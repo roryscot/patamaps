@@ -1,0 +1,117 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:patamaps:draft:1:schema:scientific-crate-options",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 4096
+    },
+    "description": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 4096
+    },
+    "datePublished": {
+      "type": "string",
+      "format": "date"
+    },
+    "consumer": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 4096
+    },
+    "environment": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 4096
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 4096
+        },
+        "namespace": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 4096
+        },
+        "sourceRevision": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 4096
+        },
+        "recordIdColumn": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 4096
+        },
+        "provenance": {
+          "type": "object"
+        }
+      },
+      "required": [
+        "id",
+        "namespace",
+        "sourceRevision"
+      ]
+    },
+    "tsvReceipt": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 4096
+    },
+    "metadataReceipt": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 4096
+    },
+    "externalSources": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 4096
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 4096
+          },
+          "description": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 4096
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "description"
+        ]
+      },
+      "maxItems": 64,
+      "minItems": 0
+    }
+  },
+  "required": [
+    "name",
+    "description",
+    "datePublished",
+    "consumer",
+    "environment",
+    "source",
+    "tsvReceipt",
+    "externalSources"
+  ]
+}

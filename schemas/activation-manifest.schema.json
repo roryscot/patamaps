@@ -1,0 +1,74 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:patamaps:draft:1:schema:activation-manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": {
+      "const": "0.1.0"
+    },
+    "documentType": {
+      "const": "activation-manifest"
+    },
+    "profile": {
+      "const": "patamaps-linux-root-draft-1"
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[A-Za-z][A-Za-z0-9+.-]*:\\S+$"
+    },
+    "digest": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    },
+    "consumer": {
+      "type": "string",
+      "pattern": "^[A-Za-z][A-Za-z0-9+.-]*:\\S+$"
+    },
+    "environment": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1024,
+      "pattern": "^[^\u0000-\u001f\u007f-\u009f]+$"
+    },
+    "proposal": {
+      "$ref": "urn:patamaps:draft:1:schema:governance#/$defs/proposal"
+    },
+    "approval": {
+      "$ref": "urn:patamaps:draft:1:schema:governance#/$defs/approval"
+    },
+    "acceptedTrust": {
+      "$ref": "urn:patamaps:draft:1:schema:governance#/$defs/trust"
+    },
+    "previousManifest": {
+      "oneOf": [
+        {
+          "type": "string",
+          "pattern": "^sha256:[a-f0-9]{64}$"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "authorizedAt": {
+      "type": "string",
+      "format": "date-time",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}\\.\\d{3}Z$"
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "documentType",
+    "profile",
+    "id",
+    "digest",
+    "consumer",
+    "environment",
+    "proposal",
+    "approval",
+    "acceptedTrust",
+    "previousManifest",
+    "authorizedAt"
+  ]
+}

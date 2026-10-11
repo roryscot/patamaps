@@ -1,0 +1,885 @@
+{
+  "scope": "pure external approval and isolated consumer; protected activation not attempted",
+  "checks": [
+    "independent-webcrypto-signature-over-exact-cli-file",
+    "agent-self-approval-refused",
+    "appended-newline-signature-refused",
+    "changed-file-bytes-refused",
+    "exact-reviewed-rust-and-typescript-artifacts-execute"
+  ],
+  "proposal": {
+    "artifacts": {
+      "captures": [
+        {
+          "digest": "sha256:410abddfcc57151459078fd35e8670ba9dae4dac0945798c4aef9686582de24a",
+          "id": "urn:bindloom:capture:410abddfcc57151459078fd35e8670ba9dae4dac0945798c4aef9686582de24a"
+        }
+      ],
+      "consumer": "urn:consumer:independent",
+      "digest": "sha256:c51637e168d02562839a5ec8e4edca62a7dc491260561dc9a699dbfe15461b78",
+      "documentType": "artifact-manifest",
+      "environment": "test",
+      "files": [
+        {
+          "byteDigest": "sha256:b43c36fecf957fe1d1e0d79d8c8a30463d85a62842c7eaeafa5414d8cd854dbd",
+          "byteLength": 1951,
+          "mediaType": "text/rust",
+          "path": "bindings-0.rs"
+        },
+        {
+          "byteDigest": "sha256:e63206d99a29853dbd35e053906297a1f75cd2f4107568ee3c518f62e3211ba4",
+          "byteLength": 959,
+          "mediaType": "text/typescript",
+          "path": "bindings-1.ts"
+        },
+        {
+          "byteDigest": "sha256:6db6f46854f99faa3cec7541db92652ee0e51bf24df4055e1760ee5b64941f2f",
+          "byteLength": 10046,
+          "mediaType": "application/json",
+          "path": "capture-0.json"
+        },
+        {
+          "byteDigest": "sha256:750e55cb72ec746a5673f54cf9902f31f6f1978ed41e9f6e71190e7425e681ab",
+          "byteLength": 971,
+          "mediaType": "application/json",
+          "path": "generation.json"
+        },
+        {
+          "byteDigest": "sha256:ce2a0cfbdb20055f11ba07f83bb48a20da0e3e8b0357df22aafcf52134d2c734",
+          "byteLength": 639,
+          "mediaType": "application/json",
+          "path": "graph.json"
+        },
+        {
+          "byteDigest": "sha256:3a1d7c9ca5aa4e7ee5987d2736e11323486c785860577226fefb9dbe5cfce85b",
+          "byteLength": 925,
+          "mediaType": "application/json",
+          "path": "path-tree-0.json"
+        },
+        {
+          "byteDigest": "sha256:a19bca7ea9b18109bc2e0f4ceec6d3301623d5427d42fd3442cb9d797fe2c9c7",
+          "byteLength": 290,
+          "mediaType": "application/json",
+          "path": "policy.json"
+        },
+        {
+          "byteDigest": "sha256:b8918506fca2243785adce620768e5313599f780117738602fdb34ddd414c700",
+          "byteLength": 1139,
+          "mediaType": "application/json",
+          "path": "projection-0.json"
+        },
+        {
+          "byteDigest": "sha256:e6bf13450949155aea3c84754774d2f2cffec85c63a0216a59437243d44a0da6",
+          "byteLength": 4964,
+          "mediaType": "application/json",
+          "path": "relation-packs.json"
+        },
+        {
+          "byteDigest": "sha256:bce90a4732b56dcdec3df2eeddecb8da849a4bffb7d9759303a241cd34ddcb69",
+          "byteLength": 246,
+          "mediaType": "application/json",
+          "path": "source-receipts.json"
+        }
+      ],
+      "id": "urn:bindloom:artifacts:c51637e168d02562839a5ec8e4edca62a7dc491260561dc9a699dbfe15461b78",
+      "profile": "bindloom-governance-draft-1",
+      "schemaVersion": "0.1.0"
+    },
+    "baseline": null,
+    "candidate": {
+      "captures": [
+        {
+          "digest": "sha256:410abddfcc57151459078fd35e8670ba9dae4dac0945798c4aef9686582de24a",
+          "documentType": "capture",
+          "executor": "sha256:054bf9478e8003f0ce88d558bca56aa95c4dcaa0a07bbec9eb3059a93712cd7c",
+          "id": "urn:bindloom:capture:410abddfcc57151459078fd35e8670ba9dae4dac0945798c4aef9686582de24a",
+          "inputs": {
+            "context": {},
+            "evaluatedAt": "2026-10-09T12:00:00Z",
+            "graph": {
+              "authorities": [],
+              "documentType": "graph",
+              "entities": [
+                {
+                  "attributes": {
+                    "path": "/greet/:id"
+                  },
+                  "id": "urn:operation:greet",
+                  "kind": "routing:command"
+                },
+                {
+                  "id": "urn:handler:greet",
+                  "kind": "routing:handler",
+                  "locators": [
+                    {
+                      "uri": "rust:crate::service::greet"
+                    },
+                    {
+                      "uri": "typescript:./service.ts#greet"
+                    }
+                  ]
+                }
+              ],
+              "id": "urn:graph:independent",
+              "mappings": [
+                {
+                  "cardinality": "one-to-one",
+                  "id": "urn:mapping:greet",
+                  "lossiness": "lossless",
+                  "provenance": {
+                    "assertedBy": "independent-consumer",
+                    "status": "declared"
+                  },
+                  "relation": "routing:handled_by",
+                  "sources": [
+                    "urn:operation:greet"
+                  ],
+                  "targets": [
+                    "urn:handler:greet"
+                  ]
+                }
+              ],
+              "namespace": "independent",
+              "revision": "1",
+              "schemaVersion": "0.1.0"
+            },
+            "packs": [
+              {
+                "description": "Semantic relations for commands, events, routes, handlers, schemas, policies, and endpoints.",
+                "documentType": "relation-pack",
+                "id": "urn:metamap:relation-pack:routing",
+                "relations": [
+                  {
+                    "cardinalities": [
+                      "one-to-one",
+                      "many-to-one"
+                    ],
+                    "cyclePolicy": "forbid",
+                    "description": "The target handler executes the source command, event, or route.",
+                    "id": "routing:handled_by",
+                    "impactDirection": "source-to-target",
+                    "sourceKinds": [
+                      "routing:command",
+                      "routing:event",
+                      "routing:route"
+                    ],
+                    "targetKinds": [
+                      "routing:handler"
+                    ]
+                  },
+                  {
+                    "cardinalities": [
+                      "one-to-one",
+                      "many-to-one"
+                    ],
+                    "cyclePolicy": "forbid",
+                    "description": "The source accepts input conforming to the target schema.",
+                    "id": "routing:accepts",
+                    "impactDirection": "target-to-source",
+                    "sourceKinds": [
+                      "routing:command",
+                      "routing:event",
+                      "routing:route"
+                    ],
+                    "targetKinds": [
+                      "routing:schema"
+                    ]
+                  },
+                  {
+                    "cardinalities": [
+                      "one-to-one",
+                      "many-to-one",
+                      "many-to-many"
+                    ],
+                    "cyclePolicy": "forbid",
+                    "description": "The source is gated by the target authorization policy.",
+                    "id": "routing:authorized_by",
+                    "impactDirection": "target-to-source",
+                    "sourceKinds": [
+                      "routing:command",
+                      "routing:event",
+                      "routing:route"
+                    ],
+                    "targetKinds": [
+                      "routing:policy"
+                    ]
+                  },
+                  {
+                    "cardinalities": [
+                      "one-to-one",
+                      "one-to-many",
+                      "many-to-many"
+                    ],
+                    "cyclePolicy": "allow",
+                    "description": "Executing the source may emit the target event.",
+                    "id": "routing:emits",
+                    "impactDirection": "source-to-target",
+                    "sourceKinds": [
+                      "routing:command",
+                      "routing:handler",
+                      "routing:route"
+                    ],
+                    "targetKinds": [
+                      "routing:event"
+                    ]
+                  },
+                  {
+                    "cardinalities": [
+                      "one-to-one",
+                      "one-to-many",
+                      "many-to-many"
+                    ],
+                    "cyclePolicy": "forbid",
+                    "description": "The source semantic operation is exposed through the target transport endpoint.",
+                    "id": "routing:exposed_as",
+                    "impactDirection": "both",
+                    "sourceKinds": [
+                      "routing:command",
+                      "routing:event",
+                      "routing:route"
+                    ],
+                    "targetKinds": [
+                      "routing:endpoint"
+                    ]
+                  },
+                  {
+                    "cardinalities": [
+                      "one-to-one",
+                      "one-to-many",
+                      "many-to-many"
+                    ],
+                    "cyclePolicy": "allow",
+                    "description": "The source workflow state permits a transition to the target state.",
+                    "id": "routing:transitions_to",
+                    "impactDirection": "both",
+                    "sourceKinds": [
+                      "routing:state"
+                    ],
+                    "targetKinds": [
+                      "routing:state"
+                    ]
+                  }
+                ],
+                "schemaVersion": "0.1.0",
+                "version": "1.0.0"
+              },
+              {
+                "description": "Minimal structural relations shared by language and domain adapters.",
+                "documentType": "relation-pack",
+                "id": "urn:metamap:relation-pack:core",
+                "relations": [
+                  {
+                    "cardinalities": [
+                      "one-to-one",
+                      "one-to-many",
+                      "many-to-many"
+                    ],
+                    "cyclePolicy": "forbid",
+                    "description": "The source structurally contains the target.",
+                    "id": "core:contains",
+                    "impactDirection": "both",
+                    "transitive": true
+                  },
+                  {
+                    "cardinalities": [
+                      "one-to-one",
+                      "one-to-many",
+                      "many-to-many"
+                    ],
+                    "cyclePolicy": "forbid",
+                    "description": "The target is a physical realization of the source concept or contract.",
+                    "id": "core:implements",
+                    "impactDirection": "source-to-target"
+                  },
+                  {
+                    "cardinalities": [
+                      "one-to-one",
+                      "many-to-one",
+                      "many-to-many"
+                    ],
+                    "cyclePolicy": "forbid",
+                    "description": "The source is constrained by the target schema or specification.",
+                    "id": "core:conforms_to",
+                    "impactDirection": "target-to-source"
+                  },
+                  {
+                    "cardinalities": [
+                      "one-to-one",
+                      "one-to-many",
+                      "many-to-one",
+                      "many-to-many"
+                    ],
+                    "cyclePolicy": "forbid",
+                    "description": "The source is derived from the target.",
+                    "id": "core:derives_from",
+                    "impactDirection": "target-to-source",
+                    "transitive": true
+                  },
+                  {
+                    "cardinalities": [
+                      "one-to-one",
+                      "one-to-many",
+                      "many-to-many"
+                    ],
+                    "cyclePolicy": "forbid",
+                    "description": "The source deterministically or procedurally produces the target.",
+                    "id": "core:generates",
+                    "impactDirection": "source-to-target"
+                  },
+                  {
+                    "cardinalities": [
+                      "one-to-one",
+                      "one-to-many",
+                      "many-to-many"
+                    ],
+                    "cyclePolicy": "forbid",
+                    "description": "The source requires the target.",
+                    "id": "core:depends_on",
+                    "impactDirection": "target-to-source",
+                    "transitive": true
+                  },
+                  {
+                    "cardinalities": [
+                      "one-to-one",
+                      "many-to-many"
+                    ],
+                    "cyclePolicy": "allow",
+                    "description": "The source and target intentionally duplicate the same scoped facts.",
+                    "id": "core:mirrors",
+                    "impactDirection": "both",
+                    "symmetric": true
+                  },
+                  {
+                    "cardinalities": [
+                      "one-to-one",
+                      "one-to-many",
+                      "many-to-many"
+                    ],
+                    "cyclePolicy": "allow",
+                    "description": "The source documentation describes the target.",
+                    "id": "core:documents",
+                    "impactDirection": "target-to-source"
+                  },
+                  {
+                    "cardinalities": [
+                      "one-to-one",
+                      "one-to-many",
+                      "many-to-many"
+                    ],
+                    "cyclePolicy": "allow",
+                    "description": "The source provides evidence about the target.",
+                    "id": "core:tests",
+                    "impactDirection": "target-to-source"
+                  },
+                  {
+                    "cardinalities": [
+                      "one-to-one",
+                      "one-to-many",
+                      "many-to-many"
+                    ],
+                    "cyclePolicy": "forbid",
+                    "description": "The source makes the target externally addressable.",
+                    "id": "core:exposes",
+                    "impactDirection": "both"
+                  },
+                  {
+                    "cardinalities": [
+                      "one-to-one",
+                      "one-to-many",
+                      "many-to-one",
+                      "many-to-many"
+                    ],
+                    "cyclePolicy": "allow",
+                    "description": "The source identifies or points to the target without implying ownership.",
+                    "id": "core:references",
+                    "impactDirection": "target-to-source"
+                  },
+                  {
+                    "cardinalities": [
+                      "one-to-one",
+                      "many-to-one",
+                      "many-to-many"
+                    ],
+                    "cyclePolicy": "forbid",
+                    "description": "The target defines the intended behavior or constraints of the source.",
+                    "id": "core:specified_by",
+                    "impactDirection": "target-to-source"
+                  }
+                ],
+                "schemaVersion": "0.1.0",
+                "version": "1.0.0"
+              }
+            ],
+            "policy": {
+              "constraints": [],
+              "documentType": "policy",
+              "evidence": [],
+              "graph": {
+                "id": "urn:graph:independent",
+                "revision": "1"
+              },
+              "id": "urn:policy:independent",
+              "mappings": [
+                {
+                  "coverage": "total",
+                  "determinism": "deterministic",
+                  "mapping": "urn:mapping:greet",
+                  "reversibility": "irreversible"
+                }
+              ],
+              "schemaVersion": "0.1.0"
+            },
+            "projectionSpec": {
+              "consumer": "urn:consumer:independent",
+              "documentType": "projection-spec",
+              "id": "urn:projection:independent",
+              "pathTree": {},
+              "schemaVersion": "0.1.0",
+              "select": {
+                "ids": [
+                  "urn:operation:greet"
+                ]
+              },
+              "slots": [
+                {
+                  "cardinality": "exactly-one",
+                  "direction": "outgoing",
+                  "name": "handler",
+                  "relation": "routing:handled_by",
+                  "targetKinds": [
+                    "routing:handler"
+                  ]
+                }
+              ]
+            }
+          },
+          "profile": "bindloom-routing-draft-1",
+          "result": {
+            "generation": {
+              "activeMappings": [
+                "urn:mapping:greet"
+              ],
+              "context": {},
+              "digest": "sha256:41bdf865749622bb091755595c5febb93562273ce1da287044556ccc5c6ba8d0",
+              "documentType": "generation",
+              "evaluatedAt": "2026-10-09T12:00:00Z",
+              "evidence": [],
+              "graph": {
+                "digest": "sha256:838331c0ca3b12118e18e74d87d10a685910045273e4c942c9dc52a9c89189ca",
+                "id": "urn:graph:independent",
+                "revision": "1"
+              },
+              "id": "urn:bindloom:generation:41bdf865749622bb091755595c5febb93562273ce1da287044556ccc5c6ba8d0",
+              "inactiveMappings": [],
+              "packs": [
+                {
+                  "digest": "sha256:07683a803d0c7b7a4aa621e6bfe9b8cffa8667fd16047601aa4aa86268f84a2e",
+                  "id": "urn:metamap:relation-pack:core",
+                  "version": "1.0.0"
+                },
+                {
+                  "digest": "sha256:c7bca28d6b8836a04a6f505bff4033947e401dd6c93cfeb8e543f82c9f0cb19d",
+                  "id": "urn:metamap:relation-pack:routing",
+                  "version": "1.0.0"
+                }
+              ],
+              "policy": {
+                "digest": "sha256:fc4ef5f53e619d99c2857d9bebb7a1ebe7388b685cd0f405ab3a8b8f9689653b",
+                "id": "urn:policy:independent"
+              },
+              "profile": "bindloom-routing-draft-1",
+              "schemaVersion": "0.1.0",
+              "waiversApplied": []
+            },
+            "issues": [],
+            "pathTree": {
+              "attribute": "path",
+              "delimiter": "/",
+              "digest": "sha256:72a85324b7c69724040d3a6e0feb22dafbdb22d723925e88ec166ec5a7e1ee99",
+              "documentType": "path-tree",
+              "id": "urn:bindloom:path-tree:72a85324b7c69724040d3a6e0feb22dafbdb22d723925e88ec166ec5a7e1ee99",
+              "params": [
+                ":id"
+              ],
+              "profile": "bindloom-routing-draft-1",
+              "projection": {
+                "digest": "sha256:41e8254b1b66ebd75270abe499f316b39b36cc90367da0d80f067c7c9af81c5d",
+                "id": "urn:bindloom:projection:41e8254b1b66ebd75270abe499f316b39b36cc90367da0d80f067c7c9af81c5d"
+              },
+              "schemaVersion": "0.1.0",
+              "spec": {
+                "digest": "sha256:4f48344fc97636958af9c92880d653459a195b753fe11b1555639350426bdd06",
+                "id": "urn:projection:independent"
+              },
+              "tree": {
+                "_": "/",
+                "greet": {
+                  ":id": {
+                    "$": {
+                      "id": "urn:operation:greet",
+                      "kind": "routing:command",
+                      "slots": {
+                        "handler": {
+                          "id": "urn:handler:greet",
+                          "kind": "routing:handler",
+                          "locators": [
+                            {
+                              "uri": "rust:crate::service::greet"
+                            },
+                            {
+                              "uri": "typescript:./service.ts#greet"
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "_": "/greet/:id"
+                  },
+                  "_": "/greet"
+                }
+              }
+            },
+            "projection": {
+              "digest": "sha256:41e8254b1b66ebd75270abe499f316b39b36cc90367da0d80f067c7c9af81c5d",
+              "documentType": "projection",
+              "entries": [
+                {
+                  "slots": [
+                    {
+                      "cardinality": "exactly-one",
+                      "direction": "outgoing",
+                      "mappings": [
+                        "urn:mapping:greet"
+                      ],
+                      "name": "handler",
+                      "relation": "routing:handled_by",
+                      "targets": [
+                        {
+                          "id": "urn:handler:greet",
+                          "kind": "routing:handler",
+                          "locators": [
+                            {
+                              "uri": "rust:crate::service::greet"
+                            },
+                            {
+                              "uri": "typescript:./service.ts#greet"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ],
+                  "subject": {
+                    "attributes": {
+                      "path": "/greet/:id"
+                    },
+                    "id": "urn:operation:greet",
+                    "kind": "routing:command"
+                  }
+                }
+              ],
+              "generation": {
+                "digest": "sha256:41bdf865749622bb091755595c5febb93562273ce1da287044556ccc5c6ba8d0",
+                "id": "urn:bindloom:generation:41bdf865749622bb091755595c5febb93562273ce1da287044556ccc5c6ba8d0"
+              },
+              "graph": {
+                "digest": "sha256:838331c0ca3b12118e18e74d87d10a685910045273e4c942c9dc52a9c89189ca",
+                "id": "urn:graph:independent",
+                "revision": "1"
+              },
+              "id": "urn:bindloom:projection:41e8254b1b66ebd75270abe499f316b39b36cc90367da0d80f067c7c9af81c5d",
+              "profile": "bindloom-routing-draft-1",
+              "schemaVersion": "0.1.0",
+              "spec": {
+                "digest": "sha256:4f48344fc97636958af9c92880d653459a195b753fe11b1555639350426bdd06",
+                "id": "urn:projection:independent"
+              }
+            },
+            "status": "viable"
+          },
+          "schemaVersion": "0.1.0",
+          "sources": [
+            {
+              "byteLength": 69,
+              "content": "pub fn greet(input: &str) -> String { format!(\"Hello, {}!\", input) }\n",
+              "digest": "sha256:17236c8f81815ca6628a127e0c1e3613b292ef1895d574d59548ebcf6c73681a",
+              "id": "urn:source:service",
+              "locator": "rust:crate::service"
+            }
+          ]
+        }
+      ],
+      "emissions": [
+        {
+          "bindingSlot": "handler",
+          "language": "rust",
+          "projection": "urn:projection:independent"
+        },
+        {
+          "bindingSlot": "handler",
+          "language": "typescript",
+          "projection": "urn:projection:independent"
+        }
+      ]
+    },
+    "consumer": "urn:consumer:independent",
+    "digest": "sha256:c32725e1ce2eb68bf41d4026494af9ae5cf1adc4691b665b4bc8bedf915061e8",
+    "documentType": "change-proposal",
+    "engine": "sha256:eccfd35629052a92d22f4bd3a06204c48d9089c4be6184a509ac04f5cbc1c9cb",
+    "environment": "test",
+    "id": "urn:bindloom:change-proposal:c32725e1ce2eb68bf41d4026494af9ae5cf1adc4691b665b4bc8bedf915061e8",
+    "intent": "deploy",
+    "profile": "bindloom-governance-draft-1",
+    "proposer": "agent",
+    "requirements": [
+      {
+        "action": "activate",
+        "fact": "activation",
+        "subject": "urn:consumer:independent"
+      },
+      {
+        "action": "bootstrap",
+        "fact": "activation",
+        "subject": "urn:consumer:independent"
+      },
+      {
+        "action": "change-context",
+        "fact": "evaluation-context",
+        "subject": "urn:consumer:independent"
+      },
+      {
+        "action": "change-context",
+        "fact": "evaluation-time",
+        "subject": "urn:consumer:independent"
+      },
+      {
+        "action": "change-graph",
+        "fact": "entity.record",
+        "subject": "urn:handler:greet"
+      },
+      {
+        "action": "change-graph",
+        "fact": "entity.record",
+        "subject": "urn:operation:greet"
+      },
+      {
+        "action": "change-graph",
+        "fact": "graph.id",
+        "subject": "urn:graph:independent"
+      },
+      {
+        "action": "change-graph",
+        "fact": "graph.namespace",
+        "subject": "urn:graph:independent"
+      },
+      {
+        "action": "change-graph",
+        "fact": "graph.revision",
+        "subject": "urn:graph:independent"
+      },
+      {
+        "action": "change-graph",
+        "fact": "mapping.record",
+        "subject": "urn:mapping:greet"
+      },
+      {
+        "action": "change-law",
+        "fact": "relation-packs",
+        "subject": "urn:graph:independent"
+      },
+      {
+        "action": "change-policy",
+        "fact": "policy.constraints",
+        "subject": "urn:policy:independent"
+      },
+      {
+        "action": "change-policy",
+        "fact": "policy.evidence",
+        "subject": "urn:policy:independent"
+      },
+      {
+        "action": "change-policy",
+        "fact": "policy.id",
+        "subject": "urn:policy:independent"
+      },
+      {
+        "action": "change-policy",
+        "fact": "policy.mappings",
+        "subject": "urn:policy:independent"
+      },
+      {
+        "action": "change-projection",
+        "fact": "projection-specifications",
+        "subject": "urn:consumer:independent"
+      },
+      {
+        "action": "change-source",
+        "fact": "source.record",
+        "subject": "urn:source:service"
+      },
+      {
+        "action": "relax-policy",
+        "fact": "policy.constraints",
+        "subject": "urn:policy:independent"
+      },
+      {
+        "action": "relax-policy",
+        "fact": "policy.mappings",
+        "subject": "urn:policy:independent"
+      }
+    ],
+    "schemaVersion": "0.1.0",
+    "trust": {
+      "digest": "sha256:1c3f967c71cef92e1e5cb5aa2703c16ce6ca6677dfcd6da28c3deccc04753ae9",
+      "id": "urn:trust:independent",
+      "revision": "1"
+    }
+  },
+  "approval": {
+    "digest": "sha256:2d4bd60d5065683f8f6e584e410c8d6496c9d6b3de4fed8c1e379a7524e7b953",
+    "documentType": "approval",
+    "id": "urn:bindloom:approval:2d4bd60d5065683f8f6e584e410c8d6496c9d6b3de4fed8c1e379a7524e7b953",
+    "payload": {
+      "algorithm": "Ed25519",
+      "artifacts": {
+        "digest": "sha256:c51637e168d02562839a5ec8e4edca62a7dc491260561dc9a699dbfe15461b78",
+        "id": "urn:bindloom:artifacts:c51637e168d02562839a5ec8e4edca62a7dc491260561dc9a699dbfe15461b78"
+      },
+      "baseline": null,
+      "consumer": "urn:consumer:independent",
+      "domain": "urn:bindloom:approval:draft:1",
+      "engine": "sha256:eccfd35629052a92d22f4bd3a06204c48d9089c4be6184a509ac04f5cbc1c9cb",
+      "environment": "test",
+      "expiresAt": "2026-10-10T02:00:00.000Z",
+      "grants": [
+        "owner-grant"
+      ],
+      "intent": "deploy",
+      "issuedAt": "2026-10-10T00:30:00.000Z",
+      "key": "owner-key",
+      "principal": "owner",
+      "profile": "bindloom-governance-draft-1",
+      "proposal": {
+        "digest": "sha256:c32725e1ce2eb68bf41d4026494af9ae5cf1adc4691b665b4bc8bedf915061e8",
+        "id": "urn:bindloom:change-proposal:c32725e1ce2eb68bf41d4026494af9ae5cf1adc4691b665b4bc8bedf915061e8"
+      },
+      "requirements": [
+        {
+          "action": "activate",
+          "fact": "activation",
+          "subject": "urn:consumer:independent"
+        },
+        {
+          "action": "bootstrap",
+          "fact": "activation",
+          "subject": "urn:consumer:independent"
+        },
+        {
+          "action": "change-context",
+          "fact": "evaluation-context",
+          "subject": "urn:consumer:independent"
+        },
+        {
+          "action": "change-context",
+          "fact": "evaluation-time",
+          "subject": "urn:consumer:independent"
+        },
+        {
+          "action": "change-graph",
+          "fact": "entity.record",
+          "subject": "urn:handler:greet"
+        },
+        {
+          "action": "change-graph",
+          "fact": "entity.record",
+          "subject": "urn:operation:greet"
+        },
+        {
+          "action": "change-graph",
+          "fact": "graph.id",
+          "subject": "urn:graph:independent"
+        },
+        {
+          "action": "change-graph",
+          "fact": "graph.namespace",
+          "subject": "urn:graph:independent"
+        },
+        {
+          "action": "change-graph",
+          "fact": "graph.revision",
+          "subject": "urn:graph:independent"
+        },
+        {
+          "action": "change-graph",
+          "fact": "mapping.record",
+          "subject": "urn:mapping:greet"
+        },
+        {
+          "action": "change-law",
+          "fact": "relation-packs",
+          "subject": "urn:graph:independent"
+        },
+        {
+          "action": "change-policy",
+          "fact": "policy.constraints",
+          "subject": "urn:policy:independent"
+        },
+        {
+          "action": "change-policy",
+          "fact": "policy.evidence",
+          "subject": "urn:policy:independent"
+        },
+        {
+          "action": "change-policy",
+          "fact": "policy.id",
+          "subject": "urn:policy:independent"
+        },
+        {
+          "action": "change-policy",
+          "fact": "policy.mappings",
+          "subject": "urn:policy:independent"
+        },
+        {
+          "action": "change-projection",
+          "fact": "projection-specifications",
+          "subject": "urn:consumer:independent"
+        },
+        {
+          "action": "change-source",
+          "fact": "source.record",
+          "subject": "urn:source:service"
+        },
+        {
+          "action": "relax-policy",
+          "fact": "policy.constraints",
+          "subject": "urn:policy:independent"
+        },
+        {
+          "action": "relax-policy",
+          "fact": "policy.mappings",
+          "subject": "urn:policy:independent"
+        }
+      ],
+      "schemaVersion": "0.1.0",
+      "trust": {
+        "digest": "sha256:1c3f967c71cef92e1e5cb5aa2703c16ce6ca6677dfcd6da28c3deccc04753ae9",
+        "id": "urn:trust:independent",
+        "revision": "1"
+      }
+    },
+    "schemaVersion": "0.1.0",
+    "signature": "UBY3xI3HDvXv3pk7UJjFfLLBnJrvoyKSVrRRGg0ukPYQyA8Uv4YaAdiOgz1MpEbI+i039MceeSpkh9wlJBE5DA=="
+  },
+  "artifactPaths": [
+    "bindings-0.rs",
+    "bindings-1.ts",
+    "capture-0.json",
+    "generation.json",
+    "graph.json",
+    "path-tree-0.json",
+    "policy.json",
+    "projection-0.json",
+    "relation-packs.json",
+    "source-receipts.json"
+  ]
+}

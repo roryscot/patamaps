@@ -1,0 +1,38 @@
+[    0.064765] hv_vmbus: registering driver hyperv_keyboard
+[    0.065107] rtc-pl031 20050000.pl031: registered as rtc0
+[    0.065195] rtc-pl031 20050000.pl031: setting system clock to 2026-10-11T04:31:23 UTC (1791693083)
+[    0.065518] NET: Registered PF_INET6 protocol family
+[    0.065937] Segment Routing with IPv6
+[    0.066031] In-situ OAM (IOAM) with IPv6
+[    0.067649] registered taskstats version 1
+[    0.067817] Loading compiled-in X.509 certificates
+[    0.122268] Freeing initrd memory: 9704K
+[    0.123863] Loaded X.509 cert 'alpinelinux.org: Alpine Linux kernel key: 87fa969a47f3e2a6aa35859eb932a17c95abcd82'
+[    0.125080] Demotion targets for Node 0: null
+[    0.125296] Key type .fscrypt registered
+[    0.125344] Key type fscrypt-provisioning registered
+[    0.127498] clk: Disabling unused clocks
+[    0.127551] PM: genpd: Disabling unused power domains
+[    0.127902] Freeing unused kernel memory: 2048K
+[    0.128002] Run /init as init process
+[    0.131777] virtio_blk virtio1: 1/0/0 default/read/poll queues
+[    0.132024] virtio_blk virtio1: [vda] 67108864 512-byte logical blocks (34.4 GB/32.0 GiB)
+[    0.145290] virtio_blk virtio2: 1/0/0 default/read/poll queues
+[    0.145495] virtio_blk virtio2: [vdb] 34656 512-byte logical blocks (17.7 MB/16.9 MiB)
+[    0.153586] fuse: init (API version 7.45)
+[    0.154572] virtiofs virtio3: discovered new tag: bindloom-share
+[    0.154996] virtiofs virtio4: discovered new tag: bindloom-results
+[    0.156726] squashfs: version 4.0 (2009/01/31) Phillip Lougher
+[    0.215461] EXT4-fs (vda): recovery complete
+[    0.215610] EXT4-fs (vda): mounted filesystem 5e630760-c528-11f1-8771-2b08d63fdbb3 r/w with ordered data mode. Quota mode: none.
+[    1.292976] random: crng init done
+Traceback (most recent call last):
+  File "<stdin>", line 3, in <module>
+  File "/opt/bindloom-python/lib/python3.12/pathlib.py", line 1027, in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/bindloom-python/lib/python3.12/pathlib.py", line 1013, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/share/final-input-verifieds.json'
+BINDLOOM_VM_GUEST_EXIT=1

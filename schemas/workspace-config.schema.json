@@ -1,0 +1,215 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:patamaps:draft:1:schema:workspace-config",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": {
+      "const": "0.1.0"
+    },
+    "documentType": {
+      "const": "workspace-config"
+    },
+    "id": {
+      "type": "string"
+    },
+    "namespace": {
+      "type": "string"
+    },
+    "revision": {
+      "type": "string"
+    },
+    "sources": {
+      "type": "array",
+      "items": {
+        "oneOf": [
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "adapter": {
+                "const": "portable-shard"
+              },
+              "path": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "id",
+              "adapter",
+              "path"
+            ]
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "adapter": {
+                "const": "process"
+              },
+              "invocation": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "executable": {
+                    "type": "string"
+                  },
+                  "arguments": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "maxItems": 128,
+                    "minItems": 0
+                  },
+                  "codeInputs": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "maxItems": 128,
+                    "minItems": 0
+                  },
+                  "bounds": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "properties": {
+                      "maximumElapsedMs": {
+                        "type": "integer",
+                        "minimum": 1,
+                        "maximum": 60000
+                      },
+                      "maximumStdoutBytes": {
+                        "type": "integer",
+                        "minimum": 1,
+                        "maximum": 16777216
+                      },
+                      "maximumStderrBytes": {
+                        "type": "integer",
+                        "minimum": 1,
+                        "maximum": 65536
+                      }
+                    },
+                    "required": [
+                      "maximumElapsedMs",
+                      "maximumStdoutBytes",
+                      "maximumStderrBytes"
+                    ]
+                  }
+                },
+                "required": [
+                  "executable",
+                  "arguments",
+                  "codeInputs",
+                  "bounds"
+                ]
+              },
+              "inputs": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "maxItems": 1024,
+                "minItems": 1
+              },
+              "config": {
+                "type": "object"
+              }
+            },
+            "required": [
+              "id",
+              "adapter",
+              "invocation",
+              "inputs",
+              "config"
+            ]
+          }
+        ]
+      },
+      "maxItems": 64,
+      "minItems": 1
+    },
+    "packs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 64,
+      "minItems": 0
+    },
+    "policy": {
+      "type": "string"
+    },
+    "projections": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "path": {
+            "type": "string"
+          },
+          "emissions": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "path": {
+                  "type": "string"
+                },
+                "language": {
+                  "enum": [
+                    "json",
+                    "rust",
+                    "typescript"
+                  ]
+                },
+                "bindingSlot": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "path",
+                "language"
+              ]
+            },
+            "maxItems": 32,
+            "minItems": 0
+          }
+        },
+        "required": [
+          "path",
+          "emissions"
+        ]
+      },
+      "maxItems": 16,
+      "minItems": 1
+    },
+    "context": {
+      "type": "object"
+    },
+    "evaluatedAt": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "documentType",
+    "id",
+    "namespace",
+    "revision",
+    "sources",
+    "packs",
+    "policy",
+    "projections",
+    "context",
+    "evaluatedAt"
+  ]
+}

@@ -1,0 +1,144 @@
+{
+  "engineRevision": "399747a4ad05a37cd8db1cedd53048fad2175be4",
+  "referenceNode": "v22.16.0",
+  "initialProbe": {
+    "path": "/users/:id/:next",
+    "parameters": {
+      "id": ":next",
+      "next": "literal"
+    },
+    "referenceActual": "/users/:next/literal",
+    "successorActual": "/users/:next/literal",
+    "disposition": "This probe did not distinguish the implementations. The reference replaces longer tokens first; the final D005 control inserts a shorter token from a longer token value."
+  },
+  "controls": [
+    {
+      "id": "D005",
+      "referenceExpected": "/users/literal/literal",
+      "successorExpected": "/users/:id/literal",
+      "referenceActual": "/users/literal/literal",
+      "successorActual": "/users/:id/literal",
+      "pass": true
+    },
+    {
+      "id": "D006",
+      "referenceLibrarySignatureExpected": true,
+      "successorTrustKeyExpected": "GOVERNANCE_INVALID_CRYPTO",
+      "referenceLibrarySignatureActual": true,
+      "successorRefusal": {
+        "issues": [
+          {
+            "code": "GOVERNANCE_INVALID_CRYPTO",
+            "message": "Weak or noncanonical public point",
+            "severity": "error",
+            "subjectId": "governance"
+          }
+        ],
+        "status": "rejected"
+      },
+      "pass": true
+    }
+  ],
+  "inputs": {
+    "graph": {
+      "schemaVersion": "0.1.0",
+      "documentType": "graph",
+      "id": "urn:difference:graph",
+      "namespace": "difference",
+      "revision": "1",
+      "entities": [
+        {
+          "id": "urn:difference:route",
+          "kind": "route",
+          "attributes": {
+            "path": "/users/:longname/:id"
+          }
+        }
+      ],
+      "mappings": [],
+      "authorities": []
+    },
+    "policy": {
+      "schemaVersion": "0.1.0",
+      "documentType": "policy",
+      "id": "urn:difference:policy",
+      "graph": {
+        "id": "urn:difference:graph",
+        "revision": "1"
+      },
+      "mappings": [],
+      "constraints": [],
+      "evidence": []
+    },
+    "spec": {
+      "schemaVersion": "0.1.0",
+      "documentType": "projection-spec",
+      "id": "urn:difference:spec",
+      "consumer": "urn:difference:consumer",
+      "select": {
+        "ids": [
+          "urn:difference:route"
+        ]
+      },
+      "slots": [],
+      "pathTree": {}
+    },
+    "trust": {
+      "schemaVersion": "0.1.0",
+      "documentType": "trusted-consumer",
+      "mode": "governed",
+      "id": "urn:difference:trust",
+      "revision": "1",
+      "consumer": "urn:difference:consumer",
+      "environment": "test",
+      "principals": [
+        {
+          "id": "owner",
+          "role": "owner",
+          "revoked": false
+        }
+      ],
+      "keys": [
+        {
+          "id": "owner-key",
+          "principal": "owner",
+          "algorithm": "Ed25519",
+          "publicKey": "MCowBQYDK2VwAyEAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=",
+          "validFrom": "2026-10-10T00:00:00.000Z",
+          "validUntil": "2026-10-10T08:00:00.000Z",
+          "revoked": false
+        }
+      ],
+      "grants": []
+    }
+  },
+  "successorHydration": {
+    "documentType": "hydrated-path-tree",
+    "template": {
+      "id": "urn:bindloom:path-tree:fea70f65ed8d6baf43308dc0629859386a1b7cec9315a5103a15a210b66c5cac",
+      "digest": "sha256:fea70f65ed8d6baf43308dc0629859386a1b7cec9315a5103a15a210b66c5cac"
+    },
+    "parameters": {
+      "id": "literal",
+      "longname": ":id"
+    },
+    "tree": {
+      "_": "/",
+      "users": {
+        "_": "/users",
+        ":longname": {
+          "_": "/users/:id",
+          ":id": {
+            "_": "/users/:id/literal",
+            "$": {
+              "id": "urn:difference:route",
+              "kind": "route",
+              "slots": {}
+            }
+          }
+        }
+      }
+    }
+  },
+  "claim": "Intentional successor changes; these disagreements are retained, not counted as shared-profile equivalence."
+}

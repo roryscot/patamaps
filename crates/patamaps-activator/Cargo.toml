@@ -1,0 +1,26 @@
+[package]
+name = "patamaps-activator"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+description = "Fixed Linux root-owned artifact activation for Patamaps"
+
+[dependencies]
+patamaps-contracts.workspace = true
+patamaps-core.workspace = true
+patamaps-governance.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+thiserror.workspace = true
+time.workspace = true
+rustix.workspace = true
+
+[dev-dependencies]
+patamaps-projection.workspace = true
+base64.workspace = true
+ed25519-dalek.workspace = true
+
+[lints]
+workspace = true

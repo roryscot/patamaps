@@ -1,0 +1,136 @@
+{
+  "profile": "native simple routing, complete admission; not proof/repair/lifecycle throughput",
+  "seed": 20261010,
+  "host": "macOS-26.6.2-arm64-arm-64bit-Mach-O",
+  "architecture": "arm64",
+  "binary": {
+    "path": "/Users/admin/dev/patamaps/patamaps/.tools/bindloom-current",
+    "bytes": 39109104,
+    "digest": "sha256:efeaa61d431fca62a84be5790452da2294e35aaf5e9e1946e3190b60576c9cb7"
+  },
+  "engine": {
+    "compiler": "sha256:58e035b0e2b4869ab6455c4f89484af548950e10bfbf64da596058df09d97db7",
+    "documentType": "executor-description",
+    "governance": "sha256:22cc3f9a9717188de41ddde8d97e142a063b5f455967e0cdb6514d287f5fc22c",
+    "schemaVersion": "0.1.0",
+    "scientific": "sha256:11ffda219f868194a38d960ecf317a09ec76ff43f8c33354e213a3c639367b46",
+    "workspace": "sha256:c63c437c5f37d2666681d97cceb9e1df4d0f858b06981345326566b93103533d"
+  },
+  "buildProfile": "development build, debug symbols disabled; no release performance claim",
+  "measurement": "wall time for fresh CLI process, strict parsing, graph checks, admission and JSON output; cold/warm filesystem cache not separated",
+  "workloads": [
+    {
+      "mappings": 1000,
+      "entities": 2000,
+      "graphBytes": 391345,
+      "graphDigest": "sha256:c2e1978b34cf3abdc2583ace07bd65404af3e0f61a2f580228ed5cd3655a05a0",
+      "policyDigest": "sha256:8f22439a2f5452e88d7d4ea28e5302e0eade2f276bc90e150129828f92e4c4b2",
+      "expected": "viable",
+      "trials": [
+        {
+          "trial": 0,
+          "wallSeconds": 0.14120629103854299,
+          "exitCode": 0,
+          "stdoutBytes": 29996,
+          "stdoutDigest": "sha256:c68ffc98829684c4db238daf510b42cadc11f517b81d79afb9e5b8008b925cbd",
+          "stderr": "",
+          "status": "viable"
+        },
+        {
+          "trial": 1,
+          "wallSeconds": 0.10302337515167892,
+          "exitCode": 0,
+          "stdoutBytes": 29996,
+          "stdoutDigest": "sha256:c68ffc98829684c4db238daf510b42cadc11f517b81d79afb9e5b8008b925cbd",
+          "stderr": "",
+          "status": "viable"
+        },
+        {
+          "trial": 2,
+          "wallSeconds": 0.09644262492656708,
+          "exitCode": 0,
+          "stdoutBytes": 29996,
+          "stdoutDigest": "sha256:c68ffc98829684c4db238daf510b42cadc11f517b81d79afb9e5b8008b925cbd",
+          "stderr": "",
+          "status": "viable"
+        }
+      ]
+    },
+    {
+      "mappings": 10000,
+      "entities": 20000,
+      "graphBytes": 3962048,
+      "graphDigest": "sha256:2fa261caf348eeb9e59d51d1766f9fe06887ff55d6eaea7eb9c9431d720634fc",
+      "policyDigest": "sha256:8f22439a2f5452e88d7d4ea28e5302e0eade2f276bc90e150129828f92e4c4b2",
+      "expected": "viable",
+      "trials": [
+        {
+          "trial": 0,
+          "wallSeconds": 0.9696465828455985,
+          "exitCode": 0,
+          "stdoutBytes": 299996,
+          "stdoutDigest": "sha256:ee1f3a2555da39bd555605e6e1c66967f81de2068d8a11d9ab8ba2a8955438d3",
+          "stderr": "",
+          "status": "viable"
+        },
+        {
+          "trial": 1,
+          "wallSeconds": 0.9151186251547188,
+          "exitCode": 0,
+          "stdoutBytes": 299996,
+          "stdoutDigest": "sha256:ee1f3a2555da39bd555605e6e1c66967f81de2068d8a11d9ab8ba2a8955438d3",
+          "stderr": "",
+          "status": "viable"
+        },
+        {
+          "trial": 2,
+          "wallSeconds": 0.9181860410608351,
+          "exitCode": 0,
+          "stdoutBytes": 299996,
+          "stdoutDigest": "sha256:ee1f3a2555da39bd555605e6e1c66967f81de2068d8a11d9ab8ba2a8955438d3",
+          "stderr": "",
+          "status": "viable"
+        }
+      ]
+    },
+    {
+      "mappings": 100000,
+      "entities": 200000,
+      "graphBytes": 40118954,
+      "graphDigest": "sha256:71b688a02506c5b9c3fa0c0a031264db0a88dbbf64e00ebe06ed298b48c608a2",
+      "policyDigest": "sha256:8f22439a2f5452e88d7d4ea28e5302e0eade2f276bc90e150129828f92e4c4b2",
+      "expected": "controlled-refusal-input-limit",
+      "trials": [
+        {
+          "trial": 0,
+          "wallSeconds": 0.024162417044863105,
+          "exitCode": 1,
+          "stdoutBytes": 220,
+          "stdoutDigest": "sha256:1317f6384a42f6e361cf6e7d00ad3bb54d7ce989e924ae34d167bf0045ff9230",
+          "stderr": "",
+          "status": "controlled-refusal-input-limit"
+        },
+        {
+          "trial": 1,
+          "wallSeconds": 0.01254329108633101,
+          "exitCode": 1,
+          "stdoutBytes": 220,
+          "stdoutDigest": "sha256:1317f6384a42f6e361cf6e7d00ad3bb54d7ce989e924ae34d167bf0045ff9230",
+          "stderr": "",
+          "status": "controlled-refusal-input-limit"
+        },
+        {
+          "trial": 2,
+          "wallSeconds": 0.016306792153045535,
+          "exitCode": 1,
+          "stdoutBytes": 220,
+          "stdoutDigest": "sha256:1317f6384a42f6e361cf6e7d00ad3bb54d7ce989e924ae34d167bf0045ff9230",
+          "stderr": "",
+          "status": "controlled-refusal-input-limit"
+        }
+      ]
+    }
+  ],
+  "comparison": "No TypeScript timing baseline; no speed or memory advantage established",
+  "nativeRuntime": "Node absent from PATH"
+}

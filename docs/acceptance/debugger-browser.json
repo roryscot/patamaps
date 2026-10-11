@@ -1,0 +1,55 @@
+{
+  "testedEngine": "sha256:58e035b0e2b4869ab6455c4f89484af548950e10bfbf64da596058df09d97db7",
+  "syntheticFixtures": [
+    "inspection-rejected.html",
+    "inspection-viable.html"
+  ],
+  "servingBoundary": "Fixed two synthetic pages held in memory on a disposable loopback-only server; no host path, traversal, directory listing, write, proxy or remote-fetch endpoint",
+  "observations": [
+    "Rejected and viable admission states and section navigation visible in DOM",
+    "Rejected screenshot visually inspected",
+    "Mouse expansion exposes issue codes and subjects",
+    "Shared report shows injected img label as literal escaped text, with no executable img element",
+    "Keyboard Enter on skip link focuses MAIN#main",
+    "Keyboard Enter expands checked-generation details",
+    "No JavaScript dialog observed"
+  ],
+  "rejectedDom": {
+    "content": [
+      {
+        "type": "text",
+        "text": "- link \"Skip to inspection\":\n  - /url: \"#main\"\n- banner:\n  - paragraph: Bindloom · offline inspection\n  - heading \"urn:example:command:create-user\" [level=1]\n  - paragraph: Read-only captured evidence. No change is applied. Current approval and activation are not evaluated; missing or rejected data remains visible.\n  - navigation \"Inspection sections\":\n    - link \"Decision\":\n      - /url: \"#decision\"\n    - link \"Subjects\":\n      - /url: \"#subjects\"\n    - link \"Mappings\":\n      - /url: \"#mappings\"\n    - link \"Proofs and risk\":\n      - /url: \"#semantics\"\n    - link \"Sources\":\n      - /url: \"#sources\"\n    - link \"Changes\":\n      - /url: \"#changes\"\n    - link \"Shared JSON report\":\n      - /url: \"#raw\"\n- main:\n  - region \"Decision\":\n    - heading \"Decision\" [level=2]\n    - paragraph:\n      - text: \"Admission:\"\n      - strong: rejected\n      - text: \". Selection:\"\n      - strong: known\n      - text: \". Navigation:\"\n      - strong: complete\n      - text: .\n    - generic \"Issues and their recorded subjects\"\n  - region \"Subjects\":\n    - heading \"Subjects\" [level=2]\n    - article:\n      - heading \"urn:example:command:create-user\" [level=3]\n      - paragraph: \"Record state: known\"\n      - generic \"Captured records\"\n    - article:\n      - heading \"urn:example:endpoint:create-user\" [level=3]\n      - paragraph: \"Record state: known\"\n      - generic \"Captured records\"\n    - article:\n      - heading \"urn:example:event:user-created\" [level=3]\n      - paragraph: \"Record state: known\"\n      - generic \"Captured records\"\n    - article:\n      - heading \"urn:example:handler:create-user\" [level=3]\n      - paragraph: \"Record state: known\"\n      - generic \"Captured records\"\n    - article:\n      - heading \"urn:example:policy:identity-admin\" [level=3]\n      - paragraph: \"Record state: known\"\n      - generic \"Captured records\"\n    - article:\n      - heading \"urn:example:schema:create-user\" [level=3]\n      - paragraph: \"Record state: known\"\n      - generic \"Captured records\"\n  - region \"Mappings\":\n    - heading \"Mappings\" [level=2]\n    - article:\n      - heading \"urn:example:mapping:create-user-endpoint\" [level=3]\n      - paragraph: \"Record state: known\"\n      - generic \"Captured records\"\n    - article:\n      - heading \"urn:example:mapping:create-user-event\" [level=3]\n      - paragraph: \"Record state: known\"\n      - generic \"Captured records\"\n    - article:\n      - heading \"urn:example:mapping:create-user-handler\" [level=3]\n      - paragraph: \"Record state: known\"\n      - generic \"Captured records\"\n    - article:\n      - heading \"urn:example:mapping:create-user-input\" [level=3]\n      - paragraph: \"Record state: known\"\n      - generic \"Captured records\"\n    - article:\n      - heading \"urn:example:mapping:create-user-policy\" [level=3]\n      - paragraph: \"Record state: known\"\n      - generic \"Captured records\"\n  - region \"Proofs, uncertainty, budget and declared ownership\":\n    - heading \"Proofs, uncertainty, budget and declared ownership\" [level=2]\n    - generic \"Checked generation; null means unavailable\"\n    - generic \"Projection and its complete risk closure\"\n    - generic \"Path tree\"\n    - generic \"Ownership declarations; authentication not evaluated\"\n    - generic \"Exact policy, evidence and law declarations\"\n  - region \"Sources\":\n    - heading \"Sources\" [level=2]\n    - generic \"Captured receipts and missing bytes\"\n  - region \"Observed changes and declared dependency paths\":\n    - heading \"Observed changes and declared dependency paths\" [level=2]\n    - generic \"Comparison\"\n    - generic \"Impact; no assertion of unique causality\"\n  - region \"Shared JSON report\":\n    - heading \"Shared JSON report\" [level=2]\n    - generic \"The same report used by CLI inspection\"\n- contentinfo:\n  - paragraph: Capture-bound inspection; no external resources or executable candidate content."
+      }
+    ],
+    "isError": false
+  },
+  "viableDom": {
+    "content": [
+      {
+        "type": "text",
+        "text": "- link \"Skip to inspection\":\n  - /url: \"#main\"\n- banner:\n  - paragraph: Bindloom · offline inspection\n  - heading \"urn:example:command:create-user\" [level=1]\n  - paragraph: Read-only captured evidence. No change is applied. Current approval and activation are not evaluated; missing or rejected data remains visible.\n  - navigation \"Inspection sections\":\n    - link \"Decision\":\n      - /url: \"#decision\"\n    - link \"Subjects\":\n      - /url: \"#subjects\"\n    - link \"Mappings\":\n      - /url: \"#mappings\"\n    - link \"Proofs and risk\":\n      - /url: \"#semantics\"\n    - link \"Sources\":\n      - /url: \"#sources\"\n    - link \"Changes\":\n      - /url: \"#changes\"\n    - link \"Shared JSON report\":\n      - /url: \"#raw\"\n- main:\n  - region \"Decision\":\n    - heading \"Decision\" [level=2]\n    - paragraph:\n      - text: \"Admission:\"\n      - strong: viable\n      - text: \". Selection:\"\n      - strong: known\n      - text: \". Navigation:\"\n      - strong: complete\n      - text: .\n    - generic \"Issues and their recorded subjects\"\n  - region \"Subjects\":\n    - heading \"Subjects\" [level=2]\n    - article:\n      - heading \"urn:example:command:create-user\" [level=3]\n      - paragraph: \"Record state: known\"\n      - generic \"Captured records\"\n    - article:\n      - heading \"urn:example:endpoint:create-user\" [level=3]\n      - paragraph: \"Record state: known\"\n      - generic \"Captured records\"\n    - article:\n      - heading \"urn:example:event:user-created\" [level=3]\n      - paragraph: \"Record state: known\"\n      - generic \"Captured records\"\n    - article:\n      - heading \"urn:example:handler:create-user\" [level=3]\n      - paragraph: \"Record state: known\"\n      - generic \"Captured records\"\n    - article:\n      - heading \"urn:example:policy:identity-admin\" [level=3]\n      - paragraph: \"Record state: known\"\n      - generic \"Captured records\"\n    - article:\n      - heading \"urn:example:schema:create-user\" [level=3]\n      - paragraph: \"Record state: known\"\n      - generic \"Captured records\"\n  - region \"Mappings\":\n    - heading \"Mappings\" [level=2]\n    - article:\n      - heading \"urn:example:mapping:create-user-endpoint\" [level=3]\n      - paragraph: \"Record state: known\"\n      - generic \"Captured records\"\n    - article:\n      - heading \"urn:example:mapping:create-user-event\" [level=3]\n      - paragraph: \"Record state: known\"\n      - generic \"Captured records\"\n    - article:\n      - heading \"urn:example:mapping:create-user-handler\" [level=3]\n      - paragraph: \"Record state: known\"\n      - generic \"Captured records\"\n    - article:\n      - heading \"urn:example:mapping:create-user-input\" [level=3]\n      - paragraph: \"Record state: known\"\n      - generic \"Captured records\"\n    - article:\n      - heading \"urn:example:mapping:create-user-policy\" [level=3]\n      - paragraph: \"Record state: known\"\n      - generic \"Captured records\"\n  - region \"Proofs, uncertainty, budget and declared ownership\":\n    - heading \"Proofs, uncertainty, budget and declared ownership\" [level=2]\n    - generic \"Checked generation; null means unavailable\"\n    - generic \"Projection and its complete risk closure\"\n    - generic \"Path tree\"\n    - generic \"Ownership declarations; authentication not evaluated\"\n    - generic \"Exact policy, evidence and law declarations\"\n  - region \"Sources\":\n    - heading \"Sources\" [level=2]\n    - generic \"Captured receipts and missing bytes\"\n  - region \"Observed changes and declared dependency paths\":\n    - heading \"Observed changes and declared dependency paths\" [level=2]\n    - generic \"Comparison\"\n    - generic \"Impact; no assertion of unique causality\"\n  - region \"Shared JSON report\":\n    - heading \"Shared JSON report\" [level=2]\n    - generic \"The same report used by CLI inspection\"\n- contentinfo:\n  - paragraph: Capture-bound inspection; no external resources or executable candidate content."
+      }
+    ],
+    "isError": false
+  },
+  "keyboardResult": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{ activeId: 'main', activeTag: 'MAIN' }{ generationExpanded: true, hasDialog: false }"
+      }
+    ],
+    "isError": false
+  },
+  "laterCurrentAttempt": {
+    "browserSelection": "No browser available",
+    "connectedBrowsers": [],
+    "fixtureServerStopped": true
+  },
+  "limits": [
+    "No screen-reader, contrast or complete WCAG audit",
+    "No viable screenshot retained after a screenshot request timed out",
+    "The reviewed renderer source is unchanged; current core receipts regenerated, current browser reconnect unavailable",
+    "Reviewed fixture hashes were not independently captured at visit time; deterministic reconstruction is retained separately"
+  ]
+}

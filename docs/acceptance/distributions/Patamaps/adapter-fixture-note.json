@@ -1,0 +1,6 @@
+{
+  "observation": "The initial complete macOS run failed the forged-request classification assertion; the original assertion did not include the returned error. A focused run and 40 unchanged repetitions then passed.",
+  "inference": "The original cat(file) fixture never reads stdin, so a successful child exit may race with writing the request. The specific initial error was not captured.",
+  "change": "Only the test provider now consumes the full request before returning its response. ADAPTER_BINDING, ADAPTER_DIAGNOSTIC, duplicate-JSON, exit, timeout and output-limit assertions remain required; deadlines are unchanged.",
+  "productionBehavior": "unchanged"
+}

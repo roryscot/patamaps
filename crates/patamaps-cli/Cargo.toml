@@ -1,0 +1,27 @@
+[package]
+name = "patamaps-cli"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+description = "Native correspondence compiler command line interface"
+
+[[bin]]
+name = "patamaps"
+path = "src/main.rs"
+
+[dependencies]
+patamaps-contracts.workspace = true
+patamaps-core.workspace = true
+patamaps-projection.workspace = true
+patamaps-governance.workspace = true
+patamaps-inspect.workspace = true
+patamaps-workspace.workspace = true
+patamaps-scientific.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+clap.workspace = true
+
+[lints]
+workspace = true

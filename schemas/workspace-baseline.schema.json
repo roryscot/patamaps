@@ -1,0 +1,132 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:patamaps:draft:1:schema:workspace-baseline",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": {
+      "const": "0.1.0"
+    },
+    "documentType": {
+      "const": "workspace-baseline"
+    },
+    "profile": {
+      "const": "patamaps-workspace-draft-1"
+    },
+    "executor": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    },
+    "workspaceExecutor": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    },
+    "configDigest": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    },
+    "config": {
+      "$ref": "urn:patamaps:draft:1:schema:workspace-config"
+    },
+    "discovery": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "sourceId": {
+            "type": "string"
+          },
+          "adapter": {
+            "type": "string"
+          },
+          "adapterVersion": {
+            "type": "string"
+          },
+          "requestDigest": {
+            "type": "string",
+            "pattern": "^sha256:[a-f0-9]{64}$"
+          },
+          "shardDigest": {
+            "type": "string",
+            "pattern": "^sha256:[a-f0-9]{64}$"
+          },
+          "shard": {
+            "$ref": "urn:patamaps:draft:1:schema:graph"
+          },
+          "diagnostics": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "severity": {
+                  "enum": [
+                    "warning",
+                    "error"
+                  ]
+                },
+                "code": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "severity",
+                "code",
+                "message"
+              ]
+            },
+            "maxItems": 1024,
+            "minItems": 0
+          }
+        },
+        "required": [
+          "sourceId",
+          "adapter",
+          "adapterVersion",
+          "requestDigest",
+          "shardDigest",
+          "shard",
+          "diagnostics"
+        ]
+      },
+      "maxItems": 64,
+      "minItems": 0
+    },
+    "captures": {
+      "type": "array",
+      "items": {
+        "$ref": "urn:patamaps:draft:1:schema:capture"
+      },
+      "maxItems": 16,
+      "minItems": 1
+    },
+    "outputs": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "maxProperties": 32
+    },
+    "digest": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "documentType",
+    "profile",
+    "executor",
+    "workspaceExecutor",
+    "configDigest",
+    "config",
+    "discovery",
+    "captures",
+    "outputs",
+    "digest"
+  ]
+}

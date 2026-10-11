@@ -1,0 +1,486 @@
+{
+  "schemaVersion": "0.1.0",
+  "documentType": "capture",
+  "profile": "bindloom-routing-draft-1",
+  "executor": "sha256:07f74356f72db6236458375321a18f36240642e695f5e1fbc1a37b9c74fe775f",
+  "id": "urn:bindloom:capture:765407a57b653964e2f5a31cb723f2063e5537dca7cbde3908a7581ce22d60d5",
+  "digest": "sha256:765407a57b653964e2f5a31cb723f2063e5537dca7cbde3908a7581ce22d60d5",
+  "inputs": {
+    "graph": {
+      "schemaVersion": "0.1.0",
+      "documentType": "graph",
+      "id": "urn:example:path-tree:graph",
+      "namespace": "path-tree-example",
+      "label": "Nested path-tree example",
+      "revision": "1",
+      "relationPacks": [
+        {
+          "id": "urn:metamap:relation-pack:core",
+          "version": "1.0.0"
+        },
+        {
+          "id": "urn:metamap:relation-pack:routing",
+          "version": "1.0.0"
+        }
+      ],
+      "entities": [
+        {
+          "id": "urn:example:route:dev",
+          "kind": "routing:route",
+          "label": "Dev",
+          "attributes": {
+            "path": "/dev"
+          }
+        },
+        {
+          "id": "urn:example:route:auth",
+          "kind": "routing:route",
+          "label": "Auth",
+          "attributes": {
+            "path": "/auth"
+          }
+        },
+        {
+          "id": "urn:example:route:auth-sign-in",
+          "kind": "routing:route",
+          "label": "Sign in",
+          "attributes": {
+            "path": "/auth/sign_in"
+          }
+        },
+        {
+          "id": "urn:example:route:auth-sign-up",
+          "kind": "routing:route",
+          "label": "Sign up",
+          "attributes": {
+            "path": "/auth/sign_up"
+          }
+        },
+        {
+          "id": "urn:example:route:admin",
+          "kind": "routing:route",
+          "label": "Admin",
+          "attributes": {
+            "path": "/admin"
+          }
+        },
+        {
+          "id": "urn:example:route:admin-role",
+          "kind": "routing:route",
+          "label": "Admin role",
+          "attributes": {
+            "path": "/admin/:role"
+          }
+        },
+        {
+          "id": "urn:example:route:admin-group",
+          "kind": "routing:route",
+          "label": "Admin group",
+          "attributes": {
+            "path": "/admin/:role/group/:groupId"
+          }
+        },
+        {
+          "id": "urn:example:route:event",
+          "kind": "routing:route",
+          "label": "Event",
+          "attributes": {
+            "path": "/event/:eventId"
+          }
+        },
+        {
+          "id": "urn:example:route:event-cast",
+          "kind": "routing:route",
+          "label": "Event cast",
+          "attributes": {
+            "path": "/event/:eventId/cast"
+          }
+        },
+        {
+          "id": "urn:example:route:event-story",
+          "kind": "routing:route",
+          "label": "Event story",
+          "attributes": {
+            "path": "/event/:eventId/story"
+          }
+        },
+        {
+          "id": "urn:example:route:files",
+          "kind": "routing:route",
+          "label": "Files",
+          "attributes": {
+            "path": "/files/*path"
+          }
+        },
+        {
+          "id": "urn:example:route:docs",
+          "kind": "routing:route",
+          "label": "Docs",
+          "attributes": {
+            "path": "/docs/*slug?"
+          }
+        },
+        {
+          "id": "urn:example:handler:sign-in",
+          "kind": "routing:handler",
+          "label": "Sign in handler",
+          "locators": [
+            {
+              "uri": "typescript:src/auth/sign-in.ts#handleSignIn"
+            }
+          ]
+        }
+      ],
+      "mappings": [
+        {
+          "id": "urn:example:mapping:sign-in-handler",
+          "relation": "routing:handled_by",
+          "sources": [
+            "urn:example:route:auth-sign-in"
+          ],
+          "targets": [
+            "urn:example:handler:sign-in"
+          ],
+          "cardinality": "one-to-one",
+          "lossiness": "lossless",
+          "provenance": {
+            "status": "declared",
+            "assertedBy": "team:identity"
+          }
+        }
+      ],
+      "authorities": []
+    },
+    "packs": [
+      {
+        "schemaVersion": "0.1.0",
+        "documentType": "relation-pack",
+        "id": "urn:metamap:relation-pack:routing",
+        "version": "1.0.0",
+        "description": "Semantic relations for commands, events, routes, handlers, schemas, policies, and endpoints.",
+        "relations": [
+          {
+            "id": "routing:handled_by",
+            "cyclePolicy": "forbid",
+            "description": "The target handler executes the source command, event, or route.",
+            "sourceKinds": [
+              "routing:command",
+              "routing:event",
+              "routing:route"
+            ],
+            "targetKinds": [
+              "routing:handler"
+            ],
+            "cardinalities": [
+              "one-to-one",
+              "many-to-one"
+            ],
+            "impactDirection": "source-to-target"
+          },
+          {
+            "id": "routing:accepts",
+            "cyclePolicy": "forbid",
+            "description": "The source accepts input conforming to the target schema.",
+            "sourceKinds": [
+              "routing:command",
+              "routing:event",
+              "routing:route"
+            ],
+            "targetKinds": [
+              "routing:schema"
+            ],
+            "cardinalities": [
+              "one-to-one",
+              "many-to-one"
+            ],
+            "impactDirection": "target-to-source"
+          },
+          {
+            "id": "routing:authorized_by",
+            "cyclePolicy": "forbid",
+            "description": "The source is gated by the target authorization policy.",
+            "sourceKinds": [
+              "routing:command",
+              "routing:event",
+              "routing:route"
+            ],
+            "targetKinds": [
+              "routing:policy"
+            ],
+            "cardinalities": [
+              "one-to-one",
+              "many-to-one",
+              "many-to-many"
+            ],
+            "impactDirection": "target-to-source"
+          },
+          {
+            "id": "routing:emits",
+            "cyclePolicy": "allow",
+            "description": "Executing the source may emit the target event.",
+            "sourceKinds": [
+              "routing:command",
+              "routing:handler",
+              "routing:route"
+            ],
+            "targetKinds": [
+              "routing:event"
+            ],
+            "cardinalities": [
+              "one-to-one",
+              "one-to-many",
+              "many-to-many"
+            ],
+            "impactDirection": "source-to-target"
+          },
+          {
+            "id": "routing:exposed_as",
+            "cyclePolicy": "forbid",
+            "description": "The source semantic operation is exposed through the target transport endpoint.",
+            "sourceKinds": [
+              "routing:command",
+              "routing:event",
+              "routing:route"
+            ],
+            "targetKinds": [
+              "routing:endpoint"
+            ],
+            "cardinalities": [
+              "one-to-one",
+              "one-to-many",
+              "many-to-many"
+            ],
+            "impactDirection": "both"
+          },
+          {
+            "id": "routing:transitions_to",
+            "cyclePolicy": "allow",
+            "description": "The source workflow state permits a transition to the target state.",
+            "sourceKinds": [
+              "routing:state"
+            ],
+            "targetKinds": [
+              "routing:state"
+            ],
+            "cardinalities": [
+              "one-to-one",
+              "one-to-many",
+              "many-to-many"
+            ],
+            "impactDirection": "both"
+          }
+        ]
+      },
+      {
+        "schemaVersion": "0.1.0",
+        "documentType": "relation-pack",
+        "id": "urn:metamap:relation-pack:core",
+        "version": "1.0.0",
+        "description": "Minimal structural relations shared by language and domain adapters.",
+        "relations": [
+          {
+            "id": "core:contains",
+            "cyclePolicy": "forbid",
+            "description": "The source structurally contains the target.",
+            "cardinalities": [
+              "one-to-one",
+              "one-to-many",
+              "many-to-many"
+            ],
+            "transitive": true,
+            "impactDirection": "both"
+          },
+          {
+            "id": "core:implements",
+            "cyclePolicy": "forbid",
+            "description": "The target is a physical realization of the source concept or contract.",
+            "cardinalities": [
+              "one-to-one",
+              "one-to-many",
+              "many-to-many"
+            ],
+            "impactDirection": "source-to-target"
+          },
+          {
+            "id": "core:conforms_to",
+            "cyclePolicy": "forbid",
+            "description": "The source is constrained by the target schema or specification.",
+            "cardinalities": [
+              "one-to-one",
+              "many-to-one",
+              "many-to-many"
+            ],
+            "impactDirection": "target-to-source"
+          },
+          {
+            "id": "core:derives_from",
+            "cyclePolicy": "forbid",
+            "description": "The source is derived from the target.",
+            "cardinalities": [
+              "one-to-one",
+              "one-to-many",
+              "many-to-one",
+              "many-to-many"
+            ],
+            "transitive": true,
+            "impactDirection": "target-to-source"
+          },
+          {
+            "id": "core:generates",
+            "cyclePolicy": "forbid",
+            "description": "The source deterministically or procedurally produces the target.",
+            "cardinalities": [
+              "one-to-one",
+              "one-to-many",
+              "many-to-many"
+            ],
+            "impactDirection": "source-to-target"
+          },
+          {
+            "id": "core:depends_on",
+            "cyclePolicy": "forbid",
+            "description": "The source requires the target.",
+            "cardinalities": [
+              "one-to-one",
+              "one-to-many",
+              "many-to-many"
+            ],
+            "transitive": true,
+            "impactDirection": "target-to-source"
+          },
+          {
+            "id": "core:mirrors",
+            "cyclePolicy": "allow",
+            "description": "The source and target intentionally duplicate the same scoped facts.",
+            "cardinalities": [
+              "one-to-one",
+              "many-to-many"
+            ],
+            "symmetric": true,
+            "impactDirection": "both"
+          },
+          {
+            "id": "core:documents",
+            "cyclePolicy": "allow",
+            "description": "The source documentation describes the target.",
+            "cardinalities": [
+              "one-to-one",
+              "one-to-many",
+              "many-to-many"
+            ],
+            "impactDirection": "target-to-source"
+          },
+          {
+            "id": "core:tests",
+            "cyclePolicy": "allow",
+            "description": "The source provides evidence about the target.",
+            "cardinalities": [
+              "one-to-one",
+              "one-to-many",
+              "many-to-many"
+            ],
+            "impactDirection": "target-to-source"
+          },
+          {
+            "id": "core:exposes",
+            "cyclePolicy": "forbid",
+            "description": "The source makes the target externally addressable.",
+            "cardinalities": [
+              "one-to-one",
+              "one-to-many",
+              "many-to-many"
+            ],
+            "impactDirection": "both"
+          },
+          {
+            "id": "core:references",
+            "cyclePolicy": "allow",
+            "description": "The source identifies or points to the target without implying ownership.",
+            "cardinalities": [
+              "one-to-one",
+              "one-to-many",
+              "many-to-one",
+              "many-to-many"
+            ],
+            "impactDirection": "target-to-source"
+          },
+          {
+            "id": "core:specified_by",
+            "cyclePolicy": "forbid",
+            "description": "The target defines the intended behavior or constraints of the source.",
+            "cardinalities": [
+              "one-to-one",
+              "many-to-one",
+              "many-to-many"
+            ],
+            "impactDirection": "target-to-source"
+          }
+        ]
+      }
+    ],
+    "policy": {
+      "schemaVersion": "0.1.0",
+      "documentType": "policy",
+      "id": "urn:example:path-tree:viability",
+      "graph": {
+        "id": "urn:example:path-tree:graph",
+        "digest": "sha256:5559a047b971b6db415d3c814c71c64578716ddd0c1c184b9c044220e69a2ead"
+      },
+      "mappings": [
+        {
+          "mapping": "urn:example:mapping:sign-in-handler",
+          "coverage": "total",
+          "determinism": "deterministic",
+          "reversibility": "irreversible"
+        }
+      ],
+      "constraints": [],
+      "evidence": []
+    },
+    "context": {},
+    "evaluatedAt": "2026-09-15T00:00:00.000Z"
+  },
+  "sources": [],
+  "result": {
+    "generation": {
+      "activeMappings": [
+        "urn:example:mapping:sign-in-handler"
+      ],
+      "context": {},
+      "digest": "sha256:0e25bbe2a42457a022da1cb059d0408b9b88ab40370b25ca0fd600f02e71a9a5",
+      "documentType": "generation",
+      "evaluatedAt": "2026-09-15T00:00:00.000Z",
+      "evidence": [],
+      "graph": {
+        "digest": "sha256:5559a047b971b6db415d3c814c71c64578716ddd0c1c184b9c044220e69a2ead",
+        "id": "urn:example:path-tree:graph",
+        "revision": "1"
+      },
+      "id": "urn:bindloom:generation:0e25bbe2a42457a022da1cb059d0408b9b88ab40370b25ca0fd600f02e71a9a5",
+      "inactiveMappings": [],
+      "packs": [
+        {
+          "digest": "sha256:07683a803d0c7b7a4aa621e6bfe9b8cffa8667fd16047601aa4aa86268f84a2e",
+          "id": "urn:metamap:relation-pack:core",
+          "version": "1.0.0"
+        },
+        {
+          "digest": "sha256:c7bca28d6b8836a04a6f505bff4033947e401dd6c93cfeb8e543f82c9f0cb19d",
+          "id": "urn:metamap:relation-pack:routing",
+          "version": "1.0.0"
+        }
+      ],
+      "policy": {
+        "digest": "sha256:cb9343e3ca7ff740560f2453279d5ca4415b9f60a0dd6cd26981b94373b685b5",
+        "id": "urn:example:path-tree:viability"
+      },
+      "profile": "bindloom-routing-draft-1",
+      "schemaVersion": "0.1.0",
+      "waiversApplied": []
+    },
+    "issues": [],
+    "pathTree": null,
+    "projection": null,
+    "status": "viable"
+  }
+}

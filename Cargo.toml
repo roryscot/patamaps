@@ -1,0 +1,53 @@
+[workspace]
+resolver = "3"
+members = [
+    "crates/patamaps-contracts",
+    "crates/patamaps-core",
+    "crates/patamaps-projection",
+    "crates/patamaps-cli",
+    "crates/patamaps-governance",
+    "crates/patamaps-activator",
+    "crates/patamaps-inspect",
+    "crates/patamaps-workspace",
+    "crates/patamaps-scientific",
+]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.99"
+license = "Apache-2.0"
+repository = "https://github.com/roryscot/patamaps"
+
+[workspace.dependencies]
+patamaps-contracts = { path = "crates/patamaps-contracts", version = "0.1.0" }
+patamaps-core = { path = "crates/patamaps-core", version = "0.1.0" }
+patamaps-projection = { path = "crates/patamaps-projection", version = "0.1.0" }
+patamaps-governance = { path = "crates/patamaps-governance", version = "0.1.0" }
+patamaps-inspect = { path = "crates/patamaps-inspect", version = "0.1.0" }
+patamaps-workspace = { path = "crates/patamaps-workspace", version = "0.1.0" }
+patamaps-scientific = { path = "crates/patamaps-scientific", version = "0.1.0" }
+base64 = "=0.22.1"
+ed25519-dalek = { version = "=2.2.0", default-features = false, features = ["std", "fast"] }
+serde = { version = "1.0.229", features = ["derive"] }
+serde_json = { version = "1.0.151", features = ["float_roundtrip"] }
+serde_json_canonicalizer = "=0.3.2"
+sha2 = "0.10.9"
+thiserror = "2.0.21"
+clap = { version = "4.6.7", features = ["derive"] }
+time = { version = "0.3.55", features = ["parsing", "formatting"] }
+rustix = { version = "=1.1.5", features = ["fs", "process"] }
+yaml-rust2 = { version = "=0.13.0", default-features = false }
+jsonschema = { version = "=0.58.6", default-features = false }
+fluent-uri = "=0.4.1"
+
+[workspace.lints.rust]
+unsafe_code = "forbid"
+
+[workspace.lints.clippy]
+all = "warn"
+
+[profile.release]
+lto = "thin"
+codegen-units = 1
+strip = "debuginfo"

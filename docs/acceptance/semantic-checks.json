@@ -1,0 +1,73 @@
+[
+  {
+    "command": [
+      "python3",
+      "scripts/reference/compare.py",
+      "/Users/admin/dev/SEEDZ/metamap",
+      "--cli",
+      "target/release/bindloom",
+      "--node",
+      "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+      "--output",
+      "docs/acceptance/reference-routing-semantic.json"
+    ],
+    "exitCode": 0,
+    "stdout": "PASS: 18 independently declared shared routing cases against isolated reference 399747a4ad05a37cd8db1cedd53048fad2175be4; complete outputs in docs/acceptance/reference-routing-semantic.json\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "python3",
+      "scripts/reference/semantic.py",
+      "/Users/admin/dev/SEEDZ/metamap",
+      "--cli",
+      "target/release/bindloom",
+      "--node",
+      "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+      "--output",
+      "docs/acceptance/reference-semantic.json"
+    ],
+    "exitCode": 0,
+    "stdout": "PASS: 40 independently declared law, uncertainty and budget cases against isolated reference 399747a4ad05a37cd8db1cedd53048fad2175be4; complete records in docs/acceptance/reference-semantic.json\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "python3",
+      "scripts/test_native.py",
+      "--cli",
+      "target/release/bindloom",
+      "--tsc",
+      "/Users/admin/dev/SEEDZ/metamap/node_modules/typescript/lib/tsc.js",
+      "--node",
+      "/Users/admin/.nvm/versions/node/v22.16.0/bin/node"
+    ],
+    "exitCode": 0,
+    "stdout": "PASS: independently owned Rust and TypeScript consumers, actual module move, stable semantic ID, strict type refusal, escaped data, rejected-output preservation, forged generation rejection, no-clobber output; native compiler and Rust runtime executed with Node absent from PATH.\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "python3",
+      "scripts/test_canonical.py",
+      "--cli",
+      "target/release/bindloom",
+      "--node",
+      "/Users/admin/.nvm/versions/node/v22.16.0/bin/node"
+    ],
+    "exitCode": 0,
+    "stdout": "PASS: 4104 deterministic binary64 and integer boundary inputs match independent ECMAScript JSON bytes (seed 8785).\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+      "scripts/test_schemas.mjs",
+      "/Users/admin/dev/SEEDZ/metamap",
+      "target/release/bindloom"
+    ],
+    "exitCode": 0,
+    "stdout": "PASS: all successor schemas compile in the local registry; five law fixtures and an actual Rust derivation validate.\n",
+    "stderr": ""
+  }
+]

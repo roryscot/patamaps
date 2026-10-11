@@ -1,0 +1,1221 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta http-equiv="Content-Security-Policy" content="default-src 'none';style-src 'unsafe-inline';base-uri 'none';form-action 'none'"><title>Bindloom inspection</title><style>:root{color-scheme:light dark;font:16px/1.55 system-ui}body{margin:0 auto;max-width:1100px;padding:24px}section{border:1px solid #8887;border-radius:8px;padding:20px;margin:20px 0}a{color:LinkText}nav{display:flex;flex-wrap:wrap;gap:20px}pre{white-space:pre-wrap;overflow-wrap:anywhere;max-height:28rem;overflow:auto;background:#8881;padding:16px}a:focus-visible,summary:focus-visible,pre:focus-visible{outline:3px solid #bd7000;outline-offset:4px}.skip{position:absolute;top:-80px}.skip:focus{top:8px}summary{cursor:pointer}h1,h2,p,li{overflow-wrap:anywhere}.notice{border-left:4px solid #bd7000;padding:12px}article{border-top:1px solid #8885;padding-top:12px;margin-top:16px}</style></head><body><a class="skip" href="#main">Skip to inspection</a><header><p>Bindloom · offline inspection</p><h1>urn:example:command:create-user</h1><p class="notice">Read-only captured evidence. No change is applied. Current approval and activation are not evaluated; missing or rejected data remains visible.</p><nav aria-label="Inspection sections"><a href="#decision">Decision</a><a href="#subjects">Subjects</a><a href="#mappings">Mappings</a><a href="#semantics">Proofs and risk</a><a href="#sources">Sources</a><a href="#changes">Changes</a><a href="#raw">Shared JSON report</a></nav></header><main id="main" tabindex="-1"><section id="decision" aria-labelledby="decision-title"><h2 id="decision-title">Decision</h2><p>Admission: <strong>rejected</strong>. Selection: <strong>known</strong>. Navigation: <strong>complete</strong>.</p><details><summary>Issues and their recorded subjects</summary><pre tabindex="0">[
+  {
+    &quot;issue&quot;: {
+      &quot;code&quot;: &quot;UNRESOLVED_ENDPOINT&quot;,
+      &quot;message&quot;: &quot;Missing endpoint urn:handler:missing&quot;,
+      &quot;severity&quot;: &quot;error&quot;,
+      &quot;subjectId&quot;: &quot;urn:example:mapping:create-user-handler&quot;
+    },
+    &quot;relevance&quot;: &quot;dependency&quot;
+  }
+]</pre></details></section><section id="subjects" aria-labelledby="subjects-title"><h2 id="subjects-title">Subjects</h2><article id="subjects-7d63b42df8c6743041d40ec55c5f077fefe41cf266b5ae365c3522f0d2606199"><h3>urn:example:command:create-user</h3><p>Record state: known</p><details><summary>Captured records</summary><pre tabindex="0">{
+  &quot;id&quot;: &quot;urn:example:command:create-user&quot;,
+  &quot;records&quot;: [
+    {
+      &quot;id&quot;: &quot;urn:example:command:create-user&quot;,
+      &quot;kind&quot;: &quot;routing:command&quot;,
+      &quot;label&quot;: &quot;&lt;img src=x onerror=alert(1)&gt;&quot;
+    }
+  ],
+  &quot;relevance&quot;: &quot;selection-or-dependency&quot;,
+  &quot;state&quot;: &quot;known&quot;
+}</pre></details></article><article id="subjects-6618cc87622c5a1b559c31847fd2c14aed6f984bb65a81687b74cc95dd3cb0a2"><h3>urn:example:endpoint:create-user</h3><p>Record state: known</p><details><summary>Captured records</summary><pre tabindex="0">{
+  &quot;id&quot;: &quot;urn:example:endpoint:create-user&quot;,
+  &quot;records&quot;: [
+    {
+      &quot;attributes&quot;: {
+        &quot;method&quot;: &quot;POST&quot;,
+        &quot;path&quot;: &quot;/users&quot;
+      },
+      &quot;id&quot;: &quot;urn:example:endpoint:create-user&quot;,
+      &quot;kind&quot;: &quot;routing:endpoint&quot;,
+      &quot;label&quot;: &quot;POST /users&quot;
+    }
+  ],
+  &quot;relevance&quot;: &quot;selection-or-dependency&quot;,
+  &quot;state&quot;: &quot;known&quot;
+}</pre></details></article><article id="subjects-7b9a9e31152874634fc2ae34aaa439e196c08c595dedd6e3da7cba9e1831ddd4"><h3>urn:example:event:user-created</h3><p>Record state: known</p><details><summary>Captured records</summary><pre tabindex="0">{
+  &quot;id&quot;: &quot;urn:example:event:user-created&quot;,
+  &quot;records&quot;: [
+    {
+      &quot;id&quot;: &quot;urn:example:event:user-created&quot;,
+      &quot;kind&quot;: &quot;routing:event&quot;,
+      &quot;label&quot;: &quot;User created&quot;
+    }
+  ],
+  &quot;relevance&quot;: &quot;selection-or-dependency&quot;,
+  &quot;state&quot;: &quot;known&quot;
+}</pre></details></article><article id="subjects-596b5d6f79c67af552927e94e9517e9313cf37b660655b9b6b931322d97af20e"><h3>urn:example:handler:create-user</h3><p>Record state: known</p><details><summary>Captured records</summary><pre tabindex="0">{
+  &quot;id&quot;: &quot;urn:example:handler:create-user&quot;,
+  &quot;records&quot;: [
+    {
+      &quot;id&quot;: &quot;urn:example:handler:create-user&quot;,
+      &quot;kind&quot;: &quot;routing:handler&quot;,
+      &quot;label&quot;: &quot;Create user handler&quot;,
+      &quot;locators&quot;: [
+        {
+          &quot;uri&quot;: &quot;typescript:src/identity/create-user.ts#handleCreateUser&quot;
+        }
+      ]
+    }
+  ],
+  &quot;relevance&quot;: &quot;other&quot;,
+  &quot;state&quot;: &quot;known&quot;
+}</pre></details></article><article id="subjects-9f35c7debf92b77654481320b121b616876288be82c076a554d5ddc2f471de0d"><h3>urn:example:policy:identity-admin</h3><p>Record state: known</p><details><summary>Captured records</summary><pre tabindex="0">{
+  &quot;id&quot;: &quot;urn:example:policy:identity-admin&quot;,
+  &quot;records&quot;: [
+    {
+      &quot;id&quot;: &quot;urn:example:policy:identity-admin&quot;,
+      &quot;kind&quot;: &quot;routing:policy&quot;,
+      &quot;label&quot;: &quot;Identity administrator&quot;
+    }
+  ],
+  &quot;relevance&quot;: &quot;selection-or-dependency&quot;,
+  &quot;state&quot;: &quot;known&quot;
+}</pre></details></article><article id="subjects-7e4e7f68698f855e361c4e5a45de8b2e7672f8d23a8e39033233d4385aeac92e"><h3>urn:example:schema:create-user</h3><p>Record state: known</p><details><summary>Captured records</summary><pre tabindex="0">{
+  &quot;id&quot;: &quot;urn:example:schema:create-user&quot;,
+  &quot;records&quot;: [
+    {
+      &quot;id&quot;: &quot;urn:example:schema:create-user&quot;,
+      &quot;kind&quot;: &quot;routing:schema&quot;,
+      &quot;label&quot;: &quot;Create user input&quot;,
+      &quot;locators&quot;: [
+        {
+          &quot;uri&quot;: &quot;json-schema:schemas/create-user.json&quot;
+        }
+      ]
+    }
+  ],
+  &quot;relevance&quot;: &quot;selection-or-dependency&quot;,
+  &quot;state&quot;: &quot;known&quot;
+}</pre></details></article></section><section id="mappings" aria-labelledby="mappings-title"><h2 id="mappings-title">Mappings</h2><article id="mappings-66ed5fb2424aa0a1c188bd29ac5e1941795ca985e384ee8b4cf6ee2bd80556e9"><h3>urn:example:mapping:create-user-endpoint</h3><p>Record state: known</p><details><summary>Captured records</summary><pre tabindex="0">{
+  &quot;activity&quot;: &quot;unavailable&quot;,
+  &quot;id&quot;: &quot;urn:example:mapping:create-user-endpoint&quot;,
+  &quot;records&quot;: [
+    {
+      &quot;cardinality&quot;: &quot;one-to-one&quot;,
+      &quot;id&quot;: &quot;urn:example:mapping:create-user-endpoint&quot;,
+      &quot;lossiness&quot;: &quot;lossless&quot;,
+      &quot;provenance&quot;: {
+        &quot;assertedBy&quot;: &quot;team:api&quot;,
+        &quot;status&quot;: &quot;declared&quot;
+      },
+      &quot;relation&quot;: &quot;routing:exposed_as&quot;,
+      &quot;sources&quot;: [
+        &quot;urn:example:command:create-user&quot;
+      ],
+      &quot;targets&quot;: [
+        &quot;urn:example:endpoint:create-user&quot;
+      ]
+    }
+  ],
+  &quot;relevance&quot;: &quot;selection-or-dependency&quot;,
+  &quot;state&quot;: &quot;known&quot;
+}</pre></details></article><article id="mappings-688f68dd14972d68d2f909e13ecce7bdd819cad37d3551a62c7dac9bc3178d60"><h3>urn:example:mapping:create-user-event</h3><p>Record state: known</p><details><summary>Captured records</summary><pre tabindex="0">{
+  &quot;activity&quot;: &quot;unavailable&quot;,
+  &quot;id&quot;: &quot;urn:example:mapping:create-user-event&quot;,
+  &quot;records&quot;: [
+    {
+      &quot;cardinality&quot;: &quot;one-to-one&quot;,
+      &quot;id&quot;: &quot;urn:example:mapping:create-user-event&quot;,
+      &quot;lossiness&quot;: &quot;lossless&quot;,
+      &quot;provenance&quot;: {
+        &quot;assertedBy&quot;: &quot;team:identity&quot;,
+        &quot;status&quot;: &quot;declared&quot;
+      },
+      &quot;relation&quot;: &quot;routing:emits&quot;,
+      &quot;sources&quot;: [
+        &quot;urn:example:command:create-user&quot;
+      ],
+      &quot;targets&quot;: [
+        &quot;urn:example:event:user-created&quot;
+      ]
+    }
+  ],
+  &quot;relevance&quot;: &quot;selection-or-dependency&quot;,
+  &quot;state&quot;: &quot;known&quot;
+}</pre></details></article><article id="mappings-1b9d54ce88d870ca660d94b591c7330ce302bc4e0fcc697d7ed265d739ccfbb5"><h3>urn:example:mapping:create-user-handler</h3><p>Record state: known</p><details><summary>Captured records</summary><pre tabindex="0">{
+  &quot;activity&quot;: &quot;unavailable&quot;,
+  &quot;id&quot;: &quot;urn:example:mapping:create-user-handler&quot;,
+  &quot;records&quot;: [
+    {
+      &quot;cardinality&quot;: &quot;one-to-one&quot;,
+      &quot;id&quot;: &quot;urn:example:mapping:create-user-handler&quot;,
+      &quot;lossiness&quot;: &quot;lossless&quot;,
+      &quot;provenance&quot;: {
+        &quot;assertedBy&quot;: &quot;team:identity&quot;,
+        &quot;status&quot;: &quot;declared&quot;
+      },
+      &quot;relation&quot;: &quot;routing:handled_by&quot;,
+      &quot;sources&quot;: [
+        &quot;urn:example:command:create-user&quot;
+      ],
+      &quot;targets&quot;: [
+        &quot;urn:handler:missing&quot;
+      ]
+    }
+  ],
+  &quot;relevance&quot;: &quot;selection-or-dependency&quot;,
+  &quot;state&quot;: &quot;known&quot;
+}</pre></details></article><article id="mappings-7eaf5b7caf700868325f8a45f5485f7868411dcb719393dc82c4e9bee1054746"><h3>urn:example:mapping:create-user-input</h3><p>Record state: known</p><details><summary>Captured records</summary><pre tabindex="0">{
+  &quot;activity&quot;: &quot;unavailable&quot;,
+  &quot;id&quot;: &quot;urn:example:mapping:create-user-input&quot;,
+  &quot;records&quot;: [
+    {
+      &quot;cardinality&quot;: &quot;one-to-one&quot;,
+      &quot;id&quot;: &quot;urn:example:mapping:create-user-input&quot;,
+      &quot;lossiness&quot;: &quot;lossless&quot;,
+      &quot;provenance&quot;: {
+        &quot;assertedBy&quot;: &quot;team:identity&quot;,
+        &quot;status&quot;: &quot;declared&quot;
+      },
+      &quot;relation&quot;: &quot;routing:accepts&quot;,
+      &quot;sources&quot;: [
+        &quot;urn:example:command:create-user&quot;
+      ],
+      &quot;targets&quot;: [
+        &quot;urn:example:schema:create-user&quot;
+      ]
+    }
+  ],
+  &quot;relevance&quot;: &quot;selection-or-dependency&quot;,
+  &quot;state&quot;: &quot;known&quot;
+}</pre></details></article><article id="mappings-64b3958e9e4473e88495f7e5fa59e8d0f091bca11dfa6b23f44a21042db22e1f"><h3>urn:example:mapping:create-user-policy</h3><p>Record state: known</p><details><summary>Captured records</summary><pre tabindex="0">{
+  &quot;activity&quot;: &quot;unavailable&quot;,
+  &quot;id&quot;: &quot;urn:example:mapping:create-user-policy&quot;,
+  &quot;records&quot;: [
+    {
+      &quot;cardinality&quot;: &quot;one-to-one&quot;,
+      &quot;id&quot;: &quot;urn:example:mapping:create-user-policy&quot;,
+      &quot;lossiness&quot;: &quot;lossless&quot;,
+      &quot;provenance&quot;: {
+        &quot;assertedBy&quot;: &quot;team:security&quot;,
+        &quot;status&quot;: &quot;declared&quot;
+      },
+      &quot;relation&quot;: &quot;routing:authorized_by&quot;,
+      &quot;sources&quot;: [
+        &quot;urn:example:command:create-user&quot;
+      ],
+      &quot;targets&quot;: [
+        &quot;urn:example:policy:identity-admin&quot;
+      ]
+    }
+  ],
+  &quot;relevance&quot;: &quot;selection-or-dependency&quot;,
+  &quot;state&quot;: &quot;known&quot;
+}</pre></details></article></section><section id="semantics" aria-labelledby="semantics-title"><h2 id="semantics-title">Proofs, uncertainty, budget and declared ownership</h2><details><summary>Checked generation; null means unavailable</summary><pre tabindex="0">null</pre></details><details><summary>Projection and its complete risk closure</summary><pre tabindex="0">null</pre></details><details><summary>Path tree</summary><pre tabindex="0">null</pre></details><details><summary>Ownership declarations; authentication not evaluated</summary><pre tabindex="0">{
+  &quot;authentication&quot;: &quot;not-evaluated&quot;,
+  &quot;declarations&quot;: [
+    {
+      &quot;concept&quot;: &quot;urn:example:command:create-user&quot;,
+      &quot;facts&quot;: [
+        &quot;routing-identity&quot;
+      ],
+      &quot;id&quot;: &quot;urn:example:authority:create-user-routing&quot;,
+      &quot;mode&quot;: &quot;canonical&quot;,
+      &quot;provenance&quot;: {
+        &quot;assertedBy&quot;: &quot;team:identity&quot;,
+        &quot;status&quot;: &quot;declared&quot;
+      },
+      &quot;source&quot;: &quot;urn:example:command:create-user&quot;
+    }
+  ],
+  &quot;interpretation&quot;: &quot;declared-fact-ownership&quot;
+}</pre></details><details><summary>Exact policy, evidence and law declarations</summary><pre tabindex="0">{
+  &quot;packs&quot;: [
+    {
+      &quot;description&quot;: &quot;Semantic relations for commands, events, routes, handlers, schemas, policies, and endpoints.&quot;,
+      &quot;documentType&quot;: &quot;relation-pack&quot;,
+      &quot;id&quot;: &quot;urn:metamap:relation-pack:routing&quot;,
+      &quot;relations&quot;: [
+        {
+          &quot;cardinalities&quot;: [
+            &quot;one-to-one&quot;,
+            &quot;many-to-one&quot;
+          ],
+          &quot;cyclePolicy&quot;: &quot;forbid&quot;,
+          &quot;description&quot;: &quot;The target handler executes the source command, event, or route.&quot;,
+          &quot;id&quot;: &quot;routing:handled_by&quot;,
+          &quot;impactDirection&quot;: &quot;source-to-target&quot;,
+          &quot;sourceKinds&quot;: [
+            &quot;routing:command&quot;,
+            &quot;routing:event&quot;,
+            &quot;routing:route&quot;
+          ],
+          &quot;targetKinds&quot;: [
+            &quot;routing:handler&quot;
+          ]
+        },
+        {
+          &quot;cardinalities&quot;: [
+            &quot;one-to-one&quot;,
+            &quot;many-to-one&quot;
+          ],
+          &quot;cyclePolicy&quot;: &quot;forbid&quot;,
+          &quot;description&quot;: &quot;The source accepts input conforming to the target schema.&quot;,
+          &quot;id&quot;: &quot;routing:accepts&quot;,
+          &quot;impactDirection&quot;: &quot;target-to-source&quot;,
+          &quot;sourceKinds&quot;: [
+            &quot;routing:command&quot;,
+            &quot;routing:event&quot;,
+            &quot;routing:route&quot;
+          ],
+          &quot;targetKinds&quot;: [
+            &quot;routing:schema&quot;
+          ]
+        },
+        {
+          &quot;cardinalities&quot;: [
+            &quot;one-to-one&quot;,
+            &quot;many-to-one&quot;,
+            &quot;many-to-many&quot;
+          ],
+          &quot;cyclePolicy&quot;: &quot;forbid&quot;,
+          &quot;description&quot;: &quot;The source is gated by the target authorization policy.&quot;,
+          &quot;id&quot;: &quot;routing:authorized_by&quot;,
+          &quot;impactDirection&quot;: &quot;target-to-source&quot;,
+          &quot;sourceKinds&quot;: [
+            &quot;routing:command&quot;,
+            &quot;routing:event&quot;,
+            &quot;routing:route&quot;
+          ],
+          &quot;targetKinds&quot;: [
+            &quot;routing:policy&quot;
+          ]
+        },
+        {
+          &quot;cardinalities&quot;: [
+            &quot;one-to-one&quot;,
+            &quot;one-to-many&quot;,
+            &quot;many-to-many&quot;
+          ],
+          &quot;cyclePolicy&quot;: &quot;allow&quot;,
+          &quot;description&quot;: &quot;Executing the source may emit the target event.&quot;,
+          &quot;id&quot;: &quot;routing:emits&quot;,
+          &quot;impactDirection&quot;: &quot;source-to-target&quot;,
+          &quot;sourceKinds&quot;: [
+            &quot;routing:command&quot;,
+            &quot;routing:handler&quot;,
+            &quot;routing:route&quot;
+          ],
+          &quot;targetKinds&quot;: [
+            &quot;routing:event&quot;
+          ]
+        },
+        {
+          &quot;cardinalities&quot;: [
+            &quot;one-to-one&quot;,
+            &quot;one-to-many&quot;,
+            &quot;many-to-many&quot;
+          ],
+          &quot;cyclePolicy&quot;: &quot;forbid&quot;,
+          &quot;description&quot;: &quot;The source semantic operation is exposed through the target transport endpoint.&quot;,
+          &quot;id&quot;: &quot;routing:exposed_as&quot;,
+          &quot;impactDirection&quot;: &quot;both&quot;,
+          &quot;sourceKinds&quot;: [
+            &quot;routing:command&quot;,
+            &quot;routing:event&quot;,
+            &quot;routing:route&quot;
+          ],
+          &quot;targetKinds&quot;: [
+            &quot;routing:endpoint&quot;
+          ]
+        },
+        {
+          &quot;cardinalities&quot;: [
+            &quot;one-to-one&quot;,
+            &quot;one-to-many&quot;,
+            &quot;many-to-many&quot;
+          ],
+          &quot;cyclePolicy&quot;: &quot;allow&quot;,
+          &quot;description&quot;: &quot;The source workflow state permits a transition to the target state.&quot;,
+          &quot;id&quot;: &quot;routing:transitions_to&quot;,
+          &quot;impactDirection&quot;: &quot;both&quot;,
+          &quot;sourceKinds&quot;: [
+            &quot;routing:state&quot;
+          ],
+          &quot;targetKinds&quot;: [
+            &quot;routing:state&quot;
+          ]
+        }
+      ],
+      &quot;schemaVersion&quot;: &quot;0.1.0&quot;,
+      &quot;version&quot;: &quot;1.0.0&quot;
+    },
+    {
+      &quot;description&quot;: &quot;Minimal structural relations shared by language and domain adapters.&quot;,
+      &quot;documentType&quot;: &quot;relation-pack&quot;,
+      &quot;id&quot;: &quot;urn:metamap:relation-pack:core&quot;,
+      &quot;relations&quot;: [
+        {
+          &quot;cardinalities&quot;: [
+            &quot;one-to-one&quot;,
+            &quot;one-to-many&quot;,
+            &quot;many-to-many&quot;
+          ],
+          &quot;cyclePolicy&quot;: &quot;forbid&quot;,
+          &quot;description&quot;: &quot;The source structurally contains the target.&quot;,
+          &quot;id&quot;: &quot;core:contains&quot;,
+          &quot;impactDirection&quot;: &quot;both&quot;,
+          &quot;transitive&quot;: true
+        },
+        {
+          &quot;cardinalities&quot;: [
+            &quot;one-to-one&quot;,
+            &quot;one-to-many&quot;,
+            &quot;many-to-many&quot;
+          ],
+          &quot;cyclePolicy&quot;: &quot;forbid&quot;,
+          &quot;description&quot;: &quot;The target is a physical realization of the source concept or contract.&quot;,
+          &quot;id&quot;: &quot;core:implements&quot;,
+          &quot;impactDirection&quot;: &quot;source-to-target&quot;
+        },
+        {
+          &quot;cardinalities&quot;: [
+            &quot;one-to-one&quot;,
+            &quot;many-to-one&quot;,
+            &quot;many-to-many&quot;
+          ],
+          &quot;cyclePolicy&quot;: &quot;forbid&quot;,
+          &quot;description&quot;: &quot;The source is constrained by the target schema or specification.&quot;,
+          &quot;id&quot;: &quot;core:conforms_to&quot;,
+          &quot;impactDirection&quot;: &quot;target-to-source&quot;
+        },
+        {
+          &quot;cardinalities&quot;: [
+            &quot;one-to-one&quot;,
+            &quot;one-to-many&quot;,
+            &quot;many-to-one&quot;,
+            &quot;many-to-many&quot;
+          ],
+          &quot;cyclePolicy&quot;: &quot;forbid&quot;,
+          &quot;description&quot;: &quot;The source is derived from the target.&quot;,
+          &quot;id&quot;: &quot;core:derives_from&quot;,
+          &quot;impactDirection&quot;: &quot;target-to-source&quot;,
+          &quot;transitive&quot;: true
+        },
+        {
+          &quot;cardinalities&quot;: [
+            &quot;one-to-one&quot;,
+            &quot;one-to-many&quot;,
+            &quot;many-to-many&quot;
+          ],
+          &quot;cyclePolicy&quot;: &quot;forbid&quot;,
+          &quot;description&quot;: &quot;The source deterministically or procedurally produces the target.&quot;,
+          &quot;id&quot;: &quot;core:generates&quot;,
+          &quot;impactDirection&quot;: &quot;source-to-target&quot;
+        },
+        {
+          &quot;cardinalities&quot;: [
+            &quot;one-to-one&quot;,
+            &quot;one-to-many&quot;,
+            &quot;many-to-many&quot;
+          ],
+          &quot;cyclePolicy&quot;: &quot;forbid&quot;,
+          &quot;description&quot;: &quot;The source requires the target.&quot;,
+          &quot;id&quot;: &quot;core:depends_on&quot;,
+          &quot;impactDirection&quot;: &quot;target-to-source&quot;,
+          &quot;transitive&quot;: true
+        },
+        {
+          &quot;cardinalities&quot;: [
+            &quot;one-to-one&quot;,
+            &quot;many-to-many&quot;
+          ],
+          &quot;cyclePolicy&quot;: &quot;allow&quot;,
+          &quot;description&quot;: &quot;The source and target intentionally duplicate the same scoped facts.&quot;,
+          &quot;id&quot;: &quot;core:mirrors&quot;,
+          &quot;impactDirection&quot;: &quot;both&quot;,
+          &quot;symmetric&quot;: true
+        },
+        {
+          &quot;cardinalities&quot;: [
+            &quot;one-to-one&quot;,
+            &quot;one-to-many&quot;,
+            &quot;many-to-many&quot;
+          ],
+          &quot;cyclePolicy&quot;: &quot;allow&quot;,
+          &quot;description&quot;: &quot;The source documentation describes the target.&quot;,
+          &quot;id&quot;: &quot;core:documents&quot;,
+          &quot;impactDirection&quot;: &quot;target-to-source&quot;
+        },
+        {
+          &quot;cardinalities&quot;: [
+            &quot;one-to-one&quot;,
+            &quot;one-to-many&quot;,
+            &quot;many-to-many&quot;
+          ],
+          &quot;cyclePolicy&quot;: &quot;allow&quot;,
+          &quot;description&quot;: &quot;The source provides evidence about the target.&quot;,
+          &quot;id&quot;: &quot;core:tests&quot;,
+          &quot;impactDirection&quot;: &quot;target-to-source&quot;
+        },
+        {
+          &quot;cardinalities&quot;: [
+            &quot;one-to-one&quot;,
+            &quot;one-to-many&quot;,
+            &quot;many-to-many&quot;
+          ],
+          &quot;cyclePolicy&quot;: &quot;forbid&quot;,
+          &quot;description&quot;: &quot;The source makes the target externally addressable.&quot;,
+          &quot;id&quot;: &quot;core:exposes&quot;,
+          &quot;impactDirection&quot;: &quot;both&quot;
+        },
+        {
+          &quot;cardinalities&quot;: [
+            &quot;one-to-one&quot;,
+            &quot;one-to-many&quot;,
+            &quot;many-to-one&quot;,
+            &quot;many-to-many&quot;
+          ],
+          &quot;cyclePolicy&quot;: &quot;allow&quot;,
+          &quot;description&quot;: &quot;The source identifies or points to the target without implying ownership.&quot;,
+          &quot;id&quot;: &quot;core:references&quot;,
+          &quot;impactDirection&quot;: &quot;target-to-source&quot;
+        },
+        {
+          &quot;cardinalities&quot;: [
+            &quot;one-to-one&quot;,
+            &quot;many-to-one&quot;,
+            &quot;many-to-many&quot;
+          ],
+          &quot;cyclePolicy&quot;: &quot;forbid&quot;,
+          &quot;description&quot;: &quot;The target defines the intended behavior or constraints of the source.&quot;,
+          &quot;id&quot;: &quot;core:specified_by&quot;,
+          &quot;impactDirection&quot;: &quot;target-to-source&quot;
+        }
+      ],
+      &quot;schemaVersion&quot;: &quot;0.1.0&quot;,
+      &quot;version&quot;: &quot;1.0.0&quot;
+    }
+  ],
+  &quot;policy&quot;: {
+    &quot;constraints&quot;: [
+      {
+        &quot;id&quot;: &quot;urn:example:constraint:create-user-handler-required&quot;,
+        &quot;kind&quot;: &quot;core:requires-mapping&quot;,
+        &quot;parameters&quot;: {
+          &quot;direction&quot;: &quot;source&quot;,
+          &quot;relation&quot;: &quot;routing:handled_by&quot;
+        },
+        &quot;subjects&quot;: [
+          &quot;urn:example:command:create-user&quot;
+        ]
+      },
+      {
+        &quot;id&quot;: &quot;urn:example:constraint:create-user-handler-unique&quot;,
+        &quot;kind&quot;: &quot;core:unique-target&quot;,
+        &quot;parameters&quot;: {
+          &quot;direction&quot;: &quot;source&quot;,
+          &quot;relation&quot;: &quot;routing:handled_by&quot;
+        },
+        &quot;subjects&quot;: [
+          &quot;urn:example:command:create-user&quot;
+        ]
+      },
+      {
+        &quot;id&quot;: &quot;urn:example:constraint:create-user-routing-authority&quot;,
+        &quot;kind&quot;: &quot;core:requires-authority&quot;,
+        &quot;parameters&quot;: {
+          &quot;fact&quot;: &quot;routing-identity&quot;
+        },
+        &quot;subjects&quot;: [
+          &quot;urn:example:command:create-user&quot;
+        ]
+      }
+    ],
+    &quot;documentType&quot;: &quot;policy&quot;,
+    &quot;evidence&quot;: [],
+    &quot;graph&quot;: {
+      &quot;id&quot;: &quot;urn:example:routing:graph&quot;,
+      &quot;revision&quot;: &quot;1&quot;
+    },
+    &quot;id&quot;: &quot;urn:example:routing:viability&quot;,
+    &quot;mappings&quot;: [
+      {
+        &quot;coverage&quot;: &quot;total&quot;,
+        &quot;determinism&quot;: &quot;deterministic&quot;,
+        &quot;mapping&quot;: &quot;urn:example:mapping:create-user-handler&quot;,
+        &quot;reversibility&quot;: &quot;irreversible&quot;
+      },
+      {
+        &quot;coverage&quot;: &quot;total&quot;,
+        &quot;determinism&quot;: &quot;deterministic&quot;,
+        &quot;mapping&quot;: &quot;urn:example:mapping:create-user-input&quot;,
+        &quot;reversibility&quot;: &quot;irreversible&quot;
+      },
+      {
+        &quot;coverage&quot;: &quot;total&quot;,
+        &quot;determinism&quot;: &quot;deterministic&quot;,
+        &quot;mapping&quot;: &quot;urn:example:mapping:create-user-policy&quot;,
+        &quot;reversibility&quot;: &quot;irreversible&quot;
+      },
+      {
+        &quot;coverage&quot;: &quot;total&quot;,
+        &quot;determinism&quot;: &quot;deterministic&quot;,
+        &quot;mapping&quot;: &quot;urn:example:mapping:create-user-endpoint&quot;,
+        &quot;reversibility&quot;: &quot;irreversible&quot;
+      },
+      {
+        &quot;coverage&quot;: &quot;partial&quot;,
+        &quot;determinism&quot;: &quot;deterministic&quot;,
+        &quot;mapping&quot;: &quot;urn:example:mapping:create-user-event&quot;,
+        &quot;reversibility&quot;: &quot;irreversible&quot;
+      }
+    ],
+    &quot;schemaVersion&quot;: &quot;0.1.0&quot;
+  }
+}</pre></details></section><section id="sources" aria-labelledby="sources-title"><h2 id="sources-title">Sources</h2><details><summary>Captured receipts and missing bytes</summary><pre tabindex="0">{
+  &quot;membership&quot;: &quot;not-captured; no attribution inferred from labels or locators&quot;,
+  &quot;missingBytes&quot;: [],
+  &quot;receipts&quot;: []
+}</pre></details></section><section id="changes" aria-labelledby="changes-title"><h2 id="changes-title">Observed changes and declared dependency paths</h2><details><summary>Comparison</summary><pre tabindex="0">{
+  &quot;reason&quot;: &quot;No before capture supplied&quot;,
+  &quot;status&quot;: &quot;unavailable&quot;
+}</pre></details><details><summary>Impact; no assertion of unique causality</summary><pre tabindex="0">null</pre></details></section><section id="raw" aria-labelledby="raw-title"><h2 id="raw-title">Shared JSON report</h2><details><summary>The same report used by CLI inspection</summary><pre tabindex="0">{
+  &quot;digest&quot;: &quot;sha256:07f39f063f61ad294824a941d7017b62b06bfc73bdf70179d64682c2c361539b&quot;,
+  &quot;id&quot;: &quot;urn:bindloom:explanation:07f39f063f61ad294824a941d7017b62b06bfc73bdf70179d64682c2c361539b&quot;,
+  &quot;record&quot;: {
+    &quot;admission&quot;: &quot;rejected&quot;,
+    &quot;approval&quot;: {
+      &quot;active&quot;: &quot;not-evaluated&quot;,
+      &quot;currentAuthority&quot;: &quot;not-evaluated&quot;,
+      &quot;reason&quot;: &quot;Captured ownership and viability do not establish current external approval or active host state&quot;,
+      &quot;status&quot;: &quot;not-evaluated&quot;
+    },
+    &quot;capture&quot;: {
+      &quot;digest&quot;: &quot;sha256:35859896de04a38613ed33236db22df87c4f9a9413fd1ce440a47ba1223f7ee9&quot;,
+      &quot;id&quot;: &quot;urn:bindloom:capture:35859896de04a38613ed33236db22df87c4f9a9413fd1ce440a47ba1223f7ee9&quot;
+    },
+    &quot;causality&quot;: {
+      &quot;interpretation&quot;: &quot;Observed input differences and declared dependency paths; unique causal responsibility is not established&quot;
+    },
+    &quot;comparison&quot;: {
+      &quot;reason&quot;: &quot;No before capture supplied&quot;,
+      &quot;status&quot;: &quot;unavailable&quot;
+    },
+    &quot;consumer&quot;: &quot;urn:consumer:inspection&quot;,
+    &quot;context&quot;: {},
+    &quot;documentType&quot;: &quot;explanation&quot;,
+    &quot;evaluatedAt&quot;: &quot;2026-10-10T00:00:00Z&quot;,
+    &quot;generation&quot;: null,
+    &quot;impact&quot;: null,
+    &quot;issues&quot;: [
+      {
+        &quot;issue&quot;: {
+          &quot;code&quot;: &quot;UNRESOLVED_ENDPOINT&quot;,
+          &quot;message&quot;: &quot;Missing endpoint urn:handler:missing&quot;,
+          &quot;severity&quot;: &quot;error&quot;,
+          &quot;subjectId&quot;: &quot;urn:example:mapping:create-user-handler&quot;
+        },
+        &quot;relevance&quot;: &quot;dependency&quot;
+      }
+    ],
+    &quot;mappings&quot;: [
+      {
+        &quot;activity&quot;: &quot;unavailable&quot;,
+        &quot;id&quot;: &quot;urn:example:mapping:create-user-endpoint&quot;,
+        &quot;records&quot;: [
+          {
+            &quot;cardinality&quot;: &quot;one-to-one&quot;,
+            &quot;id&quot;: &quot;urn:example:mapping:create-user-endpoint&quot;,
+            &quot;lossiness&quot;: &quot;lossless&quot;,
+            &quot;provenance&quot;: {
+              &quot;assertedBy&quot;: &quot;team:api&quot;,
+              &quot;status&quot;: &quot;declared&quot;
+            },
+            &quot;relation&quot;: &quot;routing:exposed_as&quot;,
+            &quot;sources&quot;: [
+              &quot;urn:example:command:create-user&quot;
+            ],
+            &quot;targets&quot;: [
+              &quot;urn:example:endpoint:create-user&quot;
+            ]
+          }
+        ],
+        &quot;relevance&quot;: &quot;selection-or-dependency&quot;,
+        &quot;state&quot;: &quot;known&quot;
+      },
+      {
+        &quot;activity&quot;: &quot;unavailable&quot;,
+        &quot;id&quot;: &quot;urn:example:mapping:create-user-event&quot;,
+        &quot;records&quot;: [
+          {
+            &quot;cardinality&quot;: &quot;one-to-one&quot;,
+            &quot;id&quot;: &quot;urn:example:mapping:create-user-event&quot;,
+            &quot;lossiness&quot;: &quot;lossless&quot;,
+            &quot;provenance&quot;: {
+              &quot;assertedBy&quot;: &quot;team:identity&quot;,
+              &quot;status&quot;: &quot;declared&quot;
+            },
+            &quot;relation&quot;: &quot;routing:emits&quot;,
+            &quot;sources&quot;: [
+              &quot;urn:example:command:create-user&quot;
+            ],
+            &quot;targets&quot;: [
+              &quot;urn:example:event:user-created&quot;
+            ]
+          }
+        ],
+        &quot;relevance&quot;: &quot;selection-or-dependency&quot;,
+        &quot;state&quot;: &quot;known&quot;
+      },
+      {
+        &quot;activity&quot;: &quot;unavailable&quot;,
+        &quot;id&quot;: &quot;urn:example:mapping:create-user-handler&quot;,
+        &quot;records&quot;: [
+          {
+            &quot;cardinality&quot;: &quot;one-to-one&quot;,
+            &quot;id&quot;: &quot;urn:example:mapping:create-user-handler&quot;,
+            &quot;lossiness&quot;: &quot;lossless&quot;,
+            &quot;provenance&quot;: {
+              &quot;assertedBy&quot;: &quot;team:identity&quot;,
+              &quot;status&quot;: &quot;declared&quot;
+            },
+            &quot;relation&quot;: &quot;routing:handled_by&quot;,
+            &quot;sources&quot;: [
+              &quot;urn:example:command:create-user&quot;
+            ],
+            &quot;targets&quot;: [
+              &quot;urn:handler:missing&quot;
+            ]
+          }
+        ],
+        &quot;relevance&quot;: &quot;selection-or-dependency&quot;,
+        &quot;state&quot;: &quot;known&quot;
+      },
+      {
+        &quot;activity&quot;: &quot;unavailable&quot;,
+        &quot;id&quot;: &quot;urn:example:mapping:create-user-input&quot;,
+        &quot;records&quot;: [
+          {
+            &quot;cardinality&quot;: &quot;one-to-one&quot;,
+            &quot;id&quot;: &quot;urn:example:mapping:create-user-input&quot;,
+            &quot;lossiness&quot;: &quot;lossless&quot;,
+            &quot;provenance&quot;: {
+              &quot;assertedBy&quot;: &quot;team:identity&quot;,
+              &quot;status&quot;: &quot;declared&quot;
+            },
+            &quot;relation&quot;: &quot;routing:accepts&quot;,
+            &quot;sources&quot;: [
+              &quot;urn:example:command:create-user&quot;
+            ],
+            &quot;targets&quot;: [
+              &quot;urn:example:schema:create-user&quot;
+            ]
+          }
+        ],
+        &quot;relevance&quot;: &quot;selection-or-dependency&quot;,
+        &quot;state&quot;: &quot;known&quot;
+      },
+      {
+        &quot;activity&quot;: &quot;unavailable&quot;,
+        &quot;id&quot;: &quot;urn:example:mapping:create-user-policy&quot;,
+        &quot;records&quot;: [
+          {
+            &quot;cardinality&quot;: &quot;one-to-one&quot;,
+            &quot;id&quot;: &quot;urn:example:mapping:create-user-policy&quot;,
+            &quot;lossiness&quot;: &quot;lossless&quot;,
+            &quot;provenance&quot;: {
+              &quot;assertedBy&quot;: &quot;team:security&quot;,
+              &quot;status&quot;: &quot;declared&quot;
+            },
+            &quot;relation&quot;: &quot;routing:authorized_by&quot;,
+            &quot;sources&quot;: [
+              &quot;urn:example:command:create-user&quot;
+            ],
+            &quot;targets&quot;: [
+              &quot;urn:example:policy:identity-admin&quot;
+            ]
+          }
+        ],
+        &quot;relevance&quot;: &quot;selection-or-dependency&quot;,
+        &quot;state&quot;: &quot;known&quot;
+      }
+    ],
+    &quot;navigation&quot;: {
+      &quot;mappingIds&quot;: [
+        &quot;urn:example:mapping:create-user-endpoint&quot;,
+        &quot;urn:example:mapping:create-user-event&quot;,
+        &quot;urn:example:mapping:create-user-handler&quot;,
+        &quot;urn:example:mapping:create-user-input&quot;,
+        &quot;urn:example:mapping:create-user-policy&quot;
+      ],
+      &quot;omittedMappings&quot;: 0,
+      &quot;omittedSubjects&quot;: 0,
+      &quot;status&quot;: &quot;complete&quot;,
+      &quot;subjectIds&quot;: [
+        &quot;urn:example:command:create-user&quot;,
+        &quot;urn:example:endpoint:create-user&quot;,
+        &quot;urn:example:event:user-created&quot;,
+        &quot;urn:example:handler:create-user&quot;,
+        &quot;urn:example:policy:identity-admin&quot;,
+        &quot;urn:example:schema:create-user&quot;
+      ]
+    },
+    &quot;ownership&quot;: {
+      &quot;authentication&quot;: &quot;not-evaluated&quot;,
+      &quot;declarations&quot;: [
+        {
+          &quot;concept&quot;: &quot;urn:example:command:create-user&quot;,
+          &quot;facts&quot;: [
+            &quot;routing-identity&quot;
+          ],
+          &quot;id&quot;: &quot;urn:example:authority:create-user-routing&quot;,
+          &quot;mode&quot;: &quot;canonical&quot;,
+          &quot;provenance&quot;: {
+            &quot;assertedBy&quot;: &quot;team:identity&quot;,
+            &quot;status&quot;: &quot;declared&quot;
+          },
+          &quot;source&quot;: &quot;urn:example:command:create-user&quot;
+        }
+      ],
+      &quot;interpretation&quot;: &quot;declared-fact-ownership&quot;
+    },
+    &quot;pathTree&quot;: null,
+    &quot;policy&quot;: {
+      &quot;constraints&quot;: [
+        {
+          &quot;id&quot;: &quot;urn:example:constraint:create-user-handler-required&quot;,
+          &quot;kind&quot;: &quot;core:requires-mapping&quot;,
+          &quot;parameters&quot;: {
+            &quot;direction&quot;: &quot;source&quot;,
+            &quot;relation&quot;: &quot;routing:handled_by&quot;
+          },
+          &quot;subjects&quot;: [
+            &quot;urn:example:command:create-user&quot;
+          ]
+        },
+        {
+          &quot;id&quot;: &quot;urn:example:constraint:create-user-handler-unique&quot;,
+          &quot;kind&quot;: &quot;core:unique-target&quot;,
+          &quot;parameters&quot;: {
+            &quot;direction&quot;: &quot;source&quot;,
+            &quot;relation&quot;: &quot;routing:handled_by&quot;
+          },
+          &quot;subjects&quot;: [
+            &quot;urn:example:command:create-user&quot;
+          ]
+        },
+        {
+          &quot;id&quot;: &quot;urn:example:constraint:create-user-routing-authority&quot;,
+          &quot;kind&quot;: &quot;core:requires-authority&quot;,
+          &quot;parameters&quot;: {
+            &quot;fact&quot;: &quot;routing-identity&quot;
+          },
+          &quot;subjects&quot;: [
+            &quot;urn:example:command:create-user&quot;
+          ]
+        }
+      ],
+      &quot;documentType&quot;: &quot;policy&quot;,
+      &quot;evidence&quot;: [],
+      &quot;graph&quot;: {
+        &quot;id&quot;: &quot;urn:example:routing:graph&quot;,
+        &quot;revision&quot;: &quot;1&quot;
+      },
+      &quot;id&quot;: &quot;urn:example:routing:viability&quot;,
+      &quot;mappings&quot;: [
+        {
+          &quot;coverage&quot;: &quot;total&quot;,
+          &quot;determinism&quot;: &quot;deterministic&quot;,
+          &quot;mapping&quot;: &quot;urn:example:mapping:create-user-handler&quot;,
+          &quot;reversibility&quot;: &quot;irreversible&quot;
+        },
+        {
+          &quot;coverage&quot;: &quot;total&quot;,
+          &quot;determinism&quot;: &quot;deterministic&quot;,
+          &quot;mapping&quot;: &quot;urn:example:mapping:create-user-input&quot;,
+          &quot;reversibility&quot;: &quot;irreversible&quot;
+        },
+        {
+          &quot;coverage&quot;: &quot;total&quot;,
+          &quot;determinism&quot;: &quot;deterministic&quot;,
+          &quot;mapping&quot;: &quot;urn:example:mapping:create-user-policy&quot;,
+          &quot;reversibility&quot;: &quot;irreversible&quot;
+        },
+        {
+          &quot;coverage&quot;: &quot;total&quot;,
+          &quot;determinism&quot;: &quot;deterministic&quot;,
+          &quot;mapping&quot;: &quot;urn:example:mapping:create-user-endpoint&quot;,
+          &quot;reversibility&quot;: &quot;irreversible&quot;
+        },
+        {
+          &quot;coverage&quot;: &quot;partial&quot;,
+          &quot;determinism&quot;: &quot;deterministic&quot;,
+          &quot;mapping&quot;: &quot;urn:example:mapping:create-user-event&quot;,
+          &quot;reversibility&quot;: &quot;irreversible&quot;
+        }
+      ],
+      &quot;schemaVersion&quot;: &quot;0.1.0&quot;
+    },
+    &quot;projection&quot;: null,
+    &quot;relationPacks&quot;: [
+      {
+        &quot;description&quot;: &quot;Semantic relations for commands, events, routes, handlers, schemas, policies, and endpoints.&quot;,
+        &quot;documentType&quot;: &quot;relation-pack&quot;,
+        &quot;id&quot;: &quot;urn:metamap:relation-pack:routing&quot;,
+        &quot;relations&quot;: [
+          {
+            &quot;cardinalities&quot;: [
+              &quot;one-to-one&quot;,
+              &quot;many-to-one&quot;
+            ],
+            &quot;cyclePolicy&quot;: &quot;forbid&quot;,
+            &quot;description&quot;: &quot;The target handler executes the source command, event, or route.&quot;,
+            &quot;id&quot;: &quot;routing:handled_by&quot;,
+            &quot;impactDirection&quot;: &quot;source-to-target&quot;,
+            &quot;sourceKinds&quot;: [
+              &quot;routing:command&quot;,
+              &quot;routing:event&quot;,
+              &quot;routing:route&quot;
+            ],
+            &quot;targetKinds&quot;: [
+              &quot;routing:handler&quot;
+            ]
+          },
+          {
+            &quot;cardinalities&quot;: [
+              &quot;one-to-one&quot;,
+              &quot;many-to-one&quot;
+            ],
+            &quot;cyclePolicy&quot;: &quot;forbid&quot;,
+            &quot;description&quot;: &quot;The source accepts input conforming to the target schema.&quot;,
+            &quot;id&quot;: &quot;routing:accepts&quot;,
+            &quot;impactDirection&quot;: &quot;target-to-source&quot;,
+            &quot;sourceKinds&quot;: [
+              &quot;routing:command&quot;,
+              &quot;routing:event&quot;,
+              &quot;routing:route&quot;
+            ],
+            &quot;targetKinds&quot;: [
+              &quot;routing:schema&quot;
+            ]
+          },
+          {
+            &quot;cardinalities&quot;: [
+              &quot;one-to-one&quot;,
+              &quot;many-to-one&quot;,
+              &quot;many-to-many&quot;
+            ],
+            &quot;cyclePolicy&quot;: &quot;forbid&quot;,
+            &quot;description&quot;: &quot;The source is gated by the target authorization policy.&quot;,
+            &quot;id&quot;: &quot;routing:authorized_by&quot;,
+            &quot;impactDirection&quot;: &quot;target-to-source&quot;,
+            &quot;sourceKinds&quot;: [
+              &quot;routing:command&quot;,
+              &quot;routing:event&quot;,
+              &quot;routing:route&quot;
+            ],
+            &quot;targetKinds&quot;: [
+              &quot;routing:policy&quot;
+            ]
+          },
+          {
+            &quot;cardinalities&quot;: [
+              &quot;one-to-one&quot;,
+              &quot;one-to-many&quot;,
+              &quot;many-to-many&quot;
+            ],
+            &quot;cyclePolicy&quot;: &quot;allow&quot;,
+            &quot;description&quot;: &quot;Executing the source may emit the target event.&quot;,
+            &quot;id&quot;: &quot;routing:emits&quot;,
+            &quot;impactDirection&quot;: &quot;source-to-target&quot;,
+            &quot;sourceKinds&quot;: [
+              &quot;routing:command&quot;,
+              &quot;routing:handler&quot;,
+              &quot;routing:route&quot;
+            ],
+            &quot;targetKinds&quot;: [
+              &quot;routing:event&quot;
+            ]
+          },
+          {
+            &quot;cardinalities&quot;: [
+              &quot;one-to-one&quot;,
+              &quot;one-to-many&quot;,
+              &quot;many-to-many&quot;
+            ],
+            &quot;cyclePolicy&quot;: &quot;forbid&quot;,
+            &quot;description&quot;: &quot;The source semantic operation is exposed through the target transport endpoint.&quot;,
+            &quot;id&quot;: &quot;routing:exposed_as&quot;,
+            &quot;impactDirection&quot;: &quot;both&quot;,
+            &quot;sourceKinds&quot;: [
+              &quot;routing:command&quot;,
+              &quot;routing:event&quot;,
+              &quot;routing:route&quot;
+            ],
+            &quot;targetKinds&quot;: [
+              &quot;routing:endpoint&quot;
+            ]
+          },
+          {
+            &quot;cardinalities&quot;: [
+              &quot;one-to-one&quot;,
+              &quot;one-to-many&quot;,
+              &quot;many-to-many&quot;
+            ],
+            &quot;cyclePolicy&quot;: &quot;allow&quot;,
+            &quot;description&quot;: &quot;The source workflow state permits a transition to the target state.&quot;,
+            &quot;id&quot;: &quot;routing:transitions_to&quot;,
+            &quot;impactDirection&quot;: &quot;both&quot;,
+            &quot;sourceKinds&quot;: [
+              &quot;routing:state&quot;
+            ],
+            &quot;targetKinds&quot;: [
+              &quot;routing:state&quot;
+            ]
+          }
+        ],
+        &quot;schemaVersion&quot;: &quot;0.1.0&quot;,
+        &quot;version&quot;: &quot;1.0.0&quot;
+      },
+      {
+        &quot;description&quot;: &quot;Minimal structural relations shared by language and domain adapters.&quot;,
+        &quot;documentType&quot;: &quot;relation-pack&quot;,
+        &quot;id&quot;: &quot;urn:metamap:relation-pack:core&quot;,
+        &quot;relations&quot;: [
+          {
+            &quot;cardinalities&quot;: [
+              &quot;one-to-one&quot;,
+              &quot;one-to-many&quot;,
+              &quot;many-to-many&quot;
+            ],
+            &quot;cyclePolicy&quot;: &quot;forbid&quot;,
+            &quot;description&quot;: &quot;The source structurally contains the target.&quot;,
+            &quot;id&quot;: &quot;core:contains&quot;,
+            &quot;impactDirection&quot;: &quot;both&quot;,
+            &quot;transitive&quot;: true
+          },
+          {
+            &quot;cardinalities&quot;: [
+              &quot;one-to-one&quot;,
+              &quot;one-to-many&quot;,
+              &quot;many-to-many&quot;
+            ],
+            &quot;cyclePolicy&quot;: &quot;forbid&quot;,
+            &quot;description&quot;: &quot;The target is a physical realization of the source concept or contract.&quot;,
+            &quot;id&quot;: &quot;core:implements&quot;,
+            &quot;impactDirection&quot;: &quot;source-to-target&quot;
+          },
+          {
+            &quot;cardinalities&quot;: [
+              &quot;one-to-one&quot;,
+              &quot;many-to-one&quot;,
+              &quot;many-to-many&quot;
+            ],
+            &quot;cyclePolicy&quot;: &quot;forbid&quot;,
+            &quot;description&quot;: &quot;The source is constrained by the target schema or specification.&quot;,
+            &quot;id&quot;: &quot;core:conforms_to&quot;,
+            &quot;impactDirection&quot;: &quot;target-to-source&quot;
+          },
+          {
+            &quot;cardinalities&quot;: [
+              &quot;one-to-one&quot;,
+              &quot;one-to-many&quot;,
+              &quot;many-to-one&quot;,
+              &quot;many-to-many&quot;
+            ],
+            &quot;cyclePolicy&quot;: &quot;forbid&quot;,
+            &quot;description&quot;: &quot;The source is derived from the target.&quot;,
+            &quot;id&quot;: &quot;core:derives_from&quot;,
+            &quot;impactDirection&quot;: &quot;target-to-source&quot;,
+            &quot;transitive&quot;: true
+          },
+          {
+            &quot;cardinalities&quot;: [
+              &quot;one-to-one&quot;,
+              &quot;one-to-many&quot;,
+              &quot;many-to-many&quot;
+            ],
+            &quot;cyclePolicy&quot;: &quot;forbid&quot;,
+            &quot;description&quot;: &quot;The source deterministically or procedurally produces the target.&quot;,
+            &quot;id&quot;: &quot;core:generates&quot;,
+            &quot;impactDirection&quot;: &quot;source-to-target&quot;
+          },
+          {
+            &quot;cardinalities&quot;: [
+              &quot;one-to-one&quot;,
+              &quot;one-to-many&quot;,
+              &quot;many-to-many&quot;
+            ],
+            &quot;cyclePolicy&quot;: &quot;forbid&quot;,
+            &quot;description&quot;: &quot;The source requires the target.&quot;,
+            &quot;id&quot;: &quot;core:depends_on&quot;,
+            &quot;impactDirection&quot;: &quot;target-to-source&quot;,
+            &quot;transitive&quot;: true
+          },
+          {
+            &quot;cardinalities&quot;: [
+              &quot;one-to-one&quot;,
+              &quot;many-to-many&quot;
+            ],
+            &quot;cyclePolicy&quot;: &quot;allow&quot;,
+            &quot;description&quot;: &quot;The source and target intentionally duplicate the same scoped facts.&quot;,
+            &quot;id&quot;: &quot;core:mirrors&quot;,
+            &quot;impactDirection&quot;: &quot;both&quot;,
+            &quot;symmetric&quot;: true
+          },
+          {
+            &quot;cardinalities&quot;: [
+              &quot;one-to-one&quot;,
+              &quot;one-to-many&quot;,
+              &quot;many-to-many&quot;
+            ],
+            &quot;cyclePolicy&quot;: &quot;allow&quot;,
+            &quot;description&quot;: &quot;The source documentation describes the target.&quot;,
+            &quot;id&quot;: &quot;core:documents&quot;,
+            &quot;impactDirection&quot;: &quot;target-to-source&quot;
+          },
+          {
+            &quot;cardinalities&quot;: [
+              &quot;one-to-one&quot;,
+              &quot;one-to-many&quot;,
+              &quot;many-to-many&quot;
+            ],
+            &quot;cyclePolicy&quot;: &quot;allow&quot;,
+            &quot;description&quot;: &quot;The source provides evidence about the target.&quot;,
+            &quot;id&quot;: &quot;core:tests&quot;,
+            &quot;impactDirection&quot;: &quot;target-to-source&quot;
+          },
+          {
+            &quot;cardinalities&quot;: [
+              &quot;one-to-one&quot;,
+              &quot;one-to-many&quot;,
+              &quot;many-to-many&quot;
+            ],
+            &quot;cyclePolicy&quot;: &quot;forbid&quot;,
+            &quot;description&quot;: &quot;The source makes the target externally addressable.&quot;,
+            &quot;id&quot;: &quot;core:exposes&quot;,
+            &quot;impactDirection&quot;: &quot;both&quot;
+          },
+          {
+            &quot;cardinalities&quot;: [
+              &quot;one-to-one&quot;,
+              &quot;one-to-many&quot;,
+              &quot;many-to-one&quot;,
+              &quot;many-to-many&quot;
+            ],
+            &quot;cyclePolicy&quot;: &quot;allow&quot;,
+            &quot;description&quot;: &quot;The source identifies or points to the target without implying ownership.&quot;,
+            &quot;id&quot;: &quot;core:references&quot;,
+            &quot;impactDirection&quot;: &quot;target-to-source&quot;
+          },
+          {
+            &quot;cardinalities&quot;: [
+              &quot;one-to-one&quot;,
+              &quot;many-to-one&quot;,
+              &quot;many-to-many&quot;
+            ],
+            &quot;cyclePolicy&quot;: &quot;forbid&quot;,
+            &quot;description&quot;: &quot;The target defines the intended behavior or constraints of the source.&quot;,
+            &quot;id&quot;: &quot;core:specified_by&quot;,
+            &quot;impactDirection&quot;: &quot;target-to-source&quot;
+          }
+        ],
+        &quot;schemaVersion&quot;: &quot;0.1.0&quot;,
+        &quot;version&quot;: &quot;1.0.0&quot;
+      }
+    ],
+    &quot;schemaVersion&quot;: &quot;0.1.0&quot;,
+    &quot;selection&quot;: {
+      &quot;id&quot;: &quot;urn:example:command:create-user&quot;,
+      &quot;kind&quot;: &quot;entity&quot;,
+      &quot;occurrences&quot;: 1,
+      &quot;state&quot;: &quot;known&quot;
+    },
+    &quot;sources&quot;: {
+      &quot;membership&quot;: &quot;not-captured; no attribution inferred from labels or locators&quot;,
+      &quot;missingBytes&quot;: [],
+      &quot;receipts&quot;: []
+    },
+    &quot;subjects&quot;: [
+      {
+        &quot;id&quot;: &quot;urn:example:command:create-user&quot;,
+        &quot;records&quot;: [
+          {
+            &quot;id&quot;: &quot;urn:example:command:create-user&quot;,
+            &quot;kind&quot;: &quot;routing:command&quot;,
+            &quot;label&quot;: &quot;&lt;img src=x onerror=alert(1)&gt;&quot;
+          }
+        ],
+        &quot;relevance&quot;: &quot;selection-or-dependency&quot;,
+        &quot;state&quot;: &quot;known&quot;
+      },
+      {
+        &quot;id&quot;: &quot;urn:example:endpoint:create-user&quot;,
+        &quot;records&quot;: [
+          {
+            &quot;attributes&quot;: {
+              &quot;method&quot;: &quot;POST&quot;,
+              &quot;path&quot;: &quot;/users&quot;
+            },
+            &quot;id&quot;: &quot;urn:example:endpoint:create-user&quot;,
+            &quot;kind&quot;: &quot;routing:endpoint&quot;,
+            &quot;label&quot;: &quot;POST /users&quot;
+          }
+        ],
+        &quot;relevance&quot;: &quot;selection-or-dependency&quot;,
+        &quot;state&quot;: &quot;known&quot;
+      },
+      {
+        &quot;id&quot;: &quot;urn:example:event:user-created&quot;,
+        &quot;records&quot;: [
+          {
+            &quot;id&quot;: &quot;urn:example:event:user-created&quot;,
+            &quot;kind&quot;: &quot;routing:event&quot;,
+            &quot;label&quot;: &quot;User created&quot;
+          }
+        ],
+        &quot;relevance&quot;: &quot;selection-or-dependency&quot;,
+        &quot;state&quot;: &quot;known&quot;
+      },
+      {
+        &quot;id&quot;: &quot;urn:example:handler:create-user&quot;,
+        &quot;records&quot;: [
+          {
+            &quot;id&quot;: &quot;urn:example:handler:create-user&quot;,
+            &quot;kind&quot;: &quot;routing:handler&quot;,
+            &quot;label&quot;: &quot;Create user handler&quot;,
+            &quot;locators&quot;: [
+              {
+                &quot;uri&quot;: &quot;typescript:src/identity/create-user.ts#handleCreateUser&quot;
+              }
+            ]
+          }
+        ],
+        &quot;relevance&quot;: &quot;other&quot;,
+        &quot;state&quot;: &quot;known&quot;
+      },
+      {
+        &quot;id&quot;: &quot;urn:example:policy:identity-admin&quot;,
+        &quot;records&quot;: [
+          {
+            &quot;id&quot;: &quot;urn:example:policy:identity-admin&quot;,
+            &quot;kind&quot;: &quot;routing:policy&quot;,
+            &quot;label&quot;: &quot;Identity administrator&quot;
+          }
+        ],
+        &quot;relevance&quot;: &quot;selection-or-dependency&quot;,
+        &quot;state&quot;: &quot;known&quot;
+      },
+      {
+        &quot;id&quot;: &quot;urn:example:schema:create-user&quot;,
+        &quot;records&quot;: [
+          {
+            &quot;id&quot;: &quot;urn:example:schema:create-user&quot;,
+            &quot;kind&quot;: &quot;routing:schema&quot;,
+            &quot;label&quot;: &quot;Create user input&quot;,
+            &quot;locators&quot;: [
+              {
+                &quot;uri&quot;: &quot;json-schema:schemas/create-user.json&quot;
+              }
+            ]
+          }
+        ],
+        &quot;relevance&quot;: &quot;selection-or-dependency&quot;,
+        &quot;state&quot;: &quot;known&quot;
+      }
+    ]
+  }
+}</pre></details></section></main><footer><p>Capture-bound inspection; no external resources or executable candidate content.</p></footer></body></html>

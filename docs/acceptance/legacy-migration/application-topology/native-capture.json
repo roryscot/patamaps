@@ -1,0 +1,1032 @@
+{
+  "schemaVersion": "0.1.0",
+  "documentType": "capture",
+  "profile": "bindloom-routing-draft-1",
+  "executor": "sha256:07f74356f72db6236458375321a18f36240642e695f5e1fbc1a37b9c74fe775f",
+  "id": "urn:bindloom:capture:9e097d081acdfdeaab4ba81b70c2fbe81ab64cee6a23521b3d50d119ed3415ed",
+  "digest": "sha256:9e097d081acdfdeaab4ba81b70c2fbe81ab64cee6a23521b3d50d119ed3415ed",
+  "inputs": {
+    "graph": {
+      "schemaVersion": "0.1.0",
+      "documentType": "graph",
+      "id": "urn:example:application-topology:graph",
+      "namespace": "example",
+      "label": "Application topology example",
+      "revision": "1",
+      "relationPacks": [
+        {
+          "id": "urn:metamap:relation-pack:core",
+          "version": "1.0.0"
+        },
+        {
+          "id": "urn:metamap:relation-pack:routing",
+          "version": "1.0.0"
+        },
+        {
+          "id": "urn:metamap:relation-pack:application-topology",
+          "version": "1.0.0"
+        }
+      ],
+      "entities": [
+        {
+          "id": "urn:example:app",
+          "kind": "topology:application"
+        },
+        {
+          "id": "urn:example:segment:root",
+          "kind": "topology:segment"
+        },
+        {
+          "id": "urn:example:container:root",
+          "kind": "topology:container",
+          "locators": [
+            {
+              "uri": "repo://example/app/layout.tsx"
+            }
+          ]
+        },
+        {
+          "id": "urn:example:page:account",
+          "kind": "topology:page",
+          "locators": [
+            {
+              "uri": "repo://example/app/account/page.tsx"
+            }
+          ],
+          "attributes": {
+            "runtime": "client"
+          }
+        },
+        {
+          "id": "urn:example:route:account",
+          "kind": "routing:route",
+          "attributes": {
+            "topologySurface": "semantic-page"
+          }
+        },
+        {
+          "id": "urn:example:content:account",
+          "kind": "topology:content",
+          "locators": [
+            {
+              "uri": "cms://example/account"
+            }
+          ]
+        },
+        {
+          "id": "urn:example:context:session",
+          "kind": "topology:context"
+        },
+        {
+          "id": "urn:example:hydration:account",
+          "kind": "topology:hydration-boundary"
+        }
+      ],
+      "mappings": [
+        {
+          "id": "urn:example:mapping:app-segment",
+          "relation": "topology:contains",
+          "sources": [
+            "urn:example:app"
+          ],
+          "targets": [
+            "urn:example:segment:root"
+          ],
+          "cardinality": "one-to-one",
+          "lossiness": "lossless",
+          "provenance": {
+            "status": "declared",
+            "assertedBy": "example"
+          }
+        },
+        {
+          "id": "urn:example:mapping:segment-structure",
+          "relation": "topology:contains",
+          "sources": [
+            "urn:example:segment:root"
+          ],
+          "targets": [
+            "urn:example:container:root",
+            "urn:example:page:account",
+            "urn:example:hydration:account"
+          ],
+          "cardinality": "one-to-many",
+          "lossiness": "lossless",
+          "provenance": {
+            "status": "declared",
+            "assertedBy": "example"
+          }
+        },
+        {
+          "id": "urn:example:mapping:container-page",
+          "relation": "topology:wraps",
+          "sources": [
+            "urn:example:container:root"
+          ],
+          "targets": [
+            "urn:example:page:account"
+          ],
+          "cardinality": "one-to-one",
+          "lossiness": "lossless",
+          "provenance": {
+            "status": "declared",
+            "assertedBy": "example"
+          }
+        },
+        {
+          "id": "urn:example:mapping:page-container",
+          "relation": "topology:rendered_in",
+          "sources": [
+            "urn:example:page:account"
+          ],
+          "targets": [
+            "urn:example:container:root"
+          ],
+          "cardinality": "one-to-one",
+          "lossiness": "lossless",
+          "provenance": {
+            "status": "declared",
+            "assertedBy": "example"
+          }
+        },
+        {
+          "id": "urn:example:mapping:route-page",
+          "relation": "topology:implemented_by",
+          "sources": [
+            "urn:example:route:account"
+          ],
+          "targets": [
+            "urn:example:page:account"
+          ],
+          "cardinality": "one-to-one",
+          "lossiness": "lossless",
+          "provenance": {
+            "status": "declared",
+            "assertedBy": "example"
+          }
+        },
+        {
+          "id": "urn:example:mapping:route-container",
+          "relation": "topology:rendered_in",
+          "sources": [
+            "urn:example:route:account"
+          ],
+          "targets": [
+            "urn:example:container:root"
+          ],
+          "cardinality": "one-to-one",
+          "lossiness": "lossless",
+          "provenance": {
+            "status": "declared",
+            "assertedBy": "example"
+          }
+        },
+        {
+          "id": "urn:example:mapping:route-content",
+          "relation": "topology:resolves_content",
+          "sources": [
+            "urn:example:route:account"
+          ],
+          "targets": [
+            "urn:example:content:account"
+          ],
+          "cardinality": "one-to-one",
+          "lossiness": "lossless",
+          "provenance": {
+            "status": "declared",
+            "assertedBy": "example"
+          }
+        },
+        {
+          "id": "urn:example:mapping:route-context",
+          "relation": "topology:requires_context",
+          "sources": [
+            "urn:example:route:account"
+          ],
+          "targets": [
+            "urn:example:context:session"
+          ],
+          "cardinality": "one-to-one",
+          "lossiness": "lossless",
+          "provenance": {
+            "status": "declared",
+            "assertedBy": "example"
+          }
+        },
+        {
+          "id": "urn:example:mapping:container-context",
+          "relation": "topology:provides_context",
+          "sources": [
+            "urn:example:container:root"
+          ],
+          "targets": [
+            "urn:example:context:session"
+          ],
+          "cardinality": "one-to-one",
+          "lossiness": "lossless",
+          "provenance": {
+            "status": "declared",
+            "assertedBy": "example"
+          }
+        },
+        {
+          "id": "urn:example:mapping:hydrate-page",
+          "relation": "topology:hydrates",
+          "sources": [
+            "urn:example:hydration:account"
+          ],
+          "targets": [
+            "urn:example:page:account"
+          ],
+          "cardinality": "one-to-one",
+          "lossiness": "lossless",
+          "provenance": {
+            "status": "declared",
+            "assertedBy": "example"
+          }
+        },
+        {
+          "id": "urn:example:mapping:hydrate-route",
+          "relation": "topology:hydrates",
+          "sources": [
+            "urn:example:hydration:account"
+          ],
+          "targets": [
+            "urn:example:route:account"
+          ],
+          "cardinality": "one-to-one",
+          "lossiness": "lossless",
+          "provenance": {
+            "status": "declared",
+            "assertedBy": "example"
+          }
+        }
+      ],
+      "authorities": []
+    },
+    "packs": [
+      {
+        "schemaVersion": "0.1.0",
+        "documentType": "relation-pack",
+        "id": "urn:metamap:relation-pack:routing",
+        "version": "1.0.0",
+        "description": "Semantic relations for commands, events, routes, handlers, schemas, policies, and endpoints.",
+        "relations": [
+          {
+            "id": "routing:handled_by",
+            "cyclePolicy": "forbid",
+            "description": "The target handler executes the source command, event, or route.",
+            "sourceKinds": [
+              "routing:command",
+              "routing:event",
+              "routing:route"
+            ],
+            "targetKinds": [
+              "routing:handler"
+            ],
+            "cardinalities": [
+              "one-to-one",
+              "many-to-one"
+            ],
+            "impactDirection": "source-to-target"
+          },
+          {
+            "id": "routing:accepts",
+            "cyclePolicy": "forbid",
+            "description": "The source accepts input conforming to the target schema.",
+            "sourceKinds": [
+              "routing:command",
+              "routing:event",
+              "routing:route"
+            ],
+            "targetKinds": [
+              "routing:schema"
+            ],
+            "cardinalities": [
+              "one-to-one",
+              "many-to-one"
+            ],
+            "impactDirection": "target-to-source"
+          },
+          {
+            "id": "routing:authorized_by",
+            "cyclePolicy": "forbid",
+            "description": "The source is gated by the target authorization policy.",
+            "sourceKinds": [
+              "routing:command",
+              "routing:event",
+              "routing:route"
+            ],
+            "targetKinds": [
+              "routing:policy"
+            ],
+            "cardinalities": [
+              "one-to-one",
+              "many-to-one",
+              "many-to-many"
+            ],
+            "impactDirection": "target-to-source"
+          },
+          {
+            "id": "routing:emits",
+            "cyclePolicy": "allow",
+            "description": "Executing the source may emit the target event.",
+            "sourceKinds": [
+              "routing:command",
+              "routing:handler",
+              "routing:route"
+            ],
+            "targetKinds": [
+              "routing:event"
+            ],
+            "cardinalities": [
+              "one-to-one",
+              "one-to-many",
+              "many-to-many"
+            ],
+            "impactDirection": "source-to-target"
+          },
+          {
+            "id": "routing:exposed_as",
+            "cyclePolicy": "forbid",
+            "description": "The source semantic operation is exposed through the target transport endpoint.",
+            "sourceKinds": [
+              "routing:command",
+              "routing:event",
+              "routing:route"
+            ],
+            "targetKinds": [
+              "routing:endpoint"
+            ],
+            "cardinalities": [
+              "one-to-one",
+              "one-to-many",
+              "many-to-many"
+            ],
+            "impactDirection": "both"
+          },
+          {
+            "id": "routing:transitions_to",
+            "cyclePolicy": "allow",
+            "description": "The source workflow state permits a transition to the target state.",
+            "sourceKinds": [
+              "routing:state"
+            ],
+            "targetKinds": [
+              "routing:state"
+            ],
+            "cardinalities": [
+              "one-to-one",
+              "one-to-many",
+              "many-to-many"
+            ],
+            "impactDirection": "both"
+          }
+        ]
+      },
+      {
+        "schemaVersion": "0.1.0",
+        "documentType": "relation-pack",
+        "id": "urn:metamap:relation-pack:application-topology",
+        "version": "1.0.0",
+        "description": "Structural relations for applications, route implementations, containers, outlets, content, contexts, data loading, parameters, middleware, fallbacks, and hydration boundaries.",
+        "relations": [
+          {
+            "id": "topology:contains",
+            "cyclePolicy": "forbid",
+            "description": "The source structural scope directly contains the target structural element.",
+            "sourceKinds": [
+              "topology:application",
+              "topology:segment",
+              "topology:outlet"
+            ],
+            "targetKinds": [
+              "topology:segment",
+              "topology:page",
+              "topology:container",
+              "topology:outlet",
+              "topology:boundary",
+              "topology:hydration-boundary",
+              "routing:route"
+            ],
+            "cardinalities": [
+              "one-to-one",
+              "one-to-many",
+              "many-to-many"
+            ],
+            "transitive": true,
+            "impactDirection": "both"
+          },
+          {
+            "id": "topology:implemented_by",
+            "cyclePolicy": "forbid",
+            "description": "The target framework element implements the source semantic route.",
+            "sourceKinds": [
+              "routing:route"
+            ],
+            "targetKinds": [
+              "topology:page",
+              "topology:container"
+            ],
+            "cardinalities": [
+              "one-to-one",
+              "one-to-many",
+              "many-to-one"
+            ],
+            "impactDirection": "target-to-source"
+          },
+          {
+            "id": "topology:wraps",
+            "cyclePolicy": "forbid",
+            "description": "The source container is the nearest rendering parent of the target page or nested container.",
+            "sourceKinds": [
+              "topology:container"
+            ],
+            "targetKinds": [
+              "topology:page",
+              "topology:container"
+            ],
+            "cardinalities": [
+              "one-to-one",
+              "one-to-many"
+            ],
+            "transitive": true,
+            "impactDirection": "source-to-target"
+          },
+          {
+            "id": "topology:rendered_in",
+            "cyclePolicy": "forbid",
+            "description": "The target is the nearest container that renders the source semantic route or page.",
+            "sourceKinds": [
+              "routing:route",
+              "topology:page"
+            ],
+            "targetKinds": [
+              "topology:container"
+            ],
+            "cardinalities": [
+              "one-to-one",
+              "many-to-one"
+            ],
+            "impactDirection": "target-to-source"
+          },
+          {
+            "id": "topology:has_outlet",
+            "cyclePolicy": "forbid",
+            "description": "The source container declares the target rendering outlet.",
+            "sourceKinds": [
+              "topology:container"
+            ],
+            "targetKinds": [
+              "topology:outlet"
+            ],
+            "cardinalities": [
+              "one-to-one",
+              "one-to-many"
+            ],
+            "impactDirection": "source-to-target"
+          },
+          {
+            "id": "topology:fills_outlet",
+            "cyclePolicy": "forbid",
+            "description": "The source page or container supplies the target outlet.",
+            "sourceKinds": [
+              "topology:page",
+              "topology:container"
+            ],
+            "targetKinds": [
+              "topology:outlet"
+            ],
+            "cardinalities": [
+              "one-to-one",
+              "many-to-one",
+              "many-to-many"
+            ],
+            "impactDirection": "both"
+          },
+          {
+            "id": "topology:hosts_provider",
+            "cyclePolicy": "forbid",
+            "description": "The source rendering scope mounts the target context provider.",
+            "sourceKinds": [
+              "topology:container",
+              "topology:page"
+            ],
+            "targetKinds": [
+              "topology:context-provider"
+            ],
+            "cardinalities": [
+              "one-to-one",
+              "one-to-many",
+              "many-to-many"
+            ],
+            "impactDirection": "source-to-target"
+          },
+          {
+            "id": "topology:provides_context",
+            "cyclePolicy": "forbid",
+            "description": "The source scope makes the target context available to descendants.",
+            "sourceKinds": [
+              "topology:application",
+              "topology:container",
+              "topology:page",
+              "topology:context-provider"
+            ],
+            "targetKinds": [
+              "topology:context"
+            ],
+            "cardinalities": [
+              "one-to-one",
+              "one-to-many",
+              "many-to-many"
+            ],
+            "impactDirection": "source-to-target"
+          },
+          {
+            "id": "topology:requires_context",
+            "cyclePolicy": "forbid",
+            "description": "The source cannot be expressed unless the target context is provided in its active scope.",
+            "sourceKinds": [
+              "routing:route",
+              "topology:page",
+              "topology:container",
+              "topology:component",
+              "topology:content",
+              "topology:loader"
+            ],
+            "targetKinds": [
+              "topology:context"
+            ],
+            "cardinalities": [
+              "one-to-one",
+              "one-to-many",
+              "many-to-many"
+            ],
+            "impactDirection": "target-to-source"
+          },
+          {
+            "id": "topology:resolves_content",
+            "cyclePolicy": "forbid",
+            "description": "The target is an independently referenceable content source resolved by the source.",
+            "sourceKinds": [
+              "routing:route",
+              "topology:page",
+              "topology:component",
+              "topology:outlet"
+            ],
+            "targetKinds": [
+              "topology:content"
+            ],
+            "cardinalities": [
+              "one-to-one",
+              "one-to-many",
+              "many-to-many"
+            ],
+            "impactDirection": "target-to-source"
+          },
+          {
+            "id": "topology:loads",
+            "cyclePolicy": "forbid",
+            "description": "The source invokes the target loader to resolve data.",
+            "sourceKinds": [
+              "routing:route",
+              "topology:page",
+              "topology:container",
+              "topology:component"
+            ],
+            "targetKinds": [
+              "topology:loader"
+            ],
+            "cardinalities": [
+              "one-to-one",
+              "one-to-many",
+              "many-to-many"
+            ],
+            "impactDirection": "target-to-source"
+          },
+          {
+            "id": "topology:parameterized_by",
+            "cyclePolicy": "forbid",
+            "description": "The source route shape is parameterized by the target schema.",
+            "sourceKinds": [
+              "routing:route",
+              "topology:page"
+            ],
+            "targetKinds": [
+              "routing:schema"
+            ],
+            "cardinalities": [
+              "one-to-one",
+              "one-to-many",
+              "many-to-one"
+            ],
+            "impactDirection": "target-to-source"
+          },
+          {
+            "id": "topology:produces",
+            "cyclePolicy": "forbid",
+            "description": "The source produces data conforming to the target schema.",
+            "sourceKinds": [
+              "routing:handler",
+              "topology:loader"
+            ],
+            "targetKinds": [
+              "routing:schema"
+            ],
+            "cardinalities": [
+              "one-to-one",
+              "one-to-many",
+              "many-to-one"
+            ],
+            "impactDirection": "source-to-target"
+          },
+          {
+            "id": "topology:consumes",
+            "cyclePolicy": "forbid",
+            "description": "The source consumes data conforming to the target schema.",
+            "sourceKinds": [
+              "topology:page",
+              "topology:component",
+              "topology:hydration-boundary"
+            ],
+            "targetKinds": [
+              "routing:schema"
+            ],
+            "cardinalities": [
+              "one-to-one",
+              "one-to-many",
+              "many-to-one"
+            ],
+            "impactDirection": "target-to-source"
+          },
+          {
+            "id": "topology:hydrates",
+            "cyclePolicy": "forbid",
+            "description": "The source hydration boundary activates the target client-rendered structure.",
+            "sourceKinds": [
+              "topology:hydration-boundary"
+            ],
+            "targetKinds": [
+              "routing:route",
+              "topology:page",
+              "topology:container",
+              "topology:component",
+              "topology:boundary"
+            ],
+            "cardinalities": [
+              "one-to-one",
+              "one-to-many"
+            ],
+            "impactDirection": "both"
+          },
+          {
+            "id": "topology:guarded_by",
+            "cyclePolicy": "forbid",
+            "description": "The source route or rendering scope is guarded by the target middleware.",
+            "sourceKinds": [
+              "routing:route",
+              "topology:page",
+              "topology:container"
+            ],
+            "targetKinds": [
+              "topology:middleware"
+            ],
+            "cardinalities": [
+              "one-to-one",
+              "many-to-one",
+              "many-to-many"
+            ],
+            "impactDirection": "target-to-source"
+          },
+          {
+            "id": "topology:fallback_for",
+            "cyclePolicy": "forbid",
+            "description": "The source loading, error, not-found, or default boundary is the fallback for the target scope.",
+            "sourceKinds": [
+              "topology:boundary"
+            ],
+            "targetKinds": [
+              "topology:segment",
+              "routing:route",
+              "topology:page",
+              "topology:container"
+            ],
+            "cardinalities": [
+              "one-to-one",
+              "one-to-many",
+              "many-to-many"
+            ],
+            "impactDirection": "source-to-target"
+          }
+        ]
+      },
+      {
+        "schemaVersion": "0.1.0",
+        "documentType": "relation-pack",
+        "id": "urn:metamap:relation-pack:core",
+        "version": "1.0.0",
+        "description": "Minimal structural relations shared by language and domain adapters.",
+        "relations": [
+          {
+            "id": "core:contains",
+            "cyclePolicy": "forbid",
+            "description": "The source structurally contains the target.",
+            "cardinalities": [
+              "one-to-one",
+              "one-to-many",
+              "many-to-many"
+            ],
+            "transitive": true,
+            "impactDirection": "both"
+          },
+          {
+            "id": "core:implements",
+            "cyclePolicy": "forbid",
+            "description": "The target is a physical realization of the source concept or contract.",
+            "cardinalities": [
+              "one-to-one",
+              "one-to-many",
+              "many-to-many"
+            ],
+            "impactDirection": "source-to-target"
+          },
+          {
+            "id": "core:conforms_to",
+            "cyclePolicy": "forbid",
+            "description": "The source is constrained by the target schema or specification.",
+            "cardinalities": [
+              "one-to-one",
+              "many-to-one",
+              "many-to-many"
+            ],
+            "impactDirection": "target-to-source"
+          },
+          {
+            "id": "core:derives_from",
+            "cyclePolicy": "forbid",
+            "description": "The source is derived from the target.",
+            "cardinalities": [
+              "one-to-one",
+              "one-to-many",
+              "many-to-one",
+              "many-to-many"
+            ],
+            "transitive": true,
+            "impactDirection": "target-to-source"
+          },
+          {
+            "id": "core:generates",
+            "cyclePolicy": "forbid",
+            "description": "The source deterministically or procedurally produces the target.",
+            "cardinalities": [
+              "one-to-one",
+              "one-to-many",
+              "many-to-many"
+            ],
+            "impactDirection": "source-to-target"
+          },
+          {
+            "id": "core:depends_on",
+            "cyclePolicy": "forbid",
+            "description": "The source requires the target.",
+            "cardinalities": [
+              "one-to-one",
+              "one-to-many",
+              "many-to-many"
+            ],
+            "transitive": true,
+            "impactDirection": "target-to-source"
+          },
+          {
+            "id": "core:mirrors",
+            "cyclePolicy": "allow",
+            "description": "The source and target intentionally duplicate the same scoped facts.",
+            "cardinalities": [
+              "one-to-one",
+              "many-to-many"
+            ],
+            "symmetric": true,
+            "impactDirection": "both"
+          },
+          {
+            "id": "core:documents",
+            "cyclePolicy": "allow",
+            "description": "The source documentation describes the target.",
+            "cardinalities": [
+              "one-to-one",
+              "one-to-many",
+              "many-to-many"
+            ],
+            "impactDirection": "target-to-source"
+          },
+          {
+            "id": "core:tests",
+            "cyclePolicy": "allow",
+            "description": "The source provides evidence about the target.",
+            "cardinalities": [
+              "one-to-one",
+              "one-to-many",
+              "many-to-many"
+            ],
+            "impactDirection": "target-to-source"
+          },
+          {
+            "id": "core:exposes",
+            "cyclePolicy": "forbid",
+            "description": "The source makes the target externally addressable.",
+            "cardinalities": [
+              "one-to-one",
+              "one-to-many",
+              "many-to-many"
+            ],
+            "impactDirection": "both"
+          },
+          {
+            "id": "core:references",
+            "cyclePolicy": "allow",
+            "description": "The source identifies or points to the target without implying ownership.",
+            "cardinalities": [
+              "one-to-one",
+              "one-to-many",
+              "many-to-one",
+              "many-to-many"
+            ],
+            "impactDirection": "target-to-source"
+          },
+          {
+            "id": "core:specified_by",
+            "cyclePolicy": "forbid",
+            "description": "The target defines the intended behavior or constraints of the source.",
+            "cardinalities": [
+              "one-to-one",
+              "many-to-one",
+              "many-to-many"
+            ],
+            "impactDirection": "target-to-source"
+          }
+        ]
+      }
+    ],
+    "policy": {
+      "schemaVersion": "0.1.0",
+      "documentType": "policy",
+      "id": "urn:example:application-topology:policy",
+      "graph": {
+        "id": "urn:example:application-topology:graph",
+        "digest": "sha256:4fcb8d3d7b48d74e5f47f6d83afc1e53b8e99924ea133b090f161aca14852158"
+      },
+      "mappings": [
+        {
+          "select": {
+            "provenanceStatuses": [
+              "declared"
+            ]
+          },
+          "coverage": "total",
+          "determinism": "deterministic",
+          "reversibility": "irreversible"
+        }
+      ],
+      "constraints": [
+        {
+          "id": "urn:example:constraint:page-coverage",
+          "kind": "topology:relation-totality",
+          "subjects": [
+            "urn:example:application-topology:graph"
+          ],
+          "parameters": {
+            "allowExcluded": true,
+            "cardinality": "exactly-one",
+            "counterpartKinds": [
+              "routing:route"
+            ],
+            "direction": "target",
+            "relation": "topology:implemented_by",
+            "subjectKinds": [
+              "topology:page"
+            ]
+          }
+        },
+        {
+          "id": "urn:example:constraint:client-hydration",
+          "kind": "topology:relation-totality",
+          "subjects": [
+            "urn:example:application-topology:graph"
+          ],
+          "parameters": {
+            "cardinality": "exactly-one",
+            "counterpartKinds": [
+              "topology:hydration-boundary"
+            ],
+            "direction": "target",
+            "relation": "topology:hydrates",
+            "subjectAttributes": {
+              "runtime": "client"
+            },
+            "subjectKinds": [
+              "topology:page"
+            ]
+          }
+        },
+        {
+          "id": "urn:example:constraint:reachable",
+          "kind": "topology:reachable",
+          "subjects": [
+            "urn:example:application-topology:graph"
+          ],
+          "parameters": {
+            "relation": "topology:contains",
+            "root": "urn:example:app",
+            "subjectKinds": [
+              "topology:segment",
+              "topology:container",
+              "topology:page",
+              "topology:hydration-boundary"
+            ]
+          }
+        },
+        {
+          "id": "urn:example:constraint:context",
+          "kind": "topology:context-satisfied",
+          "subjects": [
+            "urn:example:application-topology:graph"
+          ],
+          "parameters": {
+            "hostsProviderRelation": "topology:hosts_provider",
+            "parentRelation": "topology:wraps",
+            "providesRelation": "topology:provides_context",
+            "renderedInRelation": "topology:rendered_in",
+            "requiresRelation": "topology:requires_context",
+            "subjectAttributes": {
+              "topologySurface": "semantic-page"
+            },
+            "subjectKinds": [
+              "routing:route"
+            ]
+          }
+        }
+      ],
+      "evidence": []
+    },
+    "context": {},
+    "evaluatedAt": "2026-09-08T00:00:00.000Z"
+  },
+  "sources": [],
+  "result": {
+    "generation": {
+      "activeMappings": [
+        "urn:example:mapping:app-segment",
+        "urn:example:mapping:container-context",
+        "urn:example:mapping:container-page",
+        "urn:example:mapping:hydrate-page",
+        "urn:example:mapping:hydrate-route",
+        "urn:example:mapping:page-container",
+        "urn:example:mapping:route-container",
+        "urn:example:mapping:route-content",
+        "urn:example:mapping:route-context",
+        "urn:example:mapping:route-page",
+        "urn:example:mapping:segment-structure"
+      ],
+      "context": {},
+      "digest": "sha256:b0cfec854654b71d1ffbeb287c33df5bb765226e4b0d49bbe56c6c210a3d5ca4",
+      "documentType": "generation",
+      "evaluatedAt": "2026-09-08T00:00:00.000Z",
+      "evidence": [],
+      "graph": {
+        "digest": "sha256:4fcb8d3d7b48d74e5f47f6d83afc1e53b8e99924ea133b090f161aca14852158",
+        "id": "urn:example:application-topology:graph",
+        "revision": "1"
+      },
+      "id": "urn:bindloom:generation:b0cfec854654b71d1ffbeb287c33df5bb765226e4b0d49bbe56c6c210a3d5ca4",
+      "inactiveMappings": [],
+      "packs": [
+        {
+          "digest": "sha256:c805d0b323743e3eb21139bf90810b58784a8fc3da6d419e8023d7512f8f2d81",
+          "id": "urn:metamap:relation-pack:application-topology",
+          "version": "1.0.0"
+        },
+        {
+          "digest": "sha256:07683a803d0c7b7a4aa621e6bfe9b8cffa8667fd16047601aa4aa86268f84a2e",
+          "id": "urn:metamap:relation-pack:core",
+          "version": "1.0.0"
+        },
+        {
+          "digest": "sha256:c7bca28d6b8836a04a6f505bff4033947e401dd6c93cfeb8e543f82c9f0cb19d",
+          "id": "urn:metamap:relation-pack:routing",
+          "version": "1.0.0"
+        }
+      ],
+      "policy": {
+        "digest": "sha256:1cb9d06860136766d75796d19f9ccb4d2471fde3a70ca988e9919d86f37f90e4",
+        "id": "urn:example:application-topology:policy"
+      },
+      "profile": "bindloom-routing-draft-1",
+      "schemaVersion": "0.1.0",
+      "waiversApplied": []
+    },
+    "issues": [],
+    "pathTree": null,
+    "projection": null,
+    "status": "viable"
+  }
+}

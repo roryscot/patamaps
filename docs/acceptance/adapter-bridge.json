@@ -1,0 +1,537 @@
+{
+  "engines": {
+    "compiler": "sha256:07f74356f72db6236458375321a18f36240642e695f5e1fbc1a37b9c74fe775f",
+    "documentType": "executor-description",
+    "governance": "sha256:c486ea479e3d0371bec3f5a6fa7f0350b304610280f3ee2253e71539892b031a",
+    "schemaVersion": "0.1.0",
+    "scientific": "sha256:78032b00a319c0fa6d3df5f6c303409643922f330df6bcf2f01bcf15c4ed66ad",
+    "workspace": "sha256:2f2f535c8086b66daec416d4577a78e1acd5797874ddcad7007d28c6dc842403"
+  },
+  "cases": [
+    {
+      "adapter": "typescript-zod",
+      "pass": true,
+      "expected": "viable",
+      "status": "viable",
+      "adapterVersion": "typescript-zod@1.0.0+bindloom-envelope-1",
+      "inputs": [
+        {
+          "id": "urn:bridge:source:typescript-zod:schemas/domain.ts",
+          "locator": "workspace:schemas/domain.ts",
+          "digest": "sha256:a99f2756368285d86d4c696137957028031f7f6905a6b6a50bca9db0853e6211",
+          "byteLength": 101,
+          "content": "import {z} from \"zod\"; export const Item=z.object({id:z.string(),count:z.number().int().nullable()});"
+        }
+      ],
+      "entities": 3,
+      "mappings": 1,
+      "generatedDigest": "sha256:02b909bce166bdc1e4591ab1a3c03842c6e706a4a7d9b73a8588bf468ea0ed2e",
+      "repeatedCheck": {
+        "status": "unchanged",
+        "baselineDigest": "sha256:02b909bce166bdc1e4591ab1a3c03842c6e706a4a7d9b73a8588bf468ea0ed2e",
+        "currentDigest": "sha256:02b909bce166bdc1e4591ab1a3c03842c6e706a4a7d9b73a8588bf468ea0ed2e",
+        "changes": []
+      },
+      "referenceRefusal": null,
+      "evaluation": {
+        "generation": {
+          "activeMappings": [
+            "urn:bridge:mapping:urn%3Abridge%3Asource%3Atypescript-zod%3Acontains%3AItem"
+          ],
+          "context": {},
+          "digest": "sha256:4ec67327048fe07d89eaf3660bc5abe71dde3b015de6cd3c9a6e03918fb3c311",
+          "documentType": "generation",
+          "evaluatedAt": "2026-10-10T00:00:00.000Z",
+          "evidence": [],
+          "graph": {
+            "digest": "sha256:d2c3750ee387507ed369c1bbd7b32acba8798f354d5d8b2f21e9394ec7aeb5ec",
+            "id": "urn:bridge:typescript-zod",
+            "revision": "1"
+          },
+          "id": "urn:bindloom:generation:4ec67327048fe07d89eaf3660bc5abe71dde3b015de6cd3c9a6e03918fb3c311",
+          "inactiveMappings": [],
+          "packs": [
+            {
+              "digest": "sha256:c805d0b323743e3eb21139bf90810b58784a8fc3da6d419e8023d7512f8f2d81",
+              "id": "urn:metamap:relation-pack:application-topology",
+              "version": "1.0.0"
+            },
+            {
+              "digest": "sha256:07683a803d0c7b7a4aa621e6bfe9b8cffa8667fd16047601aa4aa86268f84a2e",
+              "id": "urn:metamap:relation-pack:core",
+              "version": "1.0.0"
+            },
+            {
+              "digest": "sha256:c7bca28d6b8836a04a6f505bff4033947e401dd6c93cfeb8e543f82c9f0cb19d",
+              "id": "urn:metamap:relation-pack:routing",
+              "version": "1.0.0"
+            }
+          ],
+          "policy": {
+            "digest": "sha256:a9e248990ecde4fb91c40390c6cd0dd3d0035a09a8c0db469277e12d13c6c411",
+            "id": "urn:bridge:policy"
+          },
+          "profile": "bindloom-routing-draft-1",
+          "schemaVersion": "0.1.0",
+          "waiversApplied": []
+        },
+        "issues": [],
+        "pathTree": null,
+        "projection": {
+          "digest": "sha256:8d1e4be975379ba53e66934640af29064a65f5f0569f445c0e6242877d2675cf",
+          "documentType": "projection",
+          "entries": [],
+          "generation": {
+            "digest": "sha256:4ec67327048fe07d89eaf3660bc5abe71dde3b015de6cd3c9a6e03918fb3c311",
+            "id": "urn:bindloom:generation:4ec67327048fe07d89eaf3660bc5abe71dde3b015de6cd3c9a6e03918fb3c311"
+          },
+          "graph": {
+            "digest": "sha256:d2c3750ee387507ed369c1bbd7b32acba8798f354d5d8b2f21e9394ec7aeb5ec",
+            "id": "urn:bridge:typescript-zod",
+            "revision": "1"
+          },
+          "id": "urn:bindloom:projection:8d1e4be975379ba53e66934640af29064a65f5f0569f445c0e6242877d2675cf",
+          "profile": "bindloom-routing-draft-1",
+          "schemaVersion": "0.1.0",
+          "spec": {
+            "digest": "sha256:5238eafb57fc19ca8b5b71d40773119826038ace2a4dc6e217226848b670ed26",
+            "id": "urn:bridge:projection"
+          }
+        },
+        "status": "viable"
+      },
+      "cacheHits": 0
+    },
+    {
+      "adapter": "prisma",
+      "pass": true,
+      "expected": "viable",
+      "status": "viable",
+      "adapterVersion": "prisma@1.0.0+bindloom-envelope-1",
+      "inputs": [
+        {
+          "id": "urn:bridge:source:prisma:schema.prisma",
+          "locator": "workspace:schema.prisma",
+          "digest": "sha256:bcd3b421cfdd27f92f282d68909ffa146dc44ceef356d5281672e3def99e522c",
+          "byteLength": 71,
+          "content": "enum State {\n READY\n DONE\n}\nmodel Item {\n id String @id\n state State\n}\n"
+        }
+      ],
+      "entities": 6,
+      "mappings": 2,
+      "generatedDigest": "sha256:93ec9532d6dc3414095c371b7d22b697f3373f8ce376103939d626fcc8559ae7",
+      "repeatedCheck": {
+        "status": "unchanged",
+        "baselineDigest": "sha256:93ec9532d6dc3414095c371b7d22b697f3373f8ce376103939d626fcc8559ae7",
+        "currentDigest": "sha256:93ec9532d6dc3414095c371b7d22b697f3373f8ce376103939d626fcc8559ae7",
+        "changes": []
+      },
+      "referenceRefusal": null,
+      "evaluation": {
+        "generation": {
+          "activeMappings": [
+            "urn:bridge:mapping:urn%3Abridge%3Asource%3Aprisma%3Acontains%3Aurn%3Abridge%3Aprisma-enum%3Aurn%253Abridge%253Asource%253Aprisma%253AState",
+            "urn:bridge:mapping:urn%3Abridge%3Asource%3Aprisma%3Acontains%3Aurn%3Abridge%3Aprisma-model%3Aurn%253Abridge%253Asource%253Aprisma%253AItem"
+          ],
+          "context": {},
+          "digest": "sha256:c9c6a4917e4619fdbe61101fde6cbfdf5dce09d1d4a0663f361f856bd93644e5",
+          "documentType": "generation",
+          "evaluatedAt": "2026-10-10T00:00:00.000Z",
+          "evidence": [],
+          "graph": {
+            "digest": "sha256:e6e247ff3db73ea4cc89f391aa902983a85e492dff0577054ea2b979bb598d45",
+            "id": "urn:bridge:prisma",
+            "revision": "1"
+          },
+          "id": "urn:bindloom:generation:c9c6a4917e4619fdbe61101fde6cbfdf5dce09d1d4a0663f361f856bd93644e5",
+          "inactiveMappings": [],
+          "packs": [
+            {
+              "digest": "sha256:c805d0b323743e3eb21139bf90810b58784a8fc3da6d419e8023d7512f8f2d81",
+              "id": "urn:metamap:relation-pack:application-topology",
+              "version": "1.0.0"
+            },
+            {
+              "digest": "sha256:07683a803d0c7b7a4aa621e6bfe9b8cffa8667fd16047601aa4aa86268f84a2e",
+              "id": "urn:metamap:relation-pack:core",
+              "version": "1.0.0"
+            },
+            {
+              "digest": "sha256:c7bca28d6b8836a04a6f505bff4033947e401dd6c93cfeb8e543f82c9f0cb19d",
+              "id": "urn:metamap:relation-pack:routing",
+              "version": "1.0.0"
+            }
+          ],
+          "policy": {
+            "digest": "sha256:d989bca9d7124b8f078755bbc9d59cd564f8731953addf164fa8fbbdaeb45d3c",
+            "id": "urn:bridge:policy"
+          },
+          "profile": "bindloom-routing-draft-1",
+          "schemaVersion": "0.1.0",
+          "waiversApplied": []
+        },
+        "issues": [],
+        "pathTree": null,
+        "projection": {
+          "digest": "sha256:e9579a6a9376451e2b9e3b9d67c7f9eb9d0d8a0683866e876ce3caa929655fea",
+          "documentType": "projection",
+          "entries": [],
+          "generation": {
+            "digest": "sha256:c9c6a4917e4619fdbe61101fde6cbfdf5dce09d1d4a0663f361f856bd93644e5",
+            "id": "urn:bindloom:generation:c9c6a4917e4619fdbe61101fde6cbfdf5dce09d1d4a0663f361f856bd93644e5"
+          },
+          "graph": {
+            "digest": "sha256:e6e247ff3db73ea4cc89f391aa902983a85e492dff0577054ea2b979bb598d45",
+            "id": "urn:bridge:prisma",
+            "revision": "1"
+          },
+          "id": "urn:bindloom:projection:e9579a6a9376451e2b9e3b9d67c7f9eb9d0d8a0683866e876ce3caa929655fea",
+          "profile": "bindloom-routing-draft-1",
+          "schemaVersion": "0.1.0",
+          "spec": {
+            "digest": "sha256:5238eafb57fc19ca8b5b71d40773119826038ace2a4dc6e217226848b670ed26",
+            "id": "urn:bridge:projection"
+          }
+        },
+        "status": "viable"
+      },
+      "cacheHits": 0
+    },
+    {
+      "adapter": "nextjs-app-router",
+      "pass": true,
+      "expected": "viable",
+      "status": "viable",
+      "adapterVersion": "nextjs-app-router@1.1.0+bindloom-envelope-1",
+      "inputs": [
+        {
+          "id": "urn:bridge:source:nextjs-app-router:app/api/items/route.ts",
+          "locator": "workspace:app/api/items/route.ts",
+          "digest": "sha256:4d672b14bbea7eef6c343f8f09ea1efc670f9c5c75cd84558862b35ea5a3a25b",
+          "byteLength": 55,
+          "content": "export async function GET(){return new Response(\"ok\");}"
+        },
+        {
+          "id": "urn:bridge:source:nextjs-app-router:app/layout.tsx",
+          "locator": "workspace:app/layout.tsx",
+          "digest": "sha256:fbf3570df6357da7785493f454849f8747d6a2166e974fa5e27c1466595f43d7",
+          "byteLength": 76,
+          "content": "export default function Layout({children}) {return <main>{children}</main>;}"
+        },
+        {
+          "id": "urn:bridge:source:nextjs-app-router:app/page.tsx",
+          "locator": "workspace:app/page.tsx",
+          "digest": "sha256:1204be4a96ba4bbc8dba912ae2eb13871ffe001de8c0e396b135de6b3490f739",
+          "byteLength": 71,
+          "content": "\"use client\"; export default function Page(){return <main>Home</main>;}"
+        }
+      ],
+      "entities": 10,
+      "mappings": 12,
+      "generatedDigest": "sha256:090625085593476bdcda71c670cc3e16d8cf5ba5a6cf40f7d6c191110ae942ca",
+      "repeatedCheck": {
+        "status": "unchanged",
+        "baselineDigest": "sha256:090625085593476bdcda71c670cc3e16d8cf5ba5a6cf40f7d6c191110ae942ca",
+        "currentDigest": "sha256:090625085593476bdcda71c670cc3e16d8cf5ba5a6cf40f7d6c191110ae942ca",
+        "changes": []
+      },
+      "referenceRefusal": null,
+      "evaluation": {
+        "generation": {
+          "activeMappings": [
+            "urn:bridge:mapping:urn%3Abridge%3Asource%3Anextjs-app-router%3Acontains%3A.%3Asegment%3Aapi",
+            "urn:bridge:mapping:urn%3Abridge%3Asource%3Anextjs-app-router%3Acontains%3Aapi%3Asegment%3Aapi%2Fitems",
+            "urn:bridge:mapping:urn%3Abridge%3Asource%3Anextjs-app-router%3Acontains%3Aapplication%3Aroot",
+            "urn:bridge:mapping:urn%3Abridge%3Asource%3Anextjs-app-router%3Acontains%3Ahydration%3A.%3Apage",
+            "urn:bridge:mapping:urn%3Abridge%3Asource%3Anextjs-app-router%3Acontains%3Asegment%3A.%3Alayout",
+            "urn:bridge:mapping:urn%3Abridge%3Asource%3Anextjs-app-router%3Acontains%3Asegment%3A.%3Apage",
+            "urn:bridge:mapping:urn%3Abridge%3Asource%3Anextjs-app-router%3Acontains%3Asegment%3Aapi%2Fitems%3AGET",
+            "urn:bridge:mapping:urn%3Abridge%3Asource%3Anextjs-app-router%3Ahydrates%3A.%3Apage",
+            "urn:bridge:mapping:urn%3Abridge%3Asource%3Anextjs-app-router%3Arendered-in%3Aurn%3Abridge%3Atopology-page%3Aurn%253Abridge%253Asource%253Anextjs-app-router%253A.%253Apage",
+            "urn:bridge:mapping:urn%3Abridge%3Asource%3Anextjs-app-router%3Arouting-exposed_as%3Aapi%2Fitems%3AGET",
+            "urn:bridge:mapping:urn%3Abridge%3Asource%3Anextjs-app-router%3Arouting-handled_by%3Aapi%2Fitems%3AGET",
+            "urn:bridge:mapping:urn%3Abridge%3Asource%3Anextjs-app-router%3Awraps%3Aurn%3Abridge%3Atopology-container%3Aurn%253Abridge%253Asource%253Anextjs-app-router%253A.%253Alayout%3Aurn%3Abridge%3Atopology-page%3Aurn%253Abridge%253Asource%253Anextjs-app-router%253A.%253Apage"
+          ],
+          "context": {},
+          "digest": "sha256:2345b27835bd296960a9414c94b62ee7d02d10fee833a1fc9917e1dd433a6dc1",
+          "documentType": "generation",
+          "evaluatedAt": "2026-10-10T00:00:00.000Z",
+          "evidence": [],
+          "graph": {
+            "digest": "sha256:cbaec2d6b58f5ac68c2f7ec00a22f9650c7b2b6d04571358d694d0ddb9621aef",
+            "id": "urn:bridge:nextjs-app-router",
+            "revision": "1"
+          },
+          "id": "urn:bindloom:generation:2345b27835bd296960a9414c94b62ee7d02d10fee833a1fc9917e1dd433a6dc1",
+          "inactiveMappings": [],
+          "packs": [
+            {
+              "digest": "sha256:c805d0b323743e3eb21139bf90810b58784a8fc3da6d419e8023d7512f8f2d81",
+              "id": "urn:metamap:relation-pack:application-topology",
+              "version": "1.0.0"
+            },
+            {
+              "digest": "sha256:07683a803d0c7b7a4aa621e6bfe9b8cffa8667fd16047601aa4aa86268f84a2e",
+              "id": "urn:metamap:relation-pack:core",
+              "version": "1.0.0"
+            },
+            {
+              "digest": "sha256:c7bca28d6b8836a04a6f505bff4033947e401dd6c93cfeb8e543f82c9f0cb19d",
+              "id": "urn:metamap:relation-pack:routing",
+              "version": "1.0.0"
+            }
+          ],
+          "policy": {
+            "digest": "sha256:e2ebd1ebbb5f81425c65a9d356608fa90aa7290fbfbffb0d3b0cec69bedfc297",
+            "id": "urn:bridge:policy"
+          },
+          "profile": "bindloom-routing-draft-1",
+          "schemaVersion": "0.1.0",
+          "waiversApplied": []
+        },
+        "issues": [],
+        "pathTree": null,
+        "projection": {
+          "digest": "sha256:fae83f592b7961e551bb072947d0f74b23fafcbef3f1daebc8b205ce36c75444",
+          "documentType": "projection",
+          "entries": [],
+          "generation": {
+            "digest": "sha256:2345b27835bd296960a9414c94b62ee7d02d10fee833a1fc9917e1dd433a6dc1",
+            "id": "urn:bindloom:generation:2345b27835bd296960a9414c94b62ee7d02d10fee833a1fc9917e1dd433a6dc1"
+          },
+          "graph": {
+            "digest": "sha256:cbaec2d6b58f5ac68c2f7ec00a22f9650c7b2b6d04571358d694d0ddb9621aef",
+            "id": "urn:bridge:nextjs-app-router",
+            "revision": "1"
+          },
+          "id": "urn:bindloom:projection:fae83f592b7961e551bb072947d0f74b23fafcbef3f1daebc8b205ce36c75444",
+          "profile": "bindloom-routing-draft-1",
+          "schemaVersion": "0.1.0",
+          "spec": {
+            "digest": "sha256:5238eafb57fc19ca8b5b71d40773119826038ace2a4dc6e217226848b670ed26",
+            "id": "urn:bridge:projection"
+          }
+        },
+        "status": "viable"
+      },
+      "cacheHits": 0
+    },
+    {
+      "adapter": "json-collections",
+      "pass": true,
+      "expected": "viable",
+      "status": "viable",
+      "adapterVersion": "json-collections@1.0.0+bindloom-envelope-1",
+      "inputs": [
+        {
+          "id": "urn:bridge:source:json-collections:surfaces.json",
+          "locator": "workspace:surfaces.json",
+          "digest": "sha256:cdb5664d7c010ea8084be12f36ce6315fb2a67d0c17bed63c431e0d4944d2557",
+          "byteLength": 123,
+          "content": "{\"surfaces\": [{\"id\": \"discover\", \"label\": \"Discover\", \"viewIds\": [\"feed\", \"search\"], \"privatePayload\": {\"ignored\": true}}]}"
+        }
+      ],
+      "entities": 4,
+      "mappings": 2,
+      "generatedDigest": "sha256:8a9f193ef99551431bca9d71a288acffe6858504796cb9f53c03490e500ede6c",
+      "repeatedCheck": {
+        "status": "unchanged",
+        "baselineDigest": "sha256:8a9f193ef99551431bca9d71a288acffe6858504796cb9f53c03490e500ede6c",
+        "currentDigest": "sha256:8a9f193ef99551431bca9d71a288acffe6858504796cb9f53c03490e500ede6c",
+        "changes": []
+      },
+      "referenceRefusal": null,
+      "evaluation": {
+        "generation": {
+          "activeMappings": [
+            "urn:bridge:mapping:urn%3Abridge%3Asource%3Ajson-collections%3A%2Fsurfaces%3Adiscover%3AviewIds",
+            "urn:bridge:mapping:urn%3Abridge%3Asource%3Ajson-collections%3Acontains%3A%2Fsurfaces"
+          ],
+          "context": {},
+          "digest": "sha256:0864b2cdcbe2a475b8f3bb131c9ab8766f44ff65a4cf15c46c75fc222af0d6a1",
+          "documentType": "generation",
+          "evaluatedAt": "2026-10-10T00:00:00.000Z",
+          "evidence": [],
+          "graph": {
+            "digest": "sha256:5dfac724cc0bcd721da78e13444d312aa1cab0cbc606e4252b40b4f40175a838",
+            "id": "urn:bridge:json-collections",
+            "revision": "1"
+          },
+          "id": "urn:bindloom:generation:0864b2cdcbe2a475b8f3bb131c9ab8766f44ff65a4cf15c46c75fc222af0d6a1",
+          "inactiveMappings": [],
+          "packs": [
+            {
+              "digest": "sha256:c805d0b323743e3eb21139bf90810b58784a8fc3da6d419e8023d7512f8f2d81",
+              "id": "urn:metamap:relation-pack:application-topology",
+              "version": "1.0.0"
+            },
+            {
+              "digest": "sha256:07683a803d0c7b7a4aa621e6bfe9b8cffa8667fd16047601aa4aa86268f84a2e",
+              "id": "urn:metamap:relation-pack:core",
+              "version": "1.0.0"
+            },
+            {
+              "digest": "sha256:c7bca28d6b8836a04a6f505bff4033947e401dd6c93cfeb8e543f82c9f0cb19d",
+              "id": "urn:metamap:relation-pack:routing",
+              "version": "1.0.0"
+            }
+          ],
+          "policy": {
+            "digest": "sha256:577dc27b6acd8c6a141e96d77b08266a45afbe875dd442b381661dc716ad80cf",
+            "id": "urn:bridge:policy"
+          },
+          "profile": "bindloom-routing-draft-1",
+          "schemaVersion": "0.1.0",
+          "waiversApplied": []
+        },
+        "issues": [],
+        "pathTree": null,
+        "projection": {
+          "digest": "sha256:ca0b2a81a60753ea835e0117fe6126c56b1eb8fb31eb33d424e5fb411bdb69d9",
+          "documentType": "projection",
+          "entries": [],
+          "generation": {
+            "digest": "sha256:0864b2cdcbe2a475b8f3bb131c9ab8766f44ff65a4cf15c46c75fc222af0d6a1",
+            "id": "urn:bindloom:generation:0864b2cdcbe2a475b8f3bb131c9ab8766f44ff65a4cf15c46c75fc222af0d6a1"
+          },
+          "graph": {
+            "digest": "sha256:5dfac724cc0bcd721da78e13444d312aa1cab0cbc606e4252b40b4f40175a838",
+            "id": "urn:bridge:json-collections",
+            "revision": "1"
+          },
+          "id": "urn:bindloom:projection:ca0b2a81a60753ea835e0117fe6126c56b1eb8fb31eb33d424e5fb411bdb69d9",
+          "profile": "bindloom-routing-draft-1",
+          "schemaVersion": "0.1.0",
+          "spec": {
+            "digest": "sha256:5238eafb57fc19ca8b5b71d40773119826038ace2a4dc6e217226848b670ed26",
+            "id": "urn:bridge:projection"
+          }
+        },
+        "status": "viable"
+      },
+      "cacheHits": 0
+    },
+    {
+      "adapter": "legacy-sources",
+      "pass": true,
+      "expected": "rejected",
+      "status": "rejected",
+      "adapterVersion": "legacy-sources@1.0.0+bindloom-envelope-1",
+      "inputs": [
+        {
+          "id": "urn:bridge:source:legacy-sources:sources.json",
+          "locator": "workspace:sources.json",
+          "digest": "sha256:61fab7d2a2de79247922b2254efd912fa0ef87ab4f3dfde6339f03eb2a1d2d0c",
+          "byteLength": 121,
+          "content": "{\"sourcesOfTruth\": [{\"id\": \"schema\", \"label\": \"Schema\", \"paths\": [\"schema.prisma\"], \"outputs\": [\"generated/client.ts\"]}]}"
+        }
+      ],
+      "entities": 3,
+      "mappings": 2,
+      "generatedDigest": "sha256:1bb04a119a817bc7598d43e9e931844de4a89c28c088ca9505e1c2c8afe1886c",
+      "repeatedCheck": {
+        "status": "rejected",
+        "baselineDigest": "sha256:1bb04a119a817bc7598d43e9e931844de4a89c28c088ca9505e1c2c8afe1886c",
+        "currentDigest": "sha256:1bb04a119a817bc7598d43e9e931844de4a89c28c088ca9505e1c2c8afe1886c",
+        "changes": []
+      },
+      "referenceRefusal": {
+        "status": "rejected",
+        "issues": [
+          {
+            "severity": "error",
+            "code": "UNDECLARED_LOSSINESS",
+            "message": "urn:metamap:mapping:schema%3Agenerates%3A0 must declare lossless or lossy before activation",
+            "subjectId": "urn:metamap:mapping:schema%3Agenerates%3A0",
+            "causalPath": [
+              "urn:metamap:mapping:schema%3Agenerates%3A0"
+            ]
+          },
+          {
+            "severity": "error",
+            "code": "UNDECLARED_LOSSINESS",
+            "message": "urn:metamap:mapping:schema%3Areferences%3A0 must declare lossless or lossy before activation",
+            "subjectId": "urn:metamap:mapping:schema%3Areferences%3A0",
+            "causalPath": [
+              "urn:metamap:mapping:schema%3Areferences%3A0"
+            ]
+          }
+        ],
+        "impact": {
+          "changedSubjects": [
+            "urn:metamap:mapping:schema%3Agenerates%3A0",
+            "urn:metamap:mapping:schema%3Areferences%3A0"
+          ],
+          "affectedSubjects": [
+            "urn:bridge:concept:schema",
+            "urn:metamap:legacy-artifact:schema.prisma",
+            "urn:metamap:legacy-output:generated%2Fclient.ts",
+            "urn:metamap:mapping:schema%3Agenerates%3A0",
+            "urn:metamap:mapping:schema%3Areferences%3A0"
+          ],
+          "paths": [
+            {
+              "subjectId": "urn:bridge:concept:schema",
+              "path": [
+                "urn:metamap:mapping:schema%3Agenerates%3A0",
+                "urn:bridge:concept:schema"
+              ]
+            },
+            {
+              "subjectId": "urn:metamap:legacy-artifact:schema.prisma",
+              "path": [
+                "urn:metamap:mapping:schema%3Areferences%3A0",
+                "urn:metamap:legacy-artifact:schema.prisma"
+              ]
+            },
+            {
+              "subjectId": "urn:metamap:legacy-output:generated%2Fclient.ts",
+              "path": [
+                "urn:metamap:mapping:schema%3Agenerates%3A0",
+                "urn:metamap:legacy-output:generated%2Fclient.ts"
+              ]
+            },
+            {
+              "subjectId": "urn:metamap:mapping:schema%3Agenerates%3A0",
+              "path": [
+                "urn:metamap:mapping:schema%3Agenerates%3A0"
+              ]
+            },
+            {
+              "subjectId": "urn:metamap:mapping:schema%3Areferences%3A0",
+              "path": [
+                "urn:metamap:mapping:schema%3Areferences%3A0"
+              ]
+            }
+          ]
+        },
+        "quarantinedSubjects": [
+          "urn:bridge:concept:schema",
+          "urn:metamap:legacy-artifact:schema.prisma",
+          "urn:metamap:legacy-output:generated%2Fclient.ts",
+          "urn:metamap:mapping:schema%3Agenerates%3A0",
+          "urn:metamap:mapping:schema%3Areferences%3A0"
+        ]
+      },
+      "evaluation": {
+        "issues": [
+          {
+            "code": "UNDECLARED_LOSSINESS",
+            "message": "Admitted mappings need declared lossiness",
+            "severity": "error",
+            "subjectId": "urn:metamap:mapping:schema%3Agenerates%3A0"
+          },
+          {
+            "code": "UNDECLARED_LOSSINESS",
+            "message": "Admitted mappings need declared lossiness",
+            "severity": "error",
+            "subjectId": "urn:metamap:mapping:schema%3Areferences%3A0"
+          }
+        ],
+        "status": "rejected"
+      },
+      "cacheHits": 0
+    }
+  ],
+  "scope": "Captured bounded fixtures for all five advertised reused adapters; no provider dependency-closure, whole-framework, authentication or activation claim"
+}

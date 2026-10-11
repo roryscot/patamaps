@@ -1,0 +1,25 @@
+[package]
+name = "patamaps-benchmark-native"
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.99"
+license = "Apache-2.0"
+publish = false
+
+[workspace]
+
+[dependencies]
+patamaps-contracts = { path = "../../crates/patamaps-contracts" }
+patamaps-core = { path = "../../crates/patamaps-core" }
+patamaps-projection = { path = "../../crates/patamaps-projection" }
+patamaps-inspect = { path = "../../crates/patamaps-inspect" }
+serde = { version = "=1.0.229", features = ["derive"] }
+serde_json = { version = "=1.0.152", features = ["float_roundtrip"] }
+
+[lints.rust]
+unsafe_code = "forbid"
+
+[profile.release]
+lto = "thin"
+codegen-units = 1
+strip = "debuginfo"

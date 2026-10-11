@@ -1,0 +1,51 @@
+{
+  "verifiedAtUtc": "2026-10-11T04:07:12.152840+00:00",
+  "status": "passed",
+  "nativeTests": 110,
+  "compileFailDocumentationTests": 13,
+  "linuxTestFunctions": 10,
+  "platform": "aarch64-unknown-linux-gnu",
+  "kernel": "6.18.52-0-virt",
+  "userland": "Debian 12 bookworm from pinned official Rust 1.99 image",
+  "filesystem": "Private ext4 raw disk, ordered data mode; GNU stat labels its shared filesystem magic ext2/ext3",
+  "guestNetwork": "none configured",
+  "sourceArchive": {
+    "path": "bindloom-draft-07f74356f72d-source.tar.gz",
+    "digest": "sha256:1f48205fe26af59411eaf8738acb9c9abf717e1d1ef8bd9cc57feae5a98b3272"
+  },
+  "rootImageIndex": "sha256:114c7a4425406451c2866b6aafe69fe29b1b298832db1277d411ac73c82d04d6",
+  "rootImageManifest": "sha256:e393e07b3c3c39f238de676b0eb60c03dc7aefe5d6e37be6d29c686bf4d7e256",
+  "rawConsole": "native-test-console.raw.log",
+  "derivedReadableConsole": "native-test-console.txt",
+  "rawConsoleDigest": "sha256:faaf4e0458b6219a0d139770c2972602f3d8ad01f6d984b618a804880d105506",
+  "commands": [
+    "cargo build --workspace --locked --offline",
+    "cargo clippy --workspace --all-targets --locked --offline -- -D warnings",
+    "BINDLOOM_TEST_COMPILER_BINARY=/work/project/target/debug/bindloom BINDLOOM_TEST_ACTIVATOR_BINARY=/work/project/target/debug/bindloom-activator cargo test --workspace --locked --offline -- --test-threads=1"
+  ],
+  "toolchainComponents": [
+    {
+      "package": "clippy-preview",
+      "url": "https://static.rust-lang.org/dist/2026-10-01/clippy-1.99.0-aarch64-unknown-linux-gnu.tar.xz",
+      "version": "0.1.99",
+      "digest": "sha256:42e49dc02d29949395c0c072585961f6c9b5408110236087828d4e2f94ca96ef",
+      "bytes": 3810696,
+      "path": "clippy-1.99.0-aarch64-unknown-linux-gnu.tar.xz"
+    },
+    {
+      "package": "rustfmt-preview",
+      "url": "https://static.rust-lang.org/dist/2026-10-01/rustfmt-1.99.0-aarch64-unknown-linux-gnu.tar.xz",
+      "version": "1.10.0",
+      "digest": "sha256:4b9162fef99fd5246d2f83a2430c144e9bb9095aac6d1de0aaebde45ec01e09a",
+      "bytes": 2285720,
+      "path": "rustfmt-1.99.0-aarch64-unknown-linux-gnu.tar.xz"
+    }
+  ],
+  "environment": {
+    "RUSTUP_TOOLCHAIN": "1.99.0-aarch64-unknown-linux-gnu",
+    "CARGO_INCREMENTAL": "0",
+    "CARGO_PROFILE_DEV_DEBUG": "0",
+    "CARGO_PROFILE_TEST_DEBUG": "0"
+  },
+  "scope": "Actual independent-UID, held-lock/concurrency, manifest/substitution, five SIGKILL phases, installed production executable, approval/current trust/revocation, native consumption, approved move and fresh rollback; process-crash behavior, not power-loss or production activation"
+}

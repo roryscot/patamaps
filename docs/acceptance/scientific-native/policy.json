@@ -1,0 +1,246 @@
+{
+  "schemaVersion": "0.1.0",
+  "documentType": "policy",
+  "id": "urn:metamap:example:scientific-exploratory-policy",
+  "graph": {
+    "id": "urn:metamap:sssom:source:da32f81278ed1b68a3be79268936e69366e32255bb1682e41cdd1796b6d26afa",
+    "revision": "e4fe727428661f0093f6ab9269f4fb80387e39fc"
+  },
+  "mappings": [
+    {
+      "select": {
+        "ids": [
+          "urn:metamap:sssom:assertion:8de1dc3872c9861f89dd33d43811482b4ff54d9dd8a7eaa92fa13e4d4a40c463",
+          "urn:metamap:sssom:assertion:427a67a58079c8bc28e4c919925123645a1f845eece9e3b453337ef3a73a47d9",
+          "urn:metamap:sssom:assertion:765857762486e7fbfe06ca71b17c94e4d247fceca4ba0b370cd68fe045bfc3a9",
+          "urn:metamap:sssom:assertion:09f3d10e6c0d67924820cf07670fea1af3b2c04b7505e9b4525a557434802bdc",
+          "urn:metamap:sssom:assertion:9607f63fa4293e59bb40e3f632ac73e26a113eb1bc18c49080c93d4aab621ee4",
+          "urn:metamap:sssom:assertion:7cc350f1d78151c5fcd2be86423f0d37392181a0a184c0409b56be11ef1fd250",
+          "urn:metamap:sssom:assertion:e843200462a3875cb99387ad8008e6f0a40c565704b1da933ae8aeb42c8f488a"
+        ]
+      },
+      "coverage": "partial",
+      "determinism": "deterministic",
+      "reversibility": "irreversible"
+    },
+    {
+      "mapping": "urn:bindloom:mapping:derived:2cf90ca5a16e488a93e1049341825167bffc0737dc1640a46998e552698a5f40",
+      "coverage": "partial",
+      "determinism": "deterministic",
+      "reversibility": "irreversible",
+      "applicability": {
+        "when": {
+          "key": "executeScientificReversal",
+          "operator": "equals",
+          "value": true
+        }
+      }
+    }
+  ],
+  "constraints": [],
+  "evidence": [],
+  "semantics": {
+    "interpretation": "declared-law-application",
+    "derivations": [
+      {
+        "schemaVersion": "0.1.0",
+        "documentType": "derivation",
+        "id": "urn:bindloom:derivation:0c3ac985769a2c5aec38e34b88ecf0ab751d6ef4527da83bbbefb827326c353b",
+        "digest": "sha256:0c3ac985769a2c5aec38e34b88ecf0ab751d6ef4527da83bbbefb827326c353b",
+        "interpretation": "declared-law-application",
+        "rule": {
+          "id": "urn:metamap:scientific:law:reverse-broad",
+          "pack": {
+            "id": "urn:metamap:relation-pack:scientific-skos",
+            "version": "1.0.0",
+            "digest": "sha256:8696503eec1f31fe66fbb54ddba7835940e52b720be2f5a350ca61fc34c28b9e"
+          },
+          "imports": []
+        },
+        "premises": [
+          {
+            "mapping": "urn:metamap:sssom:assertion:09f3d10e6c0d67924820cf07670fea1af3b2c04b7505e9b4525a557434802bdc",
+            "digest": "sha256:0372b56d59940804fbef419643488102d78a3d2a5d6c030d66f1d22cd47ff2f0"
+          }
+        ],
+        "result": {
+          "id": "urn:bindloom:mapping:derived:2cf90ca5a16e488a93e1049341825167bffc0737dc1640a46998e552698a5f40",
+          "relation": "scientific:narrow-match",
+          "sources": [
+            "http://purl.obolibrary.org/obo/HP_0000104"
+          ],
+          "targets": [
+            "http://purl.obolibrary.org/obo/MP_0000520"
+          ],
+          "cardinality": "one-to-one",
+          "lossiness": "lossy",
+          "provenance": {
+            "status": "inferred",
+            "assertedBy": "urn:metamap:scientific:law:reverse-broad"
+          }
+        },
+        "context": {
+          "executeScientificReversal": false
+        },
+        "contextDigest": "sha256:c1e1ba1a04ecd205755c12d171cc1828ed7e8b452d1ae82c5059aa2011664327",
+        "dependencies": [
+          {
+            "id": "urn:metamap:sssom:assertion:09f3d10e6c0d67924820cf07670fea1af3b2c04b7505e9b4525a557434802bdc",
+            "digest": "sha256:0372b56d59940804fbef419643488102d78a3d2a5d6c030d66f1d22cd47ff2f0"
+          }
+        ],
+        "depth": 1,
+        "derivationCount": 1,
+        "uncertainty": [
+          {
+            "dimension": "identity",
+            "status": "unknown",
+            "evidence": [],
+            "assessments": [],
+            "measurementModels": [],
+            "sourceRevisions": []
+          },
+          {
+            "dimension": "context",
+            "status": "unknown",
+            "evidence": [],
+            "assessments": [],
+            "measurementModels": [],
+            "sourceRevisions": []
+          },
+          {
+            "dimension": "provenance",
+            "status": "unknown",
+            "evidence": [],
+            "assessments": [],
+            "measurementModels": [],
+            "sourceRevisions": []
+          },
+          {
+            "dimension": "completeness",
+            "status": "unknown",
+            "evidence": [],
+            "assessments": [],
+            "measurementModels": [],
+            "sourceRevisions": []
+          },
+          {
+            "dimension": "causal-relevance",
+            "status": "unknown",
+            "evidence": [],
+            "assessments": [],
+            "measurementModels": [],
+            "sourceRevisions": []
+          },
+          {
+            "dimension": "conflicting-authority",
+            "status": "unknown",
+            "evidence": [],
+            "assessments": [],
+            "measurementModels": [],
+            "sourceRevisions": []
+          }
+        ]
+      }
+    ],
+    "derivationLimits": {
+      "maxDepth": 8,
+      "maxDerivations": 32
+    },
+    "assessments": [],
+    "uncertaintyRequirements": [],
+    "riskBudgets": [
+      {
+        "id": "urn:metamap:example:scientific-ordinal-budget",
+        "consumer": "urn:metamap:example:exploratory-scientific-consumer",
+        "classifications": [
+          {
+            "id": "urn:metamap:example:classification:8de1dc3872c9861f89dd33d43811482b4ff54d9dd8a7eaa92fa13e4d4a40c463",
+            "select": {
+              "ids": [
+                "urn:metamap:sssom:assertion:8de1dc3872c9861f89dd33d43811482b4ff54d9dd8a7eaa92fa13e4d4a40c463"
+              ]
+            },
+            "classification": "source-declared-approximation",
+            "cost": 1
+          },
+          {
+            "id": "urn:metamap:example:classification:427a67a58079c8bc28e4c919925123645a1f845eece9e3b453337ef3a73a47d9",
+            "select": {
+              "ids": [
+                "urn:metamap:sssom:assertion:427a67a58079c8bc28e4c919925123645a1f845eece9e3b453337ef3a73a47d9"
+              ]
+            },
+            "classification": "source-declared-approximation",
+            "cost": 2
+          },
+          {
+            "id": "urn:metamap:example:classification:765857762486e7fbfe06ca71b17c94e4d247fceca4ba0b370cd68fe045bfc3a9",
+            "select": {
+              "ids": [
+                "urn:metamap:sssom:assertion:765857762486e7fbfe06ca71b17c94e4d247fceca4ba0b370cd68fe045bfc3a9"
+              ]
+            },
+            "classification": "source-declared-approximation",
+            "cost": 4
+          },
+          {
+            "id": "urn:metamap:example:classification:09f3d10e6c0d67924820cf07670fea1af3b2c04b7505e9b4525a557434802bdc",
+            "select": {
+              "ids": [
+                "urn:metamap:sssom:assertion:09f3d10e6c0d67924820cf07670fea1af3b2c04b7505e9b4525a557434802bdc"
+              ]
+            },
+            "classification": "source-declared-approximation",
+            "cost": 2
+          },
+          {
+            "id": "urn:metamap:example:classification:9607f63fa4293e59bb40e3f632ac73e26a113eb1bc18c49080c93d4aab621ee4",
+            "select": {
+              "ids": [
+                "urn:metamap:sssom:assertion:9607f63fa4293e59bb40e3f632ac73e26a113eb1bc18c49080c93d4aab621ee4"
+              ]
+            },
+            "classification": "source-declared-approximation",
+            "cost": 5
+          },
+          {
+            "id": "urn:metamap:example:classification:7cc350f1d78151c5fcd2be86423f0d37392181a0a184c0409b56be11ef1fd250",
+            "select": {
+              "ids": [
+                "urn:metamap:sssom:assertion:7cc350f1d78151c5fcd2be86423f0d37392181a0a184c0409b56be11ef1fd250"
+              ]
+            },
+            "classification": "source-declared-approximation",
+            "cost": 2
+          },
+          {
+            "id": "urn:metamap:example:classification:e843200462a3875cb99387ad8008e6f0a40c565704b1da933ae8aeb42c8f488a",
+            "select": {
+              "ids": [
+                "urn:metamap:sssom:assertion:e843200462a3875cb99387ad8008e6f0a40c565704b1da933ae8aeb42c8f488a"
+              ]
+            },
+            "classification": "source-declared-approximation",
+            "cost": 2
+          },
+          {
+            "id": "urn:metamap:example:classification:2cf90ca5a16e488a93e1049341825167bffc0737dc1640a46998e552698a5f40",
+            "select": {
+              "ids": [
+                "urn:bindloom:mapping:derived:2cf90ca5a16e488a93e1049341825167bffc0737dc1640a46998e552698a5f40"
+              ]
+            },
+            "classification": "normative-derived-inverse",
+            "cost": 0
+          }
+        ],
+        "maximumTotalCost": 18,
+        "maximumInferredMappings": 0,
+        "maximumLossyMappings": 7,
+        "requireCompleteClassification": true,
+        "requireCompleteDependencies": true
+      }
+    ]
+  }
+}

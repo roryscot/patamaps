@@ -1,0 +1,107 @@
+{
+  "verifiedAtUtc": "2026-10-11T13:36:24.343499+00:00",
+  "status": "passed",
+  "engine": {
+    "compiler": "sha256:f5e64903ab9a076b0e8dcfec37fc643addb43a9a39aaabdaccefd73e827a8057",
+    "documentType": "executor-description",
+    "governance": "sha256:c8a9fd4851cbadeb80fb56e21d29cf3dc34ab8e9852b9657e1ade6517571219e",
+    "schemaVersion": "0.1.0",
+    "scientific": "sha256:e8cb6b75fa01f605ee6661f094e01d7a91656d666aa8661f56bb54d21ccc4d9f",
+    "workspace": "sha256:23f5a269a4e8579e56e1de480e24d5e0acbe824e63f5923b75a93000a13bb4ab"
+  },
+  "hostToolchain": "rustc 1.99.0 (b940084d7 2026-09-28)\nbinary: rustc\ncommit-hash: b940084d7eb6a299eb4bfeb8e34901bc051e7ac4\ncommit-date: 2026-09-28\nhost: aarch64-apple-darwin\nrelease: 1.99.0\nLLVM version: 23.1.1\n",
+  "environment": {
+    "SDKROOT": "/Library/Developer/CommandLineTools/SDKs/MacOSX26.5.sdk",
+    "CARGO_INCREMENTAL": "0",
+    "CARGO_PROFILE_DEV_DEBUG": "0",
+    "CARGO_PROFILE_TEST_DEBUG": "0"
+  },
+  "commands": [
+    {
+      "argv": [
+        "/Users/admin/.cargo/bin/cargo",
+        "fmt",
+        "--all",
+        "--",
+        "--check"
+      ],
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/Users/admin/.cargo/bin/cargo",
+        "build",
+        "--workspace",
+        "--locked",
+        "--offline"
+      ],
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": "    Finished `dev` profile [unoptimized] target(s) in 0.29s\n"
+    },
+    {
+      "argv": [
+        "/Users/admin/.cargo/bin/cargo",
+        "clippy",
+        "--workspace",
+        "--all-targets",
+        "--locked",
+        "--offline",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": "    Checking patamaps-workspace v0.1.0 (/Users/admin/dev/patamaps/patamaps/crates/patamaps-workspace)\n    Finished `dev` profile [unoptimized] target(s) in 1.10s\n"
+    },
+    {
+      "argv": [
+        "/Users/admin/.cargo/bin/cargo",
+        "test",
+        "--workspace",
+        "--locked",
+        "--offline"
+      ],
+      "exitCode": 0,
+      "stdout": "\nrunning 0 tests\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n\n\nrunning 0 tests\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n\n\nrunning 3 tests\ntest unsupported_host_refuses_without_touching_a_path ... ok\ntest transport_never_accepts_host_options_or_ambiguous_json ... ok\ntest complete_lifecycle_pure_stages_check_proof_unknown_policy_and_unique_budget ... ok\n\ntest result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.12s\n\n\nrunning 0 tests\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n\n\nrunning 0 tests\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n\n\nrunning 7 tests\ntest interoperable_integer_bounds_and_overflow_are_explicit ... ok\ntest nullable_budget_is_an_explicit_choice_and_absence_is_not_null ... ok\ntest malformed_or_duplicate_json_never_reaches_typed_values ... ok\ntest normative_binary64_numbers_and_hash_bytes ... ok\ntest normative_unicode_order_and_no_normalization ... ok\ntest draft_wire_is_closed_and_absent_differs_from_null ... ok\ntest parser_bounds_are_enforced_before_unlimited_recursion ... ok\n\ntest result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n\n\nrunning 0 tests\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n\n\nrunning 8 tests\ntest law_context_and_declared_kind_conditions_are_checked ... ok\ntest forbidden_close_chain_inconsistent_kinds_and_exact_import_drift_reject ... ok\ntest unknown_law_missing_premise_wrong_roles_and_nary_stay_distinct ... ok\ntest declared_law_limits_are_incomplete_and_loss_is_conservative ... ok\ntest disjointness_applies_to_active_facts_and_cannot_be_waived ... ok\ntest explicit_chain_proposes_without_mutating_or_transferring_authority ... ok\ntest missing_proof_changed_premise_context_or_forged_readdressed_content_refuse ... ok\ntest inactive_partial_nondeterministic_irreversible_premises_cannot_be_upgraded ... ok\n\ntest result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.03s\n\n\nrunning 15 tests\ntest nary_cycle_detection_does_not_reduce_endpoint_groups_to_one_pair ... ok\ntest impact_preserves_origin_paths_and_reports_missing_information ... ok\ntest policy_coverage_unknown_operations_and_stale_graph_cannot_be_waived ... ok\ntest canonical_conflict_candidate_ambiguity_and_delegation_cycle_are_distinct ... ok\ntest numeric_context_agrees_between_strict_ingress_and_typed_sdk_values ... ok\ntest narrowing_delegation_resolves_but_widening_or_branch_conflict_fails ... ok\ntest composition_deduplicates_equal_records_and_refuses_conflict ... ok\ntest applicability_requires_context_and_preserves_inactive_mapping ... ok\ntest duplicate_selector_values_and_deep_policy_metadata_refuse_admission ... ok\ntest routing_is_usefully_admitted_with_fact_scoped_authority ... ok\ntest sdk_numeric_metadata_is_normalized_to_the_declared_binary64_domain ... ok\ntest sdk_metadata_cannot_bypass_ingress_resource_limits ... ok\ntest open_kind_names_and_shared_physical_locators_do_not_merge_identities ... ok\ntest unknown_evidence_does_not_meet_support_and_waivers_expire_at_boundary ... ok\ntest duplicate_identity_dangling_endpoint_and_wrong_role_are_rejected ... ok\n\ntest result: ok. 15 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.03s\n\n\nrunning 6 tests\ntest original_application_fixture_satisfies_totality_reachability_hydration_and_context ... ok\ntest removing_semantic_binding_provider_hydration_or_containment_refuses ... ok\ntest exclusions_require_exact_relation_permission_visible_owner_reason_and_no_binding ... ok\ntest closest_provider_shadows_ancestor_but_two_providers_at_one_depth_refuse ... ok\ntest empty_selection_parameter_types_counterpart_kinds_and_unique_cardinality_refuse ... ok\ntest aggregate_topology_work_exhaustion_cannot_become_an_admitted_generation ... ok\n\ntest result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.22s\n\n\nrunning 6 tests\ntest stale_scope_missing_evidence_and_unreasoned_not_applicable_refuse ... ok\ntest shared_evidence_is_deduplicated_and_full_values_bind_the_proof ... ok\ntest incompatible_models_and_not_applicable_contributors_cannot_be_hidden ... ok\ntest tolerant_and_strict_requirements_differ_and_direct_support_cannot_erase_unknown ... ok\ntest typed_contradiction_and_inconclusive_evidence_remain_visible ... ok\ntest six_dimensions_propagate_independently_without_scalar_confidence_upgrades ... ok\n\ntest result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.06s\n\n\nrunning 0 tests\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n\n\nrunning 12 tests\ntest published_crypto_vector_and_strict_crypto_refusals ... ok\ntest trust_duplicates_shared_identity_and_unknown_principals_refuse ... ok\ntest refusal_missing_sources_and_untrusted_recursive_results_never_mint_proposals ... ok\ntest signed_ingress_is_closed_and_explicit_nullable_baseline_is_required ... ok\ntest viable_agent_proposal_remains_unapproved_and_exact_owner_verifies ... ok\ntest multiple_selected_projections_are_complete_and_inconsistent_inputs_refuse ... ok\ntest correctly_signed_wrong_content_and_foreign_identity_cannot_authorize ... ok\ntest intervals_use_current_time_and_full_signed_interval_with_exclusive_expiry ... ok\ntest exact_complete_file_inventory_and_recomputed_delta_cannot_be_forged ... ok\ntest revocation_stale_trust_environment_and_separately_supplied_base_refuse ... ok\ntest ordinary_rebind_needs_explicit_joint_action_and_fact_scope ... ok\ntest policy_authority_pack_waiver_budget_and_rollback_edits_require_owner ... ok\n\ntest result: ok. 12 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.41s\n\n\nrunning 0 tests\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n\n\nrunning 7 tests\ntest hot_graph_work_and_recursive_result_data_cannot_bypass_controls ... ok\ntest captured_explanation_preserves_rejection_ambiguity_missing_sources_and_safe_html ... ok\ntest protected_facts_and_exact_record_expectations_block_edits ... ok\ntest finite_space_compiles_ranks_and_requires_approval_without_source_mutation ... ok\ntest restore_and_supply_can_be_jointly_useful_but_never_replace_policy_or_invent_proofs ... ok\ntest exact_duplicate_removal_and_unchanged_keeper_are_enforced ... ok\ntest partial_budgets_cancellation_and_overflow_never_claim_minimality ... ok\n\ntest result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.16s\n\n\nrunning 0 tests\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n\n\nrunning 7 tests\ntest paths_are_authored_and_provenance_stays_in_the_captured_graph_contract ... ok\ntest excessive_path_depth_refuses_before_recursive_tree_construction ... ok\ntest alternate_delimiters_and_prototype_like_child_keys_are_plain_data ... ok\ntest hydration_changes_only_paths_keeps_template_keys_occupants_and_requires_parameters ... ok\ntest substituted_parameter_text_is_literal_and_not_reinterpreted_as_another_token ... ok\ntest path_collisions_missing_attributes_reserved_keys_and_stale_specs_refuse ... ok\ntest semantic_tree_capture_success_and_refusal_replay_through_the_same_evaluator ... ok\n\ntest result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.06s\n\n\nrunning 3 tests\ntest strings_and_prototype_like_metadata_remain_data ... ok\ntest cardinality_kind_loss_and_native_locator_failures_are_visible ... ok\ntest repeated_target_metadata_is_bounded_before_cloning_unlimited_output ... ok\n\ntest result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.08s\n\n\nrunning 5 tests\ntest reordered_records_have_no_stable_identity_delta ... ok\ntest tampering_executor_substitution_and_forged_result_fail ... ok\ntest a_receipt_does_not_claim_that_source_bytes_are_available ... ok\ntest changed_raw_sources_are_reported_without_inventing_an_extraction ... ok\ntest success_and_structural_rejection_replay_offline ... ok\n\ntest result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.10s\n\n\nrunning 7 tests\ntest unique_lossy_and_inferred_limits_include_the_premise_closure ... ok\ntest incomplete_opt_out_is_refused_and_unused_sources_are_not_charged ... ok\ntest missing_overlapping_and_overflowing_classifications_refuse ... ok\ntest a_consumer_cannot_disable_choose_another_budget_or_hide_unknown_cost ... ok\ntest exact_unique_budget_boundaries_and_repeated_slots_cost_once ... ok\ntest branching_proofs_reuse_a_shared_proof_and_mapping_closure_once ... ok\ntest semantic_success_rejection_and_risk_delta_replay_offline ... ok\n\ntest result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.15s\n\n\nrunning 0 tests\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n\n\nrunning 3 tests\ntest newly_replayed_source_substitution_and_missing_payloads_refuse ... ok\ntest crate_replays_exact_inventory_and_native_bindings_without_elevating_truth ... ok\ntest complete_inventory_and_receipt_tampering_refuse ... ok\n\ntest result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 1.80s\n\n\nrunning 5 tests\ntest strict_yaml_duplicates_aliases_tags_directives_and_wire_bounds_refuse ... ok\ntest unknown_prefix_builtin_collision_unsupported_assertions_and_lexical_numbers_refuse ... ok\ntest default_and_explicit_condensed_exports_preserve_effective_fields ... ok\ntest licensed_source_keeps_seven_assertions_unknown_loss_and_full_metadata ... ok\ntest quoting_scalar_extensions_explicit_identity_and_unknown_predicate_are_preserved ... ok\n\ntest result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.08s\n\n\nrunning 2 tests\ntest process_tests::exact_response_rejects_forged_request_duplicate_json_and_error_diagnostic ... ok\ntest process_tests::exit_timeout_pipe_overflow_and_inherited_pipe_holders_are_bounded ... ok\n\ntest result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.08s\n\n\nrunning 4 tests\ntest source_symlink_escape_and_absolute_locator_paths_refuse ... ok\ntest malformed_config_shards_duplicate_outputs_and_rejected_capture_remain_explicit ... ok\ntest drift_check_preserves_baseline_and_captures_actual_changed_source ... ok\ntest current_bytes_cache_equivalence_and_untrusted_cache_refusal ... ok\n\ntest result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.19s\n\n\nrunning 1 test\ntest crates/patamaps-activator/src/transaction.rs - transaction::ProtectedState (line 19) - compile fail ... ok\n\ntest result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.07s\n\n\nrunning 0 tests\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n\n\nrunning 4 tests\ntest crates/patamaps-core/src/admission.rs - admission::AdmittedGeneration (line 51) - compile fail ... ok\ntest crates/patamaps-core/src/graph.rs - graph::CheckedGraph (line 223) - compile fail ... ok\ntest crates/patamaps-core/src/derivation.rs - derivation::CheckedDerivations (line 71) - compile fail ... ok\ntest crates/patamaps-core/src/graph.rs - graph::CheckedGraph (line 218) - compile fail ... ok\n\ntest result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.07s\n\n\nrunning 3 tests\ntest crates/patamaps-governance/src/lib.rs - CheckedArtifacts (line 25) - compile fail ... ok\ntest crates/patamaps-governance/src/proposal.rs - proposal::CheckedProposal (line 19) - compile fail ... ok\ntest crates/patamaps-governance/src/approval.rs - approval::AuthorizedChange (line 118) - compile fail ... ok\n\ntest result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.07s\n\n\nrunning 1 test\ntest crates/patamaps-inspect/src/explanation.rs - explanation::CheckedExplanation (line 22) - compile fail ... ok\n\ntest result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.05s\n\n\nrunning 2 tests\ntest crates/patamaps-projection/src/path_tree.rs - path_tree::CheckedPathTree (line 43) - compile fail ... ok\ntest crates/patamaps-projection/src/lib.rs - CheckedProjection (line 54) - compile fail ... ok\n\ntest result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.05s\n\n\nrunning 2 tests\ntest crates/patamaps-scientific/src/crate_export.rs - crate_export::CheckedScientificCrate (line 50) - compile fail ... ok\ntest crates/patamaps-scientific/src/model.rs - model::CheckedSssom (line 70) - compile fail ... ok\n\ntest result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.12s\n\n\nrunning 0 tests\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n\n",
+      "stderr": "   Compiling patamaps-workspace v0.1.0 (/Users/admin/dev/patamaps/patamaps/crates/patamaps-workspace)\n    Finished `test` profile [unoptimized] target(s) in 1.25s\n     Running unittests src/lib.rs (target/debug/deps/patamaps_activator-ffc570a8007acbd1)\n     Running unittests src/main.rs (target/debug/deps/patamaps_activator-c19fb63d936c2e4a)\n     Running tests/transport.rs (target/debug/deps/transport-0c24c197dfcdbfe4)\n     Running unittests src/main.rs (target/debug/deps/patamaps-2c7afc4b65789295)\n     Running unittests src/lib.rs (target/debug/deps/patamaps_contracts-e74bdb1da585ba59)\n     Running tests/canonical.rs (target/debug/deps/canonical-66f186c0d1540ea3)\n     Running unittests src/lib.rs (target/debug/deps/patamaps_core-99fbcc823a195113)\n     Running tests/derivation.rs (target/debug/deps/derivation-4134b537e2037650)\n     Running tests/kernel.rs (target/debug/deps/kernel-a35cca88ae2be9ea)\n     Running tests/topology.rs (target/debug/deps/topology-d3ebf467f710d760)\n     Running tests/uncertainty.rs (target/debug/deps/uncertainty-c5213b9d9b598246)\n     Running unittests src/lib.rs (target/debug/deps/patamaps_governance-9b2f0b095abfd321)\n     Running tests/governance.rs (target/debug/deps/governance-2c223baedee82559)\n     Running unittests src/lib.rs (target/debug/deps/patamaps_inspect-245a3614afa28bb3)\n     Running tests/inspection.rs (target/debug/deps/inspection-622a7500a22f1764)\n     Running unittests src/lib.rs (target/debug/deps/patamaps_projection-3d18d90864fce2cc)\n     Running tests/path_tree.rs (target/debug/deps/path_tree-51009ce1cdd82ede)\n     Running tests/projection.rs (target/debug/deps/projection-8d162be57a26e046)\n     Running tests/replay.rs (target/debug/deps/replay-704ec9bdedeeb4c0)\n     Running tests/risk.rs (target/debug/deps/risk-1a4fe958ba4696eb)\n     Running unittests src/lib.rs (target/debug/deps/patamaps_scientific-14f042f468884c8e)\n     Running tests/crate.rs (target/debug/deps/crate-ccd73359086c947f)\n     Running tests/sssom.rs (target/debug/deps/sssom-26a485d36343aa94)\n     Running unittests src/lib.rs (target/debug/deps/patamaps_workspace-634623f80c14c598)\n     Running tests/workspace.rs (target/debug/deps/workspace-21101ce1943ff9a8)\n   Doc-tests patamaps_activator\n   Doc-tests patamaps_contracts\n   Doc-tests patamaps_core\n   Doc-tests patamaps_governance\n   Doc-tests patamaps_inspect\n   Doc-tests patamaps_projection\n   Doc-tests patamaps_scientific\n   Doc-tests patamaps_workspace\n"
+    },
+    {
+      "argv": [
+        "/Users/admin/.cargo/bin/cargo",
+        "build",
+        "--release",
+        "--workspace",
+        "--locked",
+        "--offline"
+      ],
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": "   Compiling patamaps-contracts v0.1.0 (/Users/admin/dev/patamaps/patamaps/crates/patamaps-contracts)\n   Compiling patamaps-core v0.1.0 (/Users/admin/dev/patamaps/patamaps/crates/patamaps-core)\n   Compiling patamaps-projection v0.1.0 (/Users/admin/dev/patamaps/patamaps/crates/patamaps-projection)\n   Compiling patamaps-governance v0.1.0 (/Users/admin/dev/patamaps/patamaps/crates/patamaps-governance)\n   Compiling patamaps-workspace v0.1.0 (/Users/admin/dev/patamaps/patamaps/crates/patamaps-workspace)\n   Compiling patamaps-scientific v0.1.0 (/Users/admin/dev/patamaps/patamaps/crates/patamaps-scientific)\n   Compiling patamaps-activator v0.1.0 (/Users/admin/dev/patamaps/patamaps/crates/patamaps-activator)\n   Compiling patamaps-inspect v0.1.0 (/Users/admin/dev/patamaps/patamaps/crates/patamaps-inspect)\n   Compiling patamaps-cli v0.1.0 (/Users/admin/dev/patamaps/patamaps/crates/patamaps-cli)\n    Finished `release` profile [optimized] target(s) in 1m 37s\n"
+    }
+  ],
+  "nativeTests": {
+    "passed": 100,
+    "compileFailDocumentationPassed": 13
+  },
+  "linuxLifecycleTestUpdate": {
+    "execution": "Not executed on macOS; Linux separately verifies runtime",
+    "sources": [
+      {
+        "path": "crates/patamaps-activator/src/linux_tests.rs",
+        "digest": "sha256:43ccefd80aafa411d525d95aced2d9d708053f540ac335199a81bf8a0a0c46ed"
+      },
+      {
+        "path": "crates/patamaps-activator/tests/support/lifecycle.rs",
+        "digest": "sha256:83b1b37208191b466c3cb74ef108946972ea34fa3521b71103f1df57e2ddd493"
+      },
+      {
+        "path": "scripts/test_linux.sh",
+        "digest": "sha256:b66ff02cdc4b6660ba6bdfc4a1f66e86635e321987378b7f2e7f38139fd28d32"
+      }
+    ]
+  }
+}

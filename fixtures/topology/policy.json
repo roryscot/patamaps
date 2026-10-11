@@ -1,0 +1,102 @@
+{
+  "schemaVersion": "0.1.0",
+  "id": "urn:test:policy:application-topology",
+  "graph": {
+    "id": "urn:test:graph:application-topology",
+    "revision": "1"
+  },
+  "mappings": [
+    {
+      "select": {
+        "provenanceStatuses": [
+          "observed",
+          "declared"
+        ]
+      },
+      "coverage": "total",
+      "determinism": "deterministic",
+      "reversibility": "irreversible"
+    }
+  ],
+  "constraints": [
+    {
+      "id": "urn:test:constraint:page-coverage",
+      "kind": "topology:relation-totality",
+      "subjects": [
+        "urn:test:graph:application-topology"
+      ],
+      "parameters": {
+        "subjectKinds": [
+          "topology:page"
+        ],
+        "relation": "topology:implemented_by",
+        "direction": "target",
+        "cardinality": "exactly-one",
+        "counterpartKinds": [
+          "routing:route"
+        ],
+        "allowExcluded": true
+      }
+    },
+    {
+      "id": "urn:test:constraint:client-hydration",
+      "kind": "topology:relation-totality",
+      "subjects": [
+        "urn:test:graph:application-topology"
+      ],
+      "parameters": {
+        "subjectKinds": [
+          "topology:page"
+        ],
+        "subjectAttributes": {
+          "runtime": "client"
+        },
+        "relation": "topology:hydrates",
+        "direction": "target",
+        "cardinality": "exactly-one",
+        "counterpartKinds": [
+          "topology:hydration-boundary"
+        ]
+      }
+    },
+    {
+      "id": "urn:test:constraint:observed-reachability",
+      "kind": "topology:reachable",
+      "subjects": [
+        "urn:test:graph:application-topology"
+      ],
+      "parameters": {
+        "root": "urn:test:app",
+        "relation": "topology:contains",
+        "subjectKinds": [
+          "topology:segment",
+          "topology:container",
+          "topology:page",
+          "topology:hydration-boundary"
+        ]
+      }
+    },
+    {
+      "id": "urn:test:constraint:context",
+      "kind": "topology:context-satisfied",
+      "subjects": [
+        "urn:test:graph:application-topology"
+      ],
+      "parameters": {
+        "subjectKinds": [
+          "routing:route"
+        ],
+        "subjectAttributes": {
+          "topologySurface": "semantic-page"
+        },
+        "requiresRelation": "topology:requires_context",
+        "providesRelation": "topology:provides_context",
+        "renderedInRelation": "topology:rendered_in",
+        "parentRelation": "topology:wraps",
+        "hostsProviderRelation": "topology:hosts_provider"
+      }
+    }
+  ],
+  "evidence": [],
+  "documentType": "policy"
+}

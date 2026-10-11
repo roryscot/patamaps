@@ -1,0 +1,126 @@
+{
+  "verifiedAtUtc": "2026-10-11T02:49:02.649182+00:00",
+  "engine": {
+    "compiler": "sha256:07f74356f72db6236458375321a18f36240642e695f5e1fbc1a37b9c74fe775f",
+    "documentType": "executor-description",
+    "governance": "sha256:c486ea479e3d0371bec3f5a6fa7f0350b304610280f3ee2253e71539892b031a",
+    "schemaVersion": "0.1.0",
+    "scientific": "sha256:78032b00a319c0fa6d3df5f6c303409643922f330df6bcf2f01bcf15c4ed66ad",
+    "workspace": "sha256:2f2f535c8086b66daec416d4577a78e1acd5797874ddcad7007d28c6dc842403"
+  },
+  "hostToolchain": "rustc 1.99.0 (b940084d7 2026-09-28)\nbinary: rustc\ncommit-hash: b940084d7eb6a299eb4bfeb8e34901bc051e7ac4\ncommit-date: 2026-09-28\nhost: aarch64-apple-darwin\nrelease: 1.99.0\nLLVM version: 23.1.1\n",
+  "environment": {
+    "SDKROOT": "/Library/Developer/CommandLineTools/SDKs/MacOSX26.5.sdk",
+    "CARGO_INCREMENTAL": "0",
+    "CARGO_PROFILE_DEV_DEBUG": "0",
+    "CARGO_PROFILE_TEST_DEBUG": "0"
+  },
+  "commands": [
+    {
+      "argv": [
+        "/Users/admin/.cargo/bin/cargo",
+        "fmt",
+        "--all",
+        "--",
+        "--check"
+      ],
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/Users/admin/.cargo/bin/cargo",
+        "clippy",
+        "--workspace",
+        "--all-targets",
+        "--locked",
+        "--offline",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": "    Finished `dev` profile [unoptimized] target(s) in 0.38s\n"
+    },
+    {
+      "argv": [
+        "/Users/admin/.cargo/bin/cargo",
+        "clippy",
+        "--workspace",
+        "--all-targets",
+        "--locked",
+        "--offline",
+        "--target",
+        "aarch64-unknown-linux-gnu",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": "    Finished `dev` profile [unoptimized] target(s) in 0.12s\n"
+    },
+    {
+      "argv": [
+        "/Users/admin/.cargo/bin/cargo",
+        "build",
+        "--release",
+        "--workspace",
+        "--locked",
+        "--offline"
+      ],
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": "    Finished `release` profile [optimized] target(s) in 0.17s\n"
+    },
+    {
+      "argv": [
+        "python3",
+        "scripts/test_canonical.py",
+        "--cli",
+        "/Users/admin/dev/patamaps/patamaps/target/release/bindloom",
+        "--node",
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node"
+      ],
+      "exitCode": 0,
+      "stdout": "PASS: 4104 deterministic binary64 and integer boundary inputs match independent ECMAScript JSON bytes (seed 8785).\n",
+      "stderr": ""
+    }
+  ],
+  "nativeTests": {
+    "command": "cargo test --workspace --locked --offline",
+    "passed": 99,
+    "compileFailDocumentationPassed": 13,
+    "log": "docs/acceptance/native-final-cargo-test.log",
+    "execution": "Previously completed at this same source identity; raw output retained, not rerun for this receipt"
+  },
+  "linuxRuntime": "not-executed",
+  "status": "passed",
+  "linuxLifecycleTestUpdate": {
+    "scope": "Composed independent shards, complete capture receipts and explicit cost-one risk budget in the native consumer/approved move/fresh rollback test, plus cost-zero-budget refusal",
+    "verifiedAtUtc": "2026-10-11T02:54:44.187634+00:00",
+    "argv": [
+      "/Users/admin/.cargo/bin/cargo",
+      "clippy",
+      "--workspace",
+      "--all-targets",
+      "--locked",
+      "--offline",
+      "--target",
+      "aarch64-unknown-linux-gnu",
+      "--",
+      "-D",
+      "warnings"
+    ],
+    "exitCode": 0,
+    "stdout": "",
+    "stderr": "    Checking bindloom-activator v0.1.0 (/Users/admin/dev/patamaps/patamaps/crates/bindloom-activator)\n    Finished `dev` profile [unoptimized] target(s) in 1.33s\n",
+    "execution": "Cross-target compile/type check only; no Linux runtime acceptance",
+    "source": {
+      "path": "crates/bindloom-activator/src/linux_tests.rs",
+      "digest": "sha256:68022ddd585fd63bee9aa65c6b6455a5827ebe9b79e316e0b43098d0d1c8a7c0"
+    }
+  }
+}

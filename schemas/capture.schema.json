@@ -1,0 +1,119 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:patamaps:draft:1:schema:capture",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": {
+      "const": "0.1.0"
+    },
+    "documentType": {
+      "const": "capture"
+    },
+    "profile": {
+      "enum": [
+        "patamaps-routing-draft-1",
+        "patamaps-semantic-draft-1"
+      ]
+    },
+    "executor": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[A-Za-z][A-Za-z0-9+.-]*:\\S+$"
+    },
+    "digest": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    },
+    "inputs": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "graph": {
+          "type": "object"
+        },
+        "packs": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          },
+          "minItems": 0,
+          "maxItems": 64
+        },
+        "policy": {
+          "type": "object"
+        },
+        "context": {
+          "type": "object"
+        },
+        "evaluatedAt": {
+          "type": "string"
+        },
+        "projectionSpec": {
+          "$ref": "urn:patamaps:draft:1:schema:projection-spec"
+        }
+      },
+      "required": [
+        "graph",
+        "packs",
+        "policy",
+        "context",
+        "evaluatedAt"
+      ]
+    },
+    "sources": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9+.-]*:\\S+$"
+          },
+          "locator": {
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9+.-]*:\\S+$"
+          },
+          "digest": {
+            "type": "string",
+            "pattern": "^sha256:[a-f0-9]{64}$"
+          },
+          "byteLength": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 9007199254740991
+          },
+          "content": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "locator",
+          "digest",
+          "byteLength"
+        ]
+      },
+      "minItems": 0,
+      "maxItems": 1024
+    },
+    "result": {
+      "type": "object"
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "documentType",
+    "profile",
+    "executor",
+    "id",
+    "digest",
+    "inputs",
+    "sources",
+    "result"
+  ]
+}

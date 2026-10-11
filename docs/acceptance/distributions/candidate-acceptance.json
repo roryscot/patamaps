@@ -1,0 +1,941 @@
+{
+  "verifiedAtUtc": "2026-10-11T04:34:19.240673+00:00",
+  "status": "passed",
+  "sourceInventoryEntries": 394,
+  "sourceInventoryDigest": "sha256:389b51d08417f14cc4e11eda77754512e1a90cb1cf7b4eaf247359bc1566f2cf",
+  "macos": {
+    "schemaVersion": "0.1.0",
+    "status": "unpublished-draft",
+    "target": "aarch64-apple-darwin",
+    "toolchain": "rustc 1.99.0 (b940084d7 2026-09-28)\nbinary: rustc\ncommit-hash: b940084d7eb6a299eb4bfeb8e34901bc051e7ac4\ncommit-date: 2026-09-28\nhost: aarch64-apple-darwin\nrelease: 1.99.0\nLLVM version: 23.1.1\n",
+    "engines": {
+      "compiler": "sha256:07f74356f72db6236458375321a18f36240642e695f5e1fbc1a37b9c74fe775f",
+      "documentType": "executor-description",
+      "governance": "sha256:c486ea479e3d0371bec3f5a6fa7f0350b304610280f3ee2253e71539892b031a",
+      "schemaVersion": "0.1.0",
+      "scientific": "sha256:78032b00a319c0fa6d3df5f6c303409643922f330df6bcf2f01bcf15c4ed66ad",
+      "workspace": "sha256:2f2f535c8086b66daec416d4577a78e1acd5797874ddcad7007d28c6dc842403"
+    },
+    "binaryDigest": "sha256:a567763f20e81cdfccbec0dc3ff4082d930440564d250d14081094759258f6d7",
+    "buildProfile": "release",
+    "buildProvenance": "Caller-declared profile; hashing and source identity do not attest a reproducible or authorized binary",
+    "sourceInventoryDigest": "sha256:389b51d08417f14cc4e11eda77754512e1a90cb1cf7b4eaf247359bc1566f2cf",
+    "protectedActivationAcceptance": "recorded-separately",
+    "sourceArchive": {
+      "path": "bindloom-draft-07f74356f72d-source.tar.gz",
+      "digest": "sha256:c80be133741e563ddfed3b395bf1df045bf4f67d84062f3dc520c297c8724f50"
+    },
+    "nativeArchive": {
+      "path": "bindloom-draft-07f74356f72d-aarch64-apple-darwin.tar.gz",
+      "digest": "sha256:5ca99f31fcc1355552bd0731f9bd23b6c17e0e15e21e6b4f38e886292ecb79a1"
+    }
+  },
+  "linux": {
+    "schemaVersion": "0.1.0",
+    "status": "unpublished-draft",
+    "target": "aarch64-unknown-linux-gnu",
+    "toolchain": "rustc 1.99.0 (b940084d7 2026-09-28)\nbinary: rustc\ncommit-hash: b940084d7eb6a299eb4bfeb8e34901bc051e7ac4\ncommit-date: 2026-09-28\nhost: aarch64-unknown-linux-gnu\nrelease: 1.99.0\nLLVM version: 23.1.1\n",
+    "engines": {
+      "compiler": "sha256:07f74356f72db6236458375321a18f36240642e695f5e1fbc1a37b9c74fe775f",
+      "documentType": "executor-description",
+      "governance": "sha256:c486ea479e3d0371bec3f5a6fa7f0350b304610280f3ee2253e71539892b031a",
+      "schemaVersion": "0.1.0",
+      "scientific": "sha256:78032b00a319c0fa6d3df5f6c303409643922f330df6bcf2f01bcf15c4ed66ad",
+      "workspace": "sha256:2f2f535c8086b66daec416d4577a78e1acd5797874ddcad7007d28c6dc842403"
+    },
+    "binaryDigest": "sha256:6eaf69bed1946eac03f64e2ab1cc484d81b62e4730a7cc5b8218693e5a8b3b65",
+    "buildProfile": "release",
+    "buildProvenance": "Caller-declared profile; hashing and source identity do not attest a reproducible or authorized binary",
+    "sourceInventoryDigest": "sha256:389b51d08417f14cc4e11eda77754512e1a90cb1cf7b4eaf247359bc1566f2cf",
+    "protectedActivationAcceptance": "recorded-separately",
+    "activatorBinaryDigest": "sha256:60366a7adb512815c6591d531856a7d739cbc436b393920a97a96a6718f47637",
+    "activatorInstallation": "Owner installation/trust bootstrap required; package does not install or activate",
+    "sourceArchive": {
+      "path": "bindloom-draft-07f74356f72d-source.tar.gz",
+      "digest": "sha256:374957092a55ae6b99780b3a9ca60642a0d6bc0bf1507eca9952891edf4b98db"
+    },
+    "nativeArchive": {
+      "path": "bindloom-draft-07f74356f72d-aarch64-unknown-linux-gnu.tar.gz",
+      "digest": "sha256:96f7c99a8effca9e0c5b0d98f87d228ce7e5d275a2368f46432f625d253210a7"
+    }
+  },
+  "nativeAcceptance": {
+    "macosTests": 100,
+    "linuxTests": 110,
+    "compileFailTestsPerPlatform": 13,
+    "linuxReleaseHostFunctions": 10,
+    "toolchain": "1.99.0",
+    "features": "default"
+  },
+  "testedSourceArchive": {
+    "path": "bindloom-draft-07f74356f72d-source.tar.gz",
+    "digest": "sha256:1f48205fe26af59411eaf8738acb9c9abf717e1d1ef8bd9cc57feae5a98b3272"
+  },
+  "unchangedTestedInputs": [
+    {
+      "path": "Cargo.lock",
+      "digest": "sha256:0824fb71669119f164aea142a965558ca3362a93e5576473fd4b501ad5c5fc54"
+    },
+    {
+      "path": "Cargo.toml",
+      "digest": "sha256:2ce591a4db724c1871d4145413c8128f15b98a2ce0cbf7ad67e09bb8dbfbde4e"
+    },
+    {
+      "path": "crates/bindloom-activator/Cargo.toml",
+      "digest": "sha256:70775ba77cee16b1a9b7b887e8e342c31d38c53dcf98242e64da909699b2e301"
+    },
+    {
+      "path": "crates/bindloom-activator/src/error.rs",
+      "digest": "sha256:cd1333f6c09ea0afddd4815ca21673c6728f62f33c01909038e83bdbb58104cd"
+    },
+    {
+      "path": "crates/bindloom-activator/src/lib.rs",
+      "digest": "sha256:5dadef2957c734d2bc6521ec18a053dc52ea13348d2f61d7f3475c0efd77563a"
+    },
+    {
+      "path": "crates/bindloom-activator/src/linux_tests.rs",
+      "digest": "sha256:a0d9ef9dc511eb9a905e5a6fe321117b8da749e18dc280faae7e4abde4d7e62c"
+    },
+    {
+      "path": "crates/bindloom-activator/src/main.rs",
+      "digest": "sha256:7fff84a9af3521ba5cdbdabef9c575efc192decc3051cd64a0fdccd708e655cd"
+    },
+    {
+      "path": "crates/bindloom-activator/src/model.rs",
+      "digest": "sha256:134df77e874cc77be18c345bd982d42ddb3e32020c09ead68c89ef94aa361d3f"
+    },
+    {
+      "path": "crates/bindloom-activator/src/storage.rs",
+      "digest": "sha256:8d5339efc03135cb36717a93dae23f5db5af3179278363975d505c87974f9345"
+    },
+    {
+      "path": "crates/bindloom-activator/src/transaction.rs",
+      "digest": "sha256:e9632092e394978c7bb4217658638206834b9384ac4df8d40088b0ba90fe9fe2"
+    },
+    {
+      "path": "crates/bindloom-activator/tests/support/lifecycle.rs",
+      "digest": "sha256:e4dcd93e2971f13375216e1b253e2e9643786bbef311f5cee8700c943e7d88cf"
+    },
+    {
+      "path": "crates/bindloom-activator/tests/transport.rs",
+      "digest": "sha256:eeb23f931b0a3cd0e5538d29e853c39ef0e812c95114defc7e108ea1665e8b11"
+    },
+    {
+      "path": "crates/bindloom-cli/Cargo.toml",
+      "digest": "sha256:65537e3607866cb382dfffa495e28ed9ec48747be8557b660b2b01e305310ba2"
+    },
+    {
+      "path": "crates/bindloom-cli/src/main.rs",
+      "digest": "sha256:66deee741c910d2ac158abee76ff83bc14f3e046c3f00838b272c84661d2c736"
+    },
+    {
+      "path": "crates/bindloom-contracts/Cargo.toml",
+      "digest": "sha256:242e07690af5bc18ca10d40d99f1ba024404f649d3dfe2c17bd9689efc1a53c0"
+    },
+    {
+      "path": "crates/bindloom-contracts/src/integer.rs",
+      "digest": "sha256:d51688dbe80f38596cd7eec079f7fab7b41c03a24e8daaebde8c3a2a8e293697"
+    },
+    {
+      "path": "crates/bindloom-contracts/src/json.rs",
+      "digest": "sha256:faea9d54b2fd6c577227b24d1d7688bac4eea03ce139de0db12da25a0ced05a5"
+    },
+    {
+      "path": "crates/bindloom-contracts/src/lib.rs",
+      "digest": "sha256:179b78921424f4c83bf116fdf034be4fdfe06eefee8c6177259d4b2fb2648f6e"
+    },
+    {
+      "path": "crates/bindloom-contracts/src/model.rs",
+      "digest": "sha256:9733e006e13996a4550d5a3bd6c40e7bdf9b4972e97f29bfcb269c268f9b51aa"
+    },
+    {
+      "path": "crates/bindloom-contracts/src/semantic.rs",
+      "digest": "sha256:c4f2b330ed551fe1853764717ab274f5296d20ca259f0a2c094c19440664b308"
+    },
+    {
+      "path": "crates/bindloom-contracts/tests/canonical.rs",
+      "digest": "sha256:e2ecc2ee717b1a78c64086c66b4976a59f10b11895b66a7228e7969ddba54b12"
+    },
+    {
+      "path": "crates/bindloom-core/Cargo.toml",
+      "digest": "sha256:50cb50343fb35ceda1e9b50e15733a586e43cf5e37ddfd45c726f1da1bf397bb"
+    },
+    {
+      "path": "crates/bindloom-core/src/admission.rs",
+      "digest": "sha256:830f9aab3910e4015b59aefbc6b232593f612e6b1e0814373beb5704d6b55ab8"
+    },
+    {
+      "path": "crates/bindloom-core/src/control.rs",
+      "digest": "sha256:848df878b55da78bab7edf2a7866c25d60027d9f5787e101256e4c9b576722e5"
+    },
+    {
+      "path": "crates/bindloom-core/src/derivation.rs",
+      "digest": "sha256:e5e73ca8387518effce4123bf6cc5f266c95ddbf94de5f4421cad1050ba5f1fa"
+    },
+    {
+      "path": "crates/bindloom-core/src/diff.rs",
+      "digest": "sha256:7621b0474f92327101cadd921e4287935b3e0e272be2a7cb94657039c25f4013"
+    },
+    {
+      "path": "crates/bindloom-core/src/graph.rs",
+      "digest": "sha256:c5297ee0453d3f11b23512cb6b707035affd3d9afdfc653e544da1d31c5c3d4c"
+    },
+    {
+      "path": "crates/bindloom-core/src/impact.rs",
+      "digest": "sha256:6c39d861c863f67aaebe27011043331e87842f42aaa0ddf5aa45e2121a51586f"
+    },
+    {
+      "path": "crates/bindloom-core/src/laws.rs",
+      "digest": "sha256:a3caa0c738f314c49b10f01f29befefb13e06f5f496269ec8622f110a4924711"
+    },
+    {
+      "path": "crates/bindloom-core/src/lib.rs",
+      "digest": "sha256:9e23ea79bbe5991860d4aa116b3d2db38005704372d77e7298158af0eef8d079"
+    },
+    {
+      "path": "crates/bindloom-core/src/preflight.rs",
+      "digest": "sha256:e3cbf00349d1a52e0c97b2cc9c3ccaef2b31cdb576765cf6ebcdd090ab37ead8"
+    },
+    {
+      "path": "crates/bindloom-core/src/risk.rs",
+      "digest": "sha256:702a2d690fe8ed15acd44f3ac3e2ef1afc486acfecc7bdac3fa17ee45dc7b60e"
+    },
+    {
+      "path": "crates/bindloom-core/src/topology.rs",
+      "digest": "sha256:1fa764b0a754ed3b6fc66d733f11819b4d37745411cf477376ceca3a2bc52bea"
+    },
+    {
+      "path": "crates/bindloom-core/src/uncertainty.rs",
+      "digest": "sha256:53888c86fd6163f11cc1f4eaeaab4ef6b87b8e0e43786f9a32890f299d7e6334"
+    },
+    {
+      "path": "crates/bindloom-core/tests/derivation.rs",
+      "digest": "sha256:9b1f53c97d82543bee0737e4e034b0415808ade19693e5a2de4bd736d1405934"
+    },
+    {
+      "path": "crates/bindloom-core/tests/kernel.rs",
+      "digest": "sha256:331ddcbca3bee0a43e1ba11d6ef95bc488143893b6f07d7b35f2bf885ef16b29"
+    },
+    {
+      "path": "crates/bindloom-core/tests/topology.rs",
+      "digest": "sha256:da3d56cc086175b3ff22b0a87f40c2258f1ead60871b34e56251cbdaec709f8b"
+    },
+    {
+      "path": "crates/bindloom-core/tests/uncertainty.rs",
+      "digest": "sha256:b3270e9bf1032bd3e50cd70b059e3ac91877fc6a3ff7bc067b5cefbdbe91b12d"
+    },
+    {
+      "path": "crates/bindloom-governance/Cargo.toml",
+      "digest": "sha256:ca8dcf6efc073b8a9cb277021ab1fd525bdebf20793053d017c0449f323ae126"
+    },
+    {
+      "path": "crates/bindloom-governance/src/approval.rs",
+      "digest": "sha256:7ba03d2b52d5268472f550d7b782bf045205b3d1e5edecff5b95760256d36e0b"
+    },
+    {
+      "path": "crates/bindloom-governance/src/artifacts.rs",
+      "digest": "sha256:19e36196d25a2de71eb33131a050f730e3b32cc1a024762ac9534c53f7731b5f"
+    },
+    {
+      "path": "crates/bindloom-governance/src/delta.rs",
+      "digest": "sha256:da1b233eaa800bd1129d079ca6ff24a1be4d7e6e253b2d81dcf1837b0ef458f1"
+    },
+    {
+      "path": "crates/bindloom-governance/src/lib.rs",
+      "digest": "sha256:371ba4695779cd18b74ffade70081d2e401ae204764d22063a705be7dbcfd4d9"
+    },
+    {
+      "path": "crates/bindloom-governance/src/model.rs",
+      "digest": "sha256:562a55b0083ea15ad079faf79288f044e70e79f7d77537355a7d0d7ba0b88bb5"
+    },
+    {
+      "path": "crates/bindloom-governance/src/proposal.rs",
+      "digest": "sha256:d91ac16d1b8357e19ea26a6ca533075c01cd7633e832d28767c1534866297dbc"
+    },
+    {
+      "path": "crates/bindloom-governance/src/trust.rs",
+      "digest": "sha256:0e483853987c59924cca72f25ca8e90c8f5edcfb613d84b187b357c703b26d81"
+    },
+    {
+      "path": "crates/bindloom-governance/src/util.rs",
+      "digest": "sha256:eda16c3cea9fcff0dc4cc500d7db9bebfce49f99cddffab37c105b107f11953b"
+    },
+    {
+      "path": "crates/bindloom-governance/tests/governance.rs",
+      "digest": "sha256:79cd4349a3666e24e0086ebd64e9bd6f7060f489e00075565bd5d4ae32a9787c"
+    },
+    {
+      "path": "crates/bindloom-inspect/Cargo.toml",
+      "digest": "sha256:75c2fbd46278d079c4a740c74899822b9eab6ff88ea1e100feccd5eec7de7a0f"
+    },
+    {
+      "path": "crates/bindloom-inspect/src/explanation.rs",
+      "digest": "sha256:bfb92625065a6551a5f768ee0519920473e81563b8454629ac3d39bd4a9eae81"
+    },
+    {
+      "path": "crates/bindloom-inspect/src/lib.rs",
+      "digest": "sha256:87bbf92d43dacf9ffb558a3e22d0269207c0eb734e8ac12edf1861a92cec518c"
+    },
+    {
+      "path": "crates/bindloom-inspect/src/repair.rs",
+      "digest": "sha256:234d395e73b07b330418baea11c697d3bce398f08f350e406c36873c75b710c1"
+    },
+    {
+      "path": "crates/bindloom-inspect/tests/inspection.rs",
+      "digest": "sha256:5fbda8ce53e0efcc66ec20d1c6336485c38874aabd2730aa5674c37234071687"
+    },
+    {
+      "path": "crates/bindloom-projection/Cargo.toml",
+      "digest": "sha256:4874f82a15ec98205629f0f242fae6fa65db8eddd1a9362ff523ef06501212e4"
+    },
+    {
+      "path": "crates/bindloom-projection/src/capture.rs",
+      "digest": "sha256:742322b7af0d878b6f9728c3ea2d25407789433944b6e7af0e624144a37fe405"
+    },
+    {
+      "path": "crates/bindloom-projection/src/lib.rs",
+      "digest": "sha256:16f37535ff415b57044d02af6563ea7cfc8eeeeacb4e2d03185938eacdf54538"
+    },
+    {
+      "path": "crates/bindloom-projection/src/path_tree.rs",
+      "digest": "sha256:408c4cc6aa2d45f277ecdb113c7e3b136152361c7051873e1a0af9b0e88edd83"
+    },
+    {
+      "path": "crates/bindloom-projection/tests/path_tree.rs",
+      "digest": "sha256:bf0e9b00881e1d3b16cd7c42cba22f8b763e44dc8a1aba4d83552788aab5a467"
+    },
+    {
+      "path": "crates/bindloom-projection/tests/projection.rs",
+      "digest": "sha256:b57d4edb6c1bf5d01b0d0945a7ff5def3e471ffd3823371095adac5195d2a577"
+    },
+    {
+      "path": "crates/bindloom-projection/tests/replay.rs",
+      "digest": "sha256:0b3735d7fe428244961d750902810d0a8be16c3718eabbfce7cd38deebdd3dcd"
+    },
+    {
+      "path": "crates/bindloom-projection/tests/risk.rs",
+      "digest": "sha256:822a3a65227ed0b9f6df69a3eeb79000aa5886c908fd967499cf140b2c32ad5b"
+    },
+    {
+      "path": "crates/bindloom-scientific/Cargo.toml",
+      "digest": "sha256:8c744e19bfbd5a0473cdb5dad81f04f308ce6f70aeb2197b28de0a21a13fbee4"
+    },
+    {
+      "path": "crates/bindloom-scientific/src/crate_export.rs",
+      "digest": "sha256:9a4c188a1446770c9190d9a095a3d39872fb6045765b7051d9004820c90437e0"
+    },
+    {
+      "path": "crates/bindloom-scientific/src/export.rs",
+      "digest": "sha256:8b837e176d0d9505d1cc272d9a9ce9fa34f217af2fc763640ccb8e99d37e9aae"
+    },
+    {
+      "path": "crates/bindloom-scientific/src/graph.rs",
+      "digest": "sha256:bc432832af04e3094f94d93f478b82b60e8434aeed467a8641b8cd1d80528b29"
+    },
+    {
+      "path": "crates/bindloom-scientific/src/interpret.rs",
+      "digest": "sha256:f80c2509ee169f72eaadda746e7e29ef6478d029543c4a2cd8e4374ac7d49533"
+    },
+    {
+      "path": "crates/bindloom-scientific/src/lib.rs",
+      "digest": "sha256:a1e6efd1bbe583b9a21719c60d80c393c6064b76f66e71db74fb6972388d1f68"
+    },
+    {
+      "path": "crates/bindloom-scientific/src/model.rs",
+      "digest": "sha256:1a8107355af295aa88befd4d40d35617c451ca6f906d67f4484b218aaf59eaaf"
+    },
+    {
+      "path": "crates/bindloom-scientific/src/syntax.rs",
+      "digest": "sha256:50f1578f404ac10025c5c236658ebe62fbbcef7ac59211a7ebfbca059bcadee4"
+    },
+    {
+      "path": "crates/bindloom-scientific/tests/crate.rs",
+      "digest": "sha256:ee04dcdd9e0c09ae897d257fb4c8ca2a35d9b010a0bb087cce080d8914a069c2"
+    },
+    {
+      "path": "crates/bindloom-scientific/tests/sssom.rs",
+      "digest": "sha256:e95d7693760ac584f8127e5f41a1d96de0855f3c668ab52ca3186ef10b703bcc"
+    },
+    {
+      "path": "crates/bindloom-workspace/Cargo.toml",
+      "digest": "sha256:c59be7292b6a205b3de5c3d8fdb88af4cf5fe833584225083eec8cd7f9c7e11d"
+    },
+    {
+      "path": "crates/bindloom-workspace/src/lib.rs",
+      "digest": "sha256:981f3fc8a20f24804b8bdd714b6ee6ca174108981412c6345ca709d25ef3901c"
+    },
+    {
+      "path": "crates/bindloom-workspace/src/model.rs",
+      "digest": "sha256:19e794dfc98abe5a7f74b2a8d8ddd85903d38392dfa96ba3813f9b780b85a502"
+    },
+    {
+      "path": "crates/bindloom-workspace/src/process.rs",
+      "digest": "sha256:1e47a7385ffeb69d0b5579a03d3f9109fe62914b3ed779f87dd30e63e187da27"
+    },
+    {
+      "path": "crates/bindloom-workspace/src/process_tests.rs",
+      "digest": "sha256:58890428d54bc89b41f232c28833ab017f379bdcc8ebe04baf06b55a0ae11c6c"
+    },
+    {
+      "path": "crates/bindloom-workspace/tests/workspace.rs",
+      "digest": "sha256:4cfc8b8040c53daf85229d66928a3f3327b0e46299194fc2b4f2ddd2b262725d"
+    },
+    {
+      "path": "fixtures/laws/graph.json",
+      "digest": "sha256:c565b59c76000d5d09dc3fed1c0e621c05f3590335c4b7c049e3208df1a3866d"
+    },
+    {
+      "path": "fixtures/laws/pack.json",
+      "digest": "sha256:ae937ce752b7932ae596ce72b89351084fe7f399f8f577b70f2b35f48ea1c789"
+    },
+    {
+      "path": "fixtures/laws/policy.json",
+      "digest": "sha256:8a081a7d1c239fe42b8aac4f5f16a8967ed102c8caf9fafe094814559ea28b23"
+    },
+    {
+      "path": "fixtures/laws/projection-spec.json",
+      "digest": "sha256:f6a4f744db00eb75b80a4cc7b8fa8cc34a548018367aef800575a6c854b1edf8"
+    },
+    {
+      "path": "fixtures/laws/request.json",
+      "digest": "sha256:902ac83d2e4aee0180f83f506e1f946aad23ff5d6545bf04fdb0da8ed65a65fa"
+    },
+    {
+      "path": "fixtures/reference/LICENSE",
+      "digest": "sha256:cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+    },
+    {
+      "path": "fixtures/reference/NOTICE",
+      "digest": "sha256:cfa666f6558212e3890a68fff258af49febff0af2b77be80f6563e1aa1c6cd48"
+    },
+    {
+      "path": "fixtures/reference/evaluation/README.md",
+      "digest": "sha256:fa02d777af983705319b712eb315979ead9832880162a100c76e9d73340bf629"
+    },
+    {
+      "path": "fixtures/reference/evaluation/capability-corpus.json",
+      "digest": "sha256:9bedfc360300b1377c9fcf4563ffbb2b8f30130280f912d3b9f263e4ea3cc6e4"
+    },
+    {
+      "path": "fixtures/reference/evaluation/legacy-compatibility.json",
+      "digest": "sha256:697fabaa8a9cdec93098efcf9343c321e146e35f30787cd9547c71dcacc91348"
+    },
+    {
+      "path": "fixtures/reference/examples/routing/README.md",
+      "digest": "sha256:eb2d2260f4f716d6beff22dca8e789c447f26adbefe5d60e3c11cee630ff4edb"
+    },
+    {
+      "path": "fixtures/reference/examples/routing/bindings/.npmignore",
+      "digest": "sha256:70a213afeabe5ac38ae4c88b2c7002ce5068b91a3e57a032245ab809dc6fa460"
+    },
+    {
+      "path": "fixtures/reference/examples/routing/bindings/README.md",
+      "digest": "sha256:cbf26bb53c37280d6afa050d9d0da5b167c0ca604ebb0e9117a5ea32abe474fe"
+    },
+    {
+      "path": "fixtures/reference/examples/routing/bindings/build.d.mts",
+      "digest": "sha256:2270e9c9d53ab0d62037de9c380598eae854b1b5280d34c77c30571000bcc76e"
+    },
+    {
+      "path": "fixtures/reference/examples/routing/bindings/build.mjs",
+      "digest": "sha256:9d409b54e46767840ba2810aef7a8f823b9e7a18cf294e431da40fef5d105ca6"
+    },
+    {
+      "path": "fixtures/reference/examples/routing/bindings/consumer/consumer.ts",
+      "digest": "sha256:cf8535332e20313037f7a296c1f9d1d27237b801c2dab5565ea4ecd3ec0187cf"
+    },
+    {
+      "path": "fixtures/reference/examples/routing/bindings/consumer/graph.json",
+      "digest": "sha256:ef38996cdacc47647937b2a1002d413884ea4f5a2cb2cd20363190bda1eb3bb8"
+    },
+    {
+      "path": "fixtures/reference/examples/routing/bindings/consumer/projection.json",
+      "digest": "sha256:30e35dddb0f8b2d5210c3de966035583d2c51c73a32322d0a3ea3f2884d2a157"
+    },
+    {
+      "path": "fixtures/reference/examples/routing/bindings/consumer/viability-template.json",
+      "digest": "sha256:98411ec97072334cbb2579147eeaee723eab60ec2e90c43f9a1259920856b397"
+    },
+    {
+      "path": "fixtures/reference/examples/routing/bindings/contract/graph.json",
+      "digest": "sha256:1ca7076158886163ef3784e9ed29cc9afa1539376ecf650f271d3a65958044d7"
+    },
+    {
+      "path": "fixtures/reference/examples/routing/bindings/contract/input-schema.mjs",
+      "digest": "sha256:91ef94507725d4dd0b453a69687ae40428ced2b20875a023e980bd38982f5bf0"
+    },
+    {
+      "path": "fixtures/reference/examples/routing/bindings/generated/build.json",
+      "digest": "sha256:81da8fecbd571277d2594c511b4fce706e8f1a6549884d449dc86e978e743c7f"
+    },
+    {
+      "path": "fixtures/reference/examples/routing/bindings/generated/consumer.d.mts",
+      "digest": "sha256:a91b42c6ca923a1329228fe82829a962f1668725b5172ac72d4b3cc92615ef09"
+    },
+    {
+      "path": "fixtures/reference/examples/routing/bindings/generated/consumer.mjs",
+      "digest": "sha256:a697f501ba36cdc3c0466928bf2b730ae56db87164ec6a76b4d5e316ec588ead"
+    },
+    {
+      "path": "fixtures/reference/examples/routing/bindings/generated/inputs/contract/input-schema.91ef94507725d4dd0b453a69687ae40428ced2b20875a023e980bd38982f5bf0.mjs",
+      "digest": "sha256:91ef94507725d4dd0b453a69687ae40428ced2b20875a023e980bd38982f5bf0"
+    },
+    {
+      "path": "fixtures/reference/examples/routing/bindings/generated/inputs/service/handlers/create-user.689adf3371d4bdce1c6af91d9c93354133a7c10719e794a8b1c93f30ee2d5c1b.mjs",
+      "digest": "sha256:689adf3371d4bdce1c6af91d9c93354133a7c10719e794a8b1c93f30ee2d5c1b"
+    },
+    {
+      "path": "fixtures/reference/examples/routing/bindings/metamap.config.json",
+      "digest": "sha256:b851028489a98f95d34b0130a648e6d8aab13dbddcde2b369a1424dde944adce"
+    },
+    {
+      "path": "fixtures/reference/examples/routing/bindings/service/graph.json",
+      "digest": "sha256:14307a958a364508e6f4c48dca7dfed25566380d934d200ae3a26096e8a7acfd"
+    },
+    {
+      "path": "fixtures/reference/examples/routing/bindings/service/handlers/create-user.mjs",
+      "digest": "sha256:689adf3371d4bdce1c6af91d9c93354133a7c10719e794a8b1c93f30ee2d5c1b"
+    },
+    {
+      "path": "fixtures/reference/examples/routing/generated/command-router.json",
+      "digest": "sha256:bc7f47ca42741a4eec319400dabcae7f13d8c8944e511790f79195b8c5f639c9"
+    },
+    {
+      "path": "fixtures/reference/examples/routing/generated/command-router.ts",
+      "digest": "sha256:afb847d1d5a907e0dae452c6f0c7a04f16558ff5abe4148e496bc0ea234f61bc"
+    },
+    {
+      "path": "fixtures/reference/examples/routing/generated/generation.json",
+      "digest": "sha256:1f00cc0a8caea12fa0925e2e30d23f6742a55eec83da9b26a2f073f558e7001c"
+    },
+    {
+      "path": "fixtures/reference/examples/routing/graph.json",
+      "digest": "sha256:49ae24f74a6e003d8466e024af54e42b37479a2c94c1749efdc5320c442bff4a"
+    },
+    {
+      "path": "fixtures/reference/examples/routing/projection.json",
+      "digest": "sha256:fedc3c2f0946ad717460a36d5592b13e14e8619a2ac6555b914f650c5f33d699"
+    },
+    {
+      "path": "fixtures/reference/examples/routing/viability-policy.json",
+      "digest": "sha256:8abb4b684a1c6428da017c0d520a5b47fe4efea9b5435016df41c78589475a2e"
+    },
+    {
+      "path": "fixtures/reference/examples/scientific-mapping/consumer.mjs",
+      "digest": "sha256:b7909057e112a647a5f0759360a96b785061c1e6d7c9e689a1dffdbcb87fb0f9"
+    },
+    {
+      "path": "fixtures/reference/examples/scientific-mapping/fixtures/mgi-subset-manifest.json",
+      "digest": "sha256:dde093953e7e3ab66bafbb7673a6dc56fa1fe0a1ce7fe216f89c4c139af412f6"
+    },
+    {
+      "path": "fixtures/reference/examples/scientific-mapping/fixtures/mgi-subset.sssom.tsv",
+      "digest": "sha256:0eafab5a5673563e0a7fc737f9470f4fb3a53ad29beb4bc8d6138f1b3a610b69"
+    },
+    {
+      "path": "fixtures/reference/examples/scientific-mapping/lookup.mjs",
+      "digest": "sha256:3ae633874d48e42575cbea458f879142c1518d2d42026968b4499cb6d41dfa4f"
+    },
+    {
+      "path": "fixtures/reference/relation-packs/application-topology.json",
+      "digest": "sha256:eaa7b0d9cc0c8ae966407874cfb9b587f239a12868e4e04405a658cb269407ba"
+    },
+    {
+      "path": "fixtures/reference/relation-packs/core.json",
+      "digest": "sha256:eeea5ffaf25f5d48866cb6161ca93554564aae901cf9e0df53de02f47c94c2b2"
+    },
+    {
+      "path": "fixtures/reference/relation-packs/research.json",
+      "digest": "sha256:68c2318bd29a10a1a3dbb307c63221b0a4d09a311abc39279acbb098bb16b375"
+    },
+    {
+      "path": "fixtures/reference/relation-packs/routing.json",
+      "digest": "sha256:3af9a177219da28a25129d67f9c6e4134ce276586c31ba96e849e964302c1423"
+    },
+    {
+      "path": "fixtures/reference/relation-packs/scientific-skos.json",
+      "digest": "sha256:2b79e79f495f2c8a1fb2e7cd39ddf112e2306c26ad5a267762f9c38759b5ff57"
+    },
+    {
+      "path": "fixtures/reference/schemas/metamap-activation-request.schema.json",
+      "digest": "sha256:913ada8c7ac7f06664dc06ce49b19ec44a926ea5443aba694acc37e4edc63a34"
+    },
+    {
+      "path": "fixtures/reference/schemas/metamap-activation.schema.json",
+      "digest": "sha256:eb6e94db372ec7b5f9ffa82cbbe59bf4ed2b2c4a36a5d3f3f548c38d649e155b"
+    },
+    {
+      "path": "fixtures/reference/schemas/metamap-active-pointer.schema.json",
+      "digest": "sha256:21761210f51ff61d327a66da906651481ed705640e77963b2bd18139d4647811"
+    },
+    {
+      "path": "fixtures/reference/schemas/metamap-approval.schema.json",
+      "digest": "sha256:d1bbddf61a0328b1dd241fe26e0f5dbc6dba8b1aa8c43437ba1862cadc7158e8"
+    },
+    {
+      "path": "fixtures/reference/schemas/metamap-artifact-manifest.schema.json",
+      "digest": "sha256:30ba7fdea2725ea5486beb415d25f5507770c7f80ca211b173e53e5b15cd60e1"
+    },
+    {
+      "path": "fixtures/reference/schemas/metamap-change-proposal.schema.json",
+      "digest": "sha256:601de50849cefa19dcc342fd1a3b14df2e58e5886300924cc56fe5e2b2d6ae0e"
+    },
+    {
+      "path": "fixtures/reference/schemas/metamap-composition-request.schema.json",
+      "digest": "sha256:9f0101b16805f50e523220eb86f745fae45777103ad8dfb6001a9e8f63f75cac"
+    },
+    {
+      "path": "fixtures/reference/schemas/metamap-composition-result.schema.json",
+      "digest": "sha256:d7c4c83425155cc25877ff8095202fc848e66c657844ad9d8339108c1e3336ac"
+    },
+    {
+      "path": "fixtures/reference/schemas/metamap-config.schema.json",
+      "digest": "sha256:220e851a41f5f23d40216df3f8c79b230e30ba7496d3b85fd036493ed78fbad2"
+    },
+    {
+      "path": "fixtures/reference/schemas/metamap-counterfactual-v2.schema.json",
+      "digest": "sha256:1fe082607c30a2e6c0d5ea56a647800e903599509f6a5ebdee7d4dc4b9e41aa3"
+    },
+    {
+      "path": "fixtures/reference/schemas/metamap-counterfactual-v3.schema.json",
+      "digest": "sha256:5d1fa5a7dba6c27847ce6891b136b5de71707d7a478ccaacba488cdc43f5c066"
+    },
+    {
+      "path": "fixtures/reference/schemas/metamap-counterfactual.schema.json",
+      "digest": "sha256:7c62b8620651d3386a969dc632169c9642615839eb957dc2b116801580376b17"
+    },
+    {
+      "path": "fixtures/reference/schemas/metamap-derivation.schema.json",
+      "digest": "sha256:bc18a9ac153fbe9a05db6438df6cd60cf0a9e199d9f4513dc09539949f74669d"
+    },
+    {
+      "path": "fixtures/reference/schemas/metamap-explanation-request.schema.json",
+      "digest": "sha256:4aaeec7ca2a3cbc28b9c9d62002cbccc44f6998c38a68cc39034baec993e8b78"
+    },
+    {
+      "path": "fixtures/reference/schemas/metamap-explanation-result.schema.json",
+      "digest": "sha256:c02730052c3d7f2bf7ad0e5d0498dee397ef6a30110fdc2669a3d1299b9a8410"
+    },
+    {
+      "path": "fixtures/reference/schemas/metamap-explanation.schema.json",
+      "digest": "sha256:0a20277eb1460d6e536ad8dc22c09b9f2f12e2994c73010a2297848821eb56e6"
+    },
+    {
+      "path": "fixtures/reference/schemas/metamap-generation-v2.schema.json",
+      "digest": "sha256:bc1d4e4dff9368cf84fe34e204813c8e49a69f6725d55e09cf401a1cd19eed50"
+    },
+    {
+      "path": "fixtures/reference/schemas/metamap-generation.schema.json",
+      "digest": "sha256:bbd89856d5649247dc1c21d02f40ef4f642fcf2470dff770c2a8a49156c3dd8d"
+    },
+    {
+      "path": "fixtures/reference/schemas/metamap-governance.schema.json",
+      "digest": "sha256:00ce7e119ecb0ecc73bc5f3f1891b38ad25392a163a97ebcb1a287bf676ca4ca"
+    },
+    {
+      "path": "fixtures/reference/schemas/metamap-graph.schema.json",
+      "digest": "sha256:fa177ee438ac4cf55e133666c0c7a66e5c7bb0242deb78611e2e3482148bde72"
+    },
+    {
+      "path": "fixtures/reference/schemas/metamap-path-tree-v2.schema.json",
+      "digest": "sha256:c37f627d11f5ef25a0f6d9baf3ba604a191c0eb8a8914821064b843e1fe1e2d4"
+    },
+    {
+      "path": "fixtures/reference/schemas/metamap-path-tree.schema.json",
+      "digest": "sha256:b74866f9bb75a4addc06174611ca35bf6fb5d7ba3d2b5e2755dc20256e60e943"
+    },
+    {
+      "path": "fixtures/reference/schemas/metamap-projection-spec-v2.schema.json",
+      "digest": "sha256:b641293144e922664bfb90c3cb06f9211d62d7f574974fcce10d1770d2aacb89"
+    },
+    {
+      "path": "fixtures/reference/schemas/metamap-projection-spec.schema.json",
+      "digest": "sha256:c8580eed448c3259272a84b4a2cbc3f6bdb39bfb1a0f9276802b0eaf7b7723b8"
+    },
+    {
+      "path": "fixtures/reference/schemas/metamap-projection-v2.schema.json",
+      "digest": "sha256:bdd81950feb9df58f5299e3edbd01bf3225f5418f4f63f45f8b851df6b01117a"
+    },
+    {
+      "path": "fixtures/reference/schemas/metamap-projection.schema.json",
+      "digest": "sha256:869168ca2579ef9373d90eb39a3d96493cd4e723b2bdb154f132b044920afa5e"
+    },
+    {
+      "path": "fixtures/reference/schemas/metamap-repair-request.schema.json",
+      "digest": "sha256:86ab260998a775b18cfc2c73610c16c697d6c0c3c68ae20ddd55eb4a69ba668a"
+    },
+    {
+      "path": "fixtures/reference/schemas/metamap-repair-result.schema.json",
+      "digest": "sha256:1b66b01d7c152105b26a026ffdc64c06e5b6f21a603e4db354d75d412f653565"
+    },
+    {
+      "path": "fixtures/reference/schemas/metamap-repair.schema.json",
+      "digest": "sha256:0efbe108c6fac913520cae415579e3389b5d60c5bb59ebef1af7b65644e60461"
+    },
+    {
+      "path": "fixtures/reference/schemas/metamap-replay-v2.schema.json",
+      "digest": "sha256:c7d607b99fe08962c0080bd671a8c4e69b1f08316abf8376bdf359b226c6b793"
+    },
+    {
+      "path": "fixtures/reference/schemas/metamap-replay-v3.schema.json",
+      "digest": "sha256:24f354b08aba84dd98b99766c6173387a632236e266b2f8677e5ab3e91fe53eb"
+    },
+    {
+      "path": "fixtures/reference/schemas/metamap-replay.schema.json",
+      "digest": "sha256:b0c04c10b15ec29c379490d6529b99ae731030419bf3882dedf168e86cb2716c"
+    },
+    {
+      "path": "fixtures/reference/schemas/metamap-scientific-crate-profile.schema.json",
+      "digest": "sha256:ff1c361fbf610a18d56f42c2e693d41bd940a9b024d255ab24fc2617b68df17a"
+    },
+    {
+      "path": "fixtures/reference/schemas/metamap-snapshot.schema.json",
+      "digest": "sha256:20cce940bb1ac6bb54b6fff2e951747c3471ca868d8ee156a737f68ebdc09ce8"
+    },
+    {
+      "path": "fixtures/reference/schemas/metamap-source-capture.schema.json",
+      "digest": "sha256:8e8dbdaedd1980498aee76e0adcc54f1ba9a587a9375d0db3fcf86c9470bd65e"
+    },
+    {
+      "path": "fixtures/reference/schemas/metamap-source-inspection.schema.json",
+      "digest": "sha256:b460faefa805c2a762064f92f34cde7aa5f2ae7957de9f62c26c60cf0158a8f5"
+    },
+    {
+      "path": "fixtures/reference/schemas/metamap-source-receipt.schema.json",
+      "digest": "sha256:366b839eb5108309a0527b582bca3f087bf958d01ca309e5aaa68139cf348a63"
+    },
+    {
+      "path": "fixtures/reference/schemas/metamap-sssom-document.schema.json",
+      "digest": "sha256:c8fb8866de43a4b7ab3e366abc9cd886679b673d2593584a22c6771fe53c03ce"
+    },
+    {
+      "path": "fixtures/reference/schemas/metamap-sssom-source.schema.json",
+      "digest": "sha256:517eda0a0beff2158689f1b9abd48ba541a23abafb3fbff94723af42fe6a4b86"
+    },
+    {
+      "path": "fixtures/reference/schemas/metamap-trusted-consumer.schema.json",
+      "digest": "sha256:68703f0312a4c47090bceec62f4dbd5d4fb6f7892a4cba75f41849841fbee07f"
+    },
+    {
+      "path": "fixtures/reference/schemas/metamap-viability-v2.schema.json",
+      "digest": "sha256:eeae8c2248ce29f40eb73cf3359bfa0361f72cae6bd4e32b139882dffe82539b"
+    },
+    {
+      "path": "fixtures/reference/schemas/metamap-viability.schema.json",
+      "digest": "sha256:7bc63b3622dee90e2b0428a78dfa9f836a4ea7c14dbfc36ed3177fbc4b0d1e1b"
+    },
+    {
+      "path": "fixtures/reference/schemas/relation-pack-v2.schema.json",
+      "digest": "sha256:3923a94dc77e608b73534d1c31844d4bfa823fb75708d961e6d9b97e67ae41fc"
+    },
+    {
+      "path": "fixtures/reference/schemas/relation-pack.schema.json",
+      "digest": "sha256:bfac8a6fa108eb430aec628ec6952b8123468daba0178b801f7f7c1ac3e4e135"
+    },
+    {
+      "path": "fixtures/reference/schemas/sssom-1.0.0-slots.json",
+      "digest": "sha256:6c6869005ab2724260006f8eb5d8f0ef65f93cd399439342803d9ad2e5aff8eb"
+    },
+    {
+      "path": "fixtures/reference/schemas/sssom-1.0.0.schema.json",
+      "digest": "sha256:1034a8c60e3063f8f621b15a3dcea9f8745040a13e32f0fb91c1ee5244512bb8"
+    },
+    {
+      "path": "fixtures/reference/src/__tests__/canonical.test.ts",
+      "digest": "sha256:11a8f1be494295854f32c70875e15325d94d9940f590b59f4a07b0284ee9d6d1"
+    },
+    {
+      "path": "fixtures/reference/standards/sssom-1.0.0/LICENSE",
+      "digest": "sha256:f11b9b56cde6c1794c0cbc123fd9b2c17a1c59af150116dc9f5e1d30bd643a5b"
+    },
+    {
+      "path": "fixtures/reference/standards/sssom-1.0.0/README.md",
+      "digest": "sha256:d28f7046e50ed87aae944f7ea917bfacd0a714b7cb23c38987268b983e203e5a"
+    },
+    {
+      "path": "fixtures/reference/standards/sssom-1.0.0/sssom_schema.yaml",
+      "digest": "sha256:dde9bd0aa706715859999685d58634cf26893f499523326f7e28fb3e11252ae1"
+    },
+    {
+      "path": "fixtures/routing/graph.json",
+      "digest": "sha256:c3f812727d666b10fc3a230f3f70427ca27413dd77e3fa97080c63d3f4016477"
+    },
+    {
+      "path": "fixtures/routing/policy.json",
+      "digest": "sha256:b43b42584724e809229ed00d346a83f73ac1c4fd0725ec195dad5ed117c1afa6"
+    },
+    {
+      "path": "fixtures/routing/projection-spec.json",
+      "digest": "sha256:84f4c3bae2fafd30567dc531aee977a14ff4da5ae366cac66f44ece07675f19e"
+    },
+    {
+      "path": "fixtures/scientific/ro-crate-1.2-context.jsonld",
+      "digest": "sha256:27a661f6082735563d9f83145a63876cbe0c0b78624332d3ca05053253eb0d41"
+    },
+    {
+      "path": "fixtures/scientific/ro-crate-context-pin.json",
+      "digest": "sha256:fbfbd1ba8475a2de500caac6d7ea2db862139670981e44e09750ba1c8fe178e7"
+    },
+    {
+      "path": "fixtures/scientific/source-pin.json",
+      "digest": "sha256:b8b6c8b62236e85a0ea53b348d86ae83968a7fc4f48b54145a2036b648bce4bb"
+    },
+    {
+      "path": "fixtures/topology/graph.json",
+      "digest": "sha256:462a52f310dc1c634297d3ef924ce0bb22cb7b82e220147c142ca2d3b1049431"
+    },
+    {
+      "path": "fixtures/topology/original.json",
+      "digest": "sha256:c8516fbb36f0c3ef7d8e64457455edff7b4ac7dbb53da8754236343aaac341df"
+    },
+    {
+      "path": "fixtures/topology/policy.json",
+      "digest": "sha256:df03b4b802f4ed8e6bd134cb77bb4987158717dde69e7c4211bac7fcbf3e2f27"
+    },
+    {
+      "path": "fixtures/topology/source-pin.json",
+      "digest": "sha256:d5a2536399dc06716312270e7da15e3a4b1daea9f831e1eacfbdec3a5dd6cac0"
+    },
+    {
+      "path": "relation-packs/application-topology.json",
+      "digest": "sha256:b68162b6ddf7844f45c736b0e7ffaf82eddd0711705c5a17e8709b0f51b347eb"
+    },
+    {
+      "path": "relation-packs/core.json",
+      "digest": "sha256:a12f6534c3f0f8bc6fb42317f39c5555bad618cde0338748f77a1125ba9bdf1f"
+    },
+    {
+      "path": "relation-packs/research.json",
+      "digest": "sha256:f2d210d8883502a63e1bec369daeb1f79d8cefe4e5c9e0a95ca1ce9720c77354"
+    },
+    {
+      "path": "relation-packs/routing.json",
+      "digest": "sha256:64cb8bad363e056b99e62fca7f1eca95c46790dcb0c4dd8c2f987c0ed4ff601f"
+    },
+    {
+      "path": "relation-packs/scientific-skos.json",
+      "digest": "sha256:160a5fa1f353be912b5cded9499e0eebd441a99e26bd618e65cb7d48d69866de"
+    },
+    {
+      "path": "rust-toolchain.toml",
+      "digest": "sha256:2ad6f15416572b4836585087f1d4abc53b8fa2dbd616f8dacfaa587ed6714228"
+    },
+    {
+      "path": "schemas/activation-manifest.schema.json",
+      "digest": "sha256:e7e7074df7795cda387ed9db3aeb32c8ed0fa49f0fce5ab3f6fbe42b94cb63ce"
+    },
+    {
+      "path": "schemas/activation-request.schema.json",
+      "digest": "sha256:9b2c2ae5f1a9fe54ab89ebf61620ac7259a11eecdcee9aa67b09b3185053f271"
+    },
+    {
+      "path": "schemas/active-pointer.schema.json",
+      "digest": "sha256:3747dcba8a6bf94432a003eae3cb9fc754f8347425ea61a93550b09f62c61180"
+    },
+    {
+      "path": "schemas/adapter-request.schema.json",
+      "digest": "sha256:3d0932224f19aed059c3c2f2f9ee9b2166ef04ec14f11a6a43d6cbd90ab0af91"
+    },
+    {
+      "path": "schemas/adapter-response.schema.json",
+      "digest": "sha256:0011be131ce9906937b80c4e438fbe57d2bf9f000d28e4a079411d18ed18e2c1"
+    },
+    {
+      "path": "schemas/approval-payload.schema.json",
+      "digest": "sha256:9009e542361364c27c623a462de8716df31002b7f0cd1ab53c7108108c5f0edc"
+    },
+    {
+      "path": "schemas/approval.schema.json",
+      "digest": "sha256:4c85d087dcc4d1d7fd5c6f799dba20f359420ddecf41333646caad7865bf492c"
+    },
+    {
+      "path": "schemas/artifact-manifest.schema.json",
+      "digest": "sha256:55c388f56a2fc888f20f0216018da4aa244a2f87cd03258bcd17970f35ae2d00"
+    },
+    {
+      "path": "schemas/capture.schema.json",
+      "digest": "sha256:d1e0e30739b73ff8c94e6eef20f49a33956b65cbd4af59fc5e3b9721d7a18a21"
+    },
+    {
+      "path": "schemas/change-proposal.schema.json",
+      "digest": "sha256:35fb8f3f2e3d638bd6a6445fb85ab4962d831ef2c99773602a10f9c8b5bf81ee"
+    },
+    {
+      "path": "schemas/composition-request.schema.json",
+      "digest": "sha256:d04cbf28f624266339156bb8ba3394028d72d5af1b55478bb14cef39dc87e2af"
+    },
+    {
+      "path": "schemas/derivation.schema.json",
+      "digest": "sha256:89e48019bd86337c12fb44bac37551499ee9f3f1075912a1625afeda56da35c1"
+    },
+    {
+      "path": "schemas/governance.schema.json",
+      "digest": "sha256:ea9851123c791de30ea8eb1d00bc7e13af8c4b5dc7b530781facbeb338df14f7"
+    },
+    {
+      "path": "schemas/graph.schema.json",
+      "digest": "sha256:7f9604f5eca5d5196c7c498d08f5d215074d8348543236025e58319786354803"
+    },
+    {
+      "path": "schemas/policy.schema.json",
+      "digest": "sha256:6f139ff27fe0f0f5fe1edac2ad2d55a3ae0e58d9afdd9a60382c19a0d0a19dee"
+    },
+    {
+      "path": "schemas/prepared-candidate.schema.json",
+      "digest": "sha256:4b0386ddad722fe745147822520371e00c24225cfcc94b13490cbf1a814eb51f"
+    },
+    {
+      "path": "schemas/projection-spec.schema.json",
+      "digest": "sha256:eef3f93081e3312c8e9581ca747846b083cb4d0e47c858fd65d335c2c83dee6d"
+    },
+    {
+      "path": "schemas/relation-pack.schema.json",
+      "digest": "sha256:de483bb94b1b3157dc2bb9f362cfab4d3f7f5adedb40204b476848df6075227a"
+    },
+    {
+      "path": "schemas/scientific-crate-options.schema.json",
+      "digest": "sha256:c63b130b9c0b537d47f33a39a43ec680c8c179326ff10db89f1e2ec9c646d4f5"
+    },
+    {
+      "path": "schemas/scientific-crate.schema.json",
+      "digest": "sha256:306d8ee0d3badd713c4b732c2c5d85f2d2602dd3d50123ada88a3040c37f04fc"
+    },
+    {
+      "path": "schemas/semantic-policy.schema.json",
+      "digest": "sha256:525ad07b6f6446a5536ab155fa56ed16bfedf0b8e33b53f3dc7ef59364f9416f"
+    },
+    {
+      "path": "schemas/sssom-document.schema.json",
+      "digest": "sha256:2c3fb006ae34cecfbcb3f25ae4050a9044ac22697d5ebe669e26b7d9cc57fe6b"
+    },
+    {
+      "path": "schemas/sssom-source.schema.json",
+      "digest": "sha256:cf0edf921587950a49373530e5292f217827b5bea5910378d1061a7c321877be"
+    },
+    {
+      "path": "schemas/trusted-consumer.schema.json",
+      "digest": "sha256:37e0c296549ef5f1589e716f8d802d50ac217ee27e5da081c4663d39b85ec2ad"
+    },
+    {
+      "path": "schemas/workspace-baseline.schema.json",
+      "digest": "sha256:d9ba8f590b55cbd7af9e9906a725a1cb5e015c7012c0202df57768d1aa264f46"
+    },
+    {
+      "path": "schemas/workspace-config.schema.json",
+      "digest": "sha256:5e55ea0d8dba4498c7006705d770357fcac2c2e6ee4c1d9a6574ce22f708982c"
+    }
+  ],
+  "integrityCommand": {
+    "argv": [
+      "python3",
+      "/Users/admin/dev/patamaps/patamaps/scripts/test_source_integrity.py",
+      "/Users/admin/dev/SEEDZ/metamap",
+      "--output",
+      "/Users/admin/dev/patamaps/patamaps/docs/acceptance/distributions/source-integrity-final.json"
+    ],
+    "exitCode": 0,
+    "stdout": "PASS: 91 original file entries retain exact Git bytes; 22 original expectations unchanged; 53 native destinations exist; current documentation links resolve; reference checkout clean.\n",
+    "stderr": ""
+  },
+  "scope": "Identical exact source inventories, actual independent package installations and unchanged native production/test/fixture bytes; no public release or production activation"
+}

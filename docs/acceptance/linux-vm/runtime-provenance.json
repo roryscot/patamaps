@@ -1,0 +1,365 @@
+{
+  "inputs": [
+    {
+      "path": ".tools/linux-vm/vfkit",
+      "bytes": 66431936,
+      "digest": "sha256:0ed83fc8ca7aa708598835480dba1362406aa7cd1dab3b27464eb76327d9652d"
+    },
+    {
+      "path": ".tools/linux-vm/vfkit-arm64",
+      "bytes": 31926912,
+      "digest": "sha256:020d29aeebca0c9dd306e585c16881af128bee72f34eaed49ea213681f0a52b1"
+    },
+    {
+      "path": ".tools/linux-vm/alpine-netboot.tar.gz",
+      "bytes": 432082685,
+      "digest": "sha256:124087f5df9ac698bb4e942d603eaae96721e451cdc4706c71a5e42ff863b589"
+    },
+    {
+      "path": ".tools/linux-vm/vmlinuz-virt",
+      "bytes": 10387968,
+      "digest": "sha256:e45e1f6083d1ed45db6647b422e32b6ae6dc54de7b8190b7b97744fb293412e3"
+    },
+    {
+      "path": ".tools/linux-vm/Image",
+      "bytes": 36241408,
+      "digest": "sha256:e698a107e4d04117db1a7b0daee99bdae5f0647fba2af50f3cd020a666950ab9"
+    },
+    {
+      "path": ".tools/linux-vm/initramfs-virt",
+      "bytes": 9399083,
+      "digest": "sha256:ffe65ec5a0c0bf470042ad28f7ce7aa5f842ce8090e4230fb2703a7a34e1bebe"
+    },
+    {
+      "path": ".tools/linux-vm/modloop-virt",
+      "bytes": 17743872,
+      "digest": "sha256:32a189d5e4ae4417cf65bfcc91d2cc8ffdf5957fbbc1f055b037861c595b7328"
+    },
+    {
+      "path": ".tools/linux-vm/share/registry.tar.gz",
+      "bytes": 96746322,
+      "digest": "sha256:6e8410657ab63f33d0670ca5c04614f1e2372626dc80a70a98a9709097d2449a"
+    },
+    {
+      "path": ".tools/linux-vm/share/reference-runtime.tar.gz",
+      "bytes": 15889366,
+      "digest": "sha256:4d168289d4cd0f56a025aeb0dcd8b78a525f693cb1884128891aa5954152886a"
+    },
+    {
+      "path": ".tools/linux-vm/share/reference-assets.tar.gz",
+      "bytes": 31023,
+      "digest": "sha256:bc8eba568cdd7fdad3de0f3f97448512bd8bab4dce9cd3038f2fa54ac7f39836"
+    },
+    {
+      "path": ".tools/linux-vm/share/Python-3.12.11.tar.xz",
+      "bytes": 20525812,
+      "digest": "sha256:c30bb24b7f1e9a19b11b55a546434f74e739bb4c271a3e3a80ff4380d49f7adb"
+    },
+    {
+      "path": ".tools/linux-vm/share/node-v22.16.0-linux-arm64.tar.xz",
+      "bytes": 29126496,
+      "digest": "sha256:eab80cb88f8fda1e65f5e8d0420c9809bdb320b03fd34976ab7161b6e703b910"
+    }
+  ],
+  "alpineSource": "https://dl-cdn.alpinelinux.org/alpine/v3.24/releases/aarch64/alpine-netboot-3.24.2-aarch64.tar.gz",
+  "vfkitRelease": "https://github.com/crc-org/vfkit/releases/tag/v0.6.4",
+  "vfkitSignature": "Original checksum matches official release metadata, but original codesign validation failed. Task-owned ARM64 copy was ad hoc signed with only virtualization entitlement; local codesign verification passed. No global trust/signing settings changed.",
+  "architecture": "aarch64",
+  "cpus": 4,
+  "memoryMiB": 6144,
+  "disk": "Project-owned sparse 32 GiB raw ext4 disk; no host block device",
+  "network": "No guest network device",
+  "sharing": "Staged project inputs mounted read-only; later result export limited to separate project-owned output directory",
+  "rootImageIndex": {
+    "manifests": [
+      {
+        "annotations": {
+          "com.docker.official-images.bashbrew.arch": "amd64",
+          "org.opencontainers.image.base.digest": "sha256:6664ea6221140b52bddee69d4b3410d0f2f4eda8ed2bbf80dc91ea055cd94a43",
+          "org.opencontainers.image.base.name": "buildpack-deps:bookworm",
+          "org.opencontainers.image.created": "2026-10-06T04:43:34Z",
+          "org.opencontainers.image.revision": "079baa4c2b11008b41b8d13329e7548a6e3dc59a",
+          "org.opencontainers.image.source": "https://github.com/rust-lang/docker-rust.git#079baa4c2b11008b41b8d13329e7548a6e3dc59a:stable/bookworm",
+          "org.opencontainers.image.url": "https://hub.docker.com/_/rust",
+          "org.opencontainers.image.version": "1-bookworm"
+        },
+        "digest": "sha256:b36c246742b4d323472588f789601be34eb4af053255e2af53969078ee8dcec7",
+        "mediaType": "application/vnd.oci.image.manifest.v1+json",
+        "platform": {
+          "architecture": "amd64",
+          "os": "linux"
+        },
+        "size": 1940
+      },
+      {
+        "annotations": {
+          "com.docker.official-images.bashbrew.arch": "amd64",
+          "vnd.docker.reference.digest": "sha256:b36c246742b4d323472588f789601be34eb4af053255e2af53969078ee8dcec7",
+          "vnd.docker.reference.type": "attestation-manifest"
+        },
+        "digest": "sha256:347cc21b3f3bb0f52d88131aa94761ee1f7f1df2fb02e8be6b8077bbe6dd34d5",
+        "mediaType": "application/vnd.oci.image.manifest.v1+json",
+        "platform": {
+          "architecture": "unknown",
+          "os": "unknown"
+        },
+        "size": 842
+      },
+      {
+        "annotations": {
+          "com.docker.official-images.bashbrew.arch": "arm32v7",
+          "org.opencontainers.image.base.digest": "sha256:36ea3c29278ec3ab28eebd64b0aa3c9a53b9ecaa72cebcb58762ee813207b94d",
+          "org.opencontainers.image.base.name": "buildpack-deps:bookworm",
+          "org.opencontainers.image.created": "2026-10-06T05:54:48Z",
+          "org.opencontainers.image.revision": "079baa4c2b11008b41b8d13329e7548a6e3dc59a",
+          "org.opencontainers.image.source": "https://github.com/rust-lang/docker-rust.git#079baa4c2b11008b41b8d13329e7548a6e3dc59a:stable/bookworm",
+          "org.opencontainers.image.url": "https://hub.docker.com/_/rust",
+          "org.opencontainers.image.version": "1-bookworm"
+        },
+        "digest": "sha256:86a9c2aca5d1d60d0ffd5397cdeee8bc6796c893ef49c2481000670b0f41e398",
+        "mediaType": "application/vnd.oci.image.manifest.v1+json",
+        "platform": {
+          "architecture": "arm",
+          "os": "linux",
+          "variant": "v7"
+        },
+        "size": 1942
+      },
+      {
+        "annotations": {
+          "com.docker.official-images.bashbrew.arch": "arm32v7",
+          "vnd.docker.reference.digest": "sha256:86a9c2aca5d1d60d0ffd5397cdeee8bc6796c893ef49c2481000670b0f41e398",
+          "vnd.docker.reference.type": "attestation-manifest"
+        },
+        "digest": "sha256:2695c63bf31fffdacb7ee08eb9a48e531023be0238a18f80a711c524874e12e8",
+        "mediaType": "application/vnd.oci.image.manifest.v1+json",
+        "platform": {
+          "architecture": "unknown",
+          "os": "unknown"
+        },
+        "size": 842
+      },
+      {
+        "annotations": {
+          "com.docker.official-images.bashbrew.arch": "arm64v8",
+          "org.opencontainers.image.base.digest": "sha256:713468e310395862392894a4dea5996eb8f6f76498c74dcbd37613e0f740096f",
+          "org.opencontainers.image.base.name": "buildpack-deps:bookworm",
+          "org.opencontainers.image.created": "2026-10-06T04:46:48Z",
+          "org.opencontainers.image.revision": "079baa4c2b11008b41b8d13329e7548a6e3dc59a",
+          "org.opencontainers.image.source": "https://github.com/rust-lang/docker-rust.git#079baa4c2b11008b41b8d13329e7548a6e3dc59a:stable/bookworm",
+          "org.opencontainers.image.url": "https://hub.docker.com/_/rust",
+          "org.opencontainers.image.version": "1-bookworm"
+        },
+        "digest": "sha256:e393e07b3c3c39f238de676b0eb60c03dc7aefe5d6e37be6d29c686bf4d7e256",
+        "mediaType": "application/vnd.oci.image.manifest.v1+json",
+        "platform": {
+          "architecture": "arm64",
+          "os": "linux",
+          "variant": "v8"
+        },
+        "size": 1942
+      },
+      {
+        "annotations": {
+          "com.docker.official-images.bashbrew.arch": "arm64v8",
+          "vnd.docker.reference.digest": "sha256:e393e07b3c3c39f238de676b0eb60c03dc7aefe5d6e37be6d29c686bf4d7e256",
+          "vnd.docker.reference.type": "attestation-manifest"
+        },
+        "digest": "sha256:c914714c9d25189743fd8266126a94d0421a27e01ece3eae2b723d0bb842d3f2",
+        "mediaType": "application/vnd.oci.image.manifest.v1+json",
+        "platform": {
+          "architecture": "unknown",
+          "os": "unknown"
+        },
+        "size": 842
+      },
+      {
+        "annotations": {
+          "com.docker.official-images.bashbrew.arch": "i386",
+          "org.opencontainers.image.base.digest": "sha256:085770b6083172771374e49f3430a88c84e63dd99ff3135bdd776c9ee39f6c40",
+          "org.opencontainers.image.base.name": "buildpack-deps:bookworm",
+          "org.opencontainers.image.created": "2026-10-06T04:38:40Z",
+          "org.opencontainers.image.revision": "079baa4c2b11008b41b8d13329e7548a6e3dc59a",
+          "org.opencontainers.image.source": "https://github.com/rust-lang/docker-rust.git#079baa4c2b11008b41b8d13329e7548a6e3dc59a:stable/bookworm",
+          "org.opencontainers.image.url": "https://hub.docker.com/_/rust",
+          "org.opencontainers.image.version": "1-bookworm"
+        },
+        "digest": "sha256:d16fdc4eee1d5eb8ab8c3edbdbac647101c7ef742ae9184a8e2ade6bf822a6e5",
+        "mediaType": "application/vnd.oci.image.manifest.v1+json",
+        "platform": {
+          "architecture": "386",
+          "os": "linux"
+        },
+        "size": 1939
+      },
+      {
+        "annotations": {
+          "com.docker.official-images.bashbrew.arch": "i386",
+          "vnd.docker.reference.digest": "sha256:d16fdc4eee1d5eb8ab8c3edbdbac647101c7ef742ae9184a8e2ade6bf822a6e5",
+          "vnd.docker.reference.type": "attestation-manifest"
+        },
+        "digest": "sha256:7719b38f47f99d30c2df8dda734febaf93f375e3adff10ccd6ec27ce18401220",
+        "mediaType": "application/vnd.oci.image.manifest.v1+json",
+        "platform": {
+          "architecture": "unknown",
+          "os": "unknown"
+        },
+        "size": 842
+      },
+      {
+        "annotations": {
+          "com.docker.official-images.bashbrew.arch": "ppc64le",
+          "org.opencontainers.image.base.digest": "sha256:af8731adb06753af169c92aebe148c8b07b3cc0c11e5b8440faf1bb13abfceaa",
+          "org.opencontainers.image.base.name": "buildpack-deps:bookworm",
+          "org.opencontainers.image.created": "2026-10-06T18:50:43Z",
+          "org.opencontainers.image.revision": "079baa4c2b11008b41b8d13329e7548a6e3dc59a",
+          "org.opencontainers.image.source": "https://github.com/rust-lang/docker-rust.git#079baa4c2b11008b41b8d13329e7548a6e3dc59a:stable/bookworm",
+          "org.opencontainers.image.url": "https://hub.docker.com/_/rust",
+          "org.opencontainers.image.version": "1-bookworm"
+        },
+        "digest": "sha256:6158d984f89300e1014f7ad2b136c871ff10885be91c6186cbcc6e33d5b64ae1",
+        "mediaType": "application/vnd.oci.image.manifest.v1+json",
+        "platform": {
+          "architecture": "ppc64le",
+          "os": "linux"
+        },
+        "size": 1942
+      },
+      {
+        "annotations": {
+          "com.docker.official-images.bashbrew.arch": "ppc64le",
+          "vnd.docker.reference.digest": "sha256:6158d984f89300e1014f7ad2b136c871ff10885be91c6186cbcc6e33d5b64ae1",
+          "vnd.docker.reference.type": "attestation-manifest"
+        },
+        "digest": "sha256:84763b1edf621e5302354eae0ceec10848d15ff50a11e09c2292d6c331a70239",
+        "mediaType": "application/vnd.oci.image.manifest.v1+json",
+        "platform": {
+          "architecture": "unknown",
+          "os": "unknown"
+        },
+        "size": 842
+      }
+    ],
+    "mediaType": "application/vnd.oci.image.index.v1+json",
+    "schemaVersion": 2
+  },
+  "rootImageManifest": {
+    "schemaVersion": 2,
+    "mediaType": "application/vnd.oci.image.manifest.v1+json",
+    "config": {
+      "mediaType": "application/vnd.oci.image.config.v1+json",
+      "digest": "sha256:73eb2767751775c6ff108a52a3ba67d0913be05ad319a34993f13e52463aa361",
+      "size": 4562
+    },
+    "layers": [
+      {
+        "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+        "digest": "sha256:2a02c40189e361a19e7cb07374fe9925f5c4f7db254ae2b9196348c27c286b03",
+        "size": 48401555
+      },
+      {
+        "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+        "digest": "sha256:bdc7363672c63abfefdedaf5e03be8e39cb662841d4f31237c4b7d7e3729f65c",
+        "size": 23442412
+      },
+      {
+        "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+        "digest": "sha256:99713dbe79ee22ead7509cd8c7c37d309206e5ddd834ba41611459b49e6ddc06",
+        "size": 66769669
+      },
+      {
+        "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+        "digest": "sha256:4562cb873c99b9446ba4daee7180b2d40bbac13aefcf459f2e516776c1ed0458",
+        "size": 203246653
+      },
+      {
+        "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+        "digest": "sha256:e15eaf310247f4ef58be3d467855ac40c5c0a2b71d6c5bce585051acf8336c72",
+        "size": 187516724
+      }
+    ],
+    "annotations": {
+      "com.docker.official-images.bashbrew.arch": "arm64v8",
+      "org.opencontainers.image.base.digest": "sha256:713468e310395862392894a4dea5996eb8f6f76498c74dcbd37613e0f740096f",
+      "org.opencontainers.image.base.name": "buildpack-deps:bookworm",
+      "org.opencontainers.image.created": "2026-10-06T04:46:48Z",
+      "org.opencontainers.image.revision": "079baa4c2b11008b41b8d13329e7548a6e3dc59a",
+      "org.opencontainers.image.source": "https://github.com/rust-lang/docker-rust.git#079baa4c2b11008b41b8d13329e7548a6e3dc59a:stable/bookworm",
+      "org.opencontainers.image.url": "https://hub.docker.com/_/rust",
+      "org.opencontainers.image.version": "1-bookworm"
+    }
+  },
+  "filesystemFormattingTools": [
+    {
+      "package": "e2fsprogs",
+      "version": "1.47.4-r0",
+      "dependencies": "so:libblkid.so.1 so:libc.musl-aarch64.so.1 so:libcom_err.so.2 so:libe2p.so.2 so:libext2fs.so.2 so:libuuid.so.1",
+      "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/main/aarch64/e2fsprogs-1.47.4-r0.apk",
+      "bytes": 184461,
+      "digest": "sha256:52fd401e79ce6b0ff7648733ba4de3135083cd0132543534e72106e7ea767a00"
+    },
+    {
+      "package": "e2fsprogs-libs",
+      "version": "1.47.4-r0",
+      "dependencies": "so:libc.musl-aarch64.so.1 so:libcom_err.so.2",
+      "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/main/aarch64/e2fsprogs-libs-1.47.4-r0.apk",
+      "bytes": 216701,
+      "digest": "sha256:52124971ae397d599aadd79263fcd68fc9e271922ccf8185b124f35fe24c60c8"
+    },
+    {
+      "package": "libuuid",
+      "version": "2.42.3-r1",
+      "dependencies": "so:libc.musl-aarch64.so.1",
+      "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/main/aarch64/libuuid-2.42.3-r1.apk",
+      "bytes": 15385,
+      "digest": "sha256:9ce20c7ffe2ccaa7c321893c10564abbca13c3f2edb82f60a35f1f68e004f86c"
+    },
+    {
+      "package": "libblkid",
+      "version": "2.42.3-r1",
+      "dependencies": "so:libc.musl-aarch64.so.1 so:libeconf.so.0",
+      "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/main/aarch64/libblkid-2.42.3-r1.apk",
+      "bytes": 97097,
+      "digest": "sha256:9d0f24976c575c53c12526b6e078edf34c980c153bc8e5f1c1053cbece5b8cfa"
+    },
+    {
+      "package": "libcom_err",
+      "version": "1.47.4-r0",
+      "dependencies": "so:libc.musl-aarch64.so.1",
+      "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/main/aarch64/libcom_err-1.47.4-r0.apk",
+      "bytes": 6577,
+      "digest": "sha256:a75b5955ff57046e33fc2842cfe466dc77d8e68305d5c86c6646b38a069490a2"
+    },
+    {
+      "package": "libeconf",
+      "version": "0.8.3-r0",
+      "dependencies": "so:libc.musl-aarch64.so.1",
+      "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/main/aarch64/libeconf-0.8.3-r0.apk",
+      "bytes": 27259,
+      "digest": "sha256:cf0899d49ded0a6891e3cdf1b37887f2ecd77293afe1d8f3cb8937763c83f183"
+    }
+  ],
+  "rustToolchainComponents": [
+    {
+      "package": "clippy-preview",
+      "url": "https://static.rust-lang.org/dist/2026-10-01/clippy-1.99.0-aarch64-unknown-linux-gnu.tar.xz",
+      "version": "0.1.99",
+      "digest": "sha256:42e49dc02d29949395c0c072585961f6c9b5408110236087828d4e2f94ca96ef",
+      "bytes": 3810696,
+      "path": "clippy-1.99.0-aarch64-unknown-linux-gnu.tar.xz"
+    },
+    {
+      "package": "rustfmt-preview",
+      "url": "https://static.rust-lang.org/dist/2026-10-01/rustfmt-1.99.0-aarch64-unknown-linux-gnu.tar.xz",
+      "version": "1.10.0",
+      "digest": "sha256:4b9162fef99fd5246d2f83a2430c144e9bb9095aac6d1de0aaebde45ec01e09a",
+      "bytes": 2285720,
+      "path": "rustfmt-1.99.0-aarch64-unknown-linux-gnu.tar.xz"
+    }
+  ],
+  "bootstrapSourcesArchive": {
+    "path": "bootstrap-sources.tar.gz",
+    "digest": "sha256:921c670c3aefd092e7311ddcb3c63d77c42d15503750ddb41354dcaf7196afb9"
+  },
+  "limits": "Initial sandbox VM validation reported unavailable virtualization; narrowly escalated project-owned guest boot succeeded. Bootstrap missing-module/component/Python/reference assets failures are preserved. This runtime is test tooling, not a shipped protected installer."
+}

@@ -1,0 +1,45 @@
+[    0.064583] hv_vmbus: registering driver hyperv_keyboard
+[    0.064901] rtc-pl031 20050000.pl031: registered as rtc0
+[    0.065002] rtc-pl031 20050000.pl031: setting system clock to 2026-10-11T04:30:24 UTC (1791693024)
+[    0.065269] NET: Registered PF_INET6 protocol family
+[    0.065622] Segment Routing with IPv6
+[    0.065660] In-situ OAM (IOAM) with IPv6
+[    0.066790] registered taskstats version 1
+[    0.066940] Loading compiled-in X.509 certificates
+[    0.119476] Freeing initrd memory: 9704K
+[    0.121287] Loaded X.509 cert 'alpinelinux.org: Alpine Linux kernel key: 87fa969a47f3e2a6aa35859eb932a17c95abcd82'
+[    0.122338] Demotion targets for Node 0: null
+[    0.122535] Key type .fscrypt registered
+[    0.122575] Key type fscrypt-provisioning registered
+[    0.124805] clk: Disabling unused clocks
+[    0.124880] PM: genpd: Disabling unused power domains
+[    0.125102] Freeing unused kernel memory: 2048K
+[    0.125161] Run /init as init process
+[    0.128348] virtio_blk virtio1: 1/0/0 default/read/poll queues
+[    0.128560] virtio_blk virtio1: [vda] 67108864 512-byte logical blocks (34.4 GB/32.0 GiB)
+[    0.135600] virtio_blk virtio2: 1/0/0 default/read/poll queues
+[    0.135827] virtio_blk virtio2: [vdb] 34656 512-byte logical blocks (17.7 MB/16.9 MiB)
+[    0.152514] fuse: init (API version 7.45)
+[    0.153355] virtiofs virtio3: discovered new tag: bindloom-share
+[    0.153692] virtiofs virtio4: discovered new tag: bindloom-results
+[    0.155427] squashfs: version 4.0 (2009/01/31) Phillip Lougher
+[    0.228696] EXT4-fs (vda): recovery complete
+[    0.228866] EXT4-fs (vda): mounted filesystem 5e630760-c528-11f1-8771-2b08d63fdbb3 r/w with ordered data mode. Quota mode: none.
+[    1.304090] random: crng init done
+BINDLOOM_FINAL_SOURCE_INPUT_VERIFIED sha256:389b51d08417f14cc4e11eda77754512e1a90cb1cf7b4eaf247359bc1566f2cf
+Traceback (most recent call last):
+  File "/final-input/bindloom-draft-07f74356f72d/scripts/package.py", line 54, in <module>
+    toolchain = subprocess.check_output([rustc, "-vV"], text=True)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/bindloom-python/lib/python3.12/subprocess.py", line 466, in check_output
+    return run(*popenargs, stdout=PIPE, timeout=timeout, check=True,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/bindloom-python/lib/python3.12/subprocess.py", line 548, in run
+    with Popen(*popenargs, **kwargs) as process:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/bindloom-python/lib/python3.12/subprocess.py", line 1026, in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+  File "/opt/bindloom-python/lib/python3.12/subprocess.py", line 1955, in _execute_child
+    raise child_exception_type(errno_num, err_msg, err_filename)
+FileNotFoundError: [Errno 2] No such file or directory: '/.cargo/bin/rustc'
+BINDLOOM_VM_GUEST_EXIT=1

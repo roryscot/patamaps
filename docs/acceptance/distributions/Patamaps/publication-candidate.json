@@ -1,0 +1,147 @@
+{
+  "status": "passed",
+  "purpose": "Bind the requested initial source publication to the immutable tested Patamaps draft snapshots.",
+  "baseCommit": "ab6efc333a3c90f7ce9235822b49098809d8b159",
+  "destination": {
+    "repository": "roryscot/patamaps",
+    "branch": "main",
+    "visibility": "public",
+    "account": "roryscot",
+    "sshAccount": "roryscot"
+  },
+  "commitIdentity": {
+    "name": "Rory Dahl",
+    "email": "rory.dahl@protonmail.com"
+  },
+  "testedSnapshotAcceptance": {
+    "path": "docs/acceptance/distributions/Patamaps/pre-commit/acceptance.json",
+    "digest": "sha256:33d5fa34253e23b76edfc6c348cff9c17480b97bdc0c8170e42626926898ee35",
+    "status": "passed",
+    "sourceInventoryEntries": 396,
+    "sourceInventoryDigest": "sha256:de4186bc3542a715fd1222e321863479b7f934a1b4a3400659bcee6f18d9d4fa"
+  },
+  "unchangedPackagedSourceFiles": 394,
+  "documentationOnlyChanges": [
+    {
+      "path": "README.md",
+      "snapshotDigest": "sha256:62b5a68efee39ad72ecbb64b2ec21ce4a100be4d76cd125b32d4c2ac5240fa9d",
+      "commitCandidateDigest": "sha256:0c0876ebf4b321fe42cc4eaced04d33e39382445801b1a03062412128b320d08"
+    },
+    {
+      "path": "docs/acceptance/2026-10-11-patamaps.md",
+      "snapshotDigest": "sha256:51616669df5a99a04d363b335a46cab13b6bf917e9123236b7f893dfa4911aca",
+      "commitCandidateDigest": "sha256:8b023362358a4c2a8e2ccfaeeeb456a0975c52dddb99cc9abe76d4418429a1ee"
+    }
+  ],
+  "gitIgnoreChange": {
+    "path": ".gitignore",
+    "digest": "sha256:185efafc88f34ae968f4dfce50bac3c7e6f012cba168a7836c6f6ada4b4d7d08",
+    "purpose": "Ignore Cargo target directories at every depth while preserving their local files."
+  },
+  "productionSourcesTestsFixturesContractsSDKsAdaptersAndScripts": "Byte-identical to the installed and native-tested draft candidate; no code change after acceptance.",
+  "sourceIntegrity": {
+    "argv": [
+      "python3",
+      "scripts/test_source_integrity.py",
+      "/Users/admin/dev/SEEDZ/metamap",
+      "--output",
+      "docs/acceptance/distributions/Patamaps/pre-commit/source-integrity-publication.json"
+    ],
+    "exitCode": 0,
+    "stdout": "PASS: 91 original file entries retain exact Git bytes; 22 original expectations unchanged; 53 native destinations exist; current documentation links resolve; reference checkout clean.\n",
+    "stderr": ""
+  },
+  "verificationBoundary": "The full native suites and package installations were previously run on the retained snapshots. This publication check reruns archive/source binding and original source integrity; it does not claim a fresh platform test run.",
+  "publicationBoundary": "This receipt records the verified commit candidate, not successful Git commit or remote push. No release tag, package-registry publication, production installation or activation is included.",
+  "publicationChecks": [
+    {
+      "argv": [
+        "/Users/admin/.cargo/bin/cargo",
+        "fmt",
+        "--all",
+        "--",
+        "--check"
+      ],
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/Users/admin/dev/SEEDZ/metamap/node_modules/.bin/prettier",
+        "--check",
+        "README.md",
+        "BUILD_PLAN.md",
+        "docs/acceptance/2026-10-11-patamaps.md"
+      ],
+      "exitCode": 0,
+      "stdout": "Checking formatting...\nAll matched files use Prettier code style!\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "diff",
+        "--cached",
+        "--check",
+        "--",
+        ".gitignore",
+        "README.md",
+        "BUILD_PLAN.md",
+        "Cargo.toml",
+        "Cargo.lock",
+        "rust-toolchain.toml",
+        "LICENSE",
+        "NOTICE",
+        "crates",
+        "scripts",
+        "sdk",
+        "adapters",
+        "examples",
+        "schemas",
+        "relation-packs",
+        "docs/SPEC.md",
+        "docs/decisions"
+      ],
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  ],
+  "preservedEvidenceWhitespace": {
+    "argv": [
+      "git",
+      "diff",
+      "--cached",
+      "--check"
+    ],
+    "exitCode": 2,
+    "diagnosticsByFile": {
+      "docs/acceptance/distributions/Linux-final-bootstrap-path-failure.raw.log": 38,
+      "docs/acceptance/distributions/Linux-final-initial-environment-failure.raw.log": 45,
+      "docs/acceptance/distributions/Linux-verified/installation-console.raw.log": 61,
+      "docs/acceptance/distributions/Patamaps/stage5.raw.log": 629,
+      "docs/acceptance/distributions/Patamaps/stage6.raw.log": 61,
+      "docs/acceptance/linux-vm/bootstrap-missing-components.raw.log": 69,
+      "docs/acceptance/linux-vm/bootstrap-missing-ext4.raw.log": 23,
+      "docs/acceptance/linux-vm/bootstrap-python-missing-filter.raw.log": 43,
+      "docs/acceptance/linux-vm/initial-boot.raw.log": 23,
+      "docs/acceptance/linux-vm/installation-console.raw.log": 31,
+      "docs/acceptance/linux-vm/native-test-console.raw.log": 616,
+      "docs/acceptance/linux-vm/package-missing-reference-assets.raw.log": 7392,
+      "docs/acceptance/native-test-before-lifecycle.log": 1,
+      "docs/acceptance/scientific-native/condensed.sssom.tsv": 7,
+      "docs/acceptance/scientific-native/default.sssom.tsv": 7,
+      "docs/acceptance/scientific-native/source.tsv": 7,
+      "fixtures/reference/examples/scientific-mapping/fixtures/mgi-subset.sssom.tsv": 7,
+      "fixtures/reference/standards/sssom-1.0.0/sssom_schema.yaml": 21
+    },
+    "disposition": "Preserved exact raw console bytes, scientific TSV trailing empty fields and original schema bytes. No active implementation or current documentation whitespace diagnostics."
+  },
+  "stagingCheck": {
+    "files": 480,
+    "allIndexedBytesMatchedWorkspace": true,
+    "excludedBuildCachesAndLocalTools": true,
+    "noUnstagedProjectFiles": true
+  }
+}

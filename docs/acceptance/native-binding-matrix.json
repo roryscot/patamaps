@@ -1,0 +1,2246 @@
+{
+  "profile": "consumer-owned-json-string-routing-draft-1",
+  "referencePin": "399747a4ad05a37cd8db1cedd53048fad2175be4",
+  "compiler": {
+    "compiler": "sha256:07f74356f72db6236458375321a18f36240642e695f5e1fbc1a37b9c74fe775f",
+    "documentType": "executor-description",
+    "governance": "sha256:c486ea479e3d0371bec3f5a6fa7f0350b304610280f3ee2253e71539892b031a",
+    "schemaVersion": "0.1.0",
+    "scientific": "sha256:78032b00a319c0fa6d3df5f6c303409643922f330df6bcf2f01bcf15c4ed66ad",
+    "workspace": "sha256:2f2f535c8086b66daec416d4577a78e1acd5797874ddcad7007d28c6dc842403"
+  },
+  "cases": [
+    {
+      "id": "normal-binding",
+      "originalExpectation": {
+        "id": "normal-binding",
+        "expected": "executed",
+        "operation": "urn:bindings:command:create-user",
+        "endpoint": "/users",
+        "displayName": "Ada"
+      },
+      "successor": {
+        "status": "executed",
+        "response": {
+          "displayName": "Ada",
+          "operation": "create-user"
+        },
+        "endpoint": "/users",
+        "build": {
+          "profile": "consumer-owned-json-string-routing-draft-1",
+          "engine": {
+            "compiler": "sha256:07f74356f72db6236458375321a18f36240642e695f5e1fbc1a37b9c74fe775f",
+            "documentType": "executor-description",
+            "governance": "sha256:c486ea479e3d0371bec3f5a6fa7f0350b304610280f3ee2253e71539892b031a",
+            "schemaVersion": "0.1.0",
+            "scientific": "sha256:78032b00a319c0fa6d3df5f6c303409643922f330df6bcf2f01bcf15c4ed66ad",
+            "workspace": "sha256:2f2f535c8086b66daec416d4577a78e1acd5797874ddcad7007d28c6dc842403"
+          },
+          "inputBytes": {
+            "Cargo.lock": "sha256:8fe0318476d121f58dd1f31b075064e163476d24bac26cb08300ce9b23bcfcfe",
+            "Cargo.toml": "sha256:3c2f9a6c89f138d9f79842d6ba058d0d05197d7599f9a033d61b1a3f613e6e56",
+            "consumer/graph.json": "sha256:2c17273a9d0c9640a58e60f71a40fd9f8f2a87ba1e03aebbc4fec23a2055bd0c",
+            "contract/graph.json": "sha256:aa752215d8365291ccb0ecc789aee5ded1d65a68701bc0c1ac1a3fc5c24b7f8f",
+            "contract/input_schema.rs": "sha256:780c7d42f925eb25c7fd2f091576ecdddfadd1c85d1090d450dd1b10709a734d",
+            "policy.json": "sha256:274bba588938ecd2dda08cdc30980393f1b1cb027d2afb0643d83dedad90b976",
+            "projection.json": "sha256:2947b1c880baa36057cc792d1624c6a04587d3a0be9126fc0283d190bfe13d31",
+            "service/graph.json": "sha256:6bc6ae1583b9019779a0e2c27ad48210a4d8b4e42d28206278a2bb87d0495287",
+            "service/handlers/create_user.rs": "sha256:6c65ef7d0015eeb29b96921e61dcb528a66a260a5ecf69a3482e07d8988612e5",
+            "sources.json": "sha256:8346ee27c329c1a19dacfe74cab33adf38e4985753402e27407d62f277ceba34",
+            "src/main.rs": "sha256:595e3eef31dee07dfe9fbe7647e5d9a86c7966a9f05089815a7ba3d59cf3f00d"
+          },
+          "generation": {
+            "schemaVersion": "0.1.0",
+            "documentType": "generation",
+            "profile": "bindloom-routing-draft-1",
+            "id": "urn:bindloom:generation:10ebde1b5f6ebf432a3539cad72d0d088c355715bff5c41cc77e14c4703c85ad",
+            "digest": "sha256:10ebde1b5f6ebf432a3539cad72d0d088c355715bff5c41cc77e14c4703c85ad",
+            "evaluatedAt": "2026-10-09T00:00:00.000Z",
+            "graph": {
+              "id": "urn:bindings:graph",
+              "digest": "sha256:9fd055cd90a8edcc4ef71c52461dc379a75b9f65b51068939c32cec4c536038a"
+            },
+            "policy": {
+              "id": "urn:bindings:policy",
+              "digest": "sha256:03e5a20fcd4267ab552ab39d12d0e93f239254304c5283ef660c11c994efb693"
+            },
+            "packs": [
+              {
+                "id": "urn:metamap:relation-pack:core",
+                "version": "1.0.0",
+                "digest": "sha256:07683a803d0c7b7a4aa621e6bfe9b8cffa8667fd16047601aa4aa86268f84a2e"
+              },
+              {
+                "id": "urn:metamap:relation-pack:routing",
+                "version": "1.0.0",
+                "digest": "sha256:c7bca28d6b8836a04a6f505bff4033947e401dd6c93cfeb8e543f82c9f0cb19d"
+              }
+            ],
+            "context": {
+              "environment": "production"
+            },
+            "activeMappings": [
+              "urn:bindings:mapping:endpoint-production",
+              "urn:bindings:mapping:handler",
+              "urn:bindings:mapping:input"
+            ],
+            "inactiveMappings": [
+              {
+                "id": "urn:bindings:mapping:endpoint-development",
+                "reason": "when-not-satisfied"
+              }
+            ],
+            "evidence": [],
+            "waiversApplied": []
+          },
+          "projection": {
+            "schemaVersion": "0.1.0",
+            "documentType": "projection",
+            "profile": "bindloom-routing-draft-1",
+            "id": "urn:bindloom:projection:f4c8ad0e32707eede4ff382eeff25dc35dcce4ad8c28acbb3671697104f61832",
+            "digest": "sha256:f4c8ad0e32707eede4ff382eeff25dc35dcce4ad8c28acbb3671697104f61832",
+            "graph": {
+              "id": "urn:bindings:graph",
+              "digest": "sha256:9fd055cd90a8edcc4ef71c52461dc379a75b9f65b51068939c32cec4c536038a"
+            },
+            "generation": {
+              "id": "urn:bindloom:generation:10ebde1b5f6ebf432a3539cad72d0d088c355715bff5c41cc77e14c4703c85ad",
+              "digest": "sha256:10ebde1b5f6ebf432a3539cad72d0d088c355715bff5c41cc77e14c4703c85ad"
+            },
+            "spec": {
+              "id": "urn:bindings:projection",
+              "digest": "sha256:0fd0de63886365e1140794b888ce956d00b13f328e6485daa8201f42a618215d"
+            },
+            "entries": [
+              {
+                "subject": {
+                  "id": "urn:bindings:command:create-user",
+                  "kind": "routing:command"
+                },
+                "slots": [
+                  {
+                    "name": "endpoint",
+                    "relation": "routing:exposed_as",
+                    "direction": "outgoing",
+                    "cardinality": "exactly-one",
+                    "mappings": [
+                      "urn:bindings:mapping:endpoint-production"
+                    ],
+                    "targets": [
+                      {
+                        "id": "urn:bindings:endpoint:production",
+                        "kind": "routing:endpoint",
+                        "attributes": {
+                          "environment": "production",
+                          "method": "POST",
+                          "path": "/users"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "name": "handler",
+                    "relation": "routing:handled_by",
+                    "direction": "outgoing",
+                    "cardinality": "exactly-one",
+                    "mappings": [
+                      "urn:bindings:mapping:handler"
+                    ],
+                    "targets": [
+                      {
+                        "id": "urn:bindings:handler:create-user",
+                        "kind": "routing:handler",
+                        "locators": [
+                          {
+                            "uri": "rust:crate::service::create_user",
+                            "digest": "sha256:6c65ef7d0015eeb29b96921e61dcb528a66a260a5ecf69a3482e07d8988612e5"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "name": "input",
+                    "relation": "routing:accepts",
+                    "direction": "outgoing",
+                    "cardinality": "exactly-one",
+                    "mappings": [
+                      "urn:bindings:mapping:input"
+                    ],
+                    "targets": [
+                      {
+                        "id": "urn:bindings:schema:create-user",
+                        "kind": "routing:schema",
+                        "locators": [
+                          {
+                            "uri": "rust:crate::contract::validate_create_user",
+                            "digest": "sha256:780c7d42f925eb25c7fd2f091576ecdddfadd1c85d1090d450dd1b10709a734d"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          "coverage": [
+            {
+              "sourceId": "contract",
+              "owner": "team:contract",
+              "entityId": "urn:bindings:schema:create-user",
+              "relation": "routing:accepts",
+              "mappings": [
+                "urn:bindings:mapping:input"
+              ],
+              "exclusion": null
+            },
+            {
+              "sourceId": "service",
+              "owner": "team:service",
+              "entityId": "urn:bindings:handler:create-user",
+              "relation": "routing:handled_by",
+              "mappings": [
+                "urn:bindings:mapping:handler"
+              ],
+              "exclusion": null
+            },
+            {
+              "sourceId": "service",
+              "owner": "team:service",
+              "entityId": "urn:bindings:endpoint:production",
+              "relation": "routing:exposed_as",
+              "mappings": [
+                "urn:bindings:mapping:endpoint-production"
+              ],
+              "exclusion": null
+            },
+            {
+              "sourceId": "service",
+              "owner": "team:service",
+              "entityId": "urn:bindings:endpoint:development",
+              "relation": "routing:exposed_as",
+              "mappings": [
+                "urn:bindings:mapping:endpoint-development"
+              ],
+              "exclusion": null
+            }
+          ],
+          "moduleMap": {
+            "contract": "contract/input_schema.rs",
+            "service": "service/handlers/create_user.rs"
+          },
+          "authorization": "not-evaluated",
+          "activation": "not-evaluated"
+        }
+      },
+      "pass": true,
+      "savedAcceptedBuildUnchanged": true
+    },
+    {
+      "id": "moved-implementation",
+      "originalExpectation": {
+        "id": "moved-implementation",
+        "expected": "executed",
+        "sameSemanticId": true,
+        "locatorChanged": true,
+        "displayName": "Ada"
+      },
+      "successor": {
+        "status": "executed",
+        "response": {
+          "displayName": "Ada",
+          "operation": "create-user"
+        },
+        "endpoint": "/users",
+        "build": {
+          "profile": "consumer-owned-json-string-routing-draft-1",
+          "engine": {
+            "compiler": "sha256:07f74356f72db6236458375321a18f36240642e695f5e1fbc1a37b9c74fe775f",
+            "documentType": "executor-description",
+            "governance": "sha256:c486ea479e3d0371bec3f5a6fa7f0350b304610280f3ee2253e71539892b031a",
+            "schemaVersion": "0.1.0",
+            "scientific": "sha256:78032b00a319c0fa6d3df5f6c303409643922f330df6bcf2f01bcf15c4ed66ad",
+            "workspace": "sha256:2f2f535c8086b66daec416d4577a78e1acd5797874ddcad7007d28c6dc842403"
+          },
+          "inputBytes": {
+            "Cargo.lock": "sha256:8fe0318476d121f58dd1f31b075064e163476d24bac26cb08300ce9b23bcfcfe",
+            "Cargo.toml": "sha256:3c2f9a6c89f138d9f79842d6ba058d0d05197d7599f9a033d61b1a3f613e6e56",
+            "consumer/graph.json": "sha256:2c17273a9d0c9640a58e60f71a40fd9f8f2a87ba1e03aebbc4fec23a2055bd0c",
+            "contract/graph.json": "sha256:aa752215d8365291ccb0ecc789aee5ded1d65a68701bc0c1ac1a3fc5c24b7f8f",
+            "contract/input_schema.rs": "sha256:780c7d42f925eb25c7fd2f091576ecdddfadd1c85d1090d450dd1b10709a734d",
+            "policy.json": "sha256:274bba588938ecd2dda08cdc30980393f1b1cb027d2afb0643d83dedad90b976",
+            "projection.json": "sha256:2947b1c880baa36057cc792d1624c6a04587d3a0be9126fc0283d190bfe13d31",
+            "service/graph.json": "sha256:6bc6ae1583b9019779a0e2c27ad48210a4d8b4e42d28206278a2bb87d0495287",
+            "service/relocated/create_user.rs": "sha256:6c65ef7d0015eeb29b96921e61dcb528a66a260a5ecf69a3482e07d8988612e5",
+            "sources.json": "sha256:112b29df8b66c896a733a8c928c751d13843d509683fb506e71af3c4adf73529",
+            "src/main.rs": "sha256:595e3eef31dee07dfe9fbe7647e5d9a86c7966a9f05089815a7ba3d59cf3f00d"
+          },
+          "generation": {
+            "schemaVersion": "0.1.0",
+            "documentType": "generation",
+            "profile": "bindloom-routing-draft-1",
+            "id": "urn:bindloom:generation:10ebde1b5f6ebf432a3539cad72d0d088c355715bff5c41cc77e14c4703c85ad",
+            "digest": "sha256:10ebde1b5f6ebf432a3539cad72d0d088c355715bff5c41cc77e14c4703c85ad",
+            "evaluatedAt": "2026-10-09T00:00:00.000Z",
+            "graph": {
+              "id": "urn:bindings:graph",
+              "digest": "sha256:9fd055cd90a8edcc4ef71c52461dc379a75b9f65b51068939c32cec4c536038a"
+            },
+            "policy": {
+              "id": "urn:bindings:policy",
+              "digest": "sha256:03e5a20fcd4267ab552ab39d12d0e93f239254304c5283ef660c11c994efb693"
+            },
+            "packs": [
+              {
+                "id": "urn:metamap:relation-pack:core",
+                "version": "1.0.0",
+                "digest": "sha256:07683a803d0c7b7a4aa621e6bfe9b8cffa8667fd16047601aa4aa86268f84a2e"
+              },
+              {
+                "id": "urn:metamap:relation-pack:routing",
+                "version": "1.0.0",
+                "digest": "sha256:c7bca28d6b8836a04a6f505bff4033947e401dd6c93cfeb8e543f82c9f0cb19d"
+              }
+            ],
+            "context": {
+              "environment": "production"
+            },
+            "activeMappings": [
+              "urn:bindings:mapping:endpoint-production",
+              "urn:bindings:mapping:handler",
+              "urn:bindings:mapping:input"
+            ],
+            "inactiveMappings": [
+              {
+                "id": "urn:bindings:mapping:endpoint-development",
+                "reason": "when-not-satisfied"
+              }
+            ],
+            "evidence": [],
+            "waiversApplied": []
+          },
+          "projection": {
+            "schemaVersion": "0.1.0",
+            "documentType": "projection",
+            "profile": "bindloom-routing-draft-1",
+            "id": "urn:bindloom:projection:f4c8ad0e32707eede4ff382eeff25dc35dcce4ad8c28acbb3671697104f61832",
+            "digest": "sha256:f4c8ad0e32707eede4ff382eeff25dc35dcce4ad8c28acbb3671697104f61832",
+            "graph": {
+              "id": "urn:bindings:graph",
+              "digest": "sha256:9fd055cd90a8edcc4ef71c52461dc379a75b9f65b51068939c32cec4c536038a"
+            },
+            "generation": {
+              "id": "urn:bindloom:generation:10ebde1b5f6ebf432a3539cad72d0d088c355715bff5c41cc77e14c4703c85ad",
+              "digest": "sha256:10ebde1b5f6ebf432a3539cad72d0d088c355715bff5c41cc77e14c4703c85ad"
+            },
+            "spec": {
+              "id": "urn:bindings:projection",
+              "digest": "sha256:0fd0de63886365e1140794b888ce956d00b13f328e6485daa8201f42a618215d"
+            },
+            "entries": [
+              {
+                "subject": {
+                  "id": "urn:bindings:command:create-user",
+                  "kind": "routing:command"
+                },
+                "slots": [
+                  {
+                    "name": "endpoint",
+                    "relation": "routing:exposed_as",
+                    "direction": "outgoing",
+                    "cardinality": "exactly-one",
+                    "mappings": [
+                      "urn:bindings:mapping:endpoint-production"
+                    ],
+                    "targets": [
+                      {
+                        "id": "urn:bindings:endpoint:production",
+                        "kind": "routing:endpoint",
+                        "attributes": {
+                          "environment": "production",
+                          "method": "POST",
+                          "path": "/users"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "name": "handler",
+                    "relation": "routing:handled_by",
+                    "direction": "outgoing",
+                    "cardinality": "exactly-one",
+                    "mappings": [
+                      "urn:bindings:mapping:handler"
+                    ],
+                    "targets": [
+                      {
+                        "id": "urn:bindings:handler:create-user",
+                        "kind": "routing:handler",
+                        "locators": [
+                          {
+                            "uri": "rust:crate::service::create_user",
+                            "digest": "sha256:6c65ef7d0015eeb29b96921e61dcb528a66a260a5ecf69a3482e07d8988612e5"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "name": "input",
+                    "relation": "routing:accepts",
+                    "direction": "outgoing",
+                    "cardinality": "exactly-one",
+                    "mappings": [
+                      "urn:bindings:mapping:input"
+                    ],
+                    "targets": [
+                      {
+                        "id": "urn:bindings:schema:create-user",
+                        "kind": "routing:schema",
+                        "locators": [
+                          {
+                            "uri": "rust:crate::contract::validate_create_user",
+                            "digest": "sha256:780c7d42f925eb25c7fd2f091576ecdddfadd1c85d1090d450dd1b10709a734d"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          "coverage": [
+            {
+              "sourceId": "contract",
+              "owner": "team:contract",
+              "entityId": "urn:bindings:schema:create-user",
+              "relation": "routing:accepts",
+              "mappings": [
+                "urn:bindings:mapping:input"
+              ],
+              "exclusion": null
+            },
+            {
+              "sourceId": "service",
+              "owner": "team:service",
+              "entityId": "urn:bindings:handler:create-user",
+              "relation": "routing:handled_by",
+              "mappings": [
+                "urn:bindings:mapping:handler"
+              ],
+              "exclusion": null
+            },
+            {
+              "sourceId": "service",
+              "owner": "team:service",
+              "entityId": "urn:bindings:endpoint:production",
+              "relation": "routing:exposed_as",
+              "mappings": [
+                "urn:bindings:mapping:endpoint-production"
+              ],
+              "exclusion": null
+            },
+            {
+              "sourceId": "service",
+              "owner": "team:service",
+              "entityId": "urn:bindings:endpoint:development",
+              "relation": "routing:exposed_as",
+              "mappings": [
+                "urn:bindings:mapping:endpoint-development"
+              ],
+              "exclusion": null
+            }
+          ],
+          "moduleMap": {
+            "contract": "contract/input_schema.rs",
+            "service": "service/relocated/create_user.rs"
+          },
+          "authorization": "not-evaluated",
+          "activation": "not-evaluated"
+        }
+      },
+      "pass": true,
+      "savedAcceptedBuildUnchanged": true
+    },
+    {
+      "id": "development-context",
+      "originalExpectation": {
+        "id": "development-context",
+        "expected": "executed",
+        "endpoint": "/dev/users",
+        "displayName": "Ada"
+      },
+      "successor": {
+        "status": "executed",
+        "response": {
+          "displayName": "Ada",
+          "operation": "create-user"
+        },
+        "endpoint": "/dev/users",
+        "build": {
+          "profile": "consumer-owned-json-string-routing-draft-1",
+          "engine": {
+            "compiler": "sha256:07f74356f72db6236458375321a18f36240642e695f5e1fbc1a37b9c74fe775f",
+            "documentType": "executor-description",
+            "governance": "sha256:c486ea479e3d0371bec3f5a6fa7f0350b304610280f3ee2253e71539892b031a",
+            "schemaVersion": "0.1.0",
+            "scientific": "sha256:78032b00a319c0fa6d3df5f6c303409643922f330df6bcf2f01bcf15c4ed66ad",
+            "workspace": "sha256:2f2f535c8086b66daec416d4577a78e1acd5797874ddcad7007d28c6dc842403"
+          },
+          "inputBytes": {
+            "Cargo.lock": "sha256:8fe0318476d121f58dd1f31b075064e163476d24bac26cb08300ce9b23bcfcfe",
+            "Cargo.toml": "sha256:3c2f9a6c89f138d9f79842d6ba058d0d05197d7599f9a033d61b1a3f613e6e56",
+            "consumer/graph.json": "sha256:2c17273a9d0c9640a58e60f71a40fd9f8f2a87ba1e03aebbc4fec23a2055bd0c",
+            "contract/graph.json": "sha256:aa752215d8365291ccb0ecc789aee5ded1d65a68701bc0c1ac1a3fc5c24b7f8f",
+            "contract/input_schema.rs": "sha256:780c7d42f925eb25c7fd2f091576ecdddfadd1c85d1090d450dd1b10709a734d",
+            "policy.json": "sha256:274bba588938ecd2dda08cdc30980393f1b1cb027d2afb0643d83dedad90b976",
+            "projection.json": "sha256:2947b1c880baa36057cc792d1624c6a04587d3a0be9126fc0283d190bfe13d31",
+            "service/graph.json": "sha256:6bc6ae1583b9019779a0e2c27ad48210a4d8b4e42d28206278a2bb87d0495287",
+            "service/handlers/create_user.rs": "sha256:6c65ef7d0015eeb29b96921e61dcb528a66a260a5ecf69a3482e07d8988612e5",
+            "sources.json": "sha256:8346ee27c329c1a19dacfe74cab33adf38e4985753402e27407d62f277ceba34",
+            "src/main.rs": "sha256:595e3eef31dee07dfe9fbe7647e5d9a86c7966a9f05089815a7ba3d59cf3f00d"
+          },
+          "generation": {
+            "schemaVersion": "0.1.0",
+            "documentType": "generation",
+            "profile": "bindloom-routing-draft-1",
+            "id": "urn:bindloom:generation:a92d859b29390aa9878e4fd5b797aa0ca1bc7cd9bea242f7fe404aec30d3e5ec",
+            "digest": "sha256:a92d859b29390aa9878e4fd5b797aa0ca1bc7cd9bea242f7fe404aec30d3e5ec",
+            "evaluatedAt": "2026-10-09T00:00:00.000Z",
+            "graph": {
+              "id": "urn:bindings:graph",
+              "digest": "sha256:9fd055cd90a8edcc4ef71c52461dc379a75b9f65b51068939c32cec4c536038a"
+            },
+            "policy": {
+              "id": "urn:bindings:policy",
+              "digest": "sha256:03e5a20fcd4267ab552ab39d12d0e93f239254304c5283ef660c11c994efb693"
+            },
+            "packs": [
+              {
+                "id": "urn:metamap:relation-pack:core",
+                "version": "1.0.0",
+                "digest": "sha256:07683a803d0c7b7a4aa621e6bfe9b8cffa8667fd16047601aa4aa86268f84a2e"
+              },
+              {
+                "id": "urn:metamap:relation-pack:routing",
+                "version": "1.0.0",
+                "digest": "sha256:c7bca28d6b8836a04a6f505bff4033947e401dd6c93cfeb8e543f82c9f0cb19d"
+              }
+            ],
+            "context": {
+              "environment": "development"
+            },
+            "activeMappings": [
+              "urn:bindings:mapping:endpoint-development",
+              "urn:bindings:mapping:handler",
+              "urn:bindings:mapping:input"
+            ],
+            "inactiveMappings": [
+              {
+                "id": "urn:bindings:mapping:endpoint-production",
+                "reason": "when-not-satisfied"
+              }
+            ],
+            "evidence": [],
+            "waiversApplied": []
+          },
+          "projection": {
+            "schemaVersion": "0.1.0",
+            "documentType": "projection",
+            "profile": "bindloom-routing-draft-1",
+            "id": "urn:bindloom:projection:2c9d10358c643967f78ff1a55b0abafb813f804bc393da229c45b5a0e908085a",
+            "digest": "sha256:2c9d10358c643967f78ff1a55b0abafb813f804bc393da229c45b5a0e908085a",
+            "graph": {
+              "id": "urn:bindings:graph",
+              "digest": "sha256:9fd055cd90a8edcc4ef71c52461dc379a75b9f65b51068939c32cec4c536038a"
+            },
+            "generation": {
+              "id": "urn:bindloom:generation:a92d859b29390aa9878e4fd5b797aa0ca1bc7cd9bea242f7fe404aec30d3e5ec",
+              "digest": "sha256:a92d859b29390aa9878e4fd5b797aa0ca1bc7cd9bea242f7fe404aec30d3e5ec"
+            },
+            "spec": {
+              "id": "urn:bindings:projection",
+              "digest": "sha256:0fd0de63886365e1140794b888ce956d00b13f328e6485daa8201f42a618215d"
+            },
+            "entries": [
+              {
+                "subject": {
+                  "id": "urn:bindings:command:create-user",
+                  "kind": "routing:command"
+                },
+                "slots": [
+                  {
+                    "name": "endpoint",
+                    "relation": "routing:exposed_as",
+                    "direction": "outgoing",
+                    "cardinality": "exactly-one",
+                    "mappings": [
+                      "urn:bindings:mapping:endpoint-development"
+                    ],
+                    "targets": [
+                      {
+                        "id": "urn:bindings:endpoint:development",
+                        "kind": "routing:endpoint",
+                        "attributes": {
+                          "environment": "development",
+                          "method": "POST",
+                          "path": "/dev/users"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "name": "handler",
+                    "relation": "routing:handled_by",
+                    "direction": "outgoing",
+                    "cardinality": "exactly-one",
+                    "mappings": [
+                      "urn:bindings:mapping:handler"
+                    ],
+                    "targets": [
+                      {
+                        "id": "urn:bindings:handler:create-user",
+                        "kind": "routing:handler",
+                        "locators": [
+                          {
+                            "uri": "rust:crate::service::create_user",
+                            "digest": "sha256:6c65ef7d0015eeb29b96921e61dcb528a66a260a5ecf69a3482e07d8988612e5"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "name": "input",
+                    "relation": "routing:accepts",
+                    "direction": "outgoing",
+                    "cardinality": "exactly-one",
+                    "mappings": [
+                      "urn:bindings:mapping:input"
+                    ],
+                    "targets": [
+                      {
+                        "id": "urn:bindings:schema:create-user",
+                        "kind": "routing:schema",
+                        "locators": [
+                          {
+                            "uri": "rust:crate::contract::validate_create_user",
+                            "digest": "sha256:780c7d42f925eb25c7fd2f091576ecdddfadd1c85d1090d450dd1b10709a734d"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          "coverage": [
+            {
+              "sourceId": "contract",
+              "owner": "team:contract",
+              "entityId": "urn:bindings:schema:create-user",
+              "relation": "routing:accepts",
+              "mappings": [
+                "urn:bindings:mapping:input"
+              ],
+              "exclusion": null
+            },
+            {
+              "sourceId": "service",
+              "owner": "team:service",
+              "entityId": "urn:bindings:handler:create-user",
+              "relation": "routing:handled_by",
+              "mappings": [
+                "urn:bindings:mapping:handler"
+              ],
+              "exclusion": null
+            },
+            {
+              "sourceId": "service",
+              "owner": "team:service",
+              "entityId": "urn:bindings:endpoint:production",
+              "relation": "routing:exposed_as",
+              "mappings": [
+                "urn:bindings:mapping:endpoint-production"
+              ],
+              "exclusion": null
+            },
+            {
+              "sourceId": "service",
+              "owner": "team:service",
+              "entityId": "urn:bindings:endpoint:development",
+              "relation": "routing:exposed_as",
+              "mappings": [
+                "urn:bindings:mapping:endpoint-development"
+              ],
+              "exclusion": null
+            }
+          ],
+          "moduleMap": {
+            "contract": "contract/input_schema.rs",
+            "service": "service/handlers/create_user.rs"
+          },
+          "authorization": "not-evaluated",
+          "activation": "not-evaluated"
+        }
+      },
+      "pass": true,
+      "savedAcceptedBuildUnchanged": true
+    },
+    {
+      "id": "missing-handler",
+      "originalExpectation": {
+        "id": "missing-handler",
+        "expected": "rejected",
+        "code": "REQUIRED_MAPPING_MISSING",
+        "preserveArtifacts": true
+      },
+      "successor": {
+        "status": "rejected",
+        "code": "REQUIRED_MAPPING_MISSING",
+        "details": [
+          {
+            "code": "REQUIRED_MAPPING_MISSING",
+            "message": "No active mapping meeting urn:bindings:constraint:handler-required",
+            "severity": "error",
+            "subjectId": "urn:bindings:command:create-user"
+          }
+        ]
+      },
+      "pass": true,
+      "savedAcceptedBuildUnchanged": true
+    },
+    {
+      "id": "ambiguous-handler",
+      "originalExpectation": {
+        "id": "ambiguous-handler",
+        "expected": "rejected",
+        "code": "NON_UNIQUE_MAPPING_TARGET",
+        "preserveArtifacts": true
+      },
+      "successor": {
+        "status": "rejected",
+        "code": "NON_UNIQUE_MAPPING_TARGET",
+        "details": [
+          {
+            "code": "NON_UNIQUE_MAPPING_TARGET",
+            "message": "Multiple targets under urn:bindings:constraint:handler-unique",
+            "severity": "error",
+            "subjectId": "urn:bindings:command:create-user"
+          }
+        ]
+      },
+      "pass": true,
+      "savedAcceptedBuildUnchanged": true
+    },
+    {
+      "id": "missing-endpoint",
+      "originalExpectation": {
+        "id": "missing-endpoint",
+        "expected": "rejected",
+        "code": "REQUIRED_MAPPING_MISSING",
+        "preserveArtifacts": true
+      },
+      "successor": {
+        "status": "rejected",
+        "code": "REQUIRED_MAPPING_MISSING",
+        "details": [
+          {
+            "code": "REQUIRED_MAPPING_MISSING",
+            "message": "No active mapping meeting urn:bindings:constraint:endpoint-required",
+            "severity": "error",
+            "subjectId": "urn:bindings:command:create-user"
+          }
+        ]
+      },
+      "pass": true,
+      "savedAcceptedBuildUnchanged": true
+    },
+    {
+      "id": "ambiguous-endpoint",
+      "originalExpectation": {
+        "id": "ambiguous-endpoint",
+        "expected": "rejected",
+        "code": "NON_UNIQUE_MAPPING_TARGET",
+        "preserveArtifacts": true
+      },
+      "successor": {
+        "status": "rejected",
+        "code": "NON_UNIQUE_MAPPING_TARGET",
+        "details": [
+          {
+            "code": "NON_UNIQUE_MAPPING_TARGET",
+            "message": "Multiple targets under urn:bindings:constraint:endpoint-unique",
+            "severity": "error",
+            "subjectId": "urn:bindings:command:create-user"
+          }
+        ]
+      },
+      "pass": true,
+      "savedAcceptedBuildUnchanged": true
+    },
+    {
+      "id": "missing-context",
+      "originalExpectation": {
+        "id": "missing-context",
+        "expected": "rejected",
+        "code": "CONTEXT_KEY_MISSING",
+        "preserveArtifacts": true
+      },
+      "successor": {
+        "status": "rejected",
+        "code": "CONTEXT_KEY_MISSING",
+        "details": [
+          {
+            "code": "CONTEXT_KEY_MISSING",
+            "message": "Required context key environment is absent",
+            "severity": "error",
+            "subjectId": "urn:bindings:mapping:endpoint-development"
+          },
+          {
+            "code": "CONTEXT_KEY_MISSING",
+            "message": "Required context key environment is absent",
+            "severity": "error",
+            "subjectId": "urn:bindings:mapping:endpoint-production"
+          },
+          {
+            "code": "REQUIRED_MAPPING_MISSING",
+            "message": "No active mapping meeting urn:bindings:constraint:endpoint-required",
+            "severity": "error",
+            "subjectId": "urn:bindings:command:create-user"
+          }
+        ]
+      },
+      "pass": true,
+      "savedAcceptedBuildUnchanged": true
+    },
+    {
+      "id": "conflicting-owners",
+      "originalExpectation": {
+        "id": "conflicting-owners",
+        "expected": "rejected",
+        "code": "AUTHORITY_CONFLICT",
+        "preserveArtifacts": true
+      },
+      "successor": {
+        "status": "rejected",
+        "code": "AUTHORITY_CONFLICT",
+        "details": [
+          {
+            "code": "AUTHORITY_CONFLICT",
+            "message": "Canonical fact scopes overlap",
+            "severity": "error",
+            "subjectId": "urn:bindings:command:create-user"
+          }
+        ]
+      },
+      "pass": true,
+      "savedAcceptedBuildUnchanged": true
+    },
+    {
+      "id": "narrow-delegation",
+      "originalExpectation": {
+        "id": "narrow-delegation",
+        "expected": "executed",
+        "authorityFact": "implementation",
+        "displayName": "Ada"
+      },
+      "successor": {
+        "status": "executed",
+        "response": {
+          "displayName": "Ada",
+          "operation": "create-user"
+        },
+        "endpoint": "/users",
+        "build": {
+          "profile": "consumer-owned-json-string-routing-draft-1",
+          "engine": {
+            "compiler": "sha256:07f74356f72db6236458375321a18f36240642e695f5e1fbc1a37b9c74fe775f",
+            "documentType": "executor-description",
+            "governance": "sha256:c486ea479e3d0371bec3f5a6fa7f0350b304610280f3ee2253e71539892b031a",
+            "schemaVersion": "0.1.0",
+            "scientific": "sha256:78032b00a319c0fa6d3df5f6c303409643922f330df6bcf2f01bcf15c4ed66ad",
+            "workspace": "sha256:2f2f535c8086b66daec416d4577a78e1acd5797874ddcad7007d28c6dc842403"
+          },
+          "inputBytes": {
+            "Cargo.lock": "sha256:8fe0318476d121f58dd1f31b075064e163476d24bac26cb08300ce9b23bcfcfe",
+            "Cargo.toml": "sha256:3c2f9a6c89f138d9f79842d6ba058d0d05197d7599f9a033d61b1a3f613e6e56",
+            "consumer/graph.json": "sha256:8eb60cdced0811f69f710fc423913a79facb9d02c2be41104e4cad73e0f1b372",
+            "contract/graph.json": "sha256:aa752215d8365291ccb0ecc789aee5ded1d65a68701bc0c1ac1a3fc5c24b7f8f",
+            "contract/input_schema.rs": "sha256:780c7d42f925eb25c7fd2f091576ecdddfadd1c85d1090d450dd1b10709a734d",
+            "policy.json": "sha256:274bba588938ecd2dda08cdc30980393f1b1cb027d2afb0643d83dedad90b976",
+            "projection.json": "sha256:2947b1c880baa36057cc792d1624c6a04587d3a0be9126fc0283d190bfe13d31",
+            "service/graph.json": "sha256:6bc6ae1583b9019779a0e2c27ad48210a4d8b4e42d28206278a2bb87d0495287",
+            "service/handlers/create_user.rs": "sha256:6c65ef7d0015eeb29b96921e61dcb528a66a260a5ecf69a3482e07d8988612e5",
+            "sources.json": "sha256:8346ee27c329c1a19dacfe74cab33adf38e4985753402e27407d62f277ceba34",
+            "src/main.rs": "sha256:595e3eef31dee07dfe9fbe7647e5d9a86c7966a9f05089815a7ba3d59cf3f00d"
+          },
+          "generation": {
+            "schemaVersion": "0.1.0",
+            "documentType": "generation",
+            "profile": "bindloom-routing-draft-1",
+            "id": "urn:bindloom:generation:97f4bf86b42a6a0248b0c05f456190f97595b0d565f5a6c5d067629f9220a712",
+            "digest": "sha256:97f4bf86b42a6a0248b0c05f456190f97595b0d565f5a6c5d067629f9220a712",
+            "evaluatedAt": "2026-10-09T00:00:00.000Z",
+            "graph": {
+              "id": "urn:bindings:graph",
+              "digest": "sha256:a9809e5353b9e76c072def3e2f93b6ef69ae703ea224aa954b1f33bb1430effd"
+            },
+            "policy": {
+              "id": "urn:bindings:policy",
+              "digest": "sha256:838d6e24470a4b24deb3ba60a93218bf3b93d778537635dde6e47912dfb4c01c"
+            },
+            "packs": [
+              {
+                "id": "urn:metamap:relation-pack:core",
+                "version": "1.0.0",
+                "digest": "sha256:07683a803d0c7b7a4aa621e6bfe9b8cffa8667fd16047601aa4aa86268f84a2e"
+              },
+              {
+                "id": "urn:metamap:relation-pack:routing",
+                "version": "1.0.0",
+                "digest": "sha256:c7bca28d6b8836a04a6f505bff4033947e401dd6c93cfeb8e543f82c9f0cb19d"
+              }
+            ],
+            "context": {
+              "environment": "production"
+            },
+            "activeMappings": [
+              "urn:bindings:mapping:endpoint-production",
+              "urn:bindings:mapping:handler",
+              "urn:bindings:mapping:input"
+            ],
+            "inactiveMappings": [
+              {
+                "id": "urn:bindings:mapping:endpoint-development",
+                "reason": "when-not-satisfied"
+              }
+            ],
+            "evidence": [],
+            "waiversApplied": []
+          },
+          "projection": {
+            "schemaVersion": "0.1.0",
+            "documentType": "projection",
+            "profile": "bindloom-routing-draft-1",
+            "id": "urn:bindloom:projection:8f1b3191bbece0b81c175e70deae31d9df2222a37ae9eafa420b6079cfb9d8ad",
+            "digest": "sha256:8f1b3191bbece0b81c175e70deae31d9df2222a37ae9eafa420b6079cfb9d8ad",
+            "graph": {
+              "id": "urn:bindings:graph",
+              "digest": "sha256:a9809e5353b9e76c072def3e2f93b6ef69ae703ea224aa954b1f33bb1430effd"
+            },
+            "generation": {
+              "id": "urn:bindloom:generation:97f4bf86b42a6a0248b0c05f456190f97595b0d565f5a6c5d067629f9220a712",
+              "digest": "sha256:97f4bf86b42a6a0248b0c05f456190f97595b0d565f5a6c5d067629f9220a712"
+            },
+            "spec": {
+              "id": "urn:bindings:projection",
+              "digest": "sha256:0fd0de63886365e1140794b888ce956d00b13f328e6485daa8201f42a618215d"
+            },
+            "entries": [
+              {
+                "subject": {
+                  "id": "urn:bindings:command:create-user",
+                  "kind": "routing:command"
+                },
+                "slots": [
+                  {
+                    "name": "endpoint",
+                    "relation": "routing:exposed_as",
+                    "direction": "outgoing",
+                    "cardinality": "exactly-one",
+                    "mappings": [
+                      "urn:bindings:mapping:endpoint-production"
+                    ],
+                    "targets": [
+                      {
+                        "id": "urn:bindings:endpoint:production",
+                        "kind": "routing:endpoint",
+                        "attributes": {
+                          "environment": "production",
+                          "method": "POST",
+                          "path": "/users"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "name": "handler",
+                    "relation": "routing:handled_by",
+                    "direction": "outgoing",
+                    "cardinality": "exactly-one",
+                    "mappings": [
+                      "urn:bindings:mapping:handler"
+                    ],
+                    "targets": [
+                      {
+                        "id": "urn:bindings:handler:create-user",
+                        "kind": "routing:handler",
+                        "locators": [
+                          {
+                            "uri": "rust:crate::service::create_user",
+                            "digest": "sha256:6c65ef7d0015eeb29b96921e61dcb528a66a260a5ecf69a3482e07d8988612e5"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "name": "input",
+                    "relation": "routing:accepts",
+                    "direction": "outgoing",
+                    "cardinality": "exactly-one",
+                    "mappings": [
+                      "urn:bindings:mapping:input"
+                    ],
+                    "targets": [
+                      {
+                        "id": "urn:bindings:schema:create-user",
+                        "kind": "routing:schema",
+                        "locators": [
+                          {
+                            "uri": "rust:crate::contract::validate_create_user",
+                            "digest": "sha256:780c7d42f925eb25c7fd2f091576ecdddfadd1c85d1090d450dd1b10709a734d"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          "coverage": [
+            {
+              "sourceId": "contract",
+              "owner": "team:contract",
+              "entityId": "urn:bindings:schema:create-user",
+              "relation": "routing:accepts",
+              "mappings": [
+                "urn:bindings:mapping:input"
+              ],
+              "exclusion": null
+            },
+            {
+              "sourceId": "service",
+              "owner": "team:service",
+              "entityId": "urn:bindings:handler:create-user",
+              "relation": "routing:handled_by",
+              "mappings": [
+                "urn:bindings:mapping:handler"
+              ],
+              "exclusion": null
+            },
+            {
+              "sourceId": "service",
+              "owner": "team:service",
+              "entityId": "urn:bindings:endpoint:production",
+              "relation": "routing:exposed_as",
+              "mappings": [
+                "urn:bindings:mapping:endpoint-production"
+              ],
+              "exclusion": null
+            },
+            {
+              "sourceId": "service",
+              "owner": "team:service",
+              "entityId": "urn:bindings:endpoint:development",
+              "relation": "routing:exposed_as",
+              "mappings": [
+                "urn:bindings:mapping:endpoint-development"
+              ],
+              "exclusion": null
+            }
+          ],
+          "moduleMap": {
+            "contract": "contract/input_schema.rs",
+            "service": "service/handlers/create_user.rs"
+          },
+          "authorization": "not-evaluated",
+          "activation": "not-evaluated"
+        }
+      },
+      "pass": true,
+      "savedAcceptedBuildUnchanged": true
+    },
+    {
+      "id": "widened-delegation",
+      "originalExpectation": {
+        "id": "widened-delegation",
+        "expected": "rejected",
+        "code": "DELEGATION_FACT_WIDENING",
+        "preserveArtifacts": true
+      },
+      "successor": {
+        "status": "rejected",
+        "code": "DELEGATION_FACT_WIDENING",
+        "details": [
+          {
+            "code": "DELEGATION_FACT_WIDENING",
+            "message": "Delegation widens fact scope",
+            "severity": "error",
+            "subjectId": "urn:bindings:authority:delegated"
+          }
+        ]
+      },
+      "pass": true,
+      "savedAcceptedBuildUnchanged": true
+    },
+    {
+      "id": "conflicting-shards",
+      "originalExpectation": {
+        "id": "conflicting-shards",
+        "expected": "rejected",
+        "code": "SHARD_COMPOSITION_CONFLICT",
+        "preserveArtifacts": true
+      },
+      "successor": {
+        "status": "rejected",
+        "code": "CONFLICTING_SHARD_DEFINITION",
+        "details": [
+          {
+            "code": "CONFLICTING_SHARD_DEFINITION",
+            "message": "Shards disagree on a stable identity",
+            "severity": "error",
+            "subjectId": "urn:bindings:command:create-user"
+          }
+        ]
+      },
+      "pass": true,
+      "savedAcceptedBuildUnchanged": true
+    },
+    {
+      "id": "unmapped-leaf",
+      "originalExpectation": {
+        "id": "unmapped-leaf",
+        "expected": "rejected",
+        "code": "UNMAPPED_OWNED_LEAF",
+        "preserveArtifacts": true
+      },
+      "successor": {
+        "status": "rejected",
+        "code": "UNMAPPED_OWNED_LEAF",
+        "details": "urn:bindings:handler:unbound"
+      },
+      "pass": true,
+      "savedAcceptedBuildUnchanged": true
+    },
+    {
+      "id": "owned-exclusion",
+      "originalExpectation": {
+        "id": "owned-exclusion",
+        "expected": "executed",
+        "exclusionVisible": true,
+        "displayName": "Ada"
+      },
+      "successor": {
+        "status": "executed",
+        "response": {
+          "displayName": "Ada",
+          "operation": "create-user"
+        },
+        "endpoint": "/users",
+        "build": {
+          "profile": "consumer-owned-json-string-routing-draft-1",
+          "engine": {
+            "compiler": "sha256:07f74356f72db6236458375321a18f36240642e695f5e1fbc1a37b9c74fe775f",
+            "documentType": "executor-description",
+            "governance": "sha256:c486ea479e3d0371bec3f5a6fa7f0350b304610280f3ee2253e71539892b031a",
+            "schemaVersion": "0.1.0",
+            "scientific": "sha256:78032b00a319c0fa6d3df5f6c303409643922f330df6bcf2f01bcf15c4ed66ad",
+            "workspace": "sha256:2f2f535c8086b66daec416d4577a78e1acd5797874ddcad7007d28c6dc842403"
+          },
+          "inputBytes": {
+            "Cargo.lock": "sha256:8fe0318476d121f58dd1f31b075064e163476d24bac26cb08300ce9b23bcfcfe",
+            "Cargo.toml": "sha256:3c2f9a6c89f138d9f79842d6ba058d0d05197d7599f9a033d61b1a3f613e6e56",
+            "consumer/graph.json": "sha256:2c17273a9d0c9640a58e60f71a40fd9f8f2a87ba1e03aebbc4fec23a2055bd0c",
+            "contract/graph.json": "sha256:aa752215d8365291ccb0ecc789aee5ded1d65a68701bc0c1ac1a3fc5c24b7f8f",
+            "contract/input_schema.rs": "sha256:780c7d42f925eb25c7fd2f091576ecdddfadd1c85d1090d450dd1b10709a734d",
+            "policy.json": "sha256:274bba588938ecd2dda08cdc30980393f1b1cb027d2afb0643d83dedad90b976",
+            "projection.json": "sha256:2947b1c880baa36057cc792d1624c6a04587d3a0be9126fc0283d190bfe13d31",
+            "service/graph.json": "sha256:c706593825bafd593034b03a3298e9eb51d0360a926d524de653d323a651d797",
+            "service/handlers/create_user.rs": "sha256:6c65ef7d0015eeb29b96921e61dcb528a66a260a5ecf69a3482e07d8988612e5",
+            "sources.json": "sha256:70d28620cf0ce7f2b08021ac9af2a6eb27750ac1ccc1bf66ae6ee9bdb7c5aed2",
+            "src/main.rs": "sha256:595e3eef31dee07dfe9fbe7647e5d9a86c7966a9f05089815a7ba3d59cf3f00d"
+          },
+          "generation": {
+            "schemaVersion": "0.1.0",
+            "documentType": "generation",
+            "profile": "bindloom-routing-draft-1",
+            "id": "urn:bindloom:generation:d5810db9f7cd592bf80c51d420428c8fabf4dcfbcbf8c914bae65af96ca51c23",
+            "digest": "sha256:d5810db9f7cd592bf80c51d420428c8fabf4dcfbcbf8c914bae65af96ca51c23",
+            "evaluatedAt": "2026-10-09T00:00:00.000Z",
+            "graph": {
+              "id": "urn:bindings:graph",
+              "digest": "sha256:049891f8c0ca8aea274ff042f940a6ee50b07088cd49ab2ca647390c44dfc360"
+            },
+            "policy": {
+              "id": "urn:bindings:policy",
+              "digest": "sha256:9e31d821ba78622ef4a5fd944e20bf1f01cbca3ce1256ba5fbd21fcb6b4857ce"
+            },
+            "packs": [
+              {
+                "id": "urn:metamap:relation-pack:core",
+                "version": "1.0.0",
+                "digest": "sha256:07683a803d0c7b7a4aa621e6bfe9b8cffa8667fd16047601aa4aa86268f84a2e"
+              },
+              {
+                "id": "urn:metamap:relation-pack:routing",
+                "version": "1.0.0",
+                "digest": "sha256:c7bca28d6b8836a04a6f505bff4033947e401dd6c93cfeb8e543f82c9f0cb19d"
+              }
+            ],
+            "context": {
+              "environment": "production"
+            },
+            "activeMappings": [
+              "urn:bindings:mapping:endpoint-production",
+              "urn:bindings:mapping:handler",
+              "urn:bindings:mapping:input"
+            ],
+            "inactiveMappings": [
+              {
+                "id": "urn:bindings:mapping:endpoint-development",
+                "reason": "when-not-satisfied"
+              }
+            ],
+            "evidence": [],
+            "waiversApplied": []
+          },
+          "projection": {
+            "schemaVersion": "0.1.0",
+            "documentType": "projection",
+            "profile": "bindloom-routing-draft-1",
+            "id": "urn:bindloom:projection:f74f1908de071604c175013e153ef418a94303d773f98cc2f8c52ab9452c014f",
+            "digest": "sha256:f74f1908de071604c175013e153ef418a94303d773f98cc2f8c52ab9452c014f",
+            "graph": {
+              "id": "urn:bindings:graph",
+              "digest": "sha256:049891f8c0ca8aea274ff042f940a6ee50b07088cd49ab2ca647390c44dfc360"
+            },
+            "generation": {
+              "id": "urn:bindloom:generation:d5810db9f7cd592bf80c51d420428c8fabf4dcfbcbf8c914bae65af96ca51c23",
+              "digest": "sha256:d5810db9f7cd592bf80c51d420428c8fabf4dcfbcbf8c914bae65af96ca51c23"
+            },
+            "spec": {
+              "id": "urn:bindings:projection",
+              "digest": "sha256:0fd0de63886365e1140794b888ce956d00b13f328e6485daa8201f42a618215d"
+            },
+            "entries": [
+              {
+                "subject": {
+                  "id": "urn:bindings:command:create-user",
+                  "kind": "routing:command"
+                },
+                "slots": [
+                  {
+                    "name": "endpoint",
+                    "relation": "routing:exposed_as",
+                    "direction": "outgoing",
+                    "cardinality": "exactly-one",
+                    "mappings": [
+                      "urn:bindings:mapping:endpoint-production"
+                    ],
+                    "targets": [
+                      {
+                        "id": "urn:bindings:endpoint:production",
+                        "kind": "routing:endpoint",
+                        "attributes": {
+                          "environment": "production",
+                          "method": "POST",
+                          "path": "/users"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "name": "handler",
+                    "relation": "routing:handled_by",
+                    "direction": "outgoing",
+                    "cardinality": "exactly-one",
+                    "mappings": [
+                      "urn:bindings:mapping:handler"
+                    ],
+                    "targets": [
+                      {
+                        "id": "urn:bindings:handler:create-user",
+                        "kind": "routing:handler",
+                        "locators": [
+                          {
+                            "uri": "rust:crate::service::create_user",
+                            "digest": "sha256:6c65ef7d0015eeb29b96921e61dcb528a66a260a5ecf69a3482e07d8988612e5"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "name": "input",
+                    "relation": "routing:accepts",
+                    "direction": "outgoing",
+                    "cardinality": "exactly-one",
+                    "mappings": [
+                      "urn:bindings:mapping:input"
+                    ],
+                    "targets": [
+                      {
+                        "id": "urn:bindings:schema:create-user",
+                        "kind": "routing:schema",
+                        "locators": [
+                          {
+                            "uri": "rust:crate::contract::validate_create_user",
+                            "digest": "sha256:780c7d42f925eb25c7fd2f091576ecdddfadd1c85d1090d450dd1b10709a734d"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          "coverage": [
+            {
+              "sourceId": "contract",
+              "owner": "team:contract",
+              "entityId": "urn:bindings:schema:create-user",
+              "relation": "routing:accepts",
+              "mappings": [
+                "urn:bindings:mapping:input"
+              ],
+              "exclusion": null
+            },
+            {
+              "sourceId": "service",
+              "owner": "team:service",
+              "entityId": "urn:bindings:handler:create-user",
+              "relation": "routing:handled_by",
+              "mappings": [
+                "urn:bindings:mapping:handler"
+              ],
+              "exclusion": null
+            },
+            {
+              "sourceId": "service",
+              "owner": "team:service",
+              "entityId": "urn:bindings:endpoint:production",
+              "relation": "routing:exposed_as",
+              "mappings": [
+                "urn:bindings:mapping:endpoint-production"
+              ],
+              "exclusion": null
+            },
+            {
+              "sourceId": "service",
+              "owner": "team:service",
+              "entityId": "urn:bindings:endpoint:development",
+              "relation": "routing:exposed_as",
+              "mappings": [
+                "urn:bindings:mapping:endpoint-development"
+              ],
+              "exclusion": null
+            },
+            {
+              "sourceId": "service",
+              "owner": "team:service",
+              "entityId": "urn:bindings:handler:unbound",
+              "relation": "routing:handled_by",
+              "mappings": [],
+              "exclusion": {
+                "entity": "urn:bindings:handler:unbound",
+                "relation": "routing:handled_by",
+                "reason": "Internal helper is outside the API consumer",
+                "assertedBy": "team:service"
+              }
+            }
+          ],
+          "moduleMap": {
+            "contract": "contract/input_schema.rs",
+            "service": "service/handlers/create_user.rs"
+          },
+          "authorization": "not-evaluated",
+          "activation": "not-evaluated"
+        }
+      },
+      "pass": true,
+      "savedAcceptedBuildUnchanged": true
+    },
+    {
+      "id": "invalid-native-export",
+      "originalExpectation": {
+        "id": "invalid-native-export",
+        "expected": "rejected",
+        "code": "UNRESOLVED_NATIVE_EXPORT",
+        "preserveArtifacts": true
+      },
+      "successor": {
+        "status": "rejected",
+        "code": "UNRESOLVED_NATIVE_EXPORT",
+        "details": [
+          {
+            "reason": "compiler-artifact",
+            "package_id": "registry+https://github.com/rust-lang/crates.io-index#zmij@1.0.23",
+            "manifest_path": "/Users/admin/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/zmij-1.0.23/Cargo.toml",
+            "target": {
+              "kind": [
+                "custom-build"
+              ],
+              "crate_types": [
+                "bin"
+              ],
+              "name": "build-script-build",
+              "src_path": "/Users/admin/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/zmij-1.0.23/build.rs",
+              "edition": "2021",
+              "doc": false,
+              "doctest": false,
+              "test": false
+            },
+            "profile": {
+              "opt_level": "0",
+              "debuginfo": 0,
+              "debug_assertions": true,
+              "overflow_checks": true,
+              "test": false
+            },
+            "features": [],
+            "filenames": [
+              "/Users/admin/dev/patamaps/patamaps/target/binding-consumer/debug/build/zmij-1ca154611561605d/build-script-build"
+            ],
+            "executable": null,
+            "fresh": true
+          },
+          {
+            "reason": "compiler-artifact",
+            "package_id": "registry+https://github.com/rust-lang/crates.io-index#serde_core@1.0.229",
+            "manifest_path": "/Users/admin/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_core-1.0.229/Cargo.toml",
+            "target": {
+              "kind": [
+                "custom-build"
+              ],
+              "crate_types": [
+                "bin"
+              ],
+              "name": "build-script-build",
+              "src_path": "/Users/admin/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_core-1.0.229/build.rs",
+              "edition": "2021",
+              "doc": false,
+              "doctest": false,
+              "test": false
+            },
+            "profile": {
+              "opt_level": "0",
+              "debuginfo": 0,
+              "debug_assertions": true,
+              "overflow_checks": true,
+              "test": false
+            },
+            "features": [
+              "std"
+            ],
+            "filenames": [
+              "/Users/admin/dev/patamaps/patamaps/target/binding-consumer/debug/build/serde_core-fe6d88f512b963cb/build-script-build"
+            ],
+            "executable": null,
+            "fresh": true
+          },
+          {
+            "reason": "build-script-executed",
+            "package_id": "registry+https://github.com/rust-lang/crates.io-index#zmij@1.0.23",
+            "linked_libs": [],
+            "linked_paths": [],
+            "cfgs": [],
+            "env": [],
+            "out_dir": "/Users/admin/dev/patamaps/patamaps/target/binding-consumer/debug/build/zmij-7c25764f19acd978/out"
+          },
+          {
+            "reason": "compiler-artifact",
+            "package_id": "registry+https://github.com/rust-lang/crates.io-index#serde_json@1.0.152",
+            "manifest_path": "/Users/admin/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.152/Cargo.toml",
+            "target": {
+              "kind": [
+                "custom-build"
+              ],
+              "crate_types": [
+                "bin"
+              ],
+              "name": "build-script-build",
+              "src_path": "/Users/admin/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.152/build.rs",
+              "edition": "2021",
+              "doc": false,
+              "doctest": false,
+              "test": false
+            },
+            "profile": {
+              "opt_level": "0",
+              "debuginfo": 0,
+              "debug_assertions": true,
+              "overflow_checks": true,
+              "test": false
+            },
+            "features": [
+              "default",
+              "float_roundtrip",
+              "std"
+            ],
+            "filenames": [
+              "/Users/admin/dev/patamaps/patamaps/target/binding-consumer/debug/build/serde_json-714aa59c7339d803/build-script-build"
+            ],
+            "executable": null,
+            "fresh": true
+          },
+          {
+            "reason": "compiler-artifact",
+            "package_id": "registry+https://github.com/rust-lang/crates.io-index#memchr@2.8.3",
+            "manifest_path": "/Users/admin/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/memchr-2.8.3/Cargo.toml",
+            "target": {
+              "kind": [
+                "lib"
+              ],
+              "crate_types": [
+                "lib"
+              ],
+              "name": "memchr",
+              "src_path": "/Users/admin/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/memchr-2.8.3/src/lib.rs",
+              "edition": "2021",
+              "doc": true,
+              "doctest": true,
+              "test": true
+            },
+            "profile": {
+              "opt_level": "0",
+              "debuginfo": 0,
+              "debug_assertions": true,
+              "overflow_checks": true,
+              "test": false
+            },
+            "features": [
+              "alloc",
+              "std"
+            ],
+            "filenames": [
+              "/Users/admin/dev/patamaps/patamaps/target/binding-consumer/debug/deps/libmemchr-808aac0368d04014.rlib",
+              "/Users/admin/dev/patamaps/patamaps/target/binding-consumer/debug/deps/libmemchr-808aac0368d04014.rmeta"
+            ],
+            "executable": null,
+            "fresh": true
+          },
+          {
+            "reason": "compiler-artifact",
+            "package_id": "registry+https://github.com/rust-lang/crates.io-index#itoa@1.0.18",
+            "manifest_path": "/Users/admin/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/itoa-1.0.18/Cargo.toml",
+            "target": {
+              "kind": [
+                "lib"
+              ],
+              "crate_types": [
+                "lib"
+              ],
+              "name": "itoa",
+              "src_path": "/Users/admin/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/itoa-1.0.18/src/lib.rs",
+              "edition": "2021",
+              "doc": true,
+              "doctest": true,
+              "test": true
+            },
+            "profile": {
+              "opt_level": "0",
+              "debuginfo": 0,
+              "debug_assertions": true,
+              "overflow_checks": true,
+              "test": false
+            },
+            "features": [],
+            "filenames": [
+              "/Users/admin/dev/patamaps/patamaps/target/binding-consumer/debug/deps/libitoa-4e2e266ea8bc45de.rlib",
+              "/Users/admin/dev/patamaps/patamaps/target/binding-consumer/debug/deps/libitoa-4e2e266ea8bc45de.rmeta"
+            ],
+            "executable": null,
+            "fresh": true
+          },
+          {
+            "reason": "build-script-executed",
+            "package_id": "registry+https://github.com/rust-lang/crates.io-index#serde_core@1.0.229",
+            "linked_libs": [],
+            "linked_paths": [],
+            "cfgs": [],
+            "env": [],
+            "out_dir": "/Users/admin/dev/patamaps/patamaps/target/binding-consumer/debug/build/serde_core-9f60b440edfc5e5b/out"
+          },
+          {
+            "reason": "build-script-executed",
+            "package_id": "registry+https://github.com/rust-lang/crates.io-index#serde_json@1.0.152",
+            "linked_libs": [],
+            "linked_paths": [],
+            "cfgs": [
+              "fast_arithmetic=\"64\""
+            ],
+            "env": [],
+            "out_dir": "/Users/admin/dev/patamaps/patamaps/target/binding-consumer/debug/build/serde_json-1f958889f70b6ceb/out"
+          },
+          {
+            "reason": "compiler-artifact",
+            "package_id": "registry+https://github.com/rust-lang/crates.io-index#zmij@1.0.23",
+            "manifest_path": "/Users/admin/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/zmij-1.0.23/Cargo.toml",
+            "target": {
+              "kind": [
+                "lib"
+              ],
+              "crate_types": [
+                "lib"
+              ],
+              "name": "zmij",
+              "src_path": "/Users/admin/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/zmij-1.0.23/src/lib.rs",
+              "edition": "2021",
+              "doc": true,
+              "doctest": true,
+              "test": true
+            },
+            "profile": {
+              "opt_level": "0",
+              "debuginfo": 0,
+              "debug_assertions": true,
+              "overflow_checks": true,
+              "test": false
+            },
+            "features": [],
+            "filenames": [
+              "/Users/admin/dev/patamaps/patamaps/target/binding-consumer/debug/deps/libzmij-7bce5485eef17876.rlib",
+              "/Users/admin/dev/patamaps/patamaps/target/binding-consumer/debug/deps/libzmij-7bce5485eef17876.rmeta"
+            ],
+            "executable": null,
+            "fresh": true
+          },
+          {
+            "reason": "compiler-artifact",
+            "package_id": "registry+https://github.com/rust-lang/crates.io-index#serde_core@1.0.229",
+            "manifest_path": "/Users/admin/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_core-1.0.229/Cargo.toml",
+            "target": {
+              "kind": [
+                "lib"
+              ],
+              "crate_types": [
+                "lib"
+              ],
+              "name": "serde_core",
+              "src_path": "/Users/admin/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_core-1.0.229/src/lib.rs",
+              "edition": "2021",
+              "doc": true,
+              "doctest": true,
+              "test": true
+            },
+            "profile": {
+              "opt_level": "0",
+              "debuginfo": 0,
+              "debug_assertions": true,
+              "overflow_checks": true,
+              "test": false
+            },
+            "features": [
+              "std"
+            ],
+            "filenames": [
+              "/Users/admin/dev/patamaps/patamaps/target/binding-consumer/debug/deps/libserde_core-6b6ca85aff6b3477.rlib",
+              "/Users/admin/dev/patamaps/patamaps/target/binding-consumer/debug/deps/libserde_core-6b6ca85aff6b3477.rmeta"
+            ],
+            "executable": null,
+            "fresh": true
+          },
+          {
+            "reason": "compiler-artifact",
+            "package_id": "registry+https://github.com/rust-lang/crates.io-index#serde_json@1.0.152",
+            "manifest_path": "/Users/admin/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.152/Cargo.toml",
+            "target": {
+              "kind": [
+                "lib"
+              ],
+              "crate_types": [
+                "lib"
+              ],
+              "name": "serde_json",
+              "src_path": "/Users/admin/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.152/src/lib.rs",
+              "edition": "2021",
+              "doc": true,
+              "doctest": true,
+              "test": true
+            },
+            "profile": {
+              "opt_level": "0",
+              "debuginfo": 0,
+              "debug_assertions": true,
+              "overflow_checks": true,
+              "test": false
+            },
+            "features": [
+              "default",
+              "float_roundtrip",
+              "std"
+            ],
+            "filenames": [
+              "/Users/admin/dev/patamaps/patamaps/target/binding-consumer/debug/deps/libserde_json-f80c885ec012a29b.rlib",
+              "/Users/admin/dev/patamaps/patamaps/target/binding-consumer/debug/deps/libserde_json-f80c885ec012a29b.rmeta"
+            ],
+            "executable": null,
+            "fresh": true
+          },
+          {
+            "reason": "compiler-message",
+            "package_id": "path+file:///private/var/folders/tr/qmsqldfn59591rbflj14mc4r0000gn/T/bindloom-binding-matrix-i7kqueu6/invalid-native-export-candidate#bindloom-native-bindings-example@0.1.0",
+            "manifest_path": "/private/var/folders/tr/qmsqldfn59591rbflj14mc4r0000gn/T/bindloom-binding-matrix-i7kqueu6/invalid-native-export-candidate/Cargo.toml",
+            "target": {
+              "kind": [
+                "bin"
+              ],
+              "crate_types": [
+                "bin"
+              ],
+              "name": "bindloom-native-bindings-example",
+              "src_path": "/private/var/folders/tr/qmsqldfn59591rbflj14mc4r0000gn/T/bindloom-binding-matrix-i7kqueu6/invalid-native-export-candidate/src/main.rs",
+              "edition": "2024",
+              "doc": true,
+              "doctest": false,
+              "test": true
+            },
+            "message": {
+              "rendered": "error[E0425]: cannot find function `not_exported` in module `crate::service`\n  --> src/bindings.rs:16:59\n   |\n16 |     \"urn:bindings:command:create-user\" => crate::service::not_exported(input),\n   |                                                           ^^^^^^^^^^^^ not found in `crate::service`\n\n",
+              "$message_type": "diagnostic",
+              "children": [],
+              "level": "error",
+              "message": "cannot find function `not_exported` in module `crate::service`",
+              "spans": [
+                {
+                  "byte_end": 2684,
+                  "byte_start": 2672,
+                  "column_end": 71,
+                  "column_start": 59,
+                  "expansion": null,
+                  "file_name": "src/bindings.rs",
+                  "is_primary": true,
+                  "label": "not found in `crate::service`",
+                  "line_end": 16,
+                  "line_start": 16,
+                  "suggested_replacement": null,
+                  "suggestion_applicability": null,
+                  "text": [
+                    {
+                      "highlight_end": 71,
+                      "highlight_start": 59,
+                      "text": "    \"urn:bindings:command:create-user\" => crate::service::not_exported(input),"
+                    }
+                  ]
+                }
+              ],
+              "code": {
+                "code": "E0425",
+                "explanation": "An unresolved name was used.\n\nErroneous code examples:\n\n```compile_fail,E0425\nsomething_that_doesnt_exist::foo;\n// error: unresolved name `something_that_doesnt_exist::foo`\n\n// or:\n\ntrait Foo {\n    fn bar() {\n        Self; // error: unresolved name `Self`\n    }\n}\n\n// or:\n\nlet x = unknown_variable;  // error: unresolved name `unknown_variable`\n```\n\nPlease verify that the name wasn't misspelled and ensure that the\nidentifier being referred to is valid for the given situation. Example:\n\n```\nenum something_that_does_exist {\n    Foo,\n}\n```\n\nOr:\n\n```\nmod something_that_does_exist {\n    pub static foo : i32 = 0i32;\n}\n\nsomething_that_does_exist::foo; // ok!\n```\n\nOr:\n\n```\nlet unknown_variable = 12u32;\nlet x = unknown_variable; // ok!\n```\n\nIf the item is not defined in the current module, it must be imported using a\n`use` statement, like so:\n\n```\n# mod foo { pub fn bar() {} }\n# fn main() {\nuse foo::bar;\nbar();\n# }\n```\n\nIf the item you are importing is not defined in some super-module of the\ncurrent module, then it must also be declared as public (e.g., `pub fn`).\n"
+              }
+            }
+          },
+          {
+            "reason": "compiler-message",
+            "package_id": "path+file:///private/var/folders/tr/qmsqldfn59591rbflj14mc4r0000gn/T/bindloom-binding-matrix-i7kqueu6/invalid-native-export-candidate#bindloom-native-bindings-example@0.1.0",
+            "manifest_path": "/private/var/folders/tr/qmsqldfn59591rbflj14mc4r0000gn/T/bindloom-binding-matrix-i7kqueu6/invalid-native-export-candidate/Cargo.toml",
+            "target": {
+              "kind": [
+                "bin"
+              ],
+              "crate_types": [
+                "bin"
+              ],
+              "name": "bindloom-native-bindings-example",
+              "src_path": "/private/var/folders/tr/qmsqldfn59591rbflj14mc4r0000gn/T/bindloom-binding-matrix-i7kqueu6/invalid-native-export-candidate/src/main.rs",
+              "edition": "2024",
+              "doc": true,
+              "doctest": false,
+              "test": true
+            },
+            "message": {
+              "rendered": "For more information about this error, try `rustc --explain E0425`.\n",
+              "$message_type": "diagnostic",
+              "children": [],
+              "level": "failure-note",
+              "message": "For more information about this error, try `rustc --explain E0425`.",
+              "spans": [],
+              "code": null
+            }
+          },
+          {
+            "reason": "build-finished",
+            "success": false
+          }
+        ]
+      },
+      "pass": true,
+      "savedAcceptedBuildUnchanged": true
+    },
+    {
+      "id": "locator-escape",
+      "originalExpectation": {
+        "id": "locator-escape",
+        "expected": "rejected",
+        "code": "NATIVE_LOCATOR_OUTSIDE_OWNER",
+        "preserveArtifacts": true
+      },
+      "successor": {
+        "status": "rejected",
+        "code": "NATIVE_LOCATOR_OUTSIDE_OWNER",
+        "details": "../outside.rs"
+      },
+      "pass": true,
+      "savedAcceptedBuildUnchanged": true
+    },
+    {
+      "id": "symlink-escape",
+      "originalExpectation": {
+        "id": "symlink-escape",
+        "expected": "rejected",
+        "code": "NATIVE_LOCATOR_OUTSIDE_OWNER",
+        "preserveArtifacts": true
+      },
+      "successor": {
+        "status": "rejected",
+        "code": "NATIVE_LOCATOR_OUTSIDE_OWNER",
+        "details": "service/handlers/create_user.rs"
+      },
+      "pass": true,
+      "savedAcceptedBuildUnchanged": true
+    },
+    {
+      "id": "native-byte-drift",
+      "originalExpectation": {
+        "id": "native-byte-drift",
+        "expected": "rejected",
+        "code": "NATIVE_INPUT_DIGEST_MISMATCH",
+        "preserveArtifacts": true
+      },
+      "successor": {
+        "status": "rejected",
+        "code": "NATIVE_INPUT_DIGEST_MISMATCH",
+        "details": "urn:bindings:handler:create-user"
+      },
+      "pass": true,
+      "savedAcceptedBuildUnchanged": true
+    },
+    {
+      "id": "stale-generation",
+      "originalExpectation": {
+        "id": "stale-generation",
+        "expected": "rejected",
+        "code": "STALE_PROJECTION_GENERATION",
+        "preserveArtifacts": true
+      },
+      "successor": {
+        "status": "rejected",
+        "code": "PROJECTION_GENERATION_RECHECK_FAILED",
+        "details": [
+          {
+            "code": "PROJECTION_GENERATION_RECHECK_FAILED",
+            "message": "Saved generation differs from fresh evaluation",
+            "severity": "error",
+            "subjectId": "generation.json"
+          }
+        ]
+      },
+      "pass": true,
+      "savedAcceptedBuildUnchanged": true
+    },
+    {
+      "id": "new-implementation-identity",
+      "originalExpectation": {
+        "id": "new-implementation-identity",
+        "expected": "executed",
+        "newSemanticId": true,
+        "displayName": "Ada"
+      },
+      "successor": {
+        "status": "executed",
+        "response": {
+          "displayName": "Ada",
+          "operation": "create-user"
+        },
+        "endpoint": "/users",
+        "build": {
+          "profile": "consumer-owned-json-string-routing-draft-1",
+          "engine": {
+            "compiler": "sha256:07f74356f72db6236458375321a18f36240642e695f5e1fbc1a37b9c74fe775f",
+            "documentType": "executor-description",
+            "governance": "sha256:c486ea479e3d0371bec3f5a6fa7f0350b304610280f3ee2253e71539892b031a",
+            "schemaVersion": "0.1.0",
+            "scientific": "sha256:78032b00a319c0fa6d3df5f6c303409643922f330df6bcf2f01bcf15c4ed66ad",
+            "workspace": "sha256:2f2f535c8086b66daec416d4577a78e1acd5797874ddcad7007d28c6dc842403"
+          },
+          "inputBytes": {
+            "Cargo.lock": "sha256:8fe0318476d121f58dd1f31b075064e163476d24bac26cb08300ce9b23bcfcfe",
+            "Cargo.toml": "sha256:3c2f9a6c89f138d9f79842d6ba058d0d05197d7599f9a033d61b1a3f613e6e56",
+            "consumer/graph.json": "sha256:10f25f116efcce1147840635c8a2988bed06517f3cfa8218b1f732eb4da6b2f1",
+            "contract/graph.json": "sha256:aa752215d8365291ccb0ecc789aee5ded1d65a68701bc0c1ac1a3fc5c24b7f8f",
+            "contract/input_schema.rs": "sha256:780c7d42f925eb25c7fd2f091576ecdddfadd1c85d1090d450dd1b10709a734d",
+            "policy.json": "sha256:274bba588938ecd2dda08cdc30980393f1b1cb027d2afb0643d83dedad90b976",
+            "projection.json": "sha256:2947b1c880baa36057cc792d1624c6a04587d3a0be9126fc0283d190bfe13d31",
+            "service/graph.json": "sha256:ed54357061d59e29dbdd7ac688ecac547009e57a5c5be4bcd7a686335d074dc9",
+            "service/handlers/create_user.rs": "sha256:6c65ef7d0015eeb29b96921e61dcb528a66a260a5ecf69a3482e07d8988612e5",
+            "sources.json": "sha256:8346ee27c329c1a19dacfe74cab33adf38e4985753402e27407d62f277ceba34",
+            "src/main.rs": "sha256:595e3eef31dee07dfe9fbe7647e5d9a86c7966a9f05089815a7ba3d59cf3f00d"
+          },
+          "generation": {
+            "schemaVersion": "0.1.0",
+            "documentType": "generation",
+            "profile": "bindloom-routing-draft-1",
+            "id": "urn:bindloom:generation:dc7a5670488e2a51c0108a9515f940f08bf99970bbf016ae6458b5533c4ff01b",
+            "digest": "sha256:dc7a5670488e2a51c0108a9515f940f08bf99970bbf016ae6458b5533c4ff01b",
+            "evaluatedAt": "2026-10-09T00:00:00.000Z",
+            "graph": {
+              "id": "urn:bindings:graph",
+              "digest": "sha256:523e6ed967b3c53a936e3af3baef04f5405fa8acb3e6c6b5f9fedd1f8eee6d11"
+            },
+            "policy": {
+              "id": "urn:bindings:policy",
+              "digest": "sha256:2cc1d892455c9d713257c79e86f17396fa49598790d4147336a626ae21c8bd37"
+            },
+            "packs": [
+              {
+                "id": "urn:metamap:relation-pack:core",
+                "version": "1.0.0",
+                "digest": "sha256:07683a803d0c7b7a4aa621e6bfe9b8cffa8667fd16047601aa4aa86268f84a2e"
+              },
+              {
+                "id": "urn:metamap:relation-pack:routing",
+                "version": "1.0.0",
+                "digest": "sha256:c7bca28d6b8836a04a6f505bff4033947e401dd6c93cfeb8e543f82c9f0cb19d"
+              }
+            ],
+            "context": {
+              "environment": "production"
+            },
+            "activeMappings": [
+              "urn:bindings:mapping:endpoint-production",
+              "urn:bindings:mapping:handler",
+              "urn:bindings:mapping:input"
+            ],
+            "inactiveMappings": [
+              {
+                "id": "urn:bindings:mapping:endpoint-development",
+                "reason": "when-not-satisfied"
+              }
+            ],
+            "evidence": [],
+            "waiversApplied": []
+          },
+          "projection": {
+            "schemaVersion": "0.1.0",
+            "documentType": "projection",
+            "profile": "bindloom-routing-draft-1",
+            "id": "urn:bindloom:projection:814561d1986384cccb06af6a5ca9fa79ed4d015e587e28a177fcbabfea22147c",
+            "digest": "sha256:814561d1986384cccb06af6a5ca9fa79ed4d015e587e28a177fcbabfea22147c",
+            "graph": {
+              "id": "urn:bindings:graph",
+              "digest": "sha256:523e6ed967b3c53a936e3af3baef04f5405fa8acb3e6c6b5f9fedd1f8eee6d11"
+            },
+            "generation": {
+              "id": "urn:bindloom:generation:dc7a5670488e2a51c0108a9515f940f08bf99970bbf016ae6458b5533c4ff01b",
+              "digest": "sha256:dc7a5670488e2a51c0108a9515f940f08bf99970bbf016ae6458b5533c4ff01b"
+            },
+            "spec": {
+              "id": "urn:bindings:projection",
+              "digest": "sha256:0fd0de63886365e1140794b888ce956d00b13f328e6485daa8201f42a618215d"
+            },
+            "entries": [
+              {
+                "subject": {
+                  "id": "urn:bindings:command:create-user",
+                  "kind": "routing:command"
+                },
+                "slots": [
+                  {
+                    "name": "endpoint",
+                    "relation": "routing:exposed_as",
+                    "direction": "outgoing",
+                    "cardinality": "exactly-one",
+                    "mappings": [
+                      "urn:bindings:mapping:endpoint-production"
+                    ],
+                    "targets": [
+                      {
+                        "id": "urn:bindings:endpoint:production",
+                        "kind": "routing:endpoint",
+                        "attributes": {
+                          "environment": "production",
+                          "method": "POST",
+                          "path": "/users"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "name": "handler",
+                    "relation": "routing:handled_by",
+                    "direction": "outgoing",
+                    "cardinality": "exactly-one",
+                    "mappings": [
+                      "urn:bindings:mapping:handler"
+                    ],
+                    "targets": [
+                      {
+                        "id": "urn:bindings:handler:new-implementation",
+                        "kind": "routing:handler",
+                        "locators": [
+                          {
+                            "uri": "rust:crate::service::create_user",
+                            "digest": "sha256:6c65ef7d0015eeb29b96921e61dcb528a66a260a5ecf69a3482e07d8988612e5"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "name": "input",
+                    "relation": "routing:accepts",
+                    "direction": "outgoing",
+                    "cardinality": "exactly-one",
+                    "mappings": [
+                      "urn:bindings:mapping:input"
+                    ],
+                    "targets": [
+                      {
+                        "id": "urn:bindings:schema:create-user",
+                        "kind": "routing:schema",
+                        "locators": [
+                          {
+                            "uri": "rust:crate::contract::validate_create_user",
+                            "digest": "sha256:780c7d42f925eb25c7fd2f091576ecdddfadd1c85d1090d450dd1b10709a734d"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          "coverage": [
+            {
+              "sourceId": "contract",
+              "owner": "team:contract",
+              "entityId": "urn:bindings:schema:create-user",
+              "relation": "routing:accepts",
+              "mappings": [
+                "urn:bindings:mapping:input"
+              ],
+              "exclusion": null
+            },
+            {
+              "sourceId": "service",
+              "owner": "team:service",
+              "entityId": "urn:bindings:handler:new-implementation",
+              "relation": "routing:handled_by",
+              "mappings": [
+                "urn:bindings:mapping:handler"
+              ],
+              "exclusion": null
+            },
+            {
+              "sourceId": "service",
+              "owner": "team:service",
+              "entityId": "urn:bindings:endpoint:production",
+              "relation": "routing:exposed_as",
+              "mappings": [
+                "urn:bindings:mapping:endpoint-production"
+              ],
+              "exclusion": null
+            },
+            {
+              "sourceId": "service",
+              "owner": "team:service",
+              "entityId": "urn:bindings:endpoint:development",
+              "relation": "routing:exposed_as",
+              "mappings": [
+                "urn:bindings:mapping:endpoint-development"
+              ],
+              "exclusion": null
+            }
+          ],
+          "moduleMap": {
+            "contract": "contract/input_schema.rs",
+            "service": "service/handlers/create_user.rs"
+          },
+          "authorization": "not-evaluated",
+          "activation": "not-evaluated"
+        }
+      },
+      "pass": true,
+      "savedAcceptedBuildUnchanged": true
+    },
+    {
+      "id": "invalid-runtime-input",
+      "originalExpectation": {
+        "id": "invalid-runtime-input",
+        "expected": "runtime-rejected",
+        "code": "INVALID_CREATE_USER_INPUT"
+      },
+      "successor": {
+        "status": "runtime-rejected",
+        "code": "INVALID_CREATE_USER_INPUT"
+      },
+      "pass": true,
+      "savedAcceptedBuildUnchanged": true
+    },
+    {
+      "id": "runtime-structure-change",
+      "originalExpectation": {
+        "id": "runtime-structure-change",
+        "expected": "runtime-rejected",
+        "code": "UNKNOWN_OPERATION"
+      },
+      "successor": {
+        "status": "runtime-rejected",
+        "code": "UNKNOWN_OPERATION"
+      },
+      "pass": true,
+      "savedAcceptedBuildUnchanged": true
+    }
+  ],
+  "runtimeInputShadow": [
+    {
+      "input": {
+        "name": " Ada "
+      },
+      "reference": {
+        "status": "executed",
+        "result": {
+          "operation": "create-user",
+          "displayName": "Ada"
+        }
+      },
+      "native": {
+        "status": "executed",
+        "result": {
+          "displayName": "Ada",
+          "operation": "create-user"
+        }
+      },
+      "pass": true
+    },
+    {
+      "input": {
+        "name": "\ufeffAda\ufeff"
+      },
+      "reference": {
+        "status": "executed",
+        "result": {
+          "operation": "create-user",
+          "displayName": "Ada"
+        }
+      },
+      "native": {
+        "status": "executed",
+        "result": {
+          "displayName": "Ada",
+          "operation": "create-user"
+        }
+      },
+      "pass": true
+    },
+    {
+      "input": {
+        "name": "\u0085"
+      },
+      "reference": {
+        "status": "executed",
+        "result": {
+          "operation": "create-user",
+          "displayName": "\u0085"
+        }
+      },
+      "native": {
+        "status": "executed",
+        "result": {
+          "displayName": "\u0085",
+          "operation": "create-user"
+        }
+      },
+      "pass": true
+    },
+    {
+      "input": null,
+      "reference": {
+        "status": "runtime-rejected",
+        "code": "INVALID_CREATE_USER_INPUT"
+      },
+      "native": {
+        "status": "runtime-rejected",
+        "code": "INVALID_CREATE_USER_INPUT"
+      },
+      "pass": true
+    },
+    {
+      "input": [],
+      "reference": {
+        "status": "runtime-rejected",
+        "code": "INVALID_CREATE_USER_INPUT"
+      },
+      "native": {
+        "status": "runtime-rejected",
+        "code": "INVALID_CREATE_USER_INPUT"
+      },
+      "pass": true
+    },
+    {
+      "input": {},
+      "reference": {
+        "status": "runtime-rejected",
+        "code": "INVALID_CREATE_USER_INPUT"
+      },
+      "native": {
+        "status": "runtime-rejected",
+        "code": "INVALID_CREATE_USER_INPUT"
+      },
+      "pass": true
+    },
+    {
+      "input": {
+        "name": ""
+      },
+      "reference": {
+        "status": "runtime-rejected",
+        "code": "INVALID_CREATE_USER_INPUT"
+      },
+      "native": {
+        "status": "runtime-rejected",
+        "code": "INVALID_CREATE_USER_INPUT"
+      },
+      "pass": true
+    },
+    {
+      "input": {
+        "name": "   "
+      },
+      "reference": {
+        "status": "runtime-rejected",
+        "code": "INVALID_CREATE_USER_INPUT"
+      },
+      "native": {
+        "status": "runtime-rejected",
+        "code": "INVALID_CREATE_USER_INPUT"
+      },
+      "pass": true
+    },
+    {
+      "input": {
+        "name": 1
+      },
+      "reference": {
+        "status": "runtime-rejected",
+        "code": "INVALID_CREATE_USER_INPUT"
+      },
+      "native": {
+        "status": "runtime-rejected",
+        "code": "INVALID_CREATE_USER_INPUT"
+      },
+      "pass": true
+    }
+  ],
+  "scope": "All 22 declared scenario meanings transposed into native builds; no claim of old JS API drop-in compatibility. D008 maps only stale-generation and conflicting-shards diagnostic names, retaining original expectations and full findings. D002 serializes consumer input/output at generated string-function boundaries.",
+  "authorization": "not-evaluated",
+  "activation": "not-evaluated"
+}

@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:patamaps:draft:1:schema:sssom-document",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": {
+      "const": "1.0.0"
+    },
+    "profile": {
+      "const": "sssom-1.0-entity-tsv"
+    },
+    "metadata": {
+      "type": "object"
+    },
+    "columns": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 4096
+      },
+      "maxItems": 256,
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "rows": {
+      "type": "array",
+      "items": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "maxLength": 16777216
+        },
+        "maxItems": 256,
+        "minItems": 1
+      },
+      "maxItems": 50000,
+      "minItems": 1
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "profile",
+    "metadata",
+    "columns",
+    "rows"
+  ]
+}

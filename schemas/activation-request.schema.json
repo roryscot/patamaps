@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:patamaps:draft:1:schema:activation-request",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": {
+      "const": "0.1.0"
+    },
+    "documentType": {
+      "const": "activation-request"
+    },
+    "prepared": {
+      "$ref": "urn:patamaps:draft:1:schema:governance#/$defs/prepared"
+    },
+    "approval": {
+      "$ref": "urn:patamaps:draft:1:schema:governance#/$defs/approval"
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "documentType",
+    "prepared",
+    "approval"
+  ]
+}
