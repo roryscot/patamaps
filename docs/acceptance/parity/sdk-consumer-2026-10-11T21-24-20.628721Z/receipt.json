@@ -1,0 +1,110 @@
+{
+  "schemaVersion": "1.0.0",
+  "status": "failed",
+  "commands": [
+    {
+      "name": "compile",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "/Users/admin/dev/SEEDZ/metamap/node_modules/typescript/lib/tsc.js",
+        "consumer.mts",
+        "--strict",
+        "--module",
+        "NodeNext",
+        "--moduleResolution",
+        "NodeNext",
+        "--target",
+        "ES2022",
+        "--lib",
+        "ES2022"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "execute",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "/private/tmp/patamaps-installed-sdk-rm2xi8o3/consumer.mjs"
+      ],
+      "exitCode": 1
+    },
+    {
+      "name": "reject-types",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "/Users/admin/dev/SEEDZ/metamap/node_modules/typescript/lib/tsc.js",
+        "negative.mts",
+        "--strict",
+        "--module",
+        "NodeNext",
+        "--moduleResolution",
+        "NodeNext",
+        "--target",
+        "ES2022",
+        "--lib",
+        "ES2022",
+        "--noEmit"
+      ],
+      "exitCode": 2
+    }
+  ],
+  "candidate": {
+    "binaryDigest": "sha256:04771822490750586750b6f7a8eec609aabfbb77d20345731d7657e0c885f4aa",
+    "engine": {
+      "compiler": "sha256:a0ef7b00d61b27b93ae079bafb330bb807c2c4ba8060a3da2036c7883f9770d3",
+      "documentType": "executor-description",
+      "governance": "sha256:c9f2b7db0888302c2d8a727d501abb52031cb2050710de4000d5a9e0f94f082e",
+      "schemaVersion": "0.1.0",
+      "scientific": "sha256:190e7402d0068b17774b4cd991c2e391f49f512a6be8ee4572d4d635a7bc61be",
+      "workspace": "sha256:615be481bf88d384836f9dde62883a6fa2cfd87a62cf5b246e92df55de49b262"
+    },
+    "sdkSourceInventory": [
+      {
+        "path": "sdk/typescript/canonical.mjs",
+        "digest": "sha256:3be5b66afd2b6618043964261bb07536f7c86dfc75b176ec4629e86c498710ac"
+      },
+      {
+        "path": "sdk/typescript/index.mjs",
+        "digest": "sha256:5f963f40f5907d15e88e5d24fa70e96fdc66e62d027edc13f7b96cbf8f9096fd"
+      },
+      {
+        "path": "sdk/typescript/sssom-profile.mjs",
+        "digest": "sha256:a37260f42d6b02c5900dbefa9477386667f5286079a7a1abd12495e3dc78e533"
+      },
+      {
+        "path": "sdk/typescript/sssom.mjs",
+        "digest": "sha256:ccc44eac40a38b892d42c33537a9f15915e1aa65c774e6dc78d129284a6bfb74"
+      },
+      {
+        "path": "sdk/typescript/canonical.d.ts",
+        "digest": "sha256:88ae79727dbad3b0872a9c3539a95fe6c444b810ff416423f06a2cf39274ecb4"
+      },
+      {
+        "path": "sdk/typescript/index.d.ts",
+        "digest": "sha256:ca7d5a09a74c187b5d3e6a79e695e5ac6528d6c5e4b8f8d12302c508db42a5b3"
+      },
+      {
+        "path": "sdk/typescript/sssom.d.ts",
+        "digest": "sha256:7f58f17edc48bcb8340b73004273fa4c23a9f4b3671ca1276225f16de8254457"
+      },
+      {
+        "path": "sdk/typescript/package.json",
+        "digest": "sha256:e3738fe650cbef2f87b1bccf0f74df94186be66a62cc416ce82a022db6c21752"
+      }
+    ]
+  },
+  "host": {
+    "platform": "macOS-26.6.2-arm64-arm-64bit-Mach-O",
+    "architecture": "arm64"
+  },
+  "retainedStage": "/private/tmp/patamaps-installed-sdk-rm2xi8o3",
+  "logs": {
+    "compile.stderr.log": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "compile.stdout.log": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "execute.stderr.log": "sha256:a80d4a08a99f51b2e111b697dd56b7943fd46f10a947185756f0c9a34a7ac9f0",
+    "execute.stdout.log": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "reject-types.stderr.log": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "reject-types.stdout.log": "sha256:a3f6605b4abcf85de4f3c7928ba46e8c99fb580d21fdd3ae71dbef4e2c382c2b"
+  },
+  "scope": "Copied canonical and scientific SDK interfaces compiled and executed outside the checkout with empty PATH. This closes no full-package or obligation-level parity gate. No MetaMap runtime package is present in the copied consumer."
+}

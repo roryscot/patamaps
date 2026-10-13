@@ -1,0 +1,49 @@
+{
+  "schemaVersion": "1.0.0",
+  "createdAt": "2026-10-12T17:46:39.677362+00:00",
+  "status": "probe-executed-inspect-result",
+  "goalStatus": "active",
+  "commands": [
+    {
+      "name": "probe-syntax",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "--check",
+        "scripts/parity/pack_contracts.mjs"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "probe-format",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "/Users/admin/dev/patamaps/patamaps/.tools/parity/oracles/399747a4ad05-p8pkt3pr/reference/node_modules/prettier/bin/prettier.cjs",
+        "--check",
+        "scripts/parity/pack_contracts.mjs"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "diff-check",
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "supervised-file-probe",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "scripts/parity/pack_contracts.mjs",
+        "--files"
+      ],
+      "exitCode": 1
+    }
+  ],
+  "driverDigest": "sha256:73dc0c5541d0a0809bc0affa1c58cf69eb6322c57b2e3dd835c4dbffb6a67576",
+  "corpusCreated": true,
+  "scope": "New filesystem/JSON loader comparison driver, no original expectation rewritten, no full loader/export/platform contract accepted. Source code of the production engine is unchanged after the passing 13-test/161-control repair.",
+  "fullParityAcceptance": false
+}

@@ -1,0 +1,25 @@
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: Frozen file runtime/host profile
++ actual - expected
+
+  {
+    architecture: 'arm64',
++   node: 'v22.16.0',
+-   node: 'v24.21.0',
+    platform: 'darwin'
+  }
+
+    at verifyFileFixtures (file:///Users/admin/dev/patamaps/patamaps/scripts/parity/pack_contracts.mjs:441:10)
+    at file:///Users/admin/dev/patamaps/patamaps/scripts/parity/pack_contracts.mjs:470:1 {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: { platform: 'darwin', architecture: 'arm64', node: 'v22.16.0' },
+  expected: { platform: 'darwin', architecture: 'arm64', node: 'v24.21.0' },
+  operator: 'deepStrictEqual',
+  diff: 'simple'
+}
+
+Node.js v24.21.0

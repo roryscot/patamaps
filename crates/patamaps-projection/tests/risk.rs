@@ -289,6 +289,7 @@ fn captured(
 ) -> CaptureRecord {
     capture(
         CaptureInputs {
+            projection_specs: vec![],
             graph: g,
             packs: vec![pack],
             policy: p,

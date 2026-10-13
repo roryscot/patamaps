@@ -1,0 +1,225 @@
+{
+  "schemaVersion": "1.0.0",
+  "status": "partial-progress",
+  "goalStatus": "active",
+  "candidate": {
+    "binaryDigest": "sha256:da829f33092e9a7493894fa5eb669063a3174cd1f54565ff4b29ce2ce6713a54",
+    "engine": {
+      "compiler": "sha256:6516c3d6e319fb05ff3a9cca6425fd40017da1627d3162332093fcdb92d0cf48",
+      "documentType": "executor-description",
+      "governance": "sha256:8ed196a2229c3fa6119ecec0680f89abfb720edf6b50f5a541998c8525490ac0",
+      "schemaVersion": "0.1.0",
+      "scientific": "sha256:ece7c54cc2c2186de28fc120b48152d1521bd439f18990a8f7a16c1c58a35e95",
+      "workspace": "sha256:570382c10b61b25e1fb643f959add307af10fddb9a5250f732416cc9d10a0287"
+    }
+  },
+  "commandsActuallyRun": [
+    {
+      "label": "node-syntax-0",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "--check",
+        "scripts/parity/storage_guard.mjs"
+      ],
+      "exitCode": 0,
+      "expectedExitCode": 0
+    },
+    {
+      "label": "node-syntax-1",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "--check",
+        "scripts/parity/original.mjs"
+      ],
+      "exitCode": 0,
+      "expectedExitCode": 0
+    },
+    {
+      "label": "node-syntax-2",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "--check",
+        "scripts/parity/legacy_validation.mjs"
+      ],
+      "exitCode": 0,
+      "expectedExitCode": 0
+    },
+    {
+      "label": "node-syntax-3",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "--check",
+        "scripts/parity/freeze_validation.mjs"
+      ],
+      "exitCode": 0,
+      "expectedExitCode": 0
+    },
+    {
+      "label": "node-syntax-4",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "--check",
+        "scripts/parity/reconcile_surface.mjs"
+      ],
+      "exitCode": 0,
+      "expectedExitCode": 0
+    },
+    {
+      "label": "node-syntax-5",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "--check",
+        "sdk/typescript/legacy-validation.mjs"
+      ],
+      "exitCode": 0,
+      "expectedExitCode": 0
+    },
+    {
+      "label": "format",
+      "command": [
+        "/Users/admin/.cargo/bin/cargo",
+        "fmt",
+        "--all",
+        "--",
+        "--check"
+      ],
+      "exitCode": 0,
+      "expectedExitCode": 0
+    },
+    {
+      "label": "diff",
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exitCode": 0,
+      "expectedExitCode": 0
+    },
+    {
+      "label": "prettier",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        ".tools/parity/oracles/399747a4ad05-p8pkt3pr/reference/node_modules/prettier/bin/prettier.cjs",
+        "--check",
+        "README.md",
+        "BUILD_PLAN.md",
+        "scripts/parity/storage_guard.mjs",
+        "scripts/parity/original.mjs",
+        "scripts/parity/legacy_validation.mjs",
+        "scripts/parity/freeze_validation.mjs",
+        "scripts/parity/reconcile_surface.mjs"
+      ],
+      "exitCode": 0,
+      "expectedExitCode": 0
+    },
+    {
+      "label": "strict-parity",
+      "command": [
+        "/opt/homebrew/bin/python3",
+        "-B",
+        "scripts/parity/verify.py",
+        "--strict"
+      ],
+      "exitCode": 1,
+      "expectedExitCode": 1
+    }
+  ],
+  "counts": {
+    "unclassified": 1198,
+    "verified-equivalent": 81,
+    "missing": 13,
+    "implemented-unverified": 1
+  },
+  "currentFunctionalOriginalCases": 7,
+  "staleCaseEvidence": 74,
+  "strictAcceptance": false,
+  "availableBytesAtCheckpoint": 23687929856,
+  "sourceInventory": [
+    {
+      "path": "scripts/parity/storage_guard.mjs",
+      "digest": "sha256:8fb2f2080f3a6a5b523739d7cb8b36fb40963a49b9ee25183ce761324650934a"
+    },
+    {
+      "path": "scripts/parity/original.mjs",
+      "digest": "sha256:e090be057549c59b1b11a209243554310dafa527535d0882247216e027fe9d92"
+    },
+    {
+      "path": "scripts/parity/legacy_validation.mjs",
+      "digest": "sha256:9d8cdf67455f0efcbae6cc0212736ecb84543c0c9e70ff3a0f35ef09ba46bf6f"
+    },
+    {
+      "path": "scripts/parity/freeze_validation.mjs",
+      "digest": "sha256:6bc569544b91b1070742de388c8b688cc6493fb8dd1413ab249fb4f1bf396041"
+    },
+    {
+      "path": "scripts/parity/reconcile_surface.mjs",
+      "digest": "sha256:d6954ff95fd19d9f34c22a6b986262dc1f0b1e94ae39f90b54d6c19376591931"
+    },
+    {
+      "path": "sdk/typescript/legacy-validation.mjs",
+      "digest": "sha256:8f047fd939a25bf36acbd5d0663c9d9380b3de08f30a57048a0b6eb479e8a13b"
+    },
+    {
+      "path": "crates/patamaps-core/src/registry.rs",
+      "digest": "sha256:207a8b0c57ba2e6836068133ab793a56bb0085b2726118037cd4a62ebabafc2a"
+    },
+    {
+      "path": "crates/patamaps-core/src/legacy_validation.rs",
+      "digest": "sha256:d2dd0a07b7768fbe66ceb1d6ba0becbeb229ce22dd535815d3498a217eea2664"
+    },
+    {
+      "path": "crates/patamaps-core/src/legacy_core.json",
+      "digest": "sha256:b942ebdf7a0d5c8a5e638be5518330385c246168b12bf2ec535e610352136f60"
+    },
+    {
+      "path": "crates/patamaps-core/tests/registry.rs",
+      "digest": "sha256:29751d381c02db16e3be005f58dcb111407330d480afc15e1a662e2862748985"
+    },
+    {
+      "path": "crates/patamaps-core/tests/legacy_validation.rs",
+      "digest": "sha256:33cbee90b27f4a08c016a048a58ae2ae4f63b5851c9ede8326cfed7a4a80b060"
+    },
+    {
+      "path": "fixtures/parity/legacy-validation-controls.json",
+      "digest": "sha256:c840095799be76db9d0e4e88e42f61e6c9a2f5fb776c3d6582a8ae96bac4fcab"
+    },
+    {
+      "path": "fixtures/parity/supplement-cli-parser.json",
+      "digest": "sha256:fbca6c8a725edb50e1b19f87bc2d3ac57f699452a79998191857922645c2343b"
+    },
+    {
+      "path": "fixtures/parity/registry-validation-classification.json",
+      "digest": "sha256:69dd091b66663a489b5c833a8c17adcb212bb97b128883b59f19915ea49c5731"
+    },
+    {
+      "path": "scripts/parity/verify.py",
+      "digest": "sha256:ab030c95856dd0e56e2972d9693f7aa003c3fb711d92387fb0bb834af0c98109"
+    },
+    {
+      "path": "scripts/parity/sdk_consumer.py",
+      "digest": "sha256:952ad1675fbd3f7e3bd6eed9dc9dac9537f389cde593cce54ba449dd0d40e085"
+    }
+  ],
+  "preservedActualFunctionalRuns": {
+    "original": "docs/acceptance/parity/original-validation-2026-10-12T04-50-35.031Z/receipt.json",
+    "controls": "docs/acceptance/parity/legacy-validation-2026-10-12T04-52-02.346Z/receipt.json",
+    "supervisionLimitation": "Both runs were unsupervised. Exact pre-guard drivers and run-review sidecars remain preserved. Supervised repeat is required."
+  },
+  "observedNativeChecksThisTurn": {
+    "commands": [
+      "SDKROOT=/Library/Developer/CommandLineTools/SDKs/MacOSX26.5.sdk CARGO_INCREMENTAL=0 CARGO_PROFILE_DEV_DEBUG=0 CARGO_PROFILE_TEST_DEBUG=0 /Users/admin/.cargo/bin/cargo build --locked -p patamaps-cli",
+      "SDKROOT=/Library/Developer/CommandLineTools/SDKs/MacOSX26.5.sdk CARGO_INCREMENTAL=0 CARGO_PROFILE_DEV_DEBUG=0 CARGO_PROFILE_TEST_DEBUG=0 /Users/admin/.cargo/bin/cargo test --locked -p patamaps-core --test registry --test legacy_validation"
+    ],
+    "observation": "Build and two focused tests passed in tool outputs; the legacy test compared all 472 frozen cases. These commands were invoked directly, without required storage supervision, and need supervised repeat. This is a transcript observation, not a fresh full native suite receipt."
+  },
+  "storageGuardControl": "docs/acceptance/parity/storage-entrypoint-review-2026-10-12T05-11-31.806337Z/receipt.json",
+  "pending": [
+    "Start capacity below installed 25 GB minimum; no deletion beyond the approved VM disk is authorized.",
+    "Successful supervised runner path and expanded installed SDK type/runtime consumer.",
+    "Fresh supervised full portable/Clippy, 74 original-case and component receipts at this compiler identity.",
+    "Full legacy 1.0/2.0 registry/pack import, standalone semantics and workspace configuration.",
+    "Remaining P0 classification and P1\u2013P9 functionality/platform/package gates."
+  ],
+  "scope": "Actual scoped progress only. Full parity, supervised replacement acceptance, publication and activation are not achieved."
+}

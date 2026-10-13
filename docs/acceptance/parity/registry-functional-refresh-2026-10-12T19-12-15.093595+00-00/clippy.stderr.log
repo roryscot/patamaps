@@ -1,0 +1,49 @@
+    Checking patamaps-contracts v0.1.0 (/Users/admin/dev/patamaps/patamaps/crates/patamaps-contracts)
+    Checking patamaps-core v0.1.0 (/Users/admin/dev/patamaps/patamaps/crates/patamaps-core)
+error: this `if` statement can be collapsed
+   --> crates/patamaps-core/src/legacy_registry.rs:346:13
+    |
+346 | /             if let Some(inverse) = first
+347 | |                 .get("inverse")
+348 | |                 .and_then(Value::as_str)
+349 | |                 .filter(|v| !v.is_empty())
+...   |
+354 | |             }
+    | |_____________^
+    |
+    = help: for further information visit https://rust-lang.github.io/rust-clippy/rust-1.99.0/index.html#collapsible_if
+    = note: `-D clippy::collapsible-if` implied by `-D warnings`
+    = help: to override `-D warnings` add `#[allow(clippy::collapsible_if)]`
+help: collapse nested if block
+    |
+349 ~                 .filter(|v| !v.is_empty())
+350 ~                 && result["id"] != inverse {
+351 |                     return Err(error(format!("Law {law_id} contradicts inverse {inverse}")));
+352 ~                 }
+    |
+
+error: this `if` statement can be collapsed
+   --> crates/patamaps-core/src/legacy_registry.rs:421:9
+    |
+421 | /         if let Some(inverse) = definition
+422 | |             .get("inverse")
+423 | |             .and_then(Value::as_str)
+424 | |             .filter(|v| !v.is_empty())
+...   |
+431 | |         }
+    | |_________^
+    |
+    = help: for further information visit https://rust-lang.github.io/rust-clippy/rust-1.99.0/index.html#collapsible_if
+help: collapse nested if block
+    |
+424 ~             .filter(|v| !v.is_empty())
+425 ~             && (!definitions.contains_key(inverse) || !reverse(inverse)) {
+426 |                 return Err(error(format!(
+427 |                     "Inverse relation {relation} needs a referenced inverse and executable law"
+428 |                 )));
+429 ~             }
+    |
+
+error: could not compile `patamaps-core` (lib test) due to 2 previous errors
+warning: build failed, waiting for other jobs to finish...
+error: could not compile `patamaps-core` (lib) due to 2 previous errors

@@ -1,0 +1,106 @@
+{
+  "schemaVersion": "1.0.0",
+  "status": "passed",
+  "commands": [
+    {
+      "name": "compile",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "/Users/admin/dev/SEEDZ/metamap/node_modules/typescript/lib/tsc.js",
+        "consumer.mts",
+        "--strict",
+        "--module",
+        "NodeNext",
+        "--moduleResolution",
+        "NodeNext",
+        "--target",
+        "ES2022",
+        "--lib",
+        "ES2022"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "execute",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "/private/tmp/patamaps-installed-sdk-dm6_4nai/consumer.mjs"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "reject-types",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "/Users/admin/dev/SEEDZ/metamap/node_modules/typescript/lib/tsc.js",
+        "negative.mts",
+        "--strict",
+        "--module",
+        "NodeNext",
+        "--moduleResolution",
+        "NodeNext",
+        "--target",
+        "ES2022",
+        "--lib",
+        "ES2022",
+        "--noEmit"
+      ],
+      "exitCode": 2
+    }
+  ],
+  "candidate": {
+    "binaryDigest": "sha256:412c5a9caa43fc4cd4619f3dde83118cbac4f13769aded8e96c57b8e2b7e3a43",
+    "engine": {
+      "compiler": "sha256:a0ef7b00d61b27b93ae079bafb330bb807c2c4ba8060a3da2036c7883f9770d3",
+      "documentType": "executor-description",
+      "governance": "sha256:c9f2b7db0888302c2d8a727d501abb52031cb2050710de4000d5a9e0f94f082e",
+      "schemaVersion": "0.1.0",
+      "scientific": "sha256:4808a87d741be15493f72eab30681ef531e5ab5fd644a2a64fa7208197d7a4c4",
+      "workspace": "sha256:615be481bf88d384836f9dde62883a6fa2cfd87a62cf5b246e92df55de49b262"
+    },
+    "sdkSourceInventory": [
+      {
+        "path": "sdk/typescript/canonical.mjs",
+        "digest": "sha256:3be5b66afd2b6618043964261bb07536f7c86dfc75b176ec4629e86c498710ac"
+      },
+      {
+        "path": "sdk/typescript/index.mjs",
+        "digest": "sha256:0a109779705120ecce7d7101694ebaf4d25a08172de99bba07d18d855b6281ad"
+      },
+      {
+        "path": "sdk/typescript/sssom.mjs",
+        "digest": "sha256:24d1845e53ae19601d3559517466ab3712be435b9d7a09d24e379845ea3ff5fa"
+      },
+      {
+        "path": "sdk/typescript/canonical.d.ts",
+        "digest": "sha256:88ae79727dbad3b0872a9c3539a95fe6c444b810ff416423f06a2cf39274ecb4"
+      },
+      {
+        "path": "sdk/typescript/index.d.ts",
+        "digest": "sha256:ca7d5a09a74c187b5d3e6a79e695e5ac6528d6c5e4b8f8d12302c508db42a5b3"
+      },
+      {
+        "path": "sdk/typescript/sssom.d.ts",
+        "digest": "sha256:1dfc789dda53c5e6fba8843d40ff2255bdc1e3b0397bf59b0c712604768b9e5d"
+      },
+      {
+        "path": "sdk/typescript/package.json",
+        "digest": "sha256:e3738fe650cbef2f87b1bccf0f74df94186be66a62cc416ce82a022db6c21752"
+      }
+    ]
+  },
+  "host": {
+    "platform": "macOS-26.6.2-arm64-arm-64bit-Mach-O",
+    "architecture": "arm64"
+  },
+  "retainedStage": "/private/tmp/patamaps-installed-sdk-dm6_4nai",
+  "logs": {
+    "compile.stderr.log": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "compile.stdout.log": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "execute.stderr.log": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "execute.stdout.log": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "reject-types.stderr.log": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "reject-types.stdout.log": "sha256:a3f6605b4abcf85de4f3c7928ba46e8c99fb580d21fdd3ae71dbef4e2c382c2b"
+  },
+  "scope": "Copied canonical and scientific SDK interfaces compiled and executed outside the checkout with empty PATH. This closes no full-package or obligation-level parity gate. No MetaMap runtime package is present in the copied consumer."
+}

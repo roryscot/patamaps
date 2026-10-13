@@ -1,0 +1,54 @@
+node:internal/modules/run_main:123
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: 
+ RUN  v3.2.7 /Users/admin/dev/patamaps/patamaps/.tools/parity/oracles/399747a4ad05-p8pkt3pr/reference
+
+ ❯ src/__tests__/legacy-adapter.test.ts (1 test | 1 failed) 31ms
+   × legacy sources-of-truth adapter > imports the current catalog without inventing ambiguous authority 30ms
+     → Expected JSON-compatible values
+
+ Test Files  1 failed (1)
+      Tests  1 failed (1)
+   Start at  19:54:34
+   Duration  213ms (transform 54ms, setup 50ms, collect 14ms, tests 31ms, environment 0ms, prepare 36ms)
+
+JSON report written to /Users/admin/dev/patamaps/patamaps/.tools/parity/runs/original-migration-mRAYvi/vitest.json
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/__tests__/legacy-adapter.test.ts > legacy sources-of-truth adapter > imports the current catalog without inventing ambiguous authority
+CanonicalJsonError: Expected JSON-compatible values
+ ❯ fail ../../../../../sdk/typescript/canonical.mjs:12:9
+     10| }
+     11| const fail = (code, message) => {
+     12|   throw new CanonicalJsonError(code, message);
+       |         ^
+     13| };
+     14| 
+ ❯ copy ../../../../../sdk/typescript/canonical.mjs:50:7
+ ❯ copy ../../../../../sdk/typescript/canonical.mjs:87:23
+ ❯ copy ../../../../../sdk/typescript/canonical.mjs:72:25
+ ❯ copy ../../../../../sdk/typescript/canonical.mjs:87:23
+ ❯ copy ../../../../../sdk/typescript/canonical.mjs:87:23
+ ❯ portable ../../../../../sdk/typescript/canonical.mjs:93:25
+ ❯ marshalJson ../../../../../sdk/typescript/canonical.mjs:97:39
+ ❯ invoke ../../../../../sdk/typescript/legacy-validation.mjs:132:24
+ ❯ Object.validateLegacyDocument ../../../../../sdk/typescript/legacy-validation.mjs:289:14
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+
+1 !== 0
+
+    at file:///Users/admin/dev/patamaps/patamaps/scripts/parity/original.mjs:692:8 {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: 1,
+  expected: 0,
+  operator: 'strictEqual'
+}
+
+Node.js v22.16.0

@@ -1,0 +1,33 @@
+{
+  "name": "patamaps-native-sdk-draft",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./index.d.ts",
+      "import": "./index.mjs"
+    },
+    "./canonical": {
+      "types": "./canonical.d.ts",
+      "import": "./canonical.mjs"
+    },
+    "./sssom": {
+      "types": "./sssom.d.ts",
+      "import": "./sssom.mjs"
+    },
+    "./legacy-validation": {
+      "types": "./legacy-validation.d.ts",
+      "import": "./legacy-validation.mjs"
+    }
+  },
+  "license": "Apache-2.0",
+  "peerDependencies": {
+    "patamaps-discovery-draft": "0.1.0"
+  },
+  "peerDependenciesMeta": {
+    "patamaps-discovery-draft": {
+      "optional": true
+    }
+  }
+}

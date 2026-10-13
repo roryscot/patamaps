@@ -1,0 +1,265 @@
+{
+  "schemaVersion": "1.0.0",
+  "status": "component-checks-passed",
+  "commands": [
+    {
+      "name": "build",
+      "command": [
+        "/Users/admin/.cargo/bin/cargo",
+        "build",
+        "--locked",
+        "-p",
+        "patamaps-cli"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "registry-controls",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "scripts/parity/registry_contracts.mjs"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "file-controls",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "scripts/parity/pack_contracts.mjs",
+        "--files"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "nested-controls",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "scripts/parity/pack_contracts.mjs",
+        "--nested"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "clippy",
+      "command": [
+        "/Users/admin/.cargo/bin/cargo",
+        "clippy",
+        "--workspace",
+        "--all-targets",
+        "--locked",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "native",
+      "command": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "-B",
+        "scripts/parity/native.py"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "installed-sdk",
+      "command": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "-B",
+        "scripts/parity/sdk_consumer.py"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "pack-controls",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "scripts/parity/pack_contracts.mjs"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "frozen-validation",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "scripts/parity/legacy_validation.mjs"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "original-canonical",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "scripts/parity/original.mjs"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "original-sssom",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "scripts/parity/original.mjs",
+        "--sssom"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "original-discovery",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "scripts/parity/original.mjs",
+        "--discovery"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "original-sssom-adapter",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "scripts/parity/original.mjs",
+        "--sssom-adapter"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "original-validation",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "scripts/parity/original.mjs",
+        "--validation"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "original-registry",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "scripts/parity/original.mjs",
+        "--registry"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "discovery-api",
+      "command": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "-B",
+        "scripts/parity/discovery_api.py"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "scientific-bounds",
+      "command": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "-B",
+        "scripts/parity/scientific_bounds.py"
+      ],
+      "exitCode": 0
+    }
+  ],
+  "resumedFrom": {
+    "path": "docs/acceptance/parity/registry-functional-refresh-2026-10-12T19-13-04.528011+00-00/receipt.json",
+    "digest": "sha256:d1b8f055c350bd4c856350f09e689a6f8f7acadfcf64512d6b06fb8b82103ba7",
+    "passedCommandsReused": 6,
+    "reason": "Production sources unchanged. Installed-consumer harness now loads the original Node type declarations and uses an ES2022 JSON copy; prior compiler diagnostics remain retained."
+  },
+  "scope": "Current supervised portable/installed/components and exact original case evidence; no complete parity gate closes.",
+  "binaryDigest": "sha256:0631c53b6535cd9402f77ad6d12ee63b3585108cd7a7e81faac08c9f4f8209c0",
+  "candidateEngine": {
+    "compiler": "sha256:e9b5148e1cc72dd90686ffaeda24e49826aec2df941d84e94eedb9690d6d7863",
+    "documentType": "executor-description",
+    "governance": "sha256:7460216f4c07b94b171c47d3dd16ea4c65af90ea717695352588d2eb2d6db576",
+    "schemaVersion": "0.1.0",
+    "scientific": "sha256:57f0bfd087ff34983c8b10b3927e33c81195c6ec1aeb9c3d767b39173e668cea",
+    "workspace": "sha256:178744792f30172a921b2dbfbd29a82426c24b8a424d9f09f1d2c2f50e7b75b3"
+  },
+  "ledger": {
+    "status": "incomplete",
+    "inventory": {
+      "obligations": 1293,
+      "exports": 92,
+      "suites": 53,
+      "expandedOriginalCases": 601,
+      "cliCommands": 22,
+      "cliOptions": 32
+    },
+    "counts": {
+      "unclassified": 1170,
+      "verified-equivalent": 95,
+      "missing": 16,
+      "implemented-unverified": 12
+    },
+    "currentVerifiedEquivalent": 95,
+    "invalidEvidence": [],
+    "strictAcceptance": false
+  },
+  "evidenceAttachmentRepair": {
+    "verifiedBy": "docs/acceptance/parity/registry-verification-checkpoint-2026-10-12T19-21-19.501486+00-00/strict-ledger.stdout.log",
+    "verifierDigest": "sha256:df4718995d6ede0fbb22f6444c606c6a3959508c7e7ffa5334c3b1e749dcc378",
+    "scope": "Native core-data loading happens once before callbacks and is explicitly verified as initialization. All selected case operations remain attributed to original callback names; prior attachment failure is retained."
+  },
+  "functionalEvidence": [
+    {
+      "path": "docs/acceptance/parity/registry-controls-2026-10-12T19-13-35.043Z/receipt.json",
+      "digest": "sha256:3349148f194646df40d55efe42afd55fb04ce75c287fd28ed41b098a2e51de04"
+    },
+    {
+      "path": "docs/acceptance/parity/pack-file-controls-2026-10-12T19-13-36.901Z/receipt.json",
+      "digest": "sha256:3b33075c0b87711a7ad22012a607e7142c0be62d9704c20562302f99adb60fc6"
+    },
+    {
+      "path": "docs/acceptance/parity/pack-nested-controls-2026-10-12T19-13-37.174Z/receipt.json",
+      "digest": "sha256:f01ac6f99e18a5e15bd757670cd58f38afe800374423736e26858a8d4ba69659"
+    },
+    {
+      "path": "docs/acceptance/parity/native-2026-10-12T19-13-41.800324Z/receipt.json",
+      "digest": "sha256:3056f0f6366a419e5ffeb1e64c28fd8942ccbefb7243addf2409670ae1d06733"
+    },
+    {
+      "path": "docs/acceptance/parity/sdk-consumer-2026-10-12T19-17-19.437539Z/receipt.json",
+      "digest": "sha256:3c87bbde1ea540220ae093dea52f6c9a817bbea67be34f57982489b1daa169a1"
+    },
+    {
+      "path": "docs/acceptance/parity/pack-json-controls-2026-10-12T19-17-22.664Z/receipt.json",
+      "digest": "sha256:2f7d561bdd23f60d3e0d7c5251e82e9149738f4e2cb960d671d213955ddd1eaa"
+    },
+    {
+      "path": "docs/acceptance/parity/legacy-validation-2026-10-12T19-17-24.437Z/receipt.json",
+      "digest": "sha256:fa626b999ce7bbb512af5f037e5557024f5f98ddbf74ff0e2033ae9cf8bca014"
+    },
+    {
+      "path": "docs/acceptance/parity/original-canonical-2026-10-12T19-17-31.479Z/receipt.json",
+      "digest": "sha256:2413d61b30d5c824fbbe09e0372a836c2f8a496786c12446fafb5e51a7a661c5"
+    },
+    {
+      "path": "docs/acceptance/parity/original-sssom-2026-10-12T19-17-32.261Z/receipt.json",
+      "digest": "sha256:42221c1e918008063dc9caacbfe6e3e021daefc5df3dda248937a7986644715e"
+    },
+    {
+      "path": "docs/acceptance/parity/original-discovery-2026-10-12T19-17-34.283Z/receipt.json",
+      "digest": "sha256:1650a91e6dd19f7d1fff9cd1075f9643513f06c1a93eb489d0ba6ae886dfaa6e"
+    },
+    {
+      "path": "docs/acceptance/parity/original-sssom-adapter-2026-10-12T19-17-35.427Z/receipt.json",
+      "digest": "sha256:966de213333f482c7283b81fed132565f175276c2ebe89c9d531bf684da99393"
+    },
+    {
+      "path": "docs/acceptance/parity/original-validation-2026-10-12T19-17-37.785Z/receipt.json",
+      "digest": "sha256:546101ce87fa90ac52b67f5fb7de0aa07f52da4a4a5e4a2adedb636cecb19a59"
+    },
+    {
+      "path": "docs/acceptance/parity/original-registry-2026-10-12T19-17-38.420Z/receipt.json",
+      "digest": "sha256:ea91f825e2d65c4dcaec6556324978e0eac02262ee3aafe2da94cc54d5f6ef18"
+    },
+    {
+      "path": "docs/acceptance/parity/discovery-api-2026-10-12T19-17-39.481644Z/receipt.json",
+      "digest": "sha256:ffd03801555e3d5cf78b0ed6e512c317e90e1f0cb1c9261c9ee0c6026c34779f"
+    },
+    {
+      "path": "docs/acceptance/parity/scientific-bounds-2026-10-12T19-17-44.437104Z/receipt.json",
+      "digest": "sha256:4b102f7c3729f52923f6ebf6dc056b1f4738698f651b959e2d6f40237f3b5cdc"
+    }
+  ]
+}

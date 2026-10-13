@@ -1,0 +1,68 @@
+{
+  "status": "failed",
+  "failedFixture": "metamap-shard",
+  "failure": "The new empty-shard fixture incorrectly expected viability while its policy selector matched no mappings. Both engines refuse with EMPTY_MAPPING_SELECTOR. The candidate inventory-capacity repair itself reached native admission.",
+  "candidateBinaryDigest": "sha256:fa82b6b43d07f15c7336eed53bee56795396238e00acc75305af28ad79633f37",
+  "retainedRun": "/var/folders/tr/qmsqldfn59591rbflj14mc4r0000gn/T/patamaps-independent-discovery-yyhggils",
+  "nativeResult": {
+    "issues": [
+      {
+        "code": "EMPTY_MAPPING_SELECTOR",
+        "message": "Selector matches no graph mappings",
+        "severity": "error",
+        "subjectId": "urn:bridge:policy"
+      }
+    ],
+    "status": "rejected"
+  },
+  "referenceResult": {
+    "status": "rejected",
+    "issues": [
+      {
+        "severity": "error",
+        "code": "EMPTY_MAPPING_SELECTOR",
+        "message": "Mapping selector at policy index 0 matches no graph mappings",
+        "subjectId": "urn:bridge:policy",
+        "causalPath": [
+          "urn:bridge:policy"
+        ]
+      }
+    ],
+    "impact": {
+      "changedSubjects": [
+        "urn:bridge:policy"
+      ],
+      "affectedSubjects": [
+        "urn:bridge:policy"
+      ],
+      "paths": [
+        {
+          "subjectId": "urn:bridge:policy",
+          "path": [
+            "urn:bridge:policy"
+          ]
+        }
+      ]
+    },
+    "quarantinedSubjects": [
+      "urn:bridge:policy"
+    ]
+  },
+  "referenceCommand": [
+    "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+    "--input-type=module",
+    "-e",
+    "import{readFileSync}from\"node:fs\";import{pathToFileURL}from\"node:url\";const{compileMetamap}=await import(pathToFileURL(process.argv[1]+\"/dist/viability.js\"));const v=JSON.parse(readFileSync(0,\"utf8\"));console.log(JSON.stringify(compileMetamap(v.graph,v.policy,{evaluatedAt:\"2026-10-10T00:00:00.000Z\"})));",
+    "/Users/admin/dev/patamaps/patamaps/.tools/parity/oracles/399747a4ad05-p8pkt3pr/reference"
+  ],
+  "referenceEngine": "399747a4ad05a37cd8db1cedd53048fad2175be4",
+  "originalTreeFilesVerified": 610,
+  "referenceInput": "docs/acceptance/parity/component-refresh-2026-10-11T23-28-04.834843Z/empty-shard-reference.input.json",
+  "referenceOutputDigest": "sha256:fc9b21dbfb5b2260355336f9c9c6ccdf5b041a23a943ad785fbd72602c46a963",
+  "wireChanges": [
+    "graph.schemaVersion 0.1.0 to 2.0.0 and removed documentType",
+    "policy.schemaVersion 0.1.0 to 1.0.0 and removed documentType"
+  ],
+  "proposedFixtureRepair": "A separate positive fixture will supply two entities and one explicit lossless declared core:references mapping. The generic policy can then select an actual mapping. All original and failed fixtures remain unchanged.",
+  "originalCasesClosed": 0
+}

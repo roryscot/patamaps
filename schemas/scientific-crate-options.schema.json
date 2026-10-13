@@ -102,6 +102,14 @@
       },
       "maxItems": 64,
       "minItems": 0
+    },
+    "rawInputs": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "maxProperties": 1024,
+      "description": "Explicit included bytes keyed by captured receipt ID. Excluded receipts must lack content in the capture and remain digest references."
     }
   },
   "required": [

@@ -210,6 +210,11 @@ pub fn import_graph(checked: &CheckedSssom, options: &ImportOptions) -> Result<G
     };
     // This is source-shaped data, not a CheckedGraph. Unknown predicates remain
     // uninterpreted and will refuse use unless a consumer registers semantics.
-    parse::<GraphDocument>(&canonical_bytes(&graph)?)?;
+    let limits = if checked.limits.max_bytes == MAX_INPUT_BYTES {
+        STRICT_JSON_LIMITS
+    } else {
+        SSSOM_TRANSPORT_LIMITS
+    };
+    parse_with_limits::<GraphDocument>(&canonical_bytes(&graph)?, limits)?;
     Ok(graph)
 }

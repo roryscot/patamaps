@@ -1,0 +1,58 @@
+{
+  "schemaVersion": "1.0.0",
+  "status": "verification-failed",
+  "commands": [
+    {
+      "name": "build",
+      "command": [
+        "/Users/admin/.cargo/bin/cargo",
+        "build",
+        "--locked",
+        "-p",
+        "patamaps-cli"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "registry-controls",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "scripts/parity/registry_contracts.mjs"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "file-controls",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "scripts/parity/pack_contracts.mjs",
+        "--files"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "nested-controls",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "scripts/parity/pack_contracts.mjs",
+        "--nested"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "clippy",
+      "command": [
+        "/Users/admin/.cargo/bin/cargo",
+        "clippy",
+        "--workspace",
+        "--all-targets",
+        "--locked",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exitCode": 101
+    }
+  ],
+  "scope": "Current supervised portable/installed/components and exact original case evidence; no complete parity gate closes."
+}

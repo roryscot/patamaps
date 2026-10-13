@@ -1,0 +1,24 @@
+node:internal/fs/cp/cp-sync:90
+    throw new ERR_FS_CP_EEXIST({
+          ^
+
+SystemError [ERR_FS_CP_EEXIST]: Target already exists: cp returned EEXIST (/Users/admin/dev/patamaps/patamaps/.tools/parity/runs/installed-validation-0EkpEz/node_modules/patamaps-native-sdk-draft/LICENSE already exists) /Users/admin/dev/patamaps/patamaps/.tools/parity/runs/installed-validation-0EkpEz/node_modules/patamaps-native-sdk-draft/LICENSE
+    at onFile (node:internal/fs/cp/cp-sync:90:11)
+    at getStats (node:internal/fs/cp/cp-sync:72:12)
+    at cpSyncFn (node:internal/fs/cp/cp-sync:58:10)
+    at cpSync (node:fs:3242:3)
+    at file:///Users/admin/dev/patamaps/patamaps/scripts/parity/legacy_validation.mjs:42:1 {
+  code: 'ERR_FS_CP_EEXIST',
+  info: {
+    message: '/Users/admin/dev/patamaps/patamaps/.tools/parity/runs/installed-validation-0EkpEz/node_modules/patamaps-native-sdk-draft/LICENSE already exists',
+    path: '/Users/admin/dev/patamaps/patamaps/.tools/parity/runs/installed-validation-0EkpEz/node_modules/patamaps-native-sdk-draft/LICENSE',
+    syscall: 'cp',
+    errno: 17,
+    code: 'EEXIST'
+  },
+  errno: [Getter/Setter],
+  syscall: [Getter/Setter],
+  path: [Getter/Setter]
+}
+
+Node.js v24.21.0

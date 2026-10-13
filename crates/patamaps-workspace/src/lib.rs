@@ -1,6 +1,8 @@
 //! Local I/O orchestration. All semantic decisions use the checked Rust kernel.
 #![forbid(unsafe_code)]
+mod legacy_io;
 mod model;
+pub use legacy_io::legacy_workspace_request;
 mod process;
 #[cfg(all(test, unix))]
 mod process_tests;
@@ -21,7 +23,7 @@ use std::{
 
 pub const PROFILE: &str = "patamaps-workspace-draft-1";
 pub fn engine_id() -> String {
-    canonical_digest(&json!({"profile":PROFILE,"compiler":executor_id(),"manifest":include_str!("../Cargo.toml"),"model":include_str!("model.rs"),"process":include_str!("process.rs"),"workspace":include_str!("lib.rs")})).expect("finite embedded source")
+    canonical_digest(&json!({"profile":PROFILE,"compiler":executor_id(),"manifest":include_str!("../Cargo.toml"),"model":include_str!("model.rs"),"process":include_str!("process.rs"),"workspace":include_str!("lib.rs"),"legacyIO":include_str!("legacy_io.rs")})).expect("finite embedded source")
 }
 #[derive(Debug, thiserror::Error)]
 pub enum Error {
@@ -260,7 +262,7 @@ pub fn generate(
                 inputs,
                 config: adapter_config,
             } => {
-                if !(1..=1024).contains(&inputs.len()) || invocation.code_inputs.len() > 128 {
+                if !(1..=1024).contains(&inputs.len()) || invocation.code_inputs.len() > 512 {
                     return Err(Error::refused(
                         "ADAPTER_INPUT_LIMIT",
                         "Provider input inventory is out of bounds",
@@ -402,6 +404,7 @@ pub fn generate(
         }
         let record = capture(
             CaptureInputs {
+                projection_specs: vec![],
                 graph: graph.clone(),
                 packs: packs.clone(),
                 policy: policy.clone(),

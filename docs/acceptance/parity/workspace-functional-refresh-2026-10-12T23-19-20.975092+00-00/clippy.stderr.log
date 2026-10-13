@@ -1,0 +1,183 @@
+    Checking patamaps-contracts v0.1.0 (/Users/admin/dev/patamaps/patamaps/crates/patamaps-contracts)
+    Checking patamaps-core v0.1.0 (/Users/admin/dev/patamaps/patamaps/crates/patamaps-core)
+error: the `Err`-variant returned from this function is very large
+  --> crates/patamaps-core/src/legacy_workspace.rs:64:25
+   |
+64 | fn parse(text: &str) -> Result<J, LegacyWorkspaceError> {
+   |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ the `Err`-variant is at least 136 bytes
+   |
+   = help: try reducing the size of `legacy_workspace::LegacyWorkspaceError`, for example by boxing large elements or replacing it with `Box<legacy_workspace::LegacyWorkspaceError>`
+   = help: for further information visit https://rust-lang.github.io/rust-clippy/rust-1.99.0/index.html#result_large_err
+   = note: `-D clippy::result-large-err` implied by `-D warnings`
+   = help: to override `-D warnings` add `#[allow(clippy::result_large_err)]`
+
+error: the `Err`-variant returned from this function is very large
+  --> crates/patamaps-core/src/legacy_workspace.rs:69:18
+   |
+69 | fn raw(v: &J) -> Result<String, LegacyWorkspaceError> {
+   |                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ the `Err`-variant is at least 136 bytes
+   |
+   = help: try reducing the size of `legacy_workspace::LegacyWorkspaceError`, for example by boxing large elements or replacing it with `Box<legacy_workspace::LegacyWorkspaceError>`
+   = help: for further information visit https://rust-lang.github.io/rust-clippy/rust-1.99.0/index.html#result_large_err
+
+error: the `Err`-variant returned from this function is very large
+  --> crates/patamaps-core/src/legacy_workspace.rs:88:36
+   |
+88 | fn get<'a>(v: &'a J, key: &str) -> Result<&'a J, LegacyWorkspaceError> {
+   |                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ the `Err`-variant is at least 136 bytes
+   |
+   = help: try reducing the size of `legacy_workspace::LegacyWorkspaceError`, for example by boxing large elements or replacing it with `Box<legacy_workspace::LegacyWorkspaceError>`
+   = help: for further information visit https://rust-lang.github.io/rust-clippy/rust-1.99.0/index.html#result_large_err
+
+error: the `Err`-variant returned from this function is very large
+  --> crates/patamaps-core/src/legacy_workspace.rs:92:37
+   |
+92 | fn list<'a>(v: &'a J, key: &str) -> Result<&'a [J], LegacyWorkspaceError> {
+   |                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ the `Err`-variant is at least 136 bytes
+   |
+   = help: try reducing the size of `legacy_workspace::LegacyWorkspaceError`, for example by boxing large elements or replacing it with `Box<legacy_workspace::LegacyWorkspaceError>`
+   = help: for further information visit https://rust-lang.github.io/rust-clippy/rust-1.99.0/index.html#result_large_err
+
+error: the `Err`-variant returned from this function is very large
+  --> crates/patamaps-core/src/legacy_workspace.rs:97:37
+   |
+97 | fn text<'a>(v: &'a J, key: &str) -> Result<&'a str, LegacyWorkspaceError> {
+   |                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ the `Err`-variant is at least 136 bytes
+   |
+   = help: try reducing the size of `legacy_workspace::LegacyWorkspaceError`, for example by boxing large elements or replacing it with `Box<legacy_workspace::LegacyWorkspaceError>`
+   = help: for further information visit https://rust-lang.github.io/rust-clippy/rust-1.99.0/index.html#result_large_err
+
+error: the `Err`-variant returned from this function is very large
+   --> crates/patamaps-core/src/legacy_workspace.rs:123:47
+    |
+123 | fn hash(v: &J, col: &CollatorBorrowed<'_>) -> Result<J, LegacyWorkspaceError> {
+    |                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ the `Err`-variant is at least 136 bytes
+    |
+    = help: try reducing the size of `legacy_workspace::LegacyWorkspaceError`, for example by boxing large elements or replacing it with `Box<legacy_workspace::LegacyWorkspaceError>`
+    = help: for further information visit https://rust-lang.github.io/rust-clippy/rust-1.99.0/index.html#result_large_err
+
+error: the `Err`-variant returned from this function is very large
+   --> crates/patamaps-core/src/legacy_workspace.rs:128:49
+    |
+128 | fn pretty(v: &J, col: &CollatorBorrowed<'_>) -> Result<J, LegacyWorkspaceError> {
+    |                                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ the `Err`-variant is at least 136 bytes
+    |
+    = help: try reducing the size of `legacy_workspace::LegacyWorkspaceError`, for example by boxing large elements or replacing it with `Box<legacy_workspace::LegacyWorkspaceError>`
+    = help: for further information visit https://rust-lang.github.io/rust-clippy/rust-1.99.0/index.html#result_large_err
+
+error: the `Err`-variant returned from this function is very large
+   --> crates/patamaps-core/src/legacy_workspace.rs:132:27
+    |
+132 | fn locale(value: &str) -> Result<CollatorBorrowed<'static>, LegacyWorkspaceError> {
+    |                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ the `Err`-variant is at least 136 bytes
+    |
+    = help: try reducing the size of `legacy_workspace::LegacyWorkspaceError`, for example by boxing large elements or replacing it with `Box<legacy_workspace::LegacyWorkspaceError>`
+    = help: for further information visit https://rust-lang.github.io/rust-clippy/rust-1.99.0/index.html#result_large_err
+
+error: the `Err`-variant returned from this function is very large
+   --> crates/patamaps-core/src/legacy_workspace.rs:141:25
+    |
+141 | fn projection(v: &J) -> Result<Value, LegacyWorkspaceError> {
+    |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ the `Err`-variant is at least 136 bytes
+    |
+    = help: try reducing the size of `legacy_workspace::LegacyWorkspaceError`, for example by boxing large elements or replacing it with `Box<legacy_workspace::LegacyWorkspaceError>`
+    = help: for further information visit https://rust-lang.github.io/rust-clippy/rust-1.99.0/index.html#result_large_err
+
+error: the `Err`-variant returned from this function is very large
+   --> crates/patamaps-core/src/legacy_workspace.rs:167:6
+    |
+167 | ) -> Result<Document, LegacyWorkspaceError> {
+    |      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ the `Err`-variant is at least 136 bytes
+    |
+    = help: try reducing the size of `legacy_workspace::LegacyWorkspaceError`, for example by boxing large elements or replacing it with `Box<legacy_workspace::LegacyWorkspaceError>`
+    = help: for further information visit https://rust-lang.github.io/rust-clippy/rust-1.99.0/index.html#result_large_err
+
+error: the `Err`-variant returned from this function is very large
+   --> crates/patamaps-core/src/legacy_workspace.rs:230:6
+    |
+230 | ) -> Result<J, LegacyWorkspaceError> {
+    |      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ the `Err`-variant is at least 136 bytes
+    |
+    = help: try reducing the size of `legacy_workspace::LegacyWorkspaceError`, for example by boxing large elements or replacing it with `Box<legacy_workspace::LegacyWorkspaceError>`
+    = help: for further information visit https://rust-lang.github.io/rust-clippy/rust-1.99.0/index.html#result_large_err
+
+error: the `Err`-variant returned from this function is very large
+   --> crates/patamaps-core/src/legacy_workspace.rs:260:61
+    |
+260 | fn unconfigured(config: &J, graph: &J, configured: &[J]) -> Result<Vec<J>, LegacyWorkspaceError> {
+    |                                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ the `Err`-variant is at least 136 bytes
+    |
+    = help: try reducing the size of `legacy_workspace::LegacyWorkspaceError`, for example by boxing large elements or replacing it with `Box<legacy_workspace::LegacyWorkspaceError>`
+    = help: for further information visit https://rust-lang.github.io/rust-clippy/rust-1.99.0/index.html#result_large_err
+
+error: the `Err`-variant returned from this function is very large
+   --> crates/patamaps-core/src/legacy_workspace.rs:329:43
+    |
+329 | fn pack_digest(pack: &J, locale: &str) -> Result<J, LegacyWorkspaceError> {
+    |                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ the `Err`-variant is at least 136 bytes
+    |
+    = help: try reducing the size of `legacy_workspace::LegacyWorkspaceError`, for example by boxing large elements or replacing it with `Box<legacy_workspace::LegacyWorkspaceError>`
+    = help: for further information visit https://rust-lang.github.io/rust-clippy/rust-1.99.0/index.html#result_large_err
+
+error: the `Err`-variant returned from this function is very large
+   --> crates/patamaps-core/src/legacy_workspace.rs:342:6
+    |
+342 | ) -> Result<J, LegacyWorkspaceError> {
+    |      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ the `Err`-variant is at least 136 bytes
+    |
+    = help: try reducing the size of `legacy_workspace::LegacyWorkspaceError`, for example by boxing large elements or replacing it with `Box<legacy_workspace::LegacyWorkspaceError>`
+    = help: for further information visit https://rust-lang.github.io/rust-clippy/rust-1.99.0/index.html#result_large_err
+
+error: the `Err`-variant returned from this closure is very large
+   --> crates/patamaps-core/src/legacy_workspace.rs:349:14
+    |
+349 |           .map(|a| {
+    |  ______________^
+350 | |             Ok(obj(vec![
+351 | |                 ("id", get(a, "sourceId")?.clone()),
+352 | |                 ("adapterVersion", get(a, "adapterVersion")?.clone()),
+353 | |                 ("inputs", get(a, "inputs")?.clone()),
+354 | |             ]))
+355 | |         })
+    | |_________^ the `Err`-variant is at least 136 bytes
+    |
+    = help: try reducing the size of `legacy_workspace::LegacyWorkspaceError`, for example by boxing large elements or replacing it with `Box<legacy_workspace::LegacyWorkspaceError>`
+    = help: for further information visit https://rust-lang.github.io/rust-clippy/rust-1.99.0/index.html#result_large_err
+
+error: the `Err`-variant returned from this closure is very large
+   --> crates/patamaps-core/src/legacy_workspace.rs:367:14
+    |
+367 |           .map(|(i, a)| {
+    |  ______________^
+368 | |             let value = get(a, "document")?.clone();
+369 | |             let mut origins = HashMap::new();
+370 | |             for field in ["relationPacks", "entities", "mappings", "authorities"] {
+...   |
+386 | |             Ok(Document { value, origins })
+387 | |         })
+    | |_________^ the `Err`-variant is at least 136 bytes
+    |
+    = help: try reducing the size of `legacy_workspace::LegacyWorkspaceError`, for example by boxing large elements or replacing it with `Box<legacy_workspace::LegacyWorkspaceError>`
+    = help: for further information visit https://rust-lang.github.io/rust-clippy/rust-1.99.0/index.html#result_large_err
+
+error: the `Err`-variant returned from this function is very large
+   --> crates/patamaps-core/src/legacy_workspace.rs:584:29
+    |
+584 | fn has_errors(value: &J) -> Result<bool, LegacyWorkspaceError> {
+    |                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ the `Err`-variant is at least 136 bytes
+    |
+    = help: try reducing the size of `legacy_workspace::LegacyWorkspaceError`, for example by boxing large elements or replacing it with `Box<legacy_workspace::LegacyWorkspaceError>`
+    = help: for further information visit https://rust-lang.github.io/rust-clippy/rust-1.99.0/index.html#result_large_err
+
+error: the `Err`-variant returned from this function is very large
+   --> crates/patamaps-core/src/legacy_workspace.rs:603:6
+    |
+603 | ) -> Result<Box<RawValue>, LegacyWorkspaceError> {
+    |      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ the `Err`-variant is at least 136 bytes
+    |
+    = help: try reducing the size of `legacy_workspace::LegacyWorkspaceError`, for example by boxing large elements or replacing it with `Box<legacy_workspace::LegacyWorkspaceError>`
+    = help: for further information visit https://rust-lang.github.io/rust-clippy/rust-1.99.0/index.html#result_large_err
+
+error: could not compile `patamaps-core` (lib test) due to 18 previous errors
+warning: build failed, waiting for other jobs to finish...
+error: could not compile `patamaps-core` (lib) due to 18 previous errors

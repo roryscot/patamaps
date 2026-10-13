@@ -1,0 +1,237 @@
+{
+  "schemaVersion": "1.0.0",
+  "driver": "migration",
+  "driverDigest": "sha256:8f14b01e9a2e9affa0b12180437ec4521ed5fe8e13b335368be745f908d980b0",
+  "supervision": {
+    "mode": "inherited-live-supervisor",
+    "project": "/Users/admin/dev/patamaps/patamaps",
+    "configurationDigest": "sha256:77505e4ca3960c2df14617ffa5951838a6b84e51d6f8ed715ec60faa3c9e8187",
+    "policy": {
+      "version": 1,
+      "minimumFreeBytes": 0,
+      "reserveFreeBytes": 10000000000,
+      "maximumRunGrowthBytes": 8000000000,
+      "maximumRetainedBytes": 50000000000,
+      "monitorIntervalMs": 2000,
+      "terminationGraceMs": 15000
+    },
+    "availableBytesAtEntry": 13343813632
+  },
+  "selection": {
+    "path": "fixtures/parity/migration-selected-cases.json",
+    "digest": "sha256:e0c024b58c31778a8d64c140e78d31ffe1f188f8ce637c78a26cd8bd88a8e8cb",
+    "schemaVersion": "1.0.0",
+    "suite": "src/__tests__/legacy-adapter.test.ts",
+    "testNamePattern": "^legacy sources-of-truth adapter ",
+    "selectedCaseIds": [
+      "parity:e81677370687b66ae960"
+    ],
+    "excludedCaseIds": [],
+    "scope": "The unchanged original catalog migration callback executes Rust migration, graph validation and authority queries. Original makeUrn remains an independent expected-value utility. Full migration/CLI/public contracts remain open."
+  },
+  "timestamp": "2026-10-13T01-12-12.536Z",
+  "status": "passed",
+  "command": [
+    "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+    "/Users/admin/dev/patamaps/patamaps/.tools/parity/oracles/399747a4ad05-p8pkt3pr/reference/node_modules/vitest/vitest.mjs",
+    "run",
+    "--config",
+    "/Users/admin/dev/patamaps/patamaps/.tools/parity/runs/original-migration-Krknv8/vitest.config.mjs",
+    "--reporter=default",
+    "--reporter=json",
+    "--outputFile",
+    "/Users/admin/dev/patamaps/patamaps/.tools/parity/runs/original-migration-Krknv8/vitest.json",
+    "--testNamePattern",
+    "^legacy sources-of-truth adapter "
+  ],
+  "exitCode": 0,
+  "signal": null,
+  "error": null,
+  "manifestDigest": "sha256:963a0bdb0514342053144b369b900342d78c55d79ddc3a07c032dd859c8cd8ed",
+  "comparisonRulesDigest": "sha256:ab76e60deb27bf8b425063f3d432b88720c1f0d6e2cd67b43b9846cb9fb5ae91",
+  "reference": {
+    "engine": "399747a4ad05a37cd8db1cedd53048fad2175be4",
+    "caseOrigin": "Unchanged pinned original source/assertions",
+    "operationsRerun": false,
+    "testsRerun": false,
+    "referenceObservation": "docs/acceptance/full-reference/reference-vitest.json"
+  },
+  "candidate": {
+    "binary": "target/debug/patamaps",
+    "binaryDigest": "sha256:5bc88d4470ca46b22d1927068869e5d01991c356c17c019fa2ed2210ff3280a5",
+    "engine": {
+      "compiler": "sha256:d48dc57ed54534f78f3ce7af66afb2973bf631aaa3212e5739117911dd55cb65",
+      "documentType": "executor-description",
+      "governance": "sha256:105d7fccbeb266ee95e299dff8fbab7a9c3e6d8adabd3eca571276563b9e42a9",
+      "schemaVersion": "0.1.0",
+      "scientific": "sha256:36228ca0b9fb8de449bbbe8e9d42537ab670d6e34acf516593a3d45037525657",
+      "workspace": "sha256:b933da6c0b55d919da0d55236897c28f3b49f3f839bacfa3ac5bf6c9b5f51821"
+    },
+    "sdkSourceInventory": [
+      {
+        "path": "sdk/typescript/canonical.mjs",
+        "digest": "sha256:e75b120bfde61ea338f1b29af936a9d227db24f7dfcab32cf5f2100775911ebe"
+      },
+      {
+        "path": "sdk/typescript/canonical.d.ts",
+        "digest": "sha256:88ae79727dbad3b0872a9c3539a95fe6c444b810ff416423f06a2cf39274ecb4"
+      },
+      {
+        "path": "sdk/typescript/canonical.d.ts",
+        "digest": "sha256:88ae79727dbad3b0872a9c3539a95fe6c444b810ff416423f06a2cf39274ecb4"
+      },
+      {
+        "path": "sdk/typescript/canonical.mjs",
+        "digest": "sha256:e75b120bfde61ea338f1b29af936a9d227db24f7dfcab32cf5f2100775911ebe"
+      },
+      {
+        "path": "sdk/typescript/cli.mjs",
+        "digest": "sha256:2a0225cb3f468bcf9edefd4da36d88e5393dd84a4f20b8754c4020fdb4e366fe"
+      },
+      {
+        "path": "sdk/typescript/index.d.ts",
+        "digest": "sha256:aa76e1583c3a1b872ec1fa9fbbaddd8c1211a118c9f670c0d9ec1b0ba3a4bbae"
+      },
+      {
+        "path": "sdk/typescript/index.mjs",
+        "digest": "sha256:f5f5abcf9d4b199a4674795bd5e96252f65c1449d679a73dd069c17c89db6015"
+      },
+      {
+        "path": "sdk/typescript/legacy-cli.d.ts",
+        "digest": "sha256:2c765e29edc81b277ae0dfd531e04c072386c8f39195e8a371976d7ba3aac37e"
+      },
+      {
+        "path": "sdk/typescript/legacy-cli.mjs",
+        "digest": "sha256:e8b3964178e54002715de3ff90ef8688a2d1f449f75e2d3f03e19ea767d41032"
+      },
+      {
+        "path": "sdk/typescript/legacy-composition.d.ts",
+        "digest": "sha256:5d776057c00df9548b9b09590bedc48b1f0e1a6a2991d4f6ab55fdacbf6e5677"
+      },
+      {
+        "path": "sdk/typescript/legacy-composition.mjs",
+        "digest": "sha256:7c176a5062c72562d05df937977d9906587ba4e8d914551db3458d7543d461f6"
+      },
+      {
+        "path": "sdk/typescript/legacy-config.d.ts",
+        "digest": "sha256:58675d458afcf7b5db9a52c163629436d248c6172c4167254c42f73c4d4e8f15"
+      },
+      {
+        "path": "sdk/typescript/legacy-config.mjs",
+        "digest": "sha256:df331e601bf7c2bca9273263a7bed464cee471afbf4e4cc39e047db8c300d15c"
+      },
+      {
+        "path": "sdk/typescript/legacy-correspondence.d.ts",
+        "digest": "sha256:5513b17c388b56b295e854beaa7026a1c35f4ee013bd500c334a9c5f99c94c62"
+      },
+      {
+        "path": "sdk/typescript/legacy-correspondence.mjs",
+        "digest": "sha256:2a0254640dfe4d140d3766d43776523dd562808e8be5540a8032e346b12af339"
+      },
+      {
+        "path": "sdk/typescript/legacy-evaluation.d.ts",
+        "digest": "sha256:cf02aabaa67cd49f32a093cb1d2d520dd4c3125a13660689c39a069f26227c7e"
+      },
+      {
+        "path": "sdk/typescript/legacy-evaluation.mjs",
+        "digest": "sha256:b45b2772fd1e6c7207fc45f8747f412b6421a2cfc4ba7cd62a6c30e9d67717f7"
+      },
+      {
+        "path": "sdk/typescript/legacy-graph.d.ts",
+        "digest": "sha256:3e6b7faaf0bb6838613b74194915422d1093565a275f936b5411023b3a361c6e"
+      },
+      {
+        "path": "sdk/typescript/legacy-graph.mjs",
+        "digest": "sha256:edab7d38b8fd1dcdcc51443b3104946a9181d3c9dbb8f4e152352d64bab3746e"
+      },
+      {
+        "path": "sdk/typescript/legacy-references.d.ts",
+        "digest": "sha256:feb5ed0a5dcfe3185d17c95c17afb195d2ac4a18189377feb93e737e3a22e735"
+      },
+      {
+        "path": "sdk/typescript/legacy-references.mjs",
+        "digest": "sha256:907f7d3946db7b8ec2b11d458b3dea42982c8635541a8cf28ff5ad8cc58b7ba9"
+      },
+      {
+        "path": "sdk/typescript/legacy-registry.mjs",
+        "digest": "sha256:3362107f8aac339694c3fb350a720d2ee65cd03f87e5c63d0f3103f93d2dce10"
+      },
+      {
+        "path": "sdk/typescript/legacy-reporting.d.ts",
+        "digest": "sha256:8ca2bee95e0d3b454c3a864855e7866c9e8904c15dc2193f4e061634fd7ac158"
+      },
+      {
+        "path": "sdk/typescript/legacy-reporting.mjs",
+        "digest": "sha256:32dcfbb7eb6460b3e01b9a32e495999678c8794ef5abdddfe271ff5b3d023d2d"
+      },
+      {
+        "path": "sdk/typescript/legacy-validation.d.ts",
+        "digest": "sha256:264d5624a3be1fb03aa4e83af749d4573d7c8dc85d7492cd227191b5d56df509"
+      },
+      {
+        "path": "sdk/typescript/legacy-validation.mjs",
+        "digest": "sha256:621a1922b04717439816e73605ec3021eb5a185adf83f514b5d60690d2603576"
+      },
+      {
+        "path": "sdk/typescript/legacy-workspace.d.ts",
+        "digest": "sha256:0042b2129ef98e3e7858142194c225a698cba5581267ef14346bbe1b47d74f7a"
+      },
+      {
+        "path": "sdk/typescript/legacy-workspace.mjs",
+        "digest": "sha256:d3893cdc92010588440cc96cb0c6741314cd3bd34050dbb51e420872b1a2a45d"
+      },
+      {
+        "path": "sdk/typescript/package.json",
+        "digest": "sha256:b5601cc9d2d94c9c7690e53a8d53e7f8338517beeb35ccc1ac21259bdb039078"
+      },
+      {
+        "path": "sdk/typescript/sssom-profile.mjs",
+        "digest": "sha256:a37260f42d6b02c5900dbefa9477386667f5286079a7a1abd12495e3dc78e533"
+      },
+      {
+        "path": "sdk/typescript/sssom.d.ts",
+        "digest": "sha256:7f58f17edc48bcb8340b73004273fa4c23a9f4b3671ca1276225f16de8254457"
+      },
+      {
+        "path": "sdk/typescript/sssom.mjs",
+        "digest": "sha256:ccc44eac40a38b892d42c33537a9f15915e1aa65c774e6dc78d129284a6bfb74"
+      }
+    ],
+    "facadeDigest": "sha256:e75b120bfde61ea338f1b29af936a9d227db24f7dfcab32cf5f2100775911ebe",
+    "facadeDeclarationDigest": "sha256:88ae79727dbad3b0872a9c3539a95fe6c444b810ff416423f06a2cf39274ecb4"
+  },
+  "host": {
+    "platform": "darwin",
+    "architecture": "arm64",
+    "node": "v22.16.0",
+    "locale": "en-US"
+  },
+  "counts": {
+    "originalCases": 1,
+    "passed": 1,
+    "failed": 0,
+    "skipped": 0,
+    "explicitlyUnselected": 0,
+    "nativeExecutions": 9
+  },
+  "assertions": "The unchanged original catalog migration callback executes Rust migration, graph validation and authority queries. Original makeUrn remains an independent expected-value utility. Full migration/CLI/public contracts remain open.",
+  "obligations": [
+    {
+      "id": "parity:e81677370687b66ae960",
+      "scope": "complete-original-case",
+      "status": "verified-equivalent",
+      "origin": {
+        "path": "src/__tests__/legacy-adapter.test.ts",
+        "digest": "sha256:cc824416f1977765445fe93492774d06b646c99210c62f1cd33f1356343a80f6",
+        "line": 21
+      },
+      "expectationDigest": "sha256:a68bd1504e1fafe86d88bbb4a7b71437448aec1ce2c3371739ec5a319f9c0c15",
+      "fullName": "legacy sources-of-truth adapter imports the current catalog without inventing ambiguous authority",
+      "occurrence": 0,
+      "candidateExecution": "Original catalog migration assertions; Rust-generated records, diagnostics, graph validation and authority queries"
+    }
+  ],
+  "originalTreeFilesVerified": 610,
+  "retainedRun": ".tools/parity/runs/original-migration-Krknv8",
+  "cleanup": "Any explicit Node cleanup within owned roots is retained by rename; deletion outside those roots is refused"
+}

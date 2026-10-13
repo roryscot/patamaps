@@ -1,0 +1,176 @@
+{
+  "schemaVersion": "1.0.0",
+  "status": "component-checks-passed",
+  "commands": [
+    {
+      "name": "build",
+      "command": [
+        "/Users/admin/.cargo/bin/cargo",
+        "build",
+        "--locked",
+        "-p",
+        "patamaps-cli"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "file-controls",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "scripts/parity/pack_contracts.mjs",
+        "--files"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "nested-controls",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "scripts/parity/pack_contracts.mjs",
+        "--nested"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "clippy",
+      "command": [
+        "/Users/admin/.cargo/bin/cargo",
+        "clippy",
+        "--workspace",
+        "--all-targets",
+        "--locked",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "native",
+      "command": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "-B",
+        "scripts/parity/native.py"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "installed-sdk",
+      "command": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "-B",
+        "scripts/parity/sdk_consumer.py"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "pack-controls",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "scripts/parity/pack_contracts.mjs"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "frozen-validation",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "scripts/parity/legacy_validation.mjs"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "original-canonical",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "scripts/parity/original.mjs"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "original-sssom",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "scripts/parity/original.mjs",
+        "--sssom"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "original-discovery",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "scripts/parity/original.mjs",
+        "--discovery"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "original-sssom-adapter",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "scripts/parity/original.mjs",
+        "--sssom-adapter"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "original-validation",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "scripts/parity/original.mjs",
+        "--validation"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "original-packs",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "scripts/parity/original.mjs",
+        "--packs"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "discovery-api",
+      "command": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "-B",
+        "scripts/parity/discovery_api.py"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "scientific-bounds",
+      "command": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "-B",
+        "scripts/parity/scientific_bounds.py"
+      ],
+      "exitCode": 0
+    }
+  ],
+  "scope": "Current supervised portable/installed/components and exact original case evidence; no complete parity gate closes.",
+  "binaryDigest": "sha256:c1f2ad50914b3a8867040cb675cb557e235c99d589bdd2cc9b13d921c5b1b558",
+  "ledger": {
+    "status": "incomplete",
+    "inventory": {
+      "obligations": 1293,
+      "exports": 92,
+      "suites": 53,
+      "expandedOriginalCases": 601,
+      "cliCommands": 22,
+      "cliOptions": 32
+    },
+    "counts": {
+      "unclassified": 1178,
+      "verified-equivalent": 87,
+      "missing": 16,
+      "implemented-unverified": 12
+    },
+    "currentVerifiedEquivalent": 87,
+    "invalidEvidence": [],
+    "strictAcceptance": false
+  }
+}

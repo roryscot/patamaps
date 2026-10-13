@@ -1,0 +1,40 @@
+{
+  "schemaVersion": "1.0.0",
+  "status": "pack-differences-observed",
+  "commands": [
+    {
+      "name": "build",
+      "command": [
+        "/Users/admin/.cargo/bin/cargo",
+        "build",
+        "--locked",
+        "-p",
+        "patamaps-cli"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "pack-native",
+      "command": [
+        "/Users/admin/.cargo/bin/cargo",
+        "test",
+        "--locked",
+        "-p",
+        "patamaps-core",
+        "--test",
+        "legacy_pack"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "pack-json-controls",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "scripts/parity/pack_contracts.mjs"
+      ],
+      "exitCode": 1
+    }
+  ],
+  "binaryDigest": "sha256:67ceb8324d7809cad750863f7a4f74ee6e527de728fe6a5e1004a6ac3c2568a1",
+  "scope": "Actual native pack regression checks and independent frozen JSON diagnostic comparison. No full public-contract or original-case obligation closes."
+}

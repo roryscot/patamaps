@@ -1,0 +1,143 @@
+{
+  "schemaVersion": "1.0.0",
+  "status": "failed",
+  "commands": [
+    {
+      "label": "build",
+      "command": [
+        "/Users/admin/.cargo/bin/cargo",
+        "build",
+        "--locked",
+        "-p",
+        "patamaps-cli"
+      ],
+      "exitCode": 0
+    },
+    {
+      "label": "clippy",
+      "command": [
+        "/Users/admin/.cargo/bin/cargo",
+        "clippy",
+        "--locked",
+        "--workspace",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exitCode": 0
+    },
+    {
+      "label": "native",
+      "command": [
+        "/opt/homebrew/bin/python3",
+        "-B",
+        "scripts/parity/native.py"
+      ],
+      "exitCode": 0
+    },
+    {
+      "label": "installed-sdk",
+      "command": [
+        "/opt/homebrew/bin/python3",
+        "-B",
+        "scripts/parity/sdk_consumer.py"
+      ],
+      "exitCode": 0
+    },
+    {
+      "label": "evaluation-controls",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "scripts/parity/evaluation_contracts.mjs"
+      ],
+      "exitCode": 0
+    },
+    {
+      "label": "evaluation-expanded-controls",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "scripts/parity/evaluation_contracts.mjs",
+        "--expanded"
+      ],
+      "exitCode": 0
+    },
+    {
+      "label": "original-evaluation",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "scripts/parity/original.mjs",
+        "--evaluation"
+      ],
+      "exitCode": 0,
+      "attachmentExitCode": 1,
+      "attachedObligationsVerified": true
+    },
+    {
+      "label": "original-core-data",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "scripts/parity/original.mjs",
+        "--core-data"
+      ],
+      "exitCode": 0,
+      "attachmentExitCode": 1,
+      "attachedObligationsVerified": true
+    },
+    {
+      "label": "cli-controls",
+      "command": [
+        "/opt/homebrew/bin/python3",
+        "-B",
+        "scripts/parity/cli_contracts.py"
+      ],
+      "exitCode": 1
+    }
+  ],
+  "functionalEvidence": [
+    {
+      "path": "docs/acceptance/parity/native-2026-10-13T01-02-06.081261Z/receipt.json",
+      "digest": "sha256:6de49333c64e5509b446afe5f33ca430f7bae2399b2237bef054605abd97a02c"
+    },
+    {
+      "path": "docs/acceptance/parity/sdk-consumer-2026-10-13T01-04-44.612728Z/receipt.json",
+      "digest": "sha256:7727fad715571203aa2c2b06bed2277cfc2adffb753c77f1122e8556345fc3d4"
+    },
+    {
+      "path": "docs/acceptance/parity/evaluation-controls-2026-10-13T01-04-49.427Z/receipt.json",
+      "digest": "sha256:aa7fe2f6cf944012f222d2927651efcd065053acd0fa08ded24af359c51c436f"
+    },
+    {
+      "path": "docs/acceptance/parity/evaluation-controls-2026-10-13T01-04-53.083Z/receipt.json",
+      "digest": "sha256:3a64d19d6a1604ffa7939b5fd043af1d44b9f9cf6fb31411f1a3acdbb678adeb"
+    },
+    {
+      "path": "docs/acceptance/parity/original-evaluation-2026-10-13T01-04-53.865Z/receipt.json",
+      "digest": "sha256:653091259b0f50ad6432740b5df947c7ac6ea5c08d95f39f6faccfc35bfab692"
+    },
+    {
+      "path": "docs/acceptance/parity/original-core-data-2026-10-13T01-04-56.352Z/receipt.json",
+      "digest": "sha256:c2d56f923f1ebb372329d071ac93bd54154709b1b2ecbed4d124bbf345aebcda"
+    },
+    {
+      "path": "docs/acceptance/parity/cli-controls-2026-10-13T01-04-57.642116+00-00/receipt.json",
+      "digest": "sha256:0c7d85299c62653b23dfa01aa8566b54de2d06e11c9071dbf853e4bce523e8f3"
+    }
+  ],
+  "binaryDigest": "sha256:5bc88d4470ca46b22d1927068869e5d01991c356c17c019fa2ed2210ff3280a5",
+  "candidateEngine": {
+    "compiler": "sha256:d48dc57ed54534f78f3ce7af66afb2973bf631aaa3212e5739117911dd55cb65",
+    "documentType": "executor-description",
+    "governance": "sha256:105d7fccbeb266ee95e299dff8fbab7a9c3e6d8adabd3eca571276563b9e42a9",
+    "schemaVersion": "0.1.0",
+    "scientific": "sha256:36228ca0b9fb8de449bbbe8e9d42537ab670d6e34acf516593a3d45037525657",
+    "workspace": "sha256:b933da6c0b55d919da0d55236897c28f3b49f3f839bacfa3ac5bf6c9b5f51821"
+  },
+  "scope": "Full prior portable/component/installed/original callback refresh plus original context/selector/impact observations. Full P0-P9 completion remains unresolved.",
+  "reusedEvidence": [
+    {
+      "path": "docs/acceptance/parity/evaluation-functional-refresh-2026-10-13T01-01-35.997498+00-00/receipt.json",
+      "digest": "sha256:114e77677566ed4d04dfbd6a920a4e146d0b638efcac5094cafcd34d2e01a2fd"
+    }
+  ]
+}

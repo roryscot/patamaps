@@ -1,0 +1,172 @@
+{
+  "schemaVersion": "1.0.0",
+  "status": "SDK-export-repair-verification-pending",
+  "scope": "Verify four original v1 disagreements without changing the original 404 expectations; refresh affected earlier components and boundary request storage. Full P0-P9 goal remains unfinished.",
+  "previousRepair": "docs/acceptance/parity/viability-repair-2026-10-13T01-31-17.552206+00-00",
+  "corpusDigest": "sha256:df246fe562839235f187e2f61e21a329d01c3e4f2c20d90c03d37c8191a464fc",
+  "sourceInventory": [
+    {
+      "path": "BUILD_PLAN.md",
+      "digest": "sha256:1ddf18b265f9dedc0b958aac0a4b754cc17f47841b52713125e108915e9586aa"
+    },
+    {
+      "path": "README.md",
+      "digest": "sha256:b267395c4a6c27a60bcc3c8a86b5f4442713a3aac444b92e6bf1307db2e587bb"
+    },
+    {
+      "path": "crates/patamaps-cli/src/main.rs",
+      "digest": "sha256:524bb677410e3f10dc7df2ce805331b80051e9093c1f713eb0a537e155fcdd32"
+    },
+    {
+      "path": "crates/patamaps-core/src/legacy_constraints.rs",
+      "digest": "sha256:9b9fc7f10b73e7edc7fe5c018e4575be4f5151306927ef319b054897e63f3399"
+    },
+    {
+      "path": "crates/patamaps-core/src/legacy_evaluation.rs",
+      "digest": "sha256:b495b17cd1c2399086ab79852e7a2ad8b94a958b7b8df0fa3e8e94443a21ef26"
+    },
+    {
+      "path": "crates/patamaps-core/src/legacy_pack.rs",
+      "digest": "sha256:ecafb867847a061b1965ba618b8370932cb8e0d06221b8aa055556cb32a23856"
+    },
+    {
+      "path": "crates/patamaps-core/src/legacy_references.rs",
+      "digest": "sha256:53b642981d04dddc13d06ec4012c2de60348f72ba755d8e4fd6d7a909cb68275"
+    },
+    {
+      "path": "crates/patamaps-core/src/legacy_viability.rs",
+      "digest": "sha256:44cee2729877e1ff4690544361c9f44e09f5fa57e26a5b8a3c9e0115487b5557"
+    },
+    {
+      "path": "crates/patamaps-core/src/lib.rs",
+      "digest": "sha256:9eb47815ea96d0410f7d39d6ff5abbf4f2bd262cfbe8464ab8bc1c93f3e1595e"
+    },
+    {
+      "path": "crates/patamaps-core/tests/legacy_viability.rs",
+      "digest": "sha256:6196abfd6f54baa4684d988556bf6cccb2dc0d738fe9ef5696ca911ab0b780ac"
+    },
+    {
+      "path": "crates/patamaps-projection/src/capture.rs",
+      "digest": "sha256:0c59070a03f5f1e23063343ec41160afe0a543abb60af6e7032aeffb765e19cf"
+    },
+    {
+      "path": "fixtures/parity/coverage.json",
+      "digest": "sha256:d89813e9f60ce7a5e26737edc22a5732380def202db5b29f096ec1422a970dbf"
+    },
+    {
+      "path": "fixtures/parity/legacy-viability-classification.json",
+      "digest": "sha256:2afba9fdd162702e8b91aa0780f8aa0678a6867e36c0ae48d3870aa7e2677786"
+    },
+    {
+      "path": "fixtures/parity/viability-controls.json",
+      "digest": "sha256:df246fe562839235f187e2f61e21a329d01c3e4f2c20d90c03d37c8191a464fc"
+    },
+    {
+      "path": "scripts/parity/viability_contracts.mjs",
+      "digest": "sha256:b0968043b0e42f652c4470b11a4a3310886de13b76b6a9fe238e73df5ed88e10"
+    },
+    {
+      "path": "sdk/typescript/legacy-evaluation.d.ts",
+      "digest": "sha256:be18b5ac43fae751f0a9975e955584d15c46364a91395bfe8ed4cefc87dd7626"
+    },
+    {
+      "path": "sdk/typescript/legacy-validation.d.ts",
+      "digest": "sha256:4660b31a60c7fff60096bdbdecc3bc94d12904023cc5302ba38866b02d2c8816"
+    },
+    {
+      "path": "sdk/typescript/legacy-validation.mjs",
+      "digest": "sha256:4a2ecea8dd7c81a7caf314d327ab26f5412650db07ffeb6c8c3a91a8f4836699"
+    },
+    {
+      "path": "sdk/typescript/legacy-viability.d.ts",
+      "digest": "sha256:466e57dd3f4f01653085c27d244c70d1230c4f50c00b658eb54c93a0dcdcdc6e"
+    },
+    {
+      "path": "sdk/typescript/legacy-viability.mjs",
+      "digest": "sha256:c5971e51b0181a0496958632ef06d53f08267b412947b3b14ea4a3ae8e5968e9"
+    },
+    {
+      "path": "scripts/parity/scientific_bounds.py",
+      "digest": "sha256:5e5fa7d976b8539319a40a65a8bf5fd546456f7c877582b97782adbd6b8515f1"
+    }
+  ],
+  "freeBytesBefore": 10918023168,
+  "reserveFreeBytes": 10000000000,
+  "checks": [
+    {
+      "command": "SDKROOT=/Library/Developer/CommandLineTools/SDKs/MacOSX26.5.sdk CARGO_INCREMENTAL=0 CARGO_PROFILE_DEV_DEBUG=0 CARGO_PROFILE_TEST_DEBUG=0 node /Users/admin/Documents/Codex/storage-safeguards/run-project.mjs patamaps -- /Users/admin/.cargo/bin/cargo build --locked -p patamaps-cli",
+      "exitCode": 75,
+      "supervisionRecord": "/Users/admin/Documents/Codex/.storage-control/heavy-builds/runs/cd5820e7-4284-438a-94b6-6b18bd746285/run.json",
+      "completed": false,
+      "stopReason": "kill EPERM",
+      "minimumFreeBytesObserved": 9778712576,
+      "dependentComparisonsStarted": false
+    },
+    {
+      "command": "SDKROOT=/Library/Developer/CommandLineTools/SDKs/MacOSX26.5.sdk CARGO_INCREMENTAL=0 CARGO_PROFILE_DEV_DEBUG=0 CARGO_PROFILE_TEST_DEBUG=0 node /Users/admin/Documents/Codex/storage-safeguards/run-project.mjs patamaps -- /Users/admin/.cargo/bin/cargo build --locked -p patamaps-cli",
+      "exitCode": 0,
+      "supervisionRecord": "/Users/admin/Documents/Codex/.storage-control/heavy-builds/runs/b8b6b03f-1663-4ff3-9a69-3e105c12dda9/run.json",
+      "completed": true,
+      "log": "repaired-build.stdout.log"
+    },
+    {
+      "command": "node /Users/admin/Documents/Codex/storage-safeguards/run-project.mjs patamaps -- node scripts/parity/viability_contracts.mjs",
+      "exitCode": 0,
+      "receipt": "docs/acceptance/parity/viability-controls-2026-10-13T14-56-54.376Z/receipt.json",
+      "counts": {
+        "cases": 404,
+        "matched": 404,
+        "differences": 0
+      },
+      "supervisionRecord": "/Users/admin/Documents/Codex/.storage-control/heavy-builds/runs/ab37c358-eb40-44a4-a4f9-f08bc49801f2/run.json",
+      "referenceGitBlobsVerifiedAfter": 610
+    },
+    {
+      "command": "guarded cargo test --locked -p patamaps-core --test legacy_viability",
+      "exitCode": 0,
+      "tests": 1,
+      "unchangedOriginalObservationsAsserted": 404,
+      "supervisionRecord": "/Users/admin/Documents/Codex/.storage-control/heavy-builds/runs/875cd286-c024-400b-9119-ba9a60fc3081/run.json"
+    },
+    {
+      "command": "guarded node scripts/parity/original.mjs --viability",
+      "exitCode": 1,
+      "status": "SDK exports missing before native execution",
+      "retainedRun": ".tools/parity/runs/original-viability-ZiX0MF",
+      "originalTestsObserved": {
+        "passed": 0,
+        "failed": 10,
+        "skipped": 2
+      },
+      "failedTransport": "direct module compileLegacyMetamap and validateLegacyViableGeneration were absent while factory methods existed",
+      "repair": "Add five direct convenience forwarders; preserve all original test assertions and the failed report."
+    }
+  ],
+  "approvedDeletion": "docs/acceptance/parity/duplicate-large-input-deletion-2026-10-13T14-45-39.809749+00-00/receipt.json",
+  "additionalDeletionApproved": false,
+  "unrun": [
+    "Clippy",
+    "affected older component refresh",
+    "original v1 callbacks",
+    "installed types",
+    "nine boundaries and input retention integration"
+  ],
+  "binaryDigestAfterInterruptedBuild": "sha256:f4f290dcef8eb5d609370a6e35b5f3a6cbb4c6229bf54a139e6be68994bc36e1",
+  "candidate": {
+    "binaryDigest": "sha256:f92f02c80951f815dd8c2dfa2fd67d1be068f09ece9347552769d044391ddee6",
+    "engine": {
+      "compiler": "sha256:964d7765b9c8f4a9b7adc3b7e925f0da500fda49577c228863c1a57b7cdfc995",
+      "documentType": "executor-description",
+      "governance": "sha256:3db94fae3153db25f7b182a9d99e17e312c5fb7be9fc461911ec963786069acd",
+      "schemaVersion": "0.1.0",
+      "scientific": "sha256:0f45e578378ae21a6cb1bb76c88496ae2b11b486d02a448e77de6192eaf38c6f",
+      "workspace": "sha256:111f05ee89146f0141cecb299e40b4ca730e37a443305a6f22f12bf20c6bf27d"
+    },
+    "sourceIdentitiesMatched": {
+      "compiler": "sha256:964d7765b9c8f4a9b7adc3b7e925f0da500fda49577c228863c1a57b7cdfc995",
+      "governance": "sha256:3db94fae3153db25f7b182a9d99e17e312c5fb7be9fc461911ec963786069acd",
+      "workspace": "sha256:111f05ee89146f0141cecb299e40b4ca730e37a443305a6f22f12bf20c6bf27d",
+      "scientific": "sha256:0f45e578378ae21a6cb1bb76c88496ae2b11b486d02a448e77de6192eaf38c6f"
+    }
+  }
+}

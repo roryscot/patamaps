@@ -1,6 +1,7 @@
 use crate::*;
 use patamaps_contracts::{
-    JsonObject, MAX_INPUT_BYTES, MAX_SAFE_INTEGER, canonical_bytes, parse, parse_value,
+    JsonLimits, JsonObject, MAX_SAFE_INTEGER, STRICT_JSON_LIMITS, canonical_bytes,
+    parse_with_limits,
 };
 use serde::Deserialize;
 use serde_json::{Number, Value, json};
@@ -391,10 +392,7 @@ pub(crate) fn interpret(document: &SssomDocument) -> Result<Interpretation> {
         });
     }
     let mut propagation = Vec::new();
-    for (name, slot) in &slots().mapping_set {
-        if !slot.propagated {
-            continue;
-        }
+    for name in crate::propagatable_slots() {
         let Some(value) = metadata.get(name).filter(|v| has(v)) else {
             continue;
         };
@@ -424,13 +422,13 @@ pub(crate) fn interpret(document: &SssomDocument) -> Result<Interpretation> {
         {
             return refuse(
                 "SSSOM_UNSUPPORTED_LITERAL",
-                "Literal records are outside this entity profile",
+                "Literal records are outside the entity TSV profile",
             );
         }
         if record.fields.contains_key("predicate_modifier") {
             return refuse(
                 "SSSOM_UNSUPPORTED_NEGATION",
-                "Negated records are outside this entity profile",
+                "Negated records are outside the entity TSV profile",
             );
         }
         for name in [
@@ -468,7 +466,7 @@ pub(crate) fn interpret(document: &SssomDocument) -> Result<Interpretation> {
                     if result == "https://w3id.org/sssom/NoTermFound" {
                         return refuse(
                             "SSSOM_UNSUPPORTED_UNMAPPED",
-                            "NoTermFound is outside this entity profile",
+                            "NoTermFound is outside the entity TSV profile",
                         );
                     }
                     Ok(Value::String(result))
@@ -527,6 +525,15 @@ fn members(value: &Value) -> Vec<&Value> {
 }
 
 pub fn check_document(document: &SssomDocument) -> Result<CheckedSssom> {
+    check_document_with_limits(document, STRICT_JSON_LIMITS)
+}
+pub fn check_document_compatible(document: &SssomDocument) -> Result<CheckedSssom> {
+    check_document_with_limits(document, SSSOM_COMPATIBILITY_LIMITS)
+}
+pub(crate) fn check_document_with_limits(
+    document: &SssomDocument,
+    limits: JsonLimits,
+) -> Result<CheckedSssom> {
     if document.rows.len() > 50_000
         || !(1..=256).contains(&document.columns.len())
         || document.columns.iter().any(|c| c.is_empty())
@@ -537,23 +544,37 @@ pub fn check_document(document: &SssomDocument) -> Result<CheckedSssom> {
             "Invalid document row/header bounds or duplicate column",
         );
     }
-    patamaps_core::check_metadata_bounds(
-        [(&document.metadata, 1)],
+    patamaps_core::check_metadata_bounds_with_limits(
+        [(&document.metadata, 2)],
         "sssom",
         "SSSOM_METADATA_LIMIT",
+        limits,
     )?;
     let bytes = canonical_bytes(document)?;
-    if bytes.len() > MAX_INPUT_BYTES {
-        return refuse("SSSOM_SIZE_LIMIT", "Encoded source exceeds 16 MiB");
+    if bytes.len() > limits.max_bytes {
+        return Err(Error::new(
+            "SSSOM_SIZE_LIMIT",
+            format!("Encoded source exceeds {} bytes", limits.max_bytes),
+        ));
     }
-    parse_value(&bytes)?;
-    let document: SssomDocument = parse(&bytes)?;
+    let document: SssomDocument = parse_with_limits(&bytes, limits)?;
     let interpretation = interpret(&document)?;
     Ok(CheckedSssom {
         document,
         interpretation,
+        limits,
     })
 }
 pub fn parse_tsv(input: &[u8], external: Option<&[u8]>) -> Result<CheckedSssom> {
-    check_document(&syntax::decode(input, external)?)
+    parse_tsv_with_limits(input, external, STRICT_JSON_LIMITS)
+}
+pub fn parse_tsv_compatible(input: &[u8], external: Option<&[u8]>) -> Result<CheckedSssom> {
+    parse_tsv_with_limits(input, external, SSSOM_COMPATIBILITY_LIMITS)
+}
+pub(crate) fn parse_tsv_with_limits(
+    input: &[u8],
+    external: Option<&[u8]>,
+    limits: JsonLimits,
+) -> Result<CheckedSssom> {
+    check_document_with_limits(&syntax::decode(input, external, limits)?, limits)
 }

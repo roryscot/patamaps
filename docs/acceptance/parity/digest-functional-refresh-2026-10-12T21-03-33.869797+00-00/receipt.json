@@ -1,0 +1,76 @@
+{
+  "schemaVersion": "1.0.0",
+  "status": "failed",
+  "commands": [
+    {
+      "label": "build",
+      "command": [
+        "/Users/admin/.cargo/bin/cargo",
+        "build",
+        "--locked",
+        "-p",
+        "patamaps-cli"
+      ],
+      "exitCode": 0,
+      "retainedCommandRun": "docs/acceptance/parity/digest-functional-refresh-2026-10-12T20-59-53.294259+00-00/receipt.json"
+    },
+    {
+      "label": "clippy",
+      "command": [
+        "/Users/admin/.cargo/bin/cargo",
+        "clippy",
+        "--locked",
+        "--workspace",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exitCode": 0,
+      "retainedCommandRun": "docs/acceptance/parity/digest-functional-refresh-2026-10-12T20-59-53.294259+00-00/receipt.json"
+    },
+    {
+      "label": "native",
+      "command": [
+        "/opt/homebrew/bin/python3",
+        "-B",
+        "scripts/parity/native.py"
+      ],
+      "exitCode": 0,
+      "retainedCommandRun": "docs/acceptance/parity/digest-functional-refresh-2026-10-12T20-59-53.294259+00-00/receipt.json"
+    },
+    {
+      "label": "installed-sdk",
+      "command": [
+        "/opt/homebrew/bin/python3",
+        "-B",
+        "scripts/parity/sdk_consumer.py"
+      ],
+      "exitCode": 1
+    }
+  ],
+  "functionalEvidence": [
+    {
+      "path": "docs/acceptance/parity/native-2026-10-12T21-00-52.238898Z/receipt.json",
+      "digest": "sha256:6cc9a0d3f962201e914ddc8bff8bdde146a5f1da62a29a807a2983fb6300f1a6"
+    },
+    {
+      "path": "docs/acceptance/parity/sdk-consumer-2026-10-12T21-03-55.423076Z/receipt.json",
+      "digest": "sha256:a5733d792f71de1da5b6886fc233523a82642f5745732a3d63e84465090a1e4d"
+    }
+  ],
+  "binaryDigest": "sha256:a86b4d765224b109e4b076fa93d07aab520e65c8daa40296f3ac0a7f9a740dd0",
+  "candidateEngine": {
+    "compiler": "sha256:c1f0306734e051e7665b20cbbda4074b1d1df97c7a480ff3db26c2224a70dee1",
+    "documentType": "executor-description",
+    "governance": "sha256:2063ddeb236905cf4bd5180705616c6a4635f13c64d265f3709ddd2ae9daf036",
+    "schemaVersion": "0.1.0",
+    "scientific": "sha256:970fe42b841435247fd1875b21a70c26daa4fba67c9a5101c987de345bfa96da",
+    "workspace": "sha256:a9c387adc8d40f52c1347e8e024dec3b8d27622af97c5a3355af044a394528a5"
+  },
+  "reusedPassedBuildNativeRun": {
+    "path": "docs/acceptance/parity/digest-functional-refresh-2026-10-12T20-59-53.294259+00-00/receipt.json",
+    "digest": "sha256:4420b870810e78cfed673765382cc04dd58f37188a6e6f65abe554a7cd4ad619"
+  },
+  "scope": "Current unchecked digest/UTF-16/composition/graph/registry/JSON/native/installed SDK/discovery/scientific components, including the source-bound native collator patch. Original callbacks and expectations remain unchanged. Complete accepted-domain/package/platform parity remains unresolved."
+}

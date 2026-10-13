@@ -1,0 +1,66 @@
+{
+  "schemaVersion": "1.0.0",
+  "status": "refusal-control-passed",
+  "command": [
+    "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+    "scripts/parity/legacy_validation.mjs"
+  ],
+  "exitCode": 75,
+  "stdout": "",
+  "stderr": "Storage guard: 23.70 GB free; 25.00 GB required. Review an exact cleanup list; nothing is purged automatically.\n",
+  "noRunOrAcceptanceOutputAllocated": true,
+  "syntaxChecks": [
+    {
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "--check",
+        "scripts/parity/storage_guard.mjs"
+      ],
+      "exitCode": 0
+    },
+    {
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "--check",
+        "scripts/parity/original.mjs"
+      ],
+      "exitCode": 0
+    },
+    {
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "--check",
+        "scripts/parity/legacy_validation.mjs"
+      ],
+      "exitCode": 0
+    },
+    {
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "--check",
+        "scripts/parity/freeze_validation.mjs"
+      ],
+      "exitCode": 0
+    },
+    {
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "--check",
+        "scripts/parity/reconcile_surface.mjs"
+      ],
+      "exitCode": 0
+    },
+    {
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "--check",
+        "sdk/typescript/legacy-validation.mjs"
+      ],
+      "exitCode": 0
+    }
+  ],
+  "availableBytesObservedAfterRefusal": 23704825856,
+  "policyPath": "/Users/admin/dev/tmp/rust-sketches/wargame-workbench/storage-policy.json",
+  "policyDigest": "sha256:921931c5dbdd4a0bb962847667c30e8f2eefabb4b4137d846c2b159f8efc4050",
+  "scope": "Actual low-space refusal and syntax checks only. Successful inherited-lease execution, full native suite and installed typed consumer remain unrun. Existing unsupervised validation runs are preserved as actual functional results, explicitly flagged for supervised repeat."
+}

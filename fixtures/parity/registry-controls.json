@@ -1,0 +1,432 @@
+{
+  "schemaVersion": "1.0.0",
+  "referenceEngine": "399747a4ad05a37cd8db1cedd53048fad2175be4",
+  "scenarioDigest": "sha256:ab2b049398d4a5d75326067edd15a5945cb532c988d8218cd500a56a190b9bae",
+  "originalRuntime": "v24.21.0",
+  "originalArtifacts": [
+    {
+      "path": "dist/relations.js",
+      "digest": "sha256:07161aa9c42c09871e63fe6a9e53e329c2b4ecae353c6a3efec236bc117189ef"
+    },
+    {
+      "path": "dist/relation-pack.js",
+      "digest": "sha256:8460a18d2b0d3685342eac03c68cc0cbc2c397419299bb674b28a8c6ac35b75e"
+    },
+    {
+      "path": "dist/stable.js",
+      "digest": "sha256:d0557e48e5549d572802bb4500a74fe7736b7e9d63c94540c93304eaa8a73fca"
+    }
+  ],
+  "scope": "Frozen original outcomes for finite portable-data registration, queries, identity, mutations and executable law decisions; arbitrary JS objects and complete public contracts remain unresolved.",
+  "cases": [
+    {
+      "name": "empty queries",
+      "expected": {
+        "status": "observed",
+        "value": [
+          [],
+          [],
+          [],
+          "undefined",
+          "undefined",
+          "undefined",
+          false
+        ]
+      }
+    },
+    {
+      "name": "default original core identity",
+      "expected": {
+        "status": "observed",
+        "value": [
+          true,
+          true,
+          1,
+          0
+        ]
+      }
+    },
+    {
+      "name": "ordered packs and definitions",
+      "expected": {
+        "status": "observed",
+        "value": [
+          [
+            "urn:pack:b",
+            "urn:pack:a"
+          ],
+          [
+            "test:b",
+            "test:a"
+          ],
+          true,
+          true
+        ]
+      }
+    },
+    {
+      "name": "query arrays are fresh",
+      "expected": {
+        "status": "observed",
+        "value": [
+          1,
+          1,
+          true,
+          true,
+          true
+        ]
+      }
+    },
+    {
+      "name": "same object registration idempotent",
+      "expected": {
+        "status": "observed",
+        "value": [
+          1,
+          1,
+          true
+        ]
+      }
+    },
+    {
+      "name": "equal clone preserves first identity",
+      "expected": {
+        "status": "observed",
+        "value": [
+          true,
+          true
+        ]
+      }
+    },
+    {
+      "name": "member order conflict",
+      "expected": {
+        "status": "observed",
+        "value": {
+          "name": "Error",
+          "message": "Relation pack urn:pack:p@1 conflicts with its registered definition"
+        }
+      }
+    },
+    {
+      "name": "version conflict before relation conflict",
+      "expected": {
+        "status": "observed",
+        "value": {
+          "name": "Error",
+          "message": "Relation pack urn:pack:p is already registered at version 1"
+        }
+      }
+    },
+    {
+      "name": "legacy shape is unchecked",
+      "expected": {
+        "status": "observed",
+        "value": [
+          true,
+          true,
+          false
+        ]
+      }
+    },
+    {
+      "name": "duplicate incoming relation atomic",
+      "expected": {
+        "status": "observed",
+        "value": [
+          {
+            "name": "Error",
+            "message": "Relation test:r is already registered"
+          },
+          [],
+          [],
+          true
+        ]
+      }
+    },
+    {
+      "name": "existing relation conflict atomic",
+      "expected": {
+        "status": "observed",
+        "value": [
+          {
+            "name": "Error",
+            "message": "Relation test:r is already registered"
+          },
+          true,
+          [
+            "urn:pack:p"
+          ]
+        ]
+      }
+    },
+    {
+      "name": "pack ID mutation preserves registration key",
+      "expected": {
+        "status": "observed",
+        "value": [
+          true,
+          true,
+          true,
+          false
+        ]
+      }
+    },
+    {
+      "name": "version queries read live object",
+      "expected": {
+        "status": "observed",
+        "value": [
+          true,
+          false,
+          true,
+          true,
+          false
+        ]
+      }
+    },
+    {
+      "name": "relation ID mutation preserves registration key",
+      "expected": {
+        "status": "observed",
+        "value": [
+          true,
+          true,
+          [
+            "test:changed"
+          ]
+        ]
+      }
+    },
+    {
+      "name": "replacing relation array retains original objects",
+      "expected": {
+        "status": "observed",
+        "value": [
+          true,
+          true,
+          true
+        ]
+      }
+    },
+    {
+      "name": "mutated schema tag changes executable filter",
+      "expected": {
+        "status": "observed",
+        "value": [
+          true,
+          true
+        ]
+      }
+    },
+    {
+      "name": "executable copied and recursively frozen",
+      "expected": {
+        "status": "observed",
+        "value": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          false,
+          true
+        ]
+      }
+    },
+    {
+      "name": "law wrapper fresh with stable pack and law",
+      "expected": {
+        "status": "observed",
+        "value": [
+          true,
+          true,
+          true,
+          true,
+          true
+        ]
+      }
+    },
+    {
+      "name": "caller executable edits do not change registry",
+      "expected": {
+        "status": "observed",
+        "value": [
+          "urn:law:r",
+          true,
+          "test:r"
+        ]
+      }
+    },
+    {
+      "name": "executable duplicate law atomic",
+      "expected": {
+        "status": "observed",
+        "value": [
+          {
+            "name": "Error",
+            "message": "Duplicate law urn:law:r"
+          },
+          [],
+          [],
+          true
+        ]
+      }
+    },
+    {
+      "name": "cross pack duplicate law",
+      "expected": {
+        "status": "observed",
+        "value": {
+          "name": "Error",
+          "message": "Duplicate law urn:law:r"
+        }
+      }
+    },
+    {
+      "name": "legacy description drift invalidates law",
+      "expected": {
+        "status": "observed",
+        "value": {
+          "name": "Error",
+          "message": "Missing exact imported pack urn:pack:p@1"
+        }
+      }
+    },
+    {
+      "name": "legacy new relation visible to exact imports",
+      "expected": {
+        "status": "observed",
+        "value": [
+          true,
+          [
+            "test:new"
+          ]
+        ]
+      }
+    },
+    {
+      "name": "empty imported kind restriction",
+      "expected": {
+        "status": "observed",
+        "value": {
+          "name": "Error",
+          "message": "Law urn:law:r has incompatible reverse endpoint kinds"
+        }
+      }
+    },
+    {
+      "name": "reverse inverse contradiction",
+      "expected": {
+        "status": "observed",
+        "value": {
+          "name": "Error",
+          "message": "Law urn:law:r contradicts inverse test:q"
+        }
+      }
+    },
+    {
+      "name": "reverse non symmetry contradiction",
+      "expected": {
+        "status": "observed",
+        "value": {
+          "name": "Error",
+          "message": "Law urn:law:r contradicts declared non-symmetry"
+        }
+      }
+    },
+    {
+      "name": "unconditional reverse satisfies symmetric flag",
+      "expected": {
+        "status": "observed",
+        "value": {}
+      }
+    },
+    {
+      "name": "conditional reverse cannot satisfy symmetric flag",
+      "expected": {
+        "status": "observed",
+        "value": {
+          "name": "Error",
+          "message": "Symmetric relation test:r needs an executable reverse law"
+        }
+      }
+    },
+    {
+      "name": "missing composition law",
+      "expected": {
+        "status": "observed",
+        "value": {
+          "name": "Error",
+          "message": "Relation test:r needs an executable chain with test:q"
+        }
+      }
+    },
+    {
+      "name": "missing disjoint relation",
+      "expected": {
+        "status": "observed",
+        "value": {
+          "name": "Error",
+          "message": "Invalid disjoint relation test:missing for test:r"
+        }
+      }
+    },
+    {
+      "name": "self disjoint relation",
+      "expected": {
+        "status": "observed",
+        "value": {
+          "name": "Error",
+          "message": "Invalid disjoint relation test:r for test:r"
+        }
+      }
+    },
+    {
+      "name": "law outside pack before symmetric flag",
+      "expected": {
+        "status": "observed",
+        "value": {
+          "name": "Error",
+          "message": "Law urn:law:r references a relation outside its pack or exact imports"
+        }
+      }
+    },
+    {
+      "name": "legacy private use identifiers and values",
+      "expected": {
+        "status": "observed",
+        "value": [
+          true,
+          true,
+          "urn:pack:"
+        ]
+      }
+    },
+    {
+      "name": "legacy UTF16 description retains identity",
+      "expected": {
+        "status": "observed",
+        "value": [
+          true,
+          "\ud800"
+        ]
+      }
+    },
+    {
+      "name": "unchecked executable digest before registration",
+      "expected": {
+        "status": "observed",
+        "value": [
+          "sha256:b6173a6f8965decdc73d4e99fe1d273df46bb2962069055ee7fb8bd45a372271",
+          {
+            "name": "Error",
+            "message": "Relation pack does not match the portable schema: $ must NOT have additional properties"
+          }
+        ]
+      }
+    }
+  ]
+}

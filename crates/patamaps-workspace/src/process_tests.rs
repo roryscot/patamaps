@@ -23,7 +23,7 @@ impl Temp {
 }
 impl Drop for Temp {
     fn drop(&mut self) {
-        let _ = fs::remove_dir_all(&self.0);
+        eprintln!("Retained process-test fixture: {}", self.0.display());
     }
 }
 fn setup() -> (Temp, AdapterRequest, AdapterResponse, Invocation) {
@@ -145,11 +145,11 @@ fn exit_timeout_pipe_overflow_and_inherited_pipe_holders_are_bounded() {
     assert!(start.elapsed() < Duration::from_secs(2));
     invocation.arguments.clear();
     invocation.bounds.maximum_stdout_bytes = SafeInteger::new(32).unwrap();
+    let overflow =
+        process::invoke(&invocation, Path::new("/usr/bin/yes"), &root.0, &request).unwrap_err();
     assert!(
-        process::invoke(&invocation, Path::new("/usr/bin/yes"), &root.0, &request)
-            .unwrap_err()
-            .to_string()
-            .contains("ADAPTER_OUTPUT_LIMIT")
+        overflow.to_string().contains("ADAPTER_OUTPUT_LIMIT"),
+        "{overflow:?}"
     );
     invocation.arguments = vec!["-c".into(), "/bin/sleep 10 & exit 0".into()];
     let start = Instant::now();

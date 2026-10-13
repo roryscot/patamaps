@@ -1,0 +1,42 @@
+[
+  {
+    "name": "build",
+    "command": [
+      "/Users/admin/.cargo/bin/cargo",
+      "build",
+      "--locked",
+      "-p",
+      "patamaps-cli"
+    ],
+    "exitCode": 0,
+    "stdout": "docs/acceptance/parity/diagnostic-rebuild-2026-10-12T12-44-04.448185Z/build.stdout.log",
+    "stderr": "docs/acceptance/parity/diagnostic-rebuild-2026-10-12T12-44-04.448185Z/build.stderr.log"
+  },
+  {
+    "name": "clippy",
+    "command": [
+      "/Users/admin/.cargo/bin/cargo",
+      "clippy",
+      "--workspace",
+      "--all-targets",
+      "--locked",
+      "--",
+      "-D",
+      "warnings"
+    ],
+    "exitCode": 0,
+    "stdout": "docs/acceptance/parity/diagnostic-rebuild-2026-10-12T12-44-04.448185Z/clippy.stdout.log",
+    "stderr": "docs/acceptance/parity/diagnostic-rebuild-2026-10-12T12-44-04.448185Z/clippy.stderr.log"
+  },
+  {
+    "name": "native",
+    "command": [
+      "/opt/homebrew/opt/python@3.14/bin/python3.14",
+      "-B",
+      "scripts/parity/native.py"
+    ],
+    "exitCode": 101,
+    "stdout": "docs/acceptance/parity/diagnostic-rebuild-2026-10-12T12-44-04.448185Z/native.stdout.log",
+    "stderr": "docs/acceptance/parity/diagnostic-rebuild-2026-10-12T12-44-04.448185Z/native.stderr.log"
+  }
+]

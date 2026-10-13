@@ -13,6 +13,61 @@ fn options() -> ImportOptions {
         provenance: None,
     }
 }
+
+#[test]
+fn compatibility_source_model_import_and_export_accept_more_than_sixteen_mib() {
+    let text = std::str::from_utf8(FIXTURE).unwrap();
+    let mut metadata = parse_tsv(FIXTURE, None)
+        .unwrap()
+        .document()
+        .metadata
+        .clone();
+    metadata.insert(
+        "mapping_set_description".into(),
+        serde_json::Value::String("x".repeat(17 * 1024 * 1024)),
+    );
+    let body = text
+        .lines()
+        .skip_while(|line| line.starts_with('#'))
+        .collect::<Vec<_>>()
+        .join("\n");
+    let larger = format!(
+        "#{}\n{body}\n",
+        String::from_utf8(canonical_bytes(&metadata).unwrap()).unwrap()
+    );
+    assert!(larger.len() > patamaps_contracts::MAX_INPUT_BYTES);
+    assert_eq!(
+        parse_tsv(larger.as_bytes(), None).unwrap_err().code,
+        "SSSOM_SIZE_LIMIT"
+    );
+    let source = parse_tsv_compatible(larger.as_bytes(), None).unwrap();
+    assert_eq!(
+        source.document().metadata["mapping_set_description"]
+            .as_str()
+            .unwrap()
+            .len(),
+        17 * 1024 * 1024
+    );
+    let graph = import_graph(&source, &options()).unwrap();
+    assert_eq!(graph.mappings.len(), 7);
+    assert_eq!(
+        graph.metadata.as_ref().unwrap()["sssom"]["rawDocument"],
+        serde_json::to_value(source.document()).unwrap()
+    );
+    let exported = export_tsv(&source, false).unwrap();
+    assert!(exported.text.len() > patamaps_contracts::MAX_INPUT_BYTES);
+    let parsed = parse_tsv_compatible(exported.text.as_bytes(), None).unwrap();
+    assert_eq!(
+        canonical_bytes(parsed.document()).unwrap(),
+        canonical_bytes(source.document()).unwrap()
+    );
+    assert_eq!(
+        parse_tsv_compatible(&vec![b' '; SSSOM_MAX_BYTES + 1], None)
+            .unwrap_err()
+            .code,
+        "SSSOM_SIZE_LIMIT"
+    );
+}
 fn error(bytes: &[u8], expected: &str) {
     assert_eq!(parse_tsv(bytes, None).unwrap_err().code, expected);
 }

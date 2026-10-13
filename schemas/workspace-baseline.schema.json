@@ -99,7 +99,14 @@
     "captures": {
       "type": "array",
       "items": {
-        "$ref": "urn:patamaps:draft:1:schema:capture"
+        "oneOf": [
+          {
+            "$ref": "urn:patamaps:draft:1:schema:capture"
+          },
+          {
+            "$ref": "urn:patamaps:draft:2:schema:capture-collection"
+          }
+        ]
       },
       "maxItems": 16,
       "minItems": 1

@@ -1,0 +1,19 @@
+{
+  "schemaVersion": "1.0.0",
+  "status": "passed",
+  "command": [
+    "/opt/homebrew/bin/python3",
+    "-B",
+    "scripts/parity/verify.py",
+    "--record",
+    "/Users/admin/dev/patamaps/patamaps/docs/acceptance/parity/original-config-2026-10-12T22-51-04.476Z/receipt.json"
+  ],
+  "exitCode": 0,
+  "component": {
+    "path": "docs/acceptance/parity/original-config-2026-10-12T22-51-04.476Z/receipt.json",
+    "digest": "sha256:0a60e29caf58f95a04c0dc37963b68ae9fa90edff3ecbd45dea73c30e40a7f11"
+  },
+  "failedVerifierDigest": "sha256:634dfff584d3502cae85b6589acc91d8af966723ca1e6effa5fd61070a27e927",
+  "repairedVerifierDigest": "sha256:80fde996f5f402add48ea70cadb8c5dfe02410e1191a1726a201daf80e72aab0",
+  "reason": "Correct observation cardinality: each of the three unchanged config callbacks invokes the parser twice. The new verifier accidentally asserted one after correcting nonzero refusal exit codes from 2 to 1. Original tests, inputs, expectations and implementation are unchanged."
+}

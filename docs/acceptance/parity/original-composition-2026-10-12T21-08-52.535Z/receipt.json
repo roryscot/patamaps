@@ -1,0 +1,192 @@
+{
+  "schemaVersion": "1.0.0",
+  "driver": "composition",
+  "driverDigest": "sha256:dae451d5bb780f745d7bc6baa8d3f9ce27c83690609eda6cf333dfa86b9a1db2",
+  "supervision": {
+    "mode": "inherited-live-supervisor",
+    "project": "/Users/admin/dev/patamaps/patamaps",
+    "configurationDigest": "sha256:77505e4ca3960c2df14617ffa5951838a6b84e51d6f8ed715ec60faa3c9e8187",
+    "policy": {
+      "version": 1,
+      "minimumFreeBytes": 0,
+      "reserveFreeBytes": 10000000000,
+      "maximumRunGrowthBytes": 8000000000,
+      "maximumRetainedBytes": 50000000000,
+      "monitorIntervalMs": 2000,
+      "terminationGraceMs": 15000
+    },
+    "availableBytesAtEntry": 14545555456
+  },
+  "selection": {
+    "path": "fixtures/parity/composition-selected-cases.json",
+    "digest": "sha256:a045d338d0286882890fb98fb96c762d6738b0c6bb4e8920a3abc4aebd48686a",
+    "schemaVersion": "1.0.0",
+    "suite": "src/__tests__/composer.test.ts",
+    "testNamePattern": "^metamap composition ",
+    "selectedCaseIds": [
+      "parity:6e78e6e687b660604fb4",
+      "parity:ba1e701d1781375a850a"
+    ],
+    "excludedCaseIds": [],
+    "scope": "Both unchanged original composition callbacks and fixtures run native shard composition and native graph query/validation. Only composer and graph imports map to native SDK facades. These original cases do not close complete public accepted-domain or package contracts."
+  },
+  "timestamp": "2026-10-12T21-08-52.535Z",
+  "status": "passed",
+  "command": [
+    "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+    "/Users/admin/dev/patamaps/patamaps/.tools/parity/oracles/399747a4ad05-p8pkt3pr/reference/node_modules/vitest/vitest.mjs",
+    "run",
+    "--config",
+    "/Users/admin/dev/patamaps/patamaps/.tools/parity/runs/original-composition-0xkTHJ/vitest.config.mjs",
+    "--reporter=default",
+    "--reporter=json",
+    "--outputFile",
+    "/Users/admin/dev/patamaps/patamaps/.tools/parity/runs/original-composition-0xkTHJ/vitest.json",
+    "--testNamePattern",
+    "^metamap composition "
+  ],
+  "exitCode": 0,
+  "signal": null,
+  "error": null,
+  "manifestDigest": "sha256:963a0bdb0514342053144b369b900342d78c55d79ddc3a07c032dd859c8cd8ed",
+  "comparisonRulesDigest": "sha256:ab76e60deb27bf8b425063f3d432b88720c1f0d6e2cd67b43b9846cb9fb5ae91",
+  "reference": {
+    "engine": "399747a4ad05a37cd8db1cedd53048fad2175be4",
+    "caseOrigin": "Unchanged pinned original source/assertions",
+    "operationsRerun": false,
+    "testsRerun": false,
+    "referenceObservation": "docs/acceptance/full-reference/reference-vitest.json"
+  },
+  "candidate": {
+    "binary": "target/debug/patamaps",
+    "binaryDigest": "sha256:ebdbf9777d719e5c16c5be5dd5999e1a56ffb132cfb43a85a5620f269f785b6e",
+    "engine": {
+      "compiler": "sha256:69cb1de5d02b99eff8ed93c5ed2d1cf55495ec37b9c2f95d5faa0277293e000a",
+      "documentType": "executor-description",
+      "governance": "sha256:35e63929d85844561e6e00a85cbe7123649d169b61ef1141b537f5a133b6a19e",
+      "schemaVersion": "0.1.0",
+      "scientific": "sha256:7e1aba39acf5373b9f478e48e7694cdcd15dc2accdaf5f365c27d0dbb38f3a79",
+      "workspace": "sha256:ea65a85d4f7fe5ff44fb8a200aa055b1ebfa3be1f1540144214cae6205b211cf"
+    },
+    "sdkSourceInventory": [
+      {
+        "path": "sdk/typescript/canonical.mjs",
+        "digest": "sha256:830acf94b6a334a5659856b1c6ba342e8c02d9df49752c9163be7fa3461a3954"
+      },
+      {
+        "path": "sdk/typescript/canonical.d.ts",
+        "digest": "sha256:88ae79727dbad3b0872a9c3539a95fe6c444b810ff416423f06a2cf39274ecb4"
+      },
+      {
+        "path": "sdk/typescript/canonical.d.ts",
+        "digest": "sha256:88ae79727dbad3b0872a9c3539a95fe6c444b810ff416423f06a2cf39274ecb4"
+      },
+      {
+        "path": "sdk/typescript/canonical.mjs",
+        "digest": "sha256:830acf94b6a334a5659856b1c6ba342e8c02d9df49752c9163be7fa3461a3954"
+      },
+      {
+        "path": "sdk/typescript/index.d.ts",
+        "digest": "sha256:aa76e1583c3a1b872ec1fa9fbbaddd8c1211a118c9f670c0d9ec1b0ba3a4bbae"
+      },
+      {
+        "path": "sdk/typescript/index.mjs",
+        "digest": "sha256:f5f5abcf9d4b199a4674795bd5e96252f65c1449d679a73dd069c17c89db6015"
+      },
+      {
+        "path": "sdk/typescript/legacy-composition.d.ts",
+        "digest": "sha256:5d776057c00df9548b9b09590bedc48b1f0e1a6a2991d4f6ab55fdacbf6e5677"
+      },
+      {
+        "path": "sdk/typescript/legacy-composition.mjs",
+        "digest": "sha256:7c176a5062c72562d05df937977d9906587ba4e8d914551db3458d7543d461f6"
+      },
+      {
+        "path": "sdk/typescript/legacy-graph.d.ts",
+        "digest": "sha256:3e6b7faaf0bb6838613b74194915422d1093565a275f936b5411023b3a361c6e"
+      },
+      {
+        "path": "sdk/typescript/legacy-graph.mjs",
+        "digest": "sha256:55b9b20e95e6b488d505c4bb531637f17fe0f90b2c0e4855f1674435c4769510"
+      },
+      {
+        "path": "sdk/typescript/legacy-registry.mjs",
+        "digest": "sha256:690e6837fbf74b48e71e88628504c1bc787c2f5672dae215c8ef2defb820e401"
+      },
+      {
+        "path": "sdk/typescript/legacy-validation.d.ts",
+        "digest": "sha256:05328e05239d5f5c127b9097505d11137928a6b9af86a30ac938ad15ef9393dc"
+      },
+      {
+        "path": "sdk/typescript/legacy-validation.mjs",
+        "digest": "sha256:31f54d60a37fefeea69986eac6cb37edede35b631a4a7779fd99746a71bfc85c"
+      },
+      {
+        "path": "sdk/typescript/package.json",
+        "digest": "sha256:45da1eca3cce8ca85e1108209aa4e4a02cb6921e52aa1d334f9fb3cf07d0f258"
+      },
+      {
+        "path": "sdk/typescript/sssom-profile.mjs",
+        "digest": "sha256:a37260f42d6b02c5900dbefa9477386667f5286079a7a1abd12495e3dc78e533"
+      },
+      {
+        "path": "sdk/typescript/sssom.d.ts",
+        "digest": "sha256:7f58f17edc48bcb8340b73004273fa4c23a9f4b3671ca1276225f16de8254457"
+      },
+      {
+        "path": "sdk/typescript/sssom.mjs",
+        "digest": "sha256:ccc44eac40a38b892d42c33537a9f15915e1aa65c774e6dc78d129284a6bfb74"
+      }
+    ],
+    "facadeDigest": "sha256:830acf94b6a334a5659856b1c6ba342e8c02d9df49752c9163be7fa3461a3954",
+    "facadeDeclarationDigest": "sha256:88ae79727dbad3b0872a9c3539a95fe6c444b810ff416423f06a2cf39274ecb4"
+  },
+  "host": {
+    "platform": "darwin",
+    "architecture": "arm64",
+    "node": "v22.16.0",
+    "locale": "en-US"
+  },
+  "counts": {
+    "originalCases": 2,
+    "passed": 2,
+    "failed": 0,
+    "skipped": 0,
+    "explicitlyUnselected": 0,
+    "nativeExecutions": 6
+  },
+  "assertions": "Both unchanged original composition callbacks and fixtures run native shard composition and native graph query/validation. Only composer and graph imports map to native SDK facades. These original cases do not close complete public accepted-domain or package contracts.",
+  "obligations": [
+    {
+      "id": "parity:6e78e6e687b660604fb4",
+      "scope": "complete-original-case",
+      "status": "verified-equivalent",
+      "origin": {
+        "path": "src/__tests__/composer.test.ts",
+        "digest": "sha256:cdb2d592f75787e6ae2bbc17dc35bfc7bcc72122df49c69bdad8663e1dad6285",
+        "line": 20
+      },
+      "expectationDigest": "sha256:88ab16ce52322d94524665bb1777021fad5add1c7b2da725589b43e741744702",
+      "fullName": "metamap composition composes shards before resolving cross-shard references",
+      "occurrence": 0,
+      "candidateExecution": "Original shard composition assertions; native phase order, first-object merge handles, conflicts and cross-shard graph validation"
+    },
+    {
+      "id": "parity:ba1e701d1781375a850a",
+      "scope": "complete-original-case",
+      "status": "verified-equivalent",
+      "origin": {
+        "path": "src/__tests__/composer.test.ts",
+        "digest": "sha256:cdb2d592f75787e6ae2bbc17dc35bfc7bcc72122df49c69bdad8663e1dad6285",
+        "line": 49
+      },
+      "expectationDigest": "sha256:3805026a30df45663c76aaabc6a8882537c018c7da43c8972848cc711fbdebf1",
+      "fullName": "metamap composition rejects conflicting definitions for the same semantic identity",
+      "occurrence": 0,
+      "candidateExecution": "Original shard composition assertions; native phase order, first-object merge handles, conflicts and cross-shard graph validation"
+    }
+  ],
+  "originalTreeFilesVerified": 610,
+  "retainedRun": ".tools/parity/runs/original-composition-0xkTHJ",
+  "cleanup": "Any explicit Node cleanup within owned roots is retained by rename; deletion outside those roots is refused"
+}

@@ -1,0 +1,424 @@
+{
+  "schemaVersion": "1.0.0",
+  "referenceEngine": "399747a4ad05a37cd8db1cedd53048fad2175be4",
+  "scope": "Reviewed classification for the native registry and read-only validator public surface. Missing denotes the complete original contract; native analogues and scoped tests are retained as partial implementation facts. No owner deviation is accepted.",
+  "componentEvidence": [
+    {
+      "path": "docs/acceptance/parity/native-2026-10-12T19-57-38.062715Z/receipt.json",
+      "digest": "sha256:3a029c980398f18ae47799dca437d292ecdb8bc2d1220a04c1a46e869d80dfe1",
+      "reused": true
+    },
+    {
+      "path": "docs/acceptance/parity/graph-focused-2026-10-12T19-55-44.279878+00-00/receipt.json",
+      "digest": "sha256:ddd2b092026c4fcb85b48eb179d43203cba2e1cfa1f453d340632a8611b80dc2",
+      "reused": true
+    },
+    {
+      "path": "docs/acceptance/parity/graph-functional-refresh-2026-10-12T20-00-52.722099+00-00/factory-receipt.json",
+      "digest": "sha256:09a2db76ec7bdc177d93a041470d2267cbe6b3f1a3c84ec2fb3251d6eb222315"
+    },
+    {
+      "path": "docs/acceptance/parity/sdk-consumer-2026-10-12T20-01-52.188501Z/receipt.json",
+      "digest": "sha256:a31dbe8fddb386b4c57f8d23fac5486fde401a668e5a0a3ead4b2230ca48fcef"
+    },
+    {
+      "path": "docs/acceptance/parity/graph-controls-2026-10-12T20-01-55.544Z/receipt.json",
+      "digest": "sha256:754b80e9ebf3479e468a4c75bebf79eafc75de14964843a9e38d33986aafec86"
+    },
+    {
+      "path": "docs/acceptance/parity/registry-controls-2026-10-12T20-01-56.211Z/receipt.json",
+      "digest": "sha256:43e1c84714434d095b973c60829fb9fc8928666afd1bace96bbab51abd79695a"
+    },
+    {
+      "path": "docs/acceptance/parity/pack-file-controls-2026-10-12T20-01-56.993Z/receipt.json",
+      "digest": "sha256:bad47b42b078c4e54fcd8dd572bb9a22f073a902d4f534cb5a39960c04cf863b"
+    },
+    {
+      "path": "docs/acceptance/parity/pack-nested-controls-2026-10-12T20-01-57.262Z/receipt.json",
+      "digest": "sha256:d31a048cc7972ad14e9d19c96b7519673fc39810a258523f644220a1c3c98afa"
+    },
+    {
+      "path": "docs/acceptance/parity/pack-json-controls-2026-10-12T20-01-59.256Z/receipt.json",
+      "digest": "sha256:24c20256128ff398a338de79f7afd5e5836bc6a8d70fcadbe0743a9f0e9d34f9"
+    },
+    {
+      "path": "docs/acceptance/parity/legacy-validation-2026-10-12T20-02-01.014Z/receipt.json",
+      "digest": "sha256:2ba096e5ec4207e68a0ad07b63574c86c0016ec7caddec64bf8c2cd4124879ee"
+    },
+    {
+      "path": "docs/acceptance/parity/original-canonical-2026-10-12T20-02-08.048Z/receipt.json",
+      "digest": "sha256:cbfb4a16df931ae237e193905f1941d3efbb1c8e0bd3e8481e12f76501d28319"
+    },
+    {
+      "path": "docs/acceptance/parity/original-sssom-2026-10-12T20-02-09.274Z/receipt.json",
+      "digest": "sha256:fc215e4e847b985a5ac2dc2aaf6a37a0492735a38def59e0686e8af05e823127"
+    },
+    {
+      "path": "docs/acceptance/parity/original-discovery-2026-10-12T20-02-11.826Z/receipt.json",
+      "digest": "sha256:65b33ad6704919e5a87e39eaabe7a556e2a147c65c5efcd988928680ce1b759f"
+    },
+    {
+      "path": "docs/acceptance/parity/original-sssom-adapter-2026-10-12T20-02-13.700Z/receipt.json",
+      "digest": "sha256:31591092995da2b947b2516da55ad7fba44d7e6516a619e6aa0187c51a701018"
+    },
+    {
+      "path": "docs/acceptance/parity/original-validation-2026-10-12T20-02-17.107Z/receipt.json",
+      "digest": "sha256:b671280f93a3279aa215d43a2c539777c2a75979111723d4decac9d00934f0d0"
+    },
+    {
+      "path": "docs/acceptance/parity/original-registry-2026-10-12T20-02-18.507Z/receipt.json",
+      "digest": "sha256:5a6a83dcd2f3f3da3ed5b9ec39711206bc5637848964d87ddf7c6a7cacdf1648"
+    },
+    {
+      "path": "docs/acceptance/parity/original-graph-2026-10-12T20-02-20.362Z/receipt.json",
+      "digest": "sha256:6f9cf876c91bf79c4eb0fcbe91ef6319613a1acda43ddf0f5d4e80c72bb31931"
+    },
+    {
+      "path": "docs/acceptance/parity/discovery-api-2026-10-12T20-02-21.765735Z/receipt.json",
+      "digest": "sha256:8ad24e09a4dfb8bc549bd3b387348bc13aa44346fb7663b622309fc9d82a9753"
+    },
+    {
+      "path": "docs/acceptance/parity/scientific-bounds-2026-10-12T20-02-26.854166Z/receipt.json",
+      "digest": "sha256:461ca3a34cbccd0e45687d934483ee93ec7565dbaf89cdb5eaf2bfa80669b00d"
+    }
+  ],
+  "rows": [
+    {
+      "id": "parity:ef063ede925b3a9e43c4",
+      "name": "RelationRegistry.constructor",
+      "status": "missing",
+      "nativeAnalogue": {
+        "path": "crates/patamaps-core/src/registry.rs",
+        "symbol": "RelationRegistry::new"
+      },
+      "facts": [
+        "A modern typed Rust registry member exists. Registration validates proposed state before replacement.",
+        "The SDK now provides LegacyRelationRegistry with Rust-owned ordered registration, queries, first refusals and executable-law/import decisions. SDK handles retain live 1.0 objects and copied recursively frozen 2.0 objects. All 14 original executable-pack cases execute without changing assertions; 35 additional frozen controls cover all public query methods, order, identity, mutation, atomic failure and law behavior.",
+        "The current graph refresh passes 149 portable Rust tests, Clippy, 26 installed negative type controls, 11 pack/context and 18 graph declaration comparisons with explicit public registry substitution. All 342 pack/file, 35 registry, 45 graph-query and one inherited-factory controls, 472 validation controls and 99 unchanged original cases pass. Finite evidence leaves complete accepted-domain, package and platform parity unresolved."
+      ],
+      "unresolved": "Complete accepted-domain parity remains open: arbitrary JavaScript objects/prototypes/accessors, undefined and other non-JSON members, non-scalar registration/query keys, exact unchecked legacy digest ordering, unrelated mutable pack states, canonical registration error details, resource bounds and platform behavior. Finite portable-data controls do not establish the whole public contract.",
+      "acceptance": "Execute original registry/law/pack workflows through a documented native API plus an installed typed consumer, retaining all original pack fields, version/digest conventions and failures.",
+      "candidateEntryPoint": {
+        "path": "sdk/typescript/legacy-validation.mjs",
+        "symbol": "LegacyRelationRegistry",
+        "native": "crates/patamaps-core/src/legacy_registry.rs"
+      }
+    },
+    {
+      "id": "parity:7d9b0eb8fe6c7734524b",
+      "name": "RelationRegistry.registerPack",
+      "status": "missing",
+      "nativeAnalogue": {
+        "path": "crates/patamaps-core/src/registry.rs",
+        "symbol": "RelationRegistry::register_pack"
+      },
+      "facts": [
+        "A modern typed Rust registry member exists. Registration validates proposed state before replacement.",
+        "The SDK now provides LegacyRelationRegistry with Rust-owned ordered registration, queries, first refusals and executable-law/import decisions. SDK handles retain live 1.0 objects and copied recursively frozen 2.0 objects. All 14 original executable-pack cases execute without changing assertions; 35 additional frozen controls cover all public query methods, order, identity, mutation, atomic failure and law behavior.",
+        "The current graph refresh passes 149 portable Rust tests, Clippy, 26 installed negative type controls, 11 pack/context and 18 graph declaration comparisons with explicit public registry substitution. All 342 pack/file, 35 registry, 45 graph-query and one inherited-factory controls, 472 validation controls and 99 unchanged original cases pass. Finite evidence leaves complete accepted-domain, package and platform parity unresolved."
+      ],
+      "unresolved": "Complete accepted-domain parity remains open: arbitrary JavaScript objects/prototypes/accessors, undefined and other non-JSON members, non-scalar registration/query keys, exact unchecked legacy digest ordering, unrelated mutable pack states, canonical registration error details, resource bounds and platform behavior. Finite portable-data controls do not establish the whole public contract.",
+      "acceptance": "Execute original registry/law/pack workflows through a documented native API plus an installed typed consumer, retaining all original pack fields, version/digest conventions and failures.",
+      "candidateEntryPoint": {
+        "path": "sdk/typescript/legacy-validation.mjs",
+        "symbol": "LegacyRelationRegistry",
+        "native": "crates/patamaps-core/src/legacy_registry.rs"
+      }
+    },
+    {
+      "id": "parity:46431f9d59b9c1c491bf",
+      "name": "RelationRegistry.getPack",
+      "status": "missing",
+      "nativeAnalogue": {
+        "path": "crates/patamaps-core/src/registry.rs",
+        "symbol": "RelationRegistry::get_pack"
+      },
+      "facts": [
+        "A modern typed Rust registry member exists. Registration validates proposed state before replacement.",
+        "The SDK now provides LegacyRelationRegistry with Rust-owned ordered registration, queries, first refusals and executable-law/import decisions. SDK handles retain live 1.0 objects and copied recursively frozen 2.0 objects. All 14 original executable-pack cases execute without changing assertions; 35 additional frozen controls cover all public query methods, order, identity, mutation, atomic failure and law behavior.",
+        "The current graph refresh passes 149 portable Rust tests, Clippy, 26 installed negative type controls, 11 pack/context and 18 graph declaration comparisons with explicit public registry substitution. All 342 pack/file, 35 registry, 45 graph-query and one inherited-factory controls, 472 validation controls and 99 unchanged original cases pass. Finite evidence leaves complete accepted-domain, package and platform parity unresolved."
+      ],
+      "unresolved": "Complete accepted-domain parity remains open: arbitrary JavaScript objects/prototypes/accessors, undefined and other non-JSON members, non-scalar registration/query keys, exact unchecked legacy digest ordering, unrelated mutable pack states, canonical registration error details, resource bounds and platform behavior. Finite portable-data controls do not establish the whole public contract.",
+      "acceptance": "Execute original registry/law/pack workflows through a documented native API plus an installed typed consumer, retaining all original pack fields, version/digest conventions and failures.",
+      "candidateEntryPoint": {
+        "path": "sdk/typescript/legacy-validation.mjs",
+        "symbol": "LegacyRelationRegistry",
+        "native": "crates/patamaps-core/src/legacy_registry.rs"
+      }
+    },
+    {
+      "id": "parity:79efb34eadce5907f499",
+      "name": "RelationRegistry.getLaw",
+      "status": "missing",
+      "nativeAnalogue": {
+        "path": "crates/patamaps-core/src/registry.rs",
+        "symbol": "RelationRegistry::get_law"
+      },
+      "facts": [
+        "A modern typed Rust registry member exists. Registration validates proposed state before replacement.",
+        "The SDK now provides LegacyRelationRegistry with Rust-owned ordered registration, queries, first refusals and executable-law/import decisions. SDK handles retain live 1.0 objects and copied recursively frozen 2.0 objects. All 14 original executable-pack cases execute without changing assertions; 35 additional frozen controls cover all public query methods, order, identity, mutation, atomic failure and law behavior.",
+        "The current graph refresh passes 149 portable Rust tests, Clippy, 26 installed negative type controls, 11 pack/context and 18 graph declaration comparisons with explicit public registry substitution. All 342 pack/file, 35 registry, 45 graph-query and one inherited-factory controls, 472 validation controls and 99 unchanged original cases pass. Finite evidence leaves complete accepted-domain, package and platform parity unresolved."
+      ],
+      "unresolved": "Complete accepted-domain parity remains open: arbitrary JavaScript objects/prototypes/accessors, undefined and other non-JSON members, non-scalar registration/query keys, exact unchecked legacy digest ordering, unrelated mutable pack states, canonical registration error details, resource bounds and platform behavior. Finite portable-data controls do not establish the whole public contract.",
+      "acceptance": "Execute original registry/law/pack workflows through a documented native API plus an installed typed consumer, retaining all original pack fields, version/digest conventions and failures.",
+      "candidateEntryPoint": {
+        "path": "sdk/typescript/legacy-validation.mjs",
+        "symbol": "LegacyRelationRegistry",
+        "native": "crates/patamaps-core/src/legacy_registry.rs"
+      }
+    },
+    {
+      "id": "parity:cf5410114bf3847ba213",
+      "name": "RelationRegistry.executablePacks",
+      "status": "missing",
+      "nativeAnalogue": {
+        "path": "crates/patamaps-core/src/registry.rs",
+        "symbol": "RelationRegistry::executable_packs"
+      },
+      "facts": [
+        "A modern typed Rust registry member exists. Registration validates proposed state before replacement.",
+        "The SDK now provides LegacyRelationRegistry with Rust-owned ordered registration, queries, first refusals and executable-law/import decisions. SDK handles retain live 1.0 objects and copied recursively frozen 2.0 objects. All 14 original executable-pack cases execute without changing assertions; 35 additional frozen controls cover all public query methods, order, identity, mutation, atomic failure and law behavior.",
+        "The current graph refresh passes 149 portable Rust tests, Clippy, 26 installed negative type controls, 11 pack/context and 18 graph declaration comparisons with explicit public registry substitution. All 342 pack/file, 35 registry, 45 graph-query and one inherited-factory controls, 472 validation controls and 99 unchanged original cases pass. Finite evidence leaves complete accepted-domain, package and platform parity unresolved."
+      ],
+      "unresolved": "Complete accepted-domain parity remains open: arbitrary JavaScript objects/prototypes/accessors, undefined and other non-JSON members, non-scalar registration/query keys, exact unchecked legacy digest ordering, unrelated mutable pack states, canonical registration error details, resource bounds and platform behavior. Finite portable-data controls do not establish the whole public contract.",
+      "acceptance": "Execute original registry/law/pack workflows through a documented native API plus an installed typed consumer, retaining all original pack fields, version/digest conventions and failures.",
+      "candidateEntryPoint": {
+        "path": "sdk/typescript/legacy-validation.mjs",
+        "symbol": "LegacyRelationRegistry",
+        "native": "crates/patamaps-core/src/legacy_registry.rs"
+      }
+    },
+    {
+      "id": "parity:6a8f79980ef6fd9bc584",
+      "name": "RelationRegistry.get",
+      "status": "missing",
+      "nativeAnalogue": {
+        "path": "crates/patamaps-core/src/registry.rs",
+        "symbol": "RelationRegistry::get"
+      },
+      "facts": [
+        "A modern typed Rust registry member exists. Registration validates proposed state before replacement.",
+        "The SDK now provides LegacyRelationRegistry with Rust-owned ordered registration, queries, first refusals and executable-law/import decisions. SDK handles retain live 1.0 objects and copied recursively frozen 2.0 objects. All 14 original executable-pack cases execute without changing assertions; 35 additional frozen controls cover all public query methods, order, identity, mutation, atomic failure and law behavior.",
+        "The current graph refresh passes 149 portable Rust tests, Clippy, 26 installed negative type controls, 11 pack/context and 18 graph declaration comparisons with explicit public registry substitution. All 342 pack/file, 35 registry, 45 graph-query and one inherited-factory controls, 472 validation controls and 99 unchanged original cases pass. Finite evidence leaves complete accepted-domain, package and platform parity unresolved."
+      ],
+      "unresolved": "Complete accepted-domain parity remains open: arbitrary JavaScript objects/prototypes/accessors, undefined and other non-JSON members, non-scalar registration/query keys, exact unchecked legacy digest ordering, unrelated mutable pack states, canonical registration error details, resource bounds and platform behavior. Finite portable-data controls do not establish the whole public contract.",
+      "acceptance": "Execute original registry/law/pack workflows through a documented native API plus an installed typed consumer, retaining all original pack fields, version/digest conventions and failures.",
+      "candidateEntryPoint": {
+        "path": "sdk/typescript/legacy-validation.mjs",
+        "symbol": "LegacyRelationRegistry",
+        "native": "crates/patamaps-core/src/legacy_registry.rs"
+      }
+    },
+    {
+      "id": "parity:d1bda66a7a1625a09f79",
+      "name": "RelationRegistry.hasPack",
+      "status": "missing",
+      "nativeAnalogue": {
+        "path": "crates/patamaps-core/src/registry.rs",
+        "symbol": "RelationRegistry::has_pack"
+      },
+      "facts": [
+        "A modern typed Rust registry member exists. Registration validates proposed state before replacement.",
+        "The SDK now provides LegacyRelationRegistry with Rust-owned ordered registration, queries, first refusals and executable-law/import decisions. SDK handles retain live 1.0 objects and copied recursively frozen 2.0 objects. All 14 original executable-pack cases execute without changing assertions; 35 additional frozen controls cover all public query methods, order, identity, mutation, atomic failure and law behavior.",
+        "The current graph refresh passes 149 portable Rust tests, Clippy, 26 installed negative type controls, 11 pack/context and 18 graph declaration comparisons with explicit public registry substitution. All 342 pack/file, 35 registry, 45 graph-query and one inherited-factory controls, 472 validation controls and 99 unchanged original cases pass. Finite evidence leaves complete accepted-domain, package and platform parity unresolved."
+      ],
+      "unresolved": "Complete accepted-domain parity remains open: arbitrary JavaScript objects/prototypes/accessors, undefined and other non-JSON members, non-scalar registration/query keys, exact unchecked legacy digest ordering, unrelated mutable pack states, canonical registration error details, resource bounds and platform behavior. Finite portable-data controls do not establish the whole public contract.",
+      "acceptance": "Execute original registry/law/pack workflows through a documented native API plus an installed typed consumer, retaining all original pack fields, version/digest conventions and failures.",
+      "candidateEntryPoint": {
+        "path": "sdk/typescript/legacy-validation.mjs",
+        "symbol": "LegacyRelationRegistry",
+        "native": "crates/patamaps-core/src/legacy_registry.rs"
+      }
+    },
+    {
+      "id": "parity:ab710b73894423b170ec",
+      "name": "RelationRegistry.all",
+      "status": "missing",
+      "nativeAnalogue": {
+        "path": "crates/patamaps-core/src/registry.rs",
+        "symbol": "RelationRegistry::all"
+      },
+      "facts": [
+        "A modern typed Rust registry member exists. Registration validates proposed state before replacement.",
+        "The SDK now provides LegacyRelationRegistry with Rust-owned ordered registration, queries, first refusals and executable-law/import decisions. SDK handles retain live 1.0 objects and copied recursively frozen 2.0 objects. All 14 original executable-pack cases execute without changing assertions; 35 additional frozen controls cover all public query methods, order, identity, mutation, atomic failure and law behavior.",
+        "The current graph refresh passes 149 portable Rust tests, Clippy, 26 installed negative type controls, 11 pack/context and 18 graph declaration comparisons with explicit public registry substitution. All 342 pack/file, 35 registry, 45 graph-query and one inherited-factory controls, 472 validation controls and 99 unchanged original cases pass. Finite evidence leaves complete accepted-domain, package and platform parity unresolved."
+      ],
+      "unresolved": "Complete accepted-domain parity remains open: arbitrary JavaScript objects/prototypes/accessors, undefined and other non-JSON members, non-scalar registration/query keys, exact unchecked legacy digest ordering, unrelated mutable pack states, canonical registration error details, resource bounds and platform behavior. Finite portable-data controls do not establish the whole public contract.",
+      "acceptance": "Execute original registry/law/pack workflows through a documented native API plus an installed typed consumer, retaining all original pack fields, version/digest conventions and failures.",
+      "candidateEntryPoint": {
+        "path": "sdk/typescript/legacy-validation.mjs",
+        "symbol": "LegacyRelationRegistry",
+        "native": "crates/patamaps-core/src/legacy_registry.rs"
+      }
+    },
+    {
+      "id": "parity:700536c95d1a7aad52b0",
+      "name": "RelationRegistry.allPacks",
+      "status": "missing",
+      "nativeAnalogue": {
+        "path": "crates/patamaps-core/src/registry.rs",
+        "symbol": "RelationRegistry::all_packs"
+      },
+      "facts": [
+        "A modern typed Rust registry member exists. Registration validates proposed state before replacement.",
+        "The SDK now provides LegacyRelationRegistry with Rust-owned ordered registration, queries, first refusals and executable-law/import decisions. SDK handles retain live 1.0 objects and copied recursively frozen 2.0 objects. All 14 original executable-pack cases execute without changing assertions; 35 additional frozen controls cover all public query methods, order, identity, mutation, atomic failure and law behavior.",
+        "The current graph refresh passes 149 portable Rust tests, Clippy, 26 installed negative type controls, 11 pack/context and 18 graph declaration comparisons with explicit public registry substitution. All 342 pack/file, 35 registry, 45 graph-query and one inherited-factory controls, 472 validation controls and 99 unchanged original cases pass. Finite evidence leaves complete accepted-domain, package and platform parity unresolved."
+      ],
+      "unresolved": "Complete accepted-domain parity remains open: arbitrary JavaScript objects/prototypes/accessors, undefined and other non-JSON members, non-scalar registration/query keys, exact unchecked legacy digest ordering, unrelated mutable pack states, canonical registration error details, resource bounds and platform behavior. Finite portable-data controls do not establish the whole public contract.",
+      "acceptance": "Execute original registry/law/pack workflows through a documented native API plus an installed typed consumer, retaining all original pack fields, version/digest conventions and failures.",
+      "candidateEntryPoint": {
+        "path": "sdk/typescript/legacy-validation.mjs",
+        "symbol": "LegacyRelationRegistry",
+        "native": "crates/patamaps-core/src/legacy_registry.rs"
+      }
+    },
+    {
+      "id": "parity:4c08de6c674bb889f574",
+      "name": "RelationRegistry",
+      "status": "missing",
+      "nativeAnalogue": {
+        "path": "crates/patamaps-core/src/registry.rs"
+      },
+      "facts": [
+        "A complete mapped legacy class and its required schema/version semantics are absent from the installed language SDK.",
+        "The SDK now provides LegacyRelationRegistry with Rust-owned ordered registration, queries, first refusals and executable-law/import decisions. SDK handles retain live 1.0 objects and copied recursively frozen 2.0 objects. All 14 original executable-pack cases execute without changing assertions; 35 additional frozen controls cover all public query methods, order, identity, mutation, atomic failure and law behavior.",
+        "The current graph refresh passes 149 portable Rust tests, Clippy, 26 installed negative type controls, 11 pack/context and 18 graph declaration comparisons with explicit public registry substitution. All 342 pack/file, 35 registry, 45 graph-query and one inherited-factory controls, 472 validation controls and 99 unchanged original cases pass. Finite evidence leaves complete accepted-domain, package and platform parity unresolved."
+      ],
+      "unresolved": "Complete accepted-domain parity remains open: arbitrary JavaScript objects/prototypes/accessors, undefined and other non-JSON members, non-scalar registration/query keys, exact unchecked legacy digest ordering, unrelated mutable pack states, canonical registration error details, resource bounds and platform behavior. Finite portable-data controls do not establish the whole public contract.",
+      "acceptance": "Verify the complete original export contract and installed typed/runtime use. Passing selected original callbacks or JSON controls alone cannot close this row.",
+      "candidateEntryPoint": {
+        "path": "sdk/typescript/legacy-validation.mjs",
+        "symbol": "LegacyRelationRegistry",
+        "native": "crates/patamaps-core/src/legacy_registry.rs"
+      }
+    },
+    {
+      "id": "parity:8a81037c6f613f2975ab",
+      "name": "coreRelationPack",
+      "status": "missing",
+      "nativeAnalogue": {
+        "path": "crates/patamaps-core/src/legacy_core.json"
+      },
+      "facts": [
+        "The exact original default data is preserved internally and used for validation, but the original public constant/type interface is not exported.",
+        "The original core JSON data is available through the native-backed legacyCoreRelationPack SDK accessor and is reused by default legacy registry construction; original core identity/definition and installed consumer controls pass.",
+        "The current graph refresh passes 149 portable Rust tests, Clippy, 26 installed negative type controls, 11 pack/context and 18 graph declaration comparisons with explicit public registry substitution. All 342 pack/file, 35 registry, 45 graph-query and one inherited-factory controls, 472 validation controls and 99 unchanged original cases pass. Finite evidence leaves complete accepted-domain, package and platform parity unresolved."
+      ],
+      "unresolved": "The exact original default data is preserved internally and used for validation, but the original public constant/type interface is not exported.",
+      "acceptance": "Verify the complete original export contract and installed typed/runtime use. Passing selected original callbacks or JSON controls alone cannot close this row."
+    },
+    {
+      "id": "parity:3e3762f53c61117e86ba",
+      "name": "validateDocumentSemantics",
+      "status": "missing",
+      "nativeAnalogue": {
+        "path": "crates/patamaps-core/src/legacy_validation.rs"
+      },
+      "facts": [
+        "Semantic findings run within full validation, but the original standalone post-shape semantic API and accepted registry argument are not exposed.",
+        "The current graph refresh passes 149 portable Rust tests, Clippy, 26 installed negative type controls, 11 pack/context and 18 graph declaration comparisons with explicit public registry substitution. All 342 pack/file, 35 registry, 45 graph-query and one inherited-factory controls, 472 validation controls and 99 unchanged original cases pass. Finite evidence leaves complete accepted-domain, package and platform parity unresolved."
+      ],
+      "unresolved": "Semantic findings run within full validation, but the original standalone post-shape semantic API and accepted registry argument are not exposed.",
+      "acceptance": "Verify the complete original export contract and installed typed/runtime use. Passing selected original callbacks or JSON controls alone cannot close this row."
+    },
+    {
+      "id": "parity:001ac4cb773b89e6b847",
+      "name": "validateDocumentShape",
+      "status": "implemented-unverified",
+      "nativeAnalogue": {
+        "path": "sdk/typescript/legacy-validation.mjs"
+      },
+      "facts": [
+        "The current supervised candidate agrees on all 472 frozen JSON shape controls. Non-JSON JavaScript properties/getters/prototypes and transport resource boundaries still need complete-contract verification.",
+        "The current graph refresh passes 149 portable Rust tests, Clippy, 26 installed negative type controls, 11 pack/context and 18 graph declaration comparisons with explicit public registry substitution. All 342 pack/file, 35 registry, 45 graph-query and one inherited-factory controls, 472 validation controls and 99 unchanged original cases pass. Finite evidence leaves complete accepted-domain, package and platform parity unresolved."
+      ],
+      "unresolved": "Refresh supervised original/frozen-output checks against the rebuilt candidate; test the complete accepted JS-value domain and resource/transport limits. The prior 472 controls cover JSON only.",
+      "acceptance": "Verify the complete original export contract and installed typed/runtime use. Passing selected original callbacks or JSON controls alone cannot close this row."
+    },
+    {
+      "id": "parity:3ef73300ddaa34bbab41",
+      "name": "validateMetamapDocument",
+      "status": "missing",
+      "nativeAnalogue": {
+        "path": "sdk/typescript/legacy-validation.mjs"
+      },
+      "facts": [
+        "Current supervised default-core JSON validation passes all seven unchanged original cases and 472 full-output controls. The original caller-supplied mutable JavaScript registry argument and complete accepted-value domain remain missing.",
+        "The current graph refresh passes 149 portable Rust tests, Clippy, 26 installed negative type controls, 11 pack/context and 18 graph declaration comparisons with explicit public registry substitution. All 342 pack/file, 35 registry, 45 graph-query and one inherited-factory controls, 472 validation controls and 99 unchanged original cases pass. Finite evidence leaves complete accepted-domain, package and platform parity unresolved."
+      ],
+      "unresolved": "Verify the newly written portable pack snapshot path, then restore the original registry argument and full mutable JS registry behavior. The accepted JS-value domain and exact portable pack diagnostics remain unverified.",
+      "acceptance": "Verify the complete original export contract and installed typed/runtime use. Passing selected original callbacks or JSON controls alone cannot close this row."
+    },
+    {
+      "id": "parity:2127e22a66de92cabad3",
+      "name": "parseRelationPack",
+      "status": "missing",
+      "nativeAnalogue": {
+        "path": "crates/patamaps-core/src/legacy_pack.rs",
+        "symbol": "ParsedLegacyRelationPack::parse"
+      },
+      "facts": [
+        "Current Rust-backed parsing preserves caller object identity and matches all 159 independently frozen plain JSON pack acceptance, digest and exact thrown name/message controls. Four unchanged original negative-law shape assertions also pass. Nested conditional/context schema diagnostics and non-JSON JavaScript value behavior remain outside that finite control set.",
+        "Portable 1.0 source strings retain their original UTF-16 units through a reversible schema projection; ordinary scalar JSON parsing remains strict. Typed native import explicitly refuses unpaired fields without replacing original data.",
+        "The original parser uses AJV diagnostic ordering/messages and has JavaScript accepted-value behavior beyond the current JSON transport. Those complete contracts remain unverified.",
+        "The current graph refresh passes 149 portable Rust tests, Clippy, 26 installed negative type controls, 11 pack/context and 18 graph declaration comparisons with explicit public registry substitution. All 342 pack/file, 35 registry, 45 graph-query and one inherited-factory controls, 472 validation controls and 99 unchanged original cases pass. Finite evidence leaves complete accepted-domain, package and platform parity unresolved."
+      ],
+      "unresolved": "Extend independently frozen controls to complete nested law/context schema diagnostics and the original JavaScript accepted-value domain. Resolve transport bounds explicitly; finite JSON matches alone do not establish the complete parser export.",
+      "acceptance": "Execute unchanged original pack parsing assertions plus independently frozen shape/message controls, original URI format/digest edge cases, and installed positive/negative typed consumers."
+    },
+    {
+      "id": "parity:5b4cdea124524fe75705",
+      "name": "relationPackDigest",
+      "status": "missing",
+      "nativeAnalogue": {
+        "path": "crates/patamaps-core/src/legacy_pack.rs",
+        "symbol": "ParsedLegacyRelationPack::original_digest"
+      },
+      "facts": [
+        "Current compiled parsing calculates version-specific original addresses for shape-validated packs, including legacy UTF-16 escapes. All valid rows in the 159-case original JSON corpus, an unchanged legacy address assertion and installed consumers agree. Original source byte, original document and migrated native addresses remain separate.",
+        "The original digest export hashes its supplied pack without invoking portable shape validation; its legacy stable/locale/JSON-value conventions must be audited independently.",
+        "Native JSON digest dispatch now precedes shape validation, matching the original executable digest behavior exercised by invalid executable data. Full arbitrary-JavaScript serialization and locale-sensitive legacy key ordering remain unresolved.",
+        "The current graph refresh passes 149 portable Rust tests, Clippy, 26 installed negative type controls, 11 pack/context and 18 graph declaration comparisons with explicit public registry substitution. All 342 pack/file, 35 registry, 45 graph-query and one inherited-factory controls, 472 validation controls and 99 unchanged original cases pass. Finite evidence leaves complete accepted-domain, package and platform parity unresolved."
+      ],
+      "unresolved": "Restore the complete original digest export contract without silently substituting strict shape validation or native addresses; independently verify both original conventions and accepted value/type behavior.",
+      "acceptance": "Compare original digest outputs and refusals for both schema versions, supplied-property orders, optional values, strings and original dependency mutation/binding cases through an installed typed/native consumer."
+    },
+    {
+      "id": "parity:231c4138886d8aa148e1",
+      "name": "loadRelationPack",
+      "status": "missing",
+      "nativeAnalogue": {
+        "path": "crates/patamaps-cli/src/main.rs",
+        "symbol": "LegacyCommand::PackFile / LegacyValidationApi.loadLegacyRelationPack"
+      },
+      "facts": [
+        "The current asynchronous SDK file path passes installed runtime/type controls and the unchanged original escaped-duplicate assertion. It resolves the caller path and delegates reading/version dispatch to Rust.",
+        "Current controls verify portable 1.0 duplicate/UTF-16 preservation, executable 2.0 duplicate/scalar-Unicode refusals, UTF-8 replacement, source binding and missing-file code/path. Complete Node file/JSON syntax diagnostics remain unresolved.",
+        "Full exact file/JSON/AJV error behavior, the accepted JavaScript value domain and bounded-source differences remain unresolved. A written file transport alone does not establish complete original loader parity.",
+        "The current graph refresh passes 149 portable Rust tests, Clippy, 26 installed negative type controls, 11 pack/context and 18 graph declaration comparisons with explicit public registry substitution. All 342 pack/file, 35 registry, 45 graph-query and one inherited-factory controls, 472 validation controls and 99 unchanged original cases pass. Finite evidence leaves complete accepted-domain, package and platform parity unresolved."
+      ],
+      "unresolved": "Verify the written asynchronous file-loader workflow against unchanged original assertions and installed consumers; preserve exact observable errors, path behavior and source data. Resolve byte/depth/value/time bounds explicitly rather than silently treating them as accepted original-contract differences.",
+      "acceptance": "Execute unchanged original executable-pack file tests plus positive/negative installed loader controls, legacy duplicate keys, executable escaped duplicate keys, invalid encoding/JSON, relative paths and missing files, retaining fixtures under the deletion rule."
+    }
+  ],
+  "implementationCheckpoint": "docs/acceptance/parity/loader-functional-refresh-2026-10-12T18-30-03.512691+00-00/receipt.json",
+  "componentEvidenceScope": "Current rebuilt candidate observations with exact binary/source hashes in each receipt. Complete public contracts are not inferred from finite controls, type aliases or original-case subsets.",
+  "historicalComponentEvidence": [
+    "docs/acceptance/parity/original-validation-2026-10-12T04-50-35.031Z/receipt.json",
+    "docs/acceptance/parity/legacy-validation-2026-10-12T04-52-02.346Z/receipt.json",
+    "docs/acceptance/parity/native-2026-10-12T11-54-51.463278Z/receipt.json",
+    "docs/acceptance/parity/sdk-consumer-2026-10-12T11-39-44.737161Z/receipt.json",
+    "docs/acceptance/parity/legacy-validation-2026-10-12T11-40-08.548Z/receipt.json",
+    "docs/acceptance/parity/original-packs-2026-10-12T11-49-49.834Z/receipt.json",
+    {
+      "checkpoint": "before-current-loader-refresh",
+      "evidence": [
+        "docs/acceptance/parity/native-2026-10-12T13-38-09.642843Z/receipt.json",
+        "docs/acceptance/parity/sdk-consumer-2026-10-12T13-38-55.060511Z/receipt.json",
+        "docs/acceptance/parity/pack-json-controls-2026-10-12T13-38-58.764Z/receipt.json",
+        "docs/acceptance/parity/legacy-validation-2026-10-12T13-42-24.507Z/receipt.json",
+        "docs/acceptance/parity/original-packs-2026-10-12T13-42-46.287Z/receipt.json"
+      ]
+    }
+  ]
+}

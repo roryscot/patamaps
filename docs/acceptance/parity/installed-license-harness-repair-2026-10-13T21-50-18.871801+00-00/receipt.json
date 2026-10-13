@@ -1,0 +1,20 @@
+{
+  "schemaVersion": "1.0.0",
+  "status": "implemented-runtime-verification-pending",
+  "scope": "The frozen validation installer copied the SDK tree, then tried to copy already-present LICENSE/NOTICE with no-overwrite safeguards. Check exact installed/root notice bytes instead of duplicating those copy operations. No original behavioral assertion, expectation, SDK/Rust implementation or file is removed.",
+  "affectedCheck": "frozen-validation",
+  "path": "scripts/parity/legacy_validation.mjs",
+  "beforeDigest": "sha256:9d8cdf67455f0efcbae6cc0212736ecb84543c0c9e70ff3a0f35ef09ba46bf6f",
+  "failedRun": "docs/acceptance/parity/viability-mixed-runtime-functional-refresh-2026-10-13T21-47-50.693700+00-00/receipt.json",
+  "afterDigest": "sha256:4130416b34a5b00ff0ac84bd536eb135b03d0215b0b6332fd09c6dc9ceb85a69",
+  "checks": [
+    {
+      "command": "Node --check scripts/parity/legacy_validation.mjs",
+      "exitCode": 0
+    },
+    {
+      "command": "Pinned Prettier --check scripts/parity/legacy_validation.mjs",
+      "exitCode": 0
+    }
+  ]
+}

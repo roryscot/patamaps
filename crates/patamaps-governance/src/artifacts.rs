@@ -23,7 +23,7 @@ pub(crate) fn candidate_bounds(candidate: &GovernedCandidate) -> Result<()> {
             &c.inputs.policy,
             &c.inputs.context,
         )?;
-        if let Some(spec) = &c.inputs.projection_spec {
+        for spec in c.inputs.specs() {
             patamaps_core::check_metadata_bounds(
                 spec.metadata.iter().map(|m| (m, 4)),
                 &spec.id,
@@ -65,11 +65,26 @@ pub(crate) fn normalized_candidate(
     candidate: &GovernedCandidate,
     consumer: &str,
 ) -> Result<GovernedCandidate> {
+    normalize(candidate, consumer, true)
+}
+
+pub(crate) fn normalized_reference_candidate(
+    candidate: &GovernedCandidate,
+    consumer: &str,
+) -> Result<GovernedCandidate> {
+    normalize(candidate, consumer, false)
+}
+
+fn normalize(
+    candidate: &GovernedCandidate,
+    consumer: &str,
+    require_source_bytes: bool,
+) -> Result<GovernedCandidate> {
     candidate_bounds(candidate)?;
     let mut ids = BTreeSet::new();
     for c in &candidate.captures {
         let checked = replay(c)?;
-        if !checked.missing_sources().is_empty() {
+        if require_source_bytes && !checked.missing_sources().is_empty() {
             return fail(
                 "GOVERNANCE_MISSING_SOURCE_BYTES",
                 "Governed candidates require bytes for every declared source receipt",
@@ -81,21 +96,23 @@ pub(crate) fn normalized_candidate(
                 "Every selected capture must be freshly viable",
             );
         }
-        let Some(spec) = &c.inputs.projection_spec else {
+        if c.inputs.specs().next().is_none() {
             return fail(
                 "GOVERNANCE_WRONG_CONSUMER",
                 "Every capture needs an explicit consumer projection",
             );
-        };
-        let declared = spec
-            .consumer
-            .as_deref()
-            .or(spec.semantics.as_ref().map(|s| s.consumer.as_str()));
-        if declared != Some(consumer) || !ids.insert(&spec.id) {
-            return fail(
-                "GOVERNANCE_WRONG_CONSUMER",
-                "Projection consumers must match and specification identities must be unique",
-            );
+        }
+        for spec in c.inputs.specs() {
+            let declared = spec
+                .consumer
+                .as_deref()
+                .or(spec.semantics.as_ref().map(|s| s.consumer.as_str()));
+            if declared != Some(consumer) || !ids.insert(&spec.id) {
+                return fail(
+                    "GOVERNANCE_WRONG_CONSUMER",
+                    "Projection consumers must match and specification identities must be unique",
+                );
+            }
         }
     }
     let candidate: GovernedCandidate = normalized(candidate)?;
@@ -180,6 +197,23 @@ pub(crate) fn prepare_artifacts(
     let mut projections = BTreeMap::new();
     for (i, c) in candidate.captures.iter().enumerate() {
         writer.json(&format!("capture-{i}.json"), c)?;
+        if !c.inputs.projection_specs.is_empty() {
+            let outcomes = c.result["projections"]
+                .as_array()
+                .expect("fresh collection result");
+            for (j, spec) in c.inputs.projection_specs.iter().enumerate() {
+                let outcome = outcomes
+                    .iter()
+                    .find(|outcome| outcome["specId"] == spec.id)
+                    .expect("fresh outcome for every specification");
+                writer.json(&format!("projection-{i}-{j}.json"), &outcome["projection"])?;
+                if !outcome["pathTree"].is_null() {
+                    writer.json(&format!("path-tree-{i}-{j}.json"), &outcome["pathTree"])?;
+                }
+                projections.insert(&spec.id, project(&generation, spec)?);
+            }
+            continue;
+        }
         writer.json(&format!("projection-{i}.json"), &c.result["projection"])?;
         if !c.result["pathTree"].is_null() {
             writer.json(&format!("path-tree-{i}.json"), &c.result["pathTree"])?;

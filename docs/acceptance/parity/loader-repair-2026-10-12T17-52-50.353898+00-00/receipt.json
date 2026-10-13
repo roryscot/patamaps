@@ -1,0 +1,27 @@
+{
+  "schemaVersion": "1.0.0",
+  "status": "verification-failed",
+  "commands": [
+    {
+      "name": "build",
+      "command": [
+        "/Users/admin/.cargo/bin/cargo",
+        "build",
+        "--locked",
+        "-p",
+        "patamaps-cli"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "file-controls",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "scripts/parity/pack_contracts.mjs",
+        "--files"
+      ],
+      "exitCode": 1
+    }
+  ],
+  "fullParityAcceptance": false
+}

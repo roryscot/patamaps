@@ -22,7 +22,7 @@ impl Temp {
 }
 impl Drop for Temp {
     fn drop(&mut self) {
-        let _ = fs::remove_dir_all(&self.0);
+        eprintln!("Retained workspace-test fixture: {}", self.0.display());
     }
 }
 fn fixture(root: &Temp) -> WorkspaceConfig {
@@ -193,4 +193,93 @@ fn source_symlink_escape_and_absolute_locator_paths_refuse() {
     for path in ["../outside.json", "/outside.json", "a//b", "a\\b", "a/./b"] {
         assert!(!relative_path(path));
     }
+}
+
+#[cfg(unix)]
+#[test]
+fn large_provider_code_inventory_is_captured_and_bounded() {
+    use patamaps_contracts::{MAX_INPUT_BYTES, SafeInteger, canonical_digest};
+
+    let root = Temp::new();
+    let mut config = fixture(&root);
+    let raw = fs::read(root.0.join("graph.json")).unwrap();
+    let response = AdapterResponse {
+        schema_version: ProtocolVersion::Draft1,
+        document_type: ResponseType::Record,
+        profile: PROFILE.into(),
+        source_id: config.sources[0].id().into(),
+        adapter_version: "inventory-fixture-1".into(),
+        request_digest: "sha256:REPLACE_REQUEST".into(),
+        inputs: vec![InputReceipt {
+            path: "graph.json".into(),
+            digest: patamaps_contracts::byte_digest(&raw),
+            byte_length: SafeInteger::new(raw.len() as u64).unwrap(),
+        }],
+        shard: parse(&raw).unwrap(),
+        diagnostics: Vec::new(),
+    };
+    fs::write(
+        root.0.join("response.json"),
+        canonical_bytes(&response).unwrap(),
+    )
+    .unwrap();
+    let mut code_inputs = vec!["response.json".into()];
+    for index in 0..511 {
+        let name = format!("dependency-{index}.txt");
+        fs::write(root.0.join(&name), format!("dependency {index}\n")).unwrap();
+        code_inputs.push(name);
+    }
+    config.sources = vec![Source::Process {
+        id: response.source_id,
+        invocation: Invocation {
+            executable: "/bin/sh".into(),
+            arguments: vec![
+                "-c".into(),
+                "request=$(/bin/cat); digest=$(printf '%s' \"$request\" | /usr/bin/sed -n 's/.*\"requestDigest\":\"\\([^\"]*\\)\".*/\\1/p'); /usr/bin/sed \"s/sha256:REPLACE_REQUEST/$digest/\" response.json".into(),
+            ],
+            code_inputs,
+            bounds: ProcessBounds {
+                maximum_elapsed_ms: SafeInteger::new(1000).unwrap(),
+                maximum_stdout_bytes: SafeInteger::new(65536).unwrap(),
+                maximum_stderr_bytes: SafeInteger::new(4096).unwrap(),
+            },
+        },
+        inputs: vec!["graph.json".into()],
+        config: Default::default(),
+    }];
+    let first = generate(&root.0, &config, None).unwrap();
+    assert_eq!(first.baseline.captures[0].result["status"], "viable");
+    assert_eq!(first.baseline.captures[0].sources.len(), 516);
+    let first_digest = canonical_digest(&first.baseline).unwrap();
+    fs::write(root.0.join("dependency-510.txt"), b"changed dependency\n").unwrap();
+    let changed = generate(&root.0, &config, None).unwrap();
+    assert_ne!(first_digest, canonical_digest(&changed.baseline).unwrap());
+    assert!(
+        check(&root.0, &config, &first.baseline, None)
+            .unwrap()
+            .changes
+            .contains(&"discovery")
+    );
+
+    let Source::Process { invocation, .. } = &mut config.sources[0] else {
+        unreachable!()
+    };
+    invocation.code_inputs.push("over-limit.txt".into());
+    assert!(
+        generate(&root.0, &config, None)
+            .unwrap_err()
+            .to_string()
+            .contains("ADAPTER_INPUT_LIMIT")
+    );
+    let Source::Process { invocation, .. } = &mut config.sources[0] else {
+        unreachable!()
+    };
+    invocation.code_inputs.pop();
+    fs::write(root.0.join("dependency-0.txt"), vec![b'x'; MAX_INPUT_BYTES]).unwrap();
+    assert!(
+        generate(&root.0, &config, None)
+            .unwrap_err()
+            .to_string()
+            .contains("WORKSPACE_SOURCE_LIMIT")
+    );
 }

@@ -55,6 +55,7 @@ fn fixture() -> (CaptureRecord, CrateOptions) {
     );
     let c = capture(
         CaptureInputs {
+            projection_specs: vec![],
             graph,
             packs: vec![scientific_pack()],
             policy,
@@ -157,4 +158,110 @@ fn newly_replayed_source_substitution_and_missing_payloads_refuse() {
         create_crate(&missing, &o).unwrap_err().code,
         "SCIENTIFIC_CRATE_REPLAY"
     );
+}
+
+#[test]
+fn partial_sources_remain_digest_references_and_cannot_enter_closed_governance() {
+    let (c, mut o) = fixture();
+    let mut receipts = c.sources.clone();
+    receipts[0].content = None;
+    let partial = capture(c.inputs.clone(), receipts).unwrap();
+    o.raw_inputs = Some(Default::default());
+    let package = create_crate(&partial, &o).unwrap();
+    assert_eq!(package.external_raw_inputs(), 1);
+    assert!(
+        !package
+            .record()
+            .files
+            .keys()
+            .any(|p| p.starts_with("source/"))
+    );
+    let round: ScientificCrate = parse(&canonical_bytes(&package).unwrap()).unwrap();
+    assert_eq!(verify_crate(&round).unwrap().external_raw_inputs(), 1);
+    let id = format!("urn:patamaps:raw-input:{}", &partial.sources[0].digest[7..]);
+    let entities = round.metadata["@graph"].as_array().unwrap();
+    let reference = entities.iter().find(|entity| entity["@id"] == id).unwrap();
+    assert_eq!(reference["sha256"], &partial.sources[0].digest[7..]);
+    assert!(
+        reference["description"]
+            .as_str()
+            .unwrap()
+            .contains("reference only")
+    );
+    assert!(
+        entities[1]["hasPart"]
+            .as_array()
+            .unwrap()
+            .iter()
+            .any(|p| p["@id"] == id)
+    );
+    let governed = patamaps_governance::GovernedCandidate {
+        captures: vec![partial],
+        emissions: vec![],
+    };
+    assert!(
+        patamaps_governance::prepare_candidate_artifacts(&governed, &o.consumer, &o.environment)
+            .is_err()
+    );
+    assert!(
+        create_crate(&c, &o).is_err(),
+        "Excluded bytes must not survive inside the exported capture"
+    );
+    let mut forged = round.clone();
+    forged.metadata["@graph"]
+        .as_array_mut()
+        .unwrap()
+        .iter_mut()
+        .find(|entity| entity["@id"] == id)
+        .unwrap()["sha256"] = json!("0".repeat(64));
+    assert!(verify_crate(&forged).is_err());
+    let mut extra = o;
+    extra
+        .raw_inputs
+        .as_mut()
+        .unwrap()
+        .insert("urn:unknown:receipt".into(), "forged".into());
+    assert!(create_crate(&governed.captures[0], &extra).is_err());
+}
+
+#[test]
+fn included_inventory_is_exact_and_collection_crates_emit_all_native_bindings() {
+    let (c, mut o) = fixture();
+    o.raw_inputs = Some(std::collections::BTreeMap::from([(
+        c.sources[0].id.clone(),
+        c.sources[0].content.clone().unwrap(),
+    )]));
+    assert_eq!(
+        verify_crate(create_crate(&c, &o).unwrap().record())
+            .unwrap()
+            .external_raw_inputs(),
+        0
+    );
+    o.raw_inputs
+        .as_mut()
+        .unwrap()
+        .values_mut()
+        .next()
+        .unwrap()
+        .push(' ');
+    assert!(create_crate(&c, &o).is_err());
+    o.raw_inputs = None;
+    let mut inputs = c.inputs;
+    let spec = inputs.projection_spec.take().unwrap();
+    let mut second = spec.clone();
+    second.id = "urn:projection:scientific:second".into();
+    inputs.projection_specs = vec![spec, second];
+    let collection = capture(inputs, c.sources).unwrap();
+    let package = create_crate(&collection, &o).unwrap();
+    for file in [
+        "bindings-0.ts",
+        "bindings-1.rs",
+        "bindings-2.ts",
+        "bindings-3.rs",
+        "projection-0-0.json",
+        "projection-0-1.json",
+    ] {
+        assert!(package.record().files.contains_key(file), "{file}");
+    }
+    verify_crate(package.record()).unwrap();
 }

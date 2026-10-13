@@ -1,0 +1,411 @@
+{
+  "schemaVersion": "1.0.0",
+  "status": "passed",
+  "rulesDigest": "sha256:9ce1931663a312cecfde298e6a1a6d583520c6ddd1eb87386a3ca55796521045",
+  "referenceEngine": "399747a4ad05a37cd8db1cedd53048fad2175be4",
+  "candidate": {
+    "binaryDigest": "sha256:477ee9e19ee8e6ae3c0b0b161f1bec86de829f2667a178810d3c57622a1f3a6e",
+    "engine": {
+      "compiler": "sha256:a064d0322fbbd2984578f8a9a23e8dc607bb4f0769f3b263da4f6a7573987663",
+      "documentType": "executor-description",
+      "governance": "sha256:a772c03317c3e71f81998a514f1a500518ea8f2d5a1b0e4e54fe814d9f7279e6",
+      "schemaVersion": "0.1.0",
+      "scientific": "sha256:5ee01e8c0a6371ffe2d561024c4c1c75b7ce17a7f95e00dcc375482fd77de480",
+      "workspace": "sha256:d6ef71e710cdd6602b91bec07d9a033d4a00424ef6aebcf2eedc1ce8b0ed2a2e"
+    },
+    "facadeDigest": "sha256:71649f48111e4cb450f8505a118fa0df0d872f2777d6b45a5c06b27719be3524"
+  },
+  "records": [
+    {
+      "name": "property-order",
+      "inputDigest": "sha256:225c85204728e9d60cbb895693ee1d82dded8329d3e8a1b6d895badf08c8d6f0",
+      "referenceCommand": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "/Users/admin/dev/patamaps/patamaps/scripts/parity/reference_json.mjs",
+        "/Users/admin/dev/patamaps/patamaps/.tools/parity/oracles/399747a4ad05-p8pkt3pr/reference",
+        "/Users/admin/dev/patamaps/patamaps/.tools/parity/runs/json-observables-C7ZPVk/property-order.json"
+      ],
+      "referenceExitCode": 0,
+      "reference": {
+        "status": "accepted",
+        "canonical": "{\"a\":2,\"z\":1}",
+        "ownKeys": [
+          "z",
+          "a"
+        ]
+      },
+      "candidate": {
+        "status": "accepted",
+        "canonical": "{\"a\":2,\"z\":1}",
+        "ownKeys": [
+          "z",
+          "a"
+        ]
+      },
+      "equal": true
+    },
+    {
+      "name": "prototype-property",
+      "inputDigest": "sha256:ab53ba039005840bec9134bacaa2bcea534780ddf84b73c8b2638197b3f8ea7f",
+      "referenceCommand": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "/Users/admin/dev/patamaps/patamaps/scripts/parity/reference_json.mjs",
+        "/Users/admin/dev/patamaps/patamaps/.tools/parity/oracles/399747a4ad05-p8pkt3pr/reference",
+        "/Users/admin/dev/patamaps/patamaps/.tools/parity/runs/json-observables-C7ZPVk/prototype-property.json"
+      ],
+      "referenceExitCode": 0,
+      "reference": {
+        "status": "accepted",
+        "canonical": "{\"__proto__\":{\"admin\":true},\"a\":0}",
+        "ownKeys": [
+          "__proto__",
+          "a"
+        ]
+      },
+      "candidate": {
+        "status": "accepted",
+        "canonical": "{\"__proto__\":{\"admin\":true},\"a\":0}",
+        "ownKeys": [
+          "__proto__",
+          "a"
+        ]
+      },
+      "equal": true
+    },
+    {
+      "name": "decoded-duplicate",
+      "inputDigest": "sha256:5dc60ca7e7cb5a45bccaaad4530c73fe33e21501fb96ddaf341a29c419b2ebb7",
+      "referenceCommand": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "/Users/admin/dev/patamaps/patamaps/scripts/parity/reference_json.mjs",
+        "/Users/admin/dev/patamaps/patamaps/.tools/parity/oracles/399747a4ad05-p8pkt3pr/reference",
+        "/Users/admin/dev/patamaps/patamaps/.tools/parity/runs/json-observables-C7ZPVk/decoded-duplicate.json"
+      ],
+      "referenceExitCode": 0,
+      "reference": {
+        "status": "refused",
+        "error": {
+          "name": "CanonicalJsonError",
+          "code": "DUPLICATE_JSON_KEY",
+          "message": "Duplicate JSON property \"a\""
+        }
+      },
+      "candidate": {
+        "status": "refused",
+        "error": {
+          "name": "CanonicalJsonError",
+          "code": "DUPLICATE_JSON_KEY",
+          "message": "Duplicate JSON property \"a\""
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "syntax-before-duplicate",
+      "inputDigest": "sha256:c2f158030bbdc95f7971677b06daa083404e7360af549d695721c052e1a082e2",
+      "referenceCommand": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "/Users/admin/dev/patamaps/patamaps/scripts/parity/reference_json.mjs",
+        "/Users/admin/dev/patamaps/patamaps/.tools/parity/oracles/399747a4ad05-p8pkt3pr/reference",
+        "/Users/admin/dev/patamaps/patamaps/.tools/parity/runs/json-observables-C7ZPVk/syntax-before-duplicate.json"
+      ],
+      "referenceExitCode": 0,
+      "reference": {
+        "status": "refused",
+        "error": {
+          "name": "CanonicalJsonError",
+          "code": "INVALID_JSON_SYNTAX",
+          "message": "Invalid JSON syntax"
+        }
+      },
+      "candidate": {
+        "status": "refused",
+        "error": {
+          "name": "CanonicalJsonError",
+          "code": "INVALID_JSON_SYNTAX",
+          "message": "Invalid JSON syntax"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "duplicate-before-nonfinite",
+      "inputDigest": "sha256:b5f5012cb2f16562a93d5779513a02e47740086e5800007404896d8d215484d3",
+      "referenceCommand": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "/Users/admin/dev/patamaps/patamaps/scripts/parity/reference_json.mjs",
+        "/Users/admin/dev/patamaps/patamaps/.tools/parity/oracles/399747a4ad05-p8pkt3pr/reference",
+        "/Users/admin/dev/patamaps/patamaps/.tools/parity/runs/json-observables-C7ZPVk/duplicate-before-nonfinite.json"
+      ],
+      "referenceExitCode": 0,
+      "reference": {
+        "status": "refused",
+        "error": {
+          "name": "CanonicalJsonError",
+          "code": "DUPLICATE_JSON_KEY",
+          "message": "Duplicate JSON property \"a\""
+        }
+      },
+      "candidate": {
+        "status": "refused",
+        "error": {
+          "name": "CanonicalJsonError",
+          "code": "DUPLICATE_JSON_KEY",
+          "message": "Duplicate JSON property \"a\""
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "duplicate-before-unicode",
+      "inputDigest": "sha256:ab4bfc2cfa50c5b9534e78f97aa22c1ee88a4b7f3c6149974993c636adbec93f",
+      "referenceCommand": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "/Users/admin/dev/patamaps/patamaps/scripts/parity/reference_json.mjs",
+        "/Users/admin/dev/patamaps/patamaps/.tools/parity/oracles/399747a4ad05-p8pkt3pr/reference",
+        "/Users/admin/dev/patamaps/patamaps/.tools/parity/runs/json-observables-C7ZPVk/duplicate-before-unicode.json"
+      ],
+      "referenceExitCode": 0,
+      "reference": {
+        "status": "refused",
+        "error": {
+          "name": "CanonicalJsonError",
+          "code": "DUPLICATE_JSON_KEY",
+          "message": "Duplicate JSON property \"a\""
+        }
+      },
+      "candidate": {
+        "status": "refused",
+        "error": {
+          "name": "CanonicalJsonError",
+          "code": "DUPLICATE_JSON_KEY",
+          "message": "Duplicate JSON property \"a\""
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "surrogate-key-duplicate",
+      "inputDigest": "sha256:6b31a41ca92a66b419af2ae3b515ab283427ec8ad8ea23dba235c515b02fedd5",
+      "referenceCommand": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "/Users/admin/dev/patamaps/patamaps/scripts/parity/reference_json.mjs",
+        "/Users/admin/dev/patamaps/patamaps/.tools/parity/oracles/399747a4ad05-p8pkt3pr/reference",
+        "/Users/admin/dev/patamaps/patamaps/.tools/parity/runs/json-observables-C7ZPVk/surrogate-key-duplicate.json"
+      ],
+      "referenceExitCode": 0,
+      "reference": {
+        "status": "refused",
+        "error": {
+          "name": "CanonicalJsonError",
+          "code": "DUPLICATE_JSON_KEY",
+          "message": "Duplicate JSON property \"\\ud800\""
+        }
+      },
+      "candidate": {
+        "status": "refused",
+        "error": {
+          "name": "CanonicalJsonError",
+          "code": "DUPLICATE_JSON_KEY",
+          "message": "Duplicate JSON property \"\\ud800\""
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "escaped-nonbmp-duplicate",
+      "inputDigest": "sha256:17fdd9611bde74a5a26053628b4567438e32c7346ab0a4a5b5cebcca6326e43e",
+      "referenceCommand": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "/Users/admin/dev/patamaps/patamaps/scripts/parity/reference_json.mjs",
+        "/Users/admin/dev/patamaps/patamaps/.tools/parity/oracles/399747a4ad05-p8pkt3pr/reference",
+        "/Users/admin/dev/patamaps/patamaps/.tools/parity/runs/json-observables-C7ZPVk/escaped-nonbmp-duplicate.json"
+      ],
+      "referenceExitCode": 0,
+      "reference": {
+        "status": "refused",
+        "error": {
+          "name": "CanonicalJsonError",
+          "code": "DUPLICATE_JSON_KEY",
+          "message": "Duplicate JSON property \"😀\""
+        }
+      },
+      "candidate": {
+        "status": "refused",
+        "error": {
+          "name": "CanonicalJsonError",
+          "code": "DUPLICATE_JSON_KEY",
+          "message": "Duplicate JSON property \"😀\""
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "literal-unpaired-surrogate",
+      "inputDigest": "sha256:2bff2f70f312e4a83ec2f29b99cf5ae581cfcd78438134b11150926e5523c5c9",
+      "referenceCommand": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "/Users/admin/dev/patamaps/patamaps/scripts/parity/reference_json.mjs",
+        "/Users/admin/dev/patamaps/patamaps/.tools/parity/oracles/399747a4ad05-p8pkt3pr/reference",
+        "/Users/admin/dev/patamaps/patamaps/.tools/parity/runs/json-observables-C7ZPVk/literal-unpaired-surrogate.json"
+      ],
+      "referenceExitCode": 0,
+      "reference": {
+        "status": "refused",
+        "error": {
+          "name": "CanonicalJsonError",
+          "code": "INVALID_JSON_UNICODE",
+          "message": "Unpaired high surrogate"
+        }
+      },
+      "candidate": {
+        "status": "refused",
+        "error": {
+          "name": "CanonicalJsonError",
+          "code": "INVALID_JSON_UNICODE",
+          "message": "Unpaired high surrogate"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "syntax-before-literal-unicode",
+      "inputDigest": "sha256:dd7507e5ee51b21bb16bf75dcc1faf1a1817e8bf4b9798c5cbf9d17d42e36a30",
+      "referenceCommand": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "/Users/admin/dev/patamaps/patamaps/scripts/parity/reference_json.mjs",
+        "/Users/admin/dev/patamaps/patamaps/.tools/parity/oracles/399747a4ad05-p8pkt3pr/reference",
+        "/Users/admin/dev/patamaps/patamaps/.tools/parity/runs/json-observables-C7ZPVk/syntax-before-literal-unicode.json"
+      ],
+      "referenceExitCode": 0,
+      "reference": {
+        "status": "refused",
+        "error": {
+          "name": "CanonicalJsonError",
+          "code": "INVALID_JSON_SYNTAX",
+          "message": "Invalid JSON syntax"
+        }
+      },
+      "candidate": {
+        "status": "refused",
+        "error": {
+          "name": "CanonicalJsonError",
+          "code": "INVALID_JSON_SYNTAX",
+          "message": "Invalid JSON syntax"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "nonfinite-number",
+      "inputDigest": "sha256:40d0b71913085bf77c7c6e3ee1d8e7731bede3d6af369bfa3fd95ef75fa1a747",
+      "referenceCommand": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "/Users/admin/dev/patamaps/patamaps/scripts/parity/reference_json.mjs",
+        "/Users/admin/dev/patamaps/patamaps/.tools/parity/oracles/399747a4ad05-p8pkt3pr/reference",
+        "/Users/admin/dev/patamaps/patamaps/.tools/parity/runs/json-observables-C7ZPVk/nonfinite-number.json"
+      ],
+      "referenceExitCode": 0,
+      "reference": {
+        "status": "refused",
+        "error": {
+          "name": "CanonicalJsonError",
+          "code": "INVALID_JSON_VALUE",
+          "message": "JSON numbers must be finite IEEE-754 values"
+        }
+      },
+      "candidate": {
+        "status": "refused",
+        "error": {
+          "name": "CanonicalJsonError",
+          "code": "INVALID_JSON_VALUE",
+          "message": "JSON numbers must be finite IEEE-754 values"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "depth-65",
+      "inputDigest": "sha256:b370b3089fd7a85d5de86ab4ab31cef50677518c4da4643ae5f42391db05be50",
+      "referenceCommand": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "/Users/admin/dev/patamaps/patamaps/scripts/parity/reference_json.mjs",
+        "/Users/admin/dev/patamaps/patamaps/.tools/parity/oracles/399747a4ad05-p8pkt3pr/reference",
+        "/Users/admin/dev/patamaps/patamaps/.tools/parity/runs/json-observables-C7ZPVk/depth-65.json"
+      ],
+      "referenceExitCode": 0,
+      "reference": {
+        "status": "accepted",
+        "canonical": "[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[0]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]",
+        "ownKeys": [
+          "0"
+        ]
+      },
+      "candidate": {
+        "status": "accepted",
+        "canonical": "[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[0]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]",
+        "ownKeys": [
+          "0"
+        ]
+      },
+      "equal": true
+    },
+    {
+      "name": "depth-512",
+      "inputDigest": "sha256:abd9f20c8c5ace7b94f11dfa450da5845b298a9f604084f8c7842c49669b71ba",
+      "referenceCommand": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "/Users/admin/dev/patamaps/patamaps/scripts/parity/reference_json.mjs",
+        "/Users/admin/dev/patamaps/patamaps/.tools/parity/oracles/399747a4ad05-p8pkt3pr/reference",
+        "/Users/admin/dev/patamaps/patamaps/.tools/parity/runs/json-observables-C7ZPVk/depth-512.json"
+      ],
+      "referenceExitCode": 0,
+      "reference": {
+        "status": "accepted",
+        "canonical": "[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[0]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]",
+        "ownKeys": [
+          "0"
+        ]
+      },
+      "candidate": {
+        "status": "accepted",
+        "canonical": "[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[0]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]",
+        "ownKeys": [
+          "0"
+        ]
+      },
+      "equal": true
+    },
+    {
+      "name": "depth-513",
+      "inputDigest": "sha256:bc290be53a7db8c454f0eed5728e6352cbdf955221352a2c9428329faa084ea5",
+      "referenceCommand": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "/Users/admin/dev/patamaps/patamaps/scripts/parity/reference_json.mjs",
+        "/Users/admin/dev/patamaps/patamaps/.tools/parity/oracles/399747a4ad05-p8pkt3pr/reference",
+        "/Users/admin/dev/patamaps/patamaps/.tools/parity/runs/json-observables-C7ZPVk/depth-513.json"
+      ],
+      "referenceExitCode": 0,
+      "reference": {
+        "status": "refused",
+        "error": {
+          "name": "CanonicalJsonError",
+          "code": "JSON_DEPTH_LIMIT",
+          "message": "JSON input exceeds 512 levels"
+        }
+      },
+      "candidate": {
+        "status": "refused",
+        "error": {
+          "name": "CanonicalJsonError",
+          "code": "JSON_DEPTH_LIMIT",
+          "message": "JSON input exceeds 512 levels"
+        }
+      },
+      "equal": true
+    }
+  ],
+  "originalCasesClosed": 0,
+  "retainedRun": ".tools/parity/runs/json-observables-C7ZPVk",
+  "cleanup": "No deletion"
+}

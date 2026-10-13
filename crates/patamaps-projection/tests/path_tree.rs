@@ -217,6 +217,7 @@ fn excessive_path_depth_refuses_before_recursive_tree_construction() {
 fn semantic_tree_capture_success_and_refusal_replay_through_the_same_evaluator() {
     let (g, p, s) = inputs();
     let input = CaptureInputs {
+        projection_specs: vec![],
         graph: g.clone(),
         packs: vec![],
         policy: p.clone(),

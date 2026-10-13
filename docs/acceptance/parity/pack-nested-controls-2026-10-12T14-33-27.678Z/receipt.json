@@ -1,0 +1,2855 @@
+{
+  "schemaVersion": "1.0.0",
+  "status": "component-controls-passed",
+  "supervision": {
+    "mode": "inherited-live-supervisor",
+    "project": "/Users/admin/dev/patamaps/patamaps",
+    "configurationDigest": "sha256:77505e4ca3960c2df14617ffa5951838a6b84e51d6f8ed715ec60faa3c9e8187",
+    "policy": {
+      "version": 1,
+      "minimumFreeBytes": 0,
+      "reserveFreeBytes": 10000000000,
+      "maximumRunGrowthBytes": 8000000000,
+      "maximumRetainedBytes": 50000000000,
+      "monitorIntervalMs": 2000,
+      "terminationGraceMs": 15000
+    },
+    "availableBytesAtEntry": 27016273920
+  },
+  "reference": {
+    "engine": "399747a4ad05a37cd8db1cedd53048fad2175be4",
+    "corpus": "fixtures/parity/pack-nested-controls.json",
+    "corpusDigest": "sha256:e2f9970280e92ddb31b37f2c180b977f1963a51bfa84c697297b3aabada92909",
+    "sourceFiles": [
+      {
+        "path": "src/relation-pack.ts",
+        "digest": "sha256:b035eb01f6af1d9d34547abaa0139f07492ef801c72987bcae42245935f3d9b7"
+      },
+      {
+        "path": "src/canonical.ts",
+        "digest": "sha256:06994bd6e52c332ef52e37dd92408372adc51a593067a1b03ba0108bf1adf7ce"
+      },
+      {
+        "path": "src/stable.ts",
+        "digest": "sha256:5e0800fab53ac01f4e8506ca4d85b8a0a25ee74c1e79392cb69c11431633f270"
+      },
+      {
+        "path": "schemas/relation-pack.schema.json",
+        "digest": "sha256:bfac8a6fa108eb430aec628ec6952b8123468daba0178b801f7f7c1ac3e4e135"
+      },
+      {
+        "path": "schemas/relation-pack-v2.schema.json",
+        "digest": "sha256:3923a94dc77e608b73534d1c31844d4bfa823fb75708d961e6d9b97e67ae41fc"
+      }
+    ]
+  },
+  "candidate": {
+    "binaryDigest": "sha256:d6563265ef038420528e686d1fc420dfd49ac348655b164c41a09d4b978b906b",
+    "engine": {
+      "compiler": "sha256:56a63c7f70caf03a39deacebcb9361ef9e3a7b18f2ee290955ff259e64427f05",
+      "documentType": "executor-description",
+      "governance": "sha256:a1aaa1a75baf926dc6a9c649c48cbd28b40d052fd058d8f0d61df486f5442efc",
+      "schemaVersion": "0.1.0",
+      "scientific": "sha256:5c6319a65461f238db27117d3387e8d88f6a571a8162381549fdd3a4cc2e40fe",
+      "workspace": "sha256:5d7b3eef2e8976ee883b3f5d2f158f555de7439805fb8fc99c1663d037b1c6be"
+    },
+    "sdkSourceInventory": [
+      {
+        "path": "sdk/typescript/canonical.mjs",
+        "digest": "sha256:830acf94b6a334a5659856b1c6ba342e8c02d9df49752c9163be7fa3461a3954"
+      },
+      {
+        "path": "sdk/typescript/legacy-validation.mjs",
+        "digest": "sha256:45d24605ad814370db2c97ac13cb03a6a4c6fa3b4fa5e1a24c1d521764ebb281"
+      }
+    ]
+  },
+  "comparedCases": 161,
+  "matchedCases": 161,
+  "nativeExecutions": 181,
+  "results": [
+    {
+      "name": "reverse-neutral",
+      "expected": {
+        "status": "accepted",
+        "digest": "sha256:025e38fa8aaeee256cbd9e582a7b7e2d61601c0c11f6f9666c73a2e65803eb21"
+      },
+      "observed": {
+        "status": "accepted",
+        "digest": "sha256:025e38fa8aaeee256cbd9e582a7b7e2d61601c0c11f6f9666c73a2e65803eb21"
+      },
+      "equal": true
+    },
+    {
+      "name": "reverse-id-absent",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0 must have required property 'id'"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0 must have required property 'id'"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "reverse-id-null",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/id must be string"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/id must be string"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "reverse-id-false",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/id must be string"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/id must be string"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "reverse-id-0",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/id must be string"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/id must be string"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "reverse-id-\"\"",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/id must match pattern \"^[A-Za-z][A-Za-z0-9+.-]*:[^\\s]+$\""
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/id must match pattern \"^[A-Za-z][A-Za-z0-9+.-]*:[^\\s]+$\""
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "reverse-id-[]",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/id must be string"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/id must be string"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "reverse-id-{}",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/id must be string"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/id must be string"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "reverse-operation-absent",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/operands must NOT have fewer than 2 items; /laws/0 must match \"else\" schema; /laws/0 must have required property 'operation'"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/operands must NOT have fewer than 2 items; /laws/0 must match \"else\" schema; /laws/0 must have required property 'operation'"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "reverse-operation-null",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/operands must NOT have fewer than 2 items; /laws/0 must match \"else\" schema; /laws/0/operation must be equal to one of the allowed values"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/operands must NOT have fewer than 2 items; /laws/0 must match \"else\" schema; /laws/0/operation must be equal to one of the allowed values"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "reverse-operation-false",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/operands must NOT have fewer than 2 items; /laws/0 must match \"else\" schema; /laws/0/operation must be equal to one of the allowed values"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/operands must NOT have fewer than 2 items; /laws/0 must match \"else\" schema; /laws/0/operation must be equal to one of the allowed values"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "reverse-operation-0",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/operands must NOT have fewer than 2 items; /laws/0 must match \"else\" schema; /laws/0/operation must be equal to one of the allowed values"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/operands must NOT have fewer than 2 items; /laws/0 must match \"else\" schema; /laws/0/operation must be equal to one of the allowed values"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "reverse-operation-\"\"",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/operands must NOT have fewer than 2 items; /laws/0 must match \"else\" schema; /laws/0/operation must be equal to one of the allowed values"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/operands must NOT have fewer than 2 items; /laws/0 must match \"else\" schema; /laws/0/operation must be equal to one of the allowed values"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "reverse-operation-[]",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/operands must NOT have fewer than 2 items; /laws/0 must match \"else\" schema; /laws/0/operation must be equal to one of the allowed values"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/operands must NOT have fewer than 2 items; /laws/0 must match \"else\" schema; /laws/0/operation must be equal to one of the allowed values"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "reverse-operation-{}",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/operands must NOT have fewer than 2 items; /laws/0 must match \"else\" schema; /laws/0/operation must be equal to one of the allowed values"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/operands must NOT have fewer than 2 items; /laws/0 must match \"else\" schema; /laws/0/operation must be equal to one of the allowed values"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "reverse-operands-absent",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0 must have required property 'operands'"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0 must have required property 'operands'"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "reverse-operands-null",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/operands must be array; /laws/0 must match \"then\" schema; /laws/0/operands must be array"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/operands must be array; /laws/0 must match \"then\" schema; /laws/0/operands must be array"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "reverse-operands-false",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/operands must be array; /laws/0 must match \"then\" schema; /laws/0/operands must be array"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/operands must be array; /laws/0 must match \"then\" schema; /laws/0/operands must be array"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "reverse-operands-0",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/operands must be array; /laws/0 must match \"then\" schema; /laws/0/operands must be array"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/operands must be array; /laws/0 must match \"then\" schema; /laws/0/operands must be array"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "reverse-operands-\"\"",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/operands must be array; /laws/0 must match \"then\" schema; /laws/0/operands must be array"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/operands must be array; /laws/0 must match \"then\" schema; /laws/0/operands must be array"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "reverse-operands-[]",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/operands must NOT have fewer than 1 items; /laws/0 must match \"then\" schema; /laws/0/operands must NOT have fewer than 1 items"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/operands must NOT have fewer than 1 items; /laws/0 must match \"then\" schema; /laws/0/operands must NOT have fewer than 1 items"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "reverse-operands-{}",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/operands must be array; /laws/0 must match \"then\" schema; /laws/0/operands must be array"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/operands must be array; /laws/0 must match \"then\" schema; /laws/0/operands must be array"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "reverse-resultRelation-absent",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0 must have required property 'resultRelation'"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0 must have required property 'resultRelation'"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "reverse-resultRelation-null",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/resultRelation must be string"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/resultRelation must be string"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "reverse-resultRelation-false",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/resultRelation must be string"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/resultRelation must be string"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "reverse-resultRelation-0",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/resultRelation must be string"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/resultRelation must be string"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "reverse-resultRelation-\"\"",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/resultRelation must match pattern \"^[a-z][a-z0-9._-]*:[a-z][a-z0-9._-]*$\""
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/resultRelation must match pattern \"^[a-z][a-z0-9._-]*:[a-z][a-z0-9._-]*$\""
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "reverse-resultRelation-[]",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/resultRelation must be string"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/resultRelation must be string"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "reverse-resultRelation-{}",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/resultRelation must be string"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/resultRelation must be string"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "reverse-handling-absent",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0 must have required property 'handling'"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0 must have required property 'handling'"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "reverse-handling-null",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/handling must be object"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/handling must be object"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "reverse-handling-false",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/handling must be object"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/handling must be object"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "reverse-handling-0",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/handling must be object"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/handling must be object"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "reverse-handling-\"\"",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/handling must be object"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/handling must be object"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "reverse-handling-[]",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/handling must be object"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/handling must be object"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "reverse-handling-{}",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/handling must have required property 'lossiness'; /laws/0/handling must have required property 'uncertainty'; /laws/0/handling must have required property 'authority'"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/handling must have required property 'lossiness'; /laws/0/handling must have required property 'uncertainty'; /laws/0/handling must have required property 'authority'"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "reverse-conditions-absent",
+      "expected": {
+        "status": "accepted",
+        "digest": "sha256:025e38fa8aaeee256cbd9e582a7b7e2d61601c0c11f6f9666c73a2e65803eb21"
+      },
+      "observed": {
+        "status": "accepted",
+        "digest": "sha256:025e38fa8aaeee256cbd9e582a7b7e2d61601c0c11f6f9666c73a2e65803eb21"
+      },
+      "equal": true
+    },
+    {
+      "name": "reverse-conditions-null",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/conditions must be object; /laws/0 must match \"then\" schema; /laws/0/conditions must be object"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/conditions must be object; /laws/0 must match \"then\" schema; /laws/0/conditions must be object"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "reverse-conditions-false",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/conditions must be object; /laws/0 must match \"then\" schema; /laws/0/conditions must be object"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/conditions must be object; /laws/0 must match \"then\" schema; /laws/0/conditions must be object"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "reverse-conditions-0",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/conditions must be object; /laws/0 must match \"then\" schema; /laws/0/conditions must be object"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/conditions must be object; /laws/0 must match \"then\" schema; /laws/0/conditions must be object"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "reverse-conditions-\"\"",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/conditions must be object; /laws/0 must match \"then\" schema; /laws/0/conditions must be object"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/conditions must be object; /laws/0 must match \"then\" schema; /laws/0/conditions must be object"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "reverse-conditions-[]",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/conditions must be object; /laws/0 must match \"then\" schema; /laws/0/conditions must be object"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/conditions must be object; /laws/0 must match \"then\" schema; /laws/0/conditions must be object"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "reverse-conditions-{}",
+      "expected": {
+        "status": "accepted",
+        "digest": "sha256:783f84fa0712dc0daca297b27893d09d604ed8b87cbf1c908f32f0b3ea58ddc0"
+      },
+      "observed": {
+        "status": "accepted",
+        "digest": "sha256:783f84fa0712dc0daca297b27893d09d604ed8b87cbf1c908f32f0b3ea58ddc0"
+      },
+      "equal": true
+    },
+    {
+      "name": "reverse-patch-{\"operands\":[]}",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/operands must NOT have fewer than 1 items; /laws/0 must match \"then\" schema; /laws/0/operands must NOT have fewer than 1 items"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/operands must NOT have fewer than 1 items; /laws/0 must match \"then\" schema; /laws/0/operands must NOT have fewer than 1 items"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "reverse-patch-{\"operands\":[\"test:edge\",\"test:edge\",\"test:edge\"]}",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/operands must NOT have more than 1 items; /laws/0 must match \"then\" schema; /laws/0/operands must NOT have more than 2 items"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/operands must NOT have more than 1 items; /laws/0 must match \"then\" schema; /laws/0/operands must NOT have more than 2 items"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "reverse-patch-{\"operands\":[null,false]}",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/operands must NOT have more than 1 items; /laws/0 must match \"then\" schema; /laws/0/operands/0 must be string; /laws/0/operands/1 must be string"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/operands must NOT have more than 1 items; /laws/0 must match \"then\" schema; /laws/0/operands/0 must be string; /laws/0/operands/1 must be string"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "reverse-patch-{\"operation\":\"unknown\",\"operands\":[]}",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/operands must NOT have fewer than 2 items; /laws/0 must match \"else\" schema; /laws/0/operation must be equal to one of the allowed values; /laws/0/operands must NOT have fewer than 1 items"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/operands must NOT have fewer than 2 items; /laws/0 must match \"else\" schema; /laws/0/operation must be equal to one of the allowed values; /laws/0/operands must NOT have fewer than 1 items"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "reverse-patch-{\"handling\":{\"authority\":\"delegate\",\"uncertainty\":0,\"lossiness\":false}}",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/handling/lossiness must be equal to constant; /laws/0/handling/uncertainty must be equal to constant; /laws/0/handling/authority must be equal to constant"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/handling/lossiness must be equal to constant; /laws/0/handling/uncertainty must be equal to constant; /laws/0/handling/authority must be equal to constant"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "reverse-patch-{\"handling\":{\"unknownZ\":true,\"unknownA\":false}}",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/handling must have required property 'lossiness'; /laws/0/handling must have required property 'uncertainty'; /laws/0/handling must have required property 'authority'; /laws/0/handling must NOT have additional properties; /laws/0/handling must NOT have additional properties"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/handling must have required property 'lossiness'; /laws/0/handling must have required property 'uncertainty'; /laws/0/handling must have required property 'authority'; /laws/0/handling must NOT have additional properties; /laws/0/handling must NOT have additional properties"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "reverse-patch-{\"conditions\":{\"middleKinds\":[\"x\"]}}",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/conditions/middleKinds boolean schema is false; /laws/0 must match \"then\" schema"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/conditions/middleKinds boolean schema is false; /laws/0 must match \"then\" schema"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "reverse-patch-{\"conditions\":{\"sourceKinds\":[],\"middleKinds\":[],\"targetKinds\":[]}}",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/conditions/middleKinds boolean schema is false; /laws/0 must match \"then\" schema; /laws/0/conditions/sourceKinds must NOT have fewer than 1 items; /laws/0/conditions/middleKinds must NOT have fewer than 1 items; /laws/0/conditions/targetKinds must NOT have fewer than 1 items"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/conditions/middleKinds boolean schema is false; /laws/0 must match \"then\" schema; /laws/0/conditions/sourceKinds must NOT have fewer than 1 items; /laws/0/conditions/middleKinds must NOT have fewer than 1 items; /laws/0/conditions/targetKinds must NOT have fewer than 1 items"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "reverse-patch-{\"conditions\":{\"middleKinds\":[\"__proto__\",\"__proto__\"]}}",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/conditions/middleKinds boolean schema is false; /laws/0 must match \"then\" schema"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/conditions/middleKinds boolean schema is false; /laws/0 must match \"then\" schema"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "reverse-patch-{\"conditions\":{\"sourceKinds\":[0,0],\"middleKinds\":[false,false]}}",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/conditions/middleKinds boolean schema is false; /laws/0 must match \"then\" schema; /laws/0/conditions/sourceKinds/0 must be string; /laws/0/conditions/sourceKinds/1 must be string; /laws/0/conditions/middleKinds/0 must be string; /laws/0/conditions/middleKinds/1 must be string"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/conditions/middleKinds boolean schema is false; /laws/0 must match \"then\" schema; /laws/0/conditions/sourceKinds/0 must be string; /laws/0/conditions/sourceKinds/1 must be string; /laws/0/conditions/middleKinds/0 must be string; /laws/0/conditions/middleKinds/1 must be string"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "reverse-patch-{\"conditions\":{\"sourceKinds\":[\"a\",\"b\",\"a\",\"b\",\"a\"]}}",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/conditions/sourceKinds must NOT have duplicate items (items ## 4 and 2 are identical)"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/conditions/sourceKinds must NOT have duplicate items (items ## 4 and 2 are identical)"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "reverse-patch-{\"conditions\":{\"unknownZ\":true,\"unknownA\":false}}",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/conditions must NOT have additional properties; /laws/0/conditions must NOT have additional properties"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/conditions must NOT have additional properties; /laws/0/conditions must NOT have additional properties"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "reverse-patch-{\"id\":null,\"operation\":\"unknown\",\"operands\":[],\"handling\":{}}",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/operands must NOT have fewer than 2 items; /laws/0 must match \"else\" schema; /laws/0/id must be string; /laws/0/operation must be equal to one of the allowed values; /laws/0/operands must NOT have fewer than 1 items; /laws/0/handling must have required property 'lossiness'; /laws/0/handling must have required property 'uncertainty'; /laws/0/handling must have required property 'authority'"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/operands must NOT have fewer than 2 items; /laws/0 must match \"else\" schema; /laws/0/id must be string; /laws/0/operation must be equal to one of the allowed values; /laws/0/operands must NOT have fewer than 1 items; /laws/0/handling must have required property 'lossiness'; /laws/0/handling must have required property 'uncertainty'; /laws/0/handling must have required property 'authority'"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "chain-neutral",
+      "expected": {
+        "status": "accepted",
+        "digest": "sha256:33a7f2a3df361b0cf0ea6045aa26c7a056eaf55483a37669fe32cfea6ba35eeb"
+      },
+      "observed": {
+        "status": "accepted",
+        "digest": "sha256:33a7f2a3df361b0cf0ea6045aa26c7a056eaf55483a37669fe32cfea6ba35eeb"
+      },
+      "equal": true
+    },
+    {
+      "name": "chain-id-absent",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0 must have required property 'id'"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0 must have required property 'id'"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "chain-id-null",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/id must be string"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/id must be string"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "chain-id-false",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/id must be string"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/id must be string"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "chain-id-0",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/id must be string"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/id must be string"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "chain-id-\"\"",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/id must match pattern \"^[A-Za-z][A-Za-z0-9+.-]*:[^\\s]+$\""
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/id must match pattern \"^[A-Za-z][A-Za-z0-9+.-]*:[^\\s]+$\""
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "chain-id-[]",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/id must be string"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/id must be string"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "chain-id-{}",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/id must be string"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/id must be string"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "chain-operation-absent",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0 must have required property 'operation'"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0 must have required property 'operation'"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "chain-operation-null",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/operation must be equal to one of the allowed values"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/operation must be equal to one of the allowed values"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "chain-operation-false",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/operation must be equal to one of the allowed values"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/operation must be equal to one of the allowed values"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "chain-operation-0",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/operation must be equal to one of the allowed values"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/operation must be equal to one of the allowed values"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "chain-operation-\"\"",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/operation must be equal to one of the allowed values"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/operation must be equal to one of the allowed values"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "chain-operation-[]",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/operation must be equal to one of the allowed values"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/operation must be equal to one of the allowed values"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "chain-operation-{}",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/operation must be equal to one of the allowed values"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/operation must be equal to one of the allowed values"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "chain-operands-absent",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0 must have required property 'operands'"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0 must have required property 'operands'"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "chain-operands-null",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/operands must be array; /laws/0 must match \"else\" schema; /laws/0/operands must be array"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/operands must be array; /laws/0 must match \"else\" schema; /laws/0/operands must be array"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "chain-operands-false",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/operands must be array; /laws/0 must match \"else\" schema; /laws/0/operands must be array"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/operands must be array; /laws/0 must match \"else\" schema; /laws/0/operands must be array"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "chain-operands-0",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/operands must be array; /laws/0 must match \"else\" schema; /laws/0/operands must be array"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/operands must be array; /laws/0 must match \"else\" schema; /laws/0/operands must be array"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "chain-operands-\"\"",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/operands must be array; /laws/0 must match \"else\" schema; /laws/0/operands must be array"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/operands must be array; /laws/0 must match \"else\" schema; /laws/0/operands must be array"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "chain-operands-[]",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/operands must NOT have fewer than 2 items; /laws/0 must match \"else\" schema; /laws/0/operands must NOT have fewer than 1 items"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/operands must NOT have fewer than 2 items; /laws/0 must match \"else\" schema; /laws/0/operands must NOT have fewer than 1 items"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "chain-operands-{}",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/operands must be array; /laws/0 must match \"else\" schema; /laws/0/operands must be array"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/operands must be array; /laws/0 must match \"else\" schema; /laws/0/operands must be array"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "chain-resultRelation-absent",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0 must have required property 'resultRelation'"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0 must have required property 'resultRelation'"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "chain-resultRelation-null",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/resultRelation must be string"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/resultRelation must be string"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "chain-resultRelation-false",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/resultRelation must be string"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/resultRelation must be string"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "chain-resultRelation-0",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/resultRelation must be string"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/resultRelation must be string"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "chain-resultRelation-\"\"",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/resultRelation must match pattern \"^[a-z][a-z0-9._-]*:[a-z][a-z0-9._-]*$\""
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/resultRelation must match pattern \"^[a-z][a-z0-9._-]*:[a-z][a-z0-9._-]*$\""
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "chain-resultRelation-[]",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/resultRelation must be string"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/resultRelation must be string"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "chain-resultRelation-{}",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/resultRelation must be string"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/resultRelation must be string"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "chain-handling-absent",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0 must have required property 'handling'"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0 must have required property 'handling'"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "chain-handling-null",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/handling must be object"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/handling must be object"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "chain-handling-false",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/handling must be object"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/handling must be object"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "chain-handling-0",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/handling must be object"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/handling must be object"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "chain-handling-\"\"",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/handling must be object"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/handling must be object"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "chain-handling-[]",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/handling must be object"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/handling must be object"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "chain-handling-{}",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/handling must have required property 'lossiness'; /laws/0/handling must have required property 'uncertainty'; /laws/0/handling must have required property 'authority'"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/handling must have required property 'lossiness'; /laws/0/handling must have required property 'uncertainty'; /laws/0/handling must have required property 'authority'"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "chain-conditions-absent",
+      "expected": {
+        "status": "accepted",
+        "digest": "sha256:33a7f2a3df361b0cf0ea6045aa26c7a056eaf55483a37669fe32cfea6ba35eeb"
+      },
+      "observed": {
+        "status": "accepted",
+        "digest": "sha256:33a7f2a3df361b0cf0ea6045aa26c7a056eaf55483a37669fe32cfea6ba35eeb"
+      },
+      "equal": true
+    },
+    {
+      "name": "chain-conditions-null",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/conditions must be object"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/conditions must be object"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "chain-conditions-false",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/conditions must be object"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/conditions must be object"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "chain-conditions-0",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/conditions must be object"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/conditions must be object"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "chain-conditions-\"\"",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/conditions must be object"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/conditions must be object"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "chain-conditions-[]",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/conditions must be object"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/conditions must be object"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "chain-conditions-{}",
+      "expected": {
+        "status": "accepted",
+        "digest": "sha256:cd1cf8da2f75316b8ba3b8773291d6ec234f4476f9d762fc1da1a4a5afdb04fd"
+      },
+      "observed": {
+        "status": "accepted",
+        "digest": "sha256:cd1cf8da2f75316b8ba3b8773291d6ec234f4476f9d762fc1da1a4a5afdb04fd"
+      },
+      "equal": true
+    },
+    {
+      "name": "chain-patch-{\"operands\":[]}",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/operands must NOT have fewer than 2 items; /laws/0 must match \"else\" schema; /laws/0/operands must NOT have fewer than 1 items"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/operands must NOT have fewer than 2 items; /laws/0 must match \"else\" schema; /laws/0/operands must NOT have fewer than 1 items"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "chain-patch-{\"operands\":[\"test:edge\",\"test:edge\",\"test:edge\"]}",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/operands must NOT have more than 2 items; /laws/0 must match \"else\" schema; /laws/0/operands must NOT have more than 2 items"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/operands must NOT have more than 2 items; /laws/0 must match \"else\" schema; /laws/0/operands must NOT have more than 2 items"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "chain-patch-{\"operands\":[null,false]}",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/operands/0 must be string; /laws/0/operands/1 must be string"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/operands/0 must be string; /laws/0/operands/1 must be string"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "chain-patch-{\"operation\":\"unknown\",\"operands\":[]}",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/operands must NOT have fewer than 2 items; /laws/0 must match \"else\" schema; /laws/0/operation must be equal to one of the allowed values; /laws/0/operands must NOT have fewer than 1 items"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/operands must NOT have fewer than 2 items; /laws/0 must match \"else\" schema; /laws/0/operation must be equal to one of the allowed values; /laws/0/operands must NOT have fewer than 1 items"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "chain-patch-{\"handling\":{\"authority\":\"delegate\",\"uncertainty\":0,\"lossiness\":false}}",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/handling/lossiness must be equal to constant; /laws/0/handling/uncertainty must be equal to constant; /laws/0/handling/authority must be equal to constant"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/handling/lossiness must be equal to constant; /laws/0/handling/uncertainty must be equal to constant; /laws/0/handling/authority must be equal to constant"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "chain-patch-{\"handling\":{\"unknownZ\":true,\"unknownA\":false}}",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/handling must have required property 'lossiness'; /laws/0/handling must have required property 'uncertainty'; /laws/0/handling must have required property 'authority'; /laws/0/handling must NOT have additional properties; /laws/0/handling must NOT have additional properties"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/handling must have required property 'lossiness'; /laws/0/handling must have required property 'uncertainty'; /laws/0/handling must have required property 'authority'; /laws/0/handling must NOT have additional properties; /laws/0/handling must NOT have additional properties"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "chain-patch-{\"conditions\":{\"middleKinds\":[\"x\"]}}",
+      "expected": {
+        "status": "accepted",
+        "digest": "sha256:39ae0f93a5fcf9a7c58577e4f8317341a5afbd5bfdec5796d8c44768c2a49bd3"
+      },
+      "observed": {
+        "status": "accepted",
+        "digest": "sha256:39ae0f93a5fcf9a7c58577e4f8317341a5afbd5bfdec5796d8c44768c2a49bd3"
+      },
+      "equal": true
+    },
+    {
+      "name": "chain-patch-{\"conditions\":{\"sourceKinds\":[],\"middleKinds\":[],\"targetKinds\":[]}}",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/conditions/sourceKinds must NOT have fewer than 1 items; /laws/0/conditions/middleKinds must NOT have fewer than 1 items; /laws/0/conditions/targetKinds must NOT have fewer than 1 items"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/conditions/sourceKinds must NOT have fewer than 1 items; /laws/0/conditions/middleKinds must NOT have fewer than 1 items; /laws/0/conditions/targetKinds must NOT have fewer than 1 items"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "chain-patch-{\"conditions\":{\"middleKinds\":[\"__proto__\",\"__proto__\"]}}",
+      "expected": {
+        "status": "accepted",
+        "digest": "sha256:a4482f64424ad941e618ddd180d780a3407e17ad984f7a000697bae06f609f5f"
+      },
+      "observed": {
+        "status": "accepted",
+        "digest": "sha256:a4482f64424ad941e618ddd180d780a3407e17ad984f7a000697bae06f609f5f"
+      },
+      "equal": true
+    },
+    {
+      "name": "chain-patch-{\"conditions\":{\"sourceKinds\":[0,0],\"middleKinds\":[false,false]}}",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/conditions/sourceKinds/0 must be string; /laws/0/conditions/sourceKinds/1 must be string; /laws/0/conditions/middleKinds/0 must be string; /laws/0/conditions/middleKinds/1 must be string"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/conditions/sourceKinds/0 must be string; /laws/0/conditions/sourceKinds/1 must be string; /laws/0/conditions/middleKinds/0 must be string; /laws/0/conditions/middleKinds/1 must be string"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "chain-patch-{\"conditions\":{\"sourceKinds\":[\"a\",\"b\",\"a\",\"b\",\"a\"]}}",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/conditions/sourceKinds must NOT have duplicate items (items ## 4 and 2 are identical)"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/conditions/sourceKinds must NOT have duplicate items (items ## 4 and 2 are identical)"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "chain-patch-{\"conditions\":{\"unknownZ\":true,\"unknownA\":false}}",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/conditions must NOT have additional properties; /laws/0/conditions must NOT have additional properties"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/conditions must NOT have additional properties; /laws/0/conditions must NOT have additional properties"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "chain-patch-{\"id\":null,\"operation\":\"unknown\",\"operands\":[],\"handling\":{}}",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/operands must NOT have fewer than 2 items; /laws/0 must match \"else\" schema; /laws/0/id must be string; /laws/0/operation must be equal to one of the allowed values; /laws/0/operands must NOT have fewer than 1 items; /laws/0/handling must have required property 'lossiness'; /laws/0/handling must have required property 'uncertainty'; /laws/0/handling must have required property 'authority'"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/operands must NOT have fewer than 2 items; /laws/0 must match \"else\" schema; /laws/0/id must be string; /laws/0/operation must be equal to one of the allowed values; /laws/0/operands must NOT have fewer than 1 items; /laws/0/handling must have required property 'lossiness'; /laws/0/handling must have required property 'uncertainty'; /laws/0/handling must have required property 'authority'"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "context-null",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/conditions/context must be object; /laws/0/conditions/context must be object; /laws/0/conditions/context must be object; /laws/0/conditions/context must be object; /laws/0/conditions/context must be object; /laws/0/conditions/context must be object; /laws/0/conditions/context must match exactly one schema in oneOf"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/conditions/context must be object; /laws/0/conditions/context must be object; /laws/0/conditions/context must be object; /laws/0/conditions/context must be object; /laws/0/conditions/context must be object; /laws/0/conditions/context must be object; /laws/0/conditions/context must match exactly one schema in oneOf"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "context-false",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/conditions/context must be object; /laws/0/conditions/context must be object; /laws/0/conditions/context must be object; /laws/0/conditions/context must be object; /laws/0/conditions/context must be object; /laws/0/conditions/context must be object; /laws/0/conditions/context must match exactly one schema in oneOf"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/conditions/context must be object; /laws/0/conditions/context must be object; /laws/0/conditions/context must be object; /laws/0/conditions/context must be object; /laws/0/conditions/context must be object; /laws/0/conditions/context must be object; /laws/0/conditions/context must match exactly one schema in oneOf"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "context-[]",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/conditions/context must be object; /laws/0/conditions/context must be object; /laws/0/conditions/context must be object; /laws/0/conditions/context must be object; /laws/0/conditions/context must be object; /laws/0/conditions/context must be object; /laws/0/conditions/context must match exactly one schema in oneOf"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/conditions/context must be object; /laws/0/conditions/context must be object; /laws/0/conditions/context must be object; /laws/0/conditions/context must be object; /laws/0/conditions/context must be object; /laws/0/conditions/context must be object; /laws/0/conditions/context must match exactly one schema in oneOf"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "context-{}",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/conditions/context must have required property 'key'; /laws/0/conditions/context must have required property 'operator'; /laws/0/conditions/context must have required property 'value'; /laws/0/conditions/context must have required property 'key'; /laws/0/conditions/context must have required property 'operator'; /laws/0/conditions/context must have required property 'values'; /laws/0/conditions/context must have required property 'key'; /laws/0/conditions/context must have required property 'operator'; /laws/0/conditions/context must have required property 'all'; /laws/0/conditions/context must have required property 'any'; /laws/0/conditions/context must have required property 'not'; /laws/0/conditions/context must match exactly one schema in oneOf"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/conditions/context must have required property 'key'; /laws/0/conditions/context must have required property 'operator'; /laws/0/conditions/context must have required property 'value'; /laws/0/conditions/context must have required property 'key'; /laws/0/conditions/context must have required property 'operator'; /laws/0/conditions/context must have required property 'values'; /laws/0/conditions/context must have required property 'key'; /laws/0/conditions/context must have required property 'operator'; /laws/0/conditions/context must have required property 'all'; /laws/0/conditions/context must have required property 'any'; /laws/0/conditions/context must have required property 'not'; /laws/0/conditions/context must match exactly one schema in oneOf"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "context-{\"key\":\"x\",\"operator\":\"equals\",\"value\":null}",
+      "expected": {
+        "status": "accepted",
+        "digest": "sha256:e3b340ce3e980efdcbf89b50f882e8d412a545d5dbdff842bb86d572530b84c6"
+      },
+      "observed": {
+        "status": "accepted",
+        "digest": "sha256:e3b340ce3e980efdcbf89b50f882e8d412a545d5dbdff842bb86d572530b84c6"
+      },
+      "equal": true
+    },
+    {
+      "name": "context-{\"key\":\"x\",\"operator\":\"not-equals\",\"value\":false}",
+      "expected": {
+        "status": "accepted",
+        "digest": "sha256:ee54f15bacb82362236c4b2d1379570970eb639e43e7f5b83d0097c7657ca99e"
+      },
+      "observed": {
+        "status": "accepted",
+        "digest": "sha256:ee54f15bacb82362236c4b2d1379570970eb639e43e7f5b83d0097c7657ca99e"
+      },
+      "equal": true
+    },
+    {
+      "name": "context-{\"key\":\"x\",\"operator\":\"in\",\"values\":[null,false,0,\"\"]}",
+      "expected": {
+        "status": "accepted",
+        "digest": "sha256:99c457a145637d20fa27816005bb450248f4e16358d4457d3adc8cd797c3e651"
+      },
+      "observed": {
+        "status": "accepted",
+        "digest": "sha256:99c457a145637d20fa27816005bb450248f4e16358d4457d3adc8cd797c3e651"
+      },
+      "equal": true
+    },
+    {
+      "name": "context-{\"key\":\"x\",\"operator\":\"not-in\",\"values\":[true]}",
+      "expected": {
+        "status": "accepted",
+        "digest": "sha256:ffec4e675773275baac21a559cc2d4cfbd7a322137a2cab9d322158a459e940f"
+      },
+      "observed": {
+        "status": "accepted",
+        "digest": "sha256:ffec4e675773275baac21a559cc2d4cfbd7a322137a2cab9d322158a459e940f"
+      },
+      "equal": true
+    },
+    {
+      "name": "context-{\"key\":\"x\",\"operator\":\"exists\"}",
+      "expected": {
+        "status": "accepted",
+        "digest": "sha256:60c5f2167d5419c83832df1477daddda6b6df6cd37320a056ce5e1685e4ea061"
+      },
+      "observed": {
+        "status": "accepted",
+        "digest": "sha256:60c5f2167d5419c83832df1477daddda6b6df6cd37320a056ce5e1685e4ea061"
+      },
+      "equal": true
+    },
+    {
+      "name": "context-{\"key\":\"x\",\"operator\":\"exists\",\"value\":false}",
+      "expected": {
+        "status": "accepted",
+        "digest": "sha256:58e649fe9d95d3e685f4019497d480706b2bee52f14c47ec0e42e48e3afcd286"
+      },
+      "observed": {
+        "status": "accepted",
+        "digest": "sha256:58e649fe9d95d3e685f4019497d480706b2bee52f14c47ec0e42e48e3afcd286"
+      },
+      "equal": true
+    },
+    {
+      "name": "context-{\"key\":\"x\",\"operator\":\"equals\"}",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/conditions/context must have required property 'value'; /laws/0/conditions/context must have required property 'values'; /laws/0/conditions/context/operator must be equal to one of the allowed values; /laws/0/conditions/context/operator must be equal to constant; /laws/0/conditions/context must have required property 'all'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must have required property 'any'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must have required property 'not'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must match exactly one schema in oneOf"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/conditions/context must have required property 'value'; /laws/0/conditions/context must have required property 'values'; /laws/0/conditions/context/operator must be equal to one of the allowed values; /laws/0/conditions/context/operator must be equal to constant; /laws/0/conditions/context must have required property 'all'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must have required property 'any'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must have required property 'not'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must match exactly one schema in oneOf"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "context-{\"key\":\"\",\"operator\":\"equals\",\"value\":[]}",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/conditions/context/key must NOT have fewer than 1 characters; /laws/0/conditions/context/value must be null; /laws/0/conditions/context/value must be boolean; /laws/0/conditions/context/value must be number; /laws/0/conditions/context/value must be string; /laws/0/conditions/context/value must match exactly one schema in oneOf; /laws/0/conditions/context must have required property 'values'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context/key must NOT have fewer than 1 characters; /laws/0/conditions/context/operator must be equal to one of the allowed values; /laws/0/conditions/context/key must NOT have fewer than 1 characters; /laws/0/conditions/context/operator must be equal to constant; /laws/0/conditions/context/value must be boolean; /laws/0/conditions/context must have required property 'all'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must have required property 'any'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must have required property 'not'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must match exactly one schema in oneOf"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/conditions/context/key must NOT have fewer than 1 characters; /laws/0/conditions/context/value must be null; /laws/0/conditions/context/value must be boolean; /laws/0/conditions/context/value must be number; /laws/0/conditions/context/value must be string; /laws/0/conditions/context/value must match exactly one schema in oneOf; /laws/0/conditions/context must have required property 'values'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context/key must NOT have fewer than 1 characters; /laws/0/conditions/context/operator must be equal to one of the allowed values; /laws/0/conditions/context/key must NOT have fewer than 1 characters; /laws/0/conditions/context/operator must be equal to constant; /laws/0/conditions/context/value must be boolean; /laws/0/conditions/context must have required property 'all'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must have required property 'any'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must have required property 'not'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must match exactly one schema in oneOf"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "context-{\"key\":false,\"operator\":\"unknown\",\"value\":{}}",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/conditions/context/key must be string; /laws/0/conditions/context/operator must be equal to one of the allowed values; /laws/0/conditions/context/value must be null; /laws/0/conditions/context/value must be boolean; /laws/0/conditions/context/value must be number; /laws/0/conditions/context/value must be string; /laws/0/conditions/context/value must match exactly one schema in oneOf; /laws/0/conditions/context must have required property 'values'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context/key must be string; /laws/0/conditions/context/operator must be equal to one of the allowed values; /laws/0/conditions/context/key must be string; /laws/0/conditions/context/operator must be equal to constant; /laws/0/conditions/context/value must be boolean; /laws/0/conditions/context must have required property 'all'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must have required property 'any'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must have required property 'not'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must match exactly one schema in oneOf"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/conditions/context/key must be string; /laws/0/conditions/context/operator must be equal to one of the allowed values; /laws/0/conditions/context/value must be null; /laws/0/conditions/context/value must be boolean; /laws/0/conditions/context/value must be number; /laws/0/conditions/context/value must be string; /laws/0/conditions/context/value must match exactly one schema in oneOf; /laws/0/conditions/context must have required property 'values'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context/key must be string; /laws/0/conditions/context/operator must be equal to one of the allowed values; /laws/0/conditions/context/key must be string; /laws/0/conditions/context/operator must be equal to constant; /laws/0/conditions/context/value must be boolean; /laws/0/conditions/context must have required property 'all'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must have required property 'any'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must have required property 'not'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must match exactly one schema in oneOf"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "context-{\"key\":\"x\",\"operator\":\"in\",\"values\":[]}",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/conditions/context must have required property 'value'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context/operator must be equal to one of the allowed values; /laws/0/conditions/context/values must NOT have fewer than 1 items; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context/operator must be equal to constant; /laws/0/conditions/context must have required property 'all'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must have required property 'any'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must have required property 'not'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must match exactly one schema in oneOf"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/conditions/context must have required property 'value'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context/operator must be equal to one of the allowed values; /laws/0/conditions/context/values must NOT have fewer than 1 items; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context/operator must be equal to constant; /laws/0/conditions/context must have required property 'all'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must have required property 'any'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must have required property 'not'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must match exactly one schema in oneOf"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "context-{\"key\":\"x\",\"operator\":\"in\",\"values\":[null,null]}",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/conditions/context must have required property 'value'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context/operator must be equal to one of the allowed values; /laws/0/conditions/context/values must NOT have duplicate items (items ## 0 and 1 are identical); /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context/operator must be equal to constant; /laws/0/conditions/context must have required property 'all'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must have required property 'any'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must have required property 'not'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must match exactly one schema in oneOf"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/conditions/context must have required property 'value'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context/operator must be equal to one of the allowed values; /laws/0/conditions/context/values must NOT have duplicate items (items ## 0 and 1 are identical); /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context/operator must be equal to constant; /laws/0/conditions/context must have required property 'all'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must have required property 'any'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must have required property 'not'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must match exactly one schema in oneOf"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "context-{\"key\":\"x\",\"operator\":\"in\",\"values\":[0,false,0,false,0]}",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/conditions/context must have required property 'value'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context/operator must be equal to one of the allowed values; /laws/0/conditions/context/values must NOT have duplicate items (items ## 2 and 4 are identical); /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context/operator must be equal to constant; /laws/0/conditions/context must have required property 'all'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must have required property 'any'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must have required property 'not'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must match exactly one schema in oneOf"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/conditions/context must have required property 'value'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context/operator must be equal to one of the allowed values; /laws/0/conditions/context/values must NOT have duplicate items (items ## 2 and 4 are identical); /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context/operator must be equal to constant; /laws/0/conditions/context must have required property 'all'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must have required property 'any'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must have required property 'not'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must match exactly one schema in oneOf"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "context-{\"key\":\"x\",\"operator\":\"in\",\"values\":[[],{}]}",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/conditions/context must have required property 'value'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context/operator must be equal to one of the allowed values; /laws/0/conditions/context/values/0 must be null; /laws/0/conditions/context/values/0 must be boolean; /laws/0/conditions/context/values/0 must be number; /laws/0/conditions/context/values/0 must be string; /laws/0/conditions/context/values/0 must match exactly one schema in oneOf; /laws/0/conditions/context/values/1 must be null; /laws/0/conditions/context/values/1 must be boolean; /laws/0/conditions/context/values/1 must be number; /laws/0/conditions/context/values/1 must be string; /laws/0/conditions/context/values/1 must match exactly one schema in oneOf; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context/operator must be equal to constant; /laws/0/conditions/context must have required property 'all'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must have required property 'any'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must have required property 'not'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must match exactly one schema in oneOf"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/conditions/context must have required property 'value'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context/operator must be equal to one of the allowed values; /laws/0/conditions/context/values/0 must be null; /laws/0/conditions/context/values/0 must be boolean; /laws/0/conditions/context/values/0 must be number; /laws/0/conditions/context/values/0 must be string; /laws/0/conditions/context/values/0 must match exactly one schema in oneOf; /laws/0/conditions/context/values/1 must be null; /laws/0/conditions/context/values/1 must be boolean; /laws/0/conditions/context/values/1 must be number; /laws/0/conditions/context/values/1 must be string; /laws/0/conditions/context/values/1 must match exactly one schema in oneOf; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context/operator must be equal to constant; /laws/0/conditions/context must have required property 'all'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must have required property 'any'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must have required property 'not'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must match exactly one schema in oneOf"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "context-{\"key\":\"x\",\"operator\":\"exists\",\"value\":null}",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/conditions/context/operator must be equal to one of the allowed values; /laws/0/conditions/context must have required property 'values'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context/operator must be equal to one of the allowed values; /laws/0/conditions/context/value must be boolean; /laws/0/conditions/context must have required property 'all'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must have required property 'any'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must have required property 'not'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must match exactly one schema in oneOf"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/conditions/context/operator must be equal to one of the allowed values; /laws/0/conditions/context must have required property 'values'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context/operator must be equal to one of the allowed values; /laws/0/conditions/context/value must be boolean; /laws/0/conditions/context must have required property 'all'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must have required property 'any'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must have required property 'not'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must match exactly one schema in oneOf"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "context-{\"key\":\"x\",\"operator\":\"equals\",\"value\":true,\"values\":[true]}",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context/operator must be equal to one of the allowed values; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context/operator must be equal to constant; /laws/0/conditions/context must have required property 'all'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must have required property 'any'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must have required property 'not'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must match exactly one schema in oneOf"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context/operator must be equal to one of the allowed values; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context/operator must be equal to constant; /laws/0/conditions/context must have required property 'all'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must have required property 'any'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must have required property 'not'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must match exactly one schema in oneOf"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "context-{\"all\":[]}",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/conditions/context must have required property 'key'; /laws/0/conditions/context must have required property 'operator'; /laws/0/conditions/context must have required property 'value'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must have required property 'key'; /laws/0/conditions/context must have required property 'operator'; /laws/0/conditions/context must have required property 'values'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must have required property 'key'; /laws/0/conditions/context must have required property 'operator'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context/all must NOT have fewer than 1 items; /laws/0/conditions/context must have required property 'any'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must have required property 'not'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must match exactly one schema in oneOf"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/conditions/context must have required property 'key'; /laws/0/conditions/context must have required property 'operator'; /laws/0/conditions/context must have required property 'value'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must have required property 'key'; /laws/0/conditions/context must have required property 'operator'; /laws/0/conditions/context must have required property 'values'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must have required property 'key'; /laws/0/conditions/context must have required property 'operator'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context/all must NOT have fewer than 1 items; /laws/0/conditions/context must have required property 'any'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must have required property 'not'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must match exactly one schema in oneOf"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "context-{\"any\":false}",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/conditions/context must have required property 'key'; /laws/0/conditions/context must have required property 'operator'; /laws/0/conditions/context must have required property 'value'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must have required property 'key'; /laws/0/conditions/context must have required property 'operator'; /laws/0/conditions/context must have required property 'values'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must have required property 'key'; /laws/0/conditions/context must have required property 'operator'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must have required property 'all'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context/any must be array; /laws/0/conditions/context must have required property 'not'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must match exactly one schema in oneOf"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/conditions/context must have required property 'key'; /laws/0/conditions/context must have required property 'operator'; /laws/0/conditions/context must have required property 'value'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must have required property 'key'; /laws/0/conditions/context must have required property 'operator'; /laws/0/conditions/context must have required property 'values'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must have required property 'key'; /laws/0/conditions/context must have required property 'operator'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must have required property 'all'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context/any must be array; /laws/0/conditions/context must have required property 'not'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must match exactly one schema in oneOf"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "context-{\"not\":null}",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/conditions/context must have required property 'key'; /laws/0/conditions/context must have required property 'operator'; /laws/0/conditions/context must have required property 'value'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must have required property 'key'; /laws/0/conditions/context must have required property 'operator'; /laws/0/conditions/context must have required property 'values'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must have required property 'key'; /laws/0/conditions/context must have required property 'operator'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must have required property 'all'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must have required property 'any'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context/not must be object; /laws/0/conditions/context/not must be object; /laws/0/conditions/context/not must be object; /laws/0/conditions/context/not must be object; /laws/0/conditions/context/not must be object; /laws/0/conditions/context/not must be object; /laws/0/conditions/context/not must match exactly one schema in oneOf; /laws/0/conditions/context must match exactly one schema in oneOf"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/conditions/context must have required property 'key'; /laws/0/conditions/context must have required property 'operator'; /laws/0/conditions/context must have required property 'value'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must have required property 'key'; /laws/0/conditions/context must have required property 'operator'; /laws/0/conditions/context must have required property 'values'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must have required property 'key'; /laws/0/conditions/context must have required property 'operator'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must have required property 'all'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must have required property 'any'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context/not must be object; /laws/0/conditions/context/not must be object; /laws/0/conditions/context/not must be object; /laws/0/conditions/context/not must be object; /laws/0/conditions/context/not must be object; /laws/0/conditions/context/not must be object; /laws/0/conditions/context/not must match exactly one schema in oneOf; /laws/0/conditions/context must match exactly one schema in oneOf"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "context-{\"all\":[{\"key\":\"x\",\"operator\":\"exists\"}]}",
+      "expected": {
+        "status": "accepted",
+        "digest": "sha256:70fc704d6a54dbbcac102156ea5091792854b065b74703c97d845ad32d29220b"
+      },
+      "observed": {
+        "status": "accepted",
+        "digest": "sha256:70fc704d6a54dbbcac102156ea5091792854b065b74703c97d845ad32d29220b"
+      },
+      "equal": true
+    },
+    {
+      "name": "context-{\"any\":[{\"key\":\"x\",\"operator\":\"exists\",\"value\":true}]}",
+      "expected": {
+        "status": "accepted",
+        "digest": "sha256:57590887eb0010f345e23b0bb2c7d9f9bf68570ca1b020275a79509425ae3fb6"
+      },
+      "observed": {
+        "status": "accepted",
+        "digest": "sha256:57590887eb0010f345e23b0bb2c7d9f9bf68570ca1b020275a79509425ae3fb6"
+      },
+      "equal": true
+    },
+    {
+      "name": "context-{\"not\":{\"key\":\"x\",\"operator\":\"equals\",\"value\":1}}",
+      "expected": {
+        "status": "accepted",
+        "digest": "sha256:706d9e33ce6435c6a09adb460fdff56b2fda674d9a8271226adc5f0ce47a4904"
+      },
+      "observed": {
+        "status": "accepted",
+        "digest": "sha256:706d9e33ce6435c6a09adb460fdff56b2fda674d9a8271226adc5f0ce47a4904"
+      },
+      "equal": true
+    },
+    {
+      "name": "context-{\"all\":[{\"any\":[{\"not\":{\"key\":\"x\",\"operator\":\"exists\"}}]}]}",
+      "expected": {
+        "status": "accepted",
+        "digest": "sha256:cdab46f372cfab4ad0fc016d45572333cccd9eb7d6d391409e37f5fdc5c2d1dc"
+      },
+      "observed": {
+        "status": "accepted",
+        "digest": "sha256:cdab46f372cfab4ad0fc016d45572333cccd9eb7d6d391409e37f5fdc5c2d1dc"
+      },
+      "equal": true
+    },
+    {
+      "name": "context-{\"all\":[{\"key\":\"x\",\"operator\":\"exists\"},{}]}",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/conditions/context must have required property 'key'; /laws/0/conditions/context must have required property 'operator'; /laws/0/conditions/context must have required property 'value'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must have required property 'key'; /laws/0/conditions/context must have required property 'operator'; /laws/0/conditions/context must have required property 'values'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must have required property 'key'; /laws/0/conditions/context must have required property 'operator'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context/all/1 must have required property 'key'; /laws/0/conditions/context/all/1 must have required property 'operator'; /laws/0/conditions/context/all/1 must have required property 'value'; /laws/0/conditions/context/all/1 must have required property 'key'; /laws/0/conditions/context/all/1 must have required property 'operator'; /laws/0/conditions/context/all/1 must have required property 'values'; /laws/0/conditions/context/all/1 must have required property 'key'; /laws/0/conditions/context/all/1 must have required property 'operator'; /laws/0/conditions/context/all/1 must have required property 'all'; /laws/0/conditions/context/all/1 must have required property 'any'; /laws/0/conditions/context/all/1 must have required property 'not'; /laws/0/conditions/context/all/1 must match exactly one schema in oneOf; /laws/0/conditions/context must have required property 'any'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must have required property 'not'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must match exactly one schema in oneOf"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/conditions/context must have required property 'key'; /laws/0/conditions/context must have required property 'operator'; /laws/0/conditions/context must have required property 'value'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must have required property 'key'; /laws/0/conditions/context must have required property 'operator'; /laws/0/conditions/context must have required property 'values'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must have required property 'key'; /laws/0/conditions/context must have required property 'operator'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context/all/1 must have required property 'key'; /laws/0/conditions/context/all/1 must have required property 'operator'; /laws/0/conditions/context/all/1 must have required property 'value'; /laws/0/conditions/context/all/1 must have required property 'key'; /laws/0/conditions/context/all/1 must have required property 'operator'; /laws/0/conditions/context/all/1 must have required property 'values'; /laws/0/conditions/context/all/1 must have required property 'key'; /laws/0/conditions/context/all/1 must have required property 'operator'; /laws/0/conditions/context/all/1 must have required property 'all'; /laws/0/conditions/context/all/1 must have required property 'any'; /laws/0/conditions/context/all/1 must have required property 'not'; /laws/0/conditions/context/all/1 must match exactly one schema in oneOf; /laws/0/conditions/context must have required property 'any'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must have required property 'not'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must match exactly one schema in oneOf"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "context-{\"any\":[{\"not\":{\"key\":0,\"operator\":\"equals\",\"value\":[]}},false]}",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/conditions/context must have required property 'key'; /laws/0/conditions/context must have required property 'operator'; /laws/0/conditions/context must have required property 'value'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must have required property 'key'; /laws/0/conditions/context must have required property 'operator'; /laws/0/conditions/context must have required property 'values'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must have required property 'key'; /laws/0/conditions/context must have required property 'operator'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must have required property 'all'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context/any/0 must have required property 'key'; /laws/0/conditions/context/any/0 must have required property 'operator'; /laws/0/conditions/context/any/0 must have required property 'value'; /laws/0/conditions/context/any/0 must NOT have additional properties; /laws/0/conditions/context/any/0 must have required property 'key'; /laws/0/conditions/context/any/0 must have required property 'operator'; /laws/0/conditions/context/any/0 must have required property 'values'; /laws/0/conditions/context/any/0 must NOT have additional properties; /laws/0/conditions/context/any/0 must have required property 'key'; /laws/0/conditions/context/any/0 must have required property 'operator'; /laws/0/conditions/context/any/0 must NOT have additional properties; /laws/0/conditions/context/any/0 must have required property 'all'; /laws/0/conditions/context/any/0 must NOT have additional properties; /laws/0/conditions/context/any/0 must have required property 'any'; /laws/0/conditions/context/any/0 must NOT have additional properties; /laws/0/conditions/context/any/0/not/key must be string; /laws/0/conditions/context/any/0/not/value must be null; /laws/0/conditions/context/any/0/not/value must be boolean; /laws/0/conditions/context/any/0/not/value must be number; /laws/0/conditions/context/any/0/not/value must be string; /laws/0/conditions/context/any/0/not/value must match exactly one schema in oneOf; /laws/0/conditions/context/any/0/not must have required property 'values'; /laws/0/conditions/context/any/0/not must NOT have additional properties; /laws/0/conditions/context/any/0/not/key must be string; /laws/0/conditions/context/any/0/not/operator must be equal to one of the allowed values; /laws/0/conditions/context/any/0/not/key must be string; /laws/0/conditions/context/any/0/not/operator must be equal to constant; /laws/0/conditions/context/any/0/not/value must be boolean; /laws/0/conditions/context/any/0/not must have required property 'all'; /laws/0/conditions/context/any/0/not must NOT have additional properties; /laws/0/conditions/context/any/0/not must NOT have additional properties; /laws/0/conditions/context/any/0/not must NOT have additional properties; /laws/0/conditions/context/any/0/not must have required property 'any'; /laws/0/conditions/context/any/0/not must NOT have additional properties; /laws/0/conditions/context/any/0/not must NOT have additional properties; /laws/0/conditions/context/any/0/not must NOT have additional properties; /laws/0/conditions/context/any/0/not must have required property 'not'; /laws/0/conditions/context/any/0/not must NOT have additional properties; /laws/0/conditions/context/any/0/not must NOT have additional properties; /laws/0/conditions/context/any/0/not must NOT have additional properties; /laws/0/conditions/context/any/0/not must match exactly one schema in oneOf; /laws/0/conditions/context/any/0 must match exactly one schema in oneOf; /laws/0/conditions/context/any/1 must be object; /laws/0/conditions/context/any/1 must be object; /laws/0/conditions/context/any/1 must be object; /laws/0/conditions/context/any/1 must be object; /laws/0/conditions/context/any/1 must be object; /laws/0/conditions/context/any/1 must be object; /laws/0/conditions/context/any/1 must match exactly one schema in oneOf; /laws/0/conditions/context must have required property 'not'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must match exactly one schema in oneOf"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/conditions/context must have required property 'key'; /laws/0/conditions/context must have required property 'operator'; /laws/0/conditions/context must have required property 'value'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must have required property 'key'; /laws/0/conditions/context must have required property 'operator'; /laws/0/conditions/context must have required property 'values'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must have required property 'key'; /laws/0/conditions/context must have required property 'operator'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must have required property 'all'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context/any/0 must have required property 'key'; /laws/0/conditions/context/any/0 must have required property 'operator'; /laws/0/conditions/context/any/0 must have required property 'value'; /laws/0/conditions/context/any/0 must NOT have additional properties; /laws/0/conditions/context/any/0 must have required property 'key'; /laws/0/conditions/context/any/0 must have required property 'operator'; /laws/0/conditions/context/any/0 must have required property 'values'; /laws/0/conditions/context/any/0 must NOT have additional properties; /laws/0/conditions/context/any/0 must have required property 'key'; /laws/0/conditions/context/any/0 must have required property 'operator'; /laws/0/conditions/context/any/0 must NOT have additional properties; /laws/0/conditions/context/any/0 must have required property 'all'; /laws/0/conditions/context/any/0 must NOT have additional properties; /laws/0/conditions/context/any/0 must have required property 'any'; /laws/0/conditions/context/any/0 must NOT have additional properties; /laws/0/conditions/context/any/0/not/key must be string; /laws/0/conditions/context/any/0/not/value must be null; /laws/0/conditions/context/any/0/not/value must be boolean; /laws/0/conditions/context/any/0/not/value must be number; /laws/0/conditions/context/any/0/not/value must be string; /laws/0/conditions/context/any/0/not/value must match exactly one schema in oneOf; /laws/0/conditions/context/any/0/not must have required property 'values'; /laws/0/conditions/context/any/0/not must NOT have additional properties; /laws/0/conditions/context/any/0/not/key must be string; /laws/0/conditions/context/any/0/not/operator must be equal to one of the allowed values; /laws/0/conditions/context/any/0/not/key must be string; /laws/0/conditions/context/any/0/not/operator must be equal to constant; /laws/0/conditions/context/any/0/not/value must be boolean; /laws/0/conditions/context/any/0/not must have required property 'all'; /laws/0/conditions/context/any/0/not must NOT have additional properties; /laws/0/conditions/context/any/0/not must NOT have additional properties; /laws/0/conditions/context/any/0/not must NOT have additional properties; /laws/0/conditions/context/any/0/not must have required property 'any'; /laws/0/conditions/context/any/0/not must NOT have additional properties; /laws/0/conditions/context/any/0/not must NOT have additional properties; /laws/0/conditions/context/any/0/not must NOT have additional properties; /laws/0/conditions/context/any/0/not must have required property 'not'; /laws/0/conditions/context/any/0/not must NOT have additional properties; /laws/0/conditions/context/any/0/not must NOT have additional properties; /laws/0/conditions/context/any/0/not must NOT have additional properties; /laws/0/conditions/context/any/0/not must match exactly one schema in oneOf; /laws/0/conditions/context/any/0 must match exactly one schema in oneOf; /laws/0/conditions/context/any/1 must be object; /laws/0/conditions/context/any/1 must be object; /laws/0/conditions/context/any/1 must be object; /laws/0/conditions/context/any/1 must be object; /laws/0/conditions/context/any/1 must be object; /laws/0/conditions/context/any/1 must be object; /laws/0/conditions/context/any/1 must match exactly one schema in oneOf; /laws/0/conditions/context must have required property 'not'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must match exactly one schema in oneOf"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "context-{\"all\":[],\"any\":[],\"not\":{}}",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/conditions/context must have required property 'key'; /laws/0/conditions/context must have required property 'operator'; /laws/0/conditions/context must have required property 'value'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must have required property 'key'; /laws/0/conditions/context must have required property 'operator'; /laws/0/conditions/context must have required property 'values'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must have required property 'key'; /laws/0/conditions/context must have required property 'operator'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context/all must NOT have fewer than 1 items; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context/any must NOT have fewer than 1 items; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context/not must have required property 'key'; /laws/0/conditions/context/not must have required property 'operator'; /laws/0/conditions/context/not must have required property 'value'; /laws/0/conditions/context/not must have required property 'key'; /laws/0/conditions/context/not must have required property 'operator'; /laws/0/conditions/context/not must have required property 'values'; /laws/0/conditions/context/not must have required property 'key'; /laws/0/conditions/context/not must have required property 'operator'; /laws/0/conditions/context/not must have required property 'all'; /laws/0/conditions/context/not must have required property 'any'; /laws/0/conditions/context/not must have required property 'not'; /laws/0/conditions/context/not must match exactly one schema in oneOf; /laws/0/conditions/context must match exactly one schema in oneOf"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/conditions/context must have required property 'key'; /laws/0/conditions/context must have required property 'operator'; /laws/0/conditions/context must have required property 'value'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must have required property 'key'; /laws/0/conditions/context must have required property 'operator'; /laws/0/conditions/context must have required property 'values'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must have required property 'key'; /laws/0/conditions/context must have required property 'operator'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context/all must NOT have fewer than 1 items; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context/any must NOT have fewer than 1 items; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context/not must have required property 'key'; /laws/0/conditions/context/not must have required property 'operator'; /laws/0/conditions/context/not must have required property 'value'; /laws/0/conditions/context/not must have required property 'key'; /laws/0/conditions/context/not must have required property 'operator'; /laws/0/conditions/context/not must have required property 'values'; /laws/0/conditions/context/not must have required property 'key'; /laws/0/conditions/context/not must have required property 'operator'; /laws/0/conditions/context/not must have required property 'all'; /laws/0/conditions/context/not must have required property 'any'; /laws/0/conditions/context/not must have required property 'not'; /laws/0/conditions/context/not must match exactly one schema in oneOf; /laws/0/conditions/context must match exactly one schema in oneOf"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "context-{\"unknownZ\":true,\"unknownA\":false}",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/conditions/context must have required property 'key'; /laws/0/conditions/context must have required property 'operator'; /laws/0/conditions/context must have required property 'value'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must have required property 'key'; /laws/0/conditions/context must have required property 'operator'; /laws/0/conditions/context must have required property 'values'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must have required property 'key'; /laws/0/conditions/context must have required property 'operator'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must have required property 'all'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must have required property 'any'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must have required property 'not'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must match exactly one schema in oneOf"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/conditions/context must have required property 'key'; /laws/0/conditions/context must have required property 'operator'; /laws/0/conditions/context must have required property 'value'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must have required property 'key'; /laws/0/conditions/context must have required property 'operator'; /laws/0/conditions/context must have required property 'values'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must have required property 'key'; /laws/0/conditions/context must have required property 'operator'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must have required property 'all'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must have required property 'any'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must have required property 'not'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must match exactly one schema in oneOf"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "imports-null",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /imports must be array"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /imports must be array"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "imports-false",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /imports must be array"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /imports must be array"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "imports-[]",
+      "expected": {
+        "status": "accepted",
+        "digest": "sha256:d60f794c6523f770924b60b6660b99398b62cd4f83dc91a68eefd1d6a7b89791"
+      },
+      "observed": {
+        "status": "accepted",
+        "digest": "sha256:d60f794c6523f770924b60b6660b99398b62cd4f83dc91a68eefd1d6a7b89791"
+      },
+      "equal": true
+    },
+    {
+      "name": "imports-[{\"id\":\"urn:pack:other\",\"version\":\"1\",\"digest\":\"sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"}]",
+      "expected": {
+        "status": "accepted",
+        "digest": "sha256:30f72f1f7d5ae1fa5597e7105b1fa68952928267490272bee7649cd4b3eeeb11"
+      },
+      "observed": {
+        "status": "accepted",
+        "digest": "sha256:30f72f1f7d5ae1fa5597e7105b1fa68952928267490272bee7649cd4b3eeeb11"
+      },
+      "equal": true
+    },
+    {
+      "name": "imports-[{\"id\":\"urn:pack:other\",\"version\":\"1\",\"digest\":\"sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"},{\"id\":\"urn:pack:other\",\"version\":\"1\",\"digest\":\"sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"}]",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /imports must NOT have duplicate items (items ## 0 and 1 are identical)"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /imports must NOT have duplicate items (items ## 0 and 1 are identical)"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "imports-[{\"id\":null,\"version\":\"\",\"digest\":\"wrong\",\"unknown\":true},{}]",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /imports/0 must NOT have additional properties; /imports/0/id must be string; /imports/0/version must NOT have fewer than 1 characters; /imports/0/digest must match pattern \"^sha256:[a-f0-9]{64}$\"; /imports/1 must have required property 'id'; /imports/1 must have required property 'version'; /imports/1 must have required property 'digest'"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /imports/0 must NOT have additional properties; /imports/0/id must be string; /imports/0/version must NOT have fewer than 1 characters; /imports/0/digest must match pattern \"^sha256:[a-f0-9]{64}$\"; /imports/1 must have required property 'id'; /imports/1 must have required property 'version'; /imports/1 must have required property 'digest'"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "imports-[null,null]",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /imports/0 must be object; /imports/1 must be object; /imports must NOT have duplicate items (items ## 0 and 1 are identical)"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /imports/0 must be object; /imports/1 must be object; /imports must NOT have duplicate items (items ## 0 and 1 are identical)"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "relation-disjointWith-[null,null]",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0/disjointWith/0 must be string; /relations/0/disjointWith/1 must be string"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0/disjointWith/0 must be string; /relations/0/disjointWith/1 must be string"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "relation-disjointWith-[0,0]",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0/disjointWith/0 must be string; /relations/0/disjointWith/1 must be string"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0/disjointWith/0 must be string; /relations/0/disjointWith/1 must be string"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "relation-disjointWith-[\"__proto__\",\"__proto__\"]",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0/disjointWith/0 must match pattern \"^[a-z][a-z0-9._-]*:[a-z][a-z0-9._-]*$\"; /relations/0/disjointWith/1 must match pattern \"^[a-z][a-z0-9._-]*:[a-z][a-z0-9._-]*$\""
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0/disjointWith/0 must match pattern \"^[a-z][a-z0-9._-]*:[a-z][a-z0-9._-]*$\"; /relations/0/disjointWith/1 must match pattern \"^[a-z][a-z0-9._-]*:[a-z][a-z0-9._-]*$\""
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "relation-disjointWith-[\"test:edge\",\"test:edge\"]",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0/disjointWith must NOT have duplicate items (items ## 1 and 0 are identical)"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0/disjointWith must NOT have duplicate items (items ## 1 and 0 are identical)"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "relation-composesWith-[null,null]",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0/composesWith/0 must be string; /relations/0/composesWith/1 must be string"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0/composesWith/0 must be string; /relations/0/composesWith/1 must be string"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "relation-composesWith-[0,0]",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0/composesWith/0 must be string; /relations/0/composesWith/1 must be string"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0/composesWith/0 must be string; /relations/0/composesWith/1 must be string"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "relation-composesWith-[\"__proto__\",\"__proto__\"]",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0/composesWith/0 must match pattern \"^[a-z][a-z0-9._-]*:[a-z][a-z0-9._-]*$\"; /relations/0/composesWith/1 must match pattern \"^[a-z][a-z0-9._-]*:[a-z][a-z0-9._-]*$\""
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0/composesWith/0 must match pattern \"^[a-z][a-z0-9._-]*:[a-z][a-z0-9._-]*$\"; /relations/0/composesWith/1 must match pattern \"^[a-z][a-z0-9._-]*:[a-z][a-z0-9._-]*$\""
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "relation-composesWith-[\"test:edge\",\"test:edge\"]",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0/composesWith must NOT have duplicate items (items ## 1 and 0 are identical)"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0/composesWith must NOT have duplicate items (items ## 1 and 0 are identical)"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "relation-cardinalities-[null,null]",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0/cardinalities/0 must be equal to one of the allowed values; /relations/0/cardinalities/1 must be equal to one of the allowed values; /relations/0/cardinalities must NOT have duplicate items (items ## 0 and 1 are identical)"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0/cardinalities/0 must be equal to one of the allowed values; /relations/0/cardinalities/1 must be equal to one of the allowed values; /relations/0/cardinalities must NOT have duplicate items (items ## 0 and 1 are identical)"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "relation-cardinalities-[0,0]",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0/cardinalities/0 must be equal to one of the allowed values; /relations/0/cardinalities/1 must be equal to one of the allowed values; /relations/0/cardinalities must NOT have duplicate items (items ## 0 and 1 are identical)"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0/cardinalities/0 must be equal to one of the allowed values; /relations/0/cardinalities/1 must be equal to one of the allowed values; /relations/0/cardinalities must NOT have duplicate items (items ## 0 and 1 are identical)"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "relation-cardinalities-[\"__proto__\",\"__proto__\"]",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0/cardinalities/0 must be equal to one of the allowed values; /relations/0/cardinalities/1 must be equal to one of the allowed values; /relations/0/cardinalities must NOT have duplicate items (items ## 0 and 1 are identical)"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0/cardinalities/0 must be equal to one of the allowed values; /relations/0/cardinalities/1 must be equal to one of the allowed values; /relations/0/cardinalities must NOT have duplicate items (items ## 0 and 1 are identical)"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "relation-cardinalities-[\"test:edge\",\"test:edge\"]",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0/cardinalities/0 must be equal to one of the allowed values; /relations/0/cardinalities/1 must be equal to one of the allowed values; /relations/0/cardinalities must NOT have duplicate items (items ## 0 and 1 are identical)"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0/cardinalities/0 must be equal to one of the allowed values; /relations/0/cardinalities/1 must be equal to one of the allowed values; /relations/0/cardinalities must NOT have duplicate items (items ## 0 and 1 are identical)"
+        }
+      },
+      "equal": true
+    }
+  ],
+  "differences": [],
+  "originalCasesClosed": 0,
+  "scope": "Finite executable law/conditional/context/import JSON schema controls, parser identity, valid original digests and exact thrown name/message. No arbitrary JS object, unchecked digest, file or resource-bound equivalence.",
+  "traceDigest": "sha256:9e14bf552b82c78b0010ceb22d8c74091c11390ce5dc2bd30db02e9d50df7c8e",
+  "driverDigest": "sha256:63c2e96fa90f82ed2b934abacbf4090d866cf026b0c1a5c5752b004ea90b05eb"
+}

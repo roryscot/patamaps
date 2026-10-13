@@ -1,0 +1,651 @@
+{
+  "status": "different",
+  "scope": "Exact four previously timed-out immutable cases; diagnostic subset only, no full-corpus acceptance.",
+  "supervision": {
+    "mode": "inherited-live-supervisor",
+    "project": "/Users/admin/dev/patamaps/patamaps",
+    "configurationDigest": "sha256:77505e4ca3960c2df14617ffa5951838a6b84e51d6f8ed715ec60faa3c9e8187",
+    "policy": {
+      "version": 1,
+      "minimumFreeBytes": 0,
+      "reserveFreeBytes": 1000000000,
+      "maximumRunGrowthBytes": 8000000000,
+      "maximumRetainedBytes": 50000000000,
+      "monitorIntervalMs": 2000,
+      "terminationGraceMs": 15000
+    },
+    "availableBytesAtEntry": 5620477952
+  },
+  "driverDigest": "sha256:cee5027134ec871750a4c8499f0f6ac6a730573b4b1f15bc22acc283e1c41e73",
+  "binaryDigest": "sha256:92015d3e68b61209164c2e76e6ce4e12d804296ebc8a9c948a94c3f76dd59424",
+  "engine": {
+    "compiler": "sha256:03f8893280600b383d703092c0574d29c31e0decb169efc9c1e4504b22429a26",
+    "documentType": "executor-description",
+    "governance": "sha256:b800ce2f769304c9e35901cc79e16ddeabdbb3ba4de7f42b343b412429446f41",
+    "schemaVersion": "0.1.0",
+    "scientific": "sha256:cca4930e7605e0fbdecdf43873b8dfd15bb705bdc6ce8270908fab95a57f6593",
+    "workspace": "sha256:19fea4320b1f80d0c0783548514409cbebd6c344c55d36588d71d85367c09c60"
+  },
+  "cases": 4,
+  "matched": 3,
+  "observations": [
+    {
+      "name": "constraint-183",
+      "expected": {
+        "status": "observed",
+        "value": {
+          "status": "rejected",
+          "issues": [
+            {
+              "severity": "error",
+              "code": "REQUIRED_EVIDENCE_MISSING",
+              "message": "urn:example:mapping:prisma-contains-user-email has no supporting evidence meeting urn:test:constraint",
+              "subjectId": "urn:example:mapping:prisma-contains-user-email",
+              "causalPath": [
+                "urn:example:mapping:prisma-contains-user-email"
+              ]
+            }
+          ],
+          "impact": {
+            "changedSubjects": [
+              "urn:example:mapping:prisma-contains-user-email"
+            ],
+            "affectedSubjects": [
+              "urn:example:element:prisma.User.email",
+              "urn:example:element:zod.UserSchema.email",
+              "urn:example:mapping:prisma-contains-user-email",
+              "urn:example:mapping:zod-contains-user-email",
+              "urn:example:mapping:zod-email-derived-from-prisma",
+              "urn:example:structure:prisma-schema",
+              "urn:example:structure:shared-domain-schema"
+            ],
+            "paths": [
+              {
+                "subjectId": "urn:example:element:prisma.User.email",
+                "path": [
+                  "urn:example:mapping:prisma-contains-user-email",
+                  "urn:example:element:prisma.User.email"
+                ]
+              },
+              {
+                "subjectId": "urn:example:element:zod.UserSchema.email",
+                "path": [
+                  "urn:example:mapping:prisma-contains-user-email",
+                  "urn:example:element:prisma.User.email",
+                  "urn:example:mapping:zod-email-derived-from-prisma",
+                  "urn:example:element:zod.UserSchema.email"
+                ]
+              },
+              {
+                "subjectId": "urn:example:mapping:prisma-contains-user-email",
+                "path": [
+                  "urn:example:mapping:prisma-contains-user-email"
+                ]
+              },
+              {
+                "subjectId": "urn:example:mapping:zod-contains-user-email",
+                "path": [
+                  "urn:example:mapping:prisma-contains-user-email",
+                  "urn:example:element:prisma.User.email",
+                  "urn:example:mapping:zod-email-derived-from-prisma",
+                  "urn:example:element:zod.UserSchema.email",
+                  "urn:example:mapping:zod-contains-user-email"
+                ]
+              },
+              {
+                "subjectId": "urn:example:mapping:zod-email-derived-from-prisma",
+                "path": [
+                  "urn:example:mapping:prisma-contains-user-email",
+                  "urn:example:element:prisma.User.email",
+                  "urn:example:mapping:zod-email-derived-from-prisma"
+                ]
+              },
+              {
+                "subjectId": "urn:example:structure:prisma-schema",
+                "path": [
+                  "urn:example:mapping:prisma-contains-user-email",
+                  "urn:example:structure:prisma-schema"
+                ]
+              },
+              {
+                "subjectId": "urn:example:structure:shared-domain-schema",
+                "path": [
+                  "urn:example:mapping:prisma-contains-user-email",
+                  "urn:example:element:prisma.User.email",
+                  "urn:example:mapping:zod-email-derived-from-prisma",
+                  "urn:example:element:zod.UserSchema.email",
+                  "urn:example:mapping:zod-contains-user-email",
+                  "urn:example:structure:shared-domain-schema"
+                ]
+              }
+            ]
+          },
+          "quarantinedSubjects": [
+            "urn:example:element:prisma.User.email",
+            "urn:example:element:zod.UserSchema.email",
+            "urn:example:mapping:prisma-contains-user-email",
+            "urn:example:mapping:zod-contains-user-email",
+            "urn:example:mapping:zod-email-derived-from-prisma",
+            "urn:example:structure:prisma-schema",
+            "urn:example:structure:shared-domain-schema"
+          ]
+        },
+        "host": {
+          "keys": [
+            "status",
+            "issues",
+            "impact",
+            "quarantinedSubjects"
+          ],
+          "issueKeys": [
+            [
+              "severity",
+              "code",
+              "message",
+              "subjectId",
+              "causalPath"
+            ]
+          ]
+        }
+      },
+      "observed": {
+        "status": "observed",
+        "value": {
+          "status": "rejected",
+          "issues": [
+            {
+              "severity": "error",
+              "code": "REQUIRED_EVIDENCE_MISSING",
+              "message": "urn:example:mapping:prisma-contains-user-email has no supporting evidence meeting urn:test:constraint",
+              "subjectId": "urn:example:mapping:prisma-contains-user-email",
+              "causalPath": [
+                "urn:example:mapping:prisma-contains-user-email"
+              ]
+            }
+          ],
+          "impact": {
+            "changedSubjects": [
+              "urn:example:mapping:prisma-contains-user-email"
+            ],
+            "affectedSubjects": [
+              "urn:example:element:prisma.User.email",
+              "urn:example:element:zod.UserSchema.email",
+              "urn:example:mapping:prisma-contains-user-email",
+              "urn:example:mapping:zod-contains-user-email",
+              "urn:example:mapping:zod-email-derived-from-prisma",
+              "urn:example:structure:prisma-schema",
+              "urn:example:structure:shared-domain-schema"
+            ],
+            "paths": [
+              {
+                "subjectId": "urn:example:element:prisma.User.email",
+                "path": [
+                  "urn:example:mapping:prisma-contains-user-email",
+                  "urn:example:element:prisma.User.email"
+                ]
+              },
+              {
+                "subjectId": "urn:example:element:zod.UserSchema.email",
+                "path": [
+                  "urn:example:mapping:prisma-contains-user-email",
+                  "urn:example:element:prisma.User.email",
+                  "urn:example:mapping:zod-email-derived-from-prisma",
+                  "urn:example:element:zod.UserSchema.email"
+                ]
+              },
+              {
+                "subjectId": "urn:example:mapping:prisma-contains-user-email",
+                "path": [
+                  "urn:example:mapping:prisma-contains-user-email"
+                ]
+              },
+              {
+                "subjectId": "urn:example:mapping:zod-contains-user-email",
+                "path": [
+                  "urn:example:mapping:prisma-contains-user-email",
+                  "urn:example:element:prisma.User.email",
+                  "urn:example:mapping:zod-email-derived-from-prisma",
+                  "urn:example:element:zod.UserSchema.email",
+                  "urn:example:mapping:zod-contains-user-email"
+                ]
+              },
+              {
+                "subjectId": "urn:example:mapping:zod-email-derived-from-prisma",
+                "path": [
+                  "urn:example:mapping:prisma-contains-user-email",
+                  "urn:example:element:prisma.User.email",
+                  "urn:example:mapping:zod-email-derived-from-prisma"
+                ]
+              },
+              {
+                "subjectId": "urn:example:structure:prisma-schema",
+                "path": [
+                  "urn:example:mapping:prisma-contains-user-email",
+                  "urn:example:structure:prisma-schema"
+                ]
+              },
+              {
+                "subjectId": "urn:example:structure:shared-domain-schema",
+                "path": [
+                  "urn:example:mapping:prisma-contains-user-email",
+                  "urn:example:element:prisma.User.email",
+                  "urn:example:mapping:zod-email-derived-from-prisma",
+                  "urn:example:element:zod.UserSchema.email",
+                  "urn:example:mapping:zod-contains-user-email",
+                  "urn:example:structure:shared-domain-schema"
+                ]
+              }
+            ]
+          },
+          "quarantinedSubjects": [
+            "urn:example:element:prisma.User.email",
+            "urn:example:element:zod.UserSchema.email",
+            "urn:example:mapping:prisma-contains-user-email",
+            "urn:example:mapping:zod-contains-user-email",
+            "urn:example:mapping:zod-email-derived-from-prisma",
+            "urn:example:structure:prisma-schema",
+            "urn:example:structure:shared-domain-schema"
+          ]
+        },
+        "host": {
+          "keys": [
+            "status",
+            "issues",
+            "impact",
+            "quarantinedSubjects"
+          ],
+          "issueKeys": [
+            [
+              "severity",
+              "code",
+              "message",
+              "subjectId",
+              "causalPath"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "name": "constraint-205",
+      "expected": {
+        "status": "observed",
+        "value": {
+          "status": "rejected",
+          "issues": [
+            {
+              "severity": "error",
+              "code": "INVALID_CONSTRAINT_PARAMETERS",
+              "message": "urn:test:constraint has unsupported parameter(s): z, a",
+              "subjectId": "urn:test:constraint",
+              "causalPath": [
+                "urn:test:constraint"
+              ]
+            }
+          ],
+          "impact": {
+            "changedSubjects": [
+              "urn:test:constraint"
+            ],
+            "affectedSubjects": [
+              "urn:example:mapping:prisma-contains-user-email",
+              "urn:test:constraint"
+            ],
+            "paths": [
+              {
+                "subjectId": "urn:example:mapping:prisma-contains-user-email",
+                "path": [
+                  "urn:test:constraint",
+                  "urn:example:mapping:prisma-contains-user-email"
+                ]
+              },
+              {
+                "subjectId": "urn:test:constraint",
+                "path": [
+                  "urn:test:constraint"
+                ]
+              }
+            ]
+          },
+          "quarantinedSubjects": [
+            "urn:example:mapping:prisma-contains-user-email",
+            "urn:test:constraint"
+          ]
+        },
+        "host": {
+          "keys": [
+            "status",
+            "issues",
+            "impact",
+            "quarantinedSubjects"
+          ],
+          "issueKeys": [
+            [
+              "severity",
+              "code",
+              "message",
+              "subjectId",
+              "causalPath"
+            ]
+          ]
+        }
+      },
+      "observed": {
+        "status": "observed",
+        "value": {
+          "status": "rejected",
+          "issues": [
+            {
+              "severity": "error",
+              "code": "INVALID_CONSTRAINT_PARAMETERS",
+              "message": "urn:test:constraint has unsupported parameter(s): z, a",
+              "subjectId": "urn:test:constraint",
+              "causalPath": [
+                "urn:test:constraint"
+              ]
+            }
+          ],
+          "impact": {
+            "changedSubjects": [
+              "urn:test:constraint"
+            ],
+            "affectedSubjects": [
+              "urn:example:mapping:prisma-contains-user-email",
+              "urn:test:constraint"
+            ],
+            "paths": [
+              {
+                "subjectId": "urn:example:mapping:prisma-contains-user-email",
+                "path": [
+                  "urn:test:constraint",
+                  "urn:example:mapping:prisma-contains-user-email"
+                ]
+              },
+              {
+                "subjectId": "urn:test:constraint",
+                "path": [
+                  "urn:test:constraint"
+                ]
+              }
+            ]
+          },
+          "quarantinedSubjects": [
+            "urn:example:mapping:prisma-contains-user-email",
+            "urn:test:constraint"
+          ]
+        },
+        "host": {
+          "keys": [
+            "status",
+            "issues",
+            "impact",
+            "quarantinedSubjects"
+          ],
+          "issueKeys": [
+            [
+              "severity",
+              "code",
+              "message",
+              "subjectId",
+              "causalPath"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "name": "constraint-225",
+      "expected": {
+        "status": "observed",
+        "value": {
+          "status": "rejected",
+          "issues": [
+            {
+              "severity": "error",
+              "code": "REQUIRED_AUTHORITY_UNRESOLVED",
+              "message": "urn:example:mapping:prisma-contains-user-email has unresolved authority for type",
+              "subjectId": "urn:example:mapping:prisma-contains-user-email",
+              "causalPath": [
+                "urn:example:mapping:prisma-contains-user-email"
+              ]
+            }
+          ],
+          "impact": {
+            "changedSubjects": [
+              "urn:example:mapping:prisma-contains-user-email"
+            ],
+            "affectedSubjects": [
+              "urn:example:element:prisma.User.email",
+              "urn:example:element:zod.UserSchema.email",
+              "urn:example:mapping:prisma-contains-user-email",
+              "urn:example:mapping:zod-contains-user-email",
+              "urn:example:mapping:zod-email-derived-from-prisma",
+              "urn:example:structure:prisma-schema",
+              "urn:example:structure:shared-domain-schema"
+            ],
+            "paths": [
+              {
+                "subjectId": "urn:example:element:prisma.User.email",
+                "path": [
+                  "urn:example:mapping:prisma-contains-user-email",
+                  "urn:example:element:prisma.User.email"
+                ]
+              },
+              {
+                "subjectId": "urn:example:element:zod.UserSchema.email",
+                "path": [
+                  "urn:example:mapping:prisma-contains-user-email",
+                  "urn:example:element:prisma.User.email",
+                  "urn:example:mapping:zod-email-derived-from-prisma",
+                  "urn:example:element:zod.UserSchema.email"
+                ]
+              },
+              {
+                "subjectId": "urn:example:mapping:prisma-contains-user-email",
+                "path": [
+                  "urn:example:mapping:prisma-contains-user-email"
+                ]
+              },
+              {
+                "subjectId": "urn:example:mapping:zod-contains-user-email",
+                "path": [
+                  "urn:example:mapping:prisma-contains-user-email",
+                  "urn:example:element:prisma.User.email",
+                  "urn:example:mapping:zod-email-derived-from-prisma",
+                  "urn:example:element:zod.UserSchema.email",
+                  "urn:example:mapping:zod-contains-user-email"
+                ]
+              },
+              {
+                "subjectId": "urn:example:mapping:zod-email-derived-from-prisma",
+                "path": [
+                  "urn:example:mapping:prisma-contains-user-email",
+                  "urn:example:element:prisma.User.email",
+                  "urn:example:mapping:zod-email-derived-from-prisma"
+                ]
+              },
+              {
+                "subjectId": "urn:example:structure:prisma-schema",
+                "path": [
+                  "urn:example:mapping:prisma-contains-user-email",
+                  "urn:example:structure:prisma-schema"
+                ]
+              },
+              {
+                "subjectId": "urn:example:structure:shared-domain-schema",
+                "path": [
+                  "urn:example:mapping:prisma-contains-user-email",
+                  "urn:example:element:prisma.User.email",
+                  "urn:example:mapping:zod-email-derived-from-prisma",
+                  "urn:example:element:zod.UserSchema.email",
+                  "urn:example:mapping:zod-contains-user-email",
+                  "urn:example:structure:shared-domain-schema"
+                ]
+              }
+            ]
+          },
+          "quarantinedSubjects": [
+            "urn:example:element:prisma.User.email",
+            "urn:example:element:zod.UserSchema.email",
+            "urn:example:mapping:prisma-contains-user-email",
+            "urn:example:mapping:zod-contains-user-email",
+            "urn:example:mapping:zod-email-derived-from-prisma",
+            "urn:example:structure:prisma-schema",
+            "urn:example:structure:shared-domain-schema"
+          ]
+        },
+        "host": {
+          "keys": [
+            "status",
+            "issues",
+            "impact",
+            "quarantinedSubjects"
+          ],
+          "issueKeys": [
+            [
+              "severity",
+              "code",
+              "message",
+              "subjectId",
+              "causalPath"
+            ]
+          ]
+        }
+      },
+      "observed": {
+        "status": "threw",
+        "error": {
+          "name": "Error",
+          "message": "spawnSync /Users/admin/dev/patamaps/patamaps/target/debug/patamaps ETIMEDOUT"
+        }
+      }
+    },
+    {
+      "name": "constraint-239",
+      "expected": {
+        "status": "observed",
+        "value": {
+          "status": "rejected",
+          "issues": [
+            {
+              "severity": "error",
+              "code": "INVALID_CONSTRAINT_PARAMETERS",
+              "message": "urn:test:constraint requires subjectKinds, a relation, source|target direction, and a supported cardinality",
+              "subjectId": "urn:test:constraint",
+              "causalPath": [
+                "urn:test:constraint"
+              ]
+            }
+          ],
+          "impact": {
+            "changedSubjects": [
+              "urn:test:constraint"
+            ],
+            "affectedSubjects": [
+              "urn:example:mapping:prisma-contains-user-email",
+              "urn:test:constraint"
+            ],
+            "paths": [
+              {
+                "subjectId": "urn:example:mapping:prisma-contains-user-email",
+                "path": [
+                  "urn:test:constraint",
+                  "urn:example:mapping:prisma-contains-user-email"
+                ]
+              },
+              {
+                "subjectId": "urn:test:constraint",
+                "path": [
+                  "urn:test:constraint"
+                ]
+              }
+            ]
+          },
+          "quarantinedSubjects": [
+            "urn:example:mapping:prisma-contains-user-email",
+            "urn:test:constraint"
+          ]
+        },
+        "host": {
+          "keys": [
+            "status",
+            "issues",
+            "impact",
+            "quarantinedSubjects"
+          ],
+          "issueKeys": [
+            [
+              "severity",
+              "code",
+              "message",
+              "subjectId",
+              "causalPath"
+            ]
+          ]
+        }
+      },
+      "observed": {
+        "status": "observed",
+        "value": {
+          "status": "rejected",
+          "issues": [
+            {
+              "severity": "error",
+              "code": "INVALID_CONSTRAINT_PARAMETERS",
+              "message": "urn:test:constraint requires subjectKinds, a relation, source|target direction, and a supported cardinality",
+              "subjectId": "urn:test:constraint",
+              "causalPath": [
+                "urn:test:constraint"
+              ]
+            }
+          ],
+          "impact": {
+            "changedSubjects": [
+              "urn:test:constraint"
+            ],
+            "affectedSubjects": [
+              "urn:example:mapping:prisma-contains-user-email",
+              "urn:test:constraint"
+            ],
+            "paths": [
+              {
+                "subjectId": "urn:example:mapping:prisma-contains-user-email",
+                "path": [
+                  "urn:test:constraint",
+                  "urn:example:mapping:prisma-contains-user-email"
+                ]
+              },
+              {
+                "subjectId": "urn:test:constraint",
+                "path": [
+                  "urn:test:constraint"
+                ]
+              }
+            ]
+          },
+          "quarantinedSubjects": [
+            "urn:example:mapping:prisma-contains-user-email",
+            "urn:test:constraint"
+          ]
+        },
+        "host": {
+          "keys": [
+            "status",
+            "issues",
+            "impact",
+            "quarantinedSubjects"
+          ],
+          "issueKeys": [
+            [
+              "severity",
+              "code",
+              "message",
+              "subjectId",
+              "causalPath"
+            ]
+          ]
+        }
+      }
+    }
+  ]
+}

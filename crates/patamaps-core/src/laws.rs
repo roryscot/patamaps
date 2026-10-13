@@ -58,6 +58,15 @@ fn unconditional(law: &RelationLaw) -> bool {
 pub(crate) fn validate(
     packs: &[RelationPack],
 ) -> Result<HashMap<String, (usize, usize)>, CheckError> {
+    validate_with_digests(packs, |index| Ok(canonical_digest(&packs[index])?))
+}
+
+/// Legacy imports use their preserved original document addresses. The law
+/// policy and dependency checks are shared with modern native registration.
+pub(crate) fn validate_with_digests(
+    packs: &[RelationPack],
+    digest: impl Fn(usize) -> Result<String, CheckError>,
+) -> Result<HashMap<String, (usize, usize)>, CheckError> {
     preflight(packs)?;
     let by_id: HashMap<_, _> = packs
         .iter()
@@ -98,7 +107,7 @@ pub(crate) fn validate(
                 ));
                 continue;
             };
-            if i.version != packs[dep].version || i.digest != canonical_digest(&packs[dep])? {
+            if i.version != packs[dep].version || i.digest != digest(dep)? {
                 issues.push(Issue::error(
                     "PACK_IMPORT_BINDING_MISMATCH",
                     "Imported version/digest differs from exact supplied bytes",

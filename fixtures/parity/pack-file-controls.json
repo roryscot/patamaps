@@ -1,0 +1,399 @@
+{
+  "schemaVersion": "1.0.0",
+  "referenceEngine": "399747a4ad05a37cd8db1cedd53048fad2175be4",
+  "sourceFiles": [
+    {
+      "path": "src/relation-pack.ts",
+      "digest": "sha256:b035eb01f6af1d9d34547abaa0139f07492ef801c72987bcae42245935f3d9b7"
+    },
+    {
+      "path": "src/canonical.ts",
+      "digest": "sha256:06994bd6e52c332ef52e37dd92408372adc51a593067a1b03ba0108bf1adf7ce"
+    },
+    {
+      "path": "src/stable.ts",
+      "digest": "sha256:5e0800fab53ac01f4e8506ca4d85b8a0a25ee74c1e79392cb69c11431633f270"
+    },
+    {
+      "path": "schemas/relation-pack.schema.json",
+      "digest": "sha256:bfac8a6fa108eb430aec628ec6952b8123468daba0178b801f7f7c1ac3e4e135"
+    },
+    {
+      "path": "schemas/relation-pack-v2.schema.json",
+      "digest": "sha256:3923a94dc77e608b73534d1c31844d4bfa823fb75708d961e6d9b97e67ae41fc"
+    }
+  ],
+  "host": {
+    "platform": "darwin",
+    "architecture": "arm64",
+    "node": "v22.16.0"
+  },
+  "scope": "Finite Node 22/macOS file-load data/digests and thrown name/message/code/path/errno/syscall. Retained fixture paths and bytes are immutable. Runtime stack locations and added native report metadata are outside this component comparison; the full JS/loader/platform/resource contract remains open.",
+  "cases": [
+    {
+      "name": "portable.json",
+      "path": "/Users/admin/dev/patamaps/patamaps/.tools/parity/pack-file-controls/2026-10-12T17-46-39.174Z/portable.json",
+      "sourcePath": "/Users/admin/dev/patamaps/patamaps/.tools/parity/pack-file-controls/2026-10-12T17-46-39.174Z/portable.json",
+      "fixtureKind": "file",
+      "sourceDigest": "sha256:09fd6f545be0eaa47c59b3317f78c0b449ab92b041eaa1da6b12cb4e8079f6c6",
+      "expected": {
+        "status": "accepted",
+        "document": {
+          "schemaVersion": "1.0.0",
+          "id": "urn:pack:control",
+          "version": "1",
+          "relations": [
+            {
+              "id": "test:edge",
+              "cyclePolicy": "allow"
+            }
+          ]
+        },
+        "digest": "sha256:a85ecb34fc86fb1cf624a468014e200ba22d49e9d3a4898cd08cfbf0d24bba13"
+      }
+    },
+    {
+      "name": "executable.json",
+      "path": "/Users/admin/dev/patamaps/patamaps/.tools/parity/pack-file-controls/2026-10-12T17-46-39.174Z/executable.json",
+      "sourcePath": "/Users/admin/dev/patamaps/patamaps/.tools/parity/pack-file-controls/2026-10-12T17-46-39.174Z/executable.json",
+      "fixtureKind": "file",
+      "sourceDigest": "sha256:fe2a4c61f822c18a819002d1d58a508bec08d48c557da817e8c667cf0da83d35",
+      "expected": {
+        "status": "accepted",
+        "document": {
+          "schemaVersion": "2.0.0",
+          "id": "urn:pack:control",
+          "version": "1",
+          "relations": [
+            {
+              "id": "test:edge",
+              "cyclePolicy": "allow"
+            }
+          ],
+          "laws": []
+        },
+        "digest": "sha256:1cfff3c53210da1cf3670284cfe91a00246b02c73ede11b36852d0537e4f779b"
+      }
+    },
+    {
+      "name": "portable-unpaired.json",
+      "path": "/Users/admin/dev/patamaps/patamaps/.tools/parity/pack-file-controls/2026-10-12T17-46-39.174Z/portable-unpaired.json",
+      "sourcePath": "/Users/admin/dev/patamaps/patamaps/.tools/parity/pack-file-controls/2026-10-12T17-46-39.174Z/portable-unpaired.json",
+      "fixtureKind": "file",
+      "sourceDigest": "sha256:fa115b156681f2f692ffa0fa5ccd2e0801853d64acbad275de7ef1852c73b80b",
+      "expected": {
+        "status": "accepted",
+        "document": {
+          "schemaVersion": "1.0.0",
+          "id": "urn:pack:control",
+          "version": "1",
+          "relations": [
+            {
+              "id": "test:edge",
+              "cyclePolicy": "allow"
+            }
+          ],
+          "description": "\ud800"
+        },
+        "digest": "sha256:2b32419f767e2cd39067e8f0ef92c7a68515750d0ec442d62da61a4ef886dee2"
+      }
+    },
+    {
+      "name": "executable-unpaired.json",
+      "path": "/Users/admin/dev/patamaps/patamaps/.tools/parity/pack-file-controls/2026-10-12T17-46-39.174Z/executable-unpaired.json",
+      "sourcePath": "/Users/admin/dev/patamaps/patamaps/.tools/parity/pack-file-controls/2026-10-12T17-46-39.174Z/executable-unpaired.json",
+      "fixtureKind": "file",
+      "sourceDigest": "sha256:b6dc75329b735d867ef076ee20831cd13ac5e28ded941a4a04ab953d55cbe86c",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "CanonicalJsonError",
+          "message": "Unpaired high surrogate",
+          "code": "INVALID_JSON_UNICODE"
+        }
+      }
+    },
+    {
+      "name": "empty.json",
+      "path": "/Users/admin/dev/patamaps/patamaps/.tools/parity/pack-file-controls/2026-10-12T17-46-39.174Z/empty.json",
+      "sourcePath": "/Users/admin/dev/patamaps/patamaps/.tools/parity/pack-file-controls/2026-10-12T17-46-39.174Z/empty.json",
+      "fixtureKind": "file",
+      "sourceDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "SyntaxError",
+          "message": "Unexpected end of JSON input"
+        }
+      }
+    },
+    {
+      "name": "whitespace.json",
+      "path": "/Users/admin/dev/patamaps/patamaps/.tools/parity/pack-file-controls/2026-10-12T17-46-39.174Z/whitespace.json",
+      "sourcePath": "/Users/admin/dev/patamaps/patamaps/.tools/parity/pack-file-controls/2026-10-12T17-46-39.174Z/whitespace.json",
+      "fixtureKind": "file",
+      "sourceDigest": "sha256:6e1fc4ba122ef0a03d00de4e34a3b87b28f4aeadfbe3e51562fe6bc7dd23a4c6",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "SyntaxError",
+          "message": "Unexpected end of JSON input"
+        }
+      }
+    },
+    {
+      "name": "truncated-object.json",
+      "path": "/Users/admin/dev/patamaps/patamaps/.tools/parity/pack-file-controls/2026-10-12T17-46-39.174Z/truncated-object.json",
+      "sourcePath": "/Users/admin/dev/patamaps/patamaps/.tools/parity/pack-file-controls/2026-10-12T17-46-39.174Z/truncated-object.json",
+      "fixtureKind": "file",
+      "sourceDigest": "sha256:021fb596db81e6d02bf3d2586ee3981fe519f275c0ac9ca76bbcf2ebb4097d96",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "SyntaxError",
+          "message": "Expected property name or '}' in JSON at position 1 (line 1 column 2)"
+        }
+      }
+    },
+    {
+      "name": "truncated-pack.json",
+      "path": "/Users/admin/dev/patamaps/patamaps/.tools/parity/pack-file-controls/2026-10-12T17-46-39.174Z/truncated-pack.json",
+      "sourcePath": "/Users/admin/dev/patamaps/patamaps/.tools/parity/pack-file-controls/2026-10-12T17-46-39.174Z/truncated-pack.json",
+      "fixtureKind": "file",
+      "sourceDigest": "sha256:c9d9f1646052df30df13ac606d5eabbe1c18497a7021ac2a60a5150fe27f48be",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "SyntaxError",
+          "message": "Expected double-quoted property name in JSON at position 25 (line 1 column 26)"
+        }
+      }
+    },
+    {
+      "name": "trailing-comma.json",
+      "path": "/Users/admin/dev/patamaps/patamaps/.tools/parity/pack-file-controls/2026-10-12T17-46-39.174Z/trailing-comma.json",
+      "sourcePath": "/Users/admin/dev/patamaps/patamaps/.tools/parity/pack-file-controls/2026-10-12T17-46-39.174Z/trailing-comma.json",
+      "fixtureKind": "file",
+      "sourceDigest": "sha256:5ca7c451eadab8522fe13f45d1bb7813d1713fe7881206f8d89b0940330108c2",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "SyntaxError",
+          "message": "Expected double-quoted property name in JSON at position 118 (line 1 column 119)"
+        }
+      }
+    },
+    {
+      "name": "missing-colon.json",
+      "path": "/Users/admin/dev/patamaps/patamaps/.tools/parity/pack-file-controls/2026-10-12T17-46-39.174Z/missing-colon.json",
+      "sourcePath": "/Users/admin/dev/patamaps/patamaps/.tools/parity/pack-file-controls/2026-10-12T17-46-39.174Z/missing-colon.json",
+      "fixtureKind": "file",
+      "sourceDigest": "sha256:b05dce264e9f61af8c5d114aacbfa3801066d5800053f25be3c01adab070e81c",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "SyntaxError",
+          "message": "Expected ':' after property name in JSON at position 17 (line 1 column 18)"
+        }
+      }
+    },
+    {
+      "name": "bad-literal.json",
+      "path": "/Users/admin/dev/patamaps/patamaps/.tools/parity/pack-file-controls/2026-10-12T17-46-39.174Z/bad-literal.json",
+      "sourcePath": "/Users/admin/dev/patamaps/patamaps/.tools/parity/pack-file-controls/2026-10-12T17-46-39.174Z/bad-literal.json",
+      "fixtureKind": "file",
+      "sourceDigest": "sha256:a8068ca1f6b7fc0a1e66b9edd707836e4d63d9a648d511ed6c70753f094bd5a1",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "SyntaxError",
+          "message": "Expected ',' or '}' after property value in JSON at position 34 (line 1 column 35)"
+        }
+      }
+    },
+    {
+      "name": "bom.json",
+      "path": "/Users/admin/dev/patamaps/patamaps/.tools/parity/pack-file-controls/2026-10-12T17-46-39.174Z/bom.json",
+      "sourcePath": "/Users/admin/dev/patamaps/patamaps/.tools/parity/pack-file-controls/2026-10-12T17-46-39.174Z/bom.json",
+      "fixtureKind": "file",
+      "sourceDigest": "sha256:103c0a6bad156e1991e35aafdfe783fc261ba430e6dd50243a285694eca0ac69",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "SyntaxError",
+          "message": "Unexpected token '﻿', \"﻿{\"schemaV\"... is not valid JSON"
+        }
+      }
+    },
+    {
+      "name": "null.json",
+      "path": "/Users/admin/dev/patamaps/patamaps/.tools/parity/pack-file-controls/2026-10-12T17-46-39.174Z/null.json",
+      "sourcePath": "/Users/admin/dev/patamaps/patamaps/.tools/parity/pack-file-controls/2026-10-12T17-46-39.174Z/null.json",
+      "fixtureKind": "file",
+      "sourceDigest": "sha256:74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: $ must be object"
+        }
+      }
+    },
+    {
+      "name": "undefined.json",
+      "path": "/Users/admin/dev/patamaps/patamaps/.tools/parity/pack-file-controls/2026-10-12T17-46-39.174Z/undefined.json",
+      "sourcePath": "/Users/admin/dev/patamaps/patamaps/.tools/parity/pack-file-controls/2026-10-12T17-46-39.174Z/undefined.json",
+      "fixtureKind": "file",
+      "sourceDigest": "sha256:eb045d78d273107348b0300c01d29b7552d622abbc6faf81b3ec55359aa9950c",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "SyntaxError",
+          "message": "\"undefined\" is not valid JSON"
+        }
+      }
+    },
+    {
+      "name": "extra-value.json",
+      "path": "/Users/admin/dev/patamaps/patamaps/.tools/parity/pack-file-controls/2026-10-12T17-46-39.174Z/extra-value.json",
+      "sourcePath": "/Users/admin/dev/patamaps/patamaps/.tools/parity/pack-file-controls/2026-10-12T17-46-39.174Z/extra-value.json",
+      "fixtureKind": "file",
+      "sourceDigest": "sha256:59068602a198cd62673d067f28c0187f0f147cc22b3322656e8f98218939bb64",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "SyntaxError",
+          "message": "Unexpected non-whitespace character after JSON at position 119 (line 1 column 120)"
+        }
+      }
+    },
+    {
+      "name": "portable-duplicates.json",
+      "path": "/Users/admin/dev/patamaps/patamaps/.tools/parity/pack-file-controls/2026-10-12T17-46-39.174Z/portable-duplicates.json",
+      "sourcePath": "/Users/admin/dev/patamaps/patamaps/.tools/parity/pack-file-controls/2026-10-12T17-46-39.174Z/portable-duplicates.json",
+      "fixtureKind": "file",
+      "sourceDigest": "sha256:a25cd5f66c512f716a64e4ae5b20ee91b38484ae86fa85cedb4710fa09ac6ddb",
+      "expected": {
+        "status": "accepted",
+        "document": {
+          "schemaVersion": "1.0.0",
+          "id": "urn:pack:control",
+          "version": "1",
+          "relations": [
+            {
+              "id": "test:edge",
+              "cyclePolicy": "allow"
+            }
+          ]
+        },
+        "digest": "sha256:a85ecb34fc86fb1cf624a468014e200ba22d49e9d3a4898cd08cfbf0d24bba13"
+      }
+    },
+    {
+      "name": "executable-duplicates.json",
+      "path": "/Users/admin/dev/patamaps/patamaps/.tools/parity/pack-file-controls/2026-10-12T17-46-39.174Z/executable-duplicates.json",
+      "sourcePath": "/Users/admin/dev/patamaps/patamaps/.tools/parity/pack-file-controls/2026-10-12T17-46-39.174Z/executable-duplicates.json",
+      "fixtureKind": "file",
+      "sourceDigest": "sha256:5529d86b90a97b1c93b551536a71e30e41eb12f1485b4da87a0574ac76891dc7",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "CanonicalJsonError",
+          "message": "Duplicate JSON property \"version\"",
+          "code": "DUPLICATE_JSON_KEY"
+        }
+      }
+    },
+    {
+      "name": "replacement.json",
+      "path": "/Users/admin/dev/patamaps/patamaps/.tools/parity/pack-file-controls/2026-10-12T17-46-39.174Z/replacement.json",
+      "sourcePath": "/Users/admin/dev/patamaps/patamaps/.tools/parity/pack-file-controls/2026-10-12T17-46-39.174Z/replacement.json",
+      "fixtureKind": "file",
+      "sourceDigest": "sha256:b85322a7d11af123570792a3b9860b7ebe82cb840fca7e6e593b92e1e5f048b0",
+      "expected": {
+        "status": "accepted",
+        "document": {
+          "schemaVersion": "1.0.0",
+          "id": "urn:pack:control",
+          "version": "1",
+          "relations": [
+            {
+              "id": "test:edge",
+              "cyclePolicy": "allow"
+            }
+          ],
+          "description": "�"
+        },
+        "digest": "sha256:1a1d7ab15669280951fbebe6b30e452c4332467c7b38652a781dc58e0583442f"
+      }
+    },
+    {
+      "name": "missing.json",
+      "path": "/Users/admin/dev/patamaps/patamaps/.tools/parity/pack-file-controls/2026-10-12T17-46-39.174Z/missing.json",
+      "sourcePath": "/Users/admin/dev/patamaps/patamaps/.tools/parity/pack-file-controls/2026-10-12T17-46-39.174Z/missing.json",
+      "fixtureKind": "missing",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "ENOENT: no such file or directory, open '/Users/admin/dev/patamaps/patamaps/.tools/parity/pack-file-controls/2026-10-12T17-46-39.174Z/missing.json'",
+          "code": "ENOENT",
+          "path": "/Users/admin/dev/patamaps/patamaps/.tools/parity/pack-file-controls/2026-10-12T17-46-39.174Z/missing.json",
+          "errno": -2,
+          "syscall": "open"
+        }
+      }
+    },
+    {
+      "name": "directory",
+      "path": "/Users/admin/dev/patamaps/patamaps/.tools/parity/pack-file-controls/2026-10-12T17-46-39.174Z/directory",
+      "sourcePath": "/Users/admin/dev/patamaps/patamaps/.tools/parity/pack-file-controls/2026-10-12T17-46-39.174Z/directory",
+      "fixtureKind": "directory",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "EISDIR: illegal operation on a directory, read",
+          "code": "EISDIR",
+          "errno": -21,
+          "syscall": "read"
+        }
+      }
+    },
+    {
+      "name": "not-directory",
+      "path": "/Users/admin/dev/patamaps/patamaps/.tools/parity/pack-file-controls/2026-10-12T17-46-39.174Z/not-directory/pack.json",
+      "sourcePath": "/Users/admin/dev/patamaps/patamaps/.tools/parity/pack-file-controls/2026-10-12T17-46-39.174Z/not-directory",
+      "fixtureKind": "not-directory",
+      "sourceDigest": "sha256:d8d43d525d1bed49352799a892bc413a8183d459cfe95eccf3d32ea7a14af475",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "ENOTDIR: not a directory, open '/Users/admin/dev/patamaps/patamaps/.tools/parity/pack-file-controls/2026-10-12T17-46-39.174Z/not-directory/pack.json'",
+          "code": "ENOTDIR",
+          "path": "/Users/admin/dev/patamaps/patamaps/.tools/parity/pack-file-controls/2026-10-12T17-46-39.174Z/not-directory/pack.json",
+          "errno": -20,
+          "syscall": "open"
+        }
+      }
+    },
+    {
+      "name": "loop.json",
+      "path": "/Users/admin/dev/patamaps/patamaps/.tools/parity/pack-file-controls/2026-10-12T17-46-39.174Z/loop.json",
+      "sourcePath": "/Users/admin/dev/patamaps/patamaps/.tools/parity/pack-file-controls/2026-10-12T17-46-39.174Z/loop.json",
+      "fixtureKind": "loop",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "ELOOP: too many symbolic links encountered, open '/Users/admin/dev/patamaps/patamaps/.tools/parity/pack-file-controls/2026-10-12T17-46-39.174Z/loop.json'",
+          "code": "ELOOP",
+          "path": "/Users/admin/dev/patamaps/patamaps/.tools/parity/pack-file-controls/2026-10-12T17-46-39.174Z/loop.json",
+          "errno": -62,
+          "syscall": "open"
+        }
+      }
+    }
+  ]
+}

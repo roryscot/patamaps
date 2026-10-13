@@ -90,6 +90,7 @@ fn candidate() -> GovernedCandidate {
     }];
     let c = capture(
         CaptureInputs {
+            projection_specs: vec![],
             graph,
             packs: vec![parse(include_bytes!("../../../relation-packs/routing.json")).unwrap()],
             policy,
@@ -116,6 +117,47 @@ fn candidate() -> GovernedCandidate {
             },
         ],
     }
+}
+
+#[test]
+fn collection_artifacts_include_every_specification_and_refused_or_wrong_consumers_cannot_prepare()
+{
+    let mut candidate = candidate();
+    let previous = candidate.captures.remove(0);
+    let mut input = previous.inputs;
+    let spec = input.projection_spec.take().unwrap();
+    let mut second = spec.clone();
+    second.id = "urn:spec:collection-second".into();
+    input.projection_specs = vec![second, spec];
+    candidate
+        .captures
+        .push(capture(input.clone(), previous.sources.clone()).unwrap());
+    let prepared = prepare_candidate_artifacts(&candidate, CONSUMER, ENVIRONMENT).unwrap();
+    for path in [
+        "projection-0-0.json",
+        "projection-0-1.json",
+        "path-tree-0-0.json",
+        "path-tree-0-1.json",
+    ] {
+        assert!(
+            prepared.files().contains_key(path),
+            "Missing collection artifact {path}"
+        );
+        assert!(
+            prepared
+                .manifest()
+                .files
+                .iter()
+                .any(|file| file.path == path)
+        );
+    }
+    input.projection_specs[0].consumer = Some("urn:consumer:other".into());
+    candidate.captures[0] = capture(input.clone(), previous.sources.clone()).unwrap();
+    assert!(prepare_candidate_artifacts(&candidate, CONSUMER, ENVIRONMENT).is_err());
+    input.projection_specs[0].consumer = Some(CONSUMER.into());
+    input.projection_specs[0].slots[0].target_kinds = Some(vec!["unavailable-kind".into()]);
+    candidate.captures[0] = capture(input, previous.sources).unwrap();
+    assert!(prepare_candidate_artifacts(&candidate, CONSUMER, ENVIRONMENT).is_err());
 }
 fn recapture(candidate: &mut GovernedCandidate) {
     for c in &mut candidate.captures {

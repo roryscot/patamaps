@@ -1,0 +1,19 @@
+   Compiling patamaps-contracts v0.1.0 (/Users/admin/dev/patamaps/patamaps/crates/patamaps-contracts)
+   Compiling patamaps-core v0.1.0 (/Users/admin/dev/patamaps/patamaps/crates/patamaps-core)
+error: lifetime may not live long enough
+   --> crates/patamaps-core/src/legacy_correspondence.rs:309:9
+    |
+303 |     fn resolve(&self, reference: &J) -> Result<&[&'a J], LegacyCorrespondenceError> {
+    |                -                 - let's call the lifetime of this reference `'1`
+    |                |
+    |                let's call the lifetime of this reference `'2`
+...
+309 |         Ok(self.structures.get(&key).map(Vec::as_slice).unwrap_or(&[]))
+    |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ method was supposed to return data with lifetime `'2` but it is returning data with lifetime `'1`
+    |
+help: consider introducing a named lifetime parameter and update trait if needed
+    |
+303 |     fn resolve<'b>(&self, reference: &'b J) -> Result<&'b [&'a J], LegacyCorrespondenceError> {
+    |               ++++                    ++               ++
+
+error: could not compile `patamaps-core` (lib) due to 1 previous error

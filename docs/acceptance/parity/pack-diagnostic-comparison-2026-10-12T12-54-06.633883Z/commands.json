@@ -1,0 +1,34 @@
+[
+  {
+    "name": "build",
+    "command": [
+      "/Users/admin/.cargo/bin/cargo",
+      "build",
+      "--locked",
+      "-p",
+      "patamaps-cli"
+    ],
+    "exitCode": 0
+  },
+  {
+    "name": "pack-native",
+    "command": [
+      "/Users/admin/.cargo/bin/cargo",
+      "test",
+      "--locked",
+      "-p",
+      "patamaps-core",
+      "--test",
+      "legacy_pack"
+    ],
+    "exitCode": 0
+  },
+  {
+    "name": "pack-json-controls",
+    "command": [
+      "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+      "scripts/parity/pack_contracts.mjs"
+    ],
+    "exitCode": 1
+  }
+]

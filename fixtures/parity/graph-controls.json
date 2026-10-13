@@ -1,0 +1,1111 @@
+{
+  "schemaVersion": "1.0.0",
+  "referenceEngine": "399747a4ad05a37cd8db1cedd53048fad2175be4",
+  "scenarioDigest": "sha256:7009e06140dc3b44dd9846504036dc0183bfc8e4fe29ecccbb956eb1e8dc3e19",
+  "originalRuntime": "v22.16.0",
+  "originalArtifacts": [
+    {
+      "path": "dist/relations.js",
+      "digest": "sha256:07161aa9c42c09871e63fe6a9e53e329c2b4ecae353c6a3efec236bc117189ef"
+    },
+    {
+      "path": "dist/graph.js",
+      "digest": "sha256:5d558cc4967a01b79edaa83f0aa7637b36d1b53c52895c52eda69d787816b366"
+    },
+    {
+      "path": "dist/validator.js",
+      "digest": "sha256:82c931fdef38b1b17495c4244fbda274ea2f6bddec171caa65838a4ceb24e975"
+    }
+  ],
+  "scope": "Frozen original outcomes for finite JSON graph construction, identity, query order, traversal, mutations and authority ambiguity; arbitrary JavaScript and complete public contracts remain unresolved.",
+  "cases": [
+    {
+      "name": "constructor identities and valid issues",
+      "expected": {
+        "status": "observed",
+        "value": [
+          true,
+          true,
+          []
+        ]
+      }
+    },
+    {
+      "name": "from retains document and registry",
+      "expected": {
+        "status": "observed",
+        "value": [
+          true,
+          true,
+          true
+        ]
+      }
+    },
+    {
+      "name": "entity and mapping lookup identity",
+      "expected": {
+        "status": "observed",
+        "value": [
+          true,
+          true,
+          true,
+          true
+        ]
+      }
+    },
+    {
+      "name": "mapping bucket order and fresh arrays",
+      "expected": {
+        "status": "observed",
+        "value": [
+          true,
+          [
+            "urn:m:z",
+            "urn:m:a"
+          ],
+          true
+        ]
+      }
+    },
+    {
+      "name": "mapping both direction",
+      "expected": {
+        "status": "observed",
+        "value": [
+          "urn:m:z",
+          "urn:m:a"
+        ]
+      }
+    },
+    {
+      "name": "mapping outgoing direction",
+      "expected": {
+        "status": "observed",
+        "value": [
+          "urn:m:a"
+        ]
+      }
+    },
+    {
+      "name": "mapping incoming direction",
+      "expected": {
+        "status": "observed",
+        "value": [
+          "urn:m:z"
+        ]
+      }
+    },
+    {
+      "name": "explicit empty relation filter",
+      "expected": {
+        "status": "observed",
+        "value": [
+          [],
+          [],
+          [
+            [
+              "urn:e:a",
+              0,
+              null,
+              null
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "name": "relation inclusion filter",
+      "expected": {
+        "status": "observed",
+        "value": [
+          [
+            [
+              "urn:e:a",
+              "urn:m:z"
+            ],
+            [
+              "urn:e:d",
+              "urn:m:a"
+            ]
+          ],
+          []
+        ]
+      }
+    },
+    {
+      "name": "nary neighbor insertion order",
+      "expected": {
+        "status": "observed",
+        "value": [
+          [
+            "urn:e:c",
+            "urn:m:z"
+          ],
+          [
+            "urn:e:b",
+            "urn:m:z"
+          ]
+        ]
+      }
+    },
+    {
+      "name": "neighbor object identities",
+      "expected": {
+        "status": "observed",
+        "value": [
+          true,
+          true,
+          true,
+          true
+        ]
+      }
+    },
+    {
+      "name": "symmetric both direction",
+      "expected": {
+        "status": "observed",
+        "value": [
+          [
+            "urn:e:a",
+            "urn:m:z"
+          ],
+          [
+            "urn:e:d",
+            "urn:m:a"
+          ]
+        ]
+      }
+    },
+    {
+      "name": "symmetric outgoing direction",
+      "expected": {
+        "status": "observed",
+        "value": [
+          [
+            "urn:e:a",
+            "urn:m:z"
+          ],
+          [
+            "urn:e:d",
+            "urn:m:a"
+          ]
+        ]
+      }
+    },
+    {
+      "name": "symmetric incoming direction",
+      "expected": {
+        "status": "observed",
+        "value": [
+          [
+            "urn:e:a",
+            "urn:m:z"
+          ],
+          [
+            "urn:e:d",
+            "urn:m:a"
+          ]
+        ]
+      }
+    },
+    {
+      "name": "self duplicate endpoints deduplicated",
+      "expected": {
+        "status": "observed",
+        "value": [
+          1,
+          [
+            [
+              "urn:e:b",
+              "urn:m:self"
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "name": "duplicate mapping keys replace neighbor value in first slot",
+      "expected": {
+        "status": "observed",
+        "value": [
+          [
+            [
+              "urn:e:b",
+              "urn:m:same"
+            ],
+            [
+              "urn:e:c",
+              "urn:m:same"
+            ]
+          ],
+          true,
+          true
+        ]
+      }
+    },
+    {
+      "name": "unknown endpoint skipped",
+      "expected": {
+        "status": "observed",
+        "value": [
+          [
+            "urn:e:c",
+            "urn:m:z"
+          ],
+          [
+            "urn:e:b",
+            "urn:m:z"
+          ]
+        ]
+      }
+    },
+    {
+      "name": "breadth first default depth",
+      "expected": {
+        "status": "observed",
+        "value": [
+          [
+            "urn:e:a",
+            0,
+            null,
+            null
+          ],
+          [
+            "urn:e:c",
+            1,
+            "urn:m:z",
+            "urn:e:a"
+          ],
+          [
+            "urn:e:b",
+            1,
+            "urn:m:z",
+            "urn:e:a"
+          ]
+        ]
+      }
+    },
+    {
+      "name": "breadth first insertion order and depth",
+      "expected": {
+        "status": "observed",
+        "value": [
+          [
+            "urn:e:a",
+            0,
+            null,
+            null
+          ],
+          [
+            "urn:e:c",
+            1,
+            "urn:m:z",
+            "urn:e:a"
+          ],
+          [
+            "urn:e:b",
+            1,
+            "urn:m:z",
+            "urn:e:a"
+          ],
+          [
+            "urn:e:d",
+            2,
+            "urn:m:a",
+            "urn:e:b"
+          ]
+        ]
+      }
+    },
+    {
+      "name": "zero depth",
+      "expected": {
+        "status": "observed",
+        "value": [
+          [
+            "urn:e:a",
+            0,
+            null,
+            null
+          ]
+        ]
+      }
+    },
+    {
+      "name": "trace identities",
+      "expected": {
+        "status": "observed",
+        "value": [
+          true,
+          true,
+          true,
+          "urn:e:b"
+        ]
+      }
+    },
+    {
+      "name": "invalid depth -1",
+      "expected": {
+        "status": "observed",
+        "value": {
+          "name": "Error",
+          "message": "maxDepth must be a non-negative integer",
+          "typeError": false,
+          "validationError": false
+        }
+      }
+    },
+    {
+      "name": "invalid depth 0.5",
+      "expected": {
+        "status": "observed",
+        "value": {
+          "name": "Error",
+          "message": "maxDepth must be a non-negative integer",
+          "typeError": false,
+          "validationError": false
+        }
+      }
+    },
+    {
+      "name": "invalid depth 2",
+      "expected": {
+        "status": "observed",
+        "value": {
+          "name": "Error",
+          "message": "maxDepth must be a non-negative integer",
+          "typeError": false,
+          "validationError": false
+        }
+      }
+    },
+    {
+      "name": "absent trace start precedes invalid depth",
+      "expected": {
+        "status": "observed",
+        "value": []
+      }
+    },
+    {
+      "name": "depth beyond native checked graph limit",
+      "expected": {
+        "status": "observed",
+        "value": [
+          71,
+          70,
+          "urn:e:70"
+        ]
+      }
+    },
+    {
+      "name": "large integer depth terminates on visited set",
+      "expected": {
+        "status": "observed",
+        "value": [
+          [
+            "urn:e:a",
+            0,
+            null,
+            null
+          ],
+          [
+            "urn:e:c",
+            1,
+            "urn:m:z",
+            "urn:e:a"
+          ],
+          [
+            "urn:e:b",
+            1,
+            "urn:m:z",
+            "urn:e:a"
+          ],
+          [
+            "urn:e:d",
+            2,
+            "urn:m:a",
+            "urn:e:b"
+          ]
+        ]
+      }
+    },
+    {
+      "name": "entity mutation retains original key",
+      "expected": {
+        "status": "observed",
+        "value": [
+          true,
+          true,
+          [
+            [
+              "urn:e:renamed",
+              0,
+              null,
+              null
+            ],
+            [
+              "urn:e:c",
+              1,
+              "urn:m:z",
+              "urn:e:a"
+            ],
+            [
+              "urn:e:b",
+              1,
+              "urn:m:z",
+              "urn:e:a"
+            ],
+            [
+              "urn:e:renamed",
+              2,
+              "urn:m:z",
+              "urn:e:c"
+            ],
+            [
+              "urn:e:d",
+              2,
+              "urn:m:a",
+              "urn:e:b"
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "name": "document array replacement preserves indexed objects",
+      "expected": {
+        "status": "observed",
+        "value": [
+          true,
+          true,
+          true,
+          [
+            [
+              "urn:e:c",
+              "urn:m:z"
+            ],
+            [
+              "urn:e:b",
+              "urn:m:z"
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "name": "mapping mutation changes filtering without reindexing",
+      "expected": {
+        "status": "observed",
+        "value": [
+          true,
+          true,
+          0,
+          [
+            "urn:m:a"
+          ],
+          [
+            [
+              "urn:e:d",
+              "urn:m:changed"
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "name": "live relation symmetry mutation",
+      "expected": {
+        "status": "observed",
+        "value": [
+          [
+            [
+              "urn:e:d",
+              "urn:m:a"
+            ]
+          ],
+          [
+            [
+              "urn:e:a",
+              "urn:m:z"
+            ],
+            [
+              "urn:e:d",
+              "urn:m:a"
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "name": "unresolved authority",
+      "expected": {
+        "status": "observed",
+        "value": {
+          "status": "unresolved",
+          "candidates": []
+        }
+      }
+    },
+    {
+      "name": "canonical identity and wildcard facts",
+      "expected": {
+        "status": "observed",
+        "value": [
+          {
+            "status": "resolved",
+            "canonical": {
+              "id": "urn:auth:a",
+              "concept": "urn:e:a",
+              "source": "urn:e:b",
+              "facts": [
+                "*"
+              ],
+              "mode": "canonical",
+              "provenance": {
+                "status": "declared",
+                "assertedBy": "human:test"
+              }
+            },
+            "effective": {
+              "id": "urn:auth:a",
+              "concept": "urn:e:a",
+              "source": "urn:e:b",
+              "facts": [
+                "*"
+              ],
+              "mode": "canonical",
+              "provenance": {
+                "status": "declared",
+                "assertedBy": "human:test"
+              }
+            },
+            "delegationChain": [
+              {
+                "id": "urn:auth:a",
+                "concept": "urn:e:a",
+                "source": "urn:e:b",
+                "facts": [
+                  "*"
+                ],
+                "mode": "canonical",
+                "provenance": {
+                  "status": "declared",
+                  "assertedBy": "human:test"
+                }
+              }
+            ],
+            "candidates": []
+          },
+          true,
+          true,
+          true
+        ]
+      }
+    },
+    {
+      "name": "delegation chain and candidates",
+      "expected": {
+        "status": "observed",
+        "value": [
+          {
+            "status": "resolved",
+            "canonical": {
+              "id": "urn:auth:a",
+              "concept": "urn:e:a",
+              "source": "urn:e:b",
+              "facts": [
+                "type"
+              ],
+              "mode": "canonical",
+              "provenance": {
+                "status": "declared",
+                "assertedBy": "human:test"
+              }
+            },
+            "effective": {
+              "id": "urn:auth:b",
+              "concept": "urn:e:a",
+              "source": "urn:e:b",
+              "facts": [
+                "type"
+              ],
+              "mode": "delegated",
+              "provenance": {
+                "status": "declared",
+                "assertedBy": "human:test"
+              },
+              "delegatedFrom": "urn:auth:a"
+            },
+            "delegationChain": [
+              {
+                "id": "urn:auth:a",
+                "concept": "urn:e:a",
+                "source": "urn:e:b",
+                "facts": [
+                  "type"
+                ],
+                "mode": "canonical",
+                "provenance": {
+                  "status": "declared",
+                  "assertedBy": "human:test"
+                }
+              },
+              {
+                "id": "urn:auth:b",
+                "concept": "urn:e:a",
+                "source": "urn:e:b",
+                "facts": [
+                  "type"
+                ],
+                "mode": "delegated",
+                "provenance": {
+                  "status": "declared",
+                  "assertedBy": "human:test"
+                },
+                "delegatedFrom": "urn:auth:a"
+              }
+            ],
+            "candidates": [
+              {
+                "id": "urn:auth:c",
+                "concept": "urn:e:a",
+                "source": "urn:e:b",
+                "facts": [
+                  "type"
+                ],
+                "mode": "candidate",
+                "provenance": {
+                  "status": "declared",
+                  "assertedBy": "human:test"
+                }
+              }
+            ]
+          },
+          true,
+          true
+        ]
+      }
+    },
+    {
+      "name": "fact filtered delegation",
+      "expected": {
+        "status": "threw",
+        "error": {
+          "name": "MetamapValidationError",
+          "message": "Metamap validation failed with 1 error(s)"
+        }
+      }
+    },
+    {
+      "name": "ambiguous canonical preserves grouped order",
+      "expected": {
+        "status": "observed",
+        "value": {
+          "status": "ambiguous",
+          "candidates": [
+            {
+              "id": "urn:auth:b",
+              "concept": "urn:e:a",
+              "source": "urn:e:b",
+              "facts": [
+                "type"
+              ],
+              "mode": "canonical",
+              "provenance": {
+                "status": "declared",
+                "assertedBy": "human:test"
+              }
+            },
+            {
+              "id": "urn:auth:a",
+              "concept": "urn:e:a",
+              "source": "urn:e:b",
+              "facts": [
+                "type"
+              ],
+              "mode": "canonical",
+              "provenance": {
+                "status": "declared",
+                "assertedBy": "human:test"
+              }
+            },
+            {
+              "id": "urn:auth:d",
+              "concept": "urn:e:a",
+              "source": "urn:e:b",
+              "facts": [
+                "type"
+              ],
+              "mode": "delegated",
+              "provenance": {
+                "status": "declared",
+                "assertedBy": "human:test"
+              },
+              "delegatedFrom": "urn:auth:b"
+            },
+            {
+              "id": "urn:auth:c",
+              "concept": "urn:e:a",
+              "source": "urn:e:b",
+              "facts": [
+                "type"
+              ],
+              "mode": "candidate",
+              "provenance": {
+                "status": "declared",
+                "assertedBy": "human:test"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "candidate alone ambiguous",
+      "expected": {
+        "status": "observed",
+        "value": {
+          "status": "ambiguous",
+          "candidates": [
+            {
+              "id": "urn:auth:c",
+              "concept": "urn:e:a",
+              "source": "urn:e:b",
+              "facts": [
+                "type"
+              ],
+              "mode": "candidate",
+              "provenance": {
+                "status": "declared",
+                "assertedBy": "human:test"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "multiple delegation children ambiguous",
+      "expected": {
+        "status": "observed",
+        "value": {
+          "status": "ambiguous",
+          "candidates": [
+            {
+              "id": "urn:auth:a",
+              "concept": "urn:e:a",
+              "source": "urn:e:b",
+              "facts": [
+                "type"
+              ],
+              "mode": "canonical",
+              "provenance": {
+                "status": "declared",
+                "assertedBy": "human:test"
+              }
+            },
+            {
+              "id": "urn:auth:b",
+              "concept": "urn:e:a",
+              "source": "urn:e:b",
+              "facts": [
+                "type"
+              ],
+              "mode": "delegated",
+              "provenance": {
+                "status": "declared",
+                "assertedBy": "human:test"
+              },
+              "delegatedFrom": "urn:auth:a"
+            },
+            {
+              "id": "urn:auth:c",
+              "concept": "urn:e:a",
+              "source": "urn:e:b",
+              "facts": [
+                "type"
+              ],
+              "mode": "delegated",
+              "provenance": {
+                "status": "declared",
+                "assertedBy": "human:test"
+              },
+              "delegatedFrom": "urn:auth:a"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "mutated delegation cycle terminates ambiguous",
+      "expected": {
+        "status": "observed",
+        "value": {
+          "status": "ambiguous",
+          "candidates": [
+            {
+              "id": "urn:auth:a",
+              "concept": "urn:e:a",
+              "source": "urn:e:b",
+              "facts": [
+                "type"
+              ],
+              "mode": "canonical",
+              "provenance": {
+                "status": "declared",
+                "assertedBy": "human:test"
+              }
+            },
+            {
+              "id": "urn:auth:a",
+              "concept": "urn:e:a",
+              "source": "urn:e:b",
+              "facts": [
+                "type"
+              ],
+              "mode": "delegated",
+              "provenance": {
+                "status": "declared",
+                "assertedBy": "human:test"
+              },
+              "delegatedFrom": "urn:auth:a"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "delegation mode and parent mutations retain buckets",
+      "expected": {
+        "status": "observed",
+        "value": {
+          "status": "resolved",
+          "canonical": {
+            "id": "urn:auth:a",
+            "concept": "urn:e:a",
+            "source": "urn:e:b",
+            "facts": [
+              "type"
+            ],
+            "mode": "canonical",
+            "provenance": {
+              "status": "declared",
+              "assertedBy": "human:test"
+            }
+          },
+          "effective": {
+            "id": "urn:auth:b",
+            "concept": "urn:e:a",
+            "source": "urn:e:b",
+            "facts": [
+              "type"
+            ],
+            "mode": "candidate",
+            "provenance": {
+              "status": "declared",
+              "assertedBy": "human:test"
+            }
+          },
+          "delegationChain": [
+            {
+              "id": "urn:auth:a",
+              "concept": "urn:e:a",
+              "source": "urn:e:b",
+              "facts": [
+                "type"
+              ],
+              "mode": "canonical",
+              "provenance": {
+                "status": "declared",
+                "assertedBy": "human:test"
+              }
+            },
+            {
+              "id": "urn:auth:b",
+              "concept": "urn:e:a",
+              "source": "urn:e:b",
+              "facts": [
+                "type"
+              ],
+              "mode": "candidate",
+              "provenance": {
+                "status": "declared",
+                "assertedBy": "human:test"
+              }
+            }
+          ],
+          "candidates": [
+            {
+              "id": "urn:auth:b",
+              "concept": "urn:e:a",
+              "source": "urn:e:b",
+              "facts": [
+                "type"
+              ],
+              "mode": "candidate",
+              "provenance": {
+                "status": "declared",
+                "assertedBy": "human:test"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "authority concept mutation retains bucket",
+      "expected": {
+        "status": "observed",
+        "value": [
+          {
+            "status": "resolved",
+            "canonical": {
+              "id": "urn:auth:a",
+              "concept": "urn:e:c",
+              "source": "urn:e:b",
+              "facts": [
+                "type"
+              ],
+              "mode": "canonical",
+              "provenance": {
+                "status": "declared",
+                "assertedBy": "human:test"
+              }
+            },
+            "effective": {
+              "id": "urn:auth:a",
+              "concept": "urn:e:c",
+              "source": "urn:e:b",
+              "facts": [
+                "type"
+              ],
+              "mode": "canonical",
+              "provenance": {
+                "status": "declared",
+                "assertedBy": "human:test"
+              }
+            },
+            "delegationChain": [
+              {
+                "id": "urn:auth:a",
+                "concept": "urn:e:c",
+                "source": "urn:e:b",
+                "facts": [
+                  "type"
+                ],
+                "mode": "canonical",
+                "provenance": {
+                  "status": "declared",
+                  "assertedBy": "human:test"
+                }
+              }
+            ],
+            "candidates": []
+          },
+          {
+            "status": "unresolved",
+            "candidates": []
+          }
+        ]
+      }
+    },
+    {
+      "name": "constructor validation error issues",
+      "expected": {
+        "status": "observed",
+        "value": {
+          "name": "MetamapValidationError",
+          "message": "Metamap validation failed with 1 error(s)",
+          "typeError": false,
+          "validationError": true,
+          "issues": [
+            {
+              "severity": "error",
+              "code": "UNRESOLVED_ENDPOINT",
+              "message": "Mapping endpoint urn:e:missing does not resolve",
+              "path": "$.mappings[0].targets[2]",
+              "subjectId": "urn:m:z"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "from refuses invalid despite validate false",
+      "expected": {
+        "status": "observed",
+        "value": {
+          "name": "MetamapValidationError",
+          "message": "Metamap validation failed with 1 error(s)",
+          "typeError": false,
+          "validationError": true,
+          "issues": [
+            {
+              "severity": "error",
+              "code": "UNRESOLVED_ENDPOINT",
+              "message": "Mapping endpoint urn:e:missing does not resolve",
+              "path": "$.mappings[0].targets[2]",
+              "subjectId": "urn:m:z"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "validate false retains validation issues",
+      "expected": {
+        "status": "observed",
+        "value": [
+          [
+            {
+              "severity": "error",
+              "code": "UNRESOLVED_ENDPOINT",
+              "message": "Mapping endpoint urn:e:missing does not resolve",
+              "path": "$.mappings[0].targets[2]",
+              "subjectId": "urn:m:z"
+            }
+          ],
+          [
+            [
+              "urn:e:c",
+              "urn:m:z"
+            ],
+            [
+              "urn:e:b",
+              "urn:m:z"
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "name": "duplicate entities choose last retained identity",
+      "expected": {
+        "status": "observed",
+        "value": [
+          true,
+          [
+            [
+              "urn:e:a",
+              0,
+              null,
+              null
+            ],
+            [
+              "urn:e:c",
+              1,
+              "urn:m:z",
+              "urn:e:a"
+            ],
+            [
+              "urn:e:b",
+              1,
+              "urn:m:z",
+              "urn:e:a"
+            ]
+          ]
+        ]
+      }
+    }
+  ]
+}

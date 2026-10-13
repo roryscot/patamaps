@@ -523,28 +523,25 @@ pub fn search_repairs(
             "Repair space or runtime bounds exceed Draft 1",
         );
     }
-    let spec = request
-        .baseline
-        .inputs
-        .projection_spec
-        .as_ref()
-        .ok_or_else(|| {
-            CheckError(vec![Issue::error(
-                "REPAIR_MISSING_PROJECTION",
-                "Repair requires one captured projection",
-                "repair",
-            )])
-        })?;
-    if spec
-        .consumer
-        .as_deref()
-        .or_else(|| spec.semantics.as_ref().map(|s| s.consumer.as_str()))
-        != Some(&request.consumer)
-    {
-        return fail(
-            "REPAIR_WRONG_CONSUMER",
-            "Repair consumer must bind captured projection",
-        );
+    if request.baseline.inputs.specs().next().is_none() {
+        return Err(CheckError(vec![Issue::error(
+            "REPAIR_MISSING_PROJECTION",
+            "Repair requires a captured consumer projection",
+            "repair",
+        )]));
+    }
+    for spec in request.baseline.inputs.specs() {
+        if spec
+            .consumer
+            .as_deref()
+            .or_else(|| spec.semantics.as_ref().map(|s| s.consumer.as_str()))
+            != Some(&request.consumer)
+        {
+            return fail(
+                "REPAIR_WRONG_CONSUMER",
+                "Repair consumer must bind every captured projection",
+            );
+        }
     }
     if request
         .baseline

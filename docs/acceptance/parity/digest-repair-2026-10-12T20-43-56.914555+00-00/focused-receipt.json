@@ -1,0 +1,30 @@
+{
+  "status": "failed",
+  "commands": [
+    {
+      "label": "build",
+      "command": [
+        "/Users/admin/.cargo/bin/cargo",
+        "build",
+        "--offline",
+        "-p",
+        "patamaps-cli"
+      ],
+      "exitCode": 0
+    },
+    {
+      "label": "native-contracts-core",
+      "command": [
+        "/Users/admin/.cargo/bin/cargo",
+        "test",
+        "--locked",
+        "-p",
+        "patamaps-contracts",
+        "-p",
+        "patamaps-core"
+      ],
+      "exitCode": 101
+    }
+  ],
+  "functionalEvidence": []
+}

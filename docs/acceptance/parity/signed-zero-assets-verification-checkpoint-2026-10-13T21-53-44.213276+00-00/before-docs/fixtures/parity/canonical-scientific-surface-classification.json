@@ -1,0 +1,759 @@
+{
+  "schemaVersion": "1.0.0",
+  "referenceEngine": "399747a4ad05a37cd8db1cedd53048fad2175be4",
+  "scope": "Classify the existing 25 canonical and SSSOM public declarations/constructors/properties as implemented-unverified. This creates no equivalence or owner-accepted deviation and leaves the full 1293-obligation scope unchanged.",
+  "sourceInventory": [
+    {
+      "path": "crates/patamaps-contracts/src/json.rs",
+      "digest": "sha256:42fb728ceabf554bb62ea6924f103e6989bbe56c8db7ba528292f6255e583e3a"
+    },
+    {
+      "path": "crates/patamaps-scientific/src/export.rs",
+      "digest": "sha256:4b37c4f1b264008bf17cb02da223d2cd18c415c4a5f9edaae5a86d8921f3897f"
+    },
+    {
+      "path": "crates/patamaps-scientific/src/interpret.rs",
+      "digest": "sha256:f9d61fd1ff1ee440b7a0526a0eb85717217ae77e993588a7f2e1e1548941aef4"
+    },
+    {
+      "path": "crates/patamaps-scientific/src/lib.rs",
+      "digest": "sha256:3b4d2aeee66061cd92ef060a711261699f04dc45a00814c92ddf6476e683165f"
+    },
+    {
+      "path": "crates/patamaps-scientific/src/model.rs",
+      "digest": "sha256:70b54c22d40e82f4612dd54a00d1dc59f70b1c78ae062fdaca10f9854722dcc6"
+    },
+    {
+      "path": "crates/patamaps-scientific/src/source.rs",
+      "digest": "sha256:1d469b6610b22b111a38b2239dbb5d3adba5fad6d636a51329d53401e93adaeb"
+    },
+    {
+      "path": "sdk/typescript/canonical.d.ts",
+      "digest": "sha256:88ae79727dbad3b0872a9c3539a95fe6c444b810ff416423f06a2cf39274ecb4"
+    },
+    {
+      "path": "sdk/typescript/canonical.mjs",
+      "digest": "sha256:57f2f61257413626083a1902c8dc96107a498456d791fa69ad7c3c71cbe59051"
+    },
+    {
+      "path": "sdk/typescript/index.d.ts",
+      "digest": "sha256:aa76e1583c3a1b872ec1fa9fbbaddd8c1211a118c9f670c0d9ec1b0ba3a4bbae"
+    },
+    {
+      "path": "sdk/typescript/index.mjs",
+      "digest": "sha256:f5f5abcf9d4b199a4674795bd5e96252f65c1449d679a73dd069c17c89db6015"
+    },
+    {
+      "path": "sdk/typescript/sssom-profile.mjs",
+      "digest": "sha256:a37260f42d6b02c5900dbefa9477386667f5286079a7a1abd12495e3dc78e533"
+    },
+    {
+      "path": "sdk/typescript/sssom.d.ts",
+      "digest": "sha256:7f58f17edc48bcb8340b73004273fa4c23a9f4b3671ca1276225f16de8254457"
+    },
+    {
+      "path": "sdk/typescript/sssom.mjs",
+      "digest": "sha256:ccc44eac40a38b892d42c33537a9f15915e1aa65c774e6dc78d129284a6bfb74"
+    }
+  ],
+  "rows": [
+    {
+      "id": "parity:3e1f498aaa279cc0d356",
+      "name": "CanonicalJsonError.constructor",
+      "status": "implemented-unverified",
+      "origin": {
+        "path": "src/canonical.ts",
+        "digest": "sha256:06994bd6e52c332ef52e37dd92408372adc51a593067a1b03ba0108bf1adf7ce",
+        "line": 5,
+        "column": 3
+      },
+      "candidateEntryPoint": {
+        "path": "sdk/typescript/canonical.mjs",
+        "symbol": "CanonicalJsonError.constructor",
+        "declaration": "sdk/typescript/canonical.d.ts"
+      },
+      "nativeAnalogue": {
+        "path": "crates/patamaps-contracts/src/json.rs",
+        "symbol": "JsonDiagnostic",
+        "scope": "Current native canonical/strict JSON parser and SDK error/legacy-reference bridge; original arbitrary-value, resource, full public type and required package/platform behavior remains unverified."
+      },
+      "facts": [
+        "Frozen original class-member CanonicalJsonError.constructor is declared in src/canonical.ts at sha256:06994bd6e52c332ef52e37dd92408372adc51a593067a1b03ba0108bf1adf7ce.",
+        "The SDK has the corresponding public CanonicalJsonError implementation/declaration, re-exported through index.mjs/index.d.ts. Canonical/SSSOM computation calls the native executable; error objects and constants are host/data declarations.",
+        "Prior callback/boundary evidence applies to its identified previous candidate and selected cases only. The rebuilt signed-zero candidate and expanded SDK package currently await their full prepared refresh. Direct public/type/error/resource obligations are not closed by those earlier narrow runs."
+      ],
+      "unresolved": "Execute current-candidate complete public API and installed type/constant/error-property comparisons against the unchanged original source. Exercise original accepted/refused values and host/identity behavior across the full declared domain, including resource boundaries, then complete required package/platform acceptance. Reconcile any extra/missing properties or domain differences explicitly; no owner deviation is accepted.",
+      "acceptance": "Invoke the Rust-backed mapped operation on the frozen original inputs; compare complete results, refusals and unknown states under the explicit compatibility rules. Bind the actual installed source/SDK/native identity and original assertion/type/byte expectations; no source inspection or selected callback pass alone closes this public obligation."
+    },
+    {
+      "id": "parity:ed139e595dd7a1ab2382",
+      "name": "SssomError.constructor",
+      "status": "implemented-unverified",
+      "origin": {
+        "path": "src/sssom.ts",
+        "digest": "sha256:bc99ab38d7b4e9d8754bafdadddca5edb164de116464ab0b9a454a5a8ac8c6af",
+        "line": 76,
+        "column": 3
+      },
+      "candidateEntryPoint": {
+        "path": "sdk/typescript/sssom.mjs",
+        "symbol": "SssomError.constructor",
+        "declaration": "sdk/typescript/sssom.d.ts"
+      },
+      "nativeAnalogue": {
+        "path": "crates/patamaps-scientific/src/lib.rs",
+        "symbol": "Error",
+        "scope": "Current native SSSOM parsing/interpretation and public SDK models/metadata; original full type/value, identity/error, resource and required package/platform behavior remains unverified."
+      },
+      "facts": [
+        "Frozen original class-member SssomError.constructor is declared in src/sssom.ts at sha256:bc99ab38d7b4e9d8754bafdadddca5edb164de116464ab0b9a454a5a8ac8c6af.",
+        "The SDK has the corresponding public SssomError implementation/declaration, re-exported through index.mjs/index.d.ts. Canonical/SSSOM computation calls the native executable; error objects and constants are host/data declarations.",
+        "Prior callback/boundary evidence applies to its identified previous candidate and selected cases only. The rebuilt signed-zero candidate and expanded SDK package currently await their full prepared refresh. Direct public/type/error/resource obligations are not closed by those earlier narrow runs."
+      ],
+      "unresolved": "Execute current-candidate complete public API and installed type/constant/error-property comparisons against the unchanged original source. Exercise original accepted/refused values and host/identity behavior across the full declared domain, including resource boundaries, then complete required package/platform acceptance. Reconcile any extra/missing properties or domain differences explicitly; no owner deviation is accepted.",
+      "acceptance": "Invoke the Rust-backed mapped operation on the frozen original inputs; compare complete results, refusals and unknown states under the explicit compatibility rules. Bind the actual installed source/SDK/native identity and original assertion/type/byte expectations; no source inspection or selected callback pass alone closes this public obligation."
+    },
+    {
+      "id": "parity:3258bfc66c5c362bd18c",
+      "name": "CanonicalJsonError",
+      "status": "implemented-unverified",
+      "origin": {
+        "path": "src/canonical.ts",
+        "digest": "sha256:06994bd6e52c332ef52e37dd92408372adc51a593067a1b03ba0108bf1adf7ce",
+        "line": 4,
+        "column": 1
+      },
+      "candidateEntryPoint": {
+        "path": "sdk/typescript/canonical.mjs",
+        "symbol": "CanonicalJsonError",
+        "declaration": "sdk/typescript/canonical.d.ts"
+      },
+      "nativeAnalogue": {
+        "path": "crates/patamaps-contracts/src/json.rs",
+        "symbol": "JsonDiagnostic",
+        "scope": "Current native canonical/strict JSON parser and SDK error/legacy-reference bridge; original arbitrary-value, resource, full public type and required package/platform behavior remains unverified."
+      },
+      "facts": [
+        "Frozen original exported-symbol CanonicalJsonError is declared in src/canonical.ts at sha256:06994bd6e52c332ef52e37dd92408372adc51a593067a1b03ba0108bf1adf7ce.",
+        "The SDK has the corresponding public CanonicalJsonError implementation/declaration, re-exported through index.mjs/index.d.ts. Canonical/SSSOM computation calls the native executable; error objects and constants are host/data declarations.",
+        "Prior callback/boundary evidence applies to its identified previous candidate and selected cases only. The rebuilt signed-zero candidate and expanded SDK package currently await their full prepared refresh. Direct public/type/error/resource obligations are not closed by those earlier narrow runs."
+      ],
+      "unresolved": "Execute current-candidate complete public API and installed type/constant/error-property comparisons against the unchanged original source. Exercise original accepted/refused values and host/identity behavior across the full declared domain, including resource boundaries, then complete required package/platform acceptance. Reconcile any extra/missing properties or domain differences explicitly; no owner deviation is accepted.",
+      "acceptance": "Invoke the Rust-backed mapped operation on the frozen original inputs; compare complete results, refusals and unknown states under the explicit compatibility rules. Bind the actual installed source/SDK/native identity and original assertion/type/byte expectations; no source inspection or selected callback pass alone closes this public obligation."
+    },
+    {
+      "id": "parity:6d119c1c7a27ab492bc8",
+      "name": "canonicalDigest",
+      "status": "implemented-unverified",
+      "origin": {
+        "path": "src/canonical.ts",
+        "digest": "sha256:06994bd6e52c332ef52e37dd92408372adc51a593067a1b03ba0108bf1adf7ce",
+        "line": 98,
+        "column": 1
+      },
+      "candidateEntryPoint": {
+        "path": "sdk/typescript/canonical.mjs",
+        "symbol": "canonicalDigest",
+        "declaration": "sdk/typescript/canonical.d.ts"
+      },
+      "nativeAnalogue": {
+        "path": "crates/patamaps-contracts/src/json.rs",
+        "symbol": "canonical_digest",
+        "scope": "Current native canonical/strict JSON parser and SDK error/legacy-reference bridge; original arbitrary-value, resource, full public type and required package/platform behavior remains unverified."
+      },
+      "facts": [
+        "Frozen original exported-symbol canonicalDigest is declared in src/canonical.ts at sha256:06994bd6e52c332ef52e37dd92408372adc51a593067a1b03ba0108bf1adf7ce.",
+        "The SDK has the corresponding public canonicalDigest implementation/declaration, re-exported through index.mjs/index.d.ts. Canonical/SSSOM computation calls the native executable; error objects and constants are host/data declarations.",
+        "Prior callback/boundary evidence applies to its identified previous candidate and selected cases only. The rebuilt signed-zero candidate and expanded SDK package currently await their full prepared refresh. Direct public/type/error/resource obligations are not closed by those earlier narrow runs."
+      ],
+      "unresolved": "Execute current-candidate complete public API and installed type/constant/error-property comparisons against the unchanged original source. Exercise original accepted/refused values and host/identity behavior across the full declared domain, including resource boundaries, then complete required package/platform acceptance. Reconcile any extra/missing properties or domain differences explicitly; no owner deviation is accepted.",
+      "acceptance": "Invoke the Rust-backed mapped operation on the frozen original inputs; compare complete results, refusals and unknown states under the explicit compatibility rules. Bind the actual installed source/SDK/native identity and original assertion/type/byte expectations; no source inspection or selected callback pass alone closes this public obligation."
+    },
+    {
+      "id": "parity:68aebe6b28174ebdf693",
+      "name": "canonicalJson",
+      "status": "implemented-unverified",
+      "origin": {
+        "path": "src/canonical.ts",
+        "digest": "sha256:06994bd6e52c332ef52e37dd92408372adc51a593067a1b03ba0108bf1adf7ce",
+        "line": 32,
+        "column": 1
+      },
+      "candidateEntryPoint": {
+        "path": "sdk/typescript/canonical.mjs",
+        "symbol": "canonicalJson",
+        "declaration": "sdk/typescript/canonical.d.ts"
+      },
+      "nativeAnalogue": {
+        "path": "crates/patamaps-contracts/src/json.rs",
+        "symbol": "canonical_bytes",
+        "scope": "Current native canonical/strict JSON parser and SDK error/legacy-reference bridge; original arbitrary-value, resource, full public type and required package/platform behavior remains unverified."
+      },
+      "facts": [
+        "Frozen original exported-symbol canonicalJson is declared in src/canonical.ts at sha256:06994bd6e52c332ef52e37dd92408372adc51a593067a1b03ba0108bf1adf7ce.",
+        "The SDK has the corresponding public canonicalJson implementation/declaration, re-exported through index.mjs/index.d.ts. Canonical/SSSOM computation calls the native executable; error objects and constants are host/data declarations.",
+        "Prior callback/boundary evidence applies to its identified previous candidate and selected cases only. The rebuilt signed-zero candidate and expanded SDK package currently await their full prepared refresh. Direct public/type/error/resource obligations are not closed by those earlier narrow runs."
+      ],
+      "unresolved": "Execute current-candidate complete public API and installed type/constant/error-property comparisons against the unchanged original source. Exercise original accepted/refused values and host/identity behavior across the full declared domain, including resource boundaries, then complete required package/platform acceptance. Reconcile any extra/missing properties or domain differences explicitly; no owner deviation is accepted.",
+      "acceptance": "Invoke the Rust-backed mapped operation on the frozen original inputs; compare complete results, refusals and unknown states under the explicit compatibility rules. Bind the actual installed source/SDK/native identity and original assertion/type/byte expectations; no source inspection or selected callback pass alone closes this public obligation."
+    },
+    {
+      "id": "parity:0d6543f4fb038b8a66de",
+      "name": "legacyReferenceValue",
+      "status": "implemented-unverified",
+      "origin": {
+        "path": "src/canonical.ts",
+        "digest": "sha256:06994bd6e52c332ef52e37dd92408372adc51a593067a1b03ba0108bf1adf7ce",
+        "line": 105,
+        "column": 1
+      },
+      "candidateEntryPoint": {
+        "path": "sdk/typescript/canonical.mjs",
+        "symbol": "legacyReferenceValue",
+        "declaration": "sdk/typescript/canonical.d.ts"
+      },
+      "nativeAnalogue": {
+        "path": "crates/patamaps-contracts/src/json.rs",
+        "symbol": "parse_value",
+        "scope": "Current native canonical/strict JSON parser and SDK error/legacy-reference bridge; original arbitrary-value, resource, full public type and required package/platform behavior remains unverified."
+      },
+      "facts": [
+        "Frozen original exported-symbol legacyReferenceValue is declared in src/canonical.ts at sha256:06994bd6e52c332ef52e37dd92408372adc51a593067a1b03ba0108bf1adf7ce.",
+        "The SDK has the corresponding public legacyReferenceValue implementation/declaration, re-exported through index.mjs/index.d.ts. Canonical/SSSOM computation calls the native executable; error objects and constants are host/data declarations.",
+        "Prior callback/boundary evidence applies to its identified previous candidate and selected cases only. The rebuilt signed-zero candidate and expanded SDK package currently await their full prepared refresh. Direct public/type/error/resource obligations are not closed by those earlier narrow runs."
+      ],
+      "unresolved": "Execute current-candidate complete public API and installed type/constant/error-property comparisons against the unchanged original source. Exercise original accepted/refused values and host/identity behavior across the full declared domain, including resource boundaries, then complete required package/platform acceptance. Reconcile any extra/missing properties or domain differences explicitly; no owner deviation is accepted.",
+      "acceptance": "Invoke the Rust-backed mapped operation on the frozen original inputs; compare complete results, refusals and unknown states under the explicit compatibility rules. Bind the actual installed source/SDK/native identity and original assertion/type/byte expectations; no source inspection or selected callback pass alone closes this public obligation."
+    },
+    {
+      "id": "parity:0bca8d7f8ccf3af6442c",
+      "name": "parseStrictJson",
+      "status": "implemented-unverified",
+      "origin": {
+        "path": "src/canonical.ts",
+        "digest": "sha256:06994bd6e52c332ef52e37dd92408372adc51a593067a1b03ba0108bf1adf7ce",
+        "line": 156,
+        "column": 1
+      },
+      "candidateEntryPoint": {
+        "path": "sdk/typescript/canonical.mjs",
+        "symbol": "parseStrictJson",
+        "declaration": "sdk/typescript/canonical.d.ts"
+      },
+      "nativeAnalogue": {
+        "path": "crates/patamaps-contracts/src/json.rs",
+        "symbol": "parse_value",
+        "scope": "Current native canonical/strict JSON parser and SDK error/legacy-reference bridge; original arbitrary-value, resource, full public type and required package/platform behavior remains unverified."
+      },
+      "facts": [
+        "Frozen original exported-symbol parseStrictJson is declared in src/canonical.ts at sha256:06994bd6e52c332ef52e37dd92408372adc51a593067a1b03ba0108bf1adf7ce.",
+        "The SDK has the corresponding public parseStrictJson implementation/declaration, re-exported through index.mjs/index.d.ts. Canonical/SSSOM computation calls the native executable; error objects and constants are host/data declarations.",
+        "Prior callback/boundary evidence applies to its identified previous candidate and selected cases only. The rebuilt signed-zero candidate and expanded SDK package currently await their full prepared refresh. Direct public/type/error/resource obligations are not closed by those earlier narrow runs."
+      ],
+      "unresolved": "Execute current-candidate complete public API and installed type/constant/error-property comparisons against the unchanged original source. Exercise original accepted/refused values and host/identity behavior across the full declared domain, including resource boundaries, then complete required package/platform acceptance. Reconcile any extra/missing properties or domain differences explicitly; no owner deviation is accepted.",
+      "acceptance": "Invoke the Rust-backed mapped operation on the frozen original inputs; compare complete results, refusals and unknown states under the explicit compatibility rules. Bind the actual installed source/SDK/native identity and original assertion/type/byte expectations; no source inspection or selected callback pass alone closes this public obligation."
+    },
+    {
+      "id": "parity:7c5d29fddcc8156a1f63",
+      "name": "SSSOM_ENTITY_PROFILE",
+      "status": "implemented-unverified",
+      "origin": {
+        "path": "src/sssom-model.ts",
+        "digest": "sha256:54addd3d236315bfc0a20d8f985aa36c2d2793e338e5f2f76db807febce0fe95",
+        "line": 4,
+        "column": 14
+      },
+      "candidateEntryPoint": {
+        "path": "sdk/typescript/sssom.mjs",
+        "symbol": "SSSOM_ENTITY_PROFILE",
+        "declaration": "sdk/typescript/sssom.d.ts"
+      },
+      "nativeAnalogue": {
+        "path": "crates/patamaps-scientific/src/model.rs",
+        "symbol": "EntityProfile",
+        "scope": "Current native SSSOM parsing/interpretation and public SDK models/metadata; original full type/value, identity/error, resource and required package/platform behavior remains unverified."
+      },
+      "facts": [
+        "Frozen original exported-symbol SSSOM_ENTITY_PROFILE is declared in src/sssom-model.ts at sha256:54addd3d236315bfc0a20d8f985aa36c2d2793e338e5f2f76db807febce0fe95.",
+        "The SDK has the corresponding public SSSOM_ENTITY_PROFILE implementation/declaration, re-exported through index.mjs/index.d.ts. Canonical/SSSOM computation calls the native executable; error objects and constants are host/data declarations.",
+        "Prior callback/boundary evidence applies to its identified previous candidate and selected cases only. The rebuilt signed-zero candidate and expanded SDK package currently await their full prepared refresh. Direct public/type/error/resource obligations are not closed by those earlier narrow runs."
+      ],
+      "unresolved": "Execute current-candidate complete public API and installed type/constant/error-property comparisons against the unchanged original source. Exercise original accepted/refused values and host/identity behavior across the full declared domain, including resource boundaries, then complete required package/platform acceptance. Reconcile any extra/missing properties or domain differences explicitly; no owner deviation is accepted.",
+      "acceptance": "Invoke the Rust-backed mapped operation on the frozen original inputs; compare complete results, refusals and unknown states under the explicit compatibility rules. Bind the actual installed source/SDK/native identity and original assertion/type/byte expectations; no source inspection or selected callback pass alone closes this public obligation."
+    },
+    {
+      "id": "parity:049b4b589948d9dbe63d",
+      "name": "SSSOM_FORMAT_VERSION",
+      "status": "implemented-unverified",
+      "origin": {
+        "path": "src/sssom-model.ts",
+        "digest": "sha256:54addd3d236315bfc0a20d8f985aa36c2d2793e338e5f2f76db807febce0fe95",
+        "line": 3,
+        "column": 14
+      },
+      "candidateEntryPoint": {
+        "path": "sdk/typescript/sssom.mjs",
+        "symbol": "SSSOM_FORMAT_VERSION",
+        "declaration": "sdk/typescript/sssom.d.ts"
+      },
+      "nativeAnalogue": {
+        "path": "crates/patamaps-scientific/src/model.rs",
+        "symbol": "FormatVersion",
+        "scope": "Current native SSSOM parsing/interpretation and public SDK models/metadata; original full type/value, identity/error, resource and required package/platform behavior remains unverified."
+      },
+      "facts": [
+        "Frozen original exported-symbol SSSOM_FORMAT_VERSION is declared in src/sssom-model.ts at sha256:54addd3d236315bfc0a20d8f985aa36c2d2793e338e5f2f76db807febce0fe95.",
+        "The SDK has the corresponding public SSSOM_FORMAT_VERSION implementation/declaration, re-exported through index.mjs/index.d.ts. Canonical/SSSOM computation calls the native executable; error objects and constants are host/data declarations.",
+        "Prior callback/boundary evidence applies to its identified previous candidate and selected cases only. The rebuilt signed-zero candidate and expanded SDK package currently await their full prepared refresh. Direct public/type/error/resource obligations are not closed by those earlier narrow runs."
+      ],
+      "unresolved": "Execute current-candidate complete public API and installed type/constant/error-property comparisons against the unchanged original source. Exercise original accepted/refused values and host/identity behavior across the full declared domain, including resource boundaries, then complete required package/platform acceptance. Reconcile any extra/missing properties or domain differences explicitly; no owner deviation is accepted.",
+      "acceptance": "Invoke the Rust-backed mapped operation on the frozen original inputs; compare complete results, refusals and unknown states under the explicit compatibility rules. Bind the actual installed source/SDK/native identity and original assertion/type/byte expectations; no source inspection or selected callback pass alone closes this public obligation."
+    },
+    {
+      "id": "parity:5ee11c9f4e4c25b816c6",
+      "name": "SssomDocument",
+      "status": "implemented-unverified",
+      "origin": {
+        "path": "src/sssom-model.ts",
+        "digest": "sha256:54addd3d236315bfc0a20d8f985aa36c2d2793e338e5f2f76db807febce0fe95",
+        "line": 7,
+        "column": 1
+      },
+      "candidateEntryPoint": {
+        "path": "sdk/typescript/sssom.d.ts",
+        "symbol": "SssomDocument",
+        "declaration": "sdk/typescript/sssom.d.ts"
+      },
+      "nativeAnalogue": {
+        "path": "crates/patamaps-scientific/src/model.rs",
+        "symbol": "SssomDocument",
+        "scope": "Current native SSSOM parsing/interpretation and public SDK models/metadata; original full type/value, identity/error, resource and required package/platform behavior remains unverified."
+      },
+      "facts": [
+        "Frozen original exported-symbol SssomDocument is declared in src/sssom-model.ts at sha256:54addd3d236315bfc0a20d8f985aa36c2d2793e338e5f2f76db807febce0fe95.",
+        "The SDK has the corresponding public SssomDocument implementation/declaration, re-exported through index.mjs/index.d.ts. Canonical/SSSOM computation calls the native executable; error objects and constants are host/data declarations.",
+        "Prior callback/boundary evidence applies to its identified previous candidate and selected cases only. The rebuilt signed-zero candidate and expanded SDK package currently await their full prepared refresh. Direct public/type/error/resource obligations are not closed by those earlier narrow runs."
+      ],
+      "unresolved": "Execute current-candidate complete public API and installed type/constant/error-property comparisons against the unchanged original source. Exercise original accepted/refused values and host/identity behavior across the full declared domain, including resource boundaries, then complete required package/platform acceptance. Reconcile any extra/missing properties or domain differences explicitly; no owner deviation is accepted.",
+      "acceptance": "Compile an external TypeScript/Rust consumer against the mapped public types; parsed wire values cannot construct checked capability states. Bind the actual installed source/SDK/native identity and original assertion/type/byte expectations; no source inspection or selected callback pass alone closes this public obligation."
+    },
+    {
+      "id": "parity:0d2acb320b4277d59be1",
+      "name": "SssomExportResult",
+      "status": "implemented-unverified",
+      "origin": {
+        "path": "src/sssom-model.ts",
+        "digest": "sha256:54addd3d236315bfc0a20d8f985aa36c2d2793e338e5f2f76db807febce0fe95",
+        "line": 35,
+        "column": 1
+      },
+      "candidateEntryPoint": {
+        "path": "sdk/typescript/sssom.d.ts",
+        "symbol": "SssomExportResult",
+        "declaration": "sdk/typescript/sssom.d.ts"
+      },
+      "nativeAnalogue": {
+        "path": "crates/patamaps-scientific/src/model.rs",
+        "symbol": "ExportedSssom",
+        "scope": "Current native SSSOM parsing/interpretation and public SDK models/metadata; original full type/value, identity/error, resource and required package/platform behavior remains unverified."
+      },
+      "facts": [
+        "Frozen original exported-symbol SssomExportResult is declared in src/sssom-model.ts at sha256:54addd3d236315bfc0a20d8f985aa36c2d2793e338e5f2f76db807febce0fe95.",
+        "The SDK has the corresponding public SssomExportResult implementation/declaration, re-exported through index.mjs/index.d.ts. Canonical/SSSOM computation calls the native executable; error objects and constants are host/data declarations.",
+        "Prior callback/boundary evidence applies to its identified previous candidate and selected cases only. The rebuilt signed-zero candidate and expanded SDK package currently await their full prepared refresh. Direct public/type/error/resource obligations are not closed by those earlier narrow runs."
+      ],
+      "unresolved": "Execute current-candidate complete public API and installed type/constant/error-property comparisons against the unchanged original source. Exercise original accepted/refused values and host/identity behavior across the full declared domain, including resource boundaries, then complete required package/platform acceptance. Reconcile any extra/missing properties or domain differences explicitly; no owner deviation is accepted.",
+      "acceptance": "Compile an external TypeScript/Rust consumer against the mapped public types; parsed wire values cannot construct checked capability states. Bind the actual installed source/SDK/native identity and original assertion/type/byte expectations; no source inspection or selected callback pass alone closes this public obligation."
+    },
+    {
+      "id": "parity:4a01815e1c8611f7d8c9",
+      "name": "SssomInterpretation",
+      "status": "implemented-unverified",
+      "origin": {
+        "path": "src/sssom-model.ts",
+        "digest": "sha256:54addd3d236315bfc0a20d8f985aa36c2d2793e338e5f2f76db807febce0fe95",
+        "line": 20,
+        "column": 1
+      },
+      "candidateEntryPoint": {
+        "path": "sdk/typescript/sssom.d.ts",
+        "symbol": "SssomInterpretation",
+        "declaration": "sdk/typescript/sssom.d.ts"
+      },
+      "nativeAnalogue": {
+        "path": "crates/patamaps-scientific/src/model.rs",
+        "symbol": "Interpretation",
+        "scope": "Current native SSSOM parsing/interpretation and public SDK models/metadata; original full type/value, identity/error, resource and required package/platform behavior remains unverified."
+      },
+      "facts": [
+        "Frozen original exported-symbol SssomInterpretation is declared in src/sssom-model.ts at sha256:54addd3d236315bfc0a20d8f985aa36c2d2793e338e5f2f76db807febce0fe95.",
+        "The SDK has the corresponding public SssomInterpretation implementation/declaration, re-exported through index.mjs/index.d.ts. Canonical/SSSOM computation calls the native executable; error objects and constants are host/data declarations.",
+        "Prior callback/boundary evidence applies to its identified previous candidate and selected cases only. The rebuilt signed-zero candidate and expanded SDK package currently await their full prepared refresh. Direct public/type/error/resource obligations are not closed by those earlier narrow runs."
+      ],
+      "unresolved": "Execute current-candidate complete public API and installed type/constant/error-property comparisons against the unchanged original source. Exercise original accepted/refused values and host/identity behavior across the full declared domain, including resource boundaries, then complete required package/platform acceptance. Reconcile any extra/missing properties or domain differences explicitly; no owner deviation is accepted.",
+      "acceptance": "Compile an external TypeScript/Rust consumer against the mapped public types; parsed wire values cannot construct checked capability states. Bind the actual installed source/SDK/native identity and original assertion/type/byte expectations; no source inspection or selected callback pass alone closes this public obligation."
+    },
+    {
+      "id": "parity:69e04bcfbe365ff9cf7d",
+      "name": "SssomRecord",
+      "status": "implemented-unverified",
+      "origin": {
+        "path": "src/sssom-model.ts",
+        "digest": "sha256:54addd3d236315bfc0a20d8f985aa36c2d2793e338e5f2f76db807febce0fe95",
+        "line": 14,
+        "column": 1
+      },
+      "candidateEntryPoint": {
+        "path": "sdk/typescript/sssom.d.ts",
+        "symbol": "SssomRecord",
+        "declaration": "sdk/typescript/sssom.d.ts"
+      },
+      "nativeAnalogue": {
+        "path": "crates/patamaps-scientific/src/model.rs",
+        "symbol": "SssomRecord",
+        "scope": "Current native SSSOM parsing/interpretation and public SDK models/metadata; original full type/value, identity/error, resource and required package/platform behavior remains unverified."
+      },
+      "facts": [
+        "Frozen original exported-symbol SssomRecord is declared in src/sssom-model.ts at sha256:54addd3d236315bfc0a20d8f985aa36c2d2793e338e5f2f76db807febce0fe95.",
+        "The SDK has the corresponding public SssomRecord implementation/declaration, re-exported through index.mjs/index.d.ts. Canonical/SSSOM computation calls the native executable; error objects and constants are host/data declarations.",
+        "Prior callback/boundary evidence applies to its identified previous candidate and selected cases only. The rebuilt signed-zero candidate and expanded SDK package currently await their full prepared refresh. Direct public/type/error/resource obligations are not closed by those earlier narrow runs."
+      ],
+      "unresolved": "Execute current-candidate complete public API and installed type/constant/error-property comparisons against the unchanged original source. Exercise original accepted/refused values and host/identity behavior across the full declared domain, including resource boundaries, then complete required package/platform acceptance. Reconcile any extra/missing properties or domain differences explicitly; no owner deviation is accepted.",
+      "acceptance": "Compile an external TypeScript/Rust consumer against the mapped public types; parsed wire values cannot construct checked capability states. Bind the actual installed source/SDK/native identity and original assertion/type/byte expectations; no source inspection or selected callback pass alone closes this public obligation."
+    },
+    {
+      "id": "parity:d5f3986e7cf17edf0773",
+      "name": "SSSOM_BUILTIN_PREFIXES",
+      "status": "implemented-unverified",
+      "origin": {
+        "path": "src/sssom.ts",
+        "digest": "sha256:bc99ab38d7b4e9d8754bafdadddca5edb164de116464ab0b9a454a5a8ac8c6af",
+        "line": 23,
+        "column": 14
+      },
+      "candidateEntryPoint": {
+        "path": "sdk/typescript/sssom.mjs",
+        "symbol": "SSSOM_BUILTIN_PREFIXES",
+        "declaration": "sdk/typescript/sssom.d.ts"
+      },
+      "nativeAnalogue": {
+        "path": "crates/patamaps-scientific/src/interpret.rs",
+        "symbol": "builtin_prefixes",
+        "scope": "Current native SSSOM parsing/interpretation and public SDK models/metadata; original full type/value, identity/error, resource and required package/platform behavior remains unverified."
+      },
+      "facts": [
+        "Frozen original exported-symbol SSSOM_BUILTIN_PREFIXES is declared in src/sssom.ts at sha256:bc99ab38d7b4e9d8754bafdadddca5edb164de116464ab0b9a454a5a8ac8c6af.",
+        "The SDK has the corresponding public SSSOM_BUILTIN_PREFIXES implementation/declaration, re-exported through index.mjs/index.d.ts. Canonical/SSSOM computation calls the native executable; error objects and constants are host/data declarations.",
+        "Prior callback/boundary evidence applies to its identified previous candidate and selected cases only. The rebuilt signed-zero candidate and expanded SDK package currently await their full prepared refresh. Direct public/type/error/resource obligations are not closed by those earlier narrow runs."
+      ],
+      "unresolved": "Execute current-candidate complete public API and installed type/constant/error-property comparisons against the unchanged original source. Exercise original accepted/refused values and host/identity behavior across the full declared domain, including resource boundaries, then complete required package/platform acceptance. Reconcile any extra/missing properties or domain differences explicitly; no owner deviation is accepted.",
+      "acceptance": "Invoke the Rust-backed mapped operation on the frozen original inputs; compare complete results, refusals and unknown states under the explicit compatibility rules. Bind the actual installed source/SDK/native identity and original assertion/type/byte expectations; no source inspection or selected callback pass alone closes this public obligation."
+    },
+    {
+      "id": "parity:003112e8f1ab90033c03",
+      "name": "SSSOM_MAX_BYTES",
+      "status": "implemented-unverified",
+      "origin": {
+        "path": "src/sssom.ts",
+        "digest": "sha256:bc99ab38d7b4e9d8754bafdadddca5edb164de116464ab0b9a454a5a8ac8c6af",
+        "line": 19,
+        "column": 14
+      },
+      "candidateEntryPoint": {
+        "path": "sdk/typescript/sssom.mjs",
+        "symbol": "SSSOM_MAX_BYTES",
+        "declaration": "sdk/typescript/sssom.d.ts"
+      },
+      "nativeAnalogue": {
+        "path": "crates/patamaps-scientific/src/model.rs",
+        "symbol": "SSSOM_MAX_BYTES",
+        "scope": "Current native SSSOM parsing/interpretation and public SDK models/metadata; original full type/value, identity/error, resource and required package/platform behavior remains unverified."
+      },
+      "facts": [
+        "Frozen original exported-symbol SSSOM_MAX_BYTES is declared in src/sssom.ts at sha256:bc99ab38d7b4e9d8754bafdadddca5edb164de116464ab0b9a454a5a8ac8c6af.",
+        "The SDK has the corresponding public SSSOM_MAX_BYTES implementation/declaration, re-exported through index.mjs/index.d.ts. Canonical/SSSOM computation calls the native executable; error objects and constants are host/data declarations.",
+        "Prior callback/boundary evidence applies to its identified previous candidate and selected cases only. The rebuilt signed-zero candidate and expanded SDK package currently await their full prepared refresh. Direct public/type/error/resource obligations are not closed by those earlier narrow runs."
+      ],
+      "unresolved": "Execute current-candidate complete public API and installed type/constant/error-property comparisons against the unchanged original source. Exercise original accepted/refused values and host/identity behavior across the full declared domain, including resource boundaries, then complete required package/platform acceptance. Reconcile any extra/missing properties or domain differences explicitly; no owner deviation is accepted.",
+      "acceptance": "Invoke the Rust-backed mapped operation on the frozen original inputs; compare complete results, refusals and unknown states under the explicit compatibility rules. Bind the actual installed source/SDK/native identity and original assertion/type/byte expectations; no source inspection or selected callback pass alone closes this public obligation."
+    },
+    {
+      "id": "parity:846b9e9400dd7a4c42e8",
+      "name": "SSSOM_PROPAGATABLE_SLOTS",
+      "status": "implemented-unverified",
+      "origin": {
+        "path": "src/sssom.ts",
+        "digest": "sha256:bc99ab38d7b4e9d8754bafdadddca5edb164de116464ab0b9a454a5a8ac8c6af",
+        "line": 45,
+        "column": 14
+      },
+      "candidateEntryPoint": {
+        "path": "sdk/typescript/sssom.mjs",
+        "symbol": "SSSOM_PROPAGATABLE_SLOTS",
+        "declaration": "sdk/typescript/sssom.d.ts"
+      },
+      "nativeAnalogue": {
+        "path": "crates/patamaps-scientific/src/lib.rs",
+        "symbol": "propagatable_slots",
+        "scope": "Current native SSSOM parsing/interpretation and public SDK models/metadata; original full type/value, identity/error, resource and required package/platform behavior remains unverified."
+      },
+      "facts": [
+        "Frozen original exported-symbol SSSOM_PROPAGATABLE_SLOTS is declared in src/sssom.ts at sha256:bc99ab38d7b4e9d8754bafdadddca5edb164de116464ab0b9a454a5a8ac8c6af.",
+        "The SDK has the corresponding public SSSOM_PROPAGATABLE_SLOTS implementation/declaration, re-exported through index.mjs/index.d.ts. Canonical/SSSOM computation calls the native executable; error objects and constants are host/data declarations.",
+        "Prior callback/boundary evidence applies to its identified previous candidate and selected cases only. The rebuilt signed-zero candidate and expanded SDK package currently await their full prepared refresh. Direct public/type/error/resource obligations are not closed by those earlier narrow runs."
+      ],
+      "unresolved": "Execute current-candidate complete public API and installed type/constant/error-property comparisons against the unchanged original source. Exercise original accepted/refused values and host/identity behavior across the full declared domain, including resource boundaries, then complete required package/platform acceptance. Reconcile any extra/missing properties or domain differences explicitly; no owner deviation is accepted.",
+      "acceptance": "Invoke the Rust-backed mapped operation on the frozen original inputs; compare complete results, refusals and unknown states under the explicit compatibility rules. Bind the actual installed source/SDK/native identity and original assertion/type/byte expectations; no source inspection or selected callback pass alone closes this public obligation."
+    },
+    {
+      "id": "parity:cd68e5b28d35ba574f1d",
+      "name": "SssomError",
+      "status": "implemented-unverified",
+      "origin": {
+        "path": "src/sssom.ts",
+        "digest": "sha256:bc99ab38d7b4e9d8754bafdadddca5edb164de116464ab0b9a454a5a8ac8c6af",
+        "line": 75,
+        "column": 1
+      },
+      "candidateEntryPoint": {
+        "path": "sdk/typescript/sssom.mjs",
+        "symbol": "SssomError",
+        "declaration": "sdk/typescript/sssom.d.ts"
+      },
+      "nativeAnalogue": {
+        "path": "crates/patamaps-scientific/src/lib.rs",
+        "symbol": "Error",
+        "scope": "Current native SSSOM parsing/interpretation and public SDK models/metadata; original full type/value, identity/error, resource and required package/platform behavior remains unverified."
+      },
+      "facts": [
+        "Frozen original exported-symbol SssomError is declared in src/sssom.ts at sha256:bc99ab38d7b4e9d8754bafdadddca5edb164de116464ab0b9a454a5a8ac8c6af.",
+        "The SDK has the corresponding public SssomError implementation/declaration, re-exported through index.mjs/index.d.ts. Canonical/SSSOM computation calls the native executable; error objects and constants are host/data declarations.",
+        "Prior callback/boundary evidence applies to its identified previous candidate and selected cases only. The rebuilt signed-zero candidate and expanded SDK package currently await their full prepared refresh. Direct public/type/error/resource obligations are not closed by those earlier narrow runs."
+      ],
+      "unresolved": "Execute current-candidate complete public API and installed type/constant/error-property comparisons against the unchanged original source. Exercise original accepted/refused values and host/identity behavior across the full declared domain, including resource boundaries, then complete required package/platform acceptance. Reconcile any extra/missing properties or domain differences explicitly; no owner deviation is accepted.",
+      "acceptance": "Invoke the Rust-backed mapped operation on the frozen original inputs; compare complete results, refusals and unknown states under the explicit compatibility rules. Bind the actual installed source/SDK/native identity and original assertion/type/byte expectations; no source inspection or selected callback pass alone closes this public obligation."
+    },
+    {
+      "id": "parity:f25b46a76f026a4c5b33",
+      "name": "expandSssomCurie",
+      "status": "implemented-unverified",
+      "origin": {
+        "path": "src/sssom.ts",
+        "digest": "sha256:bc99ab38d7b4e9d8754bafdadddca5edb164de116464ab0b9a454a5a8ac8c6af",
+        "line": 140,
+        "column": 1
+      },
+      "candidateEntryPoint": {
+        "path": "sdk/typescript/sssom.mjs",
+        "symbol": "expandSssomCurie",
+        "declaration": "sdk/typescript/sssom.d.ts"
+      },
+      "nativeAnalogue": {
+        "path": "crates/patamaps-scientific/src/interpret.rs",
+        "symbol": "expand_curie",
+        "scope": "Current native SSSOM parsing/interpretation and public SDK models/metadata; original full type/value, identity/error, resource and required package/platform behavior remains unverified."
+      },
+      "facts": [
+        "Frozen original exported-symbol expandSssomCurie is declared in src/sssom.ts at sha256:bc99ab38d7b4e9d8754bafdadddca5edb164de116464ab0b9a454a5a8ac8c6af.",
+        "The SDK has the corresponding public expandSssomCurie implementation/declaration, re-exported through index.mjs/index.d.ts. Canonical/SSSOM computation calls the native executable; error objects and constants are host/data declarations.",
+        "Prior callback/boundary evidence applies to its identified previous candidate and selected cases only. The rebuilt signed-zero candidate and expanded SDK package currently await their full prepared refresh. Direct public/type/error/resource obligations are not closed by those earlier narrow runs."
+      ],
+      "unresolved": "Execute current-candidate complete public API and installed type/constant/error-property comparisons against the unchanged original source. Exercise original accepted/refused values and host/identity behavior across the full declared domain, including resource boundaries, then complete required package/platform acceptance. Reconcile any extra/missing properties or domain differences explicitly; no owner deviation is accepted.",
+      "acceptance": "Invoke the Rust-backed mapped operation on the frozen original inputs; compare complete results, refusals and unknown states under the explicit compatibility rules. Bind the actual installed source/SDK/native identity and original assertion/type/byte expectations; no source inspection or selected callback pass alone closes this public obligation."
+    },
+    {
+      "id": "parity:32410d7713db3e9cca26",
+      "name": "exportSssomTsv",
+      "status": "implemented-unverified",
+      "origin": {
+        "path": "src/sssom.ts",
+        "digest": "sha256:bc99ab38d7b4e9d8754bafdadddca5edb164de116464ab0b9a454a5a8ac8c6af",
+        "line": 638,
+        "column": 1
+      },
+      "candidateEntryPoint": {
+        "path": "sdk/typescript/sssom.mjs",
+        "symbol": "exportSssomTsv",
+        "declaration": "sdk/typescript/sssom.d.ts"
+      },
+      "nativeAnalogue": {
+        "path": "crates/patamaps-scientific/src/export.rs",
+        "symbol": "export_tsv",
+        "scope": "Current native SSSOM parsing/interpretation and public SDK models/metadata; original full type/value, identity/error, resource and required package/platform behavior remains unverified."
+      },
+      "facts": [
+        "Frozen original exported-symbol exportSssomTsv is declared in src/sssom.ts at sha256:bc99ab38d7b4e9d8754bafdadddca5edb164de116464ab0b9a454a5a8ac8c6af.",
+        "The SDK has the corresponding public exportSssomTsv implementation/declaration, re-exported through index.mjs/index.d.ts. Canonical/SSSOM computation calls the native executable; error objects and constants are host/data declarations.",
+        "Prior callback/boundary evidence applies to its identified previous candidate and selected cases only. The rebuilt signed-zero candidate and expanded SDK package currently await their full prepared refresh. Direct public/type/error/resource obligations are not closed by those earlier narrow runs."
+      ],
+      "unresolved": "Execute current-candidate complete public API and installed type/constant/error-property comparisons against the unchanged original source. Exercise original accepted/refused values and host/identity behavior across the full declared domain, including resource boundaries, then complete required package/platform acceptance. Reconcile any extra/missing properties or domain differences explicitly; no owner deviation is accepted.",
+      "acceptance": "Invoke the Rust-backed mapped operation on the frozen original inputs; compare complete results, refusals and unknown states under the explicit compatibility rules. Bind the actual installed source/SDK/native identity and original assertion/type/byte expectations; no source inspection or selected callback pass alone closes this public obligation."
+    },
+    {
+      "id": "parity:78bfbe9603f2e11aad75",
+      "name": "interpretSssomDocument",
+      "status": "implemented-unverified",
+      "origin": {
+        "path": "src/sssom.ts",
+        "digest": "sha256:bc99ab38d7b4e9d8754bafdadddca5edb164de116464ab0b9a454a5a8ac8c6af",
+        "line": 578,
+        "column": 1
+      },
+      "candidateEntryPoint": {
+        "path": "sdk/typescript/sssom.mjs",
+        "symbol": "interpretSssomDocument",
+        "declaration": "sdk/typescript/sssom.d.ts"
+      },
+      "nativeAnalogue": {
+        "path": "crates/patamaps-scientific/src/interpret.rs",
+        "symbol": "check_document_compatible",
+        "scope": "Current native SSSOM parsing/interpretation and public SDK models/metadata; original full type/value, identity/error, resource and required package/platform behavior remains unverified."
+      },
+      "facts": [
+        "Frozen original exported-symbol interpretSssomDocument is declared in src/sssom.ts at sha256:bc99ab38d7b4e9d8754bafdadddca5edb164de116464ab0b9a454a5a8ac8c6af.",
+        "The SDK has the corresponding public interpretSssomDocument implementation/declaration, re-exported through index.mjs/index.d.ts. Canonical/SSSOM computation calls the native executable; error objects and constants are host/data declarations.",
+        "Prior callback/boundary evidence applies to its identified previous candidate and selected cases only. The rebuilt signed-zero candidate and expanded SDK package currently await their full prepared refresh. Direct public/type/error/resource obligations are not closed by those earlier narrow runs."
+      ],
+      "unresolved": "Execute current-candidate complete public API and installed type/constant/error-property comparisons against the unchanged original source. Exercise original accepted/refused values and host/identity behavior across the full declared domain, including resource boundaries, then complete required package/platform acceptance. Reconcile any extra/missing properties or domain differences explicitly; no owner deviation is accepted.",
+      "acceptance": "Invoke the Rust-backed mapped operation on the frozen original inputs; compare complete results, refusals and unknown states under the explicit compatibility rules. Bind the actual installed source/SDK/native identity and original assertion/type/byte expectations; no source inspection or selected callback pass alone closes this public obligation."
+    },
+    {
+      "id": "parity:951d8b2d06a23cf96711",
+      "name": "parseSssomDocument",
+      "status": "implemented-unverified",
+      "origin": {
+        "path": "src/sssom.ts",
+        "digest": "sha256:bc99ab38d7b4e9d8754bafdadddca5edb164de116464ab0b9a454a5a8ac8c6af",
+        "line": 573,
+        "column": 1
+      },
+      "candidateEntryPoint": {
+        "path": "sdk/typescript/sssom.mjs",
+        "symbol": "parseSssomDocument",
+        "declaration": "sdk/typescript/sssom.d.ts"
+      },
+      "nativeAnalogue": {
+        "path": "crates/patamaps-scientific/src/interpret.rs",
+        "symbol": "check_document_compatible",
+        "scope": "Current native SSSOM parsing/interpretation and public SDK models/metadata; original full type/value, identity/error, resource and required package/platform behavior remains unverified."
+      },
+      "facts": [
+        "Frozen original exported-symbol parseSssomDocument is declared in src/sssom.ts at sha256:bc99ab38d7b4e9d8754bafdadddca5edb164de116464ab0b9a454a5a8ac8c6af.",
+        "The SDK has the corresponding public parseSssomDocument implementation/declaration, re-exported through index.mjs/index.d.ts. Canonical/SSSOM computation calls the native executable; error objects and constants are host/data declarations.",
+        "Prior callback/boundary evidence applies to its identified previous candidate and selected cases only. The rebuilt signed-zero candidate and expanded SDK package currently await their full prepared refresh. Direct public/type/error/resource obligations are not closed by those earlier narrow runs."
+      ],
+      "unresolved": "Execute current-candidate complete public API and installed type/constant/error-property comparisons against the unchanged original source. Exercise original accepted/refused values and host/identity behavior across the full declared domain, including resource boundaries, then complete required package/platform acceptance. Reconcile any extra/missing properties or domain differences explicitly; no owner deviation is accepted.",
+      "acceptance": "Invoke the Rust-backed mapped operation on the frozen original inputs; compare complete results, refusals and unknown states under the explicit compatibility rules. Bind the actual installed source/SDK/native identity and original assertion/type/byte expectations; no source inspection or selected callback pass alone closes this public obligation."
+    },
+    {
+      "id": "parity:88d0e6a32d45884139da",
+      "name": "parseSssomSourceConfig",
+      "status": "implemented-unverified",
+      "origin": {
+        "path": "src/sssom.ts",
+        "digest": "sha256:bc99ab38d7b4e9d8754bafdadddca5edb164de116464ab0b9a454a5a8ac8c6af",
+        "line": 627,
+        "column": 1
+      },
+      "candidateEntryPoint": {
+        "path": "sdk/typescript/sssom.mjs",
+        "symbol": "parseSssomSourceConfig",
+        "declaration": "sdk/typescript/sssom.d.ts"
+      },
+      "nativeAnalogue": {
+        "path": "crates/patamaps-scientific/src/source.rs",
+        "symbol": "parse_sssom_source_config",
+        "scope": "Current native SSSOM parsing/interpretation and public SDK models/metadata; original full type/value, identity/error, resource and required package/platform behavior remains unverified."
+      },
+      "facts": [
+        "Frozen original exported-symbol parseSssomSourceConfig is declared in src/sssom.ts at sha256:bc99ab38d7b4e9d8754bafdadddca5edb164de116464ab0b9a454a5a8ac8c6af.",
+        "The SDK has the corresponding public parseSssomSourceConfig implementation/declaration, re-exported through index.mjs/index.d.ts. Canonical/SSSOM computation calls the native executable; error objects and constants are host/data declarations.",
+        "Prior callback/boundary evidence applies to its identified previous candidate and selected cases only. The rebuilt signed-zero candidate and expanded SDK package currently await their full prepared refresh. Direct public/type/error/resource obligations are not closed by those earlier narrow runs."
+      ],
+      "unresolved": "Execute current-candidate complete public API and installed type/constant/error-property comparisons against the unchanged original source. Exercise original accepted/refused values and host/identity behavior across the full declared domain, including resource boundaries, then complete required package/platform acceptance. Reconcile any extra/missing properties or domain differences explicitly; no owner deviation is accepted.",
+      "acceptance": "Invoke the Rust-backed mapped operation on the frozen original inputs; compare complete results, refusals and unknown states under the explicit compatibility rules. Bind the actual installed source/SDK/native identity and original assertion/type/byte expectations; no source inspection or selected callback pass alone closes this public obligation."
+    },
+    {
+      "id": "parity:355a44fb97171626b817",
+      "name": "parseSssomTsv",
+      "status": "implemented-unverified",
+      "origin": {
+        "path": "src/sssom.ts",
+        "digest": "sha256:bc99ab38d7b4e9d8754bafdadddca5edb164de116464ab0b9a454a5a8ac8c6af",
+        "line": 581,
+        "column": 1
+      },
+      "candidateEntryPoint": {
+        "path": "sdk/typescript/sssom.mjs",
+        "symbol": "parseSssomTsv",
+        "declaration": "sdk/typescript/sssom.d.ts"
+      },
+      "nativeAnalogue": {
+        "path": "crates/patamaps-scientific/src/interpret.rs",
+        "symbol": "parse_tsv_compatible",
+        "scope": "Current native SSSOM parsing/interpretation and public SDK models/metadata; original full type/value, identity/error, resource and required package/platform behavior remains unverified."
+      },
+      "facts": [
+        "Frozen original exported-symbol parseSssomTsv is declared in src/sssom.ts at sha256:bc99ab38d7b4e9d8754bafdadddca5edb164de116464ab0b9a454a5a8ac8c6af.",
+        "The SDK has the corresponding public parseSssomTsv implementation/declaration, re-exported through index.mjs/index.d.ts. Canonical/SSSOM computation calls the native executable; error objects and constants are host/data declarations.",
+        "Prior callback/boundary evidence applies to its identified previous candidate and selected cases only. The rebuilt signed-zero candidate and expanded SDK package currently await their full prepared refresh. Direct public/type/error/resource obligations are not closed by those earlier narrow runs."
+      ],
+      "unresolved": "Execute current-candidate complete public API and installed type/constant/error-property comparisons against the unchanged original source. Exercise original accepted/refused values and host/identity behavior across the full declared domain, including resource boundaries, then complete required package/platform acceptance. Reconcile any extra/missing properties or domain differences explicitly; no owner deviation is accepted.",
+      "acceptance": "Invoke the Rust-backed mapped operation on the frozen original inputs; compare complete results, refusals and unknown states under the explicit compatibility rules. Bind the actual installed source/SDK/native identity and original assertion/type/byte expectations; no source inspection or selected callback pass alone closes this public obligation."
+    },
+    {
+      "id": "parity:dfca390a02d032eebc42",
+      "name": "CanonicalJsonError.code",
+      "status": "implemented-unverified",
+      "origin": {
+        "path": "src/canonical.ts",
+        "digest": "sha256:06994bd6e52c332ef52e37dd92408372adc51a593067a1b03ba0108bf1adf7ce",
+        "line": 6
+      },
+      "candidateEntryPoint": {
+        "path": "sdk/typescript/canonical.mjs",
+        "symbol": "CanonicalJsonError.code",
+        "declaration": "sdk/typescript/canonical.d.ts"
+      },
+      "nativeAnalogue": {
+        "path": "crates/patamaps-contracts/src/json.rs",
+        "symbol": "JsonDiagnostic",
+        "scope": "Current native canonical/strict JSON parser and SDK error/legacy-reference bridge; original arbitrary-value, resource, full public type and required package/platform behavior remains unverified."
+      },
+      "facts": [
+        "Frozen original class-member CanonicalJsonError.code is declared in src/canonical.ts at sha256:06994bd6e52c332ef52e37dd92408372adc51a593067a1b03ba0108bf1adf7ce.",
+        "The SDK has the corresponding public CanonicalJsonError implementation/declaration, re-exported through index.mjs/index.d.ts. Canonical/SSSOM computation calls the native executable; error objects and constants are host/data declarations.",
+        "Prior callback/boundary evidence applies to its identified previous candidate and selected cases only. The rebuilt signed-zero candidate and expanded SDK package currently await their full prepared refresh. Direct public/type/error/resource obligations are not closed by those earlier narrow runs."
+      ],
+      "unresolved": "Execute current-candidate complete public API and installed type/constant/error-property comparisons against the unchanged original source. Exercise original accepted/refused values and host/identity behavior across the full declared domain, including resource boundaries, then complete required package/platform acceptance. Reconcile any extra/missing properties or domain differences explicitly; no owner deviation is accepted.",
+      "acceptance": "Compile and execute a consumer that inspects the public error property through the Rust-backed compatibility facade. Bind the actual installed source/SDK/native identity and original assertion/type/byte expectations; no source inspection or selected callback pass alone closes this public obligation."
+    },
+    {
+      "id": "parity:fb49041595f58e28534f",
+      "name": "SssomError.code",
+      "status": "implemented-unverified",
+      "origin": {
+        "path": "src/sssom.ts",
+        "digest": "sha256:bc99ab38d7b4e9d8754bafdadddca5edb164de116464ab0b9a454a5a8ac8c6af",
+        "line": 77
+      },
+      "candidateEntryPoint": {
+        "path": "sdk/typescript/sssom.mjs",
+        "symbol": "SssomError.code",
+        "declaration": "sdk/typescript/sssom.d.ts"
+      },
+      "nativeAnalogue": {
+        "path": "crates/patamaps-scientific/src/lib.rs",
+        "symbol": "Error",
+        "scope": "Current native SSSOM parsing/interpretation and public SDK models/metadata; original full type/value, identity/error, resource and required package/platform behavior remains unverified."
+      },
+      "facts": [
+        "Frozen original class-member SssomError.code is declared in src/sssom.ts at sha256:bc99ab38d7b4e9d8754bafdadddca5edb164de116464ab0b9a454a5a8ac8c6af.",
+        "The SDK has the corresponding public SssomError implementation/declaration, re-exported through index.mjs/index.d.ts. Canonical/SSSOM computation calls the native executable; error objects and constants are host/data declarations.",
+        "Prior callback/boundary evidence applies to its identified previous candidate and selected cases only. The rebuilt signed-zero candidate and expanded SDK package currently await their full prepared refresh. Direct public/type/error/resource obligations are not closed by those earlier narrow runs."
+      ],
+      "unresolved": "Execute current-candidate complete public API and installed type/constant/error-property comparisons against the unchanged original source. Exercise original accepted/refused values and host/identity behavior across the full declared domain, including resource boundaries, then complete required package/platform acceptance. Reconcile any extra/missing properties or domain differences explicitly; no owner deviation is accepted.",
+      "acceptance": "Compile and execute a consumer that inspects the public error property through the Rust-backed compatibility facade. Bind the actual installed source/SDK/native identity and original assertion/type/byte expectations; no source inspection or selected callback pass alone closes this public obligation."
+    }
+  ]
+}

@@ -1,0 +1,69 @@
+{
+  "schemaVersion": "1.0.0",
+  "status": "failed",
+  "commands": [
+    {
+      "label": "build",
+      "command": [
+        "/Users/admin/.cargo/bin/cargo",
+        "build",
+        "--locked",
+        "-p",
+        "patamaps-cli"
+      ],
+      "exitCode": 0
+    },
+    {
+      "label": "clippy",
+      "command": [
+        "/Users/admin/.cargo/bin/cargo",
+        "clippy",
+        "--locked",
+        "--workspace",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exitCode": 0
+    },
+    {
+      "label": "native",
+      "command": [
+        "/opt/homebrew/bin/python3",
+        "-B",
+        "scripts/parity/native.py"
+      ],
+      "exitCode": 0
+    },
+    {
+      "label": "installed-sdk",
+      "command": [
+        "/opt/homebrew/bin/python3",
+        "-B",
+        "scripts/parity/sdk_consumer.py"
+      ],
+      "exitCode": 1
+    }
+  ],
+  "functionalEvidence": [
+    {
+      "path": "docs/acceptance/parity/native-2026-10-13T01-02-06.081261Z/receipt.json",
+      "digest": "sha256:6de49333c64e5509b446afe5f33ca430f7bae2399b2237bef054605abd97a02c"
+    },
+    {
+      "path": "docs/acceptance/parity/sdk-consumer-2026-10-13T01-02-41.283049Z/receipt.json",
+      "digest": "sha256:f9c5e2422a35a084546416164a4dc094354538af3ab61adc42e083c94fc78c4b"
+    }
+  ],
+  "binaryDigest": "sha256:5bc88d4470ca46b22d1927068869e5d01991c356c17c019fa2ed2210ff3280a5",
+  "candidateEngine": {
+    "compiler": "sha256:d48dc57ed54534f78f3ce7af66afb2973bf631aaa3212e5739117911dd55cb65",
+    "documentType": "executor-description",
+    "governance": "sha256:105d7fccbeb266ee95e299dff8fbab7a9c3e6d8adabd3eca571276563b9e42a9",
+    "schemaVersion": "0.1.0",
+    "scientific": "sha256:36228ca0b9fb8de449bbbe8e9d42537ab670d6e34acf516593a3d45037525657",
+    "workspace": "sha256:b933da6c0b55d919da0d55236897c28f3b49f3f839bacfa3ac5bf6c9b5f51821"
+  },
+  "scope": "Full prior portable/component/installed/original callback refresh plus original context/selector/impact observations. Full P0-P9 completion remains unresolved."
+}

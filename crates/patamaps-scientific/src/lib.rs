@@ -4,7 +4,13 @@ mod crate_export;
 mod export;
 mod graph;
 mod interpret;
+mod legacy_config;
 mod model;
+mod source;
+pub use legacy_config::{
+    LegacyConfigError, LegacyConfigRequest, LegacyLoadedConfig, legacy_config_request,
+    load_legacy_metamap_config_bytes, parse_legacy_metamap_config, resolve_legacy_config_path,
+};
 mod syntax;
 pub use crate_export::{
     CheckedScientificCrate, CrateOptions, ExternalSource, ScientificCrate, create_crate,
@@ -12,8 +18,12 @@ pub use crate_export::{
 };
 pub use export::export_tsv;
 pub use graph::{ImportOptions, import_graph, predicate_relation, scientific_pack};
-pub use interpret::{builtin_prefixes, check_document, expand_curie, parse_tsv};
+pub use interpret::{
+    builtin_prefixes, check_document, check_document_compatible, expand_curie, parse_tsv,
+    parse_tsv_compatible,
+};
 pub use model::*;
+pub use source::{SssomSourceConfig, parse_sssom_source_config, propagatable_slots};
 
 #[derive(Debug, thiserror::Error)]
 #[error("{code}: {message}")]

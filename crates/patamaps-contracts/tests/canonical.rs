@@ -99,6 +99,37 @@ fn parser_bounds_are_enforced_before_unlimited_recursion() {
 }
 
 #[test]
+fn compatibility_nesting_preserves_the_reference_domain_without_weakening_strict_parsing() {
+    use patamaps_contracts::{COMPATIBILITY_JSON_LIMITS, JsonLimits, parse_value_with_limits};
+    for depth in [65, 128, 512] {
+        let text = "[".repeat(depth) + "0" + &"]".repeat(depth);
+        assert!(parse_value(text.as_bytes()).is_err());
+        let parsed = parse_value_with_limits(text.as_bytes(), COMPATIBILITY_JSON_LIMITS).unwrap();
+        assert_eq!(canonical_bytes(&parsed).unwrap(), text.as_bytes());
+        assert_eq!(
+            canonical_digest(&parsed).unwrap(),
+            patamaps_contracts::byte_digest(text.as_bytes())
+        );
+    }
+    let text = "[".repeat(513) + "0" + &"]".repeat(513);
+    assert!(parse_value_with_limits(text.as_bytes(), COMPATIBILITY_JSON_LIMITS).is_err());
+    let duplicate = "{\"child\":".repeat(511) + "{\"a\":1,\"\\u0061\":2}" + &"}".repeat(511);
+    let error =
+        parse_value_with_limits(duplicate.as_bytes(), COMPATIBILITY_JSON_LIMITS).unwrap_err();
+    assert!(error.to_string().contains("DUPLICATE_JSON_KEY"));
+    assert!(
+        parse_value_with_limits(
+            b"0",
+            JsonLimits {
+                max_depth: 513,
+                ..COMPATIBILITY_JSON_LIMITS
+            }
+        )
+        .is_err()
+    );
+}
+
+#[test]
 fn draft_wire_is_closed_and_absent_differs_from_null() {
     let value: Value =
         serde_json::from_slice(include_bytes!("../../../fixtures/routing/graph.json")).unwrap();

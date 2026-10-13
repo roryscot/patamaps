@@ -1,0 +1,118 @@
+{
+  "schemaVersion": "1.0.0",
+  "createdAt": "2026-10-12T14:30:12.711970+00:00",
+  "status": "written-source-checked-rebuild-and-parity-pending",
+  "goalStatus": "active",
+  "commands": [
+    {
+      "name": "rust-format",
+      "command": [
+        "/Users/admin/.cargo/bin/cargo",
+        "fmt",
+        "--all",
+        "--",
+        "--check"
+      ],
+      "exitCode": 0,
+      "stdout": "docs/acceptance/parity/nested-pack-repair-2026-10-12T14-20-07.167116+00-00/source-checkpoint/rust-format.stdout.log",
+      "stderr": "docs/acceptance/parity/nested-pack-repair-2026-10-12T14-20-07.167116+00-00/source-checkpoint/rust-format.stderr.log"
+    },
+    {
+      "name": "pack-probe-syntax",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "--check",
+        "scripts/parity/pack_contracts.mjs"
+      ],
+      "exitCode": 0,
+      "stdout": "docs/acceptance/parity/nested-pack-repair-2026-10-12T14-20-07.167116+00-00/source-checkpoint/pack-probe-syntax.stdout.log",
+      "stderr": "docs/acceptance/parity/nested-pack-repair-2026-10-12T14-20-07.167116+00-00/source-checkpoint/pack-probe-syntax.stderr.log"
+    },
+    {
+      "name": "probe-format",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "/Users/admin/dev/patamaps/patamaps/.tools/parity/oracles/399747a4ad05-p8pkt3pr/reference/node_modules/prettier/bin/prettier.cjs",
+        "--check",
+        "scripts/parity/pack_contracts.mjs"
+      ],
+      "exitCode": 0,
+      "stdout": "docs/acceptance/parity/nested-pack-repair-2026-10-12T14-20-07.167116+00-00/source-checkpoint/probe-format.stdout.log",
+      "stderr": "docs/acceptance/parity/nested-pack-repair-2026-10-12T14-20-07.167116+00-00/source-checkpoint/probe-format.stderr.log"
+    },
+    {
+      "name": "diff-check",
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exitCode": 0,
+      "stdout": "docs/acceptance/parity/nested-pack-repair-2026-10-12T14-20-07.167116+00-00/source-checkpoint/diff-check.stdout.log",
+      "stderr": "docs/acceptance/parity/nested-pack-repair-2026-10-12T14-20-07.167116+00-00/source-checkpoint/diff-check.stderr.log"
+    },
+    {
+      "name": "source-integrity",
+      "command": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "-B",
+        "scripts/test_source_integrity.py",
+        "/Users/admin/dev/SEEDZ/metamap",
+        "--output",
+        "/Users/admin/dev/patamaps/patamaps/docs/acceptance/parity/nested-pack-repair-2026-10-12T14-20-07.167116+00-00/source-checkpoint/source-integrity.json"
+      ],
+      "exitCode": 0,
+      "stdout": "docs/acceptance/parity/nested-pack-repair-2026-10-12T14-20-07.167116+00-00/source-checkpoint/source-integrity.stdout.log",
+      "stderr": "docs/acceptance/parity/nested-pack-repair-2026-10-12T14-20-07.167116+00-00/source-checkpoint/source-integrity.stderr.log"
+    },
+    {
+      "name": "strict-ledger",
+      "command": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "-B",
+        "scripts/parity/verify.py",
+        "--strict"
+      ],
+      "exitCode": 1,
+      "stdout": "docs/acceptance/parity/nested-pack-repair-2026-10-12T14-20-07.167116+00-00/source-checkpoint/strict-ledger.stdout.log",
+      "stderr": "docs/acceptance/parity/nested-pack-repair-2026-10-12T14-20-07.167116+00-00/source-checkpoint/strict-ledger.stderr.log"
+    }
+  ],
+  "nativeRunnerAst": "passed",
+  "frozenReferenceBlobsVerified": 610,
+  "sourceEngine": {
+    "compiler": "sha256:56a63c7f70caf03a39deacebcb9361ef9e3a7b18f2ee290955ff259e64427f05",
+    "governance": "sha256:a1aaa1a75baf926dc6a9c649c48cbd28b40d052fd058d8f0d61df486f5442efc",
+    "workspace": "sha256:5d7b3eef2e8976ee883b3f5d2f158f555de7439805fb8fc99c1663d037b1c6be",
+    "scientific": "sha256:5c6319a65461f238db27117d3387e8d88f6a571a8162381549fdd3a4cc2e40fe"
+  },
+  "cachedEngine": {
+    "compiler": "sha256:427c041d01845cb78688980499d3c354815df2506e7ad72ac3a2a8488a29636f",
+    "documentType": "executor-description",
+    "governance": "sha256:63da5544412e971c7e12652c74b91c68267936e4a12f74b2227e49c7fbb157d2",
+    "schemaVersion": "0.1.0",
+    "scientific": "sha256:9ecbbf4424065e59033ae126a99b9159d12a9d4c855b8521cc4abbbbf48e1cf5",
+    "workspace": "sha256:20a60610dc1ab4092973878fb824550780e3e6bde8a2c099b92c4f069c9cee9c"
+  },
+  "currentSourceMatchesBinary": false,
+  "ledgerHistoricalStatusCounts": {
+    "unclassified": 1178,
+    "verified-equivalent": 87,
+    "missing": 16,
+    "implemented-unverified": 12
+  },
+  "initialNestedObservation": {
+    "receipt": "docs/acceptance/parity/pack-nested-controls-2026-10-12T14-15-11.393Z/receipt.json",
+    "matched": 98,
+    "compared": 161,
+    "differences": 63
+  },
+  "sharedLeaseAtCheckpoint": {
+    "pid": null,
+    "label": null,
+    "startedAt": null
+  },
+  "verification": "Latest Rust/SDK functional checks are not run. Prior 136 native, 159 pack, 472 graph, installed type controls and 87 selected original cases remain evidence for their exact preceding tested binary.",
+  "scope": "Preserved source/probe/failed-start checkpoint; no new functional acceptance, Linux acceptance, publication or activation.",
+  "fullParityAcceptance": false
+}

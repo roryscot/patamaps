@@ -1,0 +1,251 @@
+{
+  "schemaVersion": "1.0.0",
+  "status": "passed",
+  "commands": [
+    {
+      "label": "factory-control",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "/Users/admin/dev/patamaps/patamaps/docs/acceptance/parity/graph-functional-refresh-2026-10-12T20-00-52.722099+00-00/factory-check.mjs"
+      ],
+      "exitCode": 0
+    },
+    {
+      "label": "installed-sdk",
+      "command": [
+        "/opt/homebrew/bin/python3",
+        "-B",
+        "scripts/parity/sdk_consumer.py"
+      ],
+      "exitCode": 0
+    },
+    {
+      "label": "graph-controls",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "scripts/parity/graph_contracts.mjs"
+      ],
+      "exitCode": 0
+    },
+    {
+      "label": "registry-controls",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "scripts/parity/registry_contracts.mjs"
+      ],
+      "exitCode": 0
+    },
+    {
+      "label": "file-controls",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "scripts/parity/pack_contracts.mjs",
+        "--files"
+      ],
+      "exitCode": 0
+    },
+    {
+      "label": "nested-controls",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "scripts/parity/pack_contracts.mjs",
+        "--nested"
+      ],
+      "exitCode": 0
+    },
+    {
+      "label": "pack-controls",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "scripts/parity/pack_contracts.mjs"
+      ],
+      "exitCode": 0
+    },
+    {
+      "label": "frozen-validation",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "scripts/parity/legacy_validation.mjs"
+      ],
+      "exitCode": 0
+    },
+    {
+      "label": "original-canonical",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "scripts/parity/original.mjs"
+      ],
+      "exitCode": 0,
+      "attachmentExitCode": 1
+    },
+    {
+      "label": "original-sssom",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "scripts/parity/original.mjs",
+        "--sssom"
+      ],
+      "exitCode": 0,
+      "attachmentExitCode": 1
+    },
+    {
+      "label": "original-discovery",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "scripts/parity/original.mjs",
+        "--discovery"
+      ],
+      "exitCode": 0,
+      "attachmentExitCode": 1
+    },
+    {
+      "label": "original-sssom-adapter",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "scripts/parity/original.mjs",
+        "--sssom-adapter"
+      ],
+      "exitCode": 0,
+      "attachmentExitCode": 1
+    },
+    {
+      "label": "original-validation",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "scripts/parity/original.mjs",
+        "--validation"
+      ],
+      "exitCode": 0,
+      "attachmentExitCode": 1
+    },
+    {
+      "label": "original-registry",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "scripts/parity/original.mjs",
+        "--registry"
+      ],
+      "exitCode": 0,
+      "attachmentExitCode": 1
+    },
+    {
+      "label": "original-graph",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "scripts/parity/original.mjs",
+        "--graph"
+      ],
+      "exitCode": 0,
+      "attachmentExitCode": 0
+    },
+    {
+      "label": "discovery-api",
+      "command": [
+        "/opt/homebrew/bin/python3",
+        "-B",
+        "scripts/parity/discovery_api.py"
+      ],
+      "exitCode": 0
+    },
+    {
+      "label": "scientific-bounds",
+      "command": [
+        "/opt/homebrew/bin/python3",
+        "-B",
+        "scripts/parity/scientific_bounds.py"
+      ],
+      "exitCode": 0
+    }
+  ],
+  "functionalEvidence": [
+    {
+      "path": "docs/acceptance/parity/native-2026-10-12T19-57-38.062715Z/receipt.json",
+      "digest": "sha256:3a029c980398f18ae47799dca437d292ecdb8bc2d1220a04c1a46e869d80dfe1",
+      "reused": true
+    },
+    {
+      "path": "docs/acceptance/parity/graph-focused-2026-10-12T19-55-44.279878+00-00/receipt.json",
+      "digest": "sha256:ddd2b092026c4fcb85b48eb179d43203cba2e1cfa1f453d340632a8611b80dc2",
+      "reused": true
+    },
+    {
+      "path": "docs/acceptance/parity/graph-functional-refresh-2026-10-12T20-00-52.722099+00-00/factory-receipt.json",
+      "digest": "sha256:09a2db76ec7bdc177d93a041470d2267cbe6b3f1a3c84ec2fb3251d6eb222315"
+    },
+    {
+      "path": "docs/acceptance/parity/sdk-consumer-2026-10-12T20-01-52.188501Z/receipt.json",
+      "digest": "sha256:a31dbe8fddb386b4c57f8d23fac5486fde401a668e5a0a3ead4b2230ca48fcef"
+    },
+    {
+      "path": "docs/acceptance/parity/graph-controls-2026-10-12T20-01-55.544Z/receipt.json",
+      "digest": "sha256:754b80e9ebf3479e468a4c75bebf79eafc75de14964843a9e38d33986aafec86"
+    },
+    {
+      "path": "docs/acceptance/parity/registry-controls-2026-10-12T20-01-56.211Z/receipt.json",
+      "digest": "sha256:43e1c84714434d095b973c60829fb9fc8928666afd1bace96bbab51abd79695a"
+    },
+    {
+      "path": "docs/acceptance/parity/pack-file-controls-2026-10-12T20-01-56.993Z/receipt.json",
+      "digest": "sha256:bad47b42b078c4e54fcd8dd572bb9a22f073a902d4f534cb5a39960c04cf863b"
+    },
+    {
+      "path": "docs/acceptance/parity/pack-nested-controls-2026-10-12T20-01-57.262Z/receipt.json",
+      "digest": "sha256:d31a048cc7972ad14e9d19c96b7519673fc39810a258523f644220a1c3c98afa"
+    },
+    {
+      "path": "docs/acceptance/parity/pack-json-controls-2026-10-12T20-01-59.256Z/receipt.json",
+      "digest": "sha256:24c20256128ff398a338de79f7afd5e5836bc6a8d70fcadbe0743a9f0e9d34f9"
+    },
+    {
+      "path": "docs/acceptance/parity/legacy-validation-2026-10-12T20-02-01.014Z/receipt.json",
+      "digest": "sha256:2ba096e5ec4207e68a0ad07b63574c86c0016ec7caddec64bf8c2cd4124879ee"
+    },
+    {
+      "path": "docs/acceptance/parity/original-canonical-2026-10-12T20-02-08.048Z/receipt.json",
+      "digest": "sha256:cbfb4a16df931ae237e193905f1941d3efbb1c8e0bd3e8481e12f76501d28319"
+    },
+    {
+      "path": "docs/acceptance/parity/original-sssom-2026-10-12T20-02-09.274Z/receipt.json",
+      "digest": "sha256:fc215e4e847b985a5ac2dc2aaf6a37a0492735a38def59e0686e8af05e823127"
+    },
+    {
+      "path": "docs/acceptance/parity/original-discovery-2026-10-12T20-02-11.826Z/receipt.json",
+      "digest": "sha256:65b33ad6704919e5a87e39eaabe7a556e2a147c65c5efcd988928680ce1b759f"
+    },
+    {
+      "path": "docs/acceptance/parity/original-sssom-adapter-2026-10-12T20-02-13.700Z/receipt.json",
+      "digest": "sha256:31591092995da2b947b2516da55ad7fba44d7e6516a619e6aa0187c51a701018"
+    },
+    {
+      "path": "docs/acceptance/parity/original-validation-2026-10-12T20-02-17.107Z/receipt.json",
+      "digest": "sha256:b671280f93a3279aa215d43a2c539777c2a75979111723d4decac9d00934f0d0"
+    },
+    {
+      "path": "docs/acceptance/parity/original-registry-2026-10-12T20-02-18.507Z/receipt.json",
+      "digest": "sha256:5a6a83dcd2f3f3da3ed5b9ec39711206bc5637848964d87ddf7c6a7cacdf1648"
+    },
+    {
+      "path": "docs/acceptance/parity/original-graph-2026-10-12T20-02-20.362Z/receipt.json",
+      "digest": "sha256:6f9cf876c91bf79c4eb0fcbe91ef6319613a1acda43ddf0f5d4e80c72bb31931"
+    },
+    {
+      "path": "docs/acceptance/parity/discovery-api-2026-10-12T20-02-21.765735Z/receipt.json",
+      "digest": "sha256:8ad24e09a4dfb8bc549bd3b387348bc13aa44346fb7663b622309fc9d82a9753"
+    },
+    {
+      "path": "docs/acceptance/parity/scientific-bounds-2026-10-12T20-02-26.854166Z/receipt.json",
+      "digest": "sha256:461ca3a34cbccd0e45687d934483ee93ec7565dbaf89cdb5eaf2bfa80669b00d"
+    }
+  ],
+  "binaryDigest": "sha256:8610eb1b34faf8cfd11944969ef3ae1b1e57466535d48694afc2b85ce15af31c",
+  "candidateEngine": {
+    "compiler": "sha256:82c559154679ff17737bdaf7d4225bc9a80e1fcd3fa9d9aa725d933fe2a288f5",
+    "documentType": "executor-description",
+    "governance": "sha256:7a83400dca72c68ff9ef0cac87a589bdb69e399eeb3172360782bc5782608cee",
+    "schemaVersion": "0.1.0",
+    "scientific": "sha256:0f1b23ab099b7b9931dfe9cf9b4237b210432d6472e4202d0043f07fd064e639",
+    "workspace": "sha256:4bbc3c72af05c41f71648ca22d29b9a394e211c5b35397f28a78e8f294cf473e"
+  },
+  "resumedFrom": "docs/acceptance/parity/graph-functional-refresh-2026-10-12T19-56-51.447341+00-00/receipt.json",
+  "scope": "Current graph/native/SDK component refresh. Original callbacks and expectations remain unchanged; complete package, accepted-domain and platform parity remain unresolved."
+}

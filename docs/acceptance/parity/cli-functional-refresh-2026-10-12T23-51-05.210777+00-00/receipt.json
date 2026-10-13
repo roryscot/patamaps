@@ -1,0 +1,53 @@
+{
+  "schemaVersion": "1.0.0",
+  "status": "failed",
+  "commands": [
+    {
+      "label": "build",
+      "command": [
+        "/Users/admin/.cargo/bin/cargo",
+        "build",
+        "--locked",
+        "-p",
+        "patamaps-cli"
+      ],
+      "exitCode": 0,
+      "reusedGuardRecord": "/Users/admin/Documents/Codex/.storage-control/heavy-builds/runs/0400e7aa-fa45-47d8-ac5f-7f2c822870f7/run.json"
+    },
+    {
+      "label": "cli-controls",
+      "exitCode": 0,
+      "reusedReceipt": "docs/acceptance/parity/cli-controls-2026-10-12T23-49-27.417904+00-00/receipt.json"
+    },
+    {
+      "label": "cli-expanded-controls",
+      "command": [
+        "/opt/homebrew/bin/python3",
+        "-B",
+        "scripts/parity/cli_contracts.py",
+        "--expanded"
+      ],
+      "exitCode": 1
+    }
+  ],
+  "functionalEvidence": [
+    {
+      "path": "docs/acceptance/parity/cli-controls-2026-10-12T23-49-27.417904+00-00/receipt.json",
+      "digest": "sha256:df0a9e8d64c68cfaa42938125fb9e378b2750225f462935b1d26aedf48a958a5"
+    },
+    {
+      "path": "docs/acceptance/parity/cli-controls-2026-10-12T23-51-29.827967+00-00/receipt.json",
+      "digest": "sha256:c16233647ccde07a7c341b9eca4eaa290d1801f3eea73085bbc7278d5db9dd22"
+    }
+  ],
+  "binaryDigest": "sha256:c6fb2501198ceb155544ff492dfb830ea35627eaac8d1f72c5f943d5d83b5466",
+  "candidateEngine": {
+    "compiler": "sha256:f660ffd21394fd39250bed91c5f76edd1eefc5fde822587478e1e7636cec3906",
+    "documentType": "executor-description",
+    "governance": "sha256:c8f9ca38b13e71603e6acf6a02a298ec021565570ccc78103947012d1a6023d6",
+    "schemaVersion": "0.1.0",
+    "scientific": "sha256:832d7fe3c7f731e13f6726335e523cd0fd731b09a27b637ea534cf190d7c11ec",
+    "workspace": "sha256:0e88223f9c113a05b00d81178a0890715f7b16e7fc4c882f5b9f313438e75ee7"
+  },
+  "scope": "Current native and installed SDK/provider checks, unchanged original callback assertions, source-catalog migration and seven CLI workflows. Complete accepted-domain/package/platform parity remains unresolved."
+}

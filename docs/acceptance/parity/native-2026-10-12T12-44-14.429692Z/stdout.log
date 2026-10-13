@@ -1,0 +1,97 @@
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 8 tests
+test interoperable_integer_bounds_and_overflow_are_explicit ... ok
+test normative_unicode_order_and_no_normalization ... ok
+test normative_binary64_numbers_and_hash_bytes ... ok
+test malformed_or_duplicate_json_never_reaches_typed_values ... ok
+test nullable_budget_is_an_explicit_choice_and_absence_is_not_null ... ok
+test parser_bounds_are_enforced_before_unlimited_recursion ... ok
+test compatibility_nesting_preserves_the_reference_domain_without_weakening_strict_parsing ... ok
+test draft_wire_is_closed_and_absent_differs_from_null ... ok
+
+test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 3 tests
+test file_decoding_retains_invalid_utf8_evidence_and_rejects_bom_and_source_limits ... ok
+test raw_last_version_selects_duplicate_and_unicode_rules_without_changing_strict_json ... ok
+test legacy_decoding_preserves_utf16_units_and_private_use_scalar_collisions ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 8 tests
+test unknown_law_missing_premise_wrong_roles_and_nary_stay_distinct ... ok
+test law_context_and_declared_kind_conditions_are_checked ... ok
+test forbidden_close_chain_inconsistent_kinds_and_exact_import_drift_reject ... ok
+test declared_law_limits_are_incomplete_and_loss_is_conservative ... ok
+test inactive_partial_nondeterministic_irreversible_premises_cannot_be_upgraded ... ok
+test missing_proof_changed_premise_context_or_forged_readdressed_content_refuse ... ok
+test explicit_chain_proposes_without_mutating_or_transferring_authority ... ok
+test disjointness_applies_to_active_facts_and_cannot_be_waived ... ok
+
+test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.03s
+
+
+running 15 tests
+test nary_cycle_detection_does_not_reduce_endpoint_groups_to_one_pair ... ok
+test composition_deduplicates_equal_records_and_refuses_conflict ... ok
+test impact_preserves_origin_paths_and_reports_missing_information ... ok
+test open_kind_names_and_shared_physical_locators_do_not_merge_identities ... ok
+test applicability_requires_context_and_preserves_inactive_mapping ... ok
+test numeric_context_agrees_between_strict_ingress_and_typed_sdk_values ... ok
+test narrowing_delegation_resolves_but_widening_or_branch_conflict_fails ... ok
+test canonical_conflict_candidate_ambiguity_and_delegation_cycle_are_distinct ... ok
+test routing_is_usefully_admitted_with_fact_scoped_authority ... ok
+test duplicate_selector_values_and_deep_policy_metadata_refuse_admission ... ok
+test sdk_metadata_cannot_bypass_ingress_resource_limits ... ok
+test policy_coverage_unknown_operations_and_stale_graph_cannot_be_waived ... ok
+test unknown_evidence_does_not_meet_support_and_waivers_expire_at_boundary ... ok
+test sdk_numeric_metadata_is_normalized_to_the_declared_binary64_domain ... ok
+test duplicate_identity_dangling_endpoint_and_wrong_role_are_rejected ... ok
+
+test result: ok. 15 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s
+
+
+running 11 tests
+test original_pack_text_retains_legacy_duplicates_and_exact_source_binding ... ok
+test legacy_empty_kind_lists_preserve_data_and_original_digest_without_admission ... ok
+test executable_file_text_rejects_decoded_duplicates_before_unicode_and_retains_scalar_sources ... ok
+test valid_legacy_utf16_pack_remains_readable_and_addressable_without_lossy_native_admission ... ok
+test portable_schema_refusals_preserve_original_type_and_unknown_property_messages ... ok
+test portable_array_refusals_preserve_ajv_duplicate_pair_selection_and_type_filtering ... ok
+test schema_dispatch_rejects_unreported_fields_and_invalid_version_specific_shapes ... FAILED
+test portable_shape_is_separate_from_executable_scope_validation ... ok
+test preserved_uri_format_and_javascript_whitespace_are_not_replaced_by_other_standards ... ok
+test imported_registry_rejects_collisions_and_modern_mutation_without_changing_snapshot ... ok
+test executable_imports_bind_original_addresses_and_registration_order ... ok
+
+failures:
+
+---- schema_dispatch_rejects_unreported_fields_and_invalid_version_specific_shapes stdout ----
+
+thread 'schema_dispatch_rejects_unreported_fields_and_invalid_version_specific_shapes' (65569058) panicked at crates/patamaps-core/tests/legacy_pack.rs:287:5:
+assertion failed: error.issues.iter().any(|issue| issue.message.contains("newMandatoryFeature"))
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+
+failures:
+    schema_dispatch_rejects_unreported_fields_and_invalid_version_specific_shapes
+
+test result: FAILED. 10 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s
+

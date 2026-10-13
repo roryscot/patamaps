@@ -1,0 +1,128 @@
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: 
+ RUN  v3.2.7 /Users/admin/dev/patamaps/patamaps/.tools/parity/oracles/399747a4ad05-p8pkt3pr/reference
+
+ ❯ src/__tests__/executable-pack.test.ts (14 tests | 4 failed) 440ms
+   × explicit executable pack profile > requires the exact declared imports and freezes a copied executable definition 51ms
+     → invalid type: floating point `0.0`, expected usize
+   ✓ explicit executable pack profile > retains the original legacy pack digest convention 12ms
+   ✓ explicit executable pack profile > rejects unsupported law shape (value) => {
+      value.laws[0].operands = ["core:contains"];
+    } 13ms
+   ✓ explicit executable pack profile > rejects unsupported law shape (value) => {
+      value.laws[0].operation = "run-script";
+    } 12ms
+   ✓ explicit executable pack profile > rejects unsupported law shape (value) => {
+      value.laws[0].handling.authority = "transfer";
+    } 13ms
+   ✓ explicit executable pack profile > rejects unsupported law shape (value) => {
+      value.newMandatoryFeature = true;
+    } 12ms
+   ✓ explicit executable pack profile > rejects law references outside explicitly imported definitions 17ms
+   × explicit executable pack profile > rejects missing, changed, repeated and self imports 47ms
+     → Relation pack does not match the portable schema: /imports must NOT have duplicate items (items ## 0 and 1 are identical)
+   × explicit executable pack profile > detects a legacy dependency object drifting after executable registration 36ms
+     → expected [Function] to throw error matching /Missing exact/ but got 'invalid type: floating point `0.0`, e…'
+   × explicit executable pack profile > checks a nested executable dependency's exact legacy import 47ms
+     → invalid type: floating point `0.0`, expected usize
+   ✓ explicit executable pack profile > requires unconditional executable laws for a new transitive/symmetric/inverse claim 98ms
+   ✓ explicit executable pack profile > rejects transitivity contradicted by the relation and impossible endpoint kinds 39ms
+   ✓ explicit executable pack profile > rejects duplicate law IDs and does not partially register a rejected pack 36ms
+   ✓ explicit executable pack profile > rejects duplicate decoded JSON properties when loading an executable pack 6ms
+
+ Test Files  1 failed (1)
+      Tests  4 failed | 10 passed (14)
+   Start at  15:03:58
+   Duration  1.37s (transform 39ms, setup 19ms, collect 784ms, tests 440ms, environment 0ms, prepare 41ms)
+
+JSON report written to /Users/admin/dev/patamaps/patamaps/.tools/parity/runs/original-registry-YURpSE/vitest.json
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 4 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/__tests__/executable-pack.test.ts > explicit executable pack profile > requires the exact declared imports and freezes a copied executable definition
+Error: invalid type: floating point `0.0`, expected usize
+ ❯ finish ../../../../../sdk/typescript/legacy-validation.mjs:44:13
+     42|         : canonicalPackRefusal
+     43|           ? new CanonicalJsonError(code, message)
+     44|           : new Error(message);
+       |             ^
+     45|       if (!(
+     46|         command[2] === "registry" ||
+ ❯ invoke ../../../../../sdk/typescript/legacy-validation.mjs:72:12
+ ❯ LegacyRelationRegistry.#request ../../../../../sdk/typescript/legacy-registry.mjs:34:14
+ ❯ LegacyRelationRegistry.getLaw ../../../../../sdk/typescript/legacy-registry.mjs:78:35
+ ❯ LegacyRelationRegistry.getLaw ../../../../../sdk/typescript/legacy-validation.mjs:197:27
+ ❯ src/__tests__/executable-pack.test.ts:46:21
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/4]⎯
+
+ FAIL  src/__tests__/executable-pack.test.ts > explicit executable pack profile > rejects missing, changed, repeated and self imports
+Error: Relation pack does not match the portable schema: /imports must NOT have duplicate items (items ## 0 and 1 are identical)
+ ❯ finish ../../../../../sdk/typescript/legacy-validation.mjs:44:13
+     42|         : canonicalPackRefusal
+     43|           ? new CanonicalJsonError(code, message)
+     44|           : new Error(message);
+       |             ^
+     45|       if (!(
+     46|         command[2] === "registry" ||
+ ❯ invoke ../../../../../sdk/typescript/legacy-validation.mjs:72:12
+ ❯ Object.digestLegacyRelationPack ../../../../../sdk/typescript/legacy-validation.mjs:154:14
+ ❯ digestLegacyRelationPack ../../../../../sdk/typescript/legacy-validation.mjs:180:9
+ ❯ src/__tests__/executable-pack.test.ts:105:17
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/4]⎯
+
+ FAIL  src/__tests__/executable-pack.test.ts > explicit executable pack profile > detects a legacy dependency object drifting after executable registration
+AssertionError: expected [Function] to throw error matching /Missing exact/ but got 'invalid type: floating point `0.0`, e…'
+
+- Expected: 
+/Missing exact/
+
++ Received: 
+"invalid type: floating point `0.0`, expected usize"
+
+ ❯ src/__tests__/executable-pack.test.ts:126:55
+    124|     const registry = new RelationRegistry([legacy, value]);
+    125|     legacy.description = "drifted";
+    126|     expect(() => registry.getLaw("urn:law:contains")).toThrow(/Missing…
+       |                                                       ^
+    127|   });
+    128|   it("checks a nested executable dependency's exact legacy import", ()…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/4]⎯
+
+ FAIL  src/__tests__/executable-pack.test.ts > explicit executable pack profile > checks a nested executable dependency's exact legacy import
+Error: invalid type: floating point `0.0`, expected usize
+ ❯ finish ../../../../../sdk/typescript/legacy-validation.mjs:44:13
+     42|         : canonicalPackRefusal
+     43|           ? new CanonicalJsonError(code, message)
+     44|           : new Error(message);
+       |             ^
+     45|       if (!(
+     46|         command[2] === "registry" ||
+ ❯ invoke ../../../../../sdk/typescript/legacy-validation.mjs:72:12
+ ❯ LegacyRelationRegistry.#request ../../../../../sdk/typescript/legacy-registry.mjs:34:14
+ ❯ LegacyRelationRegistry.registerPack ../../../../../sdk/typescript/legacy-registry.mjs:39:35
+ ❯ new LegacyRelationRegistry ../../../../../sdk/typescript/legacy-registry.mjs:11:38
+ ❯ new LegacyRelationRegistry ../../../../../sdk/typescript/legacy-validation.mjs:188:22
+ ❯ src/__tests__/executable-pack.test.ts:154:22
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/4]⎯
+
+
+
+1 !== 0
+
+    at file:///Users/admin/dev/patamaps/patamaps/scripts/parity/original.mjs:528:8 {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: 1,
+  expected: 0,
+  operator: 'strictEqual',
+  diff: 'simple'
+}
+
+Node.js v24.21.0

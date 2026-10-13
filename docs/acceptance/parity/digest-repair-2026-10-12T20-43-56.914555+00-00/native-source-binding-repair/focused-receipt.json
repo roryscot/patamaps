@@ -1,0 +1,79 @@
+{
+  "status": "passed",
+  "commands": [
+    {
+      "label": "build",
+      "command": [
+        "/Users/admin/.cargo/bin/cargo",
+        "build",
+        "--offline",
+        "-p",
+        "patamaps-cli"
+      ],
+      "exitCode": 0
+    },
+    {
+      "label": "native-contracts-core",
+      "command": [
+        "/Users/admin/.cargo/bin/cargo",
+        "test",
+        "--locked",
+        "-p",
+        "patamaps-contracts",
+        "-p",
+        "patamaps-core"
+      ],
+      "exitCode": 0
+    },
+    {
+      "label": "digest-controls",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "scripts/parity/digest_contracts.mjs"
+      ],
+      "exitCode": 0
+    },
+    {
+      "label": "composition-controls",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "scripts/parity/composition_contracts.mjs"
+      ],
+      "exitCode": 0
+    },
+    {
+      "label": "pack-controls",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "scripts/parity/pack_contracts.mjs"
+      ],
+      "exitCode": 0
+    },
+    {
+      "label": "registry-controls",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "scripts/parity/registry_contracts.mjs"
+      ],
+      "exitCode": 0
+    }
+  ],
+  "functionalEvidence": [
+    {
+      "path": "docs/acceptance/parity/digest-controls-2026-10-12T20-56-14.403Z/receipt.json",
+      "digest": "sha256:bf1d51ded1b5f6313b9a9d5bab1f9b42cbe5737124a8315da0870c054e5e2020"
+    },
+    {
+      "path": "docs/acceptance/parity/composition-controls-2026-10-12T20-56-15.562Z/receipt.json",
+      "digest": "sha256:cd10fad48a0c1f2b04b9ab4acaad6c28af1134018cd7e5613e6b6e062288921d"
+    },
+    {
+      "path": "docs/acceptance/parity/pack-json-controls-2026-10-12T20-56-15.861Z/receipt.json",
+      "digest": "sha256:6b27231cfffa44a5699478cbd7edd610a953c591ad20aa5a9c7265c913ef9224"
+    },
+    {
+      "path": "docs/acceptance/parity/registry-controls-2026-10-12T20-56-17.639Z/receipt.json",
+      "digest": "sha256:2962176442bda18e4fc5f6b6c6b68cf3e1435372166482918854b931045a538d"
+    }
+  ]
+}

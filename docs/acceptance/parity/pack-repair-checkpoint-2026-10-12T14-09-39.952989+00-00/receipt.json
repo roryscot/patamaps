@@ -1,0 +1,161 @@
+{
+  "schemaVersion": "1.0.0",
+  "createdAt": "2026-10-12T14:10:23.176317+00:00",
+  "status": "scoped-verification-passed-full-parity-incomplete",
+  "goalStatus": "active",
+  "commands": [
+    {
+      "name": "rust-format",
+      "command": [
+        "/Users/admin/.cargo/bin/cargo",
+        "fmt",
+        "--all",
+        "--",
+        "--check"
+      ],
+      "exitCode": 0,
+      "stdout": "docs/acceptance/parity/pack-repair-checkpoint-2026-10-12T14-09-39.952989+00-00/rust-format.stdout.log",
+      "stderr": "docs/acceptance/parity/pack-repair-checkpoint-2026-10-12T14-09-39.952989+00-00/rust-format.stderr.log"
+    },
+    {
+      "name": "sdk-syntax",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "--check",
+        "sdk/typescript/legacy-validation.mjs"
+      ],
+      "exitCode": 0,
+      "stdout": "docs/acceptance/parity/pack-repair-checkpoint-2026-10-12T14-09-39.952989+00-00/sdk-syntax.stdout.log",
+      "stderr": "docs/acceptance/parity/pack-repair-checkpoint-2026-10-12T14-09-39.952989+00-00/sdk-syntax.stderr.log"
+    },
+    {
+      "name": "pack-probe-syntax",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "--check",
+        "scripts/parity/pack_contracts.mjs"
+      ],
+      "exitCode": 0,
+      "stdout": "docs/acceptance/parity/pack-repair-checkpoint-2026-10-12T14-09-39.952989+00-00/pack-probe-syntax.stdout.log",
+      "stderr": "docs/acceptance/parity/pack-repair-checkpoint-2026-10-12T14-09-39.952989+00-00/pack-probe-syntax.stderr.log"
+    },
+    {
+      "name": "sdk-format",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "/Users/admin/dev/patamaps/patamaps/.tools/parity/oracles/399747a4ad05-p8pkt3pr/reference/node_modules/prettier/bin/prettier.cjs",
+        "--check",
+        "sdk/typescript/legacy-validation.mjs",
+        "sdk/typescript/legacy-validation.d.ts",
+        "scripts/parity/pack_contracts.mjs"
+      ],
+      "exitCode": 0,
+      "stdout": "docs/acceptance/parity/pack-repair-checkpoint-2026-10-12T14-09-39.952989+00-00/sdk-format.stdout.log",
+      "stderr": "docs/acceptance/parity/pack-repair-checkpoint-2026-10-12T14-09-39.952989+00-00/sdk-format.stderr.log"
+    },
+    {
+      "name": "diff-check",
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exitCode": 0,
+      "stdout": "docs/acceptance/parity/pack-repair-checkpoint-2026-10-12T14-09-39.952989+00-00/diff-check.stdout.log",
+      "stderr": "docs/acceptance/parity/pack-repair-checkpoint-2026-10-12T14-09-39.952989+00-00/diff-check.stderr.log"
+    },
+    {
+      "name": "source-integrity",
+      "command": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "-B",
+        "scripts/test_source_integrity.py",
+        "/Users/admin/dev/SEEDZ/metamap",
+        "--output",
+        "/Users/admin/dev/patamaps/patamaps/docs/acceptance/parity/pack-repair-checkpoint-2026-10-12T14-09-39.952989+00-00/source-integrity.json"
+      ],
+      "exitCode": 0,
+      "stdout": "docs/acceptance/parity/pack-repair-checkpoint-2026-10-12T14-09-39.952989+00-00/source-integrity.stdout.log",
+      "stderr": "docs/acceptance/parity/pack-repair-checkpoint-2026-10-12T14-09-39.952989+00-00/source-integrity.stderr.log"
+    },
+    {
+      "name": "strict-ledger",
+      "command": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "-B",
+        "scripts/parity/verify.py",
+        "--strict"
+      ],
+      "exitCode": 1,
+      "stdout": "docs/acceptance/parity/pack-repair-checkpoint-2026-10-12T14-09-39.952989+00-00/strict-ledger.stdout.log",
+      "stderr": "docs/acceptance/parity/pack-repair-checkpoint-2026-10-12T14-09-39.952989+00-00/strict-ledger.stderr.log"
+    }
+  ],
+  "candidateBinaryDigest": "sha256:73f272a212082586a46a6315e5f0722b52d2d6759b1be3232bac0bd6402c8a8b",
+  "candidateEngine": {
+    "compiler": "sha256:427c041d01845cb78688980499d3c354815df2506e7ad72ac3a2a8488a29636f",
+    "documentType": "executor-description",
+    "governance": "sha256:63da5544412e971c7e12652c74b91c68267936e4a12f74b2227e49c7fbb157d2",
+    "schemaVersion": "0.1.0",
+    "scientific": "sha256:9ecbbf4424065e59033ae126a99b9159d12a9d4c855b8521cc4abbbbf48e1cf5",
+    "workspace": "sha256:20a60610dc1ab4092973878fb824550780e3e6bde8a2c099b92c4f069c9cee9c"
+  },
+  "currentSourceMatchesBinary": true,
+  "frozenReferenceBlobsVerified": 610,
+  "ledger": {
+    "status": "incomplete",
+    "inventory": {
+      "obligations": 1293,
+      "exports": 92,
+      "suites": 53,
+      "expandedOriginalCases": 601,
+      "cliCommands": 22,
+      "cliOptions": 32
+    },
+    "counts": {
+      "unclassified": 1178,
+      "verified-equivalent": 87,
+      "missing": 16,
+      "implemented-unverified": 12
+    },
+    "currentVerifiedEquivalent": 87,
+    "invalidEvidence": [],
+    "strictAcceptance": false
+  },
+  "functionalEvidence": [
+    {
+      "path": "docs/acceptance/parity/pack-parity-repair-2026-10-12T13-37-55.888858Z/receipt.json",
+      "digest": "sha256:29103f154e7067c259e42bf6e4d647561b9d9a2a75e63b0d688b617d17e28921"
+    },
+    {
+      "path": "docs/acceptance/parity/pack-repair-functional-refresh-2026-10-12T13-42-24.275968Z/receipt.json",
+      "digest": "sha256:c70f641f831b307924cfea900651159f3d3b29be06901fe74ee2234fa17289fb"
+    },
+    {
+      "path": "docs/acceptance/parity/native-2026-10-12T13-38-09.642843Z/receipt.json",
+      "digest": "sha256:3f131fbe34dc3ecf46cbe4386e6b50df3d04b444680811c81124fa9f6c1a563b"
+    },
+    {
+      "path": "docs/acceptance/parity/sdk-consumer-2026-10-12T13-38-55.060511Z/receipt.json",
+      "digest": "sha256:a5b8fe4e292c385764195ba496e0d049ea4749e52efdd5d127d25160e99eb776"
+    },
+    {
+      "path": "docs/acceptance/parity/pack-json-controls-2026-10-12T13-38-58.764Z/receipt.json",
+      "digest": "sha256:720d32a6f81a32a6117800be34b62f1aafdbffc54b77d509dff244a42b8f644b"
+    },
+    {
+      "path": "docs/acceptance/parity/legacy-validation-2026-10-12T13-42-24.507Z/receipt.json",
+      "digest": "sha256:e07f08f278514bd465ad54b7e1c7475c0107feb8ce842f55232b452b204e89c8"
+    },
+    {
+      "path": "docs/acceptance/parity/discovery-api-2026-10-12T13-42-47.291123Z/receipt.json",
+      "digest": "sha256:23de5593986733efb977788556c7caf29b1dd17126e573b19be87ab7bbc3a312"
+    },
+    {
+      "path": "docs/acceptance/parity/scientific-bounds-2026-10-12T13-42-54.391676Z/receipt.json",
+      "digest": "sha256:a55e6ad60140a3ef7ec25d135d522033cc2790577de6b1f122a00833d2cde2c6"
+    }
+  ],
+  "fullParityAcceptance": false,
+  "scope": "Exact current macOS ARM64 portable build/components and attached selected original cases. Fresh Linux, complete workflow/type/export coverage, owner deviations and remaining P0\u2013P9 gates are unresolved."
+}

@@ -1,0 +1,195 @@
+{
+  "schemaVersion": "1.0.0",
+  "createdAt": "2026-10-12T18:50:40.482118+00:00",
+  "status": "scoped-verification-passed-full-parity-incomplete",
+  "goalStatus": "active",
+  "commands": [
+    {
+      "name": "rust-format",
+      "command": [
+        "/Users/admin/.cargo/bin/cargo",
+        "fmt",
+        "--all",
+        "--",
+        "--check"
+      ],
+      "exitCode": 0,
+      "stdout": "docs/acceptance/parity/loader-verification-checkpoint-2026-10-12T18-48-40.026348+00-00/rust-format.stdout.log",
+      "stderr": "docs/acceptance/parity/loader-verification-checkpoint-2026-10-12T18-48-40.026348+00-00/rust-format.stderr.log"
+    },
+    {
+      "name": "sdk-syntax",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "--check",
+        "sdk/typescript/legacy-validation.mjs"
+      ],
+      "exitCode": 0,
+      "stdout": "docs/acceptance/parity/loader-verification-checkpoint-2026-10-12T18-48-40.026348+00-00/sdk-syntax.stdout.log",
+      "stderr": "docs/acceptance/parity/loader-verification-checkpoint-2026-10-12T18-48-40.026348+00-00/sdk-syntax.stderr.log"
+    },
+    {
+      "name": "probe-syntax",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "--check",
+        "scripts/parity/pack_contracts.mjs"
+      ],
+      "exitCode": 0,
+      "stdout": "docs/acceptance/parity/loader-verification-checkpoint-2026-10-12T18-48-40.026348+00-00/probe-syntax.stdout.log",
+      "stderr": "docs/acceptance/parity/loader-verification-checkpoint-2026-10-12T18-48-40.026348+00-00/probe-syntax.stderr.log"
+    },
+    {
+      "name": "javascript-format",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "/Users/admin/dev/patamaps/patamaps/.tools/parity/oracles/399747a4ad05-p8pkt3pr/reference/node_modules/prettier/bin/prettier.cjs",
+        "--check",
+        "sdk/typescript/legacy-validation.mjs",
+        "scripts/parity/pack_contracts.mjs"
+      ],
+      "exitCode": 0,
+      "stdout": "docs/acceptance/parity/loader-verification-checkpoint-2026-10-12T18-48-40.026348+00-00/javascript-format.stdout.log",
+      "stderr": "docs/acceptance/parity/loader-verification-checkpoint-2026-10-12T18-48-40.026348+00-00/javascript-format.stderr.log"
+    },
+    {
+      "name": "diff-check",
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exitCode": 0,
+      "stdout": "docs/acceptance/parity/loader-verification-checkpoint-2026-10-12T18-48-40.026348+00-00/diff-check.stdout.log",
+      "stderr": "docs/acceptance/parity/loader-verification-checkpoint-2026-10-12T18-48-40.026348+00-00/diff-check.stderr.log"
+    },
+    {
+      "name": "source-integrity",
+      "command": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "-B",
+        "scripts/test_source_integrity.py",
+        "/Users/admin/dev/SEEDZ/metamap",
+        "--output",
+        "/Users/admin/dev/patamaps/patamaps/docs/acceptance/parity/loader-verification-checkpoint-2026-10-12T18-48-40.026348+00-00/source-integrity.json"
+      ],
+      "exitCode": 0,
+      "stdout": "docs/acceptance/parity/loader-verification-checkpoint-2026-10-12T18-48-40.026348+00-00/source-integrity.stdout.log",
+      "stderr": "docs/acceptance/parity/loader-verification-checkpoint-2026-10-12T18-48-40.026348+00-00/source-integrity.stderr.log"
+    },
+    {
+      "name": "strict-ledger",
+      "command": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "-B",
+        "scripts/parity/verify.py",
+        "--strict"
+      ],
+      "exitCode": 1,
+      "stdout": "docs/acceptance/parity/loader-verification-checkpoint-2026-10-12T18-48-40.026348+00-00/strict-ledger.stdout.log",
+      "stderr": "docs/acceptance/parity/loader-verification-checkpoint-2026-10-12T18-48-40.026348+00-00/strict-ledger.stderr.log"
+    }
+  ],
+  "runnerAstChecks": "passed",
+  "currentSourceMatchesBinary": true,
+  "candidateEngine": {
+    "compiler": "sha256:88107efee2085d313b472eea2bdb37981d4eb9705f9495c08ad5c354d35a6495",
+    "documentType": "executor-description",
+    "governance": "sha256:24bc55f165c5287c5a04a321cd1bba8b105d4f8b8a3af1e5e6a4663ebfa528d2",
+    "schemaVersion": "0.1.0",
+    "scientific": "sha256:9e75448a3b795dbb4c69b11290c015c75b7b8855acc4b68b3508077b0b5037f5",
+    "workspace": "sha256:3cb7935158419711b58c17a4c52a864888829b4f3a206ecd876e957d1f5cc5a3"
+  },
+  "candidateBinaryDigest": "sha256:c1f2ad50914b3a8867040cb675cb557e235c99d589bdd2cc9b13d921c5b1b558",
+  "frozenReferenceBlobsVerified": 610,
+  "derivativeSyntaxFixtures": "ten exact original expected messages/source byte digests preserved",
+  "functionalRun": "docs/acceptance/parity/loader-functional-refresh-2026-10-12T18-30-03.512691+00-00/receipt.json",
+  "functionalEvidence": [
+    {
+      "path": "docs/acceptance/parity/pack-file-controls-2026-10-12T18-30-31.840Z/receipt.json",
+      "digest": "sha256:1dd3ac97cb7923db2c7f3ec87e6398d8237113ed311eb03d7625e764316f8225"
+    },
+    {
+      "path": "docs/acceptance/parity/pack-nested-controls-2026-10-12T18-30-33.323Z/receipt.json",
+      "digest": "sha256:e5231fef860b5d21d5ce8fb58ba090f30f8084b658bc108e6fa302f482bc9960"
+    },
+    {
+      "path": "docs/acceptance/parity/native-2026-10-12T18-30-40.565971Z/receipt.json",
+      "digest": "sha256:cda9ffe97ff76b8c59f8c270cfc3b02e8489ab5f78bdadf3ec1a41dce80987d3"
+    },
+    {
+      "path": "docs/acceptance/parity/sdk-consumer-2026-10-12T18-31-20.316322Z/receipt.json",
+      "digest": "sha256:b06fdcb32e562856cd2014feb88e8526fe095c6163df06f3fca8787a0371d54c"
+    },
+    {
+      "path": "docs/acceptance/parity/pack-json-controls-2026-10-12T18-31-23.367Z/receipt.json",
+      "digest": "sha256:c9c5034b131fcac9261d448c8756ab9b91883a1fb5bec373ab94bd0cb6721edf"
+    },
+    {
+      "path": "docs/acceptance/parity/legacy-validation-2026-10-12T18-31-25.731Z/receipt.json",
+      "digest": "sha256:6409593d76bba2526b4436bd6bd8db9de857d2b63d10519899e6b290842d0d5c"
+    },
+    {
+      "path": "docs/acceptance/parity/original-canonical-2026-10-12T18-31-34.541Z/receipt.json",
+      "digest": "sha256:5f16c42accc62d9a561f93a5f713b7d3abd3fd0ed04834efbed4b5a50e745cb7"
+    },
+    {
+      "path": "docs/acceptance/parity/original-sssom-2026-10-12T18-31-35.435Z/receipt.json",
+      "digest": "sha256:1870e6f35abb7fb1be3e8c4f1322ba2b59c4c46bab8d9d91f78111502037da90"
+    },
+    {
+      "path": "docs/acceptance/parity/original-discovery-2026-10-12T18-31-37.892Z/receipt.json",
+      "digest": "sha256:ffdf994d21204d9359a18b489397922d361bd9ed8bf4712b9be4147ccc79b3c8"
+    },
+    {
+      "path": "docs/acceptance/parity/original-sssom-adapter-2026-10-12T18-31-39.245Z/receipt.json",
+      "digest": "sha256:4542b90238ef85110fd687ce0093f37d30ebe52774644f663b38eed9dcdc35f6"
+    },
+    {
+      "path": "docs/acceptance/parity/original-validation-2026-10-12T18-31-42.079Z/receipt.json",
+      "digest": "sha256:e6faab3a00efde8c32a73fb302f34ab92312c94f46f34a5aae11862695a423d3"
+    },
+    {
+      "path": "docs/acceptance/parity/original-packs-2026-10-12T18-31-42.842Z/receipt.json",
+      "digest": "sha256:afceff69a993c0aaf5e088b06c12c0274a1cb62ffc65c351fb7672380ca66d5b"
+    },
+    {
+      "path": "docs/acceptance/parity/discovery-api-2026-10-12T18-31-43.646660Z/receipt.json",
+      "digest": "sha256:d07513002d16131f775e4a31cd5a1a3316ccc6bcf274e37acb56da9e5c524f74"
+    }
+  ],
+  "verifiedScopes": {
+    "portableRustTests": 138,
+    "initialPackCases": 159,
+    "nestedPackCases": 161,
+    "loaderCases": 22,
+    "frozenGraphCases": 472,
+    "originalCases": 87,
+    "installedNegativeTypeControls": 16,
+    "originalTypeComparisons": 11,
+    "scientificBoundaryCases": 9,
+    "discoveryProviders": 7
+  },
+  "ledger": {
+    "status": "incomplete",
+    "inventory": {
+      "obligations": 1293,
+      "exports": 92,
+      "suites": 53,
+      "expandedOriginalCases": 601,
+      "cliCommands": 22,
+      "cliOptions": 32
+    },
+    "counts": {
+      "unclassified": 1178,
+      "verified-equivalent": 87,
+      "missing": 16,
+      "implemented-unverified": 12
+    },
+    "currentVerifiedEquivalent": 87,
+    "invalidEvidence": [],
+    "strictAcceptance": false
+  },
+  "fullParityAcceptance": false,
+  "pending": "Full mutable registry/unchecked digest/JS domain, further error and platform controls, remaining P0 classification and P1\u2013P9 workflows, fresh Linux/ARM64 packaging/acceptance and explicit owner dispositions. No new commit/push, registry publication or production activation."
+}

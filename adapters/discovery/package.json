@@ -1,0 +1,79 @@
+{
+  "name": "patamaps-discovery-draft",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "license": "Apache-2.0",
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "ajv": "8.20.0",
+    "ajv-formats": "3.0.1",
+    "patamaps-native-sdk-draft": "0.1.0",
+    "typescript": "5.9.3"
+  },
+  "exports": {
+    ".": {
+      "types": "./index.d.ts",
+      "import": "./index.mjs"
+    },
+    "./prisma": {
+      "types": "./adapters/prisma.d.ts",
+      "import": "./adapters/prisma.js"
+    },
+    "./typescript-zod": {
+      "types": "./adapters/typescript-zod.d.ts",
+      "import": "./adapters/typescript-zod.js"
+    },
+    "./nextjs-app-router": {
+      "types": "./adapters/nextjs-app-router.d.ts",
+      "import": "./adapters/nextjs-app-router.js"
+    },
+    "./json-collections": {
+      "types": "./adapters/json-collections.d.ts",
+      "import": "./adapters/json-collections.js"
+    },
+    "./legacy-sources": {
+      "types": "./adapters/legacy-sources.d.ts",
+      "import": "./adapters/legacy-sources.js"
+    },
+    "./sssom-tsv": {
+      "types": "./adapters/sssom-tsv.d.ts",
+      "import": "./adapters/sssom-tsv.js"
+    },
+    "./metamap-shard": {
+      "types": "./adapters/metamap-shard.d.ts",
+      "import": "./adapters/metamap-shard.js"
+    },
+    "./legacy": {
+      "types": "./adapters/source-of-truth.d.ts",
+      "import": "./adapters/source-of-truth.js"
+    },
+    "./process": "./process.mjs"
+  },
+  "files": [
+    "adapters",
+    "profiles",
+    "schemas",
+    "canonical.js",
+    "sssom.js",
+    "scientific-relations.js",
+    "relation-pack.js",
+    "model.js",
+    "model.d.ts",
+    "viability-model.d.ts",
+    "references.js",
+    "references.d.ts",
+    "stable.js",
+    "stable.d.ts",
+    "config.d.ts",
+    "index.mjs",
+    "index.d.ts",
+    "process.mjs",
+    "LICENSE",
+    "NOTICE",
+    "README.md",
+    "provenance.json"
+  ]
+}

@@ -1,0 +1,169 @@
+{
+  "schemaVersion": "1.0.0",
+  "status": "built-runtime-verification-blocked-shared-lease",
+  "previousVerifiedCheckpoint": "docs/acceptance/parity/viability-verification-checkpoint-2026-10-13T20-20-57.370362+00-00/receipt.json",
+  "scope": "Preserve finite negative-zero facts through the Rust v1 compiler; preserve caller context identity and freezing. No change to original expectations, original engine, 1293 denominator, native admission, or existing resource limits. Nonfinite values, sparse arrays, arbitrary host objects, v2, callbacks and full package/platform domains remain separately unresolved.",
+  "acceptance": [
+    "54 independently frozen original cases must match whole result values/digests, active mappings, signed-zero numeric facts and host own-key/identity/freezing observations.",
+    "Existing immutable 404 observations and unchanged original compiler callbacks must still pass.",
+    "Portable Rust tests, Clippy, installed SDK and all affected revision-bound evidence must be refreshed, with no invalid ledger evidence."
+  ],
+  "dependencies": [
+    "The unchanged 10 GB disk reserve and shared build lease.",
+    "Retained pinned original engine and immutable source bytes."
+  ],
+  "sourceInventory": [
+    {
+      "path": "sdk/typescript/canonical.mjs",
+      "digest": "sha256:e75b120bfde61ea338f1b29af936a9d227db24f7dfcab32cf5f2100775911ebe"
+    },
+    {
+      "path": "sdk/typescript/legacy-viability.mjs",
+      "digest": "sha256:846a3019dba56924c7724feaa7984343ada87d79b254ad568fd827bfa744a041"
+    },
+    {
+      "path": "crates/patamaps-core/src/legacy_viability.rs",
+      "digest": "sha256:44cee2729877e1ff4690544361c9f44e09f5fa57e26a5b8a3c9e0115487b5557"
+    },
+    {
+      "path": "crates/patamaps-core/tests/legacy_viability.rs",
+      "digest": "sha256:6196abfd6f54baa4684d988556bf6cccb2dc0d738fe9ef5696ca911ab0b780ac"
+    }
+  ],
+  "driver": {
+    "path": "scripts/parity/viability_signed_zero.mjs",
+    "digest": "sha256:b5a99ffcdc853ada143df8bc4182832c105b454cc347434ffdd04c245fdb7f81"
+  },
+  "attempts": [
+    {
+      "stage": "original-freeze-plus-pre-repair-comparison",
+      "guardRecord": "/Users/admin/Documents/Codex/.storage-control/heavy-builds/runs/c002b3de-f6e5-4600-9a65-ee4e43fdf911/run.json",
+      "result": "Reserve unavailable at child entry; no original freeze or candidate comparison executed."
+    },
+    {
+      "stage": "signed-zero-after-repair-comparison",
+      "result": "Shared heavy-run lease busy; no test launched.",
+      "observedAt": "2026-10-13T20:42:49.827078+00:00"
+    },
+    {
+      "stage": "full-current-candidate-45-check-refresh",
+      "result": "Shared heavy-run lease busy; no test launched.",
+      "observedAt": "2026-10-13T20:42:49.827201+00:00"
+    }
+  ],
+  "unrun": [
+    "signed-zero-after-repair-comparison",
+    "existing-404-controls-for-new-candidate",
+    "original-callbacks-for-new-candidate",
+    "portable-native-suite-for-new-candidate",
+    "Clippy-for-new-candidate",
+    "installed-SDK-for-new-candidate",
+    "all-other-new-candidate-functional-refresh-checks",
+    "current-candidate-strict-ledger"
+  ],
+  "filesDeleted": 0,
+  "latestCapacityObservation": {
+    "availableBytes": 7429267456,
+    "requiredReserveBytes": 10000000000
+  },
+  "originalFreeze": "docs/acceptance/parity/viability-signed-zero-2026-10-13T20-35-00.570Z/receipt.json",
+  "beforeRepairComparison": "docs/acceptance/parity/viability-signed-zero-2026-10-13T20-35-36.868Z/receipt.json",
+  "build": {
+    "command": [
+      "/Users/admin/.cargo/bin/cargo",
+      "build",
+      "--locked",
+      "-p",
+      "patamaps-cli"
+    ],
+    "exitCode": 0,
+    "stdout": "docs/acceptance/parity/viability-signed-zero-scope-2026-10-13T20-33-26.396585+00-00/build.stdout.log",
+    "stderr": "docs/acceptance/parity/viability-signed-zero-scope-2026-10-13T20-33-26.396585+00-00/build.stderr.log",
+    "guardRecord": "/Users/admin/Documents/Codex/.storage-control/heavy-builds/runs/8d4e7700-1a0b-4275-9123-d4a8b61fbe5e/run.json"
+  },
+  "candidateEngine": {
+    "compiler": "sha256:03f8893280600b383d703092c0574d29c31e0decb169efc9c1e4504b22429a26",
+    "documentType": "executor-description",
+    "governance": "sha256:b800ce2f769304c9e35901cc79e16ddeabdbb3ba4de7f42b343b412429446f41",
+    "schemaVersion": "0.1.0",
+    "scientific": "sha256:cca4930e7605e0fbdecdf43873b8dfd15bb705bdc6ce8270908fab95a57f6593",
+    "workspace": "sha256:19fea4320b1f80d0c0783548514409cbebd6c344c55d36588d71d85367c09c60"
+  },
+  "candidateBinaryDigest": "sha256:92015d3e68b61209164c2e76e6ce4e12d804296ebc8a9c948a94c3f76dd59424",
+  "currentSourceMatchesBinary": true,
+  "afterSourceInventory": [
+    {
+      "path": "sdk/typescript/canonical.mjs",
+      "digest": "sha256:57f2f61257413626083a1902c8dc96107a498456d791fa69ad7c3c71cbe59051"
+    },
+    {
+      "path": "sdk/typescript/legacy-viability.mjs",
+      "digest": "sha256:f32af4cb64b195edb8bee8dc8ad8901c675a501b75aaf4f4dceb821d8b80d043"
+    },
+    {
+      "path": "crates/patamaps-core/src/legacy_viability.rs",
+      "digest": "sha256:70bb1e07d92447cfef639c5038273afaea6ad1cbb4804b6ec237f212f9176c6f"
+    },
+    {
+      "path": "crates/patamaps-core/tests/legacy_viability.rs",
+      "digest": "sha256:5319ed394c70e143819bcb8c4aa7d3761b76621d6218db85db05a450fe821127"
+    },
+    {
+      "path": "scripts/parity/native.py",
+      "digest": "sha256:dbe1a257ef7f05b44a31a7b94688ea9f920885ca899effef803ad5b938d5f4a9"
+    },
+    {
+      "path": "scripts/parity/viability_signed_zero.mjs",
+      "digest": "sha256:b5a99ffcdc853ada143df8bc4182832c105b454cc347434ffdd04c245fdb7f81"
+    },
+    {
+      "path": "fixtures/parity/viability-signed-zero-controls.json",
+      "digest": "sha256:56f166b4418990175a91f512c5bc22ab90eaf6393932d9aa51bc2f80c3d88244"
+    }
+  ],
+  "checks": [
+    {
+      "command": "cargo fmt --all -- --check",
+      "exitCode": 0
+    },
+    {
+      "command": "git diff --check",
+      "exitCode": 0
+    },
+    {
+      "command": "pinned Prettier --check canonical.mjs legacy-viability.mjs viability_signed_zero.mjs",
+      "exitCode": 0
+    },
+    {
+      "command": "Python AST parse native.py and retained fresh 45-check driver; independent source identities and both original corpus digests",
+      "exitCode": 0
+    }
+  ],
+  "preparedFunctionalRefresh": "docs/acceptance/parity/viability-signed-zero-functional-refresh-2026-10-13T20-39-08.658345+00-00",
+  "nextAction": {
+    "command": [
+      "/Users/admin/.nvm/versions/node/v24.21.0/bin/node",
+      "/Users/admin/Documents/Codex/storage-safeguards/run-project.mjs",
+      "patamaps",
+      "--",
+      "/opt/homebrew/bin/python3",
+      "-B",
+      "docs/acceptance/parity/viability-signed-zero-functional-refresh-2026-10-13T20-39-08.658345+00-00/driver.py"
+    ],
+    "prerequisites": [
+      "Shared heavy-run lease released.",
+      "At least 10,000,000,000 bytes available under the unchanged storage policy."
+    ],
+    "acceptance": "All 45 current-candidate checks must pass; refresh classification provenance and strict ledger with zero invalid evidence. Strict full-parity acceptance must remain incomplete unless every original obligation is actually closed."
+  },
+  "documentationInventory": [
+    {
+      "path": "README.md",
+      "digest": "sha256:1803c1218eb78ad550c5bf9cdd910125900309dea121cc66ad4a81ffc26f6d16"
+    },
+    {
+      "path": "BUILD_PLAN.md",
+      "digest": "sha256:f74de6eacc5ba42a65502159cb961c86bfd44ee0130d9a74b884b728c6dce0a2"
+    }
+  ]
+}

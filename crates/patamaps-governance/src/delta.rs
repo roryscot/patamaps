@@ -268,13 +268,13 @@ pub(crate) fn classified_requirements(
     let old_specs = before.map(|b| {
         b.captures
             .iter()
-            .map(|c| &c.inputs.projection_spec)
+            .flat_map(|c| c.inputs.specs())
             .collect::<Vec<_>>()
     });
     let specs = after
         .captures
         .iter()
-        .map(|c| &c.inputs.projection_spec)
+        .flat_map(|c| c.inputs.specs())
         .collect::<Vec<_>>();
     if !equal(&old_specs, &Some(specs))?
         || !equal(&before.map(|b| &b.emissions), &Some(&after.emissions))?

@@ -1,0 +1,361 @@
+{
+  "schemaVersion": "1.0.0",
+  "driver": "registry",
+  "driverDigest": "sha256:2b6fe04247a71f12eeadb035435b902ecf629cf98f43e7ffbdf24eecd59204af",
+  "supervision": {
+    "mode": "inherited-live-supervisor",
+    "project": "/Users/admin/dev/patamaps/patamaps",
+    "configurationDigest": "sha256:77505e4ca3960c2df14617ffa5951838a6b84e51d6f8ed715ec60faa3c9e8187",
+    "policy": {
+      "version": 1,
+      "minimumFreeBytes": 0,
+      "reserveFreeBytes": 10000000000,
+      "maximumRunGrowthBytes": 8000000000,
+      "maximumRetainedBytes": 50000000000,
+      "monitorIntervalMs": 2000,
+      "terminationGraceMs": 15000
+    },
+    "availableBytesAtEntry": 16930033664
+  },
+  "selection": {
+    "path": "fixtures/parity/registry-selected-cases.json",
+    "digest": "sha256:90bf80396bc8c6aed1660c4767dd3d78910138c7b538390e14edd3d966867e2e",
+    "schemaVersion": "1.0.0",
+    "suite": "src/__tests__/executable-pack.test.ts",
+    "testNamePattern": "^explicit executable pack profile ",
+    "selectedCaseIds": [
+      "parity:3250b9381a3f35da4c06",
+      "parity:895c596340a6a658fff4",
+      "parity:9dcb7550e502ffb9c127",
+      "parity:9f09ec0bb083d97cb300",
+      "parity:a1f880a12ed61f4f6969",
+      "parity:162ca2f37c9e1e5dedc4",
+      "parity:17efd869f2f37cb7c3cf",
+      "parity:cd1890365158cc8608f2",
+      "parity:229dc53eaef06f7d4c5f",
+      "parity:1522e34d9ff5e0023935",
+      "parity:516cf0f71870b2df94f4",
+      "parity:f7916dd38ca00ce73c3d",
+      "parity:79874888b8ca3a13fa8d",
+      "parity:6b418a619f94193b08f8"
+    ],
+    "excludedCaseIds": [],
+    "scope": "All fourteen unchanged original callbacks, inputs and assertions execute through native pack and ordered registry operations. Only relation-pack and relations imports are mapped; original stable utilities supply independent expected digests. The SDK preserves live legacy object handles and copies/freezes executable data. This closes original cases, not the entire unchecked JavaScript registry or export contract."
+  },
+  "timestamp": "2026-10-12T19-03-58.036Z",
+  "status": "failed",
+  "command": [
+    "/Users/admin/.nvm/versions/node/v24.21.0/bin/node",
+    "/Users/admin/dev/patamaps/patamaps/.tools/parity/oracles/399747a4ad05-p8pkt3pr/reference/node_modules/vitest/vitest.mjs",
+    "run",
+    "--config",
+    "/Users/admin/dev/patamaps/patamaps/.tools/parity/runs/original-registry-YURpSE/vitest.config.mjs",
+    "--reporter=default",
+    "--reporter=json",
+    "--outputFile",
+    "/Users/admin/dev/patamaps/patamaps/.tools/parity/runs/original-registry-YURpSE/vitest.json",
+    "--testNamePattern",
+    "^explicit executable pack profile "
+  ],
+  "exitCode": 1,
+  "signal": null,
+  "error": null,
+  "manifestDigest": "sha256:963a0bdb0514342053144b369b900342d78c55d79ddc3a07c032dd859c8cd8ed",
+  "comparisonRulesDigest": "sha256:ab76e60deb27bf8b425063f3d432b88720c1f0d6e2cd67b43b9846cb9fb5ae91",
+  "reference": {
+    "engine": "399747a4ad05a37cd8db1cedd53048fad2175be4",
+    "caseOrigin": "Unchanged pinned original source/assertions",
+    "operationsRerun": false,
+    "testsRerun": false,
+    "referenceObservation": "docs/acceptance/full-reference/reference-vitest.json"
+  },
+  "candidate": {
+    "binary": "target/debug/patamaps",
+    "binaryDigest": "sha256:4370193f53aa83b907c1acf86bbf1837667e45742f64bc216d749e1ad06c0b62",
+    "engine": {
+      "compiler": "sha256:85ff4fd03c4ce3f915fb31131971d985d7d7651df29118a1e02adabd395855d2",
+      "documentType": "executor-description",
+      "governance": "sha256:ef16833538d22683c8876ea1d66ff0b4d207c60676702315bf620c194cac7988",
+      "schemaVersion": "0.1.0",
+      "scientific": "sha256:2c9c4f298bfec1f5c68400cca68b1f2333a5c6335b8456cb7a35ad9734ca4a5d",
+      "workspace": "sha256:e94b54119f604bb7d798ed525cb5d255fa2faea0bdbc724f732a54bbaed04ca2"
+    },
+    "sdkSourceInventory": [
+      {
+        "path": "sdk/typescript/canonical.mjs",
+        "digest": "sha256:830acf94b6a334a5659856b1c6ba342e8c02d9df49752c9163be7fa3461a3954"
+      },
+      {
+        "path": "sdk/typescript/canonical.d.ts",
+        "digest": "sha256:88ae79727dbad3b0872a9c3539a95fe6c444b810ff416423f06a2cf39274ecb4"
+      },
+      {
+        "path": "sdk/typescript/canonical.d.ts",
+        "digest": "sha256:88ae79727dbad3b0872a9c3539a95fe6c444b810ff416423f06a2cf39274ecb4"
+      },
+      {
+        "path": "sdk/typescript/canonical.mjs",
+        "digest": "sha256:830acf94b6a334a5659856b1c6ba342e8c02d9df49752c9163be7fa3461a3954"
+      },
+      {
+        "path": "sdk/typescript/index.d.ts",
+        "digest": "sha256:aa76e1583c3a1b872ec1fa9fbbaddd8c1211a118c9f670c0d9ec1b0ba3a4bbae"
+      },
+      {
+        "path": "sdk/typescript/index.mjs",
+        "digest": "sha256:f5f5abcf9d4b199a4674795bd5e96252f65c1449d679a73dd069c17c89db6015"
+      },
+      {
+        "path": "sdk/typescript/legacy-registry.mjs",
+        "digest": "sha256:51451a35d7692940aaa8506c102bbad94ac9bf7c7321a4bd086d73b84bfa673f"
+      },
+      {
+        "path": "sdk/typescript/legacy-validation.d.ts",
+        "digest": "sha256:8f185eada7f79a222ce4567523c5be837aeb30f9ae4a42b61afb05a80b228b5b"
+      },
+      {
+        "path": "sdk/typescript/legacy-validation.mjs",
+        "digest": "sha256:6c9c7dd05f123e75a34f586394ff7035c4c63e0afdbb2ac9c7eb16241099c803"
+      },
+      {
+        "path": "sdk/typescript/package.json",
+        "digest": "sha256:45da1eca3cce8ca85e1108209aa4e4a02cb6921e52aa1d334f9fb3cf07d0f258"
+      },
+      {
+        "path": "sdk/typescript/sssom-profile.mjs",
+        "digest": "sha256:a37260f42d6b02c5900dbefa9477386667f5286079a7a1abd12495e3dc78e533"
+      },
+      {
+        "path": "sdk/typescript/sssom.d.ts",
+        "digest": "sha256:7f58f17edc48bcb8340b73004273fa4c23a9f4b3671ca1276225f16de8254457"
+      },
+      {
+        "path": "sdk/typescript/sssom.mjs",
+        "digest": "sha256:ccc44eac40a38b892d42c33537a9f15915e1aa65c774e6dc78d129284a6bfb74"
+      }
+    ],
+    "facadeDigest": "sha256:830acf94b6a334a5659856b1c6ba342e8c02d9df49752c9163be7fa3461a3954",
+    "facadeDeclarationDigest": "sha256:88ae79727dbad3b0872a9c3539a95fe6c444b810ff416423f06a2cf39274ecb4"
+  },
+  "host": {
+    "platform": "darwin",
+    "architecture": "arm64",
+    "node": "v24.21.0"
+  },
+  "counts": {
+    "originalCases": 14,
+    "passed": 10,
+    "failed": 4,
+    "skipped": 0,
+    "explicitlyUnselected": 0,
+    "nativeExecutions": 46
+  },
+  "assertions": "All fourteen unchanged original callbacks, inputs and assertions execute through native pack and ordered registry operations. Only relation-pack and relations imports are mapped; original stable utilities supply independent expected digests. The SDK preserves live legacy object handles and copies/freezes executable data. This closes original cases, not the entire unchecked JavaScript registry or export contract.",
+  "obligations": [
+    {
+      "id": "parity:f7916dd38ca00ce73c3d",
+      "scope": "complete-original-case",
+      "status": "failed",
+      "origin": {
+        "path": "src/__tests__/executable-pack.test.ts",
+        "digest": "sha256:b7f15a72564f40d59c6307bdf83d3a81dd7ee0dfc6d764b966cdbf693ae82b41",
+        "line": 43
+      },
+      "expectationDigest": "sha256:c0773410d916264f4f864074b715a3340480ceca908c385057f4bc0ceb89cea7",
+      "fullName": "explicit executable pack profile requires the exact declared imports and freezes a copied executable definition",
+      "occurrence": 0,
+      "candidateExecution": "All original executable-pack cases; Rust ordered registration, exact imports, live dependency drift and law checks with retained SDK identities and copied frozen executable definitions"
+    },
+    {
+      "id": "parity:6b418a619f94193b08f8",
+      "scope": "complete-original-case",
+      "status": "verified-equivalent",
+      "origin": {
+        "path": "src/__tests__/executable-pack.test.ts",
+        "digest": "sha256:b7f15a72564f40d59c6307bdf83d3a81dd7ee0dfc6d764b966cdbf693ae82b41",
+        "line": 57
+      },
+      "expectationDigest": "sha256:d18a466b380c55ed7111b7e1c239a7856e57c3eca0db6610503925ef24c95303",
+      "fullName": "explicit executable pack profile retains the original legacy pack digest convention",
+      "occurrence": 0,
+      "candidateExecution": "All original executable-pack cases; Rust ordered registration, exact imports, live dependency drift and law checks with retained SDK identities and copied frozen executable definitions"
+    },
+    {
+      "id": "parity:229dc53eaef06f7d4c5f",
+      "scope": "complete-original-case",
+      "status": "verified-equivalent",
+      "origin": {
+        "path": "src/__tests__/executable-pack.test.ts",
+        "digest": "sha256:b7f15a72564f40d59c6307bdf83d3a81dd7ee0dfc6d764b966cdbf693ae82b41",
+        "line": 62
+      },
+      "expectationDigest": "sha256:21a0ec8e45e10519b5366b0f9bdba95ecf0d867ce0a4938e3ad298aab231ba13",
+      "fullName": "explicit executable pack profile rejects unsupported law shape (value) => {\n      value.laws[0].operands = [\"core:contains\"];\n    }",
+      "occurrence": 0,
+      "candidateExecution": "All original executable-pack cases; Rust ordered registration, exact imports, live dependency drift and law checks with retained SDK identities and copied frozen executable definitions"
+    },
+    {
+      "id": "parity:1522e34d9ff5e0023935",
+      "scope": "complete-original-case",
+      "status": "verified-equivalent",
+      "origin": {
+        "path": "src/__tests__/executable-pack.test.ts",
+        "digest": "sha256:b7f15a72564f40d59c6307bdf83d3a81dd7ee0dfc6d764b966cdbf693ae82b41",
+        "line": 62
+      },
+      "expectationDigest": "sha256:21a0ec8e45e10519b5366b0f9bdba95ecf0d867ce0a4938e3ad298aab231ba13",
+      "fullName": "explicit executable pack profile rejects unsupported law shape (value) => {\n      value.laws[0].operation = \"run-script\";\n    }",
+      "occurrence": 0,
+      "candidateExecution": "All original executable-pack cases; Rust ordered registration, exact imports, live dependency drift and law checks with retained SDK identities and copied frozen executable definitions"
+    },
+    {
+      "id": "parity:cd1890365158cc8608f2",
+      "scope": "complete-original-case",
+      "status": "verified-equivalent",
+      "origin": {
+        "path": "src/__tests__/executable-pack.test.ts",
+        "digest": "sha256:b7f15a72564f40d59c6307bdf83d3a81dd7ee0dfc6d764b966cdbf693ae82b41",
+        "line": 62
+      },
+      "expectationDigest": "sha256:21a0ec8e45e10519b5366b0f9bdba95ecf0d867ce0a4938e3ad298aab231ba13",
+      "fullName": "explicit executable pack profile rejects unsupported law shape (value) => {\n      value.laws[0].handling.authority = \"transfer\";\n    }",
+      "occurrence": 0,
+      "candidateExecution": "All original executable-pack cases; Rust ordered registration, exact imports, live dependency drift and law checks with retained SDK identities and copied frozen executable definitions"
+    },
+    {
+      "id": "parity:516cf0f71870b2df94f4",
+      "scope": "complete-original-case",
+      "status": "verified-equivalent",
+      "origin": {
+        "path": "src/__tests__/executable-pack.test.ts",
+        "digest": "sha256:b7f15a72564f40d59c6307bdf83d3a81dd7ee0dfc6d764b966cdbf693ae82b41",
+        "line": 62
+      },
+      "expectationDigest": "sha256:21a0ec8e45e10519b5366b0f9bdba95ecf0d867ce0a4938e3ad298aab231ba13",
+      "fullName": "explicit executable pack profile rejects unsupported law shape (value) => {\n      value.newMandatoryFeature = true;\n    }",
+      "occurrence": 0,
+      "candidateExecution": "All original executable-pack cases; Rust ordered registration, exact imports, live dependency drift and law checks with retained SDK identities and copied frozen executable definitions"
+    },
+    {
+      "id": "parity:a1f880a12ed61f4f6969",
+      "scope": "complete-original-case",
+      "status": "verified-equivalent",
+      "origin": {
+        "path": "src/__tests__/executable-pack.test.ts",
+        "digest": "sha256:b7f15a72564f40d59c6307bdf83d3a81dd7ee0dfc6d764b966cdbf693ae82b41",
+        "line": 84
+      },
+      "expectationDigest": "sha256:2cdbefdc4ea17a90201de5cb06eeb2252903818d4cdc9d62bab329d3461198ab",
+      "fullName": "explicit executable pack profile rejects law references outside explicitly imported definitions",
+      "occurrence": 0,
+      "candidateExecution": "All original executable-pack cases; Rust ordered registration, exact imports, live dependency drift and law checks with retained SDK identities and copied frozen executable definitions"
+    },
+    {
+      "id": "parity:162ca2f37c9e1e5dedc4",
+      "scope": "complete-original-case",
+      "status": "failed",
+      "origin": {
+        "path": "src/__tests__/executable-pack.test.ts",
+        "digest": "sha256:b7f15a72564f40d59c6307bdf83d3a81dd7ee0dfc6d764b966cdbf693ae82b41",
+        "line": 91
+      },
+      "expectationDigest": "sha256:b462f2e545cc1376819aa691613820f5e4337ecf41357c58393a4e60679560f1",
+      "fullName": "explicit executable pack profile rejects missing, changed, repeated and self imports",
+      "occurrence": 0,
+      "candidateExecution": "All original executable-pack cases; Rust ordered registration, exact imports, live dependency drift and law checks with retained SDK identities and copied frozen executable definitions"
+    },
+    {
+      "id": "parity:895c596340a6a658fff4",
+      "scope": "complete-original-case",
+      "status": "failed",
+      "origin": {
+        "path": "src/__tests__/executable-pack.test.ts",
+        "digest": "sha256:b7f15a72564f40d59c6307bdf83d3a81dd7ee0dfc6d764b966cdbf693ae82b41",
+        "line": 112
+      },
+      "expectationDigest": "sha256:c2c129fd9f4dede578c635969eaece52fc172d17096b00d254a4ec8fda573982",
+      "fullName": "explicit executable pack profile detects a legacy dependency object drifting after executable registration",
+      "occurrence": 0,
+      "candidateExecution": "All original executable-pack cases; Rust ordered registration, exact imports, live dependency drift and law checks with retained SDK identities and copied frozen executable definitions"
+    },
+    {
+      "id": "parity:3250b9381a3f35da4c06",
+      "scope": "complete-original-case",
+      "status": "failed",
+      "origin": {
+        "path": "src/__tests__/executable-pack.test.ts",
+        "digest": "sha256:b7f15a72564f40d59c6307bdf83d3a81dd7ee0dfc6d764b966cdbf693ae82b41",
+        "line": 128
+      },
+      "expectationDigest": "sha256:3f3b51068b7fd87a18a9f045253f34f40f24dddb7e8eeaba1fed93862c143c1e",
+      "fullName": "explicit executable pack profile checks a nested executable dependency's exact legacy import",
+      "occurrence": 0,
+      "candidateExecution": "All original executable-pack cases; Rust ordered registration, exact imports, live dependency drift and law checks with retained SDK identities and copied frozen executable definitions"
+    },
+    {
+      "id": "parity:79874888b8ca3a13fa8d",
+      "scope": "complete-original-case",
+      "status": "verified-equivalent",
+      "origin": {
+        "path": "src/__tests__/executable-pack.test.ts",
+        "digest": "sha256:b7f15a72564f40d59c6307bdf83d3a81dd7ee0dfc6d764b966cdbf693ae82b41",
+        "line": 161
+      },
+      "expectationDigest": "sha256:d9322af0d7bbab20c58761ca53d45af01418aed5d300a996e6a75b6b9dfafc11",
+      "fullName": "explicit executable pack profile requires unconditional executable laws for a new transitive/symmetric/inverse claim",
+      "occurrence": 0,
+      "candidateExecution": "All original executable-pack cases; Rust ordered registration, exact imports, live dependency drift and law checks with retained SDK identities and copied frozen executable definitions"
+    },
+    {
+      "id": "parity:17efd869f2f37cb7c3cf",
+      "scope": "complete-original-case",
+      "status": "verified-equivalent",
+      "origin": {
+        "path": "src/__tests__/executable-pack.test.ts",
+        "digest": "sha256:b7f15a72564f40d59c6307bdf83d3a81dd7ee0dfc6d764b966cdbf693ae82b41",
+        "line": 204
+      },
+      "expectationDigest": "sha256:e9f49c15088af2c01a91cba21ee07eea0eff5dbc0875a59e09bad6c01269a0af",
+      "fullName": "explicit executable pack profile rejects transitivity contradicted by the relation and impossible endpoint kinds",
+      "occurrence": 0,
+      "candidateExecution": "All original executable-pack cases; Rust ordered registration, exact imports, live dependency drift and law checks with retained SDK identities and copied frozen executable definitions"
+    },
+    {
+      "id": "parity:9f09ec0bb083d97cb300",
+      "scope": "complete-original-case",
+      "status": "verified-equivalent",
+      "origin": {
+        "path": "src/__tests__/executable-pack.test.ts",
+        "digest": "sha256:b7f15a72564f40d59c6307bdf83d3a81dd7ee0dfc6d764b966cdbf693ae82b41",
+        "line": 232
+      },
+      "expectationDigest": "sha256:c766ed6d96bf5ea757fa26792ff24a32d9185b77c936948646c2f5e579268173",
+      "fullName": "explicit executable pack profile rejects duplicate law IDs and does not partially register a rejected pack",
+      "occurrence": 0,
+      "candidateExecution": "All original executable-pack cases; Rust ordered registration, exact imports, live dependency drift and law checks with retained SDK identities and copied frozen executable definitions"
+    },
+    {
+      "id": "parity:9dcb7550e502ffb9c127",
+      "scope": "complete-original-case",
+      "status": "verified-equivalent",
+      "origin": {
+        "path": "src/__tests__/executable-pack.test.ts",
+        "digest": "sha256:b7f15a72564f40d59c6307bdf83d3a81dd7ee0dfc6d764b966cdbf693ae82b41",
+        "line": 253
+      },
+      "expectationDigest": "sha256:95fbd7018699787256898459bea93d384d3d89c43aaf41ecd8a6b11c4154253a",
+      "fullName": "explicit executable pack profile rejects duplicate decoded JSON properties when loading an executable pack",
+      "occurrence": 0,
+      "candidateExecution": "All original executable-pack cases; Rust ordered registration, exact imports, live dependency drift and law checks with retained SDK identities and copied frozen executable definitions"
+    }
+  ],
+  "originalTreeFilesVerified": 610,
+  "retainedRun": ".tools/parity/runs/original-registry-YURpSE",
+  "cleanup": "Any explicit Node cleanup within owned roots is retained by rename; deletion outside those roots is refused",
+  "retainedFileInput": {
+    "originalPath": "/Users/admin/dev/patamaps/patamaps/.tools/parity/runs/original-registry-YURpSE/tmp/metamap-pack-test-qhfSNM/pack.json",
+    "retainedPath": ".tools/parity/runs/original-registry-YURpSE/retained-cleanup/55419-0-metamap-pack-test-qhfSNM/pack.json",
+    "digest": "sha256:89f14fc98ba42062583e8b86e0ce691c63f8237928abfdb6274885bce4a6684e",
+    "cleanupRecordDigest": "sha256:91aac7daa3c1333867145578ad55c26ac3c664b4968c6262464970c45728e9f1"
+  }
+}

@@ -1,0 +1,69 @@
+
+ RUN  v3.2.7 /Users/admin/dev/patamaps/patamaps/.tools/parity/oracles/399747a4ad05-p8pkt3pr/reference
+
+ ❯ src/__tests__/sssom.test.ts (54 tests | 4 failed | 50 skipped) 9ms
+   ↓ loss-preserving supported SSSOM1.0 entity TSV profile > validates exact pinned public subset bytes and preserves all seven records and five predicates
+   ↓ loss-preserving supported SSSOM1.0 entity TSV profile > round-trips quoted tabs, newlines, double quotes, multivalues and raw numeric spellings
+   ↓ loss-preserving supported SSSOM1.0 entity TSV profile > accepts CRLF outer line endings and a header-only empty mapping set
+   ↓ loss-preserving supported SSSOM1.0 entity TSV profile > propagates only annotated slots, removes their effective set values and retains originals separately
+   ↓ loss-preserving supported SSSOM1.0 entity TSV profile > blocks propagation across the entire set when one record has a value
+   ↓ loss-preserving supported SSSOM1.0 entity TSV profile > condenses explicitly only common values and preserves effective fields
+   ↓ loss-preserving supported SSSOM1.0 entity TSV profile > does not condense conflicting set values or partially populated record fields
+   ↓ loss-preserving supported SSSOM1.0 entity TSV profile > accepts explicit local external metadata without inferring its filename
+   ↓ loss-preserving supported SSSOM1.0 entity TSV profile > retains defined scalar extensions, definitions and unknown type hints without assigning executable meaning
+   ↓ loss-preserving supported SSSOM1.0 entity TSV profile > rejects an undefined metadata extension without dropping source data
+   ↓ loss-preserving supported SSSOM1.0 entity TSV profile > rejects an undefined column extension without dropping source data
+   ↓ loss-preserving supported SSSOM1.0 entity TSV profile > rejects invalid extension same-name
+   ↓ loss-preserving supported SSSOM1.0 entity TSV profile > rejects invalid extension same-property
+   ↓ loss-preserving supported SSSOM1.0 entity TSV profile > rejects invalid extension standard-name
+   ↓ loss-preserving supported SSSOM1.0 entity TSV profile > rejects invalid extension unknown-prefix
+   ↓ loss-preserving supported SSSOM1.0 entity TSV profile > rejects invalid extension compound-value
+   ↓ loss-preserving supported SSSOM1.0 entity TSV profile > rejects invalid extension extra-definition-key
+   ↓ loss-preserving supported SSSOM1.0 entity TSV profile > rejects invalid confidence NaN without promoting it into support
+   ↓ loss-preserving supported SSSOM1.0 entity TSV profile > rejects invalid confidence Infinity without promoting it into support
+   ↓ loss-preserving supported SSSOM1.0 entity TSV profile > rejects invalid confidence 1e9999 without promoting it into support
+   ↓ loss-preserving supported SSSOM1.0 entity TSV profile > rejects invalid confidence -0.1 without promoting it into support
+   ↓ loss-preserving supported SSSOM1.0 entity TSV profile > rejects invalid confidence 1.1 without promoting it into support
+   ↓ loss-preserving supported SSSOM1.0 entity TSV profile > rejects invalid confidence abc without promoting it into support
+   ↓ loss-preserving supported SSSOM1.0 entity TSV profile > rejects invalid encoded input BOM
+   ↓ loss-preserving supported SSSOM1.0 entity TSV profile > rejects invalid encoded input UTF8
+   ↓ loss-preserving supported SSSOM1.0 entity TSV profile > rejects invalid encoded input size
+   ↓ loss-preserving supported SSSOM1.0 entity TSV profile > rejects malformed supported field duplicate-header
+   ↓ loss-preserving supported SSSOM1.0 entity TSV profile > rejects malformed supported field width
+   ↓ loss-preserving supported SSSOM1.0 entity TSV profile > rejects malformed supported field required-header
+   ↓ loss-preserving supported SSSOM1.0 entity TSV profile > rejects malformed supported field required-value
+   ↓ loss-preserving supported SSSOM1.0 entity TSV profile > rejects malformed supported field invalid-date
+   ↓ loss-preserving supported SSSOM1.0 entity TSV profile > rejects malformed supported field empty-multivalue
+   ↓ loss-preserving supported SSSOM1.0 entity TSV profile > rejects bad identifier/quoting before graph construction
+   ↓ loss-preserving supported SSSOM1.0 entity TSV profile > rejects bad identifier/quoting before graph construction
+   ↓ loss-preserving supported SSSOM1.0 entity TSV profile > rejects bad identifier/quoting before graph construction
+   ↓ loss-preserving supported SSSOM1.0 entity TSV profile > rejects forbidden/malformed YAML duplicate
+   ↓ loss-preserving supported SSSOM1.0 entity TSV profile > rejects forbidden/malformed YAML anchor
+   ↓ loss-preserving supported SSSOM1.0 entity TSV profile > rejects forbidden/malformed YAML tag
+   ↓ loss-preserving supported SSSOM1.0 entity TSV profile > rejects forbidden/malformed YAML directive
+   ↓ loss-preserving supported SSSOM1.0 entity TSV profile > rejects identifier error undefined
+   ↓ loss-preserving supported SSSOM1.0 entity TSV profile > rejects identifier error builtin-collision
+   ↓ loss-preserving supported SSSOM1.0 entity TSV profile > rejects identifier error full-IRI
+   ↓ loss-preserving supported SSSOM1.0 entity TSV profile > rejects identifier error case-fold
+   ↓ loss-preserving supported SSSOM1.0 entity TSV profile > resolves built-ins and Unicode NCNames without network access or case folding
+   ↓ loss-preserving supported SSSOM1.0 entity TSV profile > explicitly rejects unsupported literal records
+   ↓ loss-preserving supported SSSOM1.0 entity TSV profile > explicitly rejects unsupported unmapped records
+   ↓ loss-preserving supported SSSOM1.0 entity TSV profile > explicitly rejects unsupported negated records
+   ↓ loss-preserving supported SSSOM1.0 entity TSV profile > rejects forged portable document profile/extra fields and wrong format configuration
+   ↓ scientific adapter assertion identities and conservative interpretation > preserves repeated four-core-field assertions, distinct complementary metadata and exact duplicates
+   × scientific adapter assertion identities and conservative interpretation > keeps anonymous content occurrence IDs across reordering and semantic condensation 6ms
+     → spawnSync /Users/admin/dev/patamaps/patamaps/--sssom-adapter ENOENT
+   × scientific adapter assertion identities and conservative interpretation > gives changed anonymous assertions new IDs without changing stable ontology identities 1ms
+     → spawnSync /Users/admin/dev/patamaps/patamaps/--sssom-adapter ENOENT
+   × scientific adapter assertion identities and conservative interpretation > retains explicit scoped source IDs across record changes and rejects duplicate IDs 1ms
+     → spawnSync /Users/admin/dev/patamaps/patamaps/--sssom-adapter ENOENT
+   ↓ scientific adapter assertion identities and conservative interpretation > preserves arbitrary predicates as unregistered uninterpreted relations
+   × scientific adapter assertion identities and conservative interpretation > fingerprints both external inputs, accepts arbitrary local filename extensions and writes nothing 1ms
+     → spawnSync /Users/admin/dev/patamaps/patamaps/--sssom-adapter ENOENT
+
+ Test Files  1 failed (1)
+      Tests  4 failed | 50 skipped (54)
+   Start at  17:16:43
+   Duration  656ms (transform 98ms, setup 229ms, collect 278ms, tests 9ms, environment 0ms, prepare 44ms)
+
+JSON report written to /Users/admin/dev/patamaps/patamaps/.tools/parity/runs/original-sssom-adapter-E8phTQ/vitest.json

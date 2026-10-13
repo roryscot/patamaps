@@ -1,0 +1,447 @@
+{
+  "schemaVersion": "1.0.0",
+  "status": "different",
+  "supervision": {
+    "mode": "inherited-live-supervisor",
+    "project": "/Users/admin/dev/patamaps/patamaps",
+    "configurationDigest": "sha256:77505e4ca3960c2df14617ffa5951838a6b84e51d6f8ed715ec60faa3c9e8187",
+    "policy": {
+      "version": 1,
+      "minimumFreeBytes": 0,
+      "reserveFreeBytes": 10000000000,
+      "maximumRunGrowthBytes": 8000000000,
+      "maximumRetainedBytes": 50000000000,
+      "monitorIntervalMs": 2000,
+      "terminationGraceMs": 15000
+    },
+    "availableBytesAtEntry": 10061504512
+  },
+  "referenceEngine": "399747a4ad05a37cd8db1cedd53048fad2175be4",
+  "driverDigest": "sha256:c8f5d9a1ee5f04d7405fd5a5cc9412f5a2432f63ca3e7706b98ebfdaf4df4471",
+  "corpus": {
+    "path": "fixtures/parity/viability-controls.json",
+    "digest": "sha256:df246fe562839235f187e2f61e21a329d01c3e4f2c20d90c03d37c8191a464fc"
+  },
+  "candidate": {
+    "binaryDigest": "sha256:f4f290dcef8eb5d609370a6e35b5f3a6cbb4c6229bf54a139e6be68994bc36e1",
+    "engine": {
+      "compiler": "sha256:fc0b8709d8b58a10cd3eda24ed05d68a502aeb662e6081b32a068802ce2f47c5",
+      "documentType": "executor-description",
+      "governance": "sha256:06300821b4e406635fe8bef8d1a7628a2ff10d33258d65885e9cbe5c9a0af1ab",
+      "schemaVersion": "0.1.0",
+      "scientific": "sha256:916f2489b669aa8e72e099fd01f12f53a51ec478b234206e9d10e0236f923a2c",
+      "workspace": "sha256:5b945c57dc544cc46976308acf0a1b379f925f9e0ad0361ad8ba9e3a5845d390"
+    }
+  },
+  "counts": {
+    "cases": 404,
+    "matched": 400,
+    "differences": 4
+  },
+  "differences": [
+    {
+      "name": "policy-graph-{}",
+      "expected": {
+        "status": "observed",
+        "value": {
+          "valid": false,
+          "issues": [
+            {
+              "severity": "error",
+              "code": "INVALID_VIABILITY_POLICY",
+              "message": "must have required property 'revision'",
+              "path": "/graph"
+            },
+            {
+              "severity": "error",
+              "code": "INVALID_VIABILITY_POLICY",
+              "message": "must have required property 'digest'",
+              "path": "/graph"
+            },
+            {
+              "severity": "error",
+              "code": "INVALID_VIABILITY_POLICY",
+              "message": "must match a schema in anyOf",
+              "path": "/graph"
+            },
+            {
+              "severity": "error",
+              "code": "INVALID_VIABILITY_POLICY",
+              "message": "must have required property 'id'",
+              "path": "/graph"
+            }
+          ]
+        },
+        "host": {
+          "keys": [
+            "valid",
+            "issues"
+          ],
+          "issueKeys": [
+            [
+              "severity",
+              "code",
+              "message",
+              "path"
+            ],
+            [
+              "severity",
+              "code",
+              "message",
+              "path"
+            ],
+            [
+              "severity",
+              "code",
+              "message",
+              "path"
+            ],
+            [
+              "severity",
+              "code",
+              "message",
+              "path"
+            ]
+          ]
+        }
+      },
+      "observed": {
+        "status": "observed",
+        "value": {
+          "valid": false,
+          "issues": [
+            {
+              "severity": "error",
+              "code": "INVALID_VIABILITY_POLICY",
+              "message": "must have required property 'id'",
+              "path": "/graph"
+            },
+            {
+              "severity": "error",
+              "code": "INVALID_VIABILITY_POLICY",
+              "message": "{} is not valid under any of the schemas listed in the 'anyOf' keyword",
+              "path": "/graph"
+            }
+          ]
+        },
+        "host": {
+          "keys": [
+            "valid",
+            "issues"
+          ],
+          "issueKeys": [
+            [
+              "severity",
+              "code",
+              "message",
+              "path"
+            ],
+            [
+              "severity",
+              "code",
+              "message",
+              "path"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "name": "parse-policy-graph-{}",
+      "expected": {
+        "status": "threw",
+        "error": {
+          "name": "Error",
+          "message": "Invalid Metamap viability policy: /graph must have required property 'revision'; /graph must have required property 'digest'; /graph must match a schema in anyOf; /graph must have required property 'id'"
+        }
+      },
+      "observed": {
+        "status": "threw",
+        "error": {
+          "name": "Error",
+          "message": "Invalid Metamap viability policy: /graph must have required property 'id'; /graph {} is not valid under any of the schemas listed in the 'anyOf' keyword"
+        }
+      }
+    },
+    {
+      "name": "timestamp-2026-09-02T24:00:00.0001Z",
+      "expected": {
+        "status": "observed",
+        "value": {
+          "status": "rejected",
+          "issues": [
+            {
+              "severity": "error",
+              "code": "INVALID_EVALUATION_TIME",
+              "message": "2026-09-02T24:00:00.0001Z is not a valid timestamp",
+              "subjectId": "urn:example:viability:user-schema",
+              "causalPath": [
+                "urn:example:viability:user-schema"
+              ]
+            }
+          ],
+          "impact": {
+            "changedSubjects": [
+              "urn:example:viability:user-schema"
+            ],
+            "affectedSubjects": [
+              "urn:example:viability:user-schema"
+            ],
+            "paths": [
+              {
+                "subjectId": "urn:example:viability:user-schema",
+                "path": [
+                  "urn:example:viability:user-schema"
+                ]
+              }
+            ]
+          },
+          "quarantinedSubjects": [
+            "urn:example:viability:user-schema"
+          ]
+        },
+        "host": {
+          "keys": [
+            "status",
+            "issues",
+            "impact",
+            "quarantinedSubjects"
+          ],
+          "issueKeys": [
+            [
+              "severity",
+              "code",
+              "message",
+              "subjectId",
+              "path",
+              "causalPath"
+            ]
+          ]
+        }
+      },
+      "observed": {
+        "status": "observed",
+        "value": {
+          "status": "viable",
+          "generation": {
+            "$schema": "https://raw.githubusercontent.com/roryscot/metamap/v0.3.0/schemas/metamap-generation.schema.json",
+            "schemaVersion": "1.0.0",
+            "evaluatedAt": "2026-09-02T24:00:00.0001Z",
+            "graph": {
+              "id": "urn:example:metamap:example-user-schema",
+              "revision": "example-1",
+              "digest": "sha256:7c3384787b0fac61a94bde964cebe9742c4c69c37a1648527adab641d395efe6"
+            },
+            "policy": {
+              "id": "urn:example:viability:user-schema",
+              "digest": "sha256:6d7e18866a7fd4abfeb2e9a779bca16e4e506a70fb4b8594e6d08052c130c833"
+            },
+            "context": {
+              "environment": "production",
+              "maintenance": false
+            },
+            "activeMappings": [
+              "urn:example:mapping:prisma-contains-user-email",
+              "urn:example:mapping:user-email-implementations",
+              "urn:example:mapping:zod-contains-user-email",
+              "urn:example:mapping:zod-email-derived-from-prisma"
+            ],
+            "inactiveMappings": [],
+            "evidence": [
+              "urn:example:evidence:email-conformance-test"
+            ],
+            "waiversApplied": [],
+            "id": "urn:metamap:generation:6dd5ddfe399b3814e6338a12cf062378b6d0b215b62a960ddac60dce8f579cb0",
+            "digest": "sha256:6dd5ddfe399b3814e6338a12cf062378b6d0b215b62a960ddac60dce8f579cb0"
+          },
+          "issues": [],
+          "impact": {
+            "changedSubjects": [],
+            "affectedSubjects": [],
+            "paths": []
+          }
+        },
+        "host": {
+          "keys": [
+            "status",
+            "generation",
+            "issues",
+            "impact"
+          ],
+          "issueKeys": [],
+          "generationKeys": [
+            "$schema",
+            "schemaVersion",
+            "evaluatedAt",
+            "graph",
+            "policy",
+            "context",
+            "activeMappings",
+            "inactiveMappings",
+            "evidence",
+            "waiversApplied",
+            "id",
+            "digest"
+          ],
+          "graphKeys": [
+            "id",
+            "revision",
+            "digest"
+          ],
+          "sharedContext": true,
+          "frozen": true,
+          "contextFrozen": true,
+          "activeFrozen": true
+        }
+      }
+    },
+    {
+      "name": "selector-{}",
+      "expected": {
+        "status": "observed",
+        "value": {
+          "status": "rejected",
+          "issues": [
+            {
+              "severity": "error",
+              "code": "INVALID_VIABILITY_POLICY",
+              "message": "must have required property 'mapping'",
+              "path": "/mappings/0"
+            },
+            {
+              "severity": "error",
+              "code": "INVALID_VIABILITY_POLICY",
+              "message": "must NOT have fewer than 1 properties",
+              "path": "/mappings/0/select"
+            },
+            {
+              "severity": "error",
+              "code": "INVALID_VIABILITY_POLICY",
+              "message": "must match exactly one schema in oneOf",
+              "path": "/mappings/0"
+            },
+            {
+              "severity": "error",
+              "code": "INVALID_VIABILITY_POLICY",
+              "message": "must NOT have fewer than 1 properties",
+              "path": "/mappings/0/select"
+            }
+          ],
+          "impact": {
+            "changedSubjects": [],
+            "affectedSubjects": [],
+            "paths": []
+          },
+          "quarantinedSubjects": []
+        },
+        "host": {
+          "keys": [
+            "status",
+            "issues",
+            "impact",
+            "quarantinedSubjects"
+          ],
+          "issueKeys": [
+            [
+              "severity",
+              "code",
+              "message",
+              "path"
+            ],
+            [
+              "severity",
+              "code",
+              "message",
+              "path"
+            ],
+            [
+              "severity",
+              "code",
+              "message",
+              "path"
+            ],
+            [
+              "severity",
+              "code",
+              "message",
+              "path"
+            ]
+          ]
+        }
+      },
+      "observed": {
+        "status": "observed",
+        "value": {
+          "status": "rejected",
+          "issues": [
+            {
+              "severity": "error",
+              "code": "INVALID_VIABILITY_POLICY",
+              "message": "must have required property 'mapping'",
+              "path": "/mappings/0"
+            },
+            {
+              "severity": "error",
+              "code": "INVALID_VIABILITY_POLICY",
+              "message": "{} has less than 1 property",
+              "path": "/mappings/0/select"
+            },
+            {
+              "severity": "error",
+              "code": "INVALID_VIABILITY_POLICY",
+              "message": "must match exactly one schema in oneOf",
+              "path": "/mappings/0"
+            },
+            {
+              "severity": "error",
+              "code": "INVALID_VIABILITY_POLICY",
+              "message": "{} has less than 1 property",
+              "path": "/mappings/0/select"
+            }
+          ],
+          "impact": {
+            "changedSubjects": [],
+            "affectedSubjects": [],
+            "paths": []
+          },
+          "quarantinedSubjects": []
+        },
+        "host": {
+          "keys": [
+            "status",
+            "issues",
+            "impact",
+            "quarantinedSubjects"
+          ],
+          "issueKeys": [
+            [
+              "severity",
+              "code",
+              "message",
+              "path"
+            ],
+            [
+              "severity",
+              "code",
+              "message",
+              "path"
+            ],
+            [
+              "severity",
+              "code",
+              "message",
+              "path"
+            ],
+            [
+              "severity",
+              "code",
+              "message",
+              "path"
+            ]
+          ]
+        }
+      }
+    }
+  ],
+  "scope": "Original JSON v1 policy/generation/compiler observations. V2 semantic compilation, custom callbacks, arbitrary accessors/proxies and resource/platform acceptance remain open."
+}

@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "1.0.0",
+  "referenceEngine": "399747a4ad05a37cd8db1cedd53048fad2175be4",
+  "baselineDigest": "sha256:963a0bdb0514342053144b369b900342d78c55d79ddc3a07c032dd859c8cd8ed",
+  "previousSupplementDigest": "sha256:82826c6f95fbae6c25b6114a2252713441b652bf5bda24fe19e04863616db35c",
+  "audit": {
+    "path": "docs/acceptance/parity/surface-reconciliation-2026-10-12T04-59-15.437Z/receipt.json",
+    "digest": "sha256:58bd4818693cf30d8d94cbbf65a5ecc16bbb43422f63abc8ab2ec46141648a5e"
+  },
+  "purpose": "Add the executable CLI parser omission without changing either earlier frozen inventory or original source. All obligations in all three inventory files remain required.",
+  "obligations": [
+    {
+      "id": "parity:c27fec84b113abfb5f7e",
+      "identity": "cli:impact:--changed",
+      "kind": "cli-option",
+      "name": "impact --changed",
+      "parent": "parity:91a7ddffa028bdac1488",
+      "origin": {
+        "path": "src/cli.ts",
+        "digest": "sha256:43642843f4266661c2517206219072ea76f15192a2d2f6119c91f3bd9a6f5c9f",
+        "line": 573
+      },
+      "status": "unclassified",
+      "candidateEvidence": [],
+      "workstream": "P3",
+      "candidateEntryPoint": {
+        "kind": "native-cli-option",
+        "referenceCommand": "impact",
+        "option": "--changed"
+      },
+      "verificationStrategy": "Run real reference/candidate CLI calls with valid, missing, repeated and omitted --changed values; preserve complete status/output/subject selection and filesystem effects. The source accepts and consumes this value although the impact subject selection uses positionals.",
+      "expectation": {
+        "kind": "pinned-executable-cli-parser",
+        "documentedUsage": "metamap impact <graph.json> <policy.json> <subject-id...> [--context context.json] [--as-of timestamp] [--relation-pack pack.json]...",
+        "parserLine": 573,
+        "valuedOptions": [
+          "--context",
+          "--as-of",
+          "--changed",
+          "--relation-pack"
+        ],
+        "sourceDigest": "sha256:43642843f4266661c2517206219072ea76f15192a2d2f6119c91f3bd9a6f5c9f",
+        "inference": "Static source inspection: impact accepts a valued --changed option through the shared compile/promote/impact parser; its changedSubjects are remaining positional arguments. Real CLI equivalence remains unverified."
+      },
+      "inventoryCorrection": "The first manifest derived options from CLI help. Independent AST reconciliation found this recognized executable option omitted from help and the first inventory."
+    }
+  ],
+  "expandedObligationCount": 1293,
+  "ownerApprovedDeviations": []
+}

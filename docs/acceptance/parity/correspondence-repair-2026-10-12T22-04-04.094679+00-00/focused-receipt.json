@@ -1,0 +1,35 @@
+{
+  "schemaVersion": "1.0.0",
+  "status": "failed",
+  "commands": [
+    {
+      "label": "freeze-correspondence",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "scripts/parity/correspondence_contracts.mjs",
+        "--freeze-only"
+      ],
+      "exitCode": 0
+    },
+    {
+      "label": "freeze-references",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "scripts/parity/reference_contracts.mjs",
+        "--freeze-only"
+      ],
+      "exitCode": 0
+    },
+    {
+      "label": "build",
+      "command": [
+        "/Users/admin/.cargo/bin/cargo",
+        "build",
+        "--locked",
+        "-p",
+        "patamaps-cli"
+      ],
+      "exitCode": 101
+    }
+  ]
+}

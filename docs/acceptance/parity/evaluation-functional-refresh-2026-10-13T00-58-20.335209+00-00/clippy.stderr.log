@@ -1,0 +1,28 @@
+    Checking patamaps-core v0.1.0 (/Users/admin/dev/patamaps/patamaps/crates/patamaps-core)
+error: this `if` statement can be collapsed
+   --> crates/patamaps-core/src/legacy_evaluation.rs:453:9
+    |
+453 | /         if !proofs.is_empty() {
+454 | |             if let Some(mapping) = map_index.get(current.as_str()) {
+455 | |                 for endpoint in strings(mapping, "sources")?
+456 | |                     .into_iter()
+...   |
+468 | |         }
+    | |_________^
+    |
+    = help: for further information visit https://rust-lang.github.io/rust-clippy/rust-1.99.0/index.html#collapsible_if
+    = note: `-D clippy::collapsible-if` implied by `-D warnings`
+    = help: to override `-D warnings` add `#[allow(clippy::collapsible_if)]`
+help: collapse nested if block
+    |
+453 ~         if !proofs.is_empty()
+454 ~             && let Some(mapping) = map_index.get(current.as_str()) {
+455 |                 for endpoint in strings(mapping, "sources")?
+...
+466 |                 }
+467 ~             }
+    |
+
+error: could not compile `patamaps-core` (lib) due to 1 previous error
+warning: build failed, waiting for other jobs to finish...
+error: could not compile `patamaps-core` (lib test) due to 1 previous error

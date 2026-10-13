@@ -1,0 +1,69 @@
+{
+  "schemaVersion": "1.0.0",
+  "status": "failed",
+  "commands": [
+    {
+      "label": "build",
+      "command": [
+        "/Users/admin/.cargo/bin/cargo",
+        "build",
+        "--locked",
+        "-p",
+        "patamaps-cli"
+      ],
+      "exitCode": 0
+    },
+    {
+      "label": "clippy",
+      "command": [
+        "/Users/admin/.cargo/bin/cargo",
+        "clippy",
+        "--locked",
+        "--workspace",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exitCode": 0
+    },
+    {
+      "label": "native",
+      "command": [
+        "/opt/homebrew/bin/python3",
+        "-B",
+        "scripts/parity/native.py"
+      ],
+      "exitCode": 0
+    },
+    {
+      "label": "installed-sdk",
+      "command": [
+        "/opt/homebrew/bin/python3",
+        "-B",
+        "scripts/parity/sdk_consumer.py"
+      ],
+      "exitCode": 1
+    }
+  ],
+  "functionalEvidence": [
+    {
+      "path": "docs/acceptance/parity/native-2026-10-12T23-21-14.540265Z/receipt.json",
+      "digest": "sha256:11f12147e5edf3e2fe31de12845f8c820dcb4c1e80ebd2ebaa5f7d377f60ee00"
+    },
+    {
+      "path": "docs/acceptance/parity/sdk-consumer-2026-10-12T23-21-47.698629Z/receipt.json",
+      "digest": "sha256:67a2410b910b9b42807193094ab7c21e1ae7fdcc682c12bdb8deb10f69c7939f"
+    }
+  ],
+  "binaryDigest": "sha256:50b9250e696779e9c0eee2d5b408303692efdcec1858622de3b5145ceb53757a",
+  "candidateEngine": {
+    "compiler": "sha256:2e22e5a5d939e50aaf59fcb488811e18e53fe8abfa78240943a7da65bc7180e7",
+    "documentType": "executor-description",
+    "governance": "sha256:d9227f346cb4ec203823fcbedb7ea8d1d9cb48cca8406e438e9d2b3d55d78225",
+    "schemaVersion": "0.1.0",
+    "scientific": "sha256:888fcc9b688d8296e853a49d2ae453cbfee933154d9ab075a224ada449f4df88",
+    "workspace": "sha256:0b7666c5ebd9bfda2883a2312c4c194d982f6222bbeddf9915521befed57864f"
+  },
+  "scope": "Current workspace/cache/outputs/custom-adapter/configuration parsing/loading/correspondence/reference/reporting/diff/digest/UTF-16/composition/graph/registry/JSON/native/installed SDK/discovery/scientific components, including the source-bound native collator patch. Original callbacks and expectations remain unchanged. Complete accepted-domain/package/platform parity remains unresolved."
+}

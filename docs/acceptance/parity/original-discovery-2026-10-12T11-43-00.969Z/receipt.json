@@ -1,0 +1,599 @@
+{
+  "schemaVersion": "1.0.0",
+  "driver": "discovery",
+  "driverDigest": "sha256:e090be057549c59b1b11a209243554310dafa527535d0882247216e027fe9d92",
+  "supervision": {
+    "mode": "inherited-live-supervisor",
+    "project": "/Users/admin/dev/patamaps/patamaps",
+    "configurationDigest": "sha256:77505e4ca3960c2df14617ffa5951838a6b84e51d6f8ed715ec60faa3c9e8187",
+    "policy": {
+      "version": 1,
+      "minimumFreeBytes": 25000000000,
+      "reserveFreeBytes": 10000000000,
+      "maximumRunGrowthBytes": 8000000000,
+      "maximumRetainedBytes": 50000000000,
+      "monitorIntervalMs": 2000,
+      "terminationGraceMs": 15000
+    },
+    "availableBytesAtEntry": 31364849664
+  },
+  "selection": {
+    "path": "fixtures/parity/discovery-selected-cases.json",
+    "digest": "sha256:94788bd5f0e9204d81b899800df14ccf8fbe4b4a0f45b84662f4bd78faa33de2",
+    "schemaVersion": "1.0.0",
+    "suite": "src/__tests__/adapters.test.ts",
+    "testNamePattern": "^repository adapters ",
+    "selectedCaseIds": [
+      "parity:3c4383df045d2e04f446",
+      "parity:61cac48714e04540712a",
+      "parity:60cc37440f9987d7dfd8"
+    ],
+    "excludedCaseIds": [],
+    "moduleBindings": {
+      "../adapters/prisma.js": "adapters/prisma.js",
+      "../adapters/typescript-zod.js": "adapters/typescript-zod.js",
+      "../adapters/json-collections.js": "adapters/json-collections.js"
+    },
+    "scope": "All three unchanged original pure fact-discovery cases execute against the installed extracted providers. Admission and graph/policy/governance cases are outside this selection and remain open."
+  },
+  "timestamp": "2026-10-12T11-43-00.969Z",
+  "status": "passed",
+  "command": [
+    "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+    "/Users/admin/dev/patamaps/patamaps/.tools/parity/oracles/399747a4ad05-p8pkt3pr/reference/node_modules/vitest/vitest.mjs",
+    "run",
+    "--config",
+    "/Users/admin/dev/patamaps/patamaps/.tools/parity/runs/original-discovery-GTKTWI/vitest.config.mjs",
+    "--reporter=default",
+    "--reporter=json",
+    "--outputFile",
+    "/Users/admin/dev/patamaps/patamaps/.tools/parity/runs/original-discovery-GTKTWI/vitest.json",
+    "--testNamePattern",
+    "^repository adapters "
+  ],
+  "exitCode": 0,
+  "signal": null,
+  "error": null,
+  "manifestDigest": "sha256:963a0bdb0514342053144b369b900342d78c55d79ddc3a07c032dd859c8cd8ed",
+  "comparisonRulesDigest": "sha256:ab76e60deb27bf8b425063f3d432b88720c1f0d6e2cd67b43b9846cb9fb5ae91",
+  "reference": {
+    "engine": "399747a4ad05a37cd8db1cedd53048fad2175be4",
+    "caseOrigin": "Unchanged pinned original source/assertions",
+    "operationsRerun": false,
+    "testsRerun": false,
+    "referenceObservation": "docs/acceptance/full-reference/reference-vitest.json"
+  },
+  "candidate": {
+    "binary": "target/debug/patamaps",
+    "binaryDigest": "sha256:e3f8002da9dcab39370b8c80b57e25b0608902dc2dee7b41fb4530536f65a08b",
+    "engine": {
+      "compiler": "sha256:2debad95a00a4055080bbf047431be1da9772ee0d96d832d2fa2c53f3758474e",
+      "documentType": "executor-description",
+      "governance": "sha256:0ba8f417fc49d5ef0893ab469563d92a5451f2fb73b9603454cf2a290210911f",
+      "schemaVersion": "0.1.0",
+      "scientific": "sha256:6555053d5f0efb924526bee95d5a4cdf483886153e251f1c0fa6e6bac89607ac",
+      "workspace": "sha256:f0a019c12e6059173f9263079f8c8e1baf2f04094e151faa48fb3caac2edcf69"
+    },
+    "sdkSourceInventory": [
+      {
+        "path": "adapters/discovery/LICENSE",
+        "digest": "sha256:cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+      },
+      {
+        "path": "adapters/discovery/NOTICE",
+        "digest": "sha256:cfa666f6558212e3890a68fff258af49febff0af2b77be80f6563e1aa1c6cd48"
+      },
+      {
+        "path": "adapters/discovery/README.md",
+        "digest": "sha256:a522528301e6f4b0c15e4916a0103abae455e05e3f96389a971fa71a9796668f"
+      },
+      {
+        "path": "adapters/discovery/adapters/json-collections.d.ts",
+        "digest": "sha256:ba848348dab5c845499036610c25cf776b8423314c15b9b3738c6cbb3901c34a"
+      },
+      {
+        "path": "adapters/discovery/adapters/json-collections.js",
+        "digest": "sha256:8a76bbe88b75837c8114f85221ac1dc668f858248869ab3e9853eea946ecac39"
+      },
+      {
+        "path": "adapters/discovery/adapters/legacy-sources.d.ts",
+        "digest": "sha256:b2c6e480c336a88d509c2376bde5a14a40587f66d7f99eb1f49c606129e09fdd"
+      },
+      {
+        "path": "adapters/discovery/adapters/legacy-sources.js",
+        "digest": "sha256:4ca2aaf9464e004561fc91e32e6b1168340a9b55f39b7a12707843640c32dce5"
+      },
+      {
+        "path": "adapters/discovery/adapters/metamap-shard.d.ts",
+        "digest": "sha256:f15919521cb2589631003de89ab0d1cdbc12c0108a044a99a9d4a74bc942883f"
+      },
+      {
+        "path": "adapters/discovery/adapters/metamap-shard.js",
+        "digest": "sha256:de8da41af094f9dbb874820ce77aaad72e6148ea6702a36b58d6d358d2464792"
+      },
+      {
+        "path": "adapters/discovery/adapters/nextjs-app-router.d.ts",
+        "digest": "sha256:fbc4dcdba52075d1de85d016de4b9da000804ff6ad22f953c31bbe0a50d921a7"
+      },
+      {
+        "path": "adapters/discovery/adapters/nextjs-app-router.js",
+        "digest": "sha256:94e67a89f9aa4e4ebc5cbd5bc4eac1708a4cfcd9548cf122f1725c6a342714e2"
+      },
+      {
+        "path": "adapters/discovery/adapters/prisma.d.ts",
+        "digest": "sha256:bb9628f8208d5ad58c0ef1ff2c21d0e7aecc398088c994a82772750228654d94"
+      },
+      {
+        "path": "adapters/discovery/adapters/prisma.js",
+        "digest": "sha256:ea519787b3cd5314478e005fcdb45a1303efd67f9a4ac5286a62621bf8999f94"
+      },
+      {
+        "path": "adapters/discovery/adapters/source-of-truth.d.ts",
+        "digest": "sha256:c9451b58d98d0327c7e0c46e607d37d911854a55400263d770b1910a3bd032df"
+      },
+      {
+        "path": "adapters/discovery/adapters/source-of-truth.js",
+        "digest": "sha256:9ffe66100dbaeebce34e2bc9364f15b3185de33711870a1f36b08ee452d6de9e"
+      },
+      {
+        "path": "adapters/discovery/adapters/sssom-tsv.d.ts",
+        "digest": "sha256:7942456e65559c99e91e862be57cf6441013d207b2d3ecf1168a8fa4a0c12c17"
+      },
+      {
+        "path": "adapters/discovery/adapters/sssom-tsv.js",
+        "digest": "sha256:e58e7ca16b941942f5428b570d061b43d2e04411d2f785e5ccb1d258da3da65d"
+      },
+      {
+        "path": "adapters/discovery/adapters/types.d.ts",
+        "digest": "sha256:d113b2361b33a66ab442091bb358566c39e4f68a5e060ee56d5fc062539d1c19"
+      },
+      {
+        "path": "adapters/discovery/adapters/types.js",
+        "digest": "sha256:8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881"
+      },
+      {
+        "path": "adapters/discovery/adapters/typescript-zod.d.ts",
+        "digest": "sha256:04da65470573218c012c3db46de8fc74aa3107fc63709c8cc8cf312be57997dd"
+      },
+      {
+        "path": "adapters/discovery/adapters/typescript-zod.js",
+        "digest": "sha256:7be0b02ceac6ad674052d372f7fadedf9b0eff96431658a9eb0f297be40e9adc"
+      },
+      {
+        "path": "adapters/discovery/canonical.js",
+        "digest": "sha256:59d332dc23a2181f66ebb97cbf01a77f2cce454ecd0c4b4841b485e2baeee02f"
+      },
+      {
+        "path": "adapters/discovery/config.d.ts",
+        "digest": "sha256:d69cd20951b07c4b867c5e1bf198e6ee0705c3b017affbc1071c39ae48e351c9"
+      },
+      {
+        "path": "adapters/discovery/index.d.ts",
+        "digest": "sha256:1dd47e3fad509d1298fa1e4868173ad7a475cae391037b0d14d014d74c5653e5"
+      },
+      {
+        "path": "adapters/discovery/index.mjs",
+        "digest": "sha256:e203a5e1dc7e285b0466bbc4745ad391de923d43f9fe1636f6d748bf6f9966f8"
+      },
+      {
+        "path": "adapters/discovery/model.d.ts",
+        "digest": "sha256:d90fe046d23a7a154f4f40d2eb7a67ab1154a64bc475e403c5f2a4e9a61795f6"
+      },
+      {
+        "path": "adapters/discovery/model.js",
+        "digest": "sha256:8f5a7f067cea1855bc826f1c6ec12c0decab3efe7a893db4b59a012de115294e"
+      },
+      {
+        "path": "adapters/discovery/package.json",
+        "digest": "sha256:f256a1d68e2a4a215d94bf314a28e32d8301a9d6ae5d04456a821e219a1dfc8a"
+      },
+      {
+        "path": "adapters/discovery/process.mjs",
+        "digest": "sha256:ce9d3575f90e54c1ada768766737176e27b903d2d5c165b19be5cc127ea7a788"
+      },
+      {
+        "path": "adapters/discovery/profiles/scientific-skos.json",
+        "digest": "sha256:2b79e79f495f2c8a1fb2e7cd39ddf112e2306c26ad5a267762f9c38759b5ff57"
+      },
+      {
+        "path": "adapters/discovery/provenance.json",
+        "digest": "sha256:51d7e2fd8b1e749bee17bc611b9e3084ddf2b6fd0591e73abbd31e5991ab887c"
+      },
+      {
+        "path": "adapters/discovery/references.d.ts",
+        "digest": "sha256:72de447d6938407349e98faca988858320c08c74cefb480bdfc0970152647815"
+      },
+      {
+        "path": "adapters/discovery/references.js",
+        "digest": "sha256:bdb1da9a9a5e94695b8819e48e158cb339fe6c7b121f3dea501c55b591c2ce84"
+      },
+      {
+        "path": "adapters/discovery/relation-pack.js",
+        "digest": "sha256:afba780baf7fe1967d140b1f8773d719962ababbc24235e5a15d3f5a95b62d8a"
+      },
+      {
+        "path": "adapters/discovery/schemas/metamap-graph.schema.json",
+        "digest": "sha256:fa177ee438ac4cf55e133666c0c7a66e5c7bb0242deb78611e2e3482148bde72"
+      },
+      {
+        "path": "adapters/discovery/scientific-relations.js",
+        "digest": "sha256:bc0e8172310cbecca6c46a77207859760b543368cf379ab26848a906e4028568"
+      },
+      {
+        "path": "adapters/discovery/sssom.js",
+        "digest": "sha256:5a82afd1cae447c9f26b6043ed902fcedb790b975ba3adb575eed731aadb8ae5"
+      },
+      {
+        "path": "adapters/discovery/stable.d.ts",
+        "digest": "sha256:dd0d402d3639d8c424e45625731d5c61d3ee65c55492ac86f89b831a57a6c6c0"
+      },
+      {
+        "path": "adapters/discovery/stable.js",
+        "digest": "sha256:fca250a18b4414d03013d524cf7515f258982570effe806d0ffb73a8e72d6c4a"
+      },
+      {
+        "path": "adapters/discovery/viability-model.d.ts",
+        "digest": "sha256:c451c309e7c4d5a2918bc152a916755b0cb9f53edfee36e6cdae55f0264c4482"
+      },
+      {
+        "path": "sdk/typescript/canonical.d.ts",
+        "digest": "sha256:88ae79727dbad3b0872a9c3539a95fe6c444b810ff416423f06a2cf39274ecb4"
+      },
+      {
+        "path": "sdk/typescript/canonical.mjs",
+        "digest": "sha256:830acf94b6a334a5659856b1c6ba342e8c02d9df49752c9163be7fa3461a3954"
+      },
+      {
+        "path": "sdk/typescript/index.d.ts",
+        "digest": "sha256:aa76e1583c3a1b872ec1fa9fbbaddd8c1211a118c9f670c0d9ec1b0ba3a4bbae"
+      },
+      {
+        "path": "sdk/typescript/index.mjs",
+        "digest": "sha256:f5f5abcf9d4b199a4674795bd5e96252f65c1449d679a73dd069c17c89db6015"
+      },
+      {
+        "path": "sdk/typescript/legacy-validation.d.ts",
+        "digest": "sha256:b2c6dfcf90b1d4c4af71e29c4308fe094c667266dd3cb20b963898f9153b3704"
+      },
+      {
+        "path": "sdk/typescript/legacy-validation.mjs",
+        "digest": "sha256:f08ac73fda55878470b9c2ee1050502f52e6a2fbc63d80b30a172db5880c5ce9"
+      },
+      {
+        "path": "sdk/typescript/package.json",
+        "digest": "sha256:45da1eca3cce8ca85e1108209aa4e4a02cb6921e52aa1d334f9fb3cf07d0f258"
+      },
+      {
+        "path": "sdk/typescript/sssom-profile.mjs",
+        "digest": "sha256:a37260f42d6b02c5900dbefa9477386667f5286079a7a1abd12495e3dc78e533"
+      },
+      {
+        "path": "sdk/typescript/sssom.d.ts",
+        "digest": "sha256:7f58f17edc48bcb8340b73004273fa4c23a9f4b3671ca1276225f16de8254457"
+      },
+      {
+        "path": "sdk/typescript/sssom.mjs",
+        "digest": "sha256:ccc44eac40a38b892d42c33537a9f15915e1aa65c774e6dc78d129284a6bfb74"
+      }
+    ],
+    "facadeDigest": "sha256:830acf94b6a334a5659856b1c6ba342e8c02d9df49752c9163be7fa3461a3954",
+    "facadeDeclarationDigest": "sha256:88ae79727dbad3b0872a9c3539a95fe6c444b810ff416423f06a2cf39274ecb4"
+  },
+  "host": {
+    "platform": "darwin",
+    "architecture": "arm64",
+    "node": "v22.16.0"
+  },
+  "counts": {
+    "originalCases": 3,
+    "passed": 3,
+    "failed": 0,
+    "skipped": 0,
+    "explicitlyUnselected": 0,
+    "nativeExecutions": 0,
+    "factExecutions": 3
+  },
+  "assertions": "All three unchanged original pure fact-discovery cases execute against the installed extracted providers. Admission and graph/policy/governance cases are outside this selection and remain open.",
+  "obligations": [
+    {
+      "id": "parity:3c4383df045d2e04f446",
+      "scope": "complete-original-case",
+      "status": "verified-equivalent",
+      "origin": {
+        "path": "src/__tests__/adapters.test.ts",
+        "digest": "sha256:d1580d3825356a5e2b779be2340898d419e60b2edd1cb8f42fdd7a9fe0767342",
+        "line": 26
+      },
+      "expectationDigest": "sha256:538029440c7558b58b8249783f4715c612ddf2e8a1bc15934e427b9fc32f1a72",
+      "fullName": "repository adapters discovers Prisma models, fields, enums, and stable locators",
+      "occurrence": 0,
+      "candidateExecution": "Original pure fact-discovery assertions; installed licensed provider code and pinned TypeScript tooling, with no MetaMap runtime package. Native admission is verified by the separate installed-host component receipt."
+    },
+    {
+      "id": "parity:61cac48714e04540712a",
+      "scope": "complete-original-case",
+      "status": "verified-equivalent",
+      "origin": {
+        "path": "src/__tests__/adapters.test.ts",
+        "digest": "sha256:d1580d3825356a5e2b779be2340898d419e60b2edd1cb8f42fdd7a9fe0767342",
+        "line": 77
+      },
+      "expectationDigest": "sha256:f6658a37b41be0c47e7916798d6c4bb78714635529de68f4ba49f31245282f7b",
+      "fullName": "repository adapters discovers Zod object fields, enums, and derivation chains",
+      "occurrence": 0,
+      "candidateExecution": "Original pure fact-discovery assertions; installed licensed provider code and pinned TypeScript tooling, with no MetaMap runtime package. Native admission is verified by the separate installed-host component receipt."
+    },
+    {
+      "id": "parity:60cc37440f9987d7dfd8",
+      "scope": "complete-original-case",
+      "status": "verified-equivalent",
+      "origin": {
+        "path": "src/__tests__/adapters.test.ts",
+        "digest": "sha256:d1580d3825356a5e2b779be2340898d419e60b2edd1cb8f42fdd7a9fe0767342",
+        "line": 124
+      },
+      "expectationDigest": "sha256:082e5460eff7772f8127137e498f0b3502b6588c88f7dbb98a746161f07d0e5e",
+      "fullName": "repository adapters turns configured JSON records into references without copying domain data",
+      "occurrence": 0,
+      "candidateExecution": "Original pure fact-discovery assertions; installed licensed provider code and pinned TypeScript tooling, with no MetaMap runtime package. Native admission is verified by the separate installed-host component receipt."
+    }
+  ],
+  "originalTreeFilesVerified": 610,
+  "retainedRun": ".tools/parity/runs/original-discovery-GTKTWI",
+  "cleanup": "Any explicit Node cleanup within owned roots is retained by rename; deletion outside those roots is refused",
+  "installedProvider": {
+    "path": ".tools/parity/runs/original-discovery-GTKTWI/installed/node_modules/patamaps-discovery-draft",
+    "packages": [
+      "ajv",
+      "ajv-formats",
+      "fast-deep-equal",
+      "fast-uri",
+      "json-schema-traverse",
+      "patamaps-discovery-draft",
+      "patamaps-native-sdk-draft",
+      "require-from-string",
+      "typescript"
+    ],
+    "tooling": {
+      "manifest": "fixtures/parity/discovery-tooling.json",
+      "digest": "sha256:3ece931df151b88367c561acdd7c8eaa7a66395d55a07d38d47dad77de5fe51a",
+      "packages": [
+        {
+          "name": "ajv",
+          "version": "8.20.0"
+        },
+        {
+          "name": "ajv-formats",
+          "version": "3.0.1"
+        },
+        {
+          "name": "fast-deep-equal",
+          "version": "3.1.3"
+        },
+        {
+          "name": "fast-uri",
+          "version": "3.1.6"
+        },
+        {
+          "name": "json-schema-traverse",
+          "version": "1.0.0"
+        },
+        {
+          "name": "require-from-string",
+          "version": "2.0.2"
+        },
+        {
+          "name": "typescript",
+          "version": "5.9.3"
+        }
+      ]
+    },
+    "typescriptVersion": "5.9.3",
+    "observerPath": ".tools/parity/runs/original-discovery-GTKTWI/observed-providers.mjs",
+    "observerDigest": "sha256:ae1b32b1b42be0ffbd263e05710475e815acca0b81f227e5c4386aa44d572e8c",
+    "inventory": [
+      {
+        "path": "LICENSE",
+        "digest": "sha256:cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+      },
+      {
+        "path": "NOTICE",
+        "digest": "sha256:cfa666f6558212e3890a68fff258af49febff0af2b77be80f6563e1aa1c6cd48"
+      },
+      {
+        "path": "README.md",
+        "digest": "sha256:a522528301e6f4b0c15e4916a0103abae455e05e3f96389a971fa71a9796668f"
+      },
+      {
+        "path": "adapters/json-collections.d.ts",
+        "digest": "sha256:ba848348dab5c845499036610c25cf776b8423314c15b9b3738c6cbb3901c34a"
+      },
+      {
+        "path": "adapters/json-collections.js",
+        "digest": "sha256:8a76bbe88b75837c8114f85221ac1dc668f858248869ab3e9853eea946ecac39"
+      },
+      {
+        "path": "adapters/legacy-sources.d.ts",
+        "digest": "sha256:b2c6e480c336a88d509c2376bde5a14a40587f66d7f99eb1f49c606129e09fdd"
+      },
+      {
+        "path": "adapters/legacy-sources.js",
+        "digest": "sha256:4ca2aaf9464e004561fc91e32e6b1168340a9b55f39b7a12707843640c32dce5"
+      },
+      {
+        "path": "adapters/metamap-shard.d.ts",
+        "digest": "sha256:f15919521cb2589631003de89ab0d1cdbc12c0108a044a99a9d4a74bc942883f"
+      },
+      {
+        "path": "adapters/metamap-shard.js",
+        "digest": "sha256:de8da41af094f9dbb874820ce77aaad72e6148ea6702a36b58d6d358d2464792"
+      },
+      {
+        "path": "adapters/nextjs-app-router.d.ts",
+        "digest": "sha256:fbc4dcdba52075d1de85d016de4b9da000804ff6ad22f953c31bbe0a50d921a7"
+      },
+      {
+        "path": "adapters/nextjs-app-router.js",
+        "digest": "sha256:94e67a89f9aa4e4ebc5cbd5bc4eac1708a4cfcd9548cf122f1725c6a342714e2"
+      },
+      {
+        "path": "adapters/prisma.d.ts",
+        "digest": "sha256:bb9628f8208d5ad58c0ef1ff2c21d0e7aecc398088c994a82772750228654d94"
+      },
+      {
+        "path": "adapters/prisma.js",
+        "digest": "sha256:ea519787b3cd5314478e005fcdb45a1303efd67f9a4ac5286a62621bf8999f94"
+      },
+      {
+        "path": "adapters/source-of-truth.d.ts",
+        "digest": "sha256:c9451b58d98d0327c7e0c46e607d37d911854a55400263d770b1910a3bd032df"
+      },
+      {
+        "path": "adapters/source-of-truth.js",
+        "digest": "sha256:9ffe66100dbaeebce34e2bc9364f15b3185de33711870a1f36b08ee452d6de9e"
+      },
+      {
+        "path": "adapters/sssom-tsv.d.ts",
+        "digest": "sha256:7942456e65559c99e91e862be57cf6441013d207b2d3ecf1168a8fa4a0c12c17"
+      },
+      {
+        "path": "adapters/sssom-tsv.js",
+        "digest": "sha256:e58e7ca16b941942f5428b570d061b43d2e04411d2f785e5ccb1d258da3da65d"
+      },
+      {
+        "path": "adapters/types.d.ts",
+        "digest": "sha256:d113b2361b33a66ab442091bb358566c39e4f68a5e060ee56d5fc062539d1c19"
+      },
+      {
+        "path": "adapters/types.js",
+        "digest": "sha256:8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881"
+      },
+      {
+        "path": "adapters/typescript-zod.d.ts",
+        "digest": "sha256:04da65470573218c012c3db46de8fc74aa3107fc63709c8cc8cf312be57997dd"
+      },
+      {
+        "path": "adapters/typescript-zod.js",
+        "digest": "sha256:7be0b02ceac6ad674052d372f7fadedf9b0eff96431658a9eb0f297be40e9adc"
+      },
+      {
+        "path": "canonical.js",
+        "digest": "sha256:59d332dc23a2181f66ebb97cbf01a77f2cce454ecd0c4b4841b485e2baeee02f"
+      },
+      {
+        "path": "config.d.ts",
+        "digest": "sha256:d69cd20951b07c4b867c5e1bf198e6ee0705c3b017affbc1071c39ae48e351c9"
+      },
+      {
+        "path": "index.d.ts",
+        "digest": "sha256:1dd47e3fad509d1298fa1e4868173ad7a475cae391037b0d14d014d74c5653e5"
+      },
+      {
+        "path": "index.mjs",
+        "digest": "sha256:e203a5e1dc7e285b0466bbc4745ad391de923d43f9fe1636f6d748bf6f9966f8"
+      },
+      {
+        "path": "model.d.ts",
+        "digest": "sha256:d90fe046d23a7a154f4f40d2eb7a67ab1154a64bc475e403c5f2a4e9a61795f6"
+      },
+      {
+        "path": "model.js",
+        "digest": "sha256:8f5a7f067cea1855bc826f1c6ec12c0decab3efe7a893db4b59a012de115294e"
+      },
+      {
+        "path": "package.json",
+        "digest": "sha256:f256a1d68e2a4a215d94bf314a28e32d8301a9d6ae5d04456a821e219a1dfc8a"
+      },
+      {
+        "path": "process.mjs",
+        "digest": "sha256:ce9d3575f90e54c1ada768766737176e27b903d2d5c165b19be5cc127ea7a788"
+      },
+      {
+        "path": "profiles/scientific-skos.json",
+        "digest": "sha256:2b79e79f495f2c8a1fb2e7cd39ddf112e2306c26ad5a267762f9c38759b5ff57"
+      },
+      {
+        "path": "provenance.json",
+        "digest": "sha256:51d7e2fd8b1e749bee17bc611b9e3084ddf2b6fd0591e73abbd31e5991ab887c"
+      },
+      {
+        "path": "references.d.ts",
+        "digest": "sha256:72de447d6938407349e98faca988858320c08c74cefb480bdfc0970152647815"
+      },
+      {
+        "path": "references.js",
+        "digest": "sha256:bdb1da9a9a5e94695b8819e48e158cb339fe6c7b121f3dea501c55b591c2ce84"
+      },
+      {
+        "path": "relation-pack.js",
+        "digest": "sha256:afba780baf7fe1967d140b1f8773d719962ababbc24235e5a15d3f5a95b62d8a"
+      },
+      {
+        "path": "schemas/metamap-graph.schema.json",
+        "digest": "sha256:fa177ee438ac4cf55e133666c0c7a66e5c7bb0242deb78611e2e3482148bde72"
+      },
+      {
+        "path": "scientific-relations.js",
+        "digest": "sha256:bc0e8172310cbecca6c46a77207859760b543368cf379ab26848a906e4028568"
+      },
+      {
+        "path": "sssom.js",
+        "digest": "sha256:5a82afd1cae447c9f26b6043ed902fcedb790b975ba3adb575eed731aadb8ae5"
+      },
+      {
+        "path": "stable.d.ts",
+        "digest": "sha256:dd0d402d3639d8c424e45625731d5c61d3ee65c55492ac86f89b831a57a6c6c0"
+      },
+      {
+        "path": "stable.js",
+        "digest": "sha256:fca250a18b4414d03013d524cf7515f258982570effe806d0ffb73a8e72d6c4a"
+      },
+      {
+        "path": "viability-model.d.ts",
+        "digest": "sha256:c451c309e7c4d5a2918bc152a916755b0cb9f53edfee36e6cdae55f0264c4482"
+      }
+    ],
+    "sdkInventory": [
+      {
+        "path": "canonical.d.ts",
+        "digest": "sha256:88ae79727dbad3b0872a9c3539a95fe6c444b810ff416423f06a2cf39274ecb4"
+      },
+      {
+        "path": "canonical.mjs",
+        "digest": "sha256:830acf94b6a334a5659856b1c6ba342e8c02d9df49752c9163be7fa3461a3954"
+      },
+      {
+        "path": "index.d.ts",
+        "digest": "sha256:aa76e1583c3a1b872ec1fa9fbbaddd8c1211a118c9f670c0d9ec1b0ba3a4bbae"
+      },
+      {
+        "path": "index.mjs",
+        "digest": "sha256:f5f5abcf9d4b199a4674795bd5e96252f65c1449d679a73dd069c17c89db6015"
+      },
+      {
+        "path": "legacy-validation.d.ts",
+        "digest": "sha256:b2c6dfcf90b1d4c4af71e29c4308fe094c667266dd3cb20b963898f9153b3704"
+      },
+      {
+        "path": "legacy-validation.mjs",
+        "digest": "sha256:f08ac73fda55878470b9c2ee1050502f52e6a2fbc63d80b30a172db5880c5ce9"
+      },
+      {
+        "path": "package.json",
+        "digest": "sha256:45da1eca3cce8ca85e1108209aa4e4a02cb6921e52aa1d334f9fb3cf07d0f258"
+      },
+      {
+        "path": "sssom-profile.mjs",
+        "digest": "sha256:a37260f42d6b02c5900dbefa9477386667f5286079a7a1abd12495e3dc78e533"
+      },
+      {
+        "path": "sssom.d.ts",
+        "digest": "sha256:7f58f17edc48bcb8340b73004273fa4c23a9f4b3671ca1276225f16de8254457"
+      },
+      {
+        "path": "sssom.mjs",
+        "digest": "sha256:ccc44eac40a38b892d42c33537a9f15915e1aa65c774e6dc78d129284a6bfb74"
+      }
+    ]
+  }
+}

@@ -1,7 +1,9 @@
+use base64::{Engine as _, engine::general_purpose::STANDARD};
 use clap::{Args, Parser, Subcommand, ValueEnum};
 use patamaps_contracts::{
-    CompositionRequest, ContractError, GraphDocument, JsonObject, MAX_INPUT_BYTES, PolicyDocument,
-    ProjectionSpec, RelationPack, canonical_bytes, parse, parse_value,
+    COMPATIBILITY_JSON_LIMITS, CompositionRequest, ContractError, GraphDocument, JsonObject,
+    MAX_INPUT_BYTES, PolicyDocument, ProjectionSpec, RelationPack, canonical_bytes,
+    canonical_digest, parse, parse_value, parse_value_with_limits,
 };
 use patamaps_core::{
     CheckError, CheckedGraph, DerivationStatus, Direction, EvaluationOptions, Issue, admit,
@@ -64,6 +66,24 @@ enum Format {
     Typescript,
 }
 #[derive(Clone, Copy, ValueEnum)]
+enum JsonOperation {
+    Canonical,
+    Digest,
+    Parse,
+}
+
+#[derive(Clone, Copy, ValueEnum)]
+enum LegacyJsonOperation {
+    Validate,
+    Shape,
+}
+#[derive(Clone, Copy, ValueEnum)]
+enum LegacyPackOperation {
+    Parse,
+    Import,
+    Digest,
+}
+#[derive(Clone, Copy, ValueEnum)]
 enum TraceDirection {
     Forward,
     Reverse,
@@ -76,6 +96,11 @@ enum Intent {
 }
 #[derive(Subcommand)]
 enum Command {
+    /// Read-only legacy data validation; reports confer no admission or authorization.
+    Legacy {
+        #[command(subcommand)]
+        command: LegacyCommand,
+    },
     /// Source-preserving scientific syntax/profile operations; imports stay unadmitted.
     Sssom {
         #[command(subcommand)]
@@ -83,6 +108,11 @@ enum Command {
     },
     /// Describe installed source identities; this does not authenticate a binary.
     Engine,
+    /// JSON SDK transport: bounded stdin, Rust canonicalization and diagnostics.
+    Json {
+        #[arg(value_enum)]
+        operation: JsonOperation,
+    },
     /// Discover explicitly selected sources and return a captured native bundle.
     Generate {
         config: PathBuf,
@@ -273,7 +303,7 @@ enum Command {
         input: GraphInput,
         policy: PathBuf,
         #[arg(long)]
-        spec: Option<PathBuf>,
+        spec: Vec<PathBuf>,
         #[arg(long)]
         source_receipts: Option<PathBuf>,
         #[command(flatten)]
@@ -304,7 +334,108 @@ enum Command {
 }
 
 #[derive(Subcommand)]
+enum LegacyCommand {
+    /// Run an original command workflow with explicitly selected installed transport.
+    Run {
+        #[arg(long)]
+        node: PathBuf,
+        #[arg(long)]
+        entry: PathBuf,
+        #[arg(last = true)]
+        arguments: Vec<String>,
+    },
+
+    /// JSON request with document and optional native or legacy registered packs.
+    Json {
+        #[arg(value_enum)]
+        operation: LegacyJsonOperation,
+    },
+    /// Versioned portable pack data over stdin; its original address is preserved.
+    Pack {
+        #[arg(value_enum)]
+        operation: LegacyPackOperation,
+        /// Observed host locale for unchecked legacy stable digests.
+        #[arg(long, default_value = "en-US")]
+        locale: String,
+    },
+    /// Read a portable pack file with its original version-specific JSON rules.
+    PackFile {
+        #[arg(value_enum)]
+        operation: LegacyPackOperation,
+        path: PathBuf,
+    },
+    /// Ordered legacy registry operations over current host-owned snapshots.
+    Registry {
+        #[arg(value_enum)]
+        operation: LegacyRegistryTransport,
+    },
+    /// Indexed graph observations over retained host-owned data and keys.
+    Graph {
+        #[arg(value_enum)]
+        operation: LegacyRegistryTransport,
+    },
+    /// Compose legacy shards without validating their cross-shard references.
+    Compose {
+        #[arg(value_enum)]
+        operation: LegacyRegistryTransport,
+    },
+    /// Read-only legacy diffs and Markdown reports, retaining UTF-16 output.
+    Reporting {
+        #[arg(value_enum)]
+        operation: LegacyRegistryTransport,
+    },
+    /// Materialize legacy correspondence declarations and observe drift.
+    Correspondence {
+        #[arg(value_enum)]
+        operation: LegacyRegistryTransport,
+    },
+    /// Original CLI parsing/rendering and source-catalog migration observations.
+    Cli {
+        #[arg(value_enum)]
+        operation: LegacyRegistryTransport,
+    },
+    /// Original context, selector and causal-impact observations.
+    Evaluation {
+        #[arg(value_enum)]
+        operation: LegacyRegistryTransport,
+    },
+    /// Original v1 policy, generation and compilation observations.
+    Viability {
+        #[arg(value_enum)]
+        operation: LegacyRegistryTransport,
+    },
+    /// Original workspace assembly, cache, baseline and output observations.
+    Workspace {
+        #[arg(value_enum)]
+        operation: LegacyRegistryTransport,
+    },
+    /// Validate the original workspace config without admission or defaults.
+    Config {
+        #[arg(value_enum)]
+        operation: LegacyRegistryTransport,
+    },
+    /// Load an original workspace config and resolve repository paths.
+    ConfigFile { path: PathBuf },
+    /// Observe legacy reference identifiers, URI encoding and path predicates.
+    References {
+        #[arg(value_enum)]
+        operation: LegacyRegistryTransport,
+    },
+}
+
+#[derive(Clone, Copy, ValueEnum)]
+enum LegacyRegistryTransport {
+    Json,
+}
+
+#[derive(Subcommand)]
 enum ScientificCommand {
+    /// SDK operations over stdin; all scientific interpretation executes here.
+    Json {
+        operation: ScientificJsonOperation,
+        #[arg(long)]
+        condense: bool,
+    },
     /// Regenerate a bounded scientific RO-Crate from viable captured source bytes.
     Crate {
         capture: PathBuf,
@@ -337,6 +468,118 @@ enum ScientificCommand {
         output: Output,
     },
 }
+
+#[derive(Clone, Copy, ValueEnum)]
+enum ScientificJsonOperation {
+    Parse,
+    SourceConfig,
+    Profile,
+    Document,
+    Interpret,
+    Export,
+    Expand,
+}
+
+fn scientific_operation(
+    operation: ScientificJsonOperation,
+    condense: bool,
+) -> patamaps_scientific::Result<serde_json::Value> {
+    use patamaps_scientific::*;
+    let error = |code, message: String| Error { code, message };
+    if condense && !matches!(operation, ScientificJsonOperation::Export) {
+        return Err(error(
+            "SSSOM_EXPORT_OPTIONS",
+            "condense applies only to export".into(),
+        ));
+    }
+    let mut input = Vec::new();
+    std::io::stdin()
+        .take((SSSOM_TRANSPORT_LIMITS.max_bytes + 1) as u64)
+        .read_to_end(&mut input)
+        .map_err(|e| error("SSSOM_TRANSPORT", e.to_string()))?;
+    if matches!(operation, ScientificJsonOperation::SourceConfig) {
+        return serde_json::to_value(parse_sssom_source_config(&input)?)
+            .map_err(|e| error("SSSOM_TRANSPORT", e.to_string()));
+    }
+    let value = parse_value_with_limits(&input, SSSOM_TRANSPORT_LIMITS)?;
+    match operation {
+        ScientificJsonOperation::Profile => {
+            if value != serde_json::json!({}) {
+                return Err(error(
+                    "SSSOM_TRANSPORT",
+                    "Profile expects an empty request object".into(),
+                ));
+            }
+            Ok(
+                serde_json::json!({"prefixes": builtin_prefixes(), "propagatableSlots": propagatable_slots()}),
+            )
+        }
+        ScientificJsonOperation::SourceConfig => unreachable!(),
+        ScientificJsonOperation::Parse => {
+            #[derive(serde::Deserialize)]
+            #[serde(deny_unknown_fields)]
+            struct Request {
+                input: String,
+                metadata: Option<String>,
+            }
+            let request: Request = serde_json::from_value(value)
+                .map_err(|e| error("SSSOM_DOCUMENT", e.to_string()))?;
+            let decode = |v: &str| {
+                if v.len() > SSSOM_MAX_BYTES.div_ceil(3) * 4 {
+                    return Err(error(
+                        "SSSOM_SIZE_LIMIT",
+                        "SSSOM input exceeds 64 MiB".into(),
+                    ));
+                }
+                let bytes = STANDARD
+                    .decode(v)
+                    .map_err(|e| error("SSSOM_TRANSPORT", e.to_string()))?;
+                if bytes.len() > SSSOM_MAX_BYTES {
+                    return Err(error(
+                        "SSSOM_SIZE_LIMIT",
+                        "SSSOM input exceeds 64 MiB".into(),
+                    ));
+                }
+                Ok(bytes)
+            };
+            let source = decode(&request.input)?;
+            let metadata = request.metadata.as_deref().map(decode).transpose()?;
+            let checked = parse_tsv_compatible(&source, metadata.as_deref())?;
+            serde_json::to_value(checked.document())
+                .map_err(|e| error("SSSOM_TRANSPORT", e.to_string()))
+        }
+        ScientificJsonOperation::Expand => {
+            #[derive(serde::Deserialize)]
+            #[serde(deny_unknown_fields)]
+            struct Request {
+                value: String,
+                prefixes: std::collections::BTreeMap<String, String>,
+            }
+            let request: Request = serde_json::from_value(value)
+                .map_err(|e| error("SSSOM_IDENTIFIER", e.to_string()))?;
+            Ok(serde_json::Value::String(expand_curie(
+                &request.value,
+                &request.prefixes,
+            )?))
+        }
+        _ => {
+            let document: SssomDocument = serde_json::from_value(value)
+                .map_err(|e| error("SSSOM_DOCUMENT", e.to_string()))?;
+            let checked = check_document_compatible(&document)?;
+            match operation {
+                ScientificJsonOperation::Document => serde_json::to_value(checked.document()),
+                ScientificJsonOperation::Interpret => {
+                    serde_json::to_value(checked.interpretation())
+                }
+                ScientificJsonOperation::Export => {
+                    serde_json::to_value(export_tsv(&checked, condense)?)
+                }
+                _ => unreachable!(),
+            }
+            .map_err(|e| error("SSSOM_TRANSPORT", e.to_string()))
+        }
+    }
+}
 enum Failure {
     Rejected(CheckError),
     ReportedRejection,
@@ -364,12 +607,18 @@ impl From<serde_json::Error> for Failure {
 }
 
 fn bytes(path: &Path) -> Result<Vec<u8>, Failure> {
+    bytes_with_limit(path, MAX_INPUT_BYTES)
+}
+fn bytes_with_limit(path: &Path, maximum: usize) -> Result<Vec<u8>, Failure> {
     let mut bytes = Vec::new();
     File::open(path)?
-        .take((MAX_INPUT_BYTES + 1) as u64)
+        .take((maximum + 1) as u64)
         .read_to_end(&mut bytes)?;
-    if bytes.len() > MAX_INPUT_BYTES {
-        return Err(ContractError::InputLimit.into());
+    if bytes.len() > maximum {
+        if maximum == MAX_INPUT_BYTES {
+            return Err(ContractError::InputLimit.into());
+        }
+        return Err(ContractError::ScopedInputLimit { max_bytes: maximum }.into());
     }
     Ok(bytes)
 }
@@ -410,8 +659,19 @@ fn write(output: &Output, bytes: &[u8]) -> Result<(), Failure> {
     write_bytes(output, bytes, true)
 }
 fn write_bytes(output: &Output, bytes: &[u8], newline: bool) -> Result<(), Failure> {
-    if bytes.len().saturating_add(usize::from(newline)) > MAX_INPUT_BYTES {
-        return Err(ContractError::InputLimit.into());
+    write_bytes_with_limit(output, bytes, newline, MAX_INPUT_BYTES)
+}
+fn write_bytes_with_limit(
+    output: &Output,
+    bytes: &[u8],
+    newline: bool,
+    maximum: usize,
+) -> Result<(), Failure> {
+    if bytes.len().saturating_add(usize::from(newline)) > maximum {
+        if maximum == MAX_INPUT_BYTES {
+            return Err(ContractError::InputLimit.into());
+        }
+        return Err(ContractError::ScopedInputLimit { max_bytes: maximum }.into());
     }
     let Some(path) = &output.output else {
         let mut stdout = std::io::stdout().lock();
@@ -461,6 +721,16 @@ fn write_bytes(output: &Output, bytes: &[u8], newline: bool) -> Result<(), Failu
 fn json<T: Serialize>(output: &Output, value: &T) -> Result<(), Failure> {
     write(output, &serde_json::to_vec_pretty(value)?)
 }
+fn scientific_json<T: Serialize>(output: &Output, value: &T) -> Result<(), Failure> {
+    let bytes = canonical_bytes(value)?;
+    parse_value_with_limits(&bytes, patamaps_scientific::SSSOM_TRANSPORT_LIMITS)?;
+    write_bytes_with_limit(
+        output,
+        &bytes,
+        true,
+        patamaps_scientific::SSSOM_TRANSPORT_LIMITS.max_bytes,
+    )
+}
 fn stdout_json<T: Serialize>(value: &T) -> Result<(), Failure> {
     json(
         &Output {
@@ -470,9 +740,598 @@ fn stdout_json<T: Serialize>(value: &T) -> Result<(), Failure> {
         value,
     )
 }
+
+fn legacy_pack_output(
+    operation: LegacyPackOperation,
+    input: Vec<u8>,
+    locale: &str,
+) -> Result<(), Failure> {
+    // The original digest export dispatches by version without shape parsing.
+    // In particular, a caller can address an invalid executable definition
+    // before asking registration to reject it. Digesting grants no validity.
+    if matches!(operation, LegacyPackOperation::Digest) {
+        let digest = patamaps_contracts::LegacyPackJson::parse(input, COMPATIBILITY_JSON_LIMITS)
+            .and_then(|json| json.digest_bytes_for_locale(locale))
+            .map(|bytes| patamaps_contracts::byte_digest(&bytes));
+        return match digest {
+            Ok(digest) => stdout_json(&digest),
+            Err(error) => {
+                stdout_json(
+                    &serde_json::json!({"status":"refused","error":error.json_diagnostic(COMPATIBILITY_JSON_LIMITS)}),
+                )?;
+                Err(Failure::ReportedRejection)
+            }
+        };
+    }
+    let result = patamaps_core::ParsedLegacyRelationPack::parse(input);
+    let parsed = match result {
+        Ok(parsed) => parsed,
+        Err(error) => {
+            stdout_json(&serde_json::json!({"status":"refused","error":error}))?;
+            return Err(Failure::ReportedRejection);
+        }
+    };
+    match operation {
+        // Preserve the original text for the host JSON.parse transport. A
+        // scalar-Unicode serializer would reject valid legacy UTF-16 escapes.
+        LegacyPackOperation::Parse => write_bytes_with_limit(
+            &Output {
+                output: None,
+                overwrite: false,
+            },
+            parsed.document_json().as_bytes(),
+            true,
+            MAX_INPUT_BYTES + 1,
+        ),
+        LegacyPackOperation::Digest => unreachable!("digest dispatch precedes shape validation"),
+        LegacyPackOperation::Import => match parsed.import_native_view() {
+            Ok(imported) => stdout_json(imported.report()),
+            Err(error) => {
+                stdout_json(&serde_json::json!({"status":"refused","error":error}))?;
+                Err(Failure::ReportedRejection)
+            }
+        },
+    }
+}
+
+fn legacy_pack_file(operation: LegacyPackOperation, path: &Path) -> Result<(), Failure> {
+    let read = || -> std::io::Result<Vec<u8>> {
+        let mut bytes = Vec::new();
+        File::open(path)?
+            .take((MAX_INPUT_BYTES + 1) as u64)
+            .read_to_end(&mut bytes)?;
+        Ok(bytes)
+    };
+    match read() {
+        Ok(bytes) => legacy_pack_output(operation, bytes, "en-US"),
+        Err(error) => legacy_file_error(error, path),
+    }
+}
+
+fn legacy_file_error(error: std::io::Error, path: &Path) -> Result<(), Failure> {
+    use std::io::ErrorKind;
+    let code = match error.kind() {
+        ErrorKind::NotFound => "ENOENT",
+        ErrorKind::PermissionDenied => "EACCES",
+        ErrorKind::NotADirectory => "ENOTDIR",
+        ErrorKind::IsADirectory => "EISDIR",
+        _ if error.raw_os_error() == Some(rustix::io::Errno::LOOP.raw_os_error()) => "ELOOP",
+        _ => "LEGACY_PACK_IO",
+    };
+    let description = match code {
+        "ENOENT" => "no such file or directory",
+        "EACCES" => "permission denied",
+        "ENOTDIR" => "not a directory",
+        "EISDIR" => "illegal operation on a directory",
+        "ELOOP" => "too many symbolic links encountered",
+        _ => "unmapped native filesystem error",
+    };
+    let syscall = if code == "EISDIR" { "read" } else { "open" };
+    let message = if code == "EISDIR" {
+        format!("{code}: {description}, {syscall}")
+    } else {
+        format!("{code}: {description}, {syscall} '{}'", path.display())
+    };
+    let mut report = serde_json::json!({"status":"refused","error":{
+        "code":code, "message":message, "path":path,
+        "errno":error.raw_os_error().map(|errno| -errno),
+        "syscall":syscall, "nativeMessage":error.to_string()
+    }});
+    if code == "EISDIR" {
+        report["error"].as_object_mut().unwrap().remove("path");
+    }
+    stdout_json(&report)?;
+    Err(Failure::ReportedRejection)
+}
+
+#[derive(Serialize)]
+struct LegacyConfigRefusal {
+    status: &'static str,
+    error: patamaps_scientific::LegacyConfigError,
+}
+
 fn run(command: Command) -> Result<(), Failure> {
     match command {
+        Command::Legacy {
+            command:
+                LegacyCommand::Run {
+                    node,
+                    entry,
+                    arguments,
+                },
+        } => {
+            if !node.is_absolute() || !entry.is_absolute() {
+                return Err(Failure::Operational(
+                    "Legacy CLI requires absolute Node and installed entry paths".into(),
+                ));
+            }
+            let status = std::process::Command::new(node)
+                .arg(entry)
+                .arg("--native")
+                .arg(std::env::current_exe()?)
+                .args(arguments)
+                .env_clear()
+                .stdin(std::process::Stdio::inherit())
+                .stdout(std::process::Stdio::inherit())
+                .stderr(std::process::Stdio::inherit())
+                .status()?;
+            std::process::exit(status.code().unwrap_or(1));
+        }
+
+        Command::Legacy {
+            command: LegacyCommand::Pack { operation, locale },
+        } => {
+            let mut input = Vec::new();
+            std::io::stdin()
+                .take((MAX_INPUT_BYTES + 1) as u64)
+                .read_to_end(&mut input)?;
+            legacy_pack_output(operation, input, &locale)
+        }
+        Command::Legacy {
+            command: LegacyCommand::PackFile { operation, path },
+        } => legacy_pack_file(operation, &path),
+        Command::Legacy {
+            command:
+                LegacyCommand::Cli { .. }
+                | LegacyCommand::Evaluation { .. }
+                | LegacyCommand::Viability { .. },
+        } => {
+            let evaluate = matches!(
+                command,
+                Command::Legacy {
+                    command: LegacyCommand::Evaluation { .. }
+                }
+            );
+            let viability = matches!(
+                command,
+                Command::Legacy {
+                    command: LegacyCommand::Viability { .. }
+                }
+            );
+            let mut input = Vec::new();
+            std::io::stdin()
+                .take((MAX_INPUT_BYTES + 1) as u64)
+                .read_to_end(&mut input)?;
+            let result = parse_value_with_limits(&input, COMPATIBILITY_JSON_LIMITS)
+                .and_then(|v| serde_json::from_value(v).map_err(Into::into));
+            let request = match result {
+                Ok(v) => v,
+                Err(e) => {
+                    stdout_json(
+                        &serde_json::json!({"status":"refused","error":{"code":"LEGACY_WORKSPACE_INPUT","name":"Error","message":e.to_string()}}),
+                    )?;
+                    return Err(Failure::ReportedRejection);
+                }
+            };
+            let result = if viability {
+                patamaps_core::legacy_viability_request(request)
+            } else if evaluate {
+                patamaps_core::legacy_evaluation_request(request)
+            } else {
+                patamaps_core::legacy_cli_request(request)
+            };
+            match result {
+                Ok(response) => stdout_json(&response),
+                Err(error) => {
+                    #[derive(Serialize)]
+                    struct Refusal {
+                        status: &'static str,
+                        error: patamaps_core::LegacyWorkspaceError,
+                    }
+                    stdout_json(&Refusal {
+                        status: "refused",
+                        error,
+                    })?;
+                    Err(Failure::ReportedRejection)
+                }
+            }
+        }
+        Command::Legacy {
+            command: LegacyCommand::Workspace { .. },
+        } => {
+            let mut input = Vec::new();
+            std::io::stdin()
+                .take((MAX_INPUT_BYTES + 1) as u64)
+                .read_to_end(&mut input)?;
+            let result = parse_value_with_limits(&input, COMPATIBILITY_JSON_LIMITS)
+                .and_then(|v| serde_json::from_value(v).map_err(Into::into));
+            let request = match result {
+                Ok(v) => v,
+                Err(e) => {
+                    stdout_json(
+                        &serde_json::json!({"status":"refused","error":{"code":"LEGACY_WORKSPACE_INPUT","name":"Error","message":e.to_string()}}),
+                    )?;
+                    return Err(Failure::ReportedRejection);
+                }
+            };
+            match patamaps_workspace::legacy_workspace_request(request) {
+                Ok(response) => stdout_json(&response),
+                Err(error) => {
+                    #[derive(Serialize)]
+                    struct Refusal {
+                        status: &'static str,
+                        error: patamaps_core::LegacyWorkspaceError,
+                    }
+                    stdout_json(&Refusal {
+                        status: "refused",
+                        error,
+                    })?;
+                    Err(Failure::ReportedRejection)
+                }
+            }
+        }
+        Command::Legacy {
+            command: LegacyCommand::Config { .. },
+        } => {
+            let mut input = Vec::new();
+            std::io::stdin()
+                .take((MAX_INPUT_BYTES + 1) as u64)
+                .read_to_end(&mut input)?;
+            let result = parse_value_with_limits(&input, COMPATIBILITY_JSON_LIMITS)
+                .and_then(|v| serde_json::from_value(v).map_err(Into::into));
+            let request = match result {
+                Ok(v) => v,
+                Err(e) => {
+                    stdout_json(
+                        &serde_json::json!({"status":"refused","error":{"code":"LEGACY_CONFIG_INPUT","name":"Error","message":e.to_string()}}),
+                    )?;
+                    return Err(Failure::ReportedRejection);
+                }
+            };
+            match patamaps_scientific::legacy_config_request(request) {
+                Ok(response) => stdout_json(&response),
+                Err(error) => {
+                    stdout_json(&LegacyConfigRefusal {
+                        status: "refused",
+                        error,
+                    })?;
+                    Err(Failure::ReportedRejection)
+                }
+            }
+        }
+        Command::Legacy {
+            command: LegacyCommand::ConfigFile { path },
+        } => {
+            let path = patamaps_scientific::resolve_legacy_config_path(&path)?;
+            let mut bytes = Vec::new();
+            let read = File::open(&path)
+                .and_then(|f| f.take((MAX_INPUT_BYTES + 1) as u64).read_to_end(&mut bytes));
+            match read {
+                Err(error) => legacy_file_error(error, &path),
+                Ok(_) => match patamaps_scientific::load_legacy_metamap_config_bytes(&bytes, &path)
+                {
+                    Ok(response) => stdout_json(&response),
+                    Err(error) => {
+                        stdout_json(&LegacyConfigRefusal {
+                            status: "refused",
+                            error,
+                        })?;
+                        Err(Failure::ReportedRejection)
+                    }
+                },
+            }
+        }
+        Command::Legacy {
+            command: LegacyCommand::Registry { .. },
+        } => {
+            let mut input = Vec::new();
+            std::io::stdin()
+                .take((MAX_INPUT_BYTES + 1) as u64)
+                .read_to_end(&mut input)?;
+            let result = parse_value_with_limits(&input, COMPATIBILITY_JSON_LIMITS)
+                .map_err(|error| patamaps_core::LegacyRegistryError {
+                    code: "LEGACY_REGISTRY_INPUT".into(),
+                    message: error.to_string(),
+                })
+                .and_then(|value| {
+                    serde_json::from_value(value).map_err(|error| {
+                        patamaps_core::LegacyRegistryError {
+                            code: "LEGACY_REGISTRY_INPUT".into(),
+                            message: error.to_string(),
+                        }
+                    })
+                })
+                .and_then(patamaps_core::legacy_registry_request);
+            match result {
+                Ok(response) => stdout_json(&response),
+                Err(error) => {
+                    stdout_json(&serde_json::json!({"status":"refused","error":error}))?;
+                    Err(Failure::ReportedRejection)
+                }
+            }
+        }
+        Command::Legacy {
+            command: LegacyCommand::Graph { .. },
+        } => {
+            let mut input = Vec::new();
+            std::io::stdin()
+                .take((MAX_INPUT_BYTES + 1) as u64)
+                .read_to_end(&mut input)?;
+            let result = parse_value_with_limits(&input, COMPATIBILITY_JSON_LIMITS)
+                .map_err(|error| patamaps_core::LegacyGraphError {
+                    code: "LEGACY_GRAPH_INPUT".into(),
+                    name: "Error".into(),
+                    message: error.to_string(),
+                })
+                .and_then(|value| {
+                    serde_json::from_value(value).map_err(|error| patamaps_core::LegacyGraphError {
+                        code: "LEGACY_GRAPH_INPUT".into(),
+                        name: "Error".into(),
+                        message: error.to_string(),
+                    })
+                })
+                .and_then(patamaps_core::legacy_graph_request);
+            match result {
+                Ok(response) => stdout_json(&response),
+                Err(error) => {
+                    stdout_json(&serde_json::json!({"status":"refused","error":error}))?;
+                    Err(Failure::ReportedRejection)
+                }
+            }
+        }
+        Command::Legacy {
+            command: LegacyCommand::Correspondence { .. },
+        } => {
+            let mut input = Vec::new();
+            std::io::stdin()
+                .take((MAX_INPUT_BYTES + 1) as u64)
+                .read_to_end(&mut input)?;
+            let result = parse_value_with_limits(&input, COMPATIBILITY_JSON_LIMITS)
+                .map_err(|e| patamaps_core::LegacyCorrespondenceError {
+                    code: "LEGACY_CORRESPONDENCE_INPUT".into(),
+                    name: "Error".into(),
+                    message: e.to_string(),
+                })
+                .and_then(|v| {
+                    serde_json::from_value(v).map_err(|e| {
+                        patamaps_core::LegacyCorrespondenceError {
+                            code: "LEGACY_CORRESPONDENCE_INPUT".into(),
+                            name: "Error".into(),
+                            message: e.to_string(),
+                        }
+                    })
+                })
+                .and_then(patamaps_core::legacy_correspondence_request);
+            match result {
+                Ok(response) => stdout_json(&response),
+                Err(error) => {
+                    stdout_json(&serde_json::json!({"status":"refused","error":error}))?;
+                    Err(Failure::ReportedRejection)
+                }
+            }
+        }
+        Command::Legacy {
+            command: LegacyCommand::References { .. },
+        } => {
+            let mut input = Vec::new();
+            std::io::stdin()
+                .take((MAX_INPUT_BYTES + 1) as u64)
+                .read_to_end(&mut input)?;
+            let result = parse_value_with_limits(&input, COMPATIBILITY_JSON_LIMITS)
+                .map_err(|e| patamaps_core::LegacyReferenceError {
+                    code: "LEGACY_REFERENCE_INPUT".into(),
+                    name: "Error".into(),
+                    message: e.to_string(),
+                })
+                .and_then(|v| {
+                    serde_json::from_value(v).map_err(|e| patamaps_core::LegacyReferenceError {
+                        code: "LEGACY_REFERENCE_INPUT".into(),
+                        name: "Error".into(),
+                        message: e.to_string(),
+                    })
+                })
+                .and_then(patamaps_core::legacy_reference_request);
+            match result {
+                Ok(response) => stdout_json(&response),
+                Err(error) => {
+                    stdout_json(&serde_json::json!({"status":"refused","error":error}))?;
+                    Err(Failure::ReportedRejection)
+                }
+            }
+        }
+        Command::Legacy {
+            command: LegacyCommand::Reporting { .. },
+        } => {
+            let mut input = Vec::new();
+            std::io::stdin()
+                .take((MAX_INPUT_BYTES + 1) as u64)
+                .read_to_end(&mut input)?;
+            let result = parse_value_with_limits(&input, COMPATIBILITY_JSON_LIMITS)
+                .map_err(|e| patamaps_core::LegacyReportingError {
+                    code: "LEGACY_REPORTING_INPUT".into(),
+                    name: "Error".into(),
+                    message: e.to_string(),
+                })
+                .and_then(|v| {
+                    serde_json::from_value(v).map_err(|e| patamaps_core::LegacyReportingError {
+                        code: "LEGACY_REPORTING_INPUT".into(),
+                        name: "Error".into(),
+                        message: e.to_string(),
+                    })
+                })
+                .and_then(patamaps_core::legacy_reporting_request);
+            match result {
+                Ok(response) => {
+                    // This read-only response carries JSON-escaped UTF-16 code
+                    // units. Converting through scalar Value would lose them.
+                    let bytes = serde_json::to_vec(&response)?;
+                    write_bytes(
+                        &Output {
+                            output: None,
+                            overwrite: false,
+                        },
+                        &bytes,
+                        true,
+                    )
+                }
+                Err(error) => {
+                    stdout_json(&serde_json::json!({"status":"refused","error":error}))?;
+                    Err(Failure::ReportedRejection)
+                }
+            }
+        }
+        Command::Legacy {
+            command: LegacyCommand::Compose { .. },
+        } => {
+            let mut input = Vec::new();
+            std::io::stdin()
+                .take((MAX_INPUT_BYTES + 1) as u64)
+                .read_to_end(&mut input)?;
+            let result = parse_value_with_limits(&input, COMPATIBILITY_JSON_LIMITS)
+                .map_err(|e| patamaps_core::LegacyCompositionError {
+                    code: "LEGACY_COMPOSITION_INPUT".into(),
+                    name: "Error".into(),
+                    message: e.to_string(),
+                    identifier: None,
+                })
+                .and_then(|v| {
+                    serde_json::from_value(v).map_err(|e| patamaps_core::LegacyCompositionError {
+                        code: "LEGACY_COMPOSITION_INPUT".into(),
+                        name: "Error".into(),
+                        message: e.to_string(),
+                        identifier: None,
+                    })
+                })
+                .and_then(patamaps_core::compose_legacy_documents);
+            match result {
+                Ok(response) => stdout_json(&response),
+                Err(error) => {
+                    stdout_json(&serde_json::json!({"status":"refused","error":error}))?;
+                    Err(Failure::ReportedRejection)
+                }
+            }
+        }
+        Command::Legacy {
+            command: LegacyCommand::Json { operation },
+        } => {
+            let mut input = Vec::new();
+            std::io::stdin()
+                .take((MAX_INPUT_BYTES + 1) as u64)
+                .read_to_end(&mut input)?;
+            let request = match parse_value_with_limits(&input, COMPATIBILITY_JSON_LIMITS) {
+                Ok(value) => value,
+                Err(error) => {
+                    stdout_json(
+                        &serde_json::json!({"status":"refused","error":error.json_diagnostic(COMPATIBILITY_JSON_LIMITS)}),
+                    )?;
+                    return Err(Failure::ReportedRejection);
+                }
+            };
+            if !request.is_object()
+                || request
+                    .as_object()
+                    .unwrap()
+                    .keys()
+                    .any(|key| key != "document" && key != "packs" && key != "legacyPacks")
+                || request.get("document").is_none()
+                || (request.get("packs").is_some() && request.get("legacyPacks").is_some())
+            {
+                stdout_json(
+                    &serde_json::json!({"status":"refused","error":{"code":"LEGACY_REQUEST","message":"Expected a document and either native draft packs or portable legacy packs"}}),
+                )?;
+                return Err(Failure::ReportedRejection);
+            }
+            if matches!(operation, LegacyJsonOperation::Shape) {
+                return stdout_json(&patamaps_core::validate_legacy_document_shape(
+                    &request["document"],
+                ));
+            }
+            let registry = if let Some(packs) = request.get("packs") {
+                match serde_json::from_value::<Vec<RelationPack>>(packs.clone()) {
+                    Ok(packs) => patamaps_core::RelationRegistry::new(packs),
+                    Err(error) => {
+                        stdout_json(
+                            &serde_json::json!({"status":"refused","error":{"code":"LEGACY_REGISTRY_INPUT","message":error.to_string()}}),
+                        )?;
+                        return Err(Failure::ReportedRejection);
+                    }
+                }
+            } else if let Some(packs) = request.get("legacyPacks") {
+                let Some(packs) = packs.as_array() else {
+                    stdout_json(
+                        &serde_json::json!({"status":"refused","error":{"code":"LEGACY_REGISTRY_INPUT","message":"Legacy packs must be an array"}}),
+                    )?;
+                    return Err(Failure::ReportedRejection);
+                };
+                patamaps_core::RelationRegistry::from_legacy_packs(packs.iter().cloned())
+            } else {
+                patamaps_core::RelationRegistry::with_legacy_core()
+            };
+            match registry {
+                Ok(registry) => stdout_json(&patamaps_core::validate_legacy_document(
+                    &request["document"],
+                    &registry,
+                )),
+                Err(error) => {
+                    stdout_json(&serde_json::json!({"status":"refused","issues":error.0}))?;
+                    Err(Failure::ReportedRejection)
+                }
+            }
+        }
+        Command::Json { operation } => {
+            let mut input = Vec::new();
+            std::io::stdin()
+                .take((MAX_INPUT_BYTES + 1) as u64)
+                .read_to_end(&mut input)?;
+            let value = match parse_value_with_limits(&input, COMPATIBILITY_JSON_LIMITS) {
+                Ok(value) => value,
+                Err(error) => {
+                    stdout_json(
+                        &serde_json::json!({"status":"refused","error":error.json_diagnostic(COMPATIBILITY_JSON_LIMITS)}),
+                    )?;
+                    return Err(Failure::ReportedRejection);
+                }
+            };
+            match operation {
+                JsonOperation::Canonical | JsonOperation::Parse => write(
+                    &Output {
+                        output: None,
+                        overwrite: false,
+                    },
+                    &canonical_bytes(&value)?,
+                ),
+                JsonOperation::Digest => stdout_json(&canonical_digest(&value)?),
+            }
+        }
         Command::Sssom { command } => match command {
+            ScientificCommand::Json {
+                operation,
+                condense,
+            } => {
+                let output = Output {
+                    output: None,
+                    overwrite: false,
+                };
+                match scientific_operation(operation, condense) {
+                    Ok(value) => scientific_json(&output, &value),
+                    Err(error) => {
+                        stdout_json(
+                            &serde_json::json!({"status":"refused","error":{"code":error.code,"message":error.message}}),
+                        )?;
+                        Err(Failure::ReportedRejection)
+                    }
+                }
+            }
             ScientificCommand::Crate {
                 capture,
                 options,
@@ -490,7 +1349,7 @@ fn run(command: Command) -> Result<(), Failure> {
                     .map_err(|e| Failure::Operational(e.to_string()))?;
                 json(
                     &output,
-                    &serde_json::json!({"status":"verified", "profile":"urn:patamaps:scientific-crate:draft:1", "engine":patamaps_scientific::scientific_engine_id(), "files":verified.record().files.len(), "scientificTruth":"not-established", "authorization":"not-evaluated", "activation":"not-evaluated"}),
+                    &serde_json::json!({"status":"verified", "profile":"urn:patamaps:scientific-crate:draft:1", "engine":patamaps_scientific::scientific_engine_id(), "files":verified.record().files.len(), "externalRawInputs":verified.external_raw_inputs(), "scientificTruth":"not-established", "authorization":"not-evaluated", "activation":"not-evaluated"}),
                 )
             }
             ScientificCommand::Import {
@@ -500,9 +1359,12 @@ fn run(command: Command) -> Result<(), Failure> {
                 output,
             } => {
                 let options: patamaps_scientific::ImportOptions = read(&source_config)?;
-                let raw = bytes(&input)?;
-                let external = metadata.as_ref().map(|p| bytes(p)).transpose()?;
-                let checked = patamaps_scientific::parse_tsv(&raw, external.as_deref())
+                let raw = bytes_with_limit(&input, patamaps_scientific::SSSOM_MAX_BYTES)?;
+                let external = metadata
+                    .as_ref()
+                    .map(|p| bytes_with_limit(p, patamaps_scientific::SSSOM_MAX_BYTES))
+                    .transpose()?;
+                let checked = patamaps_scientific::parse_tsv_compatible(&raw, external.as_deref())
                     .map_err(|e| Failure::Operational(e.to_string()))?;
                 let graph = patamaps_scientific::import_graph(&checked, &options)
                     .map_err(|e| Failure::Operational(e.to_string()))?;
@@ -522,7 +1384,7 @@ fn run(command: Command) -> Result<(), Failure> {
                         ),
                     });
                 }
-                json(
+                scientific_json(
                     &output,
                     &serde_json::json!({"schemaVersion":"0.1.0","documentType":"scientific-import","profile":"patamaps-scientific-draft-1","sourceOptions":options,"status":"source-imported","scientificTruth":"not-established","document":checked.document(),"interpretation":checked.interpretation(),"graph":graph,"pack":patamaps_scientific::scientific_pack(),"sources":sources}),
                 )
@@ -532,12 +1394,16 @@ fn run(command: Command) -> Result<(), Failure> {
                 condense,
                 output,
             } => {
-                let document: patamaps_scientific::SssomDocument = read(&document)?;
-                let checked = patamaps_scientific::check_document(&document)
+                let document: patamaps_scientific::SssomDocument =
+                    patamaps_contracts::parse_with_limits(
+                        &bytes_with_limit(&document, patamaps_scientific::SSSOM_MAX_BYTES)?,
+                        patamaps_scientific::SSSOM_COMPATIBILITY_LIMITS,
+                    )?;
+                let checked = patamaps_scientific::check_document_compatible(&document)
                     .map_err(|e| Failure::Operational(e.to_string()))?;
                 let exported = patamaps_scientific::export_tsv(&checked, condense)
                     .map_err(|e| Failure::Operational(e.to_string()))?;
-                json(&output, &exported)
+                scientific_json(&output, &exported)
             }
         },
         Command::Engine => stdout_json(
@@ -859,9 +1725,13 @@ fn run(command: Command) -> Result<(), Failure> {
                 ),
             }
         }
-        Command::Canonical { input, output } => {
-            write(&output, &canonical_bytes(&parse_value(&bytes(&input)?)?)?)
-        }
+        Command::Canonical { input, output } => write(
+            &output,
+            &canonical_bytes(&parse_value_with_limits(
+                &bytes(&input)?,
+                COMPATIBILITY_JSON_LIMITS,
+            )?)?,
+        ),
         Command::Capture {
             input,
             policy,
@@ -872,12 +1742,21 @@ fn run(command: Command) -> Result<(), Failure> {
         } => {
             let options = options(&evaluation)?;
             let inputs = CaptureInputs {
+                projection_specs: if spec.len() > 1 {
+                    spec.iter().map(|p| read(p)).collect::<Result<_, _>>()?
+                } else {
+                    vec![]
+                },
                 graph: read(&input.graph)?,
                 packs: packs(&input.packs)?,
                 policy: read(&policy)?,
                 context: options.context,
                 evaluated_at: options.evaluated_at,
-                projection_spec: spec.as_ref().map(|p| read(p)).transpose()?,
+                projection_spec: if spec.len() == 1 {
+                    Some(read(&spec[0])?)
+                } else {
+                    None
+                },
             };
             let sources: Vec<SourceReceipt> = source_receipts
                 .as_ref()

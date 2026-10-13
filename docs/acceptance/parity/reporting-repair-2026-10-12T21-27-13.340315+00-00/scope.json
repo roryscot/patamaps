@@ -1,0 +1,53 @@
+{
+  "schemaVersion": "1.0.0",
+  "createdAt": "2026-10-12T21-27-13.340315+00-00",
+  "scope": "Native read-only legacy document diff and report rendering, with thin installed SDK transport. Graph schema/header ignored by diff as in original; no validation, admission, approval or activation.",
+  "deliverables": [
+    "Rust implementation of src/diff.ts and src/report.ts finite JSON behavior including UTF-16 transport",
+    "Native CLI transport and SDK functions/types",
+    "Frozen original outputs before candidate comparisons",
+    "Original diff test and installed consumer verification",
+    "Fresh source-bound parity evidence and explicit remaining gaps"
+  ],
+  "acceptance": [
+    "Exact complete diff values and report UTF-16 strings match immutable original observations",
+    "Duplicate ID semantics, stable locale ties, ordinal changed-property order, missing-vs-null behavior, grouping threshold and collision, escaping and ending LF exercised",
+    "Original diff callback unchanged",
+    "Source identity includes new implementation; current executable independently matches sources",
+    "Relevant Rust tests, installed SDK/type checks, existing parity checks remain passing"
+  ],
+  "limitations": [
+    "Arbitrary JavaScript values/identity and exhaustive locale/runtime behavior remain public-contract obligations",
+    "Linux architectures/package activation not satisfied by this macOS run"
+  ],
+  "before": [
+    {
+      "path": "crates/patamaps-contracts/src/legacy_json.rs",
+      "sha256": "721517bc517786e003b28e6e231dccb293e27c5aedf6ea41200e3b8d3100e808"
+    },
+    {
+      "path": "crates/patamaps-contracts/src/lib.rs",
+      "sha256": "057d2be2bd918db5fdd131524b7ca26c8d9c84b429cbb52facfc97fdd6985400"
+    },
+    {
+      "path": "crates/patamaps-core/src/lib.rs",
+      "sha256": "1df94c9f75ad7610b20b90f3c0fa64ddd8327598da37a527816b47bd5fe32993"
+    },
+    {
+      "path": "crates/patamaps-cli/src/main.rs",
+      "sha256": "5732bd467d43c051963afb9a3b9fbefde52e15385973a30f947e41ba33c9c3b4"
+    },
+    {
+      "path": "crates/patamaps-projection/src/capture.rs",
+      "sha256": "f3c8933d85b29dd7ad041a44390486caf4d87a4d97c4e1604b64214869bc441e"
+    },
+    {
+      "path": "sdk/typescript/legacy-validation.mjs",
+      "sha256": "31f54d60a37fefeea69986eac6cb37edede35b631a4a7779fd99746a71bfc85c"
+    },
+    {
+      "path": "sdk/typescript/legacy-validation.d.ts",
+      "sha256": "05328e05239d5f5c127b9097505d11137928a6b9af86a30ac938ad15ef9393dc"
+    }
+  ]
+}

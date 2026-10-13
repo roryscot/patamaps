@@ -1,0 +1,39 @@
+{
+  "schemaVersion": "1.0.0",
+  "referenceEngine": "399747a4ad05a37cd8db1cedd53048fad2175be4",
+  "purpose": "Comparison contracts fixed independently of candidate results. Rules do not authorize a parity deviation.",
+  "rules": [
+    {
+      "id": "canonical-utf8-exact",
+      "surface": "canonicalJson for portable JSON values; independent digest integrity of the observed bytes",
+      "comparison": "Exact UTF-8 canonical bytes; preserve numeric, Unicode, array-order and member-name behavior. Hash observed bytes independently. A library canonicalDigest obligation requires a real native library call, not merely a transport-side hash.",
+      "transport": "The native canonical CLI appends exactly one LF as stdout framing. Remove exactly that LF and compare the complete canonical payload; generic trimming or whitespace normalization is forbidden.",
+      "exceptions": []
+    },
+    {
+      "id": "strict-json-refusal",
+      "surface": "parseStrictJson for malformed JSON",
+      "comparison": "Both outcomes must refuse. Error code/message/source location differences are separately recorded and remain unresolved unless explicitly mapped and accepted.",
+      "exceptions": []
+    },
+    {
+      "id": "accepted-domain-exact",
+      "surface": "Input/resource profiles",
+      "comparison": "A reference-valid input refused by the candidate is a missing capability, irrespective of whether the candidate refusal is controlled or documented.",
+      "exceptions": []
+    },
+    {
+      "id": "functional-records-exact",
+      "surface": "Graph, admission, proof, projection, report, discovery, scientific and host operations",
+      "comparison": "Compare every observable semantic field, refusals, origin subjects, meaningful ordering, absent/null states and declared filesystem effects. Each address/envelope/API adaptation must have a named field-level mapping and retain both original full records.",
+      "exceptions": []
+    }
+  ],
+  "forbiddenNormalization": [
+    "Dropping ownership, proofs, evidence, risk, source provenance or refusal origins",
+    "Converting unavailable values to zero or empty results",
+    "Readdressing historical captures or signed payloads as current verified or authorized state",
+    "Counting a reference test pass, native test filename or declared intentional difference as candidate equivalence",
+    "Replacing original assertions or expected values with candidate output"
+  ]
+}

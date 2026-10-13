@@ -1,0 +1,369 @@
+{
+  "schemaVersion": "1.0.0",
+  "driver": "canonical",
+  "driverDigest": "sha256:8f6c37bc409d1437850e1dad28887a0daa19388b4cdc0db3dd2e424e977be785",
+  "supervision": {
+    "mode": "inherited-live-supervisor",
+    "project": "/Users/admin/dev/patamaps/patamaps",
+    "configurationDigest": "sha256:77505e4ca3960c2df14617ffa5951838a6b84e51d6f8ed715ec60faa3c9e8187",
+    "policy": {
+      "version": 1,
+      "minimumFreeBytes": 0,
+      "reserveFreeBytes": 10000000000,
+      "maximumRunGrowthBytes": 8000000000,
+      "maximumRetainedBytes": 50000000000,
+      "monitorIntervalMs": 2000,
+      "terminationGraceMs": 15000
+    },
+    "availableBytesAtEntry": 18613379072
+  },
+  "selection": null,
+  "timestamp": "2026-10-12T19-58-21.234Z",
+  "status": "passed",
+  "command": [
+    "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+    "/Users/admin/dev/patamaps/patamaps/.tools/parity/oracles/399747a4ad05-p8pkt3pr/reference/node_modules/vitest/vitest.mjs",
+    "run",
+    "--config",
+    "/Users/admin/dev/patamaps/patamaps/.tools/parity/runs/original-canonical-kXRej3/vitest.config.mjs",
+    "--reporter=default",
+    "--reporter=json",
+    "--outputFile",
+    "/Users/admin/dev/patamaps/patamaps/.tools/parity/runs/original-canonical-kXRej3/vitest.json"
+  ],
+  "exitCode": 0,
+  "signal": null,
+  "error": null,
+  "manifestDigest": "sha256:963a0bdb0514342053144b369b900342d78c55d79ddc3a07c032dd859c8cd8ed",
+  "comparisonRulesDigest": "sha256:ab76e60deb27bf8b425063f3d432b88720c1f0d6e2cd67b43b9846cb9fb5ae91",
+  "reference": {
+    "engine": "399747a4ad05a37cd8db1cedd53048fad2175be4",
+    "caseOrigin": "Unchanged pinned original source/assertions",
+    "operationsRerun": false,
+    "testsRerun": false,
+    "referenceObservation": "docs/acceptance/full-reference/reference-vitest.json"
+  },
+  "candidate": {
+    "binary": "target/debug/patamaps",
+    "binaryDigest": "sha256:8610eb1b34faf8cfd11944969ef3ae1b1e57466535d48694afc2b85ce15af31c",
+    "engine": {
+      "compiler": "sha256:82c559154679ff17737bdaf7d4225bc9a80e1fcd3fa9d9aa725d933fe2a288f5",
+      "documentType": "executor-description",
+      "governance": "sha256:7a83400dca72c68ff9ef0cac87a589bdb69e399eeb3172360782bc5782608cee",
+      "schemaVersion": "0.1.0",
+      "scientific": "sha256:0f1b23ab099b7b9931dfe9cf9b4237b210432d6472e4202d0043f07fd064e639",
+      "workspace": "sha256:4bbc3c72af05c41f71648ca22d29b9a394e211c5b35397f28a78e8f294cf473e"
+    },
+    "sdkSourceInventory": [
+      {
+        "path": "sdk/typescript/canonical.mjs",
+        "digest": "sha256:830acf94b6a334a5659856b1c6ba342e8c02d9df49752c9163be7fa3461a3954"
+      },
+      {
+        "path": "sdk/typescript/canonical.d.ts",
+        "digest": "sha256:88ae79727dbad3b0872a9c3539a95fe6c444b810ff416423f06a2cf39274ecb4"
+      }
+    ],
+    "facadeDigest": "sha256:830acf94b6a334a5659856b1c6ba342e8c02d9df49752c9163be7fa3461a3954",
+    "facadeDeclarationDigest": "sha256:88ae79727dbad3b0872a9c3539a95fe6c444b810ff416423f06a2cf39274ecb4"
+  },
+  "host": {
+    "platform": "darwin",
+    "architecture": "arm64",
+    "node": "v22.16.0"
+  },
+  "counts": {
+    "originalCases": 20,
+    "passed": 20,
+    "failed": 0,
+    "skipped": 0,
+    "explicitlyUnselected": 0,
+    "nativeExecutions": 27
+  },
+  "assertions": "Original assertions and parameter values are unchanged. Canonical module imports alone are mapped to the Patamaps facade; original stable digest utilities compute independent expected values.",
+  "obligations": [
+    {
+      "id": "parity:c854c5256307fd633c39",
+      "scope": "complete-original-case",
+      "status": "verified-equivalent",
+      "origin": {
+        "path": "src/__tests__/canonical.test.ts",
+        "digest": "sha256:11a8f1be494295854f32c70875e15325d94d9940f590b59f4a07b0284ee9d6d1",
+        "line": 11
+      },
+      "expectationDigest": "sha256:b4cdd60cae34692aed8d5e25890dca7bc74febea0dad1a9c3eca3b4884831aaa",
+      "fullName": "RFC 8785 canonical values materializes only legacy optional fields without executing getters or accepting undefined in new values",
+      "occurrence": 0,
+      "candidateExecution": "Original assertions, Rust-native canonical/parse/digest operations, JavaScript-only marshalling refusals for untransportable values"
+    },
+    {
+      "id": "parity:fe579cb04c8f4277b4d5",
+      "scope": "complete-original-case",
+      "status": "verified-equivalent",
+      "origin": {
+        "path": "src/__tests__/canonical.test.ts",
+        "digest": "sha256:11a8f1be494295854f32c70875e15325d94d9940f590b59f4a07b0284ee9d6d1",
+        "line": 38
+      },
+      "expectationDigest": "sha256:bfa0edc3a823b1ebbacb95b1ee03a56ce2bbf641009123d0b510eba8e5da575b",
+      "fullName": "RFC 8785 canonical values uses the normative UTF-16 property order, preserving array order and Unicode",
+      "occurrence": 0,
+      "candidateExecution": "Original assertions, Rust-native canonical/parse/digest operations, JavaScript-only marshalling refusals for untransportable values"
+    },
+    {
+      "id": "parity:489c0f2dbeb483a31188",
+      "scope": "complete-original-case",
+      "status": "verified-equivalent",
+      "origin": {
+        "path": "src/__tests__/canonical.test.ts",
+        "digest": "sha256:11a8f1be494295854f32c70875e15325d94d9940f590b59f4a07b0284ee9d6d1",
+        "line": 57
+      },
+      "expectationDigest": "sha256:844e899d0fbfdf2a65e4d21b48397e55eb10104b917ec770ee21abc5cfd281e2",
+      "fullName": "RFC 8785 canonical values serializes the RFC numerical examples with ECMAScript rounding and negative zero",
+      "occurrence": 0,
+      "candidateExecution": "Original assertions, Rust-native canonical/parse/digest operations, JavaScript-only marshalling refusals for untransportable values"
+    },
+    {
+      "id": "parity:8665de8f6aa411c4dc44",
+      "scope": "complete-original-case",
+      "status": "verified-equivalent",
+      "origin": {
+        "path": "src/__tests__/canonical.test.ts",
+        "digest": "sha256:11a8f1be494295854f32c70875e15325d94d9940f590b59f4a07b0284ee9d6d1",
+        "line": 80
+      },
+      "expectationDigest": "sha256:db6c4290bad0141b9a81fdf599f7a2555c0d620c106c2c9cd2bec8870962a4ee",
+      "fullName": "RFC 8785 canonical values hashes UTF-8 canonical bytes without altering the legacy convention",
+      "occurrence": 0,
+      "candidateExecution": "Original assertions, Rust-native canonical/parse/digest operations, JavaScript-only marshalling refusals for untransportable values"
+    },
+    {
+      "id": "parity:031d85e472489af93f3b",
+      "scope": "complete-original-case",
+      "status": "verified-equivalent",
+      "origin": {
+        "path": "src/__tests__/canonical.test.ts",
+        "digest": "sha256:11a8f1be494295854f32c70875e15325d94d9940f590b59f4a07b0284ee9d6d1",
+        "line": 87
+      },
+      "expectationDigest": "sha256:26a583fcd059fdac8355d37cf975930340c8ff4490985f3d8751d09577108669",
+      "fullName": "RFC 8785 canonical values rejects a non-I-JSON value: NaN",
+      "occurrence": 0,
+      "candidateExecution": "Original assertions, Rust-native canonical/parse/digest operations, JavaScript-only marshalling refusals for untransportable values"
+    },
+    {
+      "id": "parity:d559f7e0906669192f1d",
+      "scope": "complete-original-case",
+      "status": "verified-equivalent",
+      "origin": {
+        "path": "src/__tests__/canonical.test.ts",
+        "digest": "sha256:11a8f1be494295854f32c70875e15325d94d9940f590b59f4a07b0284ee9d6d1",
+        "line": 87
+      },
+      "expectationDigest": "sha256:26a583fcd059fdac8355d37cf975930340c8ff4490985f3d8751d09577108669",
+      "fullName": "RFC 8785 canonical values rejects a non-I-JSON value: Infinity",
+      "occurrence": 0,
+      "candidateExecution": "Original assertions, Rust-native canonical/parse/digest operations, JavaScript-only marshalling refusals for untransportable values"
+    },
+    {
+      "id": "parity:fd82767db925bb877fc4",
+      "scope": "complete-original-case",
+      "status": "verified-equivalent",
+      "origin": {
+        "path": "src/__tests__/canonical.test.ts",
+        "digest": "sha256:11a8f1be494295854f32c70875e15325d94d9940f590b59f4a07b0284ee9d6d1",
+        "line": 87
+      },
+      "expectationDigest": "sha256:26a583fcd059fdac8355d37cf975930340c8ff4490985f3d8751d09577108669",
+      "fullName": "RFC 8785 canonical values rejects a non-I-JSON value: -Infinity",
+      "occurrence": 0,
+      "candidateExecution": "Original assertions, Rust-native canonical/parse/digest operations, JavaScript-only marshalling refusals for untransportable values"
+    },
+    {
+      "id": "parity:754f1a7091e115fb72de",
+      "scope": "complete-original-case",
+      "status": "verified-equivalent",
+      "origin": {
+        "path": "src/__tests__/canonical.test.ts",
+        "digest": "sha256:11a8f1be494295854f32c70875e15325d94d9940f590b59f4a07b0284ee9d6d1",
+        "line": 87
+      },
+      "expectationDigest": "sha256:26a583fcd059fdac8355d37cf975930340c8ff4490985f3d8751d09577108669",
+      "fullName": "RFC 8785 canonical values rejects a non-I-JSON value: undefined",
+      "occurrence": 0,
+      "candidateExecution": "Original assertions, Rust-native canonical/parse/digest operations, JavaScript-only marshalling refusals for untransportable values"
+    },
+    {
+      "id": "parity:0d30b59ac3d9767c0593",
+      "scope": "complete-original-case",
+      "status": "verified-equivalent",
+      "origin": {
+        "path": "src/__tests__/canonical.test.ts",
+        "digest": "sha256:11a8f1be494295854f32c70875e15325d94d9940f590b59f4a07b0284ee9d6d1",
+        "line": 87
+      },
+      "expectationDigest": "sha256:26a583fcd059fdac8355d37cf975930340c8ff4490985f3d8751d09577108669",
+      "fullName": "RFC 8785 canonical values rejects a non-I-JSON value: 1n",
+      "occurrence": 0,
+      "candidateExecution": "Original assertions, Rust-native canonical/parse/digest operations, JavaScript-only marshalling refusals for untransportable values"
+    },
+    {
+      "id": "parity:96dbf06c33b18124cf51",
+      "scope": "complete-original-case",
+      "status": "verified-equivalent",
+      "origin": {
+        "path": "src/__tests__/canonical.test.ts",
+        "digest": "sha256:11a8f1be494295854f32c70875e15325d94d9940f590b59f4a07b0284ee9d6d1",
+        "line": 87
+      },
+      "expectationDigest": "sha256:26a583fcd059fdac8355d37cf975930340c8ff4490985f3d8751d09577108669",
+      "fullName": "RFC 8785 canonical values rejects a non-I-JSON value: Wed Dec 31 1969 19:00:00 GMT-0500 (Eastern Standard Time)",
+      "occurrence": 0,
+      "candidateExecution": "Original assertions, Rust-native canonical/parse/digest operations, JavaScript-only marshalling refusals for untransportable values"
+    },
+    {
+      "id": "parity:0f7f9b05e1fede4a43dd",
+      "scope": "complete-original-case",
+      "status": "verified-equivalent",
+      "origin": {
+        "path": "src/__tests__/canonical.test.ts",
+        "digest": "sha256:11a8f1be494295854f32c70875e15325d94d9940f590b59f4a07b0284ee9d6d1",
+        "line": 87
+      },
+      "expectationDigest": "sha256:26a583fcd059fdac8355d37cf975930340c8ff4490985f3d8751d09577108669",
+      "fullName": "RFC 8785 canonical values rejects a non-I-JSON value: { a: undefined }",
+      "occurrence": 0,
+      "candidateExecution": "Original assertions, Rust-native canonical/parse/digest operations, JavaScript-only marshalling refusals for untransportable values"
+    },
+    {
+      "id": "parity:40785ff309ebdb2d5800",
+      "scope": "complete-original-case",
+      "status": "verified-equivalent",
+      "origin": {
+        "path": "src/__tests__/canonical.test.ts",
+        "digest": "sha256:11a8f1be494295854f32c70875e15325d94d9940f590b59f4a07b0284ee9d6d1",
+        "line": 87
+      },
+      "expectationDigest": "sha256:26a583fcd059fdac8355d37cf975930340c8ff4490985f3d8751d09577108669",
+      "fullName": "RFC 8785 canonical values rejects a non-I-JSON value: undefined",
+      "occurrence": 1,
+      "candidateExecution": "Original assertions, Rust-native canonical/parse/digest operations, JavaScript-only marshalling refusals for untransportable values"
+    },
+    {
+      "id": "parity:d53398c2ade071bfa89e",
+      "scope": "complete-original-case",
+      "status": "verified-equivalent",
+      "origin": {
+        "path": "src/__tests__/canonical.test.ts",
+        "digest": "sha256:11a8f1be494295854f32c70875e15325d94d9940f590b59f4a07b0284ee9d6d1",
+        "line": 87
+      },
+      "expectationDigest": "sha256:26a583fcd059fdac8355d37cf975930340c8ff4490985f3d8751d09577108669",
+      "fullName": "RFC 8785 canonical values rejects a non-I-JSON value: { value: '\ud800' }",
+      "occurrence": 0,
+      "candidateExecution": "Original assertions, Rust-native canonical/parse/digest operations, JavaScript-only marshalling refusals for untransportable values"
+    },
+    {
+      "id": "parity:33eacf397670235c4ac7",
+      "scope": "complete-original-case",
+      "status": "verified-equivalent",
+      "origin": {
+        "path": "src/__tests__/canonical.test.ts",
+        "digest": "sha256:11a8f1be494295854f32c70875e15325d94d9940f590b59f4a07b0284ee9d6d1",
+        "line": 87
+      },
+      "expectationDigest": "sha256:26a583fcd059fdac8355d37cf975930340c8ff4490985f3d8751d09577108669",
+      "fullName": "RFC 8785 canonical values rejects a non-I-JSON value: { '\\udfff': 1 }",
+      "occurrence": 0,
+      "candidateExecution": "Original assertions, Rust-native canonical/parse/digest operations, JavaScript-only marshalling refusals for untransportable values"
+    },
+    {
+      "id": "parity:579ca8adfca34bea35ff",
+      "scope": "complete-original-case",
+      "status": "verified-equivalent",
+      "origin": {
+        "path": "src/__tests__/canonical.test.ts",
+        "digest": "sha256:11a8f1be494295854f32c70875e15325d94d9940f590b59f4a07b0284ee9d6d1",
+        "line": 102
+      },
+      "expectationDigest": "sha256:cfb80270eda33a792c75f33ccae286815bb34ea8556803e008d4245ad4662db2",
+      "fullName": "RFC 8785 canonical values rejects cycles and accessors without evaluating them",
+      "occurrence": 0,
+      "candidateExecution": "Original assertions, Rust-native canonical/parse/digest operations, JavaScript-only marshalling refusals for untransportable values"
+    },
+    {
+      "id": "parity:ffabf87f828ddac6e59e",
+      "scope": "complete-original-case",
+      "status": "verified-equivalent",
+      "origin": {
+        "path": "src/__tests__/canonical.test.ts",
+        "digest": "sha256:11a8f1be494295854f32c70875e15325d94d9940f590b59f4a07b0284ee9d6d1",
+        "line": 118
+      },
+      "expectationDigest": "sha256:7521aeaa3472d193482a53826a963a4e898dc9d4e70c5599a3d095e1af2b327e",
+      "fullName": "RFC 8785 canonical values rejects decoded duplicate keys before use: {\"a\":1,\"a\":2}",
+      "occurrence": 0,
+      "candidateExecution": "Original assertions, Rust-native canonical/parse/digest operations, JavaScript-only marshalling refusals for untransportable values"
+    },
+    {
+      "id": "parity:ec15b2ec5960b508a1b0",
+      "scope": "complete-original-case",
+      "status": "verified-equivalent",
+      "origin": {
+        "path": "src/__tests__/canonical.test.ts",
+        "digest": "sha256:11a8f1be494295854f32c70875e15325d94d9940f590b59f4a07b0284ee9d6d1",
+        "line": 118
+      },
+      "expectationDigest": "sha256:7521aeaa3472d193482a53826a963a4e898dc9d4e70c5599a3d095e1af2b327e",
+      "fullName": "RFC 8785 canonical values rejects decoded duplicate keys before use: {\"a\":1,\"\\u0061\":2}",
+      "occurrence": 0,
+      "candidateExecution": "Original assertions, Rust-native canonical/parse/digest operations, JavaScript-only marshalling refusals for untransportable values"
+    },
+    {
+      "id": "parity:dd9cfc90dd606b2d4ec6",
+      "scope": "complete-original-case",
+      "status": "verified-equivalent",
+      "origin": {
+        "path": "src/__tests__/canonical.test.ts",
+        "digest": "sha256:11a8f1be494295854f32c70875e15325d94d9940f590b59f4a07b0284ee9d6d1",
+        "line": 118
+      },
+      "expectationDigest": "sha256:7521aeaa3472d193482a53826a963a4e898dc9d4e70c5599a3d095e1af2b327e",
+      "fullName": "RFC 8785 canonical values rejects decoded duplicate keys before use: {\"nested\":{\"x\":1,\"x\":2}}",
+      "occurrence": 0,
+      "candidateExecution": "Original assertions, Rust-native canonical/parse/digest operations, JavaScript-only marshalling refusals for untransportable values"
+    },
+    {
+      "id": "parity:7318aa7b3a80a0c03a8f",
+      "scope": "complete-original-case",
+      "status": "verified-equivalent",
+      "origin": {
+        "path": "src/__tests__/canonical.test.ts",
+        "digest": "sha256:11a8f1be494295854f32c70875e15325d94d9940f590b59f4a07b0284ee9d6d1",
+        "line": 118
+      },
+      "expectationDigest": "sha256:7521aeaa3472d193482a53826a963a4e898dc9d4e70c5599a3d095e1af2b327e",
+      "fullName": "RFC 8785 canonical values rejects decoded duplicate keys before use: [{\"x\":1,\"x\":2}]",
+      "occurrence": 0,
+      "candidateExecution": "Original assertions, Rust-native canonical/parse/digest operations, JavaScript-only marshalling refusals for untransportable values"
+    },
+    {
+      "id": "parity:e00f2c7687a7f8ed1dc4",
+      "scope": "complete-original-case",
+      "status": "verified-equivalent",
+      "origin": {
+        "path": "src/__tests__/canonical.test.ts",
+        "digest": "sha256:11a8f1be494295854f32c70875e15325d94d9940f590b59f4a07b0284ee9d6d1",
+        "line": 127
+      },
+      "expectationDigest": "sha256:fbe5533a2b0a8c4dfd3c3be2dfa6723be1dca08d36e17e42266bcdc196bce7eb",
+      "fullName": "RFC 8785 canonical values retains prototype-like keys as ordinary JSON data and bounds nesting",
+      "occurrence": 0,
+      "candidateExecution": "Original assertions, Rust-native canonical/parse/digest operations, JavaScript-only marshalling refusals for untransportable values"
+    }
+  ],
+  "originalTreeFilesVerified": 610,
+  "retainedRun": ".tools/parity/runs/original-canonical-kXRej3",
+  "cleanup": "Any explicit Node cleanup within owned roots is retained by rename; deletion outside those roots is refused"
+}

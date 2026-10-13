@@ -3,6 +3,83 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "exports": { ".": { "types": "./index.d.ts", "import": "./index.mjs" } },
-  "license": "Apache-2.0"
+  "exports": {
+    ".": {
+      "types": "./index.d.ts",
+      "import": "./index.mjs"
+    },
+    "./canonical": {
+      "types": "./canonical.d.ts",
+      "import": "./canonical.mjs"
+    },
+    "./sssom": {
+      "types": "./sssom.d.ts",
+      "import": "./sssom.mjs"
+    },
+    "./legacy-validation": {
+      "types": "./legacy-validation.d.ts",
+      "import": "./legacy-validation.mjs"
+    },
+    "./relation-packs/application-topology.json": "./relation-packs/application-topology.json",
+    "./relation-packs/core.json": "./relation-packs/core.json",
+    "./relation-packs/research.json": "./relation-packs/research.json",
+    "./relation-packs/routing.json": "./relation-packs/routing.json",
+    "./schemas/metamap-activation-request.schema.json": "./schemas/metamap-activation-request.schema.json",
+    "./schemas/metamap-activation.schema.json": "./schemas/metamap-activation.schema.json",
+    "./schemas/metamap-active-pointer.schema.json": "./schemas/metamap-active-pointer.schema.json",
+    "./schemas/metamap-approval.schema.json": "./schemas/metamap-approval.schema.json",
+    "./schemas/metamap-artifact-manifest.schema.json": "./schemas/metamap-artifact-manifest.schema.json",
+    "./schemas/metamap-change-proposal.schema.json": "./schemas/metamap-change-proposal.schema.json",
+    "./schemas/metamap-composition-request.schema.json": "./schemas/metamap-composition-request.schema.json",
+    "./schemas/metamap-composition-result.schema.json": "./schemas/metamap-composition-result.schema.json",
+    "./schemas/metamap-config.schema.json": "./schemas/metamap-config.schema.json",
+    "./schemas/metamap-counterfactual-v2.schema.json": "./schemas/metamap-counterfactual-v2.schema.json",
+    "./schemas/metamap-counterfactual-v3.schema.json": "./schemas/metamap-counterfactual-v3.schema.json",
+    "./schemas/metamap-counterfactual.schema.json": "./schemas/metamap-counterfactual.schema.json",
+    "./schemas/metamap-derivation.schema.json": "./schemas/metamap-derivation.schema.json",
+    "./schemas/metamap-explanation-request.schema.json": "./schemas/metamap-explanation-request.schema.json",
+    "./schemas/metamap-explanation-result.schema.json": "./schemas/metamap-explanation-result.schema.json",
+    "./schemas/metamap-explanation.schema.json": "./schemas/metamap-explanation.schema.json",
+    "./schemas/metamap-generation-v2.schema.json": "./schemas/metamap-generation-v2.schema.json",
+    "./schemas/metamap-generation.schema.json": "./schemas/metamap-generation.schema.json",
+    "./schemas/metamap-governance.schema.json": "./schemas/metamap-governance.schema.json",
+    "./schemas/metamap-graph.schema.json": "./schemas/metamap-graph.schema.json",
+    "./schemas/metamap-path-tree-v2.schema.json": "./schemas/metamap-path-tree-v2.schema.json",
+    "./schemas/metamap-path-tree.schema.json": "./schemas/metamap-path-tree.schema.json",
+    "./schemas/metamap-projection-spec-v2.schema.json": "./schemas/metamap-projection-spec-v2.schema.json",
+    "./schemas/metamap-projection-spec.schema.json": "./schemas/metamap-projection-spec.schema.json",
+    "./schemas/metamap-projection-v2.schema.json": "./schemas/metamap-projection-v2.schema.json",
+    "./schemas/metamap-projection.schema.json": "./schemas/metamap-projection.schema.json",
+    "./schemas/metamap-repair-request.schema.json": "./schemas/metamap-repair-request.schema.json",
+    "./schemas/metamap-repair-result.schema.json": "./schemas/metamap-repair-result.schema.json",
+    "./schemas/metamap-repair.schema.json": "./schemas/metamap-repair.schema.json",
+    "./schemas/metamap-replay-v2.schema.json": "./schemas/metamap-replay-v2.schema.json",
+    "./schemas/metamap-replay-v3.schema.json": "./schemas/metamap-replay-v3.schema.json",
+    "./schemas/metamap-replay.schema.json": "./schemas/metamap-replay.schema.json",
+    "./schemas/metamap-scientific-crate-profile.schema.json": "./schemas/metamap-scientific-crate-profile.schema.json",
+    "./schemas/metamap-snapshot.schema.json": "./schemas/metamap-snapshot.schema.json",
+    "./schemas/metamap-source-capture.schema.json": "./schemas/metamap-source-capture.schema.json",
+    "./schemas/metamap-source-inspection.schema.json": "./schemas/metamap-source-inspection.schema.json",
+    "./schemas/metamap-source-receipt.schema.json": "./schemas/metamap-source-receipt.schema.json",
+    "./schemas/metamap-sssom-document.schema.json": "./schemas/metamap-sssom-document.schema.json",
+    "./schemas/metamap-sssom-source.schema.json": "./schemas/metamap-sssom-source.schema.json",
+    "./schemas/metamap-trusted-consumer.schema.json": "./schemas/metamap-trusted-consumer.schema.json",
+    "./schemas/metamap-viability-v2.schema.json": "./schemas/metamap-viability-v2.schema.json",
+    "./schemas/metamap-viability.schema.json": "./schemas/metamap-viability.schema.json",
+    "./schemas/relation-pack-v2.schema.json": "./schemas/relation-pack-v2.schema.json",
+    "./schemas/relation-pack.schema.json": "./schemas/relation-pack.schema.json",
+    "./schemas/sssom-1.0.0.schema.json": "./schemas/sssom-1.0.0.schema.json"
+  },
+  "license": "Apache-2.0",
+  "peerDependencies": {
+    "patamaps-discovery-draft": "0.1.0"
+  },
+  "peerDependenciesMeta": {
+    "patamaps-discovery-draft": {
+      "optional": true
+    }
+  },
+  "bin": {
+    "patamaps-compat": "./cli.mjs"
+  }
 }

@@ -1,0 +1,69 @@
+{
+  "schemaVersion": "1.0.0",
+  "status": "failed",
+  "commands": [
+    {
+      "label": "build",
+      "command": [
+        "/Users/admin/.cargo/bin/cargo",
+        "build",
+        "--locked",
+        "-p",
+        "patamaps-cli"
+      ],
+      "exitCode": 0
+    },
+    {
+      "label": "clippy",
+      "command": [
+        "/Users/admin/.cargo/bin/cargo",
+        "clippy",
+        "--locked",
+        "--workspace",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exitCode": 0
+    },
+    {
+      "label": "native",
+      "command": [
+        "/opt/homebrew/bin/python3",
+        "-B",
+        "scripts/parity/native.py"
+      ],
+      "exitCode": 0
+    },
+    {
+      "label": "installed-sdk",
+      "command": [
+        "/opt/homebrew/bin/python3",
+        "-B",
+        "scripts/parity/sdk_consumer.py"
+      ],
+      "exitCode": 1
+    }
+  ],
+  "functionalEvidence": [
+    {
+      "path": "docs/acceptance/parity/native-2026-10-12T21-57-30.804591Z/receipt.json",
+      "digest": "sha256:2e695621312b0776fbd06acbe34d81568563309e3c1b93ebd4e074845b1e06a1"
+    },
+    {
+      "path": "docs/acceptance/parity/sdk-consumer-2026-10-12T21-58-00.747304Z/receipt.json",
+      "digest": "sha256:910274570a692b09e269fb14b47cdfcfe85128bc71b3496da148b3fe85cdec57"
+    }
+  ],
+  "binaryDigest": "sha256:8b96db79c45a40a1b0172626caacabd140134e2d6efe304751393d1b8d0d2b76",
+  "candidateEngine": {
+    "compiler": "sha256:adb2b109a0ff65fab907c72d35f1ffe36f1cfb86bf84e0044d740aea0a0eb871",
+    "documentType": "executor-description",
+    "governance": "sha256:00a5b845e6efec05560ed8c4f9ae5c7874d2aaa88881534da3d6ccf2f756bdd5",
+    "schemaVersion": "0.1.0",
+    "scientific": "sha256:dbf6f9ec83faa8d2cabf6ef0dcbbd0197fe03718d15dcd184b116d79ac426329",
+    "workspace": "sha256:25c7aa794b6fb03a8d68163293e646eba203a07b2569dd52ccbed6713d35cdab"
+  },
+  "scope": "Current reporting/diff/digest/UTF-16/composition/graph/registry/JSON/native/installed SDK/discovery/scientific components, including the source-bound native collator patch. Original callbacks and expectations remain unchanged. Complete accepted-domain/package/platform parity remains unresolved."
+}

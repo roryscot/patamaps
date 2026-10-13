@@ -1,0 +1,1659 @@
+{
+  "schemaVersion": "1.0.0",
+  "timestamp": "2026-10-11T14-44-25.690Z",
+  "status": "capability-gaps-observed",
+  "reference": {
+    "engine": "399747a4ad05a37cd8db1cedd53048fad2175be4",
+    "preparation": ".tools/parity/oracles/399747a4ad05-p8pkt3pr/preparation.json",
+    "testsRerun": false,
+    "operationsRerun": true
+  },
+  "candidate": {
+    "binary": "target/release/patamaps",
+    "binaryDigest": "sha256:783377a966976a2422bad9cc6b02cd6d02badb2b0ed49b388a81ff3fe4ba9a3c",
+    "engine": {
+      "compiler": "sha256:f5e64903ab9a076b0e8dcfec37fc643addb43a9a39aaabdaccefd73e827a8057",
+      "documentType": "executor-description",
+      "governance": "sha256:c8a9fd4851cbadeb80fb56e21d29cf3dc34ab8e9852b9657e1ade6517571219e",
+      "schemaVersion": "0.1.0",
+      "scientific": "sha256:e8cb6b75fa01f605ee6661f094e01d7a91656d666aa8661f56bb54d21ccc4d9f",
+      "workspace": "sha256:23f5a269a4e8579e56e1de480e24d5e0acbe824e63f5923b75a93000a13bb4ab"
+    },
+    "gitHead": "d519705664f95d8a614f870868faf0b311eb6953",
+    "dirty": " M BUILD_PLAN.md\n M README.md\n?? docs/acceptance/parity/\n?? fixtures/parity/\n?? scripts/parity/\n"
+  },
+  "host": {
+    "platform": "darwin",
+    "architecture": "arm64",
+    "hostname": "Rorys-MacBook-Pro.local",
+    "node": "v22.16.0"
+  },
+  "manifestDigest": "sha256:963a0bdb0514342053144b369b900342d78c55d79ddc3a07c032dd859c8cd8ed",
+  "comparisonRulesDigest": "sha256:ab76e60deb27bf8b425063f3d432b88720c1f0d6e2cd67b43b9846cb9fb5ae91",
+  "records": [
+    {
+      "name": "normative-unicode",
+      "input": {
+        "path": "docs/acceptance/parity/canonical-2026-10-11T14-44-25.690Z/00-normative-unicode.input.json",
+        "digest": "sha256:672415a764b1b3bb0650c3b71c1dfd88fa821bd56778888739c133a8804b53b3"
+      },
+      "originalObligations": [
+        "parity:fe579cb04c8f4277b4d5"
+      ],
+      "coverage": "Component probe; original test case is not claimed closed by this probe.",
+      "rule": "canonical-utf8-exact",
+      "result": "equivalent-bytes",
+      "referenceOutcome": {
+        "status": "accepted",
+        "canonical": "{\"\\r\":2,\"1\":4,\"a\":[3,2,1],\"\":6,\"ö\":7,\"€\":1,\"😀\":5,\"דּ\":3}",
+        "digest": "sha256:77d04c815854ac952d1bbf800a86ad6dd8c9bd61b452357477558603c5238d7c"
+      },
+      "candidateOutcome": {
+        "command": [
+          "/Users/admin/dev/patamaps/patamaps/target/release/patamaps",
+          "canonical",
+          "/Users/admin/dev/patamaps/patamaps/.tools/parity/runs/canonical-ZGPCI7/00-normative-unicode.json"
+        ],
+        "exitCode": 0,
+        "signal": null,
+        "error": null
+      },
+      "referenceProcess": {
+        "command": [
+          "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+          "/Users/admin/dev/patamaps/patamaps/scripts/parity/reference_canonical.mjs",
+          "/Users/admin/dev/patamaps/patamaps/.tools/parity/oracles/399747a4ad05-p8pkt3pr/reference",
+          "/Users/admin/dev/patamaps/patamaps/.tools/parity/runs/canonical-ZGPCI7/00-normative-unicode.json"
+        ],
+        "exitCode": 0,
+        "signal": null,
+        "error": null
+      },
+      "raw": {
+        "reference.stdout": {
+          "path": "docs/acceptance/parity/canonical-2026-10-11T14-44-25.690Z/00-normative-unicode.reference.stdout",
+          "digest": "sha256:db987650d1216838dce9e9de5ee6d49afd97ab06e702fc340d6d544ffa2f0d9a"
+        },
+        "reference.stderr": {
+          "path": "docs/acceptance/parity/canonical-2026-10-11T14-44-25.690Z/00-normative-unicode.reference.stderr",
+          "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "candidate.stdout": {
+          "path": "docs/acceptance/parity/canonical-2026-10-11T14-44-25.690Z/00-normative-unicode.candidate.stdout",
+          "digest": "sha256:8868c93a87bbd33d51d4905fc2730cdc931ae7180aaaf2b2b940b096ecb696a3"
+        },
+        "candidate.stderr": {
+          "path": "docs/acceptance/parity/canonical-2026-10-11T14-44-25.690Z/00-normative-unicode.candidate.stderr",
+          "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      }
+    },
+    {
+      "name": "composed-unicode",
+      "input": {
+        "path": "docs/acceptance/parity/canonical-2026-10-11T14-44-25.690Z/01-composed-unicode.input.json",
+        "digest": "sha256:69e46f3f0688000ab7eeb9e40e6a516a254268cd644a24f4f69cf7ad063cf479"
+      },
+      "originalObligations": [
+        "parity:fe579cb04c8f4277b4d5"
+      ],
+      "coverage": "Component probe; original test case is not claimed closed by this probe.",
+      "rule": "canonical-utf8-exact",
+      "result": "equivalent-bytes",
+      "referenceOutcome": {
+        "status": "accepted",
+        "canonical": "{\"value\":\"é\"}",
+        "digest": "sha256:69e46f3f0688000ab7eeb9e40e6a516a254268cd644a24f4f69cf7ad063cf479"
+      },
+      "candidateOutcome": {
+        "command": [
+          "/Users/admin/dev/patamaps/patamaps/target/release/patamaps",
+          "canonical",
+          "/Users/admin/dev/patamaps/patamaps/.tools/parity/runs/canonical-ZGPCI7/01-composed-unicode.json"
+        ],
+        "exitCode": 0,
+        "signal": null,
+        "error": null
+      },
+      "referenceProcess": {
+        "command": [
+          "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+          "/Users/admin/dev/patamaps/patamaps/scripts/parity/reference_canonical.mjs",
+          "/Users/admin/dev/patamaps/patamaps/.tools/parity/oracles/399747a4ad05-p8pkt3pr/reference",
+          "/Users/admin/dev/patamaps/patamaps/.tools/parity/runs/canonical-ZGPCI7/01-composed-unicode.json"
+        ],
+        "exitCode": 0,
+        "signal": null,
+        "error": null
+      },
+      "raw": {
+        "reference.stdout": {
+          "path": "docs/acceptance/parity/canonical-2026-10-11T14-44-25.690Z/01-composed-unicode.reference.stdout",
+          "digest": "sha256:e79edc977bd261d89b645bfe76bf1f52bf578db5b05af79aea818a34eaee75ee"
+        },
+        "reference.stderr": {
+          "path": "docs/acceptance/parity/canonical-2026-10-11T14-44-25.690Z/01-composed-unicode.reference.stderr",
+          "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "candidate.stdout": {
+          "path": "docs/acceptance/parity/canonical-2026-10-11T14-44-25.690Z/01-composed-unicode.candidate.stdout",
+          "digest": "sha256:4de305e13898b9b3d0c26d62bff36fe5e41f59dacb8d0dd6912831169410c8b5"
+        },
+        "candidate.stderr": {
+          "path": "docs/acceptance/parity/canonical-2026-10-11T14-44-25.690Z/01-composed-unicode.candidate.stderr",
+          "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      }
+    },
+    {
+      "name": "decomposed-unicode",
+      "input": {
+        "path": "docs/acceptance/parity/canonical-2026-10-11T14-44-25.690Z/02-decomposed-unicode.input.json",
+        "digest": "sha256:f71d4b4ee81605c49924abc9f96e730514ac61f52a347a16ff95e18aebd9db53"
+      },
+      "originalObligations": [
+        "parity:fe579cb04c8f4277b4d5"
+      ],
+      "coverage": "Component probe; original test case is not claimed closed by this probe.",
+      "rule": "canonical-utf8-exact",
+      "result": "equivalent-bytes",
+      "referenceOutcome": {
+        "status": "accepted",
+        "canonical": "{\"value\":\"é\"}",
+        "digest": "sha256:1b986c631da83257beca64c93ff3e5174908d558af7bb9dfb36b25a6198f7c38"
+      },
+      "candidateOutcome": {
+        "command": [
+          "/Users/admin/dev/patamaps/patamaps/target/release/patamaps",
+          "canonical",
+          "/Users/admin/dev/patamaps/patamaps/.tools/parity/runs/canonical-ZGPCI7/02-decomposed-unicode.json"
+        ],
+        "exitCode": 0,
+        "signal": null,
+        "error": null
+      },
+      "referenceProcess": {
+        "command": [
+          "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+          "/Users/admin/dev/patamaps/patamaps/scripts/parity/reference_canonical.mjs",
+          "/Users/admin/dev/patamaps/patamaps/.tools/parity/oracles/399747a4ad05-p8pkt3pr/reference",
+          "/Users/admin/dev/patamaps/patamaps/.tools/parity/runs/canonical-ZGPCI7/02-decomposed-unicode.json"
+        ],
+        "exitCode": 0,
+        "signal": null,
+        "error": null
+      },
+      "raw": {
+        "reference.stdout": {
+          "path": "docs/acceptance/parity/canonical-2026-10-11T14-44-25.690Z/02-decomposed-unicode.reference.stdout",
+          "digest": "sha256:6573faaaa6edbc8a7018a512cc21630a868b9c3180588fef3dfc2816bc5bc3c2"
+        },
+        "reference.stderr": {
+          "path": "docs/acceptance/parity/canonical-2026-10-11T14-44-25.690Z/02-decomposed-unicode.reference.stderr",
+          "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "candidate.stdout": {
+          "path": "docs/acceptance/parity/canonical-2026-10-11T14-44-25.690Z/02-decomposed-unicode.candidate.stdout",
+          "digest": "sha256:76ffc8183b39bef5ef5474268efe0a76de74f4c38bf77f72dacdbfebd8ee4284"
+        },
+        "candidate.stderr": {
+          "path": "docs/acceptance/parity/canonical-2026-10-11T14-44-25.690Z/02-decomposed-unicode.candidate.stderr",
+          "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      }
+    },
+    {
+      "name": "normative-numbers",
+      "input": {
+        "path": "docs/acceptance/parity/canonical-2026-10-11T14-44-25.690Z/03-normative-numbers.input.json",
+        "digest": "sha256:a2dfe9651c1bc1cbd40de0798700241da1e02eb722926deb7dde8d70aea6971f"
+      },
+      "originalObligations": [
+        "parity:489c0f2dbeb483a31188"
+      ],
+      "coverage": "Component probe; original test case is not claimed closed by this probe.",
+      "rule": "canonical-utf8-exact",
+      "result": "equivalent-bytes",
+      "referenceOutcome": {
+        "status": "accepted",
+        "canonical": "[333333333.3333333,1e+30,4.5,0.002,1e-27,0]",
+        "digest": "sha256:3c9384fb0690970a0df3b40b3cc762ff1b9c9efbd41daeda39db4b2eae1a6cb4"
+      },
+      "candidateOutcome": {
+        "command": [
+          "/Users/admin/dev/patamaps/patamaps/target/release/patamaps",
+          "canonical",
+          "/Users/admin/dev/patamaps/patamaps/.tools/parity/runs/canonical-ZGPCI7/03-normative-numbers.json"
+        ],
+        "exitCode": 0,
+        "signal": null,
+        "error": null
+      },
+      "referenceProcess": {
+        "command": [
+          "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+          "/Users/admin/dev/patamaps/patamaps/scripts/parity/reference_canonical.mjs",
+          "/Users/admin/dev/patamaps/patamaps/.tools/parity/oracles/399747a4ad05-p8pkt3pr/reference",
+          "/Users/admin/dev/patamaps/patamaps/.tools/parity/runs/canonical-ZGPCI7/03-normative-numbers.json"
+        ],
+        "exitCode": 0,
+        "signal": null,
+        "error": null
+      },
+      "raw": {
+        "reference.stdout": {
+          "path": "docs/acceptance/parity/canonical-2026-10-11T14-44-25.690Z/03-normative-numbers.reference.stdout",
+          "digest": "sha256:15457ad2b597ee8824d5f19d3ad2d653a0ed707d11955c58908b7a461df3c690"
+        },
+        "reference.stderr": {
+          "path": "docs/acceptance/parity/canonical-2026-10-11T14-44-25.690Z/03-normative-numbers.reference.stderr",
+          "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "candidate.stdout": {
+          "path": "docs/acceptance/parity/canonical-2026-10-11T14-44-25.690Z/03-normative-numbers.candidate.stdout",
+          "digest": "sha256:0621f3192731b9fde0f083af131c4c498c9c1742c3ad63de72c7492959e7a4ec"
+        },
+        "candidate.stderr": {
+          "path": "docs/acceptance/parity/canonical-2026-10-11T14-44-25.690Z/03-normative-numbers.candidate.stderr",
+          "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      }
+    },
+    {
+      "name": "binary64-0000000000000001",
+      "input": {
+        "path": "docs/acceptance/parity/canonical-2026-10-11T14-44-25.690Z/04-binary64-0000000000000001.input.json",
+        "digest": "sha256:c46e7ca1be4c8734f373a56530787288fa2058d73d07855e9247e949f811a42a"
+      },
+      "originalObligations": [
+        "parity:489c0f2dbeb483a31188"
+      ],
+      "coverage": "Component probe; original test case is not claimed closed by this probe.",
+      "rule": "canonical-utf8-exact",
+      "result": "equivalent-bytes",
+      "referenceOutcome": {
+        "status": "accepted",
+        "canonical": "5e-324",
+        "digest": "sha256:c46e7ca1be4c8734f373a56530787288fa2058d73d07855e9247e949f811a42a"
+      },
+      "candidateOutcome": {
+        "command": [
+          "/Users/admin/dev/patamaps/patamaps/target/release/patamaps",
+          "canonical",
+          "/Users/admin/dev/patamaps/patamaps/.tools/parity/runs/canonical-ZGPCI7/04-binary64-0000000000000001.json"
+        ],
+        "exitCode": 0,
+        "signal": null,
+        "error": null
+      },
+      "referenceProcess": {
+        "command": [
+          "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+          "/Users/admin/dev/patamaps/patamaps/scripts/parity/reference_canonical.mjs",
+          "/Users/admin/dev/patamaps/patamaps/.tools/parity/oracles/399747a4ad05-p8pkt3pr/reference",
+          "/Users/admin/dev/patamaps/patamaps/.tools/parity/runs/canonical-ZGPCI7/04-binary64-0000000000000001.json"
+        ],
+        "exitCode": 0,
+        "signal": null,
+        "error": null
+      },
+      "raw": {
+        "reference.stdout": {
+          "path": "docs/acceptance/parity/canonical-2026-10-11T14-44-25.690Z/04-binary64-0000000000000001.reference.stdout",
+          "digest": "sha256:45733e39c2b9578c5198954163466d8ff37f33f2d462859a4b949a7bc080d9f5"
+        },
+        "reference.stderr": {
+          "path": "docs/acceptance/parity/canonical-2026-10-11T14-44-25.690Z/04-binary64-0000000000000001.reference.stderr",
+          "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "candidate.stdout": {
+          "path": "docs/acceptance/parity/canonical-2026-10-11T14-44-25.690Z/04-binary64-0000000000000001.candidate.stdout",
+          "digest": "sha256:0263639e0bd634801d80c88ccba3d7fc9c86b2ed0fb2b31f2db23806f784a2b0"
+        },
+        "candidate.stderr": {
+          "path": "docs/acceptance/parity/canonical-2026-10-11T14-44-25.690Z/04-binary64-0000000000000001.candidate.stderr",
+          "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      }
+    },
+    {
+      "name": "binary64-8000000000000001",
+      "input": {
+        "path": "docs/acceptance/parity/canonical-2026-10-11T14-44-25.690Z/05-binary64-8000000000000001.input.json",
+        "digest": "sha256:046f4049d09944fcb2efbf2ddb0ea8f05e0204591d6d02c9106efc88190fa7f9"
+      },
+      "originalObligations": [
+        "parity:489c0f2dbeb483a31188"
+      ],
+      "coverage": "Component probe; original test case is not claimed closed by this probe.",
+      "rule": "canonical-utf8-exact",
+      "result": "equivalent-bytes",
+      "referenceOutcome": {
+        "status": "accepted",
+        "canonical": "-5e-324",
+        "digest": "sha256:046f4049d09944fcb2efbf2ddb0ea8f05e0204591d6d02c9106efc88190fa7f9"
+      },
+      "candidateOutcome": {
+        "command": [
+          "/Users/admin/dev/patamaps/patamaps/target/release/patamaps",
+          "canonical",
+          "/Users/admin/dev/patamaps/patamaps/.tools/parity/runs/canonical-ZGPCI7/05-binary64-8000000000000001.json"
+        ],
+        "exitCode": 0,
+        "signal": null,
+        "error": null
+      },
+      "referenceProcess": {
+        "command": [
+          "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+          "/Users/admin/dev/patamaps/patamaps/scripts/parity/reference_canonical.mjs",
+          "/Users/admin/dev/patamaps/patamaps/.tools/parity/oracles/399747a4ad05-p8pkt3pr/reference",
+          "/Users/admin/dev/patamaps/patamaps/.tools/parity/runs/canonical-ZGPCI7/05-binary64-8000000000000001.json"
+        ],
+        "exitCode": 0,
+        "signal": null,
+        "error": null
+      },
+      "raw": {
+        "reference.stdout": {
+          "path": "docs/acceptance/parity/canonical-2026-10-11T14-44-25.690Z/05-binary64-8000000000000001.reference.stdout",
+          "digest": "sha256:9b17ffbfcd2fac9aaca45bb406496bb2b06d5139a405d6ecea20a165d2508e68"
+        },
+        "reference.stderr": {
+          "path": "docs/acceptance/parity/canonical-2026-10-11T14-44-25.690Z/05-binary64-8000000000000001.reference.stderr",
+          "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "candidate.stdout": {
+          "path": "docs/acceptance/parity/canonical-2026-10-11T14-44-25.690Z/05-binary64-8000000000000001.candidate.stdout",
+          "digest": "sha256:547b7e2b081c7689cb1725cec0c70b9f80899382b43d2633cdf8c5c65d970d3a"
+        },
+        "candidate.stderr": {
+          "path": "docs/acceptance/parity/canonical-2026-10-11T14-44-25.690Z/05-binary64-8000000000000001.candidate.stderr",
+          "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      }
+    },
+    {
+      "name": "binary64-7fefffffffffffff",
+      "input": {
+        "path": "docs/acceptance/parity/canonical-2026-10-11T14-44-25.690Z/06-binary64-7fefffffffffffff.input.json",
+        "digest": "sha256:c2784e1abd6317452708f3fbf9641c16b959561bc621a1d408c23a20aa2cb585"
+      },
+      "originalObligations": [
+        "parity:489c0f2dbeb483a31188"
+      ],
+      "coverage": "Component probe; original test case is not claimed closed by this probe.",
+      "rule": "canonical-utf8-exact",
+      "result": "equivalent-bytes",
+      "referenceOutcome": {
+        "status": "accepted",
+        "canonical": "1.7976931348623157e+308",
+        "digest": "sha256:c2784e1abd6317452708f3fbf9641c16b959561bc621a1d408c23a20aa2cb585"
+      },
+      "candidateOutcome": {
+        "command": [
+          "/Users/admin/dev/patamaps/patamaps/target/release/patamaps",
+          "canonical",
+          "/Users/admin/dev/patamaps/patamaps/.tools/parity/runs/canonical-ZGPCI7/06-binary64-7fefffffffffffff.json"
+        ],
+        "exitCode": 0,
+        "signal": null,
+        "error": null
+      },
+      "referenceProcess": {
+        "command": [
+          "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+          "/Users/admin/dev/patamaps/patamaps/scripts/parity/reference_canonical.mjs",
+          "/Users/admin/dev/patamaps/patamaps/.tools/parity/oracles/399747a4ad05-p8pkt3pr/reference",
+          "/Users/admin/dev/patamaps/patamaps/.tools/parity/runs/canonical-ZGPCI7/06-binary64-7fefffffffffffff.json"
+        ],
+        "exitCode": 0,
+        "signal": null,
+        "error": null
+      },
+      "raw": {
+        "reference.stdout": {
+          "path": "docs/acceptance/parity/canonical-2026-10-11T14-44-25.690Z/06-binary64-7fefffffffffffff.reference.stdout",
+          "digest": "sha256:1f1cd003005c6c7dea0e4f4a2609049f6722b39cc2eee1423676a84712b2272c"
+        },
+        "reference.stderr": {
+          "path": "docs/acceptance/parity/canonical-2026-10-11T14-44-25.690Z/06-binary64-7fefffffffffffff.reference.stderr",
+          "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "candidate.stdout": {
+          "path": "docs/acceptance/parity/canonical-2026-10-11T14-44-25.690Z/06-binary64-7fefffffffffffff.candidate.stdout",
+          "digest": "sha256:02ef9237693d1f1730c33693c040e61116db956536c628b7505c72cf9ca93ffa"
+        },
+        "candidate.stderr": {
+          "path": "docs/acceptance/parity/canonical-2026-10-11T14-44-25.690Z/06-binary64-7fefffffffffffff.candidate.stderr",
+          "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      }
+    },
+    {
+      "name": "binary64-ffefffffffffffff",
+      "input": {
+        "path": "docs/acceptance/parity/canonical-2026-10-11T14-44-25.690Z/07-binary64-ffefffffffffffff.input.json",
+        "digest": "sha256:f0347276b171ff0c36491c912285a2833de7313d1a103a4b1be0274bfe7c021f"
+      },
+      "originalObligations": [
+        "parity:489c0f2dbeb483a31188"
+      ],
+      "coverage": "Component probe; original test case is not claimed closed by this probe.",
+      "rule": "canonical-utf8-exact",
+      "result": "equivalent-bytes",
+      "referenceOutcome": {
+        "status": "accepted",
+        "canonical": "-1.7976931348623157e+308",
+        "digest": "sha256:f0347276b171ff0c36491c912285a2833de7313d1a103a4b1be0274bfe7c021f"
+      },
+      "candidateOutcome": {
+        "command": [
+          "/Users/admin/dev/patamaps/patamaps/target/release/patamaps",
+          "canonical",
+          "/Users/admin/dev/patamaps/patamaps/.tools/parity/runs/canonical-ZGPCI7/07-binary64-ffefffffffffffff.json"
+        ],
+        "exitCode": 0,
+        "signal": null,
+        "error": null
+      },
+      "referenceProcess": {
+        "command": [
+          "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+          "/Users/admin/dev/patamaps/patamaps/scripts/parity/reference_canonical.mjs",
+          "/Users/admin/dev/patamaps/patamaps/.tools/parity/oracles/399747a4ad05-p8pkt3pr/reference",
+          "/Users/admin/dev/patamaps/patamaps/.tools/parity/runs/canonical-ZGPCI7/07-binary64-ffefffffffffffff.json"
+        ],
+        "exitCode": 0,
+        "signal": null,
+        "error": null
+      },
+      "raw": {
+        "reference.stdout": {
+          "path": "docs/acceptance/parity/canonical-2026-10-11T14-44-25.690Z/07-binary64-ffefffffffffffff.reference.stdout",
+          "digest": "sha256:7e12f35e4473cd49422c147b75cd05e7dacc0139a8a2115aff8ef0e211641420"
+        },
+        "reference.stderr": {
+          "path": "docs/acceptance/parity/canonical-2026-10-11T14-44-25.690Z/07-binary64-ffefffffffffffff.reference.stderr",
+          "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "candidate.stdout": {
+          "path": "docs/acceptance/parity/canonical-2026-10-11T14-44-25.690Z/07-binary64-ffefffffffffffff.candidate.stdout",
+          "digest": "sha256:d2174483f9c1d67e4db459d79550ee15a50995c2f96603a07c6f1e8edc755577"
+        },
+        "candidate.stderr": {
+          "path": "docs/acceptance/parity/canonical-2026-10-11T14-44-25.690Z/07-binary64-ffefffffffffffff.candidate.stderr",
+          "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      }
+    },
+    {
+      "name": "binary64-4340000000000000",
+      "input": {
+        "path": "docs/acceptance/parity/canonical-2026-10-11T14-44-25.690Z/08-binary64-4340000000000000.input.json",
+        "digest": "sha256:c681da39d7273a6a24c15c9cac3a75526ff2ecf8ba4ee60346a0c70c8163bdb2"
+      },
+      "originalObligations": [
+        "parity:489c0f2dbeb483a31188"
+      ],
+      "coverage": "Component probe; original test case is not claimed closed by this probe.",
+      "rule": "canonical-utf8-exact",
+      "result": "equivalent-bytes",
+      "referenceOutcome": {
+        "status": "accepted",
+        "canonical": "9007199254740992",
+        "digest": "sha256:c681da39d7273a6a24c15c9cac3a75526ff2ecf8ba4ee60346a0c70c8163bdb2"
+      },
+      "candidateOutcome": {
+        "command": [
+          "/Users/admin/dev/patamaps/patamaps/target/release/patamaps",
+          "canonical",
+          "/Users/admin/dev/patamaps/patamaps/.tools/parity/runs/canonical-ZGPCI7/08-binary64-4340000000000000.json"
+        ],
+        "exitCode": 0,
+        "signal": null,
+        "error": null
+      },
+      "referenceProcess": {
+        "command": [
+          "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+          "/Users/admin/dev/patamaps/patamaps/scripts/parity/reference_canonical.mjs",
+          "/Users/admin/dev/patamaps/patamaps/.tools/parity/oracles/399747a4ad05-p8pkt3pr/reference",
+          "/Users/admin/dev/patamaps/patamaps/.tools/parity/runs/canonical-ZGPCI7/08-binary64-4340000000000000.json"
+        ],
+        "exitCode": 0,
+        "signal": null,
+        "error": null
+      },
+      "raw": {
+        "reference.stdout": {
+          "path": "docs/acceptance/parity/canonical-2026-10-11T14-44-25.690Z/08-binary64-4340000000000000.reference.stdout",
+          "digest": "sha256:051a246c27461084ba7b577df70a7fa6f9904a218d29444c38244d0e17b252d4"
+        },
+        "reference.stderr": {
+          "path": "docs/acceptance/parity/canonical-2026-10-11T14-44-25.690Z/08-binary64-4340000000000000.reference.stderr",
+          "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "candidate.stdout": {
+          "path": "docs/acceptance/parity/canonical-2026-10-11T14-44-25.690Z/08-binary64-4340000000000000.candidate.stdout",
+          "digest": "sha256:39ec82d0fadb4e41acd3f99b1db1b7cc8001df98ad73ab63b819eda9b8636ccb"
+        },
+        "candidate.stderr": {
+          "path": "docs/acceptance/parity/canonical-2026-10-11T14-44-25.690Z/08-binary64-4340000000000000.candidate.stderr",
+          "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      }
+    },
+    {
+      "name": "binary64-4430000000000000",
+      "input": {
+        "path": "docs/acceptance/parity/canonical-2026-10-11T14-44-25.690Z/09-binary64-4430000000000000.input.json",
+        "digest": "sha256:7933ef1b34c194c7a327ef424e54282dd2872bc7bda27812f9edf7882ca340c0"
+      },
+      "originalObligations": [
+        "parity:489c0f2dbeb483a31188"
+      ],
+      "coverage": "Component probe; original test case is not claimed closed by this probe.",
+      "rule": "canonical-utf8-exact",
+      "result": "equivalent-bytes",
+      "referenceOutcome": {
+        "status": "accepted",
+        "canonical": "295147905179352830000",
+        "digest": "sha256:7933ef1b34c194c7a327ef424e54282dd2872bc7bda27812f9edf7882ca340c0"
+      },
+      "candidateOutcome": {
+        "command": [
+          "/Users/admin/dev/patamaps/patamaps/target/release/patamaps",
+          "canonical",
+          "/Users/admin/dev/patamaps/patamaps/.tools/parity/runs/canonical-ZGPCI7/09-binary64-4430000000000000.json"
+        ],
+        "exitCode": 0,
+        "signal": null,
+        "error": null
+      },
+      "referenceProcess": {
+        "command": [
+          "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+          "/Users/admin/dev/patamaps/patamaps/scripts/parity/reference_canonical.mjs",
+          "/Users/admin/dev/patamaps/patamaps/.tools/parity/oracles/399747a4ad05-p8pkt3pr/reference",
+          "/Users/admin/dev/patamaps/patamaps/.tools/parity/runs/canonical-ZGPCI7/09-binary64-4430000000000000.json"
+        ],
+        "exitCode": 0,
+        "signal": null,
+        "error": null
+      },
+      "raw": {
+        "reference.stdout": {
+          "path": "docs/acceptance/parity/canonical-2026-10-11T14-44-25.690Z/09-binary64-4430000000000000.reference.stdout",
+          "digest": "sha256:7d54e4eb37a40fa247403fd265cc3c995f11fdd105e808af82da3303fc18c379"
+        },
+        "reference.stderr": {
+          "path": "docs/acceptance/parity/canonical-2026-10-11T14-44-25.690Z/09-binary64-4430000000000000.reference.stderr",
+          "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "candidate.stdout": {
+          "path": "docs/acceptance/parity/canonical-2026-10-11T14-44-25.690Z/09-binary64-4430000000000000.candidate.stdout",
+          "digest": "sha256:161dc8563618236c777249dd39bbd2bb88ebf105a4fd481737d3f913e78105b0"
+        },
+        "candidate.stderr": {
+          "path": "docs/acceptance/parity/canonical-2026-10-11T14-44-25.690Z/09-binary64-4430000000000000.candidate.stderr",
+          "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      }
+    },
+    {
+      "name": "binary64-44b52d02c7e14af5",
+      "input": {
+        "path": "docs/acceptance/parity/canonical-2026-10-11T14-44-25.690Z/10-binary64-44b52d02c7e14af5.input.json",
+        "digest": "sha256:143eadc1fc2fe10a563df313c717399d1835652d710fa189119ff2e1d5cde33d"
+      },
+      "originalObligations": [
+        "parity:489c0f2dbeb483a31188"
+      ],
+      "coverage": "Component probe; original test case is not claimed closed by this probe.",
+      "rule": "canonical-utf8-exact",
+      "result": "equivalent-bytes",
+      "referenceOutcome": {
+        "status": "accepted",
+        "canonical": "9.999999999999997e+22",
+        "digest": "sha256:143eadc1fc2fe10a563df313c717399d1835652d710fa189119ff2e1d5cde33d"
+      },
+      "candidateOutcome": {
+        "command": [
+          "/Users/admin/dev/patamaps/patamaps/target/release/patamaps",
+          "canonical",
+          "/Users/admin/dev/patamaps/patamaps/.tools/parity/runs/canonical-ZGPCI7/10-binary64-44b52d02c7e14af5.json"
+        ],
+        "exitCode": 0,
+        "signal": null,
+        "error": null
+      },
+      "referenceProcess": {
+        "command": [
+          "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+          "/Users/admin/dev/patamaps/patamaps/scripts/parity/reference_canonical.mjs",
+          "/Users/admin/dev/patamaps/patamaps/.tools/parity/oracles/399747a4ad05-p8pkt3pr/reference",
+          "/Users/admin/dev/patamaps/patamaps/.tools/parity/runs/canonical-ZGPCI7/10-binary64-44b52d02c7e14af5.json"
+        ],
+        "exitCode": 0,
+        "signal": null,
+        "error": null
+      },
+      "raw": {
+        "reference.stdout": {
+          "path": "docs/acceptance/parity/canonical-2026-10-11T14-44-25.690Z/10-binary64-44b52d02c7e14af5.reference.stdout",
+          "digest": "sha256:55e986c83c439e41db7ac96707e6b5eecd7caf37cdcf6c596434ee434e6519e6"
+        },
+        "reference.stderr": {
+          "path": "docs/acceptance/parity/canonical-2026-10-11T14-44-25.690Z/10-binary64-44b52d02c7e14af5.reference.stderr",
+          "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "candidate.stdout": {
+          "path": "docs/acceptance/parity/canonical-2026-10-11T14-44-25.690Z/10-binary64-44b52d02c7e14af5.candidate.stdout",
+          "digest": "sha256:7ca731fe40d3ec24f74c06a5e00163b464b1f7faf27dc807a63ac74edc55b315"
+        },
+        "candidate.stderr": {
+          "path": "docs/acceptance/parity/canonical-2026-10-11T14-44-25.690Z/10-binary64-44b52d02c7e14af5.candidate.stderr",
+          "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      }
+    },
+    {
+      "name": "binary64-44b52d02c7e14af6",
+      "input": {
+        "path": "docs/acceptance/parity/canonical-2026-10-11T14-44-25.690Z/11-binary64-44b52d02c7e14af6.input.json",
+        "digest": "sha256:0b1af6b73e932475817f8eb620deecf21ad7570df3400a23db5c79a9001597f7"
+      },
+      "originalObligations": [
+        "parity:489c0f2dbeb483a31188"
+      ],
+      "coverage": "Component probe; original test case is not claimed closed by this probe.",
+      "rule": "canonical-utf8-exact",
+      "result": "equivalent-bytes",
+      "referenceOutcome": {
+        "status": "accepted",
+        "canonical": "1e+23",
+        "digest": "sha256:0b1af6b73e932475817f8eb620deecf21ad7570df3400a23db5c79a9001597f7"
+      },
+      "candidateOutcome": {
+        "command": [
+          "/Users/admin/dev/patamaps/patamaps/target/release/patamaps",
+          "canonical",
+          "/Users/admin/dev/patamaps/patamaps/.tools/parity/runs/canonical-ZGPCI7/11-binary64-44b52d02c7e14af6.json"
+        ],
+        "exitCode": 0,
+        "signal": null,
+        "error": null
+      },
+      "referenceProcess": {
+        "command": [
+          "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+          "/Users/admin/dev/patamaps/patamaps/scripts/parity/reference_canonical.mjs",
+          "/Users/admin/dev/patamaps/patamaps/.tools/parity/oracles/399747a4ad05-p8pkt3pr/reference",
+          "/Users/admin/dev/patamaps/patamaps/.tools/parity/runs/canonical-ZGPCI7/11-binary64-44b52d02c7e14af6.json"
+        ],
+        "exitCode": 0,
+        "signal": null,
+        "error": null
+      },
+      "raw": {
+        "reference.stdout": {
+          "path": "docs/acceptance/parity/canonical-2026-10-11T14-44-25.690Z/11-binary64-44b52d02c7e14af6.reference.stdout",
+          "digest": "sha256:154d72751c0b547b00a7545db025de2876ee9c935b53db76286eaffba759788b"
+        },
+        "reference.stderr": {
+          "path": "docs/acceptance/parity/canonical-2026-10-11T14-44-25.690Z/11-binary64-44b52d02c7e14af6.reference.stderr",
+          "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "candidate.stdout": {
+          "path": "docs/acceptance/parity/canonical-2026-10-11T14-44-25.690Z/11-binary64-44b52d02c7e14af6.candidate.stdout",
+          "digest": "sha256:d82ebecf08513655c460a94357f9981b8ccdad959cd816b26458b5be76fee565"
+        },
+        "candidate.stderr": {
+          "path": "docs/acceptance/parity/canonical-2026-10-11T14-44-25.690Z/11-binary64-44b52d02c7e14af6.candidate.stderr",
+          "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      }
+    },
+    {
+      "name": "binary64-44b52d02c7e14af7",
+      "input": {
+        "path": "docs/acceptance/parity/canonical-2026-10-11T14-44-25.690Z/12-binary64-44b52d02c7e14af7.input.json",
+        "digest": "sha256:de7cb5db5ee06bf7ef5b74ebcf94cd9d7efda28125905f7ff590724953173c7b"
+      },
+      "originalObligations": [
+        "parity:489c0f2dbeb483a31188"
+      ],
+      "coverage": "Component probe; original test case is not claimed closed by this probe.",
+      "rule": "canonical-utf8-exact",
+      "result": "equivalent-bytes",
+      "referenceOutcome": {
+        "status": "accepted",
+        "canonical": "1.0000000000000001e+23",
+        "digest": "sha256:de7cb5db5ee06bf7ef5b74ebcf94cd9d7efda28125905f7ff590724953173c7b"
+      },
+      "candidateOutcome": {
+        "command": [
+          "/Users/admin/dev/patamaps/patamaps/target/release/patamaps",
+          "canonical",
+          "/Users/admin/dev/patamaps/patamaps/.tools/parity/runs/canonical-ZGPCI7/12-binary64-44b52d02c7e14af7.json"
+        ],
+        "exitCode": 0,
+        "signal": null,
+        "error": null
+      },
+      "referenceProcess": {
+        "command": [
+          "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+          "/Users/admin/dev/patamaps/patamaps/scripts/parity/reference_canonical.mjs",
+          "/Users/admin/dev/patamaps/patamaps/.tools/parity/oracles/399747a4ad05-p8pkt3pr/reference",
+          "/Users/admin/dev/patamaps/patamaps/.tools/parity/runs/canonical-ZGPCI7/12-binary64-44b52d02c7e14af7.json"
+        ],
+        "exitCode": 0,
+        "signal": null,
+        "error": null
+      },
+      "raw": {
+        "reference.stdout": {
+          "path": "docs/acceptance/parity/canonical-2026-10-11T14-44-25.690Z/12-binary64-44b52d02c7e14af7.reference.stdout",
+          "digest": "sha256:7ae89e9205d6a3d06930922146984adbc4b6231066a2ff8fc23ab7f9a42e13c9"
+        },
+        "reference.stderr": {
+          "path": "docs/acceptance/parity/canonical-2026-10-11T14-44-25.690Z/12-binary64-44b52d02c7e14af7.reference.stderr",
+          "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "candidate.stdout": {
+          "path": "docs/acceptance/parity/canonical-2026-10-11T14-44-25.690Z/12-binary64-44b52d02c7e14af7.candidate.stdout",
+          "digest": "sha256:31aeadd4dfeb47a374eef04f04d03b2adf070a938b81a21976927d5d6d26e5ea"
+        },
+        "candidate.stderr": {
+          "path": "docs/acceptance/parity/canonical-2026-10-11T14-44-25.690Z/12-binary64-44b52d02c7e14af7.candidate.stderr",
+          "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      }
+    },
+    {
+      "name": "binary64-3eb0c6f7a0b5ed8c",
+      "input": {
+        "path": "docs/acceptance/parity/canonical-2026-10-11T14-44-25.690Z/13-binary64-3eb0c6f7a0b5ed8c.input.json",
+        "digest": "sha256:2ace34b29d30d300aeacd4f2bb83367fa186f11a3f02ed461f35f00fd741a242"
+      },
+      "originalObligations": [
+        "parity:489c0f2dbeb483a31188"
+      ],
+      "coverage": "Component probe; original test case is not claimed closed by this probe.",
+      "rule": "canonical-utf8-exact",
+      "result": "equivalent-bytes",
+      "referenceOutcome": {
+        "status": "accepted",
+        "canonical": "9.999999999999997e-7",
+        "digest": "sha256:2ace34b29d30d300aeacd4f2bb83367fa186f11a3f02ed461f35f00fd741a242"
+      },
+      "candidateOutcome": {
+        "command": [
+          "/Users/admin/dev/patamaps/patamaps/target/release/patamaps",
+          "canonical",
+          "/Users/admin/dev/patamaps/patamaps/.tools/parity/runs/canonical-ZGPCI7/13-binary64-3eb0c6f7a0b5ed8c.json"
+        ],
+        "exitCode": 0,
+        "signal": null,
+        "error": null
+      },
+      "referenceProcess": {
+        "command": [
+          "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+          "/Users/admin/dev/patamaps/patamaps/scripts/parity/reference_canonical.mjs",
+          "/Users/admin/dev/patamaps/patamaps/.tools/parity/oracles/399747a4ad05-p8pkt3pr/reference",
+          "/Users/admin/dev/patamaps/patamaps/.tools/parity/runs/canonical-ZGPCI7/13-binary64-3eb0c6f7a0b5ed8c.json"
+        ],
+        "exitCode": 0,
+        "signal": null,
+        "error": null
+      },
+      "raw": {
+        "reference.stdout": {
+          "path": "docs/acceptance/parity/canonical-2026-10-11T14-44-25.690Z/13-binary64-3eb0c6f7a0b5ed8c.reference.stdout",
+          "digest": "sha256:491c56c70720f88f7602a5860e153dd96cdb45315513e91243ab7b0420ddd401"
+        },
+        "reference.stderr": {
+          "path": "docs/acceptance/parity/canonical-2026-10-11T14-44-25.690Z/13-binary64-3eb0c6f7a0b5ed8c.reference.stderr",
+          "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "candidate.stdout": {
+          "path": "docs/acceptance/parity/canonical-2026-10-11T14-44-25.690Z/13-binary64-3eb0c6f7a0b5ed8c.candidate.stdout",
+          "digest": "sha256:e7b8e4d68c811ffd9211e283dcce87444a519c64d834c88a89c153a7bca645df"
+        },
+        "candidate.stderr": {
+          "path": "docs/acceptance/parity/canonical-2026-10-11T14-44-25.690Z/13-binary64-3eb0c6f7a0b5ed8c.candidate.stderr",
+          "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      }
+    },
+    {
+      "name": "binary64-3eb0c6f7a0b5ed8d",
+      "input": {
+        "path": "docs/acceptance/parity/canonical-2026-10-11T14-44-25.690Z/14-binary64-3eb0c6f7a0b5ed8d.input.json",
+        "digest": "sha256:159fb29a827ad04b260aa6c8ab6d8637f8f2b38af5c4f3cb49d6a21205e040f8"
+      },
+      "originalObligations": [
+        "parity:489c0f2dbeb483a31188"
+      ],
+      "coverage": "Component probe; original test case is not claimed closed by this probe.",
+      "rule": "canonical-utf8-exact",
+      "result": "equivalent-bytes",
+      "referenceOutcome": {
+        "status": "accepted",
+        "canonical": "0.000001",
+        "digest": "sha256:159fb29a827ad04b260aa6c8ab6d8637f8f2b38af5c4f3cb49d6a21205e040f8"
+      },
+      "candidateOutcome": {
+        "command": [
+          "/Users/admin/dev/patamaps/patamaps/target/release/patamaps",
+          "canonical",
+          "/Users/admin/dev/patamaps/patamaps/.tools/parity/runs/canonical-ZGPCI7/14-binary64-3eb0c6f7a0b5ed8d.json"
+        ],
+        "exitCode": 0,
+        "signal": null,
+        "error": null
+      },
+      "referenceProcess": {
+        "command": [
+          "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+          "/Users/admin/dev/patamaps/patamaps/scripts/parity/reference_canonical.mjs",
+          "/Users/admin/dev/patamaps/patamaps/.tools/parity/oracles/399747a4ad05-p8pkt3pr/reference",
+          "/Users/admin/dev/patamaps/patamaps/.tools/parity/runs/canonical-ZGPCI7/14-binary64-3eb0c6f7a0b5ed8d.json"
+        ],
+        "exitCode": 0,
+        "signal": null,
+        "error": null
+      },
+      "raw": {
+        "reference.stdout": {
+          "path": "docs/acceptance/parity/canonical-2026-10-11T14-44-25.690Z/14-binary64-3eb0c6f7a0b5ed8d.reference.stdout",
+          "digest": "sha256:d81593991de0c2c07c371fdfa7a0ded3eadb537d32e28da679cfd27cd4d96d4d"
+        },
+        "reference.stderr": {
+          "path": "docs/acceptance/parity/canonical-2026-10-11T14-44-25.690Z/14-binary64-3eb0c6f7a0b5ed8d.reference.stderr",
+          "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "candidate.stdout": {
+          "path": "docs/acceptance/parity/canonical-2026-10-11T14-44-25.690Z/14-binary64-3eb0c6f7a0b5ed8d.candidate.stdout",
+          "digest": "sha256:7c23575be1e90143a566741dd2e933f37705c3a483f160bf9c6952380c0af24c"
+        },
+        "candidate.stderr": {
+          "path": "docs/acceptance/parity/canonical-2026-10-11T14-44-25.690Z/14-binary64-3eb0c6f7a0b5ed8d.candidate.stderr",
+          "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      }
+    },
+    {
+      "name": "prototype-key",
+      "input": {
+        "path": "docs/acceptance/parity/canonical-2026-10-11T14-44-25.690Z/15-prototype-key.input.json",
+        "digest": "sha256:97777f0617f27788432d152e037ca1c29af829df349e72126bd8f07938280937"
+      },
+      "originalObligations": [
+        "parity:e00f2c7687a7f8ed1dc4"
+      ],
+      "coverage": "Component probe; original test case is not claimed closed by this probe.",
+      "rule": "canonical-utf8-exact",
+      "result": "equivalent-bytes",
+      "referenceOutcome": {
+        "status": "accepted",
+        "canonical": "{\"__proto__\":{\"admin\":true},\"x\":\"\\\"\"}",
+        "digest": "sha256:97777f0617f27788432d152e037ca1c29af829df349e72126bd8f07938280937"
+      },
+      "candidateOutcome": {
+        "command": [
+          "/Users/admin/dev/patamaps/patamaps/target/release/patamaps",
+          "canonical",
+          "/Users/admin/dev/patamaps/patamaps/.tools/parity/runs/canonical-ZGPCI7/15-prototype-key.json"
+        ],
+        "exitCode": 0,
+        "signal": null,
+        "error": null
+      },
+      "referenceProcess": {
+        "command": [
+          "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+          "/Users/admin/dev/patamaps/patamaps/scripts/parity/reference_canonical.mjs",
+          "/Users/admin/dev/patamaps/patamaps/.tools/parity/oracles/399747a4ad05-p8pkt3pr/reference",
+          "/Users/admin/dev/patamaps/patamaps/.tools/parity/runs/canonical-ZGPCI7/15-prototype-key.json"
+        ],
+        "exitCode": 0,
+        "signal": null,
+        "error": null
+      },
+      "raw": {
+        "reference.stdout": {
+          "path": "docs/acceptance/parity/canonical-2026-10-11T14-44-25.690Z/15-prototype-key.reference.stdout",
+          "digest": "sha256:26bff823d243481e473e0c55c55a7a82ed5a046a383865a57097c5af4bd3854d"
+        },
+        "reference.stderr": {
+          "path": "docs/acceptance/parity/canonical-2026-10-11T14-44-25.690Z/15-prototype-key.reference.stderr",
+          "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "candidate.stdout": {
+          "path": "docs/acceptance/parity/canonical-2026-10-11T14-44-25.690Z/15-prototype-key.candidate.stdout",
+          "digest": "sha256:51af88276d19cbb85c35c3edd92189f5e2e09fed3cdcb04079dc010c649ad7be"
+        },
+        "candidate.stderr": {
+          "path": "docs/acceptance/parity/canonical-2026-10-11T14-44-25.690Z/15-prototype-key.candidate.stderr",
+          "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      }
+    },
+    {
+      "name": "depth-64",
+      "input": {
+        "path": "docs/acceptance/parity/canonical-2026-10-11T14-44-25.690Z/16-depth-64.input.json",
+        "digest": "sha256:f0244ae1938270f711155b0a26a4307cde7050495140dd858a88a1cfc378cf40"
+      },
+      "originalObligations": [
+        "parity:e00f2c7687a7f8ed1dc4"
+      ],
+      "coverage": "Component probe; original test case is not claimed closed by this probe.",
+      "rule": "accepted-domain-exact",
+      "result": "equivalent-bytes",
+      "referenceOutcome": {
+        "status": "accepted",
+        "canonical": "[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[0]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]",
+        "digest": "sha256:f0244ae1938270f711155b0a26a4307cde7050495140dd858a88a1cfc378cf40"
+      },
+      "candidateOutcome": {
+        "command": [
+          "/Users/admin/dev/patamaps/patamaps/target/release/patamaps",
+          "canonical",
+          "/Users/admin/dev/patamaps/patamaps/.tools/parity/runs/canonical-ZGPCI7/16-depth-64.json"
+        ],
+        "exitCode": 0,
+        "signal": null,
+        "error": null
+      },
+      "referenceProcess": {
+        "command": [
+          "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+          "/Users/admin/dev/patamaps/patamaps/scripts/parity/reference_canonical.mjs",
+          "/Users/admin/dev/patamaps/patamaps/.tools/parity/oracles/399747a4ad05-p8pkt3pr/reference",
+          "/Users/admin/dev/patamaps/patamaps/.tools/parity/runs/canonical-ZGPCI7/16-depth-64.json"
+        ],
+        "exitCode": 0,
+        "signal": null,
+        "error": null
+      },
+      "raw": {
+        "reference.stdout": {
+          "path": "docs/acceptance/parity/canonical-2026-10-11T14-44-25.690Z/16-depth-64.reference.stdout",
+          "digest": "sha256:e9119e1400493969cd0c6543fc2272b817088c6fbad81479e0295b9369e74f06"
+        },
+        "reference.stderr": {
+          "path": "docs/acceptance/parity/canonical-2026-10-11T14-44-25.690Z/16-depth-64.reference.stderr",
+          "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "candidate.stdout": {
+          "path": "docs/acceptance/parity/canonical-2026-10-11T14-44-25.690Z/16-depth-64.candidate.stdout",
+          "digest": "sha256:f8e98d56449d4c90792a9368b4558e287a6e96fc9cd94059b42f99577f7c38a8"
+        },
+        "candidate.stderr": {
+          "path": "docs/acceptance/parity/canonical-2026-10-11T14-44-25.690Z/16-depth-64.candidate.stderr",
+          "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      }
+    },
+    {
+      "name": "depth-65",
+      "input": {
+        "path": "docs/acceptance/parity/canonical-2026-10-11T14-44-25.690Z/17-depth-65.input.json",
+        "digest": "sha256:2574b71c86249bc36bf15157b4883f41da049924b6ddd4477f68af56d73d76b2"
+      },
+      "originalObligations": [
+        "parity:e00f2c7687a7f8ed1dc4"
+      ],
+      "coverage": "Component probe; original test case is not claimed closed by this probe.",
+      "rule": "accepted-domain-exact",
+      "result": "missing-capability",
+      "referenceOutcome": {
+        "status": "accepted",
+        "canonical": "[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[0]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]",
+        "digest": "sha256:2574b71c86249bc36bf15157b4883f41da049924b6ddd4477f68af56d73d76b2"
+      },
+      "candidateOutcome": {
+        "command": [
+          "/Users/admin/dev/patamaps/patamaps/target/release/patamaps",
+          "canonical",
+          "/Users/admin/dev/patamaps/patamaps/.tools/parity/runs/canonical-ZGPCI7/17-depth-65.json"
+        ],
+        "exitCode": 1,
+        "signal": null,
+        "error": null
+      },
+      "referenceProcess": {
+        "command": [
+          "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+          "/Users/admin/dev/patamaps/patamaps/scripts/parity/reference_canonical.mjs",
+          "/Users/admin/dev/patamaps/patamaps/.tools/parity/oracles/399747a4ad05-p8pkt3pr/reference",
+          "/Users/admin/dev/patamaps/patamaps/.tools/parity/runs/canonical-ZGPCI7/17-depth-65.json"
+        ],
+        "exitCode": 0,
+        "signal": null,
+        "error": null
+      },
+      "raw": {
+        "reference.stdout": {
+          "path": "docs/acceptance/parity/canonical-2026-10-11T14-44-25.690Z/17-depth-65.reference.stdout",
+          "digest": "sha256:bb3fa3ec50d831200824163200f922715daa9c146dc4a45a52ff5bc3b40ab771"
+        },
+        "reference.stderr": {
+          "path": "docs/acceptance/parity/canonical-2026-10-11T14-44-25.690Z/17-depth-65.reference.stderr",
+          "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "candidate.stdout": {
+          "path": "docs/acceptance/parity/canonical-2026-10-11T14-44-25.690Z/17-depth-65.candidate.stdout",
+          "digest": "sha256:efbd1ae0803f406ff434b20e584d69a2eaeded56c5071e15b71a8bec3d42cd62"
+        },
+        "candidate.stderr": {
+          "path": "docs/acceptance/parity/canonical-2026-10-11T14-44-25.690Z/17-depth-65.candidate.stderr",
+          "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      }
+    },
+    {
+      "name": "depth-128",
+      "input": {
+        "path": "docs/acceptance/parity/canonical-2026-10-11T14-44-25.690Z/18-depth-128.input.json",
+        "digest": "sha256:a87f12d34d179c4dd058f06d205b96585bd84797eab5360fe32bc414d56028ba"
+      },
+      "originalObligations": [
+        "parity:e00f2c7687a7f8ed1dc4"
+      ],
+      "coverage": "Component probe; original test case is not claimed closed by this probe.",
+      "rule": "accepted-domain-exact",
+      "result": "missing-capability",
+      "referenceOutcome": {
+        "status": "accepted",
+        "canonical": "[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[0]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]",
+        "digest": "sha256:a87f12d34d179c4dd058f06d205b96585bd84797eab5360fe32bc414d56028ba"
+      },
+      "candidateOutcome": {
+        "command": [
+          "/Users/admin/dev/patamaps/patamaps/target/release/patamaps",
+          "canonical",
+          "/Users/admin/dev/patamaps/patamaps/.tools/parity/runs/canonical-ZGPCI7/18-depth-128.json"
+        ],
+        "exitCode": 1,
+        "signal": null,
+        "error": null
+      },
+      "referenceProcess": {
+        "command": [
+          "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+          "/Users/admin/dev/patamaps/patamaps/scripts/parity/reference_canonical.mjs",
+          "/Users/admin/dev/patamaps/patamaps/.tools/parity/oracles/399747a4ad05-p8pkt3pr/reference",
+          "/Users/admin/dev/patamaps/patamaps/.tools/parity/runs/canonical-ZGPCI7/18-depth-128.json"
+        ],
+        "exitCode": 0,
+        "signal": null,
+        "error": null
+      },
+      "raw": {
+        "reference.stdout": {
+          "path": "docs/acceptance/parity/canonical-2026-10-11T14-44-25.690Z/18-depth-128.reference.stdout",
+          "digest": "sha256:431e986c26a56d42172010db4463c8187629723b212b9db721ac328f15a17788"
+        },
+        "reference.stderr": {
+          "path": "docs/acceptance/parity/canonical-2026-10-11T14-44-25.690Z/18-depth-128.reference.stderr",
+          "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "candidate.stdout": {
+          "path": "docs/acceptance/parity/canonical-2026-10-11T14-44-25.690Z/18-depth-128.candidate.stdout",
+          "digest": "sha256:efbd1ae0803f406ff434b20e584d69a2eaeded56c5071e15b71a8bec3d42cd62"
+        },
+        "candidate.stderr": {
+          "path": "docs/acceptance/parity/canonical-2026-10-11T14-44-25.690Z/18-depth-128.candidate.stderr",
+          "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      }
+    },
+    {
+      "name": "depth-512",
+      "input": {
+        "path": "docs/acceptance/parity/canonical-2026-10-11T14-44-25.690Z/19-depth-512.input.json",
+        "digest": "sha256:8ffc0a1c6c684d5a33431fd2d1cd8295423335157134c42b1ee0be9ab57b36eb"
+      },
+      "originalObligations": [
+        "parity:e00f2c7687a7f8ed1dc4"
+      ],
+      "coverage": "Component probe; original test case is not claimed closed by this probe.",
+      "rule": "accepted-domain-exact",
+      "result": "missing-capability",
+      "referenceOutcome": {
+        "status": "accepted",
+        "canonical": "[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[0]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]",
+        "digest": "sha256:8ffc0a1c6c684d5a33431fd2d1cd8295423335157134c42b1ee0be9ab57b36eb"
+      },
+      "candidateOutcome": {
+        "command": [
+          "/Users/admin/dev/patamaps/patamaps/target/release/patamaps",
+          "canonical",
+          "/Users/admin/dev/patamaps/patamaps/.tools/parity/runs/canonical-ZGPCI7/19-depth-512.json"
+        ],
+        "exitCode": 1,
+        "signal": null,
+        "error": null
+      },
+      "referenceProcess": {
+        "command": [
+          "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+          "/Users/admin/dev/patamaps/patamaps/scripts/parity/reference_canonical.mjs",
+          "/Users/admin/dev/patamaps/patamaps/.tools/parity/oracles/399747a4ad05-p8pkt3pr/reference",
+          "/Users/admin/dev/patamaps/patamaps/.tools/parity/runs/canonical-ZGPCI7/19-depth-512.json"
+        ],
+        "exitCode": 0,
+        "signal": null,
+        "error": null
+      },
+      "raw": {
+        "reference.stdout": {
+          "path": "docs/acceptance/parity/canonical-2026-10-11T14-44-25.690Z/19-depth-512.reference.stdout",
+          "digest": "sha256:55da0e6745b9fb00601430b391858d5702d0f17914b7dfbd9c75f83049cc6d00"
+        },
+        "reference.stderr": {
+          "path": "docs/acceptance/parity/canonical-2026-10-11T14-44-25.690Z/19-depth-512.reference.stderr",
+          "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "candidate.stdout": {
+          "path": "docs/acceptance/parity/canonical-2026-10-11T14-44-25.690Z/19-depth-512.candidate.stdout",
+          "digest": "sha256:efbd1ae0803f406ff434b20e584d69a2eaeded56c5071e15b71a8bec3d42cd62"
+        },
+        "candidate.stderr": {
+          "path": "docs/acceptance/parity/canonical-2026-10-11T14-44-25.690Z/19-depth-512.candidate.stderr",
+          "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      }
+    },
+    {
+      "name": "depth-513",
+      "input": {
+        "path": "docs/acceptance/parity/canonical-2026-10-11T14-44-25.690Z/20-depth-513.input.json",
+        "digest": "sha256:2755a3d42cecfe819923ad47e99c120dd28fdd9ef0418af7ee4764477f3a725f"
+      },
+      "originalObligations": [
+        "parity:e00f2c7687a7f8ed1dc4"
+      ],
+      "coverage": "Component probe; original test case is not claimed closed by this probe.",
+      "rule": "accepted-domain-exact",
+      "result": "equivalent-refusal-with-unresolved-diagnostics",
+      "referenceOutcome": {
+        "status": "refused",
+        "name": "CanonicalJsonError",
+        "code": "JSON_DEPTH_LIMIT",
+        "message": "JSON input exceeds 512 levels"
+      },
+      "candidateOutcome": {
+        "command": [
+          "/Users/admin/dev/patamaps/patamaps/target/release/patamaps",
+          "canonical",
+          "/Users/admin/dev/patamaps/patamaps/.tools/parity/runs/canonical-ZGPCI7/20-depth-513.json"
+        ],
+        "exitCode": 1,
+        "signal": null,
+        "error": null
+      },
+      "referenceProcess": {
+        "command": [
+          "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+          "/Users/admin/dev/patamaps/patamaps/scripts/parity/reference_canonical.mjs",
+          "/Users/admin/dev/patamaps/patamaps/.tools/parity/oracles/399747a4ad05-p8pkt3pr/reference",
+          "/Users/admin/dev/patamaps/patamaps/.tools/parity/runs/canonical-ZGPCI7/20-depth-513.json"
+        ],
+        "exitCode": 0,
+        "signal": null,
+        "error": null
+      },
+      "raw": {
+        "reference.stdout": {
+          "path": "docs/acceptance/parity/canonical-2026-10-11T14-44-25.690Z/20-depth-513.reference.stdout",
+          "digest": "sha256:527b49a4c203946a5fe0892fc3bc66a673180974d64a2a12d4ee1b8bc08bfcb4"
+        },
+        "reference.stderr": {
+          "path": "docs/acceptance/parity/canonical-2026-10-11T14-44-25.690Z/20-depth-513.reference.stderr",
+          "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "candidate.stdout": {
+          "path": "docs/acceptance/parity/canonical-2026-10-11T14-44-25.690Z/20-depth-513.candidate.stdout",
+          "digest": "sha256:efbd1ae0803f406ff434b20e584d69a2eaeded56c5071e15b71a8bec3d42cd62"
+        },
+        "candidate.stderr": {
+          "path": "docs/acceptance/parity/canonical-2026-10-11T14-44-25.690Z/20-depth-513.candidate.stderr",
+          "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      }
+    },
+    {
+      "name": "depth-514",
+      "input": {
+        "path": "docs/acceptance/parity/canonical-2026-10-11T14-44-25.690Z/21-depth-514.input.json",
+        "digest": "sha256:3595f468c958194744fc9c34e182c6b787ca050c09b855b50b0a8a74c7e925d3"
+      },
+      "originalObligations": [
+        "parity:e00f2c7687a7f8ed1dc4"
+      ],
+      "coverage": "Component probe; original test case is not claimed closed by this probe.",
+      "rule": "accepted-domain-exact",
+      "result": "equivalent-refusal-with-unresolved-diagnostics",
+      "referenceOutcome": {
+        "status": "refused",
+        "name": "CanonicalJsonError",
+        "code": "JSON_DEPTH_LIMIT",
+        "message": "JSON input exceeds 512 levels"
+      },
+      "candidateOutcome": {
+        "command": [
+          "/Users/admin/dev/patamaps/patamaps/target/release/patamaps",
+          "canonical",
+          "/Users/admin/dev/patamaps/patamaps/.tools/parity/runs/canonical-ZGPCI7/21-depth-514.json"
+        ],
+        "exitCode": 1,
+        "signal": null,
+        "error": null
+      },
+      "referenceProcess": {
+        "command": [
+          "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+          "/Users/admin/dev/patamaps/patamaps/scripts/parity/reference_canonical.mjs",
+          "/Users/admin/dev/patamaps/patamaps/.tools/parity/oracles/399747a4ad05-p8pkt3pr/reference",
+          "/Users/admin/dev/patamaps/patamaps/.tools/parity/runs/canonical-ZGPCI7/21-depth-514.json"
+        ],
+        "exitCode": 0,
+        "signal": null,
+        "error": null
+      },
+      "raw": {
+        "reference.stdout": {
+          "path": "docs/acceptance/parity/canonical-2026-10-11T14-44-25.690Z/21-depth-514.reference.stdout",
+          "digest": "sha256:527b49a4c203946a5fe0892fc3bc66a673180974d64a2a12d4ee1b8bc08bfcb4"
+        },
+        "reference.stderr": {
+          "path": "docs/acceptance/parity/canonical-2026-10-11T14-44-25.690Z/21-depth-514.reference.stderr",
+          "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "candidate.stdout": {
+          "path": "docs/acceptance/parity/canonical-2026-10-11T14-44-25.690Z/21-depth-514.candidate.stdout",
+          "digest": "sha256:efbd1ae0803f406ff434b20e584d69a2eaeded56c5071e15b71a8bec3d42cd62"
+        },
+        "candidate.stderr": {
+          "path": "docs/acceptance/parity/canonical-2026-10-11T14-44-25.690Z/21-depth-514.candidate.stderr",
+          "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      }
+    },
+    {
+      "name": "decoded-duplicate-0",
+      "input": {
+        "path": "docs/acceptance/parity/canonical-2026-10-11T14-44-25.690Z/22-decoded-duplicate-0.input.json",
+        "digest": "sha256:1c53ee0df7b12fd4d65b976120c7fa6b847dc41dffd7f0331c3237a1ceab1756"
+      },
+      "originalObligations": [
+        "parity:7318aa7b3a80a0c03a8f",
+        "parity:ec15b2ec5960b508a1b0",
+        "parity:ffabf87f828ddac6e59e",
+        "parity:dd9cfc90dd606b2d4ec6"
+      ],
+      "coverage": "Component probe; original test case is not claimed closed by this probe.",
+      "rule": "strict-json-refusal",
+      "result": "equivalent-refusal-with-unresolved-diagnostics",
+      "referenceOutcome": {
+        "status": "refused",
+        "name": "CanonicalJsonError",
+        "code": "DUPLICATE_JSON_KEY",
+        "message": "Duplicate JSON property \"a\""
+      },
+      "candidateOutcome": {
+        "command": [
+          "/Users/admin/dev/patamaps/patamaps/target/release/patamaps",
+          "canonical",
+          "/Users/admin/dev/patamaps/patamaps/.tools/parity/runs/canonical-ZGPCI7/22-decoded-duplicate-0.json"
+        ],
+        "exitCode": 1,
+        "signal": null,
+        "error": null
+      },
+      "referenceProcess": {
+        "command": [
+          "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+          "/Users/admin/dev/patamaps/patamaps/scripts/parity/reference_canonical.mjs",
+          "/Users/admin/dev/patamaps/patamaps/.tools/parity/oracles/399747a4ad05-p8pkt3pr/reference",
+          "/Users/admin/dev/patamaps/patamaps/.tools/parity/runs/canonical-ZGPCI7/22-decoded-duplicate-0.json"
+        ],
+        "exitCode": 0,
+        "signal": null,
+        "error": null
+      },
+      "raw": {
+        "reference.stdout": {
+          "path": "docs/acceptance/parity/canonical-2026-10-11T14-44-25.690Z/22-decoded-duplicate-0.reference.stdout",
+          "digest": "sha256:c1f292c12984762fef9908d547d172ba7a39e0392d54b5a01149e52e2e6fc094"
+        },
+        "reference.stderr": {
+          "path": "docs/acceptance/parity/canonical-2026-10-11T14-44-25.690Z/22-decoded-duplicate-0.reference.stderr",
+          "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "candidate.stdout": {
+          "path": "docs/acceptance/parity/canonical-2026-10-11T14-44-25.690Z/22-decoded-duplicate-0.candidate.stdout",
+          "digest": "sha256:9edb61095bdfb9a8375dd50e9c6d69a2e720964ca09d503ebd37ffe37b68c449"
+        },
+        "candidate.stderr": {
+          "path": "docs/acceptance/parity/canonical-2026-10-11T14-44-25.690Z/22-decoded-duplicate-0.candidate.stderr",
+          "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      }
+    },
+    {
+      "name": "decoded-duplicate-1",
+      "input": {
+        "path": "docs/acceptance/parity/canonical-2026-10-11T14-44-25.690Z/23-decoded-duplicate-1.input.json",
+        "digest": "sha256:c95ba945b310a34906bbfc28ce1346b87741d5a2b3066d1d3ecfa0acbd86392c"
+      },
+      "originalObligations": [
+        "parity:7318aa7b3a80a0c03a8f",
+        "parity:ec15b2ec5960b508a1b0",
+        "parity:ffabf87f828ddac6e59e",
+        "parity:dd9cfc90dd606b2d4ec6"
+      ],
+      "coverage": "Component probe; original test case is not claimed closed by this probe.",
+      "rule": "strict-json-refusal",
+      "result": "equivalent-refusal-with-unresolved-diagnostics",
+      "referenceOutcome": {
+        "status": "refused",
+        "name": "CanonicalJsonError",
+        "code": "DUPLICATE_JSON_KEY",
+        "message": "Duplicate JSON property \"a\""
+      },
+      "candidateOutcome": {
+        "command": [
+          "/Users/admin/dev/patamaps/patamaps/target/release/patamaps",
+          "canonical",
+          "/Users/admin/dev/patamaps/patamaps/.tools/parity/runs/canonical-ZGPCI7/23-decoded-duplicate-1.json"
+        ],
+        "exitCode": 1,
+        "signal": null,
+        "error": null
+      },
+      "referenceProcess": {
+        "command": [
+          "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+          "/Users/admin/dev/patamaps/patamaps/scripts/parity/reference_canonical.mjs",
+          "/Users/admin/dev/patamaps/patamaps/.tools/parity/oracles/399747a4ad05-p8pkt3pr/reference",
+          "/Users/admin/dev/patamaps/patamaps/.tools/parity/runs/canonical-ZGPCI7/23-decoded-duplicate-1.json"
+        ],
+        "exitCode": 0,
+        "signal": null,
+        "error": null
+      },
+      "raw": {
+        "reference.stdout": {
+          "path": "docs/acceptance/parity/canonical-2026-10-11T14-44-25.690Z/23-decoded-duplicate-1.reference.stdout",
+          "digest": "sha256:c1f292c12984762fef9908d547d172ba7a39e0392d54b5a01149e52e2e6fc094"
+        },
+        "reference.stderr": {
+          "path": "docs/acceptance/parity/canonical-2026-10-11T14-44-25.690Z/23-decoded-duplicate-1.reference.stderr",
+          "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "candidate.stdout": {
+          "path": "docs/acceptance/parity/canonical-2026-10-11T14-44-25.690Z/23-decoded-duplicate-1.candidate.stdout",
+          "digest": "sha256:e8418b36f0c3fc5b21170fa76fb8fe812e4960f9e6d8d975c92db986f4d39304"
+        },
+        "candidate.stderr": {
+          "path": "docs/acceptance/parity/canonical-2026-10-11T14-44-25.690Z/23-decoded-duplicate-1.candidate.stderr",
+          "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      }
+    },
+    {
+      "name": "decoded-duplicate-2",
+      "input": {
+        "path": "docs/acceptance/parity/canonical-2026-10-11T14-44-25.690Z/24-decoded-duplicate-2.input.json",
+        "digest": "sha256:82a62eb760c614c071e993c9ad723a6bd3fa580ad37d03c31d4977ea6115443b"
+      },
+      "originalObligations": [
+        "parity:7318aa7b3a80a0c03a8f",
+        "parity:ec15b2ec5960b508a1b0",
+        "parity:ffabf87f828ddac6e59e",
+        "parity:dd9cfc90dd606b2d4ec6"
+      ],
+      "coverage": "Component probe; original test case is not claimed closed by this probe.",
+      "rule": "strict-json-refusal",
+      "result": "equivalent-refusal-with-unresolved-diagnostics",
+      "referenceOutcome": {
+        "status": "refused",
+        "name": "CanonicalJsonError",
+        "code": "DUPLICATE_JSON_KEY",
+        "message": "Duplicate JSON property \"x\""
+      },
+      "candidateOutcome": {
+        "command": [
+          "/Users/admin/dev/patamaps/patamaps/target/release/patamaps",
+          "canonical",
+          "/Users/admin/dev/patamaps/patamaps/.tools/parity/runs/canonical-ZGPCI7/24-decoded-duplicate-2.json"
+        ],
+        "exitCode": 1,
+        "signal": null,
+        "error": null
+      },
+      "referenceProcess": {
+        "command": [
+          "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+          "/Users/admin/dev/patamaps/patamaps/scripts/parity/reference_canonical.mjs",
+          "/Users/admin/dev/patamaps/patamaps/.tools/parity/oracles/399747a4ad05-p8pkt3pr/reference",
+          "/Users/admin/dev/patamaps/patamaps/.tools/parity/runs/canonical-ZGPCI7/24-decoded-duplicate-2.json"
+        ],
+        "exitCode": 0,
+        "signal": null,
+        "error": null
+      },
+      "raw": {
+        "reference.stdout": {
+          "path": "docs/acceptance/parity/canonical-2026-10-11T14-44-25.690Z/24-decoded-duplicate-2.reference.stdout",
+          "digest": "sha256:45f8d396bfe444d3d9487fb7eb2321babbf237522dc74d6952c736dc5d096bcf"
+        },
+        "reference.stderr": {
+          "path": "docs/acceptance/parity/canonical-2026-10-11T14-44-25.690Z/24-decoded-duplicate-2.reference.stderr",
+          "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "candidate.stdout": {
+          "path": "docs/acceptance/parity/canonical-2026-10-11T14-44-25.690Z/24-decoded-duplicate-2.candidate.stdout",
+          "digest": "sha256:16b0988359b79a58ae7ca33711eeb7a84b2ca02035c55e99d23649b20aa6616a"
+        },
+        "candidate.stderr": {
+          "path": "docs/acceptance/parity/canonical-2026-10-11T14-44-25.690Z/24-decoded-duplicate-2.candidate.stderr",
+          "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      }
+    },
+    {
+      "name": "decoded-duplicate-3",
+      "input": {
+        "path": "docs/acceptance/parity/canonical-2026-10-11T14-44-25.690Z/25-decoded-duplicate-3.input.json",
+        "digest": "sha256:5d01d21c323476b72ae19c3d918d96deead22a34ae33dd92246313c3f106a2e7"
+      },
+      "originalObligations": [
+        "parity:7318aa7b3a80a0c03a8f",
+        "parity:ec15b2ec5960b508a1b0",
+        "parity:ffabf87f828ddac6e59e",
+        "parity:dd9cfc90dd606b2d4ec6"
+      ],
+      "coverage": "Component probe; original test case is not claimed closed by this probe.",
+      "rule": "strict-json-refusal",
+      "result": "equivalent-refusal-with-unresolved-diagnostics",
+      "referenceOutcome": {
+        "status": "refused",
+        "name": "CanonicalJsonError",
+        "code": "DUPLICATE_JSON_KEY",
+        "message": "Duplicate JSON property \"x\""
+      },
+      "candidateOutcome": {
+        "command": [
+          "/Users/admin/dev/patamaps/patamaps/target/release/patamaps",
+          "canonical",
+          "/Users/admin/dev/patamaps/patamaps/.tools/parity/runs/canonical-ZGPCI7/25-decoded-duplicate-3.json"
+        ],
+        "exitCode": 1,
+        "signal": null,
+        "error": null
+      },
+      "referenceProcess": {
+        "command": [
+          "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+          "/Users/admin/dev/patamaps/patamaps/scripts/parity/reference_canonical.mjs",
+          "/Users/admin/dev/patamaps/patamaps/.tools/parity/oracles/399747a4ad05-p8pkt3pr/reference",
+          "/Users/admin/dev/patamaps/patamaps/.tools/parity/runs/canonical-ZGPCI7/25-decoded-duplicate-3.json"
+        ],
+        "exitCode": 0,
+        "signal": null,
+        "error": null
+      },
+      "raw": {
+        "reference.stdout": {
+          "path": "docs/acceptance/parity/canonical-2026-10-11T14-44-25.690Z/25-decoded-duplicate-3.reference.stdout",
+          "digest": "sha256:45f8d396bfe444d3d9487fb7eb2321babbf237522dc74d6952c736dc5d096bcf"
+        },
+        "reference.stderr": {
+          "path": "docs/acceptance/parity/canonical-2026-10-11T14-44-25.690Z/25-decoded-duplicate-3.reference.stderr",
+          "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "candidate.stdout": {
+          "path": "docs/acceptance/parity/canonical-2026-10-11T14-44-25.690Z/25-decoded-duplicate-3.candidate.stdout",
+          "digest": "sha256:fc952f820dba924956a9e5550af0fd2a5c865bd903360ede1ac45403a92388b0"
+        },
+        "candidate.stderr": {
+          "path": "docs/acceptance/parity/canonical-2026-10-11T14-44-25.690Z/25-decoded-duplicate-3.candidate.stderr",
+          "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      }
+    },
+    {
+      "name": "nonfinite-number",
+      "input": {
+        "path": "docs/acceptance/parity/canonical-2026-10-11T14-44-25.690Z/26-nonfinite-number.input.json",
+        "digest": "sha256:cb013dcc16fe0e5ca4b3588e94fedb08d57d0671c0bc216f27e5cd61b59d77b0"
+      },
+      "originalObligations": [
+        "parity:e00f2c7687a7f8ed1dc4"
+      ],
+      "coverage": "Component probe; original test case is not claimed closed by this probe.",
+      "rule": "strict-json-refusal",
+      "result": "equivalent-refusal-with-unresolved-diagnostics",
+      "referenceOutcome": {
+        "status": "refused",
+        "name": "CanonicalJsonError",
+        "code": "INVALID_JSON_VALUE",
+        "message": "JSON numbers must be finite IEEE-754 values"
+      },
+      "candidateOutcome": {
+        "command": [
+          "/Users/admin/dev/patamaps/patamaps/target/release/patamaps",
+          "canonical",
+          "/Users/admin/dev/patamaps/patamaps/.tools/parity/runs/canonical-ZGPCI7/26-nonfinite-number.json"
+        ],
+        "exitCode": 1,
+        "signal": null,
+        "error": null
+      },
+      "referenceProcess": {
+        "command": [
+          "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+          "/Users/admin/dev/patamaps/patamaps/scripts/parity/reference_canonical.mjs",
+          "/Users/admin/dev/patamaps/patamaps/.tools/parity/oracles/399747a4ad05-p8pkt3pr/reference",
+          "/Users/admin/dev/patamaps/patamaps/.tools/parity/runs/canonical-ZGPCI7/26-nonfinite-number.json"
+        ],
+        "exitCode": 0,
+        "signal": null,
+        "error": null
+      },
+      "raw": {
+        "reference.stdout": {
+          "path": "docs/acceptance/parity/canonical-2026-10-11T14-44-25.690Z/26-nonfinite-number.reference.stdout",
+          "digest": "sha256:006a3c7f5e24db0fbbcabaabd2f33aed055b2858dc0145d76320780412e1a270"
+        },
+        "reference.stderr": {
+          "path": "docs/acceptance/parity/canonical-2026-10-11T14-44-25.690Z/26-nonfinite-number.reference.stderr",
+          "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "candidate.stdout": {
+          "path": "docs/acceptance/parity/canonical-2026-10-11T14-44-25.690Z/26-nonfinite-number.candidate.stdout",
+          "digest": "sha256:0008dc0ebbd2231418f78c16010ff13518350e8176a564874231e7a670858088"
+        },
+        "candidate.stderr": {
+          "path": "docs/acceptance/parity/canonical-2026-10-11T14-44-25.690Z/26-nonfinite-number.candidate.stderr",
+          "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      }
+    },
+    {
+      "name": "trailing-comma",
+      "input": {
+        "path": "docs/acceptance/parity/canonical-2026-10-11T14-44-25.690Z/27-trailing-comma.input.json",
+        "digest": "sha256:9494e756b4958883d33b48d5240ae5a21cf59d453a9720fbb4dfba20a211b66c"
+      },
+      "originalObligations": [
+        "parity:e00f2c7687a7f8ed1dc4"
+      ],
+      "coverage": "Component probe; original test case is not claimed closed by this probe.",
+      "rule": "strict-json-refusal",
+      "result": "equivalent-refusal-with-unresolved-diagnostics",
+      "referenceOutcome": {
+        "status": "refused",
+        "name": "CanonicalJsonError",
+        "code": "INVALID_JSON_SYNTAX",
+        "message": "Invalid JSON syntax"
+      },
+      "candidateOutcome": {
+        "command": [
+          "/Users/admin/dev/patamaps/patamaps/target/release/patamaps",
+          "canonical",
+          "/Users/admin/dev/patamaps/patamaps/.tools/parity/runs/canonical-ZGPCI7/27-trailing-comma.json"
+        ],
+        "exitCode": 1,
+        "signal": null,
+        "error": null
+      },
+      "referenceProcess": {
+        "command": [
+          "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+          "/Users/admin/dev/patamaps/patamaps/scripts/parity/reference_canonical.mjs",
+          "/Users/admin/dev/patamaps/patamaps/.tools/parity/oracles/399747a4ad05-p8pkt3pr/reference",
+          "/Users/admin/dev/patamaps/patamaps/.tools/parity/runs/canonical-ZGPCI7/27-trailing-comma.json"
+        ],
+        "exitCode": 0,
+        "signal": null,
+        "error": null
+      },
+      "raw": {
+        "reference.stdout": {
+          "path": "docs/acceptance/parity/canonical-2026-10-11T14-44-25.690Z/27-trailing-comma.reference.stdout",
+          "digest": "sha256:11cd4523d702717128411930ef970fb6b98418a63c688b1baec9b0de9915e5f5"
+        },
+        "reference.stderr": {
+          "path": "docs/acceptance/parity/canonical-2026-10-11T14-44-25.690Z/27-trailing-comma.reference.stderr",
+          "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "candidate.stdout": {
+          "path": "docs/acceptance/parity/canonical-2026-10-11T14-44-25.690Z/27-trailing-comma.candidate.stdout",
+          "digest": "sha256:95a595c9c122fe970670a0a7002ae7b4fc166d4e87e485b1553d3b537e981b54"
+        },
+        "candidate.stderr": {
+          "path": "docs/acceptance/parity/canonical-2026-10-11T14-44-25.690Z/27-trailing-comma.candidate.stderr",
+          "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      }
+    }
+  ],
+  "counts": {
+    "total": 28,
+    "capabilityGaps": 3,
+    "unresolvedDiagnosticComparisons": 8,
+    "originalCasesClosed": 0
+  },
+  "retainedRun": ".tools/parity/runs/canonical-ZGPCI7",
+  "cleanup": "No deletion; original inputs, both process outputs and isolated oracle retained"
+}

@@ -1,0 +1,152 @@
+{
+  "schemaVersion": "1.0.0",
+  "status": "failed",
+  "commands": [
+    {
+      "label": "build",
+      "command": [
+        "/Users/admin/.cargo/bin/cargo",
+        "build",
+        "--locked",
+        "-p",
+        "patamaps-cli"
+      ],
+      "exitCode": 0
+    },
+    {
+      "label": "evaluation-controls",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "scripts/parity/evaluation_contracts.mjs"
+      ],
+      "exitCode": 0
+    },
+    {
+      "label": "evaluation-expanded-controls",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "scripts/parity/evaluation_contracts.mjs",
+        "--expanded"
+      ],
+      "exitCode": 0
+    },
+    {
+      "label": "original-evaluation",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "scripts/parity/original.mjs",
+        "--evaluation"
+      ],
+      "exitCode": 0,
+      "attachmentExitCode": 1,
+      "attachedObligationsVerified": true
+    },
+    {
+      "label": "original-core-data",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "scripts/parity/original.mjs",
+        "--core-data"
+      ],
+      "exitCode": 0,
+      "attachmentExitCode": 1,
+      "attachedObligationsVerified": true
+    },
+    {
+      "label": "cli-controls",
+      "command": [
+        "/opt/homebrew/bin/python3",
+        "-B",
+        "scripts/parity/cli_contracts.py"
+      ],
+      "exitCode": 0
+    },
+    {
+      "label": "cli-expanded-controls",
+      "command": [
+        "/opt/homebrew/bin/python3",
+        "-B",
+        "scripts/parity/cli_contracts.py",
+        "--expanded"
+      ],
+      "exitCode": 0
+    },
+    {
+      "label": "migration-controls",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "scripts/parity/migration_contracts.mjs"
+      ],
+      "exitCode": 0
+    },
+    {
+      "label": "original-migration",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "scripts/parity/original.mjs",
+        "--migration"
+      ],
+      "exitCode": 0,
+      "attachmentExitCode": 1,
+      "attachedObligationsVerified": true
+    },
+    {
+      "label": "clippy",
+      "command": [
+        "/Users/admin/.cargo/bin/cargo",
+        "clippy",
+        "--locked",
+        "--workspace",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exitCode": 101
+    }
+  ],
+  "functionalEvidence": [
+    {
+      "path": "docs/acceptance/parity/evaluation-controls-2026-10-13T00-59-51.089Z/receipt.json",
+      "digest": "sha256:875e17607815a5e2b5baed9ad624353e7cc771405e4cf105a1690ff92e12fff8"
+    },
+    {
+      "path": "docs/acceptance/parity/evaluation-controls-2026-10-13T00-59-55.061Z/receipt.json",
+      "digest": "sha256:d3c22c16c3988d4b96a2c2004f395eca52fdb683636485bbcc7d31e998827f28"
+    },
+    {
+      "path": "docs/acceptance/parity/original-evaluation-2026-10-13T00-59-56.143Z/receipt.json",
+      "digest": "sha256:73eda2ec6ef87d55d42657ad343b53026018ab0d082b1515b2090e1a071fd657"
+    },
+    {
+      "path": "docs/acceptance/parity/original-core-data-2026-10-13T00-59-58.645Z/receipt.json",
+      "digest": "sha256:95a619ca9f70c53447dd38a296b89bf6de24a3537383b85bd640610375e5aa3b"
+    },
+    {
+      "path": "docs/acceptance/parity/cli-controls-2026-10-13T00-59-59.962605+00-00/receipt.json",
+      "digest": "sha256:7d36f586a9f62d35a330c561c116ee64ac7ccfa9995fdb6757cc16788611c99d"
+    },
+    {
+      "path": "docs/acceptance/parity/cli-controls-2026-10-13T01-00-15.752982+00-00/receipt.json",
+      "digest": "sha256:36f2712660b87a163f5d5115fc02ec8cc4115593c326b352d15a55608fe748b3"
+    },
+    {
+      "path": "docs/acceptance/parity/migration-controls-2026-10-13T01-00-21.854Z/receipt.json",
+      "digest": "sha256:f7dc9019947d7da99dbf4dcb1c35a20190886824f3c5fcd13e3e8795275ec256"
+    },
+    {
+      "path": "docs/acceptance/parity/original-migration-2026-10-13T01-00-22.490Z/receipt.json",
+      "digest": "sha256:7062a827ef549c7a84a8ff4eab79af42be8d093b84750900d9d34674f491abbf"
+    }
+  ],
+  "binaryDigest": "sha256:8b190157ab85061b57ab05781dbfc93d32b9639deef6a17ca9dd4861eb21d813",
+  "candidateEngine": {
+    "compiler": "sha256:35dbe079d6196f86bb403b2bbf0b473978c030268fe32b72bd1930cfa23ef5be",
+    "documentType": "executor-description",
+    "governance": "sha256:b13497be145a1005ad0dbfb3f0997f7c6833ec0417e7bc62f47955f8309578c3",
+    "schemaVersion": "0.1.0",
+    "scientific": "sha256:cfa7830cfc3fa603550bd4114edfec457ca68f4bf807a4434c6335de43417e3b",
+    "workspace": "sha256:4913aebe6824c3e51a2838b8f217ad76c28299100890ebb99a5f4e7a1561d423"
+  },
+  "scope": "Full prior portable/component/installed/original callback refresh plus original context/selector/impact observations. Full P0-P9 completion remains unresolved."
+}

@@ -1,0 +1,265 @@
+{
+  "schemaVersion": "1.0.0",
+  "status": "failed",
+  "commands": [
+    {
+      "label": "build",
+      "command": [
+        "/Users/admin/.cargo/bin/cargo",
+        "build",
+        "--locked",
+        "-p",
+        "patamaps-cli"
+      ],
+      "exitCode": 0
+    },
+    {
+      "label": "clippy",
+      "command": [
+        "/Users/admin/.cargo/bin/cargo",
+        "clippy",
+        "--locked",
+        "--workspace",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exitCode": 0
+    },
+    {
+      "label": "native",
+      "command": [
+        "/opt/homebrew/bin/python3",
+        "-B",
+        "scripts/parity/native.py"
+      ],
+      "exitCode": 0
+    },
+    {
+      "label": "installed-sdk",
+      "command": [
+        "/opt/homebrew/bin/python3",
+        "-B",
+        "scripts/parity/sdk_consumer.py"
+      ],
+      "exitCode": 0,
+      "reusedReceipt": "docs/acceptance/parity/sdk-consumer-2026-10-12T23-22-55.960374Z/receipt.json",
+      "reusedReceiptDigest": "sha256:94a3c0352ed48895d0881244c976cb46592a8c095f228ca85a8894ccaed26328"
+    },
+    {
+      "label": "config-controls",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "scripts/parity/config_contracts.mjs"
+      ],
+      "exitCode": 0
+    },
+    {
+      "label": "correspondence-controls",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "scripts/parity/correspondence_contracts.mjs"
+      ],
+      "exitCode": 0
+    },
+    {
+      "label": "reference-controls",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "scripts/parity/reference_contracts.mjs"
+      ],
+      "exitCode": 0
+    },
+    {
+      "label": "reporting-controls",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "scripts/parity/reporting_contracts.mjs"
+      ],
+      "exitCode": 0
+    },
+    {
+      "label": "digest-controls",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "scripts/parity/digest_contracts.mjs"
+      ],
+      "exitCode": 0
+    },
+    {
+      "label": "digest-utf16-controls",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "scripts/parity/digest_contracts.mjs",
+        "--utf16"
+      ],
+      "exitCode": 0
+    },
+    {
+      "label": "composition-controls",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "scripts/parity/composition_contracts.mjs"
+      ],
+      "exitCode": 0
+    },
+    {
+      "label": "graph-controls",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "scripts/parity/graph_contracts.mjs"
+      ],
+      "exitCode": 0
+    },
+    {
+      "label": "factory-control",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "/Users/admin/dev/patamaps/patamaps/docs/acceptance/parity/workspace-functional-refresh-2026-10-12T23-24-36.315937+00-00/factory-check.mjs"
+      ],
+      "exitCode": 0
+    },
+    {
+      "label": "registry-controls",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "scripts/parity/registry_contracts.mjs"
+      ],
+      "exitCode": 0
+    },
+    {
+      "label": "file-controls",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "scripts/parity/pack_contracts.mjs",
+        "--files"
+      ],
+      "exitCode": 0
+    },
+    {
+      "label": "nested-controls",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "scripts/parity/pack_contracts.mjs",
+        "--nested"
+      ],
+      "exitCode": 0
+    },
+    {
+      "label": "pack-controls",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "scripts/parity/pack_contracts.mjs"
+      ],
+      "exitCode": 0
+    },
+    {
+      "label": "frozen-validation",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "scripts/parity/legacy_validation.mjs"
+      ],
+      "exitCode": 0
+    },
+    {
+      "label": "original-canonical",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "scripts/parity/original.mjs"
+      ],
+      "exitCode": 0,
+      "attachmentExitCode": 1
+    }
+  ],
+  "functionalEvidence": [
+    {
+      "path": "docs/acceptance/parity/native-2026-10-12T23-21-14.540265Z/receipt.json",
+      "digest": "sha256:11f12147e5edf3e2fe31de12845f8c820dcb4c1e80ebd2ebaa5f7d377f60ee00"
+    },
+    {
+      "path": "docs/acceptance/parity/sdk-consumer-2026-10-12T23-22-55.960374Z/receipt.json",
+      "digest": "sha256:94a3c0352ed48895d0881244c976cb46592a8c095f228ca85a8894ccaed26328"
+    },
+    {
+      "path": "docs/acceptance/parity/config-controls-2026-10-12T23-24-55.420Z/receipt.json",
+      "digest": "sha256:5e6acb38641dd19b99a464542c99999e3ba25b1ee1be6cba78ad934e4d6df9ea"
+    },
+    {
+      "path": "docs/acceptance/parity/correspondence-controls-2026-10-12T23-24-58.417Z/receipt.json",
+      "digest": "sha256:a9e0bbedb3c6b62cd75a02aaa128ce2750d17db0585cc3d7660ab1c97708c583"
+    },
+    {
+      "path": "docs/acceptance/parity/reference-controls-2026-10-12T23-24-58.847Z/receipt.json",
+      "digest": "sha256:271e8a7e6007d20a345dcf78e97a0fe7891380e1910894edcf62df9b5ff619e7"
+    },
+    {
+      "path": "docs/acceptance/parity/reporting-controls-2026-10-12T23-24-59.802Z/receipt.json",
+      "digest": "sha256:62ee6c59e252b50684f9481112a8608cc8af72c45af39fa2cba17de0a7faeb2a"
+    },
+    {
+      "path": "docs/acceptance/parity/digest-controls-2026-10-12T23-25-00.208Z/receipt.json",
+      "digest": "sha256:4967b24e91d23b203efa53e9973ca96983a89fc0106f1f8fc0497d57d0d5bbd4"
+    },
+    {
+      "path": "docs/acceptance/parity/digest-utf16-controls-2026-10-12T23-25-00.503Z/receipt.json",
+      "digest": "sha256:8941d6da3d862d18a6616d9be113049247d6915265151ce58c2f39d938ed7419"
+    },
+    {
+      "path": "docs/acceptance/parity/composition-controls-2026-10-12T23-25-00.995Z/receipt.json",
+      "digest": "sha256:e1204afb829770e0da45901bea6c094269a8be6224ceaf58ded2772b2f848274"
+    },
+    {
+      "path": "docs/acceptance/parity/graph-controls-2026-10-12T23-25-01.356Z/receipt.json",
+      "digest": "sha256:1a711410bcd7fd50e211b71de2d26330c23dc6971f2dd1fb9d5604c5396f4d64"
+    },
+    {
+      "path": "docs/acceptance/parity/workspace-functional-refresh-2026-10-12T23-24-36.315937+00-00/factory-receipt.json",
+      "digest": "sha256:971dbd8318bbb05cfbe0dc675766657b4a5af86782e9f4681f82710ad11fa498"
+    },
+    {
+      "path": "docs/acceptance/parity/registry-controls-2026-10-12T23-25-02.336Z/receipt.json",
+      "digest": "sha256:973ee294f987ae170a93ab894dd7b02d79f19c78fa13228753980f6043ac88f9"
+    },
+    {
+      "path": "docs/acceptance/parity/pack-file-controls-2026-10-12T23-25-03.195Z/receipt.json",
+      "digest": "sha256:29789b66ad78fe703d6be9ed8bc85466855a719fb75c07414ac10ba6bf453d02"
+    },
+    {
+      "path": "docs/acceptance/parity/pack-nested-controls-2026-10-12T23-25-03.546Z/receipt.json",
+      "digest": "sha256:b8b29743ce1b0fa6d91f2d97a87d6e06dce830cbe499bed95e70c9067b1f147c"
+    },
+    {
+      "path": "docs/acceptance/parity/pack-json-controls-2026-10-12T23-25-05.599Z/receipt.json",
+      "digest": "sha256:f051451dcc9bd0df59e1d87a74f93d4668ba24f8f792a3a2e7d64122ee16440d"
+    },
+    {
+      "path": "docs/acceptance/parity/legacy-validation-2026-10-12T23-25-07.428Z/receipt.json",
+      "digest": "sha256:93b1e5b426a1bb3c880e20ef502294a9916c31fd61e8a06f4c88d12a2b3bf980"
+    },
+    {
+      "path": "docs/acceptance/parity/original-canonical-2026-10-12T23-25-14.611Z/receipt.json",
+      "digest": "sha256:dc5a3e725dc37d1bb147522432f452db69ff891b04fa29a7da7d3e1307d32b99"
+    }
+  ],
+  "reusedEvidence": [
+    {
+      "path": "docs/acceptance/parity/workspace-functional-refresh-2026-10-12T23-20-50.998726+00-00/receipt.json",
+      "digest": "sha256:d039d1a2650e72188e1913239268ede129abe06cab1cadfb4b7bfa60fbaa6b9b"
+    },
+    {
+      "path": "docs/acceptance/parity/sdk-consumer-2026-10-12T23-22-55.960374Z/receipt.json",
+      "digest": "sha256:94a3c0352ed48895d0881244c976cb46592a8c095f228ca85a8894ccaed26328"
+    }
+  ],
+  "binaryDigest": "sha256:50b9250e696779e9c0eee2d5b408303692efdcec1858622de3b5145ceb53757a",
+  "candidateEngine": {
+    "compiler": "sha256:2e22e5a5d939e50aaf59fcb488811e18e53fe8abfa78240943a7da65bc7180e7",
+    "documentType": "executor-description",
+    "governance": "sha256:d9227f346cb4ec203823fcbedb7ea8d1d9cb48cca8406e438e9d2b3d55d78225",
+    "schemaVersion": "0.1.0",
+    "scientific": "sha256:888fcc9b688d8296e853a49d2ae453cbfee933154d9ab075a224ada449f4df88",
+    "workspace": "sha256:0b7666c5ebd9bfda2883a2312c4c194d982f6222bbeddf9915521befed57864f"
+  },
+  "scope": "Current workspace/cache/outputs/custom-adapter/configuration parsing/loading/correspondence/reference/reporting/diff/digest/UTF-16/composition/graph/registry/JSON/native/installed SDK/discovery/scientific components, including the source-bound native collator patch. Original callbacks and expectations remain unchanged. Complete accepted-domain/package/platform parity remains unresolved."
+}

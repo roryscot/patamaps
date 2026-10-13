@@ -44,6 +44,26 @@ pub fn prepare_candidate_artifacts(
     consumer: &str,
     environment: &str,
 ) -> util::Result<CheckedArtifacts> {
+    prepare(candidate, consumer, environment, true)
+}
+
+/// Prepare exploratory outputs while retaining missing source receipts as
+/// references. Proposal and authorization entry points still require all source
+/// bytes and independently reproduce their artifacts.
+pub fn prepare_reference_artifacts(
+    candidate: &GovernedCandidate,
+    consumer: &str,
+    environment: &str,
+) -> util::Result<CheckedArtifacts> {
+    prepare(candidate, consumer, environment, false)
+}
+
+fn prepare(
+    candidate: &GovernedCandidate,
+    consumer: &str,
+    environment: &str,
+    require_source_bytes: bool,
+) -> util::Result<CheckedArtifacts> {
     if !patamaps_core::valid_identifier(consumer)
         || environment.is_empty()
         || environment.len() > 4096
@@ -53,7 +73,11 @@ pub fn prepare_candidate_artifacts(
             "Invalid artifact consumer/environment",
         );
     }
-    let candidate = artifacts::normalized_candidate(candidate, consumer)?;
+    let candidate = if require_source_bytes {
+        artifacts::normalized_candidate(candidate, consumer)?
+    } else {
+        artifacts::normalized_reference_candidate(candidate, consumer)?
+    };
     let prepared = artifacts::prepare_artifacts(&candidate, consumer, environment)?;
     Ok(CheckedArtifacts {
         manifest: prepared.manifest,

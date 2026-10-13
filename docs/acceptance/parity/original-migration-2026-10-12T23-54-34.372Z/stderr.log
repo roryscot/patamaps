@@ -1,0 +1,24 @@
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/__tests__/legacy-adapter.test.ts > legacy sources-of-truth adapter > imports the current catalog without inventing ambiguous authority
+CanonicalJsonError: Expected JSON-compatible values
+ ❯ fail ../../../../../sdk/typescript/canonical.mjs:12:9
+     10| }
+     11| const fail = (code, message) => {
+     12|   throw new CanonicalJsonError(code, message);
+       |         ^
+     13| };
+     14| 
+ ❯ copy ../../../../../sdk/typescript/canonical.mjs:50:7
+ ❯ copy ../../../../../sdk/typescript/canonical.mjs:87:23
+ ❯ copy ../../../../../sdk/typescript/canonical.mjs:72:25
+ ❯ copy ../../../../../sdk/typescript/canonical.mjs:87:23
+ ❯ copy ../../../../../sdk/typescript/canonical.mjs:87:23
+ ❯ portable ../../../../../sdk/typescript/canonical.mjs:93:25
+ ❯ marshalJson ../../../../../sdk/typescript/canonical.mjs:97:39
+ ❯ invoke ../../../../../sdk/typescript/legacy-validation.mjs:132:24
+ ❯ Object.validateLegacyDocument ../../../../../sdk/typescript/legacy-validation.mjs:289:14
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+

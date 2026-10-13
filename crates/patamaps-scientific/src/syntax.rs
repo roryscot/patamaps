@@ -1,5 +1,5 @@
 use crate::{EntityProfile, Error, FormatVersion, Result, SssomDocument, refuse};
-use patamaps_contracts::{JsonObject, MAX_INPUT_BYTES, MAX_JSON_DEPTH, MAX_JSON_VALUES};
+use patamaps_contracts::{JsonLimits, JsonObject};
 use serde_json::{Map, Number, Value};
 use yaml_rust2::{
     Yaml,
@@ -7,9 +7,12 @@ use yaml_rust2::{
     scanner::TScalarStyle,
 };
 
-pub(crate) fn text(bytes: &[u8]) -> Result<&str> {
-    if bytes.len() > MAX_INPUT_BYTES {
-        return refuse("SSSOM_SIZE_LIMIT", "Source exceeds 16 MiB");
+pub(crate) fn text(bytes: &[u8], limits: JsonLimits) -> Result<&str> {
+    if bytes.len() > limits.max_bytes {
+        return Err(Error::new(
+            "SSSOM_SIZE_LIMIT",
+            format!("Source exceeds {} bytes", limits.max_bytes),
+        ));
     }
     let source =
         std::str::from_utf8(bytes).map_err(|_| Error::new("SSSOM_UTF8", "Invalid UTF-8"))?;
@@ -69,7 +72,7 @@ fn attach(stack: &mut [Frame], root: &mut Option<Value>, value: Value) -> Result
     }
     Ok(())
 }
-pub(crate) fn metadata(source: &str) -> Result<JsonObject> {
+pub(crate) fn metadata(source: &str, limits: JsonLimits) -> Result<JsonObject> {
     if source.lines().any(|line| line.starts_with('%')) {
         return refuse("SSSOM_FORBIDDEN_YAML", "Directives are unsupported");
     }
@@ -83,7 +86,7 @@ pub(crate) fn metadata(source: &str) -> Result<JsonObject> {
             .next_token()
             .map_err(|_| Error::new("SSSOM_METADATA_YAML", "Malformed YAML 1.2"))?;
         count += 1;
-        if count > MAX_JSON_VALUES || stack.len() > MAX_JSON_DEPTH {
+        if count > limits.max_values || stack.len() > limits.max_depth {
             return refuse("SSSOM_METADATA_LIMIT", "Metadata exceeds structural limits");
         }
         match event {
@@ -199,16 +202,20 @@ pub(crate) fn tsv(source: &str) -> Result<Vec<Vec<String>>> {
     }
     Ok(records)
 }
-pub(crate) fn decode(input: &[u8], external: Option<&[u8]>) -> Result<SssomDocument> {
-    let mut source = text(input)?;
+pub(crate) fn decode(
+    input: &[u8],
+    external: Option<&[u8]>,
+    limits: JsonLimits,
+) -> Result<SssomDocument> {
+    let mut source = text(input, limits)?;
     let yaml = if let Some(external) = external {
         if source.starts_with('#') {
             return refuse(
                 "SSSOM_METADATA_MODE",
-                "Embedded and external metadata cannot be combined",
+                "External metadata cannot be combined with embedded metadata",
             );
         }
-        text(external)?.to_owned()
+        text(external, limits)?.to_owned()
     } else {
         let mut lines = Vec::new();
         while source.starts_with('#') {
@@ -246,7 +253,7 @@ pub(crate) fn decode(input: &[u8], external: Option<&[u8]>) -> Result<SssomDocum
     Ok(SssomDocument {
         schema_version: FormatVersion::Sssom1,
         profile: EntityProfile::Entity1,
-        metadata: metadata(&yaml)?,
+        metadata: metadata(&yaml, limits)?,
         columns,
         rows: rows.collect(),
     })

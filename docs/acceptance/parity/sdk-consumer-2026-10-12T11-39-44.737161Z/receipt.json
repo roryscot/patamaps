@@ -1,0 +1,118 @@
+{
+  "schemaVersion": "1.0.0",
+  "status": "passed",
+  "commands": [
+    {
+      "name": "compile",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "/Users/admin/dev/SEEDZ/metamap/node_modules/typescript/lib/tsc.js",
+        "consumer.mts",
+        "--strict",
+        "--module",
+        "NodeNext",
+        "--moduleResolution",
+        "NodeNext",
+        "--target",
+        "ES2022",
+        "--lib",
+        "ES2022"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "execute",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "/private/tmp/patamaps-installed-sdk-lac5gi8v/consumer.mjs"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "reject-types",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "/Users/admin/dev/SEEDZ/metamap/node_modules/typescript/lib/tsc.js",
+        "negative.mts",
+        "--strict",
+        "--module",
+        "NodeNext",
+        "--moduleResolution",
+        "NodeNext",
+        "--target",
+        "ES2022",
+        "--lib",
+        "ES2022",
+        "--noEmit"
+      ],
+      "exitCode": 2
+    }
+  ],
+  "candidate": {
+    "binaryDigest": "sha256:e3f8002da9dcab39370b8c80b57e25b0608902dc2dee7b41fb4530536f65a08b",
+    "engine": {
+      "compiler": "sha256:2debad95a00a4055080bbf047431be1da9772ee0d96d832d2fa2c53f3758474e",
+      "documentType": "executor-description",
+      "governance": "sha256:0ba8f417fc49d5ef0893ab469563d92a5451f2fb73b9603454cf2a290210911f",
+      "schemaVersion": "0.1.0",
+      "scientific": "sha256:6555053d5f0efb924526bee95d5a4cdf483886153e251f1c0fa6e6bac89607ac",
+      "workspace": "sha256:f0a019c12e6059173f9263079f8c8e1baf2f04094e151faa48fb3caac2edcf69"
+    },
+    "sdkSourceInventory": [
+      {
+        "path": "sdk/typescript/canonical.mjs",
+        "digest": "sha256:830acf94b6a334a5659856b1c6ba342e8c02d9df49752c9163be7fa3461a3954"
+      },
+      {
+        "path": "sdk/typescript/index.mjs",
+        "digest": "sha256:f5f5abcf9d4b199a4674795bd5e96252f65c1449d679a73dd069c17c89db6015"
+      },
+      {
+        "path": "sdk/typescript/legacy-validation.mjs",
+        "digest": "sha256:f08ac73fda55878470b9c2ee1050502f52e6a2fbc63d80b30a172db5880c5ce9"
+      },
+      {
+        "path": "sdk/typescript/sssom-profile.mjs",
+        "digest": "sha256:a37260f42d6b02c5900dbefa9477386667f5286079a7a1abd12495e3dc78e533"
+      },
+      {
+        "path": "sdk/typescript/sssom.mjs",
+        "digest": "sha256:ccc44eac40a38b892d42c33537a9f15915e1aa65c774e6dc78d129284a6bfb74"
+      },
+      {
+        "path": "sdk/typescript/canonical.d.ts",
+        "digest": "sha256:88ae79727dbad3b0872a9c3539a95fe6c444b810ff416423f06a2cf39274ecb4"
+      },
+      {
+        "path": "sdk/typescript/index.d.ts",
+        "digest": "sha256:aa76e1583c3a1b872ec1fa9fbbaddd8c1211a118c9f670c0d9ec1b0ba3a4bbae"
+      },
+      {
+        "path": "sdk/typescript/legacy-validation.d.ts",
+        "digest": "sha256:b2c6dfcf90b1d4c4af71e29c4308fe094c667266dd3cb20b963898f9153b3704"
+      },
+      {
+        "path": "sdk/typescript/sssom.d.ts",
+        "digest": "sha256:7f58f17edc48bcb8340b73004273fa4c23a9f4b3671ca1276225f16de8254457"
+      },
+      {
+        "path": "sdk/typescript/package.json",
+        "digest": "sha256:45da1eca3cce8ca85e1108209aa4e4a02cb6921e52aa1d334f9fb3cf07d0f258"
+      }
+    ]
+  },
+  "host": {
+    "platform": "macOS-26.6.2-arm64-arm-64bit-Mach-O",
+    "architecture": "arm64"
+  },
+  "retainedStage": "/private/tmp/patamaps-installed-sdk-lac5gi8v",
+  "logs": {
+    "compile.stderr.log": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "compile.stdout.log": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "execute.stderr.log": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "execute.stdout.log": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "reject-types.stderr.log": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "reject-types.stdout.log": "sha256:035be2e3a96e80fb950766db20a041af3ebc5be011e36de37ca34faec41e1285"
+  },
+  "scope": "Copied canonical, scientific and read-only legacy JSON graph/pack SDK interfaces compiled and executed outside the checkout with empty PATH, including asynchronous file loading, version-specific duplicates, UTF-16, UTF-8 replacement and missing-file refusals. Thirteen negative type controls reject. This closes no full-package or obligation-level parity gate. No MetaMap runtime package is present in the copied consumer."
+}

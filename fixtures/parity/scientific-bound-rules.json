@@ -1,0 +1,8 @@
+{
+  "schemaVersion": "1.0.0",
+  "scope": "Component checks for exact accepted SSSOM document bytes and refusal codes. These controls close zero original cases and do not establish whole scientific replay/crate/workspace parity.",
+  "accepted": "Compare SHA-256 of complete canonical UTF-8 document bytes. Remove exactly one native stdout framing LF. No source field or array order may be normalized away.",
+  "refused": "Compare actual accept/refuse status and error code. Retain full reference and candidate diagnostics; unequal messages remain unresolved diagnostics.",
+  "bounds": { "inputBytes": 67108864, "rows": 50000, "columns": 256 },
+  "expectedInputs": ["licensed-source", "model-over-16-mib", "input-at-64-mib", "input-over-64-mib", "external-metadata-at-64-mib", "rows-at-limit", "rows-over-limit", "columns-at-limit", "columns-over-limit"]
+}

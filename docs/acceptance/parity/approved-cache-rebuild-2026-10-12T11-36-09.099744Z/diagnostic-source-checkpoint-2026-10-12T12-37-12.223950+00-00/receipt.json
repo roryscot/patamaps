@@ -1,0 +1,210 @@
+{
+  "schemaVersion": "1.0.0",
+  "createdAt": "2026-10-12T12:37:15.001100+00:00",
+  "status": "source-checked-rebuild-and-parity-pending",
+  "scope": "Latest diagnostic changes are source-checked. The preceding built candidate has preserved native and component results; those results do not verify the latest source. Original expectation bytes are unchanged.",
+  "commands": [
+    {
+      "name": "rust-format",
+      "command": [
+        "/Users/admin/.cargo/bin/cargo",
+        "fmt",
+        "--all",
+        "--",
+        "--check"
+      ],
+      "exitCode": 0,
+      "stdout": "docs/acceptance/parity/approved-cache-rebuild-2026-10-12T11-36-09.099744Z/diagnostic-source-checkpoint-2026-10-12T12-37-12.223950+00-00/rust-format.stdout.log",
+      "stderr": "docs/acceptance/parity/approved-cache-rebuild-2026-10-12T11-36-09.099744Z/diagnostic-source-checkpoint-2026-10-12T12-37-12.223950+00-00/rust-format.stderr.log"
+    },
+    {
+      "name": "sdk-syntax",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "--check",
+        "sdk/typescript/legacy-validation.mjs"
+      ],
+      "exitCode": 0,
+      "stdout": "docs/acceptance/parity/approved-cache-rebuild-2026-10-12T11-36-09.099744Z/diagnostic-source-checkpoint-2026-10-12T12-37-12.223950+00-00/sdk-syntax.stdout.log",
+      "stderr": "docs/acceptance/parity/approved-cache-rebuild-2026-10-12T11-36-09.099744Z/diagnostic-source-checkpoint-2026-10-12T12-37-12.223950+00-00/sdk-syntax.stderr.log"
+    },
+    {
+      "name": "pack-probe-syntax",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "--check",
+        "scripts/parity/pack_contracts.mjs"
+      ],
+      "exitCode": 0,
+      "stdout": "docs/acceptance/parity/approved-cache-rebuild-2026-10-12T11-36-09.099744Z/diagnostic-source-checkpoint-2026-10-12T12-37-12.223950+00-00/pack-probe-syntax.stdout.log",
+      "stderr": "docs/acceptance/parity/approved-cache-rebuild-2026-10-12T11-36-09.099744Z/diagnostic-source-checkpoint-2026-10-12T12-37-12.223950+00-00/pack-probe-syntax.stderr.log"
+    },
+    {
+      "name": "javascript-format",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "/Users/admin/dev/patamaps/patamaps/.tools/parity/oracles/399747a4ad05-p8pkt3pr/reference/node_modules/prettier/bin/prettier.cjs",
+        "--check",
+        "sdk/typescript/legacy-validation.mjs",
+        "scripts/parity/pack_contracts.mjs"
+      ],
+      "exitCode": 0,
+      "stdout": "docs/acceptance/parity/approved-cache-rebuild-2026-10-12T11-36-09.099744Z/diagnostic-source-checkpoint-2026-10-12T12-37-12.223950+00-00/javascript-format.stdout.log",
+      "stderr": "docs/acceptance/parity/approved-cache-rebuild-2026-10-12T11-36-09.099744Z/diagnostic-source-checkpoint-2026-10-12T12-37-12.223950+00-00/javascript-format.stderr.log"
+    },
+    {
+      "name": "diff-check",
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exitCode": 0,
+      "stdout": "docs/acceptance/parity/approved-cache-rebuild-2026-10-12T11-36-09.099744Z/diagnostic-source-checkpoint-2026-10-12T12-37-12.223950+00-00/diff-check.stdout.log",
+      "stderr": "docs/acceptance/parity/approved-cache-rebuild-2026-10-12T11-36-09.099744Z/diagnostic-source-checkpoint-2026-10-12T12-37-12.223950+00-00/diff-check.stderr.log"
+    },
+    {
+      "name": "source-integrity",
+      "command": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "-B",
+        "scripts/test_source_integrity.py",
+        "/Users/admin/dev/SEEDZ/metamap",
+        "--output",
+        "/Users/admin/dev/patamaps/patamaps/docs/acceptance/parity/approved-cache-rebuild-2026-10-12T11-36-09.099744Z/diagnostic-source-checkpoint-2026-10-12T12-37-12.223950+00-00/source-integrity.json"
+      ],
+      "exitCode": 0,
+      "stdout": "docs/acceptance/parity/approved-cache-rebuild-2026-10-12T11-36-09.099744Z/diagnostic-source-checkpoint-2026-10-12T12-37-12.223950+00-00/source-integrity.stdout.log",
+      "stderr": "docs/acceptance/parity/approved-cache-rebuild-2026-10-12T11-36-09.099744Z/diagnostic-source-checkpoint-2026-10-12T12-37-12.223950+00-00/source-integrity.stderr.log"
+    },
+    {
+      "name": "supervised-latest-build",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v24.21.0/bin/node",
+        "/Users/admin/Documents/Codex/storage-safeguards/run-project.mjs",
+        "patamaps",
+        "--",
+        "/usr/bin/env",
+        "SDKROOT=/Library/Developer/CommandLineTools/SDKs/MacOSX26.5.sdk",
+        "CARGO_INCREMENTAL=0",
+        "CARGO_PROFILE_DEV_DEBUG=0",
+        "CARGO_PROFILE_TEST_DEBUG=0",
+        "/Users/admin/.cargo/bin/cargo",
+        "build",
+        "--locked",
+        "-p",
+        "patamaps-cli"
+      ],
+      "exitCode": 75,
+      "stdout": "docs/acceptance/parity/approved-cache-rebuild-2026-10-12T11-36-09.099744Z/diagnostic-source-checkpoint-2026-10-12T12-37-12.223950+00-00/supervised-latest-build.stdout.log",
+      "stderr": "docs/acceptance/parity/approved-cache-rebuild-2026-10-12T11-36-09.099744Z/diagnostic-source-checkpoint-2026-10-12T12-37-12.223950+00-00/supervised-latest-build.stderr.log"
+    },
+    {
+      "name": "supervised-pack-probe",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "scripts/parity/pack_contracts.mjs"
+      ],
+      "exitCode": 75,
+      "stdout": "docs/acceptance/parity/approved-cache-rebuild-2026-10-12T11-36-09.099744Z/diagnostic-source-checkpoint-2026-10-12T12-37-12.223950+00-00/supervised-pack-probe.stdout.log",
+      "stderr": "docs/acceptance/parity/approved-cache-rebuild-2026-10-12T11-36-09.099744Z/diagnostic-source-checkpoint-2026-10-12T12-37-12.223950+00-00/supervised-pack-probe.stderr.log"
+    },
+    {
+      "name": "strict-ledger",
+      "command": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "-B",
+        "scripts/parity/verify.py",
+        "--strict"
+      ],
+      "exitCode": 1,
+      "stdout": "docs/acceptance/parity/approved-cache-rebuild-2026-10-12T11-36-09.099744Z/diagnostic-source-checkpoint-2026-10-12T12-37-12.223950+00-00/strict-ledger.stdout.log",
+      "stderr": "docs/acceptance/parity/approved-cache-rebuild-2026-10-12T11-36-09.099744Z/diagnostic-source-checkpoint-2026-10-12T12-37-12.223950+00-00/strict-ledger.stderr.log"
+    }
+  ],
+  "candidate": {
+    "binaryDigest": "sha256:88386b9a43ca4cf8c3b033820d26104ad25fcbf8251ca76365454c5612bb8989",
+    "cachedEngine": {
+      "compiler": "sha256:13d527501270e8a73947b25a6295c320d9d6c0769b55751f25e60bb74efb9e2f",
+      "documentType": "executor-description",
+      "governance": "sha256:976f29b93ae842b1abb883a1d3bf1b33cb1d46bbccce5d1be4b0b11d440f8ac9",
+      "schemaVersion": "0.1.0",
+      "scientific": "sha256:e414faab674b201f9136a14d9b7b11219bd773937e38d6ebb8bc083bd680cc68",
+      "workspace": "sha256:e74b327caebc6e472e976695b5c2f88d556a554a4b4941a774be2ec1c84ac7dd"
+    },
+    "expectedSourceIdentities": {
+      "compiler": "sha256:13cc97dfdd8b82c25c4306f1051ae66855f22655730055d0e7390fdae9e206d7",
+      "governance": "sha256:8600099216c2c00a0f8859fbbdb14bc225d41a384e152d2f506dcd4a7a4c9f0e",
+      "workspace": "sha256:1064861d5bba37ebdd59be774a11d8081745dd191017effb11504ece63457cb6",
+      "scientific": "sha256:3bc13d58ae27e3ae02e99c9f576f77e0d721c73d9e0e406ce4878102c9f8016b"
+    },
+    "sourceIdentityMismatch": [
+      "compiler",
+      "governance",
+      "workspace",
+      "scientific"
+    ],
+    "rebuilt": false
+  },
+  "sourceInventory": [
+    {
+      "path": "Cargo.toml",
+      "digest": "sha256:8b54a27a77afbe3062347259f5b0646b2c0876128f4fa6752f5358e1bfa8e1c5"
+    },
+    {
+      "path": "Cargo.lock",
+      "digest": "sha256:94114fad8dcd8ab720271eaca81bc60c17c3364903bc90434cec690d1b18b6b0"
+    },
+    {
+      "path": "crates/patamaps-core/src/legacy_pack.rs",
+      "digest": "sha256:5375d2f9b1dd881a5661be733f394198d270526f6c5968e2156ad37d4fc75c9a"
+    },
+    {
+      "path": "crates/patamaps-core/tests/legacy_pack.rs",
+      "digest": "sha256:73912229df4c06ce93f2222e39ade216d1c58cae3e0ce4dc6fbd4d7ba2fea970"
+    },
+    {
+      "path": "sdk/typescript/legacy-validation.mjs",
+      "digest": "sha256:45d24605ad814370db2c97ac13cb03a6a4c6fa3b4fa5e1a24c1d521764ebb281"
+    },
+    {
+      "path": "scripts/parity/pack_contracts.mjs",
+      "digest": "sha256:0b0ed189062074923f93977fb1836b16fbfcd594822e3ef0e74e7c79de0f574a"
+    },
+    {
+      "path": "fixtures/parity/registry-validation-classification.json",
+      "digest": "sha256:2914d1ae23ab1f97a8ae9e133742f9a275c31405696e5870424684718af3541e"
+    },
+    {
+      "path": "fixtures/parity/coverage.json",
+      "digest": "sha256:5148519474b09ff9495ec0c64c099ec60d8dd4938302ab24e3d82b1d3de8d28a"
+    },
+    {
+      "path": "README.md",
+      "digest": "sha256:6ca8b62e49a4e1259d1b5ccf66ba9ad67b1945efe6056625bf82ed2203c1e0c0"
+    },
+    {
+      "path": "BUILD_PLAN.md",
+      "digest": "sha256:592b0b83fe2320c8a7aa52f7cf8ddb1073d880a9ea05940bb6e5bb0430064f52"
+    }
+  ],
+  "reference": {
+    "engine": "399747a4ad05a37cd8db1cedd53048fad2175be4",
+    "verifiedGitBlobs": 610
+  },
+  "pythonSyntaxFiles": 12,
+  "availableBytesAtEnd": 21964226560,
+  "originalCasesClosed": 0,
+  "pending": [
+    "Rebuild latest production source and run Clippy/native regression tests",
+    "Run installed SDK and independently frozen pack JSON diagnostic probe",
+    "Refresh all six original-case groups and 472 frozen legacy validation comparisons, then attach only current receipts",
+    "Refresh discovery API/scientific bounds comparisons",
+    "Complete remaining P0\u2013P9 obligations and actual Linux x86_64/ARM64 acceptance"
+  ],
+  "counterexamplesToCheck": [
+    "Multi-field diagnostics may reveal AJV/native schema traversal ordering differences",
+    "Prototype-named strings may expose AJV optimized uniqueness behavior that the native schema validator handles differently"
+  ],
+  "deletionScope": "Only the previously approved 1319-file debug/deps inventory was removed. Newly rebuilt cache contents are outside that approval."
+}

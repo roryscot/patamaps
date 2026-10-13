@@ -65,7 +65,7 @@ pub fn export_tsv(checked: &CheckedSssom, condense: bool) -> Result<ExportedSsso
         text.push_str(&row.iter().map(|v| quote(v)).collect::<Vec<_>>().join("\t"));
         text.push('\n');
     }
-    let after = parse_tsv(text.as_bytes(), None)?;
+    let after = interpret::parse_tsv_with_limits(text.as_bytes(), None, checked.limits)?;
     let fields = |value: &Interpretation| -> Result<Vec<u8>> {
         Ok(canonical_bytes(
             &value.records.iter().map(|r| &r.fields).collect::<Vec<_>>(),

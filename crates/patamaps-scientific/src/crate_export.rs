@@ -2,6 +2,7 @@ use crate::*;
 use patamaps_contracts::*;
 use patamaps_governance::{
     ArtifactEmission, EmissionLanguage, GovernedCandidate, prepare_candidate_artifacts,
+    prepare_reference_artifacts,
 };
 use patamaps_projection::{CaptureRecord, replay};
 use serde::{Deserialize, Serialize};
@@ -38,6 +39,15 @@ pub struct CrateOptions {
     )]
     pub metadata_receipt: Option<String>,
     pub external_sources: Vec<ExternalSource>,
+    /// Explicit included payloads keyed by receipt ID. Omission retains the
+    /// original closed-source mode; an empty map requests references only.
+    /// The capture must omit content for every receipt excluded from this map.
+    #[serde(
+        default,
+        deserialize_with = "patamaps_contracts::present",
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub raw_inputs: Option<BTreeMap<String, String>>,
 }
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(deny_unknown_fields)]
@@ -52,10 +62,14 @@ pub struct ScientificCrate {
 /// ```
 #[derive(Debug, Serialize)]
 #[serde(transparent)]
-pub struct CheckedScientificCrate(ScientificCrate);
+pub struct CheckedScientificCrate(ScientificCrate, #[serde(skip)] usize);
 impl CheckedScientificCrate {
     pub fn record(&self) -> &ScientificCrate {
         &self.0
+    }
+    /// Receipt references whose raw bytes are absent from the complete package.
+    pub fn external_raw_inputs(&self) -> usize {
+        self.1
     }
 }
 pub fn scientific_engine_id() -> &'static str {
@@ -66,6 +80,10 @@ pub fn scientific_engine_id() -> &'static str {
         "manifest": include_str!("../Cargo.toml"), "lib": include_str!("lib.rs"),
         "model": include_str!("model.rs"), "syntax": include_str!("syntax.rs"),
         "interpret": include_str!("interpret.rs"), "export": include_str!("export.rs"),
+        "source": include_str!("source.rs"),
+        "legacyConfig": include_str!("legacy_config.rs"),
+        "legacyConfigSchema": include_str!("../../../fixtures/reference/schemas/metamap-config.schema.json"),
+        "sourceSchema": include_str!("../../../fixtures/reference/schemas/metamap-sssom-source.schema.json"),
         "graph": include_str!("graph.rs"), "crate": include_str!("crate_export.rs"),
         "modelSource": include_str!("../../../fixtures/reference/standards/sssom-1.0.0/sssom_schema.yaml"),
         "schema": include_str!("../../../fixtures/reference/schemas/sssom-1.0.0.schema.json"),
@@ -192,48 +210,118 @@ fn source_matches(source: &GraphDocument, candidate: &GraphDocument) -> Result<(
 pub fn create_crate(c: &CaptureRecord, o: &CrateOptions) -> Result<CheckedScientificCrate> {
     settings(o)?;
     let checked = replay(c)?;
-    if c.result["status"] != "viable" || !checked.missing_sources().is_empty() {
+    if c.result["status"] != "viable"
+        || (o.raw_inputs.is_none() && !checked.missing_sources().is_empty())
+    {
         return refuse(
             "SCIENTIFIC_CRATE_REPLAY",
             "Crate requires viable replay and every declared receipt's bytes",
         );
     }
-    let spec = c
-        .inputs
-        .projection_spec
-        .as_ref()
-        .ok_or_else(|| Error::new("SCIENTIFIC_CRATE_REPLAY", "Consumer projection required"))?;
-    let raw = receipt(c, &o.tsv_receipt)?;
-    let metadata = o
-        .metadata_receipt
-        .as_deref()
-        .map(|id| receipt(c, id))
-        .transpose()?;
+    let specs: Vec<_> = c.inputs.specs().collect();
+    if specs.is_empty() {
+        return refuse("SCIENTIFIC_CRATE_REPLAY", "Consumer projection required");
+    }
+    let source_receipts: BTreeSet<_> = std::iter::once(o.tsv_receipt.as_str())
+        .chain(o.metadata_receipt.as_deref())
+        .collect();
+    if c.sources.len() != source_receipts.len()
+        || c.sources
+            .iter()
+            .any(|s| !source_receipts.contains(s.id.as_str()))
+    {
+        return refuse(
+            "SCIENTIFIC_CRATE_SOURCE",
+            "Crate requires exactly the configured single source's receipts",
+        );
+    }
+    if let Some(raw_inputs) = &o.raw_inputs {
+        for (id, bytes) in raw_inputs {
+            let declared = c.sources.iter().find(|s| s.id == *id).ok_or_else(|| {
+                Error::new(
+                    "SCIENTIFIC_CRATE_SOURCE",
+                    "Raw payload has no captured receipt",
+                )
+            })?;
+            if byte_digest(bytes.as_bytes()) != declared.digest
+                || bytes.len() as u64 != declared.byte_length.get()
+                || declared.content.as_ref() != Some(bytes)
+            {
+                return refuse(
+                    "SCIENTIFIC_CRATE_SOURCE",
+                    "Raw payload does not match its captured receipt and content",
+                );
+            }
+        }
+        if c.sources
+            .iter()
+            .any(|s| s.content.is_some() != raw_inputs.contains_key(&s.id))
+        {
+            return refuse(
+                "SCIENTIFIC_CRATE_SOURCE",
+                "Capture content must exactly match the included payload inventory",
+            );
+        }
+    }
     if o.metadata_receipt.as_deref() == Some(o.tsv_receipt.as_str()) {
         return refuse(
             "SCIENTIFIC_CRATE_SOURCE",
             "TSV and metadata receipts must be distinct",
         );
     }
-    let sssom = parse_tsv(raw.as_bytes(), metadata.map(str::as_bytes))?;
+    let captured_document = c
+        .inputs
+        .graph
+        .metadata
+        .as_ref()
+        .and_then(|m| m.get("sssom"))
+        .and_then(|v| v.get("rawDocument"))
+        .ok_or_else(|| {
+            Error::new(
+                "SCIENTIFIC_CRATE_SOURCE",
+                "Captured SSSOM document required",
+            )
+        })?;
+    let document: SssomDocument = parse(&canonical_bytes(captured_document)?)?;
+    let sssom = check_document(&document)?;
+    if checked.missing_sources().is_empty() {
+        let raw = receipt(c, &o.tsv_receipt)?;
+        let metadata = o
+            .metadata_receipt
+            .as_deref()
+            .map(|id| receipt(c, id))
+            .transpose()?;
+        let parsed = parse_tsv(raw.as_bytes(), metadata.map(str::as_bytes))?;
+        if canonical_bytes(parsed.document())? != canonical_bytes(sssom.document())? {
+            return refuse(
+                "SCIENTIFIC_CRATE_SOURCE",
+                "Included raw bytes disagree with the captured SSSOM document",
+            );
+        }
+    }
     let source = import_graph(&sssom, &o.source)?;
     source_matches(&source, &c.inputs.graph)?;
     let exported = export_tsv(&sssom, false)?;
-    let prepared = prepare_candidate_artifacts(
+    let prepare = if o.raw_inputs.is_some() {
+        prepare_reference_artifacts
+    } else {
+        prepare_candidate_artifacts
+    };
+    let prepared = prepare(
         &GovernedCandidate {
             captures: vec![c.clone()],
-            emissions: vec![
-                ArtifactEmission {
-                    projection: spec.id.clone(),
-                    language: EmissionLanguage::Typescript,
-                    binding_slot: None,
-                },
-                ArtifactEmission {
-                    projection: spec.id.clone(),
-                    language: EmissionLanguage::Rust,
-                    binding_slot: None,
-                },
-            ],
+            emissions: specs
+                .iter()
+                .flat_map(|spec| {
+                    [EmissionLanguage::Typescript, EmissionLanguage::Rust].map(|language| {
+                        ArtifactEmission {
+                            projection: spec.id.clone(),
+                            language,
+                            binding_slot: None,
+                        }
+                    })
+                })
+                .collect(),
         },
         &o.consumer,
         &o.environment,
@@ -252,12 +340,16 @@ pub fn create_crate(c: &CaptureRecord, o: &CrateOptions) -> Result<CheckedScient
         include_str!("../../../fixtures/scientific/ro-crate-1.2-context.jsonld").into(),
     );
     let mut source_parts = Vec::new();
+    let mut absent = Vec::new();
     for (i, s) in c.sources.iter().enumerate() {
+        let Some(content) = &s.content else {
+            let id = format!("urn:patamaps:raw-input:{}", &s.digest[7..]);
+            source_parts.push(json!({"@id":id}));
+            absent.push((id, s));
+            continue;
+        };
         let path = format!("source/source-{i}.txt");
-        files.insert(
-            path.clone(),
-            s.content.clone().expect("replayed complete source"),
-        );
+        files.insert(path.clone(), content.clone());
         source_parts.push(json!({"@id":path}));
     }
     let license = sssom
@@ -291,8 +383,16 @@ pub fn create_crate(c: &CaptureRecord, o: &CrateOptions) -> Result<CheckedScient
         json!({"@id":"./", "@type":"Dataset", "name":o.name, "description":format!("{}; scientific truth, current approval and activation are not established", o.description), "datePublished":o.date_published, "license":{"@id":license}, "creditText":creators.join(", "), "conformsTo":{"@id":PROFILE}, "hasPart":files.keys().map(|p| json!({"@id":p})).collect::<Vec<_>>(), "isBasedOn":o.external_sources.iter().map(|e|json!({"@id":e.id})).collect::<Vec<_>>() }),
         json!({"@id":license, "@type":"CreativeWork", "name":"Source-declared license", "identifier":license}),
         json!({"@id":RO_CRATE, "@type":"CreativeWork", "name":"RO-Crate 1.2 specification"}),
-        json!({"@id":PROFILE, "@type":"CreativeWork", "name":"Patamaps closed single-source scientific crate draft 1"}),
+        json!({"@id":PROFILE, "@type":"CreativeWork", "name":"Patamaps single-source scientific crate draft 1"}),
     ];
+    let external_raw_inputs = absent.len();
+    for (id, s) in &absent {
+        entities[1]["hasPart"]
+            .as_array_mut()
+            .expect("constructed parts")
+            .push(json!({"@id":id}));
+        entities.push(json!({"@id":id,"@type":"File","name":s.locator,"description":"Raw payload not included or fetched; captured digest is a reference only","sha256":&s.digest[7..],"contentSize":s.byte_length.get().to_string(),"license":{"@id":license}}));
+    }
     for (path, bytes) in &files {
         let mut e = json!({"@id":path, "@type":"File", "name":path, "contentSize":bytes.len().to_string(), "sha256":&byte_digest(bytes.as_bytes())[7..], "encodingFormat":if path.ends_with(".tsv") {"text/tab-separated-values"} else if path.ends_with(".rs") {"text/rust"} else if path.ends_with(".ts") {"text/typescript"} else if path.ends_with(".txt") {"text/plain"} else {"application/json"}});
         if path.starts_with("source/") || path == "export.sssom.tsv" {
@@ -324,7 +424,7 @@ pub fn create_crate(c: &CaptureRecord, o: &CrateOptions) -> Result<CheckedScient
     // Serialized transport, including repeated capture/source representations,
     // must fit the same strict ingress profile as verification.
     parse_value(&canonical_bytes(&result)?)?;
-    Ok(CheckedScientificCrate(result))
+    Ok(CheckedScientificCrate(result, external_raw_inputs))
 }
 fn bounds(c: &ScientificCrate) -> Result<()> {
     patamaps_core::check_value_bounds(&c.metadata, PROFILE, "SCIENTIFIC_CRATE_RESOURCE_LIMIT")?;

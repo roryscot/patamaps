@@ -1,0 +1,237 @@
+{
+  "schemaVersion": "1.0.0",
+  "createdAt": "2026-10-12T11:36:09.101263+00:00",
+  "status": "build-passed",
+  "goalStatus": "active",
+  "scope": "Exact approved cache deletion, supervised rebuild and current-candidate parity verification. Full P0\u2013P9 remains required.",
+  "approvedDeletionRecord": "/Users/admin/dev/patamaps/patamaps/.tools/parity/storage-review/approved-debug-deps-delete-20261012T113419.761605Z.json",
+  "commands": [
+    {
+      "name": "supervised-build",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v24.21.0/bin/node",
+        "/Users/admin/Documents/Codex/storage-safeguards/run-project.mjs",
+        "patamaps",
+        "--",
+        "/usr/bin/env",
+        "SDKROOT=/Library/Developer/CommandLineTools/SDKs/MacOSX26.5.sdk",
+        "CARGO_INCREMENTAL=0",
+        "CARGO_PROFILE_DEV_DEBUG=0",
+        "CARGO_PROFILE_TEST_DEBUG=0",
+        "/Users/admin/.cargo/bin/cargo",
+        "build",
+        "--locked",
+        "-p",
+        "patamaps-cli"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "installed-sdk",
+      "command": [
+        "/opt/homebrew/bin/python3",
+        "-B",
+        "scripts/parity/sdk_consumer.py"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "frozen-validation",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "scripts/parity/legacy_validation.mjs"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "original-canonical",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "scripts/parity/original.mjs"
+      ],
+      "exitCode": 75
+    },
+    {
+      "name": "original-canonical-refresh",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "scripts/parity/original.mjs"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "original-sssom-refresh",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "scripts/parity/original.mjs",
+        "--sssom"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "original-discovery-refresh",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "scripts/parity/original.mjs",
+        "--discovery"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "original-sssom-adapter-refresh",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "scripts/parity/original.mjs",
+        "--sssom-adapter"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "original-validation-refresh",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "scripts/parity/original.mjs",
+        "--validation"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "original-packs",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "scripts/parity/original.mjs",
+        "--packs"
+      ],
+      "exitCode": 75
+    },
+    {
+      "name": "original-packs-retry-1",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "scripts/parity/original.mjs",
+        "--packs"
+      ],
+      "exitCode": 1
+    },
+    {
+      "name": "original-packs-fixed-1",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "scripts/parity/original.mjs",
+        "--packs"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "clippy-1",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v24.21.0/bin/node",
+        "/Users/admin/Documents/Codex/storage-safeguards/run-project.mjs",
+        "patamaps",
+        "--",
+        "/usr/bin/env",
+        "SDKROOT=/Library/Developer/CommandLineTools/SDKs/MacOSX26.5.sdk",
+        "CARGO_INCREMENTAL=0",
+        "CARGO_PROFILE_DEV_DEBUG=0",
+        "CARGO_PROFILE_TEST_DEBUG=0",
+        "/Users/admin/.cargo/bin/cargo",
+        "clippy",
+        "--workspace",
+        "--all-targets",
+        "--locked",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exitCode": 101
+    },
+    {
+      "name": "final-clippy-1",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v24.21.0/bin/node",
+        "/Users/admin/Documents/Codex/storage-safeguards/run-project.mjs",
+        "patamaps",
+        "--",
+        "/usr/bin/env",
+        "SDKROOT=/Library/Developer/CommandLineTools/SDKs/MacOSX26.5.sdk",
+        "CARGO_INCREMENTAL=0",
+        "CARGO_PROFILE_DEV_DEBUG=0",
+        "CARGO_PROFILE_TEST_DEBUG=0",
+        "/Users/admin/.cargo/bin/cargo",
+        "clippy",
+        "--workspace",
+        "--all-targets",
+        "--locked",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "final-build-1",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v24.21.0/bin/node",
+        "/Users/admin/Documents/Codex/storage-safeguards/run-project.mjs",
+        "patamaps",
+        "--",
+        "/usr/bin/env",
+        "SDKROOT=/Library/Developer/CommandLineTools/SDKs/MacOSX26.5.sdk",
+        "CARGO_INCREMENTAL=0",
+        "CARGO_PROFILE_DEV_DEBUG=0",
+        "CARGO_PROFILE_TEST_DEBUG=0",
+        "/Users/admin/.cargo/bin/cargo",
+        "build",
+        "--locked",
+        "-p",
+        "patamaps-cli"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "final-native-1",
+      "command": [
+        "/opt/homebrew/bin/python3",
+        "-B",
+        "scripts/parity/native.py"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "final-installed-sdk-1",
+      "command": [
+        "/opt/homebrew/bin/python3",
+        "-B",
+        "scripts/parity/sdk_consumer.py"
+      ],
+      "exitCode": 75
+    },
+    {
+      "name": "final-installed-sdk-2",
+      "command": [
+        "/opt/homebrew/bin/python3",
+        "-B",
+        "scripts/parity/sdk_consumer.py"
+      ],
+      "exitCode": 75
+    },
+    {
+      "name": "final-installed-sdk-3",
+      "command": [
+        "/opt/homebrew/bin/python3",
+        "-B",
+        "scripts/parity/sdk_consumer.py"
+      ],
+      "exitCode": 75
+    },
+    {
+      "name": "final-installed-sdk-4",
+      "command": [
+        "/opt/homebrew/bin/python3",
+        "-B",
+        "scripts/parity/sdk_consumer.py"
+      ],
+      "exitCode": 75
+    }
+  ]
+}

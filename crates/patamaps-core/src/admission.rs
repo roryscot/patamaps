@@ -89,13 +89,6 @@ pub(crate) fn context_valid(context: &JsonObject) -> bool {
     })
 }
 
-fn includes(actual: &Value, value: &Value) -> bool {
-    actual.as_array().map_or_else(
-        || equivalent(actual, value),
-        |a| a.iter().any(|v| equivalent(v, value)),
-    )
-}
-
 fn equivalent(a: &Value, b: &Value) -> bool {
     if a.is_number() && b.is_number() {
         a.as_f64() == b.as_f64()
@@ -133,22 +126,40 @@ pub(crate) fn expr_valid(expr: &ContextExpression, depth: usize) -> bool {
 }
 
 pub(crate) fn required<'a>(expr: &'a ContextExpression, keys: &mut BTreeSet<&'a str>) {
+    visit_required(expr, &mut |key| {
+        keys.insert(key);
+    });
+}
+
+pub(crate) fn visit_required<'a>(expr: &'a ContextExpression, visit: &mut impl FnMut(&'a str)) {
     match expr {
-        ContextExpression::All { all } => all.iter().for_each(|e| required(e, keys)),
-        ContextExpression::Any { any } => any.iter().for_each(|e| required(e, keys)),
-        ContextExpression::Not { not } => required(not, keys),
+        ContextExpression::All { all } => all.iter().for_each(|e| visit_required(e, visit)),
+        ContextExpression::Any { any } => any.iter().for_each(|e| visit_required(e, visit)),
+        ContextExpression::Not { not } => visit_required(not, visit),
         ContextExpression::Comparison { key, .. } | ContextExpression::Membership { key, .. } => {
-            keys.insert(key);
+            visit(key);
         }
         ContextExpression::Exists { .. } => {}
     }
 }
 
 pub(crate) fn matches_context(expr: &ContextExpression, context: &JsonObject) -> bool {
+    matches_context_with(expr, context, &equivalent)
+}
+
+pub(crate) fn matches_context_with(
+    expr: &ContextExpression,
+    context: &JsonObject,
+    equal: &impl Fn(&Value, &Value) -> bool,
+) -> bool {
     match expr {
-        ContextExpression::All { all } => all.iter().all(|e| matches_context(e, context)),
-        ContextExpression::Any { any } => any.iter().any(|e| matches_context(e, context)),
-        ContextExpression::Not { not } => !matches_context(not, context),
+        ContextExpression::All { all } => {
+            all.iter().all(|e| matches_context_with(e, context, equal))
+        }
+        ContextExpression::Any { any } => {
+            any.iter().any(|e| matches_context_with(e, context, equal))
+        }
+        ContextExpression::Not { not } => !matches_context_with(not, context, equal),
         ContextExpression::Exists { key, value, .. } => {
             context.contains_key(key) == value.unwrap_or(true)
         }
@@ -156,17 +167,20 @@ pub(crate) fn matches_context(expr: &ContextExpression, context: &JsonObject) ->
             key,
             operator,
             value,
-        } => context
-            .get(key)
-            .is_some_and(|a| includes(a, value) == (*operator == ComparisonOperator::Equals)),
+        } => context.get(key).is_some_and(|a| {
+            a.as_array().map_or_else(
+                || equal(a, value),
+                |values| values.iter().any(|v| equal(v, value)),
+            ) == (*operator == ComparisonOperator::Equals)
+        }),
         ContextExpression::Membership {
             key,
             operator,
             values,
         } => context.get(key).is_some_and(|a| {
             let found = match a.as_array() {
-                Some(a) => a.iter().any(|n| values.iter().any(|v| equivalent(v, n))),
-                None => values.iter().any(|v| equivalent(v, a)),
+                Some(a) => a.iter().any(|n| values.iter().any(|v| equal(v, n))),
+                None => values.iter().any(|v| equal(v, a)),
             };
             found == (*operator == MembershipOperator::In)
         }),
@@ -178,25 +192,43 @@ pub(crate) fn selector_matches(
     mapping: &Mapping,
     s: &MappingSelector,
 ) -> bool {
-    s.ids.as_ref().is_none_or(|v| v.contains(&mapping.id))
-        && s.relations
-            .as_ref()
-            .is_none_or(|v| v.contains(&mapping.relation))
-        && s.source_kinds.as_ref().is_none_or(|v| {
+    selector_matches_with(
+        s,
+        &mapping.id,
+        &mapping.relation,
+        |v| {
             mapping
                 .sources
                 .iter()
                 .any(|id| graph.entity(id).is_some_and(|e| v.contains(&e.kind)))
-        })
-        && s.target_kinds.as_ref().is_none_or(|v| {
+        },
+        |v| {
             mapping
                 .targets
                 .iter()
                 .any(|id| graph.entity(id).is_some_and(|e| v.contains(&e.kind)))
-        })
-        && s.provenance_statuses
+        },
+        |v| v.contains(&mapping.provenance.status),
+    )
+}
+
+pub(crate) fn selector_matches_with(
+    s: &MappingSelector,
+    id: &str,
+    relation: &str,
+    source_kinds: impl FnOnce(&[String]) -> bool,
+    target_kinds: impl FnOnce(&[String]) -> bool,
+    provenance_statuses: impl FnOnce(&[ProvenanceStatus]) -> bool,
+) -> bool {
+    s.ids.as_ref().is_none_or(|v| v.iter().any(|v| v == id))
+        && s.relations
             .as_ref()
-            .is_none_or(|v| v.contains(&mapping.provenance.status))
+            .is_none_or(|v| v.iter().any(|v| v == relation))
+        && s.source_kinds.as_deref().is_none_or(source_kinds)
+        && s.target_kinds.as_deref().is_none_or(target_kinds)
+        && s.provenance_statuses
+            .as_deref()
+            .is_none_or(provenance_statuses)
 }
 
 fn constraint_issues(

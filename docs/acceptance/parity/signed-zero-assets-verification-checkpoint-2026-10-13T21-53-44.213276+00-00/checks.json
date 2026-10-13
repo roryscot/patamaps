@@ -1,0 +1,81 @@
+{
+  "schemaVersion": "1.0.0",
+  "checks": [
+    {
+      "label": "rust-format",
+      "command": [
+        "/Users/admin/.cargo/bin/cargo",
+        "fmt",
+        "--all",
+        "--",
+        "--check"
+      ],
+      "exitCode": 0
+    },
+    {
+      "label": "diff-whitespace",
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exitCode": 0
+    },
+    {
+      "label": "sdk-format",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v24.21.0/bin/node",
+        ".tools/parity/oracles/399747a4ad05-p8pkt3pr/reference/node_modules/prettier/bin/prettier.cjs",
+        "--check",
+        "sdk/typescript/canonical.mjs",
+        "sdk/typescript/legacy-viability.mjs",
+        "sdk/typescript/package.json",
+        "scripts/parity/viability_signed_zero.mjs",
+        "scripts/parity/legacy_validation.mjs"
+      ],
+      "exitCode": 0
+    },
+    {
+      "label": "strict-ledger",
+      "command": [
+        "/opt/homebrew/bin/python3",
+        "-B",
+        "scripts/parity/verify.py",
+        "--strict"
+      ],
+      "exitCode": 1
+    }
+  ],
+  "strictLedger": {
+    "status": "incomplete",
+    "inventory": {
+      "obligations": 1293,
+      "exports": 92,
+      "suites": 53,
+      "expandedOriginalCases": 601,
+      "cliCommands": 22,
+      "cliOptions": 32
+    },
+    "counts": {
+      "unclassified": 890,
+      "verified-equivalent": 124,
+      "missing": 43,
+      "implemented-unverified": 236
+    },
+    "currentVerifiedEquivalent": 124,
+    "invalidEvidence": [],
+    "strictAcceptance": false
+  },
+  "frozenReferenceBlobsVerified": 610,
+  "pythonSyntax": "passed",
+  "currentSourceMatchesBinary": true,
+  "candidateEngine": {
+    "compiler": "sha256:03f8893280600b383d703092c0574d29c31e0decb169efc9c1e4504b22429a26",
+    "documentType": "executor-description",
+    "governance": "sha256:b800ce2f769304c9e35901cc79e16ddeabdbb3ba4de7f42b343b412429446f41",
+    "schemaVersion": "0.1.0",
+    "scientific": "sha256:cca4930e7605e0fbdecdf43873b8dfd15bb705bdc6ce8270908fab95a57f6593",
+    "workspace": "sha256:19fea4320b1f80d0c0783548514409cbebd6c344c55d36588d71d85367c09c60"
+  },
+  "candidateBinaryDigest": "sha256:92015d3e68b61209164c2e76e6ce4e12d804296ebc8a9c948a94c3f76dd59424"
+}

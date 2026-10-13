@@ -1,0 +1,2843 @@
+{
+  "schemaVersion": "1.0.0",
+  "status": "component-controls-passed",
+  "supervision": {
+    "mode": "inherited-live-supervisor",
+    "project": "/Users/admin/dev/patamaps/patamaps",
+    "configurationDigest": "sha256:77505e4ca3960c2df14617ffa5951838a6b84e51d6f8ed715ec60faa3c9e8187",
+    "policy": {
+      "version": 1,
+      "minimumFreeBytes": 0,
+      "reserveFreeBytes": 10000000000,
+      "maximumRunGrowthBytes": 8000000000,
+      "maximumRetainedBytes": 50000000000,
+      "monitorIntervalMs": 2000,
+      "terminationGraceMs": 15000
+    },
+    "availableBytesAtEntry": 14662451200
+  },
+  "reference": {
+    "engine": "399747a4ad05a37cd8db1cedd53048fad2175be4",
+    "corpus": "fixtures/parity/pack-json-controls.json",
+    "corpusDigest": "sha256:d839dd6bda9994dae6f7289e4c67fbf31237a213af46165d0fc53d5f8c055e49",
+    "sourceFiles": [
+      {
+        "path": "src/relation-pack.ts",
+        "digest": "sha256:b035eb01f6af1d9d34547abaa0139f07492ef801c72987bcae42245935f3d9b7"
+      },
+      {
+        "path": "src/canonical.ts",
+        "digest": "sha256:06994bd6e52c332ef52e37dd92408372adc51a593067a1b03ba0108bf1adf7ce"
+      },
+      {
+        "path": "src/stable.ts",
+        "digest": "sha256:5e0800fab53ac01f4e8506ca4d85b8a0a25ee74c1e79392cb69c11431633f270"
+      },
+      {
+        "path": "schemas/relation-pack.schema.json",
+        "digest": "sha256:bfac8a6fa108eb430aec628ec6952b8123468daba0178b801f7f7c1ac3e4e135"
+      },
+      {
+        "path": "schemas/relation-pack-v2.schema.json",
+        "digest": "sha256:3923a94dc77e608b73534d1c31844d4bfa823fb75708d961e6d9b97e67ae41fc"
+      }
+    ]
+  },
+  "candidate": {
+    "binaryDigest": "sha256:ebdbf9777d719e5c16c5be5dd5999e1a56ffb132cfb43a85a5620f269f785b6e",
+    "engine": {
+      "compiler": "sha256:69cb1de5d02b99eff8ed93c5ed2d1cf55495ec37b9c2f95d5faa0277293e000a",
+      "documentType": "executor-description",
+      "governance": "sha256:35e63929d85844561e6e00a85cbe7123649d169b61ef1141b537f5a133b6a19e",
+      "schemaVersion": "0.1.0",
+      "scientific": "sha256:7e1aba39acf5373b9f478e48e7694cdcd15dc2accdaf5f365c27d0dbb38f3a79",
+      "workspace": "sha256:ea65a85d4f7fe5ff44fb8a200aa055b1ebfa3be1f1540144214cae6205b211cf"
+    },
+    "sdkSourceInventory": [
+      {
+        "path": "sdk/typescript/canonical.mjs",
+        "digest": "sha256:830acf94b6a334a5659856b1c6ba342e8c02d9df49752c9163be7fa3461a3954"
+      },
+      {
+        "path": "sdk/typescript/legacy-validation.mjs",
+        "digest": "sha256:31f54d60a37fefeea69986eac6cb37edede35b631a4a7779fd99746a71bfc85c"
+      }
+    ]
+  },
+  "comparedCases": 159,
+  "matchedCases": 159,
+  "nativeExecutions": 175,
+  "results": [
+    {
+      "name": "neutral-1.0.0",
+      "expected": {
+        "status": "accepted",
+        "digest": "sha256:a85ecb34fc86fb1cf624a468014e200ba22d49e9d3a4898cd08cfbf0d24bba13"
+      },
+      "observed": {
+        "status": "accepted",
+        "digest": "sha256:a85ecb34fc86fb1cf624a468014e200ba22d49e9d3a4898cd08cfbf0d24bba13"
+      },
+      "equal": true
+    },
+    {
+      "name": "1.0.0-schemaVersion-absent",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: $ must have required property 'schemaVersion'"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: $ must have required property 'schemaVersion'"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "1.0.0-schemaVersion-null",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /schemaVersion must be equal to constant"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /schemaVersion must be equal to constant"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "1.0.0-schemaVersion-false",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /schemaVersion must be equal to constant"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /schemaVersion must be equal to constant"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "1.0.0-schemaVersion-0",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /schemaVersion must be equal to constant"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /schemaVersion must be equal to constant"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "1.0.0-schemaVersion-\"\"",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /schemaVersion must be equal to constant"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /schemaVersion must be equal to constant"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "1.0.0-schemaVersion-[]",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /schemaVersion must be equal to constant"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /schemaVersion must be equal to constant"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "1.0.0-schemaVersion-{}",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /schemaVersion must be equal to constant"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /schemaVersion must be equal to constant"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "1.0.0-id-absent",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: $ must have required property 'id'"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: $ must have required property 'id'"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "1.0.0-id-null",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /id must be string"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /id must be string"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "1.0.0-id-false",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /id must be string"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /id must be string"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "1.0.0-id-0",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /id must be string"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /id must be string"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "1.0.0-id-\"\"",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /id must match pattern \"^[A-Za-z][A-Za-z0-9+.-]*:[^\\s]+$\""
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /id must match pattern \"^[A-Za-z][A-Za-z0-9+.-]*:[^\\s]+$\""
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "1.0.0-id-[]",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /id must be string"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /id must be string"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "1.0.0-id-{}",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /id must be string"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /id must be string"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "1.0.0-version-absent",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: $ must have required property 'version'"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: $ must have required property 'version'"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "1.0.0-version-null",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /version must be string"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /version must be string"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "1.0.0-version-false",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /version must be string"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /version must be string"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "1.0.0-version-0",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /version must be string"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /version must be string"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "1.0.0-version-\"\"",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /version must NOT have fewer than 1 characters"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /version must NOT have fewer than 1 characters"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "1.0.0-version-[]",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /version must be string"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /version must be string"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "1.0.0-version-{}",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /version must be string"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /version must be string"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "1.0.0-relations-absent",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: $ must have required property 'relations'"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: $ must have required property 'relations'"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "1.0.0-relations-null",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations must be array"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations must be array"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "1.0.0-relations-false",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations must be array"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations must be array"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "1.0.0-relations-0",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations must be array"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations must be array"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "1.0.0-relations-\"\"",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations must be array"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations must be array"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "1.0.0-relations-[]",
+      "expected": {
+        "status": "accepted",
+        "digest": "sha256:8e4a01edde066e4e069347e4baedc1760b894a38b15bb6a514b063bc37d9b973"
+      },
+      "observed": {
+        "status": "accepted",
+        "digest": "sha256:8e4a01edde066e4e069347e4baedc1760b894a38b15bb6a514b063bc37d9b973"
+      },
+      "equal": true
+    },
+    {
+      "name": "1.0.0-relations-{}",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations must be array"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations must be array"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "1.0.0-relations.0-absent",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0 must be object"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0 must be object"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "1.0.0-relations.0-null",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0 must be object"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0 must be object"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "1.0.0-relations.0-false",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0 must be object"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0 must be object"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "1.0.0-relations.0-0",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0 must be object"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0 must be object"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "1.0.0-relations.0-\"\"",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0 must be object"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0 must be object"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "1.0.0-relations.0-[]",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0 must be object"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0 must be object"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "1.0.0-relations.0-{}",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0 must have required property 'id'; /relations/0 must have required property 'cyclePolicy'"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0 must have required property 'id'; /relations/0 must have required property 'cyclePolicy'"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "1.0.0-relations.0.id-absent",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0 must have required property 'id'"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0 must have required property 'id'"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "1.0.0-relations.0.id-null",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0/id must be string"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0/id must be string"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "1.0.0-relations.0.id-false",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0/id must be string"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0/id must be string"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "1.0.0-relations.0.id-0",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0/id must be string"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0/id must be string"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "1.0.0-relations.0.id-\"\"",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0/id must match pattern \"^[a-z][a-z0-9._-]*:[a-z][a-z0-9._-]*$\""
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0/id must match pattern \"^[a-z][a-z0-9._-]*:[a-z][a-z0-9._-]*$\""
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "1.0.0-relations.0.id-[]",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0/id must be string"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0/id must be string"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "1.0.0-relations.0.id-{}",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0/id must be string"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0/id must be string"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "1.0.0-relations.0.cyclePolicy-absent",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0 must have required property 'cyclePolicy'"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0 must have required property 'cyclePolicy'"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "1.0.0-relations.0.cyclePolicy-null",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0/cyclePolicy must be equal to one of the allowed values"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0/cyclePolicy must be equal to one of the allowed values"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "1.0.0-relations.0.cyclePolicy-false",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0/cyclePolicy must be equal to one of the allowed values"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0/cyclePolicy must be equal to one of the allowed values"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "1.0.0-relations.0.cyclePolicy-0",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0/cyclePolicy must be equal to one of the allowed values"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0/cyclePolicy must be equal to one of the allowed values"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "1.0.0-relations.0.cyclePolicy-\"\"",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0/cyclePolicy must be equal to one of the allowed values"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0/cyclePolicy must be equal to one of the allowed values"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "1.0.0-relations.0.cyclePolicy-[]",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0/cyclePolicy must be equal to one of the allowed values"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0/cyclePolicy must be equal to one of the allowed values"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "1.0.0-relations.0.cyclePolicy-{}",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0/cyclePolicy must be equal to one of the allowed values"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0/cyclePolicy must be equal to one of the allowed values"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "1.0.0-patch-{\"newMandatoryFeature\":true}",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: $ must NOT have additional properties"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: $ must NOT have additional properties"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "1.0.0-patch-{\"unknownA\":true,\"unknownB\":false}",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: $ must NOT have additional properties; $ must NOT have additional properties"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: $ must NOT have additional properties; $ must NOT have additional properties"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "1.0.0-patch-{\"id\":null,\"version\":false}",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /id must be string; /version must be string"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /id must be string; /version must be string"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "1.0.0-patch-{\"$schema\":null,\"description\":0}",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /$schema must be string; /description must be string"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /$schema must be string; /description must be string"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "1.0.0-patch-{\"$schema\":\"relative/\\\"quoted\"}",
+      "expected": {
+        "status": "accepted",
+        "digest": "sha256:91497289aa28505198167d044d6741ac86b044cc82b871588a7ecbb0e1598ea4"
+      },
+      "observed": {
+        "status": "accepted",
+        "digest": "sha256:91497289aa28505198167d044d6741ac86b044cc82b871588a7ecbb0e1598ea4"
+      },
+      "equal": true
+    },
+    {
+      "name": "1.0.0-patch-{\"$schema\":\"https://example.test/schema\"}",
+      "expected": {
+        "status": "accepted",
+        "digest": "sha256:cdb2f7b9bcf6a44f20cc998174e8bbc403c0d952f43786149dd41817fc4ac60c"
+      },
+      "observed": {
+        "status": "accepted",
+        "digest": "sha256:cdb2f7b9bcf6a44f20cc998174e8bbc403c0d952f43786149dd41817fc4ac60c"
+      },
+      "equal": true
+    },
+    {
+      "name": "1.0.0-patch-{\"$schema\":\"not a URI\"}",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /$schema must match format \"uri-reference\""
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /$schema must match format \"uri-reference\""
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "1.0.0-patch-{\"description\":\"😀\"}",
+      "expected": {
+        "status": "accepted",
+        "digest": "sha256:ad70a54a93cd7911c0107c8ea5278df7085ddf48be9297bee7e64ae40f0cf334"
+      },
+      "observed": {
+        "status": "accepted",
+        "digest": "sha256:ad70a54a93cd7911c0107c8ea5278df7085ddf48be9297bee7e64ae40f0cf334"
+      },
+      "equal": true
+    },
+    {
+      "name": "1.0.0-patch-{\"description\":\"\\ud800\"}",
+      "expected": {
+        "status": "accepted",
+        "digest": "sha256:2b32419f767e2cd39067e8f0ef92c7a68515750d0ec442d62da61a4ef886dee2"
+      },
+      "observed": {
+        "status": "accepted",
+        "digest": "sha256:2b32419f767e2cd39067e8f0ef92c7a68515750d0ec442d62da61a4ef886dee2"
+      },
+      "equal": true
+    },
+    {
+      "name": "1.0.0-patch-{\"version\":\"\\udfff\"}",
+      "expected": {
+        "status": "accepted",
+        "digest": "sha256:089982689f0447c67aae0b785f8838584ebcee66ec4feea441cada18d1f47626"
+      },
+      "observed": {
+        "status": "accepted",
+        "digest": "sha256:089982689f0447c67aae0b785f8838584ebcee66ec4feea441cada18d1f47626"
+      },
+      "equal": true
+    },
+    {
+      "name": "1.0.0-relation-{\"sourceKinds\":[]}",
+      "expected": {
+        "status": "accepted",
+        "digest": "sha256:6ed397ba148d4c305b0ea48b61d74a525952620aa48f15b2628581703c64c96e"
+      },
+      "observed": {
+        "status": "accepted",
+        "digest": "sha256:6ed397ba148d4c305b0ea48b61d74a525952620aa48f15b2628581703c64c96e"
+      },
+      "equal": true
+    },
+    {
+      "name": "1.0.0-relation-{\"sourceKinds\":[\"\\ud800\",\"\"]}",
+      "expected": {
+        "status": "accepted",
+        "digest": "sha256:3fbbf5a6eb95452bf852ac0c0b7cffa69e81c569ed67a22a20d2becaaf76d8fe"
+      },
+      "observed": {
+        "status": "accepted",
+        "digest": "sha256:3fbbf5a6eb95452bf852ac0c0b7cffa69e81c569ed67a22a20d2becaaf76d8fe"
+      },
+      "equal": true
+    },
+    {
+      "name": "1.0.0-relation-{\"sourceKinds\":[\"x\",\"x\"]}",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0/sourceKinds must NOT have duplicate items (items ## 1 and 0 are identical)"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0/sourceKinds must NOT have duplicate items (items ## 1 and 0 are identical)"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "1.0.0-relation-{\"sourceKinds\":[\"a\",\"b\",\"a\",\"b\",\"a\"]}",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0/sourceKinds must NOT have duplicate items (items ## 4 and 2 are identical)"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0/sourceKinds must NOT have duplicate items (items ## 4 and 2 are identical)"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "1.0.0-relation-{\"sourceKinds\":[\"__proto__\",\"__proto__\"]}",
+      "expected": {
+        "status": "accepted",
+        "digest": "sha256:63daef62863d5ea3067d7ad750bdd1f76990eec85746252cc04c59a95e0c5cc8"
+      },
+      "observed": {
+        "status": "accepted",
+        "digest": "sha256:63daef62863d5ea3067d7ad750bdd1f76990eec85746252cc04c59a95e0c5cc8"
+      },
+      "equal": true
+    },
+    {
+      "name": "1.0.0-relation-{\"sourceKinds\":[\"constructor\",\"constructor\"]}",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0/sourceKinds must NOT have duplicate items (items ## 1 and 0 are identical)"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0/sourceKinds must NOT have duplicate items (items ## 1 and 0 are identical)"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "1.0.0-relation-{\"sourceKinds\":[null,null]}",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0/sourceKinds/0 must be string; /relations/0/sourceKinds/1 must be string"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0/sourceKinds/0 must be string; /relations/0/sourceKinds/1 must be string"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "1.0.0-relation-{\"sourceKinds\":[0,0]}",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0/sourceKinds/0 must be string; /relations/0/sourceKinds/1 must be string"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0/sourceKinds/0 must be string; /relations/0/sourceKinds/1 must be string"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "1.0.0-relation-{\"targetKinds\":\"x\"}",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0/targetKinds must be array"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0/targetKinds must be array"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "1.0.0-relation-{\"cardinalities\":[\"invalid\"]}",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0/cardinalities/0 must be equal to one of the allowed values"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0/cardinalities/0 must be equal to one of the allowed values"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "1.0.0-relation-{\"cardinalities\":[\"one-to-one\",\"many-to-one\",\"one-to-one\",\"many-to-one\",\"one-to-one\"]}",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0/cardinalities must NOT have duplicate items (items ## 2 and 4 are identical)"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0/cardinalities must NOT have duplicate items (items ## 2 and 4 are identical)"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "1.0.0-relation-{\"inverse\":\"INVALID\"}",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0/inverse must match pattern \"^[a-z][a-z0-9._-]*:[a-z][a-z0-9._-]*$\""
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0/inverse must match pattern \"^[a-z][a-z0-9._-]*:[a-z][a-z0-9._-]*$\""
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "1.0.0-relation-{\"cyclePolicy\":\"unknown\"}",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0/cyclePolicy must be equal to one of the allowed values"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0/cyclePolicy must be equal to one of the allowed values"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "1.0.0-relation-{\"id\":false,\"cyclePolicy\":\"unknown\"}",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0/id must be string; /relations/0/cyclePolicy must be equal to one of the allowed values"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0/id must be string; /relations/0/cyclePolicy must be equal to one of the allowed values"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "1.0.0-relation-{\"unknownA\":true,\"unknownB\":false}",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0 must NOT have additional properties; /relations/0 must NOT have additional properties"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0 must NOT have additional properties; /relations/0 must NOT have additional properties"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "1.0.0-relation-{\"transitive\":\"yes\"}",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0/transitive must be boolean"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0/transitive must be boolean"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "neutral-2.0.0",
+      "expected": {
+        "status": "accepted",
+        "digest": "sha256:1cfff3c53210da1cf3670284cfe91a00246b02c73ede11b36852d0537e4f779b"
+      },
+      "observed": {
+        "status": "accepted",
+        "digest": "sha256:1cfff3c53210da1cf3670284cfe91a00246b02c73ede11b36852d0537e4f779b"
+      },
+      "equal": true
+    },
+    {
+      "name": "2.0.0-schemaVersion-absent",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: $ must have required property 'schemaVersion'; $ must NOT have additional properties"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: $ must have required property 'schemaVersion'; $ must NOT have additional properties"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "2.0.0-schemaVersion-null",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: $ must NOT have additional properties; /schemaVersion must be equal to constant"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: $ must NOT have additional properties; /schemaVersion must be equal to constant"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "2.0.0-schemaVersion-false",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: $ must NOT have additional properties; /schemaVersion must be equal to constant"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: $ must NOT have additional properties; /schemaVersion must be equal to constant"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "2.0.0-schemaVersion-0",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: $ must NOT have additional properties; /schemaVersion must be equal to constant"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: $ must NOT have additional properties; /schemaVersion must be equal to constant"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "2.0.0-schemaVersion-\"\"",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: $ must NOT have additional properties; /schemaVersion must be equal to constant"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: $ must NOT have additional properties; /schemaVersion must be equal to constant"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "2.0.0-schemaVersion-[]",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: $ must NOT have additional properties; /schemaVersion must be equal to constant"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: $ must NOT have additional properties; /schemaVersion must be equal to constant"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "2.0.0-schemaVersion-{}",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: $ must NOT have additional properties; /schemaVersion must be equal to constant"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: $ must NOT have additional properties; /schemaVersion must be equal to constant"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "2.0.0-id-absent",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: $ must have required property 'id'"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: $ must have required property 'id'"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "2.0.0-id-null",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /id must be string"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /id must be string"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "2.0.0-id-false",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /id must be string"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /id must be string"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "2.0.0-id-0",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /id must be string"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /id must be string"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "2.0.0-id-\"\"",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /id must match pattern \"^[A-Za-z][A-Za-z0-9+.-]*:[^\\s]+$\""
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /id must match pattern \"^[A-Za-z][A-Za-z0-9+.-]*:[^\\s]+$\""
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "2.0.0-id-[]",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /id must be string"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /id must be string"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "2.0.0-id-{}",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /id must be string"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /id must be string"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "2.0.0-version-absent",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: $ must have required property 'version'"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: $ must have required property 'version'"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "2.0.0-version-null",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /version must be string"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /version must be string"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "2.0.0-version-false",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /version must be string"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /version must be string"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "2.0.0-version-0",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /version must be string"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /version must be string"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "2.0.0-version-\"\"",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /version must NOT have fewer than 1 characters"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /version must NOT have fewer than 1 characters"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "2.0.0-version-[]",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /version must be string"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /version must be string"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "2.0.0-version-{}",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /version must be string"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /version must be string"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "2.0.0-relations-absent",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: $ must have required property 'relations'"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: $ must have required property 'relations'"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "2.0.0-relations-null",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations must be array"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations must be array"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "2.0.0-relations-false",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations must be array"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations must be array"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "2.0.0-relations-0",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations must be array"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations must be array"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "2.0.0-relations-\"\"",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations must be array"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations must be array"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "2.0.0-relations-[]",
+      "expected": {
+        "status": "accepted",
+        "digest": "sha256:a466f97e80902a5c95522f91dbff6818fe83f4755a6283191fea737c50e5ee1c"
+      },
+      "observed": {
+        "status": "accepted",
+        "digest": "sha256:a466f97e80902a5c95522f91dbff6818fe83f4755a6283191fea737c50e5ee1c"
+      },
+      "equal": true
+    },
+    {
+      "name": "2.0.0-relations-{}",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations must be array"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations must be array"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "2.0.0-relations.0-absent",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0 must be object"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0 must be object"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "2.0.0-relations.0-null",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0 must be object"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0 must be object"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "2.0.0-relations.0-false",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0 must be object"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0 must be object"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "2.0.0-relations.0-0",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0 must be object"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0 must be object"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "2.0.0-relations.0-\"\"",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0 must be object"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0 must be object"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "2.0.0-relations.0-[]",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0 must be object"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0 must be object"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "2.0.0-relations.0-{}",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0 must have required property 'id'; /relations/0 must have required property 'cyclePolicy'"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0 must have required property 'id'; /relations/0 must have required property 'cyclePolicy'"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "2.0.0-relations.0.id-absent",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0 must have required property 'id'"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0 must have required property 'id'"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "2.0.0-relations.0.id-null",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0/id must be string"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0/id must be string"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "2.0.0-relations.0.id-false",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0/id must be string"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0/id must be string"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "2.0.0-relations.0.id-0",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0/id must be string"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0/id must be string"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "2.0.0-relations.0.id-\"\"",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0/id must match pattern \"^[a-z][a-z0-9._-]*:[a-z][a-z0-9._-]*$\""
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0/id must match pattern \"^[a-z][a-z0-9._-]*:[a-z][a-z0-9._-]*$\""
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "2.0.0-relations.0.id-[]",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0/id must be string"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0/id must be string"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "2.0.0-relations.0.id-{}",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0/id must be string"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0/id must be string"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "2.0.0-relations.0.cyclePolicy-absent",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0 must have required property 'cyclePolicy'"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0 must have required property 'cyclePolicy'"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "2.0.0-relations.0.cyclePolicy-null",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0/cyclePolicy must be equal to one of the allowed values"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0/cyclePolicy must be equal to one of the allowed values"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "2.0.0-relations.0.cyclePolicy-false",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0/cyclePolicy must be equal to one of the allowed values"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0/cyclePolicy must be equal to one of the allowed values"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "2.0.0-relations.0.cyclePolicy-0",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0/cyclePolicy must be equal to one of the allowed values"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0/cyclePolicy must be equal to one of the allowed values"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "2.0.0-relations.0.cyclePolicy-\"\"",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0/cyclePolicy must be equal to one of the allowed values"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0/cyclePolicy must be equal to one of the allowed values"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "2.0.0-relations.0.cyclePolicy-[]",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0/cyclePolicy must be equal to one of the allowed values"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0/cyclePolicy must be equal to one of the allowed values"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "2.0.0-relations.0.cyclePolicy-{}",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0/cyclePolicy must be equal to one of the allowed values"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0/cyclePolicy must be equal to one of the allowed values"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "2.0.0-patch-{\"newMandatoryFeature\":true}",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: $ must NOT have additional properties"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: $ must NOT have additional properties"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "2.0.0-patch-{\"unknownA\":true,\"unknownB\":false}",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: $ must NOT have additional properties; $ must NOT have additional properties"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: $ must NOT have additional properties; $ must NOT have additional properties"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "2.0.0-patch-{\"id\":null,\"version\":false}",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /id must be string; /version must be string"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /id must be string; /version must be string"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "2.0.0-patch-{\"$schema\":null,\"description\":0}",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /$schema must be string; /description must be string"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /$schema must be string; /description must be string"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "2.0.0-patch-{\"$schema\":\"relative/\\\"quoted\"}",
+      "expected": {
+        "status": "accepted",
+        "digest": "sha256:88a67608b0f690dea750f536499cbefca65382f1697d41a15c2806ceeb7e500b"
+      },
+      "observed": {
+        "status": "accepted",
+        "digest": "sha256:88a67608b0f690dea750f536499cbefca65382f1697d41a15c2806ceeb7e500b"
+      },
+      "equal": true
+    },
+    {
+      "name": "2.0.0-patch-{\"$schema\":\"https://example.test/schema\"}",
+      "expected": {
+        "status": "accepted",
+        "digest": "sha256:73a27fa18587d7aac15852fae1e04af86d769fb20aa02f6a04cf4692be87f7c8"
+      },
+      "observed": {
+        "status": "accepted",
+        "digest": "sha256:73a27fa18587d7aac15852fae1e04af86d769fb20aa02f6a04cf4692be87f7c8"
+      },
+      "equal": true
+    },
+    {
+      "name": "2.0.0-patch-{\"$schema\":\"not a URI\"}",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /$schema must match format \"uri-reference\""
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /$schema must match format \"uri-reference\""
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "2.0.0-patch-{\"description\":\"😀\"}",
+      "expected": {
+        "status": "accepted",
+        "digest": "sha256:d35570b62ebfc09704bfc4fbfa723a55d1771df72df41afe517117d104d80629"
+      },
+      "observed": {
+        "status": "accepted",
+        "digest": "sha256:d35570b62ebfc09704bfc4fbfa723a55d1771df72df41afe517117d104d80629"
+      },
+      "equal": true
+    },
+    {
+      "name": "2.0.0-patch-{\"description\":\"\\ud800\"}",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "CanonicalJsonError",
+          "message": "Unpaired high surrogate"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "CanonicalJsonError",
+          "message": "Unpaired high surrogate"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "2.0.0-patch-{\"version\":\"\\udfff\"}",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "CanonicalJsonError",
+          "message": "Unpaired low surrogate"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "CanonicalJsonError",
+          "message": "Unpaired low surrogate"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "2.0.0-relation-{\"sourceKinds\":[]}",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0/sourceKinds must NOT have fewer than 1 items"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0/sourceKinds must NOT have fewer than 1 items"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "2.0.0-relation-{\"sourceKinds\":[\"\\ud800\",\"\"]}",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "CanonicalJsonError",
+          "message": "Unpaired high surrogate"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "CanonicalJsonError",
+          "message": "Unpaired high surrogate"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "2.0.0-relation-{\"sourceKinds\":[\"x\",\"x\"]}",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0/sourceKinds must NOT have duplicate items (items ## 1 and 0 are identical)"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0/sourceKinds must NOT have duplicate items (items ## 1 and 0 are identical)"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "2.0.0-relation-{\"sourceKinds\":[\"a\",\"b\",\"a\",\"b\",\"a\"]}",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0/sourceKinds must NOT have duplicate items (items ## 4 and 2 are identical)"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0/sourceKinds must NOT have duplicate items (items ## 4 and 2 are identical)"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "2.0.0-relation-{\"sourceKinds\":[\"__proto__\",\"__proto__\"]}",
+      "expected": {
+        "status": "accepted",
+        "digest": "sha256:6aee9f46185f375d2538d11e466b24e4769af69a6c0fbf10e5b1468af44b6823"
+      },
+      "observed": {
+        "status": "accepted",
+        "digest": "sha256:6aee9f46185f375d2538d11e466b24e4769af69a6c0fbf10e5b1468af44b6823"
+      },
+      "equal": true
+    },
+    {
+      "name": "2.0.0-relation-{\"sourceKinds\":[\"constructor\",\"constructor\"]}",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0/sourceKinds must NOT have duplicate items (items ## 1 and 0 are identical)"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0/sourceKinds must NOT have duplicate items (items ## 1 and 0 are identical)"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "2.0.0-relation-{\"sourceKinds\":[null,null]}",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0/sourceKinds/0 must be string; /relations/0/sourceKinds/1 must be string"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0/sourceKinds/0 must be string; /relations/0/sourceKinds/1 must be string"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "2.0.0-relation-{\"sourceKinds\":[0,0]}",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0/sourceKinds/0 must be string; /relations/0/sourceKinds/1 must be string"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0/sourceKinds/0 must be string; /relations/0/sourceKinds/1 must be string"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "2.0.0-relation-{\"targetKinds\":\"x\"}",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0/targetKinds must be array"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0/targetKinds must be array"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "2.0.0-relation-{\"cardinalities\":[\"invalid\"]}",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0/cardinalities/0 must be equal to one of the allowed values"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0/cardinalities/0 must be equal to one of the allowed values"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "2.0.0-relation-{\"cardinalities\":[\"one-to-one\",\"many-to-one\",\"one-to-one\",\"many-to-one\",\"one-to-one\"]}",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0/cardinalities must NOT have duplicate items (items ## 2 and 4 are identical)"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0/cardinalities must NOT have duplicate items (items ## 2 and 4 are identical)"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "2.0.0-relation-{\"inverse\":\"INVALID\"}",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0/inverse must match pattern \"^[a-z][a-z0-9._-]*:[a-z][a-z0-9._-]*$\""
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0/inverse must match pattern \"^[a-z][a-z0-9._-]*:[a-z][a-z0-9._-]*$\""
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "2.0.0-relation-{\"cyclePolicy\":\"unknown\"}",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0/cyclePolicy must be equal to one of the allowed values"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0/cyclePolicy must be equal to one of the allowed values"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "2.0.0-relation-{\"id\":false,\"cyclePolicy\":\"unknown\"}",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0/id must be string; /relations/0/cyclePolicy must be equal to one of the allowed values"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0/id must be string; /relations/0/cyclePolicy must be equal to one of the allowed values"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "2.0.0-relation-{\"unknownA\":true,\"unknownB\":false}",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0 must NOT have additional properties; /relations/0 must NOT have additional properties"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0 must NOT have additional properties; /relations/0 must NOT have additional properties"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "2.0.0-relation-{\"transitive\":\"yes\"}",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0/transitive must be boolean"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0/transitive must be boolean"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "root-null",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: $ must be object"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: $ must be object"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "root-false",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: $ must be object"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: $ must be object"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "root-0",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: $ must be object"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: $ must be object"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "root-\"\"",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: $ must be object"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: $ must be object"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "root-[]",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: $ must be object"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: $ must be object"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "root-{}",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: $ must have required property 'schemaVersion'; $ must have required property 'id'; $ must have required property 'version'; $ must have required property 'relations'"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: $ must have required property 'schemaVersion'; $ must have required property 'id'; $ must have required property 'version'; $ must have required property 'relations'"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "root-{\"schemaVersion\":\"9.0.0\"}",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: $ must have required property 'id'; $ must have required property 'version'; $ must have required property 'relations'; /schemaVersion must be equal to constant"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: $ must have required property 'id'; $ must have required property 'version'; $ must have required property 'relations'; /schemaVersion must be equal to constant"
+        }
+      },
+      "equal": true
+    }
+  ],
+  "differences": [],
+  "originalCasesClosed": 0,
+  "scope": "Finite plain JSON pack shape, parser identity, version-specific valid digests and exact thrown name/message. Does not establish arbitrary JS objects, unchecked digest inputs, file parsing/errors or resource-bound equivalence.",
+  "traceDigest": "sha256:1398709af9821ae2518d6e2d15db3267762f303c4b0425eb276109c71fa789c6",
+  "driverDigest": "sha256:73dc0c5541d0a0809bc0affa1c58cf69eb6322c57b2e3dd835c4dbffb6a67576"
+}

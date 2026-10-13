@@ -1,11 +1,13 @@
 #![forbid(unsafe_code)]
 
 mod capture;
+mod compare;
 mod path_tree;
 pub use capture::{
-    CaptureInputs, CaptureRecord, SourceReceipt, VerifiedReplay, capture, compare, evaluate,
+    CaptureInputs, CaptureRecord, CaptureVersion, SourceReceipt, VerifiedReplay, capture, evaluate,
     executor_id, replay,
 };
+pub use compare::compare;
 pub use path_tree::{
     CheckedPathTree, HydratedTree, PathNode, PathTreeRecord, compile_path_tree, hydrate,
 };

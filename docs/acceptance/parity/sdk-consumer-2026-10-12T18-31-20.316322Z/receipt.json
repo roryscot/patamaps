@@ -1,0 +1,194 @@
+{
+  "schemaVersion": "1.0.0",
+  "status": "passed",
+  "commands": [
+    {
+      "name": "reference-type-declarations",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "/Users/admin/dev/SEEDZ/metamap/node_modules/typescript/lib/tsc.js",
+        "/Users/admin/dev/patamaps/patamaps/.tools/parity/oracles/399747a4ad05-p8pkt3pr/reference/src/model.ts",
+        "/Users/admin/dev/patamaps/patamaps/.tools/parity/oracles/399747a4ad05-p8pkt3pr/reference/src/viability-model.ts",
+        "--strict",
+        "--module",
+        "NodeNext",
+        "--moduleResolution",
+        "NodeNext",
+        "--target",
+        "ES2022",
+        "--lib",
+        "ES2022",
+        "--declaration",
+        "--emitDeclarationOnly",
+        "--outDir",
+        "/private/tmp/patamaps-installed-sdk-0yr7sp3r/reference-contracts"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "pack-type-contracts",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "/Users/admin/dev/SEEDZ/metamap/node_modules/typescript/lib/tsc.js",
+        "type-contracts.mts",
+        "--strict",
+        "--module",
+        "NodeNext",
+        "--moduleResolution",
+        "NodeNext",
+        "--target",
+        "ES2022",
+        "--lib",
+        "ES2022",
+        "--noEmit"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "compile",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "/Users/admin/dev/SEEDZ/metamap/node_modules/typescript/lib/tsc.js",
+        "consumer.mts",
+        "--strict",
+        "--module",
+        "NodeNext",
+        "--moduleResolution",
+        "NodeNext",
+        "--target",
+        "ES2022",
+        "--lib",
+        "ES2022"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "execute",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "/private/tmp/patamaps-installed-sdk-0yr7sp3r/consumer.mjs"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "reject-types",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "/Users/admin/dev/SEEDZ/metamap/node_modules/typescript/lib/tsc.js",
+        "negative.mts",
+        "--strict",
+        "--module",
+        "NodeNext",
+        "--moduleResolution",
+        "NodeNext",
+        "--target",
+        "ES2022",
+        "--lib",
+        "ES2022",
+        "--noEmit"
+      ],
+      "exitCode": 2
+    }
+  ],
+  "candidate": {
+    "binaryDigest": "sha256:c1f2ad50914b3a8867040cb675cb557e235c99d589bdd2cc9b13d921c5b1b558",
+    "engine": {
+      "compiler": "sha256:88107efee2085d313b472eea2bdb37981d4eb9705f9495c08ad5c354d35a6495",
+      "documentType": "executor-description",
+      "governance": "sha256:24bc55f165c5287c5a04a321cd1bba8b105d4f8b8a3af1e5e6a4663ebfa528d2",
+      "schemaVersion": "0.1.0",
+      "scientific": "sha256:9e75448a3b795dbb4c69b11290c015c75b7b8855acc4b68b3508077b0b5037f5",
+      "workspace": "sha256:3cb7935158419711b58c17a4c52a864888829b4f3a206ecd876e957d1f5cc5a3"
+    },
+    "sdkSourceInventory": [
+      {
+        "path": "sdk/typescript/canonical.mjs",
+        "digest": "sha256:830acf94b6a334a5659856b1c6ba342e8c02d9df49752c9163be7fa3461a3954"
+      },
+      {
+        "path": "sdk/typescript/index.mjs",
+        "digest": "sha256:f5f5abcf9d4b199a4674795bd5e96252f65c1449d679a73dd069c17c89db6015"
+      },
+      {
+        "path": "sdk/typescript/legacy-validation.mjs",
+        "digest": "sha256:1f1e221f2e0124fbb81191003fd840224e77aa8d7c9e57ad3210f99f7b01bc02"
+      },
+      {
+        "path": "sdk/typescript/sssom-profile.mjs",
+        "digest": "sha256:a37260f42d6b02c5900dbefa9477386667f5286079a7a1abd12495e3dc78e533"
+      },
+      {
+        "path": "sdk/typescript/sssom.mjs",
+        "digest": "sha256:ccc44eac40a38b892d42c33537a9f15915e1aa65c774e6dc78d129284a6bfb74"
+      },
+      {
+        "path": "sdk/typescript/canonical.d.ts",
+        "digest": "sha256:88ae79727dbad3b0872a9c3539a95fe6c444b810ff416423f06a2cf39274ecb4"
+      },
+      {
+        "path": "sdk/typescript/index.d.ts",
+        "digest": "sha256:aa76e1583c3a1b872ec1fa9fbbaddd8c1211a118c9f670c0d9ec1b0ba3a4bbae"
+      },
+      {
+        "path": "sdk/typescript/legacy-validation.d.ts",
+        "digest": "sha256:d895c5d46883c319de03e7cd226326994c3d6e5b6068dbcb3d750e00d8e4f99b"
+      },
+      {
+        "path": "sdk/typescript/sssom.d.ts",
+        "digest": "sha256:7f58f17edc48bcb8340b73004273fa4c23a9f4b3671ca1276225f16de8254457"
+      },
+      {
+        "path": "sdk/typescript/package.json",
+        "digest": "sha256:45da1eca3cce8ca85e1108209aa4e4a02cb6921e52aa1d334f9fb3cf07d0f258"
+      }
+    ]
+  },
+  "host": {
+    "platform": "macOS-26.6.2-arm64-arm-64bit-Mach-O",
+    "architecture": "arm64"
+  },
+  "retainedStage": "/private/tmp/patamaps-installed-sdk-0yr7sp3r",
+  "logs": {
+    "compile.stderr.log": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "compile.stdout.log": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "execute.stderr.log": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "execute.stdout.log": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "pack-type-contracts.stderr.log": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "pack-type-contracts.stdout.log": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "reference-type-declarations.stderr.log": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "reference-type-declarations.stdout.log": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "reject-types.stderr.log": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "reject-types.stdout.log": "sha256:a8ada899609aa556a366047c1801d8e258cae618e38b84d8c950e6e83af96780"
+  },
+  "typeContractComparison": {
+    "mapping": "fixtures/parity/legacy-pack-type-mapping.json",
+    "mappingDigest": "sha256:cbf98a74f1cd579fd11efa452449100b2eb59470859e77cf2e9fda1ddae02e54",
+    "mappedDeclarations": 11,
+    "comparison": "Original-source-generated declarations and candidate aliases are assignable in both directions under strict TypeScript checking.",
+    "sourceInventory": [
+      {
+        "path": "src/model.ts",
+        "digest": "sha256:f470117b2b017de99144802b8d89f0102136f4c5972f853159cb5a9af96bf3b8"
+      },
+      {
+        "path": "src/viability-model.ts",
+        "digest": "sha256:722b04376c5e5c7e5de3a242ec5a1fa613b900e9e8752f72ce9bcfc1aad145c8"
+      }
+    ],
+    "retainedProbe": "/private/tmp/patamaps-installed-sdk-0yr7sp3r/type-contracts.mts",
+    "probeDigest": "sha256:47f2b7e478824b61a520e798424fa1f34191667fe2bb996d622d8b0e1db5112a",
+    "generatedOriginalDeclarations": [
+      {
+        "path": "/private/tmp/patamaps-installed-sdk-0yr7sp3r/reference-contracts/model.d.ts",
+        "digest": "sha256:d90fe046d23a7a154f4f40d2eb7a67ab1154a64bc475e403c5f2a4e9a61795f6"
+      },
+      {
+        "path": "/private/tmp/patamaps-installed-sdk-0yr7sp3r/reference-contracts/viability-model.d.ts",
+        "digest": "sha256:c451c309e7c4d5a2918bc152a916755b0cb9f53edfee36e6cdae55f0264c4482"
+      }
+    ],
+    "referenceGitBlobsVerifiedBeforeAndAfter": 610
+  },
+  "negativeTypeControls": 16,
+  "scope": "Copied canonical, scientific and read-only legacy JSON graph/pack SDK interfaces compiled and executed outside the checkout with empty PATH, including asynchronous file loading, version-specific duplicates, UTF-16, UTF-8 replacement and missing-file refusals. Sixteen negative type controls reject. Eleven mapped pack/context declarations receive bidirectional type comparisons against declarations generated from the unchanged original source. This closes no full-package or obligation-level parity gate. Reference types are comparison inputs only; no MetaMap runtime package is present in the copied consumer."
+}

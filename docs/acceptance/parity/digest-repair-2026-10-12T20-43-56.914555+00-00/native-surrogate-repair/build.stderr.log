@@ -1,0 +1,39 @@
+     Locking 1 package to highest Rust 1.99 compatible version
+      Adding icu_collator v2.2.1 (/Users/admin/dev/patamaps/patamaps/vendor/icu_collator)
+   Compiling libc v0.2.190
+   Compiling icu_collator v2.2.1 (/Users/admin/dev/patamaps/patamaps/vendor/icu_collator)
+   Compiling cpufeatures v0.2.17
+   Compiling sha2 v0.10.9
+warning: associated function `new_implicit_from_char` is never used
+   --> vendor/icu_collator/src/elements.rs:555:12
+    |
+538 | impl CollationElement {
+    | --------------------- associated function in this implementation
+...
+555 |     pub fn new_implicit_from_char(c: char) -> Self {
+    |            ^^^^^^^^^^^^^^^^^^^^^^
+    |
+    = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+   Compiling patamaps-contracts v0.1.0 (/Users/admin/dev/patamaps/patamaps/crates/patamaps-contracts)
+warning: `icu_collator` (lib) generated 1 warning
+   Compiling patamaps-core v0.1.0 (/Users/admin/dev/patamaps/patamaps/crates/patamaps-core)
+   Compiling patamaps-projection v0.1.0 (/Users/admin/dev/patamaps/patamaps/crates/patamaps-projection)
+error: recursion limit reached while expanding `$crate::json_internal!`
+   --> crates/patamaps-projection/src/capture.rs:95:27
+    |
+ 95 |   ...   canonical_digest(&json!({
+    |  _________________________^
+ 96 | | ...       "profile":PROFILE,"toolchain":include_str!("../../../rust-toolchain.toml"),
+ 97 | | ...   "lock":include_str!("../../../Cargo.lock"),
+ 98 | | ...   "workspace":include_str!("../../../Cargo.toml"),
+...   |
+134 | | ...       "projection":include_str!("lib.rs"),"capture":include_str!("capture.rs"),"comparison":include_str!("compare.rs"),"pathT...
+135 | | ...   }))
+    | |________^
+    |
+    = help: consider increasing the recursion limit by adding a `#![recursion_limit = "256"]` attribute to your crate (`patamaps_projection`)
+    = note: this error originates in the macro `$crate::json_internal` which comes from the expansion of the macro `json` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error: could not compile `patamaps-projection` (lib) due to 1 previous error
+warning: build failed, waiting for other jobs to finish...

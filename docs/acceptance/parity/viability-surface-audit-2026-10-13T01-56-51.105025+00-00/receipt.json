@@ -1,0 +1,55 @@
+{
+  "schemaVersion": "1.0.0",
+  "status": "static-review-completed",
+  "goalStatus": "active",
+  "classification": {
+    "path": "fixtures/parity/legacy-viability-classification.json",
+    "digest": "sha256:2afba9fdd162702e8b91aa0780f8aa0678a6867e36c0ae48d3870aa7e2677786"
+  },
+  "sourceInventory": [
+    {
+      "path": "crates/patamaps-core/src/legacy_viability.rs",
+      "digest": "sha256:152a5623a8ec6b621fd4002be750a30b9c277a4ad2064e19f4d68e5d0c94cfcb"
+    },
+    {
+      "path": "crates/patamaps-core/src/legacy_constraints.rs",
+      "digest": "sha256:9b9fc7f10b73e7edc7fe5c018e4575be4f5151306927ef319b054897e63f3399"
+    },
+    {
+      "path": "sdk/typescript/legacy-viability.mjs",
+      "digest": "sha256:c5971e51b0181a0496958632ef06d53f08267b412947b3b14ea4a3ae8e5968e9"
+    },
+    {
+      "path": "sdk/typescript/legacy-viability.d.ts",
+      "digest": "sha256:466e57dd3f4f01653085c27d244c70d1230c4f50c00b658eb54c93a0dcdcdc6e"
+    },
+    {
+      "path": "sdk/typescript/legacy-evaluation.d.ts",
+      "digest": "sha256:be18b5ac43fae751f0a9975e955584d15c46364a91395bfe8ed4cefc87dd7626"
+    }
+  ],
+  "referenceGitBlobsVerified": 610,
+  "reviewedRows": 42,
+  "reviewedStatuses": {
+    "implemented-unverified": 25,
+    "missing": 17
+  },
+  "beforeCounts": {
+    "unclassified": 1006,
+    "verified-equivalent": 114,
+    "implemented-unverified": 145,
+    "missing": 28
+  },
+  "afterCounts": {
+    "unclassified": 964,
+    "verified-equivalent": 114,
+    "implemented-unverified": 170,
+    "missing": 45
+  },
+  "verification": "All original IDs/names/source digests and classification bindings validated statically. No new candidateEvidence was attached and no obligation was marked equivalent. The strict verifier cannot run until the current sources are rebuilt.",
+  "storageBlocker": "9.41 GiB available against the 10 GiB floor; the same exact 12-file deletion approval remains pending. No additional deletion, VM creation or build-policy change occurred.",
+  "next": "Freeze independently and build/test the v1 candidate after authorized storage recovery; implement missing public callbacks, constants, memory/governed activator and full v2 compiler.",
+  "classificationBindingsValidated": 215,
+  "frozenDenominatorDigestsStillMatch": true,
+  "baselineObligationCount": 1293
+}

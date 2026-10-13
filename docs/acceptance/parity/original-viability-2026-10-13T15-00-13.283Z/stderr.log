@@ -1,0 +1,123 @@
+
+⎯⎯⎯⎯⎯⎯ Failed Tests 10 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/__tests__/viability.test.ts > viability compiler > compiles a complete policy into a deterministic immutable generation
+TypeError: (0 , compileMetamap) is not a function
+ ❯ src/__tests__/viability.test.ts:50:19
+     48| describe("viability compiler", () => {
+     49|   it("compiles a complete policy into a deterministic immutable genera…
+     50|     const first = compileMetamap(document(), policy(), {
+       |                   ^
+     51|       context: production,
+     52|       evaluatedAt,
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/10]⎯
+
+ FAIL  src/__tests__/viability.test.ts > viability compiler > detects mutation of a persisted generation
+TypeError: (0 , compileMetamap) is not a function
+ ❯ src/__tests__/viability.test.ts:70:20
+     68| 
+     69|   it("detects mutation of a persisted generation", () => {
+     70|     const result = compileMetamap(document(), policy(), {
+       |                    ^
+     71|       context: production,
+     72|       evaluatedAt,
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/10]⎯
+
+ FAIL  src/__tests__/viability.test.ts > viability compiler > expresses and inhibits mappings without mutating the graph
+TypeError: (0 , compileMetamap) is not a function
+ ❯ src/__tests__/viability.test.ts:90:20
+     88| 
+     89|   it("expresses and inhibits mappings without mutating the graph", () …
+     90|     const result = compileMetamap(document(), policy(), {
+       |                    ^
+     91|       context: { environment: "production", maintenance: true },
+     92|       evaluatedAt,
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/10]⎯
+
+ FAIL  src/__tests__/viability.test.ts > viability compiler > rejects missing context instead of silently deactivating mappings
+TypeError: (0 , compileMetamap) is not a function
+ ❯ src/__tests__/viability.test.ts:105:20
+    103| 
+    104|   it("rejects missing context instead of silently deactivating mapping…
+    105|     const result = compileMetamap(document(), policy(), { evaluatedAt …
+       |                    ^
+    106|     expect(result.status).toBe("rejected");
+    107|     expect(result.issues).toEqual(
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/10]⎯
+
+ FAIL  src/__tests__/viability.test.ts > viability compiler > requires a full date-time for deterministic waiver evaluation
+TypeError: (0 , compileMetamap) is not a function
+ ❯ src/__tests__/viability.test.ts:115:20
+    113| 
+    114|   it("requires a full date-time for deterministic waiver evaluation", …
+    115|     const result = compileMetamap(document(), policy(), {
+       |                    ^
+    116|       context: production,
+    117|       evaluatedAt: "2026-09-02",
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/10]⎯
+
+ FAIL  src/__tests__/viability.test.ts > viability compiler > rejects missing declarations and unknown lossiness
+TypeError: (0 , compileMetamap) is not a function
+ ❯ src/__tests__/viability.test.ts:130:21
+    128|     const incomplete = policy();
+    129|     incomplete.mappings.pop();
+    130|     const missing = compileMetamap(document(), incomplete, {
+       |                     ^
+    131|       context: production,
+    132|       evaluatedAt,
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/10]⎯
+
+ FAIL  src/__tests__/viability.test.ts > viability compiler > allows only explicit, scoped, unexpired waivers
+TypeError: (0 , compileMetamap) is not a function
+ ❯ src/__tests__/viability.test.ts:171:20
+    169|     ];
+    170| 
+    171|     const waived = compileMetamap(ambiguous, waivedPolicy, {
+       |                    ^
+    172|       context: production,
+    173|       evaluatedAt,
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/10]⎯
+
+ FAIL  src/__tests__/viability.test.ts > viability compiler > rejects contradictory evidence only when its mapping is expressed
+TypeError: (0 , compileMetamap) is not a function
+ ❯ src/__tests__/viability.test.ts:208:7
+    206| 
+    207|     expect(
+    208|       compileMetamap(document(), contradicted, {
+       |       ^
+    209|         context: production,
+    210|         evaluatedAt,
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[8/10]⎯
+
+ FAIL  src/__tests__/viability.test.ts > viability compiler > calculates causal impact using relation-specific propagation
+TypeError: (0 , compileMetamap) is not a function
+ ❯ src/__tests__/viability.test.ts:222:20
+    220| 
+    221|   it("calculates causal impact using relation-specific propagation", (…
+    222|     const result = compileMetamap(document(), policy(), {
+       |                    ^
+    223|       context: production,
+    224|       evaluatedAt,
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[9/10]⎯
+
+ FAIL  src/__tests__/viability.test.ts > viability compiler > rejects constraint kinds without a registered evaluator
+TypeError: (0 , compileMetamap) is not a function
+ ❯ src/__tests__/viability.test.ts:261:20
+    259|       subjects: ["urn:example:concept:user.email"],
+    260|     });
+    261|     const result = compileMetamap(document(), custom, {
+       |                    ^
+    262|       context: production,
+    263|       evaluatedAt,
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[10/10]⎯
+

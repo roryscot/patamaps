@@ -11,6 +11,7 @@ fn typed<T: DeserializeOwned>(v: Value) -> T {
 }
 fn base() -> CaptureRecord {
     capture(CaptureInputs {
+        projection_specs: vec![],
         graph:typed(json!({"schemaVersion":"0.1.0","documentType":"graph","id":"urn:graph:repair","namespace":"repair","entities":[{"id":"urn:command:greet","kind":"routing:command","label":"<img src=x onerror=alert(1)>"},{"id":"urn:handler:a","kind":"routing:handler"},{"id":"urn:handler:b","kind":"routing:handler"}],"mappings":[{"id":"urn:mapping:greet","relation":"routing:handled_by","sources":["urn:command:greet"],"targets":["urn:handler:missing"],"cardinality":"one-to-one","lossiness":"lossless","provenance":{"status":"declared","assertedBy":"proposer"}}],"authorities":[]})),
         packs:vec![parse(include_bytes!("../../../relation-packs/routing.json")).unwrap()],
         policy:typed(json!({"schemaVersion":"0.1.0","documentType":"policy","id":"urn:policy:repair","graph":{"id":"urn:graph:repair"},"mappings":[{"mapping":"urn:mapping:greet","coverage":"total","determinism":"deterministic","reversibility":"irreversible"}],"constraints":[],"evidence":[]})),

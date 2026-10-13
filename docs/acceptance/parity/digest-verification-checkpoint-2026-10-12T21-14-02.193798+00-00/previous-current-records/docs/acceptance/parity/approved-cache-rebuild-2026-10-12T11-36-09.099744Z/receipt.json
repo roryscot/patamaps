@@ -1,0 +1,410 @@
+{
+  "schemaVersion": "1.0.0",
+  "createdAt": "2026-10-12T11:36:09.101263+00:00",
+  "status": "scoped-verification-passed-full-parity-incomplete",
+  "goalStatus": "active",
+  "scope": "Exact approved cache deletion, supervised rebuild and current-candidate parity verification. Full P0\u2013P9 remains required.",
+  "approvedDeletionRecord": "/Users/admin/dev/patamaps/patamaps/.tools/parity/storage-review/approved-debug-deps-delete-20261012T113419.761605Z.json",
+  "commands": [
+    {
+      "name": "supervised-build",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v24.21.0/bin/node",
+        "/Users/admin/Documents/Codex/storage-safeguards/run-project.mjs",
+        "patamaps",
+        "--",
+        "/usr/bin/env",
+        "SDKROOT=/Library/Developer/CommandLineTools/SDKs/MacOSX26.5.sdk",
+        "CARGO_INCREMENTAL=0",
+        "CARGO_PROFILE_DEV_DEBUG=0",
+        "CARGO_PROFILE_TEST_DEBUG=0",
+        "/Users/admin/.cargo/bin/cargo",
+        "build",
+        "--locked",
+        "-p",
+        "patamaps-cli"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "installed-sdk",
+      "command": [
+        "/opt/homebrew/bin/python3",
+        "-B",
+        "scripts/parity/sdk_consumer.py"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "frozen-validation",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "scripts/parity/legacy_validation.mjs"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "original-canonical",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "scripts/parity/original.mjs"
+      ],
+      "exitCode": 75
+    },
+    {
+      "name": "original-canonical-refresh",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "scripts/parity/original.mjs"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "original-sssom-refresh",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "scripts/parity/original.mjs",
+        "--sssom"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "original-discovery-refresh",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "scripts/parity/original.mjs",
+        "--discovery"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "original-sssom-adapter-refresh",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "scripts/parity/original.mjs",
+        "--sssom-adapter"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "original-validation-refresh",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "scripts/parity/original.mjs",
+        "--validation"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "original-packs",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "scripts/parity/original.mjs",
+        "--packs"
+      ],
+      "exitCode": 75
+    },
+    {
+      "name": "original-packs-retry-1",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "scripts/parity/original.mjs",
+        "--packs"
+      ],
+      "exitCode": 1
+    },
+    {
+      "name": "original-packs-fixed-1",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "scripts/parity/original.mjs",
+        "--packs"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "clippy-1",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v24.21.0/bin/node",
+        "/Users/admin/Documents/Codex/storage-safeguards/run-project.mjs",
+        "patamaps",
+        "--",
+        "/usr/bin/env",
+        "SDKROOT=/Library/Developer/CommandLineTools/SDKs/MacOSX26.5.sdk",
+        "CARGO_INCREMENTAL=0",
+        "CARGO_PROFILE_DEV_DEBUG=0",
+        "CARGO_PROFILE_TEST_DEBUG=0",
+        "/Users/admin/.cargo/bin/cargo",
+        "clippy",
+        "--workspace",
+        "--all-targets",
+        "--locked",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exitCode": 101
+    },
+    {
+      "name": "final-clippy-1",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v24.21.0/bin/node",
+        "/Users/admin/Documents/Codex/storage-safeguards/run-project.mjs",
+        "patamaps",
+        "--",
+        "/usr/bin/env",
+        "SDKROOT=/Library/Developer/CommandLineTools/SDKs/MacOSX26.5.sdk",
+        "CARGO_INCREMENTAL=0",
+        "CARGO_PROFILE_DEV_DEBUG=0",
+        "CARGO_PROFILE_TEST_DEBUG=0",
+        "/Users/admin/.cargo/bin/cargo",
+        "clippy",
+        "--workspace",
+        "--all-targets",
+        "--locked",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "final-build-1",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v24.21.0/bin/node",
+        "/Users/admin/Documents/Codex/storage-safeguards/run-project.mjs",
+        "patamaps",
+        "--",
+        "/usr/bin/env",
+        "SDKROOT=/Library/Developer/CommandLineTools/SDKs/MacOSX26.5.sdk",
+        "CARGO_INCREMENTAL=0",
+        "CARGO_PROFILE_DEV_DEBUG=0",
+        "CARGO_PROFILE_TEST_DEBUG=0",
+        "/Users/admin/.cargo/bin/cargo",
+        "build",
+        "--locked",
+        "-p",
+        "patamaps-cli"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "final-native-1",
+      "command": [
+        "/opt/homebrew/bin/python3",
+        "-B",
+        "scripts/parity/native.py"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "final-installed-sdk-1",
+      "command": [
+        "/opt/homebrew/bin/python3",
+        "-B",
+        "scripts/parity/sdk_consumer.py"
+      ],
+      "exitCode": 75
+    },
+    {
+      "name": "final-installed-sdk-2",
+      "command": [
+        "/opt/homebrew/bin/python3",
+        "-B",
+        "scripts/parity/sdk_consumer.py"
+      ],
+      "exitCode": 75
+    },
+    {
+      "name": "final-installed-sdk-3",
+      "command": [
+        "/opt/homebrew/bin/python3",
+        "-B",
+        "scripts/parity/sdk_consumer.py"
+      ],
+      "exitCode": 75
+    },
+    {
+      "name": "final-installed-sdk-4",
+      "command": [
+        "/opt/homebrew/bin/python3",
+        "-B",
+        "scripts/parity/sdk_consumer.py"
+      ],
+      "exitCode": 75
+    },
+    {
+      "name": "rust-format",
+      "command": [
+        "/Users/admin/.cargo/bin/cargo",
+        "fmt",
+        "--all",
+        "--",
+        "--check"
+      ],
+      "exitCode": 0,
+      "stdout": "docs/acceptance/parity/approved-cache-rebuild-2026-10-12T11-36-09.099744Z/diagnostic-source-checkpoint-2026-10-12T12-37-12.223950+00-00/rust-format.stdout.log",
+      "stderr": "docs/acceptance/parity/approved-cache-rebuild-2026-10-12T11-36-09.099744Z/diagnostic-source-checkpoint-2026-10-12T12-37-12.223950+00-00/rust-format.stderr.log"
+    },
+    {
+      "name": "sdk-syntax",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "--check",
+        "sdk/typescript/legacy-validation.mjs"
+      ],
+      "exitCode": 0,
+      "stdout": "docs/acceptance/parity/approved-cache-rebuild-2026-10-12T11-36-09.099744Z/diagnostic-source-checkpoint-2026-10-12T12-37-12.223950+00-00/sdk-syntax.stdout.log",
+      "stderr": "docs/acceptance/parity/approved-cache-rebuild-2026-10-12T11-36-09.099744Z/diagnostic-source-checkpoint-2026-10-12T12-37-12.223950+00-00/sdk-syntax.stderr.log"
+    },
+    {
+      "name": "pack-probe-syntax",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "--check",
+        "scripts/parity/pack_contracts.mjs"
+      ],
+      "exitCode": 0,
+      "stdout": "docs/acceptance/parity/approved-cache-rebuild-2026-10-12T11-36-09.099744Z/diagnostic-source-checkpoint-2026-10-12T12-37-12.223950+00-00/pack-probe-syntax.stdout.log",
+      "stderr": "docs/acceptance/parity/approved-cache-rebuild-2026-10-12T11-36-09.099744Z/diagnostic-source-checkpoint-2026-10-12T12-37-12.223950+00-00/pack-probe-syntax.stderr.log"
+    },
+    {
+      "name": "javascript-format",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "/Users/admin/dev/patamaps/patamaps/.tools/parity/oracles/399747a4ad05-p8pkt3pr/reference/node_modules/prettier/bin/prettier.cjs",
+        "--check",
+        "sdk/typescript/legacy-validation.mjs",
+        "scripts/parity/pack_contracts.mjs"
+      ],
+      "exitCode": 0,
+      "stdout": "docs/acceptance/parity/approved-cache-rebuild-2026-10-12T11-36-09.099744Z/diagnostic-source-checkpoint-2026-10-12T12-37-12.223950+00-00/javascript-format.stdout.log",
+      "stderr": "docs/acceptance/parity/approved-cache-rebuild-2026-10-12T11-36-09.099744Z/diagnostic-source-checkpoint-2026-10-12T12-37-12.223950+00-00/javascript-format.stderr.log"
+    },
+    {
+      "name": "diff-check",
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exitCode": 0,
+      "stdout": "docs/acceptance/parity/approved-cache-rebuild-2026-10-12T11-36-09.099744Z/diagnostic-source-checkpoint-2026-10-12T12-37-12.223950+00-00/diff-check.stdout.log",
+      "stderr": "docs/acceptance/parity/approved-cache-rebuild-2026-10-12T11-36-09.099744Z/diagnostic-source-checkpoint-2026-10-12T12-37-12.223950+00-00/diff-check.stderr.log"
+    },
+    {
+      "name": "source-integrity",
+      "command": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "-B",
+        "scripts/test_source_integrity.py",
+        "/Users/admin/dev/SEEDZ/metamap",
+        "--output",
+        "/Users/admin/dev/patamaps/patamaps/docs/acceptance/parity/approved-cache-rebuild-2026-10-12T11-36-09.099744Z/diagnostic-source-checkpoint-2026-10-12T12-37-12.223950+00-00/source-integrity.json"
+      ],
+      "exitCode": 0,
+      "stdout": "docs/acceptance/parity/approved-cache-rebuild-2026-10-12T11-36-09.099744Z/diagnostic-source-checkpoint-2026-10-12T12-37-12.223950+00-00/source-integrity.stdout.log",
+      "stderr": "docs/acceptance/parity/approved-cache-rebuild-2026-10-12T11-36-09.099744Z/diagnostic-source-checkpoint-2026-10-12T12-37-12.223950+00-00/source-integrity.stderr.log"
+    },
+    {
+      "name": "supervised-latest-build",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v24.21.0/bin/node",
+        "/Users/admin/Documents/Codex/storage-safeguards/run-project.mjs",
+        "patamaps",
+        "--",
+        "/usr/bin/env",
+        "SDKROOT=/Library/Developer/CommandLineTools/SDKs/MacOSX26.5.sdk",
+        "CARGO_INCREMENTAL=0",
+        "CARGO_PROFILE_DEV_DEBUG=0",
+        "CARGO_PROFILE_TEST_DEBUG=0",
+        "/Users/admin/.cargo/bin/cargo",
+        "build",
+        "--locked",
+        "-p",
+        "patamaps-cli"
+      ],
+      "exitCode": 75,
+      "stdout": "docs/acceptance/parity/approved-cache-rebuild-2026-10-12T11-36-09.099744Z/diagnostic-source-checkpoint-2026-10-12T12-37-12.223950+00-00/supervised-latest-build.stdout.log",
+      "stderr": "docs/acceptance/parity/approved-cache-rebuild-2026-10-12T11-36-09.099744Z/diagnostic-source-checkpoint-2026-10-12T12-37-12.223950+00-00/supervised-latest-build.stderr.log"
+    },
+    {
+      "name": "supervised-pack-probe",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "scripts/parity/pack_contracts.mjs"
+      ],
+      "exitCode": 75,
+      "stdout": "docs/acceptance/parity/approved-cache-rebuild-2026-10-12T11-36-09.099744Z/diagnostic-source-checkpoint-2026-10-12T12-37-12.223950+00-00/supervised-pack-probe.stdout.log",
+      "stderr": "docs/acceptance/parity/approved-cache-rebuild-2026-10-12T11-36-09.099744Z/diagnostic-source-checkpoint-2026-10-12T12-37-12.223950+00-00/supervised-pack-probe.stderr.log"
+    },
+    {
+      "name": "strict-ledger",
+      "command": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "-B",
+        "scripts/parity/verify.py",
+        "--strict"
+      ],
+      "exitCode": 1,
+      "stdout": "docs/acceptance/parity/approved-cache-rebuild-2026-10-12T11-36-09.099744Z/diagnostic-source-checkpoint-2026-10-12T12-37-12.223950+00-00/strict-ledger.stdout.log",
+      "stderr": "docs/acceptance/parity/approved-cache-rebuild-2026-10-12T11-36-09.099744Z/diagnostic-source-checkpoint-2026-10-12T12-37-12.223950+00-00/strict-ledger.stderr.log"
+    }
+  ],
+  "latestSourceCheckpoint": "docs/acceptance/parity/digest-verification-checkpoint-2026-10-12T21-10-06.828766+00-00/receipt.json",
+  "latestSourceCheckpointDigest": "sha256:62fd1e2f0607457f36a87ec9485fe2a42b659b9e80f9dc1983878cb180b32198",
+  "latestSourceBuilt": true,
+  "scopedVerification": {
+    "precedingFinalNativeReceipt": "docs/acceptance/parity/native-2026-10-12T11-54-51.463278Z/receipt.json",
+    "precedingNativeTestsPassed": 133,
+    "precedingInstalledNegativeTypeControls": 13,
+    "precedingFrozenJsonCasesMatched": 472,
+    "precedingOriginalCasesPassed": 87,
+    "scope": "Each preserved receipt identifies its actual binary and source. Latest diagnostic changes are not covered by those executions."
+  },
+  "fullParityAcceptance": false,
+  "availableBytesAtLastCheck": 21964226560,
+  "currentScopedVerification": {
+    "portableRustTests": 161,
+    "initialPackCases": 159,
+    "nestedPackCases": 161,
+    "loaderCases": 22,
+    "registryCases": 35,
+    "graphQueryCases": 45,
+    "inheritedFactoryCases": 1,
+    "frozenGraphCases": 472,
+    "originalCases": 101,
+    "installedNegativeTypeControls": 29,
+    "originalTypeComparisons": 11,
+    "graphTypeComparisons": 18,
+    "compositionTypeComparisons": 3,
+    "compositionCases": 36,
+    "uncheckedDigestCases": 40,
+    "utf16DigestCases": 65,
+    "vendoredCollatorFiles": 31,
+    "registryPublicMethodDeclarationComparison": true,
+    "graphPublicInterfaceDeclarationComparison": true,
+    "scientificBoundaryCases": 9,
+    "discoveryProviders": 7
+  },
+  "currentLedger": {
+    "status": "incomplete",
+    "inventory": {
+      "obligations": 1293,
+      "exports": 92,
+      "suites": 53,
+      "expandedOriginalCases": 601,
+      "cliCommands": 22,
+      "cliOptions": 32
+    },
+    "counts": {
+      "unclassified": 1128,
+      "verified-equivalent": 101,
+      "implemented-unverified": 36,
+      "missing": 28
+    },
+    "currentVerifiedEquivalent": 101,
+    "invalidEvidence": [],
+    "strictAcceptance": false
+  }
+}

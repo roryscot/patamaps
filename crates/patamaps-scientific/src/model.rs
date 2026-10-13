@@ -1,7 +1,23 @@
-use patamaps_contracts::JsonObject;
+use patamaps_contracts::{JsonLimits, JsonObject};
 use serde::{Deserialize, Serialize};
 use serde_json::Value;
 use std::collections::BTreeMap;
+
+pub const SSSOM_MAX_BYTES: usize = 64 * 1024 * 1024;
+/// Reference-sized source/model ingress, selected separately from the original
+/// strict native profile. A value count cannot exceed the encoded byte count.
+pub const SSSOM_COMPATIBILITY_LIMITS: JsonLimits = JsonLimits {
+    max_bytes: SSSOM_MAX_BYTES,
+    max_depth: 512,
+    max_values: SSSOM_MAX_BYTES,
+};
+/// Expanded discovery transports repeat source/document/interpretation data.
+/// This bound does not change protected proposal or host transport limits.
+pub const SSSOM_TRANSPORT_LIMITS: JsonLimits = JsonLimits {
+    max_bytes: 1024 * 1024 * 1024,
+    max_depth: 512,
+    max_values: 1024 * 1024 * 1024,
+};
 
 #[derive(Debug, Clone, Copy, Serialize, Deserialize)]
 pub enum FormatVersion {
@@ -74,6 +90,8 @@ pub struct Interpretation {
 pub struct CheckedSssom {
     pub(crate) document: SssomDocument,
     pub(crate) interpretation: Interpretation,
+    #[serde(skip)]
+    pub(crate) limits: JsonLimits,
 }
 impl CheckedSssom {
     pub fn document(&self) -> &SssomDocument {

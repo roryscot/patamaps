@@ -114,6 +114,7 @@ pub fn consumer_capture(revision: &str, module: &str) -> CaptureRecord {
     }
     capture(
         CaptureInputs {
+            projection_specs: vec![],
             graph,
             packs,
             policy,

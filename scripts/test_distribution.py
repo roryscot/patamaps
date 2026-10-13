@@ -113,10 +113,15 @@ with tempfile.TemporaryDirectory(prefix="patamaps-install-") as temporary:
     graph["entities"][0]["label"] = "changed installed source"; write(consumer / "graph.json", graph)
     drift = json.loads(run([cli, "check", "config.json", "baseline.json", "--root", consumer], consumer, expected=2))
     assert drift["status"] == "drift" and (consumer / "baseline.json").read_bytes() == original_baseline
-    # Exercise the pinned discovery bridge through the installed native host.
-    shutil.copyfile(source / "adapters/metamap-process.mjs", consumer / "bridge.mjs")
+    # Exercise the owned discovery package through the installed native host.
+    # TypeScript is explicit optional tooling; no MetaMap package is loaded.
+    shutil.copytree(source / "adapters", consumer / "adapters")
+    shutil.copytree(args.reference.resolve() / "node_modules/typescript", consumer / "node_modules/typescript")
+    discovery_code = sorted(str(path.relative_to(consumer)) for path in (consumer / "adapters").rglob("*") if path.is_file() and (path.suffix in {".mjs", ".js"} or path.name == "package.json"))
+    discovery_code += ["node_modules/typescript/lib/typescript.js", "node_modules/typescript/package.json"]
+    discovery_code += sorted(str(path.relative_to(consumer)) for path in (consumer / "node_modules/patamaps-native-sdk-draft").rglob("*") if path.is_file() and path.suffix in {".mjs", ".js", ".json"})
     (consumer / "src/input.ts").write_text('import {z} from "zod"; export const Name = z.string();')
-    config["sources"] = [{"id": "urn:source:framework", "adapter": "process", "invocation": {"executable": str(args.node.resolve()), "arguments": [str(consumer / "bridge.mjs"), str(args.reference.resolve())], "codeInputs": ["bridge.mjs"], "bounds": {"maximumElapsedMs": 3000, "maximumStdoutBytes": 1048576, "maximumStderrBytes": 65536}}, "inputs": ["src/input.ts"], "config": {"adapter": "typescript-zod", "roots": ["src"]}}]
+    config["sources"] = [{"id": "urn:source:framework", "adapter": "process", "invocation": {"executable": str(args.node.resolve()), "arguments": [str(consumer / "adapters/metamap-process.mjs")], "codeInputs": discovery_code, "bounds": {"maximumElapsedMs": 3000, "maximumStdoutBytes": 1048576, "maximumStderrBytes": 65536}}, "inputs": ["src/input.ts"], "config": {"adapter": "typescript-zod", "roots": ["src"]}}]
     # Empty selection remains an explicit valid discovery-only consumer here.
     policy["mappings"] = []; policy["constraints"] = []; write(consumer / "policy.json", policy)
     write(consumer / "projection.json", {"schemaVersion":"0.1.0","documentType":"projection-spec","id":"urn:projection:discovery","select":{"kinds":["zod-schema"]},"slots":[]})

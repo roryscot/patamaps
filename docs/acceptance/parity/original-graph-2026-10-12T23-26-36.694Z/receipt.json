@@ -1,0 +1,262 @@
+{
+  "schemaVersion": "1.0.0",
+  "driver": "graph",
+  "driverDigest": "sha256:3387c768ba5fe23db221a860c1fb84046619797782c26a52da6829c20cbc3a1c",
+  "supervision": {
+    "mode": "inherited-live-supervisor",
+    "project": "/Users/admin/dev/patamaps/patamaps",
+    "configurationDigest": "sha256:77505e4ca3960c2df14617ffa5951838a6b84e51d6f8ed715ec60faa3c9e8187",
+    "policy": {
+      "version": 1,
+      "minimumFreeBytes": 0,
+      "reserveFreeBytes": 10000000000,
+      "maximumRunGrowthBytes": 8000000000,
+      "maximumRetainedBytes": 50000000000,
+      "monitorIntervalMs": 2000,
+      "terminationGraceMs": 15000
+    },
+    "availableBytesAtEntry": 12081889280
+  },
+  "selection": {
+    "path": "fixtures/parity/graph-selected-cases.json",
+    "digest": "sha256:9c3a740c254452742097f8983b9d45cdbb2157142127c7a0966528195d13b199",
+    "schemaVersion": "1.0.0",
+    "suite": "src/__tests__/graph.test.ts",
+    "testNamePattern": "^MetamapGraph ",
+    "selectedCaseIds": [
+      "parity:330b0bc082051d87bc57",
+      "parity:0e482f56af51e461e0b4",
+      "parity:424742507db44c3cafb8",
+      "parity:65863c76f07eb3a77ece"
+    ],
+    "excludedCaseIds": [],
+    "scope": "All four unchanged original graph callbacks, fixture bytes and assertions execute native graph validation/query/traversal/authority operations. Only the graph import is mapped to the SDK facade. Retained handles preserve object identity; no observation admits or authorizes a generation. This closes original cases, not the entire JavaScript graph contract."
+  },
+  "timestamp": "2026-10-12T23-26-36.694Z",
+  "status": "passed",
+  "command": [
+    "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+    "/Users/admin/dev/patamaps/patamaps/.tools/parity/oracles/399747a4ad05-p8pkt3pr/reference/node_modules/vitest/vitest.mjs",
+    "run",
+    "--config",
+    "/Users/admin/dev/patamaps/patamaps/.tools/parity/runs/original-graph-jyXhLT/vitest.config.mjs",
+    "--reporter=default",
+    "--reporter=json",
+    "--outputFile",
+    "/Users/admin/dev/patamaps/patamaps/.tools/parity/runs/original-graph-jyXhLT/vitest.json",
+    "--testNamePattern",
+    "^MetamapGraph "
+  ],
+  "exitCode": 0,
+  "signal": null,
+  "error": null,
+  "manifestDigest": "sha256:963a0bdb0514342053144b369b900342d78c55d79ddc3a07c032dd859c8cd8ed",
+  "comparisonRulesDigest": "sha256:ab76e60deb27bf8b425063f3d432b88720c1f0d6e2cd67b43b9846cb9fb5ae91",
+  "reference": {
+    "engine": "399747a4ad05a37cd8db1cedd53048fad2175be4",
+    "caseOrigin": "Unchanged pinned original source/assertions",
+    "operationsRerun": false,
+    "testsRerun": false,
+    "referenceObservation": "docs/acceptance/full-reference/reference-vitest.json"
+  },
+  "candidate": {
+    "binary": "target/debug/patamaps",
+    "binaryDigest": "sha256:50b9250e696779e9c0eee2d5b408303692efdcec1858622de3b5145ceb53757a",
+    "engine": {
+      "compiler": "sha256:2e22e5a5d939e50aaf59fcb488811e18e53fe8abfa78240943a7da65bc7180e7",
+      "documentType": "executor-description",
+      "governance": "sha256:d9227f346cb4ec203823fcbedb7ea8d1d9cb48cca8406e438e9d2b3d55d78225",
+      "schemaVersion": "0.1.0",
+      "scientific": "sha256:888fcc9b688d8296e853a49d2ae453cbfee933154d9ab075a224ada449f4df88",
+      "workspace": "sha256:0b7666c5ebd9bfda2883a2312c4c194d982f6222bbeddf9915521befed57864f"
+    },
+    "sdkSourceInventory": [
+      {
+        "path": "sdk/typescript/canonical.mjs",
+        "digest": "sha256:55acfe8fa5bb80a1a6fa20e05422f9815bc1bd16e12e853a3113f91760fd5347"
+      },
+      {
+        "path": "sdk/typescript/canonical.d.ts",
+        "digest": "sha256:88ae79727dbad3b0872a9c3539a95fe6c444b810ff416423f06a2cf39274ecb4"
+      },
+      {
+        "path": "sdk/typescript/canonical.d.ts",
+        "digest": "sha256:88ae79727dbad3b0872a9c3539a95fe6c444b810ff416423f06a2cf39274ecb4"
+      },
+      {
+        "path": "sdk/typescript/canonical.mjs",
+        "digest": "sha256:55acfe8fa5bb80a1a6fa20e05422f9815bc1bd16e12e853a3113f91760fd5347"
+      },
+      {
+        "path": "sdk/typescript/index.d.ts",
+        "digest": "sha256:aa76e1583c3a1b872ec1fa9fbbaddd8c1211a118c9f670c0d9ec1b0ba3a4bbae"
+      },
+      {
+        "path": "sdk/typescript/index.mjs",
+        "digest": "sha256:f5f5abcf9d4b199a4674795bd5e96252f65c1449d679a73dd069c17c89db6015"
+      },
+      {
+        "path": "sdk/typescript/legacy-composition.d.ts",
+        "digest": "sha256:5d776057c00df9548b9b09590bedc48b1f0e1a6a2991d4f6ab55fdacbf6e5677"
+      },
+      {
+        "path": "sdk/typescript/legacy-composition.mjs",
+        "digest": "sha256:7c176a5062c72562d05df937977d9906587ba4e8d914551db3458d7543d461f6"
+      },
+      {
+        "path": "sdk/typescript/legacy-config.d.ts",
+        "digest": "sha256:58675d458afcf7b5db9a52c163629436d248c6172c4167254c42f73c4d4e8f15"
+      },
+      {
+        "path": "sdk/typescript/legacy-config.mjs",
+        "digest": "sha256:df331e601bf7c2bca9273263a7bed464cee471afbf4e4cc39e047db8c300d15c"
+      },
+      {
+        "path": "sdk/typescript/legacy-correspondence.d.ts",
+        "digest": "sha256:5513b17c388b56b295e854beaa7026a1c35f4ee013bd500c334a9c5f99c94c62"
+      },
+      {
+        "path": "sdk/typescript/legacy-correspondence.mjs",
+        "digest": "sha256:2a0254640dfe4d140d3766d43776523dd562808e8be5540a8032e346b12af339"
+      },
+      {
+        "path": "sdk/typescript/legacy-graph.d.ts",
+        "digest": "sha256:3e6b7faaf0bb6838613b74194915422d1093565a275f936b5411023b3a361c6e"
+      },
+      {
+        "path": "sdk/typescript/legacy-graph.mjs",
+        "digest": "sha256:55b9b20e95e6b488d505c4bb531637f17fe0f90b2c0e4855f1674435c4769510"
+      },
+      {
+        "path": "sdk/typescript/legacy-references.d.ts",
+        "digest": "sha256:feb5ed0a5dcfe3185d17c95c17afb195d2ac4a18189377feb93e737e3a22e735"
+      },
+      {
+        "path": "sdk/typescript/legacy-references.mjs",
+        "digest": "sha256:907f7d3946db7b8ec2b11d458b3dea42982c8635541a8cf28ff5ad8cc58b7ba9"
+      },
+      {
+        "path": "sdk/typescript/legacy-registry.mjs",
+        "digest": "sha256:690e6837fbf74b48e71e88628504c1bc787c2f5672dae215c8ef2defb820e401"
+      },
+      {
+        "path": "sdk/typescript/legacy-reporting.d.ts",
+        "digest": "sha256:8ca2bee95e0d3b454c3a864855e7866c9e8904c15dc2193f4e061634fd7ac158"
+      },
+      {
+        "path": "sdk/typescript/legacy-reporting.mjs",
+        "digest": "sha256:32dcfbb7eb6460b3e01b9a32e495999678c8794ef5abdddfe271ff5b3d023d2d"
+      },
+      {
+        "path": "sdk/typescript/legacy-validation.d.ts",
+        "digest": "sha256:e7c24b771e8a62c7952c91a9c5e1d6a2245cb6dc27d50efecef52c1ddd3a34b1"
+      },
+      {
+        "path": "sdk/typescript/legacy-validation.mjs",
+        "digest": "sha256:3c097c4690825588b956a507ceb51e0cdf179848387e6bb2fd70620b9c50d6d7"
+      },
+      {
+        "path": "sdk/typescript/legacy-workspace.d.ts",
+        "digest": "sha256:0042b2129ef98e3e7858142194c225a698cba5581267ef14346bbe1b47d74f7a"
+      },
+      {
+        "path": "sdk/typescript/legacy-workspace.mjs",
+        "digest": "sha256:d3893cdc92010588440cc96cb0c6741314cd3bd34050dbb51e420872b1a2a45d"
+      },
+      {
+        "path": "sdk/typescript/package.json",
+        "digest": "sha256:b7b8d3cae0108f0dbff1ac3342f58d89f0517f343d6cd1baf8b3e399dcb12bdb"
+      },
+      {
+        "path": "sdk/typescript/sssom-profile.mjs",
+        "digest": "sha256:a37260f42d6b02c5900dbefa9477386667f5286079a7a1abd12495e3dc78e533"
+      },
+      {
+        "path": "sdk/typescript/sssom.d.ts",
+        "digest": "sha256:7f58f17edc48bcb8340b73004273fa4c23a9f4b3671ca1276225f16de8254457"
+      },
+      {
+        "path": "sdk/typescript/sssom.mjs",
+        "digest": "sha256:ccc44eac40a38b892d42c33537a9f15915e1aa65c774e6dc78d129284a6bfb74"
+      }
+    ],
+    "facadeDigest": "sha256:55acfe8fa5bb80a1a6fa20e05422f9815bc1bd16e12e853a3113f91760fd5347",
+    "facadeDeclarationDigest": "sha256:88ae79727dbad3b0872a9c3539a95fe6c444b810ff416423f06a2cf39274ecb4"
+  },
+  "host": {
+    "platform": "darwin",
+    "architecture": "arm64",
+    "node": "v22.16.0",
+    "locale": "en-US"
+  },
+  "counts": {
+    "originalCases": 4,
+    "passed": 4,
+    "failed": 0,
+    "skipped": 0,
+    "explicitlyUnselected": 0,
+    "nativeExecutions": 13
+  },
+  "assertions": "All four unchanged original graph callbacks, fixture bytes and assertions execute native graph validation/query/traversal/authority operations. Only the graph import is mapped to the SDK facade. Retained handles preserve object identity; no observation admits or authorizes a generation. This closes original cases, not the entire JavaScript graph contract.",
+  "obligations": [
+    {
+      "id": "parity:65863c76f07eb3a77ece",
+      "scope": "complete-original-case",
+      "status": "verified-equivalent",
+      "origin": {
+        "path": "src/__tests__/graph.test.ts",
+        "digest": "sha256:1fab977e680d26f78b58ea77b8da355a6b7110db0657ae40907dbf8c176c887e",
+        "line": 20
+      },
+      "expectationDigest": "sha256:37653f014567c6c23dfec003b53953ea5b3d4038ade83a4592b33f6e0d0feeec",
+      "fullName": "MetamapGraph traverses typed structural correspondences",
+      "occurrence": 0,
+      "candidateExecution": "Original graph assertions; native legacy validation, indexed queries, ordered traversal and authority observations with retained caller object identity"
+    },
+    {
+      "id": "parity:424742507db44c3cafb8",
+      "scope": "complete-original-case",
+      "status": "verified-equivalent",
+      "origin": {
+        "path": "src/__tests__/graph.test.ts",
+        "digest": "sha256:1fab977e680d26f78b58ea77b8da355a6b7110db0657ae40907dbf8c176c887e",
+        "line": 34
+      },
+      "expectationDigest": "sha256:e2be840fbb1d6344aeb2e6ffc0deed3fe71656cc783e669cacb8ad1b92d746b6",
+      "fullName": "MetamapGraph resolves authority for an individual fact",
+      "occurrence": 0,
+      "candidateExecution": "Original graph assertions; native legacy validation, indexed queries, ordered traversal and authority observations with retained caller object identity"
+    },
+    {
+      "id": "parity:330b0bc082051d87bc57",
+      "scope": "complete-original-case",
+      "status": "verified-equivalent",
+      "origin": {
+        "path": "src/__tests__/graph.test.ts",
+        "digest": "sha256:1fab977e680d26f78b58ea77b8da355a6b7110db0657ae40907dbf8c176c887e",
+        "line": 47
+      },
+      "expectationDigest": "sha256:d8a8a730aacff36e254ff47c7107e601c9c63a0f5a438e56fa210ac63b233906",
+      "fullName": "MetamapGraph does not treat unrelated facts as resolved",
+      "occurrence": 0,
+      "candidateExecution": "Original graph assertions; native legacy validation, indexed queries, ordered traversal and authority observations with retained caller object identity"
+    },
+    {
+      "id": "parity:0e482f56af51e461e0b4",
+      "scope": "complete-original-case",
+      "status": "verified-equivalent",
+      "origin": {
+        "path": "src/__tests__/graph.test.ts",
+        "digest": "sha256:1fab977e680d26f78b58ea77b8da355a6b7110db0657ae40907dbf8c176c887e",
+        "line": 54
+      },
+      "expectationDigest": "sha256:6f1882aaf11ba5d444cdd200479f62411e08f621b3b7f509de2934969e3e2150",
+      "fullName": "MetamapGraph resolves an explicit delegation chain to its effective owner",
+      "occurrence": 0,
+      "candidateExecution": "Original graph assertions; native legacy validation, indexed queries, ordered traversal and authority observations with retained caller object identity"
+    }
+  ],
+  "originalTreeFilesVerified": 610,
+  "retainedRun": ".tools/parity/runs/original-graph-jyXhLT",
+  "cleanup": "Any explicit Node cleanup within owned roots is retained by rename; deletion outside those roots is refused"
+}

@@ -1,0 +1,377 @@
+{
+  "status": "frozen-original",
+  "cases": 28,
+  "corpusDigest": "sha256:5ee3bd5339e85b64feda4a8ed2449b5eb43cbd44f80d75ee6deeba2e68c3c146",
+  "commands": [
+    {
+      "mode": "reference",
+      "case": "valid-graph",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "/Users/admin/dev/patamaps/patamaps/.tools/parity/oracles/399747a4ad05-p8pkt3pr/reference/dist/cli.js",
+        "validate",
+        "graph.json"
+      ],
+      "exitCode": 0
+    },
+    {
+      "mode": "reference",
+      "case": "valid-pack",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "/Users/admin/dev/patamaps/patamaps/.tools/parity/oracles/399747a4ad05-p8pkt3pr/reference/dist/cli.js",
+        "validate",
+        "graph.json",
+        "--relation-pack",
+        "pack.json"
+      ],
+      "exitCode": 0
+    },
+    {
+      "mode": "reference",
+      "case": "diff-identical-valid",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "/Users/admin/dev/patamaps/patamaps/.tools/parity/oracles/399747a4ad05-p8pkt3pr/reference/dist/cli.js",
+        "diff",
+        "graph.json",
+        "graph.json"
+      ],
+      "exitCode": 0
+    },
+    {
+      "mode": "reference",
+      "case": "diff-changed-valid",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "/Users/admin/dev/patamaps/patamaps/.tools/parity/oracles/399747a4ad05-p8pkt3pr/reference/dist/cli.js",
+        "diff",
+        "graph.json",
+        "after.json"
+      ],
+      "exitCode": 0
+    },
+    {
+      "mode": "reference",
+      "case": "valid-trace-incoming",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "/Users/admin/dev/patamaps/patamaps/.tools/parity/oracles/399747a4ad05-p8pkt3pr/reference/dist/cli.js",
+        "trace",
+        "graph.json",
+        "urn:test:a",
+        "incoming",
+        "3"
+      ],
+      "exitCode": 0
+    },
+    {
+      "mode": "reference",
+      "case": "valid-trace-outgoing",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "/Users/admin/dev/patamaps/patamaps/.tools/parity/oracles/399747a4ad05-p8pkt3pr/reference/dist/cli.js",
+        "trace",
+        "graph.json",
+        "urn:test:a",
+        "outgoing",
+        "3"
+      ],
+      "exitCode": 0
+    },
+    {
+      "mode": "reference",
+      "case": "valid-trace-both",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "/Users/admin/dev/patamaps/patamaps/.tools/parity/oracles/399747a4ad05-p8pkt3pr/reference/dist/cli.js",
+        "trace",
+        "graph.json",
+        "urn:test:a",
+        "both",
+        "3"
+      ],
+      "exitCode": 0
+    },
+    {
+      "mode": "reference",
+      "case": "valid-trace-depth-0",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "/Users/admin/dev/patamaps/patamaps/.tools/parity/oracles/399747a4ad05-p8pkt3pr/reference/dist/cli.js",
+        "trace",
+        "graph.json",
+        "urn:test:c",
+        "both",
+        "0"
+      ],
+      "exitCode": 0
+    },
+    {
+      "mode": "reference",
+      "case": "valid-trace-depth--1",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "/Users/admin/dev/patamaps/patamaps/.tools/parity/oracles/399747a4ad05-p8pkt3pr/reference/dist/cli.js",
+        "trace",
+        "graph.json",
+        "urn:test:c",
+        "both",
+        "-1"
+      ],
+      "exitCode": 1
+    },
+    {
+      "mode": "reference",
+      "case": "valid-trace-depth-x",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "/Users/admin/dev/patamaps/patamaps/.tools/parity/oracles/399747a4ad05-p8pkt3pr/reference/dist/cli.js",
+        "trace",
+        "graph.json",
+        "urn:test:c",
+        "both",
+        "x"
+      ],
+      "exitCode": 1
+    },
+    {
+      "mode": "reference",
+      "case": "valid-trace-depth-1.5",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "/Users/admin/dev/patamaps/patamaps/.tools/parity/oracles/399747a4ad05-p8pkt3pr/reference/dist/cli.js",
+        "trace",
+        "graph.json",
+        "urn:test:c",
+        "both",
+        "1.5"
+      ],
+      "exitCode": 0
+    },
+    {
+      "mode": "reference",
+      "case": "valid-trace-depth-+2",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "/Users/admin/dev/patamaps/patamaps/.tools/parity/oracles/399747a4ad05-p8pkt3pr/reference/dist/cli.js",
+        "trace",
+        "graph.json",
+        "urn:test:c",
+        "both",
+        "+2"
+      ],
+      "exitCode": 0
+    },
+    {
+      "mode": "reference",
+      "case": "valid-trace-depth-1e2",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "/Users/admin/dev/patamaps/patamaps/.tools/parity/oracles/399747a4ad05-p8pkt3pr/reference/dist/cli.js",
+        "trace",
+        "graph.json",
+        "urn:test:c",
+        "both",
+        "1e2"
+      ],
+      "exitCode": 0
+    },
+    {
+      "mode": "reference",
+      "case": "valid-trace-depth-0x10",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "/Users/admin/dev/patamaps/patamaps/.tools/parity/oracles/399747a4ad05-p8pkt3pr/reference/dist/cli.js",
+        "trace",
+        "graph.json",
+        "urn:test:c",
+        "both",
+        "0x10"
+      ],
+      "exitCode": 0
+    },
+    {
+      "mode": "reference",
+      "case": "valid-trace-depth-2tail",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "/Users/admin/dev/patamaps/patamaps/.tools/parity/oracles/399747a4ad05-p8pkt3pr/reference/dist/cli.js",
+        "trace",
+        "graph.json",
+        "urn:test:c",
+        "both",
+        "2tail"
+      ],
+      "exitCode": 0
+    },
+    {
+      "mode": "reference",
+      "case": "valid-trace-depth-9999999999999999999999999999",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "/Users/admin/dev/patamaps/patamaps/.tools/parity/oracles/399747a4ad05-p8pkt3pr/reference/dist/cli.js",
+        "trace",
+        "graph.json",
+        "urn:test:c",
+        "both",
+        "9999999999999999999999999999"
+      ],
+      "exitCode": 0
+    },
+    {
+      "mode": "reference",
+      "case": "valid-trace-relation",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "/Users/admin/dev/patamaps/patamaps/.tools/parity/oracles/399747a4ad05-p8pkt3pr/reference/dist/cli.js",
+        "trace",
+        "graph.json",
+        "urn:test:c",
+        "both",
+        "3",
+        "core:references"
+      ],
+      "exitCode": 0
+    },
+    {
+      "mode": "reference",
+      "case": "valid-trace-no-relation",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "/Users/admin/dev/patamaps/patamaps/.tools/parity/oracles/399747a4ad05-p8pkt3pr/reference/dist/cli.js",
+        "trace",
+        "graph.json",
+        "urn:test:c",
+        "both",
+        "3",
+        "core:contains"
+      ],
+      "exitCode": 0
+    },
+    {
+      "mode": "reference",
+      "case": "valid-trace-extra",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "/Users/admin/dev/patamaps/patamaps/.tools/parity/oracles/399747a4ad05-p8pkt3pr/reference/dist/cli.js",
+        "trace",
+        "graph.json",
+        "urn:test:c",
+        "both",
+        "3",
+        "core:references",
+        "ignored"
+      ],
+      "exitCode": 0
+    },
+    {
+      "mode": "reference",
+      "case": "valid-trace-unknown",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "/Users/admin/dev/patamaps/patamaps/.tools/parity/oracles/399747a4ad05-p8pkt3pr/reference/dist/cli.js",
+        "trace",
+        "graph.json",
+        "urn:test:missing"
+      ],
+      "exitCode": 1
+    },
+    {
+      "mode": "reference",
+      "case": "resolved-authority",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "/Users/admin/dev/patamaps/patamaps/.tools/parity/oracles/399747a4ad05-p8pkt3pr/reference/dist/cli.js",
+        "authority",
+        "graph.json",
+        "urn:test:c",
+        "*"
+      ],
+      "exitCode": 0
+    },
+    {
+      "mode": "reference",
+      "case": "absent-authority",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "/Users/admin/dev/patamaps/patamaps/.tools/parity/oracles/399747a4ad05-p8pkt3pr/reference/dist/cli.js",
+        "authority",
+        "graph.json",
+        "urn:test:missing",
+        "type"
+      ],
+      "exitCode": 0
+    },
+    {
+      "mode": "reference",
+      "case": "ambiguous-authority",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "/Users/admin/dev/patamaps/patamaps/.tools/parity/oracles/399747a4ad05-p8pkt3pr/reference/dist/cli.js",
+        "authority",
+        "graph.json",
+        "urn:test:c",
+        "*"
+      ],
+      "exitCode": 1
+    },
+    {
+      "mode": "reference",
+      "case": "unicode-diff-valid",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "/Users/admin/dev/patamaps/patamaps/.tools/parity/oracles/399747a4ad05-p8pkt3pr/reference/dist/cli.js",
+        "diff",
+        "graph.json",
+        "after.json"
+      ],
+      "exitCode": 0
+    },
+    {
+      "mode": "reference",
+      "case": "generate-refusal-report",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "/Users/admin/dev/patamaps/patamaps/.tools/parity/oracles/399747a4ad05-p8pkt3pr/reference/dist/cli.js",
+        "generate",
+        "config.json"
+      ],
+      "exitCode": 1
+    },
+    {
+      "mode": "reference",
+      "case": "generate-baseline",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "/Users/admin/dev/patamaps/patamaps/.tools/parity/oracles/399747a4ad05-p8pkt3pr/reference/dist/cli.js",
+        "generate",
+        "config.json"
+      ],
+      "exitCode": 0
+    },
+    {
+      "mode": "reference",
+      "case": "check-baseline-clean",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "/Users/admin/dev/patamaps/patamaps/.tools/parity/oracles/399747a4ad05-p8pkt3pr/reference/dist/cli.js",
+        "check",
+        "config.json"
+      ],
+      "exitCode": 0
+    },
+    {
+      "mode": "reference",
+      "case": "check-baseline-drift",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "/Users/admin/dev/patamaps/patamaps/.tools/parity/oracles/399747a4ad05-p8pkt3pr/reference/dist/cli.js",
+        "check",
+        "config.json"
+      ],
+      "exitCode": 1
+    }
+  ],
+  "retainedWork": "/var/folders/tr/qmsqldfn59591rbflj14mc4r0000gn/T/patamaps-cli-controls-sal1u1cf"
+}

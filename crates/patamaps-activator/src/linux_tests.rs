@@ -102,6 +102,7 @@ impl Fixture {
         let source = "pub fn greet(input:&str)->String{format!(\"Hello, {}!\",input)}\n";
         let captured = capture(
             CaptureInputs {
+                projection_specs: vec![],
                 graph,
                 packs: vec![parse(include_bytes!("../../../relation-packs/routing.json")).unwrap()],
                 policy,

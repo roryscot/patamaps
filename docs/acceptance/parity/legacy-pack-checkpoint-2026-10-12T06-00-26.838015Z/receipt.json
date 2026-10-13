@@ -1,0 +1,307 @@
+{
+  "schemaVersion": "1.0.0",
+  "createdAt": "2026-10-12T06:03:40.121867+00:00",
+  "status": "partial-progress",
+  "goalStatus": "active",
+  "compiledCandidateAvailable": false,
+  "functionalAcceptance": false,
+  "scope": "Portable legacy pack source implementation; syntax/source preservation checks only. No new original/export/CLI/schema/consumer parity obligation is closed.",
+  "commands": [
+    {
+      "name": "format-rust",
+      "command": [
+        "/Users/admin/.cargo/bin/cargo",
+        "fmt",
+        "--all"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "format-sdk-docs",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "/Users/admin/dev/patamaps/patamaps/.tools/parity/oracles/399747a4ad05-p8pkt3pr/reference/node_modules/prettier/bin/prettier.cjs",
+        "--write",
+        "sdk/typescript/legacy-validation.mjs",
+        "sdk/typescript/legacy-validation.d.ts",
+        "README.md",
+        "BUILD_PLAN.md",
+        "crates/patamaps-core/src/legacy_uri_reference.json"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "rust-format",
+      "command": [
+        "/Users/admin/.cargo/bin/cargo",
+        "fmt",
+        "--all",
+        "--check"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "sdk-syntax",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "--check",
+        "sdk/typescript/legacy-validation.mjs"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "sdk-docs-format",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "/Users/admin/dev/patamaps/patamaps/.tools/parity/oracles/399747a4ad05-p8pkt3pr/reference/node_modules/prettier/bin/prettier.cjs",
+        "--check",
+        "sdk/typescript/legacy-validation.mjs",
+        "sdk/typescript/legacy-validation.d.ts",
+        "README.md",
+        "BUILD_PLAN.md",
+        "crates/patamaps-core/src/legacy_uri_reference.json"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "git-diff-check",
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "strict-ledger",
+      "command": [
+        "/opt/homebrew/bin/python3",
+        "-B",
+        "scripts/parity/verify.py",
+        "--strict"
+      ],
+      "exitCode": 1
+    },
+    {
+      "name": "plan-format-after-classification",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "/Users/admin/dev/patamaps/patamaps/.tools/parity/oracles/399747a4ad05-p8pkt3pr/reference/node_modules/prettier/bin/prettier.cjs",
+        "--write",
+        "BUILD_PLAN.md"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "plan-format-check-after-classification",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "/Users/admin/dev/patamaps/patamaps/.tools/parity/oracles/399747a4ad05-p8pkt3pr/reference/node_modules/prettier/bin/prettier.cjs",
+        "--check",
+        "BUILD_PLAN.md"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "source-integrity",
+      "command": [
+        "/opt/homebrew/bin/python3",
+        "-B",
+        "scripts/test_source_integrity.py",
+        "/Users/admin/dev/SEEDZ/metamap",
+        "--output",
+        "/Users/admin/dev/patamaps/patamaps/docs/acceptance/parity/legacy-pack-checkpoint-2026-10-12T06-00-26.838015Z/preserved-source-integrity.json"
+      ],
+      "exitCode": 0
+    }
+  ],
+  "unrun": [
+    "Compilation of the new core and CLI source",
+    "Six focused Rust legacy pack tests",
+    "Modern registry and frozen legacy validation regressions",
+    "Installed SDK positive runtime/type checks and eleven negative type controls",
+    "Independent frozen pack parser/digest controls and original registry/pack suite cases",
+    "Fresh complete portable/native/Clippy and original/component refresh",
+    "Real Linux x86_64 and ARM64 acceptance",
+    "Full P0\u2013P9 replacement and packaging acceptance"
+  ],
+  "deletion": {
+    "approvedVmDisk": "/Users/admin/dev/patamaps/patamaps/.tools/linux-vm/disk.raw",
+    "diskAbsent": true,
+    "additionalDeletionOccurred": false,
+    "pendingProposal": ".tools/parity/storage-review/proposed-debug-deps-20261012T054832.187707Z.json",
+    "additionalApprovalReceived": false
+  },
+  "strictLedgerExpectation": "Exit 1 is expected: cached native binary source identities do not match the new production source. Prior successful cases are historical, not current acceptance.",
+  "lockRegeneration": {
+    "command": [
+      "/Users/admin/.cargo/bin/cargo",
+      "update",
+      "--offline",
+      "-p",
+      "patamaps-core"
+    ],
+    "exitCode": 0,
+    "observation": "Locking 0 packages; existing locked jsonschema dependency added to core without installing a new package. This is lockfile regeneration, not compilation."
+  },
+  "guardedFocusedTestAttempt": {
+    "command": [
+      "/Users/admin/.nvm/versions/node/v24.21.0/bin/node",
+      "/Users/admin/Documents/Codex/storage-safeguards/run-project.mjs",
+      "patamaps",
+      "--",
+      "/usr/bin/env",
+      "SDKROOT=/Library/Developer/CommandLineTools/SDKs/MacOSX26.5.sdk",
+      "CARGO_INCREMENTAL=0",
+      "CARGO_PROFILE_DEV_DEBUG=0",
+      "CARGO_PROFILE_TEST_DEBUG=0",
+      "/Users/admin/.cargo/bin/cargo",
+      "test",
+      "-p",
+      "patamaps-core",
+      "--test",
+      "legacy_pack",
+      "--locked"
+    ],
+    "exitCode": 75,
+    "stdout": "",
+    "stderr": "Storage guard: 24.85 GB free; 25.00 GB required. Review an exact cleanup list; nothing is purged automatically.\n",
+    "testProcessStarted": false,
+    "source": "Observed tool execution in this goal turn; installed supervisor refused before Cargo started."
+  },
+  "commandsFinalized": true,
+  "pinnedOracleFilesUnchanged": 610,
+  "unchangedFrozenValidationControls": {
+    "path": "fixtures/parity/legacy-validation-controls.json",
+    "digest": "sha256:c840095799be76db9d0e4e88e42f61e6c9a2f5fb776c3d6582a8ae96bac4fcab",
+    "cases": 472
+  },
+  "uriFormatProvenance": "Exact preserved source pattern/digest and MIT notice; native ASCII/digit/slash transformation matches its recorded recipe. Regex/parser execution remains unrun.",
+  "pythonSyntax": {
+    "path": "scripts/parity/sdk_consumer.py",
+    "method": "Python compile() without executing/importing the harness or creating bytecode files",
+    "result": "passed"
+  },
+  "classification": {
+    "counts": {
+      "unclassified": 1195,
+      "verified-equivalent": 81,
+      "missing": 16,
+      "implemented-unverified": 1
+    },
+    "reviewedCompleteContracts": 17,
+    "newVerifiedEquivalentRows": 0,
+    "scope": "81 classified-equivalent rows retain historical successful candidate evidence. The new source has not been built and the strict verifier rejects cached binary/source identity mismatch."
+  },
+  "sourceInventory": [
+    {
+      "path": "Cargo.toml",
+      "digest": "sha256:8b54a27a77afbe3062347259f5b0646b2c0876128f4fa6752f5358e1bfa8e1c5"
+    },
+    {
+      "path": "Cargo.lock",
+      "digest": "sha256:94114fad8dcd8ab720271eaca81bc60c17c3364903bc90434cec690d1b18b6b0"
+    },
+    {
+      "path": "crates/patamaps-core/Cargo.toml",
+      "digest": "sha256:fa5090fbc6ebf37c9e44d4dd8eea9c1fe4bf17e2d955f816a31d2f2ce1fd6fa5"
+    },
+    {
+      "path": "crates/patamaps-core/src/lib.rs",
+      "digest": "sha256:1fef4c62be8eb69d10d9d0fe6cb36c588cc268a6afc363b208aafba0c2d1332b"
+    },
+    {
+      "path": "crates/patamaps-core/src/legacy_pack.rs",
+      "digest": "sha256:5f7da10558ce017774668f5f0f1dbcff5df0c7119b5b1b74fe9eca2de04b8999"
+    },
+    {
+      "path": "crates/patamaps-core/src/legacy_uri_reference.json",
+      "digest": "sha256:5b631cbb15139a39ca7a8bacf4c09f43b2980fe98afaaac5947f8f3fb92b5498"
+    },
+    {
+      "path": "crates/patamaps-core/src/registry.rs",
+      "digest": "sha256:e5df387fdba1c9579913a857d0628d2909f315307b0db0f4492ec17996214ddf"
+    },
+    {
+      "path": "crates/patamaps-core/src/laws.rs",
+      "digest": "sha256:d2e0e9110010a14b29deb1bc32cbaeeee4b5beb1dcb15ef414f02e84db9e6f15"
+    },
+    {
+      "path": "crates/patamaps-core/tests/legacy_pack.rs",
+      "digest": "sha256:a9f7f305566d39f6937c6cdfbae229ee9e34d2f8333aebaec08b8c053a9cfbe4"
+    },
+    {
+      "path": "crates/patamaps-cli/src/main.rs",
+      "digest": "sha256:73117e56a0130753b894a7844174d19de135f1529d2346e781cc166ace1ee492"
+    },
+    {
+      "path": "crates/patamaps-projection/src/capture.rs",
+      "digest": "sha256:9c77dfc474d454cf95257597f1f774f13b961bd7a57f3f41a11eec7205739081"
+    },
+    {
+      "path": "sdk/typescript/legacy-validation.mjs",
+      "digest": "sha256:3ceb30b1e84a306e145028219ed8f76d4a8b228a813d1dee63e03dc78804b216"
+    },
+    {
+      "path": "sdk/typescript/legacy-validation.d.ts",
+      "digest": "sha256:30c4313c7f39d11c4eb34496a665c2d966a0f957bec04dc219139908a2e09739"
+    },
+    {
+      "path": "scripts/parity/sdk_consumer.py",
+      "digest": "sha256:141f0f5e1037f8822fa1b7e02abc48debbd1475b38b6b6a93f4719700855aac2"
+    },
+    {
+      "path": "fixtures/parity/registry-validation-classification.json",
+      "digest": "sha256:fe427581197f3d694336ebea34e2d1adc18ea5396fb5d822f0b715669ba92fba"
+    },
+    {
+      "path": "fixtures/parity/coverage.json",
+      "digest": "sha256:6b041f43c59c7b5987a5c3ae7ff7fe180ffd0bd288bc990c901bf59944c83a93"
+    },
+    {
+      "path": "README.md",
+      "digest": "sha256:460881c40b3b77693f2278f40e8df411a02b0fec5548ba8a32d7c59fd4eed16c"
+    },
+    {
+      "path": "BUILD_PLAN.md",
+      "digest": "sha256:8d7644a913b583a5fee3d3713a7553ffa67e66ed5fb04de9abaadd10a540397d"
+    },
+    {
+      "path": "NOTICE",
+      "digest": "sha256:f34064cdf5ad8597dda7ae0e91a508773cc694deb7b43872d017d55d2ea587f6"
+    }
+  ],
+  "logs": {
+    "format-rust.stderr.log": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "format-rust.stdout.log": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "format-sdk-docs.stderr.log": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "format-sdk-docs.stdout.log": "sha256:05fe19f95806412d0ef659c3c69ec4d8d7f352f7f334c4163e309df005b9f1b2",
+    "git-diff-check.stderr.log": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "git-diff-check.stdout.log": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "plan-format-after-classification.stderr.log": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "plan-format-after-classification.stdout.log": "sha256:51c1c5ad22bcadefa6355bfa061eb0c58c0078a39acb65efbdb10b4235b0ebb5",
+    "plan-format-check-after-classification.stderr.log": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "plan-format-check-after-classification.stdout.log": "sha256:17aa973d3f004560237d9a95171210b0671deff23d61628eecf7322ff5938f20",
+    "rust-format.stderr.log": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "rust-format.stdout.log": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "sdk-docs-format.stderr.log": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "sdk-docs-format.stdout.log": "sha256:17aa973d3f004560237d9a95171210b0671deff23d61628eecf7322ff5938f20",
+    "sdk-syntax.stderr.log": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "sdk-syntax.stdout.log": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "source-integrity.stderr.log": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "source-integrity.stdout.log": "sha256:066bfe999b586d949e21b1e8c592d7d2cd024bd39fd422bfe9ee9608fd7f5fbc",
+    "strict-ledger.stderr.log": "sha256:a3d8625c63db318697de2b7f1ab6b43e9e9f7719f19f06ea0362443375ba709b",
+    "strict-ledger.stdout.log": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "nextRequiredWork": [
+    "Obtain additional deletion approval or an external capacity change; recheck the unchanged supervisor. Do not delete any additional material or bypass the guard.",
+    "Build the exact new candidate and run the six focused pack tests plus registry/472-control regressions through the installed supervisor. Fix actual failures without weakening expectations.",
+    "Freeze independent original parser/digest/URI controls, verify complete exact diagnostics and execute original registry/pack assertions with retained fixture cleanup.",
+    "Compile/execute the installed SDK consumer including all eleven negative controls. Restore mutable registry and file-loader contracts, then pursue all remaining P0\u2013P9 gates."
+  ],
+  "goalTurnOutcome": "progress",
+  "goalTurnOutcomeEvidence": "New portable pack importer/registry snapshot, CLI/typed SDK source, six unrun Rust tests, installed consumer expansion, three reviewed missing contracts, successful syntax/format/preserved-source checks. Storage continues to prevent compilation/functional checks; no new parity closure is claimed.",
+  "latestSourceChecksPassed": true,
+  "strictLedgerFailedAsExpected": true,
+  "finalSourceInventoryRechecked": true
+}

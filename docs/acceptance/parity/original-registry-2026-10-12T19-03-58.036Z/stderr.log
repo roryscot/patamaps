@@ -1,0 +1,73 @@
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 4 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/__tests__/executable-pack.test.ts > explicit executable pack profile > requires the exact declared imports and freezes a copied executable definition
+Error: invalid type: floating point `0.0`, expected usize
+ ❯ finish ../../../../../sdk/typescript/legacy-validation.mjs:44:13
+     42|         : canonicalPackRefusal
+     43|           ? new CanonicalJsonError(code, message)
+     44|           : new Error(message);
+       |             ^
+     45|       if (!(
+     46|         command[2] === "registry" ||
+ ❯ invoke ../../../../../sdk/typescript/legacy-validation.mjs:72:12
+ ❯ LegacyRelationRegistry.#request ../../../../../sdk/typescript/legacy-registry.mjs:34:14
+ ❯ LegacyRelationRegistry.getLaw ../../../../../sdk/typescript/legacy-registry.mjs:78:35
+ ❯ LegacyRelationRegistry.getLaw ../../../../../sdk/typescript/legacy-validation.mjs:197:27
+ ❯ src/__tests__/executable-pack.test.ts:46:21
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/4]⎯
+
+ FAIL  src/__tests__/executable-pack.test.ts > explicit executable pack profile > rejects missing, changed, repeated and self imports
+Error: Relation pack does not match the portable schema: /imports must NOT have duplicate items (items ## 0 and 1 are identical)
+ ❯ finish ../../../../../sdk/typescript/legacy-validation.mjs:44:13
+     42|         : canonicalPackRefusal
+     43|           ? new CanonicalJsonError(code, message)
+     44|           : new Error(message);
+       |             ^
+     45|       if (!(
+     46|         command[2] === "registry" ||
+ ❯ invoke ../../../../../sdk/typescript/legacy-validation.mjs:72:12
+ ❯ Object.digestLegacyRelationPack ../../../../../sdk/typescript/legacy-validation.mjs:154:14
+ ❯ digestLegacyRelationPack ../../../../../sdk/typescript/legacy-validation.mjs:180:9
+ ❯ src/__tests__/executable-pack.test.ts:105:17
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/4]⎯
+
+ FAIL  src/__tests__/executable-pack.test.ts > explicit executable pack profile > detects a legacy dependency object drifting after executable registration
+AssertionError: expected [Function] to throw error matching /Missing exact/ but got 'invalid type: floating point `0.0`, e…'
+
+- Expected: 
+/Missing exact/
+
++ Received: 
+"invalid type: floating point `0.0`, expected usize"
+
+ ❯ src/__tests__/executable-pack.test.ts:126:55
+    124|     const registry = new RelationRegistry([legacy, value]);
+    125|     legacy.description = "drifted";
+    126|     expect(() => registry.getLaw("urn:law:contains")).toThrow(/Missing…
+       |                                                       ^
+    127|   });
+    128|   it("checks a nested executable dependency's exact legacy import", ()…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/4]⎯
+
+ FAIL  src/__tests__/executable-pack.test.ts > explicit executable pack profile > checks a nested executable dependency's exact legacy import
+Error: invalid type: floating point `0.0`, expected usize
+ ❯ finish ../../../../../sdk/typescript/legacy-validation.mjs:44:13
+     42|         : canonicalPackRefusal
+     43|           ? new CanonicalJsonError(code, message)
+     44|           : new Error(message);
+       |             ^
+     45|       if (!(
+     46|         command[2] === "registry" ||
+ ❯ invoke ../../../../../sdk/typescript/legacy-validation.mjs:72:12
+ ❯ LegacyRelationRegistry.#request ../../../../../sdk/typescript/legacy-registry.mjs:34:14
+ ❯ LegacyRelationRegistry.registerPack ../../../../../sdk/typescript/legacy-registry.mjs:39:35
+ ❯ new LegacyRelationRegistry ../../../../../sdk/typescript/legacy-registry.mjs:11:38
+ ❯ new LegacyRelationRegistry ../../../../../sdk/typescript/legacy-validation.mjs:188:22
+ ❯ src/__tests__/executable-pack.test.ts:154:22
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/4]⎯
+

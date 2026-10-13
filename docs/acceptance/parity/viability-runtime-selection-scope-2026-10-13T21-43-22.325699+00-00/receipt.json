@@ -1,0 +1,71 @@
+{
+  "schemaVersion": "1.0.0",
+  "status": "implementation-pending",
+  "scope": "Host test runtime can be explicitly selected without changing original expectations, product transport, API domains, timeouts, bounds, or storage safeguards. Default remains Node 22.16.0; Node 22 pipe timeout remains unresolved, Node 24 provides additional host evidence only.",
+  "acceptance": [
+    "Selected runtime is absolute and exists",
+    "Original 404 and signed-zero 54 fixture digests unchanged",
+    "Fresh current candidate complete functional refresh executes with original assertions on explicitly recorded Node 24",
+    "Node 22 failures and stack samples preserved, no Node 22 acceptance claimed"
+  ],
+  "files": [
+    {
+      "path": "scripts/parity/storage_guard.py",
+      "beforeDigest": "sha256:1152427aca1eb690b2ede41ecadfa5cae45dc6a34f78ef43a323b37272fb4b89",
+      "retained": "docs/acceptance/parity/viability-runtime-selection-scope-2026-10-13T21-43-22.325699+00-00/before/scripts/parity/storage_guard.py"
+    },
+    {
+      "path": "scripts/parity/sdk_consumer.py",
+      "beforeDigest": "sha256:9429975bb26cff0b84e141db99aa62b08b3349dcda13fbbf4593daed17c2e6f0",
+      "retained": "docs/acceptance/parity/viability-runtime-selection-scope-2026-10-13T21-43-22.325699+00-00/before/scripts/parity/sdk_consumer.py"
+    },
+    {
+      "path": "scripts/parity/discovery_api.py",
+      "beforeDigest": "sha256:597ba3a46353dc8e10ea7e88c8ffa8a71a2c271b3fb63fae7da01582893bf2af",
+      "retained": "docs/acceptance/parity/viability-runtime-selection-scope-2026-10-13T21-43-22.325699+00-00/before/scripts/parity/discovery_api.py"
+    },
+    {
+      "path": "scripts/parity/workspace_workflow.py",
+      "beforeDigest": "sha256:80dc9b4b525f35538bf562a7712d3e5f09b81aa42c4ef28f07d8c840a687e28e",
+      "retained": "docs/acceptance/parity/viability-runtime-selection-scope-2026-10-13T21-43-22.325699+00-00/before/scripts/parity/workspace_workflow.py"
+    },
+    {
+      "path": "scripts/parity/scientific_bounds.py",
+      "beforeDigest": "sha256:5e5fa7d976b8539319a40a65a8bf5fd546456f7c877582b97782adbd6b8515f1",
+      "retained": "docs/acceptance/parity/viability-runtime-selection-scope-2026-10-13T21-43-22.325699+00-00/before/scripts/parity/scientific_bounds.py"
+    },
+    {
+      "path": "scripts/parity/cli_contracts.py",
+      "beforeDigest": "sha256:a35fd0361607e07b586020aa5720d0eb7a1113d8af6a7ba627ba315602bf89be",
+      "retained": "docs/acceptance/parity/viability-runtime-selection-scope-2026-10-13T21-43-22.325699+00-00/before/scripts/parity/cli_contracts.py"
+    },
+    {
+      "path": "README.md",
+      "beforeDigest": "sha256:1803c1218eb78ad550c5bf9cdd910125900309dea121cc66ad4a81ffc26f6d16",
+      "retained": "docs/acceptance/parity/viability-runtime-selection-scope-2026-10-13T21-43-22.325699+00-00/before/README.md"
+    },
+    {
+      "path": "BUILD_PLAN.md",
+      "beforeDigest": "sha256:f74de6eacc5ba42a65502159cb961c86bfd44ee0130d9a74b884b728c6dce0a2",
+      "retained": "docs/acceptance/parity/viability-runtime-selection-scope-2026-10-13T21-43-22.325699+00-00/before/BUILD_PLAN.md"
+    }
+  ],
+  "diagnostics": [
+    "docs/acceptance/parity/viability-native-timeout-probe-2026-10-13T21-38-01.171716+00-00/receipt.json",
+    "docs/acceptance/parity/viability-node-timeout-probe-2026-10-13T21-39-00.654866+00-00/receipt.json"
+  ],
+  "storagePolicyObservation": {
+    "path": "/Users/admin/dev/tmp/rust-sketches/wargame-workbench/storage-policy.json",
+    "digest": "sha256:e5d13f0b3417b0defa9cd8a4672ce4fea6f266ffe87677f2aa7f3bca69ef5e24",
+    "value": {
+      "version": 1,
+      "minimumFreeBytes": 0,
+      "reserveFreeBytes": 1000000000,
+      "maximumRunGrowthBytes": 8000000000,
+      "maximumRetainedBytes": 50000000000,
+      "monitorIntervalMs": 2000,
+      "terminationGraceMs": 15000
+    },
+    "statement": "External configured policy now has a 1 GB reserve; this work did not edit the policy or stop/delete unrelated jobs."
+  }
+}

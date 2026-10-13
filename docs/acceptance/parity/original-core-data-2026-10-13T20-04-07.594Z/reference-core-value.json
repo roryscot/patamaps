@@ -1,0 +1,139 @@
+{
+  "referenceEngine": "399747a4ad05a37cd8db1cedd53048fad2175be4",
+  "sourceDigest": "sha256:2a02e289bc3298527903fe73f02986f72622beebeea17d10e868e95abfa0b3b8",
+  "artifactDigest": "sha256:07161aa9c42c09871e63fe6a9e53e329c2b4ecae353c6a3efec236bc117189ef",
+  "value": {
+    "schemaVersion": "1.0.0",
+    "id": "urn:metamap:relation-pack:core",
+    "version": "1.0.0",
+    "description": "Minimal structural relations shared by language and domain adapters.",
+    "relations": [
+      {
+        "id": "core:contains",
+        "cyclePolicy": "forbid",
+        "transitive": true,
+        "impactDirection": "both",
+        "cardinalities": [
+          "one-to-one",
+          "one-to-many",
+          "many-to-many"
+        ]
+      },
+      {
+        "id": "core:implements",
+        "cyclePolicy": "forbid",
+        "impactDirection": "source-to-target",
+        "cardinalities": [
+          "one-to-one",
+          "one-to-many",
+          "many-to-many"
+        ]
+      },
+      {
+        "id": "core:conforms_to",
+        "cyclePolicy": "forbid",
+        "impactDirection": "target-to-source",
+        "cardinalities": [
+          "one-to-one",
+          "many-to-one",
+          "many-to-many"
+        ]
+      },
+      {
+        "id": "core:derives_from",
+        "cyclePolicy": "forbid",
+        "transitive": true,
+        "impactDirection": "target-to-source",
+        "cardinalities": [
+          "one-to-one",
+          "one-to-many",
+          "many-to-one",
+          "many-to-many"
+        ]
+      },
+      {
+        "id": "core:generates",
+        "cyclePolicy": "forbid",
+        "impactDirection": "source-to-target",
+        "cardinalities": [
+          "one-to-one",
+          "one-to-many",
+          "many-to-many"
+        ]
+      },
+      {
+        "id": "core:depends_on",
+        "cyclePolicy": "forbid",
+        "transitive": true,
+        "impactDirection": "target-to-source",
+        "cardinalities": [
+          "one-to-one",
+          "one-to-many",
+          "many-to-many"
+        ]
+      },
+      {
+        "id": "core:mirrors",
+        "cyclePolicy": "allow",
+        "symmetric": true,
+        "impactDirection": "both",
+        "cardinalities": [
+          "one-to-one",
+          "many-to-many"
+        ]
+      },
+      {
+        "id": "core:documents",
+        "cyclePolicy": "allow",
+        "impactDirection": "target-to-source",
+        "cardinalities": [
+          "one-to-one",
+          "one-to-many",
+          "many-to-many"
+        ]
+      },
+      {
+        "id": "core:tests",
+        "cyclePolicy": "allow",
+        "impactDirection": "target-to-source",
+        "cardinalities": [
+          "one-to-one",
+          "one-to-many",
+          "many-to-many"
+        ]
+      },
+      {
+        "id": "core:exposes",
+        "cyclePolicy": "forbid",
+        "impactDirection": "both",
+        "cardinalities": [
+          "one-to-one",
+          "one-to-many",
+          "many-to-many"
+        ]
+      },
+      {
+        "id": "core:references",
+        "cyclePolicy": "allow",
+        "impactDirection": "target-to-source",
+        "cardinalities": [
+          "one-to-one",
+          "one-to-many",
+          "many-to-one",
+          "many-to-many"
+        ]
+      },
+      {
+        "id": "core:specified_by",
+        "cyclePolicy": "forbid",
+        "impactDirection": "target-to-source",
+        "cardinalities": [
+          "one-to-one",
+          "many-to-one",
+          "many-to-many"
+        ]
+      }
+    ]
+  },
+  "scope": "Complete JSON value of the original runtime constant; the portable JSON additionally includes relation descriptions."
+}

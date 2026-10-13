@@ -1,0 +1,2569 @@
+{
+  "schemaVersion": "1.0.0",
+  "referenceEngine": "399747a4ad05a37cd8db1cedd53048fad2175be4",
+  "locale": "en-US",
+  "cases": [
+    {
+      "name": "core-direction-core:contains-s",
+      "action": {
+        "operation": "impact",
+        "input": "{\"value\":{\"document\":{\"schemaVersion\":\"1.0.0\",\"id\":\"graph\",\"entities\":[],\"mappings\":[{\"id\":\"m\",\"relation\":\"core:contains\",\"sources\":[\"s\"],\"targets\":[\"t\"]}],\"authorities\":[]},\"options\":{\"changedSubjects\":[\"s\"]}},\"numbers\":[]}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": {
+          "changedSubjects": [
+            "s"
+          ],
+          "affectedSubjects": [
+            "m",
+            "s",
+            "t"
+          ],
+          "paths": [
+            {
+              "subjectId": "m",
+              "path": [
+                "s",
+                "m"
+              ]
+            },
+            {
+              "subjectId": "s",
+              "path": [
+                "s"
+              ]
+            },
+            {
+              "subjectId": "t",
+              "path": [
+                "s",
+                "m",
+                "t"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "core-direction-core:contains-t",
+      "action": {
+        "operation": "impact",
+        "input": "{\"value\":{\"document\":{\"schemaVersion\":\"1.0.0\",\"id\":\"graph\",\"entities\":[],\"mappings\":[{\"id\":\"m\",\"relation\":\"core:contains\",\"sources\":[\"s\"],\"targets\":[\"t\"]}],\"authorities\":[]},\"options\":{\"changedSubjects\":[\"t\"]}},\"numbers\":[]}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": {
+          "changedSubjects": [
+            "t"
+          ],
+          "affectedSubjects": [
+            "m",
+            "s",
+            "t"
+          ],
+          "paths": [
+            {
+              "subjectId": "m",
+              "path": [
+                "t",
+                "m"
+              ]
+            },
+            {
+              "subjectId": "s",
+              "path": [
+                "t",
+                "m",
+                "s"
+              ]
+            },
+            {
+              "subjectId": "t",
+              "path": [
+                "t"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "core-direction-core:implements-s",
+      "action": {
+        "operation": "impact",
+        "input": "{\"value\":{\"document\":{\"schemaVersion\":\"1.0.0\",\"id\":\"graph\",\"entities\":[],\"mappings\":[{\"id\":\"m\",\"relation\":\"core:implements\",\"sources\":[\"s\"],\"targets\":[\"t\"]}],\"authorities\":[]},\"options\":{\"changedSubjects\":[\"s\"]}},\"numbers\":[]}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": {
+          "changedSubjects": [
+            "s"
+          ],
+          "affectedSubjects": [
+            "m",
+            "s",
+            "t"
+          ],
+          "paths": [
+            {
+              "subjectId": "m",
+              "path": [
+                "s",
+                "m"
+              ]
+            },
+            {
+              "subjectId": "s",
+              "path": [
+                "s"
+              ]
+            },
+            {
+              "subjectId": "t",
+              "path": [
+                "s",
+                "m",
+                "t"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "core-direction-core:implements-t",
+      "action": {
+        "operation": "impact",
+        "input": "{\"value\":{\"document\":{\"schemaVersion\":\"1.0.0\",\"id\":\"graph\",\"entities\":[],\"mappings\":[{\"id\":\"m\",\"relation\":\"core:implements\",\"sources\":[\"s\"],\"targets\":[\"t\"]}],\"authorities\":[]},\"options\":{\"changedSubjects\":[\"t\"]}},\"numbers\":[]}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": {
+          "changedSubjects": [
+            "t"
+          ],
+          "affectedSubjects": [
+            "t"
+          ],
+          "paths": [
+            {
+              "subjectId": "t",
+              "path": [
+                "t"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "core-direction-core:conforms_to-s",
+      "action": {
+        "operation": "impact",
+        "input": "{\"value\":{\"document\":{\"schemaVersion\":\"1.0.0\",\"id\":\"graph\",\"entities\":[],\"mappings\":[{\"id\":\"m\",\"relation\":\"core:conforms_to\",\"sources\":[\"s\"],\"targets\":[\"t\"]}],\"authorities\":[]},\"options\":{\"changedSubjects\":[\"s\"]}},\"numbers\":[]}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": {
+          "changedSubjects": [
+            "s"
+          ],
+          "affectedSubjects": [
+            "s"
+          ],
+          "paths": [
+            {
+              "subjectId": "s",
+              "path": [
+                "s"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "core-direction-core:conforms_to-t",
+      "action": {
+        "operation": "impact",
+        "input": "{\"value\":{\"document\":{\"schemaVersion\":\"1.0.0\",\"id\":\"graph\",\"entities\":[],\"mappings\":[{\"id\":\"m\",\"relation\":\"core:conforms_to\",\"sources\":[\"s\"],\"targets\":[\"t\"]}],\"authorities\":[]},\"options\":{\"changedSubjects\":[\"t\"]}},\"numbers\":[]}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": {
+          "changedSubjects": [
+            "t"
+          ],
+          "affectedSubjects": [
+            "m",
+            "s",
+            "t"
+          ],
+          "paths": [
+            {
+              "subjectId": "m",
+              "path": [
+                "t",
+                "m"
+              ]
+            },
+            {
+              "subjectId": "s",
+              "path": [
+                "t",
+                "m",
+                "s"
+              ]
+            },
+            {
+              "subjectId": "t",
+              "path": [
+                "t"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "core-direction-core:derives_from-s",
+      "action": {
+        "operation": "impact",
+        "input": "{\"value\":{\"document\":{\"schemaVersion\":\"1.0.0\",\"id\":\"graph\",\"entities\":[],\"mappings\":[{\"id\":\"m\",\"relation\":\"core:derives_from\",\"sources\":[\"s\"],\"targets\":[\"t\"]}],\"authorities\":[]},\"options\":{\"changedSubjects\":[\"s\"]}},\"numbers\":[]}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": {
+          "changedSubjects": [
+            "s"
+          ],
+          "affectedSubjects": [
+            "s"
+          ],
+          "paths": [
+            {
+              "subjectId": "s",
+              "path": [
+                "s"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "core-direction-core:derives_from-t",
+      "action": {
+        "operation": "impact",
+        "input": "{\"value\":{\"document\":{\"schemaVersion\":\"1.0.0\",\"id\":\"graph\",\"entities\":[],\"mappings\":[{\"id\":\"m\",\"relation\":\"core:derives_from\",\"sources\":[\"s\"],\"targets\":[\"t\"]}],\"authorities\":[]},\"options\":{\"changedSubjects\":[\"t\"]}},\"numbers\":[]}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": {
+          "changedSubjects": [
+            "t"
+          ],
+          "affectedSubjects": [
+            "m",
+            "s",
+            "t"
+          ],
+          "paths": [
+            {
+              "subjectId": "m",
+              "path": [
+                "t",
+                "m"
+              ]
+            },
+            {
+              "subjectId": "s",
+              "path": [
+                "t",
+                "m",
+                "s"
+              ]
+            },
+            {
+              "subjectId": "t",
+              "path": [
+                "t"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "core-direction-core:generates-s",
+      "action": {
+        "operation": "impact",
+        "input": "{\"value\":{\"document\":{\"schemaVersion\":\"1.0.0\",\"id\":\"graph\",\"entities\":[],\"mappings\":[{\"id\":\"m\",\"relation\":\"core:generates\",\"sources\":[\"s\"],\"targets\":[\"t\"]}],\"authorities\":[]},\"options\":{\"changedSubjects\":[\"s\"]}},\"numbers\":[]}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": {
+          "changedSubjects": [
+            "s"
+          ],
+          "affectedSubjects": [
+            "m",
+            "s",
+            "t"
+          ],
+          "paths": [
+            {
+              "subjectId": "m",
+              "path": [
+                "s",
+                "m"
+              ]
+            },
+            {
+              "subjectId": "s",
+              "path": [
+                "s"
+              ]
+            },
+            {
+              "subjectId": "t",
+              "path": [
+                "s",
+                "m",
+                "t"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "core-direction-core:generates-t",
+      "action": {
+        "operation": "impact",
+        "input": "{\"value\":{\"document\":{\"schemaVersion\":\"1.0.0\",\"id\":\"graph\",\"entities\":[],\"mappings\":[{\"id\":\"m\",\"relation\":\"core:generates\",\"sources\":[\"s\"],\"targets\":[\"t\"]}],\"authorities\":[]},\"options\":{\"changedSubjects\":[\"t\"]}},\"numbers\":[]}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": {
+          "changedSubjects": [
+            "t"
+          ],
+          "affectedSubjects": [
+            "t"
+          ],
+          "paths": [
+            {
+              "subjectId": "t",
+              "path": [
+                "t"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "core-direction-core:depends_on-s",
+      "action": {
+        "operation": "impact",
+        "input": "{\"value\":{\"document\":{\"schemaVersion\":\"1.0.0\",\"id\":\"graph\",\"entities\":[],\"mappings\":[{\"id\":\"m\",\"relation\":\"core:depends_on\",\"sources\":[\"s\"],\"targets\":[\"t\"]}],\"authorities\":[]},\"options\":{\"changedSubjects\":[\"s\"]}},\"numbers\":[]}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": {
+          "changedSubjects": [
+            "s"
+          ],
+          "affectedSubjects": [
+            "s"
+          ],
+          "paths": [
+            {
+              "subjectId": "s",
+              "path": [
+                "s"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "core-direction-core:depends_on-t",
+      "action": {
+        "operation": "impact",
+        "input": "{\"value\":{\"document\":{\"schemaVersion\":\"1.0.0\",\"id\":\"graph\",\"entities\":[],\"mappings\":[{\"id\":\"m\",\"relation\":\"core:depends_on\",\"sources\":[\"s\"],\"targets\":[\"t\"]}],\"authorities\":[]},\"options\":{\"changedSubjects\":[\"t\"]}},\"numbers\":[]}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": {
+          "changedSubjects": [
+            "t"
+          ],
+          "affectedSubjects": [
+            "m",
+            "s",
+            "t"
+          ],
+          "paths": [
+            {
+              "subjectId": "m",
+              "path": [
+                "t",
+                "m"
+              ]
+            },
+            {
+              "subjectId": "s",
+              "path": [
+                "t",
+                "m",
+                "s"
+              ]
+            },
+            {
+              "subjectId": "t",
+              "path": [
+                "t"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "core-direction-core:mirrors-s",
+      "action": {
+        "operation": "impact",
+        "input": "{\"value\":{\"document\":{\"schemaVersion\":\"1.0.0\",\"id\":\"graph\",\"entities\":[],\"mappings\":[{\"id\":\"m\",\"relation\":\"core:mirrors\",\"sources\":[\"s\"],\"targets\":[\"t\"]}],\"authorities\":[]},\"options\":{\"changedSubjects\":[\"s\"]}},\"numbers\":[]}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": {
+          "changedSubjects": [
+            "s"
+          ],
+          "affectedSubjects": [
+            "m",
+            "s",
+            "t"
+          ],
+          "paths": [
+            {
+              "subjectId": "m",
+              "path": [
+                "s",
+                "m"
+              ]
+            },
+            {
+              "subjectId": "s",
+              "path": [
+                "s"
+              ]
+            },
+            {
+              "subjectId": "t",
+              "path": [
+                "s",
+                "m",
+                "t"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "core-direction-core:mirrors-t",
+      "action": {
+        "operation": "impact",
+        "input": "{\"value\":{\"document\":{\"schemaVersion\":\"1.0.0\",\"id\":\"graph\",\"entities\":[],\"mappings\":[{\"id\":\"m\",\"relation\":\"core:mirrors\",\"sources\":[\"s\"],\"targets\":[\"t\"]}],\"authorities\":[]},\"options\":{\"changedSubjects\":[\"t\"]}},\"numbers\":[]}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": {
+          "changedSubjects": [
+            "t"
+          ],
+          "affectedSubjects": [
+            "m",
+            "s",
+            "t"
+          ],
+          "paths": [
+            {
+              "subjectId": "m",
+              "path": [
+                "t",
+                "m"
+              ]
+            },
+            {
+              "subjectId": "s",
+              "path": [
+                "t",
+                "m",
+                "s"
+              ]
+            },
+            {
+              "subjectId": "t",
+              "path": [
+                "t"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "core-direction-core:documents-s",
+      "action": {
+        "operation": "impact",
+        "input": "{\"value\":{\"document\":{\"schemaVersion\":\"1.0.0\",\"id\":\"graph\",\"entities\":[],\"mappings\":[{\"id\":\"m\",\"relation\":\"core:documents\",\"sources\":[\"s\"],\"targets\":[\"t\"]}],\"authorities\":[]},\"options\":{\"changedSubjects\":[\"s\"]}},\"numbers\":[]}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": {
+          "changedSubjects": [
+            "s"
+          ],
+          "affectedSubjects": [
+            "s"
+          ],
+          "paths": [
+            {
+              "subjectId": "s",
+              "path": [
+                "s"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "core-direction-core:documents-t",
+      "action": {
+        "operation": "impact",
+        "input": "{\"value\":{\"document\":{\"schemaVersion\":\"1.0.0\",\"id\":\"graph\",\"entities\":[],\"mappings\":[{\"id\":\"m\",\"relation\":\"core:documents\",\"sources\":[\"s\"],\"targets\":[\"t\"]}],\"authorities\":[]},\"options\":{\"changedSubjects\":[\"t\"]}},\"numbers\":[]}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": {
+          "changedSubjects": [
+            "t"
+          ],
+          "affectedSubjects": [
+            "m",
+            "s",
+            "t"
+          ],
+          "paths": [
+            {
+              "subjectId": "m",
+              "path": [
+                "t",
+                "m"
+              ]
+            },
+            {
+              "subjectId": "s",
+              "path": [
+                "t",
+                "m",
+                "s"
+              ]
+            },
+            {
+              "subjectId": "t",
+              "path": [
+                "t"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "core-direction-core:tests-s",
+      "action": {
+        "operation": "impact",
+        "input": "{\"value\":{\"document\":{\"schemaVersion\":\"1.0.0\",\"id\":\"graph\",\"entities\":[],\"mappings\":[{\"id\":\"m\",\"relation\":\"core:tests\",\"sources\":[\"s\"],\"targets\":[\"t\"]}],\"authorities\":[]},\"options\":{\"changedSubjects\":[\"s\"]}},\"numbers\":[]}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": {
+          "changedSubjects": [
+            "s"
+          ],
+          "affectedSubjects": [
+            "s"
+          ],
+          "paths": [
+            {
+              "subjectId": "s",
+              "path": [
+                "s"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "core-direction-core:tests-t",
+      "action": {
+        "operation": "impact",
+        "input": "{\"value\":{\"document\":{\"schemaVersion\":\"1.0.0\",\"id\":\"graph\",\"entities\":[],\"mappings\":[{\"id\":\"m\",\"relation\":\"core:tests\",\"sources\":[\"s\"],\"targets\":[\"t\"]}],\"authorities\":[]},\"options\":{\"changedSubjects\":[\"t\"]}},\"numbers\":[]}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": {
+          "changedSubjects": [
+            "t"
+          ],
+          "affectedSubjects": [
+            "m",
+            "s",
+            "t"
+          ],
+          "paths": [
+            {
+              "subjectId": "m",
+              "path": [
+                "t",
+                "m"
+              ]
+            },
+            {
+              "subjectId": "s",
+              "path": [
+                "t",
+                "m",
+                "s"
+              ]
+            },
+            {
+              "subjectId": "t",
+              "path": [
+                "t"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "core-direction-core:exposes-s",
+      "action": {
+        "operation": "impact",
+        "input": "{\"value\":{\"document\":{\"schemaVersion\":\"1.0.0\",\"id\":\"graph\",\"entities\":[],\"mappings\":[{\"id\":\"m\",\"relation\":\"core:exposes\",\"sources\":[\"s\"],\"targets\":[\"t\"]}],\"authorities\":[]},\"options\":{\"changedSubjects\":[\"s\"]}},\"numbers\":[]}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": {
+          "changedSubjects": [
+            "s"
+          ],
+          "affectedSubjects": [
+            "m",
+            "s",
+            "t"
+          ],
+          "paths": [
+            {
+              "subjectId": "m",
+              "path": [
+                "s",
+                "m"
+              ]
+            },
+            {
+              "subjectId": "s",
+              "path": [
+                "s"
+              ]
+            },
+            {
+              "subjectId": "t",
+              "path": [
+                "s",
+                "m",
+                "t"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "core-direction-core:exposes-t",
+      "action": {
+        "operation": "impact",
+        "input": "{\"value\":{\"document\":{\"schemaVersion\":\"1.0.0\",\"id\":\"graph\",\"entities\":[],\"mappings\":[{\"id\":\"m\",\"relation\":\"core:exposes\",\"sources\":[\"s\"],\"targets\":[\"t\"]}],\"authorities\":[]},\"options\":{\"changedSubjects\":[\"t\"]}},\"numbers\":[]}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": {
+          "changedSubjects": [
+            "t"
+          ],
+          "affectedSubjects": [
+            "m",
+            "s",
+            "t"
+          ],
+          "paths": [
+            {
+              "subjectId": "m",
+              "path": [
+                "t",
+                "m"
+              ]
+            },
+            {
+              "subjectId": "s",
+              "path": [
+                "t",
+                "m",
+                "s"
+              ]
+            },
+            {
+              "subjectId": "t",
+              "path": [
+                "t"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "core-direction-core:references-s",
+      "action": {
+        "operation": "impact",
+        "input": "{\"value\":{\"document\":{\"schemaVersion\":\"1.0.0\",\"id\":\"graph\",\"entities\":[],\"mappings\":[{\"id\":\"m\",\"relation\":\"core:references\",\"sources\":[\"s\"],\"targets\":[\"t\"]}],\"authorities\":[]},\"options\":{\"changedSubjects\":[\"s\"]}},\"numbers\":[]}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": {
+          "changedSubjects": [
+            "s"
+          ],
+          "affectedSubjects": [
+            "s"
+          ],
+          "paths": [
+            {
+              "subjectId": "s",
+              "path": [
+                "s"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "core-direction-core:references-t",
+      "action": {
+        "operation": "impact",
+        "input": "{\"value\":{\"document\":{\"schemaVersion\":\"1.0.0\",\"id\":\"graph\",\"entities\":[],\"mappings\":[{\"id\":\"m\",\"relation\":\"core:references\",\"sources\":[\"s\"],\"targets\":[\"t\"]}],\"authorities\":[]},\"options\":{\"changedSubjects\":[\"t\"]}},\"numbers\":[]}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": {
+          "changedSubjects": [
+            "t"
+          ],
+          "affectedSubjects": [
+            "m",
+            "s",
+            "t"
+          ],
+          "paths": [
+            {
+              "subjectId": "m",
+              "path": [
+                "t",
+                "m"
+              ]
+            },
+            {
+              "subjectId": "s",
+              "path": [
+                "t",
+                "m",
+                "s"
+              ]
+            },
+            {
+              "subjectId": "t",
+              "path": [
+                "t"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "core-direction-core:specified_by-s",
+      "action": {
+        "operation": "impact",
+        "input": "{\"value\":{\"document\":{\"schemaVersion\":\"1.0.0\",\"id\":\"graph\",\"entities\":[],\"mappings\":[{\"id\":\"m\",\"relation\":\"core:specified_by\",\"sources\":[\"s\"],\"targets\":[\"t\"]}],\"authorities\":[]},\"options\":{\"changedSubjects\":[\"s\"]}},\"numbers\":[]}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": {
+          "changedSubjects": [
+            "s"
+          ],
+          "affectedSubjects": [
+            "s"
+          ],
+          "paths": [
+            {
+              "subjectId": "s",
+              "path": [
+                "s"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "core-direction-core:specified_by-t",
+      "action": {
+        "operation": "impact",
+        "input": "{\"value\":{\"document\":{\"schemaVersion\":\"1.0.0\",\"id\":\"graph\",\"entities\":[],\"mappings\":[{\"id\":\"m\",\"relation\":\"core:specified_by\",\"sources\":[\"s\"],\"targets\":[\"t\"]}],\"authorities\":[]},\"options\":{\"changedSubjects\":[\"t\"]}},\"numbers\":[]}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": {
+          "changedSubjects": [
+            "t"
+          ],
+          "affectedSubjects": [
+            "m",
+            "s",
+            "t"
+          ],
+          "paths": [
+            {
+              "subjectId": "m",
+              "path": [
+                "t",
+                "m"
+              ]
+            },
+            {
+              "subjectId": "s",
+              "path": [
+                "t",
+                "m",
+                "s"
+              ]
+            },
+            {
+              "subjectId": "t",
+              "path": [
+                "t"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "stable-locale-tie-24",
+      "action": {
+        "operation": "impact",
+        "input": "{\"value\":{\"document\":{\"schemaVersion\":\"1.0.0\",\"id\":\"graph\",\"entities\":[],\"mappings\":[{\"id\":\"m\",\"relation\":\"unknown\",\"sources\":[\"seed\"],\"targets\":[\"á\",\"á\",\"a\"]}],\"authorities\":[]},\"options\":{\"changedSubjects\":[\"seed\"],\"derivations\":[]}},\"numbers\":[]}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": {
+          "changedSubjects": [
+            "seed"
+          ],
+          "affectedSubjects": [
+            "a",
+            "á",
+            "á",
+            "m",
+            "seed"
+          ],
+          "paths": [
+            {
+              "subjectId": "a",
+              "path": [
+                "seed",
+                "m",
+                "a"
+              ]
+            },
+            {
+              "subjectId": "á",
+              "path": [
+                "seed",
+                "m",
+                "á"
+              ]
+            },
+            {
+              "subjectId": "á",
+              "path": [
+                "seed",
+                "m",
+                "á"
+              ]
+            },
+            {
+              "subjectId": "m",
+              "path": [
+                "seed",
+                "m"
+              ]
+            },
+            {
+              "subjectId": "seed",
+              "path": [
+                "seed"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "stable-locale-tie-25",
+      "action": {
+        "operation": "impact",
+        "input": "{\"value\":{\"document\":{\"schemaVersion\":\"1.0.0\",\"id\":\"graph\",\"entities\":[],\"mappings\":[{\"id\":\"m\",\"relation\":\"unknown\",\"sources\":[\"seed\"],\"targets\":[\"á\",\"á\",\"a\"]}],\"authorities\":[]},\"options\":{\"changedSubjects\":[\"seed\"],\"derivations\":[{\"id\":\"proof\",\"premises\":[{\"mapping\":\"m\"}],\"result\":{\"id\":\"result\"}}]}},\"numbers\":[]}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": {
+          "changedSubjects": [
+            "seed"
+          ],
+          "affectedSubjects": [
+            "a",
+            "á",
+            "á",
+            "m",
+            "proof",
+            "result",
+            "seed"
+          ],
+          "paths": [
+            {
+              "subjectId": "a",
+              "path": [
+                "seed",
+                "m",
+                "a"
+              ]
+            },
+            {
+              "subjectId": "á",
+              "path": [
+                "seed",
+                "m",
+                "á"
+              ]
+            },
+            {
+              "subjectId": "á",
+              "path": [
+                "seed",
+                "m",
+                "á"
+              ]
+            },
+            {
+              "subjectId": "m",
+              "path": [
+                "seed",
+                "m"
+              ]
+            },
+            {
+              "subjectId": "proof",
+              "path": [
+                "seed",
+                "m",
+                "proof"
+              ]
+            },
+            {
+              "subjectId": "result",
+              "path": [
+                "seed",
+                "m",
+                "proof",
+                "result"
+              ]
+            },
+            {
+              "subjectId": "seed",
+              "path": [
+                "seed"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "stable-locale-tie-26",
+      "action": {
+        "operation": "impact",
+        "input": "{\"value\":{\"document\":{\"schemaVersion\":\"1.0.0\",\"id\":\"graph\",\"entities\":[],\"mappings\":[{\"id\":\"m\",\"relation\":\"unknown\",\"sources\":[\"á\"],\"targets\":[\"á\",\"á\",\"a\"]}],\"authorities\":[]},\"options\":{\"changedSubjects\":[\"á\"],\"derivations\":[]}},\"numbers\":[]}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": {
+          "changedSubjects": [
+            "á"
+          ],
+          "affectedSubjects": [
+            "a",
+            "á",
+            "á",
+            "m"
+          ],
+          "paths": [
+            {
+              "subjectId": "a",
+              "path": [
+                "á",
+                "m",
+                "a"
+              ]
+            },
+            {
+              "subjectId": "á",
+              "path": [
+                "á"
+              ]
+            },
+            {
+              "subjectId": "á",
+              "path": [
+                "á",
+                "m",
+                "á"
+              ]
+            },
+            {
+              "subjectId": "m",
+              "path": [
+                "á",
+                "m"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "stable-locale-tie-27",
+      "action": {
+        "operation": "impact",
+        "input": "{\"value\":{\"document\":{\"schemaVersion\":\"1.0.0\",\"id\":\"graph\",\"entities\":[],\"mappings\":[{\"id\":\"m\",\"relation\":\"unknown\",\"sources\":[\"á\"],\"targets\":[\"á\",\"á\",\"a\"]}],\"authorities\":[]},\"options\":{\"changedSubjects\":[\"á\"],\"derivations\":[{\"id\":\"proof\",\"premises\":[{\"mapping\":\"m\"}],\"result\":{\"id\":\"result\"}}]}},\"numbers\":[]}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": {
+          "changedSubjects": [
+            "á"
+          ],
+          "affectedSubjects": [
+            "a",
+            "á",
+            "á",
+            "m",
+            "proof",
+            "result"
+          ],
+          "paths": [
+            {
+              "subjectId": "a",
+              "path": [
+                "á",
+                "m",
+                "a"
+              ]
+            },
+            {
+              "subjectId": "á",
+              "path": [
+                "á"
+              ]
+            },
+            {
+              "subjectId": "á",
+              "path": [
+                "á",
+                "m",
+                "á"
+              ]
+            },
+            {
+              "subjectId": "m",
+              "path": [
+                "á",
+                "m"
+              ]
+            },
+            {
+              "subjectId": "proof",
+              "path": [
+                "á",
+                "m",
+                "proof"
+              ]
+            },
+            {
+              "subjectId": "result",
+              "path": [
+                "á",
+                "m",
+                "proof",
+                "result"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "stable-locale-tie-28",
+      "action": {
+        "operation": "impact",
+        "input": "{\"value\":{\"document\":{\"schemaVersion\":\"1.0.0\",\"id\":\"graph\",\"entities\":[],\"mappings\":[{\"id\":\"m\",\"relation\":\"unknown\",\"sources\":[\"seed\"],\"targets\":[\"A\",\"a\",\"á\",\"á\"]}],\"authorities\":[]},\"options\":{\"changedSubjects\":[\"seed\"],\"derivations\":[]}},\"numbers\":[]}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": {
+          "changedSubjects": [
+            "seed"
+          ],
+          "affectedSubjects": [
+            "a",
+            "A",
+            "á",
+            "á",
+            "m",
+            "seed"
+          ],
+          "paths": [
+            {
+              "subjectId": "a",
+              "path": [
+                "seed",
+                "m",
+                "a"
+              ]
+            },
+            {
+              "subjectId": "A",
+              "path": [
+                "seed",
+                "m",
+                "A"
+              ]
+            },
+            {
+              "subjectId": "á",
+              "path": [
+                "seed",
+                "m",
+                "á"
+              ]
+            },
+            {
+              "subjectId": "á",
+              "path": [
+                "seed",
+                "m",
+                "á"
+              ]
+            },
+            {
+              "subjectId": "m",
+              "path": [
+                "seed",
+                "m"
+              ]
+            },
+            {
+              "subjectId": "seed",
+              "path": [
+                "seed"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "stable-locale-tie-29",
+      "action": {
+        "operation": "impact",
+        "input": "{\"value\":{\"document\":{\"schemaVersion\":\"1.0.0\",\"id\":\"graph\",\"entities\":[],\"mappings\":[{\"id\":\"m\",\"relation\":\"unknown\",\"sources\":[\"seed\"],\"targets\":[\"A\",\"a\",\"á\",\"á\"]}],\"authorities\":[]},\"options\":{\"changedSubjects\":[\"seed\"],\"derivations\":[{\"id\":\"proof\",\"premises\":[{\"mapping\":\"m\"}],\"result\":{\"id\":\"result\"}}]}},\"numbers\":[]}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": {
+          "changedSubjects": [
+            "seed"
+          ],
+          "affectedSubjects": [
+            "a",
+            "A",
+            "á",
+            "á",
+            "m",
+            "proof",
+            "result",
+            "seed"
+          ],
+          "paths": [
+            {
+              "subjectId": "a",
+              "path": [
+                "seed",
+                "m",
+                "a"
+              ]
+            },
+            {
+              "subjectId": "A",
+              "path": [
+                "seed",
+                "m",
+                "A"
+              ]
+            },
+            {
+              "subjectId": "á",
+              "path": [
+                "seed",
+                "m",
+                "á"
+              ]
+            },
+            {
+              "subjectId": "á",
+              "path": [
+                "seed",
+                "m",
+                "á"
+              ]
+            },
+            {
+              "subjectId": "m",
+              "path": [
+                "seed",
+                "m"
+              ]
+            },
+            {
+              "subjectId": "proof",
+              "path": [
+                "seed",
+                "m",
+                "proof"
+              ]
+            },
+            {
+              "subjectId": "result",
+              "path": [
+                "seed",
+                "m",
+                "proof",
+                "result"
+              ]
+            },
+            {
+              "subjectId": "seed",
+              "path": [
+                "seed"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "stable-locale-tie-30",
+      "action": {
+        "operation": "impact",
+        "input": "{\"value\":{\"document\":{\"schemaVersion\":\"1.0.0\",\"id\":\"graph\",\"entities\":[],\"mappings\":[{\"id\":\"m\",\"relation\":\"unknown\",\"sources\":[\"A\"],\"targets\":[\"A\",\"a\",\"á\",\"á\"]}],\"authorities\":[]},\"options\":{\"changedSubjects\":[\"A\"],\"derivations\":[]}},\"numbers\":[]}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": {
+          "changedSubjects": [
+            "A"
+          ],
+          "affectedSubjects": [
+            "a",
+            "A",
+            "á",
+            "á",
+            "m"
+          ],
+          "paths": [
+            {
+              "subjectId": "a",
+              "path": [
+                "A",
+                "m",
+                "a"
+              ]
+            },
+            {
+              "subjectId": "A",
+              "path": [
+                "A"
+              ]
+            },
+            {
+              "subjectId": "á",
+              "path": [
+                "A",
+                "m",
+                "á"
+              ]
+            },
+            {
+              "subjectId": "á",
+              "path": [
+                "A",
+                "m",
+                "á"
+              ]
+            },
+            {
+              "subjectId": "m",
+              "path": [
+                "A",
+                "m"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "stable-locale-tie-31",
+      "action": {
+        "operation": "impact",
+        "input": "{\"value\":{\"document\":{\"schemaVersion\":\"1.0.0\",\"id\":\"graph\",\"entities\":[],\"mappings\":[{\"id\":\"m\",\"relation\":\"unknown\",\"sources\":[\"A\"],\"targets\":[\"A\",\"a\",\"á\",\"á\"]}],\"authorities\":[]},\"options\":{\"changedSubjects\":[\"A\"],\"derivations\":[{\"id\":\"proof\",\"premises\":[{\"mapping\":\"m\"}],\"result\":{\"id\":\"result\"}}]}},\"numbers\":[]}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": {
+          "changedSubjects": [
+            "A"
+          ],
+          "affectedSubjects": [
+            "a",
+            "A",
+            "á",
+            "á",
+            "m",
+            "proof",
+            "result"
+          ],
+          "paths": [
+            {
+              "subjectId": "a",
+              "path": [
+                "A",
+                "m",
+                "a"
+              ]
+            },
+            {
+              "subjectId": "A",
+              "path": [
+                "A"
+              ]
+            },
+            {
+              "subjectId": "á",
+              "path": [
+                "A",
+                "m",
+                "á"
+              ]
+            },
+            {
+              "subjectId": "á",
+              "path": [
+                "A",
+                "m",
+                "á"
+              ]
+            },
+            {
+              "subjectId": "m",
+              "path": [
+                "A",
+                "m"
+              ]
+            },
+            {
+              "subjectId": "proof",
+              "path": [
+                "A",
+                "m",
+                "proof"
+              ]
+            },
+            {
+              "subjectId": "result",
+              "path": [
+                "A",
+                "m",
+                "proof",
+                "result"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "stable-locale-tie-32",
+      "action": {
+        "operation": "impact",
+        "input": "{\"value\":{\"document\":{\"schemaVersion\":\"1.0.0\",\"id\":\"graph\",\"entities\":[],\"mappings\":[{\"id\":\"m\",\"relation\":\"unknown\",\"sources\":[\"seed\"],\"targets\":[\"é\",\"é\",\"É\",\"É\"]}],\"authorities\":[]},\"options\":{\"changedSubjects\":[\"seed\"],\"derivations\":[]}},\"numbers\":[]}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": {
+          "changedSubjects": [
+            "seed"
+          ],
+          "affectedSubjects": [
+            "é",
+            "é",
+            "É",
+            "É",
+            "m",
+            "seed"
+          ],
+          "paths": [
+            {
+              "subjectId": "é",
+              "path": [
+                "seed",
+                "m",
+                "é"
+              ]
+            },
+            {
+              "subjectId": "é",
+              "path": [
+                "seed",
+                "m",
+                "é"
+              ]
+            },
+            {
+              "subjectId": "É",
+              "path": [
+                "seed",
+                "m",
+                "É"
+              ]
+            },
+            {
+              "subjectId": "É",
+              "path": [
+                "seed",
+                "m",
+                "É"
+              ]
+            },
+            {
+              "subjectId": "m",
+              "path": [
+                "seed",
+                "m"
+              ]
+            },
+            {
+              "subjectId": "seed",
+              "path": [
+                "seed"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "stable-locale-tie-33",
+      "action": {
+        "operation": "impact",
+        "input": "{\"value\":{\"document\":{\"schemaVersion\":\"1.0.0\",\"id\":\"graph\",\"entities\":[],\"mappings\":[{\"id\":\"m\",\"relation\":\"unknown\",\"sources\":[\"seed\"],\"targets\":[\"é\",\"é\",\"É\",\"É\"]}],\"authorities\":[]},\"options\":{\"changedSubjects\":[\"seed\"],\"derivations\":[{\"id\":\"proof\",\"premises\":[{\"mapping\":\"m\"}],\"result\":{\"id\":\"result\"}}]}},\"numbers\":[]}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": {
+          "changedSubjects": [
+            "seed"
+          ],
+          "affectedSubjects": [
+            "é",
+            "é",
+            "É",
+            "É",
+            "m",
+            "proof",
+            "result",
+            "seed"
+          ],
+          "paths": [
+            {
+              "subjectId": "é",
+              "path": [
+                "seed",
+                "m",
+                "é"
+              ]
+            },
+            {
+              "subjectId": "é",
+              "path": [
+                "seed",
+                "m",
+                "é"
+              ]
+            },
+            {
+              "subjectId": "É",
+              "path": [
+                "seed",
+                "m",
+                "É"
+              ]
+            },
+            {
+              "subjectId": "É",
+              "path": [
+                "seed",
+                "m",
+                "É"
+              ]
+            },
+            {
+              "subjectId": "m",
+              "path": [
+                "seed",
+                "m"
+              ]
+            },
+            {
+              "subjectId": "proof",
+              "path": [
+                "seed",
+                "m",
+                "proof"
+              ]
+            },
+            {
+              "subjectId": "result",
+              "path": [
+                "seed",
+                "m",
+                "proof",
+                "result"
+              ]
+            },
+            {
+              "subjectId": "seed",
+              "path": [
+                "seed"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "stable-locale-tie-34",
+      "action": {
+        "operation": "impact",
+        "input": "{\"value\":{\"document\":{\"schemaVersion\":\"1.0.0\",\"id\":\"graph\",\"entities\":[],\"mappings\":[{\"id\":\"m\",\"relation\":\"unknown\",\"sources\":[\"é\"],\"targets\":[\"é\",\"é\",\"É\",\"É\"]}],\"authorities\":[]},\"options\":{\"changedSubjects\":[\"é\"],\"derivations\":[]}},\"numbers\":[]}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": {
+          "changedSubjects": [
+            "é"
+          ],
+          "affectedSubjects": [
+            "é",
+            "é",
+            "É",
+            "É",
+            "m"
+          ],
+          "paths": [
+            {
+              "subjectId": "é",
+              "path": [
+                "é"
+              ]
+            },
+            {
+              "subjectId": "é",
+              "path": [
+                "é",
+                "m",
+                "é"
+              ]
+            },
+            {
+              "subjectId": "É",
+              "path": [
+                "é",
+                "m",
+                "É"
+              ]
+            },
+            {
+              "subjectId": "É",
+              "path": [
+                "é",
+                "m",
+                "É"
+              ]
+            },
+            {
+              "subjectId": "m",
+              "path": [
+                "é",
+                "m"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "stable-locale-tie-35",
+      "action": {
+        "operation": "impact",
+        "input": "{\"value\":{\"document\":{\"schemaVersion\":\"1.0.0\",\"id\":\"graph\",\"entities\":[],\"mappings\":[{\"id\":\"m\",\"relation\":\"unknown\",\"sources\":[\"é\"],\"targets\":[\"é\",\"é\",\"É\",\"É\"]}],\"authorities\":[]},\"options\":{\"changedSubjects\":[\"é\"],\"derivations\":[{\"id\":\"proof\",\"premises\":[{\"mapping\":\"m\"}],\"result\":{\"id\":\"result\"}}]}},\"numbers\":[]}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": {
+          "changedSubjects": [
+            "é"
+          ],
+          "affectedSubjects": [
+            "é",
+            "é",
+            "É",
+            "É",
+            "m",
+            "proof",
+            "result"
+          ],
+          "paths": [
+            {
+              "subjectId": "é",
+              "path": [
+                "é"
+              ]
+            },
+            {
+              "subjectId": "é",
+              "path": [
+                "é",
+                "m",
+                "é"
+              ]
+            },
+            {
+              "subjectId": "É",
+              "path": [
+                "é",
+                "m",
+                "É"
+              ]
+            },
+            {
+              "subjectId": "É",
+              "path": [
+                "é",
+                "m",
+                "É"
+              ]
+            },
+            {
+              "subjectId": "m",
+              "path": [
+                "é",
+                "m"
+              ]
+            },
+            {
+              "subjectId": "proof",
+              "path": [
+                "é",
+                "m",
+                "proof"
+              ]
+            },
+            {
+              "subjectId": "result",
+              "path": [
+                "é",
+                "m",
+                "proof",
+                "result"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "stable-locale-tie-36",
+      "action": {
+        "operation": "impact",
+        "input": "{\"value\":{\"document\":{\"schemaVersion\":\"1.0.0\",\"id\":\"graph\",\"entities\":[],\"mappings\":[{\"id\":\"m\",\"relation\":\"unknown\",\"sources\":[\"seed\"],\"targets\":[\"\\ud800\",\"\\ud801\",\"\"]}],\"authorities\":[]},\"options\":{\"changedSubjects\":[\"seed\"],\"derivations\":[]}},\"numbers\":[]}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": {
+          "changedSubjects": [
+            "seed"
+          ],
+          "affectedSubjects": [
+            "m",
+            "seed",
+            "\ud800",
+            "\ud801",
+            ""
+          ],
+          "paths": [
+            {
+              "subjectId": "m",
+              "path": [
+                "seed",
+                "m"
+              ]
+            },
+            {
+              "subjectId": "seed",
+              "path": [
+                "seed"
+              ]
+            },
+            {
+              "subjectId": "\ud800",
+              "path": [
+                "seed",
+                "m",
+                "\ud800"
+              ]
+            },
+            {
+              "subjectId": "\ud801",
+              "path": [
+                "seed",
+                "m",
+                "\ud801"
+              ]
+            },
+            {
+              "subjectId": "",
+              "path": [
+                "seed",
+                "m",
+                ""
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "stable-locale-tie-37",
+      "action": {
+        "operation": "impact",
+        "input": "{\"value\":{\"document\":{\"schemaVersion\":\"1.0.0\",\"id\":\"graph\",\"entities\":[],\"mappings\":[{\"id\":\"m\",\"relation\":\"unknown\",\"sources\":[\"seed\"],\"targets\":[\"\\ud800\",\"\\ud801\",\"\"]}],\"authorities\":[]},\"options\":{\"changedSubjects\":[\"seed\"],\"derivations\":[{\"id\":\"proof\",\"premises\":[{\"mapping\":\"m\"}],\"result\":{\"id\":\"result\"}}]}},\"numbers\":[]}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": {
+          "changedSubjects": [
+            "seed"
+          ],
+          "affectedSubjects": [
+            "m",
+            "proof",
+            "result",
+            "seed",
+            "\ud800",
+            "\ud801",
+            ""
+          ],
+          "paths": [
+            {
+              "subjectId": "m",
+              "path": [
+                "seed",
+                "m"
+              ]
+            },
+            {
+              "subjectId": "proof",
+              "path": [
+                "seed",
+                "m",
+                "proof"
+              ]
+            },
+            {
+              "subjectId": "result",
+              "path": [
+                "seed",
+                "m",
+                "proof",
+                "result"
+              ]
+            },
+            {
+              "subjectId": "seed",
+              "path": [
+                "seed"
+              ]
+            },
+            {
+              "subjectId": "\ud800",
+              "path": [
+                "seed",
+                "m",
+                "\ud800"
+              ]
+            },
+            {
+              "subjectId": "\ud801",
+              "path": [
+                "seed",
+                "m",
+                "\ud801"
+              ]
+            },
+            {
+              "subjectId": "",
+              "path": [
+                "seed",
+                "m",
+                ""
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "stable-locale-tie-38",
+      "action": {
+        "operation": "impact",
+        "input": "{\"value\":{\"document\":{\"schemaVersion\":\"1.0.0\",\"id\":\"graph\",\"entities\":[],\"mappings\":[{\"id\":\"m\",\"relation\":\"unknown\",\"sources\":[\"\\ud800\"],\"targets\":[\"\\ud800\",\"\\ud801\",\"\"]}],\"authorities\":[]},\"options\":{\"changedSubjects\":[\"\\ud800\"],\"derivations\":[]}},\"numbers\":[]}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": {
+          "changedSubjects": [
+            "\ud800"
+          ],
+          "affectedSubjects": [
+            "m",
+            "\ud800",
+            "\ud801",
+            ""
+          ],
+          "paths": [
+            {
+              "subjectId": "m",
+              "path": [
+                "\ud800",
+                "m"
+              ]
+            },
+            {
+              "subjectId": "\ud800",
+              "path": [
+                "\ud800"
+              ]
+            },
+            {
+              "subjectId": "\ud801",
+              "path": [
+                "\ud800",
+                "m",
+                "\ud801"
+              ]
+            },
+            {
+              "subjectId": "",
+              "path": [
+                "\ud800",
+                "m",
+                ""
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "stable-locale-tie-39",
+      "action": {
+        "operation": "impact",
+        "input": "{\"value\":{\"document\":{\"schemaVersion\":\"1.0.0\",\"id\":\"graph\",\"entities\":[],\"mappings\":[{\"id\":\"m\",\"relation\":\"unknown\",\"sources\":[\"\\ud800\"],\"targets\":[\"\\ud800\",\"\\ud801\",\"\"]}],\"authorities\":[]},\"options\":{\"changedSubjects\":[\"\\ud800\"],\"derivations\":[{\"id\":\"proof\",\"premises\":[{\"mapping\":\"m\"}],\"result\":{\"id\":\"result\"}}]}},\"numbers\":[]}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": {
+          "changedSubjects": [
+            "\ud800"
+          ],
+          "affectedSubjects": [
+            "m",
+            "proof",
+            "result",
+            "\ud800",
+            "\ud801",
+            ""
+          ],
+          "paths": [
+            {
+              "subjectId": "m",
+              "path": [
+                "\ud800",
+                "m"
+              ]
+            },
+            {
+              "subjectId": "proof",
+              "path": [
+                "\ud800",
+                "m",
+                "proof"
+              ]
+            },
+            {
+              "subjectId": "result",
+              "path": [
+                "\ud800",
+                "m",
+                "proof",
+                "result"
+              ]
+            },
+            {
+              "subjectId": "\ud800",
+              "path": [
+                "\ud800"
+              ]
+            },
+            {
+              "subjectId": "\ud801",
+              "path": [
+                "\ud800",
+                "m",
+                "\ud801"
+              ]
+            },
+            {
+              "subjectId": "",
+              "path": [
+                "\ud800",
+                "m",
+                ""
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "stable-locale-tie-40",
+      "action": {
+        "operation": "impact",
+        "input": "{\"value\":{\"document\":{\"schemaVersion\":\"1.0.0\",\"id\":\"graph\",\"entities\":[],\"mappings\":[{\"id\":\"m\",\"relation\":\"unknown\",\"sources\":[\"seed\"],\"targets\":[\"😀\",\"a\",\"é\"]}],\"authorities\":[]},\"options\":{\"changedSubjects\":[\"seed\"],\"derivations\":[]}},\"numbers\":[]}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": {
+          "changedSubjects": [
+            "seed"
+          ],
+          "affectedSubjects": [
+            "😀",
+            "a",
+            "é",
+            "m",
+            "seed"
+          ],
+          "paths": [
+            {
+              "subjectId": "😀",
+              "path": [
+                "seed",
+                "m",
+                "😀"
+              ]
+            },
+            {
+              "subjectId": "a",
+              "path": [
+                "seed",
+                "m",
+                "a"
+              ]
+            },
+            {
+              "subjectId": "é",
+              "path": [
+                "seed",
+                "m",
+                "é"
+              ]
+            },
+            {
+              "subjectId": "m",
+              "path": [
+                "seed",
+                "m"
+              ]
+            },
+            {
+              "subjectId": "seed",
+              "path": [
+                "seed"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "stable-locale-tie-41",
+      "action": {
+        "operation": "impact",
+        "input": "{\"value\":{\"document\":{\"schemaVersion\":\"1.0.0\",\"id\":\"graph\",\"entities\":[],\"mappings\":[{\"id\":\"m\",\"relation\":\"unknown\",\"sources\":[\"seed\"],\"targets\":[\"😀\",\"a\",\"é\"]}],\"authorities\":[]},\"options\":{\"changedSubjects\":[\"seed\"],\"derivations\":[{\"id\":\"proof\",\"premises\":[{\"mapping\":\"m\"}],\"result\":{\"id\":\"result\"}}]}},\"numbers\":[]}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": {
+          "changedSubjects": [
+            "seed"
+          ],
+          "affectedSubjects": [
+            "😀",
+            "a",
+            "é",
+            "m",
+            "proof",
+            "result",
+            "seed"
+          ],
+          "paths": [
+            {
+              "subjectId": "😀",
+              "path": [
+                "seed",
+                "m",
+                "😀"
+              ]
+            },
+            {
+              "subjectId": "a",
+              "path": [
+                "seed",
+                "m",
+                "a"
+              ]
+            },
+            {
+              "subjectId": "é",
+              "path": [
+                "seed",
+                "m",
+                "é"
+              ]
+            },
+            {
+              "subjectId": "m",
+              "path": [
+                "seed",
+                "m"
+              ]
+            },
+            {
+              "subjectId": "proof",
+              "path": [
+                "seed",
+                "m",
+                "proof"
+              ]
+            },
+            {
+              "subjectId": "result",
+              "path": [
+                "seed",
+                "m",
+                "proof",
+                "result"
+              ]
+            },
+            {
+              "subjectId": "seed",
+              "path": [
+                "seed"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "stable-locale-tie-42",
+      "action": {
+        "operation": "impact",
+        "input": "{\"value\":{\"document\":{\"schemaVersion\":\"1.0.0\",\"id\":\"graph\",\"entities\":[],\"mappings\":[{\"id\":\"m\",\"relation\":\"unknown\",\"sources\":[\"😀\"],\"targets\":[\"😀\",\"a\",\"é\"]}],\"authorities\":[]},\"options\":{\"changedSubjects\":[\"😀\"],\"derivations\":[]}},\"numbers\":[]}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": {
+          "changedSubjects": [
+            "😀"
+          ],
+          "affectedSubjects": [
+            "😀",
+            "a",
+            "é",
+            "m"
+          ],
+          "paths": [
+            {
+              "subjectId": "😀",
+              "path": [
+                "😀"
+              ]
+            },
+            {
+              "subjectId": "a",
+              "path": [
+                "😀",
+                "m",
+                "a"
+              ]
+            },
+            {
+              "subjectId": "é",
+              "path": [
+                "😀",
+                "m",
+                "é"
+              ]
+            },
+            {
+              "subjectId": "m",
+              "path": [
+                "😀",
+                "m"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "stable-locale-tie-43",
+      "action": {
+        "operation": "impact",
+        "input": "{\"value\":{\"document\":{\"schemaVersion\":\"1.0.0\",\"id\":\"graph\",\"entities\":[],\"mappings\":[{\"id\":\"m\",\"relation\":\"unknown\",\"sources\":[\"😀\"],\"targets\":[\"😀\",\"a\",\"é\"]}],\"authorities\":[]},\"options\":{\"changedSubjects\":[\"😀\"],\"derivations\":[{\"id\":\"proof\",\"premises\":[{\"mapping\":\"m\"}],\"result\":{\"id\":\"result\"}}]}},\"numbers\":[]}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": {
+          "changedSubjects": [
+            "😀"
+          ],
+          "affectedSubjects": [
+            "😀",
+            "a",
+            "é",
+            "m",
+            "proof",
+            "result"
+          ],
+          "paths": [
+            {
+              "subjectId": "😀",
+              "path": [
+                "😀"
+              ]
+            },
+            {
+              "subjectId": "a",
+              "path": [
+                "😀",
+                "m",
+                "a"
+              ]
+            },
+            {
+              "subjectId": "é",
+              "path": [
+                "😀",
+                "m",
+                "é"
+              ]
+            },
+            {
+              "subjectId": "m",
+              "path": [
+                "😀",
+                "m"
+              ]
+            },
+            {
+              "subjectId": "proof",
+              "path": [
+                "😀",
+                "m",
+                "proof"
+              ]
+            },
+            {
+              "subjectId": "result",
+              "path": [
+                "😀",
+                "m",
+                "proof",
+                "result"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "mutated-retained-registry-none",
+      "action": {
+        "operation": "impact",
+        "input": "{\"value\":{\"document\":{\"schemaVersion\":\"1.0.0\",\"id\":\"graph\",\"entities\":[],\"mappings\":[{\"id\":\"m2\",\"relation\":\"r\",\"sources\":[\"b\"],\"targets\":[\"c\"]},{\"id\":\"m1\",\"relation\":\"r\",\"sources\":[\"a\"],\"targets\":[\"b\"]},{\"id\":\"m3\",\"relation\":\"unknown\",\"sources\":[\"c\",\"d\"],\"targets\":[\"e\",\"f\"]}],\"authorities\":[{\"id\":\"auth\",\"concept\":\"a\",\"source\":\"b\"}]},\"options\":{\"changedSubjects\":[\"a\"]},\"packs\":[{\"schemaVersion\":\"1.0.0\",\"id\":\"custom\",\"version\":\"1\",\"relations\":[{\"id\":\"r\",\"cyclePolicy\":\"allow\",\"impactDirection\":\"both\"}]}],\"mutation\":{\"id\":\"renamed\",\"direction\":\"none\"}},\"numbers\":[]}"
+      },
+      "host": "mutated-registry",
+      "expected": {
+        "status": "observed",
+        "value": {
+          "changedSubjects": [
+            "a"
+          ],
+          "affectedSubjects": [
+            "a"
+          ],
+          "paths": [
+            {
+              "subjectId": "a",
+              "path": [
+                "a"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "mutated-retained-registry-both",
+      "action": {
+        "operation": "impact",
+        "input": "{\"value\":{\"document\":{\"schemaVersion\":\"1.0.0\",\"id\":\"graph\",\"entities\":[],\"mappings\":[{\"id\":\"m2\",\"relation\":\"r\",\"sources\":[\"b\"],\"targets\":[\"c\"]},{\"id\":\"m1\",\"relation\":\"r\",\"sources\":[\"a\"],\"targets\":[\"b\"]},{\"id\":\"m3\",\"relation\":\"unknown\",\"sources\":[\"c\",\"d\"],\"targets\":[\"e\",\"f\"]}],\"authorities\":[{\"id\":\"auth\",\"concept\":\"a\",\"source\":\"b\"}]},\"options\":{\"changedSubjects\":[\"a\"]},\"packs\":[{\"schemaVersion\":\"1.0.0\",\"id\":\"custom\",\"version\":\"1\",\"relations\":[{\"id\":\"r\",\"cyclePolicy\":\"allow\",\"impactDirection\":\"both\"}]}],\"mutation\":{\"id\":\"renamed\",\"direction\":\"both\"}},\"numbers\":[]}"
+      },
+      "host": "mutated-registry",
+      "expected": {
+        "status": "observed",
+        "value": {
+          "changedSubjects": [
+            "a"
+          ],
+          "affectedSubjects": [
+            "a",
+            "b",
+            "c",
+            "d",
+            "e",
+            "f",
+            "m1",
+            "m2",
+            "m3"
+          ],
+          "paths": [
+            {
+              "subjectId": "a",
+              "path": [
+                "a"
+              ]
+            },
+            {
+              "subjectId": "b",
+              "path": [
+                "a",
+                "m1",
+                "b"
+              ]
+            },
+            {
+              "subjectId": "c",
+              "path": [
+                "a",
+                "m1",
+                "b",
+                "m2",
+                "c"
+              ]
+            },
+            {
+              "subjectId": "d",
+              "path": [
+                "a",
+                "m1",
+                "b",
+                "m2",
+                "c",
+                "m3",
+                "e",
+                "m3",
+                "d"
+              ]
+            },
+            {
+              "subjectId": "e",
+              "path": [
+                "a",
+                "m1",
+                "b",
+                "m2",
+                "c",
+                "m3",
+                "e"
+              ]
+            },
+            {
+              "subjectId": "f",
+              "path": [
+                "a",
+                "m1",
+                "b",
+                "m2",
+                "c",
+                "m3",
+                "f"
+              ]
+            },
+            {
+              "subjectId": "m1",
+              "path": [
+                "a",
+                "m1"
+              ]
+            },
+            {
+              "subjectId": "m2",
+              "path": [
+                "a",
+                "m1",
+                "b",
+                "m2"
+              ]
+            },
+            {
+              "subjectId": "m3",
+              "path": [
+                "a",
+                "m1",
+                "b",
+                "m2",
+                "c",
+                "m3"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "mutated-retained-registry-source-to-target",
+      "action": {
+        "operation": "impact",
+        "input": "{\"value\":{\"document\":{\"schemaVersion\":\"1.0.0\",\"id\":\"graph\",\"entities\":[],\"mappings\":[{\"id\":\"m2\",\"relation\":\"r\",\"sources\":[\"b\"],\"targets\":[\"c\"]},{\"id\":\"m1\",\"relation\":\"r\",\"sources\":[\"a\"],\"targets\":[\"b\"]},{\"id\":\"m3\",\"relation\":\"unknown\",\"sources\":[\"c\",\"d\"],\"targets\":[\"e\",\"f\"]}],\"authorities\":[{\"id\":\"auth\",\"concept\":\"a\",\"source\":\"b\"}]},\"options\":{\"changedSubjects\":[\"a\"]},\"packs\":[{\"schemaVersion\":\"1.0.0\",\"id\":\"custom\",\"version\":\"1\",\"relations\":[{\"id\":\"r\",\"cyclePolicy\":\"allow\",\"impactDirection\":\"both\"}]}],\"mutation\":{\"id\":\"renamed\",\"direction\":\"source-to-target\"}},\"numbers\":[]}"
+      },
+      "host": "mutated-registry",
+      "expected": {
+        "status": "observed",
+        "value": {
+          "changedSubjects": [
+            "a"
+          ],
+          "affectedSubjects": [
+            "a",
+            "b",
+            "c",
+            "d",
+            "e",
+            "f",
+            "m1",
+            "m2",
+            "m3"
+          ],
+          "paths": [
+            {
+              "subjectId": "a",
+              "path": [
+                "a"
+              ]
+            },
+            {
+              "subjectId": "b",
+              "path": [
+                "a",
+                "m1",
+                "b"
+              ]
+            },
+            {
+              "subjectId": "c",
+              "path": [
+                "a",
+                "m1",
+                "b",
+                "m2",
+                "c"
+              ]
+            },
+            {
+              "subjectId": "d",
+              "path": [
+                "a",
+                "m1",
+                "b",
+                "m2",
+                "c",
+                "m3",
+                "e",
+                "m3",
+                "d"
+              ]
+            },
+            {
+              "subjectId": "e",
+              "path": [
+                "a",
+                "m1",
+                "b",
+                "m2",
+                "c",
+                "m3",
+                "e"
+              ]
+            },
+            {
+              "subjectId": "f",
+              "path": [
+                "a",
+                "m1",
+                "b",
+                "m2",
+                "c",
+                "m3",
+                "f"
+              ]
+            },
+            {
+              "subjectId": "m1",
+              "path": [
+                "a",
+                "m1"
+              ]
+            },
+            {
+              "subjectId": "m2",
+              "path": [
+                "a",
+                "m1",
+                "b",
+                "m2"
+              ]
+            },
+            {
+              "subjectId": "m3",
+              "path": [
+                "a",
+                "m1",
+                "b",
+                "m2",
+                "c",
+                "m3"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "mutated-retained-registry-target-to-source",
+      "action": {
+        "operation": "impact",
+        "input": "{\"value\":{\"document\":{\"schemaVersion\":\"1.0.0\",\"id\":\"graph\",\"entities\":[],\"mappings\":[{\"id\":\"m2\",\"relation\":\"r\",\"sources\":[\"b\"],\"targets\":[\"c\"]},{\"id\":\"m1\",\"relation\":\"r\",\"sources\":[\"a\"],\"targets\":[\"b\"]},{\"id\":\"m3\",\"relation\":\"unknown\",\"sources\":[\"c\",\"d\"],\"targets\":[\"e\",\"f\"]}],\"authorities\":[{\"id\":\"auth\",\"concept\":\"a\",\"source\":\"b\"}]},\"options\":{\"changedSubjects\":[\"a\"]},\"packs\":[{\"schemaVersion\":\"1.0.0\",\"id\":\"custom\",\"version\":\"1\",\"relations\":[{\"id\":\"r\",\"cyclePolicy\":\"allow\",\"impactDirection\":\"both\"}]}],\"mutation\":{\"id\":\"renamed\",\"direction\":\"target-to-source\"}},\"numbers\":[]}"
+      },
+      "host": "mutated-registry",
+      "expected": {
+        "status": "observed",
+        "value": {
+          "changedSubjects": [
+            "a"
+          ],
+          "affectedSubjects": [
+            "a"
+          ],
+          "paths": [
+            {
+              "subjectId": "a",
+              "path": [
+                "a"
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "scope": "Frozen full values, errors and parsing host observations for context/selector/impact fixtures. Original compiler, custom executable callbacks, arbitrary accessor/proxy expression behavior, platform and resource acceptance remain open."
+}

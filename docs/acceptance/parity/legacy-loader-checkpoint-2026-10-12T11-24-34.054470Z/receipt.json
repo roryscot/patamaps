@@ -1,0 +1,283 @@
+{
+  "schemaVersion": "1.0.0",
+  "createdAt": "2026-10-12T11:24:34.058722+00:00",
+  "status": "partial-progress",
+  "goalStatus": "active",
+  "goalTurnOutcome": "progress",
+  "compiledCandidateAvailable": false,
+  "functionalAcceptance": false,
+  "scope": "Legacy portable file loader, version-specific JSON/UTF-16 preservation, native migration refusal and asynchronous SDK source. No complete parity obligation is closed.",
+  "acceptanceCriteria": [
+    "Portable 1.0 loader uses last decoded property, preserves original UTF-16 units and version-specific original digest.",
+    "Executable 2.0 loader rejects decoded duplicate properties before scalar-Unicode interpretation.",
+    "Native migration preserves original source binding, names unrepresentable UTF-16 fields and does not alter or admit them.",
+    "SDK file loading remains asynchronous and typed; ordinary JSON/JCS parsing remains strict.",
+    "Unchanged original assertions and independent installed consumers must verify the exact built candidate before any parity closure."
+  ],
+  "commands": [
+    {
+      "name": "rust-format",
+      "command": [
+        "/Users/admin/.cargo/bin/cargo",
+        "fmt",
+        "--all",
+        "--check"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "sdk-canonical-syntax",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "--check",
+        "sdk/typescript/canonical.mjs"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "sdk-legacy-syntax",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "--check",
+        "sdk/typescript/legacy-validation.mjs"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "sdk-docs-format",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "/Users/admin/dev/patamaps/patamaps/.tools/parity/oracles/399747a4ad05-p8pkt3pr/reference/node_modules/prettier/bin/prettier.cjs",
+        "--check",
+        "sdk/typescript/canonical.mjs",
+        "sdk/typescript/legacy-validation.mjs",
+        "sdk/typescript/legacy-validation.d.ts",
+        "README.md",
+        "BUILD_PLAN.md"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "git-diff-check",
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "source-integrity",
+      "command": [
+        "/opt/homebrew/bin/python3",
+        "-B",
+        "scripts/test_source_integrity.py",
+        "/Users/admin/dev/SEEDZ/metamap",
+        "--output",
+        "/Users/admin/dev/patamaps/patamaps/docs/acceptance/parity/legacy-loader-checkpoint-2026-10-12T11-24-34.054470Z/preserved-source-integrity.json"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "strict-ledger",
+      "command": [
+        "/opt/homebrew/bin/python3",
+        "-B",
+        "scripts/parity/verify.py",
+        "--strict"
+      ],
+      "exitCode": 1
+    }
+  ],
+  "observedStorageCheck": {
+    "command": [
+      "/Users/admin/.nvm/versions/node/v24.21.0/bin/node",
+      "/Users/admin/Documents/Codex/storage-safeguards/run-project.mjs",
+      "patamaps",
+      "check"
+    ],
+    "exitCode": 75,
+    "stderr": "Storage guard: 24.73 GB free; 25.00 GB required. Review an exact cleanup list; nothing is purged automatically.\n",
+    "source": "Actual tool result in this goal turn; no build or test process started."
+  },
+  "deletion": {
+    "approvedVmDisk": "/Users/admin/dev/patamaps/patamaps/.tools/linux-vm/disk.raw",
+    "diskAbsent": true,
+    "additionalDeletionOccurred": false,
+    "pendingProposal": ".tools/parity/storage-review/proposed-debug-deps-20261012T054832.187707Z.json",
+    "additionalApprovalReceived": false
+  },
+  "unrun": [
+    "Native compilation of current source",
+    "Three contracts UTF-16/version-dispatch tests and nine focused core pack tests",
+    "Original pack parser/digest/loader assertions and exact diagnostics",
+    "Installed SDK runtime/type consumer, including thirteen negative controls",
+    "Modern registry, strict JSON and frozen 472 legacy graph validation regressions",
+    "Complete portable/native, fresh original case refresh, Linux x86_64/ARM64 and P0\u2013P9 packaging acceptance"
+  ],
+  "pythonSyntax": {
+    "path": "scripts/parity/sdk_consumer.py",
+    "method": "Python compile() without importing/executing the harness or writing bytecode",
+    "result": "passed"
+  },
+  "generatedConsumerSyntax": {
+    "method": "TypeScript createSourceFile grammar parsing only; no type-checking or execution",
+    "version": "5.9.3",
+    "results": [
+      {
+        "label": "positive",
+        "parseDiagnostics": []
+      },
+      {
+        "label": "negative",
+        "parseDiagnostics": []
+      }
+    ],
+    "result": "passed"
+  },
+  "pinnedOracleFilesUnchanged": 610,
+  "unchangedFrozenValidationControls": {
+    "path": "fixtures/parity/legacy-validation-controls.json",
+    "digest": "sha256:c840095799be76db9d0e4e88e42f61e6c9a2f5fb776c3d6582a8ae96bac4fcab",
+    "cases": 472
+  },
+  "classification": {
+    "counts": {
+      "unclassified": 1195,
+      "verified-equivalent": 81,
+      "missing": 16,
+      "implemented-unverified": 1
+    },
+    "reviewedCompleteContracts": 17,
+    "newVerifiedEquivalentRows": 0,
+    "scope": "81 successful classified cases retain historical candidate receipts. Current source has not been built; no current functional/export equivalence is claimed."
+  },
+  "sourceInventory": [
+    {
+      "path": "Cargo.toml",
+      "digest": "sha256:8b54a27a77afbe3062347259f5b0646b2c0876128f4fa6752f5358e1bfa8e1c5"
+    },
+    {
+      "path": "Cargo.lock",
+      "digest": "sha256:94114fad8dcd8ab720271eaca81bc60c17c3364903bc90434cec690d1b18b6b0"
+    },
+    {
+      "path": "crates/patamaps-contracts/src/json.rs",
+      "digest": "sha256:52c838b92e6d1b5c402b770c4728350a93310eff10148cc6700eb3e35548a4a5"
+    },
+    {
+      "path": "crates/patamaps-contracts/src/json_scan.rs",
+      "digest": "sha256:72fff09a5245f22a8da95c29c4b41396bf827ed2cd1727c8d3f8946c6fa0a0d0"
+    },
+    {
+      "path": "crates/patamaps-contracts/src/legacy_json.rs",
+      "digest": "sha256:54da5bd6ecaaf2101fc7180a78fb2fc6d9d03fba8784e028b78a9d3c6794262b"
+    },
+    {
+      "path": "crates/patamaps-contracts/src/lib.rs",
+      "digest": "sha256:1758002e19bb9cdda0b17c94a7ff6f5bafa4ad3265d4569d8abf0163c13284f2"
+    },
+    {
+      "path": "crates/patamaps-contracts/tests/legacy_json.rs",
+      "digest": "sha256:73103ea06970b09f7154b5461a670d11a9bb927b2488fe627caa80669b57cc2e"
+    },
+    {
+      "path": "crates/patamaps-core/Cargo.toml",
+      "digest": "sha256:fa5090fbc6ebf37c9e44d4dd8eea9c1fe4bf17e2d955f816a31d2f2ce1fd6fa5"
+    },
+    {
+      "path": "crates/patamaps-core/src/lib.rs",
+      "digest": "sha256:225668af4952616361f01e0c928dd39983e815cae12fcf89eeb4c79b915ce5ea"
+    },
+    {
+      "path": "crates/patamaps-core/src/legacy_pack.rs",
+      "digest": "sha256:5a3455c91b248ce795f3eebe266c01ea7829df7029b9eec011bb0cb84dbc5e4f"
+    },
+    {
+      "path": "crates/patamaps-core/src/legacy_uri_reference.json",
+      "digest": "sha256:5b631cbb15139a39ca7a8bacf4c09f43b2980fe98afaaac5947f8f3fb92b5498"
+    },
+    {
+      "path": "crates/patamaps-core/src/registry.rs",
+      "digest": "sha256:e5df387fdba1c9579913a857d0628d2909f315307b0db0f4492ec17996214ddf"
+    },
+    {
+      "path": "crates/patamaps-core/src/laws.rs",
+      "digest": "sha256:d2e0e9110010a14b29deb1bc32cbaeeee4b5beb1dcb15ef414f02e84db9e6f15"
+    },
+    {
+      "path": "crates/patamaps-core/tests/legacy_pack.rs",
+      "digest": "sha256:5a8e826d00c44064c4f4ff523dfe0476052da5ae7b479a0e3f71a213b08e2cdd"
+    },
+    {
+      "path": "crates/patamaps-cli/src/main.rs",
+      "digest": "sha256:3427a1ba337d00ce8dc520ce310e4347cb03ec1c41c2a5958c701c764bd748a4"
+    },
+    {
+      "path": "crates/patamaps-projection/src/capture.rs",
+      "digest": "sha256:ee25f9bd2b022b92abad1316e6e3549a81f3a520c914811b40fc34e99e1f6b2a"
+    },
+    {
+      "path": "sdk/typescript/canonical.mjs",
+      "digest": "sha256:830acf94b6a334a5659856b1c6ba342e8c02d9df49752c9163be7fa3461a3954"
+    },
+    {
+      "path": "sdk/typescript/legacy-validation.mjs",
+      "digest": "sha256:f08ac73fda55878470b9c2ee1050502f52e6a2fbc63d80b30a172db5880c5ce9"
+    },
+    {
+      "path": "sdk/typescript/legacy-validation.d.ts",
+      "digest": "sha256:b2c6dfcf90b1d4c4af71e29c4308fe094c667266dd3cb20b963898f9153b3704"
+    },
+    {
+      "path": "scripts/parity/sdk_consumer.py",
+      "digest": "sha256:6cc9f4225276f8d3200965fd6de359936eb85ed93d1a2f50cfcaa9901f006650"
+    },
+    {
+      "path": "fixtures/parity/registry-validation-classification.json",
+      "digest": "sha256:6bad50b565cd4f9d87efc0317fb350058111c76a3052bdcc176227c64033fb25"
+    },
+    {
+      "path": "fixtures/parity/coverage.json",
+      "digest": "sha256:02e0e0cdb365ebbdb40384388c8443c09cbdba03d4fc0994de2c60b3928c4086"
+    },
+    {
+      "path": "README.md",
+      "digest": "sha256:57435b06920a2c161f3de01ac33bc86ff3a3fd884f4a7e03b4994faf093d3e61"
+    },
+    {
+      "path": "BUILD_PLAN.md",
+      "digest": "sha256:a4047f5ed34e341f37bbb533d879a8b89703ff4170dc4a24f107beed752295b7"
+    },
+    {
+      "path": "NOTICE",
+      "digest": "sha256:f34064cdf5ad8597dda7ae0e91a508773cc694deb7b43872d017d55d2ea587f6"
+    }
+  ],
+  "logs": {
+    "git-diff-check.stderr.log": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "git-diff-check.stdout.log": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "rust-format.stderr.log": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "rust-format.stdout.log": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "sdk-canonical-syntax.stderr.log": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "sdk-canonical-syntax.stdout.log": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "sdk-docs-format.stderr.log": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "sdk-docs-format.stdout.log": "sha256:17aa973d3f004560237d9a95171210b0671deff23d61628eecf7322ff5938f20",
+    "sdk-legacy-syntax.stderr.log": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "sdk-legacy-syntax.stdout.log": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "source-integrity.stderr.log": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "source-integrity.stdout.log": "sha256:066bfe999b586d949e21b1e8c592d7d2cd024bd39fd422bfe9ee9608fd7f5fbc",
+    "strict-ledger.stderr.log": "sha256:a3d8625c63db318697de2b7f1ab6b43e9e9f7719f19f06ea0362443375ba709b",
+    "strict-ledger.stdout.log": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "completedAt": "2026-10-12T11:29:15.152834+00:00",
+  "sourceChecksPassed": true,
+  "strictLedgerFailure": "Cached native binary source identities do not match current production source; rebuild required before attaching current evidence.",
+  "nextRequiredWork": [
+    "Recheck unchanged storage supervisor after approved capacity recovery; no additional deletion is authorized.",
+    "Build the exact current candidate and run contracts/core pack, strict JSON, registry and frozen validation regressions through the installed supervisor.",
+    "Execute unchanged original parser/digest/loader assertions and independent frozen message/URI/UTF-16 controls; preserve retained fixtures.",
+    "Compile/execute the installed async SDK consumer and all thirteen negative type controls, then continue complete P0\u2013P9 acceptance and required Linux hosts."
+  ],
+  "goalTurnOutcomeEvidence": "Written version-specific UTF-16/source-preserving file loader, asynchronous native SDK API, focused native and installed-consumer controls, updated incomplete classifications, and passing source/syntax/format preservation checks. Compilation and functional acceptance remain gated; no parity closure or additional deletion."
+}

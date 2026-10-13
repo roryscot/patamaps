@@ -141,7 +141,7 @@ pub fn explain(
         "ownership":{"interpretation":"declared-fact-ownership","authentication":"not-evaluated","declarations":graph.authorities},
         "sources":{"receipts":capture.sources,"missingBytes":verified.missing_sources(),"membership":"not-captured; no attribution inferred from labels or locators"},
         "policy":capture.inputs.policy,"relationPacks":capture.inputs.packs,"context":capture.inputs.context,"evaluatedAt":capture.inputs.evaluated_at,
-        "generation":capture.result["generation"],"projection":capture.result["projection"],"pathTree":capture.result["pathTree"],"issues":issues,"comparison":comparison,"impact":actual_impact,
+        "generation":capture.result["generation"],"projection":capture.result["projection"],"pathTree":capture.result["pathTree"],"projections":capture.result.get("projections"),"projectionSpecifications":capture.inputs.specs().collect::<Vec<_>>(),"issues":issues,"comparison":comparison,"impact":actual_impact,
         "navigation":{"subjectIds":subjects.iter().map(|s|&s["id"]).collect::<Vec<_>>(),"mappingIds":mapped.iter().map(|s|&s["id"]).collect::<Vec<_>>(),"omittedSubjects":entities.len().saturating_sub(subjects.len()),"omittedMappings":mappings.len().saturating_sub(mapped.len()),"status":if entities.len()>subjects.len()||mappings.len()>mapped.len(){"truncated"}else{"complete"}},
         "approval":{"status":"not-evaluated","currentAuthority":"not-evaluated","active":"not-evaluated","reason":"Captured ownership and viability do not establish current external approval or active host state"},
         "causality":{"interpretation":"Observed input differences and declared dependency paths; unique causal responsibility is not established"}});

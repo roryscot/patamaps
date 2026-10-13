@@ -191,12 +191,23 @@ pub fn object_bounds<'a>(
     subject: &str,
     code: &str,
 ) -> Result<(), CheckError> {
+    object_bounds_with_limits(objects, subject, code, STRICT_JSON_LIMITS)
+}
+
+/// A structural guard for an explicitly selected ingress profile. It grants no
+/// admitted capability; downstream graph/policy checks retain their own limits.
+pub fn object_bounds_with_limits<'a>(
+    objects: impl IntoIterator<Item = (&'a JsonObject, usize)>,
+    subject: &str,
+    code: &str,
+    limits: JsonLimits,
+) -> Result<(), CheckError> {
     let mut count = 0usize;
     for (object, initial_depth) in objects {
         let mut stack: Vec<_> = object.values().map(|v| (v, initial_depth)).collect();
         while let Some((value, depth)) = stack.pop() {
             count = count.saturating_add(1);
-            if depth > MAX_JSON_DEPTH || count > MAX_JSON_VALUES {
+            if depth > limits.max_depth || count > limits.max_values {
                 return Err(CheckError(vec![Issue::error(
                     code,
                     "Metadata exceeds JSON depth or value limits",

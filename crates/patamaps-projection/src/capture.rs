@@ -1,12 +1,9 @@
 use crate::{compile_path_tree, project};
 use patamaps_contracts::*;
-use patamaps_core::{CheckError, CheckedGraph, EvaluationOptions, Issue, admit, diff};
+use patamaps_core::{CheckError, CheckedGraph, EvaluationOptions, Issue, admit};
 use serde::{Deserialize, Serialize};
 use serde_json::{Value, json};
-use std::{
-    collections::{BTreeMap, BTreeSet, HashSet},
-    sync::OnceLock,
-};
+use std::{collections::HashSet, sync::OnceLock};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase", deny_unknown_fields)]
@@ -22,6 +19,32 @@ pub struct CaptureInputs {
         skip_serializing_if = "Option::is_none"
     )]
     pub projection_spec: Option<ProjectionSpec>,
+    /// Collection captures have their own wire version. Historical single-spec
+    /// captures retain their original field representation and executor binding.
+    #[serde(
+        default,
+        deserialize_with = "projection_collection",
+        skip_serializing_if = "Vec::is_empty"
+    )]
+    pub projection_specs: Vec<ProjectionSpec>,
+}
+
+fn projection_collection<'de, D: serde::Deserializer<'de>>(
+    deserializer: D,
+) -> Result<Vec<ProjectionSpec>, D::Error> {
+    let specs = Vec::<ProjectionSpec>::deserialize(deserializer)?;
+    if specs.is_empty() {
+        return Err(serde::de::Error::custom(
+            "CAPTURE_EMPTY_PROJECTION_COLLECTION",
+        ));
+    }
+    Ok(specs)
+}
+
+impl CaptureInputs {
+    pub fn specs(&self) -> impl Iterator<Item = &ProjectionSpec> {
+        self.projection_spec.iter().chain(&self.projection_specs)
+    }
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -43,10 +66,17 @@ pub enum CaptureType {
     #[serde(rename = "capture")]
     Capture,
 }
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
+pub enum CaptureVersion {
+    #[serde(rename = "0.1.0")]
+    Draft1,
+    #[serde(rename = "0.2.0")]
+    Collection1,
+}
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase", deny_unknown_fields)]
 pub struct CaptureRecord {
-    pub schema_version: ProtocolVersion,
+    pub schema_version: CaptureVersion,
     pub document_type: CaptureType,
     pub profile: String,
     pub executor: String,
@@ -62,32 +92,168 @@ pub struct CaptureRecord {
 pub fn executor_id() -> &'static str {
     static ID: OnceLock<String> = OnceLock::new();
     ID.get_or_init(|| {
-        canonical_digest(&json!({
-            "profile":PROFILE,"toolchain":include_str!("../../../rust-toolchain.toml"),
-        "lock":include_str!("../../../Cargo.lock"),
-        "workspace":include_str!("../../../Cargo.toml"),
-        "contractsManifest":include_str!("../../patamaps-contracts/Cargo.toml"),
-        "coreManifest":include_str!("../../patamaps-core/Cargo.toml"),
-        "projectionManifest":include_str!("../Cargo.toml"),
-        "contractsLib":include_str!("../../patamaps-contracts/src/lib.rs"),
-        "coreLib":include_str!("../../patamaps-core/src/lib.rs"),
-            "contracts":include_str!("../../patamaps-contracts/src/model.rs"),
-            "semanticTypes":include_str!("../../patamaps-contracts/src/semantic.rs"),
-            "json":include_str!("../../patamaps-contracts/src/json.rs"),
-            "integer":include_str!("../../patamaps-contracts/src/integer.rs"),
-            "graph":include_str!("../../patamaps-core/src/graph.rs"),
-            "admission":include_str!("../../patamaps-core/src/admission.rs"),
-            "topology":include_str!("../../patamaps-core/src/topology.rs"),
-            "laws":include_str!("../../patamaps-core/src/laws.rs"),
-            "derivation":include_str!("../../patamaps-core/src/derivation.rs"),
-            "uncertainty":include_str!("../../patamaps-core/src/uncertainty.rs"),
-            "risk":include_str!("../../patamaps-core/src/risk.rs"),
-        "diff":include_str!("../../patamaps-core/src/diff.rs"),
-            "impact":include_str!("../../patamaps-core/src/impact.rs"),
-            "preflight":include_str!("../../patamaps-core/src/preflight.rs"),
-            "control":include_str!("../../patamaps-core/src/control.rs"),
-            "projection":include_str!("lib.rs"),"capture":include_str!("capture.rs"),"pathTree":include_str!("path_tree.rs")
-        }))
+        canonical_digest(&std::collections::BTreeMap::from([
+            ("profile", PROFILE),
+            ("toolchain", include_str!("../../../rust-toolchain.toml")),
+            ("lock", include_str!("../../../Cargo.lock")),
+            ("workspace", include_str!("../../../Cargo.toml")),
+            (
+                "contractsManifest",
+                include_str!("../../patamaps-contracts/Cargo.toml"),
+            ),
+            (
+                "contractsBuild",
+                include_str!("../../patamaps-contracts/build.rs"),
+            ),
+            (
+                "legacyCollatorSource",
+                patamaps_contracts::LEGACY_COLLATOR_SOURCE_DIGEST,
+            ),
+            (
+                "coreManifest",
+                include_str!("../../patamaps-core/Cargo.toml"),
+            ),
+            ("projectionManifest", include_str!("../Cargo.toml")),
+            (
+                "contractsLib",
+                include_str!("../../patamaps-contracts/src/lib.rs"),
+            ),
+            ("coreLib", include_str!("../../patamaps-core/src/lib.rs")),
+            (
+                "contracts",
+                include_str!("../../patamaps-contracts/src/model.rs"),
+            ),
+            (
+                "semanticTypes",
+                include_str!("../../patamaps-contracts/src/semantic.rs"),
+            ),
+            ("json", include_str!("../../patamaps-contracts/src/json.rs")),
+            (
+                "jsonScan",
+                include_str!("../../patamaps-contracts/src/json_scan.rs"),
+            ),
+            (
+                "legacyJson",
+                include_str!("../../patamaps-contracts/src/legacy_json.rs"),
+            ),
+            (
+                "legacyStable",
+                include_str!("../../patamaps-contracts/src/legacy_stable.rs"),
+            ),
+            (
+                "integer",
+                include_str!("../../patamaps-contracts/src/integer.rs"),
+            ),
+            ("graph", include_str!("../../patamaps-core/src/graph.rs")),
+            (
+                "registry",
+                include_str!("../../patamaps-core/src/registry.rs"),
+            ),
+            (
+                "legacyPack",
+                include_str!("../../patamaps-core/src/legacy_pack.rs"),
+            ),
+            (
+                "legacyRegistry",
+                include_str!("../../patamaps-core/src/legacy_registry.rs"),
+            ),
+            (
+                "legacyGraph",
+                include_str!("../../patamaps-core/src/legacy_graph.rs"),
+            ),
+            (
+                "legacyComposition",
+                include_str!("../../patamaps-core/src/legacy_composition.rs"),
+            ),
+            (
+                "legacyReporting",
+                include_str!("../../patamaps-core/src/legacy_reporting.rs"),
+            ),
+            (
+                "legacyCorrespondence",
+                include_str!("../../patamaps-core/src/legacy_correspondence.rs"),
+            ),
+            (
+                "legacyEvaluation",
+                include_str!("../../patamaps-core/src/legacy_evaluation.rs"),
+            ),
+            (
+                "legacyViability",
+                include_str!("../../patamaps-core/src/legacy_viability.rs"),
+            ),
+            (
+                "legacyConstraints",
+                include_str!("../../patamaps-core/src/legacy_constraints.rs"),
+            ),
+            (
+                "legacyCli",
+                include_str!("../../patamaps-core/src/legacy_cli.rs"),
+            ),
+            (
+                "legacyCliUsage",
+                include_str!("../../patamaps-core/src/legacy_cli_usage.txt"),
+            ),
+            (
+                "legacyWorkspace",
+                include_str!("../../patamaps-core/src/legacy_workspace.rs"),
+            ),
+            (
+                "legacyReferences",
+                include_str!("../../patamaps-core/src/legacy_references.rs"),
+            ),
+            (
+                "legacyUriReference",
+                include_str!("../../patamaps-core/src/legacy_uri_reference.json"),
+            ),
+            (
+                "legacyPackSchema",
+                include_str!("../../../fixtures/reference/schemas/relation-pack.schema.json"),
+            ),
+            (
+                "executableLegacyPackSchema",
+                include_str!("../../../fixtures/reference/schemas/relation-pack-v2.schema.json"),
+            ),
+            (
+                "legacyValidation",
+                include_str!("../../patamaps-core/src/legacy_validation.rs"),
+            ),
+            (
+                "legacyCore",
+                include_str!("../../patamaps-core/src/legacy_core.json"),
+            ),
+            (
+                "admission",
+                include_str!("../../patamaps-core/src/admission.rs"),
+            ),
+            (
+                "topology",
+                include_str!("../../patamaps-core/src/topology.rs"),
+            ),
+            ("laws", include_str!("../../patamaps-core/src/laws.rs")),
+            (
+                "derivation",
+                include_str!("../../patamaps-core/src/derivation.rs"),
+            ),
+            (
+                "uncertainty",
+                include_str!("../../patamaps-core/src/uncertainty.rs"),
+            ),
+            ("risk", include_str!("../../patamaps-core/src/risk.rs")),
+            ("diff", include_str!("../../patamaps-core/src/diff.rs")),
+            ("impact", include_str!("../../patamaps-core/src/impact.rs")),
+            (
+                "preflight",
+                include_str!("../../patamaps-core/src/preflight.rs"),
+            ),
+            (
+                "control",
+                include_str!("../../patamaps-core/src/control.rs"),
+            ),
+            ("projection", include_str!("lib.rs")),
+            ("capture", include_str!("capture.rs")),
+            ("comparison", include_str!("compare.rs")),
+            ("pathTree", include_str!("path_tree.rs")),
+        ]))
         .expect("embedded source is finite JSON")
     })
 }
@@ -99,7 +265,22 @@ pub fn evaluate(inputs: &CaptureInputs) -> Result<Value, CheckError> {
         &inputs.policy,
         &inputs.context,
     )?;
-    if let Some(spec) = &inputs.projection_spec {
+    let mut spec_ids = HashSet::new();
+    if inputs.projection_spec.is_some() && !inputs.projection_specs.is_empty() {
+        return Err(CheckError(vec![Issue::error(
+            "CAPTURE_PROJECTION_PROFILE",
+            "A capture must select the single-spec or collection representation",
+            "capture",
+        )]));
+    }
+    for spec in inputs.specs() {
+        if !spec_ids.insert(&spec.id) {
+            return Err(CheckError(vec![Issue::error(
+                "CAPTURE_DUPLICATE_PROJECTION",
+                "Capture repeats a projection identity",
+                &spec.id,
+            )]));
+        }
         patamaps_core::check_metadata_bounds(
             spec.metadata.iter().map(|v| (v, 2)),
             &spec.id,
@@ -116,6 +297,40 @@ pub fn evaluate(inputs: &CaptureInputs) -> Result<Value, CheckError> {
                 evaluated_at: inputs.evaluated_at.clone(),
             },
         )?;
+        if !inputs.projection_specs.is_empty() {
+            let mut specs: Vec<_> = inputs.projection_specs.iter().collect();
+            specs.sort_by(|a, b| a.id.encode_utf16().cmp(b.id.encode_utf16()));
+            let mut outcomes = Vec::new();
+            let mut issues = generation.issues().to_vec();
+            let mut admitted = true;
+            for spec in specs {
+                match project(&generation, spec) {
+                    Ok(projection) => {
+                        let tree = spec
+                            .path_tree
+                            .as_ref()
+                            .map(|_| compile_path_tree(&projection, spec))
+                            .transpose();
+                        match tree {
+                            Ok(tree) => outcomes.push(json!({"specId":spec.id,"status":"projected","projection":projection.record(),"pathTree":tree.as_ref().map(|t|t.record()),"issues":[]})),
+                            Err(error) => {
+                                admitted = false;
+                                issues.extend(error.0.iter().cloned());
+                                outcomes.push(json!({"specId":spec.id,"status":"path-tree-rejected","projection":projection.record(),"pathTree":null,"issues":error.0}));
+                            }
+                        }
+                    }
+                    Err(error) => {
+                        admitted = false;
+                        issues.extend(error.0.iter().cloned());
+                        outcomes.push(json!({"specId":spec.id,"status":"rejected","projection":null,"pathTree":null,"issues":error.0}));
+                    }
+                }
+            }
+            return Ok(
+                json!({"status":if admitted {"viable"} else {"rejected"},"compilationStatus":"viable","generation":generation.record(),"projections":outcomes,"issues":issues}),
+            );
+        }
         let projection = inputs
             .projection_spec
             .as_ref()
@@ -133,6 +348,9 @@ pub fn evaluate(inputs: &CaptureInputs) -> Result<Value, CheckError> {
     })();
     Ok(match result {
         Ok(value) => value,
+        Err(error) if !inputs.projection_specs.is_empty() => {
+            json!({"status":"rejected","compilationStatus":"rejected","generation":null,"projections":[],"issues":error.0})
+        }
         Err(error) => json!({"status":"rejected","issues":error.0}),
     })
 }
@@ -194,14 +412,21 @@ fn sources_valid(sources: &[SourceReceipt]) -> Result<(), CheckError> {
 }
 
 pub fn capture(
-    inputs: CaptureInputs,
+    mut inputs: CaptureInputs,
     mut sources: Vec<SourceReceipt>,
 ) -> Result<CaptureRecord, CheckError> {
     sources_valid(&sources)?;
     sources.sort_by(|a, b| a.id.cmp(&b.id));
+    inputs
+        .projection_specs
+        .sort_by(|a, b| a.id.encode_utf16().cmp(b.id.encode_utf16()));
     let result = evaluate(&inputs)?;
     let mut record = CaptureRecord {
-        schema_version: ProtocolVersion::Draft1,
+        schema_version: if inputs.projection_specs.is_empty() {
+            CaptureVersion::Draft1
+        } else {
+            CaptureVersion::Collection1
+        },
         document_type: CaptureType::Capture,
         profile: evaluation_profile(&inputs.packs, &inputs.policy).into(),
         executor: executor_id().into(),
@@ -237,6 +462,18 @@ impl VerifiedReplay<'_> {
     }
 }
 pub fn replay(record: &CaptureRecord) -> Result<VerifiedReplay<'_>, CheckError> {
+    let expected_version = if record.inputs.projection_specs.is_empty() {
+        CaptureVersion::Draft1
+    } else {
+        CaptureVersion::Collection1
+    };
+    if record.schema_version != expected_version {
+        return Err(CheckError(vec![Issue::error(
+            "CAPTURE_VERSION_MISMATCH",
+            "Capture version must match its input representation",
+            &record.id,
+        )]));
+    }
     patamaps_core::check_input_bounds(
         &record.inputs.graph,
         &record.inputs.packs,
@@ -251,7 +488,7 @@ pub fn replay(record: &CaptureRecord) -> Result<VerifiedReplay<'_>, CheckError> 
         )]));
     }
     patamaps_core::check_value_bounds(&record.result, &record.id, "CAPTURE_RESOURCE_LIMIT")?;
-    if let Some(spec) = &record.inputs.projection_spec {
+    for spec in record.inputs.specs() {
         patamaps_core::check_metadata_bounds(
             spec.metadata.iter().map(|v| (v, 3)),
             &spec.id,
@@ -294,89 +531,4 @@ pub fn replay(record: &CaptureRecord) -> Result<VerifiedReplay<'_>, CheckError> 
             .map(|s| s.id.clone())
             .collect(),
     })
-}
-
-/// Compare verified inputs/results; unavailable deltas remain explicit nulls.
-pub fn compare(
-    before: &VerifiedReplay<'_>,
-    after: &VerifiedReplay<'_>,
-) -> Result<Value, CheckError> {
-    let a = before.record();
-    let b = after.record();
-    let changes = diff(&a.inputs.graph, &b.inputs.graph)?;
-    let projection_delta = match (
-        a.result.get("projection").filter(|v| !v.is_null()),
-        b.result.get("projection").filter(|v| !v.is_null()),
-    ) {
-        (Some(a), Some(b)) => Some(canonical_bytes(a)? != canonical_bytes(b)?),
-        _ => None,
-    };
-    let tree_delta = match (
-        a.result.get("pathTree").filter(|v| !v.is_null()),
-        b.result.get("pathTree").filter(|v| !v.is_null()),
-    ) {
-        (Some(a), Some(b)) => Some(canonical_bytes(a)? != canonical_bytes(b)?),
-        _ => None,
-    };
-    let changed_origins: Vec<_> = changes
-        .iter()
-        .map(|d| json!({"kind":d.kind,"id":d.id,"change":d.change}))
-        .collect();
-    let risk_delta = match (
-        a.result.pointer("/projection/semantics/risk"),
-        b.result.pointer("/projection/semantics/risk"),
-    ) {
-        (Some(a), Some(b)) if a["status"] == "evaluated" && b["status"] == "evaluated" => {
-            let before: SafeInteger =
-                serde_json::from_value(a["totalCost"].clone()).map_err(ContractError::from)?;
-            let after: SafeInteger =
-                serde_json::from_value(b["totalCost"].clone()).map_err(ContractError::from)?;
-            Some(
-                json!({"status":"available","before":a,"after":b,"totalCostChange":after.get() as i64-before.get() as i64}),
-            )
-        }
-        _ => None,
-    };
-    let origins: Vec<_> = changes.iter().map(|d| d.id.clone()).collect();
-    let source_maps: Vec<BTreeMap<_, _>> = [&a.sources, &b.sources]
-        .iter()
-        .map(|sources| sources.iter().map(|s| (s.id.clone(), s)).collect())
-        .collect();
-    let source_ids: BTreeSet<_> = source_maps.iter().flat_map(|m| m.keys()).collect();
-    let mut source_deltas = Vec::new();
-    for id in source_ids {
-        let before = source_maps[0].get(id);
-        let after = source_maps[1].get(id);
-        let before_receipt = before.map(canonical_digest).transpose()?;
-        let after_receipt = after.map(canonical_digest).transpose()?;
-        if before_receipt != after_receipt {
-            source_deltas.push(json!({"id":id,"change":if before.is_none(){"added"}else if after.is_none(){"removed"}else{"modified"},
-            "beforeDigest":before.map(|s|&s.digest),"afterDigest":after.map(|s|&s.digest),
-            "byteChange":before.map(|s|&s.digest)!=after.map(|s|&s.digest),
-            "beforeReceiptDigest":before_receipt,"afterReceiptDigest":after_receipt,"graphExtractionRecomputed":false}));
-        }
-    }
-    let declared_paths = |inputs: &CaptureInputs| -> Result<Value, CheckError> {
-        match CheckedGraph::check(inputs.graph.clone(), inputs.packs.clone()) {
-            Ok(g) => match patamaps_core::impact(&g, &origins, 64) {
-                Ok(report) => {
-                    Ok(json!({"status":"available","scope":"declared-graph","report":report}))
-                }
-                Err(error) => Ok(json!({"status":"unavailable","issues":error.0})),
-            },
-            Err(error) => Ok(json!({"status":"unavailable","issues":error.0})),
-        }
-    };
-    Ok(
-        json!({"before":a.digest,"after":b.digest,"changes":changes,"changedOrigins":changed_origins,
-        "statusChanged":a.result["status"] != b.result["status"],"projectionChanged":projection_delta,"pathTreeChanged":tree_delta,
-        "policyChanged":canonical_digest(&a.inputs.policy)? != canonical_digest(&b.inputs.policy)?,
-        "contextChanged":canonical_bytes(&a.inputs.context)? != canonical_bytes(&b.inputs.context)?,
-        "packChanged":canonical_bytes(&a.inputs.packs)? != canonical_bytes(&b.inputs.packs)?,
-        "riskDelta":risk_delta,"missingSourcesBefore":before.missing_sources(),"missingSourcesAfter":after.missing_sources(),
-        "declaredPathsBefore":declared_paths(&a.inputs)?,"declaredPathsAfter":declared_paths(&b.inputs)?,
-        "sourceDeltas":source_deltas,
-        "issueSubjectsBefore":a.result.get("issues"),"issueSubjectsAfter":b.result.get("issues"),
-        "causalClaim":"Observed input differences and findings; unique causal responsibility is not established"}),
-    )
 }
