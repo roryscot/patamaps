@@ -2,12 +2,235 @@
 //! portable schema. An imported view is not a checked or admitted generation.
 use jsonschema::error::{TypeKind, ValidationErrorKind};
 use patamaps_contracts::{
-    COMPATIBILITY_JSON_LIMITS, LegacyPackJson, RelationPack, byte_digest, canonical_bytes,
-    canonical_digest,
+    COMPATIBILITY_JSON_LIMITS, LegacyOrderedJson as J, LegacyPackJson, LegacyReadOnlyJson as Data,
+    RelationPack, byte_digest, canonical_bytes, canonical_digest,
 };
 use serde::{Deserialize, Serialize};
 use serde_json::Value;
-use std::sync::OnceLock;
+use std::{borrow::Cow, collections::HashSet, sync::OnceLock};
+
+// The same schema engine can inspect legacy JS observations before their JSON
+// projection erases NaN/infinity and array holes. These nodes are read-only;
+// they never enter strict JSON parsing or native checked/admitted values.
+struct LegacySchemaJson;
+#[derive(Clone, Copy)]
+struct LegacySchemaNode<'a> {
+    value: &'a J,
+    holes: &'a HashSet<usize>,
+}
+impl LegacySchemaNode<'_> {
+    fn hole(&self) -> bool {
+        self.holes
+            .contains(&(std::ptr::from_ref(self.value) as usize))
+    }
+}
+impl jsonschema::json::Json for LegacySchemaJson {
+    type Node<'a> = LegacySchemaNode<'a>;
+    type PreparedKey = String;
+    type StringBuffer = String;
+    fn prepare_key(key: &str) -> String {
+        key.to_owned()
+    }
+    fn with_string_node<T>(
+        buffer: &mut String,
+        string: &str,
+        f: impl FnOnce(Self::Node<'_>) -> T,
+    ) -> T {
+        buffer.clear();
+        buffer.push_str(string);
+        let value = J::String(buffer.clone());
+        f(LegacySchemaNode {
+            value: &value,
+            holes: &HashSet::new(),
+        })
+    }
+}
+struct LegacySchemaNumber(f64);
+impl jsonschema::json::JsonNumber for LegacySchemaNumber {
+    fn as_u64(&self) -> Option<u64> {
+        serde_json::Number::from_f64(self.0)?.as_u64()
+    }
+    fn as_i64(&self) -> Option<i64> {
+        serde_json::Number::from_f64(self.0)?.as_i64()
+    }
+    fn as_f64(&self) -> Option<f64> {
+        Some(self.0)
+    }
+    fn as_str(&self) -> Cow<'_, str> {
+        Cow::Owned(self.0.to_string())
+    }
+    fn to_number(&self) -> Cow<'_, serde_json::Number> {
+        Cow::Owned(serde_json::Number::from_f64(self.0).expect("finite schema number"))
+    }
+    fn is_integer(&self) -> bool {
+        self.0.fract() == 0.0
+    }
+}
+impl<'a> jsonschema::json::Node<'a, LegacySchemaJson> for LegacySchemaNode<'a> {
+    type Object = Self;
+    type Array = Self;
+    type Number = LegacySchemaNumber;
+    fn as_object(&self) -> Option<Self> {
+        matches!(self.value, J::Object(_)).then_some(*self)
+    }
+    fn as_array(&self) -> Option<Self> {
+        matches!(self.value, J::Array(_)).then_some(*self)
+    }
+    fn as_string(&self) -> Option<Cow<'a, str>> {
+        self.value.string().map(Cow::Borrowed)
+    }
+    fn as_number(&self) -> Option<Self::Number> {
+        match self.value {
+            J::Number(v) if v.is_finite() && !self.hole() => Some(LegacySchemaNumber(*v)),
+            _ => None,
+        }
+    }
+    fn as_boolean(&self) -> Option<bool> {
+        if let J::Bool(v) = self.value {
+            Some(*v)
+        } else {
+            None
+        }
+    }
+    fn is_null(&self) -> bool {
+        matches!(self.value, J::Null) && !self.hole()
+    }
+    fn json_type(&self) -> jsonschema::JsonType {
+        use jsonschema::JsonType as T;
+        if self.hole() {
+            return T::Number;
+        }
+        match self.value {
+            J::Null => T::Null,
+            J::Bool(_) => T::Boolean,
+            J::Number(_) => T::Number,
+            J::String(_) => T::String,
+            J::Array(_) => T::Array,
+            J::Object(_) => T::Object,
+        }
+    }
+    fn equals_value(&self, expected: &Value) -> bool {
+        if self.hole() {
+            return false;
+        }
+        match self.value {
+            J::Null => expected.is_null(),
+            J::Bool(v) => expected.as_bool() == Some(*v),
+            J::Number(v) => v.is_finite() && expected.as_f64() == Some(*v),
+            J::String(v) => expected.as_str() == Some(v),
+            J::Array(values) => expected.as_array().is_some_and(|other| {
+                values.len() == other.len()
+                    && values
+                        .iter()
+                        .zip(other)
+                        .all(|(value, other)| Self { value, ..*self }.equals_value(other))
+            }),
+            J::Object(pairs) => expected.as_object().is_some_and(|other| {
+                pairs.len() == other.len()
+                    && pairs.iter().all(|(key, value)| {
+                        other
+                            .get(key)
+                            .is_some_and(|other| Self { value, ..*self }.equals_value(other))
+                    })
+            }),
+        }
+    }
+    fn to_value(&self) -> Cow<'a, Value> {
+        Cow::Owned(Data::projected_value(self.value).expect("bounded read-only schema value"))
+    }
+    fn identity(&self) -> Option<jsonschema::json::NodeIdentity> {
+        None
+    }
+}
+impl<'a> jsonschema::json::Object<'a, LegacySchemaJson> for LegacySchemaNode<'a> {
+    type Node = Self;
+    type MemberName = &'a str;
+    type MembersIter = std::vec::IntoIter<(&'a str, Self)>;
+    fn len(&self) -> usize {
+        if let J::Object(pairs) = self.value {
+            pairs.len()
+        } else {
+            0
+        }
+    }
+    fn get(&self, key: &String) -> Option<Self> {
+        self.value.get(key).map(|value| Self { value, ..*self })
+    }
+    fn members(&self) -> Self::MembersIter {
+        let J::Object(pairs) = self.value else {
+            unreachable!()
+        };
+        pairs
+            .iter()
+            .map(|(key, value)| (key.as_str(), Self { value, ..*self }))
+            .collect::<Vec<_>>()
+            .into_iter()
+    }
+}
+impl<'a> jsonschema::json::Array<'a, LegacySchemaJson> for LegacySchemaNode<'a> {
+    type Node = Self;
+    type ElementsIter = std::vec::IntoIter<Self>;
+    fn len(&self) -> usize {
+        self.value.array().map_or(0, <[J]>::len)
+    }
+    fn elements(&self) -> Self::ElementsIter {
+        self.value
+            .array()
+            .expect("schema array")
+            .iter()
+            .map(|value| Self { value, ..*self })
+            .collect::<Vec<_>>()
+            .into_iter()
+    }
+    fn is_unique(&self) -> bool {
+        // Typed fingerprints retain exceptional values without aliasing a user
+        // object to an internal numeric marker. Signed zeros compare equally,
+        // as they do in AJV's array uniqueness check.
+        fn key(node: LegacySchemaNode<'_>) -> Value {
+            if node.hole() {
+                return serde_json::json!(["hole"]);
+            }
+            match node.value {
+                J::Null => serde_json::json!(["null"]),
+                J::Bool(v) => serde_json::json!(["boolean", v]),
+                J::String(v) => serde_json::json!(["string", v]),
+                J::Number(v) if v.is_nan() => serde_json::json!(["nan"]),
+                J::Number(v) if v.is_infinite() => serde_json::json!([if v.is_sign_positive() {
+                    "positive-infinity"
+                } else {
+                    "negative-infinity"
+                }]),
+                J::Number(v) => serde_json::json!(["number", if *v == 0.0 { 0.0 } else { *v }]),
+                J::Array(values) => serde_json::json!([
+                    "array",
+                    values
+                        .iter()
+                        .map(|value| key(LegacySchemaNode { value, ..node }))
+                        .collect::<Vec<_>>()
+                ]),
+                J::Object(pairs) => {
+                    let mut values = pairs
+                        .iter()
+                        .map(|(name, value)| (name, key(LegacySchemaNode { value, ..node })))
+                        .collect::<Vec<_>>();
+                    values.sort_by(|a, b| a.0.cmp(b.0));
+                    serde_json::json!(["object", values])
+                }
+            }
+        }
+        let mut seen = HashSet::new();
+        self.value
+            .array()
+            .expect("schema array")
+            .iter()
+            .all(|value| {
+                seen.insert(
+                    serde_json::to_string(&key(Self { value, ..*self }))
+                        .expect("schema equality key"),
+                )
+            })
+    }
+}
 
 #[derive(Debug, Clone, Serialize)]
 #[serde(rename_all = "camelCase")]
@@ -255,6 +478,7 @@ fn uri_reference() -> &'static jsonschema::Validator {
 /// observes JSON shape only and conveys no checked or admitted capability.
 pub struct LegacyPortableSchema {
     validator: jsonschema::Validator,
+    legacy_validator: jsonschema::Validator<LegacySchemaJson>,
     ordering: SchemaOrdering,
 }
 impl LegacyPortableSchema {
@@ -272,8 +496,17 @@ impl LegacyPortableSchema {
             })
             .build(&ordering.schema)
             .expect("preserved portable schema compiles");
+        let legacy_validator = jsonschema::options_for::<LegacySchemaJson>()
+            .with_draft(jsonschema::Draft::Draft202012)
+            .should_validate_formats(true)
+            .with_format("uri-reference", |value| {
+                uri_reference().is_valid(&Value::String(value.to_owned()))
+            })
+            .build(&ordering.schema)
+            .expect("preserved read-only legacy schema compiles");
         Self {
             validator,
+            legacy_validator,
             ordering,
         }
     }
@@ -281,6 +514,25 @@ impl LegacyPortableSchema {
         let mut issues = Vec::new();
         for error in self.validator.iter_errors(document) {
             append_schema_issues(&error, document, &self.ordering, &mut issues);
+        }
+        issues.sort_by_cached_key(|error| {
+            self.ordering
+                .issue_order(&error.issue, &error.evaluation_path)
+        });
+        issues.into_iter().map(|error| error.issue).collect()
+    }
+    pub(crate) fn legacy_issues(
+        &self,
+        document: &J,
+        holes: &HashSet<usize>,
+    ) -> Vec<LegacyPackIssue> {
+        let projected = Data::projected_value(document).expect("bounded read-only schema value");
+        let mut issues = Vec::new();
+        for error in self.legacy_validator.iter_errors(LegacySchemaNode {
+            value: document,
+            holes,
+        }) {
+            append_schema_issues(&error, &projected, &self.ordering, &mut issues);
         }
         issues.sort_by_cached_key(|error| {
             self.ordering

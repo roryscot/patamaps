@@ -1,4 +1,5 @@
-import { execFile, spawn, spawnSync } from "node:child_process";
+import { execFile, spawn } from "node:child_process";
+import { spawnWithInputSync } from "./native-input.mjs";
 import { isAbsolute, resolve } from "node:path";
 import {
   CanonicalJsonError,
@@ -98,6 +99,9 @@ export function createLegacyValidationApi(executable, observeExecution) {
                       report.error?.name === "TypeError"
                     ? new TypeError(message)
                     : new Error(message);
+      // Original v1 policy/generation parsers throw ordinary errors. Keep the
+      // structured native diagnostic in the execution trace, not on the error.
+      if (command[2] === "viability") throw error;
       if (!(
         [
           "registry",
@@ -143,7 +147,7 @@ export function createLegacyValidationApi(executable, observeExecution) {
     const command = [executable, "legacy", namespace, operation];
     if (namespace === "pack" && operation === "digest")
       command.push("--locale", new Intl.Collator().resolvedOptions().locale);
-    const result = spawnSync(executable, command.slice(1), {
+    const result = spawnWithInputSync(executable, command.slice(1), {
       input,
       encoding: "utf8",
       env: {},

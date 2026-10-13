@@ -35,6 +35,7 @@ files.append(ROOT / "fixtures/parity/workspace-controls.json")
 files.append(ROOT / "fixtures/parity/evaluation-controls.json")
 files.append(ROOT / "fixtures/parity/viability-controls.json")
 files.append(ROOT / "fixtures/parity/viability-signed-zero-controls.json")
+files.append(ROOT / "fixtures/parity/viability-numeric-controls.json")
 files.append(ROOT / "fixtures/reference/schemas/metamap-viability.schema.json")
 files.append(ROOT / "fixtures/reference/schemas/metamap-generation.schema.json")
 files += [ROOT / "fixtures/parity" / name for name in ["cli-controls.json", "cli-expanded-controls.json", "migration-controls.json"]]

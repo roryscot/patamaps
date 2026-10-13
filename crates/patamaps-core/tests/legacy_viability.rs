@@ -26,6 +26,39 @@ fn independently_frozen_original_signed_zero_compiler_observations() {
     );
 }
 
+#[test]
+fn independently_frozen_original_nonfinite_and_sparse_viability_observations() {
+    verify_frozen_observations(
+        include_bytes!("../../../fixtures/parity/viability-numeric-controls.json"),
+        "sha256:eca5ec36bac010643489dc929f834b086b909e6772371bc3e091006556680361",
+        400,
+        true,
+    );
+}
+
+fn numeric_wire_value(envelope: &J) -> J {
+    let mut value = envelope.get("value").unwrap().clone();
+    for fact in envelope.get("numbers").unwrap().array().unwrap() {
+        if fact.get("kind").unwrap().string() == Some("negative-zero") {
+            continue;
+        }
+        let mut slot = &mut value;
+        for key in fact.get("path").unwrap().array().unwrap() {
+            let key = key.string().unwrap();
+            slot = match slot {
+                J::Object(pairs) => &mut pairs.iter_mut().find(|(name, _)| name == key).unwrap().1,
+                J::Array(values) => &mut values[key.parse::<usize>().unwrap()],
+                _ => panic!("Frozen observation path must exist"),
+            };
+        }
+        // JSON.stringify writes null for nonfinite numbers and array holes.
+        // The SDK differential separately checks their preserved numeric facts
+        // and caller identities; this assertion compares the actual JSON wire.
+        *slot = J::Null;
+    }
+    value
+}
+
 fn verify_frozen_observations(bytes: &[u8], expected_digest: &str, count: usize, numeric: bool) {
     #[derive(Deserialize)]
     struct Case {
@@ -60,14 +93,14 @@ fn verify_frozen_observations(bytes: &[u8], expected_digest: &str, count: usize,
                 );
                 let actual = Data::parse(actual.get(), COMPATIBILITY_JSON_LIMITS).unwrap();
                 let expected_value = expected.value().get("value").unwrap();
-                let expected_value = if numeric {
-                    expected_value.get("value").unwrap()
+                let expected_wire = if numeric {
+                    numeric_wire_value(expected_value)
                 } else {
-                    expected_value
+                    expected_value.clone()
                 };
                 assert_eq!(
                     comparable(actual.value().get("value").unwrap()),
-                    comparable(expected_value),
+                    comparable(&expected_wire),
                     "{}",
                     case.name
                 );

@@ -1,0 +1,86 @@
+{
+  "schemaVersion": "1.0.0",
+  "checks": [
+    {
+      "label": "rust-format",
+      "command": [
+        "/Users/admin/.cargo/bin/cargo",
+        "fmt",
+        "--all",
+        "--",
+        "--check"
+      ],
+      "exitCode": 0
+    },
+    {
+      "label": "diff-whitespace",
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exitCode": 0
+    },
+    {
+      "label": "sdk-format",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v24.21.0/bin/node",
+        ".tools/parity/oracles/399747a4ad05-p8pkt3pr/reference/node_modules/prettier/bin/prettier.cjs",
+        "--check",
+        "sdk/typescript/canonical.mjs",
+        "sdk/typescript/legacy-viability.mjs",
+        "sdk/typescript/package.json",
+        "scripts/parity/viability_signed_zero.mjs",
+        "scripts/parity/legacy_validation.mjs",
+        "scripts/parity/viability_numeric.mjs",
+        "sdk/typescript/native-input.mjs",
+        "sdk/typescript/native-input-worker.mjs",
+        "sdk/typescript/legacy-validation.mjs",
+        "sdk/typescript/sssom.mjs"
+      ],
+      "exitCode": 0
+    },
+    {
+      "label": "strict-ledger",
+      "command": [
+        "/opt/homebrew/bin/python3",
+        "-B",
+        "scripts/parity/verify.py",
+        "--strict"
+      ],
+      "exitCode": 1
+    }
+  ],
+  "strictLedger": {
+    "status": "incomplete",
+    "inventory": {
+      "obligations": 1293,
+      "exports": 92,
+      "suites": 53,
+      "expandedOriginalCases": 601,
+      "cliCommands": 22,
+      "cliOptions": 32
+    },
+    "counts": {
+      "unclassified": 890,
+      "verified-equivalent": 124,
+      "missing": 43,
+      "implemented-unverified": 236
+    },
+    "currentVerifiedEquivalent": 124,
+    "invalidEvidence": [],
+    "strictAcceptance": false
+  },
+  "frozenReferenceBlobsVerified": 610,
+  "pythonSyntax": "passed",
+  "currentSourceMatchesBinary": true,
+  "candidateEngine": {
+    "compiler": "sha256:9f8fb3d3d68d84c3925663adb743ebdeef6005dba0d3feb1f034e1765f3c9c28",
+    "documentType": "executor-description",
+    "governance": "sha256:4e6fd44bf454688065870e7b9bdd5fbf2d6aca6a88cf73b566480ad46877d815",
+    "schemaVersion": "0.1.0",
+    "scientific": "sha256:8405a861bff46ef575e0b13f7821655808ab59f490aae60c9f893de4b3df0667",
+    "workspace": "sha256:a59b393e820071d58bdf7dae209eb90b41a52ac5ff9f827e017cebc02aa9fbfe"
+  },
+  "candidateBinaryDigest": "sha256:1343847d37d7b77717ba88c4c3023f9d005e7b1bdc10268360ef1f0836fc667e"
+}

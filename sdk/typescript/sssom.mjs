@@ -1,4 +1,4 @@
-import { spawnSync } from "node:child_process";
+import { spawnWithInputSync } from "./native-input.mjs";
 import { isAbsolute } from "node:path";
 import { marshalJson } from "./canonical.mjs";
 export {
@@ -41,7 +41,7 @@ export function createSssomApi(executable, observeExecution) {
   function invoke(operation, value, args = []) {
     const command = [executable, "sssom", "json", operation, ...args];
     const input = marshalJson(value);
-    const result = spawnSync(executable, command.slice(1), {
+    const result = spawnWithInputSync(executable, command.slice(1), {
       input,
       encoding: "utf8",
       env: {},

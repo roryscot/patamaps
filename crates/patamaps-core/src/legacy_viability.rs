@@ -2,7 +2,7 @@
 //! admitted generations and cannot authorize protected activation.
 use crate::legacy_evaluation::{impact, selector};
 use crate::legacy_workspace::{
-    error, get, list, locale, native, obj, observed, parse, raw, scalar, text,
+    error, get, locale, native, obj, observed, parse, raw, scalar, text,
 };
 use crate::{
     LegacyGraphRegistry, LegacyPortableSchema, LegacyWorkspaceError, LegacyWorkspaceRequest,
@@ -92,9 +92,13 @@ fn schema(generation: bool) -> &'static LegacyPortableSchema {
         })
     }
 }
-fn shape(v: &J, generation: bool) -> Result<Vec<ObservationIssue>, LegacyWorkspaceError> {
+fn shape(
+    v: &J,
+    generation: bool,
+    holes: &HashSet<usize>,
+) -> Result<Vec<ObservationIssue>, LegacyWorkspaceError> {
     Ok(schema(generation)
-        .issues(&project(v)?)
+        .legacy_issues(v, holes)
         .into_iter()
         .map(|e| ObservationIssue {
             value: obj(vec![
@@ -117,8 +121,11 @@ fn shape(v: &J, generation: bool) -> Result<Vec<ObservationIssue>, LegacyWorkspa
         })
         .collect())
 }
-fn validate_policy(v: &J) -> Result<Vec<ObservationIssue>, LegacyWorkspaceError> {
-    let mut issues = shape(v, false)?;
+fn validate_policy(
+    v: &J,
+    holes: &HashSet<usize>,
+) -> Result<Vec<ObservationIssue>, LegacyWorkspaceError> {
+    let mut issues = shape(v, false, holes)?;
     if !issues.is_empty() {
         return Ok(issues);
     }
@@ -146,8 +153,9 @@ fn validate_policy(v: &J) -> Result<Vec<ObservationIssue>, LegacyWorkspaceError>
 fn validate_generation(
     v: &J,
     locale_name: &str,
+    holes: &HashSet<usize>,
 ) -> Result<Vec<ObservationIssue>, LegacyWorkspaceError> {
-    let mut issues = shape(v, true)?;
+    let mut issues = shape(v, true, holes)?;
     if !issues.is_empty() {
         return Ok(issues);
     }
@@ -298,34 +306,30 @@ pub(crate) fn timestamp(value: &str) -> Option<i128> {
     )
 }
 
-fn signed_zero_input(input: J) -> Result<J, LegacyWorkspaceError> {
+struct NumericInput {
+    value: J,
+    holes: HashSet<usize>,
+    hole_paths: Vec<Vec<String>>,
+}
+fn numeric_input(input: J) -> Result<NumericInput, LegacyWorkspaceError> {
     if input.get("numbers").is_none() {
-        return Ok(input);
+        return Ok(NumericInput {
+            value: input,
+            holes: HashSet::new(),
+            hole_paths: Vec::new(),
+        });
     }
+    let facts = crate::legacy_evaluation::number_facts(&input)?;
     let mut value = get(&input, "value")?.clone();
-    let mut seen = HashSet::new();
-    for record in list(&input, "numbers")? {
-        let path = list(record, "path")?
-            .iter()
-            .map(|key| {
-                key.string()
-                    .ok_or_else(|| error("TypeError", "Numeric fact paths require strings"))
-            })
-            .collect::<Result<Vec<_>, _>>()?;
-        if path.is_empty() || !seen.insert(path.clone()) {
-            return Err(error(
-                "TypeError",
-                "Numeric fact path must be unique and nonempty",
-            ));
-        }
-        if text(record, "kind")? != "negative-zero" {
-            return Err(error(
-                "TypeError",
-                "Only signed-zero facts are implemented for original viability",
-            ));
-        }
+    let mut holes = HashSet::new();
+    let mut hole_paths = Vec::new();
+    let mut slots = HashSet::new();
+    for fact in facts {
         let mut slot = &mut value;
-        for key in path {
+        for (index, key) in fact.path.iter().enumerate() {
+            if fact.kind == "hole" && index + 1 == fact.path.len() && !matches!(slot, J::Array(_)) {
+                return Err(error("TypeError", "Array hole facts require an array slot"));
+            }
             slot = match slot {
                 J::Object(pairs) => pairs
                     .iter_mut()
@@ -339,36 +343,64 @@ fn signed_zero_input(input: J) -> Result<J, LegacyWorkspaceError> {
             }
             .ok_or_else(|| error("TypeError", "Numeric observation path does not exist"))?;
         }
-        match slot {
-            J::Number(number) if *number == 0.0 => *number = -0.0,
-            _ => {
-                return Err(error(
-                    "TypeError",
-                    "Numeric observation requires a zero placeholder",
-                ));
-            }
+        let address = std::ptr::from_ref(&*slot) as usize;
+        if !slots.insert(address) {
+            return Err(error(
+                "TypeError",
+                "Numeric fact path must be unique and nonempty",
+            ));
         }
+        *slot = match fact.kind.as_str() {
+            "nan" => J::Number(f64::NAN),
+            "negative-zero" => J::Number(-0.0),
+            "positive-infinity" => J::Number(f64::INFINITY),
+            "negative-infinity" => J::Number(f64::NEG_INFINITY),
+            "hole" => {
+                holes.insert(address);
+                hole_paths.push(fact.path);
+                J::Null
+            }
+            _ => unreachable!("numeric fact kind was checked"),
+        };
     }
-    Ok(value)
+    Ok(NumericInput {
+        value,
+        holes,
+        hole_paths,
+    })
 }
 
-fn signed_zero_facts(value: &J, path: &mut Vec<String>, facts: &mut Vec<J>) {
+fn numeric_facts(value: &mut J, path: &mut Vec<String>, facts: &mut Vec<J>) {
     match value {
-        J::Number(number) if *number == 0.0 && number.is_sign_negative() => facts.push(obj(vec![
-            ("path", native(path.clone())),
-            ("kind", scalar("negative-zero")),
-        ])),
+        J::Number(number)
+            if !number.is_finite() || (*number == 0.0 && number.is_sign_negative()) =>
+        {
+            let kind = if number.is_nan() {
+                "nan"
+            } else if *number == 0.0 {
+                "negative-zero"
+            } else if number.is_sign_positive() {
+                "positive-infinity"
+            } else {
+                "negative-infinity"
+            };
+            facts.push(obj(vec![
+                ("path", native(path.clone())),
+                ("kind", scalar(kind)),
+            ]));
+            *number = 0.0;
+        }
         J::Object(pairs) => {
             for (key, value) in pairs {
                 path.push(key.clone());
-                signed_zero_facts(value, path, facts);
+                numeric_facts(value, path, facts);
                 path.pop();
             }
         }
         J::Array(values) => {
-            for (index, value) in values.iter().enumerate() {
+            for (index, value) in values.iter_mut().enumerate() {
                 path.push(index.to_string());
-                signed_zero_facts(value, path, facts);
+                numeric_facts(value, path, facts);
                 path.pop();
             }
         }
@@ -376,9 +408,36 @@ fn signed_zero_facts(value: &J, path: &mut Vec<String>, facts: &mut Vec<J>) {
     }
 }
 
-fn evaluation(operation: &str, input: J, locale_name: &str) -> Result<J, LegacyWorkspaceError> {
+fn evaluation(
+    operation: &str,
+    mut input: J,
+    locale_name: &str,
+    holes: &[Vec<String>],
+) -> Result<J, LegacyWorkspaceError> {
     let mut numbers = Vec::new();
-    signed_zero_facts(&input, &mut Vec::new(), &mut numbers);
+    numeric_facts(&mut input, &mut Vec::new(), &mut numbers);
+    for path in holes {
+        let mut slot = &mut input;
+        for key in path {
+            slot = match slot {
+                J::Object(pairs) => pairs
+                    .iter_mut()
+                    .find(|(name, _)| name == key)
+                    .map(|(_, value)| value),
+                J::Array(values) => key
+                    .parse::<usize>()
+                    .ok()
+                    .and_then(|index| values.get_mut(index)),
+                _ => None,
+            }
+            .expect("compiled context hole path was checked");
+        }
+        *slot = J::Number(0.0);
+        numbers.push(obj(vec![
+            ("path", native(path.clone())),
+            ("kind", scalar("hole")),
+        ]));
+    }
     let result = crate::legacy_evaluation_request(LegacyWorkspaceRequest {
         operation: operation.into(),
         input: raw(&obj(vec![("value", input), ("numbers", J::Array(numbers))]))?,
@@ -391,7 +450,12 @@ fn core_registry() -> Value {
         serde_json::from_str(include_str!("legacy_core.json")).expect("pinned core pack");
     json!({"packs":[{"key":pack["id"],"version":pack["version"]}],"definitions":pack["relations"].as_array().expect("core relations").iter().map(|r|json!({"key":r["id"],"value":r})).collect::<Vec<_>>()})
 }
-fn compile(input: &J, locale_name: &str) -> Result<J, LegacyWorkspaceError> {
+fn compile(
+    input: &J,
+    locale_name: &str,
+    holes: &HashSet<usize>,
+    context_holes: &[Vec<String>],
+) -> Result<J, LegacyWorkspaceError> {
     let document = get(input, "document")?;
     let policy = get(input, "policy")?;
     if s(policy, "schemaVersion") == "2.0.0" {
@@ -484,7 +548,7 @@ fn compile(input: &J, locale_name: &str) -> Result<J, LegacyWorkspaceError> {
             }
         })
         .collect::<Vec<_>>();
-    let policy_issues = validate_policy(policy)?;
+    let policy_issues = validate_policy(policy, holes)?;
     let policy_valid = policy_issues.is_empty();
     issues.extend(policy_issues);
     if timestamp(evaluated_at).is_none() {
@@ -734,6 +798,7 @@ fn compile(input: &J, locale_name: &str) -> Result<J, LegacyWorkspaceError> {
                             "required",
                             obj(vec![("expression", expr.clone())]),
                             locale_name,
+                            &[],
                         )?;
                         for key in keys.array().expect("required keys") {
                             let key = key.string().expect("context key");
@@ -774,6 +839,7 @@ fn compile(input: &J, locale_name: &str) -> Result<J, LegacyWorkspaceError> {
                 ("context", context.clone()),
             ]),
             locale_name,
+            context_holes,
         )?;
         if let Some(reason) = reason.string() {
             inactive.push(obj(vec![
@@ -1014,19 +1080,34 @@ fn attach_paths(issues: &mut [ObservationIssue], impact: &J) {
 pub fn legacy_viability_request(
     request: LegacyWorkspaceRequest,
 ) -> Result<Box<RawValue>, LegacyWorkspaceError> {
-    let input = signed_zero_input(parse(&request.input)?)?;
+    let observation = numeric_input(parse(&request.input)?)?;
+    let input = &observation.value;
+    let context_holes = observation
+        .hole_paths
+        .iter()
+        .filter(|path| path.len() > 2 && path[0] == "options" && path[1] == "context")
+        .map(|path| {
+            std::iter::once("context".to_owned())
+                .chain(path[2..].iter().cloned())
+                .collect::<Vec<_>>()
+        })
+        .collect::<Vec<_>>();
     let result = match request.operation.as_str() {
-        "validate-policy" => validation_response(validate_policy(get(&input, "value")?)?),
-        "validate-generation" => {
-            validation_response(validate_generation(get(&input, "value")?, &request.locale)?)
+        "validate-policy" => {
+            validation_response(validate_policy(get(input, "value")?, &observation.holes)?)
         }
+        "validate-generation" => validation_response(validate_generation(
+            get(input, "value")?,
+            &request.locale,
+            &observation.holes,
+        )?),
         "parse-policy" | "parse-generation" => {
-            let v = get(&input, "value")?;
+            let v = get(input, "value")?;
             let generation = request.operation == "parse-generation";
             let issues = if generation {
-                validate_generation(v, &request.locale)?
+                validate_generation(v, &request.locale, &observation.holes)?
             } else {
-                validate_policy(v)?
+                validate_policy(v, &observation.holes)?
             };
             if !issues.is_empty() {
                 let message = issues
@@ -1060,7 +1141,7 @@ pub fn legacy_viability_request(
             }
             response(v.clone(), issues)
         }
-        "compile" => compile(&input, &request.locale)?,
+        "compile" => compile(input, &request.locale, &observation.holes, &context_holes)?,
         _ => return Err(error("TypeError", "Unknown legacy viability operation")),
     };
     RawValue::from_string(raw(&result)?).map_err(|e| error("Error", &e.to_string()))

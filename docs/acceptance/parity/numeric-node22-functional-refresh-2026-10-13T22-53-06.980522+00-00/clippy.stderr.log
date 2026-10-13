@@ -1,0 +1,37 @@
+    Checking patamaps-core v0.1.0 (/Users/admin/dev/patamaps/patamaps/crates/patamaps-core)
+error: usage of `bool::then` in `filter_map`
+    --> crates/patamaps-core/src/legacy_viability.rs:1088:10
+     |
+1088 |           .filter_map(|path| {
+     |  __________^
+1089 | |             (path.len() > 2 && path[0] == "options" && path[1] == "context").then(|| {
+1090 | |                 std::iter::once("context".to_owned())
+1091 | |                     .chain(path[2..].iter().cloned())
+1092 | |                     .collect::<Vec<_>>()
+1093 | |             })
+1094 | |         })
+     | |__________^
+     |
+     = help: for further information visit https://rust-lang.github.io/rust-clippy/rust-1.99.0/index.html#filter_map_bool_then
+     = note: `-D clippy::filter-map-bool-then` implied by `-D warnings`
+     = help: to override `-D warnings` add `#[allow(clippy::filter_map_bool_then)]`
+help: use `filter` then `map` instead
+     |
+1088 ~         .filter(|&path| (path.len() > 2 && path[0] == "options" && path[1] == "context")).map(|path| std::iter::once("context".to_owned())
+1089 +                     .chain(path[2..].iter().cloned())
+1090 +                     .collect::<Vec<_>>())
+     |
+
+error: this expression creates a reference which is immediately dereferenced by the compiler
+    --> crates/patamaps-core/src/legacy_viability.rs:1106:25
+     |
+1106 |             let v = get(&input, "value")?;
+     |                         ^^^^^^ help: change this to: `input`
+     |
+     = help: for further information visit https://rust-lang.github.io/rust-clippy/rust-1.99.0/index.html#needless_borrow
+     = note: `-D clippy::needless-borrow` implied by `-D warnings`
+     = help: to override `-D warnings` add `#[allow(clippy::needless_borrow)]`
+
+error: could not compile `patamaps-core` (lib) due to 2 previous errors
+warning: build failed, waiting for other jobs to finish...
+error: could not compile `patamaps-core` (lib test) due to 2 previous errors

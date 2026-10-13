@@ -28,15 +28,20 @@ fn equal(a: &Value, b: &Value) -> bool {
         (None, None) => a == b,
     }
 }
-fn value_input(input: &J) -> Result<Value, LegacyWorkspaceError> {
-    let mut value =
-        Data::projected_value(get(input, "value")?).map_err(|e| error("Error", &e.to_string()))?;
+pub(crate) struct LegacyNumberFact {
+    pub path: Vec<String>,
+    pub kind: String,
+}
+pub(crate) fn number_facts(input: &J) -> Result<Vec<LegacyNumberFact>, LegacyWorkspaceError> {
+    let value = get(input, "value")?;
     let mut seen = HashSet::new();
+    let mut facts = Vec::new();
     for record in list(input, "numbers")? {
-        let path: Vec<&str> = list(record, "path")?
+        let path: Vec<String> = list(record, "path")?
             .iter()
             .map(|v| {
                 v.string()
+                    .map(str::to_owned)
                     .ok_or_else(|| error("TypeError", "Numeric fact paths require strings"))
             })
             .collect::<Result<_, _>>()?;
@@ -58,22 +63,41 @@ fn value_input(input: &J) -> Result<Value, LegacyWorkspaceError> {
         {
             return Err(error("TypeError", "Unknown numeric observation fact"));
         }
-        let mut slot = &mut value;
-        for key in path {
-            slot = if slot.is_array() {
-                key.parse::<usize>().ok().and_then(|i| slot.get_mut(i))
-            } else {
-                slot.get_mut(key)
+        let mut slot = value;
+        for key in &path {
+            slot = match slot {
+                J::Array(values) => key.parse::<usize>().ok().and_then(|i| values.get(i)),
+                _ => slot.get(key),
             }
             .ok_or_else(|| error("TypeError", "Numeric observation path does not exist"))?;
         }
-        if slot.as_f64() != Some(0.0) {
+        if !matches!(slot, J::Number(v) if *v == 0.0) {
             return Err(error(
                 "TypeError",
                 "Numeric observation requires a zero placeholder",
             ));
         }
-        *slot = marker(kind);
+        facts.push(LegacyNumberFact {
+            path,
+            kind: kind.to_owned(),
+        });
+    }
+    Ok(facts)
+}
+fn value_input(input: &J) -> Result<Value, LegacyWorkspaceError> {
+    let mut value =
+        Data::projected_value(get(input, "value")?).map_err(|e| error("Error", &e.to_string()))?;
+    for fact in number_facts(input)? {
+        let mut slot = &mut value;
+        for key in &fact.path {
+            slot = if slot.is_array() {
+                key.parse::<usize>().ok().and_then(|i| slot.get_mut(i))
+            } else {
+                slot.get_mut(key)
+            }
+            .expect("numeric observation path was checked");
+        }
+        *slot = marker(&fact.kind);
     }
     Ok(value)
 }

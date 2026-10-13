@@ -1,4 +1,4 @@
-import { spawnSync } from "node:child_process";
+import { spawnWithInputSync } from "./native-input.mjs";
 import { isAbsolute } from "node:path";
 
 export class CanonicalJsonError extends Error {
@@ -165,7 +165,7 @@ export function createCanonicalApi(executable, observeExecution) {
     throw new TypeError("Patamaps requires an absolute native executable");
   function invoke(operation, input) {
     const command = [executable, "json", operation];
-    const result = spawnSync(executable, command.slice(1), {
+    const result = spawnWithInputSync(executable, command.slice(1), {
       input,
       encoding: "utf8",
       env: {},

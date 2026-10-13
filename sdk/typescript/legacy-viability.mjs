@@ -1,4 +1,4 @@
-import { marshalLegacySignedZeroObservationJson } from "./canonical.mjs";
+import { marshalLegacyNumericObservationJson } from "./canonical.mjs";
 import { legacyRegistryGraphSnapshot } from "./legacy-registry.mjs";
 
 export const LEGACY_METAMAP_VIABILITY_POLICY_VERSION = "1.0.0";
@@ -15,7 +15,7 @@ export function createLegacyViabilityApi(invoke, Registry) {
   function call(operation, input) {
     const response = invoke("viability", "json", {
       operation,
-      input: marshalLegacySignedZeroObservationJson(input),
+      input: marshalLegacyNumericObservationJson(input),
       locale: new Intl.Collator().resolvedOptions().locale,
     });
     const value = response.value;
