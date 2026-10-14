@@ -1,0 +1,18 @@
+{
+  "status": "observed-lineage-gap",
+  "argv": [
+    "/Users/admin/dev/patamaps/patamaps/.tools/capabilities/installed-ekq21tjf/installation/bin/patamaps",
+    "check",
+    "config.json",
+    "/Users/admin/dev/patamaps/patamaps/docs/acceptance/capabilities/source-lineage-gap-2026-10-14/forged-baseline.json",
+    "--root",
+    "/Users/admin/dev/patamaps/patamaps/.tools/capabilities/workspace-agljuknu"
+  ],
+  "exitCode": 2,
+  "baseline": "forged-baseline.json",
+  "changedField": "discovery[0].sourceId",
+  "unchanged": "All source bytes, captured inputs/results, shard bytes and outputs; only discovery source ID and the outer baseline digest changed.",
+  "candidateBinaryDigest": "sha256:9bb083eb844027c41463b391d4fec5b53f34cf1e1f6a81608c4f9e6efd3a9578",
+  "interpretation": "The command reports drift against a baseline whose configured source and recorded discovery source disagree instead of refusing inconsistent historical lineage. This does not demonstrate that a forged baseline can obtain unchanged acceptance or deployment.",
+  "deleted": []
+}

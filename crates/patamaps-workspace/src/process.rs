@@ -20,14 +20,7 @@ fn stop(child: &mut std::process::Child) {
     let _ = child.wait();
 }
 
-#[cfg(unix)]
-pub(crate) fn invoke(
-    invocation: &Invocation,
-    executable: &Path,
-    root: &Path,
-    request: &AdapterRequest,
-) -> Result<AdapterResponse, Error> {
-    use std::os::unix::process::CommandExt;
+pub(crate) fn validate_invocation(invocation: &Invocation) -> Result<(), Error> {
     let limits = &invocation.bounds;
     if !(1..=60_000).contains(&limits.maximum_elapsed_ms.get())
         || !(1..=MAX_INPUT_BYTES as u64).contains(&limits.maximum_stdout_bytes.get())
@@ -43,6 +36,19 @@ pub(crate) fn invoke(
             "Invalid process bounds or argument vector",
         ));
     }
+    Ok(())
+}
+
+#[cfg(unix)]
+pub(crate) fn invoke(
+    invocation: &Invocation,
+    executable: &Path,
+    root: &Path,
+    request: &AdapterRequest,
+) -> Result<AdapterResponse, Error> {
+    use std::os::unix::process::CommandExt;
+    validate_invocation(invocation)?;
+    let limits = &invocation.bounds;
     let request_bytes = canonical_bytes(request)?;
     if request_bytes.len() > MAX_INPUT_BYTES {
         return Err(Error::refused(

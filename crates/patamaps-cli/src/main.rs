@@ -134,6 +134,12 @@ enum Command {
         #[command(flatten)]
         output: Output,
     },
+    /// Verify recorded workspace composition and output bytes without live reads.
+    VerifyWorkspace {
+        baseline: PathBuf,
+        #[command(flatten)]
+        output: Output,
+    },
     /// Search only explicitly supplied edits; no changes are written or applied.
     Repair {
         request: PathBuf,
@@ -1447,6 +1453,19 @@ fn run(command: Command) -> Result<(), Failure> {
                 )));
             }
             Ok(())
+        }
+        Command::VerifyWorkspace { baseline, output } => {
+            let baseline = read::<patamaps_workspace::WorkspaceBaseline>(&baseline)?;
+            let verified = patamaps_workspace::verify_baseline(&baseline)
+                .map_err(|error| Failure::Operational(error.to_string()))?;
+            json(
+                &output,
+                &serde_json::json!({
+                    "status":"verified-record-bindings", "baseline":verified.record().digest,
+                    "sourceRediscovery":"not-performed", "authentication":"not-evaluated",
+                    "authorizationNow":"not-evaluated", "active":"not-evaluated"
+                }),
+            )
         }
         Command::Repair {
             request,

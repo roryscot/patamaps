@@ -1,8 +1,10 @@
 """Installed portable workspace and read-only inspection, with Node absent."""
 
+import base64
 import hashlib
 import json
 import os
+import re
 import shutil
 import subprocess
 import sys
@@ -73,6 +75,8 @@ def main():
         baseline_path = work / "baseline.json"
         baseline_path.write_text(json.dumps(baseline, indent=2) + "\n")
         saved = baseline_path.read_bytes()
+        offline = json.loads(run("offline-baseline", ["verify-workspace", "baseline.json"]))
+        assert offline == {"status": "verified-record-bindings", "baseline": baseline["digest"], "sourceRediscovery": "not-performed", "authentication": "not-evaluated", "authorizationNow": "not-evaluated", "active": "not-evaluated"}
         current = json.loads(run("unchanged", ["check", "config.json", "baseline.json", "--root", str(work)]))
         assert current["status"] == "unchanged" and not current["changes"]
         captured = work / "capture.json"
@@ -94,6 +98,14 @@ def main():
         html_path = output / "debugger.html"
         html_path.write_bytes(html)
         assert b'<script>document.documentElement.dataset.patamapsInjected=' not in html
+        styles = re.findall(rb"<style>(.*?)</style>", html, re.S)
+        assert len(styles) == 1
+        style_hash = base64.b64encode(hashlib.sha256(styles[0]).digest())
+        assert b"style-src 'sha256-" + style_hash + b"'" in html
+        assert b"unsafe-inline" not in html
+        # The static report has no executable candidate tags or external links.
+        assert not re.search(rb"<(script|img|iframe|svg|link|form|input|button)\b", html, re.I)
+        assert not re.search(rb'href="(?:https?:|javascript:)', html, re.I)
         for name, raw in inputs.items():
             if name != "graph.json":
                 assert (work / name).read_bytes() == raw

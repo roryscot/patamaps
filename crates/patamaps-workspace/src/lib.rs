@@ -114,6 +114,43 @@ fn receipt(id: &str, input: &SuppliedInput) -> SourceReceipt {
         content: Some(input.content.clone()),
     }
 }
+fn recorded_input(sources: &[SourceReceipt], id: &str, path: &str) -> Result<SuppliedInput, Error> {
+    if !relative_path(path) {
+        return Err(Error::refused(
+            "SOURCE_PATH",
+            "Invalid recorded source path",
+        ));
+    }
+    let source_id = format!("{id}:{path}");
+    let source = sources
+        .iter()
+        .find(|s| s.id == source_id)
+        .ok_or_else(|| Error::refused("WORKSPACE_SOURCE_INVENTORY", "Required source absent"))?;
+    let content = source.content.as_ref().ok_or_else(|| {
+        Error::refused(
+            "WORKSPACE_SOURCE_UNAVAILABLE",
+            "Raw recorded input is unavailable",
+        )
+    })?;
+    if source.locator != format!("workspace:{path}")
+        || content.len() > MAX_INPUT_BYTES
+        || source.byte_length.get() != content.len() as u64
+        || source.digest != byte_digest(content.as_bytes())
+    {
+        return Err(Error::refused(
+            "WORKSPACE_SOURCE_BINDING",
+            "Recorded raw input binding differs",
+        ));
+    }
+    Ok(SuppliedInput {
+        receipt: InputReceipt {
+            path: path.into(),
+            digest: source.digest.clone(),
+            byte_length: source.byte_length,
+        },
+        content: content.clone(),
+    })
+}
 fn hash_executable(path: &Path) -> Result<String, Error> {
     let file = File::open(path)?;
     if !file.metadata()?.is_file() || file.metadata()?.len() > 256 * 1024 * 1024 {
@@ -208,7 +245,6 @@ pub fn generate(
     validate_config(config)?;
     let root = fs::canonicalize(root)?;
     let config_digest = canonical_digest(config)?;
-    let mut shards = Vec::new();
     let mut sources = Vec::new();
     let mut discovery = Vec::new();
     let mut hits = 0;
@@ -216,7 +252,8 @@ pub fn generate(
     let mut total_source_bytes = 0usize;
     let mut total_shard_bytes = 0usize;
     for source in &config.sources {
-        let (shard, adapter, version, request_digest, diagnostics) = match source {
+        let (shard, adapter, version, request_digest, executable_digest, diagnostics) = match source
+        {
             Source::PortableShard { id, path } => {
                 let input = supplied(&root, path, &mut total_source_bytes)?;
                 let shard: GraphDocument = parse(input.content.as_bytes())?;
@@ -253,6 +290,7 @@ pub fn generate(
                     "portable-shard".into(),
                     "0.1.0".into(),
                     key,
+                    None,
                     Vec::new(),
                 )
             }
@@ -302,8 +340,9 @@ pub fn generate(
                         supplied(&root, p, &mut total_source_bytes)
                     })
                     .collect::<Result<Vec<_>, _>>()?;
+                let executable_digest = hash_executable(&executable)?;
                 let invocation_digest = canonical_digest(
-                    &json!({"invocation":invocation,"executableDigest":hash_executable(&executable)?,"codeInputs":code.iter().map(|i| &i.receipt).collect::<Vec<_>>()}),
+                    &json!({"invocation":invocation,"executableDigest":executable_digest,"codeInputs":code.iter().map(|i| &i.receipt).collect::<Vec<_>>()}),
                 )?;
                 let mut request = AdapterRequest {
                     schema_version: ProtocolVersion::Draft1,
@@ -326,6 +365,7 @@ pub fn generate(
                     "process".into(),
                     response.adapter_version,
                     request.request_digest,
+                    Some(executable_digest),
                     response.diagnostics,
                 )
             }
@@ -350,19 +390,14 @@ pub fn generate(
             adapter,
             adapter_version: version,
             request_digest,
+            executable_digest,
             shard_digest: canonical_digest(&shard)?,
             shard: shard.clone(),
             diagnostics,
         });
-        shards.push(shard);
     }
-    let mut graph = compose(&shards, config.id.clone(), config.namespace.clone())?;
-    // Composition revision is explicitly authored; policies are never rebound
-    // automatically when sources or their correspondence meanings change.
-    graph.revision = Some(config.revision.clone());
     // Capture authored policy, pack and projection bytes alongside discovery.
     let mut additional = BTreeSet::new();
-    let mut authored = BTreeMap::new();
     for p in std::iter::once(&config.policy)
         .chain(&config.packs)
         .chain(config.projections.iter().map(|p| &p.path))
@@ -370,14 +405,39 @@ pub fn generate(
         if additional.insert(p) {
             let input = supplied(&root, p, &mut total_source_bytes)?;
             sources.push(receipt("urn:patamaps:workspace:authored", &input));
-            authored.insert(p, input.content);
         }
     }
-    let load = |path: &String| -> Result<&str, Error> {
-        authored
-            .get(path)
-            .map(String::as_str)
-            .ok_or_else(|| Error::refused("WORKSPACE_INPUT", "Authored input absent"))
+    Ok(Generation {
+        baseline: assemble(config, discovery, sources)?,
+        cache_hits: hits,
+        cache_misses: misses,
+    })
+}
+
+// Pure assembly is shared by live generation and offline reconstruction.
+fn assemble(
+    config: &WorkspaceConfig,
+    discovery: Vec<DiscoveryReceipt>,
+    sources: Vec<SourceReceipt>,
+) -> Result<WorkspaceBaseline, Error> {
+    let config_digest = canonical_digest(config)?;
+    let shards = discovery
+        .iter()
+        .map(|d| d.shard.clone())
+        .collect::<Vec<_>>();
+    let mut graph = compose(&shards, config.id.clone(), config.namespace.clone())?;
+    // Composition revision is explicitly authored; policies are never rebound
+    // automatically when sources or their correspondence meanings change.
+    graph.revision = Some(config.revision.clone());
+    // Bind recorded provider versions, shard revisions and request/code
+    // identities into the evaluated graph, including metadata-only changes.
+    // This proves record consistency; it does not authenticate a provider.
+    graph.metadata.as_mut().expect("composition metadata").insert(
+        "workspaceLineageDigest".into(),
+        json!(canonical_digest(&json!({"profile":PROFILE,"workspaceExecutor":engine_id(),"configDigest":config_digest,"discovery":discovery}))?),
+    );
+    let load = |path: &String| -> Result<String, Error> {
+        Ok(recorded_input(&sources, "urn:patamaps:workspace:authored", path)?.content)
     };
     let policy: PolicyDocument = parse(load(&config.policy)?.as_bytes())?;
     let mut packs = config
@@ -475,11 +535,7 @@ pub fn generate(
     };
     baseline.digest = baseline_digest(&baseline)?;
     parse_value(&canonical_bytes(&baseline)?)?;
-    Ok(Generation {
-        baseline,
-        cache_hits: hits,
-        cache_misses: misses,
-    })
+    Ok(baseline)
 }
 fn baseline_digest(baseline: &WorkspaceBaseline) -> Result<String, Error> {
     let mut value = serde_json::to_value(baseline).map_err(ContractError::from)?;
@@ -490,13 +546,28 @@ fn baseline_digest(baseline: &WorkspaceBaseline) -> Result<String, Error> {
     Ok(canonical_digest(&value)?)
 }
 
-/// Rebuild from actual current sources; never writes or accepts a baseline.
-pub fn check(
-    root: &Path,
-    config: &WorkspaceConfig,
-    baseline: &WorkspaceBaseline,
-    cache: Option<&Path>,
-) -> Result<DriftReport, Error> {
+/// Checked historical record bindings. This is not authentication, current
+/// source rediscovery, authorization or activation. It cannot deserialize.
+///
+/// ```compile_fail
+/// use patamaps_workspace::{VerifiedWorkspace, WorkspaceBaseline};
+/// fn forge(baseline: &WorkspaceBaseline) -> VerifiedWorkspace<'_> {
+///     VerifiedWorkspace { baseline }
+/// }
+/// ```
+#[derive(Debug)]
+pub struct VerifiedWorkspace<'a> {
+    baseline: &'a WorkspaceBaseline,
+}
+impl VerifiedWorkspace<'_> {
+    pub fn record(&self) -> &WorkspaceBaseline {
+        self.baseline
+    }
+}
+
+/// Reconstruct recorded source composition and output bytes without filesystem
+/// access or executing a recorded provider. The workspace executor must match.
+pub fn verify_baseline(baseline: &WorkspaceBaseline) -> Result<VerifiedWorkspace<'_>, Error> {
     validate_config(&baseline.config)?;
     if baseline.captures.is_empty()
         || baseline.captures.len() > 16
@@ -539,6 +610,162 @@ pub fn check(
             "Baseline address or executor is invalid",
         ));
     }
+    if baseline.discovery.len() != baseline.config.sources.len()
+        || baseline.captures.len() != baseline.config.projections.len()
+    {
+        return Err(Error::refused(
+            "WORKSPACE_SOURCE_INVENTORY",
+            "Recorded inventory differs",
+        ));
+    }
+    let raw_sources = &baseline.captures[0].sources;
+    let mut expected_sources = Vec::new();
+    for (source, discovered) in baseline.config.sources.iter().zip(&baseline.discovery) {
+        if discovered.source_id != source.id() {
+            return Err(Error::refused(
+                "WORKSPACE_SOURCE_INVENTORY",
+                "Source order or identity differs",
+            ));
+        }
+        match source {
+            Source::PortableShard { id, path } => {
+                let input = recorded_input(raw_sources, id, path)?;
+                let key = canonical_digest(
+                    &json!({"profile":PROFILE,"executor":executor_id(),"workspaceExecutor":engine_id(),"config":baseline.config_digest,"source":source,"input":input.receipt}),
+                )?;
+                let shard: GraphDocument = parse(input.content.as_bytes())?;
+                if discovered.adapter != "portable-shard"
+                    || discovered.adapter_version != "0.1.0"
+                    || discovered.executable_digest.is_some()
+                    || !discovered.diagnostics.is_empty()
+                    || discovered.request_digest != key
+                    || canonical_bytes(&shard)? != canonical_bytes(&discovered.shard)?
+                {
+                    return Err(Error::refused(
+                        "WORKSPACE_DISCOVERY_BINDING",
+                        "Portable discovery differs from its source",
+                    ));
+                }
+                expected_sources.push(receipt(id, &input));
+            }
+            Source::Process {
+                id,
+                invocation,
+                inputs,
+                config,
+            } => {
+                process::validate_invocation(invocation)?;
+                if !(1..=1024).contains(&inputs.len()) || invocation.code_inputs.len() > 512 {
+                    return Err(Error::refused(
+                        "ADAPTER_INPUT_LIMIT",
+                        "Recorded input inventory exceeds its bound",
+                    ));
+                }
+                let executable_digest =
+                    discovered.executable_digest.as_deref().ok_or_else(|| {
+                        Error::refused(
+                            "WORKSPACE_DISCOVERY_BINDING",
+                            "Recorded executable digest absent",
+                        )
+                    })?;
+                if !Path::new(&invocation.executable).is_absolute()
+                    || executable_digest.len() != 71
+                    || !executable_digest.starts_with("sha256:")
+                    || !executable_digest[7..]
+                        .bytes()
+                        .all(|b| b.is_ascii_digit() || (b'a'..=b'f').contains(&b))
+                {
+                    return Err(Error::refused(
+                        "WORKSPACE_DISCOVERY_BINDING",
+                        "Invalid recorded executable binding",
+                    ));
+                }
+                let mut paths = BTreeSet::new();
+                let mut load = |path: &String| {
+                    if !paths.insert(path.clone()) {
+                        return Err(Error::refused(
+                            "ADAPTER_DUPLICATE_INPUT",
+                            "Repeated recorded input",
+                        ));
+                    }
+                    let input = recorded_input(raw_sources, id, path)?;
+                    expected_sources.push(receipt(id, &input));
+                    Ok(input)
+                };
+                let inputs = inputs
+                    .iter()
+                    .map(&mut load)
+                    .collect::<Result<Vec<_>, _>>()?;
+                let code = invocation
+                    .code_inputs
+                    .iter()
+                    .map(&mut load)
+                    .collect::<Result<Vec<_>, _>>()?;
+                let invocation_digest = canonical_digest(
+                    &json!({"invocation":invocation,"executableDigest":executable_digest,"codeInputs":code.iter().map(|i| &i.receipt).collect::<Vec<_>>()}),
+                )?;
+                let request = AdapterRequest {
+                    schema_version: ProtocolVersion::Draft1,
+                    document_type: RequestType::Record,
+                    profile: PROFILE.into(),
+                    source_id: id.clone(),
+                    namespace: baseline.config.namespace.clone(),
+                    config: config.clone(),
+                    inputs,
+                    invocation_digest,
+                    request_digest: String::new(),
+                };
+                if discovered.adapter != "process"
+                    || discovered.adapter_version.is_empty()
+                    || discovered.adapter_version.len() > 128
+                    || discovered.diagnostics.len() > 1024
+                    || discovered
+                        .diagnostics
+                        .iter()
+                        .any(|d| matches!(d.severity, DiagnosticSeverity::Error))
+                    || discovered.request_digest != canonical_digest(&request)?
+                {
+                    return Err(Error::refused(
+                        "WORKSPACE_DISCOVERY_BINDING",
+                        "Process discovery request differs",
+                    ));
+                }
+            }
+        }
+    }
+    let mut authored = BTreeSet::new();
+    for path in std::iter::once(&baseline.config.policy)
+        .chain(&baseline.config.packs)
+        .chain(baseline.config.projections.iter().map(|p| &p.path))
+    {
+        if authored.insert(path) {
+            let input = recorded_input(raw_sources, "urn:patamaps:workspace:authored", path)?;
+            expected_sources.push(receipt("urn:patamaps:workspace:authored", &input));
+        }
+    }
+    let rebuilt = assemble(
+        &baseline.config,
+        baseline.discovery.clone(),
+        expected_sources,
+    )?;
+    if canonical_bytes(&rebuilt)? != canonical_bytes(baseline)? {
+        return Err(Error::refused(
+            "WORKSPACE_COMPOSITION_BINDING",
+            "Recorded composition, captures or emitted bytes differ",
+        ));
+    }
+    Ok(VerifiedWorkspace { baseline })
+}
+
+/// Rebuild from actual current sources after verifying the historical baseline;
+/// never writes or accepts drift.
+pub fn check(
+    root: &Path,
+    config: &WorkspaceConfig,
+    baseline: &WorkspaceBaseline,
+    cache: Option<&Path>,
+) -> Result<DriftReport, Error> {
+    verify_baseline(baseline)?;
     let current = generate(root, config, cache)?.baseline;
     let mut changes = Vec::new();
     if baseline.config_digest != current.config_digest {

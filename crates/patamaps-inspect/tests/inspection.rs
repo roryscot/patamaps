@@ -321,6 +321,8 @@ fn captured_explanation_preserves_rejection_ambiguity_missing_sources_and_safe_h
     assert!(html.contains("&lt;img"));
     assert!(!html.contains("<script"));
     assert!(html.contains("default-src 'none'"));
+    assert!(!html.contains("unsafe-inline"));
+    assert!(html.contains("style-src 'sha256-"));
     assert!(html.contains("Skip to inspection"));
     assert!(html.contains("<summary>"));
     let missing = explain(

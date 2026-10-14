@@ -152,6 +152,14 @@ pub struct DiscoveryReceipt {
     pub adapter: String,
     pub adapter_version: String,
     pub request_digest: String,
+    /// Recorded executable bytes for reconstructing a process request. This
+    /// does not authenticate a provider or cause offline verification to run it.
+    #[serde(
+        default,
+        deserialize_with = "patamaps_contracts::present",
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub executable_digest: Option<String>,
     pub shard_digest: String,
     pub shard: GraphDocument,
     pub diagnostics: Vec<AdapterDiagnostic>,
