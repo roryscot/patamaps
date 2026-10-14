@@ -107,6 +107,8 @@ def main():
     try:
         run("build", [cargo, "build", "--locked", "--offline", "-p", "patamaps-cli"])
         run("portable-native", [cargo, "test", "--locked", "--offline", "--workspace", "--exclude", "patamaps-activator"])
+        run("portable-activation", [cargo, "test", "--locked", "--offline", "-p", "patamaps-activator", "--test", "memory", "--test", "transport"])
+        run("portable-activation-types", [cargo, "test", "--locked", "--offline", "-p", "patamaps-activator", "--doc"])
         retained("reference-semantic", "scripts/reference/semantic.py", reference, "--node", node, "--cli", cli, "--output", output / "reference-semantic.json")
         retained("lifecycle", "scripts/test_lifecycle_pure.py", "--cli", cli, "--output", output / "lifecycle.json")
         retained("native-consumers", "scripts/test_native.py", "--cli", cli, "--tsc", tsc, "--node", node)

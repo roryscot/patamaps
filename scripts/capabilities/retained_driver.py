@@ -58,8 +58,12 @@ def main():
             pass
 
     original = tempfile.TemporaryDirectory
+    original_path = sys.path.copy()
+    original_arguments = sys.argv
     tempfile.TemporaryDirectory = RetainedDirectory
     tempfile.mkdtemp = retained_mkdtemp
+    # Match direct Python script execution: imports resolve from its directory.
+    sys.path.insert(0, str(driver.parent))
     sys.argv = [str(driver), *args.arguments]
     status = "failed"
     try:
@@ -68,6 +72,8 @@ def main():
     finally:
         tempfile.TemporaryDirectory = original
         tempfile.mkdtemp = original_mkdtemp
+        sys.path[:] = original_path
+        sys.argv = original_arguments
         unchanged = driver.read_bytes() == raw
         (retained / "retention.json").write_text(
             json.dumps(

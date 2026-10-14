@@ -91,7 +91,8 @@ def main():
         consumer = work / "consumer"
         consumer.mkdir()
         (consumer / "src").mkdir()
-        dependencies = "\n".join(f'{name}={{path={json.dumps(str(source / "crates" / name))}}}' for name in ["patamaps-contracts", "patamaps-core", "patamaps-projection"])
+        dependencies = "\n".join(f'{name}={{path={json.dumps(str(source / "crates" / name))}}}' for name in ["patamaps-contracts", "patamaps-core", "patamaps-projection", "patamaps-governance", "patamaps-activator"])
+        dependencies += '\nserde_json="1"\nbase64="0.22"\ned25519-dalek="2"'
         (consumer / "Cargo.toml").write_text('[workspace]\n[package]\nname="patamaps-independent-native-consumer"\nversion="0.0.0"\nedition="2024"\n[dependencies]\n'+dependencies+'\n')
         # These are consumer-owned fixtures, outside the checkout and package.
         for name in ["graph", "policy", "projection-spec"]:
@@ -119,8 +120,15 @@ fn main(){
  println!("{}",String::from_utf8(canonical_bytes(admitted.record()).unwrap()).unwrap());
 }
 ''')
-        generation = json.loads(run("rust-sdk", [cargo, "run", "--offline", "--quiet"], consumer))
+        generation = json.loads(run("rust-sdk", [cargo, "run", "--offline", "--quiet", "--bin", "patamaps-independent-native-consumer"], consumer))
         assert generation["customConstraintEvaluators"][0]["evaluator"]["digest"] == digest((consumer / "src/main.rs").read_bytes())
+        (consumer / "src/bin").mkdir()
+        memory_source = source / "scripts/capabilities/consumers/memory.rs"
+        assert memory_source.read_bytes() == (ROOT / "scripts/capabilities/consumers/memory.rs").read_bytes()
+        (consumer / "src/bin/memory.rs").write_bytes(memory_source.read_bytes())
+        memory = json.loads(run("rust-memory-host", [cargo, "run", "--offline", "--quiet", "--bin", "memory"], consumer, {**env, "PATH": str(cargo.parent) + ":/usr/bin:/bin"}))
+        assert memory["profile"] == "patamaps-memory-draft-1"
+        assert all(memory[k] is True for k in ["bootstrap", "move", "rollback", "retryRechecked", "rejectionPreservesState"])
         (consumer / "service.rs").write_text('pub fn greet(input:&str)->String{format!("Hello, {}!",input)}\n')
         (consumer / "runtime.rs").write_text('mod service;mod bindings;fn main(){let id=bindings::SemanticId::parse("urn:example:command:create-user").unwrap();println!("{}",bindings::dispatch(id,"Ada"));}\n')
         no_node = {"PATH": "/usr/bin:/bin"}
@@ -134,7 +142,7 @@ fn main(){
         (consumer / "package.json").write_text('{"type":"module"}\n')
         (consumer / "sdk.mjs").write_text('import{Patamaps}from"patamaps-native-sdk-draft";console.log(JSON.stringify(new Patamaps(process.argv[2]).runJson(["engine"])));\n')
         assert json.loads(run("typescript-sdk", [node_runtime(), consumer / "sdk.mjs", cli], consumer)) == expected
-        receipt.update(status="passed", distribution=distribution, sourceInventoryEntries=len(inventory), engines=expected, nativeConsumption="Hello, Ada!", customEvaluatorBinding=generation["customConstraintEvaluators"][0], completedAtUtc=datetime.now(timezone.utc).isoformat())
+        receipt.update(status="passed", distribution=distribution, sourceInventoryEntries=len(inventory), engines=expected, nativeConsumption="Hello, Ada!", customEvaluatorBinding=generation["customConstraintEvaluators"][0], memoryHost=memory, memoryConsumerSourceDigest=digest(memory_source.read_bytes()), completedAtUtc=datetime.now(timezone.utc).isoformat())
     except BaseException as error:
         receipt.update(status="failed", error=f"{type(error).__name__}: {error}")
         raise

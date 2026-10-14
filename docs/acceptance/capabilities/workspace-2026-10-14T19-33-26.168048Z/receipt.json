@@ -1,0 +1,116 @@
+{
+  "status": "passed",
+  "installedReceipt": "docs/acceptance/capabilities/installed-2026-10-14T19-00-39.294566Z/receipt.json",
+  "binaryDigest": "sha256:9bb083eb844027c41463b391d4fec5b53f34cf1e1f6a81608c4f9e6efd3a9578",
+  "nodeInPath": false,
+  "retainedWork": ".tools/capabilities/workspace-agljuknu",
+  "commands": [
+    {
+      "label": "engine",
+      "argv": [
+        "/Users/admin/dev/patamaps/patamaps/.tools/capabilities/installed-ekq21tjf/installation/bin/patamaps",
+        "engine"
+      ],
+      "exitCode": 0,
+      "expectedExitCode": 0
+    },
+    {
+      "label": "generate",
+      "argv": [
+        "/Users/admin/dev/patamaps/patamaps/.tools/capabilities/installed-ekq21tjf/installation/bin/patamaps",
+        "generate",
+        "config.json",
+        "--root",
+        "/Users/admin/dev/patamaps/patamaps/.tools/capabilities/workspace-agljuknu"
+      ],
+      "exitCode": 0,
+      "expectedExitCode": 0
+    },
+    {
+      "label": "unchanged",
+      "argv": [
+        "/Users/admin/dev/patamaps/patamaps/.tools/capabilities/installed-ekq21tjf/installation/bin/patamaps",
+        "check",
+        "config.json",
+        "baseline.json",
+        "--root",
+        "/Users/admin/dev/patamaps/patamaps/.tools/capabilities/workspace-agljuknu"
+      ],
+      "exitCode": 0,
+      "expectedExitCode": 0
+    },
+    {
+      "label": "drift",
+      "argv": [
+        "/Users/admin/dev/patamaps/patamaps/.tools/capabilities/installed-ekq21tjf/installation/bin/patamaps",
+        "check",
+        "config.json",
+        "baseline.json",
+        "--root",
+        "/Users/admin/dev/patamaps/patamaps/.tools/capabilities/workspace-agljuknu"
+      ],
+      "exitCode": 2,
+      "expectedExitCode": 2
+    },
+    {
+      "label": "regenerate-current",
+      "argv": [
+        "/Users/admin/dev/patamaps/patamaps/.tools/capabilities/installed-ekq21tjf/installation/bin/patamaps",
+        "generate",
+        "config.json",
+        "--root",
+        "/Users/admin/dev/patamaps/patamaps/.tools/capabilities/workspace-agljuknu"
+      ],
+      "exitCode": 0,
+      "expectedExitCode": 0
+    },
+    {
+      "label": "inspect",
+      "argv": [
+        "/Users/admin/dev/patamaps/patamaps/.tools/capabilities/installed-ekq21tjf/installation/bin/patamaps",
+        "inspect",
+        "after.json",
+        "--before",
+        "capture.json",
+        "--subject",
+        "urn:example:command:create-user"
+      ],
+      "exitCode": 0,
+      "expectedExitCode": 0
+    },
+    {
+      "label": "html",
+      "argv": [
+        "/Users/admin/dev/patamaps/patamaps/.tools/capabilities/installed-ekq21tjf/installation/bin/patamaps",
+        "inspect",
+        "after.json",
+        "--before",
+        "capture.json",
+        "--subject",
+        "urn:example:command:create-user",
+        "--html"
+      ],
+      "exitCode": 0,
+      "expectedExitCode": 0
+    }
+  ],
+  "deleted": [],
+  "activation": "not-performed",
+  "baselineUnchanged": true,
+  "noCacheCreated": true,
+  "sourceChange": {
+    "before": "sha256:f2260288c8a3d4db5c982f66230c291b363efa06138b5ff05e2f6c7d2e29f768",
+    "after": "sha256:cb4433a3ca3fc1f183ed6ccf9215ddea2d245ec1aa5daca1556a1dd0d753a72c",
+    "beforePreservedAt": ".tools/capabilities/workspace-agljuknu/graph.before.json"
+  },
+  "html": "docs/acceptance/capabilities/workspace-2026-10-14T19-33-26.168048Z/debugger.html",
+  "browserVerification": "pending",
+  "engines": {
+    "schemaVersion": "0.1.0",
+    "documentType": "executor-description",
+    "compiler": "sha256:c9b008d3636e1789d28323436633921a1e57dab97f61759b274cd13ebdb70f0a",
+    "governance": "sha256:9f97bd7ffcd39362ac8af5447f3434b6577813fd992471c2040a760164986b5e",
+    "workspace": "sha256:e5ee17d5043ea17da009a43ffd9139fd676d463cfa08e14a9d59b5521e2387dc",
+    "scientific": "sha256:b80cd74b279f356dbc715fb340bbbce539a173765358509909070bc80d948038"
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "status": "authorized-scope-verified",
+  "observedAtUtc": "2026-10-14T19:47:31.791385+00:00",
+  "authorization": "Owner approved requesting workflow scope and confirmed GitHub authentication completed.",
+  "commands": [
+    {
+      "argv": [
+        "gh",
+        "auth",
+        "refresh",
+        "--hostname",
+        "github.com",
+        "--scopes",
+        "workflow"
+      ],
+      "sessionId": 91310,
+      "exitCode": 0,
+      "result": "Authentication complete."
+    },
+    {
+      "argv": [
+        "gh",
+        "api",
+        "user",
+        "--jq",
+        ".login"
+      ],
+      "exitCode": 0,
+      "result": "roryscot"
+    },
+    {
+      "argv": [
+        "gh",
+        "api",
+        "-i",
+        "user"
+      ],
+      "exitCode": 0,
+      "retainedHeaders": {
+        "httpStatus": 200,
+        "x-oauth-scopes": [
+          "gist",
+          "read:org",
+          "repo",
+          "workflow"
+        ]
+      }
+    }
+  ],
+  "browser": {
+    "url": "https://github.com/login/device/success",
+    "observedMessage": "Your device is now connected.",
+    "screenshot": "/private/tmp/patamaps-github-workflow-authorized-2026-10-14.png",
+    "digest": "sha256:dcbfaf711ecb6a1c56bdd43a5b6bd3a50ee59601f7273fb7a34b4455269290dd"
+  },
+  "credentialsRecorded": false,
+  "linuxAcceptance": "pending actual jobs",
+  "deleted": []
+}

@@ -1,0 +1,38 @@
+error[E0277]: the trait bound `Option<std::string::String>: From<&str>` is not satisfied
+  --> src/bin/memory.rs:20:31
+   |
+20 |     graph.revision = revision.into();
+   |                               ^^^^ the trait `From<&str>` is not implemented for `Option<std::string::String>`
+   |
+   = help: the following other types implement trait `From<T>`:
+             `Option<&T>` implements `From<&Option<T>>`
+             `Option<&mut T>` implements `From<&mut Option<T>>`
+             `Option<T>` implements `From<T>`
+             `Option<T>` implements `From<subtle::CtOption<T>>`
+             `Option<deranged::RangedI128<MIN, MAX>>` implements `From<deranged::OptionRangedI128<MIN, MAX>>`
+             `Option<deranged::RangedI16<MIN, MAX>>` implements `From<deranged::OptionRangedI16<MIN, MAX>>`
+             `Option<deranged::RangedI32<MIN, MAX>>` implements `From<deranged::OptionRangedI32<MIN, MAX>>`
+             `Option<deranged::RangedI64<MIN, MAX>>` implements `From<deranged::OptionRangedI64<MIN, MAX>>`
+           and 8 others
+   = note: required for `&str` to implement `Into<Option<std::string::String>>`
+
+error[E0277]: the trait bound `Option<std::string::String>: From<&str>` is not satisfied
+  --> src/bin/memory.rs:26:38
+   |
+26 |     policy.graph.revision = revision.into();
+   |                                      ^^^^ the trait `From<&str>` is not implemented for `Option<std::string::String>`
+   |
+   = help: the following other types implement trait `From<T>`:
+             `Option<&T>` implements `From<&Option<T>>`
+             `Option<&mut T>` implements `From<&mut Option<T>>`
+             `Option<T>` implements `From<T>`
+             `Option<T>` implements `From<subtle::CtOption<T>>`
+             `Option<deranged::RangedI128<MIN, MAX>>` implements `From<deranged::OptionRangedI128<MIN, MAX>>`
+             `Option<deranged::RangedI16<MIN, MAX>>` implements `From<deranged::OptionRangedI16<MIN, MAX>>`
+             `Option<deranged::RangedI32<MIN, MAX>>` implements `From<deranged::OptionRangedI32<MIN, MAX>>`
+             `Option<deranged::RangedI64<MIN, MAX>>` implements `From<deranged::OptionRangedI64<MIN, MAX>>`
+           and 8 others
+   = note: required for `&str` to implement `Into<Option<std::string::String>>`
+
+For more information about this error, try `rustc --explain E0277`.
+error: could not compile `patamaps-independent-native-consumer` (bin "memory") due to 2 previous errors

@@ -90,6 +90,25 @@ These are implementation limits, not demonstrated workload capacity or speed cla
 
 The implemented protected activator requires a separately installed root-owned executable and adjacent `trust.json` on a selected local Linux filesystem. A deployment binding in that trust record fixes the state directory and proposer roots. The proposer is an independent unprivileged UID and cannot choose the trust path, state root, host time, implementation binary or environment. Current host trust/grants/revocations and baseline are reread while holding a native lock through publication; root-owner `trust-update` uses that same lock and refuses implicit consumer/layout migrations. Descriptor-relative/no-follow file access and owner/type/link checks defend against substitutions. These mechanisms pass real Linux permission/crash acceptance at the [identified source snapshot](acceptance/linux-vm/native-tests.json); macOS refuses activation.
 
+The portable Rust `MemoryHost` implements a separate `patamaps-memory-draft-1`
+profile. Its externally selected provider returns current trust/time; incoming
+requests use the same closed `activation-request` and exact signed prepared
+artifacts. Memory trust has no Linux deployment binding. Consumer, environment
+and trust identity are fixed at construction. Exclusive mutable borrowing
+serializes transitions, and current authorization is repeated after preparation
+before assigning one immutable state. Refusal, provider failure and caught
+provider panic preserve the prior state. An exact retry checks current
+authorization against its original proposal baseline; other changes and
+rollback bind the actual current baseline.
+
+`memory-activation-manifest` has its own memory source executor, profile and
+`urn:patamaps:memory-activation:` address domain. Historical verification checks
+the address, predecessor, accepted trust/time, signature and complete artifact
+bytes. It does not establish current host authority or restore an active state.
+`MemoryState` has private fields and cannot deserialize. This API provides no
+filesystem persistence, independent-UID or crash guarantee; see
+[decision 0014](decisions/0014-governed-memory-host.md).
+
 ## Inspection and workspace boundaries
 
 `repair-request` supplies one verified capture, finite exact edits, permitted/protected scopes and safe integer work/time/output bounds. Repair emits candidate captures and patches; it never applies them. Approval actions are conservative proposed requirements, not grants. Cancellation and limit exhaustion report incomplete search; minimality is only within a completely explored declared finite space. See [decision 0007](decisions/0007-inspection-draft.md).

@@ -1,0 +1,1186 @@
+{
+  "status": "audit-inputs",
+  "referenceEngine": "399747a4ad05a37cd8db1cedd53048fad2175be4",
+  "scope": "Immutable Git source test descriptions and earlier native test destinations. Dynamic titles and assertion bodies require source review; names alone do not prove capability coverage.",
+  "suites": [
+    {
+      "suite": "activation",
+      "sourceRepository": "/Users/admin/dev/SEEDZ/metamap",
+      "sourceRevision": "399747a4ad05a37cd8db1cedd53048fad2175be4",
+      "sourcePath": "src/__tests__/activation.test.ts",
+      "digest": "sha256:6dfca3ed6262a23bf2efde347dd680a31503165f527a03a4666c98c7167be732",
+      "descriptions": [
+        "persistent generation activation",
+        "atomically retains the previous generation when a candidate is rejected"
+      ],
+      "nativeEvidenceCandidates": [
+        "crates/patamaps-activator/src/linux_tests.rs",
+        "crates/patamaps-activator/tests/transport.rs"
+      ],
+      "auditStatus": "source-indexed; semantic coverage not established by this index"
+    },
+    {
+      "suite": "adapter-registry",
+      "sourceRepository": "/Users/admin/dev/SEEDZ/metamap",
+      "sourceRevision": "399747a4ad05a37cd8db1cedd53048fad2175be4",
+      "sourcePath": "src/__tests__/adapter-registry.test.ts",
+      "digest": "sha256:0145fb07086d3b5249c158d240ecc768e4fc28445196e7b022487a78eb7227b8",
+      "descriptions": [
+        "adapter registry",
+        "ships a portable graph-shard adapter with the built-ins",
+        "discovers an open custom source and correspondence kind",
+        "fails loudly when an adapter was not registered"
+      ],
+      "nativeEvidenceCandidates": [
+        "crates/patamaps-workspace/tests/workspace.rs",
+        "crates/patamaps-workspace/src/process_tests.rs",
+        "crates/patamaps-core/tests/topology.rs"
+      ],
+      "auditStatus": "source-indexed; semantic coverage not established by this index"
+    },
+    {
+      "suite": "adapters",
+      "sourceRepository": "/Users/admin/dev/SEEDZ/metamap",
+      "sourceRevision": "399747a4ad05a37cd8db1cedd53048fad2175be4",
+      "sourcePath": "src/__tests__/adapters.test.ts",
+      "digest": "sha256:d1580d3825356a5e2b779be2340898d419e60b2edd1cb8f42fdd7a9fe0767342",
+      "descriptions": [
+        "repository adapters",
+        "discovers Prisma models, fields, enums, and stable locators",
+        "discovers Zod object fields, enums, and derivation chains",
+        "turns configured JSON records into references without copying domain data"
+      ],
+      "nativeEvidenceCandidates": [
+        "crates/patamaps-workspace/tests/workspace.rs",
+        "crates/patamaps-workspace/src/process_tests.rs",
+        "crates/patamaps-core/tests/topology.rs"
+      ],
+      "auditStatus": "source-indexed; semantic coverage not established by this index"
+    },
+    {
+      "suite": "application-topology",
+      "sourceRepository": "/Users/admin/dev/SEEDZ/metamap",
+      "sourceRevision": "399747a4ad05a37cd8db1cedd53048fad2175be4",
+      "sourcePath": "src/__tests__/application-topology.test.ts",
+      "digest": "sha256:5848bb255889ae1774408a11fb7d9e0c3c2aad0844cb43b50d5febf1228763df",
+      "descriptions": [
+        "application-topology constraints",
+        "validates total coverage, reachability, hydration, and context dominance",
+        "fails closed when a discovered page loses its semantic mapping",
+        "fails closed when a required context has no dominating provider",
+        "rejects exclusions unless the exact totality constraint permits them",
+        "rejects overlapping and stale mapping selectors"
+      ],
+      "nativeEvidenceCandidates": [
+        "crates/patamaps-workspace/tests/workspace.rs",
+        "crates/patamaps-workspace/src/process_tests.rs",
+        "crates/patamaps-core/tests/topology.rs"
+      ],
+      "auditStatus": "source-indexed; semantic coverage not established by this index"
+    },
+    {
+      "suite": "canonical",
+      "sourceRepository": "/Users/admin/dev/SEEDZ/metamap",
+      "sourceRevision": "399747a4ad05a37cd8db1cedd53048fad2175be4",
+      "sourcePath": "src/__tests__/canonical.test.ts",
+      "digest": "sha256:11a8f1be494295854f32c70875e15325d94d9940f590b59f4a07b0284ee9d6d1",
+      "descriptions": [
+        "RFC 8785 canonical values",
+        "materializes only legacy optional fields without executing getters or accepting undefined in new values",
+        "uses the normative UTF-16 property order, preserving array order and Unicode",
+        "serializes the RFC numerical examples with ECMAScript rounding and negative zero",
+        "hashes UTF-8 canonical bytes without altering the legacy convention",
+        "rejects cycles and accessors without evaluating them",
+        "retains prototype-like keys as ordinary JSON data and bounds nesting"
+      ],
+      "nativeEvidenceCandidates": [
+        "crates/patamaps-contracts/tests/canonical.rs",
+        "crates/patamaps-core/tests/kernel.rs"
+      ],
+      "auditStatus": "source-indexed; semantic coverage not established by this index"
+    },
+    {
+      "suite": "composer",
+      "sourceRepository": "/Users/admin/dev/SEEDZ/metamap",
+      "sourceRevision": "399747a4ad05a37cd8db1cedd53048fad2175be4",
+      "sourcePath": "src/__tests__/composer.test.ts",
+      "digest": "sha256:cdb2d592f75787e6ae2bbc17dc35bfc7bcc72122df49c69bdad8663e1dad6285",
+      "descriptions": [
+        "metamap composition",
+        "composes shards before resolving cross-shard references",
+        "rejects conflicting definitions for the same semantic identity"
+      ],
+      "nativeEvidenceCandidates": [
+        "crates/patamaps-contracts/tests/canonical.rs",
+        "crates/patamaps-core/tests/kernel.rs"
+      ],
+      "auditStatus": "source-indexed; semantic coverage not established by this index"
+    },
+    {
+      "suite": "config",
+      "sourceRepository": "/Users/admin/dev/SEEDZ/metamap",
+      "sourceRevision": "399747a4ad05a37cd8db1cedd53048fad2175be4",
+      "sourcePath": "src/__tests__/config.test.ts",
+      "digest": "sha256:538a4c9b294a02095d556b4a3b1a137ee1eda81447634720dd0524c5d86eb46e",
+      "descriptions": [
+        "workspace configuration",
+        "enforces the complete portable schema at runtime",
+        "enforces semantic uniqueness and source references",
+        "accepts exact reviewed Next.js topology exclusions"
+      ],
+      "nativeEvidenceCandidates": [
+        "crates/patamaps-workspace/tests/workspace.rs",
+        "crates/patamaps-workspace/src/process_tests.rs",
+        "crates/patamaps-core/tests/topology.rs"
+      ],
+      "auditStatus": "source-indexed; semantic coverage not established by this index"
+    },
+    {
+      "suite": "consumer-bindings",
+      "sourceRepository": "/Users/admin/dev/SEEDZ/metamap",
+      "sourceRevision": "399747a4ad05a37cd8db1cedd53048fad2175be4",
+      "sourcePath": "src/__tests__/consumer-bindings.test.ts",
+      "digest": "sha256:d837bcce4f356fde08dc659e67189dc4e5183403c998745d076849032c6113d8",
+      "descriptions": [
+        "independently owned native consumer bindings",
+        "records native source bytes through the existing snapshot inputs without modifying owned sources",
+        "rejects a changed captured module before replacing consumer artifacts",
+        "parses native inputs without executing their top-level code during generation"
+      ],
+      "nativeEvidenceCandidates": [
+        "crates/patamaps-core/tests/kernel.rs",
+        "crates/patamaps-projection/tests/projection.rs"
+      ],
+      "auditStatus": "source-indexed; semantic coverage not established by this index"
+    },
+    {
+      "suite": "correspondence",
+      "sourceRepository": "/Users/admin/dev/SEEDZ/metamap",
+      "sourceRevision": "399747a4ad05a37cd8db1cedd53048fad2175be4",
+      "sourcePath": "src/__tests__/correspondence.test.ts",
+      "digest": "sha256:6426c72188deecdd79915f30a4d0aec9b8ad1c3e1f8e5bac02024b21aabc727e",
+      "descriptions": [
+        "declared correspondences",
+        "materializes structure, field, concept, and authority references",
+        "reports an unwaived fact mismatch"
+      ],
+      "nativeEvidenceCandidates": [
+        "crates/patamaps-workspace/tests/workspace.rs",
+        "crates/patamaps-workspace/src/process_tests.rs",
+        "crates/patamaps-core/tests/topology.rs"
+      ],
+      "auditStatus": "source-indexed; semantic coverage not established by this index"
+    },
+    {
+      "suite": "counterfactual",
+      "sourceRepository": "/Users/admin/dev/SEEDZ/metamap",
+      "sourceRevision": "399747a4ad05a37cd8db1cedd53048fad2175be4",
+      "sourcePath": "src/__tests__/counterfactual.test.ts",
+      "digest": "sha256:8b85a53c529a1e044afa2f59557d633b7caea35daba167e8b3b179c0201c9414",
+      "descriptions": [
+        "read-only counterfactual comparison",
+        "reports no semantic changes for an identical evaluation",
+        "detects a removed handler and reports rejection without inventing activated removals",
+        "detects a second handler through the existing uniqueness rule",
+        "reports a changed authorization target even when the declared policy admits both candidates",
+        "reports lost supporting records separately from the evidence requirement violation",
+        "accepts stable locator moves and distinguishes metadata binding changes from runtime entry changes",
+        "detects missing declaration, lossy linkage, and lost authority without confusing their failure stages",
+        "reports context inhibition without graph changes or evidence loss",
+        "includes projection-only obligations in changed inputs and impact",
+        "keeps a removed context mapping as the origin of its failed consumers",
+        "does not turn unchanged failures into change origins for administrative metadata",
+        "retains explicitly changed diagnostic seeds without claiming runtime changes",
+        "does not traverse inhibited mappings when explaining a rejected candidate",
+        "reports path collisions without claiming the graph itself was rejected",
+        "rejects unverifiable inputs on either side and detects report corruption"
+      ],
+      "nativeEvidenceCandidates": [
+        "crates/patamaps-projection/tests/replay.rs",
+        "crates/patamaps-core/tests/kernel.rs"
+      ],
+      "auditStatus": "source-indexed; semantic coverage not established by this index"
+    },
+    {
+      "suite": "current-sources",
+      "sourceRepository": "/Users/admin/dev/SEEDZ/metamap",
+      "sourceRevision": "399747a4ad05a37cd8db1cedd53048fad2175be4",
+      "sourcePath": "src/__tests__/current-sources.test.ts",
+      "digest": "sha256:f7714fbd6869a523801ea0e57a05dd1d7d342f1353f5462b28a8677f111f4ade",
+      "descriptions": [
+        "explicit read-only current source inspection",
+        "captures and checks installed sources without creating caches or changing any input/output bytes",
+        "does not write a cache when disabled through the existing workspace API",
+        "detects changed raw bytes even when parsed graph values are identical",
+        "detects source fact/revision and emitted shard changes",
+        "detects changed configuration and removed/added source identities",
+        "detects an adapter-version difference against separately rediscovered installed outputs",
+        "detects changed relation-pack values without replacing the capture with current packs",
+        "requires explicit roots before any current-source reads",
+        "denies config/root/input traversal and symlink escapes before reading external source content",
+        "denies a nested symlink in a selected source directory",
+        "reports missing raw bytes and uninstalled adapters as unavailable, while graph replay remains valid",
+        "rejects lossy UTF-8 decoding instead of calling its text hash an exact raw-byte receipt"
+      ],
+      "nativeEvidenceCandidates": [
+        "crates/patamaps-projection/tests/replay.rs",
+        "crates/patamaps-core/tests/kernel.rs"
+      ],
+      "auditStatus": "source-indexed; semantic coverage not established by this index"
+    },
+    {
+      "suite": "debugger-native",
+      "sourceRepository": "/Users/admin/dev/SEEDZ/metamap",
+      "sourceRevision": "399747a4ad05a37cd8db1cedd53048fad2175be4",
+      "sourcePath": "src/__tests__/debugger-native.test.ts",
+      "digest": "sha256:6354b83bd8da79ff726da0e40c07000dd6818ab2e2fa0cac46b609fc0f0f4e69",
+      "descriptions": [
+        "distribution-backed local debugger and command",
+        "renders verified public scenarios and preserves source/input/existing output files"
+      ],
+      "nativeEvidenceCandidates": [
+        "crates/patamaps-inspect/tests/inspection.rs",
+        "scripts/test_inspection.py"
+      ],
+      "auditStatus": "source-indexed; semantic coverage not established by this index"
+    },
+    {
+      "suite": "debugger",
+      "sourceRepository": "/Users/admin/dev/SEEDZ/metamap",
+      "sourceRevision": "399747a4ad05a37cd8db1cedd53048fad2175be4",
+      "sourcePath": "src/__tests__/debugger.test.ts",
+      "digest": "sha256:f299b729606d4d8c19c62b7428303250372ca8faeee7e0fa8b9caa790da2bb55",
+      "descriptions": [
+        "static local debugger over the shared explanation",
+        "escapes labels, literal executable-looking locators and JSON evidence",
+        "binds its only inline style to the fixed content security policy hash",
+        "renders an explicit missing selection without inventing bindings or source membership",
+        "retains both duplicate records and unavailable proof/authority states",
+        "rejects a rehashed explanation that changes its checked record or authority",
+        "preserves the complete report and deterministic local-only output"
+      ],
+      "nativeEvidenceCandidates": [
+        "crates/patamaps-inspect/tests/inspection.rs",
+        "scripts/test_inspection.py"
+      ],
+      "auditStatus": "source-indexed; semantic coverage not established by this index"
+    },
+    {
+      "suite": "derivation",
+      "sourceRepository": "/Users/admin/dev/SEEDZ/metamap",
+      "sourceRevision": "399747a4ad05a37cd8db1cedd53048fad2175be4",
+      "sourcePath": "src/__tests__/derivation.test.ts",
+      "digest": "sha256:0968b5db94152173a4f012d57c635877e7536c0cc9757d0f8a3276df3cfe391f",
+      "descriptions": [
+        "bounded, explicit correspondence derivation",
+        "satisfies the fixed allowed-chain expectation without graph writes or authority transfer",
+        "checks an explicitly included proposal and rejects its absence",
+        "rejects changed premise bytes even when endpoints and relation remain unchanged",
+        "rejects a changed full context and a changed exact pack",
+        "does not authorize an unregistered close-match chain or strengthen it to identity",
+        "requires a registered law even when legacy transitive metadata is present",
+        "checks reverse operands without deriving equivalence or copying scalar confidence",
+        "requires ordered operands and the exact middle identity",
+        "reports absent premises, unsupported n-ary operands, and transform composition",
+        "reports missing context as unknown and a false condition as rejected",
+        "checks kind guards on actual endpoints",
+        "captures nested proof dependencies, enforces depth and counts shared proofs once",
+        "rejects tampering, stale results, missing proof records, and conflicting stable IDs",
+        "rejects recomputed proof claims that erase loss or dependency limits",
+        "rejects duplicate untrusted JSON keys before interpreting a request",
+        "binds the optional schema field and uses stable content-addressed IDs",
+        "checks disjointness only among active facts and keeps alternatives possible"
+      ],
+      "nativeEvidenceCandidates": [
+        "crates/patamaps-core/tests/derivation.rs",
+        "crates/patamaps-projection/tests/path_tree.rs",
+        "crates/patamaps-projection/tests/risk.rs"
+      ],
+      "auditStatus": "source-indexed; semantic coverage not established by this index"
+    },
+    {
+      "suite": "diff",
+      "sourceRepository": "/Users/admin/dev/SEEDZ/metamap",
+      "sourceRevision": "399747a4ad05a37cd8db1cedd53048fad2175be4",
+      "sourcePath": "src/__tests__/diff.test.ts",
+      "digest": "sha256:750784c81248a633b9caaf2c9cd357e6bf496fde26944e37ecd1b2b6909a1f6d",
+      "descriptions": [
+        "graph diff",
+        "detects added, removed, and changed records by stable identity"
+      ],
+      "nativeEvidenceCandidates": [
+        "crates/patamaps-projection/tests/replay.rs",
+        "crates/patamaps-core/tests/kernel.rs"
+      ],
+      "auditStatus": "source-indexed; semantic coverage not established by this index"
+    },
+    {
+      "suite": "executable-pack",
+      "sourceRepository": "/Users/admin/dev/SEEDZ/metamap",
+      "sourceRevision": "399747a4ad05a37cd8db1cedd53048fad2175be4",
+      "sourcePath": "src/__tests__/executable-pack.test.ts",
+      "digest": "sha256:b7f15a72564f40d59c6307bdf83d3a81dd7ee0dfc6d764b966cdbf693ae82b41",
+      "descriptions": [
+        "explicit executable pack profile",
+        "requires the exact declared imports and freezes a copied executable definition",
+        "retains the original legacy pack digest convention",
+        "rejects law references outside explicitly imported definitions",
+        "rejects missing, changed, repeated and self imports",
+        "detects a legacy dependency object drifting after executable registration",
+        "checks a nested executable dependency",
+        "requires unconditional executable laws for a new transitive/symmetric/inverse claim",
+        "rejects transitivity contradicted by the relation and impossible endpoint kinds",
+        "rejects duplicate law IDs and does not partially register a rejected pack",
+        "rejects duplicate decoded JSON properties when loading an executable pack"
+      ],
+      "nativeEvidenceCandidates": [
+        "crates/patamaps-core/tests/derivation.rs",
+        "crates/patamaps-projection/tests/path_tree.rs",
+        "crates/patamaps-projection/tests/risk.rs"
+      ],
+      "auditStatus": "source-indexed; semantic coverage not established by this index"
+    },
+    {
+      "suite": "explanation-native",
+      "sourceRepository": "/Users/admin/dev/SEEDZ/metamap",
+      "sourceRevision": "399747a4ad05a37cd8db1cedd53048fad2175be4",
+      "sourcePath": "src/__tests__/explanation-native.test.ts",
+      "digest": "sha256:cfa0b7c4ddaacdd4b5de5c59754b66b34d4aa2b055d60f668393f653991db65c",
+      "descriptions": [
+        "distribution-backed explanation and command",
+        "uses one verified report for public API and strict command, preserving sources"
+      ],
+      "nativeEvidenceCandidates": [
+        "crates/patamaps-inspect/tests/inspection.rs",
+        "scripts/test_inspection.py"
+      ],
+      "auditStatus": "source-indexed; semantic coverage not established by this index"
+    },
+    {
+      "suite": "explanation",
+      "sourceRepository": "/Users/admin/dev/SEEDZ/metamap",
+      "sourceRevision": "399747a4ad05a37cd8db1cedd53048fad2175be4",
+      "sourcePath": "src/__tests__/explanation.test.ts",
+      "digest": "sha256:e48593f33704337b7ec439ef866c079c45226164da9ae96069d789a1813d1754",
+      "descriptions": [
+        "shared captured explanations",
+        "navigates the generated operation, actual schema slot and checked proof premises",
+        "retains the missing premise origin and original compiler issue subjects",
+        "keeps a failed consumer slot subject separate from its actual removed input",
+        "shows scoped owner and delegation declarations without treating them as grants",
+        "retains a bad recorded rule without inventing a checked rule match",
+        "requires the exact pack digest before exposing a recorded law match",
+        "retains contradictory evidence and recorded measurement model in a rejected capture",
+        "shows actual whole-projection risk charges, including premise charges",
+        "retains the risk-budget rejection with unavailable runtime bindings",
+        "shows a missing slot and a path-tree failure using their original issue stages",
+        "makes missing subjects and empty selected entries explicit",
+        "preserves duplicate mapping occurrences and declines an ambiguous comparison",
+        "preserves duplicate entity records without silently selecting a kind or label",
+        "discloses focus truncation while keeping the explicitly selected record",
+        "retains multiple observed change origins and no uniquely proven cause",
+        "compares identical verified captures without fabricating input changes",
+        "exposes supplied legal, blocked and rejected alternatives without applying them",
+        "rejects supplied repairs for a different capture even after request rehashing",
+        "rejects a different graph baseline and unknown consumer or unrelated projection",
+        "rejects falsified replay output despite updated content hashes",
+        "rejects duplicate keys, unknown fields, future versions and invalid limits",
+        "round-trips the same complete report without changing input objects or their evidence"
+      ],
+      "nativeEvidenceCandidates": [
+        "crates/patamaps-inspect/tests/inspection.rs",
+        "scripts/test_inspection.py"
+      ],
+      "auditStatus": "source-indexed; semantic coverage not established by this index"
+    },
+    {
+      "suite": "governance-native",
+      "sourceRepository": "/Users/admin/dev/SEEDZ/metamap",
+      "sourceRevision": "399747a4ad05a37cd8db1cedd53048fad2175be4",
+      "sourcePath": "src/__tests__/governance-native.test.ts",
+      "digest": "sha256:b0c58891a34f8207671bb509bdcb155db09bc8c4daf53b64395af289ccc05e74",
+      "descriptions": [
+        "verifies the public approval API and executes the exact reviewed native consumer bytes"
+      ],
+      "nativeEvidenceCandidates": [
+        "crates/patamaps-governance/tests/governance.rs",
+        "scripts/test_governance.mjs"
+      ],
+      "auditStatus": "source-indexed; semantic coverage not established by this index"
+    },
+    {
+      "suite": "governance",
+      "sourceRepository": "/Users/admin/dev/SEEDZ/metamap",
+      "sourceRevision": "399747a4ad05a37cd8db1cedd53048fad2175be4",
+      "sourcePath": "src/__tests__/governance.test.ts",
+      "digest": "sha256:30e43bd343d9cfae29870d2f0eb65f67c72a54edd26edf4184f2c3ba5db65257",
+      "descriptions": [
+        "fixed governance cryptography and strict inputs",
+        "verifies RFC 8032 section 7.1 test 1 without using any signer",
+        "accepts an approval signed through independent WebCrypto over the published JCS payload",
+        "requires an exact Ed25519 public key, canonical base64 and a 64-byte signature",
+        "rejects duplicate, escaped duplicate, unsupported and invalid-Unicode signed/configuration inputs",
+        "rejects getters, toJSON, undefined and unsafe manifest integers without invoking code",
+        "exact unapproved proposals and byte manifests",
+        "preserves complete input values, emits native outputs and grants no permission by construction",
+        "rejects removed delta requirements even with recomputed proposal addresses",
+        "rejects a failed evaluation, missing/wrong consumer projections and unrequested rollback bootstrap",
+        "checks content addresses over every field including schema metadata",
+        "current externally scoped approval verification",
+        "rejects a shared public key assigned to independent principal identities",
+        "rejects an invalid assessment revision before a proposal can be approved",
+        "requires owner approval to remove a working constraint or broaden uncertainty acceptance",
+        "combines explicitly selected grants without combining an action from one with an unrelated fact from another",
+        "rejects a correctly signed reduced action list and graph-supplied trusted configuration",
+        "accepts exactly scoped owner approval and repeats pure verification without state writes",
+        "allows an externally granted agent implementation rebinding without granting ownership",
+        "rejects wrong environment, stale trust and a separately supplied stale protected baseline",
+        "binds rollback intent separately and ignores graph-supplied trust/key material"
+      ],
+      "nativeEvidenceCandidates": [
+        "crates/patamaps-governance/tests/governance.rs",
+        "scripts/test_governance.mjs"
+      ],
+      "auditStatus": "source-indexed; semantic coverage not established by this index"
+    },
+    {
+      "suite": "governed-activation",
+      "sourceRepository": "/Users/admin/dev/SEEDZ/metamap",
+      "sourceRevision": "399747a4ad05a37cd8db1cedd53048fad2175be4",
+      "sourcePath": "src/__tests__/governed-activation.test.ts",
+      "digest": "sha256:243d4df7d9dc0d406075bbcda2cc69423adc222fd5a5043d16c359cb2a7d77a5",
+      "descriptions": [
+        "governed activation through the existing in-memory interface",
+        "atomically exposes one immutable, exact signed consumer state",
+        "requires the host to opt in; a request cannot select its trust root",
+        "makes only an identical still-authorized retry idempotent",
+        "reads fresh trust and refuses revoked approval without retiring active state",
+        "rejects agent self-approval and a legacy fallback even with a viable v1 graph",
+        "rejects stale-base deployment and requires a fresh owner-authorized rollback",
+        "reports an unavailable trusted host without changing current state",
+        "activation manifest and strict wire integrity",
+        "rejects duplicate request fields, path traversal and caller clocks",
+        "requires an exact pointer identity and validates previous artifact bytes"
+      ],
+      "nativeEvidenceCandidates": [
+        "crates/patamaps-activator/src/linux_tests.rs",
+        "crates/patamaps-activator/tests/transport.rs"
+      ],
+      "auditStatus": "source-indexed; semantic coverage not established by this index"
+    },
+    {
+      "suite": "graph",
+      "sourceRepository": "/Users/admin/dev/SEEDZ/metamap",
+      "sourceRevision": "399747a4ad05a37cd8db1cedd53048fad2175be4",
+      "sourcePath": "src/__tests__/graph.test.ts",
+      "digest": "sha256:1fab977e680d26f78b58ea77b8da355a6b7110db0657ae40907dbf8c176c887e",
+      "descriptions": [
+        "MetamapGraph",
+        "traverses typed structural correspondences",
+        "resolves authority for an individual fact",
+        "does not treat unrelated facts as resolved",
+        "resolves an explicit delegation chain to its effective owner"
+      ],
+      "nativeEvidenceCandidates": [
+        "crates/patamaps-contracts/tests/canonical.rs",
+        "crates/patamaps-core/tests/kernel.rs"
+      ],
+      "auditStatus": "source-indexed; semantic coverage not established by this index"
+    },
+    {
+      "suite": "legacy-adapter",
+      "sourceRepository": "/Users/admin/dev/SEEDZ/metamap",
+      "sourceRevision": "399747a4ad05a37cd8db1cedd53048fad2175be4",
+      "sourcePath": "src/__tests__/legacy-adapter.test.ts",
+      "digest": "sha256:cc824416f1977765445fe93492774d06b646c99210c62f1cd33f1356343a80f6",
+      "descriptions": [
+        "legacy sources-of-truth adapter",
+        "imports the current catalog without inventing ambiguous authority"
+      ],
+      "nativeEvidenceCandidates": [
+        "crates/patamaps-workspace/tests/workspace.rs",
+        "crates/patamaps-workspace/src/process_tests.rs",
+        "crates/patamaps-core/tests/topology.rs"
+      ],
+      "auditStatus": "source-indexed; semantic coverage not established by this index"
+    },
+    {
+      "suite": "legacy-compatibility",
+      "sourceRepository": "/Users/admin/dev/SEEDZ/metamap",
+      "sourceRevision": "399747a4ad05a37cd8db1cedd53048fad2175be4",
+      "sourcePath": "src/__tests__/legacy-compatibility.test.ts",
+      "digest": "sha256:9a60510035cab17b369b34e26dc5811908fa36fe478a3510c75de0b0b9838a22",
+      "descriptions": [
+        "published legacy contract compatibility",
+        "preserves every existing schema and relation-pack byte identity"
+      ],
+      "nativeEvidenceCandidates": [
+        "scripts/test_binding_matrix.py",
+        "scripts/test_scientific.py",
+        "crates/patamaps-activator/src/linux_tests.rs"
+      ],
+      "auditStatus": "source-indexed; semantic coverage not established by this index"
+    },
+    {
+      "suite": "lifecycle-native",
+      "sourceRepository": "/Users/admin/dev/SEEDZ/metamap",
+      "sourceRevision": "399747a4ad05a37cd8db1cedd53048fad2175be4",
+      "sourcePath": "src/__tests__/lifecycle-native.test.ts",
+      "digest": "sha256:32e79668b861906f595c47d60e66798d07f55a9fd37fcd52c4cd6c2d6612ad50",
+      "descriptions": [
+        "runs the public governed lifecycle and native bindings while preserving active state on negative cases"
+      ],
+      "nativeEvidenceCandidates": [
+        "scripts/test_binding_matrix.py",
+        "scripts/test_scientific.py",
+        "crates/patamaps-activator/src/linux_tests.rs",
+        "crates/patamaps-activator/tests/transport.rs",
+        "scripts/test_lifecycle_pure.py"
+      ],
+      "auditStatus": "source-indexed; semantic coverage not established by this index"
+    },
+    {
+      "suite": "metamap-shard",
+      "sourceRepository": "/Users/admin/dev/SEEDZ/metamap",
+      "sourceRevision": "399747a4ad05a37cd8db1cedd53048fad2175be4",
+      "sourcePath": "src/__tests__/metamap-shard.test.ts",
+      "digest": "sha256:23eca26ad537f01bd50d3a4f138400b78420dca358b04e6fa11c9f84ea19e565",
+      "descriptions": [
+        "portable Metamap shard adapter",
+        "imports a shard emitted outside the core adapter runtime",
+        "loads configured relation semantics into workspace validation"
+      ],
+      "nativeEvidenceCandidates": [
+        "crates/patamaps-workspace/tests/workspace.rs",
+        "crates/patamaps-workspace/src/process_tests.rs",
+        "crates/patamaps-core/tests/topology.rs"
+      ],
+      "auditStatus": "source-indexed; semantic coverage not established by this index"
+    },
+    {
+      "suite": "nextjs-app-router",
+      "sourceRepository": "/Users/admin/dev/SEEDZ/metamap",
+      "sourceRevision": "399747a4ad05a37cd8db1cedd53048fad2175be4",
+      "sourcePath": "src/__tests__/nextjs-app-router.test.ts",
+      "digest": "sha256:96095bffb1d935048f64df86029836ccbe0c0fb2f983cfc0349710e24646b7bd",
+      "descriptions": [
+        "Next.js App Router adapter",
+        "discovers pages, containers, providers, loaders, boundaries, hydration, dynamic parameters, and route handlers",
+        "reports stale exclusions instead of silently accepting them"
+      ],
+      "nativeEvidenceCandidates": [
+        "crates/patamaps-workspace/tests/workspace.rs",
+        "crates/patamaps-workspace/src/process_tests.rs",
+        "crates/patamaps-core/tests/topology.rs"
+      ],
+      "auditStatus": "source-indexed; semantic coverage not established by this index"
+    },
+    {
+      "suite": "path-tree",
+      "sourceRepository": "/Users/admin/dev/SEEDZ/metamap",
+      "sourceRevision": "399747a4ad05a37cd8db1cedd53048fad2175be4",
+      "sourcePath": "src/__tests__/path-tree.test.ts",
+      "digest": "sha256:825763a403de9d2c0ba3bc7f51bf77da757ebd36289396e70d47722dec066fdc",
+      "descriptions": [
+        "nested path-tree compiler",
+        "compiles a nested tree with _ paths and $ occupants",
+        "hydrates :params without mutating the compiled tree",
+        "emits a typed hydrate helper",
+        "hydrates catch-all and optional catch-all parameters",
+        "rejects missing paths, collisions, reserved segments, and undeclared pathTree"
+      ],
+      "nativeEvidenceCandidates": [
+        "crates/patamaps-core/tests/derivation.rs",
+        "crates/patamaps-projection/tests/path_tree.rs",
+        "crates/patamaps-projection/tests/risk.rs"
+      ],
+      "auditStatus": "source-indexed; semantic coverage not established by this index"
+    },
+    {
+      "suite": "projection",
+      "sourceRepository": "/Users/admin/dev/SEEDZ/metamap",
+      "sourceRevision": "399747a4ad05a37cd8db1cedd53048fad2175be4",
+      "sourcePath": "src/__tests__/projection.test.ts",
+      "digest": "sha256:e892beb5b467e64a88ef086f23e631f2c69a6daeb7010b4aac2c722b9408e3e6",
+      "descriptions": [
+        "static projection compiler",
+        "compiles an immutable, content-addressed routing table",
+        "emits a typed dependency-free TypeScript lookup",
+        "emits enum-like identity unions without relation slots",
+        "rejects stale generations and ambiguous handler resolution",
+        "rejects inactive required links, disallowed target kinds, and lossy links",
+        "validates duplicate slots before compilation"
+      ],
+      "nativeEvidenceCandidates": [
+        "crates/patamaps-core/tests/kernel.rs",
+        "crates/patamaps-projection/tests/projection.rs"
+      ],
+      "auditStatus": "source-indexed; semantic coverage not established by this index"
+    },
+    {
+      "suite": "protected-activation",
+      "sourceRepository": "/Users/admin/dev/SEEDZ/metamap",
+      "sourceRevision": "399747a4ad05a37cd8db1cedd53048fad2175be4",
+      "sourcePath": "src/__tests__/protected-activation.test.ts",
+      "digest": "sha256:a09d969884c3247f89d421876685c7966bbe8556c5e66a2b0e3c72ae31c464df",
+      "descriptions": [
+        "strict protected activation transport",
+        "rejects invalid UTF-8, duplicate JSON and candidate clock/config fields",
+        "bounds the wire before parsing large data",
+        "publishes exact bytes, makes authorized retries unchanged, and executes a protected native consumer",
+        "rejects agent approval, swapped request files and owner trust changes without retiring state",
+        "uses fixed owner wrapper and CLI current clocks; rejects caller options and strict wire duplicates",
+        "rejects unprotected deployment paths and proposal roots overlapping trust/state",
+        "rejects linked configuration files without following them or publishing state",
+        "rejects proposer-owned active files even when their signed bytes remain valid",
+        "serializes concurrent stale-base proposals and exposes complete old/new reads",
+        "requires fresh current-base owner approval for rollback and reports a post-commit response failure honestly"
+      ],
+      "nativeEvidenceCandidates": [
+        "crates/patamaps-activator/src/linux_tests.rs",
+        "crates/patamaps-activator/tests/transport.rs"
+      ],
+      "auditStatus": "source-indexed; semantic coverage not established by this index"
+    },
+    {
+      "suite": "provenance",
+      "sourceRepository": "/Users/admin/dev/SEEDZ/metamap",
+      "sourceRevision": "399747a4ad05a37cd8db1cedd53048fad2175be4",
+      "sourcePath": "src/__tests__/provenance.test.ts",
+      "digest": "sha256:a323b09a65b8cbe8c30886dd98a0e0a2081b530fab18854e526ac9aad634ef14",
+      "descriptions": [
+        "complete recorded source lineage",
+        "reconstructs the existing workspace and binds each configuration, input and shard without mutating records",
+        "keeps JCS receipt/capture bindings and referenced legacy graph/snapshot digests distinct",
+        "requires exactly the configured source inventory, including source order and adapter identity",
+        "rejects missing, duplicated, modified and unbound exact source relation packs",
+        "rejects duplicate input paths and decoded JSON keys, extra members and unknown versions",
+        "rejects missing receipts and all altered snapshot bindings",
+        "derives an explicit content revision when an adapter shard has no declared revision",
+        "shows source/candidate changes and raw rediscovery/authentication/authorization as separate states",
+        "reports metadata-only graph changes even when no semantic record changes exist",
+        "compares explicit new captures, including adapter, revision, configuration and shard changes",
+        "does not execute accessors or serialize arbitrary producer objects",
+        "refuses a factory with absent exact pack values rather than substituting current packs",
+        "records custom adapter outputs without installing or executing a module named by their configuration",
+        "reproduces the committed source capture from the fixed local example files in CI",
+        "captures a legacy relation-pack workspace through the explicit portable reference profile"
+      ],
+      "nativeEvidenceCandidates": [
+        "crates/patamaps-projection/tests/replay.rs",
+        "crates/patamaps-core/tests/kernel.rs"
+      ],
+      "auditStatus": "source-indexed; semantic coverage not established by this index"
+    },
+    {
+      "suite": "relation-pack",
+      "sourceRepository": "/Users/admin/dev/SEEDZ/metamap",
+      "sourceRevision": "399747a4ad05a37cd8db1cedd53048fad2175be4",
+      "sourcePath": "src/__tests__/relation-pack.test.ts",
+      "digest": "sha256:22ff10b61cd06b0abf76dbf8c1d975d003a0da96ad10e49a454c776588d6c064",
+      "descriptions": [
+        "core relation pack",
+        "keeps the portable JSON pack aligned with the TypeScript registry"
+      ],
+      "nativeEvidenceCandidates": [
+        "crates/patamaps-contracts/tests/canonical.rs",
+        "crates/patamaps-core/tests/kernel.rs"
+      ],
+      "auditStatus": "source-indexed; semantic coverage not established by this index"
+    },
+    {
+      "suite": "repair-native",
+      "sourceRepository": "/Users/admin/dev/SEEDZ/metamap",
+      "sourceRevision": "399747a4ad05a37cd8db1cedd53048fad2175be4",
+      "sourcePath": "src/__tests__/repair-native.test.ts",
+      "digest": "sha256:ac89609ee5121271dad62fef6f6fb879f4390225c741e3a0032f32a613932afc",
+      "descriptions": [
+        "distribution-backed repair and native consumer",
+        "executes supplied repaired providers, native paths and the strict read-only command"
+      ],
+      "nativeEvidenceCandidates": [
+        "crates/patamaps-inspect/tests/inspection.rs",
+        "scripts/test_inspection.py"
+      ],
+      "auditStatus": "source-indexed; semantic coverage not established by this index"
+    },
+    {
+      "suite": "repair",
+      "sourceRepository": "/Users/admin/dev/SEEDZ/metamap",
+      "sourceRevision": "399747a4ad05a37cd8db1cedd53048fad2175be4",
+      "sourcePath": "src/__tests__/repair.test.ts",
+      "digest": "sha256:7568b50c568bb15700136c1a2a7963f63c527826c550c4795b2875201b944319",
+      "descriptions": [
+        "bounded read-only repair using the existing compiler",
+        "restores a supplied mapping with explicit binding updates and owner-review requirements",
+        "rejects an equally small incompatible target and retains the actual consumer failure",
+        "selects a supplied captured target and blocks an invented entity",
+        "removes an exact duplicate and refuses an arbitrary deletion",
+        "repairs a missing mapping and declaration together while preserving all policy protections",
+        "supplies only a missing effective declaration",
+        "keeps the existing risk budget rejection instead of raising limits",
+        "rejects a captured policy depth outside the supplied bound",
+        "rejects duplicate JSON, content changes and a rehashed false baseline evaluation",
+        "blocks stale digests, a changed duplicate keeper and cost overflow",
+        "recomputes patch, authorization, coverage, ranking and minimum claims after rehashing",
+        "ranks by changed records, declared cost and stable identity regardless of input edit order",
+        "rejects a changed proof premise through the shared compiler without inventing a replacement proof",
+        "supports cancellation between completed candidates without applying any result",
+        "reports an empty explicit search space without a global impossibility claim",
+        "counts a large finite space exactly while starting only the bounded candidate count"
+      ],
+      "nativeEvidenceCandidates": [
+        "crates/patamaps-inspect/tests/inspection.rs",
+        "scripts/test_inspection.py"
+      ],
+      "auditStatus": "source-indexed; semantic coverage not established by this index"
+    },
+    {
+      "suite": "replay",
+      "sourceRepository": "/Users/admin/dev/SEEDZ/metamap",
+      "sourceRevision": "399747a4ad05a37cd8db1cedd53048fad2175be4",
+      "sourcePath": "src/__tests__/replay.test.ts",
+      "digest": "sha256:37708c8b28c171bbff92d59e9ebafbd81ed1028e7d77d2d605a020846e491ae3",
+      "descriptions": [
+        "compiler replay contract",
+        "round-trips the compiler and static projection without changing legacy generations or caller inputs",
+        "reproduces nested path trees with the same generation and projection bindings",
+        "captures explicit context and evaluation time instead of reading a new clock during replay",
+        "rejects malformed and unsupported portable contracts before replay",
+        "detects changed inputs and identities without silently accepting a new content address",
+        "recomputes results and rejects a forged expected generation even after the bundle is rehashed",
+        "rejects a different installed compiler, dependency payload, or runtime",
+        "rejects missing, substituted, and duplicate relation-pack dependencies",
+        "reproduces rejected compilation without upgrading it to admission",
+        "keeps projection rejection distinct from successful graph compilation",
+        "requires explicit executor support and unambiguous projection identities"
+      ],
+      "nativeEvidenceCandidates": [
+        "crates/patamaps-projection/tests/replay.rs",
+        "crates/patamaps-core/tests/kernel.rs"
+      ],
+      "auditStatus": "source-indexed; semantic coverage not established by this index"
+    },
+    {
+      "suite": "risk",
+      "sourceRepository": "/Users/admin/dev/SEEDZ/metamap",
+      "sourceRevision": "399747a4ad05a37cd8db1cedd53048fad2175be4",
+      "sourcePath": "src/__tests__/risk.test.ts",
+      "digest": "sha256:9f99ba97c363ffcd6766c27b554bf1d373e9e1de904d9ed9b95b2821bc84cfeb",
+      "descriptions": [
+        "consumer correspondence budgets",
+        "rejects a typed policy option in a legacy projection rather than ignoring it",
+        "meets the frozen below/at/above acceptance with explicit zero cost for the derived edge",
+        "counts shared dependency paths once while retaining identical recorded uncertainty",
+        "excludes unused and inactive mappings even when their cost is large or their classification is absent",
+        "rejects missing classifications instead of assigning implicit zero",
+        "rejects overlapping classes even when they specify the same zero cost",
+        "does not let an unrelated cheaper budget or null bypass the consumer budget",
+        "requires matching full policy values for a typed generation",
+        "rejects integer overflow before reporting or comparing a rounded total",
+        "allows the declared inferred limit at equality and rejects above it",
+        "allows lossiness only with a matching static slot and consumer count limit",
+        "binds a changed budget into both generation and projection despite unchanged bindings",
+        "rejects hash-consistent risk totals, missing classifications and invented zero evaluation"
+      ],
+      "nativeEvidenceCandidates": [
+        "crates/patamaps-core/tests/uncertainty.rs",
+        "crates/patamaps-projection/tests/risk.rs"
+      ],
+      "auditStatus": "source-indexed; semantic coverage not established by this index"
+    },
+    {
+      "suite": "schema-contract",
+      "sourceRepository": "/Users/admin/dev/SEEDZ/metamap",
+      "sourceRevision": "399747a4ad05a37cd8db1cedd53048fad2175be4",
+      "sourcePath": "src/__tests__/schema-contract.test.ts",
+      "digest": "sha256:cbc15c8fa519459d9fa95fc52c8f6583981ffbe3d3e03f7229f62544b87acce9",
+      "descriptions": [
+        "portable JSON contracts",
+        "strictly validates the repository config, example graph, and relation pack"
+      ],
+      "nativeEvidenceCandidates": [
+        "crates/patamaps-contracts/tests/canonical.rs",
+        "crates/patamaps-core/tests/kernel.rs"
+      ],
+      "auditStatus": "source-indexed; semantic coverage not established by this index"
+    },
+    {
+      "suite": "scientific-crate",
+      "sourceRepository": "/Users/admin/dev/SEEDZ/metamap",
+      "sourceRevision": "399747a4ad05a37cd8db1cedd53048fad2175be4",
+      "sourcePath": "src/__tests__/scientific-crate.test.ts",
+      "digest": "sha256:0f19086ab57d6ea0210e48a4fc935d431a3516137a5bb40420bcad215b6cf3a2",
+      "descriptions": [
+        "checks included exact raw bytes against receipts and captured interpretation and recomputes native output",
+        "keeps missing raw input as a reference without claiming an embedded payload",
+        "rejects wrong raw bytes and extra payload files before presenting verified provenance"
+      ],
+      "nativeEvidenceCandidates": [
+        "crates/patamaps-scientific/tests/sssom.rs",
+        "crates/patamaps-scientific/tests/crate.rs"
+      ],
+      "auditStatus": "source-indexed; semantic coverage not established by this index"
+    },
+    {
+      "suite": "scientific-source-native",
+      "sourceRepository": "/Users/admin/dev/SEEDZ/metamap",
+      "sourceRevision": "399747a4ad05a37cd8db1cedd53048fad2175be4",
+      "sourcePath": "src/__tests__/scientific-source-native.test.ts",
+      "digest": "sha256:26b19e9c229814ad0134866de3a477799524e82722e089d9d02719d627ac05da",
+      "descriptions": [
+        "installed scientific source API and command",
+        "imports the pinned subset, preserves its export and executes read-only source/replay commands",
+        "executes and typechecks a distinct five-relation consumer with proof, budgets and a checked provenance crate"
+      ],
+      "nativeEvidenceCandidates": [
+        "crates/patamaps-scientific/tests/sssom.rs",
+        "crates/patamaps-scientific/tests/crate.rs"
+      ],
+      "auditStatus": "source-indexed; semantic coverage not established by this index"
+    },
+    {
+      "suite": "scientific-source",
+      "sourceRepository": "/Users/admin/dev/SEEDZ/metamap",
+      "sourceRevision": "399747a4ad05a37cd8db1cedd53048fad2175be4",
+      "sourcePath": "src/__tests__/scientific-source.test.ts",
+      "digest": "sha256:7347ae99a5e8e527989357aa8d2a0b511e9fef6fd662413e5b104f6582e5a4f7",
+      "descriptions": [
+        "SSSOM discovery through complete source-bound replay",
+        "reports changed raw metadata bytes while captured historical replay remains independent of live reads",
+        "binds source revision and declared selection context without changing ontology entity IDs or granting authority",
+        "rejects a valid prior signature after source revision/context substitution",
+        "rejects a symlink escape through the external metadata path before adapter reading",
+        "bounded normative SKOS laws without pragmatic chaining or identity inference",
+        "records exact-chain proof with all six uncertainty dimensions unknown and no derived authority",
+        "reverses broad as narrow and retains the original direction of both raw assertions"
+      ],
+      "nativeEvidenceCandidates": [
+        "crates/patamaps-scientific/tests/sssom.rs",
+        "crates/patamaps-scientific/tests/crate.rs"
+      ],
+      "auditStatus": "source-indexed; semantic coverage not established by this index"
+    },
+    {
+      "suite": "semantic-counterfactual",
+      "sourceRepository": "/Users/admin/dev/SEEDZ/metamap",
+      "sourceRevision": "399747a4ad05a37cd8db1cedd53048fad2175be4",
+      "sourcePath": "src/__tests__/semantic-counterfactual.test.ts",
+      "digest": "sha256:4d30854bec1c522bc265df892724a9425b68739185af883ac4af383d040a8b1f",
+      "descriptions": [
+        "semantic counterfactual comparisons",
+        "reports no changed semantics for an identical reproduced evaluation",
+        "explains a removed premise through the captured proof without inventing deactivations",
+        "compares lost proofs separately from graph changes",
+        "reports explicit projection changes without inferring a cost or extra confidence",
+        "captures incomplete consumer classification as projection rejection and reports its input change",
+        "refuses mixed profiles and unverified captures",
+        "rejects hash-consistent reports that pretend an unavailable projection has a measured delta",
+        "rejects duplicate decoded keys in report JSON"
+      ],
+      "nativeEvidenceCandidates": [
+        "crates/patamaps-core/tests/derivation.rs",
+        "crates/patamaps-projection/tests/path_tree.rs",
+        "crates/patamaps-projection/tests/risk.rs"
+      ],
+      "auditStatus": "source-indexed; semantic coverage not established by this index"
+    },
+    {
+      "suite": "semantic-projection",
+      "sourceRepository": "/Users/admin/dev/SEEDZ/metamap",
+      "sourceRevision": "399747a4ad05a37cd8db1cedd53048fad2175be4",
+      "sourcePath": "src/__tests__/semantic-projection.test.ts",
+      "digest": "sha256:6bf1eefd0ebe7773b7c3d5bcce72a111c15eef94a83249edd0e47c5a2a7192e6",
+      "descriptions": [
+        "proof-carrying static expressions",
+        "binds the actual semantic generation, consumer and spec with a complete proof closure",
+        "counts a shared mapping closure once across slots and excludes unused or inactive mappings",
+        "rejects a stale graph and a substituted relation pack",
+        "rejects a rehashed generation with missing proof, changed context or incomplete dependencies",
+        "rejects self-consistent projection hashes that conceal dependencies, proofs, or uncertainty",
+        "requires an explicit budget decision and rejects a requested missing budget",
+        "rejects mixed contract versions instead of interpreting a proof through the legacy profile",
+        "binds nested path trees to the actual projection and preserves parameter hydration",
+        "rejects a changed tree specification and mixed tree versions",
+        "rejects duplicate decoded keys in new projection and tree readers"
+      ],
+      "nativeEvidenceCandidates": [
+        "crates/patamaps-core/tests/derivation.rs",
+        "crates/patamaps-projection/tests/path_tree.rs",
+        "crates/patamaps-projection/tests/risk.rs"
+      ],
+      "auditStatus": "source-indexed; semantic coverage not established by this index"
+    },
+    {
+      "suite": "semantic-replay",
+      "sourceRepository": "/Users/admin/dev/SEEDZ/metamap",
+      "sourceRevision": "399747a4ad05a37cd8db1cedd53048fad2175be4",
+      "sourcePath": "src/__tests__/semantic-replay.test.ts",
+      "digest": "sha256:c9af8f3354281e2b343193c9eba5cc7a20052c9ff80709c51f4d30193da3c03f",
+      "descriptions": [
+        "semantic capture and exact replay",
+        "reproduces the graph, checked proof, projection and path tree without mutating inputs",
+        "includes the schema URI in every new capture binding",
+        "rejects changed context, time, proof and budget inputs even if the outer bundle is rehashed",
+        "recomputes a forged expected projection, dependency closure and path tree",
+        "requires the exact installed executor, runtime and dependency payload",
+        "rejects missing, duplicate or substituted packs and missing exact graph pack digests",
+        "preserves a reproduced compilation rejection and does not create projections",
+        "keeps successful compilation distinct from a rejected consumer expression",
+        "refuses requested source rediscovery, custom executors and repeated projection identities",
+        "rejects named executable loading and duplicate decoded keys"
+      ],
+      "nativeEvidenceCandidates": [
+        "crates/patamaps-core/tests/derivation.rs",
+        "crates/patamaps-projection/tests/path_tree.rs",
+        "crates/patamaps-projection/tests/risk.rs"
+      ],
+      "auditStatus": "source-indexed; semantic coverage not established by this index"
+    },
+    {
+      "suite": "semantic",
+      "sourceRepository": "/Users/admin/dev/SEEDZ/metamap",
+      "sourceRevision": "399747a4ad05a37cd8db1cedd53048fad2175be4",
+      "sourcePath": "src/__tests__/semantic.test.ts",
+      "digest": "sha256:1df61d358ff0a59162a5ceabc083f587ae8efac88faa5e9b218f00447f345e95",
+      "descriptions": [
+        "explicit version 2 proof admission",
+        "preserves legacy programmatic optional fields and evaluates the canonical numeric context",
+        "admits a checked explicit claim and binds exact packs, proof dependencies and original policy",
+        "does not require a materialized transitive edge in an otherwise valid graph",
+        "rejects missing and stale proof records before admission",
+        "rejects an active claim supported by an inactive premise",
+        "binds requested context and exact graph pack references",
+        "follows the proof dependency after a premise is removed and does not invent an admitted generation",
+        "rejects a required unknown dimension with its specific consumer requirement",
+        "rejects proof claims and executable packs in the legacy profile",
+        "rejects unknown fields, unknown versions and missing mandatory members",
+        "rejects a malformed or content-tampered captured generation",
+        "preserves an in-memory legacy generation when passed a version 2 candidate",
+        "preserves persistent bytes when version 2 is passed to the legacy promoter"
+      ],
+      "nativeEvidenceCandidates": [
+        "crates/patamaps-core/tests/derivation.rs",
+        "crates/patamaps-projection/tests/path_tree.rs",
+        "crates/patamaps-projection/tests/risk.rs"
+      ],
+      "auditStatus": "source-indexed; semantic coverage not established by this index"
+    },
+    {
+      "suite": "source-cli",
+      "sourceRepository": "/Users/admin/dev/SEEDZ/metamap",
+      "sourceRevision": "399747a4ad05a37cd8db1cedd53048fad2175be4",
+      "sourcePath": "src/__tests__/source-cli.test.ts",
+      "digest": "sha256:0e05cfb9504e635afd85b10a1835f8ebd7b3e518fab34c89b297ec45da94f4c6",
+      "descriptions": [
+        "packaged provenance CLI and native consumer acceptance",
+        "requires explicit local roots and refuses incomplete or unknown commands",
+        "writes only the requested capture and preserves existing files and caches",
+        "captures, replays, inspects, type-checks and executes checked native projection/tree modules",
+        "retains a rejected source-bound evaluation and compares its unknown expression state",
+        "reports byte changes during explicit inspection while preserving the saved capture",
+        "keeps graph replay valid when raw sources disappear and reports current rediscovery unavailable",
+        "rejects receipt tampering even after receipt and distribution bundle are rehashed",
+        "refuses duplicate capture options, source capture for legacy policy and decoded duplicate keys",
+        "denies a symlink escape using only caller-selected root authority",
+        "compares changed captured sources without silently changing the explicit candidate"
+      ],
+      "nativeEvidenceCandidates": [
+        "crates/patamaps-projection/tests/replay.rs",
+        "crates/patamaps-core/tests/kernel.rs"
+      ],
+      "auditStatus": "source-indexed; semantic coverage not established by this index"
+    },
+    {
+      "suite": "source-replay",
+      "sourceRepository": "/Users/admin/dev/SEEDZ/metamap",
+      "sourceRevision": "399747a4ad05a37cd8db1cedd53048fad2175be4",
+      "sourcePath": "src/__tests__/source-replay.test.ts",
+      "digest": "sha256:d8a8e462ae8cf5d1c38d734c6f598b17946e065789f0b0c2e09709a97ef63427",
+      "descriptions": [
+        "source-bound exact replay and comparisons",
+        "captures the full source graph separately from the checked candidate and retains policy/projection version 2",
+        "reproduces rejected admission and provenance without creating consumer outputs",
+        "detects altered source composition after both source capture and bundle are rehashed",
+        "checks source-only changes even when candidate compilation and graph are unchanged",
+        "rejects missing captures, receipts, snapshot members, packs and named executors",
+        "refuses source overrides, legacy source capture and duplicate decoded capture keys",
+        "recomputes forged lineage reports and keeps expected raw rediscovery unavailable",
+        "retains exact executor, runtime, dependency, proof and budget tampering checks",
+        "compares source/candidate lineage and preserves unknown rejected projection deltas",
+        "rejects mixed replay profiles and altered rehashed report known-state claims"
+      ],
+      "nativeEvidenceCandidates": [
+        "crates/patamaps-projection/tests/replay.rs",
+        "crates/patamaps-core/tests/kernel.rs"
+      ],
+      "auditStatus": "source-indexed; semantic coverage not established by this index"
+    },
+    {
+      "suite": "sssom",
+      "sourceRepository": "/Users/admin/dev/SEEDZ/metamap",
+      "sourceRevision": "399747a4ad05a37cd8db1cedd53048fad2175be4",
+      "sourcePath": "src/__tests__/sssom.test.ts",
+      "digest": "sha256:8f1fa28784ced3889faa822491361d3b78655e47f3858f20bf716171c213eb30",
+      "descriptions": [
+        "loss-preserving supported SSSOM1.0 entity TSV profile",
+        "validates exact pinned public subset bytes and preserves all seven records and five predicates",
+        "round-trips quoted tabs, newlines, double quotes, multivalues and raw numeric spellings",
+        "accepts CRLF outer line endings and a header-only empty mapping set",
+        "propagates only annotated slots, removes their effective set values and retains originals separately",
+        "blocks propagation across the entire set when one record has a value",
+        "condenses explicitly only common values and preserves effective fields",
+        "does not condense conflicting set values or partially populated record fields",
+        "accepts explicit local external metadata without inferring its filename",
+        "retains defined scalar extensions, definitions and unknown type hints without assigning executable meaning",
+        "resolves built-ins and Unicode NCNames without network access or case folding",
+        "rejects forged portable document profile/extra fields and wrong format configuration",
+        "scientific adapter assertion identities and conservative interpretation",
+        "preserves repeated four-core-field assertions, distinct complementary metadata and exact duplicates",
+        "keeps anonymous content occurrence IDs across reordering and semantic condensation",
+        "gives changed anonymous assertions new IDs without changing stable ontology identities",
+        "retains explicit scoped source IDs across record changes and rejects duplicate IDs",
+        "preserves arbitrary predicates as unregistered uninterpreted relations",
+        "fingerprints both external inputs, accepts arbitrary local filename extensions and writes nothing"
+      ],
+      "nativeEvidenceCandidates": [
+        "crates/patamaps-scientific/tests/sssom.rs",
+        "crates/patamaps-scientific/tests/crate.rs"
+      ],
+      "auditStatus": "source-indexed; semantic coverage not established by this index"
+    },
+    {
+      "suite": "typed-native",
+      "sourceRepository": "/Users/admin/dev/SEEDZ/metamap",
+      "sourceRevision": "399747a4ad05a37cd8db1cedd53048fad2175be4",
+      "sourcePath": "src/__tests__/typed-native.test.ts",
+      "digest": "sha256:2cb27b33539ec6db4ebcf9203a4f0e935a8c2509389612b62d6727265764bb28",
+      "descriptions": [
+        "reproduces the typed example and type-checks/executes its generated native modules in CI"
+      ],
+      "nativeEvidenceCandidates": [
+        "crates/patamaps-core/tests/kernel.rs",
+        "crates/patamaps-projection/tests/projection.rs"
+      ],
+      "auditStatus": "source-indexed; semantic coverage not established by this index"
+    },
+    {
+      "suite": "typed-replay",
+      "sourceRepository": "/Users/admin/dev/SEEDZ/metamap",
+      "sourceRevision": "399747a4ad05a37cd8db1cedd53048fad2175be4",
+      "sourcePath": "src/__tests__/typed-replay.test.ts",
+      "digest": "sha256:7d2a818bffe387d01689f980dffe44b25cf27228b3723eec1ac97258c36f4e88",
+      "descriptions": [
+        "typed inputs through generated bindings and exact replay",
+        "reproduces full assessment/evidence and budget inputs, evaluated projections and hydrated-tree bindings",
+        "requires full evidence and rejects a substituted or rehashed generation summary",
+        "replays a genuine cost rejection and reports unavailable risk deltas without invented zero",
+        "reports assessment/proof and risk changes while preserving consumer entries",
+        "checks requirements and budgets without assessments and retains explicit unknown state"
+      ],
+      "nativeEvidenceCandidates": [
+        "crates/patamaps-projection/tests/replay.rs",
+        "crates/patamaps-core/tests/kernel.rs"
+      ],
+      "auditStatus": "source-indexed; semantic coverage not established by this index"
+    },
+    {
+      "suite": "uncertainty",
+      "sourceRepository": "/Users/admin/dev/SEEDZ/metamap",
+      "sourceRevision": "399747a4ad05a37cd8db1cedd53048fad2175be4",
+      "sourcePath": "src/__tests__/uncertainty.test.ts",
+      "digest": "sha256:f67736bc9b370dc5ed83586a5b7eb6f2f2f718e9fcd44bb94f7e26842830b23d",
+      "descriptions": [
+        "typed recorded uncertainty",
+        "satisfies the frozen required-unknown acceptance and gives a dimension-specific explanation",
+        "binds full evidence values separately from their asserted artifact digest",
+        "does not strengthen repeated evidence or scalar confidence",
+        "keeps an unknown premise despite direct support on the derived result",
+        "uses named model incompatibility as unknown and never averages confidence",
+        "contradicting evidence dominates an assessment and unrelated model support",
+        "treats inconclusive support as unknown",
+        "requires evidence on every contributing assessment rather than borrowing another path",
+        "allows a reasoned not-applicable dimension only when the consumer permits contributing exemptions",
+        "scopes authority assessments to incident mappings without transferring ownership",
+        "matches an explicit mapping source revision before falling back to graph revision",
+        "retains typed dependencies and unresolved conflict across a nested derivation",
+        "reports stale requirement selectors and checks only active matched mappings",
+        "rejects duplicated dimensions and self-consistent rehashes concealing changed typed dependencies"
+      ],
+      "nativeEvidenceCandidates": [
+        "crates/patamaps-core/tests/uncertainty.rs",
+        "crates/patamaps-projection/tests/risk.rs"
+      ],
+      "auditStatus": "source-indexed; semantic coverage not established by this index"
+    },
+    {
+      "suite": "validator",
+      "sourceRepository": "/Users/admin/dev/SEEDZ/metamap",
+      "sourceRevision": "399747a4ad05a37cd8db1cedd53048fad2175be4",
+      "sourcePath": "src/__tests__/validator.test.ts",
+      "digest": "sha256:77c898efed2e9be9b7c3e796c102b5b60e16dc1e336004d3784d87ecc96b6f11",
+      "descriptions": [
+        "metamap validation",
+        "accepts the language-neutral example graph",
+        "rejects mappings with unresolved endpoints",
+        "rejects overlapping canonical authority",
+        "rejects cycles for acyclic relation types",
+        "rejects delegation that widens its parent",
+        "rejects overlapping sibling delegations",
+        "reports malformed relation-pack references without throwing"
+      ],
+      "nativeEvidenceCandidates": [
+        "crates/patamaps-contracts/tests/canonical.rs",
+        "crates/patamaps-core/tests/kernel.rs"
+      ],
+      "auditStatus": "source-indexed; semantic coverage not established by this index"
+    },
+    {
+      "suite": "viability",
+      "sourceRepository": "/Users/admin/dev/SEEDZ/metamap",
+      "sourceRevision": "399747a4ad05a37cd8db1cedd53048fad2175be4",
+      "sourcePath": "src/__tests__/viability.test.ts",
+      "digest": "sha256:d34ac2a04fec82bf11cc3a36dd82473df79e659ecbe7ddbc89e0745e14c1a47a",
+      "descriptions": [
+        "context expressions",
+        "supports composition, set membership, and explicit absence",
+        "viability compiler",
+        "compiles a complete policy into a deterministic immutable generation",
+        "detects mutation of a persisted generation",
+        "expresses and inhibits mappings without mutating the graph",
+        "rejects missing context instead of silently deactivating mappings",
+        "requires a full date-time for deterministic waiver evaluation",
+        "rejects missing declarations and unknown lossiness",
+        "allows only explicit, scoped, unexpired waivers",
+        "rejects contradictory evidence only when its mapping is expressed",
+        "calculates causal impact using relation-specific propagation",
+        "retains the last viable generation after a rejected activation",
+        "rejects constraint kinds without a registered evaluator"
+      ],
+      "nativeEvidenceCandidates": [
+        "crates/patamaps-core/tests/kernel.rs",
+        "crates/patamaps-projection/tests/projection.rs"
+      ],
+      "auditStatus": "source-indexed; semantic coverage not established by this index"
+    },
+    {
+      "suite": "workspace",
+      "sourceRepository": "/Users/admin/dev/SEEDZ/metamap",
+      "sourceRevision": "399747a4ad05a37cd8db1cedd53048fad2175be4",
+      "sourcePath": "src/__tests__/workspace.test.ts",
+      "digest": "sha256:f4fb14252bfed004e531a6c1cfa12a32c5c9230e0623ebd36aba292ef2b1b696",
+      "descriptions": [
+        "workspace pipeline",
+        "generates a baseline, reuses unchanged shards, and detects drift"
+      ],
+      "nativeEvidenceCandidates": [
+        "crates/patamaps-workspace/tests/workspace.rs",
+        "crates/patamaps-workspace/src/process_tests.rs",
+        "crates/patamaps-core/tests/topology.rs"
+      ],
+      "auditStatus": "source-indexed; semantic coverage not established by this index"
+    }
+  ],
+  "completedCapabilityAudit": false,
+  "deleted": []
+}

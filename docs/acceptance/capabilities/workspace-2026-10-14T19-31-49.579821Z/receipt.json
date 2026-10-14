@@ -1,0 +1,59 @@
+{
+  "status": "failed",
+  "installedReceipt": "docs/acceptance/capabilities/installed-2026-10-14T19-00-39.294566Z/receipt.json",
+  "binaryDigest": "sha256:9bb083eb844027c41463b391d4fec5b53f34cf1e1f6a81608c4f9e6efd3a9578",
+  "nodeInPath": false,
+  "retainedWork": ".tools/capabilities/workspace-mxxwnemq",
+  "commands": [
+    {
+      "label": "engine",
+      "argv": [
+        "/Users/admin/dev/patamaps/patamaps/.tools/capabilities/installed-ekq21tjf/installation/bin/patamaps",
+        "engine"
+      ],
+      "exitCode": 0,
+      "expectedExitCode": 0
+    },
+    {
+      "label": "generate",
+      "argv": [
+        "/Users/admin/dev/patamaps/patamaps/.tools/capabilities/installed-ekq21tjf/installation/bin/patamaps",
+        "generate",
+        "config.json",
+        "--root",
+        "/Users/admin/dev/patamaps/patamaps/.tools/capabilities/workspace-mxxwnemq"
+      ],
+      "exitCode": 0,
+      "expectedExitCode": 0
+    },
+    {
+      "label": "unchanged",
+      "argv": [
+        "/Users/admin/dev/patamaps/patamaps/.tools/capabilities/installed-ekq21tjf/installation/bin/patamaps",
+        "check",
+        "config.json",
+        "baseline.json",
+        "--root",
+        "/Users/admin/dev/patamaps/patamaps/.tools/capabilities/workspace-mxxwnemq"
+      ],
+      "exitCode": 0,
+      "expectedExitCode": 0
+    },
+    {
+      "label": "drift",
+      "argv": [
+        "/Users/admin/dev/patamaps/patamaps/.tools/capabilities/installed-ekq21tjf/installation/bin/patamaps",
+        "check",
+        "config.json",
+        "baseline.json",
+        "--root",
+        "/Users/admin/dev/patamaps/patamaps/.tools/capabilities/workspace-mxxwnemq"
+      ],
+      "exitCode": 2,
+      "expectedExitCode": 2
+    }
+  ],
+  "deleted": [],
+  "activation": "not-performed",
+  "error": "KeyError: 'current'"
+}

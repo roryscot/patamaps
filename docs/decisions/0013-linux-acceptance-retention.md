@@ -28,11 +28,12 @@ equality. This preserves the original hard-link refusal and the subsequent
 ordinary publication test. Linux execution must verify the changed restoration
 step; static inspection does not prove it.
 
-The owner approved requesting `workflow` scope for the existing Rory CLI login.
-The refresh flow recognized `roryscot` and reached GitHub's passkey confirmation;
-completion and the resulting token scopes still require verification. The prior
-token reported `gist`, `read:org` and `repo`. The workflow stays local until
-authentication completes. Current Linux gates remain open; historical ARM64/ext4
+The owner approved requesting `workflow` scope for the existing Rory CLI login
+and completed GitHub authentication. The renewed refresh exited 0. The CLI user
+endpoint verifies `roryscot`; its OAuth scope header verifies `gist`, `read:org`,
+`repo` and `workflow`. [The authorization record](../acceptance/capabilities/github-workflow-authorization-2026-10-14/receipt.json)
+retains these non-secret observations. Current Linux gates remain open until
+the prepared candidate is pushed and both jobs execute. Historical ARM64/ext4
 evidence retains its original source and binary identities. No local VM is
 created by this workflow.
 
