@@ -19,6 +19,7 @@ pub use legacy_pack::LegacyPortableSchema;
 mod legacy_references;
 mod legacy_registry;
 mod legacy_reporting;
+mod legacy_semantic;
 mod legacy_validation;
 mod legacy_viability;
 pub use legacy_viability::legacy_viability_request;

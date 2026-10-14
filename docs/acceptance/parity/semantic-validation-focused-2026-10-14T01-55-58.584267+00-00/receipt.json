@@ -1,0 +1,41 @@
+{
+  "status": "failed",
+  "commands": [
+    {
+      "label": "clippy",
+      "command": [
+        "/Users/admin/.cargo/bin/cargo",
+        "clippy",
+        "--locked",
+        "--workspace",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exitCode": 0
+    },
+    {
+      "label": "native-semantic",
+      "command": [
+        "/Users/admin/.cargo/bin/cargo",
+        "test",
+        "--locked",
+        "-p",
+        "patamaps-core",
+        "--test",
+        "legacy_semantic"
+      ],
+      "exitCode": 0
+    },
+    {
+      "label": "installed-sdk",
+      "command": [
+        "/opt/homebrew/bin/python3",
+        "-B",
+        "scripts/parity/sdk_consumer.py"
+      ],
+      "exitCode": 1
+    }
+  ]
+}

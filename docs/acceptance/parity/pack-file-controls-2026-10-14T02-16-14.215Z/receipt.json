@@ -1,0 +1,593 @@
+{
+  "schemaVersion": "1.0.0",
+  "status": "component-controls-passed",
+  "supervision": {
+    "mode": "inherited-live-supervisor",
+    "project": "/Users/admin/dev/patamaps/patamaps",
+    "configurationDigest": "sha256:77505e4ca3960c2df14617ffa5951838a6b84e51d6f8ed715ec60faa3c9e8187",
+    "policy": {
+      "version": 1,
+      "minimumFreeBytes": 0,
+      "reserveFreeBytes": 1000000000,
+      "maximumRunGrowthBytes": 8000000000,
+      "maximumRetainedBytes": 50000000000,
+      "monitorIntervalMs": 2000,
+      "terminationGraceMs": 15000
+    },
+    "availableBytesAtEntry": 3454742528
+  },
+  "reference": {
+    "engine": "399747a4ad05a37cd8db1cedd53048fad2175be4",
+    "corpus": "fixtures/parity/pack-file-controls.json",
+    "corpusDigest": "sha256:6c7fb36d9f6062e7241957535c9b70d0a4c66e2cba64eebf945aa3269fdf7c0a",
+    "sourceFiles": [
+      {
+        "path": "src/relation-pack.ts",
+        "digest": "sha256:b035eb01f6af1d9d34547abaa0139f07492ef801c72987bcae42245935f3d9b7"
+      },
+      {
+        "path": "src/canonical.ts",
+        "digest": "sha256:06994bd6e52c332ef52e37dd92408372adc51a593067a1b03ba0108bf1adf7ce"
+      },
+      {
+        "path": "src/stable.ts",
+        "digest": "sha256:5e0800fab53ac01f4e8506ca4d85b8a0a25ee74c1e79392cb69c11431633f270"
+      },
+      {
+        "path": "schemas/relation-pack.schema.json",
+        "digest": "sha256:bfac8a6fa108eb430aec628ec6952b8123468daba0178b801f7f7c1ac3e4e135"
+      },
+      {
+        "path": "schemas/relation-pack-v2.schema.json",
+        "digest": "sha256:3923a94dc77e608b73534d1c31844d4bfa823fb75708d961e6d9b97e67ae41fc"
+      }
+    ]
+  },
+  "candidate": {
+    "binaryDigest": "sha256:4e2c60686a105c6a4a5df02325576ebbeb0c9de0b778d74c4335b2cae09953f0",
+    "engine": {
+      "compiler": "sha256:195baefe7f0bc38ad51e42bbf6e176e53ec76cb4bbbb160abcc63f18d69cba0a",
+      "documentType": "executor-description",
+      "governance": "sha256:0afd5424b92a6171bdbefd34052f4c86b13f151134816c63c802584cf7c4a5fc",
+      "schemaVersion": "0.1.0",
+      "scientific": "sha256:b12c3bf9f5b140a909bcc57955cff23f73224ec1600860efb022c89174fcf8ee",
+      "workspace": "sha256:c0766ca6257b8316e8e585563d1445af781885d893276fcefbc679ec1cd5cca3"
+    },
+    "sdkSourceInventory": [
+      {
+        "path": "sdk/typescript/canonical.mjs",
+        "digest": "sha256:1fb585d17e00d783e7ce43b7f4a5c45fe848dea28d0eb364713ef134fae1d214"
+      },
+      {
+        "path": "sdk/typescript/legacy-validation.mjs",
+        "digest": "sha256:da39f7b1e5ea205511d78d0017865a6c2a0732ab80ae72c7f2962215aff749c2"
+      }
+    ]
+  },
+  "comparedCases": 22,
+  "matchedCases": 22,
+  "nativeExecutions": 27,
+  "results": [
+    {
+      "name": "portable.json",
+      "expected": {
+        "status": "accepted",
+        "document": {
+          "schemaVersion": "1.0.0",
+          "id": "urn:pack:control",
+          "version": "1",
+          "relations": [
+            {
+              "id": "test:edge",
+              "cyclePolicy": "allow"
+            }
+          ]
+        },
+        "digest": "sha256:a85ecb34fc86fb1cf624a468014e200ba22d49e9d3a4898cd08cfbf0d24bba13"
+      },
+      "observed": {
+        "status": "accepted",
+        "document": {
+          "schemaVersion": "1.0.0",
+          "id": "urn:pack:control",
+          "version": "1",
+          "relations": [
+            {
+              "id": "test:edge",
+              "cyclePolicy": "allow"
+            }
+          ]
+        },
+        "digest": "sha256:a85ecb34fc86fb1cf624a468014e200ba22d49e9d3a4898cd08cfbf0d24bba13"
+      },
+      "equal": true
+    },
+    {
+      "name": "executable.json",
+      "expected": {
+        "status": "accepted",
+        "document": {
+          "schemaVersion": "2.0.0",
+          "id": "urn:pack:control",
+          "version": "1",
+          "relations": [
+            {
+              "id": "test:edge",
+              "cyclePolicy": "allow"
+            }
+          ],
+          "laws": []
+        },
+        "digest": "sha256:1cfff3c53210da1cf3670284cfe91a00246b02c73ede11b36852d0537e4f779b"
+      },
+      "observed": {
+        "status": "accepted",
+        "document": {
+          "schemaVersion": "2.0.0",
+          "id": "urn:pack:control",
+          "version": "1",
+          "relations": [
+            {
+              "id": "test:edge",
+              "cyclePolicy": "allow"
+            }
+          ],
+          "laws": []
+        },
+        "digest": "sha256:1cfff3c53210da1cf3670284cfe91a00246b02c73ede11b36852d0537e4f779b"
+      },
+      "equal": true
+    },
+    {
+      "name": "portable-unpaired.json",
+      "expected": {
+        "status": "accepted",
+        "document": {
+          "schemaVersion": "1.0.0",
+          "id": "urn:pack:control",
+          "version": "1",
+          "relations": [
+            {
+              "id": "test:edge",
+              "cyclePolicy": "allow"
+            }
+          ],
+          "description": "\ud800"
+        },
+        "digest": "sha256:2b32419f767e2cd39067e8f0ef92c7a68515750d0ec442d62da61a4ef886dee2"
+      },
+      "observed": {
+        "status": "accepted",
+        "document": {
+          "schemaVersion": "1.0.0",
+          "id": "urn:pack:control",
+          "version": "1",
+          "relations": [
+            {
+              "id": "test:edge",
+              "cyclePolicy": "allow"
+            }
+          ],
+          "description": "\ud800"
+        },
+        "digest": "sha256:2b32419f767e2cd39067e8f0ef92c7a68515750d0ec442d62da61a4ef886dee2"
+      },
+      "equal": true
+    },
+    {
+      "name": "executable-unpaired.json",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "CanonicalJsonError",
+          "message": "Unpaired high surrogate",
+          "code": "INVALID_JSON_UNICODE"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "CanonicalJsonError",
+          "message": "Unpaired high surrogate",
+          "code": "INVALID_JSON_UNICODE"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "empty.json",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "SyntaxError",
+          "message": "Unexpected end of JSON input"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "SyntaxError",
+          "message": "Unexpected end of JSON input"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "whitespace.json",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "SyntaxError",
+          "message": "Unexpected end of JSON input"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "SyntaxError",
+          "message": "Unexpected end of JSON input"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "truncated-object.json",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "SyntaxError",
+          "message": "Expected property name or '}' in JSON at position 1 (line 1 column 2)"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "SyntaxError",
+          "message": "Expected property name or '}' in JSON at position 1 (line 1 column 2)"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "truncated-pack.json",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "SyntaxError",
+          "message": "Expected double-quoted property name in JSON at position 25 (line 1 column 26)"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "SyntaxError",
+          "message": "Expected double-quoted property name in JSON at position 25 (line 1 column 26)"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "trailing-comma.json",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "SyntaxError",
+          "message": "Expected double-quoted property name in JSON at position 118 (line 1 column 119)"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "SyntaxError",
+          "message": "Expected double-quoted property name in JSON at position 118 (line 1 column 119)"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "missing-colon.json",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "SyntaxError",
+          "message": "Expected ':' after property name in JSON at position 17 (line 1 column 18)"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "SyntaxError",
+          "message": "Expected ':' after property name in JSON at position 17 (line 1 column 18)"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "bad-literal.json",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "SyntaxError",
+          "message": "Expected ',' or '}' after property value in JSON at position 34 (line 1 column 35)"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "SyntaxError",
+          "message": "Expected ',' or '}' after property value in JSON at position 34 (line 1 column 35)"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "bom.json",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "SyntaxError",
+          "message": "Unexpected token '﻿', \"﻿{\"schemaV\"... is not valid JSON"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "SyntaxError",
+          "message": "Unexpected token '﻿', \"﻿{\"schemaV\"... is not valid JSON"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "null.json",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: $ must be object"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: $ must be object"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "undefined.json",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "SyntaxError",
+          "message": "\"undefined\" is not valid JSON"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "SyntaxError",
+          "message": "\"undefined\" is not valid JSON"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "extra-value.json",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "SyntaxError",
+          "message": "Unexpected non-whitespace character after JSON at position 119 (line 1 column 120)"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "SyntaxError",
+          "message": "Unexpected non-whitespace character after JSON at position 119 (line 1 column 120)"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "portable-duplicates.json",
+      "expected": {
+        "status": "accepted",
+        "document": {
+          "schemaVersion": "1.0.0",
+          "id": "urn:pack:control",
+          "version": "1",
+          "relations": [
+            {
+              "id": "test:edge",
+              "cyclePolicy": "allow"
+            }
+          ]
+        },
+        "digest": "sha256:a85ecb34fc86fb1cf624a468014e200ba22d49e9d3a4898cd08cfbf0d24bba13"
+      },
+      "observed": {
+        "status": "accepted",
+        "document": {
+          "schemaVersion": "1.0.0",
+          "id": "urn:pack:control",
+          "version": "1",
+          "relations": [
+            {
+              "id": "test:edge",
+              "cyclePolicy": "allow"
+            }
+          ]
+        },
+        "digest": "sha256:a85ecb34fc86fb1cf624a468014e200ba22d49e9d3a4898cd08cfbf0d24bba13"
+      },
+      "equal": true
+    },
+    {
+      "name": "executable-duplicates.json",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "CanonicalJsonError",
+          "message": "Duplicate JSON property \"version\"",
+          "code": "DUPLICATE_JSON_KEY"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "CanonicalJsonError",
+          "message": "Duplicate JSON property \"version\"",
+          "code": "DUPLICATE_JSON_KEY"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "replacement.json",
+      "expected": {
+        "status": "accepted",
+        "document": {
+          "schemaVersion": "1.0.0",
+          "id": "urn:pack:control",
+          "version": "1",
+          "relations": [
+            {
+              "id": "test:edge",
+              "cyclePolicy": "allow"
+            }
+          ],
+          "description": "�"
+        },
+        "digest": "sha256:1a1d7ab15669280951fbebe6b30e452c4332467c7b38652a781dc58e0583442f"
+      },
+      "observed": {
+        "status": "accepted",
+        "document": {
+          "schemaVersion": "1.0.0",
+          "id": "urn:pack:control",
+          "version": "1",
+          "relations": [
+            {
+              "id": "test:edge",
+              "cyclePolicy": "allow"
+            }
+          ],
+          "description": "�"
+        },
+        "digest": "sha256:1a1d7ab15669280951fbebe6b30e452c4332467c7b38652a781dc58e0583442f"
+      },
+      "equal": true
+    },
+    {
+      "name": "missing.json",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "ENOENT: no such file or directory, open '/Users/admin/dev/patamaps/patamaps/.tools/parity/pack-file-controls/2026-10-12T17-46-39.174Z/missing.json'",
+          "code": "ENOENT",
+          "path": "/Users/admin/dev/patamaps/patamaps/.tools/parity/pack-file-controls/2026-10-12T17-46-39.174Z/missing.json",
+          "errno": -2,
+          "syscall": "open"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "ENOENT: no such file or directory, open '/Users/admin/dev/patamaps/patamaps/.tools/parity/pack-file-controls/2026-10-12T17-46-39.174Z/missing.json'",
+          "code": "ENOENT",
+          "path": "/Users/admin/dev/patamaps/patamaps/.tools/parity/pack-file-controls/2026-10-12T17-46-39.174Z/missing.json",
+          "errno": -2,
+          "syscall": "open"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "directory",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "EISDIR: illegal operation on a directory, read",
+          "code": "EISDIR",
+          "errno": -21,
+          "syscall": "read"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "EISDIR: illegal operation on a directory, read",
+          "code": "EISDIR",
+          "errno": -21,
+          "syscall": "read"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "not-directory",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "ENOTDIR: not a directory, open '/Users/admin/dev/patamaps/patamaps/.tools/parity/pack-file-controls/2026-10-12T17-46-39.174Z/not-directory/pack.json'",
+          "code": "ENOTDIR",
+          "path": "/Users/admin/dev/patamaps/patamaps/.tools/parity/pack-file-controls/2026-10-12T17-46-39.174Z/not-directory/pack.json",
+          "errno": -20,
+          "syscall": "open"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "ENOTDIR: not a directory, open '/Users/admin/dev/patamaps/patamaps/.tools/parity/pack-file-controls/2026-10-12T17-46-39.174Z/not-directory/pack.json'",
+          "code": "ENOTDIR",
+          "path": "/Users/admin/dev/patamaps/patamaps/.tools/parity/pack-file-controls/2026-10-12T17-46-39.174Z/not-directory/pack.json",
+          "errno": -20,
+          "syscall": "open"
+        }
+      },
+      "equal": true
+    },
+    {
+      "name": "loop.json",
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "ELOOP: too many symbolic links encountered, open '/Users/admin/dev/patamaps/patamaps/.tools/parity/pack-file-controls/2026-10-12T17-46-39.174Z/loop.json'",
+          "code": "ELOOP",
+          "path": "/Users/admin/dev/patamaps/patamaps/.tools/parity/pack-file-controls/2026-10-12T17-46-39.174Z/loop.json",
+          "errno": -62,
+          "syscall": "open"
+        }
+      },
+      "observed": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "ELOOP: too many symbolic links encountered, open '/Users/admin/dev/patamaps/patamaps/.tools/parity/pack-file-controls/2026-10-12T17-46-39.174Z/loop.json'",
+          "code": "ELOOP",
+          "path": "/Users/admin/dev/patamaps/patamaps/.tools/parity/pack-file-controls/2026-10-12T17-46-39.174Z/loop.json",
+          "errno": -62,
+          "syscall": "open"
+        }
+      },
+      "equal": true
+    }
+  ],
+  "differences": [],
+  "originalCasesClosed": 0,
+  "scope": "Finite Node 22/macOS file-load data/digests and thrown name/message/code/path/errno/syscall. Retained fixture paths and bytes are immutable. Runtime stack locations and added native report metadata are outside this component comparison; the full JS/loader/platform/resource contract remains open.",
+  "traceDigest": "sha256:a46fbed62c132060d6e2060bdb73b1682a45e8a5cd75a8168792e7d5296dd491",
+  "driverDigest": "sha256:73dc0c5541d0a0809bc0affa1c58cf69eb6322c57b2e3dd835c4dbffb6a67576"
+}

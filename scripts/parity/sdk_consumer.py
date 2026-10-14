@@ -59,7 +59,9 @@ evaluation_mapping_path = ROOT / 'fixtures/parity/legacy-evaluation-type-mapping
 evaluation_type_mapping = json.loads(evaluation_mapping_path.read_bytes())
 viability_mapping_path = ROOT / 'fixtures/parity/legacy-viability-type-mapping.json'
 viability_type_mapping = json.loads(viability_mapping_path.read_bytes())
-type_rows = viability_type_mapping['rows'] + evaluation_type_mapping['rows'] + migration_type_mapping['rows'] + workspace_type_mapping['rows'] + config_type_mapping['rows'] + type_mapping['rows'] + graph_type_mapping['rows'] + reporting_type_mapping['rows'] + correspondence_type_mapping['rows']
+semantic_mapping_path=ROOT/'fixtures/parity/legacy-semantic-type-mapping.json'
+semantic_type_mapping=json.loads(semantic_mapping_path.read_bytes())
+type_rows = semantic_type_mapping['rows'] + viability_type_mapping['rows'] + evaluation_type_mapping['rows'] + migration_type_mapping['rows'] + workspace_type_mapping['rows'] + config_type_mapping['rows'] + type_mapping['rows'] + graph_type_mapping['rows'] + reporting_type_mapping['rows'] + correspondence_type_mapping['rows']
 assert type_mapping['referenceEngine'] == supplement['referenceEngine']
 
 def verify_reference():
@@ -354,7 +356,22 @@ if(rejectedMemory.activated||rejectedMemory.current!==acceptedMemory.current||me
 if(rejectedMemory.compilation.quarantinedSubjects!==rejectedMemory.compilation.impact.affectedSubjects)throw new Error('Installed memory quarantine alias mismatch');
 const factoryMemory=new legacy.LegacyMetamapActivator(undefined,factoryCallbacks);
 if(!factoryMemory.activate(customDocument,customPolicy,v1Input.options).activated)throw new Error('Installed factory memory activation failed');
+import {parseLegacySemanticPolicy,parseLegacySemanticGeneration,legacySemanticGenerationDigest,validateLegacySemanticPolicy,validateLegacySemanticGeneration,legacyPolicyView,admittedLegacyMappingDependencies} from "patamaps-native-sdk-draft";
+import type {LegacyMetamapSemanticPolicy,LegacySemanticGeneration,LegacyMappingDependency,LegacyConsumerRiskBudget} from "patamaps-native-sdk-draft";
+const semanticPolicy:LegacyMetamapSemanticPolicy=JSON.parse(__SEMANTIC_POLICY__), semanticGeneration:LegacySemanticGeneration=JSON.parse(__SEMANTIC_GENERATION__);
+if(!validateLegacySemanticPolicy(semanticPolicy).valid||!validateLegacySemanticGeneration(semanticGeneration).valid||parseLegacySemanticPolicy(semanticPolicy)!==semanticPolicy||parseLegacySemanticGeneration(semanticGeneration)!==semanticGeneration)throw new Error('Installed semantic validator/parser identity mismatch');
+if(legacySemanticGenerationDigest(semanticGeneration)!==semanticGeneration.digest)throw new Error('Installed semantic generation address mismatch');
+const legacyView=legacyPolicyView(semanticPolicy);if(legacyView.schemaVersion!=='1.0.0'||legacyView.mappings!==semanticPolicy.mappings||'derivations' in legacyView)throw new Error('Installed semantic legacy view/identity mismatch');
+const semanticGraph:LegacyGraphDocument=JSON.parse(__SEMANTIC_GRAPH__);
+const dependencyRows:LegacyMappingDependency[]=admittedLegacyMappingDependencies(semanticGraph,new Set(semanticGraph.mappings.map(mapping=>mapping.id)),semanticGeneration.semantic.derivations);
+if(!dependencyRows.some(row=>row.derivation&&row.premises.length>0))throw new Error('Installed semantic dependency capture mismatch');
 '''
+semantic_fixture=ROOT/'fixtures/parity/semantic-validation-controls.json'
+assert sha(semantic_fixture)=='sha256:f8b33a4c6666d454220bddd015b488846ffd8b4347c860d4bfa8b6dfe7e452ee'
+semantic_corpus=json.loads(semantic_fixture.read_text());semantic_by_name={case['name']:case for case in semantic_corpus['cases']}
+program=program.replace('__SEMANTIC_POLICY__',json.dumps(semantic_by_name['baseline-relations-parse-policy']['action']['text'])).replace('__SEMANTIC_GENERATION__',json.dumps(semantic_by_name['baseline-relations-parse-generation']['action']['text']))
+semantic_dependency_case=next(case for case in semantic_corpus['cases'] if case['action']['operation']=='dependencies' and json.loads(case['action']['text'])['active'])
+program=program.replace('__SEMANTIC_GRAPH__',json.dumps(json.dumps(json.loads(semantic_dependency_case['action']['text'])['graph'],separators=(',',':'))))
 (stage / 'consumer.mts').write_text(program)
 (stage / 'negative.mts').write_text('''import {createSssomApi,createCanonicalApi,createLegacyValidationApi} from "patamaps-native-sdk-draft";
 createSssomApi('/absolute/path').parseSssomTsv({});
@@ -441,6 +458,12 @@ new (createLegacyValidationApi('/absolute/path').LegacyMetamapActivator)().activ
 new (createLegacyValidationApi('/absolute/path').LegacyMetamapActivator)().current=undefined;
 new (createLegacyValidationApi('/absolute/path').LegacyMetamapActivator)().governedCurrent={};
 const invalidActivation:import('patamaps-native-sdk-draft').LegacyActivationResult={activated:true,current:undefined,compilation:{} as any};
+createLegacyValidationApi('/absolute/path').legacySemanticGenerationDigest({});
+createLegacyValidationApi('/absolute/path').legacyPolicyView({schemaVersion:'1.0.0'});
+createLegacyValidationApi('/absolute/path').admittedLegacyMappingDependencies({} as import('patamaps-native-sdk-draft').LegacyGraphDocument,[],[]);
+const invalidSemanticVersion:import('patamaps-native-sdk-draft').LegacyMetamapSemanticPolicy['schemaVersion']='1.0.0';
+const invalidUncertainty:import('patamaps-native-sdk-draft').LegacyUncertaintyAssessment['dimension']='random';
+const invalidRiskBudget:import('patamaps-native-sdk-draft').LegacyConsumerRiskBudget={id:'id',consumer:'c',classifications:[],maximumTotalCost:0,requireCompleteClassification:false,requireCompleteDependencies:true};
 ''')
 environment = {**os.environ, 'PATH': ''}
 commands = []
@@ -499,6 +522,14 @@ memory_helpers=memory_source[memory_source.index('function encode(value)'):memor
 memory_probe=stage/'memory-activation.mjs'
 memory_probe.write_text('import assert from "node:assert/strict";\nimport {readFileSync} from "node:fs";\nimport * as sdk from "patamaps-native-sdk-draft";\n'+memory_helpers+'\nconst binary='+json.dumps(str(installed))+';\nsdk.configureLegacyValidation(binary);\nconst owner=sdk.createLegacyValidationApi(binary);\nconst apis=[{Actor:owner.LegacyMetamapActivator,Relations:owner.LegacyRelationRegistry,Constraints:owner.LegacyConstraintRegistry},{Actor:sdk.LegacyMetamapActivator,Relations:sdk.LegacyRelationRegistry,Constraints:sdk.LegacyConstraintRegistry}];\nlet cases=0,comparisons=0;for(const name of '+json.dumps([p.name for p,_ in memory_corpora])+'){const corpus=JSON.parse(readFileSync(new URL("./"+name,import.meta.url)));cases+=corpus.cases.length;for(const api of apis)for(const entry of corpus.cases){assert.deepEqual(observe(entry.action,api,corpus.document,corpus.baseline),entry.expected,entry.name);comparisons++;}}\nconsole.log(JSON.stringify({status:"matched",cases,comparisons}));\n')
 memory_execution=run('installed-memory-activation',[NODE,memory_probe])
+copy_file(semantic_fixture,stage/semantic_fixture.name)
+semantic_driver=ROOT/'scripts/parity/semantic_validation.mjs';semantic_source=semantic_driver.read_text();semantic_helpers=semantic_source[semantic_source.index('function decode(action)'):semantic_source.index('\nlet receipt;')]
+semantic_probe=stage/'semantic-validation.mjs'
+# The frozen observer is JSON encoded, including omission of undefined host fields.
+# Apply that same encoding to the installed observation without changing expectations.
+semantic_probe.write_text('import assert from "node:assert/strict";\nimport {readFileSync} from "node:fs";\nimport * as sdk from "patamaps-native-sdk-draft";\n'+semantic_helpers+'\nconst binary='+json.dumps(str(installed))+';\nsdk.configureLegacyValidation(binary);\nconst owner=sdk.createLegacyValidationApi(binary);\nconst apis=[owner,sdk].map(api=>({"validate-policy":api.validateLegacySemanticPolicy,"parse-policy":api.parseLegacySemanticPolicy,"validate-generation":api.validateLegacySemanticGeneration,"parse-generation":api.parseLegacySemanticGeneration,digest:api.legacySemanticGenerationDigest,view:api.legacyPolicyView,dependencies:api.admittedLegacyMappingDependencies}));\nconst corpus=JSON.parse(readFileSync(new URL("./semantic-validation-controls.json",import.meta.url)));let comparisons=0;for(const api of apis)for(const entry of corpus.cases){assert.deepEqual(JSON.parse(JSON.stringify(observe(entry.action,api))),entry.expected,entry.name);comparisons++;}\nconsole.log(JSON.stringify({status:"matched",cases:corpus.cases.length,comparisons}));\n')
+semantic_execution=run('installed-semantic-validation',[NODE,semantic_probe])
+
 asset_execution = run('published-assets', [NODE, asset_probe])
 asset_observations = json.loads(asset_execution.stdout)['observations'] if asset_execution.returncode == 0 else []
 
@@ -586,6 +617,7 @@ passed = passed and reference_declarations.returncode == 0 and type_contracts is
 passed = passed and numeric_execution.returncode == 0
 passed = passed and callback_execution.returncode == 0
 passed = passed and memory_execution.returncode == 0
+passed = passed and semantic_execution.returncode == 0
 passed = passed and all(engine[key] == value for key,value in identities(ROOT).items()) and sha(installed) == sha(binary)
 verify_reference()
 receipt = {'uncheckedDigestCorpus':{'path':digest_fixture.relative_to(ROOT).as_posix(),'digest':sha(digest_fixture)},'schemaVersion':'1.0.0','status':'passed' if passed else 'failed','commands':commands,
@@ -593,6 +625,7 @@ receipt = {'uncheckedDigestCorpus':{'path':digest_fixture.relative_to(ROOT).as_p
            'driver':'installed-sdk-data-subchecks','driverDigest':sha(Path(__file__)),'assetProbe':{'path':str(asset_probe),'digest':sha(asset_probe)},
            'numericViability':{'corpus':numeric_fixture.relative_to(ROOT).as_posix(),'corpusDigest':sha(numeric_fixture),'cases':400,'exitCode':numeric_execution.returncode,'probe':{'path':str(numeric_probe),'digest':sha(numeric_probe)},'helperSource':{'path':numeric_driver.relative_to(ROOT).as_posix(),'digest':sha(numeric_driver)}},
            'constraintCallbacks':{'corpora':[{'path':p.relative_to(ROOT).as_posix(),'digest':sha(p)} for p,_ in callback_corpora],'cases':82,'comparisons':164,'exitCode':callback_execution.returncode,'probe':{'path':str(callback_probe),'digest':sha(callback_probe)},'helperSource':{'path':callback_driver.relative_to(ROOT).as_posix(),'digest':sha(callback_driver)}},
+           'semanticValidation':{'corpus':semantic_fixture.relative_to(ROOT).as_posix(),'corpusDigest':sha(semantic_fixture),'cases':467,'comparisons':934,'exitCode':semantic_execution.returncode,'probe':{'path':str(semantic_probe),'digest':sha(semantic_probe)},'helperSource':{'path':semantic_driver.relative_to(ROOT).as_posix(),'digest':sha(semantic_driver)},'typeComparison':{'mapping':semantic_mapping_path.relative_to(ROOT).as_posix(),'digest':sha(semantic_mapping_path),'mappedDeclarations':len(semantic_type_mapping['rows']),'scope':semantic_type_mapping['scope']}},
            'memoryActivation':{'corpora':[{'path':p.relative_to(ROOT).as_posix(),'digest':sha(p)} for p,_ in memory_corpora],'cases':73,'comparisons':146,'exitCode':memory_execution.returncode,'probe':{'path':str(memory_probe),'digest':sha(memory_probe)},'helperSource':{'path':memory_driver.relative_to(ROOT).as_posix(),'digest':sha(memory_driver)},'declarationProjections':3,'scope':'Original memory current getter, legacy activation parameters/result and all selected frozen memory/refusal controls; full governed overload/state, complete arbitrary JavaScript and nominal package/required platform acceptance remain open.'},
            'publishedAssets':{'scope':'Original public JSON source/import subchecks only; exact original bytes and actual installed Node imports. Original valid/invalid schema and semantic acceptance remains unverified by this probe, so it cannot close the published-data obligations.','count':len(published_assets),'observations':asset_observations},
            'obligationSubchecks':[{'id':row['id'],'status':'passed' if passed else 'failed','scope':'published-data-source-and-import','origin':row['origin'],'expectationDigest':row['expectation']['digest']} for row in published_assets],

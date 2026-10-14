@@ -7,6 +7,16 @@ import type {
   LegacyConstraintRegistry,
   LegacyMetamapActivator,
 } from "./legacy-viability.js";
+import type {
+  validateLegacySemanticPolicy,
+  parseLegacySemanticPolicy,
+  validateLegacySemanticGeneration,
+  parseLegacySemanticGeneration,
+  legacySemanticGenerationDigest,
+  legacyPolicyView,
+  admittedLegacyMappingDependencies,
+} from "./legacy-semantic.js";
+export * from "./legacy-semantic.js";
 export * from "./legacy-viability.js";
 import type {
   parseLegacyEvaluationContext,
@@ -215,6 +225,13 @@ export type LegacyValidationOptions =
       nativePacks?: never;
     };
 export interface LegacyValidationApi {
+  validateLegacySemanticPolicy: typeof validateLegacySemanticPolicy;
+  parseLegacySemanticPolicy: typeof parseLegacySemanticPolicy;
+  validateLegacySemanticGeneration: typeof validateLegacySemanticGeneration;
+  parseLegacySemanticGeneration: typeof parseLegacySemanticGeneration;
+  legacySemanticGenerationDigest: typeof legacySemanticGenerationDigest;
+  legacyPolicyView: typeof legacyPolicyView;
+  admittedLegacyMappingDependencies: typeof admittedLegacyMappingDependencies;
   LegacyMetamapActivator: typeof LegacyMetamapActivator;
   LegacyConstraintRegistry: typeof LegacyConstraintRegistry;
   validateLegacyViabilityPolicy: typeof validateLegacyViabilityPolicy;

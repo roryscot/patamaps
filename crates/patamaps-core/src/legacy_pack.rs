@@ -482,6 +482,97 @@ pub struct LegacyPortableSchema {
     ordering: SchemaOrdering,
 }
 impl LegacyPortableSchema {
+    /// Bundle preserved cross-document references without network retrieval.
+    /// The source schemas are unchanged; this ordered compiler input retains
+    /// each resource's original property order for diagnostic reconstruction.
+    pub(crate) fn with_resources(text: &str, resources: &[&str]) -> Self {
+        let parse = |text: &str| {
+            Data::parse(text, COMPATIBILITY_JSON_LIMITS)
+                .expect("preserved schema resource")
+                .value()
+                .clone()
+        };
+        let mut root = parse(text);
+        let mut documents = resources.iter().map(|text| parse(text)).collect::<Vec<_>>();
+        let identities = documents
+            .iter()
+            .enumerate()
+            .map(|(index, value)| {
+                (
+                    value
+                        .get("$id")
+                        .and_then(J::string)
+                        .expect("preserved resource identity")
+                        .to_owned(),
+                    index,
+                )
+            })
+            .collect::<std::collections::HashMap<_, _>>();
+        fn rewrite(
+            value: &mut J,
+            owner: Option<usize>,
+            identities: &std::collections::HashMap<String, usize>,
+        ) {
+            match value {
+                J::Object(pairs) => {
+                    pairs.retain(|(key, _)| key != "$id");
+                    for (key, child) in pairs {
+                        if key == "$ref" {
+                            let J::String(reference) = child else {
+                                panic!("preserved schema reference")
+                            };
+                            if reference.starts_with('#') {
+                                if let Some(index) = owner {
+                                    *reference = format!(
+                                        "#/$defs/patamaps_source_schema_{index}{}",
+                                        &reference[1..]
+                                    );
+                                }
+                            } else {
+                                let (base, fragment) =
+                                    reference.split_once('#').unwrap_or((reference, ""));
+                                let index = identities
+                                    .get(base)
+                                    .expect("every preserved schema dependency is supplied");
+                                *reference =
+                                    format!("#/$defs/patamaps_source_schema_{index}{fragment}");
+                            }
+                        } else {
+                            rewrite(child, owner, identities);
+                        }
+                    }
+                }
+                J::Array(items) => {
+                    for child in items {
+                        rewrite(child, owner, identities);
+                    }
+                }
+                _ => {}
+            }
+        }
+        rewrite(&mut root, None, &identities);
+        for (index, document) in documents.iter_mut().enumerate() {
+            rewrite(document, Some(index), &identities);
+        }
+        let J::Object(root_pairs) = &mut root else {
+            panic!("preserved schema object")
+        };
+        if !root_pairs.iter().any(|(key, _)| key == "$defs") {
+            root_pairs.push(("$defs".into(), J::Object(Vec::new())));
+        }
+        let J::Object(definitions) = &mut root_pairs
+            .iter_mut()
+            .find(|(key, _)| key == "$defs")
+            .expect("schema definitions")
+            .1
+        else {
+            panic!("preserved definitions object")
+        };
+        for (index, document) in documents.into_iter().enumerate() {
+            definitions.push((format!("patamaps_source_schema_{index}"), document));
+        }
+        Self::new(&crate::legacy_workspace::raw(&root).expect("ordered bundled schema"))
+    }
     pub fn new(text: &str) -> Self {
         let mut ordering = SchemaOrdering {
             schema: serde_json::from_str(text).expect("preserved portable schema"),

@@ -4,8 +4,8 @@ import { isAbsolute } from "node:path";
 export class CanonicalJsonError extends Error {
   constructor(code, message) {
     super(message);
-    this.name = "CanonicalJsonError";
     this.code = code;
+    this.name = "CanonicalJsonError";
   }
 }
 const fail = (code, message) => {

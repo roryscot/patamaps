@@ -25,6 +25,7 @@ import { createLegacyCorrespondenceApi } from "./legacy-correspondence.mjs";
 import { createLegacyCliApi } from "./legacy-cli.mjs";
 import { createLegacyWorkspaceApi } from "./legacy-workspace.mjs";
 import { createLegacyEvaluationApi } from "./legacy-evaluation.mjs";
+import { createLegacySemanticApi } from "./legacy-semantic.mjs";
 import {
   createLegacyViabilityApi,
   initializeLegacyConstraintRegistry,
@@ -280,6 +281,7 @@ export function createLegacyValidationApi(executable, observeExecution) {
     ...createLegacyCorrespondenceApi(invoke),
     ...createLegacyReferenceApi(invoke),
     ...createLegacyEvaluationApi(invoke, Registry),
+    ...createLegacySemanticApi(invoke),
     ...createLegacyViabilityApi(invoke, Registry, Graph),
     ...createLegacyConfigApi(invoke, loadFile),
     ...workspace,
@@ -365,6 +367,19 @@ export const parseLegacyViableGeneration = (value) =>
   api().parseLegacyViableGeneration(value);
 export const compileLegacyMetamap = (document, policy, options) =>
   api().compileLegacyMetamap(document, policy, options);
+export const validateLegacySemanticPolicy = (value) =>
+  api().validateLegacySemanticPolicy(value);
+export const parseLegacySemanticPolicy = (value) =>
+  api().parseLegacySemanticPolicy(value);
+export const validateLegacySemanticGeneration = (value) =>
+  api().validateLegacySemanticGeneration(value);
+export const parseLegacySemanticGeneration = (value) =>
+  api().parseLegacySemanticGeneration(value);
+export const legacySemanticGenerationDigest = (value) =>
+  api().legacySemanticGenerationDigest(value);
+export const legacyPolicyView = (value) => api().legacyPolicyView(value);
+export const admittedLegacyMappingDependencies = (...args) =>
+  api().admittedLegacyMappingDependencies(...args);
 export const validateLegacyDocumentShape = (document) =>
   api().validateLegacyDocumentShape(document);
 export const parseLegacyRelationPack = (value) =>

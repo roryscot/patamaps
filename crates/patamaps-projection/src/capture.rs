@@ -182,6 +182,38 @@ pub fn executor_id() -> &'static str {
                 include_str!("../../patamaps-core/src/legacy_viability.rs"),
             ),
             (
+                "legacySemantic",
+                include_str!("../../patamaps-core/src/legacy_semantic.rs"),
+            ),
+            (
+                "legacySemanticPolicySchema",
+                include_str!(
+                    "../../../fixtures/reference/schemas/metamap-viability-v2.schema.json"
+                ),
+            ),
+            (
+                "legacySemanticGenerationSchema",
+                include_str!(
+                    "../../../fixtures/reference/schemas/metamap-generation-v2.schema.json"
+                ),
+            ),
+            (
+                "legacySemanticDerivationSchema",
+                include_str!("../../../fixtures/reference/schemas/metamap-derivation.schema.json"),
+            ),
+            (
+                "legacySemanticGraphSchema",
+                include_str!("../../../fixtures/reference/schemas/metamap-graph.schema.json"),
+            ),
+            (
+                "legacySemanticV1PolicySchema",
+                include_str!("../../../fixtures/reference/schemas/metamap-viability.schema.json"),
+            ),
+            (
+                "legacySemanticV1GenerationSchema",
+                include_str!("../../../fixtures/reference/schemas/metamap-generation.schema.json"),
+            ),
+            (
                 "legacyConstraints",
                 include_str!("../../patamaps-core/src/legacy_constraints.rs"),
             ),

@@ -1,0 +1,49 @@
+node:internal/modules/run_main:123
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: view-42
++ actual - expected
+
+  {
+    host: {
++     inputSchemaVersion: undefined,
+      issueKeys: null,
+      keys: [
+        'schemaVersion'
+      ],
+      retained: [],
+
+    at file:///private/tmp/patamaps-installed-sdk-f8w1ft3z/semantic-validation.mjs:92:183
+    at ModuleJob.run (node:internal/modules/esm/module_job:274:25)
+    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:644:26)
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:117:5) {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: {
+    status: 'observed',
+    value: { schemaVersion: '1.0.0' },
+    host: {
+      sameInput: false,
+      keys: [ 'schemaVersion' ],
+      issueKeys: null,
+      retained: [],
+      schemaVersion: '1.0.0',
+      inputSchemaVersion: undefined
+    }
+  },
+  expected: {
+    status: 'observed',
+    value: { schemaVersion: '1.0.0' },
+    host: {
+      sameInput: false,
+      keys: [ 'schemaVersion' ],
+      issueKeys: null,
+      retained: [],
+      schemaVersion: '1.0.0'
+    }
+  },
+  operator: 'deepStrictEqual'
+}
+
+Node.js v22.16.0

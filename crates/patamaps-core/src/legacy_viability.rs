@@ -1506,6 +1506,9 @@ pub fn legacy_viability_request(
         })
         .collect::<Vec<_>>();
     let result = match request.operation.as_str() {
+        operation if operation.starts_with("semantic-") => {
+            crate::legacy_semantic::request(operation, input)?
+        }
         "validate-policy" => {
             validation_response(validate_policy(get(input, "value")?, &observation.holes)?)
         }

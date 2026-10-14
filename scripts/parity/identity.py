@@ -13,7 +13,7 @@ def identities(root: Path):
         if function == "executor_id()":
             start = source.index("BTreeMap::from([")
             recipe = source[start:source.index("]))", start)]
-            for name, relative in re.findall(r'\(\s*"([^"]+)"\s*,\s*include_str!\("([^"]+)"\)\s*,?\s*\)', recipe):
+            for name, relative in re.findall(r'\(\s*"([^"]+)"\s*,\s*include_str!\(\s*"([^"]+)"\s*\)\s*,?\s*\)', recipe):
                 value[name] = (path.parent / relative).read_text()
             for name, literal in re.findall(r'\(\s*"([^"]+)"\s*,\s*"([^"]+)"\s*,?\s*\)', recipe):
                 value[name] = literal
@@ -21,7 +21,7 @@ def identities(root: Path):
         else:
             start = source.index("json!({")
             recipe = source[start:source.index("}))", start)]
-            for name, relative in re.findall(r'"([^"]+)"\s*:\s*include_str!\("([^"]+)"\)', recipe):
+            for name, relative in re.findall(r'"([^"]+)"\s*:\s*include_str!\(\s*"([^"]+)"\s*\)', recipe):
                 value[name] = (path.parent / relative).read_text()
             for name, literal in re.findall(r'"([^"]+)"\s*:\s*"([^"]+)"', recipe):
                 value[name] = literal

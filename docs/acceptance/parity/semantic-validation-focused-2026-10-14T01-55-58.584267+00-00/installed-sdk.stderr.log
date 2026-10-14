@@ -1,0 +1,11 @@
+Traceback (most recent call last):
+  File "/Users/admin/dev/patamaps/patamaps/scripts/parity/sdk_consumer.py", line 621, in <module>
+    passed = passed and all(engine[key] == value for key,value in identities(ROOT).items()) and sha(installed) == sha(binary)
+                                                                  ~~~~~~~~~~^^^^^^
+  File "/Users/admin/dev/patamaps/patamaps/scripts/parity/identity.py", line 49, in identities
+    compiler = embedded(root / "crates/patamaps-projection/src/capture.rs", "executor_id()", {
+        "profile": profile, "legacyCollatorSource": "sha256:" + digest.hexdigest()})
+  File "/Users/admin/dev/patamaps/patamaps/scripts/parity/identity.py", line 29, in embedded
+    assert set(value) == set(declared) and len(declared) == len(value), f"Unclassified source identity fields in {function}"
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Unclassified source identity fields in executor_id()
