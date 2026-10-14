@@ -1,0 +1,93 @@
+{
+  "status": "failed",
+  "scope": "Development source/native package installation, Rust library customization and generated compiler-free Rust consumer, Python/TypeScript installed wrappers. Protected Linux host and complete scientific/discovery migrations are recorded separately.",
+  "retainedWork": ".tools/capabilities/installed-0k5g2ttk",
+  "commands": [
+    {
+      "label": "package",
+      "argv": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "-B",
+        "/Users/admin/dev/patamaps/patamaps/scripts/package.py",
+        "--binary",
+        "/Users/admin/dev/patamaps/patamaps/target/debug/patamaps",
+        "--build-profile",
+        "development",
+        "--output",
+        "/Users/admin/dev/patamaps/patamaps/.tools/capabilities/installed-0k5g2ttk/package",
+        "--acceptance-output",
+        "/Users/admin/dev/patamaps/patamaps/docs/acceptance/capabilities/installed-2026-10-14T16-07-01.989412Z"
+      ],
+      "exitCode": 0,
+      "stdout": {
+        "path": "docs/acceptance/capabilities/installed-2026-10-14T16-07-01.989412Z/package.stdout.log",
+        "digest": "sha256:d761d73aa4fa00135f123ccbe1d7edf7ac066b6bc094fcb678923207414719a4"
+      },
+      "stderr": {
+        "path": "docs/acceptance/capabilities/installed-2026-10-14T16-07-01.989412Z/package.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "install",
+      "argv": [
+        "/Users/admin/.cargo/bin/cargo",
+        "install",
+        "--path",
+        "/Users/admin/dev/patamaps/patamaps/.tools/capabilities/installed-0k5g2ttk/source/patamaps-draft-c9b008d3636e/crates/patamaps-cli",
+        "--locked",
+        "--offline",
+        "--debug",
+        "--root",
+        "/Users/admin/dev/patamaps/patamaps/.tools/capabilities/installed-0k5g2ttk/installation"
+      ],
+      "exitCode": 0,
+      "stdout": {
+        "path": "docs/acceptance/capabilities/installed-2026-10-14T16-07-01.989412Z/install.stdout.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "docs/acceptance/capabilities/installed-2026-10-14T16-07-01.989412Z/install.stderr.log",
+        "digest": "sha256:548091e9a371074e45fe3e9ca9c0d328c290d1405c9e08a9330a447c44f828c7"
+      }
+    },
+    {
+      "label": "installed-engine",
+      "argv": [
+        "/Users/admin/dev/patamaps/patamaps/.tools/capabilities/installed-0k5g2ttk/installation/bin/patamaps",
+        "engine"
+      ],
+      "exitCode": 0,
+      "stdout": {
+        "path": "docs/acceptance/capabilities/installed-2026-10-14T16-07-01.989412Z/installed-engine.stdout.log",
+        "digest": "sha256:e1ac240ff2952232d0d6a2d407db5c1b4af3342e748d13e2889b49363f49e60e"
+      },
+      "stderr": {
+        "path": "docs/acceptance/capabilities/installed-2026-10-14T16-07-01.989412Z/installed-engine.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "rust-sdk",
+      "argv": [
+        "/Users/admin/.cargo/bin/cargo",
+        "run",
+        "--offline",
+        "--quiet"
+      ],
+      "exitCode": 101,
+      "stdout": {
+        "path": "docs/acceptance/capabilities/installed-2026-10-14T16-07-01.989412Z/rust-sdk.stdout.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "docs/acceptance/capabilities/installed-2026-10-14T16-07-01.989412Z/rust-sdk.stderr.log",
+        "digest": "sha256:624765c34a14d3221bcf440e81489a6a5bdf50ed440d3452c562c11b57762363"
+      }
+    }
+  ],
+  "deleted": [],
+  "registryPublication": "not-requested",
+  "productionActivation": "not-requested",
+  "error": "RuntimeError: rust-sdk failed; inspect retained logs in /Users/admin/dev/patamaps/patamaps/docs/acceptance/capabilities/installed-2026-10-14T16-07-01.989412Z"
+}

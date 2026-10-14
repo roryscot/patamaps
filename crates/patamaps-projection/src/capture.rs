@@ -262,6 +262,10 @@ pub fn executor_id() -> &'static str {
                 include_str!("../../patamaps-core/src/admission.rs"),
             ),
             (
+                "nativeConstraints",
+                include_str!("../../patamaps-core/src/constraints.rs"),
+            ),
+            (
                 "topology",
                 include_str!("../../patamaps-core/src/topology.rs"),
             ),

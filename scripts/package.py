@@ -13,10 +13,15 @@ parser.add_argument("--binary", type=Path, required=True)
 parser.add_argument("--activator-binary", type=Path, help="Optional separately verified Linux host executable")
 parser.add_argument("--output", type=Path, required=True)
 parser.add_argument("--build-profile", choices=["release", "development", "unspecified"], default="unspecified")
+parser.add_argument("--acceptance-output", type=Path, help="Exact current receipt directory kept beside this package, outside its source payload")
 args = parser.parse_args()
 binary = args.binary.resolve()
 output = args.output.resolve()
 output.mkdir(parents=True, exist_ok=True)
+acceptance_output = args.acceptance_output.resolve() if args.acceptance_output else None
+if acceptance_output:
+    relative_acceptance = acceptance_output.relative_to(ROOT / "docs/acceptance")
+    assert relative_acceptance.parts, "Do not exclude the acceptance evidence root"
 
 def digest(data):
     return "sha256:" + hashlib.sha256(data).hexdigest()
@@ -32,19 +37,24 @@ def archive(path, files, prefix):
                 tar.addfile(entry, io.BytesIO(data))
 
 source = {}
-for directory in ["crates", "fixtures", "relation-packs", "schemas", "sdk", "adapters", "scripts", "examples"]:
+for directory in ["crates", "fixtures", "relation-packs", "schemas", "sdk", "adapters", "scripts", "examples", "vendor"]:
     for path in sorted((ROOT / directory).rglob("*")):
         if path.is_file() and not any(p in {"__pycache__", "node_modules", ".DS_Store", "target"} for p in path.parts):
             source[path.relative_to(ROOT).as_posix()] = path.read_bytes()
-for name in ["Cargo.toml", "Cargo.lock", "rust-toolchain.toml", "LICENSE", "NOTICE", "README.md", "BUILD_PLAN.md", "docs/SPEC.md"]:
+for name in ["Cargo.toml", "Cargo.lock", "rust-toolchain.toml", "LICENSE", "NOTICE", "README.md", "BUILD_PLAN.md", "docs/SPEC.md", "docs/TEST_CLASSIFICATION.md"]:
     source[name] = (ROOT / name).read_bytes()
 for path in (ROOT / "docs/decisions").glob("*.md"):
     source[path.relative_to(ROOT).as_posix()] = path.read_bytes()
+for path in (ROOT / "docs/history").rglob("*"):
+    if path.is_file():
+        source[path.relative_to(ROOT).as_posix()] = path.read_bytes()
 # The installation receipt identifies these archives and remains beside them,
 # rather than recursively entering the bundle it verifies. Historical archives
 # remain in the repository. Include all other acceptance records for inspection.
 for path in (ROOT / "docs/acceptance").rglob("*"):
     relative = path.relative_to(ROOT / "docs/acceptance")
+    if acceptance_output and path.is_relative_to(acceptance_output):
+        continue
     if path.is_file() and relative.parts[0] not in {"distributions", "source-snapshots"} and relative.as_posix() != "native-installation.json":
         source[path.relative_to(ROOT).as_posix()] = path.read_bytes()
 inventory = [{"path": name, "digest": digest(data), "bytes": len(data)} for name, data in sorted(source.items())]
@@ -59,6 +69,8 @@ receipt = {"schemaVersion": "0.1.0", "status": "unpublished-draft", "target": ta
            "buildProvenance": "Caller-declared profile; hashing and source identity do not attest a reproducible or authorized binary",
            "sourceInventoryDigest": digest(source["source-inventory.json"]),
            "protectedActivationAcceptance": "recorded-separately"}
+if acceptance_output:
+    receipt["acceptanceOutputOutsideSourcePayload"] = acceptance_output.relative_to(ROOT).as_posix()
 if args.activator_binary:
     assert target.endswith("unknown-linux-gnu"), "Protected executable packaging is Linux-only"
     activator = args.activator_binary.resolve()

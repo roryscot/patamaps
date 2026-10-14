@@ -1,6 +1,7 @@
 #![forbid(unsafe_code)]
 
 mod admission;
+mod constraints;
 mod control;
 mod derivation;
 mod diff;
@@ -36,6 +37,11 @@ mod uncertainty;
 
 pub use admission::{
     AdmittedGeneration, EvaluationOptions, GenerationRecord, admit, admit_controlled,
+    admit_with_constraints,
+};
+pub use constraints::{
+    ConstraintEvaluationContext, ConstraintEvaluator, ConstraintEvaluatorBinding,
+    ConstraintRegistry, ConstraintRegistryError,
 };
 pub use control::{CancellationToken, WorkControl};
 pub use derivation::{

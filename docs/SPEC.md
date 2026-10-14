@@ -133,3 +133,22 @@ bounded across all topology constraints at 2,000,000 visited/checked steps; each
 evaluator permits at most 1,024 findings before an explicit diagnostic refusal.
 Exhaustion never yields admission. Ownership/exclusion metadata remains a
 declaration, not authenticated host authority.
+
+## Explicit native constraint extensions
+
+The Rust library exposes `ConstraintRegistry`, `ConstraintEvaluationContext` and
+`admit_with_constraints`. Registered code borrows immutable inputs and returns
+typed findings. Built-ins cannot be replaced; missing evaluators, failures,
+unwind panics, invalid or over-limit findings and exhausted controls refuse.
+Namespaced custom errors cannot impersonate ordinary waivable findings. Used
+implementation bindings are included in the generation address in UTF-16 kind
+order; unused registrations have no effect. This host attribution does not
+authenticate the evaluator implementation.
+
+In-process callbacks are trusted host code and use cooperative cancellation;
+this API cannot preempt a callback that never returns. Default portable capture,
+replay, artifact preparation and protected publication install no custom code.
+Unknown-kind refusal can be captured and verified, but serialized custom results
+cannot restore admission. This preserves MetaMap’s explicit built-in-only replay
+boundary. See [decision 0012](decisions/0012-native-constraint-evaluators.md) and the
+[current compiler checkpoint](acceptance/capabilities/compiler-2026-10-14T15-51-21.761649Z/receipt.json).

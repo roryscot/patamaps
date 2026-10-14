@@ -41,12 +41,14 @@ pub struct GenerationRecord {
     pub inactive_mappings: Vec<InactiveMapping>,
     pub evidence: Vec<String>,
     pub waivers_applied: Vec<String>,
+    #[serde(skip_serializing_if = "Vec::is_empty")]
+    pub custom_constraint_evaluators: Vec<crate::ConstraintEvaluatorBinding>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub semantics: Option<SemanticGeneration>,
 }
 
 /// This type borrows the immutable graph and policy that established admission.
-/// Serialized records are evidence; the only constructor is `admit`.
+/// Serialized records are evidence; only checked admission creates this value.
 ///
 /// ```compile_fail
 /// use patamaps_core::AdmittedGeneration;
@@ -418,7 +420,7 @@ pub fn admit<'a>(
     policy: &'a PolicyDocument,
     options: EvaluationOptions,
 ) -> Result<AdmittedGeneration<'a>, CheckError> {
-    admit_internal(graph, policy, options, None)
+    admit_internal(graph, policy, options, None, None)
 }
 pub fn admit_controlled<'a>(
     graph: &'a CheckedGraph,
@@ -426,13 +428,29 @@ pub fn admit_controlled<'a>(
     options: EvaluationOptions,
     control: &crate::WorkControl,
 ) -> Result<AdmittedGeneration<'a>, CheckError> {
-    admit_internal(graph, policy, options, Some(control))
+    admit_internal(graph, policy, options, Some(control), None)
 }
+
+/// Check the same policy pipeline with explicitly installed native extensions.
+/// Used evaluator bindings become part of the generation's canonical address.
+/// Default capture/replay and protected publication do not install callbacks;
+/// their unknown-kind refusal prevents a serialized custom result bypass.
+pub fn admit_with_constraints<'a>(
+    graph: &'a CheckedGraph,
+    policy: &'a PolicyDocument,
+    options: EvaluationOptions,
+    registry: &crate::ConstraintRegistry<'_>,
+    control: &crate::WorkControl,
+) -> Result<AdmittedGeneration<'a>, CheckError> {
+    admit_internal(graph, policy, options, Some(control), Some(registry))
+}
+
 fn admit_internal<'a>(
     graph: &'a CheckedGraph,
     policy: &'a PolicyDocument,
     options: EvaluationOptions,
     control: Option<&crate::WorkControl>,
+    registry: Option<&crate::ConstraintRegistry<'_>>,
 ) -> Result<AdmittedGeneration<'a>, CheckError> {
     crate::control::poll(control)?;
     crate::graph::object_bounds(
@@ -887,9 +905,26 @@ fn admit_internal<'a>(
         }
     }
     let mut topology_work = crate::topology::Work::new(control);
+    let mut custom_bindings = std::collections::BTreeMap::new();
     for c in &policy.constraints {
         crate::control::poll(control)?;
-        if crate::topology::supported(&c.kind) {
+        if let Some(registry) = registry.filter(|_| !crate::constraints::builtin(&c.kind)) {
+            let context = crate::ConstraintEvaluationContext {
+                graph,
+                policy,
+                options: &options,
+                active: &active,
+                control: control.expect("custom admission requires explicit work controls"),
+            };
+            issues.extend(registry.evaluate(c, &context)?);
+            custom_bindings.insert(
+                c.kind.clone(),
+                registry
+                    .binding(&c.kind)
+                    .expect("successful evaluation has a registered binding")
+                    .clone(),
+            );
+        } else if crate::topology::supported(&c.kind) {
             issues.extend(crate::topology::evaluate(
                 c,
                 graph,
@@ -1064,6 +1099,8 @@ fn admit_internal<'a>(
     let mut active_mappings: Vec<_> = active.iter().cloned().collect();
     active_mappings.sort();
     inactive.sort_by(|a, b| a.id.cmp(&b.id));
+    let mut custom_constraint_evaluators: Vec<_> = custom_bindings.into_values().collect();
+    custom_constraint_evaluators.sort_by(|a, b| a.kind.encode_utf16().cmp(b.kind.encode_utf16()));
     let mut record = GenerationRecord {
         schema_version: ProtocolVersion::Draft1,
         document_type: "generation",
@@ -1097,6 +1134,7 @@ fn admit_internal<'a>(
             .map(|e| e.id.clone())
             .collect(),
         waivers_applied: applied.into_iter().collect(),
+        custom_constraint_evaluators,
         semantics: checked_derivations
             .as_ref()
             .zip(policy.semantics.as_ref())
