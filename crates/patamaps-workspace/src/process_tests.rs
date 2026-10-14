@@ -144,6 +144,8 @@ fn exit_timeout_pipe_overflow_and_inherited_pipe_holders_are_bounded() {
     );
     assert!(start.elapsed() < Duration::from_secs(2));
     invocation.arguments.clear();
+    // Isolate pipe overflow from the preceding deliberately tight deadline.
+    invocation.bounds.maximum_elapsed_ms = SafeInteger::new(1000).unwrap();
     invocation.bounds.maximum_stdout_bytes = SafeInteger::new(32).unwrap();
     let overflow =
         process::invoke(&invocation, Path::new("/usr/bin/yes"), &root.0, &request).unwrap_err();
@@ -151,6 +153,7 @@ fn exit_timeout_pipe_overflow_and_inherited_pipe_holders_are_bounded() {
         overflow.to_string().contains("ADAPTER_OUTPUT_LIMIT"),
         "{overflow:?}"
     );
+    invocation.bounds.maximum_elapsed_ms = SafeInteger::new(30).unwrap();
     invocation.arguments = vec!["-c".into(), "/bin/sleep 10 & exit 0".into()];
     let start = Instant::now();
     assert!(

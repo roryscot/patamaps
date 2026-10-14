@@ -1,0 +1,10 @@
+{
+  "status": "observed-fixture-deadline-collision",
+  "candidate": "0ed396fa11c4fc092c551c40b013c5fd46347eab",
+  "run": "https://github.com/roryscot/patamaps/actions/runs/38630209976",
+  "failure": "process_tests::exit_timeout_pipe_overflow_and_inherited_pipe_holders_are_bounded: expected ADAPTER_OUTPUT_LIMIT, observed ADAPTER_TIMEOUT",
+  "sourceObservation": "The overflow case reused the 30 ms deadline previously assigned to the 10 second sleep control. The product enforces both output and elapsed-time bounds, so the deadline can win before the pipe reader reports overflow.",
+  "proposedCorrection": "Restore the setup budget of 1000 ms only for the 32-byte overflow case; explicitly restore 30 ms for the inherited-pipe timeout case. All assertion expressions and both 30 ms timeout controls remain. Production code is unchanged.",
+  "archivePreservedAt": "/Users/admin/dev/patamaps/patamaps/.tools/capabilities/linux-ci-38630209976/x86_64/fixtures.tar.gz",
+  "deleted": []
+}
