@@ -1,0 +1,5933 @@
+{
+  "status": "different",
+  "counts": {
+    "cases": 68,
+    "matched": 0,
+    "differences": 68
+  },
+  "differences": [
+    {
+      "name": "registry-construct",
+      "expected": {
+        "status": "observed",
+        "value": {
+          "builtins": [
+            {
+              "kind": "core:requires-evidence",
+              "name": "requiresEvidence",
+              "length": 2,
+              "stable": true
+            },
+            {
+              "kind": "core:requires-mapping",
+              "name": "requiresMapping",
+              "length": 2,
+              "stable": true
+            },
+            {
+              "kind": "core:forbids-mapping",
+              "name": "forbidsMapping",
+              "length": 2,
+              "stable": true
+            },
+            {
+              "kind": "core:unique-target",
+              "name": "uniqueTarget",
+              "length": 2,
+              "stable": true
+            },
+            {
+              "kind": "core:requires-authority",
+              "name": "requiresAuthority",
+              "length": 2,
+              "stable": true
+            },
+            {
+              "kind": "topology:relation-totality",
+              "name": "topologyRelationTotality",
+              "length": 2,
+              "stable": true
+            },
+            {
+              "kind": "topology:reachable",
+              "name": "topologyReachable",
+              "length": 2,
+              "stable": true
+            },
+            {
+              "kind": "topology:context-satisfied",
+              "name": "topologyContextSatisfied",
+              "length": 2,
+              "stable": true
+            }
+          ],
+          "keys": [
+            "evaluators"
+          ],
+          "missing": true
+        }
+      },
+      "observed": {
+        "status": "threw",
+        "error": {
+          "name": "TypeError",
+          "message": "api.Registry is not a constructor",
+          "constructor": "TypeError",
+          "keys": [],
+          "ownNames": [
+            "stack",
+            "message"
+          ]
+        },
+        "host": {
+          "events": [],
+          "sameThrownObject": false
+        }
+      }
+    },
+    {
+      "name": "registry-test:custom-register",
+      "expected": {
+        "status": "observed",
+        "value": {
+          "builtins": [
+            {
+              "kind": "core:requires-evidence",
+              "name": "requiresEvidence",
+              "length": 2,
+              "stable": true
+            },
+            {
+              "kind": "core:requires-mapping",
+              "name": "requiresMapping",
+              "length": 2,
+              "stable": true
+            },
+            {
+              "kind": "core:forbids-mapping",
+              "name": "forbidsMapping",
+              "length": 2,
+              "stable": true
+            },
+            {
+              "kind": "core:unique-target",
+              "name": "uniqueTarget",
+              "length": 2,
+              "stable": true
+            },
+            {
+              "kind": "core:requires-authority",
+              "name": "requiresAuthority",
+              "length": 2,
+              "stable": true
+            },
+            {
+              "kind": "topology:relation-totality",
+              "name": "topologyRelationTotality",
+              "length": 2,
+              "stable": true
+            },
+            {
+              "kind": "topology:reachable",
+              "name": "topologyReachable",
+              "length": 2,
+              "stable": true
+            },
+            {
+              "kind": "topology:context-satisfied",
+              "name": "topologyContextSatisfied",
+              "length": 2,
+              "stable": true
+            }
+          ],
+          "registerUndefined": true,
+          "retained": true,
+          "zeroAlias": null,
+          "keys": [
+            "evaluators"
+          ]
+        }
+      },
+      "observed": {
+        "status": "threw",
+        "error": {
+          "name": "TypeError",
+          "message": "api.Registry is not a constructor",
+          "constructor": "TypeError",
+          "keys": [],
+          "ownNames": [
+            "stack",
+            "message"
+          ]
+        },
+        "host": {
+          "events": [],
+          "sameThrownObject": false
+        }
+      }
+    },
+    {
+      "name": "registry-test:custom-duplicate",
+      "expected": {
+        "status": "threw",
+        "error": {
+          "name": "Error",
+          "message": "Constraint evaluator test:custom is already registered",
+          "constructor": "Error",
+          "keys": [],
+          "ownNames": [
+            "stack",
+            "message"
+          ]
+        },
+        "host": {
+          "events": [],
+          "sameThrownObject": false
+        }
+      },
+      "observed": {
+        "status": "threw",
+        "error": {
+          "name": "TypeError",
+          "message": "api.Registry is not a constructor",
+          "constructor": "TypeError",
+          "keys": [],
+          "ownNames": [
+            "stack",
+            "message"
+          ]
+        },
+        "host": {
+          "events": [],
+          "sameThrownObject": false
+        }
+      }
+    },
+    {
+      "name": "registry-core:requires-evidence-register",
+      "expected": {
+        "status": "threw",
+        "error": {
+          "name": "Error",
+          "message": "Constraint evaluator core:requires-evidence is already registered",
+          "constructor": "Error",
+          "keys": [],
+          "ownNames": [
+            "stack",
+            "message"
+          ]
+        },
+        "host": {
+          "events": [],
+          "sameThrownObject": false
+        }
+      },
+      "observed": {
+        "status": "threw",
+        "error": {
+          "name": "TypeError",
+          "message": "api.Registry is not a constructor",
+          "constructor": "TypeError",
+          "keys": [],
+          "ownNames": [
+            "stack",
+            "message"
+          ]
+        },
+        "host": {
+          "events": [],
+          "sameThrownObject": false
+        }
+      }
+    },
+    {
+      "name": "registry-core:requires-evidence-duplicate",
+      "expected": {
+        "status": "threw",
+        "error": {
+          "name": "Error",
+          "message": "Constraint evaluator core:requires-evidence is already registered",
+          "constructor": "Error",
+          "keys": [],
+          "ownNames": [
+            "stack",
+            "message"
+          ]
+        },
+        "host": {
+          "events": [],
+          "sameThrownObject": false
+        }
+      },
+      "observed": {
+        "status": "threw",
+        "error": {
+          "name": "TypeError",
+          "message": "api.Registry is not a constructor",
+          "constructor": "TypeError",
+          "keys": [],
+          "ownNames": [
+            "stack",
+            "message"
+          ]
+        },
+        "host": {
+          "events": [],
+          "sameThrownObject": false
+        }
+      }
+    },
+    {
+      "name": "registry-__proto__-register",
+      "expected": {
+        "status": "observed",
+        "value": {
+          "builtins": [
+            {
+              "kind": "core:requires-evidence",
+              "name": "requiresEvidence",
+              "length": 2,
+              "stable": true
+            },
+            {
+              "kind": "core:requires-mapping",
+              "name": "requiresMapping",
+              "length": 2,
+              "stable": true
+            },
+            {
+              "kind": "core:forbids-mapping",
+              "name": "forbidsMapping",
+              "length": 2,
+              "stable": true
+            },
+            {
+              "kind": "core:unique-target",
+              "name": "uniqueTarget",
+              "length": 2,
+              "stable": true
+            },
+            {
+              "kind": "core:requires-authority",
+              "name": "requiresAuthority",
+              "length": 2,
+              "stable": true
+            },
+            {
+              "kind": "topology:relation-totality",
+              "name": "topologyRelationTotality",
+              "length": 2,
+              "stable": true
+            },
+            {
+              "kind": "topology:reachable",
+              "name": "topologyReachable",
+              "length": 2,
+              "stable": true
+            },
+            {
+              "kind": "topology:context-satisfied",
+              "name": "topologyContextSatisfied",
+              "length": 2,
+              "stable": true
+            }
+          ],
+          "registerUndefined": true,
+          "retained": true,
+          "zeroAlias": null,
+          "keys": [
+            "evaluators"
+          ]
+        }
+      },
+      "observed": {
+        "status": "threw",
+        "error": {
+          "name": "TypeError",
+          "message": "api.Registry is not a constructor",
+          "constructor": "TypeError",
+          "keys": [],
+          "ownNames": [
+            "stack",
+            "message"
+          ]
+        },
+        "host": {
+          "events": [],
+          "sameThrownObject": false
+        }
+      }
+    },
+    {
+      "name": "registry-__proto__-duplicate",
+      "expected": {
+        "status": "threw",
+        "error": {
+          "name": "Error",
+          "message": "Constraint evaluator __proto__ is already registered",
+          "constructor": "Error",
+          "keys": [],
+          "ownNames": [
+            "stack",
+            "message"
+          ]
+        },
+        "host": {
+          "events": [],
+          "sameThrownObject": false
+        }
+      },
+      "observed": {
+        "status": "threw",
+        "error": {
+          "name": "TypeError",
+          "message": "api.Registry is not a constructor",
+          "constructor": "TypeError",
+          "keys": [],
+          "ownNames": [
+            "stack",
+            "message"
+          ]
+        },
+        "host": {
+          "events": [],
+          "sameThrownObject": false
+        }
+      }
+    },
+    {
+      "name": "registry--register",
+      "expected": {
+        "status": "observed",
+        "value": {
+          "builtins": [
+            {
+              "kind": "core:requires-evidence",
+              "name": "requiresEvidence",
+              "length": 2,
+              "stable": true
+            },
+            {
+              "kind": "core:requires-mapping",
+              "name": "requiresMapping",
+              "length": 2,
+              "stable": true
+            },
+            {
+              "kind": "core:forbids-mapping",
+              "name": "forbidsMapping",
+              "length": 2,
+              "stable": true
+            },
+            {
+              "kind": "core:unique-target",
+              "name": "uniqueTarget",
+              "length": 2,
+              "stable": true
+            },
+            {
+              "kind": "core:requires-authority",
+              "name": "requiresAuthority",
+              "length": 2,
+              "stable": true
+            },
+            {
+              "kind": "topology:relation-totality",
+              "name": "topologyRelationTotality",
+              "length": 2,
+              "stable": true
+            },
+            {
+              "kind": "topology:reachable",
+              "name": "topologyReachable",
+              "length": 2,
+              "stable": true
+            },
+            {
+              "kind": "topology:context-satisfied",
+              "name": "topologyContextSatisfied",
+              "length": 2,
+              "stable": true
+            }
+          ],
+          "registerUndefined": true,
+          "retained": true,
+          "zeroAlias": null,
+          "keys": [
+            "evaluators"
+          ]
+        }
+      },
+      "observed": {
+        "status": "threw",
+        "error": {
+          "name": "TypeError",
+          "message": "api.Registry is not a constructor",
+          "constructor": "TypeError",
+          "keys": [],
+          "ownNames": [
+            "stack",
+            "message"
+          ]
+        },
+        "host": {
+          "events": [],
+          "sameThrownObject": false
+        }
+      }
+    },
+    {
+      "name": "registry--duplicate",
+      "expected": {
+        "status": "threw",
+        "error": {
+          "name": "Error",
+          "message": "Constraint evaluator  is already registered",
+          "constructor": "Error",
+          "keys": [],
+          "ownNames": [
+            "stack",
+            "message"
+          ]
+        },
+        "host": {
+          "events": [],
+          "sameThrownObject": false
+        }
+      },
+      "observed": {
+        "status": "threw",
+        "error": {
+          "name": "TypeError",
+          "message": "api.Registry is not a constructor",
+          "constructor": "TypeError",
+          "keys": [],
+          "ownNames": [
+            "stack",
+            "message"
+          ]
+        },
+        "host": {
+          "events": [],
+          "sameThrownObject": false
+        }
+      }
+    },
+    {
+      "name": "registry-@nan-register",
+      "expected": {
+        "status": "observed",
+        "value": {
+          "builtins": [
+            {
+              "kind": "core:requires-evidence",
+              "name": "requiresEvidence",
+              "length": 2,
+              "stable": true
+            },
+            {
+              "kind": "core:requires-mapping",
+              "name": "requiresMapping",
+              "length": 2,
+              "stable": true
+            },
+            {
+              "kind": "core:forbids-mapping",
+              "name": "forbidsMapping",
+              "length": 2,
+              "stable": true
+            },
+            {
+              "kind": "core:unique-target",
+              "name": "uniqueTarget",
+              "length": 2,
+              "stable": true
+            },
+            {
+              "kind": "core:requires-authority",
+              "name": "requiresAuthority",
+              "length": 2,
+              "stable": true
+            },
+            {
+              "kind": "topology:relation-totality",
+              "name": "topologyRelationTotality",
+              "length": 2,
+              "stable": true
+            },
+            {
+              "kind": "topology:reachable",
+              "name": "topologyReachable",
+              "length": 2,
+              "stable": true
+            },
+            {
+              "kind": "topology:context-satisfied",
+              "name": "topologyContextSatisfied",
+              "length": 2,
+              "stable": true
+            }
+          ],
+          "registerUndefined": true,
+          "retained": true,
+          "zeroAlias": null,
+          "keys": [
+            "evaluators"
+          ]
+        }
+      },
+      "observed": {
+        "status": "threw",
+        "error": {
+          "name": "TypeError",
+          "message": "api.Registry is not a constructor",
+          "constructor": "TypeError",
+          "keys": [],
+          "ownNames": [
+            "stack",
+            "message"
+          ]
+        },
+        "host": {
+          "events": [],
+          "sameThrownObject": false
+        }
+      }
+    },
+    {
+      "name": "registry-@nan-duplicate",
+      "expected": {
+        "status": "threw",
+        "error": {
+          "name": "Error",
+          "message": "Constraint evaluator NaN is already registered",
+          "constructor": "Error",
+          "keys": [],
+          "ownNames": [
+            "stack",
+            "message"
+          ]
+        },
+        "host": {
+          "events": [],
+          "sameThrownObject": false
+        }
+      },
+      "observed": {
+        "status": "threw",
+        "error": {
+          "name": "TypeError",
+          "message": "api.Registry is not a constructor",
+          "constructor": "TypeError",
+          "keys": [],
+          "ownNames": [
+            "stack",
+            "message"
+          ]
+        },
+        "host": {
+          "events": [],
+          "sameThrownObject": false
+        }
+      }
+    },
+    {
+      "name": "registry-@negative-zero-register",
+      "expected": {
+        "status": "observed",
+        "value": {
+          "builtins": [
+            {
+              "kind": "core:requires-evidence",
+              "name": "requiresEvidence",
+              "length": 2,
+              "stable": true
+            },
+            {
+              "kind": "core:requires-mapping",
+              "name": "requiresMapping",
+              "length": 2,
+              "stable": true
+            },
+            {
+              "kind": "core:forbids-mapping",
+              "name": "forbidsMapping",
+              "length": 2,
+              "stable": true
+            },
+            {
+              "kind": "core:unique-target",
+              "name": "uniqueTarget",
+              "length": 2,
+              "stable": true
+            },
+            {
+              "kind": "core:requires-authority",
+              "name": "requiresAuthority",
+              "length": 2,
+              "stable": true
+            },
+            {
+              "kind": "topology:relation-totality",
+              "name": "topologyRelationTotality",
+              "length": 2,
+              "stable": true
+            },
+            {
+              "kind": "topology:reachable",
+              "name": "topologyReachable",
+              "length": 2,
+              "stable": true
+            },
+            {
+              "kind": "topology:context-satisfied",
+              "name": "topologyContextSatisfied",
+              "length": 2,
+              "stable": true
+            }
+          ],
+          "registerUndefined": true,
+          "retained": true,
+          "zeroAlias": true,
+          "keys": [
+            "evaluators"
+          ]
+        }
+      },
+      "observed": {
+        "status": "threw",
+        "error": {
+          "name": "TypeError",
+          "message": "api.Registry is not a constructor",
+          "constructor": "TypeError",
+          "keys": [],
+          "ownNames": [
+            "stack",
+            "message"
+          ]
+        },
+        "host": {
+          "events": [],
+          "sameThrownObject": false
+        }
+      }
+    },
+    {
+      "name": "registry-@negative-zero-duplicate",
+      "expected": {
+        "status": "threw",
+        "error": {
+          "name": "Error",
+          "message": "Constraint evaluator 0 is already registered",
+          "constructor": "Error",
+          "keys": [],
+          "ownNames": [
+            "stack",
+            "message"
+          ]
+        },
+        "host": {
+          "events": [],
+          "sameThrownObject": false
+        }
+      },
+      "observed": {
+        "status": "threw",
+        "error": {
+          "name": "TypeError",
+          "message": "api.Registry is not a constructor",
+          "constructor": "TypeError",
+          "keys": [],
+          "ownNames": [
+            "stack",
+            "message"
+          ]
+        },
+        "host": {
+          "events": [],
+          "sameThrownObject": false
+        }
+      }
+    },
+    {
+      "name": "registry-@symbol-register",
+      "expected": {
+        "status": "observed",
+        "value": {
+          "builtins": [
+            {
+              "kind": "core:requires-evidence",
+              "name": "requiresEvidence",
+              "length": 2,
+              "stable": true
+            },
+            {
+              "kind": "core:requires-mapping",
+              "name": "requiresMapping",
+              "length": 2,
+              "stable": true
+            },
+            {
+              "kind": "core:forbids-mapping",
+              "name": "forbidsMapping",
+              "length": 2,
+              "stable": true
+            },
+            {
+              "kind": "core:unique-target",
+              "name": "uniqueTarget",
+              "length": 2,
+              "stable": true
+            },
+            {
+              "kind": "core:requires-authority",
+              "name": "requiresAuthority",
+              "length": 2,
+              "stable": true
+            },
+            {
+              "kind": "topology:relation-totality",
+              "name": "topologyRelationTotality",
+              "length": 2,
+              "stable": true
+            },
+            {
+              "kind": "topology:reachable",
+              "name": "topologyReachable",
+              "length": 2,
+              "stable": true
+            },
+            {
+              "kind": "topology:context-satisfied",
+              "name": "topologyContextSatisfied",
+              "length": 2,
+              "stable": true
+            }
+          ],
+          "registerUndefined": true,
+          "retained": true,
+          "zeroAlias": null,
+          "keys": [
+            "evaluators"
+          ]
+        }
+      },
+      "observed": {
+        "status": "threw",
+        "error": {
+          "name": "TypeError",
+          "message": "api.Registry is not a constructor",
+          "constructor": "TypeError",
+          "keys": [],
+          "ownNames": [
+            "stack",
+            "message"
+          ]
+        },
+        "host": {
+          "events": [],
+          "sameThrownObject": false
+        }
+      }
+    },
+    {
+      "name": "registry-@symbol-duplicate",
+      "expected": {
+        "status": "threw",
+        "error": {
+          "name": "TypeError",
+          "message": "Cannot convert a Symbol value to a string",
+          "constructor": "TypeError",
+          "keys": [],
+          "ownNames": [
+            "stack",
+            "message"
+          ]
+        },
+        "host": {
+          "events": [],
+          "sameThrownObject": false
+        }
+      },
+      "observed": {
+        "status": "threw",
+        "error": {
+          "name": "TypeError",
+          "message": "api.Registry is not a constructor",
+          "constructor": "TypeError",
+          "keys": [],
+          "ownNames": [
+            "stack",
+            "message"
+          ]
+        },
+        "host": {
+          "events": [],
+          "sameThrownObject": false
+        }
+      }
+    },
+    {
+      "name": "registry-@object-register",
+      "expected": {
+        "status": "observed",
+        "value": {
+          "builtins": [
+            {
+              "kind": "core:requires-evidence",
+              "name": "requiresEvidence",
+              "length": 2,
+              "stable": true
+            },
+            {
+              "kind": "core:requires-mapping",
+              "name": "requiresMapping",
+              "length": 2,
+              "stable": true
+            },
+            {
+              "kind": "core:forbids-mapping",
+              "name": "forbidsMapping",
+              "length": 2,
+              "stable": true
+            },
+            {
+              "kind": "core:unique-target",
+              "name": "uniqueTarget",
+              "length": 2,
+              "stable": true
+            },
+            {
+              "kind": "core:requires-authority",
+              "name": "requiresAuthority",
+              "length": 2,
+              "stable": true
+            },
+            {
+              "kind": "topology:relation-totality",
+              "name": "topologyRelationTotality",
+              "length": 2,
+              "stable": true
+            },
+            {
+              "kind": "topology:reachable",
+              "name": "topologyReachable",
+              "length": 2,
+              "stable": true
+            },
+            {
+              "kind": "topology:context-satisfied",
+              "name": "topologyContextSatisfied",
+              "length": 2,
+              "stable": true
+            }
+          ],
+          "registerUndefined": true,
+          "retained": true,
+          "zeroAlias": null,
+          "keys": [
+            "evaluators"
+          ]
+        }
+      },
+      "observed": {
+        "status": "threw",
+        "error": {
+          "name": "TypeError",
+          "message": "api.Registry is not a constructor",
+          "constructor": "TypeError",
+          "keys": [],
+          "ownNames": [
+            "stack",
+            "message"
+          ]
+        },
+        "host": {
+          "events": [],
+          "sameThrownObject": false
+        }
+      }
+    },
+    {
+      "name": "registry-@object-duplicate",
+      "expected": {
+        "status": "threw",
+        "error": {
+          "name": "Error",
+          "message": "Constraint evaluator [object Object] is already registered",
+          "constructor": "Error",
+          "keys": [],
+          "ownNames": [
+            "stack",
+            "message"
+          ]
+        },
+        "host": {
+          "events": [],
+          "sameThrownObject": false
+        }
+      },
+      "observed": {
+        "status": "threw",
+        "error": {
+          "name": "TypeError",
+          "message": "api.Registry is not a constructor",
+          "constructor": "TypeError",
+          "keys": [],
+          "ownNames": [
+            "stack",
+            "message"
+          ]
+        },
+        "host": {
+          "events": [],
+          "sameThrownObject": false
+        }
+      }
+    },
+    {
+      "name": "registry-value-undefined",
+      "expected": {
+        "status": "observed",
+        "value": {
+          "builtins": [
+            {
+              "kind": "core:requires-evidence",
+              "name": "requiresEvidence",
+              "length": 2,
+              "stable": true
+            },
+            {
+              "kind": "core:requires-mapping",
+              "name": "requiresMapping",
+              "length": 2,
+              "stable": true
+            },
+            {
+              "kind": "core:forbids-mapping",
+              "name": "forbidsMapping",
+              "length": 2,
+              "stable": true
+            },
+            {
+              "kind": "core:unique-target",
+              "name": "uniqueTarget",
+              "length": 2,
+              "stable": true
+            },
+            {
+              "kind": "core:requires-authority",
+              "name": "requiresAuthority",
+              "length": 2,
+              "stable": true
+            },
+            {
+              "kind": "topology:relation-totality",
+              "name": "topologyRelationTotality",
+              "length": 2,
+              "stable": true
+            },
+            {
+              "kind": "topology:reachable",
+              "name": "topologyReachable",
+              "length": 2,
+              "stable": true
+            },
+            {
+              "kind": "topology:context-satisfied",
+              "name": "topologyContextSatisfied",
+              "length": 2,
+              "stable": true
+            }
+          ],
+          "registerUndefined": true,
+          "retained": true,
+          "zeroAlias": null,
+          "keys": [
+            "evaluators"
+          ]
+        }
+      },
+      "observed": {
+        "status": "threw",
+        "error": {
+          "name": "TypeError",
+          "message": "api.Registry is not a constructor",
+          "constructor": "TypeError",
+          "keys": [],
+          "ownNames": [
+            "stack",
+            "message"
+          ]
+        },
+        "host": {
+          "events": [],
+          "sameThrownObject": false
+        }
+      }
+    },
+    {
+      "name": "registry-value-null",
+      "expected": {
+        "status": "observed",
+        "value": {
+          "builtins": [
+            {
+              "kind": "core:requires-evidence",
+              "name": "requiresEvidence",
+              "length": 2,
+              "stable": true
+            },
+            {
+              "kind": "core:requires-mapping",
+              "name": "requiresMapping",
+              "length": 2,
+              "stable": true
+            },
+            {
+              "kind": "core:forbids-mapping",
+              "name": "forbidsMapping",
+              "length": 2,
+              "stable": true
+            },
+            {
+              "kind": "core:unique-target",
+              "name": "uniqueTarget",
+              "length": 2,
+              "stable": true
+            },
+            {
+              "kind": "core:requires-authority",
+              "name": "requiresAuthority",
+              "length": 2,
+              "stable": true
+            },
+            {
+              "kind": "topology:relation-totality",
+              "name": "topologyRelationTotality",
+              "length": 2,
+              "stable": true
+            },
+            {
+              "kind": "topology:reachable",
+              "name": "topologyReachable",
+              "length": 2,
+              "stable": true
+            },
+            {
+              "kind": "topology:context-satisfied",
+              "name": "topologyContextSatisfied",
+              "length": 2,
+              "stable": true
+            }
+          ],
+          "registerUndefined": true,
+          "retained": true,
+          "zeroAlias": null,
+          "keys": [
+            "evaluators"
+          ]
+        }
+      },
+      "observed": {
+        "status": "threw",
+        "error": {
+          "name": "TypeError",
+          "message": "api.Registry is not a constructor",
+          "constructor": "TypeError",
+          "keys": [],
+          "ownNames": [
+            "stack",
+            "message"
+          ]
+        },
+        "host": {
+          "events": [],
+          "sameThrownObject": false
+        }
+      }
+    },
+    {
+      "name": "registry-value-false",
+      "expected": {
+        "status": "observed",
+        "value": {
+          "builtins": [
+            {
+              "kind": "core:requires-evidence",
+              "name": "requiresEvidence",
+              "length": 2,
+              "stable": true
+            },
+            {
+              "kind": "core:requires-mapping",
+              "name": "requiresMapping",
+              "length": 2,
+              "stable": true
+            },
+            {
+              "kind": "core:forbids-mapping",
+              "name": "forbidsMapping",
+              "length": 2,
+              "stable": true
+            },
+            {
+              "kind": "core:unique-target",
+              "name": "uniqueTarget",
+              "length": 2,
+              "stable": true
+            },
+            {
+              "kind": "core:requires-authority",
+              "name": "requiresAuthority",
+              "length": 2,
+              "stable": true
+            },
+            {
+              "kind": "topology:relation-totality",
+              "name": "topologyRelationTotality",
+              "length": 2,
+              "stable": true
+            },
+            {
+              "kind": "topology:reachable",
+              "name": "topologyReachable",
+              "length": 2,
+              "stable": true
+            },
+            {
+              "kind": "topology:context-satisfied",
+              "name": "topologyContextSatisfied",
+              "length": 2,
+              "stable": true
+            }
+          ],
+          "registerUndefined": true,
+          "retained": true,
+          "zeroAlias": null,
+          "keys": [
+            "evaluators"
+          ]
+        }
+      },
+      "observed": {
+        "status": "threw",
+        "error": {
+          "name": "TypeError",
+          "message": "api.Registry is not a constructor",
+          "constructor": "TypeError",
+          "keys": [],
+          "ownNames": [
+            "stack",
+            "message"
+          ]
+        },
+        "host": {
+          "events": [],
+          "sameThrownObject": false
+        }
+      }
+    },
+    {
+      "name": "builtin-core:requires-evidence-0",
+      "expected": {
+        "status": "observed",
+        "value": {
+          "value": [
+            {
+              "severity": "error",
+              "code": "REQUIRED_EVIDENCE_MISSING",
+              "message": "urn:example:concept:user.email has no supporting evidence meeting urn:test:callback:builtin",
+              "subjectId": "urn:example:concept:user.email"
+            }
+          ],
+          "numbers": []
+        },
+        "host": {
+          "issueKeys": [
+            [
+              "severity",
+              "code",
+              "message",
+              "subjectId"
+            ]
+          ],
+          "documentUnchanged": true,
+          "evidenceUnchanged": true,
+          "active": [
+            "urn:example:mapping:prisma-contains-user-email",
+            "urn:example:mapping:zod-contains-user-email",
+            "urn:example:mapping:user-email-implementations",
+            "urn:example:mapping:zod-email-derived-from-prisma"
+          ]
+        }
+      },
+      "observed": {
+        "status": "threw",
+        "error": {
+          "name": "TypeError",
+          "message": "api.Registry is not a constructor",
+          "constructor": "TypeError",
+          "keys": [],
+          "ownNames": [
+            "stack",
+            "message"
+          ]
+        },
+        "host": {
+          "events": [],
+          "sameThrownObject": false
+        }
+      }
+    },
+    {
+      "name": "builtin-core:requires-evidence-1",
+      "expected": {
+        "status": "observed",
+        "value": {
+          "value": [
+            {
+              "severity": "error",
+              "code": "REQUIRED_EVIDENCE_MISSING",
+              "message": "urn:example:concept:user.email has no supporting evidence meeting urn:test:callback:builtin",
+              "subjectId": "urn:example:concept:user.email"
+            }
+          ],
+          "numbers": []
+        },
+        "host": {
+          "issueKeys": [
+            [
+              "severity",
+              "code",
+              "message",
+              "subjectId"
+            ]
+          ],
+          "documentUnchanged": true,
+          "evidenceUnchanged": true,
+          "active": [
+            "urn:example:mapping:prisma-contains-user-email",
+            "urn:example:mapping:zod-contains-user-email",
+            "urn:example:mapping:user-email-implementations",
+            "urn:example:mapping:zod-email-derived-from-prisma"
+          ]
+        }
+      },
+      "observed": {
+        "status": "threw",
+        "error": {
+          "name": "TypeError",
+          "message": "api.Registry is not a constructor",
+          "constructor": "TypeError",
+          "keys": [],
+          "ownNames": [
+            "stack",
+            "message"
+          ]
+        },
+        "host": {
+          "events": [],
+          "sameThrownObject": false
+        }
+      }
+    },
+    {
+      "name": "builtin-core:requires-evidence-2",
+      "expected": {
+        "status": "observed",
+        "value": {
+          "value": [
+            {
+              "severity": "error",
+              "code": "INVALID_CONSTRAINT_PARAMETERS",
+              "message": "urn:test:callback:builtin has unsupported parameter(s): unexpected",
+              "subjectId": "urn:test:callback:builtin"
+            }
+          ],
+          "numbers": []
+        },
+        "host": {
+          "issueKeys": [
+            [
+              "severity",
+              "code",
+              "message",
+              "subjectId"
+            ]
+          ],
+          "documentUnchanged": true,
+          "evidenceUnchanged": true,
+          "active": [
+            "urn:example:mapping:prisma-contains-user-email",
+            "urn:example:mapping:zod-contains-user-email",
+            "urn:example:mapping:user-email-implementations",
+            "urn:example:mapping:zod-email-derived-from-prisma"
+          ]
+        }
+      },
+      "observed": {
+        "status": "threw",
+        "error": {
+          "name": "TypeError",
+          "message": "api.Registry is not a constructor",
+          "constructor": "TypeError",
+          "keys": [],
+          "ownNames": [
+            "stack",
+            "message"
+          ]
+        },
+        "host": {
+          "events": [],
+          "sameThrownObject": false
+        }
+      }
+    },
+    {
+      "name": "builtin-core:requires-mapping-0",
+      "expected": {
+        "status": "observed",
+        "value": {
+          "value": [],
+          "numbers": []
+        },
+        "host": {
+          "issueKeys": [],
+          "documentUnchanged": true,
+          "evidenceUnchanged": true,
+          "active": [
+            "urn:example:mapping:prisma-contains-user-email",
+            "urn:example:mapping:zod-contains-user-email",
+            "urn:example:mapping:user-email-implementations",
+            "urn:example:mapping:zod-email-derived-from-prisma"
+          ]
+        }
+      },
+      "observed": {
+        "status": "threw",
+        "error": {
+          "name": "TypeError",
+          "message": "api.Registry is not a constructor",
+          "constructor": "TypeError",
+          "keys": [],
+          "ownNames": [
+            "stack",
+            "message"
+          ]
+        },
+        "host": {
+          "events": [],
+          "sameThrownObject": false
+        }
+      }
+    },
+    {
+      "name": "builtin-core:requires-mapping-1",
+      "expected": {
+        "status": "observed",
+        "value": {
+          "value": [],
+          "numbers": []
+        },
+        "host": {
+          "issueKeys": [],
+          "documentUnchanged": true,
+          "evidenceUnchanged": true,
+          "active": [
+            "urn:example:mapping:prisma-contains-user-email",
+            "urn:example:mapping:zod-contains-user-email",
+            "urn:example:mapping:user-email-implementations",
+            "urn:example:mapping:zod-email-derived-from-prisma"
+          ]
+        }
+      },
+      "observed": {
+        "status": "threw",
+        "error": {
+          "name": "TypeError",
+          "message": "api.Registry is not a constructor",
+          "constructor": "TypeError",
+          "keys": [],
+          "ownNames": [
+            "stack",
+            "message"
+          ]
+        },
+        "host": {
+          "events": [],
+          "sameThrownObject": false
+        }
+      }
+    },
+    {
+      "name": "builtin-core:requires-mapping-2",
+      "expected": {
+        "status": "observed",
+        "value": {
+          "value": [
+            {
+              "severity": "error",
+              "code": "INVALID_CONSTRAINT_PARAMETERS",
+              "message": "urn:test:callback:builtin has unsupported parameter(s): unexpected",
+              "subjectId": "urn:test:callback:builtin"
+            }
+          ],
+          "numbers": []
+        },
+        "host": {
+          "issueKeys": [
+            [
+              "severity",
+              "code",
+              "message",
+              "subjectId"
+            ]
+          ],
+          "documentUnchanged": true,
+          "evidenceUnchanged": true,
+          "active": [
+            "urn:example:mapping:prisma-contains-user-email",
+            "urn:example:mapping:zod-contains-user-email",
+            "urn:example:mapping:user-email-implementations",
+            "urn:example:mapping:zod-email-derived-from-prisma"
+          ]
+        }
+      },
+      "observed": {
+        "status": "threw",
+        "error": {
+          "name": "TypeError",
+          "message": "api.Registry is not a constructor",
+          "constructor": "TypeError",
+          "keys": [],
+          "ownNames": [
+            "stack",
+            "message"
+          ]
+        },
+        "host": {
+          "events": [],
+          "sameThrownObject": false
+        }
+      }
+    },
+    {
+      "name": "builtin-core:forbids-mapping-0",
+      "expected": {
+        "status": "observed",
+        "value": {
+          "value": [
+            {
+              "severity": "error",
+              "code": "FORBIDDEN_MAPPING_ACTIVE",
+              "message": "urn:example:concept:user.email has forbidden active mapping(s): urn:example:mapping:user-email-implementations",
+              "subjectId": "urn:example:concept:user.email"
+            }
+          ],
+          "numbers": []
+        },
+        "host": {
+          "issueKeys": [
+            [
+              "severity",
+              "code",
+              "message",
+              "subjectId"
+            ]
+          ],
+          "documentUnchanged": true,
+          "evidenceUnchanged": true,
+          "active": [
+            "urn:example:mapping:prisma-contains-user-email",
+            "urn:example:mapping:zod-contains-user-email",
+            "urn:example:mapping:user-email-implementations",
+            "urn:example:mapping:zod-email-derived-from-prisma"
+          ]
+        }
+      },
+      "observed": {
+        "status": "threw",
+        "error": {
+          "name": "TypeError",
+          "message": "api.Registry is not a constructor",
+          "constructor": "TypeError",
+          "keys": [],
+          "ownNames": [
+            "stack",
+            "message"
+          ]
+        },
+        "host": {
+          "events": [],
+          "sameThrownObject": false
+        }
+      }
+    },
+    {
+      "name": "builtin-core:forbids-mapping-1",
+      "expected": {
+        "status": "observed",
+        "value": {
+          "value": [
+            {
+              "severity": "error",
+              "code": "FORBIDDEN_MAPPING_ACTIVE",
+              "message": "urn:example:concept:user.email has forbidden active mapping(s): urn:example:mapping:user-email-implementations",
+              "subjectId": "urn:example:concept:user.email"
+            }
+          ],
+          "numbers": []
+        },
+        "host": {
+          "issueKeys": [
+            [
+              "severity",
+              "code",
+              "message",
+              "subjectId"
+            ]
+          ],
+          "documentUnchanged": true,
+          "evidenceUnchanged": true,
+          "active": [
+            "urn:example:mapping:prisma-contains-user-email",
+            "urn:example:mapping:zod-contains-user-email",
+            "urn:example:mapping:user-email-implementations",
+            "urn:example:mapping:zod-email-derived-from-prisma"
+          ]
+        }
+      },
+      "observed": {
+        "status": "threw",
+        "error": {
+          "name": "TypeError",
+          "message": "api.Registry is not a constructor",
+          "constructor": "TypeError",
+          "keys": [],
+          "ownNames": [
+            "stack",
+            "message"
+          ]
+        },
+        "host": {
+          "events": [],
+          "sameThrownObject": false
+        }
+      }
+    },
+    {
+      "name": "builtin-core:forbids-mapping-2",
+      "expected": {
+        "status": "observed",
+        "value": {
+          "value": [
+            {
+              "severity": "error",
+              "code": "INVALID_CONSTRAINT_PARAMETERS",
+              "message": "urn:test:callback:builtin has unsupported parameter(s): unexpected",
+              "subjectId": "urn:test:callback:builtin"
+            }
+          ],
+          "numbers": []
+        },
+        "host": {
+          "issueKeys": [
+            [
+              "severity",
+              "code",
+              "message",
+              "subjectId"
+            ]
+          ],
+          "documentUnchanged": true,
+          "evidenceUnchanged": true,
+          "active": [
+            "urn:example:mapping:prisma-contains-user-email",
+            "urn:example:mapping:zod-contains-user-email",
+            "urn:example:mapping:user-email-implementations",
+            "urn:example:mapping:zod-email-derived-from-prisma"
+          ]
+        }
+      },
+      "observed": {
+        "status": "threw",
+        "error": {
+          "name": "TypeError",
+          "message": "api.Registry is not a constructor",
+          "constructor": "TypeError",
+          "keys": [],
+          "ownNames": [
+            "stack",
+            "message"
+          ]
+        },
+        "host": {
+          "events": [],
+          "sameThrownObject": false
+        }
+      }
+    },
+    {
+      "name": "builtin-core:unique-target-0",
+      "expected": {
+        "status": "observed",
+        "value": {
+          "value": [
+            {
+              "severity": "error",
+              "code": "NON_UNIQUE_MAPPING_TARGET",
+              "message": "urn:example:concept:user.email resolves to 2 active targets under urn:test:callback:builtin",
+              "subjectId": "urn:example:concept:user.email"
+            }
+          ],
+          "numbers": []
+        },
+        "host": {
+          "issueKeys": [
+            [
+              "severity",
+              "code",
+              "message",
+              "subjectId"
+            ]
+          ],
+          "documentUnchanged": true,
+          "evidenceUnchanged": true,
+          "active": [
+            "urn:example:mapping:prisma-contains-user-email",
+            "urn:example:mapping:zod-contains-user-email",
+            "urn:example:mapping:user-email-implementations",
+            "urn:example:mapping:zod-email-derived-from-prisma"
+          ]
+        }
+      },
+      "observed": {
+        "status": "threw",
+        "error": {
+          "name": "TypeError",
+          "message": "api.Registry is not a constructor",
+          "constructor": "TypeError",
+          "keys": [],
+          "ownNames": [
+            "stack",
+            "message"
+          ]
+        },
+        "host": {
+          "events": [],
+          "sameThrownObject": false
+        }
+      }
+    },
+    {
+      "name": "builtin-core:unique-target-1",
+      "expected": {
+        "status": "observed",
+        "value": {
+          "value": [
+            {
+              "severity": "error",
+              "code": "NON_UNIQUE_MAPPING_TARGET",
+              "message": "urn:example:concept:user.email resolves to 2 active targets under urn:test:callback:builtin",
+              "subjectId": "urn:example:concept:user.email"
+            }
+          ],
+          "numbers": []
+        },
+        "host": {
+          "issueKeys": [
+            [
+              "severity",
+              "code",
+              "message",
+              "subjectId"
+            ]
+          ],
+          "documentUnchanged": true,
+          "evidenceUnchanged": true,
+          "active": [
+            "urn:example:mapping:prisma-contains-user-email",
+            "urn:example:mapping:zod-contains-user-email",
+            "urn:example:mapping:user-email-implementations",
+            "urn:example:mapping:zod-email-derived-from-prisma"
+          ]
+        }
+      },
+      "observed": {
+        "status": "threw",
+        "error": {
+          "name": "TypeError",
+          "message": "api.Registry is not a constructor",
+          "constructor": "TypeError",
+          "keys": [],
+          "ownNames": [
+            "stack",
+            "message"
+          ]
+        },
+        "host": {
+          "events": [],
+          "sameThrownObject": false
+        }
+      }
+    },
+    {
+      "name": "builtin-core:unique-target-2",
+      "expected": {
+        "status": "observed",
+        "value": {
+          "value": [
+            {
+              "severity": "error",
+              "code": "INVALID_CONSTRAINT_PARAMETERS",
+              "message": "urn:test:callback:builtin has unsupported parameter(s): unexpected",
+              "subjectId": "urn:test:callback:builtin"
+            }
+          ],
+          "numbers": []
+        },
+        "host": {
+          "issueKeys": [
+            [
+              "severity",
+              "code",
+              "message",
+              "subjectId"
+            ]
+          ],
+          "documentUnchanged": true,
+          "evidenceUnchanged": true,
+          "active": [
+            "urn:example:mapping:prisma-contains-user-email",
+            "urn:example:mapping:zod-contains-user-email",
+            "urn:example:mapping:user-email-implementations",
+            "urn:example:mapping:zod-email-derived-from-prisma"
+          ]
+        }
+      },
+      "observed": {
+        "status": "threw",
+        "error": {
+          "name": "TypeError",
+          "message": "api.Registry is not a constructor",
+          "constructor": "TypeError",
+          "keys": [],
+          "ownNames": [
+            "stack",
+            "message"
+          ]
+        },
+        "host": {
+          "events": [],
+          "sameThrownObject": false
+        }
+      }
+    },
+    {
+      "name": "builtin-core:requires-authority-0",
+      "expected": {
+        "status": "observed",
+        "value": {
+          "value": [
+            {
+              "severity": "error",
+              "code": "INVALID_CONSTRAINT_PARAMETERS",
+              "message": "urn:test:callback:builtin requires a string fact parameter",
+              "subjectId": "urn:test:callback:builtin"
+            }
+          ],
+          "numbers": []
+        },
+        "host": {
+          "issueKeys": [
+            [
+              "severity",
+              "code",
+              "message",
+              "subjectId"
+            ]
+          ],
+          "documentUnchanged": true,
+          "evidenceUnchanged": true,
+          "active": [
+            "urn:example:mapping:prisma-contains-user-email",
+            "urn:example:mapping:zod-contains-user-email",
+            "urn:example:mapping:user-email-implementations",
+            "urn:example:mapping:zod-email-derived-from-prisma"
+          ]
+        }
+      },
+      "observed": {
+        "status": "threw",
+        "error": {
+          "name": "TypeError",
+          "message": "api.Registry is not a constructor",
+          "constructor": "TypeError",
+          "keys": [],
+          "ownNames": [
+            "stack",
+            "message"
+          ]
+        },
+        "host": {
+          "events": [],
+          "sameThrownObject": false
+        }
+      }
+    },
+    {
+      "name": "builtin-core:requires-authority-1",
+      "expected": {
+        "status": "observed",
+        "value": {
+          "value": [
+            {
+              "severity": "error",
+              "code": "INVALID_CONSTRAINT_PARAMETERS",
+              "message": "urn:test:callback:builtin requires a string fact parameter",
+              "subjectId": "urn:test:callback:builtin"
+            }
+          ],
+          "numbers": []
+        },
+        "host": {
+          "issueKeys": [
+            [
+              "severity",
+              "code",
+              "message",
+              "subjectId"
+            ]
+          ],
+          "documentUnchanged": true,
+          "evidenceUnchanged": true,
+          "active": [
+            "urn:example:mapping:prisma-contains-user-email",
+            "urn:example:mapping:zod-contains-user-email",
+            "urn:example:mapping:user-email-implementations",
+            "urn:example:mapping:zod-email-derived-from-prisma"
+          ]
+        }
+      },
+      "observed": {
+        "status": "threw",
+        "error": {
+          "name": "TypeError",
+          "message": "api.Registry is not a constructor",
+          "constructor": "TypeError",
+          "keys": [],
+          "ownNames": [
+            "stack",
+            "message"
+          ]
+        },
+        "host": {
+          "events": [],
+          "sameThrownObject": false
+        }
+      }
+    },
+    {
+      "name": "builtin-core:requires-authority-2",
+      "expected": {
+        "status": "observed",
+        "value": {
+          "value": [
+            {
+              "severity": "error",
+              "code": "INVALID_CONSTRAINT_PARAMETERS",
+              "message": "urn:test:callback:builtin has unsupported parameter(s): unexpected",
+              "subjectId": "urn:test:callback:builtin"
+            }
+          ],
+          "numbers": []
+        },
+        "host": {
+          "issueKeys": [
+            [
+              "severity",
+              "code",
+              "message",
+              "subjectId"
+            ]
+          ],
+          "documentUnchanged": true,
+          "evidenceUnchanged": true,
+          "active": [
+            "urn:example:mapping:prisma-contains-user-email",
+            "urn:example:mapping:zod-contains-user-email",
+            "urn:example:mapping:user-email-implementations",
+            "urn:example:mapping:zod-email-derived-from-prisma"
+          ]
+        }
+      },
+      "observed": {
+        "status": "threw",
+        "error": {
+          "name": "TypeError",
+          "message": "api.Registry is not a constructor",
+          "constructor": "TypeError",
+          "keys": [],
+          "ownNames": [
+            "stack",
+            "message"
+          ]
+        },
+        "host": {
+          "events": [],
+          "sameThrownObject": false
+        }
+      }
+    },
+    {
+      "name": "builtin-topology:relation-totality-0",
+      "expected": {
+        "status": "observed",
+        "value": {
+          "value": [
+            {
+              "severity": "error",
+              "code": "INVALID_CONSTRAINT_PARAMETERS",
+              "message": "urn:test:callback:builtin requires subjectKinds, a relation, source|target direction, and a supported cardinality",
+              "subjectId": "urn:test:callback:builtin"
+            }
+          ],
+          "numbers": []
+        },
+        "host": {
+          "issueKeys": [
+            [
+              "severity",
+              "code",
+              "message",
+              "subjectId"
+            ]
+          ],
+          "documentUnchanged": true,
+          "evidenceUnchanged": true,
+          "active": [
+            "urn:example:mapping:prisma-contains-user-email",
+            "urn:example:mapping:zod-contains-user-email",
+            "urn:example:mapping:user-email-implementations",
+            "urn:example:mapping:zod-email-derived-from-prisma"
+          ]
+        }
+      },
+      "observed": {
+        "status": "threw",
+        "error": {
+          "name": "TypeError",
+          "message": "api.Registry is not a constructor",
+          "constructor": "TypeError",
+          "keys": [],
+          "ownNames": [
+            "stack",
+            "message"
+          ]
+        },
+        "host": {
+          "events": [],
+          "sameThrownObject": false
+        }
+      }
+    },
+    {
+      "name": "builtin-topology:relation-totality-1",
+      "expected": {
+        "status": "observed",
+        "value": {
+          "value": [
+            {
+              "severity": "error",
+              "code": "INVALID_CONSTRAINT_PARAMETERS",
+              "message": "urn:test:callback:builtin requires subjectKinds, a relation, source|target direction, and a supported cardinality",
+              "subjectId": "urn:test:callback:builtin"
+            }
+          ],
+          "numbers": []
+        },
+        "host": {
+          "issueKeys": [
+            [
+              "severity",
+              "code",
+              "message",
+              "subjectId"
+            ]
+          ],
+          "documentUnchanged": true,
+          "evidenceUnchanged": true,
+          "active": [
+            "urn:example:mapping:prisma-contains-user-email",
+            "urn:example:mapping:zod-contains-user-email",
+            "urn:example:mapping:user-email-implementations",
+            "urn:example:mapping:zod-email-derived-from-prisma"
+          ]
+        }
+      },
+      "observed": {
+        "status": "threw",
+        "error": {
+          "name": "TypeError",
+          "message": "api.Registry is not a constructor",
+          "constructor": "TypeError",
+          "keys": [],
+          "ownNames": [
+            "stack",
+            "message"
+          ]
+        },
+        "host": {
+          "events": [],
+          "sameThrownObject": false
+        }
+      }
+    },
+    {
+      "name": "builtin-topology:relation-totality-2",
+      "expected": {
+        "status": "observed",
+        "value": {
+          "value": [
+            {
+              "severity": "error",
+              "code": "INVALID_CONSTRAINT_PARAMETERS",
+              "message": "urn:test:callback:builtin has unsupported parameter(s): unexpected",
+              "subjectId": "urn:test:callback:builtin"
+            }
+          ],
+          "numbers": []
+        },
+        "host": {
+          "issueKeys": [
+            [
+              "severity",
+              "code",
+              "message",
+              "subjectId"
+            ]
+          ],
+          "documentUnchanged": true,
+          "evidenceUnchanged": true,
+          "active": [
+            "urn:example:mapping:prisma-contains-user-email",
+            "urn:example:mapping:zod-contains-user-email",
+            "urn:example:mapping:user-email-implementations",
+            "urn:example:mapping:zod-email-derived-from-prisma"
+          ]
+        }
+      },
+      "observed": {
+        "status": "threw",
+        "error": {
+          "name": "TypeError",
+          "message": "api.Registry is not a constructor",
+          "constructor": "TypeError",
+          "keys": [],
+          "ownNames": [
+            "stack",
+            "message"
+          ]
+        },
+        "host": {
+          "events": [],
+          "sameThrownObject": false
+        }
+      }
+    },
+    {
+      "name": "builtin-topology:reachable-0",
+      "expected": {
+        "status": "observed",
+        "value": {
+          "value": [
+            {
+              "severity": "error",
+              "code": "INVALID_CONSTRAINT_PARAMETERS",
+              "message": "urn:test:callback:builtin requires a known root, relation, and subjectKinds",
+              "subjectId": "urn:test:callback:builtin"
+            }
+          ],
+          "numbers": []
+        },
+        "host": {
+          "issueKeys": [
+            [
+              "severity",
+              "code",
+              "message",
+              "subjectId"
+            ]
+          ],
+          "documentUnchanged": true,
+          "evidenceUnchanged": true,
+          "active": [
+            "urn:example:mapping:prisma-contains-user-email",
+            "urn:example:mapping:zod-contains-user-email",
+            "urn:example:mapping:user-email-implementations",
+            "urn:example:mapping:zod-email-derived-from-prisma"
+          ]
+        }
+      },
+      "observed": {
+        "status": "threw",
+        "error": {
+          "name": "TypeError",
+          "message": "api.Registry is not a constructor",
+          "constructor": "TypeError",
+          "keys": [],
+          "ownNames": [
+            "stack",
+            "message"
+          ]
+        },
+        "host": {
+          "events": [],
+          "sameThrownObject": false
+        }
+      }
+    },
+    {
+      "name": "builtin-topology:reachable-1",
+      "expected": {
+        "status": "observed",
+        "value": {
+          "value": [
+            {
+              "severity": "error",
+              "code": "INVALID_CONSTRAINT_PARAMETERS",
+              "message": "urn:test:callback:builtin requires a known root, relation, and subjectKinds",
+              "subjectId": "urn:test:callback:builtin"
+            }
+          ],
+          "numbers": []
+        },
+        "host": {
+          "issueKeys": [
+            [
+              "severity",
+              "code",
+              "message",
+              "subjectId"
+            ]
+          ],
+          "documentUnchanged": true,
+          "evidenceUnchanged": true,
+          "active": [
+            "urn:example:mapping:prisma-contains-user-email",
+            "urn:example:mapping:zod-contains-user-email",
+            "urn:example:mapping:user-email-implementations",
+            "urn:example:mapping:zod-email-derived-from-prisma"
+          ]
+        }
+      },
+      "observed": {
+        "status": "threw",
+        "error": {
+          "name": "TypeError",
+          "message": "api.Registry is not a constructor",
+          "constructor": "TypeError",
+          "keys": [],
+          "ownNames": [
+            "stack",
+            "message"
+          ]
+        },
+        "host": {
+          "events": [],
+          "sameThrownObject": false
+        }
+      }
+    },
+    {
+      "name": "builtin-topology:reachable-2",
+      "expected": {
+        "status": "observed",
+        "value": {
+          "value": [
+            {
+              "severity": "error",
+              "code": "INVALID_CONSTRAINT_PARAMETERS",
+              "message": "urn:test:callback:builtin has unsupported parameter(s): unexpected",
+              "subjectId": "urn:test:callback:builtin"
+            }
+          ],
+          "numbers": []
+        },
+        "host": {
+          "issueKeys": [
+            [
+              "severity",
+              "code",
+              "message",
+              "subjectId"
+            ]
+          ],
+          "documentUnchanged": true,
+          "evidenceUnchanged": true,
+          "active": [
+            "urn:example:mapping:prisma-contains-user-email",
+            "urn:example:mapping:zod-contains-user-email",
+            "urn:example:mapping:user-email-implementations",
+            "urn:example:mapping:zod-email-derived-from-prisma"
+          ]
+        }
+      },
+      "observed": {
+        "status": "threw",
+        "error": {
+          "name": "TypeError",
+          "message": "api.Registry is not a constructor",
+          "constructor": "TypeError",
+          "keys": [],
+          "ownNames": [
+            "stack",
+            "message"
+          ]
+        },
+        "host": {
+          "events": [],
+          "sameThrownObject": false
+        }
+      }
+    },
+    {
+      "name": "builtin-topology:context-satisfied-0",
+      "expected": {
+        "status": "observed",
+        "value": {
+          "value": [
+            {
+              "severity": "error",
+              "code": "INVALID_CONSTRAINT_PARAMETERS",
+              "message": "urn:test:callback:builtin requires subjectKinds and five valid topology relations",
+              "subjectId": "urn:test:callback:builtin"
+            }
+          ],
+          "numbers": []
+        },
+        "host": {
+          "issueKeys": [
+            [
+              "severity",
+              "code",
+              "message",
+              "subjectId"
+            ]
+          ],
+          "documentUnchanged": true,
+          "evidenceUnchanged": true,
+          "active": [
+            "urn:example:mapping:prisma-contains-user-email",
+            "urn:example:mapping:zod-contains-user-email",
+            "urn:example:mapping:user-email-implementations",
+            "urn:example:mapping:zod-email-derived-from-prisma"
+          ]
+        }
+      },
+      "observed": {
+        "status": "threw",
+        "error": {
+          "name": "TypeError",
+          "message": "api.Registry is not a constructor",
+          "constructor": "TypeError",
+          "keys": [],
+          "ownNames": [
+            "stack",
+            "message"
+          ]
+        },
+        "host": {
+          "events": [],
+          "sameThrownObject": false
+        }
+      }
+    },
+    {
+      "name": "builtin-topology:context-satisfied-1",
+      "expected": {
+        "status": "observed",
+        "value": {
+          "value": [
+            {
+              "severity": "error",
+              "code": "INVALID_CONSTRAINT_PARAMETERS",
+              "message": "urn:test:callback:builtin requires subjectKinds and five valid topology relations",
+              "subjectId": "urn:test:callback:builtin"
+            }
+          ],
+          "numbers": []
+        },
+        "host": {
+          "issueKeys": [
+            [
+              "severity",
+              "code",
+              "message",
+              "subjectId"
+            ]
+          ],
+          "documentUnchanged": true,
+          "evidenceUnchanged": true,
+          "active": [
+            "urn:example:mapping:prisma-contains-user-email",
+            "urn:example:mapping:zod-contains-user-email",
+            "urn:example:mapping:user-email-implementations",
+            "urn:example:mapping:zod-email-derived-from-prisma"
+          ]
+        }
+      },
+      "observed": {
+        "status": "threw",
+        "error": {
+          "name": "TypeError",
+          "message": "api.Registry is not a constructor",
+          "constructor": "TypeError",
+          "keys": [],
+          "ownNames": [
+            "stack",
+            "message"
+          ]
+        },
+        "host": {
+          "events": [],
+          "sameThrownObject": false
+        }
+      }
+    },
+    {
+      "name": "builtin-topology:context-satisfied-2",
+      "expected": {
+        "status": "observed",
+        "value": {
+          "value": [
+            {
+              "severity": "error",
+              "code": "INVALID_CONSTRAINT_PARAMETERS",
+              "message": "urn:test:callback:builtin has unsupported parameter(s): unexpected",
+              "subjectId": "urn:test:callback:builtin"
+            }
+          ],
+          "numbers": []
+        },
+        "host": {
+          "issueKeys": [
+            [
+              "severity",
+              "code",
+              "message",
+              "subjectId"
+            ]
+          ],
+          "documentUnchanged": true,
+          "evidenceUnchanged": true,
+          "active": [
+            "urn:example:mapping:prisma-contains-user-email",
+            "urn:example:mapping:zod-contains-user-email",
+            "urn:example:mapping:user-email-implementations",
+            "urn:example:mapping:zod-email-derived-from-prisma"
+          ]
+        }
+      },
+      "observed": {
+        "status": "threw",
+        "error": {
+          "name": "TypeError",
+          "message": "api.Registry is not a constructor",
+          "constructor": "TypeError",
+          "keys": [],
+          "ownNames": [
+            "stack",
+            "message"
+          ]
+        },
+        "host": {
+          "events": [],
+          "sameThrownObject": false
+        }
+      }
+    },
+    {
+      "name": "compile-empty",
+      "expected": {
+        "status": "observed",
+        "value": {
+          "value": {
+            "status": "viable",
+            "generation": {
+              "$schema": "https://raw.githubusercontent.com/roryscot/metamap/v0.3.0/schemas/metamap-generation.schema.json",
+              "schemaVersion": "1.0.0",
+              "evaluatedAt": "2026-09-02T00:00:00.000Z",
+              "graph": {
+                "id": "urn:example:metamap:example-user-schema",
+                "revision": "example-1",
+                "digest": "sha256:7c3384787b0fac61a94bde964cebe9742c4c69c37a1648527adab641d395efe6"
+              },
+              "policy": {
+                "id": "urn:example:viability:user-schema",
+                "digest": "sha256:4e3366bbaab5853db4cf4d9d0229c1b2076a4e7cadfd4989d81f8f9e48cce239"
+              },
+              "context": {
+                "environment": "production",
+                "maintenance": false
+              },
+              "activeMappings": [
+                "urn:example:mapping:prisma-contains-user-email",
+                "urn:example:mapping:user-email-implementations",
+                "urn:example:mapping:zod-contains-user-email",
+                "urn:example:mapping:zod-email-derived-from-prisma"
+              ],
+              "inactiveMappings": [],
+              "evidence": [],
+              "waiversApplied": [],
+              "id": "urn:metamap:generation:cbeb8421193ae4cd2d0c391719e61495075a52f6a5dcfd0a5ad2806cfecbf911",
+              "digest": "sha256:cbeb8421193ae4cd2d0c391719e61495075a52f6a5dcfd0a5ad2806cfecbf911"
+            },
+            "issues": [],
+            "impact": {
+              "changedSubjects": [],
+              "affectedSubjects": [],
+              "paths": []
+            }
+          },
+          "numbers": []
+        },
+        "host": {
+          "keys": [
+            "status",
+            "generation",
+            "issues",
+            "impact"
+          ],
+          "issueKeys": [],
+          "events": [
+            {
+              "lookup": "test:callback-0",
+              "receiver": true
+            },
+            {
+              "callback": 0,
+              "receiverUndefined": true,
+              "sameConstraint": true,
+              "sameDocument": true,
+              "graphDocument": true,
+              "sameGraph": true,
+              "sameSet": true,
+              "freshContext": true,
+              "sameEvidence": true,
+              "contextKeys": [
+                "document",
+                "graph",
+                "activeMappings",
+                "evidence"
+              ],
+              "active": [
+                "urn:example:mapping:prisma-contains-user-email",
+                "urn:example:mapping:zod-contains-user-email",
+                "urn:example:mapping:user-email-implementations",
+                "urn:example:mapping:zod-email-derived-from-prisma"
+              ],
+              "entityIdentity": true
+            }
+          ],
+          "issueIdentity": [],
+          "issueMutations": {
+            "value": [],
+            "numbers": []
+          },
+          "distinctContexts": 1,
+          "sharedContext": true,
+          "frozen": true,
+          "contextFrozen": true,
+          "generationKeys": [
+            "$schema",
+            "schemaVersion",
+            "evaluatedAt",
+            "graph",
+            "policy",
+            "context",
+            "activeMappings",
+            "inactiveMappings",
+            "evidence",
+            "waiversApplied",
+            "id",
+            "digest"
+          ],
+          "graphKeys": [
+            "id",
+            "revision",
+            "digest"
+          ]
+        }
+      },
+      "observed": {
+        "status": "threw",
+        "error": {
+          "name": "TypeError",
+          "message": "api.Registry is not a constructor",
+          "constructor": "TypeError",
+          "keys": [],
+          "ownNames": [
+            "stack",
+            "message"
+          ]
+        },
+        "host": {
+          "events": [],
+          "sameThrownObject": false
+        }
+      }
+    },
+    {
+      "name": "compile-warning",
+      "expected": {
+        "status": "observed",
+        "value": {
+          "value": {
+            "status": "viable",
+            "generation": {
+              "$schema": "https://raw.githubusercontent.com/roryscot/metamap/v0.3.0/schemas/metamap-generation.schema.json",
+              "schemaVersion": "1.0.0",
+              "evaluatedAt": "2026-09-02T00:00:00.000Z",
+              "graph": {
+                "id": "urn:example:metamap:example-user-schema",
+                "revision": "example-1",
+                "digest": "sha256:7c3384787b0fac61a94bde964cebe9742c4c69c37a1648527adab641d395efe6"
+              },
+              "policy": {
+                "id": "urn:example:viability:user-schema",
+                "digest": "sha256:2e3178cd8167935180fe5a73d6333c35626108756643d7d4020ea30b0c6a06fa"
+              },
+              "context": {
+                "environment": "production",
+                "maintenance": false
+              },
+              "activeMappings": [
+                "urn:example:mapping:prisma-contains-user-email",
+                "urn:example:mapping:user-email-implementations",
+                "urn:example:mapping:zod-contains-user-email",
+                "urn:example:mapping:zod-email-derived-from-prisma"
+              ],
+              "inactiveMappings": [],
+              "evidence": [],
+              "waiversApplied": [],
+              "id": "urn:metamap:generation:f884ae29d9f1b387d1e041437e43e3e725e9256516bd4a9492994d87ee5a8149",
+              "digest": "sha256:f884ae29d9f1b387d1e041437e43e3e725e9256516bd4a9492994d87ee5a8149"
+            },
+            "issues": [
+              {
+                "severity": "warning",
+                "code": "CUSTOM_CALLBACK",
+                "message": "custom issue",
+                "subjectId": "urn:example:mapping:prisma-contains-user-email",
+                "extra": {
+                  "retained": true
+                }
+              }
+            ],
+            "impact": {
+              "changedSubjects": [],
+              "affectedSubjects": [],
+              "paths": []
+            }
+          },
+          "numbers": []
+        },
+        "host": {
+          "keys": [
+            "status",
+            "generation",
+            "issues",
+            "impact"
+          ],
+          "issueKeys": [
+            [
+              "severity",
+              "code",
+              "message",
+              "subjectId",
+              "path",
+              "extra",
+              "causalPath"
+            ]
+          ],
+          "events": [
+            {
+              "lookup": "test:callback-0",
+              "receiver": true
+            },
+            {
+              "callback": 0,
+              "receiverUndefined": true,
+              "sameConstraint": true,
+              "sameDocument": true,
+              "graphDocument": true,
+              "sameGraph": true,
+              "sameSet": true,
+              "freshContext": true,
+              "sameEvidence": true,
+              "contextKeys": [
+                "document",
+                "graph",
+                "activeMappings",
+                "evidence"
+              ],
+              "active": [
+                "urn:example:mapping:prisma-contains-user-email",
+                "urn:example:mapping:zod-contains-user-email",
+                "urn:example:mapping:user-email-implementations",
+                "urn:example:mapping:zod-email-derived-from-prisma"
+              ],
+              "entityIdentity": true
+            }
+          ],
+          "issueIdentity": [
+            true
+          ],
+          "issueMutations": {
+            "value": [
+              {
+                "severity": "warning",
+                "code": "CUSTOM_CALLBACK",
+                "message": "custom issue",
+                "subjectId": "urn:example:mapping:prisma-contains-user-email",
+                "extra": {
+                  "retained": true
+                }
+              }
+            ],
+            "numbers": []
+          },
+          "distinctContexts": 1,
+          "sharedContext": true,
+          "frozen": true,
+          "contextFrozen": true,
+          "generationKeys": [
+            "$schema",
+            "schemaVersion",
+            "evaluatedAt",
+            "graph",
+            "policy",
+            "context",
+            "activeMappings",
+            "inactiveMappings",
+            "evidence",
+            "waiversApplied",
+            "id",
+            "digest"
+          ],
+          "graphKeys": [
+            "id",
+            "revision",
+            "digest"
+          ]
+        }
+      },
+      "observed": {
+        "status": "threw",
+        "error": {
+          "name": "TypeError",
+          "message": "api.Registry is not a constructor",
+          "constructor": "TypeError",
+          "keys": [],
+          "ownNames": [
+            "stack",
+            "message"
+          ]
+        },
+        "host": {
+          "events": [],
+          "sameThrownObject": false
+        }
+      }
+    },
+    {
+      "name": "compile-error",
+      "expected": {
+        "status": "observed",
+        "value": {
+          "value": {
+            "status": "rejected",
+            "issues": [
+              {
+                "severity": "error",
+                "code": "CUSTOM_CALLBACK",
+                "message": "custom issue",
+                "subjectId": "urn:example:mapping:prisma-contains-user-email",
+                "extra": {
+                  "retained": true
+                },
+                "causalPath": [
+                  "urn:example:mapping:prisma-contains-user-email"
+                ]
+              }
+            ],
+            "impact": {
+              "changedSubjects": [
+                "urn:example:mapping:prisma-contains-user-email"
+              ],
+              "affectedSubjects": [
+                "urn:example:element:prisma.User.email",
+                "urn:example:element:zod.UserSchema.email",
+                "urn:example:mapping:prisma-contains-user-email",
+                "urn:example:mapping:zod-contains-user-email",
+                "urn:example:mapping:zod-email-derived-from-prisma",
+                "urn:example:structure:prisma-schema",
+                "urn:example:structure:shared-domain-schema"
+              ],
+              "paths": [
+                {
+                  "subjectId": "urn:example:element:prisma.User.email",
+                  "path": [
+                    "urn:example:mapping:prisma-contains-user-email",
+                    "urn:example:element:prisma.User.email"
+                  ]
+                },
+                {
+                  "subjectId": "urn:example:element:zod.UserSchema.email",
+                  "path": [
+                    "urn:example:mapping:prisma-contains-user-email",
+                    "urn:example:element:prisma.User.email",
+                    "urn:example:mapping:zod-email-derived-from-prisma",
+                    "urn:example:element:zod.UserSchema.email"
+                  ]
+                },
+                {
+                  "subjectId": "urn:example:mapping:prisma-contains-user-email",
+                  "path": [
+                    "urn:example:mapping:prisma-contains-user-email"
+                  ]
+                },
+                {
+                  "subjectId": "urn:example:mapping:zod-contains-user-email",
+                  "path": [
+                    "urn:example:mapping:prisma-contains-user-email",
+                    "urn:example:element:prisma.User.email",
+                    "urn:example:mapping:zod-email-derived-from-prisma",
+                    "urn:example:element:zod.UserSchema.email",
+                    "urn:example:mapping:zod-contains-user-email"
+                  ]
+                },
+                {
+                  "subjectId": "urn:example:mapping:zod-email-derived-from-prisma",
+                  "path": [
+                    "urn:example:mapping:prisma-contains-user-email",
+                    "urn:example:element:prisma.User.email",
+                    "urn:example:mapping:zod-email-derived-from-prisma"
+                  ]
+                },
+                {
+                  "subjectId": "urn:example:structure:prisma-schema",
+                  "path": [
+                    "urn:example:mapping:prisma-contains-user-email",
+                    "urn:example:structure:prisma-schema"
+                  ]
+                },
+                {
+                  "subjectId": "urn:example:structure:shared-domain-schema",
+                  "path": [
+                    "urn:example:mapping:prisma-contains-user-email",
+                    "urn:example:element:prisma.User.email",
+                    "urn:example:mapping:zod-email-derived-from-prisma",
+                    "urn:example:element:zod.UserSchema.email",
+                    "urn:example:mapping:zod-contains-user-email",
+                    "urn:example:structure:shared-domain-schema"
+                  ]
+                }
+              ]
+            },
+            "quarantinedSubjects": [
+              "urn:example:element:prisma.User.email",
+              "urn:example:element:zod.UserSchema.email",
+              "urn:example:mapping:prisma-contains-user-email",
+              "urn:example:mapping:zod-contains-user-email",
+              "urn:example:mapping:zod-email-derived-from-prisma",
+              "urn:example:structure:prisma-schema",
+              "urn:example:structure:shared-domain-schema"
+            ]
+          },
+          "numbers": []
+        },
+        "host": {
+          "keys": [
+            "status",
+            "issues",
+            "impact",
+            "quarantinedSubjects"
+          ],
+          "issueKeys": [
+            [
+              "severity",
+              "code",
+              "message",
+              "subjectId",
+              "path",
+              "extra",
+              "causalPath"
+            ]
+          ],
+          "events": [
+            {
+              "lookup": "test:callback-0",
+              "receiver": true
+            },
+            {
+              "callback": 0,
+              "receiverUndefined": true,
+              "sameConstraint": true,
+              "sameDocument": true,
+              "graphDocument": true,
+              "sameGraph": true,
+              "sameSet": true,
+              "freshContext": true,
+              "sameEvidence": true,
+              "contextKeys": [
+                "document",
+                "graph",
+                "activeMappings",
+                "evidence"
+              ],
+              "active": [
+                "urn:example:mapping:prisma-contains-user-email",
+                "urn:example:mapping:zod-contains-user-email",
+                "urn:example:mapping:user-email-implementations",
+                "urn:example:mapping:zod-email-derived-from-prisma"
+              ],
+              "entityIdentity": true
+            }
+          ],
+          "issueIdentity": [
+            true
+          ],
+          "issueMutations": {
+            "value": [
+              {
+                "severity": "error",
+                "code": "CUSTOM_CALLBACK",
+                "message": "custom issue",
+                "subjectId": "urn:example:mapping:prisma-contains-user-email",
+                "extra": {
+                  "retained": true
+                },
+                "causalPath": [
+                  "urn:example:mapping:prisma-contains-user-email"
+                ]
+              }
+            ],
+            "numbers": []
+          },
+          "distinctContexts": 1
+        }
+      },
+      "observed": {
+        "status": "threw",
+        "error": {
+          "name": "TypeError",
+          "message": "api.Registry is not a constructor",
+          "constructor": "TypeError",
+          "keys": [],
+          "ownNames": [
+            "stack",
+            "message"
+          ]
+        },
+        "host": {
+          "events": [],
+          "sameThrownObject": false
+        }
+      }
+    },
+    {
+      "name": "compile-waived",
+      "expected": {
+        "status": "observed",
+        "value": {
+          "value": {
+            "status": "viable",
+            "generation": {
+              "$schema": "https://raw.githubusercontent.com/roryscot/metamap/v0.3.0/schemas/metamap-generation.schema.json",
+              "schemaVersion": "1.0.0",
+              "evaluatedAt": "2026-09-02T00:00:00.000Z",
+              "graph": {
+                "id": "urn:example:metamap:example-user-schema",
+                "revision": "example-1",
+                "digest": "sha256:7c3384787b0fac61a94bde964cebe9742c4c69c37a1648527adab641d395efe6"
+              },
+              "policy": {
+                "id": "urn:example:viability:user-schema",
+                "digest": "sha256:6792660d9d5fd7df4b5b8c781bd0124cca9e50ff89d38ec2717eda05b3db7059"
+              },
+              "context": {
+                "environment": "production",
+                "maintenance": false
+              },
+              "activeMappings": [
+                "urn:example:mapping:prisma-contains-user-email",
+                "urn:example:mapping:user-email-implementations",
+                "urn:example:mapping:zod-contains-user-email",
+                "urn:example:mapping:zod-email-derived-from-prisma"
+              ],
+              "inactiveMappings": [],
+              "evidence": [],
+              "waiversApplied": [
+                "urn:test:callback:waiver"
+              ],
+              "id": "urn:metamap:generation:a696a84bb3a70b65b7beb008d46ab7c461ecb34041ed74f716ad78dbf9a1c3fa",
+              "digest": "sha256:a696a84bb3a70b65b7beb008d46ab7c461ecb34041ed74f716ad78dbf9a1c3fa"
+            },
+            "issues": [
+              {
+                "severity": "warning",
+                "code": "REQUIRED_MAPPING_MISSING",
+                "message": "custom issue",
+                "subjectId": "urn:example:mapping:prisma-contains-user-email",
+                "extra": {
+                  "retained": true
+                },
+                "waivedBy": "urn:test:callback:waiver"
+              }
+            ],
+            "impact": {
+              "changedSubjects": [],
+              "affectedSubjects": [],
+              "paths": []
+            }
+          },
+          "numbers": []
+        },
+        "host": {
+          "keys": [
+            "status",
+            "generation",
+            "issues",
+            "impact"
+          ],
+          "issueKeys": [
+            [
+              "severity",
+              "code",
+              "message",
+              "subjectId",
+              "path",
+              "extra",
+              "waivedBy",
+              "causalPath"
+            ]
+          ],
+          "events": [
+            {
+              "lookup": "test:callback-0",
+              "receiver": true
+            },
+            {
+              "callback": 0,
+              "receiverUndefined": true,
+              "sameConstraint": true,
+              "sameDocument": true,
+              "graphDocument": true,
+              "sameGraph": true,
+              "sameSet": true,
+              "freshContext": true,
+              "sameEvidence": true,
+              "contextKeys": [
+                "document",
+                "graph",
+                "activeMappings",
+                "evidence"
+              ],
+              "active": [
+                "urn:example:mapping:prisma-contains-user-email",
+                "urn:example:mapping:zod-contains-user-email",
+                "urn:example:mapping:user-email-implementations",
+                "urn:example:mapping:zod-email-derived-from-prisma"
+              ],
+              "entityIdentity": true
+            }
+          ],
+          "issueIdentity": [
+            true
+          ],
+          "issueMutations": {
+            "value": [
+              {
+                "severity": "warning",
+                "code": "REQUIRED_MAPPING_MISSING",
+                "message": "custom issue",
+                "subjectId": "urn:example:mapping:prisma-contains-user-email",
+                "extra": {
+                  "retained": true
+                },
+                "waivedBy": "urn:test:callback:waiver"
+              }
+            ],
+            "numbers": []
+          },
+          "distinctContexts": 1,
+          "sharedContext": true,
+          "frozen": true,
+          "contextFrozen": true,
+          "generationKeys": [
+            "$schema",
+            "schemaVersion",
+            "evaluatedAt",
+            "graph",
+            "policy",
+            "context",
+            "activeMappings",
+            "inactiveMappings",
+            "evidence",
+            "waiversApplied",
+            "id",
+            "digest"
+          ],
+          "graphKeys": [
+            "id",
+            "revision",
+            "digest"
+          ]
+        }
+      },
+      "observed": {
+        "status": "threw",
+        "error": {
+          "name": "TypeError",
+          "message": "api.Registry is not a constructor",
+          "constructor": "TypeError",
+          "keys": [],
+          "ownNames": [
+            "stack",
+            "message"
+          ]
+        },
+        "host": {
+          "events": [],
+          "sameThrownObject": false
+        }
+      }
+    },
+    {
+      "name": "compile-throw-error",
+      "expected": {
+        "status": "threw",
+        "error": {
+          "name": "Error",
+          "message": "callback failure",
+          "constructor": "Error",
+          "keys": [],
+          "ownNames": [
+            "stack",
+            "message"
+          ]
+        },
+        "host": {
+          "events": [
+            {
+              "lookup": "test:callback-0",
+              "receiver": true
+            },
+            {
+              "callback": 0,
+              "receiverUndefined": true,
+              "sameConstraint": true,
+              "sameDocument": true,
+              "graphDocument": true,
+              "sameGraph": true,
+              "sameSet": true,
+              "freshContext": true,
+              "sameEvidence": true,
+              "contextKeys": [
+                "document",
+                "graph",
+                "activeMappings",
+                "evidence"
+              ],
+              "active": [
+                "urn:example:mapping:prisma-contains-user-email",
+                "urn:example:mapping:zod-contains-user-email",
+                "urn:example:mapping:user-email-implementations",
+                "urn:example:mapping:zod-email-derived-from-prisma"
+              ],
+              "entityIdentity": true
+            }
+          ],
+          "sameThrownObject": true
+        }
+      },
+      "observed": {
+        "status": "threw",
+        "error": {
+          "name": "TypeError",
+          "message": "api.Registry is not a constructor",
+          "constructor": "TypeError",
+          "keys": [],
+          "ownNames": [
+            "stack",
+            "message"
+          ]
+        },
+        "host": {
+          "events": [],
+          "sameThrownObject": false
+        }
+      }
+    },
+    {
+      "name": "compile-throw-typeerror",
+      "expected": {
+        "status": "threw",
+        "error": {
+          "name": "TypeError",
+          "message": "callback failure",
+          "constructor": "TypeError",
+          "keys": [],
+          "ownNames": [
+            "stack",
+            "message"
+          ]
+        },
+        "host": {
+          "events": [
+            {
+              "lookup": "test:callback-0",
+              "receiver": true
+            },
+            {
+              "callback": 0,
+              "receiverUndefined": true,
+              "sameConstraint": true,
+              "sameDocument": true,
+              "graphDocument": true,
+              "sameGraph": true,
+              "sameSet": true,
+              "freshContext": true,
+              "sameEvidence": true,
+              "contextKeys": [
+                "document",
+                "graph",
+                "activeMappings",
+                "evidence"
+              ],
+              "active": [
+                "urn:example:mapping:prisma-contains-user-email",
+                "urn:example:mapping:zod-contains-user-email",
+                "urn:example:mapping:user-email-implementations",
+                "urn:example:mapping:zod-email-derived-from-prisma"
+              ],
+              "entityIdentity": true
+            }
+          ],
+          "sameThrownObject": true
+        }
+      },
+      "observed": {
+        "status": "threw",
+        "error": {
+          "name": "TypeError",
+          "message": "api.Registry is not a constructor",
+          "constructor": "TypeError",
+          "keys": [],
+          "ownNames": [
+            "stack",
+            "message"
+          ]
+        },
+        "host": {
+          "events": [],
+          "sameThrownObject": false
+        }
+      }
+    },
+    {
+      "name": "compile-active-clear",
+      "expected": {
+        "status": "observed",
+        "value": {
+          "value": {
+            "status": "viable",
+            "generation": {
+              "$schema": "https://raw.githubusercontent.com/roryscot/metamap/v0.3.0/schemas/metamap-generation.schema.json",
+              "schemaVersion": "1.0.0",
+              "evaluatedAt": "2026-09-02T00:00:00.000Z",
+              "graph": {
+                "id": "urn:example:metamap:example-user-schema",
+                "revision": "example-1",
+                "digest": "sha256:7c3384787b0fac61a94bde964cebe9742c4c69c37a1648527adab641d395efe6"
+              },
+              "policy": {
+                "id": "urn:example:viability:user-schema",
+                "digest": "sha256:4c10c9ba3a9afb8adf98e929ad6019631043b32dc27b50e986facc0403c3bfcd"
+              },
+              "context": {
+                "environment": "production",
+                "maintenance": false
+              },
+              "activeMappings": [],
+              "inactiveMappings": [],
+              "evidence": [],
+              "waiversApplied": [],
+              "id": "urn:metamap:generation:7f96fcc30f4aa8de2fd6f6184346202d6397db12be2c4c0143c84d5a350af941",
+              "digest": "sha256:7f96fcc30f4aa8de2fd6f6184346202d6397db12be2c4c0143c84d5a350af941"
+            },
+            "issues": [],
+            "impact": {
+              "changedSubjects": [],
+              "affectedSubjects": [],
+              "paths": []
+            }
+          },
+          "numbers": []
+        },
+        "host": {
+          "keys": [
+            "status",
+            "generation",
+            "issues",
+            "impact"
+          ],
+          "issueKeys": [],
+          "events": [
+            {
+              "lookup": "test:callback-0",
+              "receiver": true
+            },
+            {
+              "callback": 0,
+              "receiverUndefined": true,
+              "sameConstraint": true,
+              "sameDocument": true,
+              "graphDocument": true,
+              "sameGraph": true,
+              "sameSet": true,
+              "freshContext": true,
+              "sameEvidence": true,
+              "contextKeys": [
+                "document",
+                "graph",
+                "activeMappings",
+                "evidence"
+              ],
+              "active": [
+                "urn:example:mapping:prisma-contains-user-email",
+                "urn:example:mapping:zod-contains-user-email",
+                "urn:example:mapping:user-email-implementations",
+                "urn:example:mapping:zod-email-derived-from-prisma"
+              ],
+              "entityIdentity": true
+            }
+          ],
+          "issueIdentity": [],
+          "issueMutations": {
+            "value": [],
+            "numbers": []
+          },
+          "distinctContexts": 1,
+          "sharedContext": true,
+          "frozen": true,
+          "contextFrozen": true,
+          "generationKeys": [
+            "$schema",
+            "schemaVersion",
+            "evaluatedAt",
+            "graph",
+            "policy",
+            "context",
+            "activeMappings",
+            "inactiveMappings",
+            "evidence",
+            "waiversApplied",
+            "id",
+            "digest"
+          ],
+          "graphKeys": [
+            "id",
+            "revision",
+            "digest"
+          ]
+        }
+      },
+      "observed": {
+        "status": "threw",
+        "error": {
+          "name": "TypeError",
+          "message": "api.Registry is not a constructor",
+          "constructor": "TypeError",
+          "keys": [],
+          "ownNames": [
+            "stack",
+            "message"
+          ]
+        },
+        "host": {
+          "events": [],
+          "sameThrownObject": false
+        }
+      }
+    },
+    {
+      "name": "compile-active-add",
+      "expected": {
+        "status": "observed",
+        "value": {
+          "value": {
+            "status": "viable",
+            "generation": {
+              "$schema": "https://raw.githubusercontent.com/roryscot/metamap/v0.3.0/schemas/metamap-generation.schema.json",
+              "schemaVersion": "1.0.0",
+              "evaluatedAt": "2026-09-02T00:00:00.000Z",
+              "graph": {
+                "id": "urn:example:metamap:example-user-schema",
+                "revision": "example-1",
+                "digest": "sha256:7c3384787b0fac61a94bde964cebe9742c4c69c37a1648527adab641d395efe6"
+              },
+              "policy": {
+                "id": "urn:example:viability:user-schema",
+                "digest": "sha256:7cc617e78cd81f7ac471b647f33c2416f40e5e1399857d3ff90a7f9cb43acd43"
+              },
+              "context": {
+                "environment": "production",
+                "maintenance": false
+              },
+              "activeMappings": [
+                "urn:example:mapping:prisma-contains-user-email",
+                "urn:example:mapping:user-email-implementations",
+                "urn:example:mapping:zod-contains-user-email",
+                "urn:example:mapping:zod-email-derived-from-prisma",
+                "urn:test:callback:external"
+              ],
+              "inactiveMappings": [],
+              "evidence": [],
+              "waiversApplied": [],
+              "id": "urn:metamap:generation:f27903c7588d4e6c503bfa76b372418e0f060ca1b916705b847d4b68631b5903",
+              "digest": "sha256:f27903c7588d4e6c503bfa76b372418e0f060ca1b916705b847d4b68631b5903"
+            },
+            "issues": [],
+            "impact": {
+              "changedSubjects": [],
+              "affectedSubjects": [],
+              "paths": []
+            }
+          },
+          "numbers": []
+        },
+        "host": {
+          "keys": [
+            "status",
+            "generation",
+            "issues",
+            "impact"
+          ],
+          "issueKeys": [],
+          "events": [
+            {
+              "lookup": "test:callback-0",
+              "receiver": true
+            },
+            {
+              "callback": 0,
+              "receiverUndefined": true,
+              "sameConstraint": true,
+              "sameDocument": true,
+              "graphDocument": true,
+              "sameGraph": true,
+              "sameSet": true,
+              "freshContext": true,
+              "sameEvidence": true,
+              "contextKeys": [
+                "document",
+                "graph",
+                "activeMappings",
+                "evidence"
+              ],
+              "active": [
+                "urn:example:mapping:prisma-contains-user-email",
+                "urn:example:mapping:zod-contains-user-email",
+                "urn:example:mapping:user-email-implementations",
+                "urn:example:mapping:zod-email-derived-from-prisma"
+              ],
+              "entityIdentity": true
+            }
+          ],
+          "issueIdentity": [],
+          "issueMutations": {
+            "value": [],
+            "numbers": []
+          },
+          "distinctContexts": 1,
+          "sharedContext": true,
+          "frozen": true,
+          "contextFrozen": true,
+          "generationKeys": [
+            "$schema",
+            "schemaVersion",
+            "evaluatedAt",
+            "graph",
+            "policy",
+            "context",
+            "activeMappings",
+            "inactiveMappings",
+            "evidence",
+            "waiversApplied",
+            "id",
+            "digest"
+          ],
+          "graphKeys": [
+            "id",
+            "revision",
+            "digest"
+          ]
+        }
+      },
+      "observed": {
+        "status": "threw",
+        "error": {
+          "name": "TypeError",
+          "message": "api.Registry is not a constructor",
+          "constructor": "TypeError",
+          "keys": [],
+          "ownNames": [
+            "stack",
+            "message"
+          ]
+        },
+        "host": {
+          "events": [],
+          "sameThrownObject": false
+        }
+      }
+    },
+    {
+      "name": "compile-mutate-context",
+      "expected": {
+        "status": "observed",
+        "value": {
+          "value": {
+            "status": "viable",
+            "generation": {
+              "$schema": "https://raw.githubusercontent.com/roryscot/metamap/v0.3.0/schemas/metamap-generation.schema.json",
+              "schemaVersion": "1.0.0",
+              "evaluatedAt": "2026-09-02T00:00:00.000Z",
+              "graph": {
+                "id": "urn:example:metamap:example-user-schema",
+                "revision": "example-1",
+                "digest": "sha256:7c3384787b0fac61a94bde964cebe9742c4c69c37a1648527adab641d395efe6"
+              },
+              "policy": {
+                "id": "urn:example:viability:user-schema",
+                "digest": "sha256:77ea5478a00a6bb4156611ecf96656a145f7e9967fbe1835ff6510f1e954cd22"
+              },
+              "context": {
+                "environment": "production",
+                "maintenance": false,
+                "numeric": 0
+              },
+              "activeMappings": [
+                "urn:example:mapping:prisma-contains-user-email",
+                "urn:example:mapping:user-email-implementations",
+                "urn:example:mapping:zod-contains-user-email",
+                "urn:example:mapping:zod-email-derived-from-prisma"
+              ],
+              "inactiveMappings": [],
+              "evidence": [],
+              "waiversApplied": [],
+              "id": "urn:metamap:generation:7f424365f8375bbceba345e22f2c39e73537d526cc2457e81e58cd8bfaf17a62",
+              "digest": "sha256:7f424365f8375bbceba345e22f2c39e73537d526cc2457e81e58cd8bfaf17a62"
+            },
+            "issues": [],
+            "impact": {
+              "changedSubjects": [],
+              "affectedSubjects": [],
+              "paths": []
+            }
+          },
+          "numbers": [
+            {
+              "path": [
+                "generation",
+                "context",
+                "numeric"
+              ],
+              "kind": "nan"
+            }
+          ]
+        },
+        "host": {
+          "keys": [
+            "status",
+            "generation",
+            "issues",
+            "impact"
+          ],
+          "issueKeys": [],
+          "events": [
+            {
+              "lookup": "test:callback-0",
+              "receiver": true
+            },
+            {
+              "callback": 0,
+              "receiverUndefined": true,
+              "sameConstraint": true,
+              "sameDocument": true,
+              "graphDocument": true,
+              "sameGraph": true,
+              "sameSet": true,
+              "freshContext": true,
+              "sameEvidence": true,
+              "contextKeys": [
+                "document",
+                "graph",
+                "activeMappings",
+                "evidence"
+              ],
+              "active": [
+                "urn:example:mapping:prisma-contains-user-email",
+                "urn:example:mapping:zod-contains-user-email",
+                "urn:example:mapping:user-email-implementations",
+                "urn:example:mapping:zod-email-derived-from-prisma"
+              ],
+              "entityIdentity": true
+            }
+          ],
+          "issueIdentity": [],
+          "issueMutations": {
+            "value": [],
+            "numbers": []
+          },
+          "distinctContexts": 1,
+          "sharedContext": true,
+          "frozen": true,
+          "contextFrozen": true,
+          "generationKeys": [
+            "$schema",
+            "schemaVersion",
+            "evaluatedAt",
+            "graph",
+            "policy",
+            "context",
+            "activeMappings",
+            "inactiveMappings",
+            "evidence",
+            "waiversApplied",
+            "id",
+            "digest"
+          ],
+          "graphKeys": [
+            "id",
+            "revision",
+            "digest"
+          ]
+        }
+      },
+      "observed": {
+        "status": "threw",
+        "error": {
+          "name": "TypeError",
+          "message": "api.Registry is not a constructor",
+          "constructor": "TypeError",
+          "keys": [],
+          "ownNames": [
+            "stack",
+            "message"
+          ]
+        },
+        "host": {
+          "events": [],
+          "sameThrownObject": false
+        }
+      }
+    },
+    {
+      "name": "compile-mutate-policy-id",
+      "expected": {
+        "status": "observed",
+        "value": {
+          "value": {
+            "status": "viable",
+            "generation": {
+              "$schema": "https://raw.githubusercontent.com/roryscot/metamap/v0.3.0/schemas/metamap-generation.schema.json",
+              "schemaVersion": "1.0.0",
+              "evaluatedAt": "2026-09-02T00:00:00.000Z",
+              "graph": {
+                "id": "urn:example:metamap:example-user-schema",
+                "revision": "example-1",
+                "digest": "sha256:7c3384787b0fac61a94bde964cebe9742c4c69c37a1648527adab641d395efe6"
+              },
+              "policy": {
+                "id": "urn:test:callback:mutated-policy",
+                "digest": "sha256:b1902416070a3ecde807192295834f2f09865a12dd853b6abf927c99be731267"
+              },
+              "context": {
+                "environment": "production",
+                "maintenance": false
+              },
+              "activeMappings": [
+                "urn:example:mapping:prisma-contains-user-email",
+                "urn:example:mapping:user-email-implementations",
+                "urn:example:mapping:zod-contains-user-email",
+                "urn:example:mapping:zod-email-derived-from-prisma"
+              ],
+              "inactiveMappings": [],
+              "evidence": [],
+              "waiversApplied": [],
+              "id": "urn:metamap:generation:acd4bac9e05b67b5eb2dff5797db6e6c9867bfb234c0454378791881e1c911fd",
+              "digest": "sha256:acd4bac9e05b67b5eb2dff5797db6e6c9867bfb234c0454378791881e1c911fd"
+            },
+            "issues": [],
+            "impact": {
+              "changedSubjects": [],
+              "affectedSubjects": [],
+              "paths": []
+            }
+          },
+          "numbers": []
+        },
+        "host": {
+          "keys": [
+            "status",
+            "generation",
+            "issues",
+            "impact"
+          ],
+          "issueKeys": [],
+          "events": [
+            {
+              "lookup": "test:callback-0",
+              "receiver": true
+            },
+            {
+              "callback": 0,
+              "receiverUndefined": true,
+              "sameConstraint": true,
+              "sameDocument": true,
+              "graphDocument": true,
+              "sameGraph": true,
+              "sameSet": true,
+              "freshContext": true,
+              "sameEvidence": true,
+              "contextKeys": [
+                "document",
+                "graph",
+                "activeMappings",
+                "evidence"
+              ],
+              "active": [
+                "urn:example:mapping:prisma-contains-user-email",
+                "urn:example:mapping:zod-contains-user-email",
+                "urn:example:mapping:user-email-implementations",
+                "urn:example:mapping:zod-email-derived-from-prisma"
+              ],
+              "entityIdentity": true
+            }
+          ],
+          "issueIdentity": [],
+          "issueMutations": {
+            "value": [],
+            "numbers": []
+          },
+          "distinctContexts": 1,
+          "sharedContext": true,
+          "frozen": true,
+          "contextFrozen": true,
+          "generationKeys": [
+            "$schema",
+            "schemaVersion",
+            "evaluatedAt",
+            "graph",
+            "policy",
+            "context",
+            "activeMappings",
+            "inactiveMappings",
+            "evidence",
+            "waiversApplied",
+            "id",
+            "digest"
+          ],
+          "graphKeys": [
+            "id",
+            "revision",
+            "digest"
+          ]
+        }
+      },
+      "observed": {
+        "status": "threw",
+        "error": {
+          "name": "TypeError",
+          "message": "api.Registry is not a constructor",
+          "constructor": "TypeError",
+          "keys": [],
+          "ownNames": [
+            "stack",
+            "message"
+          ]
+        },
+        "host": {
+          "events": [],
+          "sameThrownObject": false
+        }
+      }
+    },
+    {
+      "name": "compile-mutate-document-id",
+      "expected": {
+        "status": "observed",
+        "value": {
+          "value": {
+            "status": "viable",
+            "generation": {
+              "$schema": "https://raw.githubusercontent.com/roryscot/metamap/v0.3.0/schemas/metamap-generation.schema.json",
+              "schemaVersion": "1.0.0",
+              "evaluatedAt": "2026-09-02T00:00:00.000Z",
+              "graph": {
+                "id": "urn:test:callback:mutated-document",
+                "revision": "example-1",
+                "digest": "sha256:1cc1d481452478731e2ac1c0a5f6d94529e6eb22593c4b037cb9aa8998374b15"
+              },
+              "policy": {
+                "id": "urn:example:viability:user-schema",
+                "digest": "sha256:1aa6ec0af404029c8aea903daa1cf84299be91539d6572e15923aac5373a9b43"
+              },
+              "context": {
+                "environment": "production",
+                "maintenance": false
+              },
+              "activeMappings": [
+                "urn:example:mapping:prisma-contains-user-email",
+                "urn:example:mapping:user-email-implementations",
+                "urn:example:mapping:zod-contains-user-email",
+                "urn:example:mapping:zod-email-derived-from-prisma"
+              ],
+              "inactiveMappings": [],
+              "evidence": [],
+              "waiversApplied": [],
+              "id": "urn:metamap:generation:d1371f7ae5a792b7c773e107ea7c5718d7040d55ac84615c128d7b2efbd2cebf",
+              "digest": "sha256:d1371f7ae5a792b7c773e107ea7c5718d7040d55ac84615c128d7b2efbd2cebf"
+            },
+            "issues": [],
+            "impact": {
+              "changedSubjects": [],
+              "affectedSubjects": [],
+              "paths": []
+            }
+          },
+          "numbers": []
+        },
+        "host": {
+          "keys": [
+            "status",
+            "generation",
+            "issues",
+            "impact"
+          ],
+          "issueKeys": [],
+          "events": [
+            {
+              "lookup": "test:callback-0",
+              "receiver": true
+            },
+            {
+              "callback": 0,
+              "receiverUndefined": true,
+              "sameConstraint": true,
+              "sameDocument": true,
+              "graphDocument": true,
+              "sameGraph": true,
+              "sameSet": true,
+              "freshContext": true,
+              "sameEvidence": true,
+              "contextKeys": [
+                "document",
+                "graph",
+                "activeMappings",
+                "evidence"
+              ],
+              "active": [
+                "urn:example:mapping:prisma-contains-user-email",
+                "urn:example:mapping:zod-contains-user-email",
+                "urn:example:mapping:user-email-implementations",
+                "urn:example:mapping:zod-email-derived-from-prisma"
+              ],
+              "entityIdentity": true
+            }
+          ],
+          "issueIdentity": [],
+          "issueMutations": {
+            "value": [],
+            "numbers": []
+          },
+          "distinctContexts": 1,
+          "sharedContext": true,
+          "frozen": true,
+          "contextFrozen": true,
+          "generationKeys": [
+            "$schema",
+            "schemaVersion",
+            "evaluatedAt",
+            "graph",
+            "policy",
+            "context",
+            "activeMappings",
+            "inactiveMappings",
+            "evidence",
+            "waiversApplied",
+            "id",
+            "digest"
+          ],
+          "graphKeys": [
+            "id",
+            "revision",
+            "digest"
+          ]
+        }
+      },
+      "observed": {
+        "status": "threw",
+        "error": {
+          "name": "TypeError",
+          "message": "api.Registry is not a constructor",
+          "constructor": "TypeError",
+          "keys": [],
+          "ownNames": [
+            "stack",
+            "message"
+          ]
+        },
+        "host": {
+          "events": [],
+          "sameThrownObject": false
+        }
+      }
+    },
+    {
+      "name": "compile-mutate-mappings",
+      "expected": {
+        "status": "observed",
+        "value": {
+          "value": {
+            "status": "viable",
+            "generation": {
+              "$schema": "https://raw.githubusercontent.com/roryscot/metamap/v0.3.0/schemas/metamap-generation.schema.json",
+              "schemaVersion": "1.0.0",
+              "evaluatedAt": "2026-09-02T00:00:00.000Z",
+              "graph": {
+                "id": "urn:example:metamap:example-user-schema",
+                "revision": "example-1",
+                "digest": "sha256:7c3384787b0fac61a94bde964cebe9742c4c69c37a1648527adab641d395efe6"
+              },
+              "policy": {
+                "id": "urn:example:viability:user-schema",
+                "digest": "sha256:0e9aa3fba0d17fff734a2caaba0c57e534c89efcb9c1f9156361710f4f35e342"
+              },
+              "context": {
+                "environment": "production",
+                "maintenance": false
+              },
+              "activeMappings": [
+                "urn:example:mapping:prisma-contains-user-email",
+                "urn:example:mapping:user-email-implementations",
+                "urn:example:mapping:zod-contains-user-email",
+                "urn:example:mapping:zod-email-derived-from-prisma"
+              ],
+              "inactiveMappings": [],
+              "evidence": [],
+              "waiversApplied": [],
+              "id": "urn:metamap:generation:de6c30576246cc80b45b2de504d1192acc32a1c59c6f018f86a60b772db83c0c",
+              "digest": "sha256:de6c30576246cc80b45b2de504d1192acc32a1c59c6f018f86a60b772db83c0c"
+            },
+            "issues": [],
+            "impact": {
+              "changedSubjects": [],
+              "affectedSubjects": [],
+              "paths": []
+            }
+          },
+          "numbers": []
+        },
+        "host": {
+          "keys": [
+            "status",
+            "generation",
+            "issues",
+            "impact"
+          ],
+          "issueKeys": [],
+          "events": [
+            {
+              "lookup": "test:callback-0",
+              "receiver": true
+            },
+            {
+              "callback": 0,
+              "receiverUndefined": true,
+              "sameConstraint": true,
+              "sameDocument": true,
+              "graphDocument": true,
+              "sameGraph": true,
+              "sameSet": true,
+              "freshContext": true,
+              "sameEvidence": true,
+              "contextKeys": [
+                "document",
+                "graph",
+                "activeMappings",
+                "evidence"
+              ],
+              "active": [
+                "urn:example:mapping:prisma-contains-user-email",
+                "urn:example:mapping:zod-contains-user-email",
+                "urn:example:mapping:user-email-implementations",
+                "urn:example:mapping:zod-email-derived-from-prisma"
+              ],
+              "entityIdentity": true
+            }
+          ],
+          "issueIdentity": [],
+          "issueMutations": {
+            "value": [],
+            "numbers": []
+          },
+          "distinctContexts": 1,
+          "sharedContext": true,
+          "frozen": true,
+          "contextFrozen": true,
+          "generationKeys": [
+            "$schema",
+            "schemaVersion",
+            "evaluatedAt",
+            "graph",
+            "policy",
+            "context",
+            "activeMappings",
+            "inactiveMappings",
+            "evidence",
+            "waiversApplied",
+            "id",
+            "digest"
+          ],
+          "graphKeys": [
+            "id",
+            "revision",
+            "digest"
+          ]
+        }
+      },
+      "observed": {
+        "status": "threw",
+        "error": {
+          "name": "TypeError",
+          "message": "api.Registry is not a constructor",
+          "constructor": "TypeError",
+          "keys": [],
+          "ownNames": [
+            "stack",
+            "message"
+          ]
+        },
+        "host": {
+          "events": [],
+          "sameThrownObject": false
+        }
+      }
+    },
+    {
+      "name": "compile-replace-evidence",
+      "expected": {
+        "status": "observed",
+        "value": {
+          "value": {
+            "status": "viable",
+            "generation": {
+              "$schema": "https://raw.githubusercontent.com/roryscot/metamap/v0.3.0/schemas/metamap-generation.schema.json",
+              "schemaVersion": "1.0.0",
+              "evaluatedAt": "2026-09-02T00:00:00.000Z",
+              "graph": {
+                "id": "urn:example:metamap:example-user-schema",
+                "revision": "example-1",
+                "digest": "sha256:7c3384787b0fac61a94bde964cebe9742c4c69c37a1648527adab641d395efe6"
+              },
+              "policy": {
+                "id": "urn:example:viability:user-schema",
+                "digest": "sha256:19a85dc37f479e14ee8ff01410bda7d0f30bdc0687465b1d4190c41393183026"
+              },
+              "context": {
+                "environment": "production",
+                "maintenance": false
+              },
+              "activeMappings": [
+                "urn:example:mapping:prisma-contains-user-email",
+                "urn:example:mapping:user-email-implementations",
+                "urn:example:mapping:zod-contains-user-email",
+                "urn:example:mapping:zod-email-derived-from-prisma"
+              ],
+              "inactiveMappings": [],
+              "evidence": [],
+              "waiversApplied": [],
+              "id": "urn:metamap:generation:672be9c7a920a2dc3b8ed76e770b20d9038d11d94b446453c8226e90c50bdd0d",
+              "digest": "sha256:672be9c7a920a2dc3b8ed76e770b20d9038d11d94b446453c8226e90c50bdd0d"
+            },
+            "issues": [],
+            "impact": {
+              "changedSubjects": [],
+              "affectedSubjects": [],
+              "paths": []
+            }
+          },
+          "numbers": []
+        },
+        "host": {
+          "keys": [
+            "status",
+            "generation",
+            "issues",
+            "impact"
+          ],
+          "issueKeys": [],
+          "events": [
+            {
+              "lookup": "test:callback-0",
+              "receiver": true
+            },
+            {
+              "callback": 0,
+              "receiverUndefined": true,
+              "sameConstraint": true,
+              "sameDocument": true,
+              "graphDocument": true,
+              "sameGraph": true,
+              "sameSet": true,
+              "freshContext": true,
+              "sameEvidence": true,
+              "contextKeys": [
+                "document",
+                "graph",
+                "activeMappings",
+                "evidence"
+              ],
+              "active": [
+                "urn:example:mapping:prisma-contains-user-email",
+                "urn:example:mapping:zod-contains-user-email",
+                "urn:example:mapping:user-email-implementations",
+                "urn:example:mapping:zod-email-derived-from-prisma"
+              ],
+              "entityIdentity": true
+            }
+          ],
+          "issueIdentity": [],
+          "issueMutations": {
+            "value": [],
+            "numbers": []
+          },
+          "distinctContexts": 1,
+          "sharedContext": true,
+          "frozen": true,
+          "contextFrozen": true,
+          "generationKeys": [
+            "$schema",
+            "schemaVersion",
+            "evaluatedAt",
+            "graph",
+            "policy",
+            "context",
+            "activeMappings",
+            "inactiveMappings",
+            "evidence",
+            "waiversApplied",
+            "id",
+            "digest"
+          ],
+          "graphKeys": [
+            "id",
+            "revision",
+            "digest"
+          ]
+        }
+      },
+      "observed": {
+        "status": "threw",
+        "error": {
+          "name": "TypeError",
+          "message": "api.Registry is not a constructor",
+          "constructor": "TypeError",
+          "keys": [],
+          "ownNames": [
+            "stack",
+            "message"
+          ]
+        },
+        "host": {
+          "events": [],
+          "sameThrownObject": false
+        }
+      }
+    },
+    {
+      "name": "compile-append-constraint",
+      "expected": {
+        "status": "observed",
+        "value": {
+          "value": {
+            "status": "viable",
+            "generation": {
+              "$schema": "https://raw.githubusercontent.com/roryscot/metamap/v0.3.0/schemas/metamap-generation.schema.json",
+              "schemaVersion": "1.0.0",
+              "evaluatedAt": "2026-09-02T00:00:00.000Z",
+              "graph": {
+                "id": "urn:example:metamap:example-user-schema",
+                "revision": "example-1",
+                "digest": "sha256:7c3384787b0fac61a94bde964cebe9742c4c69c37a1648527adab641d395efe6"
+              },
+              "policy": {
+                "id": "urn:example:viability:user-schema",
+                "digest": "sha256:b662f9449df09ab2d2e4ad99f447649beaee956b8c296ea45ab2e89fdce3c5c7"
+              },
+              "context": {
+                "environment": "production",
+                "maintenance": false
+              },
+              "activeMappings": [
+                "urn:example:mapping:prisma-contains-user-email",
+                "urn:example:mapping:user-email-implementations",
+                "urn:example:mapping:zod-contains-user-email",
+                "urn:example:mapping:zod-email-derived-from-prisma"
+              ],
+              "inactiveMappings": [],
+              "evidence": [],
+              "waiversApplied": [],
+              "id": "urn:metamap:generation:14c2811c4d9ba096ec0140d575238db7319bf1404ff02143ed8d3631208ff1da",
+              "digest": "sha256:14c2811c4d9ba096ec0140d575238db7319bf1404ff02143ed8d3631208ff1da"
+            },
+            "issues": [],
+            "impact": {
+              "changedSubjects": [],
+              "affectedSubjects": [],
+              "paths": []
+            }
+          },
+          "numbers": []
+        },
+        "host": {
+          "keys": [
+            "status",
+            "generation",
+            "issues",
+            "impact"
+          ],
+          "issueKeys": [],
+          "events": [
+            {
+              "lookup": "test:callback-0",
+              "receiver": true
+            },
+            {
+              "callback": 0,
+              "receiverUndefined": true,
+              "sameConstraint": true,
+              "sameDocument": true,
+              "graphDocument": true,
+              "sameGraph": true,
+              "sameSet": true,
+              "freshContext": true,
+              "sameEvidence": true,
+              "contextKeys": [
+                "document",
+                "graph",
+                "activeMappings",
+                "evidence"
+              ],
+              "active": [
+                "urn:example:mapping:prisma-contains-user-email",
+                "urn:example:mapping:zod-contains-user-email",
+                "urn:example:mapping:user-email-implementations",
+                "urn:example:mapping:zod-email-derived-from-prisma"
+              ],
+              "entityIdentity": true
+            }
+          ],
+          "issueIdentity": [],
+          "issueMutations": {
+            "value": [],
+            "numbers": []
+          },
+          "distinctContexts": 1,
+          "sharedContext": true,
+          "frozen": true,
+          "contextFrozen": true,
+          "generationKeys": [
+            "$schema",
+            "schemaVersion",
+            "evaluatedAt",
+            "graph",
+            "policy",
+            "context",
+            "activeMappings",
+            "inactiveMappings",
+            "evidence",
+            "waiversApplied",
+            "id",
+            "digest"
+          ],
+          "graphKeys": [
+            "id",
+            "revision",
+            "digest"
+          ]
+        }
+      },
+      "observed": {
+        "status": "threw",
+        "error": {
+          "name": "TypeError",
+          "message": "api.Registry is not a constructor",
+          "constructor": "TypeError",
+          "keys": [],
+          "ownNames": [
+            "stack",
+            "message"
+          ]
+        },
+        "host": {
+          "events": [],
+          "sameThrownObject": false
+        }
+      }
+    },
+    {
+      "name": "compile-sequence-empty-empty",
+      "expected": {
+        "status": "observed",
+        "value": {
+          "value": {
+            "status": "viable",
+            "generation": {
+              "$schema": "https://raw.githubusercontent.com/roryscot/metamap/v0.3.0/schemas/metamap-generation.schema.json",
+              "schemaVersion": "1.0.0",
+              "evaluatedAt": "2026-09-02T00:00:00.000Z",
+              "graph": {
+                "id": "urn:example:metamap:example-user-schema",
+                "revision": "example-1",
+                "digest": "sha256:7c3384787b0fac61a94bde964cebe9742c4c69c37a1648527adab641d395efe6"
+              },
+              "policy": {
+                "id": "urn:example:viability:user-schema",
+                "digest": "sha256:b15e7af0a39ff641603bab8c24475b344f1e42c0b75269e82ef470a3eba1df47"
+              },
+              "context": {
+                "environment": "production",
+                "maintenance": false
+              },
+              "activeMappings": [
+                "urn:example:mapping:prisma-contains-user-email",
+                "urn:example:mapping:user-email-implementations",
+                "urn:example:mapping:zod-contains-user-email",
+                "urn:example:mapping:zod-email-derived-from-prisma"
+              ],
+              "inactiveMappings": [],
+              "evidence": [],
+              "waiversApplied": [],
+              "id": "urn:metamap:generation:99a55f95e386130f214196056ea16e86c7d3442ab7312f4dccaf7b412767a391",
+              "digest": "sha256:99a55f95e386130f214196056ea16e86c7d3442ab7312f4dccaf7b412767a391"
+            },
+            "issues": [],
+            "impact": {
+              "changedSubjects": [],
+              "affectedSubjects": [],
+              "paths": []
+            }
+          },
+          "numbers": []
+        },
+        "host": {
+          "keys": [
+            "status",
+            "generation",
+            "issues",
+            "impact"
+          ],
+          "issueKeys": [],
+          "events": [
+            {
+              "lookup": "test:callback-0",
+              "receiver": true
+            },
+            {
+              "callback": 0,
+              "receiverUndefined": true,
+              "sameConstraint": true,
+              "sameDocument": true,
+              "graphDocument": true,
+              "sameGraph": true,
+              "sameSet": true,
+              "freshContext": true,
+              "sameEvidence": true,
+              "contextKeys": [
+                "document",
+                "graph",
+                "activeMappings",
+                "evidence"
+              ],
+              "active": [
+                "urn:example:mapping:prisma-contains-user-email",
+                "urn:example:mapping:zod-contains-user-email",
+                "urn:example:mapping:user-email-implementations",
+                "urn:example:mapping:zod-email-derived-from-prisma"
+              ],
+              "entityIdentity": true
+            },
+            {
+              "lookup": "test:callback-1",
+              "receiver": true
+            },
+            {
+              "callback": 1,
+              "receiverUndefined": true,
+              "sameConstraint": true,
+              "sameDocument": true,
+              "graphDocument": true,
+              "sameGraph": true,
+              "sameSet": true,
+              "freshContext": true,
+              "sameEvidence": true,
+              "contextKeys": [
+                "document",
+                "graph",
+                "activeMappings",
+                "evidence"
+              ],
+              "active": [
+                "urn:example:mapping:prisma-contains-user-email",
+                "urn:example:mapping:zod-contains-user-email",
+                "urn:example:mapping:user-email-implementations",
+                "urn:example:mapping:zod-email-derived-from-prisma"
+              ],
+              "entityIdentity": true
+            }
+          ],
+          "issueIdentity": [],
+          "issueMutations": {
+            "value": [],
+            "numbers": []
+          },
+          "distinctContexts": 2,
+          "sharedContext": true,
+          "frozen": true,
+          "contextFrozen": true,
+          "generationKeys": [
+            "$schema",
+            "schemaVersion",
+            "evaluatedAt",
+            "graph",
+            "policy",
+            "context",
+            "activeMappings",
+            "inactiveMappings",
+            "evidence",
+            "waiversApplied",
+            "id",
+            "digest"
+          ],
+          "graphKeys": [
+            "id",
+            "revision",
+            "digest"
+          ]
+        }
+      },
+      "observed": {
+        "status": "threw",
+        "error": {
+          "name": "TypeError",
+          "message": "api.Registry is not a constructor",
+          "constructor": "TypeError",
+          "keys": [],
+          "ownNames": [
+            "stack",
+            "message"
+          ]
+        },
+        "host": {
+          "events": [],
+          "sameThrownObject": false
+        }
+      }
+    },
+    {
+      "name": "compile-sequence-active-clear-empty",
+      "expected": {
+        "status": "observed",
+        "value": {
+          "value": {
+            "status": "viable",
+            "generation": {
+              "$schema": "https://raw.githubusercontent.com/roryscot/metamap/v0.3.0/schemas/metamap-generation.schema.json",
+              "schemaVersion": "1.0.0",
+              "evaluatedAt": "2026-09-02T00:00:00.000Z",
+              "graph": {
+                "id": "urn:example:metamap:example-user-schema",
+                "revision": "example-1",
+                "digest": "sha256:7c3384787b0fac61a94bde964cebe9742c4c69c37a1648527adab641d395efe6"
+              },
+              "policy": {
+                "id": "urn:example:viability:user-schema",
+                "digest": "sha256:dc40659b41f5159cd3f77fb8b13864bf591d95677d8fef20d5b45e3c0a0b8e84"
+              },
+              "context": {
+                "environment": "production",
+                "maintenance": false
+              },
+              "activeMappings": [],
+              "inactiveMappings": [],
+              "evidence": [],
+              "waiversApplied": [],
+              "id": "urn:metamap:generation:0f0741ca70e46869a64f4f8fcdb33b8f48bad881430dfd76834437c5e56a2857",
+              "digest": "sha256:0f0741ca70e46869a64f4f8fcdb33b8f48bad881430dfd76834437c5e56a2857"
+            },
+            "issues": [],
+            "impact": {
+              "changedSubjects": [],
+              "affectedSubjects": [],
+              "paths": []
+            }
+          },
+          "numbers": []
+        },
+        "host": {
+          "keys": [
+            "status",
+            "generation",
+            "issues",
+            "impact"
+          ],
+          "issueKeys": [],
+          "events": [
+            {
+              "lookup": "test:callback-0",
+              "receiver": true
+            },
+            {
+              "callback": 0,
+              "receiverUndefined": true,
+              "sameConstraint": true,
+              "sameDocument": true,
+              "graphDocument": true,
+              "sameGraph": true,
+              "sameSet": true,
+              "freshContext": true,
+              "sameEvidence": true,
+              "contextKeys": [
+                "document",
+                "graph",
+                "activeMappings",
+                "evidence"
+              ],
+              "active": [
+                "urn:example:mapping:prisma-contains-user-email",
+                "urn:example:mapping:zod-contains-user-email",
+                "urn:example:mapping:user-email-implementations",
+                "urn:example:mapping:zod-email-derived-from-prisma"
+              ],
+              "entityIdentity": true
+            },
+            {
+              "lookup": "test:callback-1",
+              "receiver": true
+            },
+            {
+              "callback": 1,
+              "receiverUndefined": true,
+              "sameConstraint": true,
+              "sameDocument": true,
+              "graphDocument": true,
+              "sameGraph": true,
+              "sameSet": true,
+              "freshContext": true,
+              "sameEvidence": true,
+              "contextKeys": [
+                "document",
+                "graph",
+                "activeMappings",
+                "evidence"
+              ],
+              "active": [],
+              "entityIdentity": true
+            }
+          ],
+          "issueIdentity": [],
+          "issueMutations": {
+            "value": [],
+            "numbers": []
+          },
+          "distinctContexts": 2,
+          "sharedContext": true,
+          "frozen": true,
+          "contextFrozen": true,
+          "generationKeys": [
+            "$schema",
+            "schemaVersion",
+            "evaluatedAt",
+            "graph",
+            "policy",
+            "context",
+            "activeMappings",
+            "inactiveMappings",
+            "evidence",
+            "waiversApplied",
+            "id",
+            "digest"
+          ],
+          "graphKeys": [
+            "id",
+            "revision",
+            "digest"
+          ]
+        }
+      },
+      "observed": {
+        "status": "threw",
+        "error": {
+          "name": "TypeError",
+          "message": "api.Registry is not a constructor",
+          "constructor": "TypeError",
+          "keys": [],
+          "ownNames": [
+            "stack",
+            "message"
+          ]
+        },
+        "host": {
+          "events": [],
+          "sameThrownObject": false
+        }
+      }
+    },
+    {
+      "name": "compile-sequence-replace-evidence-empty",
+      "expected": {
+        "status": "observed",
+        "value": {
+          "value": {
+            "status": "viable",
+            "generation": {
+              "$schema": "https://raw.githubusercontent.com/roryscot/metamap/v0.3.0/schemas/metamap-generation.schema.json",
+              "schemaVersion": "1.0.0",
+              "evaluatedAt": "2026-09-02T00:00:00.000Z",
+              "graph": {
+                "id": "urn:example:metamap:example-user-schema",
+                "revision": "example-1",
+                "digest": "sha256:7c3384787b0fac61a94bde964cebe9742c4c69c37a1648527adab641d395efe6"
+              },
+              "policy": {
+                "id": "urn:example:viability:user-schema",
+                "digest": "sha256:7a1722b770de085b558591d06c85669679e0fe9e00c8f4da4665aafb70f3431a"
+              },
+              "context": {
+                "environment": "production",
+                "maintenance": false
+              },
+              "activeMappings": [
+                "urn:example:mapping:prisma-contains-user-email",
+                "urn:example:mapping:user-email-implementations",
+                "urn:example:mapping:zod-contains-user-email",
+                "urn:example:mapping:zod-email-derived-from-prisma"
+              ],
+              "inactiveMappings": [],
+              "evidence": [],
+              "waiversApplied": [],
+              "id": "urn:metamap:generation:67fba14290526bf1b0d14b1d5c212ab0c309068d1cf7f94e19deca1eb3cb0769",
+              "digest": "sha256:67fba14290526bf1b0d14b1d5c212ab0c309068d1cf7f94e19deca1eb3cb0769"
+            },
+            "issues": [],
+            "impact": {
+              "changedSubjects": [],
+              "affectedSubjects": [],
+              "paths": []
+            }
+          },
+          "numbers": []
+        },
+        "host": {
+          "keys": [
+            "status",
+            "generation",
+            "issues",
+            "impact"
+          ],
+          "issueKeys": [],
+          "events": [
+            {
+              "lookup": "test:callback-0",
+              "receiver": true
+            },
+            {
+              "callback": 0,
+              "receiverUndefined": true,
+              "sameConstraint": true,
+              "sameDocument": true,
+              "graphDocument": true,
+              "sameGraph": true,
+              "sameSet": true,
+              "freshContext": true,
+              "sameEvidence": true,
+              "contextKeys": [
+                "document",
+                "graph",
+                "activeMappings",
+                "evidence"
+              ],
+              "active": [
+                "urn:example:mapping:prisma-contains-user-email",
+                "urn:example:mapping:zod-contains-user-email",
+                "urn:example:mapping:user-email-implementations",
+                "urn:example:mapping:zod-email-derived-from-prisma"
+              ],
+              "entityIdentity": true
+            },
+            {
+              "lookup": "test:callback-1",
+              "receiver": true
+            },
+            {
+              "callback": 1,
+              "receiverUndefined": true,
+              "sameConstraint": true,
+              "sameDocument": true,
+              "graphDocument": true,
+              "sameGraph": true,
+              "sameSet": true,
+              "freshContext": true,
+              "sameEvidence": true,
+              "contextKeys": [
+                "document",
+                "graph",
+                "activeMappings",
+                "evidence"
+              ],
+              "active": [
+                "urn:example:mapping:prisma-contains-user-email",
+                "urn:example:mapping:zod-contains-user-email",
+                "urn:example:mapping:user-email-implementations",
+                "urn:example:mapping:zod-email-derived-from-prisma"
+              ],
+              "entityIdentity": true
+            }
+          ],
+          "issueIdentity": [],
+          "issueMutations": {
+            "value": [],
+            "numbers": []
+          },
+          "distinctContexts": 2,
+          "sharedContext": true,
+          "frozen": true,
+          "contextFrozen": true,
+          "generationKeys": [
+            "$schema",
+            "schemaVersion",
+            "evaluatedAt",
+            "graph",
+            "policy",
+            "context",
+            "activeMappings",
+            "inactiveMappings",
+            "evidence",
+            "waiversApplied",
+            "id",
+            "digest"
+          ],
+          "graphKeys": [
+            "id",
+            "revision",
+            "digest"
+          ]
+        }
+      },
+      "observed": {
+        "status": "threw",
+        "error": {
+          "name": "TypeError",
+          "message": "api.Registry is not a constructor",
+          "constructor": "TypeError",
+          "keys": [],
+          "ownNames": [
+            "stack",
+            "message"
+          ]
+        },
+        "host": {
+          "events": [],
+          "sameThrownObject": false
+        }
+      }
+    },
+    {
+      "name": "compile-sequence-delete-next-error",
+      "expected": {
+        "status": "threw",
+        "error": {
+          "name": "TypeError",
+          "message": "Iterator value undefined is not an entry object",
+          "constructor": "TypeError",
+          "keys": [],
+          "ownNames": [
+            "stack",
+            "message"
+          ]
+        },
+        "host": {
+          "events": [
+            {
+              "lookup": "test:callback-0",
+              "receiver": true
+            },
+            {
+              "callback": 0,
+              "receiverUndefined": true,
+              "sameConstraint": true,
+              "sameDocument": true,
+              "graphDocument": true,
+              "sameGraph": true,
+              "sameSet": true,
+              "freshContext": true,
+              "sameEvidence": true,
+              "contextKeys": [
+                "document",
+                "graph",
+                "activeMappings",
+                "evidence"
+              ],
+              "active": [
+                "urn:example:mapping:prisma-contains-user-email",
+                "urn:example:mapping:zod-contains-user-email",
+                "urn:example:mapping:user-email-implementations",
+                "urn:example:mapping:zod-email-derived-from-prisma"
+              ],
+              "entityIdentity": true
+            }
+          ],
+          "sameThrownObject": false
+        }
+      },
+      "observed": {
+        "status": "threw",
+        "error": {
+          "name": "TypeError",
+          "message": "api.Registry is not a constructor",
+          "constructor": "TypeError",
+          "keys": [],
+          "ownNames": [
+            "stack",
+            "message"
+          ]
+        },
+        "host": {
+          "events": [],
+          "sameThrownObject": false
+        }
+      }
+    },
+    {
+      "name": "compile-sequence-shared-error-shared-error",
+      "expected": {
+        "status": "observed",
+        "value": {
+          "value": {
+            "status": "viable",
+            "generation": {
+              "$schema": "https://raw.githubusercontent.com/roryscot/metamap/v0.3.0/schemas/metamap-generation.schema.json",
+              "schemaVersion": "1.0.0",
+              "evaluatedAt": "2026-09-02T00:00:00.000Z",
+              "graph": {
+                "id": "urn:example:metamap:example-user-schema",
+                "revision": "example-1",
+                "digest": "sha256:7c3384787b0fac61a94bde964cebe9742c4c69c37a1648527adab641d395efe6"
+              },
+              "policy": {
+                "id": "urn:example:viability:user-schema",
+                "digest": "sha256:0bca90bc5743fd3d6ba927e5fd94e472ea546e6a5bd010b75cecc631e6370329"
+              },
+              "context": {
+                "environment": "production",
+                "maintenance": false
+              },
+              "activeMappings": [
+                "urn:example:mapping:prisma-contains-user-email",
+                "urn:example:mapping:user-email-implementations",
+                "urn:example:mapping:zod-contains-user-email",
+                "urn:example:mapping:zod-email-derived-from-prisma"
+              ],
+              "inactiveMappings": [],
+              "evidence": [],
+              "waiversApplied": [
+                "urn:test:callback:waiver"
+              ],
+              "id": "urn:metamap:generation:644527f023668fc60e45bbe669663153cd48d61bde47efce9520ab18178ac40e",
+              "digest": "sha256:644527f023668fc60e45bbe669663153cd48d61bde47efce9520ab18178ac40e"
+            },
+            "issues": [
+              {
+                "severity": "warning",
+                "code": "REQUIRED_MAPPING_MISSING",
+                "message": "shared issue",
+                "subjectId": "urn:example:mapping:prisma-contains-user-email",
+                "extra": "retained",
+                "waivedBy": "urn:test:callback:waiver"
+              },
+              {
+                "severity": "warning",
+                "code": "REQUIRED_MAPPING_MISSING",
+                "message": "shared issue",
+                "subjectId": "urn:example:mapping:prisma-contains-user-email",
+                "extra": "retained",
+                "waivedBy": "urn:test:callback:waiver"
+              }
+            ],
+            "impact": {
+              "changedSubjects": [],
+              "affectedSubjects": [],
+              "paths": []
+            }
+          },
+          "numbers": []
+        },
+        "host": {
+          "keys": [
+            "status",
+            "generation",
+            "issues",
+            "impact"
+          ],
+          "issueKeys": [
+            [
+              "severity",
+              "code",
+              "message",
+              "subjectId",
+              "path",
+              "extra",
+              "waivedBy",
+              "causalPath"
+            ],
+            [
+              "severity",
+              "code",
+              "message",
+              "subjectId",
+              "path",
+              "extra",
+              "waivedBy",
+              "causalPath"
+            ]
+          ],
+          "events": [
+            {
+              "lookup": "test:callback-0",
+              "receiver": true
+            },
+            {
+              "callback": 0,
+              "receiverUndefined": true,
+              "sameConstraint": true,
+              "sameDocument": true,
+              "graphDocument": true,
+              "sameGraph": true,
+              "sameSet": true,
+              "freshContext": true,
+              "sameEvidence": true,
+              "contextKeys": [
+                "document",
+                "graph",
+                "activeMappings",
+                "evidence"
+              ],
+              "active": [
+                "urn:example:mapping:prisma-contains-user-email",
+                "urn:example:mapping:zod-contains-user-email",
+                "urn:example:mapping:user-email-implementations",
+                "urn:example:mapping:zod-email-derived-from-prisma"
+              ],
+              "entityIdentity": true
+            },
+            {
+              "lookup": "test:callback-1",
+              "receiver": true
+            },
+            {
+              "callback": 1,
+              "receiverUndefined": true,
+              "sameConstraint": true,
+              "sameDocument": true,
+              "graphDocument": true,
+              "sameGraph": true,
+              "sameSet": true,
+              "freshContext": true,
+              "sameEvidence": true,
+              "contextKeys": [
+                "document",
+                "graph",
+                "activeMappings",
+                "evidence"
+              ],
+              "active": [
+                "urn:example:mapping:prisma-contains-user-email",
+                "urn:example:mapping:zod-contains-user-email",
+                "urn:example:mapping:user-email-implementations",
+                "urn:example:mapping:zod-email-derived-from-prisma"
+              ],
+              "entityIdentity": true
+            }
+          ],
+          "issueIdentity": [
+            true,
+            true
+          ],
+          "issueMutations": {
+            "value": [
+              {
+                "severity": "warning",
+                "code": "REQUIRED_MAPPING_MISSING",
+                "message": "shared issue",
+                "subjectId": "urn:example:mapping:prisma-contains-user-email",
+                "extra": "retained",
+                "waivedBy": "urn:test:callback:waiver"
+              },
+              {
+                "severity": "warning",
+                "code": "REQUIRED_MAPPING_MISSING",
+                "message": "shared issue",
+                "subjectId": "urn:example:mapping:prisma-contains-user-email",
+                "extra": "retained",
+                "waivedBy": "urn:test:callback:waiver"
+              }
+            ],
+            "numbers": []
+          },
+          "distinctContexts": 2,
+          "sharedContext": true,
+          "frozen": true,
+          "contextFrozen": true,
+          "generationKeys": [
+            "$schema",
+            "schemaVersion",
+            "evaluatedAt",
+            "graph",
+            "policy",
+            "context",
+            "activeMappings",
+            "inactiveMappings",
+            "evidence",
+            "waiversApplied",
+            "id",
+            "digest"
+          ],
+          "graphKeys": [
+            "id",
+            "revision",
+            "digest"
+          ]
+        }
+      },
+      "observed": {
+        "status": "threw",
+        "error": {
+          "name": "TypeError",
+          "message": "api.Registry is not a constructor",
+          "constructor": "TypeError",
+          "keys": [],
+          "ownNames": [
+            "stack",
+            "message"
+          ]
+        },
+        "host": {
+          "events": [],
+          "sameThrownObject": false
+        }
+      }
+    },
+    {
+      "name": "compile-sequence-warning-error",
+      "expected": {
+        "status": "observed",
+        "value": {
+          "value": {
+            "status": "rejected",
+            "issues": [
+              {
+                "severity": "warning",
+                "code": "CUSTOM_CALLBACK",
+                "message": "custom issue",
+                "subjectId": "urn:example:mapping:prisma-contains-user-email",
+                "extra": {
+                  "retained": true
+                },
+                "causalPath": [
+                  "urn:example:mapping:prisma-contains-user-email"
+                ]
+              },
+              {
+                "severity": "error",
+                "code": "CUSTOM_CALLBACK",
+                "message": "custom issue",
+                "subjectId": "urn:example:mapping:prisma-contains-user-email",
+                "extra": {
+                  "retained": true
+                },
+                "causalPath": [
+                  "urn:example:mapping:prisma-contains-user-email"
+                ]
+              }
+            ],
+            "impact": {
+              "changedSubjects": [
+                "urn:example:mapping:prisma-contains-user-email"
+              ],
+              "affectedSubjects": [
+                "urn:example:element:prisma.User.email",
+                "urn:example:element:zod.UserSchema.email",
+                "urn:example:mapping:prisma-contains-user-email",
+                "urn:example:mapping:zod-contains-user-email",
+                "urn:example:mapping:zod-email-derived-from-prisma",
+                "urn:example:structure:prisma-schema",
+                "urn:example:structure:shared-domain-schema"
+              ],
+              "paths": [
+                {
+                  "subjectId": "urn:example:element:prisma.User.email",
+                  "path": [
+                    "urn:example:mapping:prisma-contains-user-email",
+                    "urn:example:element:prisma.User.email"
+                  ]
+                },
+                {
+                  "subjectId": "urn:example:element:zod.UserSchema.email",
+                  "path": [
+                    "urn:example:mapping:prisma-contains-user-email",
+                    "urn:example:element:prisma.User.email",
+                    "urn:example:mapping:zod-email-derived-from-prisma",
+                    "urn:example:element:zod.UserSchema.email"
+                  ]
+                },
+                {
+                  "subjectId": "urn:example:mapping:prisma-contains-user-email",
+                  "path": [
+                    "urn:example:mapping:prisma-contains-user-email"
+                  ]
+                },
+                {
+                  "subjectId": "urn:example:mapping:zod-contains-user-email",
+                  "path": [
+                    "urn:example:mapping:prisma-contains-user-email",
+                    "urn:example:element:prisma.User.email",
+                    "urn:example:mapping:zod-email-derived-from-prisma",
+                    "urn:example:element:zod.UserSchema.email",
+                    "urn:example:mapping:zod-contains-user-email"
+                  ]
+                },
+                {
+                  "subjectId": "urn:example:mapping:zod-email-derived-from-prisma",
+                  "path": [
+                    "urn:example:mapping:prisma-contains-user-email",
+                    "urn:example:element:prisma.User.email",
+                    "urn:example:mapping:zod-email-derived-from-prisma"
+                  ]
+                },
+                {
+                  "subjectId": "urn:example:structure:prisma-schema",
+                  "path": [
+                    "urn:example:mapping:prisma-contains-user-email",
+                    "urn:example:structure:prisma-schema"
+                  ]
+                },
+                {
+                  "subjectId": "urn:example:structure:shared-domain-schema",
+                  "path": [
+                    "urn:example:mapping:prisma-contains-user-email",
+                    "urn:example:element:prisma.User.email",
+                    "urn:example:mapping:zod-email-derived-from-prisma",
+                    "urn:example:element:zod.UserSchema.email",
+                    "urn:example:mapping:zod-contains-user-email",
+                    "urn:example:structure:shared-domain-schema"
+                  ]
+                }
+              ]
+            },
+            "quarantinedSubjects": [
+              "urn:example:element:prisma.User.email",
+              "urn:example:element:zod.UserSchema.email",
+              "urn:example:mapping:prisma-contains-user-email",
+              "urn:example:mapping:zod-contains-user-email",
+              "urn:example:mapping:zod-email-derived-from-prisma",
+              "urn:example:structure:prisma-schema",
+              "urn:example:structure:shared-domain-schema"
+            ]
+          },
+          "numbers": []
+        },
+        "host": {
+          "keys": [
+            "status",
+            "issues",
+            "impact",
+            "quarantinedSubjects"
+          ],
+          "issueKeys": [
+            [
+              "severity",
+              "code",
+              "message",
+              "subjectId",
+              "path",
+              "extra",
+              "causalPath"
+            ],
+            [
+              "severity",
+              "code",
+              "message",
+              "subjectId",
+              "path",
+              "extra",
+              "causalPath"
+            ]
+          ],
+          "events": [
+            {
+              "lookup": "test:callback-0",
+              "receiver": true
+            },
+            {
+              "callback": 0,
+              "receiverUndefined": true,
+              "sameConstraint": true,
+              "sameDocument": true,
+              "graphDocument": true,
+              "sameGraph": true,
+              "sameSet": true,
+              "freshContext": true,
+              "sameEvidence": true,
+              "contextKeys": [
+                "document",
+                "graph",
+                "activeMappings",
+                "evidence"
+              ],
+              "active": [
+                "urn:example:mapping:prisma-contains-user-email",
+                "urn:example:mapping:zod-contains-user-email",
+                "urn:example:mapping:user-email-implementations",
+                "urn:example:mapping:zod-email-derived-from-prisma"
+              ],
+              "entityIdentity": true
+            },
+            {
+              "lookup": "test:callback-1",
+              "receiver": true
+            },
+            {
+              "callback": 1,
+              "receiverUndefined": true,
+              "sameConstraint": true,
+              "sameDocument": true,
+              "graphDocument": true,
+              "sameGraph": true,
+              "sameSet": true,
+              "freshContext": true,
+              "sameEvidence": true,
+              "contextKeys": [
+                "document",
+                "graph",
+                "activeMappings",
+                "evidence"
+              ],
+              "active": [
+                "urn:example:mapping:prisma-contains-user-email",
+                "urn:example:mapping:zod-contains-user-email",
+                "urn:example:mapping:user-email-implementations",
+                "urn:example:mapping:zod-email-derived-from-prisma"
+              ],
+              "entityIdentity": true
+            }
+          ],
+          "issueIdentity": [
+            true,
+            true
+          ],
+          "issueMutations": {
+            "value": [
+              {
+                "severity": "warning",
+                "code": "CUSTOM_CALLBACK",
+                "message": "custom issue",
+                "subjectId": "urn:example:mapping:prisma-contains-user-email",
+                "extra": {
+                  "retained": true
+                },
+                "causalPath": [
+                  "urn:example:mapping:prisma-contains-user-email"
+                ]
+              },
+              {
+                "severity": "error",
+                "code": "CUSTOM_CALLBACK",
+                "message": "custom issue",
+                "subjectId": "urn:example:mapping:prisma-contains-user-email",
+                "extra": {
+                  "retained": true
+                },
+                "causalPath": [
+                  "urn:example:mapping:prisma-contains-user-email"
+                ]
+              }
+            ],
+            "numbers": []
+          },
+          "distinctContexts": 2
+        }
+      },
+      "observed": {
+        "status": "threw",
+        "error": {
+          "name": "TypeError",
+          "message": "api.Registry is not a constructor",
+          "constructor": "TypeError",
+          "keys": [],
+          "ownNames": [
+            "stack",
+            "message"
+          ]
+        },
+        "host": {
+          "events": [],
+          "sameThrownObject": false
+        }
+      }
+    },
+    {
+      "name": "compile-sequence-mutate-document-id-empty",
+      "expected": {
+        "status": "observed",
+        "value": {
+          "value": {
+            "status": "viable",
+            "generation": {
+              "$schema": "https://raw.githubusercontent.com/roryscot/metamap/v0.3.0/schemas/metamap-generation.schema.json",
+              "schemaVersion": "1.0.0",
+              "evaluatedAt": "2026-09-02T00:00:00.000Z",
+              "graph": {
+                "id": "urn:test:callback:mutated-document",
+                "revision": "example-1",
+                "digest": "sha256:1cc1d481452478731e2ac1c0a5f6d94529e6eb22593c4b037cb9aa8998374b15"
+              },
+              "policy": {
+                "id": "urn:example:viability:user-schema",
+                "digest": "sha256:33455813f2d9047ebc690b41eb4890bfa0a76a3d5637743541513c12600c3b03"
+              },
+              "context": {
+                "environment": "production",
+                "maintenance": false
+              },
+              "activeMappings": [
+                "urn:example:mapping:prisma-contains-user-email",
+                "urn:example:mapping:user-email-implementations",
+                "urn:example:mapping:zod-contains-user-email",
+                "urn:example:mapping:zod-email-derived-from-prisma"
+              ],
+              "inactiveMappings": [],
+              "evidence": [],
+              "waiversApplied": [],
+              "id": "urn:metamap:generation:f0e7554e9d0cc1293b19a86c62cee4a9f78b51e740238bf2d16aabb5b2ffb447",
+              "digest": "sha256:f0e7554e9d0cc1293b19a86c62cee4a9f78b51e740238bf2d16aabb5b2ffb447"
+            },
+            "issues": [],
+            "impact": {
+              "changedSubjects": [],
+              "affectedSubjects": [],
+              "paths": []
+            }
+          },
+          "numbers": []
+        },
+        "host": {
+          "keys": [
+            "status",
+            "generation",
+            "issues",
+            "impact"
+          ],
+          "issueKeys": [],
+          "events": [
+            {
+              "lookup": "test:callback-0",
+              "receiver": true
+            },
+            {
+              "callback": 0,
+              "receiverUndefined": true,
+              "sameConstraint": true,
+              "sameDocument": true,
+              "graphDocument": true,
+              "sameGraph": true,
+              "sameSet": true,
+              "freshContext": true,
+              "sameEvidence": true,
+              "contextKeys": [
+                "document",
+                "graph",
+                "activeMappings",
+                "evidence"
+              ],
+              "active": [
+                "urn:example:mapping:prisma-contains-user-email",
+                "urn:example:mapping:zod-contains-user-email",
+                "urn:example:mapping:user-email-implementations",
+                "urn:example:mapping:zod-email-derived-from-prisma"
+              ],
+              "entityIdentity": true
+            },
+            {
+              "lookup": "test:callback-1",
+              "receiver": true
+            },
+            {
+              "callback": 1,
+              "receiverUndefined": true,
+              "sameConstraint": true,
+              "sameDocument": true,
+              "graphDocument": true,
+              "sameGraph": true,
+              "sameSet": true,
+              "freshContext": true,
+              "sameEvidence": true,
+              "contextKeys": [
+                "document",
+                "graph",
+                "activeMappings",
+                "evidence"
+              ],
+              "active": [
+                "urn:example:mapping:prisma-contains-user-email",
+                "urn:example:mapping:zod-contains-user-email",
+                "urn:example:mapping:user-email-implementations",
+                "urn:example:mapping:zod-email-derived-from-prisma"
+              ],
+              "entityIdentity": true
+            }
+          ],
+          "issueIdentity": [],
+          "issueMutations": {
+            "value": [],
+            "numbers": []
+          },
+          "distinctContexts": 2,
+          "sharedContext": true,
+          "frozen": true,
+          "contextFrozen": true,
+          "generationKeys": [
+            "$schema",
+            "schemaVersion",
+            "evaluatedAt",
+            "graph",
+            "policy",
+            "context",
+            "activeMappings",
+            "inactiveMappings",
+            "evidence",
+            "waiversApplied",
+            "id",
+            "digest"
+          ],
+          "graphKeys": [
+            "id",
+            "revision",
+            "digest"
+          ]
+        }
+      },
+      "observed": {
+        "status": "threw",
+        "error": {
+          "name": "TypeError",
+          "message": "api.Registry is not a constructor",
+          "constructor": "TypeError",
+          "keys": [],
+          "ownNames": [
+            "stack",
+            "message"
+          ]
+        },
+        "host": {
+          "events": [],
+          "sameThrownObject": false
+        }
+      }
+    },
+    {
+      "name": "compile-sequence-mutate-context-empty",
+      "expected": {
+        "status": "observed",
+        "value": {
+          "value": {
+            "status": "viable",
+            "generation": {
+              "$schema": "https://raw.githubusercontent.com/roryscot/metamap/v0.3.0/schemas/metamap-generation.schema.json",
+              "schemaVersion": "1.0.0",
+              "evaluatedAt": "2026-09-02T00:00:00.000Z",
+              "graph": {
+                "id": "urn:example:metamap:example-user-schema",
+                "revision": "example-1",
+                "digest": "sha256:7c3384787b0fac61a94bde964cebe9742c4c69c37a1648527adab641d395efe6"
+              },
+              "policy": {
+                "id": "urn:example:viability:user-schema",
+                "digest": "sha256:477e2ef8cad0f86b24e3a037709bcd6197cf6ffeec6cba1025095326294ba478"
+              },
+              "context": {
+                "environment": "production",
+                "maintenance": false,
+                "numeric": 0
+              },
+              "activeMappings": [
+                "urn:example:mapping:prisma-contains-user-email",
+                "urn:example:mapping:user-email-implementations",
+                "urn:example:mapping:zod-contains-user-email",
+                "urn:example:mapping:zod-email-derived-from-prisma"
+              ],
+              "inactiveMappings": [],
+              "evidence": [],
+              "waiversApplied": [],
+              "id": "urn:metamap:generation:cd3aa1fe69a8f09af0752d8d2ec34458dfc8abf33c9392351c002ddb5ab0a845",
+              "digest": "sha256:cd3aa1fe69a8f09af0752d8d2ec34458dfc8abf33c9392351c002ddb5ab0a845"
+            },
+            "issues": [],
+            "impact": {
+              "changedSubjects": [],
+              "affectedSubjects": [],
+              "paths": []
+            }
+          },
+          "numbers": [
+            {
+              "path": [
+                "generation",
+                "context",
+                "numeric"
+              ],
+              "kind": "nan"
+            }
+          ]
+        },
+        "host": {
+          "keys": [
+            "status",
+            "generation",
+            "issues",
+            "impact"
+          ],
+          "issueKeys": [],
+          "events": [
+            {
+              "lookup": "test:callback-0",
+              "receiver": true
+            },
+            {
+              "callback": 0,
+              "receiverUndefined": true,
+              "sameConstraint": true,
+              "sameDocument": true,
+              "graphDocument": true,
+              "sameGraph": true,
+              "sameSet": true,
+              "freshContext": true,
+              "sameEvidence": true,
+              "contextKeys": [
+                "document",
+                "graph",
+                "activeMappings",
+                "evidence"
+              ],
+              "active": [
+                "urn:example:mapping:prisma-contains-user-email",
+                "urn:example:mapping:zod-contains-user-email",
+                "urn:example:mapping:user-email-implementations",
+                "urn:example:mapping:zod-email-derived-from-prisma"
+              ],
+              "entityIdentity": true
+            },
+            {
+              "lookup": "test:callback-1",
+              "receiver": true
+            },
+            {
+              "callback": 1,
+              "receiverUndefined": true,
+              "sameConstraint": true,
+              "sameDocument": true,
+              "graphDocument": true,
+              "sameGraph": true,
+              "sameSet": true,
+              "freshContext": true,
+              "sameEvidence": true,
+              "contextKeys": [
+                "document",
+                "graph",
+                "activeMappings",
+                "evidence"
+              ],
+              "active": [
+                "urn:example:mapping:prisma-contains-user-email",
+                "urn:example:mapping:zod-contains-user-email",
+                "urn:example:mapping:user-email-implementations",
+                "urn:example:mapping:zod-email-derived-from-prisma"
+              ],
+              "entityIdentity": true
+            }
+          ],
+          "issueIdentity": [],
+          "issueMutations": {
+            "value": [],
+            "numbers": []
+          },
+          "distinctContexts": 2,
+          "sharedContext": true,
+          "frozen": true,
+          "contextFrozen": true,
+          "generationKeys": [
+            "$schema",
+            "schemaVersion",
+            "evaluatedAt",
+            "graph",
+            "policy",
+            "context",
+            "activeMappings",
+            "inactiveMappings",
+            "evidence",
+            "waiversApplied",
+            "id",
+            "digest"
+          ],
+          "graphKeys": [
+            "id",
+            "revision",
+            "digest"
+          ]
+        }
+      },
+      "observed": {
+        "status": "threw",
+        "error": {
+          "name": "TypeError",
+          "message": "api.Registry is not a constructor",
+          "constructor": "TypeError",
+          "keys": [],
+          "ownNames": [
+            "stack",
+            "message"
+          ]
+        },
+        "host": {
+          "events": [],
+          "sameThrownObject": false
+        }
+      }
+    },
+    {
+      "name": "compile-invalid-document",
+      "expected": {
+        "status": "observed",
+        "value": {
+          "value": {
+            "status": "rejected",
+            "issues": [
+              {
+                "severity": "error",
+                "code": "UNRESOLVED_ENDPOINT",
+                "message": "Mapping endpoint urn:test:missing does not resolve",
+                "path": "$.mappings[0].sources[0]",
+                "subjectId": "urn:example:mapping:prisma-contains-user-email"
+              }
+            ],
+            "impact": {
+              "changedSubjects": [],
+              "affectedSubjects": [],
+              "paths": []
+            },
+            "quarantinedSubjects": []
+          },
+          "numbers": []
+        },
+        "host": {
+          "keys": [
+            "status",
+            "issues",
+            "impact",
+            "quarantinedSubjects"
+          ],
+          "issueKeys": [
+            [
+              "severity",
+              "code",
+              "message",
+              "path",
+              "subjectId",
+              "causalPath"
+            ]
+          ],
+          "events": [],
+          "issueIdentity": [],
+          "issueMutations": {
+            "value": [],
+            "numbers": []
+          },
+          "distinctContexts": 0
+        }
+      },
+      "observed": {
+        "status": "threw",
+        "error": {
+          "name": "TypeError",
+          "message": "api.Registry is not a constructor",
+          "constructor": "TypeError",
+          "keys": [],
+          "ownNames": [
+            "stack",
+            "message"
+          ]
+        },
+        "host": {
+          "events": [],
+          "sameThrownObject": false
+        }
+      }
+    },
+    {
+      "name": "compile-invalid-policy",
+      "expected": {
+        "status": "threw",
+        "error": {
+          "name": "Error",
+          "message": "callback failure",
+          "constructor": "Error",
+          "keys": [],
+          "ownNames": [
+            "stack",
+            "message"
+          ]
+        },
+        "host": {
+          "events": [
+            {
+              "lookup": "test:callback-0",
+              "receiver": true
+            },
+            {
+              "callback": 0,
+              "receiverUndefined": true,
+              "sameConstraint": true,
+              "sameDocument": true,
+              "graphDocument": true,
+              "sameGraph": true,
+              "sameSet": true,
+              "freshContext": true,
+              "sameEvidence": true,
+              "contextKeys": [
+                "document",
+                "graph",
+                "activeMappings",
+                "evidence"
+              ],
+              "active": [],
+              "entityIdentity": true
+            }
+          ],
+          "sameThrownObject": true
+        }
+      },
+      "observed": {
+        "status": "threw",
+        "error": {
+          "name": "TypeError",
+          "message": "api.Registry is not a constructor",
+          "constructor": "TypeError",
+          "keys": [],
+          "ownNames": [
+            "stack",
+            "message"
+          ]
+        },
+        "host": {
+          "events": [],
+          "sameThrownObject": false
+        }
+      }
+    }
+  ],
+  "supervision": {
+    "mode": "inherited-live-supervisor",
+    "project": "/Users/admin/dev/patamaps/patamaps",
+    "configurationDigest": "sha256:77505e4ca3960c2df14617ffa5951838a6b84e51d6f8ed715ec60faa3c9e8187",
+    "policy": {
+      "version": 1,
+      "minimumFreeBytes": 0,
+      "reserveFreeBytes": 1000000000,
+      "maximumRunGrowthBytes": 8000000000,
+      "maximumRetainedBytes": 50000000000,
+      "monitorIntervalMs": 2000,
+      "terminationGraceMs": 15000
+    },
+    "availableBytesAtEntry": 4592644096
+  },
+  "corpus": {
+    "path": "fixtures/parity/constraint-callback-controls.json",
+    "digest": "sha256:b2b0b824ecadc544de6bb5d6748f874707879112ce47435c8d537e5f46c232f7"
+  },
+  "candidate": {
+    "binaryDigest": "sha256:1343847d37d7b77717ba88c4c3023f9d005e7b1bdc10268360ef1f0836fc667e",
+    "engine": {
+      "compiler": "sha256:9f8fb3d3d68d84c3925663adb743ebdeef6005dba0d3feb1f034e1765f3c9c28",
+      "documentType": "executor-description",
+      "governance": "sha256:4e6fd44bf454688065870e7b9bdd5fbf2d6aca6a88cf73b566480ad46877d815",
+      "schemaVersion": "0.1.0",
+      "scientific": "sha256:8405a861bff46ef575e0b13f7821655808ab59f490aae60c9f893de4b3df0667",
+      "workspace": "sha256:a59b393e820071d58bdf7dae209eb90b41a52ac5ff9f827e017cebc02aa9fbfe"
+    },
+    "sdkSourceInventory": [
+      {
+        "path": "sdk/typescript/canonical.d.ts",
+        "digest": "sha256:88ae79727dbad3b0872a9c3539a95fe6c444b810ff416423f06a2cf39274ecb4"
+      },
+      {
+        "path": "sdk/typescript/canonical.mjs",
+        "digest": "sha256:882143dffe56417ea4a46049b5cf1545a9d74c1481cb10b91180a8df76e6ad40"
+      },
+      {
+        "path": "sdk/typescript/cli.mjs",
+        "digest": "sha256:2a0225cb3f468bcf9edefd4da36d88e5393dd84a4f20b8754c4020fdb4e366fe"
+      },
+      {
+        "path": "sdk/typescript/index.d.ts",
+        "digest": "sha256:aa76e1583c3a1b872ec1fa9fbbaddd8c1211a118c9f670c0d9ec1b0ba3a4bbae"
+      },
+      {
+        "path": "sdk/typescript/index.mjs",
+        "digest": "sha256:f5f5abcf9d4b199a4674795bd5e96252f65c1449d679a73dd069c17c89db6015"
+      },
+      {
+        "path": "sdk/typescript/legacy-cli.d.ts",
+        "digest": "sha256:2c765e29edc81b277ae0dfd531e04c072386c8f39195e8a371976d7ba3aac37e"
+      },
+      {
+        "path": "sdk/typescript/legacy-cli.mjs",
+        "digest": "sha256:e8b3964178e54002715de3ff90ef8688a2d1f449f75e2d3f03e19ea767d41032"
+      },
+      {
+        "path": "sdk/typescript/legacy-composition.d.ts",
+        "digest": "sha256:5d776057c00df9548b9b09590bedc48b1f0e1a6a2991d4f6ab55fdacbf6e5677"
+      },
+      {
+        "path": "sdk/typescript/legacy-composition.mjs",
+        "digest": "sha256:7c176a5062c72562d05df937977d9906587ba4e8d914551db3458d7543d461f6"
+      },
+      {
+        "path": "sdk/typescript/legacy-config.d.ts",
+        "digest": "sha256:58675d458afcf7b5db9a52c163629436d248c6172c4167254c42f73c4d4e8f15"
+      },
+      {
+        "path": "sdk/typescript/legacy-config.mjs",
+        "digest": "sha256:df331e601bf7c2bca9273263a7bed464cee471afbf4e4cc39e047db8c300d15c"
+      },
+      {
+        "path": "sdk/typescript/legacy-correspondence.d.ts",
+        "digest": "sha256:5513b17c388b56b295e854beaa7026a1c35f4ee013bd500c334a9c5f99c94c62"
+      },
+      {
+        "path": "sdk/typescript/legacy-correspondence.mjs",
+        "digest": "sha256:2a0254640dfe4d140d3766d43776523dd562808e8be5540a8032e346b12af339"
+      },
+      {
+        "path": "sdk/typescript/legacy-evaluation.d.ts",
+        "digest": "sha256:be18b5ac43fae751f0a9975e955584d15c46364a91395bfe8ed4cefc87dd7626"
+      },
+      {
+        "path": "sdk/typescript/legacy-evaluation.mjs",
+        "digest": "sha256:b45b2772fd1e6c7207fc45f8747f412b6421a2cfc4ba7cd62a6c30e9d67717f7"
+      },
+      {
+        "path": "sdk/typescript/legacy-graph.d.ts",
+        "digest": "sha256:3e6b7faaf0bb6838613b74194915422d1093565a275f936b5411023b3a361c6e"
+      },
+      {
+        "path": "sdk/typescript/legacy-graph.mjs",
+        "digest": "sha256:edab7d38b8fd1dcdcc51443b3104946a9181d3c9dbb8f4e152352d64bab3746e"
+      },
+      {
+        "path": "sdk/typescript/legacy-references.d.ts",
+        "digest": "sha256:feb5ed0a5dcfe3185d17c95c17afb195d2ac4a18189377feb93e737e3a22e735"
+      },
+      {
+        "path": "sdk/typescript/legacy-references.mjs",
+        "digest": "sha256:907f7d3946db7b8ec2b11d458b3dea42982c8635541a8cf28ff5ad8cc58b7ba9"
+      },
+      {
+        "path": "sdk/typescript/legacy-registry.mjs",
+        "digest": "sha256:3362107f8aac339694c3fb350a720d2ee65cd03f87e5c63d0f3103f93d2dce10"
+      },
+      {
+        "path": "sdk/typescript/legacy-reporting.d.ts",
+        "digest": "sha256:8ca2bee95e0d3b454c3a864855e7866c9e8904c15dc2193f4e061634fd7ac158"
+      },
+      {
+        "path": "sdk/typescript/legacy-reporting.mjs",
+        "digest": "sha256:32dcfbb7eb6460b3e01b9a32e495999678c8794ef5abdddfe271ff5b3d023d2d"
+      },
+      {
+        "path": "sdk/typescript/legacy-validation.d.ts",
+        "digest": "sha256:4660b31a60c7fff60096bdbdecc3bc94d12904023cc5302ba38866b02d2c8816"
+      },
+      {
+        "path": "sdk/typescript/legacy-validation.mjs",
+        "digest": "sha256:b77e46e6e2e0dbb1d3fbd006ea6740d055ec1603dc3ff41d55e716aa659d593d"
+      },
+      {
+        "path": "sdk/typescript/legacy-viability.d.ts",
+        "digest": "sha256:92a64597bd51825bfd9587b4c1f167b1b2a4afc7835a6ee2e1f325ce11ae8bf6"
+      },
+      {
+        "path": "sdk/typescript/legacy-viability.mjs",
+        "digest": "sha256:cd4c8a82ca4c1e6b955780bc098d77884bcd5220386447060824b23af156bc01"
+      },
+      {
+        "path": "sdk/typescript/legacy-workspace.d.ts",
+        "digest": "sha256:0042b2129ef98e3e7858142194c225a698cba5581267ef14346bbe1b47d74f7a"
+      },
+      {
+        "path": "sdk/typescript/legacy-workspace.mjs",
+        "digest": "sha256:d3893cdc92010588440cc96cb0c6741314cd3bd34050dbb51e420872b1a2a45d"
+      },
+      {
+        "path": "sdk/typescript/native-input-worker.mjs",
+        "digest": "sha256:18cba500258deb0242c7ffa9a54c4d619e144f2ab36366616fa0264df4293866"
+      },
+      {
+        "path": "sdk/typescript/native-input.mjs",
+        "digest": "sha256:635b35cfba465af573bce1fbd060627fc033fb05a49d359562f681c1886b95fa"
+      },
+      {
+        "path": "sdk/typescript/package.json",
+        "digest": "sha256:763e5ade134a35dc8e9340f8f58b8649ca619cffa506eceeedba3051efa2665b"
+      },
+      {
+        "path": "sdk/typescript/sssom-profile.mjs",
+        "digest": "sha256:a37260f42d6b02c5900dbefa9477386667f5286079a7a1abd12495e3dc78e533"
+      },
+      {
+        "path": "sdk/typescript/sssom.d.ts",
+        "digest": "sha256:7f58f17edc48bcb8340b73004273fa4c23a9f4b3671ca1276225f16de8254457"
+      },
+      {
+        "path": "sdk/typescript/sssom.mjs",
+        "digest": "sha256:85d25e603ab1adda6db81afec6a20214707c9859978dfe51561cb852cd17f8e5"
+      }
+    ]
+  },
+  "driverDigest": "sha256:33bdd1926bb13a4c1d7e7381e290640c60c158acc156a39a5dc292b5cc7fc046"
+}

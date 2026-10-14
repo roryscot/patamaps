@@ -15,7 +15,7 @@ use std::sync::OnceLock;
 
 pub(crate) struct ObservationIssue {
     pub value: J,
-    pub keys: Vec<&'static str>,
+    pub keys: Vec<String>,
 }
 impl ObservationIssue {
     pub fn new(code: &str, message: &str, subject: Option<&str>, path: Option<&str>) -> Self {
@@ -32,7 +32,9 @@ impl ObservationIssue {
         }
         Self {
             value: obj(pairs),
-            keys: vec!["severity", "code", "message", "subjectId", "path"],
+            keys: ["severity", "code", "message", "subjectId", "path"]
+                .map(str::to_owned)
+                .to_vec(),
         }
     }
     pub fn constraint(code: &str, message: &str, subject: &str) -> Self {
@@ -49,8 +51,8 @@ impl ObservationIssue {
         } else {
             pairs.push((key.into(), value));
         }
-        if !self.keys.contains(&key) {
-            self.keys.push(key);
+        if !self.keys.iter().any(|name| name == key) {
+            self.keys.push(key.to_owned());
         }
     }
 }
@@ -117,7 +119,9 @@ fn shape(
                     scalar(if e.path.is_empty() { "$" } else { &e.path }),
                 ),
             ]),
-            keys: vec!["severity", "code", "message", "path"],
+            keys: ["severity", "code", "message", "path"]
+                .map(str::to_owned)
+                .to_vec(),
         })
         .collect())
 }
@@ -450,6 +454,25 @@ fn core_registry() -> Value {
         serde_json::from_str(include_str!("legacy_core.json")).expect("pinned core pack");
     json!({"packs":[{"key":pack["id"],"version":pack["version"]}],"definitions":pack["relations"].as_array().expect("core relations").iter().map(|r|json!({"key":r["id"],"value":r})).collect::<Vec<_>>()})
 }
+fn rejected(issues: Vec<ObservationIssue>, impact: J) -> J {
+    let value = obj(vec![
+        ("status", scalar("rejected")),
+        (
+            "issues",
+            J::Array(issues.iter().map(|i| i.value.clone()).collect()),
+        ),
+        ("impact", impact.clone()),
+        (
+            "quarantinedSubjects",
+            impact
+                .get("affectedSubjects")
+                .expect("impact subjects")
+                .clone(),
+        ),
+    ]);
+    response(value, issues)
+}
+
 fn compile(
     input: &J,
     locale_name: &str,
@@ -491,24 +514,6 @@ fn compile(
             locale_name,
         )
     };
-    let rejected = |issues: Vec<ObservationIssue>, impact: J| {
-        let value = obj(vec![
-            ("status", scalar("rejected")),
-            (
-                "issues",
-                J::Array(issues.iter().map(|i| i.value.clone()).collect()),
-            ),
-            ("impact", impact.clone()),
-            (
-                "quarantinedSubjects",
-                impact
-                    .get("affectedSubjects")
-                    .expect("impact subjects")
-                    .clone(),
-            ),
-        ]);
-        response(value, issues)
-    };
     if input
         .get("executablePackCount")
         .is_some_and(|v| matches!(v,J::Number(n) if *n>0.0))
@@ -544,7 +549,9 @@ fn compile(
             }
             ObservationIssue {
                 value: obj(pairs),
-                keys: vec!["severity", "code", "message", "path", "subjectId"],
+                keys: ["severity", "code", "message", "path", "subjectId"]
+                    .map(str::to_owned)
+                    .to_vec(),
             }
         })
         .collect::<Vec<_>>();
@@ -871,6 +878,34 @@ fn compile(
             }
         }
     }
+    if input
+        .get("callbackPhase")
+        .is_some_and(|v| matches!(v, J::Bool(true)))
+    {
+        let active_order = mappings
+            .iter()
+            .filter(|mapping| active.contains(s(mapping, "id")))
+            .map(|mapping| s(mapping, "id").to_owned())
+            .collect::<Vec<_>>();
+        let frame = obj(vec![
+            (
+                "issues",
+                J::Array(issues.iter().map(|issue| issue.value.clone()).collect()),
+            ),
+            (
+                "issueKeys",
+                native(issues.iter().map(|issue| &issue.keys).collect::<Vec<_>>()),
+            ),
+            ("activeMappings", native(active_order)),
+            ("inactiveMappings", J::Array(inactive)),
+            ("graphDigest", scalar(&graph_digest)),
+            ("evaluatedAt", scalar(evaluated_at)),
+        ]);
+        return Ok(obj(vec![(
+            "value",
+            obj(vec![("status", scalar("constraints")), ("frame", frame)]),
+        )]));
+    }
     for constraint in items(policy, "constraints") {
         let kind = s(constraint, "kind");
         if !crate::legacy_references::relation(&Data::string_units(kind)) {
@@ -897,6 +932,73 @@ fn compile(
             )?);
         }
     }
+    let handles = vec![None; issues.len()];
+    complete_compilation(
+        input,
+        locale_name,
+        CompilationState {
+            issues,
+            active,
+            inactive,
+            evaluated_at: evaluated_at.to_owned(),
+            handles,
+        },
+    )
+}
+
+struct CompilationState {
+    issues: Vec<ObservationIssue>,
+    active: HashSet<String>,
+    inactive: Vec<J>,
+    evaluated_at: String,
+    handles: Vec<Option<usize>>,
+}
+fn complete_compilation(
+    input: &J,
+    locale_name: &str,
+    state: CompilationState,
+) -> Result<J, LegacyWorkspaceError> {
+    let CompilationState {
+        mut issues,
+        active,
+        inactive,
+        evaluated_at,
+        handles,
+    } = state;
+    let mut issue_writes = Vec::new();
+    let evaluated_at = evaluated_at.as_str();
+    let document = get(input, "document")?;
+    let policy = get(input, "policy")?;
+    let empty = obj(vec![]);
+    let options = input.get("options").unwrap_or(&empty);
+    let context = options
+        .get("context")
+        .filter(|v| !matches!(v, J::Null))
+        .unwrap_or(&empty);
+    let changed = strings(options, "changedSubjects");
+    let doc = project(document)?;
+    let pol = project(policy)?;
+    let registry = input
+        .get("registry")
+        .map(project)
+        .transpose()?
+        .unwrap_or_else(core_registry);
+    let mapping_ids = items(document, "mappings")
+        .iter()
+        .map(|m| s(m, "id"))
+        .collect::<HashSet<_>>();
+    let run_impact = |changed: Vec<String>,
+                      active: Option<&HashSet<String>>|
+     -> Result<J, LegacyWorkspaceError> {
+        let mut options = json!({"changedSubjects":changed,"policy":pol});
+        if let Some(active) = active {
+            options["activeMappings"] = json!(active);
+        }
+        impact(
+            &json!({"document":doc,"options":options,"registry":registry}),
+            locale_name,
+        )
+    };
     let mut applied = HashSet::new();
     const WAIVABLE: [&str; 10] = [
         "CONTRADICTING_EVIDENCE",
@@ -932,7 +1034,8 @@ fn compile(
             continue;
         }
         let mut matched = false;
-        for issue in &mut issues {
+        for index in 0..issues.len() {
+            let issue = &mut issues[index];
             let code = s(&issue.value, "code");
             let subject = s(&issue.value, "subjectId");
             if s(&issue.value, "severity") == "error"
@@ -949,6 +1052,20 @@ fn compile(
                 issue.set("waivedBy", J::String(id.into()));
                 applied.insert(id.to_owned());
                 matched = true;
+                if let Some(handle) = handles.get(index).copied().flatten() {
+                    issue_writes.push(native(
+                        json!({"handle":handle,"key":"severity","value":"warning"}),
+                    ));
+                    issue_writes.push(native(json!({"handle":handle,"key":"waivedBy","value":id})));
+                    let value = issues[index].value.clone();
+                    let keys = issues[index].keys.clone();
+                    for (other, other_handle) in handles.iter().enumerate() {
+                        if *other_handle == Some(handle) {
+                            issues[other].value = value.clone();
+                            issues[other].keys = keys.clone();
+                        }
+                    }
+                }
             }
         }
         if !matched {
@@ -980,14 +1097,36 @@ fn compile(
         Some(&active),
     )?;
     attach_paths(&mut issues, &impact);
+    for (index, issue) in issues.iter().enumerate() {
+        if let Some(handle) = handles.get(index).copied().flatten() {
+            let subject = s(&issue.value, "subjectId");
+            if !subject.is_empty() {
+                let mut write = json!({"handle":handle,"key":"causalPath"});
+                if let Some(path_index) = items(&impact, "paths")
+                    .iter()
+                    .position(|path| s(path, "subjectId") == subject)
+                {
+                    write["pathIndex"] = json!(path_index);
+                }
+                issue_writes.push(native(write));
+            }
+        }
+    }
     if issues.iter().any(|i| s(&i.value, "severity") == "error") {
-        return Ok(rejected(issues, impact));
+        let mut result = rejected(issues, impact);
+        let J::Object(pairs) = &mut result else {
+            unreachable!()
+        };
+        pairs.push(("issueHandles".into(), native(handles)));
+        pairs.push(("issueWrites".into(), J::Array(issue_writes)));
+        return Ok(result);
     }
     let sorted = |values: HashSet<String>| {
         let mut values = values.into_iter().collect::<Vec<_>>();
         values.sort_by_key(|s| Data::string_units(s));
         J::Array(values.into_iter().map(J::String).collect())
     };
+    let graph_digest = digest(document, locale_name)?;
     let mut graph_pairs = vec![("id", get(document, "id")?.clone())];
     if let Some(revision) = document.get("revision") {
         graph_pairs.push(("revision", revision.clone()));
@@ -1052,11 +1191,14 @@ fn compile(
         ),
         ("impact", impact),
     ]);
+    let issue_handles = native(handles);
     let mut result = response(value, issues);
     let J::Object(pairs) = &mut result else {
         unreachable!()
     };
     pairs.push(("graphKeys".into(), native(vec!["id", "revision", "digest"])));
+    pairs.push(("issueHandles".into(), issue_handles));
+    pairs.push(("issueWrites".into(), J::Array(issue_writes)));
     Ok(result)
 }
 fn attach_paths(issues: &mut [ObservationIssue], impact: &J) {
@@ -1070,10 +1212,185 @@ fn attach_paths(issues: &mut [ObservationIssue], impact: &J) {
                 .cloned();
             if let Some(path) = path {
                 issue.set("causalPath", path);
-            } else if !issue.keys.contains(&"causalPath") {
-                issue.keys.push("causalPath");
+            } else if !issue.keys.iter().any(|key| key == "causalPath") {
+                issue.keys.push("causalPath".to_owned());
             }
         }
+    }
+}
+
+fn continuation(
+    input: &J,
+    locale_name: &str,
+    holes: &HashSet<usize>,
+) -> Result<J, LegacyWorkspaceError> {
+    for (owner, field) in [
+        (get(input, "document")?, "mappings"),
+        (get(input, "document")?, "authorities"),
+        (get(input, "policy")?, "constraints"),
+        (get(input, "policy")?, "evidence"),
+    ] {
+        if items(owner, field)
+            .iter()
+            .any(|value| holes.contains(&(std::ptr::from_ref(value) as usize)))
+        {
+            return Err(error(
+                "TypeError",
+                "Iterator value undefined is not an entry object",
+            ));
+        }
+    }
+    let frame = get(input, "frame")?;
+    let values = items(frame, "issues");
+    let keys = items(frame, "issueKeys");
+    if values.len() != keys.len() {
+        return Err(error("TypeError", "Invalid compilation issue frame"));
+    }
+    let mut issues = values
+        .iter()
+        .zip(keys)
+        .map(|(value, keys)| ObservationIssue {
+            value: value.clone(),
+            keys: keys
+                .array()
+                .unwrap_or(&[])
+                .iter()
+                .filter_map(J::string)
+                .map(str::to_owned)
+                .collect(),
+        })
+        .collect::<Vec<_>>();
+    let mut handles = vec![None; issues.len()];
+    for issue in items(input, "callbackIssues") {
+        issues.push(ObservationIssue {
+            value: get(issue, "value")?.clone(),
+            keys: strings(issue, "keys"),
+        });
+        handles.push(match issue.get("handle") {
+            Some(J::Number(value))
+                if value.is_finite() && *value >= 0.0 && value.fract() == 0.0 =>
+            {
+                Some(*value as usize)
+            }
+            _ => None,
+        });
+    }
+    let active = strings(input, "activeMappings").into_iter().collect();
+    complete_compilation(
+        input,
+        locale_name,
+        CompilationState {
+            issues,
+            active,
+            inactive: items(frame, "inactiveMappings").to_vec(),
+            evaluated_at: text(frame, "evaluatedAt")?.to_owned(),
+            handles,
+        },
+    )
+}
+
+fn constraint_operation(operation: &str, input: &J) -> Result<J, LegacyWorkspaceError> {
+    match operation {
+        "constraint-kinds" => {
+            let names = [
+                "requiresEvidence",
+                "requiresMapping",
+                "forbidsMapping",
+                "uniqueTarget",
+                "requiresAuthority",
+                "topologyRelationTotality",
+                "topologyReachable",
+                "topologyContextSatisfied",
+            ];
+            Ok(obj(vec![(
+                "value",
+                native(
+                    crate::legacy_constraints::KINDS
+                        .iter()
+                        .zip(names)
+                        .map(|(kind, name)| json!({"kind":kind,"name":name}))
+                        .collect::<Vec<_>>(),
+                ),
+            )]))
+        }
+        "constraint-register" | "constraint-get" => {
+            let keys = items(input, "keys");
+            let key = get(input, "key")?;
+            let ordinal = keys.iter().position(
+                |value| matches!((value,key),(J::Number(left),J::Number(right)) if left == right),
+            );
+            Ok(obj(vec![(
+                "value",
+                if operation == "constraint-register" {
+                    native(ordinal.is_some())
+                } else {
+                    ordinal.map_or(J::Null, native)
+                },
+            )]))
+        }
+        "constraint-select" => {
+            let c = get(input, "constraint")?;
+            if !crate::legacy_references::relation(&Data::string_units(s(c, "kind"))) {
+                let issue = ObservationIssue::new(
+                    "INVALID_CONSTRAINT_KIND",
+                    &format!("{} must use namespace:name form", get(c, "kind")?.js_text()),
+                    Some(s(c, "id")),
+                    None,
+                );
+                Ok(response(
+                    obj(vec![
+                        ("status", scalar("missing")),
+                        ("issues", J::Array(vec![issue.value.clone()])),
+                    ]),
+                    vec![issue],
+                ))
+            } else {
+                Ok(obj(vec![(
+                    "value",
+                    obj(vec![
+                        ("status", scalar("lookup")),
+                        ("kind", get(c, "kind")?.clone()),
+                    ]),
+                )]))
+            }
+        }
+        "constraint-missing" => {
+            let c = get(input, "constraint")?;
+            let issue = ObservationIssue::new(
+                "UNKNOWN_CONSTRAINT_KIND",
+                &format!("No evaluator is registered for {}", s(c, "kind")),
+                Some(s(c, "id")),
+                None,
+            );
+            Ok(response(
+                obj(vec![("issues", J::Array(vec![issue.value.clone()]))]),
+                vec![issue],
+            ))
+        }
+        "constraint-evaluate" => {
+            let context = get(input, "context")?;
+            let registry = context
+                .get("registry")
+                .map(project)
+                .transpose()?
+                .unwrap_or_else(core_registry);
+            let graph = context.get("graph").map(project).transpose()?;
+            let active = strings(context, "activeMappings").into_iter().collect();
+            let issues = crate::legacy_constraints::evaluate_as(
+                text(input, "kind")?,
+                get(input, "constraint")?,
+                get(context, "document")?,
+                &active,
+                items(context, "evidence"),
+                &registry,
+                graph.as_ref(),
+            )?;
+            Ok(response(
+                J::Array(issues.iter().map(|issue| issue.value.clone()).collect()),
+                issues,
+            ))
+        }
+        _ => Err(error("TypeError", "Unknown constraint registry operation")),
     }
 }
 
@@ -1141,7 +1458,16 @@ pub fn legacy_viability_request(
             }
             response(v.clone(), issues)
         }
-        "compile" => compile(input, &request.locale, &observation.holes, &context_holes)?,
+        "compile" | "compile-start" => {
+            compile(input, &request.locale, &observation.holes, &context_holes)?
+        }
+        "compile-finish" => continuation(input, &request.locale, &observation.holes)?,
+        "constraint-kinds"
+        | "constraint-register"
+        | "constraint-get"
+        | "constraint-select"
+        | "constraint-missing"
+        | "constraint-evaluate" => constraint_operation(&request.operation, input)?,
         _ => return Err(error("TypeError", "Unknown legacy viability operation")),
     };
     RawValue::from_string(raw(&result)?).map_err(|e| error("Error", &e.to_string()))

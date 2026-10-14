@@ -14,6 +14,7 @@ import {
   createLegacyGraphClass,
   LegacyGraphValidationError,
   marshalLegacyGraphRequest,
+  bindLegacyConstraintGraphSnapshot,
 } from "./legacy-graph.mjs";
 import {
   createLegacyComposer,
@@ -24,7 +25,10 @@ import { createLegacyCorrespondenceApi } from "./legacy-correspondence.mjs";
 import { createLegacyCliApi } from "./legacy-cli.mjs";
 import { createLegacyWorkspaceApi } from "./legacy-workspace.mjs";
 import { createLegacyEvaluationApi } from "./legacy-evaluation.mjs";
-import { createLegacyViabilityApi } from "./legacy-viability.mjs";
+import {
+  createLegacyViabilityApi,
+  initializeLegacyConstraintRegistry,
+} from "./legacy-viability.mjs";
 export {
   LEGACY_METAMAP_VIABILITY_POLICY_VERSION,
   LEGACY_METAMAP_GENERATION_VERSION,
@@ -275,7 +279,7 @@ export function createLegacyValidationApi(executable, observeExecution) {
     ...createLegacyCorrespondenceApi(invoke),
     ...createLegacyReferenceApi(invoke),
     ...createLegacyEvaluationApi(invoke, Registry),
-    ...createLegacyViabilityApi(invoke, Registry),
+    ...createLegacyViabilityApi(invoke, Registry, Graph),
     ...createLegacyConfigApi(invoke, loadFile),
     ...workspace,
     get legacyCoreRelationPack() {
@@ -461,11 +465,28 @@ export class LegacyRelationRegistry {
 }
 export const legacyCoreRelationPack = () => api().legacyCoreRelationPack;
 
+export class LegacyConstraintRegistry {
+  constructor() {
+    initializeLegacyConstraintRegistry(this, api().LegacyConstraintRegistry);
+  }
+  register(kind, evaluator) {
+    return api().LegacyConstraintRegistry.prototype.register.call(
+      this,
+      kind,
+      evaluator,
+    );
+  }
+  get(kind) {
+    return api().LegacyConstraintRegistry.prototype.get.call(this, kind);
+  }
+}
+
 export class LegacyGraph {
   #graph;
   constructor(document, options = {}) {
     const registry = options.registry ?? new LegacyRelationRegistry();
     this.#graph = new (api().LegacyGraph)(document, { ...options, registry });
+    bindLegacyConstraintGraphSnapshot(this, this.#graph);
     this.document = this.#graph.document;
     this.registry = this.#graph.registry;
     this.validationIssues = this.#graph.validationIssues;

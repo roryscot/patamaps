@@ -1,6 +1,13 @@
 import { legacyRegistryGraphSnapshot } from "./legacy-registry.mjs";
 import { marshalJson } from "./canonical.mjs";
 
+const constraintGraphs = new WeakMap();
+/** @internal Fixed graph indexes with live caller objects for constraint calls. */
+export const legacyConstraintGraphSnapshot = (graph) =>
+  constraintGraphs.get(graph)?.();
+export const bindLegacyConstraintGraphSnapshot = (wrapper, graph) =>
+  constraintGraphs.set(wrapper, () => legacyConstraintGraphSnapshot(graph));
+
 // A declared optional undefined property is absent to the original schema.
 // Preserve the caller's object/property; omit only known optional fields in the
 // JSON snapshot. Undefined metadata, unknown fields and mandatory fields still
@@ -135,6 +142,14 @@ export function createLegacyGraphClass(invoke, Registry) {
       this.#entities = [...document.entities];
       this.#mappings = [...document.mappings];
       this.#authorities = [...document.authorities];
+      constraintGraphs.set(this, () => ({
+        index: this.#index,
+        objects: {
+          entities: this.#entities,
+          mappings: this.#mappings,
+          authorities: this.#authorities,
+        },
+      }));
     }
     static from(value, options = {}) {
       const registry = options.registry ?? new Registry();

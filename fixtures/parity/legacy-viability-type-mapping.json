@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0.0",
   "referenceEngine": "399747a4ad05a37cd8db1cedd53048fad2175be4",
-  "scope": "Bidirectional original v1 wire types, policy/generation validation/parsing declarations and two version constants. Full compileMetamap overloads, custom constraint registry and memory/governed activation remain outside this comparison; no partial runtime-options substitution is presented as full equivalence.",
+  "scope": "Bidirectional original v1 wire, validation/parsing and version declarations, plus constraint context/evaluator/public registry methods with an explicit separately compared LegacyGraph substitution. Original private nominal class compatibility, complete compileMetamap overloads, arbitrary JavaScript and memory/governed activation remain outside this comparison.",
   "rows": [
     {
       "id": "parity:a488977540a28fd340a7",
@@ -144,6 +144,30 @@
       "candidateName": "LEGACY_METAMAP_GENERATION_VERSION",
       "candidateModule": "sdk/typescript/legacy-viability.d.ts",
       "valueComparison": true
+    },
+    {
+      "id": "parity:2a72d981d8328d88fb0f",
+      "referenceName": "ConstraintEvaluationContext",
+      "referenceModule": "src/constraints.ts",
+      "referenceSourceDigest": "sha256:b0ae786c97cba3e2bf6be21b928199ce78d89f43748c755c5e524c491e709953",
+      "candidateName": "LegacyConstraintEvaluationContext",
+      "candidateModule": "sdk/typescript/legacy-viability.d.ts"
+    },
+    {
+      "id": "parity:6e0e0714425f852cc26e",
+      "referenceName": "ConstraintEvaluator",
+      "referenceModule": "src/constraints.ts",
+      "referenceSourceDigest": "sha256:b0ae786c97cba3e2bf6be21b928199ce78d89f43748c755c5e524c491e709953",
+      "candidateName": "LegacyConstraintEvaluator",
+      "candidateModule": "sdk/typescript/legacy-viability.d.ts"
+    },
+    {
+      "id": "parity:b4986e9c42bcd83baa30",
+      "referenceName": "ConstraintRegistry",
+      "referenceModule": "src/constraints.ts",
+      "referenceSourceDigest": "sha256:b0ae786c97cba3e2bf6be21b928199ce78d89f43748c755c5e524c491e709953",
+      "candidateName": "LegacyConstraintRegistry",
+      "candidateModule": "sdk/typescript/legacy-viability.d.ts"
     }
   ]
 }

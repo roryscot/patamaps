@@ -1,10 +1,12 @@
-import type { LegacyGraphDocument } from "./legacy-graph.js";
+import type { LegacyGraph, LegacyGraphDocument } from "./legacy-graph.js";
 import type { LegacyRelationRegistry } from "./legacy-validation.js";
 import type {
   LegacyEvaluationContext,
   LegacyInactiveMappingReason,
   LegacyImpactReport,
   LegacyMetamapViabilityPolicy,
+  LegacyEvidenceRecord,
+  LegacyViabilityConstraint,
 } from "./legacy-evaluation.js";
 
 export const LEGACY_METAMAP_VIABILITY_POLICY_VERSION: "1.0.0";
@@ -47,9 +49,25 @@ export interface LegacyCompileOptions {
   evaluatedAt?: string;
   changedSubjects?: readonly string[];
 }
-/** The original custom constraint callback transport remains unfinished. */
+export interface LegacyConstraintEvaluationContext {
+  document: LegacyGraphDocument;
+  graph: LegacyGraph;
+  activeMappings: ReadonlySet<string>;
+  evidence: readonly LegacyEvidenceRecord[];
+}
+export type LegacyConstraintEvaluator = (
+  constraint: LegacyViabilityConstraint,
+  context: LegacyConstraintEvaluationContext,
+) => LegacyViabilityIssue[];
+export class LegacyConstraintRegistry {
+  private readonly evaluators: Map<string, LegacyConstraintEvaluator>;
+  constructor();
+  register(kind: string, evaluator: LegacyConstraintEvaluator): void;
+  get(kind: string): LegacyConstraintEvaluator | undefined;
+}
 export interface LegacyCompilationRuntimeOptions extends LegacyCompileOptions {
   relationRegistry?: LegacyRelationRegistry;
+  constraintRegistry?: LegacyConstraintRegistry;
 }
 export type LegacyCompilationResult =
   | {

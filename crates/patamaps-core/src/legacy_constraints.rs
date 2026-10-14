@@ -126,6 +126,17 @@ pub(crate) fn evaluate(
     registry: &Value,
 ) -> Result<Vec<Issue>, LegacyWorkspaceError> {
     let kind = s(c, "kind");
+    evaluate_as(kind, c, document, active, evidence, registry, None)
+}
+pub(crate) fn evaluate_as(
+    kind: &str,
+    c: &J,
+    document: &J,
+    active: &HashSet<String>,
+    evidence: &[J],
+    registry: &Value,
+    graph: Option<&Value>,
+) -> Result<Vec<Issue>, LegacyWorkspaceError> {
     let id = s(c, "id");
     let allowed: &[&str] = match kind {
         "core:requires-evidence" => &["minimumConfidence", "kinds"],
@@ -320,7 +331,10 @@ pub(crate) fn evaluate(
             ));
         };
         let doc = project(document)?;
-        let built = graph_query(json!({"operation":"build","document":doc,"registry":registry}))?;
+        let built = match graph {
+            Some(graph) => graph.clone(),
+            None => graph_query(json!({"operation":"build","document":doc,"registry":registry}))?,
+        };
         if built["index"].is_null() {
             return Err(error(
                 "MetamapValidationError",
@@ -328,8 +342,9 @@ pub(crate) fn evaluate(
             ));
         }
         for subject in &subjects {
+            let objects = built.get("objects").cloned().unwrap_or_else(|| json!({"entities":doc["entities"],"mappings":doc["mappings"],"authorities":doc["authorities"]}));
             let resolution = graph_query(
-                json!({"operation":"resolve-authority","registry":registry,"index":built["index"],"objects":{"entities":doc["entities"],"mappings":doc["mappings"],"authorities":doc["authorities"]},"id":subject,"fact":fact}),
+                json!({"operation":"resolve-authority","registry":registry,"index":built["index"],"objects":objects,"id":subject,"fact":fact}),
             )?;
             let status = resolution["status"].as_str().unwrap_or("");
             if status != "resolved" {

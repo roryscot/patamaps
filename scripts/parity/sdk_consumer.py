@@ -329,6 +329,22 @@ if(parseLegacyViabilityPolicy(v1Input.policy)!==v1Input.policy||parseLegacyViabl
 if(v1Result.generation.context!==v1Input.options.context||!Object.isFrozen(v1Result.generation.context)||!Object.isFrozen(v1Result.generation.activeMappings))throw new Error('Installed v1 caller context identity/freeze mismatch');
 if(LEGACY_METAMAP_VIABILITY_POLICY_VERSION!=='1.0.0'||LEGACY_METAMAP_GENERATION_VERSION!=='1.0.0')throw new Error('Installed original v1 version constant mismatch');
 '''.replace('__PATAMAPS_EXECUTABLE__',json.dumps(str(installed))).replace('__VIABILITY_INPUT__',json.dumps(viability_baseline['action']['input'])).replace('__VIABILITY_EXPECTED__',json.dumps(json.dumps(viability_baseline['expected']['value'],separators=(',',':'))))
+program += '''
+import {LegacyConstraintRegistry,type LegacyConstraintEvaluator,type LegacyConstraintEvaluationContext} from "patamaps-native-sdk-draft";
+const callbacks=new LegacyConstraintRegistry();
+const customEvaluator:LegacyConstraintEvaluator=(constraint,context:LegacyConstraintEvaluationContext)=>{
+ if(context.document!==customDocument||context.graph.document!==customDocument||!context.activeMappings.has(customDocument.mappings[0].id))throw new Error('Installed typed callback context mismatch');
+ return [];
+};
+callbacks.register('test:installed-callback',customEvaluator);
+if(callbacks.get('test:installed-callback')!==customEvaluator||callbacks.get('test:absent')!==undefined)throw new Error('Installed configured registry identity mismatch');
+const customDocument:LegacyGraphDocument=JSON.parse(JSON.stringify(v1Input.document)), customPolicy:LegacyMetamapViabilityPolicy=JSON.parse(JSON.stringify(v1Input.policy));
+customPolicy.constraints=[{id:'urn:test:installed:constraint',kind:'test:installed-callback',subjects:[customDocument.mappings[0].id]}];
+if(compileLegacyMetamap(customDocument,customPolicy,{...v1Input.options,constraintRegistry:callbacks}).status!=='viable')throw new Error('Installed typed custom compilation mismatch');
+const factoryCallbacks=new legacy.LegacyConstraintRegistry();
+factoryCallbacks.register('test:installed-callback',customEvaluator);
+if(legacy.compileLegacyMetamap(customDocument,customPolicy,{...v1Input.options,constraintRegistry:factoryCallbacks}).status!=='viable')throw new Error('Installed factory custom compilation mismatch');
+'''
 (stage / 'consumer.mts').write_text(program)
 (stage / 'negative.mts').write_text('''import {createSssomApi,createCanonicalApi,createLegacyValidationApi} from "patamaps-native-sdk-draft";
 createSssomApi('/absolute/path').parseSssomTsv({});
@@ -401,6 +417,13 @@ const badMappingCoverage:import('patamaps-native-sdk-draft').LegacyMappingCovera
 createLegacyValidationApi('/absolute/path').compileLegacyMetamap({},{});
 createLegacyValidationApi('/absolute/path').compileLegacyMetamap({} as import('patamaps-native-sdk-draft').LegacyGraphDocument,{} as import('patamaps-native-sdk-draft').LegacyMetamapViabilityPolicy,{evaluatedAt:7});
 const badIssueMessage:import('patamaps-native-sdk-draft').LegacyViabilityIssue={severity:'warning',code:'X',message:7};
+new (createLegacyValidationApi('/absolute/path').LegacyConstraintRegistry)().get(7);
+new (createLegacyValidationApi('/absolute/path').LegacyConstraintRegistry)().register(7,()=>[]);
+new (createLegacyValidationApi('/absolute/path').LegacyConstraintRegistry)().register('test:bad',()=>false);
+new (createLegacyValidationApi('/absolute/path').LegacyConstraintRegistry)().register('test:bad',(constraint,context)=>{context.activeMappings.add('id');return [];});
+new (createLegacyValidationApi('/absolute/path').LegacyConstraintRegistry)().register('test:bad',(constraint,context)=>{context.evidence.push({});return [];});
+const badConstraintContext:import('patamaps-native-sdk-draft').LegacyConstraintEvaluationContext={document:{} as any,graph:{},activeMappings:new Set(),evidence:[]};
+createLegacyValidationApi('/absolute/path').compileLegacyMetamap({} as import('patamaps-native-sdk-draft').LegacyGraphDocument,{} as import('patamaps-native-sdk-draft').LegacyMetamapViabilityPolicy,{constraintRegistry:{}});
 ''')
 environment = {**os.environ, 'PATH': ''}
 commands = []
@@ -439,6 +462,16 @@ numeric_helpers = numeric_source[numeric_source.index('function encode(value)'):
 numeric_probe = stage / 'viability-numeric.mjs'
 numeric_probe.write_text('import assert from "node:assert/strict";\nimport {readFileSync} from "node:fs";\nimport {createLegacyValidationApi} from "patamaps-native-sdk-draft";\n' + numeric_helpers + '\nconst corpus=JSON.parse(readFileSync(new URL("./viability-numeric-controls.json",import.meta.url)));\nconst owner=createLegacyValidationApi(' + json.dumps(str(installed)) + ');\nconst api={compile:owner.compileLegacyMetamap,"validate-policy":owner.validateLegacyViabilityPolicy,"parse-policy":owner.parseLegacyViabilityPolicy,"validate-generation":owner.validateLegacyViableGeneration,"parse-generation":owner.parseLegacyViableGeneration};\nfor(const entry of corpus.cases)assert.deepEqual(observe(entry.action,api),entry.expected,entry.name);\nconsole.log(JSON.stringify({status:"matched",cases:corpus.cases.length}));\n')
 numeric_execution = run('installed-numeric-viability', [NODE, numeric_probe])
+callback_driver = ROOT / 'scripts/parity/constraint_callbacks.mjs'
+callback_source = callback_driver.read_text()
+callback_helpers = callback_source[callback_source.index('function encode(value)'):callback_source.index('\nlet receipt;')]
+callback_corpora = [(ROOT / 'fixtures/parity/constraint-callback-controls.json','sha256:b2b0b824ecadc544de6bb5d6748f874707879112ce47435c8d537e5f46c232f7'),(ROOT / 'fixtures/parity/constraint-callback-host-controls.json','sha256:e2c88a14c7970b7fce272479b5a8b6c0e8a9c99708053849e6b06da4cfa20197')]
+for fixture,digest in callback_corpora:
+    assert sha(fixture)==digest
+    copy_file(fixture,stage/fixture.name)
+callback_probe=stage/'constraint-callbacks.mjs'
+callback_probe.write_text('import assert from "node:assert/strict";\nimport {readFileSync} from "node:fs";\nimport * as sdk from "patamaps-native-sdk-draft";\nconst kinds='+json.dumps(['core:requires-evidence','core:requires-mapping','core:forbids-mapping','core:unique-target','core:requires-authority','topology:relation-totality','topology:reachable','topology:context-satisfied'])+';\n'+callback_helpers+'\nconst binary='+json.dumps(str(installed))+';\nsdk.configureLegacyValidation(binary);\nconst owner=sdk.createLegacyValidationApi(binary);\nconst apis=[{Registry:owner.LegacyConstraintRegistry,Graph:owner.LegacyGraph,compile:owner.compileLegacyMetamap},{Registry:sdk.LegacyConstraintRegistry,Graph:sdk.LegacyGraph,compile:sdk.compileLegacyMetamap}];\nlet cases=0,comparisons=0;\nfor(const name of '+json.dumps([p.name for p,_ in callback_corpora])+'){const corpus=JSON.parse(readFileSync(new URL("./"+name,import.meta.url)));cases+=corpus.cases.length;for(const api of apis)for(const entry of corpus.cases){assert.deepEqual(observe(entry.action,api,corpus.document,corpus.baseline),entry.expected,entry.name);comparisons++;}}\nconsole.log(JSON.stringify({status:"matched",cases,comparisons}));\n')
+callback_execution=run('installed-constraint-callbacks',[NODE,callback_probe])
 asset_execution = run('published-assets', [NODE, asset_probe])
 asset_observations = json.loads(asset_execution.stdout)['observations'] if asset_execution.returncode == 0 else []
 
@@ -456,6 +489,15 @@ for index, module in enumerate(modules):
     contract_lines.append(f'import type * as Reference{index} from "./reference-contracts/{Path(module).relative_to('src').with_suffix('.js').as_posix()}";')
 for item in type_rows:
     index = modules.index(item['referenceModule'])
+    if item['referenceName'] == 'ConstraintEvaluationContext':
+        contract_lines.append(f'type ConstraintContextPublicMatches = Assert<Equivalent<Omit<Reference{index}.ConstraintEvaluationContext,"graph"> & {{graph:Candidate.LegacyGraph}},Candidate.LegacyConstraintEvaluationContext>>;')
+        continue
+    if item['referenceName'] == 'ConstraintEvaluator':
+        contract_lines.append(f'type ConstraintEvaluatorPublicMatches = Assert<Equivalent<(constraint:Parameters<Reference{index}.ConstraintEvaluator>[0],context:Candidate.LegacyConstraintEvaluationContext)=>ReturnType<Reference{index}.ConstraintEvaluator>,Candidate.LegacyConstraintEvaluator>>;')
+        continue
+    if item['referenceName'] == 'ConstraintRegistry':
+        contract_lines.append(f'type ConstraintRegistryPublicMatches = Assert<Equivalent<{{register(kind:Parameters<Reference{index}.ConstraintRegistry["register"]>[0],evaluator:Candidate.LegacyConstraintEvaluator):ReturnType<Reference{index}.ConstraintRegistry["register"]>;get(kind:Parameters<Reference{index}.ConstraintRegistry["get"]>[0]):Candidate.LegacyConstraintEvaluator|undefined;}},Pick<Candidate.LegacyConstraintRegistry,"register"|"get">>>;')
+        continue
     if item['referenceName'] == 'ImpactOptions':
         contract_lines.append(f'type ImpactOptionsPublicMatches = Assert<Equivalent<Omit<Reference{index}.ImpactOptions,"registry"> & {{registry?:Candidate.LegacyRelationRegistry}},Candidate.LegacyImpactOptions>>;')
         continue
@@ -510,12 +552,14 @@ passed = passed and asset_execution.returncode == 0 and len(asset_observations) 
 passed = passed and all(f'negative.mts({line},' in negative.stdout for line in range(2,44))
 passed = passed and reference_declarations.returncode == 0 and type_contracts is not None and type_contracts.returncode == 0
 passed = passed and numeric_execution.returncode == 0
+passed = passed and callback_execution.returncode == 0
 passed = passed and all(engine[key] == value for key,value in identities(ROOT).items()) and sha(installed) == sha(binary)
 verify_reference()
 receipt = {'uncheckedDigestCorpus':{'path':digest_fixture.relative_to(ROOT).as_posix(),'digest':sha(digest_fixture)},'schemaVersion':'1.0.0','status':'passed' if passed else 'failed','commands':commands,
            'manifestDigest':sha(manifest_path),'reference':{'engine':supplement['referenceEngine']},
            'driver':'installed-sdk-data-subchecks','driverDigest':sha(Path(__file__)),'assetProbe':{'path':str(asset_probe),'digest':sha(asset_probe)},
            'numericViability':{'corpus':numeric_fixture.relative_to(ROOT).as_posix(),'corpusDigest':sha(numeric_fixture),'cases':400,'exitCode':numeric_execution.returncode,'probe':{'path':str(numeric_probe),'digest':sha(numeric_probe)},'helperSource':{'path':numeric_driver.relative_to(ROOT).as_posix(),'digest':sha(numeric_driver)}},
+           'constraintCallbacks':{'corpora':[{'path':p.relative_to(ROOT).as_posix(),'digest':sha(p)} for p,_ in callback_corpora],'cases':82,'comparisons':164,'exitCode':callback_execution.returncode,'probe':{'path':str(callback_probe),'digest':sha(callback_probe)},'helperSource':{'path':callback_driver.relative_to(ROOT).as_posix(),'digest':sha(callback_driver)}},
            'publishedAssets':{'scope':'Original public JSON source/import subchecks only; exact original bytes and actual installed Node imports. Original valid/invalid schema and semantic acceptance remains unverified by this probe, so it cannot close the published-data obligations.','count':len(published_assets),'observations':asset_observations},
            'obligationSubchecks':[{'id':row['id'],'status':'passed' if passed else 'failed','scope':'published-data-source-and-import','origin':row['origin'],'expectationDigest':row['expectation']['digest']} for row in published_assets],
            'candidate':{'binaryDigest':sha(binary),'engine':engine,'sdkSourceInventory':inventory},

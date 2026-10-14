@@ -6,6 +6,104 @@ use patamaps_core::{LegacyWorkspaceRequest, legacy_viability_request};
 use serde::Deserialize;
 use serde_json::value::RawValue;
 
+fn callback_corpus() -> serde_json::Value {
+    let bytes = include_bytes!("../../../fixtures/parity/constraint-callback-controls.json");
+    assert_eq!(
+        byte_digest(bytes),
+        "sha256:b2b0b824ecadc544de6bb5d6748f874707879112ce47435c8d537e5f46c232f7"
+    );
+    serde_json::from_slice(bytes).unwrap()
+}
+
+fn callback_request(operation: &str, input: serde_json::Value) -> serde_json::Value {
+    let request = serde_json::from_value(
+        serde_json::json!({"operation":operation,"input":input.to_string(),"locale":"en-US"}),
+    )
+    .unwrap();
+    let result = legacy_viability_request(request).unwrap();
+    serde_json::from_str(result.get()).unwrap()
+}
+
+#[test]
+fn independently_frozen_original_builtin_constraint_evaluators() {
+    let corpus = callback_corpus();
+    let mut count = 0;
+    for case in corpus["cases"].as_array().unwrap() {
+        let action = &case["action"];
+        if action["operation"] != "builtin" {
+            continue;
+        }
+        let document = &corpus["document"];
+        let mut constraint = serde_json::json!({"id":"urn:test:callback:builtin","kind":action["kind"],"subjects":[document["entities"][0]["id"]]});
+        if let Some(parameters) = action.get("parameters") {
+            constraint["parameters"] = parameters.clone();
+        }
+        let active = document["mappings"]
+            .as_array()
+            .unwrap()
+            .iter()
+            .map(|mapping| mapping["id"].clone())
+            .collect::<Vec<_>>();
+        let observed = callback_request(
+            "constraint-evaluate",
+            serde_json::json!({"kind":action["kind"],"constraint":constraint,"context":{"document":document,"activeMappings":active,"evidence":corpus["baseline"]["evidence"]}}),
+        );
+        assert_eq!(
+            observed["value"], case["expected"]["value"]["value"],
+            "{}",
+            case["name"]
+        );
+        assert_eq!(
+            observed["issueKeys"], case["expected"]["host"]["issueKeys"],
+            "{}",
+            case["name"]
+        );
+        count += 1;
+    }
+    assert_eq!(count, 24);
+}
+
+#[test]
+fn original_callback_continuation_preserves_validation_and_hashes_live_inputs() {
+    let corpus = callback_corpus();
+    for mode in ["mutate-document-id", "mutate-mappings"] {
+        let mut document = corpus["document"].clone();
+        let mut policy = corpus["baseline"].clone();
+        policy["constraints"] = serde_json::json!([{"id":"urn:test:callback:0","kind":"test:callback-0","subjects":[document["mappings"][0]["id"]],"parameters":{"mode":mode}}]);
+        policy["evidence"] = serde_json::json!([]);
+        for mapping in policy["mappings"].as_array_mut().unwrap() {
+            mapping.as_object_mut().unwrap().remove("applicability");
+        }
+        let options = serde_json::json!({"context":{"environment":"production","maintenance":false},"evaluatedAt":"2026-09-02T00:00:00.000Z"});
+        let prepared = callback_request(
+            "compile-start",
+            serde_json::json!({"document":document,"policy":policy,"options":options,"callbackPhase":true,"executablePackCount":0}),
+        );
+        let frame = &prepared["value"]["frame"];
+        assert_eq!(prepared["value"]["status"], "constraints");
+        if mode == "mutate-document-id" {
+            document["id"] = serde_json::json!("urn:test:callback:mutated-document");
+        } else {
+            policy["mappings"] = serde_json::json!([]);
+        }
+        let observed = callback_request(
+            "compile-finish",
+            serde_json::json!({"document":document,"policy":policy,"options":options,"frame":frame,"activeMappings":frame["activeMappings"],"callbackIssues":[]}),
+        );
+        let name = format!("compile-{mode}");
+        let expected = corpus["cases"]
+            .as_array()
+            .unwrap()
+            .iter()
+            .find(|case| case["name"] == name)
+            .unwrap();
+        assert_eq!(
+            observed["value"], expected["expected"]["value"]["value"],
+            "{name}"
+        );
+    }
+}
+
 #[test]
 fn independently_frozen_original_v1_compiler_and_validation_observations() {
     verify_frozen_observations(

@@ -1,0 +1,817 @@
+{
+  "schemaVersion": "1.0.0",
+  "status": "matched",
+  "supervision": {
+    "mode": "inherited-live-supervisor",
+    "project": "/Users/admin/dev/patamaps/patamaps",
+    "configurationDigest": "sha256:77505e4ca3960c2df14617ffa5951838a6b84e51d6f8ed715ec60faa3c9e8187",
+    "policy": {
+      "version": 1,
+      "minimumFreeBytes": 0,
+      "reserveFreeBytes": 1000000000,
+      "maximumRunGrowthBytes": 8000000000,
+      "maximumRetainedBytes": 50000000000,
+      "monitorIntervalMs": 2000,
+      "terminationGraceMs": 15000
+    },
+    "availableBytesAtEntry": 5301653504
+  },
+  "referenceEngine": "399747a4ad05a37cd8db1cedd53048fad2175be4",
+  "corpus": {
+    "path": "fixtures/parity/registry-controls.json",
+    "digest": "sha256:66e74bb427d882db98ba7c1d61cc5ac0ce0499a9a881c5c3a59366dddd3489cf"
+  },
+  "scenarios": {
+    "path": "fixtures/parity/registry-scenarios.mjs",
+    "digest": "sha256:ab2b049398d4a5d75326067edd15a5945cb532c988d8218cd500a56a190b9bae"
+  },
+  "candidate": {
+    "binaryDigest": "sha256:b32f593266f25f0dba52e71cd185df2ecca3b1d012e23c3a8441ba44cfff4412",
+    "engine": {
+      "compiler": "sha256:fa6627a2cd0f6eb3abe2e4165fea1a2214c8c7f9f2f63a2c6c6c934dcc9554fd",
+      "documentType": "executor-description",
+      "governance": "sha256:817757c87ea93d7f1af163405b3e9aea8eb5b76727ba55986b3ed1be48e9efc2",
+      "schemaVersion": "0.1.0",
+      "scientific": "sha256:b2378481cf084fee2339a3e765ad846c4e86dc7a418f9c348285e9447e20ea8a",
+      "workspace": "sha256:173ca57d7b1bb464d12589b0ee4be62f460f4ee4175865c20a14d9fa4c1a8235"
+    },
+    "sdkSourceInventory": [
+      {
+        "path": "sdk/typescript/legacy-registry.mjs",
+        "digest": "sha256:3362107f8aac339694c3fb350a720d2ee65cd03f87e5c63d0f3103f93d2dce10"
+      },
+      {
+        "path": "sdk/typescript/legacy-validation.mjs",
+        "digest": "sha256:76d5a3a941a69514774b6df2a3340bbdd6e3ccdcfa714e2f742291fe2d78b03c"
+      },
+      {
+        "path": "sdk/typescript/legacy-validation.d.ts",
+        "digest": "sha256:948a71a643c2956f282ffab974ada0055f8f717e433bce62dc11b0c9deaa64e6"
+      },
+      {
+        "path": "sdk/typescript/canonical.mjs",
+        "digest": "sha256:882143dffe56417ea4a46049b5cf1545a9d74c1481cb10b91180a8df76e6ad40"
+      }
+    ]
+  },
+  "counts": {
+    "cases": 35,
+    "matched": 35,
+    "differences": 0,
+    "nativeExecutions": 158
+  },
+  "scope": "Component comparison only; no full export or arbitrary-JavaScript registry obligation is closed. Reference observations were frozen first; candidate registration/law/selection requests execute Rust. SDK identity and freeze observations are compared as booleans. Supplemental error.report and stack details remain outside this comparison.",
+  "originalGitBlobsVerifiedBeforeAndAfter": 610,
+  "results": [
+    {
+      "name": "empty queries",
+      "matched": true,
+      "observed": {
+        "status": "observed",
+        "value": [
+          [],
+          [],
+          [],
+          "undefined",
+          "undefined",
+          "undefined",
+          false
+        ]
+      },
+      "expected": {
+        "status": "observed",
+        "value": [
+          [],
+          [],
+          [],
+          "undefined",
+          "undefined",
+          "undefined",
+          false
+        ]
+      }
+    },
+    {
+      "name": "default original core identity",
+      "matched": true,
+      "observed": {
+        "status": "observed",
+        "value": [
+          true,
+          true,
+          1,
+          0
+        ]
+      },
+      "expected": {
+        "status": "observed",
+        "value": [
+          true,
+          true,
+          1,
+          0
+        ]
+      }
+    },
+    {
+      "name": "ordered packs and definitions",
+      "matched": true,
+      "observed": {
+        "status": "observed",
+        "value": [
+          [
+            "urn:pack:b",
+            "urn:pack:a"
+          ],
+          [
+            "test:b",
+            "test:a"
+          ],
+          true,
+          true
+        ]
+      },
+      "expected": {
+        "status": "observed",
+        "value": [
+          [
+            "urn:pack:b",
+            "urn:pack:a"
+          ],
+          [
+            "test:b",
+            "test:a"
+          ],
+          true,
+          true
+        ]
+      }
+    },
+    {
+      "name": "query arrays are fresh",
+      "matched": true,
+      "observed": {
+        "status": "observed",
+        "value": [
+          1,
+          1,
+          true,
+          true,
+          true
+        ]
+      },
+      "expected": {
+        "status": "observed",
+        "value": [
+          1,
+          1,
+          true,
+          true,
+          true
+        ]
+      }
+    },
+    {
+      "name": "same object registration idempotent",
+      "matched": true,
+      "observed": {
+        "status": "observed",
+        "value": [
+          1,
+          1,
+          true
+        ]
+      },
+      "expected": {
+        "status": "observed",
+        "value": [
+          1,
+          1,
+          true
+        ]
+      }
+    },
+    {
+      "name": "equal clone preserves first identity",
+      "matched": true,
+      "observed": {
+        "status": "observed",
+        "value": [
+          true,
+          true
+        ]
+      },
+      "expected": {
+        "status": "observed",
+        "value": [
+          true,
+          true
+        ]
+      }
+    },
+    {
+      "name": "member order conflict",
+      "matched": true,
+      "observed": {
+        "status": "observed",
+        "value": {
+          "name": "Error",
+          "message": "Relation pack urn:pack:p@1 conflicts with its registered definition"
+        }
+      },
+      "expected": {
+        "status": "observed",
+        "value": {
+          "name": "Error",
+          "message": "Relation pack urn:pack:p@1 conflicts with its registered definition"
+        }
+      }
+    },
+    {
+      "name": "version conflict before relation conflict",
+      "matched": true,
+      "observed": {
+        "status": "observed",
+        "value": {
+          "name": "Error",
+          "message": "Relation pack urn:pack:p is already registered at version 1"
+        }
+      },
+      "expected": {
+        "status": "observed",
+        "value": {
+          "name": "Error",
+          "message": "Relation pack urn:pack:p is already registered at version 1"
+        }
+      }
+    },
+    {
+      "name": "legacy shape is unchecked",
+      "matched": true,
+      "observed": {
+        "status": "observed",
+        "value": [
+          true,
+          true,
+          false
+        ]
+      },
+      "expected": {
+        "status": "observed",
+        "value": [
+          true,
+          true,
+          false
+        ]
+      }
+    },
+    {
+      "name": "duplicate incoming relation atomic",
+      "matched": true,
+      "observed": {
+        "status": "observed",
+        "value": [
+          {
+            "name": "Error",
+            "message": "Relation test:r is already registered"
+          },
+          [],
+          [],
+          true
+        ]
+      },
+      "expected": {
+        "status": "observed",
+        "value": [
+          {
+            "name": "Error",
+            "message": "Relation test:r is already registered"
+          },
+          [],
+          [],
+          true
+        ]
+      }
+    },
+    {
+      "name": "existing relation conflict atomic",
+      "matched": true,
+      "observed": {
+        "status": "observed",
+        "value": [
+          {
+            "name": "Error",
+            "message": "Relation test:r is already registered"
+          },
+          true,
+          [
+            "urn:pack:p"
+          ]
+        ]
+      },
+      "expected": {
+        "status": "observed",
+        "value": [
+          {
+            "name": "Error",
+            "message": "Relation test:r is already registered"
+          },
+          true,
+          [
+            "urn:pack:p"
+          ]
+        ]
+      }
+    },
+    {
+      "name": "pack ID mutation preserves registration key",
+      "matched": true,
+      "observed": {
+        "status": "observed",
+        "value": [
+          true,
+          true,
+          true,
+          false
+        ]
+      },
+      "expected": {
+        "status": "observed",
+        "value": [
+          true,
+          true,
+          true,
+          false
+        ]
+      }
+    },
+    {
+      "name": "version queries read live object",
+      "matched": true,
+      "observed": {
+        "status": "observed",
+        "value": [
+          true,
+          false,
+          true,
+          true,
+          false
+        ]
+      },
+      "expected": {
+        "status": "observed",
+        "value": [
+          true,
+          false,
+          true,
+          true,
+          false
+        ]
+      }
+    },
+    {
+      "name": "relation ID mutation preserves registration key",
+      "matched": true,
+      "observed": {
+        "status": "observed",
+        "value": [
+          true,
+          true,
+          [
+            "test:changed"
+          ]
+        ]
+      },
+      "expected": {
+        "status": "observed",
+        "value": [
+          true,
+          true,
+          [
+            "test:changed"
+          ]
+        ]
+      }
+    },
+    {
+      "name": "replacing relation array retains original objects",
+      "matched": true,
+      "observed": {
+        "status": "observed",
+        "value": [
+          true,
+          true,
+          true
+        ]
+      },
+      "expected": {
+        "status": "observed",
+        "value": [
+          true,
+          true,
+          true
+        ]
+      }
+    },
+    {
+      "name": "mutated schema tag changes executable filter",
+      "matched": true,
+      "observed": {
+        "status": "observed",
+        "value": [
+          true,
+          true
+        ]
+      },
+      "expected": {
+        "status": "observed",
+        "value": [
+          true,
+          true
+        ]
+      }
+    },
+    {
+      "name": "executable copied and recursively frozen",
+      "matched": true,
+      "observed": {
+        "status": "observed",
+        "value": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          false,
+          true
+        ]
+      },
+      "expected": {
+        "status": "observed",
+        "value": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          false,
+          true
+        ]
+      }
+    },
+    {
+      "name": "law wrapper fresh with stable pack and law",
+      "matched": true,
+      "observed": {
+        "status": "observed",
+        "value": [
+          true,
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      "expected": {
+        "status": "observed",
+        "value": [
+          true,
+          true,
+          true,
+          true,
+          true
+        ]
+      }
+    },
+    {
+      "name": "caller executable edits do not change registry",
+      "matched": true,
+      "observed": {
+        "status": "observed",
+        "value": [
+          "urn:law:r",
+          true,
+          "test:r"
+        ]
+      },
+      "expected": {
+        "status": "observed",
+        "value": [
+          "urn:law:r",
+          true,
+          "test:r"
+        ]
+      }
+    },
+    {
+      "name": "executable duplicate law atomic",
+      "matched": true,
+      "observed": {
+        "status": "observed",
+        "value": [
+          {
+            "name": "Error",
+            "message": "Duplicate law urn:law:r"
+          },
+          [],
+          [],
+          true
+        ]
+      },
+      "expected": {
+        "status": "observed",
+        "value": [
+          {
+            "name": "Error",
+            "message": "Duplicate law urn:law:r"
+          },
+          [],
+          [],
+          true
+        ]
+      }
+    },
+    {
+      "name": "cross pack duplicate law",
+      "matched": true,
+      "observed": {
+        "status": "observed",
+        "value": {
+          "name": "Error",
+          "message": "Duplicate law urn:law:r"
+        }
+      },
+      "expected": {
+        "status": "observed",
+        "value": {
+          "name": "Error",
+          "message": "Duplicate law urn:law:r"
+        }
+      }
+    },
+    {
+      "name": "legacy description drift invalidates law",
+      "matched": true,
+      "observed": {
+        "status": "observed",
+        "value": {
+          "name": "Error",
+          "message": "Missing exact imported pack urn:pack:p@1"
+        }
+      },
+      "expected": {
+        "status": "observed",
+        "value": {
+          "name": "Error",
+          "message": "Missing exact imported pack urn:pack:p@1"
+        }
+      }
+    },
+    {
+      "name": "legacy new relation visible to exact imports",
+      "matched": true,
+      "observed": {
+        "status": "observed",
+        "value": [
+          true,
+          [
+            "test:new"
+          ]
+        ]
+      },
+      "expected": {
+        "status": "observed",
+        "value": [
+          true,
+          [
+            "test:new"
+          ]
+        ]
+      }
+    },
+    {
+      "name": "empty imported kind restriction",
+      "matched": true,
+      "observed": {
+        "status": "observed",
+        "value": {
+          "name": "Error",
+          "message": "Law urn:law:r has incompatible reverse endpoint kinds"
+        }
+      },
+      "expected": {
+        "status": "observed",
+        "value": {
+          "name": "Error",
+          "message": "Law urn:law:r has incompatible reverse endpoint kinds"
+        }
+      }
+    },
+    {
+      "name": "reverse inverse contradiction",
+      "matched": true,
+      "observed": {
+        "status": "observed",
+        "value": {
+          "name": "Error",
+          "message": "Law urn:law:r contradicts inverse test:q"
+        }
+      },
+      "expected": {
+        "status": "observed",
+        "value": {
+          "name": "Error",
+          "message": "Law urn:law:r contradicts inverse test:q"
+        }
+      }
+    },
+    {
+      "name": "reverse non symmetry contradiction",
+      "matched": true,
+      "observed": {
+        "status": "observed",
+        "value": {
+          "name": "Error",
+          "message": "Law urn:law:r contradicts declared non-symmetry"
+        }
+      },
+      "expected": {
+        "status": "observed",
+        "value": {
+          "name": "Error",
+          "message": "Law urn:law:r contradicts declared non-symmetry"
+        }
+      }
+    },
+    {
+      "name": "unconditional reverse satisfies symmetric flag",
+      "matched": true,
+      "observed": {
+        "status": "observed",
+        "value": {}
+      },
+      "expected": {
+        "status": "observed",
+        "value": {}
+      }
+    },
+    {
+      "name": "conditional reverse cannot satisfy symmetric flag",
+      "matched": true,
+      "observed": {
+        "status": "observed",
+        "value": {
+          "name": "Error",
+          "message": "Symmetric relation test:r needs an executable reverse law"
+        }
+      },
+      "expected": {
+        "status": "observed",
+        "value": {
+          "name": "Error",
+          "message": "Symmetric relation test:r needs an executable reverse law"
+        }
+      }
+    },
+    {
+      "name": "missing composition law",
+      "matched": true,
+      "observed": {
+        "status": "observed",
+        "value": {
+          "name": "Error",
+          "message": "Relation test:r needs an executable chain with test:q"
+        }
+      },
+      "expected": {
+        "status": "observed",
+        "value": {
+          "name": "Error",
+          "message": "Relation test:r needs an executable chain with test:q"
+        }
+      }
+    },
+    {
+      "name": "missing disjoint relation",
+      "matched": true,
+      "observed": {
+        "status": "observed",
+        "value": {
+          "name": "Error",
+          "message": "Invalid disjoint relation test:missing for test:r"
+        }
+      },
+      "expected": {
+        "status": "observed",
+        "value": {
+          "name": "Error",
+          "message": "Invalid disjoint relation test:missing for test:r"
+        }
+      }
+    },
+    {
+      "name": "self disjoint relation",
+      "matched": true,
+      "observed": {
+        "status": "observed",
+        "value": {
+          "name": "Error",
+          "message": "Invalid disjoint relation test:r for test:r"
+        }
+      },
+      "expected": {
+        "status": "observed",
+        "value": {
+          "name": "Error",
+          "message": "Invalid disjoint relation test:r for test:r"
+        }
+      }
+    },
+    {
+      "name": "law outside pack before symmetric flag",
+      "matched": true,
+      "observed": {
+        "status": "observed",
+        "value": {
+          "name": "Error",
+          "message": "Law urn:law:r references a relation outside its pack or exact imports"
+        }
+      },
+      "expected": {
+        "status": "observed",
+        "value": {
+          "name": "Error",
+          "message": "Law urn:law:r references a relation outside its pack or exact imports"
+        }
+      }
+    },
+    {
+      "name": "legacy private use identifiers and values",
+      "matched": true,
+      "observed": {
+        "status": "observed",
+        "value": [
+          true,
+          true,
+          "urn:pack:"
+        ]
+      },
+      "expected": {
+        "status": "observed",
+        "value": [
+          true,
+          true,
+          "urn:pack:"
+        ]
+      }
+    },
+    {
+      "name": "legacy UTF16 description retains identity",
+      "matched": true,
+      "observed": {
+        "status": "observed",
+        "value": [
+          true,
+          "\ud800"
+        ]
+      },
+      "expected": {
+        "status": "observed",
+        "value": [
+          true,
+          "\ud800"
+        ]
+      }
+    },
+    {
+      "name": "unchecked executable digest before registration",
+      "matched": true,
+      "observed": {
+        "status": "observed",
+        "value": [
+          "sha256:b6173a6f8965decdc73d4e99fe1d273df46bb2962069055ee7fb8bd45a372271",
+          {
+            "name": "Error",
+            "message": "Relation pack does not match the portable schema: $ must NOT have additional properties"
+          }
+        ]
+      },
+      "expected": {
+        "status": "observed",
+        "value": [
+          "sha256:b6173a6f8965decdc73d4e99fe1d273df46bb2962069055ee7fb8bd45a372271",
+          {
+            "name": "Error",
+            "message": "Relation pack does not match the portable schema: $ must NOT have additional properties"
+          }
+        ]
+      }
+    }
+  ],
+  "traceDigest": "sha256:07396de7e3cd025f855db919c4a27d653b79c56916bfb3a9fa34fab85ea2454f",
+  "driverDigest": "sha256:f555250ca11073b4e37b5ee5eab3da7c1ae3da7db0ebf2b3512cd17da8291c32"
+}
