@@ -1,0 +1,233 @@
+{
+  "status": "partial-substantive-audit",
+  "candidate": "0fe527e97c6973c6fdb68e2f0f7d05f1de4ebea8",
+  "referenceEngine": "399747a4ad05a37cd8db1cedd53048fad2175be4",
+  "referenceCheckoutHead": "6a6a9d2415df85504a83fce4fd7291d0391c0d17",
+  "referencePinning": "Checkout HEAD includes an acceptance-record commit. Every reviewed test body is independently byte-equal to the named engine commit; no checkout reset or source modification was performed.",
+  "reviewedReferenceSources": [
+    {
+      "suite": "graph",
+      "sourceRevision": "399747a4ad05a37cd8db1cedd53048fad2175be4",
+      "sourcePath": "src/__tests__/graph.test.ts",
+      "digest": "sha256:1fab977e680d26f78b58ea77b8da355a6b7110db0657ae40907dbf8c176c887e",
+      "review": "Complete reference assertion bodies read and independently matched to pinned Git bytes. Listed native implementation/test portions inspected. This is not a one-to-one suite execution claim.",
+      "capabilities": [
+        "C02"
+      ],
+      "substantiveGuarantees": [
+        "relation-filtered traversal",
+        "fact-scoped canonical/delegated authority and unresolved unrelated facts"
+      ],
+      "nativeEvidenceLocations": [
+        "crates/patamaps-core/tests/kernel.rs",
+        "crates/patamaps-core/src/graph.rs"
+      ]
+    },
+    {
+      "suite": "composer",
+      "sourceRevision": "399747a4ad05a37cd8db1cedd53048fad2175be4",
+      "sourcePath": "src/__tests__/composer.test.ts",
+      "digest": "sha256:cdb2d592f75787e6ae2bbc17dc35bfc7bcc72122df49c69bdad8663e1dad6285",
+      "review": "Complete reference assertion bodies read and independently matched to pinned Git bytes. Listed native implementation/test portions inspected. This is not a one-to-one suite execution claim.",
+      "capabilities": [
+        "C02"
+      ],
+      "substantiveGuarantees": [
+        "cross-shard references checked after composition",
+        "equal records deduplicated; conflicts refused; ordered composedFrom retained"
+      ],
+      "nativeEvidenceLocations": [
+        "crates/patamaps-core/tests/kernel.rs",
+        "crates/patamaps-core/src/graph.rs"
+      ]
+    },
+    {
+      "suite": "diff",
+      "sourceRevision": "399747a4ad05a37cd8db1cedd53048fad2175be4",
+      "sourcePath": "src/__tests__/diff.test.ts",
+      "digest": "sha256:750784c81248a633b9caaf2c9cd357e6bf496fde26944e37ecd1b2b6909a1f6d",
+      "review": "Complete reference assertion bodies read and independently matched to pinned Git bytes. Listed native implementation/test portions inspected. This is not a one-to-one suite execution claim.",
+      "capabilities": [
+        "C09"
+      ],
+      "substantiveGuarantees": [
+        "stable-ID added/removed/modified records",
+        "legacy changedProperties retained; native exact record/document digests explicit"
+      ],
+      "nativeEvidenceLocations": [
+        "crates/patamaps-core/src/diff.rs",
+        "crates/patamaps-core/src/legacy_reporting.rs",
+        "crates/patamaps-core/tests/legacy_reporting.rs"
+      ]
+    },
+    {
+      "suite": "relation-pack",
+      "sourceRevision": "399747a4ad05a37cd8db1cedd53048fad2175be4",
+      "sourcePath": "src/__tests__/relation-pack.test.ts",
+      "digest": "sha256:22ff10b61cd06b0abf76dbf8c1d975d003a0da96ad10e49a454c776588d6c064",
+      "review": "Complete reference assertion bodies read and independently matched to pinned Git bytes. Listed native implementation/test portions inspected. This is not a one-to-one suite execution claim.",
+      "capabilities": [
+        "C01",
+        "C03"
+      ],
+      "substantiveGuarantees": [
+        "original portable registry identities and relation semantics retained"
+      ],
+      "nativeEvidenceLocations": [
+        "relation-packs/core.json",
+        "scripts/test_source_integrity.py"
+      ]
+    },
+    {
+      "suite": "validator",
+      "sourceRevision": "399747a4ad05a37cd8db1cedd53048fad2175be4",
+      "sourcePath": "src/__tests__/validator.test.ts",
+      "digest": "sha256:77c898efed2e9be9b7c3e796c102b5b60e16dc1e336004d3784d87ecc96b6f11",
+      "review": "Complete reference assertion bodies read and independently matched to pinned Git bytes. Listed native implementation/test portions inspected. This is not a one-to-one suite execution claim.",
+      "capabilities": [
+        "C02"
+      ],
+      "substantiveGuarantees": [
+        "dangling endpoints, authority overlap, forbidden cycles, widening and sibling conflicts refuse",
+        "invalid pack shape never creates checked state"
+      ],
+      "nativeEvidenceLocations": [
+        "crates/patamaps-core/tests/kernel.rs",
+        "crates/patamaps-contracts/tests/canonical.rs"
+      ]
+    },
+    {
+      "suite": "config",
+      "sourceRevision": "399747a4ad05a37cd8db1cedd53048fad2175be4",
+      "sourcePath": "src/__tests__/config.test.ts",
+      "digest": "sha256:538a4c9b294a02095d556b4a3b1a137ee1eda81447634720dd0524c5d86eb46e",
+      "review": "Complete reference assertion bodies read and independently matched to pinned Git bytes. Listed native implementation/test portions inspected. This is not a one-to-one suite execution claim.",
+      "capabilities": [
+        "C15",
+        "C16"
+      ],
+      "substantiveGuarantees": [
+        "closed runtime config and unique source identities",
+        "correspondence source references and reviewed Next.js exclusions need complete integration evidence"
+      ],
+      "nativeEvidenceLocations": [
+        "crates/patamaps-workspace/src/lib.rs",
+        "crates/patamaps-workspace/tests/workspace.rs",
+        "scripts/capabilities/integrations.py"
+      ]
+    },
+    {
+      "suite": "workspace",
+      "sourceRevision": "399747a4ad05a37cd8db1cedd53048fad2175be4",
+      "sourcePath": "src/__tests__/workspace.test.ts",
+      "digest": "sha256:f4fb14252bfed004e531a6c1cfa12a32c5c9230e0623ebd36aba292ef2b1b696",
+      "review": "Complete reference assertion bodies read and independently matched to pinned Git bytes. Listed native implementation/test portions inspected. This is not a one-to-one suite execution claim.",
+      "capabilities": [
+        "C15",
+        "C16"
+      ],
+      "substantiveGuarantees": [
+        "baseline generation, unchanged comparison and drift detection preserve accepted bytes",
+        "cache is only a parsing optimization"
+      ],
+      "nativeEvidenceLocations": [
+        "crates/patamaps-workspace/src/lib.rs",
+        "crates/patamaps-workspace/tests/workspace.rs",
+        "scripts/capabilities/workspace.py"
+      ]
+    },
+    {
+      "suite": "canonical",
+      "sourceRevision": "399747a4ad05a37cd8db1cedd53048fad2175be4",
+      "sourcePath": "src/__tests__/canonical.test.ts",
+      "digest": "sha256:11a8f1be494295854f32c70875e15325d94d9940f590b59f4a07b0284ee9d6d1",
+      "review": "Complete reference assertion bodies read and independently matched to pinned Git bytes. Listed native implementation/test portions inspected. This is not a one-to-one suite execution claim.",
+      "capabilities": [
+        "C01"
+      ],
+      "substantiveGuarantees": [
+        "UTF-16 property order, array/Unicode preservation, binary64 examples, negative zero and exact UTF-8 SHA-256",
+        "duplicate decoded keys, nonfinite values, invalid Unicode and excess recursion refuse",
+        "legacy trailing newline/digest convention remains distinct",
+        "prototype-like JSON keys remain ordinary data"
+      ],
+      "nativeEvidenceLocations": [
+        "crates/patamaps-contracts/tests/canonical.rs",
+        "crates/patamaps-contracts/src/json.rs",
+        "crates/patamaps-contracts/tests/legacy_digest.rs"
+      ]
+    },
+    {
+      "suite": "schema-contract",
+      "sourceRevision": "399747a4ad05a37cd8db1cedd53048fad2175be4",
+      "sourcePath": "src/__tests__/schema-contract.test.ts",
+      "digest": "sha256:cbc15c8fa519459d9fa95fc52c8f6583981ffbe3d3e03f7229f62544b87acce9",
+      "review": "Complete reference assertion bodies read and independently matched to pinned Git bytes. Listed native implementation/test portions inspected. This is not a one-to-one suite execution claim.",
+      "capabilities": [
+        "C01"
+      ],
+      "substantiveGuarantees": [
+        "original schema/pack bytes retained; legacy/native envelopes explicit",
+        "27 example/schema validation pairs require their preserved schema execution evidence"
+      ],
+      "nativeEvidenceLocations": [
+        "fixtures/reference/schemas",
+        "scripts/test_source_integrity.py",
+        "crates/patamaps-contracts/tests/canonical.rs"
+      ]
+    },
+    {
+      "suite": "legacy-adapter",
+      "sourceRevision": "399747a4ad05a37cd8db1cedd53048fad2175be4",
+      "sourcePath": "src/__tests__/legacy-adapter.test.ts",
+      "digest": "sha256:cc824416f1977765445fe93492774d06b646c99210c62f1cd33f1356343a80f6",
+      "review": "Complete reference assertion bodies read and independently matched to pinned Git bytes. Listed native implementation/test portions inspected. This is not a one-to-one suite execution claim.",
+      "capabilities": [
+        "C02",
+        "C16"
+      ],
+      "substantiveGuarantees": [
+        "import catalog without inventing canonical authority for multiple sources/ambiguous paths",
+        "preserve warnings and resolved/ambiguous fact scopes"
+      ],
+      "nativeEvidenceLocations": [
+        "crates/patamaps-core/src/legacy_cli.rs",
+        "scripts/parity/verify.py"
+      ]
+    },
+    {
+      "suite": "legacy-compatibility",
+      "sourceRevision": "399747a4ad05a37cd8db1cedd53048fad2175be4",
+      "sourcePath": "src/__tests__/legacy-compatibility.test.ts",
+      "digest": "sha256:9a60510035cab17b369b34e26dc5811908fa36fe478a3510c75de0b0b9838a22",
+      "review": "Complete reference assertion bodies read and independently matched to pinned Git bytes. Listed native implementation/test portions inspected. This is not a one-to-one suite execution claim.",
+      "capabilities": [
+        "C01",
+        "C07",
+        "C08"
+      ],
+      "substantiveGuarantees": [
+        "original byte pins and deterministic legacy identities remain preserved evidence",
+        "native successor addresses retain their declared executor/profile; required integrations use explicit compatibility/migration contracts"
+      ],
+      "nativeEvidenceLocations": [
+        "fixtures/conformance.json",
+        "crates/patamaps-contracts/tests/legacy_digest.rs",
+        "scripts/test_source_integrity.py"
+      ]
+    }
+  ],
+  "currentCompilerReceipt": {
+    "path": "docs/acceptance/capabilities/compiler-2026-10-14T22-00-55.280812Z/receipt.json",
+    "digest": "sha256:78bc91dd4e983d7cf467063c38d4c4cdab8ae38f0725fde33b1dc38e57b43211",
+    "status": "passed",
+    "scope": "Native compiler stages and preserved controls. This does not establish every original schema/integration workflow or complete source audit."
+  },
+  "classification": {
+    "nativeGuarantees": "Canonical interoperability, strict ingress, stable identities, fact scopes, conflict refusal and source drift remain substantive.",
+    "legacyCompatibility": "Required consumed bytes/digests/domains remain exact; successor records keep their own declared executor/profile.",
+    "ownerExclusions": "Literal getter/prototype/exception/alias behaviors are not default native requirements. Ingress still must be data-only and not execute accessors."
+  },
+  "remaining": "Review the other pinned suites and complete integration bodies, then bind each requirement to current candidate workflow acceptance. No capability is dispositioned or declared complete by this audit.",
+  "deleted": []
+}

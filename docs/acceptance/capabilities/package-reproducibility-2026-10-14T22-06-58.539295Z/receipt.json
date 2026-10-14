@@ -1,0 +1,123 @@
+{
+  "status": "passed",
+  "retainedWork": ".tools/capabilities/package-reproducibility-5rwjy94o",
+  "commands": [
+    {
+      "label": "first",
+      "argv": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "-B",
+        "/Users/admin/dev/patamaps/patamaps/scripts/package.py",
+        "--binary",
+        "/Users/admin/dev/patamaps/patamaps/target/debug/patamaps",
+        "--build-profile",
+        "development",
+        "--output",
+        "/Users/admin/dev/patamaps/patamaps/.tools/capabilities/package-reproducibility-5rwjy94o/first",
+        "--acceptance-output",
+        "/Users/admin/dev/patamaps/patamaps/docs/acceptance/capabilities/package-reproducibility-2026-10-14T22-06-58.539295Z"
+      ],
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "stdout": {
+        "path": "docs/acceptance/capabilities/package-reproducibility-2026-10-14T22-06-58.539295Z/first.stdout.log",
+        "digest": "sha256:ca55cb8b5be958e4d8b3eaf04b2d7668be5b378b4834295a0d925c6a308db5c2"
+      },
+      "stderr": {
+        "path": "docs/acceptance/capabilities/package-reproducibility-2026-10-14T22-06-58.539295Z/first.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "second",
+      "argv": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "-B",
+        "/Users/admin/dev/patamaps/patamaps/scripts/package.py",
+        "--binary",
+        "/Users/admin/dev/patamaps/patamaps/target/debug/patamaps",
+        "--build-profile",
+        "development",
+        "--output",
+        "/Users/admin/dev/patamaps/patamaps/.tools/capabilities/package-reproducibility-5rwjy94o/different-output-path",
+        "--acceptance-output",
+        "/Users/admin/dev/patamaps/patamaps/docs/acceptance/capabilities/package-reproducibility-2026-10-14T22-06-58.539295Z"
+      ],
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "stdout": {
+        "path": "docs/acceptance/capabilities/package-reproducibility-2026-10-14T22-06-58.539295Z/second.stdout.log",
+        "digest": "sha256:ca55cb8b5be958e4d8b3eaf04b2d7668be5b378b4834295a0d925c6a308db5c2"
+      },
+      "stderr": {
+        "path": "docs/acceptance/capabilities/package-reproducibility-2026-10-14T22-06-58.539295Z/second.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "refuse-overwrite",
+      "argv": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "-B",
+        "/Users/admin/dev/patamaps/patamaps/scripts/package.py",
+        "--binary",
+        "/Users/admin/dev/patamaps/patamaps/target/debug/patamaps",
+        "--build-profile",
+        "development",
+        "--output",
+        "/Users/admin/dev/patamaps/patamaps/.tools/capabilities/package-reproducibility-5rwjy94o/first",
+        "--acceptance-output",
+        "/Users/admin/dev/patamaps/patamaps/docs/acceptance/capabilities/package-reproducibility-2026-10-14T22-06-58.539295Z"
+      ],
+      "exitCode": 1,
+      "expectedExitCode": 1,
+      "stdout": {
+        "path": "docs/acceptance/capabilities/package-reproducibility-2026-10-14T22-06-58.539295Z/refuse-overwrite.stdout.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "docs/acceptance/capabilities/package-reproducibility-2026-10-14T22-06-58.539295Z/refuse-overwrite.stderr.log",
+        "digest": "sha256:de05136d218d2b6064616a7195767e25ddba4116d52a4448ff78309a9f13ae83"
+      }
+    }
+  ],
+  "binaryDigest": "sha256:11117634a2870dcb39c9c59be2d10c3c1dc335d7eb8eb1896975ff988eb5a038",
+  "engines": {
+    "schemaVersion": "0.1.0",
+    "documentType": "executor-description",
+    "compiler": "sha256:216e8e3e5e46c8bcdd1dd4691d1c331b2c88946b02831b5a4ebab56aa7927f6e",
+    "governance": "sha256:21efda20a9fd4af24eb2829de54e7335b3d218ca6c8db8effe5b6e550929002f",
+    "workspace": "sha256:d0102344a8edc35c8557b19be8cfaad61ecc01878514171f290892c540df73aa",
+    "scientific": "sha256:8e326388272c0d88de54d53ebb9a5714bcd8e04000ccd77e09273a1bdc1c7096"
+  },
+  "scope": "Full source/native archives from identical current source and one identified development binary, created at separate paths/times. This does not attest deterministic independent binary rebuilds, owner acceptance, registry publication or activation.",
+  "deleted": [],
+  "archives": [
+    {
+      "kind": "sourceArchive",
+      "paths": [
+        ".tools/capabilities/package-reproducibility-5rwjy94o/first/patamaps-draft-216e8e3e5e46-source.tar.gz",
+        ".tools/capabilities/package-reproducibility-5rwjy94o/different-output-path/patamaps-draft-216e8e3e5e46-source.tar.gz"
+      ],
+      "digest": "sha256:d9f173bc10b15fcb5e8005c090fd6471806a398e61487610ff7fe6b8054e085a",
+      "gzipMtime": 0,
+      "gzipFilenamePresent": false
+    },
+    {
+      "kind": "nativeArchive",
+      "paths": [
+        ".tools/capabilities/package-reproducibility-5rwjy94o/first/patamaps-draft-216e8e3e5e46-aarch64-apple-darwin.tar.gz",
+        ".tools/capabilities/package-reproducibility-5rwjy94o/different-output-path/patamaps-draft-216e8e3e5e46-aarch64-apple-darwin.tar.gz"
+      ],
+      "digest": "sha256:b9132c019aacc2da0f9ed8aa5cdd160d671cc55abb9f09f6650212bd2700d992",
+      "gzipMtime": 0,
+      "gzipFilenamePresent": false
+    }
+  ],
+  "sourceInventoryEntries": 12342,
+  "sourceInventoryDigest": "sha256:f6066d3ba6da75c50b83944f18bcd92f58034cef9e7ed56721c182d4e8a02b76",
+  "allSourceMembersAndCurrentBytesVerified": true,
+  "nativeBinaryBytesVerified": true,
+  "existingOutputsPreserved": true,
+  "completedAtUtc": "2026-10-14T22:07:54.597309+00:00"
+}
