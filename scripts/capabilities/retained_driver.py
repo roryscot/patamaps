@@ -25,6 +25,8 @@ def main():
         ROOT / "scripts/reference/semantic.py",
         ROOT / "scripts/test_lifecycle_pure.py",
         ROOT / "scripts/test_native.py",
+        ROOT / "scripts/test_scientific.py",
+        ROOT / "scripts/test_adapter_bridge.py",
     }
     if driver not in allowed:
         parser.error("Select an audited, unchanged capability driver")
@@ -34,12 +36,16 @@ def main():
     raw = driver.read_bytes()
     paths = []
 
+    original_mkdtemp = tempfile.mkdtemp
+
+    def retained_mkdtemp(suffix=None, prefix=None, dir=None):
+        name = original_mkdtemp(prefix=prefix or "fixture-", suffix=suffix or "", dir=retained)
+        paths.append(name)
+        return name
+
     class RetainedDirectory:
         def __init__(self, suffix=None, prefix=None, dir=None, **options):
-            self.name = tempfile.mkdtemp(
-                prefix=prefix or "fixture-", suffix=suffix or "", dir=retained
-            )
-            paths.append(self.name)
+            self.name = retained_mkdtemp(suffix=suffix, prefix=prefix)
 
         def __enter__(self):
             return self.name
@@ -53,6 +59,7 @@ def main():
 
     original = tempfile.TemporaryDirectory
     tempfile.TemporaryDirectory = RetainedDirectory
+    tempfile.mkdtemp = retained_mkdtemp
     sys.argv = [str(driver), *args.arguments]
     status = "failed"
     try:
@@ -60,6 +67,7 @@ def main():
         status = "passed"
     finally:
         tempfile.TemporaryDirectory = original
+        tempfile.mkdtemp = original_mkdtemp
         unchanged = driver.read_bytes() == raw
         (retained / "retention.json").write_text(
             json.dumps(

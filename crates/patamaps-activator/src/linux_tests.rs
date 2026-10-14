@@ -53,10 +53,16 @@ struct Fixture {
 impl Fixture {
     fn new() -> Self {
         root();
-        let dir = std::env::temp_dir().join(stage_name("linux-test"));
+        let parent = std::env::var_os("PATAMAPS_TEST_FIXTURE_ROOT")
+            .map(PathBuf::from)
+            .unwrap_or_else(std::env::temp_dir);
+        fs::create_dir_all(&parent).unwrap();
+        let dir = parent.join(stage_name("linux-test"));
         fs::create_dir(&dir).unwrap();
         chmod(&dir, 0o755);
         fs::create_dir(dir.join("state")).unwrap();
+        fs::create_dir(dir.join("retained")).unwrap();
+        chmod(&dir.join("retained"), 0o700);
         fs::create_dir(dir.join("proposals")).unwrap();
         chmod(&dir.join("proposals"), 0o777);
         let signing = SigningKey::from_bytes(&[29; 32]);
@@ -73,6 +79,17 @@ impl Fixture {
         chmod(&dir.join("trust.json"), 0o644);
         let host = ProtectedHost::new(dir.join("trust.json")).unwrap();
         Self { dir, host, trust }
+    }
+    fn retain(&self, relative: &str) -> PathBuf {
+        let source = self.dir.join(relative);
+        let destination = self.dir.join("retained").join(stage_name("preserved"));
+        fs::rename(&source, &destination).unwrap();
+        eprintln!(
+            "Retained test artifact: {} -> {}",
+            source.display(),
+            destination.display()
+        );
+        destination
     }
     fn request(
         &self,
@@ -222,7 +239,7 @@ impl Fixture {
 }
 impl Drop for Fixture {
     fn drop(&mut self) {
-        let _ = fs::remove_dir_all(&self.dir);
+        eprintln!("Retained Linux activation fixture: {}", self.dir.display());
     }
 }
 fn timestamp(t: time::OffsetDateTime) -> String {
@@ -470,7 +487,7 @@ fn distinct_proposer_uid_cannot_modify_trust_lock_pointer_runtime_or_artifacts()
         .status()
         .unwrap();
     assert!(status.success());
-    fs::remove_file(f.dir.join("state/current.json")).unwrap();
+    f.retain("state/current.json");
     fs::rename(
         f.dir.join("proposals/copied-pointer"),
         f.dir.join("state/current.json"),
@@ -489,14 +506,21 @@ fn symlinks_hardlinks_and_complete_inventory_swaps_refuse() {
     fs::rename(f.dir.join("trust.json"), f.dir.join("real-trust")).unwrap();
     symlink("real-trust", f.dir.join("trust.json")).unwrap();
     assert!(f.host.read().is_err());
-    fs::remove_file(f.dir.join("trust.json")).unwrap();
+    f.retain("trust.json");
     fs::rename(f.dir.join("real-trust"), f.dir.join("trust.json")).unwrap();
     fs::hard_link(f.dir.join("trust.json"), f.dir.join("linked-trust")).unwrap();
     assert_eq!(
         f.host.read().unwrap_err().code(),
         "ACTIVATION_UNPROTECTED_FILE"
     );
-    fs::remove_file(f.dir.join("linked-trust")).unwrap();
+    // Retain both hard links and their shared inode. Recreate the original trust
+    // bytes at the configured path with one link, instead of deleting a link.
+    let original_trust = fs::read(f.dir.join("trust.json")).unwrap();
+    f.retain("linked-trust");
+    f.retain("trust.json");
+    fs::write(f.dir.join("trust.json"), &original_trust).unwrap();
+    chmod(&f.dir.join("trust.json"), 0o644);
+    assert_eq!(fs::read(f.dir.join("trust.json")).unwrap(), original_trust);
     assert!(matches!(
         f.host.activate(&request),
         ActivationOutcome::Activated { .. }
@@ -641,7 +665,7 @@ fn precommit_revocation_expiry_lost_lock_and_postcommit_failure_are_distinct() {
                         }
                     }
                     "lock" => {
-                        fs::remove_file(f.dir.join("state/.promotion.lock")).unwrap();
+                        f.retain("state/.promotion.lock");
                         fs::write(f.dir.join("state/.promotion.lock"), b"").unwrap();
                         chmod(&f.dir.join("state/.promotion.lock"), 0o600);
                     }

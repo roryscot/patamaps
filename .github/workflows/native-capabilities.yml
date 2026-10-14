@@ -1,0 +1,58 @@
+name: Native capability acceptance
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  linux:
+    name: Linux ${{ matrix.architecture }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - runner: ubuntu-24.04
+            architecture: x86_64
+          - runner: ubuntu-24.04-arm
+            architecture: aarch64
+    runs-on: ${{ matrix.runner }}
+    timeout-minutes: 45
+    env:
+      CARGO_INCREMENTAL: '0'
+      CARGO_PROFILE_DEV_DEBUG: '0'
+      CARGO_PROFILE_TEST_DEBUG: '0'
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - name: Install pinned Rust toolchain
+        run: rustup toolchain install 1.99.0 --profile minimal --component rustfmt --component clippy
+      - name: Run native Linux acceptance as root
+        shell: bash
+        run: |
+          sudo env CARGO_HOME="${CARGO_HOME:-$HOME/.cargo}" RUSTUP_HOME="${RUSTUP_HOME:-$HOME/.rustup}" PATH="$PATH" \
+            CARGO_INCREMENTAL=0 CARGO_PROFILE_DEV_DEBUG=0 CARGO_PROFILE_TEST_DEBUG=0 \
+            python3 -B scripts/capabilities/linux.py \
+              --cargo "$HOME/.cargo/bin/cargo" \
+              --output "$GITHUB_WORKSPACE/ci-evidence" \
+              --architecture "${{ matrix.architecture }}" \
+              --fixtures "/tmp/patamaps-ci-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
+      - name: Retain Linux fixture material
+        if: always()
+        shell: bash
+        run: |
+          mkdir -p ci-evidence
+          fixture_path="/tmp/patamaps-ci-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
+          if sudo test -d "$fixture_path"; then
+            sudo tar -czf "$GITHUB_WORKSPACE/ci-evidence/fixtures.tar.gz" -C /tmp "$(basename "$fixture_path")"
+            sudo chmod 0644 "$GITHUB_WORKSPACE/ci-evidence/fixtures.tar.gz"
+          fi
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        if: always()
+        with:
+          name: native-linux-${{ matrix.architecture }}-${{ github.sha }}
+          path: ci-evidence/
+          if-no-files-found: error

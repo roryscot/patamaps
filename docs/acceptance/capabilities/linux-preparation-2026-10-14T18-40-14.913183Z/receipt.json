@@ -1,0 +1,63 @@
+{
+  "status": "prepared-not-executed",
+  "sourceRevision": "d4506fe33f0686c663e2be877cdb2af84825731f",
+  "sourceInventory": [
+    {
+      "path": "crates/patamaps-activator/src/linux_tests.rs",
+      "digest": "sha256:577613c64cdcc2c2b7a7ef47b95aff75a3c9874487a2b8b29064ea68f6d1eb45"
+    },
+    {
+      "path": ".github/workflows/native-capabilities.yml",
+      "digest": "sha256:e3b87506f97f4f0c53de8a580ad4cc81bfd2b2d68e47cace23442b5eb4e677b3"
+    },
+    {
+      "path": "docs/decisions/0013-linux-acceptance-retention.md",
+      "digest": "sha256:b6f3eef1948847b26f11f0e491923ad01d776d18b7ffb33ac272c9e029216500"
+    },
+    {
+      "path": "scripts/capabilities/compiler.py",
+      "digest": "sha256:1702b3a7198e8143ffe2df844fa59ed99c01dec4c625669937de988860db6875"
+    },
+    {
+      "path": "scripts/capabilities/install.py",
+      "digest": "sha256:ac2da3c1e0ef0d23f964b950b7ed94f29de076223567336a5b5fb2d7f3951e21"
+    },
+    {
+      "path": "scripts/capabilities/integrations.py",
+      "digest": "sha256:f75f8b11cd4d0f524a916a6ccf7e1544cb347168d60cb6ed5f1b49684d25d23b"
+    },
+    {
+      "path": "scripts/capabilities/linux.py",
+      "digest": "sha256:1f73fa78df7cf75374d918502d1e8897226778cb794b4449d99ab81f206d4050"
+    },
+    {
+      "path": "scripts/capabilities/retained_driver.py",
+      "digest": "sha256:846a66d294bcab5d1e3eb02b053edbc743764e23ba2799a524c3c61e6abcb3f6"
+    }
+  ],
+  "checks": {
+    "pythonSyntax": "passed for all five capability runners",
+    "workflowStructure": "passed for both architecture jobs, read-only permissions and Action commit pins",
+    "gitDiffWhitespace": "passed",
+    "originalLinuxTestFunctions": "unchanged",
+    "originalLinuxAssertionExpressions": 87,
+    "preservedOriginalAssertions": "all present byte-for-byte",
+    "additionalAssertionExpressions": [
+      "assert_eq!(fs::read(f.dir.join(\"trust.json\")).unwrap(), original_trust)"
+    ],
+    "preservedOriginalSourceDigest": "sha256:115e792efa3b46243fd04e545726f03888d85e239af30aa13c58c722b87a884a",
+    "fixtureDeletionCalls": "none in Linux test module"
+  },
+  "execution": {
+    "integrations": "queue ended with exit 75 after shared-lease retries; no integration started",
+    "rustfmt": "guard refused with exit 75 while another build held the lease",
+    "linux": "workflow not yet published or executed"
+  },
+  "authentication": {
+    "scopeRequest": "owner approved; gh auth refresh reached GitHub passkey confirmation for roryscot",
+    "completion": "pending human authentication and resulting scope verification"
+  },
+  "deleted": [],
+  "productionActivation": "not-requested",
+  "createdAtUtc": "2026-10-14T18:40:14.912876+00:00"
+}
