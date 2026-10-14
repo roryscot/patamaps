@@ -5,9 +5,18 @@ import { legacyConstraintGraphSnapshot } from "./legacy-graph.mjs";
 export const LEGACY_METAMAP_VIABILITY_POLICY_VERSION = "1.0.0";
 export const LEGACY_METAMAP_GENERATION_VERSION = "1.0.0";
 const constraintInitializers = new WeakMap();
+const activatorInitializers = new WeakMap();
+const activatorHosts = new WeakMap();
 /** @internal Seed configured and factory registries through their own register. */
 export const initializeLegacyConstraintRegistry = (registry, Registry) =>
   constraintInitializers.get(Registry)(registry);
+export const initializeLegacyMetamapActivator = (
+  actor,
+  Actor,
+  relations,
+  constraints,
+  host,
+) => activatorInitializers.get(Actor)(actor, relations, constraints, host);
 
 function deepFreeze(value) {
   if (typeof value !== "object" || value === null || Object.isFrozen(value))
@@ -29,10 +38,20 @@ export function createLegacyViabilityApi(invoke, Registry, Graph) {
     const value = response.value;
     if (value.issues)
       value.issues = value.issues.map((issue, index) =>
-        Object.fromEntries(
-          response.issueKeys[index].map((key) => [key, issue[key]]),
+        Object.assign(
+          Object.fromEntries(
+            response.issueKeys[index].map((key) => [key, issue[key]]),
+          ),
+          response.issuePathIndexes?.[index] == null
+            ? {}
+            : {
+                causalPath:
+                  value.impact.paths[response.issuePathIndexes[index]].path,
+              },
         ),
       );
+    if (value.quarantinedSubjects)
+      value.quarantinedSubjects = value.impact.affectedSubjects;
     if (value.generation)
       value.generation.graph = Object.fromEntries(
         response.graphKeys.map((key) => [key, value.generation.graph[key]]),
@@ -107,6 +126,95 @@ export function createLegacyViabilityApi(invoke, Registry, Graph) {
     for (const { kind, evaluator } of builtins)
       registry.register(kind, evaluator);
   });
+  const LegacyMetamapActivator = class MetamapActivator {
+    relationRegistry;
+    constraintRegistry;
+    generation;
+    constructor(
+      relations = new Registry(),
+      constraints = new LegacyConstraintRegistry(),
+      host,
+    ) {
+      initializeLegacyMetamapActivator(
+        this,
+        LegacyMetamapActivator,
+        relations,
+        constraints,
+        host,
+      );
+    }
+    get current() {
+      return this.generation;
+    }
+    get governedCurrent() {
+      if (!activatorHosts.has(this))
+        call("activation-receiver", {
+          member: "governedState",
+          nullReceiver: this === null,
+          undefinedReceiver: this === undefined,
+        });
+      return undefined;
+    }
+    activate(value, policy, options = {}) {
+      if (!activatorHosts.has(this))
+        call("activation-receiver", {
+          member: "governedHost",
+          nullReceiver: this === null,
+          undefinedReceiver: this === undefined,
+        });
+      const host = activatorHosts.get(this),
+        hasPolicy = policy !== undefined;
+      const selection = call("activation-select", {
+        hasPolicy,
+        hostPresent: Boolean(host),
+        ...(!hasPolicy
+          ? host
+            ? { hostMode: host.mode }
+            : {}
+          : host
+            ? {}
+            : { policyVersion: policy.schemaVersion }),
+      });
+      if (selection.action === "host-required") return selection.result;
+      if (selection.action === "governed")
+        return call("activation-governed", {});
+      const compilation =
+        selection.action === "protected"
+          ? call("activation-protected", {
+              document: value,
+              subjectId: policy.id,
+              changedSubjects: options.changedSubjects ?? [],
+              registry: legacyRegistryGraphSnapshot(
+                this.relationRegistry ?? new Registry(),
+                ["impactDirection"],
+              ),
+            })
+          : api.compileLegacyMetamap(value, policy, {
+              ...options,
+              relationRegistry: this.relationRegistry,
+              constraintRegistry: this.constraintRegistry,
+            });
+      const transition = call("activation-complete", {
+        compilationStatus: compilation.status,
+      });
+      if (transition.publishGeneration)
+        this.generation = compilation.generation;
+      return {
+        activated: transition.activated,
+        current: this.generation,
+        compilation,
+      };
+    }
+  };
+  activatorInitializers.set(
+    LegacyMetamapActivator,
+    (actor, relations, constraints, host) => {
+      actor.relationRegistry = relations;
+      actor.constraintRegistry = constraints;
+      actor.generation = undefined;
+      activatorHosts.set(actor, host);
+    },
+  );
   function request(document, policy, options, registry, context) {
     const { relationRegistry, constraintRegistry, ...portable } = options;
     return {
@@ -129,6 +237,7 @@ export function createLegacyViabilityApi(invoke, Registry, Graph) {
     return result;
   }
   const api = {
+    LegacyMetamapActivator,
     LegacyConstraintRegistry,
     validateLegacyViabilityPolicy(value) {
       return call("validate-policy", { value });

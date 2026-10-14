@@ -201,12 +201,25 @@ fn validate_generation(
     Ok(issues)
 }
 fn response(value: J, issues: Vec<ObservationIssue>) -> J {
+    let path_indexes = issues
+        .iter()
+        .map(|issue| {
+            let subject = s(&issue.value, "subjectId");
+            issue.value.get("causalPath")?;
+            value.get("impact").and_then(|impact| {
+                items(impact, "paths")
+                    .iter()
+                    .position(|path| s(path, "subjectId") == subject)
+            })
+        })
+        .collect::<Vec<_>>();
     obj(vec![
         ("value", value),
         (
             "issueKeys",
             native(issues.iter().map(|i| &i.keys).collect::<Vec<_>>()),
         ),
+        ("issuePathIndexes", native(path_indexes)),
     ])
 }
 fn validation_response(issues: Vec<ObservationIssue>) -> J {
@@ -1394,6 +1407,89 @@ fn constraint_operation(operation: &str, input: &J) -> Result<J, LegacyWorkspace
     }
 }
 
+fn activation_operation(
+    operation: &str,
+    input: &J,
+    locale_name: &str,
+) -> Result<J, LegacyWorkspaceError> {
+    match operation {
+        "activation-receiver" => {
+            let member = text(input, "member")?;
+            if !["governedHost", "governedState"].contains(&member) {
+                return Err(error("TypeError", "Unknown activator private member"));
+            }
+            let message = if matches!(input.get("nullReceiver"), Some(J::Bool(true))) {
+                format!("Cannot read properties of null (reading '#{member}')")
+            } else if matches!(input.get("undefinedReceiver"), Some(J::Bool(true))) {
+                format!("Cannot read properties of undefined (reading '#{member}')")
+            } else {
+                format!(
+                    "Cannot read private member #{member} from an object whose class did not declare it"
+                )
+            };
+            Err(error("TypeError", &message))
+        }
+        "activation-select" => {
+            let has_policy = matches!(input.get("hasPolicy"), Some(J::Bool(true)));
+            let host = matches!(input.get("hostPresent"), Some(J::Bool(true)));
+            let action = if !has_policy {
+                if host && s(input, "hostMode") == "governed" {
+                    "governed"
+                } else {
+                    "host-required"
+                }
+            } else if host || s(input, "policyVersion") != "1.0.0" {
+                "protected"
+            } else {
+                "compile"
+            };
+            let mut value = vec![("action", scalar(action))];
+            if action == "host-required" {
+                value.push(("result",obj(vec![("status",scalar("rejected")),("activated",J::Bool(false)),("issues",native(json!([{"code":"GOVERNANCE_HOST_REQUIRED","message":"The consumer must select governed mode outside the request"}])))])));
+            }
+            Ok(obj(vec![("value", obj(value))]))
+        }
+        "activation-protected" => {
+            let options = json!({"changedSubjects":strings(input,"changedSubjects")});
+            let registry = input
+                .get("registry")
+                .map(project)
+                .transpose()?
+                .unwrap_or_else(core_registry);
+            let impact = impact(
+                &json!({"document":project(get(input,"document")?)?,"options":options,"registry":registry}),
+                locale_name,
+            )?;
+            let mut issue = ObservationIssue::new(
+                "PROTECTED_ACTIVATION_REQUIRED",
+                "Governed consumers and version 2 candidates require exact protected approval",
+                None,
+                None,
+            );
+            if let Some(subject) = input.get("subjectId") {
+                issue.set("subjectId", subject.clone());
+            }
+            Ok(rejected(vec![issue], impact))
+        }
+        "activation-complete" => {
+            let activated = match s(input, "compilationStatus") {
+                "viable" => true,
+                "rejected" => false,
+                _ => return Err(error("TypeError", "Invalid memory compilation status")),
+            };
+            Ok(obj(vec![(
+                "value",
+                native(json!({"activated":activated,"publishGeneration":activated})),
+            )]))
+        }
+        "activation-governed" => Err(error(
+            "Error",
+            "Legacy signed governed activation transport is not implemented",
+        )),
+        _ => Err(error("TypeError", "Unknown memory activation operation")),
+    }
+}
+
 pub fn legacy_viability_request(
     request: LegacyWorkspaceRequest,
 ) -> Result<Box<RawValue>, LegacyWorkspaceError> {
@@ -1462,6 +1558,13 @@ pub fn legacy_viability_request(
             compile(input, &request.locale, &observation.holes, &context_holes)?
         }
         "compile-finish" => continuation(input, &request.locale, &observation.holes)?,
+        "activation-receiver"
+        | "activation-select"
+        | "activation-protected"
+        | "activation-complete"
+        | "activation-governed" => {
+            activation_operation(&request.operation, input, &request.locale)?
+        }
         "constraint-kinds"
         | "constraint-register"
         | "constraint-get"

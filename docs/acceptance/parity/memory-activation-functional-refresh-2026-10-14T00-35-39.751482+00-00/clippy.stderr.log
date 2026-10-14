@@ -1,0 +1,16 @@
+    Checking patamaps-core v0.1.0 (/Users/admin/dev/patamaps/patamaps/crates/patamaps-core)
+error: this block may be rewritten with the `?` operator
+   --> crates/patamaps-core/src/legacy_viability.rs:208:13
+    |
+208 | /             if issue.value.get("causalPath").is_none() {
+209 | |                 return None;
+210 | |             }
+    | |_____________^ help: replace it with: `issue.value.get("causalPath")?;`
+    |
+    = help: for further information visit https://rust-lang.github.io/rust-clippy/rust-1.99.0/index.html#question_mark
+    = note: `-D clippy::question-mark` implied by `-D warnings`
+    = help: to override `-D warnings` add `#[allow(clippy::question_mark)]`
+
+error: could not compile `patamaps-core` (lib test) due to 1 previous error
+warning: build failed, waiting for other jobs to finish...
+error: could not compile `patamaps-core` (lib) due to 1 previous error

@@ -344,6 +344,16 @@ if(compileLegacyMetamap(customDocument,customPolicy,{...v1Input.options,constrai
 const factoryCallbacks=new legacy.LegacyConstraintRegistry();
 factoryCallbacks.register('test:installed-callback',customEvaluator);
 if(legacy.compileLegacyMetamap(customDocument,customPolicy,{...v1Input.options,constraintRegistry:factoryCallbacks}).status!=='viable')throw new Error('Installed factory custom compilation mismatch');
+import {LegacyMetamapActivator,type LegacyActivationResult} from "patamaps-native-sdk-draft";
+const memory=new LegacyMetamapActivator(undefined,callbacks);
+const acceptedMemory:LegacyActivationResult=memory.activate(customDocument,customPolicy,v1Input.options);
+if(!acceptedMemory.activated||acceptedMemory.current!==memory.current||acceptedMemory.current!==acceptedMemory.compilation.generation)throw new Error('Installed memory generation identity mismatch');
+const brokenMemory:LegacyMetamapViabilityPolicy=JSON.parse(JSON.stringify(customPolicy));brokenMemory.graph.id='urn:test:installed:wrong-graph';
+const rejectedMemory:LegacyActivationResult=memory.activate(customDocument,brokenMemory,v1Input.options);
+if(rejectedMemory.activated||rejectedMemory.current!==acceptedMemory.current||memory.current!==acceptedMemory.current||memory.governedCurrent!==undefined)throw new Error('Installed memory rejection changed current generation');
+if(rejectedMemory.compilation.quarantinedSubjects!==rejectedMemory.compilation.impact.affectedSubjects)throw new Error('Installed memory quarantine alias mismatch');
+const factoryMemory=new legacy.LegacyMetamapActivator(undefined,factoryCallbacks);
+if(!factoryMemory.activate(customDocument,customPolicy,v1Input.options).activated)throw new Error('Installed factory memory activation failed');
 '''
 (stage / 'consumer.mts').write_text(program)
 (stage / 'negative.mts').write_text('''import {createSssomApi,createCanonicalApi,createLegacyValidationApi} from "patamaps-native-sdk-draft";
@@ -424,6 +434,13 @@ new (createLegacyValidationApi('/absolute/path').LegacyConstraintRegistry)().reg
 new (createLegacyValidationApi('/absolute/path').LegacyConstraintRegistry)().register('test:bad',(constraint,context)=>{context.evidence.push({});return [];});
 const badConstraintContext:import('patamaps-native-sdk-draft').LegacyConstraintEvaluationContext={document:{} as any,graph:{},activeMappings:new Set(),evidence:[]};
 createLegacyValidationApi('/absolute/path').compileLegacyMetamap({} as import('patamaps-native-sdk-draft').LegacyGraphDocument,{} as import('patamaps-native-sdk-draft').LegacyMetamapViabilityPolicy,{constraintRegistry:{}});
+new (createLegacyValidationApi('/absolute/path').LegacyMetamapActivator)(7);
+new (createLegacyValidationApi('/absolute/path').LegacyMetamapActivator)(undefined,{});
+new (createLegacyValidationApi('/absolute/path').LegacyMetamapActivator)().activate({});
+new (createLegacyValidationApi('/absolute/path').LegacyMetamapActivator)().activate({} as any,{} as any,{evaluatedAt:7});
+new (createLegacyValidationApi('/absolute/path').LegacyMetamapActivator)().current=undefined;
+new (createLegacyValidationApi('/absolute/path').LegacyMetamapActivator)().governedCurrent={};
+const invalidActivation:import('patamaps-native-sdk-draft').LegacyActivationResult={activated:true,current:undefined,compilation:{} as any};
 ''')
 environment = {**os.environ, 'PATH': ''}
 commands = []
@@ -472,6 +489,16 @@ for fixture,digest in callback_corpora:
 callback_probe=stage/'constraint-callbacks.mjs'
 callback_probe.write_text('import assert from "node:assert/strict";\nimport {readFileSync} from "node:fs";\nimport * as sdk from "patamaps-native-sdk-draft";\nconst kinds='+json.dumps(['core:requires-evidence','core:requires-mapping','core:forbids-mapping','core:unique-target','core:requires-authority','topology:relation-totality','topology:reachable','topology:context-satisfied'])+';\n'+callback_helpers+'\nconst binary='+json.dumps(str(installed))+';\nsdk.configureLegacyValidation(binary);\nconst owner=sdk.createLegacyValidationApi(binary);\nconst apis=[{Registry:owner.LegacyConstraintRegistry,Graph:owner.LegacyGraph,compile:owner.compileLegacyMetamap},{Registry:sdk.LegacyConstraintRegistry,Graph:sdk.LegacyGraph,compile:sdk.compileLegacyMetamap}];\nlet cases=0,comparisons=0;\nfor(const name of '+json.dumps([p.name for p,_ in callback_corpora])+'){const corpus=JSON.parse(readFileSync(new URL("./"+name,import.meta.url)));cases+=corpus.cases.length;for(const api of apis)for(const entry of corpus.cases){assert.deepEqual(observe(entry.action,api,corpus.document,corpus.baseline),entry.expected,entry.name);comparisons++;}}\nconsole.log(JSON.stringify({status:"matched",cases,comparisons}));\n')
 callback_execution=run('installed-constraint-callbacks',[NODE,callback_probe])
+memory_corpora=[(ROOT/'fixtures/parity/memory-activation-controls.json','sha256:a075af3abaa522533bd43d5b9ce9335215a1c6ed77c7e7518b8176ed8a403e2c'),(ROOT/'fixtures/parity/memory-activation-receiver-controls.json','sha256:7b21f42ffd669bf346aa80f0144fdf53f5601a22fad998b7fd218411cd926ccc')]
+for fixture,digest in memory_corpora:
+    assert sha(fixture)==digest
+    copy_file(fixture,stage/fixture.name)
+memory_driver=ROOT/'scripts/parity/memory_activation.mjs'
+memory_source=memory_driver.read_text()
+memory_helpers=memory_source[memory_source.index('function encode(value)'):memory_source.index('\nlet receipt;')]
+memory_probe=stage/'memory-activation.mjs'
+memory_probe.write_text('import assert from "node:assert/strict";\nimport {readFileSync} from "node:fs";\nimport * as sdk from "patamaps-native-sdk-draft";\n'+memory_helpers+'\nconst binary='+json.dumps(str(installed))+';\nsdk.configureLegacyValidation(binary);\nconst owner=sdk.createLegacyValidationApi(binary);\nconst apis=[{Actor:owner.LegacyMetamapActivator,Relations:owner.LegacyRelationRegistry,Constraints:owner.LegacyConstraintRegistry},{Actor:sdk.LegacyMetamapActivator,Relations:sdk.LegacyRelationRegistry,Constraints:sdk.LegacyConstraintRegistry}];\nlet cases=0,comparisons=0;for(const name of '+json.dumps([p.name for p,_ in memory_corpora])+'){const corpus=JSON.parse(readFileSync(new URL("./"+name,import.meta.url)));cases+=corpus.cases.length;for(const api of apis)for(const entry of corpus.cases){assert.deepEqual(observe(entry.action,api,corpus.document,corpus.baseline),entry.expected,entry.name);comparisons++;}}\nconsole.log(JSON.stringify({status:"matched",cases,comparisons}));\n')
+memory_execution=run('installed-memory-activation',[NODE,memory_probe])
 asset_execution = run('published-assets', [NODE, asset_probe])
 asset_observations = json.loads(asset_execution.stdout)['observations'] if asset_execution.returncode == 0 else []
 
@@ -535,6 +562,11 @@ graph_index=modules.index('src/graph.ts')
 contract_lines.append(f'type GraphPublicContractMatches = Assert<Equivalent<Omit<Pick<Reference{graph_index}.MetamapGraph,keyof Candidate.LegacyGraph>,"registry"> & {{readonly registry:Candidate.LegacyRelationRegistry}},Candidate.LegacyGraph>>;')
 contract_lines.append(f'type GraphErrorPublicContractMatches = Assert<Equivalent<Reference{graph_index}.MetamapValidationError,Candidate.LegacyGraphValidationError>>;')
 composition_index=modules.index('src/composer.ts')
+viability_index=modules.index('src/viability.ts')
+model_index=modules.index('src/viability-model.ts')
+contract_lines.append(f'type MemoryCurrentGetterMatches = Assert<Equivalent<Reference{viability_index}.MetamapActivator["current"],Candidate.LegacyMetamapActivator["current"]>>;')
+contract_lines.append(f'type MemoryActivationParametersMatch = Assert<Equivalent<Parameters<Reference{viability_index}.MetamapActivator["activate"]>,Parameters<Candidate.LegacyMetamapActivator["activate"]>>>;')
+contract_lines.append(f'type MemoryActivationResultMatches = Assert<Equivalent<Reference{model_index}.ActivationResult,ReturnType<Candidate.LegacyMetamapActivator["activate"]>>>;')
 contract_lines.append(f'type CompositionOptionsMatches = Assert<Equivalent<Reference{composition_index}.CompositionOptions,Candidate.LegacyCompositionOptions>>;')
 contract_lines.append(f'type CompositionFunctionMatches = Assert<Equivalent<typeof Reference{composition_index}.composeMetamapDocuments,typeof Candidate.composeLegacyDocuments>>;')
 contract_lines.append(f'type CompositionErrorMatches = Assert<Equivalent<Reference{composition_index}.MetamapCompositionError,Candidate.LegacyCompositionError>>;')
@@ -553,6 +585,7 @@ passed = passed and all(f'negative.mts({line},' in negative.stdout for line in r
 passed = passed and reference_declarations.returncode == 0 and type_contracts is not None and type_contracts.returncode == 0
 passed = passed and numeric_execution.returncode == 0
 passed = passed and callback_execution.returncode == 0
+passed = passed and memory_execution.returncode == 0
 passed = passed and all(engine[key] == value for key,value in identities(ROOT).items()) and sha(installed) == sha(binary)
 verify_reference()
 receipt = {'uncheckedDigestCorpus':{'path':digest_fixture.relative_to(ROOT).as_posix(),'digest':sha(digest_fixture)},'schemaVersion':'1.0.0','status':'passed' if passed else 'failed','commands':commands,
@@ -560,6 +593,7 @@ receipt = {'uncheckedDigestCorpus':{'path':digest_fixture.relative_to(ROOT).as_p
            'driver':'installed-sdk-data-subchecks','driverDigest':sha(Path(__file__)),'assetProbe':{'path':str(asset_probe),'digest':sha(asset_probe)},
            'numericViability':{'corpus':numeric_fixture.relative_to(ROOT).as_posix(),'corpusDigest':sha(numeric_fixture),'cases':400,'exitCode':numeric_execution.returncode,'probe':{'path':str(numeric_probe),'digest':sha(numeric_probe)},'helperSource':{'path':numeric_driver.relative_to(ROOT).as_posix(),'digest':sha(numeric_driver)}},
            'constraintCallbacks':{'corpora':[{'path':p.relative_to(ROOT).as_posix(),'digest':sha(p)} for p,_ in callback_corpora],'cases':82,'comparisons':164,'exitCode':callback_execution.returncode,'probe':{'path':str(callback_probe),'digest':sha(callback_probe)},'helperSource':{'path':callback_driver.relative_to(ROOT).as_posix(),'digest':sha(callback_driver)}},
+           'memoryActivation':{'corpora':[{'path':p.relative_to(ROOT).as_posix(),'digest':sha(p)} for p,_ in memory_corpora],'cases':73,'comparisons':146,'exitCode':memory_execution.returncode,'probe':{'path':str(memory_probe),'digest':sha(memory_probe)},'helperSource':{'path':memory_driver.relative_to(ROOT).as_posix(),'digest':sha(memory_driver)},'declarationProjections':3,'scope':'Original memory current getter, legacy activation parameters/result and all selected frozen memory/refusal controls; full governed overload/state, complete arbitrary JavaScript and nominal package/required platform acceptance remain open.'},
            'publishedAssets':{'scope':'Original public JSON source/import subchecks only; exact original bytes and actual installed Node imports. Original valid/invalid schema and semantic acceptance remains unverified by this probe, so it cannot close the published-data obligations.','count':len(published_assets),'observations':asset_observations},
            'obligationSubchecks':[{'id':row['id'],'status':'passed' if passed else 'failed','scope':'published-data-source-and-import','origin':row['origin'],'expectationDigest':row['expectation']['digest']} for row in published_assets],
            'candidate':{'binaryDigest':sha(binary),'engine':engine,'sdkSourceInventory':inventory},

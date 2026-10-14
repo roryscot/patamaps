@@ -24,47 +24,50 @@ const cli = resolve(
   process.argv.slice(2).find((argument) => !argument.startsWith("--")) ??
     join(root, "target/debug/patamaps"),
 );
-const mode = process.argv.includes("--viability")
-  ? "viability"
-  : process.argv.includes("--evaluation")
-    ? "evaluation"
-    : process.argv.includes("--core-data")
-      ? "core-data"
-      : process.argv.includes("--migration")
-        ? "migration"
-        : process.argv.includes("--workspace")
-          ? "workspace"
-          : process.argv.includes("--adapter-registry")
-            ? "adapter-registry"
-            : process.argv.includes("--config")
-              ? "config"
-              : process.argv.includes("--correspondence")
-                ? "correspondence"
-                : process.argv.includes("--reporting")
-                  ? "reporting"
-                  : process.argv.includes("--composition")
-                    ? "composition"
-                    : process.argv.includes("--graph")
-                      ? "graph"
-                      : process.argv.includes("--registry")
-                        ? "registry"
-                        : process.argv.includes("--packs")
-                          ? "packs"
-                          : process.argv.includes("--validation")
-                            ? "validation"
-                            : process.argv.includes("--discovery")
-                              ? "discovery"
-                              : process.argv.includes("--sssom-adapter")
-                                ? "sssom-adapter"
-                                : process.argv.includes("--sssom")
-                                  ? "sssom"
-                                  : "canonical";
+const mode = process.argv.includes("--memory-activation")
+  ? "memory-activation"
+  : process.argv.includes("--viability")
+    ? "viability"
+    : process.argv.includes("--evaluation")
+      ? "evaluation"
+      : process.argv.includes("--core-data")
+        ? "core-data"
+        : process.argv.includes("--migration")
+          ? "migration"
+          : process.argv.includes("--workspace")
+            ? "workspace"
+            : process.argv.includes("--adapter-registry")
+              ? "adapter-registry"
+              : process.argv.includes("--config")
+                ? "config"
+                : process.argv.includes("--correspondence")
+                  ? "correspondence"
+                  : process.argv.includes("--reporting")
+                    ? "reporting"
+                    : process.argv.includes("--composition")
+                      ? "composition"
+                      : process.argv.includes("--graph")
+                        ? "graph"
+                        : process.argv.includes("--registry")
+                          ? "registry"
+                          : process.argv.includes("--packs")
+                            ? "packs"
+                            : process.argv.includes("--validation")
+                              ? "validation"
+                              : process.argv.includes("--discovery")
+                                ? "discovery"
+                                : process.argv.includes("--sssom-adapter")
+                                  ? "sssom-adapter"
+                                  : process.argv.includes("--sssom")
+                                    ? "sssom"
+                                    : "canonical";
 const scientificAdapter = mode === "sssom-adapter";
 const scientific = mode === "sssom" || scientificAdapter;
 const discovery = mode === "discovery";
 const validation = mode === "validation";
 const evaluation = mode === "evaluation";
-const viability = mode === "viability";
+const memoryActivation = mode === "memory-activation";
+const viability = mode === "viability" || memoryActivation;
 const registry = mode === "registry" || mode === "core-data";
 const graph = mode === "graph";
 const composition = mode === "composition";
@@ -76,7 +79,9 @@ const workspace = mode === "workspace" || mode === "adapter-registry";
 const packs = mode === "packs" || registry;
 const installProviders = discovery || scientificAdapter || workspace;
 const selectionPath = viability
-  ? "fixtures/parity/viability-selected-cases.json"
+  ? memoryActivation
+    ? "fixtures/parity/memory-activation-selected-cases.json"
+    : "fixtures/parity/viability-selected-cases.json"
   : evaluation
     ? "fixtures/parity/evaluation-selected-cases.json"
     : migration
@@ -438,7 +443,7 @@ const viabilityFacade = join(run, "viability-facade.mjs");
 if (viability)
   writeFileSync(
     viabilityFacade,
-    `export {compileLegacyMetamap as compileMetamap,validateLegacyViableGeneration as validateViableGeneration} from ${JSON.stringify(legacy)}; export class MetamapActivator {constructor(){throw new Error('Memory activation is unimplemented and explicitly unselected by this compiler-only receipt');}}\n`,
+    `export {compileLegacyMetamap as compileMetamap,validateLegacyViableGeneration as validateViableGeneration,LegacyMetamapActivator as MetamapActivator} from ${JSON.stringify(legacy)};\n`,
   );
 const viabilityPlugin = viability
   ? `{name:'native-viability-original-case',enforce:'pre',resolveId(specifier,importer){if(specifier.endsWith('/viability.js') && importer?.startsWith(${JSON.stringify(source)}))return ${JSON.stringify(viabilityFacade)};}}`
@@ -520,7 +525,9 @@ const allOutcomes = observed.map((test) => {
     traceCaseName: [...test.ancestorTitles, test.title].join(" > "),
     occurrence,
     candidateExecution: viability
-      ? "Ten unchanged original v1 compiler callbacks through Rust; memory activation explicitly unselected"
+      ? memoryActivation
+        ? "One unchanged original current-generation retention callback through Rust mode/publication transitions, v1 compilation and retained SDK generation handles"
+        : "Ten unchanged original v1 compiler callbacks through Rust; memory activation explicitly unselected by this selection"
       : evaluation
         ? "Unchanged original context expression callback through Rust; compiler callbacks explicitly unselected"
         : mode === "core-data"

@@ -1,0 +1,32 @@
+{
+  "commands": [
+    {
+      "label": "receiver-controls",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "scripts/parity/memory_activation.mjs",
+        "--receivers"
+      ]
+    },
+    {
+      "label": "native-viability-memory",
+      "command": [
+        "/Users/admin/.cargo/bin/cargo",
+        "test",
+        "--locked",
+        "-p",
+        "patamaps-core",
+        "--test",
+        "legacy_viability"
+      ]
+    },
+    {
+      "label": "original-memory-activation",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "scripts/parity/original.mjs",
+        "--memory-activation"
+      ]
+    }
+  ]
+}

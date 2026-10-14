@@ -1,0 +1,92 @@
+{
+  "schemaVersion": "1.0.0",
+  "checks": [
+    {
+      "label": "rust-format",
+      "command": [
+        "/Users/admin/.cargo/bin/cargo",
+        "fmt",
+        "--all",
+        "--",
+        "--check"
+      ],
+      "exitCode": 0
+    },
+    {
+      "label": "diff-whitespace",
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exitCode": 0
+    },
+    {
+      "label": "sdk-format",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v24.21.0/bin/node",
+        ".tools/parity/oracles/399747a4ad05-p8pkt3pr/reference/node_modules/prettier/bin/prettier.cjs",
+        "--check",
+        "sdk/typescript/canonical.mjs",
+        "sdk/typescript/legacy-viability.mjs",
+        "sdk/typescript/package.json",
+        "scripts/parity/viability_signed_zero.mjs",
+        "scripts/parity/legacy_validation.mjs",
+        "scripts/parity/viability_numeric.mjs",
+        "sdk/typescript/native-input.mjs",
+        "sdk/typescript/native-input-worker.mjs",
+        "sdk/typescript/legacy-validation.mjs",
+        "sdk/typescript/sssom.mjs",
+        "sdk/typescript/legacy-graph.mjs",
+        "sdk/typescript/legacy-viability.d.ts",
+        "sdk/typescript/legacy-validation.d.ts",
+        "scripts/parity/constraint_callbacks.mjs",
+        "scripts/parity/memory_activation.mjs",
+        "scripts/parity/original.mjs"
+      ],
+      "exitCode": 0
+    },
+    {
+      "label": "strict-ledger",
+      "command": [
+        "/opt/homebrew/bin/python3",
+        "-B",
+        "scripts/parity/verify.py",
+        "--strict"
+      ],
+      "exitCode": 1
+    }
+  ],
+  "strictLedger": {
+    "status": "incomplete",
+    "inventory": {
+      "obligations": 1293,
+      "exports": 92,
+      "suites": 53,
+      "expandedOriginalCases": 601,
+      "cliCommands": 22,
+      "cliOptions": 32
+    },
+    "counts": {
+      "unclassified": 890,
+      "verified-equivalent": 125,
+      "implemented-unverified": 247,
+      "missing": 31
+    },
+    "currentVerifiedEquivalent": 125,
+    "invalidEvidence": [],
+    "strictAcceptance": false
+  },
+  "frozenReferenceBlobsVerified": 610,
+  "pythonSyntax": "passed",
+  "currentSourceMatchesBinary": true,
+  "candidateEngine": {
+    "compiler": "sha256:9ad55b0e1a221b7a6b0396d21ed82d1e902ca8d346db6b561bb8b1faa0870e08",
+    "documentType": "executor-description",
+    "governance": "sha256:9f1708c0e3ddb4c143e2a815b71699189adb9988cbdc1c1a3476bed2cb5285fa",
+    "schemaVersion": "0.1.0",
+    "scientific": "sha256:6b6f3f4613b3880b5eefdfdd2868459178adda3761230cb1ee1989eecacdabff",
+    "workspace": "sha256:cb7ac9fc85d83c6b1699d61d69756d324f7fcf79318b1aba510f2bbfa0df6da5"
+  },
+  "candidateBinaryDigest": "sha256:e33b7c61570d1508c6c0474985edc69e7bf8c148b518db5f73ea5759fc7921fb"
+}

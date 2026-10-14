@@ -82,6 +82,34 @@ export type LegacyCompilationResult =
       impact: LegacyImpactReport;
       quarantinedSubjects: string[];
     };
+export type LegacyActivationResult =
+  | {
+      activated: true;
+      current: LegacyViableGeneration;
+      compilation: Extract<LegacyCompilationResult, { status: "viable" }>;
+    }
+  | {
+      activated: false;
+      current?: LegacyViableGeneration;
+      compilation: Extract<LegacyCompilationResult, { status: "rejected" }>;
+    };
+/** Original memory interface. Signed governed overloads remain unfinished. */
+export class LegacyMetamapActivator {
+  private readonly relationRegistry: LegacyRelationRegistry;
+  private readonly constraintRegistry: LegacyConstraintRegistry;
+  private generation?: LegacyViableGeneration;
+  constructor(
+    relationRegistry?: LegacyRelationRegistry,
+    constraintRegistry?: LegacyConstraintRegistry,
+  );
+  get current(): LegacyViableGeneration | undefined;
+  get governedCurrent(): undefined;
+  activate(
+    document: LegacyGraphDocument,
+    policy: LegacyMetamapViabilityPolicy,
+    options?: LegacyCompileOptions,
+  ): LegacyActivationResult;
+}
 export function validateLegacyViabilityPolicy(
   value: unknown,
 ): LegacyViabilityValidationResult;

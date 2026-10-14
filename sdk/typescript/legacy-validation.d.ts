@@ -5,6 +5,7 @@ import type {
   parseLegacyViableGeneration,
   compileLegacyMetamap,
   LegacyConstraintRegistry,
+  LegacyMetamapActivator,
 } from "./legacy-viability.js";
 export * from "./legacy-viability.js";
 import type {
@@ -214,6 +215,7 @@ export type LegacyValidationOptions =
       nativePacks?: never;
     };
 export interface LegacyValidationApi {
+  LegacyMetamapActivator: typeof LegacyMetamapActivator;
   LegacyConstraintRegistry: typeof LegacyConstraintRegistry;
   validateLegacyViabilityPolicy: typeof validateLegacyViabilityPolicy;
   validateLegacyViableGeneration: typeof validateLegacyViableGeneration;

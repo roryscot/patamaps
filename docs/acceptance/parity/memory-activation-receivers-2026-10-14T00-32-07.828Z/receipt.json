@@ -1,0 +1,1000 @@
+{
+  "status": "different",
+  "counts": {
+    "cases": 12,
+    "comparisons": 24,
+    "matched": 6,
+    "differences": 18
+  },
+  "differences": [
+    {
+      "name": "receiver-plain-governedCurrent",
+      "facade": "factory",
+      "expected": {
+        "status": "threw",
+        "error": {
+          "name": "TypeError",
+          "message": "Cannot read private member #governedState from an object whose class did not declare it",
+          "constructor": "TypeError",
+          "keys": [],
+          "ownNames": [
+            "stack",
+            "message"
+          ]
+        },
+        "events": []
+      },
+      "observed": {
+        "status": "observed",
+        "value": {
+          "numbers": []
+        },
+        "currentUndefined": true
+      }
+    },
+    {
+      "name": "receiver-plain-activate-false",
+      "facade": "factory",
+      "expected": {
+        "status": "threw",
+        "error": {
+          "name": "TypeError",
+          "message": "Cannot read private member #governedHost from an object whose class did not declare it",
+          "constructor": "TypeError",
+          "keys": [],
+          "ownNames": [
+            "stack",
+            "message"
+          ]
+        },
+        "events": []
+      },
+      "observed": {
+        "status": "observed",
+        "value": {
+          "value": {
+            "activated": true,
+            "current": {
+              "$schema": "https://raw.githubusercontent.com/roryscot/metamap/v0.3.0/schemas/metamap-generation.schema.json",
+              "schemaVersion": "1.0.0",
+              "evaluatedAt": "2026-09-02T00:00:00.000Z",
+              "graph": {
+                "id": "urn:example:metamap:example-user-schema",
+                "revision": "example-1",
+                "digest": "sha256:7c3384787b0fac61a94bde964cebe9742c4c69c37a1648527adab641d395efe6"
+              },
+              "policy": {
+                "id": "urn:example:viability:user-schema",
+                "digest": "sha256:6d7e18866a7fd4abfeb2e9a779bca16e4e506a70fb4b8594e6d08052c130c833"
+              },
+              "context": {
+                "environment": "production",
+                "maintenance": false
+              },
+              "activeMappings": [
+                "urn:example:mapping:prisma-contains-user-email",
+                "urn:example:mapping:user-email-implementations",
+                "urn:example:mapping:zod-contains-user-email",
+                "urn:example:mapping:zod-email-derived-from-prisma"
+              ],
+              "inactiveMappings": [],
+              "evidence": [
+                "urn:example:evidence:email-conformance-test"
+              ],
+              "waiversApplied": [],
+              "id": "urn:metamap:generation:2acaf9461c557bae4eda35566b52ffeb3fab2bef3ce24cc98fe18d3203c8c6fd",
+              "digest": "sha256:2acaf9461c557bae4eda35566b52ffeb3fab2bef3ce24cc98fe18d3203c8c6fd"
+            },
+            "compilation": {
+              "status": "viable",
+              "generation": {
+                "$schema": "https://raw.githubusercontent.com/roryscot/metamap/v0.3.0/schemas/metamap-generation.schema.json",
+                "schemaVersion": "1.0.0",
+                "evaluatedAt": "2026-09-02T00:00:00.000Z",
+                "graph": {
+                  "id": "urn:example:metamap:example-user-schema",
+                  "revision": "example-1",
+                  "digest": "sha256:7c3384787b0fac61a94bde964cebe9742c4c69c37a1648527adab641d395efe6"
+                },
+                "policy": {
+                  "id": "urn:example:viability:user-schema",
+                  "digest": "sha256:6d7e18866a7fd4abfeb2e9a779bca16e4e506a70fb4b8594e6d08052c130c833"
+                },
+                "context": {
+                  "environment": "production",
+                  "maintenance": false
+                },
+                "activeMappings": [
+                  "urn:example:mapping:prisma-contains-user-email",
+                  "urn:example:mapping:user-email-implementations",
+                  "urn:example:mapping:zod-contains-user-email",
+                  "urn:example:mapping:zod-email-derived-from-prisma"
+                ],
+                "inactiveMappings": [],
+                "evidence": [
+                  "urn:example:evidence:email-conformance-test"
+                ],
+                "waiversApplied": [],
+                "id": "urn:metamap:generation:2acaf9461c557bae4eda35566b52ffeb3fab2bef3ce24cc98fe18d3203c8c6fd",
+                "digest": "sha256:2acaf9461c557bae4eda35566b52ffeb3fab2bef3ce24cc98fe18d3203c8c6fd"
+              },
+              "issues": [],
+              "impact": {
+                "changedSubjects": [],
+                "affectedSubjects": [],
+                "paths": []
+              }
+            }
+          },
+          "numbers": []
+        },
+        "currentUndefined": true
+      }
+    },
+    {
+      "name": "receiver-plain-activate-true",
+      "facade": "factory",
+      "expected": {
+        "status": "threw",
+        "error": {
+          "name": "TypeError",
+          "message": "Cannot read private member #governedHost from an object whose class did not declare it",
+          "constructor": "TypeError",
+          "keys": [],
+          "ownNames": [
+            "stack",
+            "message"
+          ]
+        },
+        "events": []
+      },
+      "observed": {
+        "status": "observed",
+        "value": {
+          "value": {
+            "status": "rejected",
+            "activated": false,
+            "issues": [
+              {
+                "code": "GOVERNANCE_HOST_REQUIRED",
+                "message": "The consumer must select governed mode outside the request"
+              }
+            ]
+          },
+          "numbers": []
+        },
+        "currentUndefined": true
+      }
+    },
+    {
+      "name": "receiver-null-governedCurrent",
+      "facade": "factory",
+      "expected": {
+        "status": "threw",
+        "error": {
+          "name": "TypeError",
+          "message": "Cannot read properties of null (reading '#governedState')",
+          "constructor": "TypeError",
+          "keys": [],
+          "ownNames": [
+            "stack",
+            "message"
+          ]
+        },
+        "events": []
+      },
+      "observed": {
+        "status": "observed",
+        "value": {
+          "numbers": []
+        },
+        "currentUndefined": true
+      }
+    },
+    {
+      "name": "receiver-null-activate-false",
+      "facade": "factory",
+      "expected": {
+        "status": "threw",
+        "error": {
+          "name": "TypeError",
+          "message": "Cannot read properties of null (reading '#governedHost')",
+          "constructor": "TypeError",
+          "keys": [],
+          "ownNames": [
+            "stack",
+            "message"
+          ]
+        },
+        "events": []
+      },
+      "observed": {
+        "status": "threw",
+        "error": {
+          "name": "TypeError",
+          "message": "Cannot read properties of null (reading 'relationRegistry')",
+          "constructor": "TypeError",
+          "keys": [],
+          "ownNames": [
+            "stack",
+            "message"
+          ]
+        },
+        "events": []
+      }
+    },
+    {
+      "name": "receiver-null-activate-true",
+      "facade": "factory",
+      "expected": {
+        "status": "threw",
+        "error": {
+          "name": "TypeError",
+          "message": "Cannot read properties of null (reading '#governedHost')",
+          "constructor": "TypeError",
+          "keys": [],
+          "ownNames": [
+            "stack",
+            "message"
+          ]
+        },
+        "events": []
+      },
+      "observed": {
+        "status": "observed",
+        "value": {
+          "value": {
+            "status": "rejected",
+            "activated": false,
+            "issues": [
+              {
+                "code": "GOVERNANCE_HOST_REQUIRED",
+                "message": "The consumer must select governed mode outside the request"
+              }
+            ]
+          },
+          "numbers": []
+        },
+        "currentUndefined": true
+      }
+    },
+    {
+      "name": "receiver-proxy-governedCurrent",
+      "facade": "factory",
+      "expected": {
+        "status": "threw",
+        "error": {
+          "name": "TypeError",
+          "message": "Cannot read private member #governedState from an object whose class did not declare it",
+          "constructor": "TypeError",
+          "keys": [],
+          "ownNames": [
+            "stack",
+            "message"
+          ]
+        },
+        "events": []
+      },
+      "observed": {
+        "status": "observed",
+        "value": {
+          "numbers": []
+        },
+        "currentUndefined": true
+      }
+    },
+    {
+      "name": "receiver-proxy-activate-false",
+      "facade": "factory",
+      "expected": {
+        "status": "threw",
+        "error": {
+          "name": "TypeError",
+          "message": "Cannot read private member #governedHost from an object whose class did not declare it",
+          "constructor": "TypeError",
+          "keys": [],
+          "ownNames": [
+            "stack",
+            "message"
+          ]
+        },
+        "events": []
+      },
+      "observed": {
+        "status": "observed",
+        "value": {
+          "value": {
+            "activated": true,
+            "current": {
+              "$schema": "https://raw.githubusercontent.com/roryscot/metamap/v0.3.0/schemas/metamap-generation.schema.json",
+              "schemaVersion": "1.0.0",
+              "evaluatedAt": "2026-09-02T00:00:00.000Z",
+              "graph": {
+                "id": "urn:example:metamap:example-user-schema",
+                "revision": "example-1",
+                "digest": "sha256:7c3384787b0fac61a94bde964cebe9742c4c69c37a1648527adab641d395efe6"
+              },
+              "policy": {
+                "id": "urn:example:viability:user-schema",
+                "digest": "sha256:6d7e18866a7fd4abfeb2e9a779bca16e4e506a70fb4b8594e6d08052c130c833"
+              },
+              "context": {
+                "environment": "production",
+                "maintenance": false
+              },
+              "activeMappings": [
+                "urn:example:mapping:prisma-contains-user-email",
+                "urn:example:mapping:user-email-implementations",
+                "urn:example:mapping:zod-contains-user-email",
+                "urn:example:mapping:zod-email-derived-from-prisma"
+              ],
+              "inactiveMappings": [],
+              "evidence": [
+                "urn:example:evidence:email-conformance-test"
+              ],
+              "waiversApplied": [],
+              "id": "urn:metamap:generation:2acaf9461c557bae4eda35566b52ffeb3fab2bef3ce24cc98fe18d3203c8c6fd",
+              "digest": "sha256:2acaf9461c557bae4eda35566b52ffeb3fab2bef3ce24cc98fe18d3203c8c6fd"
+            },
+            "compilation": {
+              "status": "viable",
+              "generation": {
+                "$schema": "https://raw.githubusercontent.com/roryscot/metamap/v0.3.0/schemas/metamap-generation.schema.json",
+                "schemaVersion": "1.0.0",
+                "evaluatedAt": "2026-09-02T00:00:00.000Z",
+                "graph": {
+                  "id": "urn:example:metamap:example-user-schema",
+                  "revision": "example-1",
+                  "digest": "sha256:7c3384787b0fac61a94bde964cebe9742c4c69c37a1648527adab641d395efe6"
+                },
+                "policy": {
+                  "id": "urn:example:viability:user-schema",
+                  "digest": "sha256:6d7e18866a7fd4abfeb2e9a779bca16e4e506a70fb4b8594e6d08052c130c833"
+                },
+                "context": {
+                  "environment": "production",
+                  "maintenance": false
+                },
+                "activeMappings": [
+                  "urn:example:mapping:prisma-contains-user-email",
+                  "urn:example:mapping:user-email-implementations",
+                  "urn:example:mapping:zod-contains-user-email",
+                  "urn:example:mapping:zod-email-derived-from-prisma"
+                ],
+                "inactiveMappings": [],
+                "evidence": [
+                  "urn:example:evidence:email-conformance-test"
+                ],
+                "waiversApplied": [],
+                "id": "urn:metamap:generation:2acaf9461c557bae4eda35566b52ffeb3fab2bef3ce24cc98fe18d3203c8c6fd",
+                "digest": "sha256:2acaf9461c557bae4eda35566b52ffeb3fab2bef3ce24cc98fe18d3203c8c6fd"
+              },
+              "issues": [],
+              "impact": {
+                "changedSubjects": [],
+                "affectedSubjects": [],
+                "paths": []
+              }
+            }
+          },
+          "numbers": []
+        },
+        "currentUndefined": false
+      }
+    },
+    {
+      "name": "receiver-proxy-activate-true",
+      "facade": "factory",
+      "expected": {
+        "status": "threw",
+        "error": {
+          "name": "TypeError",
+          "message": "Cannot read private member #governedHost from an object whose class did not declare it",
+          "constructor": "TypeError",
+          "keys": [],
+          "ownNames": [
+            "stack",
+            "message"
+          ]
+        },
+        "events": []
+      },
+      "observed": {
+        "status": "observed",
+        "value": {
+          "value": {
+            "status": "rejected",
+            "activated": false,
+            "issues": [
+              {
+                "code": "GOVERNANCE_HOST_REQUIRED",
+                "message": "The consumer must select governed mode outside the request"
+              }
+            ]
+          },
+          "numbers": []
+        },
+        "currentUndefined": true
+      }
+    },
+    {
+      "name": "receiver-plain-governedCurrent",
+      "facade": "configured",
+      "expected": {
+        "status": "threw",
+        "error": {
+          "name": "TypeError",
+          "message": "Cannot read private member #governedState from an object whose class did not declare it",
+          "constructor": "TypeError",
+          "keys": [],
+          "ownNames": [
+            "stack",
+            "message"
+          ]
+        },
+        "events": []
+      },
+      "observed": {
+        "status": "observed",
+        "value": {
+          "numbers": []
+        },
+        "currentUndefined": true
+      }
+    },
+    {
+      "name": "receiver-plain-activate-false",
+      "facade": "configured",
+      "expected": {
+        "status": "threw",
+        "error": {
+          "name": "TypeError",
+          "message": "Cannot read private member #governedHost from an object whose class did not declare it",
+          "constructor": "TypeError",
+          "keys": [],
+          "ownNames": [
+            "stack",
+            "message"
+          ]
+        },
+        "events": []
+      },
+      "observed": {
+        "status": "observed",
+        "value": {
+          "value": {
+            "activated": true,
+            "current": {
+              "$schema": "https://raw.githubusercontent.com/roryscot/metamap/v0.3.0/schemas/metamap-generation.schema.json",
+              "schemaVersion": "1.0.0",
+              "evaluatedAt": "2026-09-02T00:00:00.000Z",
+              "graph": {
+                "id": "urn:example:metamap:example-user-schema",
+                "revision": "example-1",
+                "digest": "sha256:7c3384787b0fac61a94bde964cebe9742c4c69c37a1648527adab641d395efe6"
+              },
+              "policy": {
+                "id": "urn:example:viability:user-schema",
+                "digest": "sha256:6d7e18866a7fd4abfeb2e9a779bca16e4e506a70fb4b8594e6d08052c130c833"
+              },
+              "context": {
+                "environment": "production",
+                "maintenance": false
+              },
+              "activeMappings": [
+                "urn:example:mapping:prisma-contains-user-email",
+                "urn:example:mapping:user-email-implementations",
+                "urn:example:mapping:zod-contains-user-email",
+                "urn:example:mapping:zod-email-derived-from-prisma"
+              ],
+              "inactiveMappings": [],
+              "evidence": [
+                "urn:example:evidence:email-conformance-test"
+              ],
+              "waiversApplied": [],
+              "id": "urn:metamap:generation:2acaf9461c557bae4eda35566b52ffeb3fab2bef3ce24cc98fe18d3203c8c6fd",
+              "digest": "sha256:2acaf9461c557bae4eda35566b52ffeb3fab2bef3ce24cc98fe18d3203c8c6fd"
+            },
+            "compilation": {
+              "status": "viable",
+              "generation": {
+                "$schema": "https://raw.githubusercontent.com/roryscot/metamap/v0.3.0/schemas/metamap-generation.schema.json",
+                "schemaVersion": "1.0.0",
+                "evaluatedAt": "2026-09-02T00:00:00.000Z",
+                "graph": {
+                  "id": "urn:example:metamap:example-user-schema",
+                  "revision": "example-1",
+                  "digest": "sha256:7c3384787b0fac61a94bde964cebe9742c4c69c37a1648527adab641d395efe6"
+                },
+                "policy": {
+                  "id": "urn:example:viability:user-schema",
+                  "digest": "sha256:6d7e18866a7fd4abfeb2e9a779bca16e4e506a70fb4b8594e6d08052c130c833"
+                },
+                "context": {
+                  "environment": "production",
+                  "maintenance": false
+                },
+                "activeMappings": [
+                  "urn:example:mapping:prisma-contains-user-email",
+                  "urn:example:mapping:user-email-implementations",
+                  "urn:example:mapping:zod-contains-user-email",
+                  "urn:example:mapping:zod-email-derived-from-prisma"
+                ],
+                "inactiveMappings": [],
+                "evidence": [
+                  "urn:example:evidence:email-conformance-test"
+                ],
+                "waiversApplied": [],
+                "id": "urn:metamap:generation:2acaf9461c557bae4eda35566b52ffeb3fab2bef3ce24cc98fe18d3203c8c6fd",
+                "digest": "sha256:2acaf9461c557bae4eda35566b52ffeb3fab2bef3ce24cc98fe18d3203c8c6fd"
+              },
+              "issues": [],
+              "impact": {
+                "changedSubjects": [],
+                "affectedSubjects": [],
+                "paths": []
+              }
+            }
+          },
+          "numbers": []
+        },
+        "currentUndefined": true
+      }
+    },
+    {
+      "name": "receiver-plain-activate-true",
+      "facade": "configured",
+      "expected": {
+        "status": "threw",
+        "error": {
+          "name": "TypeError",
+          "message": "Cannot read private member #governedHost from an object whose class did not declare it",
+          "constructor": "TypeError",
+          "keys": [],
+          "ownNames": [
+            "stack",
+            "message"
+          ]
+        },
+        "events": []
+      },
+      "observed": {
+        "status": "observed",
+        "value": {
+          "value": {
+            "status": "rejected",
+            "activated": false,
+            "issues": [
+              {
+                "code": "GOVERNANCE_HOST_REQUIRED",
+                "message": "The consumer must select governed mode outside the request"
+              }
+            ]
+          },
+          "numbers": []
+        },
+        "currentUndefined": true
+      }
+    },
+    {
+      "name": "receiver-null-governedCurrent",
+      "facade": "configured",
+      "expected": {
+        "status": "threw",
+        "error": {
+          "name": "TypeError",
+          "message": "Cannot read properties of null (reading '#governedState')",
+          "constructor": "TypeError",
+          "keys": [],
+          "ownNames": [
+            "stack",
+            "message"
+          ]
+        },
+        "events": []
+      },
+      "observed": {
+        "status": "observed",
+        "value": {
+          "numbers": []
+        },
+        "currentUndefined": true
+      }
+    },
+    {
+      "name": "receiver-null-activate-false",
+      "facade": "configured",
+      "expected": {
+        "status": "threw",
+        "error": {
+          "name": "TypeError",
+          "message": "Cannot read properties of null (reading '#governedHost')",
+          "constructor": "TypeError",
+          "keys": [],
+          "ownNames": [
+            "stack",
+            "message"
+          ]
+        },
+        "events": []
+      },
+      "observed": {
+        "status": "threw",
+        "error": {
+          "name": "TypeError",
+          "message": "Cannot read properties of null (reading 'relationRegistry')",
+          "constructor": "TypeError",
+          "keys": [],
+          "ownNames": [
+            "stack",
+            "message"
+          ]
+        },
+        "events": []
+      }
+    },
+    {
+      "name": "receiver-null-activate-true",
+      "facade": "configured",
+      "expected": {
+        "status": "threw",
+        "error": {
+          "name": "TypeError",
+          "message": "Cannot read properties of null (reading '#governedHost')",
+          "constructor": "TypeError",
+          "keys": [],
+          "ownNames": [
+            "stack",
+            "message"
+          ]
+        },
+        "events": []
+      },
+      "observed": {
+        "status": "observed",
+        "value": {
+          "value": {
+            "status": "rejected",
+            "activated": false,
+            "issues": [
+              {
+                "code": "GOVERNANCE_HOST_REQUIRED",
+                "message": "The consumer must select governed mode outside the request"
+              }
+            ]
+          },
+          "numbers": []
+        },
+        "currentUndefined": true
+      }
+    },
+    {
+      "name": "receiver-proxy-governedCurrent",
+      "facade": "configured",
+      "expected": {
+        "status": "threw",
+        "error": {
+          "name": "TypeError",
+          "message": "Cannot read private member #governedState from an object whose class did not declare it",
+          "constructor": "TypeError",
+          "keys": [],
+          "ownNames": [
+            "stack",
+            "message"
+          ]
+        },
+        "events": []
+      },
+      "observed": {
+        "status": "observed",
+        "value": {
+          "numbers": []
+        },
+        "currentUndefined": true
+      }
+    },
+    {
+      "name": "receiver-proxy-activate-false",
+      "facade": "configured",
+      "expected": {
+        "status": "threw",
+        "error": {
+          "name": "TypeError",
+          "message": "Cannot read private member #governedHost from an object whose class did not declare it",
+          "constructor": "TypeError",
+          "keys": [],
+          "ownNames": [
+            "stack",
+            "message"
+          ]
+        },
+        "events": []
+      },
+      "observed": {
+        "status": "observed",
+        "value": {
+          "value": {
+            "activated": true,
+            "current": {
+              "$schema": "https://raw.githubusercontent.com/roryscot/metamap/v0.3.0/schemas/metamap-generation.schema.json",
+              "schemaVersion": "1.0.0",
+              "evaluatedAt": "2026-09-02T00:00:00.000Z",
+              "graph": {
+                "id": "urn:example:metamap:example-user-schema",
+                "revision": "example-1",
+                "digest": "sha256:7c3384787b0fac61a94bde964cebe9742c4c69c37a1648527adab641d395efe6"
+              },
+              "policy": {
+                "id": "urn:example:viability:user-schema",
+                "digest": "sha256:6d7e18866a7fd4abfeb2e9a779bca16e4e506a70fb4b8594e6d08052c130c833"
+              },
+              "context": {
+                "environment": "production",
+                "maintenance": false
+              },
+              "activeMappings": [
+                "urn:example:mapping:prisma-contains-user-email",
+                "urn:example:mapping:user-email-implementations",
+                "urn:example:mapping:zod-contains-user-email",
+                "urn:example:mapping:zod-email-derived-from-prisma"
+              ],
+              "inactiveMappings": [],
+              "evidence": [
+                "urn:example:evidence:email-conformance-test"
+              ],
+              "waiversApplied": [],
+              "id": "urn:metamap:generation:2acaf9461c557bae4eda35566b52ffeb3fab2bef3ce24cc98fe18d3203c8c6fd",
+              "digest": "sha256:2acaf9461c557bae4eda35566b52ffeb3fab2bef3ce24cc98fe18d3203c8c6fd"
+            },
+            "compilation": {
+              "status": "viable",
+              "generation": {
+                "$schema": "https://raw.githubusercontent.com/roryscot/metamap/v0.3.0/schemas/metamap-generation.schema.json",
+                "schemaVersion": "1.0.0",
+                "evaluatedAt": "2026-09-02T00:00:00.000Z",
+                "graph": {
+                  "id": "urn:example:metamap:example-user-schema",
+                  "revision": "example-1",
+                  "digest": "sha256:7c3384787b0fac61a94bde964cebe9742c4c69c37a1648527adab641d395efe6"
+                },
+                "policy": {
+                  "id": "urn:example:viability:user-schema",
+                  "digest": "sha256:6d7e18866a7fd4abfeb2e9a779bca16e4e506a70fb4b8594e6d08052c130c833"
+                },
+                "context": {
+                  "environment": "production",
+                  "maintenance": false
+                },
+                "activeMappings": [
+                  "urn:example:mapping:prisma-contains-user-email",
+                  "urn:example:mapping:user-email-implementations",
+                  "urn:example:mapping:zod-contains-user-email",
+                  "urn:example:mapping:zod-email-derived-from-prisma"
+                ],
+                "inactiveMappings": [],
+                "evidence": [
+                  "urn:example:evidence:email-conformance-test"
+                ],
+                "waiversApplied": [],
+                "id": "urn:metamap:generation:2acaf9461c557bae4eda35566b52ffeb3fab2bef3ce24cc98fe18d3203c8c6fd",
+                "digest": "sha256:2acaf9461c557bae4eda35566b52ffeb3fab2bef3ce24cc98fe18d3203c8c6fd"
+              },
+              "issues": [],
+              "impact": {
+                "changedSubjects": [],
+                "affectedSubjects": [],
+                "paths": []
+              }
+            }
+          },
+          "numbers": []
+        },
+        "currentUndefined": false
+      }
+    },
+    {
+      "name": "receiver-proxy-activate-true",
+      "facade": "configured",
+      "expected": {
+        "status": "threw",
+        "error": {
+          "name": "TypeError",
+          "message": "Cannot read private member #governedHost from an object whose class did not declare it",
+          "constructor": "TypeError",
+          "keys": [],
+          "ownNames": [
+            "stack",
+            "message"
+          ]
+        },
+        "events": []
+      },
+      "observed": {
+        "status": "observed",
+        "value": {
+          "value": {
+            "status": "rejected",
+            "activated": false,
+            "issues": [
+              {
+                "code": "GOVERNANCE_HOST_REQUIRED",
+                "message": "The consumer must select governed mode outside the request"
+              }
+            ]
+          },
+          "numbers": []
+        },
+        "currentUndefined": true
+      }
+    }
+  ],
+  "supervision": {
+    "mode": "inherited-live-supervisor",
+    "project": "/Users/admin/dev/patamaps/patamaps",
+    "configurationDigest": "sha256:77505e4ca3960c2df14617ffa5951838a6b84e51d6f8ed715ec60faa3c9e8187",
+    "policy": {
+      "version": 1,
+      "minimumFreeBytes": 0,
+      "reserveFreeBytes": 1000000000,
+      "maximumRunGrowthBytes": 8000000000,
+      "maximumRetainedBytes": 50000000000,
+      "monitorIntervalMs": 2000,
+      "terminationGraceMs": 15000
+    },
+    "availableBytesAtEntry": 6116343808
+  },
+  "corpus": {
+    "path": "fixtures/parity/memory-activation-receiver-controls.json",
+    "digest": "sha256:7b21f42ffd669bf346aa80f0144fdf53f5601a22fad998b7fd218411cd926ccc"
+  },
+  "candidate": {
+    "binaryDigest": "sha256:82dcf4f4bf761a31a3190a363bde0148eb2cfcc0de43ce2f9dc830ef37a44ebd",
+    "engine": {
+      "compiler": "sha256:c5cd6c594daf153c6a638a2f677fda8c019c29df0eedf6997e96ad04cf524c1c",
+      "documentType": "executor-description",
+      "governance": "sha256:7ae8594323a3ea05defae88def1b2d7256bef5e37ab4e8abb3250d6dfcaf71e4",
+      "schemaVersion": "0.1.0",
+      "scientific": "sha256:0233deb17faebbb5d631ec5fb49f6a0e001709bc58a8b72e47eaec28c990f3f7",
+      "workspace": "sha256:dbec6f3fb01dd2773a8dab4560259c704c2bf6dd0b08bce33ebfd7ebf574e618"
+    },
+    "sdkSourceInventory": [
+      {
+        "path": "sdk/typescript/canonical.d.ts",
+        "digest": "sha256:88ae79727dbad3b0872a9c3539a95fe6c444b810ff416423f06a2cf39274ecb4"
+      },
+      {
+        "path": "sdk/typescript/canonical.mjs",
+        "digest": "sha256:882143dffe56417ea4a46049b5cf1545a9d74c1481cb10b91180a8df76e6ad40"
+      },
+      {
+        "path": "sdk/typescript/cli.mjs",
+        "digest": "sha256:2a0225cb3f468bcf9edefd4da36d88e5393dd84a4f20b8754c4020fdb4e366fe"
+      },
+      {
+        "path": "sdk/typescript/index.d.ts",
+        "digest": "sha256:aa76e1583c3a1b872ec1fa9fbbaddd8c1211a118c9f670c0d9ec1b0ba3a4bbae"
+      },
+      {
+        "path": "sdk/typescript/index.mjs",
+        "digest": "sha256:f5f5abcf9d4b199a4674795bd5e96252f65c1449d679a73dd069c17c89db6015"
+      },
+      {
+        "path": "sdk/typescript/legacy-cli.d.ts",
+        "digest": "sha256:2c765e29edc81b277ae0dfd531e04c072386c8f39195e8a371976d7ba3aac37e"
+      },
+      {
+        "path": "sdk/typescript/legacy-cli.mjs",
+        "digest": "sha256:e8b3964178e54002715de3ff90ef8688a2d1f449f75e2d3f03e19ea767d41032"
+      },
+      {
+        "path": "sdk/typescript/legacy-composition.d.ts",
+        "digest": "sha256:5d776057c00df9548b9b09590bedc48b1f0e1a6a2991d4f6ab55fdacbf6e5677"
+      },
+      {
+        "path": "sdk/typescript/legacy-composition.mjs",
+        "digest": "sha256:7c176a5062c72562d05df937977d9906587ba4e8d914551db3458d7543d461f6"
+      },
+      {
+        "path": "sdk/typescript/legacy-config.d.ts",
+        "digest": "sha256:58675d458afcf7b5db9a52c163629436d248c6172c4167254c42f73c4d4e8f15"
+      },
+      {
+        "path": "sdk/typescript/legacy-config.mjs",
+        "digest": "sha256:df331e601bf7c2bca9273263a7bed464cee471afbf4e4cc39e047db8c300d15c"
+      },
+      {
+        "path": "sdk/typescript/legacy-correspondence.d.ts",
+        "digest": "sha256:5513b17c388b56b295e854beaa7026a1c35f4ee013bd500c334a9c5f99c94c62"
+      },
+      {
+        "path": "sdk/typescript/legacy-correspondence.mjs",
+        "digest": "sha256:2a0254640dfe4d140d3766d43776523dd562808e8be5540a8032e346b12af339"
+      },
+      {
+        "path": "sdk/typescript/legacy-evaluation.d.ts",
+        "digest": "sha256:be18b5ac43fae751f0a9975e955584d15c46364a91395bfe8ed4cefc87dd7626"
+      },
+      {
+        "path": "sdk/typescript/legacy-evaluation.mjs",
+        "digest": "sha256:b45b2772fd1e6c7207fc45f8747f412b6421a2cfc4ba7cd62a6c30e9d67717f7"
+      },
+      {
+        "path": "sdk/typescript/legacy-graph.d.ts",
+        "digest": "sha256:3e6b7faaf0bb6838613b74194915422d1093565a275f936b5411023b3a361c6e"
+      },
+      {
+        "path": "sdk/typescript/legacy-graph.mjs",
+        "digest": "sha256:bcd5a775d134136a0cbb3f2e4d8e1d56b0c3a6746bd35beca22171062b8d8af8"
+      },
+      {
+        "path": "sdk/typescript/legacy-references.d.ts",
+        "digest": "sha256:feb5ed0a5dcfe3185d17c95c17afb195d2ac4a18189377feb93e737e3a22e735"
+      },
+      {
+        "path": "sdk/typescript/legacy-references.mjs",
+        "digest": "sha256:907f7d3946db7b8ec2b11d458b3dea42982c8635541a8cf28ff5ad8cc58b7ba9"
+      },
+      {
+        "path": "sdk/typescript/legacy-registry.mjs",
+        "digest": "sha256:3362107f8aac339694c3fb350a720d2ee65cd03f87e5c63d0f3103f93d2dce10"
+      },
+      {
+        "path": "sdk/typescript/legacy-reporting.d.ts",
+        "digest": "sha256:8ca2bee95e0d3b454c3a864855e7866c9e8904c15dc2193f4e061634fd7ac158"
+      },
+      {
+        "path": "sdk/typescript/legacy-reporting.mjs",
+        "digest": "sha256:32dcfbb7eb6460b3e01b9a32e495999678c8794ef5abdddfe271ff5b3d023d2d"
+      },
+      {
+        "path": "sdk/typescript/legacy-validation.d.ts",
+        "digest": "sha256:5d8adc86d38da11f9ef408585ae1d04bf8c257eec1d879238264b77b0baf5ad8"
+      },
+      {
+        "path": "sdk/typescript/legacy-validation.mjs",
+        "digest": "sha256:25da6fa2ce87333f9f30f902fcf9c5c4589ffb6029aed1b132628549b37d583c"
+      },
+      {
+        "path": "sdk/typescript/legacy-viability.d.ts",
+        "digest": "sha256:4966b8bf93c92134e99e1fd28679c84b17e7101b92d9105b71ecab3b1474ebc3"
+      },
+      {
+        "path": "sdk/typescript/legacy-viability.mjs",
+        "digest": "sha256:51df01e71261bf7be8e048d32f5ca8db7dae68a2a64010415cbcc873129d724d"
+      },
+      {
+        "path": "sdk/typescript/legacy-workspace.d.ts",
+        "digest": "sha256:0042b2129ef98e3e7858142194c225a698cba5581267ef14346bbe1b47d74f7a"
+      },
+      {
+        "path": "sdk/typescript/legacy-workspace.mjs",
+        "digest": "sha256:d3893cdc92010588440cc96cb0c6741314cd3bd34050dbb51e420872b1a2a45d"
+      },
+      {
+        "path": "sdk/typescript/native-input-worker.mjs",
+        "digest": "sha256:18cba500258deb0242c7ffa9a54c4d619e144f2ab36366616fa0264df4293866"
+      },
+      {
+        "path": "sdk/typescript/native-input.mjs",
+        "digest": "sha256:635b35cfba465af573bce1fbd060627fc033fb05a49d359562f681c1886b95fa"
+      },
+      {
+        "path": "sdk/typescript/package.json",
+        "digest": "sha256:763e5ade134a35dc8e9340f8f58b8649ca619cffa506eceeedba3051efa2665b"
+      },
+      {
+        "path": "sdk/typescript/sssom-profile.mjs",
+        "digest": "sha256:a37260f42d6b02c5900dbefa9477386667f5286079a7a1abd12495e3dc78e533"
+      },
+      {
+        "path": "sdk/typescript/sssom.d.ts",
+        "digest": "sha256:7f58f17edc48bcb8340b73004273fa4c23a9f4b3671ca1276225f16de8254457"
+      },
+      {
+        "path": "sdk/typescript/sssom.mjs",
+        "digest": "sha256:85d25e603ab1adda6db81afec6a20214707c9859978dfe51561cb852cd17f8e5"
+      }
+    ]
+  },
+  "driverDigest": "sha256:4dc4bd0ca01934e41e1040590b96de5382d20f13f3a581cb1f1d0452510bebb5"
+}

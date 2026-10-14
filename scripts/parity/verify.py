@@ -79,6 +79,7 @@ def receipt_evidence(path, obligation_id):
     core_data = receipt.get("driver") == "core-data"
     evaluation = receipt.get("driver") == "evaluation"
     viability = receipt.get("driver") == "viability"
+    memory_activation = receipt.get("driver") == "memory-activation"
     graph = receipt.get("driver") == "graph"
     composition = receipt.get("driver") == "composition"
     reporting = receipt.get("driver") == "reporting"
@@ -87,7 +88,7 @@ def receipt_evidence(path, obligation_id):
     migration = receipt.get("driver") == "migration"
     workspace = receipt.get("driver") in ["workspace", "adapter-registry"]
     packs = receipt.get("driver") in ["packs", "registry"]
-    if validation or packs or graph or composition or reporting or correspondence or config or workspace or migration or core_data or evaluation or viability:
+    if validation or packs or graph or composition or reporting or correspondence or config or workspace or migration or core_data or evaluation or viability or memory_activation:
         assert receipt["driverDigest"] == digest((path.parent / "driver.mjs").read_bytes()), "Retained validation driver differs from its executed bytes"
     if not discovery:
         assert receipt["candidate"]["facadeDigest"] == digest((ROOT / "sdk/typescript/canonical.mjs").read_bytes())
@@ -111,6 +112,8 @@ def receipt_evidence(path, obligation_id):
         expected_selection = "fixtures/parity/evaluation-selected-cases.json" if evaluation else "fixtures/parity/core-data-selected-cases.json" if core_data else "fixtures/parity/migration-selected-cases.json" if migration else f"fixtures/parity/{receipt['driver']}-selected-cases.json" if workspace else "fixtures/parity/config-selected-cases.json" if config else "fixtures/parity/correspondence-selected-cases.json" if correspondence else "fixtures/parity/reporting-selected-cases.json" if reporting else "fixtures/parity/composition-selected-cases.json" if composition else "fixtures/parity/graph-selected-cases.json" if graph else "fixtures/parity/registry-selected-cases.json" if registry else "fixtures/parity/pack-selected-cases.json" if packs else "fixtures/parity/sssom-adapter-selected-cases.json" if scientific_adapter else "fixtures/parity/discovery-selected-cases.json" if discovery else "fixtures/parity/sssom-selected-cases.json"
         if viability:
             expected_selection = "fixtures/parity/viability-selected-cases.json"
+        if memory_activation:
+            expected_selection = "fixtures/parity/memory-activation-selected-cases.json"
         assert selection["path"] == expected_selection
         assert selection["digest"] == digest(selection_path.read_bytes())
         declared = read(selection_path)
@@ -202,6 +205,25 @@ def receipt_evidence(path, obligation_id):
             response = json.loads(call["stdout"])
             assert set(response) == {"valid", "issues"} and isinstance(response["valid"], bool) and isinstance(response["issues"], list)
         allowed = lambda command: command[:3] == [str(binary), "legacy", "json"]
+    elif memory_activation:
+        assert selection and original['origin']['path']=='src/__tests__/viability.test.ts'
+        assert (len(selected),len(excluded))==(1,11)
+        assert original['name']=='viability compiler retains the last viable generation after a rejected activation'
+        runtime_name=' > '.join([*cases[row['occurrence']]['ancestorTitles'],cases[row['occurrence']]['title']])
+        all_calls=[call for call in executions if call.get('caseName')==runtime_name]
+        calls=[call for call in all_calls if call['command']==[str(binary),'legacy','viability','json']]
+        assert calls and all(call['exitCode']==0 for call in all_calls)
+        requests=[json.loads(call['input']) for call in calls]
+        assert all(request['locale']==receipt['host']['locale'] for request in requests)
+        operations=[request['operation'] for request in requests]
+        assert operations.count('activation-select')==2 and operations.count('activation-complete')==2
+        completed=[json.loads(call['stdout'])['value'] for call in calls if json.loads(call['input'])['operation']=='activation-complete']
+        assert completed==[{'activated':True,'publishGeneration':True},{'activated':False,'publishGeneration':False}]
+        compilations=[json.loads(call['stdout'])['value'] for call in calls if json.loads(call['input'])['operation']=='compile-finish']
+        assert len(compilations)==2 and [value['status'] for value in compilations]==['viable','rejected']
+        assert compilations[0]['generation']['activeMappings'] and any(issue['code']=='MAPPING_POLICY_MISSING' for issue in compilations[1]['issues'])
+        assert all(operation in ['activation-select','activation-complete','compile-start','compile-finish','constraint-kinds','constraint-register','constraint-get','constraint-select','constraint-evaluate'] for operation in operations)
+        allowed=lambda command: command in [[str(binary),'legacy','viability','json'],[str(binary),'legacy','registry','json'],[str(binary),'legacy','graph','json']]
     elif viability:
         assert selection and original['origin']['path']=='src/__tests__/viability.test.ts'
         assert (len(selected),len(excluded))==(10,2)
@@ -469,6 +491,8 @@ if args.record:
             row["candidateEntryPoint"] = {"kind": "original-scientific-adapter-case-with-installed-provider", "operation": "source facts and assertion identities using native scientific/configuration/hash operations", "source": "adapters/discovery/adapters/sssom-tsv.js"}
         elif receipt.get("driver") == "validation":
             row["candidateEntryPoint"] = {"kind": "original-test-with-native-facade", "operation": "read-only legacy JSON graph shape and semantic validation", "source": "sdk/typescript/legacy-validation.mjs"}
+        elif receipt.get("driver") == "memory-activation":
+            row["candidateEntryPoint"]={"kind":"original-test-with-native-facade","operation":"original memory current-generation retention through native mode/transition and v1 compilation with SDK generation handles","source":"sdk/typescript/legacy-viability.mjs"}
         elif receipt.get("driver") == "viability":
             row["candidateEntryPoint"]={"kind":"original-test-with-native-facade","operation":"original v1 policy/generation compiler, built-in constraints, context/evidence/waivers and generation validation","source":"sdk/typescript/legacy-viability.mjs"}
         elif receipt.get("driver") == "migration":

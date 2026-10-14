@@ -25,6 +25,82 @@ fn callback_request(operation: &str, input: serde_json::Value) -> serde_json::Va
 }
 
 #[test]
+fn independently_frozen_original_memory_refusal_and_publication_observations() {
+    let bytes = include_bytes!("../../../fixtures/parity/memory-activation-controls.json");
+    assert_eq!(
+        byte_digest(bytes),
+        "sha256:a075af3abaa522533bd43d5b9ce9335215a1c6ed77c7e7518b8176ed8a403e2c"
+    );
+    let corpus: serde_json::Value = serde_json::from_slice(bytes).unwrap();
+    assert_eq!(corpus["cases"].as_array().unwrap().len(), 61);
+    let mut refusals = 0;
+    let mut transitions = 0;
+    for case in corpus["cases"].as_array().unwrap() {
+        let action = &case["action"];
+        let Some(steps) = action["steps"].as_array() else {
+            continue;
+        };
+        for (index, step) in steps.iter().enumerate() {
+            let expected = &case["expected"]["results"][index];
+            if expected["status"] != "observed" {
+                continue;
+            }
+            let host = action
+                .get("host")
+                .is_some_and(|host| !host.is_null() && host != false && host != 0);
+            let selection = callback_request(
+                "activation-select",
+                serde_json::json!({"hasPolicy":step!="request-only","hostPresent":host,"hostMode":if action["host"]=="governed"{"governed"}else{"memory"},"policyVersion":if step=="version2"{"2.0.0"}else if step=="version0"{"0.0.0"}else if step=="version-missing"{""}else{"1.0.0"}}),
+            );
+            let value = &expected["value"]["value"];
+            if step == "request-only" {
+                assert_eq!(selection["value"]["result"], *value, "{}", case["name"]);
+                refusals += 1;
+                continue;
+            }
+            if value["compilation"]["issues"]
+                .as_array()
+                .unwrap()
+                .iter()
+                .any(|issue| issue["code"] == "PROTECTED_ACTIVATION_REQUIRED")
+            {
+                assert_eq!(selection["value"]["action"], "protected");
+                let mut input = serde_json::json!({"document":corpus["document"],"subjectId":corpus["baseline"]["id"],"changedSubjects":[]});
+                if action["registry"] == "empty" {
+                    input["registry"] = serde_json::json!({"packs":[],"definitions":[]});
+                }
+                let result = callback_request("activation-protected", input);
+                assert_eq!(result["value"], value["compilation"], "{}", case["name"]);
+                assert_eq!(
+                    result["issueKeys"], expected["host"]["issueKeys"],
+                    "{}",
+                    case["name"]
+                );
+                refusals += 1;
+            } else {
+                assert_eq!(selection["value"]["action"], "compile");
+            }
+            let transition = callback_request(
+                "activation-complete",
+                serde_json::json!({"compilationStatus":value["compilation"]["status"]}),
+            );
+            assert_eq!(
+                transition["value"]["activated"], value["activated"],
+                "{}",
+                case["name"]
+            );
+            assert_eq!(
+                transition["value"]["publishGeneration"], value["activated"],
+                "{}",
+                case["name"]
+            );
+            transitions += 1;
+        }
+    }
+    assert!(refusals >= 20 && transitions >= 40);
+}
+
+#[test]
 fn independently_frozen_original_builtin_constraint_evaluators() {
     let corpus = callback_corpus();
     let mut count = 0;
@@ -61,6 +137,39 @@ fn independently_frozen_original_builtin_constraint_evaluators() {
         count += 1;
     }
     assert_eq!(count, 24);
+}
+
+#[test]
+fn independently_frozen_original_memory_receiver_errors() {
+    let bytes = include_bytes!("../../../fixtures/parity/memory-activation-receiver-controls.json");
+    assert_eq!(
+        byte_digest(bytes),
+        "sha256:7b21f42ffd669bf346aa80f0144fdf53f5601a22fad998b7fd218411cd926ccc"
+    );
+    let corpus: serde_json::Value = serde_json::from_slice(bytes).unwrap();
+    let mut count = 0;
+    for case in corpus["cases"].as_array().unwrap() {
+        let action = &case["action"];
+        let member = match action["member"].as_str().unwrap() {
+            "activate" => "governedHost",
+            "governedCurrent" => "governedState",
+            _ => continue,
+        };
+        let request=serde_json::from_value(serde_json::json!({"operation":"activation-receiver","input":serde_json::json!({"member":member,"nullReceiver":action["receiver"]=="null"}).to_string(),"locale":"en-US"})).unwrap();
+        let error = legacy_viability_request(request).unwrap_err();
+        assert_eq!(
+            error.name,
+            case["expected"]["error"]["name"].as_str().unwrap()
+        );
+        let message: serde_json::Value = serde_json::from_str(error.message.get()).unwrap();
+        assert_eq!(
+            message, case["expected"]["error"]["message"],
+            "{}",
+            case["name"]
+        );
+        count += 1;
+    }
+    assert_eq!(count, 9);
 }
 
 #[test]

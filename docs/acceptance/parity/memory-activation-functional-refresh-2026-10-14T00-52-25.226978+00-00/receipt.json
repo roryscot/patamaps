@@ -1,0 +1,1264 @@
+{
+  "schemaVersion": "1.0.0",
+  "status": "passed",
+  "commands": [
+    {
+      "label": "memory-activation-controls",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "scripts/parity/memory_activation.mjs"
+      ],
+      "exitCode": 0
+    },
+    {
+      "label": "memory-activation-receiver-controls",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "scripts/parity/memory_activation.mjs",
+        "--receivers"
+      ],
+      "exitCode": 0
+    },
+    {
+      "label": "original-memory-activation",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "scripts/parity/original.mjs",
+        "--memory-activation"
+      ],
+      "exitCode": 0,
+      "attachmentExitCode": 1,
+      "attachedObligationsVerified": true
+    },
+    {
+      "label": "constraint-callback-controls",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "scripts/parity/constraint_callbacks.mjs"
+      ],
+      "exitCode": 0
+    },
+    {
+      "label": "constraint-callback-host-controls",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "scripts/parity/constraint_callbacks.mjs",
+        "--host"
+      ],
+      "exitCode": 0
+    },
+    {
+      "label": "numeric-viability-controls",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "scripts/parity/viability_numeric.mjs"
+      ],
+      "exitCode": 0
+    },
+    {
+      "label": "native-input-transport-controls",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "/Users/admin/dev/patamaps/patamaps/docs/acceptance/parity/memory-activation-functional-refresh-2026-10-14T00-41-29.254411+00-00/transport/driver.mjs"
+      ],
+      "exitCode": 0
+    },
+    {
+      "label": "signed-zero-controls",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "scripts/parity/viability_signed_zero.mjs"
+      ],
+      "exitCode": 0
+    },
+    {
+      "label": "original-viability",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "scripts/parity/original.mjs",
+        "--viability"
+      ],
+      "exitCode": 0,
+      "attachmentExitCode": 1,
+      "attachedObligationsVerified": true
+    },
+    {
+      "label": "viability-controls",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "scripts/parity/viability_contracts.mjs"
+      ],
+      "exitCode": 0
+    },
+    {
+      "label": "clippy",
+      "command": [
+        "/Users/admin/.cargo/bin/cargo",
+        "clippy",
+        "--locked",
+        "--workspace",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exitCode": 0
+    },
+    {
+      "label": "native",
+      "command": [
+        "/opt/homebrew/bin/python3",
+        "-B",
+        "scripts/parity/native.py"
+      ],
+      "exitCode": 0
+    },
+    {
+      "label": "installed-sdk",
+      "command": [
+        "/opt/homebrew/bin/python3",
+        "-B",
+        "scripts/parity/sdk_consumer.py"
+      ],
+      "exitCode": 0
+    },
+    {
+      "label": "evaluation-controls",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "scripts/parity/evaluation_contracts.mjs"
+      ],
+      "exitCode": 0
+    },
+    {
+      "label": "evaluation-expanded-controls",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "scripts/parity/evaluation_contracts.mjs",
+        "--expanded"
+      ],
+      "exitCode": 0
+    },
+    {
+      "label": "original-evaluation",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "scripts/parity/original.mjs",
+        "--evaluation"
+      ],
+      "exitCode": 0,
+      "attachmentExitCode": 1,
+      "attachedObligationsVerified": true
+    },
+    {
+      "label": "original-core-data",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "scripts/parity/original.mjs",
+        "--core-data"
+      ],
+      "exitCode": 0,
+      "attachmentExitCode": 1,
+      "attachedObligationsVerified": true
+    },
+    {
+      "label": "cli-controls",
+      "command": [
+        "/opt/homebrew/bin/python3",
+        "-B",
+        "scripts/parity/cli_contracts.py"
+      ],
+      "exitCode": 0
+    },
+    {
+      "label": "cli-expanded-controls",
+      "command": [
+        "/opt/homebrew/bin/python3",
+        "-B",
+        "scripts/parity/cli_contracts.py",
+        "--expanded"
+      ],
+      "exitCode": 0
+    },
+    {
+      "label": "migration-controls",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "scripts/parity/migration_contracts.mjs"
+      ],
+      "exitCode": 0
+    },
+    {
+      "label": "original-migration",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "scripts/parity/original.mjs",
+        "--migration"
+      ],
+      "exitCode": 0,
+      "attachmentExitCode": 1,
+      "attachedObligationsVerified": true
+    },
+    {
+      "label": "config-controls",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "scripts/parity/config_contracts.mjs"
+      ],
+      "exitCode": 0
+    },
+    {
+      "label": "correspondence-controls",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "scripts/parity/correspondence_contracts.mjs"
+      ],
+      "exitCode": 0
+    },
+    {
+      "label": "reference-controls",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "scripts/parity/reference_contracts.mjs"
+      ],
+      "exitCode": 0
+    },
+    {
+      "label": "reporting-controls",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "scripts/parity/reporting_contracts.mjs"
+      ],
+      "exitCode": 0
+    },
+    {
+      "label": "digest-controls",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "scripts/parity/digest_contracts.mjs"
+      ],
+      "exitCode": 0
+    },
+    {
+      "label": "digest-utf16-controls",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "scripts/parity/digest_contracts.mjs",
+        "--utf16"
+      ],
+      "exitCode": 0
+    },
+    {
+      "label": "composition-controls",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "scripts/parity/composition_contracts.mjs"
+      ],
+      "exitCode": 0
+    },
+    {
+      "label": "graph-controls",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "scripts/parity/graph_contracts.mjs"
+      ],
+      "exitCode": 0
+    },
+    {
+      "label": "factory-control",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "/Users/admin/dev/patamaps/patamaps/docs/acceptance/parity/memory-activation-functional-refresh-2026-10-14T00-52-25.226978+00-00/factory-check.mjs"
+      ],
+      "exitCode": 0
+    },
+    {
+      "label": "registry-controls",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "scripts/parity/registry_contracts.mjs"
+      ],
+      "exitCode": 0
+    },
+    {
+      "label": "file-controls",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "scripts/parity/pack_contracts.mjs",
+        "--files"
+      ],
+      "exitCode": 0
+    },
+    {
+      "label": "nested-controls",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "scripts/parity/pack_contracts.mjs",
+        "--nested"
+      ],
+      "exitCode": 0
+    },
+    {
+      "label": "pack-controls",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "scripts/parity/pack_contracts.mjs"
+      ],
+      "exitCode": 0
+    },
+    {
+      "label": "frozen-validation",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "scripts/parity/legacy_validation.mjs"
+      ],
+      "exitCode": 0
+    },
+    {
+      "label": "original-canonical",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "scripts/parity/original.mjs"
+      ],
+      "exitCode": 0,
+      "attachmentExitCode": 1,
+      "attachedObligationsVerified": true
+    },
+    {
+      "label": "original-sssom",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "scripts/parity/original.mjs",
+        "--sssom"
+      ],
+      "exitCode": 0,
+      "attachmentExitCode": 1,
+      "attachedObligationsVerified": true
+    },
+    {
+      "label": "original-discovery",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "scripts/parity/original.mjs",
+        "--discovery"
+      ],
+      "exitCode": 0,
+      "attachmentExitCode": 1,
+      "attachedObligationsVerified": true
+    },
+    {
+      "label": "original-sssom-adapter",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "scripts/parity/original.mjs",
+        "--sssom-adapter"
+      ],
+      "exitCode": 0,
+      "attachmentExitCode": 1,
+      "attachedObligationsVerified": true
+    },
+    {
+      "label": "original-validation",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "scripts/parity/original.mjs",
+        "--validation"
+      ],
+      "exitCode": 0,
+      "attachmentExitCode": 1,
+      "attachedObligationsVerified": true
+    },
+    {
+      "label": "original-registry",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "scripts/parity/original.mjs",
+        "--registry"
+      ],
+      "exitCode": 0,
+      "attachmentExitCode": 1,
+      "attachedObligationsVerified": true
+    },
+    {
+      "label": "original-graph",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "scripts/parity/original.mjs",
+        "--graph"
+      ],
+      "exitCode": 0,
+      "attachmentExitCode": 1,
+      "attachedObligationsVerified": true
+    },
+    {
+      "label": "original-composition",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "scripts/parity/original.mjs",
+        "--composition"
+      ],
+      "exitCode": 0,
+      "attachmentExitCode": 1,
+      "attachedObligationsVerified": true
+    },
+    {
+      "label": "original-reporting",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "scripts/parity/original.mjs",
+        "--reporting"
+      ],
+      "exitCode": 0,
+      "attachmentExitCode": 1,
+      "attachedObligationsVerified": true
+    },
+    {
+      "label": "original-correspondence",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "scripts/parity/original.mjs",
+        "--correspondence"
+      ],
+      "exitCode": 0,
+      "attachmentExitCode": 1,
+      "attachedObligationsVerified": true
+    },
+    {
+      "label": "original-config",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "scripts/parity/original.mjs",
+        "--config"
+      ],
+      "exitCode": 0,
+      "attachmentExitCode": 1,
+      "attachedObligationsVerified": true
+    },
+    {
+      "label": "original-workspace",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "scripts/parity/original.mjs",
+        "--workspace"
+      ],
+      "exitCode": 0,
+      "attachmentExitCode": 1,
+      "attachedObligationsVerified": true
+    },
+    {
+      "label": "original-adapter-registry",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "scripts/parity/original.mjs",
+        "--adapter-registry"
+      ],
+      "exitCode": 0,
+      "attachmentExitCode": 0,
+      "attachedObligationsVerified": true
+    },
+    {
+      "label": "workspace-controls",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "scripts/parity/workspace_contracts.mjs"
+      ],
+      "exitCode": 0
+    },
+    {
+      "label": "workspace-workflow",
+      "command": [
+        "/opt/homebrew/bin/python3",
+        "-B",
+        "scripts/parity/workspace_workflow.py"
+      ],
+      "exitCode": 0
+    },
+    {
+      "label": "discovery-api",
+      "command": [
+        "/opt/homebrew/bin/python3",
+        "-B",
+        "scripts/parity/discovery_api.py"
+      ],
+      "exitCode": 0
+    },
+    {
+      "label": "scientific-bounds",
+      "command": [
+        "/opt/homebrew/bin/python3",
+        "-B",
+        "scripts/parity/scientific_bounds.py"
+      ],
+      "exitCode": 0
+    }
+  ],
+  "functionalEvidence": [
+    {
+      "path": "docs/acceptance/parity/memory-activation-2026-10-14T00-42-05.378Z/receipt.json",
+      "digest": "sha256:b0ee69eaf42ba682379f86a9f9c2b1eed3c0fed6c7db3125c1b908fa41e80644"
+    },
+    {
+      "path": "docs/acceptance/parity/memory-activation-receivers-2026-10-14T00-43-23.693Z/receipt.json",
+      "digest": "sha256:41f2a25b0cacc54e5bb9a43bae20de8634d05e0d5e60911d1bbbb8e069c25d19"
+    },
+    {
+      "path": "docs/acceptance/parity/original-memory-activation-2026-10-14T00-43-30.277Z/receipt.json",
+      "digest": "sha256:28983f697ba2f2358c019a9180c015e92811d8642d66a20929cf2d973cc78a2b"
+    },
+    {
+      "path": "docs/acceptance/parity/constraint-callbacks-2026-10-14T00-43-33.385Z/receipt.json",
+      "digest": "sha256:21a7f71cd08912d141fe21c19e5daf49079cd2a4aeba050750daa47710d1e192"
+    },
+    {
+      "path": "docs/acceptance/parity/constraint-callback-host-2026-10-14T00-44-44.304Z/receipt.json",
+      "digest": "sha256:742b5aaf510dda68d6fa12e45920e0e52a2ee63333d977ce9a23cdbd322a354a"
+    },
+    {
+      "path": "docs/acceptance/parity/viability-numeric-2026-10-14T00-44-57.963Z/receipt.json",
+      "digest": "sha256:9355e7c84c7605b7df3817aa4346ab08b04d3fbb23d7e34bbce87ff5dd4d3045"
+    },
+    {
+      "path": "docs/acceptance/parity/memory-activation-functional-refresh-2026-10-14T00-41-29.254411+00-00/transport/receipt.json",
+      "digest": "sha256:afd8a60f1abd276aa648ddb2af046bbc706df5825f52a662ad80ed305ffe871f"
+    },
+    {
+      "path": "docs/acceptance/parity/viability-signed-zero-2026-10-14T00-45-39.702Z/receipt.json",
+      "digest": "sha256:08982426431f1d7de1e9753ad5038ca50451e3bed2b7623b62f869cd6a7958ea"
+    },
+    {
+      "path": "docs/acceptance/parity/original-viability-2026-10-14T00-45-46.197Z/receipt.json",
+      "digest": "sha256:83a84fd5f448566cc0623858eb59e7301411b72419030b878878b826e56f20b9"
+    },
+    {
+      "path": "docs/acceptance/parity/viability-controls-2026-10-14T00-45-52.415Z/receipt.json",
+      "digest": "sha256:d4f2d1a5382fc7f4a12a7b583061af64c58493c6c1c8bd755ce9ae1a44069651"
+    },
+    {
+      "path": "docs/acceptance/parity/native-2026-10-14T00-46-30.855177Z/receipt.json",
+      "digest": "sha256:7ce6509d4b9c62b794a4debaf58c2c9029e1a859f5f495f15f4cdbcafb19c01c"
+    },
+    {
+      "path": "docs/acceptance/parity/sdk-consumer-2026-10-14T00-57-49.543296Z/receipt.json",
+      "digest": "sha256:c75e0dea1f4db4f5e65e89d2c679c565435a8009d692389e175cfd1f63cb59fd"
+    },
+    {
+      "path": "docs/acceptance/parity/evaluation-controls-2026-10-14T01-01-38.174Z/receipt.json",
+      "digest": "sha256:bbe66cf9c64f2dc57ac35f57b6645316f5357245a6a95d37bd3138b68479c7e7"
+    },
+    {
+      "path": "docs/acceptance/parity/evaluation-controls-2026-10-14T01-02-04.093Z/receipt.json",
+      "digest": "sha256:bb405fbf4974ed7b2a897c7ba6c20bc195881251507eca02f2edef7cbd4f6782"
+    },
+    {
+      "path": "docs/acceptance/parity/original-evaluation-2026-10-14T01-02-07.022Z/receipt.json",
+      "digest": "sha256:f9e61a2110181a5c015b35f9dc0a0b12baddc35a61a29bdfdae06e02638ca453"
+    },
+    {
+      "path": "docs/acceptance/parity/original-core-data-2026-10-14T01-02-10.078Z/receipt.json",
+      "digest": "sha256:e63bdcce0c3fe4f8d7488cb777362c1f42b235199a2572f71091fb016695f8c2"
+    },
+    {
+      "path": "docs/acceptance/parity/cli-controls-2026-10-14T01-02-11.671785+00-00/receipt.json",
+      "digest": "sha256:98b51095e98d33403b6f616f14fcd980f13ac6281b037c47d7552ae107c46c1c"
+    },
+    {
+      "path": "docs/acceptance/parity/cli-controls-2026-10-14T01-02-34.712982+00-00/receipt.json",
+      "digest": "sha256:d60c99ce5956fc10014b6f3feb2cea91cd9a8a7a1cd006208bdd59983fd8370f"
+    },
+    {
+      "path": "docs/acceptance/parity/migration-controls-2026-10-14T01-02-48.263Z/receipt.json",
+      "digest": "sha256:b110c24f1bdc23fa31ebab5b351d51c213c06fafcae124fb41697cbf4d2c30bf"
+    },
+    {
+      "path": "docs/acceptance/parity/original-migration-2026-10-14T01-02-51.096Z/receipt.json",
+      "digest": "sha256:ddb4bf355c0cffe6278b715e05b3a5f4ea720c7e5cb3f9a197e8fb72b95705e6"
+    },
+    {
+      "path": "docs/acceptance/parity/config-controls-2026-10-14T01-02-53.051Z/receipt.json",
+      "digest": "sha256:d5eff3cfc576d5f22481c073a24e6a9d34e91ca38b0ed9e71796b42c99dd9901"
+    },
+    {
+      "path": "docs/acceptance/parity/correspondence-controls-2026-10-14T01-03-02.602Z/receipt.json",
+      "digest": "sha256:7985377fc289a2d03ce53b6fc5a62539dca05cf9519d4394df6f8bac47a00db6"
+    },
+    {
+      "path": "docs/acceptance/parity/reference-controls-2026-10-14T01-03-04.608Z/receipt.json",
+      "digest": "sha256:dc1ae7c28267eda8902a234faa1eff9900ce83d6a90f84b33910837bd6539978"
+    },
+    {
+      "path": "docs/acceptance/parity/reporting-controls-2026-10-14T01-03-11.603Z/receipt.json",
+      "digest": "sha256:69108728ce714f9859828fb8b32b6980fe579c2ecc1d63cf08e150f1f7a9c23f"
+    },
+    {
+      "path": "docs/acceptance/parity/digest-controls-2026-10-14T01-03-13.491Z/receipt.json",
+      "digest": "sha256:45a022f93543ed663b60a76873028a01ff94bbf6f52953fbcc73679cfe8acf8e"
+    },
+    {
+      "path": "docs/acceptance/parity/digest-utf16-controls-2026-10-14T01-03-14.742Z/receipt.json",
+      "digest": "sha256:d55473074a53714582568a359c6c73dab32af7b01c3b941e30a29aa7e912f1c1"
+    },
+    {
+      "path": "docs/acceptance/parity/composition-controls-2026-10-14T01-03-16.803Z/receipt.json",
+      "digest": "sha256:6c41fa30d7de394f08f20480938bc70fb1b3ca972d4d567874152cb278dcdca1"
+    },
+    {
+      "path": "docs/acceptance/parity/graph-controls-2026-10-14T01-03-18.183Z/receipt.json",
+      "digest": "sha256:b043f394039ab17532383b3610e86ba55b17405cff2088e7d7f371a3f764f72b"
+    },
+    {
+      "path": "docs/acceptance/parity/memory-activation-functional-refresh-2026-10-14T00-52-25.226978+00-00/factory-receipt.json",
+      "digest": "sha256:1d1a9bc12c6e33990de0ad2bf2fb8fc1b32e5336250f722ce7dceda90931dc26"
+    },
+    {
+      "path": "docs/acceptance/parity/registry-controls-2026-10-14T01-03-22.979Z/receipt.json",
+      "digest": "sha256:1519cc34b40a305a903c46ece5deb0441df571d62ba31753e620fbb2cd774412"
+    },
+    {
+      "path": "docs/acceptance/parity/pack-file-controls-2026-10-14T01-03-27.557Z/receipt.json",
+      "digest": "sha256:d8eb790a201975aafa77e183134dfcded21da7ffb60dc1f67c790830dff9d744"
+    },
+    {
+      "path": "docs/acceptance/parity/pack-nested-controls-2026-10-14T01-03-28.062Z/receipt.json",
+      "digest": "sha256:3ffad0d2286a19e6b56dc13e0edec497bd838641540c0c3e415ef17acbe88e62"
+    },
+    {
+      "path": "docs/acceptance/parity/pack-json-controls-2026-10-14T01-03-34.839Z/receipt.json",
+      "digest": "sha256:b39d388ad6007373be1c9648e70af2d55f2484815d10b5dada6ab02b445419eb"
+    },
+    {
+      "path": "docs/acceptance/parity/legacy-validation-2026-10-14T01-03-41.292Z/receipt.json",
+      "digest": "sha256:6c0f33c33d9e7e707bf42bfb1f18b820e54a7710c06ea81093cac93dfe44ab0f"
+    },
+    {
+      "path": "docs/acceptance/parity/original-canonical-2026-10-14T01-04-12.809Z/receipt.json",
+      "digest": "sha256:15233f65ece6c17fc09139504d9857e5e1d8e54fe0eaf473e34e93bb5857febe"
+    },
+    {
+      "path": "docs/acceptance/parity/original-sssom-2026-10-14T01-04-15.152Z/receipt.json",
+      "digest": "sha256:fd6983120ab14c7da0d6563d7d90c2394685cf50bdd05f240a042b8723f86acc"
+    },
+    {
+      "path": "docs/acceptance/parity/original-discovery-2026-10-14T01-04-20.812Z/receipt.json",
+      "digest": "sha256:1f990c45b4493ed78900f89ec5dcdfff6af9a7845e75be26b00efedc703d8a99"
+    },
+    {
+      "path": "docs/acceptance/parity/original-sssom-adapter-2026-10-14T01-04-23.646Z/receipt.json",
+      "digest": "sha256:71840fa27998b5c28c1529e61ab880bc58da916f7c447b4c404a9a3d00f2136b"
+    },
+    {
+      "path": "docs/acceptance/parity/original-validation-2026-10-14T01-04-30.603Z/receipt.json",
+      "digest": "sha256:5c7715294cc93b7ce69e75e077000bc8aea721ce249b19771379d91db9ea76c9"
+    },
+    {
+      "path": "docs/acceptance/parity/original-registry-2026-10-14T01-04-33.266Z/receipt.json",
+      "digest": "sha256:a0632b07f7e950262920ea6b838075db1ad60cdfd9fcb5393ab6f6b0aab9167f"
+    },
+    {
+      "path": "docs/acceptance/parity/original-graph-2026-10-14T01-04-37.615Z/receipt.json",
+      "digest": "sha256:65e727435821b1eddfeba2d726b715aa7a02fd6797bd5274528fee0f23cbbad1"
+    },
+    {
+      "path": "docs/acceptance/parity/original-composition-2026-10-14T01-04-40.335Z/receipt.json",
+      "digest": "sha256:3712a3451c76cbaa698869bb1564168d97f57ed0d5e609326939c6dff480e40c"
+    },
+    {
+      "path": "docs/acceptance/parity/original-reporting-2026-10-14T01-04-42.827Z/receipt.json",
+      "digest": "sha256:a1098706d724af3db0e0c36fabdc321271b3537e9be07d1b6290bdeedcf9b40c"
+    },
+    {
+      "path": "docs/acceptance/parity/original-correspondence-2026-10-14T01-04-45.145Z/receipt.json",
+      "digest": "sha256:9c97e5fc12fe937e6ddd555992a9af581dbdab32d062c88bb097c5e565941adb"
+    },
+    {
+      "path": "docs/acceptance/parity/original-config-2026-10-14T01-04-47.505Z/receipt.json",
+      "digest": "sha256:ffb48f63de455862cf22add0c7e838bf81c2bf8d8f1561c4a6855d665f53da3f"
+    },
+    {
+      "path": "docs/acceptance/parity/original-workspace-2026-10-14T01-04-50.130Z/receipt.json",
+      "digest": "sha256:6f0ce4ea438a8899a11f9d64ffbc9c7c18c4515f487e8e277b05157973f63967"
+    },
+    {
+      "path": "docs/acceptance/parity/original-adapter-registry-2026-10-14T01-04-56.029Z/receipt.json",
+      "digest": "sha256:15f0bb3fcafd6e195b46c719f9d65f25efedd24a8921623fd17a845b8d656119"
+    },
+    {
+      "path": "docs/acceptance/parity/workspace-controls-2026-10-14T01-05-00.149Z/receipt.json",
+      "digest": "sha256:d4c4badfc85da92b0d74c650e3031c0012e74cd1cda376f28edaa49ffb61827f"
+    },
+    {
+      "path": "docs/acceptance/parity/workspace-workflow-2026-10-14T01-05-03.707571+00-00/receipt.json",
+      "digest": "sha256:f7ae49abc5159f4d87b94eefc4ad88ccc5f3949741f22b6f5a3b572fc77a0bb3"
+    },
+    {
+      "path": "docs/acceptance/parity/discovery-api-2026-10-14T01-05-16.404933Z/receipt.json",
+      "digest": "sha256:8204299ddbd8940123064102eaac93ee64e6ff11e95a63b0d9028d8bca77d05b"
+    },
+    {
+      "path": "docs/acceptance/parity/scientific-bounds-2026-10-14T01-05-23.745466Z/receipt.json",
+      "digest": "sha256:3c68dc48ab5e7c8ab8009e43fc7e92d6c2c4a0900fd866778370db87a3aa3add"
+    }
+  ],
+  "binaryDigest": "sha256:e33b7c61570d1508c6c0474985edc69e7bf8c148b518db5f73ea5759fc7921fb",
+  "candidateEngine": {
+    "compiler": "sha256:9ad55b0e1a221b7a6b0396d21ed82d1e902ca8d346db6b561bb8b1faa0870e08",
+    "documentType": "executor-description",
+    "governance": "sha256:9f1708c0e3ddb4c143e2a815b71699189adb9988cbdc1c1a3476bed2cb5285fa",
+    "schemaVersion": "0.1.0",
+    "scientific": "sha256:6b6f3f4613b3880b5eefdfdd2868459178adda3761230cb1ee1989eecacdabff",
+    "workspace": "sha256:cb7ac9fc85d83c6b1699d61d69756d324f7fcf79318b1aba510f2bbfa0df6da5"
+  },
+  "sourceInventory": [
+    {
+      "path": "sdk/typescript/LICENSE",
+      "digest": "sha256:cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+    },
+    {
+      "path": "sdk/typescript/NOTICE",
+      "digest": "sha256:925cb338812aa7e03071238f2d288cd4f8a6177728656fb1dac0445afac65b68"
+    },
+    {
+      "path": "sdk/typescript/canonical.d.ts",
+      "digest": "sha256:88ae79727dbad3b0872a9c3539a95fe6c444b810ff416423f06a2cf39274ecb4"
+    },
+    {
+      "path": "sdk/typescript/canonical.mjs",
+      "digest": "sha256:882143dffe56417ea4a46049b5cf1545a9d74c1481cb10b91180a8df76e6ad40"
+    },
+    {
+      "path": "sdk/typescript/cli.mjs",
+      "digest": "sha256:2a0225cb3f468bcf9edefd4da36d88e5393dd84a4f20b8754c4020fdb4e366fe"
+    },
+    {
+      "path": "sdk/typescript/index.d.ts",
+      "digest": "sha256:aa76e1583c3a1b872ec1fa9fbbaddd8c1211a118c9f670c0d9ec1b0ba3a4bbae"
+    },
+    {
+      "path": "sdk/typescript/index.mjs",
+      "digest": "sha256:f5f5abcf9d4b199a4674795bd5e96252f65c1449d679a73dd069c17c89db6015"
+    },
+    {
+      "path": "sdk/typescript/legacy-cli.d.ts",
+      "digest": "sha256:2c765e29edc81b277ae0dfd531e04c072386c8f39195e8a371976d7ba3aac37e"
+    },
+    {
+      "path": "sdk/typescript/legacy-cli.mjs",
+      "digest": "sha256:e8b3964178e54002715de3ff90ef8688a2d1f449f75e2d3f03e19ea767d41032"
+    },
+    {
+      "path": "sdk/typescript/legacy-composition.d.ts",
+      "digest": "sha256:5d776057c00df9548b9b09590bedc48b1f0e1a6a2991d4f6ab55fdacbf6e5677"
+    },
+    {
+      "path": "sdk/typescript/legacy-composition.mjs",
+      "digest": "sha256:7c176a5062c72562d05df937977d9906587ba4e8d914551db3458d7543d461f6"
+    },
+    {
+      "path": "sdk/typescript/legacy-config.d.ts",
+      "digest": "sha256:58675d458afcf7b5db9a52c163629436d248c6172c4167254c42f73c4d4e8f15"
+    },
+    {
+      "path": "sdk/typescript/legacy-config.mjs",
+      "digest": "sha256:df331e601bf7c2bca9273263a7bed464cee471afbf4e4cc39e047db8c300d15c"
+    },
+    {
+      "path": "sdk/typescript/legacy-correspondence.d.ts",
+      "digest": "sha256:5513b17c388b56b295e854beaa7026a1c35f4ee013bd500c334a9c5f99c94c62"
+    },
+    {
+      "path": "sdk/typescript/legacy-correspondence.mjs",
+      "digest": "sha256:2a0254640dfe4d140d3766d43776523dd562808e8be5540a8032e346b12af339"
+    },
+    {
+      "path": "sdk/typescript/legacy-evaluation.d.ts",
+      "digest": "sha256:be18b5ac43fae751f0a9975e955584d15c46364a91395bfe8ed4cefc87dd7626"
+    },
+    {
+      "path": "sdk/typescript/legacy-evaluation.mjs",
+      "digest": "sha256:b45b2772fd1e6c7207fc45f8747f412b6421a2cfc4ba7cd62a6c30e9d67717f7"
+    },
+    {
+      "path": "sdk/typescript/legacy-graph.d.ts",
+      "digest": "sha256:3e6b7faaf0bb6838613b74194915422d1093565a275f936b5411023b3a361c6e"
+    },
+    {
+      "path": "sdk/typescript/legacy-graph.mjs",
+      "digest": "sha256:bcd5a775d134136a0cbb3f2e4d8e1d56b0c3a6746bd35beca22171062b8d8af8"
+    },
+    {
+      "path": "sdk/typescript/legacy-references.d.ts",
+      "digest": "sha256:feb5ed0a5dcfe3185d17c95c17afb195d2ac4a18189377feb93e737e3a22e735"
+    },
+    {
+      "path": "sdk/typescript/legacy-references.mjs",
+      "digest": "sha256:907f7d3946db7b8ec2b11d458b3dea42982c8635541a8cf28ff5ad8cc58b7ba9"
+    },
+    {
+      "path": "sdk/typescript/legacy-registry.mjs",
+      "digest": "sha256:3362107f8aac339694c3fb350a720d2ee65cd03f87e5c63d0f3103f93d2dce10"
+    },
+    {
+      "path": "sdk/typescript/legacy-reporting.d.ts",
+      "digest": "sha256:8ca2bee95e0d3b454c3a864855e7866c9e8904c15dc2193f4e061634fd7ac158"
+    },
+    {
+      "path": "sdk/typescript/legacy-reporting.mjs",
+      "digest": "sha256:32dcfbb7eb6460b3e01b9a32e495999678c8794ef5abdddfe271ff5b3d023d2d"
+    },
+    {
+      "path": "sdk/typescript/legacy-validation.d.ts",
+      "digest": "sha256:5d8adc86d38da11f9ef408585ae1d04bf8c257eec1d879238264b77b0baf5ad8"
+    },
+    {
+      "path": "sdk/typescript/legacy-validation.mjs",
+      "digest": "sha256:d87a058d042fb8a9bbc2f0884a476408faa7c62944f8b083bc8695ec0696fa1f"
+    },
+    {
+      "path": "sdk/typescript/legacy-viability.d.ts",
+      "digest": "sha256:4966b8bf93c92134e99e1fd28679c84b17e7101b92d9105b71ecab3b1474ebc3"
+    },
+    {
+      "path": "sdk/typescript/legacy-viability.mjs",
+      "digest": "sha256:48d0d3269a51762a5f0c083b400852d3dcefeece3fe2b9f4c7bd877f83e2bc78"
+    },
+    {
+      "path": "sdk/typescript/legacy-workspace.d.ts",
+      "digest": "sha256:0042b2129ef98e3e7858142194c225a698cba5581267ef14346bbe1b47d74f7a"
+    },
+    {
+      "path": "sdk/typescript/legacy-workspace.mjs",
+      "digest": "sha256:d3893cdc92010588440cc96cb0c6741314cd3bd34050dbb51e420872b1a2a45d"
+    },
+    {
+      "path": "sdk/typescript/native-input-worker.mjs",
+      "digest": "sha256:18cba500258deb0242c7ffa9a54c4d619e144f2ab36366616fa0264df4293866"
+    },
+    {
+      "path": "sdk/typescript/native-input.mjs",
+      "digest": "sha256:635b35cfba465af573bce1fbd060627fc033fb05a49d359562f681c1886b95fa"
+    },
+    {
+      "path": "sdk/typescript/package.json",
+      "digest": "sha256:763e5ade134a35dc8e9340f8f58b8649ca619cffa506eceeedba3051efa2665b"
+    },
+    {
+      "path": "sdk/typescript/relation-packs/application-topology.json",
+      "digest": "sha256:eaa7b0d9cc0c8ae966407874cfb9b587f239a12868e4e04405a658cb269407ba"
+    },
+    {
+      "path": "sdk/typescript/relation-packs/core.json",
+      "digest": "sha256:eeea5ffaf25f5d48866cb6161ca93554564aae901cf9e0df53de02f47c94c2b2"
+    },
+    {
+      "path": "sdk/typescript/relation-packs/research.json",
+      "digest": "sha256:68c2318bd29a10a1a3dbb307c63221b0a4d09a311abc39279acbb098bb16b375"
+    },
+    {
+      "path": "sdk/typescript/relation-packs/routing.json",
+      "digest": "sha256:3af9a177219da28a25129d67f9c6e4134ce276586c31ba96e849e964302c1423"
+    },
+    {
+      "path": "sdk/typescript/schemas/metamap-activation-request.schema.json",
+      "digest": "sha256:913ada8c7ac7f06664dc06ce49b19ec44a926ea5443aba694acc37e4edc63a34"
+    },
+    {
+      "path": "sdk/typescript/schemas/metamap-activation.schema.json",
+      "digest": "sha256:eb6e94db372ec7b5f9ffa82cbbe59bf4ed2b2c4a36a5d3f3f548c38d649e155b"
+    },
+    {
+      "path": "sdk/typescript/schemas/metamap-active-pointer.schema.json",
+      "digest": "sha256:21761210f51ff61d327a66da906651481ed705640e77963b2bd18139d4647811"
+    },
+    {
+      "path": "sdk/typescript/schemas/metamap-approval.schema.json",
+      "digest": "sha256:d1bbddf61a0328b1dd241fe26e0f5dbc6dba8b1aa8c43437ba1862cadc7158e8"
+    },
+    {
+      "path": "sdk/typescript/schemas/metamap-artifact-manifest.schema.json",
+      "digest": "sha256:30ba7fdea2725ea5486beb415d25f5507770c7f80ca211b173e53e5b15cd60e1"
+    },
+    {
+      "path": "sdk/typescript/schemas/metamap-change-proposal.schema.json",
+      "digest": "sha256:601de50849cefa19dcc342fd1a3b14df2e58e5886300924cc56fe5e2b2d6ae0e"
+    },
+    {
+      "path": "sdk/typescript/schemas/metamap-composition-request.schema.json",
+      "digest": "sha256:9f0101b16805f50e523220eb86f745fae45777103ad8dfb6001a9e8f63f75cac"
+    },
+    {
+      "path": "sdk/typescript/schemas/metamap-composition-result.schema.json",
+      "digest": "sha256:d7c4c83425155cc25877ff8095202fc848e66c657844ad9d8339108c1e3336ac"
+    },
+    {
+      "path": "sdk/typescript/schemas/metamap-config.schema.json",
+      "digest": "sha256:220e851a41f5f23d40216df3f8c79b230e30ba7496d3b85fd036493ed78fbad2"
+    },
+    {
+      "path": "sdk/typescript/schemas/metamap-counterfactual-v2.schema.json",
+      "digest": "sha256:1fe082607c30a2e6c0d5ea56a647800e903599509f6a5ebdee7d4dc4b9e41aa3"
+    },
+    {
+      "path": "sdk/typescript/schemas/metamap-counterfactual-v3.schema.json",
+      "digest": "sha256:5d1fa5a7dba6c27847ce6891b136b5de71707d7a478ccaacba488cdc43f5c066"
+    },
+    {
+      "path": "sdk/typescript/schemas/metamap-counterfactual.schema.json",
+      "digest": "sha256:7c62b8620651d3386a969dc632169c9642615839eb957dc2b116801580376b17"
+    },
+    {
+      "path": "sdk/typescript/schemas/metamap-derivation.schema.json",
+      "digest": "sha256:bc18a9ac153fbe9a05db6438df6cd60cf0a9e199d9f4513dc09539949f74669d"
+    },
+    {
+      "path": "sdk/typescript/schemas/metamap-explanation-request.schema.json",
+      "digest": "sha256:4aaeec7ca2a3cbc28b9c9d62002cbccc44f6998c38a68cc39034baec993e8b78"
+    },
+    {
+      "path": "sdk/typescript/schemas/metamap-explanation-result.schema.json",
+      "digest": "sha256:c02730052c3d7f2bf7ad0e5d0498dee397ef6a30110fdc2669a3d1299b9a8410"
+    },
+    {
+      "path": "sdk/typescript/schemas/metamap-explanation.schema.json",
+      "digest": "sha256:0a20277eb1460d6e536ad8dc22c09b9f2f12e2994c73010a2297848821eb56e6"
+    },
+    {
+      "path": "sdk/typescript/schemas/metamap-generation-v2.schema.json",
+      "digest": "sha256:bc1d4e4dff9368cf84fe34e204813c8e49a69f6725d55e09cf401a1cd19eed50"
+    },
+    {
+      "path": "sdk/typescript/schemas/metamap-generation.schema.json",
+      "digest": "sha256:bbd89856d5649247dc1c21d02f40ef4f642fcf2470dff770c2a8a49156c3dd8d"
+    },
+    {
+      "path": "sdk/typescript/schemas/metamap-governance.schema.json",
+      "digest": "sha256:00ce7e119ecb0ecc73bc5f3f1891b38ad25392a163a97ebcb1a287bf676ca4ca"
+    },
+    {
+      "path": "sdk/typescript/schemas/metamap-graph.schema.json",
+      "digest": "sha256:fa177ee438ac4cf55e133666c0c7a66e5c7bb0242deb78611e2e3482148bde72"
+    },
+    {
+      "path": "sdk/typescript/schemas/metamap-path-tree-v2.schema.json",
+      "digest": "sha256:c37f627d11f5ef25a0f6d9baf3ba604a191c0eb8a8914821064b843e1fe1e2d4"
+    },
+    {
+      "path": "sdk/typescript/schemas/metamap-path-tree.schema.json",
+      "digest": "sha256:b74866f9bb75a4addc06174611ca35bf6fb5d7ba3d2b5e2755dc20256e60e943"
+    },
+    {
+      "path": "sdk/typescript/schemas/metamap-projection-spec-v2.schema.json",
+      "digest": "sha256:b641293144e922664bfb90c3cb06f9211d62d7f574974fcce10d1770d2aacb89"
+    },
+    {
+      "path": "sdk/typescript/schemas/metamap-projection-spec.schema.json",
+      "digest": "sha256:c8580eed448c3259272a84b4a2cbc3f6bdb39bfb1a0f9276802b0eaf7b7723b8"
+    },
+    {
+      "path": "sdk/typescript/schemas/metamap-projection-v2.schema.json",
+      "digest": "sha256:bdd81950feb9df58f5299e3edbd01bf3225f5418f4f63f45f8b851df6b01117a"
+    },
+    {
+      "path": "sdk/typescript/schemas/metamap-projection.schema.json",
+      "digest": "sha256:869168ca2579ef9373d90eb39a3d96493cd4e723b2bdb154f132b044920afa5e"
+    },
+    {
+      "path": "sdk/typescript/schemas/metamap-repair-request.schema.json",
+      "digest": "sha256:86ab260998a775b18cfc2c73610c16c697d6c0c3c68ae20ddd55eb4a69ba668a"
+    },
+    {
+      "path": "sdk/typescript/schemas/metamap-repair-result.schema.json",
+      "digest": "sha256:1b66b01d7c152105b26a026ffdc64c06e5b6f21a603e4db354d75d412f653565"
+    },
+    {
+      "path": "sdk/typescript/schemas/metamap-repair.schema.json",
+      "digest": "sha256:0efbe108c6fac913520cae415579e3389b5d60c5bb59ebef1af7b65644e60461"
+    },
+    {
+      "path": "sdk/typescript/schemas/metamap-replay-v2.schema.json",
+      "digest": "sha256:c7d607b99fe08962c0080bd671a8c4e69b1f08316abf8376bdf359b226c6b793"
+    },
+    {
+      "path": "sdk/typescript/schemas/metamap-replay-v3.schema.json",
+      "digest": "sha256:24f354b08aba84dd98b99766c6173387a632236e266b2f8677e5ab3e91fe53eb"
+    },
+    {
+      "path": "sdk/typescript/schemas/metamap-replay.schema.json",
+      "digest": "sha256:b0c04c10b15ec29c379490d6529b99ae731030419bf3882dedf168e86cb2716c"
+    },
+    {
+      "path": "sdk/typescript/schemas/metamap-scientific-crate-profile.schema.json",
+      "digest": "sha256:ff1c361fbf610a18d56f42c2e693d41bd940a9b024d255ab24fc2617b68df17a"
+    },
+    {
+      "path": "sdk/typescript/schemas/metamap-snapshot.schema.json",
+      "digest": "sha256:20cce940bb1ac6bb54b6fff2e951747c3471ca868d8ee156a737f68ebdc09ce8"
+    },
+    {
+      "path": "sdk/typescript/schemas/metamap-source-capture.schema.json",
+      "digest": "sha256:8e8dbdaedd1980498aee76e0adcc54f1ba9a587a9375d0db3fcf86c9470bd65e"
+    },
+    {
+      "path": "sdk/typescript/schemas/metamap-source-inspection.schema.json",
+      "digest": "sha256:b460faefa805c2a762064f92f34cde7aa5f2ae7957de9f62c26c60cf0158a8f5"
+    },
+    {
+      "path": "sdk/typescript/schemas/metamap-source-receipt.schema.json",
+      "digest": "sha256:366b839eb5108309a0527b582bca3f087bf958d01ca309e5aaa68139cf348a63"
+    },
+    {
+      "path": "sdk/typescript/schemas/metamap-sssom-document.schema.json",
+      "digest": "sha256:c8fb8866de43a4b7ab3e366abc9cd886679b673d2593584a22c6771fe53c03ce"
+    },
+    {
+      "path": "sdk/typescript/schemas/metamap-sssom-source.schema.json",
+      "digest": "sha256:517eda0a0beff2158689f1b9abd48ba541a23abafb3fbff94723af42fe6a4b86"
+    },
+    {
+      "path": "sdk/typescript/schemas/metamap-trusted-consumer.schema.json",
+      "digest": "sha256:68703f0312a4c47090bceec62f4dbd5d4fb6f7892a4cba75f41849841fbee07f"
+    },
+    {
+      "path": "sdk/typescript/schemas/metamap-viability-v2.schema.json",
+      "digest": "sha256:eeae8c2248ce29f40eb73cf3359bfa0361f72cae6bd4e32b139882dffe82539b"
+    },
+    {
+      "path": "sdk/typescript/schemas/metamap-viability.schema.json",
+      "digest": "sha256:7bc63b3622dee90e2b0428a78dfa9f836a4ea7c14dbfc36ed3177fbc4b0d1e1b"
+    },
+    {
+      "path": "sdk/typescript/schemas/relation-pack-v2.schema.json",
+      "digest": "sha256:3923a94dc77e608b73534d1c31844d4bfa823fb75708d961e6d9b97e67ae41fc"
+    },
+    {
+      "path": "sdk/typescript/schemas/relation-pack.schema.json",
+      "digest": "sha256:bfac8a6fa108eb430aec628ec6952b8123468daba0178b801f7f7c1ac3e4e135"
+    },
+    {
+      "path": "sdk/typescript/schemas/sssom-1.0.0.schema.json",
+      "digest": "sha256:1034a8c60e3063f8f621b15a3dcea9f8745040a13e32f0fb91c1ee5244512bb8"
+    },
+    {
+      "path": "sdk/typescript/sssom-profile.mjs",
+      "digest": "sha256:a37260f42d6b02c5900dbefa9477386667f5286079a7a1abd12495e3dc78e533"
+    },
+    {
+      "path": "sdk/typescript/sssom.d.ts",
+      "digest": "sha256:7f58f17edc48bcb8340b73004273fa4c23a9f4b3671ca1276225f16de8254457"
+    },
+    {
+      "path": "sdk/typescript/sssom.mjs",
+      "digest": "sha256:85d25e603ab1adda6db81afec6a20214707c9859978dfe51561cb852cd17f8e5"
+    },
+    {
+      "path": "scripts/parity/cli_contracts.py",
+      "digest": "sha256:5f7a42748b969021669209a78d23ea06ea19e56f3e14886ea8fe3c6793729e06"
+    },
+    {
+      "path": "scripts/parity/discovery_api.py",
+      "digest": "sha256:9e9b57457c79cd829b9e0ec3e0570850d9054a8a3a1a293140cbc30a2a819da5"
+    },
+    {
+      "path": "scripts/parity/extract_discovery.py",
+      "digest": "sha256:a1cf02905fb9460b94017bb363d6a3b991f08bfa64e85f260fe7624099c3dda4"
+    },
+    {
+      "path": "scripts/parity/identity.py",
+      "digest": "sha256:72a29b1e11268000a70981de80d2433477ab14c4b97a521c0de8f4eb2e07fec8"
+    },
+    {
+      "path": "scripts/parity/native.py",
+      "digest": "sha256:36a2ab05cfa38093df64c21f962f42d3c0455a51ca258945698e75b7d298b250"
+    },
+    {
+      "path": "scripts/parity/prepare_oracle.py",
+      "digest": "sha256:ff417c2830aa2a9a825c76b2fe69689bf44d16a02b25b84b413fe01442af3d8d"
+    },
+    {
+      "path": "scripts/parity/retained_copy.py",
+      "digest": "sha256:4f1235b250ecd8b5a675a341703fd6de510a9980e457c7863afeda2e3147acd4"
+    },
+    {
+      "path": "scripts/parity/scientific_bounds.py",
+      "digest": "sha256:0f3883ca174621c77a15dcf204d25658cfd7e23a57ea16d1a80eae281cf708cc"
+    },
+    {
+      "path": "scripts/parity/sdk_consumer.py",
+      "digest": "sha256:5ae7c7767e595fc03507ffdb51b1def3a4cdc60c38d09519962ff820b3754877"
+    },
+    {
+      "path": "scripts/parity/sssom_profile.py",
+      "digest": "sha256:9a18c62f0e4d448ac32dd11bc7092e4bc04e9adb6bd0a9ed0bdfefc802e3d523"
+    },
+    {
+      "path": "scripts/parity/storage_guard.py",
+      "digest": "sha256:7f768143b2f1be3ca4444ea4c183ddd640d015192c8a6b54144ed89f8bd1a3a0"
+    },
+    {
+      "path": "scripts/parity/storage_guard_test.py",
+      "digest": "sha256:dc2d261a5ae2e0a08a0a2873709982cd37e2a92509b48d9fc6a79d1a4c15470f"
+    },
+    {
+      "path": "scripts/parity/verify.py",
+      "digest": "sha256:4c5f094c0012016701d2a41f8e28c6c13f6870b044c884386c83f4250b71875f"
+    },
+    {
+      "path": "scripts/parity/workspace_workflow.py",
+      "digest": "sha256:e9d36b91f90ecbe4190de747ed5a665d95f683fe5b1cc4d76d40c093464e3fb3"
+    },
+    {
+      "path": "scripts/parity/canonical.mjs",
+      "digest": "sha256:e181fd60480e2ea14b5c0850a39c98e6e5442cae1cb974a8f1554d4f5e6b9250"
+    },
+    {
+      "path": "scripts/parity/composition_contracts.mjs",
+      "digest": "sha256:cf085aa89c24758518b8e5c21bb1b5d84aec25390caff9326c2abd7861def5d8"
+    },
+    {
+      "path": "scripts/parity/config_contracts.mjs",
+      "digest": "sha256:17bcccf31e94d009f7157172a1398857ad11fa280ac8f69cbe414d5e298a8270"
+    },
+    {
+      "path": "scripts/parity/constraint_callbacks.mjs",
+      "digest": "sha256:0d4d1682cc4c6ec573689e72b7992362e7f33f106f541bb568a0e604b9c518a2"
+    },
+    {
+      "path": "scripts/parity/correspondence_contracts.mjs",
+      "digest": "sha256:d847043deb644aafd2ee6ab5fd472d34b05914aa34355ed01e74a8a9e45b4ce4"
+    },
+    {
+      "path": "scripts/parity/digest_contracts.mjs",
+      "digest": "sha256:846fc72c94a9fbc0747f136d2f0b9fdb55dab9491363c6b0cef0ab90b1901746"
+    },
+    {
+      "path": "scripts/parity/evaluation_contracts.mjs",
+      "digest": "sha256:dfc07646e4a66cf38a71238b56a14824100b3eb1d3e4cd870c829c107744afbc"
+    },
+    {
+      "path": "scripts/parity/freeze.mjs",
+      "digest": "sha256:e8d9d8bd23e8d0dcf54a0c4885ed0bc0b35afd7c394923bd0822796263e60009"
+    },
+    {
+      "path": "scripts/parity/freeze_validation.mjs",
+      "digest": "sha256:6bc569544b91b1070742de388c8b688cc6493fb8dd1413ab249fb4f1bf396041"
+    },
+    {
+      "path": "scripts/parity/graph_contracts.mjs",
+      "digest": "sha256:58c894cd206155d202a1fa65f07dd8a4d83d401f692ca866e1a491dc56f9a2dc"
+    },
+    {
+      "path": "scripts/parity/json_observables.mjs",
+      "digest": "sha256:ba015d644e02185561fbd86ae0e822ac27fc19d6b3add57c337995da32c5edc1"
+    },
+    {
+      "path": "scripts/parity/legacy_validation.mjs",
+      "digest": "sha256:4130416b34a5b00ff0ac84bd536eb135b03d0215b0b6332fd09c6dc9ceb85a69"
+    },
+    {
+      "path": "scripts/parity/memory_activation.mjs",
+      "digest": "sha256:4dc4bd0ca01934e41e1040590b96de5382d20f13f3a581cb1f1d0452510bebb5"
+    },
+    {
+      "path": "scripts/parity/migration_contracts.mjs",
+      "digest": "sha256:de1c59f27f02f8c3278a43cb39b4f097b2630784f31dae746dbf5c5e2d01bd65"
+    },
+    {
+      "path": "scripts/parity/original.mjs",
+      "digest": "sha256:b09a9f3a599c58657a7ff1f542a77ba07ece7423715dc4b6a66d5b4d770fe331"
+    },
+    {
+      "path": "scripts/parity/original_canonical.mjs",
+      "digest": "sha256:615197246d9b03b57c8db5ae2a006dc86cbab4f1f7c4c79a3aa5b1834bd2385a"
+    },
+    {
+      "path": "scripts/parity/pack_contracts.mjs",
+      "digest": "sha256:73dc0c5541d0a0809bc0affa1c58cf69eb6322c57b2e3dd835c4dbffb6a67576"
+    },
+    {
+      "path": "scripts/parity/reconcile_surface.mjs",
+      "digest": "sha256:d6954ff95fd19d9f34c22a6b986262dc1f0b1e94ae39f90b54d6c19376591931"
+    },
+    {
+      "path": "scripts/parity/reference_canonical.mjs",
+      "digest": "sha256:0be58a4f680d4ca5ca3768b95a9318f6e3bee1a35a4009de38c66fb7ea87f719"
+    },
+    {
+      "path": "scripts/parity/reference_contracts.mjs",
+      "digest": "sha256:e76c5ba9901e14a72d2c1ab13ca2e8c7189482cbf7a6c1a14bb522d635f42ed9"
+    },
+    {
+      "path": "scripts/parity/reference_json.mjs",
+      "digest": "sha256:1928543039e225f0f09deb92124aaa7c33efc1c70a67f333e30f3767f6d31dea"
+    },
+    {
+      "path": "scripts/parity/reference_sssom.mjs",
+      "digest": "sha256:aee732b5ce5ac690383e0223d303d10974edbdc74e4d0cf633503071748d5773"
+    },
+    {
+      "path": "scripts/parity/registry_contracts.mjs",
+      "digest": "sha256:f555250ca11073b4e37b5ee5eab3da7c1ae3da7db0ebf2b3512cd17da8291c32"
+    },
+    {
+      "path": "scripts/parity/reporting_contracts.mjs",
+      "digest": "sha256:969030bca5cde6d22ac21d12c616116bb7063e6dbcaacf2f93f123f7b377201e"
+    },
+    {
+      "path": "scripts/parity/source_config.mjs",
+      "digest": "sha256:4e76078d9cddf68b9d91ce36e2d4605932c42f4e3b6f81bf00ab1b6a24b39e4d"
+    },
+    {
+      "path": "scripts/parity/storage_guard.mjs",
+      "digest": "sha256:8fb2f2080f3a6a5b523739d7cb8b36fb40963a49b9ee25183ce761324650934a"
+    },
+    {
+      "path": "scripts/parity/supplement.mjs",
+      "digest": "sha256:3a1f272c944ef57b47804de26ed397090c00926f201e605f489747f0c930aaf7"
+    },
+    {
+      "path": "scripts/parity/viability_contracts.mjs",
+      "digest": "sha256:b0968043b0e42f652c4470b11a4a3310886de13b76b6a9fe238e73df5ed88e10"
+    },
+    {
+      "path": "scripts/parity/viability_numeric.mjs",
+      "digest": "sha256:a751210b5f50982c2c1be982158c8caa7520cae621d45cfc77d33f3033637c2e"
+    },
+    {
+      "path": "scripts/parity/viability_signed_zero.mjs",
+      "digest": "sha256:b5a99ffcdc853ada143df8bc4182832c105b454cc347434ffdd04c245fdb7f81"
+    },
+    {
+      "path": "scripts/parity/workspace_contracts.mjs",
+      "digest": "sha256:a3045fadbe285387de13ebc27778095d907f256d95279548da7681463ccf0aa3"
+    }
+  ],
+  "scope": "All52 current component checks bind one unchanged production binary/SDK/Node22 candidate. Twelve passing checks are carried forward after exact candidate hashes and the single isolated positive-consumer-fixture correction are verified; the installed SDK and remaining39 checks freshly execute here. Original expectations, compiler flags and all frozen controls are unchanged. Fullgoverned/v2/accepted-domain/package/required Linux gates remain open.",
+  "reusedEvidence": [
+    {
+      "path": "docs/acceptance/parity/memory-activation-functional-refresh-2026-10-14T00-41-29.254411+00-00/receipt.json",
+      "digest": "sha256:d29b67d2908b2c3a18c169f97845aa02c512cae9763398f1606b2748d814e95b",
+      "checks": 12,
+      "sameProductionBinarySdkAndNodeVerified": true,
+      "isolatedConsumerFixtureDifferenceVerified": true,
+      "correction": {
+        "beforeSource": "docs/acceptance/parity/memory-activation-scope-2026-10-14T00-12-40.717770+00-00/before-positive-fixture-correction/sdk_consumer.py",
+        "beforeDigest": "sha256:72190ccdb4e82aad4ff8c55adccaceac1baa699a991818f3f9b00f6ab9f8ce6d",
+        "afterDigest": "sha256:5ae7c7767e595fc03507ffdb51b1def3a4cdc60c38d09519962ff820b3754877",
+        "oldLine": "const brokenMemory:LegacyMetamapViabilityPolicy=JSON.parse(JSON.stringify(customPolicy));brokenMemory.mappings=[];",
+        "newLine": "const brokenMemory:LegacyMetamapViabilityPolicy=JSON.parse(JSON.stringify(customPolicy));brokenMemory.graph.id='urn:test:installed:wrong-graph';",
+        "reason": "The test callback asserted a mapping was active while the rejection fixture removed every declaration, making that callback assertion false. A graph-binding mismatch now rejects with active declarations retained. All callback/context/rejection assertions and original frozen controls remain unchanged."
+      }
+    }
+  ],
+  "nodeRuntime": {
+    "path": "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+    "digest": "sha256:a45751fbfe88440bebff63cd44814e4ed6deb642bc3e3c4a14c4f8ae0ed9e019",
+    "version": "v22.16.0",
+    "uv": "1.49.2",
+    "platform": "darwin",
+    "architecture": "arm64"
+  },
+  "diagnosticOnlyPriorFailures": [
+    "docs/acceptance/parity/viability-signed-zero-functional-refresh-2026-10-13T20-39-08.658345+00-00/receipt.json",
+    "docs/acceptance/parity/viability-timeout-diagnostic-2026-10-13T21-31-04.553167+00-00/receipt.json",
+    "docs/acceptance/parity/viability-node-timeout-probe-2026-10-13T21-39-00.654866+00-00/receipt.json"
+  ],
+  "driverDigest": "sha256:e7d769338c285d2bae203383c6294c6897d65062ce53ceb19736353d820d8f4b"
+}

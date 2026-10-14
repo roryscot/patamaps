@@ -28,6 +28,7 @@ import { createLegacyEvaluationApi } from "./legacy-evaluation.mjs";
 import {
   createLegacyViabilityApi,
   initializeLegacyConstraintRegistry,
+  initializeLegacyMetamapActivator,
 } from "./legacy-viability.mjs";
 export {
   LEGACY_METAMAP_VIABILITY_POLICY_VERSION,
@@ -480,6 +481,42 @@ export class LegacyConstraintRegistry {
     return api().LegacyConstraintRegistry.prototype.get.call(this, kind);
   }
 }
+
+export const LegacyMetamapActivator = class MetamapActivator {
+  relationRegistry;
+  constraintRegistry;
+  generation;
+  constructor(
+    relations = new LegacyRelationRegistry(),
+    constraints = new LegacyConstraintRegistry(),
+    host,
+  ) {
+    initializeLegacyMetamapActivator(
+      this,
+      api().LegacyMetamapActivator,
+      relations,
+      constraints,
+      host,
+    );
+  }
+  get current() {
+    return this.generation;
+  }
+  get governedCurrent() {
+    return Object.getOwnPropertyDescriptor(
+      api().LegacyMetamapActivator.prototype,
+      "governedCurrent",
+    ).get.call(this);
+  }
+  activate(value, policy, options = {}) {
+    return api().LegacyMetamapActivator.prototype.activate.call(
+      this,
+      value,
+      policy,
+      options,
+    );
+  }
+};
 
 export class LegacyGraph {
   #graph;
