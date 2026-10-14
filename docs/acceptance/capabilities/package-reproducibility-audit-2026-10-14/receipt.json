@@ -1,0 +1,25 @@
+{
+  "status": "observed-package-reproducibility-gap",
+  "capability": "C19",
+  "archives": [
+    {
+      "archive": ".tools/capabilities/installed-jzq4xe63/package/patamaps-draft-c9b008d3636e-source.tar.gz",
+      "gzipHeaderMtime": 1792009858,
+      "headerHex": "1f8b080882e6cf6a02ff",
+      "archiveDigest": "sha256:425ae1924d1bc3487898320f1c99f3e18ba5ee327c4c6dc6267c0231d63e3760"
+    },
+    {
+      "archive": ".tools/capabilities/installed-jzq4xe63/package/patamaps-draft-c9b008d3636e-aarch64-apple-darwin.tar.gz",
+      "gzipHeaderMtime": 1792009873,
+      "headerHex": "1f8b080891e6cf6a02ff",
+      "archiveDigest": "sha256:61598c7fd9176bd14c11a1cc716a4a009d0525187065749fd0a35f939618914c"
+    }
+  ],
+  "packager": "scripts/package.py archive() uses tarfile.open(mode=w:gz) without selecting a fixed gzip header time. Tar entries alone use mtime=0.",
+  "localPythonPrimarySource": "/opt/homebrew/Cellar/python@3.14/3.14.0/Frameworks/Python.framework/Versions/3.14/lib/python3.14/gzip.py",
+  "sourceObservation": "The installed gzip implementation uses time.time() when its header mtime is unspecified. Both actual archive headers contain nonzero timestamps.",
+  "conclusion": "Fixed tar entry times do not establish reproducible archive bytes. Recreating an identical payload at a different header time would change its digest. No two-build reproducibility trial is claimed.",
+  "nextAcceptance": "Preserve prior packager/archives, explicitly fix gzip header metadata, and independently compare two archives of identical controlled bytes created with different output paths/times. Preserve all payload files and required controls.",
+  "goal": "active-incomplete",
+  "deleted": []
+}

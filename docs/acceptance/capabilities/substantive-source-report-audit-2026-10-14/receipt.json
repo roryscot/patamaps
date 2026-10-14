@@ -1,0 +1,102 @@
+{
+  "status": "partial-substantive-audit-open-guarantees",
+  "recordedAtUtc": "2026-10-14T20:38:58.918976+00:00",
+  "candidate": "4b2507c7e4094094ddaaad97528473a3eef8fd5b",
+  "reviewedReferenceSources": [
+    {
+      "suite": "provenance",
+      "sourceRevision": "399747a4ad05a37cd8db1cedd53048fad2175be4",
+      "path": "src/__tests__/provenance.test.ts",
+      "digest": "sha256:a323b09a65b8cbe8c30886dd98a0e0a2081b530fab18854e526ac9aad634ef14",
+      "review": "Assertion bodies and relevant implementation read; this is not an original-suite execution result."
+    },
+    {
+      "suite": "source-replay",
+      "sourceRevision": "399747a4ad05a37cd8db1cedd53048fad2175be4",
+      "path": "src/__tests__/source-replay.test.ts",
+      "digest": "sha256:d8a8e462ae8cf5d1c38d734c6f598b17946e065789f0b0c2e09709a97ef63427",
+      "review": "Assertion bodies and relevant implementation read; this is not an original-suite execution result."
+    },
+    {
+      "suite": "current-sources",
+      "sourceRevision": "399747a4ad05a37cd8db1cedd53048fad2175be4",
+      "path": "src/__tests__/current-sources.test.ts",
+      "digest": "sha256:f7714fbd6869a523801ea0e57a05dd1d7d342f1353f5462b28a8677f111f4ade",
+      "review": "Assertion bodies and relevant implementation read; this is not an original-suite execution result."
+    },
+    {
+      "suite": "debugger",
+      "sourceRevision": "399747a4ad05a37cd8db1cedd53048fad2175be4",
+      "path": "src/__tests__/debugger.test.ts",
+      "digest": "sha256:f299b729606d4d8c19c62b7428303250372ca8faeee7e0fa8b9caa790da2bb55",
+      "review": "Assertion bodies and relevant implementation read; this is not an original-suite execution result."
+    },
+    {
+      "suite": "debugger-native",
+      "sourceRevision": "399747a4ad05a37cd8db1cedd53048fad2175be4",
+      "path": "src/__tests__/debugger-native.test.ts",
+      "digest": "sha256:6354b83bd8da79ff726da0e40c07000dd6818ab2e2fa0cac46b609fc0f0f4e69",
+      "review": "Assertion bodies and relevant implementation read; this is not an original-suite execution result."
+    },
+    {
+      "suite": "explanation",
+      "sourceRevision": "399747a4ad05a37cd8db1cedd53048fad2175be4",
+      "path": "src/__tests__/explanation.test.ts",
+      "digest": "sha256:e48593f33704337b7ec439ef866c079c45226164da9ae96069d789a1813d1754",
+      "review": "Assertion bodies and relevant implementation read; this is not an original-suite execution result."
+    }
+  ],
+  "resolvedFindings": [
+    {
+      "capabilities": [
+        "C11"
+      ],
+      "finding": "Governed memory activation lacked a native workflow.",
+      "resolution": "Native MemoryHost, independent controls and installed Rust consumer; earlier exact source receipts remain."
+    },
+    {
+      "capabilities": [
+        "C08",
+        "C15"
+      ],
+      "finding": "Separate capture/shard checks did not reconstruct complete recorded workspace composition.",
+      "resolution": "verify_baseline/private VerifiedWorkspace, complete pure assembly, source metadata binding, CLI verify-workspace and independent substitution controls."
+    },
+    {
+      "capabilities": [
+        "C13"
+      ],
+      "finding": "Native stylesheet policy allowed unsafe-inline rather than the exact fixed style hash.",
+      "resolution": "Pinned SHA-256 stylesheet policy; installed independent HTML hash verification remains pending in the guarded queue."
+    }
+  ],
+  "openFindings": [
+    {
+      "capabilities": [
+        "C09",
+        "C13",
+        "C15"
+      ],
+      "referenceGuarantee": "Source capture distinguishes full source composition from a distinct evaluated candidate, with exact source membership and source-only changes.",
+      "nativeObservation": "verify_baseline now checks one composed workspace. Generic capture/compare/explain retain receipts but do not provide a source-bound candidate envelope or precise per-source record attribution.",
+      "nextAcceptance": "Bind an independently verified workspace baseline to a separately replayed candidate, recompute the relationship and source record membership, preserve metadata-only and rejected/unknown states, and reject rehashed mismatches without reading or executing source locators."
+    },
+    {
+      "capabilities": [
+        "C13"
+      ],
+      "referenceGuarantee": "Bounded explanation retains the explicitly selected record while disclosing omitted records.",
+      "nativeObservation": "explain builds BTreeMap rows and applies take(maximum_subjects/maximum_mappings) before prioritizing the selection. A selection later in key order can be known but omitted from the bounded rows. This is a source-level finding; no new execution is claimed.",
+      "nextAcceptance": "Add a last-in-order selection with bounds of one, preserve that selection and all its duplicate occurrences, disclose omissions and keep missing selection explicit."
+    }
+  ],
+  "remainingAudit": "The other pinned suites still need substantive assertion/implementation review; filenames or test counts do not establish coverage.",
+  "packageMeasurement": {
+    "snapshot": ".tools/capabilities/installed-mpbjww3f/source/patamaps-draft-c9b008d3636e",
+    "documentationBytes": 698353636,
+    "fixtureBytes": 37944523,
+    "interpretation": "Historical documentation accounts for most extracted source size. A future evidence companion/index can reduce build-package copies while preserving all originals and required test inputs. No packaging exclusions changed in this audit."
+  },
+  "implementedVsVerified": "The new lineage library is verified locally and by both Linux architecture jobs. Source-bound candidate reporting and focused-selection retention are not implemented or accepted by this record.",
+  "deleted": []
+}

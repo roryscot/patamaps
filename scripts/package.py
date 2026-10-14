@@ -1,5 +1,6 @@
 """Create unpublished source/native bundles with exact inventories; no installers."""
 import argparse
+import gzip
 import hashlib
 import io
 import json
@@ -28,13 +29,16 @@ def digest(data):
 
 def archive(path, files, prefix):
     with path.open("xb") as destination:
-        with tarfile.open(fileobj=destination, mode="w:gz", format=tarfile.PAX_FORMAT) as tar:
-            for name, data in sorted(files.items()):
-                entry = tarfile.TarInfo(f"{prefix}/{name}")
-                entry.size = len(data)
-                entry.mode = 0o755 if name.startswith("bin/") else 0o644
-                entry.mtime = 0
-                tar.addfile(entry, io.BytesIO(data))
+        # Fix both container metadata and tar members. Gzip's defaults record
+        # the output filename and current time even when tar mtime is zero.
+        with gzip.GzipFile(filename="", mode="wb", fileobj=destination, mtime=0) as compressed:
+            with tarfile.open(fileobj=compressed, mode="w", format=tarfile.PAX_FORMAT) as tar:
+                for name, data in sorted(files.items()):
+                    entry = tarfile.TarInfo(f"{prefix}/{name}")
+                    entry.size = len(data)
+                    entry.mode = 0o755 if name.startswith("bin/") else 0o644
+                    entry.mtime = 0
+                    tar.addfile(entry, io.BytesIO(data))
 
 source = {}
 for directory in ["crates", "fixtures", "relation-packs", "schemas", "sdk", "adapters", "scripts", "examples", "vendor"]:

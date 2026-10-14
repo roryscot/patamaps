@@ -32,8 +32,9 @@ The owner approved requesting `workflow` scope for the existing Rory CLI login
 and completed GitHub authentication. The renewed refresh exited 0. The CLI user
 endpoint verifies `roryscot`; its OAuth scope header verifies `gist`, `read:org`,
 `repo` and `workflow`. [The authorization record](../acceptance/capabilities/github-workflow-authorization-2026-10-14/receipt.json)
-retains these non-secret observations. Current Linux gates remain open until
-the prepared candidate is pushed and both jobs execute. Historical ARM64/ext4
+retains these non-secret observations. [The actual current Linux record](../acceptance/capabilities/linux-ci-38631786116/local-retention.json)
+passes both architectures using debug and release production binaries.
+Historical ARM64/ext4
 evidence retains its original source and binary identities. No local VM is
 created by this workflow.
 

@@ -1,0 +1,71 @@
+{
+  "status": "actual-two-architecture-acceptance-passed-retained",
+  "recordedAtUtc": "2026-10-14T20:36:41.658528+00:00",
+  "sourceRevision": "4b2507c7e4094094ddaaad97528473a3eef8fd5b",
+  "run": "https://github.com/roryscot/patamaps/actions/runs/38631786116",
+  "architectures": [
+    {
+      "architecture": "aarch64",
+      "receipt": "docs/acceptance/capabilities/linux-ci-38631786116/native-linux-aarch64-4b2507c7e4094094ddaaad97528473a3eef8fd5b/receipt.json",
+      "receiptDigest": "sha256:bfbac1b7167247b736a08b6ca52e3b77bf1da5e85b946483a5a68db9756a12af",
+      "engines": {
+        "schemaVersion": "0.1.0",
+        "documentType": "executor-description",
+        "compiler": "sha256:c9b008d3636e1789d28323436633921a1e57dab97f61759b274cd13ebdb70f0a",
+        "governance": "sha256:9f97bd7ffcd39362ac8af5447f3434b6577813fd992471c2040a760164986b5e",
+        "workspace": "sha256:bcf22f96dfe18be8f01258312c09c7039a50aa8225fbc4cee5c8c356e2203609",
+        "scientific": "sha256:b80cd74b279f356dbc715fb340bbbce539a173765358509909070bc80d948038"
+      },
+      "binaries": {
+        "debug/patamaps": "sha256:e2e1fba2b389693e338fe73b23a998c9e52445132b8341b278feb73e674cfded",
+        "debug/patamaps-activator": "sha256:a4a71512144f01892f5a600a024bda4ab058a0ccea2ede95c9081f8f80696566",
+        "release/patamaps": "sha256:b3ccc767381ea8c77405525be2b3a674fdb1afce035b0f463ea01e43361df974",
+        "release/patamaps-activator": "sha256:4bd05502558f1a3b30659af13b0b4bcf77f18daa38522bdae802686d00a4a655"
+      },
+      "commands": [
+        "build-debug",
+        "rustfmt",
+        "clippy",
+        "native-debug",
+        "build-release",
+        "release-host"
+      ],
+      "archive": ".tools/capabilities/linux-ci-38631786116/native-linux-aarch64-4b2507c7e4094094ddaaad97528473a3eef8fd5b/fixtures.tar.gz",
+      "archiveDigest": "sha256:d1a64ec0d38b23a5ea94f07b36fa8e12af9abe1b3680fc7f5e77c792217c26fb",
+      "archiveMembers": 1724
+    },
+    {
+      "architecture": "x86_64",
+      "receipt": "docs/acceptance/capabilities/linux-ci-38631786116/native-linux-x86_64-4b2507c7e4094094ddaaad97528473a3eef8fd5b/receipt.json",
+      "receiptDigest": "sha256:8d569e9c4fa10dc91a32a011d6fbcadac7961da3abce2657e59ba46d4ca4aedc",
+      "engines": {
+        "schemaVersion": "0.1.0",
+        "documentType": "executor-description",
+        "compiler": "sha256:c9b008d3636e1789d28323436633921a1e57dab97f61759b274cd13ebdb70f0a",
+        "governance": "sha256:9f97bd7ffcd39362ac8af5447f3434b6577813fd992471c2040a760164986b5e",
+        "workspace": "sha256:bcf22f96dfe18be8f01258312c09c7039a50aa8225fbc4cee5c8c356e2203609",
+        "scientific": "sha256:b80cd74b279f356dbc715fb340bbbce539a173765358509909070bc80d948038"
+      },
+      "binaries": {
+        "debug/patamaps": "sha256:8abb7ec9bbf4e91c150ece2360a7619744e9e26f7c296326516dfdb32c738f1c",
+        "debug/patamaps-activator": "sha256:3429dc7cc66e9b0f45352ef141bd2eeb97988627b97f025b2f060379cb5fadbb",
+        "release/patamaps": "sha256:f14263b9ab810ebe9732f350fb5492ed2235aee7b2bb869c12d659d2e70c53d4",
+        "release/patamaps-activator": "sha256:e18058d2fffd808bf1e9f7b79b65eb6ad705a12124167f70ff162341208e87c5"
+      },
+      "commands": [
+        "build-debug",
+        "rustfmt",
+        "clippy",
+        "native-debug",
+        "build-release",
+        "release-host"
+      ],
+      "archive": ".tools/capabilities/linux-ci-38631786116/native-linux-x86_64-4b2507c7e4094094ddaaad97528473a3eef8fd5b/fixtures.tar.gz",
+      "archiveDigest": "sha256:0cd9b3bf801235df24fb334d049ec749d37cfb06831e5cc10c20add43d6e7972",
+      "archiveMembers": 1724
+    }
+  ],
+  "scope": "Full workspace tests and protected host lifecycle using debug and release production binaries; fixed overflow fixture preserves all original assertions and both tight timeout controls.",
+  "recoveryVerification": "Complete fixture archives have verified gzip/tar member lists; no restoration or production activation was performed.",
+  "deleted": []
+}

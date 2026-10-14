@@ -1,0 +1,242 @@
+{
+  "status": "passed",
+  "scope": "Development source/native package installation, Rust library customization and generated compiler-free Rust consumer, Python/TypeScript installed wrappers. Protected Linux host and complete scientific/discovery migrations are recorded separately.",
+  "retainedWork": ".tools/capabilities/installed-jzq4xe63",
+  "commands": [
+    {
+      "label": "package",
+      "argv": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "-B",
+        "/Users/admin/dev/patamaps/patamaps/scripts/package.py",
+        "--binary",
+        "/Users/admin/dev/patamaps/patamaps/target/debug/patamaps",
+        "--build-profile",
+        "development",
+        "--output",
+        "/Users/admin/dev/patamaps/patamaps/.tools/capabilities/installed-jzq4xe63/package",
+        "--acceptance-output",
+        "/Users/admin/dev/patamaps/patamaps/docs/acceptance/capabilities/installed-2026-10-14T20-30-53.202204Z"
+      ],
+      "exitCode": 0,
+      "stdout": {
+        "path": "docs/acceptance/capabilities/installed-2026-10-14T20-30-53.202204Z/package.stdout.log",
+        "digest": "sha256:d0ce499c68ab2680647dd3a543efdd391161b410b39e8602c2276172a6977ba1"
+      },
+      "stderr": {
+        "path": "docs/acceptance/capabilities/installed-2026-10-14T20-30-53.202204Z/package.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "install",
+      "argv": [
+        "/Users/admin/.cargo/bin/cargo",
+        "install",
+        "--path",
+        "/Users/admin/dev/patamaps/patamaps/.tools/capabilities/installed-jzq4xe63/source/patamaps-draft-c9b008d3636e/crates/patamaps-cli",
+        "--locked",
+        "--offline",
+        "--debug",
+        "--root",
+        "/Users/admin/dev/patamaps/patamaps/.tools/capabilities/installed-jzq4xe63/installation"
+      ],
+      "exitCode": 0,
+      "stdout": {
+        "path": "docs/acceptance/capabilities/installed-2026-10-14T20-30-53.202204Z/install.stdout.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "docs/acceptance/capabilities/installed-2026-10-14T20-30-53.202204Z/install.stderr.log",
+        "digest": "sha256:9278f945ddc8e7fc1fa8f88e71cc97223d7b6c199877e8c07d1a52eec68f0c9a"
+      }
+    },
+    {
+      "label": "installed-engine",
+      "argv": [
+        "/Users/admin/dev/patamaps/patamaps/.tools/capabilities/installed-jzq4xe63/installation/bin/patamaps",
+        "engine"
+      ],
+      "exitCode": 0,
+      "stdout": {
+        "path": "docs/acceptance/capabilities/installed-2026-10-14T20-30-53.202204Z/installed-engine.stdout.log",
+        "digest": "sha256:1d63ed95fbfe68e95cbca137a308623484de812a74e23537f1b34951ac9a6e52"
+      },
+      "stderr": {
+        "path": "docs/acceptance/capabilities/installed-2026-10-14T20-30-53.202204Z/installed-engine.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "rust-sdk",
+      "argv": [
+        "/Users/admin/.cargo/bin/cargo",
+        "run",
+        "--offline",
+        "--quiet",
+        "--bin",
+        "patamaps-independent-native-consumer"
+      ],
+      "exitCode": 0,
+      "stdout": {
+        "path": "docs/acceptance/capabilities/installed-2026-10-14T20-30-53.202204Z/rust-sdk.stdout.log",
+        "digest": "sha256:5c4fbb7d10580aaf5bf4f0887caef7353dd5fedfacde4b4a2858218c0a5764de"
+      },
+      "stderr": {
+        "path": "docs/acceptance/capabilities/installed-2026-10-14T20-30-53.202204Z/rust-sdk.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "rust-memory-host",
+      "argv": [
+        "/Users/admin/.cargo/bin/cargo",
+        "run",
+        "--offline",
+        "--quiet",
+        "--bin",
+        "memory"
+      ],
+      "exitCode": 0,
+      "stdout": {
+        "path": "docs/acceptance/capabilities/installed-2026-10-14T20-30-53.202204Z/rust-memory-host.stdout.log",
+        "digest": "sha256:63894a5ab43c1dab67dd293415b2e4bf7fa4ea5f0810fe5458b1f7d7024abd2c"
+      },
+      "stderr": {
+        "path": "docs/acceptance/capabilities/installed-2026-10-14T20-30-53.202204Z/rust-memory-host.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "runtime-build",
+      "argv": [
+        "/Users/admin/.cargo/bin/rustc",
+        "--edition=2024",
+        "runtime.rs",
+        "-o",
+        "runtime"
+      ],
+      "exitCode": 0,
+      "stdout": {
+        "path": "docs/acceptance/capabilities/installed-2026-10-14T20-30-53.202204Z/runtime-build.stdout.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "docs/acceptance/capabilities/installed-2026-10-14T20-30-53.202204Z/runtime-build.stderr.log",
+        "digest": "sha256:efdba0293a7404225c800c8cd1cc7f20d49fc9f883851d8a0e623ad19db7107c"
+      }
+    },
+    {
+      "label": "runtime",
+      "argv": [
+        "/Users/admin/dev/patamaps/patamaps/.tools/capabilities/installed-jzq4xe63/consumer/runtime"
+      ],
+      "exitCode": 0,
+      "stdout": {
+        "path": "docs/acceptance/capabilities/installed-2026-10-14T20-30-53.202204Z/runtime.stdout.log",
+        "digest": "sha256:902f4d30a6318ad21ab741f67b38666b0049d410161f1b813e69f49ba1e3897a"
+      },
+      "stderr": {
+        "path": "docs/acceptance/capabilities/installed-2026-10-14T20-30-53.202204Z/runtime.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "python-sdk",
+      "argv": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "-B",
+        "-c",
+        "from patamaps import Patamaps;import json,sys;print(json.dumps(Patamaps(sys.argv[1]).run_json([\"engine\"])))",
+        "/Users/admin/dev/patamaps/patamaps/.tools/capabilities/installed-jzq4xe63/installation/bin/patamaps"
+      ],
+      "exitCode": 0,
+      "stdout": {
+        "path": "docs/acceptance/capabilities/installed-2026-10-14T20-30-53.202204Z/python-sdk.stdout.log",
+        "digest": "sha256:1cfa0438db1bde18e89ee14b4783187a8835b52e79f3598e18761e04d247bb60"
+      },
+      "stderr": {
+        "path": "docs/acceptance/capabilities/installed-2026-10-14T20-30-53.202204Z/python-sdk.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "typescript-sdk",
+      "argv": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "/Users/admin/dev/patamaps/patamaps/.tools/capabilities/installed-jzq4xe63/consumer/sdk.mjs",
+        "/Users/admin/dev/patamaps/patamaps/.tools/capabilities/installed-jzq4xe63/installation/bin/patamaps"
+      ],
+      "exitCode": 0,
+      "stdout": {
+        "path": "docs/acceptance/capabilities/installed-2026-10-14T20-30-53.202204Z/typescript-sdk.stdout.log",
+        "digest": "sha256:f37c778de1667f4d3d53b5e82fdea08f0592cf20b418813f05160dfc9163ffae"
+      },
+      "stderr": {
+        "path": "docs/acceptance/capabilities/installed-2026-10-14T20-30-53.202204Z/typescript-sdk.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  ],
+  "deleted": [],
+  "registryPublication": "not-requested",
+  "productionActivation": "not-requested",
+  "distribution": {
+    "schemaVersion": "0.1.0",
+    "status": "unpublished-draft",
+    "target": "aarch64-apple-darwin",
+    "toolchain": "rustc 1.99.0 (b940084d7 2026-09-28)\nbinary: rustc\ncommit-hash: b940084d7eb6a299eb4bfeb8e34901bc051e7ac4\ncommit-date: 2026-09-28\nhost: aarch64-apple-darwin\nrelease: 1.99.0\nLLVM version: 23.1.1\n",
+    "engines": {
+      "compiler": "sha256:c9b008d3636e1789d28323436633921a1e57dab97f61759b274cd13ebdb70f0a",
+      "documentType": "executor-description",
+      "governance": "sha256:9f97bd7ffcd39362ac8af5447f3434b6577813fd992471c2040a760164986b5e",
+      "schemaVersion": "0.1.0",
+      "scientific": "sha256:b80cd74b279f356dbc715fb340bbbce539a173765358509909070bc80d948038",
+      "workspace": "sha256:bcf22f96dfe18be8f01258312c09c7039a50aa8225fbc4cee5c8c356e2203609"
+    },
+    "binaryDigest": "sha256:8309ba0e6aee409a460a62ed7e729d48732f9db88773ed6a69145d25df70e3c0",
+    "buildProfile": "development",
+    "buildProvenance": "Caller-declared profile; hashing and source identity do not attest a reproducible or authorized binary",
+    "sourceInventoryDigest": "sha256:2f302abd79608ce1234b768c2358f4356ab03787ab05d2130e85d75eb4719802",
+    "protectedActivationAcceptance": "recorded-separately",
+    "acceptanceOutputOutsideSourcePayload": "docs/acceptance/capabilities/installed-2026-10-14T20-30-53.202204Z",
+    "sourceArchive": {
+      "path": "patamaps-draft-c9b008d3636e-source.tar.gz",
+      "digest": "sha256:425ae1924d1bc3487898320f1c99f3e18ba5ee327c4c6dc6267c0231d63e3760"
+    },
+    "nativeArchive": {
+      "path": "patamaps-draft-c9b008d3636e-aarch64-apple-darwin.tar.gz",
+      "digest": "sha256:61598c7fd9176bd14c11a1cc716a4a009d0525187065749fd0a35f939618914c"
+    }
+  },
+  "sourceInventoryEntries": 12137,
+  "engines": {
+    "schemaVersion": "0.1.0",
+    "documentType": "executor-description",
+    "compiler": "sha256:c9b008d3636e1789d28323436633921a1e57dab97f61759b274cd13ebdb70f0a",
+    "governance": "sha256:9f97bd7ffcd39362ac8af5447f3434b6577813fd992471c2040a760164986b5e",
+    "workspace": "sha256:bcf22f96dfe18be8f01258312c09c7039a50aa8225fbc4cee5c8c356e2203609",
+    "scientific": "sha256:b80cd74b279f356dbc715fb340bbbce539a173765358509909070bc80d948038"
+  },
+  "nativeConsumption": "Hello, Ada!",
+  "customEvaluatorBinding": {
+    "evaluator": {
+      "digest": "sha256:ab2ada2fdc529f64dd8bd93c9d79b65e714703c5ae4c224c8dc02ae8ab4ff79b",
+      "id": "urn:evaluator:installed"
+    },
+    "kind": "consumer:requires-active"
+  },
+  "memoryHost": {
+    "bootstrap": true,
+    "executor": "sha256:8c73205ba588ab7e9ba6f0fa13163af00407a8fe866e6d1641e356103f0f8467",
+    "files": 8,
+    "manifest": "sha256:edd14a7f9382e2b54a80a34bb45d9eb0b2d8d8a210405f8b2f11c2e82278a6f2",
+    "move": true,
+    "profile": "patamaps-memory-draft-1",
+    "rejectionPreservesState": true,
+    "retryRechecked": true,
+    "rollback": true
+  },
+  "memoryConsumerSourceDigest": "sha256:f1f1e115a773d9751c62c11872762d738982a169e879798f3c1174d67b596bbe",
+  "completedAtUtc": "2026-10-14T20:31:47.282118+00:00"
+}
