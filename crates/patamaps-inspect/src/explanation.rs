@@ -1,6 +1,7 @@
 use patamaps_contracts::*;
 use patamaps_core::{CheckError, CheckedGraph, ImpactReport, Issue, impact};
 use patamaps_projection::{CaptureRecord, compare, replay};
+use patamaps_workspace::{VerifiedSourceEvaluation, compare_source_evaluations};
 use serde::{Deserialize, Serialize};
 use serde_json::{Value, json};
 use std::collections::{BTreeMap, BTreeSet};
@@ -46,6 +47,26 @@ fn state(n: usize) -> &'static str {
 }
 fn serialized<T: Serialize>(value: T) -> Result<Value, CheckError> {
     Ok(serde_json::to_value(value).map_err(ContractError::from)?)
+}
+fn focused<'a>(
+    records: &'a BTreeMap<String, Vec<Value>>,
+    selected: Option<&str>,
+    dependencies: &BTreeSet<String>,
+    limit: usize,
+) -> Vec<(&'a String, &'a Vec<Value>)> {
+    let mut rows: Vec<_> = records.iter().collect();
+    let priority = |id: &String| {
+        if selected == Some(id.as_str()) {
+            0
+        } else if dependencies.contains(id) {
+            1
+        } else {
+            2
+        }
+    };
+    rows.sort_by(|(a, _), (b, _)| (priority(a), a).cmp(&(priority(b), b)));
+    rows.truncate(limit);
+    rows
 }
 pub fn explain(
     capture: &CaptureRecord,
@@ -98,8 +119,12 @@ pub fn explain(
             dependency_ids.insert(m.id.clone());
         }
     }
-    let subjects:Vec<_>=entities.iter().take(maximum_subjects).map(|(id,records)|json!({"id":id,"state":state(records.len()),"records":records,"relevance":if dependency_ids.contains(id){"selection-or-dependency"}else{"other"}})).collect();
-    let mapped:Vec<_>=mappings.iter().take(maximum_mappings).map(|(id,records)|{
+    let (selected_entity, selected_mapping) = match selection.kind {
+        SelectionKind::Entity => (Some(selection.id.as_str()), None),
+        SelectionKind::Mapping => (None, Some(selection.id.as_str())),
+    };
+    let subjects:Vec<_>=focused(&entities,selected_entity,&dependency_ids,maximum_subjects).into_iter().map(|(id,records)|json!({"id":id,"state":state(records.len()),"records":records,"relevance":if dependency_ids.contains(id){"selection-or-dependency"}else{"other"}})).collect();
+    let mapped:Vec<_>=focused(&mappings,selected_mapping,&dependency_ids,maximum_mappings).into_iter().map(|(id,records)|{
         let active=capture.result["generation"]["activeMappings"].as_array().map(|ids|ids.iter().any(|v|v==id));
         json!({"id":id,"state":state(records.len()),"records":records,"activity":match active{Some(true)=>"active",Some(false)=>"inactive",None=>"unavailable"},"relevance":if dependency_ids.contains(id){"selection-or-dependency"}else{"other"}})
     }).collect();
@@ -153,6 +178,51 @@ pub fn explain(
         record,
     })
 }
+/// Explain the same candidate with its separately verified source composition.
+/// Every source claim is recomputed from checked workspace records; this does
+/// not read a locator, authenticate a provider or authorize an activation.
+pub fn explain_source(
+    evaluation: &VerifiedSourceEvaluation<'_>,
+    before: Option<&VerifiedSourceEvaluation<'_>>,
+    selection: InspectionSelection,
+    maximum_subjects: usize,
+    maximum_mappings: usize,
+) -> Result<CheckedExplanation, CheckError> {
+    let source_error = |error: patamaps_workspace::Error| {
+        CheckError(vec![Issue::error(
+            "EXPLANATION_SOURCE_BINDING",
+            error.to_string(),
+            "source-inspection",
+        )])
+    };
+    if before.is_some_and(|old| old.source_graph().id != evaluation.source_graph().id) {
+        return Err(CheckError(vec![Issue::error(
+            "EXPLANATION_SOURCE_BASELINE",
+            "Source comparison requires the same workspace graph ID",
+            "source-inspection",
+        )]));
+    }
+    let source = evaluation.inspect().map_err(source_error)?;
+    let mut report = explain(
+        evaluation.candidate().record(),
+        before.map(|v| v.candidate().record()),
+        selection,
+        maximum_subjects,
+        maximum_mappings,
+    )?;
+    report.record["sources"]["membership"] = json!("verified-recorded-shards-to-candidate-inputs");
+    report.record["sources"]["inspection"] = source.record().clone();
+    if let Some(old) = before {
+        let compared = compare_source_evaluations(old, evaluation).map_err(source_error)?;
+        report.record["sources"]["comparison"] =
+            json!({"status":"compared","report":compared.record()});
+    }
+    parse_value(&canonical_bytes(&report.record)?)?;
+    report.digest = canonical_digest(&report.record)?;
+    report.id = format!("urn:patamaps:explanation:{}", &report.digest[7..]);
+    Ok(report)
+}
+
 fn escape(value: &str) -> String {
     let mut out = String::with_capacity(value.len());
     for c in value.chars() {

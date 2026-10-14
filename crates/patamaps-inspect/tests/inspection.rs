@@ -358,6 +358,93 @@ fn capture_fn(inputs: CaptureInputs) -> CaptureRecord {
     capture(inputs, vec![]).unwrap()
 }
 #[test]
+fn bounded_focus_retains_late_selected_entities_and_ambiguous_mappings() {
+    let capture = base();
+    let before = canonical_bytes(&capture).unwrap();
+    let selected = "urn:handler:b";
+    let report = explain(
+        &capture,
+        None,
+        InspectionSelection {
+            kind: SelectionKind::Entity,
+            id: selected.into(),
+        },
+        1,
+        1,
+    )
+    .unwrap();
+    assert_eq!(report.record()["selection"]["state"], "known");
+    assert_eq!(report.record()["subjects"][0]["id"], selected);
+    assert_eq!(
+        report.record()["navigation"]["subjectIds"],
+        json!([selected])
+    );
+    assert_eq!(report.record()["navigation"]["omittedSubjects"], 2);
+    assert_eq!(report.record()["navigation"]["status"], "truncated");
+    assert_eq!(canonical_bytes(&capture).unwrap(), before);
+
+    let mut inputs = capture.inputs.clone();
+    let mut late = inputs.graph.mappings[0].clone();
+    late.id = "urn:mapping:z-selected".into();
+    let mut conflicting = late.clone();
+    conflicting.targets = vec!["urn:handler:b".into()];
+    inputs.graph.mappings.extend([late, conflicting]);
+    let capture = capture_fn(inputs);
+    let before = canonical_bytes(&capture).unwrap();
+    let report = explain(
+        &capture,
+        None,
+        InspectionSelection {
+            kind: SelectionKind::Mapping,
+            id: "urn:mapping:z-selected".into(),
+        },
+        1,
+        1,
+    )
+    .unwrap();
+    assert_eq!(report.record()["selection"]["state"], "ambiguous");
+    assert_eq!(report.record()["selection"]["occurrences"], 2);
+    assert_eq!(
+        report.record()["mappings"][0]["id"],
+        "urn:mapping:z-selected"
+    );
+    assert_eq!(
+        report.record()["mappings"][0]["records"]
+            .as_array()
+            .unwrap()
+            .len(),
+        2
+    );
+    assert_ne!(
+        report.record()["mappings"][0]["records"][0],
+        report.record()["mappings"][0]["records"][1]
+    );
+    assert_eq!(report.record()["mappings"][0]["activity"], "unavailable");
+    assert_eq!(report.record()["navigation"]["omittedMappings"], 1);
+    assert_eq!(canonical_bytes(&capture).unwrap(), before);
+
+    let missing = explain(
+        &capture,
+        None,
+        InspectionSelection {
+            kind: SelectionKind::Mapping,
+            id: "urn:mapping:missing".into(),
+        },
+        1,
+        1,
+    )
+    .unwrap();
+    assert_eq!(missing.record()["selection"]["state"], "missing");
+    assert_eq!(missing.record()["selection"]["occurrences"], 0);
+    assert!(
+        missing.record()["mappings"]
+            .as_array()
+            .unwrap()
+            .iter()
+            .all(|m| m["id"] != "urn:mapping:missing")
+    );
+}
+#[test]
 fn hot_graph_work_and_recursive_result_data_cannot_bypass_controls() {
     let base = base();
     let token = CancellationToken::default();

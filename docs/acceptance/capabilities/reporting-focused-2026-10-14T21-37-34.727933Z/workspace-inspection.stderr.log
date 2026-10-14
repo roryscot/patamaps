@@ -1,0 +1,15 @@
+   Compiling patamaps-projection v0.1.0 (/Users/admin/dev/patamaps/patamaps/crates/patamaps-projection)
+   Compiling patamaps-workspace v0.1.0 (/Users/admin/dev/patamaps/patamaps/crates/patamaps-workspace)
+   Compiling patamaps-governance v0.1.0 (/Users/admin/dev/patamaps/patamaps/crates/patamaps-governance)
+   Compiling patamaps-inspect v0.1.0 (/Users/admin/dev/patamaps/patamaps/crates/patamaps-inspect)
+error[E0609]: no field `label` on type `Mapping`
+   --> crates/patamaps-workspace/tests/source_evaluation.rs:107:15
+    |
+107 |     duplicate.label = Some("second occurrence".into());
+    |               ^^^^^ unknown field
+    |
+    = note: available fields are: `id`, `relation`, `sources`, `targets`, `cardinality` ... and 5 others
+
+For more information about this error, try `rustc --explain E0609`.
+error: could not compile `patamaps-workspace` (test "source_evaluation") due to 1 previous error
+warning: build failed, waiting for other jobs to finish...

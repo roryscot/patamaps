@@ -140,6 +140,50 @@ enum Command {
         #[command(flatten)]
         output: Output,
     },
+    /// Capture a distinct candidate against a verified recorded workspace.
+    SourceEvaluate {
+        baseline: PathBuf,
+        inputs: PathBuf,
+        #[command(flatten)]
+        output: Output,
+    },
+    /// Verify source/candidate bindings without current source reads.
+    SourceVerify {
+        evaluation: PathBuf,
+        #[command(flatten)]
+        output: Output,
+    },
+    /// Compare two verified source/candidate evaluations, retaining unknowns.
+    SourceCompare {
+        before: PathBuf,
+        after: PathBuf,
+        #[command(flatten)]
+        output: Output,
+    },
+    /// Export the exact verified candidate for existing artifact/governance APIs.
+    SourceCandidate {
+        evaluation: PathBuf,
+        #[command(flatten)]
+        output: Output,
+    },
+    /// Inspect verified sources and candidate as JSON or the existing debugger.
+    SourceInspect {
+        evaluation: PathBuf,
+        #[arg(long)]
+        before: Option<PathBuf>,
+        #[arg(long)]
+        subject: String,
+        #[arg(long)]
+        mapping: bool,
+        #[arg(long)]
+        html: bool,
+        #[arg(long, default_value_t = 128)]
+        maximum_subjects: usize,
+        #[arg(long, default_value_t = 256)]
+        maximum_mappings: usize,
+        #[command(flatten)]
+        output: Output,
+    },
     /// Search only explicitly supplied edits; no changes are written or applied.
     Repair {
         request: PathBuf,
@@ -1466,6 +1510,97 @@ fn run(command: Command) -> Result<(), Failure> {
                     "authorizationNow":"not-evaluated", "active":"not-evaluated"
                 }),
             )
+        }
+        Command::SourceEvaluate {
+            baseline,
+            inputs,
+            output,
+        } => {
+            let baseline = read::<patamaps_workspace::WorkspaceBaseline>(&baseline)?;
+            let verified = patamaps_workspace::verify_baseline(&baseline)
+                .map_err(|e| Failure::Operational(e.to_string()))?;
+            let record = patamaps_workspace::capture_source_evaluation(&verified, read(&inputs)?)
+                .map_err(|e| Failure::Operational(e.to_string()))?;
+            json(&output, &record)
+        }
+        Command::SourceVerify { evaluation, output } => {
+            let record = read::<patamaps_workspace::SourceEvaluationRecord>(&evaluation)?;
+            let verified = patamaps_workspace::verify_source_evaluation(&record)
+                .map_err(|e| Failure::Operational(e.to_string()))?;
+            json(
+                &output,
+                &verified
+                    .inspect()
+                    .map_err(|e| Failure::Operational(e.to_string()))?,
+            )
+        }
+        Command::SourceCompare {
+            before,
+            after,
+            output,
+        } => {
+            let before = read::<patamaps_workspace::SourceEvaluationRecord>(&before)?;
+            let after = read::<patamaps_workspace::SourceEvaluationRecord>(&after)?;
+            let a = patamaps_workspace::verify_source_evaluation(&before)
+                .map_err(|e| Failure::Operational(e.to_string()))?;
+            let b = patamaps_workspace::verify_source_evaluation(&after)
+                .map_err(|e| Failure::Operational(e.to_string()))?;
+            json(
+                &output,
+                &patamaps_workspace::compare_source_evaluations(&a, &b)
+                    .map_err(|e| Failure::Operational(e.to_string()))?,
+            )
+        }
+        Command::SourceCandidate { evaluation, output } => {
+            let record = read::<patamaps_workspace::SourceEvaluationRecord>(&evaluation)?;
+            let verified = patamaps_workspace::verify_source_evaluation(&record)
+                .map_err(|e| Failure::Operational(e.to_string()))?;
+            json(&output, verified.candidate().record())
+        }
+        Command::SourceInspect {
+            evaluation,
+            before,
+            subject,
+            mapping,
+            html,
+            maximum_subjects,
+            maximum_mappings,
+            output,
+        } => {
+            let record = read::<patamaps_workspace::SourceEvaluationRecord>(&evaluation)?;
+            let old = before
+                .as_ref()
+                .map(|p| read::<patamaps_workspace::SourceEvaluationRecord>(p))
+                .transpose()?;
+            let verified = patamaps_workspace::verify_source_evaluation(&record)
+                .map_err(|e| Failure::Operational(e.to_string()))?;
+            let old = old
+                .as_ref()
+                .map(patamaps_workspace::verify_source_evaluation)
+                .transpose()
+                .map_err(|e| Failure::Operational(e.to_string()))?;
+            let report = patamaps_inspect::explain_source(
+                &verified,
+                old.as_ref(),
+                patamaps_inspect::InspectionSelection {
+                    kind: if mapping {
+                        patamaps_inspect::SelectionKind::Mapping
+                    } else {
+                        patamaps_inspect::SelectionKind::Entity
+                    },
+                    id: subject,
+                },
+                maximum_subjects,
+                maximum_mappings,
+            )?;
+            if html {
+                write(
+                    &output,
+                    patamaps_inspect::render_debugger(&report)?.as_bytes(),
+                )
+            } else {
+                json(&output, &report)
+            }
         }
         Command::Repair {
             request,

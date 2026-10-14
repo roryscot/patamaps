@@ -1,0 +1,46 @@
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 8 tests
+test bounded_focus_retains_late_selected_entities_and_ambiguous_mappings ... ok
+test captured_explanation_preserves_rejection_ambiguity_missing_sources_and_safe_html ... ok
+test exact_duplicate_removal_and_unchanged_keeper_are_enforced ... ok
+test finite_space_compiles_ranks_and_requires_approval_without_source_mutation ... ok
+test hot_graph_work_and_recursive_result_data_cannot_bypass_controls ... ok
+test partial_budgets_cancellation_and_overflow_never_claim_minimality ... ok
+test protected_facts_and_exact_record_expectations_block_edits ... ok
+test restore_and_supply_can_be_jointly_useful_but_never_replace_policy_or_invent_proofs ... ok
+
+test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.41s
+
+
+running 3 tests
+test ambiguous_source_focus_retains_records_and_reports_unavailable_comparison ... ok
+test focused_source_report_and_escaped_html_use_verified_offline_context ... FAILED
+test source_only_change_invalidates_the_actual_artifact_manifest ... FAILED
+
+failures:
+
+---- focused_source_report_and_escaped_html_use_verified_offline_context stdout ----
+
+thread 'focused_source_report_and_escaped_html_use_verified_offline_context' (73810387) panicked at crates/patamaps-inspect/tests/source_inspection.rs:76:5:
+assertion failed: html.contains("style-src &#39;sha256-")
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+Retained source-evaluation fixture: /var/folders/tr/qmsqldfn59591rbflj14mc4r0000gn/T/patamaps-source-evaluation-3365-1
+
+---- source_only_change_invalidates_the_actual_artifact_manifest stdout ----
+
+thread 'source_only_change_invalidates_the_actual_artifact_manifest' (73810397) panicked at crates/patamaps-inspect/tests/source_inspection.rs:150:10:
+called `Result::unwrap()` on an `Err` value: CheckError([Issue { severity: Error, code: "GOVERNANCE_INVALID_TIME", message: "Expected exact UTC timestamp with milliseconds", subject_id: Some("governance"), waived_by: None }])
+Retained source-evaluation fixture: /var/folders/tr/qmsqldfn59591rbflj14mc4r0000gn/T/patamaps-source-evaluation-3365-2
+
+
+failures:
+    focused_source_report_and_escaped_html_use_verified_offline_context
+    source_only_change_invalidates_the_actual_artifact_manifest
+
+test result: FAILED. 1 passed; 2 failed; 0 ignored; 0 measured; 0 filtered out; finished in 1.42s
+

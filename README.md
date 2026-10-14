@@ -4,7 +4,7 @@ Patamaps is a Rust-native correspondence compiler built against MetaMap’s subs
 
 The [active capability build plan](BUILD_PLAN.md) uses `@roryscot/metamap` 0.7.1 engine `399747a4ad05a37cd8db1cedd53048fad2175be4` as its reference. The owner’s revised goal prioritizes complete native workflows and required semantic, security, format, canonicalization, hash and signature guarantees. Exact JavaScript exception wording, object identity, prototypes and incidental mutation are required only for a demonstrated integration. The [test classification policy](docs/TEST_CLASSIFICATION.md) preserves that distinction without changing original evidence.
 
-**Completion remains open.** Native draft components implement the compiler, scoped ownership, checked derivations, uncertainty/risk, projection/path trees, replay, governance, memory and Linux activation, inspection/repair, workspaces and scientific integration. The [verified checkpoint](docs/acceptance/capabilities/verified-installed-linux-checkpoint-2026-10-14T20-44-30.393420Z/receipt.json) matches current source to installed Rust/Python/TypeScript, scientific/discovery, workspace and ARM64/x86_64 Linux acceptance. The remaining source audit identifies reporting between a source workspace and a distinct candidate, plus retaining the selected inspector record under small view limits. The full substantive audit remains open.
+**Completion remains open.** Native draft components implement the compiler, scoped ownership, checked derivations, uncertainty/risk, projection/path trees, replay, governance, memory and Linux activation, inspection/repair, workspaces and scientific integration. The [verified checkpoint](docs/acceptance/capabilities/verified-installed-linux-checkpoint-2026-10-14T20-44-30.393420Z/receipt.json) matches its recorded source to installed Rust/Python/TypeScript, scientific/discovery, workspace and ARM64/x86_64 Linux acceptance. Source workspace versus distinct candidate reporting and bounded selected-record retention now pass focused native checks. The prior installed/Linux checkpoint is historical for this changed candidate; refreshed compiler, installed-consumer and platform milestones plus the full substantive audit remain open.
 
 The [native compiler and portable activation milestone](docs/acceptance/capabilities/compiler-2026-10-14T19-34-05.354843Z/receipt.json) passes ten stages: 200 portable Rust tests, seven governed memory controls, portable transport and checked-state type controls, 40 meaningful MetaMap comparisons, the complete lifecycle, real Rust/TypeScript consumer moves, original-byte integrity, Rustfmt and Clippy. [Decision 0012](docs/decisions/0012-native-constraint-evaluators.md) defines native custom constraints; [decision 0014](docs/decisions/0014-governed-memory-host.md) defines the new memory host and its separate profile.
 
@@ -21,6 +21,24 @@ The [earlier compatibility component checkpoint](docs/acceptance/parity/uncertai
 Local heavy checks use the storage supervisor installed at `~/Documents/Codex/storage-safeguards`; missing installation, a busy shared lease or insufficient capacity refuses the run. Check drivers preserve sources, requests, outputs and receipts. No VM is needed by the compiler. The approved VM disk and duplicate request inventories were removed with retained deletion receipts and verified recovery copies where applicable; further deletion requires an exact list and approval.
 
 The scope and architecture below explain the native project. Earlier R0–R11 milestone descriptions are design context; current delivery order and acceptance are controlled by [BUILD_PLAN.md](BUILD_PLAN.md).
+
+## Inspect sources and a distinct candidate
+
+`source-evaluate BASELINE INPUTS` binds explicit capture inputs to a verified
+workspace baseline under `patamaps-source-evaluation-draft-1`. `source-verify`
+reconstructs the recorded composition and candidate offline. `source-compare`
+reports source and candidate changes separately; duplicate identities or rejected
+consumer outputs retain explicit unavailable states.
+
+`source-inspect EVALUATION --subject ID --maximum-subjects 1` keeps the selected
+record visible and reports exact recorded shard membership. Add `--before OLD`
+for comparison or `--html` for the escaped debugger. `source-candidate` exports
+the exact verified capture for existing artifact/proposal APIs. Source-only
+changes alter that capture and its artifacts, requiring a fresh external approval.
+These reports do not authenticate providers, establish truth, rediscover current
+sources, or authorize activation. [Decision 0018](docs/decisions/0018-source-candidate-evaluation.md)
+and [the focused checks](docs/acceptance/capabilities/reporting-focused-2026-10-14T21-41-54.529457Z/receipt.json)
+identify the contract and native controls.
 
 ## Run the current native preview
 
