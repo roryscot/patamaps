@@ -1,0 +1,1007 @@
+{
+  "schemaVersion": "1.0.0",
+  "status": "matched",
+  "supervision": {
+    "mode": "inherited-live-supervisor",
+    "project": "/Users/admin/dev/patamaps/patamaps",
+    "configurationDigest": "sha256:77505e4ca3960c2df14617ffa5951838a6b84e51d6f8ed715ec60faa3c9e8187",
+    "policy": {
+      "version": 1,
+      "minimumFreeBytes": 0,
+      "reserveFreeBytes": 1000000000,
+      "maximumRunGrowthBytes": 8000000000,
+      "maximumRetainedBytes": 50000000000,
+      "monitorIntervalMs": 2000,
+      "terminationGraceMs": 15000
+    },
+    "availableBytesAtEntry": 10592595968
+  },
+  "referenceEngine": "399747a4ad05a37cd8db1cedd53048fad2175be4",
+  "corpus": {
+    "path": "fixtures/parity/composition-controls.json",
+    "digest": "sha256:a27acfa56b0eefee0c190f5f6f36f1abd0fd7d61eb554cc0c8fd94290e2fcdb3"
+  },
+  "scenarios": {
+    "path": "fixtures/parity/composition-scenarios.mjs",
+    "digest": "sha256:cafc5e7cc8925660f2d0f4b591f9ec4bf6f184be2c0b43a4539efd0338601e80"
+  },
+  "candidate": {
+    "binaryDigest": "sha256:3947089a08124d15deb4a1fbadc6981f2865fb892c014a742a2ca500982cf603",
+    "engine": {
+      "compiler": "sha256:2e86f59e74f0202a64508d4489a713e8149b2727d8c8cde94a6ed4c3be710234",
+      "documentType": "executor-description",
+      "governance": "sha256:41f572a6863382b91fb758968f7951417482b307ade096b3b5e124422e847505",
+      "schemaVersion": "0.1.0",
+      "scientific": "sha256:553aa5808df6465d826e3533713fb13cc482175a7665696f68a8bf02bdcb275e",
+      "workspace": "sha256:e06aaefefcc93f7e35972428a4637345a51e5f6a15bc34e87adc527b5dda2d89"
+    },
+    "sdkSourceInventory": [
+      {
+        "path": "sdk/typescript/legacy-registry.mjs",
+        "digest": "sha256:3362107f8aac339694c3fb350a720d2ee65cd03f87e5c63d0f3103f93d2dce10"
+      },
+      {
+        "path": "sdk/typescript/legacy-graph.mjs",
+        "digest": "sha256:bcd5a775d134136a0cbb3f2e4d8e1d56b0c3a6746bd35beca22171062b8d8af8"
+      },
+      {
+        "path": "sdk/typescript/legacy-composition.mjs",
+        "digest": "sha256:7c176a5062c72562d05df937977d9906587ba4e8d914551db3458d7543d461f6"
+      },
+      {
+        "path": "sdk/typescript/legacy-composition.d.ts",
+        "digest": "sha256:5d776057c00df9548b9b09590bedc48b1f0e1a6a2991d4f6ab55fdacbf6e5677"
+      },
+      {
+        "path": "sdk/typescript/legacy-graph.d.ts",
+        "digest": "sha256:3e6b7faaf0bb6838613b74194915422d1093565a275f936b5411023b3a361c6e"
+      },
+      {
+        "path": "sdk/typescript/legacy-validation.mjs",
+        "digest": "sha256:910a25544af3a1ce090e970f4be033433148888e9730fcee122ad51f7b9c9ba0"
+      },
+      {
+        "path": "sdk/typescript/legacy-validation.d.ts",
+        "digest": "sha256:a7f334aacc5c7407252af755420f9f7befe76cd995c1f10c80878255a9ef1029"
+      },
+      {
+        "path": "sdk/typescript/canonical.mjs",
+        "digest": "sha256:1fb585d17e00d783e7ce43b7f4a5c45fe848dea28d0eb364713ef134fae1d214"
+      }
+    ]
+  },
+  "counts": {
+    "cases": 36,
+    "matched": 36,
+    "differences": 0,
+    "nativeExecutions": 43
+  },
+  "scope": "Component comparison only; no full export or arbitrary-JavaScript composition obligation is closed. Reference observations were frozen first; candidate merge, conflict and equivalence requests execute Rust. SDK object identities are compared as booleans. Supplemental error.report and stack details remain outside this comparison.",
+  "originalGitBlobsVerifiedBeforeAndAfter": 610,
+  "results": [
+    {
+      "name": "empty shard list",
+      "matched": true,
+      "observed": {
+        "status": "observed",
+        "value": {
+          "name": "MetamapCompositionError",
+          "message": "At least one metamap shard is required",
+          "hasIdentifier": true,
+          "compositionError": true,
+          "typeError": false
+        }
+      },
+      "expected": {
+        "status": "observed",
+        "value": {
+          "name": "MetamapCompositionError",
+          "message": "At least one metamap shard is required",
+          "hasIdentifier": true,
+          "compositionError": true,
+          "typeError": false
+        }
+      }
+    },
+    {
+      "name": "single shard header and metadata",
+      "matched": true,
+      "observed": {
+        "status": "observed",
+        "value": {
+          "$schema": "./schemas/metamap-graph.schema.json",
+          "schemaVersion": "2.0.0",
+          "id": "urn:graph:composed",
+          "namespace": "output",
+          "label": "output label",
+          "revision": "output revision",
+          "relationPacks": [],
+          "entities": [
+            {
+              "id": "urn:e:a",
+              "kind": "field"
+            }
+          ],
+          "mappings": [],
+          "authorities": [],
+          "metadata": {
+            "composedFrom": [
+              "urn:shard:a"
+            ]
+          }
+        }
+      },
+      "expected": {
+        "status": "observed",
+        "value": {
+          "$schema": "./schemas/metamap-graph.schema.json",
+          "schemaVersion": "2.0.0",
+          "id": "urn:graph:composed",
+          "namespace": "output",
+          "label": "output label",
+          "revision": "output revision",
+          "relationPacks": [],
+          "entities": [
+            {
+              "id": "urn:e:a",
+              "kind": "field"
+            }
+          ],
+          "mappings": [],
+          "authorities": [],
+          "metadata": {
+            "composedFrom": [
+              "urn:shard:a"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "omitted option fields remain own undefined properties",
+      "matched": true,
+      "observed": {
+        "status": "observed",
+        "value": [
+          [
+            "$schema",
+            "schemaVersion",
+            "id",
+            "namespace",
+            "label",
+            "revision",
+            "relationPacks",
+            "entities",
+            "mappings",
+            "authorities",
+            "metadata"
+          ],
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      "expected": {
+        "status": "observed",
+        "value": [
+          [
+            "$schema",
+            "schemaVersion",
+            "id",
+            "namespace",
+            "label",
+            "revision",
+            "relationPacks",
+            "entities",
+            "mappings",
+            "authorities",
+            "metadata"
+          ],
+          true,
+          true,
+          true,
+          true
+        ]
+      }
+    },
+    {
+      "name": "first object identities and fresh arrays",
+      "matched": true,
+      "observed": {
+        "status": "observed",
+        "value": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      "expected": {
+        "status": "observed",
+        "value": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ]
+      }
+    },
+    {
+      "name": "first equal object retained",
+      "matched": true,
+      "observed": {
+        "status": "observed",
+        "value": [
+          1,
+          true,
+          false,
+          {
+            "composedFrom": [
+              "urn:shard:a",
+              "urn:shard:b"
+            ]
+          }
+        ]
+      },
+      "expected": {
+        "status": "observed",
+        "value": [
+          1,
+          true,
+          false,
+          {
+            "composedFrom": [
+              "urn:shard:a",
+              "urn:shard:b"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "entity insertion order",
+      "matched": true,
+      "observed": {
+        "status": "observed",
+        "value": [
+          "urn:e:z",
+          "urn:e:a",
+          "urn:e:c"
+        ]
+      },
+      "expected": {
+        "status": "observed",
+        "value": [
+          "urn:e:z",
+          "urn:e:a",
+          "urn:e:c"
+        ]
+      }
+    },
+    {
+      "name": "mapping and authority insertion order",
+      "matched": true,
+      "observed": {
+        "status": "observed",
+        "value": [
+          [
+            "urn:m:z",
+            "urn:m:a",
+            "urn:m:c"
+          ],
+          [
+            "urn:auth:z",
+            "urn:auth:a"
+          ]
+        ]
+      },
+      "expected": {
+        "status": "observed",
+        "value": [
+          [
+            "urn:m:z",
+            "urn:m:a",
+            "urn:m:c"
+          ],
+          [
+            "urn:auth:z",
+            "urn:auth:a"
+          ]
+        ]
+      }
+    },
+    {
+      "name": "relation pack insertion order and first identity",
+      "matched": true,
+      "observed": {
+        "status": "observed",
+        "value": [
+          [
+            "urn:pack:z",
+            "urn:pack:a",
+            "urn:pack:b"
+          ],
+          true
+        ]
+      },
+      "expected": {
+        "status": "observed",
+        "value": [
+          [
+            "urn:pack:z",
+            "urn:pack:a",
+            "urn:pack:b"
+          ],
+          true
+        ]
+      }
+    },
+    {
+      "name": "missing or null relation packs",
+      "matched": true,
+      "observed": {
+        "status": "observed",
+        "value": []
+      },
+      "expected": {
+        "status": "observed",
+        "value": []
+      }
+    },
+    {
+      "name": "duplicate shard IDs",
+      "matched": true,
+      "observed": {
+        "status": "observed",
+        "value": {
+          "name": "MetamapCompositionError",
+          "message": "Duplicate shard id urn:shard:a",
+          "identifier": "urn:shard:a",
+          "hasIdentifier": true,
+          "compositionError": true,
+          "typeError": false
+        }
+      },
+      "expected": {
+        "status": "observed",
+        "value": {
+          "name": "MetamapCompositionError",
+          "message": "Duplicate shard id urn:shard:a",
+          "identifier": "urn:shard:a",
+          "hasIdentifier": true,
+          "compositionError": true,
+          "typeError": false
+        }
+      }
+    },
+    {
+      "name": "unsupported schema before duplicate ID",
+      "matched": true,
+      "observed": {
+        "status": "observed",
+        "value": {
+          "name": "MetamapCompositionError",
+          "message": "Cannot compose urn:shard:a: unsupported schema 9",
+          "identifier": "urn:shard:a",
+          "hasIdentifier": true,
+          "compositionError": true,
+          "typeError": false
+        }
+      },
+      "expected": {
+        "status": "observed",
+        "value": {
+          "name": "MetamapCompositionError",
+          "message": "Cannot compose urn:shard:a: unsupported schema 9",
+          "identifier": "urn:shard:a",
+          "hasIdentifier": true,
+          "compositionError": true,
+          "typeError": false
+        }
+      }
+    },
+    {
+      "name": "all shard IDs checked before entity merge",
+      "matched": true,
+      "observed": {
+        "status": "observed",
+        "value": {
+          "name": "MetamapCompositionError",
+          "message": "Duplicate shard id urn:shard:a",
+          "identifier": "urn:shard:a",
+          "hasIdentifier": true,
+          "compositionError": true,
+          "typeError": false
+        }
+      },
+      "expected": {
+        "status": "observed",
+        "value": {
+          "name": "MetamapCompositionError",
+          "message": "Duplicate shard id urn:shard:a",
+          "identifier": "urn:shard:a",
+          "hasIdentifier": true,
+          "compositionError": true,
+          "typeError": false
+        }
+      }
+    },
+    {
+      "name": "unsupported schema diagnostic",
+      "matched": true,
+      "observed": {
+        "status": "observed",
+        "value": {
+          "name": "MetamapCompositionError",
+          "message": "Cannot compose urn:shard:a: unsupported schema 1.0.0",
+          "identifier": "urn:shard:a",
+          "hasIdentifier": true,
+          "compositionError": true,
+          "typeError": false
+        }
+      },
+      "expected": {
+        "status": "observed",
+        "value": {
+          "name": "MetamapCompositionError",
+          "message": "Cannot compose urn:shard:a: unsupported schema 1.0.0",
+          "identifier": "urn:shard:a",
+          "hasIdentifier": true,
+          "compositionError": true,
+          "typeError": false
+        }
+      }
+    },
+    {
+      "name": "entity conflict",
+      "matched": true,
+      "observed": {
+        "status": "observed",
+        "value": {
+          "name": "MetamapCompositionError",
+          "message": "Conflicting entity definition for urn:e:a",
+          "identifier": "urn:e:a",
+          "hasIdentifier": true,
+          "compositionError": true,
+          "typeError": false
+        }
+      },
+      "expected": {
+        "status": "observed",
+        "value": {
+          "name": "MetamapCompositionError",
+          "message": "Conflicting entity definition for urn:e:a",
+          "identifier": "urn:e:a",
+          "hasIdentifier": true,
+          "compositionError": true,
+          "typeError": false
+        }
+      }
+    },
+    {
+      "name": "mapping conflict",
+      "matched": true,
+      "observed": {
+        "status": "observed",
+        "value": {
+          "name": "MetamapCompositionError",
+          "message": "Conflicting mapping definition for urn:m:a",
+          "identifier": "urn:m:a",
+          "hasIdentifier": true,
+          "compositionError": true,
+          "typeError": false
+        }
+      },
+      "expected": {
+        "status": "observed",
+        "value": {
+          "name": "MetamapCompositionError",
+          "message": "Conflicting mapping definition for urn:m:a",
+          "identifier": "urn:m:a",
+          "hasIdentifier": true,
+          "compositionError": true,
+          "typeError": false
+        }
+      }
+    },
+    {
+      "name": "authority conflict",
+      "matched": true,
+      "observed": {
+        "status": "observed",
+        "value": {
+          "name": "MetamapCompositionError",
+          "message": "Conflicting authority definition for urn:auth:a",
+          "identifier": "urn:auth:a",
+          "hasIdentifier": true,
+          "compositionError": true,
+          "typeError": false
+        }
+      },
+      "expected": {
+        "status": "observed",
+        "value": {
+          "name": "MetamapCompositionError",
+          "message": "Conflicting authority definition for urn:auth:a",
+          "identifier": "urn:auth:a",
+          "hasIdentifier": true,
+          "compositionError": true,
+          "typeError": false
+        }
+      }
+    },
+    {
+      "name": "relation version conflict",
+      "matched": true,
+      "observed": {
+        "status": "observed",
+        "value": {
+          "name": "MetamapCompositionError",
+          "message": "Relation pack urn:pack:a has incompatible versions 1 and 2",
+          "identifier": "urn:pack:a",
+          "hasIdentifier": true,
+          "compositionError": true,
+          "typeError": false
+        }
+      },
+      "expected": {
+        "status": "observed",
+        "value": {
+          "name": "MetamapCompositionError",
+          "message": "Relation pack urn:pack:a has incompatible versions 1 and 2",
+          "identifier": "urn:pack:a",
+          "hasIdentifier": true,
+          "compositionError": true,
+          "typeError": false
+        }
+      }
+    },
+    {
+      "name": "relation reference conflict",
+      "matched": true,
+      "observed": {
+        "status": "observed",
+        "value": {
+          "name": "MetamapCompositionError",
+          "message": "Relation pack urn:pack:a@1 has conflicting references",
+          "identifier": "urn:pack:a",
+          "hasIdentifier": true,
+          "compositionError": true,
+          "typeError": false
+        }
+      },
+      "expected": {
+        "status": "observed",
+        "value": {
+          "name": "MetamapCompositionError",
+          "message": "Relation pack urn:pack:a@1 has conflicting references",
+          "identifier": "urn:pack:a",
+          "hasIdentifier": true,
+          "compositionError": true,
+          "typeError": false
+        }
+      }
+    },
+    {
+      "name": "pack version conflict before reference conflict",
+      "matched": true,
+      "observed": {
+        "status": "observed",
+        "value": {
+          "name": "MetamapCompositionError",
+          "message": "Relation pack urn:pack:a has incompatible versions 1 and 2",
+          "identifier": "urn:pack:a",
+          "hasIdentifier": true,
+          "compositionError": true,
+          "typeError": false
+        }
+      },
+      "expected": {
+        "status": "observed",
+        "value": {
+          "name": "MetamapCompositionError",
+          "message": "Relation pack urn:pack:a has incompatible versions 1 and 2",
+          "identifier": "urn:pack:a",
+          "hasIdentifier": true,
+          "compositionError": true,
+          "typeError": false
+        }
+      }
+    },
+    {
+      "name": "pack conflict precedes entity conflict",
+      "matched": true,
+      "observed": {
+        "status": "observed",
+        "value": {
+          "name": "MetamapCompositionError",
+          "message": "Relation pack urn:pack:a has incompatible versions 1 and 2",
+          "identifier": "urn:pack:a",
+          "hasIdentifier": true,
+          "compositionError": true,
+          "typeError": false
+        }
+      },
+      "expected": {
+        "status": "observed",
+        "value": {
+          "name": "MetamapCompositionError",
+          "message": "Relation pack urn:pack:a has incompatible versions 1 and 2",
+          "identifier": "urn:pack:a",
+          "hasIdentifier": true,
+          "compositionError": true,
+          "typeError": false
+        }
+      }
+    },
+    {
+      "name": "entity conflict precedes mapping and authority conflicts",
+      "matched": true,
+      "observed": {
+        "status": "observed",
+        "value": {
+          "name": "MetamapCompositionError",
+          "message": "Conflicting entity definition for urn:e:a",
+          "identifier": "urn:e:a",
+          "hasIdentifier": true,
+          "compositionError": true,
+          "typeError": false
+        }
+      },
+      "expected": {
+        "status": "observed",
+        "value": {
+          "name": "MetamapCompositionError",
+          "message": "Conflicting entity definition for urn:e:a",
+          "identifier": "urn:e:a",
+          "hasIdentifier": true,
+          "compositionError": true,
+          "typeError": false
+        }
+      }
+    },
+    {
+      "name": "same document duplicate equal entities",
+      "matched": true,
+      "observed": {
+        "status": "observed",
+        "value": [
+          1,
+          true
+        ]
+      },
+      "expected": {
+        "status": "observed",
+        "value": [
+          1,
+          true
+        ]
+      }
+    },
+    {
+      "name": "same document duplicate conflicting entities",
+      "matched": true,
+      "observed": {
+        "status": "observed",
+        "value": {
+          "name": "MetamapCompositionError",
+          "message": "Conflicting entity definition for urn:e:a",
+          "identifier": "urn:e:a",
+          "hasIdentifier": true,
+          "compositionError": true,
+          "typeError": false
+        }
+      },
+      "expected": {
+        "status": "observed",
+        "value": {
+          "name": "MetamapCompositionError",
+          "message": "Conflicting entity definition for urn:e:a",
+          "identifier": "urn:e:a",
+          "hasIdentifier": true,
+          "compositionError": true,
+          "typeError": false
+        }
+      }
+    },
+    {
+      "name": "deep reordered member equivalence",
+      "matched": true,
+      "observed": {
+        "status": "observed",
+        "value": [
+          1,
+          true
+        ]
+      },
+      "expected": {
+        "status": "observed",
+        "value": [
+          1,
+          true
+        ]
+      }
+    },
+    {
+      "name": "array order remains significant",
+      "matched": true,
+      "observed": {
+        "status": "observed",
+        "value": {
+          "name": "MetamapCompositionError",
+          "message": "Conflicting entity definition for urn:e:a",
+          "identifier": "urn:e:a",
+          "hasIdentifier": true,
+          "compositionError": true,
+          "typeError": false
+        }
+      },
+      "expected": {
+        "status": "observed",
+        "value": {
+          "name": "MetamapCompositionError",
+          "message": "Conflicting entity definition for urn:e:a",
+          "identifier": "urn:e:a",
+          "hasIdentifier": true,
+          "compositionError": true,
+          "typeError": false
+        }
+      }
+    },
+    {
+      "name": "negative zero and zero compare equally",
+      "matched": true,
+      "observed": {
+        "status": "observed",
+        "value": [
+          true,
+          true
+        ]
+      },
+      "expected": {
+        "status": "observed",
+        "value": [
+          true,
+          true
+        ]
+      }
+    },
+    {
+      "name": "distinct primitive types conflict",
+      "matched": true,
+      "observed": {
+        "status": "observed",
+        "value": {
+          "name": "MetamapCompositionError",
+          "message": "Conflicting entity definition for urn:e:a",
+          "identifier": "urn:e:a",
+          "hasIdentifier": true,
+          "compositionError": true,
+          "typeError": false
+        }
+      },
+      "expected": {
+        "status": "observed",
+        "value": {
+          "name": "MetamapCompositionError",
+          "message": "Conflicting entity definition for urn:e:a",
+          "identifier": "urn:e:a",
+          "hasIdentifier": true,
+          "compositionError": true,
+          "typeError": false
+        }
+      }
+    },
+    {
+      "name": "integer-index keys enumerate consistently",
+      "matched": true,
+      "observed": {
+        "status": "observed",
+        "value": 1
+      },
+      "expected": {
+        "status": "observed",
+        "value": 1
+      }
+    },
+    {
+      "name": "locale-equal canonical Unicode keys preserve order",
+      "matched": true,
+      "observed": {
+        "status": "observed",
+        "value": {
+          "name": "MetamapCompositionError",
+          "message": "Conflicting entity definition for urn:e:a",
+          "identifier": "urn:e:a",
+          "hasIdentifier": true,
+          "compositionError": true,
+          "typeError": false
+        }
+      },
+      "expected": {
+        "status": "observed",
+        "value": {
+          "name": "MetamapCompositionError",
+          "message": "Conflicting entity definition for urn:e:a",
+          "identifier": "urn:e:a",
+          "hasIdentifier": true,
+          "compositionError": true,
+          "typeError": false
+        }
+      }
+    },
+    {
+      "name": "locale-equal ignorable keys preserve order",
+      "matched": true,
+      "observed": {
+        "status": "observed",
+        "value": {
+          "name": "MetamapCompositionError",
+          "message": "Conflicting entity definition for urn:e:a",
+          "identifier": "urn:e:a",
+          "hasIdentifier": true,
+          "compositionError": true,
+          "typeError": false
+        }
+      },
+      "expected": {
+        "status": "observed",
+        "value": {
+          "name": "MetamapCompositionError",
+          "message": "Conflicting entity definition for urn:e:a",
+          "identifier": "urn:e:a",
+          "hasIdentifier": true,
+          "compositionError": true,
+          "typeError": false
+        }
+      }
+    },
+    {
+      "name": "locale key sorting retains case and accents",
+      "matched": true,
+      "observed": {
+        "status": "observed",
+        "value": 1
+      },
+      "expected": {
+        "status": "observed",
+        "value": 1
+      }
+    },
+    {
+      "name": "string values are not normalized",
+      "matched": true,
+      "observed": {
+        "status": "observed",
+        "value": {
+          "name": "MetamapCompositionError",
+          "message": "Conflicting entity definition for urn:e:a",
+          "identifier": "urn:e:a",
+          "hasIdentifier": true,
+          "compositionError": true,
+          "typeError": false
+        }
+      },
+      "expected": {
+        "status": "observed",
+        "value": {
+          "name": "MetamapCompositionError",
+          "message": "Conflicting entity definition for urn:e:a",
+          "identifier": "urn:e:a",
+          "hasIdentifier": true,
+          "compositionError": true,
+          "typeError": false
+        }
+      }
+    },
+    {
+      "name": "prototype-named fields retained as data",
+      "matched": true,
+      "observed": {
+        "status": "observed",
+        "value": [
+          true,
+          {
+            "__proto__": {
+              "x": 1
+            },
+            "constructor": 2
+          },
+          true
+        ]
+      },
+      "expected": {
+        "status": "observed",
+        "value": [
+          true,
+          {
+            "__proto__": {
+              "x": 1
+            },
+            "constructor": 2
+          },
+          true
+        ]
+      }
+    },
+    {
+      "name": "merged object mutation reflects caller changes",
+      "matched": true,
+      "observed": {
+        "status": "observed",
+        "value": [
+          "changed",
+          true,
+          1
+        ]
+      },
+      "expected": {
+        "status": "observed",
+        "value": [
+          "changed",
+          true,
+          1
+        ]
+      }
+    },
+    {
+      "name": "composition does not validate cross-shard endpoints",
+      "matched": true,
+      "observed": {
+        "status": "observed",
+        "value": [
+          [],
+          true
+        ]
+      },
+      "expected": {
+        "status": "observed",
+        "value": [
+          [],
+          true
+        ]
+      }
+    },
+    {
+      "name": "composition preserves unresolved endpoints until graph validation",
+      "matched": true,
+      "observed": {
+        "status": "observed",
+        "value": [
+          1,
+          {
+            "name": "MetamapValidationError",
+            "message": "Metamap validation failed with 1 error(s)",
+            "hasIdentifier": false,
+            "compositionError": false,
+            "typeError": false
+          }
+        ]
+      },
+      "expected": {
+        "status": "observed",
+        "value": [
+          1,
+          {
+            "name": "MetamapValidationError",
+            "message": "Metamap validation failed with 1 error(s)",
+            "hasIdentifier": false,
+            "compositionError": false,
+            "typeError": false
+          }
+        ]
+      }
+    }
+  ],
+  "traceDigest": "sha256:3103f5f18ce665894a25c73624fb8503b87db76a00d62fa01bbd9870a066c82f",
+  "driverDigest": "sha256:cf085aa89c24758518b8e5c21bb1b5d84aec25390caff9326c2abd7861def5d8"
+}

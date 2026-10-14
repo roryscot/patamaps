@@ -34,6 +34,23 @@ pub(crate) fn unknown(dimension: UncertaintyDimension) -> DerivationUncertainty 
         source_revisions: vec![],
     }
 }
+/// Shared qualitative meet; record validation and ordering stay with their callers.
+pub(crate) fn qualitative_meet_status(
+    contradicted: bool,
+    unknown: bool,
+    models: usize,
+    all_not_applicable: bool,
+) -> UncertaintyStatus {
+    if contradicted {
+        UncertaintyStatus::Contradicted
+    } else if unknown || models > 1 {
+        UncertaintyStatus::Unknown
+    } else if all_not_applicable {
+        UncertaintyStatus::NotApplicable
+    } else {
+        UncertaintyStatus::Supported
+    }
+}
 /// A qualitative meet. No scalar confidence averaging or probabilistic claim.
 fn combine(
     dimension: UncertaintyDimension,
@@ -43,25 +60,18 @@ fn combine(
         return unknown(dimension);
     }
     let models = uniq(values.iter().flat_map(|v| v.measurement_models.clone()));
-    let status = if values
-        .iter()
-        .any(|v| v.status == UncertaintyStatus::Contradicted)
-    {
-        UncertaintyStatus::Contradicted
-    } else if values
-        .iter()
-        .any(|v| v.status == UncertaintyStatus::Unknown)
-        || models.len() > 1
-    {
-        UncertaintyStatus::Unknown
-    } else if values
-        .iter()
-        .all(|v| v.status == UncertaintyStatus::NotApplicable)
-    {
-        UncertaintyStatus::NotApplicable
-    } else {
-        UncertaintyStatus::Supported
-    };
+    let status = qualitative_meet_status(
+        values
+            .iter()
+            .any(|v| v.status == UncertaintyStatus::Contradicted),
+        values
+            .iter()
+            .any(|v| v.status == UncertaintyStatus::Unknown),
+        models.len(),
+        values
+            .iter()
+            .all(|v| v.status == UncertaintyStatus::NotApplicable),
+    );
     DerivationUncertainty {
         dimension,
         status,

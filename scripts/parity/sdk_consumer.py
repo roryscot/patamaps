@@ -61,7 +61,9 @@ viability_mapping_path = ROOT / 'fixtures/parity/legacy-viability-type-mapping.j
 viability_type_mapping = json.loads(viability_mapping_path.read_bytes())
 semantic_mapping_path=ROOT/'fixtures/parity/legacy-semantic-type-mapping.json'
 semantic_type_mapping=json.loads(semantic_mapping_path.read_bytes())
-type_rows = semantic_type_mapping['rows'] + viability_type_mapping['rows'] + evaluation_type_mapping['rows'] + migration_type_mapping['rows'] + workspace_type_mapping['rows'] + config_type_mapping['rows'] + type_mapping['rows'] + graph_type_mapping['rows'] + reporting_type_mapping['rows'] + correspondence_type_mapping['rows']
+uncertainty_risk_mapping_path=ROOT/'fixtures/parity/legacy-uncertainty-risk-type-mapping.json'
+uncertainty_risk_type_mapping=json.loads(uncertainty_risk_mapping_path.read_bytes())
+type_rows = uncertainty_risk_type_mapping['rows'] + semantic_type_mapping['rows'] + viability_type_mapping['rows'] + evaluation_type_mapping['rows'] + migration_type_mapping['rows'] + workspace_type_mapping['rows'] + config_type_mapping['rows'] + type_mapping['rows'] + graph_type_mapping['rows'] + reporting_type_mapping['rows'] + correspondence_type_mapping['rows']
 assert type_mapping['referenceEngine'] == supplement['referenceEngine']
 
 def verify_reference():
@@ -366,6 +368,22 @@ const semanticGraph:LegacyGraphDocument=JSON.parse(__SEMANTIC_GRAPH__);
 const dependencyRows:LegacyMappingDependency[]=admittedLegacyMappingDependencies(semanticGraph,new Set(semanticGraph.mappings.map(mapping=>mapping.id)),semanticGeneration.semantic.derivations);
 if(!dependencyRows.some(row=>row.derivation&&row.premises.length>0))throw new Error('Installed semantic dependency capture mismatch');
 '''
+program += """
+import type {LegacyUncertaintyInputs,LegacyDerivationUncertainty,LegacyMappingUncertaintySummary,LegacyProjectionRiskSummary,LegacySemanticProjectionSpec,LegacyDerivationIssue} from "patamaps-native-sdk-draft";
+const recordedInputs:LegacyUncertaintyInputs={assessments:semanticPolicy.assessments,evidence:semanticPolicy.evidence};
+const inputDiagnostics:LegacyDerivationIssue[]=legacy.validateLegacyUncertaintyInputs(semanticGraph,recordedInputs);
+if(inputDiagnostics.length)throw new Error('Installed recorded uncertainty validation failed');
+const recordedUnknown:LegacyDerivationUncertainty=legacy.legacyUnknownDimension('identity');
+if(recordedUnknown.status!=='unknown'||recordedUnknown.assessments.length)throw new Error('Installed unknown uncertainty mismatch');
+const recordedMeet:LegacyDerivationUncertainty=legacy.combineLegacyUncertainty('identity',[recordedUnknown,recordedUnknown]);
+if(recordedMeet.status!=='unknown')throw new Error('Installed qualitative meet strengthened unknown');
+const recordedSummaries:LegacyMappingUncertaintySummary[]=legacy.legacyGraphUncertainty(semanticGraph,semanticGeneration.semantic.derivations,recordedInputs);
+const summaryDiagnostics:LegacyDerivationIssue[]=legacy.legacyUncertaintySummaryIssues(recordedSummaries);
+if(summaryDiagnostics.length||recordedSummaries.length!==semanticGraph.mappings.length)throw new Error('Installed graph uncertainty mismatch');
+const riskSpec:LegacySemanticProjectionSpec={schemaVersion:'2.0.0',id:'urn:installed:risk-spec',consumer:'urn:installed:consumer',budget:null,select:{},slots:[]};
+const recordedRisk:LegacyProjectionRiskSummary=legacy.evaluateLegacyConsumerRisk(semanticGraph,semanticGeneration,riskSpec,[]).risk;
+if(recordedRisk.status!=='not-evaluated'||recordedRisk.totalCost!==null)throw new Error('Installed risk no-budget state mismatch');
+"""
 semantic_fixture=ROOT/'fixtures/parity/semantic-validation-controls.json'
 assert sha(semantic_fixture)=='sha256:f8b33a4c6666d454220bddd015b488846ffd8b4347c860d4bfa8b6dfe7e452ee'
 semantic_corpus=json.loads(semantic_fixture.read_text());semantic_by_name={case['name']:case for case in semantic_corpus['cases']}
@@ -464,6 +482,13 @@ createLegacyValidationApi('/absolute/path').admittedLegacyMappingDependencies({}
 const invalidSemanticVersion:import('patamaps-native-sdk-draft').LegacyMetamapSemanticPolicy['schemaVersion']='1.0.0';
 const invalidUncertainty:import('patamaps-native-sdk-draft').LegacyUncertaintyAssessment['dimension']='random';
 const invalidRiskBudget:import('patamaps-native-sdk-draft').LegacyConsumerRiskBudget={id:'id',consumer:'c',classifications:[],maximumTotalCost:0,requireCompleteClassification:false,requireCompleteDependencies:true};
+createLegacyValidationApi('/absolute/path').legacyUnknownDimension('not-a-dimension');
+createLegacyValidationApi('/absolute/path').combineLegacyUncertainty('identity',[{dimension:'identity',status:'invalid',evidence:[],assessments:[],measurementModels:[],sourceRevisions:[]}]);
+createLegacyValidationApi('/absolute/path').legacyUncertaintyRequirementIssues({} as any,[],[],[],{assessments:[],evidence:[]});
+createLegacyValidationApi('/absolute/path').legacyConsumerBudgetIssues({} as any,[{id:'id',consumer:'c',classifications:[],maximumTotalCost:'zero',requireCompleteClassification:true,requireCompleteDependencies:true}]);
+const invalidProjectionDirection:import('patamaps-native-sdk-draft').LegacyProjectionDirection='both';
+const invalidSemanticProjectionVersion:import('patamaps-native-sdk-draft').LegacySemanticProjectionSpec['schemaVersion']='1.0.0';
+const invalidRiskStatus:import('patamaps-native-sdk-draft').LegacyProjectionRiskSummary['status']='verified';
 ''')
 environment = {**os.environ, 'PATH': ''}
 commands = []
@@ -529,6 +554,17 @@ semantic_probe=stage/'semantic-validation.mjs'
 # Apply that same encoding to the installed observation without changing expectations.
 semantic_probe.write_text('import assert from "node:assert/strict";\nimport {readFileSync} from "node:fs";\nimport * as sdk from "patamaps-native-sdk-draft";\n'+semantic_helpers+'\nconst binary='+json.dumps(str(installed))+';\nsdk.configureLegacyValidation(binary);\nconst owner=sdk.createLegacyValidationApi(binary);\nconst apis=[owner,sdk].map(api=>({"validate-policy":api.validateLegacySemanticPolicy,"parse-policy":api.parseLegacySemanticPolicy,"validate-generation":api.validateLegacySemanticGeneration,"parse-generation":api.parseLegacySemanticGeneration,digest:api.legacySemanticGenerationDigest,view:api.legacyPolicyView,dependencies:api.admittedLegacyMappingDependencies}));\nconst corpus=JSON.parse(readFileSync(new URL("./semantic-validation-controls.json",import.meta.url)));let comparisons=0;for(const api of apis)for(const entry of corpus.cases){assert.deepEqual(JSON.parse(JSON.stringify(observe(entry.action,api))),entry.expected,entry.name);comparisons++;}\nconsole.log(JSON.stringify({status:"matched",cases:corpus.cases.length,comparisons}));\n')
 semantic_execution=run('installed-semantic-validation',[NODE,semantic_probe])
+uncertainty_risk_corpora=[(ROOT/'fixtures/parity/uncertainty-risk-controls.json','sha256:8475785f4a8b75c5d209e76bb264951dfa02d866e3338fbf06aca3feecdbdc10'),(ROOT/'fixtures/parity/uncertainty-risk-assessment-controls.json','sha256:2f17db893503b01aed39a9d8b8ea802b1498217b7eb53f6b5dfa0626a271ed55')]
+for fixture,digest in uncertainty_risk_corpora:
+    assert sha(fixture)==digest
+    copy_file(fixture,stage/fixture.name)
+uncertainty_risk_driver=ROOT/'scripts/parity/uncertainty_risk.mjs'
+uncertainty_risk_source=uncertainty_risk_driver.read_text()
+uncertainty_risk_helpers=uncertainty_risk_source[uncertainty_risk_source.index('function encode(value)'):uncertainty_risk_source.index('\nlet receipt;')]
+uncertainty_risk_probe=stage/'uncertainty-risk.mjs'
+uncertainty_risk_probe.write_text('import assert from "node:assert/strict";\nimport {readFileSync} from "node:fs";\nimport * as sdk from "patamaps-native-sdk-draft";\n'+uncertainty_risk_helpers+'\nconst binary='+json.dumps(str(installed))+';\nsdk.configureLegacyValidation(binary);const owner=sdk.createLegacyValidationApi(binary);\nconst apis=[owner,sdk].map(a=>({empty:a.legacyEmptyUncertaintyInputs,validate:a.validateLegacyUncertaintyInputs,unknown:a.legacyUnknownDimension,combine:a.combineLegacyUncertainty,mapping:a.legacyMappingUncertainty,dependencies:a.legacyUncertaintyDependencies,graph:a.legacyGraphUncertainty,summary:a.legacyUncertaintySummaryIssues,requirements:a.legacyUncertaintyRequirementIssues,budgets:a.legacyConsumerBudgetIssues,risk:a.evaluateLegacyConsumerRisk}));\nlet cases=0,comparisons=0;for(const name of '+json.dumps([p.name for p,_ in uncertainty_risk_corpora])+'){const corpus=JSON.parse(readFileSync(new URL("./"+name,import.meta.url)));cases+=corpus.cases.length;for(const api of apis)for(const entry of corpus.cases){assert.deepEqual(JSON.parse(JSON.stringify(observe(entry.action,api))),entry.expected,entry.name);comparisons++;}}\nconsole.log(JSON.stringify({status:"matched",cases,comparisons}));\n')
+uncertainty_risk_execution=run('installed-uncertainty-risk',[NODE,uncertainty_risk_probe])
+
 
 asset_execution = run('published-assets', [NODE, asset_probe])
 asset_observations = json.loads(asset_execution.stdout)['observations'] if asset_execution.returncode == 0 else []
@@ -618,6 +654,7 @@ passed = passed and numeric_execution.returncode == 0
 passed = passed and callback_execution.returncode == 0
 passed = passed and memory_execution.returncode == 0
 passed = passed and semantic_execution.returncode == 0
+passed = passed and uncertainty_risk_execution.returncode == 0
 passed = passed and all(engine[key] == value for key,value in identities(ROOT).items()) and sha(installed) == sha(binary)
 verify_reference()
 receipt = {'uncheckedDigestCorpus':{'path':digest_fixture.relative_to(ROOT).as_posix(),'digest':sha(digest_fixture)},'schemaVersion':'1.0.0','status':'passed' if passed else 'failed','commands':commands,
@@ -625,6 +662,7 @@ receipt = {'uncheckedDigestCorpus':{'path':digest_fixture.relative_to(ROOT).as_p
            'driver':'installed-sdk-data-subchecks','driverDigest':sha(Path(__file__)),'assetProbe':{'path':str(asset_probe),'digest':sha(asset_probe)},
            'numericViability':{'corpus':numeric_fixture.relative_to(ROOT).as_posix(),'corpusDigest':sha(numeric_fixture),'cases':400,'exitCode':numeric_execution.returncode,'probe':{'path':str(numeric_probe),'digest':sha(numeric_probe)},'helperSource':{'path':numeric_driver.relative_to(ROOT).as_posix(),'digest':sha(numeric_driver)}},
            'constraintCallbacks':{'corpora':[{'path':p.relative_to(ROOT).as_posix(),'digest':sha(p)} for p,_ in callback_corpora],'cases':82,'comparisons':164,'exitCode':callback_execution.returncode,'probe':{'path':str(callback_probe),'digest':sha(callback_probe)},'helperSource':{'path':callback_driver.relative_to(ROOT).as_posix(),'digest':sha(callback_driver)}},
+           'uncertaintyRisk':{'corpora':[{'path':p.relative_to(ROOT).as_posix(),'digest':sha(p)} for p,_ in uncertainty_risk_corpora],'cases':1302,'comparisons':2604,'exitCode':uncertainty_risk_execution.returncode,'probe':{'path':str(uncertainty_risk_probe),'digest':sha(uncertainty_risk_probe)},'helperSource':{'path':uncertainty_risk_driver.relative_to(ROOT).as_posix(),'digest':sha(uncertainty_risk_driver)},'typeComparison':{'mapping':uncertainty_risk_mapping_path.relative_to(ROOT).as_posix(),'digest':sha(uncertainty_risk_mapping_path),'mappedDeclarations':22,'originalPublicObligations':10,'internalDependencyDeclarations':12,'scope':uncertainty_risk_type_mapping['scope']}},
            'semanticValidation':{'corpus':semantic_fixture.relative_to(ROOT).as_posix(),'corpusDigest':sha(semantic_fixture),'cases':467,'comparisons':934,'exitCode':semantic_execution.returncode,'probe':{'path':str(semantic_probe),'digest':sha(semantic_probe)},'helperSource':{'path':semantic_driver.relative_to(ROOT).as_posix(),'digest':sha(semantic_driver)},'typeComparison':{'mapping':semantic_mapping_path.relative_to(ROOT).as_posix(),'digest':sha(semantic_mapping_path),'mappedDeclarations':len(semantic_type_mapping['rows']),'scope':semantic_type_mapping['scope']}},
            'memoryActivation':{'corpora':[{'path':p.relative_to(ROOT).as_posix(),'digest':sha(p)} for p,_ in memory_corpora],'cases':73,'comparisons':146,'exitCode':memory_execution.returncode,'probe':{'path':str(memory_probe),'digest':sha(memory_probe)},'helperSource':{'path':memory_driver.relative_to(ROOT).as_posix(),'digest':sha(memory_driver)},'declarationProjections':3,'scope':'Original memory current getter, legacy activation parameters/result and all selected frozen memory/refusal controls; full governed overload/state, complete arbitrary JavaScript and nominal package/required platform acceptance remain open.'},
            'publishedAssets':{'scope':'Original public JSON source/import subchecks only; exact original bytes and actual installed Node imports. Original valid/invalid schema and semantic acceptance remains unverified by this probe, so it cannot close the published-data obligations.','count':len(published_assets),'observations':asset_observations},

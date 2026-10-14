@@ -1,0 +1,11 @@
+import assert from 'node:assert/strict';
+import {readFileSync,writeFileSync} from 'node:fs';
+import {dirname} from 'node:path';
+import {fileURLToPath} from 'node:url';
+import {spawnWithInputSync} from "/Users/admin/dev/patamaps/patamaps/sdk/typescript/native-input.mjs";
+const out=dirname(fileURLToPath(import.meta.url)),node=process.execPath,rows=[],input='x'.repeat(8193)+'日本語',options={env:{},encoding:'utf8',timeout:2000,maxBuffer:65536,input};
+let result=spawnWithInputSync(node,['-e',"const chunks=[];process.stdin.on('data',c=>chunks.push(c));process.stdin.on('end',()=>{process.stdout.write(Buffer.concat(chunks));process.stderr.write('partial stderr');process.exitCode=7})"],options);assert.equal(result.status,7);assert.equal(result.stdout,input);assert.equal(result.stderr,'partial stderr');assert.equal(result.error,undefined);rows.push({name:'input-over-eight-kib-and-unicode-plus-nonzero-status',passed:true});
+result=spawnWithInputSync('/private/tmp/patamaps-intentionally-missing-native-transport-binary',[],options);assert.equal(result.error.code,'ENOENT');rows.push({name:'missing-executable',passed:true});
+result=spawnWithInputSync(node,['-e',"process.stdout.write('started');setInterval(()=>{},1000)"],{...options,timeout:250});assert.equal(result.error.code,'ETIMEDOUT');assert.equal(result.stdout,'started');rows.push({name:'timeout-retains-partial-output',passed:true});
+result=spawnWithInputSync(node,['-e',"process.stdout.write('s'.repeat(1500));process.stderr.write('e'.repeat(1500));setInterval(()=>{},1000)"],{...options,maxBuffer:2000});assert.equal(result.error.code,'ENOBUFS');assert(Buffer.byteLength(result.stdout)+Buffer.byteLength(result.stderr)>2000);rows.push({name:'combined-output-budget',passed:true});
+writeFileSync(out+'/receipt.json',JSON.stringify({status:'passed',scope:'Transport failure and byte-delivery controls only, not full platform acceptance',node:process.version,rows},null,2)+'\n');console.log(JSON.stringify({status:'passed',checks:rows.length,receipt:out+'/receipt.json'}));

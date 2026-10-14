@@ -1,0 +1,95 @@
+    Checking patamaps-core v0.1.0 (/Users/admin/dev/patamaps/patamaps/crates/patamaps-core)
+error: this `if` statement can be collapsed
+   --> crates/patamaps-core/src/legacy_uncertainty_risk.rs:172:9
+    |
+172 | /         if let Some(Some(revision)) = subjects.get(subject) {
+173 | |             if revision.string() != Some(s(assessment, "sourceRevision")) {
+174 | |                 issues.push(issue(
+175 | |                     "ASSESSMENT_REVISION_MISMATCH",
+...   |
+184 | |         }
+    | |_________^
+    |
+    = help: for further information visit https://rust-lang.github.io/rust-clippy/rust-1.99.0/index.html#collapsible_if
+    = note: `-D clippy::collapsible-if` implied by `-D warnings`
+    = help: to override `-D warnings` add `#[allow(clippy::collapsible_if)]`
+help: collapse nested if block
+    |
+172 ~         if let Some(Some(revision)) = subjects.get(subject)
+173 ~             && revision.string() != Some(s(assessment, "sourceRevision")) {
+174 |                 issues.push(issue(
+...
+182 |                 ));
+183 ~             }
+    |
+
+error: this `if` statement can be collapsed
+   --> crates/patamaps-core/src/legacy_uncertainty_risk.rs:586:13
+    |
+586 | /             if let Some(v) = b.get(field) {
+587 | |                 if safe_integer(Some(v)).is_none_or(|n| n < 0.0) {
+588 | |                     issues.push(risk_issue(
+589 | |                         "INVALID_RISK_LIMIT",
+...   |
+594 | |             }
+    | |_____________^
+    |
+    = help: for further information visit https://rust-lang.github.io/rust-clippy/rust-1.99.0/index.html#collapsible_if
+help: collapse nested if block
+    |
+586 ~             if let Some(v) = b.get(field)
+587 ~                 && safe_integer(Some(v)).is_none_or(|n| n < 0.0) {
+588 |                     issues.push(risk_issue(
+...
+592 |                     ));
+593 ~                 }
+    |
+
+error: this `if` statement can be collapsed
+   --> crates/patamaps-core/src/legacy_uncertainty_risk.rs:735:20
+    |
+735 |               } else if let Some(maximum) = safe_integer(budget.get("maximumTotalCost")) {
+    |  ____________________^
+736 | |                 if (total as f64) > maximum {
+737 | |                     issues.push(risk_issue(
+738 | |                         "CONSUMER_RISK_BUDGET_EXCEEDED",
+...   |
+746 | |             }
+    | |_____________^
+    |
+    = help: for further information visit https://rust-lang.github.io/rust-clippy/rust-1.99.0/index.html#collapsible_if
+help: collapse nested if block
+    |
+735 ~             } else if let Some(maximum) = safe_integer(budget.get("maximumTotalCost"))
+736 ~                 && (total as f64) > maximum {
+737 |                     issues.push(risk_issue(
+...
+744 |                     ));
+745 ~                 }
+    |
+
+error: this `if` statement can be collapsed
+   --> crates/patamaps-core/src/legacy_uncertainty_risk.rs:761:17
+    |
+761 | /                 if let Some(limit) = budget.get(field) {
+762 | |                     if count as f64 > to_number(limit) {
+763 | |                         issues.push(risk_issue(
+764 | |                             code,
+...   |
+772 | |                 }
+    | |_________________^
+    |
+    = help: for further information visit https://rust-lang.github.io/rust-clippy/rust-1.99.0/index.html#collapsible_if
+help: collapse nested if block
+    |
+761 ~                 if let Some(limit) = budget.get(field)
+762 ~                     && count as f64 > to_number(limit) {
+763 |                         issues.push(risk_issue(
+...
+770 |                         ));
+771 ~                     }
+    |
+
+error: could not compile `patamaps-core` (lib test) due to 4 previous errors
+warning: build failed, waiting for other jobs to finish...
+error: could not compile `patamaps-core` (lib) due to 4 previous errors

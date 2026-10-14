@@ -1,0 +1,47 @@
+    Checking patamaps-core v0.1.0 (/Users/admin/dev/patamaps/patamaps/crates/patamaps-core)
+error[E0369]: binary operation `!=` cannot be applied to type `std::option::Option<&patamaps_contracts::LegacyOrderedJson>`
+   --> crates/patamaps-core/src/legacy_uncertainty_risk.rs:173:49
+    |
+173 |             if assessment.get("sourceRevision") != Some(*revision) {
+    |                -------------------------------- ^^ --------------- std::option::Option<&patamaps_contracts::LegacyOrderedJson>
+    |                |
+    |                std::option::Option<&patamaps_contracts::LegacyOrderedJson>
+    |
+note: `patamaps_contracts::LegacyOrderedJson` does not implement `std::cmp::PartialEq`
+   --> crates/patamaps-contracts/src/legacy_stable.rs:15:1
+    |
+ 15 | pub enum LegacyOrderedJson {
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^ `patamaps_contracts::LegacyOrderedJson` is defined in another crate
+
+error[E0369]: binary operation `==` cannot be applied to type `std::option::Option<&patamaps_contracts::LegacyOrderedJson>`
+   --> crates/patamaps-core/src/legacy_uncertainty_risk.rs:491:41
+    |
+491 |             if r.get("requireEvidence") == Some(&J::Bool(true))
+    |                ------------------------ ^^ -------------------- std::option::Option<&patamaps_contracts::LegacyOrderedJson>
+    |                |
+    |                std::option::Option<&patamaps_contracts::LegacyOrderedJson>
+    |
+note: `patamaps_contracts::LegacyOrderedJson` does not implement `std::cmp::PartialEq`
+   --> crates/patamaps-contracts/src/legacy_stable.rs:15:1
+    |
+ 15 | pub enum LegacyOrderedJson {
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^ `patamaps_contracts::LegacyOrderedJson` is defined in another crate
+
+error[E0369]: binary operation `==` cannot be applied to type `std::option::Option<&patamaps_contracts::LegacyOrderedJson>`
+   --> crates/patamaps-core/src/legacy_uncertainty_risk.rs:676:27
+    |
+676 |     if spec.get("budget") == Some(&J::Null) {
+    |        ------------------ ^^ -------------- std::option::Option<&patamaps_contracts::LegacyOrderedJson>
+    |        |
+    |        std::option::Option<&patamaps_contracts::LegacyOrderedJson>
+    |
+note: `patamaps_contracts::LegacyOrderedJson` does not implement `std::cmp::PartialEq`
+   --> crates/patamaps-contracts/src/legacy_stable.rs:15:1
+    |
+ 15 | pub enum LegacyOrderedJson {
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^ `patamaps_contracts::LegacyOrderedJson` is defined in another crate
+
+For more information about this error, try `rustc --explain E0369`.
+error: could not compile `patamaps-core` (lib test) due to 3 previous errors
+warning: build failed, waiting for other jobs to finish...
+error: could not compile `patamaps-core` (lib) due to 3 previous errors

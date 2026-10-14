@@ -27,6 +27,11 @@ import { createLegacyWorkspaceApi } from "./legacy-workspace.mjs";
 import { createLegacyEvaluationApi } from "./legacy-evaluation.mjs";
 import { createLegacySemanticApi } from "./legacy-semantic.mjs";
 import {
+  createLegacyUncertaintyRiskApi,
+  legacyEmptyUncertaintyInputs,
+} from "./legacy-uncertainty-risk.mjs";
+export { legacyEmptyUncertaintyInputs };
+import {
   createLegacyViabilityApi,
   initializeLegacyConstraintRegistry,
   initializeLegacyMetamapActivator,
@@ -282,6 +287,7 @@ export function createLegacyValidationApi(executable, observeExecution) {
     ...createLegacyReferenceApi(invoke),
     ...createLegacyEvaluationApi(invoke, Registry),
     ...createLegacySemanticApi(invoke),
+    ...createLegacyUncertaintyRiskApi(invoke),
     ...createLegacyViabilityApi(invoke, Registry, Graph),
     ...createLegacyConfigApi(invoke, loadFile),
     ...workspace,
@@ -380,6 +386,26 @@ export const legacySemanticGenerationDigest = (value) =>
 export const legacyPolicyView = (value) => api().legacyPolicyView(value);
 export const admittedLegacyMappingDependencies = (...args) =>
   api().admittedLegacyMappingDependencies(...args);
+export const validateLegacyUncertaintyInputs = (...args) =>
+  api().validateLegacyUncertaintyInputs(...args);
+export const legacyUnknownDimension = (...args) =>
+  api().legacyUnknownDimension(...args);
+export const combineLegacyUncertainty = (...args) =>
+  api().combineLegacyUncertainty(...args);
+export const legacyMappingUncertainty = (...args) =>
+  api().legacyMappingUncertainty(...args);
+export const legacyUncertaintyDependencies = (...args) =>
+  api().legacyUncertaintyDependencies(...args);
+export const legacyGraphUncertainty = (...args) =>
+  api().legacyGraphUncertainty(...args);
+export const legacyUncertaintySummaryIssues = (...args) =>
+  api().legacyUncertaintySummaryIssues(...args);
+export const legacyUncertaintyRequirementIssues = (...args) =>
+  api().legacyUncertaintyRequirementIssues(...args);
+export const legacyConsumerBudgetIssues = (...args) =>
+  api().legacyConsumerBudgetIssues(...args);
+export const evaluateLegacyConsumerRisk = (...args) =>
+  api().evaluateLegacyConsumerRisk(...args);
 export const validateLegacyDocumentShape = (document) =>
   api().validateLegacyDocumentShape(document);
 export const parseLegacyRelationPack = (value) =>

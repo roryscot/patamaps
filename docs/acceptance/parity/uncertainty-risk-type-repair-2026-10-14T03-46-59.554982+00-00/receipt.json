@@ -1,0 +1,66 @@
+{
+  "status": "passed",
+  "commands": [
+    {
+      "label": "declarations",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "/Users/admin/dev/SEEDZ/metamap/node_modules/typescript/lib/tsc.js",
+        "type-contracts.mts",
+        "--strict",
+        "--module",
+        "NodeNext",
+        "--moduleResolution",
+        "NodeNext",
+        "--target",
+        "ES2022",
+        "--lib",
+        "ES2022",
+        "--noEmit"
+      ],
+      "exitCode": 0
+    },
+    {
+      "label": "positive",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "/Users/admin/dev/SEEDZ/metamap/node_modules/typescript/lib/tsc.js",
+        "consumer.mts",
+        "--strict",
+        "--module",
+        "NodeNext",
+        "--moduleResolution",
+        "NodeNext",
+        "--target",
+        "ES2022",
+        "--lib",
+        "ES2022",
+        "--noEmit"
+      ],
+      "exitCode": 0
+    },
+    {
+      "label": "negative",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "/Users/admin/dev/SEEDZ/metamap/node_modules/typescript/lib/tsc.js",
+        "negative.mts",
+        "--strict",
+        "--module",
+        "NodeNext",
+        "--moduleResolution",
+        "NodeNext",
+        "--target",
+        "ES2022",
+        "--lib",
+        "ES2022",
+        "--noEmit"
+      ],
+      "exitCode": 2
+    }
+  ],
+  "retainedStage": "/private/tmp/patamaps-uncertainty-types-wuqba_bc",
+  "previousStageModified": false,
+  "runtimeChanged": false,
+  "sourceDigest": "sha256:7c46190d4fc46141a76bd063330f003cac822e1255e3ea9577815f2246361ed6"
+}

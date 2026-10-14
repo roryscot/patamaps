@@ -721,6 +721,20 @@ fn append_schema_issues(
         }
         ValidationErrorKind::Constant { .. } => "must be equal to constant".into(),
         ValidationErrorKind::Enum { .. } => "must be equal to one of the allowed values".into(),
+        ValidationErrorKind::Maximum { limit } => {
+            format!("must be <= {}", limit.as_f64().expect("numeric maximum"))
+        }
+        ValidationErrorKind::Minimum { limit } => {
+            format!("must be >= {}", limit.as_f64().expect("numeric minimum"))
+        }
+        ValidationErrorKind::ExclusiveMaximum { limit } => format!(
+            "must be < {}",
+            limit.as_f64().expect("numeric exclusive maximum")
+        ),
+        ValidationErrorKind::ExclusiveMinimum { limit } => format!(
+            "must be > {}",
+            limit.as_f64().expect("numeric exclusive minimum")
+        ),
         ValidationErrorKind::MinLength { limit } => {
             format!("must NOT have fewer than {limit} characters")
         }

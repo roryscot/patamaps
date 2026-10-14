@@ -186,6 +186,10 @@ pub fn executor_id() -> &'static str {
                 include_str!("../../patamaps-core/src/legacy_semantic.rs"),
             ),
             (
+                "legacyUncertaintyRisk",
+                include_str!("../../patamaps-core/src/legacy_uncertainty_risk.rs"),
+            ),
+            (
                 "legacySemanticPolicySchema",
                 include_str!(
                     "../../../fixtures/reference/schemas/metamap-viability-v2.schema.json"

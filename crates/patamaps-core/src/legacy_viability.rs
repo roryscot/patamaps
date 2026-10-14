@@ -387,7 +387,7 @@ fn numeric_input(input: J) -> Result<NumericInput, LegacyWorkspaceError> {
     })
 }
 
-fn numeric_facts(value: &mut J, path: &mut Vec<String>, facts: &mut Vec<J>) {
+pub(crate) fn numeric_facts(value: &mut J, path: &mut Vec<String>, facts: &mut Vec<J>) {
     match value {
         J::Number(number)
             if !number.is_finite() || (*number == 0.0 && number.is_sign_negative()) =>
@@ -1506,6 +1506,9 @@ pub fn legacy_viability_request(
         })
         .collect::<Vec<_>>();
     let result = match request.operation.as_str() {
+        operation if operation.starts_with("uncertainty-") || operation.starts_with("risk-") => {
+            crate::legacy_uncertainty_risk::request(operation, input)?
+        }
         operation if operation.starts_with("semantic-") => {
             crate::legacy_semantic::request(operation, input)?
         }

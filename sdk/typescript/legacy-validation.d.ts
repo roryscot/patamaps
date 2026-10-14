@@ -17,6 +17,20 @@ import type {
   admittedLegacyMappingDependencies,
 } from "./legacy-semantic.js";
 export * from "./legacy-semantic.js";
+import type {
+  legacyEmptyUncertaintyInputs,
+  validateLegacyUncertaintyInputs,
+  legacyUnknownDimension,
+  combineLegacyUncertainty,
+  legacyMappingUncertainty,
+  legacyUncertaintyDependencies,
+  legacyGraphUncertainty,
+  legacyUncertaintySummaryIssues,
+  legacyUncertaintyRequirementIssues,
+  legacyConsumerBudgetIssues,
+  evaluateLegacyConsumerRisk,
+} from "./legacy-uncertainty-risk.js";
+export * from "./legacy-uncertainty-risk.js";
 export * from "./legacy-viability.js";
 import type {
   parseLegacyEvaluationContext,
@@ -225,6 +239,17 @@ export type LegacyValidationOptions =
       nativePacks?: never;
     };
 export interface LegacyValidationApi {
+  legacyEmptyUncertaintyInputs: typeof legacyEmptyUncertaintyInputs;
+  validateLegacyUncertaintyInputs: typeof validateLegacyUncertaintyInputs;
+  legacyUnknownDimension: typeof legacyUnknownDimension;
+  combineLegacyUncertainty: typeof combineLegacyUncertainty;
+  legacyMappingUncertainty: typeof legacyMappingUncertainty;
+  legacyUncertaintyDependencies: typeof legacyUncertaintyDependencies;
+  legacyGraphUncertainty: typeof legacyGraphUncertainty;
+  legacyUncertaintySummaryIssues: typeof legacyUncertaintySummaryIssues;
+  legacyUncertaintyRequirementIssues: typeof legacyUncertaintyRequirementIssues;
+  legacyConsumerBudgetIssues: typeof legacyConsumerBudgetIssues;
+  evaluateLegacyConsumerRisk: typeof evaluateLegacyConsumerRisk;
   validateLegacySemanticPolicy: typeof validateLegacySemanticPolicy;
   parseLegacySemanticPolicy: typeof parseLegacySemanticPolicy;
   validateLegacySemanticGeneration: typeof validateLegacySemanticGeneration;

@@ -1,0 +1,35 @@
+{
+  "status": "passed",
+  "commands": [
+    {
+      "label": "original-example-inputs",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "scripts/parity/uncertainty_risk.mjs"
+      ],
+      "exitCode": 0
+    },
+    {
+      "label": "original-six-dimension-inputs",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "scripts/parity/uncertainty_risk.mjs",
+        "--assessments"
+      ],
+      "exitCode": 0
+    },
+    {
+      "label": "native-frozen-controls",
+      "command": [
+        "/Users/admin/.cargo/bin/cargo",
+        "test",
+        "--locked",
+        "-p",
+        "patamaps-core",
+        "--test",
+        "legacy_uncertainty_risk"
+      ],
+      "exitCode": 0
+    }
+  ]
+}

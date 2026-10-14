@@ -27,6 +27,7 @@ mod legacy_workspace;
 pub use legacy_workspace::{
     LegacyWorkspaceError, LegacyWorkspaceRequest, legacy_workspace_request,
 };
+mod legacy_uncertainty_risk;
 mod preflight;
 mod registry;
 mod risk;

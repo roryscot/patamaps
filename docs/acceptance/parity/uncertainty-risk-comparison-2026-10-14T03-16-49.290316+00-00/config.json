@@ -1,0 +1,31 @@
+{
+  "commands": [
+    {
+      "label": "original-unknown-inputs",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "scripts/parity/uncertainty_risk.mjs"
+      ]
+    },
+    {
+      "label": "original-assessment-inputs",
+      "command": [
+        "/Users/admin/.nvm/versions/node/v22.16.0/bin/node",
+        "scripts/parity/uncertainty_risk.mjs",
+        "--assessments"
+      ]
+    },
+    {
+      "label": "native-frozen-controls",
+      "command": [
+        "/Users/admin/.cargo/bin/cargo",
+        "test",
+        "--locked",
+        "-p",
+        "patamaps-core",
+        "--test",
+        "legacy_uncertainty_risk"
+      ]
+    }
+  ]
+}

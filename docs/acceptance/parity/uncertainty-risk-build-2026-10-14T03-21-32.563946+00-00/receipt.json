@@ -1,0 +1,30 @@
+{
+  "status": "passed",
+  "commands": [
+    {
+      "label": "clippy",
+      "command": [
+        "/Users/admin/.cargo/bin/cargo",
+        "clippy",
+        "--locked",
+        "--workspace",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exitCode": 0
+    },
+    {
+      "label": "build-cli",
+      "command": [
+        "/Users/admin/.cargo/bin/cargo",
+        "build",
+        "--locked",
+        "-p",
+        "patamaps-cli"
+      ],
+      "exitCode": 0
+    }
+  ]
+}

@@ -11,7 +11,7 @@ use serde_json::{Value, json};
 use std::collections::{HashMap, HashSet};
 use std::sync::OnceLock;
 
-const RESOURCES: [&str; 8] = [
+pub(crate) const RESOURCES: [&str; 8] = [
     include_str!("../../../fixtures/reference/schemas/metamap-graph.schema.json"),
     include_str!("../../../fixtures/reference/schemas/metamap-viability.schema.json"),
     include_str!("../../../fixtures/reference/schemas/metamap-generation.schema.json"),
@@ -124,7 +124,7 @@ fn validate_policy(
     }
     Ok(issues)
 }
-fn uncertainty_summary_issues(summaries: &[J]) -> Vec<J> {
+pub(crate) fn uncertainty_summary_issues(summaries: &[J]) -> Vec<J> {
     let mut issues = Vec::new();
     let mut ids = HashSet::new();
     for summary in summaries {
