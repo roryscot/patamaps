@@ -36,7 +36,7 @@ def main():
     work = Path(tempfile.mkdtemp(prefix="integrations-", dir=ROOT / ".tools/capabilities"))
     environment = {**os.environ, "CARGO_INCREMENTAL": "0", "CARGO_PROFILE_DEV_DEBUG": "0", "CARGO_PROFILE_TEST_DEBUG": "0", "PYTHONDONTWRITEBYTECODE": "1"}
     if sys.platform == "darwin":
-        environment["SDKROOT"] = "/Library/Developer/CommandLineTools/SDKs/MacOSX26.5.sdk"
+        environment["SDKROOT"] = subprocess.check_output(["xcrun", "--show-sdk-path"], text=True).strip()
     files = [
         ROOT / "scripts/test_scientific.py", ROOT / "scripts/test_adapter_bridge.py",
         ROOT / "scripts/check_scientific_independent.py", ROOT / "scripts/capabilities/integrations.py",

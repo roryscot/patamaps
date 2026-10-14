@@ -52,7 +52,7 @@ def main():
     retained_base = ROOT / ".tools/capabilities"
     retained_base.mkdir(parents=True, exist_ok=True)
     work = Path(tempfile.mkdtemp(prefix="compiler-", dir=retained_base))
-    reference = Path("/Users/admin/dev/SEEDZ/metamap")
+    reference = Path(os.environ.get("PATAMAPS_REFERENCE", "/Users/admin/dev/SEEDZ/metamap")).resolve()
     node = node_runtime()
     tsc = reference / "node_modules/typescript/lib/tsc.js"
     cargo = Path.home() / ".cargo/bin/cargo"
@@ -65,7 +65,7 @@ def main():
         "PYTHONDONTWRITEBYTECODE": "1",
     }
     if platform.system() == "Darwin":
-        env["SDKROOT"] = "/Library/Developer/CommandLineTools/SDKs/MacOSX26.5.sdk"
+        env["SDKROOT"] = subprocess.check_output(["xcrun", "--show-sdk-path"], text=True).strip()
     source = inventory()
     commands = []
     receipt = {

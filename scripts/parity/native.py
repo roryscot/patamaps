@@ -14,9 +14,11 @@ ROOT = Path(__file__).resolve().parents[2]
 stamp = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H-%M-%S.%fZ")
 output = ROOT / "docs/acceptance/parity" / f"native-{stamp}"
 output.mkdir(parents=True)
-environment = {**os.environ, "SDKROOT": "/Library/Developer/CommandLineTools/SDKs/MacOSX26.5.sdk",
+environment = {**os.environ,
                "CARGO_INCREMENTAL": "0", "CARGO_PROFILE_DEV_DEBUG": "0", "CARGO_PROFILE_TEST_DEBUG": "0"}
-if platform.system() != "Darwin":
+if platform.system() == "Darwin":
+    environment["SDKROOT"] = subprocess.check_output(["xcrun", "--show-sdk-path"], text=True).strip()
+else:
     environment.pop("SDKROOT", None)
 cargo = Path.home() / ".cargo/bin/cargo"
 command = [str(cargo), "test", "--locked", "--workspace", "--exclude", "patamaps-activator"]

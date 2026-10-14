@@ -30,7 +30,7 @@ def main():
     env = {**os.environ, "CARGO_INCREMENTAL": "0", "CARGO_PROFILE_DEV_DEBUG": "0", "CARGO_PROFILE_TEST_DEBUG": "0", "PYTHONDONTWRITEBYTECODE": "1"}
     env["CARGO_TARGET_DIR"] = str(ROOT / "target/package-test")
     if sys.platform == "darwin":
-        env["SDKROOT"] = "/Library/Developer/CommandLineTools/SDKs/MacOSX26.5.sdk"
+        env["SDKROOT"] = subprocess.check_output(["xcrun", "--show-sdk-path"], text=True).strip()
     cargo = Path.home() / ".cargo/bin/cargo"
     rustc = Path.home() / ".cargo/bin/rustc"
     commands = []
