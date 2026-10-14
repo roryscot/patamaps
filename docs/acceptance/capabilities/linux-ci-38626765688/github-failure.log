@@ -1,0 +1,50 @@
+Linux aarch64	Run native Linux acceptance as root	﻿2026-10-14T19:48:51.8151421Z ##[group]Run sudo env CARGO_HOME="${CARGO_HOME:-$HOME/.cargo}" RUSTUP_HOME="${RUSTUP_HOME:-$HOME/.rustup}" PATH="$PATH" \
+Linux aarch64	Run native Linux acceptance as root	2026-10-14T19:48:51.8152443Z ^[[36;1msudo env CARGO_HOME="${CARGO_HOME:-$HOME/.cargo}" RUSTUP_HOME="${RUSTUP_HOME:-$HOME/.rustup}" PATH="$PATH" \^[[0m
+Linux aarch64	Run native Linux acceptance as root	2026-10-14T19:48:51.8153215Z ^[[36;1m  CARGO_INCREMENTAL=0 CARGO_PROFILE_DEV_DEBUG=0 CARGO_PROFILE_TEST_DEBUG=0 \^[[0m
+Linux aarch64	Run native Linux acceptance as root	2026-10-14T19:48:51.8153757Z ^[[36;1m  python3 -B scripts/capabilities/linux.py \^[[0m
+Linux aarch64	Run native Linux acceptance as root	2026-10-14T19:48:51.8154400Z ^[[36;1m    --cargo "$HOME/.cargo/bin/cargo" \^[[0m
+Linux aarch64	Run native Linux acceptance as root	2026-10-14T19:48:51.8154896Z ^[[36;1m    --output "$GITHUB_WORKSPACE/ci-evidence" \^[[0m
+Linux aarch64	Run native Linux acceptance as root	2026-10-14T19:48:51.8155297Z ^[[36;1m    --architecture "aarch64" \^[[0m
+Linux aarch64	Run native Linux acceptance as root	2026-10-14T19:48:51.8155764Z ^[[36;1m    --fixtures "/tmp/patamaps-ci-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"^[[0m
+Linux aarch64	Run native Linux acceptance as root	2026-10-14T19:48:51.8210215Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+Linux aarch64	Run native Linux acceptance as root	2026-10-14T19:48:51.8210826Z env:
+Linux aarch64	Run native Linux acceptance as root	2026-10-14T19:48:51.8211113Z   CARGO_INCREMENTAL: 0
+Linux aarch64	Run native Linux acceptance as root	2026-10-14T19:48:51.8211537Z   CARGO_PROFILE_DEV_DEBUG: 0
+Linux aarch64	Run native Linux acceptance as root	2026-10-14T19:48:51.8211883Z   CARGO_PROFILE_TEST_DEBUG: 0
+Linux aarch64	Run native Linux acceptance as root	2026-10-14T19:48:51.8212278Z ##[endgroup]
+Linux aarch64	Run native Linux acceptance as root	2026-10-14T19:48:51.9236853Z {"check": "build-debug", "exitCode": 1}
+Linux aarch64	Run native Linux acceptance as root	2026-10-14T19:48:51.9246977Z {"status": "failed", "receipt": "/home/runner/work/patamaps/patamaps/ci-evidence/receipt.json"}
+Linux aarch64	Run native Linux acceptance as root	2026-10-14T19:48:51.9774451Z Traceback (most recent call last):
+Linux aarch64	Run native Linux acceptance as root	2026-10-14T19:48:51.9775158Z   File "/home/runner/work/patamaps/patamaps/scripts/capabilities/linux.py", line 95, in <module>
+Linux aarch64	Run native Linux acceptance as root	2026-10-14T19:48:51.9775945Z     main()
+Linux aarch64	Run native Linux acceptance as root	2026-10-14T19:48:51.9776499Z   File "/home/runner/work/patamaps/patamaps/scripts/capabilities/linux.py", line 70, in main
+Linux aarch64	Run native Linux acceptance as root	2026-10-14T19:48:51.9777177Z     run("build-debug", [cargo, "build", "--workspace", "--locked"])
+Linux aarch64	Run native Linux acceptance as root	2026-10-14T19:48:51.9777762Z   File "/home/runner/work/patamaps/patamaps/scripts/capabilities/linux.py", line 66, in run
+Linux aarch64	Run native Linux acceptance as root	2026-10-14T19:48:51.9778363Z     raise RuntimeError(f"{label} failed; preserve and inspect {output}")
+Linux aarch64	Run native Linux acceptance as root	2026-10-14T19:48:51.9785351Z RuntimeError: build-debug failed; preserve and inspect /home/runner/work/patamaps/patamaps/ci-evidence
+Linux aarch64	Run native Linux acceptance as root	2026-10-14T19:48:51.9935224Z ##[error]Process completed with exit code 1.
+Linux x86_64	Run native Linux acceptance as root	﻿2026-10-14T19:48:53.4887469Z ##[group]Run sudo env CARGO_HOME="${CARGO_HOME:-$HOME/.cargo}" RUSTUP_HOME="${RUSTUP_HOME:-$HOME/.rustup}" PATH="$PATH" \
+Linux x86_64	Run native Linux acceptance as root	2026-10-14T19:48:53.4888133Z ^[[36;1msudo env CARGO_HOME="${CARGO_HOME:-$HOME/.cargo}" RUSTUP_HOME="${RUSTUP_HOME:-$HOME/.rustup}" PATH="$PATH" \^[[0m
+Linux x86_64	Run native Linux acceptance as root	2026-10-14T19:48:53.4888625Z ^[[36;1m  CARGO_INCREMENTAL=0 CARGO_PROFILE_DEV_DEBUG=0 CARGO_PROFILE_TEST_DEBUG=0 \^[[0m
+Linux x86_64	Run native Linux acceptance as root	2026-10-14T19:48:53.4889002Z ^[[36;1m  python3 -B scripts/capabilities/linux.py \^[[0m
+Linux x86_64	Run native Linux acceptance as root	2026-10-14T19:48:53.4889271Z ^[[36;1m    --cargo "$HOME/.cargo/bin/cargo" \^[[0m
+Linux x86_64	Run native Linux acceptance as root	2026-10-14T19:48:53.4889538Z ^[[36;1m    --output "$GITHUB_WORKSPACE/ci-evidence" \^[[0m
+Linux x86_64	Run native Linux acceptance as root	2026-10-14T19:48:53.4889789Z ^[[36;1m    --architecture "x86_64" \^[[0m
+Linux x86_64	Run native Linux acceptance as root	2026-10-14T19:48:53.4890098Z ^[[36;1m    --fixtures "/tmp/patamaps-ci-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"^[[0m
+Linux x86_64	Run native Linux acceptance as root	2026-10-14T19:48:53.4946849Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+Linux x86_64	Run native Linux acceptance as root	2026-10-14T19:48:53.4947133Z env:
+Linux x86_64	Run native Linux acceptance as root	2026-10-14T19:48:53.4947319Z   CARGO_INCREMENTAL: 0
+Linux x86_64	Run native Linux acceptance as root	2026-10-14T19:48:53.4947542Z   CARGO_PROFILE_DEV_DEBUG: 0
+Linux x86_64	Run native Linux acceptance as root	2026-10-14T19:48:53.4947741Z   CARGO_PROFILE_TEST_DEBUG: 0
+Linux x86_64	Run native Linux acceptance as root	2026-10-14T19:48:53.4947929Z ##[endgroup]
+Linux x86_64	Run native Linux acceptance as root	2026-10-14T19:48:53.6204597Z {"check": "build-debug", "exitCode": 1}
+Linux x86_64	Run native Linux acceptance as root	2026-10-14T19:48:53.6213958Z {"status": "failed", "receipt": "/home/runner/work/patamaps/patamaps/ci-evidence/receipt.json"}
+Linux x86_64	Run native Linux acceptance as root	2026-10-14T19:48:53.6766301Z Traceback (most recent call last):
+Linux x86_64	Run native Linux acceptance as root	2026-10-14T19:48:53.6766962Z   File "/home/runner/work/patamaps/patamaps/scripts/capabilities/linux.py", line 95, in <module>
+Linux x86_64	Run native Linux acceptance as root	2026-10-14T19:48:53.6767543Z     main()
+Linux x86_64	Run native Linux acceptance as root	2026-10-14T19:48:53.6767985Z   File "/home/runner/work/patamaps/patamaps/scripts/capabilities/linux.py", line 70, in main
+Linux x86_64	Run native Linux acceptance as root	2026-10-14T19:48:53.6768618Z     run("build-debug", [cargo, "build", "--workspace", "--locked"])
+Linux x86_64	Run native Linux acceptance as root	2026-10-14T19:48:53.6769119Z   File "/home/runner/work/patamaps/patamaps/scripts/capabilities/linux.py", line 66, in run
+Linux x86_64	Run native Linux acceptance as root	2026-10-14T19:48:53.6769562Z     raise RuntimeError(f"{label} failed; preserve and inspect {output}")
+Linux x86_64	Run native Linux acceptance as root	2026-10-14T19:48:53.6770162Z RuntimeError: build-debug failed; preserve and inspect /home/runner/work/patamaps/patamaps/ci-evidence
+Linux x86_64	Run native Linux acceptance as root	2026-10-14T19:48:53.6917215Z ##[error]Process completed with exit code 1.

@@ -32,7 +32,9 @@ def main():
     args = parser.parse_args()
     assert platform.system() == "Linux" and os.geteuid() == 0, "Use an isolated Linux root test host"
     assert platform.machine() == args.architecture, "Verify the actual required architecture"
-    cargo = args.cargo.resolve()
+    # Rustup proxies select their command from argv[0]; resolving cargo's
+    # symlink to rustup changes "cargo build" into a different command.
+    cargo = args.cargo.absolute()
     assert cargo.is_file()
     output = args.output.resolve()
     output.mkdir(parents=True, exist_ok=False)

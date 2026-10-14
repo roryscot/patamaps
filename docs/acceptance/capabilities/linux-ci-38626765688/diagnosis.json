@@ -1,0 +1,71 @@
+{
+  "status": "diagnosed-runner-failure-correction-checked",
+  "recordedAtUtc": "2026-10-14T19:50:21.295943+00:00",
+  "run": "https://github.com/roryscot/patamaps/actions/runs/38626765688",
+  "candidate": "aed5a596c59d80ce79d3f061993825206c198205",
+  "failure": "Both build-debug logs report rustup usage and unexpected --workspace before compilation. The runner resolved the cargo proxy symlink, losing command selection through argv[0].",
+  "correction": "Use an absolute cargo path without resolving symlinks.",
+  "localChecks": [
+    {
+      "command": [
+        "/Users/admin/.cargo/bin/cargo",
+        "--version"
+      ],
+      "exitCode": 0,
+      "stdout": "cargo 1.99.0 (5f94df478 2026-08-27)"
+    },
+    {
+      "command": [
+        "ast.parse",
+        "scripts/capabilities/linux.py"
+      ],
+      "result": "passed"
+    }
+  ],
+  "correctedRunnerDigest": "sha256:1d89ff14f01e0b77bd6c09bb1c1b8ead38f0bdcc8aad29c00edca5a8c7df8ae2",
+  "productOrAssertionChanges": false,
+  "linuxAcceptance": "still open; actual rerun required",
+  "retainedFiles": [
+    {
+      "path": "github-failure.log",
+      "digest": "sha256:54733ca3c85ddb9b287be36955586756f768150c0bea55d2c88ef3d9bcd476ad"
+    },
+    {
+      "path": "github-run.json",
+      "digest": "sha256:2d30f9e3eb1c3c2525c2419c07a849fff5688d66dc1ec1f0fd3d39ce0d55910b"
+    },
+    {
+      "path": "native-linux-aarch64-aed5a596c59d80ce79d3f061993825206c198205/build-debug.stderr.log",
+      "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "native-linux-aarch64-aed5a596c59d80ce79d3f061993825206c198205/build-debug.stdout.log",
+      "digest": "sha256:aee7dbc1171dc8d9e816b6d0d9dbc83faef4b2da897089b9a2d8f40fd48c5917"
+    },
+    {
+      "path": "native-linux-aarch64-aed5a596c59d80ce79d3f061993825206c198205/fixtures.tar.gz",
+      "digest": "sha256:6ed3ac87241177dc92a98f0138f76d87e78ca28c80cf3323d2ec2bfb85415008"
+    },
+    {
+      "path": "native-linux-aarch64-aed5a596c59d80ce79d3f061993825206c198205/receipt.json",
+      "digest": "sha256:5eafa87ee30bcdb614e4b83ee372ddb2543b26b3a5d4dea249c1eef7f3cbca9a"
+    },
+    {
+      "path": "native-linux-x86_64-aed5a596c59d80ce79d3f061993825206c198205/build-debug.stderr.log",
+      "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "native-linux-x86_64-aed5a596c59d80ce79d3f061993825206c198205/build-debug.stdout.log",
+      "digest": "sha256:aee7dbc1171dc8d9e816b6d0d9dbc83faef4b2da897089b9a2d8f40fd48c5917"
+    },
+    {
+      "path": "native-linux-x86_64-aed5a596c59d80ce79d3f061993825206c198205/fixtures.tar.gz",
+      "digest": "sha256:2857d7e90e71b3881c5e0bc7c98bfa8c470d6000f4278705ac305284b4e267f8"
+    },
+    {
+      "path": "native-linux-x86_64-aed5a596c59d80ce79d3f061993825206c198205/receipt.json",
+      "digest": "sha256:8b35f62e2a5a8dd9475c45d3739a238543484264f2738138cc6b9a175fef371a"
+    }
+  ],
+  "deleted": []
+}
