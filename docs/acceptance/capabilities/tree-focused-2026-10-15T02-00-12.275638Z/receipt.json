@@ -1,0 +1,214 @@
+{
+  "status": "passed",
+  "retainedWork": ".tools/capabilities/tree-focused-81lqzw0a",
+  "scope": "Focused real Rust API/CLI emission and standalone TypeScript execution; no installed package claim.",
+  "commands": [
+    {
+      "label": "format",
+      "argv": [
+        "/Users/admin/.cargo/bin/cargo",
+        "fmt",
+        "--all"
+      ],
+      "exitCode": 0,
+      "expectedExitCodes": [
+        0
+      ],
+      "stdout": {
+        "path": "docs/acceptance/capabilities/tree-focused-2026-10-15T02-00-12.275638Z/format.stdout.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "docs/acceptance/capabilities/tree-focused-2026-10-15T02-00-12.275638Z/format.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "consumer-format",
+      "argv": [
+        "/Users/admin/.cargo/bin/rustfmt",
+        "--edition",
+        "2024",
+        "scripts/capabilities/consumers/typed_tree.rs"
+      ],
+      "exitCode": 0,
+      "expectedExitCodes": [
+        0
+      ],
+      "stdout": {
+        "path": "docs/acceptance/capabilities/tree-focused-2026-10-15T02-00-12.275638Z/consumer-format.stdout.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "docs/acceptance/capabilities/tree-focused-2026-10-15T02-00-12.275638Z/consumer-format.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "build-cli",
+      "argv": [
+        "/Users/admin/.cargo/bin/cargo",
+        "build",
+        "--locked",
+        "--offline",
+        "-p",
+        "patamaps-cli"
+      ],
+      "exitCode": 0,
+      "expectedExitCodes": [
+        0
+      ],
+      "stdout": {
+        "path": "docs/acceptance/capabilities/tree-focused-2026-10-15T02-00-12.275638Z/build-cli.stdout.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "docs/acceptance/capabilities/tree-focused-2026-10-15T02-00-12.275638Z/build-cli.stderr.log",
+        "digest": "sha256:9e1be62ab90737e6e697f71cf9d09788dbd012e6d397117fe8a6ec6f010439ec"
+      }
+    },
+    {
+      "label": "native-emission",
+      "argv": [
+        "/Users/admin/.cargo/bin/cargo",
+        "run",
+        "--offline",
+        "--quiet",
+        "--bin",
+        "typed_tree"
+      ],
+      "exitCode": 0,
+      "expectedExitCodes": [
+        0
+      ],
+      "stdout": {
+        "path": "docs/acceptance/capabilities/tree-focused-2026-10-15T02-00-12.275638Z/native-emission.stdout.log",
+        "digest": "sha256:11a8708d4498624c5e3a1e430dbbd57db505118735fb3e1e2bb49a914878f5ff"
+      },
+      "stderr": {
+        "path": "docs/acceptance/capabilities/tree-focused-2026-10-15T02-00-12.275638Z/native-emission.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "cli-emission",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+        "path-tree",
+        "graph.json",
+        "policy.json",
+        "spec.json",
+        "--relation-pack",
+        "pack.json",
+        "--context",
+        "context.json",
+        "--as-of",
+        "2026-10-10T12:00:00Z",
+        "--format",
+        "typescript",
+        "--export",
+        "nativeTree"
+      ],
+      "exitCode": 0,
+      "expectedExitCodes": [
+        0
+      ],
+      "stdout": {
+        "path": "docs/acceptance/capabilities/tree-focused-2026-10-15T02-00-12.275638Z/cli-emission.stdout.log",
+        "digest": "sha256:a605a8dc3033a7767b8a90f63a3d906a53ddf0eca458ea1900af9a3f986283b1"
+      },
+      "stderr": {
+        "path": "docs/acceptance/capabilities/tree-focused-2026-10-15T02-00-12.275638Z/cli-emission.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "typescript-build",
+      "argv": [
+        "/Users/admin/.nvm/versions/node/v22.23.3/bin/node",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/reference/metamap-399747a4ad05/node_modules/typescript/lib/tsc.js",
+        "--strict",
+        "--target",
+        "ES2022",
+        "--module",
+        "NodeNext",
+        "--moduleResolution",
+        "NodeNext",
+        "--outDir",
+        "dist",
+        "typed_runtime.mts"
+      ],
+      "exitCode": 0,
+      "expectedExitCodes": [
+        0
+      ],
+      "stdout": {
+        "path": "docs/acceptance/capabilities/tree-focused-2026-10-15T02-00-12.275638Z/typescript-build.stdout.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "docs/acceptance/capabilities/tree-focused-2026-10-15T02-00-12.275638Z/typescript-build.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "typescript-runtime",
+      "argv": [
+        "/Users/admin/.nvm/versions/node/v22.23.3/bin/node",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/capabilities/tree-focused-81lqzw0a/dist/typed_runtime.mjs"
+      ],
+      "exitCode": 0,
+      "expectedExitCodes": [
+        0
+      ],
+      "stdout": {
+        "path": "docs/acceptance/capabilities/tree-focused-2026-10-15T02-00-12.275638Z/typescript-runtime.stdout.log",
+        "digest": "sha256:656fd4f848c539b6aa9eb11f71dab5fbaf0d9c8e5f9a212549a9cec400cb13a2"
+      },
+      "stderr": {
+        "path": "docs/acceptance/capabilities/tree-focused-2026-10-15T02-00-12.275638Z/typescript-runtime.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "false-literal-refusal",
+      "argv": [
+        "/Users/admin/.nvm/versions/node/v22.23.3/bin/node",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/reference/metamap-399747a4ad05/node_modules/typescript/lib/tsc.js",
+        "--strict",
+        "--target",
+        "ES2022",
+        "--module",
+        "NodeNext",
+        "--moduleResolution",
+        "NodeNext",
+        "--noEmit",
+        "typed_invalid.mts"
+      ],
+      "exitCode": 2,
+      "expectedExitCodes": [
+        1,
+        2
+      ],
+      "stdout": {
+        "path": "docs/acceptance/capabilities/tree-focused-2026-10-15T02-00-12.275638Z/false-literal-refusal.stdout.log",
+        "digest": "sha256:8c9228183bc37df48e072d72ba2eb2b8526ff54e1b245f586eb927447752cc94"
+      },
+      "stderr": {
+        "path": "docs/acceptance/capabilities/tree-focused-2026-10-15T02-00-12.275638Z/false-literal-refusal.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  ],
+  "deleted": [],
+  "typescriptRuntime": {
+    "nativePath": "/network/99",
+    "literalPath": "/users/:next/literal",
+    "catchAll": "/files/a/b",
+    "prototypeChild": true,
+    "ownershipPreserved": true,
+    "unicodeAndBoundsRefused": true
+  },
+  "consumerDigest": "sha256:512a26c94ba894ffc51f6cb32db713bcd6c66b31f9fc6b925a12b31f13f8bd07",
+  "acceptanceDriverDigest": "sha256:c203cea3b0540fdba8cad28704f2226ee7b8d435ba435ab5151961eeccc819fd"
+}

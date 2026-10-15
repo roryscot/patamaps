@@ -1,0 +1,89 @@
+{
+  "status": "partial-substantive-audit",
+  "recordedAtUtc": "2026-10-15T01:14:13.169649+00:00",
+  "referenceEngine": "399747a4ad05a37cd8db1cedd53048fad2175be4",
+  "reviewedReferenceSources": [
+    {
+      "suite": "application-topology",
+      "sourcePath": "src/__tests__/application-topology.test.ts",
+      "digest": "sha256:5848bb255889ae1774408a11fb7d9e0c3c2aad0844cb43b50d5febf1228763df",
+      "sourceRevision": "399747a4ad05a37cd8db1cedd53048fad2175be4",
+      "capabilities": [
+        "C03"
+      ],
+      "substantiveGuaranteesReviewed": [
+        "Totality and exact counterpart cardinality, active-mapping reachability, required hydration and nearest dominating context providers",
+        "Exact relation-scoped reviewed exclusion attribution; unknown parameters, missing/ambiguous providers and stale/overlapping mapping declarations refuse",
+        "Native aggregate work and diagnostic exhaustion cannot produce an admitted generation"
+      ],
+      "nativeEvidence": [
+        {
+          "path": "crates/patamaps-core/src/topology.rs",
+          "digest": "sha256:2977c4e678d6e465ae4e994e428cfa1adaaa6db15ed11da517ec33837769797c"
+        },
+        {
+          "path": "crates/patamaps-core/tests/topology.rs",
+          "digest": "sha256:d152080a27086ca3a8d9bd213da4d876a44912e5ede4393c94c7df9868522228"
+        },
+        {
+          "path": "fixtures/topology/graph.json",
+          "digest": "sha256:462a52f310dc1c634297d3ef924ce0bb22cb7b82e220147c142ca2d3b1049431"
+        },
+        {
+          "path": "fixtures/topology/policy.json",
+          "digest": "sha256:df03b4b802f4ed8e6bd134cb77bb4987158717dde69e7c4211bac7fcbf3e2f27"
+        }
+      ],
+      "review": "Complete reference assertion bodies and listed native implementation/test portions read. This is not a one-to-one original-suite execution claim."
+    },
+    {
+      "suite": "path-tree",
+      "sourcePath": "src/__tests__/path-tree.test.ts",
+      "digest": "sha256:825763a403de9d2c0ba3bc7f51bf77da757ebd36289396e70d47722dec066fdc",
+      "sourceRevision": "399747a4ad05a37cd8db1cedd53048fad2175be4",
+      "capabilities": [
+        "C07",
+        "C08"
+      ],
+      "substantiveGuaranteesReviewed": [
+        "Explicit bound specification, authored nested paths, deterministic occupants/parameters and unambiguous identity",
+        "Hydration preserves template keys and occupants, including catch-all/optional values; missing/unsafe values refuse",
+        "Missing paths, collisions, reserved keys and undeclared/stale tree specifications refuse; native bounds remain explicit"
+      ],
+      "nativeEvidence": [
+        {
+          "path": "crates/patamaps-projection/src/path_tree.rs",
+          "digest": "sha256:d32b7febef8700673af4e62ef1fb769fd71d6d9f0b9523c6e62d7c3f90933686"
+        },
+        {
+          "path": "crates/patamaps-projection/tests/path_tree.rs",
+          "digest": "sha256:e6d229a2d18fd05be1d551a711f433e62dee55b0cd1551cafdf930038aed87ee"
+        },
+        {
+          "path": "scripts/capabilities/consumers/typed_tree.rs",
+          "digest": "sha256:85eb9dc6a3ee7de4168b8655bcf1256ec071a7257d87183f22c3571779b39821"
+        }
+      ],
+      "review": "Complete reference assertion bodies and listed native implementation/test portions read. This is not a one-to-one original-suite execution claim."
+    }
+  ],
+  "actualLinuxAcceptance": {
+    "path": "docs/acceptance/capabilities/linux-ci-38663333929/local-retention.json",
+    "digest": "sha256:686ca2b205ffeee014cca813ac6bb254db60cbb60ad66ac4b831fe199a7c6c83",
+    "sourceRevision": "66ec7a0b1b66b24a539c24a68e4947550f451423",
+    "compiledInputsMatchCurrent": true
+  },
+  "nativeTypedWorkflow": {
+    "installedReceipt": "docs/acceptance/capabilities/installed-2026-10-15T01-05-58.879199Z/receipt.json",
+    "receiptDigest": "sha256:acb120cbefefd75269f6b10fb23333cb816acefc6d02e9a8ec8162e08dee751a",
+    "scope": "Actual installed Rust policy/proof/uncertainty/budget, checked tree hydration, input/template preservation, rejection replay and separate generated Rust projection runtime. Runtime executes without Node in PATH. Production algorithms and executor identities are unchanged.",
+    "commands": [
+      "rust-typed-tree",
+      "typed-runtime-build",
+      "typed-runtime"
+    ]
+  },
+  "remainingFormatQuestion": "The original path-tree tests also assert an emitted TypeScript tree/helper module. Native tree API/JSON and Rust workflow are verified; this audit does not claim a separately emitted TypeScript tree module or silently disposition a required integration.",
+  "remainingAudit": "Other pinned suites and final capability acceptance remain incomplete.",
+  "deleted": []
+}

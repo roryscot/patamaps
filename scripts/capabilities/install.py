@@ -21,6 +21,65 @@ def digest(raw):
     return "sha256:" + hashlib.sha256(raw).hexdigest()
 
 
+TYPED_TREE_RUNTIME = r'''import {hydrateRepeatedTree} from "./repeated_tree.mjs";
+import {nativeTree,nativeTreeParams,hydrateNativeTree} from "./native_tree.mjs";
+import {hydrateAlternateTree} from "./alternate_tree.mjs";
+import {edgeTree,hydrateEdgeTree} from "./edge_tree.mjs";
+import {hydrateParams} from "./params_tree.mjs";
+import {hydrate_patamapsParams} from "./prefixed_tree.mjs";
+function check(value: boolean, message: string): void { if (!value) throw new Error(message); }
+function refuses(action: () => unknown): void {
+  let refused = false;
+  try { action(); } catch { refused = true; }
+  check(refused, "Expected path refusal");
+}
+const nativeBefore = JSON.stringify(nativeTree);
+const hydrated = hydrateNativeTree({networkId:"99"});
+check(hydrated.network[":networkId"]._ === "/network/99", "Hydrated native path");
+check(JSON.stringify(nativeTree) === nativeBefore, "Native template changed");
+check(JSON.stringify(nativeTreeParams) === JSON.stringify([":networkId"]), "Parameter inventory");
+check(hydrateNativeTree({":networkId":"99"}).network[":networkId"]._ === "/network/99", "Explicit alias");
+check(hydrateParams({networkId:"99"}).network[":networkId"]._ === "/network/99", "Export shadow");
+check(hydrate_patamapsParams({networkId:"99"}).network[":networkId"]._ === "/network/99", "Prefix shadow");
+refuses(() => hydrateNativeTree({}));
+refuses(() => hydrateNativeTree(Object.create({networkId:"99"})));
+for (const value of ["a/b","a?b","a#b","a\ufeffb","\ud800"]) {
+  refuses(() => hydrateNativeTree({networkId:value}));
+}
+refuses(() => hydrateNativeTree(Object.fromEntries(Array.from({length:1025},(_,i)=>["p"+i,"x"]))));
+refuses(() => hydrateNativeTree({networkId:"\u{1f600}".repeat(4_194_305)}));
+check(hydrateNativeTree({networkId:"a\u0085b"}).network[":networkId"]._ === @@NATIVE_UNICODE_PATH@@, "Unicode decision differs from native");
+check(hydrateAlternateTree({id:"value"}).users[":id"]._ === "--users--value", "Alternate delimiter path");
+refuses(() => hydrateAlternateTree({id:"a--b"}));
+refuses(() => hydrateRepeatedTree({id:"x".repeat(1_100_000)}));
+refuses(() => hydrateNativeTree({networkId:"\0".repeat(3_000_000)}));
+const edgeBefore = JSON.stringify(edgeTree);
+const edge = hydrateEdgeTree({id:":next",next:"literal",rest:"a/b"});
+check(edge.users[":id"][":next"]._ === "/users/:next/literal", "Substitution was reinterpreted");
+check(edge.files["*rest?"]._ === "/files/a/b", "Catch-all path");
+check(hydrateEdgeTree({id:"x",next:"y"}).files["*rest?"]._ === "/files", "Absent optional path");
+check(Object.hasOwn(edge,"__proto__"), "Prototype-like child lost");
+check(edge["__proto__"][":id"]._ === "/__proto__/:next", "Prototype-like path");
+for (const rest of ["bad?query","bad#fragment","\udfff"]) {
+  refuses(() => hydrateEdgeTree({id:"x",next:"y",rest}));
+}
+refuses(() => hydrateEdgeTree({id:"x".repeat(6_000_000),next:"y"}));
+(edge.users[":id"][":next"].$ as unknown as {label:string}).label = "changed output";
+check(JSON.stringify(edgeTree) === edgeBefore, "Hydrated occupant aliases template");
+console.log(JSON.stringify({
+  nativePath:hydrated.network[":networkId"]._,
+  literalPath:edge.users[":id"][":next"]._,
+  catchAll:edge.files["*rest?"]._,
+  prototypeChild:Object.hasOwn(edge,"__proto__"),
+  ownershipPreserved:true,unicodeAndBoundsRefused:true
+}));
+'''
+TYPED_TREE_INVALID = r'''import {hydrateNativeTree} from "./native_tree.mjs";
+const impossible: "/network/:networkId" = hydrateNativeTree({networkId:"99"}).network[":networkId"]._;
+console.log(impossible);
+'''
+
+
 def main():
     ensure_guarded()
     stamp = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H-%M-%S.%fZ")
@@ -40,9 +99,9 @@ def main():
     def save():
         path.write_text(json.dumps(receipt, indent=2) + "\n")
 
-    def run(label, argv, cwd=ROOT, environment=env):
+    def run(label, argv, cwd=ROOT, environment=env, accepted=(0,)):
         result = subprocess.run([str(v) for v in argv], cwd=cwd, env=environment, capture_output=True)
-        item = {"label": label, "argv": [str(v) for v in argv], "exitCode": result.returncode}
+        item = {"label": label, "argv": [str(v) for v in argv], "exitCode": result.returncode, "expectedExitCodes": list(accepted)}
         for stream in ["stdout", "stderr"]:
             raw = getattr(result, stream)
             log = output / f"{label}.{stream}.log"
@@ -50,8 +109,8 @@ def main():
             item[stream] = {"path": log.relative_to(ROOT).as_posix(), "digest": digest(raw)}
         commands.append(item)
         save()
-        print(json.dumps({"check": label, "exitCode": result.returncode}), flush=True)
-        if result.returncode:
+        print(json.dumps({"check": label, "exitCode": result.returncode, "expectedExitCodes": list(accepted)}), flush=True)
+        if result.returncode not in accepted:
             raise RuntimeError(f"{label} failed; inspect retained logs in {output}")
         return result.stdout.decode()
 
@@ -138,6 +197,50 @@ fn main(){
         assert (source / "scripts/capabilities/source_reporting.py").read_bytes() == (ROOT / "scripts/capabilities/source_reporting.py").read_bytes()
         source_cli = json.loads(run("installed-source-cli", [sys.executable, "-B", ROOT / "scripts/capabilities/source_reporting.py", "--cli", cli], consumer))
         assert source_cli["status"] == "passed"
+        # Exercise the native typed-policy/tree workflow through installed Rust libraries.
+        typed_fixtures = consumer / "typed-fixtures"
+        typed_fixtures.mkdir()
+        for name in ["graph", "pack", "request", "policy", "projection-spec"]:
+            (typed_fixtures / f"{name}.json").write_bytes((source / f"fixtures/laws/{name}.json").read_bytes())
+        (typed_fixtures / "core.json").write_bytes((source / "relation-packs/core.json").read_bytes())
+        typed_source = source / "scripts/capabilities/consumers/typed_tree.rs"
+        assert typed_source.read_bytes() == (ROOT / "scripts/capabilities/consumers/typed_tree.rs").read_bytes()
+        (consumer / "src/bin/typed_tree.rs").write_bytes(typed_source.read_bytes())
+        typed_tree = json.loads(run("rust-typed-tree", [cargo, "run", "--offline", "--quiet", "--bin", "typed_tree"], consumer, {**env, "PATH": str(cargo.parent) + ":/usr/bin:/bin"}))
+        assert typed_tree["profile"] == "patamaps-native-typed-consumer-acceptance"
+        assert all(typed_tree[k] is True for k in ["typedTreeHydration", "templateUnchanged", "inputBytesUnchanged", "budgetBoundary", "replayTamperRefusal", "unavailableRiskStaysNull"])
+        (consumer / "typed_runtime.rs").write_text('#[path="typed_bindings.rs"]mod bindings;fn main(){let id=bindings::SemanticId::parse("urn:a").unwrap();assert_eq!(id.as_str(),"urn:a");assert!(bindings::SemanticId::parse("urn:missing").is_none());println!("{}",bindings::PROJECTION_JSON);}\n')
+        run("typed-runtime-build", [rustc, "--edition=2024", "typed_runtime.rs", "-o", "typed_runtime"], consumer)
+        typed_runtime = json.loads(run("typed-runtime", [consumer / "typed_runtime"], consumer, {"PATH": "/usr/bin:/bin"}))
+        assert typed_runtime["digest"] == typed_tree["projectionDigest"]
+        assert typed_runtime["entries"][0]["slots"][0]["targets"][0]["id"] == "urn:c"
+        assert typed_runtime["semantics"]["risk"]["totalCost"] == 5
+        typed_inputs = typed_tree["acceptedCapture"]["inputs"]
+        for name, value in [
+            ("graph", typed_inputs["graph"]), ("policy", typed_inputs["policy"]),
+            ("spec", typed_inputs["projectionSpecs"][0]), ("pack", typed_inputs["packs"][0]),
+            ("context", typed_inputs["context"]), ("parameters", {"networkId": "99"}),
+        ]:
+            (consumer / f"typed_{name}.json").write_text(json.dumps(value, indent=2) + "\n")
+        tree_cli_arguments = [cli, "path-tree", "typed_graph.json", "typed_policy.json", "typed_spec.json", "--as-of", typed_inputs["evaluatedAt"], "--context", "typed_context.json", "--relation-pack", "typed_pack.json", "--format", "typescript", "--export", "nativeTree"]
+        cli_tree = run("typed-tree-cli", tree_cli_arguments, consumer, {"PATH": "/usr/bin:/bin"})
+        assert cli_tree == (consumer / "native_tree.mts").read_text()
+        refused = json.loads(run("typed-tree-options-refusal", [*tree_cli_arguments, "--parameters", "typed_parameters.json", "--output", "native_tree.mts"], consumer, {"PATH": "/usr/bin:/bin"}, accepted=(1,)))
+        assert any(issue["code"] == "PATH_TREE_EMISSION_OPTIONS" for issue in refused["issues"])
+        assert cli_tree == (consumer / "native_tree.mts").read_text()
+        (consumer / "typed_runtime.mts").write_text(TYPED_TREE_RUNTIME.replace("@@NATIVE_UNICODE_PATH@@", json.dumps(typed_tree["unicodePath"])))
+        (consumer / "typed_invalid.mts").write_text(TYPED_TREE_INVALID)
+        tsc = Path(os.environ.get("PATAMAPS_REFERENCE", "/Users/admin/dev/SEEDZ/metamap")) / "node_modules/typescript/lib/tsc.js"
+        assert tsc.is_file()
+        type_arguments = [node_runtime(), tsc, "--strict", "--target", "ES2022", "--module", "NodeNext", "--moduleResolution", "NodeNext"]
+        run("typed-tree-typescript-build", [*type_arguments, "--outDir", "typed_dist", "typed_runtime.mts"], consumer)
+        tree_runtime = json.loads(run("typed-tree-typescript-runtime", [node_runtime(), consumer / "typed_dist/typed_runtime.mjs"], consumer, {"PATH": "/usr/bin:/bin"}))
+        assert tree_runtime["nativePath"] == "/network/99"
+        assert tree_runtime["literalPath"] == "/users/:next/literal"
+        assert tree_runtime["catchAll"] == "/files/a/b"
+        assert all(tree_runtime[k] is True for k in ["prototypeChild", "ownershipPreserved", "unicodeAndBoundsRefused"])
+        invalid_type = run("typed-tree-false-literal-refusal", [*type_arguments, "--noEmit", "typed_invalid.mts"], consumer, accepted=(1, 2))
+        assert "TS2322" in invalid_type and "not assignable" in invalid_type
         (consumer / "service.rs").write_text('pub fn greet(input:&str)->String{format!("Hello, {}!",input)}\n')
         (consumer / "runtime.rs").write_text('mod service;mod bindings;fn main(){let id=bindings::SemanticId::parse("urn:example:command:create-user").unwrap();println!("{}",bindings::dispatch(id,"Ada"));}\n')
         no_node = {"PATH": "/usr/bin:/bin"}
@@ -151,7 +254,7 @@ fn main(){
         (consumer / "package.json").write_text('{"type":"module"}\n')
         (consumer / "sdk.mjs").write_text('import{Patamaps}from"patamaps-native-sdk-draft";console.log(JSON.stringify(new Patamaps(process.argv[2]).runJson(["engine"])));\n')
         assert json.loads(run("typescript-sdk", [node_runtime(), consumer / "sdk.mjs", cli], consumer)) == expected
-        receipt.update(status="passed", distribution=distribution, sourceInventoryEntries=len(inventory), engines=expected, nativeConsumption="Hello, Ada!", customEvaluatorBinding=generation["customConstraintEvaluators"][0], memoryHost=memory, memoryConsumerSourceDigest=digest(memory_source.read_bytes()), sourceInspection=source_report, sourceConsumerDigest=digest(source_consumer.read_bytes()), sourceCliReceipt=source_cli["receipt"], completedAtUtc=datetime.now(timezone.utc).isoformat())
+        receipt.update(status="passed", distribution=distribution, sourceInventoryEntries=len(inventory), engines=expected, nativeConsumption="Hello, Ada!", customEvaluatorBinding=generation["customConstraintEvaluators"][0], memoryHost=memory, memoryConsumerSourceDigest=digest(memory_source.read_bytes()), sourceInspection=source_report, sourceConsumerDigest=digest(source_consumer.read_bytes()), sourceCliReceipt=source_cli["receipt"], typedTree=typed_tree, typescriptTreeRuntime=tree_runtime, typedConsumerSourceDigest=digest(typed_source.read_bytes()), completedAtUtc=datetime.now(timezone.utc).isoformat())
     except BaseException as error:
         receipt.update(status="failed", error=f"{type(error).__name__}: {error}")
         raise

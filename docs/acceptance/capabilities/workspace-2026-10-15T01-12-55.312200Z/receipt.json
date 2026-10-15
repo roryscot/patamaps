@@ -1,0 +1,126 @@
+{
+  "status": "passed",
+  "installedReceipt": "docs/acceptance/capabilities/installed-2026-10-15T01-05-58.879199Z/receipt.json",
+  "binaryDigest": "sha256:e25459d15fb894f3ab18e137d8e9aed2ee453363d987967be4cee16110accda8",
+  "nodeInPath": false,
+  "retainedWork": ".tools/capabilities/workspace-ntrpqvqu",
+  "commands": [
+    {
+      "label": "engine",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/capabilities/installed-bwdyjx59/installation/bin/patamaps",
+        "engine"
+      ],
+      "exitCode": 0,
+      "expectedExitCode": 0
+    },
+    {
+      "label": "generate",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/capabilities/installed-bwdyjx59/installation/bin/patamaps",
+        "generate",
+        "config.json",
+        "--root",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/capabilities/workspace-ntrpqvqu"
+      ],
+      "exitCode": 0,
+      "expectedExitCode": 0
+    },
+    {
+      "label": "offline-baseline",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/capabilities/installed-bwdyjx59/installation/bin/patamaps",
+        "verify-workspace",
+        "baseline.json"
+      ],
+      "exitCode": 0,
+      "expectedExitCode": 0
+    },
+    {
+      "label": "unchanged",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/capabilities/installed-bwdyjx59/installation/bin/patamaps",
+        "check",
+        "config.json",
+        "baseline.json",
+        "--root",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/capabilities/workspace-ntrpqvqu"
+      ],
+      "exitCode": 0,
+      "expectedExitCode": 0
+    },
+    {
+      "label": "drift",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/capabilities/installed-bwdyjx59/installation/bin/patamaps",
+        "check",
+        "config.json",
+        "baseline.json",
+        "--root",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/capabilities/workspace-ntrpqvqu"
+      ],
+      "exitCode": 2,
+      "expectedExitCode": 2
+    },
+    {
+      "label": "regenerate-current",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/capabilities/installed-bwdyjx59/installation/bin/patamaps",
+        "generate",
+        "config.json",
+        "--root",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/capabilities/workspace-ntrpqvqu"
+      ],
+      "exitCode": 0,
+      "expectedExitCode": 0
+    },
+    {
+      "label": "inspect",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/capabilities/installed-bwdyjx59/installation/bin/patamaps",
+        "inspect",
+        "after.json",
+        "--before",
+        "capture.json",
+        "--subject",
+        "urn:example:command:create-user"
+      ],
+      "exitCode": 0,
+      "expectedExitCode": 0
+    },
+    {
+      "label": "html",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/capabilities/installed-bwdyjx59/installation/bin/patamaps",
+        "inspect",
+        "after.json",
+        "--before",
+        "capture.json",
+        "--subject",
+        "urn:example:command:create-user",
+        "--html"
+      ],
+      "exitCode": 0,
+      "expectedExitCode": 0
+    }
+  ],
+  "deleted": [],
+  "activation": "not-performed",
+  "baselineUnchanged": true,
+  "noCacheCreated": true,
+  "sourceChange": {
+    "before": "sha256:f2260288c8a3d4db5c982f66230c291b363efa06138b5ff05e2f6c7d2e29f768",
+    "after": "sha256:cb4433a3ca3fc1f183ed6ccf9215ddea2d245ec1aa5daca1556a1dd0d753a72c",
+    "beforePreservedAt": ".tools/capabilities/workspace-ntrpqvqu/graph.before.json"
+  },
+  "html": "docs/acceptance/capabilities/workspace-2026-10-15T01-12-55.312200Z/debugger.html",
+  "browserVerification": "pending",
+  "engines": {
+    "schemaVersion": "0.1.0",
+    "documentType": "executor-description",
+    "compiler": "sha256:800d7c4526f5c262b129da6b81fe68b1ecc539d671d9b006ef6e788fa0679e91",
+    "governance": "sha256:e405975a096236c1b40f8eee225c36158d76466aa58ae0b3789468db1e78f86e",
+    "workspace": "sha256:697896a607e14116464279ac2eae22d55c93e0bcf50f5b4e284bbad8bd955ed5",
+    "scientific": "sha256:8c51b59ba9efffff1b01c984376ec835139ce8cef056d4e82960ec8fbad94019"
+  }
+}

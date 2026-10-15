@@ -237,3 +237,32 @@ fn semantic_tree_capture_success_and_refusal_replay_through_the_same_evaluator()
     let report = compare(&replay(&successful).unwrap(), &replay(&rejected).unwrap()).unwrap();
     assert!(report["pathTreeChanged"].is_null());
 }
+
+#[test]
+fn tree_emission_refuses_injection_reserved_bindings_and_excessive_names() {
+    let (graph, policy, spec) = inputs();
+    let tree = compile_path_tree(&compile(graph, &policy, &spec), &spec).unwrap();
+    for name in [
+        "",
+        "a.b",
+        "a-b",
+        "x;throw Error()",
+        "Object",
+        "JSON",
+        "TextEncoder",
+        "undefined",
+        "class",
+    ] {
+        code(
+            emit_typescript_path_tree(&tree, name).unwrap_err(),
+            "INVALID_EXPORT_NAME",
+        );
+    }
+    code(
+        emit_typescript_path_tree(&tree, &"x".repeat(129)).unwrap_err(),
+        "INVALID_EXPORT_NAME",
+    );
+    for name in ["routes", "tree", "params", "_patamapsParams", "tokens"] {
+        assert!(emit_typescript_path_tree(&tree, name).is_ok());
+    }
+}

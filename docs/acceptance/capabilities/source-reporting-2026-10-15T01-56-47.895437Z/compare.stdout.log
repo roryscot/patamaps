@@ -1,0 +1,896 @@
+{
+  "id": "urn:patamaps:source-report:72ef8277f283a0bb5983c755e3d26ec3858279749153a35c23fd1f757dae6b3c",
+  "digest": "sha256:72ef8277f283a0bb5983c755e3d26ec3858279749153a35c23fd1f757dae6b3c",
+  "record": {
+    "active": "not-evaluated",
+    "after": "sha256:4d350d578dcb71e04e77026236820dbc58b1f00f5b399bb6770bad307d252014",
+    "authentication": "not-evaluated",
+    "authorizationNow": "not-evaluated",
+    "before": "sha256:c712db0286a10a2eaada4ee6d733a6c22e67e92a2be6bd6080103fae2051adc8",
+    "candidate": {
+      "after": "sha256:f31b96486b7b46662594b1d7fc8888544321a9d60dba0b4cedd223fcc13b86c8",
+      "before": "sha256:a5bfc0bd07adbbb18c5fc202694e918279d81b0c54032b5a99685b0450d3273f",
+      "causalClaim": "Observed input differences and findings; unique causal responsibility is not established",
+      "changedOrigins": [
+        {
+          "change": "modified",
+          "id": "urn:example:schema:create-user",
+          "kind": "entity"
+        }
+      ],
+      "changes": [
+        {
+          "afterDigest": "sha256:fbb6bd4e91edfbaafda53a3a6b4522505d3c0a79cdc9b1eb871ee1f89fa27c04",
+          "beforeDigest": "sha256:f85cf8e6fae1e36d326d89b8f47a3a972e43f529e0f94b138e7224029e419d56",
+          "change": "modified",
+          "id": "urn:example:schema:create-user",
+          "kind": "entity"
+        }
+      ],
+      "contextChanged": false,
+      "declaredPathsAfter": {
+        "report": {
+          "complete": true,
+          "interpretation": "Declared dependency paths; no assertion of unique causal responsibility",
+          "unavailableOrigins": [],
+          "undeclaredDirections": [],
+          "visits": [
+            {
+              "origin": "urn:example:schema:create-user",
+              "path": [
+                {
+                  "from": "urn:example:schema:create-user",
+                  "mapping": "urn:example:mapping:create-user-input",
+                  "to": "urn:example:command:create-user"
+                }
+              ],
+              "subject": "urn:example:command:create-user"
+            },
+            {
+              "origin": "urn:example:schema:create-user",
+              "path": [
+                {
+                  "from": "urn:example:schema:create-user",
+                  "mapping": "urn:example:mapping:create-user-input",
+                  "to": "urn:example:command:create-user"
+                },
+                {
+                  "from": "urn:example:command:create-user",
+                  "mapping": "urn:example:mapping:create-user-endpoint",
+                  "to": "urn:example:endpoint:create-user"
+                }
+              ],
+              "subject": "urn:example:endpoint:create-user"
+            },
+            {
+              "origin": "urn:example:schema:create-user",
+              "path": [
+                {
+                  "from": "urn:example:schema:create-user",
+                  "mapping": "urn:example:mapping:create-user-input",
+                  "to": "urn:example:command:create-user"
+                },
+                {
+                  "from": "urn:example:command:create-user",
+                  "mapping": "urn:example:mapping:create-user-event",
+                  "to": "urn:example:event:user-created"
+                }
+              ],
+              "subject": "urn:example:event:user-created"
+            },
+            {
+              "origin": "urn:example:schema:create-user",
+              "path": [
+                {
+                  "from": "urn:example:schema:create-user",
+                  "mapping": "urn:example:mapping:create-user-input",
+                  "to": "urn:example:command:create-user"
+                },
+                {
+                  "from": "urn:example:command:create-user",
+                  "mapping": "urn:example:mapping:create-user-handler",
+                  "to": "urn:example:handler:create-user"
+                }
+              ],
+              "subject": "urn:example:handler:create-user"
+            },
+            {
+              "origin": "urn:example:schema:create-user",
+              "path": [],
+              "subject": "urn:example:schema:create-user"
+            }
+          ]
+        },
+        "scope": "declared-graph",
+        "status": "available"
+      },
+      "declaredPathsBefore": {
+        "report": {
+          "complete": true,
+          "interpretation": "Declared dependency paths; no assertion of unique causal responsibility",
+          "unavailableOrigins": [],
+          "undeclaredDirections": [],
+          "visits": [
+            {
+              "origin": "urn:example:schema:create-user",
+              "path": [
+                {
+                  "from": "urn:example:schema:create-user",
+                  "mapping": "urn:example:mapping:create-user-input",
+                  "to": "urn:example:command:create-user"
+                }
+              ],
+              "subject": "urn:example:command:create-user"
+            },
+            {
+              "origin": "urn:example:schema:create-user",
+              "path": [
+                {
+                  "from": "urn:example:schema:create-user",
+                  "mapping": "urn:example:mapping:create-user-input",
+                  "to": "urn:example:command:create-user"
+                },
+                {
+                  "from": "urn:example:command:create-user",
+                  "mapping": "urn:example:mapping:create-user-endpoint",
+                  "to": "urn:example:endpoint:create-user"
+                }
+              ],
+              "subject": "urn:example:endpoint:create-user"
+            },
+            {
+              "origin": "urn:example:schema:create-user",
+              "path": [
+                {
+                  "from": "urn:example:schema:create-user",
+                  "mapping": "urn:example:mapping:create-user-input",
+                  "to": "urn:example:command:create-user"
+                },
+                {
+                  "from": "urn:example:command:create-user",
+                  "mapping": "urn:example:mapping:create-user-event",
+                  "to": "urn:example:event:user-created"
+                }
+              ],
+              "subject": "urn:example:event:user-created"
+            },
+            {
+              "origin": "urn:example:schema:create-user",
+              "path": [
+                {
+                  "from": "urn:example:schema:create-user",
+                  "mapping": "urn:example:mapping:create-user-input",
+                  "to": "urn:example:command:create-user"
+                },
+                {
+                  "from": "urn:example:command:create-user",
+                  "mapping": "urn:example:mapping:create-user-handler",
+                  "to": "urn:example:handler:create-user"
+                }
+              ],
+              "subject": "urn:example:handler:create-user"
+            },
+            {
+              "origin": "urn:example:schema:create-user",
+              "path": [],
+              "subject": "urn:example:schema:create-user"
+            }
+          ]
+        },
+        "scope": "declared-graph",
+        "status": "available"
+      },
+      "evaluatedAtChanged": false,
+      "executorChanged": false,
+      "generationChanged": true,
+      "inputChanges": [
+        {
+          "afterDigest": "sha256:0da125367e433ff04c133340d17723319a549a2d7692657c1205a129a96a5334",
+          "afterPresent": true,
+          "beforeDigest": "sha256:700f8a7cbf8c813162945e501c73fc0a48ff0a7759436fd4e642c8f52950e8df",
+          "beforePresent": true,
+          "input": "graph"
+        }
+      ],
+      "issueSubjectsAfter": [],
+      "issueSubjectsBefore": [],
+      "mappingStates": {
+        "activated": [],
+        "afterKnown": true,
+        "beforeKnown": true,
+        "deactivated": []
+      },
+      "missingSourcesAfter": [],
+      "missingSourcesBefore": [],
+      "packChanged": false,
+      "packChanges": {
+        "added": [],
+        "changed": [],
+        "occurrences": [],
+        "removed": []
+      },
+      "pathTreeChanged": null,
+      "policyChanged": false,
+      "projectionChanged": true,
+      "projectionSpecs": {
+        "added": [],
+        "changed": [],
+        "occurrences": [],
+        "removed": []
+      },
+      "riskDelta": null,
+      "semantic": {
+        "assessments": {
+          "added": [],
+          "changed": [],
+          "occurrences": [],
+          "removed": []
+        },
+        "derivations": {
+          "added": [],
+          "changed": [],
+          "occurrences": [],
+          "removed": []
+        },
+        "projections": [
+          {
+            "after": {
+              "pathTree": null,
+              "projection": {
+                "digest": "sha256:1b13cf6ff408ea4cf8ae2ee1bb560b87003ecc0ccf268072a7cbe6832445dcac",
+                "documentType": "projection",
+                "entries": [
+                  {
+                    "slots": [
+                      {
+                        "cardinality": "exactly-one",
+                        "direction": "outgoing",
+                        "mappings": [
+                          "urn:example:mapping:create-user-policy"
+                        ],
+                        "name": "authorization",
+                        "relation": "routing:authorized_by",
+                        "targets": [
+                          {
+                            "id": "urn:example:policy:identity-admin",
+                            "kind": "routing:policy",
+                            "label": "Identity administrator"
+                          }
+                        ]
+                      },
+                      {
+                        "cardinality": "many",
+                        "direction": "outgoing",
+                        "mappings": [
+                          "urn:example:mapping:create-user-event"
+                        ],
+                        "name": "emits",
+                        "relation": "routing:emits",
+                        "targets": [
+                          {
+                            "id": "urn:example:event:user-created",
+                            "kind": "routing:event",
+                            "label": "User created"
+                          }
+                        ]
+                      },
+                      {
+                        "cardinality": "one-or-more",
+                        "direction": "outgoing",
+                        "mappings": [
+                          "urn:example:mapping:create-user-endpoint"
+                        ],
+                        "name": "endpoints",
+                        "relation": "routing:exposed_as",
+                        "targets": [
+                          {
+                            "attributes": {
+                              "method": "POST",
+                              "path": "/users"
+                            },
+                            "id": "urn:example:endpoint:create-user",
+                            "kind": "routing:endpoint",
+                            "label": "POST /users"
+                          }
+                        ]
+                      },
+                      {
+                        "cardinality": "exactly-one",
+                        "direction": "outgoing",
+                        "mappings": [
+                          "urn:example:mapping:create-user-handler"
+                        ],
+                        "name": "handler",
+                        "relation": "routing:handled_by",
+                        "targets": [
+                          {
+                            "id": "urn:example:handler:create-user",
+                            "kind": "routing:handler",
+                            "label": "Create user handler",
+                            "locators": [
+                              {
+                                "uri": "typescript:src/identity/create-user.ts#handleCreateUser"
+                              },
+                              {
+                                "uri": "rust:crate::service::greet"
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "cardinality": "exactly-one",
+                        "direction": "outgoing",
+                        "mappings": [
+                          "urn:example:mapping:create-user-input"
+                        ],
+                        "name": "input",
+                        "relation": "routing:accepts",
+                        "targets": [
+                          {
+                            "id": "urn:example:schema:create-user",
+                            "kind": "routing:schema",
+                            "label": "<script>source-label</script>",
+                            "locators": [
+                              {
+                                "uri": "json-schema:schemas/create-user.json"
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ],
+                    "subject": {
+                      "id": "urn:example:command:create-user",
+                      "kind": "routing:command",
+                      "label": "Create user"
+                    }
+                  }
+                ],
+                "generation": {
+                  "digest": "sha256:9f92bbcd97a77b8d60f26890df8bd3eb3c54427634c3aaf15b3bb413d2328c34",
+                  "id": "urn:patamaps:generation:9f92bbcd97a77b8d60f26890df8bd3eb3c54427634c3aaf15b3bb413d2328c34"
+                },
+                "graph": {
+                  "digest": "sha256:0da125367e433ff04c133340d17723319a549a2d7692657c1205a129a96a5334",
+                  "id": "urn:workspace:source-reporting",
+                  "revision": "1"
+                },
+                "id": "urn:patamaps:projection:1b13cf6ff408ea4cf8ae2ee1bb560b87003ecc0ccf268072a7cbe6832445dcac",
+                "profile": "patamaps-routing-draft-1",
+                "schemaVersion": "0.1.0",
+                "spec": {
+                  "digest": "sha256:d497bc82ce233eabf90024af0d329915e2ac0ea80efcdf80bbecadb7e798b132",
+                  "id": "urn:example:projection:command-router"
+                }
+              }
+            },
+            "afterKnown": true,
+            "afterSemanticsKnown": false,
+            "before": {
+              "pathTree": null,
+              "projection": {
+                "digest": "sha256:821752d9e112332c58e25edb9bdf72c0f7b5a917137571593d202d54abcad23a",
+                "documentType": "projection",
+                "entries": [
+                  {
+                    "slots": [
+                      {
+                        "cardinality": "exactly-one",
+                        "direction": "outgoing",
+                        "mappings": [
+                          "urn:example:mapping:create-user-policy"
+                        ],
+                        "name": "authorization",
+                        "relation": "routing:authorized_by",
+                        "targets": [
+                          {
+                            "id": "urn:example:policy:identity-admin",
+                            "kind": "routing:policy",
+                            "label": "Identity administrator"
+                          }
+                        ]
+                      },
+                      {
+                        "cardinality": "many",
+                        "direction": "outgoing",
+                        "mappings": [
+                          "urn:example:mapping:create-user-event"
+                        ],
+                        "name": "emits",
+                        "relation": "routing:emits",
+                        "targets": [
+                          {
+                            "id": "urn:example:event:user-created",
+                            "kind": "routing:event",
+                            "label": "User created"
+                          }
+                        ]
+                      },
+                      {
+                        "cardinality": "one-or-more",
+                        "direction": "outgoing",
+                        "mappings": [
+                          "urn:example:mapping:create-user-endpoint"
+                        ],
+                        "name": "endpoints",
+                        "relation": "routing:exposed_as",
+                        "targets": [
+                          {
+                            "attributes": {
+                              "method": "POST",
+                              "path": "/users"
+                            },
+                            "id": "urn:example:endpoint:create-user",
+                            "kind": "routing:endpoint",
+                            "label": "POST /users"
+                          }
+                        ]
+                      },
+                      {
+                        "cardinality": "exactly-one",
+                        "direction": "outgoing",
+                        "mappings": [
+                          "urn:example:mapping:create-user-handler"
+                        ],
+                        "name": "handler",
+                        "relation": "routing:handled_by",
+                        "targets": [
+                          {
+                            "id": "urn:example:handler:create-user",
+                            "kind": "routing:handler",
+                            "label": "Create user handler",
+                            "locators": [
+                              {
+                                "uri": "typescript:src/identity/create-user.ts#handleCreateUser"
+                              },
+                              {
+                                "uri": "rust:crate::service::greet"
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "cardinality": "exactly-one",
+                        "direction": "outgoing",
+                        "mappings": [
+                          "urn:example:mapping:create-user-input"
+                        ],
+                        "name": "input",
+                        "relation": "routing:accepts",
+                        "targets": [
+                          {
+                            "id": "urn:example:schema:create-user",
+                            "kind": "routing:schema",
+                            "label": "Create user input",
+                            "locators": [
+                              {
+                                "uri": "json-schema:schemas/create-user.json"
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ],
+                    "subject": {
+                      "id": "urn:example:command:create-user",
+                      "kind": "routing:command",
+                      "label": "Create user"
+                    }
+                  }
+                ],
+                "generation": {
+                  "digest": "sha256:9807a90eeead1ceb8c9d6afa2102143f002b169d7673353630c032d0f3959ef6",
+                  "id": "urn:patamaps:generation:9807a90eeead1ceb8c9d6afa2102143f002b169d7673353630c032d0f3959ef6"
+                },
+                "graph": {
+                  "digest": "sha256:700f8a7cbf8c813162945e501c73fc0a48ff0a7759436fd4e642c8f52950e8df",
+                  "id": "urn:workspace:source-reporting",
+                  "revision": "1"
+                },
+                "id": "urn:patamaps:projection:821752d9e112332c58e25edb9bdf72c0f7b5a917137571593d202d54abcad23a",
+                "profile": "patamaps-routing-draft-1",
+                "schemaVersion": "0.1.0",
+                "spec": {
+                  "digest": "sha256:d497bc82ce233eabf90024af0d329915e2ac0ea80efcdf80bbecadb7e798b132",
+                  "id": "urn:example:projection:command-router"
+                }
+              }
+            },
+            "beforeKnown": true,
+            "beforeSemanticsKnown": false,
+            "dependenciesChanged": null,
+            "entriesChanged": true,
+            "pathTreeChanged": null,
+            "riskChanged": null,
+            "specId": "urn:example:projection:command-router",
+            "usedMappingsChanged": null
+          }
+        ],
+        "riskBudgets": {
+          "added": [],
+          "changed": [],
+          "occurrences": [],
+          "removed": []
+        },
+        "sourceReceipts": {
+          "added": [],
+          "changed": [],
+          "occurrences": [],
+          "removed": []
+        },
+        "uncertaintyRequirements": {
+          "added": [],
+          "changed": [],
+          "occurrences": [],
+          "removed": []
+        }
+      },
+      "sourceDeltas": [],
+      "sourceInspectionAfter": {
+        "capturedBytesVerified": [
+          "urn:patamaps:source-evaluation:baseline-binding",
+          "urn:patamaps:workspace:authored:pack.json",
+          "urn:patamaps:workspace:authored:policy.json",
+          "urn:patamaps:workspace:authored:projection.json",
+          "urn:source:one:one.json",
+          "urn:source:two:two.json"
+        ],
+        "currentSourceRediscovery": {
+          "reason": "No current source rediscovery was requested or executed",
+          "status": "unavailable"
+        },
+        "missingBytes": []
+      },
+      "sourceInspectionBefore": {
+        "capturedBytesVerified": [
+          "urn:patamaps:source-evaluation:baseline-binding",
+          "urn:patamaps:workspace:authored:pack.json",
+          "urn:patamaps:workspace:authored:policy.json",
+          "urn:patamaps:workspace:authored:projection.json",
+          "urn:source:one:one.json",
+          "urn:source:two:two.json"
+        ],
+        "currentSourceRediscovery": {
+          "reason": "No current source rediscovery was requested or executed",
+          "status": "unavailable"
+        },
+        "missingBytes": []
+      },
+      "statusChanged": false
+    },
+    "candidateComparison": {
+      "status": "compared"
+    },
+    "causality": "Observed recorded changes; unique causal responsibility is not established",
+    "configurationChanged": false,
+    "documentType": "source-comparison",
+    "profile": "patamaps-source-evaluation-draft-1",
+    "schemaVersion": "0.1.0",
+    "sourceChanges": [],
+    "sourceGraphChanged": false,
+    "sourceGraphChanges": [],
+    "sourceGraphComparison": {
+      "status": "compared"
+    },
+    "sourceGraphMetadataChanged": false,
+    "sourceInspectionAfter": {
+      "active": "not-evaluated",
+      "authentication": "not-evaluated",
+      "authorizationNow": "not-evaluated",
+      "baseline": "sha256:0c73448e04e16205570c21e78c8d35733624ba14616e80fb00d6e36984b368bd",
+      "candidateAdmission": "viable",
+      "candidateGraph": {
+        "digest": "sha256:0da125367e433ff04c133340d17723319a549a2d7692657c1205a129a96a5334",
+        "id": "urn:workspace:source-reporting"
+      },
+      "documentType": "source-inspection",
+      "evaluation": "sha256:4d350d578dcb71e04e77026236820dbc58b1f00f5b399bb6770bad307d252014",
+      "graphChanges": [
+        {
+          "afterDigest": "sha256:fbb6bd4e91edfbaafda53a3a6b4522505d3c0a79cdc9b1eb871ee1f89fa27c04",
+          "beforeDigest": "sha256:f85cf8e6fae1e36d326d89b8f47a3a972e43f529e0f94b138e7224029e419d56",
+          "change": "modified",
+          "id": "urn:example:schema:create-user",
+          "kind": "entity"
+        }
+      ],
+      "graphComparison": {
+        "status": "compared"
+      },
+      "graphMetadataChanged": false,
+      "membershipScope": "recorded-shards-to-candidate-inputs; derived claims retain their separate checked proofs",
+      "profile": "patamaps-source-evaluation-draft-1",
+      "rawInputs": "captured-and-verified",
+      "relationship": "candidate-differs",
+      "schemaVersion": "0.1.0",
+      "sourceGraph": {
+        "digest": "sha256:700f8a7cbf8c813162945e501c73fc0a48ff0a7759436fd4e642c8f52950e8df",
+        "id": "urn:workspace:source-reporting"
+      },
+      "sourceRediscovery": "not-performed",
+      "sourceTruth": "not-established",
+      "sources": [
+        {
+          "adapter": "portable-shard",
+          "adapterVersion": "0.1.0",
+          "configurationDigest": "sha256:c844109d84ff679f872be1b6b934dc8a5b784479e9e090a90866a9a03b09db7c",
+          "records": [
+            {
+              "candidateOccurrences": 1,
+              "candidateState": "known",
+              "id": "urn:example:authority:create-user-routing",
+              "kind": "authority",
+              "sourceOccurrences": 1,
+              "sourceState": "known"
+            },
+            {
+              "candidateOccurrences": 1,
+              "candidateState": "known",
+              "id": "urn:example:command:create-user",
+              "kind": "entity",
+              "sourceOccurrences": 1,
+              "sourceState": "known"
+            },
+            {
+              "candidateOccurrences": 1,
+              "candidateState": "known",
+              "id": "urn:example:endpoint:create-user",
+              "kind": "entity",
+              "sourceOccurrences": 1,
+              "sourceState": "known"
+            },
+            {
+              "candidateOccurrences": 1,
+              "candidateState": "known",
+              "id": "urn:example:event:user-created",
+              "kind": "entity",
+              "sourceOccurrences": 1,
+              "sourceState": "known"
+            },
+            {
+              "candidateOccurrences": 1,
+              "candidateState": "known",
+              "id": "urn:example:handler:create-user",
+              "kind": "entity",
+              "sourceOccurrences": 1,
+              "sourceState": "known"
+            },
+            {
+              "candidateOccurrences": 1,
+              "candidateState": "known",
+              "id": "urn:example:policy:identity-admin",
+              "kind": "entity",
+              "sourceOccurrences": 1,
+              "sourceState": "known"
+            },
+            {
+              "candidateOccurrences": 1,
+              "candidateState": "known",
+              "id": "urn:example:schema:create-user",
+              "kind": "entity",
+              "sourceOccurrences": 1,
+              "sourceState": "known"
+            },
+            {
+              "candidateOccurrences": 1,
+              "candidateState": "known",
+              "id": "urn:example:mapping:create-user-endpoint",
+              "kind": "mapping",
+              "sourceOccurrences": 1,
+              "sourceState": "known"
+            },
+            {
+              "candidateOccurrences": 1,
+              "candidateState": "known",
+              "id": "urn:example:mapping:create-user-event",
+              "kind": "mapping",
+              "sourceOccurrences": 1,
+              "sourceState": "known"
+            },
+            {
+              "candidateOccurrences": 1,
+              "candidateState": "known",
+              "id": "urn:example:mapping:create-user-handler",
+              "kind": "mapping",
+              "sourceOccurrences": 1,
+              "sourceState": "known"
+            },
+            {
+              "candidateOccurrences": 1,
+              "candidateState": "known",
+              "id": "urn:example:mapping:create-user-input",
+              "kind": "mapping",
+              "sourceOccurrences": 1,
+              "sourceState": "known"
+            },
+            {
+              "candidateOccurrences": 1,
+              "candidateState": "known",
+              "id": "urn:example:mapping:create-user-policy",
+              "kind": "mapping",
+              "sourceOccurrences": 1,
+              "sourceState": "known"
+            }
+          ],
+          "requestDigest": "sha256:3ef6beb009f09780b76e30b15c68f7cc67157b8da4272d10168a1d8bddce0b18",
+          "shard": {
+            "digest": "sha256:ec73d4640edb688fa892a0004ac67d9ca70b5df0a2488de8ee2ee33547811d52",
+            "id": "urn:example:routing:graph",
+            "revision": "1"
+          },
+          "sourceId": "urn:source:one"
+        },
+        {
+          "adapter": "portable-shard",
+          "adapterVersion": "0.1.0",
+          "configurationDigest": "sha256:f292cc4243b076c97198f759695706b3ea396579cd53dc54a7b0fc5cbcde3fc4",
+          "records": [],
+          "requestDigest": "sha256:b8d7cb225688f87fe847d66d77cae543b9ff6edbffa78ade3922e910fa66979c",
+          "shard": {
+            "digest": "sha256:6be57fe884de50d17d36952692c5d13e6868f744a229ff7f9491e6e2a57f926c",
+            "id": "urn:source:empty",
+            "revision": "1"
+          },
+          "sourceId": "urn:source:two"
+        }
+      ]
+    },
+    "sourceInspectionBefore": {
+      "active": "not-evaluated",
+      "authentication": "not-evaluated",
+      "authorizationNow": "not-evaluated",
+      "baseline": "sha256:0c73448e04e16205570c21e78c8d35733624ba14616e80fb00d6e36984b368bd",
+      "candidateAdmission": "viable",
+      "candidateGraph": {
+        "digest": "sha256:700f8a7cbf8c813162945e501c73fc0a48ff0a7759436fd4e642c8f52950e8df",
+        "id": "urn:workspace:source-reporting"
+      },
+      "documentType": "source-inspection",
+      "evaluation": "sha256:c712db0286a10a2eaada4ee6d733a6c22e67e92a2be6bd6080103fae2051adc8",
+      "graphChanges": [],
+      "graphComparison": {
+        "status": "compared"
+      },
+      "graphMetadataChanged": false,
+      "membershipScope": "recorded-shards-to-candidate-inputs; derived claims retain their separate checked proofs",
+      "profile": "patamaps-source-evaluation-draft-1",
+      "rawInputs": "captured-and-verified",
+      "relationship": "identical",
+      "schemaVersion": "0.1.0",
+      "sourceGraph": {
+        "digest": "sha256:700f8a7cbf8c813162945e501c73fc0a48ff0a7759436fd4e642c8f52950e8df",
+        "id": "urn:workspace:source-reporting"
+      },
+      "sourceRediscovery": "not-performed",
+      "sourceTruth": "not-established",
+      "sources": [
+        {
+          "adapter": "portable-shard",
+          "adapterVersion": "0.1.0",
+          "configurationDigest": "sha256:c844109d84ff679f872be1b6b934dc8a5b784479e9e090a90866a9a03b09db7c",
+          "records": [
+            {
+              "candidateOccurrences": 1,
+              "candidateState": "known",
+              "id": "urn:example:authority:create-user-routing",
+              "kind": "authority",
+              "sourceOccurrences": 1,
+              "sourceState": "known"
+            },
+            {
+              "candidateOccurrences": 1,
+              "candidateState": "known",
+              "id": "urn:example:command:create-user",
+              "kind": "entity",
+              "sourceOccurrences": 1,
+              "sourceState": "known"
+            },
+            {
+              "candidateOccurrences": 1,
+              "candidateState": "known",
+              "id": "urn:example:endpoint:create-user",
+              "kind": "entity",
+              "sourceOccurrences": 1,
+              "sourceState": "known"
+            },
+            {
+              "candidateOccurrences": 1,
+              "candidateState": "known",
+              "id": "urn:example:event:user-created",
+              "kind": "entity",
+              "sourceOccurrences": 1,
+              "sourceState": "known"
+            },
+            {
+              "candidateOccurrences": 1,
+              "candidateState": "known",
+              "id": "urn:example:handler:create-user",
+              "kind": "entity",
+              "sourceOccurrences": 1,
+              "sourceState": "known"
+            },
+            {
+              "candidateOccurrences": 1,
+              "candidateState": "known",
+              "id": "urn:example:policy:identity-admin",
+              "kind": "entity",
+              "sourceOccurrences": 1,
+              "sourceState": "known"
+            },
+            {
+              "candidateOccurrences": 1,
+              "candidateState": "known",
+              "id": "urn:example:schema:create-user",
+              "kind": "entity",
+              "sourceOccurrences": 1,
+              "sourceState": "known"
+            },
+            {
+              "candidateOccurrences": 1,
+              "candidateState": "known",
+              "id": "urn:example:mapping:create-user-endpoint",
+              "kind": "mapping",
+              "sourceOccurrences": 1,
+              "sourceState": "known"
+            },
+            {
+              "candidateOccurrences": 1,
+              "candidateState": "known",
+              "id": "urn:example:mapping:create-user-event",
+              "kind": "mapping",
+              "sourceOccurrences": 1,
+              "sourceState": "known"
+            },
+            {
+              "candidateOccurrences": 1,
+              "candidateState": "known",
+              "id": "urn:example:mapping:create-user-handler",
+              "kind": "mapping",
+              "sourceOccurrences": 1,
+              "sourceState": "known"
+            },
+            {
+              "candidateOccurrences": 1,
+              "candidateState": "known",
+              "id": "urn:example:mapping:create-user-input",
+              "kind": "mapping",
+              "sourceOccurrences": 1,
+              "sourceState": "known"
+            },
+            {
+              "candidateOccurrences": 1,
+              "candidateState": "known",
+              "id": "urn:example:mapping:create-user-policy",
+              "kind": "mapping",
+              "sourceOccurrences": 1,
+              "sourceState": "known"
+            }
+          ],
+          "requestDigest": "sha256:3ef6beb009f09780b76e30b15c68f7cc67157b8da4272d10168a1d8bddce0b18",
+          "shard": {
+            "digest": "sha256:ec73d4640edb688fa892a0004ac67d9ca70b5df0a2488de8ee2ee33547811d52",
+            "id": "urn:example:routing:graph",
+            "revision": "1"
+          },
+          "sourceId": "urn:source:one"
+        },
+        {
+          "adapter": "portable-shard",
+          "adapterVersion": "0.1.0",
+          "configurationDigest": "sha256:f292cc4243b076c97198f759695706b3ea396579cd53dc54a7b0fc5cbcde3fc4",
+          "records": [],
+          "requestDigest": "sha256:b8d7cb225688f87fe847d66d77cae543b9ff6edbffa78ade3922e910fa66979c",
+          "shard": {
+            "digest": "sha256:6be57fe884de50d17d36952692c5d13e6868f744a229ff7f9491e6e2a57f926c",
+            "id": "urn:source:empty",
+            "revision": "1"
+          },
+          "sourceId": "urn:source:two"
+        }
+      ]
+    },
+    "sourceRediscovery": "not-performed"
+  }
+}

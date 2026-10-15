@@ -1,0 +1,62 @@
+{
+  "schemaVersion": "0.1.0",
+  "documentType": "projection-spec",
+  "id": "urn:metamap:example:scientific-lookup",
+  "select": {
+    "ids": [
+      "http://purl.obolibrary.org/obo/HP_0000016",
+      "http://purl.obolibrary.org/obo/HP_0000033",
+      "http://purl.obolibrary.org/obo/HP_0000041",
+      "http://purl.obolibrary.org/obo/HP_0000104",
+      "http://purl.obolibrary.org/obo/HP_0000219",
+      "http://purl.obolibrary.org/obo/HP_0000252",
+      "http://purl.obolibrary.org/obo/MP_0000433",
+      "http://purl.obolibrary.org/obo/MP_0000520",
+      "http://purl.obolibrary.org/obo/MP_0003555",
+      "http://purl.obolibrary.org/obo/MP_0003622",
+      "http://purl.obolibrary.org/obo/MP_0009198",
+      "http://purl.obolibrary.org/obo/MP_0030168"
+    ]
+  },
+  "slots": [
+    {
+      "name": "exact",
+      "relation": "scientific:exact-match",
+      "direction": "outgoing",
+      "cardinality": "many",
+      "allowLossy": true
+    },
+    {
+      "name": "close",
+      "relation": "scientific:close-match",
+      "direction": "outgoing",
+      "cardinality": "many",
+      "allowLossy": true
+    },
+    {
+      "name": "broad",
+      "relation": "scientific:broad-match",
+      "direction": "outgoing",
+      "cardinality": "many",
+      "allowLossy": true
+    },
+    {
+      "name": "narrow",
+      "relation": "scientific:narrow-match",
+      "direction": "outgoing",
+      "cardinality": "many",
+      "allowLossy": true
+    },
+    {
+      "name": "related",
+      "relation": "scientific:related-match",
+      "direction": "outgoing",
+      "cardinality": "many",
+      "allowLossy": true
+    }
+  ],
+  "semantics": {
+    "consumer": "urn:metamap:example:exploratory-scientific-consumer",
+    "budget": "urn:metamap:example:scientific-ordinal-budget"
+  }
+}

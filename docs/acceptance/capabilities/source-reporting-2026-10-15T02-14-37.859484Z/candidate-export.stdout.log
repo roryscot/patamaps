@@ -1,0 +1,803 @@
+{
+  "schemaVersion": "0.1.0",
+  "documentType": "capture",
+  "profile": "patamaps-routing-draft-1",
+  "executor": "sha256:77ba746a0138b6c124d709e7398cea34cbd043c03ce8a5b122e935b55bc1d963",
+  "id": "urn:patamaps:capture:55ec93d7a988310835785bcf446fdc7661d65026e97482dcdcd404388c510f9e",
+  "digest": "sha256:55ec93d7a988310835785bcf446fdc7661d65026e97482dcdcd404388c510f9e",
+  "inputs": {
+    "graph": {
+      "schemaVersion": "0.1.0",
+      "documentType": "graph",
+      "id": "urn:workspace:source-reporting",
+      "namespace": "source-reporting",
+      "revision": "1",
+      "relationPacks": [
+        {
+          "id": "urn:metamap:relation-pack:core",
+          "version": "1.0.0"
+        },
+        {
+          "id": "urn:metamap:relation-pack:routing",
+          "version": "1.0.0"
+        }
+      ],
+      "entities": [
+        {
+          "id": "urn:example:command:create-user",
+          "kind": "routing:command",
+          "label": "Create user"
+        },
+        {
+          "id": "urn:example:endpoint:create-user",
+          "kind": "routing:endpoint",
+          "label": "POST /users",
+          "attributes": {
+            "method": "POST",
+            "path": "/users"
+          }
+        },
+        {
+          "id": "urn:example:event:user-created",
+          "kind": "routing:event",
+          "label": "User created"
+        },
+        {
+          "id": "urn:example:handler:create-user",
+          "kind": "routing:handler",
+          "label": "Create user handler",
+          "locators": [
+            {
+              "uri": "typescript:src/identity/create-user.ts#handleCreateUser"
+            },
+            {
+              "uri": "rust:crate::service::greet"
+            }
+          ]
+        },
+        {
+          "id": "urn:example:policy:identity-admin",
+          "kind": "routing:policy",
+          "label": "Identity administrator"
+        },
+        {
+          "id": "urn:example:schema:create-user",
+          "kind": "routing:schema",
+          "label": "<script>source-label</script>",
+          "locators": [
+            {
+              "uri": "json-schema:schemas/create-user.json"
+            }
+          ]
+        }
+      ],
+      "mappings": [
+        {
+          "id": "urn:example:mapping:create-user-endpoint",
+          "relation": "routing:exposed_as",
+          "sources": [
+            "urn:example:command:create-user"
+          ],
+          "targets": [
+            "urn:example:endpoint:create-user"
+          ],
+          "cardinality": "one-to-one",
+          "lossiness": "lossless",
+          "provenance": {
+            "status": "declared",
+            "assertedBy": "team:api"
+          }
+        },
+        {
+          "id": "urn:example:mapping:create-user-event",
+          "relation": "routing:emits",
+          "sources": [
+            "urn:example:command:create-user"
+          ],
+          "targets": [
+            "urn:example:event:user-created"
+          ],
+          "cardinality": "one-to-one",
+          "lossiness": "lossless",
+          "provenance": {
+            "status": "declared",
+            "assertedBy": "team:identity"
+          }
+        },
+        {
+          "id": "urn:example:mapping:create-user-handler",
+          "relation": "routing:handled_by",
+          "sources": [
+            "urn:example:command:create-user"
+          ],
+          "targets": [
+            "urn:example:handler:create-user"
+          ],
+          "cardinality": "one-to-one",
+          "lossiness": "lossless",
+          "provenance": {
+            "status": "declared",
+            "assertedBy": "team:identity"
+          }
+        },
+        {
+          "id": "urn:example:mapping:create-user-input",
+          "relation": "routing:accepts",
+          "sources": [
+            "urn:example:command:create-user"
+          ],
+          "targets": [
+            "urn:example:schema:create-user"
+          ],
+          "cardinality": "one-to-one",
+          "lossiness": "lossless",
+          "provenance": {
+            "status": "declared",
+            "assertedBy": "team:identity"
+          }
+        },
+        {
+          "id": "urn:example:mapping:create-user-policy",
+          "relation": "routing:authorized_by",
+          "sources": [
+            "urn:example:command:create-user"
+          ],
+          "targets": [
+            "urn:example:policy:identity-admin"
+          ],
+          "cardinality": "one-to-one",
+          "lossiness": "lossless",
+          "provenance": {
+            "status": "declared",
+            "assertedBy": "team:security"
+          }
+        }
+      ],
+      "authorities": [
+        {
+          "id": "urn:example:authority:create-user-routing",
+          "concept": "urn:example:command:create-user",
+          "source": "urn:example:command:create-user",
+          "facts": [
+            "routing-identity"
+          ],
+          "mode": "canonical",
+          "provenance": {
+            "status": "declared",
+            "assertedBy": "team:identity"
+          }
+        }
+      ],
+      "metadata": {
+        "composedFrom": [
+          "urn:example:routing:graph",
+          "urn:source:empty"
+        ],
+        "workspaceLineageDigest": "sha256:6f0eda7a6e6eb2805ee14bbd8c0113f2dd2c13d7ac187711e4aea109d4242d37"
+      }
+    },
+    "packs": [
+      {
+        "schemaVersion": "0.1.0",
+        "documentType": "relation-pack",
+        "id": "urn:metamap:relation-pack:routing",
+        "version": "1.0.0",
+        "description": "Semantic relations for commands, events, routes, handlers, schemas, policies, and endpoints.",
+        "relations": [
+          {
+            "id": "routing:handled_by",
+            "cyclePolicy": "forbid",
+            "description": "The target handler executes the source command, event, or route.",
+            "sourceKinds": [
+              "routing:command",
+              "routing:event",
+              "routing:route"
+            ],
+            "targetKinds": [
+              "routing:handler"
+            ],
+            "cardinalities": [
+              "one-to-one",
+              "many-to-one"
+            ],
+            "impactDirection": "source-to-target"
+          },
+          {
+            "id": "routing:accepts",
+            "cyclePolicy": "forbid",
+            "description": "The source accepts input conforming to the target schema.",
+            "sourceKinds": [
+              "routing:command",
+              "routing:event",
+              "routing:route"
+            ],
+            "targetKinds": [
+              "routing:schema"
+            ],
+            "cardinalities": [
+              "one-to-one",
+              "many-to-one"
+            ],
+            "impactDirection": "target-to-source"
+          },
+          {
+            "id": "routing:authorized_by",
+            "cyclePolicy": "forbid",
+            "description": "The source is gated by the target authorization policy.",
+            "sourceKinds": [
+              "routing:command",
+              "routing:event",
+              "routing:route"
+            ],
+            "targetKinds": [
+              "routing:policy"
+            ],
+            "cardinalities": [
+              "one-to-one",
+              "many-to-one",
+              "many-to-many"
+            ],
+            "impactDirection": "target-to-source"
+          },
+          {
+            "id": "routing:emits",
+            "cyclePolicy": "allow",
+            "description": "Executing the source may emit the target event.",
+            "sourceKinds": [
+              "routing:command",
+              "routing:handler",
+              "routing:route"
+            ],
+            "targetKinds": [
+              "routing:event"
+            ],
+            "cardinalities": [
+              "one-to-one",
+              "one-to-many",
+              "many-to-many"
+            ],
+            "impactDirection": "source-to-target"
+          },
+          {
+            "id": "routing:exposed_as",
+            "cyclePolicy": "forbid",
+            "description": "The source semantic operation is exposed through the target transport endpoint.",
+            "sourceKinds": [
+              "routing:command",
+              "routing:event",
+              "routing:route"
+            ],
+            "targetKinds": [
+              "routing:endpoint"
+            ],
+            "cardinalities": [
+              "one-to-one",
+              "one-to-many",
+              "many-to-many"
+            ],
+            "impactDirection": "both"
+          },
+          {
+            "id": "routing:transitions_to",
+            "cyclePolicy": "allow",
+            "description": "The source workflow state permits a transition to the target state.",
+            "sourceKinds": [
+              "routing:state"
+            ],
+            "targetKinds": [
+              "routing:state"
+            ],
+            "cardinalities": [
+              "one-to-one",
+              "one-to-many",
+              "many-to-many"
+            ],
+            "impactDirection": "both"
+          }
+        ]
+      },
+      {
+        "schemaVersion": "0.1.0",
+        "documentType": "relation-pack",
+        "id": "urn:metamap:relation-pack:core",
+        "version": "1.0.0",
+        "description": "Minimal structural relations shared by language and domain adapters.",
+        "relations": [
+          {
+            "id": "core:contains",
+            "cyclePolicy": "forbid",
+            "description": "The source structurally contains the target.",
+            "cardinalities": [
+              "one-to-one",
+              "one-to-many",
+              "many-to-many"
+            ],
+            "transitive": true,
+            "impactDirection": "both"
+          },
+          {
+            "id": "core:implements",
+            "cyclePolicy": "forbid",
+            "description": "The target is a physical realization of the source concept or contract.",
+            "cardinalities": [
+              "one-to-one",
+              "one-to-many",
+              "many-to-many"
+            ],
+            "impactDirection": "source-to-target"
+          },
+          {
+            "id": "core:conforms_to",
+            "cyclePolicy": "forbid",
+            "description": "The source is constrained by the target schema or specification.",
+            "cardinalities": [
+              "one-to-one",
+              "many-to-one",
+              "many-to-many"
+            ],
+            "impactDirection": "target-to-source"
+          },
+          {
+            "id": "core:derives_from",
+            "cyclePolicy": "forbid",
+            "description": "The source is derived from the target.",
+            "cardinalities": [
+              "one-to-one",
+              "one-to-many",
+              "many-to-one",
+              "many-to-many"
+            ],
+            "transitive": true,
+            "impactDirection": "target-to-source"
+          },
+          {
+            "id": "core:generates",
+            "cyclePolicy": "forbid",
+            "description": "The source deterministically or procedurally produces the target.",
+            "cardinalities": [
+              "one-to-one",
+              "one-to-many",
+              "many-to-many"
+            ],
+            "impactDirection": "source-to-target"
+          },
+          {
+            "id": "core:depends_on",
+            "cyclePolicy": "forbid",
+            "description": "The source requires the target.",
+            "cardinalities": [
+              "one-to-one",
+              "one-to-many",
+              "many-to-many"
+            ],
+            "transitive": true,
+            "impactDirection": "target-to-source"
+          },
+          {
+            "id": "core:mirrors",
+            "cyclePolicy": "allow",
+            "description": "The source and target intentionally duplicate the same scoped facts.",
+            "cardinalities": [
+              "one-to-one",
+              "many-to-many"
+            ],
+            "symmetric": true,
+            "impactDirection": "both"
+          },
+          {
+            "id": "core:documents",
+            "cyclePolicy": "allow",
+            "description": "The source documentation describes the target.",
+            "cardinalities": [
+              "one-to-one",
+              "one-to-many",
+              "many-to-many"
+            ],
+            "impactDirection": "target-to-source"
+          },
+          {
+            "id": "core:tests",
+            "cyclePolicy": "allow",
+            "description": "The source provides evidence about the target.",
+            "cardinalities": [
+              "one-to-one",
+              "one-to-many",
+              "many-to-many"
+            ],
+            "impactDirection": "target-to-source"
+          },
+          {
+            "id": "core:exposes",
+            "cyclePolicy": "forbid",
+            "description": "The source makes the target externally addressable.",
+            "cardinalities": [
+              "one-to-one",
+              "one-to-many",
+              "many-to-many"
+            ],
+            "impactDirection": "both"
+          },
+          {
+            "id": "core:references",
+            "cyclePolicy": "allow",
+            "description": "The source identifies or points to the target without implying ownership.",
+            "cardinalities": [
+              "one-to-one",
+              "one-to-many",
+              "many-to-one",
+              "many-to-many"
+            ],
+            "impactDirection": "target-to-source"
+          },
+          {
+            "id": "core:specified_by",
+            "cyclePolicy": "forbid",
+            "description": "The target defines the intended behavior or constraints of the source.",
+            "cardinalities": [
+              "one-to-one",
+              "many-to-one",
+              "many-to-many"
+            ],
+            "impactDirection": "target-to-source"
+          }
+        ]
+      }
+    ],
+    "policy": {
+      "schemaVersion": "0.1.0",
+      "documentType": "policy",
+      "id": "urn:example:routing:viability",
+      "graph": {
+        "id": "urn:workspace:source-reporting",
+        "revision": "1"
+      },
+      "mappings": [
+        {
+          "mapping": "urn:example:mapping:create-user-handler",
+          "coverage": "total",
+          "determinism": "deterministic",
+          "reversibility": "irreversible"
+        },
+        {
+          "mapping": "urn:example:mapping:create-user-input",
+          "coverage": "total",
+          "determinism": "deterministic",
+          "reversibility": "irreversible"
+        },
+        {
+          "mapping": "urn:example:mapping:create-user-policy",
+          "coverage": "total",
+          "determinism": "deterministic",
+          "reversibility": "irreversible"
+        },
+        {
+          "mapping": "urn:example:mapping:create-user-endpoint",
+          "coverage": "total",
+          "determinism": "deterministic",
+          "reversibility": "irreversible"
+        },
+        {
+          "mapping": "urn:example:mapping:create-user-event",
+          "coverage": "partial",
+          "determinism": "deterministic",
+          "reversibility": "irreversible"
+        }
+      ],
+      "constraints": [
+        {
+          "id": "urn:example:constraint:create-user-handler-required",
+          "kind": "core:requires-mapping",
+          "subjects": [
+            "urn:example:command:create-user"
+          ],
+          "parameters": {
+            "direction": "source",
+            "relation": "routing:handled_by"
+          }
+        },
+        {
+          "id": "urn:example:constraint:create-user-handler-unique",
+          "kind": "core:unique-target",
+          "subjects": [
+            "urn:example:command:create-user"
+          ],
+          "parameters": {
+            "direction": "source",
+            "relation": "routing:handled_by"
+          }
+        },
+        {
+          "id": "urn:example:constraint:create-user-routing-authority",
+          "kind": "core:requires-authority",
+          "subjects": [
+            "urn:example:command:create-user"
+          ],
+          "parameters": {
+            "fact": "routing-identity"
+          }
+        }
+      ],
+      "evidence": []
+    },
+    "context": {
+      "environment": "production"
+    },
+    "evaluatedAt": "2026-10-10T12:00:00Z",
+    "projectionSpec": {
+      "schemaVersion": "0.1.0",
+      "documentType": "projection-spec",
+      "id": "urn:example:projection:command-router",
+      "select": {
+        "kinds": [
+          "routing:command"
+        ]
+      },
+      "slots": [
+        {
+          "name": "handler",
+          "relation": "routing:handled_by",
+          "direction": "outgoing",
+          "cardinality": "exactly-one",
+          "targetKinds": [
+            "routing:handler"
+          ]
+        },
+        {
+          "name": "input",
+          "relation": "routing:accepts",
+          "direction": "outgoing",
+          "cardinality": "exactly-one",
+          "targetKinds": [
+            "routing:schema"
+          ]
+        },
+        {
+          "name": "authorization",
+          "relation": "routing:authorized_by",
+          "direction": "outgoing",
+          "cardinality": "exactly-one",
+          "targetKinds": [
+            "routing:policy"
+          ]
+        },
+        {
+          "name": "endpoints",
+          "relation": "routing:exposed_as",
+          "direction": "outgoing",
+          "cardinality": "one-or-more",
+          "targetKinds": [
+            "routing:endpoint"
+          ]
+        },
+        {
+          "name": "emits",
+          "relation": "routing:emits",
+          "direction": "outgoing",
+          "cardinality": "many",
+          "targetKinds": [
+            "routing:event"
+          ]
+        }
+      ]
+    }
+  },
+  "sources": [
+    {
+      "id": "urn:patamaps:source-evaluation:baseline-binding",
+      "locator": "urn:patamaps:source-evaluation:baseline-binding",
+      "digest": "sha256:23d479530a28c13d403e26e177ebfefe8a91d2c410cac07f3f78214bd6b30d5a",
+      "byteLength": 312,
+      "content": "{\"baseline\":\"sha256:117c060cf01078e8583ad00db74989394ab89a9159c5f9ec588ef256451e9178\",\"compiler\":\"sha256:77ba746a0138b6c124d709e7398cea34cbd043c03ce8a5b122e935b55bc1d963\",\"profile\":\"patamaps-source-evaluation-draft-1\",\"workspaceExecutor\":\"sha256:7d3f9b389c53427dac2add24d18a1339d63cfb3f4859e8933b888e89c0d28ff2\"}"
+    },
+    {
+      "id": "urn:patamaps:workspace:authored:pack.json",
+      "locator": "workspace:pack.json",
+      "digest": "sha256:64cb8bad363e056b99e62fca7f1eca95c46790dcb0c4dd8c2f987c0ed4ff601f",
+      "byteLength": 2996,
+      "content": "{\n  \"schemaVersion\": \"0.1.0\",\n  \"id\": \"urn:metamap:relation-pack:routing\",\n  \"version\": \"1.0.0\",\n  \"description\": \"Semantic relations for commands, events, routes, handlers, schemas, policies, and endpoints.\",\n  \"relations\": [\n    {\n      \"id\": \"routing:handled_by\",\n      \"description\": \"The target handler executes the source command, event, or route.\",\n      \"sourceKinds\": [\n        \"routing:command\",\n        \"routing:event\",\n        \"routing:route\"\n      ],\n      \"targetKinds\": [\n        \"routing:handler\"\n      ],\n      \"cardinalities\": [\n        \"one-to-one\",\n        \"many-to-one\"\n      ],\n      \"cyclePolicy\": \"forbid\",\n      \"impactDirection\": \"source-to-target\"\n    },\n    {\n      \"id\": \"routing:accepts\",\n      \"description\": \"The source accepts input conforming to the target schema.\",\n      \"sourceKinds\": [\n        \"routing:command\",\n        \"routing:event\",\n        \"routing:route\"\n      ],\n      \"targetKinds\": [\n        \"routing:schema\"\n      ],\n      \"cardinalities\": [\n        \"one-to-one\",\n        \"many-to-one\"\n      ],\n      \"cyclePolicy\": \"forbid\",\n      \"impactDirection\": \"target-to-source\"\n    },\n    {\n      \"id\": \"routing:authorized_by\",\n      \"description\": \"The source is gated by the target authorization policy.\",\n      \"sourceKinds\": [\n        \"routing:command\",\n        \"routing:event\",\n        \"routing:route\"\n      ],\n      \"targetKinds\": [\n        \"routing:policy\"\n      ],\n      \"cardinalities\": [\n        \"one-to-one\",\n        \"many-to-one\",\n        \"many-to-many\"\n      ],\n      \"cyclePolicy\": \"forbid\",\n      \"impactDirection\": \"target-to-source\"\n    },\n    {\n      \"id\": \"routing:emits\",\n      \"description\": \"Executing the source may emit the target event.\",\n      \"sourceKinds\": [\n        \"routing:command\",\n        \"routing:handler\",\n        \"routing:route\"\n      ],\n      \"targetKinds\": [\n        \"routing:event\"\n      ],\n      \"cardinalities\": [\n        \"one-to-one\",\n        \"one-to-many\",\n        \"many-to-many\"\n      ],\n      \"cyclePolicy\": \"allow\",\n      \"impactDirection\": \"source-to-target\"\n    },\n    {\n      \"id\": \"routing:exposed_as\",\n      \"description\": \"The source semantic operation is exposed through the target transport endpoint.\",\n      \"sourceKinds\": [\n        \"routing:command\",\n        \"routing:event\",\n        \"routing:route\"\n      ],\n      \"targetKinds\": [\n        \"routing:endpoint\"\n      ],\n      \"cardinalities\": [\n        \"one-to-one\",\n        \"one-to-many\",\n        \"many-to-many\"\n      ],\n      \"cyclePolicy\": \"forbid\",\n      \"impactDirection\": \"both\"\n    },\n    {\n      \"id\": \"routing:transitions_to\",\n      \"description\": \"The source workflow state permits a transition to the target state.\",\n      \"sourceKinds\": [\n        \"routing:state\"\n      ],\n      \"targetKinds\": [\n        \"routing:state\"\n      ],\n      \"cardinalities\": [\n        \"one-to-one\",\n        \"one-to-many\",\n        \"many-to-many\"\n      ],\n      \"cyclePolicy\": \"allow\",\n      \"impactDirection\": \"both\"\n    }\n  ],\n  \"documentType\": \"relation-pack\"\n}\n"
+    },
+    {
+      "id": "urn:patamaps:workspace:authored:policy.json",
+      "locator": "workspace:policy.json",
+      "digest": "sha256:40447bc7cb0655bf044f4dcebde3ddb7cce0d879c785c44629e11bd19b946c25",
+      "byteLength": 1958,
+      "content": "{\n  \"schemaVersion\": \"0.1.0\",\n  \"id\": \"urn:example:routing:viability\",\n  \"graph\": {\n    \"id\": \"urn:workspace:source-reporting\",\n    \"revision\": \"1\"\n  },\n  \"mappings\": [\n    {\n      \"mapping\": \"urn:example:mapping:create-user-handler\",\n      \"coverage\": \"total\",\n      \"determinism\": \"deterministic\",\n      \"reversibility\": \"irreversible\"\n    },\n    {\n      \"mapping\": \"urn:example:mapping:create-user-input\",\n      \"coverage\": \"total\",\n      \"determinism\": \"deterministic\",\n      \"reversibility\": \"irreversible\"\n    },\n    {\n      \"mapping\": \"urn:example:mapping:create-user-policy\",\n      \"coverage\": \"total\",\n      \"determinism\": \"deterministic\",\n      \"reversibility\": \"irreversible\"\n    },\n    {\n      \"mapping\": \"urn:example:mapping:create-user-endpoint\",\n      \"coverage\": \"total\",\n      \"determinism\": \"deterministic\",\n      \"reversibility\": \"irreversible\"\n    },\n    {\n      \"mapping\": \"urn:example:mapping:create-user-event\",\n      \"coverage\": \"partial\",\n      \"determinism\": \"deterministic\",\n      \"reversibility\": \"irreversible\"\n    }\n  ],\n  \"constraints\": [\n    {\n      \"id\": \"urn:example:constraint:create-user-handler-required\",\n      \"kind\": \"core:requires-mapping\",\n      \"subjects\": [\n        \"urn:example:command:create-user\"\n      ],\n      \"parameters\": {\n        \"relation\": \"routing:handled_by\",\n        \"direction\": \"source\"\n      }\n    },\n    {\n      \"id\": \"urn:example:constraint:create-user-handler-unique\",\n      \"kind\": \"core:unique-target\",\n      \"subjects\": [\n        \"urn:example:command:create-user\"\n      ],\n      \"parameters\": {\n        \"relation\": \"routing:handled_by\",\n        \"direction\": \"source\"\n      }\n    },\n    {\n      \"id\": \"urn:example:constraint:create-user-routing-authority\",\n      \"kind\": \"core:requires-authority\",\n      \"subjects\": [\n        \"urn:example:command:create-user\"\n      ],\n      \"parameters\": {\n        \"fact\": \"routing-identity\"\n      }\n    }\n  ],\n  \"evidence\": [],\n  \"documentType\": \"policy\"\n}\n"
+    },
+    {
+      "id": "urn:patamaps:workspace:authored:projection.json",
+      "locator": "workspace:projection.json",
+      "digest": "sha256:84f4c3bae2fafd30567dc531aee977a14ff4da5ae366cac66f44ece07675f19e",
+      "byteLength": 1197,
+      "content": "{\n  \"schemaVersion\": \"0.1.0\",\n  \"id\": \"urn:example:projection:command-router\",\n  \"select\": {\n    \"kinds\": [\n      \"routing:command\"\n    ]\n  },\n  \"slots\": [\n    {\n      \"name\": \"handler\",\n      \"relation\": \"routing:handled_by\",\n      \"direction\": \"outgoing\",\n      \"cardinality\": \"exactly-one\",\n      \"targetKinds\": [\n        \"routing:handler\"\n      ]\n    },\n    {\n      \"name\": \"input\",\n      \"relation\": \"routing:accepts\",\n      \"direction\": \"outgoing\",\n      \"cardinality\": \"exactly-one\",\n      \"targetKinds\": [\n        \"routing:schema\"\n      ]\n    },\n    {\n      \"name\": \"authorization\",\n      \"relation\": \"routing:authorized_by\",\n      \"direction\": \"outgoing\",\n      \"cardinality\": \"exactly-one\",\n      \"targetKinds\": [\n        \"routing:policy\"\n      ]\n    },\n    {\n      \"name\": \"endpoints\",\n      \"relation\": \"routing:exposed_as\",\n      \"direction\": \"outgoing\",\n      \"cardinality\": \"one-or-more\",\n      \"targetKinds\": [\n        \"routing:endpoint\"\n      ]\n    },\n    {\n      \"name\": \"emits\",\n      \"relation\": \"routing:emits\",\n      \"direction\": \"outgoing\",\n      \"cardinality\": \"many\",\n      \"targetKinds\": [\n        \"routing:event\"\n      ]\n    }\n  ],\n  \"documentType\": \"projection-spec\"\n}\n"
+    },
+    {
+      "id": "urn:source:one:one.json",
+      "locator": "workspace:one.json",
+      "digest": "sha256:f2260288c8a3d4db5c982f66230c291b363efa06138b5ff05e2f6c7d2e29f768",
+      "byteLength": 3985,
+      "content": "{\n  \"schemaVersion\": \"0.1.0\",\n  \"id\": \"urn:example:routing:graph\",\n  \"namespace\": \"routing-example\",\n  \"label\": \"Example semantic command router\",\n  \"revision\": \"1\",\n  \"relationPacks\": [\n    {\n      \"id\": \"urn:metamap:relation-pack:core\",\n      \"version\": \"1.0.0\"\n    },\n    {\n      \"id\": \"urn:metamap:relation-pack:routing\",\n      \"version\": \"1.0.0\"\n    }\n  ],\n  \"entities\": [\n    {\n      \"id\": \"urn:example:command:create-user\",\n      \"kind\": \"routing:command\",\n      \"label\": \"Create user\"\n    },\n    {\n      \"id\": \"urn:example:handler:create-user\",\n      \"kind\": \"routing:handler\",\n      \"label\": \"Create user handler\",\n      \"locators\": [\n        {\n          \"uri\": \"typescript:src/identity/create-user.ts#handleCreateUser\"\n        },\n        {\n          \"uri\": \"rust:crate::service::greet\"\n        }\n      ]\n    },\n    {\n      \"id\": \"urn:example:schema:create-user\",\n      \"kind\": \"routing:schema\",\n      \"label\": \"Create user input\",\n      \"locators\": [\n        {\n          \"uri\": \"json-schema:schemas/create-user.json\"\n        }\n      ]\n    },\n    {\n      \"id\": \"urn:example:policy:identity-admin\",\n      \"kind\": \"routing:policy\",\n      \"label\": \"Identity administrator\"\n    },\n    {\n      \"id\": \"urn:example:endpoint:create-user\",\n      \"kind\": \"routing:endpoint\",\n      \"label\": \"POST /users\",\n      \"attributes\": {\n        \"method\": \"POST\",\n        \"path\": \"/users\"\n      }\n    },\n    {\n      \"id\": \"urn:example:event:user-created\",\n      \"kind\": \"routing:event\",\n      \"label\": \"User created\"\n    }\n  ],\n  \"mappings\": [\n    {\n      \"id\": \"urn:example:mapping:create-user-handler\",\n      \"relation\": \"routing:handled_by\",\n      \"sources\": [\n        \"urn:example:command:create-user\"\n      ],\n      \"targets\": [\n        \"urn:example:handler:create-user\"\n      ],\n      \"cardinality\": \"one-to-one\",\n      \"lossiness\": \"lossless\",\n      \"provenance\": {\n        \"status\": \"declared\",\n        \"assertedBy\": \"team:identity\"\n      }\n    },\n    {\n      \"id\": \"urn:example:mapping:create-user-input\",\n      \"relation\": \"routing:accepts\",\n      \"sources\": [\n        \"urn:example:command:create-user\"\n      ],\n      \"targets\": [\n        \"urn:example:schema:create-user\"\n      ],\n      \"cardinality\": \"one-to-one\",\n      \"lossiness\": \"lossless\",\n      \"provenance\": {\n        \"status\": \"declared\",\n        \"assertedBy\": \"team:identity\"\n      }\n    },\n    {\n      \"id\": \"urn:example:mapping:create-user-policy\",\n      \"relation\": \"routing:authorized_by\",\n      \"sources\": [\n        \"urn:example:command:create-user\"\n      ],\n      \"targets\": [\n        \"urn:example:policy:identity-admin\"\n      ],\n      \"cardinality\": \"one-to-one\",\n      \"lossiness\": \"lossless\",\n      \"provenance\": {\n        \"status\": \"declared\",\n        \"assertedBy\": \"team:security\"\n      }\n    },\n    {\n      \"id\": \"urn:example:mapping:create-user-endpoint\",\n      \"relation\": \"routing:exposed_as\",\n      \"sources\": [\n        \"urn:example:command:create-user\"\n      ],\n      \"targets\": [\n        \"urn:example:endpoint:create-user\"\n      ],\n      \"cardinality\": \"one-to-one\",\n      \"lossiness\": \"lossless\",\n      \"provenance\": {\n        \"status\": \"declared\",\n        \"assertedBy\": \"team:api\"\n      }\n    },\n    {\n      \"id\": \"urn:example:mapping:create-user-event\",\n      \"relation\": \"routing:emits\",\n      \"sources\": [\n        \"urn:example:command:create-user\"\n      ],\n      \"targets\": [\n        \"urn:example:event:user-created\"\n      ],\n      \"cardinality\": \"one-to-one\",\n      \"lossiness\": \"lossless\",\n      \"provenance\": {\n        \"status\": \"declared\",\n        \"assertedBy\": \"team:identity\"\n      }\n    }\n  ],\n  \"authorities\": [\n    {\n      \"id\": \"urn:example:authority:create-user-routing\",\n      \"concept\": \"urn:example:command:create-user\",\n      \"source\": \"urn:example:command:create-user\",\n      \"facts\": [\n        \"routing-identity\"\n      ],\n      \"mode\": \"canonical\",\n      \"provenance\": {\n        \"status\": \"declared\",\n        \"assertedBy\": \"team:identity\"\n      }\n    }\n  ],\n  \"documentType\": \"graph\"\n}\n"
+    },
+    {
+      "id": "urn:source:two:two.json",
+      "locator": "workspace:two.json",
+      "digest": "sha256:f8d5163344cf717f413e5dcb685fbee718e3a58a7250db3750ff8dd5ab5e41aa",
+      "byteLength": 438,
+      "content": "{\n  \"schemaVersion\": \"0.1.0\",\n  \"id\": \"urn:source:empty\",\n  \"namespace\": \"routing-example\",\n  \"label\": \"Example semantic command router\",\n  \"revision\": \"1\",\n  \"relationPacks\": [\n    {\n      \"id\": \"urn:metamap:relation-pack:core\",\n      \"version\": \"1.0.0\"\n    },\n    {\n      \"id\": \"urn:metamap:relation-pack:routing\",\n      \"version\": \"1.0.0\"\n    }\n  ],\n  \"entities\": [],\n  \"mappings\": [],\n  \"authorities\": [],\n  \"documentType\": \"graph\"\n}\n"
+    }
+  ],
+  "result": {
+    "generation": {
+      "activeMappings": [
+        "urn:example:mapping:create-user-endpoint",
+        "urn:example:mapping:create-user-event",
+        "urn:example:mapping:create-user-handler",
+        "urn:example:mapping:create-user-input",
+        "urn:example:mapping:create-user-policy"
+      ],
+      "context": {
+        "environment": "production"
+      },
+      "digest": "sha256:f8e3ed8e593ce6ee9de3580f837e64445230821d30ef401a4ed3f0d01b705cdb",
+      "documentType": "generation",
+      "evaluatedAt": "2026-10-10T12:00:00Z",
+      "evidence": [],
+      "graph": {
+        "digest": "sha256:4da4f1d6d5704730129428f27d3c04fa61efe080b6250cb9c991db7d6f82e12a",
+        "id": "urn:workspace:source-reporting",
+        "revision": "1"
+      },
+      "id": "urn:patamaps:generation:f8e3ed8e593ce6ee9de3580f837e64445230821d30ef401a4ed3f0d01b705cdb",
+      "inactiveMappings": [],
+      "packs": [
+        {
+          "digest": "sha256:07683a803d0c7b7a4aa621e6bfe9b8cffa8667fd16047601aa4aa86268f84a2e",
+          "id": "urn:metamap:relation-pack:core",
+          "version": "1.0.0"
+        },
+        {
+          "digest": "sha256:c7bca28d6b8836a04a6f505bff4033947e401dd6c93cfeb8e543f82c9f0cb19d",
+          "id": "urn:metamap:relation-pack:routing",
+          "version": "1.0.0"
+        }
+      ],
+      "policy": {
+        "digest": "sha256:54b4f8908170c960e249bfb3e4a95afb0d56f6057c7852c8ce51e3909c89884b",
+        "id": "urn:example:routing:viability"
+      },
+      "profile": "patamaps-routing-draft-1",
+      "schemaVersion": "0.1.0",
+      "waiversApplied": []
+    },
+    "issues": [],
+    "pathTree": null,
+    "projection": {
+      "digest": "sha256:af3e510a32e8cfd2526448fd745fcbeba0f9675afff247192ff705f060620abe",
+      "documentType": "projection",
+      "entries": [
+        {
+          "slots": [
+            {
+              "cardinality": "exactly-one",
+              "direction": "outgoing",
+              "mappings": [
+                "urn:example:mapping:create-user-policy"
+              ],
+              "name": "authorization",
+              "relation": "routing:authorized_by",
+              "targets": [
+                {
+                  "id": "urn:example:policy:identity-admin",
+                  "kind": "routing:policy",
+                  "label": "Identity administrator"
+                }
+              ]
+            },
+            {
+              "cardinality": "many",
+              "direction": "outgoing",
+              "mappings": [
+                "urn:example:mapping:create-user-event"
+              ],
+              "name": "emits",
+              "relation": "routing:emits",
+              "targets": [
+                {
+                  "id": "urn:example:event:user-created",
+                  "kind": "routing:event",
+                  "label": "User created"
+                }
+              ]
+            },
+            {
+              "cardinality": "one-or-more",
+              "direction": "outgoing",
+              "mappings": [
+                "urn:example:mapping:create-user-endpoint"
+              ],
+              "name": "endpoints",
+              "relation": "routing:exposed_as",
+              "targets": [
+                {
+                  "attributes": {
+                    "method": "POST",
+                    "path": "/users"
+                  },
+                  "id": "urn:example:endpoint:create-user",
+                  "kind": "routing:endpoint",
+                  "label": "POST /users"
+                }
+              ]
+            },
+            {
+              "cardinality": "exactly-one",
+              "direction": "outgoing",
+              "mappings": [
+                "urn:example:mapping:create-user-handler"
+              ],
+              "name": "handler",
+              "relation": "routing:handled_by",
+              "targets": [
+                {
+                  "id": "urn:example:handler:create-user",
+                  "kind": "routing:handler",
+                  "label": "Create user handler",
+                  "locators": [
+                    {
+                      "uri": "typescript:src/identity/create-user.ts#handleCreateUser"
+                    },
+                    {
+                      "uri": "rust:crate::service::greet"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "cardinality": "exactly-one",
+              "direction": "outgoing",
+              "mappings": [
+                "urn:example:mapping:create-user-input"
+              ],
+              "name": "input",
+              "relation": "routing:accepts",
+              "targets": [
+                {
+                  "id": "urn:example:schema:create-user",
+                  "kind": "routing:schema",
+                  "label": "<script>source-label</script>",
+                  "locators": [
+                    {
+                      "uri": "json-schema:schemas/create-user.json"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "subject": {
+            "id": "urn:example:command:create-user",
+            "kind": "routing:command",
+            "label": "Create user"
+          }
+        }
+      ],
+      "generation": {
+        "digest": "sha256:f8e3ed8e593ce6ee9de3580f837e64445230821d30ef401a4ed3f0d01b705cdb",
+        "id": "urn:patamaps:generation:f8e3ed8e593ce6ee9de3580f837e64445230821d30ef401a4ed3f0d01b705cdb"
+      },
+      "graph": {
+        "digest": "sha256:4da4f1d6d5704730129428f27d3c04fa61efe080b6250cb9c991db7d6f82e12a",
+        "id": "urn:workspace:source-reporting",
+        "revision": "1"
+      },
+      "id": "urn:patamaps:projection:af3e510a32e8cfd2526448fd745fcbeba0f9675afff247192ff705f060620abe",
+      "profile": "patamaps-routing-draft-1",
+      "schemaVersion": "0.1.0",
+      "spec": {
+        "digest": "sha256:d497bc82ce233eabf90024af0d329915e2ac0ea80efcdf80bbecadb7e798b132",
+        "id": "urn:example:projection:command-router"
+      }
+    },
+    "status": "viable"
+  }
+}

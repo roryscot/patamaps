@@ -4,23 +4,19 @@ Patamaps is a Rust-native correspondence compiler built against MetaMap’s subs
 
 The [active capability build plan](BUILD_PLAN.md) uses `@roryscot/metamap` 0.7.1 engine `399747a4ad05a37cd8db1cedd53048fad2175be4` as its reference. The owner’s revised goal prioritizes complete native workflows and required semantic, security, format, canonicalization, hash and signature guarantees. Exact JavaScript exception wording, object identity, prototypes and incidental mutation are required only for a demonstrated integration. The [test classification policy](docs/TEST_CLASSIFICATION.md) preserves that distinction without changing original evidence.
 
-**Completion remains open.** Native draft components implement the compiler, scoped ownership, checked derivations, uncertainty/risk, projection/path trees, replay, governance, memory and Linux activation, inspection/repair, workspaces and scientific integration. The [verified checkpoint](docs/acceptance/capabilities/verified-installed-linux-checkpoint-2026-10-14T20-44-30.393420Z/receipt.json) matches its recorded source to installed Rust/Python/TypeScript, scientific/discovery, workspace and ARM64/x86_64 Linux acceptance. Source workspace versus distinct candidate reporting and bounded selected-record retention now pass focused native checks. The prior installed/Linux checkpoint is historical for this changed candidate; refreshed compiler, installed-consumer and platform milestones plus the full substantive audit remain open.
+**Completion remains open.** The native draft implements validation, scoped ownership, checked derivations, uncertainty/risk, projections, replay, governance, memory/Linux activation, inspection/repair, workspaces and scientific integration. The [capability matrix](BUILD_PLAN.md) records verified outcomes and unresolved guarantees; source reviews and historical test counts do not establish completion.
 
-The [native compiler and portable activation milestone](docs/acceptance/capabilities/compiler-2026-10-14T19-34-05.354843Z/receipt.json) passes ten stages: 200 portable Rust tests, seven governed memory controls, portable transport and checked-state type controls, 40 meaningful MetaMap comparisons, the complete lifecycle, real Rust/TypeScript consumer moves, original-byte integrity, Rustfmt and Clippy. [Decision 0012](docs/decisions/0012-native-constraint-evaluators.md) defines native custom constraints; [decision 0014](docs/decisions/0014-governed-memory-host.md) defines the new memory host and its separate profile.
+The new [checked-tree TypeScript emitter](docs/decisions/0020-checked-tree-typescript-emission.md) produces a standalone tree, parameter inventory and hydration helper from the private Rust checked state. [Actual installed acceptance](docs/acceptance/capabilities/installed-resume-2026-10-15T02-11-38.187814Z/receipt.json) passes Rust/API/CLI agreement, strict TypeScript compilation and execution, literal substitution, optional/catch-all and alternate delimiters, input ownership, Unicode/resource refusals and rejection of a false literal path type. Generated consumers require no MetaMap package.
 
-The [installed package](docs/acceptance/capabilities/installed-2026-10-14T20-30-53.202204Z/receipt.json) passes nine stages, including independent native customization and governed memory consumers, compiler-free Rust execution and Python/TypeScript wrappers. The [installed scientific/discovery workflow](docs/acceptance/capabilities/integrations-2026-10-14T20-38-22.585513Z/receipt.json) passes the unchanged TypeScript shadow, independent SSSOM/RDF checks and seven provider fixtures with retained source/baseline bytes and honest unknown-loss refusals. Each record identifies its exact package/source snapshot.
+[All ten compiler stages](docs/acceptance/capabilities/compiler-2026-10-15T02-01-50.627814Z/receipt.json) passed. A later [targeted lifecycle refresh](docs/acceptance/capabilities/compiler-lifecycle-refresh-2026-10-15T02-47-47.979495Z/receipt.json) fixes an aliased test-report copy and executes the selected returned repair capture, exact generation and hydrated path through a real Rust consumer. It explicitly inherits nine unchanged compiler stages rather than claiming to rerun them. Previous reports and failed attempts remain preserved.
 
-The [Linux workflow](.github/workflows/native-capabilities.yml) passes on ARM64 and x86_64 with retained fixtures and debug/release production executables. [The current actual acceptance record](docs/acceptance/capabilities/linux-ci-38631786116/local-retention.json) binds candidate `4b2507c7e4094094ddaaad97528473a3eef8fd5b`, six stages per architecture and both complete locally retained fixture archives. Earlier failures remain preserved; the runner proxy and fixture timing corrections leave production guarantees and every original assertion intact.
+The [installed development consumers](docs/acceptance/capabilities/installed-resume-2026-10-15T02-11-38.187814Z/receipt.json), [workspace/source and escaped HTML controls](docs/acceptance/capabilities/workspace-2026-10-15T02-16-26.026814Z/receipt.json), and [optimized installed scientific/discovery workflows](docs/acceptance/capabilities/integrations-2026-10-15T02-45-50.817560Z/receipt.json) pass. The latter uses a separately [source-verified release installation](docs/acceptance/capabilities/installed-release-2026-10-15T02-27-02.605765Z/receipt.json) with the original deadlines and assertions. Two development-profile discovery attempts exceeded the fixture's 30-second deadline; those failures remain recorded. The release result establishes no comparative speed advantage over MetaMap.
 
-The [installed workspace workflow](docs/acceptance/capabilities/workspace-2026-10-14T20-38-21.397170Z/receipt.json) verifies complete historical composition offline, checks current sources, detects drift and preserves its baseline with Node absent. Its actual CLI HTML passes independent SHA-256 stylesheet-policy and escaping checks. [Interactive browser execution remains unrun](docs/acceptance/capabilities/workspace-2026-10-14T20-38-21.397170Z/browser-verification.json).
+[Actual ARM64/x86_64 Linux acceptance](docs/acceptance/capabilities/linux-ci-38663333929/local-retention.json) passes on published waiver candidate `66ec7a0`, including debug/release production binaries and retained fixtures. The subsequent checked-tree production source requires its own Linux run after publication. Interactive debugger execution remains unverified after the recorded browser-policy refusal; static escaping and stylesheet-policy checks pass.
 
-The [earlier compatibility component checkpoint](docs/acceptance/parity/uncertainty-risk-verification-checkpoint-2026-10-14T03-31-04.450312+00-00/receipt.json) passes 55 freshly executed checks, including 191 portable Rust tests and installed uncertainty/risk/semantic SDK comparisons. It is component evidence. The original 1,293-obligation parity ledger, original tests/expectations, reference bytes and failed runs remain historical evidence, not the completion metric for the revised goal. The [previous plan and README](docs/history/capability-goal-transition-2026-10-14T15-22-48.455971Z/receipt.json) are preserved byte for byte.
+The original 1,293-obligation ledger, reference tests/expectations, captures and failed runs remain historical evidence. [The prior plan and README](docs/history/capability-goal-transition-2026-10-14T15-22-48.455971Z/receipt.json) are preserved. The native source audit remains partial. Recorded derivation dependency paths and the Linux precommit artifact-swap preservation assertion are specific remaining work; no capability has been owner-dispositioned.
 
-[The draft protocol](docs/SPEC.md) specifies checked-state and wire boundaries. [Earlier Patamaps acceptance](docs/acceptance/distributions/Patamaps/acceptance.json) identifies the tested draft packages and actual ARM64 Linux host checks. Those records retain their original identities. Registry publication, production installation, trust/bootstrap and activation are separate authorization boundaries.
-
-Local heavy checks use the storage supervisor installed at `~/Documents/Codex/storage-safeguards`; missing installation, a busy shared lease or insufficient capacity refuses the run. Check drivers preserve sources, requests, outputs and receipts. No VM is needed by the compiler. The approved VM disk and duplicate request inventories were removed with retained deletion receipts and verified recovery copies where applicable; further deletion requires an exact list and approval.
-
-The scope and architecture below explain the native project. Earlier R0–R11 milestone descriptions are design context; current delivery order and acceptance are controlled by [BUILD_PLAN.md](BUILD_PLAN.md).
+[The draft protocol](docs/SPEC.md) controls checked-state and wire boundaries. Registry publication, production installation, trust/bootstrap and activation remain separate authorization boundaries. Local heavy checks use the storage supervisor; the Intel limit is the owner-approved 2 GB per run. Package preparation and installation can reuse an exact inventoried archive across separately supervised phases. No VM is needed.
 
 ## Inspect sources and a distinct candidate
 
@@ -39,6 +35,20 @@ These reports do not authenticate providers, establish truth, rediscover current
 sources, or authorize activation. [Decision 0018](docs/decisions/0018-source-candidate-evaluation.md)
 and [the focused checks](docs/acceptance/capabilities/reporting-focused-2026-10-14T21-41-54.529457Z/receipt.json)
 identify the contract and native controls.
+
+## Emit a standalone checked path tree
+
+Use a projection specification with `pathTree: {}` and authored `path` attributes
+on its selected entities:
+
+```sh
+patamaps path-tree graph.json policy.json projection.json --as-of 2026-10-10T12:00:00Z --format typescript --export routes --output routes.mts
+```
+
+The module exports `routes`, `routesParams` and `hydrateRoutes(parameters)`.
+Hydration returns data with string paths and cloned occupants. Missing or unsafe
+values refuse. JSON remains the command's default; `--parameters` applies only
+to JSON output. Parsed/generated data grants no checked or activation state.
 
 ## Run the current native preview
 

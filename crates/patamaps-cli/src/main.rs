@@ -17,7 +17,7 @@ use patamaps_governance::{
 };
 use patamaps_projection::{
     CaptureInputs, CaptureRecord, SourceReceipt, capture, compare, compile_path_tree, emit_rust,
-    emit_typescript, hydrate, project, replay,
+    emit_typescript, emit_typescript_path_tree, hydrate, project, replay,
 };
 use serde::{Serialize, de::DeserializeOwned};
 use std::{
@@ -63,6 +63,11 @@ struct Output {
 enum Format {
     Json,
     Rust,
+    Typescript,
+}
+#[derive(Clone, Copy, ValueEnum)]
+enum TreeFormat {
+    Json,
     Typescript,
 }
 #[derive(Clone, Copy, ValueEnum)]
@@ -276,6 +281,10 @@ enum Command {
         evaluation: Evaluation,
         #[arg(long)]
         parameters: Option<PathBuf>,
+        #[arg(long, value_enum, default_value = "json")]
+        format: TreeFormat,
+        #[arg(long)]
+        export: Option<String>,
         #[command(flatten)]
         output: Output,
     },
@@ -1764,17 +1773,37 @@ fn run(command: Command) -> Result<(), Failure> {
             spec,
             evaluation,
             parameters,
+            format,
+            export,
             output,
         } => {
+            if (matches!(format, TreeFormat::Typescript) && parameters.is_some())
+                || (matches!(format, TreeFormat::Json) && export.is_some())
+            {
+                return Err(CheckError(vec![Issue::error(
+                    "PATH_TREE_EMISSION_OPTIONS",
+                    "Parameters require JSON output; an export name requires TypeScript output",
+                    "path-tree",
+                )])
+                .into());
+            }
             let graph = graph(&input)?;
             let policy: PolicyDocument = read(&policy)?;
             let spec: ProjectionSpec = read(&spec)?;
             let generation = admit(&graph, &policy, options(&evaluation)?)?;
             let projection = project(&generation, &spec)?;
             let tree = compile_path_tree(&projection, &spec)?;
-            match parameters {
-                Some(path) => json(&output, &hydrate(&tree, read(&path)?)?),
-                None => json(&output, tree.record()),
+            match format {
+                TreeFormat::Json => match parameters {
+                    Some(path) => json(&output, &hydrate(&tree, read(&path)?)?),
+                    None => json(&output, tree.record()),
+                },
+                TreeFormat::Typescript => write_bytes(
+                    &output,
+                    emit_typescript_path_tree(&tree, export.as_deref().unwrap_or("pathTree"))?
+                        .as_bytes(),
+                    false,
+                ),
             }
         }
         Command::Derive {

@@ -1,0 +1,86 @@
+// Generated from urn:patamaps:path-tree:67b9928d957f41070a456f0591e77ed43c08fcb0ff94de26308cf8c0a2521acf; regenerate after correspondence changes.
+export const nativeTree = JSON.parse("{\"_\":\"/\",\"network\":{\":networkId\":{\"$\":{\"id\":\"urn:a\",\"kind\":\"concept\",\"slots\":{\"derived\":{\"id\":\"urn:c\",\"kind\":\"concept\"}}},\"_\":\"/network/:networkId\"},\"_\":\"/network\"}}") as { readonly ["_"]: "/"; readonly ["network"]: { readonly [":networkId"]: { readonly ["$"]: { readonly ["id"]: "urn:a"; readonly ["kind"]: "concept"; readonly ["slots"]: { readonly ["derived"]: { readonly ["id"]: "urn:c"; readonly ["kind"]: "concept" } } }; readonly ["_"]: "/network/:networkId" }; readonly ["_"]: "/network" } };
+export const nativeTreeParams = [":networkId"] as const;
+export type NativeTreeParam = (typeof nativeTreeParams)[number];
+export type NativeTreeHydratedNode<T> = { readonly [K in keyof T]: K extends "_" ? string : K extends "$" ? T[K] : T[K] extends object ? NativeTreeHydratedNode<T[K]> : T[K] };
+
+export function hydrateNativeTree(_patamapsparams: Record<string, string>): NativeTreeHydratedNode<typeof nativeTree> {
+  if (_patamapsparams === null || typeof _patamapsparams !== "object" || Array.isArray(_patamapsparams)) {
+    throw new Error("Path parameters must be a string map");
+  }
+  const _patamapsencoder = new TextEncoder();
+  const _patamapsunicode = (text: string): boolean => {
+    for (const character of text) {
+      const point = character.codePointAt(0)!;
+      if (point >= 0xd800 && point <= 0xdfff) return false;
+    }
+    return true;
+  };
+  const _patamapsbytes = (text: string): number => _patamapsencoder.encode(text).length;
+  const _patamapsentries = Object.entries(_patamapsparams);
+  if (_patamapsentries.length > 1024) throw new Error("Path parameter resource limit");
+  const _patamapsvalues: Record<string, string> = Object.create(null);
+  let _patamapsinputBytes = 0;
+  for (const [key, value] of _patamapsentries) {
+    if (typeof value !== "string" || !_patamapsunicode(key) || !_patamapsunicode(value)) {
+      throw new Error("Path parameters must contain Unicode scalar strings");
+    }
+    _patamapsinputBytes += _patamapsbytes(key) + _patamapsbytes(value);
+    if (_patamapsinputBytes > 16777216) throw new Error("Path parameter resource limit");
+    _patamapsvalues[key] = value;
+  }
+  const _patamapsresolve = (token: string): string | undefined => {
+    const bare = token.slice(1).replace(/\?$/, "");
+    for (const key of [token, bare, ":" + bare, "*" + bare, "*" + bare + "?"]) {
+      if (Object.hasOwn(_patamapsvalues, key)) return _patamapsvalues[key];
+    }
+    return undefined;
+  };
+  const _patamapsdelimiter = "/";
+  const _patamapstokens = new Set<string>(nativeTreeParams as readonly string[]);
+  let _patamapsoutputBytes = 0;
+  const _patamapspath = (path: string): string => {
+    if (!path.startsWith(_patamapsdelimiter)) throw new Error("Invalid path template");
+    let output = "";
+    for (const token of path.slice(_patamapsdelimiter.length).split(_patamapsdelimiter)) {
+      let value = token;
+      if (_patamapstokens.has(token)) {
+        const supplied = _patamapsresolve(token);
+        if (supplied === undefined && token.startsWith("*") && token.endsWith("?")) {
+          value = "";
+        } else {
+          if (supplied === undefined || supplied.length === 0 || /[\s\u0085?#]/u.test(supplied)
+              || (!token.startsWith("*") && supplied.includes("/"))
+              || (_patamapsdelimiter !== "/" && supplied.includes(_patamapsdelimiter))) {
+            throw new Error("Missing or unsafe path parameter " + token);
+          }
+          value = supplied;
+        }
+      }
+      if (value.length !== 0) output += _patamapsdelimiter + value;
+    }
+    if (_patamapsdelimiter === "/") {
+      output = "/" + output.split("/").filter(part => part.length !== 0).join("/");
+    } else if (output.length === 0) {
+      output = _patamapsdelimiter;
+    }
+    _patamapsoutputBytes += _patamapsbytes(output);
+    if (_patamapsoutputBytes > 16777216) throw new Error("Hydrated path resource limit");
+    return output;
+  };
+  const _patamapswalk = (node: Record<string, unknown>): Record<string, unknown> => {
+    if (!Object.hasOwn(node, "_") || typeof node._ !== "string") throw new Error("Invalid path node");
+    const result: Record<string, unknown> = Object.create(null);
+    for (const [key, value] of Object.entries(node)) {
+      if (key === "_") result[key] = _patamapspath(value as string);
+      else if (key === "$") result[key] = JSON.parse(JSON.stringify(value));
+      else {
+        if (value === null || typeof value !== "object" || Array.isArray(value)) throw new Error("Invalid path child");
+        result[key] = _patamapswalk(value as Record<string, unknown>);
+      }
+    }
+    return result;
+  };
+  return _patamapswalk(nativeTree) as NativeTreeHydratedNode<typeof nativeTree>;
+}
+

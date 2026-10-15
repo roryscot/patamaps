@@ -1,0 +1,130 @@
+{
+  "status": "partial-substantive-audit",
+  "recordedAtUtc": "2026-10-15T02:39:16.700489+00:00",
+  "referenceEngine": "399747a4ad05a37cd8db1cedd53048fad2175be4",
+  "reviewedReferenceSources": [
+    {
+      "suite": "replay",
+      "sourcePath": "src/__tests__/replay.test.ts",
+      "sourceRevision": "399747a4ad05a37cd8db1cedd53048fad2175be4",
+      "digest": "sha256:37708c8b28c171bbff92d59e9ebafbd81ed1028e7d77d2d605a020846e491ae3",
+      "capabilities": [
+        "C01",
+        "C08"
+      ],
+      "substantiveGuaranteesReviewed": [
+        "Exact source/dependency/toolchain/profile identities, immutable owned inputs, explicit time/context and complete result recomputation govern replay. Rehashing substituted output does not establish a verified replay.",
+        "Strict decoded JSON, closed typed envelopes, pack registration, duplicate spec refusal and built-in-only capture preserve portable boundaries. Native Rust source identities replace the historical Node executor; historical captures are not relabeled."
+      ],
+      "nativeEvidence": [
+        {
+          "path": "crates/patamaps-projection/src/capture.rs",
+          "digest": "sha256:b0c8ced7e6a03c2475f2b42007bdc053becac745b0b18f4e2b6bdc06783385d4"
+        },
+        {
+          "path": "crates/patamaps-projection/tests/replay.rs",
+          "digest": "sha256:d45d99896587cec3b0f1075aa785cf258aebb0895b4384a74e226326d16e0814"
+        }
+      ],
+      "review": "Complete reference assertion body and listed relevant native implementation/tests were read. This is not original-suite execution or final capability acceptance."
+    },
+    {
+      "suite": "semantic-replay",
+      "sourcePath": "src/__tests__/semantic-replay.test.ts",
+      "sourceRevision": "399747a4ad05a37cd8db1cedd53048fad2175be4",
+      "digest": "sha256:c9af8f3354281e2b343193c9eba5cc7a20052c9ff80709c51f4d30193da3c03f",
+      "capabilities": [
+        "C04",
+        "C06",
+        "C07",
+        "C08"
+      ],
+      "substantiveGuaranteesReviewed": [
+        "Capture rechecks proof, dependency, uncertainty, budget, projection and tree outputs. Foreign executors, changed source bytes and self-consistently rehashed expected data refuse.",
+        "Native collection profile0.2 preserves known graph compilation independently of rejected consumer output. Historical single-spec0.1 keeps its original representation; consumers requiring per-expression known states use the collection profile, including for one specification.",
+        "Missing source content remains explicit and is never fetched or rediscovered by ordinary replay. Workspace/source evaluation performs its own separately checked lineage reconstruction."
+      ],
+      "nativeEvidence": [
+        {
+          "path": "crates/patamaps-projection/src/capture.rs",
+          "digest": "sha256:b0c8ced7e6a03c2475f2b42007bdc053becac745b0b18f4e2b6bdc06783385d4"
+        },
+        {
+          "path": "crates/patamaps-projection/tests/replay.rs",
+          "digest": "sha256:d45d99896587cec3b0f1075aa785cf258aebb0895b4384a74e226326d16e0814"
+        },
+        {
+          "path": "crates/patamaps-projection/tests/risk.rs",
+          "digest": "sha256:2b9c8271dc3882a526088c7551ee301d9bb5327f3de42089068065642bdb4ca0"
+        },
+        {
+          "path": "crates/patamaps-projection/tests/path_tree.rs",
+          "digest": "sha256:40a3e377707a3a3968769affceff381f83397d8d5bdafe0fc35a9c8af23e9055"
+        }
+      ],
+      "review": "Complete reference assertion body and listed relevant native implementation/tests were read. This is not original-suite execution or final capability acceptance."
+    },
+    {
+      "suite": "scientific-source-native",
+      "sourcePath": "src/__tests__/scientific-source-native.test.ts",
+      "sourceRevision": "399747a4ad05a37cd8db1cedd53048fad2175be4",
+      "digest": "sha256:26b19e9c229814ad0134866de3a477799524e82722e089d9d02719d627ac05da",
+      "capabilities": [
+        "C04",
+        "C05",
+        "C06",
+        "C07",
+        "C17",
+        "C18"
+      ],
+      "substantiveGuaranteesReviewed": [
+        "The pinned source has seven assertions across five relations, with distinct duplicates and retained original provenance. Actual Rust lookup is compared with the unchanged TypeScript consumer through an explicit shape adapter.",
+        "Cost18, budget17 refusal, strict evidence refusal, irreversible reversal, stale proof, crate tampering and source byte preservation are native acceptance assertions. This verifies supported data/workflows, not scientific truth or current activation."
+      ],
+      "nativeEvidence": [
+        {
+          "path": "scripts/test_scientific.py",
+          "digest": "sha256:4665abbf763e7970fa1ecc7d8e9faccb883b6d59c95fa0aa407f19b2e0312c2e"
+        },
+        {
+          "path": "crates/patamaps-scientific/tests/crate.rs",
+          "digest": "sha256:9e05ab20889491dafc2d89db1aec2d5e726e69025ad17d231472f1cbfeac6b2b"
+        },
+        {
+          "path": "examples/scientific-lookup/src/main.rs",
+          "digest": "sha256:760afd08c3a56a3c22c1de01e3f6dabdde1b56e1960fde18d731673566274235"
+        }
+      ],
+      "review": "Complete reference assertion body and listed relevant native implementation/tests were read. This is not original-suite execution or final capability acceptance."
+    },
+    {
+      "suite": "scientific-crate",
+      "sourcePath": "src/__tests__/scientific-crate.test.ts",
+      "sourceRevision": "399747a4ad05a37cd8db1cedd53048fad2175be4",
+      "digest": "sha256:0f19086ab57d6ea0210e48a4fc935d431a3516137a5bb40420bcad215b6cf3a2",
+      "capabilities": [
+        "C08",
+        "C17"
+      ],
+      "substantiveGuaranteesReviewed": [
+        "Crate verification reconstructs its complete metadata, inventory, replay, export and Rust/TypeScript bytes. Extra/missing/tampered files, source assertion substitution, invalid date and conflicting JSON-LD identities refuse.",
+        "Included payload bytes must match their receipts; absent payloads remain explicit digest references and cannot enter closed governed artifacts. Partial mixed-payload alignment deserves additional adversarial checking; source review alone is not proof of every case."
+      ],
+      "nativeEvidence": [
+        {
+          "path": "crates/patamaps-scientific/src/crate_export.rs",
+          "digest": "sha256:4c61d08a72262d5efa85cf5909cf82792a669df8ac4bc8c343a6e52eedafc42f"
+        },
+        {
+          "path": "crates/patamaps-scientific/tests/crate.rs",
+          "digest": "sha256:9e05ab20889491dafc2d89db1aec2d5e726e69025ad17d231472f1cbfeac6b2b"
+        }
+      ],
+      "review": "Complete reference assertion body and listed relevant native implementation/tests were read. This is not original-suite execution or final capability acceptance."
+    }
+  ],
+  "originalCasesExecutedByThisReview": 0,
+  "ownerDispositions": [],
+  "remaining": "Other suites, recorded dependency propagation, outstanding verification gaps and final capability acceptance remain open.",
+  "deleted": []
+}

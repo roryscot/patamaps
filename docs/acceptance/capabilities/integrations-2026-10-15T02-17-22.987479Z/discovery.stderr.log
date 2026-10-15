@@ -1,0 +1,28 @@
+Traceback (most recent call last):
+  File "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/scripts/capabilities/retained_driver.py", line 97, in <module>
+    main()
+    ~~~~^^
+  File "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/scripts/capabilities/retained_driver.py", line 70, in main
+    runpy.run_path(str(driver), run_name="__main__")
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen runpy>", line 294, in run_path
+  File "<frozen runpy>", line 98, in _run_module_code
+  File "<frozen runpy>", line 88, in _run_code
+  File "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/scripts/test_adapter_bridge.py", line 91, in <module>
+    result=run(a.cli.resolve(),work,['generate','config.json','--root',str(work)],expected_exit)
+  File "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/scripts/test_adapter_bridge.py", line 37, in run
+    r=subprocess.run([str(cli),*command],cwd=work,capture_output=True,text=True,timeout=30)
+  File "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/intel-python-3.13.16-20261013/runtime/python/lib/python3.13/subprocess.py", line 557, in run
+    stdout, stderr = process.communicate(input, timeout=timeout)
+                     ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/intel-python-3.13.16-20261013/runtime/python/lib/python3.13/subprocess.py", line 1223, in communicate
+    stdout, stderr = self._communicate(input, endtime, timeout)
+                     ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/intel-python-3.13.16-20261013/runtime/python/lib/python3.13/subprocess.py", line 2156, in _communicate
+    self._check_timeout(endtime, orig_timeout, stdout, stderr)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/intel-python-3.13.16-20261013/runtime/python/lib/python3.13/subprocess.py", line 1270, in _check_timeout
+    raise TimeoutExpired(
+    ...<2 lines>...
+            stderr=b''.join(stderr_seq) if stderr_seq else None)
+subprocess.TimeoutExpired: Command '['/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/capabilities/installed-stoub0kb/installation/bin/patamaps', 'generate', 'config.json', '--root', '/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/capabilities/integrations-bz0zz4jt/discovery/patamaps-independent-discovery-ulxm2_1b/typescript-zod']' timed out after 30 seconds

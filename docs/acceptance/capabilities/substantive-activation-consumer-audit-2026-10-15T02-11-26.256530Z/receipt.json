@@ -1,0 +1,222 @@
+{
+  "status": "partial-substantive-audit",
+  "recordedAtUtc": "2026-10-15T02:11:26.258532+00:00",
+  "referenceEngine": "399747a4ad05a37cd8db1cedd53048fad2175be4",
+  "reviewedReferenceSources": [
+    {
+      "suite": "activation",
+      "sourceRevision": "399747a4ad05a37cd8db1cedd53048fad2175be4",
+      "sourcePath": "src/__tests__/activation.test.ts",
+      "digest": "sha256:6dfca3ed6262a23bf2efde347dd680a31503165f527a03a4666c98c7167be732",
+      "capabilities": [
+        "C11",
+        "C12"
+      ],
+      "substantiveGuaranteesReviewed": [
+        "A rejected candidate cannot replace accepted state. Native memory and Linux persistence expose separate explicit profiles."
+      ],
+      "nativeEvidence": [
+        {
+          "path": "crates/patamaps-activator/tests/memory.rs",
+          "digest": "sha256:062a8515ffc8b7cdeb7c1eb4a196a06145f8ddf4b3869a7dba0647f544d9ea94"
+        },
+        {
+          "path": "crates/patamaps-activator/src/linux_tests.rs",
+          "digest": "sha256:577613c64cdcc2c2b7a7ef47b95aff75a3c9874487a2b8b29064ea68f6d1eb45"
+        }
+      ],
+      "review": "Complete reference assertion body and relevant listed native implementation/assertion portions read. Constituent checks are distinguished from complete workflow acceptance; original-suite execution is not claimed."
+    },
+    {
+      "suite": "governed-activation",
+      "sourceRevision": "399747a4ad05a37cd8db1cedd53048fad2175be4",
+      "sourcePath": "src/__tests__/governed-activation.test.ts",
+      "digest": "sha256:243d4df7d9dc0d406075bbcda2cc69423adc222fd5a5043d16c359cb2a7d77a5",
+      "capabilities": [
+        "C10",
+        "C11"
+      ],
+      "substantiveGuaranteesReviewed": [
+        "Owner-selected host context supplies fresh trust/time; exact signed files, predecessor, environment and current grants determine transition and retry.",
+        "Tampered files/proposal/signature/inventory, host failure/panic, revocation, expiry and self-approval retain accepted state. Historical verification grants no current authority.",
+        "Rust borrowing/private constructors preserve state ownership; no literal JavaScript object-identity or deep-freeze equivalence is claimed."
+      ],
+      "nativeEvidence": [
+        {
+          "path": "crates/patamaps-activator/src/memory.rs",
+          "digest": "sha256:97e98f84f6efe7a8005cce333710ae3626ab450fb1ea7205f931b982279a6273"
+        },
+        {
+          "path": "crates/patamaps-activator/tests/memory.rs",
+          "digest": "sha256:062a8515ffc8b7cdeb7c1eb4a196a06145f8ddf4b3869a7dba0647f544d9ea94"
+        },
+        {
+          "path": "crates/patamaps-activator/tests/transport.rs",
+          "digest": "sha256:2768e7243a4e2904d488141d3e982a80458fb2d05fb63a88981d924a8c407e69"
+        }
+      ],
+      "review": "Complete reference assertion body and relevant listed native implementation/assertion portions read. Constituent checks are distinguished from complete workflow acceptance; original-suite execution is not claimed."
+    },
+    {
+      "suite": "protected-activation",
+      "sourceRevision": "399747a4ad05a37cd8db1cedd53048fad2175be4",
+      "sourcePath": "src/__tests__/protected-activation.test.ts",
+      "digest": "sha256:a09d969884c3247f89d421876685c7966bbe8556c5e66a2b0e3c72ae31c464df",
+      "capabilities": [
+        "C10",
+        "C12"
+      ],
+      "substantiveGuaranteesReviewed": [
+        "Strict ingress and fixed protected runtime reject caller trust/time, non-Linux hosts, unsafe files/links/ownership and extra artifacts.",
+        "Actual Linux tests cover distinct proposer/consumer UID, native lock, fresh authorization, concurrent stale bases, five SIGKILL phases, native module move and fresh-approved rollback.",
+        "Verification gap: the precommit swap branch asserts rejection but skips readback of the prior active state. Add an independent pointer/state preservation assertion and run it on Linux. No production defect has yet been demonstrated."
+      ],
+      "nativeEvidence": [
+        {
+          "path": "crates/patamaps-activator/src/transaction.rs",
+          "digest": "sha256:1f836df17423c175dbc8e0de8a3998f4d59d89d8a13a0ce05fd74b0847ce396d"
+        },
+        {
+          "path": "crates/patamaps-activator/src/linux_tests.rs",
+          "digest": "sha256:577613c64cdcc2c2b7a7ef47b95aff75a3c9874487a2b8b29064ea68f6d1eb45"
+        },
+        {
+          "path": "crates/patamaps-activator/tests/transport.rs",
+          "digest": "sha256:2768e7243a4e2904d488141d3e982a80458fb2d05fb63a88981d924a8c407e69"
+        }
+      ],
+      "review": "Complete reference assertion body and relevant listed native implementation/assertion portions read. Constituent checks are distinguished from complete workflow acceptance; original-suite execution is not claimed."
+    },
+    {
+      "suite": "governance-native",
+      "sourceRevision": "399747a4ad05a37cd8db1cedd53048fad2175be4",
+      "sourcePath": "src/__tests__/governance-native.test.ts",
+      "digest": "sha256:b0c58891a34f8207671bb509bdcb155db09bc8c4daf53b64395af289ccc05e74",
+      "capabilities": [
+        "C07",
+        "C10"
+      ],
+      "substantiveGuaranteesReviewed": [
+        "The reference wrapper requires actual reviewed-byte native execution, external owner approval, refusal of agent self-approval and output substitution, plus path hydration.",
+        "Existing native checks and the new checked-tree consumer provide the constituent flows. The exact original nine-file/seven-label fixture and public subpath names are not the native completion criterion."
+      ],
+      "nativeEvidence": [
+        {
+          "path": "scripts/test_native.py",
+          "digest": "sha256:8c06b379efcd7b4d2f6f23237540c82f516c0b0bc20d40b28801189453bcbe99"
+        },
+        {
+          "path": "scripts/capabilities/consumers/typed_tree.rs",
+          "digest": "sha256:512a26c94ba894ffc51f6cb32db713bcd6c66b31f9fc6b925a12b31f13f8bd07"
+        },
+        {
+          "path": "crates/patamaps-activator/src/linux_tests.rs",
+          "digest": "sha256:577613c64cdcc2c2b7a7ef47b95aff75a3c9874487a2b8b29064ea68f6d1eb45"
+        }
+      ],
+      "review": "Complete reference assertion body and relevant listed native implementation/assertion portions read. Constituent checks are distinguished from complete workflow acceptance; original-suite execution is not claimed."
+    },
+    {
+      "suite": "lifecycle-native",
+      "sourceRevision": "399747a4ad05a37cd8db1cedd53048fad2175be4",
+      "sourcePath": "src/__tests__/lifecycle-native.test.ts",
+      "digest": "sha256:32e79668b861906f595c47d60e66798d07f55a9fd37fcd52c4cd6c2d6612ad50",
+      "capabilities": [
+        "C02",
+        "C04",
+        "C05",
+        "C06",
+        "C07",
+        "C10",
+        "C11",
+        "C12"
+      ],
+      "substantiveGuaranteesReviewed": [
+        "The reference wrapper binds two owned shards, checked proof, unique ordinal cost, real consumer move, stale approval/output/evidence/binding refusals, accepted-state preservation and fresh rollback.",
+        "Native portable and Linux fixtures implement these stages with independently authored data; their costs and output counts need not copy incidental fixture values. New native typed consumer separately checks exact cost five and rejected capture replay."
+      ],
+      "nativeEvidence": [
+        {
+          "path": "scripts/test_lifecycle_pure.py",
+          "digest": "sha256:9fea9040cdf6c0271d38fe31b3cb9d339948a16c8aa438c93e4ef8c6f5a26d28"
+        },
+        {
+          "path": "scripts/test_native.py",
+          "digest": "sha256:8c06b379efcd7b4d2f6f23237540c82f516c0b0bc20d40b28801189453bcbe99"
+        },
+        {
+          "path": "crates/patamaps-activator/tests/transport.rs",
+          "digest": "sha256:2768e7243a4e2904d488141d3e982a80458fb2d05fb63a88981d924a8c407e69"
+        },
+        {
+          "path": "crates/patamaps-activator/src/linux_tests.rs",
+          "digest": "sha256:577613c64cdcc2c2b7a7ef47b95aff75a3c9874487a2b8b29064ea68f6d1eb45"
+        }
+      ],
+      "review": "Complete reference assertion body and relevant listed native implementation/assertion portions read. Constituent checks are distinguished from complete workflow acceptance; original-suite execution is not claimed."
+    },
+    {
+      "suite": "explanation-native",
+      "sourceRevision": "399747a4ad05a37cd8db1cedd53048fad2175be4",
+      "sourcePath": "src/__tests__/explanation-native.test.ts",
+      "digest": "sha256:cfa0b7c4ddaacdd4b5de5c59754b66b34d4aa2b055d60f668393f653991db65c",
+      "capabilities": [
+        "C09",
+        "C13",
+        "C18"
+      ],
+      "substantiveGuaranteesReviewed": [
+        "The reference wrapper requires one source-preserving report through API and strict CLI, explicit unknown causality/current authority, and no application.",
+        "Native report/CLI and static escaped HTML checks exist. Interactive browser execution remains explicitly unverified; this review does not close that boundary."
+      ],
+      "nativeEvidence": [
+        {
+          "path": "scripts/capabilities/source_reporting.py",
+          "digest": "sha256:2a5f46a84bde99d3a97d646df42e10aa829a8aec2ea25c97d8c32062c573d248"
+        },
+        {
+          "path": "scripts/capabilities/workspace.py",
+          "digest": "sha256:b7b5e73b2c0ca55b1962a85ba7114bee4b25a3a76ab8db0dc3086920197258e7"
+        },
+        {
+          "path": "crates/patamaps-inspect/src/explanation.rs",
+          "digest": "sha256:bad1aa7dce3b64ae7d361c734908af0fad1b05b594c672f651f09cdbda8b5b7d"
+        }
+      ],
+      "review": "Complete reference assertion body and relevant listed native implementation/assertion portions read. Constituent checks are distinguished from complete workflow acceptance; original-suite execution is not claimed."
+    },
+    {
+      "suite": "repair-native",
+      "sourceRevision": "399747a4ad05a37cd8db1cedd53048fad2175be4",
+      "sourcePath": "src/__tests__/repair-native.test.ts",
+      "digest": "sha256:ac89609ee5121271dad62fef6f6fb879f4390225c741e3a0032f32a613932afc",
+      "capabilities": [
+        "C07",
+        "C14"
+      ],
+      "substantiveGuaranteesReviewed": [
+        "The original wrapper executes actual repaired provider/native-path output and read-only CLI without application or implied authorization.",
+        "Native checks already verify finite repair proposals and preserved accepted state; direct execution of the selected returned repair capture as a generated native consumer still needs an explicit acceptance check."
+      ],
+      "nativeEvidence": [
+        {
+          "path": "scripts/test_lifecycle_pure.py",
+          "digest": "sha256:9fea9040cdf6c0271d38fe31b3cb9d339948a16c8aa438c93e4ef8c6f5a26d28"
+        },
+        {
+          "path": "crates/patamaps-activator/src/linux_tests.rs",
+          "digest": "sha256:577613c64cdcc2c2b7a7ef47b95aff75a3c9874487a2b8b29064ea68f6d1eb45"
+        },
+        {
+          "path": "crates/patamaps-inspect/src/repair.rs",
+          "digest": "sha256:6680fe5e0c14722c04f4917e21281b128eab1b63af53bd60966570105bbe8177"
+        }
+      ],
+      "review": "Complete reference assertion body and relevant listed native implementation/assertion portions read. Constituent checks are distinguished from complete workflow acceptance; original-suite execution is not claimed."
+    }
+  ],
+  "originalCasesExecutedByThisReview": 0,
+  "ownerDispositions": [],
+  "remaining": "Other pinned suites, the recorded C09 dependency-path repair, C12 swap-preservation assertion, returned repair-capture native execution and browser acceptance remain open.",
+  "deleted": []
+}

@@ -410,3 +410,153 @@ pub fn hydrate(
     parse_value(&canonical_bytes(&result)?)?;
     Ok(result)
 }
+
+/// Emit a standalone data module from a checked tree. The helper returns data;
+/// it does not create checked policy, graph, replay or activation capabilities.
+pub fn emit_typescript_path_tree(
+    tree: &CheckedPathTree,
+    export: &str,
+) -> Result<String, CheckError> {
+    if export.len() > 128 {
+        return Err(error(
+            "INVALID_EXPORT_NAME",
+            "TypeScript tree export name exceeds 128 bytes",
+            "export",
+        ));
+    }
+    const GLOBALS: &[&str] = &[
+        "Object",
+        "Array",
+        "Error",
+        "Set",
+        "TextEncoder",
+        "undefined",
+    ];
+    if !super::typescript_export_name(export) || GLOBALS.contains(&export) {
+        return Err(error(
+            "INVALID_EXPORT_NAME",
+            "Invalid or reserved TypeScript tree export name",
+            export,
+        ));
+    }
+    let value = serde_json::to_value(&tree.record.tree).map_err(ContractError::from)?;
+    let json = String::from_utf8(canonical_bytes(&value)?).expect("canonical Unicode");
+    let params =
+        String::from_utf8(canonical_bytes(&tree.record.params)?).expect("canonical Unicode");
+    let type_name = format!("{}{}", export[..1].to_ascii_uppercase(), &export[1..]);
+    let params_name = format!("{export}Params");
+    let mut prefix = "_patamaps".to_owned();
+    while export.starts_with(&prefix) {
+        prefix.push('_');
+    }
+    let runtime = TYPESCRIPT_TREE_RUNTIME
+        .replace("@@HYDRATE@@", &format!("hydrate{type_name}"))
+        .replace("@@EXPORT@@", export)
+        .replace("@@TYPE@@", &type_name)
+        .replace("@@PARAMS@@", &params_name)
+        .replace("@@P@@", &prefix)
+        .replace(
+            "@@DELIMITER@@",
+            &super::js_string(tree.record.delimiter.as_str()),
+        )
+        .replace("@@LIMIT@@", &MAX_INPUT_BYTES.to_string());
+    Ok(format!(
+        "// Generated from {}; regenerate after correspondence changes.\nexport const {export} = JSON.parse({}) as {};\nexport const {params_name} = {params} as const;\nexport type {type_name}Param = (typeof {params_name})[number];\nexport type {type_name}HydratedNode<T> = {{ readonly [K in keyof T]: K extends \"_\" ? string : K extends \"$\" ? T[K] : T[K] extends object ? {type_name}HydratedNode<T[K]> : T[K] }};\n{runtime}",
+        tree.record.id,
+        super::js_string(&json),
+        super::typescript_type(&value),
+    ))
+}
+
+// Segment-wise substitution, owned data and bounds match native hydration.
+// Keep this consumer runtime inside the hashed Rust source inventory.
+const TYPESCRIPT_TREE_RUNTIME: &str = r###"
+export function @@HYDRATE@@(@@P@@params: Record<string, string>): @@TYPE@@HydratedNode<typeof @@EXPORT@@> {
+  if (@@P@@params === null || typeof @@P@@params !== "object" || Array.isArray(@@P@@params)) {
+    throw new Error("Path parameters must be a string map");
+  }
+  const @@P@@encoder = new TextEncoder();
+  const @@P@@unicode = (text: string): boolean => {
+    for (const character of text) {
+      const point = character.codePointAt(0)!;
+      if (point >= 0xd800 && point <= 0xdfff) return false;
+    }
+    return true;
+  };
+  const @@P@@bytes = (text: string): number => @@P@@encoder.encode(text).length;
+  const @@P@@entries = Object.entries(@@P@@params);
+  if (@@P@@entries.length > 1024) throw new Error("Path parameter resource limit");
+  const @@P@@values: Record<string, string> = Object.create(null);
+  let @@P@@inputBytes = 0;
+  for (const [key, value] of @@P@@entries) {
+    if (typeof value !== "string" || !@@P@@unicode(key) || !@@P@@unicode(value)) {
+      throw new Error("Path parameters must contain Unicode scalar strings");
+    }
+    @@P@@inputBytes += @@P@@bytes(key) + @@P@@bytes(value);
+    if (@@P@@inputBytes > @@LIMIT@@) throw new Error("Path parameter resource limit");
+    @@P@@values[key] = value;
+  }
+  const @@P@@resolve = (token: string): string | undefined => {
+    const bare = token.slice(1).replace(/\?$/, "");
+    for (const key of [token, bare, ":" + bare, "*" + bare, "*" + bare + "?"]) {
+      if (Object.hasOwn(@@P@@values, key)) return @@P@@values[key];
+    }
+    return undefined;
+  };
+  const @@P@@delimiter: string = @@DELIMITER@@;
+  const @@P@@tokens = new Set<string>(@@PARAMS@@ as readonly string[]);
+  let @@P@@outputBytes = 0;
+  const @@P@@path = (path: string): string => {
+    if (!path.startsWith(@@P@@delimiter)) throw new Error("Invalid path template");
+    let output = "";
+    let pathBytes = 0;
+    for (const token of path.slice(@@P@@delimiter.length).split(@@P@@delimiter)) {
+      let value = token;
+      if (@@P@@tokens.has(token)) {
+        const supplied = @@P@@resolve(token);
+        if (supplied === undefined && token.startsWith("*") && token.endsWith("?")) {
+          value = "";
+        } else {
+          if (supplied === undefined || supplied.length === 0 || /[\s?#]/u.test(supplied)
+              || (!token.startsWith("*") && supplied.includes("/"))
+              || (@@P@@delimiter !== "/" && supplied.includes(@@P@@delimiter))) {
+            throw new Error("Missing or unsafe path parameter " + token);
+          }
+          value = supplied;
+        }
+      }
+      if (value.length !== 0) {
+        pathBytes += @@P@@bytes(@@P@@delimiter) + @@P@@bytes(value);
+        if (pathBytes > @@LIMIT@@) throw new Error("Hydrated path resource limit");
+        output += @@P@@delimiter + value;
+      }
+    }
+    if (@@P@@delimiter === "/") {
+      output = "/" + output.split("/").filter(part => part.length !== 0).join("/");
+    } else if (output.length === 0) {
+      output = @@P@@delimiter;
+    }
+    @@P@@outputBytes += @@P@@bytes(output);
+    if (@@P@@outputBytes > @@LIMIT@@) throw new Error("Hydrated path resource limit");
+    return output;
+  };
+  const @@P@@walk = (node: Record<string, unknown>): Record<string, unknown> => {
+    if (!Object.hasOwn(node, "_") || typeof node._ !== "string") throw new Error("Invalid path node");
+    const result: Record<string, unknown> = Object.create(null);
+    for (const [key, value] of Object.entries(node)) {
+      if (key === "_") result[key] = @@P@@path(value as string);
+      else if (key === "$") result[key] = JSON.parse(JSON.stringify(value));
+      else {
+        if (value === null || typeof value !== "object" || Array.isArray(value)) throw new Error("Invalid path child");
+        result[key] = @@P@@walk(value as Record<string, unknown>);
+      }
+    }
+    return result;
+  };
+  const @@P@@result = @@P@@walk(@@EXPORT@@);
+  if (@@P@@bytes(JSON.stringify(@@P@@result)) > @@LIMIT@@) {
+    throw new Error("Hydrated tree resource limit");
+  }
+  return @@P@@result as @@TYPE@@HydratedNode<typeof @@EXPORT@@>;
+}
+"###;

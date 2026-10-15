@@ -1,0 +1,67 @@
+{
+  "status": "confirmed-reporting-defect-original-preserved",
+  "recordedAtUtc": "2026-10-15T02:19:50.900107+00:00",
+  "sourceReport": {
+    "path": "docs/acceptance/capabilities/compiler-2026-10-15T02-01-50.627814Z/lifecycle.json",
+    "digest": "sha256:c9f2cf25321ec512c82c888a47157875ad29be75032564b9440f9e3d77153d38"
+  },
+  "savedOriginal": {
+    "path": ".tools/capabilities/compiler-2dmyfgrc/lifecycle/patamaps-lifecycle-pure-mudxvndp/generated/capture.json",
+    "digest": "sha256:e1f4d3e6b96f970af0d7bb5ac584de76f865b53a4c9fe6d4f20a2208443802db",
+    "replay": "verified"
+  },
+  "inlineCapture": "refused by native replay; its input policy was mutated by the Python test fixture after the valid saved capture was replayed",
+  "requiredFix": {
+    "path": "scripts/test_lifecycle_pure.py",
+    "change": "Clone captured inputs before modifying the independent rejected-candidate fixture; assert original saved/embedded capture equality and execute the selected returned repair capture.",
+    "status": "not-yet-applied"
+  },
+  "commands": [
+    {
+      "label": "preserved-original",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/capabilities/installed-stoub0kb/installation/bin/patamaps",
+        "replay",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/docs/acceptance/capabilities/lifecycle-report-integrity-2026-10-15T02-19-50.247411Z/preserved-original.capture.json"
+      ],
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "stdout": {
+        "path": "docs/acceptance/capabilities/lifecycle-report-integrity-2026-10-15T02-19-50.247411Z/preserved-original.stdout.log",
+        "digest": "sha256:d6f132c43b83d623ca787a565164fa18c51ef324adf05c656de301f2f7ce9c98"
+      },
+      "stderr": {
+        "path": "docs/acceptance/capabilities/lifecycle-report-integrity-2026-10-15T02-19-50.247411Z/preserved-original.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "mutated-inline",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/capabilities/installed-stoub0kb/installation/bin/patamaps",
+        "replay",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/docs/acceptance/capabilities/lifecycle-report-integrity-2026-10-15T02-19-50.247411Z/mutated-inline.capture.json"
+      ],
+      "exitCode": 1,
+      "expectedExitCode": 1,
+      "stdout": {
+        "path": "docs/acceptance/capabilities/lifecycle-report-integrity-2026-10-15T02-19-50.247411Z/mutated-inline.stdout.log",
+        "digest": "sha256:971ea39b31a5f639c467dfaf74bdc4c63270f0059d5e53ef883210ecd7de35f1"
+      },
+      "stderr": {
+        "path": "docs/acceptance/capabilities/lifecycle-report-integrity-2026-10-15T02-19-50.247411Z/mutated-inline.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  ],
+  "engines": {
+    "schemaVersion": "0.1.0",
+    "documentType": "executor-description",
+    "compiler": "sha256:77ba746a0138b6c124d709e7398cea34cbd043c03ce8a5b122e935b55bc1d963",
+    "governance": "sha256:409660e9282e66f29eccbb2f234000fec6266977f2f9d4a960515a5229c1c552",
+    "workspace": "sha256:7d3f9b389c53427dac2add24d18a1339d63cfb3f4859e8933b888e89c0d28ff2",
+    "scientific": "sha256:097bc5735ea5dc590afd653f449975655d31d760c14e871fdc0a9e8dcc044270"
+  },
+  "scope": "Defect in a test report copy, not a demonstrated native replay/admission bypass. Prior raw report and actual command logs remain unchanged.",
+  "deleted": []
+}

@@ -9,7 +9,8 @@ pub use capture::{
 };
 pub use compare::compare;
 pub use path_tree::{
-    CheckedPathTree, HydratedTree, PathNode, PathTreeRecord, compile_path_tree, hydrate,
+    CheckedPathTree, HydratedTree, PathNode, PathTreeRecord, compile_path_tree,
+    emit_typescript_path_tree, hydrate,
 };
 
 use patamaps_contracts::*;
@@ -449,6 +450,68 @@ fn locator<'a>(entity: &'a Entity, scheme: &str) -> Result<&'a str, CheckError> 
     }
 }
 
+const TYPESCRIPT_RESERVED: &[&str] = &[
+    "default",
+    "class",
+    "function",
+    "const",
+    "let",
+    "var",
+    "import",
+    "export",
+    "interface",
+    "type",
+    "enum",
+    "await",
+    "yield",
+    "new",
+    "return",
+    "switch",
+    "case",
+    "delete",
+    "extends",
+    "implements",
+    "static",
+    "null",
+    "true",
+    "false",
+    "dispatch",
+    "SemanticId",
+    "break",
+    "catch",
+    "continue",
+    "debugger",
+    "do",
+    "else",
+    "finally",
+    "for",
+    "if",
+    "in",
+    "instanceof",
+    "super",
+    "this",
+    "throw",
+    "try",
+    "typeof",
+    "void",
+    "while",
+    "with",
+    "abstract",
+    "declare",
+    "private",
+    "protected",
+    "public",
+    "readonly",
+    "require",
+    "global",
+    "arguments",
+    "eval",
+    "JSON",
+];
+fn typescript_export_name(name: &str) -> bool {
+    language_identifier(name) && !TYPESCRIPT_RESERVED.contains(&name)
+}
+
 /// Typed static data; JSON.parse avoids object-literal __proto__ interpretation.
 /// An optional binding slot adds the draft fn(string)->string demonstration.
 pub fn emit_typescript(
@@ -456,66 +519,8 @@ pub fn emit_typescript(
     export: &str,
     binding_slot: Option<&str>,
 ) -> Result<String, CheckError> {
-    const RESERVED: &[&str] = &[
-        "default",
-        "class",
-        "function",
-        "const",
-        "let",
-        "var",
-        "import",
-        "export",
-        "interface",
-        "type",
-        "enum",
-        "await",
-        "yield",
-        "new",
-        "return",
-        "switch",
-        "case",
-        "delete",
-        "extends",
-        "implements",
-        "static",
-        "null",
-        "true",
-        "false",
-        "dispatch",
-        "SemanticId",
-        "break",
-        "catch",
-        "continue",
-        "debugger",
-        "do",
-        "else",
-        "finally",
-        "for",
-        "if",
-        "in",
-        "instanceof",
-        "super",
-        "this",
-        "throw",
-        "try",
-        "typeof",
-        "void",
-        "while",
-        "with",
-        "abstract",
-        "declare",
-        "private",
-        "protected",
-        "public",
-        "readonly",
-        "require",
-        "global",
-        "arguments",
-        "eval",
-        "JSON",
-    ];
     if !language_identifier(export)
-        || RESERVED.contains(&export)
+        || TYPESCRIPT_RESERVED.contains(&export)
         || (binding_slot.is_some()
             && export
                 .strip_prefix("handler")
@@ -544,7 +549,7 @@ pub fn emit_typescript(
                 || module.contains(['\n', '\r', '\\', '\0'])
                 || module.split('/').any(|s| s == "..")
                 || !language_identifier(symbol)
-                || RESERVED.contains(&symbol)
+                || TYPESCRIPT_RESERVED.contains(&symbol)
             {
                 return Err(CheckError(vec![Issue::error(
                     "INVALID_NATIVE_LOCATOR",

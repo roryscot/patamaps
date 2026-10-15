@@ -1,0 +1,126 @@
+{
+  "status": "passed",
+  "installedReceipt": "docs/acceptance/capabilities/installed-resume-2026-10-15T02-11-38.187814Z/receipt.json",
+  "binaryDigest": "sha256:aa55dc3a1f26ff33ee7af7c3aff23b9b4b7d1179cc9de9214220861571117d4e",
+  "nodeInPath": false,
+  "retainedWork": ".tools/capabilities/workspace-fjt8mwtb",
+  "commands": [
+    {
+      "label": "engine",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/capabilities/installed-stoub0kb/installation/bin/patamaps",
+        "engine"
+      ],
+      "exitCode": 0,
+      "expectedExitCode": 0
+    },
+    {
+      "label": "generate",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/capabilities/installed-stoub0kb/installation/bin/patamaps",
+        "generate",
+        "config.json",
+        "--root",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/capabilities/workspace-fjt8mwtb"
+      ],
+      "exitCode": 0,
+      "expectedExitCode": 0
+    },
+    {
+      "label": "offline-baseline",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/capabilities/installed-stoub0kb/installation/bin/patamaps",
+        "verify-workspace",
+        "baseline.json"
+      ],
+      "exitCode": 0,
+      "expectedExitCode": 0
+    },
+    {
+      "label": "unchanged",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/capabilities/installed-stoub0kb/installation/bin/patamaps",
+        "check",
+        "config.json",
+        "baseline.json",
+        "--root",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/capabilities/workspace-fjt8mwtb"
+      ],
+      "exitCode": 0,
+      "expectedExitCode": 0
+    },
+    {
+      "label": "drift",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/capabilities/installed-stoub0kb/installation/bin/patamaps",
+        "check",
+        "config.json",
+        "baseline.json",
+        "--root",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/capabilities/workspace-fjt8mwtb"
+      ],
+      "exitCode": 2,
+      "expectedExitCode": 2
+    },
+    {
+      "label": "regenerate-current",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/capabilities/installed-stoub0kb/installation/bin/patamaps",
+        "generate",
+        "config.json",
+        "--root",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/capabilities/workspace-fjt8mwtb"
+      ],
+      "exitCode": 0,
+      "expectedExitCode": 0
+    },
+    {
+      "label": "inspect",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/capabilities/installed-stoub0kb/installation/bin/patamaps",
+        "inspect",
+        "after.json",
+        "--before",
+        "capture.json",
+        "--subject",
+        "urn:example:command:create-user"
+      ],
+      "exitCode": 0,
+      "expectedExitCode": 0
+    },
+    {
+      "label": "html",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/capabilities/installed-stoub0kb/installation/bin/patamaps",
+        "inspect",
+        "after.json",
+        "--before",
+        "capture.json",
+        "--subject",
+        "urn:example:command:create-user",
+        "--html"
+      ],
+      "exitCode": 0,
+      "expectedExitCode": 0
+    }
+  ],
+  "deleted": [],
+  "activation": "not-performed",
+  "baselineUnchanged": true,
+  "noCacheCreated": true,
+  "sourceChange": {
+    "before": "sha256:f2260288c8a3d4db5c982f66230c291b363efa06138b5ff05e2f6c7d2e29f768",
+    "after": "sha256:cb4433a3ca3fc1f183ed6ccf9215ddea2d245ec1aa5daca1556a1dd0d753a72c",
+    "beforePreservedAt": ".tools/capabilities/workspace-fjt8mwtb/graph.before.json"
+  },
+  "html": "docs/acceptance/capabilities/workspace-2026-10-15T02-16-26.026814Z/debugger.html",
+  "browserVerification": "pending",
+  "engines": {
+    "schemaVersion": "0.1.0",
+    "documentType": "executor-description",
+    "compiler": "sha256:77ba746a0138b6c124d709e7398cea34cbd043c03ce8a5b122e935b55bc1d963",
+    "governance": "sha256:409660e9282e66f29eccbb2f234000fec6266977f2f9d4a960515a5229c1c552",
+    "workspace": "sha256:7d3f9b389c53427dac2add24d18a1339d63cfb3f4859e8933b888e89c0d28ff2",
+    "scientific": "sha256:097bc5735ea5dc590afd653f449975655d31d760c14e871fdc0a9e8dcc044270"
+  }
+}

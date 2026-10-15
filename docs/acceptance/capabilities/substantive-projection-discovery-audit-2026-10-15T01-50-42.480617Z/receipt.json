@@ -1,0 +1,319 @@
+{
+  "status": "partial-substantive-audit",
+  "recordedAtUtc": "2026-10-15T01:50:42.480087+00:00",
+  "referenceEngine": "399747a4ad05a37cd8db1cedd53048fad2175be4",
+  "reviewedReferenceSources": [
+    {
+      "suite": "projection",
+      "sourcePath": "src/__tests__/projection.test.ts",
+      "sourceRevision": "399747a4ad05a37cd8db1cedd53048fad2175be4",
+      "digest": "sha256:e892beb5b467e64a88ef086f23e631f2c69a6daeb7010b4aac2c722b9408e3e6",
+      "capabilities": [
+        "C07"
+      ],
+      "substantiveGuaranteesReviewed": [
+        "Admitted immutable graph, exact packs/context/time and bound specification produce an addressed projection; private Rust states prevent forged/stale mutable generations.",
+        "Slot cardinality, active links, target kinds and loss policy govern output. Escaped metadata remains data; generated Rust/TypeScript consumers execute across a real module move.",
+        "Native SemanticId naming replaces incidental generated type-alias naming. This review is not a claim to execute the original JavaScript test suite."
+      ],
+      "nativeEvidence": [
+        {
+          "path": "crates/patamaps-projection/src/lib.rs",
+          "digest": "sha256:101d7995a823457108ab9a94d1f4c379c70918d898bfe0ec7080ad94534a4119"
+        },
+        {
+          "path": "crates/patamaps-projection/tests/projection.rs",
+          "digest": "sha256:bd55f73961f700929e94d0c234a5e662f353ba9a40ecadf2e9ab10273f27ae31"
+        },
+        {
+          "path": "scripts/test_native.py",
+          "digest": "sha256:8c06b379efcd7b4d2f6f23237540c82f516c0b0bc20d40b28801189453bcbe99"
+        }
+      ],
+      "review": "Complete reference assertion bodies and the relevant native implementation/test portions were read. Original suite execution and final workflow acceptance are not claimed."
+    },
+    {
+      "suite": "semantic-projection",
+      "sourcePath": "src/__tests__/semantic-projection.test.ts",
+      "sourceRevision": "399747a4ad05a37cd8db1cedd53048fad2175be4",
+      "digest": "sha256:6bf1eefd0ebe7773b7c3d5bcce72a111c15eef94a83249edd0e47c5a2a7192e6",
+      "capabilities": [
+        "C04",
+        "C06",
+        "C07",
+        "C08"
+      ],
+      "substantiveGuaranteesReviewed": [
+        "Complete unique used-mapping/proof closure preserves typed uncertainty, exact consumer/spec/generation bindings and explicit unevaluated risk.",
+        "Shared premises are charged once; missing/overlapping classifications, overflow, consumer budget substitution and disabled complete-accounting refuse.",
+        "Persisted reports convey data; native checked states require recomputation. New TypeScript tree emission is undergoing separate installed acceptance."
+      ],
+      "nativeEvidence": [
+        {
+          "path": "crates/patamaps-core/src/risk.rs",
+          "digest": "sha256:c1a3a471527bcf854239ef11b20ef2736d5eb128a1de95692df4e93c1a9b4e6e"
+        },
+        {
+          "path": "crates/patamaps-projection/src/lib.rs",
+          "digest": "sha256:101d7995a823457108ab9a94d1f4c379c70918d898bfe0ec7080ad94534a4119"
+        },
+        {
+          "path": "crates/patamaps-projection/src/path_tree.rs",
+          "digest": "sha256:9e20771eff12dc7040dbd2602eefb33a44db7c05feb84b9ae5a0c1c5b8ba3bce"
+        },
+        {
+          "path": "crates/patamaps-projection/tests/risk.rs",
+          "digest": "sha256:2b9c8271dc3882a526088c7551ee301d9bb5327f3de42089068065642bdb4ca0"
+        },
+        {
+          "path": "crates/patamaps-projection/tests/path_tree.rs",
+          "digest": "sha256:40a3e377707a3a3968769affceff381f83397d8d5bdafe0fc35a9c8af23e9055"
+        }
+      ],
+      "review": "Complete reference assertion bodies and the relevant native implementation/test portions were read. Original suite execution and final workflow acceptance are not claimed."
+    },
+    {
+      "suite": "semantic-counterfactual",
+      "sourcePath": "src/__tests__/semantic-counterfactual.test.ts",
+      "sourceRevision": "399747a4ad05a37cd8db1cedd53048fad2175be4",
+      "digest": "sha256:4d30854bec1c522bc265df892724a9425b68739185af883ac4af383d040a8b1f",
+      "capabilities": [
+        "C08",
+        "C09"
+      ],
+      "substantiveGuaranteesReviewed": [
+        "Comparison accepts verified replays, records policy/proof/spec/source changes separately, preserves known compilation after a consumer refusal, and leaves unavailable projection/risk deltas null.",
+        "Known gap: current native impact follows authored graph directions only. The reference also traces a removed premise through its recorded derivation ID to the inferred mapping. Native proof-dependency path reporting remains required; existing loss-of-proof deltas do not close it."
+      ],
+      "nativeEvidence": [
+        {
+          "path": "crates/patamaps-projection/src/compare.rs",
+          "digest": "sha256:8b8ac3cf3d42d335072a961c70ec0636f43417664a9998b3db145e3b439c942e"
+        },
+        {
+          "path": "crates/patamaps-projection/tests/replay.rs",
+          "digest": "sha256:d45d99896587cec3b0f1075aa785cf258aebb0895b4384a74e226326d16e0814"
+        },
+        {
+          "path": "crates/patamaps-projection/tests/risk.rs",
+          "digest": "sha256:2b9c8271dc3882a526088c7551ee301d9bb5327f3de42089068065642bdb4ca0"
+        },
+        {
+          "path": "crates/patamaps-core/src/impact.rs",
+          "digest": "sha256:869ca8996d5caaabda8b134eff2ce4d6569dddf24739dea390d5ab04715007a9"
+        },
+        {
+          "path": "crates/patamaps-inspect/src/explanation.rs",
+          "digest": "sha256:bad1aa7dce3b64ae7d361c734908af0fad1b05b594c672f651f09cdbda8b5b7d"
+        }
+      ],
+      "review": "Complete reference assertion bodies and the relevant native implementation/test portions were read. Original suite execution and final workflow acceptance are not claimed."
+    },
+    {
+      "suite": "adapter-registry",
+      "sourcePath": "src/__tests__/adapter-registry.test.ts",
+      "sourceRevision": "399747a4ad05a37cd8db1cedd53048fad2175be4",
+      "digest": "sha256:0145fb07086d3b5249c158d240ecc768e4fc28445196e7b022487a78eb7227b8",
+      "capabilities": [
+        "C15",
+        "C16"
+      ],
+      "substantiveGuaranteesReviewed": [
+        "Optional discovery supplies seven licensed providers. Custom adapter callbacks preserve configuration/context; native dispatch owns registry and workspace decisions.",
+        "Native process responses bind source/request/code inputs and fail on unknown provider, diagnostic error, malformed response, timeout, exit and pipe limits."
+      ],
+      "nativeEvidence": [
+        {
+          "path": "sdk/typescript/legacy-workspace.mjs",
+          "digest": "sha256:d3893cdc92010588440cc96cb0c6741314cd3bd34050dbb51e420872b1a2a45d"
+        },
+        {
+          "path": "adapters/discovery/index.mjs",
+          "digest": "sha256:4b0367d88beaa8be839378df1d3b0b4d7173b36b803fbc2b8275cb9f3bdb0677"
+        },
+        {
+          "path": "crates/patamaps-workspace/src/process_tests.rs",
+          "digest": "sha256:92b3bccdaa3da333bb0d72d2704e0573727afa5bed8682fadfe1de7a7049acad"
+        }
+      ],
+      "review": "Complete reference assertion bodies and the relevant native implementation/test portions were read. Original suite execution and final workflow acceptance are not claimed."
+    },
+    {
+      "suite": "adapters",
+      "sourcePath": "src/__tests__/adapters.test.ts",
+      "sourceRevision": "399747a4ad05a37cd8db1cedd53048fad2175be4",
+      "digest": "sha256:d1580d3825356a5e2b779be2340898d419e60b2edd1cb8f42fdd7a9fe0767342",
+      "capabilities": [
+        "C16"
+      ],
+      "substantiveGuaranteesReviewed": [
+        "Pinned Prisma/Zod/JSON fact parser code is retained exactly apart from source-map comments; native candidate runtime does not import MetaMap.",
+        "Original bodies cover typed/nullability/cardinality facts, stable locators, Zod derivation chains and privacy-preserving JSON references. Current seven-provider fixture coverage is narrower than whole-framework coverage."
+      ],
+      "nativeEvidence": [
+        {
+          "path": "adapters/discovery/provenance.json",
+          "digest": "sha256:51d7e2fd8b1e749bee17bc611b9e3084ddf2b6fd0591e73abbd31e5991ab887c"
+        },
+        {
+          "path": "adapters/discovery/process.mjs",
+          "digest": "sha256:ce9d3575f90e54c1ada768766737176e27b903d2d5c165b19be5cc127ea7a788"
+        },
+        {
+          "path": "scripts/test_adapter_bridge.py",
+          "digest": "sha256:2c06224fff161c0775ef93069a011077a5b0c3c6d2c34077a7fccb3d113eb961"
+        }
+      ],
+      "review": "Complete reference assertion bodies and the relevant native implementation/test portions were read. Original suite execution and final workflow acceptance are not claimed."
+    },
+    {
+      "suite": "correspondence",
+      "sourcePath": "src/__tests__/correspondence.test.ts",
+      "sourceRevision": "399747a4ad05a37cd8db1cedd53048fad2175be4",
+      "digest": "sha256:6426c72188deecdd79915f30a4d0aec9b8ad1c3e1f8e5bac02024b21aabc727e",
+      "capabilities": [
+        "C02",
+        "C15"
+      ],
+      "substantiveGuaranteesReviewed": [
+        "Native correspondence materialization emits structure/field/concept/authority references with fact scopes and retains unwaived FIELD_DRIFT as error.",
+        "The frozen 63-case original-value corpus and 253 reference controls are existing independent native regression inputs; this source review does not turn compatibility output into admission."
+      ],
+      "nativeEvidence": [
+        {
+          "path": "crates/patamaps-core/src/legacy_correspondence.rs",
+          "digest": "sha256:cca31e0679d7825216f499bbcfd715782021857ca6a070956ea5e47d820dad1a"
+        },
+        {
+          "path": "crates/patamaps-core/tests/legacy_correspondence.rs",
+          "digest": "sha256:28ecdc1242b67bd49a2d3818213c2ee99c49c214e190275ddcdd05ef143191a4"
+        },
+        {
+          "path": "sdk/typescript/legacy-correspondence.mjs",
+          "digest": "sha256:2a0254640dfe4d140d3766d43776523dd562808e8be5540a8032e346b12af339"
+        }
+      ],
+      "review": "Complete reference assertion bodies and the relevant native implementation/test portions were read. Original suite execution and final workflow acceptance are not claimed."
+    },
+    {
+      "suite": "metamap-shard",
+      "sourcePath": "src/__tests__/metamap-shard.test.ts",
+      "sourceRevision": "399747a4ad05a37cd8db1cedd53048fad2175be4",
+      "digest": "sha256:23eca26ad537f01bd50d3a4f138400b78420dca358b04e6fa11c9f84ea19e565",
+      "capabilities": [
+        "C02",
+        "C15",
+        "C16"
+      ],
+      "substantiveGuaranteesReviewed": [
+        "External shard values and configured relation semantics survive discovery; unchanged shape schema is relocated locally.",
+        "Composed graph admission remains in Rust. Native portable shards use their explicit draft envelope, while the optional provider reads original MetaMap data without relabeling it."
+      ],
+      "nativeEvidence": [
+        {
+          "path": "adapters/discovery/adapters/metamap-shard.js",
+          "digest": "sha256:de8da41af094f9dbb874820ce77aaad72e6148ea6702a36b58d6d358d2464792"
+        },
+        {
+          "path": "adapters/discovery/schemas/metamap-graph.schema.json",
+          "digest": "sha256:fa177ee438ac4cf55e133666c0c7a66e5c7bb0242deb78611e2e3482148bde72"
+        },
+        {
+          "path": "scripts/test_adapter_bridge.py",
+          "digest": "sha256:2c06224fff161c0775ef93069a011077a5b0c3c6d2c34077a7fccb3d113eb961"
+        },
+        {
+          "path": "crates/patamaps-workspace/tests/workspace.rs",
+          "digest": "sha256:ba5e3d8d1ee01e27a7863a713cf1236e6d2da9f6d39dead0936f33c243f8465f"
+        }
+      ],
+      "review": "Complete reference assertion bodies and the relevant native implementation/test portions were read. Original suite execution and final workflow acceptance are not claimed."
+    },
+    {
+      "suite": "nextjs-app-router",
+      "sourcePath": "src/__tests__/nextjs-app-router.test.ts",
+      "sourceRevision": "399747a4ad05a37cd8db1cedd53048fad2175be4",
+      "digest": "sha256:96095bffb1d935048f64df86029836ccbe0c0fb2f983cfc0349710e24646b7bd",
+      "capabilities": [
+        "C03",
+        "C16"
+      ],
+      "substantiveGuaranteesReviewed": [
+        "Pinned provider retains pages/containers/providers/loaders/boundaries/hydration/parameters/handlers, exclusion attribution and stale-exclusion diagnostics.",
+        "Original assertion bodies include fetch/static-params/metadata/query and shared context-provider distinctions. Exact provider reuse is verified; the installed small fixture is not full Next.js application acceptance."
+      ],
+      "nativeEvidence": [
+        {
+          "path": "adapters/discovery/adapters/nextjs-app-router.js",
+          "digest": "sha256:94e67a89f9aa4e4ebc5cbd5bc4eac1708a4cfcd9548cf122f1725c6a342714e2"
+        },
+        {
+          "path": "adapters/discovery/provenance.json",
+          "digest": "sha256:51d7e2fd8b1e749bee17bc611b9e3084ddf2b6fd0591e73abbd31e5991ab887c"
+        },
+        {
+          "path": "scripts/test_adapter_bridge.py",
+          "digest": "sha256:2c06224fff161c0775ef93069a011077a5b0c3c6d2c34077a7fccb3d113eb961"
+        },
+        {
+          "path": "crates/patamaps-core/tests/topology.rs",
+          "digest": "sha256:d152080a27086ca3a8d9bd213da4d876a44912e5ede4393c94c7df9868522228"
+        }
+      ],
+      "review": "Complete reference assertion bodies and the relevant native implementation/test portions were read. Original suite execution and final workflow acceptance are not claimed."
+    }
+  ],
+  "providerReuse": [
+    {
+      "path": "adapters/discovery/adapters/prisma.js",
+      "digest": "sha256:ea519787b3cd5314478e005fcdb45a1303efd67f9a4ac5286a62621bf8999f94",
+      "sourceOrigin": "src/adapters/prisma.ts",
+      "sourceOriginDigest": "sha256:45f34a6f59b1a54aff845e4cc3776a52f570012041d3bb2651a0e3f4279ae6f8",
+      "transformation": "Remove the trailing source-map locator; preserve executable code and declarations",
+      "exactDeclaredTransformation": true
+    },
+    {
+      "path": "adapters/discovery/adapters/typescript-zod.js",
+      "digest": "sha256:7be0b02ceac6ad674052d372f7fadedf9b0eff96431658a9eb0f297be40e9adc",
+      "sourceOrigin": "src/adapters/typescript-zod.ts",
+      "sourceOriginDigest": "sha256:15df2d57ba77bfd1c937faaa482d5f69817214fb7e365bf32c4cfe60d96bdedf",
+      "transformation": "Remove the trailing source-map locator; preserve executable code and declarations",
+      "exactDeclaredTransformation": true
+    },
+    {
+      "path": "adapters/discovery/adapters/json-collections.js",
+      "digest": "sha256:8a76bbe88b75837c8114f85221ac1dc668f858248869ab3e9853eea946ecac39",
+      "sourceOrigin": "src/adapters/json-collections.ts",
+      "sourceOriginDigest": "sha256:87b02e786237ffce7f9de25a34a86e4aa2f26d4cbb82edefd8048ed99128f0ca",
+      "transformation": "Remove the trailing source-map locator; preserve executable code and declarations",
+      "exactDeclaredTransformation": true
+    },
+    {
+      "path": "adapters/discovery/adapters/nextjs-app-router.js",
+      "digest": "sha256:94e67a89f9aa4e4ebc5cbd5bc4eac1708a4cfcd9548cf122f1725c6a342714e2",
+      "sourceOrigin": "src/adapters/nextjs-app-router.ts",
+      "sourceOriginDigest": "sha256:42ac40fed1a5461c2423e2aa9f45c5262a372c7c9d553e3beb9f79e170d92c9d",
+      "transformation": "Remove the trailing source-map locator; preserve executable code and declarations",
+      "exactDeclaredTransformation": true
+    },
+    {
+      "path": "adapters/discovery/adapters/metamap-shard.js",
+      "digest": "sha256:de8da41af094f9dbb874820ce77aaad72e6148ea6702a36b58d6d358d2464792",
+      "sourceOrigin": "src/adapters/metamap-shard.ts",
+      "sourceOriginDigest": "sha256:c6a3dc220fb2dc23f4ceb9a24058caf8d52488f487b31646f8e7af4df216449e",
+      "transformation": "Remove the trailing source-map locator; preserve executable code and declarations; relocate the unmodified graph schema inside this package by changing only its relative URL",
+      "exactDeclaredTransformation": true
+    }
+  ],
+  "nextRequiredRepair": {
+    "capability": "C09",
+    "requirement": "Bounded before/after recorded derivation dependency paths, including removed premises, without implying current admission, activation or unique causality.",
+    "referenceAssertion": "semantic-counterfactual.test.ts: explains a removed premise through the captured proof without inventing deactivations",
+    "nativeObservation": "compare.rs exposes declaredPathsBefore/After from core::impact, which reads checked graph mappings and declared relation directions, not policy derivation dependencies.",
+    "status": "not-implemented"
+  },
+  "originalCasesExecutedByThisReview": 0,
+  "ownerDispositions": [],
+  "remainingAudit": "Other pinned suites and final capability acceptance remain open.",
+  "deleted": []
+}

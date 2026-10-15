@@ -1,0 +1,678 @@
+{
+  "capture": "sha256:3da70d090457762813309c7f496cbaaa0f4b966c950f1af939c58582d0e1a4ef",
+  "missingSources": [],
+  "result": {
+    "generation": {
+      "activeMappings": [
+        "urn:mapping:alias",
+        "urn:mapping:greet",
+        "urn:mapping:implementation-handler"
+      ],
+      "context": {},
+      "digest": "sha256:8a34896baa0c4f72238055c0357a32e62aedf7f03d511f94e56da08e26e72617",
+      "documentType": "generation",
+      "evaluatedAt": "2026-10-10T00:00:00Z",
+      "evidence": [],
+      "graph": {
+        "digest": "sha256:c6667d71a2fd0d2741359fcfe1063a5cbcf3a5c32a8b4af9f72b71da323275ae",
+        "id": "urn:graph:linux",
+        "revision": "1"
+      },
+      "id": "urn:patamaps:generation:8a34896baa0c4f72238055c0357a32e62aedf7f03d511f94e56da08e26e72617",
+      "inactiveMappings": [],
+      "packs": [
+        {
+          "digest": "sha256:07683a803d0c7b7a4aa621e6bfe9b8cffa8667fd16047601aa4aa86268f84a2e",
+          "id": "urn:metamap:relation-pack:core",
+          "version": "1.0.0"
+        },
+        {
+          "digest": "sha256:c7bca28d6b8836a04a6f505bff4033947e401dd6c93cfeb8e543f82c9f0cb19d",
+          "id": "urn:metamap:relation-pack:routing",
+          "version": "1.0.0"
+        },
+        {
+          "digest": "sha256:a6236f1f8ac752dbb228dcfef7d43936c24564a1461755054cc3d16e74a94107",
+          "id": "urn:pack:linux:lifecycle",
+          "version": "1.0.0"
+        }
+      ],
+      "policy": {
+        "digest": "sha256:647846705be498798b193876472d0608c60937536f0837201490c01e3484e1e8",
+        "id": "urn:policy:linux"
+      },
+      "profile": "patamaps-semantic-draft-1",
+      "schemaVersion": "0.1.0",
+      "semantics": {
+        "dependencies": [
+          {
+            "mapping": "urn:mapping:alias",
+            "premises": []
+          },
+          {
+            "derivation": {
+              "digest": "sha256:81f7f259ef8ddd524198961b2c2ea6cf4709b19cdec301b9ab205fa12f221df4",
+              "id": "urn:patamaps:derivation:81f7f259ef8ddd524198961b2c2ea6cf4709b19cdec301b9ab205fa12f221df4"
+            },
+            "mapping": "urn:mapping:greet",
+            "premises": [
+              "urn:mapping:alias",
+              "urn:mapping:implementation-handler"
+            ]
+          },
+          {
+            "mapping": "urn:mapping:implementation-handler",
+            "premises": []
+          }
+        ],
+        "derivationLimits": {
+          "maxDepth": 8.0,
+          "maxDerivations": 32.0
+        },
+        "derivations": [
+          {
+            "context": {},
+            "contextDigest": "sha256:44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+            "dependencies": [
+              {
+                "digest": "sha256:1437bc68ea62cce2258240aab9a52804f1c511f801f06f47cc87c8c8453c559e",
+                "id": "urn:mapping:alias"
+              },
+              {
+                "digest": "sha256:a9e2366abab7a75467a046cb4da72d6d4b898674c475de6746babf6822a6d296",
+                "id": "urn:mapping:implementation-handler"
+              }
+            ],
+            "depth": 1.0,
+            "derivationCount": 1.0,
+            "digest": "sha256:81f7f259ef8ddd524198961b2c2ea6cf4709b19cdec301b9ab205fa12f221df4",
+            "documentType": "derivation",
+            "id": "urn:patamaps:derivation:81f7f259ef8ddd524198961b2c2ea6cf4709b19cdec301b9ab205fa12f221df4",
+            "interpretation": "declared-law-application",
+            "premises": [
+              {
+                "digest": "sha256:1437bc68ea62cce2258240aab9a52804f1c511f801f06f47cc87c8c8453c559e",
+                "mapping": "urn:mapping:alias"
+              },
+              {
+                "digest": "sha256:a9e2366abab7a75467a046cb4da72d6d4b898674c475de6746babf6822a6d296",
+                "mapping": "urn:mapping:implementation-handler"
+              }
+            ],
+            "result": {
+              "cardinality": "one-to-one",
+              "id": "urn:mapping:greet",
+              "lossiness": "lossless",
+              "provenance": {
+                "assertedBy": "urn:law:linux:binding-chain",
+                "status": "inferred"
+              },
+              "relation": "routing:handled_by",
+              "sources": [
+                "urn:command:greet"
+              ],
+              "targets": [
+                "urn:handler:greet"
+              ]
+            },
+            "rule": {
+              "id": "urn:law:linux:binding-chain",
+              "imports": [
+                {
+                  "digest": "sha256:c7bca28d6b8836a04a6f505bff4033947e401dd6c93cfeb8e543f82c9f0cb19d",
+                  "id": "urn:metamap:relation-pack:routing",
+                  "version": "1.0.0"
+                }
+              ],
+              "pack": {
+                "digest": "sha256:a6236f1f8ac752dbb228dcfef7d43936c24564a1461755054cc3d16e74a94107",
+                "id": "urn:pack:linux:lifecycle",
+                "version": "1.0.0"
+              }
+            },
+            "schemaVersion": "0.1.0",
+            "uncertainty": [
+              {
+                "assessments": [],
+                "dimension": "identity",
+                "evidence": [],
+                "measurementModels": [],
+                "sourceRevisions": [],
+                "status": "unknown"
+              },
+              {
+                "assessments": [],
+                "dimension": "context",
+                "evidence": [],
+                "measurementModels": [],
+                "sourceRevisions": [],
+                "status": "unknown"
+              },
+              {
+                "assessments": [],
+                "dimension": "provenance",
+                "evidence": [],
+                "measurementModels": [],
+                "sourceRevisions": [],
+                "status": "unknown"
+              },
+              {
+                "assessments": [],
+                "dimension": "completeness",
+                "evidence": [],
+                "measurementModels": [],
+                "sourceRevisions": [],
+                "status": "unknown"
+              },
+              {
+                "assessments": [],
+                "dimension": "causal-relevance",
+                "evidence": [],
+                "measurementModels": [],
+                "sourceRevisions": [],
+                "status": "unknown"
+              },
+              {
+                "assessments": [],
+                "dimension": "conflicting-authority",
+                "evidence": [],
+                "measurementModels": [],
+                "sourceRevisions": [],
+                "status": "unknown"
+              }
+            ]
+          }
+        ],
+        "interpretation": "declared-law-application",
+        "riskEvaluation": "available-for-projection",
+        "uncertainty": [
+          {
+            "dimensions": [
+              {
+                "assessments": [],
+                "dimension": "identity",
+                "evidence": [],
+                "measurementModels": [],
+                "sourceRevisions": [],
+                "status": "unknown"
+              },
+              {
+                "assessments": [],
+                "dimension": "context",
+                "evidence": [],
+                "measurementModels": [],
+                "sourceRevisions": [],
+                "status": "unknown"
+              },
+              {
+                "assessments": [],
+                "dimension": "provenance",
+                "evidence": [],
+                "measurementModels": [],
+                "sourceRevisions": [],
+                "status": "unknown"
+              },
+              {
+                "assessments": [],
+                "dimension": "completeness",
+                "evidence": [],
+                "measurementModels": [],
+                "sourceRevisions": [],
+                "status": "unknown"
+              },
+              {
+                "assessments": [],
+                "dimension": "causal-relevance",
+                "evidence": [],
+                "measurementModels": [],
+                "sourceRevisions": [],
+                "status": "unknown"
+              },
+              {
+                "assessments": [],
+                "dimension": "conflicting-authority",
+                "evidence": [],
+                "measurementModels": [],
+                "sourceRevisions": [],
+                "status": "unknown"
+              }
+            ],
+            "mapping": "urn:mapping:alias"
+          },
+          {
+            "dimensions": [
+              {
+                "assessments": [],
+                "dimension": "identity",
+                "evidence": [],
+                "measurementModels": [],
+                "sourceRevisions": [],
+                "status": "unknown"
+              },
+              {
+                "assessments": [],
+                "dimension": "context",
+                "evidence": [],
+                "measurementModels": [],
+                "sourceRevisions": [],
+                "status": "unknown"
+              },
+              {
+                "assessments": [],
+                "dimension": "provenance",
+                "evidence": [],
+                "measurementModels": [],
+                "sourceRevisions": [],
+                "status": "unknown"
+              },
+              {
+                "assessments": [],
+                "dimension": "completeness",
+                "evidence": [],
+                "measurementModels": [],
+                "sourceRevisions": [],
+                "status": "unknown"
+              },
+              {
+                "assessments": [],
+                "dimension": "causal-relevance",
+                "evidence": [],
+                "measurementModels": [],
+                "sourceRevisions": [],
+                "status": "unknown"
+              },
+              {
+                "assessments": [],
+                "dimension": "conflicting-authority",
+                "evidence": [],
+                "measurementModels": [],
+                "sourceRevisions": [],
+                "status": "unknown"
+              }
+            ],
+            "mapping": "urn:mapping:implementation-handler"
+          },
+          {
+            "dimensions": [
+              {
+                "assessments": [],
+                "dimension": "identity",
+                "evidence": [],
+                "measurementModels": [],
+                "sourceRevisions": [],
+                "status": "unknown"
+              },
+              {
+                "assessments": [],
+                "dimension": "context",
+                "evidence": [],
+                "measurementModels": [],
+                "sourceRevisions": [],
+                "status": "unknown"
+              },
+              {
+                "assessments": [],
+                "dimension": "provenance",
+                "evidence": [],
+                "measurementModels": [],
+                "sourceRevisions": [],
+                "status": "unknown"
+              },
+              {
+                "assessments": [],
+                "dimension": "completeness",
+                "evidence": [],
+                "measurementModels": [],
+                "sourceRevisions": [],
+                "status": "unknown"
+              },
+              {
+                "assessments": [],
+                "dimension": "causal-relevance",
+                "evidence": [],
+                "measurementModels": [],
+                "sourceRevisions": [],
+                "status": "unknown"
+              },
+              {
+                "assessments": [],
+                "dimension": "conflicting-authority",
+                "evidence": [],
+                "measurementModels": [],
+                "sourceRevisions": [],
+                "status": "unknown"
+              }
+            ],
+            "mapping": "urn:mapping:greet"
+          }
+        ]
+      },
+      "waiversApplied": []
+    },
+    "issues": [],
+    "pathTree": {
+      "attribute": "path",
+      "delimiter": "/",
+      "digest": "sha256:9f9972a490514943f99e59bf24a70ab1d814f37bece1e90152b552b7ee13aff7",
+      "documentType": "path-tree",
+      "id": "urn:patamaps:path-tree:9f9972a490514943f99e59bf24a70ab1d814f37bece1e90152b552b7ee13aff7",
+      "params": [
+        ":id"
+      ],
+      "profile": "patamaps-semantic-draft-1",
+      "projection": {
+        "digest": "sha256:7bced3f35c02c9658f175d294f34edc4a0ce2dcfda984f3b636ef3ab8f1b88b3",
+        "id": "urn:patamaps:projection:7bced3f35c02c9658f175d294f34edc4a0ce2dcfda984f3b636ef3ab8f1b88b3"
+      },
+      "schemaVersion": "0.1.0",
+      "spec": {
+        "digest": "sha256:e9eb74f0ab85e7e636ade6d580d9cab5e58206faddb1149b9b6c485d73aedd3e",
+        "id": "urn:projection:linux"
+      },
+      "tree": {
+        "_": "/",
+        "greet": {
+          ":id": {
+            "$": {
+              "id": "urn:command:greet",
+              "kind": "routing:command",
+              "slots": {
+                "handler": {
+                  "id": "urn:handler:greet",
+                  "kind": "routing:handler",
+                  "locators": [
+                    {
+                      "uri": "rust:crate::service::greet"
+                    }
+                  ]
+                }
+              }
+            },
+            "_": "/greet/:id"
+          },
+          "_": "/greet"
+        }
+      }
+    },
+    "projection": {
+      "digest": "sha256:7bced3f35c02c9658f175d294f34edc4a0ce2dcfda984f3b636ef3ab8f1b88b3",
+      "documentType": "projection",
+      "entries": [
+        {
+          "slots": [
+            {
+              "cardinality": "exactly-one",
+              "direction": "outgoing",
+              "mappings": [
+                "urn:mapping:greet"
+              ],
+              "name": "handler",
+              "relation": "routing:handled_by",
+              "targets": [
+                {
+                  "id": "urn:handler:greet",
+                  "kind": "routing:handler",
+                  "locators": [
+                    {
+                      "uri": "rust:crate::service::greet"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "subject": {
+            "attributes": {
+              "path": "/greet/:id"
+            },
+            "id": "urn:command:greet",
+            "kind": "routing:command"
+          }
+        }
+      ],
+      "generation": {
+        "digest": "sha256:8a34896baa0c4f72238055c0357a32e62aedf7f03d511f94e56da08e26e72617",
+        "id": "urn:patamaps:generation:8a34896baa0c4f72238055c0357a32e62aedf7f03d511f94e56da08e26e72617"
+      },
+      "graph": {
+        "digest": "sha256:c6667d71a2fd0d2741359fcfe1063a5cbcf3a5c32a8b4af9f72b71da323275ae",
+        "id": "urn:graph:linux",
+        "revision": "1"
+      },
+      "id": "urn:patamaps:projection:7bced3f35c02c9658f175d294f34edc4a0ce2dcfda984f3b636ef3ab8f1b88b3",
+      "profile": "patamaps-semantic-draft-1",
+      "schemaVersion": "0.1.0",
+      "semantics": {
+        "consumer": "urn:consumer:linux",
+        "dependencies": [
+          {
+            "mapping": "urn:mapping:alias",
+            "premises": []
+          },
+          {
+            "derivation": {
+              "digest": "sha256:81f7f259ef8ddd524198961b2c2ea6cf4709b19cdec301b9ab205fa12f221df4",
+              "id": "urn:patamaps:derivation:81f7f259ef8ddd524198961b2c2ea6cf4709b19cdec301b9ab205fa12f221df4"
+            },
+            "mapping": "urn:mapping:greet",
+            "premises": [
+              "urn:mapping:alias",
+              "urn:mapping:implementation-handler"
+            ]
+          },
+          {
+            "mapping": "urn:mapping:implementation-handler",
+            "premises": []
+          }
+        ],
+        "derivations": [
+          {
+            "digest": "sha256:81f7f259ef8ddd524198961b2c2ea6cf4709b19cdec301b9ab205fa12f221df4",
+            "id": "urn:patamaps:derivation:81f7f259ef8ddd524198961b2c2ea6cf4709b19cdec301b9ab205fa12f221df4"
+          }
+        ],
+        "risk": {
+          "budget": {
+            "digest": "sha256:2bad230cc75b6deb36afdaff5178b321ab108055c70529abc873693b7fd64ee0",
+            "id": "urn:budget:linux"
+          },
+          "classifications": [
+            {
+              "classification": "explicit-unit-cost",
+              "cost": 1.0,
+              "mapping": "urn:mapping:alias"
+            },
+            {
+              "classification": "explicit-unit-cost",
+              "cost": 1.0,
+              "mapping": "urn:mapping:greet"
+            },
+            {
+              "classification": "explicit-unit-cost",
+              "cost": 1.0,
+              "mapping": "urn:mapping:implementation-handler"
+            }
+          ],
+          "inferredMappings": [
+            "urn:mapping:greet"
+          ],
+          "lossyMappings": [],
+          "status": "evaluated",
+          "totalCost": 3.0,
+          "uncertainty": [
+            {
+              "dimensions": [
+                {
+                  "assessments": [],
+                  "dimension": "identity",
+                  "evidence": [],
+                  "measurementModels": [],
+                  "sourceRevisions": [],
+                  "status": "unknown"
+                },
+                {
+                  "assessments": [],
+                  "dimension": "context",
+                  "evidence": [],
+                  "measurementModels": [],
+                  "sourceRevisions": [],
+                  "status": "unknown"
+                },
+                {
+                  "assessments": [],
+                  "dimension": "provenance",
+                  "evidence": [],
+                  "measurementModels": [],
+                  "sourceRevisions": [],
+                  "status": "unknown"
+                },
+                {
+                  "assessments": [],
+                  "dimension": "completeness",
+                  "evidence": [],
+                  "measurementModels": [],
+                  "sourceRevisions": [],
+                  "status": "unknown"
+                },
+                {
+                  "assessments": [],
+                  "dimension": "causal-relevance",
+                  "evidence": [],
+                  "measurementModels": [],
+                  "sourceRevisions": [],
+                  "status": "unknown"
+                },
+                {
+                  "assessments": [],
+                  "dimension": "conflicting-authority",
+                  "evidence": [],
+                  "measurementModels": [],
+                  "sourceRevisions": [],
+                  "status": "unknown"
+                }
+              ],
+              "mapping": "urn:mapping:alias"
+            },
+            {
+              "dimensions": [
+                {
+                  "assessments": [],
+                  "dimension": "identity",
+                  "evidence": [],
+                  "measurementModels": [],
+                  "sourceRevisions": [],
+                  "status": "unknown"
+                },
+                {
+                  "assessments": [],
+                  "dimension": "context",
+                  "evidence": [],
+                  "measurementModels": [],
+                  "sourceRevisions": [],
+                  "status": "unknown"
+                },
+                {
+                  "assessments": [],
+                  "dimension": "provenance",
+                  "evidence": [],
+                  "measurementModels": [],
+                  "sourceRevisions": [],
+                  "status": "unknown"
+                },
+                {
+                  "assessments": [],
+                  "dimension": "completeness",
+                  "evidence": [],
+                  "measurementModels": [],
+                  "sourceRevisions": [],
+                  "status": "unknown"
+                },
+                {
+                  "assessments": [],
+                  "dimension": "causal-relevance",
+                  "evidence": [],
+                  "measurementModels": [],
+                  "sourceRevisions": [],
+                  "status": "unknown"
+                },
+                {
+                  "assessments": [],
+                  "dimension": "conflicting-authority",
+                  "evidence": [],
+                  "measurementModels": [],
+                  "sourceRevisions": [],
+                  "status": "unknown"
+                }
+              ],
+              "mapping": "urn:mapping:greet"
+            },
+            {
+              "dimensions": [
+                {
+                  "assessments": [],
+                  "dimension": "identity",
+                  "evidence": [],
+                  "measurementModels": [],
+                  "sourceRevisions": [],
+                  "status": "unknown"
+                },
+                {
+                  "assessments": [],
+                  "dimension": "context",
+                  "evidence": [],
+                  "measurementModels": [],
+                  "sourceRevisions": [],
+                  "status": "unknown"
+                },
+                {
+                  "assessments": [],
+                  "dimension": "provenance",
+                  "evidence": [],
+                  "measurementModels": [],
+                  "sourceRevisions": [],
+                  "status": "unknown"
+                },
+                {
+                  "assessments": [],
+                  "dimension": "completeness",
+                  "evidence": [],
+                  "measurementModels": [],
+                  "sourceRevisions": [],
+                  "status": "unknown"
+                },
+                {
+                  "assessments": [],
+                  "dimension": "causal-relevance",
+                  "evidence": [],
+                  "measurementModels": [],
+                  "sourceRevisions": [],
+                  "status": "unknown"
+                },
+                {
+                  "assessments": [],
+                  "dimension": "conflicting-authority",
+                  "evidence": [],
+                  "measurementModels": [],
+                  "sourceRevisions": [],
+                  "status": "unknown"
+                }
+              ],
+              "mapping": "urn:mapping:implementation-handler"
+            }
+          ]
+        },
+        "usedMappings": [
+          "urn:mapping:alias",
+          "urn:mapping:greet",
+          "urn:mapping:implementation-handler"
+        ]
+      },
+      "spec": {
+        "digest": "sha256:e9eb74f0ab85e7e636ade6d580d9cab5e58206faddb1149b9b6c485d73aedd3e",
+        "id": "urn:projection:linux"
+      }
+    },
+    "status": "viable"
+  },
+  "status": "verified"
+}
