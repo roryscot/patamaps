@@ -47,6 +47,9 @@ enum Config {
         nonsecret_inputs: bool,
         files: Vec<TomlSelection>,
     },
+    Files {
+        nonsecret_inputs: bool,
+    },
     Cargo(Box<CargoConfig>),
     Dockerfile(Box<crate::native_docker::DockerConfig>),
 }
@@ -886,7 +889,7 @@ fn cargo_entities(
             entities.push(entity(id,"cargo-target",&source,json!({"package":package_id,"name":target["name"],"kind":target["kind"],
                 "crateTypes":target["crate_types"],"requiredFeatures":target.get("required-features").cloned().unwrap_or(json!([])),
                 "source":source,"possibleExecutableInput":executable,"executionObserved":false,"compilationEstablished":false,
-                "evidenceClass":"cargo-declared-target"})));
+                "evidenceClass":"cargo-declared-target", "discoveryContext":{"manifest":manifest,"workspaceManifest":workspace_manifest,"platformFilter":platform,"features":features,"defaultFeatures":default_features,"view":if view==DependencyView::Resolved {"resolved"}else{"declared-local"},"workingDirectory":"owner-root","compilationEstablished":false}})));
         }
     }
     let mut executable_inputs = Vec::new();
@@ -980,6 +983,29 @@ pub fn discover_native(request: &AdapterRequest, root: &Path) -> Result<AdapterR
                 entities,
                 json!({"profile":VERSION,"evidenceClass":"observed-syntax","parser":"toml_edit=0.23.7","testedTomlProfile":"1.0-values",
                 "excludedNodeCount":excluded,"compilationEstablished":false,"semanticMeaning":"owner-authored"}),
+            )
+        }
+        Config::Files { nonsecret_inputs } => {
+            if !nonsecret_inputs {
+                return Err(refused(
+                    "NATIVE_SECRET_INPUT",
+                    "Only explicitly declared complete nonsecret files may be captured",
+                ));
+            }
+            let mut entities = Vec::new();
+            for (path, raw) in &inputs {
+                if path.len() > 4096 {
+                    return Err(refused(
+                        "NATIVE_DISCOVERY_INPUT",
+                        "Captured file path exceeds the observation bound",
+                    ));
+                }
+                entities.push(entity(physical_id(&request.namespace, "input", &json!(path))?, "build:input", path,
+                    json!({"file":path,"digest":byte_digest(raw.as_bytes()),"byteLength":raw.len(),"evidenceClass":"captured-file-receipt","contentStoredInCapture":true,"compilationEstablished":false})));
+            }
+            (
+                entities,
+                json!({"profile":VERSION,"evidenceClass":"captured-file-receipts","compilationEstablished":false,"semanticMeaning":"owner-authored"}),
             )
         }
         Config::Dockerfile(config) => {

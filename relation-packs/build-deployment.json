@@ -1,0 +1,76 @@
+{
+  "schemaVersion": "0.1.0",
+  "id": "urn:patamaps:relation-pack:build-deployment",
+  "version": "1.0.0",
+  "description": "Explicit build and packaging correspondences. Relation assertions retain their declared or observed evidence class; no parsing result establishes compilation, image contents or runtime behavior.",
+  "relations": [
+    {
+      "id": "build:compiled_into",
+      "description": "The selected implementation is declared for or observed in the selected Cargo build target; compiler evidence is a separate obligation.",
+      "sourceKinds": [
+        "routing:handler"
+      ],
+      "targetKinds": [
+        "cargo-target"
+      ],
+      "cardinalities": [
+        "one-to-one",
+        "many-to-one"
+      ],
+      "cyclePolicy": "forbid",
+      "impactDirection": "target-to-source"
+    },
+    {
+      "id": "build:produces",
+      "description": "A selected Cargo target is declared to produce or observed producing an identified artifact.",
+      "sourceKinds": [
+        "cargo-target"
+      ],
+      "targetKinds": [
+        "build:artifact"
+      ],
+      "cardinalities": [
+        "one-to-one",
+        "one-to-many"
+      ],
+      "cyclePolicy": "forbid",
+      "impactDirection": "source-to-target"
+    },
+    {
+      "id": "deployment:packages",
+      "description": "A selected stage/image is declared to package or observed containing the identified artifact/configuration.",
+      "sourceKinds": [
+        "docker-stage",
+        "deployment:image"
+      ],
+      "targetKinds": [
+        "build:artifact",
+        "build:configuration"
+      ],
+      "cardinalities": [
+        "one-to-one",
+        "one-to-many",
+        "many-to-many"
+      ],
+      "cyclePolicy": "forbid",
+      "impactDirection": "target-to-source"
+    },
+    {
+      "id": "deployment:starts",
+      "description": "A selected stage/image launch command identifies the artifact; actual execution remains separate evidence.",
+      "sourceKinds": [
+        "docker-stage",
+        "deployment:image"
+      ],
+      "targetKinds": [
+        "build:artifact"
+      ],
+      "cardinalities": [
+        "one-to-one",
+        "many-to-one"
+      ],
+      "cyclePolicy": "forbid",
+      "impactDirection": "target-to-source"
+    }
+  ]
+}

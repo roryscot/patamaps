@@ -274,3 +274,44 @@ fn repeated_long_key_paths_cannot_amplify_the_observation_budget() {
         })
     ));
 }
+
+#[test]
+fn captured_file_receipts_bind_utf8_bytes_without_live_io() {
+    let mut req = request("label=\"é\"\n");
+    req.config =
+        serde_json::from_value(json!({"provider":"files","nonsecretInputs":true})).unwrap();
+    rehash(&mut req);
+    let a = discover_native(&req, Path::new("/unavailable-owner")).unwrap();
+    let b = discover_native(&req, Path::new("/relocated-unavailable-owner")).unwrap();
+    assert_eq!(canonical_bytes(&a).unwrap(), canonical_bytes(&b).unwrap());
+    assert_eq!(a.shard.entities.len(), 1);
+    let value = serde_json::to_value(&a.shard.entities[0]).unwrap();
+    assert_eq!(value["kind"], "build:input");
+    assert_eq!(
+        value["attributes"]["digest"],
+        byte_digest(req.inputs[0].content.as_bytes())
+    );
+    assert_eq!(
+        value["attributes"]["byteLength"],
+        req.inputs[0].content.len()
+    );
+    assert_eq!(value["attributes"]["compilationEstablished"], false);
+}
+#[test]
+fn file_receipts_require_nonsecret_consent_and_correct_input_digest() {
+    let mut req = request("a=1\n");
+    req.config =
+        serde_json::from_value(json!({"provider":"files","nonsecretInputs":false})).unwrap();
+    rehash(&mut req);
+    assert!(matches!(
+        discover_native(&req, Path::new("/unused")),
+        Err(Error::Refused {
+            code: "NATIVE_SECRET_INPUT",
+            ..
+        })
+    ));
+    req.config.insert("nonsecretInputs".into(), json!(true));
+    req.inputs[0].content.push('x');
+    rehash(&mut req);
+    assert!(discover_native(&req, Path::new("/unused")).is_err());
+}

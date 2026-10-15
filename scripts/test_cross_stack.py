@@ -23,7 +23,7 @@ def digest(raw):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--phase", choices=["bootstrap", "fixture", "discovery", "regression", "bindings", "docker"], required=True)
+    parser.add_argument("--phase", choices=["bootstrap", "fixture", "discovery", "regression", "bindings", "docker", "workspace"], required=True)
     args = parser.parse_args()
     ensure_guarded()
     stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%S.%fZ")
@@ -34,7 +34,7 @@ def main():
                CARGO_TARGET_DIR=str(ROOT / ".tools/cross-stack/target-service"),
                npm_config_cache=str(ROOT / ".tools/cross-stack/npm-cache"),
                npm_config_logs_max="1000000", NODE_OPTIONS="--max-old-space-size=2048")
-    if args.phase in {"discovery", "regression", "bindings", "docker"}:
+    if args.phase in {"discovery", "regression", "bindings", "docker", "workspace"}:
         env["CARGO_TARGET_DIR"] = str(ROOT / "target")
         # Reuse the already compiled Intel test profile without discarding it.
         env.pop("CARGO_PROFILE_DEV_DEBUG", None)
@@ -97,6 +97,12 @@ def main():
             run("workspace-tests", ["cargo", "test", "--workspace", "--locked", "--offline"], timeout=600)
             run("workspace-doctests", ["cargo", "test", "--workspace", "--doc", "--locked", "--offline"])
             receipt["scope"] = "Native workspace lint, unit/integration and documentation regression gates; no cross-stack release acceptance"
+        elif args.phase == "workspace":
+            from cross_stack_workspace import verify
+            receipt["workspaceChecks"] = verify(ROOT, work, env, run)
+            for path, old in before.items():
+                assert digest((ROOT / path).read_bytes()) == old, "Fixture input changed: " + path
+            receipt["sourceUnchanged"] = True
         elif args.phase == "docker":
             from cross_stack_docker import verify
             receipt["dockerObservationChecks"] = verify(ROOT, work, env, run)

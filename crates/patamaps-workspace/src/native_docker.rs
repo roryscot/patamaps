@@ -744,7 +744,13 @@ pub(crate) fn observe(
             )
         })?;
     for stage in &stages {
-        entities.push(json!({"id":id(namespace,"docker-stage",&json!([config.dockerfile,stage.index]))?,"kind":"docker-stage","attributes":stage.value()}));
+        let mut stage_value = stage.value();
+        stage_value["dockerfile"] = json!(config.dockerfile);
+        stage_value["context"] = json!(config.context);
+        stage_value["frontend"] = json!(config.frontend);
+        stage_value["requestedTarget"] = json!(config.target);
+        stage_value["buildArgs"] = json!(config.build_args);
+        entities.push(json!({"id":id(namespace,"docker-stage",&json!([config.dockerfile,stage.index]))?,"kind":"docker-stage","attributes":stage_value}));
     }
     let encoded = entities
         .iter()
