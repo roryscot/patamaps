@@ -1,0 +1,25 @@
+{
+  "profile": "patamaps-cross-stack-browser-defect-1",
+  "status": "observed-failure; readiness-fix-implemented; reverification-pending",
+  "sourceCommit": "170d62fbbe406785c0e0ec45848b035639f6b1b1",
+  "run": "https://github.com/roryscot/patamaps/actions/runs/38822007970",
+  "artifact": {
+    "artifactId": 12014116823,
+    "bytes": 239585907,
+    "sha256": "40bf9eb7b595bbda38729045e41c95bfe0b4442b377eff712e2098d79ad88817",
+    "run": 38822007970
+  },
+  "requests": [
+    {
+      "method": "GET",
+      "path": "?name=Widget",
+      "status": 200
+    }
+  ],
+  "apiPostObserved": false,
+  "observation": "The form navigated with a default GET /?name=Widget instead of a POST /api/items. Pending initial JavaScript requests were aborted; the next navigation loaded them successfully. No pageerror was recorded in the trace.",
+  "inference": "The enabled server-rendered controls were used before the submit listener was attached.",
+  "change": "Disable input and submit until React hydration completes; assert real browser POST responses while delaying page-script delivery. No fixed readiness sleep is added.",
+  "primaryGuidance": "https://playwright.dev/docs/navigations#hydration",
+  "fullReleaseAccepted": false
+}
