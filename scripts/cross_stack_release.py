@@ -25,7 +25,9 @@ class Unavailable(RuntimeError):
     pass
 
 
-def dependencies(docker, browser):
+def dependencies(docker, browser, platform="linux/amd64"):
+    if platform != "linux/amd64":
+        raise Unavailable("REQUIRED_DECLARED_PLATFORM_LANE_UNAVAILABLE")
     if not shutil.which(str(docker)):
         raise Unavailable("REQUIRED_DOCKER_LANE_UNAVAILABLE")
     if not (Path(browser) / "node_modules/playwright/package.json").is_file():
@@ -60,8 +62,21 @@ def verify(root, work, env, run):
     import dev
     browser = fixture / "acceptance/browser"
     dependencies("docker", browser)
-    for label, command in [("docker-version", ["docker", "version"]), ("buildx-version", ["docker", "buildx", "version"]),
-                           ("buildkit-info", ["docker", "buildx", "inspect", "--bootstrap"]), ("clang-version", ["clang", "--version"]),
+    observed_docker = run("m6-docker-version", ["docker", "version", "--format", "{{json .}}"], expected_success=None)
+    try:
+        docker_version = json.loads(observed_docker)
+    except ValueError as error:
+        raise Unavailable("REQUIRED_DOCKER_DAEMON_UNAVAILABLE") from error
+    if not docker_version.get("Server"):
+        raise Unavailable("REQUIRED_DOCKER_DAEMON_UNAVAILABLE")
+    buildkit = run("m6-buildkit-info", ["docker", "buildx", "inspect", "--bootstrap"], expected_success=None)
+    if "linux/amd64" not in buildkit.decode():
+        raise Unavailable("REQUIRED_BUILDKIT_PLATFORM_UNAVAILABLE")
+    probe_node = Path(env["PATAMAPS_DEV_NODE"]).resolve()
+    probe = json.loads(run("m6-browser-availability", [probe_node, browser / "probe.cjs"], expected_success=None))
+    if probe.get("status") != "available":
+        raise Unavailable("REQUIRED_BROWSER_RUNTIME_UNAVAILABLE")
+    for label, command in [("buildx-version", ["docker", "buildx", "version"]), ("clang-version", ["clang", "--version"]),
                            ("linker-version", ["ld.lld", "--version"])]:
         run("m6-" + label, command)
     expected = json.loads((fixture / "acceptance/m6-expected.json").read_bytes())
@@ -207,7 +222,8 @@ def verify(root, work, env, run):
     assert "ld-linux-x86-64.so.2" in (work / "m6-elf-loader.stdout.log").read_text()
     record("m6-cargo-linux-artifact", result="compiled-and-inspected", digest=binary_digest, target=selected[0], compiler=compiler_version, executable=format_evidence)
     notices = {p.relative_to(exported / "licenses").as_posix(): build.digest(p.read_bytes()) for p in (exported / "licenses").rglob("*") if p.is_file()}
-    assert {"application/LICENSE", "application/NOTICE", "rust/LICENSE-MIT", "rust/LICENSE-APACHE", "rust/COPYRIGHT.html"} <= notices.keys()
+    assert {"application/LICENSE", "application/NOTICE", "rust/LICENSE-MIT", "rust/LICENSE-APACHE", "rust/COPYRIGHT",
+            "rust/COPYRIGHT-library.html", "rust/licenses/MIT.txt", "rust/licenses/Apache-2.0.txt"} <= notices.keys()
     for artifact in artifacts:
         package = artifact.get("package_id", "")
         if artifact.get("reason") == "compiler-artifact" and package.startswith("registry+"):
@@ -313,7 +329,15 @@ def verify(root, work, env, run):
             (work / ("unavailable-" + label + ".json")).write_text(json.dumps({"status": "unavailable", "reason": str(error), "fullReleaseAccepted": False}) + "\n")
         else:
             raise AssertionError("Missing required lane was skipped")
-    record("m6-missing-required-lanes", result="unavailable-refuses-full-release", lanes=["docker", "browser"])
+    try:
+        dependencies("docker", browser, platform="linux/arm64")
+    except Unavailable:
+        pass
+    else:
+        raise AssertionError("Undeclared platform was accepted")
+    missing_runtime = json.loads(run("m6-missing-browser-runtime", [node, browser / "probe.cjs", work / "absent-browser-runtime"], expected_success=False))
+    assert missing_runtime["status"] == "unavailable" and missing_runtime["code"] == "REQUIRED_BROWSER_RUNTIME_UNAVAILABLE"
+    record("m6-missing-required-lanes", result="unavailable-refuses-full-release", lanes=["docker", "browser-module", "browser-runtime", "platform"])
     release = {"artifactDigest": binary_digest, "configurationDigest": config_digest, "image": positive, "platform": "linux/amd64",
                "cargoTarget": selected[0]["target"]["name"], "executable": format_evidence, "http": True, "browser": True}
     admission = admit_release(candidate, cli, release, run)
