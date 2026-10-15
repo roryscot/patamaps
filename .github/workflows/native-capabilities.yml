@@ -152,6 +152,8 @@ jobs:
         run: python3 -B scripts/ci_cross_stack.py --phase image
       - name: Verify MetaMap decisions with actual Linux release observations
         run: python3 -B scripts/ci_cross_stack.py --phase compatibility
+      - name: Install an exact package and rerun the mixed workflow
+        run: python3 -B scripts/ci_cross_stack.py --phase installed
       - name: Retain owned images, candidates, traces and logs
         if: always()
         run: python3 -B scripts/archive_cross_stack_ci.py --phase image

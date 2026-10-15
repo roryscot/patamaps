@@ -54,7 +54,7 @@ def request(base, path, body=None, raw=None):
         return response.status, json.loads(response.read())
 
 
-def verify(root, work, env, run):
+def verify(root, work, env, run, compiler_override=None):
     fixture = root / "examples/cross-stack"
     sys.path.insert(0, str(fixture))
     import build
@@ -80,8 +80,11 @@ def verify(root, work, env, run):
                            ("linker-version", ["ld.lld", "--version"])]:
         run("m6-" + label, command)
     expected = json.loads((fixture / "acceptance/m6-expected.json").read_bytes())
-    run("m6-cli", ["cargo", "build", "--release", "-p", "patamaps-cli", "--locked", "--offline"], timeout=900)
-    cli = root / "target/release/patamaps"
+    if compiler_override is None:
+        run("m6-cli", ["cargo", "build", "--release", "-p", "patamaps-cli", "--locked", "--offline"], timeout=900)
+        cli = root / "target/release/patamaps"
+    else:
+        cli = Path(compiler_override).resolve(strict=True)
     cargo = Path(run("m6-cargo", ["rustup", "which", "cargo"]).decode().strip()).resolve()
     rustc = Path(run("m6-rustc", ["rustup", "which", "rustc"]).decode().strip()).resolve()
     node = Path(env["PATAMAPS_DEV_NODE"]).resolve()

@@ -26,8 +26,8 @@ def main():
         if disk.free < 500000000 or disk.used - baseline.used > 4000000000:
             raise RuntimeError("CI archive storage boundary reached; original candidates and images retained")
     try:
-        objects = work / "owned-docker-objects.json"
-        images = sorted(set(json.loads(objects.read_bytes())["images"])) if objects.exists() else []
+        object_paths = [work / "owned-docker-objects.json", evidence / "cross-stack-installed/installed-workflow/owned-docker-objects.json"]
+        images = sorted({identity for objects in object_paths if objects.exists() for identity in json.loads(objects.read_bytes())["images"]})
         if images:
             command = ["docker", "image", "save", *images]
             receipt["imageCommand"] = command
