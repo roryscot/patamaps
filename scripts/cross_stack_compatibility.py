@@ -139,11 +139,27 @@ def verify(root, work, env, run):
     build.snapshot(fixture, malformed_source)
     (malformed_source / "config/service.toml").write_text('[http]\nlisten="0.0.0.0:8080"\nlisten="duplicate"\n')
     malformed = work / "malformed-workspace"
-    workspace.prepare(root, malformed_source, malformed, cli, node, cargo, rustc, commands("m7-malformed"), typescript=fixture / "web/node_modules/typescript")
+    _, malformed_config, _, _ = workspace.prepare(root, malformed_source, malformed, cli, node, cargo, rustc, commands("m7-malformed"), typescript=fixture / "web/node_modules/typescript")
     refused = run("m7-malformed-native-source", [cli, "generate", "pre-workspace.json", "--root", malformed], cwd=malformed, expected_success=False)
     diagnostic = refused.decode() + (work / "m7-malformed-native-source.stderr.log").read_text()
-    assert "NATIVE_TOML_SYNTAX" in diagnostic
-    unavailable = {"status": "unavailable", "producer": "actual-native-TOML-source", "diagnostic": diagnostic, "graphAvailable": False}
+    assert "ADAPTER_EXIT" in diagnostic and "urn:example:source:toml" in diagnostic and "app/config/service.toml" in diagnostic, diagnostic
+    # The bounded private tool boundary preserves an exit class, not arbitrary
+    # provider pipe payload. Obtain the same actual parser diagnostic separately
+    # and preserve both refusals; never manufacture a graph from unavailable data.
+    source = next(v for v in malformed_config["sources"] if v["id"] == "urn:example:source:toml")
+    supplied = []
+    for name in source["inputs"]:
+        content = (malformed / name).read_bytes()
+        supplied.append({"receipt": {"path": name, "digest": build.digest(content), "byteLength": len(content)}, "content": content.decode("utf8")})
+    request = {"schemaVersion": "0.1.0", "documentType": "adapter-request", "profile": "patamaps-workspace-draft-1",
+               "sourceId": source["id"], "namespace": malformed_config["namespace"], "config": source["config"], "inputs": supplied,
+               "invocationDigest": "sha256:" + "0" * 64, "requestDigest": ""}
+    request["requestDigest"] = json.loads(run("m7-malformed-detail-digest", [cli, "json", "digest"], input_bytes=json.dumps(request).encode()))
+    detail = run("m7-malformed-native-detail", [cli, "discover-native"], cwd=malformed, input_bytes=json.dumps(request).encode(), expected_success=False)
+    parser_diagnostic = detail.decode() + (work / "m7-malformed-native-detail.stderr.log").read_text()
+    assert "NATIVE_TOML_SYNTAX" in parser_diagnostic, parser_diagnostic
+    unavailable = {"status": "unavailable", "producer": "actual-native-TOML-source", "workspaceDiagnostic": diagnostic,
+                   "parserDiagnostic": parser_diagnostic, "graphAvailable": False, "directDiagnosticIsWorkspaceCapture": False}
     (work / "unavailable-source.json").write_text(json.dumps(unavailable, indent=2) + "\n")
     cases.append({"control": "m7-malformed-config", "sourceRoot": str(work), "unavailablePath": "unavailable-source.json", "nativeDiagnostic": "NATIVE_TOML_SYNTAX"})
     request = {"referenceRuntime": str(runtime), "executable": str(cli), "output": str(work / "metamap-comparison"), "context": inputs["context"],
