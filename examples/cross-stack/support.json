@@ -5,9 +5,9 @@
     "M1": "native-observation-scope-verified",
     "M2": "generated-http-binding-scope-verified",
     "M3": "native-observations-verified; independent-BuildKit-pending",
-    "M4": "not-implemented",
-    "M5": "not-implemented",
-    "M6": "not-run",
+    "M4": "source-intent-scope-verified-on-Intel-and-Linux; actual-image-chain-pending-M6",
+    "M5": "Linux-preview-matrix-passed; Intel-preview-matrix-pending",
+    "M6": "implemented-required-Linux-image-browser-lane; acceptance-pending",
     "M7": "not-run"
   },
   "versions": {
@@ -21,7 +21,8 @@
     "dockerfileFrontend": "docker/dockerfile:1.10.0",
     "linuxTarget": "x86_64-unknown-linux-gnu",
     "dockerfileGrammar": "tree-sitter-containerfile=0.9.2",
-    "treeSitter": "0.26.5"
+    "treeSitter": "0.26.5",
+    "playwright": "1.64.1"
   },
   "licenses": {
     "next": "MIT",
@@ -31,7 +32,8 @@
     "toml_edit": "MIT OR Apache-2.0",
     "tree-sitter-containerfile": "MIT (WharfLab and retained Camden Cheek notices)",
     "tree-sitter": "MIT",
-    "tree-sitter-language": "MIT"
+    "tree-sitter-language": "MIT",
+    "playwright": "Apache-2.0"
   },
   "supported": {
     "next": "App Router; declared roots; file routes only",
@@ -61,6 +63,7 @@
     "M0": "docs/acceptance/cross-stack/m0-fixture/receipt.json",
     "M1": "docs/acceptance/cross-stack/m1-native-observations/receipt.json",
     "M2": "docs/acceptance/cross-stack/m2-http-bindings/receipt.json",
-    "M3-native": "docs/acceptance/cross-stack/m3-docker-observations/receipt.json"
+    "M3-native": "docs/acceptance/cross-stack/m3-docker-observations/receipt.json",
+    "M4-source": "docs/acceptance/cross-stack/m4-workspace/receipt.json"
   }
 }

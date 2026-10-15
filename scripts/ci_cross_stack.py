@@ -24,7 +24,7 @@ def digest(raw):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--phase", choices=["source", "development"], default="source")
+    parser.add_argument("--phase", choices=["source", "development", "image"], default="source")
     args = parser.parse_args()
     if platform.system() != "Linux" or os.environ.get("GITHUB_ACTIONS") != "true":
         raise RuntimeError("Use the configured isolated GitHub Linux CI job; Intel work uses its existing supervisor")
@@ -66,7 +66,7 @@ def main():
             item[stream + "Digest"] = digest((work / (label + "." + stream + ".log")).read_bytes())
         save()
         print(json.dumps({"check": label, "exitCode": process.returncode, "seconds": item["seconds"]}), flush=True)
-        if (process.returncode == 0) != expected_success:
+        if expected_success is not None and (process.returncode == 0) != expected_success:
             print((work / (label + ".stderr.log")).read_text()[-9000:], flush=True)
             print((work / (label + ".stdout.log")).read_text()[-3000:], flush=True)
             raise RuntimeError(label + " failed; all candidate material and logs are retained")
@@ -83,15 +83,19 @@ def main():
             receipt["sourceWorkspace"] = verify(ROOT, work, env, run)
             from cross_stack_supervision import verify as verify_supervision
             receipt["toolSupervision"] = verify_supervision(ROOT, work, env, run)
-        else:
+        elif args.phase == "development":
             from cross_stack_development import verify
             receipt["developmentPreview"] = verify(ROOT, work, env, run)
+        else:
+            from cross_stack_release import verify
+            receipt["linuxRelease"] = verify(ROOT, work, env, run)
+            receipt.update(linuxImage="passed", browser="passed")
         space()
         assert all(digest((ROOT / name).read_bytes()) == value for name, value in before.items()), "Tracked source changed during acceptance"
         receipt["sourceUnchanged"] = True
-        receipt["status"] = "passed-source-intent-scope" if args.phase == "source" else "passed-development-preview-scope"
+        receipt["status"] = {"source": "passed-source-intent-scope", "development": "passed-development-preview-scope", "image": "passed-linux-image-browser-scope"}[args.phase]
     except BaseException as error:
-        receipt.update(status="failed", failure=str(error), traceback=traceback.format_exc())
+        receipt.update(status="unavailable" if type(error).__name__ == "Unavailable" else "failed", failure=str(error), traceback=traceback.format_exc())
         raise
     finally:
         receipt["finishedUtc"] = datetime.now(timezone.utc).isoformat()

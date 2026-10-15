@@ -63,7 +63,8 @@ def verify(root,work,env,run):
     stage=observation["selectedStage"]
     for key,value in expected["selectedStage"].items():assert stage[key]==value,(key,stage)
     copies=instructions(baseline,"copy_instruction")
-    assert len(copies)==3 and copies[1]["observation"]["fromStageIndex"]==0
+    assert len(copies)==4 and copies[1]["observation"]["fromStageIndex"]==0
+    assert copies[3]["observation"]["fromStageIndex"]==0 and copies[3]["observation"]["sources"]==["/build/licenses"]
     assert any(v["source"]=="config/service.toml" and v["destination"]=="/app/service.toml" for v in members(baseline))
     assert not any(v["source"].startswith("service/target/") for v in members(baseline))
     assert any("RUN effects" in v for v in reasons(baseline))

@@ -1,0 +1,33 @@
+{
+  "profile": "patamaps-cross-stack-m6-independent-controls-1",
+  "frozenBeforeMatrix": true,
+  "derivedFromDiscovery": false,
+  "platform": "linux/amd64",
+  "rustTarget": "x86_64-unknown-linux-gnu",
+  "elfMachine": 62,
+  "controls": [
+    "m6-buildkit-stages",
+    "m6-cargo-linux-artifact",
+    "m6-image-bytes-config-licenses",
+    "m6-real-next-linux-http",
+    "m6-real-browser",
+    "m6-buildkit-alias-index",
+    "m6-buildkit-explicit-arg-json-copy",
+    "m6-buildkit-specific-ignore",
+    "m6-buildkit-broken-copy",
+    "m6-buildkit-ignored-config",
+    "m6-buildkit-wrong-stage",
+    "m6-wrong-binary",
+    "m6-missing-config",
+    "m6-missing-loader-library",
+    "m6-wrong-architecture",
+    "m6-wrong-listener",
+    "m6-expose-is-not-listener",
+    "m6-stale-generated-client",
+    "m6-missing-required-lanes",
+    "m6-native-release-admission",
+    "m6-native-evidence-refusals"
+  ],
+  "acceptanceRequires": ["actual BuildKit", "Linux ELF tied to Cargo", "immutable image identity", "effective config", "real HTTP", "real browser", "negative controls", "native admission"],
+  "productionActivation": "excluded"
+}

@@ -182,7 +182,7 @@ def bind(destination, cli, owner, config, policy, run):
                 "observation.contextMembers": [{"source": "build-context/config/service.toml", "destination": deployment["configDestination"], "digest": config_digest, "bytesCaptured": True}]})
     # RUN is a declared recipe, never a proved artifact. Full release acceptance
     # still requires an actual selected-platform build and independent runtime.
-    recipe = "RUN cargo build --manifest-path " + op["cargo"]["manifest"] + " --locked --release --target " + op["cargo"]["platform"]
+    recipe = "RUN cargo build --manifest-path " + op["cargo"]["manifest"] + " --locked --release --target " + op["cargo"]["platform"] + " --message-format=json-render-diagnostics > /build/cargo-messages.jsonl && rustc -Vv > /build/rustc-version.txt && sh service/tools/collect-notices.sh /build/licenses"
     requirement("build-recipe", "docker-instruction", {"file": "build-context/deploy/Dockerfile", "instruction": "run_instruction", "lexeme": recipe})
     artifact_id = owner["operations"][0]["id"] + ":linux-artifact"
     config_id = WORKSPACE + ":configuration"
