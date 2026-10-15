@@ -153,6 +153,7 @@ def bind(destination, cli, owner, config, policy, run):
         for kind in ["routing:route", "routing:handler"]:
             requirement("operation-next-" + kind.split(":")[1], kind,
                         {"adapter": "nextjs-app-router", "repositoryPath": "app/" + op["frontend"]["file"], "routePath": op["frontend"]["path"], "method": op["frontend"]["method"]}, op["id"])
+        requirement("operation-next-endpoint", "routing:endpoint", {"adapter": "nextjs-app-router", "path": op["frontend"]["path"], "method": op["frontend"]["method"]}, op["id"])
         requirement("cargo-package", "cargo-package", {"name": op["cargo"]["package"], "manifest": "app/" + op["cargo"]["manifest"]})
         targets = requirement("cargo-target", "cargo-target", {"name": op["cargo"]["target"], "kind": ["bin"], "source": "app/service/src/main.rs", "requiredFeatures": op["cargo"]["requiredFeatures"],
                     "discoveryContext.manifest": "app/" + op["cargo"]["manifest"], "discoveryContext.platformFilter": op["cargo"]["platform"],
@@ -195,7 +196,7 @@ def bind(destination, cli, owner, config, policy, run):
         overlay["mappings"].append({"id": WORKSPACE + ":build-intent:" + str(i), "relation": relation, "sources": [source], "targets": [target],
                                     "cardinality": "one-to-one", "lossiness": "lossless", "provenance": {"status": "declared", "assertedBy": "fixture-owner"}})
     policy["constraints"].append({"id": WORKSPACE + ":next-totality", "kind": "topology:relation-totality", "subjects": [WORKSPACE],
-              "parameters": {"subjectKinds": ["routing:route", "routing:handler", "topology:page"], "subjectAttributes": {"adapter": "nextjs-app-router"},
+              "parameters": {"subjectKinds": ["routing:route", "routing:handler", "routing:endpoint", "topology:page"], "subjectAttributes": {"adapter": "nextjs-app-router"},
                              "relation": "core:implements", "direction": "target", "cardinality": "exactly-one", "counterpartKinds": ["routing:command", "build:view"]}})
     policy["constraints"].append({"id": WORKSPACE + ":run-totality", "kind": "topology:relation-totality", "subjects": [WORKSPACE],
               "parameters": {"subjectKinds": ["docker-instruction"], "subjectAttributes": {"instruction": "run_instruction"},

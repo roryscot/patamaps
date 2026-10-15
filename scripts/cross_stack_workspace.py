@@ -14,6 +14,7 @@ def verify(root, work, env, run):
     rustc = Path(run("m4-rustc", ["rustup", "which", "rustc"]).decode().strip()).resolve()
     node = Path(env["PATAMAPS_DEV_NODE"]).resolve()
     fixture = root / "examples/cross-stack"
+    expected = json.loads((fixture / "acceptance/m4-expected.json").read_bytes())
     sys.path.insert(0, str(fixture))
     import build
     import workspace
@@ -59,7 +60,7 @@ def verify(root, work, env, run):
             return owner
         assert refusal is None, label + " unexpectedly passed"
         assert receipt["fullReleaseAccepted"] is False
-        assert len(receipt["requirements"]) == 15
+        assert len(receipt["requirements"]) == expected["requirements"]
         assert all(len(v["matches"]) == 1 for v in receipt["requirements"]), receipt
         controls.append({"control": label, "result": "source-intent-viable", "baseline": receipt["baseline"], "fullReleaseAccepted": False})
         return owner
@@ -116,7 +117,6 @@ def verify(root, work, env, run):
     run("m4-tamper-refusal", [cli, "verify-workspace", forged], expected_success=False)
     assert "WORKSPACE_COMPOSITION_BINDING" in (work / "m4-tamper-refusal.stderr.log").read_text()
     controls.append({"control": "m4-rehashed-lineage-substitution", "result": "refused", "code": "WORKSPACE_COMPOSITION_BINDING"})
-    expected = json.loads((fixture / "acceptance/m4-expected.json").read_bytes())
     assert {v["control"] for v in controls if v["result"] == "source-intent-viable"} == set(expected["positive"])
     for label, code in expected["negative"].items():
         assert any(v["control"] == label and v["result"] == "refused" and v["code"] == code for v in controls)
