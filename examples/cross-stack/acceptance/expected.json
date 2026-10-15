@@ -1,0 +1,69 @@
+{
+  "profile": "patamaps-cross-stack-expectations-1",
+  "author": "fixture-owner",
+  "derivedFromDiscovery": false,
+  "operationId": "urn:example:operation:create-item",
+  "chain": [
+    "web/app/api/items/route.ts",
+    "POST /api/items",
+    "urn:example:operation:create-item",
+    "POST /items",
+    "catalog_service::create_item",
+    "catalog-service",
+    "x86_64-unknown-linux-gnu",
+    "builder",
+    "runtime",
+    "/usr/local/bin/catalog-service"
+  ],
+  "nextPages": [
+    "web/app/page.tsx",
+    "web/app/items/[id]/page.tsx"
+  ],
+  "request": {
+    "name": "Widget"
+  },
+  "response": {
+    "id": "item:widget",
+    "name": "Widget"
+  },
+  "status": 201,
+  "malformedStatus": 400,
+  "backendFailureRequest": {
+    "name": "fail"
+  },
+  "backendFailureStatus": 500,
+  "health": {
+    "path": "/health",
+    "status": 200,
+    "body": {
+      "status": "ok"
+    }
+  },
+  "controls": [
+    "new-unmapped-route",
+    "moved-handler",
+    "missing-export",
+    "wrong-signature",
+    "duplicate-binding",
+    "wrong-http-path",
+    "wire-shape-mismatch",
+    "disabled-feature",
+    "changed-lock",
+    "duplicate-toml-key",
+    "unsafe-toml-number",
+    "out-of-scope-path",
+    "broken-copy-from",
+    "ignored-config",
+    "macho-artifact",
+    "wrong-listener",
+    "opaque-shell-effect",
+    "truncated-provider",
+    "racing-edit",
+    "rehash-tampering",
+    "offline-reconstruction",
+    "root-relocation",
+    "installed-consumer",
+    "missing-container-lane"
+  ],
+  "state": "frozen-before-discovery-implementation"
+}

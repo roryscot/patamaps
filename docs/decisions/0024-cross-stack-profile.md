@@ -1,0 +1,11 @@
+# Cross-stack fixture and observation profile
+
+The owner authorized implementation of the standalone 2026-10-15 cross-stack plan on Intel, with verified commit/push checkpoints. Existing C01-C19 acceptance remains evidence for its original source and scope; it does not accept this new feature.
+
+M0 freezes one real Next.js App Router/Rust tiny_http application, explicit method/path/JSON contracts, a Linux Cargo target and a multi-stage Dockerfile. Exact supported versions and licenses are in examples/cross-stack/support.json. Expected operations and negative controls are authored in acceptance/expected.json before discovery implementation. New observation profiles must preserve raw nonsecret inputs and typed TOML spans, capture Cargo's locked/offline metadata, and distinguish syntax, resolution, compilation, image inspection and runtime observations.
+
+Reuse the workspace process protocol, its 16 MiB combined input bound, receipts and offline reconstruction. Keep process caching disabled. Cargo/TOML providers belong in patamaps-workspace unless a new crate earns its cost. Pin toml_edit 0.23.7 with parse only (MIT OR Apache-2.0, Rust >=1.76, TOML 1.0) after source/API review. Runtime TOML values outside native JSON's safe domain must remain tagged rather than coerced. Missing ambient configuration or unavailable offline dependencies must refuse instead of silently changing resolution.
+
+The fixture uses Next 16.4.1/React 19.3.1/TypeScript 5.9.3 and Rust 1.99.0/tiny_http 0.12.0. Next and React use MIT; TypeScript uses Apache-2.0; tiny_http uses MIT OR Apache-2.0. Node 22.23.3 satisfies Next's >=20.9.0 engine requirement. TypeScript is pinned to a supported 5.x version rather than implicitly changing the discovery bridge's compiler API.
+
+M0/M1 do not establish generated registration, Docker semantics, coherent development publication, MetaMap compatibility or runtime/image acceptance. Unsupported required constructs block those later gates. The source plan is preserved outside this checkout at /Volumes/dev_src_case_sensitive/patamaps-development-plans/2026-10-15-cross-stack/BUILD_PLAN.md; it does not replace the existing capability BUILD_PLAN.md. Current implementation progress will be recorded with exact commands and retained evidence at each checkpoint.

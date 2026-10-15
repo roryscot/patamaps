@@ -1,0 +1,261 @@
+{
+  "status": "passed",
+  "phase": "fixture",
+  "profile": "patamaps-cross-stack-fixture-1",
+  "startedUtc": "2026-10-15T16:54:59.782281+00:00",
+  "commands": [
+    {
+      "label": "rust-version",
+      "argv": [
+        "rustc",
+        "-Vv"
+      ],
+      "cwd": ".",
+      "exitCode": 0,
+      "seconds": 0.397,
+      "stdout": {
+        "path": ".tools/cross-stack/fixture-20261015T165459.781378Z/rust-version.stdout.log",
+        "digest": "sha256:b1184c1aecf3182548f3bbdd91e5043e464821b1dcbf6d5ca8246339bd0be84a"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/fixture-20261015T165459.781378Z/rust-version.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "cargo-version",
+      "argv": [
+        "cargo",
+        "--version"
+      ],
+      "cwd": ".",
+      "exitCode": 0,
+      "seconds": 0.123,
+      "stdout": {
+        "path": ".tools/cross-stack/fixture-20261015T165459.781378Z/cargo-version.stdout.log",
+        "digest": "sha256:1f88eaf7fe1aaec83184752cf4c944cd22f00184136ff36a3e4c318cc60ef566"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/fixture-20261015T165459.781378Z/cargo-version.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "node-version",
+      "argv": [
+        "node",
+        "--version"
+      ],
+      "cwd": ".",
+      "exitCode": 0,
+      "seconds": 0.079,
+      "stdout": {
+        "path": ".tools/cross-stack/fixture-20261015T165459.781378Z/node-version.stdout.log",
+        "digest": "sha256:33e26f35db6e57ce0c486ddc815fe966867e4f649e418eaf323f75f4720eb8e9"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/fixture-20261015T165459.781378Z/node-version.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "rust-format",
+      "argv": [
+        "cargo",
+        "fmt",
+        "--manifest-path",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/examples/cross-stack/service/Cargo.toml",
+        "--",
+        "--check"
+      ],
+      "cwd": ".",
+      "exitCode": 0,
+      "seconds": 0.289,
+      "stdout": {
+        "path": ".tools/cross-stack/fixture-20261015T165459.781378Z/rust-format.stdout.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/fixture-20261015T165459.781378Z/rust-format.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "rust-tests",
+      "argv": [
+        "cargo",
+        "test",
+        "--manifest-path",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/examples/cross-stack/service/Cargo.toml",
+        "--locked",
+        "--offline"
+      ],
+      "cwd": ".",
+      "exitCode": 0,
+      "seconds": 19.567,
+      "stdout": {
+        "path": ".tools/cross-stack/fixture-20261015T165459.781378Z/rust-tests.stdout.log",
+        "digest": "sha256:010849039ec557dbb003cb92e3e13b479ac59b405397544f33d25ac03f8c76ab"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/fixture-20261015T165459.781378Z/rust-tests.stderr.log",
+        "digest": "sha256:560f79f2a6c305fc39ea7f0ff31502798857fdb24deaf34fd08af0c7b4c261a4"
+      }
+    },
+    {
+      "label": "rust-build",
+      "argv": [
+        "cargo",
+        "build",
+        "--manifest-path",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/examples/cross-stack/service/Cargo.toml",
+        "--locked",
+        "--offline"
+      ],
+      "cwd": ".",
+      "exitCode": 0,
+      "seconds": 0.587,
+      "stdout": {
+        "path": ".tools/cross-stack/fixture-20261015T165459.781378Z/rust-build.stdout.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/fixture-20261015T165459.781378Z/rust-build.stderr.log",
+        "digest": "sha256:81f1af0185722389521e8384815dbbd7c2793ede313f669f0099e575009d64e0"
+      }
+    },
+    {
+      "label": "next-build",
+      "argv": [
+        "npm",
+        "run",
+        "build"
+      ],
+      "cwd": "examples/cross-stack/web",
+      "exitCode": 0,
+      "seconds": 37.02,
+      "stdout": {
+        "path": ".tools/cross-stack/fixture-20261015T165459.781378Z/next-build.stdout.log",
+        "digest": "sha256:8fe6451839ecc612b2a811a1851b034c40a2bdca1b62b99734a12b7d8d2c8c31"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/fixture-20261015T165459.781378Z/next-build.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "next-typecheck",
+      "argv": [
+        "npm",
+        "run",
+        "typecheck"
+      ],
+      "cwd": "examples/cross-stack/web",
+      "exitCode": 0,
+      "seconds": 2.64,
+      "stdout": {
+        "path": ".tools/cross-stack/fixture-20261015T165459.781378Z/next-typecheck.stdout.log",
+        "digest": "sha256:8c8bf418ac3dd64447a13f6c833f407cf93a2b4959cfc37f0b62edc29ef5928d"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/fixture-20261015T165459.781378Z/next-typecheck.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  ],
+  "retainedWork": ".tools/cross-stack/fixture-20261015T165459.781378Z",
+  "filesDeleted": [],
+  "fullCrossStackAcceptance": false,
+  "containerAcceptance": "not-run",
+  "browserAcceptance": "not-run",
+  "generatedRegistration": "not-implemented",
+  "sourceInventory": {
+    "examples/cross-stack/.dockerignore": "sha256:ab935c7c81106d3bccd86f7b2e3edfbdb6712670b72296d189a528c1aeacfb7c",
+    "examples/cross-stack/.gitignore": "sha256:e0f20864aa53885a1456384f06a5893f8a70425f2d5ed4039c2ac48f1fe3b2a4",
+    "examples/cross-stack/README.md": "sha256:eaa223e0b66657329b8f9c774aec29e520d6ea906eba4a0177466dc915c81bc4",
+    "examples/cross-stack/acceptance/expected.json": "sha256:4b6fe10f673674d8947725b849a61435858305f856adf588e0040faafafbe404",
+    "examples/cross-stack/config/service.toml": "sha256:ec046d3e08183708c3aae0453ce0cb4febe7b875452d781ea867897b65bccd07",
+    "examples/cross-stack/contracts/create-item.request.schema.json": "sha256:e814007c18146f82674e36f5dc6fb1affe8e871f828c8ddff117f244e2ddfe95",
+    "examples/cross-stack/contracts/create-item.response.schema.json": "sha256:3c49c73af83622c4678aedd932a53e51f71b78db7de502b68a9ed36a46af7113",
+    "examples/cross-stack/contracts/operations.json": "sha256:7d0af137602757e29a20cb8b8ae1cb8333f836da348d3cd8028a5d233f7ef4e4",
+    "examples/cross-stack/deploy/Dockerfile": "sha256:ccc6cd1005cb31b6abe6879c4ff9b26c26d137dea8203c07b717ec8bb10fb59f",
+    "examples/cross-stack/mappings/README.md": "sha256:594388cf251b81e2c1a87afe1fa3c093b6a36dd7cc667230407917678bf2cbbb",
+    "examples/cross-stack/service/Cargo.lock": "sha256:3e511df39108267fd2cf10a9b49dd49db589ae1f49b6fb8b9152779d365a99c3",
+    "examples/cross-stack/service/Cargo.toml": "sha256:fdd1f664593da2163ad70802e6c2bc8b922dcd019500550c349efbb556cba77c",
+    "examples/cross-stack/service/src/lib.rs": "sha256:1e04089800d93b65af6823c1be25653244b70252723e6f9df4005e80a2eea962",
+    "examples/cross-stack/service/src/main.rs": "sha256:82596f7e03085edd788b917ec5dc0f8cea657f3568f5afa9f4db7223e5d1c1b9",
+    "examples/cross-stack/support.json": "sha256:4340a0accba5809619c912a9ec02316e3e61a42c08254ff01a3b20e943b9e5b4",
+    "examples/cross-stack/web/app/api/items/route.ts": "sha256:769206e406cb0546426540951f061b9e8508c0739d0f516313ad776dab96eec9",
+    "examples/cross-stack/web/app/items/[id]/page.tsx": "sha256:62f257c01a26a7c6bf0eb8b7cbfa4d15bec683e1e98648e034c219373f65fde9",
+    "examples/cross-stack/web/app/layout.tsx": "sha256:c1948db0db63dcabb24d969c4d4d7d55277304aeb7cc4ffa2485ca6fb3464693",
+    "examples/cross-stack/web/app/page.tsx": "sha256:ac74e88cd925452545d0f820e39f274f80c7a2e590643b8b356f3600567e077b",
+    "examples/cross-stack/web/next.config.mjs": "sha256:d9be514b014a67dbf2f6aeb0acd2b5b87801e378127d4ae8f592af5e39460b25",
+    "examples/cross-stack/web/package-lock.json": "sha256:b2d52eccd71b29bd6e6938292d3ef692e434ac4ca77e8508ed0da7c57fbc2d59",
+    "examples/cross-stack/web/package.json": "sha256:3bcba3a9906f2dd519ab7863a9174d4262aba9246977bfba96ad090ffdfd6334",
+    "examples/cross-stack/web/tsconfig.json": "sha256:45fd26769ac1a8f0b8741099674b71e00846b9f97ce1b7cb7afb98c7922ce7f0"
+  },
+  "httpChecks": [
+    {
+      "case": "health",
+      "status": 200,
+      "body": {
+        "status": "ok"
+      }
+    },
+    {
+      "case": "create",
+      "status": 201,
+      "body": {
+        "id": "item:widget",
+        "name": "Widget"
+      }
+    },
+    {
+      "case": "malformed",
+      "status": 400,
+      "body": {
+        "error": "invalid-request"
+      }
+    },
+    {
+      "case": "extra-field",
+      "status": 400,
+      "body": {
+        "error": "invalid-request"
+      }
+    },
+    {
+      "case": "empty-name",
+      "status": 400,
+      "body": {
+        "error": "invalid-name"
+      }
+    },
+    {
+      "case": "backend-failure",
+      "status": 500,
+      "body": {
+        "error": "backend-failure"
+      }
+    }
+  ],
+  "effectiveListener": "127.0.0.1:50552",
+  "runtimeConfiguration": {
+    "path": "examples/cross-stack/config/service.toml",
+    "digest": "sha256:ec046d3e08183708c3aae0453ce0cb4febe7b875452d781ea867897b65bccd07",
+    "testListenerOverride": "127.0.0.1:0"
+  },
+  "sourceUnchanged": true,
+  "completedUtc": "2026-10-15T16:56:02.158053+00:00",
+  "scope": "M0 real native Next/Rust fixture only; no generated-registration, image, browser, interoperability or full cross-stack acceptance",
+  "sourceBase": "3a01f2296873d48b6dff8059618e425d4bbca0ae",
+  "sourcePlanSha256": "a85531e9fdb3df27555db7b30436226f4ae4d3c65f410ab4d87e05007dc6944d",
+  "statusMetadataUpdatedAfterRun": true,
+  "supportBeforeDigest": "sha256:4340a0accba5809619c912a9ec02316e3e61a42c08254ff01a3b20e943b9e5b4",
+  "supportAfterDigest": "sha256:a56d2b4d9b4dc746d57259c8611a2d679e2d8793ab18ff4dd4dad87584d709ee",
+  "dependencyLocks": {
+    "examples/cross-stack/service/Cargo.lock": "sha256:3e511df39108267fd2cf10a9b49dd49db589ae1f49b6fb8b9152779d365a99c3",
+    "examples/cross-stack/web/package-lock.json": "sha256:b2d52eccd71b29bd6e6938292d3ef692e434ac4ca77e8508ed0da7c57fbc2d59"
+  },
+  "dockerOnIntel": "unavailable: no docker executable on configured PATH"
+}

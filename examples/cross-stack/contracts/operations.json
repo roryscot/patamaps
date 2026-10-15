@@ -1,0 +1,36 @@
+{
+  "profile": "patamaps-cross-stack-fixture-1",
+  "operations": [
+    {
+      "id": "urn:example:operation:create-item",
+      "frontend": {
+        "method": "POST",
+        "path": "/api/items",
+        "file": "web/app/api/items/route.ts"
+      },
+      "endpoint": {
+        "method": "POST",
+        "path": "/items"
+      },
+      "implementation": {
+        "crate": "catalog_service",
+        "symbol": "create_item",
+        "file": "service/src/lib.rs",
+        "request": "CreateItemRequest",
+        "response": "CreateItemResponse"
+      },
+      "cargo": {
+        "manifest": "service/Cargo.toml",
+        "package": "catalog-service",
+        "target": "catalog-service",
+        "features": [],
+        "platform": "x86_64-unknown-linux-gnu",
+        "profile": "release"
+      },
+      "schemas": {
+        "request": "contracts/create-item.request.schema.json",
+        "response": "contracts/create-item.response.schema.json"
+      }
+    }
+  ]
+}
