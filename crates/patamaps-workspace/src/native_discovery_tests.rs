@@ -292,8 +292,8 @@ fn captured_file_receipts_bind_utf8_bytes_without_live_io() {
         byte_digest(req.inputs[0].content.as_bytes())
     );
     assert_eq!(
-        value["attributes"]["byteLength"],
-        req.inputs[0].content.len()
+        canonical_bytes(&value["attributes"]["byteLength"]).unwrap(),
+        canonical_bytes(&json!(req.inputs[0].content.len())).unwrap()
     );
     assert_eq!(value["attributes"]["compilationEstablished"], false);
 }

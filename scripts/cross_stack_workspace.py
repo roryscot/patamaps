@@ -88,6 +88,8 @@ def verify(root, work, env, run):
     case("m4-wrong-runtime-listener", replace("config/service.toml", "0.0.0.0:8080", "127.0.0.1:9090"), "REQUIRED_MAPPING_MISSING")
     case("m4-extra-opaque-run", replace("deploy/Dockerfile", "WORKDIR /app", "WORKDIR /app\nRUN echo unproved"), "TOPOLOGY_REQUIRED_RELATION_MISSING")
     case("m4-dynamic-next-config", replace("web/next.config.mjs", "export default", "const env = process.env;\nexport default"), "REQUIRED_MAPPING_MISSING")
+    case("m4-disabled-required-feature", lambda owner: (owner / "service/Cargo.toml").write_text(
+         (owner / "service/Cargo.toml").read_text() + '\n[features]\nflag=[]\n[[bin]]\nname="catalog-service"\npath="src/main.rs"\nrequired-features=["flag"]\n'), "REQUIRED_MAPPING_MISSING")
     # Offline reconstruction checks captured records without Node, Cargo or any
     # provider on PATH. It does not rediscover or authenticate current sources.
     moves = []

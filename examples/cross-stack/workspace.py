@@ -8,13 +8,13 @@ import copy
 import json
 import os
 import shutil
-import sys
 
 import build
 
 WORKSPACE = "urn:example:cross-stack:workspace"
 AS_OF = "2026-10-15T00:00:00Z"
 PACKS = ["routing", "application-topology", "build-deployment"]
+NEXT_LITERAL_PROFILE = b'export default { output: "standalone", experimental: { cpus: 2 } };\n'
 
 
 def write(path, value):
@@ -73,6 +73,10 @@ def prepare(repo, source, destination, cli, node, cargo, rustc, run, typescript=
                    and Path(p).stem in {"page", "layout", "template", "route", "loading", "error", "global-error", "not-found", "default"}]
     deployment = owner["deployment"]
     operation = owner["operations"][0]
+    if operation["cargo"]["platform"] != "x86_64-unknown-linux-gnu" or deployment["platform"] != "linux/amd64" or operation["cargo"]["profile"] != "release":
+        raise build.BuildError("CROSS_STACK_PLATFORM_PROFILE_UNSUPPORTED")
+    if operation["cargo"]["features"] or operation["cargo"]["requiredFeatures"]:
+        raise build.BuildError("CROSS_STACK_FEATURE_PROFILE_UNSUPPORTED")
     cargo_config = {"provider": "cargo", "nonsecretInputs": True,
                     "manifest": "app/" + operation["cargo"]["manifest"], "workspaceManifest": "app/" + operation["cargo"]["manifest"],
                     "lockfile": "app/service/Cargo.lock", "cargo": str(cargo), "cargoDigest": build.digest(cargo.read_bytes()),
@@ -150,7 +154,7 @@ def bind(destination, cli, owner, config, policy, run):
             requirement("operation-next-" + kind.split(":")[1], kind,
                         {"adapter": "nextjs-app-router", "repositoryPath": "app/" + op["frontend"]["file"], "routePath": op["frontend"]["path"], "method": op["frontend"]["method"]}, op["id"])
         requirement("cargo-package", "cargo-package", {"name": op["cargo"]["package"], "manifest": "app/" + op["cargo"]["manifest"]})
-        targets = requirement("cargo-target", "cargo-target", {"name": op["cargo"]["target"], "kind": ["bin"], "source": "app/service/src/main.rs",
+        targets = requirement("cargo-target", "cargo-target", {"name": op["cargo"]["target"], "kind": ["bin"], "source": "app/service/src/main.rs", "requiredFeatures": op["cargo"]["requiredFeatures"],
                     "discoveryContext.manifest": "app/" + op["cargo"]["manifest"], "discoveryContext.platformFilter": op["cargo"]["platform"],
                     "discoveryContext.features": op["cargo"]["features"], "discoveryContext.defaultFeatures": True, "discoveryContext.view": "resolved"})
         for i, target in enumerate(targets):
@@ -159,27 +163,29 @@ def bind(destination, cli, owner, config, policy, run):
     deployment = owner["deployment"]
     requirement("listener", "toml-key", {"path": "app/config/service.toml", "observation.key": ["http", "listen"],
                                          "observation.value": {"type": "string", "value": deployment["listener"]}})
-    requirement("next-config", "build:input", {"file": "app/web/next.config.mjs", "digest": deployment["nextConfigDigest"]})
+    requirement("next-config", "build:input", {"file": "app/web/next.config.mjs", "digest": build.digest(NEXT_LITERAL_PROFILE)})
     builder = requirement("builder", "docker-stage", {"alias": deployment["builderStage"], "dockerfile": "build-context/deploy/Dockerfile", "platform": deployment["platform"]})
     by_id = {e["id"]: e for e in graph["entities"]}
     builder_index = by_id[builder[0]]["attributes"]["index"] if len(builder) == 1 else -1
     runtime = {"alias": deployment["runtimeStage"], "dockerfile": "build-context/deploy/Dockerfile", "platform": deployment["platform"],
                "workdir": "/app", "entrypoint": [deployment["executable"]], "cmd": [deployment["configDestination"]], "expose": ["8080"], "unsupportedReasons": []}
     runtime_ids = requirement("runtime", "docker-stage", runtime)
+    artifact_source = "/build/service/target/" + op["cargo"]["platform"] + "/release/" + op["cargo"]["target"]
     requirement("binary-copy", "docker-instruction", {"file": "build-context/deploy/Dockerfile", "instruction": "copy_instruction",
-                "observation.fromStageIndex": builder_index, "observation.sources": [deployment["artifactSource"]],
+                "observation.fromStageIndex": builder_index, "observation.sources": [artifact_source],
                 "observation.resolvedDestination": deployment["executable"] , "supportedSyntaxAndResolution": True})
     config_digest = build.digest((destination / "build-context/config/service.toml").read_bytes())
     requirement("config-copy", "docker-instruction", {"file": "build-context/deploy/Dockerfile", "instruction": "copy_instruction", "supportedSyntaxAndResolution": True,
                 "observation.contextMembers": [{"source": "build-context/config/service.toml", "destination": deployment["configDestination"], "digest": config_digest, "bytesCaptured": True}]})
     # RUN is a declared recipe, never a proved artifact. Full release acceptance
     # still requires an actual selected-platform build and independent runtime.
-    requirement("build-recipe", "docker-instruction", {"file": "build-context/deploy/Dockerfile", "instruction": "run_instruction", "lexeme": deployment["buildRecipe"]})
+    recipe = "RUN cargo build --manifest-path " + op["cargo"]["manifest"] + " --locked --release --target " + op["cargo"]["platform"]
+    requirement("build-recipe", "docker-instruction", {"file": "build-context/deploy/Dockerfile", "instruction": "run_instruction", "lexeme": recipe})
     artifact_id = owner["operations"][0]["id"] + ":linux-artifact"
     config_id = WORKSPACE + ":configuration"
     overlay["entities"].extend([
         {"id": artifact_id, "kind": "build:artifact", "attributes": {"evidenceClass": "declared-build-intent", "compilationEstablished": False,
-          "platform": deployment["platform"], "cargo": owner["operations"][0]["cargo"], "path": deployment["artifactSource"]}},
+          "platform": deployment["platform"], "cargo": owner["operations"][0]["cargo"], "path": artifact_source}},
         {"id": config_id, "kind": "build:configuration", "attributes": {"evidenceClass": "captured-file-receipt", "digest": config_digest,
           "source": "build-context/config/service.toml", "destination": deployment["configDestination"], "imageContentsEstablished": False}}])
     declared_links = [("build:produces", target, artifact_id) for target in targets]

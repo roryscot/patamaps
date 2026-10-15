@@ -27,7 +27,8 @@
         "target": "catalog-service",
         "features": [],
         "platform": "x86_64-unknown-linux-gnu",
-        "profile": "release"
+        "profile": "release",
+        "requiredFeatures": []
       },
       "schemas": {
         "request": "contracts/create-item.request.schema.json",
@@ -73,9 +74,6 @@
     "frontend": "docker/dockerfile:1.10.0",
     "listener": "0.0.0.0:8080",
     "executable": "/usr/local/bin/catalog-service",
-    "configDestination": "/app/service.toml",
-    "artifactSource": "/build/service/target/x86_64-unknown-linux-gnu/release/catalog-service",
-    "buildRecipe": "RUN cargo build --manifest-path service/Cargo.toml --locked --release --target x86_64-unknown-linux-gnu",
-    "nextConfigDigest": "sha256:d9be514b014a67dbf2f6aeb0acd2b5b87801e378127d4ae8f592af5e39460b25"
+    "configDestination": "/app/service.toml"
   }
 }
