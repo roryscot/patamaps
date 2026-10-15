@@ -1,0 +1,53 @@
+{
+  "status": "passed",
+  "scope": "Install the existing exact pinned independent SSSOM/RDF checker on Intel; this alone does not establish scientific conformance.",
+  "requirementsDigest": "sha256:f1729bd36f06488b03f50b5973a3c2d33e876e7b6056de6156713d34f836f038",
+  "commands": [
+    {
+      "label": "venv",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/intel-python-3.13.16-20261013/runtime/python/bin/python3",
+        "-B",
+        "-m",
+        "venv",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/scientific-checker"
+      ],
+      "exitCode": 0
+    },
+    {
+      "label": "pinned-install",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/scientific-checker/bin/python",
+        "-B",
+        "-m",
+        "pip",
+        "install",
+        "--cache-dir",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/scientific-checker-cache/pip",
+        "--report",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/docs/acceptance/capabilities/intel-scientific-prerequisite-2026-10-15T00-45-22.273078Z/installation.json",
+        "--requirement",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/docs/acceptance/scientific-checker-requirements.txt"
+      ],
+      "exitCode": 0
+    },
+    {
+      "label": "pins",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/scientific-checker/bin/python",
+        "-B",
+        "-c",
+        "import importlib.metadata as m,json,platform,sys; pins=dict(line.strip().split(\"==\") for line in open(sys.argv[1]) if line.strip()); actual={k:m.version(k) for k in pins}; assert actual==pins,(actual,pins); print(json.dumps({\"python\":sys.version,\"architecture\":platform.machine(),\"packages\":actual}))",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/docs/acceptance/scientific-checker-requirements.txt"
+      ],
+      "exitCode": 0
+    }
+  ],
+  "deleted": [],
+  "host": {
+    "architecture": "x86_64",
+    "platform": "macOS-15.8.1-x86_64-i386-64bit-Mach-O"
+  },
+  "environment": ".tools/scientific-checker",
+  "completedAtUtc": "2026-10-15T00:46:24.354871+00:00"
+}

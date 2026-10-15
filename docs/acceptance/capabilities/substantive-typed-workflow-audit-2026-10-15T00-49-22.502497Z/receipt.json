@@ -1,0 +1,88 @@
+{
+  "status": "partial-substantive-audit",
+  "recordedAtUtc": "2026-10-15T00:49:22.503555+00:00",
+  "referenceEngine": "399747a4ad05a37cd8db1cedd53048fad2175be4",
+  "reviewedReferenceSources": [
+    {
+      "suite": "typed-native",
+      "sourcePath": "src/__tests__/typed-native.test.ts",
+      "sourceRevision": "399747a4ad05a37cd8db1cedd53048fad2175be4",
+      "digest": "sha256:2cb27b33539ec6db4ebcf9203a4f0e935a8c2509389612b62d6727265764bb28",
+      "capabilities": [
+        "C07",
+        "C18"
+      ],
+      "requirementsReviewed": [
+        "Checked projection and tree from explicit typed policy/proof inputs",
+        "Actually type-check and execute generated bindings, refuse unknown identity, preserve template while hydrating parameters"
+      ],
+      "review": "Complete original assertion bodies read; corresponding native implementation and test portions reviewed. No literal API, identical address or full original-suite execution claim."
+    },
+    {
+      "suite": "typed-replay",
+      "sourcePath": "src/__tests__/typed-replay.test.ts",
+      "sourceRevision": "399747a4ad05a37cd8db1cedd53048fad2175be4",
+      "digest": "sha256:7d2a818bffe387d01689f980dffe44b25cf27228b3723eec1ac97258c36f4e88",
+      "capabilities": [
+        "C05",
+        "C06",
+        "C08",
+        "C09"
+      ],
+      "requirementsReviewed": [
+        "Capture complete assessments, evidence, requirements and budgets without input mutation",
+        "Projection receives fully checked policy/generation; input substitution and rehashed summaries do not become checked state",
+        "Replay recomputes changed assessment, evidence, requirement and budget inputs",
+        "Genuine budget rejection replays; unavailable risk deltas stay null; attribution changes do not invent qualitative risk change",
+        "Strict versus tolerant unknown-state requirements remain explicit"
+      ],
+      "review": "Complete original assertion bodies read; corresponding native implementation and test portions reviewed. No literal API, identical address or full original-suite execution claim."
+    }
+  ],
+  "nativeEvidenceInventory": [
+    {
+      "path": "scripts/test_native.py",
+      "digest": "sha256:8c06b379efcd7b4d2f6f23237540c82f516c0b0bc20d40b28801189453bcbe99"
+    },
+    {
+      "path": "crates/patamaps-projection/src/capture.rs",
+      "digest": "sha256:b0c8ced7e6a03c2475f2b42007bdc053becac745b0b18f4e2b6bdc06783385d4"
+    },
+    {
+      "path": "crates/patamaps-projection/src/compare.rs",
+      "digest": "sha256:8b8ac3cf3d42d335072a961c70ec0636f43417664a9998b3db145e3b439c942e"
+    },
+    {
+      "path": "crates/patamaps-projection/src/path_tree.rs",
+      "digest": "sha256:d32b7febef8700673af4e62ef1fb769fd71d6d9f0b9523c6e62d7c3f90933686"
+    },
+    {
+      "path": "crates/patamaps-projection/tests/replay.rs",
+      "digest": "sha256:d45d99896587cec3b0f1075aa785cf258aebb0895b4384a74e226326d16e0814"
+    },
+    {
+      "path": "crates/patamaps-projection/tests/risk.rs",
+      "digest": "sha256:2b9c8271dc3882a526088c7551ee301d9bb5327f3de42089068065642bdb4ca0"
+    },
+    {
+      "path": "crates/patamaps-projection/tests/path_tree.rs",
+      "digest": "sha256:e6d229a2d18fd05be1d551a711f433e62dee55b0cd1551cafdf930038aed87ee"
+    }
+  ],
+  "currentCompilerMilestone": {
+    "path": "docs/acceptance/capabilities/compiler-2026-10-15T00-39-15.391993Z/receipt.json",
+    "digest": "sha256:49aee12bedb8715b4a842569686a04cfb364d4165baff43539dd5c44e59735d1",
+    "status": "passed"
+  },
+  "nativeFindings": [
+    "Private admitted/projected/replayed types and immutable borrowing replace untrusted summary assertions. Persisted capture records are recomputed and compared canonically.",
+    "Collection outcomes preserve successful compilation when a consumer rejects. Removed or rejected projections have null semantic/risk deltas.",
+    "Native hydration preserves template keys and occupants; generated Rust/TypeScript projection consumers actually execute in the compiler milestone."
+  ],
+  "openAcceptanceQuestion": {
+    "capability": "C07/C18",
+    "detail": "The original typed-native test executes an emitted TypeScript path-tree module. Current native acceptance verifies checked tree/hydration through Rust API/CLI and executes generated projection modules; it does not execute a separately emitted TypeScript tree module. Establish the required native integration contract and a complete typed-tree consumer workflow before claiming this original workflow fully accepted. This record neither promises a new JS API nor dispositions a capability."
+  },
+  "remaining": "Continue the other suite assertion/implementation reviews and current platform/installed acceptance; the full capability goal is incomplete.",
+  "deleted": []
+}

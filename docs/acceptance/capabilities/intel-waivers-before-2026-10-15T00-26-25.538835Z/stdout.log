@@ -1,0 +1,26 @@
+
+running 3 tests
+test an_allowed_waiver_never_covers_missing_policy_or_protected_codes ... ok
+test exact_ordinary_waivers_preserve_findings_and_original_graph_bytes ... FAILED
+test waiver_scope_and_expiry_cannot_cover_another_mapping_or_boundary_time ... FAILED
+
+failures:
+
+---- exact_ordinary_waivers_preserve_findings_and_original_graph_bytes stdout ----
+
+thread 'exact_ordinary_waivers_preserve_findings_and_original_graph_bytes' (3105572) panicked at crates/patamaps-core/tests/waivers.rs:73:58:
+called `Result::unwrap()` on an `Err` value: CheckError([Issue { severity: Error, code: "INVALID_WAIVER", message: "Waiver has invalid or protected scope", subject_id: Some("urn:waiver:bounded-migration"), waived_by: None }, Issue { severity: Error, code: "UNDECLARED_LOSSINESS", message: "Admitted mappings need declared lossiness", subject_id: Some("urn:example:mapping:create-user-handler"), waived_by: None }])
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+---- waiver_scope_and_expiry_cannot_cover_another_mapping_or_boundary_time stdout ----
+
+thread 'waiver_scope_and_expiry_cannot_cover_another_mapping_or_boundary_time' (3105573) panicked at crates/patamaps-core/tests/waivers.rs:63:5:
+EXPIRED_WAIVER: candidate rejected with 2 issue(s)
+
+
+failures:
+    exact_ordinary_waivers_preserve_findings_and_original_graph_bytes
+    waiver_scope_and_expiry_cannot_cover_another_mapping_or_boundary_time
+
+test result: FAILED. 1 passed; 2 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s
+

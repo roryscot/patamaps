@@ -1,0 +1,53 @@
+{
+  "status": "running",
+  "host": "x86_64-apple-darwin",
+  "commands": [
+    {
+      "label": "installer-download",
+      "argv": [
+        "/usr/bin/curl",
+        "--fail",
+        "--location",
+        "--proto",
+        "=https",
+        "--tlsv1.2",
+        "--output",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/intel-bootstrap/intel-rustup-2026-10-14T23-39-45.117235Z/rustup-init",
+        "https://static.rust-lang.org/rustup/dist/x86_64-apple-darwin/rustup-init"
+      ],
+      "exitCode": 0
+    },
+    {
+      "label": "checksum-download",
+      "argv": [
+        "/usr/bin/curl",
+        "--fail",
+        "--location",
+        "--proto",
+        "=https",
+        "--tlsv1.2",
+        "--output",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/intel-bootstrap/intel-rustup-2026-10-14T23-39-45.117235Z/rustup-init.sha256",
+        "https://static.rust-lang.org/rustup/dist/x86_64-apple-darwin/rustup-init.sha256"
+      ],
+      "exitCode": 0
+    },
+    {
+      "label": "rustup-install",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/intel-bootstrap/intel-rustup-2026-10-14T23-39-45.117235Z/rustup-init",
+        "-y",
+        "--no-modify-path",
+        "--default-toolchain",
+        "none",
+        "--profile",
+        "minimal"
+      ],
+      "exitCode": 0
+    }
+  ],
+  "deleted": [],
+  "shellProfilesModified": false,
+  "installerUrl": "https://static.rust-lang.org/rustup/dist/x86_64-apple-darwin/rustup-init",
+  "installerDigest": "sha256:259e2b84274434085163fe8d556510571772cda2aa6d87ca6aa664f57bc644e3"
+}

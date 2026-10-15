@@ -1,0 +1,144 @@
+{
+  "status": "partial-substantive-audit",
+  "recordedAtUtc": "2026-10-15T00:43:17.743816+00:00",
+  "baseCommit": "eae61dd8633044a97b2bc42db079aeecbb80e42c",
+  "workingSource": "Uncommitted ordinary-waiver repair; exact native file hashes below.",
+  "referenceEngine": "399747a4ad05a37cd8db1cedd53048fad2175be4",
+  "reviewedReferenceSources": [
+    {
+      "suite": "executable-pack",
+      "sourcePath": "src/__tests__/executable-pack.test.ts",
+      "sourceRevision": "399747a4ad05a37cd8db1cedd53048fad2175be4",
+      "digest": "sha256:b7f15a72564f40d59c6307bdf83d3a81dd7ee0dfc6d764b966cdbf693ae82b41",
+      "review": "Complete assertion bodies and listed native implementation/test portions read. This is a substantive source review, not an identical-wire or one-to-one upstream-suite execution claim.",
+      "capabilities": [
+        "C01",
+        "C03",
+        "C04"
+      ],
+      "guarantees": [
+        "Exact direct and nested imports; immutable registered snapshots; no ambient imports or script operations",
+        "Law arity, endpoint compatibility, required unconditional flags, global identities, disjointness and atomic registration refusal",
+        "Decoded duplicate key refusal and preserved original legacy digest convention"
+      ],
+      "nativeEvidence": [
+        "crates/patamaps-core/src/registry.rs",
+        "crates/patamaps-core/src/laws.rs",
+        "crates/patamaps-core/tests/registry.rs",
+        "crates/patamaps-core/tests/derivation.rs",
+        "crates/patamaps-core/tests/legacy_pack.rs"
+      ]
+    },
+    {
+      "suite": "viability",
+      "sourcePath": "src/__tests__/viability.test.ts",
+      "sourceRevision": "399747a4ad05a37cd8db1cedd53048fad2175be4",
+      "digest": "sha256:d34ac2a04fec82bf11cc3a36dd82473df79e659ecbe7ddbc89e0745e14c1a47a",
+      "review": "Complete assertion bodies and listed native implementation/test portions read. This is a substantive source review, not an identical-wire or one-to-one upstream-suite execution claim.",
+      "capabilities": [
+        "C03",
+        "C09",
+        "C11"
+      ],
+      "guarantees": [
+        "Explicit context/time, complete mapping declarations, active/inactive mappings and unknown evaluator refusal",
+        "Ordinary contradiction and exact scoped unexpired waivers; original graph bytes retained",
+        "Persisted outputs rechecked; relation-specific impact paths; rejected activation preserves accepted state"
+      ],
+      "nativeEvidence": [
+        "crates/patamaps-core/src/admission.rs",
+        "crates/patamaps-core/src/impact.rs",
+        "crates/patamaps-core/tests/kernel.rs",
+        "crates/patamaps-core/tests/native_constraints.rs",
+        "crates/patamaps-core/tests/waivers.rs",
+        "crates/patamaps-projection/tests/waivers.rs",
+        "crates/patamaps-activator/tests/memory.rs"
+      ]
+    }
+  ],
+  "nativeEvidenceInventory": [
+    {
+      "path": "crates/patamaps-activator/tests/memory.rs",
+      "digest": "sha256:062a8515ffc8b7cdeb7c1eb4a196a06145f8ddf4b3869a7dba0647f544d9ea94"
+    },
+    {
+      "path": "crates/patamaps-core/src/admission.rs",
+      "digest": "sha256:a6dc8000e818e8de3545b6e385a7fccfa4ae78da7ad6a6680aa33744c228d331"
+    },
+    {
+      "path": "crates/patamaps-core/src/impact.rs",
+      "digest": "sha256:869ca8996d5caaabda8b134eff2ce4d6569dddf24739dea390d5ab04715007a9"
+    },
+    {
+      "path": "crates/patamaps-core/src/laws.rs",
+      "digest": "sha256:d2e0e9110010a14b29deb1bc32cbaeeee4b5beb1dcb15ef414f02e84db9e6f15"
+    },
+    {
+      "path": "crates/patamaps-core/src/registry.rs",
+      "digest": "sha256:e5df387fdba1c9579913a857d0628d2909f315307b0db0f4492ec17996214ddf"
+    },
+    {
+      "path": "crates/patamaps-core/tests/derivation.rs",
+      "digest": "sha256:da3dd04c3fadf3924a023ec4fa0d6402d9d4ef151baa0b7d0f9ccdfe98c0ad29"
+    },
+    {
+      "path": "crates/patamaps-core/tests/kernel.rs",
+      "digest": "sha256:567f4fd5a11f3dbd33fec3ea69ae78c192ab9bc295bf690ad3079203dfb31ed0"
+    },
+    {
+      "path": "crates/patamaps-core/tests/legacy_pack.rs",
+      "digest": "sha256:978eb0807105dcb38b5fc30175b1835325db05d809647b67e3a63c8874b4e09c"
+    },
+    {
+      "path": "crates/patamaps-core/tests/native_constraints.rs",
+      "digest": "sha256:8e3ebea4e22d2bd2359c83356eba445be524245a1651926b948b4272972bd956"
+    },
+    {
+      "path": "crates/patamaps-core/tests/registry.rs",
+      "digest": "sha256:29751d381c02db16e3be005f58dcb111407330d480afc15e1a662e2862748985"
+    },
+    {
+      "path": "crates/patamaps-core/tests/waivers.rs",
+      "digest": "sha256:53a7f4c96517893ad885bff8e4e3f57c0b2b97af7a433a2a35aec4fabc63a2af"
+    },
+    {
+      "path": "crates/patamaps-projection/tests/waivers.rs",
+      "digest": "sha256:3c973bedc232de80804576f90fccff74680ca8fde30fd56a0b4596a9246a18eb"
+    }
+  ],
+  "resolvedFinding": {
+    "capability": "C03",
+    "problem": "Four reference-supported ordinary policy findings were absent from the native waiver allowlist.",
+    "decision": "docs/decisions/0019-native-ordinary-waivers.md",
+    "ordinaryCodes": [
+      "REQUIRED_EVIDENCE_MISSING",
+      "CONTRADICTING_EVIDENCE",
+      "REQUIRED_MAPPING_MISSING",
+      "FORBIDDEN_MAPPING_ACTIVE",
+      "NON_UNIQUE_MAPPING_TARGET",
+      "REQUIRED_AUTHORITY_UNRESOLVED",
+      "UNDECLARED_LOSSINESS",
+      "UNDECLARED_IMPACT_DIRECTION",
+      "UNVERIFIED_DETERMINISM",
+      "UNVERIFIED_REVERSIBILITY"
+    ],
+    "upstreamImplementationDigest": "sha256:e60fb571a3b6afc565d301de96171cb2f8ead51550c4d2073d061342681fe1e4",
+    "nativeScopeExpiryProjectionReplayReceipt": "docs/acceptance/capabilities/intel-waivers-after-2026-10-15T00-27-28.284487Z/receipt.json",
+    "originalRuntimeReceipt": "docs/acceptance/capabilities/intel-reference-waivers-2026-10-15T00-42-17.065963Z/receipt.json",
+    "originalRuntimeCases": 4,
+    "originalRuntimeOutcomesPerCase": [
+      "unwaived rejection",
+      "exact scoped waiver admitted with warning",
+      "wrong subject rejected",
+      "expiry boundary rejected"
+    ],
+    "comparisonLimit": "Original runtime uses its authority example; independent native tests use routing fixtures. No identical wire input claim."
+  },
+  "compilerMilestone": {
+    "path": "docs/acceptance/capabilities/compiler-2026-10-15T00-39-15.391993Z/receipt.json",
+    "digest": "sha256:49aee12bedb8715b4a842569686a04cfb364d4165baff43539dd5c44e59735d1",
+    "status": "passed"
+  },
+  "remaining": "Complete the other pinned suite assertion/implementation reviews and bind all capabilities to current installed/platform outcomes. No owner capability disposition or final acceptance is established.",
+  "deleted": []
+}

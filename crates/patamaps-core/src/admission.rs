@@ -943,6 +943,10 @@ fn admit_internal<'a>(
         "FORBIDDEN_MAPPING_ACTIVE",
         "NON_UNIQUE_MAPPING_TARGET",
         "REQUIRED_AUTHORITY_UNRESOLVED",
+        "UNDECLARED_LOSSINESS",
+        "UNDECLARED_IMPACT_DIRECTION",
+        "UNVERIFIED_DETERMINISM",
+        "UNVERIFIED_REVERSIBILITY",
     ];
     let mut waiver_ids = HashSet::new();
     let mut applied = BTreeSet::new();
