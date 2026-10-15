@@ -2,12 +2,14 @@
 
 mod capture;
 mod compare;
+mod http;
 mod path_tree;
 pub use capture::{
     CaptureInputs, CaptureRecord, CaptureVersion, SourceReceipt, VerifiedReplay, capture, evaluate,
     executor_id, replay,
 };
 pub use compare::{compare, compare_with_origins};
+pub use http::{emit_http_rust, emit_http_typescript};
 pub use path_tree::{
     CheckedPathTree, HydratedTree, PathNode, PathTreeRecord, compile_path_tree,
     emit_typescript_path_tree, hydrate,

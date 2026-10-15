@@ -1,0 +1,143 @@
+{
+  "profile": "patamaps-cross-stack-m2-independent-controls-1",
+  "author": "fixture-owner",
+  "derivedFromDiscovery": false,
+  "state": "frozen-before-final-M2-controls",
+  "http": [
+    {
+      "name": "health",
+      "method": "GET",
+      "path": "/health",
+      "body": null,
+      "expected": {
+        "status": 200,
+        "body": {
+          "status": "ok"
+        }
+      }
+    },
+    {
+      "name": "create",
+      "method": "POST",
+      "path": "/items",
+      "body": {
+        "name": "Widget"
+      },
+      "expected": {
+        "status": 201,
+        "body": {
+          "id": "item:widget",
+          "name": "Widget"
+        }
+      }
+    },
+    {
+      "name": "wrong-type",
+      "method": "POST",
+      "path": "/items",
+      "body": {
+        "name": 4
+      },
+      "expected": {
+        "status": 400,
+        "body": {
+          "error": "invalid-request"
+        }
+      }
+    },
+    {
+      "name": "unknown-field",
+      "method": "POST",
+      "path": "/items",
+      "body": {
+        "name": "ok",
+        "extra": true
+      },
+      "expected": {
+        "status": 400,
+        "body": {
+          "error": "invalid-request"
+        }
+      }
+    },
+    {
+      "name": "empty-name",
+      "method": "POST",
+      "path": "/items",
+      "body": {
+        "name": ""
+      },
+      "expected": {
+        "status": 400,
+        "body": {
+          "error": "invalid-request"
+        }
+      }
+    },
+    {
+      "name": "backend-failure",
+      "method": "POST",
+      "path": "/items",
+      "body": {
+        "name": "fail"
+      },
+      "expected": {
+        "status": 500,
+        "body": {
+          "error": "backend-failure"
+        }
+      }
+    },
+    {
+      "name": "wrong-method",
+      "method": "GET",
+      "path": "/items",
+      "body": null,
+      "expected": {
+        "status": 404,
+        "body": {
+          "error": "not-found"
+        }
+      }
+    }
+  ],
+  "runtimeRefusals": {
+    "wrong-http-path": {
+      "status": 404,
+      "body": {
+        "error": "not-found"
+      }
+    },
+    "changed-request-shape": {
+      "status": 400,
+      "body": {
+        "error": "invalid-request"
+      }
+    },
+    "changed-response-shape": {
+      "status": 500,
+      "body": {
+        "error": "invalid-response"
+      }
+    },
+    "removed-serde-field": {
+      "status": 500,
+      "body": {
+        "error": "invalid-response"
+      }
+    },
+    "renamed-request-wire-field": {
+      "status": 400,
+      "body": {
+        "error": "invalid-request"
+      }
+    },
+    "missing-router-registration": {
+      "status": 404,
+      "body": {
+        "error": "not-found"
+      }
+    }
+  },
+  "schemaValidationChange": "Generated boundary validation rejects an empty name as invalid-request before the handler. M0 direct handwritten routing returned invalid-name; the historical receipt remains unchanged."
+}

@@ -114,6 +114,7 @@ pub fn executor_id() -> &'static str {
                 include_str!("../../patamaps-core/Cargo.toml"),
             ),
             ("projectionManifest", include_str!("../Cargo.toml")),
+            ("httpBindings", include_str!("http.rs")),
             (
                 "contractsLib",
                 include_str!("../../patamaps-contracts/src/lib.rs"),

@@ -3,7 +3,7 @@
   "milestones": {
     "M0": "native-fixture-verified",
     "M1": "native-observation-scope-verified",
-    "M2": "not-implemented",
+    "M2": "generated-http-binding-scope-verified",
     "M3": "not-implemented",
     "M4": "not-implemented",
     "M5": "not-implemented",
@@ -32,7 +32,7 @@
     "next": "App Router; declared roots; file routes only",
     "rust": "One explicit library handler and binary; no macro/call-graph inference",
     "toml": "Pinned parser; tested TOML 1.0 values; explicit complete nonsecret input files, selected tagged lossless observations",
-    "http": "POST /api/items -> POST /items; one bounded JSON object request/response",
+    "http": "Literal unique POST frontend/backend endpoints; exact required string-object JSON Schema subset; generated registration/client with actual compile/wire controls",
     "docker": "Declared Linux target, final runtime stage, exact artifact/config links; image acceptance required"
   },
   "unsupported": [
@@ -49,6 +49,7 @@
   "acceptanceReceipt": "docs/acceptance/cross-stack/m0-fixture/receipt.json",
   "acceptanceReceipts": {
     "M0": "docs/acceptance/cross-stack/m0-fixture/receipt.json",
-    "M1": "docs/acceptance/cross-stack/m1-native-observations/receipt.json"
+    "M1": "docs/acceptance/cross-stack/m1-native-observations/receipt.json",
+    "M2": "docs/acceptance/cross-stack/m2-http-bindings/receipt.json"
   }
 }

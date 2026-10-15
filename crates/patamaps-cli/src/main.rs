@@ -16,8 +16,9 @@ use patamaps_governance::{
     create_approval_payload, create_proposal, verify_approval,
 };
 use patamaps_projection::{
-    CaptureInputs, CaptureRecord, SourceReceipt, capture, compile_path_tree, emit_rust,
-    emit_typescript, emit_typescript_path_tree, hydrate, project, replay,
+    CaptureInputs, CaptureRecord, SourceReceipt, capture, compile_path_tree, emit_http_rust,
+    emit_http_typescript, emit_rust, emit_typescript, emit_typescript_path_tree, hydrate, project,
+    replay,
 };
 use serde::{Serialize, de::DeserializeOwned};
 use std::{
@@ -64,6 +65,8 @@ enum Format {
     Json,
     Rust,
     Typescript,
+    HttpRust,
+    HttpTypescript,
 }
 #[derive(Clone, Copy, ValueEnum)]
 enum TreeFormat {
@@ -1916,6 +1919,10 @@ fn run(command: Command) -> Result<(), Failure> {
             let projection = project(&admitted, &spec)?;
             match format {
                 Format::Json => json(&output, projection.record()),
+                Format::HttpRust => write(&output, emit_http_rust(&projection)?.as_bytes()),
+                Format::HttpTypescript => {
+                    write(&output, emit_http_typescript(&projection)?.as_bytes())
+                }
                 Format::Rust => write(
                     &output,
                     emit_rust(&projection, binding_slot.as_deref())?.as_bytes(),

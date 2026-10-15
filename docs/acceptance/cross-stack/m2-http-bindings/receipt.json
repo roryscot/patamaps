@@ -1,0 +1,2921 @@
+{
+  "profile": "patamaps-cross-stack-m2-acceptance-1",
+  "status": "accepted-for-declared-http-binding-scope",
+  "recordedUtc": "2026-10-15T18:30:39.025765+00:00",
+  "parent": "91ce612c4edfd4a3e87c94a56bfad7137cc65efe",
+  "host": "Intel macOS x86_64",
+  "bindingMatrix": {
+    "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/receipt.json",
+    "digest": "sha256:370a990599c39dfc2e9f7201fb989f331c12cd64be6637a01e7215becc8ee03c",
+    "receipt": {
+      "status": "passed",
+      "phase": "bindings",
+      "profile": "patamaps-cross-stack-fixture-1",
+      "startedUtc": "2026-10-15T18:24:52.065129+00:00",
+      "commands": [
+        {
+          "label": "rust-version",
+          "argv": [
+            "rustc",
+            "-Vv"
+          ],
+          "cwd": ".",
+          "expectedSuccess": true,
+          "exitCode": 0,
+          "seconds": 0.074,
+          "stdout": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/rust-version.stdout.log",
+            "digest": "sha256:b1184c1aecf3182548f3bbdd91e5043e464821b1dcbf6d5ca8246339bd0be84a"
+          },
+          "stderr": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/rust-version.stderr.log",
+            "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        },
+        {
+          "label": "cargo-version",
+          "argv": [
+            "cargo",
+            "--version"
+          ],
+          "cwd": ".",
+          "expectedSuccess": true,
+          "exitCode": 0,
+          "seconds": 0.042,
+          "stdout": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/cargo-version.stdout.log",
+            "digest": "sha256:1f88eaf7fe1aaec83184752cf4c944cd22f00184136ff36a3e4c318cc60ef566"
+          },
+          "stderr": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/cargo-version.stderr.log",
+            "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        },
+        {
+          "label": "node-version",
+          "argv": [
+            "node",
+            "--version"
+          ],
+          "cwd": ".",
+          "expectedSuccess": true,
+          "exitCode": 0,
+          "seconds": 0.037,
+          "stdout": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/node-version.stdout.log",
+            "digest": "sha256:33e26f35db6e57ce0c486ddc815fe966867e4f649e418eaf323f75f4720eb8e9"
+          },
+          "stderr": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/node-version.stderr.log",
+            "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        },
+        {
+          "label": "m2-format",
+          "argv": [
+            "cargo",
+            "fmt",
+            "--all",
+            "--",
+            "--check"
+          ],
+          "cwd": ".",
+          "expectedSuccess": true,
+          "exitCode": 0,
+          "seconds": 1.024,
+          "stdout": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/m2-format.stdout.log",
+            "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "stderr": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/m2-format.stderr.log",
+            "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        },
+        {
+          "label": "m2-projection-tests",
+          "argv": [
+            "cargo",
+            "test",
+            "-p",
+            "patamaps-projection",
+            "--locked",
+            "--offline"
+          ],
+          "cwd": ".",
+          "expectedSuccess": true,
+          "exitCode": 0,
+          "seconds": 17.698,
+          "stdout": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/m2-projection-tests.stdout.log",
+            "digest": "sha256:81ef48211cbc7df9e6b15a8714e195d77dc55d1690b220d359895f085f8469b3"
+          },
+          "stderr": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/m2-projection-tests.stderr.log",
+            "digest": "sha256:2f2cd29bf5e22e73ade2b6ad726cdf7c0af4d93bfb515edb7a3f86fb9e297c2b"
+          }
+        },
+        {
+          "label": "m2-cli-build",
+          "argv": [
+            "cargo",
+            "build",
+            "-p",
+            "patamaps-cli",
+            "--locked",
+            "--offline"
+          ],
+          "cwd": ".",
+          "expectedSuccess": true,
+          "exitCode": 0,
+          "seconds": 14.446,
+          "stdout": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/m2-cli-build.stdout.log",
+            "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "stderr": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/m2-cli-build.stderr.log",
+            "digest": "sha256:c6709ec7b93302103adbb73d41593fab252af7339c76132b0527fd651a7669b5"
+          }
+        },
+        {
+          "label": "m2-engine",
+          "argv": [
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+            "engine"
+          ],
+          "cwd": ".",
+          "expectedSuccess": true,
+          "exitCode": 0,
+          "seconds": 1.002,
+          "stdout": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/m2-engine.stdout.log",
+            "digest": "sha256:7214955884b74fb77f5176ebc4bd5c444597c10695a5d1439a38ac399d041024"
+          },
+          "stderr": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/m2-engine.stderr.log",
+            "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        },
+        {
+          "label": "supported-http-projection",
+          "argv": [
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+            "link",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/supported/.patamaps/graph.json",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/supported/.patamaps/policy.json",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/supported/.patamaps/projection-spec.json",
+            "--relation-pack",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/supported/mappings/routing-pack.json",
+            "--as-of",
+            "2026-10-15T00:00:00Z",
+            "--context",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/supported/.patamaps/context.json"
+          ],
+          "cwd": ".tools/cross-stack/bindings-20261015T182452.064387Z/cases/supported",
+          "expectedSuccess": true,
+          "exitCode": 0,
+          "seconds": 0.025,
+          "stdout": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/supported-http-projection.stdout.log",
+            "digest": "sha256:aa45c80f9623ad6b53f84aa42ca6dc4864a5c42e00128600d637f988f73cac47"
+          },
+          "stderr": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/supported-http-projection.stderr.log",
+            "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        },
+        {
+          "label": "supported-http-rust",
+          "argv": [
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+            "link",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/supported/.patamaps/graph.json",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/supported/.patamaps/policy.json",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/supported/.patamaps/projection-spec.json",
+            "--relation-pack",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/supported/mappings/routing-pack.json",
+            "--as-of",
+            "2026-10-15T00:00:00Z",
+            "--context",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/supported/.patamaps/context.json",
+            "--format",
+            "http-rust"
+          ],
+          "cwd": ".tools/cross-stack/bindings-20261015T182452.064387Z/cases/supported",
+          "expectedSuccess": true,
+          "exitCode": 0,
+          "seconds": 0.027,
+          "stdout": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/supported-http-rust.stdout.log",
+            "digest": "sha256:35402ae64e5deeaf554446eab51360827dbbeea6b70da1cc0d72c7ae8d6409b5"
+          },
+          "stderr": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/supported-http-rust.stderr.log",
+            "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        },
+        {
+          "label": "supported-http-typescript",
+          "argv": [
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+            "link",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/supported/.patamaps/graph.json",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/supported/.patamaps/policy.json",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/supported/.patamaps/projection-spec.json",
+            "--relation-pack",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/supported/mappings/routing-pack.json",
+            "--as-of",
+            "2026-10-15T00:00:00Z",
+            "--context",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/supported/.patamaps/context.json",
+            "--format",
+            "http-typescript"
+          ],
+          "cwd": ".tools/cross-stack/bindings-20261015T182452.064387Z/cases/supported",
+          "expectedSuccess": true,
+          "exitCode": 0,
+          "seconds": 0.025,
+          "stdout": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/supported-http-typescript.stdout.log",
+            "digest": "sha256:c3121a2337620abb60e93f900ae5582f78e8224ccc9498e439cfdbdb9b911ac1"
+          },
+          "stderr": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/supported-http-typescript.stderr.log",
+            "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        },
+        {
+          "label": "supported-http-rust-format",
+          "argv": [
+            "rustfmt",
+            "--edition",
+            "2024",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/supported/service/src/generated.rs"
+          ],
+          "cwd": ".tools/cross-stack/bindings-20261015T182452.064387Z/cases/supported",
+          "expectedSuccess": true,
+          "exitCode": 0,
+          "seconds": 0.082,
+          "stdout": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/supported-http-rust-format.stdout.log",
+            "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "stderr": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/supported-http-rust-format.stderr.log",
+            "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        },
+        {
+          "label": "supported-cargo-build",
+          "argv": [
+            "cargo",
+            "build",
+            "--manifest-path",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/supported/service/Cargo.toml",
+            "--bin",
+            "catalog-service",
+            "--locked",
+            "--offline"
+          ],
+          "cwd": ".",
+          "expectedSuccess": true,
+          "exitCode": 0,
+          "seconds": 0.946,
+          "stdout": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/supported-cargo-build.stdout.log",
+            "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "stderr": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/supported-cargo-build.stderr.log",
+            "digest": "sha256:89fee2ac9e81d59f6486f12f6d5fce2ff642863098a072afc7a035d5ee776f41"
+          }
+        },
+        {
+          "label": "supported-cargo-tests",
+          "argv": [
+            "cargo",
+            "test",
+            "--manifest-path",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/supported/service/Cargo.toml",
+            "--locked",
+            "--offline"
+          ],
+          "cwd": ".",
+          "expectedSuccess": true,
+          "exitCode": 0,
+          "seconds": 0.94,
+          "stdout": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/supported-cargo-tests.stdout.log",
+            "digest": "sha256:a81fd38aef00723a0046e5294da2d330fc17a20f801a29b520a6ff49072367ec"
+          },
+          "stderr": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/supported-cargo-tests.stderr.log",
+            "digest": "sha256:8ab35c8d90b0d2fcb3ba974ca25b7cfc587375519f718c6a78e05756568b0de2"
+          }
+        },
+        {
+          "label": "supported-next-build",
+          "argv": [
+            "npm",
+            "run",
+            "build"
+          ],
+          "cwd": ".tools/cross-stack/bindings-20261015T182452.064387Z/cases/supported/web",
+          "expectedSuccess": true,
+          "exitCode": 0,
+          "seconds": 10.754,
+          "stdout": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/supported-next-build.stdout.log",
+            "digest": "sha256:a36e23289f18a6cbb0c6f0b294c1a5fba821cf34520cbb873c11013d28737919"
+          },
+          "stderr": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/supported-next-build.stderr.log",
+            "digest": "sha256:a330ab0faa9d9b0914b8e5821cf59627050321e2c54c7012f8bb28cc8d6bea1b"
+          }
+        },
+        {
+          "label": "supported-next-typecheck",
+          "argv": [
+            "npm",
+            "run",
+            "typecheck"
+          ],
+          "cwd": ".tools/cross-stack/bindings-20261015T182452.064387Z/cases/supported/web",
+          "expectedSuccess": true,
+          "exitCode": 0,
+          "seconds": 1.541,
+          "stdout": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/supported-next-typecheck.stdout.log",
+            "digest": "sha256:8c8bf418ac3dd64447a13f6c833f407cf93a2b4959cfc37f0b62edc29ef5928d"
+          },
+          "stderr": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/supported-next-typecheck.stderr.log",
+            "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        },
+        {
+          "label": "supported-client-compile",
+          "argv": [
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/examples/cross-stack/web/node_modules/.bin/tsc",
+            "--target",
+            "ES2022",
+            "--module",
+            "commonjs",
+            "--lib",
+            "ES2022,DOM",
+            "--strict",
+            "--skipLibCheck",
+            "--outDir",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/client-js",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/supported/web/generated/operations.ts"
+          ],
+          "cwd": ".",
+          "expectedSuccess": true,
+          "exitCode": 0,
+          "seconds": 0.532,
+          "stdout": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/supported-client-compile.stdout.log",
+            "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "stderr": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/supported-client-compile.stderr.log",
+            "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        },
+        {
+          "label": "supported-http-client",
+          "argv": [
+            "node",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/independent-client-check.cjs"
+          ],
+          "cwd": ".",
+          "expectedSuccess": true,
+          "exitCode": 0,
+          "seconds": 0.261,
+          "stdout": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/supported-http-client.stdout.log",
+            "digest": "sha256:faff7b33ca5aa53f9f5c94f4bedd8690cd62639badc5729597330c863141d8e9"
+          },
+          "stderr": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/supported-http-client.stderr.log",
+            "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        },
+        {
+          "label": "moved-handler-http-projection",
+          "argv": [
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+            "link",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/moved-handler/.patamaps/graph.json",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/moved-handler/.patamaps/policy.json",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/moved-handler/.patamaps/projection-spec.json",
+            "--relation-pack",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/moved-handler/mappings/routing-pack.json",
+            "--as-of",
+            "2026-10-15T00:00:00Z",
+            "--context",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/moved-handler/.patamaps/context.json"
+          ],
+          "cwd": ".tools/cross-stack/bindings-20261015T182452.064387Z/cases/moved-handler",
+          "expectedSuccess": true,
+          "exitCode": 0,
+          "seconds": 0.049,
+          "stdout": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/moved-handler-http-projection.stdout.log",
+            "digest": "sha256:e83cb788d94e20ee3f0cb26d2b3fcf8a7aabca24dfaea1e8848c85f1c0d8ab0d"
+          },
+          "stderr": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/moved-handler-http-projection.stderr.log",
+            "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        },
+        {
+          "label": "moved-handler-http-rust",
+          "argv": [
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+            "link",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/moved-handler/.patamaps/graph.json",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/moved-handler/.patamaps/policy.json",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/moved-handler/.patamaps/projection-spec.json",
+            "--relation-pack",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/moved-handler/mappings/routing-pack.json",
+            "--as-of",
+            "2026-10-15T00:00:00Z",
+            "--context",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/moved-handler/.patamaps/context.json",
+            "--format",
+            "http-rust"
+          ],
+          "cwd": ".tools/cross-stack/bindings-20261015T182452.064387Z/cases/moved-handler",
+          "expectedSuccess": true,
+          "exitCode": 0,
+          "seconds": 0.048,
+          "stdout": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/moved-handler-http-rust.stdout.log",
+            "digest": "sha256:6585a4231f9d01bb57419baa046752454a56496ced316ab7dcf0aaeb6a6c5302"
+          },
+          "stderr": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/moved-handler-http-rust.stderr.log",
+            "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        },
+        {
+          "label": "moved-handler-http-typescript",
+          "argv": [
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+            "link",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/moved-handler/.patamaps/graph.json",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/moved-handler/.patamaps/policy.json",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/moved-handler/.patamaps/projection-spec.json",
+            "--relation-pack",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/moved-handler/mappings/routing-pack.json",
+            "--as-of",
+            "2026-10-15T00:00:00Z",
+            "--context",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/moved-handler/.patamaps/context.json",
+            "--format",
+            "http-typescript"
+          ],
+          "cwd": ".tools/cross-stack/bindings-20261015T182452.064387Z/cases/moved-handler",
+          "expectedSuccess": true,
+          "exitCode": 0,
+          "seconds": 0.046,
+          "stdout": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/moved-handler-http-typescript.stdout.log",
+            "digest": "sha256:772b659d70b0e35d719861a51c54eca66b3e1d6f30d70feca90b0c7548594d3e"
+          },
+          "stderr": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/moved-handler-http-typescript.stderr.log",
+            "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        },
+        {
+          "label": "moved-handler-http-rust-format",
+          "argv": [
+            "rustfmt",
+            "--edition",
+            "2024",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/moved-handler/service/src/generated.rs"
+          ],
+          "cwd": ".tools/cross-stack/bindings-20261015T182452.064387Z/cases/moved-handler",
+          "expectedSuccess": true,
+          "exitCode": 0,
+          "seconds": 0.084,
+          "stdout": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/moved-handler-http-rust-format.stdout.log",
+            "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "stderr": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/moved-handler-http-rust-format.stderr.log",
+            "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        },
+        {
+          "label": "moved-handler-cargo-build",
+          "argv": [
+            "cargo",
+            "build",
+            "--manifest-path",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/moved-handler/service/Cargo.toml",
+            "--bin",
+            "catalog-service",
+            "--locked",
+            "--offline"
+          ],
+          "cwd": ".",
+          "expectedSuccess": true,
+          "exitCode": 0,
+          "seconds": 0.594,
+          "stdout": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/moved-handler-cargo-build.stdout.log",
+            "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "stderr": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/moved-handler-cargo-build.stderr.log",
+            "digest": "sha256:b4fe68fff19e2bbee26b7506910078b6051b8cadffaa403b99ce04bcc5a0d2eb"
+          }
+        },
+        {
+          "label": "missing-export-http-projection",
+          "argv": [
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+            "link",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/missing-export/.patamaps/graph.json",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/missing-export/.patamaps/policy.json",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/missing-export/.patamaps/projection-spec.json",
+            "--relation-pack",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/missing-export/mappings/routing-pack.json",
+            "--as-of",
+            "2026-10-15T00:00:00Z",
+            "--context",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/missing-export/.patamaps/context.json"
+          ],
+          "cwd": ".tools/cross-stack/bindings-20261015T182452.064387Z/cases/missing-export",
+          "expectedSuccess": true,
+          "exitCode": 0,
+          "seconds": 0.026,
+          "stdout": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/missing-export-http-projection.stdout.log",
+            "digest": "sha256:b1a1df96773decc7faab93aa7d062a1d3ebc89aa9e4ec64c98e3ca92d8fdf102"
+          },
+          "stderr": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/missing-export-http-projection.stderr.log",
+            "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        },
+        {
+          "label": "missing-export-http-rust",
+          "argv": [
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+            "link",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/missing-export/.patamaps/graph.json",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/missing-export/.patamaps/policy.json",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/missing-export/.patamaps/projection-spec.json",
+            "--relation-pack",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/missing-export/mappings/routing-pack.json",
+            "--as-of",
+            "2026-10-15T00:00:00Z",
+            "--context",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/missing-export/.patamaps/context.json",
+            "--format",
+            "http-rust"
+          ],
+          "cwd": ".tools/cross-stack/bindings-20261015T182452.064387Z/cases/missing-export",
+          "expectedSuccess": true,
+          "exitCode": 0,
+          "seconds": 0.027,
+          "stdout": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/missing-export-http-rust.stdout.log",
+            "digest": "sha256:9e9cdc0a684d406796d4ef21cee4b684adb65c3b67a6f9f6e79ce4fbab5e7e8d"
+          },
+          "stderr": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/missing-export-http-rust.stderr.log",
+            "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        },
+        {
+          "label": "missing-export-http-typescript",
+          "argv": [
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+            "link",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/missing-export/.patamaps/graph.json",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/missing-export/.patamaps/policy.json",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/missing-export/.patamaps/projection-spec.json",
+            "--relation-pack",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/missing-export/mappings/routing-pack.json",
+            "--as-of",
+            "2026-10-15T00:00:00Z",
+            "--context",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/missing-export/.patamaps/context.json",
+            "--format",
+            "http-typescript"
+          ],
+          "cwd": ".tools/cross-stack/bindings-20261015T182452.064387Z/cases/missing-export",
+          "expectedSuccess": true,
+          "exitCode": 0,
+          "seconds": 0.027,
+          "stdout": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/missing-export-http-typescript.stdout.log",
+            "digest": "sha256:f5be10b9513286eb12e660df95d842ddeec6ccfc8e964bec23aea2953e8777aa"
+          },
+          "stderr": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/missing-export-http-typescript.stderr.log",
+            "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        },
+        {
+          "label": "missing-export-http-rust-format",
+          "argv": [
+            "rustfmt",
+            "--edition",
+            "2024",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/missing-export/service/src/generated.rs"
+          ],
+          "cwd": ".tools/cross-stack/bindings-20261015T182452.064387Z/cases/missing-export",
+          "expectedSuccess": true,
+          "exitCode": 0,
+          "seconds": 0.079,
+          "stdout": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/missing-export-http-rust-format.stdout.log",
+            "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "stderr": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/missing-export-http-rust-format.stderr.log",
+            "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        },
+        {
+          "label": "missing-export-cargo-build",
+          "argv": [
+            "cargo",
+            "build",
+            "--manifest-path",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/missing-export/service/Cargo.toml",
+            "--bin",
+            "catalog-service",
+            "--locked",
+            "--offline"
+          ],
+          "cwd": ".",
+          "expectedSuccess": false,
+          "exitCode": 101,
+          "seconds": 0.314,
+          "stdout": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/missing-export-cargo-build.stdout.log",
+            "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "stderr": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/missing-export-cargo-build.stderr.log",
+            "digest": "sha256:058844a9106a3bf7f0ba60207085acd3fbb7c13b929b7f9ebfbdff48a01023b5"
+          }
+        },
+        {
+          "label": "wrong-signature-http-projection",
+          "argv": [
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+            "link",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/wrong-signature/.patamaps/graph.json",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/wrong-signature/.patamaps/policy.json",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/wrong-signature/.patamaps/projection-spec.json",
+            "--relation-pack",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/wrong-signature/mappings/routing-pack.json",
+            "--as-of",
+            "2026-10-15T00:00:00Z",
+            "--context",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/wrong-signature/.patamaps/context.json"
+          ],
+          "cwd": ".tools/cross-stack/bindings-20261015T182452.064387Z/cases/wrong-signature",
+          "expectedSuccess": true,
+          "exitCode": 0,
+          "seconds": 0.049,
+          "stdout": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/wrong-signature-http-projection.stdout.log",
+            "digest": "sha256:6b75addd9dbb9c003381f2660b319a3a5a487a4fc5834ef8a101ec6581f0ae7a"
+          },
+          "stderr": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/wrong-signature-http-projection.stderr.log",
+            "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        },
+        {
+          "label": "wrong-signature-http-rust",
+          "argv": [
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+            "link",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/wrong-signature/.patamaps/graph.json",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/wrong-signature/.patamaps/policy.json",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/wrong-signature/.patamaps/projection-spec.json",
+            "--relation-pack",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/wrong-signature/mappings/routing-pack.json",
+            "--as-of",
+            "2026-10-15T00:00:00Z",
+            "--context",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/wrong-signature/.patamaps/context.json",
+            "--format",
+            "http-rust"
+          ],
+          "cwd": ".tools/cross-stack/bindings-20261015T182452.064387Z/cases/wrong-signature",
+          "expectedSuccess": true,
+          "exitCode": 0,
+          "seconds": 0.045,
+          "stdout": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/wrong-signature-http-rust.stdout.log",
+            "digest": "sha256:574f77e84c4d142918f06e60dd6b70d34e72f7ab0794218f56de8030dcb75312"
+          },
+          "stderr": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/wrong-signature-http-rust.stderr.log",
+            "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        },
+        {
+          "label": "wrong-signature-http-typescript",
+          "argv": [
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+            "link",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/wrong-signature/.patamaps/graph.json",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/wrong-signature/.patamaps/policy.json",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/wrong-signature/.patamaps/projection-spec.json",
+            "--relation-pack",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/wrong-signature/mappings/routing-pack.json",
+            "--as-of",
+            "2026-10-15T00:00:00Z",
+            "--context",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/wrong-signature/.patamaps/context.json",
+            "--format",
+            "http-typescript"
+          ],
+          "cwd": ".tools/cross-stack/bindings-20261015T182452.064387Z/cases/wrong-signature",
+          "expectedSuccess": true,
+          "exitCode": 0,
+          "seconds": 0.029,
+          "stdout": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/wrong-signature-http-typescript.stdout.log",
+            "digest": "sha256:6c93f1155ecac605331e90f1eef5c6ac58eeba34da2a86079161c3b4d8db5729"
+          },
+          "stderr": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/wrong-signature-http-typescript.stderr.log",
+            "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        },
+        {
+          "label": "wrong-signature-http-rust-format",
+          "argv": [
+            "rustfmt",
+            "--edition",
+            "2024",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/wrong-signature/service/src/generated.rs"
+          ],
+          "cwd": ".tools/cross-stack/bindings-20261015T182452.064387Z/cases/wrong-signature",
+          "expectedSuccess": true,
+          "exitCode": 0,
+          "seconds": 0.084,
+          "stdout": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/wrong-signature-http-rust-format.stdout.log",
+            "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "stderr": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/wrong-signature-http-rust-format.stderr.log",
+            "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        },
+        {
+          "label": "wrong-signature-cargo-build",
+          "argv": [
+            "cargo",
+            "build",
+            "--manifest-path",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/wrong-signature/service/Cargo.toml",
+            "--bin",
+            "catalog-service",
+            "--locked",
+            "--offline"
+          ],
+          "cwd": ".",
+          "expectedSuccess": false,
+          "exitCode": 101,
+          "seconds": 0.313,
+          "stdout": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/wrong-signature-cargo-build.stdout.log",
+            "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "stderr": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/wrong-signature-cargo-build.stderr.log",
+            "digest": "sha256:d4086f08f99608f65c191f8615b9585dcd7603608b96996e158e66ab50aa6133"
+          }
+        },
+        {
+          "label": "disabled-handler-http-projection",
+          "argv": [
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+            "link",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/disabled-handler/.patamaps/graph.json",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/disabled-handler/.patamaps/policy.json",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/disabled-handler/.patamaps/projection-spec.json",
+            "--relation-pack",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/disabled-handler/mappings/routing-pack.json",
+            "--as-of",
+            "2026-10-15T00:00:00Z",
+            "--context",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/disabled-handler/.patamaps/context.json"
+          ],
+          "cwd": ".tools/cross-stack/bindings-20261015T182452.064387Z/cases/disabled-handler",
+          "expectedSuccess": true,
+          "exitCode": 0,
+          "seconds": 0.048,
+          "stdout": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/disabled-handler-http-projection.stdout.log",
+            "digest": "sha256:1ebd5892b8448bc330ab713b0165d34779b12ef96ea3161983c02482dcde2286"
+          },
+          "stderr": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/disabled-handler-http-projection.stderr.log",
+            "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        },
+        {
+          "label": "disabled-handler-http-rust",
+          "argv": [
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+            "link",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/disabled-handler/.patamaps/graph.json",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/disabled-handler/.patamaps/policy.json",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/disabled-handler/.patamaps/projection-spec.json",
+            "--relation-pack",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/disabled-handler/mappings/routing-pack.json",
+            "--as-of",
+            "2026-10-15T00:00:00Z",
+            "--context",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/disabled-handler/.patamaps/context.json",
+            "--format",
+            "http-rust"
+          ],
+          "cwd": ".tools/cross-stack/bindings-20261015T182452.064387Z/cases/disabled-handler",
+          "expectedSuccess": true,
+          "exitCode": 0,
+          "seconds": 0.045,
+          "stdout": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/disabled-handler-http-rust.stdout.log",
+            "digest": "sha256:28493fa4c0e8664d1554266602a56059687d1fb46290f2fb9e3a4eebd18b962b"
+          },
+          "stderr": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/disabled-handler-http-rust.stderr.log",
+            "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        },
+        {
+          "label": "disabled-handler-http-typescript",
+          "argv": [
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+            "link",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/disabled-handler/.patamaps/graph.json",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/disabled-handler/.patamaps/policy.json",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/disabled-handler/.patamaps/projection-spec.json",
+            "--relation-pack",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/disabled-handler/mappings/routing-pack.json",
+            "--as-of",
+            "2026-10-15T00:00:00Z",
+            "--context",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/disabled-handler/.patamaps/context.json",
+            "--format",
+            "http-typescript"
+          ],
+          "cwd": ".tools/cross-stack/bindings-20261015T182452.064387Z/cases/disabled-handler",
+          "expectedSuccess": true,
+          "exitCode": 0,
+          "seconds": 0.044,
+          "stdout": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/disabled-handler-http-typescript.stdout.log",
+            "digest": "sha256:5275dff7b7bed78b66f2fe84fea99450b3649b9b27e3008786fa34a9aea72ad4"
+          },
+          "stderr": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/disabled-handler-http-typescript.stderr.log",
+            "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        },
+        {
+          "label": "disabled-handler-http-rust-format",
+          "argv": [
+            "rustfmt",
+            "--edition",
+            "2024",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/disabled-handler/service/src/generated.rs"
+          ],
+          "cwd": ".tools/cross-stack/bindings-20261015T182452.064387Z/cases/disabled-handler",
+          "expectedSuccess": true,
+          "exitCode": 0,
+          "seconds": 0.09,
+          "stdout": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/disabled-handler-http-rust-format.stdout.log",
+            "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "stderr": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/disabled-handler-http-rust-format.stderr.log",
+            "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        },
+        {
+          "label": "disabled-handler-cargo-build",
+          "argv": [
+            "cargo",
+            "build",
+            "--manifest-path",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/disabled-handler/service/Cargo.toml",
+            "--bin",
+            "catalog-service",
+            "--locked",
+            "--offline"
+          ],
+          "cwd": ".",
+          "expectedSuccess": false,
+          "exitCode": 101,
+          "seconds": 0.201,
+          "stdout": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/disabled-handler-cargo-build.stdout.log",
+            "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "stderr": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/disabled-handler-cargo-build.stderr.log",
+            "digest": "sha256:989e7bfb7788aa2ffb1bd6cad8261e3438d27cc55f14ba4463d435f1c707bf15"
+          }
+        },
+        {
+          "label": "enabled-handler-cargo-build",
+          "argv": [
+            "cargo",
+            "build",
+            "--manifest-path",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/disabled-handler/service/Cargo.toml",
+            "--bin",
+            "catalog-service",
+            "--locked",
+            "--offline",
+            "--features",
+            "handler-enabled"
+          ],
+          "cwd": ".",
+          "expectedSuccess": true,
+          "exitCode": 0,
+          "seconds": 0.594,
+          "stdout": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/enabled-handler-cargo-build.stdout.log",
+            "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "stderr": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/enabled-handler-cargo-build.stderr.log",
+            "digest": "sha256:6f62e866d810d1b16caa95c91a607111e1cff2ef057a86d2b9d95115d18fbc08"
+          }
+        },
+        {
+          "label": "colliding-endpoint-http-projection",
+          "argv": [
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+            "link",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/colliding-endpoint/.patamaps/graph.json",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/colliding-endpoint/.patamaps/policy.json",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/colliding-endpoint/.patamaps/projection-spec.json",
+            "--relation-pack",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/colliding-endpoint/mappings/routing-pack.json",
+            "--as-of",
+            "2026-10-15T00:00:00Z",
+            "--context",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/colliding-endpoint/.patamaps/context.json"
+          ],
+          "cwd": ".tools/cross-stack/bindings-20261015T182452.064387Z/cases/colliding-endpoint",
+          "expectedSuccess": true,
+          "exitCode": 0,
+          "seconds": 0.048,
+          "stdout": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/colliding-endpoint-http-projection.stdout.log",
+            "digest": "sha256:425d8122d641844e3fced94ca2e0d862db1bc2f9503882b2bd82f309e8e25b4f"
+          },
+          "stderr": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/colliding-endpoint-http-projection.stderr.log",
+            "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        },
+        {
+          "label": "colliding-endpoint-http-rust",
+          "argv": [
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+            "link",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/colliding-endpoint/.patamaps/graph.json",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/colliding-endpoint/.patamaps/policy.json",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/colliding-endpoint/.patamaps/projection-spec.json",
+            "--relation-pack",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/colliding-endpoint/mappings/routing-pack.json",
+            "--as-of",
+            "2026-10-15T00:00:00Z",
+            "--context",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/colliding-endpoint/.patamaps/context.json",
+            "--format",
+            "http-rust"
+          ],
+          "cwd": ".tools/cross-stack/bindings-20261015T182452.064387Z/cases/colliding-endpoint",
+          "expectedSuccess": false,
+          "exitCode": 1,
+          "seconds": 0.049,
+          "stdout": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/colliding-endpoint-http-rust.stdout.log",
+            "digest": "sha256:4297cc8a1278c506ee281545120e7a00683d11917f4e45a8b9b317a2450520bd"
+          },
+          "stderr": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/colliding-endpoint-http-rust.stderr.log",
+            "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        },
+        {
+          "label": "unsupported-schema-pattern-http-projection",
+          "argv": [
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+            "link",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/unsupported-schema-pattern/.patamaps/graph.json",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/unsupported-schema-pattern/.patamaps/policy.json",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/unsupported-schema-pattern/.patamaps/projection-spec.json",
+            "--relation-pack",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/unsupported-schema-pattern/mappings/routing-pack.json",
+            "--as-of",
+            "2026-10-15T00:00:00Z",
+            "--context",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/unsupported-schema-pattern/.patamaps/context.json"
+          ],
+          "cwd": ".tools/cross-stack/bindings-20261015T182452.064387Z/cases/unsupported-schema-pattern",
+          "expectedSuccess": true,
+          "exitCode": 0,
+          "seconds": 0.029,
+          "stdout": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/unsupported-schema-pattern-http-projection.stdout.log",
+            "digest": "sha256:a91b8b902055a357043c328e0726612dee3f39378831d8427f870ef96c341959"
+          },
+          "stderr": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/unsupported-schema-pattern-http-projection.stderr.log",
+            "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        },
+        {
+          "label": "unsupported-schema-pattern-http-rust",
+          "argv": [
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+            "link",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/unsupported-schema-pattern/.patamaps/graph.json",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/unsupported-schema-pattern/.patamaps/policy.json",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/unsupported-schema-pattern/.patamaps/projection-spec.json",
+            "--relation-pack",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/unsupported-schema-pattern/mappings/routing-pack.json",
+            "--as-of",
+            "2026-10-15T00:00:00Z",
+            "--context",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/unsupported-schema-pattern/.patamaps/context.json",
+            "--format",
+            "http-rust"
+          ],
+          "cwd": ".tools/cross-stack/bindings-20261015T182452.064387Z/cases/unsupported-schema-pattern",
+          "expectedSuccess": false,
+          "exitCode": 1,
+          "seconds": 0.047,
+          "stdout": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/unsupported-schema-pattern-http-rust.stdout.log",
+            "digest": "sha256:89984846e657bb234cb41507594a2197b9ccd8195a82a0b74ff06a35b7c88a9c"
+          },
+          "stderr": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/unsupported-schema-pattern-http-rust.stderr.log",
+            "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        },
+        {
+          "label": "unsupported-method-http-projection",
+          "argv": [
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+            "link",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/unsupported-method/.patamaps/graph.json",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/unsupported-method/.patamaps/policy.json",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/unsupported-method/.patamaps/projection-spec.json",
+            "--relation-pack",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/unsupported-method/mappings/routing-pack.json",
+            "--as-of",
+            "2026-10-15T00:00:00Z",
+            "--context",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/unsupported-method/.patamaps/context.json"
+          ],
+          "cwd": ".tools/cross-stack/bindings-20261015T182452.064387Z/cases/unsupported-method",
+          "expectedSuccess": true,
+          "exitCode": 0,
+          "seconds": 0.028,
+          "stdout": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/unsupported-method-http-projection.stdout.log",
+            "digest": "sha256:0f9052b7970c93f72a5c530a8d6733365ee64f0662ed11acf0bebc68df5727ea"
+          },
+          "stderr": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/unsupported-method-http-projection.stderr.log",
+            "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        },
+        {
+          "label": "unsupported-method-http-rust",
+          "argv": [
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+            "link",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/unsupported-method/.patamaps/graph.json",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/unsupported-method/.patamaps/policy.json",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/unsupported-method/.patamaps/projection-spec.json",
+            "--relation-pack",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/unsupported-method/mappings/routing-pack.json",
+            "--as-of",
+            "2026-10-15T00:00:00Z",
+            "--context",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/unsupported-method/.patamaps/context.json",
+            "--format",
+            "http-rust"
+          ],
+          "cwd": ".tools/cross-stack/bindings-20261015T182452.064387Z/cases/unsupported-method",
+          "expectedSuccess": false,
+          "exitCode": 1,
+          "seconds": 0.029,
+          "stdout": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/unsupported-method-http-rust.stdout.log",
+            "digest": "sha256:4297cc8a1278c506ee281545120e7a00683d11917f4e45a8b9b317a2450520bd"
+          },
+          "stderr": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/unsupported-method-http-rust.stderr.log",
+            "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        },
+        {
+          "label": "wrong-http-path-http-projection",
+          "argv": [
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+            "link",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/wrong-http-path/.patamaps/graph.json",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/wrong-http-path/.patamaps/policy.json",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/wrong-http-path/.patamaps/projection-spec.json",
+            "--relation-pack",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/wrong-http-path/mappings/routing-pack.json",
+            "--as-of",
+            "2026-10-15T00:00:00Z",
+            "--context",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/wrong-http-path/.patamaps/context.json"
+          ],
+          "cwd": ".tools/cross-stack/bindings-20261015T182452.064387Z/cases/wrong-http-path",
+          "expectedSuccess": true,
+          "exitCode": 0,
+          "seconds": 0.024,
+          "stdout": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/wrong-http-path-http-projection.stdout.log",
+            "digest": "sha256:ad6dbf45d25395e2725b7ee764b87a7eceb027db8a8bd84ee69a2cce83f01a51"
+          },
+          "stderr": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/wrong-http-path-http-projection.stderr.log",
+            "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        },
+        {
+          "label": "wrong-http-path-http-rust",
+          "argv": [
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+            "link",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/wrong-http-path/.patamaps/graph.json",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/wrong-http-path/.patamaps/policy.json",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/wrong-http-path/.patamaps/projection-spec.json",
+            "--relation-pack",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/wrong-http-path/mappings/routing-pack.json",
+            "--as-of",
+            "2026-10-15T00:00:00Z",
+            "--context",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/wrong-http-path/.patamaps/context.json",
+            "--format",
+            "http-rust"
+          ],
+          "cwd": ".tools/cross-stack/bindings-20261015T182452.064387Z/cases/wrong-http-path",
+          "expectedSuccess": true,
+          "exitCode": 0,
+          "seconds": 0.027,
+          "stdout": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/wrong-http-path-http-rust.stdout.log",
+            "digest": "sha256:bed5d1a2e99df0657383bd1552a352ad4430140a437025dc1b1bd326e1c6ed0b"
+          },
+          "stderr": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/wrong-http-path-http-rust.stderr.log",
+            "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        },
+        {
+          "label": "wrong-http-path-http-typescript",
+          "argv": [
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+            "link",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/wrong-http-path/.patamaps/graph.json",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/wrong-http-path/.patamaps/policy.json",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/wrong-http-path/.patamaps/projection-spec.json",
+            "--relation-pack",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/wrong-http-path/mappings/routing-pack.json",
+            "--as-of",
+            "2026-10-15T00:00:00Z",
+            "--context",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/wrong-http-path/.patamaps/context.json",
+            "--format",
+            "http-typescript"
+          ],
+          "cwd": ".tools/cross-stack/bindings-20261015T182452.064387Z/cases/wrong-http-path",
+          "expectedSuccess": true,
+          "exitCode": 0,
+          "seconds": 0.026,
+          "stdout": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/wrong-http-path-http-typescript.stdout.log",
+            "digest": "sha256:06be874ca697a961bd8ac9454ba4f37d777e9fa13afc24cca4a6a79d3cdf88d4"
+          },
+          "stderr": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/wrong-http-path-http-typescript.stderr.log",
+            "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        },
+        {
+          "label": "wrong-http-path-http-rust-format",
+          "argv": [
+            "rustfmt",
+            "--edition",
+            "2024",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/wrong-http-path/service/src/generated.rs"
+          ],
+          "cwd": ".tools/cross-stack/bindings-20261015T182452.064387Z/cases/wrong-http-path",
+          "expectedSuccess": true,
+          "exitCode": 0,
+          "seconds": 0.087,
+          "stdout": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/wrong-http-path-http-rust-format.stdout.log",
+            "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "stderr": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/wrong-http-path-http-rust-format.stderr.log",
+            "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        },
+        {
+          "label": "wrong-http-path-cargo-build",
+          "argv": [
+            "cargo",
+            "build",
+            "--manifest-path",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/wrong-http-path/service/Cargo.toml",
+            "--bin",
+            "catalog-service",
+            "--locked",
+            "--offline"
+          ],
+          "cwd": ".",
+          "expectedSuccess": true,
+          "exitCode": 0,
+          "seconds": 0.601,
+          "stdout": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/wrong-http-path-cargo-build.stdout.log",
+            "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "stderr": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/wrong-http-path-cargo-build.stderr.log",
+            "digest": "sha256:50e0cfd76e896ba0c81f6906a43b4b47423c1a575f005b65e244ed505dfcde56"
+          }
+        },
+        {
+          "label": "changed-request-shape-http-projection",
+          "argv": [
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+            "link",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/changed-request-shape/.patamaps/graph.json",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/changed-request-shape/.patamaps/policy.json",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/changed-request-shape/.patamaps/projection-spec.json",
+            "--relation-pack",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/changed-request-shape/mappings/routing-pack.json",
+            "--as-of",
+            "2026-10-15T00:00:00Z",
+            "--context",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/changed-request-shape/.patamaps/context.json"
+          ],
+          "cwd": ".tools/cross-stack/bindings-20261015T182452.064387Z/cases/changed-request-shape",
+          "expectedSuccess": true,
+          "exitCode": 0,
+          "seconds": 0.049,
+          "stdout": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/changed-request-shape-http-projection.stdout.log",
+            "digest": "sha256:2f5fec4f43bdf3fe2c247f243d70af87bdffac8c3d6b752823daecb14abb9cdb"
+          },
+          "stderr": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/changed-request-shape-http-projection.stderr.log",
+            "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        },
+        {
+          "label": "changed-request-shape-http-rust",
+          "argv": [
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+            "link",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/changed-request-shape/.patamaps/graph.json",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/changed-request-shape/.patamaps/policy.json",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/changed-request-shape/.patamaps/projection-spec.json",
+            "--relation-pack",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/changed-request-shape/mappings/routing-pack.json",
+            "--as-of",
+            "2026-10-15T00:00:00Z",
+            "--context",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/changed-request-shape/.patamaps/context.json",
+            "--format",
+            "http-rust"
+          ],
+          "cwd": ".tools/cross-stack/bindings-20261015T182452.064387Z/cases/changed-request-shape",
+          "expectedSuccess": true,
+          "exitCode": 0,
+          "seconds": 0.044,
+          "stdout": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/changed-request-shape-http-rust.stdout.log",
+            "digest": "sha256:2b7bfdfdc80eca4c41e921f7147e7138fef35783a791376ca5729390508fe376"
+          },
+          "stderr": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/changed-request-shape-http-rust.stderr.log",
+            "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        },
+        {
+          "label": "changed-request-shape-http-typescript",
+          "argv": [
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+            "link",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/changed-request-shape/.patamaps/graph.json",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/changed-request-shape/.patamaps/policy.json",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/changed-request-shape/.patamaps/projection-spec.json",
+            "--relation-pack",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/changed-request-shape/mappings/routing-pack.json",
+            "--as-of",
+            "2026-10-15T00:00:00Z",
+            "--context",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/changed-request-shape/.patamaps/context.json",
+            "--format",
+            "http-typescript"
+          ],
+          "cwd": ".tools/cross-stack/bindings-20261015T182452.064387Z/cases/changed-request-shape",
+          "expectedSuccess": true,
+          "exitCode": 0,
+          "seconds": 0.047,
+          "stdout": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/changed-request-shape-http-typescript.stdout.log",
+            "digest": "sha256:485ff64fcd9f5dace3e501dfe07f0881d91d8faae41eaacdd15a89f8dbbefb0c"
+          },
+          "stderr": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/changed-request-shape-http-typescript.stderr.log",
+            "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        },
+        {
+          "label": "changed-request-shape-http-rust-format",
+          "argv": [
+            "rustfmt",
+            "--edition",
+            "2024",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/changed-request-shape/service/src/generated.rs"
+          ],
+          "cwd": ".tools/cross-stack/bindings-20261015T182452.064387Z/cases/changed-request-shape",
+          "expectedSuccess": true,
+          "exitCode": 0,
+          "seconds": 0.088,
+          "stdout": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/changed-request-shape-http-rust-format.stdout.log",
+            "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "stderr": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/changed-request-shape-http-rust-format.stderr.log",
+            "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        },
+        {
+          "label": "changed-request-shape-cargo-build",
+          "argv": [
+            "cargo",
+            "build",
+            "--manifest-path",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/changed-request-shape/service/Cargo.toml",
+            "--bin",
+            "catalog-service",
+            "--locked",
+            "--offline"
+          ],
+          "cwd": ".",
+          "expectedSuccess": true,
+          "exitCode": 0,
+          "seconds": 0.605,
+          "stdout": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/changed-request-shape-cargo-build.stdout.log",
+            "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "stderr": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/changed-request-shape-cargo-build.stderr.log",
+            "digest": "sha256:beb902bd8234a8e181ba753ba73462d63ba7e3b73ea4ff8189b84c962b3b92d0"
+          }
+        },
+        {
+          "label": "changed-response-shape-http-projection",
+          "argv": [
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+            "link",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/changed-response-shape/.patamaps/graph.json",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/changed-response-shape/.patamaps/policy.json",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/changed-response-shape/.patamaps/projection-spec.json",
+            "--relation-pack",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/changed-response-shape/mappings/routing-pack.json",
+            "--as-of",
+            "2026-10-15T00:00:00Z",
+            "--context",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/changed-response-shape/.patamaps/context.json"
+          ],
+          "cwd": ".tools/cross-stack/bindings-20261015T182452.064387Z/cases/changed-response-shape",
+          "expectedSuccess": true,
+          "exitCode": 0,
+          "seconds": 0.027,
+          "stdout": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/changed-response-shape-http-projection.stdout.log",
+            "digest": "sha256:e341e6502a4ed46af7197997a1010cbf22b92e0f1c2373d7f0a549ac2a9fe21a"
+          },
+          "stderr": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/changed-response-shape-http-projection.stderr.log",
+            "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        },
+        {
+          "label": "changed-response-shape-http-rust",
+          "argv": [
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+            "link",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/changed-response-shape/.patamaps/graph.json",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/changed-response-shape/.patamaps/policy.json",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/changed-response-shape/.patamaps/projection-spec.json",
+            "--relation-pack",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/changed-response-shape/mappings/routing-pack.json",
+            "--as-of",
+            "2026-10-15T00:00:00Z",
+            "--context",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/changed-response-shape/.patamaps/context.json",
+            "--format",
+            "http-rust"
+          ],
+          "cwd": ".tools/cross-stack/bindings-20261015T182452.064387Z/cases/changed-response-shape",
+          "expectedSuccess": true,
+          "exitCode": 0,
+          "seconds": 0.049,
+          "stdout": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/changed-response-shape-http-rust.stdout.log",
+            "digest": "sha256:22e2105713e1313ff8ad243b7f8496fa1437422cf7217f2a6af30a7fa86aab09"
+          },
+          "stderr": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/changed-response-shape-http-rust.stderr.log",
+            "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        },
+        {
+          "label": "changed-response-shape-http-typescript",
+          "argv": [
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+            "link",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/changed-response-shape/.patamaps/graph.json",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/changed-response-shape/.patamaps/policy.json",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/changed-response-shape/.patamaps/projection-spec.json",
+            "--relation-pack",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/changed-response-shape/mappings/routing-pack.json",
+            "--as-of",
+            "2026-10-15T00:00:00Z",
+            "--context",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/changed-response-shape/.patamaps/context.json",
+            "--format",
+            "http-typescript"
+          ],
+          "cwd": ".tools/cross-stack/bindings-20261015T182452.064387Z/cases/changed-response-shape",
+          "expectedSuccess": true,
+          "exitCode": 0,
+          "seconds": 0.043,
+          "stdout": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/changed-response-shape-http-typescript.stdout.log",
+            "digest": "sha256:4b56140492adbe3735eb85bb55b129cb75e33e7b944fb7685865edaf4c4789bc"
+          },
+          "stderr": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/changed-response-shape-http-typescript.stderr.log",
+            "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        },
+        {
+          "label": "changed-response-shape-http-rust-format",
+          "argv": [
+            "rustfmt",
+            "--edition",
+            "2024",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/changed-response-shape/service/src/generated.rs"
+          ],
+          "cwd": ".tools/cross-stack/bindings-20261015T182452.064387Z/cases/changed-response-shape",
+          "expectedSuccess": true,
+          "exitCode": 0,
+          "seconds": 0.088,
+          "stdout": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/changed-response-shape-http-rust-format.stdout.log",
+            "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "stderr": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/changed-response-shape-http-rust-format.stderr.log",
+            "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        },
+        {
+          "label": "changed-response-shape-cargo-build",
+          "argv": [
+            "cargo",
+            "build",
+            "--manifest-path",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/changed-response-shape/service/Cargo.toml",
+            "--bin",
+            "catalog-service",
+            "--locked",
+            "--offline"
+          ],
+          "cwd": ".",
+          "expectedSuccess": true,
+          "exitCode": 0,
+          "seconds": 0.602,
+          "stdout": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/changed-response-shape-cargo-build.stdout.log",
+            "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "stderr": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/changed-response-shape-cargo-build.stderr.log",
+            "digest": "sha256:11888df7a2e5baf3f4bb1ddf586416f61afff3d6d52dc89c130b3bfa4d654ec4"
+          }
+        },
+        {
+          "label": "removed-serde-field-http-projection",
+          "argv": [
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+            "link",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/removed-serde-field/.patamaps/graph.json",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/removed-serde-field/.patamaps/policy.json",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/removed-serde-field/.patamaps/projection-spec.json",
+            "--relation-pack",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/removed-serde-field/mappings/routing-pack.json",
+            "--as-of",
+            "2026-10-15T00:00:00Z",
+            "--context",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/removed-serde-field/.patamaps/context.json"
+          ],
+          "cwd": ".tools/cross-stack/bindings-20261015T182452.064387Z/cases/removed-serde-field",
+          "expectedSuccess": true,
+          "exitCode": 0,
+          "seconds": 0.026,
+          "stdout": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/removed-serde-field-http-projection.stdout.log",
+            "digest": "sha256:8361f259492edeae3bb59510a24f33f79a59075301a3e8634ea7aca95660a9ad"
+          },
+          "stderr": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/removed-serde-field-http-projection.stderr.log",
+            "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        },
+        {
+          "label": "removed-serde-field-http-rust",
+          "argv": [
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+            "link",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/removed-serde-field/.patamaps/graph.json",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/removed-serde-field/.patamaps/policy.json",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/removed-serde-field/.patamaps/projection-spec.json",
+            "--relation-pack",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/removed-serde-field/mappings/routing-pack.json",
+            "--as-of",
+            "2026-10-15T00:00:00Z",
+            "--context",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/removed-serde-field/.patamaps/context.json",
+            "--format",
+            "http-rust"
+          ],
+          "cwd": ".tools/cross-stack/bindings-20261015T182452.064387Z/cases/removed-serde-field",
+          "expectedSuccess": true,
+          "exitCode": 0,
+          "seconds": 0.04,
+          "stdout": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/removed-serde-field-http-rust.stdout.log",
+            "digest": "sha256:58ccfafcf585921f2f496a5561c04b30573ec2075b940fdede122c8a4f18cc23"
+          },
+          "stderr": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/removed-serde-field-http-rust.stderr.log",
+            "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        },
+        {
+          "label": "removed-serde-field-http-typescript",
+          "argv": [
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+            "link",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/removed-serde-field/.patamaps/graph.json",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/removed-serde-field/.patamaps/policy.json",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/removed-serde-field/.patamaps/projection-spec.json",
+            "--relation-pack",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/removed-serde-field/mappings/routing-pack.json",
+            "--as-of",
+            "2026-10-15T00:00:00Z",
+            "--context",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/removed-serde-field/.patamaps/context.json",
+            "--format",
+            "http-typescript"
+          ],
+          "cwd": ".tools/cross-stack/bindings-20261015T182452.064387Z/cases/removed-serde-field",
+          "expectedSuccess": true,
+          "exitCode": 0,
+          "seconds": 0.044,
+          "stdout": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/removed-serde-field-http-typescript.stdout.log",
+            "digest": "sha256:01fcdf85183e6762fe689bb662c5b422496e6eb2ef099ed967891e5fb11e96fd"
+          },
+          "stderr": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/removed-serde-field-http-typescript.stderr.log",
+            "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        },
+        {
+          "label": "removed-serde-field-http-rust-format",
+          "argv": [
+            "rustfmt",
+            "--edition",
+            "2024",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/removed-serde-field/service/src/generated.rs"
+          ],
+          "cwd": ".tools/cross-stack/bindings-20261015T182452.064387Z/cases/removed-serde-field",
+          "expectedSuccess": true,
+          "exitCode": 0,
+          "seconds": 0.082,
+          "stdout": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/removed-serde-field-http-rust-format.stdout.log",
+            "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "stderr": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/removed-serde-field-http-rust-format.stderr.log",
+            "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        },
+        {
+          "label": "removed-serde-field-cargo-build",
+          "argv": [
+            "cargo",
+            "build",
+            "--manifest-path",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/removed-serde-field/service/Cargo.toml",
+            "--bin",
+            "catalog-service",
+            "--locked",
+            "--offline"
+          ],
+          "cwd": ".",
+          "expectedSuccess": true,
+          "exitCode": 0,
+          "seconds": 0.578,
+          "stdout": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/removed-serde-field-cargo-build.stdout.log",
+            "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "stderr": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/removed-serde-field-cargo-build.stderr.log",
+            "digest": "sha256:db48bf3a056ac965382b03f552bd38e26b93bb58faa35d2d1e6cf8fe6dd1a190"
+          }
+        },
+        {
+          "label": "renamed-request-wire-field-http-projection",
+          "argv": [
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+            "link",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/renamed-request-wire-field/.patamaps/graph.json",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/renamed-request-wire-field/.patamaps/policy.json",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/renamed-request-wire-field/.patamaps/projection-spec.json",
+            "--relation-pack",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/renamed-request-wire-field/mappings/routing-pack.json",
+            "--as-of",
+            "2026-10-15T00:00:00Z",
+            "--context",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/renamed-request-wire-field/.patamaps/context.json"
+          ],
+          "cwd": ".tools/cross-stack/bindings-20261015T182452.064387Z/cases/renamed-request-wire-field",
+          "expectedSuccess": true,
+          "exitCode": 0,
+          "seconds": 0.024,
+          "stdout": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/renamed-request-wire-field-http-projection.stdout.log",
+            "digest": "sha256:ee92eb5943ef865bd9b21f9f3fba0a0106e923a8a264ce55012e8f067085ea88"
+          },
+          "stderr": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/renamed-request-wire-field-http-projection.stderr.log",
+            "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        },
+        {
+          "label": "renamed-request-wire-field-http-rust",
+          "argv": [
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+            "link",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/renamed-request-wire-field/.patamaps/graph.json",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/renamed-request-wire-field/.patamaps/policy.json",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/renamed-request-wire-field/.patamaps/projection-spec.json",
+            "--relation-pack",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/renamed-request-wire-field/mappings/routing-pack.json",
+            "--as-of",
+            "2026-10-15T00:00:00Z",
+            "--context",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/renamed-request-wire-field/.patamaps/context.json",
+            "--format",
+            "http-rust"
+          ],
+          "cwd": ".tools/cross-stack/bindings-20261015T182452.064387Z/cases/renamed-request-wire-field",
+          "expectedSuccess": true,
+          "exitCode": 0,
+          "seconds": 0.047,
+          "stdout": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/renamed-request-wire-field-http-rust.stdout.log",
+            "digest": "sha256:6f837acbba12c41a24c8244a19a407cf7e96ba684ab39834e97ab0cdf0031b79"
+          },
+          "stderr": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/renamed-request-wire-field-http-rust.stderr.log",
+            "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        },
+        {
+          "label": "renamed-request-wire-field-http-typescript",
+          "argv": [
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+            "link",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/renamed-request-wire-field/.patamaps/graph.json",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/renamed-request-wire-field/.patamaps/policy.json",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/renamed-request-wire-field/.patamaps/projection-spec.json",
+            "--relation-pack",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/renamed-request-wire-field/mappings/routing-pack.json",
+            "--as-of",
+            "2026-10-15T00:00:00Z",
+            "--context",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/renamed-request-wire-field/.patamaps/context.json",
+            "--format",
+            "http-typescript"
+          ],
+          "cwd": ".tools/cross-stack/bindings-20261015T182452.064387Z/cases/renamed-request-wire-field",
+          "expectedSuccess": true,
+          "exitCode": 0,
+          "seconds": 0.053,
+          "stdout": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/renamed-request-wire-field-http-typescript.stdout.log",
+            "digest": "sha256:960825c0380ff6623badd378305cc9b9617c0addd1330961eb7e73e2c83b4d50"
+          },
+          "stderr": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/renamed-request-wire-field-http-typescript.stderr.log",
+            "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        },
+        {
+          "label": "renamed-request-wire-field-http-rust-format",
+          "argv": [
+            "rustfmt",
+            "--edition",
+            "2024",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/renamed-request-wire-field/service/src/generated.rs"
+          ],
+          "cwd": ".tools/cross-stack/bindings-20261015T182452.064387Z/cases/renamed-request-wire-field",
+          "expectedSuccess": true,
+          "exitCode": 0,
+          "seconds": 0.083,
+          "stdout": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/renamed-request-wire-field-http-rust-format.stdout.log",
+            "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "stderr": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/renamed-request-wire-field-http-rust-format.stderr.log",
+            "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        },
+        {
+          "label": "renamed-request-wire-field-cargo-build",
+          "argv": [
+            "cargo",
+            "build",
+            "--manifest-path",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/renamed-request-wire-field/service/Cargo.toml",
+            "--bin",
+            "catalog-service",
+            "--locked",
+            "--offline"
+          ],
+          "cwd": ".",
+          "expectedSuccess": true,
+          "exitCode": 0,
+          "seconds": 0.59,
+          "stdout": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/renamed-request-wire-field-cargo-build.stdout.log",
+            "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "stderr": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/renamed-request-wire-field-cargo-build.stderr.log",
+            "digest": "sha256:3df1d33dd1a75bc4b1ac4f92382d75023169dd0d51e58b451430cc7d1be3d030"
+          }
+        },
+        {
+          "label": "missing-router-registration-http-projection",
+          "argv": [
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+            "link",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/missing-router-registration/.patamaps/graph.json",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/missing-router-registration/.patamaps/policy.json",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/missing-router-registration/.patamaps/projection-spec.json",
+            "--relation-pack",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/missing-router-registration/mappings/routing-pack.json",
+            "--as-of",
+            "2026-10-15T00:00:00Z",
+            "--context",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/missing-router-registration/.patamaps/context.json"
+          ],
+          "cwd": ".tools/cross-stack/bindings-20261015T182452.064387Z/cases/missing-router-registration",
+          "expectedSuccess": true,
+          "exitCode": 0,
+          "seconds": 0.025,
+          "stdout": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/missing-router-registration-http-projection.stdout.log",
+            "digest": "sha256:aa45c80f9623ad6b53f84aa42ca6dc4864a5c42e00128600d637f988f73cac47"
+          },
+          "stderr": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/missing-router-registration-http-projection.stderr.log",
+            "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        },
+        {
+          "label": "missing-router-registration-http-rust",
+          "argv": [
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+            "link",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/missing-router-registration/.patamaps/graph.json",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/missing-router-registration/.patamaps/policy.json",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/missing-router-registration/.patamaps/projection-spec.json",
+            "--relation-pack",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/missing-router-registration/mappings/routing-pack.json",
+            "--as-of",
+            "2026-10-15T00:00:00Z",
+            "--context",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/missing-router-registration/.patamaps/context.json",
+            "--format",
+            "http-rust"
+          ],
+          "cwd": ".tools/cross-stack/bindings-20261015T182452.064387Z/cases/missing-router-registration",
+          "expectedSuccess": true,
+          "exitCode": 0,
+          "seconds": 0.025,
+          "stdout": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/missing-router-registration-http-rust.stdout.log",
+            "digest": "sha256:35402ae64e5deeaf554446eab51360827dbbeea6b70da1cc0d72c7ae8d6409b5"
+          },
+          "stderr": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/missing-router-registration-http-rust.stderr.log",
+            "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        },
+        {
+          "label": "missing-router-registration-http-typescript",
+          "argv": [
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+            "link",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/missing-router-registration/.patamaps/graph.json",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/missing-router-registration/.patamaps/policy.json",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/missing-router-registration/.patamaps/projection-spec.json",
+            "--relation-pack",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/missing-router-registration/mappings/routing-pack.json",
+            "--as-of",
+            "2026-10-15T00:00:00Z",
+            "--context",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/missing-router-registration/.patamaps/context.json",
+            "--format",
+            "http-typescript"
+          ],
+          "cwd": ".tools/cross-stack/bindings-20261015T182452.064387Z/cases/missing-router-registration",
+          "expectedSuccess": true,
+          "exitCode": 0,
+          "seconds": 0.024,
+          "stdout": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/missing-router-registration-http-typescript.stdout.log",
+            "digest": "sha256:c3121a2337620abb60e93f900ae5582f78e8224ccc9498e439cfdbdb9b911ac1"
+          },
+          "stderr": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/missing-router-registration-http-typescript.stderr.log",
+            "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        },
+        {
+          "label": "missing-router-registration-http-rust-format",
+          "argv": [
+            "rustfmt",
+            "--edition",
+            "2024",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/missing-router-registration/service/src/generated.rs"
+          ],
+          "cwd": ".tools/cross-stack/bindings-20261015T182452.064387Z/cases/missing-router-registration",
+          "expectedSuccess": true,
+          "exitCode": 0,
+          "seconds": 0.079,
+          "stdout": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/missing-router-registration-http-rust-format.stdout.log",
+            "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "stderr": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/missing-router-registration-http-rust-format.stderr.log",
+            "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        },
+        {
+          "label": "missing-router-registration-cargo-build",
+          "argv": [
+            "cargo",
+            "build",
+            "--manifest-path",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/missing-router-registration/service/Cargo.toml",
+            "--bin",
+            "catalog-service",
+            "--locked",
+            "--offline"
+          ],
+          "cwd": ".",
+          "expectedSuccess": true,
+          "exitCode": 0,
+          "seconds": 0.602,
+          "stdout": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/missing-router-registration-cargo-build.stdout.log",
+            "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "stderr": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/missing-router-registration-cargo-build.stderr.log",
+            "digest": "sha256:881ed07f711b923f0aee63c02087c0ee338ef9f76b262cd5de9df6d5cb69706f"
+          }
+        },
+        {
+          "label": "unrelated-rust-edit-http-projection",
+          "argv": [
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+            "link",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/unrelated-rust-edit/.patamaps/graph.json",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/unrelated-rust-edit/.patamaps/policy.json",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/unrelated-rust-edit/.patamaps/projection-spec.json",
+            "--relation-pack",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/unrelated-rust-edit/mappings/routing-pack.json",
+            "--as-of",
+            "2026-10-15T00:00:00Z",
+            "--context",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/unrelated-rust-edit/.patamaps/context.json"
+          ],
+          "cwd": ".tools/cross-stack/bindings-20261015T182452.064387Z/cases/unrelated-rust-edit",
+          "expectedSuccess": true,
+          "exitCode": 0,
+          "seconds": 0.027,
+          "stdout": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/unrelated-rust-edit-http-projection.stdout.log",
+            "digest": "sha256:aa45c80f9623ad6b53f84aa42ca6dc4864a5c42e00128600d637f988f73cac47"
+          },
+          "stderr": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/unrelated-rust-edit-http-projection.stderr.log",
+            "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        },
+        {
+          "label": "unrelated-rust-edit-http-rust",
+          "argv": [
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+            "link",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/unrelated-rust-edit/.patamaps/graph.json",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/unrelated-rust-edit/.patamaps/policy.json",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/unrelated-rust-edit/.patamaps/projection-spec.json",
+            "--relation-pack",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/unrelated-rust-edit/mappings/routing-pack.json",
+            "--as-of",
+            "2026-10-15T00:00:00Z",
+            "--context",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/unrelated-rust-edit/.patamaps/context.json",
+            "--format",
+            "http-rust"
+          ],
+          "cwd": ".tools/cross-stack/bindings-20261015T182452.064387Z/cases/unrelated-rust-edit",
+          "expectedSuccess": true,
+          "exitCode": 0,
+          "seconds": 0.027,
+          "stdout": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/unrelated-rust-edit-http-rust.stdout.log",
+            "digest": "sha256:35402ae64e5deeaf554446eab51360827dbbeea6b70da1cc0d72c7ae8d6409b5"
+          },
+          "stderr": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/unrelated-rust-edit-http-rust.stderr.log",
+            "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        },
+        {
+          "label": "unrelated-rust-edit-http-typescript",
+          "argv": [
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+            "link",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/unrelated-rust-edit/.patamaps/graph.json",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/unrelated-rust-edit/.patamaps/policy.json",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/unrelated-rust-edit/.patamaps/projection-spec.json",
+            "--relation-pack",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/unrelated-rust-edit/mappings/routing-pack.json",
+            "--as-of",
+            "2026-10-15T00:00:00Z",
+            "--context",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/unrelated-rust-edit/.patamaps/context.json",
+            "--format",
+            "http-typescript"
+          ],
+          "cwd": ".tools/cross-stack/bindings-20261015T182452.064387Z/cases/unrelated-rust-edit",
+          "expectedSuccess": true,
+          "exitCode": 0,
+          "seconds": 0.026,
+          "stdout": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/unrelated-rust-edit-http-typescript.stdout.log",
+            "digest": "sha256:c3121a2337620abb60e93f900ae5582f78e8224ccc9498e439cfdbdb9b911ac1"
+          },
+          "stderr": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/unrelated-rust-edit-http-typescript.stderr.log",
+            "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        },
+        {
+          "label": "unrelated-rust-edit-http-rust-format",
+          "argv": [
+            "rustfmt",
+            "--edition",
+            "2024",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/unrelated-rust-edit/service/src/generated.rs"
+          ],
+          "cwd": ".tools/cross-stack/bindings-20261015T182452.064387Z/cases/unrelated-rust-edit",
+          "expectedSuccess": true,
+          "exitCode": 0,
+          "seconds": 0.089,
+          "stdout": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/unrelated-rust-edit-http-rust-format.stdout.log",
+            "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "stderr": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/unrelated-rust-edit-http-rust-format.stderr.log",
+            "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        },
+        {
+          "label": "unrelated-rust-edit-cargo-build",
+          "argv": [
+            "cargo",
+            "build",
+            "--manifest-path",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/cases/unrelated-rust-edit/service/Cargo.toml",
+            "--bin",
+            "catalog-service",
+            "--locked",
+            "--offline"
+          ],
+          "cwd": ".",
+          "expectedSuccess": true,
+          "exitCode": 0,
+          "seconds": 0.595,
+          "stdout": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/unrelated-rust-edit-cargo-build.stdout.log",
+            "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "stderr": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/unrelated-rust-edit-cargo-build.stderr.log",
+            "digest": "sha256:0b7128740c50068c03010fed495e80dbb1fee982163a1a339baaf84da28196a7"
+          }
+        },
+        {
+          "label": "wrong-typescript-consumer",
+          "argv": [
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/examples/cross-stack/web/node_modules/.bin/tsc",
+            "--noEmit",
+            "--target",
+            "ES2022",
+            "--module",
+            "commonjs",
+            "--lib",
+            "ES2022,DOM",
+            "--strict",
+            "--skipLibCheck",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/bindings-20261015T182452.064387Z/negative-consumer.ts"
+          ],
+          "cwd": ".",
+          "expectedSuccess": false,
+          "exitCode": 2,
+          "seconds": 0.539,
+          "stdout": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/wrong-typescript-consumer.stdout.log",
+            "digest": "sha256:1c21e4b0e16ad864b15210562a534462b77604be3b119927ef54af1bfc53e592"
+          },
+          "stderr": {
+            "path": ".tools/cross-stack/bindings-20261015T182452.064387Z/wrong-typescript-consumer.stderr.log",
+            "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        }
+      ],
+      "retainedWork": ".tools/cross-stack/bindings-20261015T182452.064387Z",
+      "filesDeleted": [],
+      "fullCrossStackAcceptance": false,
+      "containerAcceptance": "not-run",
+      "browserAcceptance": "not-run",
+      "generatedRegistration": "verified-for-declared-M2-scope",
+      "sourceInventory": {
+        "examples/cross-stack/.dockerignore": "sha256:ab935c7c81106d3bccd86f7b2e3edfbdb6712670b72296d189a528c1aeacfb7c",
+        "examples/cross-stack/.gitignore": "sha256:e0f20864aa53885a1456384f06a5893f8a70425f2d5ed4039c2ac48f1fe3b2a4",
+        "examples/cross-stack/README.md": "sha256:eaa223e0b66657329b8f9c774aec29e520d6ea906eba4a0177466dc915c81bc4",
+        "examples/cross-stack/acceptance/expected.json": "sha256:4b6fe10f673674d8947725b849a61435858305f856adf588e0040faafafbe404",
+        "examples/cross-stack/acceptance/m2-expected.json": "sha256:0cc635f035e1c29bc910ff3f5219e6efae11ce81b15f00caf7a30d87ac66e242",
+        "examples/cross-stack/build.py": "sha256:1a048c675a5c1380082d6da6204d7042e257eadf49e2e76201bf407f035f1312",
+        "examples/cross-stack/config/service.toml": "sha256:ec046d3e08183708c3aae0453ce0cb4febe7b875452d781ea867897b65bccd07",
+        "examples/cross-stack/contracts/create-item.request.schema.json": "sha256:e814007c18146f82674e36f5dc6fb1affe8e871f828c8ddff117f244e2ddfe95",
+        "examples/cross-stack/contracts/create-item.response.schema.json": "sha256:3c49c73af83622c4678aedd932a53e51f71b78db7de502b68a9ed36a46af7113",
+        "examples/cross-stack/contracts/operations.json": "sha256:c91e190c34b7984f6f0baafdfc441cb8d944b3a450b99adbfa9569f1ddec8bdf",
+        "examples/cross-stack/deploy/Dockerfile": "sha256:ccc6cd1005cb31b6abe6879c4ff9b26c26d137dea8203c07b717ec8bb10fb59f",
+        "examples/cross-stack/mappings/README.md": "sha256:594388cf251b81e2c1a87afe1fa3c093b6a36dd7cc667230407917678bf2cbbb",
+        "examples/cross-stack/mappings/routing-pack.json": "sha256:64cb8bad363e056b99e62fca7f1eca95c46790dcb0c4dd8c2f987c0ed4ff601f",
+        "examples/cross-stack/service/Cargo.lock": "sha256:3e511df39108267fd2cf10a9b49dd49db589ae1f49b6fb8b9152779d365a99c3",
+        "examples/cross-stack/service/Cargo.toml": "sha256:fdd1f664593da2163ad70802e6c2bc8b922dcd019500550c349efbb556cba77c",
+        "examples/cross-stack/service/rust-toolchain.toml": "sha256:515c80a149c1e927d497dbebc399e241822aa0197e8f778c21bf5c136c90afd2",
+        "examples/cross-stack/service/src/handlers/create_item.rs": "sha256:1e04089800d93b65af6823c1be25653244b70252723e6f9df4005e80a2eea962",
+        "examples/cross-stack/service/src/lib.rs": "sha256:0e146354d88c717330e199cd284004ca7963710fb3387b2fa8c9945274b17101",
+        "examples/cross-stack/service/src/main.rs": "sha256:2b6ef5e614e3739719c2ab7eae934671be0f858a8eda4399acb59673e660c0ee",
+        "examples/cross-stack/support.json": "sha256:964a978e24e0fd030513b56757c523877ba580efda5aa5e8b4c70b6ab483f823",
+        "examples/cross-stack/web/app/api/items/route.ts": "sha256:b4f98c92dae67ee6096f652b30193f9cbc2311caeab97ca9af113f2ac0c1e4c8",
+        "examples/cross-stack/web/app/items/[id]/page.tsx": "sha256:62f257c01a26a7c6bf0eb8b7cbfa4d15bec683e1e98648e034c219373f65fde9",
+        "examples/cross-stack/web/app/layout.tsx": "sha256:c1948db0db63dcabb24d969c4d4d7d55277304aeb7cc4ffa2485ca6fb3464693",
+        "examples/cross-stack/web/app/page.tsx": "sha256:c00a67d2b7bf99604a0df7544c7649a53b9d9bd72102a962b0b5c96e92590743",
+        "examples/cross-stack/web/next.config.mjs": "sha256:d9be514b014a67dbf2f6aeb0acd2b5b87801e378127d4ae8f592af5e39460b25",
+        "examples/cross-stack/web/package-lock.json": "sha256:b2d52eccd71b29bd6e6938292d3ef692e434ac4ca77e8508ed0da7c57fbc2d59",
+        "examples/cross-stack/web/package.json": "sha256:3bcba3a9906f2dd519ab7863a9174d4262aba9246977bfba96ad090ffdfd6334",
+        "examples/cross-stack/web/tsconfig.json": "sha256:45fd26769ac1a8f0b8741099674b71e00846b9f97ce1b7cb7afb98c7922ce7f0"
+      },
+      "bindingChecks": {
+        "status": "passed",
+        "controls": [
+          {
+            "control": "supported-generated-consumer",
+            "stage": "Next/Cargo/HTTP",
+            "result": "passed",
+            "http": [
+              {
+                "case": "health",
+                "status": 200,
+                "body": {
+                  "status": "ok"
+                }
+              },
+              {
+                "case": "create",
+                "status": 201,
+                "body": {
+                  "id": "item:widget",
+                  "name": "Widget"
+                }
+              },
+              {
+                "case": "wrong-type",
+                "status": 400,
+                "body": {
+                  "error": "invalid-request"
+                }
+              },
+              {
+                "case": "unknown-field",
+                "status": 400,
+                "body": {
+                  "error": "invalid-request"
+                }
+              },
+              {
+                "case": "empty-name",
+                "status": 400,
+                "body": {
+                  "error": "invalid-request"
+                }
+              },
+              {
+                "case": "backend-failure",
+                "status": 500,
+                "body": {
+                  "error": "backend-failure"
+                }
+              },
+              {
+                "case": "wrong-method",
+                "status": 404,
+                "body": {
+                  "error": "not-found"
+                }
+              }
+            ],
+            "client": {
+              "status": "passed",
+              "realNextRustRoundTrip": true,
+              "unicodeCodePointBoundary": true,
+              "unpairedSurrogateRefused": true,
+              "invalidResponseRefused": true
+            }
+          },
+          {
+            "control": "moved-handler",
+            "stage": "Cargo/HTTP",
+            "result": "passed",
+            "stableOperationId": "urn:example:operation:create-item",
+            "freshPhysicalBinding": true
+          },
+          {
+            "control": "missing-export",
+            "stage": "Cargo",
+            "result": "refused",
+            "code": "E0425"
+          },
+          {
+            "control": "wrong-signature",
+            "stage": "Cargo",
+            "result": "refused",
+            "code": "E0308"
+          },
+          {
+            "control": "disabled-handler",
+            "stage": "Cargo",
+            "result": "refused",
+            "code": "E0425"
+          },
+          {
+            "control": "enabled-handler",
+            "stage": "Cargo/HTTP",
+            "result": "passed",
+            "explicitFeatures": [
+              "handler-enabled"
+            ]
+          },
+          {
+            "control": "duplicate-binding",
+            "stage": "generation",
+            "result": "refused",
+            "code": "HTTP_DUPLICATE_OPERATION"
+          },
+          {
+            "control": "colliding-endpoint",
+            "stage": "generation",
+            "result": "refused",
+            "code": "HTTP_ENDPOINT_CONFLICT"
+          },
+          {
+            "control": "escaped-module-map",
+            "stage": "generation",
+            "result": "refused",
+            "code": "HTTP_MODULE_OUTSIDE_OWNER"
+          },
+          {
+            "control": "unsupported-schema-pattern",
+            "stage": "generation",
+            "result": "refused",
+            "code": "HTTP_SCHEMA_UNSUPPORTED"
+          },
+          {
+            "control": "unsupported-method",
+            "stage": "generation",
+            "result": "refused",
+            "code": "HTTP_ENDPOINT_CONFLICT"
+          },
+          {
+            "control": "wrong-http-path",
+            "stage": "independent-HTTP",
+            "result": "candidate-rejected",
+            "observation": {
+              "status": 404,
+              "body": {
+                "error": "not-found"
+              }
+            }
+          },
+          {
+            "control": "changed-request-shape",
+            "stage": "independent-HTTP",
+            "result": "candidate-rejected",
+            "observation": {
+              "status": 400,
+              "body": {
+                "error": "invalid-request"
+              }
+            }
+          },
+          {
+            "control": "changed-response-shape",
+            "stage": "independent-HTTP",
+            "result": "candidate-rejected",
+            "observation": {
+              "status": 500,
+              "body": {
+                "error": "invalid-response"
+              }
+            }
+          },
+          {
+            "control": "removed-serde-field",
+            "stage": "independent-HTTP",
+            "result": "candidate-rejected",
+            "observation": {
+              "status": 500,
+              "body": {
+                "error": "invalid-response"
+              }
+            }
+          },
+          {
+            "control": "renamed-request-wire-field",
+            "stage": "independent-HTTP",
+            "result": "candidate-rejected",
+            "observation": {
+              "status": 400,
+              "body": {
+                "error": "invalid-request"
+              }
+            }
+          },
+          {
+            "control": "missing-router-registration",
+            "stage": "independent-HTTP",
+            "result": "candidate-rejected",
+            "observation": {
+              "status": 404,
+              "body": {
+                "error": "not-found"
+              }
+            }
+          },
+          {
+            "control": "unrelated-rust-edit",
+            "stage": "projection/Cargo/HTTP",
+            "result": "passed",
+            "semanticProjectionUnchanged": true,
+            "sourceInventoryChanged": true
+          },
+          {
+            "control": "wrong-typescript-consumer",
+            "stage": "TypeScript",
+            "result": "refused",
+            "code": "TS2322"
+          },
+          {
+            "control": "prior-candidate-after-refusals",
+            "stage": "HTTP",
+            "result": "passed",
+            "selectionPublication": "not-tested-until-M5"
+          }
+        ],
+        "engines": {
+          "compiler": "sha256:cc4cb13acfb46d16898559b5d971b2df381a6f81754d445a762a97826ee89c99",
+          "documentType": "executor-description",
+          "governance": "sha256:2e4fd8d770f958afb4ae9261d4292916bbb9d76668aeace42bb0fa657acc5b9d",
+          "schemaVersion": "0.1.0",
+          "scientific": "sha256:f5f9c957a6755f30f35020a64d86db032387e9febee72e7c21a1177172235a53",
+          "workspace": "sha256:2cd53f1f65d0abe3b1c6ef9b47c6a2bb98835047bc6b4482f05037f48bc1475b"
+        },
+        "baseline": {
+          "generated": {
+            "profile": "patamaps-consumer-http-build-1",
+            "status": "generated-candidate",
+            "projection": {
+              "schemaVersion": "0.1.0",
+              "documentType": "projection",
+              "profile": "patamaps-routing-draft-1",
+              "id": "urn:patamaps:projection:b8164dd6cc718a37f1553e717e97d44bd1f1d3545d42103eec229fbec99612d3",
+              "digest": "sha256:b8164dd6cc718a37f1553e717e97d44bd1f1d3545d42103eec229fbec99612d3",
+              "graph": {
+                "id": "urn:example:cross-stack:http",
+                "revision": "1",
+                "digest": "sha256:a8ddf1dc83cd107dfc00d09a64c4ba9e4f66507d7db1d6c470cd7d22418da992"
+              },
+              "generation": {
+                "id": "urn:patamaps:generation:9393b98b4f5b16009240d5a6bf56ed847213163b78d837ef9cfed4e553f3ffc4",
+                "digest": "sha256:9393b98b4f5b16009240d5a6bf56ed847213163b78d837ef9cfed4e553f3ffc4"
+              },
+              "spec": {
+                "id": "urn:example:cross-stack:http-projection",
+                "digest": "sha256:fd6159348fb5cb7216f8be30a546d956bee3ab6a04e677fe6f62e3d289e51c22"
+              },
+              "entries": [
+                {
+                  "subject": {
+                    "id": "urn:example:operation:create-item",
+                    "kind": "routing:command",
+                    "attributes": {
+                      "http": {
+                        "method": "POST",
+                        "path": "/api/items"
+                      }
+                    }
+                  },
+                  "slots": [
+                    {
+                      "name": "endpoint",
+                      "relation": "routing:exposed_as",
+                      "direction": "outgoing",
+                      "cardinality": "exactly-one",
+                      "mappings": [
+                        "urn:example:operation:create-item:mapping:endpoint"
+                      ],
+                      "targets": [
+                        {
+                          "id": "urn:example:operation:create-item:endpoint",
+                          "kind": "routing:endpoint",
+                          "attributes": {
+                            "http": {
+                              "method": "POST",
+                              "path": "/items",
+                              "successStatus": 201.0
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "name": "handler",
+                      "relation": "routing:handled_by",
+                      "direction": "outgoing",
+                      "cardinality": "exactly-one",
+                      "mappings": [
+                        "urn:example:operation:create-item:mapping:handler"
+                      ],
+                      "targets": [
+                        {
+                          "id": "urn:example:operation:create-item:handler",
+                          "kind": "routing:handler",
+                          "locators": [
+                            {
+                              "uri": "rust:crate::catalog::create_item",
+                              "digest": "sha256:1e04089800d93b65af6823c1be25653244b70252723e6f9df4005e80a2eea962"
+                            }
+                          ],
+                          "attributes": {
+                            "http": {
+                              "errorType": "OperationError",
+                              "errors": [
+                                {
+                                  "code": "invalid-name",
+                                  "status": 400.0,
+                                  "variant": "InvalidName"
+                                },
+                                {
+                                  "code": "backend-failure",
+                                  "status": 500.0,
+                                  "variant": "BackendFailure"
+                                }
+                              ],
+                              "modulePath": "handlers/create_item.rs",
+                              "profile": "patamaps-http-object-strings-1",
+                              "requestType": "CreateItemRequest",
+                              "responseSchema": {
+                                "$schema": "https://json-schema.org/draft/2020-12/schema",
+                                "additionalProperties": false,
+                                "properties": {
+                                  "id": {
+                                    "type": "string"
+                                  },
+                                  "name": {
+                                    "type": "string"
+                                  }
+                                },
+                                "required": [
+                                  "id",
+                                  "name"
+                                ],
+                                "type": "object"
+                              },
+                              "responseType": "CreateItemResponse"
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "name": "input",
+                      "relation": "routing:accepts",
+                      "direction": "outgoing",
+                      "cardinality": "exactly-one",
+                      "mappings": [
+                        "urn:example:operation:create-item:mapping:input"
+                      ],
+                      "targets": [
+                        {
+                          "id": "urn:example:operation:create-item:input",
+                          "kind": "routing:schema",
+                          "locators": [
+                            {
+                              "uri": "json-schema:contracts/create-item.request.schema.json",
+                              "digest": "sha256:e814007c18146f82674e36f5dc6fb1affe8e871f828c8ddff117f244e2ddfe95"
+                            }
+                          ],
+                          "attributes": {
+                            "jsonSchema": {
+                              "$schema": "https://json-schema.org/draft/2020-12/schema",
+                              "additionalProperties": false,
+                              "properties": {
+                                "name": {
+                                  "maxLength": 80.0,
+                                  "minLength": 1.0,
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "name"
+                              ],
+                              "type": "object"
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            "sourceBytes": {
+              "contracts/operations.json": "sha256:c91e190c34b7984f6f0baafdfc441cb8d944b3a450b99adbfa9569f1ddec8bdf",
+              "service/src/handlers/create_item.rs": "sha256:1e04089800d93b65af6823c1be25653244b70252723e6f9df4005e80a2eea962",
+              "contracts/create-item.request.schema.json": "sha256:e814007c18146f82674e36f5dc6fb1affe8e871f828c8ddff117f244e2ddfe95",
+              "contracts/create-item.response.schema.json": "sha256:3c49c73af83622c4678aedd932a53e51f71b78db7de502b68a9ed36a46af7113",
+              "service/src/lib.rs": "sha256:0e146354d88c717330e199cd284004ca7963710fb3387b2fa8c9945274b17101",
+              "service/src/main.rs": "sha256:2b6ef5e614e3739719c2ab7eae934671be0f858a8eda4399acb59673e660c0ee"
+            },
+            "moduleMap": {
+              "catalog": "service/src/handlers/create_item.rs"
+            },
+            "operationIds": [
+              "urn:example:operation:create-item"
+            ],
+            "outputs": {
+              "service/src/generated.rs": "sha256:6a396d3ae3a7a433567fbd9a47dcb013794c996faaa16d2d4eeaf9907181616a",
+              "web/generated/operations.ts": "sha256:c3121a2337620abb60e93f900ae5582f78e8224ccc9498e439cfdbdb9b911ac1"
+            },
+            "compilation": "not-run-by-generation",
+            "runtime": "not-run-by-generation",
+            "fullExecutableClosure": "not-established",
+            "authorization": "not-evaluated",
+            "activation": "not-evaluated"
+          },
+          "snapshot": {
+            ".dockerignore": {
+              "digest": "sha256:ab935c7c81106d3bccd86f7b2e3edfbdb6712670b72296d189a528c1aeacfb7c",
+              "byteLength": 69
+            },
+            ".gitignore": {
+              "digest": "sha256:e0f20864aa53885a1456384f06a5893f8a70425f2d5ed4039c2ac48f1fe3b2a4",
+              "byteLength": 105
+            },
+            "README.md": {
+              "digest": "sha256:eaa223e0b66657329b8f9c774aec29e520d6ea906eba4a0177466dc915c81bc4",
+              "byteLength": 2002
+            },
+            "build.py": {
+              "digest": "sha256:1a048c675a5c1380082d6da6204d7042e257eadf49e2e76201bf407f035f1312",
+              "byteLength": 10213
+            },
+            "support.json": {
+              "digest": "sha256:964a978e24e0fd030513b56757c523877ba580efda5aa5e8b4c70b6ab483f823",
+              "byteLength": 1981
+            },
+            "acceptance/expected.json": {
+              "digest": "sha256:4b6fe10f673674d8947725b849a61435858305f856adf588e0040faafafbe404",
+              "byteLength": 1537
+            },
+            "acceptance/m2-expected.json": {
+              "digest": "sha256:0cc635f035e1c29bc910ff3f5219e6efae11ce81b15f00caf7a30d87ac66e242",
+              "byteLength": 2869
+            },
+            "config/service.toml": {
+              "digest": "sha256:ec046d3e08183708c3aae0453ce0cb4febe7b875452d781ea867897b65bccd07",
+              "byteLength": 125
+            },
+            "contracts/create-item.request.schema.json": {
+              "digest": "sha256:e814007c18146f82674e36f5dc6fb1affe8e871f828c8ddff117f244e2ddfe95",
+              "byteLength": 260
+            },
+            "contracts/create-item.response.schema.json": {
+              "digest": "sha256:3c49c73af83622c4678aedd932a53e51f71b78db7de502b68a9ed36a46af7113",
+              "byteLength": 267
+            },
+            "contracts/operations.json": {
+              "digest": "sha256:c91e190c34b7984f6f0baafdfc441cb8d944b3a450b99adbfa9569f1ddec8bdf",
+              "byteLength": 1413
+            },
+            "deploy/Dockerfile": {
+              "digest": "sha256:ccc6cd1005cb31b6abe6879c4ff9b26c26d137dea8203c07b717ec8bb10fb59f",
+              "byteLength": 529
+            },
+            "mappings/README.md": {
+              "digest": "sha256:594388cf251b81e2c1a87afe1fa3c093b6a36dd7cc667230407917678bf2cbbb",
+              "byteLength": 380
+            },
+            "mappings/routing-pack.json": {
+              "digest": "sha256:64cb8bad363e056b99e62fca7f1eca95c46790dcb0c4dd8c2f987c0ed4ff601f",
+              "byteLength": 2996
+            },
+            "service/Cargo.lock": {
+              "digest": "sha256:3e511df39108267fd2cf10a9b49dd49db589ae1f49b6fb8b9152779d365a99c3",
+              "byteLength": 5536
+            },
+            "service/Cargo.toml": {
+              "digest": "sha256:fdd1f664593da2163ad70802e6c2bc8b922dcd019500550c349efbb556cba77c",
+              "byteLength": 361
+            },
+            "service/rust-toolchain.toml": {
+              "digest": "sha256:515c80a149c1e927d497dbebc399e241822aa0197e8f778c21bf5c136c90afd2",
+              "byteLength": 51
+            },
+            "service/src/lib.rs": {
+              "digest": "sha256:0e146354d88c717330e199cd284004ca7963710fb3387b2fa8c9945274b17101",
+              "byteLength": 117
+            },
+            "service/src/main.rs": {
+              "digest": "sha256:2b6ef5e614e3739719c2ab7eae934671be0f858a8eda4399acb59673e660c0ee",
+              "byteLength": 1701
+            },
+            "service/src/handlers/create_item.rs": {
+              "digest": "sha256:1e04089800d93b65af6823c1be25653244b70252723e6f9df4005e80a2eea962",
+              "byteLength": 1710
+            },
+            "web/next.config.mjs": {
+              "digest": "sha256:d9be514b014a67dbf2f6aeb0acd2b5b87801e378127d4ae8f592af5e39460b25",
+              "byteLength": 68
+            },
+            "web/package-lock.json": {
+              "digest": "sha256:b2d52eccd71b29bd6e6938292d3ef692e434ac4ca77e8508ed0da7c57fbc2d59",
+              "byteLength": 33360
+            },
+            "web/package.json": {
+              "digest": "sha256:3bcba3a9906f2dd519ab7863a9174d4262aba9246977bfba96ad090ffdfd6334",
+              "byteLength": 507
+            },
+            "web/tsconfig.json": {
+              "digest": "sha256:45fd26769ac1a8f0b8741099674b71e00846b9f97ce1b7cb7afb98c7922ce7f0",
+              "byteLength": 639
+            },
+            "web/app/layout.tsx": {
+              "digest": "sha256:c1948db0db63dcabb24d969c4d4d7d55277304aeb7cc4ffa2485ca6fb3464693",
+              "byteLength": 234
+            },
+            "web/app/page.tsx": {
+              "digest": "sha256:c00a67d2b7bf99604a0df7544c7649a53b9d9bd72102a962b0b5c96e92590743",
+              "byteLength": 819
+            },
+            "web/app/api/items/route.ts": {
+              "digest": "sha256:b4f98c92dae67ee6096f652b30193f9cbc2311caeab97ca9af113f2ac0c1e4c8",
+              "byteLength": 733
+            },
+            "web/app/items/[id]/page.tsx": {
+              "digest": "sha256:62f257c01a26a7c6bf0eb8b7cbfa4d15bec683e1e98648e034c219373f65fde9",
+              "byteLength": 173
+            }
+          }
+        },
+        "acceptedCandidate": ".tools/cross-stack/bindings-20261015T182452.064387Z/cases/supported",
+        "browser": "not-run",
+        "LinuxImage": "not-run",
+        "atomicSelection": "not-tested-until-M5",
+        "filesDeleted": []
+      },
+      "sourceUnchanged": true,
+      "completedUtc": "2026-10-15T18:25:56.427211+00:00"
+    }
+  },
+  "regression": {
+    "path": ".tools/cross-stack/regression-20261015T182556.719322Z/receipt.json",
+    "digest": "sha256:298a58a904830cc0efd5d0a0dfa14583ffdf44190d38f6966e607f24d22bba9d",
+    "receipt": {
+      "status": "passed",
+      "phase": "regression",
+      "profile": "patamaps-cross-stack-fixture-1",
+      "startedUtc": "2026-10-15T18:25:56.720158+00:00",
+      "commands": [
+        {
+          "label": "rust-version",
+          "argv": [
+            "rustc",
+            "-Vv"
+          ],
+          "cwd": ".",
+          "expectedSuccess": true,
+          "exitCode": 0,
+          "seconds": 0.08,
+          "stdout": {
+            "path": ".tools/cross-stack/regression-20261015T182556.719322Z/rust-version.stdout.log",
+            "digest": "sha256:b1184c1aecf3182548f3bbdd91e5043e464821b1dcbf6d5ca8246339bd0be84a"
+          },
+          "stderr": {
+            "path": ".tools/cross-stack/regression-20261015T182556.719322Z/rust-version.stderr.log",
+            "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        },
+        {
+          "label": "cargo-version",
+          "argv": [
+            "cargo",
+            "--version"
+          ],
+          "cwd": ".",
+          "expectedSuccess": true,
+          "exitCode": 0,
+          "seconds": 0.046,
+          "stdout": {
+            "path": ".tools/cross-stack/regression-20261015T182556.719322Z/cargo-version.stdout.log",
+            "digest": "sha256:1f88eaf7fe1aaec83184752cf4c944cd22f00184136ff36a3e4c318cc60ef566"
+          },
+          "stderr": {
+            "path": ".tools/cross-stack/regression-20261015T182556.719322Z/cargo-version.stderr.log",
+            "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        },
+        {
+          "label": "node-version",
+          "argv": [
+            "node",
+            "--version"
+          ],
+          "cwd": ".",
+          "expectedSuccess": true,
+          "exitCode": 0,
+          "seconds": 0.049,
+          "stdout": {
+            "path": ".tools/cross-stack/regression-20261015T182556.719322Z/node-version.stdout.log",
+            "digest": "sha256:33e26f35db6e57ce0c486ddc815fe966867e4f649e418eaf323f75f4720eb8e9"
+          },
+          "stderr": {
+            "path": ".tools/cross-stack/regression-20261015T182556.719322Z/node-version.stderr.log",
+            "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        },
+        {
+          "label": "workspace-format",
+          "argv": [
+            "cargo",
+            "fmt",
+            "--all",
+            "--",
+            "--check"
+          ],
+          "cwd": ".",
+          "expectedSuccess": true,
+          "exitCode": 0,
+          "seconds": 1.03,
+          "stdout": {
+            "path": ".tools/cross-stack/regression-20261015T182556.719322Z/workspace-format.stdout.log",
+            "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "stderr": {
+            "path": ".tools/cross-stack/regression-20261015T182556.719322Z/workspace-format.stderr.log",
+            "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        },
+        {
+          "label": "workspace-clippy",
+          "argv": [
+            "cargo",
+            "clippy",
+            "--workspace",
+            "--all-targets",
+            "--locked",
+            "--offline",
+            "--",
+            "-D",
+            "warnings"
+          ],
+          "cwd": ".",
+          "expectedSuccess": true,
+          "exitCode": 0,
+          "seconds": 8.071,
+          "stdout": {
+            "path": ".tools/cross-stack/regression-20261015T182556.719322Z/workspace-clippy.stdout.log",
+            "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "stderr": {
+            "path": ".tools/cross-stack/regression-20261015T182556.719322Z/workspace-clippy.stderr.log",
+            "digest": "sha256:aa88c9b7bf0cd2e1a06ae6f4fdb3948be732be4f0cd5b3cf5b67a4cc3aedb605"
+          }
+        },
+        {
+          "label": "workspace-tests",
+          "argv": [
+            "cargo",
+            "test",
+            "--workspace",
+            "--locked",
+            "--offline"
+          ],
+          "cwd": ".",
+          "expectedSuccess": true,
+          "exitCode": 0,
+          "seconds": 142.981,
+          "stdout": {
+            "path": ".tools/cross-stack/regression-20261015T182556.719322Z/workspace-tests.stdout.log",
+            "digest": "sha256:3055d78d0d0e05eef6091632fa616b82c192bd3af2b25f9626e185e0ebe323e9"
+          },
+          "stderr": {
+            "path": ".tools/cross-stack/regression-20261015T182556.719322Z/workspace-tests.stderr.log",
+            "digest": "sha256:54c6ad0b87230bc216526a04cde97a2b104559542416e26b3716c637bf9551de"
+          }
+        },
+        {
+          "label": "workspace-doctests",
+          "argv": [
+            "cargo",
+            "test",
+            "--workspace",
+            "--doc",
+            "--locked",
+            "--offline"
+          ],
+          "cwd": ".",
+          "expectedSuccess": true,
+          "exitCode": 0,
+          "seconds": 3.994,
+          "stdout": {
+            "path": ".tools/cross-stack/regression-20261015T182556.719322Z/workspace-doctests.stdout.log",
+            "digest": "sha256:957acb80be99e2aff25b7e0d5bf14999be356a619851b14b5dc533535ef5888c"
+          },
+          "stderr": {
+            "path": ".tools/cross-stack/regression-20261015T182556.719322Z/workspace-doctests.stderr.log",
+            "digest": "sha256:a4135cbda855f3122132093f76ff6aa167bef1ae5a81b16cce90c7e074d4b3c8"
+          }
+        }
+      ],
+      "retainedWork": ".tools/cross-stack/regression-20261015T182556.719322Z",
+      "filesDeleted": [],
+      "fullCrossStackAcceptance": false,
+      "containerAcceptance": "not-run",
+      "browserAcceptance": "not-run",
+      "generatedRegistration": "not-implemented",
+      "sourceInventory": {
+        "examples/cross-stack/.dockerignore": "sha256:ab935c7c81106d3bccd86f7b2e3edfbdb6712670b72296d189a528c1aeacfb7c",
+        "examples/cross-stack/.gitignore": "sha256:e0f20864aa53885a1456384f06a5893f8a70425f2d5ed4039c2ac48f1fe3b2a4",
+        "examples/cross-stack/README.md": "sha256:eaa223e0b66657329b8f9c774aec29e520d6ea906eba4a0177466dc915c81bc4",
+        "examples/cross-stack/acceptance/expected.json": "sha256:4b6fe10f673674d8947725b849a61435858305f856adf588e0040faafafbe404",
+        "examples/cross-stack/acceptance/m2-expected.json": "sha256:0cc635f035e1c29bc910ff3f5219e6efae11ce81b15f00caf7a30d87ac66e242",
+        "examples/cross-stack/build.py": "sha256:1a048c675a5c1380082d6da6204d7042e257eadf49e2e76201bf407f035f1312",
+        "examples/cross-stack/config/service.toml": "sha256:ec046d3e08183708c3aae0453ce0cb4febe7b875452d781ea867897b65bccd07",
+        "examples/cross-stack/contracts/create-item.request.schema.json": "sha256:e814007c18146f82674e36f5dc6fb1affe8e871f828c8ddff117f244e2ddfe95",
+        "examples/cross-stack/contracts/create-item.response.schema.json": "sha256:3c49c73af83622c4678aedd932a53e51f71b78db7de502b68a9ed36a46af7113",
+        "examples/cross-stack/contracts/operations.json": "sha256:c91e190c34b7984f6f0baafdfc441cb8d944b3a450b99adbfa9569f1ddec8bdf",
+        "examples/cross-stack/deploy/Dockerfile": "sha256:ccc6cd1005cb31b6abe6879c4ff9b26c26d137dea8203c07b717ec8bb10fb59f",
+        "examples/cross-stack/mappings/README.md": "sha256:594388cf251b81e2c1a87afe1fa3c093b6a36dd7cc667230407917678bf2cbbb",
+        "examples/cross-stack/mappings/routing-pack.json": "sha256:64cb8bad363e056b99e62fca7f1eca95c46790dcb0c4dd8c2f987c0ed4ff601f",
+        "examples/cross-stack/service/Cargo.lock": "sha256:3e511df39108267fd2cf10a9b49dd49db589ae1f49b6fb8b9152779d365a99c3",
+        "examples/cross-stack/service/Cargo.toml": "sha256:fdd1f664593da2163ad70802e6c2bc8b922dcd019500550c349efbb556cba77c",
+        "examples/cross-stack/service/rust-toolchain.toml": "sha256:515c80a149c1e927d497dbebc399e241822aa0197e8f778c21bf5c136c90afd2",
+        "examples/cross-stack/service/src/handlers/create_item.rs": "sha256:1e04089800d93b65af6823c1be25653244b70252723e6f9df4005e80a2eea962",
+        "examples/cross-stack/service/src/lib.rs": "sha256:0e146354d88c717330e199cd284004ca7963710fb3387b2fa8c9945274b17101",
+        "examples/cross-stack/service/src/main.rs": "sha256:2b6ef5e614e3739719c2ab7eae934671be0f858a8eda4399acb59673e660c0ee",
+        "examples/cross-stack/support.json": "sha256:964a978e24e0fd030513b56757c523877ba580efda5aa5e8b4c70b6ab483f823",
+        "examples/cross-stack/web/app/api/items/route.ts": "sha256:b4f98c92dae67ee6096f652b30193f9cbc2311caeab97ca9af113f2ac0c1e4c8",
+        "examples/cross-stack/web/app/items/[id]/page.tsx": "sha256:62f257c01a26a7c6bf0eb8b7cbfa4d15bec683e1e98648e034c219373f65fde9",
+        "examples/cross-stack/web/app/layout.tsx": "sha256:c1948db0db63dcabb24d969c4d4d7d55277304aeb7cc4ffa2485ca6fb3464693",
+        "examples/cross-stack/web/app/page.tsx": "sha256:c00a67d2b7bf99604a0df7544c7649a53b9d9bd72102a962b0b5c96e92590743",
+        "examples/cross-stack/web/next.config.mjs": "sha256:d9be514b014a67dbf2f6aeb0acd2b5b87801e378127d4ae8f592af5e39460b25",
+        "examples/cross-stack/web/package-lock.json": "sha256:b2d52eccd71b29bd6e6938292d3ef692e434ac4ca77e8508ed0da7c57fbc2d59",
+        "examples/cross-stack/web/package.json": "sha256:3bcba3a9906f2dd519ab7863a9174d4262aba9246977bfba96ad090ffdfd6334",
+        "examples/cross-stack/web/tsconfig.json": "sha256:45fd26769ac1a8f0b8741099674b71e00846b9f97ce1b7cb7afb98c7922ce7f0"
+      },
+      "scope": "Native workspace lint, unit/integration and documentation regression gates; no cross-stack release acceptance",
+      "completedUtc": "2026-10-15T18:28:33.887794+00:00"
+    }
+  },
+  "sourceBytes": {
+    "crates/patamaps-projection/src/lib.rs": "sha256:c39c91913e26d48aec8719b191e534f3fb05297f93fd12c23df0343bc4910a80",
+    "crates/patamaps-projection/src/capture.rs": "sha256:8b0edffa1776046998ea41e31829f925a3b75717a5bcef76cbe19c7351d78d19",
+    "crates/patamaps-projection/src/http.rs": "sha256:95df9027d15643d72b4223e9b2a6eca5f2f6f8514d395133e14c3a00ee7f2e76",
+    "crates/patamaps-cli/src/main.rs": "sha256:3803e85baa67629ee4acad12a6658961db5e87241ebd3c9c11d9748fecd516e6",
+    "scripts/cross_stack_bindings.py": "sha256:47c35d7c2ea49fbf3116330ad75ba1e38e091182dd81f2b4a6cbc4e996628a75",
+    "examples/cross-stack/build.py": "sha256:1a048c675a5c1380082d6da6204d7042e257eadf49e2e76201bf407f035f1312",
+    "examples/cross-stack/service/src/main.rs": "sha256:2b6ef5e614e3739719c2ab7eae934671be0f858a8eda4399acb59673e660c0ee",
+    "examples/cross-stack/service/src/lib.rs": "sha256:0e146354d88c717330e199cd284004ca7963710fb3387b2fa8c9945274b17101",
+    "examples/cross-stack/service/src/generated.rs": "sha256:6a396d3ae3a7a433567fbd9a47dcb013794c996faaa16d2d4eeaf9907181616a",
+    "examples/cross-stack/service/src/handlers/create_item.rs": "sha256:1e04089800d93b65af6823c1be25653244b70252723e6f9df4005e80a2eea962",
+    "examples/cross-stack/contracts/operations.json": "sha256:c91e190c34b7984f6f0baafdfc441cb8d944b3a450b99adbfa9569f1ddec8bdf",
+    "examples/cross-stack/web/app/page.tsx": "sha256:c00a67d2b7bf99604a0df7544c7649a53b9d9bd72102a962b0b5c96e92590743",
+    "examples/cross-stack/web/app/api/items/route.ts": "sha256:b4f98c92dae67ee6096f652b30193f9cbc2311caeab97ca9af113f2ac0c1e4c8",
+    "examples/cross-stack/web/generated/operations.ts": "sha256:c3121a2337620abb60e93f900ae5582f78e8224ccc9498e439cfdbdb9b911ac1",
+    "examples/cross-stack/acceptance/m2-expected.json": "sha256:0cc635f035e1c29bc910ff3f5219e6efae11ce81b15f00caf7a30d87ac66e242"
+  },
+  "checkedInGeneratedBytes": {
+    "service/src/generated.rs": "sha256:6a396d3ae3a7a433567fbd9a47dcb013794c996faaa16d2d4eeaf9907181616a",
+    "web/generated/operations.ts": "sha256:c3121a2337620abb60e93f900ae5582f78e8224ccc9498e439cfdbdb9b911ac1"
+  },
+  "scope": [
+    "native checked-projection Rust registration and TypeScript client",
+    "actual Cargo and Next builds plus real HTTP through the generated Next route/client",
+    "20 independent positive/refusal controls including real compiler and serialization behavior",
+    "source byte checks after generation and preserved prior executable candidate"
+  ],
+  "notEstablished": [
+    "whole Next/Cargo/Docker graph connection (M4)",
+    "coherent selected-candidate publication/watch/cancellation (M5)",
+    "Linux image acceptance/browser observation (M6)",
+    "cross-stack MetaMap interoperability/installed package (M7)",
+    "full M0-M7 / X01-X20 acceptance",
+    "production authorization or activation"
+  ],
+  "schemaProfile": "patamaps-http-object-strings-1",
+  "schemaValidationChange": "Empty name fails generated schema validation as invalid-request before handler dispatch; the M0 handwritten-route receipt remains unchanged.",
+  "historicalAttemptsPreserved": [
+    ".tools/cross-stack/bindings-20261015T182041.913571Z",
+    ".tools/cross-stack/bindings-20261015T182236.280067Z",
+    ".tools/cross-stack/m2-emitter-check-20261015T181335.386504Z",
+    ".tools/cross-stack/m2-first-20261015T181719.427149Z"
+  ],
+  "filesDeleted": []
+}

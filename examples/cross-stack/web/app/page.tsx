@@ -1,14 +1,19 @@
 "use client";
 import { useState, type FormEvent } from "react";
+import { callOperation } from "../generated/operations";
 export default function Page() {
   const [result, setResult] = useState("");
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const name = String(new FormData(event.currentTarget).get("name"));
-    const response = await fetch("/api/items", {method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({name})});
-    setResult(JSON.stringify(await response.json()));
+    try {
+      const result = await callOperation("urn:example:operation:create-item", {name});
+      setResult(JSON.stringify(result.body));
+    } catch {
+      setResult("The item could not be created.");
+    }
   }
   return <main><h1>Catalog</h1><form onSubmit={submit}>
-    <label htmlFor="name">Item name</label><input id="name" name="name" required maxLength={80}/>
+    <label htmlFor="name">Item name</label><input id="name" name="name" required/>
     <button type="submit">Create item</button></form><output role="status">{result}</output></main>;
 }

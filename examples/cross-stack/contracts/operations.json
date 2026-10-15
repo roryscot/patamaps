@@ -15,9 +15,11 @@
       "implementation": {
         "crate": "catalog_service",
         "symbol": "create_item",
-        "file": "service/src/lib.rs",
+        "file": "service/src/handlers/create_item.rs",
         "request": "CreateItemRequest",
-        "response": "CreateItemResponse"
+        "response": "CreateItemResponse",
+        "module": "catalog",
+        "error": "OperationError"
       },
       "cargo": {
         "manifest": "service/Cargo.toml",
@@ -30,7 +32,23 @@
       "schemas": {
         "request": "contracts/create-item.request.schema.json",
         "response": "contracts/create-item.response.schema.json"
-      }
+      },
+      "successStatus": 201,
+      "errors": [
+        {
+          "variant": "InvalidName",
+          "status": 400,
+          "code": "invalid-name"
+        },
+        {
+          "variant": "BackendFailure",
+          "status": 500,
+          "code": "backend-failure"
+        }
+      ]
     }
-  ]
+  ],
+  "moduleMap": {
+    "catalog": "service/src/handlers/create_item.rs"
+  }
 }
