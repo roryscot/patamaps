@@ -207,7 +207,7 @@ def verify(root, work, env, run):
     assert "ld-linux-x86-64.so.2" in (work / "m6-elf-loader.stdout.log").read_text()
     record("m6-cargo-linux-artifact", result="compiled-and-inspected", digest=binary_digest, target=selected[0], compiler=compiler_version, executable=format_evidence)
     notices = {p.relative_to(exported / "licenses").as_posix(): build.digest(p.read_bytes()) for p in (exported / "licenses").rglob("*") if p.is_file()}
-    assert {"application/LICENSE", "application/NOTICE", "rust/LICENSE-MIT", "rust/LICENSE-APACHE", "rust/COPYRIGHT"} <= notices.keys()
+    assert {"application/LICENSE", "application/NOTICE", "rust/LICENSE-MIT", "rust/LICENSE-APACHE", "rust/COPYRIGHT.html"} <= notices.keys()
     for artifact in artifacts:
         package = artifact.get("package_id", "")
         if artifact.get("reason") == "compiler-artifact" and package.startswith("registry+"):
