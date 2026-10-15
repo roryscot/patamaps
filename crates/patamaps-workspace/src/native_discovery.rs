@@ -48,6 +48,7 @@ enum Config {
         files: Vec<TomlSelection>,
     },
     Cargo(Box<CargoConfig>),
+    Dockerfile(Box<crate::native_docker::DockerConfig>),
 }
 
 #[derive(Deserialize)]
@@ -235,7 +236,7 @@ fn parse_toml(path: &str, raw: &str) -> Result<Document<String>, Error> {
 fn entity(id: String, kind: &str, path: &str, attributes: Value) -> Value {
     json!({"id":id,"kind":kind,"locators":[{"uri":format!("workspace:{path}")}],"attributes":attributes})
 }
-fn physical_id(namespace: &str, kind: &str, identity: &Value) -> Result<String, Error> {
+pub(super) fn physical_id(namespace: &str, kind: &str, identity: &Value) -> Result<String, Error> {
     Ok(format!(
         "urn:patamaps:observed:{kind}:{}",
         canonical_digest(&json!([namespace, identity]))?
@@ -979,6 +980,14 @@ pub fn discover_native(request: &AdapterRequest, root: &Path) -> Result<AdapterR
                 entities,
                 json!({"profile":VERSION,"evidenceClass":"observed-syntax","parser":"toml_edit=0.23.7","testedTomlProfile":"1.0-values",
                 "excludedNodeCount":excluded,"compilationEstablished":false,"semanticMeaning":"owner-authored"}),
+            )
+        }
+        Config::Dockerfile(config) => {
+            let (entities, observation) =
+                crate::native_docker::observe(&request.namespace, &inputs, &config)?;
+            (
+                entities,
+                json!({"profile":VERSION,"observation":observation}),
             )
         }
         Config::Cargo(config) => {

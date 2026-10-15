@@ -1,0 +1,31 @@
+{
+  "profile": "patamaps-cross-stack-m3-independent-controls-1",
+  "author": "fixture-owner",
+  "derivedFromDiscovery": false,
+  "state": "frozen-before-native-M3-matrix",
+  "selectedStage": {
+    "index": 1,
+    "alias": "runtime",
+    "base": "debian:bookworm-slim",
+    "platform": "linux/amd64",
+    "workdir": "/app",
+    "entrypoint": [
+      "/usr/local/bin/catalog-service"
+    ],
+    "cmd": [
+      "/app/service.toml"
+    ],
+    "user": "65532:65532",
+    "expose": [
+      "8080"
+    ]
+  },
+  "builderStage": 0,
+  "artifactSource": "/build/service/target/x86_64-unknown-linux-gnu/release/catalog-service",
+  "artifactDestination": "/usr/local/bin/catalog-service",
+  "configurationSource": "config/service.toml",
+  "configurationDestination": "/app/service.toml",
+  "imageContentsEstablishedBySyntax": false,
+  "runtimeListenerEstablishedByExpose": false,
+  "independentBuildKitOracle": "required on Linux before full M3/M6 acceptance"
+}

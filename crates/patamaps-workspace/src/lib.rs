@@ -3,6 +3,7 @@
 mod legacy_io;
 mod model;
 mod native_discovery;
+mod native_docker;
 pub use native_discovery::discover_native;
 mod source_evaluation;
 pub use legacy_io::legacy_workspace_request;
@@ -27,7 +28,7 @@ use std::{
 
 pub const PROFILE: &str = "patamaps-workspace-draft-1";
 pub fn engine_id() -> String {
-    canonical_digest(&json!({"profile":PROFILE,"compiler":executor_id(),"manifest":include_str!("../Cargo.toml"),"model":include_str!("model.rs"),"process":include_str!("process.rs"),"workspace":include_str!("lib.rs"),"legacyIO":include_str!("legacy_io.rs"),"sourceEvaluation":include_str!("source_evaluation.rs"),"nativeDiscovery":include_str!("native_discovery.rs")})).expect("finite embedded source")
+    canonical_digest(&json!({"profile":PROFILE,"compiler":executor_id(),"manifest":include_str!("../Cargo.toml"),"model":include_str!("model.rs"),"process":include_str!("process.rs"),"workspace":include_str!("lib.rs"),"legacyIO":include_str!("legacy_io.rs"),"sourceEvaluation":include_str!("source_evaluation.rs"),"nativeDiscovery":include_str!("native_discovery.rs"),"nativeDocker":include_str!("native_docker.rs")})).expect("finite embedded source")
 }
 #[derive(Debug, thiserror::Error)]
 pub enum Error {

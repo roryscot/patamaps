@@ -44,11 +44,20 @@ source = {}
 for directory in ["crates", "fixtures", "relation-packs", "schemas", "sdk", "adapters", "scripts", "examples", "vendor"]:
     for path in sorted((ROOT / directory).rglob("*")):
         if path.is_file() and not any(p in {"__pycache__", "node_modules", ".DS_Store", "target"} for p in path.parts):
-            source[path.relative_to(ROOT).as_posix()] = path.read_bytes()
+            relative = path.relative_to(ROOT)
+            if relative.parts[:2] == ("examples", "cross-stack") and (
+                any(p in {".next", ".patamaps"} for p in relative.parts)
+                or path.name in {"next-env.d.ts", "tsconfig.tsbuildinfo"}
+            ):
+                continue
+            source[relative.as_posix()] = path.read_bytes()
 for name in ["Cargo.toml", "Cargo.lock", "rust-toolchain.toml", "LICENSE", "NOTICE", "README.md", "BUILD_PLAN.md", "docs/SPEC.md", "docs/TEST_CLASSIFICATION.md"]:
     source[name] = (ROOT / name).read_bytes()
 for path in (ROOT / "docs/decisions").glob("*.md"):
     source[path.relative_to(ROOT).as_posix()] = path.read_bytes()
+for path in (ROOT / "docs/licenses").rglob("*"):
+    if path.is_file():
+        source[path.relative_to(ROOT).as_posix()] = path.read_bytes()
 for path in (ROOT / "docs/history").rglob("*"):
     if path.is_file():
         source[path.relative_to(ROOT).as_posix()] = path.read_bytes()
@@ -86,6 +95,7 @@ binary_path = output / f"{prefix}-{target}.tar.gz"
 archive(source_path, source, prefix)
 native = {"bin/patamaps": binary.read_bytes(), "LICENSE": source["LICENSE"], "NOTICE": source["NOTICE"],
           "distribution.json": (json.dumps(receipt, indent=2) + "\n").encode()}
+native.update({name: data for name, data in source.items() if name.startswith("docs/licenses/")})
 if args.activator_binary:
     native["bin/patamaps-activator"] = activator.read_bytes()
 archive(binary_path, native, prefix)
