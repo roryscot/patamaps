@@ -1,0 +1,123 @@
+{
+  "status": "passed",
+  "retainedWork": ".tools/capabilities/package-reproducibility-hh5r68i2",
+  "commands": [
+    {
+      "label": "first",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/intel-python-3.13.16-20261013/runtime/python/bin/python3",
+        "-B",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/scripts/package.py",
+        "--binary",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+        "--build-profile",
+        "development",
+        "--output",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/capabilities/package-reproducibility-hh5r68i2/first",
+        "--acceptance-output",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/docs/acceptance/capabilities/package-reproducibility-956f1a8"
+      ],
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "stdout": {
+        "path": "docs/acceptance/capabilities/package-reproducibility-956f1a8/first.stdout.log",
+        "digest": "sha256:b477227c0ed3256eacdc49a09e7113acbc0e11bcff88394fc07b3a24e309689f"
+      },
+      "stderr": {
+        "path": "docs/acceptance/capabilities/package-reproducibility-956f1a8/first.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "second",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/intel-python-3.13.16-20261013/runtime/python/bin/python3",
+        "-B",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/scripts/package.py",
+        "--binary",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+        "--build-profile",
+        "development",
+        "--output",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/capabilities/package-reproducibility-hh5r68i2/different-output-path",
+        "--acceptance-output",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/docs/acceptance/capabilities/package-reproducibility-956f1a8"
+      ],
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "stdout": {
+        "path": "docs/acceptance/capabilities/package-reproducibility-956f1a8/second.stdout.log",
+        "digest": "sha256:b477227c0ed3256eacdc49a09e7113acbc0e11bcff88394fc07b3a24e309689f"
+      },
+      "stderr": {
+        "path": "docs/acceptance/capabilities/package-reproducibility-956f1a8/second.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "refuse-overwrite",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/intel-python-3.13.16-20261013/runtime/python/bin/python3",
+        "-B",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/scripts/package.py",
+        "--binary",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+        "--build-profile",
+        "development",
+        "--output",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/capabilities/package-reproducibility-hh5r68i2/first",
+        "--acceptance-output",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/docs/acceptance/capabilities/package-reproducibility-956f1a8"
+      ],
+      "exitCode": 1,
+      "expectedExitCode": 1,
+      "stdout": {
+        "path": "docs/acceptance/capabilities/package-reproducibility-956f1a8/refuse-overwrite.stdout.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "docs/acceptance/capabilities/package-reproducibility-956f1a8/refuse-overwrite.stderr.log",
+        "digest": "sha256:a691c9e15d06f6574e3c1f0acc08ed3f62b2cd257dcb966fb7d5ed843cf3a00d"
+      }
+    }
+  ],
+  "binaryDigest": "sha256:c0152607211c65c646ab590e04b6ae2f9d6b81a6182f7478d68c2a4587c29618",
+  "engines": {
+    "schemaVersion": "0.1.0",
+    "documentType": "executor-description",
+    "compiler": "sha256:ef9ede55220df9ce22bcf6a3ff51a44ef9c872c01f402f350d76909abf806562",
+    "governance": "sha256:7463c75b6b0fb026022c67e8ecc2d78c8cdd0deba17c272fd3a9da04f21b5405",
+    "workspace": "sha256:09ebbf6a4436e5ac856851c011d666d33a5dbc97ae4aaaab8aaa41a279373fb8",
+    "scientific": "sha256:26fe1d38ac43f87a854de42b07f7dae43d483101fb2a2f7ea4675b2f45e7a4f4"
+  },
+  "scope": "Full source/native archives from identical current source and one identified development binary, created at separate paths/times. This does not attest deterministic independent binary rebuilds, owner acceptance, registry publication or activation.",
+  "deleted": [],
+  "archives": [
+    {
+      "kind": "sourceArchive",
+      "paths": [
+        ".tools/capabilities/package-reproducibility-hh5r68i2/first/patamaps-draft-ef9ede55220d-source.tar.gz",
+        ".tools/capabilities/package-reproducibility-hh5r68i2/different-output-path/patamaps-draft-ef9ede55220d-source.tar.gz"
+      ],
+      "digest": "sha256:97910d74340f483753af2009aff6e1a9b4cfb1ffc0e3e2437cd4359642ef3d2e",
+      "gzipMtime": 0,
+      "gzipFilenamePresent": false
+    },
+    {
+      "kind": "nativeArchive",
+      "paths": [
+        ".tools/capabilities/package-reproducibility-hh5r68i2/first/patamaps-draft-ef9ede55220d-x86_64-apple-darwin.tar.gz",
+        ".tools/capabilities/package-reproducibility-hh5r68i2/different-output-path/patamaps-draft-ef9ede55220d-x86_64-apple-darwin.tar.gz"
+      ],
+      "digest": "sha256:6245de16f333076bd6257864cc70f6cd63b240177297aa9be0493f4d1fe5eaa5",
+      "gzipMtime": 0,
+      "gzipFilenamePresent": false
+    }
+  ],
+  "sourceInventoryEntries": 14074,
+  "sourceInventoryDigest": "sha256:99d3edf5ed971419501ea046f83ab90bad10a2255b75e083014349d0accc271d",
+  "allSourceMembersAndCurrentBytesVerified": true,
+  "nativeBinaryBytesVerified": true,
+  "existingOutputsPreserved": true,
+  "completedAtUtc": "2026-10-15T04:34:13.477292+00:00"
+}

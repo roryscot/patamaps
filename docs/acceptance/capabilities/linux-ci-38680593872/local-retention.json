@@ -1,0 +1,78 @@
+{
+  "status": "actual-two-architecture-acceptance-passed-retained",
+  "recordedAtUtc": "2026-10-15T04:28:27.267311+00:00",
+  "sourceRevision": "956f1a8920f0fc5ba088ecda272103f12cafd8d5",
+  "run": "https://github.com/roryscot/patamaps/actions/runs/38680593872",
+  "architectures": [
+    {
+      "architecture": "aarch64",
+      "receipt": "docs/acceptance/capabilities/linux-ci-38680593872/native-linux-aarch64-956f1a8920f0fc5ba088ecda272103f12cafd8d5/receipt.json",
+      "receiptDigest": "sha256:d6c2bf7c74ff6dd91a6d35677e81b9f0f3bca1d4e43dcdfdf2f493608ae73b9d",
+      "engines": {
+        "schemaVersion": "0.1.0",
+        "documentType": "executor-description",
+        "compiler": "sha256:ef9ede55220df9ce22bcf6a3ff51a44ef9c872c01f402f350d76909abf806562",
+        "governance": "sha256:7463c75b6b0fb026022c67e8ecc2d78c8cdd0deba17c272fd3a9da04f21b5405",
+        "workspace": "sha256:09ebbf6a4436e5ac856851c011d666d33a5dbc97ae4aaaab8aaa41a279373fb8",
+        "scientific": "sha256:26fe1d38ac43f87a854de42b07f7dae43d483101fb2a2f7ea4675b2f45e7a4f4"
+      },
+      "binaries": {
+        "debug/patamaps": "sha256:d767486349f395c096e7f2fd1cb73f7d00a3dc6e6af7d1395c3510de998dd8c2",
+        "debug/patamaps-activator": "sha256:7d685d7c004edbebff0f255254871c797da872b54d063c6efe397bd400747d1c",
+        "release/patamaps": "sha256:bb2658b3450b5da9f54f6404d5deecd3b83014a727d246356c41dce4560000a5",
+        "release/patamaps-activator": "sha256:a4a6f76d664830464ed6477ca551161e013d8f185a9eac6fe3723465d61c4d6f"
+      },
+      "commands": [
+        "build-debug",
+        "rustfmt",
+        "clippy",
+        "native-debug",
+        "build-release",
+        "release-host"
+      ],
+      "sourceInventoryEntriesMatched": 388,
+      "artifactZip": ".tools/capabilities/linux-ci-38680593872/artifacts/native-linux-aarch64-956f1a8920f0fc5ba088ecda272103f12cafd8d5.zip",
+      "artifactZipDigest": "sha256:7fd50e2cce6e56e7cb931f8f9b72f6604e00f43a77143f1d9b9afd39a77a7ec5",
+      "archive": ".tools/capabilities/linux-ci-38680593872/artifacts/native-linux-aarch64-956f1a8920f0fc5ba088ecda272103f12cafd8d5/fixtures.tar.gz",
+      "archiveDigest": "sha256:3b82b266dd4b7f4500777990854418d4b97de8908cd50a6c0c2056e486996b79",
+      "archiveMembers": 1774
+    },
+    {
+      "architecture": "x86_64",
+      "receipt": "docs/acceptance/capabilities/linux-ci-38680593872/native-linux-x86_64-956f1a8920f0fc5ba088ecda272103f12cafd8d5/receipt.json",
+      "receiptDigest": "sha256:234e49fb9ce0c6fcb408d2a648a01cd07868d4028ac16c6362b1e2b3a05acdf5",
+      "engines": {
+        "schemaVersion": "0.1.0",
+        "documentType": "executor-description",
+        "compiler": "sha256:ef9ede55220df9ce22bcf6a3ff51a44ef9c872c01f402f350d76909abf806562",
+        "governance": "sha256:7463c75b6b0fb026022c67e8ecc2d78c8cdd0deba17c272fd3a9da04f21b5405",
+        "workspace": "sha256:09ebbf6a4436e5ac856851c011d666d33a5dbc97ae4aaaab8aaa41a279373fb8",
+        "scientific": "sha256:26fe1d38ac43f87a854de42b07f7dae43d483101fb2a2f7ea4675b2f45e7a4f4"
+      },
+      "binaries": {
+        "debug/patamaps": "sha256:478ef4648151046d47748697930578baebf95e8db81220bf8220dee7f6875820",
+        "debug/patamaps-activator": "sha256:8a92bb01ff0523fee90efdac296a8d77e0049e1d44d61936e61c081a471dcff6",
+        "release/patamaps": "sha256:adfb05622f741a84ac3e34ed8484bc9acdad8571e1bb255ddc475e77b5160bed",
+        "release/patamaps-activator": "sha256:f47da4b76c3fed4d0d39f9dc498ef2d8abb7a9333f61b04de3ff2da3feb1d0b2"
+      },
+      "commands": [
+        "build-debug",
+        "rustfmt",
+        "clippy",
+        "native-debug",
+        "build-release",
+        "release-host"
+      ],
+      "sourceInventoryEntriesMatched": 388,
+      "artifactZip": ".tools/capabilities/linux-ci-38680593872/artifacts/native-linux-x86_64-956f1a8920f0fc5ba088ecda272103f12cafd8d5.zip",
+      "artifactZipDigest": "sha256:5f7d51461e1b46177e56fb55c17315edec3c297969a9350ab43b949a18d746ff",
+      "archive": ".tools/capabilities/linux-ci-38680593872/artifacts/native-linux-x86_64-956f1a8920f0fc5ba088ecda272103f12cafd8d5/fixtures.tar.gz",
+      "archiveDigest": "sha256:2dae5d353578ffee41c4b14290c74affde13571783115d4baaca3d244797fca2",
+      "archiveMembers": 1774
+    }
+  ],
+  "scope": "Six actual Linux stages per architecture, including full native workspace, fixed UID/locking/current-trust/concurrency/crash/lifecycle controls and debug/release production binaries. Complete source inventories and artifact/log digests matched.",
+  "transfer": "Authenticated Rory gh CLI on original Mac streamed public ZIP bytes directly to supervised Intel receiver; no credentials or ARM disk downloads. Intel uses captured public API metadata.",
+  "recoveryVerification": "Complete ZIP and retained gzip/tar bytes verified; fixture members listed without extraction. Restoration and production activation unrun.",
+  "deleted": []
+}

@@ -1,0 +1,314 @@
+{
+  "capture": "sha256:4e46715c38afbaccc232fd97df07144fc11553ba7497b7344e517a383b14a547",
+  "missingSources": [],
+  "result": {
+    "compilationStatus": "viable",
+    "generation": {
+      "activeMappings": [
+        "urn:example:mapping:create-user-endpoint",
+        "urn:example:mapping:create-user-event",
+        "urn:example:mapping:create-user-handler",
+        "urn:example:mapping:create-user-input",
+        "urn:example:mapping:create-user-policy"
+      ],
+      "context": {},
+      "digest": "sha256:eaf86b9de53ebd84779acaf58d646e0340df05c6b824cd408cc5856ee3e2337c",
+      "documentType": "generation",
+      "evaluatedAt": "2026-10-10T12:00:00Z",
+      "evidence": [],
+      "graph": {
+        "digest": "sha256:586f009c53b10e502276332eb2b51e70e44948858ec45dd8692c2abadba6afde",
+        "id": "urn:example:routing:graph",
+        "revision": "1"
+      },
+      "id": "urn:patamaps:generation:eaf86b9de53ebd84779acaf58d646e0340df05c6b824cd408cc5856ee3e2337c",
+      "inactiveMappings": [],
+      "packs": [
+        {
+          "digest": "sha256:07683a803d0c7b7a4aa621e6bfe9b8cffa8667fd16047601aa4aa86268f84a2e",
+          "id": "urn:metamap:relation-pack:core",
+          "version": "1.0.0"
+        },
+        {
+          "digest": "sha256:c7bca28d6b8836a04a6f505bff4033947e401dd6c93cfeb8e543f82c9f0cb19d",
+          "id": "urn:metamap:relation-pack:routing",
+          "version": "1.0.0"
+        }
+      ],
+      "policy": {
+        "digest": "sha256:61dec4de8660c460bcf6341da44e485fd84e69d5eb0ad5488b8a1483f605665a",
+        "id": "urn:example:routing:viability"
+      },
+      "profile": "patamaps-routing-draft-1",
+      "schemaVersion": "0.1.0",
+      "waiversApplied": []
+    },
+    "issues": [],
+    "projections": [
+      {
+        "issues": [],
+        "pathTree": null,
+        "projection": {
+          "digest": "sha256:d6bbaa261870e1a0ad0cd2ecc69e2645d5657a8d3257ff7dd40a2d2e32b8ccb9",
+          "documentType": "projection",
+          "entries": [
+            {
+              "slots": [
+                {
+                  "cardinality": "exactly-one",
+                  "direction": "outgoing",
+                  "mappings": [
+                    "urn:example:mapping:create-user-policy"
+                  ],
+                  "name": "authorization",
+                  "relation": "routing:authorized_by",
+                  "targets": [
+                    {
+                      "id": "urn:example:policy:identity-admin",
+                      "kind": "routing:policy",
+                      "label": "Identity administrator"
+                    }
+                  ]
+                },
+                {
+                  "cardinality": "many",
+                  "direction": "outgoing",
+                  "mappings": [
+                    "urn:example:mapping:create-user-event"
+                  ],
+                  "name": "emits",
+                  "relation": "routing:emits",
+                  "targets": [
+                    {
+                      "id": "urn:example:event:user-created",
+                      "kind": "routing:event",
+                      "label": "User created"
+                    }
+                  ]
+                },
+                {
+                  "cardinality": "one-or-more",
+                  "direction": "outgoing",
+                  "mappings": [
+                    "urn:example:mapping:create-user-endpoint"
+                  ],
+                  "name": "endpoints",
+                  "relation": "routing:exposed_as",
+                  "targets": [
+                    {
+                      "attributes": {
+                        "method": "POST",
+                        "path": "/users"
+                      },
+                      "id": "urn:example:endpoint:create-user",
+                      "kind": "routing:endpoint",
+                      "label": "POST /users"
+                    }
+                  ]
+                },
+                {
+                  "cardinality": "exactly-one",
+                  "direction": "outgoing",
+                  "mappings": [
+                    "urn:example:mapping:create-user-handler"
+                  ],
+                  "name": "handler",
+                  "relation": "routing:handled_by",
+                  "targets": [
+                    {
+                      "id": "urn:example:handler:create-user",
+                      "kind": "routing:handler",
+                      "label": "Create user handler",
+                      "locators": [
+                        {
+                          "uri": "typescript:src/identity/create-user.ts#handleCreateUser"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "cardinality": "exactly-one",
+                  "direction": "outgoing",
+                  "mappings": [
+                    "urn:example:mapping:create-user-input"
+                  ],
+                  "name": "input",
+                  "relation": "routing:accepts",
+                  "targets": [
+                    {
+                      "id": "urn:example:schema:create-user",
+                      "kind": "routing:schema",
+                      "label": "Create user input",
+                      "locators": [
+                        {
+                          "uri": "json-schema:schemas/create-user.json"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "subject": {
+                "id": "urn:example:command:create-user",
+                "kind": "routing:command",
+                "label": "Create user"
+              }
+            }
+          ],
+          "generation": {
+            "digest": "sha256:eaf86b9de53ebd84779acaf58d646e0340df05c6b824cd408cc5856ee3e2337c",
+            "id": "urn:patamaps:generation:eaf86b9de53ebd84779acaf58d646e0340df05c6b824cd408cc5856ee3e2337c"
+          },
+          "graph": {
+            "digest": "sha256:586f009c53b10e502276332eb2b51e70e44948858ec45dd8692c2abadba6afde",
+            "id": "urn:example:routing:graph",
+            "revision": "1"
+          },
+          "id": "urn:patamaps:projection:d6bbaa261870e1a0ad0cd2ecc69e2645d5657a8d3257ff7dd40a2d2e32b8ccb9",
+          "profile": "patamaps-routing-draft-1",
+          "schemaVersion": "0.1.0",
+          "spec": {
+            "digest": "sha256:648b681e0f658978089c37a939004a288b0eedc586668a36544b18fe9879eb66",
+            "id": "urn:comparison:second"
+          }
+        },
+        "specId": "urn:comparison:second",
+        "status": "projected"
+      },
+      {
+        "issues": [],
+        "pathTree": null,
+        "projection": {
+          "digest": "sha256:79478d5f84cd99073d0d7a7632889f2e9f0aeeb93044caf6790bfa552181e80a",
+          "documentType": "projection",
+          "entries": [
+            {
+              "slots": [
+                {
+                  "cardinality": "exactly-one",
+                  "direction": "outgoing",
+                  "mappings": [
+                    "urn:example:mapping:create-user-policy"
+                  ],
+                  "name": "authorization",
+                  "relation": "routing:authorized_by",
+                  "targets": [
+                    {
+                      "id": "urn:example:policy:identity-admin",
+                      "kind": "routing:policy",
+                      "label": "Identity administrator"
+                    }
+                  ]
+                },
+                {
+                  "cardinality": "many",
+                  "direction": "outgoing",
+                  "mappings": [
+                    "urn:example:mapping:create-user-event"
+                  ],
+                  "name": "emits",
+                  "relation": "routing:emits",
+                  "targets": [
+                    {
+                      "id": "urn:example:event:user-created",
+                      "kind": "routing:event",
+                      "label": "User created"
+                    }
+                  ]
+                },
+                {
+                  "cardinality": "one-or-more",
+                  "direction": "outgoing",
+                  "mappings": [
+                    "urn:example:mapping:create-user-endpoint"
+                  ],
+                  "name": "endpoints",
+                  "relation": "routing:exposed_as",
+                  "targets": [
+                    {
+                      "attributes": {
+                        "method": "POST",
+                        "path": "/users"
+                      },
+                      "id": "urn:example:endpoint:create-user",
+                      "kind": "routing:endpoint",
+                      "label": "POST /users"
+                    }
+                  ]
+                },
+                {
+                  "cardinality": "exactly-one",
+                  "direction": "outgoing",
+                  "mappings": [
+                    "urn:example:mapping:create-user-handler"
+                  ],
+                  "name": "handler",
+                  "relation": "routing:handled_by",
+                  "targets": [
+                    {
+                      "id": "urn:example:handler:create-user",
+                      "kind": "routing:handler",
+                      "label": "Create user handler",
+                      "locators": [
+                        {
+                          "uri": "typescript:src/identity/create-user.ts#handleCreateUser"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "cardinality": "exactly-one",
+                  "direction": "outgoing",
+                  "mappings": [
+                    "urn:example:mapping:create-user-input"
+                  ],
+                  "name": "input",
+                  "relation": "routing:accepts",
+                  "targets": [
+                    {
+                      "id": "urn:example:schema:create-user",
+                      "kind": "routing:schema",
+                      "label": "Create user input",
+                      "locators": [
+                        {
+                          "uri": "json-schema:schemas/create-user.json"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "subject": {
+                "id": "urn:example:command:create-user",
+                "kind": "routing:command",
+                "label": "Create user"
+              }
+            }
+          ],
+          "generation": {
+            "digest": "sha256:eaf86b9de53ebd84779acaf58d646e0340df05c6b824cd408cc5856ee3e2337c",
+            "id": "urn:patamaps:generation:eaf86b9de53ebd84779acaf58d646e0340df05c6b824cd408cc5856ee3e2337c"
+          },
+          "graph": {
+            "digest": "sha256:586f009c53b10e502276332eb2b51e70e44948858ec45dd8692c2abadba6afde",
+            "id": "urn:example:routing:graph",
+            "revision": "1"
+          },
+          "id": "urn:patamaps:projection:79478d5f84cd99073d0d7a7632889f2e9f0aeeb93044caf6790bfa552181e80a",
+          "profile": "patamaps-routing-draft-1",
+          "schemaVersion": "0.1.0",
+          "spec": {
+            "digest": "sha256:d497bc82ce233eabf90024af0d329915e2ac0ea80efcdf80bbecadb7e798b132",
+            "id": "urn:example:projection:command-router"
+          }
+        },
+        "specId": "urn:example:projection:command-router",
+        "status": "projected"
+      }
+    ],
+    "status": "viable"
+  },
+  "status": "verified"
+}

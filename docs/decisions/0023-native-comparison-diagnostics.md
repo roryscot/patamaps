@@ -1,6 +1,6 @@
 # 0023 — Native comparison diagnostics
 
-Status: implemented; focused, independent and complete native compiler verification pass. Installed/platform milestone refresh remains open.
+Status: implemented and verified by focused, independent, full compiler, installed-consumer and actual Linux checks.
 
 ## Observed gap and scope
 
@@ -28,3 +28,5 @@ The full compiler run exposed an inspector test that expected duplicate-removal 
 The source-inspection and workspace candidate comparison controls had the same historical limitation. They now assert a comparable occurrence inventory while retaining rejected admission, null risk, unknown mapping transitions, all selected ambiguous records, unavailable unique-ID source-to-candidate deltas and no activation. Original reference expectations remain untouched.
 
 [All ten complete compiler stages](../acceptance/capabilities/compiler-2026-10-15T04-12-38.667740Z/receipt.json) pass on the final formatted source, including unchanged reference comparisons, native repair/source/workspace integration, generated consumers, formatting and whole-workspace Clippy.
+
+Current [installed diagnostic controls](../acceptance/capabilities/comparison-independent-installed-2026-10-15T04-25-12.071240Z/receipt.json) and [both Linux architectures](../acceptance/capabilities/linux-ci-38680593872/local-retention.json) pass on implementation 956f1a8. The [capability acceptance record](../acceptance/capabilities/package-reproducibility-956f1a8/capability-acceptance.json) records final workflow and archive outcomes.
