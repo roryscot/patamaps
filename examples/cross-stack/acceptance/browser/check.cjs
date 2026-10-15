@@ -10,6 +10,7 @@ const [base, destination] = process.argv.slice(2);
   const errors = [];
   const consoleMessages = [];
   const requests = [];
+  let delayedPageScripts = 0;
   const page = await context.newPage();
   page.on('pageerror', error => errors.push(String(error)));
   page.on('console', event => consoleMessages.push({type: event.type(), text: event.text()}));
@@ -19,6 +20,7 @@ const [base, destination] = process.argv.slice(2);
   // Enlarge the real pre-hydration window. Interactions must wait on the
   // application's disabled controls, not on an arbitrary test readiness sleep.
   await page.route('**/_next/static/chunks/app/page-*.js', async route => {
+    delayedPageScripts++;
     await new Promise(resolve => setTimeout(resolve, 250));
     await route.continue();
   });
@@ -39,13 +41,17 @@ const [base, destination] = process.argv.slice(2);
     assert.equal((await failedResponse).status(), 500);
     await page.getByRole('status').filter({hasText: 'backend-failure'}).waitFor();
     assert.deepEqual(JSON.parse(await page.getByRole('status').textContent()), {error: 'backend-failure'});
-    assert.equal((await page.goto(base + '/items/item:widget')).status(), 200);
-    assert.match(await page.locator('body').innerText(), /item:widget/);
+    for (const id of ['item:widget', 'item:100%', 'item:a%20b', 'item:Ω']) {
+      assert.equal((await page.goto(base + '/items/' + encodeURIComponent(id))).status(), 200);
+      assert.equal(await page.getByRole('heading', {level: 1}).innerText(), 'Item ' + id);
+    }
+    assert(delayedPageScripts >= 1, 'The delayed page-script control did not execute');
     assert.deepEqual(errors, []);
     fs.writeFileSync(path.join(destination, 'browser-receipt.json'), JSON.stringify({
       status: 'passed', engine: 'chromium', version: browser.version(),
       actualFormInteraction: true, hydratedClientNextLinuxRoundTrip: true,
       preHydrationScriptDeliveryDelayMs: 250, observedCreateStatus: 201,
+      delayedPageScripts, literalPercentAndUnicodeIds: true,
       deliberateBackendFailure: true, dynamicPageNavigation: true, pageErrors: errors
     }, null, 2) + '\n');
   } catch (error) {

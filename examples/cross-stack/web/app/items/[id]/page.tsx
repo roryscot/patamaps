@@ -1,4 +1,6 @@
 export default async function Item({params}:{params:Promise<{id:string}>}) {
   const {id} = await params;
-  return <main><h1>Item {id}</h1><a href="/">Catalog</a></main>;
+  let displayId = id;
+  try { displayId = decodeURIComponent(id); } catch { /* A literal percent stays text. */ }
+  return <main><h1>Item {displayId}</h1><a href="/">Catalog</a></main>;
 }
