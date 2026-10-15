@@ -87,6 +87,17 @@ jobs:
         run: python3 -B scripts/ci_cross_stack.py --phase development
       - name: Verify explicit MetaMap conversion and paired source decisions
         run: python3 -B scripts/ci_cross_stack.py --phase compatibility
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        if: always()
+        with:
+          name: cross-stack-diagnostics-source-${{ github.sha }}
+          path: |
+            ci-evidence/cross-stack-*/receipt.json
+            ci-evidence/cross-stack-image/image-controls.json
+            ci-evidence/cross-stack-image/browser/
+            ci-evidence/cross-stack-compatibility/metamap-comparison/receipt.json
+            ci-evidence/cross-stack-installed/installed-workflow/receipt.json
+          if-no-files-found: warn
       - name: Retain source fixtures and tool symlink metadata
         if: always()
         shell: bash
@@ -154,6 +165,17 @@ jobs:
         run: python3 -B scripts/ci_cross_stack.py --phase compatibility
       - name: Install an exact package and rerun the mixed workflow
         run: python3 -B scripts/ci_cross_stack.py --phase installed
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        if: always()
+        with:
+          name: cross-stack-diagnostics-image-${{ github.sha }}
+          path: |
+            ci-evidence/cross-stack-*/receipt.json
+            ci-evidence/cross-stack-image/image-controls.json
+            ci-evidence/cross-stack-image/browser/
+            ci-evidence/cross-stack-compatibility/metamap-comparison/receipt.json
+            ci-evidence/cross-stack-installed/installed-workflow/receipt.json
+          if-no-files-found: warn
       - name: Retain owned images, candidates, traces and logs
         if: always()
         run: python3 -B scripts/archive_cross_stack_ci.py --phase image
