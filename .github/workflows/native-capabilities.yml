@@ -138,6 +138,8 @@ jobs:
       - name: Prepare pinned application and browser dependencies
         shell: bash
         run: |
+          sudo apt-get update
+          sudo apt-get install --yes --no-install-recommends lld
           rustup toolchain install 1.99.0 --profile minimal --component rustfmt --component clippy
           cargo fetch --locked
           cargo fetch --manifest-path examples/cross-stack/service/Cargo.toml --locked
