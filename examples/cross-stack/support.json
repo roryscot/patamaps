@@ -2,7 +2,7 @@
   "profile": "patamaps-cross-stack-fixture-1",
   "milestones": {
     "M0": "native-fixture-verified",
-    "M1": "not-implemented",
+    "M1": "native-observation-scope-verified",
     "M2": "not-implemented",
     "M3": "not-implemented",
     "M4": "not-implemented",
@@ -31,7 +31,7 @@
   "supported": {
     "next": "App Router; declared roots; file routes only",
     "rust": "One explicit library handler and binary; no macro/call-graph inference",
-    "toml": "TOML 1.0 nonsecret declared inputs; typed lossless observations",
+    "toml": "Pinned parser; tested TOML 1.0 values; explicit complete nonsecret input files, selected tagged lossless observations",
     "http": "POST /api/items -> POST /items; one bounded JSON object request/response",
     "docker": "Declared Linux target, final runtime stage, exact artifact/config links; image acceptance required"
   },
@@ -46,5 +46,9 @@
   ],
   "imageDigests": "Must be resolved and recorded by actual Linux image acceptance; tags do not establish reproducible immutable images",
   "acceptance": "No full cross-stack claim until M0-M7 and X01-X20 have actual evidence",
-  "acceptanceReceipt": "docs/acceptance/cross-stack/m0-fixture/receipt.json"
+  "acceptanceReceipt": "docs/acceptance/cross-stack/m0-fixture/receipt.json",
+  "acceptanceReceipts": {
+    "M0": "docs/acceptance/cross-stack/m0-fixture/receipt.json",
+    "M1": "docs/acceptance/cross-stack/m1-native-observations/receipt.json"
+  }
 }

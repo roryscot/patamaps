@@ -40,16 +40,17 @@ pub(crate) fn validate_invocation(invocation: &Invocation) -> Result<(), Error> 
 }
 
 #[cfg(unix)]
-pub(crate) fn invoke(
+pub(crate) fn invoke_tool(
     invocation: &Invocation,
     executable: &Path,
     root: &Path,
-    request: &AdapterRequest,
-) -> Result<AdapterResponse, Error> {
+    input: &[u8],
+    environment: &[(&str, &str)],
+) -> Result<(Vec<u8>, Vec<u8>), Error> {
     use std::os::unix::process::CommandExt;
     validate_invocation(invocation)?;
     let limits = &invocation.bounds;
-    let request_bytes = canonical_bytes(request)?;
+    let request_bytes = input.to_vec();
     if request_bytes.len() > MAX_INPUT_BYTES {
         return Err(Error::refused(
             "ADAPTER_INPUT_LIMIT",
@@ -59,6 +60,7 @@ pub(crate) fn invoke(
     let mut child = Command::new(executable)
         .args(&invocation.arguments)
         .env_clear()
+        .envs(environment.iter().copied())
         .current_dir(root)
         .process_group(0)
         .stdin(Stdio::piped())
@@ -138,7 +140,27 @@ pub(crate) fn invoke(
     let _ = err.join();
     result?;
     written??;
-    let response: AdapterResponse = parse(output.as_deref().expect("collected stdout"))?;
+    Ok((
+        output.expect("collected stdout"),
+        diagnostics.expect("collected stderr"),
+    ))
+}
+
+#[cfg(unix)]
+pub(crate) fn invoke(
+    invocation: &Invocation,
+    executable: &Path,
+    root: &Path,
+    request: &AdapterRequest,
+) -> Result<AdapterResponse, Error> {
+    let (output, _) = invoke_tool(
+        invocation,
+        executable,
+        root,
+        &canonical_bytes(request)?,
+        &[],
+    )?;
+    let response: AdapterResponse = parse(&output)?;
     if response.profile != PROFILE
         || response.source_id != request.source_id
         || response.request_digest != request.request_digest
@@ -180,5 +202,19 @@ pub(crate) fn invoke(
     Err(Error::refused(
         "ADAPTER_PLATFORM",
         "Process discovery currently supports Linux and macOS",
+    ))
+}
+
+#[cfg(not(unix))]
+pub(crate) fn invoke_tool(
+    _: &Invocation,
+    _: &Path,
+    _: &Path,
+    _: &[u8],
+    _: &[(&str, &str)],
+) -> Result<(Vec<u8>, Vec<u8>), Error> {
+    Err(Error::refused(
+        "ADAPTER_PLATFORM",
+        "Native tool observations currently support Linux and macOS",
     ))
 }

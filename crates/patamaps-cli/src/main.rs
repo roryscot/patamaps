@@ -101,6 +101,8 @@ enum Intent {
 }
 #[derive(Subcommand)]
 enum Command {
+    /// Bounded native Cargo/TOML provider using the existing workspace process protocol.
+    DiscoverNative,
     /// Read-only legacy data validation; reports confer no admission or authorization.
     Legacy {
         #[command(subcommand)]
@@ -914,6 +916,19 @@ struct LegacyConfigRefusal {
 
 fn run(command: Command) -> Result<(), Failure> {
     match command {
+        Command::DiscoverNative => {
+            let mut input = Vec::new();
+            std::io::stdin()
+                .take((MAX_INPUT_BYTES + 1) as u64)
+                .read_to_end(&mut input)?;
+            if input.len() > MAX_INPUT_BYTES {
+                return Err(ContractError::InputLimit.into());
+            }
+            let request = parse::<patamaps_workspace::AdapterRequest>(&input)?;
+            let result = patamaps_workspace::discover_native(&request, &std::env::current_dir()?)
+                .map_err(|error| Failure::Operational(error.to_string()))?;
+            stdout_json(&result)
+        }
         Command::Legacy {
             command:
                 LegacyCommand::Run {

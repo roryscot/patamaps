@@ -23,7 +23,7 @@ def digest(raw):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--phase", choices=["bootstrap", "fixture"], required=True)
+    parser.add_argument("--phase", choices=["bootstrap", "fixture", "discovery", "regression"], required=True)
     args = parser.parse_args()
     ensure_guarded()
     stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%S.%fZ")
@@ -34,6 +34,11 @@ def main():
                CARGO_TARGET_DIR=str(ROOT / ".tools/cross-stack/target-service"),
                npm_config_cache=str(ROOT / ".tools/cross-stack/npm-cache"),
                npm_config_logs_max="1000000", NODE_OPTIONS="--max-old-space-size=2048")
+    if args.phase in {"discovery", "regression"}:
+        env["CARGO_TARGET_DIR"] = str(ROOT / "target")
+        # Reuse the already compiled Intel test profile without discarding it.
+        env.pop("CARGO_PROFILE_DEV_DEBUG", None)
+        env.pop("CARGO_PROFILE_TEST_DEBUG", None)
     receipt = {"status": "running", "phase": args.phase, "profile": "patamaps-cross-stack-fixture-1",
                "startedUtc": datetime.now(timezone.utc).isoformat(), "commands": [],
                "retainedWork": work.relative_to(ROOT).as_posix(), "filesDeleted": [],
@@ -44,13 +49,18 @@ def main():
     def save():
         receipt_path.write_text(json.dumps(receipt, indent=2) + "\n")
 
-    def run(label, argv, cwd=ROOT, timeout=300):
+    def run(label, argv, cwd=ROOT, timeout=300, input_bytes=None, expected_success=True):
         save()
         command = {"label": label, "argv": [str(v) for v in argv],
-                   "cwd": Path(cwd).relative_to(ROOT).as_posix()}
+                   "cwd": Path(cwd).relative_to(ROOT).as_posix(), "expectedSuccess": expected_success}
+        if input_bytes is not None:
+            target = work / (label + ".stdin.json")
+            with target.open("xb") as out:
+                out.write(input_bytes)
+            command["stdin"] = {"path": target.relative_to(ROOT).as_posix(), "digest": digest(input_bytes)}
         began = time.monotonic()
         with (work / (label + ".stdout.log")).open("xb") as out, (work / (label + ".stderr.log")).open("xb") as err:
-            result = subprocess.run(command["argv"], cwd=cwd, env=env, stdout=out, stderr=err, timeout=timeout)
+            result = subprocess.run(command["argv"], cwd=cwd, env=env, stdout=out, stderr=err, timeout=timeout, input=input_bytes)
         command.update(exitCode=result.returncode, seconds=round(time.monotonic()-began, 3))
         for stream in ["stdout", "stderr"]:
             p = work / (label + "." + stream + ".log")
@@ -58,7 +68,7 @@ def main():
         receipt["commands"].append(command)
         save()
         print(json.dumps({"check": label, "exitCode": result.returncode, "seconds": command["seconds"]}), flush=True)
-        if result.returncode:
+        if (result.returncode == 0) != expected_success:
             raise RuntimeError(label + " failed; retained logs in " + str(work))
         return (work / (label + ".stdout.log")).read_bytes()
 
@@ -81,6 +91,18 @@ def main():
             run("npm-lock", ["npm", "install", "--package-lock-only", "--ignore-scripts", "--no-audit", "--no-fund"], cwd=web)
             run("npm-native-install", ["npm", "ci", "--ignore-scripts", "--no-audit", "--no-fund"], cwd=web)
             run("cargo-fetch", ["cargo", "fetch", "--locked", "--manifest-path", service])
+        elif args.phase == "regression":
+            run("workspace-format", ["cargo", "fmt", "--all", "--", "--check"])
+            run("workspace-clippy", ["cargo", "clippy", "--workspace", "--all-targets", "--locked", "--offline", "--", "-D", "warnings"])
+            run("workspace-tests", ["cargo", "test", "--workspace", "--locked", "--offline"], timeout=600)
+            run("workspace-doctests", ["cargo", "test", "--workspace", "--doc", "--locked", "--offline"])
+            receipt["scope"] = "Native workspace lint, unit/integration and documentation regression gates; no cross-stack release acceptance"
+        elif args.phase == "discovery":
+            from cross_stack_discovery import verify
+            receipt["discoveryChecks"] = verify(ROOT, work, env, run)
+            for path, old in before.items():
+                assert digest((ROOT / path).read_bytes()) == old, "Fixture input changed: " + path
+            receipt["sourceUnchanged"] = True
         else:
             run("rust-format", ["cargo", "fmt", "--manifest-path", service, "--", "--check"])
             run("rust-tests", ["cargo", "test", "--manifest-path", service, "--locked", "--offline"])
