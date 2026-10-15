@@ -211,7 +211,26 @@ pub(crate) fn invoke(
         root,
         &canonical_bytes(request)?,
         &[],
-    )?;
+    )
+    .map_err(|error| match error {
+        Error::Refused { code, message } => {
+            let inputs = request
+                .inputs
+                .iter()
+                .take(8)
+                .map(|input| input.receipt.path.as_str())
+                .collect::<Vec<_>>()
+                .join(", ");
+            Error::refused(
+                code,
+                format!(
+                    "Source {} (first captured inputs: {}): {}",
+                    request.source_id, inputs, message
+                ),
+            )
+        }
+        other => other,
+    })?;
     let response: AdapterResponse = parse(&output)?;
     if response.profile != PROFILE
         || response.source_id != request.source_id

@@ -568,3 +568,37 @@ fn large_provider_code_inventory_is_captured_and_bounded() {
             .contains("WORKSPACE_SOURCE_LIMIT")
     );
 }
+
+#[cfg(unix)]
+#[test]
+fn failed_process_names_its_source_and_captured_inputs_without_pipe_payloads() {
+    let root = Temp::new();
+    let mut config = fixture(&root);
+    config.sources = vec![
+        serde_json::from_value(serde_json::json!({
+            "adapter": "process",
+            "id": "urn:patamaps:source:failing-provider",
+            "invocation": {
+                "executable": "/usr/bin/false",
+                "arguments": [],
+                "codeInputs": [],
+                "bounds": {
+                    "maximumElapsedMs": 1000,
+                    "maximumStdoutBytes": 1024,
+                    "maximumStderrBytes": 1024
+                }
+            },
+            "inputs": ["graph.json"],
+            "config": {}
+        }))
+        .unwrap(),
+    ];
+    match generate(&root.0, &config, None).unwrap_err() {
+        Error::Refused { code, message } => {
+            assert_eq!(code, "ADAPTER_EXIT");
+            assert!(message.contains("urn:patamaps:source:failing-provider"));
+            assert!(message.contains("graph.json"));
+        }
+        error => panic!("Unexpected provider refusal: {error}"),
+    }
+}
