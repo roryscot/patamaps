@@ -1,6 +1,6 @@
 {
   "profile": "patamaps-cross-stack-m5-acceptance-1",
-  "status": "Linux-preview-scope-verified; Intel-native-scope-pending",
+  "status": "Linux-and-Intel-native-preview-scope-verified",
   "sourceCommit": "a569285ca204b6fe549dec38d1ab2907959cfe7a",
   "linuxCI": {
     "run": 38816111748,
@@ -179,7 +179,21 @@
     "scope": "ordinary Unix provider and nested Cargo groups after actual CLI parent SIGKILL; trusted tools, not an OS sandbox"
   },
   "rawCommands": "linux-receipt.json",
-  "nativeIntel": "queued through unchanged existing supervisor; another project owns shared lease",
+  "nativeIntel": {
+    "status": "passed",
+    "developmentControls": 13,
+    "rawReceipt": "native-development-receipt.json",
+    "currentGuardAndRegression": "native-guard-regression.json",
+    "frozenPreGuardControl": "native-before-supervision.json",
+    "sourceRevisionAtGuardStart": "not-recorded-by-original-runner",
+    "publishedHeadAfterBothRuns": "84262c7a5f4817cd79dfc6896a801c546b6ebf60",
+    "retainedPaths": [
+      ".tools/cross-stack/development-20261015T235441.797334Z/receipt.json",
+      ".tools/cross-stack/m5-native-guard-20261015T234753.201108Z/receipt.json",
+      ".tools/cross-stack/m5-before-cancellation-20261015T234728.966987Z/receipt.json"
+    ],
+    "scope": "native preview/watch, real compiler and wire checks; actual SIGKILL ownership/liveness; format, Clippy, workspace tests, doctests, release CLI"
+  },
   "fullReleaseAccepted": false,
   "linuxImage": "pending-M6",
   "browser": "pending-M6",

@@ -1,0 +1,248 @@
+{
+  "profile": "patamaps-cross-stack-metamap-acceptance-1",
+  "controls": [
+    {
+      "control": "m7-supported",
+      "native": "viable",
+      "metamap": "viable",
+      "facts": {
+        "operationIds": [
+          "urn:example:operation:create-item"
+        ],
+        "nextPages": [
+          "/",
+          "/items/:id"
+        ],
+        "cargoBins": [
+          "catalog-service"
+        ],
+        "rustModulePath": "handlers/create_item.rs",
+        "linuxArtifactObservations": 0
+      },
+      "conversionRecords": 6,
+      "adapter": {
+        "id": "metamap-shard",
+        "version": "1.0.0",
+        "inputs": [
+          {
+            "path": "converted/graph.json",
+            "digest": "sha256:333f966a561380ad0a33e8e9e454baadb7a6f30881999d6819d47303a1184f1a"
+          }
+        ]
+      },
+      "commonIssue": null,
+      "compared": "independent facts and decisions; no cross-engine hash equality"
+    },
+    {
+      "control": "m7-moved-handler",
+      "native": "viable",
+      "metamap": "viable",
+      "facts": {
+        "operationIds": [
+          "urn:example:operation:create-item"
+        ],
+        "nextPages": [
+          "/",
+          "/items/:id"
+        ],
+        "cargoBins": [
+          "catalog-service"
+        ],
+        "rustModulePath": "handlers/moved_create_item.rs",
+        "linuxArtifactObservations": 0
+      },
+      "conversionRecords": 6,
+      "adapter": {
+        "id": "metamap-shard",
+        "version": "1.0.0",
+        "inputs": [
+          {
+            "path": "converted/graph.json",
+            "digest": "sha256:065c616879b2e58d4ed11e8325426defbd742b7af4131b29073ccf95101dabf3"
+          }
+        ]
+      },
+      "commonIssue": null,
+      "compared": "independent facts and decisions; no cross-engine hash equality"
+    },
+    {
+      "control": "m7-missing-artifact",
+      "native": "rejected",
+      "metamap": "rejected",
+      "facts": {
+        "operationIds": [
+          "urn:example:operation:create-item"
+        ],
+        "nextPages": [
+          "/",
+          "/items/:id"
+        ],
+        "cargoBins": [
+          "catalog-service"
+        ],
+        "rustModulePath": "handlers/create_item.rs",
+        "linuxArtifactObservations": 0
+      },
+      "conversionRecords": 6,
+      "adapter": {
+        "id": "metamap-shard",
+        "version": "1.0.0",
+        "inputs": [
+          {
+            "path": "converted/graph.json",
+            "digest": "sha256:b53f02da2a8595bfb17bb519436d2145c012e61beaee08a3583eeabf0c0b425f"
+          }
+        ]
+      },
+      "commonIssue": "BUILD_OBSERVATION_BINDING_MISMATCH",
+      "compared": "independent facts and decisions; no cross-engine hash equality"
+    },
+    {
+      "control": "m7-ambiguous-operation",
+      "native": "rejected",
+      "metamap": "rejected",
+      "facts": {
+        "operationIds": [
+          "urn:example:operation:create-item"
+        ],
+        "nextPages": [
+          "/",
+          "/items/:id"
+        ],
+        "cargoBins": [
+          "catalog-service"
+        ],
+        "rustModulePath": "handlers/create_item.rs",
+        "linuxArtifactObservations": 0
+      },
+      "conversionRecords": 6,
+      "adapter": {
+        "id": "metamap-shard",
+        "version": "1.0.0",
+        "inputs": [
+          {
+            "path": "converted/graph.json",
+            "digest": "sha256:7e460b98a0201147f4108e91a1ca24532dbd0cb6754c929d3b40e7d58f9855bb"
+          }
+        ]
+      },
+      "commonIssue": "NON_UNIQUE_MAPPING_TARGET",
+      "compared": "independent facts and decisions; no cross-engine hash equality"
+    },
+    {
+      "control": "m7-numeric-equivalence",
+      "native": "viable",
+      "metamap": "viable",
+      "facts": {
+        "operationIds": [
+          "urn:example:operation:create-item"
+        ],
+        "nextPages": [
+          "/",
+          "/items/:id"
+        ],
+        "cargoBins": [
+          "catalog-service"
+        ],
+        "rustModulePath": "handlers/create_item.rs",
+        "linuxArtifactObservations": 0
+      },
+      "conversionRecords": 6,
+      "adapter": {
+        "id": "metamap-shard",
+        "version": "1.0.0",
+        "inputs": [
+          {
+            "path": "converted/graph.json",
+            "digest": "sha256:a1975cec55db8ca4fcc70020578a7c74f2d1077beef277db7889c7991505f3eb"
+          }
+        ]
+      },
+      "commonIssue": null,
+      "compared": "independent facts and decisions; no cross-engine hash equality"
+    },
+    {
+      "control": "m7-missing-versus-null",
+      "native": "rejected",
+      "metamap": "rejected",
+      "facts": {
+        "operationIds": [
+          "urn:example:operation:create-item"
+        ],
+        "nextPages": [
+          "/",
+          "/items/:id"
+        ],
+        "cargoBins": [
+          "catalog-service"
+        ],
+        "rustModulePath": "handlers/create_item.rs",
+        "linuxArtifactObservations": 0
+      },
+      "conversionRecords": 6,
+      "adapter": {
+        "id": "metamap-shard",
+        "version": "1.0.0",
+        "inputs": [
+          {
+            "path": "converted/graph.json",
+            "digest": "sha256:a1975cec55db8ca4fcc70020578a7c74f2d1077beef277db7889c7991505f3eb"
+          }
+        ]
+      },
+      "commonIssue": "BUILD_OBSERVATION_BINDING_MISMATCH",
+      "compared": "independent facts and decisions; no cross-engine hash equality"
+    },
+    {
+      "control": "m7-selector-bound",
+      "native": "rejected",
+      "metamap": "rejected",
+      "facts": {
+        "operationIds": [
+          "urn:example:operation:create-item"
+        ],
+        "nextPages": [
+          "/",
+          "/items/:id"
+        ],
+        "cargoBins": [
+          "catalog-service"
+        ],
+        "rustModulePath": "handlers/create_item.rs",
+        "linuxArtifactObservations": 0
+      },
+      "conversionRecords": 6,
+      "adapter": {
+        "id": "metamap-shard",
+        "version": "1.0.0",
+        "inputs": [
+          {
+            "path": "converted/graph.json",
+            "digest": "sha256:a1975cec55db8ca4fcc70020578a7c74f2d1077beef277db7889c7991505f3eb"
+          }
+        ]
+      },
+      "commonIssue": "INVALID_CONSTRAINT_PARAMETERS",
+      "compared": "independent facts and decisions; no cross-engine hash equality"
+    },
+    {
+      "control": "m7-malformed-config",
+      "native": "source-refused",
+      "metamap": "source-refused",
+      "graphManufactured": false,
+      "independentTOMLParserComparison": false,
+      "sharedNativeProviderDiagnostic": "NATIVE_TOML_SYNTAX"
+    },
+    {
+      "control": "m7-unregistered-evaluator",
+      "result": "refused",
+      "code": "UNKNOWN_CONSTRAINT_KIND"
+    },
+    {
+      "control": "m7-protected-observation-waiver",
+      "result": "refused"
+    }
+  ],
+  "fullReleaseAccepted": false,
+  "status": "passed-portable-facts-metamap-scope"
+}

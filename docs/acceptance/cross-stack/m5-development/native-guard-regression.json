@@ -1,0 +1,138 @@
+{
+  "status": "passed",
+  "commands": [
+    {
+      "label": "format",
+      "argv": [
+        "cargo",
+        "fmt",
+        "--all",
+        "--",
+        "--check"
+      ],
+      "exitCode": 0
+    },
+    {
+      "label": "lint",
+      "argv": [
+        "cargo",
+        "clippy",
+        "--workspace",
+        "--all-targets",
+        "--locked",
+        "--offline",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exitCode": 0
+    },
+    {
+      "label": "release-cli",
+      "argv": [
+        "cargo",
+        "build",
+        "--release",
+        "-p",
+        "patamaps-cli",
+        "--locked",
+        "--offline"
+      ],
+      "exitCode": 0
+    },
+    {
+      "label": "supervision-rustc",
+      "argv": [
+        "rustup",
+        "which",
+        "rustc"
+      ],
+      "exitCode": 0
+    },
+    {
+      "label": "workspace-tests",
+      "argv": [
+        "cargo",
+        "test",
+        "--workspace",
+        "--locked",
+        "--offline"
+      ],
+      "exitCode": 0
+    },
+    {
+      "label": "workspace-docs",
+      "argv": [
+        "cargo",
+        "test",
+        "--workspace",
+        "--doc",
+        "--locked",
+        "--offline"
+      ],
+      "exitCode": 0
+    }
+  ],
+  "liveness": {
+    "controls": [
+      {
+        "control": "provider-parent-death",
+        "argv": [
+          "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/release/patamaps",
+          "generate",
+          "workspace.json",
+          "--root",
+          "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/m5-native-guard-20261015T234753.201108Z/provider-parent-death"
+        ],
+        "compilerDigest": "sha256:46756dd3d3b86839bb0902625f809e33bf883224b6a9b04550480d08c0616940",
+        "expectedStopped": true,
+        "manualCleanupRequired": false,
+        "observedOwnedPids": [
+          60740,
+          60741,
+          60742,
+          60743
+        ],
+        "observedOwnedGroups": [
+          60740,
+          60741
+        ],
+        "parentExit": -9,
+        "lingeringBeforeCleanup": [],
+        "observedMilliseconds": 38.503,
+        "result": "stopped"
+      },
+      {
+        "control": "nested-cargo-parent-death",
+        "argv": [
+          "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/release/patamaps",
+          "generate",
+          "workspace.json",
+          "--root",
+          "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/m5-native-guard-20261015T234753.201108Z/nested-cargo-parent-death"
+        ],
+        "compilerDigest": "sha256:46756dd3d3b86839bb0902625f809e33bf883224b6a9b04550480d08c0616940",
+        "expectedStopped": true,
+        "manualCleanupRequired": false,
+        "observedOwnedPids": [
+          60747,
+          60748,
+          60749,
+          60754,
+          60755,
+          60756
+        ],
+        "observedOwnedGroups": [
+          60747,
+          60748,
+          60754
+        ],
+        "parentExit": -9,
+        "lingeringBeforeCleanup": [],
+        "observedMilliseconds": 38.561,
+        "result": "stopped"
+      }
+    ],
+    "scope": "ordinary Unix provider and nested Cargo groups after actual CLI parent SIGKILL; trusted tools, not an OS sandbox"
+  }
+}
