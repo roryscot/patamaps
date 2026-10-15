@@ -1,6 +1,8 @@
 #![forbid(unsafe_code)]
 
 mod admission;
+mod build_observations;
+pub use build_observations::observation_matches;
 mod constraints;
 mod control;
 mod derivation;

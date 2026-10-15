@@ -905,6 +905,7 @@ fn admit_internal<'a>(
         }
     }
     let mut topology_work = crate::topology::Work::new(control);
+    let mut build_work = crate::build_observations::Work::new(control);
     let mut custom_bindings = std::collections::BTreeMap::new();
     for c in &policy.constraints {
         crate::control::poll(control)?;
@@ -924,6 +925,13 @@ fn admit_internal<'a>(
                     .expect("successful evaluation has a registered binding")
                     .clone(),
             );
+        } else if crate::build_observations::supported(&c.kind) {
+            issues.extend(crate::build_observations::evaluate(
+                c,
+                graph,
+                &active,
+                &mut build_work,
+            )?);
         } else if crate::topology::supported(&c.kind) {
             issues.extend(crate::topology::evaluate(
                 c,

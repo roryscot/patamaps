@@ -15,6 +15,7 @@ pub(crate) fn builtin(kind: &str) -> bool {
             | "core:requires-authority"
             | "core:requires-evidence"
     ) || crate::topology::supported(kind)
+        || crate::build_observations::supported(kind)
 }
 
 /// Attribution supplied by the host, bound into the generation's address.

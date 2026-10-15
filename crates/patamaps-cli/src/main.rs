@@ -106,6 +106,14 @@ enum Intent {
 enum Command {
     /// Bounded native Cargo/TOML provider using the existing workspace process protocol.
     DiscoverNative,
+    /// Read-only matching proposals; does not evaluate policy or confer admission.
+    MatchObservations {
+        #[command(flatten)]
+        input: GraphInput,
+        constraint: PathBuf,
+        #[command(flatten)]
+        output: Output,
+    },
     /// Read-only legacy data validation; reports confer no admission or authorization.
     Legacy {
         #[command(subcommand)]
@@ -919,6 +927,19 @@ struct LegacyConfigRefusal {
 
 fn run(command: Command) -> Result<(), Failure> {
     match command {
+        Command::MatchObservations {
+            input,
+            constraint,
+            output,
+        } => {
+            let checked = graph(&input)?;
+            let constraint: patamaps_contracts::Constraint = read(&constraint)?;
+            let matches = patamaps_core::observation_matches(&checked, &constraint)?;
+            json(
+                &output,
+                &serde_json::json!({"status":"observed-matches", "graph":{"id":checked.document().id,"digest":checked.digest()},"constraint":constraint.id,"matches":matches,"admission":"not-performed","activeBindings":"not-evaluated","authorization":"not-evaluated"}),
+            )
+        }
         Command::DiscoverNative => {
             let mut input = Vec::new();
             std::io::stdin()
