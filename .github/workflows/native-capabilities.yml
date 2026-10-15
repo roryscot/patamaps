@@ -101,7 +101,7 @@ jobs:
               work.mkdir()
               (work / "not-run.json").write_text(json.dumps({"status": "source job did not reach its entry point"}) + "\n")
           workspaces = sorted(p for p in evidence.glob("cross-stack-*") if p.is_dir())
-          with tarfile.open(evidence / "cross-stack-source.tar.gz", "x:gz", dereference=False) as archive:
+          with tarfile.open(evidence / "cross-stack-source.tar.gz", "x:gz", dereference=False, compresslevel=2) as archive:
               for workspace in workspaces:
                   receipt = workspace / "receipt.json"
                   if receipt.exists():
