@@ -1,0 +1,19 @@
+   Compiling patamaps-core v0.1.0 (/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/crates/patamaps-core)
+   Compiling patamaps-projection v0.1.0 (/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/crates/patamaps-projection)
+error: recursion limit reached while expanding `$crate::json_internal!`
+   --> crates/patamaps-projection/src/compare.rs:812:9
+    |
+812 | / ...   json!({"before":a.digest,"after":b.digest,"changes":changes,"changedOrigins":changed_origins,
+813 | | ...   "graphRecords":graph_records,"graphIdentityMode":graph_identity_mode,
+814 | | ...   "diagnosticOrigins":{"subjects":origins,"reasons":origin_reasons,"complete":origins_complete,"withinPathOriginLimit":origin...
+815 | | ...       "interpretation":"Diagnostic subjects and conservative potential influence; graph document metadata alone does not seed...
+...   |
+838 | | ...   "sourceInspectionAfter":{"capturedBytesVerified":b.sources.iter().filter(|s|s.content.is_some()).map(|s|&s.id).collect::<Ve...
+839 | | ...   "causalClaim":"Observed input differences and findings; unique causal responsibility is not established"}),
+    | |________________________________________________________________________________________________________________^
+    |
+    = help: consider increasing the recursion limit by adding a `#![recursion_limit = "256"]` attribute to your crate (`patamaps_projection`)
+    = note: this error originates in the macro `$crate::json_internal` which comes from the expansion of the macro `json` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error: could not compile `patamaps-projection` (lib) due to 1 previous error
+warning: build failed, waiting for other jobs to finish...

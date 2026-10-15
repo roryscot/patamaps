@@ -1,0 +1,123 @@
+{
+  "status": "passed",
+  "retainedWork": ".tools/capabilities/package-reproducibility-vb1zkxxp",
+  "commands": [
+    {
+      "label": "first",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/intel-python-3.13.16-20261013/runtime/python/bin/python3",
+        "-B",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/scripts/package.py",
+        "--binary",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+        "--build-profile",
+        "development",
+        "--output",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/capabilities/package-reproducibility-vb1zkxxp/first",
+        "--acceptance-output",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/docs/acceptance/capabilities/package-reproducibility-2026-10-15T03-56-15.601716Z"
+      ],
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "stdout": {
+        "path": "docs/acceptance/capabilities/package-reproducibility-2026-10-15T03-56-15.601716Z/first.stdout.log",
+        "digest": "sha256:478ffe039b5f43b513daf5841d472b7daebdf492062a5fbb190f02acc4280ef4"
+      },
+      "stderr": {
+        "path": "docs/acceptance/capabilities/package-reproducibility-2026-10-15T03-56-15.601716Z/first.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "second",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/intel-python-3.13.16-20261013/runtime/python/bin/python3",
+        "-B",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/scripts/package.py",
+        "--binary",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+        "--build-profile",
+        "development",
+        "--output",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/capabilities/package-reproducibility-vb1zkxxp/different-output-path",
+        "--acceptance-output",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/docs/acceptance/capabilities/package-reproducibility-2026-10-15T03-56-15.601716Z"
+      ],
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "stdout": {
+        "path": "docs/acceptance/capabilities/package-reproducibility-2026-10-15T03-56-15.601716Z/second.stdout.log",
+        "digest": "sha256:478ffe039b5f43b513daf5841d472b7daebdf492062a5fbb190f02acc4280ef4"
+      },
+      "stderr": {
+        "path": "docs/acceptance/capabilities/package-reproducibility-2026-10-15T03-56-15.601716Z/second.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "refuse-overwrite",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/intel-python-3.13.16-20261013/runtime/python/bin/python3",
+        "-B",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/scripts/package.py",
+        "--binary",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+        "--build-profile",
+        "development",
+        "--output",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/capabilities/package-reproducibility-vb1zkxxp/first",
+        "--acceptance-output",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/docs/acceptance/capabilities/package-reproducibility-2026-10-15T03-56-15.601716Z"
+      ],
+      "exitCode": 1,
+      "expectedExitCode": 1,
+      "stdout": {
+        "path": "docs/acceptance/capabilities/package-reproducibility-2026-10-15T03-56-15.601716Z/refuse-overwrite.stdout.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "docs/acceptance/capabilities/package-reproducibility-2026-10-15T03-56-15.601716Z/refuse-overwrite.stderr.log",
+        "digest": "sha256:694ddf03fec006372332355a5316fa75aeed468574d537bd8e358c04cfd8e53b"
+      }
+    }
+  ],
+  "binaryDigest": "sha256:0ea956daf3ac987dcb41fe10f0e155df584445061aea6862f6c29d7e4577e7f0",
+  "engines": {
+    "schemaVersion": "0.1.0",
+    "documentType": "executor-description",
+    "compiler": "sha256:d1c6ac2eaa34e010323b163143b59dcea247cbbea6c369aa49bb674a8b709f9e",
+    "governance": "sha256:0ac723ee9dc8cc68e825c06a4b2f0d05a17d1b2ac07f144292be060590e5d5cc",
+    "workspace": "sha256:bb8efd2fccbea110b755bca3f924e3f964f3761f9b1f7d2c7280e7d0a67669c0",
+    "scientific": "sha256:99cb9baaf6cfeb1eff5732c961c762c46e1e78f9e16dadb71d04376f0ffb6493"
+  },
+  "scope": "Full source/native archives from identical current source and one identified development binary, created at separate paths/times. This does not attest deterministic independent binary rebuilds, owner acceptance, registry publication or activation.",
+  "deleted": [],
+  "archives": [
+    {
+      "kind": "sourceArchive",
+      "paths": [
+        ".tools/capabilities/package-reproducibility-vb1zkxxp/first/patamaps-draft-d1c6ac2eaa34-source.tar.gz",
+        ".tools/capabilities/package-reproducibility-vb1zkxxp/different-output-path/patamaps-draft-d1c6ac2eaa34-source.tar.gz"
+      ],
+      "digest": "sha256:8496905d92a9333c7e3e67f72e3a611b60e155fa1518d4191629307deb03c443",
+      "gzipMtime": 0,
+      "gzipFilenamePresent": false
+    },
+    {
+      "kind": "nativeArchive",
+      "paths": [
+        ".tools/capabilities/package-reproducibility-vb1zkxxp/first/patamaps-draft-d1c6ac2eaa34-x86_64-apple-darwin.tar.gz",
+        ".tools/capabilities/package-reproducibility-vb1zkxxp/different-output-path/patamaps-draft-d1c6ac2eaa34-x86_64-apple-darwin.tar.gz"
+      ],
+      "digest": "sha256:36ef3e1e9868ff927a9a406c10a10f366fcd4f919bf949cbef72c267c6375f2c",
+      "gzipMtime": 0,
+      "gzipFilenamePresent": false
+    }
+  ],
+  "sourceInventoryEntries": 13735,
+  "sourceInventoryDigest": "sha256:df7e3b94e23676f033cee6ca7ff8d8b98586025764bc7505876412312654e684",
+  "allSourceMembersAndCurrentBytesVerified": true,
+  "nativeBinaryBytesVerified": true,
+  "existingOutputsPreserved": true,
+  "completedAtUtc": "2026-10-15T03:57:48.145199+00:00"
+}

@@ -184,7 +184,7 @@ fn source_only_change_invalidates_the_actual_artifact_manifest() {
 }
 
 #[test]
-fn ambiguous_source_focus_retains_records_and_reports_unavailable_comparison() {
+fn ambiguous_source_focus_retains_records_and_compares_recorded_occurrences() {
     let f = fixture();
     let baseline = generate(&f.root, &f.config, None).unwrap().baseline;
     let initial = capture_source_evaluation(
@@ -231,7 +231,14 @@ fn ambiguous_source_focus_retains_records_and_reports_unavailable_comparison() {
     );
     assert_eq!(
         report.record()["sources"]["comparison"]["report"]["candidateComparison"]["status"],
-        "unavailable"
+        "compared"
     );
+    let candidate = &report.record()["sources"]["comparison"]["report"]["candidate"];
+    assert_eq!(candidate["graphIdentityMode"], "occurrence-aware");
+    let occurrence = &candidate["graphRecords"]["mapping"]["occurrences"][0];
+    assert_eq!(occurrence["beforeDigests"].as_array().unwrap().len(), 1);
+    assert_eq!(occurrence["afterDigests"].as_array().unwrap().len(), 2);
+    assert_eq!(candidate["admittedPathsAfter"]["status"], "unavailable");
+    assert_eq!(candidate["riskDelta"], Value::Null);
     assert_eq!(report.record()["approval"]["active"], "not-evaluated");
 }

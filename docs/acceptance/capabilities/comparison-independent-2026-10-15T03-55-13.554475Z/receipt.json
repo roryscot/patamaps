@@ -1,0 +1,213 @@
+{
+  "status": "passed",
+  "requireComplete": false,
+  "scope": "Independent native CLI diagnostic controls; no activation or unique causal attribution.",
+  "retainedWork": ".tools/capabilities/comparison-independent-mgmw9rkx",
+  "binaryDigest": "sha256:0ea956daf3ac987dcb41fe10f0e155df584445061aea6862f6c29d7e4577e7f0",
+  "commands": [
+    {
+      "label": "base-capture",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+        "capture",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/capabilities/comparison-independent-mgmw9rkx/base/graph.json",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/capabilities/comparison-independent-mgmw9rkx/base/policy.json",
+        "--spec",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/capabilities/comparison-independent-mgmw9rkx/base/spec.json",
+        "--spec",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/capabilities/comparison-independent-mgmw9rkx/base/second-spec.json",
+        "--relation-pack",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/relation-packs/core.json",
+        "--relation-pack",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/relation-packs/routing.json",
+        "--as-of",
+        "2026-10-10T12:00:00Z",
+        "--output",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/capabilities/comparison-independent-mgmw9rkx/base/capture.json"
+      ],
+      "exitCode": 0,
+      "stdoutDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "base-replay",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+        "replay",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/capabilities/comparison-independent-mgmw9rkx/base/capture.json"
+      ],
+      "exitCode": 0,
+      "stdoutDigest": "sha256:5a6b8a586902c9e57f45511ca833a3c1c374ba656a65f77ab946c830064057c5",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "duplicate-capture",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+        "capture",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/capabilities/comparison-independent-mgmw9rkx/duplicate/graph.json",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/capabilities/comparison-independent-mgmw9rkx/duplicate/policy.json",
+        "--spec",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/capabilities/comparison-independent-mgmw9rkx/duplicate/spec.json",
+        "--spec",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/capabilities/comparison-independent-mgmw9rkx/duplicate/second-spec.json",
+        "--relation-pack",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/relation-packs/core.json",
+        "--relation-pack",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/relation-packs/routing.json",
+        "--as-of",
+        "2026-10-10T12:00:00Z",
+        "--output",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/capabilities/comparison-independent-mgmw9rkx/duplicate/capture.json"
+      ],
+      "exitCode": 0,
+      "stdoutDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "duplicate-replay",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+        "replay",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/capabilities/comparison-independent-mgmw9rkx/duplicate/capture.json"
+      ],
+      "exitCode": 0,
+      "stdoutDigest": "sha256:6d450185d38ba824dae209877975c2e8a4533942b56f73f0c59cb19b25cc404e",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "duplicate-compare",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+        "compare",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/capabilities/comparison-independent-mgmw9rkx/base/capture.json",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/capabilities/comparison-independent-mgmw9rkx/duplicate/capture.json"
+      ],
+      "exitCode": 1,
+      "stdoutDigest": "sha256:e3cddb0324fabd22f0395f6092f843ce64cec5615e6e6b73804539ad18859de9",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "consumer-capture",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+        "capture",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/capabilities/comparison-independent-mgmw9rkx/consumer/graph.json",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/capabilities/comparison-independent-mgmw9rkx/consumer/policy.json",
+        "--spec",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/capabilities/comparison-independent-mgmw9rkx/consumer/spec.json",
+        "--spec",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/capabilities/comparison-independent-mgmw9rkx/consumer/second-spec.json",
+        "--relation-pack",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/relation-packs/core.json",
+        "--relation-pack",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/relation-packs/routing.json",
+        "--as-of",
+        "2026-10-10T12:00:00Z",
+        "--output",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/capabilities/comparison-independent-mgmw9rkx/consumer/capture.json"
+      ],
+      "exitCode": 0,
+      "stdoutDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "consumer-replay",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+        "replay",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/capabilities/comparison-independent-mgmw9rkx/consumer/capture.json"
+      ],
+      "exitCode": 0,
+      "stdoutDigest": "sha256:faa16de47ae6827858cef74c885ba23fc0df664fe91b7f2f4eefdb97ecfd0e8c",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "consumer-compare",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+        "compare",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/capabilities/comparison-independent-mgmw9rkx/base/capture.json",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/capabilities/comparison-independent-mgmw9rkx/consumer/capture.json"
+      ],
+      "exitCode": 0,
+      "stdoutDigest": "sha256:e9ff501ac6555ed3fe48b7950db84d89db1df871b2ca503aea0db0461156befe",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "policy-capture",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+        "capture",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/capabilities/comparison-independent-mgmw9rkx/policy/graph.json",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/capabilities/comparison-independent-mgmw9rkx/policy/policy.json",
+        "--spec",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/capabilities/comparison-independent-mgmw9rkx/policy/spec.json",
+        "--spec",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/capabilities/comparison-independent-mgmw9rkx/policy/second-spec.json",
+        "--relation-pack",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/relation-packs/core.json",
+        "--relation-pack",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/relation-packs/routing.json",
+        "--as-of",
+        "2026-10-10T12:00:00Z",
+        "--output",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/capabilities/comparison-independent-mgmw9rkx/policy/capture.json"
+      ],
+      "exitCode": 0,
+      "stdoutDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "policy-replay",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+        "replay",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/capabilities/comparison-independent-mgmw9rkx/policy/capture.json"
+      ],
+      "exitCode": 0,
+      "stdoutDigest": "sha256:0d1ed0baf3e949424bc22f2c9afa2058f9163616742f7c8023fc78aca2798b0d",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "policy-compare",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+        "compare",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/capabilities/comparison-independent-mgmw9rkx/base/capture.json",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/capabilities/comparison-independent-mgmw9rkx/policy/capture.json"
+      ],
+      "exitCode": 0,
+      "stdoutDigest": "sha256:b0cd324fa0cbcca5769ace58e5bd52a487d7814e0df788b413b1be44dc0df549",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "explicit-compare",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+        "compare",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/capabilities/comparison-independent-mgmw9rkx/base/capture.json",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/capabilities/comparison-independent-mgmw9rkx/base/capture.json",
+        "--origin",
+        "urn:example:command:create-user"
+      ],
+      "exitCode": 2,
+      "stdoutDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrDigest": "sha256:6b7c8f1f88649c60e24e8507a97826834e651a222e969898b33db84c747152b5"
+    }
+  ],
+  "deleted": [],
+  "duplicateComparisonAvailable": false,
+  "consumerOriginsAvailable": false,
+  "policyOriginsAvailable": false,
+  "explicitDiagnosticAvailable": false,
+  "engines": {
+    "compiler": "sha256:d1c6ac2eaa34e010323b163143b59dcea247cbbea6c369aa49bb674a8b709f9e",
+    "documentType": "executor-description",
+    "governance": "sha256:0ac723ee9dc8cc68e825c06a4b2f0d05a17d1b2ac07f144292be060590e5d5cc",
+    "schemaVersion": "0.1.0",
+    "scientific": "sha256:99cb9baaf6cfeb1eff5732c961c762c46e1e78f9e16dadb71d04376f0ffb6493",
+    "workspace": "sha256:bb8efd2fccbea110b755bca3f924e3f964f3761f9b1f7d2c7280e7d0a67669c0"
+  },
+  "allControlsRequireComplete": false
+}

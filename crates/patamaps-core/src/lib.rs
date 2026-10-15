@@ -55,7 +55,7 @@ pub use graph::object_bounds_with_limits as check_metadata_bounds_with_limits;
 pub use graph::{
     AuthorityResolution, CheckError, CheckedGraph, Direction, Issue, Severity, TraceVisit, compose,
 };
-pub use impact::{ImpactReport, ImpactStep, ImpactVisit, impact};
+pub use impact::{ImpactReport, ImpactStep, ImpactVisit, impact, impact_admitted};
 pub use legacy_composition::{
     LegacyCompositionError, LegacyCompositionRequest, compose_legacy_documents,
 };

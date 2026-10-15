@@ -1,6 +1,6 @@
 use crate::{CaptureInputs, VerifiedReplay};
 use patamaps_contracts::*;
-use patamaps_core::{CheckError, CheckedGraph, diff};
+use patamaps_core::{CheckError, CheckedGraph, EvaluationOptions, Issue, RecordDelta, admit, diff};
 use serde::Serialize;
 use serde_json::{Value, json};
 use std::collections::{BTreeMap, BTreeSet, VecDeque};
@@ -258,14 +258,451 @@ fn support_subjects(inputs: &CaptureInputs) -> BTreeSet<&str> {
         .collect()
 }
 
+// A rejection can retain duplicate graph identities. Keep the ordinary unique-ID
+// diff contract, but do not lose the whole diagnostic report when it refuses.
+fn graph_changes(
+    a: &CaptureInputs,
+    b: &CaptureInputs,
+) -> Result<(Vec<RecordDelta>, Value, &'static str), CheckError> {
+    let inventory = json!({
+        "entity":records(&a.graph.entities,&b.graph.entities)?,
+        "mapping":records(&a.graph.mappings,&b.graph.mappings)?,
+        "authority":records(&a.graph.authorities,&b.graph.authorities)?
+    });
+    match diff(&a.graph, &b.graph) {
+        Ok(changes) => Ok((changes, inventory, "unique-ids")),
+        Err(error) if error.0.iter().all(|i| i.code == "DUPLICATE_DIFF_ID") => {
+            let mut changes = Vec::new();
+            for kind in ["entity", "mapping", "authority"] {
+                for row in inventory[kind]["occurrences"]
+                    .as_array()
+                    .expect("record occurrences")
+                {
+                    let digest = |key: &str| {
+                        row[key]
+                            .as_array()
+                            .filter(|v| v.len() == 1)
+                            .and_then(|v| v[0].as_str())
+                            .map(str::to_owned)
+                    };
+                    changes.push(RecordDelta {
+                        kind,
+                        id: row["id"].as_str().expect("record id").into(),
+                        change: if row["beforeDigests"].is_null() {
+                            "added"
+                        } else if row["afterDigests"].is_null() {
+                            "removed"
+                        } else {
+                            "modified"
+                        },
+                        before_digest: digest("beforeDigests"),
+                        after_digest: digest("afterDigests"),
+                    });
+                }
+            }
+            let (mut old, mut new) = (a.graph.clone(), b.graph.clone());
+            old.entities.clear();
+            old.mappings.clear();
+            old.authorities.clear();
+            new.entities.clear();
+            new.mappings.clear();
+            new.authorities.clear();
+            changes.extend(diff(&old, &new)?);
+            changes.sort_by(|a, b| (&a.kind, &a.id).cmp(&(&b.kind, &b.id)));
+            Ok((changes, inventory, "occurrence-aware"))
+        }
+        Err(error) => Err(error),
+    }
+}
+
+fn issue_counts(values: &[Value]) -> Result<BTreeMap<String, (Value, usize)>, CheckError> {
+    let mut counts = BTreeMap::new();
+    for value in values {
+        let entry = counts
+            .entry(canonical_digest(value)?)
+            .or_insert_with(|| (value.clone(), 0));
+        entry.1 += 1;
+    }
+    Ok(counts)
+}
+
+fn issue_delta(a: Option<&[Value]>, b: Option<&[Value]>) -> Result<Value, CheckError> {
+    let (Some(old), Some(new)) = (a, b) else {
+        return Ok(
+            json!({"beforeKnown":a.is_some(),"afterKnown":b.is_some(),"introduced":null,"resolved":null,
+            "reason":"A stage was not recorded, requested or evaluated; absence is not resolution"}),
+        );
+    };
+    let (old, new) = (issue_counts(old)?, issue_counts(new)?);
+    let ids: BTreeSet<_> = old.keys().chain(new.keys()).collect();
+    let (mut introduced, mut resolved) = (Vec::new(), Vec::new());
+    for id in ids {
+        let (a, b) = (
+            old.get(id).map_or(0, |v| v.1),
+            new.get(id).map_or(0, |v| v.1),
+        );
+        if b > a {
+            introduced.push(json!({"issue":new[id].0,"count":b-a}));
+        }
+        if a > b {
+            resolved.push(json!({"issue":old[id].0,"count":a-b}));
+        }
+    }
+    Ok(json!({"beforeKnown":true,"afterKnown":true,"introduced":introduced,"resolved":resolved}))
+}
+
+type IssueStages = BTreeMap<(&'static str, Option<String>), Option<Vec<Value>>>;
+
+fn issue_stages(capture: &crate::CaptureRecord) -> Result<IssueStages, CheckError> {
+    let mut stages = IssueStages::new();
+    let top = capture.result["issues"]
+        .as_array()
+        .expect("verified evaluation issues");
+    let collection = !capture.inputs.projection_specs.is_empty();
+    let compilation = if collection && capture.result["compilationStatus"] == "viable" {
+        let mut remaining = issue_counts(top)?;
+        for outcome in capture.result["projections"]
+            .as_array()
+            .expect("verified projection outcomes")
+        {
+            for issue in outcome["issues"]
+                .as_array()
+                .expect("verified projection issues")
+            {
+                remaining
+                    .get_mut(&canonical_digest(issue)?)
+                    .expect("aggregate includes outcome issues")
+                    .1 -= 1;
+            }
+        }
+        Some(
+            remaining
+                .into_values()
+                .flat_map(|(v, n)| std::iter::repeat_n(v, n))
+                .collect(),
+        )
+    } else if collection || capture.result["status"] == "viable" {
+        Some(top.clone())
+    } else {
+        None
+    };
+    stages.insert(("compilation", None), compilation);
+    for spec in capture.inputs.specs() {
+        let outcome = if collection {
+            capture.result["projections"]
+                .as_array()
+                .and_then(|values| values.iter().find(|v| v["specId"] == spec.id))
+        } else {
+            None
+        };
+        let projected = outcome
+            .is_some_and(|v| v["status"] == "projected" || v["status"] == "path-tree-rejected")
+            || (!collection && capture.result["status"] == "viable");
+        let projection = if projected {
+            Some(vec![])
+        } else {
+            outcome
+                .filter(|v| v["status"] == "rejected")
+                .and_then(|v| v["issues"].as_array().cloned())
+        };
+        stages.insert(("projection", Some(spec.id.clone())), projection);
+        let tree = if spec.path_tree.is_none() {
+            None
+        } else if outcome.is_some_and(|v| v["status"] == "path-tree-rejected") {
+            outcome.and_then(|v| v["issues"].as_array().cloned())
+        } else if projected {
+            Some(vec![])
+        } else {
+            None
+        };
+        stages.insert(("path-tree", Some(spec.id.clone())), tree);
+    }
+    Ok(stages)
+}
+
+fn stage_deltas(
+    a: &crate::CaptureRecord,
+    b: &crate::CaptureRecord,
+) -> Result<Vec<Value>, CheckError> {
+    let (a, b) = (issue_stages(a)?, issue_stages(b)?);
+    let keys: BTreeSet<_> = a.keys().chain(b.keys()).collect();
+    keys.into_iter().map(|key|Ok(json!({"stage":key.0,"specId":key.1,
+        "delta":issue_delta(a.get(key).and_then(|v|v.as_deref()),b.get(key).and_then(|v|v.as_deref()))?}))).collect()
+}
+
+// Declarations have no stable record identity. A digest multiset finds changed
+// occurrences without depending on order or losing identical repetitions.
+fn changed_values(a: &[Value], b: &[Value]) -> Result<Vec<Value>, CheckError> {
+    let (old, new) = (issue_counts(a)?, issue_counts(b)?);
+    let keys: BTreeSet<_> = old.keys().chain(new.keys()).collect();
+    Ok(keys
+        .into_iter()
+        .filter(|key| old.get(*key).map(|v| v.1) != new.get(*key).map(|v| v.1))
+        .map(|key| {
+            old.get(key)
+                .or_else(|| new.get(key))
+                .expect("changed record")
+                .0
+                .clone()
+        })
+        .collect())
+}
+
+fn references(value: &Value, known: &BTreeSet<&str>, subjects: &mut BTreeSet<String>) {
+    match value {
+        Value::String(id) if known.contains(id.as_str()) => {
+            subjects.insert(id.clone());
+        }
+        Value::Array(values) => {
+            for value in values {
+                references(value, known, subjects);
+            }
+        }
+        Value::Object(object) => {
+            for (key, value) in object {
+                if key == "subjects" {
+                    subjects.extend(
+                        value
+                            .as_array()
+                            .into_iter()
+                            .flatten()
+                            .filter_map(Value::as_str)
+                            .map(str::to_owned),
+                    );
+                }
+                references(value, known, subjects);
+            }
+        }
+        _ => {}
+    }
+}
+
+fn diagnostic_origins(
+    a: &CaptureInputs,
+    b: &CaptureInputs,
+    changes: &[RecordDelta],
+    explicit: &[String],
+) -> Result<(BTreeMap<String, BTreeSet<&'static str>>, bool), CheckError> {
+    let mut reasons: BTreeMap<String, BTreeSet<&'static str>> = BTreeMap::new();
+    let mut complete = true;
+    let mut add = |id: String, reason| {
+        if reasons.contains_key(&id) || reasons.len() < 256 {
+            reasons.entry(id).or_default().insert(reason);
+        } else {
+            complete = false;
+        }
+    };
+    for id in explicit {
+        add(id.clone(), "explicit-diagnostic");
+    }
+    for change in changes.iter().filter(|d| d.kind != "document") {
+        add(change.id.clone(), "graph-record");
+    }
+    let known: BTreeSet<_> = [a, b]
+        .into_iter()
+        .flat_map(|i| {
+            i.graph
+                .entities
+                .iter()
+                .map(|v| v.id.as_str())
+                .chain(i.graph.mappings.iter().map(|v| v.id.as_str()))
+                .chain(i.graph.authorities.iter().map(|v| v.id.as_str()))
+        })
+        .collect();
+    let (old, new) = (
+        serde_json::to_value(&a.policy).map_err(ContractError::from)?,
+        serde_json::to_value(&b.policy).map_err(ContractError::from)?,
+    );
+    let mut selector_changed = false;
+    for field in ["mappings", "constraints", "evidence", "waivers"] {
+        for record in changed_values(
+            old[field].as_array().map(Vec::as_slice).unwrap_or(&[]),
+            new[field].as_array().map(Vec::as_slice).unwrap_or(&[]),
+        )? {
+            let mut subjects = BTreeSet::new();
+            references(&record, &known, &mut subjects);
+            for id in subjects {
+                add(id, "policy-record-reference");
+            }
+            if field == "mappings" && record.get("select").is_some() {
+                selector_changed = true;
+            }
+        }
+    }
+    if selector_changed {
+        for input in [a, b] {
+            for m in &input.graph.mappings {
+                add(m.id.clone(), "policy-selector-potential");
+            }
+        }
+    }
+    let mut semantic_selector_changed = false;
+    for field in [
+        "derivations",
+        "assessments",
+        "uncertaintyRequirements",
+        "riskBudgets",
+    ] {
+        for record in changed_values(
+            old["semantics"][field]
+                .as_array()
+                .map(Vec::as_slice)
+                .unwrap_or(&[]),
+            new["semantics"][field]
+                .as_array()
+                .map(Vec::as_slice)
+                .unwrap_or(&[]),
+        )? {
+            if field == "derivations" {
+                if let Some(id) = record["id"].as_str() {
+                    add(id.into(), "recorded-derivation");
+                }
+            } else {
+                let mut subjects = BTreeSet::new();
+                references(&record, &known, &mut subjects);
+                for id in subjects {
+                    add(id, "semantic-policy-reference");
+                }
+                semantic_selector_changed |= record.get("select").is_some();
+            }
+        }
+    }
+    semantic_selector_changed |= changed(
+        &old["semantics"]["interpretation"],
+        &new["semantics"]["interpretation"],
+    )? || changed(
+        &old["semantics"]["derivationLimits"],
+        &new["semantics"]["derivationLimits"],
+    )?;
+    if semantic_selector_changed {
+        for input in [a, b] {
+            for mapping in &input.graph.mappings {
+                add(mapping.id.clone(), "semantic-selector-potential");
+            }
+        }
+    }
+    if changed(&a.context, &b.context)?
+        || a.evaluated_at != b.evaluated_at
+        || changed(&a.packs, &b.packs)?
+    {
+        for input in [a, b] {
+            for m in &input.graph.mappings {
+                add(m.id.clone(), "evaluation-input-potential");
+            }
+        }
+    }
+    let spec_values = |input: &CaptureInputs| {
+        input
+            .specs()
+            .map(|v| serde_json::to_value(v).map_err(ContractError::from))
+            .collect::<Result<Vec<_>, _>>()
+    };
+    let changed_specs = changed_values(&spec_values(a)?, &spec_values(b)?)?;
+    let changed_ids: BTreeSet<_> = changed_specs
+        .iter()
+        .filter_map(|v| v["id"].as_str())
+        .collect();
+    let mut selection_work = 0usize;
+    let mut work_exhausted = false;
+    'selection: for input in [a, b] {
+        for spec in input
+            .specs()
+            .filter(|s| changed_ids.contains(s.id.as_str()))
+        {
+            let selected_ids = spec
+                .select
+                .ids
+                .as_ref()
+                .map(|v| v.iter().collect::<BTreeSet<_>>());
+            let selected_kinds = spec
+                .select
+                .kinds
+                .as_ref()
+                .map(|v| v.iter().collect::<BTreeSet<_>>());
+            for entity in &input.graph.entities {
+                selection_work += 1;
+                if selection_work > 2_000_000 {
+                    work_exhausted = true;
+                    break 'selection;
+                }
+                if selected_ids
+                    .as_ref()
+                    .is_none_or(|ids| ids.contains(&entity.id))
+                    && selected_kinds
+                        .as_ref()
+                        .is_none_or(|kinds| kinds.contains(&entity.kind))
+                {
+                    add(entity.id.clone(), "consumer-selection-potential");
+                }
+            }
+        }
+    }
+    Ok((reasons, complete && !work_exhausted))
+}
+
+fn admitted_paths(inputs: &CaptureInputs, origins: &[String]) -> Result<Value, CheckError> {
+    let graph = match CheckedGraph::check(inputs.graph.clone(), inputs.packs.clone()) {
+        Ok(graph) => graph,
+        Err(error) => {
+            return Ok(
+                json!({"status":"unavailable","scope":"admitted-authored-graph","issues":error.0}),
+            );
+        }
+    };
+    let generation = match admit(
+        &graph,
+        &inputs.policy,
+        EvaluationOptions {
+            context: inputs.context.clone(),
+            evaluated_at: inputs.evaluated_at.clone(),
+        },
+    ) {
+        Ok(generation) => generation,
+        Err(error) => {
+            return Ok(
+                json!({"status":"unavailable","scope":"admitted-authored-graph","issues":error.0}),
+            );
+        }
+    };
+    match patamaps_core::impact_admitted(&generation, origins, 64) {
+        Ok(report) => Ok(
+            json!({"status":"available","scope":"admitted-authored-graph","recomputed":true,"generation":generation.record().digest,"report":report}),
+        ),
+        Err(error) => {
+            Ok(json!({"status":"unavailable","scope":"admitted-authored-graph","issues":error.0}))
+        }
+    }
+}
+
 /// Compare verified inputs/results; unavailable deltas remain explicit nulls.
 pub fn compare(
     before: &VerifiedReplay<'_>,
     after: &VerifiedReplay<'_>,
 ) -> Result<Value, CheckError> {
+    compare_with_origins(before, after, &[])
+}
+
+/// Add diagnostic subjects without altering either captured input or result.
+/// Potential policy/consumer influence is not a unique causal attribution.
+pub fn compare_with_origins(
+    before: &VerifiedReplay<'_>,
+    after: &VerifiedReplay<'_>,
+    explicit_origins: &[String],
+) -> Result<Value, CheckError> {
+    if explicit_origins.len() > 256
+        || explicit_origins
+            .iter()
+            .any(|id| !patamaps_core::valid_identifier(id))
+    {
+        return Err(CheckError(vec![Issue::error(
+            "COMPARISON_ORIGIN_LIMIT",
+            "Diagnostic origins require at most 256 valid subject identifiers",
+            "comparison",
+        )]));
+    }
     let a = before.record();
     let b = after.record();
-    let changes = diff(&a.inputs.graph, &b.inputs.graph)?;
+    let (changes, graph_records, graph_identity_mode) = graph_changes(&a.inputs, &b.inputs)?;
     let projection_delta = match (
         a.result.get("projection").filter(|v| !v.is_null()),
         b.result.get("projection").filter(|v| !v.is_null()),
@@ -299,7 +736,9 @@ pub fn compare(
         }
         _ => None,
     };
-    let origins: Vec<_> = changes.iter().map(|d| d.id.clone()).collect();
+    let (origin_reasons, origins_complete) =
+        diagnostic_origins(&a.inputs, &b.inputs, &changes, explicit_origins)?;
+    let origins: Vec<_> = origin_reasons.keys().cloned().collect();
     let source_maps: Vec<BTreeMap<_, _>> = [&a.sources, &b.sources]
         .iter()
         .map(|sources| sources.iter().map(|s| (s.id.clone(), s)).collect())
@@ -319,6 +758,11 @@ pub fn compare(
         }
     }
     let declared_paths = |inputs: &CaptureInputs| -> Result<Value, CheckError> {
+        if !origins_complete {
+            return Ok(
+                json!({"status":"unavailable","scope":"declared-graph","reason":"Diagnostic origin count or selection work limit exceeded","complete":false}),
+            );
+        }
         match CheckedGraph::check(inputs.graph.clone(), inputs.packs.clone()) {
             Ok(g) => match patamaps_core::impact(&g, &origins, 64) {
                 Ok(report) => {
@@ -384,16 +828,31 @@ pub fn compare(
             json!({"beforeKnown":a.is_some(),"afterKnown":b.is_some(),"activated":null,"deactivated":null})
         }
     };
-    Ok(
-        json!({"before":a.digest,"after":b.digest,"changes":changes,"changedOrigins":changed_origins,
+    let checked_paths = |inputs: &CaptureInputs| -> Result<Value, CheckError> {
+        if origins_complete {
+            admitted_paths(inputs, &origins)
+        } else {
+            Ok(
+                json!({"status":"unavailable","scope":"admitted-authored-graph","reason":"Diagnostic origin count or selection work limit exceeded","complete":false}),
+            )
+        }
+    };
+    let proof_paths = |inputs: &CaptureInputs| {
+        if origins_complete {
+            recorded_proof_paths(inputs, &proof_origins)
+        } else {
+            json!({"status":"unavailable","scope":"recorded-proof-dependencies","reason":"Diagnostic origin count or selection work limit exceeded","complete":false})
+        }
+    };
+    let mut report = json!({"before":a.digest,"after":b.digest,"changes":changes,"changedOrigins":changed_origins,
         "statusChanged":a.result["status"] != b.result["status"],"projectionChanged":projection_delta,"pathTreeChanged":tree_delta,
         "policyChanged":canonical_digest(&a.inputs.policy)? != canonical_digest(&b.inputs.policy)?,
         "contextChanged":canonical_bytes(&a.inputs.context)? != canonical_bytes(&b.inputs.context)?,
         "packChanged":canonical_bytes(&a.inputs.packs)? != canonical_bytes(&b.inputs.packs)?,
         "riskDelta":risk_delta,"missingSourcesBefore":before.missing_sources(),"missingSourcesAfter":after.missing_sources(),
         "declaredPathsBefore":declared_paths(&a.inputs)?,"declaredPathsAfter":declared_paths(&b.inputs)?,
-        "recordedProofPathsBefore":recorded_proof_paths(&a.inputs,&proof_origins),
-        "recordedProofPathsAfter":recorded_proof_paths(&b.inputs,&proof_origins),
+        "recordedProofPathsBefore":proof_paths(&a.inputs),
+        "recordedProofPathsAfter":proof_paths(&b.inputs),
         "policyRecords":policy_records,
         "evidenceSupport":{"recordedSupportLost":support_before.difference(&support_after).collect::<Vec<_>>(),
             "recordedSupportGained":support_after.difference(&support_before).collect::<Vec<_>>(),
@@ -406,6 +865,20 @@ pub fn compare(
         "generationChanged":match(a.result.get("generation"),b.result.get("generation")){(Some(a),Some(b))=>Some(changed(a,b)?),_=>None},
         "sourceInspectionBefore":{"capturedBytesVerified":a.sources.iter().filter(|s|s.content.is_some()).map(|s|&s.id).collect::<Vec<_>>(),"missingBytes":before.missing_sources(),"currentSourceRediscovery":{"status":"unavailable","reason":"No current source rediscovery was requested or executed"}},
         "sourceInspectionAfter":{"capturedBytesVerified":b.sources.iter().filter(|s|s.content.is_some()).map(|s|&s.id).collect::<Vec<_>>(),"missingBytes":after.missing_sources(),"currentSourceRediscovery":{"status":"unavailable","reason":"No current source rediscovery was requested or executed"}},
-        "causalClaim":"Observed input differences and findings; unique causal responsibility is not established"}),
-    )
+        "causalClaim":"Observed input differences and findings; unique causal responsibility is not established"});
+    let diagnostics = json!({
+        "graphRecords":graph_records,"graphIdentityMode":graph_identity_mode,
+        "diagnosticOrigins":{"subjects":origins,"reasons":origin_reasons,"complete":origins_complete,"withinPathOriginLimit":origins_complete,
+            "interpretation":"Diagnostic subjects and conservative potential influence; graph document metadata alone does not seed paths, and unique causal responsibility is not established"},
+        "issueDelta":issue_delta(a.result["issues"].as_array().map(Vec::as_slice),b.result["issues"].as_array().map(Vec::as_slice))?,
+        "issueStages":stage_deltas(a,b)?,
+        "admittedPathsBefore":checked_paths(&a.inputs)?,"admittedPathsAfter":checked_paths(&b.inputs)?
+    });
+    if let Value::Object(fields) = diagnostics {
+        report
+            .as_object_mut()
+            .expect("comparison report")
+            .extend(fields);
+    }
+    Ok(report)
 }

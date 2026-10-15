@@ -120,11 +120,18 @@ fn ambiguous_candidates_keep_every_occurrence_without_fabricating_deltas() {
     assert_eq!(membership["candidateState"], "ambiguous");
     let comparison =
         compare_source_evaluations(&verify_source_evaluation(&initial).unwrap(), &checked).unwrap();
-    assert_eq!(comparison.record()["candidate"], Value::Null);
     assert_eq!(
         comparison.record()["candidateComparison"]["status"],
-        "unavailable"
+        "compared"
     );
+    let candidate = &comparison.record()["candidate"];
+    assert_eq!(candidate["graphIdentityMode"], "occurrence-aware");
+    let occurrence = &candidate["graphRecords"]["mapping"]["occurrences"][0];
+    assert_eq!(occurrence["beforeDigests"].as_array().unwrap().len(), 1);
+    assert_eq!(occurrence["afterDigests"].as_array().unwrap().len(), 2);
+    assert_eq!(candidate["admittedPathsAfter"]["status"], "unavailable");
+    assert_eq!(candidate["riskDelta"], Value::Null);
+    assert_eq!(candidate["mappingStates"]["afterKnown"], false);
     assert!(
         comparison.record()["sourceChanges"]
             .as_array()

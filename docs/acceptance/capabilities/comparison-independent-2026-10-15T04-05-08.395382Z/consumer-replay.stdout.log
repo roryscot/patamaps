@@ -1,0 +1,93 @@
+{
+  "capture": "sha256:aafc964ff7f600ab914a64a2ee7bc1460ba47d268c948d48d799c166f77774b3",
+  "missingSources": [],
+  "result": {
+    "compilationStatus": "viable",
+    "generation": {
+      "activeMappings": [
+        "urn:example:mapping:create-user-endpoint",
+        "urn:example:mapping:create-user-event",
+        "urn:example:mapping:create-user-handler",
+        "urn:example:mapping:create-user-input",
+        "urn:example:mapping:create-user-policy"
+      ],
+      "context": {},
+      "digest": "sha256:eaf86b9de53ebd84779acaf58d646e0340df05c6b824cd408cc5856ee3e2337c",
+      "documentType": "generation",
+      "evaluatedAt": "2026-10-10T12:00:00Z",
+      "evidence": [],
+      "graph": {
+        "digest": "sha256:586f009c53b10e502276332eb2b51e70e44948858ec45dd8692c2abadba6afde",
+        "id": "urn:example:routing:graph",
+        "revision": "1"
+      },
+      "id": "urn:patamaps:generation:eaf86b9de53ebd84779acaf58d646e0340df05c6b824cd408cc5856ee3e2337c",
+      "inactiveMappings": [],
+      "packs": [
+        {
+          "digest": "sha256:07683a803d0c7b7a4aa621e6bfe9b8cffa8667fd16047601aa4aa86268f84a2e",
+          "id": "urn:metamap:relation-pack:core",
+          "version": "1.0.0"
+        },
+        {
+          "digest": "sha256:c7bca28d6b8836a04a6f505bff4033947e401dd6c93cfeb8e543f82c9f0cb19d",
+          "id": "urn:metamap:relation-pack:routing",
+          "version": "1.0.0"
+        }
+      ],
+      "policy": {
+        "digest": "sha256:61dec4de8660c460bcf6341da44e485fd84e69d5eb0ad5488b8a1483f605665a",
+        "id": "urn:example:routing:viability"
+      },
+      "profile": "patamaps-routing-draft-1",
+      "schemaVersion": "0.1.0",
+      "waiversApplied": []
+    },
+    "issues": [
+      {
+        "code": "PROJECTION_TARGET_KIND_MISMATCH",
+        "message": "Slot handler has disallowed target kind",
+        "severity": "error",
+        "subjectId": "urn:example:command:create-user"
+      },
+      {
+        "code": "PROJECTION_TARGET_KIND_MISMATCH",
+        "message": "Slot handler has disallowed target kind",
+        "severity": "error",
+        "subjectId": "urn:example:command:create-user"
+      }
+    ],
+    "projections": [
+      {
+        "issues": [
+          {
+            "code": "PROJECTION_TARGET_KIND_MISMATCH",
+            "message": "Slot handler has disallowed target kind",
+            "severity": "error",
+            "subjectId": "urn:example:command:create-user"
+          }
+        ],
+        "pathTree": null,
+        "projection": null,
+        "specId": "urn:comparison:second",
+        "status": "rejected"
+      },
+      {
+        "issues": [
+          {
+            "code": "PROJECTION_TARGET_KIND_MISMATCH",
+            "message": "Slot handler has disallowed target kind",
+            "severity": "error",
+            "subjectId": "urn:example:command:create-user"
+          }
+        ],
+        "pathTree": null,
+        "projection": null,
+        "specId": "urn:example:projection:command-router",
+        "status": "rejected"
+      }
+    ],
+    "status": "rejected"
+  },
+  "status": "verified"
+}

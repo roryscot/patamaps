@@ -1,0 +1,24 @@
+Diff in /Volumes/dev_src_case_sensitive/patamaps-intel-20261014/crates/patamaps-inspect/tests/inspection.rs:233:
+     let comparison = &report.attempts[0]["comparison"]["report"];
+     assert_eq!(comparison["graphIdentityMode"], "occurrence-aware");
+     let occurrence = &comparison["graphRecords"]["mapping"]["occurrences"][0];
+-    assert_eq!(occurrence["beforeDigests"], json!([digest.clone(), digest.clone()]));
++    assert_eq!(
++        occurrence["beforeDigests"],
++        json!([digest.clone(), digest.clone()])
++    );
+     assert_eq!(occurrence["afterDigests"], json!([digest.clone()]));
+     assert_eq!(comparison["declaredPathsBefore"]["status"], "unavailable");
+     assert_eq!(comparison["declaredPathsAfter"]["status"], "available");
+Diff in /Volumes/dev_src_case_sensitive/patamaps-intel-20261014/crates/patamaps-workspace/tests/source_evaluation.rs:120:
+     assert_eq!(membership["candidateState"], "ambiguous");
+     let comparison =
+         compare_source_evaluations(&verify_source_evaluation(&initial).unwrap(), &checked).unwrap();
+-    assert_eq!(comparison.record()["candidateComparison"]["status"], "compared");
++    assert_eq!(
++        comparison.record()["candidateComparison"]["status"],
++        "compared"
++    );
+     let candidate = &comparison.record()["candidate"];
+     assert_eq!(candidate["graphIdentityMode"], "occurrence-aware");
+     let occurrence = &candidate["graphRecords"]["mapping"]["occurrences"][0];

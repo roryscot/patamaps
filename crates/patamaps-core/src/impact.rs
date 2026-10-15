@@ -1,4 +1,4 @@
-use crate::{CheckError, CheckedGraph, Issue};
+use crate::{AdmittedGeneration, CheckError, CheckedGraph, Issue};
 use patamaps_contracts::ImpactDirection;
 use serde::Serialize;
 use std::collections::{BTreeMap, BTreeSet, HashSet, VecDeque};
@@ -34,6 +34,26 @@ pub fn impact(
     origins: &[String],
     max_depth: usize,
 ) -> Result<ImpactReport, CheckError> {
+    impact_with_admission(graph, origins, max_depth, None)
+}
+
+/// Follow authored directions through mappings active in this exact admission.
+/// An inactive mapping origin remains unavailable; projection usability and
+/// recorded derivation dependencies are separate questions.
+pub fn impact_admitted(
+    generation: &AdmittedGeneration<'_>,
+    origins: &[String],
+    max_depth: usize,
+) -> Result<ImpactReport, CheckError> {
+    impact_with_admission(generation.graph(), origins, max_depth, Some(generation))
+}
+
+fn impact_with_admission(
+    graph: &CheckedGraph,
+    origins: &[String],
+    max_depth: usize,
+    admission: Option<&AdmittedGeneration<'_>>,
+) -> Result<ImpactReport, CheckError> {
     if origins.len() > 256 || max_depth > 64 {
         return Err(CheckError(vec![Issue::error(
             "IMPACT_RESOURCE_LIMIT",
@@ -46,14 +66,21 @@ pub fn impact(
         visits: Vec::new(),
         unavailable_origins: Vec::new(),
         undeclared_directions: Vec::new(),
-        interpretation: "Declared dependency paths; no assertion of unique causal responsibility",
+        interpretation: if admission.is_some() {
+            "Authored dependency paths through admitted mappings; projection usability and unique causal responsibility are not established"
+        } else {
+            "Declared dependency paths; no assertion of unique causal responsibility"
+        },
     };
     let mut directions = BTreeSet::new();
     let mut work = 0usize;
     for origin in origins.iter().collect::<BTreeSet<_>>() {
         let seeds: BTreeSet<_> = if graph.entity(origin).is_some() {
             BTreeSet::from([origin.clone()])
-        } else if let Some(m) = graph.mapping(origin) {
+        } else if let Some(m) = graph
+            .mapping(origin)
+            .filter(|m| admission.is_none_or(|g| g.active(&m.id)))
+        {
             m.sources.iter().chain(&m.targets).cloned().collect()
         } else if let Some(a) = graph
             .document()
@@ -86,13 +113,19 @@ pub fn impact(
                 path: path.clone(),
             });
             if path.len() == max_depth {
-                if graph.incident(&id).next().is_some() {
+                if graph
+                    .incident(&id)
+                    .any(|m| admission.is_none_or(|g| g.active(&m.id)))
+                {
                     report.complete = false;
                 }
                 continue;
             }
             let mut next = BTreeMap::new();
-            for m in graph.incident(&id) {
+            for m in graph
+                .incident(&id)
+                .filter(|m| admission.is_none_or(|g| g.active(&m.id)))
+            {
                 let direction = graph.relation(&m.relation).and_then(|r| r.impact_direction);
                 let Some(direction) = direction else {
                     directions.insert(m.id.clone());

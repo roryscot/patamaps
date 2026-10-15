@@ -118,6 +118,189 @@ fn reordered_records_have_no_stable_identity_delta() {
     assert_ne!(canonical_digest(&a).unwrap(), canonical_digest(&b).unwrap());
 }
 
+#[test]
+fn explicit_diagnostics_work_without_changes_and_preserve_both_captures() {
+    let a = capture(inputs(), vec![]).unwrap();
+    let bytes = canonical_bytes(&a).unwrap();
+    let subject = a.inputs.graph.entities[0].id.clone();
+    let verified = replay(&a).unwrap();
+    let report =
+        compare_with_origins(&verified, &verified, std::slice::from_ref(&subject)).unwrap();
+    assert_eq!(report["changes"], json!([]));
+    assert_eq!(report["diagnosticOrigins"]["subjects"], json!([subject]));
+    assert_eq!(report["diagnosticOrigins"]["complete"], true);
+    assert_eq!(report["admittedPathsAfter"]["status"], "available");
+    assert!(
+        report["declaredPathsAfter"]["report"]["visits"]
+            .as_array()
+            .unwrap()
+            .iter()
+            .any(|v| v["origin"] == subject)
+    );
+    assert_eq!(canonical_bytes(&a).unwrap(), bytes);
+    assert!(compare_with_origins(&verified, &verified, &vec![subject; 257]).is_err());
+    assert!(compare_with_origins(&verified, &verified, &[String::new()]).is_err());
+    let report =
+        compare_with_origins(&verified, &verified, &["urn:missing:subject".into()]).unwrap();
+    assert_eq!(report["admittedPathsAfter"]["report"]["complete"], false);
+    assert_eq!(
+        report["admittedPathsAfter"]["report"]["unavailableOrigins"],
+        json!(["urn:missing:subject"])
+    );
+}
+
+#[test]
+fn duplicate_graph_rejections_retain_occurrences_instead_of_losing_the_comparison() {
+    let before = capture(inputs(), vec![]).unwrap();
+    let mut input = before.inputs.clone();
+    let entity = input.graph.entities[0].clone();
+    input.graph.entities.push(entity.clone());
+    let after = capture(input, vec![]).unwrap();
+    assert_eq!(after.result["status"], "rejected");
+    let report = compare(&replay(&before).unwrap(), &replay(&after).unwrap()).unwrap();
+    assert_eq!(report["graphIdentityMode"], "occurrence-aware");
+    let row = &report["graphRecords"]["entity"]["occurrences"][0];
+    assert_eq!(row["id"], entity.id);
+    assert_eq!(row["beforeDigests"].as_array().unwrap().len(), 1);
+    assert_eq!(row["afterDigests"].as_array().unwrap().len(), 2);
+    assert_eq!(report["changes"][0]["afterDigest"], serde_json::Value::Null);
+    assert_eq!(report["declaredPathsAfter"]["status"], "unavailable");
+    assert_eq!(report["admittedPathsAfter"]["status"], "unavailable");
+    assert!(
+        report["issueDelta"]["introduced"]
+            .as_array()
+            .unwrap()
+            .iter()
+            .any(|r| r["issue"]["code"] == "DUPLICATE_ID")
+    );
+}
+
+#[test]
+fn document_metadata_does_not_manufacture_a_dependency_origin() {
+    let before = capture(inputs(), vec![]).unwrap();
+    let mut input = before.inputs.clone();
+    input.graph.metadata =
+        Some(serde_json::from_value(json!({"review":"administrative note"})).unwrap());
+    let after = capture(input, vec![]).unwrap();
+    let report = compare(&replay(&before).unwrap(), &replay(&after).unwrap()).unwrap();
+    assert_eq!(report["changes"][0]["kind"], "document");
+    assert_eq!(report["diagnosticOrigins"]["subjects"], json!([]));
+    assert_eq!(report["declaredPathsAfter"]["report"]["visits"], json!([]));
+    assert_eq!(report["issueDelta"]["introduced"], json!([]));
+}
+
+#[test]
+fn declared_paths_and_recomputed_admitted_paths_distinguish_inactive_mappings() {
+    let mut input = inputs();
+    let mapping = input.policy.mappings[4].mapping.clone().unwrap();
+    input.policy.mappings[4].applicability = Some(Applicability {
+        when: Some(
+            parse(br#"{"key":"environment","operator":"equals","value":"production"}"#).unwrap(),
+        ),
+        unless: None,
+    });
+    input
+        .context
+        .insert("environment".into(), json!("development"));
+    for pack in &mut input.packs {
+        for relation in &mut pack.relations {
+            relation.impact_direction = Some(ImpactDirection::SourceToTarget);
+        }
+    }
+    let subject = input
+        .graph
+        .mappings
+        .iter()
+        .find(|m| m.id == mapping)
+        .unwrap()
+        .sources[0]
+        .clone();
+    let captured = capture(input, vec![]).unwrap();
+    assert_eq!(captured.result["status"], "viable");
+    let verified = replay(&captured).unwrap();
+    let report = compare_with_origins(&verified, &verified, &[subject]).unwrap();
+    let uses = |name: &str| {
+        report[name]["report"]["visits"]
+            .as_array()
+            .unwrap()
+            .iter()
+            .any(|v| {
+                v["path"]
+                    .as_array()
+                    .unwrap()
+                    .iter()
+                    .any(|s| s["mapping"] == mapping)
+            })
+    };
+    assert!(uses("declaredPathsAfter"));
+    assert!(!uses("admittedPathsAfter"));
+    let report =
+        compare_with_origins(&verified, &verified, std::slice::from_ref(&mapping)).unwrap();
+    assert_eq!(
+        report["admittedPathsAfter"]["report"]["unavailableOrigins"],
+        json!([mapping])
+    );
+}
+
+#[test]
+fn policy_evidence_and_evaluation_context_seed_potential_subjects_without_graph_edits() {
+    let before = capture(inputs(), vec![]).unwrap();
+    let mut input = before.inputs.clone();
+    let subject = input.graph.entities[0].id.clone();
+    input.policy.evidence.push(parse(&serde_json::to_vec(&json!({"id":"urn:test:evidence","subjects":[subject],"kind":"observation","result":"supports","producer":"urn:test:producer"})).unwrap()).unwrap());
+    let after = capture(input, vec![]).unwrap();
+    let report = compare(&replay(&before).unwrap(), &replay(&after).unwrap()).unwrap();
+    assert_eq!(report["changes"], json!([]));
+    assert!(
+        report["diagnosticOrigins"]["subjects"]
+            .as_array()
+            .unwrap()
+            .contains(&json!(subject))
+    );
+    let mut input = before.inputs.clone();
+    input
+        .context
+        .insert("environment".into(), json!("development"));
+    let after = capture(input, vec![]).unwrap();
+    let report = compare(&replay(&before).unwrap(), &replay(&after).unwrap()).unwrap();
+    for mapping in &before.inputs.graph.mappings {
+        assert!(
+            report["diagnosticOrigins"]["subjects"]
+                .as_array()
+                .unwrap()
+                .contains(&json!(mapping.id))
+        );
+    }
+}
+
+#[test]
+fn legacy_rejection_retains_aggregate_findings_without_inventing_a_failure_stage() {
+    let before = capture(inputs(), vec![]).unwrap();
+    let mut input = before.inputs.clone();
+    input.projection_spec.as_mut().unwrap().slots[0].target_kinds =
+        Some(vec!["unavailable-kind".into()]);
+    let after = capture(input, vec![]).unwrap();
+    assert_eq!(after.result["status"], "rejected");
+    let report = compare(&replay(&before).unwrap(), &replay(&after).unwrap()).unwrap();
+    assert!(
+        !report["issueDelta"]["introduced"]
+            .as_array()
+            .unwrap()
+            .is_empty()
+    );
+    let compilation = report["issueStages"]
+        .as_array()
+        .unwrap()
+        .iter()
+        .find(|s| s["stage"] == "compilation")
+        .unwrap();
+    assert_eq!(compilation["delta"]["afterKnown"], false);
+    assert!(compilation["delta"]["resolved"].is_null());
+    // A fresh admission recomputation can establish these paths even though
+    // the historical single-profile result did not record its failure stage.
+    assert_eq!(report["admittedPathsAfter"]["status"], "available");
+}
+
 fn collection_inputs() -> CaptureInputs {
     let mut input = inputs();
     let a = input.projection_spec.take().unwrap();
@@ -151,6 +334,29 @@ fn collection_replay_preserves_individual_outputs_and_known_compilation_after_co
     assert_eq!(report["projectionSpecs"]["changed"], json!([changed_id]));
     assert_eq!(report["mappingStates"]["afterKnown"], true);
     assert_eq!(report["mappingStates"]["deactivated"], json!([]));
+    assert!(
+        !report["diagnosticOrigins"]["subjects"]
+            .as_array()
+            .unwrap()
+            .is_empty()
+    );
+    let stage = report["issueStages"]
+        .as_array()
+        .unwrap()
+        .iter()
+        .find(|row| row["stage"] == "projection" && row["specId"] == changed_id)
+        .unwrap();
+    assert_eq!(stage["delta"]["beforeKnown"], true);
+    assert_eq!(stage["delta"]["afterKnown"], true);
+    assert!(!stage["delta"]["introduced"].as_array().unwrap().is_empty());
+    let reverse = compare(&replay(&after).unwrap(), &replay(&before).unwrap()).unwrap();
+    let stage = reverse["issueStages"]
+        .as_array()
+        .unwrap()
+        .iter()
+        .find(|row| row["stage"] == "projection" && row["specId"] == changed_id)
+        .unwrap();
+    assert!(!stage["delta"]["resolved"].as_array().unwrap().is_empty());
     let deltas = report["semantic"]["projections"].as_array().unwrap();
     assert_eq!(deltas.len(), 2);
     let delta = deltas
@@ -251,6 +457,26 @@ fn a_lost_proof_is_reported_separately_from_unchanged_graph_records_and_unknown_
     assert_eq!(report["mappingStates"]["afterKnown"], false);
     assert!(report["mappingStates"]["deactivated"].is_null());
     assert!(report["semantic"]["projections"][0]["riskChanged"].is_null());
+    let compilation = report["issueStages"]
+        .as_array()
+        .unwrap()
+        .iter()
+        .find(|s| s["stage"] == "compilation")
+        .unwrap();
+    assert!(
+        !compilation["delta"]["introduced"]
+            .as_array()
+            .unwrap()
+            .is_empty()
+    );
+    let projection = report["issueStages"]
+        .as_array()
+        .unwrap()
+        .iter()
+        .find(|s| s["stage"] == "projection")
+        .unwrap();
+    assert_eq!(projection["delta"]["afterKnown"], false);
+    assert!(projection["delta"]["resolved"].is_null());
     assert!(
         report["inputChanges"]
             .as_array()
@@ -430,4 +656,42 @@ fn proof_trace_bounds_are_explicit_for_many_origins_and_expanding_recorded_paths
             .contains(&json!("recorded-path-output-limit"))
     );
     assert!(canonical_bytes(paths).unwrap().len() < MAX_INPUT_BYTES);
+}
+
+#[test]
+fn selectors_and_changed_semantic_limits_have_conservative_mapping_origins() {
+    let before = capture(inputs(), vec![]).unwrap();
+    let mut input = before.inputs.clone();
+    let id = input.policy.mappings[4].mapping.take().unwrap();
+    input.policy.mappings[4].select = Some(MappingSelector {
+        ids: Some(vec![id]),
+        ..Default::default()
+    });
+    let after = capture(input, vec![]).unwrap();
+    assert_eq!(after.result["status"], "viable");
+    let report = compare(&replay(&before).unwrap(), &replay(&after).unwrap()).unwrap();
+    assert_eq!(report["changes"], json!([]));
+    for mapping in &before.inputs.graph.mappings {
+        assert!(
+            report["diagnosticOrigins"]["subjects"]
+                .as_array()
+                .unwrap()
+                .contains(&json!(mapping.id))
+        );
+    }
+    let before = semantic_comparison_fixture();
+    let mut input = before.inputs.clone();
+    let bounds = &mut input.policy.semantics.as_mut().unwrap().derivation_limits;
+    bounds.max_derivations = SafeInteger::new(bounds.max_derivations.get() + 1).unwrap();
+    let after = capture(input, vec![]).unwrap();
+    let report = compare(&replay(&before).unwrap(), &replay(&after).unwrap()).unwrap();
+    assert_eq!(report["changes"], json!([]));
+    for mapping in &before.inputs.graph.mappings {
+        assert!(
+            report["diagnosticOrigins"]["subjects"]
+                .as_array()
+                .unwrap()
+                .contains(&json!(mapping.id))
+        );
+    }
 }

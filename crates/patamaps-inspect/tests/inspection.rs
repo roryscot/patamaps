@@ -229,7 +229,18 @@ fn exact_duplicate_removal_and_unchanged_keeper_are_enforced() {
             .len(),
         1
     );
-    assert_eq!(report.attempts[0]["comparison"]["status"], "unavailable");
+    assert_eq!(report.attempts[0]["comparison"]["status"], "compared");
+    let comparison = &report.attempts[0]["comparison"]["report"];
+    assert_eq!(comparison["graphIdentityMode"], "occurrence-aware");
+    let occurrence = &comparison["graphRecords"]["mapping"]["occurrences"][0];
+    assert_eq!(
+        occurrence["beforeDigests"],
+        json!([digest.clone(), digest.clone()])
+    );
+    assert_eq!(occurrence["afterDigests"], json!([digest.clone()]));
+    assert_eq!(comparison["declaredPathsBefore"]["status"], "unavailable");
+    assert_eq!(comparison["declaredPathsAfter"]["status"], "available");
+    assert_eq!(report.attempts[0]["authorization"], "approval-required");
     r.edits.push(RepairEdit {
         id: "change-keeper".into(),
         semantic_cost: SafeInteger::new(0).unwrap(),

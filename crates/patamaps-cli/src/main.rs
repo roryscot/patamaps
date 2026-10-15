@@ -16,7 +16,7 @@ use patamaps_governance::{
     create_approval_payload, create_proposal, verify_approval,
 };
 use patamaps_projection::{
-    CaptureInputs, CaptureRecord, SourceReceipt, capture, compare, compile_path_tree, emit_rust,
+    CaptureInputs, CaptureRecord, SourceReceipt, capture, compile_path_tree, emit_rust,
     emit_typescript, emit_typescript_path_tree, hydrate, project, replay,
 };
 use serde::{Serialize, de::DeserializeOwned};
@@ -376,6 +376,9 @@ enum Command {
     Compare {
         before: PathBuf,
         after: PathBuf,
+        /// Additional diagnostic subjects, including when inputs are unchanged.
+        #[arg(long)]
+        origin: Vec<String>,
         #[command(flatten)]
         output: Output,
     },
@@ -1958,11 +1961,19 @@ fn run(command: Command) -> Result<(), Failure> {
         Command::Compare {
             before,
             after,
+            origin,
             output,
         } => {
             let before: CaptureRecord = read(&before)?;
             let after: CaptureRecord = read(&after)?;
-            json(&output, &compare(&replay(&before)?, &replay(&after)?)?)
+            json(
+                &output,
+                &patamaps_projection::compare_with_origins(
+                    &replay(&before)?,
+                    &replay(&after)?,
+                    &origin,
+                )?,
+            )
         }
         Command::Diff {
             before,
