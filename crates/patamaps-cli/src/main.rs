@@ -106,6 +106,8 @@ enum Intent {
 enum Command {
     /// Bounded native Cargo/TOML provider using the existing workspace process protocol.
     DiscoverNative,
+    #[command(hide = true, name = "__tool-supervisor")]
+    ToolSupervisor,
     /// Read-only matching proposals; does not evaluate policy or confer admission.
     MatchObservations {
         #[command(flatten)]
@@ -926,7 +928,38 @@ struct LegacyConfigRefusal {
 }
 
 fn run(command: Command) -> Result<(), Failure> {
+    patamaps_workspace::configure_tool_supervisor(std::env::current_exe()?)
+        .map_err(|e| Failure::Operational(e.to_string()))?;
     match command {
+        Command::ToolSupervisor => {
+            match patamaps_workspace::supervise_tool_stdio() {
+                Ok(()) => Ok(()),
+                Err(error) => {
+                    // Private exit-code transport preserves the existing
+                    // refusal classes without consuming a provider pipe bound.
+                    let code = match error {
+                        patamaps_workspace::Error::Refused {
+                            code: "ADAPTER_TIMEOUT",
+                            ..
+                        } => 71,
+                        patamaps_workspace::Error::Refused {
+                            code: "ADAPTER_OUTPUT_LIMIT",
+                            ..
+                        } => 72,
+                        patamaps_workspace::Error::Refused {
+                            code: "ADAPTER_INPUT_LIMIT",
+                            ..
+                        } => 73,
+                        patamaps_workspace::Error::Refused {
+                            code: "ADAPTER_EXIT",
+                            ..
+                        } => 74,
+                        _ => 75,
+                    };
+                    std::process::exit(code);
+                }
+            }
+        }
         Command::MatchObservations {
             input,
             constraint,

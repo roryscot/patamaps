@@ -76,6 +76,8 @@ def main():
             run(label, argv)
         from cross_stack_workspace import verify
         receipt["sourceWorkspace"] = verify(ROOT, work, env, run)
+        from cross_stack_supervision import verify as verify_supervision
+        receipt["toolSupervision"] = verify_supervision(ROOT, work, env, run)
         assert all(digest((ROOT / name).read_bytes()) == value for name, value in before.items()), "Tracked source changed during acceptance"
         receipt["sourceUnchanged"] = True
         receipt["status"] = "passed-source-intent-scope"

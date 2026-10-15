@@ -10,10 +10,10 @@ use std::{
 };
 
 #[cfg(unix)]
-fn stop(child: &mut std::process::Child) {
+fn stop(child: &mut std::process::Child, owned_group: bool) {
     // A configured provider is not sandboxed. Kill its ordinary process group,
     // including inherited pipe holders, before collecting reader threads.
-    if let Some(pid) = rustix::process::Pid::from_raw(child.id() as i32) {
+    if owned_group && let Some(pid) = rustix::process::Pid::from_raw(child.id() as i32) {
         let _ = rustix::process::kill_process_group(pid, rustix::process::Signal::KILL);
     }
     let _ = child.kill();
@@ -47,26 +47,42 @@ pub(crate) fn invoke_tool(
     input: &[u8],
     environment: &[(&str, &str)],
 ) -> Result<(Vec<u8>, Vec<u8>), Error> {
+    crate::tool_supervisor::invoke(invocation, executable, root, input, environment)
+}
+
+#[cfg(unix)]
+pub(crate) fn invoke_direct(
+    invocation: &Invocation,
+    executable: &Path,
+    root: &Path,
+    input: &[u8],
+    environment: &[(&str, &str)],
+    watched_parent: Option<u32>,
+    supervisor_exit_codes: bool,
+) -> Result<(Vec<u8>, Vec<u8>), Error> {
     use std::os::unix::process::CommandExt;
     validate_invocation(invocation)?;
     let limits = &invocation.bounds;
     let request_bytes = input.to_vec();
-    if request_bytes.len() > MAX_INPUT_BYTES {
+    if request_bytes.len() > crate::tool_supervisor::TRANSPORT_LIMIT {
         return Err(Error::refused(
             "ADAPTER_INPUT_LIMIT",
             "Request is too large",
         ));
     }
-    let mut child = Command::new(executable)
+    let mut command = Command::new(executable);
+    command
         .args(&invocation.arguments)
         .env_clear()
         .envs(environment.iter().copied())
         .current_dir(root)
-        .process_group(0)
         .stdin(Stdio::piped())
         .stdout(Stdio::piped())
-        .stderr(Stdio::piped())
-        .spawn()?;
+        .stderr(Stdio::piped());
+    if watched_parent.is_none() {
+        command.process_group(0);
+    }
+    let mut child = command.spawn()?;
     let mut stdin = child.stdin.take().expect("piped stdin");
     let stdout = child.stdout.take().expect("piped stdout");
     let stderr = child.stderr.take().expect("piped stderr");
@@ -91,6 +107,22 @@ pub(crate) fn invoke_tool(
     let result = (|| {
         let mut status = None;
         loop {
+            if let Some(parent) = watched_parent
+                && rustix::process::getppid().map(|p| p.as_raw_nonzero().get() as u32)
+                    != Some(parent)
+            {
+                // Only the validated private helper uses this mode. Its own
+                // process group contains the tool and ordinary pipe holders.
+                let group = rustix::process::getpgrp();
+                if group == rustix::process::getpid() {
+                    let _ =
+                        rustix::process::kill_process_group(group, rustix::process::Signal::KILL);
+                }
+                return Err(Error::refused(
+                    "ADAPTER_PARENT_EXIT",
+                    "The invoking parent exited",
+                ));
+            }
             while let Ok((is_stdout, result, bytes)) = rx.try_recv() {
                 result?;
                 let limit = if is_stdout { out_limit } else { err_limit };
@@ -114,9 +146,20 @@ pub(crate) fn invoke_tool(
                 // prolong the protocol beyond the configured deadline.
                 if output.is_some() && diagnostics.is_some() {
                     if !status.success() {
+                        let code = if supervisor_exit_codes {
+                            match status.code() {
+                                Some(71) => "ADAPTER_TIMEOUT",
+                                Some(72) => "ADAPTER_OUTPUT_LIMIT",
+                                Some(73) => "ADAPTER_INPUT_LIMIT",
+                                Some(74) => "ADAPTER_EXIT",
+                                _ => "ADAPTER_SUPERVISOR",
+                            }
+                        } else {
+                            "ADAPTER_EXIT"
+                        };
                         return Err(Error::refused(
-                            "ADAPTER_EXIT",
-                            "Provider exited unsuccessfully",
+                            code,
+                            "Provider or its private supervisor exited unsuccessfully",
                         ));
                     }
                     break;
@@ -132,13 +175,22 @@ pub(crate) fn invoke_tool(
         }
         Ok(())
     })();
-    stop(&mut child);
+    stop(&mut child, watched_parent.is_none());
+    let failure = match (watched_parent.is_some(), result.err()) {
+        // The private helper exits immediately with the refusal class. Its
+        // caller owns the group and kills remaining ordinary pipe holders.
+        // Joining those holders here could delay cleanup indefinitely.
+        (true, Some(error)) => return Err(error),
+        (_, failure) => failure,
+    };
     let written = writer
         .join()
         .map_err(|_| Error::refused("ADAPTER_INPUT", "Input writer failed"));
     let _ = out.join();
     let _ = err.join();
-    result?;
+    if let Some(error) = failure {
+        return Err(error);
+    }
     written??;
     Ok((
         output.expect("collected stdout"),
