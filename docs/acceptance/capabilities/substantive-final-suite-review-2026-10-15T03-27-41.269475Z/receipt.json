@@ -1,0 +1,383 @@
+{
+  "status": "pinned-reference-source-review-complete-capability-acceptance-open",
+  "recordedAtUtc": "2026-10-15T03:27:41.455351+00:00",
+  "referenceEngine": "399747a4ad05a37cd8db1cedd53048fad2175be4",
+  "reviewedReferenceSources": [
+    {
+      "suite": "consumer-bindings",
+      "sourcePath": "src/__tests__/consumer-bindings.test.ts",
+      "sourceRevision": "399747a4ad05a37cd8db1cedd53048fad2175be4",
+      "digest": "sha256:d837bcce4f356fde08dc659e67189dc4e5183403c998745d076849032c6113d8",
+      "fullReferenceAssertionBodyReviewed": true,
+      "capabilities": [
+        "C02",
+        "C03",
+        "C07",
+        "C18"
+      ],
+      "substantiveGuaranteesReviewed": [
+        "All 22 preserved consumer vectors exercise missing/ambiguous binding, authority and delegation scope, shard conflict, owned exclusions, locator and symlink escape, stale bytes/generation, stable implementation moves and runtime identity/input refusal.",
+        "Generated bindings preserve source bytes and inspect native code without executing its top-level code. Rust generated consumers and separate compile/run steps are the primary native realization; JavaScript object freezing/class identity is not the completion metric."
+      ],
+      "nativeEvidence": [
+        {
+          "path": "scripts/test_binding_matrix.py",
+          "digest": "sha256:7ffc8d62781cb785dfb9e2e5bd32d596592e6f7770d5cf1597781b7fd20ce5ce",
+          "role": "Current native contract/test/driver pointer; this source review is not execution evidence"
+        },
+        {
+          "path": "scripts/test_native.py",
+          "digest": "sha256:8c06b379efcd7b4d2f6f23237540c82f516c0b0bc20d40b28801189453bcbe99",
+          "role": "Current native contract/test/driver pointer; this source review is not execution evidence"
+        },
+        {
+          "path": "examples/native-bindings/build.py",
+          "digest": "sha256:5fc3e51c293d87028773b2090f39aa3d91a9694993ef4318e6405bdea7f38e6d",
+          "role": "Current native contract/test/driver pointer; this source review is not execution evidence"
+        },
+        {
+          "path": "examples/native-bindings/src/main.rs",
+          "digest": "sha256:595e3eef31dee07dfe9fbe7647e5d9a86c7966a9f05089815a7ba3d59cf3f00d",
+          "role": "Current native contract/test/driver pointer; this source review is not execution evidence"
+        }
+      ]
+    },
+    {
+      "suite": "counterfactual",
+      "sourcePath": "src/__tests__/counterfactual.test.ts",
+      "sourceRevision": "399747a4ad05a37cd8db1cedd53048fad2175be4",
+      "digest": "sha256:8b85a53c529a1e044afa2f59557d633b7caea35daba167e8b3b179c0201c9414",
+      "fullReferenceAssertionBodyReviewed": true,
+      "capabilities": [
+        "C09"
+      ],
+      "substantiveGuaranteesReviewed": [
+        "Identical verified evaluations have no invented changes; mapping removal, policy/evidence changes, locator moves, context inhibition and consumer-only changes remain distinguishable. Missing/rejected outputs cannot become measured zero risk or fictitious deactivations.",
+        "This review identifies further native comparison work: structured introduced/resolved issues with honest stage availability, explicit diagnostic seeds and consumer/policy-derived origins, and separate admitted versus declared dependency paths. The new proof trace and policy/evidence deltas do not by themselves close all of C09."
+      ],
+      "nativeEvidence": [
+        {
+          "path": "crates/patamaps-projection/src/compare.rs",
+          "digest": "sha256:41860e337d0f1cecfbdb3979c79a6a33a8f368bbd6019e94a04822ab669f391a",
+          "role": "Current native contract/test/driver pointer; this source review is not execution evidence"
+        },
+        {
+          "path": "crates/patamaps-projection/tests/replay.rs",
+          "digest": "sha256:9e1b6ce5282ca790e06925442a5daf898aa729fa6c1bdfa919aff1ee64eea47d",
+          "role": "Current native contract/test/driver pointer; this source review is not execution evidence"
+        },
+        {
+          "path": "crates/patamaps-core/src/impact.rs",
+          "digest": "sha256:869ca8996d5caaabda8b134eff2ce4d6569dddf24739dea390d5ab04715007a9",
+          "role": "Current native contract/test/driver pointer; this source review is not execution evidence"
+        }
+      ]
+    },
+    {
+      "suite": "derivation",
+      "sourcePath": "src/__tests__/derivation.test.ts",
+      "sourceRevision": "399747a4ad05a37cd8db1cedd53048fad2175be4",
+      "digest": "sha256:0968b5db94152173a4f012d57c635877e7536c0cc9757d0f8a3276df3cfe391f",
+      "fullReferenceAssertionBodyReviewed": true,
+      "capabilities": [
+        "C04",
+        "C05"
+      ],
+      "substantiveGuaranteesReviewed": [
+        "Executable reverse and ordered binary-chain laws bind exact premise bytes, pack/imports and complete context. Unknown/missing context, unsupported n-ary/transform composition, mismatched kinds, absent laws, stale proofs and disjoint active facts remain explicit refusals or unknown/incomplete outcomes.",
+        "Nested proof depth and shared dependency counts are bounded; conservative loss and all six uncertainty dimensions survive composition, while scalar confidence and ownership do not transfer."
+      ],
+      "nativeEvidence": [
+        {
+          "path": "crates/patamaps-core/src/derivation.rs",
+          "digest": "sha256:374314f7d5f73c9d75f04ea67e4648242aaba40c8bf9239ee98bace740c32df8",
+          "role": "Current native contract/test/driver pointer; this source review is not execution evidence"
+        },
+        {
+          "path": "crates/patamaps-core/tests/derivation.rs",
+          "digest": "sha256:da3dd04c3fadf3924a023ec4fa0d6402d9d4ef151baa0b7d0f9ccdfe98c0ad29",
+          "role": "Current native contract/test/driver pointer; this source review is not execution evidence"
+        },
+        {
+          "path": "scripts/reference/semantic.py",
+          "digest": "sha256:3cef9001eaf9ca5ff9702889460c4c93779b959fb15c34d91058b6ff6aa32b72",
+          "role": "Current native contract/test/driver pointer; this source review is not execution evidence"
+        }
+      ]
+    },
+    {
+      "suite": "governance",
+      "sourcePath": "src/__tests__/governance.test.ts",
+      "sourceRevision": "399747a4ad05a37cd8db1cedd53048fad2175be4",
+      "digest": "sha256:30e43bd343d9cfae29870d2f0eb65f67c72a54edd26edf4184f2c3ba5db65257",
+      "fullReferenceAssertionBodyReviewed": true,
+      "capabilities": [
+        "C10",
+        "C11",
+        "C12"
+      ],
+      "substantiveGuaranteesReviewed": [
+        "Strict canonical signed inputs, independent Ed25519 controls, exact complete artifact/proposal recomputation, bound baseline/environment/trust/time and same-grant action/fact scopes govern authorization.",
+        "Protected changes require an external owner; identity, grants, signatures, revocation, interval coverage and any valid candidate substitution invalidate stale approval. Candidate-supplied trust/key material cannot establish authority.",
+        "A concrete artifact integration gap was identified: the standalone TypeScript tree helper was not included in native governed artifacts. The current source now adds the exact helper when TypeScript emission is requested, with manifest and tamper controls; full-candidate verification is pending at this audit checkpoint."
+      ],
+      "nativeEvidence": [
+        {
+          "path": "crates/patamaps-governance/src/artifacts.rs",
+          "digest": "sha256:9e5cc46a0e9c5f36d6072092f8cbfac41f0f00efd88ae06cfb2c956cfe918573",
+          "role": "Current native contract/test/driver pointer; this source review is not execution evidence"
+        },
+        {
+          "path": "crates/patamaps-governance/src/approval.rs",
+          "digest": "sha256:88cf92ecd4300099399765d9a045b680d52879118b186b7274773cba9c64c800",
+          "role": "Current native contract/test/driver pointer; this source review is not execution evidence"
+        },
+        {
+          "path": "crates/patamaps-governance/src/delta.rs",
+          "digest": "sha256:a9ebdaba3c33326533aad9358cc0720b026277b72f4e0237fcff6760f7a67abe",
+          "role": "Current native contract/test/driver pointer; this source review is not execution evidence"
+        },
+        {
+          "path": "crates/patamaps-governance/tests/governance.rs",
+          "digest": "sha256:ef6dfa72a9b625abadca3d3d4270a1912b508c88084f263bfdcdccf898f27bce",
+          "role": "Current native contract/test/driver pointer; this source review is not execution evidence"
+        }
+      ]
+    },
+    {
+      "suite": "repair",
+      "sourcePath": "src/__tests__/repair.test.ts",
+      "sourceRevision": "399747a4ad05a37cd8db1cedd53048fad2175be4",
+      "digest": "sha256:7568b50c568bb15700136c1a2a7963f63c527826c550c4795b2875201b944319",
+      "fullReferenceAssertionBodyReviewed": true,
+      "capabilities": [
+        "C14"
+      ],
+      "substantiveGuaranteesReviewed": [
+        "Only supplied finite edits are searched; scoped/protected facts, stale digests, duplicate keepers, unknown targets, policy/dependency protections and cost overflow block candidates. Real compiler/consumer failures remain visible rather than raising budgets or inventing evidence/proofs.",
+        "Candidate/edit/time/cancellation limits preserve exact unexamined counts and prevent global/minimality claims. Ranked viable results remain approval-required and unapplied. The refreshed native lifecycle separately executes a returned repaired capture."
+      ],
+      "nativeEvidence": [
+        {
+          "path": "crates/patamaps-inspect/src/repair.rs",
+          "digest": "sha256:6680fe5e0c14722c04f4917e21281b128eab1b63af53bd60966570105bbe8177",
+          "role": "Current native contract/test/driver pointer; this source review is not execution evidence"
+        },
+        {
+          "path": "crates/patamaps-inspect/tests/inspection.rs",
+          "digest": "sha256:7b6057c7ac11516c59620f710c32c419559338663f45530fd2341e320eea0104",
+          "role": "Current native contract/test/driver pointer; this source review is not execution evidence"
+        },
+        {
+          "path": "scripts/test_lifecycle_pure.py",
+          "digest": "sha256:36096cfb34b6352cf113aa56d83a59d66085b5e2fbb5665008ea2cbd1b6c7252",
+          "role": "Current native contract/test/driver pointer; this source review is not execution evidence"
+        }
+      ]
+    },
+    {
+      "suite": "scientific-source",
+      "sourcePath": "src/__tests__/scientific-source.test.ts",
+      "sourceRevision": "399747a4ad05a37cd8db1cedd53048fad2175be4",
+      "digest": "sha256:7347ae99a5e8e527989357aa8d2a0b511e9fef6fd662413e5b104f6582e5a4f7",
+      "fullReferenceAssertionBodyReviewed": true,
+      "capabilities": [
+        "C04",
+        "C05",
+        "C08",
+        "C10",
+        "C15",
+        "C17"
+      ],
+      "substantiveGuaranteesReviewed": [
+        "Source capture records both explicit local metadata and TSV bytes without edits/cache writes; current rediscovery is separate from historical replay, changed provenance invalidates approvals, and external metadata symlinks remain within explicit caller authority.",
+        "Scientific exact-chain/reverse laws retain conservative unknown loss and all six unknown dimensions; no close/broad/narrow/related transitivity or derived authority is invented."
+      ],
+      "nativeEvidence": [
+        {
+          "path": "crates/patamaps-scientific/src/source.rs",
+          "digest": "sha256:1d469b6610b22b111a38b2239dbb5d3adba5fad6d636a51329d53401e93adaeb",
+          "role": "Current native contract/test/driver pointer; this source review is not execution evidence"
+        },
+        {
+          "path": "crates/patamaps-workspace/src/source_evaluation.rs",
+          "digest": "sha256:82eac63f80f431b0113ac57c13fed0a08ec1396cdf46028b3f9ce5545e3c2f09",
+          "role": "Current native contract/test/driver pointer; this source review is not execution evidence"
+        },
+        {
+          "path": "crates/patamaps-workspace/tests/source_evaluation.rs",
+          "digest": "sha256:82f9f68c8cf3aded1da9eba1370cb7bfffbedb968705ac9121eaed04827da23c",
+          "role": "Current native contract/test/driver pointer; this source review is not execution evidence"
+        },
+        {
+          "path": "scripts/test_scientific.py",
+          "digest": "sha256:4665abbf763e7970fa1ecc7d8e9faccb883b6d59c95fa0aa407f19b2e0312c2e",
+          "role": "Current native contract/test/driver pointer; this source review is not execution evidence"
+        }
+      ]
+    },
+    {
+      "suite": "semantic",
+      "sourcePath": "src/__tests__/semantic.test.ts",
+      "sourceRevision": "399747a4ad05a37cd8db1cedd53048fad2175be4",
+      "digest": "sha256:1df61d358ff0a59162a5ceabc083f587ae8efac88faa5e9b218f00447f345e95",
+      "fullReferenceAssertionBodyReviewed": true,
+      "capabilities": [
+        "C03",
+        "C04",
+        "C05",
+        "C08",
+        "C09"
+      ],
+      "substantiveGuaranteesReviewed": [
+        "Admission binds exact graph, complete policy, executable packs, proofs, active premises, conservative semantic declarations and context; absent/stale proofs or unknown required uncertainty refuse without producing a checked generation.",
+        "Removed premises still have recorded dependency paths even when compilation is rejected. The new bounded native comparison trace addresses that case; source review does not establish current admission or unique causal responsibility."
+      ],
+      "nativeEvidence": [
+        {
+          "path": "crates/patamaps-core/src/admission.rs",
+          "digest": "sha256:a6dc8000e818e8de3545b6e385a7fccfa4ae78da7ad6a6680aa33744c228d331",
+          "role": "Current native contract/test/driver pointer; this source review is not execution evidence"
+        },
+        {
+          "path": "crates/patamaps-core/tests/derivation.rs",
+          "digest": "sha256:da3dd04c3fadf3924a023ec4fa0d6402d9d4ef151baa0b7d0f9ccdfe98c0ad29",
+          "role": "Current native contract/test/driver pointer; this source review is not execution evidence"
+        },
+        {
+          "path": "crates/patamaps-projection/src/compare.rs",
+          "digest": "sha256:41860e337d0f1cecfbdb3979c79a6a33a8f368bbd6019e94a04822ab669f391a",
+          "role": "Current native contract/test/driver pointer; this source review is not execution evidence"
+        }
+      ]
+    },
+    {
+      "suite": "source-cli",
+      "sourcePath": "src/__tests__/source-cli.test.ts",
+      "sourceRevision": "399747a4ad05a37cd8db1cedd53048fad2175be4",
+      "digest": "sha256:0e05cfb9504e635afd85b10a1835f8ebd7b3e518fab34c89b297ec45da94f4c6",
+      "fullReferenceAssertionBodyReviewed": true,
+      "capabilities": [
+        "C07",
+        "C08",
+        "C09",
+        "C15",
+        "C18"
+      ],
+      "substantiveGuaranteesReviewed": [
+        "Explicit roots, closed options, no overwrite/cache creation, symlink denial and preserved historical bytes govern source capture and current inspection. Receipt/candidate differences cannot be hidden by rehashing or implicit extraction.",
+        "Source-bound rejected captures retain unknown consumer results. Installed Rust and thin SDK surfaces execute real generated consumers; standalone checked-tree TypeScript modules now have independent tsc/Node and API/CLI agreement checks. Exact original command spelling/exit-code observables are not the native ABI."
+      ],
+      "nativeEvidence": [
+        {
+          "path": "scripts/capabilities/source_reporting.py",
+          "digest": "sha256:2a5f46a84bde99d3a97d646df42e10aa829a8aec2ea25c97d8c32062c573d248",
+          "role": "Current native contract/test/driver pointer; this source review is not execution evidence"
+        },
+        {
+          "path": "scripts/capabilities/install.py",
+          "digest": "sha256:c203cea3b0540fdba8cad28704f2226ee7b8d435ba435ab5151961eeccc819fd",
+          "role": "Current native contract/test/driver pointer; this source review is not execution evidence"
+        },
+        {
+          "path": "crates/patamaps-workspace/tests/source_evaluation.rs",
+          "digest": "sha256:82f9f68c8cf3aded1da9eba1370cb7bfffbedb968705ac9121eaed04827da23c",
+          "role": "Current native contract/test/driver pointer; this source review is not execution evidence"
+        }
+      ]
+    },
+    {
+      "suite": "sssom",
+      "sourcePath": "src/__tests__/sssom.test.ts",
+      "sourceRevision": "399747a4ad05a37cd8db1cedd53048fad2175be4",
+      "digest": "sha256:8f1fa28784ced3889faa822491361d3b78655e47f3858f20bf716171c213eb30",
+      "fullReferenceAssertionBodyReviewed": true,
+      "capabilities": [
+        "C17"
+      ],
+      "substantiveGuaranteesReviewed": [
+        "The seven-record/five-predicate pin, assertion multiplicity, raw numeric spellings, quoted TSV, whole-set propagation and explicit safe condensation preserve effective records. Metadata remains explicit; source parsing does not fetch remote identifiers.",
+        "Strict YAML/Unicode/size/header/width/date/CURIE/prefix/extension controls refuse malformed or unsupported literal/unmapped/negated records. Anonymous occurrence IDs, explicit record IDs and uninterpreted predicates preserve provenance without granting executable relations.",
+        "Independent probes additionally demonstrated a mixed raw-payload alignment bypass in crate export. Current source checks each included TSV or metadata payload even when the other is absent; genuine absent payloads remain digest references."
+      ],
+      "nativeEvidence": [
+        {
+          "path": "crates/patamaps-scientific/src/syntax.rs",
+          "digest": "sha256:a22de674234ec9c2de9dbc7bd8519b7e331b140f43f41d4fee398fb3ef973571",
+          "role": "Current native contract/test/driver pointer; this source review is not execution evidence"
+        },
+        {
+          "path": "crates/patamaps-scientific/src/interpret.rs",
+          "digest": "sha256:f9d61fd1ff1ee440b7a0526a0eb85717217ae77e993588a7f2e1e1548941aef4",
+          "role": "Current native contract/test/driver pointer; this source review is not execution evidence"
+        },
+        {
+          "path": "crates/patamaps-scientific/src/graph.rs",
+          "digest": "sha256:944fb3fd5bcbf966ff0a655cc3911474b7b2318dc68d739652d59f7aaa31559c",
+          "role": "Current native contract/test/driver pointer; this source review is not execution evidence"
+        },
+        {
+          "path": "crates/patamaps-scientific/tests/sssom.rs",
+          "digest": "sha256:b3f17bf41bfc7735c41568453b0cb36f81b519628b5358d18a942ec160c57e14",
+          "role": "Current native contract/test/driver pointer; this source review is not execution evidence"
+        },
+        {
+          "path": "crates/patamaps-scientific/src/crate_export.rs",
+          "digest": "sha256:6f1d590741bdbe2a85cd0ba2943f2e55c4d0453215bd0ce6675c130a03f3c3ed",
+          "role": "Current native contract/test/driver pointer; this source review is not execution evidence"
+        }
+      ]
+    }
+  ],
+  "priorReviewRecords": [
+    {
+      "path": "docs/acceptance/capabilities/substantive-activation-consumer-audit-2026-10-15T02-11-26.256530Z/receipt.json",
+      "digest": "sha256:9a3abd236a4b1c4b6a8e70ae2bf026cde71f0610e062cada048d81cfdfcf2c11"
+    },
+    {
+      "path": "docs/acceptance/capabilities/substantive-compiler-registry-audit-2026-10-15T00-43-17.743400Z/receipt.json",
+      "digest": "sha256:08e565eaea04338cc27c590293a4fc26fbfeb45ec0cfda132b5af2b055fa1e69"
+    },
+    {
+      "path": "docs/acceptance/capabilities/substantive-contract-structural-audit-2026-10-14T22-03-27.111754Z/receipt.json",
+      "digest": "sha256:c1b2d8838f16429bf128ed02d6f74cb49de5a3adc13209eeb2404a968f29a27a"
+    },
+    {
+      "path": "docs/acceptance/capabilities/substantive-projection-discovery-audit-2026-10-15T01-50-42.480617Z/receipt.json",
+      "digest": "sha256:d7fafadc4ec851e0b7475d4f82ae592ce57bcd9be63423e394887366ebaf46fe"
+    },
+    {
+      "path": "docs/acceptance/capabilities/substantive-replay-scientific-audit-2026-10-15T02-39-16.698643Z/receipt.json",
+      "digest": "sha256:26f5310abded9569f941fae21eda730a3c5a6a339020f429fc115aa92129e12d"
+    },
+    {
+      "path": "docs/acceptance/capabilities/substantive-source-report-audit-2026-10-14/receipt.json",
+      "digest": "sha256:aac386c574c259c3dd0ac607ad00de523f8ebc8147d05519bbf38e4746c79f2e"
+    },
+    {
+      "path": "docs/acceptance/capabilities/substantive-topology-path-audit-2026-10-15T01-14-13.169269Z/receipt.json",
+      "digest": "sha256:d2de030f7f4c6ab8a182e20721600aa9397adc16fcb6284ea661c195724564f5"
+    },
+    {
+      "path": "docs/acceptance/capabilities/substantive-typed-workflow-audit-2026-10-15T00-49-22.502497Z/receipt.json",
+      "digest": "sha256:f8266692071796c1ffc9a0afea08d3583f030df259ee8756e73f358fedbb69f7"
+    },
+    {
+      "path": "docs/acceptance/capabilities/substantive-uncertainty-risk-audit-2026-10-15T02-43-16.788667Z/receipt.json",
+      "digest": "sha256:8650b4adbeae41cfe42a601addc40ac6f6c1915e86bc35120de4eac91c99bad8"
+    }
+  ],
+  "distinctOriginalSuiteBodiesReviewed": 53,
+  "allPinnedSuiteNamesMatchOriginalCatalog": true,
+  "originalCasesExecutedByThisReview": 0,
+  "scope": "Final nine complete original assertion bodies reviewed with current native contract/test/driver pointers and retained milestone evidence. This completes source discovery only; it does not establish every original assertion executed, complete native guarantee coverage, owner disposition or overall goal completion.",
+  "openWork": [
+    "C09 diagnostic origins, introduced/resolved issue stages and admitted-versus-declared path reporting",
+    "Verify the current governed TypeScript tree emission in full compiler/installed/platform milestones",
+    "Verify scientific mixed-payload repair against the independent valid external-metadata counterexample",
+    "Run strengthened C12 precommit swap pointer/full-state preservation assertion on actual Linux",
+    "Current candidate installed/platform/package milestones and browser execution acceptance"
+  ],
+  "ownerDispositions": [],
+  "deleted": []
+}

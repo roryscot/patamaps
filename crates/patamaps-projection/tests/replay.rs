@@ -195,8 +195,7 @@ fn collection_version_and_duplicate_specs_cannot_be_laundered_through_readdressi
     assert!(parse::<CaptureRecord>(&canonical_bytes(&wire).unwrap()).is_err());
 }
 
-#[test]
-fn a_lost_proof_is_reported_separately_from_unchanged_graph_records_and_unknown_projection_risk() {
+fn semantic_comparison_fixture() -> CaptureRecord {
     let mut graph: GraphDocument =
         parse(include_bytes!("../../../fixtures/laws/graph.json")).unwrap();
     let pack: RelationPack = parse(include_bytes!("../../../fixtures/laws/pack.json")).unwrap();
@@ -230,7 +229,13 @@ fn a_lost_proof_is_reported_separately_from_unchanged_graph_records_and_unknown_
         projection_spec: None,
         projection_specs: vec![spec],
     };
-    let before = capture(input, vec![]).unwrap();
+    capture(input, vec![]).unwrap()
+}
+
+#[test]
+fn a_lost_proof_is_reported_separately_from_unchanged_graph_records_and_unknown_projection_risk() {
+    let before = semantic_comparison_fixture();
+    let proof = before.inputs.policy.semantics.as_ref().unwrap().derivations[0].clone();
     assert_eq!(before.result["status"], "viable");
     let mut input = before.inputs.clone();
     input.policy.semantics.as_mut().unwrap().derivations.clear();
@@ -277,4 +282,152 @@ fn new_and_removed_specs_remain_unknown_instead_of_becoming_zero_deltas() {
         assert!(delta["dependenciesChanged"].is_null());
         assert!(delta["riskChanged"].is_null());
     }
+}
+
+#[test]
+fn removed_premise_traces_through_recorded_proof_even_when_the_candidate_is_rejected() {
+    let before = semantic_comparison_fixture();
+    let proof = &before.inputs.policy.semantics.as_ref().unwrap().derivations[0];
+    let premise = &proof.premises[1].mapping;
+    let mut inputs = before.inputs.clone();
+    inputs.graph.mappings.retain(|m| &m.id != premise);
+    inputs.policy.graph = GraphBinding {
+        id: inputs.graph.id.clone(),
+        revision: None,
+        digest: Some(canonical_digest(&inputs.graph).unwrap()),
+    };
+    let after = capture(inputs, vec![]).unwrap();
+    assert_eq!(after.result["compilationStatus"], "rejected");
+    let saved = (
+        canonical_bytes(&before).unwrap(),
+        canonical_bytes(&after).unwrap(),
+    );
+    let report = compare(&replay(&before).unwrap(), &replay(&after).unwrap()).unwrap();
+    let paths = &report["recordedProofPathsAfter"]["report"];
+    assert_eq!(paths["complete"], true);
+    assert!(paths["paths"].as_array().unwrap().contains(&json!({"origin":premise,"subjectId":proof.result.id,"path":[premise,proof.id,proof.result.id]})));
+    assert_eq!(report["mappingStates"]["afterKnown"], false);
+    assert!(report["mappingStates"]["deactivated"].is_null());
+    assert!(report["semantic"]["projections"][0]["riskChanged"].is_null());
+    assert_eq!(
+        (
+            canonical_bytes(&before).unwrap(),
+            canonical_bytes(&after).unwrap()
+        ),
+        saved
+    );
+    assert_eq!(
+        report,
+        compare(&replay(&before).unwrap(), &replay(&after).unwrap()).unwrap()
+    );
+}
+
+#[test]
+fn duplicate_cyclic_recorded_proofs_terminate_without_validity_or_completeness_claims() {
+    let before = semantic_comparison_fixture();
+    let mut inputs = before.inputs.clone();
+    let mut cyclic = inputs.policy.semantics.as_ref().unwrap().derivations[0].clone();
+    cyclic.premises[0].mapping = cyclic.result.id.clone();
+    inputs
+        .policy
+        .semantics
+        .as_mut()
+        .unwrap()
+        .derivations
+        .push(cyclic);
+    let after = capture(inputs, vec![]).unwrap();
+    assert_eq!(after.result["compilationStatus"], "rejected");
+    let report = compare(&replay(&before).unwrap(), &replay(&after).unwrap()).unwrap();
+    let impact = &report["recordedProofPathsAfter"]["report"];
+    assert_eq!(impact["complete"], false);
+    assert_eq!(impact["ambiguousDerivations"].as_array().unwrap().len(), 1);
+    assert!(impact["paths"].as_array().unwrap().len() < 10);
+}
+
+#[test]
+fn comparison_retains_recorded_evidence_changes_without_manufacturing_support_validity() {
+    let mut input = inputs();
+    input.policy.evidence.push(parse(&canonical_bytes(&json!({"id":"urn:evidence:recorded-support","subjects":["urn:command:greet"],"kind":"recorded-only","result":"supports","producer":"unverified-producer"})).unwrap()).unwrap());
+    let before = capture(input.clone(), vec![]).unwrap();
+    input.policy.evidence.clear();
+    let after = capture(input, vec![]).unwrap();
+    let report = compare(&replay(&before).unwrap(), &replay(&after).unwrap()).unwrap();
+    assert_eq!(
+        report["policyRecords"]["evidence"]["removed"],
+        json!(["urn:evidence:recorded-support"])
+    );
+    assert_eq!(
+        report["evidenceSupport"]["recordedSupportLost"],
+        json!(["urn:command:greet"])
+    );
+    let reverse = compare(&replay(&after).unwrap(), &replay(&before).unwrap()).unwrap();
+    assert_eq!(
+        reverse["evidenceSupport"]["recordedSupportGained"],
+        json!(["urn:command:greet"])
+    );
+}
+
+#[test]
+fn proof_trace_bounds_are_explicit_for_many_origins_and_expanding_recorded_paths() {
+    let before = semantic_comparison_fixture();
+    let mut inputs = before.inputs.clone();
+    let template = inputs.graph.entities[0].clone();
+    for index in 0..257 {
+        let mut entity = template.clone();
+        entity.id = format!("urn:added:{index}");
+        inputs.graph.entities.push(entity);
+    }
+    let after = capture(inputs, vec![]).unwrap();
+    let report = compare(&replay(&before).unwrap(), &replay(&after).unwrap()).unwrap();
+    assert_eq!(report["recordedProofPathsAfter"]["status"], "unavailable");
+    assert_eq!(report["recordedProofPathsAfter"]["complete"], false);
+
+    let template = before.inputs.policy.semantics.as_ref().unwrap().derivations[0].clone();
+    let mut inputs = before.inputs.clone();
+    let proofs = &mut inputs.policy.semantics.as_mut().unwrap().derivations;
+    proofs.clear();
+    for index in 0..70 {
+        let mut proof = template.clone();
+        proof.id = format!("urn:recorded:{index:03}");
+        proof.result.id = format!("urn:recorded-mapping:{index:03}");
+        proof.premises.truncate(1);
+        proof.premises[0].mapping = if index == 0 {
+            template.premises[0].mapping.clone()
+        } else {
+            format!("urn:recorded-mapping:{:03}", index - 1)
+        };
+        proofs.push(proof);
+    }
+    let after = capture(inputs.clone(), vec![]).unwrap();
+    let report = compare(&replay(&before).unwrap(), &replay(&after).unwrap()).unwrap();
+    assert_eq!(
+        report["recordedProofPathsAfter"]["report"]["complete"],
+        false
+    );
+    assert!(
+        report["recordedProofPathsAfter"]["report"]["limits"]
+            .as_array()
+            .unwrap()
+            .contains(&json!("recorded-path-depth-limit"))
+    );
+
+    let proofs = &mut inputs.policy.semantics.as_mut().unwrap().derivations;
+    for index in 0..proofs.len() {
+        proofs[index].id.push_str(&"x".repeat(1000));
+        proofs[index].result.id.push_str(&"x".repeat(1000));
+        if index > 0 {
+            proofs[index].premises[0].mapping = proofs[index - 1].result.id.clone();
+        }
+    }
+    let after = capture(inputs, vec![]).unwrap();
+    let report = compare(&replay(&before).unwrap(), &replay(&after).unwrap()).unwrap();
+    let paths = &report["recordedProofPathsAfter"];
+    assert_eq!(paths["report"]["complete"], false);
+    assert!(
+        paths["report"]["limits"]
+            .as_array()
+            .unwrap()
+            .contains(&json!("recorded-path-output-limit"))
+    );
+    assert!(canonical_bytes(paths).unwrap().len() < MAX_INPUT_BYTES);
 }

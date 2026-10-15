@@ -3,7 +3,7 @@ use patamaps_contracts::*;
 use patamaps_core::{CheckError, CheckedGraph, diff};
 use serde::Serialize;
 use serde_json::{Value, json};
-use std::collections::{BTreeMap, BTreeSet};
+use std::collections::{BTreeMap, BTreeSet, VecDeque};
 
 /// Rejected inputs may contain repeated identities. Retain occurrence counts
 /// instead of overwriting records or pretending that this is a unique-ID diff.
@@ -148,6 +148,116 @@ fn projection_changes(
     }).collect()
 }
 
+// These are recorded dependency edges, including in a replayed rejection.
+// Traversing a claim never validates its proof or changes admission state.
+fn recorded_proof_paths(inputs: &CaptureInputs, origins: &BTreeSet<String>) -> Value {
+    if origins.len() > 256 {
+        return json!({"status":"unavailable","scope":"recorded-proof-dependencies",
+            "reason":"Origin limit exceeds 256","complete":false});
+    }
+    let proofs = inputs
+        .policy
+        .semantics
+        .as_ref()
+        .map(|s| s.derivations.as_slice())
+        .unwrap_or(&[]);
+    let mut edges: BTreeMap<&str, BTreeSet<&str>> = BTreeMap::new();
+    let mut identities = BTreeSet::new();
+    let mut ambiguous = BTreeSet::new();
+    let mut limits = BTreeSet::new();
+    let mut edge_count = 0usize;
+    let mut edge_bytes = 0usize;
+    'index: for proof in proofs {
+        if !identities.insert(proof.id.as_str()) {
+            ambiguous.insert(proof.id.as_str());
+        }
+        for (from, to) in proof
+            .premises
+            .iter()
+            .map(|p| (p.mapping.as_str(), proof.id.as_str()))
+            .chain(std::iter::once((
+                proof.id.as_str(),
+                proof.result.id.as_str(),
+            )))
+        {
+            edge_count += 1;
+            edge_bytes = edge_bytes
+                .saturating_add(from.len())
+                .saturating_add(to.len());
+            if edge_count > 20_000 || edge_bytes > MAX_INPUT_BYTES {
+                limits.insert("recorded-edge-limit");
+                break 'index;
+            }
+            edges.entry(from).or_default().insert(to);
+        }
+    }
+    let mut paths = Vec::new();
+    let mut report_bytes = 0usize;
+    let mut work = 0usize;
+    // Six bytes per UTF-8 byte is a conservative JSON-escaping bound.
+    let string_cost = |id: &str| id.len().saturating_mul(6).saturating_add(3);
+    'origins: for origin in origins {
+        let mut visited = BTreeSet::from([origin.as_str()]);
+        let mut queue = VecDeque::from([(vec![origin.as_str()], string_cost(origin))]);
+        while let Some((path, path_bytes)) = queue.pop_front() {
+            let subject = *path.last().expect("nonempty dependency path");
+            let cost = path_bytes
+                .saturating_add(string_cost(origin))
+                .saturating_add(string_cost(subject))
+                .saturating_add(128);
+            if paths.len() >= 10_000 || report_bytes.saturating_add(cost) > MAX_INPUT_BYTES {
+                limits.insert("recorded-path-output-limit");
+                break 'origins;
+            }
+            report_bytes += cost;
+            paths.push(json!({"origin":origin,"subjectId":subject,"path":path}));
+            let Some(targets) = edges.get(subject) else {
+                continue;
+            };
+            for target in targets {
+                work += 1;
+                if work > 2_000_000 {
+                    limits.insert("recorded-path-work-limit");
+                    break 'origins;
+                }
+                if visited.contains(target) {
+                    continue;
+                }
+                if path.len() > 64 {
+                    limits.insert("recorded-path-depth-limit");
+                    continue;
+                }
+                if visited.len() >= 10_000 {
+                    limits.insert("recorded-path-visit-limit");
+                    continue;
+                }
+                visited.insert(target);
+                let mut next = path.clone();
+                next.push(target);
+                queue.push_back((next, path_bytes.saturating_add(string_cost(target))));
+            }
+        }
+    }
+    paths.sort_by(|a, b| {
+        (a["origin"].as_str(), a["subjectId"].as_str())
+            .cmp(&(b["origin"].as_str(), b["subjectId"].as_str()))
+    });
+    json!({"status":"available","scope":"recorded-proof-dependencies","report":{
+        "complete":limits.is_empty() && ambiguous.is_empty(),"origins":origins,"paths":paths,
+        "limits":limits,"ambiguousDerivations":ambiguous,
+        "interpretation":"Recorded identifier dependencies only; proof validity, admission, unique causality and present authorization are not established"}})
+}
+
+fn support_subjects(inputs: &CaptureInputs) -> BTreeSet<&str> {
+    inputs
+        .policy
+        .evidence
+        .iter()
+        .filter(|e| e.result == EvidenceResult::Supports)
+        .flat_map(|e| e.subjects.iter().map(String::as_str))
+        .collect()
+}
+
 /// Compare verified inputs/results; unavailable deltas remain explicit nulls.
 pub fn compare(
     before: &VerifiedReplay<'_>,
@@ -234,6 +344,29 @@ pub fn compare(
             )?,
         );
     }
+    let proof_origins: BTreeSet<String> = origins
+        .iter()
+        .cloned()
+        .chain(
+            ["added", "removed", "changed"]
+                .into_iter()
+                .flat_map(|kind| {
+                    semantic["derivations"][kind]
+                        .as_array()
+                        .into_iter()
+                        .flatten()
+                        .filter_map(Value::as_str)
+                        .map(str::to_owned)
+                }),
+        )
+        .collect();
+    let support_before = support_subjects(&a.inputs);
+    let support_after = support_subjects(&b.inputs);
+    let policy_records = json!({
+        "constraints":records(&a.inputs.policy.constraints,&b.inputs.policy.constraints)?,
+        "evidence":records(&a.inputs.policy.evidence,&b.inputs.policy.evidence)?,
+        "waivers":records(a.inputs.policy.waivers.as_deref().unwrap_or(&[]),b.inputs.policy.waivers.as_deref().unwrap_or(&[]))?
+    });
     semantic.insert("sourceReceipts".into(), records(&a.sources, &b.sources)?);
     semantic.insert(
         "projections".into(),
@@ -259,6 +392,12 @@ pub fn compare(
         "packChanged":canonical_bytes(&a.inputs.packs)? != canonical_bytes(&b.inputs.packs)?,
         "riskDelta":risk_delta,"missingSourcesBefore":before.missing_sources(),"missingSourcesAfter":after.missing_sources(),
         "declaredPathsBefore":declared_paths(&a.inputs)?,"declaredPathsAfter":declared_paths(&b.inputs)?,
+        "recordedProofPathsBefore":recorded_proof_paths(&a.inputs,&proof_origins),
+        "recordedProofPathsAfter":recorded_proof_paths(&b.inputs,&proof_origins),
+        "policyRecords":policy_records,
+        "evidenceSupport":{"recordedSupportLost":support_before.difference(&support_after).collect::<Vec<_>>(),
+            "recordedSupportGained":support_after.difference(&support_before).collect::<Vec<_>>(),
+            "interpretation":"Recorded support presence only; evidence validity and scientific truth are not established"},
         "sourceDeltas":source_deltas,
         "issueSubjectsBefore":a.result.get("issues"),"issueSubjectsAfter":b.result.get("issues"),
         "inputChanges":input_changes(a,b)?,"semantic":semantic,"mappingStates":mapping_states,

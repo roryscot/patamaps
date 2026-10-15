@@ -246,7 +246,8 @@ fn published_crypto_vector_and_strict_crypto_refusals() {
 fn viable_agent_proposal_remains_unapproved_and_exact_owner_verifies() {
     let t = trust();
     let p = propose(&candidate(), &t, None, DeploymentIntent::Deploy);
-    assert_eq!(p.files().len(), 10);
+    assert_eq!(p.files().len(), 11);
+    assert!(p.files()["path-tree-1.ts"].contains("export function hydratePathTree"));
     assert!(p.files()["bindings-0.rs"].contains("crate::service::greet"));
     assert!(p.files()["bindings-1.ts"].contains("./service.js"));
     verify_artifact_bytes(&p, p.files()).unwrap();
@@ -759,4 +760,58 @@ fn signed_ingress_is_closed_and_explicit_nullable_baseline_is_required() {
     .unwrap();
     assert_eq!(payload.grants, vec!["grant:\u{10000}", "grant:\u{e000}"]);
     approval_signing_bytes(&payload).unwrap();
+}
+
+#[test]
+fn requested_typescript_tree_bytes_are_exact_governed_artifacts() {
+    let candidate = candidate();
+    let capture = &candidate.captures[0];
+    let graph = patamaps_core::CheckedGraph::check(
+        capture.inputs.graph.clone(),
+        capture.inputs.packs.clone(),
+    )
+    .unwrap();
+    let generation = patamaps_core::admit(
+        &graph,
+        &capture.inputs.policy,
+        patamaps_core::EvaluationOptions {
+            context: capture.inputs.context.clone(),
+            evaluated_at: capture.inputs.evaluated_at.clone(),
+        },
+    )
+    .unwrap();
+    let spec = capture.inputs.projection_spec.as_ref().unwrap();
+    let projection = patamaps_projection::project(&generation, spec).unwrap();
+    let tree = patamaps_projection::compile_path_tree(&projection, spec).unwrap();
+    let expected = patamaps_projection::emit_typescript_path_tree(&tree, "pathTree").unwrap();
+    let proposal = propose(&candidate, &trust(), None, DeploymentIntent::Deploy);
+    let name = "path-tree-1.ts";
+    assert_eq!(proposal.files()[name], expected);
+    let manifest = &proposal.record().artifacts;
+    let descriptor = manifest
+        .files
+        .iter()
+        .find(|entry| entry.path == name)
+        .unwrap();
+    assert_eq!(descriptor.byte_digest, byte_digest(expected.as_bytes()));
+    assert_eq!(descriptor.byte_length.get(), expected.len() as u64);
+    for remove in [false, true] {
+        let mut prepared = proposal.prepared();
+        if remove {
+            prepared.files.remove(name);
+        } else {
+            prepared
+                .files
+                .get_mut(name)
+                .unwrap()
+                .push_str("// unreviewed bytes");
+        }
+        assert!(check_prepared(&prepared).is_err());
+    }
+    let mut rust_only = candidate;
+    rust_only
+        .emissions
+        .retain(|e| matches!(e.language, EmissionLanguage::Rust));
+    let files = prepare_candidate_artifacts(&rust_only, CONSUMER, ENVIRONMENT).unwrap();
+    assert!(!files.files().keys().any(|name| name.ends_with(".ts")));
 }

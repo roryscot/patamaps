@@ -1,7 +1,10 @@
 use crate::{model::*, util::*};
 use patamaps_contracts::*;
 use patamaps_core::{CheckedGraph, EvaluationOptions, admit};
-use patamaps_projection::{CaptureRecord, emit_rust, emit_typescript, project, replay};
+use patamaps_projection::{
+    CaptureRecord, compile_path_tree, emit_rust, emit_typescript, emit_typescript_path_tree,
+    project, replay,
+};
 use serde::Serialize;
 use std::collections::{BTreeMap, BTreeSet};
 
@@ -195,6 +198,7 @@ pub(crate) fn prepare_artifacts(
     writer.json("source-receipts.json", &first.sources)?;
     writer.json("generation.json", generation.record())?;
     let mut projections = BTreeMap::new();
+    let mut trees = BTreeMap::new();
     for (i, c) in candidate.captures.iter().enumerate() {
         writer.json(&format!("capture-{i}.json"), c)?;
         if !c.inputs.projection_specs.is_empty() {
@@ -210,7 +214,11 @@ pub(crate) fn prepare_artifacts(
                 if !outcome["pathTree"].is_null() {
                     writer.json(&format!("path-tree-{i}-{j}.json"), &outcome["pathTree"])?;
                 }
-                projections.insert(&spec.id, project(&generation, spec)?);
+                let projection = project(&generation, spec)?;
+                if spec.path_tree.is_some() {
+                    trees.insert(&spec.id, compile_path_tree(&projection, spec)?);
+                }
+                projections.insert(&spec.id, projection);
             }
             continue;
         }
@@ -223,7 +231,11 @@ pub(crate) fn prepare_artifacts(
             .projection_spec
             .as_ref()
             .expect("checked consumer specification");
-        projections.insert(&spec.id, project(&generation, spec)?);
+        let projection = project(&generation, spec)?;
+        if spec.path_tree.is_some() {
+            trees.insert(&spec.id, compile_path_tree(&projection, spec)?);
+        }
+        projections.insert(&spec.id, projection);
     }
     for (i, e) in candidate.emissions.iter().enumerate() {
         let p = &projections[&e.projection];
@@ -235,6 +247,14 @@ pub(crate) fn prepare_artifacts(
             ),
         };
         writer.add(format!("bindings-{i}.{extension}"), bytes)?;
+        if matches!(e.language, EmissionLanguage::Typescript)
+            && let Some(tree) = trees.get(&e.projection)
+        {
+            writer.add(
+                format!("path-tree-{i}.ts"),
+                emit_typescript_path_tree(tree, "pathTree")?,
+            )?;
+        }
     }
     let mut manifest = ArtifactManifest {
         schema_version: ProtocolVersion::Draft1,

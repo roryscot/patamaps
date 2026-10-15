@@ -265,3 +265,123 @@ fn included_inventory_is_exact_and_collection_crates_emit_all_native_bindings() 
     }
     verify_crate(package.record()).unwrap();
 }
+
+fn mixed_source_fixture(
+    include_tsv: bool,
+    include_metadata: bool,
+    changed_payload: Option<&str>,
+) -> (CaptureRecord, CrateOptions) {
+    let (c, mut options) = fixture();
+    let document: SssomDocument =
+        decode(c.inputs.graph.metadata.as_ref().unwrap()["sssom"]["rawDocument"].clone());
+    let mut tsv = std::str::from_utf8(RAW)
+        .unwrap()
+        .split_inclusive('\n')
+        .skip_while(|line| line.starts_with('#'))
+        .collect::<String>();
+    let mut metadata = document.metadata.clone();
+    if changed_payload == Some("tsv") {
+        let column = document
+            .columns
+            .iter()
+            .position(|name| name == "subject_id")
+            .unwrap();
+        let original = &document.rows[0][column];
+        assert!(tsv.contains(original));
+        tsv = tsv.replacen(original, &format!("{original}-altered"), 1);
+    }
+    if changed_payload == Some("metadata") {
+        metadata.insert(
+            "mapping_set_title".into(),
+            json!("Contradictory supplied metadata"),
+        );
+    }
+    let metadata = String::from_utf8(canonical_bytes(&metadata).unwrap()).unwrap();
+    let metadata_id = "urn:source:mgi:metadata";
+    options.metadata_receipt = Some(metadata_id.into());
+    let mut payloads = std::collections::BTreeMap::new();
+    let mut receipts = Vec::new();
+    for (id, bytes, included) in [
+        (c.sources[0].id.as_str(), tsv, include_tsv),
+        (metadata_id, metadata, include_metadata),
+    ] {
+        if included {
+            payloads.insert(id.into(), bytes.clone());
+        }
+        receipts.push(SourceReceipt {
+            id: id.into(),
+            locator: format!("urn:provided:{id}"),
+            digest: byte_digest(bytes.as_bytes()),
+            byte_length: SafeInteger::new(bytes.len() as u64).unwrap(),
+            content: included.then_some(bytes),
+        });
+    }
+    options.raw_inputs = Some(payloads);
+    let captured = capture(c.inputs, receipts).unwrap();
+    assert_eq!(captured.result["status"], "viable");
+    (captured, options)
+}
+
+#[test]
+fn each_valid_partial_source_inventory_verifies_without_filling_missing_bytes() {
+    for (tsv, metadata) in [(true, true), (true, false), (false, true), (false, false)] {
+        let (capture, options) = mixed_source_fixture(tsv, metadata, None);
+        let before = canonical_bytes(&capture).unwrap();
+        let package = create_crate(&capture, &options).unwrap();
+        let missing = 2 - usize::from(tsv) - usize::from(metadata);
+        assert_eq!(package.external_raw_inputs(), missing);
+        assert_eq!(
+            verify_crate(package.record())
+                .unwrap()
+                .external_raw_inputs(),
+            missing
+        );
+        assert_eq!(canonical_bytes(&capture).unwrap(), before);
+        let embedded = package
+            .record()
+            .files
+            .keys()
+            .filter(|name| name.starts_with("source/"))
+            .count();
+        assert_eq!(embedded, usize::from(tsv) + usize::from(metadata));
+    }
+}
+
+#[test]
+fn supplied_tsv_or_metadata_contradictions_refuse_even_when_the_other_payload_is_missing() {
+    for (tsv, metadata, changed) in [
+        (true, false, "tsv"),
+        (true, true, "tsv"),
+        (false, true, "metadata"),
+        (true, true, "metadata"),
+    ] {
+        let (capture, options) = mixed_source_fixture(tsv, metadata, Some(changed));
+        assert_eq!(
+            create_crate(&capture, &options).unwrap_err().code,
+            "SCIENTIFIC_CRATE_SOURCE"
+        );
+    }
+}
+
+#[test]
+fn an_absent_external_metadata_receipt_does_not_allow_embedded_metadata_mode() {
+    let (capture, mut options) = fixture();
+    let mut receipts = capture.sources.clone();
+    receipts.push(SourceReceipt {
+        id: "urn:source:mgi:metadata".into(),
+        locator: "urn:provided:metadata".into(),
+        digest: byte_digest(b"{}"),
+        byte_length: SafeInteger::new(2).unwrap(),
+        content: None,
+    });
+    options.metadata_receipt = Some("urn:source:mgi:metadata".into());
+    options.raw_inputs = Some(std::collections::BTreeMap::from([(
+        receipts[0].id.clone(),
+        receipts[0].content.clone().unwrap(),
+    )]));
+    let captured = patamaps_projection::capture(capture.inputs, receipts).unwrap();
+    assert_eq!(
+        create_crate(&captured, &options).unwrap_err().code,
+        "SSSOM_METADATA_MODE"
+    );
+}

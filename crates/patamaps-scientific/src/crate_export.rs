@@ -136,17 +136,11 @@ fn settings(o: &CrateOptions) -> Result<()> {
     }
     Ok(())
 }
-fn receipt<'a>(c: &'a CaptureRecord, id: &str) -> Result<&'a str> {
+fn receipt<'a>(c: &'a CaptureRecord, id: &str) -> Option<&'a str> {
     c.sources
         .iter()
         .find(|s| s.id == id)
         .and_then(|s| s.content.as_deref())
-        .ok_or_else(|| {
-            Error::new(
-                "SCIENTIFIC_CRATE_SOURCE",
-                format!("Missing captured source bytes: {id}"),
-            )
-        })
 }
 fn json_text<T: Serialize>(v: &T) -> Result<String> {
     Ok(String::from_utf8(canonical_bytes(v)?).expect("canonical UTF-8") + "\n")
@@ -284,18 +278,35 @@ pub fn create_crate(c: &CaptureRecord, o: &CrateOptions) -> Result<CheckedScient
         })?;
     let document: SssomDocument = parse(&canonical_bytes(captured_document)?)?;
     let sssom = check_document(&document)?;
-    if checked.missing_sources().is_empty() {
-        let raw = receipt(c, &o.tsv_receipt)?;
-        let metadata = o
-            .metadata_receipt
-            .as_deref()
-            .map(|id| receipt(c, id))
-            .transpose()?;
-        let parsed = parse_tsv(raw.as_bytes(), metadata.map(str::as_bytes))?;
+    let metadata = o.metadata_receipt.as_deref().and_then(|id| receipt(c, id));
+    if let Some(raw) = receipt(c, &o.tsv_receipt) {
+        // An absent external metadata payload cannot disable checks of included
+        // TSV columns/rows. Use the explicitly recorded metadata only to parse
+        // those bytes; this does not verify or fetch the missing metadata bytes.
+        let recorded_metadata = if o.metadata_receipt.is_some() && metadata.is_none() {
+            Some(canonical_bytes(&document.metadata)?)
+        } else {
+            None
+        };
+        let parsed = parse_tsv(
+            raw.as_bytes(),
+            metadata.map(str::as_bytes).or(recorded_metadata.as_deref()),
+        )?;
         if canonical_bytes(parsed.document())? != canonical_bytes(sssom.document())? {
             return refuse(
                 "SCIENTIFIC_CRATE_SOURCE",
                 "Included raw bytes disagree with the captured SSSOM document",
+            );
+        }
+    } else if let Some(raw) = metadata {
+        let parsed = crate::syntax::metadata(
+            crate::syntax::text(raw.as_bytes(), STRICT_JSON_LIMITS)?,
+            STRICT_JSON_LIMITS,
+        )?;
+        if canonical_bytes(&parsed)? != canonical_bytes(&document.metadata)? {
+            return refuse(
+                "SCIENTIFIC_CRATE_SOURCE",
+                "Included external metadata disagrees with the captured SSSOM document",
             );
         }
     }

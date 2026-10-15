@@ -1,0 +1,629 @@
+{
+  "status": "passed",
+  "commands": [
+    {
+      "label": "format",
+      "argv": [
+        "/Users/admin/.cargo/bin/cargo",
+        "fmt",
+        "--all"
+      ],
+      "exitCode": 0,
+      "elapsedSeconds": 1.4019801169924904,
+      "stdout": {
+        "path": "docs/acceptance/capabilities/scientific-alignment-focused-2026-10-15T03-17-33.314363Z/format.stdout.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "docs/acceptance/capabilities/scientific-alignment-focused-2026-10-15T03-17-33.314363Z/format.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "scientific-crate-tests",
+      "argv": [
+        "/Users/admin/.cargo/bin/cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "-p",
+        "patamaps-scientific",
+        "--test",
+        "crate"
+      ],
+      "exitCode": 0,
+      "elapsedSeconds": 18.22393589100102,
+      "stdout": {
+        "path": "docs/acceptance/capabilities/scientific-alignment-focused-2026-10-15T03-17-33.314363Z/scientific-crate-tests.stdout.log",
+        "digest": "sha256:683c76acafd3229131aa30225810b4316b556c3d715e24e2329b3384da1b2aba"
+      },
+      "stderr": {
+        "path": "docs/acceptance/capabilities/scientific-alignment-focused-2026-10-15T03-17-33.314363Z/scientific-crate-tests.stderr.log",
+        "digest": "sha256:2f123d6a848fc4493f885a61e125ef4527fe3944a0473e427144e0202dec3fe7"
+      }
+    },
+    {
+      "label": "scientific-clippy",
+      "argv": [
+        "/Users/admin/.cargo/bin/cargo",
+        "clippy",
+        "--locked",
+        "--offline",
+        "-p",
+        "patamaps-scientific",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exitCode": 0,
+      "elapsedSeconds": 14.023811783990823,
+      "stdout": {
+        "path": "docs/acceptance/capabilities/scientific-alignment-focused-2026-10-15T03-17-33.314363Z/scientific-clippy.stdout.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "docs/acceptance/capabilities/scientific-alignment-focused-2026-10-15T03-17-33.314363Z/scientific-clippy.stderr.log",
+        "digest": "sha256:49be767e0001c889ee752dc13409faeacacf0b4744ba983a38ac44d4ec792f9d"
+      }
+    },
+    {
+      "label": "source-integrity",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/intel-python-3.13.16-20261013/runtime/python/bin/python3",
+        "-B",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/scripts/test_source_integrity.py",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/reference/metamap-399747a4ad05",
+        "--output",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/docs/acceptance/capabilities/scientific-alignment-focused-2026-10-15T03-17-33.314363Z/reference-integrity.json"
+      ],
+      "exitCode": 0,
+      "elapsedSeconds": 2.8115780980151612,
+      "stdout": {
+        "path": "docs/acceptance/capabilities/scientific-alignment-focused-2026-10-15T03-17-33.314363Z/source-integrity.stdout.log",
+        "digest": "sha256:066bfe999b586d949e21b1e8c592d7d2cd024bd39fd422bfe9ee9608fd7f5fbc"
+      },
+      "stderr": {
+        "path": "docs/acceptance/capabilities/scientific-alignment-focused-2026-10-15T03-17-33.314363Z/source-integrity.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  ],
+  "baseRevision": "a78140674ff9f3a968228ed55d29d2fcea0d0b90",
+  "scope": "Native scientific source-alignment controls and Rust lint/format/source integrity. Newly strengthened Linux-only precommit assertions are not executed on macOS.",
+  "deleted": [],
+  "sourceInventory": [
+    {
+      "path": "Cargo.toml",
+      "digest": "sha256:48a84b8b6cb3daddee93972af960315131cb282dfc7bc4e12cc09aaba6e8656e"
+    },
+    {
+      "path": "Cargo.lock",
+      "digest": "sha256:03a7b51240a1cb1e494af854b22dc3b5ca7dd3a9e0532d428537744e1478672b"
+    },
+    {
+      "path": "crates/patamaps-activator/src/error.rs",
+      "digest": "sha256:90d462a114543a42d9ef0e564f16cab349a5a6b96517c37e3178226c6df224be"
+    },
+    {
+      "path": "crates/patamaps-activator/src/lib.rs",
+      "digest": "sha256:cd0d3c30770144fddeaf54b65c7e700155b64c2b2c8f58525609dcff60d7179d"
+    },
+    {
+      "path": "crates/patamaps-activator/src/linux_tests.rs",
+      "digest": "sha256:9fd05c0a1c40d5f3b68ca27e63a919a93ec1eb3bfbd533b6d51b9b71ce405711"
+    },
+    {
+      "path": "crates/patamaps-activator/src/main.rs",
+      "digest": "sha256:fb58ada40523492f89e53501548ae3e4c82a2f371f1cf880714083357a4f132d"
+    },
+    {
+      "path": "crates/patamaps-activator/src/memory.rs",
+      "digest": "sha256:97e98f84f6efe7a8005cce333710ae3626ab450fb1ea7205f931b982279a6273"
+    },
+    {
+      "path": "crates/patamaps-activator/src/model.rs",
+      "digest": "sha256:2ccf1169859877ccd1c95de0baec182dbb997dd70d97c7c1be75fb7a71f89615"
+    },
+    {
+      "path": "crates/patamaps-activator/src/storage.rs",
+      "digest": "sha256:464c429f03e3d8faba3c3935601bf5bba77b5e1e90c221617df8d4db27c2d7d4"
+    },
+    {
+      "path": "crates/patamaps-activator/src/transaction.rs",
+      "digest": "sha256:1f836df17423c175dbc8e0de8a3998f4d59d89d8a13a0ce05fd74b0847ce396d"
+    },
+    {
+      "path": "crates/patamaps-activator/tests/memory.rs",
+      "digest": "sha256:062a8515ffc8b7cdeb7c1eb4a196a06145f8ddf4b3869a7dba0647f544d9ea94"
+    },
+    {
+      "path": "crates/patamaps-activator/tests/support/lifecycle.rs",
+      "digest": "sha256:03bc775671bd5a29fbad3c0c84a0311b96431b206fc3b79c9b00cf8785afc6f9"
+    },
+    {
+      "path": "crates/patamaps-activator/tests/transport.rs",
+      "digest": "sha256:2768e7243a4e2904d488141d3e982a80458fb2d05fb63a88981d924a8c407e69"
+    },
+    {
+      "path": "crates/patamaps-cli/src/main.rs",
+      "digest": "sha256:b428c680be4eb42496a3b46fee6cc4c11b76881de167eef4c15b40aa7844924d"
+    },
+    {
+      "path": "crates/patamaps-contracts/build.rs",
+      "digest": "sha256:76158764b60028aebcfc5faf195cf4058159f0f83dc6e8dedfca5f04b0fdf4af"
+    },
+    {
+      "path": "crates/patamaps-contracts/src/integer.rs",
+      "digest": "sha256:d51688dbe80f38596cd7eec079f7fab7b41c03a24e8daaebde8c3a2a8e293697"
+    },
+    {
+      "path": "crates/patamaps-contracts/src/json.rs",
+      "digest": "sha256:42fb728ceabf554bb62ea6924f103e6989bbe56c8db7ba528292f6255e583e3a"
+    },
+    {
+      "path": "crates/patamaps-contracts/src/json_scan.rs",
+      "digest": "sha256:3a45c9a6fc300a57fed80399c12db4fa49498f895b2bb4d5c0f5b491ebdc3f38"
+    },
+    {
+      "path": "crates/patamaps-contracts/src/legacy_json.rs",
+      "digest": "sha256:119e341db4383c4c8306b8270175269e94b32d1879ac8d4d9d249b68a558b702"
+    },
+    {
+      "path": "crates/patamaps-contracts/src/legacy_stable.rs",
+      "digest": "sha256:48bfaf9ae7cfb1889855c280c71d5bcc65cd389c35c910ffc34f911ba0d479a2"
+    },
+    {
+      "path": "crates/patamaps-contracts/src/lib.rs",
+      "digest": "sha256:407edae5968ff65fdbf84c5bc1d250af726e67001f3de775db4656c263ceb90b"
+    },
+    {
+      "path": "crates/patamaps-contracts/src/model.rs",
+      "digest": "sha256:9733e006e13996a4550d5a3bd6c40e7bdf9b4972e97f29bfcb269c268f9b51aa"
+    },
+    {
+      "path": "crates/patamaps-contracts/src/semantic.rs",
+      "digest": "sha256:c4f2b330ed551fe1853764717ab274f5296d20ca259f0a2c094c19440664b308"
+    },
+    {
+      "path": "crates/patamaps-contracts/tests/canonical.rs",
+      "digest": "sha256:9da19c37807c80c60d713e6612f7f5dc9ec1ca785a2d613b8b75457fbf0b8642"
+    },
+    {
+      "path": "crates/patamaps-contracts/tests/legacy_digest.rs",
+      "digest": "sha256:be4d055ad073e645f361f2271e17794e2b9bee51ca740782147757eeac90ffda"
+    },
+    {
+      "path": "crates/patamaps-contracts/tests/legacy_json.rs",
+      "digest": "sha256:7f6eb971e220cdab2d88ce45f85fc7c0ab26b0ad6fbbebb9c00bbeae64118bb9"
+    },
+    {
+      "path": "crates/patamaps-contracts/tests/legacy_read_only.rs",
+      "digest": "sha256:d94e38844190abe559770bc0c932653bdd80e9f4370d2cf9607751f83f1ee62a"
+    },
+    {
+      "path": "crates/patamaps-core/src/admission.rs",
+      "digest": "sha256:a6dc8000e818e8de3545b6e385a7fccfa4ae78da7ad6a6680aa33744c228d331"
+    },
+    {
+      "path": "crates/patamaps-core/src/constraints.rs",
+      "digest": "sha256:1d0de49a1ec35d07981c9cff21ff58fc264439fe2bd201102828cc639d5b6c08"
+    },
+    {
+      "path": "crates/patamaps-core/src/control.rs",
+      "digest": "sha256:848df878b55da78bab7edf2a7866c25d60027d9f5787e101256e4c9b576722e5"
+    },
+    {
+      "path": "crates/patamaps-core/src/derivation.rs",
+      "digest": "sha256:374314f7d5f73c9d75f04ea67e4648242aaba40c8bf9239ee98bace740c32df8"
+    },
+    {
+      "path": "crates/patamaps-core/src/diff.rs",
+      "digest": "sha256:02e44f5893d41c3c0523109657ae4993b34c0c6d6d5e7543b6614a198123a7c9"
+    },
+    {
+      "path": "crates/patamaps-core/src/graph.rs",
+      "digest": "sha256:0674a39958c1baedaf1e11ac5f4665146d9335b60840996d63e01fe33bb8891e"
+    },
+    {
+      "path": "crates/patamaps-core/src/impact.rs",
+      "digest": "sha256:869ca8996d5caaabda8b134eff2ce4d6569dddf24739dea390d5ab04715007a9"
+    },
+    {
+      "path": "crates/patamaps-core/src/laws.rs",
+      "digest": "sha256:d2e0e9110010a14b29deb1bc32cbaeeee4b5beb1dcb15ef414f02e84db9e6f15"
+    },
+    {
+      "path": "crates/patamaps-core/src/legacy_cli.rs",
+      "digest": "sha256:bc0f06737a4c58d0b749db08bcd8f76a5ab162161624a198922d71f060f35797"
+    },
+    {
+      "path": "crates/patamaps-core/src/legacy_composition.rs",
+      "digest": "sha256:1230337103c6fe881c39be3958489616d0a97b29211e21cd879546e4b346825c"
+    },
+    {
+      "path": "crates/patamaps-core/src/legacy_constraints.rs",
+      "digest": "sha256:7734dd8506b4d47a9234a35857bb01d27a9b8d7104deb8c8c214e6b7210452ac"
+    },
+    {
+      "path": "crates/patamaps-core/src/legacy_correspondence.rs",
+      "digest": "sha256:cca31e0679d7825216f499bbcfd715782021857ca6a070956ea5e47d820dad1a"
+    },
+    {
+      "path": "crates/patamaps-core/src/legacy_evaluation.rs",
+      "digest": "sha256:e8fa5e873c6a54d9efafa9a8a7bc92a9d84823c6f2f6d74e201c6a1ca0c82334"
+    },
+    {
+      "path": "crates/patamaps-core/src/legacy_graph.rs",
+      "digest": "sha256:a33d4b94f60e2746a0f50932bc563d898a817c2b470125850ed720393a151d86"
+    },
+    {
+      "path": "crates/patamaps-core/src/legacy_pack.rs",
+      "digest": "sha256:2e82cce059eecbe5e1b1db45ae6e9868662b5930e63b60c4dd93a981f2c0ab3a"
+    },
+    {
+      "path": "crates/patamaps-core/src/legacy_references.rs",
+      "digest": "sha256:53b642981d04dddc13d06ec4012c2de60348f72ba755d8e4fd6d7a909cb68275"
+    },
+    {
+      "path": "crates/patamaps-core/src/legacy_registry.rs",
+      "digest": "sha256:2d2147bad1d59a8231a5f4ba719fbb42fd3b94cfe79f95019d2d844381096d6a"
+    },
+    {
+      "path": "crates/patamaps-core/src/legacy_reporting.rs",
+      "digest": "sha256:9577a0a7d9b70b7aab1823385fc866c62bfe00180581cf051b5defc8ce4fa63d"
+    },
+    {
+      "path": "crates/patamaps-core/src/legacy_semantic.rs",
+      "digest": "sha256:442e43383688731add472771db4d5a1a31102ae03d02948b7a2e52efc1482c80"
+    },
+    {
+      "path": "crates/patamaps-core/src/legacy_uncertainty_risk.rs",
+      "digest": "sha256:5d9e30dd654355c10a4442fa0a3d8a20b48161ea670581099cf9a7f4bda03dc2"
+    },
+    {
+      "path": "crates/patamaps-core/src/legacy_validation.rs",
+      "digest": "sha256:d4ee6c03c19bbf5c5d608180841b5131bfd246220923651ee1992c8ca78b6916"
+    },
+    {
+      "path": "crates/patamaps-core/src/legacy_viability.rs",
+      "digest": "sha256:1d47e48b1d7d9fda687b24c66d7713475c204af94d933cd1751340eb0272a47c"
+    },
+    {
+      "path": "crates/patamaps-core/src/legacy_workspace.rs",
+      "digest": "sha256:706aec90dbffb5bd8c75b0b92fb0e62efd14c5bdc00272272b44d1f47624251d"
+    },
+    {
+      "path": "crates/patamaps-core/src/lib.rs",
+      "digest": "sha256:c2cab9e79661eb1665766f0e7189e6a858dbdb853e1a54b4e984eb76e80d36f5"
+    },
+    {
+      "path": "crates/patamaps-core/src/preflight.rs",
+      "digest": "sha256:4aef2de207a308238833728e949defc6d8310a7b819dd0dddbe93d02d4362ac5"
+    },
+    {
+      "path": "crates/patamaps-core/src/registry.rs",
+      "digest": "sha256:e5df387fdba1c9579913a857d0628d2909f315307b0db0f4492ec17996214ddf"
+    },
+    {
+      "path": "crates/patamaps-core/src/risk.rs",
+      "digest": "sha256:c1a3a471527bcf854239ef11b20ef2736d5eb128a1de95692df4e93c1a9b4e6e"
+    },
+    {
+      "path": "crates/patamaps-core/src/topology.rs",
+      "digest": "sha256:2977c4e678d6e465ae4e994e428cfa1adaaa6db15ed11da517ec33837769797c"
+    },
+    {
+      "path": "crates/patamaps-core/src/uncertainty.rs",
+      "digest": "sha256:735552080f357af50756ed469ab524e66847f8dfb89ac250d4e9f9b4b6193e2d"
+    },
+    {
+      "path": "crates/patamaps-core/tests/derivation.rs",
+      "digest": "sha256:da3dd04c3fadf3924a023ec4fa0d6402d9d4ef151baa0b7d0f9ccdfe98c0ad29"
+    },
+    {
+      "path": "crates/patamaps-core/tests/kernel.rs",
+      "digest": "sha256:567f4fd5a11f3dbd33fec3ea69ae78c192ab9bc295bf690ad3079203dfb31ed0"
+    },
+    {
+      "path": "crates/patamaps-core/tests/legacy_cli.rs",
+      "digest": "sha256:6d02221821e47465e1234c9d424cf9979673ded32ac36815632ff46d7c0cfa73"
+    },
+    {
+      "path": "crates/patamaps-core/tests/legacy_composition.rs",
+      "digest": "sha256:a4253c4f1a4dfbd3bc1fc919d075896b8970e16fc616a367600ee1471d70fcc6"
+    },
+    {
+      "path": "crates/patamaps-core/tests/legacy_correspondence.rs",
+      "digest": "sha256:28ecdc1242b67bd49a2d3818213c2ee99c49c214e190275ddcdd05ef143191a4"
+    },
+    {
+      "path": "crates/patamaps-core/tests/legacy_evaluation.rs",
+      "digest": "sha256:6dad027038ed38a6e051664792e45466f481d50a2ea92be31951e1be0fc3a6ef"
+    },
+    {
+      "path": "crates/patamaps-core/tests/legacy_graph.rs",
+      "digest": "sha256:2d192887e895a485acd82b276bf7a1f0d79737ee2ef529905e3b2827876aea8b"
+    },
+    {
+      "path": "crates/patamaps-core/tests/legacy_pack.rs",
+      "digest": "sha256:978eb0807105dcb38b5fc30175b1835325db05d809647b67e3a63c8874b4e09c"
+    },
+    {
+      "path": "crates/patamaps-core/tests/legacy_registry.rs",
+      "digest": "sha256:90a13e534dfa2e018c14768f21b1a08e30604d2121ad9030f735cfe4eb097475"
+    },
+    {
+      "path": "crates/patamaps-core/tests/legacy_reporting.rs",
+      "digest": "sha256:d80d96fd27b8683d0191ef947838696a00f086c89e62fd2985224e272bc4bb02"
+    },
+    {
+      "path": "crates/patamaps-core/tests/legacy_semantic.rs",
+      "digest": "sha256:a2e63bdb8b029dff4c1a4e7b9985263ffd97ef1ddab7e5c3540ed136462791c6"
+    },
+    {
+      "path": "crates/patamaps-core/tests/legacy_uncertainty_risk.rs",
+      "digest": "sha256:4fe9999468cc13e77c745e6323cd405e25141ebc893b9e24bbbba2e3f0ca932f"
+    },
+    {
+      "path": "crates/patamaps-core/tests/legacy_validation.rs",
+      "digest": "sha256:33cbee90b27f4a08c016a048a58ae2ae4f63b5851c9ede8326cfed7a4a80b060"
+    },
+    {
+      "path": "crates/patamaps-core/tests/legacy_viability.rs",
+      "digest": "sha256:e535996b5b0c023e9db560eecc07477b79bfc7662d0fa1bd593c0be89610b4a8"
+    },
+    {
+      "path": "crates/patamaps-core/tests/legacy_workspace.rs",
+      "digest": "sha256:3d97c18e1ac4564c6949ea51c7bf2c84d6d9301cc9ff19ea24877642446aed9e"
+    },
+    {
+      "path": "crates/patamaps-core/tests/native_constraints.rs",
+      "digest": "sha256:8e3ebea4e22d2bd2359c83356eba445be524245a1651926b948b4272972bd956"
+    },
+    {
+      "path": "crates/patamaps-core/tests/registry.rs",
+      "digest": "sha256:29751d381c02db16e3be005f58dcb111407330d480afc15e1a662e2862748985"
+    },
+    {
+      "path": "crates/patamaps-core/tests/topology.rs",
+      "digest": "sha256:d152080a27086ca3a8d9bd213da4d876a44912e5ede4393c94c7df9868522228"
+    },
+    {
+      "path": "crates/patamaps-core/tests/uncertainty.rs",
+      "digest": "sha256:aac5b81f5f369adfc0c8f44abdfc721e7cede2ec278c36e71c6ae14dc6c91154"
+    },
+    {
+      "path": "crates/patamaps-core/tests/waivers.rs",
+      "digest": "sha256:53a7f4c96517893ad885bff8e4e3f57c0b2b97af7a433a2a35aec4fabc63a2af"
+    },
+    {
+      "path": "crates/patamaps-governance/src/approval.rs",
+      "digest": "sha256:88cf92ecd4300099399765d9a045b680d52879118b186b7274773cba9c64c800"
+    },
+    {
+      "path": "crates/patamaps-governance/src/artifacts.rs",
+      "digest": "sha256:8c19dff946ead829d45d774c63ca22e90c4c562de1300d6841c8d596fb8401bd"
+    },
+    {
+      "path": "crates/patamaps-governance/src/delta.rs",
+      "digest": "sha256:a9ebdaba3c33326533aad9358cc0720b026277b72f4e0237fcff6760f7a67abe"
+    },
+    {
+      "path": "crates/patamaps-governance/src/lib.rs",
+      "digest": "sha256:3aac35996ea6f6470028ea5b1243e3c904884a985b387fc03333514d4e93de01"
+    },
+    {
+      "path": "crates/patamaps-governance/src/model.rs",
+      "digest": "sha256:9eedb0eebe1f5a7b1941d43b0d14f8f6965d67b1fa4e5f61bfc4607f762d0ae9"
+    },
+    {
+      "path": "crates/patamaps-governance/src/proposal.rs",
+      "digest": "sha256:11bfc578ce71c206c1447869da15892dea751fe76413e1a19dfd32aa85e0b9e9"
+    },
+    {
+      "path": "crates/patamaps-governance/src/trust.rs",
+      "digest": "sha256:534057cb3a6f040b25f649a564061bb195bbc945a2a4789508892c78898d66a1"
+    },
+    {
+      "path": "crates/patamaps-governance/src/util.rs",
+      "digest": "sha256:3fdb306eabfd88f3d928f8808c29c7082793c4a9e1c6024411b1662a3942cbc3"
+    },
+    {
+      "path": "crates/patamaps-governance/tests/governance.rs",
+      "digest": "sha256:18df642fcebeeab51dc661245a1770c7572c8897875c7f14658e8708050027b9"
+    },
+    {
+      "path": "crates/patamaps-inspect/src/explanation.rs",
+      "digest": "sha256:bad1aa7dce3b64ae7d361c734908af0fad1b05b594c672f651f09cdbda8b5b7d"
+    },
+    {
+      "path": "crates/patamaps-inspect/src/lib.rs",
+      "digest": "sha256:87bbf92d43dacf9ffb558a3e22d0269207c0eb734e8ac12edf1861a92cec518c"
+    },
+    {
+      "path": "crates/patamaps-inspect/src/repair.rs",
+      "digest": "sha256:6680fe5e0c14722c04f4917e21281b128eab1b63af53bd60966570105bbe8177"
+    },
+    {
+      "path": "crates/patamaps-inspect/tests/inspection.rs",
+      "digest": "sha256:7b6057c7ac11516c59620f710c32c419559338663f45530fd2341e320eea0104"
+    },
+    {
+      "path": "crates/patamaps-inspect/tests/source_inspection.rs",
+      "digest": "sha256:dd957dc0207011b57c283072c33bd54669095b596f797206a11267a8db34d797"
+    },
+    {
+      "path": "crates/patamaps-projection/src/capture.rs",
+      "digest": "sha256:b0c8ced7e6a03c2475f2b42007bdc053becac745b0b18f4e2b6bdc06783385d4"
+    },
+    {
+      "path": "crates/patamaps-projection/src/compare.rs",
+      "digest": "sha256:8b8ac3cf3d42d335072a961c70ec0636f43417664a9998b3db145e3b439c942e"
+    },
+    {
+      "path": "crates/patamaps-projection/src/lib.rs",
+      "digest": "sha256:101d7995a823457108ab9a94d1f4c379c70918d898bfe0ec7080ad94534a4119"
+    },
+    {
+      "path": "crates/patamaps-projection/src/path_tree.rs",
+      "digest": "sha256:a18ad2f66e1c5df8aca9f65485fcad1ff632b99759e1f5a5021168934c2d335c"
+    },
+    {
+      "path": "crates/patamaps-projection/tests/native_constraints.rs",
+      "digest": "sha256:0991ec7c7ca7fdcf166e65615385e8b7a3b9f120a3e94018a04df55167a8bf1f"
+    },
+    {
+      "path": "crates/patamaps-projection/tests/path_tree.rs",
+      "digest": "sha256:40a3e377707a3a3968769affceff381f83397d8d5bdafe0fc35a9c8af23e9055"
+    },
+    {
+      "path": "crates/patamaps-projection/tests/projection.rs",
+      "digest": "sha256:bd55f73961f700929e94d0c234a5e662f353ba9a40ecadf2e9ab10273f27ae31"
+    },
+    {
+      "path": "crates/patamaps-projection/tests/replay.rs",
+      "digest": "sha256:d45d99896587cec3b0f1075aa785cf258aebb0895b4384a74e226326d16e0814"
+    },
+    {
+      "path": "crates/patamaps-projection/tests/risk.rs",
+      "digest": "sha256:2b9c8271dc3882a526088c7551ee301d9bb5327f3de42089068065642bdb4ca0"
+    },
+    {
+      "path": "crates/patamaps-projection/tests/waivers.rs",
+      "digest": "sha256:3c973bedc232de80804576f90fccff74680ca8fde30fd56a0b4596a9246a18eb"
+    },
+    {
+      "path": "crates/patamaps-scientific/src/crate_export.rs",
+      "digest": "sha256:6f1d590741bdbe2a85cd0ba2943f2e55c4d0453215bd0ce6675c130a03f3c3ed"
+    },
+    {
+      "path": "crates/patamaps-scientific/src/export.rs",
+      "digest": "sha256:4b37c4f1b264008bf17cb02da223d2cd18c415c4a5f9edaae5a86d8921f3897f"
+    },
+    {
+      "path": "crates/patamaps-scientific/src/graph.rs",
+      "digest": "sha256:944fb3fd5bcbf966ff0a655cc3911474b7b2318dc68d739652d59f7aaa31559c"
+    },
+    {
+      "path": "crates/patamaps-scientific/src/interpret.rs",
+      "digest": "sha256:f9d61fd1ff1ee440b7a0526a0eb85717217ae77e993588a7f2e1e1548941aef4"
+    },
+    {
+      "path": "crates/patamaps-scientific/src/legacy_config.rs",
+      "digest": "sha256:41441d1735bda964b9d749efe8252af7db40e1ac04075c6b6f413fbee41cb751"
+    },
+    {
+      "path": "crates/patamaps-scientific/src/lib.rs",
+      "digest": "sha256:3b4d2aeee66061cd92ef060a711261699f04dc45a00814c92ddf6476e683165f"
+    },
+    {
+      "path": "crates/patamaps-scientific/src/model.rs",
+      "digest": "sha256:70b54c22d40e82f4612dd54a00d1dc59f70b1c78ae062fdaca10f9854722dcc6"
+    },
+    {
+      "path": "crates/patamaps-scientific/src/source.rs",
+      "digest": "sha256:1d469b6610b22b111a38b2239dbb5d3adba5fad6d636a51329d53401e93adaeb"
+    },
+    {
+      "path": "crates/patamaps-scientific/src/syntax.rs",
+      "digest": "sha256:a22de674234ec9c2de9dbc7bd8519b7e331b140f43f41d4fee398fb3ef973571"
+    },
+    {
+      "path": "crates/patamaps-scientific/tests/crate.rs",
+      "digest": "sha256:5e525bb5d3601a9a19a3c9aa620aeb6ddfd6a92b578208d7f4aceddfe877b5d0"
+    },
+    {
+      "path": "crates/patamaps-scientific/tests/legacy_config.rs",
+      "digest": "sha256:328fd73dd7f6fc9f0fad3819b1c2557a3ccdfb102ab7a4319b2750f946378cdd"
+    },
+    {
+      "path": "crates/patamaps-scientific/tests/sssom.rs",
+      "digest": "sha256:b3f17bf41bfc7735c41568453b0cb36f81b519628b5358d18a942ec160c57e14"
+    },
+    {
+      "path": "crates/patamaps-workspace/src/legacy_io.rs",
+      "digest": "sha256:558f36dc951a51a14300f8f44c77765efc35cfceba246fc783cb59dcde726838"
+    },
+    {
+      "path": "crates/patamaps-workspace/src/lib.rs",
+      "digest": "sha256:e1b8058d3d680fd3d467d03e88106c08e2b97360b63539f4d673fe1581c16455"
+    },
+    {
+      "path": "crates/patamaps-workspace/src/model.rs",
+      "digest": "sha256:0384650fe1e1d7fc2f6592f64d2be9b6838f5acf49e97ba455fb95e4e45d72c7"
+    },
+    {
+      "path": "crates/patamaps-workspace/src/process.rs",
+      "digest": "sha256:6a89a572e6a75e8a0e79fe342491b2dc241b054843f29dd1141c7b188a5b3996"
+    },
+    {
+      "path": "crates/patamaps-workspace/src/process_tests.rs",
+      "digest": "sha256:92b3bccdaa3da333bb0d72d2704e0573727afa5bed8682fadfe1de7a7049acad"
+    },
+    {
+      "path": "crates/patamaps-workspace/src/source_evaluation.rs",
+      "digest": "sha256:82eac63f80f431b0113ac57c13fed0a08ec1396cdf46028b3f9ce5545e3c2f09"
+    },
+    {
+      "path": "crates/patamaps-workspace/tests/legacy_io.rs",
+      "digest": "sha256:70955306d9f7281e8a2a72e777002fba6704e8d71bb8d18dfe0ee8e5069a1ddc"
+    },
+    {
+      "path": "crates/patamaps-workspace/tests/source_evaluation.rs",
+      "digest": "sha256:82f9f68c8cf3aded1da9eba1370cb7bfffbedb968705ac9121eaed04827da23c"
+    },
+    {
+      "path": "crates/patamaps-workspace/tests/support/source_fixture.rs",
+      "digest": "sha256:65bcc1bfeee9b2e536d3db6d53b4ded02aafeeef8ca7eeb8995d3bff3f9f1833"
+    },
+    {
+      "path": "crates/patamaps-workspace/tests/workspace.rs",
+      "digest": "sha256:ba5e3d8d1ee01e27a7863a713cf1236e6d2da9f6d39dead0936f33c243f8465f"
+    },
+    {
+      "path": "crates/patamaps-activator/Cargo.toml",
+      "digest": "sha256:4a3ec946079cdd53253c7dcc88deb8dd22a7449b1898ca527cccfb5f06b16825"
+    },
+    {
+      "path": "crates/patamaps-cli/Cargo.toml",
+      "digest": "sha256:c91b2c3780ff45d24055a3ade7a144be311c1b2d2741a1a31dd3caf23da24d10"
+    },
+    {
+      "path": "crates/patamaps-contracts/Cargo.toml",
+      "digest": "sha256:1b87f86ef88c3c392d2724ec41abb4def05d32f026d95793953026dcd3287500"
+    },
+    {
+      "path": "crates/patamaps-core/Cargo.toml",
+      "digest": "sha256:e2ab524d81ad134b3a2b104e8fed5790bf5aea29f69705534f3984b8133d9c37"
+    },
+    {
+      "path": "crates/patamaps-governance/Cargo.toml",
+      "digest": "sha256:229d3b53088d07104da7e6727335e002d1ab4a77a83eb82191ee1860c425766d"
+    },
+    {
+      "path": "crates/patamaps-inspect/Cargo.toml",
+      "digest": "sha256:9a2cca1fdd3aea881868b11cac3d45748f33c8738c331ef95f60186105b7251d"
+    },
+    {
+      "path": "crates/patamaps-projection/Cargo.toml",
+      "digest": "sha256:eb10d51bbb427a7e5319ebd0a872913918d7a28ee2dfa01b41301f21428c0123"
+    },
+    {
+      "path": "crates/patamaps-scientific/Cargo.toml",
+      "digest": "sha256:c6dbefe622a85488e327c0deb85deaf655ee71ba5ff31622e23976a3a31d5e67"
+    },
+    {
+      "path": "crates/patamaps-workspace/Cargo.toml",
+      "digest": "sha256:151daf7d852f97e2383a0823329ccc115895f1bb3f0b610b3d7def0d6696c497"
+    }
+  ],
+  "engines": {
+    "compiler": "sha256:77ba746a0138b6c124d709e7398cea34cbd043c03ce8a5b122e935b55bc1d963",
+    "governance": "sha256:409660e9282e66f29eccbb2f234000fec6266977f2f9d4a960515a5229c1c552",
+    "workspace": "sha256:7d3f9b389c53427dac2add24d18a1339d63cfb3f4859e8933b888e89c0d28ff2",
+    "scientific": "sha256:d19c821a54456385aa4d6320c8649ce58af98d867487f6c7282f505f91f24c12"
+  },
+  "sourceUnchanged": true,
+  "completedAtUtc": "2026-10-15T03:18:09.964532+00:00"
+}

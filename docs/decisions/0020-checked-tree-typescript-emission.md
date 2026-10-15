@@ -38,3 +38,13 @@ Verified on the Intel candidate: [focused actual execution](../acceptance/capabi
 and the [compiler milestone](../acceptance/capabilities/compiler-2026-10-15T02-01-50.627814Z/receipt.json).
 Current Linux acceptance remains required after publication. Earlier failed
 fixture, delimiter-typing and supervisor attempts remain preserved.
+
+A requested governed TypeScript emission for a specification with a path tree
+also includes `path-tree-N.ts`, using the binding emission's index. Its exact
+checked helper bytes, media type, digest and length enter the existing complete
+artifact manifest and proposal. Missing or changed helper bytes refuse through
+normal prepared-artifact verification. This reuses the same emitter and grants
+no authorization. All ten stages of the
+[current compiler milestone](../acceptance/capabilities/compiler-2026-10-15T03-25-51.400752Z/receipt.json)
+pass, including exact governed helper-byte and tamper controls. Installed and
+Linux acceptance remain required for the changed artifact producer.

@@ -625,6 +625,7 @@ fn precommit_revocation_expiry_lost_lock_and_postcommit_failure_are_distinct() {
             ActivationOutcome::Activated { .. }
         ));
         let old = f.host.read().unwrap().unwrap();
+        let prior_pointer = fs::read(f.dir.join("state/current.json")).unwrap();
         let mut next = f.request("2", Some(&old.baseline()), DeploymentIntent::Deploy);
         if change == "expiry" {
             let checked = check_prepared(&next.prepared).unwrap();
@@ -705,12 +706,17 @@ fn precommit_revocation_expiry_lost_lock_and_postcommit_failure_are_distinct() {
                 matches!(outcome, ActivationOutcome::Rejected { .. }),
                 "{change}: {outcome:?}"
             );
-            if change != "swap" {
-                assert_eq!(
-                    f.host.read().unwrap().unwrap().manifest.digest,
-                    old.manifest.digest
-                );
-            }
+            assert_eq!(
+                fs::read(f.dir.join("state/current.json")).unwrap(),
+                prior_pointer,
+                "{change}: a rejected precommit change must preserve the exact active pointer"
+            );
+            let current = f.host.read().unwrap().unwrap();
+            assert_eq!(current.manifest.digest, old.manifest.digest, "{change}");
+            assert_eq!(
+                current.files, old.files,
+                "{change}: prior artifact bytes changed"
+            );
         }
     }
 }
