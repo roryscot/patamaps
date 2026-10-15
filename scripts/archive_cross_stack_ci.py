@@ -46,14 +46,17 @@ def main():
             receipt["imageArchive"] = {"path": str(destination), "sha256": hashlib.file_digest(destination.open("rb"), "sha256").hexdigest(), "bytes": destination.stat().st_size}
         check_space()
         destination = evidence / "cross-stack-image-evidence.tar.gz"
-        with tarfile.open(destination, "x:gz", dereference=False) as archive:
-            original = work / "receipt.json"
-            if original.exists():
-                archive.add(original, arcname=work.name + "/receipt.json")
-            for child in sorted(work.iterdir()):
-                if child.name != "receipt.json":
-                    check_space()
-                    archive.add(child, arcname=work.name + "/" + child.name)
+        workspaces = sorted(p for p in evidence.glob("cross-stack-*") if p.is_dir())
+        with tarfile.open(destination, "x:gz", dereference=False, compresslevel=2) as archive:
+            for workspace in workspaces:
+                original = workspace / "receipt.json"
+                if original.exists():
+                    archive.add(original, arcname=workspace.name + "/receipt.json")
+            for workspace in workspaces:
+                for child in sorted(workspace.iterdir()):
+                    if child.name != "receipt.json":
+                        check_space()
+                        archive.add(child, arcname=workspace.name + "/" + child.name)
         check_space()
         receipt["status"] = "retained"
     finally:

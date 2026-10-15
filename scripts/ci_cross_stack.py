@@ -24,7 +24,7 @@ def digest(raw):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--phase", choices=["source", "development", "image"], default="source")
+    parser.add_argument("--phase", choices=["source", "development", "image", "compatibility"], default="source")
     args = parser.parse_args()
     if platform.system() != "Linux" or os.environ.get("GITHUB_ACTIONS") != "true":
         raise RuntimeError("Use the configured isolated GitHub Linux CI job; Intel work uses its existing supervisor")
@@ -86,14 +86,17 @@ def main():
         elif args.phase == "development":
             from cross_stack_development import verify
             receipt["developmentPreview"] = verify(ROOT, work, env, run)
-        else:
+        elif args.phase == "image":
             from cross_stack_release import verify
             receipt["linuxRelease"] = verify(ROOT, work, env, run)
             receipt.update(linuxImage="passed", browser="passed")
+        else:
+            from cross_stack_compatibility import verify
+            receipt["metamapCompatibility"] = verify(ROOT, work, env, run)
         space()
         assert all(digest((ROOT / name).read_bytes()) == value for name, value in before.items()), "Tracked source changed during acceptance"
         receipt["sourceUnchanged"] = True
-        receipt["status"] = {"source": "passed-source-intent-scope", "development": "passed-development-preview-scope", "image": "passed-linux-image-browser-scope"}[args.phase]
+        receipt["status"] = {"source": "passed-source-intent-scope", "development": "passed-development-preview-scope", "image": "passed-linux-image-browser-scope", "compatibility": "passed-portable-facts-metamap-scope"}[args.phase]
     except BaseException as error:
         receipt.update(status="unavailable" if type(error).__name__ == "Unavailable" else "failed", failure=str(error), traceback=traceback.format_exc())
         raise

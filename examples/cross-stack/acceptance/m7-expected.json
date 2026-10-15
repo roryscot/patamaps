@@ -1,0 +1,26 @@
+{
+  "profile": "patamaps-cross-stack-m7-independent-controls-1",
+  "frozenBeforeMatrix": true,
+  "derivedFromDiscovery": false,
+  "facts": {
+    "operationIds": ["urn:example:operation:create-item"],
+    "nextPages": ["/", "/items/:id"],
+    "cargoBins": ["catalog-service"]
+  },
+  "decisions": {
+    "m7-supported": "viable",
+    "m7-moved-handler": "viable",
+    "m7-missing-artifact": "rejected",
+    "m7-ambiguous-operation": "rejected",
+    "m7-numeric-equivalence": "viable",
+    "m7-missing-versus-null": "rejected",
+    "m7-selector-bound": "rejected"
+  },
+  "controls": [
+    "m7-supported", "m7-moved-handler", "m7-missing-artifact", "m7-malformed-config",
+    "m7-ambiguous-operation", "m7-numeric-equivalence", "m7-missing-versus-null", "m7-selector-bound",
+    "m7-unregistered-evaluator", "m7-protected-observation-waiver"
+  ],
+  "malformedSource": "Both consumers refuse the actual unavailable provider result; this is not an independent TOML-parser comparison.",
+  "mandatoryEvaluator": "build:observation-binding-v1 is registered and executed by the real pinned MetaMap compiler; absence must reject."
+}
