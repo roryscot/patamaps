@@ -249,9 +249,11 @@ def verify(root, work, env, run, compiler_override=None):
         assert health(urls[8080]) == (200, {"status": "ok"})
         with frontend(urls[8080]) as base:
             wire = json.loads(run("m6-runtime-contract", [node, fixture / "acceptance/check-runtime.cjs", client / "operations.js", base, urls[8080]]))
-            assert request(base, "/api/items", raw=b'{"name":') == (400, {"error": "invalid-request"})
-            assert request(urls[8080], "/items", raw=b'{"name":') == (400, {"error": "invalid-request"})
-            record("m6-real-next-linux-http", result="passed", health={"status": "ok"}, malformedNextStatus=400, malformedServiceStatus=400, **wire)
+            malformed = {"next": request(base, "/api/items", raw=b'{"name":'), "service": request(urls[8080], "/items", raw=b'{"name":')}
+            (work / "malformed-http.json").write_text(json.dumps(malformed, indent=2) + "\n")
+            for side, response in malformed.items():
+                assert response == (expected["malformedHttp"][side]["status"], expected["malformedHttp"][side]["body"]), malformed
+            record("m6-real-next-linux-http", result="passed", health={"status": "ok"}, malformed=malformed, **wire)
             browser_work = work / "browser"
             browser_work.mkdir()
             run("m6-browser", [node, browser / "check.cjs", base, browser_work], timeout=120)

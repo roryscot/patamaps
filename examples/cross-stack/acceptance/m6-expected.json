@@ -1,10 +1,24 @@
 {
   "profile": "patamaps-cross-stack-m6-independent-controls-1",
-  "frozenBeforeMatrix": true,
+  "frozenBeforeMatrix": false,
   "derivedFromDiscovery": false,
   "platform": "linux/amd64",
   "rustTarget": "x86_64-unknown-linux-gnu",
   "elfMachine": 62,
+  "malformedHttp": {
+    "next": {
+      "status": 400,
+      "body": {
+        "error": "invalid-json"
+      }
+    },
+    "service": {
+      "status": 400,
+      "body": {
+        "error": "invalid-request"
+      }
+    }
+  },
   "controls": [
     "m6-buildkit-stages",
     "m6-cargo-linux-artifact",
@@ -28,6 +42,24 @@
     "m6-native-release-admission",
     "m6-native-evidence-refusals"
   ],
-  "acceptanceRequires": ["actual BuildKit", "Linux ELF tied to Cargo", "immutable image identity", "effective config", "real HTTP", "real browser", "negative controls", "native admission"],
-  "productionActivation": "excluded"
+  "acceptanceRequires": [
+    "actual BuildKit",
+    "Linux ELF tied to Cargo",
+    "immutable image identity",
+    "effective config",
+    "real HTTP",
+    "real browser",
+    "negative controls",
+    "native admission"
+  ],
+  "productionActivation": "excluded",
+  "originalControlSetFrozenBeforeMatrix": true,
+  "expectationRevision": 2,
+  "expectationCorrection": {
+    "field": "malformedHttp.next.body.error",
+    "previousInlineAssertion": "invalid-request",
+    "establishedFrontendContract": "invalid-json",
+    "applicationBehaviorChanged": false,
+    "basis": "web/app/api/items/route.ts returned invalid-json before M6 implementation; retain failed M6 logs"
+  }
 }
