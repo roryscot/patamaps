@@ -110,11 +110,14 @@ def verify(root, work, env, run, compiler_override=None):
     def retained():
         (work / "owned-docker-objects.json").write_text(json.dumps({"images": images, "containers": containers, "deleted": []}, indent=2) + "\n")
     retained()
-    def image(label, ctx, target="runtime", success=True):
+    def image(label, ctx, target="runtime", success=True, build_args=None):
         iid = work / (label + ".iid")
         args = ["docker", "buildx", "build", "--load", "--platform", "linux/amd64", "--target", target,
                 "--progress", "plain", "--metadata-file", work / (label + ".metadata.json"), "--iidfile", iid,
-                "--file", ctx / "deploy/Dockerfile", ctx]
+                "--file", ctx / "deploy/Dockerfile"]
+        for name, value in sorted((build_args or {}).items()):
+            args += ["--build-arg", name + "=" + value]
+        args.append(ctx)
         run(label, args, expected_success=success, timeout=900)
         if not success:
             return None
@@ -149,7 +152,7 @@ def verify(root, work, env, run, compiler_override=None):
             # positive lane still requires actual health/HTTP/browser results.
             run(label + "-start", ["docker", "start", cid], expected_success=None)
             info = json.loads(run(label + "-inspect", ["docker", "inspect", cid]))[0]
-            ports = info["NetworkSettings"]["Ports"]
+            ports = info["NetworkSettings"]["Ports"] or {}
             urls = {port: ("http://127.0.0.1:" + ports[str(port) + "/tcp"][0]["HostPort"] if ports.get(str(port) + "/tcp") else None) for port in [8080, 9090]}
             yield cid, urls, info
         finally:
@@ -274,8 +277,8 @@ def verify(root, work, env, run, compiler_override=None):
     with container("m6-alias-runtime", alias_id) as (_, urls, _):
         assert health(urls[8080]) == (200, {"status": "ok"})
     record("m6-buildkit-alias-index", result="actual-image-and-runtime-pass")
-    arg = variant("explicit-arg-json-copy", lambda raw: raw.replace("FROM rust:1.99.0-bookworm AS builder", "ARG BASE=rust:1.99.0-bookworm\nFROM ${BASE} AS builder").replace("COPY config/service.toml /app/service.toml", 'COPY ["config/service.toml", "/app/service.toml"]'))
-    arg_id = image("m6-explicit-arg-json-copy", arg)
+    arg = variant("explicit-arg-json-copy", lambda raw: raw.replace("FROM rust:1.99.0-bookworm AS builder", "ARG BASE\nFROM ${BASE} AS builder").replace("COPY config/service.toml /app/service.toml", 'COPY ["config/service.toml", "/app/service.toml"]'))
+    arg_id = image("m6-explicit-arg-json-copy", arg, build_args={"BASE": "rust:1.99.0-bookworm"})
     with container("m6-arg-runtime", arg_id) as (_, urls, _):
         assert health(urls[8080]) == (200, {"status": "ok"})
     record("m6-buildkit-explicit-arg-json-copy", result="actual-image-and-runtime-pass")
@@ -291,6 +294,12 @@ def verify(root, work, env, run, compiler_override=None):
         ("wrong-stage", lambda raw: raw.replace("--from=builder", "--from=9"), None, "runtime")]:
         case = variant(label, transform, ignore)
         image("m6-buildkit-" + label, case, target=target, success=False)
+        diagnostic = (work / ("m6-buildkit-" + label + ".stderr.log")).read_text().lower()
+        if label in {"broken-copy", "ignored-config"}:
+            missing_path = "/release/absent-service" if label == "broken-copy" else "config/service.toml"
+            assert missing_path in diagnostic and ("not found" in diagnostic or "no such" in diagnostic), diagnostic[-2000:]
+        else:
+            assert "from" in diagnostic and "9" in diagnostic and ("bounds" in diagnostic or "stage" in diagnostic), diagnostic[-2000:]
         record("m6-buildkit-" + label, result="actual-BuildKit-refusal")
     negative_cases = [
         ("wrong-binary", lambda raw: raw.replace("COPY --from=builder /build/service/target/x86_64-unknown-linux-gnu/release/catalog-service", "COPY --from=builder /usr/bin/true")),
@@ -304,6 +313,14 @@ def verify(root, work, env, run, compiler_override=None):
         identity = image("m6-image-" + label, case)
         with container("m6-runtime-" + label, identity) as (_, urls, _):
             assert health(urls[8080], seconds=3) is None, label + " unexpectedly satisfied service health"
+        diagnostics = "".join((work / ("m6-runtime-" + label + suffix)).read_text() for suffix in ["-start.stderr.log", "-logs.stdout.log", "-logs.stderr.log"]).lower()
+        final = json.loads((work / ("m6-runtime-" + label + "-final-inspect.stdout.log")).read_bytes())[0]
+        if label == "wrong-binary":
+            assert final["State"]["ExitCode"] == 0
+        elif label in {"missing-config", "missing-loader-library"}:
+            assert "no such file" in diagnostics or "not found" in diagnostics, diagnostics[-2000:]
+        else:
+            assert "listen 0.0.0.0:8081" in diagnostics, diagnostics[-2000:]
         record("m6-" + label, result="actual-image-runtime-refusal", image=identity)
     assembly = work / "wrong-architecture.S"
     assembly.write_text('.global _start\n_start:\n mov x0, #0\n mov x8, #93\n svc #0\n')
@@ -321,7 +338,10 @@ def verify(root, work, env, run, compiler_override=None):
     arch_id = image("m6-image-wrong-architecture", arch)
     with container("m6-runtime-wrong-architecture", arch_id) as (_, urls, _):
         assert health(urls[8080], seconds=3) is None
-    record("m6-wrong-architecture", result="format-gate-and-actual-runtime-refusal", observedMachine=183, requiredMachine=62)
+    arch_start = (work / "m6-runtime-wrong-architecture-start.stderr.log").read_text().lower()
+    arch_state = json.loads((work / "m6-runtime-wrong-architecture-final-inspect.stdout.log").read_bytes())[0]["State"]
+    assert "exec format" in arch_start or "exec format" in arch_state.get("Error", "").lower(), {"stderr": arch_start, "state": arch_state}
+    record("m6-wrong-architecture", result="format-gate-and-actual-exec-format-refusal", observedMachine=183, requiredMachine=62)
     exposure = variant("wrong-expose", lambda raw: raw.replace("EXPOSE 8080", "EXPOSE 9090"))
     exposure_id = image("m6-image-wrong-expose", exposure)
     with container("m6-runtime-wrong-expose", exposure_id) as (_, urls, _):
