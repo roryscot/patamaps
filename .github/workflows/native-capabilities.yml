@@ -68,6 +68,7 @@ jobs:
       CARGO_BUILD_JOBS: '2'
       RUST_TEST_THREADS: '1'
       NEXT_TELEMETRY_DISABLED: '1'
+      PATAMAPS_CROSS_STACK_COMPILER_PROFILE: release
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
@@ -82,9 +83,25 @@ jobs:
           npm ci --prefix examples/cross-stack/web --ignore-scripts --no-audit --no-fund
       - name: Check actual source providers, admission and offline replay
         run: python3 -B scripts/ci_cross_stack.py
+      - name: Retain source fixtures and tool symlink metadata
+        if: always()
+        shell: bash
+        run: |
+          python3 -B - <<'PY'
+          from pathlib import Path
+          import tarfile, json
+          evidence = Path("ci-evidence")
+          evidence.mkdir(exist_ok=True)
+          work = evidence / "cross-stack-source"
+          if not work.exists():
+              work.mkdir()
+              (work / "not-run.json").write_text(json.dumps({"status": "source job did not reach its entry point"}) + "\n")
+          with tarfile.open(evidence / "cross-stack-source.tar.gz", "x:gz", dereference=False) as archive:
+              archive.add(work, arcname="cross-stack-source")
+          PY
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         if: always()
         with:
           name: cross-stack-source-linux-x86_64-${{ github.sha }}
-          path: ci-evidence/
+          path: ci-evidence/cross-stack-source.tar.gz
           if-no-files-found: error

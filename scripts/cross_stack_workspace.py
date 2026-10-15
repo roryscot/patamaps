@@ -4,12 +4,17 @@ import json
 import sys
 
 
-def verify(root, work, env, run):
+def verify(root, work, env, run, smoke=False):
     run("m4-format", ["cargo", "fmt", "--all", "--", "--check"])
     run("m4-kernel-tests", ["cargo", "test", "-p", "patamaps-core", "--test", "build_observations", "--locked", "--offline"])
     run("m4-native-tests", ["cargo", "test", "-p", "patamaps-workspace", "--lib", "--locked", "--offline"])
-    run("m4-cli", ["cargo", "build", "-p", "patamaps-cli", "--locked", "--offline"])
-    cli = root / "target/debug/patamaps"
+    compiler_profile = env.get("PATAMAPS_CROSS_STACK_COMPILER_PROFILE", "debug")
+    assert compiler_profile in {"debug", "release"}
+    run("m4-cli", ["cargo", "build", "-p", "patamaps-cli", "--locked", "--offline", *(["--release"] if compiler_profile == "release" else [])])
+    cli = root / ("target/" + compiler_profile + "/patamaps")
+    sys.path.insert(0, str(root / "scripts/parity"))
+    from identity import identities
+    assert json.loads(run("m4-engine", [cli, "engine"])) == {"schemaVersion": "0.1.0", "documentType": "executor-description", **identities(root)}
     cargo = Path(run("m4-cargo", ["rustup", "which", "cargo"]).decode().strip()).resolve()
     rustc = Path(run("m4-rustc", ["rustup", "which", "rustc"]).decode().strip()).resolve()
     node = Path(env["PATAMAPS_DEV_NODE"]).resolve()
@@ -74,6 +79,9 @@ def verify(root, work, env, run):
         return mutate
 
     baseline = case("m4-real-chain")
+    if smoke:
+        return {"controls": controls, "count": len(controls), "scope": "single-positive-source-intent-control",
+                "remainingControls": "not-run", "fullReleaseAccepted": False}
     relocated = case("m4-relocated-chain")
     first = json.loads((baseline / "baseline.json").read_bytes())
     second = json.loads((relocated / "baseline.json").read_bytes())
@@ -83,6 +91,8 @@ def verify(root, work, env, run):
     assert json.loads((changed_lock / "baseline.json").read_bytes())["digest"] != first["digest"]
     case("m4-new-unmapped-route", lambda owner: ((owner / "web/app/extra").mkdir(),
          (owner / "web/app/extra/page.tsx").write_text("export default function Extra(){ return <p>extra</p>; }\n")), "TOPOLOGY_REQUIRED_RELATION_MISSING")
+    case("m4-new-unmapped-api", lambda owner: ((owner / "web/app/api/extra").mkdir(),
+         (owner / "web/app/api/extra/route.ts").write_text("export function GET(){return Response.json({extra:true});}\n")), "TOPOLOGY_REQUIRED_RELATION_MISSING")
     case("m4-wrong-next-method", replace("web/app/api/items/route.ts", "function POST", "function PUT"), "REQUIRED_MAPPING_MISSING")
     case("m4-wrong-binary-copy", replace("deploy/Dockerfile", "/release/catalog-service", "/release/other-service"), "REQUIRED_MAPPING_MISSING")
     case("m4-config-ignored", replace(".dockerignore", "**/.tools", "**/.tools\nconfig/service.toml"), "REQUIRED_MAPPING_MISSING")

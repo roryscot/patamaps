@@ -889,7 +889,7 @@ fn cargo_entities(
             entities.push(entity(id,"cargo-target",&source,json!({"package":package_id,"name":target["name"],"kind":target["kind"],
                 "crateTypes":target["crate_types"],"requiredFeatures":target.get("required-features").cloned().unwrap_or(json!([])),
                 "source":source,"possibleExecutableInput":executable,"executionObserved":false,"compilationEstablished":false,
-                "evidenceClass":"cargo-declared-target", "discoveryContext":{"manifest":manifest,"workspaceManifest":workspace_manifest,"platformFilter":platform,"features":features,"defaultFeatures":default_features,"view":if view==DependencyView::Resolved {"resolved"}else{"declared-local"},"workingDirectory":"owner-root","compilationEstablished":false}})));
+                "evidenceClass":"cargo-declared-target", "discoveryContext":{"manifest":config.manifest,"packageManifest":relative,"workspaceManifest":workspace_manifest,"platformFilter":platform,"features":features,"defaultFeatures":default_features,"view":if view==DependencyView::Resolved {"resolved"}else{"declared-local"},"workingDirectory":"owner-root","compilationEstablished":false}})));
         }
     }
     let mut executable_inputs = Vec::new();

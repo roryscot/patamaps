@@ -1,0 +1,830 @@
+{
+  "profile": "patamaps-cross-stack-m4-workspace-1",
+  "status": "positive-source-intent-verified-full-matrix-pending",
+  "nativeRun": ".tools/cross-stack/workspace-smoke-20261015T205618.314112Z",
+  "nativeRunDigest": "sha256:e835498ece0347579b3c4794f2a0a2cec4a1e0c1f944a8a68f99dcd0b769342a",
+  "controls": {
+    "controls": [
+      {
+        "control": "m4-real-chain",
+        "result": "source-intent-viable",
+        "baseline": "sha256:745724b59f71fe75a1017d89eb848790db4273ec4c40dc70893363c7c146dec6",
+        "fullReleaseAccepted": false
+      }
+    ],
+    "count": 1,
+    "scope": "single-positive-source-intent-control",
+    "remainingControls": "not-run",
+    "fullReleaseAccepted": false
+  },
+  "commands": [
+    {
+      "label": "rust-version",
+      "argv": [
+        "rustc",
+        "-Vv"
+      ],
+      "cwd": ".",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.136,
+      "stdout": {
+        "path": ".tools/cross-stack/workspace-smoke-20261015T205618.314112Z/rust-version.stdout.log",
+        "digest": "sha256:b1184c1aecf3182548f3bbdd91e5043e464821b1dcbf6d5ca8246339bd0be84a"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/workspace-smoke-20261015T205618.314112Z/rust-version.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "cargo-version",
+      "argv": [
+        "cargo",
+        "--version"
+      ],
+      "cwd": ".",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.078,
+      "stdout": {
+        "path": ".tools/cross-stack/workspace-smoke-20261015T205618.314112Z/cargo-version.stdout.log",
+        "digest": "sha256:1f88eaf7fe1aaec83184752cf4c944cd22f00184136ff36a3e4c318cc60ef566"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/workspace-smoke-20261015T205618.314112Z/cargo-version.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "node-version",
+      "argv": [
+        "node",
+        "--version"
+      ],
+      "cwd": ".",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.078,
+      "stdout": {
+        "path": ".tools/cross-stack/workspace-smoke-20261015T205618.314112Z/node-version.stdout.log",
+        "digest": "sha256:33e26f35db6e57ce0c486ddc815fe966867e4f649e418eaf323f75f4720eb8e9"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/workspace-smoke-20261015T205618.314112Z/node-version.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "m4-format",
+      "argv": [
+        "cargo",
+        "fmt",
+        "--all",
+        "--",
+        "--check"
+      ],
+      "cwd": ".",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 2.699,
+      "stdout": {
+        "path": ".tools/cross-stack/workspace-smoke-20261015T205618.314112Z/m4-format.stdout.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/workspace-smoke-20261015T205618.314112Z/m4-format.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "m4-kernel-tests",
+      "argv": [
+        "cargo",
+        "test",
+        "-p",
+        "patamaps-core",
+        "--test",
+        "build_observations",
+        "--locked",
+        "--offline"
+      ],
+      "cwd": ".",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 2.152,
+      "stdout": {
+        "path": ".tools/cross-stack/workspace-smoke-20261015T205618.314112Z/m4-kernel-tests.stdout.log",
+        "digest": "sha256:4ca6281b8d794b4d351dacff6c5b87d56eb77ceebfb6e5fdda9f4537bb6ad542"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/workspace-smoke-20261015T205618.314112Z/m4-kernel-tests.stderr.log",
+        "digest": "sha256:83dfc2d2381c56f98d38a22142236163d1fc5aa3325aef93057a81f1680d432b"
+      }
+    },
+    {
+      "label": "m4-native-tests",
+      "argv": [
+        "cargo",
+        "test",
+        "-p",
+        "patamaps-workspace",
+        "--lib",
+        "--locked",
+        "--offline"
+      ],
+      "cwd": ".",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 11.042,
+      "stdout": {
+        "path": ".tools/cross-stack/workspace-smoke-20261015T205618.314112Z/m4-native-tests.stdout.log",
+        "digest": "sha256:ede05bbd3e686d898a39901c14082d718984f167e5a9edaeb6f88c131d4a8fe9"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/workspace-smoke-20261015T205618.314112Z/m4-native-tests.stderr.log",
+        "digest": "sha256:b1eda5f11183f29af92b5a5a085d38ad48d0ec1311811204dc8e03be00b68836"
+      }
+    },
+    {
+      "label": "m4-cli",
+      "argv": [
+        "cargo",
+        "build",
+        "-p",
+        "patamaps-cli",
+        "--locked",
+        "--offline"
+      ],
+      "cwd": ".",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 14.151,
+      "stdout": {
+        "path": ".tools/cross-stack/workspace-smoke-20261015T205618.314112Z/m4-cli.stdout.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/workspace-smoke-20261015T205618.314112Z/m4-cli.stderr.log",
+        "digest": "sha256:47a7b140a9aec4f501d24e95e6dfd681725139da82da37934c72c7dae44cf648"
+      }
+    },
+    {
+      "label": "m4-cargo",
+      "argv": [
+        "rustup",
+        "which",
+        "cargo"
+      ],
+      "cwd": ".",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.075,
+      "stdout": {
+        "path": ".tools/cross-stack/workspace-smoke-20261015T205618.314112Z/m4-cargo.stdout.log",
+        "digest": "sha256:dd378ad655d4e60562471508e6b41891f0db0a78ef3184cc83f02762073402e2"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/workspace-smoke-20261015T205618.314112Z/m4-cargo.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "m4-rustc",
+      "argv": [
+        "rustup",
+        "which",
+        "rustc"
+      ],
+      "cwd": ".",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.023,
+      "stdout": {
+        "path": ".tools/cross-stack/workspace-smoke-20261015T205618.314112Z/m4-rustc.stdout.log",
+        "digest": "sha256:85d360d363e5f7bc0672f207f585c49cabd8da258789243e08e36e3e79481597"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/workspace-smoke-20261015T205618.314112Z/m4-rustc.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "m4-real-chain-owner-json",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+        "json",
+        "parse"
+      ],
+      "cwd": ".tools/cross-stack/workspace-smoke-20261015T205618.314112Z/cases/m4-real-chain-source/contracts",
+      "expectedSuccess": true,
+      "stdin": {
+        "path": ".tools/cross-stack/workspace-smoke-20261015T205618.314112Z/m4-real-chain-owner-json.stdin.json",
+        "digest": "sha256:70695fc7f6200ad069807d69dcda11c30d940a805ed810d54b2f3884971bb2df"
+      },
+      "exitCode": 0,
+      "seconds": 1.324,
+      "stdout": {
+        "path": ".tools/cross-stack/workspace-smoke-20261015T205618.314112Z/m4-real-chain-owner-json.stdout.log",
+        "digest": "sha256:36c29be62b8c26ea0f99d17fc84e8e13972199654bb8db271bb534f4a281fd39"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/workspace-smoke-20261015T205618.314112Z/m4-real-chain-owner-json.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "m4-real-chain-http-projection",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+        "link",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/workspace-smoke-20261015T205618.314112Z/cases/m4-real-chain/app/.patamaps/graph.json",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/workspace-smoke-20261015T205618.314112Z/cases/m4-real-chain/app/.patamaps/policy.json",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/workspace-smoke-20261015T205618.314112Z/cases/m4-real-chain/app/.patamaps/projection-spec.json",
+        "--relation-pack",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/workspace-smoke-20261015T205618.314112Z/cases/m4-real-chain/app/mappings/routing-pack.json",
+        "--as-of",
+        "2026-10-15T00:00:00Z",
+        "--context",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/workspace-smoke-20261015T205618.314112Z/cases/m4-real-chain/app/.patamaps/context.json"
+      ],
+      "cwd": ".tools/cross-stack/workspace-smoke-20261015T205618.314112Z/cases/m4-real-chain/app",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.049,
+      "stdout": {
+        "path": ".tools/cross-stack/workspace-smoke-20261015T205618.314112Z/m4-real-chain-http-projection.stdout.log",
+        "digest": "sha256:aa45c80f9623ad6b53f84aa42ca6dc4864a5c42e00128600d637f988f73cac47"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/workspace-smoke-20261015T205618.314112Z/m4-real-chain-http-projection.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "m4-real-chain-http-rust",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+        "link",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/workspace-smoke-20261015T205618.314112Z/cases/m4-real-chain/app/.patamaps/graph.json",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/workspace-smoke-20261015T205618.314112Z/cases/m4-real-chain/app/.patamaps/policy.json",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/workspace-smoke-20261015T205618.314112Z/cases/m4-real-chain/app/.patamaps/projection-spec.json",
+        "--relation-pack",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/workspace-smoke-20261015T205618.314112Z/cases/m4-real-chain/app/mappings/routing-pack.json",
+        "--as-of",
+        "2026-10-15T00:00:00Z",
+        "--context",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/workspace-smoke-20261015T205618.314112Z/cases/m4-real-chain/app/.patamaps/context.json",
+        "--format",
+        "http-rust"
+      ],
+      "cwd": ".tools/cross-stack/workspace-smoke-20261015T205618.314112Z/cases/m4-real-chain/app",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.045,
+      "stdout": {
+        "path": ".tools/cross-stack/workspace-smoke-20261015T205618.314112Z/m4-real-chain-http-rust.stdout.log",
+        "digest": "sha256:35402ae64e5deeaf554446eab51360827dbbeea6b70da1cc0d72c7ae8d6409b5"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/workspace-smoke-20261015T205618.314112Z/m4-real-chain-http-rust.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "m4-real-chain-http-typescript",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+        "link",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/workspace-smoke-20261015T205618.314112Z/cases/m4-real-chain/app/.patamaps/graph.json",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/workspace-smoke-20261015T205618.314112Z/cases/m4-real-chain/app/.patamaps/policy.json",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/workspace-smoke-20261015T205618.314112Z/cases/m4-real-chain/app/.patamaps/projection-spec.json",
+        "--relation-pack",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/workspace-smoke-20261015T205618.314112Z/cases/m4-real-chain/app/mappings/routing-pack.json",
+        "--as-of",
+        "2026-10-15T00:00:00Z",
+        "--context",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/workspace-smoke-20261015T205618.314112Z/cases/m4-real-chain/app/.patamaps/context.json",
+        "--format",
+        "http-typescript"
+      ],
+      "cwd": ".tools/cross-stack/workspace-smoke-20261015T205618.314112Z/cases/m4-real-chain/app",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.049,
+      "stdout": {
+        "path": ".tools/cross-stack/workspace-smoke-20261015T205618.314112Z/m4-real-chain-http-typescript.stdout.log",
+        "digest": "sha256:c3121a2337620abb60e93f900ae5582f78e8224ccc9498e439cfdbdb9b911ac1"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/workspace-smoke-20261015T205618.314112Z/m4-real-chain-http-typescript.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "m4-real-chain-http-rust-format",
+      "argv": [
+        "rustfmt",
+        "--edition",
+        "2024",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/workspace-smoke-20261015T205618.314112Z/cases/m4-real-chain/app/service/src/generated.rs"
+      ],
+      "cwd": ".tools/cross-stack/workspace-smoke-20261015T205618.314112Z/cases/m4-real-chain/app",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.136,
+      "stdout": {
+        "path": ".tools/cross-stack/workspace-smoke-20261015T205618.314112Z/m4-real-chain-http-rust-format.stdout.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/workspace-smoke-20261015T205618.314112Z/m4-real-chain-http-rust-format.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "m4-real-chain-workspace-observe",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+        "generate",
+        "pre-workspace.json",
+        "--root",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/workspace-smoke-20261015T205618.314112Z/cases/m4-real-chain"
+      ],
+      "cwd": ".tools/cross-stack/workspace-smoke-20261015T205618.314112Z/cases/m4-real-chain",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 51.836,
+      "stdout": {
+        "path": ".tools/cross-stack/workspace-smoke-20261015T205618.314112Z/m4-real-chain-workspace-observe.stdout.log",
+        "digest": "sha256:f354829e9d4482937ca3252fba48c2849e8aad49a8d6ebb317989670843aad3e"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/workspace-smoke-20261015T205618.314112Z/m4-real-chain-workspace-observe.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "m4-real-chain-query-catalog-page",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+        "match-observations",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/workspace-smoke-20261015T205618.314112Z/cases/m4-real-chain/observed-graph.json",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/workspace-smoke-20261015T205618.314112Z/cases/m4-real-chain/queries/catalog-page.json",
+        "--relation-pack",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/workspace-smoke-20261015T205618.314112Z/cases/m4-real-chain/routing.json",
+        "--relation-pack",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/workspace-smoke-20261015T205618.314112Z/cases/m4-real-chain/application-topology.json",
+        "--relation-pack",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/workspace-smoke-20261015T205618.314112Z/cases/m4-real-chain/build-deployment.json"
+      ],
+      "cwd": ".tools/cross-stack/workspace-smoke-20261015T205618.314112Z/cases/m4-real-chain",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.085,
+      "stdout": {
+        "path": ".tools/cross-stack/workspace-smoke-20261015T205618.314112Z/m4-real-chain-query-catalog-page.stdout.log",
+        "digest": "sha256:689db05ca9c0e8bd3c22d8e03aad0e500b7a249076e429b53d187df18015c06e"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/workspace-smoke-20261015T205618.314112Z/m4-real-chain-query-catalog-page.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "m4-real-chain-query-item-page",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+        "match-observations",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/workspace-smoke-20261015T205618.314112Z/cases/m4-real-chain/observed-graph.json",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/workspace-smoke-20261015T205618.314112Z/cases/m4-real-chain/queries/item-page.json",
+        "--relation-pack",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/workspace-smoke-20261015T205618.314112Z/cases/m4-real-chain/routing.json",
+        "--relation-pack",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/workspace-smoke-20261015T205618.314112Z/cases/m4-real-chain/application-topology.json",
+        "--relation-pack",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/workspace-smoke-20261015T205618.314112Z/cases/m4-real-chain/build-deployment.json"
+      ],
+      "cwd": ".tools/cross-stack/workspace-smoke-20261015T205618.314112Z/cases/m4-real-chain",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.084,
+      "stdout": {
+        "path": ".tools/cross-stack/workspace-smoke-20261015T205618.314112Z/m4-real-chain-query-item-page.stdout.log",
+        "digest": "sha256:d241cdbeedc0b45358d7aa9ac91ea209508f2b5efbc4def180d22d695f98fd34"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/workspace-smoke-20261015T205618.314112Z/m4-real-chain-query-item-page.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "m4-real-chain-query-operation-next-route",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+        "match-observations",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/workspace-smoke-20261015T205618.314112Z/cases/m4-real-chain/observed-graph.json",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/workspace-smoke-20261015T205618.314112Z/cases/m4-real-chain/queries/operation-next-route.json",
+        "--relation-pack",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/workspace-smoke-20261015T205618.314112Z/cases/m4-real-chain/routing.json",
+        "--relation-pack",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/workspace-smoke-20261015T205618.314112Z/cases/m4-real-chain/application-topology.json",
+        "--relation-pack",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/workspace-smoke-20261015T205618.314112Z/cases/m4-real-chain/build-deployment.json"
+      ],
+      "cwd": ".tools/cross-stack/workspace-smoke-20261015T205618.314112Z/cases/m4-real-chain",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.082,
+      "stdout": {
+        "path": ".tools/cross-stack/workspace-smoke-20261015T205618.314112Z/m4-real-chain-query-operation-next-route.stdout.log",
+        "digest": "sha256:b297e74b2076daa36b5dd894c04c5ac1196a9c6c926644d6a46a4c208224bc16"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/workspace-smoke-20261015T205618.314112Z/m4-real-chain-query-operation-next-route.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "m4-real-chain-query-operation-next-handler",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+        "match-observations",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/workspace-smoke-20261015T205618.314112Z/cases/m4-real-chain/observed-graph.json",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/workspace-smoke-20261015T205618.314112Z/cases/m4-real-chain/queries/operation-next-handler.json",
+        "--relation-pack",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/workspace-smoke-20261015T205618.314112Z/cases/m4-real-chain/routing.json",
+        "--relation-pack",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/workspace-smoke-20261015T205618.314112Z/cases/m4-real-chain/application-topology.json",
+        "--relation-pack",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/workspace-smoke-20261015T205618.314112Z/cases/m4-real-chain/build-deployment.json"
+      ],
+      "cwd": ".tools/cross-stack/workspace-smoke-20261015T205618.314112Z/cases/m4-real-chain",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.084,
+      "stdout": {
+        "path": ".tools/cross-stack/workspace-smoke-20261015T205618.314112Z/m4-real-chain-query-operation-next-handler.stdout.log",
+        "digest": "sha256:3af147a36f339dd3932a139e5f345d232b8dbe7d78f1690f18f5480fffb9c3f4"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/workspace-smoke-20261015T205618.314112Z/m4-real-chain-query-operation-next-handler.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "m4-real-chain-query-operation-next-endpoint",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+        "match-observations",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/workspace-smoke-20261015T205618.314112Z/cases/m4-real-chain/observed-graph.json",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/workspace-smoke-20261015T205618.314112Z/cases/m4-real-chain/queries/operation-next-endpoint.json",
+        "--relation-pack",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/workspace-smoke-20261015T205618.314112Z/cases/m4-real-chain/routing.json",
+        "--relation-pack",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/workspace-smoke-20261015T205618.314112Z/cases/m4-real-chain/application-topology.json",
+        "--relation-pack",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/workspace-smoke-20261015T205618.314112Z/cases/m4-real-chain/build-deployment.json"
+      ],
+      "cwd": ".tools/cross-stack/workspace-smoke-20261015T205618.314112Z/cases/m4-real-chain",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.078,
+      "stdout": {
+        "path": ".tools/cross-stack/workspace-smoke-20261015T205618.314112Z/m4-real-chain-query-operation-next-endpoint.stdout.log",
+        "digest": "sha256:9e6b8d4c3e4152e3050c970c0bf5ba4294c28171f4e2a2371908bebe49585d30"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/workspace-smoke-20261015T205618.314112Z/m4-real-chain-query-operation-next-endpoint.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "m4-real-chain-query-cargo-package",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+        "match-observations",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/workspace-smoke-20261015T205618.314112Z/cases/m4-real-chain/observed-graph.json",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/workspace-smoke-20261015T205618.314112Z/cases/m4-real-chain/queries/cargo-package.json",
+        "--relation-pack",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/workspace-smoke-20261015T205618.314112Z/cases/m4-real-chain/routing.json",
+        "--relation-pack",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/workspace-smoke-20261015T205618.314112Z/cases/m4-real-chain/application-topology.json",
+        "--relation-pack",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/workspace-smoke-20261015T205618.314112Z/cases/m4-real-chain/build-deployment.json"
+      ],
+      "cwd": ".tools/cross-stack/workspace-smoke-20261015T205618.314112Z/cases/m4-real-chain",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.087,
+      "stdout": {
+        "path": ".tools/cross-stack/workspace-smoke-20261015T205618.314112Z/m4-real-chain-query-cargo-package.stdout.log",
+        "digest": "sha256:3f649e6af36bab6297a3e875d3ca95a9f3249ffcbae5202d3e1bee3377b9b60b"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/workspace-smoke-20261015T205618.314112Z/m4-real-chain-query-cargo-package.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "m4-real-chain-query-cargo-target",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+        "match-observations",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/workspace-smoke-20261015T205618.314112Z/cases/m4-real-chain/observed-graph.json",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/workspace-smoke-20261015T205618.314112Z/cases/m4-real-chain/queries/cargo-target.json",
+        "--relation-pack",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/workspace-smoke-20261015T205618.314112Z/cases/m4-real-chain/routing.json",
+        "--relation-pack",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/workspace-smoke-20261015T205618.314112Z/cases/m4-real-chain/application-topology.json",
+        "--relation-pack",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/workspace-smoke-20261015T205618.314112Z/cases/m4-real-chain/build-deployment.json"
+      ],
+      "cwd": ".tools/cross-stack/workspace-smoke-20261015T205618.314112Z/cases/m4-real-chain",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.078,
+      "stdout": {
+        "path": ".tools/cross-stack/workspace-smoke-20261015T205618.314112Z/m4-real-chain-query-cargo-target.stdout.log",
+        "digest": "sha256:150f69211f2bc33297f9e78069e09e795f0af5f54d39dc88562f4f0ad452c906"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/workspace-smoke-20261015T205618.314112Z/m4-real-chain-query-cargo-target.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "m4-real-chain-query-listener",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+        "match-observations",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/workspace-smoke-20261015T205618.314112Z/cases/m4-real-chain/observed-graph.json",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/workspace-smoke-20261015T205618.314112Z/cases/m4-real-chain/queries/listener.json",
+        "--relation-pack",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/workspace-smoke-20261015T205618.314112Z/cases/m4-real-chain/routing.json",
+        "--relation-pack",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/workspace-smoke-20261015T205618.314112Z/cases/m4-real-chain/application-topology.json",
+        "--relation-pack",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/workspace-smoke-20261015T205618.314112Z/cases/m4-real-chain/build-deployment.json"
+      ],
+      "cwd": ".tools/cross-stack/workspace-smoke-20261015T205618.314112Z/cases/m4-real-chain",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.078,
+      "stdout": {
+        "path": ".tools/cross-stack/workspace-smoke-20261015T205618.314112Z/m4-real-chain-query-listener.stdout.log",
+        "digest": "sha256:527f9ebf374124880b419ec56b69afbaf0d8d929972df2cf64942a14bdd1ca1a"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/workspace-smoke-20261015T205618.314112Z/m4-real-chain-query-listener.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "m4-real-chain-query-next-config",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+        "match-observations",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/workspace-smoke-20261015T205618.314112Z/cases/m4-real-chain/observed-graph.json",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/workspace-smoke-20261015T205618.314112Z/cases/m4-real-chain/queries/next-config.json",
+        "--relation-pack",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/workspace-smoke-20261015T205618.314112Z/cases/m4-real-chain/routing.json",
+        "--relation-pack",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/workspace-smoke-20261015T205618.314112Z/cases/m4-real-chain/application-topology.json",
+        "--relation-pack",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/workspace-smoke-20261015T205618.314112Z/cases/m4-real-chain/build-deployment.json"
+      ],
+      "cwd": ".tools/cross-stack/workspace-smoke-20261015T205618.314112Z/cases/m4-real-chain",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.082,
+      "stdout": {
+        "path": ".tools/cross-stack/workspace-smoke-20261015T205618.314112Z/m4-real-chain-query-next-config.stdout.log",
+        "digest": "sha256:4b60fc2934af6e54dd6dab0296ea28e3d76c1fc9627bf6b11a42238bfc49c786"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/workspace-smoke-20261015T205618.314112Z/m4-real-chain-query-next-config.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "m4-real-chain-query-builder",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+        "match-observations",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/workspace-smoke-20261015T205618.314112Z/cases/m4-real-chain/observed-graph.json",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/workspace-smoke-20261015T205618.314112Z/cases/m4-real-chain/queries/builder.json",
+        "--relation-pack",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/workspace-smoke-20261015T205618.314112Z/cases/m4-real-chain/routing.json",
+        "--relation-pack",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/workspace-smoke-20261015T205618.314112Z/cases/m4-real-chain/application-topology.json",
+        "--relation-pack",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/workspace-smoke-20261015T205618.314112Z/cases/m4-real-chain/build-deployment.json"
+      ],
+      "cwd": ".tools/cross-stack/workspace-smoke-20261015T205618.314112Z/cases/m4-real-chain",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.079,
+      "stdout": {
+        "path": ".tools/cross-stack/workspace-smoke-20261015T205618.314112Z/m4-real-chain-query-builder.stdout.log",
+        "digest": "sha256:eb7eff06ca888b25009b69ffb1d96994e402db66b13160669b160f7935ed5dab"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/workspace-smoke-20261015T205618.314112Z/m4-real-chain-query-builder.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "m4-real-chain-query-runtime",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+        "match-observations",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/workspace-smoke-20261015T205618.314112Z/cases/m4-real-chain/observed-graph.json",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/workspace-smoke-20261015T205618.314112Z/cases/m4-real-chain/queries/runtime.json",
+        "--relation-pack",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/workspace-smoke-20261015T205618.314112Z/cases/m4-real-chain/routing.json",
+        "--relation-pack",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/workspace-smoke-20261015T205618.314112Z/cases/m4-real-chain/application-topology.json",
+        "--relation-pack",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/workspace-smoke-20261015T205618.314112Z/cases/m4-real-chain/build-deployment.json"
+      ],
+      "cwd": ".tools/cross-stack/workspace-smoke-20261015T205618.314112Z/cases/m4-real-chain",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.086,
+      "stdout": {
+        "path": ".tools/cross-stack/workspace-smoke-20261015T205618.314112Z/m4-real-chain-query-runtime.stdout.log",
+        "digest": "sha256:ce7549f9108a7311d4b7bb978c2d7e2d370c3b8a550f9dd31d12d26f115a2c6f"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/workspace-smoke-20261015T205618.314112Z/m4-real-chain-query-runtime.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "m4-real-chain-query-binary-copy",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+        "match-observations",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/workspace-smoke-20261015T205618.314112Z/cases/m4-real-chain/observed-graph.json",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/workspace-smoke-20261015T205618.314112Z/cases/m4-real-chain/queries/binary-copy.json",
+        "--relation-pack",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/workspace-smoke-20261015T205618.314112Z/cases/m4-real-chain/routing.json",
+        "--relation-pack",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/workspace-smoke-20261015T205618.314112Z/cases/m4-real-chain/application-topology.json",
+        "--relation-pack",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/workspace-smoke-20261015T205618.314112Z/cases/m4-real-chain/build-deployment.json"
+      ],
+      "cwd": ".tools/cross-stack/workspace-smoke-20261015T205618.314112Z/cases/m4-real-chain",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.08,
+      "stdout": {
+        "path": ".tools/cross-stack/workspace-smoke-20261015T205618.314112Z/m4-real-chain-query-binary-copy.stdout.log",
+        "digest": "sha256:9ceb788b4aac9d62d666dee76f8ba595f4274b119b6d40b0cd61ef660972a650"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/workspace-smoke-20261015T205618.314112Z/m4-real-chain-query-binary-copy.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "m4-real-chain-query-config-copy",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+        "match-observations",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/workspace-smoke-20261015T205618.314112Z/cases/m4-real-chain/observed-graph.json",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/workspace-smoke-20261015T205618.314112Z/cases/m4-real-chain/queries/config-copy.json",
+        "--relation-pack",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/workspace-smoke-20261015T205618.314112Z/cases/m4-real-chain/routing.json",
+        "--relation-pack",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/workspace-smoke-20261015T205618.314112Z/cases/m4-real-chain/application-topology.json",
+        "--relation-pack",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/workspace-smoke-20261015T205618.314112Z/cases/m4-real-chain/build-deployment.json"
+      ],
+      "cwd": ".tools/cross-stack/workspace-smoke-20261015T205618.314112Z/cases/m4-real-chain",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.084,
+      "stdout": {
+        "path": ".tools/cross-stack/workspace-smoke-20261015T205618.314112Z/m4-real-chain-query-config-copy.stdout.log",
+        "digest": "sha256:02fb4a7b2416908531b37b49894a7d2d3ccf20765a1c562b3cf4bbc894ba888d"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/workspace-smoke-20261015T205618.314112Z/m4-real-chain-query-config-copy.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "m4-real-chain-query-build-recipe",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+        "match-observations",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/workspace-smoke-20261015T205618.314112Z/cases/m4-real-chain/observed-graph.json",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/workspace-smoke-20261015T205618.314112Z/cases/m4-real-chain/queries/build-recipe.json",
+        "--relation-pack",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/workspace-smoke-20261015T205618.314112Z/cases/m4-real-chain/routing.json",
+        "--relation-pack",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/workspace-smoke-20261015T205618.314112Z/cases/m4-real-chain/application-topology.json",
+        "--relation-pack",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/workspace-smoke-20261015T205618.314112Z/cases/m4-real-chain/build-deployment.json"
+      ],
+      "cwd": ".tools/cross-stack/workspace-smoke-20261015T205618.314112Z/cases/m4-real-chain",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.082,
+      "stdout": {
+        "path": ".tools/cross-stack/workspace-smoke-20261015T205618.314112Z/m4-real-chain-query-build-recipe.stdout.log",
+        "digest": "sha256:29480f07a5ba23ee1aaab260babd64d6915d080a162af8b34e5119c790d6553f"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/workspace-smoke-20261015T205618.314112Z/m4-real-chain-query-build-recipe.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "m4-real-chain-workspace-admit",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+        "generate",
+        "workspace.json",
+        "--root",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/workspace-smoke-20261015T205618.314112Z/cases/m4-real-chain"
+      ],
+      "cwd": ".tools/cross-stack/workspace-smoke-20261015T205618.314112Z/cases/m4-real-chain",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 51.702,
+      "stdout": {
+        "path": ".tools/cross-stack/workspace-smoke-20261015T205618.314112Z/m4-real-chain-workspace-admit.stdout.log",
+        "digest": "sha256:ba2472e168614e2f1526989a3edc52e7351c5b89ef31b17e3ab549b51b58731a"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/workspace-smoke-20261015T205618.314112Z/m4-real-chain-workspace-admit.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "m4-real-chain-workspace-offline",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+        "verify-workspace",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/workspace-smoke-20261015T205618.314112Z/cases/m4-real-chain/baseline.json"
+      ],
+      "cwd": ".tools/cross-stack/workspace-smoke-20261015T205618.314112Z/cases/m4-real-chain",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 18.752,
+      "stdout": {
+        "path": ".tools/cross-stack/workspace-smoke-20261015T205618.314112Z/m4-real-chain-workspace-offline.stdout.log",
+        "digest": "sha256:87a90dafb5ccfac27ac7e4c169909199eb2f39976be962ed4017b669ffd820b2"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/workspace-smoke-20261015T205618.314112Z/m4-real-chain-workspace-offline.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  ],
+  "sourceInventory": {
+    "examples/cross-stack/.dockerignore": "sha256:ab935c7c81106d3bccd86f7b2e3edfbdb6712670b72296d189a528c1aeacfb7c",
+    "examples/cross-stack/.gitignore": "sha256:e0f20864aa53885a1456384f06a5893f8a70425f2d5ed4039c2ac48f1fe3b2a4",
+    "examples/cross-stack/README.md": "sha256:3acbba2747d1c607e85a13f8f92e495c2369e38647b4214f02fd24ebe7b4d5b6",
+    "examples/cross-stack/acceptance/expected.json": "sha256:4b6fe10f673674d8947725b849a61435858305f856adf588e0040faafafbe404",
+    "examples/cross-stack/acceptance/m2-expected.json": "sha256:0cc635f035e1c29bc910ff3f5219e6efae11ce81b15f00caf7a30d87ac66e242",
+    "examples/cross-stack/acceptance/m3-expected.json": "sha256:96e02942558e6d08449ec80cf52ffd2b3c6dff85838ff2665bffd2a4ce865f1f",
+    "examples/cross-stack/acceptance/m4-expected.json": "sha256:68d95411eb7a99b8d3f195bee8427ee8c430bcb17e23a63392ba43fc3263886c",
+    "examples/cross-stack/build.py": "sha256:1a048c675a5c1380082d6da6204d7042e257eadf49e2e76201bf407f035f1312",
+    "examples/cross-stack/config/service.toml": "sha256:ec046d3e08183708c3aae0453ce0cb4febe7b875452d781ea867897b65bccd07",
+    "examples/cross-stack/contracts/create-item.request.schema.json": "sha256:e814007c18146f82674e36f5dc6fb1affe8e871f828c8ddff117f244e2ddfe95",
+    "examples/cross-stack/contracts/create-item.response.schema.json": "sha256:3c49c73af83622c4678aedd932a53e51f71b78db7de502b68a9ed36a46af7113",
+    "examples/cross-stack/contracts/operations.json": "sha256:70695fc7f6200ad069807d69dcda11c30d940a805ed810d54b2f3884971bb2df",
+    "examples/cross-stack/deploy/Dockerfile": "sha256:ccc6cd1005cb31b6abe6879c4ff9b26c26d137dea8203c07b717ec8bb10fb59f",
+    "examples/cross-stack/mappings/README.md": "sha256:594388cf251b81e2c1a87afe1fa3c093b6a36dd7cc667230407917678bf2cbbb",
+    "examples/cross-stack/mappings/routing-pack.json": "sha256:64cb8bad363e056b99e62fca7f1eca95c46790dcb0c4dd8c2f987c0ed4ff601f",
+    "examples/cross-stack/service/Cargo.lock": "sha256:3e511df39108267fd2cf10a9b49dd49db589ae1f49b6fb8b9152779d365a99c3",
+    "examples/cross-stack/service/Cargo.toml": "sha256:fdd1f664593da2163ad70802e6c2bc8b922dcd019500550c349efbb556cba77c",
+    "examples/cross-stack/service/rust-toolchain.toml": "sha256:515c80a149c1e927d497dbebc399e241822aa0197e8f778c21bf5c136c90afd2",
+    "examples/cross-stack/service/src/generated.rs": "sha256:6a396d3ae3a7a433567fbd9a47dcb013794c996faaa16d2d4eeaf9907181616a",
+    "examples/cross-stack/service/src/handlers/create_item.rs": "sha256:1e04089800d93b65af6823c1be25653244b70252723e6f9df4005e80a2eea962",
+    "examples/cross-stack/service/src/lib.rs": "sha256:0e146354d88c717330e199cd284004ca7963710fb3387b2fa8c9945274b17101",
+    "examples/cross-stack/service/src/main.rs": "sha256:2b6ef5e614e3739719c2ab7eae934671be0f858a8eda4399acb59673e660c0ee",
+    "examples/cross-stack/support.json": "sha256:c1ab782812e7a01d759571df6fa982c63b7767323b4efa49e2db20d4243e1216",
+    "examples/cross-stack/web/app/api/items/route.ts": "sha256:b4f98c92dae67ee6096f652b30193f9cbc2311caeab97ca9af113f2ac0c1e4c8",
+    "examples/cross-stack/web/app/items/[id]/page.tsx": "sha256:62f257c01a26a7c6bf0eb8b7cbfa4d15bec683e1e98648e034c219373f65fde9",
+    "examples/cross-stack/web/app/layout.tsx": "sha256:c1948db0db63dcabb24d969c4d4d7d55277304aeb7cc4ffa2485ca6fb3464693",
+    "examples/cross-stack/web/app/page.tsx": "sha256:c00a67d2b7bf99604a0df7544c7649a53b9d9bd72102a962b0b5c96e92590743",
+    "examples/cross-stack/web/generated/operations.ts": "sha256:c3121a2337620abb60e93f900ae5582f78e8224ccc9498e439cfdbdb9b911ac1",
+    "examples/cross-stack/web/next.config.mjs": "sha256:d9be514b014a67dbf2f6aeb0acd2b5b87801e378127d4ae8f592af5e39460b25",
+    "examples/cross-stack/web/package-lock.json": "sha256:b2d52eccd71b29bd6e6938292d3ef692e434ac4ca77e8508ed0da7c57fbc2d59",
+    "examples/cross-stack/web/package.json": "sha256:3bcba3a9906f2dd519ab7863a9174d4262aba9246977bfba96ad090ffdfd6334",
+    "examples/cross-stack/web/tsconfig.json": "sha256:45fd26769ac1a8f0b8741099674b71e00846b9f97ce1b7cb7afb98c7922ce7f0",
+    "examples/cross-stack/workspace.py": "sha256:63fe93eb96aac8917c628e24f0740fd01d9add6295038c2c6f6fd9a451ade4b1"
+  },
+  "sourceUnchanged": true,
+  "applicationCompilation": "not-run-by-this-phase",
+  "linuxImage": "pending-M6",
+  "browser": "pending-M6",
+  "metaMapCompatibility": "pending-M7",
+  "fullReleaseAccepted": false,
+  "activation": "not-evaluated"
+}

@@ -146,9 +146,11 @@ def bind(destination, cli, owner, config, policy, run):
 
     for view in owner["views"]:
         overlay["entities"].append({"id": view["id"], "kind": "build:view", "attributes": {"evidenceClass": "owner-authored"}})
-        for kind in ["routing:route", "topology:page"]:
-            requirement(view["name"] + "-" + kind.split(":")[1], kind,
-                        {"adapter": "nextjs-app-router", "repositoryPath": "app/" + view["file"], "routePath": view["path"]}, view["id"])
+        requirement(view["name"] + "-page", "topology:page",
+                    {"adapter": "nextjs-app-router", "repositoryPath": "app/" + view["file"], "routePath": view["path"]}, view["id"])
+        for i, operation in enumerate(view["operations"]):
+            overlay["mappings"].append({"id": view["id"] + ":uses-operation:" + str(i), "relation": "core:depends_on", "sources": [view["id"]], "targets": [operation],
+                                        "cardinality": "one-to-one", "lossiness": "lossless", "provenance": {"status": "declared", "assertedBy": "fixture-owner"}})
     for op in owner["operations"]:
         for kind in ["routing:route", "routing:handler"]:
             requirement("operation-next-" + kind.split(":")[1], kind,
