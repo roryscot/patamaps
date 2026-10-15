@@ -94,7 +94,15 @@ def verify(root, work, env, run):
     owner, config, changed_policy, _ = workspace.prepare(root, moved_source, moved, cli, node, cargo, rustc, commands("m7-moved"),
         typescript=fixture / "web/node_modules/typescript")
     workspace.bind(moved, cli, owner, config, changed_policy, commands("m7-moved"))
-    run("m7-moved-real-cargo", [cargo, "test", "--manifest-path", moved / "app/service/Cargo.toml", "--locked", "--offline"], timeout=300)
+    previous_rustc = env.get("RUSTC")
+    env["RUSTC"] = str(rustc)
+    try:
+        run("m7-moved-real-cargo", [cargo, "test", "--manifest-path", moved / "app/service/Cargo.toml", "--locked", "--offline"], timeout=300)
+    finally:
+        if previous_rustc is None:
+            env.pop("RUSTC", None)
+        else:
+            env["RUSTC"] = previous_rustc
     moved_inputs = json.loads((moved / "baseline.json").read_bytes())["captures"][0]["inputs"]
     materialize("m7-moved-handler", moved_inputs["graph"], moved_inputs["policy"])
     missing = copy.deepcopy(graph)
