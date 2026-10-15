@@ -10,7 +10,7 @@ def verify(root, work, env, run, smoke=False):
     run("m4-native-tests", ["cargo", "test", "-p", "patamaps-workspace", "--lib", "--locked", "--offline"])
     compiler_profile = env.get("PATAMAPS_CROSS_STACK_COMPILER_PROFILE", "debug")
     assert compiler_profile in {"debug", "release"}
-    run("m4-cli", ["cargo", "build", "-p", "patamaps-cli", "--locked", "--offline", *(["--release"] if compiler_profile == "release" else [])])
+    run("m4-cli", ["cargo", "build", "-p", "patamaps-cli", "--locked", "--offline", *(["--release"] if compiler_profile == "release" else [])], timeout=900 if compiler_profile == "release" else 300)
     cli = root / ("target/" + compiler_profile + "/patamaps")
     sys.path.insert(0, str(root / "scripts/parity"))
     from identity import identities
