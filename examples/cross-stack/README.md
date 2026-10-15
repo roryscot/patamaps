@@ -22,3 +22,13 @@ Run the retained driver with --phase bindings from the repository through the su
 The [M2 receipt](../../docs/acceptance/cross-stack/m2-http-bindings/receipt.json) distinguishes Cargo/TypeScript refusals, successful compilation with rejected HTTP behavior, source integrity, and the previously retained candidate. Its browser, image, whole-chain and atomic publication lanes remain unaccepted. M0's historical empty-name response was invalid-name; generated schema validation now rejects it earlier as invalid-request, with independently frozen M2 expectations retained.
 
 The native Docker observation matrix runs with --phase docker. The [M3 native receipt](../../docs/acceptance/cross-stack/m3-docker-observations/receipt.json) covers syntax, context and explicit unresolved findings. It is not full M3/BuildKit, artifact or image acceptance; those required Linux lanes remain pending. Parser and upstream license notices are retained under docs/licenses in the repository.
+
+The foreground preview/watch driver is now implemented. See
+[its usage and publication contract](../../docs/decisions/0030-retained-development-previews.md)
+and the [M5 receipt](../../docs/acceptance/cross-stack/m5-development/receipt.json).
+All 13 independent development controls passed on Linux at the receipt's exact
+commit, including real compiler failure, usable previous selection, source races,
+watch reconciliation, concurrent readers and cancellation. Native Intel checks
+are still queued behind the existing shared build lease. The required Linux
+image/browser lane is implemented and under verification; full release and
+MetaMap/installed-consumer acceptance remain pending.

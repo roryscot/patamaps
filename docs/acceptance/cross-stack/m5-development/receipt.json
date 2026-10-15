@@ -1,0 +1,192 @@
+{
+  "profile": "patamaps-cross-stack-m5-acceptance-1",
+  "status": "Linux-preview-scope-verified; Intel-native-scope-pending",
+  "sourceCommit": "a569285ca204b6fe549dec38d1ab2907959cfe7a",
+  "linuxCI": {
+    "run": 38816111748,
+    "url": "https://github.com/roryscot/patamaps/actions/runs/38816111748",
+    "conclusion": "success",
+    "artifact": {
+      "artifactId": 12010599445,
+      "bytes": 1021749332,
+      "archiveSha256": "99b773e9259f934c86a0ba9e359aaab8f3375c886f8dfc521a54e73bb037ab89",
+      "run": 38816111748,
+      "commit": "a569285ca204b6fe549dec38d1ab2907959cfe7a",
+      "receiptStatus": {
+        "development": "passed-development-preview-scope",
+        "source": "passed-source-intent-scope"
+      },
+      "resumedAt": 748847104
+    }
+  },
+  "development": {
+    "controls": [
+      {
+        "control": "m5-real-preview",
+        "status": "verified-native-preview",
+        "selected": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-development/development-state/selected.json",
+        "candidate": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-development/development-state/attempts/20261015T222156.544785Z/candidate",
+        "seconds": 29.191,
+        "fullReleaseAccepted": false
+      },
+      {
+        "control": "m5-no-op",
+        "status": "unchanged",
+        "verification": "not-repeated",
+        "cacheHits": 0,
+        "selected": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-development/development-state/selected.json",
+        "fullReleaseAccepted": false
+      },
+      {
+        "control": "m5-missing-compiler",
+        "result": "refused",
+        "reason": "[Errno 2] No such file or directory: '/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-development/missing-compiler'",
+        "previousSelectionPreserved": true
+      },
+      {
+        "control": "m5-duplicate-schema-key",
+        "result": "refused",
+        "reason": "http-request-schema-0 failed; retained logs: /home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-development/development-state/attempts/20261015T222226.268769Z/logs",
+        "previousSelectionPreserved": true
+      },
+      {
+        "control": "m5-snapshot-race",
+        "result": "refused",
+        "reason": "SOURCE_CHANGED_DURING_SNAPSHOT",
+        "previousSelectionPreserved": true
+      },
+      {
+        "control": "m5-real-cargo-failure",
+        "result": "refused",
+        "reason": "cargo-tests failed; retained logs: /home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-development/development-state/attempts/20261015T222226.777386Z/logs",
+        "previousSelectionPreserved": true
+      },
+      {
+        "control": "m5-prior-selection-still-usable",
+        "result": "passed"
+      },
+      {
+        "control": "m5-single-edit",
+        "status": "verified-native-preview",
+        "selected": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-development/development-state/selected.json",
+        "candidate": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-development/development-state/attempts/20261015T222230.842838Z/candidate",
+        "seconds": 25.385,
+        "fullReleaseAccepted": false
+      },
+      {
+        "control": "m5-batch-and-lost-event-reconciliation",
+        "result": "selected-one-complete-candidate",
+        "edits": 5,
+        "eventChannel": "none"
+      },
+      {
+        "control": "m5-generated-feedback",
+        "result": "no-extra-attempt"
+      },
+      {
+        "control": "m5-atomic-selection-readers",
+        "result": "all-observed-pointers-complete",
+        "generations": 2
+      },
+      {
+        "control": "m5-route-rename",
+        "result": "actual-renamed-page-served",
+        "stableOperationIds": [
+          "urn:example:operation:create-item"
+        ]
+      },
+      {
+        "control": "m5-cancelled-pipeline",
+        "result": "stopped",
+        "ownedPids": [
+          12035,
+          12046,
+          12075,
+          12080,
+          12119,
+          12124,
+          12128
+        ],
+        "lingeringBeforeCleanup": [],
+        "milliseconds": 269.954,
+        "previousSelectionPreserved": true
+      }
+    ],
+    "count": 13,
+    "fullReleaseAccepted": false,
+    "scope": "native preview compilation, generated-client HTTP, retained selection and bounded foreground watch"
+  },
+  "toolSupervision": {
+    "controls": [
+      {
+        "control": "provider-parent-death",
+        "argv": [
+          "/home/runner/work/patamaps/patamaps/target/release/patamaps",
+          "generate",
+          "workspace.json",
+          "--root",
+          "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-source/provider-parent-death"
+        ],
+        "compilerDigest": "sha256:42c9a6ca0789ca7d087a671871ce3aab7a5b39603f661374168cd9b20e31526f",
+        "expectedStopped": true,
+        "manualCleanupRequired": false,
+        "observedOwnedPids": [
+          9302,
+          9303,
+          9308,
+          9312
+        ],
+        "observedOwnedGroups": [
+          9302,
+          9303
+        ],
+        "parentExit": -9,
+        "lingeringBeforeCleanup": [],
+        "observedMilliseconds": 7.339,
+        "result": "stopped"
+      },
+      {
+        "control": "nested-cargo-parent-death",
+        "argv": [
+          "/home/runner/work/patamaps/patamaps/target/release/patamaps",
+          "generate",
+          "workspace.json",
+          "--root",
+          "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-source/nested-cargo-parent-death"
+        ],
+        "compilerDigest": "sha256:42c9a6ca0789ca7d087a671871ce3aab7a5b39603f661374168cd9b20e31526f",
+        "expectedStopped": true,
+        "manualCleanupRequired": false,
+        "observedOwnedPids": [
+          9316,
+          9317,
+          9322,
+          9345,
+          9350,
+          9354
+        ],
+        "observedOwnedGroups": [
+          9316,
+          9317,
+          9345
+        ],
+        "parentExit": -9,
+        "lingeringBeforeCleanup": [],
+        "observedMilliseconds": 7.326,
+        "result": "stopped"
+      }
+    ],
+    "scope": "ordinary Unix provider and nested Cargo groups after actual CLI parent SIGKILL; trusted tools, not an OS sandbox"
+  },
+  "rawCommands": "linux-receipt.json",
+  "nativeIntel": "queued through unchanged existing supervisor; another project owns shared lease",
+  "fullReleaseAccepted": false,
+  "linuxImage": "pending-M6",
+  "browser": "pending-M6",
+  "metamapAndInstalledConsumer": "pending-M7",
+  "productionActivation": "not-performed",
+  "limitations": [
+    "Fixture timings are raw measurements, not performance guarantees or MetaMap comparisons.",
+    "Parent-death checks cover ordinary owned Unix process groups, not deliberate daemon/session escape."
+  ]
+}
