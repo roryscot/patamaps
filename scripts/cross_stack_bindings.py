@@ -34,11 +34,11 @@ def verify(root, work, env, run):
     controls = []
     target = root / ".tools/cross-stack/target-service"
 
-    def command(label, argv, cwd=root, expected_success=True):
+    def command(label, argv, cwd=root, expected_success=True, input_bytes=None):
         previous = dict(env)
         try:
             env.update(CARGO_TARGET_DIR=str(target), CARGO_PROFILE_DEV_DEBUG="0", CARGO_PROFILE_TEST_DEBUG="0")
-            return run(label, argv, cwd=cwd, timeout=300, expected_success=expected_success)
+            return run(label, argv, cwd=cwd, timeout=300, expected_success=expected_success, input_bytes=input_bytes)
         finally:
             env.clear()
             env.update(previous)
@@ -49,8 +49,8 @@ def verify(root, work, env, run):
         if mutate:
             mutate(owner)
 
-        def emit(name, argv, cwd):
-            result = command(label + "-" + name, argv, cwd, expected_success=not (refusal and name == "http-rust"))
+        def emit(name, argv, cwd, input_bytes=None):
+            result = command(label + "-" + name, argv, cwd, expected_success=not (refusal and name == "http-rust"), input_bytes=input_bytes)
             if refusal and name == "http-rust":
                 diagnostics = (work / (label + "-" + name + ".stderr.log")).read_text() + result.decode("utf-8")
                 assert refusal in diagnostics, diagnostics

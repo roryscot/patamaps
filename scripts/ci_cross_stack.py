@@ -6,6 +6,7 @@ Container, browser and installed-consumer acceptance remain separate lanes.
 from datetime import datetime, timezone
 from pathlib import Path
 import hashlib
+import argparse
 import json
 import os
 import platform
@@ -22,12 +23,15 @@ def digest(raw):
 
 
 def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--phase", choices=["source", "development"], default="source")
+    args = parser.parse_args()
     if platform.system() != "Linux" or os.environ.get("GITHUB_ACTIONS") != "true":
         raise RuntimeError("Use the configured isolated GitHub Linux CI job; Intel work uses its existing supervisor")
     revision = subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=ROOT, text=True).strip()
     if revision != os.environ.get("GITHUB_SHA"):
         raise RuntimeError("CI source revision does not match the dispatched commit")
-    work = ROOT / "ci-evidence/cross-stack-source"
+    work = ROOT / ("ci-evidence/cross-stack-" + args.phase)
     work.mkdir(parents=True, exist_ok=False)
     disk_before = shutil.disk_usage(ROOT)
     env = dict(os.environ, CARGO_INCREMENTAL="0", CARGO_BUILD_JOBS="2", RUST_TEST_THREADS="1",
@@ -74,13 +78,18 @@ def main():
     try:
         for label, argv in [("rust-version", ["rustc", "-Vv"]), ("cargo-version", ["cargo", "--version"]), ("node-version", ["node", "--version"])]:
             run(label, argv)
-        from cross_stack_workspace import verify
-        receipt["sourceWorkspace"] = verify(ROOT, work, env, run)
-        from cross_stack_supervision import verify as verify_supervision
-        receipt["toolSupervision"] = verify_supervision(ROOT, work, env, run)
+        if args.phase == "source":
+            from cross_stack_workspace import verify
+            receipt["sourceWorkspace"] = verify(ROOT, work, env, run)
+            from cross_stack_supervision import verify as verify_supervision
+            receipt["toolSupervision"] = verify_supervision(ROOT, work, env, run)
+        else:
+            from cross_stack_development import verify
+            receipt["developmentPreview"] = verify(ROOT, work, env, run)
+        space()
         assert all(digest((ROOT / name).read_bytes()) == value for name, value in before.items()), "Tracked source changed during acceptance"
         receipt["sourceUnchanged"] = True
-        receipt["status"] = "passed-source-intent-scope"
+        receipt["status"] = "passed-source-intent-scope" if args.phase == "source" else "passed-development-preview-scope"
     except BaseException as error:
         receipt.update(status="failed", failure=str(error), traceback=traceback.format_exc())
         raise

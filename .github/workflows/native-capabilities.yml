@@ -83,6 +83,8 @@ jobs:
           npm ci --prefix examples/cross-stack/web --ignore-scripts --no-audit --no-fund
       - name: Check actual source providers, admission and offline replay
         run: python3 -B scripts/ci_cross_stack.py
+      - name: Verify coherent development selection and foreground watch
+        run: python3 -B scripts/ci_cross_stack.py --phase development
       - name: Retain source fixtures and tool symlink metadata
         if: always()
         shell: bash
@@ -96,8 +98,16 @@ jobs:
           if not work.exists():
               work.mkdir()
               (work / "not-run.json").write_text(json.dumps({"status": "source job did not reach its entry point"}) + "\n")
+          workspaces = sorted(p for p in evidence.glob("cross-stack-*") if p.is_dir())
           with tarfile.open(evidence / "cross-stack-source.tar.gz", "x:gz", dereference=False) as archive:
-              archive.add(work, arcname="cross-stack-source")
+              for workspace in workspaces:
+                  receipt = workspace / "receipt.json"
+                  if receipt.exists():
+                      archive.add(receipt, arcname=workspace.name + "/receipt.json")
+              for workspace in workspaces:
+                  for child in sorted(workspace.iterdir()):
+                      if child.name != "receipt.json":
+                          archive.add(child, arcname=workspace.name + "/" + child.name)
           PY
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         if: always()

@@ -36,7 +36,7 @@ def prepare(repo, source, destination, cli, node, cargo, rustc, run, typescript=
         raise build.BuildError("CROSS_STACK_SINGLE_OPERATION_PROFILE")
     destination.mkdir(parents=True, exist_ok=False)
     inventory = build.snapshot(source, destination / "app")
-    generated = build.generate(destination / "app", cli, run)
+    generated = build.generate(destination / "app", cli, run, rustfmt=rustc.parent / "rustfmt")
     app = destination / "app"
     names = sorted(set(inventory) | set(generated["outputs"]))
     context = destination / "build-context"

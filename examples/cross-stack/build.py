@@ -32,16 +32,22 @@ def owned(root, relative):
 
 def snapshot(source, destination):
     source = source.resolve()
+    if destination.resolve(strict=False).is_relative_to(source):
+        raise BuildError("HTTP_SNAPSHOT_DESTINATION_INSIDE_SOURCE")
     destination.mkdir(parents=True, exist_ok=False)
     inventory = {}
     total = 0
     for directory, dirs, names in os.walk(source, followlinks=False):
-        dirs[:] = sorted(v for v in dirs if v not in {"node_modules", ".next", "target", "runs", ".patamaps", "generated", "__pycache__"})
+        dirs[:] = sorted(v for v in dirs if v not in {"node_modules", ".next", "target", "runs", ".patamaps", "generated", "__pycache__", ".git"})
+        if any((Path(directory) / name).is_symlink() for name in dirs):
+            raise BuildError("HTTP_SNAPSHOT_DIRECTORY_SYMLINK")
         for name in sorted(names):
             path = Path(directory) / name
             relative = path.relative_to(source).as_posix()
             if name in {"generated.rs", "next-env.d.ts", "tsconfig.tsbuildinfo"}:
                 continue
+            if name == ".env" or name.startswith(".env."):
+                raise BuildError("HTTP_SNAPSHOT_SECRET_INPUT_UNAVAILABLE: " + relative)
             actual = owned(source, relative)
             if path.is_symlink() or not actual.is_file():
                 raise BuildError("HTTP_SNAPSHOT_SYMLINK: " + relative)
@@ -57,12 +63,17 @@ def snapshot(source, destination):
     return inventory
 
 
-def generate(root, cli, run):
+def generate(root, cli, run, rustfmt=None):
     root = root.resolve()
     state = root / ".patamaps"
     state.mkdir(exist_ok=False)
     manifest_bytes = (root / "contracts/operations.json").read_bytes()
-    manifest = json.loads(manifest_bytes)
+    def strict_json(label, raw):
+        return json.loads(run(label, [cli, "json", "parse"], cwd=root, input_bytes=raw))
+
+    manifest = strict_json("http-owner-json", manifest_bytes)
+    if manifest.get("nonsecretInputs") is not True:
+        raise BuildError("HTTP_NONSECRET_DECLARATION_REQUIRED")
     if manifest["profile"] != "patamaps-cross-stack-fixture-1" or not 1 <= len(manifest["operations"]) <= 64:
         raise BuildError("HTTP_OWNER_MANIFEST_PROFILE")
     ids = [op["id"] for op in manifest["operations"]]
@@ -74,7 +85,7 @@ def generate(root, cli, run):
              "entities": [], "mappings": [], "authorities": []}
     policy = {"schemaVersion": "0.1.0", "documentType": "policy", "id": "urn:example:cross-stack:http-policy", "graph": {"id": graph["id"], "revision": "1"}, "mappings": [], "constraints": [], "evidence": []}
     source_receipts = {"contracts/operations.json": digest(manifest_bytes)}
-    for op in manifest["operations"]:
+    for index, op in enumerate(manifest["operations"]):
         implementation = op["implementation"]
         module = implementation["module"]
         filename = modules.get(module)
@@ -94,8 +105,8 @@ def generate(root, cli, run):
             {"id": handler_id, "kind": "routing:handler", "locators": [{"uri": "rust:crate::" + module + "::" + implementation["symbol"], "digest": digest(source)}],
              "attributes": {"http": {"profile": "patamaps-http-object-strings-1", "modulePath": filename.removeprefix("service/src/"),
                                       "requestType": implementation["request"], "responseType": implementation["response"], "errorType": implementation["error"],
-                                      "errors": op["errors"], "responseSchema": json.loads(response)}}},
-            {"id": input_id, "kind": "routing:schema", "locators": [{"uri": "json-schema:" + request_path, "digest": digest(request)}], "attributes": {"jsonSchema": json.loads(request)}},
+                                      "errors": op["errors"], "responseSchema": strict_json("http-response-schema-" + str(index), response)}}},
+            {"id": input_id, "kind": "routing:schema", "locators": [{"uri": "json-schema:" + request_path, "digest": digest(request)}], "attributes": {"jsonSchema": strict_json("http-request-schema-" + str(index), request)}},
             {"id": endpoint_id, "kind": "routing:endpoint", "attributes": {"http": {**op["endpoint"], "successStatus": op["successStatus"]}}},
         ])
         for name, relation, target in [("handler", "routing:handled_by", handler_id), ("input", "routing:accepts", input_id), ("endpoint", "routing:exposed_as", endpoint_id)]:
@@ -121,7 +132,7 @@ def generate(root, cli, run):
         with p.open("xb") as out:
             out.write(raw)
     # Formatting does not choose source, symbols, types or semantics.
-    run("http-rust-format", ["rustfmt", "--edition", "2024", rust_path], cwd=root)
+    run("http-rust-format", [rustfmt or "rustfmt", "--edition", "2024", rust_path], cwd=root)
     for name, expected in source_receipts.items():
         if digest(owned(root, name).read_bytes()) != expected:
             raise BuildError("HTTP_SOURCE_CHANGED_DURING_GENERATION: " + name)
@@ -140,14 +151,17 @@ def main():
     parser.add_argument("--compiler", type=Path, required=True)
     parser.add_argument("--candidate", type=Path, required=True)
     args = parser.parse_args()
+    declaration = subprocess.run([str(args.compiler.resolve()), "json", "parse"], input=(args.root / "contracts/operations.json").read_bytes(), capture_output=True, timeout=10, check=True)
+    if json.loads(declaration.stdout).get("nonsecretInputs") is not True:
+        raise BuildError("HTTP_NONSECRET_DECLARATION_REQUIRED")
     inventory = snapshot(args.root, args.candidate)
     logs = args.candidate / "build-logs"
     logs.mkdir()
     commands = []
 
-    def run(label, argv, cwd):
+    def run(label, argv, cwd, input_bytes=None):
         with (logs / (label + ".stdout.log")).open("xb") as out, (logs / (label + ".stderr.log")).open("xb") as err:
-            result = subprocess.run([str(v) for v in argv], cwd=cwd, stdout=out, stderr=err, timeout=90)
+            result = subprocess.run([str(v) for v in argv], cwd=cwd, stdout=out, stderr=err, timeout=90, input=input_bytes)
         commands.append({"label": label, "argv": [str(v) for v in argv], "exitCode": result.returncode})
         (logs / "commands.json").write_text(json.dumps(commands, indent=2) + "\n")
         if result.returncode:
