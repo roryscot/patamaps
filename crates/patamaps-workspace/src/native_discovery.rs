@@ -62,6 +62,8 @@ struct CargoConfig {
     workspace_manifest: String,
     #[serde(default)]
     root_mode: CargoRootMode,
+    #[serde(default)]
+    workspace_members: CargoMemberMode,
     lockfile: String,
     cargo: String,
     cargo_digest: String,
@@ -80,6 +82,136 @@ enum CargoRootMode {
     #[default]
     ExplicitWorkspace,
     StandalonePackage,
+}
+
+#[derive(Clone, Copy, Default, Deserialize, PartialEq, Eq)]
+#[serde(rename_all = "kebab-case")]
+enum CargoMemberMode {
+    #[default]
+    LiteralPaths,
+    BoundedDirectoryGlobs,
+}
+
+// Inspect path components without following directory symlinks. Only names and
+// file types are observed; uncaptured manifest values are never loaded here.
+fn member_directory(root: &Path, path: &Path) -> Result<(), Error> {
+    let relative = path
+        .strip_prefix(root)
+        .map_err(|_| refused("NATIVE_CARGO_PATH_ESCAPE", "Member directory outside owner"))?;
+    let mut current = root.to_path_buf();
+    for component in relative.components() {
+        if !matches!(component, std::path::Component::Normal(_)) {
+            return Err(refused(
+                "NATIVE_CARGO_MEMBERS",
+                "Member directory must be normalized",
+            ));
+        }
+        current.push(component.as_os_str());
+        let metadata = fs::symlink_metadata(&current)?;
+        if metadata.file_type().is_symlink() || !metadata.is_dir() {
+            return Err(refused(
+                "NATIVE_CARGO_MEMBERS",
+                "Member directories must be ordinary directories without symlinks",
+            ));
+        }
+    }
+    Ok(())
+}
+
+fn expand_member(
+    root: &Path,
+    base: &Path,
+    pattern: &str,
+    inputs: &Inputs<'_>,
+) -> Result<Vec<String>, Error> {
+    let parts = pattern.split('/').collect::<Vec<_>>();
+    if pattern.len() > 4096
+        || parts.len() > 32
+        || parts.iter().any(|s| {
+            s.is_empty()
+                || *s == "."
+                || *s == ".."
+                || s.contains(['\\', '?', '[', ']', '{', '}', ':'])
+                || (*s != "*" && s.contains('*'))
+        })
+        || parts.iter().filter(|s| **s == "*").count() != 1
+    {
+        return Err(refused(
+            "NATIVE_CARGO_MEMBERS",
+            "Expected one complete star directory segment and normalized literal segments",
+        ));
+    }
+    let star = parts.iter().position(|s| *s == "*").expect("checked star");
+    let prefix = parts[..star]
+        .iter()
+        .fold(base.to_path_buf(), |p, s| p.join(s));
+    member_directory(root, &prefix)?;
+    let mut names = Vec::new();
+    for entry in fs::read_dir(&prefix)? {
+        if names.len() >= 1024 {
+            return Err(refused(
+                "NATIVE_CARGO_MEMBERS",
+                "Member directory enumeration exceeds 1024 entries",
+            ));
+        }
+        let entry = entry?;
+        let name = entry
+            .file_name()
+            .into_string()
+            .map_err(|_| refused("NATIVE_SOURCE_UTF8", "Member names must be UTF-8"))?;
+        if !relative_path(&name) || name.contains('/') {
+            return Err(refused(
+                "NATIVE_CARGO_MEMBERS",
+                "Member name must be normalized",
+            ));
+        }
+        // Cargo's star matches files as well; refuse before it could inspect an
+        // unintended path. This conservative subset requires ordinary directories.
+        let kind = entry.file_type()?;
+        if !kind.is_dir() || kind.is_symlink() {
+            return Err(refused(
+                "NATIVE_CARGO_MEMBERS",
+                "Glob matches must be ordinary directories",
+            ));
+        }
+        names.push(name);
+    }
+    names.sort();
+    if names.is_empty() {
+        return Err(refused(
+            "NATIVE_CARGO_MEMBERS",
+            "Empty member expansion is unsupported",
+        ));
+    }
+    let mut manifests = Vec::new();
+    for name in names {
+        let directory = parts[star + 1..]
+            .iter()
+            .fold(prefix.join(name), |p, s| p.join(s));
+        member_directory(root, &directory)?;
+        let manifest = directory.join("Cargo.toml");
+        let metadata = fs::symlink_metadata(&manifest)?;
+        if metadata.file_type().is_symlink() || !metadata.is_file() {
+            return Err(refused(
+                "NATIVE_CARGO_MEMBERS",
+                "Matched manifests must be ordinary files",
+            ));
+        }
+        let relative = manifest
+            .strip_prefix(root)
+            .map_err(|_| refused("NATIVE_CARGO_PATH_ESCAPE", "Member manifest outside owner"))?
+            .to_str()
+            .ok_or_else(|| refused("NATIVE_SOURCE_UTF8", "Member path must be UTF-8"))?
+            .replace('\\', "/");
+        if !inputs.contains_key(relative.as_str()) {
+            return Err(refused(
+                "NATIVE_CARGO_MANIFEST_INPUT",
+                format!("Expanded manifest not captured: {relative}"),
+            ));
+        }
+        manifests.push(relative);
+    }
+    Ok(manifests)
 }
 
 /// Standalone packages are opt-in. Probe ancestor manifest existence without
@@ -543,7 +675,11 @@ fn config_inputs(
     found.dedup();
     Ok(found)
 }
-fn validate_manifest_paths(root: &Path, inputs: &Inputs<'_>) -> Result<(), Error> {
+fn validate_manifest_paths(
+    root: &Path,
+    inputs: &Inputs<'_>,
+    mode: CargoMemberMode,
+) -> Result<Vec<Value>, Error> {
     fn required(
         root: &Path,
         base: &Path,
@@ -598,6 +734,8 @@ fn validate_manifest_paths(root: &Path, inputs: &Inputs<'_>) -> Result<(), Error
         }
         Ok(())
     }
+    let mut expansions = Vec::new();
+    let mut expanded_count = 0usize;
     for (path, raw) in inputs.iter().filter(|(p, _)| p.ends_with("Cargo.toml")) {
         let document = parse_toml(path, raw)?;
         let base = root
@@ -608,15 +746,35 @@ fn validate_manifest_paths(root: &Path, inputs: &Inputs<'_>) -> Result<(), Error
         if let Some(workspace) = document.get("workspace").and_then(Item::as_table_like)
             && let Some(members) = workspace.get("members").and_then(Item::as_array)
         {
+            if members.len() > 128 {
+                return Err(refused(
+                    "NATIVE_CARGO_MEMBERS",
+                    "At most 128 member declarations are supported",
+                ));
+            }
             for member in members {
                 let value = member
                     .as_str()
                     .ok_or_else(|| refused("NATIVE_CARGO_MEMBERS", "Member is not a string"))?;
                 if value.contains(['*', '?', '[', ']', '{', '}']) {
-                    return Err(refused(
-                        "NATIVE_CARGO_MEMBERS",
-                        "Glob workspace members are unsupported in this profile",
-                    ));
+                    if mode != CargoMemberMode::BoundedDirectoryGlobs
+                        || workspace.get("exclude").is_some()
+                    {
+                        return Err(refused(
+                            "NATIVE_CARGO_MEMBERS",
+                            "Glob expansion requires explicit bounded-directory-globs mode without workspace exclusions",
+                        ));
+                    }
+                    let manifests = expand_member(root, &base, value, inputs)?;
+                    expanded_count += manifests.len();
+                    if expanded_count > 1024 || expansions.len() >= 128 {
+                        return Err(refused(
+                            "NATIVE_CARGO_MEMBERS",
+                            "Aggregate member expansion bound exceeded",
+                        ));
+                    }
+                    expansions.push(json!({"manifest":path,"pattern":value,"manifests":manifests}));
+                    continue;
                 }
                 required(root, &base, value, inputs, "Cargo.toml")?;
             }
@@ -631,7 +789,7 @@ fn validate_manifest_paths(root: &Path, inputs: &Inputs<'_>) -> Result<(), Error
         }
         dependencies(root, &base, document.as_table(), inputs)?;
     }
-    Ok(())
+    Ok(expansions)
 }
 fn tool(
     invocation: &crate::Invocation,
@@ -729,7 +887,7 @@ fn cargo_entities(
         ));
     }
     same_sources(root, inputs)?;
-    validate_manifest_paths(root, inputs)?;
+    let member_expansions = validate_manifest_paths(root, inputs, config.workspace_members)?;
     let configs = config_inputs(root, &manifest_path, cargo_home, inputs, platform)?;
     let (cargo_path, actual_cargo) = tool_digest(cargo)?;
     let (rustc_path, actual_rustc) = tool_digest(rustc)?;
@@ -841,6 +999,19 @@ fn cargo_entities(
         4 * 1024 * 1024,
     )?;
     same_sources(root, inputs)?;
+    let repeated_members = validate_manifest_paths(root, inputs, config.workspace_members)
+        .map_err(|_| {
+            refused(
+                "NATIVE_CARGO_MEMBERS_CHANGED",
+                "Workspace member inventory could not be repeated after metadata observation",
+            )
+        })?;
+    if repeated_members != member_expansions {
+        return Err(refused(
+            "NATIVE_CARGO_MEMBERS_CHANGED",
+            "Workspace member expansion changed during metadata observation",
+        ));
+    }
     validate_cargo_root(config.root_mode, &manifest_path, &workspace_path, &declared)?;
     if tool_digest(cargo)?.1 != actual_cargo || tool_digest(rustc)?.1 != actual_rustc {
         return Err(refused(
@@ -865,6 +1036,22 @@ fn cargo_entities(
     let packages = metadata["packages"]
         .as_array()
         .ok_or_else(|| refused("NATIVE_CARGO_METADATA", "Missing package inventory"))?;
+    for expansion in &member_expansions {
+        for manifest in expansion["manifests"]
+            .as_array()
+            .expect("constructed inventory")
+        {
+            let expected = root.join(manifest.as_str().expect("constructed path"));
+            if !packages.iter().any(|p| {
+                members.contains(&p["id"]) && p["manifest_path"].as_str() == expected.to_str()
+            }) {
+                return Err(refused(
+                    "NATIVE_CARGO_MEMBERS",
+                    "Cargo metadata omitted an explicitly expanded member",
+                ));
+            }
+        }
+    }
     let mut entities = Vec::new();
     for package in packages.iter().filter(|p| members.contains(&p["id"])) {
         let manifest = package["manifest_path"]
@@ -984,6 +1171,9 @@ fn cargo_entities(
         "rustc":{"path":rustc_path,"digest":actual_rustc,"version":std::str::from_utf8(&rustc_version).map_err(|_|refused("NATIVE_TOOL_UTF8","Rustc version output is not UTF-8"))?},
         "argv":args,"metadataDigest":byte_digest(&raw),"metadataBytes":std::str::from_utf8(&raw).map_err(|_|refused("NATIVE_TOOL_UTF8","Cargo metadata is not UTF-8"))?,
         "possibleExecutableInputs":executable_inputs,"dependencyExecutableInventoryAvailable":view==DependencyView::Resolved,"compilationEstablished":false,"buildScriptsExecuted":false,"completeExecutableDependencyClosureEstablished":false});
+    if config.workspace_members == CargoMemberMode::BoundedDirectoryGlobs {
+        receipt["workspaceMembers"] = json!({"mode":"bounded-directory-globs", "expansions":member_expansions, "preAndPostObservedEqual":true});
+    }
     if config.root_mode == CargoRootMode::StandalonePackage {
         receipt["rootMode"] = json!("standalone-package");
     }

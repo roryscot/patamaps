@@ -131,6 +131,36 @@ def verify(root, work, env, run):
     assert positive["shard"]["entities"] == moved["shard"]["entities"], "Root relocation changed physical identities or normalized facts"
     assert positive["shard"]["metadata"]["observation"]["metadataDigest"] != moved["shard"]["metadata"]["observation"]["metadataDigest"]
 
+    # G3 uses actual Cargo metadata; expansion is owner opt-in and fully captured.
+    globbed = cases / "bounded-members"
+    globbed.mkdir()
+    for name in ["app","helper","platform"]:
+        shutil.copytree(base/name,globbed/"crates"/name)
+    for name in ["Cargo.lock","rust-toolchain.toml"]:shutil.copy2(base/name,globbed/name)
+    (globbed/"Cargo.toml").write_text((base/"Cargo.toml").read_text().replace('members=["app","helper","platform"]','members=["crates/*"]').replace('path="helper"','path="crates/helper"'))
+    provider("g3-globs-default-refused",globbed,refuse="NATIVE_CARGO_MEMBERS")
+    glob_config=configuration(workspaceMembers="bounded-directory-globs")
+    expanded=provider("g3-globs-explicit",globbed,glob_config)
+    expansion=expanded["shard"]["metadata"]["observation"]["workspaceMembers"]
+    assert expansion=={"mode":"bounded-directory-globs","preAndPostObservedEqual":True,"expansions":[{"manifest":"Cargo.toml","pattern":"crates/*","manifests":["crates/app/Cargo.toml","crates/helper/Cargo.toml","crates/platform/Cargo.toml"]}]}
+    provider("g3-globs-missing-capture",globbed,glob_config,omitted=("crates/helper/Cargo.toml",),refuse="NATIVE_CARGO_MANIFEST_INPUT")
+    for label,pattern,extra in [("recursive","crates/**",""),("question","crates/?",""),("escape","../*",""),("exclusions","crates/*",'exclude=["crates/helper"]\n')]:
+        case=cases/("glob-"+label);shutil.copytree(globbed,case)
+        text=(case/"Cargo.toml").read_text().replace('members=["crates/*"]',f'members=["{pattern}"]\n'+extra)
+        (case/"Cargo.toml").write_text(text)
+        provider("g3-globs-"+label,case,glob_config,refuse="NATIVE_CARGO_MEMBERS")
+    linked=cases/"glob-symlink";shutil.copytree(globbed,linked)
+    (linked/"crates/alias").symlink_to((base/"helper").resolve(),target_is_directory=True)
+    provider("g3-globs-symlink",linked,glob_config,refuse="NATIVE_CARGO_MEMBERS")
+    racing=cases/"glob-racing";shutil.copytree(globbed,racing)
+    wrapper=work/"member-mutating-cargo"
+    wrapper.write_text("#!"+sys.executable+"\nimport pathlib,subprocess,sys\n"+
+        "result=subprocess.run(["+repr(str(cargo))+",*sys.argv[1:]])\n"+
+        "if sys.argv[1:2]==['metadata']:pathlib.Path("+repr(str(racing/"crates/added-after-metadata"))+").mkdir()\n"+
+        "sys.exit(result.returncode)\n")
+    wrapper.chmod(0o700)
+    provider("g3-globs-post-metadata-change",racing,configuration(workspaceMembers="bounded-directory-globs",cargo=str(wrapper.resolve()),cargoDigest=sha(wrapper)),refuse="NATIVE_CARGO_MEMBERS_CHANGED")
+
     malformed = cases / "malformed"
     shutil.copytree(base, malformed)
     (malformed / "app/Cargo.toml").write_text((malformed / "app/Cargo.toml").read_text() + "\nbroken = [")
@@ -211,7 +241,7 @@ def verify(root, work, env, run):
              mutate_live=lambda: (stale / "app/Cargo.toml").write_text((stale / "app/Cargo.toml").read_text() + "\n# concurrent edit\n"))
     # Exercise the real generic workspace bridge, not only a direct provider call.
     owner = cases / "workspace-bridge"
-    shutil.copytree(base, owner)
+    shutil.copytree(globbed, owner)
     provider_binary = work / "captured-native-provider"
     shutil.copy2(cli, provider_binary)
     cargo_alias = work / "captured-cargo"
@@ -221,6 +251,7 @@ def verify(root, work, env, run):
     bridge_config = configuration(cargo=str(cargo_alias.resolve(strict=False)),
                                   rustc=str(rustc_alias.resolve(strict=False)))
     # Keep lexical configured paths as well as the resolved byte identities.
+    bridge_config["workspaceMembers"] = "bounded-directory-globs"
     bridge_config["cargo"] = str(cargo_alias.absolute())
     bridge_config["rustc"] = str(rustc_alias.absolute())
     cargo_inputs = [v["receipt"]["path"] for v in inputs(owner)]
@@ -274,6 +305,7 @@ def verify(root, work, env, run):
                               "sourceRediscovery": "not-performed", "status": "verified-record-bindings"}, offline_result
     observed.append({"control": "m1-native-workspace-offline-reconstruction", "result": "verified",
                      "providerAndConfiguredCargoRustcAndManifestUnavailable": True,
+                     "boundedMemberExpansionReplayed": True,
                      "externalProgramsAbsentFromPath": True, "retainedMoves": moves})
 
     tampered = json.loads(saved.read_bytes())
@@ -288,10 +320,10 @@ def verify(root, work, env, run):
     observed.append({"control": "m1-rehashed-native-workspace-lineage", "result": "refused",
                      "code": "WORKSPACE_COMPOSITION_BINDING"})
 
-    return {"status": "passed", "controls": observed, "engines": engine, "nativeBinaryDigest": sha(cli), "newNativeTomlUnitTests": 10,
+    return {"status": "passed", "controls": observed, "engines": engine, "nativeBinaryDigest": sha(cli), "newNativeTomlUnitTests": 10, "memberExpansionUnitTests": 1,
             "existingBoundedProcessTests": 2, "cargo": {"path": str(cargo), "digest": sha(cargo)},
             "rustc": {"path": str(rustc), "digest": sha(rustc)}, "compiledFixtureEstablishedByTheseObservations": False,
-            "limits": {"workspaceMembers": "explicit literal members; glob members refuse",
+            "limits": {"workspaceMembers": "literal default; opt-in one-star directory glob, exact captured expansion, exclusions refuse",
                        "ambientConfig": "outside owner root refuses without copying values",
                        "cargoConfig": "only matching build.target and net.offline=true",
                        "artifactAndRuntimeAcceptance": "not established"}}

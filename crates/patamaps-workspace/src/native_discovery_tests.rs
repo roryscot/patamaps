@@ -412,3 +412,79 @@ fn standalone_cargo_root_is_explicit_and_does_not_read_ancestor_values() {
     assert_eq!(fs::read(root.join("Cargo.toml")).unwrap(), [0xff, 0xfe]);
     eprintln!("Retained standalone root fixture: {}", root.display());
 }
+
+#[test]
+fn bounded_member_expansion_requires_captured_ordinary_manifests() {
+    use std::sync::atomic::{AtomicU64, Ordering};
+    static SEQ: AtomicU64 = AtomicU64::new(0);
+    let root = std::env::temp_dir().join(format!(
+        "patamaps-members-{}-{}",
+        std::process::id(),
+        SEQ.fetch_add(1, Ordering::Relaxed)
+    ));
+    fs::create_dir(&root).unwrap();
+    let root = fs::canonicalize(root).unwrap();
+    fs::create_dir(root.join("crates")).unwrap();
+    for name in ["b", "a"] {
+        fs::create_dir(root.join("crates").join(name)).unwrap();
+        fs::write(
+            root.join("crates").join(name).join("Cargo.toml"),
+            [0xff, 0xfe],
+        )
+        .unwrap();
+    }
+    let inputs = Inputs::from([
+        ("crates/a/Cargo.toml", "captured-a"),
+        ("crates/b/Cargo.toml", "captured-b"),
+    ]);
+    assert_eq!(
+        expand_member(&root, &root, "crates/*", &inputs).unwrap(),
+        vec!["crates/a/Cargo.toml", "crates/b/Cargo.toml"]
+    );
+    // On-disk bytes are intentionally invalid UTF-8: expansion reads names and
+    // file kinds only; source-byte matching belongs to same_sources separately.
+    let missing = Inputs::from([("crates/a/Cargo.toml", "captured-a")]);
+    assert!(matches!(
+        expand_member(&root, &root, "crates/*", &missing),
+        Err(Error::Refused {
+            code: "NATIVE_CARGO_MANIFEST_INPUT",
+            ..
+        })
+    ));
+    for pattern in [
+        "crates/**",
+        "crates/a*",
+        "crates/?",
+        "crates/[ab]",
+        "../*",
+        "/crates/*",
+        "crates/*/*",
+        "crates///*",
+    ] {
+        assert!(
+            expand_member(&root, &root, pattern, &inputs).is_err(),
+            "{pattern}"
+        );
+    }
+    fs::create_dir(root.join("empty")).unwrap();
+    assert!(expand_member(&root, &root, "empty/*", &inputs).is_err());
+    fs::create_dir(root.join("large")).unwrap();
+    for n in 0..1025 {
+        fs::create_dir(root.join("large").join(n.to_string())).unwrap();
+    }
+    assert!(matches!(
+        expand_member(&root, &root, "large/*", &inputs),
+        Err(Error::Refused {
+            code: "NATIVE_CARGO_MEMBERS",
+            ..
+        })
+    ));
+    #[cfg(unix)]
+    {
+        std::os::unix::fs::symlink(root.join("crates/a"), root.join("alias")).unwrap();
+        assert!(expand_member(&root, &root, "alias/*", &inputs).is_err());
+        std::os::unix::fs::symlink(root.join("crates/a"), root.join("crates/alias")).unwrap();
+        assert!(expand_member(&root, &root, "crates/*", &inputs).is_err());
+    }
+    eprintln!("Retained member expansion fixture: {}", root.display());
+}
