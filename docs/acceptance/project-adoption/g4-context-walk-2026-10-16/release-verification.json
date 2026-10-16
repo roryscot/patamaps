@@ -1,0 +1,46 @@
+{
+  "status": "passed",
+  "scope": "full retained-context verification only; no native-build/watch claim",
+  "cacheState": "uncontrolled; no cache deletion or reset",
+  "filesDeleted": 0,
+  "runs": [
+    {
+      "label": "release-first",
+      "profile": "release",
+      "cliDigest": "7e7a770c5eac4ba03f26016a6a6dba89bdb536e72d2e0c7bd3a7da3c86777087",
+      "seconds": 60.419,
+      "exitCode": 0,
+      "entries": 195911,
+      "digest": "sha256:1bdf06561b8de728d473ae270993dbef5f80dac1e30339a307236fcc3579ecb9"
+    },
+    {
+      "label": "debug",
+      "profile": "debug",
+      "cliDigest": "17eb39de12510ac1bedcf83efed8e53694bb661eeb562c780fe9b937714dd395",
+      "seconds": 112.594,
+      "exitCode": 0,
+      "entries": 195911,
+      "digest": "sha256:1bdf06561b8de728d473ae270993dbef5f80dac1e30339a307236fcc3579ecb9"
+    },
+    {
+      "label": "release-repeat",
+      "profile": "release",
+      "cliDigest": "7e7a770c5eac4ba03f26016a6a6dba89bdb536e72d2e0c7bd3a7da3c86777087",
+      "seconds": 22.769,
+      "exitCode": 0,
+      "entries": 195911,
+      "digest": "sha256:1bdf06561b8de728d473ae270993dbef5f80dac1e30339a307236fcc3579ecb9"
+    }
+  ],
+  "sourceRestored": true,
+  "releaseBuild": {
+    "command": "cargo build --locked --offline --release -p patamaps-cli",
+    "result": "passed",
+    "secondsReportedByCargo": 315
+  },
+  "guardRecords": [
+    "2b29cc10-8534-4978-9ca6-c948de940b66",
+    "4d2a7429-6abb-4f7a-95e3-61665fe655a8"
+  ],
+  "interpretation": "Sequential uncontrolled-cache observations; no isolated profile speedup, native build, practical watch or readiness claim."
+}
