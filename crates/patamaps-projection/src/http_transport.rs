@@ -148,7 +148,7 @@ fn template(path: &str) -> Option<BTreeSet<String>> {
 fn parameters(value: Option<&Value>, subject: &str) -> Result<Schema, CheckError> {
     let empty = serde_json::json!({"$schema":"https://json-schema.org/draft/2020-12/schema",
         "type":"object","additionalProperties":false,"properties":{}});
-    let node = crate::http_schema::parse(value.unwrap_or(&empty), subject)?;
+    let node = crate::http_schema::parse_transport(value.unwrap_or(&empty), subject)?;
     if let Schema::Object { fields, extra, .. } = &node
         && matches!(extra.as_ref(), Schema::Never)
         && fields.values().all(|v| {
@@ -334,14 +334,14 @@ fn bindings(projection: &CheckedProjection) -> Result<Vec<Binding<'_>>, CheckErr
             }
         }
         let request_value: Value = attribute(input, "jsonSchema")?;
-        let body = crate::http_schema::parse(&request_value, &input.id)?;
+        let body = crate::http_schema::parse_transport(&request_value, &input.id)?;
         if !has_body && !matches!(body, Schema::Null) {
             return Err(bad(
                 "HTTP_TRANSPORT_BODY",
                 "Bodyless operations must declare null input",
             ));
         }
-        let response = crate::http_schema::parse(&handler.response_schema, id)?;
+        let response = crate::http_schema::parse_transport(&handler.response_schema, id)?;
         if (backend.method == "HEAD" || [204, 205].contains(&backend.success_status))
             && !matches!(response, Schema::Null)
         {
@@ -418,7 +418,7 @@ fn bindings(projection: &CheckedProjection) -> Result<Vec<Binding<'_>>, CheckErr
                         "Error statuses must be unique client/server failures",
                     ));
                 }
-                let node = crate::http_schema::parse(&error.schema, id)?;
+                let node = crate::http_schema::parse_transport(&error.schema, id)?;
                 if backend.method == "HEAD" && !matches!(node, Schema::Null) {
                     return Err(bad("HTTP_ERROR_CONTRACT", "HEAD errors have null bodies"));
                 }

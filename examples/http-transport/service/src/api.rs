@@ -15,6 +15,14 @@ struct Evaluate {
     message: String,
     fail: Option<bool>,
 }
+#[derive(Deserialize, Serialize)]
+#[serde(deny_unknown_fields)]
+struct Scalars {
+    uuid: String,
+    quantity: String,
+    count: u64,
+    delta: i64,
+}
 #[derive(Deserialize)]
 #[serde(deny_unknown_fields)]
 struct Replay {
@@ -106,6 +114,12 @@ async fn fetch_item(
         verbose: filter.verbose,
     }))
 }
+async fn scalars(
+    State(_context): State<Context>,
+    body: ::std::result::Result<Json<Scalars>, JsonRejection>,
+) -> Result<Json<Scalars>> {
+    body.map_err(|e| problem(e.status(), &e.body_text()))
+}
 async fn remove_item(State(context): State<Context>, Path(_id): Path<String>) -> StatusCode {
     if context.tag == "owned-state" {
         StatusCode::NO_CONTENT
@@ -120,6 +134,7 @@ pub fn router() -> Router {
     Router::new()
         .route("/evaluate", post(evaluate))
         .route("/replay", post(replay))
+        .route("/scalars", post(scalars))
         .route(
             "/items/{id}",
             get(fetch_item)

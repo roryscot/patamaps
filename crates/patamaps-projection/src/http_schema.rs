@@ -17,6 +17,8 @@ pub(super) enum Schema {
         min: u64,
         max: Option<u64>,
         values: Option<Vec<String>>,
+        uuid: bool,
+        unsigned_decimal: bool,
     },
     Number {
         integer: bool,
@@ -44,6 +46,7 @@ struct Parser<'a> {
     subject: &'a str,
     nodes: usize,
     active: BTreeSet<String>,
+    transport: bool,
 }
 
 impl Parser<'_> {
@@ -238,7 +241,15 @@ impl Parser<'_> {
             Some("string") => {
                 self.allowed(
                     map,
-                    &["type", "minLength", "maxLength", "enum", "const"],
+                    &[
+                        "type",
+                        "minLength",
+                        "maxLength",
+                        "enum",
+                        "const",
+                        "format",
+                        "pattern",
+                    ],
                     top,
                 )?;
                 let min = self.count(map, "minLength", Some(0))?.expect("default");
@@ -265,7 +276,23 @@ impl Parser<'_> {
                 } else {
                     None
                 };
-                Ok(Schema::String { min, max, values })
+                let uuid = match map.get("format") {
+                    None => false,
+                    Some(v) if self.transport && v.as_str() == Some("uuid") => true,
+                    _ => return Err(self.error()),
+                };
+                let unsigned_decimal = match map.get("pattern") {
+                    None => false,
+                    Some(v) if self.transport && v.as_str() == Some("^(0|[1-9][0-9]*)$") => true,
+                    _ => return Err(self.error()),
+                };
+                Ok(Schema::String {
+                    min,
+                    max,
+                    values,
+                    uuid,
+                    unsigned_decimal,
+                })
             }
             Some("number" | "integer") => {
                 self.allowed(map, &["type", "minimum", "maximum", "format"], top)?;
@@ -287,6 +314,9 @@ impl Parser<'_> {
                         Some("int8") => (-128.0, 127.0),
                         Some("int16") => (-32768.0, 32767.0),
                         Some("int32") => (-2147483648.0, 2147483647.0),
+                        // Explicit transport interoperability subset, never a claim of full u64/i64.
+                        Some("uint64") if self.transport => (0.0, SAFE),
+                        Some("int64") if self.transport => (-SAFE, SAFE),
                         _ => return Err(self.error()),
                     };
                     min = Some(min.unwrap_or(lo).max(lo));
@@ -315,11 +345,20 @@ impl Parser<'_> {
 }
 
 pub(super) fn parse(value: &Value, subject: &str) -> Result<Schema, CheckError> {
+    parse_profile(value, subject, false)
+}
+
+pub(super) fn parse_transport(value: &Value, subject: &str) -> Result<Schema, CheckError> {
+    parse_profile(value, subject, true)
+}
+
+fn parse_profile(value: &Value, subject: &str, transport: bool) -> Result<Schema, CheckError> {
     let mut parser = Parser {
         root: value,
         subject,
         nodes: 0,
         active: BTreeSet::new(),
+        transport,
     };
     if value.get("$schema").and_then(Value::as_str) != Some(DIALECT)
         || patamaps_contracts::canonical_bytes(value)?.len() > 262144
@@ -346,7 +385,13 @@ impl Schema {
             Self::Never => "false".into(),
             Self::Null => "value.is_null()".into(),
             Self::Boolean => "value.is_boolean()".into(),
-            Self::String { min, max, values } => {
+            Self::String {
+                min,
+                max,
+                values,
+                uuid,
+                unsigned_decimal,
+            } => {
                 let mut terms = Vec::new();
                 if *min > 0 {
                     terms.push(format!("text.chars().count() >= {min}"));
@@ -363,6 +408,12 @@ impl Schema {
                             .collect::<Vec<_>>()
                             .join(",")
                     ));
+                }
+                if *uuid {
+                    terms.push("text.len() == 36 && text.bytes().enumerate().all(|(i,b)| if [8,13,18,23].contains(&i) { b == b'-' } else { b.is_ascii_hexdigit() })".into());
+                }
+                if *unsigned_decimal {
+                    terms.push("(text == \"0\" || (!text.is_empty() && matches!(text.as_bytes()[0], b'1'..=b'9') && text.bytes().all(|b| b.is_ascii_digit())))".into());
                 }
                 format!(
                     "value.as_str().is_some_and(|text| {{ let _ = text; {} }})",
@@ -574,7 +625,13 @@ impl Schema {
             Self::Never => "false".into(),
             Self::Null => "value === null".into(),
             Self::Boolean => "typeof value === 'boolean'".into(),
-            Self::String { min, max, values } => {
+            Self::String {
+                min,
+                max,
+                values,
+                uuid,
+                unsigned_decimal,
+            } => {
                 let mut terms = vec![
                     "typeof value === 'string'".into(),
                     "unicodeScalars(value)".into(),
@@ -592,6 +649,12 @@ impl Schema {
                             .collect::<Vec<_>>()
                             .join(",")
                     ));
+                }
+                if *uuid {
+                    terms.push("value.length === 36 && Array.from(value).every((c,i) => [8,13,18,23].includes(i) ? c === '-' : /^[0-9a-fA-F]$/.test(c))".into());
+                }
+                if *unsigned_decimal {
+                    terms.push("(value === '0' || (value.length > 0 && /^[1-9]$/.test(value[0]) && Array.from(value).every(c => /^[0-9]$/.test(c))))".into());
                 }
                 terms.join(" && ")
             }
@@ -736,6 +799,42 @@ mod tests {
             let mut schema = schema;
             schema["$schema"] = json!(DIALECT);
             assert!(parse(&schema, "unsupported").is_err(), "{schema}");
+        }
+    }
+    #[test]
+    fn transport_scalar_formats_are_explicit_and_bounded() {
+        for format in ["uint64", "int64"] {
+            let schema = json!({"$schema":DIALECT,"type":"integer","format":format});
+            assert!(parse(&schema, "legacy").is_err());
+            let Schema::Number { integer, min, max } =
+                parse_transport(&schema, "transport").unwrap()
+            else {
+                panic!("number expected")
+            };
+            assert!(integer);
+            assert_eq!(max, Some(SAFE));
+            assert_eq!(min, Some(if format == "uint64" { 0.0 } else { -SAFE }));
+        }
+        for schema in [
+            json!({"$schema":DIALECT,"type":"string","format":"uuid"}),
+            json!({"$schema":DIALECT,"type":"string","pattern":"^(0|[1-9][0-9]*)$"}),
+        ] {
+            assert!(parse(&schema, "legacy").is_err());
+            let node = parse_transport(&schema, "transport").unwrap();
+            assert_eq!(node.ts(), "string");
+            assert!(node.rust().contains("text.bytes()"));
+            assert!(node.typescript().contains("Array.from(value)"));
+        }
+        for schema in [
+            json!({"type":"string","pattern":"[0-9]+"}),
+            json!({"type":"string","format":"email"}),
+            json!({"type":"number","format":"uint64"}),
+            json!({"type":"integer","format":"uint128"}),
+            json!({"type":"integer","format":"uint64","minimum":9007199254740992_u64}),
+        ] {
+            let mut schema = schema;
+            schema["$schema"] = json!(DIALECT);
+            assert!(parse_transport(&schema, "unsupported").is_err(), "{schema}");
         }
     }
     #[test]

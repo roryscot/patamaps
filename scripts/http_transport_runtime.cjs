@@ -19,6 +19,7 @@ async function failure(label,code,fn){
    if(url.pathname==='/api/evaluate'){
     const body=JSON.parse(raw);
     path=wrongProxy?'/evaluate':Object.hasOwn(body,'expected_report')?'/replay':'/evaluate';
+   } else if(url.pathname==='/api/scalars'){path='/scalars';
    } else if(url.pathname.startsWith('/api/items/')){
     const id=decodeURIComponent(url.pathname.slice('/api/items/'.length));
     path='/items/'+encodeURIComponent(id)+url.search;
@@ -76,6 +77,34 @@ async function failure(label,code,fn){
     rows.push({label:endpoint+'-'+method+'-health',status:200});
    }
   }
+  // Frozen scalar cases exercise generated validators and real Rust Serde transport.
+  const scalar={uuid:'00112233-4455-6677-8899-AABBCCDDEEFF',quantity:'18446744073709551616000000000000000000000',count:Number.MAX_SAFE_INTEGER,delta:-Number.MAX_SAFE_INTEGER};
+  for(const endpoint of ['backend','frontend']){
+   for(const [label,body] of [['safe-bounds',scalar],['zero',{...scalar,count:0,delta:0,quantity:'0'}]]){
+    const result=await api.callOperation(prefix+'scalars',body,{base:endpoint==='backend'?backend:base,endpoint});
+    assert.equal(result.status,200);assert.deepEqual(result.body,body);
+    rows.push({label:endpoint+'-scalars-'+label,status:200,quantityPreserved:result.body.quantity===body.quantity});
+   }
+  }
+  const scalarBad=[
+   ['unsafe-count',{count:Number.MAX_SAFE_INTEGER+1}],['negative-count',{count:-1}],
+   ['fractional-count',{count:1.5}],['unsafe-delta',{delta:-Number.MAX_SAFE_INTEGER-1}],
+   ['uuid-short',{uuid:'00112233'}],['uuid-nonhex',{uuid:'g0112233-4455-6677-8899-aabbccddeeff'}],
+   ['uuid-no-hyphens',{uuid:'00112233445566778899aabbccddeeff'}],['uuid-newline',{uuid:scalar.uuid+'\n'}],
+   ['quantity-empty',{quantity:''}],['quantity-leading-zero',{quantity:'01'}],
+   ['quantity-sign',{quantity:'+1'}],['quantity-negative',{quantity:'-1'}],
+   ['quantity-fraction',{quantity:'1.0'}],['quantity-exponent',{quantity:'1e3'}],
+   ['quantity-newline',{quantity:'1\n'}],['quantity-unicode-digits',{quantity:'١'}],
+  ];
+  for(const [label,patch] of scalarBad){
+   let reached=false;
+   await failure('scalar-input-'+label,'HTTP_INVALID_REQUEST',()=>api.callOperation(prefix+'scalars',{...scalar,...patch},{base:backend,transport:async()=>{reached=true;throw new Error('unexpected fetch');}}));
+   assert.equal(reached,false);
+   await failure('scalar-response-'+label,'HTTP_RESPONSE_CONTRACT',()=>api.callOperation(prefix+'scalars',scalar,{base:backend,transport:async()=>new Response(JSON.stringify({...scalar,...patch}),{status:200,headers:jsonHeaders})}));
+  }
+  const serdeNegative=await fetch(backend+'/scalars',{method:'POST',headers:jsonHeaders,body:JSON.stringify({...scalar,count:-1})});
+  assert.equal(serdeNegative.status,422);
+  rows.push({label:'scalar-rust-negative-u64',status:422});
   const denied=await api.callOperation(prefix+'get-item',null,{base:backend,endpoint:'backend',path:{id:'x'},headers:{'x-proof':'deny'}});
   assert.equal(denied.status,400);assert.equal(denied.body.error,'header-refusal');
   rows.push({label:'header-domain-refusal',status:400});

@@ -16,6 +16,9 @@ REPLY=obj({"state":{"type":"string"},"kind":{"type":"string"},"value":{"type":"s
  "limit":{"type":["integer","null"],"format":"uint32"},"verbose":{"type":["boolean","null"]}})
 EVALUATE=obj({"message":{"type":"string","maxLength":70000},"fail":{"type":"boolean"}},["message"])
 REPLAY=obj({"expected_report":{"type":"string","maxLength":70000}})
+SCALARS=obj({"uuid":{"type":"string","format":"uuid"},
+ "quantity":{"type":"string","pattern":"^(0|[1-9][0-9]*)$"},
+ "count":{"type":"integer","format":"uint64"},"delta":{"type":"integer","format":"int64"}})
 HEALTH=obj({"ok":{"type":"boolean"}})
 NULL=schema("null")
 PREFIX="urn:transport:operation:"
@@ -43,6 +46,10 @@ def definitions():
         rows.append(dict(name=method.lower()+"-health",frontend={"method":method,"path":"/api/health"},
             backend={"method":method,"path":"/health","successStatus":200},handler="health",request=NULL,
             response=NULL if method=="HEAD" else HEALTH,arguments=[],output={"mode":"json","successType":"serde_json::Value"}))
+    rows.append(dict(name="scalars",frontend={"method":"POST","path":"/api/scalars"},
+        backend={"method":"POST","path":"/scalars","successStatus":200},handler="scalars",request=SCALARS,response=SCALARS,
+        arguments=[state,{"extractor":"json-result","type":"Scalars"}],
+        output={"mode":"result-json","successType":"Scalars","errorType":"Problem"}))
     return rows
 
 def verify(root,work,env,run):
@@ -147,6 +154,8 @@ def verify(root,work,env,run):
             from cross_stack_bindings import stop
             stop(process)
     for label,mutate,code in [
+        ("unsupported-pattern",lambda rows:rows[-1]["request"]["properties"]["quantity"].update(pattern="[0-9]+"),"HTTP_JSON_SCHEMA_UNSUPPORTED"),
+        ("unsupported-format",lambda rows:rows[-1]["request"]["properties"]["uuid"].update(format="email"),"HTTP_JSON_SCHEMA_UNSUPPORTED"),
         ("missing-group",lambda rows:rows[1].pop("frontendGroup"),"HTTP_PROXY_GROUP"),
         ("mismatched-method",lambda rows:rows[0]["frontend"].update(method="PUT"),"HTTP_ENDPOINT_CONFLICT"),
         ("missing-path-required",lambda rows:rows[2]["pathParameters"].update(required=[]),"HTTP_PARAMETER_SCHEMA"),

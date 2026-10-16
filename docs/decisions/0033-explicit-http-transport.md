@@ -45,7 +45,26 @@ responseSchema and each error schema must be complete supported draft 2020-12
 schemas, not placeholders. Error entries contain status and schema; unique 400–599
 statuses preserve structured errors such as {error,issues}, including dynamic
 messages. The JSON DTO subset from decision0032 is reused; unsupported assertion
-keywords/formats still refuse.
+keywords/formats still refuse except the explicitly bounded transport extensions below.
+
+Transport parsing additionally asserts canonical hyphenated UUID text (36 ASCII
+characters, hexadecimal groups 8-4-4-4-12, either hex case, no version/variant
+restriction). It supports exactly the pattern `^(0|[1-9][0-9]*)$` as unsigned
+decimal text: no sign, leading zero, whitespace, exponent or Unicode digit.
+These strings stay strings, including quantities above u64. Arbitrary patterns
+and other string formats refuse. `uint64` and `int64` are explicitly restricted
+to the interoperable safe integer range (0..9007199254740991 and its signed
+counterpart), intersected with declared bounds. Larger numeric values refuse;
+applications needing them must declare an explicit string representation. This
+is a supported subset, not full 64-bit JSON numeric coverage. The older JSON-2
+profile retains its UUID, pattern and 64-bit-format refusals.
+
+The scalar controls echo typed u64/i64 values and exact quantity strings through
+real Rust and the controlled proxy, and freeze malformed UUID/quantity and unsafe
+integer input/response controls. Serde String alone does not enforce UUID or the
+decimal pattern on the server; these are generated client assertions, not a claim
+that the witness makes server validation equivalent. Current-source execution of
+these new scalar controls is pending CI. The accepted 1588a3c receipt predates them.
 
 Extractors: state, json, json-result, path, query and headers. Typed variants
 carry an explicit Rust type path; headers means HeaderMap. Body extraction must
