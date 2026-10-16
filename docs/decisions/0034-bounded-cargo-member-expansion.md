@@ -46,3 +46,29 @@ Its green source status is not used as proof of the new controls. Existing-proje
 Cargo qualification, additional reviewed config/Next contexts and the rest of the
 adoption plan remain required. New retained-staging controls introduced after
 63abaed have separate current-source verification pending.
+
+## Literal exclusion extension — implementation, execution pending
+
+The explicit workspaceExclusions: literal-paths mode requires bounded-directory-globs.
+Default refuse-with-globs retains the current rejection and its frozen negative.
+Support at most128 unique normalized workspace-relative literal directory paths;
+no glob syntax, escapes, duplicate/nested values or ancestor/descendant overlap with a
+matched member directory. Explicit literal member/exclusion overlaps also refuse.
+Exact matched ordinary glob directories can be excluded
+without loading their manifest values or requiring those manifest captures.
+Selected path dependencies still require their captured manifests, even if the
+dependency package is excluded from workspace membership. This is not arbitrary
+Cargo exclusion compatibility or proof that Cargo performs no filesystem reads.
+
+Record exact excluded directory names alongside included manifest expansion;
+count both against the existing1024 aggregate match bound. Check the same inventory
+after metadata; an excluded-directory membership mutation must refuse. Confirm
+included members against actual Cargo output as before. Capture retains the raw
+root manifest and declaration context; excluded values are not added to inputs.
+
+Acceptance: actual offline Cargo with a malformed, uncaptured excluded manifest
+succeeds and emits only retained members; default mode still refuses; missing
+included capture, excluded path dependency without captured manifest, ambiguous
+literal overlap, duplicate/escape/glob exclusions and symlinks refuse. A controlled
+post-metadata added excluded match must refuse. Preserve earlier failed receipts.
+Execution is pending until the new controls pass; the63abaed receipt predates it.

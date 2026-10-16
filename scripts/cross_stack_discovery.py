@@ -163,6 +163,61 @@ def verify(root, work, env, run):
     wrapper.chmod(0o700)
     provider("g3-globs-post-metadata-change",racing,configuration(workspaceMembers="bounded-directory-globs",cargo=str(wrapper.resolve()),cargoDigest=sha(wrapper)),refuse="NATIVE_CARGO_MEMBERS_CHANGED")
 
+    # Exclusions require a second explicit policy; old refusal remains frozen.
+    excluded_case=cases/"literal-exclusion";shutil.copytree(globbed,excluded_case)
+    excluded_file=excluded_case/"crates/unselected/Cargo.toml";excluded_file.parent.mkdir()
+    excluded_raw=b"\xff\xfe controlled-unselected-manifest-value"
+    excluded_file.write_bytes(excluded_raw)
+    text=(excluded_case/"Cargo.toml").read_text().replace('members=["crates/*"]','members=["crates/*"]\nexclude=["crates/unselected"]')
+    (excluded_case/"Cargo.toml").write_text(text)
+    omitted=("crates/unselected/Cargo.toml",)
+    provider("g3-literal-exclusion-default",excluded_case,glob_config,omitted=omitted,refuse="NATIVE_CARGO_MEMBERS")
+    exclusion_config=configuration(workspaceMembers="bounded-directory-globs",workspaceExclusions="literal-paths")
+    selected=provider("g3-literal-exclusion-explicit",excluded_case,exclusion_config,omitted=omitted)
+    evidence=selected["shard"]["metadata"]["observation"]["workspaceMembers"]
+    assert evidence["exclusionMode"]=="literal-paths"
+    assert evidence["expansions"]==[{"manifest":"Cargo.toml","pattern":"crates/*","manifests":["crates/app/Cargo.toml","crates/helper/Cargo.toml","crates/platform/Cargo.toml"],"excludedDirectories":["crates/unselected"]}]
+    assert excluded_file.read_bytes()==excluded_raw
+    assert "controlled-unselected-manifest-value" not in json.dumps(selected)
+    observed[-1].update(uncapturedMalformedManifestCompatible=True,excludedManifestCaptured=False,excludedManifestUnchanged=True)
+    provider("g3-exclusion-included-capture-missing",excluded_case,exclusion_config,omitted=(*omitted,"crates/helper/Cargo.toml"),refuse="NATIVE_CARGO_MANIFEST_INPUT")
+    provider("g3-exclusion-without-glob-mode",excluded_case,configuration(workspaceExclusions="literal-paths"),omitted=omitted,refuse="NATIVE_CARGO_EXCLUSIONS")
+    for label,values in [("duplicate",["crates/unselected","crates/unselected"]),("nested",["crates/unselected","crates/unselected/nested"]),("escape",["../escape"]),("glob",["crates/*"]),("ancestor-overlap",["crates"]),("descendant-overlap",["crates/unselected","crates/app/nested"])]:
+        case=cases/("exclusion-"+label);shutil.copytree(excluded_case,case)
+        (case/"Cargo.toml").write_text(text.replace('exclude=["crates/unselected"]','exclude='+json.dumps(values)))
+        provider("g3-exclusion-"+label,case,exclusion_config,omitted=omitted,refuse="NATIVE_CARGO_EXCLUSIONS")
+    literal_overlap=cases/"exclusion-literal-member-overlap";shutil.copytree(excluded_case,literal_overlap)
+    (literal_overlap/"Cargo.toml").write_text(text.replace('members=["crates/*"]','members=["crates/app","crates/helper","crates/platform"]').replace('exclude=["crates/unselected"]','exclude=["crates/unselected","crates/app"]'))
+    provider("g3-exclusion-explicit-member-overlap",literal_overlap,exclusion_config,omitted=omitted,refuse="NATIVE_CARGO_EXCLUSIONS")
+    excluded_link=cases/"exclusion-symlink";shutil.copytree(excluded_case,excluded_link)
+    (excluded_link/"Cargo.toml").write_text(text.replace('exclude=["crates/unselected"]','exclude=["crates/unselected","crates/linked"]'))
+    (excluded_link/"crates/linked").symlink_to((base/"helper").resolve(),target_is_directory=True)
+    provider("g3-exclusion-symlink",excluded_link,exclusion_config,omitted=omitted,refuse="NATIVE_CARGO_MEMBERS")
+    dependency_missing=cases/"excluded-dependency-missing";shutil.copytree(excluded_case,dependency_missing)
+    app_manifest=dependency_missing/"crates/app/Cargo.toml"
+    app_manifest.write_text(app_manifest.read_text().replace('[dependencies]\n','[dependencies]\nexcluded-local={path="../unselected"}\n'))
+    provider("g3-excluded-path-dependency-uncaptured",dependency_missing,exclusion_config,omitted=omitted,refuse="NATIVE_CARGO_MANIFEST_INPUT")
+    dependency=cases/"excluded-dependency-captured";shutil.copytree(dependency_missing,dependency)
+    (dependency/"crates/unselected/Cargo.toml").write_text('[package]\nname="excluded-local"\nversion="0.1.0"\nedition="2024"\n')
+    (dependency/"crates/unselected/src").mkdir();(dependency/"crates/unselected/src/lib.rs").write_text('pub fn present() {}\n')
+    run("g3-excluded-dependency-lock",[cargo,"generate-lockfile","--offline","--manifest-path",dependency/"Cargo.toml"])
+    included_dependency=provider("g3-excluded-path-dependency-captured",dependency,exclusion_config)
+    meta=json.loads(included_dependency["shard"]["metadata"]["observation"]["metadataBytes"])
+    package=next(p for p in meta["packages"] if p["name"]=="excluded-local")
+    assert package["id"] not in meta["workspace_members"]
+    assert "crates/unselected/Cargo.toml" in {v["path"] for v in included_dependency["inputs"]}
+    assert len([v for v in included_dependency["shard"]["entities"] if v["kind"]=="cargo-package"])==3
+    observed[-1].update(excludedDependencyCaptured=True,excludedDependencyWorkspaceMember=False)
+    mutated=cases/"excluded-match-mutation";shutil.copytree(excluded_case,mutated)
+    (mutated/"Cargo.toml").write_text(text.replace('exclude=["crates/unselected"]','exclude=["crates/unselected","crates/added-excluded"]'))
+    mutation_wrapper=work/"excluded-member-mutating-cargo"
+    mutation_wrapper.write_text("#!"+sys.executable+"\nimport pathlib,subprocess,sys\n"+
+        "result=subprocess.run(["+repr(str(cargo))+",*sys.argv[1:]])\n"+
+        "if sys.argv[1:2]==['metadata']:pathlib.Path("+repr(str(mutated/"crates/added-excluded"))+").mkdir()\n"+
+        "sys.exit(result.returncode)\n")
+    mutation_wrapper.chmod(0o700)
+    provider("g3-excluded-match-post-metadata-change",mutated,configuration(workspaceMembers="bounded-directory-globs",workspaceExclusions="literal-paths",cargo=str(mutation_wrapper.resolve()),cargoDigest=sha(mutation_wrapper)),omitted=omitted,refuse="NATIVE_CARGO_MEMBERS_CHANGED")
+
     malformed = cases / "malformed"
     shutil.copytree(base, malformed)
     (malformed / "app/Cargo.toml").write_text((malformed / "app/Cargo.toml").read_text() + "\nbroken = [")
@@ -355,10 +410,10 @@ def verify(root, work, env, run):
         {"control":"g4-stage-no-overwrite","result":"refused","code":"PROJECT_STAGE_DESTINATION_UNAVAILABLE","selectedBytesUnchanged":True},
         {"control":"g4-stage-tamper-before-creation","result":"refused","code":"PROJECT_RECORD_INPUT","destinationCreated":False}])
 
-    return {"status": "passed", "controls": observed, "engines": engine, "nativeBinaryDigest": sha(cli), "newNativeTomlUnitTests": 10, "memberExpansionUnitTests": 2,
+    return {"status": "passed", "controls": observed, "engines": engine, "nativeBinaryDigest": sha(cli), "newNativeTomlUnitTests": 10, "memberExpansionUnitTests": 3,
             "existingBoundedProcessTests": 2, "cargo": {"path": str(cargo), "digest": sha(cargo)},
             "rustc": {"path": str(rustc), "digest": sha(rustc)}, "compiledFixtureEstablishedByTheseObservations": False,
-            "limits": {"workspaceMembers": "literal default; opt-in one-star directory glob, exact captured expansion, exclusions refuse",
+            "limits": {"workspaceMembers": "literal default; opt-in one-star directory glob and separate literal-exclusion policy with exact captured expansion",
                        "ambientConfig": "outside owner root refuses without copying values",
                        "cargoConfig": "only matching build.target and net.offline=true",
                        "artifactAndRuntimeAcceptance": "not established"}}

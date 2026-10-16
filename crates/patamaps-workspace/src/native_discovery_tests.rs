@@ -518,12 +518,22 @@ fn literal_members_do_not_inherit_the_opt_in_glob_declaration_limit() {
         .map(|(k, v)| (k.as_str(), v.as_str()))
         .collect::<Inputs<'_>>();
     assert!(
-        validate_manifest_paths(&root, &inputs, CargoMemberMode::LiteralPaths)
-            .unwrap()
-            .is_empty()
+        validate_manifest_paths(
+            &root,
+            &inputs,
+            CargoMemberMode::LiteralPaths,
+            CargoExclusionMode::RefuseWithGlobs
+        )
+        .unwrap()
+        .is_empty()
     );
     assert!(matches!(
-        validate_manifest_paths(&root, &inputs, CargoMemberMode::BoundedDirectoryGlobs),
+        validate_manifest_paths(
+            &root,
+            &inputs,
+            CargoMemberMode::BoundedDirectoryGlobs,
+            CargoExclusionMode::RefuseWithGlobs
+        ),
         Err(Error::Refused {
             code: "NATIVE_CARGO_MEMBERS",
             ..
@@ -533,4 +543,65 @@ fn literal_members_do_not_inherit_the_opt_in_glob_declaration_limit() {
         "Retained literal-member compatibility fixture: {}",
         root.display()
     );
+}
+
+#[test]
+fn literal_exclusions_skip_only_exact_ordinary_glob_directories() {
+    use std::sync::atomic::{AtomicU64, Ordering};
+    static SEQ: AtomicU64 = AtomicU64::new(0);
+    let root = std::env::temp_dir().join(format!(
+        "patamaps-exclusions-{}-{}",
+        std::process::id(),
+        SEQ.fetch_add(1, Ordering::Relaxed)
+    ));
+    fs::create_dir(&root).unwrap();
+    let root = fs::canonicalize(root).unwrap();
+    fs::create_dir(root.join("crates")).unwrap();
+    for name in ["keep", "ignored"] {
+        fs::create_dir(root.join("crates").join(name)).unwrap();
+        fs::write(
+            root.join("crates").join(name).join("Cargo.toml"),
+            [0xff, 0xfe],
+        )
+        .unwrap();
+    }
+    let inputs = Inputs::from([("crates/keep/Cargo.toml", "captured")]);
+    let excluded = BTreeSet::from(["crates/ignored".to_owned()]);
+    assert_eq!(
+        expand_member_filtered(&root, &root, "crates/*", &inputs, &excluded).unwrap(),
+        (
+            vec!["crates/keep/Cargo.toml".to_owned()],
+            vec!["crates/ignored".to_owned()]
+        )
+    );
+    assert!(expand_member(&root, &root, "crates/*", &inputs).is_err());
+    let overlap = BTreeSet::from(["crates/keep/nested".to_owned()]);
+    assert!(matches!(
+        expand_member_filtered(&root, &root, "crates/*", &inputs, &overlap),
+        Err(Error::Refused {
+            code: "NATIVE_CARGO_EXCLUSIONS",
+            ..
+        })
+    ));
+    for raw in [
+        "exclude=['../escape']",
+        "exclude=['crates/*']",
+        "exclude=['crates/ignored','crates/ignored']",
+        "exclude='wrong-type'",
+        "exclude=[7]",
+        "exclude=['crates/ignored','crates/ignored/nested']",
+    ] {
+        let document = parse_toml("Cargo.toml", raw).unwrap();
+        assert!(
+            literal_exclusions(&root, &root, document.get("exclude")).is_err(),
+            "{raw}"
+        );
+    }
+    #[cfg(unix)]
+    {
+        std::os::unix::fs::symlink(root.join("crates/keep"), root.join("crates/linked")).unwrap();
+        let excluded = BTreeSet::from(["crates/ignored".to_owned(), "crates/linked".to_owned()]);
+        assert!(expand_member_filtered(&root, &root, "crates/*", &inputs, &excluded).is_err());
+    }
+    eprintln!("Retained exclusion fixture: {}", root.display());
 }

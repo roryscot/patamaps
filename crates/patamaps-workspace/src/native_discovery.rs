@@ -64,6 +64,8 @@ struct CargoConfig {
     root_mode: CargoRootMode,
     #[serde(default)]
     workspace_members: CargoMemberMode,
+    #[serde(default)]
+    workspace_exclusions: CargoExclusionMode,
     lockfile: String,
     cargo: String,
     cargo_digest: String,
@@ -90,6 +92,75 @@ enum CargoMemberMode {
     #[default]
     LiteralPaths,
     BoundedDirectoryGlobs,
+}
+
+#[derive(Clone, Copy, Default, Deserialize, PartialEq, Eq)]
+#[serde(rename_all = "kebab-case")]
+enum CargoExclusionMode {
+    #[default]
+    RefuseWithGlobs,
+    LiteralPaths,
+}
+
+fn member_literal(root: &Path, base: &Path, value: &str) -> Result<String, Error> {
+    if value.len() > 4096
+        || !relative_path(value)
+        || value.contains(['*', '?', '[', ']', '{', '}', ':'])
+    {
+        return Err(refused(
+            "NATIVE_CARGO_EXCLUSIONS",
+            "Exclusions require normalized literal directory paths",
+        ));
+    }
+    let path = base.join(value);
+    Ok(path
+        .strip_prefix(root)
+        .map_err(|_| refused("NATIVE_CARGO_PATH_ESCAPE", "Exclusion outside owner"))?
+        .to_str()
+        .ok_or_else(|| refused("NATIVE_SOURCE_UTF8", "Exclusion must be UTF-8"))?
+        .replace('\\', "/"))
+}
+fn literal_exclusions(
+    root: &Path,
+    base: &Path,
+    value: Option<&Item>,
+) -> Result<BTreeSet<String>, Error> {
+    let Some(value) = value else {
+        return Ok(BTreeSet::new());
+    };
+    let values = value.as_array().filter(|v| v.len() <= 128).ok_or_else(|| {
+        refused(
+            "NATIVE_CARGO_EXCLUSIONS",
+            "At most128 literal exclusions are supported",
+        )
+    })?;
+    let mut result = BTreeSet::new();
+    for value in values {
+        let value = value
+            .as_str()
+            .ok_or_else(|| refused("NATIVE_CARGO_EXCLUSIONS", "Exclusion is not a string"))?;
+        if !result.insert(member_literal(root, base, value)?) {
+            return Err(refused(
+                "NATIVE_CARGO_EXCLUSIONS",
+                "Duplicate normalized exclusion",
+            ));
+        }
+    }
+    if result
+        .iter()
+        .any(|a| result.iter().any(|b| a != b && member_overlap(a, b)))
+    {
+        return Err(refused(
+            "NATIVE_CARGO_EXCLUSIONS",
+            "Nested exclusion paths are unsupported",
+        ));
+    }
+    Ok(result)
+}
+fn member_overlap(a: &str, b: &str) -> bool {
+    a == b
+        || a.strip_prefix(b).is_some_and(|s| s.starts_with('/'))
+        || b.strip_prefix(a).is_some_and(|s| s.starts_with('/'))
 }
 
 // Inspect path components without following directory symlinks. Only names and
@@ -124,6 +195,17 @@ fn expand_member(
     pattern: &str,
     inputs: &Inputs<'_>,
 ) -> Result<Vec<String>, Error> {
+    expand_member_filtered(root, base, pattern, inputs, &BTreeSet::new())
+        .map(|(included, _)| included)
+}
+
+fn expand_member_filtered(
+    root: &Path,
+    base: &Path,
+    pattern: &str,
+    inputs: &Inputs<'_>,
+    exclusions: &BTreeSet<String>,
+) -> Result<(Vec<String>, Vec<String>), Error> {
     let parts = pattern.split('/').collect::<Vec<_>>();
     if pattern.len() > 4096
         || parts.len() > 32
@@ -184,11 +266,31 @@ fn expand_member(
         ));
     }
     let mut manifests = Vec::new();
+    let mut excluded = Vec::new();
     for name in names {
         let directory = parts[star + 1..]
             .iter()
             .fold(prefix.join(name), |p, s| p.join(s));
         member_directory(root, &directory)?;
+        let relative_directory = directory
+            .strip_prefix(root)
+            .map_err(|_| refused("NATIVE_CARGO_PATH_ESCAPE", "Member directory outside owner"))?
+            .to_str()
+            .ok_or_else(|| refused("NATIVE_SOURCE_UTF8", "Member directory must be UTF-8"))?
+            .replace('\\', "/");
+        if exclusions.contains(&relative_directory) {
+            excluded.push(relative_directory);
+            continue;
+        }
+        if exclusions
+            .iter()
+            .any(|e| member_overlap(e, &relative_directory))
+        {
+            return Err(refused(
+                "NATIVE_CARGO_EXCLUSIONS",
+                "Exclusion ancestor/descendant overlap is unsupported",
+            ));
+        }
         let manifest = directory.join("Cargo.toml");
         let metadata = fs::symlink_metadata(&manifest)?;
         if metadata.file_type().is_symlink() || !metadata.is_file() {
@@ -211,7 +313,7 @@ fn expand_member(
         }
         manifests.push(relative);
     }
-    Ok(manifests)
+    Ok((manifests, excluded))
 }
 
 /// Standalone packages are opt-in. Probe ancestor manifest existence without
@@ -679,6 +781,7 @@ fn validate_manifest_paths(
     root: &Path,
     inputs: &Inputs<'_>,
     mode: CargoMemberMode,
+    exclusion_mode: CargoExclusionMode,
 ) -> Result<Vec<Value>, Error> {
     fn required(
         root: &Path,
@@ -734,6 +837,14 @@ fn validate_manifest_paths(
         }
         Ok(())
     }
+    if exclusion_mode == CargoExclusionMode::LiteralPaths
+        && mode != CargoMemberMode::BoundedDirectoryGlobs
+    {
+        return Err(refused(
+            "NATIVE_CARGO_EXCLUSIONS",
+            "Literal exclusions require bounded-directory-globs mode",
+        ));
+    }
     let mut expansions = Vec::new();
     let mut expanded_count = 0usize;
     for (path, raw) in inputs.iter().filter(|(p, _)| p.ends_with("Cargo.toml")) {
@@ -743,7 +854,13 @@ fn validate_manifest_paths(
             .parent()
             .expect("manifest parent")
             .to_path_buf();
-        if let Some(workspace) = document.get("workspace").and_then(Item::as_table_like)
+        let workspace = document.get("workspace").and_then(Item::as_table_like);
+        let exclusions = if exclusion_mode == CargoExclusionMode::LiteralPaths {
+            literal_exclusions(root, &base, workspace.and_then(|w| w.get("exclude")))?
+        } else {
+            BTreeSet::new()
+        };
+        if let Some(workspace) = workspace
             && let Some(members) = workspace.get("members").and_then(Item::as_array)
         {
             if mode == CargoMemberMode::BoundedDirectoryGlobs && members.len() > 128 {
@@ -758,23 +875,43 @@ fn validate_manifest_paths(
                     .ok_or_else(|| refused("NATIVE_CARGO_MEMBERS", "Member is not a string"))?;
                 if value.contains(['*', '?', '[', ']', '{', '}']) {
                     if mode != CargoMemberMode::BoundedDirectoryGlobs
-                        || workspace.get("exclude").is_some()
+                        || (workspace.get("exclude").is_some()
+                            && exclusion_mode != CargoExclusionMode::LiteralPaths)
                     {
                         return Err(refused(
                             "NATIVE_CARGO_MEMBERS",
-                            "Glob expansion requires explicit bounded-directory-globs mode without workspace exclusions",
+                            "Glob expansion requires bounded-directory-globs and an explicit supported exclusion policy",
                         ));
                     }
-                    let manifests = expand_member(root, &base, value, inputs)?;
-                    expanded_count += manifests.len();
+                    let (manifests, excluded) =
+                        if exclusion_mode == CargoExclusionMode::LiteralPaths {
+                            expand_member_filtered(root, &base, value, inputs, &exclusions)?
+                        } else {
+                            (expand_member(root, &base, value, inputs)?, Vec::new())
+                        };
+                    expanded_count += manifests.len() + excluded.len();
                     if expanded_count > 1024 || expansions.len() >= 128 {
                         return Err(refused(
                             "NATIVE_CARGO_MEMBERS",
                             "Aggregate member expansion bound exceeded",
                         ));
                     }
-                    expansions.push(json!({"manifest":path,"pattern":value,"manifests":manifests}));
+                    let mut expansion =
+                        json!({"manifest":path,"pattern":value,"manifests":manifests});
+                    if exclusion_mode == CargoExclusionMode::LiteralPaths {
+                        expansion["excludedDirectories"] = json!(excluded);
+                    }
+                    expansions.push(expansion);
                     continue;
+                }
+                if !exclusions.is_empty() {
+                    let literal = member_literal(root, &base, value)?;
+                    if exclusions.iter().any(|e| member_overlap(e, &literal)) {
+                        return Err(refused(
+                            "NATIVE_CARGO_EXCLUSIONS",
+                            "Explicit literal member/exclusion overlap is unsupported",
+                        ));
+                    }
                 }
                 required(root, &base, value, inputs, "Cargo.toml")?;
             }
@@ -887,7 +1024,12 @@ fn cargo_entities(
         ));
     }
     same_sources(root, inputs)?;
-    let member_expansions = validate_manifest_paths(root, inputs, config.workspace_members)?;
+    let member_expansions = validate_manifest_paths(
+        root,
+        inputs,
+        config.workspace_members,
+        config.workspace_exclusions,
+    )?;
     let configs = config_inputs(root, &manifest_path, cargo_home, inputs, platform)?;
     let (cargo_path, actual_cargo) = tool_digest(cargo)?;
     let (rustc_path, actual_rustc) = tool_digest(rustc)?;
@@ -999,13 +1141,18 @@ fn cargo_entities(
         4 * 1024 * 1024,
     )?;
     same_sources(root, inputs)?;
-    let repeated_members = validate_manifest_paths(root, inputs, config.workspace_members)
-        .map_err(|_| {
-            refused(
-                "NATIVE_CARGO_MEMBERS_CHANGED",
-                "Workspace member inventory could not be repeated after metadata observation",
-            )
-        })?;
+    let repeated_members = validate_manifest_paths(
+        root,
+        inputs,
+        config.workspace_members,
+        config.workspace_exclusions,
+    )
+    .map_err(|_| {
+        refused(
+            "NATIVE_CARGO_MEMBERS_CHANGED",
+            "Workspace member inventory could not be repeated after metadata observation",
+        )
+    })?;
     if repeated_members != member_expansions {
         return Err(refused(
             "NATIVE_CARGO_MEMBERS_CHANGED",
@@ -1173,6 +1320,9 @@ fn cargo_entities(
         "possibleExecutableInputs":executable_inputs,"dependencyExecutableInventoryAvailable":view==DependencyView::Resolved,"compilationEstablished":false,"buildScriptsExecuted":false,"completeExecutableDependencyClosureEstablished":false});
     if config.workspace_members == CargoMemberMode::BoundedDirectoryGlobs {
         receipt["workspaceMembers"] = json!({"mode":"bounded-directory-globs", "expansions":member_expansions, "preAndPostObservedEqual":true});
+        if config.workspace_exclusions == CargoExclusionMode::LiteralPaths {
+            receipt["workspaceMembers"]["exclusionMode"] = json!("literal-paths");
+        }
     }
     if config.root_mode == CargoRootMode::StandalonePackage {
         receipt["rootMode"] = json!("standalone-package");
