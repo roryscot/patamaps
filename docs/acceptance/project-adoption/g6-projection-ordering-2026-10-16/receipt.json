@@ -1,0 +1,111 @@
+{
+  "status": "passed-scoped-v1-projection-ordering",
+  "problem": "Distinct canonical-equivalent identifiers compare equally under locale collation; stable target ordering must preserve first encounter order.",
+  "change": "Encounter-ordered target vector with membership set; stable locale sorting retained.",
+  "verification": [
+    {
+      "name": "freeze-original-pair",
+      "command": [
+        "node",
+        "scripts/parity/projection_contracts.mjs",
+        "<checkout>/.tools/project-adoption/projection-collation-retry2-20261016/pair",
+        "fixtures/parity/projection-collation-controls.json"
+      ],
+      "exitCode": 0,
+      "seconds": 3.081
+    },
+    {
+      "name": "rust-format-apply",
+      "command": [
+        "cargo",
+        "fmt",
+        "--all"
+      ],
+      "exitCode": 0,
+      "seconds": 1.776
+    },
+    {
+      "name": "rust-format",
+      "command": [
+        "cargo",
+        "fmt",
+        "--all",
+        "--",
+        "--check"
+      ],
+      "exitCode": 0,
+      "seconds": 1.098
+    },
+    {
+      "name": "core-tests",
+      "command": [
+        "cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "-p",
+        "patamaps-core"
+      ],
+      "exitCode": 0,
+      "seconds": 66.31
+    },
+    {
+      "name": "strict-clippy",
+      "command": [
+        "cargo",
+        "clippy",
+        "--locked",
+        "--offline",
+        "-p",
+        "patamaps-core",
+        "-p",
+        "patamaps-cli",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exitCode": 0,
+      "seconds": 23.339
+    },
+    {
+      "name": "differential",
+      "command": [
+        "node",
+        "scripts/parity/projection_contracts.mjs",
+        "<checkout>/.tools/project-adoption/projection-collation-retry2-20261016/all"
+      ],
+      "exitCode": 0,
+      "seconds": 27.193
+    }
+  ],
+  "coreTestsPassed": 116,
+  "differential": {
+    "status": "passed",
+    "cases": 68,
+    "failed": 0,
+    "referenceSource": {
+      "path": "src/projection.ts",
+      "mode": "100644",
+      "gitBlob": "9874dc978a1c5b183ce5a8bf308ef3a5c6dca2a4"
+    },
+    "compilerDigest": "8a1a1fff108b298a8cf32dfc28a812301b9c70c2a0f71ce199bc239370cb24ce"
+  },
+  "supplementaryOriginalFixtureSha256": "4edf3974aafc85d5a551fcb2671ad5573ec4457b1c50cdbceef32ca588f5b4fe",
+  "previousOriginalFixtureUnchanged": true,
+  "repeatedRegression": {
+    "cases": 2,
+    "iterationsPerCase": 32
+  },
+  "guardRun": "26f35dba-8459-40f4-bdbe-4badea2151ae",
+  "retainedFailedAttempts": [
+    "First input was rejected for cardinality mismatch.",
+    "Second input was rejected because routing relation forbids one-to-many."
+  ],
+  "filesDeleted": 0,
+  "applicationAcceptance": false,
+  "limitations": [
+    "Original v1 observations only; no claim of universal JavaScript input equivalence.",
+    "Native generator preparation, runtime, installed and deployment qualification remain open."
+  ]
+}

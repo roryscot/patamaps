@@ -231,6 +231,23 @@ compilation("unicode-private-metadata", (v) => {
   };
   regraph(v);
 });
+// Canonically equivalent identifiers remain distinct graph identifiers, but
+// compare equal under the original locale sort. Stable sorting must preserve
+// the first encounter order.
+for (const reversed of [false, true]) {
+  compilation("collation-equal-targets-" + (reversed ? "reverse" : "forward"), (v) => {
+    const ids = ["urn:test:handler:é", "urn:test:handler:e\u0301"];
+    if (reversed) ids.reverse();
+    v.document.entities.push(...ids.map((id) => ({ id, kind: "routing:handler" })));
+    v.document.mappings[0].targets = [ids[0]];
+    const second = { ...copy(v.document.mappings[0]), id: "urn:test:link:zz", targets: [ids[1]] };
+    v.document.mappings.push(second);
+    v.generation.activeMappings.push(second.id);
+    v.spec.slots[0].cardinality = "many";
+    regraph(v);
+  });
+}
+
 function readdress(v, type) {
   const { $schema, id, digest, ...content } = v;
   v.digest = original.valueDigest(content);
@@ -334,6 +351,10 @@ const out = resolve(
     ),
 );
 mkdirSync(out, { recursive: false });
+if (process.env.PATAMAPS_PROJECTION_COLLATION_ONLY === "1") {
+  const selected = cases.filter((c) => c.name.startsWith("collation-equal-targets-"));
+  cases.splice(0, cases.length, ...selected);
+}
 const corpus = cases.map((c) => {
   const expected = evaluate(original, false, c);
   const operation = {

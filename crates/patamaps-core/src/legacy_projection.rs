@@ -492,7 +492,9 @@ fn compile(input: &J, name: &str, holes: &HashSet<usize>) -> Result<J, LegacyWor
                 .get(&(s(subject, "id"), s(slot, "relation")))
                 .map(Vec::as_slice)
                 .unwrap_or(&[]);
-            let mut targets = HashSet::new();
+            // JavaScript Set preserves encounter order for collation-equal identifiers.
+            let mut targets = Vec::new();
+            let mut seen_targets = HashSet::new();
             let options = || {
                 vec![
                     (
@@ -530,7 +532,9 @@ fn compile(input: &J, name: &str, holes: &HashSet<usize>) -> Result<J, LegacyWor
                 .filter_map(J::string)
                 {
                     budget.step(1)?;
-                    targets.insert(id);
+                    if seen_targets.insert(id) {
+                        targets.push(id);
+                    }
                 }
             }
             let allowed = slot.get("targetKinds").map(|_| {

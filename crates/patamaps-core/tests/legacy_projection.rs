@@ -99,6 +99,24 @@ fn original_v1_projection_corpus_preserves_records_errors_and_numeric_transport(
         byte_digest(include_bytes!("../../../fixtures/parity/supplement.json"))
     );
     assert_eq!(corpus.cases.len(), 66);
+    check_corpus(corpus);
+}
+
+#[test]
+fn collation_equal_target_order_matches_original_repeatedly() {
+    let bytes = include_bytes!("../../../fixtures/parity/projection-collation-controls.json");
+    let corpus: FrozenCorpus = serde_json::from_slice(bytes).unwrap();
+    assert_eq!(corpus.cases.len(), 2);
+    for _ in 0..32 {
+        check_corpus(serde_json::from_slice(bytes).unwrap());
+    }
+}
+
+fn check_corpus(corpus: FrozenCorpus) {
+    assert_eq!(
+        format!("sha256:{}", corpus.reference_lock_digest),
+        byte_digest(include_bytes!("../../../fixtures/parity/supplement.json"))
+    );
     let locale = Collator::try_new(
         icu_collator::CollatorPreferences::from_locale_strict(&"en-US".parse().unwrap()).unwrap(),
         Default::default(),
