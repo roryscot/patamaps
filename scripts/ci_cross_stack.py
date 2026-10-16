@@ -24,7 +24,7 @@ def digest(raw):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--phase", choices=["source", "development", "image", "compatibility", "installed"], default="source")
+    parser.add_argument("--phase", choices=["discovery", "source", "development", "image", "compatibility", "installed"], default="source")
     args = parser.parse_args()
     if platform.system() != "Linux" or os.environ.get("GITHUB_ACTIONS") != "true":
         raise RuntimeError("Use the configured isolated GitHub Linux CI job; Intel work uses its existing supervisor")
@@ -78,7 +78,10 @@ def main():
     try:
         for label, argv in [("rust-version", ["rustc", "-Vv"]), ("cargo-version", ["cargo", "--version"]), ("node-version", ["node", "--version"])]:
             run(label, argv)
-        if args.phase == "source":
+        if args.phase == "discovery":
+            from cross_stack_discovery import verify
+            receipt["nativeDiscovery"] = verify(ROOT, work, env, run)
+        elif args.phase == "source":
             from cross_stack_workspace import verify
             receipt["sourceWorkspace"] = verify(ROOT, work, env, run)
             from cross_stack_supervision import verify as verify_supervision
@@ -103,7 +106,7 @@ def main():
         space()
         assert all(digest((ROOT / name).read_bytes()) == value for name, value in before.items()), "Tracked source changed during acceptance"
         receipt["sourceUnchanged"] = True
-        receipt["status"] = {"source": "passed-source-intent-scope", "development": "passed-development-preview-scope", "image": "passed-linux-image-browser-scope", "compatibility": "passed-portable-facts-metamap-scope", "installed": "passed-installed-consumer-scope"}[args.phase]
+        receipt["status"] = {"discovery": "passed-native-discovery-scope", "source": "passed-source-intent-scope", "development": "passed-development-preview-scope", "image": "passed-linux-image-browser-scope", "compatibility": "passed-portable-facts-metamap-scope", "installed": "passed-installed-consumer-scope"}[args.phase]
     except BaseException as error:
         receipt.update(status="unavailable" if type(error).__name__ == "Unavailable" else "failed", failure=str(error), traceback=traceback.format_exc())
         raise

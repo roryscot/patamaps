@@ -84,6 +84,8 @@ jobs:
           mkdir -p ci-evidence/transport-lock
           cp examples/http-transport/service/Cargo.lock ci-evidence/transport-lock/Cargo.lock
           npm ci --prefix examples/cross-stack/web --ignore-scripts --no-audit --no-fund
+      - name: Verify bounded Cargo member observation and offline replay
+        run: python3 -B scripts/ci_cross_stack.py --phase discovery
       - name: Check actual source providers, admission and offline replay
         run: python3 -B scripts/ci_cross_stack.py
       - name: Verify coherent development selection and foreground watch
