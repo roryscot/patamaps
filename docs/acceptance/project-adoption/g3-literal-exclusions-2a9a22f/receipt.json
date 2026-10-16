@@ -1,0 +1,203 @@
+{
+  "status": "passed-scoped-cargo-literal-exclusions",
+  "sourceRevision": "2a9a22f24575437a8837cfcda7a8c5ae7d9a61c7",
+  "diagnostics": {
+    "sha256": "993309aff3a773e8c028019b1a84db6081f50f0831ddbf3af79490bb4eb4996f",
+    "bytes": 65385
+  },
+  "phaseStatus": "passed-native-discovery-scope",
+  "controlCount": 49,
+  "selectedControls": [
+    {
+      "control": "g3-globs-exclusions",
+      "result": "refused",
+      "code": "NATIVE_CARGO_MEMBERS",
+      "manifestsAndLocksUnchanged": true,
+      "projectBuildScriptExecuted": false
+    },
+    {
+      "control": "g3-literal-exclusion-default",
+      "result": "refused",
+      "code": "NATIVE_CARGO_MEMBERS",
+      "manifestsAndLocksUnchanged": true,
+      "projectBuildScriptExecuted": false
+    },
+    {
+      "control": "g3-literal-exclusion-explicit",
+      "result": "observed",
+      "view": "resolved",
+      "manifestsAndLocksUnchanged": true,
+      "projectBuildScriptExecuted": false,
+      "requestDigest": "sha256:c992c10b9352db22e30c43d499c2ddfa2653b22460a6455c1184826fcecf5b71",
+      "shardDigest": "sha256:d4f9c15fcce16061d00846675b7d28aed8773c629cd56e06fe17f59ebd946411",
+      "memberExpansion": {
+        "exclusionMode": "literal-paths",
+        "expansions": [
+          {
+            "excludedDirectories": [
+              "crates/unselected"
+            ],
+            "manifest": "Cargo.toml",
+            "manifests": [
+              "crates/app/Cargo.toml",
+              "crates/helper/Cargo.toml",
+              "crates/platform/Cargo.toml"
+            ],
+            "pattern": "crates/*"
+          }
+        ],
+        "mode": "bounded-directory-globs",
+        "preAndPostObservedEqual": true
+      },
+      "uncapturedMalformedManifestCompatible": true,
+      "excludedManifestCaptured": false,
+      "excludedManifestUnchanged": true
+    },
+    {
+      "control": "g3-exclusion-included-capture-missing",
+      "result": "refused",
+      "code": "NATIVE_CARGO_MANIFEST_INPUT",
+      "manifestsAndLocksUnchanged": true,
+      "projectBuildScriptExecuted": false
+    },
+    {
+      "control": "g3-exclusion-without-glob-mode",
+      "result": "refused",
+      "code": "NATIVE_CARGO_EXCLUSIONS",
+      "manifestsAndLocksUnchanged": true,
+      "projectBuildScriptExecuted": false
+    },
+    {
+      "control": "g3-exclusion-duplicate",
+      "result": "refused",
+      "code": "NATIVE_CARGO_EXCLUSIONS",
+      "manifestsAndLocksUnchanged": true,
+      "projectBuildScriptExecuted": false
+    },
+    {
+      "control": "g3-exclusion-nested",
+      "result": "refused",
+      "code": "NATIVE_CARGO_EXCLUSIONS",
+      "manifestsAndLocksUnchanged": true,
+      "projectBuildScriptExecuted": false
+    },
+    {
+      "control": "g3-exclusion-escape",
+      "result": "refused",
+      "code": "NATIVE_CARGO_EXCLUSIONS",
+      "manifestsAndLocksUnchanged": true,
+      "projectBuildScriptExecuted": false
+    },
+    {
+      "control": "g3-exclusion-glob",
+      "result": "refused",
+      "code": "NATIVE_CARGO_EXCLUSIONS",
+      "manifestsAndLocksUnchanged": true,
+      "projectBuildScriptExecuted": false
+    },
+    {
+      "control": "g3-exclusion-ancestor-overlap",
+      "result": "refused",
+      "code": "NATIVE_CARGO_EXCLUSIONS",
+      "manifestsAndLocksUnchanged": true,
+      "projectBuildScriptExecuted": false
+    },
+    {
+      "control": "g3-exclusion-descendant-overlap",
+      "result": "refused",
+      "code": "NATIVE_CARGO_EXCLUSIONS",
+      "manifestsAndLocksUnchanged": true,
+      "projectBuildScriptExecuted": false
+    },
+    {
+      "control": "g3-exclusion-explicit-member-overlap",
+      "result": "refused",
+      "code": "NATIVE_CARGO_EXCLUSIONS",
+      "manifestsAndLocksUnchanged": true,
+      "projectBuildScriptExecuted": false
+    },
+    {
+      "control": "g3-exclusion-symlink",
+      "result": "refused",
+      "code": "NATIVE_CARGO_MEMBERS",
+      "manifestsAndLocksUnchanged": true,
+      "projectBuildScriptExecuted": false
+    },
+    {
+      "control": "g3-excluded-path-dependency-uncaptured",
+      "result": "refused",
+      "code": "NATIVE_CARGO_MANIFEST_INPUT",
+      "manifestsAndLocksUnchanged": true,
+      "projectBuildScriptExecuted": false
+    },
+    {
+      "control": "g3-excluded-path-dependency-captured",
+      "result": "observed",
+      "view": "resolved",
+      "manifestsAndLocksUnchanged": true,
+      "projectBuildScriptExecuted": false,
+      "requestDigest": "sha256:286dd108841ac1ffcb23a5f79dfff33430c158ea5b9f6517ae5738f2b7cd65b3",
+      "shardDigest": "sha256:933169ba4212b2fe28320360d7abd561d2be8fe6b80f0b5a53639a5ee465c45f",
+      "memberExpansion": {
+        "exclusionMode": "literal-paths",
+        "expansions": [
+          {
+            "excludedDirectories": [
+              "crates/unselected"
+            ],
+            "manifest": "Cargo.toml",
+            "manifests": [
+              "crates/app/Cargo.toml",
+              "crates/helper/Cargo.toml",
+              "crates/platform/Cargo.toml"
+            ],
+            "pattern": "crates/*"
+          }
+        ],
+        "mode": "bounded-directory-globs",
+        "preAndPostObservedEqual": true
+      },
+      "excludedDependencyCaptured": true,
+      "excludedDependencyWorkspaceMember": false
+    },
+    {
+      "control": "g3-excluded-match-post-metadata-change",
+      "result": "refused",
+      "code": "NATIVE_CARGO_MEMBERS_CHANGED",
+      "manifestsAndLocksUnchanged": true,
+      "projectBuildScriptExecuted": false
+    }
+  ],
+  "scope": {
+    "existingProjectQualification": "not-performed",
+    "nextjs": "not-performed",
+    "activation": "not-performed",
+    "fullGoalComplete": false
+  },
+  "workflow": {
+    "runId": 38853067005,
+    "url": "https://github.com/roryscot/patamaps/actions/runs/38853067005",
+    "jobs": [
+      {
+        "id": 116818361275,
+        "name": "Cross-stack Linux image and browser (amd64)",
+        "conclusion": "success"
+      },
+      {
+        "id": 116818361375,
+        "name": "Cross-stack source bindings (Linux x86_64)",
+        "conclusion": "success"
+      },
+      {
+        "id": 116818361376,
+        "name": "Linux aarch64",
+        "conclusion": "success"
+      },
+      {
+        "id": 116818361464,
+        "name": "Linux x86_64",
+        "conclusion": "success"
+      }
+    ]
+  }
+}
