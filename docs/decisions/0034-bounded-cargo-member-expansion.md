@@ -1,6 +1,6 @@
 # Bounded Cargo workspace member expansion
 
-Status: implemented with frozen controls; execution pending. G3 remains incomplete.
+Status: implemented and verified by scoped Linux controls at63abaed. G3 remains incomplete.
 
 The owner may select workspaceMembers: bounded-directory-globs in the native Cargo
 provider. Default literal-paths behavior still refuses glob members. The new mode
@@ -31,3 +31,18 @@ transient filesystem change could occur between the two checks.
 
 Cargo's documented member behavior remains the reference:
 https://doc.rust-lang.org/cargo/reference/workspaces.html#the-members-and-exclude-fields
+
+## Scoped verification
+
+CI38847576022 passed all four jobs. Its explicit discovery phase retained 31
+distinct controls and 80 commands, including nine G3 cases and glob-backed
+workspace replay after configured provider/Cargo/rustc/root-manifest paths became
+unavailable with an empty external PATH. The [scoped receipt](../acceptance/project-adoption/g3-cargo-members-63abaed/receipt.json) preserves observed request/shard digests, command outcomes,
+source/tool identities and exact coverage limitations. Expanded fixture build
+scripts were not executed; metadata observation is not compilation.
+
+Earlier CI38846332010 passed its existing jobs but did not call this driver.
+Its green source status is not used as proof of the new controls. Existing-project
+Cargo qualification, additional reviewed config/Next contexts and the rest of the
+adoption plan remain required. New retained-staging controls introduced after
+63abaed have separate current-source verification pending.

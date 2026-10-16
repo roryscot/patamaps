@@ -44,7 +44,7 @@ Source 1588a3c passed all four jobs in CI38843082846. The [47-control receipt](.
 
 ## Cargo member expansion checkpoint
 
-Decision0034 implements explicit workspaceMembers: bounded-directory-globs while retaining literal-paths as default. One complete star directory segment is supported with exact captured manifest enumeration, pre/post metadata comparison and actual Cargo member confirmation. The existing source discovery driver now includes frozen default/missing-input/syntax/symlink/mutation refusals and replays a glob-backed workspace with source/tools unavailable. Native syntax/format checks passed; current-source compilation and runtime remain pending. Cargo exclusions and broader glob grammar, other config contexts and real-project qualification remain open.
+Decision0034 implements explicit workspaceMembers: bounded-directory-globs while retaining literal-paths as default. One complete star directory segment is supported with exact captured manifest enumeration, pre/post metadata comparison and actual Cargo member confirmation. The existing source discovery driver now includes frozen default/missing-input/syntax/symlink/mutation refusals and replays a glob-backed workspace with source/tools unavailable. CI38847576022 at63abaed passed all four jobs; its explicit discovery phase retained 31 controls/80 commands, including nine G3 cases and glob-backed source/tool-unavailable replay. The [scoped Cargo receipt](../acceptance/project-adoption/g3-cargo-members-63abaed/receipt.json) excludes fixture compilation and real-project acceptance. Cargo exclusions and broader glob grammar, other config contexts and real-project qualification remain open.
 
 ## Retained staging checkpoint
 
