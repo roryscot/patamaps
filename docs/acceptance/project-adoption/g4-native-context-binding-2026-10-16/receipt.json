@@ -1,0 +1,220 @@
+{
+  "status": "passed-native-context-binding-controls",
+  "nativePackageChecks": {
+    "commands": [
+      "cargo fmt --all",
+      "cargo test --locked --offline -p patamaps-workspace",
+      "cargo clippy --locked --offline -p patamaps-workspace -p patamaps-cli --all-targets -- -D warnings",
+      "cargo build --locked --offline -p patamaps-cli"
+    ],
+    "status": "passed",
+    "guard": "ee3bd516-712e-43df-8bb3-f75a1aaef403",
+    "tests": {
+      "unit": 32,
+      "legacyIO": 3,
+      "project": 11,
+      "command": 5,
+      "sourceEvaluation": 5,
+      "workspace": 24,
+      "compileFailDocumentation": 2
+    }
+  },
+  "cli": {
+    "controls": [
+      {
+        "control": "native-binary-context-overlay-selection",
+        "result": "passed"
+      },
+      {
+        "control": "native-context-noop",
+        "result": "passed",
+        "cacheHits": 0
+      },
+      {
+        "control": "dependency-mutation",
+        "result": "refused",
+        "previousSelectionPreserved": true
+      },
+      {
+        "control": "undeclared-write",
+        "result": "refused",
+        "previousSelectionPreserved": true
+      },
+      {
+        "control": "command-failure",
+        "result": "refused",
+        "previousSelectionPreserved": true
+      },
+      {
+        "control": "wrong-preimage",
+        "result": "refused",
+        "previousSelectionPreserved": true
+      },
+      {
+        "control": "mutable-dependencies",
+        "result": "refused",
+        "previousSelectionPreserved": true
+      },
+      {
+        "control": "corrupt-snapshot-before-selection",
+        "result": "refused"
+      },
+      {
+        "control": "context-selection-offline-replay",
+        "result": "passed",
+        "sourceAndSnapshotUnavailable": true
+      },
+      {
+        "control": "selected-binary-tamper",
+        "result": "refused"
+      }
+    ],
+    "snapshotDigest": "sha256:855a9416ff419814a4da7dc29d65c46dd2294e533f7e7429a39506df5a81013c",
+    "guard": "57657473-ee15-4f52-b2b7-38d6a14c715c"
+  },
+  "watch": {
+    "controls": [
+      {
+        "control": "no-detach-policy-guardian-group",
+        "result": "passed",
+        "runner": 96090,
+        "innerGuard": 96091,
+        "tool": 96092,
+        "sleep": 96093,
+        "runnerGroup": 96090,
+        "innerGuardGroup": 96091,
+        "ordinarySurvivors": [],
+        "guardianHasIndependentGroup": true
+      },
+      {
+        "control": "ordinary-exit-and-empty-group-permission",
+        "result": "passed",
+        "cases": [
+          {
+            "case": "ordinary-success",
+            "result": "passed",
+            "exitCode": 0
+          },
+          {
+            "case": "ordinary-failure",
+            "result": "passed",
+            "exitCode": 7
+          },
+          {
+            "case": "timed-success",
+            "result": "passed",
+            "exitCode": 0
+          },
+          {
+            "case": "empty-group-EPERM",
+            "result": "passed"
+          },
+          {
+            "case": "live-group-EPERM",
+            "result": "refused"
+          }
+        ]
+      },
+      {
+        "control": "native-context-binding-materialized",
+        "result": "passed",
+        "snapshotDigest": "sha256:855a9416ff419814a4da7dc29d65c46dd2294e533f7e7429a39506df5a81013c",
+        "nativeSelectedContextRequired": true
+      },
+      {
+        "control": "initial-edit-debounce-idle",
+        "result": "passed",
+        "idleCreatedNoAttempt": true,
+        "rapidEditsOneAttempt": true
+      },
+      {
+        "control": "failed-key-suppression",
+        "result": "passed",
+        "previousSelectionPreserved": true
+      },
+      {
+        "control": "recovery-native-noop",
+        "result": "passed",
+        "verification": "not-repeated"
+      },
+      {
+        "control": "live-policy-contender",
+        "result": "passed",
+        "policyExitCode": 75,
+        "noAutomaticRetry": true
+      },
+      {
+        "control": "watch-SIGINT",
+        "result": "passed",
+        "pids": [
+          96272,
+          96273
+        ],
+        "previousSelectionPreserved": true,
+        "ordinaryDescendantsStopped": true
+      },
+      {
+        "control": "watch-SIGTERM",
+        "result": "passed",
+        "pids": [
+          96326,
+          96327
+        ],
+        "previousSelectionPreserved": true,
+        "ordinaryDescendantsStopped": true
+      },
+      {
+        "control": "watch-SIGKILL",
+        "result": "passed",
+        "pids": [
+          96355,
+          96356
+        ],
+        "previousSelectionPreserved": true,
+        "ordinaryDescendantsStopped": true
+      },
+      {
+        "control": "watch-parent-death",
+        "result": "passed",
+        "pids": [
+          96386,
+          96387
+        ],
+        "previousSelectionPreserved": true,
+        "ordinaryDescendantsStopped": true
+      },
+      {
+        "control": "watch-runner-death",
+        "result": "passed",
+        "pids": [
+          96425,
+          96426
+        ],
+        "previousSelectionPreserved": true,
+        "ordinaryDescendantsStopped": true
+      },
+      {
+        "control": "ignored-runner-refuses-success",
+        "result": "passed",
+        "nativeSelectedBindingsChecked": true,
+        "currentInputKeyRequired": true
+      }
+    ],
+    "compilerDigest": "752e3ce0559db20ecf21c38cc8d859a95f0155d9af59a18eaf18d4f539dd5995",
+    "controllerDigest": "4680ee0c256ea821e5e78c0ee0f058b0e3ca67a336bfd5d19bdd3da9a6e1736f",
+    "controlsDigest": "85f84dd918eb37dd04dddd843f8d486b579c3a35bf5babb7011d3b7bd5797753",
+    "contextBindingDigest": "8b2a2e53ef10486b41d0246ea3624193cf144e8ce8122b9eab7767de70cff0a5",
+    "sourceUnchanged": true,
+    "runnerScope": "explicit configured policy runner"
+  },
+  "observation": {
+    "contextBytesVerification": "not-performed",
+    "meaning": "declared sealed reference; new materialization verifies blobs"
+  },
+  "legacyPlanTypeAndFunctions": "preserved",
+  "actualLargeProjectNativeQualification": "pending",
+  "generatedContractIntegration": "pending",
+  "practicalActualProjectWatchLatency": "not-established",
+  "installedConsumer": "not-qualified",
+  "fullGoalComplete": false
+}

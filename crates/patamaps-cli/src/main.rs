@@ -150,12 +150,16 @@ enum Command {
         state: PathBuf,
         #[arg(long)]
         force: bool,
+        #[arg(long)]
+        context: Option<PathBuf>,
     },
     /// Observe declared build inputs/tool identities without commands or build-state writes.
     ProjectBuildInputKey {
         plan: PathBuf,
         #[arg(long)]
         source: PathBuf,
+        #[arg(long)]
+        context: Option<PathBuf>,
     },
     /// Capture explicit binary files and closed internal links into a fresh retained snapshot.
     ProjectContextCapture {
@@ -1101,10 +1105,21 @@ fn run(command: Command) -> Result<(), Failure> {
             source,
             state,
             force,
+            context,
         } => {
             let plan = read::<patamaps_workspace::ProjectBuildPlan>(&plan)?;
-            let report = patamaps_workspace::build_project(&source, &state, &plan, force)
-                .map_err(|e| Failure::Operational(e.to_string()))?;
+            let context = context
+                .as_ref()
+                .map(|p| read::<patamaps_workspace::ProjectBuildContext>(p))
+                .transpose()?;
+            let report = patamaps_workspace::build_project_with_context(
+                &source,
+                &state,
+                &plan,
+                context.as_ref(),
+                force,
+            )
+            .map_err(|e| Failure::Operational(e.to_string()))?;
             stdout_json(&report)?;
             if report["status"] == "selected-project-build"
                 || report["status"] == "unchanged-project-build"
@@ -1114,10 +1129,22 @@ fn run(command: Command) -> Result<(), Failure> {
                 Err(Failure::ReportedRejection)
             }
         }
-        Command::ProjectBuildInputKey { plan, source } => {
+        Command::ProjectBuildInputKey {
+            plan,
+            source,
+            context,
+        } => {
             let plan = read::<patamaps_workspace::ProjectBuildPlan>(&plan)?;
-            let report = patamaps_workspace::project_build_input_key(&source, &plan)
-                .map_err(|e| Failure::Operational(e.to_string()))?;
+            let context = context
+                .as_ref()
+                .map(|p| read::<patamaps_workspace::ProjectBuildContext>(p))
+                .transpose()?;
+            let report = patamaps_workspace::project_build_input_key_with_context(
+                &source,
+                &plan,
+                context.as_ref(),
+            )
+            .map_err(|e| Failure::Operational(e.to_string()))?;
             stdout_json(&report)
         }
         Command::ProjectContextCapture {

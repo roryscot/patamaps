@@ -1019,3 +1019,171 @@ fn build_input_observation_is_readonly_and_matches_selection() {
         root.0.join("unavailable-tool").to_str().unwrap().into();
     assert!(project_build_input_key(&source.0, &plan).is_err());
 }
+
+#[cfg(unix)]
+fn context_build_fixture() -> (Temp, Temp, ProjectBuildPlan, ProjectBuildContext) {
+    use std::os::unix::fs::{PermissionsExt, symlink};
+    let (root, source, mut plan) = build_fixture();
+    let owner = root.0.join("context-owner");
+    fs::create_dir_all(owner.join("node_modules/pkg")).unwrap();
+    fs::create_dir(owner.join("empty")).unwrap();
+    fs::write(owner.join("node_modules/pkg/tool.bin"), [0, 255, 128, 0, 1]).unwrap();
+    fs::set_permissions(
+        owner.join("node_modules/pkg/tool.bin"),
+        fs::Permissions::from_mode(0o751),
+    )
+    .unwrap();
+    fs::write(
+        owner.join("input.txt"),
+        "old context
+",
+    )
+    .unwrap();
+    symlink("node_modules/pkg/tool.bin", owner.join("dep-link")).unwrap();
+    let definition:ProjectContextDefinition=serde_json::from_value(serde_json::json!({
+        "profile":CONTEXT_PROFILE,"id":"urn:test:native-build-context","nonsecretInputs":true,
+        "paths":["node_modules/pkg/tool.bin","dep-link","empty","input.txt"],"symlinks":"internal-closed"
+    })).unwrap();
+    let snapshot = root.0.join("snapshot");
+    let captured = capture_project_context(&owner, &snapshot, &definition).unwrap();
+    let binding = ProjectBuildContext {
+        profile: "patamaps-project-build-context-1".into(),
+        snapshot: snapshot.to_str().unwrap().into(),
+        digest: captured["digest"].as_str().unwrap().into(),
+        overlays: std::collections::BTreeMap::from([(
+            "input.txt".into(),
+            patamaps_contracts::byte_digest(
+                b"old context
+",
+            ),
+        )]),
+        writable_paths: vec!["bundle".into(), "execution-marker".into()],
+    };
+    plan.build_steps[0].invocation.arguments[1]
+        .push_str("; /bin/cp dep-link bundle/nested/dependency");
+    (root, source, plan, binding)
+}
+
+#[cfg(unix)]
+#[test]
+fn contextual_build_materializes_binary_inputs_overlays_and_replays_without_snapshot_or_source() {
+    use std::os::unix::fs::PermissionsExt;
+    let (root, source, plan, binding) = context_build_fixture();
+    let state = root.0.join("state");
+    let observed = project_build_input_key_with_context(&source.0, &plan, Some(&binding)).unwrap();
+    assert_eq!(
+        observed["contextReference"]["bytesVerification"],
+        "not-performed"
+    );
+    assert_ne!(
+        observed["inputKey"],
+        project_build_input_key(&source.0, &plan).unwrap()["inputKey"]
+    );
+    let selected =
+        build_project_with_context(&source.0, &state, &plan, Some(&binding), false).unwrap();
+    assert_eq!(selected["status"], "selected-project-build", "{selected}");
+    assert_eq!(selected["inputKey"], observed["inputKey"]);
+    let pointer = fs::read(state.join("selected.json")).unwrap();
+    let candidate = state
+        .join(selected["attempt"].as_str().unwrap())
+        .join("candidate");
+    assert_eq!(
+        fs::read(candidate.join("bundle/nested/dependency")).unwrap(),
+        [0, 255, 128, 0, 1]
+    );
+    assert_eq!(
+        fs::metadata(candidate.join("node_modules/pkg/tool.bin"))
+            .unwrap()
+            .permissions()
+            .mode()
+            & 0o777,
+        0o751
+    );
+    assert_eq!(
+        fs::read_link(candidate.join("dep-link")).unwrap(),
+        PathBuf::from("node_modules/pkg/tool.bin")
+    );
+    assert_eq!(
+        fs::read_to_string(candidate.join("input.txt")).unwrap(),
+        "selected original
+"
+    );
+    assert!(candidate.join("empty").is_dir() && candidate.join("bindings.rs").is_file());
+    assert_eq!(
+        build_project_with_context(&source.0, &state, &plan, Some(&binding), false).unwrap()["status"],
+        "unchanged-project-build"
+    );
+    assert_eq!(fs::read(state.join("selected.json")).unwrap(), pointer);
+    let binary = candidate.join("node_modules/pkg/tool.bin");
+    fs::write(&binary, b"tamper before no-op").unwrap();
+    assert!(build_project_with_context(&source.0, &state, &plan, Some(&binding), false).is_err());
+    assert_eq!(fs::read(state.join("selected.json")).unwrap(), pointer);
+    fs::write(&binary, [0, 255, 128, 0, 1]).unwrap();
+    verify_project_build_selection(&state).unwrap();
+    fs::rename(&source.0, root.0.join("source-retained-offline")).unwrap();
+    fs::rename(&binding.snapshot, root.0.join("snapshot-retained-offline")).unwrap();
+    assert_eq!(
+        verify_project_build_selection(&state).unwrap()["status"],
+        "verified-selected-build-bindings"
+    );
+    fs::write(
+        candidate.join("node_modules/pkg/tool.bin"),
+        b"corrupt binary context",
+    )
+    .unwrap();
+    assert!(verify_project_build_selection(&state).is_err());
+    assert_eq!(fs::read(state.join("selected.json")).unwrap(), pointer);
+}
+
+#[cfg(unix)]
+#[test]
+fn contextual_build_refusals_preserve_selection_for_bad_overlays_dependency_mutation_and_extra_writes()
+ {
+    let (root, source, plan, binding) = context_build_fixture();
+    let state = root.0.join("state");
+    assert_eq!(
+        build_project_with_context(&source.0, &state, &plan, Some(&binding), false).unwrap()["status"],
+        "selected-project-build"
+    );
+    let pointer = fs::read(state.join("selected.json")).unwrap();
+    let mut wrong = binding.clone();
+    wrong.overlays.insert(
+        "input.txt".into(),
+        patamaps_contracts::byte_digest(b"wrong preimage"),
+    );
+    let mut mutable = binding.clone();
+    mutable.writable_paths.push("node_modules".into());
+    let mut wrong_digest = binding.clone();
+    wrong_digest.digest = patamaps_contracts::byte_digest(b"wrong sealed context");
+    for bad in [wrong, mutable, wrong_digest] {
+        let result =
+            build_project_with_context(&source.0, &state, &plan, Some(&bad), true).unwrap();
+        assert_eq!(result["status"], "refused-project-build", "{result}");
+        assert_eq!(result["previousSelectionPreserved"], true);
+        assert_eq!(fs::read(state.join("selected.json")).unwrap(), pointer);
+    }
+    for suffix in [
+        "; printf changed > node_modules/pkg/tool.bin",
+        "; printf unexpected > stray-file",
+        "; exit 9",
+    ] {
+        let mut changed = plan.clone();
+        changed.build_steps[0].invocation.arguments[1].push_str(suffix);
+        let result =
+            build_project_with_context(&source.0, &state, &changed, Some(&binding), true).unwrap();
+        assert_eq!(result["status"], "refused-project-build", "{result}");
+        assert_eq!(result["previousSelectionPreserved"], true);
+        assert_eq!(fs::read(state.join("selected.json")).unwrap(), pointer);
+        verify_project_build_selection(&state).unwrap();
+    }
+    fs::write(
+        PathBuf::from(&binding.snapshot).join("data/node_modules/pkg/tool.bin"),
+        b"corrupt retained blob",
+    )
+    .unwrap();
+    let result =
+        build_project_with_context(&source.0, &state, &plan, Some(&binding), true).unwrap();
+    assert_eq!(result["status"], "refused-project-build");
+    assert_eq!(fs::read(state.join("selected.json")).unwrap(), pointer);
+    verify_project_build_selection(&state).unwrap();
+}

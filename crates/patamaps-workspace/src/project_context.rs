@@ -54,6 +54,56 @@ pub struct ProjectContextManifest {
     pub entries: BTreeMap<String, ProjectContextEntry>,
     pub digest: String,
 }
+/// Explicit sealed context reference for a native retained build.
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase", deny_unknown_fields)]
+pub struct ProjectBuildContext {
+    pub profile: String,
+    pub snapshot: String,
+    pub digest: String,
+    pub overlays: BTreeMap<String, String>,
+    pub writable_paths: Vec<String>,
+}
+impl ProjectBuildContext {
+    pub(crate) fn validate(&self) -> Result<(), Error> {
+        let digest = |v: &str| {
+            v.strip_prefix("sha256:").is_some_and(|h| {
+                h.len() == 64
+                    && h.bytes()
+                        .all(|b| b.is_ascii_hexdigit() && !b.is_ascii_uppercase())
+            })
+        };
+        if self.profile != "patamaps-project-build-context-1"
+            || !std::path::Path::new(&self.snapshot).is_absolute()
+            || self.snapshot.len() > 4096
+            || self.snapshot.chars().any(char::is_control)
+            || !digest(&self.digest)
+            || self.overlays.len() > 8192
+            || self.writable_paths.len() > 64
+            || self.overlays.iter().any(|(p, d)| !allowed(p) || !digest(d))
+        {
+            return Err(refuse());
+        }
+        let mut paths = BTreeSet::new();
+        for p in &self.writable_paths {
+            if !crate::relative_path(p)
+                || p.split('/').count() > 128
+                || !paths.insert(p.as_str())
+                || p.split('/')
+                    .any(|v| v == ".git" || v.starts_with(".env") || v == ".npmrc")
+            {
+                return Err(refuse());
+            }
+        }
+        if paths
+            .iter()
+            .any(|p| p.match_indices('/').any(|(i, _)| paths.contains(&p[..i])))
+        {
+            return Err(refuse());
+        }
+        Ok(())
+    }
+}
 fn refuse() -> Error {
     Error::refused(
         "PROJECT_CONTEXT",
@@ -381,6 +431,15 @@ mod unix {
         found: &mut BTreeMap<String, u8>,
         links: bool,
     ) -> Result<(), Error> {
+        tree_filtered(root, prefix, found, links, &[])
+    }
+    fn tree_filtered(
+        root: &File,
+        prefix: &str,
+        found: &mut BTreeMap<String, u8>,
+        links: bool,
+        skipped: &[String],
+    ) -> Result<(), Error> {
         if found.len() > 262144 || prefix.split('/').count() > 128 {
             return Err(refuse());
         }
@@ -399,6 +458,9 @@ mod unix {
             } else {
                 format!("{prefix}/{name}")
             };
+            if skipped.contains(&path) {
+                continue;
+            }
             if !allowed(&path) {
                 return Err(refuse());
             }
@@ -407,7 +469,7 @@ mod unix {
             match FileType::from_raw_mode(metadata.st_mode) {
                 FileType::Directory => {
                     found.insert(path.clone(), 1);
-                    tree(root, &path, found, links)?;
+                    tree_filtered(root, &path, found, links, skipped)?;
                 }
                 FileType::RegularFile => {
                     found.insert(path, 0);
@@ -501,6 +563,224 @@ mod unix {
         }
         root_identity(snapshot, &root)?;
         Ok((root, definition, manifest))
+    }
+    fn build_metadata(
+        path: &Path,
+    ) -> Result<(ProjectContextDefinition, ProjectContextManifest), Error> {
+        let root = project_fs::root(path)?;
+        let definition = read_json(&root, "selection.json")?;
+        let manifest = read_json(&root, "manifest.json")?;
+        validate(&definition, &manifest)?;
+        root_identity(path, &root)?;
+        Ok((definition, manifest))
+    }
+    fn effective_entries(
+        binding: &ProjectBuildContext,
+        manifest: &ProjectContextManifest,
+        inputs: &[crate::SuppliedInput],
+    ) -> Result<BTreeMap<String, ProjectContextEntry>, Error> {
+        binding.validate()?;
+        if binding.digest != manifest.digest {
+            return Err(refuse());
+        }
+        crate::project::validate_selected_paths(inputs)?;
+        let mut entries = manifest.entries.clone();
+        let mut used = BTreeSet::new();
+        for input in inputs {
+            let path = &input.receipt.path;
+            if !allowed(path) {
+                return Err(refuse());
+            }
+            if patamaps_contracts::byte_digest(input.content.as_bytes()) != input.receipt.digest
+                || input.content.len() as u64 != input.receipt.byte_length.get()
+            {
+                return Err(refuse());
+            }
+            let mode = match manifest.entries.get(path) {
+                Some(ProjectContextEntry::File { digest, mode, .. }) => {
+                    if digest != &input.receipt.digest {
+                        if binding.overlays.get(path) != Some(digest) {
+                            return Err(refuse());
+                        }
+                        used.insert(path.clone());
+                    }
+                    *mode
+                }
+                None => integer(0o600),
+                _ => return Err(refuse()),
+            };
+            entries.insert(
+                path.clone(),
+                ProjectContextEntry::File {
+                    digest: input.receipt.digest.clone(),
+                    byte_length: input.receipt.byte_length,
+                    mode,
+                },
+            );
+            add_parents(&mut entries, path)?;
+        }
+        if used != binding.overlays.keys().cloned().collect() {
+            return Err(refuse());
+        }
+        for path in &binding.writable_paths {
+            if entries
+                .keys()
+                .any(|p| p == path || p.starts_with(&(path.clone() + "/")))
+            {
+                return Err(refuse());
+            }
+            add_parents(&mut entries, path)?;
+        }
+        let total = entries
+            .values()
+            .filter_map(|v| match v {
+                ProjectContextEntry::File { byte_length, .. } => Some(byte_length.get()),
+                _ => None,
+            })
+            .sum::<u64>();
+        if entries.len() > 262144 || total > 16 * 1024 * 1024 * 1024 {
+            return Err(refuse());
+        }
+        Ok(entries)
+    }
+    fn add_parents(
+        entries: &mut BTreeMap<String, ProjectContextEntry>,
+        path: &str,
+    ) -> Result<(), Error> {
+        for (i, _) in path.match_indices('/') {
+            if entries.len() > 262144 {
+                return Err(refuse());
+            }
+            match entries.get(&path[..i]) {
+                Some(ProjectContextEntry::Directory { .. }) => {}
+                Some(_) => return Err(refuse()),
+                None => {
+                    entries.insert(
+                        path[..i].into(),
+                        ProjectContextEntry::Directory {
+                            mode: integer(0o700),
+                        },
+                    );
+                }
+            }
+        }
+        Ok(())
+    }
+    pub(crate) fn verify_build_context(
+        binding: &ProjectBuildContext,
+        inputs: &[crate::SuppliedInput],
+        metadata: &Path,
+        candidate: &Path,
+    ) -> Result<(), Error> {
+        let (_, manifest) = build_metadata(metadata)?;
+        let expected = effective_entries(binding, &manifest, inputs)?;
+        let root = project_fs::root(candidate)?;
+        let mut found = BTreeMap::new();
+        tree_filtered(&root, "", &mut found, true, &binding.writable_paths)?;
+        let kinds = expected
+            .iter()
+            .map(|(p, e)| {
+                (
+                    p.clone(),
+                    match e {
+                        ProjectContextEntry::File { .. } => 0,
+                        ProjectContextEntry::Directory { .. } => 1,
+                        ProjectContextEntry::Symlink { .. } => 2,
+                    },
+                )
+            })
+            .collect::<BTreeMap<_, _>>();
+        if found != kinds {
+            return Err(refuse());
+        }
+        for (path, entry) in expected {
+            match (&entry, describe(&root, &path)?) {
+                (
+                    ProjectContextEntry::File {
+                        digest,
+                        byte_length,
+                        mode,
+                    },
+                    ProjectContextEntry::File { mode: now, .. },
+                ) => {
+                    if *mode != now
+                        || bytes(crate::project::open_project_file(&root, &path)?, None)?
+                            != (digest.clone(), byte_length.get())
+                    {
+                        return Err(refuse());
+                    }
+                }
+                (
+                    ProjectContextEntry::Directory { mode },
+                    ProjectContextEntry::Directory { mode: now },
+                ) if *mode == now => {}
+                (
+                    ProjectContextEntry::Symlink { target },
+                    ProjectContextEntry::Symlink { target: now },
+                ) if *target == now => {}
+                _ => return Err(refuse()),
+            }
+        }
+        root_identity(candidate, &root)?;
+        Ok(())
+    }
+    pub(crate) fn stage_build_context(
+        binding: &ProjectBuildContext,
+        inputs: &[crate::SuppliedInput],
+        candidate: &Path,
+        metadata: &Path,
+    ) -> Result<(), Error> {
+        binding.validate()?;
+        let snapshot = Path::new(&binding.snapshot);
+        let (definition, manifest) = build_metadata(snapshot)?;
+        let expected = effective_entries(binding, &manifest, inputs)?;
+        let report = stage_project_context(snapshot, candidate)?;
+        if report["digest"] != binding.digest {
+            return Err(refuse());
+        }
+        let saved = StageRoot::create(metadata)?;
+        write_json(&saved, "selection.json", &definition)?;
+        write_json(&saved, "manifest.json", &manifest)?;
+        saved.verify_identity()?;
+        let root = project_fs::root(candidate)?;
+        for path in &binding.writable_paths {
+            project_fs::parent(&root, path, true)?;
+        }
+        for (index, input) in inputs.iter().enumerate() {
+            if matches!(manifest.entries.get(&input.receipt.path),Some(ProjectContextEntry::File{digest,..}) if digest==&input.receipt.digest)
+            {
+                continue;
+            }
+            let (parent, leaf) = project_fs::parent(&root, &input.receipt.path, true)?;
+            let temp = format!(".patamaps-overlay-{}-{index}", std::process::id());
+            let mut file = File::from(
+                rustix::fs::openat(
+                    &parent,
+                    temp.as_str(),
+                    rustix::fs::OFlags::WRONLY
+                        | rustix::fs::OFlags::CREATE
+                        | rustix::fs::OFlags::EXCL
+                        | rustix::fs::OFlags::NOFOLLOW
+                        | rustix::fs::OFlags::CLOEXEC,
+                    Mode::from_bits_truncate(0o600),
+                )
+                .map_err(std::io::Error::from)?,
+            );
+            file.write_all(input.content.as_bytes())?;
+            let ProjectContextEntry::File { mode, .. } = &expected[&input.receipt.path] else {
+                return Err(refuse());
+            };
+            rustix::fs::fchmod(
+                &file,
+                Mode::from_bits_truncate(mode.get().try_into().map_err(|_| refuse())?),
+            )
+            .map_err(std::io::Error::from)?;
+            file.sync_all()?;
+            rustix::fs::renameat(&parent, temp.as_str(), &parent, leaf.as_str())
+                .map_err(std::io::Error::from)?;
+        }
+        root_identity(candidate, &root)?;
+        verify_build_context(binding, inputs, metadata, candidate)
     }
     pub fn capture_project_context(
         source: &Path,
@@ -740,6 +1020,8 @@ mod unix {
 }
 #[cfg(unix)]
 pub use unix::{capture_project_context, stage_project_context, verify_project_context};
+#[cfg(unix)]
+pub(crate) use unix::{stage_build_context, verify_build_context};
 #[cfg(not(unix))]
 pub fn capture_project_context(
     _: &std::path::Path,

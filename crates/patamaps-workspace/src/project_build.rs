@@ -1,5 +1,5 @@
 //! Retained local build selection. This never activates a deployment or trust state.
-use crate::{Error, ProjectCommand, ProjectProfile, WorkspaceConfig};
+use crate::{Error, ProjectBuildContext, ProjectCommand, ProjectProfile, WorkspaceConfig};
 use serde::{Deserialize, Serialize};
 
 pub const PROJECT_BUILD_PROFILE: &str = "patamaps-project-build-1";
@@ -351,8 +351,16 @@ mod unix {
             return Err(refuse("PROJECT_BUILD_SELECTION_BINDING"));
         }
         let tool_bindings: BTreeMap<String, Value> = read(&attempt, "tool-bindings.json")?;
-        let key = canonical_digest(
-            &json!({"profile":PROJECT_BUILD_PROFILE,"source":source.digest,"plan":canonical_digest(&plan)?,"tools":tool_bindings,"executor":crate::engine_id()}),
+        let context = retained_context(&attempt)?;
+        let context_digest = context.as_ref().map(canonical_digest).transpose()?;
+        if receipt["contextDigest"] != json!(context_digest) {
+            return Err(refuse("PROJECT_BUILD_CONTEXT_BINDING"));
+        }
+        let key = input_key(
+            &source,
+            &canonical_digest(&plan)?,
+            &tool_bindings,
+            context.as_ref(),
         )?;
         if key != selected.input_key {
             return Err(refuse("PROJECT_BUILD_SELECTION_BINDING"));
@@ -405,17 +413,53 @@ mod unix {
         {
             return Err(refuse("PROJECT_BUILD_SELECTED_OUTPUT_CHANGED"));
         }
+        if let Some(binding) = &context {
+            crate::project_context::verify_build_context(
+                binding,
+                &candidate.inputs,
+                &attempt.join("context"),
+                &root,
+            )?;
+        }
         Ok(
             json!({"status":"verified-selected-build-bindings","inputKey":key,"attempt":selected.attempt,
             "sourceRediscovery":"not-performed","toolExecution":"not-performed","runtime":"not-repeated",
             "authorizationNow":"not-evaluated","activation":"not-performed"}),
         )
     }
+    fn input_key(
+        source: &ProjectCapture,
+        plan_digest: &str,
+        bindings: &BTreeMap<String, Value>,
+        context: Option<&ProjectBuildContext>,
+    ) -> Result<String, Error> {
+        let mut value = json!({"profile":PROJECT_BUILD_PROFILE,"source":source.digest,"plan":plan_digest,"tools":bindings,"executor":crate::engine_id()});
+        if let Some(context) = context {
+            context.validate()?;
+            value["context"] = json!(canonical_digest(context)?);
+        }
+        Ok(canonical_digest(&value)?)
+    }
+    fn retained_context(attempt: &Path) -> Result<Option<ProjectBuildContext>, Error> {
+        match fs::symlink_metadata(attempt.join("context-binding.json")) {
+            Ok(_) => {
+                let binding: ProjectBuildContext = read(attempt, "context-binding.json")?;
+                binding.validate()?;
+                Ok(Some(binding))
+            }
+            Err(e) if e.kind() == std::io::ErrorKind::NotFound => Ok(None),
+            Err(e) => Err(e.into()),
+        }
+    }
     fn build_inputs(
         source: &Path,
         plan: &ProjectBuildPlan,
+        context: Option<&ProjectBuildContext>,
     ) -> Result<(ProjectCapture, BTreeMap<String, Value>, String, String), Error> {
         validate(plan)?;
+        if let Some(binding) = context {
+            binding.validate()?;
+        }
         let meta = fs::symlink_metadata(source)?;
         if meta.file_type().is_symlink() || !meta.is_dir() {
             return Err(refuse("PROJECT_BUILD_DIRECTORY"));
@@ -423,22 +467,28 @@ mod unix {
         let original = capture_project(source, plan.project.clone())?;
         let bindings = tools(plan)?;
         let plan_digest = canonical_digest(plan)?;
-        let key = canonical_digest(
-            &json!({"profile":PROJECT_BUILD_PROFILE,"source":original.digest,"plan":plan_digest,"tools":bindings,"executor":crate::engine_id()}),
-        )?;
+        let key = input_key(&original, &plan_digest, &bindings, context)?;
         Ok((original, bindings, plan_digest, key))
     }
 
     /// Read declared inputs/tool identities without running commands or creating build state.
     /// This observation is not admission, readiness, or an atomic filesystem snapshot.
     pub fn project_build_input_key(source: &Path, plan: &ProjectBuildPlan) -> Result<Value, Error> {
-        let (capture, bindings, plan_digest, key) = build_inputs(source, plan)?;
-        Ok(
-            json!({"status":"observed-project-build-inputs","inputKey":key,
-            "sourceCaptureDigest":capture.digest,"planDigest":plan_digest,
-            "tools":bindings,"executor":crate::engine_id(),
-            "commandsExecuted":false,"admission":"not-performed","activation":"not-performed"}),
-        )
+        project_build_input_key_with_context(source, plan, None)
+    }
+    pub fn project_build_input_key_with_context(
+        source: &Path,
+        plan: &ProjectBuildPlan,
+        context: Option<&ProjectBuildContext>,
+    ) -> Result<Value, Error> {
+        let (capture, bindings, plan_digest, key) = build_inputs(source, plan, context)?;
+        let mut report = json!({"status":"observed-project-build-inputs","inputKey":key,
+            "sourceCaptureDigest":capture.digest,"planDigest":plan_digest,"tools":bindings,"executor":crate::engine_id(),
+            "commandsExecuted":false,"admission":"not-performed","activation":"not-performed"});
+        if let Some(binding) = context {
+            report["contextReference"] = json!({"digest":binding.digest,"bytesVerification":"not-performed","semantics":"declared-sealed-snapshot-reference"});
+        }
+        Ok(report)
     }
 
     pub fn build_project(
@@ -447,7 +497,19 @@ mod unix {
         plan: &ProjectBuildPlan,
         force: bool,
     ) -> Result<Value, Error> {
+        build_project_with_context(source, state, plan, None, force)
+    }
+    pub fn build_project_with_context(
+        source: &Path,
+        state: &Path,
+        plan: &ProjectBuildPlan,
+        context: Option<&ProjectBuildContext>,
+        force: bool,
+    ) -> Result<Value, Error> {
         validate(plan)?;
+        if let Some(binding) = context {
+            binding.validate()?;
+        }
         let source_meta = fs::symlink_metadata(source)?;
         if source_meta.file_type().is_symlink() || !source_meta.is_dir() {
             return Err(refuse("PROJECT_BUILD_DIRECTORY"));
@@ -484,7 +546,7 @@ mod unix {
             .open(state.join("driver.lock"))?;
         lock.try_lock()
             .map_err(|_| refuse("PROJECT_BUILD_LOCK_UNAVAILABLE"))?;
-        let (original, bindings, plan_digest, key) = build_inputs(&source, plan)?;
+        let (original, bindings, plan_digest, key) = build_inputs(&source, plan, context)?;
         let previous = selected_bytes(&state)?;
         if let Some(raw) = &previous {
             let selected = selection(raw)?;
@@ -514,6 +576,9 @@ mod unix {
         write_new(&attempt.join("plan.json"), plan)?;
         write_new(&attempt.join("source-capture.json"), &original)?;
         write_new(&attempt.join("tool-bindings.json"), &bindings)?;
+        if let Some(binding) = context {
+            write_new(&attempt.join("context-binding.json"), binding)?;
+        }
         let began = Instant::now();
         let mut published = false;
         let result = (|| {
@@ -530,7 +595,16 @@ mod unix {
             }
             let (definition, inputs) = merged(&original, &baseline)?;
             let candidate = attempt.join("candidate");
-            crate::project::stage_selected_inputs(&inputs, &candidate)?;
+            if let Some(binding) = context {
+                crate::project_context::stage_build_context(
+                    binding,
+                    &inputs,
+                    &candidate,
+                    &attempt.join("context"),
+                )?;
+            } else {
+                crate::project::stage_selected_inputs(&inputs, &candidate)?;
+            }
             let captured = capture_project(&candidate, definition)?;
             write_new(&attempt.join("candidate-capture.json"), &captured)?;
             let mut summaries = Vec::new();
@@ -570,11 +644,14 @@ mod unix {
                 return Err(refuse("PROJECT_BUILD_SOURCE_OR_TOOL_CHANGED"));
             }
             write_new(&attempt.join("artifacts.json"), &outputs)?;
-            let receipt = json!({"status":"verified-command-build","inputKey":key,"planDigest":plan_digest,
+            let mut receipt = json!({"status":"verified-command-build","inputKey":key,"planDigest":plan_digest,
                 "sourceCaptureDigest":original.digest,"candidateCaptureDigest":captured.digest,"workspaceDigest":baseline.digest,
                 "commands":summaries,"elapsedMs":began.elapsed().as_millis() as u64,
                 "completeBuildContextEstablished":false,"completeExecutableDependencyClosureEstablished":false,
                 "runtimeMeaning":"owner-declared-verification-commands; not inferred","activation":"not-performed"});
+            if let Some(binding) = context {
+                receipt["contextDigest"] = json!(canonical_digest(binding)?);
+            }
             write_new(&attempt.join("receipt.json"), &receipt)?;
             if selected_bytes(&state)? != previous {
                 return Err(refuse("PROJECT_BUILD_SELECTION_RACE"));
@@ -604,6 +681,14 @@ mod unix {
                 || tools(plan)? != bindings
             {
                 return Err(refuse("PROJECT_BUILD_SELECTION_RACE"));
+            }
+            if let Some(binding) = context {
+                crate::project_context::verify_build_context(
+                    binding,
+                    &captured.inputs,
+                    &attempt.join("context"),
+                    &candidate,
+                )?;
             }
             fs::rename(
                 attempt.join("selection.candidate.json"),
@@ -637,7 +722,10 @@ mod unix {
     }
 }
 #[cfg(unix)]
-pub use unix::{build_project, project_build_input_key, verify_project_build_selection};
+pub use unix::{
+    build_project, build_project_with_context, project_build_input_key,
+    project_build_input_key_with_context, verify_project_build_selection,
+};
 
 #[cfg(not(unix))]
 pub fn build_project(
@@ -663,6 +751,31 @@ pub fn verify_project_build_selection(_: &std::path::Path) -> Result<serde_json:
 pub fn project_build_input_key(
     _: &std::path::Path,
     _: &ProjectBuildPlan,
+) -> Result<serde_json::Value, Error> {
+    Err(Error::refused(
+        "PROJECT_BUILD_PLATFORM",
+        "Retained builds require Unix",
+    ))
+}
+
+#[cfg(not(unix))]
+pub fn build_project_with_context(
+    _: &std::path::Path,
+    _: &std::path::Path,
+    _: &ProjectBuildPlan,
+    _: Option<&ProjectBuildContext>,
+    _: bool,
+) -> Result<serde_json::Value, Error> {
+    Err(Error::refused(
+        "PROJECT_BUILD_PLATFORM",
+        "Retained builds require Unix",
+    ))
+}
+#[cfg(not(unix))]
+pub fn project_build_input_key_with_context(
+    _: &std::path::Path,
+    _: &ProjectBuildPlan,
+    _: Option<&ProjectBuildContext>,
 ) -> Result<serde_json::Value, Error> {
     Err(Error::refused(
         "PROJECT_BUILD_PLATFORM",

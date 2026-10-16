@@ -88,6 +88,7 @@ def arguments():
     parser.add_argument("--source", type=Path, required=True)
     parser.add_argument("--state", type=Path, required=True)
     parser.add_argument("--compiler", type=Path, required=True)
+    parser.add_argument("--context", type=Path, help="Explicit sealed context binding for each native update")
     parser.add_argument("--poll-ms", type=int, default=1000)
     parser.add_argument("--debounce-ms", type=int, default=300)
     parser.add_argument("--runner", nargs=argparse.REMAINDER,
@@ -105,6 +106,8 @@ def arguments():
         parser.error("poll-ms must be 50..60000 and debounce-ms 0..60000")
     for name in ("plan", "source", "state", "compiler"):
         setattr(args, name, getattr(args, name).absolute())
+    if args.context is not None:
+        args.context = args.context.absolute()
     if not args.runner:
         node, supervisor = os.environ.get("PATAMAPS_DEV_NODE"), os.environ.get("PATAMAPS_DEV_SUPERVISOR")
         if node and supervisor:
@@ -120,8 +123,11 @@ def arguments():
 
 
 def observe(args):
+    argv = [str(args.compiler), "project-build-input-key", str(args.plan), "--source", str(args.source)]
+    if args.context is not None:
+        argv.extend(["--context", str(args.context)])
     result = subprocess.run(
-        [str(args.compiler), "project-build-input-key", str(args.plan), "--source", str(args.source)],
+        argv,
         stdout=subprocess.PIPE, stderr=subprocess.PIPE, timeout=30, check=False)
     if len(result.stdout) > 1048576 or len(result.stderr) > 65536:
         raise ValueError("BUILD_INPUT_OBSERVATION_OUTPUT_LIMIT")
@@ -200,6 +206,8 @@ def main():
                 # Guard both sides of policy runner. Neither wrapper replaces Rust validation.
                 native = [str(args.compiler), "project-build", str(args.plan),
                           "--source", str(args.source), "--state", str(args.state)]
+                if args.context is not None:
+                    native.extend(["--context", str(args.context)])
                 inner = [sys.executable, str(script), "__guard", *native]
                 argv = [sys.executable, str(script), "__guard", *args.runner, *inner]
                 event("starting-project-build-update", inputKey=key)

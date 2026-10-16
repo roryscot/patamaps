@@ -22,6 +22,7 @@ def main():
     parser.add_argument("--compiler", type=Path, default=ROOT / "target/debug/patamaps")
     parser.add_argument("--runner", nargs=argparse.REMAINDER)
     parser.add_argument("--work", type=Path)
+    parser.add_argument("--context", type=Path)
     parser.add_argument("--isolated-ci", action="store_true")
     argv = sys.argv[1:]
     runner = None
@@ -32,6 +33,8 @@ def main():
             parser.error("--runner requires an executable")
     args = parser.parse_args(argv)
     args.runner = runner
+    if args.context is not None:
+        args.context = args.context.absolute()
     if os.environ.get("WARGAME_STORAGE_RUN_TOKEN"):
         parser.error("run outside the allocating lease; each watch update is supervised")
     if args.isolated_ci and (platform.system() != "Linux" or os.environ.get("GITHUB_ACTIONS") != "true"):
@@ -131,6 +134,10 @@ def main():
         argv = [sys.executable, str(ROOT / "scripts/project_watch.py"), str(plan_path),
                 "--source", str(owner), "--state", str(state), "--compiler", str(args.compiler),
                 "--poll-ms", "100", "--debounce-ms", "500", "--runner", *(runner_override or runner)]
+        if args.context is not None:
+            # Context must precede the runner's remainder arguments.
+            split=argv.index("--runner")
+            argv[split:split]=["--context",str(args.context)]
         if parent_wrapper:
             # Real parent process; exec would erase the parent-death condition.
             argv = [sys.executable, "-c",
@@ -161,6 +168,9 @@ def main():
 
     fixed = {str(path): hashlib.sha256(path.read_bytes()).hexdigest() for path in
              [Path(__file__), ROOT / "scripts/project_watch.py", ROOT / "scripts/project_watch_guard_controls.py", args.compiler]}
+    if args.context is not None:
+        fixed[str(args.context)]=hashlib.sha256(args.context.read_bytes()).hexdigest()
+        receipt["contextBindingDigest"]=fixed[str(args.context)]
     receipt["fixedSourceDigests"] = fixed
     save()
     try:
@@ -171,6 +181,16 @@ def main():
         save()
         start("edits")
         wait_until(lambda: completed("edits", 1), "initial selected build")
+        if args.context is not None:
+            expected_context=json.loads(args.context.read_text())
+            selected=json.loads(pointer())
+            attempt=state/selected["attempt"]
+            assert json.loads((attempt/"context-binding.json").read_text())==expected_context
+            assert json.loads((attempt/"context/manifest.json").read_text())["digest"]==expected_context["digest"]
+            receipt["controls"].append(dict(control="native-context-binding-materialized",result="passed",
+                snapshotDigest=expected_context["digest"],nativeSelectedContextRequired=True))
+            save()
+
         previous = pointer()
         attempts = len(list((state / "attempts").iterdir()))
         time.sleep(1)

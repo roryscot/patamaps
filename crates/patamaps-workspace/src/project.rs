@@ -296,10 +296,7 @@ pub fn stage_project_capture(
     }))
 }
 
-pub(crate) fn stage_selected_inputs(
-    inputs: &[SuppliedInput],
-    destination: &Path,
-) -> Result<(), Error> {
+pub(crate) fn validate_selected_paths(inputs: &[SuppliedInput]) -> Result<(), Error> {
     let paths = inputs
         .iter()
         .map(|v| v.receipt.path.as_str())
@@ -315,6 +312,13 @@ pub(crate) fn stage_selected_inputs(
     {
         return Err(refuse("PROJECT_STAGE_PATH_CONFLICT"));
     }
+    Ok(())
+}
+pub(crate) fn stage_selected_inputs(
+    inputs: &[SuppliedInput],
+    destination: &Path,
+) -> Result<(), Error> {
+    validate_selected_paths(inputs)?;
     stage_inputs(inputs, destination)
 }
 
