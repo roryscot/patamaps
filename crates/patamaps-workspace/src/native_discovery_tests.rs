@@ -575,7 +575,7 @@ fn literal_exclusions_skip_only_exact_ordinary_glob_directories() {
         )
     );
     assert!(expand_member(&root, &root, "crates/*", &inputs).is_err());
-    let overlap = BTreeSet::from(["crates/keep/nested".to_owned()]);
+    let overlap = BTreeSet::from(["crates/ignored".to_owned(), "crates/keep/nested".to_owned()]);
     assert!(matches!(
         expand_member_filtered(&root, &root, "crates/*", &inputs, &overlap),
         Err(Error::Refused {
