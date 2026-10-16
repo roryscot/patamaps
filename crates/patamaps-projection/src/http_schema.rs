@@ -690,10 +690,10 @@ fn http_json_boundary(value: &serde_json::Value) -> bool {
 "#;
 
 pub(super) const TYPESCRIPT_RUNTIME: &str = r#"
-function httpJsonBoundary(value: unknown): boolean {
+function httpJsonBoundary(value: unknown, maximumDepth = 64, maximumValues = 16384): boolean {
  let work = 0;
  function visit(value: unknown, depth: number): boolean {
-  if (++work > 16384 || depth > 64) return false;
+  if (++work > maximumValues || depth > maximumDepth) return false;
   if (value === null || typeof value === 'boolean') return true;
   if (typeof value === 'number') return Number.isFinite(value) && (!Number.isInteger(value) || Number.isSafeInteger(value));
   if (typeof value === 'string') return unicodeScalars(value);

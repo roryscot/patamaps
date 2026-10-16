@@ -10,7 +10,7 @@ const PROFILE: &str = "patamaps-http-object-strings-1";
 const JSON_PROFILE: &str = "patamaps-http-json-2";
 const DIALECT: &str = "https://json-schema.org/draft/2020-12/schema";
 
-fn refusal(code: &str, message: &str, subject: &str) -> CheckError {
+pub(super) fn refusal(code: &str, message: &str, subject: &str) -> CheckError {
     CheckError(vec![Issue::error(code, message, subject)])
 }
 
@@ -104,7 +104,10 @@ fn schema(value: &Value, subject: &str) -> Result<ObjectSchema, CheckError> {
     Ok(parsed)
 }
 
-fn attribute<T: serde::de::DeserializeOwned>(entity: &Entity, key: &str) -> Result<T, CheckError> {
+pub(super) fn attribute<T: serde::de::DeserializeOwned>(
+    entity: &Entity,
+    key: &str,
+) -> Result<T, CheckError> {
     let value = entity
         .attributes
         .as_ref()
@@ -134,7 +137,7 @@ fn path(value: &str) -> bool {
             .all(|b| b.is_ascii_alphanumeric() || b"/_-".contains(&b))
 }
 
-fn identifier(value: &str) -> bool {
+pub(super) fn identifier(value: &str) -> bool {
     crate::language_identifier(value)
         && ![
             "self", "Self", "super", "crate", "type", "mod", "fn", "impl", "pub", "struct", "enum",

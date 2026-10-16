@@ -80,6 +80,12 @@ jobs:
           rustup toolchain install 1.99.0 --profile minimal --component rustfmt --component clippy
           cargo fetch --locked
           cargo fetch --manifest-path examples/cross-stack/service/Cargo.toml --locked
+          if [ ! -f examples/http-transport/service/Cargo.lock ]; then
+            cargo generate-lockfile --manifest-path examples/http-transport/service/Cargo.toml
+          fi
+          cargo fetch --manifest-path examples/http-transport/service/Cargo.toml --locked
+          mkdir -p ci-evidence/transport-lock
+          cp examples/http-transport/service/Cargo.lock ci-evidence/transport-lock/Cargo.lock
           npm ci --prefix examples/cross-stack/web --ignore-scripts --no-audit --no-fund
       - name: Check actual source providers, admission and offline replay
         run: python3 -B scripts/ci_cross_stack.py
@@ -93,6 +99,7 @@ jobs:
           name: cross-stack-diagnostics-source-${{ github.sha }}
           path: |
             ci-evidence/cross-stack-*/receipt.json
+            ci-evidence/transport-lock/Cargo.lock
             ci-evidence/cross-stack-image/image-controls.json
             ci-evidence/cross-stack-image/browser/
             ci-evidence/cross-stack-compatibility/metamap-comparison/receipt.json

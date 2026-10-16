@@ -4,6 +4,8 @@ mod capture;
 mod compare;
 mod http;
 mod http_schema;
+mod http_transport;
+pub use http_transport::{emit_axum_witness, emit_http_client};
 mod path_tree;
 pub use capture::{
     CaptureInputs, CaptureRecord, CaptureVersion, SourceReceipt, VerifiedReplay, capture, evaluate,

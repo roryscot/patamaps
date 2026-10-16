@@ -85,6 +85,8 @@ def main():
             receipt["toolSupervision"] = verify_supervision(ROOT, work, env, run)
             from project_http_json import verify as verify_http_json
             receipt["jsonHttpContracts"] = verify_http_json(ROOT, work, env, run)
+            from project_http_transport import verify as verify_http_transport
+            receipt["httpTransport"] = verify_http_transport(ROOT, work, env, run)
         elif args.phase == "development":
             from cross_stack_development import verify
             receipt["developmentPreview"] = verify(ROOT, work, env, run)
