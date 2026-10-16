@@ -59,6 +59,8 @@ pub enum OutputLanguage {
     Json,
     Rust,
     Typescript,
+    HttpClient,
+    AxumWitness,
 }
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase", deny_unknown_fields)]

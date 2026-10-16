@@ -121,6 +121,50 @@ def verify(root,work,env,run):
         assert digest=="sha256:"+hashlib.sha256((app/"src/api.rs").read_bytes()).hexdigest()
         return app
     app=prepare("positive")
+    # The real positive consumer now compiles workspace-derived framework bytes.
+    api_digest=hashlib.sha256((app/"src/api.rs").read_bytes()).hexdigest()
+    shutil.copyfile(root/"relation-packs/routing.json",app/"workspace-routing-pack.json")
+    workspace_config={"schemaVersion":"0.1.0","documentType":"workspace-config","id":"urn:transport:graph","namespace":"transport-controls","revision":"1",
+        "sources":[{"adapter":"portable-shard","id":"urn:transport:workspace-source","path":"graph.json"}],
+        "packs":["workspace-routing-pack.json"],"policy":"policy.json",
+        "projections":[{"path":"projection.json","emissions":[{"path":"generated/client.ts","language":"http-client"},{"path":"generated/witness.rs","language":"axum-witness"}]}],
+        "context":{},"evaluatedAt":"2026-10-15T00:00:00Z"}
+    (app/"workspace.json").write_text(json.dumps(workspace_config,indent=2)+"\n")
+    generated=json.loads(command("workspace-generate",[cli,"generate","workspace.json","--root",app],cwd=app))
+    baseline=generated["baseline"];assert set(baseline["outputs"])=={"generated/client.ts","generated/witness.rs"}
+    saved=app/"workspace-baseline.json";saved.write_text(json.dumps(baseline,indent=2)+"\n")
+    composed=app/"workspace-composed-graph.json";composed.write_text(json.dumps(baseline["captures"][0]["inputs"]["graph"],indent=2)+"\n")
+    common=[cli,"link",composed,app/"policy.json",app/"projection.json","--relation-pack",app/"workspace-routing-pack.json","--as-of","2026-10-15T00:00:00Z"]
+    for fmt,path,name in [("http-client","generated/client.ts","client.ts"),("axum-witness","generated/witness.rs","witness.rs")]:
+        direct=command("workspace-direct-"+fmt,[*common,"--format",fmt])
+        assert direct==baseline["outputs"][path].encode()+b"\n",(fmt,"composed checked emission differs")
+        (app/name).write_text(baseline["outputs"][path])
+    controls.append(dict(label="workspace-framework-emissions",stage="workspace",result="generated",outputs=2,directComposedEmissionBytesEqual=True,consumer="workspace-derived-bytes-used-by-subsequent-real-build"))
+    save_controls()
+    bad_config=copy.deepcopy(workspace_config);bad_config["projections"][0]["emissions"][0]["bindingSlot"]="handler"
+    (app/"workspace-bad-slot.json").write_text(json.dumps(bad_config)+"\n")
+    command("workspace-binding-slot",[cli,"generate","workspace-bad-slot.json","--root",app],cwd=app,expected_success=False)
+    assert "WORKSPACE_HTTP_BINDING_SLOT" in (work/"transport-workspace-binding-slot.stderr.log").read_text()
+    controls.append(dict(label="workspace-framework-binding-slot",stage="workspace",result="refused",code="WORKSPACE_HTTP_BINDING_SLOT"));save_controls()
+    moves=[]
+    for name in ["graph.json","policy.json","projection.json","workspace-routing-pack.json"]:
+        path=app/name;destination=path.with_name(path.name+".retained");path.rename(destination)
+        moves.append(dict(configuredPath=str(path),preservedAt=str(destination)))
+    assert all(not Path(v["configuredPath"]).exists() for v in moves)
+    previous_environment=dict(env)
+    try:
+        env.clear();env.update(PATH="/patamaps-no-external-programs",HOME=str(app/"no-user-home"))
+        replay=json.loads(command("workspace-offline",[cli,"verify-workspace",saved],cwd=work))
+        assert replay["status"]=="verified-record-bindings" and replay["sourceRediscovery"]=="not-performed"
+    finally:env.clear();env.update(previous_environment)
+    controls.append(dict(label="workspace-framework-offline",stage="workspace",result="verified",sourcePathsUnavailable=True,externalProgramsAbsentFromPath=True,retainedMoves=moves));save_controls()
+    tampered=copy.deepcopy(baseline);tampered["outputs"]["generated/client.ts"]+="\n// altered generated output\n";tampered.pop("digest")
+    tampered["digest"]=json.loads(command("workspace-tamper-digest",[cli,"json","digest"],input_bytes=json.dumps(tampered).encode()))
+    (app/"workspace-tampered.json").write_text(json.dumps(tampered)+"\n")
+    command("workspace-tamper",[cli,"verify-workspace",app/"workspace-tampered.json"],expected_success=False)
+    assert "WORKSPACE_COMPOSITION_BINDING" in (work/"transport-workspace-tamper.stderr.log").read_text()
+    controls.append(dict(label="workspace-framework-output-tamper",stage="workspace",result="refused",code="WORKSPACE_COMPOSITION_BINDING",baselineAddressRehashed=True));save_controls()
+    assert api_digest==hashlib.sha256((app/"src/api.rs").read_bytes()).hexdigest()
     previous=env.get("PATAMAPS_AXUM_WITNESS")
     try:
         env["PATAMAPS_AXUM_WITNESS"]=str(app/"witness.rs")

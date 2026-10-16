@@ -46,6 +46,7 @@ struct Parser<'a> {
     subject: &'a str,
     nodes: usize,
     active: BTreeSet<String>,
+    validated_definitions: BTreeSet<String>,
     transport: bool,
 }
 
@@ -138,6 +139,9 @@ impl Parser<'_> {
                 .ok_or_else(|| self.error())?;
             let result = self.node(target, false, depth + 1);
             self.active.remove(name);
+            if result.is_ok() {
+                self.validated_definitions.insert(name.into());
+            }
             return result;
         }
         for key in ["oneOf", "anyOf"] {
@@ -358,6 +362,7 @@ fn parse_profile(value: &Value, subject: &str, transport: bool) -> Result<Schema
         subject,
         nodes: 0,
         active: BTreeSet::new(),
+        validated_definitions: BTreeSet::new(),
         transport,
     };
     if value.get("$schema").and_then(Value::as_str) != Some(DIALECT)
@@ -371,8 +376,14 @@ fn parse_profile(value: &Value, subject: &str, transport: bool) -> Result<Schema
             .as_object()
             .filter(|v| v.len() <= 128)
             .ok_or_else(|| parser.error())?;
-        for definition in defs.values() {
-            parser.node(definition, false, 0)?;
+        for (name, definition) in defs {
+            // Root expansion already checked every assertion in referenced defs.
+            // Do not charge the same independent validation a second time. Root
+            // references still expand normally and retain the2048 visitor bound.
+            if !parser.validated_definitions.contains(name) {
+                parser.node(definition, false, 0)?;
+                parser.validated_definitions.insert(name.clone());
+            }
         }
     }
     Ok(result)
@@ -835,6 +846,34 @@ mod tests {
             let mut schema = schema;
             schema["$schema"] = json!(DIALECT);
             assert!(parse_transport(&schema, "unsupported").is_err(), "{schema}");
+        }
+    }
+    #[test]
+    fn repeated_definitions_do_not_pay_for_redundant_post_validation() {
+        let shared = (0..90)
+            .map(|i| (format!("field{i}"), json!({"type":"string"})))
+            .collect::<Map<_, _>>();
+        let schema = |count| {
+            json!({"$schema":DIALECT,"$defs":{"Shared":{"type":"object","properties":shared,"additionalProperties":false}},
+            "type":"object","additionalProperties":false,"properties":(0..count).map(|i|(format!("item{i}"),json!({"$ref":"#/$defs/Shared"}))).collect::<Map<_,_>>()})
+        };
+        // Root1+extra1+22*(ref1+object1+90fields+extra1)=2048.
+        // The previous redundant Shared validation pushed this valid root over budget.
+        assert!(parse(&schema(22), "at-bound").is_ok());
+        assert!(parse_transport(&schema(22), "at-bound").is_ok());
+        assert!(parse(&schema(23), "over-bound").is_err());
+        assert!(parse_transport(&schema(23), "over-bound").is_err());
+    }
+    #[test]
+    fn unreachable_definitions_still_validate_and_cycles_still_refuse() {
+        for definitions in [
+            json!({"Unused":{"type":"string","pattern":"unsupported"}}),
+            json!({"UnusedA":{"$ref":"#/$defs/UnusedB"},"UnusedB":{"$ref":"#/$defs/UnusedA"}}),
+            json!({"Referenced":{"type":"string"},"Unused":{"type":"integer","format":"uint128"}}),
+        ] {
+            let schema = json!({"$schema":DIALECT,"type":"string","$defs":definitions});
+            assert!(parse(&schema, "unused").is_err());
+            assert!(parse_transport(&schema, "unused").is_err());
         }
     }
     #[test]

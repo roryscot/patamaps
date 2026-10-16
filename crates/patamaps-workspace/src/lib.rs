@@ -19,7 +19,8 @@ pub use model::*;
 use patamaps_contracts::*;
 use patamaps_core::{CheckError, CheckedGraph, EvaluationOptions, admit, compose};
 use patamaps_projection::{
-    CaptureInputs, SourceReceipt, capture, emit_rust, emit_typescript, executor_id, project, replay,
+    CaptureInputs, SourceReceipt, capture, emit_axum_witness, emit_http_client, emit_rust,
+    emit_typescript, executor_id, project, replay,
 };
 use serde_json::json;
 use sha2::{Digest, Sha256};
@@ -227,6 +228,16 @@ fn validate_config(config: &WorkspaceConfig) -> Result<(), Error> {
     }
     for p in &config.projections {
         for e in &p.emissions {
+            if matches!(
+                e.language,
+                OutputLanguage::HttpClient | OutputLanguage::AxumWitness
+            ) && e.binding_slot.is_some()
+            {
+                return Err(Error::refused(
+                    "WORKSPACE_HTTP_BINDING_SLOT",
+                    "HTTP emissions use declared profile slots; bindingSlot overrides are unsupported",
+                ));
+            }
             if !relative_path(&e.path) || !outputs.insert(&e.path) {
                 return Err(Error::refused(
                     "WORKSPACE_OUTPUT_PATH",
@@ -513,6 +524,8 @@ fn assemble(
                             .expect("canonical UTF-8")
                     }
                     OutputLanguage::Rust => emit_rust(&projection, e.binding_slot.as_deref())?,
+                    OutputLanguage::HttpClient => emit_http_client(&projection)?,
+                    OutputLanguage::AxumWitness => emit_axum_witness(&projection)?,
                     OutputLanguage::Typescript => {
                         emit_typescript(&projection, "bindings", e.binding_slot.as_deref())?
                     }
