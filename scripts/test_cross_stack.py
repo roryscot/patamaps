@@ -23,7 +23,7 @@ def digest(raw):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--phase", choices=["transport-http", "json-http", "bootstrap", "fixture", "discovery", "regression", "bindings", "docker", "workspace", "workspace-smoke", "development", "compatibility", "installed"], required=True)
+    parser.add_argument("--phase", choices=["commands", "transport-http", "json-http", "bootstrap", "fixture", "discovery", "regression", "bindings", "docker", "workspace", "workspace-smoke", "development", "compatibility", "installed"], required=True)
     args = parser.parse_args()
     ensure_guarded()
     stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%S.%fZ")
@@ -39,7 +39,7 @@ def main():
         # Reuse the already compiled Intel test profile without discarding it.
         env.pop("CARGO_PROFILE_DEV_DEBUG", None)
         env.pop("CARGO_PROFILE_TEST_DEBUG", None)
-    if args.phase in {"json-http", "transport-http"}:
+    if args.phase in {"json-http", "transport-http", "commands"}:
         env["CARGO_TARGET_DIR"] = str(ROOT / "target")
     receipt = {"status": "running", "phase": args.phase, "profile": "patamaps-cross-stack-fixture-1",
                "startedUtc": datetime.now(timezone.utc).isoformat(), "commands": [],
@@ -99,6 +99,10 @@ def main():
             run("workspace-tests", ["cargo", "test", "--workspace", "--locked", "--offline"], timeout=600)
             run("workspace-doctests", ["cargo", "test", "--workspace", "--doc", "--locked", "--offline"])
             receipt["scope"] = "Native workspace lint, unit/integration and documentation regression gates; no cross-stack release acceptance"
+        elif args.phase == "commands":
+            run("command-cli", ["cargo", "build", "-p", "patamaps-cli", "--locked", "--offline"])
+            from project_command_controls import verify
+            receipt["projectCommands"] = verify(ROOT, work, env, run)
         elif args.phase == "transport-http":
             run("transport-format", ["cargo", "fmt", "--all", "--", "--check"])
             run("transport-projection-tests", ["cargo", "test", "-p", "patamaps-projection", "--locked", "--offline"])

@@ -1,0 +1,310 @@
+{
+  "status": "passed-native-project-command-scope",
+  "baseCommit": "caa33eccff18e8e4e6bba353088a91333ff70160",
+  "implementationSha256": {
+    ".github/workflows/native-capabilities.yml": "051941e7c85e802736a13f645c816bdaf0f327ff584dc2516fb1a6864aa05b20",
+    "crates/patamaps-cli/src/main.rs": "37bd7ea755a2856811028698fcf2e1510a05e688ff7216baacd5bb5f6a401c46",
+    "crates/patamaps-workspace/src/lib.rs": "2d236033b9d9d9c7a1265e9cec4776c51179117de9e2bea1e127a43d4345bec9",
+    "crates/patamaps-workspace/src/process.rs": "e5b2fc5a5944e4333485d789bf94563439c34cdc0d6f16a59bc49e1633d6fc95",
+    "crates/patamaps-workspace/src/process_tests.rs": "40a4df97ad053f1e11851559703257502fae859683b1fccdb55915b30bc12849",
+    "crates/patamaps-workspace/src/project_command.rs": "f92e7fc3f21f37f55c3a6081eaab15a1501975a062b84b96cfca04b8ea32c2fb",
+    "crates/patamaps-workspace/src/tool_supervisor.rs": "1345bce8349284e0887b3a5c41c361fa963e843fbda17a3065d28160877d1653",
+    "crates/patamaps-workspace/tests/project_command.rs": "d5ab77dd16ccad2213fa5ea6aafe06ae1fda3e8105c038539a989fca170f8230",
+    "scripts/ci_cross_stack.py": "5c1b09c49eb158cc62966e7ab698a65b43b6151fad64cf026b6992021d5e00c2",
+    "scripts/project_command_controls.py": "3f98ed6c28ad7aeff97ed27c29d162584a94831cedf1fb90320a1c5cdb578c29",
+    "scripts/test_cross_stack.py": "85c22f9794c233948420f824003ae2f1e9dbdf1b2bd8c4de6e632e92b6cb6c02"
+  },
+  "finalSourceUnchangedDuringVerification": true,
+  "commands": [
+    {
+      "label": "format",
+      "argv": [
+        "cargo",
+        "fmt",
+        "--all"
+      ],
+      "exitCode": 0,
+      "seconds": 1.55
+    },
+    {
+      "label": "format-check",
+      "argv": [
+        "cargo",
+        "fmt",
+        "--all",
+        "--",
+        "--check"
+      ],
+      "exitCode": 0,
+      "seconds": 1.058
+    },
+    {
+      "label": "cli",
+      "argv": [
+        "cargo",
+        "build",
+        "-p",
+        "patamaps-cli",
+        "--locked",
+        "--offline"
+      ],
+      "exitCode": 0,
+      "seconds": 11.008
+    },
+    {
+      "label": "workspace",
+      "argv": [
+        "cargo",
+        "test",
+        "-p",
+        "patamaps-workspace",
+        "--locked",
+        "--offline"
+      ],
+      "exitCode": 0,
+      "seconds": 21.959
+    },
+    {
+      "label": "commands",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/intel-python-3.13.16-20261013/runtime/python/bin/python3",
+        "-B",
+        "scripts/test_cross_stack.py",
+        "--phase",
+        "commands"
+      ],
+      "exitCode": 0,
+      "seconds": 7.059
+    },
+    {
+      "label": "clippy",
+      "argv": [
+        "cargo",
+        "clippy",
+        "-p",
+        "patamaps-workspace",
+        "-p",
+        "patamaps-cli",
+        "--all-targets",
+        "--locked",
+        "--offline",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exitCode": 0,
+      "seconds": 4.321
+    }
+  ],
+  "commandControlCount": 13,
+  "commandControls": [
+    {
+      "control": "command-environment",
+      "result": "completed-project-command",
+      "exitCode": 0,
+      "selectedInputsUnchanged": true,
+      "executableUnchanged": true
+    },
+    {
+      "control": "command-nonzero",
+      "result": "refused-project-command",
+      "exitCode": 9,
+      "selectedInputsUnchanged": true,
+      "executableUnchanged": true
+    },
+    {
+      "control": "command-source-change",
+      "result": "refused-project-command",
+      "exitCode": 0,
+      "selectedInputsUnchanged": false,
+      "executableUnchanged": true
+    },
+    {
+      "control": "command-directory",
+      "result": "refused",
+      "code": "PROJECT_COMMAND_DIRECTORY"
+    },
+    {
+      "control": "command-environment-reference",
+      "result": "refused",
+      "code": "PROJECT_COMMAND_ENVIRONMENT"
+    },
+    {
+      "control": "command-helper-binding",
+      "result": "refused",
+      "code": "PROJECT_COMMAND_CODE_INPUTS"
+    },
+    {
+      "control": "command-deadline",
+      "result": "refused",
+      "code": "ADAPTER_TIMEOUT"
+    },
+    {
+      "control": "command-pipe-limit",
+      "result": "refused",
+      "code": "ADAPTER_OUTPUT_LIMIT"
+    },
+    {
+      "control": "command-binary-output",
+      "result": "completed-project-command",
+      "exitCode": 0,
+      "selectedInputsUnchanged": true,
+      "executableUnchanged": true
+    },
+    {
+      "control": "command-executable-alias",
+      "result": "completed-project-command",
+      "exitCode": 0,
+      "selectedInputsUnchanged": true,
+      "executableUnchanged": true
+    },
+    {
+      "control": "command-cargo-version",
+      "result": "completed-project-command",
+      "exitCode": 0,
+      "selectedInputsUnchanged": true,
+      "executableUnchanged": true
+    },
+    {
+      "control": "command-tool-change",
+      "result": "refused-project-command",
+      "exitCode": 0,
+      "selectedInputsUnchanged": true,
+      "executableUnchanged": false
+    },
+    {
+      "control": "command-parent-death",
+      "result": "owned-descendant-stopped",
+      "parentSignal": "SIGKILL",
+      "ordinaryProcessGroupOnly": true
+    }
+  ],
+  "earlierSharedExecutorRegression": {
+    "retainedEvidence": ".tools/project-adoption/project-command-native-20261016",
+    "commands": [
+      {
+        "label": "format",
+        "argv": [
+          "cargo",
+          "fmt",
+          "--all"
+        ],
+        "exitCode": 0,
+        "seconds": 1.571
+      },
+      {
+        "label": "format-check",
+        "argv": [
+          "cargo",
+          "fmt",
+          "--all",
+          "--",
+          "--check"
+        ],
+        "exitCode": 0,
+        "seconds": 1.136
+      },
+      {
+        "label": "cli",
+        "argv": [
+          "cargo",
+          "build",
+          "-p",
+          "patamaps-cli",
+          "--locked",
+          "--offline"
+        ],
+        "exitCode": 0,
+        "seconds": 11.211
+      },
+      {
+        "label": "workspace",
+        "argv": [
+          "cargo",
+          "test",
+          "-p",
+          "patamaps-workspace",
+          "--locked",
+          "--offline"
+        ],
+        "exitCode": 0,
+        "seconds": 23.196
+      },
+      {
+        "label": "commands",
+        "argv": [
+          "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/intel-python-3.13.16-20261013/runtime/python/bin/python3",
+          "-B",
+          "scripts/test_cross_stack.py",
+          "--phase",
+          "commands"
+        ],
+        "exitCode": 0,
+        "seconds": 4.405
+      },
+      {
+        "label": "discovery",
+        "argv": [
+          "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/intel-python-3.13.16-20261013/runtime/python/bin/python3",
+          "-B",
+          "scripts/test_cross_stack.py",
+          "--phase",
+          "discovery"
+        ],
+        "exitCode": 0,
+        "seconds": 102.66
+      },
+      {
+        "label": "transport",
+        "argv": [
+          "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/intel-python-3.13.16-20261013/runtime/python/bin/python3",
+          "-B",
+          "scripts/test_cross_stack.py",
+          "--phase",
+          "transport-http"
+        ],
+        "exitCode": 0,
+        "seconds": 22.149
+      },
+      {
+        "label": "clippy",
+        "argv": [
+          "cargo",
+          "clippy",
+          "-p",
+          "patamaps-workspace",
+          "-p",
+          "patamaps-cli",
+          "--all-targets",
+          "--locked",
+          "--offline",
+          "--",
+          "-D",
+          "warnings"
+        ],
+        "exitCode": 0,
+        "seconds": 4.581
+      }
+    ],
+    "sharedExecutorFilesUnchangedThroughAliasRefinement": true,
+    "discoveryControlCount": 49,
+    "transportControlCount": 93,
+    "aliasRefinement": "Project-command configured executable path and executable/cargo controls only; existing adapter path unchanged"
+  },
+  "retainedFinalEvidence": ".tools/project-adoption/project-command-alias-native-20261016",
+  "platform": "x86_64-apple-darwin",
+  "scope": {
+    "adapterDeadlineCeilingMs": 60000,
+    "projectDeadlineCeilingMs": 86400000,
+    "actual24HourCommand": "not-run; explicit larger budget validated on fast commands",
+    "normalExitDiagnostics": "retained-with-code-signal-and-byte-digests",
+    "abortPartialPipeRetention": "not-established",
+    "parentDeath": "ordinary-group-child-stopped-after-SIGKILL; not an escape-resistant sandbox",
+    "environment": "captured-nonsecret-strings-only; ambient/secret references not resolved",
+    "fullDevelopmentWorkflow": false,
+    "applicationBuild": "not-performed",
+    "selectionPublication": "not-performed",
+    "activation": "not-performed"
+  },
+  "ci": "pending-after-push"
+}

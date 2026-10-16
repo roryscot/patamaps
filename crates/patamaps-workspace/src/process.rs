@@ -21,8 +21,15 @@ fn stop(child: &mut std::process::Child, owned_group: bool) {
 }
 
 pub(crate) fn validate_invocation(invocation: &Invocation) -> Result<(), Error> {
+    validate_invocation_for(invocation, crate::tool_supervisor::ToolPurpose::Adapter)
+}
+
+pub(crate) fn validate_invocation_for(
+    invocation: &Invocation,
+    purpose: crate::tool_supervisor::ToolPurpose,
+) -> Result<(), Error> {
     let limits = &invocation.bounds;
-    if !(1..=60_000).contains(&limits.maximum_elapsed_ms.get())
+    if !(1..=purpose.maximum_elapsed_ms()).contains(&limits.maximum_elapsed_ms.get())
         || !(1..=MAX_INPUT_BYTES as u64).contains(&limits.maximum_stdout_bytes.get())
         || !(1..=65_536).contains(&limits.maximum_stderr_bytes.get())
         || invocation.arguments.len() > 128
@@ -60,8 +67,53 @@ pub(crate) fn invoke_direct(
     watched_parent: Option<u32>,
     supervisor_exit_codes: bool,
 ) -> Result<(Vec<u8>, Vec<u8>), Error> {
-    use std::os::unix::process::CommandExt;
-    validate_invocation(invocation)?;
+    let result = invoke_direct_for(
+        invocation,
+        executable,
+        root,
+        input,
+        environment,
+        ExecutionContext {
+            watched_parent,
+            supervisor_exit_codes,
+            purpose: crate::tool_supervisor::ToolPurpose::Adapter,
+        },
+    )?;
+    Ok((result.stdout, result.stderr))
+}
+
+#[derive(serde::Serialize, serde::Deserialize)]
+#[serde(rename_all = "camelCase", deny_unknown_fields)]
+pub(crate) struct ToolOutput {
+    pub stdout: Vec<u8>,
+    pub stderr: Vec<u8>,
+    pub exit_code: Option<i32>,
+    pub exit_signal: Option<i32>,
+    pub success: bool,
+}
+
+pub(crate) struct ExecutionContext {
+    pub watched_parent: Option<u32>,
+    pub supervisor_exit_codes: bool,
+    pub purpose: crate::tool_supervisor::ToolPurpose,
+}
+
+#[cfg(unix)]
+pub(crate) fn invoke_direct_for(
+    invocation: &Invocation,
+    executable: &Path,
+    root: &Path,
+    input: &[u8],
+    environment: &[(&str, &str)],
+    context: ExecutionContext,
+) -> Result<ToolOutput, Error> {
+    use std::os::unix::process::{CommandExt, ExitStatusExt};
+    let ExecutionContext {
+        watched_parent,
+        supervisor_exit_codes,
+        purpose,
+    } = context;
+    validate_invocation_for(invocation, purpose)?;
     let limits = &invocation.bounds;
     let request_bytes = input.to_vec();
     if request_bytes.len() > crate::tool_supervisor::TRANSPORT_LIMIT {
@@ -104,6 +156,7 @@ pub(crate) fn invoke_direct(
     let start = Instant::now();
     let mut output = None;
     let mut diagnostics = None;
+    let mut completed_status = None;
     let result = (|| {
         let mut status = None;
         loop {
@@ -145,7 +198,10 @@ pub(crate) fn invoke_direct(
                 // A provider may leave children holding pipes open. They cannot
                 // prolong the protocol beyond the configured deadline.
                 if output.is_some() && diagnostics.is_some() {
-                    if !status.success() {
+                    if !status.success()
+                        && (purpose == crate::tool_supervisor::ToolPurpose::Adapter
+                            || supervisor_exit_codes)
+                    {
                         let code = if supervisor_exit_codes {
                             match status.code() {
                                 Some(71) => "ADAPTER_TIMEOUT",
@@ -162,6 +218,7 @@ pub(crate) fn invoke_direct(
                             "Provider or its private supervisor exited unsuccessfully",
                         ));
                     }
+                    completed_status = Some(status);
                     break;
                 }
             }
@@ -192,10 +249,14 @@ pub(crate) fn invoke_direct(
         return Err(error);
     }
     written??;
-    Ok((
-        output.expect("collected stdout"),
-        diagnostics.expect("collected stderr"),
-    ))
+    let status = completed_status.expect("completed process status");
+    Ok(ToolOutput {
+        stdout: output.expect("collected stdout"),
+        stderr: diagnostics.expect("collected stderr"),
+        exit_code: status.code(),
+        exit_signal: status.signal(),
+        success: status.success(),
+    })
 }
 
 #[cfg(unix)]

@@ -164,3 +164,23 @@ fn exit_timeout_pipe_overflow_and_inherited_pipe_holders_are_bounded() {
     );
     assert!(start.elapsed() < Duration::from_secs(2));
 }
+
+#[test]
+fn adapter_and_project_command_deadlines_have_separate_ceilings() {
+    let (_root, _request, _response, mut invocation) = setup();
+    invocation.bounds.maximum_elapsed_ms = SafeInteger::new(60_001).unwrap();
+    assert!(matches!(
+        crate::process::validate_invocation(&invocation),
+        Err(Error::Refused {
+            code: "ADAPTER_LIMITS",
+            ..
+        })
+    ));
+    assert!(
+        crate::process::validate_invocation_for(
+            &invocation,
+            crate::tool_supervisor::ToolPurpose::ProjectCommand
+        )
+        .is_ok()
+    );
+}

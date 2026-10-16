@@ -9,6 +9,25 @@ use std::{
     sync::OnceLock,
 };
 
+#[derive(Debug, Clone, Copy, Default, PartialEq, Eq, Deserialize, Serialize)]
+#[serde(rename_all = "kebab-case")]
+pub(crate) enum ToolPurpose {
+    #[default]
+    Adapter,
+    ProjectCommand,
+}
+impl ToolPurpose {
+    pub(crate) fn maximum_elapsed_ms(self) -> u64 {
+        match self {
+            Self::Adapter => 60_000,
+            Self::ProjectCommand => 86_400_000,
+        }
+    }
+}
+pub(crate) fn configured() -> bool {
+    PROGRAM.get().is_some()
+}
+
 const HEADER_LIMIT: usize = MAX_INPUT_BYTES;
 pub(crate) const TRANSPORT_LIMIT: usize = MAX_INPUT_BYTES + HEADER_LIMIT;
 static PROGRAM: OnceLock<PathBuf> = OnceLock::new();
@@ -37,6 +56,8 @@ pub fn configure_tool_supervisor(program: PathBuf) -> Result<(), Error> {
 #[serde(rename_all = "camelCase", deny_unknown_fields)]
 struct Request {
     version: String,
+    #[serde(default)]
+    purpose: ToolPurpose,
     parent_pid: u32,
     invocation: Invocation,
     executable: PathBuf,
@@ -73,6 +94,7 @@ pub(crate) fn invoke(
     };
     let request = Request {
         version: "patamaps-private-tool-guard-1".into(),
+        purpose: ToolPurpose::Adapter,
         parent_pid: std::process::id(),
         invocation: invocation.clone(),
         executable: executable.to_owned(),
@@ -102,6 +124,91 @@ pub(crate) fn invoke(
     crate::process::invoke_direct(&guard, program, root, &bytes, &[], None, true)
 }
 
+#[cfg(unix)]
+pub(crate) fn invoke_command(
+    invocation: &Invocation,
+    executable: &Path,
+    root: &Path,
+    environment: &[(&str, &str)],
+) -> Result<crate::process::ToolOutput, Error> {
+    crate::process::validate_invocation_for(invocation, ToolPurpose::ProjectCommand)?;
+    let Some(program) = PROGRAM.get() else {
+        return crate::process::invoke_direct_for(
+            invocation,
+            executable,
+            root,
+            &[],
+            environment,
+            crate::process::ExecutionContext {
+                watched_parent: None,
+                supervisor_exit_codes: false,
+                purpose: ToolPurpose::ProjectCommand,
+            },
+        );
+    };
+    let request = Request {
+        version: "patamaps-private-project-command-1".into(),
+        purpose: ToolPurpose::ProjectCommand,
+        parent_pid: std::process::id(),
+        invocation: invocation.clone(),
+        executable: executable.to_owned(),
+        root: root.to_owned(),
+        environment: environment
+            .iter()
+            .map(|(k, v)| ((*k).into(), (*v).into()))
+            .collect(),
+        input_length: 0,
+    };
+    let mut bytes = serde_json::to_vec(&request)
+        .map_err(|e| Error::refused("ADAPTER_SUPERVISOR", e.to_string()))?;
+    if bytes.len() >= HEADER_LIMIT {
+        return Err(Error::refused(
+            "ADAPTER_SUPERVISOR",
+            "Supervisor header bound exceeded",
+        ));
+    }
+    bytes.push(b'\n');
+    let mut guard = invocation.clone();
+    guard.executable = program.to_string_lossy().into_owned();
+    guard.arguments = vec!["__tool-supervisor".into()];
+    guard.code_inputs.clear();
+    // serde's byte arrays take at most four bytes per byte plus commas. The
+    // public command profile caps inner pipes so this envelope stays bounded.
+    let envelope_limit = 5
+        * (invocation.bounds.maximum_stdout_bytes.get()
+            + invocation.bounds.maximum_stderr_bytes.get())
+        + 4096;
+    guard.bounds.maximum_stdout_bytes = patamaps_contracts::SafeInteger::new(envelope_limit)
+        .ok_or_else(|| Error::refused("PROJECT_COMMAND_LIMITS", "Invalid envelope bound"))?;
+    let output = crate::process::invoke_direct_for(
+        &guard,
+        program,
+        root,
+        &bytes,
+        &[],
+        crate::process::ExecutionContext {
+            watched_parent: None,
+            supervisor_exit_codes: true,
+            purpose: ToolPurpose::ProjectCommand,
+        },
+    )?;
+    serde_json::from_slice(&output.stdout)
+        .map_err(|e| Error::refused("ADAPTER_SUPERVISOR", e.to_string()))
+}
+
+#[cfg(not(unix))]
+pub(crate) fn invoke_command(
+    _: &Invocation,
+    _: &Path,
+    _: &Path,
+    _: &[(&str, &str)],
+) -> Result<crate::process::ToolOutput, Error> {
+    Err(Error::refused(
+        "PROJECT_COMMAND_PLATFORM",
+        "Project commands require Unix",
+    ))
+}
+
 /// Entry for the CLI's hidden, versioned self-exec protocol. Its parent already
 /// applies the ordinary process bounds. No project scripts run while reading it.
 #[cfg(unix)]
@@ -122,7 +229,11 @@ pub fn supervise_tool_stdio() -> Result<(), Error> {
     let request: Request = serde_json::from_slice(&header)
         .map_err(|e| Error::refused("ADAPTER_SUPERVISOR", e.to_string()))?;
     let actual_parent = rustix::process::getppid().map(|p| p.as_raw_nonzero().get() as u32);
-    if request.version != "patamaps-private-tool-guard-1"
+    if request.version
+        != match request.purpose {
+            ToolPurpose::Adapter => "patamaps-private-tool-guard-1",
+            ToolPurpose::ProjectCommand => "patamaps-private-project-command-1",
+        }
         || request.input_length > MAX_INPUT_BYTES
         || actual_parent != Some(request.parent_pid)
         || rustix::process::getpgrp() != rustix::process::getpid()
@@ -147,7 +258,7 @@ pub fn supervise_tool_stdio() -> Result<(), Error> {
             std::thread::sleep(std::time::Duration::from_millis(2));
         }
     });
-    crate::process::validate_invocation(&request.invocation)?;
+    crate::process::validate_invocation_for(&request.invocation, request.purpose)?;
     let mut input = vec![0; request.input_length];
     stdin.read_exact(&mut input)?;
     let mut extra = [0];
@@ -162,17 +273,25 @@ pub fn supervise_tool_stdio() -> Result<(), Error> {
         .iter()
         .map(|(k, v)| (k.as_str(), v.as_str()))
         .collect();
-    let (stdout, stderr) = crate::process::invoke_direct(
+    let result = crate::process::invoke_direct_for(
         &request.invocation,
         &request.executable,
         &request.root,
         &input,
         &environment,
-        Some(request.parent_pid),
-        false,
+        crate::process::ExecutionContext {
+            watched_parent: Some(request.parent_pid),
+            supervisor_exit_codes: false,
+            purpose: request.purpose,
+        },
     )?;
-    std::io::stderr().write_all(&stderr)?;
-    std::io::stdout().write_all(&stdout)?;
+    if request.purpose == ToolPurpose::ProjectCommand {
+        serde_json::to_writer(std::io::stdout().lock(), &result)
+            .map_err(|e| Error::refused("ADAPTER_SUPERVISOR", e.to_string()))?;
+    } else {
+        std::io::stderr().write_all(&result.stderr)?;
+        std::io::stdout().write_all(&result.stdout)?;
+    }
     Ok(())
 }
 

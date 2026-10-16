@@ -134,6 +134,13 @@ enum Command {
         #[arg(long)]
         destination: PathBuf,
     },
+    /// Execute an explicit command with captured nonsecret environment; never publishes selection.
+    ProjectExec {
+        capture: PathBuf,
+        command: PathBuf,
+        #[arg(long)]
+        root: PathBuf,
+    },
     #[command(hide = true, name = "__tool-supervisor")]
     ToolSupervisor,
     /// Read-only matching proposals; does not evaluate policy or confer admission.
@@ -1034,6 +1041,22 @@ fn run(command: Command) -> Result<(), Failure> {
             let report = patamaps_workspace::stage_workspace_outputs(&record, &destination)
                 .map_err(|e| Failure::Operational(e.to_string()))?;
             stdout_json(&report)
+        }
+        Command::ProjectExec {
+            capture,
+            command,
+            root,
+        } => {
+            let capture = read::<patamaps_workspace::ProjectCapture>(&capture)?;
+            let command = read::<patamaps_workspace::ProjectCommand>(&command)?;
+            let report = patamaps_workspace::execute_project_command(&root, &capture, &command)
+                .map_err(|e| Failure::Operational(e.to_string()))?;
+            stdout_json(&report)?;
+            if report["status"] == "completed-project-command" {
+                Ok(())
+            } else {
+                Err(Failure::ReportedRejection)
+            }
         }
         Command::DiscoverNative => {
             let mut input = Vec::new();
