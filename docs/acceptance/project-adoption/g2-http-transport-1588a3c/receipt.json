@@ -1,0 +1,300 @@
+{
+  "status": "passed-transport-and-axum-controls",
+  "controls": [
+    {
+      "label": "missing-typed-parameters",
+      "stage": "typescript",
+      "result": "refused",
+      "code": "TS2554"
+    },
+    {
+      "label": "backend-evaluate",
+      "status": 200,
+      "kind": "evaluate"
+    },
+    {
+      "label": "backend-replay",
+      "status": 200,
+      "kind": "replay"
+    },
+    {
+      "label": "backend-above-fixture-limit",
+      "status": 200,
+      "bytes": 16000
+    },
+    {
+      "label": "backend-structured-error",
+      "status": 400,
+      "issues": 1
+    },
+    {
+      "label": "backend-get-parameters",
+      "status": 200,
+      "id": "a/b \u2603%",
+      "limit": 3,
+      "verbose": false
+    },
+    {
+      "label": "backend-put-parameters",
+      "status": 200,
+      "id": "a/b \u2603%",
+      "limit": 3,
+      "verbose": false
+    },
+    {
+      "label": "backend-patch-parameters",
+      "status": 200,
+      "id": "a/b \u2603%",
+      "limit": 3,
+      "verbose": false
+    },
+    {
+      "label": "backend-delete-no-content",
+      "status": 204
+    },
+    {
+      "label": "backend-get-health",
+      "status": 200
+    },
+    {
+      "label": "backend-head-health",
+      "status": 200
+    },
+    {
+      "label": "backend-options-health",
+      "status": 200
+    },
+    {
+      "label": "frontend-evaluate",
+      "status": 200,
+      "kind": "evaluate"
+    },
+    {
+      "label": "frontend-replay",
+      "status": 200,
+      "kind": "replay"
+    },
+    {
+      "label": "frontend-above-fixture-limit",
+      "status": 200,
+      "bytes": 16000
+    },
+    {
+      "label": "frontend-structured-error",
+      "status": 400,
+      "issues": 1
+    },
+    {
+      "label": "frontend-get-parameters",
+      "status": 200,
+      "id": "a/b \u2603%",
+      "limit": 3,
+      "verbose": false
+    },
+    {
+      "label": "frontend-put-parameters",
+      "status": 200,
+      "id": "a/b \u2603%",
+      "limit": 3,
+      "verbose": false
+    },
+    {
+      "label": "frontend-patch-parameters",
+      "status": 200,
+      "id": "a/b \u2603%",
+      "limit": 3,
+      "verbose": false
+    },
+    {
+      "label": "frontend-delete-no-content",
+      "status": 204
+    },
+    {
+      "label": "frontend-get-health",
+      "status": 200
+    },
+    {
+      "label": "frontend-head-health",
+      "status": 200
+    },
+    {
+      "label": "frontend-options-health",
+      "status": 200
+    },
+    {
+      "label": "header-domain-refusal",
+      "status": 400
+    },
+    {
+      "label": "actual-axum-body-limit",
+      "status": 413
+    },
+    {
+      "label": "wrong-proxy-branch",
+      "status": 422,
+      "actualBackend": "/evaluate"
+    },
+    {
+      "label": "proxy-branch-restored",
+      "status": 200
+    },
+    {
+      "label": "missing-path",
+      "result": "refused",
+      "code": "HTTP_INVALID_REQUEST"
+    },
+    {
+      "label": "fractional-query",
+      "result": "refused",
+      "code": "HTTP_INVALID_REQUEST"
+    },
+    {
+      "label": "extra-query",
+      "result": "refused",
+      "code": "HTTP_INVALID_REQUEST"
+    },
+    {
+      "label": "path-dot-segment",
+      "result": "refused",
+      "code": "HTTP_INVALID_PATH"
+    },
+    {
+      "label": "header-injection",
+      "result": "refused",
+      "code": "HTTP_INVALID_HEADERS"
+    },
+    {
+      "label": "utf8-byte-limit",
+      "result": "refused",
+      "code": "HTTP_INPUT_LIMIT"
+    },
+    {
+      "label": "ascii-byte-limit",
+      "result": "refused",
+      "code": "HTTP_INPUT_LIMIT"
+    },
+    {
+      "label": "content-type",
+      "result": "refused",
+      "code": "HTTP_CONTENT_TYPE"
+    },
+    {
+      "label": "response-shape",
+      "result": "refused",
+      "code": "HTTP_RESPONSE_CONTRACT"
+    },
+    {
+      "label": "error-shape",
+      "result": "refused",
+      "code": "HTTP_ERROR_CONTRACT"
+    },
+    {
+      "label": "invalid-utf8",
+      "result": "refused",
+      "code": "HTTP_INVALID_JSON"
+    },
+    {
+      "label": "bounded-response-stream",
+      "result": "refused",
+      "code": "HTTP_RESPONSE_LIMIT"
+    },
+    {
+      "label": "abort-signal",
+      "result": "cancelled",
+      "code": "AbortError"
+    },
+    {
+      "label": "missing-group",
+      "stage": "emission",
+      "result": "refused",
+      "code": "HTTP_PROXY_GROUP"
+    },
+    {
+      "label": "mismatched-method",
+      "stage": "emission",
+      "result": "refused",
+      "code": "HTTP_ENDPOINT_CONFLICT"
+    },
+    {
+      "label": "missing-path-required",
+      "stage": "emission",
+      "result": "refused",
+      "code": "HTTP_PARAMETER_SCHEMA"
+    },
+    {
+      "label": "implicit-query-array",
+      "stage": "emission",
+      "result": "refused",
+      "code": "HTTP_PARAMETER_SCHEMA"
+    },
+    {
+      "label": "reserved-header",
+      "stage": "emission",
+      "result": "refused",
+      "code": "HTTP_HEADER_CONTRACT"
+    },
+    {
+      "label": "wrong-private-input",
+      "stage": "rust-signature",
+      "result": "refused",
+      "code": "E0631"
+    },
+    {
+      "label": "wrong-private-output",
+      "stage": "rust-signature",
+      "result": "refused",
+      "code": "E0271"
+    }
+  ],
+  "profile": "patamaps-http-transport-1",
+  "lockDigest": "sha256:7d3728eaff7984b32f1454ff9b213d427bcf92d15ef96dde7b9e8812c85b20fd",
+  "router": "existing-router-preserved",
+  "fullWorkflowAccepted": false,
+  "existingProjectQualification": "not-performed",
+  "nextjs": "not-performed",
+  "activation": "not-performed",
+  "sourceRevision": "1588a3c47c092f8b1371fc80a0c803b7123c196c",
+  "workflow": {
+    "runId": 38843082846,
+    "url": "https://github.com/roryscot/patamaps/actions/runs/38843082846",
+    "jobs": [
+      {
+        "name": "Cross-stack source bindings (Linux x86_64)",
+        "conclusion": "success",
+        "id": 116787373396
+      },
+      {
+        "name": "Cross-stack Linux image and browser (amd64)",
+        "conclusion": "success",
+        "id": 116787373508
+      },
+      {
+        "name": "Linux aarch64",
+        "conclusion": "success",
+        "id": 116787373509
+      },
+      {
+        "name": "Linux x86_64",
+        "conclusion": "success",
+        "id": 116787373569
+      }
+    ]
+  },
+  "diagnostics": {
+    "artifactId": 12021769352,
+    "bytes": 40935,
+    "sha256": "99d1412c20e355682198c070e39a1c7a65c665cdcef757999e70ef32e790d2ae"
+  },
+  "scope": {
+    "axumConsumerPlatform": "Linux x86_64",
+    "proxy": "controlled Node HTTP proxy",
+    "completedHttpExchanges": 26,
+    "runtimeClientControls": 13,
+    "emissionRefusals": 5,
+    "rustSignatureRefusals": 2,
+    "typescriptRefusals": 1,
+    "existingProjects": "not-qualified",
+    "nextjsRuntime": "not-qualified",
+    "axumImage": "not-qualified"
+  }
+}

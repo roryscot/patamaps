@@ -1,6 +1,6 @@
 # Explicit transport clients and module-local Axum witnesses
 
-Status: implemented with a committed consumer lock; current-source execution receipts are pending.
+Status: implemented and verified by the scoped Linux controls at source 1588a3c.
 This is a G2 extension, not completed existing-project qualification.
 
 The owner-declared patamaps-http-transport-1 profile separates HTTP operations
@@ -116,7 +116,13 @@ with --locked and keeps it in the small diagnostics artifact. Its exact 52-packa
 lock was prepared in CI38841848134 and verified on Intel against the artifact
 digest; the lock SHA-256 is
 7d3728eaff7984b32f1454ff9b213d427bcf92d15ef96dde7b9e8812c85b20fd.
-Actual source controls must pass with that committed lock before acceptance.
+Source CI38843082846 passed with that committed lock. The scoped receipt is
+[the transport acceptance record](../acceptance/project-adoption/g2-http-transport-1588a3c/receipt.json).
+All four jobs passed; the Axum consumer itself executed on Linux x86_64.
+The 47 distinct controls comprise 26 completed HTTP exchanges, 13 client runtime
+controls, five emission refusals, two Rust signature refusals and one TypeScript
+missing-parameter refusal. The other jobs retain their established kernel and
+image/browser scope; they do not qualify an Axum image or an existing application.
 Module-local Result/F/Fut aliases and no-content status codes are explicit controls.
 
 The controlled proxy is a Node test server, not an observed Next.js proxy.
