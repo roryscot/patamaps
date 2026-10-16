@@ -103,7 +103,7 @@ def generate(root, cli, run, rustfmt=None):
         graph["entities"].extend([
             {"id": op["id"], "kind": "routing:command", "attributes": {"http": {k: op["frontend"][k] for k in ["method", "path"]}}},
             {"id": handler_id, "kind": "routing:handler", "locators": [{"uri": "rust:crate::" + module + "::" + implementation["symbol"], "digest": digest(source)}],
-             "attributes": {"http": {"profile": "patamaps-http-object-strings-1", "modulePath": filename.removeprefix("service/src/"),
+             "attributes": {"http": {"profile": op.get("httpProfile", "patamaps-http-object-strings-1"), "modulePath": filename.removeprefix("service/src/"),
                                       "requestType": implementation["request"], "responseType": implementation["response"], "errorType": implementation["error"],
                                       "errors": op["errors"], "responseSchema": strict_json("http-response-schema-" + str(index), response)}}},
             {"id": input_id, "kind": "routing:schema", "locators": [{"uri": "json-schema:" + request_path, "digest": digest(request)}], "attributes": {"jsonSchema": strict_json("http-request-schema-" + str(index), request)}},

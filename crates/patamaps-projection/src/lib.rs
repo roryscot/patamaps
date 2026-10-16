@@ -3,6 +3,7 @@
 mod capture;
 mod compare;
 mod http;
+mod http_schema;
 mod path_tree;
 pub use capture::{
     CaptureInputs, CaptureRecord, CaptureVersion, SourceReceipt, VerifiedReplay, capture, evaluate,

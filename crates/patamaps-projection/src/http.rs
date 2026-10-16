@@ -7,6 +7,7 @@ use serde_json::Value;
 use std::collections::{BTreeMap, BTreeSet};
 
 const PROFILE: &str = "patamaps-http-object-strings-1";
+const JSON_PROFILE: &str = "patamaps-http-json-2";
 const DIALECT: &str = "https://json-schema.org/draft/2020-12/schema";
 
 fn refusal(code: &str, message: &str, subject: &str) -> CheckError {
@@ -144,6 +145,24 @@ fn identifier(value: &str) -> bool {
         .contains(&value)
 }
 
+enum ContractSchema {
+    Legacy(ObjectSchema),
+    Json(crate::http_schema::Schema),
+}
+fn contract_schema(
+    value: &Value,
+    subject: &str,
+    profile: &str,
+) -> Result<ContractSchema, CheckError> {
+    if profile == JSON_PROFILE {
+        Ok(ContractSchema::Json(crate::http_schema::parse(
+            value, subject,
+        )?))
+    } else {
+        Ok(ContractSchema::Legacy(schema(value, subject)?))
+    }
+}
+
 struct Binding<'a> {
     id: &'a str,
     frontend: Endpoint,
@@ -151,8 +170,8 @@ struct Binding<'a> {
     handler: Handler,
     module: String,
     symbol: String,
-    request: ObjectSchema,
-    response: ObjectSchema,
+    request: ContractSchema,
+    response: ContractSchema,
 }
 
 fn bindings(projection: &CheckedProjection) -> Result<Vec<Binding<'_>>, CheckError> {
@@ -182,7 +201,7 @@ fn bindings(projection: &CheckedProjection) -> Result<Vec<Binding<'_>>, CheckErr
             || !identifier(&handler.request_type)
             || !identifier(&handler.response_type)
             || !identifier(&handler.error_type)
-            || handler.profile != PROFILE
+            || (handler.profile != PROFILE && handler.profile != JSON_PROFILE)
             || handler.errors.is_empty()
             || handler.errors.len() > 16
             || handler.module_path.len() > 512
@@ -268,8 +287,8 @@ fn bindings(projection: &CheckedProjection) -> Result<Vec<Binding<'_>>, CheckErr
             ));
         }
         let request_value: Value = attribute(input, "jsonSchema")?;
-        let request = schema(&request_value, &input.id)?;
-        let response = schema(&handler.response_schema, &target.id)?;
+        let request = contract_schema(&request_value, &input.id, &handler.profile)?;
+        let response = contract_schema(&handler.response_schema, &target.id, &handler.profile)?;
         result.push(Binding {
             id: &entry.subject.id,
             frontend,
@@ -284,7 +303,7 @@ fn bindings(projection: &CheckedProjection) -> Result<Vec<Binding<'_>>, CheckErr
     Ok(result)
 }
 
-fn rust_validator(schema: &ObjectSchema) -> String {
+fn legacy_rust_validator(schema: &ObjectSchema) -> String {
     let mut check = format!(
         "let Some(object) = value.as_object() else {{ return false; }};\nif object.len() != {} {{ return false; }}\n",
         schema.properties.len()
@@ -307,12 +326,37 @@ fn rust_validator(schema: &ObjectSchema) -> String {
     check
 }
 
+fn rust_validator(schema: &ContractSchema) -> String {
+    match schema {
+        ContractSchema::Legacy(schema) => legacy_rust_validator(schema),
+        ContractSchema::Json(schema) => format!("http_json_boundary(value) && ({})", schema.rust()),
+    }
+}
+fn ts_type(schema: &ContractSchema) -> String {
+    match schema {
+        ContractSchema::Legacy(schema) => legacy_ts_type(schema),
+        ContractSchema::Json(schema) => schema.ts(),
+    }
+}
+fn ts_validator(schema: &ContractSchema) -> String {
+    match schema {
+        ContractSchema::Legacy(schema) => legacy_ts_validator(schema),
+        ContractSchema::Json(schema) => format!(
+            "return httpJsonBoundary(value) && ({});",
+            schema.typescript()
+        ),
+    }
+}
+
 /// Emits source only. The consumer must bind module paths to captured bytes and run Cargo.
 pub fn emit_http_rust(projection: &CheckedProjection) -> Result<String, CheckError> {
     let checked = bindings(projection)?;
     let mut out = emit_rust(projection, None)?;
+    if checked.iter().any(|b| b.handler.profile == JSON_PROFILE) {
+        out.push_str(crate::http_schema::RUST_RUNTIME);
+    }
     out.push_str(&format!(
-        "// HTTP profile {PROFILE}; projection {}.\n",
+        "// HTTP profiles {PROFILE}, {JSON_PROFILE}; projection {}.\n",
         projection.record().digest
     ));
     let mut modules = BTreeSet::new();
@@ -335,9 +379,14 @@ pub fn emit_http_rust(projection: &CheckedProjection) -> Result<String, CheckErr
     for (i, b) in checked.iter().enumerate() {
         out.push_str(&format!("fn request_{i}(value: &serde_json::Value) -> bool {{ {} }}\nfn response_{i}(value: &serde_json::Value) -> bool {{ {} }}\n", rust_validator(&b.request), rust_validator(&b.response)));
     }
+    for (i, b) in checked.iter().enumerate() {
+        if let ContractSchema::Json(schema) = &b.request {
+            out.push_str(&format!("fn normalize_request_{i}(value: &mut serde_json::Value) {{ let _ = &value; {} }}\n",schema.normalize_rust()));
+        }
+    }
     out.push_str("pub fn dispatch(method: &str, path: &str, raw: &[u8]) -> Option<(u16, serde_json::Value)> {\nmatch (method, path) {\n");
     for (i, b) in checked.iter().enumerate() {
-        out.push_str(&format!("({:?}, {:?}) => {{\nif raw.len() > 8192 {{ return Some((413, serde_json::json!({{\"error\":\"input-limit\"}}))); }}\nlet parsed: serde_json::Value = match serde_json::from_slice(raw) {{ Ok(v) => v, Err(_) => return Some((400, serde_json::json!({{\"error\":\"invalid-request\"}}))) }};\nif !request_{i}(&parsed) {{ return Some((400, serde_json::json!({{\"error\":\"invalid-request\"}}))); }}\nlet input: {m}::{req} = match serde_json::from_value(parsed) {{ Ok(v) => v, Err(_) => return Some((400, serde_json::json!({{\"error\":\"invalid-request\"}}))) }};\nlet handler: fn({m}::{req}) -> Result<{m}::{res}, {m}::{error}> = {m}::{symbol};\nSome(match handler(input) {{\nOk(value) => match serde_json::to_value(value) {{ Ok(value) if response_{i}(&value) => ({status}, value), _ => (500, serde_json::json!({{\"error\":\"invalid-response\"}})) }},\n", b.backend.method, b.backend.path, m=b.module, req=b.handler.request_type, res=b.handler.response_type, error=b.handler.error_type, symbol=b.symbol, status=b.backend.success_status));
+        out.push_str(&format!("({:?}, {:?}) => {{\nif raw.len() > 8192 {{ return Some((413, serde_json::json!({{\"error\":\"input-limit\"}}))); }}\n#[allow(unused_mut)]\nlet mut parsed: serde_json::Value = match serde_json::from_slice(raw) {{ Ok(v) => v, Err(_) => return Some((400, serde_json::json!({{\"error\":\"invalid-request\"}}))) }};\nif !request_{i}(&parsed) {{ return Some((400, serde_json::json!({{\"error\":\"invalid-request\"}}))); }}\n{normalize}let input: {m}::{req} = match serde_json::from_value(parsed) {{ Ok(v) => v, Err(_) => return Some((400, serde_json::json!({{\"error\":\"invalid-request\"}}))) }};\nlet handler: fn({m}::{req}) -> Result<{m}::{res}, {m}::{error}> = {m}::{symbol};\nSome(match handler(input) {{\nOk(value) => match serde_json::to_value(value) {{ Ok(value) if response_{i}(&value) => ({status}, value), _ => (500, serde_json::json!({{\"error\":\"invalid-response\"}})) }},\n", b.backend.method, b.backend.path, m=b.module, req=b.handler.request_type, res=b.handler.response_type, error=b.handler.error_type, symbol=b.symbol, status=b.backend.success_status, normalize=if b.handler.profile == JSON_PROFILE { format!("normalize_request_{i}(&mut parsed);\n") } else { String::new() }));
         for error in &b.handler.errors {
             out.push_str(&format!(
                 "Err({}::{}::{}) => ({}, serde_json::json!({{\"error\":{:?}}})),\n",
@@ -350,7 +399,7 @@ pub fn emit_http_rust(projection: &CheckedProjection) -> Result<String, CheckErr
     Ok(out)
 }
 
-fn ts_type(schema: &ObjectSchema) -> String {
+fn legacy_ts_type(schema: &ObjectSchema) -> String {
     format!(
         "{{ {} }}",
         schema
@@ -362,7 +411,7 @@ fn ts_type(schema: &ObjectSchema) -> String {
     )
 }
 
-fn ts_validator(schema: &ObjectSchema) -> String {
+fn legacy_ts_validator(schema: &ObjectSchema) -> String {
     let mut check = format!(
         "if (typeof value !== 'object' || value === null || Array.isArray(value) || Object.keys(value).length !== {}) return false;\nconst object = value as Record<string, unknown>;\n",
         schema.properties.len()
@@ -377,8 +426,11 @@ fn ts_validator(schema: &ObjectSchema) -> String {
 pub fn emit_http_typescript(projection: &CheckedProjection) -> Result<String, CheckError> {
     let checked = bindings(projection)?;
     let mut out = emit_typescript(projection, "BINDINGS", None)?;
+    if checked.iter().any(|b| b.handler.profile == JSON_PROFILE) {
+        out.push_str(crate::http_schema::TYPESCRIPT_RUNTIME);
+    }
     out.push_str(&format!(
-        "// HTTP profile {PROFILE}; projection {}.\n",
+        "// HTTP profiles {PROFILE}, {JSON_PROFILE}; projection {}.\n",
         projection.record().digest
     ));
     out.push_str("export interface Requests {\n");

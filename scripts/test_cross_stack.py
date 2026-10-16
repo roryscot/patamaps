@@ -23,7 +23,7 @@ def digest(raw):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--phase", choices=["bootstrap", "fixture", "discovery", "regression", "bindings", "docker", "workspace", "workspace-smoke", "development", "compatibility", "installed"], required=True)
+    parser.add_argument("--phase", choices=["json-http", "bootstrap", "fixture", "discovery", "regression", "bindings", "docker", "workspace", "workspace-smoke", "development", "compatibility", "installed"], required=True)
     args = parser.parse_args()
     ensure_guarded()
     stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%S.%fZ")
@@ -39,6 +39,8 @@ def main():
         # Reuse the already compiled Intel test profile without discarding it.
         env.pop("CARGO_PROFILE_DEV_DEBUG", None)
         env.pop("CARGO_PROFILE_TEST_DEBUG", None)
+    if args.phase == "json-http":
+        env["CARGO_TARGET_DIR"] = str(ROOT / "target")
     receipt = {"status": "running", "phase": args.phase, "profile": "patamaps-cross-stack-fixture-1",
                "startedUtc": datetime.now(timezone.utc).isoformat(), "commands": [],
                "retainedWork": work.relative_to(ROOT).as_posix(), "filesDeleted": [],
@@ -97,6 +99,16 @@ def main():
             run("workspace-tests", ["cargo", "test", "--workspace", "--locked", "--offline"], timeout=600)
             run("workspace-doctests", ["cargo", "test", "--workspace", "--doc", "--locked", "--offline"])
             receipt["scope"] = "Native workspace lint, unit/integration and documentation regression gates; no cross-stack release acceptance"
+        elif args.phase == "json-http":
+            run("json-http-format", ["cargo", "fmt", "--all", "--", "--check"])
+            run("json-http-projection-tests", ["cargo", "test", "-p", "patamaps-projection", "--locked", "--offline"])
+            profile = env.get("PATAMAPS_CROSS_STACK_COMPILER_PROFILE", "debug")
+            assert profile in {"debug", "release"}
+            run("json-http-cli", ["cargo", "build", "-p", "patamaps-cli", "--locked", "--offline", *(["--release"] if profile == "release" else [])], timeout=900)
+            from project_http_json import verify
+            receipt["jsonHttpContracts"] = verify(ROOT, work, env, run)
+            assert all(digest((ROOT / path).read_bytes()) == old for path,old in before.items())
+            receipt["sourceUnchanged"] = True
         elif args.phase == "installed":
             from cross_stack_package import verify
             receipt["installedConsumer"] = verify(ROOT, work, env, run)

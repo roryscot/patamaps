@@ -119,6 +119,7 @@ pub fn executor_id() -> &'static str {
                 include_str!("../../patamaps-core/src/build_observations.rs"),
             ),
             ("httpBindings", include_str!("http.rs")),
+            ("httpJsonSchema", include_str!("http_schema.rs")),
             (
                 "contractsLib",
                 include_str!("../../patamaps-contracts/src/lib.rs"),
