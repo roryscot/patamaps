@@ -90,6 +90,8 @@ def main():
             receipt["projectCommands"] = verify_commands(ROOT, work, env, run)
             from project_build_controls import verify as verify_builds
             receipt["projectBuilds"] = verify_builds(ROOT, work, env, run)
+            from project_next_build_controls import verify as verify_next_build
+            receipt["nextBuildObservations"] = verify_next_build(ROOT, work, env, run)
             import sys
             watch_work = work / "project-watch"
             run("project-watch-controls", [sys.executable, "-B", ROOT / "scripts/project_watch_controls.py",

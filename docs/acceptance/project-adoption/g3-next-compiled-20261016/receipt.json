@@ -1,0 +1,107 @@
+{
+  "status": "passed-scoped-native-next-build-observations",
+  "baseline": "4128ea9c2503bca128cf8b0ae619ab7288c43115",
+  "platform": "x86_64-apple-darwin",
+  "profile": "patamaps-next-build-observations-1",
+  "evidence": {
+    "final": ".tools/project-adoption/native-next-compiled-complete-20261016",
+    "sourceUnchanged": true,
+    "finalRustImplementationMatchesPackageTestsAndClippy": true,
+    "actual": ".tools/project-adoption/next-compiled-seeder-retry2-20261016",
+    "actualReceiptSha256": "4966f18b88100d908d65a904ce086a917548918dfa64ebd6a221853ff6fd047d",
+    "finalCli": ".tools/project-adoption/native-next-cli-final-20261016",
+    "ciCallbackCompatibility": "offline replay uses explicit env -i argv, no unsupported callback keyword"
+  },
+  "verification": {
+    "fullRustWorkspaceExitCode": 0,
+    "fullWorkspaceBeforeStyleOnlyCollapsedIf": true,
+    "finalWorkspacePackageExitCode": 0,
+    "finalClippyExitCode": 0,
+    "formatCheckExitCode": 0,
+    "nativeUnitTests": 3,
+    "frozenInvalidDataCases": 16,
+    "cliControls": [
+      {
+        "control": "compiled-manifest-workspace",
+        "result": "passed",
+        "routeGroups": true,
+        "conditionsPreserved": true,
+        "runtime": false
+      },
+      {
+        "control": "refuse-digest",
+        "result": "refused"
+      },
+      {
+        "control": "refuse-public-env",
+        "result": "refused"
+      },
+      {
+        "control": "refuse-projection-unknown",
+        "result": "refused"
+      },
+      {
+        "control": "refuse-missing",
+        "result": "refused"
+      },
+      {
+        "control": "offline-baseline-replay",
+        "result": "passed",
+        "configuredSourceUnavailable": true,
+        "externalPathEmpty": true
+      }
+    ],
+    "discoveryRegressionExitCode": 0,
+    "finalCliControlDriverDigest": "fd0926b7c4db87ac100559169c5ccfbdd34321e8d07e965fa800c13c437d33f3",
+    "finalCliControlSourceUnchanged": true
+  },
+  "actual": {
+    "sourceCommit": "c61d51a57120abbbca65d4cb4a432c1cef9343bb",
+    "originalHeadAndStatusUnchanged": true,
+    "framework": "Next 16.1.6",
+    "staticRoutes": 43,
+    "dynamicRoutes": 3,
+    "moduleAliases": 46,
+    "compiledRules": 1,
+    "baselineDigest": "sha256:5ebc1f0d6c81853e967facd05dce080b3410629158523df31b7371cb836776e2",
+    "rawRoutesDigest": "sha256:1e1039b10bed3c7a8a4dd118a003df98f944877c516edc41523487c41be04139",
+    "rawAppPathsDigest": "sha256:01023a204ade5d940647180a1ad52865c532f993cd3469db1ef4fdc56d25d853",
+    "configurationProjectionDigest": "sha256:c1dffe14ec23fbf9865e6c45c7e12d5287ca6ace717d8943f36521b93adf097a",
+    "missingProjection": "refused",
+    "offlineReplay": "passed-owner-source-and-configured-provider-unavailable",
+    "externalPathEmpty": true,
+    "rawConfigurationCaptured": false,
+    "serverReferenceManifestRead": false,
+    "nonemptyRewriteRuntime": "not-qualified"
+  },
+  "priorFailures": [
+    {
+      "path": ".tools/project-adoption/native-next-compiled-20261016",
+      "cause": "Clippy collapsible_if; full Rust workspace passed; terminal-audit preserves raw running status and actual failed exit"
+    },
+    {
+      "path": ".tools/project-adoption/native-next-compiled-final-20261016",
+      "cause": "CLI test harness used relative workspace config from wrong cwd; corrected absolute path"
+    },
+    {
+      "path": ".tools/project-adoption/next-compiled-seeder-20261016",
+      "cause": "actual harness parsed empty stdout despite successful --output capture; corrected harness only"
+    }
+  ],
+  "scope": {
+    "inputFormat": "stable 16.x owner-declared version, App Router routes manifest version 3, independent owner projection",
+    "buildReceipt": "declared digest only, not execution attestation",
+    "businessCorrespondences": "not-inferred",
+    "regexAndHttp": "not-executed",
+    "serverActionHandlers": "not-observed",
+    "dataRoutes": "refused",
+    "protocolMetadata": "opaque preserved data",
+    "completeContexts": "not-established",
+    "generatedContractIntegration": "not-qualified",
+    "installedAndDeployment": "not-qualified",
+    "fullG3G6": "incomplete",
+    "activation": "not-performed"
+  },
+  "filesDeleted": 0,
+  "ci": "pending-after-push"
+}

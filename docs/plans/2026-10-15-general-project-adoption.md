@@ -201,3 +201,36 @@ to resolve G3 configuration/route observations, and integrate generated contract
 and real runtime checks. Keep G4 context/artifact/readiness/performance and G5–G6
 acceptance intact; do not substitute successful original app commands for those
 remaining requirements. Wargame's separate policy proposal remains unapplied.
+
+## Compiled Next observation checkpoint (2026-10-16)
+
+Decision0041 adds native next-build discovery over exactly three reviewed nonsecret
+captured inputs: App Router routes-manifest version 3, compiled module aliases and a separate
+typed configuration projection. It preserves route/rule conditions and array
+indexes, public environment declarations, unresolved secret labels and opaque
+RSC protocol metadata. Cross-document digests/basePath must agree. Config, regex,
+HTTP and secret references are never executed/resolved. Receipt/version metadata
+remains declared data, not authenticated build evidence.
+
+The [scoped record](../acceptance/project-adoption/g3-next-compiled-20261016/receipt.json)
+records three native unit tests with 16 frozen malformed cases, six CLI controls,
+final package tests/Clippy, existing discovery regressions and an earlier full
+Rust workspace pass before an equivalent Clippy style correction. Final Rust
+implementation hashes match package tests and all subsequent controls.
+
+Actual retained Avaelus/Seeder artifacts matched 43 static routes, 3 dynamic routes,
+46 module aliases and the compiled redirect, including reviewed public config.
+Missing projection input refused. Baseline replay passed after copied source and
+configured provider paths were renamed unavailable, with PATH empty. Raw
+required-server configuration and server-reference encryption material were not
+captured. The original source HEAD/status remains unchanged.
+
+All four prior CI 38877500148 jobs passed at 4128ea9; its 103578-byte diagnostics
+artifact 12036093112 was API-size/SHA256 verified. Actual 10 watch/13 build/13 command/
+93 transport receipts were inspected. New feature CI is pending after push.
+
+G3 remains incomplete for broader configuration/versions, actual nonempty rewrite/
+proxy behavior and Server Action handlers. The actual case has empty rewrite
+lists; controlled rule records do not establish HTTP semantics. G4 context/
+artifact/readiness/watch/performance and G5–G6 actual generated-contract/runtime/
+installed/deployment requirements remain required. Wargame policy remains unchanged.

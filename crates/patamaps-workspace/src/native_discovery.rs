@@ -52,6 +52,7 @@ enum Config {
     },
     Cargo(Box<CargoConfig>),
     Dockerfile(Box<crate::native_docker::DockerConfig>),
+    NextBuild(Box<crate::native_next::NextBuildConfig>),
 }
 
 #[derive(Deserialize)]
@@ -1403,6 +1404,14 @@ pub fn discover_native(request: &AdapterRequest, root: &Path) -> Result<AdapterR
             (
                 entities,
                 json!({"profile":VERSION,"evidenceClass":"captured-file-receipts","compilationEstablished":false,"semanticMeaning":"owner-authored"}),
+            )
+        }
+        Config::NextBuild(config) => {
+            let (entities, observation) =
+                crate::native_next::observe(&request.namespace, &inputs, &config)?;
+            (
+                entities,
+                json!({"profile":VERSION,"observation":observation}),
             )
         }
         Config::Dockerfile(config) => {
