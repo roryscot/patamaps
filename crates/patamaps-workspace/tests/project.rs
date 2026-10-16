@@ -114,7 +114,7 @@ fn tampered_content_profile_and_receipt_refuse_offline() {
 fn unknown_fields_and_duplicate_json_keys_refuse() {
     let (_, p) = fixture();
     let mut v = serde_json::to_value(p).unwrap();
-    v["execute"] = "arbitrary";
+    v["execute"] = json!("arbitrary");
     assert!(parse::<ProjectProfile>(&serde_json::to_vec(&v).unwrap()).is_err());
     assert!(parse::<ProjectProfile>(br#"{"profile":"a","profile":"b"}"#).is_err());
 }
