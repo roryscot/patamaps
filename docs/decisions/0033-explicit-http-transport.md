@@ -1,6 +1,6 @@
 # Explicit transport clients and module-local Axum witnesses
 
-Status: implemented; dependency lock preparation and execution receipts are pending.
+Status: implemented with a committed consumer lock; current-source execution receipts are pending.
 This is a G2 extension, not completed existing-project qualification.
 
 The owner-declared patamaps-http-transport-1 profile separates HTTP operations
@@ -41,8 +41,8 @@ Handler HTTP attributes have this shape:
 }
 ```
 
-responseSchema and each error schema must be complete supported draft2020-12
-schemas, not placeholders. Error entries contain status and schema; unique400–599
+responseSchema and each error schema must be complete supported draft 2020-12
+schemas, not placeholders. Error entries contain status and schema; unique 400–599
 statuses preserve structured errors such as {error,issues}, including dynamic
 messages. The JSON DTO subset from decision0032 is reused; unsupported assertion
 keywords/formats still refuse.
@@ -50,8 +50,9 @@ keywords/formats still refuse.
 Extractors: state, json, json-result, path, query and headers. Typed variants
 carry an explicit Rust type path; headers means HeaderMap. Body extraction must
 be last and is unavailable for GET/HEAD. Output modes are result-json
-(Result<Json<Success>,(StatusCode,Json<Error>)>), json and response
-(the concrete Axum Response type). Generic Rust syntax is not injected: use a
+(Result<Json<Success>,(StatusCode,Json<Error>)>), json response
+(the concrete Axum Response type), and native (an explicitly named IntoResponse
+return type such as StatusCode). Generic Rust syntax is not injected: use a
 module-local alias where a complex type is needed.
 
 One witness selects exactly one captured module. A client may cover multiple
@@ -79,7 +80,7 @@ objects. They must be exact flat objects of strings, booleans or numbers.
 All path fields are required and must match both templates. Query fields may be
 optional. Array/custom query encodings are unsupported. Headers use lowercase,
 non-reserved names and trimmed printable ASCII values; the combined declared
-header footprint is bounded to8KiB. Host/content-length/content-type/connection
+header footprint is bounded to 8 KiB. Host/content-length/content-type/connection
 and cookie headers cannot be supplied through this contract. Body content type
 is application/json.
 
@@ -90,10 +91,11 @@ serialized in sorted order. A caller supplies a trusted base URL on Node; browse
 calls may use the current origin. AbortSignal and an explicit fetch transport are
 supported. These do not authenticate the peer or confer an activation state.
 
-Request JSON bytes are checked before fetch, up to16MiB. Response streams are
-bounded and cancelled on overflow, up to64MiB; JSON content type and strict UTF-8
-decoding are required. Configured depth is1–128 and value visits1–1,000,000.
-Integral values retain the safe-JSON range. HEAD has null success/error bodies.
+Request JSON bytes are checked before fetch, up to 16 MiB. Response streams are
+bounded and cancelled on overflow, up to 64 MiB; JSON content type and strict UTF-8
+decoding are required. Configured depth is 1–128 and value visits 1–1,000,000.
+Integral values retain the safe-JSON range. HEAD has null success/error bodies; HTTP 204/205 successes also require null
+contracts and decode as no content.
 Failures distinguish request, parameter encoding, input limit, response limit,
 content type, invalid JSON, response schema and error schema. The generated client
 contains operation descriptors, validators/types and a projection digest; the
@@ -109,10 +111,13 @@ private input/output signature refusals.
 
     python3 -B scripts/test_cross_stack.py --phase transport-http
 
-Use Intel's supervisor. The source CI lane prepares the new consumer's pinned
-top-level dependencies and retains its freshly resolved lock if not yet committed.
-That bootstrap is not portable lock acceptance: commit the exact prepared lock
-and repeat the required source controls before accepting this stage.
+Use Intel's supervisor. The source CI lane fetches the committed consumer lock
+with --locked and keeps it in the small diagnostics artifact. Its exact 52-package
+lock was prepared in CI38841848134 and verified on Intel against the artifact
+digest; the lock SHA-256 is
+7d3728eaff7984b32f1454ff9b213d427bcf92d15ef96dde7b9e8812c85b20fd.
+Actual source controls must pass with that committed lock before acceptance.
+Module-local Result/F/Fut aliases and no-content status codes are explicit controls.
 
 The controlled proxy is a Node test server, not an observed Next.js proxy.
 Real Wargame/Seeder qualification, actual Next behavior, general project

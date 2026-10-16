@@ -55,7 +55,7 @@ async function failure(label,code,fn){
    const failed=await api.callOperation(prefix+'evaluate',{message:'hello',fail:true},{base:origin,endpoint});
    assert.equal(failed.status,400);assert.equal(failed.body.error,'domain-refusal');assert.equal(failed.body.issues[0].path,'$');
    rows.push({label:endpoint+'-structured-error',status:400,issues:failed.body.issues.length});
-   for(const method of ['get','put','patch','delete']){
+   for(const method of ['get','put','patch']){
     const id='a/b ☃%';
     const result=await api.callOperation(prefix+method+'-item',null,{base:origin,endpoint,path:{id},query:{limit:3,verbose:false},headers:{'x-proof':'allow'}});
     assert.equal(result.status,200);assert.equal(result.body.value,id);
@@ -64,6 +64,10 @@ async function failure(label,code,fn){
     if(endpoint==='frontend')assert.equal(traces.at(-1).method,method.toUpperCase());
     rows.push({label:endpoint+'-'+method+'-parameters',status:200,id,limit:3,verbose:false});
    }
+   const removed=await api.callOperation(prefix+'delete-item',null,{base:origin,endpoint,path:{id:'x'}});
+   assert.equal(removed.status,204);assert.equal(removed.body,null);
+   if(endpoint==='frontend')assert.equal(traces.at(-1).method,'DELETE');
+   rows.push({label:endpoint+'-delete-no-content',status:204});
    for(const method of ['get','head','options']){
     const result=await api.callOperation(prefix+method+'-health',null,{base:origin,endpoint});
     assert.equal(result.status,200);

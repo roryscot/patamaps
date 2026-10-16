@@ -45,6 +45,9 @@ struct Issue {
     message: String,
 }
 type Failure = (StatusCode, Json<Problem>);
+type Result<T> = ::std::result::Result<T, Failure>;
+type F = Evaluate;
+type Fut = Reply;
 fn problem(status: StatusCode, message: &str) -> Failure {
     (
         status,
@@ -59,8 +62,8 @@ fn problem(status: StatusCode, message: &str) -> Failure {
 }
 async fn evaluate(
     State(context): State<Context>,
-    body: Result<Json<Evaluate>, JsonRejection>,
-) -> Result<Json<Reply>, Failure> {
+    body: ::std::result::Result<Json<Evaluate>, JsonRejection>,
+) -> Result<Json<Reply>> {
     let Json(body) = body.map_err(|e| problem(e.status(), &e.body_text()))?;
     if body.fail.unwrap_or(false) {
         return Err(problem(StatusCode::BAD_REQUEST, "domain-refusal"));
@@ -75,8 +78,8 @@ async fn evaluate(
 }
 async fn replay(
     State(context): State<Context>,
-    body: Result<Json<Replay>, JsonRejection>,
-) -> Result<Json<Reply>, Failure> {
+    body: ::std::result::Result<Json<Replay>, JsonRejection>,
+) -> Result<Json<Reply>> {
     let Json(body) = body.map_err(|e| problem(e.status(), &e.body_text()))?;
     Ok(Json(Reply {
         state: context.tag.into(),
@@ -91,7 +94,7 @@ async fn fetch_item(
     Path(id): Path<String>,
     Query(filter): Query<Filter>,
     headers: HeaderMap,
-) -> Result<Json<Reply>, Failure> {
+) -> Result<Json<Reply>> {
     if headers.get("x-proof").and_then(|v| v.to_str().ok()) != Some("allow") {
         return Err(problem(StatusCode::BAD_REQUEST, "header-refusal"));
     }
@@ -102,6 +105,13 @@ async fn fetch_item(
         limit: filter.limit,
         verbose: filter.verbose,
     }))
+}
+async fn remove_item(State(context): State<Context>, Path(_id): Path<String>) -> StatusCode {
+    if context.tag == "owned-state" {
+        StatusCode::NO_CONTENT
+    } else {
+        StatusCode::SERVICE_UNAVAILABLE
+    }
 }
 async fn health() -> Json<serde_json::Value> {
     Json(serde_json::json!({"ok":true}))
@@ -115,7 +125,7 @@ pub fn router() -> Router {
             get(fetch_item)
                 .put(fetch_item)
                 .patch(fetch_item)
-                .delete(fetch_item),
+                .delete(remove_item),
         )
         .route("/health", get(health).head(health).options(health))
         .layer(DefaultBodyLimit::max(65536))

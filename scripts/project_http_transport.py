@@ -22,19 +22,23 @@ PREFIX="urn:transport:operation:"
 
 def definitions():
     state={"extractor":"state","type":"Context"}
-    output={"mode":"result-json","successType":"Reply","errorType":"Problem"}
+    output={"mode":"result-json","successType":"Fut","errorType":"Problem"}
     rows=[]
-    for name,request,ty in [("evaluate",EVALUATE,"Evaluate"),("replay",REPLAY,"Replay")]:
+    for name,request,ty in [("evaluate",EVALUATE,"F"),("replay",REPLAY,"Replay")]:
         rows.append(dict(name=name,frontend={"method":"POST","path":"/api/evaluate"},
             backend={"method":"POST","path":"/"+name,"successStatus":200},handler=name,request=request,response=REPLY,
             arguments=[state,{"extractor":"json-result","type":ty}],output=output,frontendGroup="execution"))
-    for method in ["GET","PUT","PATCH","DELETE"]:
+    for method in ["GET","PUT","PATCH"]:
         rows.append(dict(name=method.lower()+"-item",frontend={"method":method,"path":"/api/items/:id"},
             backend={"method":method,"path":"/items/{id}","successStatus":200},handler="fetch_item",request=NULL,response=REPLY,
             arguments=[state,{"extractor":"path","type":"String"},{"extractor":"query","type":"Filter"},{"extractor":"headers"}],
             output=output,pathParameters=obj({"id":{"type":"string","minLength":1,"maxLength":256}}),
             queryParameters=obj({"limit":{"type":"integer","minimum":0,"maximum":10},"verbose":{"type":"boolean"}},[]),
             headerParameters=obj({"x-proof":{"type":"string","minLength":1,"maxLength":80}})))
+    rows.append(dict(name="delete-item",frontend={"method":"DELETE","path":"/api/items/:id"},
+        backend={"method":"DELETE","path":"/items/{id}","successStatus":204},handler="remove_item",request=NULL,response=NULL,
+        arguments=[state,{"extractor":"path","type":"String"}],output={"mode":"native","successType":"StatusCode"},
+        pathParameters=obj({"id":{"type":"string","minLength":1,"maxLength":256}}),errors=[]))
     for method in ["GET","HEAD","OPTIONS"]:
         rows.append(dict(name=method.lower()+"-health",frontend={"method":method,"path":"/api/health"},
             backend={"method":method,"path":"/health","successStatus":200},handler="health",request=NULL,
@@ -52,6 +56,9 @@ def verify(root,work,env,run):
         "trackedAtSourceRevision":subprocess.run(["git","ls-files","--error-unmatch","examples/http-transport/service/Cargo.lock"],cwd=root,capture_output=True).returncode==0},indent=2)+"\n")
     target=root/".tools/project-adoption/transport-target"
     controls=[]
+    def save_controls():
+        (state/"controls.json").write_text(json.dumps(dict(status="partial-until-final-receipt",controls=controls,fullWorkflowAccepted=False),indent=2)+"\n")
+    save_controls()
     def command(label,argv,**kwargs):
         old=dict(env)
         try:
@@ -71,7 +78,7 @@ def verify(root,work,env,run):
         for row in definitions_rows:
             identity=PREFIX+row["name"]
             http=dict(profile="patamaps-http-transport-1",modulePath="src/api.rs",arguments=row["arguments"],output=row["output"],
-                responseSchema=row["response"],errors=[] if row["handler"]=="health" else [{"status":s,"schema":PROBLEM} for s in [400,413,422]],
+                responseSchema=row["response"],errors=row.get("errors",[] if row["handler"]=="health" else [{"status":s,"schema":PROBLEM} for s in [400,413,422]]),
                 limits={"requestBytes":65536,"responseBytes":16 if row["handler"]=="health" else 131072,"depth":64,"values":100000})
             for k in ["frontendGroup","pathParameters","queryParameters","headerParameters"]:
                 if k in row:http[k]=row[k]
@@ -96,9 +103,11 @@ def verify(root,work,env,run):
         common=[cli,"link",app/"graph.json",app/"policy.json",app/"projection.json","--relation-pack",root/"relation-packs/routing.json","--as-of","2026-10-15T00:00:00Z"]
         result=command(label+"-client",[*common,"--format","http-client"],expected_success=refusal is None)
         if refusal:
-            error=(work/("transport-"+label+"-client.stderr.log")).read_bytes()
-            assert refusal.encode() in error,(label,error[-1000:])
+            rejection=json.loads(result)
+            assert rejection["status"]=="rejected"
+            assert refusal in {issue["code"] for issue in rejection["issues"]},(label,rejection)
             controls.append(dict(label=label,stage="emission",result="refused",code=refusal))
+            save_controls()
             return None
         (app/"client.ts").write_bytes(result)
         (app/"witness.rs").write_bytes(command(label+"-witness",[*common,"--format","axum-witness"]))
@@ -120,6 +129,7 @@ def verify(root,work,env,run):
     diagnostics=command("missing-parameters",[node,compiler,"--target","ES2022","--module","commonjs","--lib","ES2022,DOM","--strict","--skipLibCheck","--noEmit",app/"bad-types.ts"],expected_success=False)
     assert b"TS2554" in diagnostics
     controls.append(dict(label="missing-typed-parameters",stage="typescript",result="refused",code="TS2554"))
+    save_controls()
     (app/"runtime.cjs").write_bytes((root/"scripts/http_transport_runtime.cjs").read_bytes())
     out=app/"service.stdout.log"
     with out.open("xb") as stdout,(app/"service.stderr.log").open("xb") as stderr:
@@ -132,6 +142,7 @@ def verify(root,work,env,run):
                 if process.poll() is not None or time.monotonic()>deadline:raise RuntimeError("Transport service failed to start")
                 time.sleep(.05)
             controls.extend(json.loads(command("runtime",[node,app/"runtime.cjs",app/"compiled/client.js",base])))
+            save_controls()
         finally:
             from cross_stack_bindings import stop
             stop(process)
@@ -157,6 +168,7 @@ def verify(root,work,env,run):
         error=(work/("transport-"+label+"-rust.stderr.log")).read_bytes()
         assert expected in error,(label,error[-3000:])
         controls.append(dict(label=label,stage="rust-signature",result="refused",code=expected.decode()))
+        save_controls()
     receipt=dict(status="passed-transport-and-axum-controls",controls=controls,profile="patamaps-http-transport-1",
         lockDigest="sha256:"+hashlib.sha256(lock).hexdigest(),router="existing-router-preserved",fullWorkflowAccepted=False,
         existingProjectQualification="not-performed",nextjs="not-performed",activation="not-performed")

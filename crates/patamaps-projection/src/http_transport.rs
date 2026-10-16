@@ -52,6 +52,7 @@ enum OutputMode {
     ResultJson,
     Json,
     Response,
+    Native,
 }
 #[derive(Deserialize)]
 #[serde(rename_all = "camelCase", deny_unknown_fields)]
@@ -315,6 +316,13 @@ fn bindings(projection: &CheckedProjection) -> Result<Vec<Binding<'_>>, CheckErr
                     .as_ref()
                     .is_some_and(|v| rust_type(v))
                     && handler.output.error_type.is_none() => {}
+            OutputMode::Native
+                if handler
+                    .output
+                    .success_type
+                    .as_ref()
+                    .is_some_and(|v| rust_type(v))
+                    && handler.output.error_type.is_none() => {}
             OutputMode::Response
                 if handler.output.success_type.is_none() && handler.output.error_type.is_none() => {
             }
@@ -334,10 +342,12 @@ fn bindings(projection: &CheckedProjection) -> Result<Vec<Binding<'_>>, CheckErr
             ));
         }
         let response = crate::http_schema::parse(&handler.response_schema, id)?;
-        if backend.method == "HEAD" && !matches!(response, Schema::Null) {
+        if (backend.method == "HEAD" || [204, 205].contains(&backend.success_status))
+            && !matches!(response, Schema::Null)
+        {
             return Err(bad(
                 "HTTP_TRANSPORT_BODY",
-                "HEAD response contracts must be null",
+                "HEAD and no-content response contracts must be null",
             ));
         }
         let path = parameters(handler.path_parameters.as_ref(), id)?;
@@ -440,7 +450,9 @@ fn argument(arg: &Argument) -> String {
         Argument::State { r#type: ty } => format!("axum::extract::State<{ty}>"),
         Argument::Json { r#type: ty } => format!("axum::Json<{ty}>"),
         Argument::JsonResult { r#type: ty } => {
-            format!("Result<axum::Json<{ty}>, axum::extract::rejection::JsonRejection>")
+            format!(
+                "::std::result::Result<axum::Json<{ty}>, axum::extract::rejection::JsonRejection>"
+            )
         }
         Argument::Path { r#type: ty } => format!("axum::extract::Path<{ty}>"),
         Argument::Query { r#type: ty } => format!("axum::extract::Query<{ty}>"),
@@ -483,11 +495,12 @@ pub fn emit_axum_witness(projection: &CheckedProjection) -> Result<String, Check
         let success = b.handler.output.success_type.as_deref().unwrap_or("()");
         let result = match b.handler.output.mode {
             OutputMode::ResultJson => format!(
-                "Result<axum::Json<{success}>,(axum::http::StatusCode,axum::Json<{}>)>",
+                "::std::result::Result<axum::Json<{success}>,(axum::http::StatusCode,axum::Json<{}>)>",
                 b.handler.output.error_type.as_ref().expect("validated")
             ),
             OutputMode::Json => format!("axum::Json<{success}>"),
             OutputMode::Response => "axum::response::Response".into(),
+            OutputMode::Native => success.into(),
         };
         let state = b
             .handler
@@ -498,7 +511,7 @@ pub fn emit_axum_witness(projection: &CheckedProjection) -> Result<String, Check
                 _ => None,
             })
             .unwrap_or("()");
-        out.push_str(&format!("fn signature_{index}<F,Fut>(handler:F) where F: Fn({args}) -> Fut, Fut: std::future::Future<Output={result}> + Send {{ let _ = handler; }}\nsignature_{index}({symbol});\nlet _: axum::routing::MethodRouter<{state}> = axum::routing::{method}({symbol});\n",
+        out.push_str(&format!("fn signature_{index}<__PatamapsHandler{suffix},__PatamapsFuture{suffix}>(handler:__PatamapsHandler{suffix}) where __PatamapsHandler{suffix}: ::std::ops::Fn({args}) -> __PatamapsFuture{suffix}, __PatamapsFuture{suffix}: ::std::future::Future<Output={result}> + ::std::marker::Send {{ let _ = handler; }}\nsignature_{index}({symbol});\nlet _: axum::routing::MethodRouter<{state}> = axum::routing::{method}({symbol});\n",
             symbol=b.symbol,method=b.backend.method.to_ascii_lowercase()));
         out.push_str(&format!(
             "let _ = ({:?},{:?},{:?},{:?});\n",
@@ -694,7 +707,7 @@ export async function callOperation<I extends SemanticId>(id:I,input:Requests[I]
   wireHeaders.set('content-type','application/json');
  }
  const response=await (options.transport??fetch)(url,{method:endpoint.method,headers:wireHeaders,body,cache:'no-store',signal:options.signal});
- const result=await readJson(response,op.responseBytes,endpoint.method==='HEAD');
+ const result=await readJson(response,op.responseBytes,endpoint.method==='HEAD' || response.status===204 || response.status===205);
  if(response.status===op.successStatus){
   if(!op.validResponse(result))throw new Error('HTTP_RESPONSE_CONTRACT');
   return {status:response.status,body:result} as Results[I];
