@@ -1,0 +1,63 @@
+{
+  "status": "passed-scoped-v1-projection-compatibility",
+  "profile": "original-v1-observation-not-native-admission",
+  "coreTests": 115,
+  "frozenOriginalCases": 66,
+  "nodeDifferentialCases": 66,
+  "strictClippy": "passed-core-and-cli-all-targets-deny-warnings",
+  "strictTypes": "passed-public-consumer-without-skipLibCheck",
+  "commands": [
+    {
+      "label": "rust-format",
+      "exitCode": 0,
+      "seconds": 1.703
+    },
+    {
+      "label": "core-tests",
+      "exitCode": 0,
+      "seconds": 70.647
+    },
+    {
+      "label": "strict-clippy",
+      "exitCode": 0,
+      "seconds": 14.827
+    },
+    {
+      "label": "cli-build",
+      "exitCode": 0,
+      "seconds": 32.308
+    },
+    {
+      "label": "projection-differential",
+      "exitCode": 0,
+      "seconds": 14.763
+    }
+  ],
+  "sourceDigests": {
+    "crates/patamaps-core/src/lib.rs": "0267f4a416074743241f9060e9a1fd48b9a96dcaad7233065125ae46c1bf4d43",
+    "crates/patamaps-core/src/legacy_viability.rs": "9a9bd091b1066e36d64796ca914244063135ddd504ae1955a67775db5dad4ea3",
+    "crates/patamaps-core/src/legacy_projection.rs": "0a2c38248316e94235de39dd966a231bcacd8279922298230564c9d878823e99",
+    "crates/patamaps-core/tests/legacy_projection.rs": "645cf7a132c5477bce4ff72942ee3956c1e21ab3d5d5b56be7430e2d26945187",
+    "sdk/typescript/legacy-validation.mjs": "01adf474dfe2efef3b59065272d0275bc281bcb3e2d88133da35267ec3e46ab3",
+    "sdk/typescript/legacy-validation.d.ts": "7470ad597bb23e7f3ab7e68454107a1a6037336c62f25170f3b8b203cb47f675",
+    "sdk/typescript/legacy-projection.mjs": "d7a5f3d35fb089d6f042703ddfcd7ed183e1d2b8df1da271177470f62e4698e2",
+    "sdk/typescript/legacy-projection.d.ts": "a649634a9ff92a859f0f132e01821d512bfbd90ad4343adeafd4cfe5897f1802",
+    "scripts/parity/projection_contracts.mjs": "a92556a5107e6618e5eff97341bef228f709e494135d443f55c2de5174ec5790",
+    "fixtures/parity/projection-controls.json": "38d7d483f9cca50028765f91d8c11b141ceb9f64beedca9f8ebdb2bcc081e515",
+    "fixtures/parity/types/projection-client.mts": "bd55ed18c8d4f82017a6a8a736626b05e260c54d3b3d899f65481699cd7cde56"
+  },
+  "compilerDigest": "7bf71ace23211818e666a76c8cfefe8bd8e23e7e74d0687cd18203132a74cdf8",
+  "referenceProjectionGitBlob": "9874dc978a1c5b183ce5a8bf308ef3a5c6dca2a4",
+  "guards": [
+    "08bcd4ba-942d-4893-a3d8-5e3b6de9fe82",
+    "fe88c2c7-36a3-43e9-b99d-77f61c878431"
+  ],
+  "initialCounterexamples": "First differential matched65/66; nested signed zero was corrected. Failed test-compilation and typing attempts retained; shared existing projection types reused.",
+  "limitations": [
+    "v2/executable projection unsupported",
+    "real owner generator replacement not-yet-qualified",
+    "native emission/build integration not-yet-qualified",
+    "runtime/browser/installed/deployment qualification remains required"
+  ],
+  "filesDeleted": 0
+}

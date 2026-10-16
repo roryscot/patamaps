@@ -154,7 +154,7 @@ fn validate_policy(
     }
     Ok(issues)
 }
-fn validate_generation(
+pub(crate) fn validate_generation(
     v: &J,
     locale_name: &str,
     holes: &HashSet<usize>,
@@ -200,7 +200,7 @@ fn validate_generation(
     }
     Ok(issues)
 }
-fn response(value: J, issues: Vec<ObservationIssue>) -> J {
+pub(crate) fn response(value: J, issues: Vec<ObservationIssue>) -> J {
     let path_indexes = issues
         .iter()
         .map(|issue| {
@@ -462,7 +462,7 @@ fn evaluation(
     })?;
     parse(result.get())
 }
-fn core_registry() -> Value {
+pub(crate) fn core_registry() -> Value {
     let pack: Value =
         serde_json::from_str(include_str!("legacy_core.json")).expect("pinned core pack");
     json!({"packs":[{"key":pack["id"],"version":pack["version"]}],"definitions":pack["relations"].as_array().expect("core relations").iter().map(|r|json!({"key":r["id"],"value":r})).collect::<Vec<_>>()})
@@ -1509,6 +1509,12 @@ pub fn legacy_viability_request(
         operation if operation.starts_with("uncertainty-") || operation.starts_with("risk-") => {
             crate::legacy_uncertainty_risk::request(operation, input)?
         }
+        operation if operation.starts_with("projection-") => crate::legacy_projection::request(
+            operation,
+            input,
+            &request.locale,
+            &observation.holes,
+        )?,
         operation if operation.starts_with("semantic-") => {
             crate::legacy_semantic::request(operation, input)?
         }

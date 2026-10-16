@@ -18,6 +18,7 @@ mod legacy_evaluation;
 pub use legacy_evaluation::legacy_evaluation_request;
 mod legacy_graph;
 mod legacy_pack;
+mod legacy_projection;
 pub use legacy_pack::LegacyPortableSchema;
 mod legacy_references;
 mod legacy_registry;

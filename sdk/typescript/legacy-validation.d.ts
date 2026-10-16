@@ -1,4 +1,12 @@
 import type {
+  validateLegacyProjectionSpec,
+  parseLegacyProjectionSpec,
+  validateLegacyProjection,
+  parseLegacyProjection,
+  compileLegacyProjection,
+} from "./legacy-projection.js";
+export * from "./legacy-projection.js";
+import type {
   validateLegacyViabilityPolicy,
   validateLegacyViableGeneration,
   parseLegacyViabilityPolicy,
@@ -264,6 +272,11 @@ export interface LegacyValidationApi {
   parseLegacyViabilityPolicy: typeof parseLegacyViabilityPolicy;
   parseLegacyViableGeneration: typeof parseLegacyViableGeneration;
   compileLegacyMetamap: typeof compileLegacyMetamap;
+  validateLegacyProjectionSpec: typeof validateLegacyProjectionSpec;
+  parseLegacyProjectionSpec: typeof parseLegacyProjectionSpec;
+  validateLegacyProjection: typeof validateLegacyProjection;
+  parseLegacyProjection: typeof parseLegacyProjection;
+  compileLegacyProjection: typeof compileLegacyProjection;
   parseLegacyEvaluationContext: typeof parseLegacyEvaluationContext;
   evaluateLegacyContextExpression: typeof evaluateLegacyContextExpression;
   requiredLegacyContextKeys: typeof requiredLegacyContextKeys;

@@ -1,3 +1,8 @@
+import { createLegacyProjectionApi } from "./legacy-projection.mjs";
+export {
+  LEGACY_METAMAP_PROJECTION_SPEC_VERSION,
+  LEGACY_METAMAP_PROJECTION_VERSION,
+} from "./legacy-projection.mjs";
 import { execFile, spawn } from "node:child_process";
 import { spawnWithInputSync } from "./native-input.mjs";
 import { isAbsolute, resolve } from "node:path";
@@ -289,6 +294,7 @@ export function createLegacyValidationApi(executable, observeExecution) {
     ...createLegacySemanticApi(invoke),
     ...createLegacyUncertaintyRiskApi(invoke),
     ...createLegacyViabilityApi(invoke, Registry, Graph),
+    ...createLegacyProjectionApi(invoke, Registry),
     ...createLegacyConfigApi(invoke, loadFile),
     ...workspace,
     get legacyCoreRelationPack() {
@@ -599,3 +605,14 @@ export const isLegacySourceOfTruthDocument = (...args) =>
   api().isLegacySourceOfTruthDocument(...args);
 export const adaptLegacySourcesOfTruth = (...args) =>
   api().adaptLegacySourcesOfTruth(...args);
+
+export const validateLegacyProjectionSpec = (value) =>
+  api().validateLegacyProjectionSpec(value);
+export const parseLegacyProjectionSpec = (value) =>
+  api().parseLegacyProjectionSpec(value);
+export const validateLegacyProjection = (value) =>
+  api().validateLegacyProjection(value);
+export const parseLegacyProjection = (value) =>
+  api().parseLegacyProjection(value);
+export const compileLegacyProjection = (document, generation, spec, options) =>
+  api().compileLegacyProjection(document, generation, spec, options);
