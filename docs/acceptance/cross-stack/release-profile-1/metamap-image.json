@@ -1,0 +1,1182 @@
+{
+  "status": "passed-portable-facts-metamap-scope",
+  "sourceRevision": "6047fb6dc6c917028de271b77128c9ec6717e5de",
+  "startedUtc": "2026-10-16T00:13:29.551208+00:00",
+  "commands": [
+    {
+      "label": "rust-version",
+      "argv": [
+        "rustc",
+        "-Vv"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.064,
+      "stdoutDigest": "sha256:b569b0c98ea3133c7252b4b8ea6b39b7b353813df0dd5f5c412c355691424112",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "cargo-version",
+      "argv": [
+        "cargo",
+        "--version"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.032,
+      "stdoutDigest": "sha256:1f88eaf7fe1aaec83184752cf4c944cd22f00184136ff36a3e4c318cc60ef566",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "node-version",
+      "argv": [
+        "node",
+        "--version"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.008,
+      "stdoutDigest": "sha256:33e26f35db6e57ce0c486ddc815fe966867e4f649e418eaf323f75f4720eb8e9",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m7-reference-clone",
+      "argv": [
+        "git",
+        "clone",
+        "--no-checkout",
+        "https://github.com/roryscot/metamap.git",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/metamap-reference"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 1.067,
+      "stdoutDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrDigest": "sha256:cbe558eae1d3f1f08e2d208036e905157d3c84519a5da348705ba9dc09532a8a"
+    },
+    {
+      "label": "m7-reference-checkout",
+      "argv": [
+        "git",
+        "-C",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/metamap-reference",
+        "checkout",
+        "--detach",
+        "399747a4ad05a37cd8db1cedd53048fad2175be4"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.064,
+      "stdoutDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrDigest": "sha256:a4e064ad0824b7326de6ead1de30a05850f3df2a446906c1d7192cfde8b2027c"
+    },
+    {
+      "label": "m7-reference-commit",
+      "argv": [
+        "git",
+        "-C",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/metamap-reference",
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.004,
+      "stdoutDigest": "sha256:968c5830cf135485da56a32fee03cc8537480fb43164bee35b549e896ef094a7",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m7-reference-clean",
+      "argv": [
+        "git",
+        "-C",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/metamap-reference",
+        "status",
+        "--porcelain",
+        "--untracked-files=no"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.032,
+      "stdoutDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m7-reference-files",
+      "argv": [
+        "git",
+        "-C",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/metamap-reference",
+        "ls-files",
+        "-z"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.004,
+      "stdoutDigest": "sha256:86f9434ed713036cf3d505de04b706b4e5057b3fe733b60577f0bf9d10619505",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m7-reference-runtime-dependencies",
+      "argv": [
+        "npm",
+        "ci",
+        "--ignore-scripts",
+        "--no-audit",
+        "--no-fund"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/metamap-runtime",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 1.568,
+      "stdoutDigest": "sha256:1549694d158e2acf3f80487dce43d6fc331aeeb8ff85c6e5b755f877dd53cc9f",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m7-reference-runtime-build",
+      "argv": [
+        "npm",
+        "run",
+        "build"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/metamap-runtime",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 3.684,
+      "stdoutDigest": "sha256:c692b332e082cec108b9ddd2b11a565392194fc409660506524fed8cf89fbab2",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m7-cli-build",
+      "argv": [
+        "cargo",
+        "build",
+        "--release",
+        "-p",
+        "patamaps-cli",
+        "--locked",
+        "--offline"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.164,
+      "stdoutDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrDigest": "sha256:765f1396d07f30f3a451cd3f9d9cad4e83c92c8e0aecf955ffc09061a6cf1e02"
+    },
+    {
+      "label": "m7-cargo",
+      "argv": [
+        "rustup",
+        "which",
+        "cargo"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.032,
+      "stdoutDigest": "sha256:c15b86fb353a905df8e0e155072f56ce51cb7986f607161716fb2f6ea0e06972",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m7-rustc",
+      "argv": [
+        "rustup",
+        "which",
+        "rustc"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.032,
+      "stdoutDigest": "sha256:cf7c5c8ef6339599e282ac27baa1b851ae590561ab6a54362d9da3d4ef337f5d",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m7-moved-owner-json",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/release/patamaps",
+        "json",
+        "parse"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/moved-source/contracts",
+      "expectedSuccess": true,
+      "stdinDigest": "sha256:43b3d07674ba67d8c68b35f701a925a4ea7ea02e5c67b5ad0f4acf1ab40b36ce",
+      "exitCode": 0,
+      "seconds": 0.004,
+      "stdoutDigest": "sha256:a5b09f9ac6d82da1c3ac0680cc2efb3fa0b4c4edfa2f9195f5f19ae282c0c7b7",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m7-moved-http-owner-json",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/release/patamaps",
+        "json",
+        "parse"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/moved-workspace/app",
+      "expectedSuccess": true,
+      "stdinDigest": "sha256:43b3d07674ba67d8c68b35f701a925a4ea7ea02e5c67b5ad0f4acf1ab40b36ce",
+      "exitCode": 0,
+      "seconds": 0.004,
+      "stdoutDigest": "sha256:a5b09f9ac6d82da1c3ac0680cc2efb3fa0b4c4edfa2f9195f5f19ae282c0c7b7",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m7-moved-http-response-schema-0",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/release/patamaps",
+        "json",
+        "parse"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/moved-workspace/app",
+      "expectedSuccess": true,
+      "stdinDigest": "sha256:3c49c73af83622c4678aedd932a53e51f71b78db7de502b68a9ed36a46af7113",
+      "exitCode": 0,
+      "seconds": 0.004,
+      "stdoutDigest": "sha256:5e0d8ad838be9c01be2b989c66c2a241a944117f83ea7f6ee11bb6ec9072949b",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m7-moved-http-request-schema-0",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/release/patamaps",
+        "json",
+        "parse"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/moved-workspace/app",
+      "expectedSuccess": true,
+      "stdinDigest": "sha256:e814007c18146f82674e36f5dc6fb1affe8e871f828c8ddff117f244e2ddfe95",
+      "exitCode": 0,
+      "seconds": 0.004,
+      "stdoutDigest": "sha256:4fedca985060bd101bba9594febd5bcf684b81c700e5e4acead8629b94af8a49",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m7-moved-http-projection",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/release/patamaps",
+        "link",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/moved-workspace/app/.patamaps/graph.json",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/moved-workspace/app/.patamaps/policy.json",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/moved-workspace/app/.patamaps/projection-spec.json",
+        "--relation-pack",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/moved-workspace/app/mappings/routing-pack.json",
+        "--as-of",
+        "2026-10-15T00:00:00Z",
+        "--context",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/moved-workspace/app/.patamaps/context.json"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/moved-workspace/app",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.004,
+      "stdoutDigest": "sha256:6ad07a88a5377d9e597836cd32073bace7d30250dc44426375d993c209ade9ff",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m7-moved-http-rust",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/release/patamaps",
+        "link",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/moved-workspace/app/.patamaps/graph.json",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/moved-workspace/app/.patamaps/policy.json",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/moved-workspace/app/.patamaps/projection-spec.json",
+        "--relation-pack",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/moved-workspace/app/mappings/routing-pack.json",
+        "--as-of",
+        "2026-10-15T00:00:00Z",
+        "--context",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/moved-workspace/app/.patamaps/context.json",
+        "--format",
+        "http-rust"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/moved-workspace/app",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.004,
+      "stdoutDigest": "sha256:8f58dcedd95ff516cc29cba3d64cc9b659ed392f99b82e72e585d7759dee2d1f",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m7-moved-http-typescript",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/release/patamaps",
+        "link",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/moved-workspace/app/.patamaps/graph.json",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/moved-workspace/app/.patamaps/policy.json",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/moved-workspace/app/.patamaps/projection-spec.json",
+        "--relation-pack",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/moved-workspace/app/mappings/routing-pack.json",
+        "--as-of",
+        "2026-10-15T00:00:00Z",
+        "--context",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/moved-workspace/app/.patamaps/context.json",
+        "--format",
+        "http-typescript"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/moved-workspace/app",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.004,
+      "stdoutDigest": "sha256:1b318f0cc8b2ecf3e3c17e077891424b8229ea90f4492f96951fc7e3f9ff6492",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m7-moved-http-rust-format",
+      "argv": [
+        "/home/runner/.rustup/toolchains/1.99.0-x86_64-unknown-linux-gnu/bin/rustfmt",
+        "--edition",
+        "2024",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/moved-workspace/app/service/src/generated.rs"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/moved-workspace/app",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.016,
+      "stdoutDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m7-moved-workspace-observe",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/release/patamaps",
+        "generate",
+        "pre-workspace.json",
+        "--root",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/moved-workspace"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/moved-workspace",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 1.116,
+      "stdoutDigest": "sha256:dffa3d40190b1c2d1bbb1147ce21f45735d611e69dddd2fd84672c1e832690e5",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m7-moved-query-catalog-page",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/release/patamaps",
+        "match-observations",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/moved-workspace/observed-graph.json",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/moved-workspace/queries/catalog-page.json",
+        "--relation-pack",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/moved-workspace/routing.json",
+        "--relation-pack",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/moved-workspace/application-topology.json",
+        "--relation-pack",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/moved-workspace/build-deployment.json"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/moved-workspace",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.008,
+      "stdoutDigest": "sha256:c545db3e8a19cdcec970c37902c60f37ca99df4696199d381b7d0285a3b1c519",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m7-moved-query-item-page",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/release/patamaps",
+        "match-observations",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/moved-workspace/observed-graph.json",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/moved-workspace/queries/item-page.json",
+        "--relation-pack",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/moved-workspace/routing.json",
+        "--relation-pack",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/moved-workspace/application-topology.json",
+        "--relation-pack",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/moved-workspace/build-deployment.json"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/moved-workspace",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.008,
+      "stdoutDigest": "sha256:0f418ceb447014d6a9f65f0f162d485df5590e62906e99d8a845d46c16413b0d",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m7-moved-query-operation-next-route",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/release/patamaps",
+        "match-observations",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/moved-workspace/observed-graph.json",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/moved-workspace/queries/operation-next-route.json",
+        "--relation-pack",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/moved-workspace/routing.json",
+        "--relation-pack",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/moved-workspace/application-topology.json",
+        "--relation-pack",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/moved-workspace/build-deployment.json"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/moved-workspace",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.008,
+      "stdoutDigest": "sha256:3040ff85a440951fb5cd6ea5c8405957d0b75acabb6c86ae7a1dafd8601049f3",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m7-moved-query-operation-next-handler",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/release/patamaps",
+        "match-observations",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/moved-workspace/observed-graph.json",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/moved-workspace/queries/operation-next-handler.json",
+        "--relation-pack",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/moved-workspace/routing.json",
+        "--relation-pack",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/moved-workspace/application-topology.json",
+        "--relation-pack",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/moved-workspace/build-deployment.json"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/moved-workspace",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.008,
+      "stdoutDigest": "sha256:e78fe81c9b42dda4554fee0972e47f996fd72a18b1eb4756e567e7cff251bfac",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m7-moved-query-operation-next-endpoint",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/release/patamaps",
+        "match-observations",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/moved-workspace/observed-graph.json",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/moved-workspace/queries/operation-next-endpoint.json",
+        "--relation-pack",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/moved-workspace/routing.json",
+        "--relation-pack",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/moved-workspace/application-topology.json",
+        "--relation-pack",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/moved-workspace/build-deployment.json"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/moved-workspace",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.008,
+      "stdoutDigest": "sha256:9052e3edc9cf62650ca6b03503cceb53e6e4e1a00bddfe29c635eb7b7b416aae",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m7-moved-query-cargo-package",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/release/patamaps",
+        "match-observations",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/moved-workspace/observed-graph.json",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/moved-workspace/queries/cargo-package.json",
+        "--relation-pack",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/moved-workspace/routing.json",
+        "--relation-pack",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/moved-workspace/application-topology.json",
+        "--relation-pack",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/moved-workspace/build-deployment.json"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/moved-workspace",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.008,
+      "stdoutDigest": "sha256:0512bfedd2a764aab65aaee9f7add7e14dd52fe58037babc14e4218d529c5eff",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m7-moved-query-cargo-target",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/release/patamaps",
+        "match-observations",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/moved-workspace/observed-graph.json",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/moved-workspace/queries/cargo-target.json",
+        "--relation-pack",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/moved-workspace/routing.json",
+        "--relation-pack",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/moved-workspace/application-topology.json",
+        "--relation-pack",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/moved-workspace/build-deployment.json"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/moved-workspace",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.008,
+      "stdoutDigest": "sha256:a7baadd857befa3e64c6b9c4bfcdf011dbef6889e27a6950746be3d8a84a7efa",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m7-moved-query-listener",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/release/patamaps",
+        "match-observations",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/moved-workspace/observed-graph.json",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/moved-workspace/queries/listener.json",
+        "--relation-pack",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/moved-workspace/routing.json",
+        "--relation-pack",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/moved-workspace/application-topology.json",
+        "--relation-pack",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/moved-workspace/build-deployment.json"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/moved-workspace",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.008,
+      "stdoutDigest": "sha256:61360be366ed9e0b770ffc87e8057c75ddd3508a25e44ab7743a92e8e5f9eaa9",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m7-moved-query-next-config",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/release/patamaps",
+        "match-observations",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/moved-workspace/observed-graph.json",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/moved-workspace/queries/next-config.json",
+        "--relation-pack",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/moved-workspace/routing.json",
+        "--relation-pack",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/moved-workspace/application-topology.json",
+        "--relation-pack",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/moved-workspace/build-deployment.json"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/moved-workspace",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.008,
+      "stdoutDigest": "sha256:e4b5aba800cba1cce292ab8b975797d192435e899652c852130e171fe4f68493",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m7-moved-query-builder",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/release/patamaps",
+        "match-observations",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/moved-workspace/observed-graph.json",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/moved-workspace/queries/builder.json",
+        "--relation-pack",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/moved-workspace/routing.json",
+        "--relation-pack",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/moved-workspace/application-topology.json",
+        "--relation-pack",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/moved-workspace/build-deployment.json"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/moved-workspace",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.008,
+      "stdoutDigest": "sha256:ef8771815f16343c69d3b6486184ff9ff2c9c357fb2c38bf16d1b7dabdcaf7df",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m7-moved-query-runtime",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/release/patamaps",
+        "match-observations",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/moved-workspace/observed-graph.json",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/moved-workspace/queries/runtime.json",
+        "--relation-pack",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/moved-workspace/routing.json",
+        "--relation-pack",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/moved-workspace/application-topology.json",
+        "--relation-pack",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/moved-workspace/build-deployment.json"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/moved-workspace",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.008,
+      "stdoutDigest": "sha256:54250bb8167041694208884882be16a38f91b31d75d9f5c05334f708a919323a",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m7-moved-query-binary-copy",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/release/patamaps",
+        "match-observations",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/moved-workspace/observed-graph.json",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/moved-workspace/queries/binary-copy.json",
+        "--relation-pack",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/moved-workspace/routing.json",
+        "--relation-pack",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/moved-workspace/application-topology.json",
+        "--relation-pack",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/moved-workspace/build-deployment.json"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/moved-workspace",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.008,
+      "stdoutDigest": "sha256:362c5b4d98425b7096f8c8e4fccb8702639033622be5a85f3c5ff0b6f26f266f",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m7-moved-query-config-copy",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/release/patamaps",
+        "match-observations",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/moved-workspace/observed-graph.json",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/moved-workspace/queries/config-copy.json",
+        "--relation-pack",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/moved-workspace/routing.json",
+        "--relation-pack",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/moved-workspace/application-topology.json",
+        "--relation-pack",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/moved-workspace/build-deployment.json"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/moved-workspace",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.008,
+      "stdoutDigest": "sha256:f3223c0cb14a58d99f502b6ce52b879d45c24db7f40ecae58b8d36a60cf83996",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m7-moved-query-build-recipe",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/release/patamaps",
+        "match-observations",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/moved-workspace/observed-graph.json",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/moved-workspace/queries/build-recipe.json",
+        "--relation-pack",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/moved-workspace/routing.json",
+        "--relation-pack",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/moved-workspace/application-topology.json",
+        "--relation-pack",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/moved-workspace/build-deployment.json"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/moved-workspace",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.008,
+      "stdoutDigest": "sha256:56971eed06666addaa313f23d96e0d563c9e6dd391e600de531f2f3366b37515",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m7-moved-workspace-admit",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/release/patamaps",
+        "generate",
+        "workspace.json",
+        "--root",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/moved-workspace"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/moved-workspace",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 1.117,
+      "stdoutDigest": "sha256:b98417898b04e4c5dbfef79aebf6af0694b6e9ef5b9957471b60605ffb3357e7",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m7-moved-workspace-offline",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/release/patamaps",
+        "verify-workspace",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/moved-workspace/baseline.json"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/moved-workspace",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.566,
+      "stdoutDigest": "sha256:958c969609d03f7490c3841b25fc17ebb838e8af73efc5c74424bc5115211b7d",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m7-moved-real-cargo",
+      "argv": [
+        "/home/runner/.rustup/toolchains/1.99.0-x86_64-unknown-linux-gnu/bin/cargo",
+        "test",
+        "--manifest-path",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/moved-workspace/app/service/Cargo.toml",
+        "--locked",
+        "--offline"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 5.83,
+      "stdoutDigest": "sha256:a81fd38aef00723a0046e5294da2d330fc17a20f801a29b520a6ff49072367ec",
+      "stderrDigest": "sha256:b1aa6ccef25a16647eabbe6b20db4e72c12fdd13845fc84ac6fbd9382fc2b1ad"
+    },
+    {
+      "label": "m7-malformed-owner-json",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/release/patamaps",
+        "json",
+        "parse"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/malformed-source/contracts",
+      "expectedSuccess": true,
+      "stdinDigest": "sha256:70695fc7f6200ad069807d69dcda11c30d940a805ed810d54b2f3884971bb2df",
+      "exitCode": 0,
+      "seconds": 0.004,
+      "stdoutDigest": "sha256:36c29be62b8c26ea0f99d17fc84e8e13972199654bb8db271bb534f4a281fd39",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m7-malformed-http-owner-json",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/release/patamaps",
+        "json",
+        "parse"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/malformed-workspace/app",
+      "expectedSuccess": true,
+      "stdinDigest": "sha256:70695fc7f6200ad069807d69dcda11c30d940a805ed810d54b2f3884971bb2df",
+      "exitCode": 0,
+      "seconds": 0.004,
+      "stdoutDigest": "sha256:36c29be62b8c26ea0f99d17fc84e8e13972199654bb8db271bb534f4a281fd39",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m7-malformed-http-response-schema-0",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/release/patamaps",
+        "json",
+        "parse"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/malformed-workspace/app",
+      "expectedSuccess": true,
+      "stdinDigest": "sha256:3c49c73af83622c4678aedd932a53e51f71b78db7de502b68a9ed36a46af7113",
+      "exitCode": 0,
+      "seconds": 0.004,
+      "stdoutDigest": "sha256:5e0d8ad838be9c01be2b989c66c2a241a944117f83ea7f6ee11bb6ec9072949b",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m7-malformed-http-request-schema-0",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/release/patamaps",
+        "json",
+        "parse"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/malformed-workspace/app",
+      "expectedSuccess": true,
+      "stdinDigest": "sha256:e814007c18146f82674e36f5dc6fb1affe8e871f828c8ddff117f244e2ddfe95",
+      "exitCode": 0,
+      "seconds": 0.004,
+      "stdoutDigest": "sha256:4fedca985060bd101bba9594febd5bcf684b81c700e5e4acead8629b94af8a49",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m7-malformed-http-projection",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/release/patamaps",
+        "link",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/malformed-workspace/app/.patamaps/graph.json",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/malformed-workspace/app/.patamaps/policy.json",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/malformed-workspace/app/.patamaps/projection-spec.json",
+        "--relation-pack",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/malformed-workspace/app/mappings/routing-pack.json",
+        "--as-of",
+        "2026-10-15T00:00:00Z",
+        "--context",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/malformed-workspace/app/.patamaps/context.json"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/malformed-workspace/app",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.004,
+      "stdoutDigest": "sha256:aa45c80f9623ad6b53f84aa42ca6dc4864a5c42e00128600d637f988f73cac47",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m7-malformed-http-rust",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/release/patamaps",
+        "link",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/malformed-workspace/app/.patamaps/graph.json",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/malformed-workspace/app/.patamaps/policy.json",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/malformed-workspace/app/.patamaps/projection-spec.json",
+        "--relation-pack",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/malformed-workspace/app/mappings/routing-pack.json",
+        "--as-of",
+        "2026-10-15T00:00:00Z",
+        "--context",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/malformed-workspace/app/.patamaps/context.json",
+        "--format",
+        "http-rust"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/malformed-workspace/app",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.004,
+      "stdoutDigest": "sha256:35402ae64e5deeaf554446eab51360827dbbeea6b70da1cc0d72c7ae8d6409b5",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m7-malformed-http-typescript",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/release/patamaps",
+        "link",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/malformed-workspace/app/.patamaps/graph.json",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/malformed-workspace/app/.patamaps/policy.json",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/malformed-workspace/app/.patamaps/projection-spec.json",
+        "--relation-pack",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/malformed-workspace/app/mappings/routing-pack.json",
+        "--as-of",
+        "2026-10-15T00:00:00Z",
+        "--context",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/malformed-workspace/app/.patamaps/context.json",
+        "--format",
+        "http-typescript"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/malformed-workspace/app",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.004,
+      "stdoutDigest": "sha256:c3121a2337620abb60e93f900ae5582f78e8224ccc9498e439cfdbdb9b911ac1",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m7-malformed-http-rust-format",
+      "argv": [
+        "/home/runner/.rustup/toolchains/1.99.0-x86_64-unknown-linux-gnu/bin/rustfmt",
+        "--edition",
+        "2024",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/malformed-workspace/app/service/src/generated.rs"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/malformed-workspace/app",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.016,
+      "stdoutDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m7-malformed-native-source",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/release/patamaps",
+        "generate",
+        "pre-workspace.json",
+        "--root",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/malformed-workspace"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/malformed-workspace",
+      "expectedSuccess": false,
+      "exitCode": 2,
+      "seconds": 0.816,
+      "stdoutDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrDigest": "sha256:2da9f394698740e88148f68889323dccadd7649df4e899b26b60fe68a291dd0c"
+    },
+    {
+      "label": "m7-malformed-detail-digest",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/release/patamaps",
+        "json",
+        "digest"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "stdinDigest": "sha256:13f8a6e1ce2df8befeec07e57845ebe8cfbbc1dcec4690b7342cf94ff2465e61",
+      "exitCode": 0,
+      "seconds": 0.004,
+      "stdoutDigest": "sha256:8b4b108bb330d7a91b2e26755cd3b289a601b820b04f5c2560ccb1cb6ae45067",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m7-malformed-native-detail",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/release/patamaps",
+        "discover-native"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/malformed-workspace",
+      "expectedSuccess": false,
+      "stdinDigest": "sha256:3603de156ed085d9df15590c2412f9b6b3f1d8ddf362dbe0c163a395a999e1aa",
+      "exitCode": 2,
+      "seconds": 0.004,
+      "stdoutDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrDigest": "sha256:6d7350539b73925569d772316140ccdfe270f0f84d051fda7ee02d182e7cdb04"
+    },
+    {
+      "label": "m7-actual-metamap-compiler",
+      "argv": [
+        "/opt/hostedtoolcache/node/22.23.3/x64/bin/node",
+        "/home/runner/work/patamaps/patamaps/examples/cross-stack/compatibility/check.mjs",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-compatibility/metamap-request.json"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 2.773,
+      "stdoutDigest": "sha256:1027037ce968e8371b8954f57d12d8e1ecf51167a5413ee5bd930f291ad3fd2b",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "fullCrossStackAcceptance": false,
+  "linuxImage": "pending",
+  "browser": "pending",
+  "deleted": [],
+  "ciResourceChecks": {
+    "growthBytes": 4000000000,
+    "reserveBytes": 500000000,
+    "checkedBetweenCommands": true,
+    "diskUsedBefore": 69057966080,
+    "localIntelPolicyChanged": false,
+    "diskUsedAfter": 69329580032
+  },
+  "metamapCompatibility": {
+    "status": "passed-portable-facts-metamap-scope",
+    "inputScope": "actual-Linux-image-browser-observations",
+    "referenceCommit": "399747a4ad05a37cd8db1cedd53048fad2175be4",
+    "referenceTrackedFilesUnchanged": 610,
+    "controls": [
+      {
+        "control": "m7-supported",
+        "native": "viable",
+        "metamap": "viable",
+        "facts": {
+          "operationIds": [
+            "urn:example:operation:create-item"
+          ],
+          "nextPages": [
+            "/",
+            "/items/:id"
+          ],
+          "cargoBins": [
+            "catalog-service"
+          ],
+          "rustModulePath": "handlers/create_item.rs",
+          "linuxArtifactObservations": 1
+        },
+        "conversionRecords": 6,
+        "adapter": {
+          "id": "metamap-shard",
+          "version": "1.0.0",
+          "inputs": [
+            {
+              "path": "converted/graph.json",
+              "digest": "sha256:148f4a9ba9758201da23dbc26eee2ffbd213ef563b9ea8981ce021e2b7094002"
+            }
+          ]
+        },
+        "commonIssue": null,
+        "compared": "independent facts and decisions; no cross-engine hash equality"
+      },
+      {
+        "control": "m7-moved-handler",
+        "native": "viable",
+        "metamap": "viable",
+        "facts": {
+          "operationIds": [
+            "urn:example:operation:create-item"
+          ],
+          "nextPages": [
+            "/",
+            "/items/:id"
+          ],
+          "cargoBins": [
+            "catalog-service"
+          ],
+          "rustModulePath": "handlers/moved_create_item.rs",
+          "linuxArtifactObservations": 0
+        },
+        "conversionRecords": 6,
+        "adapter": {
+          "id": "metamap-shard",
+          "version": "1.0.0",
+          "inputs": [
+            {
+              "path": "converted/graph.json",
+              "digest": "sha256:cf2897420f902fdc33cbeeab3f3e1fe413cc966fcd94c8f41777123fa9d8932c"
+            }
+          ]
+        },
+        "commonIssue": null,
+        "compared": "independent facts and decisions; no cross-engine hash equality"
+      },
+      {
+        "control": "m7-missing-artifact",
+        "native": "rejected",
+        "metamap": "rejected",
+        "facts": {
+          "operationIds": [
+            "urn:example:operation:create-item"
+          ],
+          "nextPages": [
+            "/",
+            "/items/:id"
+          ],
+          "cargoBins": [
+            "catalog-service"
+          ],
+          "rustModulePath": "handlers/create_item.rs",
+          "linuxArtifactObservations": 0
+        },
+        "conversionRecords": 6,
+        "adapter": {
+          "id": "metamap-shard",
+          "version": "1.0.0",
+          "inputs": [
+            {
+              "path": "converted/graph.json",
+              "digest": "sha256:283d5865ed69dd7d64aea5994717a15697f51d53703d7ca531cec4b2c1cf82b7"
+            }
+          ]
+        },
+        "commonIssue": "BUILD_OBSERVATION_BINDING_MISMATCH",
+        "compared": "independent facts and decisions; no cross-engine hash equality"
+      },
+      {
+        "control": "m7-ambiguous-operation",
+        "native": "rejected",
+        "metamap": "rejected",
+        "facts": {
+          "operationIds": [
+            "urn:example:operation:create-item"
+          ],
+          "nextPages": [
+            "/",
+            "/items/:id"
+          ],
+          "cargoBins": [
+            "catalog-service"
+          ],
+          "rustModulePath": "handlers/create_item.rs",
+          "linuxArtifactObservations": 1
+        },
+        "conversionRecords": 6,
+        "adapter": {
+          "id": "metamap-shard",
+          "version": "1.0.0",
+          "inputs": [
+            {
+              "path": "converted/graph.json",
+              "digest": "sha256:189edb144422cb6a4812553c016c87d0ad663b2f8a70f1e4609f3832a6684b3e"
+            }
+          ]
+        },
+        "commonIssue": "NON_UNIQUE_MAPPING_TARGET",
+        "compared": "independent facts and decisions; no cross-engine hash equality"
+      },
+      {
+        "control": "m7-numeric-equivalence",
+        "native": "viable",
+        "metamap": "viable",
+        "facts": {
+          "operationIds": [
+            "urn:example:operation:create-item"
+          ],
+          "nextPages": [
+            "/",
+            "/items/:id"
+          ],
+          "cargoBins": [
+            "catalog-service"
+          ],
+          "rustModulePath": "handlers/create_item.rs",
+          "linuxArtifactObservations": 1
+        },
+        "conversionRecords": 6,
+        "adapter": {
+          "id": "metamap-shard",
+          "version": "1.0.0",
+          "inputs": [
+            {
+              "path": "converted/graph.json",
+              "digest": "sha256:fa72c92cfedb4df53de2f89845592148cbcfab2f5b262f3f6d1d7cc5607a90bb"
+            }
+          ]
+        },
+        "commonIssue": null,
+        "compared": "independent facts and decisions; no cross-engine hash equality"
+      },
+      {
+        "control": "m7-missing-versus-null",
+        "native": "rejected",
+        "metamap": "rejected",
+        "facts": {
+          "operationIds": [
+            "urn:example:operation:create-item"
+          ],
+          "nextPages": [
+            "/",
+            "/items/:id"
+          ],
+          "cargoBins": [
+            "catalog-service"
+          ],
+          "rustModulePath": "handlers/create_item.rs",
+          "linuxArtifactObservations": 1
+        },
+        "conversionRecords": 6,
+        "adapter": {
+          "id": "metamap-shard",
+          "version": "1.0.0",
+          "inputs": [
+            {
+              "path": "converted/graph.json",
+              "digest": "sha256:fa72c92cfedb4df53de2f89845592148cbcfab2f5b262f3f6d1d7cc5607a90bb"
+            }
+          ]
+        },
+        "commonIssue": "BUILD_OBSERVATION_BINDING_MISMATCH",
+        "compared": "independent facts and decisions; no cross-engine hash equality"
+      },
+      {
+        "control": "m7-selector-bound",
+        "native": "rejected",
+        "metamap": "rejected",
+        "facts": {
+          "operationIds": [
+            "urn:example:operation:create-item"
+          ],
+          "nextPages": [
+            "/",
+            "/items/:id"
+          ],
+          "cargoBins": [
+            "catalog-service"
+          ],
+          "rustModulePath": "handlers/create_item.rs",
+          "linuxArtifactObservations": 1
+        },
+        "conversionRecords": 6,
+        "adapter": {
+          "id": "metamap-shard",
+          "version": "1.0.0",
+          "inputs": [
+            {
+              "path": "converted/graph.json",
+              "digest": "sha256:fa72c92cfedb4df53de2f89845592148cbcfab2f5b262f3f6d1d7cc5607a90bb"
+            }
+          ]
+        },
+        "commonIssue": "INVALID_CONSTRAINT_PARAMETERS",
+        "compared": "independent facts and decisions; no cross-engine hash equality"
+      },
+      {
+        "control": "m7-malformed-config",
+        "native": "source-refused",
+        "metamap": "source-refused",
+        "graphManufactured": false,
+        "independentTOMLParserComparison": false,
+        "sharedNativeProviderDiagnostic": "NATIVE_TOML_SYNTAX"
+      },
+      {
+        "control": "m7-unregistered-evaluator",
+        "result": "refused",
+        "code": "UNKNOWN_CONSTRAINT_KIND"
+      },
+      {
+        "control": "m7-protected-observation-waiver",
+        "result": "refused"
+      }
+    ],
+    "fullReleaseAccepted": false,
+    "installedConsumer": "separate-required-gate",
+    "nativeCapturesOrApprovalsReusedAsMetamapRecords": false,
+    "baselineOriginalDigest": "sha256:5decf5692522dacc00d4d7f7d5210c20c414c336709c0ac174f680d247cee8b8",
+    "materializedNativeValuePointers": [
+      "/captures/0/inputs/graph",
+      "/captures/0/inputs/policy",
+      "/captures/0/inputs/packs"
+    ]
+  },
+  "sourceUnchanged": true,
+  "finishedUtc": "2026-10-16T00:13:51.744555+00:00"
+}

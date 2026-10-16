@@ -1,0 +1,2922 @@
+{
+  "status": "passed-linux-image-browser-scope",
+  "sourceRevision": "6047fb6dc6c917028de271b77128c9ec6717e5de",
+  "startedUtc": "2026-10-16T00:06:56.751780+00:00",
+  "commands": [
+    {
+      "label": "rust-version",
+      "argv": [
+        "rustc",
+        "-Vv"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.032,
+      "stdoutDigest": "sha256:b569b0c98ea3133c7252b4b8ea6b39b7b353813df0dd5f5c412c355691424112",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "cargo-version",
+      "argv": [
+        "cargo",
+        "--version"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.032,
+      "stdoutDigest": "sha256:1f88eaf7fe1aaec83184752cf4c944cd22f00184136ff36a3e4c318cc60ef566",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "node-version",
+      "argv": [
+        "node",
+        "--version"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.008,
+      "stdoutDigest": "sha256:33e26f35db6e57ce0c486ddc815fe966867e4f649e418eaf323f75f4720eb8e9",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m6-docker-version",
+      "argv": [
+        "docker",
+        "version",
+        "--format",
+        "{{json .}}"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": null,
+      "exitCode": 0,
+      "seconds": 7.245,
+      "stdoutDigest": "sha256:c92731ec13258e3e458a7933683d40f878dfb2ab8241584ed16c14e265b407dd",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m6-buildkit-info",
+      "argv": [
+        "docker",
+        "buildx",
+        "inspect",
+        "--bootstrap"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": null,
+      "exitCode": 0,
+      "seconds": 7.933,
+      "stdoutDigest": "sha256:1aac1120374ef80d953cbbfbc0b52c8fd7000f6a8f0db192d4d1835f3fe8376f",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m6-browser-availability",
+      "argv": [
+        "/opt/hostedtoolcache/node/22.23.3/x64/bin/node",
+        "/home/runner/work/patamaps/patamaps/examples/cross-stack/acceptance/browser/probe.cjs"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": null,
+      "exitCode": 0,
+      "seconds": 2.621,
+      "stdoutDigest": "sha256:be72786eada7b3325171559850650c866c0103dd314ea7b564107c3ab8051044",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m6-buildx-version",
+      "argv": [
+        "docker",
+        "buildx",
+        "version"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.064,
+      "stdoutDigest": "sha256:af9e26004e1d709f960d6dda62c5bb9415782f12269f0ccce6c8b918d2326d72",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m6-clang-version",
+      "argv": [
+        "clang",
+        "--version"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 10.196,
+      "stdoutDigest": "sha256:3635b8631d4ebcd8ed7586f4e01e7a6b44407de9d38db6e01daca9c242ed7a53",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m6-linker-version",
+      "argv": [
+        "ld.lld",
+        "--version"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.446,
+      "stdoutDigest": "sha256:1479084e18fdeec3181dd42501959b88ee5ba6093df14b89ffa418b07afadcd4",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m6-cli",
+      "argv": [
+        "cargo",
+        "build",
+        "--release",
+        "-p",
+        "patamaps-cli",
+        "--locked",
+        "--offline"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 250.939,
+      "stdoutDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrDigest": "sha256:71730efa60992f697f6ed8152941743847ba2ce748b7e7c4349256145cccd389"
+    },
+    {
+      "label": "m6-cargo",
+      "argv": [
+        "rustup",
+        "which",
+        "cargo"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.032,
+      "stdoutDigest": "sha256:c15b86fb353a905df8e0e155072f56ce51cb7986f607161716fb2f6ea0e06972",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m6-rustc",
+      "argv": [
+        "rustup",
+        "which",
+        "rustc"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.032,
+      "stdoutDigest": "sha256:cf7c5c8ef6339599e282ac27baa1b851ae590561ab6a54362d9da3d4ef337f5d",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "owner-json",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/release/patamaps",
+        "json",
+        "parse"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps/examples/cross-stack/contracts",
+      "expectedSuccess": true,
+      "stdinDigest": "sha256:70695fc7f6200ad069807d69dcda11c30d940a805ed810d54b2f3884971bb2df",
+      "exitCode": 0,
+      "seconds": 0.004,
+      "stdoutDigest": "sha256:36c29be62b8c26ea0f99d17fc84e8e13972199654bb8db271bb534f4a281fd39",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "http-owner-json",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/release/patamaps",
+        "json",
+        "parse"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/release-candidate/app",
+      "expectedSuccess": true,
+      "stdinDigest": "sha256:70695fc7f6200ad069807d69dcda11c30d940a805ed810d54b2f3884971bb2df",
+      "exitCode": 0,
+      "seconds": 0.004,
+      "stdoutDigest": "sha256:36c29be62b8c26ea0f99d17fc84e8e13972199654bb8db271bb534f4a281fd39",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "http-response-schema-0",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/release/patamaps",
+        "json",
+        "parse"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/release-candidate/app",
+      "expectedSuccess": true,
+      "stdinDigest": "sha256:3c49c73af83622c4678aedd932a53e51f71b78db7de502b68a9ed36a46af7113",
+      "exitCode": 0,
+      "seconds": 0.004,
+      "stdoutDigest": "sha256:5e0d8ad838be9c01be2b989c66c2a241a944117f83ea7f6ee11bb6ec9072949b",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "http-request-schema-0",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/release/patamaps",
+        "json",
+        "parse"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/release-candidate/app",
+      "expectedSuccess": true,
+      "stdinDigest": "sha256:e814007c18146f82674e36f5dc6fb1affe8e871f828c8ddff117f244e2ddfe95",
+      "exitCode": 0,
+      "seconds": 0.004,
+      "stdoutDigest": "sha256:4fedca985060bd101bba9594febd5bcf684b81c700e5e4acead8629b94af8a49",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "http-projection",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/release/patamaps",
+        "link",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/release-candidate/app/.patamaps/graph.json",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/release-candidate/app/.patamaps/policy.json",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/release-candidate/app/.patamaps/projection-spec.json",
+        "--relation-pack",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/release-candidate/app/mappings/routing-pack.json",
+        "--as-of",
+        "2026-10-15T00:00:00Z",
+        "--context",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/release-candidate/app/.patamaps/context.json"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/release-candidate/app",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.004,
+      "stdoutDigest": "sha256:aa45c80f9623ad6b53f84aa42ca6dc4864a5c42e00128600d637f988f73cac47",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "http-rust",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/release/patamaps",
+        "link",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/release-candidate/app/.patamaps/graph.json",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/release-candidate/app/.patamaps/policy.json",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/release-candidate/app/.patamaps/projection-spec.json",
+        "--relation-pack",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/release-candidate/app/mappings/routing-pack.json",
+        "--as-of",
+        "2026-10-15T00:00:00Z",
+        "--context",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/release-candidate/app/.patamaps/context.json",
+        "--format",
+        "http-rust"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/release-candidate/app",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.004,
+      "stdoutDigest": "sha256:35402ae64e5deeaf554446eab51360827dbbeea6b70da1cc0d72c7ae8d6409b5",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "http-typescript",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/release/patamaps",
+        "link",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/release-candidate/app/.patamaps/graph.json",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/release-candidate/app/.patamaps/policy.json",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/release-candidate/app/.patamaps/projection-spec.json",
+        "--relation-pack",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/release-candidate/app/mappings/routing-pack.json",
+        "--as-of",
+        "2026-10-15T00:00:00Z",
+        "--context",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/release-candidate/app/.patamaps/context.json",
+        "--format",
+        "http-typescript"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/release-candidate/app",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.004,
+      "stdoutDigest": "sha256:c3121a2337620abb60e93f900ae5582f78e8224ccc9498e439cfdbdb9b911ac1",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "http-rust-format",
+      "argv": [
+        "/home/runner/.rustup/toolchains/1.99.0-x86_64-unknown-linux-gnu/bin/rustfmt",
+        "--edition",
+        "2024",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/release-candidate/app/service/src/generated.rs"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/release-candidate/app",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.016,
+      "stdoutDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "workspace-observe",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/release/patamaps",
+        "generate",
+        "pre-workspace.json",
+        "--root",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/release-candidate"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/release-candidate",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 1.167,
+      "stdoutDigest": "sha256:f213bf07a4f3ab65b518cf137d58e8d379ee1a3ba98a91178ed8eb8112384e8b",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "query-catalog-page",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/release/patamaps",
+        "match-observations",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/release-candidate/observed-graph.json",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/release-candidate/queries/catalog-page.json",
+        "--relation-pack",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/release-candidate/routing.json",
+        "--relation-pack",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/release-candidate/application-topology.json",
+        "--relation-pack",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/release-candidate/build-deployment.json"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/release-candidate",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.008,
+      "stdoutDigest": "sha256:32e8163d937db0b79fc89ff1eb35d8e7b5f0d6cd446fbe3af824f58e20effb18",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "query-item-page",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/release/patamaps",
+        "match-observations",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/release-candidate/observed-graph.json",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/release-candidate/queries/item-page.json",
+        "--relation-pack",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/release-candidate/routing.json",
+        "--relation-pack",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/release-candidate/application-topology.json",
+        "--relation-pack",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/release-candidate/build-deployment.json"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/release-candidate",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.008,
+      "stdoutDigest": "sha256:bfd6c6998ba66d9d90e24fa6a52eb87e9595f976a7ff46bd61072801f03ff648",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "query-operation-next-route",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/release/patamaps",
+        "match-observations",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/release-candidate/observed-graph.json",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/release-candidate/queries/operation-next-route.json",
+        "--relation-pack",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/release-candidate/routing.json",
+        "--relation-pack",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/release-candidate/application-topology.json",
+        "--relation-pack",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/release-candidate/build-deployment.json"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/release-candidate",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.008,
+      "stdoutDigest": "sha256:bd8f8283498df6c4e67f48903d6644d3b7fca1393e6ee36db6d2d94a88f79aae",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "query-operation-next-handler",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/release/patamaps",
+        "match-observations",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/release-candidate/observed-graph.json",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/release-candidate/queries/operation-next-handler.json",
+        "--relation-pack",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/release-candidate/routing.json",
+        "--relation-pack",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/release-candidate/application-topology.json",
+        "--relation-pack",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/release-candidate/build-deployment.json"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/release-candidate",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.008,
+      "stdoutDigest": "sha256:3fce93a681ad55fc508c9449ba83f20dbde7eb72aa2bb90b1efb989b6b45b9bc",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "query-operation-next-endpoint",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/release/patamaps",
+        "match-observations",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/release-candidate/observed-graph.json",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/release-candidate/queries/operation-next-endpoint.json",
+        "--relation-pack",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/release-candidate/routing.json",
+        "--relation-pack",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/release-candidate/application-topology.json",
+        "--relation-pack",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/release-candidate/build-deployment.json"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/release-candidate",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.008,
+      "stdoutDigest": "sha256:2dffaf0933cff456172733d84846ebbf1280a889b8cdc6fbc96faaa1ea2a57da",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "query-cargo-package",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/release/patamaps",
+        "match-observations",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/release-candidate/observed-graph.json",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/release-candidate/queries/cargo-package.json",
+        "--relation-pack",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/release-candidate/routing.json",
+        "--relation-pack",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/release-candidate/application-topology.json",
+        "--relation-pack",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/release-candidate/build-deployment.json"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/release-candidate",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.008,
+      "stdoutDigest": "sha256:bbf2d7010c771e46ed0feafa4eeadd4a141eb87f06a007f09a8da877ab9e6dae",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "query-cargo-target",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/release/patamaps",
+        "match-observations",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/release-candidate/observed-graph.json",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/release-candidate/queries/cargo-target.json",
+        "--relation-pack",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/release-candidate/routing.json",
+        "--relation-pack",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/release-candidate/application-topology.json",
+        "--relation-pack",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/release-candidate/build-deployment.json"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/release-candidate",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.008,
+      "stdoutDigest": "sha256:31a5ab498f5a90812c61e58f21bff8d60675525e19c28542409fecf5aca5153f",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "query-listener",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/release/patamaps",
+        "match-observations",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/release-candidate/observed-graph.json",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/release-candidate/queries/listener.json",
+        "--relation-pack",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/release-candidate/routing.json",
+        "--relation-pack",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/release-candidate/application-topology.json",
+        "--relation-pack",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/release-candidate/build-deployment.json"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/release-candidate",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.008,
+      "stdoutDigest": "sha256:21f9e7d9b93396c9326f9d473e77cf8a2f42422120c189d35560dae1d4001816",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "query-next-config",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/release/patamaps",
+        "match-observations",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/release-candidate/observed-graph.json",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/release-candidate/queries/next-config.json",
+        "--relation-pack",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/release-candidate/routing.json",
+        "--relation-pack",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/release-candidate/application-topology.json",
+        "--relation-pack",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/release-candidate/build-deployment.json"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/release-candidate",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.008,
+      "stdoutDigest": "sha256:a35f2e391a1007eb2c3fd44558f7a64c2dcd0489510339575db3036ae78fd446",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "query-builder",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/release/patamaps",
+        "match-observations",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/release-candidate/observed-graph.json",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/release-candidate/queries/builder.json",
+        "--relation-pack",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/release-candidate/routing.json",
+        "--relation-pack",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/release-candidate/application-topology.json",
+        "--relation-pack",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/release-candidate/build-deployment.json"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/release-candidate",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.008,
+      "stdoutDigest": "sha256:b8e9e54f1db039b23267642e988b7586691aef382638722ed1e00c01934c373c",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "query-runtime",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/release/patamaps",
+        "match-observations",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/release-candidate/observed-graph.json",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/release-candidate/queries/runtime.json",
+        "--relation-pack",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/release-candidate/routing.json",
+        "--relation-pack",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/release-candidate/application-topology.json",
+        "--relation-pack",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/release-candidate/build-deployment.json"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/release-candidate",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.008,
+      "stdoutDigest": "sha256:277d9f763d31af224007ca5f874e7f5259dc5eee75d288234bdbf1c13fe26d00",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "query-binary-copy",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/release/patamaps",
+        "match-observations",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/release-candidate/observed-graph.json",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/release-candidate/queries/binary-copy.json",
+        "--relation-pack",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/release-candidate/routing.json",
+        "--relation-pack",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/release-candidate/application-topology.json",
+        "--relation-pack",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/release-candidate/build-deployment.json"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/release-candidate",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.008,
+      "stdoutDigest": "sha256:162c4da3ba76ef82ddea1316ae7a9c96c5af9ecdb2b6d7a2b07114d04f582c9f",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "query-config-copy",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/release/patamaps",
+        "match-observations",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/release-candidate/observed-graph.json",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/release-candidate/queries/config-copy.json",
+        "--relation-pack",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/release-candidate/routing.json",
+        "--relation-pack",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/release-candidate/application-topology.json",
+        "--relation-pack",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/release-candidate/build-deployment.json"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/release-candidate",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.008,
+      "stdoutDigest": "sha256:36b573c36711e055ddf1f4695b7e922dfc16b9bf086e34ac29b1125dfc5a5708",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "query-build-recipe",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/release/patamaps",
+        "match-observations",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/release-candidate/observed-graph.json",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/release-candidate/queries/build-recipe.json",
+        "--relation-pack",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/release-candidate/routing.json",
+        "--relation-pack",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/release-candidate/application-topology.json",
+        "--relation-pack",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/release-candidate/build-deployment.json"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/release-candidate",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.008,
+      "stdoutDigest": "sha256:5480510fbba82edf92bc4196dd3f69f77a29f88e63610f45d9d937739df2b661",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "workspace-admit",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/release/patamaps",
+        "generate",
+        "workspace.json",
+        "--root",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/release-candidate"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/release-candidate",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 1.167,
+      "stdoutDigest": "sha256:b937b76dd083419ad39c388417c81bc20e13f2046547b52a371da95c63ffebd5",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "workspace-offline",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/release/patamaps",
+        "verify-workspace",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/release-candidate/baseline.json"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/release-candidate",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.566,
+      "stdoutDigest": "sha256:adfe040fc236f8591c513cea68201d306a8e24db51339c32713e356183fcd046",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m6-next-build",
+      "argv": [
+        "/opt/hostedtoolcache/node/22.23.3/x64/bin/node",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/release-candidate/app/web/node_modules/next/dist/bin/next",
+        "build",
+        "--webpack"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/release-candidate/app/web",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 26.119,
+      "stdoutDigest": "sha256:006d8b0835e95ea382502cdc01a346d8434659bf8aa074d4f4a11a7c55208045",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m6-next-typecheck",
+      "argv": [
+        "/opt/hostedtoolcache/node/22.23.3/x64/bin/node",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/release-candidate/app/web/node_modules/typescript/lib/tsc.js",
+        "--noEmit"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/release-candidate/app/web",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 1.677,
+      "stdoutDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m6-client",
+      "argv": [
+        "/opt/hostedtoolcache/node/22.23.3/x64/bin/node",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/release-candidate/app/web/node_modules/typescript/lib/tsc.js",
+        "--target",
+        "ES2022",
+        "--module",
+        "commonjs",
+        "--lib",
+        "ES2022,DOM",
+        "--strict",
+        "--skipLibCheck",
+        "--outDir",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/client-js",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/release-candidate/app/web/generated/operations.ts"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.618,
+      "stdoutDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m6-buildkit-targets",
+      "argv": [
+        "docker",
+        "buildx",
+        "build",
+        "--call=targets",
+        "--file",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/release-candidate/build-context/deploy/Dockerfile",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/release-candidate/build-context"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 3.874,
+      "stdoutDigest": "sha256:6d758048e38c16c760c23154e2cfec19f822ba0e6f2564717a1bcf146a987dc3",
+      "stderrDigest": "sha256:fcd18b3ab21165b6127ff49af1eecc59204e905b223b47f50412aa2e426c3fbb"
+    },
+    {
+      "label": "m6-positive-image",
+      "argv": [
+        "docker",
+        "buildx",
+        "build",
+        "--load",
+        "--platform",
+        "linux/amd64",
+        "--target",
+        "runtime",
+        "--progress",
+        "plain",
+        "--metadata-file",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/m6-positive-image.metadata.json",
+        "--iidfile",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/m6-positive-image.iid",
+        "--file",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/release-candidate/build-context/deploy/Dockerfile",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/release-candidate/build-context"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 28.691,
+      "stdoutDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrDigest": "sha256:7d3ece5e0c118f3f70642901c2397fa9f4e286332eb2c3771e2eee269d1cfeaf"
+    },
+    {
+      "label": "m6-image-inspect",
+      "argv": [
+        "docker",
+        "image",
+        "inspect",
+        "sha256:663fbc4289888a10816c615ce58c81fcc31696ebe79ba0be6d8ba675d948ca27"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.064,
+      "stdoutDigest": "sha256:c53120947cc9931e522492e19e194cacbd6fd31b6fd33ef34f2d9e8402602c63",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m6-builder-evidence",
+      "argv": [
+        "docker",
+        "buildx",
+        "build",
+        "--platform",
+        "linux/amd64",
+        "--target",
+        "inspection",
+        "--progress",
+        "plain",
+        "--metadata-file",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/m6-builder-evidence.metadata.json",
+        "--output",
+        "type=local,dest=/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/builder-evidence",
+        "--file",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/inspection.Dockerfile",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/release-candidate/build-context"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.517,
+      "stdoutDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrDigest": "sha256:da0d9c6362d3b75f0db72554c44b09683f9a9be15f1a3c4fd601cd236d89c12c"
+    },
+    {
+      "label": "m6-elf-loader",
+      "argv": [
+        "readelf",
+        "--program-headers",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/builder-evidence/catalog-service"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.134,
+      "stdoutDigest": "sha256:e3669e26b2328fef065ca91b14c8b8bfd3ba6a2b561571aa4796d4268acc23e2",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m6-elf-libraries",
+      "argv": [
+        "readelf",
+        "--dynamic",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/builder-evidence/catalog-service"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.002,
+      "stdoutDigest": "sha256:33ba55d2f973e405fa2d2432fed470bdec329adaaf45d41b81b80fd6c8576ff7",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m6-positive-create",
+      "argv": [
+        "docker",
+        "create",
+        "--name",
+        "patamaps-cross-stack-766ba7decd47434e89ce65872c84bd59",
+        "--platform",
+        "linux/amd64",
+        "--memory",
+        "256m",
+        "--cpus",
+        "1",
+        "--pids-limit",
+        "64",
+        "--read-only",
+        "--cap-drop",
+        "ALL",
+        "--security-opt",
+        "no-new-privileges",
+        "--publish",
+        "127.0.0.1::8080",
+        "--publish",
+        "127.0.0.1::9090",
+        "sha256:663fbc4289888a10816c615ce58c81fcc31696ebe79ba0be6d8ba675d948ca27"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.032,
+      "stdoutDigest": "sha256:d1b3c66aacaad94a5798455ac8dfdda768b6cabf263af1ea4b11380dba81255c",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m6-positive-start",
+      "argv": [
+        "docker",
+        "start",
+        "d4223824993699134e21f44d1e9b24a783a7f22a300c3c1ce47d12e24b2762e0"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": null,
+      "exitCode": 0,
+      "seconds": 1.969,
+      "stdoutDigest": "sha256:d1b3c66aacaad94a5798455ac8dfdda768b6cabf263af1ea4b11380dba81255c",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m6-positive-inspect",
+      "argv": [
+        "docker",
+        "inspect",
+        "d4223824993699134e21f44d1e9b24a783a7f22a300c3c1ce47d12e24b2762e0"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.016,
+      "stdoutDigest": "sha256:a307d25fdab9d649c19c0e8bbf63c1daec6e58926eac9dc29242526ea667b562",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m6-copy-binary",
+      "argv": [
+        "docker",
+        "cp",
+        "d4223824993699134e21f44d1e9b24a783a7f22a300c3c1ce47d12e24b2762e0:/usr/local/bin/catalog-service",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/image-contents/catalog-service"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.064,
+      "stdoutDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m6-copy-config",
+      "argv": [
+        "docker",
+        "cp",
+        "d4223824993699134e21f44d1e9b24a783a7f22a300c3c1ce47d12e24b2762e0:/app/service.toml",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/image-contents/service.toml"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.016,
+      "stdoutDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m6-copy-notices",
+      "argv": [
+        "docker",
+        "cp",
+        "d4223824993699134e21f44d1e9b24a783a7f22a300c3c1ce47d12e24b2762e0:/usr/share/licenses/catalog-service",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/image-contents/licenses"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.065,
+      "stdoutDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m6-runtime-contract",
+      "argv": [
+        "/opt/hostedtoolcache/node/22.23.3/x64/bin/node",
+        "/home/runner/work/patamaps/patamaps/examples/cross-stack/acceptance/check-runtime.cjs",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/client-js/operations.js",
+        "http://127.0.0.1:47323",
+        "http://127.0.0.1:32768"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.265,
+      "stdoutDigest": "sha256:e0707dd4c6dde54ec9aa65edec42e53be0cfdee3ac51d70ec3e8c2f7c730e768",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m6-browser",
+      "argv": [
+        "/opt/hostedtoolcache/node/22.23.3/x64/bin/node",
+        "/home/runner/work/patamaps/patamaps/examples/cross-stack/acceptance/browser/check.cjs",
+        "http://127.0.0.1:47323",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/browser"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 1.674,
+      "stdoutDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m6-stale-client-compile",
+      "argv": [
+        "/opt/hostedtoolcache/node/22.23.3/x64/bin/node",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/release-candidate/app/web/node_modules/typescript/lib/tsc.js",
+        "--target",
+        "ES2022",
+        "--module",
+        "commonjs",
+        "--lib",
+        "ES2022,DOM",
+        "--strict",
+        "--skipLibCheck",
+        "--outDir",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/stale-client/js",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/stale-client/operations.ts"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.617,
+      "stdoutDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m6-stale-client-http",
+      "argv": [
+        "/opt/hostedtoolcache/node/22.23.3/x64/bin/node",
+        "/home/runner/work/patamaps/patamaps/examples/cross-stack/acceptance/check-runtime.cjs",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/stale-client/js/operations.js",
+        "http://127.0.0.1:47323",
+        "http://127.0.0.1:32768"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": false,
+      "exitCode": 1,
+      "seconds": 0.164,
+      "stdoutDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrDigest": "sha256:5ed65b13f9b09cda92913cbda3b3698225b3c59c64bfe516761961ad65bc886a"
+    },
+    {
+      "label": "m6-positive-stop",
+      "argv": [
+        "docker",
+        "stop",
+        "--time",
+        "2",
+        "d4223824993699134e21f44d1e9b24a783a7f22a300c3c1ce47d12e24b2762e0"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 2.22,
+      "stdoutDigest": "sha256:af68a17caaae0fc2e750cc82f1b7e152cb368d26140ac836f5e55797d73ec17b",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m6-positive-logs",
+      "argv": [
+        "docker",
+        "logs",
+        "d4223824993699134e21f44d1e9b24a783a7f22a300c3c1ce47d12e24b2762e0"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.016,
+      "stdoutDigest": "sha256:5f77e95ee47d11380b500a628013cd05c8cca2c83e15725ad9b930c4379764e0",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m6-positive-final-inspect",
+      "argv": [
+        "docker",
+        "inspect",
+        "d4223824993699134e21f44d1e9b24a783a7f22a300c3c1ce47d12e24b2762e0"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.016,
+      "stdoutDigest": "sha256:8281cf995f8be46f03678c4ac6b3c8d183e72aceb3e0abb773b4522c0831f441",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m6-alias-index",
+      "argv": [
+        "docker",
+        "buildx",
+        "build",
+        "--load",
+        "--platform",
+        "linux/amd64",
+        "--target",
+        "runtime",
+        "--progress",
+        "plain",
+        "--metadata-file",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/m6-alias-index.metadata.json",
+        "--iidfile",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/m6-alias-index.iid",
+        "--file",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/image-cases/alias-index/deploy/Dockerfile",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/image-cases/alias-index"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.565,
+      "stdoutDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrDigest": "sha256:b4cc060d6a893703c4efb77ff6505aeab3eb5bca5ee254fb0cf7dec9edd1685b"
+    },
+    {
+      "label": "m6-alias-runtime-create",
+      "argv": [
+        "docker",
+        "create",
+        "--name",
+        "patamaps-cross-stack-534270071d764295b05640efb9119112",
+        "--platform",
+        "linux/amd64",
+        "--memory",
+        "256m",
+        "--cpus",
+        "1",
+        "--pids-limit",
+        "64",
+        "--read-only",
+        "--cap-drop",
+        "ALL",
+        "--security-opt",
+        "no-new-privileges",
+        "--publish",
+        "127.0.0.1::8080",
+        "--publish",
+        "127.0.0.1::9090",
+        "sha256:663fbc4289888a10816c615ce58c81fcc31696ebe79ba0be6d8ba675d948ca27"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.032,
+      "stdoutDigest": "sha256:779e7c80b865f176a0f561d8e83daf20e793b5facb50eaef57b8597b8469fc81",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m6-alias-runtime-start",
+      "argv": [
+        "docker",
+        "start",
+        "f3ddd4d0c0afb8b7edcfad2b466ea6bb7da3912cfcb329d28d361355597ed05f"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": null,
+      "exitCode": 0,
+      "seconds": 0.165,
+      "stdoutDigest": "sha256:779e7c80b865f176a0f561d8e83daf20e793b5facb50eaef57b8597b8469fc81",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m6-alias-runtime-inspect",
+      "argv": [
+        "docker",
+        "inspect",
+        "f3ddd4d0c0afb8b7edcfad2b466ea6bb7da3912cfcb329d28d361355597ed05f"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.016,
+      "stdoutDigest": "sha256:7802fad50473b10e34219da6af51a92e7ba40bfd6b16dc3c3f5af207cc7c84ec",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m6-alias-runtime-stop",
+      "argv": [
+        "docker",
+        "stop",
+        "--time",
+        "2",
+        "f3ddd4d0c0afb8b7edcfad2b466ea6bb7da3912cfcb329d28d361355597ed05f"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 2.17,
+      "stdoutDigest": "sha256:6f8986295655630ab49fc85e99a8fe04d5b167429abf801696ac9655f835ff55",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m6-alias-runtime-logs",
+      "argv": [
+        "docker",
+        "logs",
+        "f3ddd4d0c0afb8b7edcfad2b466ea6bb7da3912cfcb329d28d361355597ed05f"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.032,
+      "stdoutDigest": "sha256:5f77e95ee47d11380b500a628013cd05c8cca2c83e15725ad9b930c4379764e0",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m6-alias-runtime-final-inspect",
+      "argv": [
+        "docker",
+        "inspect",
+        "f3ddd4d0c0afb8b7edcfad2b466ea6bb7da3912cfcb329d28d361355597ed05f"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.016,
+      "stdoutDigest": "sha256:52e8f918768436fc76aa870f40ac9af8755a9099ebebbab0ffe032387faf8a58",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m6-explicit-arg-json-copy",
+      "argv": [
+        "docker",
+        "buildx",
+        "build",
+        "--load",
+        "--platform",
+        "linux/amd64",
+        "--target",
+        "runtime",
+        "--progress",
+        "plain",
+        "--metadata-file",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/m6-explicit-arg-json-copy.metadata.json",
+        "--iidfile",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/m6-explicit-arg-json-copy.iid",
+        "--file",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/image-cases/explicit-arg-json-copy/deploy/Dockerfile",
+        "--build-arg",
+        "BASE=rust:1.99.0-bookworm",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/image-cases/explicit-arg-json-copy"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.515,
+      "stdoutDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrDigest": "sha256:fe4c5678b3bb368143ed0c1e60e9f9811ce2db2d65855f475eb3f10306593f07"
+    },
+    {
+      "label": "m6-arg-runtime-create",
+      "argv": [
+        "docker",
+        "create",
+        "--name",
+        "patamaps-cross-stack-84b2a1085782413caab8bb77b9b6f922",
+        "--platform",
+        "linux/amd64",
+        "--memory",
+        "256m",
+        "--cpus",
+        "1",
+        "--pids-limit",
+        "64",
+        "--read-only",
+        "--cap-drop",
+        "ALL",
+        "--security-opt",
+        "no-new-privileges",
+        "--publish",
+        "127.0.0.1::8080",
+        "--publish",
+        "127.0.0.1::9090",
+        "sha256:663fbc4289888a10816c615ce58c81fcc31696ebe79ba0be6d8ba675d948ca27"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.032,
+      "stdoutDigest": "sha256:5c62d6fcc6dd484b74666911c7a008cac3711970663ab0fc37bea9479a2bb6e8",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m6-arg-runtime-start",
+      "argv": [
+        "docker",
+        "start",
+        "7fbab0a2ad4566cf34b565fd057d94062f29d4dc93100d39830590e243107d0c"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": null,
+      "exitCode": 0,
+      "seconds": 0.165,
+      "stdoutDigest": "sha256:5c62d6fcc6dd484b74666911c7a008cac3711970663ab0fc37bea9479a2bb6e8",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m6-arg-runtime-inspect",
+      "argv": [
+        "docker",
+        "inspect",
+        "7fbab0a2ad4566cf34b565fd057d94062f29d4dc93100d39830590e243107d0c"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.016,
+      "stdoutDigest": "sha256:c680e8e12e20d5c97e100d4928aa58197a7f810c5fdd4ac9d093ccbe408c0bb4",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m6-arg-runtime-stop",
+      "argv": [
+        "docker",
+        "stop",
+        "--time",
+        "2",
+        "7fbab0a2ad4566cf34b565fd057d94062f29d4dc93100d39830590e243107d0c"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 2.17,
+      "stdoutDigest": "sha256:65d6e113abddd0d1716583574aa23197be130a352b9201a2248050b942148f83",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m6-arg-runtime-logs",
+      "argv": [
+        "docker",
+        "logs",
+        "7fbab0a2ad4566cf34b565fd057d94062f29d4dc93100d39830590e243107d0c"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.016,
+      "stdoutDigest": "sha256:5f77e95ee47d11380b500a628013cd05c8cca2c83e15725ad9b930c4379764e0",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m6-arg-runtime-final-inspect",
+      "argv": [
+        "docker",
+        "inspect",
+        "7fbab0a2ad4566cf34b565fd057d94062f29d4dc93100d39830590e243107d0c"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.016,
+      "stdoutDigest": "sha256:c8446cf6ff32ad4df4464d9c0914776a6f251374151709f4f1d0f33b7142d797",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m6-specific-ignore",
+      "argv": [
+        "docker",
+        "buildx",
+        "build",
+        "--load",
+        "--platform",
+        "linux/amd64",
+        "--target",
+        "runtime",
+        "--progress",
+        "plain",
+        "--metadata-file",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/m6-specific-ignore.metadata.json",
+        "--iidfile",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/m6-specific-ignore.iid",
+        "--file",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/image-cases/specific-ignore/deploy/Dockerfile",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/image-cases/specific-ignore"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.515,
+      "stdoutDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrDigest": "sha256:b3248283b4a99227e56ec4bc966313ac68f099d81167e32506fba0a4ede688fb"
+    },
+    {
+      "label": "m6-specific-runtime-create",
+      "argv": [
+        "docker",
+        "create",
+        "--name",
+        "patamaps-cross-stack-7dd6f18eedf94db6b5f9f8f7182da85a",
+        "--platform",
+        "linux/amd64",
+        "--memory",
+        "256m",
+        "--cpus",
+        "1",
+        "--pids-limit",
+        "64",
+        "--read-only",
+        "--cap-drop",
+        "ALL",
+        "--security-opt",
+        "no-new-privileges",
+        "--publish",
+        "127.0.0.1::8080",
+        "--publish",
+        "127.0.0.1::9090",
+        "sha256:663fbc4289888a10816c615ce58c81fcc31696ebe79ba0be6d8ba675d948ca27"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.032,
+      "stdoutDigest": "sha256:aff55a12a4bdf22cecc85061711b7759d928676508a9a8d2de30c739d2821916",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m6-specific-runtime-start",
+      "argv": [
+        "docker",
+        "start",
+        "abef3c18aa5bc039b670f4aa27873dc6c7918f74b48a39cd99d9fa21012e447e"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": null,
+      "exitCode": 0,
+      "seconds": 0.165,
+      "stdoutDigest": "sha256:aff55a12a4bdf22cecc85061711b7759d928676508a9a8d2de30c739d2821916",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m6-specific-runtime-inspect",
+      "argv": [
+        "docker",
+        "inspect",
+        "abef3c18aa5bc039b670f4aa27873dc6c7918f74b48a39cd99d9fa21012e447e"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.016,
+      "stdoutDigest": "sha256:1821f72c90eba99c47f2c7b41b21b4a46866fab98e04003e06f7a2ad917aff86",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m6-specific-runtime-stop",
+      "argv": [
+        "docker",
+        "stop",
+        "--time",
+        "2",
+        "abef3c18aa5bc039b670f4aa27873dc6c7918f74b48a39cd99d9fa21012e447e"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 2.221,
+      "stdoutDigest": "sha256:1332745bbc96ba822cefbbb557aadaa9d6ac08781b31fb839bac1d2aa35ba947",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m6-specific-runtime-logs",
+      "argv": [
+        "docker",
+        "logs",
+        "abef3c18aa5bc039b670f4aa27873dc6c7918f74b48a39cd99d9fa21012e447e"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.016,
+      "stdoutDigest": "sha256:5f77e95ee47d11380b500a628013cd05c8cca2c83e15725ad9b930c4379764e0",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m6-specific-runtime-final-inspect",
+      "argv": [
+        "docker",
+        "inspect",
+        "abef3c18aa5bc039b670f4aa27873dc6c7918f74b48a39cd99d9fa21012e447e"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.016,
+      "stdoutDigest": "sha256:55d1f8f0284ef1e989c1d3346023608ee140da798b5be156c9c2a6d650aea0cd",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m6-buildkit-broken-copy",
+      "argv": [
+        "docker",
+        "buildx",
+        "build",
+        "--load",
+        "--platform",
+        "linux/amd64",
+        "--target",
+        "runtime",
+        "--progress",
+        "plain",
+        "--metadata-file",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/m6-buildkit-broken-copy.metadata.json",
+        "--iidfile",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/m6-buildkit-broken-copy.iid",
+        "--file",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/image-cases/broken-copy/deploy/Dockerfile",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/image-cases/broken-copy"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": false,
+      "exitCode": 1,
+      "seconds": 0.465,
+      "stdoutDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrDigest": "sha256:d053ebb37f07403a7545c107ee31609a9a6e63617713bf39c8b5299c1bb55fad"
+    },
+    {
+      "label": "m6-buildkit-ignored-config",
+      "argv": [
+        "docker",
+        "buildx",
+        "build",
+        "--load",
+        "--platform",
+        "linux/amd64",
+        "--target",
+        "runtime",
+        "--progress",
+        "plain",
+        "--metadata-file",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/m6-buildkit-ignored-config.metadata.json",
+        "--iidfile",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/m6-buildkit-ignored-config.iid",
+        "--file",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/image-cases/ignored-config/deploy/Dockerfile",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/image-cases/ignored-config"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": false,
+      "exitCode": 1,
+      "seconds": 0.466,
+      "stdoutDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrDigest": "sha256:dff8cb13c325a3c653570e1861a94bb057e958f6ff8f50f803b9cb4a59fb7bb5"
+    },
+    {
+      "label": "m6-buildkit-wrong-stage",
+      "argv": [
+        "docker",
+        "buildx",
+        "build",
+        "--load",
+        "--platform",
+        "linux/amd64",
+        "--target",
+        "runtime",
+        "--progress",
+        "plain",
+        "--metadata-file",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/m6-buildkit-wrong-stage.metadata.json",
+        "--iidfile",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/m6-buildkit-wrong-stage.iid",
+        "--file",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/image-cases/wrong-stage/deploy/Dockerfile",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/image-cases/wrong-stage"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": false,
+      "exitCode": 1,
+      "seconds": 0.315,
+      "stdoutDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrDigest": "sha256:a5851448e22fb4e32c8442abdeb7a09d565444da366ac676863583824a35aa48"
+    },
+    {
+      "label": "m6-image-wrong-binary",
+      "argv": [
+        "docker",
+        "buildx",
+        "build",
+        "--load",
+        "--platform",
+        "linux/amd64",
+        "--target",
+        "runtime",
+        "--progress",
+        "plain",
+        "--metadata-file",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/m6-image-wrong-binary.metadata.json",
+        "--iidfile",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/m6-image-wrong-binary.iid",
+        "--file",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/image-cases/wrong-binary/deploy/Dockerfile",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/image-cases/wrong-binary"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 1.117,
+      "stdoutDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrDigest": "sha256:94a806ebdcc90e5570eefaec3ea1eb9bcf27c12d6bd75a8a69153fdee0be9ff1"
+    },
+    {
+      "label": "m6-runtime-wrong-binary-create",
+      "argv": [
+        "docker",
+        "create",
+        "--name",
+        "patamaps-cross-stack-0b353a6b8a0340f29e683ff004223265",
+        "--platform",
+        "linux/amd64",
+        "--memory",
+        "256m",
+        "--cpus",
+        "1",
+        "--pids-limit",
+        "64",
+        "--read-only",
+        "--cap-drop",
+        "ALL",
+        "--security-opt",
+        "no-new-privileges",
+        "--publish",
+        "127.0.0.1::8080",
+        "--publish",
+        "127.0.0.1::9090",
+        "sha256:2e7424ca571d6c4241e681e956b71197b7c15414ae5aa570cbe65a3990fd2e35"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.032,
+      "stdoutDigest": "sha256:3a2715d821ee94a6c6a3a3f82ea729346d1b801ccdfdef948da483dbc311dfe5",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m6-runtime-wrong-binary-start",
+      "argv": [
+        "docker",
+        "start",
+        "10d2767545fdfc0979f569b028af8ee0f0c190519fb8c87f8e16e44a6f40cf6d"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": null,
+      "exitCode": 0,
+      "seconds": 0.164,
+      "stdoutDigest": "sha256:3a2715d821ee94a6c6a3a3f82ea729346d1b801ccdfdef948da483dbc311dfe5",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m6-runtime-wrong-binary-inspect",
+      "argv": [
+        "docker",
+        "inspect",
+        "10d2767545fdfc0979f569b028af8ee0f0c190519fb8c87f8e16e44a6f40cf6d"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.114,
+      "stdoutDigest": "sha256:48c64c6d6db34fdbe9f5edc39a3e0c20aed5d597cf8ad83ec19b21ca78d61208",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m6-runtime-wrong-binary-stop",
+      "argv": [
+        "docker",
+        "stop",
+        "--time",
+        "2",
+        "10d2767545fdfc0979f569b028af8ee0f0c190519fb8c87f8e16e44a6f40cf6d"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.016,
+      "stdoutDigest": "sha256:ef03103e661f77daf46ca16a3e717496cfd7b1a10bd888101260924089053bb8",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m6-runtime-wrong-binary-logs",
+      "argv": [
+        "docker",
+        "logs",
+        "10d2767545fdfc0979f569b028af8ee0f0c190519fb8c87f8e16e44a6f40cf6d"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.016,
+      "stdoutDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m6-runtime-wrong-binary-final-inspect",
+      "argv": [
+        "docker",
+        "inspect",
+        "10d2767545fdfc0979f569b028af8ee0f0c190519fb8c87f8e16e44a6f40cf6d"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.016,
+      "stdoutDigest": "sha256:48c64c6d6db34fdbe9f5edc39a3e0c20aed5d597cf8ad83ec19b21ca78d61208",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m6-image-missing-config",
+      "argv": [
+        "docker",
+        "buildx",
+        "build",
+        "--load",
+        "--platform",
+        "linux/amd64",
+        "--target",
+        "runtime",
+        "--progress",
+        "plain",
+        "--metadata-file",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/m6-image-missing-config.metadata.json",
+        "--iidfile",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/m6-image-missing-config.iid",
+        "--file",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/image-cases/missing-config/deploy/Dockerfile",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/image-cases/missing-config"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.666,
+      "stdoutDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrDigest": "sha256:d654d0481774544ee35cf53918be9b77faa20fd9090aeffa2a2f0081920a6321"
+    },
+    {
+      "label": "m6-runtime-missing-config-create",
+      "argv": [
+        "docker",
+        "create",
+        "--name",
+        "patamaps-cross-stack-179e9ad731fa493894a4c1244736cb30",
+        "--platform",
+        "linux/amd64",
+        "--memory",
+        "256m",
+        "--cpus",
+        "1",
+        "--pids-limit",
+        "64",
+        "--read-only",
+        "--cap-drop",
+        "ALL",
+        "--security-opt",
+        "no-new-privileges",
+        "--publish",
+        "127.0.0.1::8080",
+        "--publish",
+        "127.0.0.1::9090",
+        "sha256:e2ce22af512c37aa2a2d82bba127bf275731569996032908f5348e53d5dfe43a"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.032,
+      "stdoutDigest": "sha256:0d9df2ee4327d8d9f404430c3015029bc1a05b546a5268b1287c304d0bf66d6d",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m6-runtime-missing-config-start",
+      "argv": [
+        "docker",
+        "start",
+        "c385c689fd8d82f9122e72ed5a06cc758e4009f711e0633335d9be0f5f873a2f"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": null,
+      "exitCode": 0,
+      "seconds": 0.164,
+      "stdoutDigest": "sha256:0d9df2ee4327d8d9f404430c3015029bc1a05b546a5268b1287c304d0bf66d6d",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m6-runtime-missing-config-inspect",
+      "argv": [
+        "docker",
+        "inspect",
+        "c385c689fd8d82f9122e72ed5a06cc758e4009f711e0633335d9be0f5f873a2f"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.115,
+      "stdoutDigest": "sha256:48a3440a02d7836b4c3ea8eb212fbb0ec26c9aea69a488137b936aa57d5ea06a",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m6-runtime-missing-config-stop",
+      "argv": [
+        "docker",
+        "stop",
+        "--time",
+        "2",
+        "c385c689fd8d82f9122e72ed5a06cc758e4009f711e0633335d9be0f5f873a2f"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.016,
+      "stdoutDigest": "sha256:dbbd67462c23a0bac5df86fe4081e17a529afee12eda3c4586f2272262a0273d",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m6-runtime-missing-config-logs",
+      "argv": [
+        "docker",
+        "logs",
+        "c385c689fd8d82f9122e72ed5a06cc758e4009f711e0633335d9be0f5f873a2f"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.016,
+      "stdoutDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrDigest": "sha256:4a4d3759cbff626df0fa07f9349b9a7de58ccfaa96fbbffbbffc939d55a4d5c8"
+    },
+    {
+      "label": "m6-runtime-missing-config-final-inspect",
+      "argv": [
+        "docker",
+        "inspect",
+        "c385c689fd8d82f9122e72ed5a06cc758e4009f711e0633335d9be0f5f873a2f"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.016,
+      "stdoutDigest": "sha256:48a3440a02d7836b4c3ea8eb212fbb0ec26c9aea69a488137b936aa57d5ea06a",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m6-image-missing-loader-library",
+      "argv": [
+        "docker",
+        "buildx",
+        "build",
+        "--load",
+        "--platform",
+        "linux/amd64",
+        "--target",
+        "runtime",
+        "--progress",
+        "plain",
+        "--metadata-file",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/m6-image-missing-loader-library.metadata.json",
+        "--iidfile",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/m6-image-missing-loader-library.iid",
+        "--file",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/image-cases/missing-loader-library/deploy/Dockerfile",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/image-cases/missing-loader-library"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.565,
+      "stdoutDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrDigest": "sha256:21b1ab3bb5a721c5ca829f08d948bd77767d4a23f99a2c2ac36d59f704fd44b3"
+    },
+    {
+      "label": "m6-runtime-missing-loader-library-create",
+      "argv": [
+        "docker",
+        "create",
+        "--name",
+        "patamaps-cross-stack-f23eb0b85b324d1ea2209199125fa482",
+        "--platform",
+        "linux/amd64",
+        "--memory",
+        "256m",
+        "--cpus",
+        "1",
+        "--pids-limit",
+        "64",
+        "--read-only",
+        "--cap-drop",
+        "ALL",
+        "--security-opt",
+        "no-new-privileges",
+        "--publish",
+        "127.0.0.1::8080",
+        "--publish",
+        "127.0.0.1::9090",
+        "sha256:70077ba706487629fe056b96d2de28ba16ea54e3545ca7c2031fbffdf275271e"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.032,
+      "stdoutDigest": "sha256:df193a3736d50927b926a3ec5b8f5aed9207bb871c633903e26cd28ff539f53c",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m6-runtime-missing-loader-library-start",
+      "argv": [
+        "docker",
+        "start",
+        "fa449adf722714c69876d79ca38f08046a4362a36225c73d861c35a2e9feadda"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": null,
+      "exitCode": 0,
+      "seconds": 0.164,
+      "stdoutDigest": "sha256:df193a3736d50927b926a3ec5b8f5aed9207bb871c633903e26cd28ff539f53c",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m6-runtime-missing-loader-library-inspect",
+      "argv": [
+        "docker",
+        "inspect",
+        "fa449adf722714c69876d79ca38f08046a4362a36225c73d861c35a2e9feadda"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.115,
+      "stdoutDigest": "sha256:5edafc89c7f02d6f5ab1e97f2e12b98a132449fb1ed7f79566e541268e0da3a9",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m6-runtime-missing-loader-library-stop",
+      "argv": [
+        "docker",
+        "stop",
+        "--time",
+        "2",
+        "fa449adf722714c69876d79ca38f08046a4362a36225c73d861c35a2e9feadda"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.016,
+      "stdoutDigest": "sha256:97dd3bfe0b4d27a327fcc8e5566b0d47c056104eb7a5b1e47eccc19b185a0430",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m6-runtime-missing-loader-library-logs",
+      "argv": [
+        "docker",
+        "logs",
+        "fa449adf722714c69876d79ca38f08046a4362a36225c73d861c35a2e9feadda"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.016,
+      "stdoutDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrDigest": "sha256:01026f60f8c3c7f59f77a27576db39f45c210628152e1c08e65c198132a17fcb"
+    },
+    {
+      "label": "m6-runtime-missing-loader-library-final-inspect",
+      "argv": [
+        "docker",
+        "inspect",
+        "fa449adf722714c69876d79ca38f08046a4362a36225c73d861c35a2e9feadda"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.016,
+      "stdoutDigest": "sha256:5edafc89c7f02d6f5ab1e97f2e12b98a132449fb1ed7f79566e541268e0da3a9",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m6-image-wrong-listener",
+      "argv": [
+        "docker",
+        "buildx",
+        "build",
+        "--load",
+        "--platform",
+        "linux/amd64",
+        "--target",
+        "runtime",
+        "--progress",
+        "plain",
+        "--metadata-file",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/m6-image-wrong-listener.metadata.json",
+        "--iidfile",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/m6-image-wrong-listener.iid",
+        "--file",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/image-cases/wrong-listener/deploy/Dockerfile",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/image-cases/wrong-listener"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.666,
+      "stdoutDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrDigest": "sha256:7e09c186f20fae849b08e57536c6f9781704cf0dcd5975bb759a704183280e4c"
+    },
+    {
+      "label": "m6-runtime-wrong-listener-create",
+      "argv": [
+        "docker",
+        "create",
+        "--name",
+        "patamaps-cross-stack-e585887df3c74e0fb707d909b8984696",
+        "--platform",
+        "linux/amd64",
+        "--memory",
+        "256m",
+        "--cpus",
+        "1",
+        "--pids-limit",
+        "64",
+        "--read-only",
+        "--cap-drop",
+        "ALL",
+        "--security-opt",
+        "no-new-privileges",
+        "--publish",
+        "127.0.0.1::8080",
+        "--publish",
+        "127.0.0.1::9090",
+        "sha256:646670b4be83e4b6f20097604bcfd40eed1009f08c7ecb1c659676b8b16f3cbe"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.032,
+      "stdoutDigest": "sha256:ad9420dd4ef0a657e4bf1e973b155322860c640fcc5c5e26f080babcd5da8c48",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m6-runtime-wrong-listener-start",
+      "argv": [
+        "docker",
+        "start",
+        "9ec63a43ab257c7ed5f39503f745441717003a042c07322e1eb7c1ddcc40b4a4"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": null,
+      "exitCode": 0,
+      "seconds": 0.165,
+      "stdoutDigest": "sha256:ad9420dd4ef0a657e4bf1e973b155322860c640fcc5c5e26f080babcd5da8c48",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m6-runtime-wrong-listener-inspect",
+      "argv": [
+        "docker",
+        "inspect",
+        "9ec63a43ab257c7ed5f39503f745441717003a042c07322e1eb7c1ddcc40b4a4"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.016,
+      "stdoutDigest": "sha256:6b06dda702acdc6bbceaa21392d98b3223bbafaa25ccf4d2697b3884fe400c63",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m6-runtime-wrong-listener-stop",
+      "argv": [
+        "docker",
+        "stop",
+        "--time",
+        "2",
+        "9ec63a43ab257c7ed5f39503f745441717003a042c07322e1eb7c1ddcc40b4a4"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 2.169,
+      "stdoutDigest": "sha256:8b1084dbd75f349c0f4c56b915031ef1e2936ab33ad25499ec7211d414f5aae6",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m6-runtime-wrong-listener-logs",
+      "argv": [
+        "docker",
+        "logs",
+        "9ec63a43ab257c7ed5f39503f745441717003a042c07322e1eb7c1ddcc40b4a4"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.016,
+      "stdoutDigest": "sha256:d30ad9640919e4635c9d24a0d6fafffd8082acef0913ac6a5d4d4771c3081c5e",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m6-runtime-wrong-listener-final-inspect",
+      "argv": [
+        "docker",
+        "inspect",
+        "9ec63a43ab257c7ed5f39503f745441717003a042c07322e1eb7c1ddcc40b4a4"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.016,
+      "stdoutDigest": "sha256:e746b1e041a98d889562f19e83da13ef0343b1ec38c8d1f0f7306f8090ef5849",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m6-build-incompatible-elf",
+      "argv": [
+        "clang",
+        "--target=aarch64-linux-gnu",
+        "-fuse-ld=lld",
+        "-nostdlib",
+        "-static",
+        "-Wl,-e,_start",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/wrong-architecture.S",
+        "-o",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/wrong-architecture.elf"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 2.319,
+      "stdoutDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m6-image-wrong-architecture",
+      "argv": [
+        "docker",
+        "buildx",
+        "build",
+        "--load",
+        "--platform",
+        "linux/amd64",
+        "--target",
+        "runtime",
+        "--progress",
+        "plain",
+        "--metadata-file",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/m6-image-wrong-architecture.metadata.json",
+        "--iidfile",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/m6-image-wrong-architecture.iid",
+        "--file",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/image-cases/wrong-architecture/deploy/Dockerfile",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/image-cases/wrong-architecture"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 1.167,
+      "stdoutDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrDigest": "sha256:07f373d433e6fe7b5ffcb1e02e3ddf5125b6edcf6dda5fb575d5524ec5969f2e"
+    },
+    {
+      "label": "m6-runtime-wrong-architecture-create",
+      "argv": [
+        "docker",
+        "create",
+        "--name",
+        "patamaps-cross-stack-85815e1ee884475588f69d39b9c9b856",
+        "--platform",
+        "linux/amd64",
+        "--memory",
+        "256m",
+        "--cpus",
+        "1",
+        "--pids-limit",
+        "64",
+        "--read-only",
+        "--cap-drop",
+        "ALL",
+        "--security-opt",
+        "no-new-privileges",
+        "--publish",
+        "127.0.0.1::8080",
+        "--publish",
+        "127.0.0.1::9090",
+        "sha256:d4839753e7130070738cd0ffdcf8c8556154a2fbe165ecdd5c19df004710a921"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.032,
+      "stdoutDigest": "sha256:088646639a35c04c081705bb8c9a933386dae3c5a5ffdfd5e3aee0255cf2a3ee",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m6-runtime-wrong-architecture-start",
+      "argv": [
+        "docker",
+        "start",
+        "8b9e80b7ffe0e900bf54c4c630823522312f51f9ccd2ccbd3942407b385afa76"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": null,
+      "exitCode": 0,
+      "seconds": 0.164,
+      "stdoutDigest": "sha256:088646639a35c04c081705bb8c9a933386dae3c5a5ffdfd5e3aee0255cf2a3ee",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m6-runtime-wrong-architecture-inspect",
+      "argv": [
+        "docker",
+        "inspect",
+        "8b9e80b7ffe0e900bf54c4c630823522312f51f9ccd2ccbd3942407b385afa76"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.164,
+      "stdoutDigest": "sha256:565598d0f86e10d937b2bc234bc9be602cda9298332799e6ff47c7fc2a375014",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m6-runtime-wrong-architecture-stop",
+      "argv": [
+        "docker",
+        "stop",
+        "--time",
+        "2",
+        "8b9e80b7ffe0e900bf54c4c630823522312f51f9ccd2ccbd3942407b385afa76"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.016,
+      "stdoutDigest": "sha256:a2161a1a5003bb569625a60d4052837b06aa70c5df81c2b876ac941345232ba4",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m6-runtime-wrong-architecture-logs",
+      "argv": [
+        "docker",
+        "logs",
+        "8b9e80b7ffe0e900bf54c4c630823522312f51f9ccd2ccbd3942407b385afa76"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.016,
+      "stdoutDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrDigest": "sha256:b3115f24e7d8267bf252e97746b5be28d2d515bfdb1c3aa833992149642c7bab"
+    },
+    {
+      "label": "m6-runtime-wrong-architecture-final-inspect",
+      "argv": [
+        "docker",
+        "inspect",
+        "8b9e80b7ffe0e900bf54c4c630823522312f51f9ccd2ccbd3942407b385afa76"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.016,
+      "stdoutDigest": "sha256:565598d0f86e10d937b2bc234bc9be602cda9298332799e6ff47c7fc2a375014",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m6-image-wrong-expose",
+      "argv": [
+        "docker",
+        "buildx",
+        "build",
+        "--load",
+        "--platform",
+        "linux/amd64",
+        "--target",
+        "runtime",
+        "--progress",
+        "plain",
+        "--metadata-file",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/m6-image-wrong-expose.metadata.json",
+        "--iidfile",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/m6-image-wrong-expose.iid",
+        "--file",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/image-cases/wrong-expose/deploy/Dockerfile",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/image-cases/wrong-expose"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.465,
+      "stdoutDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrDigest": "sha256:0bab0554b908fbc8835821632a6ccb74dd66e6c90d51e25a141640e825c45b5b"
+    },
+    {
+      "label": "m6-runtime-wrong-expose-create",
+      "argv": [
+        "docker",
+        "create",
+        "--name",
+        "patamaps-cross-stack-15e3c0a3f7dc44eb948c2eaa611775e9",
+        "--platform",
+        "linux/amd64",
+        "--memory",
+        "256m",
+        "--cpus",
+        "1",
+        "--pids-limit",
+        "64",
+        "--read-only",
+        "--cap-drop",
+        "ALL",
+        "--security-opt",
+        "no-new-privileges",
+        "--publish",
+        "127.0.0.1::8080",
+        "--publish",
+        "127.0.0.1::9090",
+        "sha256:0c361e08ff91ad3391b64c5c797d2a558120680f1cdf9f4e0da9c4ad05272ce3"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.032,
+      "stdoutDigest": "sha256:ce3065d9a196549da5ad2ed52b295bcf9016b2033577dc29dc7629214a4bfa9f",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m6-runtime-wrong-expose-start",
+      "argv": [
+        "docker",
+        "start",
+        "368dac7042271f14f6399533daa732341082a3302aae9adcf16f283a1b2bc468"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": null,
+      "exitCode": 0,
+      "seconds": 0.164,
+      "stdoutDigest": "sha256:ce3065d9a196549da5ad2ed52b295bcf9016b2033577dc29dc7629214a4bfa9f",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m6-runtime-wrong-expose-inspect",
+      "argv": [
+        "docker",
+        "inspect",
+        "368dac7042271f14f6399533daa732341082a3302aae9adcf16f283a1b2bc468"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.016,
+      "stdoutDigest": "sha256:350a4ecef3658e94f2571685bda6ee61f46853b673a254a933b7a5eff74d693c",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m6-runtime-wrong-expose-stop",
+      "argv": [
+        "docker",
+        "stop",
+        "--time",
+        "2",
+        "368dac7042271f14f6399533daa732341082a3302aae9adcf16f283a1b2bc468"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 2.17,
+      "stdoutDigest": "sha256:1fc9312eb7b14ac64cd7ff86d1ca4cea0a77ed6a463db5a8dd954cb5ffcf7d76",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m6-runtime-wrong-expose-logs",
+      "argv": [
+        "docker",
+        "logs",
+        "368dac7042271f14f6399533daa732341082a3302aae9adcf16f283a1b2bc468"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.016,
+      "stdoutDigest": "sha256:5f77e95ee47d11380b500a628013cd05c8cca2c83e15725ad9b930c4379764e0",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m6-runtime-wrong-expose-final-inspect",
+      "argv": [
+        "docker",
+        "inspect",
+        "368dac7042271f14f6399533daa732341082a3302aae9adcf16f283a1b2bc468"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.016,
+      "stdoutDigest": "sha256:1e336af5fea504edc5b4deaf508cd00bac75db4be81ae499af651d0ce797f563",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m6-missing-browser-runtime",
+      "argv": [
+        "/opt/hostedtoolcache/node/22.23.3/x64/bin/node",
+        "/home/runner/work/patamaps/patamaps/examples/cross-stack/acceptance/browser/probe.cjs",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/absent-browser-runtime"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": false,
+      "exitCode": 69,
+      "seconds": 0.417,
+      "stdoutDigest": "sha256:c99c39f9534895912599c4ab2fdad048283d2ed281bcf2a24d7624e7d4fcec36",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m6-release-admit",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/release/patamaps",
+        "generate",
+        "release-workspace.json",
+        "--root",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/release-candidate"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/release-candidate",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 1.168,
+      "stdoutDigest": "sha256:7b322c20cc1abcf62941b7b52c289c34ae99a4afa19e583fe8561ff78e7b6d9f",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m6-release-offline",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/release/patamaps",
+        "verify-workspace",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/release-candidate/release-baseline.json"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/release-candidate",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.566,
+      "stdoutDigest": "sha256:2d084e22fc99e7012384460a7b05238a75a592e595db48de0d399e897b79929d",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m6-release-refuse-uncompiled",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/release/patamaps",
+        "generate",
+        "release-workspace-negative-uncompiled.json",
+        "--root",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/release-candidate"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/release-candidate",
+      "expectedSuccess": false,
+      "exitCode": 2,
+      "seconds": 1.117,
+      "stdoutDigest": "sha256:472fdad908606639b190a50b27039b2cf291c4e47911922dced4532f7d90a016",
+      "stderrDigest": "sha256:706a7982a23ee98fb710c7b452dc7b85bee24f006e33b00db49e7aa2c720743c"
+    },
+    {
+      "label": "m6-release-refuse-stale-config",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/release/patamaps",
+        "generate",
+        "release-workspace-negative-stale-config.json",
+        "--root",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/release-candidate"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/release-candidate",
+      "expectedSuccess": false,
+      "exitCode": 2,
+      "seconds": 1.116,
+      "stdoutDigest": "sha256:21ccb9202c6c7d9ae613d52c1be55f6a9461a025829819f0874a598623a13bfb",
+      "stderrDigest": "sha256:706a7982a23ee98fb710c7b452dc7b85bee24f006e33b00db49e7aa2c720743c"
+    },
+    {
+      "label": "m6-release-refuse-different-image",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/release/patamaps",
+        "generate",
+        "release-workspace-negative-different-image.json",
+        "--root",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/release-candidate"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/release-candidate",
+      "expectedSuccess": false,
+      "exitCode": 2,
+      "seconds": 1.116,
+      "stdoutDigest": "sha256:446e64197ab5414d2248a305c9847dc0cd6d878b882a3725058495260b837cb5",
+      "stderrDigest": "sha256:706a7982a23ee98fb710c7b452dc7b85bee24f006e33b00db49e7aa2c720743c"
+    },
+    {
+      "label": "m6-release-refuse-unobserved-browser",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/release/patamaps",
+        "generate",
+        "release-workspace-negative-unobserved-browser.json",
+        "--root",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/release-candidate"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/release-candidate",
+      "expectedSuccess": false,
+      "exitCode": 2,
+      "seconds": 1.117,
+      "stdoutDigest": "sha256:109b5573398c3a6deb9dfec06c546de2cbc993c19930059cf8ed82b39e8d92fe",
+      "stderrDigest": "sha256:706a7982a23ee98fb710c7b452dc7b85bee24f006e33b00db49e7aa2c720743c"
+    },
+    {
+      "label": "m6-release-refuse-ambiguous-artifact",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/release/patamaps",
+        "generate",
+        "release-workspace-negative-ambiguous-artifact.json",
+        "--root",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/release-candidate"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/release-candidate",
+      "expectedSuccess": false,
+      "exitCode": 2,
+      "seconds": 1.116,
+      "stdoutDigest": "sha256:5b53df2b210815de3262d0a56982953824680665a8a4d949d508dd4a119af31f",
+      "stderrDigest": "sha256:706a7982a23ee98fb710c7b452dc7b85bee24f006e33b00db49e7aa2c720743c"
+    }
+  ],
+  "fullCrossStackAcceptance": false,
+  "linuxImage": "passed",
+  "browser": "passed",
+  "deleted": [],
+  "ciResourceChecks": {
+    "growthBytes": 4000000000,
+    "reserveBytes": 500000000,
+    "checkedBetweenCommands": true,
+    "diskUsedBefore": 65797849088,
+    "localIntelPolicyChanged": false,
+    "diskUsedAfter": 69057921024
+  },
+  "linuxRelease": {
+    "status": "passed-linux-image-browser-scope",
+    "controls": [
+      {
+        "control": "m6-buildkit-stages",
+        "result": "independently-observed",
+        "requiredStages": [
+          "builder",
+          "runtime"
+        ]
+      },
+      {
+        "control": "m6-cargo-linux-artifact",
+        "result": "compiled-and-inspected",
+        "digest": "sha256:e5525bec18f93c068084fd781b8e260cd6793de1d26410e6807e224b979e5367",
+        "target": {
+          "reason": "compiler-artifact",
+          "package_id": "path+file:///build/service#catalog-service@0.1.0",
+          "manifest_path": "/build/service/Cargo.toml",
+          "target": {
+            "kind": [
+              "bin"
+            ],
+            "crate_types": [
+              "bin"
+            ],
+            "name": "catalog-service",
+            "src_path": "/build/service/src/main.rs",
+            "edition": "2024",
+            "doc": true,
+            "doctest": false,
+            "test": true
+          },
+          "profile": {
+            "opt_level": "3",
+            "debuginfo": 0,
+            "debug_assertions": false,
+            "overflow_checks": false,
+            "test": false
+          },
+          "features": [],
+          "filenames": [
+            "/build/service/target/x86_64-unknown-linux-gnu/release/catalog-service"
+          ],
+          "executable": "/build/service/target/x86_64-unknown-linux-gnu/release/catalog-service",
+          "fresh": false
+        },
+        "compiler": "rustc 1.99.0 (b940084d7 2026-09-28)\nbinary: rustc\ncommit-hash: b940084d7eb6a299eb4bfeb8e34901bc051e7ac4\ncommit-date: 2026-09-28\nhost: x86_64-unknown-linux-gnu\nrelease: 1.99.0\nLLVM version: 23.1.1\n",
+        "executable": {
+          "format": "ELF64",
+          "endianness": "little",
+          "type": 3,
+          "machine": 62
+        }
+      },
+      {
+        "control": "m6-image-bytes-config-licenses",
+        "result": "equal-to-builder-and-captured-input",
+        "image": "sha256:663fbc4289888a10816c615ce58c81fcc31696ebe79ba0be6d8ba675d948ca27",
+        "configDigest": "sha256:ec046d3e08183708c3aae0453ce0cb4febe7b875452d781ea867897b65bccd07",
+        "noticeDigests": {
+          "application/NOTICE": "sha256:b0454a6c73ccd381741a9ab4a62eb8d432b9b94313c3d674a3136733a1f9d5e2",
+          "application/LICENSE": "sha256:cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+          "rust/COPYRIGHT": "sha256:172020dbfd5b53a226dfde77616190a48dcff519b0bc0e6deb91a8450782c4af",
+          "rust/SOURCE.json": "sha256:432104cab103476b59b2a61349ea888a91dc7fe7b7381ec9c9d39bbfc878384c",
+          "rust/SHA256SUMS": "sha256:9fb0c6a364b162c4c0d884f64bda342d8a6679ccbb8110e7e7859e0b3ccc1aea",
+          "rust/COPYRIGHT-library.html": "sha256:5647be074c8edf7339fd863055923a8fc80bc5610a8d4661ec3b767b9d392c27",
+          "rust/LICENSE-MIT": "sha256:b71bd43a069ca0641a9ecfe585ca7b3c53b5cc1608f8b68321168698e28b5ea1",
+          "rust/LICENSE-APACHE": "sha256:62c7a1e35f56406896d7aa7ca52d0cc0d272ac022b5d2796e7d6905db8a3636a",
+          "crates/chunked_transfer-1.5.0/LICENSE-MIT": "sha256:5eda8c6538e7d543efe31ebad3fc0e66a7c4df056ddb901a5bdfbf5ef397e116",
+          "crates/chunked_transfer-1.5.0/LICENSE-APACHE": "sha256:a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "crates/winnow-0.7.15/LICENSE-MIT": "sha256:cb5aedb296c5246d1f22e9099f925a65146f9f0d6b4eebba97fd27a6cdbbab2d",
+          "crates/syn-3.0.9/LICENSE-MIT": "sha256:23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+          "crates/syn-3.0.9/LICENSE-APACHE": "sha256:62c7a1e35f56406896d7aa7ca52d0cc0d272ac022b5d2796e7d6905db8a3636a",
+          "crates/zmij-1.0.23/LICENSE-MIT": "sha256:23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+          "crates/log-0.4.34/LICENSE-MIT": "sha256:6485b8ed310d3f0340bf1ad1f47645069ce4069dcc6bb46c7d5c6faf41de1fdb",
+          "crates/log-0.4.34/LICENSE-APACHE": "sha256:a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "crates/unicode-ident-1.0.27/LICENSE-UNICODE": "sha256:f7db81051789b729fea528a63ec4c938fdcb93d9d61d97dc8cc2e9df6d47f2a1",
+          "crates/unicode-ident-1.0.27/LICENSE-MIT": "sha256:23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+          "crates/unicode-ident-1.0.27/LICENSE-APACHE": "sha256:62c7a1e35f56406896d7aa7ca52d0cc0d272ac022b5d2796e7d6905db8a3636a",
+          "crates/winnow-1.0.4/LICENSE-MIT": "sha256:cb5aedb296c5246d1f22e9099f925a65146f9f0d6b4eebba97fd27a6cdbbab2d",
+          "crates/equivalent-1.0.3/LICENSE-MIT": "sha256:7365cc8878a1d7ce155a58c4ca09c3d7a6be413efa5334a80ea842912b669349",
+          "crates/equivalent-1.0.3/LICENSE-APACHE": "sha256:a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "crates/serde_core-1.0.229/LICENSE-MIT": "sha256:23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+          "crates/serde_core-1.0.229/LICENSE-APACHE": "sha256:62c7a1e35f56406896d7aa7ca52d0cc0d272ac022b5d2796e7d6905db8a3636a",
+          "crates/hashbrown-0.17.1/LICENSE-MIT": "sha256:ff8f68cb076caf8cefe7a6430d4ac086ce6af2ca8ce2c4e5a2004d4552ef52a2",
+          "crates/hashbrown-0.17.1/LICENSE-APACHE": "sha256:a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "crates/quote-1.0.47/LICENSE-MIT": "sha256:23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+          "crates/quote-1.0.47/LICENSE-APACHE": "sha256:62c7a1e35f56406896d7aa7ca52d0cc0d272ac022b5d2796e7d6905db8a3636a",
+          "crates/toml_edit-0.23.7/LICENSE-MIT": "sha256:6efb0476a1cc085077ed49357026d8c173bf33017278ef440f222fb9cbcb66e6",
+          "crates/toml_edit-0.23.7/LICENSE-APACHE": "sha256:c6596eb7be8581c18be736c846fb9173b69eccf6ef94c5135893ec56bd92ba08",
+          "crates/toml_datetime-0.7.5+spec-1.1.0/LICENSE-MIT": "sha256:6efb0476a1cc085077ed49357026d8c173bf33017278ef440f222fb9cbcb66e6",
+          "crates/toml_datetime-0.7.5+spec-1.1.0/LICENSE-APACHE": "sha256:c6596eb7be8581c18be736c846fb9173b69eccf6ef94c5135893ec56bd92ba08",
+          "crates/indexmap-2.14.2/LICENSE-MIT": "sha256:ecc269ef87fd38a1d98e30bfac9ba964a9dbd9315c3770fed98d4d7cb5882055",
+          "crates/indexmap-2.14.2/LICENSE-APACHE": "sha256:a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "crates/proc-macro2-1.0.107/LICENSE-MIT": "sha256:23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+          "crates/proc-macro2-1.0.107/LICENSE-APACHE": "sha256:62c7a1e35f56406896d7aa7ca52d0cc0d272ac022b5d2796e7d6905db8a3636a",
+          "crates/itoa-1.0.18/LICENSE-MIT": "sha256:23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+          "crates/itoa-1.0.18/LICENSE-APACHE": "sha256:62c7a1e35f56406896d7aa7ca52d0cc0d272ac022b5d2796e7d6905db8a3636a",
+          "crates/memchr-2.8.3/LICENSE-MIT": "sha256:0f96a83840e146e43c0ec96a22ec1f392e0680e6c1226e6f3ba87e0740af850f",
+          "crates/ascii-1.1.0/LICENSE-MIT": "sha256:7e4b8a17b118d3d7fd7a362a4b6563e0bd98b098a24c4c7f07dd22042091a847",
+          "crates/ascii-1.1.0/LICENSE-APACHE": "sha256:fabba0cb7d00a4b3211fdc13699223ab2d22f88678ccd608494cf2b332b903e9",
+          "crates/serde_json-1.0.151/LICENSE-MIT": "sha256:23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+          "crates/serde_json-1.0.151/LICENSE-APACHE": "sha256:62c7a1e35f56406896d7aa7ca52d0cc0d272ac022b5d2796e7d6905db8a3636a",
+          "crates/serde_derive-1.0.229/LICENSE-MIT": "sha256:23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+          "crates/serde_derive-1.0.229/LICENSE-APACHE": "sha256:62c7a1e35f56406896d7aa7ca52d0cc0d272ac022b5d2796e7d6905db8a3636a",
+          "crates/toml_parser-1.1.5+spec-1.1.0/LICENSE-MIT": "sha256:6efb0476a1cc085077ed49357026d8c173bf33017278ef440f222fb9cbcb66e6",
+          "crates/toml_parser-1.1.5+spec-1.1.0/LICENSE-APACHE": "sha256:249fdb6694467dd615b259f7ddde07be3f8ae5a72cecebb0e24f6629af4215fe",
+          "crates/httpdate-1.0.3/LICENSE-MIT": "sha256:934887691e05d69d7c86ad3f2c360980fa30c15b035e351f3c9865e99da4debc",
+          "crates/httpdate-1.0.3/LICENSE-APACHE": "sha256:4d10fe5f3aa176b05b229a248866bad70b834c173f1252a814ff4748d8a13837",
+          "crates/serde-1.0.229/LICENSE-MIT": "sha256:23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+          "crates/serde-1.0.229/LICENSE-APACHE": "sha256:62c7a1e35f56406896d7aa7ca52d0cc0d272ac022b5d2796e7d6905db8a3636a",
+          "crates/tiny_http-0.12.0/LICENSE-MIT": "sha256:e69bb98ae371fc43e5ef9cb1fc648762faf92edd93a8afd71411fac419b1b550",
+          "crates/tiny_http-0.12.0/LICENSE-APACHE": "sha256:a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "rust/licenses/Unicode-3.0.txt": "sha256:f5062c9a188d81dfe66b56db4182dcf9e4b17c0d9b0d311a8e20b3a1b075c443",
+          "rust/licenses/GCC-exception-3.1.txt": "sha256:a3966c9410ef94a1efbfa9ec04e9c1994026a70623fbf0885ce36737bfba3b54",
+          "rust/licenses/GPL-2.0-only.txt": "sha256:54b212ba1f97f6948fa5486239ab505dd820b02e50cbfd296b4062c8609a70af",
+          "rust/licenses/LLVM-exception.txt": "sha256:e34c58338bd89d43e709e226610d8f32b3e3c47f4ad9a99a8dc1d4ac7842488e",
+          "rust/licenses/NCSA.txt": "sha256:39cb0234065c92b9e6cee3830cbb52b1aa289aa8fe9ba2e66730fec5cf05c630",
+          "rust/licenses/CC-BY-SA-4.0.txt": "sha256:23ee78c8bae49cf08ea2f0c84945c66b987ebe4520881fb51b3dad4fb43d07c2",
+          "rust/licenses/BSD-2-Clause.txt": "sha256:f32fb3b417a194167cfad068223fc975ba96c5960513a10f66a3c28720aec1df",
+          "rust/licenses/MIT.txt": "sha256:b85dcd3e453d05982552c52b5fc9e0bdd6d23c6f8e844b984a88af32570b0cc0",
+          "rust/licenses/OFL-1.1.txt": "sha256:8eea8287e5876b539670cadb82e99f9a7afddec6f6730811be1daf25d2e9bcfd",
+          "rust/licenses/ISC.txt": "sha256:0ff61769b238634e042ab759dddfd104a8e69d091e3600ae3410e401a6164381",
+          "rust/licenses/GPL-3.0-or-later.txt": "sha256:05315fce6c35f79b8a35454828995fa26336f235895ac64557abc028f4ffcea2",
+          "rust/licenses/Apache-2.0.txt": "sha256:074e6e32c86a4c0ef8b3ed25b721ca23aca83df277cd88106ef7177c354615ff"
+        }
+      },
+      {
+        "control": "m6-real-next-linux-http",
+        "result": "passed",
+        "health": {
+          "status": "ok"
+        },
+        "malformed": {
+          "next": [
+            400,
+            {
+              "error": "invalid-json"
+            }
+          ],
+          "service": [
+            400,
+            {
+              "error": "invalid-request"
+            }
+          ]
+        },
+        "status": "passed",
+        "realNextRustRoundTrip": true,
+        "unicodeCodePointBoundary": true,
+        "malformedResponseRefused": true
+      },
+      {
+        "control": "m6-real-browser",
+        "status": "passed",
+        "engine": "chromium",
+        "version": "156.0.8078.4",
+        "actualFormInteraction": true,
+        "hydratedClientNextLinuxRoundTrip": true,
+        "preHydrationScriptDeliveryDelayMs": 250,
+        "observedCreateStatus": 201,
+        "delayedPageScripts": 1,
+        "literalPercentAndUnicodeIds": true,
+        "deliberateBackendFailure": true,
+        "dynamicPageNavigation": true,
+        "pageErrors": []
+      },
+      {
+        "control": "m6-stale-generated-client",
+        "result": "actual-HTTP-contract-refusal",
+        "typescriptCompilation": "passed"
+      },
+      {
+        "control": "m6-buildkit-alias-index",
+        "result": "actual-image-and-runtime-pass"
+      },
+      {
+        "control": "m6-buildkit-explicit-arg-json-copy",
+        "result": "actual-image-and-runtime-pass"
+      },
+      {
+        "control": "m6-buildkit-specific-ignore",
+        "result": "actual-specific-ignore-precedence-pass"
+      },
+      {
+        "control": "m6-buildkit-broken-copy",
+        "result": "actual-BuildKit-refusal"
+      },
+      {
+        "control": "m6-buildkit-ignored-config",
+        "result": "actual-BuildKit-refusal"
+      },
+      {
+        "control": "m6-buildkit-wrong-stage",
+        "result": "actual-BuildKit-refusal"
+      },
+      {
+        "control": "m6-wrong-binary",
+        "result": "actual-image-runtime-refusal",
+        "image": "sha256:2e7424ca571d6c4241e681e956b71197b7c15414ae5aa570cbe65a3990fd2e35"
+      },
+      {
+        "control": "m6-missing-config",
+        "result": "actual-image-runtime-refusal",
+        "image": "sha256:e2ce22af512c37aa2a2d82bba127bf275731569996032908f5348e53d5dfe43a"
+      },
+      {
+        "control": "m6-missing-loader-library",
+        "result": "actual-image-runtime-refusal",
+        "image": "sha256:70077ba706487629fe056b96d2de28ba16ea54e3545ca7c2031fbffdf275271e"
+      },
+      {
+        "control": "m6-wrong-listener",
+        "result": "actual-image-runtime-refusal",
+        "image": "sha256:646670b4be83e4b6f20097604bcfd40eed1009f08c7ecb1c659676b8b16f3cbe"
+      },
+      {
+        "control": "m6-wrong-architecture",
+        "result": "format-gate-and-actual-exec-format-refusal",
+        "observedMachine": 183,
+        "requiredMachine": 62,
+        "runtimeDiagnosticLogs": [
+          "m6-runtime-wrong-architecture-start.stderr.log",
+          "m6-runtime-wrong-architecture-logs.stdout.log",
+          "m6-runtime-wrong-architecture-logs.stderr.log"
+        ],
+        "runtimeDiagnosticDigest": "sha256:b3115f24e7d8267bf252e97746b5be28d2d515bfdb1c3aa833992149642c7bab"
+      },
+      {
+        "control": "m6-expose-is-not-listener",
+        "result": "advertised-port-closed-actual-listener-observed",
+        "advertised": 9090,
+        "actual": 8080
+      },
+      {
+        "control": "m6-missing-required-lanes",
+        "result": "unavailable-refuses-full-release",
+        "lanes": [
+          "docker",
+          "browser-module",
+          "browser-runtime",
+          "platform"
+        ]
+      },
+      {
+        "control": "m6-native-release-admission",
+        "result": "native-admission-and-offline-replay-passed",
+        "baseline": "sha256:6f8b831eac9b805c5acc05cbf4d3c037a073fa2b9518e90069a9d3c6107b5523",
+        "toolAuthenticationEstablished": false,
+        "offlineImageBytesReexecuted": false,
+        "negativeControls": [
+          {
+            "control": "uncompiled",
+            "result": "refused",
+            "code": "BUILD_OBSERVATION_BINDING_MISMATCH"
+          },
+          {
+            "control": "stale-config",
+            "result": "refused",
+            "code": "BUILD_OBSERVATION_BINDING_MISMATCH"
+          },
+          {
+            "control": "different-image",
+            "result": "refused",
+            "code": "BUILD_OBSERVATION_BINDING_MISMATCH"
+          },
+          {
+            "control": "unobserved-browser",
+            "result": "refused",
+            "code": "BUILD_OBSERVATION_BINDING_MISMATCH"
+          },
+          {
+            "control": "ambiguous-artifact",
+            "result": "refused",
+            "code": "BUILD_OBSERVATION_BINDING_MISMATCH"
+          }
+        ]
+      },
+      {
+        "control": "m6-native-evidence-refusals",
+        "result": "native-refusals",
+        "controls": [
+          {
+            "control": "uncompiled",
+            "result": "refused",
+            "code": "BUILD_OBSERVATION_BINDING_MISMATCH"
+          },
+          {
+            "control": "stale-config",
+            "result": "refused",
+            "code": "BUILD_OBSERVATION_BINDING_MISMATCH"
+          },
+          {
+            "control": "different-image",
+            "result": "refused",
+            "code": "BUILD_OBSERVATION_BINDING_MISMATCH"
+          },
+          {
+            "control": "unobserved-browser",
+            "result": "refused",
+            "code": "BUILD_OBSERVATION_BINDING_MISMATCH"
+          },
+          {
+            "control": "ambiguous-artifact",
+            "result": "refused",
+            "code": "BUILD_OBSERVATION_BINDING_MISMATCH"
+          }
+        ]
+      }
+    ],
+    "source": {
+      "status": "source-intent-graph-viable",
+      "requirements": [
+        {
+          "name": "catalog-page",
+          "matches": [
+            "urn:cross-stack-workspace:topology-page:urn%3Aexample%3Asource%3Anext%3A.%3Apage"
+          ]
+        },
+        {
+          "name": "item-page",
+          "matches": [
+            "urn:cross-stack-workspace:topology-page:urn%3Aexample%3Asource%3Anext%3Aitems%2F%5Bid%5D%3Apage"
+          ]
+        },
+        {
+          "name": "operation-next-route",
+          "matches": [
+            "urn:cross-stack-workspace:next-route:urn%3Aexample%3Asource%3Anext%3Aapi%2Fitems%3APOST"
+          ]
+        },
+        {
+          "name": "operation-next-handler",
+          "matches": [
+            "urn:cross-stack-workspace:next-handler:urn%3Aexample%3Asource%3Anext%3Aapi%2Fitems%3APOST"
+          ]
+        },
+        {
+          "name": "operation-next-endpoint",
+          "matches": [
+            "urn:cross-stack-workspace:next-endpoint:urn%3Aexample%3Asource%3Anext%3Aapi%2Fitems%3APOST"
+          ]
+        },
+        {
+          "name": "cargo-package",
+          "matches": [
+            "urn:patamaps:observed:cargo-package:sha256:3ab12f3fc610a1efed0abda58209fcbec3902dc010241a5a34fba8c5317c8435"
+          ]
+        },
+        {
+          "name": "cargo-target",
+          "matches": [
+            "urn:patamaps:observed:cargo-target:sha256:0e17085199230be61abb4b0918dc6121ad85263ab781b90db4c809a9b76abf3d"
+          ]
+        },
+        {
+          "name": "listener",
+          "matches": [
+            "urn:patamaps:observed:toml-key:sha256:8b7fd4c5ce017bb10ded78e65a63c6a7ef5155aabdb62292fa60caad0824cdd2"
+          ]
+        },
+        {
+          "name": "next-config",
+          "matches": [
+            "urn:patamaps:observed:input:sha256:c888ae9a10397cd966ead98a28a20c29d23ae1c79db9b0138d40059abdaddf17"
+          ]
+        },
+        {
+          "name": "builder",
+          "matches": [
+            "urn:patamaps:observed:docker-stage:sha256:aa7b352fb3e739fba62be174b5a7361713670939797830eada41a7b83d7a86b7"
+          ]
+        },
+        {
+          "name": "runtime",
+          "matches": [
+            "urn:patamaps:observed:docker-stage:sha256:295ea865fd059f7340e8ec9fba331a93bb2d86ddb728a1a3aa418feb1c5bee44"
+          ]
+        },
+        {
+          "name": "binary-copy",
+          "matches": [
+            "urn:patamaps:observed:docker-instruction:sha256:88a7d8ce3424243278705f23ee62d56ae85094d9778e7b358f918c47285da545"
+          ]
+        },
+        {
+          "name": "config-copy",
+          "matches": [
+            "urn:patamaps:observed:docker-instruction:sha256:6762ebaa038db0d6a2edd17cfc3d508e81ba54f9daa3059f4a564f5c63917397"
+          ]
+        },
+        {
+          "name": "build-recipe",
+          "matches": [
+            "urn:patamaps:observed:docker-instruction:sha256:053b5a291f61d32f43deafbe48da0963cf81db0a9ddb98497ac4c9fb59e596aa"
+          ]
+        }
+      ],
+      "baseline": "sha256:e437c7735180b26c008c9ddb3f5ae503d9abdbe8f46e6fc4a9384ad17701d092",
+      "compilation": "not-established",
+      "image": "not-established",
+      "runtime": "not-established",
+      "fullReleaseAccepted": false,
+      "unsupported": [
+        "RUN effects require independent build evidence",
+        "one reviewed literal Next configuration only"
+      ],
+      "activation": "not-performed"
+    },
+    "release": {
+      "artifactDigest": "sha256:e5525bec18f93c068084fd781b8e260cd6793de1d26410e6807e224b979e5367",
+      "configurationDigest": "sha256:ec046d3e08183708c3aae0453ce0cb4febe7b875452d781ea867897b65bccd07",
+      "image": "sha256:663fbc4289888a10816c615ce58c81fcc31696ebe79ba0be6d8ba675d948ca27",
+      "platform": "linux/amd64",
+      "cargoTarget": "catalog-service",
+      "executable": {
+        "format": "ELF64",
+        "endianness": "little",
+        "type": 3,
+        "machine": 62
+      },
+      "http": true,
+      "browser": true
+    },
+    "metamapCompatibility": "pending-M7",
+    "installedConsumer": "pending-M7",
+    "fullReleaseAccepted": false,
+    "productionActivation": "not-performed",
+    "ownedObjects": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-image/owned-docker-objects.json"
+  },
+  "sourceUnchanged": true,
+  "finishedUtc": "2026-10-16T00:13:29.476135+00:00"
+}

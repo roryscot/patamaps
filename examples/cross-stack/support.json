@@ -1,14 +1,14 @@
 {
   "profile": "patamaps-cross-stack-fixture-1",
   "milestones": {
-    "M0": "native-fixture-verified",
+    "M0": "native-and-Linux-fixture-verified",
     "M1": "native-observation-scope-verified",
     "M2": "generated-http-binding-scope-verified",
-    "M3": "native-observations-verified; independent-BuildKit-pending",
-    "M4": "source-intent-scope-verified-on-Intel-and-Linux; actual-image-chain-pending-M6",
-    "M5": "Linux-preview-matrix-passed; Intel-preview-matrix-pending",
-    "M6": "implemented-required-Linux-image-browser-lane; acceptance-pending",
-    "M7": "not-run"
+    "M3": "native-observations-and-independent-BuildKit-image-controls-verified",
+    "M4": "source-intent-and-actual-Linux-release-chain-verified",
+    "M5": "Intel-and-Linux-preview-watch-controls-verified",
+    "M6": "Linux-amd64-image-HTTP-browser-and-refusal-controls-verified",
+    "M7": "source-and-image-MetaMap-comparison-and-exact-installed-consumers-verified"
   },
   "versions": {
     "node": "22.23.3",
@@ -40,7 +40,9 @@
     "rust": "One explicit library handler and binary; no macro/call-graph inference",
     "toml": "Pinned parser; tested TOML 1.0 values; explicit complete nonsecret input files, selected tagged lossless observations",
     "http": "Literal unique POST frontend/backend endpoints; exact required string-object JSON Schema subset; generated registration/client with actual compile/wire controls",
-    "docker": "Captured Dockerfile/context AST observations; bounded literal ignore/expansion rules; no artifact/image/runtime evidence from parsing"
+    "docker": "Captured Dockerfile/context AST observations with bounded literal rules; actual packaging, executable/config/license bytes and runtime established only by the required Linux release lane.",
+    "development": "Foreground Intel macOS x86_64 and Linux x86_64 preview/watch; coherent candidate snapshot, real compilers and generated-client HTTP; one complete verified selected pointer; no-op is not fresh verification.",
+    "interoperability": "Explicit native0.1 to pinned MetaMap2.0 envelope conversion, separately registered real evaluator, preserved originals and independently expected paired facts/decisions."
   },
   "unsupported": [
     "Pages Router",
@@ -56,14 +58,24 @@
     "shell-form launch commands",
     "external build contexts/custom frontends"
   ],
-  "imageDigests": "Must be resolved and recorded by actual Linux image acceptance; tags do not establish reproducible immutable images",
-  "acceptance": "No full cross-stack claim until M0-M7 and X01-X20 have actual evidence",
-  "acceptanceReceipt": "docs/acceptance/cross-stack/m0-fixture/receipt.json",
+  "imageDigests": "Exact built image IDs and inspected bytes are recorded by each accepted Linux run; mutable upstream base tags do not establish deterministic independent rebuilds.",
+  "acceptance": "M0\u2013M7 and X01\u2013X20 accepted only for this declared first profile; see exact source/tool/command records and limitations.",
+  "acceptanceReceipt": "docs/acceptance/cross-stack/release-profile-1/receipt.json",
   "acceptanceReceipts": {
     "M0": "docs/acceptance/cross-stack/m0-fixture/receipt.json",
     "M1": "docs/acceptance/cross-stack/m1-native-observations/receipt.json",
     "M2": "docs/acceptance/cross-stack/m2-http-bindings/receipt.json",
     "M3-native": "docs/acceptance/cross-stack/m3-docker-observations/receipt.json",
-    "M4-source": "docs/acceptance/cross-stack/m4-workspace/receipt.json"
-  }
+    "M4-source": "docs/acceptance/cross-stack/m4-workspace/receipt.json",
+    "M5": "docs/acceptance/cross-stack/m5-development/receipt.json",
+    "M6": "docs/acceptance/cross-stack/release-profile-1/linux-image.json",
+    "M7-MetaMap": "docs/acceptance/cross-stack/release-profile-1/metamap-image.json",
+    "M7-installed": "docs/acceptance/cross-stack/release-profile-1/linux-installed.json",
+    "final-native": "docs/acceptance/cross-stack/final-native/receipt.json",
+    "aggregate": "docs/acceptance/cross-stack/release-profile-1/receipt.json"
+  },
+  "testedSource": "6047fb6dc6c917028de271b77128c9ec6717e5de",
+  "fullReleaseAccepted": true,
+  "productionActivation": "not-performed",
+  "registryPublication": "not-performed"
 }

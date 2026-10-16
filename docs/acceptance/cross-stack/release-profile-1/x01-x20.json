@@ -1,0 +1,540 @@
+{
+  "status": "accepted-for-declared-profile",
+  "controls": [
+    {
+      "id": "X01",
+      "criterion": "Real page/route/Rust/Cargo/image round trip",
+      "evidenceControls": [
+        "M6:m6-cargo-linux-artifact",
+        "M6:m6-real-next-linux-http",
+        "M6:m6-real-browser"
+      ],
+      "status": "passed-for-declared-profile",
+      "evidence": [
+        {
+          "record": "linux-image.json",
+          "controlOrField": "m6-cargo-linux-artifact"
+        },
+        {
+          "record": "linux-image.json",
+          "controlOrField": "m6-real-next-linux-http"
+        },
+        {
+          "record": "linux-image.json",
+          "controlOrField": "m6-real-browser"
+        }
+      ]
+    },
+    {
+      "id": "X02",
+      "criterion": "Discover and reject new governed leaves",
+      "evidenceControls": [
+        "M4:m4-new-unmapped-route",
+        "M4:m4-new-unmapped-api"
+      ],
+      "status": "passed-for-declared-profile",
+      "evidence": [
+        {
+          "record": "linux-source.json",
+          "controlOrField": "m4-new-unmapped-route"
+        },
+        {
+          "record": "linux-source.json",
+          "controlOrField": "m4-new-unmapped-api"
+        }
+      ]
+    },
+    {
+      "id": "X03",
+      "criterion": "Stable semantic identity after actual handler move",
+      "evidenceControls": [
+        "M2:moved-handler",
+        "M7:m7-moved-handler"
+      ],
+      "status": "passed-for-declared-profile",
+      "evidence": [
+        {
+          "record": "../final-native/native-bindings.json",
+          "controlOrField": "moved-handler"
+        },
+        {
+          "record": "metamap-image.json",
+          "controlOrField": "m7-moved-handler"
+        }
+      ]
+    },
+    {
+      "id": "X04",
+      "criterion": "Actual compiler refusal preserves prior selected app",
+      "evidenceControls": [
+        "M2:missing-export",
+        "M2:wrong-signature",
+        "M5:m5-real-cargo-failure",
+        "M5:m5-prior-selection-still-usable"
+      ],
+      "status": "passed-for-declared-profile",
+      "evidence": [
+        {
+          "record": "../final-native/native-bindings.json",
+          "controlOrField": "missing-export"
+        },
+        {
+          "record": "../final-native/native-bindings.json",
+          "controlOrField": "wrong-signature"
+        },
+        {
+          "record": "linux-development.json",
+          "controlOrField": "m5-real-cargo-failure"
+        },
+        {
+          "record": "linux-development.json",
+          "controlOrField": "m5-prior-selection-still-usable"
+        }
+      ]
+    },
+    {
+      "id": "X05",
+      "criterion": "Real serialization/shape refusals",
+      "evidenceControls": [
+        "M2:changed-request-shape",
+        "M2:changed-response-shape",
+        "M2:removed-serde-field",
+        "M2:renamed-request-wire-field"
+      ],
+      "status": "passed-for-declared-profile",
+      "evidence": [
+        {
+          "record": "../final-native/native-bindings.json",
+          "controlOrField": "changed-request-shape"
+        },
+        {
+          "record": "../final-native/native-bindings.json",
+          "controlOrField": "changed-response-shape"
+        },
+        {
+          "record": "../final-native/native-bindings.json",
+          "controlOrField": "removed-serde-field"
+        },
+        {
+          "record": "../final-native/native-bindings.json",
+          "controlOrField": "renamed-request-wire-field"
+        }
+      ]
+    },
+    {
+      "id": "X06",
+      "criterion": "Selected features/target/platform and actual artifact",
+      "evidenceControls": [
+        "M1:m1-resolved-workspace",
+        "M1:m1-feature-disabled",
+        "M4:m4-disabled-required-feature",
+        "M3:m3-unsupported-platform",
+        "M6:m6-cargo-linux-artifact"
+      ],
+      "status": "passed-for-declared-profile",
+      "evidence": [
+        {
+          "record": "../final-native/native-discovery.json",
+          "controlOrField": "m1-resolved-workspace"
+        },
+        {
+          "record": "../final-native/native-discovery.json",
+          "controlOrField": "m1-feature-disabled"
+        },
+        {
+          "record": "linux-source.json",
+          "controlOrField": "m4-disabled-required-feature"
+        },
+        {
+          "record": "../final-native/native-docker-syntax.json",
+          "controlOrField": "m3-unsupported-platform"
+        },
+        {
+          "record": "linux-image.json",
+          "controlOrField": "m6-cargo-linux-artifact"
+        }
+      ]
+    },
+    {
+      "id": "X07",
+      "criterion": "Manifest/config/lock lineage and unavailable overrides",
+      "evidenceControls": [
+        "M1:m1-unrecorded-member",
+        "M1:m1-explicit-config",
+        "M1:m1-unrecorded-config",
+        "M1:m1-ambient-config",
+        "M4:m4-lock-lineage"
+      ],
+      "status": "passed-for-declared-profile",
+      "evidence": [
+        {
+          "record": "../final-native/native-discovery.json",
+          "controlOrField": "m1-unrecorded-member"
+        },
+        {
+          "record": "../final-native/native-discovery.json",
+          "controlOrField": "m1-explicit-config"
+        },
+        {
+          "record": "../final-native/native-discovery.json",
+          "controlOrField": "m1-unrecorded-config"
+        },
+        {
+          "record": "../final-native/native-discovery.json",
+          "controlOrField": "m1-ambient-config"
+        },
+        {
+          "record": "linux-source.json",
+          "controlOrField": "m4-lock-lineage"
+        }
+      ]
+    },
+    {
+      "id": "X08",
+      "criterion": "Precise malformed/duplicate/range refusal and lossless tags",
+      "evidenceControls": [
+        "M1:m1-malformed-toml",
+        "M1:m1-duplicate-toml",
+        "unit:duplicate_keys_malformed_values_and_out_of_range_integers_refuse",
+        "unit:integers_dates_and_special_floats_are_lossless_tagged_values",
+        "M7:m7-malformed-config"
+      ],
+      "status": "passed-for-declared-profile",
+      "evidence": [
+        {
+          "record": "../final-native/native-discovery.json",
+          "controlOrField": "m1-malformed-toml"
+        },
+        {
+          "record": "../final-native/native-discovery.json",
+          "controlOrField": "m1-duplicate-toml"
+        },
+        {
+          "record": "native-selected-unit-evidence.json",
+          "controlOrField": "duplicate_keys_malformed_values_and_out_of_range_integers_refuse"
+        },
+        {
+          "record": "native-selected-unit-evidence.json",
+          "controlOrField": "integers_dates_and_special_floats_are_lossless_tagged_values"
+        },
+        {
+          "record": "metamap-image.json",
+          "controlOrField": "m7-malformed-config"
+        }
+      ]
+    },
+    {
+      "id": "X09",
+      "criterion": "BuildKit independently refuses broken packaging",
+      "evidenceControls": [
+        "M3:m3-wrong-context",
+        "M6:m6-buildkit-broken-copy",
+        "M6:m6-buildkit-ignored-config",
+        "M6:m6-buildkit-wrong-stage"
+      ],
+      "status": "passed-for-declared-profile",
+      "evidence": [
+        {
+          "record": "../final-native/native-docker-syntax.json",
+          "controlOrField": "m3-wrong-context"
+        },
+        {
+          "record": "linux-image.json",
+          "controlOrField": "m6-buildkit-broken-copy"
+        },
+        {
+          "record": "linux-image.json",
+          "controlOrField": "m6-buildkit-ignored-config"
+        },
+        {
+          "record": "linux-image.json",
+          "controlOrField": "m6-buildkit-wrong-stage"
+        }
+      ]
+    },
+    {
+      "id": "X10",
+      "criterion": "Actual incompatible artifacts refuse Linux acceptance",
+      "evidenceControls": [
+        "native:macho-artifact",
+        "M6:m6-wrong-architecture"
+      ],
+      "status": "passed-for-declared-profile",
+      "evidence": [
+        {
+          "record": "../final-native/native-macho-refusal.json",
+          "controlOrField": "macho-artifact"
+        },
+        {
+          "record": "linux-image.json",
+          "controlOrField": "m6-wrong-architecture"
+        }
+      ]
+    },
+    {
+      "id": "X11",
+      "criterion": "EXPOSE does not establish the listener",
+      "evidenceControls": [
+        "M6:m6-wrong-listener",
+        "M6:m6-expose-is-not-listener"
+      ],
+      "status": "passed-for-declared-profile",
+      "evidence": [
+        {
+          "record": "linux-image.json",
+          "controlOrField": "m6-wrong-listener"
+        },
+        {
+          "record": "linux-image.json",
+          "controlOrField": "m6-expose-is-not-listener"
+        }
+      ]
+    },
+    {
+      "id": "X12",
+      "criterion": "Unproved dynamic effects remain unresolved",
+      "evidenceControls": [
+        "M3:m3-opaque-run",
+        "M3:m3-shell-launch",
+        "M4:m4-extra-opaque-run",
+        "M4:m4-dynamic-next-config"
+      ],
+      "status": "passed-for-declared-profile",
+      "evidence": [
+        {
+          "record": "../final-native/native-docker-syntax.json",
+          "controlOrField": "m3-opaque-run"
+        },
+        {
+          "record": "../final-native/native-docker-syntax.json",
+          "controlOrField": "m3-shell-launch"
+        },
+        {
+          "record": "linux-source.json",
+          "controlOrField": "m4-extra-opaque-run"
+        },
+        {
+          "record": "linux-source.json",
+          "controlOrField": "m4-dynamic-next-config"
+        }
+      ]
+    },
+    {
+      "id": "X13",
+      "criterion": "Missing tools and bounded failures preserve selection",
+      "evidenceControls": [
+        "M5:m5-missing-compiler",
+        "M5:m5-cancelled-pipeline",
+        "unit:exit_timeout_pipe_overflow_and_inherited_pipe_holders_are_bounded",
+        "supervision:provider-parent-death",
+        "supervision:nested-cargo-parent-death"
+      ],
+      "status": "passed-for-declared-profile",
+      "evidence": [
+        {
+          "record": "linux-development.json",
+          "controlOrField": "m5-missing-compiler"
+        },
+        {
+          "record": "linux-development.json",
+          "controlOrField": "m5-cancelled-pipeline"
+        },
+        {
+          "record": "native-selected-unit-evidence.json",
+          "controlOrField": "exit_timeout_pipe_overflow_and_inherited_pipe_holders_are_bounded"
+        },
+        {
+          "record": "linux-source.json",
+          "controlOrField": "provider-parent-death"
+        },
+        {
+          "record": "linux-source.json",
+          "controlOrField": "nested-cargo-parent-death"
+        }
+      ]
+    },
+    {
+      "id": "X14",
+      "criterion": "Rehashed lineage substitutions refuse",
+      "evidenceControls": [
+        "M4:m4-rehashed-lineage-substitution",
+        "unit:individually_verified_capture_and_rehashed_output_substitutions_refuse",
+        "unit:raw_receipts_and_configured_requests_cannot_be_swapped_after_rehashing"
+      ],
+      "status": "passed-for-declared-profile",
+      "evidence": [
+        {
+          "record": "linux-source.json",
+          "controlOrField": "m4-rehashed-lineage-substitution"
+        },
+        {
+          "record": "native-selected-unit-evidence.json",
+          "controlOrField": "individually_verified_capture_and_rehashed_output_substitutions_refuse"
+        },
+        {
+          "record": "native-selected-unit-evidence.json",
+          "controlOrField": "raw_receipts_and_configured_requests_cannot_be_swapped_after_rehashing"
+        }
+      ]
+    },
+    {
+      "id": "X15",
+      "criterion": "Offline reconstruction without source/provider/compiler/Node tools",
+      "evidenceControls": [
+        "M1:m1-native-workspace-offline-reconstruction",
+        "M4:m4-offline-no-tools"
+      ],
+      "status": "passed-for-declared-profile",
+      "evidence": [
+        {
+          "record": "../final-native/native-discovery.json",
+          "controlOrField": "m1-native-workspace-offline-reconstruction"
+        },
+        {
+          "record": "linux-source.json",
+          "controlOrField": "m4-offline-no-tools"
+        }
+      ]
+    },
+    {
+      "id": "X16",
+      "criterion": "Relocation and repeated invocation preserve declared identities",
+      "evidenceControls": [
+        "M1:m1-root-relocated",
+        "M3:m3-relocated",
+        "M4:m4-relocated-chain",
+        "M5:m5-no-op"
+      ],
+      "status": "passed-for-declared-profile",
+      "evidence": [
+        {
+          "record": "../final-native/native-discovery.json",
+          "controlOrField": "m1-root-relocated"
+        },
+        {
+          "record": "../final-native/native-docker-syntax.json",
+          "controlOrField": "m3-relocated"
+        },
+        {
+          "record": "linux-source.json",
+          "controlOrField": "m4-relocated-chain"
+        },
+        {
+          "record": "linux-development.json",
+          "controlOrField": "m5-no-op"
+        }
+      ]
+    },
+    {
+      "id": "X17",
+      "criterion": "Races/readers/lost events preserve complete generations",
+      "evidenceControls": [
+        "M5:m5-snapshot-race",
+        "M5:m5-batch-and-lost-event-reconciliation",
+        "M5:m5-atomic-selection-readers"
+      ],
+      "status": "passed-for-declared-profile",
+      "evidence": [
+        {
+          "record": "linux-development.json",
+          "controlOrField": "m5-snapshot-race"
+        },
+        {
+          "record": "linux-development.json",
+          "controlOrField": "m5-batch-and-lost-event-reconciliation"
+        },
+        {
+          "record": "linux-development.json",
+          "controlOrField": "m5-atomic-selection-readers"
+        }
+      ]
+    },
+    {
+      "id": "X18",
+      "criterion": "Explicit conversion and real paired MetaMap decisions",
+      "evidenceControls": [
+        "M7:m7-supported",
+        "M7:m7-moved-handler",
+        "M7:m7-missing-artifact",
+        "M7:m7-malformed-config",
+        "M7:m7-ambiguous-operation",
+        "M7:m7-unregistered-evaluator",
+        "M7:m7-protected-observation-waiver"
+      ],
+      "status": "passed-for-declared-profile",
+      "evidence": [
+        {
+          "record": "metamap-image.json",
+          "controlOrField": "m7-supported"
+        },
+        {
+          "record": "metamap-image.json",
+          "controlOrField": "m7-moved-handler"
+        },
+        {
+          "record": "metamap-image.json",
+          "controlOrField": "m7-missing-artifact"
+        },
+        {
+          "record": "metamap-image.json",
+          "controlOrField": "m7-malformed-config"
+        },
+        {
+          "record": "metamap-image.json",
+          "controlOrField": "m7-ambiguous-operation"
+        },
+        {
+          "record": "metamap-image.json",
+          "controlOrField": "m7-unregistered-evaluator"
+        },
+        {
+          "record": "metamap-image.json",
+          "controlOrField": "m7-protected-observation-waiver"
+        }
+      ]
+    },
+    {
+      "id": "X19",
+      "criterion": "Exact installed workflow and runtime without graph compilers",
+      "evidenceControls": [
+        "distribution:installedConsumer",
+        "installed:configuredCompilerUnavailable",
+        "installed:graphCompilersOnRequestPath"
+      ],
+      "status": "passed-for-declared-profile",
+      "evidence": [
+        {
+          "record": "linux-installed.json",
+          "controlOrField": "installedConsumer",
+          "pointer": "/installedConsumer"
+        },
+        {
+          "record": "installed-workflow.json",
+          "controlOrField": "configuredCompilerUnavailable"
+        },
+        {
+          "record": "installed-workflow.json",
+          "controlOrField": "graphCompilersOnRequestPath"
+        }
+      ]
+    },
+    {
+      "id": "X20",
+      "criterion": "Unavailable Docker/browser/platform blocks full acceptance",
+      "evidenceControls": [
+        "M6:m6-missing-required-lanes"
+      ],
+      "status": "passed-for-declared-profile",
+      "evidence": [
+        {
+          "record": "linux-image.json",
+          "controlOrField": "m6-missing-required-lanes"
+        }
+      ]
+    }
+  ],
+  "sourceCommit": "6047fb6dc6c917028de271b77128c9ec6717e5de",
+  "derivedFromDiscovery": false,
+  "criterionSource": "unchanged owner plan section7 X01-X20",
+  "ownerDispositions": []
+}
