@@ -122,6 +122,14 @@ enum Command {
         #[command(flatten)]
         output: Output,
     },
+    /// Stage verified selected inputs into a fresh retained directory; runs no tools.
+    ProjectStage {
+        capture: PathBuf,
+        #[arg(long)]
+        destination: PathBuf,
+        #[command(flatten)]
+        output: Output,
+    },
     #[command(hide = true, name = "__tool-supervisor")]
     ToolSupervisor,
     /// Read-only matching proposals; does not evaluate policy or confer admission.
@@ -1002,6 +1010,16 @@ fn run(command: Command) -> Result<(), Failure> {
         Command::ProjectVerify { capture, output } => {
             let record = read::<patamaps_workspace::ProjectCapture>(&capture)?;
             let report = patamaps_workspace::verify_project_capture(&record)
+                .map_err(|e| Failure::Operational(e.to_string()))?;
+            json(&output, &report)
+        }
+        Command::ProjectStage {
+            capture,
+            destination,
+            output,
+        } => {
+            let record = read::<patamaps_workspace::ProjectCapture>(&capture)?;
+            let report = patamaps_workspace::stage_project_capture(&record, &destination)
                 .map_err(|e| Failure::Operational(e.to_string()))?;
             json(&output, &report)
         }

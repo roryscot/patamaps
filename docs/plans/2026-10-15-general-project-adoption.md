@@ -45,3 +45,7 @@ Source 1588a3c passed all four jobs in CI38843082846. The [47-control receipt](.
 ## Cargo member expansion checkpoint
 
 Decision0034 implements explicit workspaceMembers: bounded-directory-globs while retaining literal-paths as default. One complete star directory segment is supported with exact captured manifest enumeration, pre/post metadata comparison and actual Cargo member confirmation. The existing source discovery driver now includes frozen default/missing-input/syntax/symlink/mutation refusals and replays a glob-backed workspace with source/tools unavailable. Native syntax/format checks passed; current-source compilation and runtime remain pending. Cargo exclusions and broader glob grammar, other config contexts and real-project qualification remain open.
+
+## Retained staging checkpoint
+
+Decision0035 adds native project-stage from the existing verified ProjectCapture into a fresh descriptor-relative directory. It reconstructs only selected UTF-8 bytes with non-executable private files; it does not restore metadata, dependencies or establish a complete build context. Capture/record/prefix validation precedes destination creation, existing destinations refuse, and partial outputs are preserved. Three filesystem controls cover source-unavailable recapture, no-overwrite/symlink handling, and tamper/prefix refusals. Existing-project input qualification and private Wargame preparation now exercise the native staging API. Current-source execution remains pending; G4 orchestration/readiness/watch/cancellation/performance and G5–G6 remain open.

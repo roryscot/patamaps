@@ -1,4 +1,4 @@
-use patamaps_contracts::{canonical_bytes, parse};
+use patamaps_contracts::{SafeInteger, byte_digest, canonical_bytes, parse};
 use patamaps_workspace::*;
 use serde_json::json;
 use std::{
@@ -164,4 +164,91 @@ fn invalid_utf8_and_oversized_input_refuse() {
     )
     .unwrap();
     assert!(capture_project(&root, p).is_err());
+}
+
+#[cfg(unix)]
+#[test]
+fn staged_inputs_recapture_identically_after_sources_are_unavailable() {
+    use std::os::unix::fs::PermissionsExt;
+    let (root, mut profile) = fixture();
+    fs::write(root.join("frontend/config.json"), "{\"label\":\"☃\"}\n").unwrap();
+    profile.inputs.push("frontend/config.json".into());
+    let record = capture_project(&root, profile.clone()).unwrap();
+    fs::rename(root.join("frontend"), root.join("frontend-retained")).unwrap();
+    let destination = root.join("candidate");
+    let receipt = stage_project_capture(&record, &destination).unwrap();
+    assert_eq!(receipt["status"], "staged-project-inputs");
+    assert_eq!(receipt["digest"], record.digest);
+    assert_eq!(receipt["selectionPublication"], "not-performed");
+    assert_eq!(receipt["secretResolution"], "not-performed");
+    assert_eq!(
+        capture_project(&destination, profile).unwrap().digest,
+        record.digest
+    );
+    for input in &record.inputs {
+        let path = destination.join(&input.receipt.path);
+        assert_eq!(fs::read(&path).unwrap(), input.content.as_bytes());
+        assert_eq!(fs::metadata(path).unwrap().permissions().mode() & 0o177, 0);
+    }
+}
+#[cfg(unix)]
+#[test]
+fn existing_destinations_and_symlink_parents_are_never_overwritten() {
+    let (root, profile) = fixture();
+    let record = capture_project(&root, profile).unwrap();
+    let existing = root.join("occupied");
+    fs::create_dir(&existing).unwrap();
+    fs::write(existing.join("sentinel"), "preserve").unwrap();
+    assert!(stage_project_capture(&record, &existing).is_err());
+    let file = root.join("occupied-file");
+    fs::write(&file, "preserve-file").unwrap();
+    assert!(stage_project_capture(&record, &file).is_err());
+    let alias = root.join("alias");
+    std::os::unix::fs::symlink(&existing, &alias).unwrap();
+    assert!(stage_project_capture(&record, &alias).is_err());
+    assert!(stage_project_capture(&record, &alias.join("candidate")).is_err());
+    assert!(!existing.join("candidate").exists());
+    assert_eq!(fs::read(existing.join("sentinel")).unwrap(), b"preserve");
+    assert_eq!(fs::read(file).unwrap(), b"preserve-file");
+    assert_eq!(fs::read_dir(&existing).unwrap().count(), 1);
+}
+#[cfg(unix)]
+#[test]
+fn invalid_records_and_prefix_collisions_refuse_before_any_destination_creation() {
+    let (root, profile) = fixture();
+    let mut record = capture_project(&root, profile).unwrap();
+    record.inputs[0].content.push('!');
+    let destination = root.join("tampered");
+    assert!(stage_project_capture(&record, &destination).is_err());
+    assert!(!destination.exists());
+    record.definition.inputs = vec!["a".into(), "a-b".into(), "a/b".into()];
+    record.definition.components[0].root = ".".into();
+    record.definition.components[0].entrypoints = vec!["a".into()];
+    record.inputs = record
+        .definition
+        .inputs
+        .iter()
+        .map(|p| SuppliedInput {
+            receipt: InputReceipt {
+                path: p.clone(),
+                digest: byte_digest(b"data"),
+                byte_length: SafeInteger::new(4).unwrap(),
+            },
+            content: "data".into(),
+        })
+        .collect();
+    record.digest = patamaps_contracts::canonical_digest(
+        &json!({"profile":PROJECT_PROFILE,"definition":record.definition,"inputs":record.inputs}),
+    )
+    .unwrap();
+    verify_project_capture(&record).unwrap();
+    let destination = root.join("conflicted");
+    assert!(matches!(
+        stage_project_capture(&record, &destination),
+        Err(Error::Refused {
+            code: "PROJECT_STAGE_PATH_CONFLICT",
+            ..
+        })
+    ));
+    assert!(!destination.exists());
 }

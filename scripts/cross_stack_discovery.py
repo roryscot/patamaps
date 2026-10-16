@@ -320,6 +320,39 @@ def verify(root, work, env, run):
     observed.append({"control": "m1-rehashed-native-workspace-lineage", "result": "refused",
                      "code": "WORKSPACE_COMPOSITION_BINDING"})
 
+    # Native G4 source-free staging uses the same verified input record contract.
+    stage_profile={"profile":"patamaps-project-inputs-1","id":"urn:qualification:retained-stage","nonsecretInputs":True,
+        "inputs":["Cargo.toml","app/src/main.rs"],"components":[{"id":"service","kind":"cargo-package","root":".","entrypoints":["Cargo.toml","app/src/main.rs"]}],
+        "secretReferences":{"database":"PATAMAPS_STAGE_UNRESOLVED_DATABASE"}}
+    profile_path=work/"stage-profile.json";profile_path.write_text(json.dumps(stage_profile)+"\n")
+    capture_path=work/"stage-capture.json"
+    run("g4-stage-capture",[cli,"project-capture",profile_path,"--root",base,"--output",capture_path])
+    captured=json.loads(capture_path.read_bytes())
+    retained_source=cases/"base-staging-retained";base.rename(retained_source)
+    assert not base.exists()
+    staged=work/"staged-selected-inputs"
+    previous_environment=dict(env)
+    try:
+        env.clear();env.update(PATH="/patamaps-no-external-programs",HOME=str(work/"stage-no-user-home"))
+        stage_result=json.loads(run("g4-project-stage",[cli,"project-stage",capture_path,"--destination",staged],cwd=work))
+        assert stage_result["status"]=="staged-project-inputs" and stage_result["digest"]==captured["digest"]
+        expected={v["receipt"]["path"]:v["receipt"]["digest"] for v in captured["inputs"]}
+        assert expected=={n:sha(staged/n) for n in expected}
+        run("g4-stage-existing-destination",[cli,"project-stage",capture_path,"--destination",staged],cwd=work,expected_success=False)
+        assert "PROJECT_STAGE_DESTINATION_UNAVAILABLE" in (work/"g4-stage-existing-destination.stderr.log").read_text()
+        assert expected=={n:sha(staged/n) for n in expected}
+        bad=json.loads(capture_path.read_bytes());bad["inputs"][0]["content"]+="tampered"
+        bad_path=work/"stage-tampered.json";bad_path.write_text(json.dumps(bad)+"\n")
+        refused_path=work/"stage-refused-candidate"
+        run("g4-stage-tampered-capture",[cli,"project-stage",bad_path,"--destination",refused_path],cwd=work,expected_success=False)
+        assert "PROJECT_RECORD_INPUT" in (work/"g4-stage-tampered-capture.stderr.log").read_text()
+        assert not refused_path.exists()
+    finally:env.clear();env.update(previous_environment)
+    observed.extend([
+        {"control":"g4-retained-input-stage","result":"staged","captureDigest":captured["digest"],"originalSelectedSourceRootUnavailable":True,"sourcePreservedAt":str(retained_source),"externalProgramsAbsentFromPath":True,"inputCount":len(expected),"selectedInputDigests":expected,"compilationEstablished":False},
+        {"control":"g4-stage-no-overwrite","result":"refused","code":"PROJECT_STAGE_DESTINATION_UNAVAILABLE","selectedBytesUnchanged":True},
+        {"control":"g4-stage-tamper-before-creation","result":"refused","code":"PROJECT_RECORD_INPUT","destinationCreated":False}])
+
     return {"status": "passed", "controls": observed, "engines": engine, "nativeBinaryDigest": sha(cli), "newNativeTomlUnitTests": 10, "memberExpansionUnitTests": 2,
             "existingBoundedProcessTests": 2, "cargo": {"path": str(cargo), "digest": sha(cargo)},
             "rustc": {"path": str(rustc), "digest": sha(rustc)}, "compiledFixtureEstablishedByTheseObservations": False,

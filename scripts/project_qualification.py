@@ -25,9 +25,9 @@ def main():
     args.output.mkdir(parents=True, exist_ok=False)
     commands = []
     reports = []
-    def run(label, argv, success=True, env=None):
+    def run(label, argv, success=True, env=None, cwd=None):
         with (args.output/(label+".stdout.log")).open("xb") as out, (args.output/(label+".stderr.log")).open("xb") as err:
-            result = subprocess.run([str(v) for v in argv], stdout=out, stderr=err, timeout=30, env=env)
+            result = subprocess.run([str(v) for v in argv], stdout=out, stderr=err, timeout=30, env=env, cwd=cwd)
         commands.append(dict(label=label, argv=[str(v) for v in argv], exitCode=result.returncode))
         (args.output/"commands.json").write_text(json.dumps(commands,indent=2)+"\n")
         assert (result.returncode == 0) == success, label
@@ -68,6 +68,17 @@ def main():
         (args.output/(name+"-offline.stdout.log")).write_bytes(offline.stdout)
         (args.output/(name+"-offline.stderr.log")).write_bytes(offline.stderr)
         assert offline.returncode==0 and json.loads(offline.stdout)==replay
+        staged=args.output/(name+"-staged")
+        isolated_env={"PATH":"/unavailable","HOME":str(isolated)}
+        staged_receipt=json.loads(run(name+"-stage",[args.compiler.resolve(),"project-stage",captured.resolve(),"--destination",staged.resolve()],env=isolated_env,cwd=isolated))
+        assert staged_receipt["status"]=="staged-project-inputs" and staged_receipt["digest"]==record["digest"]
+        assert expected=={v:sha((staged/v).read_bytes()) for v in inputs}
+        recaptured=args.output/(name+"-recaptured.json")
+        run(name+"-recapture",[args.compiler,"project-capture",profile,"--root",staged,"--output",recaptured])
+        assert json.loads(recaptured.read_bytes())["digest"]==record["digest"]
+        run(name+"-stage-existing",[args.compiler.resolve(),"project-stage",captured.resolve(),"--destination",staged.resolve()],success=False,env=isolated_env,cwd=isolated)
+        assert "PROJECT_STAGE_DESTINATION_UNAVAILABLE" in (args.output/(name+"-stage-existing.stderr.log")).read_text()
+        assert expected=={v:sha((staged/v).read_bytes()) for v in inputs}
         tampered=json.loads(captured.read_bytes());tampered["inputs"][0]["content"]+="\nTAMPER"
         bad=args.output/(name+"-tampered.json");bad.write_text(json.dumps(tampered)+"\n")
         run(name+"-tamper",[args.compiler,"project-verify",bad],success=False)
@@ -76,7 +87,7 @@ def main():
         assert git_status==subprocess.check_output(["git","status","--porcelain=v1","--untracked-files=no"],cwd=root,text=True)
         reports.append(dict(project=name,head=git_head,trackedWorkingTreeDirty=bool(git_status),selectedInputs=expected,
                             captureDigest=record["digest"],selectedInputsUnchanged=True,trackedStatusUnchanged=True,
-                            offlineReplay="passed",controlledSecretSentinelAbsent=True,tamperedBytes="refused",scope="selected-input-capture-only",
+                            offlineReplay="passed",retainedSelectedInputStaging="passed-source-free-arguments-and-empty-PATH",stagedRecaptureDigest="identical",existingDestination="refused-with-bytes-preserved",controlledSecretSentinelAbsent=True,tamperedBytes="refused",scope="selected-input-capture-and-staging-only",
                             applicationBuild="not-performed",runtime="not-performed"))
     receipt=dict(status="passed-g1-selected-input-controls",compilerDigest=sha(args.compiler.read_bytes()),
                  projects=reports,commands=commands,rawCaptureLocation=str(args.output),fullWorkflowAccepted=False,
