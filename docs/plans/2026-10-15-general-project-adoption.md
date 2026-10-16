@@ -349,3 +349,19 @@ native preparation workflow. The owner generator is unchanged. It has not yet
 run in this workflow; actual build/edit/failure/runtime qualification remains open.
 The optimized-driver build was refused before startup by another live shared
 lease; its refusal and the finished capture are retained.
+
+## Real owner native preparation baseline checkpoint
+The [actual owner baseline](../acceptance/project-adoption/g6-owner-native-preparation-2026-10-16/baseline.json)
+passed: the unchanged generator used captured Patamaps tooling in native
+preparation, all three emitted artifacts were byte-identical to the captured
+originals, and actual Next build, TypeScript and fresh manifest witness commands
+passed. Source/snapshot-unavailable replay and native no-op preserved selection;
+original Git state and pinned tools remained unchanged.
+
+The optimized driver is recorded separately from the captured generation
+compiler. Full build took 500.397 seconds, including owner generation 2.807,
+Next 18.609, TypeScript 17.325 and manifest witness 0.125 seconds. Offline replay
+took 31.823 seconds and no-op 34.716 seconds. Practical edit/watch latency is
+not accepted. The actual owner edit/failure controls are prepared but their first
+launch was refused before startup by another live shared lease. Runtime/browser,
+installed/deployment and broader framework requirements remain open.
