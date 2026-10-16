@@ -1,0 +1,144 @@
+{
+  "status": "failed",
+  "phases": [
+    {
+      "stage": 0,
+      "argv": [
+        "cargo",
+        "build",
+        "--release",
+        "--workspace",
+        "--locked",
+        "--offline"
+      ],
+      "status": "passed",
+      "attempts": [
+        {
+          "attempt": 0,
+          "exitCode": 75,
+          "stdout": "0-0.stdout.log",
+          "stderr": "0-0.stderr.log"
+        },
+        {
+          "attempt": 1,
+          "exitCode": 75,
+          "stdout": "0-1.stdout.log",
+          "stderr": "0-1.stderr.log"
+        },
+        {
+          "attempt": 2,
+          "exitCode": 75,
+          "stdout": "0-2.stdout.log",
+          "stderr": "0-2.stderr.log"
+        },
+        {
+          "attempt": 3,
+          "exitCode": 0,
+          "stdout": "0-3.stdout.log",
+          "stderr": "0-3.stderr.log"
+        }
+      ]
+    },
+    {
+      "stage": 1,
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/intel-python-3.13.16-20261013/runtime/python/bin/python3",
+        "-B",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/scripts/test_cross_stack.py",
+        "--phase",
+        "discovery"
+      ],
+      "status": "passed",
+      "attempts": [
+        {
+          "attempt": 0,
+          "exitCode": 0,
+          "stdout": "1-0.stdout.log",
+          "stderr": "1-0.stderr.log"
+        }
+      ]
+    },
+    {
+      "stage": 2,
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/intel-python-3.13.16-20261013/runtime/python/bin/python3",
+        "-B",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/scripts/test_cross_stack.py",
+        "--phase",
+        "bindings"
+      ],
+      "status": "passed",
+      "attempts": [
+        {
+          "attempt": 0,
+          "exitCode": 0,
+          "stdout": "2-0.stdout.log",
+          "stderr": "2-0.stderr.log"
+        }
+      ]
+    },
+    {
+      "stage": 3,
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/intel-python-3.13.16-20261013/runtime/python/bin/python3",
+        "-B",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/scripts/test_cross_stack.py",
+        "--phase",
+        "docker"
+      ],
+      "status": "passed",
+      "attempts": [
+        {
+          "attempt": 0,
+          "exitCode": 0,
+          "stdout": "3-0.stdout.log",
+          "stderr": "3-0.stderr.log"
+        }
+      ]
+    },
+    {
+      "stage": 4,
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/intel-python-3.13.16-20261013/runtime/python/bin/python3",
+        "-B",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/scripts/test_cross_stack.py",
+        "--phase",
+        "installed"
+      ],
+      "status": "passed",
+      "attempts": [
+        {
+          "attempt": 0,
+          "exitCode": 0,
+          "stdout": "4-0.stdout.log",
+          "stderr": "4-0.stderr.log"
+        }
+      ]
+    },
+    {
+      "stage": 5,
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/intel-python-3.13.16-20261013/runtime/python/bin/python3",
+        "-B",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/scripts/test_adapter_bridge.py",
+        "--cli",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/release/patamaps",
+        "--node",
+        "/Users/admin/.nvm/versions/node/v22.23.3/bin/node",
+        "--reference",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/reference/metamap-399747a4ad05",
+        "--output",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/final-native-lease-wait-20261015T235559.749364Z/adapters-receipt.json"
+      ],
+      "status": "failed",
+      "attempts": [
+        {
+          "attempt": 0,
+          "exitCode": 1,
+          "stdout": "5-0.stdout.log",
+          "stderr": "5-0.stderr.log"
+        }
+      ]
+    }
+  ]
+}

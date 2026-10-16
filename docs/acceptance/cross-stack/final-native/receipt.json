@@ -1,0 +1,95 @@
+{
+  "profile": "patamaps-cross-stack-final-native-acceptance-1",
+  "status": "passed-required-native-checks",
+  "recordedAfterPublishedHead": "6047fb6dc6c917028de271b77128c9ec6717e5de",
+  "host": "Intel macOS x86_64; native existing supervisor",
+  "policyChanged": false,
+  "deleted": [],
+  "records": [
+    {
+      "record": "native-discovery.json",
+      "retainedOriginal": ".tools/cross-stack/discovery-20261016T000004.958826Z/receipt.json",
+      "sha256": "2898185ea223cfb8cc2c9bcc411200119787f233474d51c72098d55c8251863d",
+      "bytes": 73866,
+      "recordedStatus": "passed"
+    },
+    {
+      "record": "native-bindings.json",
+      "retainedOriginal": ".tools/cross-stack/bindings-20261016T000149.437109Z/receipt.json",
+      "sha256": "181aef58e2fe53962b508e0f9496da9f848fb457e98e7093e6befabe9fd3027f",
+      "bytes": 193439,
+      "recordedStatus": "passed"
+    },
+    {
+      "record": "native-docker-syntax.json",
+      "retainedOriginal": ".tools/cross-stack/docker-20261016T000309.333429Z/receipt.json",
+      "sha256": "2713f76e5c53dbfc4bf66a7df35f3a21f4e6a362903c03c4741357193bd611bb",
+      "bytes": 64132,
+      "recordedStatus": "passed"
+    },
+    {
+      "record": "native-installed.json",
+      "retainedOriginal": ".tools/cross-stack/installed-20261016T000355.650783Z/receipt.json",
+      "sha256": "cc8e52f67c35d3349f4ede51f0eeff88ba38c5ab27911d44afc4dcaad151cd0d",
+      "bytes": 20412,
+      "recordedStatus": "passed"
+    },
+    {
+      "record": "native-phase-journal.json",
+      "retainedOriginal": ".tools/cross-stack/final-native-lease-wait-20261015T235559.749364Z/receipt.json",
+      "sha256": "0a7de7e11370bc969a8361380f83824073751ae8b2a9897c11075a3c3ad7f5d5",
+      "bytes": 3968,
+      "recordedStatus": "failed"
+    },
+    {
+      "record": "native-adapter-retry-journal.json",
+      "retainedOriginal": ".tools/cross-stack/native-adapter-lease-wait-20261016T000756.901950Z/receipt.json",
+      "sha256": "f0bf03b7f8f58e2ee35d115a770d8b91625f7a74087e0a0a27727f9cfd242a61",
+      "bytes": 1605,
+      "recordedStatus": "passed"
+    },
+    {
+      "record": "native-adapters.json",
+      "retainedOriginal": ".tools/cross-stack/native-adapter-lease-wait-20261016T000756.901950Z/adapters-receipt.json",
+      "sha256": "1c1d93e0396e20242b11ae741ec93ce0e573b86af819bc54c0a2eaf58d55416d",
+      "bytes": 291591,
+      "recordedStatus": "passed"
+    },
+    {
+      "record": "native-macho-refusal.json",
+      "retainedOriginal": ".tools/cross-stack/native-macho-refusal-20261016T000710.748539Z/receipt.json",
+      "sha256": "024bc7fcfe65e0c80580b926b9353df6d2a2adc24e93f5b1bac02f81a9746a00",
+      "bytes": 787,
+      "recordedStatus": "refused"
+    }
+  ],
+  "regression": "../m5-development/native-guard-regression.json",
+  "development": "../m5-development/native-development-receipt.json",
+  "covered": [
+    "cargo fmt --all -- --check",
+    "cargo clippy --workspace --all-targets --locked --offline -- -D warnings",
+    "cargo test --workspace --locked --offline",
+    "cargo test --workspace --doc --locked --offline",
+    "cargo build --release --workspace --locked --offline",
+    "native discovery matrix22",
+    "native binding matrix20",
+    "native Docker observation matrix23",
+    "native preview/watch matrix13",
+    "actual CLI SIGKILL supervision controls2",
+    "exact installed-source/native consumer with graph compilers unavailable",
+    "seven retained discovery providers",
+    "actual native Mach-O artifact rejected by Linux format gate"
+  ],
+  "initialInvocationFailure": {
+    "journal": "native-phase-journal.json",
+    "stage": 5,
+    "cause": "Direct adapter invocation omitted the existing retained runner, so storage_guard import was unavailable before any adapter control ran.",
+    "resolution": "Retried only this command through scripts/capabilities/retained_driver.py; all seven actual controls passed.",
+    "retryJournal": "native-adapter-retry-journal.json"
+  },
+  "fullReleaseAccepted": false,
+  "linuxImage": "separate required CI lane",
+  "metamapImageCompatibility": "separate required CI lane",
+  "linuxInstalledConsumer": "separate required CI lane",
+  "productionActivation": "not-performed"
+}

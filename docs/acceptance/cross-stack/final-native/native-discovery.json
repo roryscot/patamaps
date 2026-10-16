@@ -1,0 +1,1677 @@
+{
+  "status": "passed",
+  "phase": "discovery",
+  "profile": "patamaps-cross-stack-fixture-1",
+  "startedUtc": "2026-10-16T00:00:04.959269+00:00",
+  "commands": [
+    {
+      "label": "rust-version",
+      "argv": [
+        "rustc",
+        "-Vv"
+      ],
+      "cwd": ".",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.354,
+      "stdout": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/rust-version.stdout.log",
+        "digest": "sha256:b1184c1aecf3182548f3bbdd91e5043e464821b1dcbf6d5ca8246339bd0be84a"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/rust-version.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "cargo-version",
+      "argv": [
+        "cargo",
+        "--version"
+      ],
+      "cwd": ".",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.079,
+      "stdout": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/cargo-version.stdout.log",
+        "digest": "sha256:1f88eaf7fe1aaec83184752cf4c944cd22f00184136ff36a3e4c318cc60ef566"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/cargo-version.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "node-version",
+      "argv": [
+        "node",
+        "--version"
+      ],
+      "cwd": ".",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.039,
+      "stdout": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/node-version.stdout.log",
+        "digest": "sha256:33e26f35db6e57ce0c486ddc815fe966867e4f649e418eaf323f75f4720eb8e9"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/node-version.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "m1-format",
+      "argv": [
+        "cargo",
+        "fmt",
+        "--all",
+        "--",
+        "--check"
+      ],
+      "cwd": ".",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 1.288,
+      "stdout": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-format.stdout.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-format.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "m1-unit-and-process-tests",
+      "argv": [
+        "cargo",
+        "test",
+        "-p",
+        "patamaps-workspace",
+        "--locked",
+        "--offline"
+      ],
+      "cwd": ".",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 23.568,
+      "stdout": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-unit-and-process-tests.stdout.log",
+        "digest": "sha256:aebc01b89393fcf87c273f684cd3fa92f6b5252c2ac3ab8be1e1df64faa30424"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-unit-and-process-tests.stderr.log",
+        "digest": "sha256:92cacd53837b9122febe7869209e3662ee4e04dc67bbb7ea32760730606240ce"
+      }
+    },
+    {
+      "label": "m1-cli-build",
+      "argv": [
+        "cargo",
+        "build",
+        "-p",
+        "patamaps-cli",
+        "--locked",
+        "--offline"
+      ],
+      "cwd": ".",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 9.765,
+      "stdout": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-cli-build.stdout.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-cli-build.stderr.log",
+        "digest": "sha256:d088106bad4e1b5aec76c592db4a0274f10db57c2a82409e8c65cba5bc660d6f"
+      }
+    },
+    {
+      "label": "m1-selected-cargo",
+      "argv": [
+        "rustup",
+        "which",
+        "cargo"
+      ],
+      "cwd": ".",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.046,
+      "stdout": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-selected-cargo.stdout.log",
+        "digest": "sha256:dd378ad655d4e60562471508e6b41891f0db0a78ef3184cc83f02762073402e2"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-selected-cargo.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "m1-selected-rustc",
+      "argv": [
+        "rustup",
+        "which",
+        "rustc"
+      ],
+      "cwd": ".",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.025,
+      "stdout": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-selected-rustc.stdout.log",
+        "digest": "sha256:85d360d363e5f7bc0672f207f585c49cabd8da258789243e08e36e3e79481597"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-selected-rustc.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "m1-executor-description",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+        "engine"
+      ],
+      "cwd": ".",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 1.104,
+      "stdout": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-executor-description.stdout.log",
+        "digest": "sha256:fa524759ff3fe308945b52459fb575a769c801f82b21ef29d95710793f7a82d9"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-executor-description.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "m1-fixture-lock",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/intel-toolchain/installed/bin/cargo",
+        "generate-lockfile",
+        "--offline",
+        "--manifest-path",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/discovery-20261016T000004.958826Z/cases/base/Cargo.toml"
+      ],
+      "cwd": ".",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.085,
+      "stdout": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-fixture-lock.stdout.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-fixture-lock.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "m1-resolved-workspace-request",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+        "json",
+        "digest"
+      ],
+      "cwd": ".",
+      "expectedSuccess": true,
+      "stdin": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-resolved-workspace-request.stdin.json",
+        "digest": "sha256:d2a28e60f0ed1ac865d49c98a9897d6e4fcb4d949e5c1b8bdea778fef5e9702b"
+      },
+      "exitCode": 0,
+      "seconds": 0.018,
+      "stdout": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-resolved-workspace-request.stdout.log",
+        "digest": "sha256:365713608b82c821a9644c6be38c60807e70c5d8994e21aed5a3b851ad49b2a8"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-resolved-workspace-request.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "m1-resolved-workspace",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+        "discover-native"
+      ],
+      "cwd": ".tools/cross-stack/discovery-20261016T000004.958826Z/cases/base",
+      "expectedSuccess": true,
+      "stdin": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-resolved-workspace.stdin.json",
+        "digest": "sha256:d3b1fa98e3713b54213a3906b0628a2f3803adb351aab11565bf278945ab0b49"
+      },
+      "exitCode": 0,
+      "seconds": 4.417,
+      "stdout": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-resolved-workspace.stdout.log",
+        "digest": "sha256:683c273a4ac2b72329f0e718b33693cdbb8cda01842cb6f4e18d9d1933b17a8f"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-resolved-workspace.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "m1-resolved-workspace-shard-digest",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+        "json",
+        "digest"
+      ],
+      "cwd": ".",
+      "expectedSuccess": true,
+      "stdin": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-resolved-workspace-shard-digest.stdin.json",
+        "digest": "sha256:4c0422c53bae43463dce6c1925f61bda4ad0a0a55ebdc38390cdd8a54376d22f"
+      },
+      "exitCode": 0,
+      "seconds": 0.024,
+      "stdout": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-resolved-workspace-shard-digest.stdout.log",
+        "digest": "sha256:95d3d4112e6d078adfcbf71dbeced46f5a8a371b6c944f226a4b63495dffb344"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-resolved-workspace-shard-digest.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "m1-declared-view-request",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+        "json",
+        "digest"
+      ],
+      "cwd": ".",
+      "expectedSuccess": true,
+      "stdin": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-declared-view-request.stdin.json",
+        "digest": "sha256:555bbbf0b59987f524c121f7ebdd415001129ccb88085f50f24d15aeab369dec"
+      },
+      "exitCode": 0,
+      "seconds": 0.016,
+      "stdout": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-declared-view-request.stdout.log",
+        "digest": "sha256:d92eccfb38ebe61c65a1198c7ef9788e583180198aed7675c83e2d286096ae50"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-declared-view-request.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "m1-declared-view",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+        "discover-native"
+      ],
+      "cwd": ".tools/cross-stack/discovery-20261016T000004.958826Z/cases/base",
+      "expectedSuccess": true,
+      "stdin": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-declared-view.stdin.json",
+        "digest": "sha256:deb6e9b6ecfaae2a1c91f8fe37b2f62cfea8ffe604590a6cfb7310e9c5b9be98"
+      },
+      "exitCode": 0,
+      "seconds": 4.209,
+      "stdout": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-declared-view.stdout.log",
+        "digest": "sha256:55d21acfc6a39fc0763cfa8453fab7a43d4cd183fdc547b8d88f96cccd0af88d"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-declared-view.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "m1-declared-view-shard-digest",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+        "json",
+        "digest"
+      ],
+      "cwd": ".",
+      "expectedSuccess": true,
+      "stdin": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-declared-view-shard-digest.stdin.json",
+        "digest": "sha256:f76a1c101377aa75a706b53625f94c8b7d2a9c1517b9f23bad1f6517c435ded2"
+      },
+      "exitCode": 0,
+      "seconds": 0.029,
+      "stdout": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-declared-view-shard-digest.stdout.log",
+        "digest": "sha256:3a5c88223e218f12b62e290b066862dea22fe51c3295570cbc2dee347d9fec38"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-declared-view-shard-digest.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "m1-feature-disabled-request",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+        "json",
+        "digest"
+      ],
+      "cwd": ".",
+      "expectedSuccess": true,
+      "stdin": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-feature-disabled-request.stdin.json",
+        "digest": "sha256:ce4aaba1f9d15b55195100b8385ed13ee7829962fc63dea7d7b5be21c9552a1e"
+      },
+      "exitCode": 0,
+      "seconds": 0.017,
+      "stdout": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-feature-disabled-request.stdout.log",
+        "digest": "sha256:0737ccb45de941258092e0613b1a59c5edadd7b73e3348e5901bcf8a81bb65c3"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-feature-disabled-request.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "m1-feature-disabled",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+        "discover-native"
+      ],
+      "cwd": ".tools/cross-stack/discovery-20261016T000004.958826Z/cases/base",
+      "expectedSuccess": true,
+      "stdin": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-feature-disabled.stdin.json",
+        "digest": "sha256:4d5cc1e0bec74bc0a8ba35f32ca2992c68723273ceeee6566d9df52f36b41261"
+      },
+      "exitCode": 0,
+      "seconds": 4.38,
+      "stdout": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-feature-disabled.stdout.log",
+        "digest": "sha256:98d9a3b98d498d4ef5965b89c0c31db2b732781ee8cf9e9b03132bd415c34376"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-feature-disabled.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "m1-feature-disabled-shard-digest",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+        "json",
+        "digest"
+      ],
+      "cwd": ".",
+      "expectedSuccess": true,
+      "stdin": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-feature-disabled-shard-digest.stdin.json",
+        "digest": "sha256:023604a282337578cc92f0bac07d1cdecd6cdb1b3be4e2a649e2945507064ff3"
+      },
+      "exitCode": 0,
+      "seconds": 0.024,
+      "stdout": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-feature-disabled-shard-digest.stdout.log",
+        "digest": "sha256:a22b3467e5ceed081d05b538b0494dfe0708ca5197c4f0ccf7502fd1ced3ab43"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-feature-disabled-shard-digest.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "m1-root-relocated-request",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+        "json",
+        "digest"
+      ],
+      "cwd": ".",
+      "expectedSuccess": true,
+      "stdin": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-root-relocated-request.stdin.json",
+        "digest": "sha256:d2a28e60f0ed1ac865d49c98a9897d6e4fcb4d949e5c1b8bdea778fef5e9702b"
+      },
+      "exitCode": 0,
+      "seconds": 0.017,
+      "stdout": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-root-relocated-request.stdout.log",
+        "digest": "sha256:365713608b82c821a9644c6be38c60807e70c5d8994e21aed5a3b851ad49b2a8"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-root-relocated-request.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "m1-root-relocated",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+        "discover-native"
+      ],
+      "cwd": ".tools/cross-stack/discovery-20261016T000004.958826Z/cases/relocated",
+      "expectedSuccess": true,
+      "stdin": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-root-relocated.stdin.json",
+        "digest": "sha256:d3b1fa98e3713b54213a3906b0628a2f3803adb351aab11565bf278945ab0b49"
+      },
+      "exitCode": 0,
+      "seconds": 4.34,
+      "stdout": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-root-relocated.stdout.log",
+        "digest": "sha256:09b489a95c62cfde8d016ffaf4c7e977cc5cb6720c5c80d74314fc17e93683e8"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-root-relocated.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "m1-root-relocated-shard-digest",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+        "json",
+        "digest"
+      ],
+      "cwd": ".",
+      "expectedSuccess": true,
+      "stdin": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-root-relocated-shard-digest.stdin.json",
+        "digest": "sha256:4a06200dd49363c0ef0b6f83f524dcd35dec106bf4f86c6e2f0e4c78716d7e0c"
+      },
+      "exitCode": 0,
+      "seconds": 0.021,
+      "stdout": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-root-relocated-shard-digest.stdout.log",
+        "digest": "sha256:2064d0158916e7c675360021c441bd52454bbfce9ad0c87256b14056b6346b73"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-root-relocated-shard-digest.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "m1-malformed-toml-request",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+        "json",
+        "digest"
+      ],
+      "cwd": ".",
+      "expectedSuccess": true,
+      "stdin": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-malformed-toml-request.stdin.json",
+        "digest": "sha256:1a89d8c5c6f0903ea3ed07001561702584167a8dae22237e76c6d1214b1bfabe"
+      },
+      "exitCode": 0,
+      "seconds": 0.017,
+      "stdout": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-malformed-toml-request.stdout.log",
+        "digest": "sha256:07c8792d331feba2478839f406f77a237915f84df57bf4a39dcb00b5af32e715"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-malformed-toml-request.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "m1-malformed-toml",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+        "discover-native"
+      ],
+      "cwd": ".tools/cross-stack/discovery-20261016T000004.958826Z/cases/malformed",
+      "expectedSuccess": false,
+      "stdin": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-malformed-toml.stdin.json",
+        "digest": "sha256:04bee581a3c484a5a1ced44da45a9d46a61100f55f0c25ca5505288fc7282e39"
+      },
+      "exitCode": 2,
+      "seconds": 0.016,
+      "stdout": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-malformed-toml.stdout.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-malformed-toml.stderr.log",
+        "digest": "sha256:29e1d046aa38891c2446526b4d3fed291c43a879d42c369c814638a628c9aeda"
+      }
+    },
+    {
+      "label": "m1-duplicate-toml-request",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+        "json",
+        "digest"
+      ],
+      "cwd": ".",
+      "expectedSuccess": true,
+      "stdin": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-duplicate-toml-request.stdin.json",
+        "digest": "sha256:bcba947d27d57c64b648c185757b5c3ee65f0026ae0f415095bf33d30c105e32"
+      },
+      "exitCode": 0,
+      "seconds": 0.015,
+      "stdout": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-duplicate-toml-request.stdout.log",
+        "digest": "sha256:ac930947120e45723bb4822ec13c842d1501a50646b18e3f84889625dbb6ebed"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-duplicate-toml-request.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "m1-duplicate-toml",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+        "discover-native"
+      ],
+      "cwd": ".tools/cross-stack/discovery-20261016T000004.958826Z/cases/duplicate",
+      "expectedSuccess": false,
+      "stdin": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-duplicate-toml.stdin.json",
+        "digest": "sha256:1acbbc9af6556725fb7e7008521e319d5d6ba21367553abd816c8c93a60f99b8"
+      },
+      "exitCode": 2,
+      "seconds": 0.017,
+      "stdout": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-duplicate-toml.stdout.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-duplicate-toml.stderr.log",
+        "digest": "sha256:8c8b3e2332fc2c8199611820f82c137308e0aad3311068f473d0da69730726c4"
+      }
+    },
+    {
+      "label": "m1-unrecorded-member-request",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+        "json",
+        "digest"
+      ],
+      "cwd": ".",
+      "expectedSuccess": true,
+      "stdin": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-unrecorded-member-request.stdin.json",
+        "digest": "sha256:8bd34d7a915891f429dec30cbf5bd573d312bfa1b543cfb4fb8631cbf5ab5b40"
+      },
+      "exitCode": 0,
+      "seconds": 0.016,
+      "stdout": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-unrecorded-member-request.stdout.log",
+        "digest": "sha256:bccc7ba2106afe6771b53b2d7603341549547e04d80aab5a6f344b0f7fbeb214"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-unrecorded-member-request.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "m1-unrecorded-member",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+        "discover-native"
+      ],
+      "cwd": ".tools/cross-stack/discovery-20261016T000004.958826Z/cases/base",
+      "expectedSuccess": false,
+      "stdin": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-unrecorded-member.stdin.json",
+        "digest": "sha256:ca92786e5721e88659e7be725c0dbfe8a48d037ed714cc839487ea8ceb3e3ead"
+      },
+      "exitCode": 2,
+      "seconds": 0.017,
+      "stdout": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-unrecorded-member.stdout.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-unrecorded-member.stderr.log",
+        "digest": "sha256:aa281b693343ea57ab9b08c3a4ab167d7fbcae5cc16c814d470c41d091639206"
+      }
+    },
+    {
+      "label": "m1-missing-lock-request",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+        "json",
+        "digest"
+      ],
+      "cwd": ".",
+      "expectedSuccess": true,
+      "stdin": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-missing-lock-request.stdin.json",
+        "digest": "sha256:18a512dbfa2894be9ba4262cff739ae66ff650f970a0ce6d23a25a488e836b17"
+      },
+      "exitCode": 0,
+      "seconds": 0.018,
+      "stdout": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-missing-lock-request.stdout.log",
+        "digest": "sha256:0b4574edbaee0f8586a9aabafd1ad2be9f38644c593345423b142c3f8c3a6b74"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-missing-lock-request.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "m1-missing-lock",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+        "discover-native"
+      ],
+      "cwd": ".tools/cross-stack/discovery-20261016T000004.958826Z/cases/missing-lock",
+      "expectedSuccess": false,
+      "stdin": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-missing-lock.stdin.json",
+        "digest": "sha256:7e909c853aaae4729a4daef6f2847144ed98f1bc5cf01dea41adfc8bc9b4b763"
+      },
+      "exitCode": 2,
+      "seconds": 0.028,
+      "stdout": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-missing-lock.stdout.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-missing-lock.stderr.log",
+        "digest": "sha256:4a8a7e2f0d5b9e1903d49bac0f98170f8511b99c17f8372b2345e226c3560fc3"
+      }
+    },
+    {
+      "label": "m1-offline-unavailable-request",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+        "json",
+        "digest"
+      ],
+      "cwd": ".",
+      "expectedSuccess": true,
+      "stdin": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-offline-unavailable-request.stdin.json",
+        "digest": "sha256:c9db1f7a97c39bbc9fbac1e36d1b2a409adcbf55265cc9973b6f6967f32b70fb"
+      },
+      "exitCode": 0,
+      "seconds": 0.016,
+      "stdout": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-offline-unavailable-request.stdout.log",
+        "digest": "sha256:23ca1b27d0552d1a4a1d157b8f658416dfc9bc858b4e0b848ed724ac9bf88b80"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-offline-unavailable-request.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "m1-offline-unavailable",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+        "discover-native"
+      ],
+      "cwd": ".tools/cross-stack/discovery-20261016T000004.958826Z/cases/offline-dependency",
+      "expectedSuccess": false,
+      "stdin": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-offline-unavailable.stdin.json",
+        "digest": "sha256:874c92b084e2752d8290d55c6587208a55e3f4487034bac558dcd2621b421b8d"
+      },
+      "exitCode": 2,
+      "seconds": 2.26,
+      "stdout": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-offline-unavailable.stdout.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-offline-unavailable.stderr.log",
+        "digest": "sha256:5801df89ca98b6f3b48f25a765cf88676a9fad22a46ab33187606bd8f8b44930"
+      }
+    },
+    {
+      "label": "m1-real-service-request",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+        "json",
+        "digest"
+      ],
+      "cwd": ".",
+      "expectedSuccess": true,
+      "stdin": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-real-service-request.stdin.json",
+        "digest": "sha256:fb61fb42f1bb98dd940b41345ac0ff7b5567abfe2a7330cbac385e9fdc9974e6"
+      },
+      "exitCode": 0,
+      "seconds": 0.016,
+      "stdout": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-real-service-request.stdout.log",
+        "digest": "sha256:8fb1f060ee69cf0f6a389ed26a5edfc2ef2fdcba1ede981c16f46c83ab66390b"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-real-service-request.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "m1-real-service",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+        "discover-native"
+      ],
+      "cwd": ".tools/cross-stack/discovery-20261016T000004.958826Z/cases/real-service",
+      "expectedSuccess": true,
+      "stdin": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-real-service.stdin.json",
+        "digest": "sha256:631a7855266e40f3d1aa46d4d5b885b8839c32dca59f15e78e262ae32aa5cb6e"
+      },
+      "exitCode": 0,
+      "seconds": 3.901,
+      "stdout": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-real-service.stdout.log",
+        "digest": "sha256:be7ad214673a8a5c06da57a6447b68e9c041a201435a0515fad52374914a2cb5"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-real-service.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "m1-real-service-shard-digest",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+        "json",
+        "digest"
+      ],
+      "cwd": ".",
+      "expectedSuccess": true,
+      "stdin": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-real-service-shard-digest.stdin.json",
+        "digest": "sha256:acf1138a888e7443be491d86e28007d807c7c37499960764f5a4e2a9827803f3"
+      },
+      "exitCode": 0,
+      "seconds": 0.05,
+      "stdout": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-real-service-shard-digest.stdout.log",
+        "digest": "sha256:8c6c7f8ba4f785da68bbd902d139be1c42d6eb64f19bea1c0db6066b8cb58956"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-real-service-shard-digest.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "m1-oversized-tool-request",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+        "json",
+        "digest"
+      ],
+      "cwd": ".",
+      "expectedSuccess": true,
+      "stdin": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-oversized-tool-request.stdin.json",
+        "digest": "sha256:585e42a11fc99accc720381aa8135454074c65601da47f8398396aac8a0e6678"
+      },
+      "exitCode": 0,
+      "seconds": 0.018,
+      "stdout": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-oversized-tool-request.stdout.log",
+        "digest": "sha256:002f3f49693b6b9d34d176229247ad647b4d794180cadb922e813428ab22ed11"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-oversized-tool-request.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "m1-oversized-tool",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+        "discover-native"
+      ],
+      "cwd": ".tools/cross-stack/discovery-20261016T000004.958826Z/cases/base",
+      "expectedSuccess": false,
+      "stdin": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-oversized-tool.stdin.json",
+        "digest": "sha256:e0266f06916b71319bfa8604c678ac548641a8c16e64aba5f6b67f2f6ed026f2"
+      },
+      "exitCode": 2,
+      "seconds": 0.025,
+      "stdout": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-oversized-tool.stdout.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-oversized-tool.stderr.log",
+        "digest": "sha256:45eb4853fae8edff3495a8c025e652cbd0506bed30d8ebc7265885eb69fef369"
+      }
+    },
+    {
+      "label": "m1-out-of-scope-path-request",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+        "json",
+        "digest"
+      ],
+      "cwd": ".",
+      "expectedSuccess": true,
+      "stdin": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-out-of-scope-path-request.stdin.json",
+        "digest": "sha256:96c17e33e7df9a0abcebceef4fa5dc769101fec8de85ba49f85004bb04896c8a"
+      },
+      "exitCode": 0,
+      "seconds": 0.016,
+      "stdout": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-out-of-scope-path-request.stdout.log",
+        "digest": "sha256:d3e62a5825f350e4fb3bcb47307f5d50fcda8ab03a2ae75da55d2da980f63cf7"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-out-of-scope-path-request.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "m1-out-of-scope-path",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+        "discover-native"
+      ],
+      "cwd": ".tools/cross-stack/discovery-20261016T000004.958826Z/cases/escaped",
+      "expectedSuccess": false,
+      "stdin": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-out-of-scope-path.stdin.json",
+        "digest": "sha256:4f8c7f096a51436690918a1004abde77d9235e13ebfcd7647353d3ea9d09a8ae"
+      },
+      "exitCode": 2,
+      "seconds": 0.018,
+      "stdout": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-out-of-scope-path.stdout.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-out-of-scope-path.stderr.log",
+        "digest": "sha256:9f12b5869b3fa234ad8c4cb47f23065ab37f2b2e245f294a41d7b5fa69d2625d"
+      }
+    },
+    {
+      "label": "m1-explicit-config-request",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+        "json",
+        "digest"
+      ],
+      "cwd": ".",
+      "expectedSuccess": true,
+      "stdin": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-explicit-config-request.stdin.json",
+        "digest": "sha256:f4a69662682bbe1d1998a8ee65a644db74d38bacbaa2fd798203686ee12153b5"
+      },
+      "exitCode": 0,
+      "seconds": 0.016,
+      "stdout": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-explicit-config-request.stdout.log",
+        "digest": "sha256:ef47df17618fe23cb968a9ae90de9ece7a21dbd9527bafa642daf528440c5696"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-explicit-config-request.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "m1-explicit-config",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+        "discover-native"
+      ],
+      "cwd": ".tools/cross-stack/discovery-20261016T000004.958826Z/cases/config",
+      "expectedSuccess": true,
+      "stdin": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-explicit-config.stdin.json",
+        "digest": "sha256:22efc03a79fbcce612c4d9bd517716c1330f9febbe089ef926f1f80a6fb1ba8b"
+      },
+      "exitCode": 0,
+      "seconds": 4.338,
+      "stdout": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-explicit-config.stdout.log",
+        "digest": "sha256:28a813ef5b7f280591e6372649836563bad8529593698207c171a4fa6bc6664e"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-explicit-config.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "m1-explicit-config-shard-digest",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+        "json",
+        "digest"
+      ],
+      "cwd": ".",
+      "expectedSuccess": true,
+      "stdin": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-explicit-config-shard-digest.stdin.json",
+        "digest": "sha256:6da9051342d19492c277929a18cd5cd4e07b1b9fc2aa263f4b9ee1bd9eaa307c"
+      },
+      "exitCode": 0,
+      "seconds": 0.023,
+      "stdout": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-explicit-config-shard-digest.stdout.log",
+        "digest": "sha256:b41d7ae569640d946f206f225d36278e973de905a2cd351f3f19227767a50e50"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-explicit-config-shard-digest.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "m1-unrecorded-config-request",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+        "json",
+        "digest"
+      ],
+      "cwd": ".",
+      "expectedSuccess": true,
+      "stdin": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-unrecorded-config-request.stdin.json",
+        "digest": "sha256:d2a28e60f0ed1ac865d49c98a9897d6e4fcb4d949e5c1b8bdea778fef5e9702b"
+      },
+      "exitCode": 0,
+      "seconds": 0.016,
+      "stdout": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-unrecorded-config-request.stdout.log",
+        "digest": "sha256:365713608b82c821a9644c6be38c60807e70c5d8994e21aed5a3b851ad49b2a8"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-unrecorded-config-request.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "m1-unrecorded-config",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+        "discover-native"
+      ],
+      "cwd": ".tools/cross-stack/discovery-20261016T000004.958826Z/cases/config",
+      "expectedSuccess": false,
+      "stdin": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-unrecorded-config.stdin.json",
+        "digest": "sha256:d3b1fa98e3713b54213a3906b0628a2f3803adb351aab11565bf278945ab0b49"
+      },
+      "exitCode": 2,
+      "seconds": 0.027,
+      "stdout": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-unrecorded-config.stdout.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-unrecorded-config.stderr.log",
+        "digest": "sha256:cef6a0128af17502ffd6e0ddf706e868b844140d807b18f8b84a0fc55a6af8df"
+      }
+    },
+    {
+      "label": "m1-mismatched-toolchain-request",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+        "json",
+        "digest"
+      ],
+      "cwd": ".",
+      "expectedSuccess": true,
+      "stdin": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-mismatched-toolchain-request.stdin.json",
+        "digest": "sha256:b7b60436ffce7108e03e1ffc5de1f4020e74e51b92e7e8548e692e25905ac46b"
+      },
+      "exitCode": 0,
+      "seconds": 0.017,
+      "stdout": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-mismatched-toolchain-request.stdout.log",
+        "digest": "sha256:b90d532fd3142802c1671c3498bc4b58367041c8bc0829df6547f4975c706667"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-mismatched-toolchain-request.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "m1-mismatched-toolchain",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+        "discover-native"
+      ],
+      "cwd": ".tools/cross-stack/discovery-20261016T000004.958826Z/cases/mismatched-toolchain",
+      "expectedSuccess": false,
+      "stdin": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-mismatched-toolchain.stdin.json",
+        "digest": "sha256:1dd81c5f72111f87397debb3ec0c94ed3d420abfdb5b026a31bd39de44f9c2ea"
+      },
+      "exitCode": 2,
+      "seconds": 2.154,
+      "stdout": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-mismatched-toolchain.stdout.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-mismatched-toolchain.stderr.log",
+        "digest": "sha256:26306899eec6872abfa9425207a359d29ae645b115a0f1e3cbf805e050d3edb6"
+      }
+    },
+    {
+      "label": "m1-unrecorded-toolchain-request",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+        "json",
+        "digest"
+      ],
+      "cwd": ".",
+      "expectedSuccess": true,
+      "stdin": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-unrecorded-toolchain-request.stdin.json",
+        "digest": "sha256:7b35b13412d12976b4d92a99454c7db78d8812554ed1a3ab91e2cb89a13fbad5"
+      },
+      "exitCode": 0,
+      "seconds": 0.016,
+      "stdout": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-unrecorded-toolchain-request.stdout.log",
+        "digest": "sha256:f57f8f4624a2a7a5cff207beee4ae313760388232f6e8f1e3bf930a9cde9a039"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-unrecorded-toolchain-request.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "m1-unrecorded-toolchain",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+        "discover-native"
+      ],
+      "cwd": ".tools/cross-stack/discovery-20261016T000004.958826Z/cases/base",
+      "expectedSuccess": false,
+      "stdin": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-unrecorded-toolchain.stdin.json",
+        "digest": "sha256:c438d1a794ceecbea8235481a6acfe31caa9e3039f2bb4bec8605a8acd45267d"
+      },
+      "exitCode": 2,
+      "seconds": 0.024,
+      "stdout": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-unrecorded-toolchain.stdout.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-unrecorded-toolchain.stderr.log",
+        "digest": "sha256:aaf15555af13181c1e196504a807fa10dcb05a4193ef0469c7a8ee0169dfb7a3"
+      }
+    },
+    {
+      "label": "m1-executable-override-request",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+        "json",
+        "digest"
+      ],
+      "cwd": ".",
+      "expectedSuccess": true,
+      "stdin": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-executable-override-request.stdin.json",
+        "digest": "sha256:adf584b02ab66d0ef641a3e7bcb5f1ce433f4a24ff2883bcb23ff3e5b3f43e44"
+      },
+      "exitCode": 0,
+      "seconds": 0.016,
+      "stdout": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-executable-override-request.stdout.log",
+        "digest": "sha256:3714be59dbfd4c8566878e0e0c13d1a5001eef2ba73d1d6b215cbfe40df53bf5"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-executable-override-request.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "m1-executable-override",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+        "discover-native"
+      ],
+      "cwd": ".tools/cross-stack/discovery-20261016T000004.958826Z/cases/unsafe-config",
+      "expectedSuccess": false,
+      "stdin": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-executable-override.stdin.json",
+        "digest": "sha256:37f2ae4fa7dc32f976d3635c9264b12ddbc51e929e9bc51e964983235540ac7b"
+      },
+      "exitCode": 2,
+      "seconds": 0.017,
+      "stdout": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-executable-override.stdout.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-executable-override.stderr.log",
+        "digest": "sha256:29d3d3ff1efb39efa0d307dec90ef3d879c511a8da95c3ab0249b1b19f65c09b"
+      }
+    },
+    {
+      "label": "m1-ambient-config-request",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+        "json",
+        "digest"
+      ],
+      "cwd": ".",
+      "expectedSuccess": true,
+      "stdin": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-ambient-config-request.stdin.json",
+        "digest": "sha256:d2a28e60f0ed1ac865d49c98a9897d6e4fcb4d949e5c1b8bdea778fef5e9702b"
+      },
+      "exitCode": 0,
+      "seconds": 0.018,
+      "stdout": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-ambient-config-request.stdout.log",
+        "digest": "sha256:365713608b82c821a9644c6be38c60807e70c5d8994e21aed5a3b851ad49b2a8"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-ambient-config-request.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "m1-ambient-config",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+        "discover-native"
+      ],
+      "cwd": ".tools/cross-stack/discovery-20261016T000004.958826Z/ambient-parent/owner",
+      "expectedSuccess": false,
+      "stdin": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-ambient-config.stdin.json",
+        "digest": "sha256:d3b1fa98e3713b54213a3906b0628a2f3803adb351aab11565bf278945ab0b49"
+      },
+      "exitCode": 2,
+      "seconds": 0.026,
+      "stdout": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-ambient-config.stdout.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-ambient-config.stderr.log",
+        "digest": "sha256:18e6979dc033180bf2eeeb8ffa21973302bf27ebdd0732af56e6db79a988e531"
+      }
+    },
+    {
+      "label": "m1-tool-substitution-request",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+        "json",
+        "digest"
+      ],
+      "cwd": ".",
+      "expectedSuccess": true,
+      "stdin": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-tool-substitution-request.stdin.json",
+        "digest": "sha256:6ea1c8a57d3eeb8aa645bd0cb2a5f612fa28f18ee6285bf66b20d451a0f4f5d8"
+      },
+      "exitCode": 0,
+      "seconds": 0.017,
+      "stdout": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-tool-substitution-request.stdout.log",
+        "digest": "sha256:1ea35d01a09677f80e3247367780e1ffacb9dd68449a95b7a8fb9715c7283b3d"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-tool-substitution-request.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "m1-tool-substitution",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+        "discover-native"
+      ],
+      "cwd": ".tools/cross-stack/discovery-20261016T000004.958826Z/cases/base",
+      "expectedSuccess": false,
+      "stdin": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-tool-substitution.stdin.json",
+        "digest": "sha256:9dec0e9baadc7b165f0bc72f6c527e8eb119f141b8ba1cfbb5e2f03fd9291a5c"
+      },
+      "exitCode": 2,
+      "seconds": 2.039,
+      "stdout": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-tool-substitution.stdout.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-tool-substitution.stderr.log",
+        "digest": "sha256:7200fe98fcfabf830c30ae8b0671e7c906093f72695f07321ed5da28ab048969"
+      }
+    },
+    {
+      "label": "m1-stale-source-request",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+        "json",
+        "digest"
+      ],
+      "cwd": ".",
+      "expectedSuccess": true,
+      "stdin": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-stale-source-request.stdin.json",
+        "digest": "sha256:d2a28e60f0ed1ac865d49c98a9897d6e4fcb4d949e5c1b8bdea778fef5e9702b"
+      },
+      "exitCode": 0,
+      "seconds": 0.016,
+      "stdout": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-stale-source-request.stdout.log",
+        "digest": "sha256:365713608b82c821a9644c6be38c60807e70c5d8994e21aed5a3b851ad49b2a8"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-stale-source-request.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "m1-stale-source",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+        "discover-native"
+      ],
+      "cwd": ".tools/cross-stack/discovery-20261016T000004.958826Z/cases/stale-source",
+      "expectedSuccess": false,
+      "stdin": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-stale-source.stdin.json",
+        "digest": "sha256:d3b1fa98e3713b54213a3906b0628a2f3803adb351aab11565bf278945ab0b49"
+      },
+      "exitCode": 2,
+      "seconds": 0.018,
+      "stdout": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-stale-source.stdout.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-stale-source.stderr.log",
+        "digest": "sha256:c0900b8b40bfae7fa812a59c5615ca06f13972c477a7403e1c8544320995fb3e"
+      }
+    },
+    {
+      "label": "m1-workspace-native-bridge",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+        "generate",
+        "workspace.json",
+        "--root",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/discovery-20261016T000004.958826Z/cases/workspace-bridge"
+      ],
+      "cwd": ".tools/cross-stack/discovery-20261016T000004.958826Z/cases/workspace-bridge",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 9.475,
+      "stdout": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-workspace-native-bridge.stdout.log",
+        "digest": "sha256:8a6f49be35b6fe2677e7d6731c16fff4cafcd1c879a6c2308bac0f7bbc99ccc9"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-workspace-native-bridge.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "m1-workspace-offline-before",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+        "verify-workspace",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/discovery-20261016T000004.958826Z/native-workspace-baseline.json"
+      ],
+      "cwd": ".",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.417,
+      "stdout": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-workspace-offline-before.stdout.log",
+        "digest": "sha256:5258f0767af9bbb25e8117d4dbcbf1fa4d50764fe35685fcb723ed42f8ef07bb"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-workspace-offline-before.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "m1-workspace-offline-without-inputs-tools-node",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+        "verify-workspace",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/discovery-20261016T000004.958826Z/native-workspace-baseline.json"
+      ],
+      "cwd": ".tools/cross-stack/discovery-20261016T000004.958826Z",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.367,
+      "stdout": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-workspace-offline-without-inputs-tools-node.stdout.log",
+        "digest": "sha256:5258f0767af9bbb25e8117d4dbcbf1fa4d50764fe35685fcb723ed42f8ef07bb"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-workspace-offline-without-inputs-tools-node.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "m1-rehash-tampered-baseline",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+        "json",
+        "digest"
+      ],
+      "cwd": ".",
+      "expectedSuccess": true,
+      "stdin": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-rehash-tampered-baseline.stdin.json",
+        "digest": "sha256:beedeadd8e58504f39f47e7bbc10523a3f95ac9d00354059991b2f313985b221"
+      },
+      "exitCode": 0,
+      "seconds": 0.034,
+      "stdout": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-rehash-tampered-baseline.stdout.log",
+        "digest": "sha256:a6a43bde7e8c9c81bce73871363bf0d2525b134ba09890834c54c198ddbe1b49"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-rehash-tampered-baseline.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "m1-offline-rehashed-lineage-refusal",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+        "verify-workspace",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/discovery-20261016T000004.958826Z/tampered-rehashed-baseline.json"
+      ],
+      "cwd": ".",
+      "expectedSuccess": false,
+      "exitCode": 2,
+      "seconds": 0.358,
+      "stdout": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-offline-rehashed-lineage-refusal.stdout.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/discovery-20261016T000004.958826Z/m1-offline-rehashed-lineage-refusal.stderr.log",
+        "digest": "sha256:dfecf9114e3eb29a0d9d40d0ab97fe791d501260e88162f2ca9540e152ddee93"
+      }
+    }
+  ],
+  "retainedWork": ".tools/cross-stack/discovery-20261016T000004.958826Z",
+  "filesDeleted": [],
+  "fullCrossStackAcceptance": false,
+  "containerAcceptance": "not-run",
+  "browserAcceptance": "not-run",
+  "generatedRegistration": "not-evaluated-by-this-phase",
+  "sourceInventory": {
+    "examples/cross-stack/.dockerignore": "sha256:ab935c7c81106d3bccd86f7b2e3edfbdb6712670b72296d189a528c1aeacfb7c",
+    "examples/cross-stack/.gitignore": "sha256:e0f20864aa53885a1456384f06a5893f8a70425f2d5ed4039c2ac48f1fe3b2a4",
+    "examples/cross-stack/README.md": "sha256:cf42e233b206e7bac4fe9711f55051e29ea271ab1eccba1b61571c2c0ea92ed7",
+    "examples/cross-stack/acceptance/browser/check.cjs": "sha256:ff28940a3cf2e79a83fe8b14092e7337a01d4b545baa6589d54dd8245e3025c9",
+    "examples/cross-stack/acceptance/browser/package-lock.json": "sha256:ebcfa8a29e03904cb1cac186a01dba982cf58d879de254b81a64fc61907c879a",
+    "examples/cross-stack/acceptance/browser/package.json": "sha256:01b94cf432c7195700ab1a8fccc12e2c440740be6eed5548688f48037c0e86bb",
+    "examples/cross-stack/acceptance/browser/probe.cjs": "sha256:53f2a90c440a8dddb3297c084f2afc31681553aea75e13cd64030f537894a1c4",
+    "examples/cross-stack/acceptance/check-runtime.cjs": "sha256:36ec0c346058167e947bf152ebf1dac9237c4ff31e19754c239833a692b4f1e6",
+    "examples/cross-stack/acceptance/expected.json": "sha256:4b6fe10f673674d8947725b849a61435858305f856adf588e0040faafafbe404",
+    "examples/cross-stack/acceptance/m2-expected.json": "sha256:0cc635f035e1c29bc910ff3f5219e6efae11ce81b15f00caf7a30d87ac66e242",
+    "examples/cross-stack/acceptance/m3-expected.json": "sha256:96e02942558e6d08449ec80cf52ffd2b3c6dff85838ff2665bffd2a4ce865f1f",
+    "examples/cross-stack/acceptance/m4-expected.json": "sha256:68d95411eb7a99b8d3f195bee8427ee8c430bcb17e23a63392ba43fc3263886c",
+    "examples/cross-stack/acceptance/m5-expected.json": "sha256:59f31ca1c245b1b7f83e791dccbcdb6150df365bedd5720732ef0802808cf9b2",
+    "examples/cross-stack/acceptance/m6-expected.json": "sha256:7328a42a77d3e1a4e1a494ee2f62c6ccb980e50a3fa3db28ddbe19f02153277c",
+    "examples/cross-stack/acceptance/m7-expected.json": "sha256:f04ecce90aed86fb9a065b1288b0fb682f165f352e0487ddc6565453a4f0e2a6",
+    "examples/cross-stack/build.py": "sha256:f5e76b2176ea610fbf0086951f181e890721822ddfcbc3a1cb442f8b100ddee3",
+    "examples/cross-stack/compatibility/check.mjs": "sha256:3c4d5e22cbd8c604bbf1e916a280be852fbb8956caebd4962fd916e90154ec07",
+    "examples/cross-stack/config/service.toml": "sha256:ec046d3e08183708c3aae0453ce0cb4febe7b875452d781ea867897b65bccd07",
+    "examples/cross-stack/contracts/create-item.request.schema.json": "sha256:e814007c18146f82674e36f5dc6fb1affe8e871f828c8ddff117f244e2ddfe95",
+    "examples/cross-stack/contracts/create-item.response.schema.json": "sha256:3c49c73af83622c4678aedd932a53e51f71b78db7de502b68a9ed36a46af7113",
+    "examples/cross-stack/contracts/operations.json": "sha256:70695fc7f6200ad069807d69dcda11c30d940a805ed810d54b2f3884971bb2df",
+    "examples/cross-stack/deploy/Dockerfile": "sha256:2485c87a010768616242c99653279915f483056448ca0bc8ca7758613ea50868",
+    "examples/cross-stack/dev.py": "sha256:58df26a3eb1068bf4942d42db7e3867204f7d4fe767b98f6ceaba5958219a7f3",
+    "examples/cross-stack/mappings/README.md": "sha256:594388cf251b81e2c1a87afe1fa3c093b6a36dd7cc667230407917678bf2cbbb",
+    "examples/cross-stack/mappings/routing-pack.json": "sha256:64cb8bad363e056b99e62fca7f1eca95c46790dcb0c4dd8c2f987c0ed4ff601f",
+    "examples/cross-stack/service/Cargo.lock": "sha256:3e511df39108267fd2cf10a9b49dd49db589ae1f49b6fb8b9152779d365a99c3",
+    "examples/cross-stack/service/Cargo.toml": "sha256:fdd1f664593da2163ad70802e6c2bc8b922dcd019500550c349efbb556cba77c",
+    "examples/cross-stack/service/LICENSE": "sha256:cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+    "examples/cross-stack/service/NOTICE": "sha256:b0454a6c73ccd381741a9ab4a62eb8d432b9b94313c3d674a3136733a1f9d5e2",
+    "examples/cross-stack/service/licenses/rust-1.99.0/COPYRIGHT": "sha256:172020dbfd5b53a226dfde77616190a48dcff519b0bc0e6deb91a8450782c4af",
+    "examples/cross-stack/service/licenses/rust-1.99.0/LICENSE-APACHE": "sha256:62c7a1e35f56406896d7aa7ca52d0cc0d272ac022b5d2796e7d6905db8a3636a",
+    "examples/cross-stack/service/licenses/rust-1.99.0/LICENSE-MIT": "sha256:b71bd43a069ca0641a9ecfe585ca7b3c53b5cc1608f8b68321168698e28b5ea1",
+    "examples/cross-stack/service/licenses/rust-1.99.0/SHA256SUMS": "sha256:9fb0c6a364b162c4c0d884f64bda342d8a6679ccbb8110e7e7859e0b3ccc1aea",
+    "examples/cross-stack/service/licenses/rust-1.99.0/SOURCE.json": "sha256:432104cab103476b59b2a61349ea888a91dc7fe7b7381ec9c9d39bbfc878384c",
+    "examples/cross-stack/service/rust-toolchain.toml": "sha256:515c80a149c1e927d497dbebc399e241822aa0197e8f778c21bf5c136c90afd2",
+    "examples/cross-stack/service/src/generated.rs": "sha256:6a396d3ae3a7a433567fbd9a47dcb013794c996faaa16d2d4eeaf9907181616a",
+    "examples/cross-stack/service/src/handlers/create_item.rs": "sha256:1e04089800d93b65af6823c1be25653244b70252723e6f9df4005e80a2eea962",
+    "examples/cross-stack/service/src/lib.rs": "sha256:0e146354d88c717330e199cd284004ca7963710fb3387b2fa8c9945274b17101",
+    "examples/cross-stack/service/src/main.rs": "sha256:2b6ef5e614e3739719c2ab7eae934671be0f858a8eda4399acb59673e660c0ee",
+    "examples/cross-stack/service/tools/collect-notices.sh": "sha256:d978f08439038f9e84656a1c5f86c0020c00dd4ab7932781ed20f8de5761aaef",
+    "examples/cross-stack/support.json": "sha256:6570585d1ecc1e249cd0f4af0a897965986d480b488d9e84c0fdda3203b0de9e",
+    "examples/cross-stack/web/app/api/items/route.ts": "sha256:b4f98c92dae67ee6096f652b30193f9cbc2311caeab97ca9af113f2ac0c1e4c8",
+    "examples/cross-stack/web/app/items/[id]/page.tsx": "sha256:5b7d5248fbaa949f9368bd4cd8d292095dc8addc292d3688207cd93d7ef1c074",
+    "examples/cross-stack/web/app/layout.tsx": "sha256:c1948db0db63dcabb24d969c4d4d7d55277304aeb7cc4ffa2485ca6fb3464693",
+    "examples/cross-stack/web/app/page.tsx": "sha256:627dab52cb3d33f06b92190f3c4134195d27f4c4e19bc1f17a8b0acd23c10c31",
+    "examples/cross-stack/web/generated/operations.ts": "sha256:c3121a2337620abb60e93f900ae5582f78e8224ccc9498e439cfdbdb9b911ac1",
+    "examples/cross-stack/web/next.config.mjs": "sha256:d9be514b014a67dbf2f6aeb0acd2b5b87801e378127d4ae8f592af5e39460b25",
+    "examples/cross-stack/web/package-lock.json": "sha256:b2d52eccd71b29bd6e6938292d3ef692e434ac4ca77e8508ed0da7c57fbc2d59",
+    "examples/cross-stack/web/package.json": "sha256:3bcba3a9906f2dd519ab7863a9174d4262aba9246977bfba96ad090ffdfd6334",
+    "examples/cross-stack/web/tsconfig.json": "sha256:45fd26769ac1a8f0b8741099674b71e00846b9f97ce1b7cb7afb98c7922ce7f0",
+    "examples/cross-stack/workspace.py": "sha256:563f973dc240fb7eae87dd4994a110d85c379dff2f98db62414dff66df76bfa3"
+  },
+  "discoveryChecks": {
+    "status": "passed",
+    "controls": [
+      {
+        "control": "m1-resolved-workspace",
+        "result": "observed",
+        "view": "resolved",
+        "manifestsAndLocksUnchanged": true,
+        "projectBuildScriptExecuted": false,
+        "requestDigest": "sha256:d7a577039531a06fd8f2d76752daef351a8bdbbaab641efc03cf349d21603cc2",
+        "shardDigest": "sha256:7c73de6ab4e17560ff3ccc8966e97ff1d8eb97a39a6007abcadef2ee2fd3e985"
+      },
+      {
+        "control": "m1-declared-view",
+        "result": "observed",
+        "view": "declared-local",
+        "manifestsAndLocksUnchanged": true,
+        "projectBuildScriptExecuted": false,
+        "requestDigest": "sha256:60800fe2769bf033ae2b6ec3cae5f5df832ccf788c0f31cc582b8b3e7ddc1386",
+        "shardDigest": "sha256:96a83a7f4fbb4e8b3033f93593cc0fb14041a12670e2d11ff17c6a9b20ede095"
+      },
+      {
+        "control": "m1-feature-disabled",
+        "result": "observed",
+        "view": "resolved",
+        "manifestsAndLocksUnchanged": true,
+        "projectBuildScriptExecuted": false,
+        "requestDigest": "sha256:6d60bff9c6916148abddb60418bc64be69594534011155abd207004378d156e0",
+        "shardDigest": "sha256:e619fbde64f3c6292699ceb9dbe27ca643fe1b198136c9a7cb23b18e450e7eac"
+      },
+      {
+        "control": "m1-root-relocated",
+        "result": "observed",
+        "view": "resolved",
+        "manifestsAndLocksUnchanged": true,
+        "projectBuildScriptExecuted": false,
+        "requestDigest": "sha256:d7a577039531a06fd8f2d76752daef351a8bdbbaab641efc03cf349d21603cc2",
+        "shardDigest": "sha256:548bd632c368ce7aca0c0cf1fbd013131d28c202c1729bc4c6885ab1189c07c0"
+      },
+      {
+        "control": "m1-malformed-toml",
+        "result": "refused",
+        "code": "NATIVE_TOML_SYNTAX",
+        "manifestsAndLocksUnchanged": true,
+        "projectBuildScriptExecuted": false
+      },
+      {
+        "control": "m1-duplicate-toml",
+        "result": "refused",
+        "code": "NATIVE_TOML_SYNTAX",
+        "manifestsAndLocksUnchanged": true,
+        "projectBuildScriptExecuted": false
+      },
+      {
+        "control": "m1-unrecorded-member",
+        "result": "refused",
+        "code": "NATIVE_CARGO_MANIFEST_INPUT",
+        "manifestsAndLocksUnchanged": true,
+        "projectBuildScriptExecuted": false
+      },
+      {
+        "control": "m1-missing-lock",
+        "result": "refused",
+        "code": "NATIVE_CARGO_INPUT",
+        "manifestsAndLocksUnchanged": true,
+        "projectBuildScriptExecuted": false
+      },
+      {
+        "control": "m1-offline-unavailable",
+        "result": "refused",
+        "code": "NATIVE_CARGO_UNAVAILABLE",
+        "manifestsAndLocksUnchanged": true,
+        "projectBuildScriptExecuted": false
+      },
+      {
+        "control": "m1-real-service",
+        "result": "observed",
+        "view": "resolved",
+        "manifestsAndLocksUnchanged": true,
+        "projectBuildScriptExecuted": false,
+        "requestDigest": "sha256:f615f36357960223b14787121be678463672b6e1533ca708e42af9c9a2fd26dd",
+        "shardDigest": "sha256:36b03b351281edfe730966385e02fafd72d526cece35199926e28056e0e3e252"
+      },
+      {
+        "control": "m1-oversized-tool",
+        "result": "refused",
+        "code": "NATIVE_CARGO_TOOL_REFUSED",
+        "manifestsAndLocksUnchanged": true,
+        "projectBuildScriptExecuted": false
+      },
+      {
+        "control": "m1-out-of-scope-path",
+        "result": "refused",
+        "code": "NATIVE_CARGO_PATH_ESCAPE",
+        "manifestsAndLocksUnchanged": true,
+        "projectBuildScriptExecuted": false
+      },
+      {
+        "control": "m1-explicit-config",
+        "result": "observed",
+        "view": "resolved",
+        "manifestsAndLocksUnchanged": true,
+        "projectBuildScriptExecuted": false,
+        "requestDigest": "sha256:cb4226edf00f0e1d935e312dc04e01e76c0e446b095d5ddda257eef51ce4115c",
+        "shardDigest": "sha256:af4aef2a714fe9081b319940c29e0d98756cb46bdb1f7dd9b4d8c8b497114baa"
+      },
+      {
+        "control": "m1-unrecorded-config",
+        "result": "refused",
+        "code": "NATIVE_CARGO_CONFIG_INPUT",
+        "manifestsAndLocksUnchanged": true,
+        "projectBuildScriptExecuted": false
+      },
+      {
+        "control": "m1-mismatched-toolchain",
+        "result": "refused",
+        "code": "NATIVE_CARGO_TOOLCHAIN",
+        "manifestsAndLocksUnchanged": true,
+        "projectBuildScriptExecuted": false
+      },
+      {
+        "control": "m1-unrecorded-toolchain",
+        "result": "refused",
+        "code": "NATIVE_CARGO_CONFIG_INPUT",
+        "manifestsAndLocksUnchanged": true,
+        "projectBuildScriptExecuted": false
+      },
+      {
+        "control": "m1-executable-override",
+        "result": "refused",
+        "code": "NATIVE_CARGO_CONFIG",
+        "manifestsAndLocksUnchanged": true,
+        "projectBuildScriptExecuted": false
+      },
+      {
+        "control": "m1-ambient-config",
+        "result": "refused",
+        "code": "NATIVE_CARGO_AMBIENT_CONFIG",
+        "manifestsAndLocksUnchanged": true,
+        "projectBuildScriptExecuted": false
+      },
+      {
+        "control": "m1-tool-substitution",
+        "result": "refused",
+        "code": "NATIVE_CARGO_TOOL_CHANGED",
+        "manifestsAndLocksUnchanged": true,
+        "projectBuildScriptExecuted": false
+      },
+      {
+        "control": "m1-stale-source",
+        "result": "refused",
+        "code": "NATIVE_SOURCE_CHANGED",
+        "manifestsAndLocksUnchanged": true,
+        "projectBuildScriptExecuted": false
+      },
+      {
+        "control": "m1-native-workspace-offline-reconstruction",
+        "result": "verified",
+        "providerAndConfiguredCargoRustcAndManifestUnavailable": true,
+        "externalProgramsAbsentFromPath": true,
+        "retainedMoves": [
+          {
+            "configuredPathNowUnavailable": "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/discovery-20261016T000004.958826Z/captured-native-provider",
+            "preservedAt": "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/discovery-20261016T000004.958826Z/captured-native-provider.retained"
+          },
+          {
+            "configuredPathNowUnavailable": "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/discovery-20261016T000004.958826Z/captured-cargo",
+            "preservedAt": "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/discovery-20261016T000004.958826Z/captured-cargo.retained"
+          },
+          {
+            "configuredPathNowUnavailable": "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/discovery-20261016T000004.958826Z/captured-rustc",
+            "preservedAt": "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/discovery-20261016T000004.958826Z/captured-rustc.retained"
+          },
+          {
+            "configuredPathNowUnavailable": "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/discovery-20261016T000004.958826Z/cases/workspace-bridge/Cargo.toml",
+            "preservedAt": "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/discovery-20261016T000004.958826Z/cases/workspace-bridge/Cargo.toml.retained"
+          }
+        ]
+      },
+      {
+        "control": "m1-rehashed-native-workspace-lineage",
+        "result": "refused",
+        "code": "WORKSPACE_COMPOSITION_BINDING"
+      }
+    ],
+    "engines": {
+      "compiler": "sha256:ba2877bcc226d3df7866c967e5b9998d881218086bf350b899707da0b5934c7d",
+      "documentType": "executor-description",
+      "governance": "sha256:d314b34906675aab9e8a6f8951933880b1470da325f1c1501cadc8ba96c28817",
+      "schemaVersion": "0.1.0",
+      "scientific": "sha256:8bd9343ff8838589b5cb02546f307ff0ce79d1aea01db8d77ad6e47e890f7b9b",
+      "workspace": "sha256:afdb45813ec537e714660a8a56888e4603b3e5e7ed02a597cbb6fabe9bf17945"
+    },
+    "nativeBinaryDigest": "sha256:e6cb8351a86c96ea36491934918a7de5004e593c447c16d4d85b919457871ffb",
+    "newNativeTomlUnitTests": 10,
+    "existingBoundedProcessTests": 2,
+    "cargo": {
+      "path": "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/intel-toolchain/installed/bin/cargo",
+      "digest": "sha256:dcaece99ed4ac9ab5d2fa87de5725e98d90e0d0ec2c474a6067b3dccf2ff1c9e"
+    },
+    "rustc": {
+      "path": "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/intel-toolchain/installed/bin/rustc",
+      "digest": "sha256:4cd2349d91f51ad2ff5ddd4809f5f528443f5d1696109ff29480d32b86b15b5e"
+    },
+    "compiledFixtureEstablishedByTheseObservations": false,
+    "limits": {
+      "workspaceMembers": "explicit literal members; glob members refuse",
+      "ambientConfig": "outside owner root refuses without copying values",
+      "cargoConfig": "only matching build.target and net.offline=true",
+      "artifactAndRuntimeAcceptance": "not established"
+    }
+  },
+  "sourceUnchanged": true,
+  "completedUtc": "2026-10-16T00:01:28.438624+00:00"
+}

@@ -1,0 +1,365 @@
+{
+  "status": "passed",
+  "phase": "installed",
+  "profile": "patamaps-cross-stack-fixture-1",
+  "startedUtc": "2026-10-16T00:03:55.652904+00:00",
+  "commands": [
+    {
+      "label": "rust-version",
+      "argv": [
+        "rustc",
+        "-Vv"
+      ],
+      "cwd": ".",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.304,
+      "stdout": {
+        "path": ".tools/cross-stack/installed-20261016T000355.650783Z/rust-version.stdout.log",
+        "digest": "sha256:b1184c1aecf3182548f3bbdd91e5043e464821b1dcbf6d5ca8246339bd0be84a"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/installed-20261016T000355.650783Z/rust-version.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "cargo-version",
+      "argv": [
+        "cargo",
+        "--version"
+      ],
+      "cwd": ".",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.074,
+      "stdout": {
+        "path": ".tools/cross-stack/installed-20261016T000355.650783Z/cargo-version.stdout.log",
+        "digest": "sha256:1f88eaf7fe1aaec83184752cf4c944cd22f00184136ff36a3e4c318cc60ef566"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/installed-20261016T000355.650783Z/cargo-version.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "node-version",
+      "argv": [
+        "node",
+        "--version"
+      ],
+      "cwd": ".",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.039,
+      "stdout": {
+        "path": ".tools/cross-stack/installed-20261016T000355.650783Z/node-version.stdout.log",
+        "digest": "sha256:33e26f35db6e57ce0c486ddc815fe966867e4f649e418eaf323f75f4720eb8e9"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/installed-20261016T000355.650783Z/node-version.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "installed-cli-build",
+      "argv": [
+        "cargo",
+        "build",
+        "--release",
+        "-p",
+        "patamaps-cli",
+        "--locked",
+        "--offline"
+      ],
+      "cwd": ".",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.626,
+      "stdout": {
+        "path": ".tools/cross-stack/installed-20261016T000355.650783Z/installed-cli-build.stdout.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/installed-20261016T000355.650783Z/installed-cli-build.stderr.log",
+        "digest": "sha256:058601355273cf5b5e04dac59bf04dc3b51f11799bc251a1c98373d587220dc6"
+      }
+    },
+    {
+      "label": "installed-exact-package",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/intel-python-3.13.16-20261013/runtime/python/bin/python3",
+        "-B",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/scripts/package.py",
+        "--binary",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/release/patamaps",
+        "--build-profile",
+        "release",
+        "--output",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/installed-20261016T000355.650783Z/package"
+      ],
+      "cwd": ".",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 33.264,
+      "stdout": {
+        "path": ".tools/cross-stack/installed-20261016T000355.650783Z/installed-exact-package.stdout.log",
+        "digest": "sha256:ea3d7532e6a36fbc66857a74e50dafa21b2be7405eb1dd71ea688235c3ad15fb"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/installed-20261016T000355.650783Z/installed-exact-package.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "installed-real-mixed-workflow",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/intel-python-3.13.16-20261013/runtime/python/bin/python3",
+        "-B",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/installed-20261016T000355.650783Z/consumer-source/patamaps-draft-ba2877bcc226/scripts/cross_stack_installed.py",
+        "--root",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/installed-20261016T000355.650783Z/consumer-source/patamaps-draft-ba2877bcc226",
+        "--compiler",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/installed-20261016T000355.650783Z/consumer-native/patamaps-draft-ba2877bcc226/bin/patamaps",
+        "--node",
+        "/Users/admin/.nvm/versions/node/v22.23.3/bin/node",
+        "--output",
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/installed-20261016T000355.650783Z/installed-workflow",
+        "--mode",
+        "preview"
+      ],
+      "cwd": ".tools/cross-stack/installed-20261016T000355.650783Z/consumer-source/patamaps-draft-ba2877bcc226",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 81.317,
+      "stdout": {
+        "path": ".tools/cross-stack/installed-20261016T000355.650783Z/installed-real-mixed-workflow.stdout.log",
+        "digest": "sha256:bb5e7d311a8c7e0a23d634929ac8773c6198ed59abe927da0bb17f37c5203afe"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/installed-20261016T000355.650783Z/installed-real-mixed-workflow.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  ],
+  "retainedWork": ".tools/cross-stack/installed-20261016T000355.650783Z",
+  "filesDeleted": [],
+  "fullCrossStackAcceptance": false,
+  "containerAcceptance": "not-run",
+  "browserAcceptance": "not-run",
+  "generatedRegistration": "not-evaluated-by-this-phase",
+  "sourceInventory": {
+    "examples/cross-stack/.dockerignore": "sha256:ab935c7c81106d3bccd86f7b2e3edfbdb6712670b72296d189a528c1aeacfb7c",
+    "examples/cross-stack/.gitignore": "sha256:e0f20864aa53885a1456384f06a5893f8a70425f2d5ed4039c2ac48f1fe3b2a4",
+    "examples/cross-stack/README.md": "sha256:cf42e233b206e7bac4fe9711f55051e29ea271ab1eccba1b61571c2c0ea92ed7",
+    "examples/cross-stack/acceptance/browser/check.cjs": "sha256:ff28940a3cf2e79a83fe8b14092e7337a01d4b545baa6589d54dd8245e3025c9",
+    "examples/cross-stack/acceptance/browser/package-lock.json": "sha256:ebcfa8a29e03904cb1cac186a01dba982cf58d879de254b81a64fc61907c879a",
+    "examples/cross-stack/acceptance/browser/package.json": "sha256:01b94cf432c7195700ab1a8fccc12e2c440740be6eed5548688f48037c0e86bb",
+    "examples/cross-stack/acceptance/browser/probe.cjs": "sha256:53f2a90c440a8dddb3297c084f2afc31681553aea75e13cd64030f537894a1c4",
+    "examples/cross-stack/acceptance/check-runtime.cjs": "sha256:36ec0c346058167e947bf152ebf1dac9237c4ff31e19754c239833a692b4f1e6",
+    "examples/cross-stack/acceptance/expected.json": "sha256:4b6fe10f673674d8947725b849a61435858305f856adf588e0040faafafbe404",
+    "examples/cross-stack/acceptance/m2-expected.json": "sha256:0cc635f035e1c29bc910ff3f5219e6efae11ce81b15f00caf7a30d87ac66e242",
+    "examples/cross-stack/acceptance/m3-expected.json": "sha256:96e02942558e6d08449ec80cf52ffd2b3c6dff85838ff2665bffd2a4ce865f1f",
+    "examples/cross-stack/acceptance/m4-expected.json": "sha256:68d95411eb7a99b8d3f195bee8427ee8c430bcb17e23a63392ba43fc3263886c",
+    "examples/cross-stack/acceptance/m5-expected.json": "sha256:59f31ca1c245b1b7f83e791dccbcdb6150df365bedd5720732ef0802808cf9b2",
+    "examples/cross-stack/acceptance/m6-expected.json": "sha256:7328a42a77d3e1a4e1a494ee2f62c6ccb980e50a3fa3db28ddbe19f02153277c",
+    "examples/cross-stack/acceptance/m7-expected.json": "sha256:f04ecce90aed86fb9a065b1288b0fb682f165f352e0487ddc6565453a4f0e2a6",
+    "examples/cross-stack/build.py": "sha256:f5e76b2176ea610fbf0086951f181e890721822ddfcbc3a1cb442f8b100ddee3",
+    "examples/cross-stack/compatibility/check.mjs": "sha256:3c4d5e22cbd8c604bbf1e916a280be852fbb8956caebd4962fd916e90154ec07",
+    "examples/cross-stack/config/service.toml": "sha256:ec046d3e08183708c3aae0453ce0cb4febe7b875452d781ea867897b65bccd07",
+    "examples/cross-stack/contracts/create-item.request.schema.json": "sha256:e814007c18146f82674e36f5dc6fb1affe8e871f828c8ddff117f244e2ddfe95",
+    "examples/cross-stack/contracts/create-item.response.schema.json": "sha256:3c49c73af83622c4678aedd932a53e51f71b78db7de502b68a9ed36a46af7113",
+    "examples/cross-stack/contracts/operations.json": "sha256:70695fc7f6200ad069807d69dcda11c30d940a805ed810d54b2f3884971bb2df",
+    "examples/cross-stack/deploy/Dockerfile": "sha256:2485c87a010768616242c99653279915f483056448ca0bc8ca7758613ea50868",
+    "examples/cross-stack/dev.py": "sha256:58df26a3eb1068bf4942d42db7e3867204f7d4fe767b98f6ceaba5958219a7f3",
+    "examples/cross-stack/mappings/README.md": "sha256:594388cf251b81e2c1a87afe1fa3c093b6a36dd7cc667230407917678bf2cbbb",
+    "examples/cross-stack/mappings/routing-pack.json": "sha256:64cb8bad363e056b99e62fca7f1eca95c46790dcb0c4dd8c2f987c0ed4ff601f",
+    "examples/cross-stack/service/Cargo.lock": "sha256:3e511df39108267fd2cf10a9b49dd49db589ae1f49b6fb8b9152779d365a99c3",
+    "examples/cross-stack/service/Cargo.toml": "sha256:fdd1f664593da2163ad70802e6c2bc8b922dcd019500550c349efbb556cba77c",
+    "examples/cross-stack/service/LICENSE": "sha256:cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+    "examples/cross-stack/service/NOTICE": "sha256:b0454a6c73ccd381741a9ab4a62eb8d432b9b94313c3d674a3136733a1f9d5e2",
+    "examples/cross-stack/service/licenses/rust-1.99.0/COPYRIGHT": "sha256:172020dbfd5b53a226dfde77616190a48dcff519b0bc0e6deb91a8450782c4af",
+    "examples/cross-stack/service/licenses/rust-1.99.0/LICENSE-APACHE": "sha256:62c7a1e35f56406896d7aa7ca52d0cc0d272ac022b5d2796e7d6905db8a3636a",
+    "examples/cross-stack/service/licenses/rust-1.99.0/LICENSE-MIT": "sha256:b71bd43a069ca0641a9ecfe585ca7b3c53b5cc1608f8b68321168698e28b5ea1",
+    "examples/cross-stack/service/licenses/rust-1.99.0/SHA256SUMS": "sha256:9fb0c6a364b162c4c0d884f64bda342d8a6679ccbb8110e7e7859e0b3ccc1aea",
+    "examples/cross-stack/service/licenses/rust-1.99.0/SOURCE.json": "sha256:432104cab103476b59b2a61349ea888a91dc7fe7b7381ec9c9d39bbfc878384c",
+    "examples/cross-stack/service/rust-toolchain.toml": "sha256:515c80a149c1e927d497dbebc399e241822aa0197e8f778c21bf5c136c90afd2",
+    "examples/cross-stack/service/src/generated.rs": "sha256:6a396d3ae3a7a433567fbd9a47dcb013794c996faaa16d2d4eeaf9907181616a",
+    "examples/cross-stack/service/src/handlers/create_item.rs": "sha256:1e04089800d93b65af6823c1be25653244b70252723e6f9df4005e80a2eea962",
+    "examples/cross-stack/service/src/lib.rs": "sha256:0e146354d88c717330e199cd284004ca7963710fb3387b2fa8c9945274b17101",
+    "examples/cross-stack/service/src/main.rs": "sha256:2b6ef5e614e3739719c2ab7eae934671be0f858a8eda4399acb59673e660c0ee",
+    "examples/cross-stack/service/tools/collect-notices.sh": "sha256:d978f08439038f9e84656a1c5f86c0020c00dd4ab7932781ed20f8de5761aaef",
+    "examples/cross-stack/support.json": "sha256:6570585d1ecc1e249cd0f4af0a897965986d480b488d9e84c0fdda3203b0de9e",
+    "examples/cross-stack/web/app/api/items/route.ts": "sha256:b4f98c92dae67ee6096f652b30193f9cbc2311caeab97ca9af113f2ac0c1e4c8",
+    "examples/cross-stack/web/app/items/[id]/page.tsx": "sha256:5b7d5248fbaa949f9368bd4cd8d292095dc8addc292d3688207cd93d7ef1c074",
+    "examples/cross-stack/web/app/layout.tsx": "sha256:c1948db0db63dcabb24d969c4d4d7d55277304aeb7cc4ffa2485ca6fb3464693",
+    "examples/cross-stack/web/app/page.tsx": "sha256:627dab52cb3d33f06b92190f3c4134195d27f4c4e19bc1f17a8b0acd23c10c31",
+    "examples/cross-stack/web/generated/operations.ts": "sha256:c3121a2337620abb60e93f900ae5582f78e8224ccc9498e439cfdbdb9b911ac1",
+    "examples/cross-stack/web/next.config.mjs": "sha256:d9be514b014a67dbf2f6aeb0acd2b5b87801e378127d4ae8f592af5e39460b25",
+    "examples/cross-stack/web/package-lock.json": "sha256:b2d52eccd71b29bd6e6938292d3ef692e434ac4ca77e8508ed0da7c57fbc2d59",
+    "examples/cross-stack/web/package.json": "sha256:3bcba3a9906f2dd519ab7863a9174d4262aba9246977bfba96ad090ffdfd6334",
+    "examples/cross-stack/web/tsconfig.json": "sha256:45fd26769ac1a8f0b8741099674b71e00846b9f97ce1b7cb7afb98c7922ce7f0",
+    "examples/cross-stack/workspace.py": "sha256:563f973dc240fb7eae87dd4994a110d85c379dff2f98db62414dff66df76bfa3"
+  },
+  "installedConsumer": {
+    "status": "passed-installed-consumer-scope",
+    "mode": "preview",
+    "distribution": {
+      "schemaVersion": "0.1.0",
+      "status": "unpublished-draft",
+      "target": "x86_64-apple-darwin",
+      "toolchain": "rustc 1.99.0 (b940084d7 2026-09-28)\nbinary: rustc\ncommit-hash: b940084d7eb6a299eb4bfeb8e34901bc051e7ac4\ncommit-date: 2026-09-28\nhost: x86_64-apple-darwin\nrelease: 1.99.0\nLLVM version: 23.1.1\n",
+      "engines": {
+        "compiler": "sha256:ba2877bcc226d3df7866c967e5b9998d881218086bf350b899707da0b5934c7d",
+        "documentType": "executor-description",
+        "governance": "sha256:d314b34906675aab9e8a6f8951933880b1470da325f1c1501cadc8ba96c28817",
+        "schemaVersion": "0.1.0",
+        "scientific": "sha256:8bd9343ff8838589b5cb02546f307ff0ce79d1aea01db8d77ad6e47e890f7b9b",
+        "workspace": "sha256:afdb45813ec537e714660a8a56888e4603b3e5e7ed02a597cbb6fabe9bf17945"
+      },
+      "binaryDigest": "sha256:46756dd3d3b86839bb0902625f809e33bf883224b6a9b04550480d08c0616940",
+      "buildProfile": "release",
+      "buildProvenance": "Caller-declared profile; hashing and source identity do not attest a reproducible or authorized binary",
+      "sourceInventoryDigest": "sha256:75b4b9631f9a386e9a60b1b658114cd20815251abbb6dc0c8c4c0860e296af8b",
+      "protectedActivationAcceptance": "recorded-separately",
+      "sourceArchive": {
+        "path": "patamaps-draft-ba2877bcc226-source.tar.gz",
+        "digest": "sha256:cb7b5eba66417aa0cb6bd91b2b3a8fba4699b8be1d171b647185ff7cbf5429e5"
+      },
+      "nativeArchive": {
+        "path": "patamaps-draft-ba2877bcc226-x86_64-apple-darwin.tar.gz",
+        "digest": "sha256:766dc2c992d41c76ebbf49449e6c70861382d8387d7b4c5bbfcb751f682eca15"
+      }
+    },
+    "sourceInventoryFiles": 14195,
+    "allInstalledSourceBytesVerified": true,
+    "nativeBinaryMatchesPackagedAndSelected": true,
+    "mixedWorkflow": {
+      "status": "passed-installed-consumer-scope",
+      "mode": "preview",
+      "sourceRoot": "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/installed-20261016T000355.650783Z/consumer-source/patamaps-draft-ba2877bcc226",
+      "compiler": "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/installed-20261016T000355.650783Z/consumer-native/patamaps-draft-ba2877bcc226/bin/patamaps",
+      "startedUtc": "2026-10-16T00:04:44.763842+00:00",
+      "commands": [
+        {
+          "label": "installed-engine",
+          "argv": [
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/installed-20261016T000355.650783Z/consumer-native/patamaps-draft-ba2877bcc226/bin/patamaps",
+            "engine"
+          ],
+          "cwd": "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/installed-20261016T000355.650783Z/consumer-source/patamaps-draft-ba2877bcc226",
+          "expectedSuccess": true,
+          "pid": 63190,
+          "exitCode": 0,
+          "seconds": 0.551
+        },
+        {
+          "label": "installed-web-dependencies",
+          "argv": [
+            "npm",
+            "ci",
+            "--ignore-scripts",
+            "--no-audit",
+            "--no-fund"
+          ],
+          "cwd": "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/installed-20261016T000355.650783Z/consumer-source/patamaps-draft-ba2877bcc226/examples/cross-stack/web",
+          "expectedSuccess": true,
+          "pid": 63191,
+          "exitCode": 0,
+          "seconds": 5.56
+        },
+        {
+          "label": "installed-browser-dependencies",
+          "argv": [
+            "npm",
+            "ci",
+            "--ignore-scripts",
+            "--no-audit",
+            "--no-fund"
+          ],
+          "cwd": "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/installed-20261016T000355.650783Z/consumer-source/patamaps-draft-ba2877bcc226/examples/cross-stack/acceptance/browser",
+          "expectedSuccess": true,
+          "pid": 63194,
+          "exitCode": 0,
+          "seconds": 1.664
+        },
+        {
+          "label": "installed-cargo",
+          "argv": [
+            "rustup",
+            "which",
+            "cargo"
+          ],
+          "cwd": "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/installed-20261016T000355.650783Z/consumer-source/patamaps-draft-ba2877bcc226",
+          "expectedSuccess": true,
+          "pid": 63195,
+          "exitCode": 0,
+          "seconds": 0.089
+        },
+        {
+          "label": "installed-rustc",
+          "argv": [
+            "rustup",
+            "which",
+            "rustc"
+          ],
+          "cwd": "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/installed-20261016T000355.650783Z/consumer-source/patamaps-draft-ba2877bcc226",
+          "expectedSuccess": true,
+          "pid": 63196,
+          "exitCode": 0,
+          "seconds": 0.032
+        },
+        {
+          "label": "installed-runtime-without-compilers",
+          "argv": [
+            "/Users/admin/.nvm/versions/node/v22.23.3/bin/node",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/installed-20261016T000355.650783Z/consumer-source/patamaps-draft-ba2877bcc226/examples/cross-stack/acceptance/check-runtime.cjs",
+            "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/installed-20261016T000355.650783Z/installed-workflow/preview-state/attempts/20261016T000456.174261Z/client-js/operations.js",
+            "http://127.0.0.1:54012",
+            "http://127.0.0.1:54011"
+          ],
+          "cwd": "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/installed-20261016T000355.650783Z/consumer-source/patamaps-draft-ba2877bcc226",
+          "expectedSuccess": true,
+          "pid": 63461,
+          "exitCode": 0,
+          "seconds": 0.259
+        }
+      ],
+      "fullReleaseAccepted": false,
+      "deleted": [],
+      "mixedWorkflow": {
+        "status": "verified-native-preview",
+        "selected": "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/installed-20261016T000355.650783Z/installed-workflow/preview-state/selected.json",
+        "candidate": "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/installed-20261016T000355.650783Z/installed-workflow/preview-state/attempts/20261016T000456.174261Z/candidate",
+        "seconds": 62.232,
+        "fullReleaseAccepted": false
+      },
+      "engine": {
+        "compiler": "sha256:ba2877bcc226d3df7866c967e5b9998d881218086bf350b899707da0b5934c7d",
+        "documentType": "executor-description",
+        "governance": "sha256:d314b34906675aab9e8a6f8951933880b1470da325f1c1501cadc8ba96c28817",
+        "schemaVersion": "0.1.0",
+        "scientific": "sha256:8bd9343ff8838589b5cb02546f307ff0ce79d1aea01db8d77ad6e47e890f7b9b",
+        "workspace": "sha256:afdb45813ec537e714660a8a56888e4603b3e5e7ed02a597cbb6fabe9bf17945"
+      },
+      "inventoryFilesVerified": 14195,
+      "configuredCompilerUnavailable": true,
+      "compilerRetainedAs": "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/installed-20261016T000355.650783Z/consumer-native/patamaps-draft-ba2877bcc226/bin/patamaps.unavailable-after-generation",
+      "graphCompilersOnRequestPath": false,
+      "runtimeAfterRename": {
+        "mode": "native preview",
+        "status": "passed",
+        "realNextRustRoundTrip": true,
+        "unicodeCodePointBoundary": true,
+        "malformedResponseRefused": true
+      },
+      "sourceInventoryUnchanged": true,
+      "activation": "not-performed",
+      "finishedUtc": "2026-10-16T00:06:05.617871+00:00"
+    },
+    "fullReleaseAccepted": false,
+    "productionActivation": "not-performed",
+    "deleted": []
+  },
+  "completedUtc": "2026-10-16T00:06:05.721298+00:00"
+}

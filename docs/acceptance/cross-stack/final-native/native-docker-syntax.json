@@ -1,0 +1,1474 @@
+{
+  "status": "passed",
+  "phase": "docker",
+  "profile": "patamaps-cross-stack-fixture-1",
+  "startedUtc": "2026-10-16T00:03:09.334602+00:00",
+  "commands": [
+    {
+      "label": "rust-version",
+      "argv": [
+        "rustc",
+        "-Vv"
+      ],
+      "cwd": ".",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.345,
+      "stdout": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/rust-version.stdout.log",
+        "digest": "sha256:b1184c1aecf3182548f3bbdd91e5043e464821b1dcbf6d5ca8246339bd0be84a"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/rust-version.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "cargo-version",
+      "argv": [
+        "cargo",
+        "--version"
+      ],
+      "cwd": ".",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.068,
+      "stdout": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/cargo-version.stdout.log",
+        "digest": "sha256:1f88eaf7fe1aaec83184752cf4c944cd22f00184136ff36a3e4c318cc60ef566"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/cargo-version.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "node-version",
+      "argv": [
+        "node",
+        "--version"
+      ],
+      "cwd": ".",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.035,
+      "stdout": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/node-version.stdout.log",
+        "digest": "sha256:33e26f35db6e57ce0c486ddc815fe966867e4f649e418eaf323f75f4720eb8e9"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/node-version.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "m3-format",
+      "argv": [
+        "cargo",
+        "fmt",
+        "--all",
+        "--",
+        "--check"
+      ],
+      "cwd": ".",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 1.234,
+      "stdout": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/m3-format.stdout.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/m3-format.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "m3-native-tests",
+      "argv": [
+        "cargo",
+        "test",
+        "-p",
+        "patamaps-workspace",
+        "--locked",
+        "--offline"
+      ],
+      "cwd": ".",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 16.284,
+      "stdout": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/m3-native-tests.stdout.log",
+        "digest": "sha256:9d6d0cf6562e32337eee44db2e8bb1cf3ad80ee67fbd9fd29a766c139eeaeead"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/m3-native-tests.stderr.log",
+        "digest": "sha256:669378f14178a0f842e80bf18d70b85246b7e4bc6ff9898ea5b923216ac7634d"
+      }
+    },
+    {
+      "label": "m3-cli-build",
+      "argv": [
+        "cargo",
+        "build",
+        "-p",
+        "patamaps-cli",
+        "--locked",
+        "--offline"
+      ],
+      "cwd": ".",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.406,
+      "stdout": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/m3-cli-build.stdout.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/m3-cli-build.stderr.log",
+        "digest": "sha256:8950be1e8f4499f41b8e38ef15f09a0e2671be53a43aa5dec4d794320908881d"
+      }
+    },
+    {
+      "label": "m3-engine",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+        "engine"
+      ],
+      "cwd": ".",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 1.264,
+      "stdout": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/m3-engine.stdout.log",
+        "digest": "sha256:fa524759ff3fe308945b52459fb575a769c801f82b21ef29d95710793f7a82d9"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/m3-engine.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "m3-real-dockerfile-request",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+        "json",
+        "digest"
+      ],
+      "cwd": ".",
+      "expectedSuccess": true,
+      "stdin": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/m3-real-dockerfile-request.stdin.json",
+        "digest": "sha256:c5d1f6dda831933bee5112c0130136953b3768f5fec797c08499a3916bf34806"
+      },
+      "exitCode": 0,
+      "seconds": 0.032,
+      "stdout": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/m3-real-dockerfile-request.stdout.log",
+        "digest": "sha256:705f2fccc524357bbc5972017ef7c159c99e3b41ef11f94d883bf2a256520664"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/m3-real-dockerfile-request.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "m3-real-dockerfile",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+        "discover-native"
+      ],
+      "cwd": ".tools/cross-stack/docker-20261016T000309.333429Z/cases/m3-real-dockerfile",
+      "expectedSuccess": true,
+      "stdin": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/m3-real-dockerfile.stdin.json",
+        "digest": "sha256:c74a3461af37c9896436bf2274483606c02da996bcabe0f449c57e4989fa34e0"
+      },
+      "exitCode": 0,
+      "seconds": 0.057,
+      "stdout": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/m3-real-dockerfile.stdout.log",
+        "digest": "sha256:7e4a2ae7397eb70d06defe37837a7c7013bd347ea0e9319ec62d06c695426aad"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/m3-real-dockerfile.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "m3-stage-alias-move-request",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+        "json",
+        "digest"
+      ],
+      "cwd": ".",
+      "expectedSuccess": true,
+      "stdin": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/m3-stage-alias-move-request.stdin.json",
+        "digest": "sha256:de5426e550b75fa217f004f7193492d2c761ce7224817c29841e0930b19f0987"
+      },
+      "exitCode": 0,
+      "seconds": 0.033,
+      "stdout": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/m3-stage-alias-move-request.stdout.log",
+        "digest": "sha256:09cab0c66eb3c780397e4e88094327bc75ee1ebb4ad0655b0402e7add9af2c96"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/m3-stage-alias-move-request.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "m3-stage-alias-move",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+        "discover-native"
+      ],
+      "cwd": ".tools/cross-stack/docker-20261016T000309.333429Z/cases/m3-stage-alias-move",
+      "expectedSuccess": true,
+      "stdin": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/m3-stage-alias-move.stdin.json",
+        "digest": "sha256:9fcd669360f6b253fdd3d739506dc965c5c2add63cc376c13d1fc71522346c98"
+      },
+      "exitCode": 0,
+      "seconds": 0.052,
+      "stdout": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/m3-stage-alias-move.stdout.log",
+        "digest": "sha256:5a301d39286afb0486c9c7278cb8f7f554e1ec5f1e0f089f5bdbb16fb3531d5e"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/m3-stage-alias-move.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "m3-stage-index-request",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+        "json",
+        "digest"
+      ],
+      "cwd": ".",
+      "expectedSuccess": true,
+      "stdin": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/m3-stage-index-request.stdin.json",
+        "digest": "sha256:861068dc853ebe3ac452ae13df9be712211651b6a008be590fc2d623e6d607d4"
+      },
+      "exitCode": 0,
+      "seconds": 0.035,
+      "stdout": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/m3-stage-index-request.stdout.log",
+        "digest": "sha256:f62940e4134980d5916152d1afd028d03afbd3b1f2b9e8cb11f7e763bac7daee"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/m3-stage-index-request.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "m3-stage-index",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+        "discover-native"
+      ],
+      "cwd": ".tools/cross-stack/docker-20261016T000309.333429Z/cases/m3-stage-index",
+      "expectedSuccess": true,
+      "stdin": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/m3-stage-index.stdin.json",
+        "digest": "sha256:d451ca976c7469da1225305432f275afb18c08fffbd3c57602767a4b2bb8832e"
+      },
+      "exitCode": 0,
+      "seconds": 0.055,
+      "stdout": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/m3-stage-index.stdout.log",
+        "digest": "sha256:d45ce3cafd609bae0ae978516311787eac9ba6669a366dfc8b63f9ba7d7d3576"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/m3-stage-index.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "m3-missing-copy-stage-request",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+        "json",
+        "digest"
+      ],
+      "cwd": ".",
+      "expectedSuccess": true,
+      "stdin": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/m3-missing-copy-stage-request.stdin.json",
+        "digest": "sha256:206c049163b740e2760b06b5f52c5c93bb3d20ed1091dbc69629e797d33cc903"
+      },
+      "exitCode": 0,
+      "seconds": 0.032,
+      "stdout": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/m3-missing-copy-stage-request.stdout.log",
+        "digest": "sha256:61791cb8ed379ae0413944679265428f1a07c58723d7cc483edf57bfffa29186"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/m3-missing-copy-stage-request.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "m3-missing-copy-stage",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+        "discover-native"
+      ],
+      "cwd": ".tools/cross-stack/docker-20261016T000309.333429Z/cases/m3-missing-copy-stage",
+      "expectedSuccess": true,
+      "stdin": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/m3-missing-copy-stage.stdin.json",
+        "digest": "sha256:0a20afbaf8545be46fbca9eee4142b57419ab9f9a7be0fb2784bceec3b2d9101"
+      },
+      "exitCode": 0,
+      "seconds": 0.049,
+      "stdout": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/m3-missing-copy-stage.stdout.log",
+        "digest": "sha256:1047c79ee778420cd95095ba539d9c49bc9c6a158c2677978a204cb95297584c"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/m3-missing-copy-stage.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "m3-unproved-builder-artifact-request",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+        "json",
+        "digest"
+      ],
+      "cwd": ".",
+      "expectedSuccess": true,
+      "stdin": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/m3-unproved-builder-artifact-request.stdin.json",
+        "digest": "sha256:3d832c215fad018789decf6095374b1e80d7b24a88661475c4f3300feb7983e4"
+      },
+      "exitCode": 0,
+      "seconds": 0.031,
+      "stdout": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/m3-unproved-builder-artifact-request.stdout.log",
+        "digest": "sha256:21694eb3bc8535374575f20d578df4a19a3723d07b54205df0b0d1d698027f56"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/m3-unproved-builder-artifact-request.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "m3-unproved-builder-artifact",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+        "discover-native"
+      ],
+      "cwd": ".tools/cross-stack/docker-20261016T000309.333429Z/cases/m3-unproved-builder-artifact",
+      "expectedSuccess": true,
+      "stdin": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/m3-unproved-builder-artifact.stdin.json",
+        "digest": "sha256:bb72ee4de4de4b19bbc91ce426b8590d7e4b0acb9fc6a5da5d2f032451ba3e70"
+      },
+      "exitCode": 0,
+      "seconds": 0.049,
+      "stdout": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/m3-unproved-builder-artifact.stdout.log",
+        "digest": "sha256:25ae9d5faf588563c227dd74acc0b9898801398f18e15842244b8b408a369b38"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/m3-unproved-builder-artifact.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "m3-missing-config-request",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+        "json",
+        "digest"
+      ],
+      "cwd": ".",
+      "expectedSuccess": true,
+      "stdin": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/m3-missing-config-request.stdin.json",
+        "digest": "sha256:d728b6b96bdac9e625d3aa50681189162f46ffa8d5291630fa6fba1e3fccf81f"
+      },
+      "exitCode": 0,
+      "seconds": 0.03,
+      "stdout": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/m3-missing-config-request.stdout.log",
+        "digest": "sha256:b26230dfd6fae3009279d878909253bc235b388e5a80fdf7fac1590dc571dcc0"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/m3-missing-config-request.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "m3-missing-config",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+        "discover-native"
+      ],
+      "cwd": ".tools/cross-stack/docker-20261016T000309.333429Z/cases/m3-missing-config",
+      "expectedSuccess": true,
+      "stdin": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/m3-missing-config.stdin.json",
+        "digest": "sha256:ccbcb125b63772dd1f11fd426ee35615e5943788318d50c390d0bb48bf5ea695"
+      },
+      "exitCode": 0,
+      "seconds": 0.055,
+      "stdout": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/m3-missing-config.stdout.log",
+        "digest": "sha256:3c556d4d5c5078030680bd660e6bee263109f182dc56685b595e5c9536e86bb3"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/m3-missing-config.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "m3-ignored-config-request",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+        "json",
+        "digest"
+      ],
+      "cwd": ".",
+      "expectedSuccess": true,
+      "stdin": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/m3-ignored-config-request.stdin.json",
+        "digest": "sha256:815f65ed928acdbc21ffdcfad59064d3071b052f22bf34d08027ea3ef3a5eafa"
+      },
+      "exitCode": 0,
+      "seconds": 0.031,
+      "stdout": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/m3-ignored-config-request.stdout.log",
+        "digest": "sha256:34d5a850b75a5847083fb30b292a45677a98f0c197cf8b36a46f736cd4dcbde3"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/m3-ignored-config-request.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "m3-ignored-config",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+        "discover-native"
+      ],
+      "cwd": ".tools/cross-stack/docker-20261016T000309.333429Z/cases/m3-ignored-config",
+      "expectedSuccess": true,
+      "stdin": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/m3-ignored-config.stdin.json",
+        "digest": "sha256:d7facbb0c4804e63012156b5eb7f30ddff0dbf8da3c55ea2c2f195e35a02c768"
+      },
+      "exitCode": 0,
+      "seconds": 0.056,
+      "stdout": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/m3-ignored-config.stdout.log",
+        "digest": "sha256:8a71cae15fd2a1dee708e55909ddafebc888865d4d1debb7a7f75de1b73a4da9"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/m3-ignored-config.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "m3-specific-ignore-precedence-request",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+        "json",
+        "digest"
+      ],
+      "cwd": ".",
+      "expectedSuccess": true,
+      "stdin": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/m3-specific-ignore-precedence-request.stdin.json",
+        "digest": "sha256:8dbc7a848bc97595fe4105fdc3ff7adae90beb7ed1a126145a6c76db3b199cbe"
+      },
+      "exitCode": 0,
+      "seconds": 0.036,
+      "stdout": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/m3-specific-ignore-precedence-request.stdout.log",
+        "digest": "sha256:28cf2ed74f42182abf2f6da4b2e35160dd8a5a29c9f04c2cdbbfaccd9b2ee8e4"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/m3-specific-ignore-precedence-request.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "m3-specific-ignore-precedence",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+        "discover-native"
+      ],
+      "cwd": ".tools/cross-stack/docker-20261016T000309.333429Z/cases/m3-specific-ignore-precedence",
+      "expectedSuccess": true,
+      "stdin": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/m3-specific-ignore-precedence.stdin.json",
+        "digest": "sha256:1b78942beb32a235f27dca8114e5b1744dd8a4ca28e8bfb13063431d660f625a"
+      },
+      "exitCode": 0,
+      "seconds": 0.059,
+      "stdout": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/m3-specific-ignore-precedence.stdout.log",
+        "digest": "sha256:d2a41dce2b27a18ac78014c5e82584085440b650324c277757a07f66946e762b"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/m3-specific-ignore-precedence.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "m3-unresolved-build-arg-request",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+        "json",
+        "digest"
+      ],
+      "cwd": ".",
+      "expectedSuccess": true,
+      "stdin": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/m3-unresolved-build-arg-request.stdin.json",
+        "digest": "sha256:2062b8de59ab08b5a0431826ff1613227b7bd86355d5db73cd85ad378e2e70d6"
+      },
+      "exitCode": 0,
+      "seconds": 0.031,
+      "stdout": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/m3-unresolved-build-arg-request.stdout.log",
+        "digest": "sha256:71ec78d5f965a6b9321b489ca140a8b08f8a5bc5eff40d3bfb35728eb183ecf4"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/m3-unresolved-build-arg-request.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "m3-unresolved-build-arg",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+        "discover-native"
+      ],
+      "cwd": ".tools/cross-stack/docker-20261016T000309.333429Z/cases/m3-unresolved-build-arg",
+      "expectedSuccess": true,
+      "stdin": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/m3-unresolved-build-arg.stdin.json",
+        "digest": "sha256:744132cdb5fdf5b3bea25e1f3124f117c9d5ecdbbb98e4f484be7f445eb12e14"
+      },
+      "exitCode": 0,
+      "seconds": 0.054,
+      "stdout": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/m3-unresolved-build-arg.stdout.log",
+        "digest": "sha256:0801ef01ffe734df92fc13eb2c0d53af9a44709a977bfb90492ab65357e4188d"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/m3-unresolved-build-arg.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "m3-explicit-build-arg-request",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+        "json",
+        "digest"
+      ],
+      "cwd": ".",
+      "expectedSuccess": true,
+      "stdin": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/m3-explicit-build-arg-request.stdin.json",
+        "digest": "sha256:e2055ca301e3db42b2ec9039265c94e9b0c8c1610e2d423bd3c388c0045009c1"
+      },
+      "exitCode": 0,
+      "seconds": 0.031,
+      "stdout": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/m3-explicit-build-arg-request.stdout.log",
+        "digest": "sha256:ab633730de7d7be2aa0dd2db65ca8289754f2bced3b57f19612f21deb6a936df"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/m3-explicit-build-arg-request.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "m3-explicit-build-arg",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+        "discover-native"
+      ],
+      "cwd": ".tools/cross-stack/docker-20261016T000309.333429Z/cases/m3-explicit-build-arg",
+      "expectedSuccess": true,
+      "stdin": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/m3-explicit-build-arg.stdin.json",
+        "digest": "sha256:e03e015dad2d78af34760243fe925d094d635da53c8a564a05937093f05157cf"
+      },
+      "exitCode": 0,
+      "seconds": 0.057,
+      "stdout": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/m3-explicit-build-arg.stdout.log",
+        "digest": "sha256:24e6d170c9bef1d98a61eda011ed8c26bdf4e85aeb8be1447c737a9d072b2d64"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/m3-explicit-build-arg.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "m3-shell-launch-request",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+        "json",
+        "digest"
+      ],
+      "cwd": ".",
+      "expectedSuccess": true,
+      "stdin": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/m3-shell-launch-request.stdin.json",
+        "digest": "sha256:3d97bdffc9bf38d17da59faf29a15636b9553be2743e33c131fb5082ef03a106"
+      },
+      "exitCode": 0,
+      "seconds": 0.032,
+      "stdout": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/m3-shell-launch-request.stdout.log",
+        "digest": "sha256:b484d96ad0f9231d3b21827e7508e97dc2c9a6a4d3638c37a253a96b82b33ca4"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/m3-shell-launch-request.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "m3-shell-launch",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+        "discover-native"
+      ],
+      "cwd": ".tools/cross-stack/docker-20261016T000309.333429Z/cases/m3-shell-launch",
+      "expectedSuccess": true,
+      "stdin": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/m3-shell-launch.stdin.json",
+        "digest": "sha256:952a33d9a201c8817bb5813a515af082aebce30e6b74580147d8814a82f52bd7"
+      },
+      "exitCode": 0,
+      "seconds": 0.054,
+      "stdout": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/m3-shell-launch.stdout.log",
+        "digest": "sha256:e949ab8321bf69204e9fec4df1ed6d9a72aa0fc86210a34dc7161bbaec78e85b"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/m3-shell-launch.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "m3-opaque-run-request",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+        "json",
+        "digest"
+      ],
+      "cwd": ".",
+      "expectedSuccess": true,
+      "stdin": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/m3-opaque-run-request.stdin.json",
+        "digest": "sha256:c74f7dbb95b205375a93a59ae6f305539b706414a3e117b038295e7cf8acd1b4"
+      },
+      "exitCode": 0,
+      "seconds": 0.032,
+      "stdout": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/m3-opaque-run-request.stdout.log",
+        "digest": "sha256:048e8d7e5c7d6e97b71fd5e94ded3eb44da3ddb2ffa2a34e542e91681676eafd"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/m3-opaque-run-request.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "m3-opaque-run",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+        "discover-native"
+      ],
+      "cwd": ".tools/cross-stack/docker-20261016T000309.333429Z/cases/m3-opaque-run",
+      "expectedSuccess": true,
+      "stdin": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/m3-opaque-run.stdin.json",
+        "digest": "sha256:969725bd83bf31ef858e8f49aaf72bf0a5006962ad5580df9db3866af75a9eb8"
+      },
+      "exitCode": 0,
+      "seconds": 0.047,
+      "stdout": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/m3-opaque-run.stdout.log",
+        "digest": "sha256:e8bc51b6cc458c352fb53cf2f71d4e4820b29fb467fe549ea0f13857bf6fb7d5"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/m3-opaque-run.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "m3-json-copy-request",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+        "json",
+        "digest"
+      ],
+      "cwd": ".",
+      "expectedSuccess": true,
+      "stdin": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/m3-json-copy-request.stdin.json",
+        "digest": "sha256:d9dc4f6be4af3c10498db64ddbca16473294549995eead0c1781e878bc3b2ac1"
+      },
+      "exitCode": 0,
+      "seconds": 0.029,
+      "stdout": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/m3-json-copy-request.stdout.log",
+        "digest": "sha256:ab9395c910a50f03f9199bdbbefdfa0c6a82cc17a1cec1b42375e2fc95271808"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/m3-json-copy-request.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "m3-json-copy",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+        "discover-native"
+      ],
+      "cwd": ".tools/cross-stack/docker-20261016T000309.333429Z/cases/m3-json-copy",
+      "expectedSuccess": true,
+      "stdin": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/m3-json-copy.stdin.json",
+        "digest": "sha256:54e885492a80a890a667486ce156a82aa2e96adf041270472218efd5f4463da3"
+      },
+      "exitCode": 0,
+      "seconds": 0.056,
+      "stdout": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/m3-json-copy.stdout.log",
+        "digest": "sha256:652b6f08bd8dd2f2a10eadd3026c6dab8b5f7eae2c330f2bc7574f766f73fb28"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/m3-json-copy.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "m3-wrong-context-request",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+        "json",
+        "digest"
+      ],
+      "cwd": ".",
+      "expectedSuccess": true,
+      "stdin": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/m3-wrong-context-request.stdin.json",
+        "digest": "sha256:1460d4b8db27ae960ab35e26cfcd01e63ffb8e9ff1bfe3c2575c5671eb59717a"
+      },
+      "exitCode": 0,
+      "seconds": 0.033,
+      "stdout": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/m3-wrong-context-request.stdout.log",
+        "digest": "sha256:d93da7868a326273c4b13f5173079c7b4619e60b511e45f13beec8c9268cdd4a"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/m3-wrong-context-request.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "m3-wrong-context",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+        "discover-native"
+      ],
+      "cwd": ".tools/cross-stack/docker-20261016T000309.333429Z/cases/m3-wrong-context",
+      "expectedSuccess": false,
+      "stdin": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/m3-wrong-context.stdin.json",
+        "digest": "sha256:08d3bfadda96df97ed8b8fe3c12933c993b8a2642354e0ce1222e9f1bd605713"
+      },
+      "exitCode": 2,
+      "seconds": 0.032,
+      "stdout": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/m3-wrong-context.stdout.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/m3-wrong-context.stderr.log",
+        "digest": "sha256:5c8f7a233c62369f32a2b598ae16fbabf3a179b8fb8560d54e4066e2e12e58a1"
+      }
+    },
+    {
+      "label": "m3-incomplete-context-request",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+        "json",
+        "digest"
+      ],
+      "cwd": ".",
+      "expectedSuccess": true,
+      "stdin": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/m3-incomplete-context-request.stdin.json",
+        "digest": "sha256:fb9cdf6282f5a0d88f2edc0fdc236bd0e633ea283efb89756b06dc886782abca"
+      },
+      "exitCode": 0,
+      "seconds": 0.034,
+      "stdout": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/m3-incomplete-context-request.stdout.log",
+        "digest": "sha256:4b2f601e45b39030dd14653ab1538bc140a5110f89bf6fe17aba3272dee228b1"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/m3-incomplete-context-request.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "m3-incomplete-context",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+        "discover-native"
+      ],
+      "cwd": ".tools/cross-stack/docker-20261016T000309.333429Z/cases/m3-incomplete-context",
+      "expectedSuccess": false,
+      "stdin": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/m3-incomplete-context.stdin.json",
+        "digest": "sha256:b8d96ee4272263b835cfc57ba462be58f47923b18443c6559ac4cffbf0726536"
+      },
+      "exitCode": 2,
+      "seconds": 0.032,
+      "stdout": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/m3-incomplete-context.stdout.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/m3-incomplete-context.stderr.log",
+        "digest": "sha256:cbe1c4ae55de1d842837a02307fdac03040030829b51416e1e9c49245624b8b9"
+      }
+    },
+    {
+      "label": "m3-missing-target-request",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+        "json",
+        "digest"
+      ],
+      "cwd": ".",
+      "expectedSuccess": true,
+      "stdin": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/m3-missing-target-request.stdin.json",
+        "digest": "sha256:ee79563df29a1fad17f264d573e7727583ed303fb0b8890a9b8e2d0e3f81ebdb"
+      },
+      "exitCode": 0,
+      "seconds": 0.034,
+      "stdout": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/m3-missing-target-request.stdout.log",
+        "digest": "sha256:5bb3a110bf9ddae59890d511480dbf7df144ea80db5b269a1180a6ab6740907d"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/m3-missing-target-request.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "m3-missing-target",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+        "discover-native"
+      ],
+      "cwd": ".tools/cross-stack/docker-20261016T000309.333429Z/cases/m3-missing-target",
+      "expectedSuccess": false,
+      "stdin": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/m3-missing-target.stdin.json",
+        "digest": "sha256:3c66c7c3fd8b128cc45a19052bb5e7d8336440714a5ed3fa6e5c40f345e9d343"
+      },
+      "exitCode": 2,
+      "seconds": 0.052,
+      "stdout": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/m3-missing-target.stdout.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/m3-missing-target.stderr.log",
+        "digest": "sha256:d2e358a782981063f91f888911c8912b1d8d36c2792f228c4302e7d7f0afc33e"
+      }
+    },
+    {
+      "label": "m3-unsupported-platform-request",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+        "json",
+        "digest"
+      ],
+      "cwd": ".",
+      "expectedSuccess": true,
+      "stdin": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/m3-unsupported-platform-request.stdin.json",
+        "digest": "sha256:fdb3f7113663871812953bc590351092c2f4e29738e01b2a867b83ef2b075e16"
+      },
+      "exitCode": 0,
+      "seconds": 0.034,
+      "stdout": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/m3-unsupported-platform-request.stdout.log",
+        "digest": "sha256:d3f0ce43b49573b3e74906fb5f12e9e735ca38146ffbc7dde323122220e6eb9c"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/m3-unsupported-platform-request.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "m3-unsupported-platform",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+        "discover-native"
+      ],
+      "cwd": ".tools/cross-stack/docker-20261016T000309.333429Z/cases/m3-unsupported-platform",
+      "expectedSuccess": false,
+      "stdin": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/m3-unsupported-platform.stdin.json",
+        "digest": "sha256:4594269c3c457aba04fc7dddd10c90ce0ba092ad81e28615211f8df543f29b72"
+      },
+      "exitCode": 2,
+      "seconds": 0.032,
+      "stdout": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/m3-unsupported-platform.stdout.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/m3-unsupported-platform.stderr.log",
+        "digest": "sha256:cbe1c4ae55de1d842837a02307fdac03040030829b51416e1e9c49245624b8b9"
+      }
+    },
+    {
+      "label": "m3-unsupported-ignore-request",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+        "json",
+        "digest"
+      ],
+      "cwd": ".",
+      "expectedSuccess": true,
+      "stdin": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/m3-unsupported-ignore-request.stdin.json",
+        "digest": "sha256:f4a2558f577882c398b5ad2f6892d94b32e1d0b6b0d85a831a75edf081760737"
+      },
+      "exitCode": 0,
+      "seconds": 0.034,
+      "stdout": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/m3-unsupported-ignore-request.stdout.log",
+        "digest": "sha256:e380c7a907e9e084e61dda09ca6f1ad3d8385d2c469f5d8005bd43eec04fba58"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/m3-unsupported-ignore-request.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "m3-unsupported-ignore",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+        "discover-native"
+      ],
+      "cwd": ".tools/cross-stack/docker-20261016T000309.333429Z/cases/m3-unsupported-ignore",
+      "expectedSuccess": false,
+      "stdin": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/m3-unsupported-ignore.stdin.json",
+        "digest": "sha256:cf193395d1fa84203f02ac1b4940684de9be3bf195cf0225492e68b33dbc8c69"
+      },
+      "exitCode": 2,
+      "seconds": 0.054,
+      "stdout": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/m3-unsupported-ignore.stdout.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/m3-unsupported-ignore.stderr.log",
+        "digest": "sha256:4c892ff82c8691985f34f91c7df4a6265d5b69c3336f13b1219acea50c1a815d"
+      }
+    },
+    {
+      "label": "m3-invalid-json-launch-unresolved-request",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+        "json",
+        "digest"
+      ],
+      "cwd": ".",
+      "expectedSuccess": true,
+      "stdin": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/m3-invalid-json-launch-unresolved-request.stdin.json",
+        "digest": "sha256:089bb196f45f416134f32e32eb1fc52e8d849ef1c7e80aec3e61d59d1c49de65"
+      },
+      "exitCode": 0,
+      "seconds": 0.035,
+      "stdout": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/m3-invalid-json-launch-unresolved-request.stdout.log",
+        "digest": "sha256:478d56150e1256cb54a38085bb476e133910d52af0af29bb775c97be35900390"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/m3-invalid-json-launch-unresolved-request.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "m3-invalid-json-launch-unresolved",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+        "discover-native"
+      ],
+      "cwd": ".tools/cross-stack/docker-20261016T000309.333429Z/cases/m3-invalid-json-launch-unresolved",
+      "expectedSuccess": true,
+      "stdin": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/m3-invalid-json-launch-unresolved.stdin.json",
+        "digest": "sha256:4faa5d42b8124cce172b762dc67707ac58e56ea63e745badfc7cadaace0778c2"
+      },
+      "exitCode": 0,
+      "seconds": 0.054,
+      "stdout": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/m3-invalid-json-launch-unresolved.stdout.log",
+        "digest": "sha256:a78e6eea45661cf3ad09498127342aadc586add2b27bd1e5cf3b16bd30d2f6ea"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/m3-invalid-json-launch-unresolved.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "m3-malformed-request",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+        "json",
+        "digest"
+      ],
+      "cwd": ".",
+      "expectedSuccess": true,
+      "stdin": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/m3-malformed-request.stdin.json",
+        "digest": "sha256:1f62230a26abe94c0e03a978385ddd513b6e4460d55199f4f7844e5ce86fd772"
+      },
+      "exitCode": 0,
+      "seconds": 0.031,
+      "stdout": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/m3-malformed-request.stdout.log",
+        "digest": "sha256:d1cb83360f7c68d1104f3fb5b7d1db7c34acaa5e15361b02f81dd3418476e3de"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/m3-malformed-request.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "m3-malformed",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+        "discover-native"
+      ],
+      "cwd": ".tools/cross-stack/docker-20261016T000309.333429Z/cases/m3-malformed",
+      "expectedSuccess": false,
+      "stdin": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/m3-malformed.stdin.json",
+        "digest": "sha256:c2248e91d5ca5896a1998f2d59363aae7a0370ad5adfd7f464ccab8e46d3bc7e"
+      },
+      "exitCode": 2,
+      "seconds": 0.034,
+      "stdout": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/m3-malformed.stdout.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/m3-malformed.stderr.log",
+        "digest": "sha256:d97568212a20530b75ec4788114e13ab63fd207d86c9f81ec2952ba6b4f69271"
+      }
+    },
+    {
+      "label": "m3-duplicate-stage-alias-request",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+        "json",
+        "digest"
+      ],
+      "cwd": ".",
+      "expectedSuccess": true,
+      "stdin": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/m3-duplicate-stage-alias-request.stdin.json",
+        "digest": "sha256:e5f977be09199b44547c80d716fa632a31ececd2f1679c62a152a48ea832cf4b"
+      },
+      "exitCode": 0,
+      "seconds": 0.032,
+      "stdout": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/m3-duplicate-stage-alias-request.stdout.log",
+        "digest": "sha256:b5631de0ee1bf67fdf0f8c7f740a76b8e7fd3a45c5f1eba88427ed50304c32ea"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/m3-duplicate-stage-alias-request.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "m3-duplicate-stage-alias",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+        "discover-native"
+      ],
+      "cwd": ".tools/cross-stack/docker-20261016T000309.333429Z/cases/m3-duplicate-stage-alias",
+      "expectedSuccess": false,
+      "stdin": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/m3-duplicate-stage-alias.stdin.json",
+        "digest": "sha256:9a7fb783be2ed467db764516d130170f384a2a96f018d76cd1b3193b35ed08b7"
+      },
+      "exitCode": 2,
+      "seconds": 0.049,
+      "stdout": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/m3-duplicate-stage-alias.stdout.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/m3-duplicate-stage-alias.stderr.log",
+        "digest": "sha256:5ec1354914291e1af8683d4eee0510c6f91061d90a52f765cd156f4ff4d1fd12"
+      }
+    },
+    {
+      "label": "m3-over-byte-bound-request",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+        "json",
+        "digest"
+      ],
+      "cwd": ".",
+      "expectedSuccess": true,
+      "stdin": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/m3-over-byte-bound-request.stdin.json",
+        "digest": "sha256:ff9e5bf03e315aad861ce003bad00e5add2df946b9eef11ad68fa170ab3227d2"
+      },
+      "exitCode": 0,
+      "seconds": 0.199,
+      "stdout": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/m3-over-byte-bound-request.stdout.log",
+        "digest": "sha256:cba670cc2ad5b03e37c9693bb36f44d514e73d8b60e4a973b740c817d5b88f94"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/m3-over-byte-bound-request.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "m3-over-byte-bound",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+        "discover-native"
+      ],
+      "cwd": ".tools/cross-stack/docker-20261016T000309.333429Z/cases/m3-over-byte-bound",
+      "expectedSuccess": false,
+      "stdin": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/m3-over-byte-bound.stdin.json",
+        "digest": "sha256:f6a1ecebcdab912887a97151abdc4025a892337cee8b404ab3df74dbee1b6643"
+      },
+      "exitCode": 2,
+      "seconds": 0.268,
+      "stdout": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/m3-over-byte-bound.stdout.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/m3-over-byte-bound.stderr.log",
+        "digest": "sha256:2b95e29f26d58031f31bb075b6045d9bd553f5b1aa82e0bc847e4fc743da2fb4"
+      }
+    },
+    {
+      "label": "m3-relocated-request",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+        "json",
+        "digest"
+      ],
+      "cwd": ".",
+      "expectedSuccess": true,
+      "stdin": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/m3-relocated-request.stdin.json",
+        "digest": "sha256:c5d1f6dda831933bee5112c0130136953b3768f5fec797c08499a3916bf34806"
+      },
+      "exitCode": 0,
+      "seconds": 0.031,
+      "stdout": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/m3-relocated-request.stdout.log",
+        "digest": "sha256:705f2fccc524357bbc5972017ef7c159c99e3b41ef11f94d883bf2a256520664"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/m3-relocated-request.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "m3-relocated",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+        "discover-native"
+      ],
+      "cwd": ".tools/cross-stack/docker-20261016T000309.333429Z/cases/m3-relocated",
+      "expectedSuccess": true,
+      "stdin": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/m3-relocated.stdin.json",
+        "digest": "sha256:c74a3461af37c9896436bf2274483606c02da996bcabe0f449c57e4989fa34e0"
+      },
+      "exitCode": 0,
+      "seconds": 0.052,
+      "stdout": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/m3-relocated.stdout.log",
+        "digest": "sha256:7e4a2ae7397eb70d06defe37837a7c7013bd347ea0e9319ec62d06c695426aad"
+      },
+      "stderr": {
+        "path": ".tools/cross-stack/docker-20261016T000309.333429Z/m3-relocated.stderr.log",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  ],
+  "retainedWork": ".tools/cross-stack/docker-20261016T000309.333429Z",
+  "filesDeleted": [],
+  "fullCrossStackAcceptance": false,
+  "containerAcceptance": "not-run",
+  "browserAcceptance": "not-run",
+  "generatedRegistration": "not-evaluated-by-this-phase",
+  "sourceInventory": {
+    "examples/cross-stack/.dockerignore": "sha256:ab935c7c81106d3bccd86f7b2e3edfbdb6712670b72296d189a528c1aeacfb7c",
+    "examples/cross-stack/.gitignore": "sha256:e0f20864aa53885a1456384f06a5893f8a70425f2d5ed4039c2ac48f1fe3b2a4",
+    "examples/cross-stack/README.md": "sha256:cf42e233b206e7bac4fe9711f55051e29ea271ab1eccba1b61571c2c0ea92ed7",
+    "examples/cross-stack/acceptance/browser/check.cjs": "sha256:ff28940a3cf2e79a83fe8b14092e7337a01d4b545baa6589d54dd8245e3025c9",
+    "examples/cross-stack/acceptance/browser/package-lock.json": "sha256:ebcfa8a29e03904cb1cac186a01dba982cf58d879de254b81a64fc61907c879a",
+    "examples/cross-stack/acceptance/browser/package.json": "sha256:01b94cf432c7195700ab1a8fccc12e2c440740be6eed5548688f48037c0e86bb",
+    "examples/cross-stack/acceptance/browser/probe.cjs": "sha256:53f2a90c440a8dddb3297c084f2afc31681553aea75e13cd64030f537894a1c4",
+    "examples/cross-stack/acceptance/check-runtime.cjs": "sha256:36ec0c346058167e947bf152ebf1dac9237c4ff31e19754c239833a692b4f1e6",
+    "examples/cross-stack/acceptance/expected.json": "sha256:4b6fe10f673674d8947725b849a61435858305f856adf588e0040faafafbe404",
+    "examples/cross-stack/acceptance/m2-expected.json": "sha256:0cc635f035e1c29bc910ff3f5219e6efae11ce81b15f00caf7a30d87ac66e242",
+    "examples/cross-stack/acceptance/m3-expected.json": "sha256:96e02942558e6d08449ec80cf52ffd2b3c6dff85838ff2665bffd2a4ce865f1f",
+    "examples/cross-stack/acceptance/m4-expected.json": "sha256:68d95411eb7a99b8d3f195bee8427ee8c430bcb17e23a63392ba43fc3263886c",
+    "examples/cross-stack/acceptance/m5-expected.json": "sha256:59f31ca1c245b1b7f83e791dccbcdb6150df365bedd5720732ef0802808cf9b2",
+    "examples/cross-stack/acceptance/m6-expected.json": "sha256:7328a42a77d3e1a4e1a494ee2f62c6ccb980e50a3fa3db28ddbe19f02153277c",
+    "examples/cross-stack/acceptance/m7-expected.json": "sha256:f04ecce90aed86fb9a065b1288b0fb682f165f352e0487ddc6565453a4f0e2a6",
+    "examples/cross-stack/build.py": "sha256:f5e76b2176ea610fbf0086951f181e890721822ddfcbc3a1cb442f8b100ddee3",
+    "examples/cross-stack/compatibility/check.mjs": "sha256:3c4d5e22cbd8c604bbf1e916a280be852fbb8956caebd4962fd916e90154ec07",
+    "examples/cross-stack/config/service.toml": "sha256:ec046d3e08183708c3aae0453ce0cb4febe7b875452d781ea867897b65bccd07",
+    "examples/cross-stack/contracts/create-item.request.schema.json": "sha256:e814007c18146f82674e36f5dc6fb1affe8e871f828c8ddff117f244e2ddfe95",
+    "examples/cross-stack/contracts/create-item.response.schema.json": "sha256:3c49c73af83622c4678aedd932a53e51f71b78db7de502b68a9ed36a46af7113",
+    "examples/cross-stack/contracts/operations.json": "sha256:70695fc7f6200ad069807d69dcda11c30d940a805ed810d54b2f3884971bb2df",
+    "examples/cross-stack/deploy/Dockerfile": "sha256:2485c87a010768616242c99653279915f483056448ca0bc8ca7758613ea50868",
+    "examples/cross-stack/dev.py": "sha256:58df26a3eb1068bf4942d42db7e3867204f7d4fe767b98f6ceaba5958219a7f3",
+    "examples/cross-stack/mappings/README.md": "sha256:594388cf251b81e2c1a87afe1fa3c093b6a36dd7cc667230407917678bf2cbbb",
+    "examples/cross-stack/mappings/routing-pack.json": "sha256:64cb8bad363e056b99e62fca7f1eca95c46790dcb0c4dd8c2f987c0ed4ff601f",
+    "examples/cross-stack/service/Cargo.lock": "sha256:3e511df39108267fd2cf10a9b49dd49db589ae1f49b6fb8b9152779d365a99c3",
+    "examples/cross-stack/service/Cargo.toml": "sha256:fdd1f664593da2163ad70802e6c2bc8b922dcd019500550c349efbb556cba77c",
+    "examples/cross-stack/service/LICENSE": "sha256:cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+    "examples/cross-stack/service/NOTICE": "sha256:b0454a6c73ccd381741a9ab4a62eb8d432b9b94313c3d674a3136733a1f9d5e2",
+    "examples/cross-stack/service/licenses/rust-1.99.0/COPYRIGHT": "sha256:172020dbfd5b53a226dfde77616190a48dcff519b0bc0e6deb91a8450782c4af",
+    "examples/cross-stack/service/licenses/rust-1.99.0/LICENSE-APACHE": "sha256:62c7a1e35f56406896d7aa7ca52d0cc0d272ac022b5d2796e7d6905db8a3636a",
+    "examples/cross-stack/service/licenses/rust-1.99.0/LICENSE-MIT": "sha256:b71bd43a069ca0641a9ecfe585ca7b3c53b5cc1608f8b68321168698e28b5ea1",
+    "examples/cross-stack/service/licenses/rust-1.99.0/SHA256SUMS": "sha256:9fb0c6a364b162c4c0d884f64bda342d8a6679ccbb8110e7e7859e0b3ccc1aea",
+    "examples/cross-stack/service/licenses/rust-1.99.0/SOURCE.json": "sha256:432104cab103476b59b2a61349ea888a91dc7fe7b7381ec9c9d39bbfc878384c",
+    "examples/cross-stack/service/rust-toolchain.toml": "sha256:515c80a149c1e927d497dbebc399e241822aa0197e8f778c21bf5c136c90afd2",
+    "examples/cross-stack/service/src/generated.rs": "sha256:6a396d3ae3a7a433567fbd9a47dcb013794c996faaa16d2d4eeaf9907181616a",
+    "examples/cross-stack/service/src/handlers/create_item.rs": "sha256:1e04089800d93b65af6823c1be25653244b70252723e6f9df4005e80a2eea962",
+    "examples/cross-stack/service/src/lib.rs": "sha256:0e146354d88c717330e199cd284004ca7963710fb3387b2fa8c9945274b17101",
+    "examples/cross-stack/service/src/main.rs": "sha256:2b6ef5e614e3739719c2ab7eae934671be0f858a8eda4399acb59673e660c0ee",
+    "examples/cross-stack/service/tools/collect-notices.sh": "sha256:d978f08439038f9e84656a1c5f86c0020c00dd4ab7932781ed20f8de5761aaef",
+    "examples/cross-stack/support.json": "sha256:6570585d1ecc1e249cd0f4af0a897965986d480b488d9e84c0fdda3203b0de9e",
+    "examples/cross-stack/web/app/api/items/route.ts": "sha256:b4f98c92dae67ee6096f652b30193f9cbc2311caeab97ca9af113f2ac0c1e4c8",
+    "examples/cross-stack/web/app/items/[id]/page.tsx": "sha256:5b7d5248fbaa949f9368bd4cd8d292095dc8addc292d3688207cd93d7ef1c074",
+    "examples/cross-stack/web/app/layout.tsx": "sha256:c1948db0db63dcabb24d969c4d4d7d55277304aeb7cc4ffa2485ca6fb3464693",
+    "examples/cross-stack/web/app/page.tsx": "sha256:627dab52cb3d33f06b92190f3c4134195d27f4c4e19bc1f17a8b0acd23c10c31",
+    "examples/cross-stack/web/generated/operations.ts": "sha256:c3121a2337620abb60e93f900ae5582f78e8224ccc9498e439cfdbdb9b911ac1",
+    "examples/cross-stack/web/next.config.mjs": "sha256:d9be514b014a67dbf2f6aeb0acd2b5b87801e378127d4ae8f592af5e39460b25",
+    "examples/cross-stack/web/package-lock.json": "sha256:b2d52eccd71b29bd6e6938292d3ef692e434ac4ca77e8508ed0da7c57fbc2d59",
+    "examples/cross-stack/web/package.json": "sha256:3bcba3a9906f2dd519ab7863a9174d4262aba9246977bfba96ad090ffdfd6334",
+    "examples/cross-stack/web/tsconfig.json": "sha256:45fd26769ac1a8f0b8741099674b71e00846b9f97ce1b7cb7afb98c7922ce7f0",
+    "examples/cross-stack/workspace.py": "sha256:563f973dc240fb7eae87dd4994a110d85c379dff2f98db62414dff66df76bfa3"
+  },
+  "dockerObservationChecks": {
+    "status": "passed",
+    "controls": [
+      {
+        "control": "m3-real-dockerfile",
+        "result": "syntax-observed",
+        "requestDigest": "sha256:74159f708987cc655192c31c18163cb2040759f2b619025da2639fa8bad77c16",
+        "sourcesUnchanged": true,
+        "instructionsExecuted": false
+      },
+      {
+        "control": "m3-stage-alias-move",
+        "result": "syntax-observed",
+        "requestDigest": "sha256:4f91795447094cf0f1681c620e4f8f53a18f6c68747042f2e8047dd365bdf676",
+        "sourcesUnchanged": true,
+        "instructionsExecuted": false
+      },
+      {
+        "control": "m3-stage-index",
+        "result": "syntax-observed",
+        "requestDigest": "sha256:ee62822d208fbc256fb83d916fadd71eda39caaaea2f0c7d38ded1e24f84a3ba",
+        "sourcesUnchanged": true,
+        "instructionsExecuted": false
+      },
+      {
+        "control": "m3-missing-copy-stage",
+        "result": "syntax-observed",
+        "requestDigest": "sha256:203919956480d93b9c7e91b378393b1d6569101f849750831417e04811c8432b",
+        "sourcesUnchanged": true,
+        "instructionsExecuted": false
+      },
+      {
+        "control": "m3-unproved-builder-artifact",
+        "result": "syntax-observed",
+        "requestDigest": "sha256:b0fcccd08207331bd28dc52636997f16edceb2d2785d99022e11fff88770c01b",
+        "sourcesUnchanged": true,
+        "instructionsExecuted": false
+      },
+      {
+        "control": "m3-missing-config",
+        "result": "syntax-observed",
+        "requestDigest": "sha256:2f06892e710321d55c334a8c3bbc57b33b72f67357e2b5b255809e6e1caa122d",
+        "sourcesUnchanged": true,
+        "instructionsExecuted": false
+      },
+      {
+        "control": "m3-ignored-config",
+        "result": "syntax-observed",
+        "requestDigest": "sha256:66e94b53736f33279a19acb9dd24d97e29e75177657f00f0325d5c0c66ef7498",
+        "sourcesUnchanged": true,
+        "instructionsExecuted": false
+      },
+      {
+        "control": "m3-specific-ignore-precedence",
+        "result": "syntax-observed",
+        "requestDigest": "sha256:64c8770b2050cb8713a1a003f55cb295ae165d88887f505e60c339180a9f7318",
+        "sourcesUnchanged": true,
+        "instructionsExecuted": false
+      },
+      {
+        "control": "m3-unresolved-build-arg",
+        "result": "syntax-observed",
+        "requestDigest": "sha256:0b395dc52d83f61416fd5e0a136a3f2b565bd57f37005ba92b48cf63b4a45c33",
+        "sourcesUnchanged": true,
+        "instructionsExecuted": false
+      },
+      {
+        "control": "m3-explicit-build-arg",
+        "result": "syntax-observed",
+        "requestDigest": "sha256:6e201d3c4eae5197ef76327f2801b3950008d12b9162be3a8757816354b17c3f",
+        "sourcesUnchanged": true,
+        "instructionsExecuted": false
+      },
+      {
+        "control": "m3-shell-launch",
+        "result": "syntax-observed",
+        "requestDigest": "sha256:4741fa15aa807085eff19411a9aac299639d726541e42800bd0a47ba9f6487c5",
+        "sourcesUnchanged": true,
+        "instructionsExecuted": false
+      },
+      {
+        "control": "m3-opaque-run",
+        "result": "syntax-observed",
+        "requestDigest": "sha256:f3a45b194936ce72f142fe13b35a560d1c6f605a910f2ebf80082cd7f5125362",
+        "sourcesUnchanged": true,
+        "instructionsExecuted": false
+      },
+      {
+        "control": "m3-json-copy",
+        "result": "syntax-observed",
+        "requestDigest": "sha256:30a2b4821b5e1b17647b599f6c2b977dcaed4cb81075b1f7e9547f2c91f7b19a",
+        "sourcesUnchanged": true,
+        "instructionsExecuted": false
+      },
+      {
+        "control": "m3-wrong-context",
+        "result": "refused",
+        "code": "NATIVE_DOCKER_CONTEXT",
+        "sourcesUnchanged": true
+      },
+      {
+        "control": "m3-incomplete-context",
+        "result": "refused",
+        "code": "NATIVE_DOCKER_CONTEXT",
+        "sourcesUnchanged": true
+      },
+      {
+        "control": "m3-missing-target",
+        "result": "refused",
+        "code": "NATIVE_DOCKER_TARGET",
+        "sourcesUnchanged": true
+      },
+      {
+        "control": "m3-unsupported-platform",
+        "result": "refused",
+        "code": "NATIVE_DOCKER_CONTEXT",
+        "sourcesUnchanged": true
+      },
+      {
+        "control": "m3-unsupported-ignore",
+        "result": "refused",
+        "code": "NATIVE_DOCKER_IGNORE_UNSUPPORTED",
+        "sourcesUnchanged": true
+      },
+      {
+        "control": "m3-invalid-json-launch-unresolved",
+        "result": "syntax-observed",
+        "requestDigest": "sha256:48c20d7bcf6ab09d285de2af6f6dfa4a642232326632938b926da78d23bacd31",
+        "sourcesUnchanged": true,
+        "instructionsExecuted": false
+      },
+      {
+        "control": "m3-malformed",
+        "result": "refused",
+        "code": "NATIVE_DOCKER_SYNTAX",
+        "sourcesUnchanged": true
+      },
+      {
+        "control": "m3-duplicate-stage-alias",
+        "result": "refused",
+        "code": "NATIVE_DOCKER_STAGE_ALIAS",
+        "sourcesUnchanged": true
+      },
+      {
+        "control": "m3-over-byte-bound",
+        "result": "refused",
+        "code": "NATIVE_DOCKER_LIMIT",
+        "sourcesUnchanged": true
+      },
+      {
+        "control": "m3-relocated",
+        "result": "syntax-observed",
+        "requestDigest": "sha256:74159f708987cc655192c31c18163cb2040759f2b619025da2639fa8bad77c16",
+        "sourcesUnchanged": true,
+        "instructionsExecuted": false
+      }
+    ],
+    "nativeUnitControls": 6,
+    "engines": {
+      "compiler": "sha256:ba2877bcc226d3df7866c967e5b9998d881218086bf350b899707da0b5934c7d",
+      "documentType": "executor-description",
+      "governance": "sha256:d314b34906675aab9e8a6f8951933880b1470da325f1c1501cadc8ba96c28817",
+      "schemaVersion": "0.1.0",
+      "scientific": "sha256:8bd9343ff8838589b5cb02546f307ff0ce79d1aea01db8d77ad6e47e890f7b9b",
+      "workspace": "sha256:afdb45813ec537e714660a8a56888e4603b3e5e7ed02a597cbb6fabe9bf17945"
+    },
+    "nativeBinaryDigest": "sha256:e6cb8351a86c96ea36491934918a7de5004e593c447c16d4d85b919457871ffb",
+    "parser": {
+      "engine": "tree-sitter=0.26.5",
+      "grammar": "tree-sitter-containerfile=0.9.2",
+      "nodeTypesDigest": "sha256:45db9754de1647e4aa3a526d8e94c580e906099bf92000fe09247cd64c1e5868"
+    },
+    "scope": "captured syntax/context membership only",
+    "BuildKitOracle": "unavailable-on-Intel; required Linux CI lane not run",
+    "LinuxArtifact": "not-observed",
+    "imageContents": "not-observed",
+    "runtime": "not-observed",
+    "graphConnection": "not-yet-enforced-M4",
+    "filesDeleted": []
+  },
+  "sourceUnchanged": true,
+  "completedUtc": "2026-10-16T00:03:33.279755+00:00"
+}
