@@ -331,3 +331,21 @@ handlers are checked; source, native evidence and policy remain unchanged.
 This closes the compile-time negative binding controls only. Runtime HTTP,
 actual Next boundary, managed application paths and installed/deployment
 qualification remain open.
+
+## Linux preparation-aware watch checkpoint
+All four implementation CI jobs passed. The [verified diagnostics record](../acceptance/project-adoption/g6-native-preparation-2026-10-16/linux-watch.json)
+binds the artifact's API size/SHA-256 and actual controller/control hashes.
+Its receipts contain 24 preparation and 15 foreground watch controls, including
+consumed regenerated output and preparation-key failure suppression/recovery.
+This is controlled Linux CI qualification. Native Intel watch performance and
+actual application generator/build/edit/failure/runtime qualification remain open.
+
+## Real owner closed-tooling context checkpoint
+[Staging and capture](../acceptance/project-adoption/g6-owner-native-preparation-2026-10-16/context.json)
+passed for the existing Next owner context: 195,999 entries and 1,674,434,053 file
+bytes now include the pinned native compiler, SDK, relative loader and shim.
+This removes the prototype's external dependency-tree link from the planned
+native preparation workflow. The owner generator is unchanged. It has not yet
+run in this workflow; actual build/edit/failure/runtime qualification remains open.
+The optimized-driver build was refused before startup by another live shared
+lease; its refusal and the finished capture are retained.
