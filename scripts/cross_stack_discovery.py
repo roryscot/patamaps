@@ -102,6 +102,8 @@ def verify(root, work, env, run):
                          "manifestsAndLocksUnchanged": True, "projectBuildScriptExecuted": False,
                          "requestDigest": request["requestDigest"], "shardDigest": json.loads(
                              run(label + "-shard-digest", [cli, "json", "digest"], input_bytes=json.dumps(value["shard"]).encode()))})
+        if "workspaceMembers" in evidence:
+            observed[-1]["memberExpansion"] = evidence["workspaceMembers"]
         return value
 
     positive = provider("m1-resolved-workspace", base)

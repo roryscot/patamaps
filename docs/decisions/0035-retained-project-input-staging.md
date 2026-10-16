@@ -1,6 +1,6 @@
 # Retained project input staging
 
-Status: implemented with frozen filesystem controls; compilation/runtime pending. G4 workflow completion remains open.
+Status: implemented; scoped Linux staging controls verified at61d8c11. G4 workflow completion remains open.
 
 Native project-stage CAPTURE --destination NEW_DIRECTORY uses the existing
 ProjectCapture/verification contract. Its receipt is stdout-only so output-file flags cannot replace a staged input.
@@ -37,3 +37,15 @@ preparation should stage its selected input capture before the explicitly record
 candidate-only witness include. These are staging checks, not real app build or
 Next qualification. Remaining G4 requirements (orchestration, readiness, race/
 cancellation/watch/no-op/performance and installed consumers) are unchanged.
+
+## Scoped execution
+
+CI38848984424 at61d8c11 passed all four jobs. The [staging receipt](../acceptance/project-adoption/g4-project-stage-61d8c11/receipt.json) retains the three actual CLI controls and their five supporting commands,
+including the full workspace test command. The enclosing discovery receipt has
+34 controls and84 commands. CLI staging ran on Linux x86_64; both native Linux
+architectures passed their existing regression gates. This does not establish
+staging or builds on real Wargame/Seeder sources or complete G4.
+
+The subsequent d11a78c CLI refinement makes receipts stdout-only. Its dedicated
+discovery/staging/replay phase passed; full workflow completion was pending when
+this checkpoint was recorded. The Rust staging implementation is unchanged.

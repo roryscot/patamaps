@@ -1,0 +1,178 @@
+{
+  "status": "passed-retained-project-input-staging",
+  "sourceRevision": "61d8c1152d45e7253d2d2c3bc666e93ee59c8d42",
+  "workflow": {
+    "runId": 38848984424,
+    "url": "https://github.com/roryscot/patamaps/actions/runs/38848984424",
+    "jobs": [
+      {
+        "id": 116805768940,
+        "name": "Linux x86_64",
+        "conclusion": "success"
+      },
+      {
+        "id": 116805769026,
+        "name": "Cross-stack source bindings (Linux x86_64)",
+        "conclusion": "success"
+      },
+      {
+        "id": 116805769094,
+        "name": "Cross-stack Linux image and browser (amd64)",
+        "conclusion": "success"
+      },
+      {
+        "id": 116805769132,
+        "name": "Linux aarch64",
+        "conclusion": "success"
+      }
+    ]
+  },
+  "diagnostics": {
+    "artifactId": 12024692838,
+    "bytes": 52005,
+    "sha256": "72ca7cea0f9c37273cf468f34914ca14e636fd62959f61b68b8cfa4822db7f80"
+  },
+  "stagingControls": [
+    {
+      "control": "g4-retained-input-stage",
+      "result": "staged",
+      "captureDigest": "sha256:6abd2a581d04ac05eb92028053dfd38fe42af3a44a89366580d23b294d7bdca5",
+      "originalSelectedSourceRootUnavailable": true,
+      "sourcePreservedAt": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-discovery/cases/base-staging-retained",
+      "externalProgramsAbsentFromPath": true,
+      "inputCount": 2,
+      "selectedInputDigests": {
+        "Cargo.toml": "sha256:9cb76678fbddb3d27f414c96effc40e97e18f99ecafeafec31de4a35fb00286b",
+        "app/src/main.rs": "sha256:536e506bb90914c243a12b397b9a998f85ae2cbd9ba02dfd03a9e155ca5ca0f4"
+      },
+      "compilationEstablished": false
+    },
+    {
+      "control": "g4-stage-no-overwrite",
+      "result": "refused",
+      "code": "PROJECT_STAGE_DESTINATION_UNAVAILABLE",
+      "selectedBytesUnchanged": true
+    },
+    {
+      "control": "g4-stage-tamper-before-creation",
+      "result": "refused",
+      "code": "PROJECT_RECORD_INPUT",
+      "destinationCreated": false
+    }
+  ],
+  "commands": [
+    {
+      "label": "m1-unit-and-process-tests",
+      "argv": [
+        "cargo",
+        "test",
+        "-p",
+        "patamaps-workspace",
+        "--locked",
+        "--offline"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 47.391,
+      "stdoutDigest": "sha256:66357b584d433c4e503189abef1309c747ba8748efffb5271a7ff83922bebe39",
+      "stderrDigest": "sha256:3e41e6ac3ca1a22e94f94c23a6124735faf0bb5f598bb62587762ac6f862023e"
+    },
+    {
+      "label": "g4-stage-capture",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/debug/patamaps",
+        "project-capture",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-discovery/stage-profile.json",
+        "--root",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-discovery/cases/base",
+        "--output",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-discovery/stage-capture.json"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.008,
+      "stdoutDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "g4-project-stage",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/debug/patamaps",
+        "project-stage",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-discovery/stage-capture.json",
+        "--destination",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-discovery/staged-selected-inputs"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-discovery",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.008,
+      "stdoutDigest": "sha256:ce13966f8b4b9e6cbcdc9f22f500caa101d8b6ac65e05e2edbecb5bd52873afe",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "g4-stage-existing-destination",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/debug/patamaps",
+        "project-stage",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-discovery/stage-capture.json",
+        "--destination",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-discovery/staged-selected-inputs"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-discovery",
+      "expectedSuccess": false,
+      "exitCode": 2,
+      "seconds": 0.008,
+      "stdoutDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrDigest": "sha256:536336feb9a20c0dd87b30879c30549013db89bb66b031705700fb3d0cbc9544"
+    },
+    {
+      "label": "g4-stage-tampered-capture",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/debug/patamaps",
+        "project-stage",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-discovery/stage-tampered.json",
+        "--destination",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-discovery/stage-refused-candidate"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-discovery",
+      "expectedSuccess": false,
+      "exitCode": 2,
+      "seconds": 0.008,
+      "stdoutDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrDigest": "sha256:b49c8307a05ed2db26b68617a464823a20dfc7655a3c9e7fee1b9e249a72579d"
+    }
+  ],
+  "engineIdentities": {
+    "compiler": "sha256:1f3c99329bf39260fc2eb37d865fc10e3d81d0b2b1a0cbdff403c51c82e72c27",
+    "documentType": "executor-description",
+    "governance": "sha256:f48ab15852053f306ecd54e93bf4b1b00aa053fb2f820b924fac31a94453db32",
+    "schemaVersion": "0.1.0",
+    "scientific": "sha256:40cb612c1dfe969a689b9796d20ed7bd5ad47cd69ef9bb32543eebe0ef12eb1a",
+    "workspace": "sha256:e2cafa52b3815722ed2b3cacb111f38ca854b0af5bcf9ae3b304afed2eb460bd"
+  },
+  "nativeBinaryDigest": "sha256:1e4b337eb38ed684a004bec475dc88494e507be47c06aee5d6c7cc457a575c2b",
+  "scope": {
+    "stagingCliPlatform": "Linux x86_64",
+    "kernelRegressionPlatforms": [
+      "Linux x86_64",
+      "Linux aarch64"
+    ],
+    "captureProfile": "patamaps-project-inputs-1",
+    "originalSource": "retained-at-renamed-path; configured-root-unavailable",
+    "externalPrograms": "absent-from-PATH; stage runs no tools",
+    "inputScope": "two selected UTF-8 fixture files",
+    "completeBuildContext": "not-established",
+    "metadataRestoration": "not-performed",
+    "fullG4": "incomplete",
+    "existingProjectQualification": "not-performed",
+    "activation": "not-performed"
+  },
+  "subsequentRefinement": {
+    "source": "d11a78cfb4ac6e205aa5329c9879b3e2d60fe5c3",
+    "change": "CLI stage receipts stdout-only; prevents optional output flag from replacing staged input",
+    "dedicatedStagePhase": "passed; full workflow pending at observation"
+  }
+}
