@@ -291,3 +291,22 @@ Observable acceptance: an actual owner graph edit changes the existing consumed 
 
 ## Projection ordering regression checkpoint
 The [scoped regression receipt](../acceptance/project-adoption/g6-projection-ordering-2026-10-16/receipt.json) records 116 core tests, strict core/CLI Clippy and all 68 original differential cases passing. Two distinct Unicode target IDs that collate equally now preserve original encounter order, checked in both directions and repeated 32 times per case. Existing frozen66 expectations are unchanged. Two malformed initial controls were retained as failures, corrected rather than accepted. Application integration requirements above remain open.
+
+## Owner preparation implementation in progress
+The opt-in preparation contract now has a candidate implementation in the existing
+native build driver, CLI input observation and foreground watch. Generated output
+preimages and commands contribute to the input key. Preparation command records
+and generated selected bytes are retained for source-free replay. Preparation has
+no build writable-path allowance; final undeclared changes must refuse before
+build commands. Existing plan types and old Rust entry points are preserved.
+Controlled preparation and watch cases are wired into the existing Linux source
+qualification. This checkpoint is UNVERIFIED: Intel compilation, strict Clippy,
+native controlled runs, watch and actual owner qualification have not run for
+these source changes. The live shared Intel job prevents heavy verification;
+no lease or policy bypass is authorized. Do not count implementation as acceptance.
+
+Native Intel rustfmt parsed/formatted the changed Rust files and its check
+passed; Python AST parsing and diff whitespace checks also pass. A draft branch
+is being published for independent existing Linux CI while the Intel shared
+heavy lease is occupied. This is not native compilation or application acceptance;
+the full native suite and Rust candidate controls remain pending.

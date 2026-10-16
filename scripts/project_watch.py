@@ -89,6 +89,7 @@ def arguments():
     parser.add_argument("--state", type=Path, required=True)
     parser.add_argument("--compiler", type=Path, required=True)
     parser.add_argument("--context", type=Path, help="Explicit sealed context binding for each native update")
+    parser.add_argument("--preparation", type=Path, help="Explicit owner preparation contract for each update")
     parser.add_argument("--poll-ms", type=int, default=1000)
     parser.add_argument("--debounce-ms", type=int, default=300)
     parser.add_argument("--runner", nargs=argparse.REMAINDER,
@@ -108,6 +109,8 @@ def arguments():
         setattr(args, name, getattr(args, name).absolute())
     if args.context is not None:
         args.context = args.context.absolute()
+    if args.preparation is not None:
+        args.preparation = args.preparation.absolute()
     if not args.runner:
         node, supervisor = os.environ.get("PATAMAPS_DEV_NODE"), os.environ.get("PATAMAPS_DEV_SUPERVISOR")
         if node and supervisor:
@@ -126,6 +129,8 @@ def observe(args):
     argv = [str(args.compiler), "project-build-input-key", str(args.plan), "--source", str(args.source)]
     if args.context is not None:
         argv.extend(["--context", str(args.context)])
+    if args.preparation is not None:
+        argv.extend(["--preparation", str(args.preparation)])
     result = subprocess.run(
         argv,
         stdout=subprocess.PIPE, stderr=subprocess.PIPE, timeout=30, check=False)
@@ -208,6 +213,8 @@ def main():
                           "--source", str(args.source), "--state", str(args.state)]
                 if args.context is not None:
                     native.extend(["--context", str(args.context)])
+                if args.preparation is not None:
+                    native.extend(["--preparation", str(args.preparation)])
                 inner = [sys.executable, str(script), "__guard", *native]
                 argv = [sys.executable, str(script), "__guard", *args.runner, *inner]
                 event("starting-project-build-update", inputKey=key)

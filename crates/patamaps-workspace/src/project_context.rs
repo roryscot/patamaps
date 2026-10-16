@@ -110,7 +110,7 @@ fn refuse() -> Error {
         "Explicit retained context refused; partial outputs retained",
     )
 }
-fn allowed(path: &str) -> bool {
+pub(crate) fn allowed(path: &str) -> bool {
     crate::relative_path(path)
         && path.len() <= 4096
         && path.split('/').count() <= 128
@@ -851,6 +851,111 @@ mod unix {
         root_identity(candidate, &root)?;
         Ok(())
     }
+    fn preparation_preimages(
+        outputs: &BTreeMap<String, Option<String>>,
+        manifest: &ProjectContextManifest,
+    ) -> Result<(), Error> {
+        for (path, preimage) in outputs {
+            if !allowed(path) {
+                return Err(refuse());
+            }
+            match (manifest.entries.get(path), preimage) {
+                (Some(ProjectContextEntry::File { digest, .. }), Some(expected))
+                    if digest == expected => {}
+                (None, None) => {}
+                _ => return Err(refuse()),
+            }
+        }
+        Ok(())
+    }
+    pub(crate) fn verify_preparation_preimages(
+        outputs: &BTreeMap<String, Option<String>>,
+        metadata: &Path,
+        candidate: &Path,
+    ) -> Result<(), Error> {
+        let (_, manifest) = build_metadata(metadata)?;
+        preparation_preimages(outputs, &manifest)?;
+        let root = project_fs::root(candidate)?;
+        for (path, expected) in outputs {
+            let mut dir = root.try_clone()?;
+            let parts = path.split('/').collect::<Vec<_>>();
+            let mut actual = None;
+            for (index, part) in parts.iter().enumerate() {
+                let last = index == parts.len() - 1;
+                let flags = rustix::fs::OFlags::RDONLY
+                    | rustix::fs::OFlags::NOFOLLOW
+                    | rustix::fs::OFlags::CLOEXEC
+                    | if last {
+                        rustix::fs::OFlags::NONBLOCK
+                    } else {
+                        rustix::fs::OFlags::DIRECTORY
+                    };
+                match rustix::fs::openat(&dir, *part, flags, Mode::empty()) {
+                    Err(rustix::io::Errno::NOENT) => break,
+                    Err(_) => return Err(refuse()),
+                    Ok(fd) => {
+                        let file = File::from(fd);
+                        if last {
+                            if !file.metadata()?.is_file() {
+                                return Err(refuse());
+                            }
+                            actual = Some(bytes(file, None)?.0);
+                        } else {
+                            dir = file;
+                        }
+                    }
+                }
+            }
+            if &actual != expected {
+                return Err(refuse());
+            }
+        }
+        root_identity(candidate, &root)?;
+        Ok(())
+    }
+    pub(crate) fn prepared_context_binding(
+        binding: &ProjectBuildContext,
+        outputs: &BTreeMap<String, Option<String>>,
+        inputs: &[crate::SuppliedInput],
+        metadata: &Path,
+    ) -> Result<ProjectBuildContext, Error> {
+        let (_, manifest) = build_metadata(metadata)?;
+        preparation_preimages(outputs, &manifest)?;
+        let mut result = binding.clone();
+        for (path, preimage) in outputs {
+            if result.overlays.contains_key(path) {
+                return Err(refuse());
+            }
+            let input = inputs
+                .iter()
+                .find(|i| &i.receipt.path == path)
+                .ok_or_else(refuse)?;
+            if let Some(preimage) = preimage
+                && preimage != &input.receipt.digest
+            {
+                result.overlays.insert(path.clone(), preimage.clone());
+            }
+        }
+        result.validate()?;
+        // Validate explicit preimages, paths and all generated content, including replay.
+        effective_entries(&result, &manifest, inputs)?;
+        Ok(result)
+    }
+    pub(crate) fn verify_prepared_build_context(
+        binding: &ProjectBuildContext,
+        inputs: &[crate::SuppliedInput],
+        metadata: &Path,
+        candidate: &Path,
+    ) -> Result<(), Error> {
+        let (_, manifest) = build_metadata(metadata)?;
+        let expected = effective_entries(binding, &manifest, inputs)?;
+        let root = project_fs::root(candidate)?;
+        // Build write roots are NOT available to preparation. Only declared
+        // generated files may differ before the immutable candidate capture.
+        verify_tree(&root, &expected, &[], true)?;
+        root_identity(candidate, &root)?;
+        Ok(())
+    }
     pub(crate) fn stage_build_context(
         binding: &ProjectBuildContext,
         inputs: &[crate::SuppliedInput],
@@ -1052,7 +1157,10 @@ mod unix {
 #[cfg(unix)]
 pub use unix::{capture_project_context, stage_project_context, verify_project_context};
 #[cfg(unix)]
-pub(crate) use unix::{stage_build_context, verify_build_context};
+pub(crate) use unix::{
+    prepared_context_binding, stage_build_context, verify_build_context,
+    verify_preparation_preimages, verify_prepared_build_context,
+};
 #[cfg(not(unix))]
 pub fn capture_project_context(
     _: &std::path::Path,
