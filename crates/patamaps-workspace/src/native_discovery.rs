@@ -841,6 +841,7 @@ fn cargo_entities(
         4 * 1024 * 1024,
     )?;
     same_sources(root, inputs)?;
+    validate_cargo_root(config.root_mode, &manifest_path, &workspace_path, &declared)?;
     if tool_digest(cargo)?.1 != actual_cargo || tool_digest(rustc)?.1 != actual_rustc {
         return Err(refused(
             "NATIVE_CARGO_TOOL_CHANGED",

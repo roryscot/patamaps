@@ -3,6 +3,7 @@ from pathlib import Path
 import argparse
 import hashlib
 import json
+import os
 import subprocess
 import sys
 
@@ -24,9 +25,9 @@ def main():
     args.output.mkdir(parents=True, exist_ok=False)
     commands = []
     reports = []
-    def run(label, argv, success=True):
+    def run(label, argv, success=True, env=None):
         with (args.output/(label+".stdout.log")).open("xb") as out, (args.output/(label+".stderr.log")).open("xb") as err:
-            result = subprocess.run([str(v) for v in argv], stdout=out, stderr=err, timeout=30)
+            result = subprocess.run([str(v) for v in argv], stdout=out, stderr=err, timeout=30, env=env)
         commands.append(dict(label=label, argv=[str(v) for v in argv], exitCode=result.returncode))
         (args.output/"commands.json").write_text(json.dumps(commands,indent=2)+"\n")
         assert (result.returncode == 0) == success, label
@@ -49,14 +50,18 @@ def main():
         profile = args.output/(name+".profile.json")
         profile.write_text(json.dumps(definition,indent=2)+"\n")
         captured = args.output/(name+".capture.json")
-        run(name+"-capture",[args.compiler,"project-capture",profile,"--root",root,"--output",captured])
+        sentinel="patamaps-controlled-reference-sentinel-not-a-real-secret"
+        capture_env={**os.environ,"PATAMAPS_QUALIFICATION_UNRESOLVED_DATABASE":sentinel}
+        run(name+"-capture",[args.compiler,"project-capture",profile,"--root",root,"--output",captured],env=capture_env)
+        assert sentinel.encode() not in captured.read_bytes()
         record=json.loads(captured.read_bytes())
         assert {r["receipt"]["path"]:r["receipt"]["digest"] for r in record["inputs"]} == expected
         assert all(r["receipt"]["digest"]==sha(r["content"].encode()) for r in record["inputs"])
         replay=json.loads(run(name+"-verify",[args.compiler,"project-verify",captured]))
         assert replay["status"]=="verified-project-input-bindings"
         assert replay["secretResolution"]=="not-performed" and replay["admission"]=="not-performed"
-        # Replay after the private capture's source paths are all unavailable.
+        # Replay with only the capture argument, no source/tool arguments and an empty cwd/PATH.
+        # Original sources remain on the host; the native unit control separately moves required paths.
         isolated=args.output/(name+"-empty-root");isolated.mkdir()
         offline=subprocess.run([str(args.compiler.resolve()),"project-verify",str(captured.resolve())],cwd=isolated,
                                env={"PATH":"/unavailable","HOME":str(isolated)},capture_output=True,timeout=30)
@@ -71,7 +76,7 @@ def main():
         assert git_status==subprocess.check_output(["git","status","--porcelain=v1","--untracked-files=no"],cwd=root,text=True)
         reports.append(dict(project=name,head=git_head,trackedWorkingTreeDirty=bool(git_status),selectedInputs=expected,
                             captureDigest=record["digest"],selectedInputsUnchanged=True,trackedStatusUnchanged=True,
-                            offlineReplay="passed",tamperedBytes="refused",scope="selected-input-capture-only",
+                            offlineReplay="passed",controlledSecretSentinelAbsent=True,tamperedBytes="refused",scope="selected-input-capture-only",
                             applicationBuild="not-performed",runtime="not-performed"))
     receipt=dict(status="passed-g1-selected-input-controls",compilerDigest=sha(args.compiler.read_bytes()),
                  projects=reports,commands=commands,rawCaptureLocation=str(args.output),fullWorkflowAccepted=False,
