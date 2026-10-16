@@ -166,6 +166,8 @@ def main():
     try:
         from project_watch_guard_controls import verify as verify_guard_groups
         receipt["controls"].append(verify_guard_groups(ROOT / "scripts/project_watch.py", work / "guard-group-probe"))
+        from project_watch_guard_controls import verify_exits
+        receipt["controls"].append(verify_exits(ROOT / "scripts/project_watch.py", work / "guard-exit-probe"))
         save()
         start("edits")
         wait_until(lambda: completed("edits", 1), "initial selected build")

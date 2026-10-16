@@ -15,22 +15,34 @@ def event(status, **fields):
     print(json.dumps(dict(status=status, **fields), separators=(",", ":")), flush=True)
 
 
+def signal_group(pid, signum):
+    """Darwin may return EPERM after the owned group has already disappeared."""
+    try:
+        os.killpg(pid, signum)
+    except ProcessLookupError:
+        pass
+    except PermissionError:
+        if sys.platform != "darwin":
+            raise
+        result = subprocess.run(["/bin/ps", "-axo", "pgid=,stat="],
+                                check=True, capture_output=True, text=True, timeout=5)
+        rows = [line.split() for line in result.stdout.splitlines() if line.strip()]
+        if not rows or any(len(row) != 2 for row in rows):
+            raise
+        if any(int(group) == pid and not state.startswith("Z") for group, state in rows):
+            raise
+
+
 def stop(child, grace=10):
     """Stop only our child's ordinary process group; preserve all outputs."""
     if child is None:
         return
-    try:
-        os.killpg(child.pid, signal.SIGTERM)
-    except ProcessLookupError:
-        pass
+    signal_group(child.pid, signal.SIGTERM)
     deadline = time.monotonic() + grace
     while child.poll() is None and time.monotonic() < deadline:
         time.sleep(.05)
-    try:
-        # The leader can have exited while ordinary descendants remain.
-        os.killpg(child.pid, signal.SIGKILL)
-    except ProcessLookupError:
-        pass
+    # The leader can have exited while ordinary descendants remain.
+    signal_group(child.pid, signal.SIGKILL)
     child.wait()
 
 

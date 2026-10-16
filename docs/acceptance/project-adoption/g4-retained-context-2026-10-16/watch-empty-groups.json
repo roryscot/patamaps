@@ -1,0 +1,145 @@
+{
+  "status": "passed",
+  "compiler": "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps",
+  "compilerDigest": "aa494f53db0550a4976fc048b2299e5f044dd545df0d7db560fb91ab4a7c10c8",
+  "controlsDigest": "8cbf47137b705260f7d2e320b6aa54df8a2b17712d3edbcd3cbbce0fc6927959",
+  "runnerScope": "explicit configured policy runner",
+  "controllerDigest": "e75e1c6e505af75cb2423079ab5ac79081e5a328947fa3e0406f73783eb97e61",
+  "runner": [
+    "/Users/admin/.nvm/versions/node/v22.23.3/bin/node",
+    "/Users/admin/Documents/Codex/storage-safeguards/run-project.mjs",
+    "patamaps",
+    "--"
+  ],
+  "state": "/var/folders/f7/_7nmd4jd3_j5ycc8plwxnv800000gn/T/patamaps-project-watch-bme1d7a9/state",
+  "controls": [
+    {
+      "control": "no-detach-policy-guardian-group",
+      "result": "passed",
+      "runner": 93018,
+      "innerGuard": 93019,
+      "tool": 93020,
+      "sleep": 93021,
+      "runnerGroup": 93018,
+      "innerGuardGroup": 93019,
+      "ordinarySurvivors": [],
+      "guardianHasIndependentGroup": true
+    },
+    {
+      "control": "ordinary-exit-and-empty-group-permission",
+      "result": "passed",
+      "cases": [
+        {
+          "case": "ordinary-success",
+          "result": "passed",
+          "exitCode": 0
+        },
+        {
+          "case": "ordinary-failure",
+          "result": "passed",
+          "exitCode": 7
+        },
+        {
+          "case": "timed-success",
+          "result": "passed",
+          "exitCode": 0
+        },
+        {
+          "case": "empty-group-EPERM",
+          "result": "passed"
+        },
+        {
+          "case": "live-group-EPERM",
+          "result": "refused"
+        }
+      ]
+    },
+    {
+      "control": "initial-edit-debounce-idle",
+      "result": "passed",
+      "idleCreatedNoAttempt": true,
+      "rapidEditsOneAttempt": true
+    },
+    {
+      "control": "failed-key-suppression",
+      "result": "passed",
+      "previousSelectionPreserved": true
+    },
+    {
+      "control": "recovery-native-noop",
+      "result": "passed",
+      "verification": "not-repeated"
+    },
+    {
+      "control": "live-policy-contender",
+      "result": "passed",
+      "policyExitCode": 75,
+      "noAutomaticRetry": true
+    },
+    {
+      "control": "watch-SIGINT",
+      "result": "passed",
+      "pids": [
+        93269,
+        93270
+      ],
+      "previousSelectionPreserved": true,
+      "ordinaryDescendantsStopped": true
+    },
+    {
+      "control": "watch-SIGTERM",
+      "result": "passed",
+      "pids": [
+        93311,
+        93312
+      ],
+      "previousSelectionPreserved": true,
+      "ordinaryDescendantsStopped": true
+    },
+    {
+      "control": "watch-SIGKILL",
+      "result": "passed",
+      "pids": [
+        93375,
+        93376
+      ],
+      "previousSelectionPreserved": true,
+      "ordinaryDescendantsStopped": true
+    },
+    {
+      "control": "watch-parent-death",
+      "result": "passed",
+      "pids": [
+        93415,
+        93416
+      ],
+      "previousSelectionPreserved": true,
+      "ordinaryDescendantsStopped": true
+    },
+    {
+      "control": "watch-runner-death",
+      "result": "passed",
+      "pids": [
+        93465,
+        93466
+      ],
+      "previousSelectionPreserved": true,
+      "ordinaryDescendantsStopped": true
+    },
+    {
+      "control": "ignored-runner-refuses-success",
+      "result": "passed",
+      "nativeSelectedBindingsChecked": true,
+      "currentInputKeyRequired": true
+    }
+  ],
+  "sourceScope": "controlled native build, not application acceptance",
+  "fixedSourceDigests": {
+    "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/scripts/project_watch_controls.py": "8cbf47137b705260f7d2e320b6aa54df8a2b17712d3edbcd3cbbce0fc6927959",
+    "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/scripts/project_watch.py": "e75e1c6e505af75cb2423079ab5ac79081e5a328947fa3e0406f73783eb97e61",
+    "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/scripts/project_watch_guard_controls.py": "2fea0b42f0c108bed6513da89206523b45182b4da5deef1cbac6626e9a90514e",
+    "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/target/debug/patamaps": "aa494f53db0550a4976fc048b2299e5f044dd545df0d7db560fb91ab4a7c10c8"
+  },
+  "sourceUnchanged": true,
+  "retainedStateCopy": "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/project-adoption/watch-20261016T111402.778820Z/state.retained-copy"
+}
