@@ -199,14 +199,38 @@ fn existing_destinations_and_symlink_parents_are_never_overwritten() {
     let existing = root.join("occupied");
     fs::create_dir(&existing).unwrap();
     fs::write(existing.join("sentinel"), "preserve").unwrap();
-    assert!(stage_project_capture(&record, &existing).is_err());
+    assert!(matches!(
+        stage_project_capture(&record, &existing),
+        Err(Error::Refused {
+            code: "PROJECT_STAGE_DESTINATION_UNAVAILABLE",
+            ..
+        })
+    ));
     let file = root.join("occupied-file");
     fs::write(&file, "preserve-file").unwrap();
-    assert!(stage_project_capture(&record, &file).is_err());
+    assert!(matches!(
+        stage_project_capture(&record, &file),
+        Err(Error::Refused {
+            code: "PROJECT_STAGE_DESTINATION_UNAVAILABLE",
+            ..
+        })
+    ));
     let alias = root.join("alias");
     std::os::unix::fs::symlink(&existing, &alias).unwrap();
-    assert!(stage_project_capture(&record, &alias).is_err());
-    assert!(stage_project_capture(&record, &alias.join("candidate")).is_err());
+    assert!(matches!(
+        stage_project_capture(&record, &alias),
+        Err(Error::Refused {
+            code: "PROJECT_STAGE_DESTINATION_UNAVAILABLE",
+            ..
+        })
+    ));
+    assert!(matches!(
+        stage_project_capture(&record, &alias.join("candidate")),
+        Err(Error::Refused {
+            code: "PROJECT_STAGE_PARENT_SYMLINK",
+            ..
+        })
+    ));
     assert!(!existing.join("candidate").exists());
     assert_eq!(fs::read(existing.join("sentinel")).unwrap(), b"preserve");
     assert_eq!(fs::read(file).unwrap(), b"preserve-file");

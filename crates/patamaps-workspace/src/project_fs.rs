@@ -12,6 +12,9 @@ fn refuse() -> Error {
         "Fresh descriptor-relative staging refused",
     )
 }
+fn stage_refused(code: &'static str) -> Error {
+    Error::refused(code, "Fresh descriptor-relative staging refused")
+}
 fn flags() -> OFlags {
     OFlags::RDONLY | OFlags::DIRECTORY | OFlags::NOFOLLOW | OFlags::CLOEXEC
 }
@@ -35,11 +38,13 @@ pub(crate) fn parent(root: &File, path: &str, create: bool) -> Result<(File, Str
         if create {
             match mkdirat(&dir, *part, Mode::from_bits_truncate(0o700)) {
                 Ok(()) | Err(rustix::io::Errno::EXIST) => {}
-                Err(error) => return Err(std::io::Error::from(error).into()),
+                Err(_) => return Err(stage_refused("PROJECT_STAGE_DIRECTORY_UNAVAILABLE")),
             }
         }
-        dir =
-            File::from(openat(&dir, *part, flags(), Mode::empty()).map_err(std::io::Error::from)?);
+        dir = File::from(
+            openat(&dir, *part, flags(), Mode::empty())
+                .map_err(|_| stage_refused("PROJECT_STAGE_DIRECTORY_UNAVAILABLE"))?,
+        );
     }
     Ok((
         dir,
@@ -67,16 +72,24 @@ impl StageRoot {
             .file_name()
             .and_then(|v| v.to_str())
             .filter(|v| relative_path(v) && !v.contains('/'))
-            .ok_or_else(refuse)?
+            .ok_or_else(|| stage_refused("PROJECT_STAGE_DESTINATION"))?
             .to_owned();
         let parent_path = path
             .parent()
             .filter(|p| !p.as_os_str().is_empty())
             .unwrap_or(Path::new("."));
+        if std::fs::symlink_metadata(parent_path)?
+            .file_type()
+            .is_symlink()
+        {
+            return Err(stage_refused("PROJECT_STAGE_PARENT_SYMLINK"));
+        }
         let parent = root(parent_path)?;
-        mkdirat(&parent, leaf.as_str(), Mode::from_bits_truncate(0o700)).map_err(|_| refuse())?;
+        mkdirat(&parent, leaf.as_str(), Mode::from_bits_truncate(0o700))
+            .map_err(|_| stage_refused("PROJECT_STAGE_DESTINATION_UNAVAILABLE"))?;
         let directory = File::from(
-            openat(&parent, leaf.as_str(), flags(), Mode::empty()).map_err(std::io::Error::from)?,
+            openat(&parent, leaf.as_str(), flags(), Mode::empty())
+                .map_err(|_| stage_refused("PROJECT_STAGE_DIRECTORY_UNAVAILABLE"))?,
         );
         Ok(Self {
             directory,
@@ -94,14 +107,14 @@ impl StageRoot {
                 OFlags::WRONLY | OFlags::CREATE | OFlags::EXCL | OFlags::NOFOLLOW | OFlags::CLOEXEC,
                 Mode::from_bits_truncate(0o600),
             )
-            .map_err(std::io::Error::from)?,
+            .map_err(|_| stage_refused("PROJECT_STAGE_INPUT_UNAVAILABLE"))?,
         ))
     }
     pub(crate) fn mkdir(&self, path: &str) -> Result<File, Error> {
         let (parent, leaf) = parent(&self.directory, path, true)?;
         match mkdirat(&parent, leaf.as_str(), Mode::from_bits_truncate(0o700)) {
             Ok(()) | Err(rustix::io::Errno::EXIST) => {}
-            Err(error) => return Err(std::io::Error::from(error).into()),
+            Err(_) => return Err(stage_refused("PROJECT_STAGE_DIRECTORY_UNAVAILABLE")),
         }
         directory(&self.directory, path)
     }
@@ -115,13 +128,13 @@ impl StageRoot {
         for actual in [
             File::from(
                 openat(&self.parent, self.leaf.as_str(), flags(), Mode::empty())
-                    .map_err(std::io::Error::from)?,
+                    .map_err(|_| stage_refused("PROJECT_STAGE_DIRECTORY_CHANGED"))?,
             ),
-            root(&self.path)?,
+            root(&self.path).map_err(|_| stage_refused("PROJECT_STAGE_DIRECTORY_CHANGED"))?,
         ] {
             let meta = actual.metadata()?;
             if (meta.dev(), meta.ino()) != (expected.dev(), expected.ino()) {
-                return Err(refuse());
+                return Err(stage_refused("PROJECT_STAGE_DIRECTORY_CHANGED"));
             }
         }
         Ok(())
