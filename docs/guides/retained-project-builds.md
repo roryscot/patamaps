@@ -41,6 +41,13 @@ application workflow qualification remains incomplete.
 
 ### Foreground watch controller
 
+Native input observation and selected-binding verification each default to a
+30-second deadline. For a measured larger context, pass
+--inspection-timeout-ms 120000 before --runner to give each inspection up to
+two minutes. The accepted range is 1000..3600000 milliseconds. This changes only
+the inspection deadline; native validation, per-build policy leases and declared
+command budgets still apply. It does not establish practical watch performance.
+
 The generic controller lives in scripts/project_watch.py. Start it outside any
 allocating storage lease, after building the CLI:
 

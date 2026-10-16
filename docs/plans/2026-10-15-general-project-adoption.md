@@ -365,3 +365,15 @@ took 31.823 seconds and no-op 34.716 seconds. Practical edit/watch latency is
 not accepted. The actual owner edit/failure controls are prepared but their first
 launch was refused before startup by another live shared lease. Runtime/browser,
 installed/deployment and broader framework requirements remain open.
+
+## Watch inspection budget checkpoint
+
+The foreground controller accepts --inspection-timeout-ms (1000..3600000),
+preserving its 30000 default for each native observation and selection check.
+Real-project replay measured about32s overall; this motivates configurability,
+not a claim that the 30s native watch verifier has demonstrably timed out.
+Intel controlled subprocess deadline/protocol checks passed9 cases and existing
+process-exit controls passed5; see [scoped receipt](../acceptance/project-adoption/g4-watch-inspection-budget-20261016/receipt.json).
+Both native inspections still run; larger budgets do not admit mismatched keys.
+Full native watch/application/performance qualification remains open. Existing
+Linux watch CI now runs these budget controls; current-source CI is pending.
