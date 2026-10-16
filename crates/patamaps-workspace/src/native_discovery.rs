@@ -60,6 +60,8 @@ struct CargoConfig {
     nonsecret_inputs: bool,
     manifest: String,
     workspace_manifest: String,
+    #[serde(default)]
+    root_mode: CargoRootMode,
     lockfile: String,
     cargo: String,
     cargo_digest: String,
@@ -70,6 +72,66 @@ struct CargoConfig {
     features: Vec<String>,
     default_features: bool,
     view: DependencyView,
+}
+
+#[derive(Clone, Copy, Default, Deserialize, PartialEq, Eq)]
+#[serde(rename_all = "kebab-case")]
+enum CargoRootMode {
+    #[default]
+    ExplicitWorkspace,
+    StandalonePackage,
+}
+
+/// Standalone packages are opt-in. Probe ancestor manifest existence without
+/// reading its bytes: Cargo must never discover an undeclared parent workspace.
+fn validate_cargo_root(
+    mode: CargoRootMode,
+    manifest: &Path,
+    workspace: &Path,
+    declared: &Document<String>,
+) -> Result<(), Error> {
+    let has_workspace = declared
+        .get("workspace")
+        .and_then(Item::as_table_like)
+        .is_some();
+    if mode == CargoRootMode::ExplicitWorkspace {
+        if !has_workspace {
+            return Err(refused(
+                "NATIVE_CARGO_ROOT_ISOLATION",
+                "The declared workspace manifest must explicitly contain [workspace]",
+            ));
+        }
+        return Ok(());
+    }
+    if manifest != workspace
+        || has_workspace
+        || declared
+            .get("package")
+            .and_then(Item::as_table_like)
+            .is_none()
+        || declared
+            .get("package")
+            .and_then(Item::as_table_like)
+            .is_some_and(|p| p.get("workspace").is_some())
+    {
+        return Err(refused(
+            "NATIVE_CARGO_ROOT_ISOLATION",
+            "Standalone mode requires the same explicit package/root manifest without workspace selection",
+        ));
+    }
+    let directory = workspace.parent().expect("manifest parent");
+    for ancestor in directory.ancestors().skip(1) {
+        match fs::symlink_metadata(ancestor.join("Cargo.toml")) {
+            Err(e) if e.kind() == std::io::ErrorKind::NotFound => {}
+            _ => {
+                return Err(refused(
+                    "NATIVE_CARGO_ROOT_ISOLATION",
+                    "Standalone mode refuses any ancestor Cargo manifest or unavailable ancestor probe; its values were not read",
+                ));
+            }
+        }
+    }
+    Ok(())
 }
 
 #[derive(Clone, Copy, Deserialize, PartialEq, Eq)]
@@ -651,16 +713,7 @@ fn cargo_entities(
     let workspace_path = live_path(root, workspace_manifest)?;
     let workspace_root = workspace_path.parent().expect("manifest parent");
     let declared = parse_toml(workspace_manifest, inputs[workspace_manifest])?;
-    if declared
-        .get("workspace")
-        .and_then(Item::as_table_like)
-        .is_none()
-    {
-        return Err(refused(
-            "NATIVE_CARGO_ROOT_ISOLATION",
-            "The declared workspace manifest must explicitly contain [workspace]",
-        ));
-    }
+    validate_cargo_root(config.root_mode, &manifest_path, &workspace_path, &declared)?;
 
     if live_path(root, lockfile)? != workspace_root.join("Cargo.lock") {
         return Err(refused(
@@ -923,13 +976,16 @@ fn cargo_entities(
                 "sourceContentsCaptured":captured,"executionObserved":false}));
         }
     }
-    let receipt = json!({"evidenceClass":"cargo-tool-observation","view":if view==DependencyView::Resolved {"resolved"} else {"declared-local"},
+    let mut receipt = json!({"evidenceClass":"cargo-tool-observation","view":if view==DependencyView::Resolved {"resolved"} else {"declared-local"},
         "manifest":manifest,"workspaceManifest":workspace_manifest,"lockfile":lockfile,"platformFilter":platform,
         "features":features,"defaultFeatures":default_features,"configurationInputs":configs,
         "cargo":{"path":cargo_path,"digest":actual_cargo,"version":std::str::from_utf8(&cargo_version).map_err(|_|refused("NATIVE_TOOL_UTF8","Cargo version output is not UTF-8"))?},
         "rustc":{"path":rustc_path,"digest":actual_rustc,"version":std::str::from_utf8(&rustc_version).map_err(|_|refused("NATIVE_TOOL_UTF8","Rustc version output is not UTF-8"))?},
         "argv":args,"metadataDigest":byte_digest(&raw),"metadataBytes":std::str::from_utf8(&raw).map_err(|_|refused("NATIVE_TOOL_UTF8","Cargo metadata is not UTF-8"))?,
         "possibleExecutableInputs":executable_inputs,"dependencyExecutableInventoryAvailable":view==DependencyView::Resolved,"compilationEstablished":false,"buildScriptsExecuted":false,"completeExecutableDependencyClosureEstablished":false});
+    if config.root_mode == CargoRootMode::StandalonePackage {
+        receipt["rootMode"] = json!("standalone-package");
+    }
     Ok((entities, receipt))
 }
 

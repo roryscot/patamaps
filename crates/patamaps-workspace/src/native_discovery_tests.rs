@@ -315,3 +315,100 @@ fn file_receipts_require_nonsecret_consent_and_correct_input_digest() {
     rehash(&mut req);
     assert!(discover_native(&req, Path::new("/unused")).is_err());
 }
+
+#[test]
+fn standalone_cargo_root_is_explicit_and_does_not_read_ancestor_values() {
+    use std::sync::atomic::{AtomicU64, Ordering};
+    static SEQ: AtomicU64 = AtomicU64::new(0);
+    let root = std::env::temp_dir().join(format!(
+        "patamaps-standalone-{}-{}",
+        std::process::id(),
+        SEQ.fetch_add(1, Ordering::Relaxed)
+    ));
+    fs::create_dir(&root).unwrap();
+    let package_dir = root.join("package");
+    fs::create_dir(&package_dir).unwrap();
+    let manifest = package_dir.join("Cargo.toml");
+    let document = parse_toml(
+        "Cargo.toml",
+        "[package]\nname='standalone'\nversion='0.1.0'\n",
+    )
+    .unwrap();
+    fs::write(&manifest, document.to_string()).unwrap();
+    assert!(
+        validate_cargo_root(
+            CargoRootMode::StandalonePackage,
+            &manifest,
+            &manifest,
+            &document
+        )
+        .is_ok()
+    );
+    assert!(
+        validate_cargo_root(
+            CargoRootMode::ExplicitWorkspace,
+            &manifest,
+            &manifest,
+            &document
+        )
+        .is_err()
+    );
+    assert!(
+        validate_cargo_root(
+            CargoRootMode::StandalonePackage,
+            &root.join("other.toml"),
+            &manifest,
+            &document
+        )
+        .is_err()
+    );
+    let workspace = parse_toml("Cargo.toml", "[workspace]\nmembers=[]\n").unwrap();
+    assert!(
+        validate_cargo_root(
+            CargoRootMode::StandalonePackage,
+            &manifest,
+            &manifest,
+            &workspace
+        )
+        .is_err()
+    );
+    assert!(
+        validate_cargo_root(
+            CargoRootMode::ExplicitWorkspace,
+            &manifest,
+            &manifest,
+            &workspace
+        )
+        .is_ok()
+    );
+    let inherited = parse_toml(
+        "Cargo.toml",
+        "[package]\nname='standalone'\nversion='0.1.0'\nworkspace='..'\n",
+    )
+    .unwrap();
+    assert!(
+        validate_cargo_root(
+            CargoRootMode::StandalonePackage,
+            &manifest,
+            &manifest,
+            &inherited
+        )
+        .is_err()
+    );
+    // Invalid UTF-8 would fail TOML/source parsing if read. Existence alone must refuse.
+    fs::write(root.join("Cargo.toml"), [0xff, 0xfe]).unwrap();
+    let error = validate_cargo_root(
+        CargoRootMode::StandalonePackage,
+        &manifest,
+        &manifest,
+        &document,
+    )
+    .unwrap_err();
+    assert!(
+        error
+            .to_string()
+            .starts_with("NATIVE_CARGO_ROOT_ISOLATION:")
+    );
+    assert_eq!(fs::read(root.join("Cargo.toml")).unwrap(), [0xff, 0xfe]);
+    eprintln!("Retained standalone root fixture: {}", root.display());
+}
