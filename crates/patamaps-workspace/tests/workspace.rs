@@ -602,3 +602,79 @@ fn failed_process_names_its_source_and_captured_inputs_without_pipe_payloads() {
         error => panic!("Unexpected provider refusal: {error}"),
     }
 }
+
+#[test]
+#[cfg(unix)]
+fn workspace_output_staging_is_offline_and_never_overwrites() {
+    use std::os::unix::fs::PermissionsExt;
+    let root = Temp::new();
+    let config = fixture(&root);
+    let baseline = generate(&root.0, &config, None).unwrap().baseline;
+    for name in ["graph.json", "pack.json", "policy.json", "projection.json"] {
+        fs::rename(root.0.join(name), root.0.join(format!("retained-{name}"))).unwrap();
+    }
+    let destination = root.0.join("outputs");
+    let report = stage_workspace_outputs(&baseline, &destination).unwrap();
+    assert_eq!(report["status"], "staged-workspace-outputs");
+    assert_eq!(report["baselineDigest"], baseline.digest);
+    let file = destination.join("bindings.rs");
+    assert_eq!(
+        fs::read_to_string(&file).unwrap(),
+        baseline.outputs["bindings.rs"]
+    );
+    assert_eq!(
+        fs::metadata(&file).unwrap().permissions().mode() & 0o777,
+        0o600
+    );
+    assert_eq!(
+        fs::metadata(&destination).unwrap().permissions().mode() & 0o777,
+        0o700
+    );
+    assert!(stage_workspace_outputs(&baseline, &destination).is_err());
+    assert_eq!(
+        fs::read_to_string(&file).unwrap(),
+        baseline.outputs["bindings.rs"]
+    );
+    let alias = root.0.join("alias");
+    std::os::unix::fs::symlink(&destination, &alias).unwrap();
+    assert!(stage_workspace_outputs(&baseline, &alias).is_err());
+    assert_eq!(
+        fs::read_to_string(&file).unwrap(),
+        baseline.outputs["bindings.rs"]
+    );
+}
+
+#[test]
+fn workspace_output_staging_refuses_tampering_and_prefix_conflicts_before_creation() {
+    let root = Temp::new();
+    let mut config = fixture(&root);
+    let baseline = generate(&root.0, &config, None).unwrap().baseline;
+    let mut forged = baseline.clone();
+    forged
+        .outputs
+        .insert("bindings.rs".into(), "// altered".into());
+    readdress(&mut forged);
+    let destination = root.0.join("tampered");
+    assert!(matches!(
+        stage_workspace_outputs(&forged, &destination),
+        Err(Error::Refused {
+            code: "WORKSPACE_COMPOSITION_BINDING",
+            ..
+        })
+    ));
+    assert!(!destination.exists());
+    config.projections[0].emissions[0].path = "out".into();
+    let mut nested = config.projections[0].emissions[0].clone();
+    nested.path = "out/nested.rs".into();
+    config.projections[0].emissions.push(nested);
+    let conflict = generate(&root.0, &config, None).unwrap().baseline;
+    let destination = root.0.join("conflict");
+    assert!(matches!(
+        stage_workspace_outputs(&conflict, &destination),
+        Err(Error::Refused {
+            code: "PROJECT_STAGE_PATH_CONFLICT",
+            ..
+        })
+    ));
+    assert!(!destination.exists());
+}

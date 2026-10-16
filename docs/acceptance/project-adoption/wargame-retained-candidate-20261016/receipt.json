@@ -1,0 +1,66 @@
+{
+  "status": "actual-candidate-compilation-incomplete",
+  "sourceCommit": "cf4e0de9dcd7c87ccf32f6f40adb662078e45d13",
+  "retainedCandidate": "/Volumes/dev_src_case_sensitive/patamaps-project-candidates/wargame-20261016",
+  "ordinaryFileCount": 13217,
+  "ordinaryFileBytes": 2517774073,
+  "copyMethod": "Darwin clonefile; each ordinary file hashed before and after; all source bytes rechecked",
+  "sourceFilesUnchangedAtCopy": true,
+  "symlinks": [
+    {
+      "path": "generated",
+      "target": "contract-bundles/current/generated"
+    },
+    {
+      "path": "contract-bundles/current",
+      "target": "0cc40b8a05545f965adb874ae4690014bd78bf2e366aee7fc560f76bd1a258c4"
+    },
+    {
+      "path": "web/src/generated",
+      "target": "../../contract-bundles/current/web"
+    }
+  ],
+  "candidateChange": "module-local generated Axum witness include only",
+  "cargoManifestUnchanged": true,
+  "originalProjectPolicyUnchanged": true,
+  "candidatePolicy": {
+    "version": 1,
+    "minimumFreeBytes": 0,
+    "reserveFreeBytes": 500000000,
+    "maximumRunGrowthBytes": 300000000,
+    "maximumRetainedBytes": 100000000000,
+    "monitorIntervalMs": 2000,
+    "terminationGraceMs": 15000
+  },
+  "attempts": [
+    {
+      "stage": "nested-candidate-evidence",
+      "exitCode": 1,
+      "reason": "enclosing Cargo workspace; candidate relocated without manifest edits"
+    },
+    {
+      "stage": "isolated-candidate-offline-evidence",
+      "exitCode": 1,
+      "reason": "missing csv package in native Cargo cache"
+    },
+    {
+      "stage": "locked-target-fetch",
+      "exitCode": 0,
+      "lockfileUnchanged": true
+    },
+    {
+      "stage": "native-evidence-after-fetch",
+      "exitCode": 75,
+      "reason": "300MB application growth budget exceeded; guard also reported kill EPERM"
+    }
+  ],
+  "guardRun": "65f39a9b-1932-4ee1-b482-159a9dc82145",
+  "subsequentObservation": "shared lease released; no candidate-named process observed",
+  "policyProposal": "candidate-only 4GB; pending explicit approval; not applied",
+  "applicationCompilation": "incomplete",
+  "nativeEvidenceRegeneration": "not-completed",
+  "nextjsRuntime": "not-performed",
+  "fullGoalComplete": false,
+  "privateSourceAndSchemasPublished": false,
+  "filesDeleted": 0
+}

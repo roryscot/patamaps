@@ -273,20 +273,7 @@ pub fn stage_project_capture(
     destination: &Path,
 ) -> Result<serde_json::Value, Error> {
     let verification = verify_project_capture(record)?;
-    let paths = record
-        .inputs
-        .iter()
-        .map(|v| v.receipt.path.as_str())
-        .collect::<BTreeSet<_>>();
-    if record.inputs.iter().any(|v| {
-        v.receipt
-            .path
-            .match_indices('/')
-            .any(|(i, _)| paths.contains(&v.receipt.path[..i]))
-    }) {
-        return Err(refuse("PROJECT_STAGE_PATH_CONFLICT"));
-    }
-    stage_inputs(record, destination)?;
+    stage_selected_inputs(&record.inputs, destination)?;
     Ok(serde_json::json!({
         "status":"staged-project-inputs", "profile":PROJECT_PROFILE,
         "digest":record.digest, "project":record.definition.id,
@@ -300,8 +287,30 @@ pub fn stage_project_capture(
     }))
 }
 
+pub(crate) fn stage_selected_inputs(
+    inputs: &[SuppliedInput],
+    destination: &Path,
+) -> Result<(), Error> {
+    let paths = inputs
+        .iter()
+        .map(|v| v.receipt.path.as_str())
+        .collect::<BTreeSet<_>>();
+    if paths.len() != inputs.len()
+        || inputs.iter().any(|v| {
+            !relative_path(&v.receipt.path)
+                || v.receipt
+                    .path
+                    .match_indices('/')
+                    .any(|(i, _)| paths.contains(&v.receipt.path[..i]))
+        })
+    {
+        return Err(refuse("PROJECT_STAGE_PATH_CONFLICT"));
+    }
+    stage_inputs(inputs, destination)
+}
+
 #[cfg(unix)]
-fn stage_inputs(record: &ProjectCapture, destination: &Path) -> Result<(), Error> {
+fn stage_inputs(inputs: &[SuppliedInput], destination: &Path) -> Result<(), Error> {
     use rustix::fs::{Mode, OFlags, mkdirat, openat};
     use std::{
         fs::OpenOptions,
@@ -331,7 +340,7 @@ fn stage_inputs(record: &ProjectCapture, destination: &Path) -> Result<(), Error
         openat(&parent, leaf, directory_flags, Mode::empty())
             .map_err(|_| refuse("PROJECT_STAGE_DIRECTORY_UNAVAILABLE"))?,
     );
-    for input in &record.inputs {
+    for input in inputs {
         let mut current = directory.try_clone()?;
         let parts = input.receipt.path.split('/').collect::<Vec<_>>();
         for part in &parts[..parts.len() - 1] {
@@ -365,7 +374,7 @@ fn stage_inputs(record: &ProjectCapture, destination: &Path) -> Result<(), Error
     if (metadata.dev(), metadata.ino()) != (visible_metadata.dev(), visible_metadata.ino()) {
         return Err(refuse("PROJECT_STAGE_DIRECTORY_CHANGED"));
     }
-    for input in &record.inputs {
+    for input in inputs {
         if read_input(&visible, &input.receipt.path, MAX_INPUT_BYTES)? != input.content.as_bytes() {
             return Err(refuse("PROJECT_STAGE_INPUT_CHANGED"));
         }
@@ -382,6 +391,6 @@ fn stage_inputs(record: &ProjectCapture, destination: &Path) -> Result<(), Error
 }
 
 #[cfg(not(unix))]
-fn stage_inputs(_: &ProjectCapture, _: &Path) -> Result<(), Error> {
+fn stage_inputs(_: &[SuppliedInput], _: &Path) -> Result<(), Error> {
     Err(refuse("PROJECT_PLATFORM_UNAVAILABLE"))
 }

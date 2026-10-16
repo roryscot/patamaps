@@ -1,0 +1,9 @@
+# Retained workspace output staging
+
+Use `patamaps workspace-stage BASELINE.json --destination NEW_DIRECTORY` to materialize the outputs of an existing verified workspace baseline. The receipt goes to stdout. The destination must not exist.
+
+The Rust entry point reconstructs and checks the baseline before creating anything, then reuses project staging's descriptor-relative writer. Output path prefix conflicts refuse before destination creation. Files are private and non-executable; existing destinations and symlinks refuse. The writer rechecks the visible directory identity and exact file bytes, preserving partial failures. Both project and workspace staging share this writer.
+
+This copies generated outputs only. It does not restore a project build context, run discovery or tools, build an application, publish a selected candidate, or grant authorization. Explicitly configure source staging and build context separately. In particular, a standalone Cargo package staged beneath another Cargo workspace can inherit an unintended workspace boundary: retain build candidates outside an enclosing workspace instead of altering their manifests to make compilation pass.
+
+Acceptance: offline staging with configured source paths unavailable and empty external PATH; compiled Rust/TypeScript and runtime consumer uses staged bytes; refusal on existing destination, symlink, rehashed output substitution and file/directory prefix conflicts. Native Intel verification passed formatting, locked offline CLI build, the full workspace test suite,93 controlled transport cases and focused all-target Clippy. See [scoped receipt](../acceptance/project-adoption/g4-workspace-output-staging-20261016/receipt.json). CI is pending after push.

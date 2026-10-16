@@ -1,0 +1,132 @@
+{
+  "status": "passed-native-workspace-output-staging",
+  "baseCommit": "b2351c071919771620305ea28fa951f4b1440b3b",
+  "implementationSha256": {
+    "crates/patamaps-cli/src/main.rs": "4af537a75382f2d7e69bba51c83063887d1bf6d85bed0a38855c47f5c1603930",
+    "crates/patamaps-workspace/src/lib.rs": "79249325600c953cd77699ea919e6a3aaf8a38a6a54faa7faa672d7174342a21",
+    "crates/patamaps-workspace/src/project.rs": "49c60d9bae6fe9112c80d544c417370b4c47796e8fedd98a38a778a89c416f8e",
+    "crates/patamaps-workspace/tests/workspace.rs": "24edbbbcb86d81bce7f9b44cf2d956cdbddc39f791c760b7e812a320cd2e72d4",
+    "scripts/project_http_transport.py": "4575d106eaff9d7b01c9c1af5c58179d3bb0be0c3d76f79c0c344cffe4ce3617"
+  },
+  "sourceUnchangedDuringVerification": true,
+  "commands": [
+    {
+      "label": "format",
+      "argv": [
+        "cargo",
+        "fmt",
+        "--all"
+      ],
+      "exitCode": 0,
+      "seconds": 1.497
+    },
+    {
+      "label": "format-check",
+      "argv": [
+        "cargo",
+        "fmt",
+        "--all",
+        "--",
+        "--check"
+      ],
+      "exitCode": 0,
+      "seconds": 1.097
+    },
+    {
+      "label": "cli",
+      "argv": [
+        "cargo",
+        "build",
+        "-p",
+        "patamaps-cli",
+        "--locked",
+        "--offline"
+      ],
+      "exitCode": 0,
+      "seconds": 11.031
+    },
+    {
+      "label": "workspace",
+      "argv": [
+        "cargo",
+        "test",
+        "-p",
+        "patamaps-workspace",
+        "--locked",
+        "--offline"
+      ],
+      "exitCode": 0,
+      "seconds": 21.232
+    },
+    {
+      "label": "transport",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/intel-python-3.13.16-20261013/runtime/python/bin/python3",
+        "-B",
+        "scripts/test_cross_stack.py",
+        "--phase",
+        "transport-http"
+      ],
+      "exitCode": 0,
+      "seconds": 21.697
+    },
+    {
+      "label": "clippy",
+      "argv": [
+        "cargo",
+        "clippy",
+        "-p",
+        "patamaps-workspace",
+        "-p",
+        "patamaps-cli",
+        "--all-targets",
+        "--locked",
+        "--offline",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exitCode": 0,
+      "seconds": 4.223
+    }
+  ],
+  "transportStatus": "passed-transport-and-axum-controls",
+  "transportControlCount": 93,
+  "stagingControls": [
+    {
+      "label": "workspace-output-stage",
+      "stage": "workspace",
+      "result": "staged",
+      "sourcePathsUnavailable": true,
+      "externalProgramsAbsentFromPath": true,
+      "outputs": 2,
+      "consumer": "native-staged-bytes-used-by-subsequent-real-build"
+    },
+    {
+      "label": "workspace-output-stage-existing",
+      "stage": "workspace",
+      "result": "refused",
+      "code": "PROJECT_STAGE_DESTINATION_UNAVAILABLE",
+      "outputBytesPreserved": true
+    },
+    {
+      "label": "workspace-output-stage-tamper",
+      "stage": "workspace",
+      "result": "refused",
+      "code": "WORKSPACE_COMPOSITION_BINDING",
+      "destinationCreated": false
+    }
+  ],
+  "retainedNativeEvidence": ".tools/project-adoption/workspace-stage-native-20261016",
+  "platform": "x86_64-apple-darwin",
+  "scope": {
+    "generatedOutputs": "staged-and-rechecked",
+    "sourceInputs": "not-copied",
+    "controlledConsumer": "Rust/TypeScript compiled and HTTP runtime checked using staged bytes",
+    "actualApplicationAcceptance": false,
+    "selectionPublication": "not-performed",
+    "activation": "not-performed",
+    "fullG4": "incomplete"
+  },
+  "ci": "pending-after-push"
+}

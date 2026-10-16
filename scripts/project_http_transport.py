@@ -156,14 +156,33 @@ def verify(root,work,env,run):
         env.clear();env.update(PATH="/patamaps-no-external-programs",HOME=str(app/"no-user-home"))
         replay=json.loads(command("workspace-offline",[cli,"verify-workspace",saved],cwd=work))
         assert replay["status"]=="verified-record-bindings" and replay["sourceRediscovery"]=="not-performed"
+        staged=app/"staged-workspace"
+        stage=json.loads(command("workspace-stage",[cli,"workspace-stage",saved,"--destination",staged],cwd=work))
+        assert stage["status"]=="staged-workspace-outputs" and stage["baselineDigest"]==baseline["digest"]
+        assert stage["sourceInputs"]=="not-copied" and stage["outputCount"]==2
+        for path in baseline["outputs"]:
+            assert (staged/path).read_bytes()==baseline["outputs"][path].encode()
+        command("workspace-stage-existing",[cli,"workspace-stage",saved,"--destination",staged],cwd=work,expected_success=False)
+        assert "PROJECT_STAGE_DESTINATION_UNAVAILABLE" in (work/"transport-workspace-stage-existing.stderr.log").read_text()
+        assert all((staged/path).read_bytes()==body.encode() for path,body in baseline["outputs"].items())
     finally:env.clear();env.update(previous_environment)
     controls.append(dict(label="workspace-framework-offline",stage="workspace",result="verified",sourcePathsUnavailable=True,externalProgramsAbsentFromPath=True,retainedMoves=moves));save_controls()
+    # The compiled consumer receives exact bytes materialized by the native stager.
+    for path,name in [("generated/client.ts","client.ts"),("generated/witness.rs","witness.rs")]:
+        shutil.copyfile(staged/path,app/name)
+    controls.append(dict(label="workspace-output-stage",stage="workspace",result="staged",sourcePathsUnavailable=True,externalProgramsAbsentFromPath=True,outputs=2,consumer="native-staged-bytes-used-by-subsequent-real-build"));save_controls()
+    controls.append(dict(label="workspace-output-stage-existing",stage="workspace",result="refused",code="PROJECT_STAGE_DESTINATION_UNAVAILABLE",outputBytesPreserved=True));save_controls()
     tampered=copy.deepcopy(baseline);tampered["outputs"]["generated/client.ts"]+="\n// altered generated output\n";tampered.pop("digest")
     tampered["digest"]=json.loads(command("workspace-tamper-digest",[cli,"json","digest"],input_bytes=json.dumps(tampered).encode()))
     (app/"workspace-tampered.json").write_text(json.dumps(tampered)+"\n")
     command("workspace-tamper",[cli,"verify-workspace",app/"workspace-tampered.json"],expected_success=False)
     assert "WORKSPACE_COMPOSITION_BINDING" in (work/"transport-workspace-tamper.stderr.log").read_text()
     controls.append(dict(label="workspace-framework-output-tamper",stage="workspace",result="refused",code="WORKSPACE_COMPOSITION_BINDING",baselineAddressRehashed=True));save_controls()
+    refused_destination=app/"tampered-stage"
+    command("workspace-stage-tamper",[cli,"workspace-stage",app/"workspace-tampered.json","--destination",refused_destination],expected_success=False)
+    assert "WORKSPACE_COMPOSITION_BINDING" in (work/"transport-workspace-stage-tamper.stderr.log").read_text()
+    assert not refused_destination.exists()
+    controls.append(dict(label="workspace-output-stage-tamper",stage="workspace",result="refused",code="WORKSPACE_COMPOSITION_BINDING",destinationCreated=False));save_controls()
     assert api_digest==hashlib.sha256((app/"src/api.rs").read_bytes()).hexdigest()
     previous=env.get("PATAMAPS_AXUM_WITNESS")
     try:

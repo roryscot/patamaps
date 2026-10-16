@@ -819,3 +819,43 @@ pub fn check(
         changes,
     })
 }
+
+/// Reconstruct verified output bytes in a fresh retained directory, without tools.
+/// This does not copy source inputs, execute a build, or publish a selection.
+pub fn stage_workspace_outputs(
+    baseline: &WorkspaceBaseline,
+    destination: &Path,
+) -> Result<serde_json::Value, Error> {
+    let checked = verify_baseline(baseline)?;
+    let inputs = checked
+        .record()
+        .outputs
+        .iter()
+        .map(|(path, content)| {
+            Ok(SuppliedInput {
+                receipt: InputReceipt {
+                    path: path.clone(),
+                    digest: byte_digest(content.as_bytes()),
+                    byte_length: SafeInteger::new(content.len() as u64).ok_or_else(|| {
+                        Error::refused(
+                            "WORKSPACE_OUTPUT_LIMIT",
+                            "Output length exceeds safe integers",
+                        )
+                    })?,
+                },
+                content: content.clone(),
+            })
+        })
+        .collect::<Result<Vec<_>, Error>>()?;
+    project::stage_selected_inputs(&inputs, destination)?;
+    Ok(json!({
+        "status": "staged-workspace-outputs", "profile": PROFILE,
+        "baselineDigest": baseline.digest, "workspace": baseline.config.id,
+        "outputs": inputs.iter().map(|v| &v.receipt).collect::<Vec<_>>(),
+        "outputCount": inputs.len(), "outputBytesRechecked": true,
+        "permissions": "user-only-non-executable-files",
+        "sourceInputs": "not-copied", "toolExecution": "not-performed",
+        "compilation": "not-performed", "selectionPublication": "not-performed",
+        "authorizationNow": "not-evaluated", "activation": "not-performed"
+    }))
+}

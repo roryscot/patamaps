@@ -128,6 +128,12 @@ enum Command {
         #[arg(long)]
         destination: PathBuf,
     },
+    /// Stage verified workspace output bytes in a fresh retained directory; runs no tools.
+    WorkspaceStage {
+        baseline: PathBuf,
+        #[arg(long)]
+        destination: PathBuf,
+    },
     #[command(hide = true, name = "__tool-supervisor")]
     ToolSupervisor,
     /// Read-only matching proposals; does not evaluate policy or confer admission.
@@ -1017,6 +1023,15 @@ fn run(command: Command) -> Result<(), Failure> {
         } => {
             let record = read::<patamaps_workspace::ProjectCapture>(&capture)?;
             let report = patamaps_workspace::stage_project_capture(&record, &destination)
+                .map_err(|e| Failure::Operational(e.to_string()))?;
+            stdout_json(&report)
+        }
+        Command::WorkspaceStage {
+            baseline,
+            destination,
+        } => {
+            let record = read::<patamaps_workspace::WorkspaceBaseline>(&baseline)?;
+            let report = patamaps_workspace::stage_workspace_outputs(&record, &destination)
                 .map_err(|e| Failure::Operational(e.to_string()))?;
             stdout_json(&report)
         }
