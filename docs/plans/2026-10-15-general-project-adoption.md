@@ -103,3 +103,29 @@ The [native workflow receipt](../acceptance/project-adoption/g4-retained-project
 The previous command primitive fe8bbb3 also passed all four CI38862268958 jobs; its small diagnostics artifact was API-digest verified and its13 command controls inspected. New retained-build CI is pending after push.
 
 G4 still requires foreground watch, qualified readiness/HTTP semantics, complete applicable input/context/dependency treatment, actual-project performance and installed workflow. The text-capture/symlink/output metadata limits are explicit; controlled artifact checks are not real application acceptance. G3 Next configuration/rewrites/Server Actions and G5–G6 deployment/real qualification remain open. The separate Wargame candidate growth-limit proposal remains unapproved and unapplied.
+
+## Foreground watch implementation sequence
+
+Reuse the native retained build driver. First expose a read-only observation of its
+exact input key, sharing capture/plan/tool/engine binding code with actual builds.
+Then add a foreground controller outside examples that debounces declared changes
+and acquires the existing storage supervisor only for each attempted update. Idle
+polling must not hold the shared build lease. A failed key must not spin or silently
+bypass a capacity refusal. Existing selected artifacts remain available on failure.
+
+Acceptance requires actual supervised Intel controls for edits, unchanged polls,
+rapid edits, failed-key suppression, source/tool changes, concurrent contenders,
+SIGINT/SIGTERM/SIGKILL and parent death with ordinary descendants stopped. Preserve
+all attempts and diagnostics. Stub runners may test routing but do not establish
+Intel supervisor acceptance. Read-only observation is not admission or an atomic
+filesystem snapshot; the native build rechecks lineage before publication. The
+observation primitive alone does not complete G4 foreground watch.
+
+The first watch prerequisite is implemented as native project-build-input-key.
+It shares exact source/plan/tool/engine binding construction with project-build,
+creates no build state and executes no configured commands. Native verification
+passed22 workspace integration tests, CLI compilation, focused all-target Clippy,
+and13 supervised build workflow controls. The new control checks read-only
+observation, equality with the selected build key and changed selected bytes.
+See [scoped receipt](../acceptance/project-adoption/g4-build-input-observation-20261016/receipt.json).
+CI for this addition is pending after push. The foreground controller remains open.

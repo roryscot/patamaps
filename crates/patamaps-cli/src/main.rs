@@ -151,6 +151,12 @@ enum Command {
         #[arg(long)]
         force: bool,
     },
+    /// Observe declared build inputs/tool identities without commands or build-state writes.
+    ProjectBuildInputKey {
+        plan: PathBuf,
+        #[arg(long)]
+        source: PathBuf,
+    },
     /// Verify local selected build bindings/artifacts without source rediscovery or tool execution.
     ProjectBuildVerify {
         state: PathBuf,
@@ -1089,6 +1095,12 @@ fn run(command: Command) -> Result<(), Failure> {
             } else {
                 Err(Failure::ReportedRejection)
             }
+        }
+        Command::ProjectBuildInputKey { plan, source } => {
+            let plan = read::<patamaps_workspace::ProjectBuildPlan>(&plan)?;
+            let report = patamaps_workspace::project_build_input_key(&source, &plan)
+                .map_err(|e| Failure::Operational(e.to_string()))?;
+            stdout_json(&report)
         }
         Command::ProjectBuildVerify { state } => {
             let report = patamaps_workspace::verify_project_build_selection(&state)

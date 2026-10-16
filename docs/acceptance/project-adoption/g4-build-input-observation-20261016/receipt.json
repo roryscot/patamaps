@@ -1,0 +1,47 @@
+{
+  "status": "passed-scoped-native-checkpoint",
+  "baseline": "46633a37ab233a1288f4990418c6f45cb64a30aa",
+  "feature": "read-only retained build input observation",
+  "commands": [
+    {
+      "command": "cargo fmt --all",
+      "exitCode": 0
+    },
+    {
+      "command": "cargo test --locked --offline -p patamaps-workspace --test workspace",
+      "exitCode": 0,
+      "tests": 22
+    },
+    {
+      "command": "cargo build --locked --offline -p patamaps-cli",
+      "exitCode": 0
+    },
+    {
+      "command": "cargo clippy --locked --offline -p patamaps-workspace -p patamaps-cli --all-targets -- -D warnings",
+      "exitCode": 0
+    },
+    {
+      "command": "python scripts/test_cross_stack.py --phase build-plan",
+      "exitCode": 0,
+      "controls": 13
+    }
+  ],
+  "nativeWorkflowReceipt": {
+    "path": ".tools/cross-stack/build-plan-20261016T075403.825910Z/receipt.json",
+    "sha256": "058a0f79673c1278f928ed0a6e57c804cb1bbbe437991a0602ef2a8a9c9b4277"
+  },
+  "storageGuardRuns": [
+    "14be0613-52c6-443b-af3a-74cc6f2b4202",
+    "a7eb005a-8dc5-4ed4-96da-39d8f9dc99f5",
+    "a1a31983-a307-44d3-a8ae-8f58368b4a17",
+    "726b5687-0241-4182-9db4-179badb26457",
+    "d8daea12-6382-4f60-ab25-e4b679c9f615"
+  ],
+  "limits": [
+    "Not an atomic filesystem snapshot or full dependency closure",
+    "No provider or build command execution during observation",
+    "Foreground watcher and parent-death qualification remain unimplemented",
+    "Real application runtime and deployment qualification remain open"
+  ],
+  "ci": "pending after push"
+}

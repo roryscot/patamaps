@@ -977,3 +977,45 @@ fn changing_an_earlier_tool_during_verification_preserves_selection() {
     assert_eq!(fs::read(state.join("selected.json")).unwrap(), previous);
     verify_project_build_selection(&state).unwrap();
 }
+
+#[test]
+#[cfg(unix)]
+fn build_input_observation_is_readonly_and_matches_selection() {
+    let (root, source, mut plan) = build_fixture();
+    let state = root.0.join("state");
+    let before = capture_project(&source.0, plan.project.clone()).unwrap();
+    let observed = project_build_input_key(&source.0, &plan).unwrap();
+    assert_eq!(observed["commandsExecuted"], false);
+    assert!(!state.exists());
+    assert!(!source.0.join("execution-marker").exists());
+    assert_eq!(
+        capture_project(&source.0, plan.project.clone())
+            .unwrap()
+            .digest,
+        before.digest
+    );
+    let selected = build_project(&source.0, &state, &plan, false).unwrap();
+    assert_eq!(selected["inputKey"], observed["inputKey"]);
+    fs::write(source.0.join("not-selected.txt"), "ignored").unwrap();
+    assert_eq!(
+        project_build_input_key(&source.0, &plan).unwrap()["inputKey"],
+        observed["inputKey"]
+    );
+    fs::write(source.0.join("input.txt"), "changed").unwrap();
+    assert_ne!(
+        project_build_input_key(&source.0, &plan).unwrap()["inputKey"],
+        observed["inputKey"]
+    );
+    fs::write(source.0.join("input.txt"), "selected original\n").unwrap();
+    plan.verification_steps[0]
+        .invocation
+        .arguments
+        .push("plan-change".into());
+    assert_ne!(
+        project_build_input_key(&source.0, &plan).unwrap()["inputKey"],
+        observed["inputKey"]
+    );
+    plan.build_steps[0].invocation.executable =
+        root.0.join("unavailable-tool").to_str().unwrap().into();
+    assert!(project_build_input_key(&source.0, &plan).is_err());
+}

@@ -40,7 +40,17 @@ def verify(root,work,env,run):
         raw=run("build-"+label,[cli,"project-build",path,"--source",source,"--state",state,*(["--force"] if force else [])],
                 expected_success=success)
         return json.loads(raw)
+    observed_plan=evidence/"observe-plan.json";write(observed_plan,plan)
+    observed=json.loads(run("build-input-observation",[cli,"project-build-input-key",observed_plan,"--source",source]))
+    assert observed["status"]=="observed-project-build-inputs" and observed["commandsExecuted"] is False
+    assert not state.exists() and not (source/"bundle").exists()
     first=build("first",plan);assert first["status"]=="selected-project-build"
+    assert first["inputKey"]==observed["inputKey"]
+    (source/"input.txt").write_text("changed observation\n")
+    changed_key=json.loads(run("build-input-change",[cli,"project-build-input-key",observed_plan,"--source",source]))
+    assert changed_key["inputKey"]!=observed["inputKey"]
+    (source/"input.txt").write_text("original\n")
+    controls.append(dict(control="build-input-observation",result="read-only",sameKeyAsBuild=True,selectedChangeDetected=True))
     pointer=(state/"selected.json").read_bytes()
     selected=state/json.loads(pointer)["attempt"]
     assert (selected/"candidate/bundle/app").read_text()=="artifact"

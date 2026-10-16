@@ -24,3 +24,17 @@ A successful update atomically replaces selected.json and preserves the exact pr
 project-build-verify rechecks retained records and candidate artifact bytes without rediscovering original source or executing recorded tools. Relocated state was tested when bytes/modes are preserved. Pin the creating Patamaps executor source/identity for historical verification. Saved command evidence is not a signed execution attestation, current authorization or deployment activation.
 
 The current workflow inherits bounded selected text capture; it does not restore opaque source dependencies, package installs, original executable metadata or an entire arbitrary project automatically. Verification commands can own runtime checks, but readiness/HTTP semantics require actual qualification. Foreground watch, actual-project measurements, installed-consumer workflow and full real application acceptance remain separate required work.
+
+### Observing declared changes
+
+Run `patamaps project-build-input-key PLAN --source OWNER` to observe the
+same input key used by `project-build`, without creating build state or executing
+providers, build commands or verification commands. The key binds the declared
+selected source, plan, configured executable targets and Patamaps engine.
+Unknown or missing selected inputs and unavailable configured executables refuse.
+
+This is a polling primitive for a future foreground watcher. It is not an atomic
+filesystem snapshot, admission, readiness, a complete dependency closure, or
+permission to bypass the storage supervisor. A build still recaptures and verifies
+its inputs before publication. Unselected files do not affect this key. Watch
+lifecycle and per-update supervision remain unimplemented.

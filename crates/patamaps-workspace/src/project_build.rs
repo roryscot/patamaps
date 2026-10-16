@@ -411,6 +411,36 @@ mod unix {
             "authorizationNow":"not-evaluated","activation":"not-performed"}),
         )
     }
+    fn build_inputs(
+        source: &Path,
+        plan: &ProjectBuildPlan,
+    ) -> Result<(ProjectCapture, BTreeMap<String, Value>, String, String), Error> {
+        validate(plan)?;
+        let meta = fs::symlink_metadata(source)?;
+        if meta.file_type().is_symlink() || !meta.is_dir() {
+            return Err(refuse("PROJECT_BUILD_DIRECTORY"));
+        }
+        let original = capture_project(source, plan.project.clone())?;
+        let bindings = tools(plan)?;
+        let plan_digest = canonical_digest(plan)?;
+        let key = canonical_digest(
+            &json!({"profile":PROJECT_BUILD_PROFILE,"source":original.digest,"plan":plan_digest,"tools":bindings,"executor":crate::engine_id()}),
+        )?;
+        Ok((original, bindings, plan_digest, key))
+    }
+
+    /// Read declared inputs/tool identities without running commands or creating build state.
+    /// This observation is not admission, readiness, or an atomic filesystem snapshot.
+    pub fn project_build_input_key(source: &Path, plan: &ProjectBuildPlan) -> Result<Value, Error> {
+        let (capture, bindings, plan_digest, key) = build_inputs(source, plan)?;
+        Ok(
+            json!({"status":"observed-project-build-inputs","inputKey":key,
+            "sourceCaptureDigest":capture.digest,"planDigest":plan_digest,
+            "tools":bindings,"executor":crate::engine_id(),
+            "commandsExecuted":false,"admission":"not-performed","activation":"not-performed"}),
+        )
+    }
+
     pub fn build_project(
         source: &Path,
         state: &Path,
@@ -454,12 +484,7 @@ mod unix {
             .open(state.join("driver.lock"))?;
         lock.try_lock()
             .map_err(|_| refuse("PROJECT_BUILD_LOCK_UNAVAILABLE"))?;
-        let original = capture_project(&source, plan.project.clone())?;
-        let bindings = tools(plan)?;
-        let plan_digest = canonical_digest(plan)?;
-        let key = canonical_digest(
-            &json!({"profile":PROJECT_BUILD_PROFILE,"source":original.digest,"plan":plan_digest,"tools":bindings,"executor":crate::engine_id()}),
-        )?;
+        let (original, bindings, plan_digest, key) = build_inputs(&source, plan)?;
         let previous = selected_bytes(&state)?;
         if let Some(raw) = &previous {
             let selected = selection(raw)?;
@@ -612,7 +637,7 @@ mod unix {
     }
 }
 #[cfg(unix)]
-pub use unix::{build_project, verify_project_build_selection};
+pub use unix::{build_project, project_build_input_key, verify_project_build_selection};
 
 #[cfg(not(unix))]
 pub fn build_project(
@@ -628,6 +653,17 @@ pub fn build_project(
 }
 #[cfg(not(unix))]
 pub fn verify_project_build_selection(_: &std::path::Path) -> Result<serde_json::Value, Error> {
+    Err(Error::refused(
+        "PROJECT_BUILD_PLATFORM",
+        "Retained builds require Unix",
+    ))
+}
+
+#[cfg(not(unix))]
+pub fn project_build_input_key(
+    _: &std::path::Path,
+    _: &ProjectBuildPlan,
+) -> Result<serde_json::Value, Error> {
     Err(Error::refused(
         "PROJECT_BUILD_PLATFORM",
         "Retained builds require Unix",
