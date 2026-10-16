@@ -1,6 +1,6 @@
 # Finite JSON DTO HTTP contracts (draft profile 2)
 
-Status: implementation and regression controls added; execution receipts determine acceptance.
+Status: [scoped Rust/TypeScript/wire regressions and both Linux native lanes passed](../acceptance/project-adoption/g2-json-http-3e75c60/receipt.json). This does not complete G2 framework or existing-project qualification.
 This extends checked HTTP emission with the owner-selected handler profile
 patamaps-http-json-2. The original patamaps-http-object-strings-1 remains supported.
 Selecting a schema does not infer a Rust type, router, semantic identity or Serde behavior.
@@ -33,12 +33,12 @@ Unknown assertion keywords, unsupported formats, external/recursive references,
 allOf and reference siblings with additional assertions refuse generation.
 No arbitrary Serde enum, flattening, custom serializer or macro equivalence is claimed.
 
-A schema has at most 256 KiB, 128 definitions, 128 properties per object, depth32
-and 2,048 expanded nodes. Length/count constraints are integral through1,000,000.
-The generated wire profile bounds values to depth64 and16,384 value visits.
+A schema has at most 256 KiB, 128 definitions, 128 properties per object, depth 32
+and 2,048 expanded nodes. Length/count constraints are integral through 1,000,000.
+The generated wire profile bounds values to depth 64 and 16,384 value visits.
 Integral-valued JSON numbers must lie within ±9,007,199,254,740,991; larger Rust
 integers require an explicitly reviewed wire representation, not silent rounding.
-Other numeric values must be finite. Request bytes retain the existing8,192-byte
+Other numeric values must be finite. Request bytes retain the existing 8,192-byte
 dispatch limit. Larger application body limits remain configurable-framework work.
 
 Rust and TypeScript checks count Unicode scalar values. Client validators reject
@@ -47,11 +47,11 @@ and non-plain objects. HTTP responses are parsed JSON objects. These are JSON DT
 validators, not an object-code sandbox.
 
 Before typed Serde decoding, generated Rust dispatch normalizes only fields
-declared integer by their selected schema. Thus numeric spellings1.0 and1e0 can
+declared integer by their selected schema. Thus numeric spellings 1.0 and 1e0 can
 satisfy an integer contract. Number-typed fields are left intact, including
 negative zero on direct HTTP input. anyOf normalization uses its first matching
 alternative; oneOf has a unique selected alternative. Generated-client
-JSON.stringify follows JavaScript's ordinary wire behavior, including -0 becoming0.
+JSON.stringify follows JavaScript's ordinary wire behavior, including -0 becoming 0.
 
 TypeScript emits nested types and string literal unions. Its index signature for
 typed additional properties includes declared property types to avoid excluding

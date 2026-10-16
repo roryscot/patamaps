@@ -194,14 +194,14 @@ const id='urn:example:operation:create-item';
             finally:
                 from cross_stack_bindings import stop
                 stop(process)
-        controls.extend(rows)
+        controls.extend([dict(row,candidate=label) for row in rows])
         assert all(builder.digest(builder.owned(app,p).read_bytes())==d for p,d in generated["sourceBytes"].items())
         return generated
 
     generated=candidate("rich-dto")
-    candidate("ambiguous-union",True)
+    ambiguity=candidate("ambiguous-union",True)
     receipt=dict(status="passed-json-dto-contract-regressions",profile="patamaps-http-json-2",controls=controls,
-                 generated=generated,fullWorkflowAccepted=False,existingProjectQualification="not-performed",
+                 generated=generated,ambiguityGeneration=ambiguity,fullWorkflowAccepted=False,existingProjectQualification="not-performed",
                  framework="sync-typed-dispatch",axum="not-performed",activation="not-performed")
     (state/"receipt.json").write_text(json.dumps(receipt,indent=2)+"\n")
     return receipt
