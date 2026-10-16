@@ -1,0 +1,34 @@
+# General project adoption build plan
+
+Status: active. Owner authorization: create and pursue on Intel with regular commits and pushes.
+Baseline: 591e313cc770ab256a045e4e101a6a2358262b1f. The completed cross-stack M0–M7/X01–X20 plan and receipts remain historical, unchanged.
+Scope: usable, explicitly bounded Next.js/Rust project integration beyond the catalog fixture. Completion requires independent existing-project evidence, not another invented example.
+
+## Authority and exclusions
+
+Rust owns parsing, validation, admission, capture/replay and emission. Reuse existing workspace/process providers, graph laws, checked projections, candidate publication and package contracts. Owner profiles declare semantic correspondences and intent; discovery never invents business meaning. Do not replace the kernel, introduce a parallel graph framework or infer arbitrary macro/shell effects.
+All heavy execution uses Intel's existing shared storage supervisor, its 4 GB growth / 500 MB reserve / 100 GB retention policy and retained outputs. Wait for another project's lease; do not interrupt it or use another runtime/VM. No deletions, production deployment, registry publication, secrets ingestion or trust activation. Keep regular verified commits and Rory pushes; no history rewrite.
+
+## Milestones and observable acceptance
+
+| Stage | Deliverable | Acceptance / negative controls |
+| --- | --- | --- |
+| G0 | Inventory, fixed baseline, qualification selection and this plan | Record real project provenance and constraints; read applicable instructions; distinguish working modifications from Git commit. Preserve prior accepted profile. |
+| G1 | Native project onboarding profile and explicit nonsecret input capture | Arbitrary owner-relative layout; named components/contexts; explicit input allowlist; bounded native strict JSON; unknown keys/path escapes/symlinks/duplicate identities/secret-file selection refuse. Secret references remain unresolved labels and never read environment/files. Deterministic content receipt with stated non-admission status. Replay verifies exact inputs without source/tool access. Actual Wargame and independently structured Seeder input captures; no source mutations. |
+| G2 | General HTTP contract profile and framework bridges | Extend native HTTP emitter with bounded nested objects, optional fields, arrays, booleans, numeric bounds, enums, supported methods and path/query/header parameters. Explicit versioned schema subset, no silent ignored keywords. Axum integration through real handler signatures/extractors. Rust/TS compile plus real HTTP positive and independently frozen invalid cases; retain old string-object profile. No arbitrary Serde/macro equivalence claim. |
+| G3 | Configurable Next/Cargo observations | Owner-selected Next roots/config and workspace manifests/lockfiles/targets/features/platform. Support reviewed Cargo globs/config subset with exact captured enumeration and ambiguity refusals. Route groups/dynamic routes plus explicit rewrites/proxy/environment/Server Action boundaries. Use real project cases, not filename evidence as runtime proof. Omitted inputs/config/feature/route mutation controls. |
+| G4 | Portable retained development workflow | Reusable commands outside examples; explicit executable argv/cwd/environment references, readiness/HTTP checks, exact output selection and source/tool lineage. Preserve previous selection on failed/raced/cancelled build, foreground watch and parent death. Measure cold/warm edit latency, memory units and retained disk on actual project sizes. No-op reports verification not repeated; no invented cache hits or speed claim. |
+| G5 | Deployment contexts and installed consumers | Owner-selected Dockerfile/context/stage/Cargo target/profile/platform with bounded static observations plus actual Linux builds, artifact/image/config/listener/HTTP/browser evidence. Wrong binary/config/arch/listener/stale generated contract refuse. Safe nonsecret config projections must be captured as independently declared inputs; raw secret-bearing files never enter capture. Fresh exact installed source/native package repeats usable workflow without example-script copying or graph compiler on request paths. |
+| G6 | Independent qualification and release decision | Retained candidates from existing Wargame (Next + Axum + nested domain types) and a differently structured project (Seeder Next monorepo, plus independent Rust project if needed). Record source commit AND exact selected working bytes; no unrelated app changes. Real native builds, generated contracts, runtime calls and browser controls; existing app tests through their mandated guards. Independent expected failures, replay after source/tools unavailable, installed consumer and previous fixture regressions. Publish scoped support matrix with passed/failed/unavailable states. |
+
+Dependencies: G1 before reusable capture/configuration; G2/G3 before G4 general runtime; G4 before G5 installed/release; G6 runs incrementally but acceptance requires all preceding required controls. Do not call G1 source capture complete workflow acceptance.
+
+## Qualification intake (initial read-only observations)
+
+- Wargame: /Volumes/dev_src_case_sensitive/projects/wargame, HEAD cf4e0de9dcd7c87ccf32f6f40adb662078e45d13. Existing working changes include README, VERIFICATION, build status, managed-browser harness, storage policy and independent Linux evidence. Preserve them. Rust root package wargame-workbench, Axum 0.8, Serde/schemars/sqlx/tokio; Next 16.4.1 under web, Node >=24 <25. Existing Metamap compiler must remain unchanged; generated contract aliases share one atomic bundle pointer. Its AGENTS mandates its own guarded npm verification and distinguishes synthetic from empirical acceptance.
+- Seeder: /Volumes/dev_src_case_sensitive/projects/seeder, HEAD c61d51a57120abbbca65d4cb4a432c1cef9343bb. Next ^16.0.0 under packages/web and optional ad-platform-web, root npm workspace. Full instructions and current worktree must be reviewed before anything beyond read-only selected-input observation.
+- Initial selection is a proposal based on existing implementation. Actual qualification must disclose missing prerequisites and may add a suitable independent Rust consumer. Do not weaken requirements to turn a capture into a runtime pass.
+
+## Evidence and commit policy
+
+Each stage records exact source/tool identities, commands, outcome, retained path and explicit unrun controls. Negative tests are frozen before repairing their target behavior. Do not rewrite historical failed receipts. Commit plan first, then small verified implementation milestones and their evidence; push after verifying origin, authenticated Rory identity and all new author/committer metadata. Full Linux/image/browser checks use required CI lanes when native prerequisites are absent. Record progress and handoff without declaring incomplete stages accepted.
