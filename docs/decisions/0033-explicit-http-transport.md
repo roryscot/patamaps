@@ -1,6 +1,6 @@
 # Explicit transport clients and module-local Axum witnesses
 
-Status: implemented and verified by the scoped Linux controls at source 1588a3c.
+Status: implemented and verified by the scoped Linux controls at sources 1588a3c and 5880cbe.
 This is a G2 extension, not completed existing-project qualification.
 
 The owner-declared patamaps-http-transport-1 profile separates HTTP operations
@@ -63,8 +63,11 @@ The scalar controls echo typed u64/i64 values and exact quantity strings through
 real Rust and the controlled proxy, and freeze malformed UUID/quantity and unsafe
 integer input/response controls. Serde String alone does not enforce UUID or the
 decimal pattern on the server; these are generated client assertions, not a claim
-that the witness makes server validation equivalent. Current-source execution of
-these new scalar controls is pending CI. The accepted 1588a3c receipt predates them.
+that the witness makes server validation equivalent. The [5880cbe scalar receipt](../acceptance/project-adoption/g2-http-transport-5880cbe/receipt.json)
+records 86 distinct controls and all four CI38845561544 jobs passed. It includes
+31 completed HTTP exchanges, 45 runtime client controls, seven emission refusals,
+two Rust signature refusals and one TypeScript refusal. The accepted 1588a3c
+receipt predates the scalar extensions and remains preserved.
 
 Extractors: state, json, json-result, path, query and headers. Typed variants
 carry an explicit Rust type path; headers means HeaderMap. Body extraction must

@@ -1,0 +1,497 @@
+{
+  "status": "passed-transport-and-axum-controls",
+  "controls": [
+    {
+      "label": "missing-typed-parameters",
+      "stage": "typescript",
+      "result": "refused",
+      "code": "TS2554"
+    },
+    {
+      "label": "backend-evaluate",
+      "status": 200,
+      "kind": "evaluate"
+    },
+    {
+      "label": "backend-replay",
+      "status": 200,
+      "kind": "replay"
+    },
+    {
+      "label": "backend-above-fixture-limit",
+      "status": 200,
+      "bytes": 16000
+    },
+    {
+      "label": "backend-structured-error",
+      "status": 400,
+      "issues": 1
+    },
+    {
+      "label": "backend-get-parameters",
+      "status": 200,
+      "id": "a/b \u2603%",
+      "limit": 3,
+      "verbose": false
+    },
+    {
+      "label": "backend-put-parameters",
+      "status": 200,
+      "id": "a/b \u2603%",
+      "limit": 3,
+      "verbose": false
+    },
+    {
+      "label": "backend-patch-parameters",
+      "status": 200,
+      "id": "a/b \u2603%",
+      "limit": 3,
+      "verbose": false
+    },
+    {
+      "label": "backend-delete-no-content",
+      "status": 204
+    },
+    {
+      "label": "backend-get-health",
+      "status": 200
+    },
+    {
+      "label": "backend-head-health",
+      "status": 200
+    },
+    {
+      "label": "backend-options-health",
+      "status": 200
+    },
+    {
+      "label": "frontend-evaluate",
+      "status": 200,
+      "kind": "evaluate"
+    },
+    {
+      "label": "frontend-replay",
+      "status": 200,
+      "kind": "replay"
+    },
+    {
+      "label": "frontend-above-fixture-limit",
+      "status": 200,
+      "bytes": 16000
+    },
+    {
+      "label": "frontend-structured-error",
+      "status": 400,
+      "issues": 1
+    },
+    {
+      "label": "frontend-get-parameters",
+      "status": 200,
+      "id": "a/b \u2603%",
+      "limit": 3,
+      "verbose": false
+    },
+    {
+      "label": "frontend-put-parameters",
+      "status": 200,
+      "id": "a/b \u2603%",
+      "limit": 3,
+      "verbose": false
+    },
+    {
+      "label": "frontend-patch-parameters",
+      "status": 200,
+      "id": "a/b \u2603%",
+      "limit": 3,
+      "verbose": false
+    },
+    {
+      "label": "frontend-delete-no-content",
+      "status": 204
+    },
+    {
+      "label": "frontend-get-health",
+      "status": 200
+    },
+    {
+      "label": "frontend-head-health",
+      "status": 200
+    },
+    {
+      "label": "frontend-options-health",
+      "status": 200
+    },
+    {
+      "label": "backend-scalars-safe-bounds",
+      "status": 200,
+      "quantityPreserved": true
+    },
+    {
+      "label": "backend-scalars-zero",
+      "status": 200,
+      "quantityPreserved": true
+    },
+    {
+      "label": "frontend-scalars-safe-bounds",
+      "status": 200,
+      "quantityPreserved": true
+    },
+    {
+      "label": "frontend-scalars-zero",
+      "status": 200,
+      "quantityPreserved": true
+    },
+    {
+      "label": "scalar-input-unsafe-count",
+      "result": "refused",
+      "code": "HTTP_INVALID_REQUEST"
+    },
+    {
+      "label": "scalar-response-unsafe-count",
+      "result": "refused",
+      "code": "HTTP_RESPONSE_CONTRACT"
+    },
+    {
+      "label": "scalar-input-negative-count",
+      "result": "refused",
+      "code": "HTTP_INVALID_REQUEST"
+    },
+    {
+      "label": "scalar-response-negative-count",
+      "result": "refused",
+      "code": "HTTP_RESPONSE_CONTRACT"
+    },
+    {
+      "label": "scalar-input-fractional-count",
+      "result": "refused",
+      "code": "HTTP_INVALID_REQUEST"
+    },
+    {
+      "label": "scalar-response-fractional-count",
+      "result": "refused",
+      "code": "HTTP_RESPONSE_CONTRACT"
+    },
+    {
+      "label": "scalar-input-unsafe-delta",
+      "result": "refused",
+      "code": "HTTP_INVALID_REQUEST"
+    },
+    {
+      "label": "scalar-response-unsafe-delta",
+      "result": "refused",
+      "code": "HTTP_RESPONSE_CONTRACT"
+    },
+    {
+      "label": "scalar-input-uuid-short",
+      "result": "refused",
+      "code": "HTTP_INVALID_REQUEST"
+    },
+    {
+      "label": "scalar-response-uuid-short",
+      "result": "refused",
+      "code": "HTTP_RESPONSE_CONTRACT"
+    },
+    {
+      "label": "scalar-input-uuid-nonhex",
+      "result": "refused",
+      "code": "HTTP_INVALID_REQUEST"
+    },
+    {
+      "label": "scalar-response-uuid-nonhex",
+      "result": "refused",
+      "code": "HTTP_RESPONSE_CONTRACT"
+    },
+    {
+      "label": "scalar-input-uuid-no-hyphens",
+      "result": "refused",
+      "code": "HTTP_INVALID_REQUEST"
+    },
+    {
+      "label": "scalar-response-uuid-no-hyphens",
+      "result": "refused",
+      "code": "HTTP_RESPONSE_CONTRACT"
+    },
+    {
+      "label": "scalar-input-uuid-newline",
+      "result": "refused",
+      "code": "HTTP_INVALID_REQUEST"
+    },
+    {
+      "label": "scalar-response-uuid-newline",
+      "result": "refused",
+      "code": "HTTP_RESPONSE_CONTRACT"
+    },
+    {
+      "label": "scalar-input-quantity-empty",
+      "result": "refused",
+      "code": "HTTP_INVALID_REQUEST"
+    },
+    {
+      "label": "scalar-response-quantity-empty",
+      "result": "refused",
+      "code": "HTTP_RESPONSE_CONTRACT"
+    },
+    {
+      "label": "scalar-input-quantity-leading-zero",
+      "result": "refused",
+      "code": "HTTP_INVALID_REQUEST"
+    },
+    {
+      "label": "scalar-response-quantity-leading-zero",
+      "result": "refused",
+      "code": "HTTP_RESPONSE_CONTRACT"
+    },
+    {
+      "label": "scalar-input-quantity-sign",
+      "result": "refused",
+      "code": "HTTP_INVALID_REQUEST"
+    },
+    {
+      "label": "scalar-response-quantity-sign",
+      "result": "refused",
+      "code": "HTTP_RESPONSE_CONTRACT"
+    },
+    {
+      "label": "scalar-input-quantity-negative",
+      "result": "refused",
+      "code": "HTTP_INVALID_REQUEST"
+    },
+    {
+      "label": "scalar-response-quantity-negative",
+      "result": "refused",
+      "code": "HTTP_RESPONSE_CONTRACT"
+    },
+    {
+      "label": "scalar-input-quantity-fraction",
+      "result": "refused",
+      "code": "HTTP_INVALID_REQUEST"
+    },
+    {
+      "label": "scalar-response-quantity-fraction",
+      "result": "refused",
+      "code": "HTTP_RESPONSE_CONTRACT"
+    },
+    {
+      "label": "scalar-input-quantity-exponent",
+      "result": "refused",
+      "code": "HTTP_INVALID_REQUEST"
+    },
+    {
+      "label": "scalar-response-quantity-exponent",
+      "result": "refused",
+      "code": "HTTP_RESPONSE_CONTRACT"
+    },
+    {
+      "label": "scalar-input-quantity-newline",
+      "result": "refused",
+      "code": "HTTP_INVALID_REQUEST"
+    },
+    {
+      "label": "scalar-response-quantity-newline",
+      "result": "refused",
+      "code": "HTTP_RESPONSE_CONTRACT"
+    },
+    {
+      "label": "scalar-input-quantity-unicode-digits",
+      "result": "refused",
+      "code": "HTTP_INVALID_REQUEST"
+    },
+    {
+      "label": "scalar-response-quantity-unicode-digits",
+      "result": "refused",
+      "code": "HTTP_RESPONSE_CONTRACT"
+    },
+    {
+      "label": "scalar-rust-negative-u64",
+      "status": 422
+    },
+    {
+      "label": "header-domain-refusal",
+      "status": 400
+    },
+    {
+      "label": "actual-axum-body-limit",
+      "status": 413
+    },
+    {
+      "label": "wrong-proxy-branch",
+      "status": 422,
+      "actualBackend": "/evaluate"
+    },
+    {
+      "label": "proxy-branch-restored",
+      "status": 200
+    },
+    {
+      "label": "missing-path",
+      "result": "refused",
+      "code": "HTTP_INVALID_REQUEST"
+    },
+    {
+      "label": "fractional-query",
+      "result": "refused",
+      "code": "HTTP_INVALID_REQUEST"
+    },
+    {
+      "label": "extra-query",
+      "result": "refused",
+      "code": "HTTP_INVALID_REQUEST"
+    },
+    {
+      "label": "path-dot-segment",
+      "result": "refused",
+      "code": "HTTP_INVALID_PATH"
+    },
+    {
+      "label": "header-injection",
+      "result": "refused",
+      "code": "HTTP_INVALID_HEADERS"
+    },
+    {
+      "label": "utf8-byte-limit",
+      "result": "refused",
+      "code": "HTTP_INPUT_LIMIT"
+    },
+    {
+      "label": "ascii-byte-limit",
+      "result": "refused",
+      "code": "HTTP_INPUT_LIMIT"
+    },
+    {
+      "label": "content-type",
+      "result": "refused",
+      "code": "HTTP_CONTENT_TYPE"
+    },
+    {
+      "label": "response-shape",
+      "result": "refused",
+      "code": "HTTP_RESPONSE_CONTRACT"
+    },
+    {
+      "label": "error-shape",
+      "result": "refused",
+      "code": "HTTP_ERROR_CONTRACT"
+    },
+    {
+      "label": "invalid-utf8",
+      "result": "refused",
+      "code": "HTTP_INVALID_JSON"
+    },
+    {
+      "label": "bounded-response-stream",
+      "result": "refused",
+      "code": "HTTP_RESPONSE_LIMIT"
+    },
+    {
+      "label": "abort-signal",
+      "result": "cancelled",
+      "code": "AbortError"
+    },
+    {
+      "label": "unsupported-pattern",
+      "stage": "emission",
+      "result": "refused",
+      "code": "HTTP_JSON_SCHEMA_UNSUPPORTED"
+    },
+    {
+      "label": "unsupported-format",
+      "stage": "emission",
+      "result": "refused",
+      "code": "HTTP_JSON_SCHEMA_UNSUPPORTED"
+    },
+    {
+      "label": "missing-group",
+      "stage": "emission",
+      "result": "refused",
+      "code": "HTTP_PROXY_GROUP"
+    },
+    {
+      "label": "mismatched-method",
+      "stage": "emission",
+      "result": "refused",
+      "code": "HTTP_ENDPOINT_CONFLICT"
+    },
+    {
+      "label": "missing-path-required",
+      "stage": "emission",
+      "result": "refused",
+      "code": "HTTP_PARAMETER_SCHEMA"
+    },
+    {
+      "label": "implicit-query-array",
+      "stage": "emission",
+      "result": "refused",
+      "code": "HTTP_PARAMETER_SCHEMA"
+    },
+    {
+      "label": "reserved-header",
+      "stage": "emission",
+      "result": "refused",
+      "code": "HTTP_HEADER_CONTRACT"
+    },
+    {
+      "label": "wrong-private-input",
+      "stage": "rust-signature",
+      "result": "refused",
+      "code": "E0631"
+    },
+    {
+      "label": "wrong-private-output",
+      "stage": "rust-signature",
+      "result": "refused",
+      "code": "E0271"
+    }
+  ],
+  "profile": "patamaps-http-transport-1",
+  "lockDigest": "sha256:7d3728eaff7984b32f1454ff9b213d427bcf92d15ef96dde7b9e8812c85b20fd",
+  "router": "existing-router-preserved",
+  "fullWorkflowAccepted": false,
+  "existingProjectQualification": "not-performed",
+  "nextjs": "not-performed",
+  "activation": "not-performed",
+  "sourceRevision": "5880cbee34d28b79cad49e5b2156cecd4954adce",
+  "workflow": {
+    "runId": 38845561544,
+    "url": "https://github.com/roryscot/patamaps/actions/runs/38845561544",
+    "jobs": [
+      {
+        "id": 116795176467,
+        "name": "Cross-stack source bindings (Linux x86_64)",
+        "conclusion": "success"
+      },
+      {
+        "id": 116795176650,
+        "name": "Cross-stack Linux image and browser (amd64)",
+        "conclusion": "success"
+      },
+      {
+        "id": 116795176840,
+        "name": "Linux aarch64",
+        "conclusion": "success"
+      },
+      {
+        "id": 116795176875,
+        "name": "Linux x86_64",
+        "conclusion": "success"
+      }
+    ]
+  },
+  "diagnostics": {
+    "artifactId": 12023456608,
+    "bytes": 41990,
+    "sha256": "ecc4eddec136011967c73d0024a483d479a6a2ae59eca3a7f2894943288f604e"
+  },
+  "scope": {
+    "completedHttpExchanges": 31,
+    "runtimeClientControls": 45,
+    "emissionRefusals": 7,
+    "rustSignatureRefusals": 2,
+    "typescriptRefusals": 1,
+    "axumConsumerPlatform": "Linux x86_64",
+    "proxy": "controlled Node HTTP proxy",
+    "existingProjects": "not-qualified",
+    "nextjsRuntime": "not-qualified",
+    "axumImage": "not-qualified",
+    "legacyJson2Refusals": "retained; full native tests passed on both Linux architectures"
+  }
+}
