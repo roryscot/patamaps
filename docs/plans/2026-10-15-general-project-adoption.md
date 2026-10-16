@@ -234,3 +234,6 @@ proxy behavior and Server Action handlers. The actual case has empty rewrite
 lists; controlled rule records do not establish HTTP semantics. G4 context/
 artifact/readiness/watch/performance and G5–G6 actual generated-contract/runtime/
 installed/deployment requirements remain required. Wargame policy remains unchanged.
+
+## Retained context primitive checkpoint
+The opt-in [retained context API](../guides/retained-contexts.md) captures binary bytes, permission bits, explicit directories and closed relative links without weakening the old text profile. Native package tests, Clippy and five CLI controls pass. The actual selected Next project context captured 1,604,201,589 bytes across 195,911 entries in 538.121 seconds; the [scoped receipt](../acceptance/project-adoption/g4-retained-context-2026-10-16/receipt.json) deliberately leaves large offline reconstruction, application build and native project-build integration pending. These primitives advance G4 but do not complete portable workflow or G6 qualification.

@@ -320,82 +320,22 @@ pub(crate) fn stage_selected_inputs(
 
 #[cfg(unix)]
 fn stage_inputs(inputs: &[SuppliedInput], destination: &Path) -> Result<(), Error> {
-    use rustix::fs::{Mode, OFlags, mkdirat, openat};
-    use std::{
-        fs::OpenOptions,
-        io::Write,
-        os::unix::fs::{MetadataExt, OpenOptionsExt},
-    };
-    let leaf = destination
-        .file_name()
-        .and_then(|v| v.to_str())
-        .filter(|v| relative_path(v) && !v.contains('/'))
-        .ok_or_else(|| refuse("PROJECT_STAGE_DESTINATION"))?;
-    let parent = destination
-        .parent()
-        .filter(|p| !p.as_os_str().is_empty())
-        .unwrap_or(Path::new("."));
-    if std::fs::symlink_metadata(parent)?.file_type().is_symlink() {
-        return Err(refuse("PROJECT_STAGE_PARENT_SYMLINK"));
-    }
-    let directory_flags = OFlags::RDONLY | OFlags::DIRECTORY | OFlags::NOFOLLOW | OFlags::CLOEXEC;
-    let parent = OpenOptions::new()
-        .read(true)
-        .custom_flags(directory_flags.bits() as i32)
-        .open(parent)?;
-    mkdirat(&parent, leaf, Mode::from_bits_truncate(0o700))
-        .map_err(|_| refuse("PROJECT_STAGE_DESTINATION_UNAVAILABLE"))?;
-    let directory = File::from(
-        openat(&parent, leaf, directory_flags, Mode::empty())
-            .map_err(|_| refuse("PROJECT_STAGE_DIRECTORY_UNAVAILABLE"))?,
-    );
+    use std::io::Write;
+    let stage = crate::project_fs::StageRoot::create(destination)?;
     for input in inputs {
-        let mut current = directory.try_clone()?;
-        let parts = input.receipt.path.split('/').collect::<Vec<_>>();
-        for part in &parts[..parts.len() - 1] {
-            match mkdirat(&current, *part, Mode::from_bits_truncate(0o700)) {
-                Ok(()) => {}
-                Err(rustix::io::Errno::EXIST) => {}
-                Err(_) => return Err(refuse("PROJECT_STAGE_DIRECTORY_UNAVAILABLE")),
-            }
-            current = File::from(
-                openat(&current, *part, directory_flags, Mode::empty())
-                    .map_err(|_| refuse("PROJECT_STAGE_DIRECTORY_UNAVAILABLE"))?,
-            );
-        }
-        let mut file = File::from(
-            openat(
-                &current,
-                *parts.last().expect("validated nonempty input"),
-                OFlags::WRONLY | OFlags::CREATE | OFlags::EXCL | OFlags::NOFOLLOW | OFlags::CLOEXEC,
-                Mode::from_bits_truncate(0o600),
-            )
-            .map_err(|_| refuse("PROJECT_STAGE_INPUT_UNAVAILABLE"))?,
-        );
-        file.write_all(input.content.as_bytes())?;
+        stage
+            .file(&input.receipt.path)?
+            .write_all(input.content.as_bytes())?;
     }
-    let metadata = directory.metadata()?;
-    let visible = File::from(
-        openat(&parent, leaf, directory_flags, Mode::empty())
-            .map_err(|_| refuse("PROJECT_STAGE_DIRECTORY_CHANGED"))?,
-    );
-    let visible_metadata = visible.metadata()?;
-    if (metadata.dev(), metadata.ino()) != (visible_metadata.dev(), visible_metadata.ino()) {
-        return Err(refuse("PROJECT_STAGE_DIRECTORY_CHANGED"));
-    }
+    stage.verify_identity()?;
     for input in inputs {
-        if read_input(&visible, &input.receipt.path, MAX_INPUT_BYTES)? != input.content.as_bytes() {
+        if read_input(&stage.directory, &input.receipt.path, MAX_INPUT_BYTES)?
+            != input.content.as_bytes()
+        {
             return Err(refuse("PROJECT_STAGE_INPUT_CHANGED"));
         }
     }
-    let path_view = OpenOptions::new()
-        .read(true)
-        .custom_flags(directory_flags.bits() as i32)
-        .open(destination)?;
-    let path_metadata = path_view.metadata()?;
-    if (metadata.dev(), metadata.ino()) != (path_metadata.dev(), path_metadata.ino()) {
-        return Err(refuse("PROJECT_STAGE_DIRECTORY_CHANGED"));
-    }
+    stage.verify_identity()?;
     Ok(())
 }
 

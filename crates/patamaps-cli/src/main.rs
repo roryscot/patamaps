@@ -157,6 +157,24 @@ enum Command {
         #[arg(long)]
         source: PathBuf,
     },
+    /// Capture explicit binary files and closed internal links into a fresh retained snapshot.
+    ProjectContextCapture {
+        definition: PathBuf,
+        #[arg(long)]
+        root: PathBuf,
+        #[arg(long)]
+        destination: PathBuf,
+    },
+    /// Verify retained context bytes without original source or tools.
+    ProjectContextVerify {
+        snapshot: PathBuf,
+    },
+    /// Reconstruct verified retained context into a fresh directory.
+    ProjectContextStage {
+        snapshot: PathBuf,
+        #[arg(long)]
+        destination: PathBuf,
+    },
     /// Verify local selected build bindings/artifacts without source rediscovery or tool execution.
     ProjectBuildVerify {
         state: PathBuf,
@@ -1099,6 +1117,30 @@ fn run(command: Command) -> Result<(), Failure> {
         Command::ProjectBuildInputKey { plan, source } => {
             let plan = read::<patamaps_workspace::ProjectBuildPlan>(&plan)?;
             let report = patamaps_workspace::project_build_input_key(&source, &plan)
+                .map_err(|e| Failure::Operational(e.to_string()))?;
+            stdout_json(&report)
+        }
+        Command::ProjectContextCapture {
+            definition,
+            root,
+            destination,
+        } => {
+            let definition = read::<patamaps_workspace::ProjectContextDefinition>(&definition)?;
+            let report =
+                patamaps_workspace::capture_project_context(&root, &destination, &definition)
+                    .map_err(|e| Failure::Operational(e.to_string()))?;
+            stdout_json(&report)
+        }
+        Command::ProjectContextVerify { snapshot } => {
+            let report = patamaps_workspace::verify_project_context(&snapshot)
+                .map_err(|e| Failure::Operational(e.to_string()))?;
+            stdout_json(&report)
+        }
+        Command::ProjectContextStage {
+            snapshot,
+            destination,
+        } => {
+            let report = patamaps_workspace::stage_project_context(&snapshot, &destination)
                 .map_err(|e| Failure::Operational(e.to_string()))?;
             stdout_json(&report)
         }

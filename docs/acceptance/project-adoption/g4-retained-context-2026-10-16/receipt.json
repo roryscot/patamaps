@@ -1,0 +1,57 @@
+{
+  "status": "passed-retained-context-primitives",
+  "contextCliControls": {
+    "status": "passed-project-context-controls",
+    "controls": [
+      {
+        "control": "binary-mode-links-source-unavailable",
+        "result": "passed"
+      },
+      {
+        "control": "no-overwrite",
+        "result": "refused"
+      },
+      {
+        "control": "corrupt-before-destination",
+        "result": "refused"
+      },
+      {
+        "control": "parent-after-link-escape",
+        "result": "refused"
+      },
+      {
+        "control": "reserved-path",
+        "result": "refused"
+      }
+    ],
+    "snapshotDigest": "sha256:68fe3333386b280113077df8e3252db99d66aea82cbc6bb1349dc24ec49de591",
+    "binaryDigest": "sha256:f81780d6780412dd07fa8c70cf1bae5732f15e201dfd03f5fd8e9f2045fec080",
+    "completeBuildContextEstablished": false,
+    "nativeProjectBuildIntegration": "not-qualified",
+    "filesDeleted": 0
+  },
+  "actualSelectedContext": {
+    "selectedPaths": 176438,
+    "entries": 195911,
+    "fileBytes": 1604201589,
+    "digest": "sha256:1bdf06561b8de728d473ae270993dbef5f80dac1e30339a307236fcc3579ecb9",
+    "captureSeconds": 538.121,
+    "cliDigest": "681600a8e3fc13212f2c7be703760fbfa564322d4c83ecbdbe8e0648ff9151fd",
+    "nonbuildExclusions": "One nonportable legacy research document; existing safe path contract retained",
+    "largeOfflineReconstruction": "in-progress-not-established",
+    "applicationBuild": "not-yet-run"
+  },
+  "nativeChecks": {
+    "commands": [
+      "cargo fmt --all",
+      "cargo test --locked --offline -p patamaps-workspace",
+      "cargo clippy --locked --offline -p patamaps-workspace -p patamaps-cli --all-targets -- -D warnings",
+      "cargo build --locked --offline -p patamaps-cli"
+    ],
+    "status": "passed",
+    "guard": "5cc47d18-11dd-4582-982f-85bdc19fe82f"
+  },
+  "nativeProjectBuildIntegration": "not-qualified",
+  "completeBuildContextEstablished": false,
+  "filesDeleted": 0
+}
