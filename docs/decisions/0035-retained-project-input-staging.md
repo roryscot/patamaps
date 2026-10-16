@@ -2,8 +2,9 @@
 
 Status: implemented with frozen filesystem controls; compilation/runtime pending. G4 workflow completion remains open.
 
-Add native project-stage CAPTURE --destination NEW_DIRECTORY using the existing
-ProjectCapture/verification contract. It reads only the verified record, never
+Native project-stage CAPTURE --destination NEW_DIRECTORY uses the existing
+ProjectCapture/verification contract. Its receipt is stdout-only so output-file flags cannot replace a staged input.
+It reads only the verified record, never
 original project paths, environment values or tools. The destination parent must
 already exist. Refuse an existing destination (including symlinks), invalid or
 tampered capture, and file/directory prefix collisions before creating anything.

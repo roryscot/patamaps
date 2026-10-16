@@ -127,8 +127,6 @@ enum Command {
         capture: PathBuf,
         #[arg(long)]
         destination: PathBuf,
-        #[command(flatten)]
-        output: Output,
     },
     #[command(hide = true, name = "__tool-supervisor")]
     ToolSupervisor,
@@ -1016,12 +1014,11 @@ fn run(command: Command) -> Result<(), Failure> {
         Command::ProjectStage {
             capture,
             destination,
-            output,
         } => {
             let record = read::<patamaps_workspace::ProjectCapture>(&capture)?;
             let report = patamaps_workspace::stage_project_capture(&record, &destination)
                 .map_err(|e| Failure::Operational(e.to_string()))?;
-            json(&output, &report)
+            stdout_json(&report)
         }
         Command::DiscoverNative => {
             let mut input = Vec::new();
