@@ -171,3 +171,105 @@ runtime behavior, deployment and application acceptance are separate requirement
 The Rust APIs build_project_with_preparation and
 project_build_input_key_with_preparation take optional existing context and
 preparation references; old functions delegate with no preparation.
+
+### Migrating an existing generator
+
+Keep the owner's rendering and implementation-coverage checks. Replace only the
+graph parsing/compilation/projection calls, then run that same generator as a
+preparation command. The retained Next qualification used this pattern with an
+unchanged owner generator; its [baseline record](../acceptance/project-adoption/g6-owner-native-preparation-2026-10-16/baseline.json)
+binds the actual inputs, compiler hashes and framework checks.
+
+1. Capture the project dependencies, native binary and SDK runtime files inside
+   the closed retained context. Opaque binaries belong in the context, not in the
+   UTF-8 project input profile. Keep the package layout and internal links intact.
+2. Select the graph, policy, projection specification, generator and adapter/SDK
+   text as project inputs. Include the actual scripts in command codeInputs.
+   Existing limits still apply: at most 1,024 selected text paths, a bounded
+   16 MiB capture record, and at most 128 code inputs per command.
+3. Remove generated files from project source inputs and workspace emissions.
+   Declare each preparation output using its exact captured manifest digest, or
+   null for an absent path. Generated files cannot overlap build writable paths.
+4. Run the owner generator as preparation, followed by the real framework build,
+   type checking and owner verification commands. Generation must fail the build
+   when parsing, graph compilation, projection or implementation coverage fails.
+5. Verify changed generated content reaches the actual consumer, and a failed
+   generation preserves the prior selection. Replaying retained bindings and a
+   native no-op do not repeat runtime checks. Installed, HTTP/browser and
+   deployment qualification are separate from successful compilation.
+
+For an existing generator that imports original v1 observation APIs, a narrow
+adapter can preserve its imports while moving computation into Rust. The example
+below assumes these captured files:
+
+~~~text
+.patamaps/tools/patamaps
+.patamaps/tools/sdk/*.mjs
+.patamaps/tools/sdk/package.json
+.patamaps/tools/compat.mjs
+.patamaps/tools/loader.mjs
+~~~
+
+In compat.mjs:
+
+~~~javascript
+import { fileURLToPath } from "node:url";
+import {
+  createLegacyValidationApi,
+  createCanonicalApi,
+} from "./sdk/index.mjs";
+
+const executable = fileURLToPath(new URL("./patamaps", import.meta.url));
+const api = createLegacyValidationApi(executable);
+const canonical = createCanonicalApi(executable);
+
+export const RelationRegistry = api.LegacyRelationRegistry;
+export const coreRelationPack = api.legacyCoreRelationPack;
+export const parseRelationPack = value => api.parseLegacyRelationPack(value);
+export const parseViabilityPolicy = value => api.parseLegacyViabilityPolicy(value);
+export const parseProjectionSpec = value => api.parseLegacyProjectionSpec(value);
+export const compileMetamap = (...args) => api.compileLegacyMetamap(...args);
+export const compileProjection = (...args) => api.compileLegacyProjection(...args);
+export const stableJson = value =>
+  JSON.stringify(canonical.legacyReferenceValue(value), null, 2) + "\n";
+~~~
+
+In loader.mjs:
+
+~~~javascript
+export async function resolve(specifier, context, nextResolve) {
+  if (specifier === "@roryscot/metamap") {
+    return {
+      url: new URL("./compat.mjs", import.meta.url).href,
+      shortCircuit: true,
+    };
+  }
+  return nextResolve(specifier, context);
+}
+~~~
+
+The generation command uses an absolute configured Node executable, root cwd,
+and this argv (replace the owner script path):
+
+~~~json
+[
+  "--experimental-loader",
+  "./.patamaps/tools/loader.mjs",
+  "scripts/generate-routes.mjs"
+]
+~~~
+
+Apply the loader to the generation process only. Framework build and request
+processes consume the generated contract; they do not need this loader. Capture
+relation packs as explicit data inputs as well. The adapter covers only the
+listed original v1 observation APIs; it neither admits a native generation nor
+implements arbitrary original SDK exports or executable semantic profiles.
+The passing retained case used Node 22.23.3. Other runtimes and generator imports
+require their own checks.
+
+Preparation environment references resolve captured nonsecretConfiguration
+strings. Secret references remain unresolved labels; capture a separately
+declared nonsecret configuration projection instead of raw secret-bearing files.
+A captured tool/dependency tree does not itself establish complete executable
+dependency closure or practical development-loop performance. The retained case's
+500.397-second full build and 34.716-second no-op leave that performance work open.
