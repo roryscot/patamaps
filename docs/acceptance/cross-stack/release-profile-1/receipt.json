@@ -114,6 +114,26 @@
     "native-selected-unit-evidence.json": {
       "sha256": "3f4f59addb70e4b2353a26b52a0336b4bd339d6545ad51b0dca59f023ed8f87c",
       "bytes": 1032
+    },
+    "full-archive-retention.json": {
+      "sha256": "dfe61814fc6a8d0bfdc6985704d10a21b17bd7c828ece0b0e868665ee47f9b5d",
+      "bytes": 2707
+    },
+    "owned-image-archive-verification.json": {
+      "sha256": "29901048a1a0bc0161fe71619b3f8042d72d59c719e761da196839099956eaa9",
+      "bytes": 1106
+    },
+    "ci-image-archive-receipt.json": {
+      "sha256": "6f359f5cbc4ad517d581319de1421a536641dbffd9de22619fe87db678db8277",
+      "bytes": 1103
+    },
+    "native-linux-x86_64.json": {
+      "sha256": "36ce9ca221f5c58f84c6dc3aa9fb68e90b3cf045f6859ba7087875faea548e31",
+      "bytes": 71073
+    },
+    "native-linux-aarch64.json": {
+      "sha256": "0a8f148eba903e7d9108c8ab41f3730e2aa3007a70544071596c4c307e75e284",
+      "bytes": 71075
     }
   },
   "phaseFlags": "Individual phase receipts keep fullReleaseAccepted=false because each phase alone is insufficient. This aggregate binds all mandatory lanes for the named fixture/profile.",
@@ -146,5 +166,11 @@
   "fullReleaseAccepted": true,
   "productionActivation": "not-performed",
   "registryPublication": "not-performed",
-  "deleted": []
+  "deleted": [],
+  "retainedArchives": "full-archive-retention.json",
+  "savedImageArchive": "owned-image-archive-verification.json",
+  "nativeLinux": {
+    "x86_64": "native-linux-x86_64.json",
+    "aarch64": "native-linux-aarch64.json"
+  }
 }

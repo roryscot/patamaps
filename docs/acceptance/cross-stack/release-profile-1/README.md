@@ -33,7 +33,10 @@ The Linux workflow ran scripts/ci_cross_stack.py with source, development, image
 compatibility and installed phases. [Run/artifact metadata](ci-run-summary.json)
 identifies the exact source and successful jobs. Small diagnostic ZIPs were
 [downloaded and SHA-256 checked](diagnostic-artifact-retrieval.json) on Intel;
-full candidates, images and architecture archives have separate retention records.
+[full source, image and architecture archives](full-archive-retention.json) are
+retained on Intel with local hashes matching GitHub. The embedded
+[owned-image archive](owned-image-archive-verification.json) was also hash-checked;
+both accepted positive image IDs are present. Full restoration was not exercised.
 Earlier failures, original expectations and assertion corrections remain in
 m6-image-browser/ and the historical milestone records. In particular, detached
 Docker startup can return success while its container log reports exec format
