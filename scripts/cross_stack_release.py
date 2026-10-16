@@ -338,10 +338,15 @@ def verify(root, work, env, run, compiler_override=None):
     arch_id = image("m6-image-wrong-architecture", arch)
     with container("m6-runtime-wrong-architecture", arch_id) as (_, urls, _):
         assert health(urls[8080], seconds=3) is None
-    arch_start = (work / "m6-runtime-wrong-architecture-start.stderr.log").read_text().lower()
+    arch_logs = ["m6-runtime-wrong-architecture" + suffix for suffix in ["-start.stderr.log", "-logs.stdout.log", "-logs.stderr.log"]]
+    arch_diagnostics = "".join((work / name).read_text() for name in arch_logs).lower()
     arch_state = json.loads((work / "m6-runtime-wrong-architecture-final-inspect.stdout.log").read_bytes())[0]["State"]
-    assert "exec format" in arch_start or "exec format" in arch_state.get("Error", "").lower(), {"stderr": arch_start, "state": arch_state}
-    record("m6-wrong-architecture", result="format-gate-and-actual-exec-format-refusal", observedMachine=183, requiredMachine=62)
+    # A detached start can succeed while the container's init reports execve's
+    # failure through its retained log. Require the causal format diagnostic;
+    # an arbitrary nonzero exit or absent health endpoint cannot satisfy this.
+    assert "exec format" in arch_diagnostics or "exec format" in arch_state.get("Error", "").lower(), {"diagnostics": arch_diagnostics, "state": arch_state}
+    record("m6-wrong-architecture", result="format-gate-and-actual-exec-format-refusal", observedMachine=183, requiredMachine=62,
+           runtimeDiagnosticLogs=arch_logs, runtimeDiagnosticDigest=build.digest(arch_diagnostics.encode()))
     exposure = variant("wrong-expose", lambda raw: raw.replace("EXPOSE 8080", "EXPOSE 9090"))
     exposure_id = image("m6-image-wrong-expose", exposure)
     with container("m6-runtime-wrong-expose", exposure_id) as (_, urls, _):

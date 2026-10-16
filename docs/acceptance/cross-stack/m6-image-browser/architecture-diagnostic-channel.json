@@ -1,0 +1,34 @@
+{
+  "profile": "patamaps-cross-stack-runtime-diagnostic-channel-regression-1",
+  "sourceCommit": "84262c7a5f4817cd79dfc6896a801c546b6ebf60",
+  "ciRun": 38826300910,
+  "url": "https://github.com/roryscot/patamaps/actions/runs/38826300910",
+  "archive": {
+    "artifactId": 12015303849,
+    "bytes": 242809540,
+    "sha256": "f931de770a33d2f21b8fc5b1eae8958e3e190d7b782ca76e2ca14d40edf1b6cb"
+  },
+  "observation": {
+    "dockerStartStderr": "",
+    "containerLogStderr": "exec /usr/local/bin/catalog-service: exec format error\n",
+    "finalState": {
+      "Status": "exited",
+      "Running": false,
+      "Paused": false,
+      "Restarting": false,
+      "OOMKilled": false,
+      "Dead": false,
+      "Pid": 0,
+      "ExitCode": 255,
+      "Error": "",
+      "StartedAt": "2026-10-15T23:59:18.116733395Z",
+      "FinishedAt": "2026-10-15T23:59:18.225429804Z"
+    },
+    "oldAssertionObservedDiagnostic": false,
+    "correctedLogChannelObservesSameCausalDiagnostic": true
+  },
+  "criteriaChanged": false,
+  "requiredEvidence": "real ELF e_machine183; independent format refusal; actual container exec format diagnostic; no health",
+  "fullM6Accepted": false,
+  "correction": "Read the actual retained container log as well as detached docker start stderr/state; preserve causal assertion."
+}

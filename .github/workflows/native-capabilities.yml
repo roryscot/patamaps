@@ -97,6 +97,10 @@ jobs:
             ci-evidence/cross-stack-image/browser/
             ci-evidence/cross-stack-compatibility/metamap-comparison/receipt.json
             ci-evidence/cross-stack-installed/installed-workflow/receipt.json
+            ci-evidence/cross-stack-image/m6-runtime-*.log
+            ci-evidence/cross-stack-compatibility/m7-actual-metamap-compiler.stderr.log
+            ci-evidence/cross-stack-installed/installed-workflow/*.stderr.log
+            ci-evidence/cross-stack-installed/installed-workflow/m6-runtime-*.log
           if-no-files-found: warn
       - name: Retain source fixtures and tool symlink metadata
         if: always()
@@ -175,6 +179,10 @@ jobs:
             ci-evidence/cross-stack-image/browser/
             ci-evidence/cross-stack-compatibility/metamap-comparison/receipt.json
             ci-evidence/cross-stack-installed/installed-workflow/receipt.json
+            ci-evidence/cross-stack-image/m6-runtime-*.log
+            ci-evidence/cross-stack-compatibility/m7-actual-metamap-compiler.stderr.log
+            ci-evidence/cross-stack-installed/installed-workflow/*.stderr.log
+            ci-evidence/cross-stack-installed/installed-workflow/m6-runtime-*.log
           if-no-files-found: warn
       - name: Retain owned images, candidates, traces and logs
         if: always()
