@@ -41,6 +41,10 @@ def guard(argv):
     second instance handles a runner that exits without stopping its child.
     """
     parent = os.getppid()
+    # The policy runner need not detach its child. Keep this guardian outside
+    # its group so outer cleanup cannot kill it before it stops the build.
+    if os.getpgrp() != os.getpid():
+        os.setsid()
     cancelled = False
 
     def cancel(signum, frame):

@@ -160,10 +160,13 @@ def main():
         current = None
 
     fixed = {str(path): hashlib.sha256(path.read_bytes()).hexdigest() for path in
-             [Path(__file__), ROOT / "scripts/project_watch.py", args.compiler]}
+             [Path(__file__), ROOT / "scripts/project_watch.py", ROOT / "scripts/project_watch_guard_controls.py", args.compiler]}
     receipt["fixedSourceDigests"] = fixed
     save()
     try:
+        from project_watch_guard_controls import verify as verify_guard_groups
+        receipt["controls"].append(verify_guard_groups(ROOT / "scripts/project_watch.py", work / "guard-group-probe"))
+        save()
         start("edits")
         wait_until(lambda: completed("edits", 1), "initial selected build")
         previous = pointer()
