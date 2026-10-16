@@ -90,6 +90,11 @@ def main():
             receipt["projectCommands"] = verify_commands(ROOT, work, env, run)
             from project_build_controls import verify as verify_builds
             receipt["projectBuilds"] = verify_builds(ROOT, work, env, run)
+            import sys
+            watch_work = work / "project-watch"
+            run("project-watch-controls", [sys.executable, "-B", ROOT / "scripts/project_watch_controls.py",
+                                           "--work", watch_work, "--isolated-ci"], timeout=300)
+            receipt["projectWatch"] = json.loads((watch_work / "receipt.json").read_text())
             from project_http_json import verify as verify_http_json
             receipt["jsonHttpContracts"] = verify_http_json(ROOT, work, env, run)
             from project_http_transport import verify as verify_http_transport

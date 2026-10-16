@@ -129,3 +129,35 @@ and13 supervised build workflow controls. The new control checks read-only
 observation, equality with the selected build key and changed selected bytes.
 See [scoped receipt](../acceptance/project-adoption/g4-build-input-observation-20261016/receipt.json).
 CI for this addition is pending after push. The foreground controller remains open.
+
+## Foreground watch checkpoint (2026-10-16)
+
+Decision0040 and scripts/project_watch.py add a generic foreground controller over
+the native key/build/selection verifier. Idle polling owns no allocating lease;
+each update uses the explicit policy runner. Failed keys, including exit75, are
+suppressed until a declared change or explicit restart. A zero runner exit alone
+cannot claim success: native selected bindings and the current declared key must
+match. No-op still does not repeat runtime verification.
+
+The [scoped native receipt](../acceptance/project-adoption/g4-foreground-watch-20261016/receipt.json)
+records10 final controls with fixed controller/CLI bytes: initial selection,
+debounced edits/idle, failure suppression, native no-op recovery, live policy
+contention, SIGINT/SIGTERM/SIGKILL, actual watcher-parent death, abrupt runner death
+and refusal of a runner that skipped the build. Ordinary descendants stopped and
+the previous selection survived cancellation/failure. Separate actual Intel
+supervisor recovery after runner SIGKILL passed with a new selected generation.
+Preflight controls refuse inherited heavy leases and Intel invocation of the
+isolated CI fixture. Initial parser and cleanup-observation failures are retained.
+
+The existing isolated Linux source lane now runs the same lifecycle controls with
+a clearly identified kernel-lock runner fixture and retained diagnostic records.
+That does not replace actual Intel policy qualification. New CI remains pending
+after push. All four prior CI jobs passed at46633a3 (38869068173) and a84219c
+(38870247865); both small diagnostics archives were API-size/digest verified and
+their 12/13 build controls inspected.
+
+G4 remains incomplete: actual-project watch/tool-edit qualification,
+readiness/HTTP semantics, complete applicable contexts/dependencies, measured
+cold/warm memory/disk behavior and installed workflow. G3 configuration and
+G5–G6 actual application/deployment acceptance remain open. The Wargame
+candidate-only growth proposal remains unanswered/unapplied.

@@ -33,8 +33,52 @@ providers, build commands or verification commands. The key binds the declared
 selected source, plan, configured executable targets and Patamaps engine.
 Unknown or missing selected inputs and unavailable configured executables refuse.
 
-This is a polling primitive for a future foreground watcher. It is not an atomic
+This is the polling primitive used by the foreground controller below. It is not an atomic
 filesystem snapshot, admission, readiness, a complete dependency closure, or
 permission to bypass the storage supervisor. A build still recaptures and verifies
-its inputs before publication. Unselected files do not affect this key. Watch
-lifecycle and per-update supervision remain unimplemented.
+its inputs before publication. Unselected files do not affect this key. The controller below supplies scoped lifecycle and per-update supervision; full
+application workflow qualification remains incomplete.
+
+### Foreground watch controller
+
+The generic controller lives in scripts/project_watch.py. Start it outside any
+allocating storage lease, after building the CLI:
+
+```sh
+python3 scripts/project_watch.py owner-build.json \
+  --source /absolute/owner --state /absolute/retained-state \
+  --compiler /absolute/patamaps \
+  --runner /absolute/node /absolute/storage-supervisor.mjs patamaps --
+```
+
+Place --runner last: all remaining arguments are the exact policy command prefix.
+On the configured Intel development host, sourcing the development environment
+provides the default runner. No runner means refusal when that environment is
+absent. Do not wrap the entire watcher in the heavy-run supervisor. Each update
+enters the configured runner; idle polling does not acquire its lease.
+
+Rust observes the declared input key, revalidates each build, retains attempts
+and publishes selection. The controller debounces changes. Failed keys, including
+policy exit75, are not retried until an input change or explicit restart. Missing
+inputs report unavailable and preserve existing selection. Returning to an
+unchanged successful key uses Rust's no-op verification semantics, without
+rerunning build commands or inventing cache hits.
+
+The process wrappers monitor actual parent relationships on both sides of the
+policy runner. Cleanup covers ordinary child process groups; independently
+detached or adversarial processes are outside that guarantee. Owner-declared
+verification commands remain the only readiness evidence. The controller does
+not establish arbitrary application HTTP readiness, a complete build context,
+dependency closure, performance claims or installed-consumer acceptance.
+
+
+A zero runner exit also requires native selected-build binding verification and
+a match against the current declared input key. A runner that skips the command
+cannot claim an update while stale or absent selection remains. This check
+repeats artifact/binding verification, not application runtime commands.
+
+Native Intel qualification covers10 controlled workflow/lifecycle cases, plus
+separate preflight refusals. See the scoped watch acceptance record. Linux CI
+controls use an explicitly isolated runner fixture and retain their own evidence;
+they are not substitutes for actual Intel policy execution. Python3.13 on Unix
+is the native tested runtime; other runtime coverage belongs to its identified CI.
