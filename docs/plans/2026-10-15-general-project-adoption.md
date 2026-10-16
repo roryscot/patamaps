@@ -161,3 +161,43 @@ readiness/HTTP semantics, complete applicable contexts/dependencies, measured
 cold/warm memory/disk behavior and installed workflow. G3 configuration and
 G5–G6 actual application/deployment acceptance remain open. The Wargame
 candidate-only growth proposal remains unanswered/unapplied.
+
+## Existing application command checkpoint (2026-10-16)
+
+All four CI 38872872081 jobs passed at f2bdeb8. Its 103465-byte source diagnostics
+artifact 12034098698 was API-size/SHA256 verified; the actual 10 watch, 13 retained
+build, 13 command and 93 controlled transport receipts were inspected. The native
+Intel policy evidence remains separate from CI's controlled runner fixture.
+
+A retained existing Avaelus/Seeder c61d51a5 context now preserves 176267 ordinary
+files and 172 internal links, 1604205946 logical bytes, using verified native clones.
+Raw environment files/private-key suffixes and the exact unavailable root .meta
+development-tools link are excluded; the original link and checkout remain.
+All selected source/destination hashes, modes, link targets and source membership
+passed. Source HEAD/status remained unchanged.
+
+The unchanged default Next 16.1.6 Turbopack build passed on the retained candidate
+through Seeder's actual Intel launcher. Its configuration skips type validation,
+so a separate TypeScript 5.9.3 --noEmit check was run and passed. The subsequent
+native project-capture/project-exec qualification bound 878 text inputs and
+captured nonsecret environment references, with a captured owner helper checking
+framework entrypoint hashes. Actual Next build and TypeScript commands passed;
+input capture verification also passed with candidate source/configured program
+paths unavailable and external PATH empty. Next-generated next-env.d.ts and the
+added helper are identified separately from original source. The initial wrong
+component-kind profile refusal remains retained; the profile was corrected to
+existing next-app/configuration without changing the native parser.
+
+The [scoped real-project record](../acceptance/project-adoption/seeder-actual-next-commands-20261016/receipt.json)
+does not qualify a Patamaps generated-contract replacement, full dependency
+closure, native retained-build reconstruction/selection, actual app watch,
+HTTP/browser behavior or deployment. Installed dependencies remain separately
+retained, outside native UTF8 capture. Whole baseline Next output is retained
+before the native command builds a fresh output. Timing/RSS observations are
+scoped measurements, not a paired cold/warm benchmark or performance advantage.
+
+Next independent implementation should use these actual compiled Next manifests
+to resolve G3 configuration/route observations, and integrate generated contracts
+and real runtime checks. Keep G4 context/artifact/readiness/performance and G5–G6
+acceptance intact; do not substitute successful original app commands for those
+remaining requirements. Wargame's separate policy proposal remains unapplied.

@@ -1,6 +1,6 @@
 # Foreground retained project watch
 
-Status: implemented; native controlled lifecycle verification passed; Linux CI pending.
+Status: implemented; native controlled lifecycle and all four Linux CI jobs passed at f2bdeb8 (run 38872872081).
 
 The example-specific development loop is insufficient for arbitrary owner build
 plans. Reuse project-build-input-key and project-build; keep capture, admission,

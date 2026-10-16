@@ -82,3 +82,22 @@ separate preflight refusals. See the scoped watch acceptance record. Linux CI
 controls use an explicitly isolated runner fixture and retain their own evidence;
 they are not substitutes for actual Intel policy execution. Python3.13 on Unix
 is the native tested runtime; other runtime coverage belongs to its identified CI.
+
+### Existing application command qualification
+
+The [Avaelus/Seeder record](../acceptance/project-adoption/seeder-actual-next-commands-20261016/receipt.json)
+qualifies project-exec on a retained existing Next 16.1.6 monorepo: 878 selected text
+inputs, captured nonsecret environment, an explicitly captured configuration
+helper, and hash checks on the Next/TypeScript entrypoint scripts. The actual
+application build and separate TypeScript 5.9.3 --noEmit check passed. Capture
+verification also passed while the configured owner/program paths were
+unavailable. That replay checks input bindings, not a new execution or execution
+attestation.
+
+This uses an already prepared root. Installed dependencies were retained in a
+separately verified snapshot; node_modules remains excluded from the native text
+capture. This does not qualify reconstruction through project-build, artifact
+selection, watch on this app, generated-contract integration, HTTP/browser
+behavior or installed/deployed general workflows. The original checkout remains
+unchanged. Next-generated candidate metadata and the qualification helper are
+identified separately from original application source.
