@@ -334,7 +334,7 @@ fn standalone_cargo_root_is_explicit_and_does_not_read_ancestor_values() {
         "[package]\nname='standalone'\nversion='0.1.0'\n",
     )
     .unwrap();
-    fs::write(&manifest, document.to_string()).unwrap();
+    fs::write(&manifest, "[package]\nname='standalone'\nversion='0.1.0'\n").unwrap();
     assert!(
         validate_cargo_root(
             CargoRootMode::StandalonePackage,
