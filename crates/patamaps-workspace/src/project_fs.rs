@@ -118,11 +118,6 @@ impl StageRoot {
         }
         directory(&self.directory, path)
     }
-    pub(crate) fn symlink(&self, path: &str, target: &str) -> Result<(), Error> {
-        let (parent, leaf) = parent(&self.directory, path, true)?;
-        rustix::fs::symlinkat(target, &parent, leaf.as_str()).map_err(std::io::Error::from)?;
-        Ok(())
-    }
     pub(crate) fn verify_identity(&self) -> Result<(), Error> {
         let expected = self.directory.metadata()?;
         for actual in [

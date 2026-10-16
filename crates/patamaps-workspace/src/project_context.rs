@@ -425,62 +425,249 @@ mod unix {
             },
         )?)
     }
-    fn tree(
+    // Traverse closed trees from held directory descriptors. Each file still
+    // gets a complete hash and metadata check; ancestor paths are not reopened
+    // for every leaf. Collect names before descending to keep FD use bounded.
+    fn verify_tree(
         root: &File,
-        prefix: &str,
-        found: &mut BTreeMap<String, u8>,
-        links: bool,
-    ) -> Result<(), Error> {
-        tree_filtered(root, prefix, found, links, &[])
-    }
-    fn tree_filtered(
-        root: &File,
-        prefix: &str,
-        found: &mut BTreeMap<String, u8>,
-        links: bool,
+        expected: &BTreeMap<String, ProjectContextEntry>,
         skipped: &[String],
+        permissions: bool,
     ) -> Result<(), Error> {
-        if found.len() > 262144 || prefix.split('/').count() > 128 {
+        fn identity(parent: &File, name: &str, meta: &std::fs::Metadata) -> Result<(), Error> {
+            let visible = if meta.is_dir() {
+                project_fs::directory(parent, name)?.metadata()?
+            } else {
+                crate::project::open_project_file(parent, name)?.metadata()?
+            };
+            if (
+                visible.dev(),
+                visible.ino(),
+                visible.len(),
+                visible.mode(),
+                visible.mtime(),
+                visible.mtime_nsec(),
+                visible.ctime(),
+                visible.ctime_nsec(),
+            ) != (
+                meta.dev(),
+                meta.ino(),
+                meta.len(),
+                meta.mode(),
+                meta.mtime(),
+                meta.mtime_nsec(),
+                meta.ctime(),
+                meta.ctime_nsec(),
+            ) {
+                return Err(refuse());
+            }
+            Ok(())
+        }
+        fn stamp(meta: &std::fs::Metadata) -> (u64, u64, u32, i64, i64, i64, i64) {
+            (
+                meta.dev(),
+                meta.ino(),
+                meta.mode(),
+                meta.mtime(),
+                meta.mtime_nsec(),
+                meta.ctime(),
+                meta.ctime_nsec(),
+            )
+        }
+        fn walk(
+            dir: &File,
+            prefix: &str,
+            depth: usize,
+            expected: &BTreeMap<String, ProjectContextEntry>,
+            skipped: &[String],
+            permissions: bool,
+            seen: &mut usize,
+        ) -> Result<(), Error> {
+            if depth > 128 {
+                return Err(refuse());
+            }
+            let before = dir.metadata()?;
+            let children = {
+                let mut children = Vec::new();
+                for item in Dir::read_from(dir).map_err(std::io::Error::from)? {
+                    let item = item.map_err(std::io::Error::from)?;
+                    let name = item.file_name().to_str().map_err(|_| refuse())?;
+                    if name == "." || name == ".." {
+                        continue;
+                    }
+                    let path = if prefix.is_empty() {
+                        name.to_owned()
+                    } else {
+                        format!("{prefix}/{name}")
+                    };
+                    if skipped.contains(&path) {
+                        continue;
+                    }
+                    if !allowed(&path)
+                        || !expected.contains_key(&path)
+                        || children.len() + *seen >= 262144
+                    {
+                        return Err(refuse());
+                    }
+                    children.push((name.to_owned(), path));
+                }
+                children
+            };
+            for (name, path) in children {
+                *seen += 1;
+                if *seen > 262144 {
+                    return Err(refuse());
+                }
+                match &expected[&path] {
+                    ProjectContextEntry::Directory { mode: want } => {
+                        let child = project_fs::directory(dir, &name)?;
+                        let metadata = child.metadata()?;
+                        if permissions && mode(&child)? != *want {
+                            return Err(refuse());
+                        }
+                        walk(
+                            &child,
+                            &path,
+                            depth + 1,
+                            expected,
+                            skipped,
+                            permissions,
+                            seen,
+                        )?;
+                        identity(dir, &name, &metadata)?;
+                    }
+                    ProjectContextEntry::File {
+                        digest,
+                        byte_length,
+                        mode: want,
+                    } => {
+                        let file = crate::project::open_project_file(dir, &name)?;
+                        let metadata = file.metadata()?;
+                        if permissions && mode(&file)? != *want {
+                            return Err(refuse());
+                        }
+                        if bytes(file, None)? != (digest.clone(), byte_length.get()) {
+                            return Err(refuse());
+                        }
+                        identity(dir, &name, &metadata)?;
+                    }
+                    ProjectContextEntry::Symlink { target } => {
+                        let metadata = statat(dir, name.as_str(), AtFlags::SYMLINK_NOFOLLOW)
+                            .map_err(std::io::Error::from)?;
+                        if FileType::from_raw_mode(metadata.st_mode) != FileType::Symlink {
+                            return Err(refuse());
+                        }
+                        let actual = readlinkat(dir, name.as_str(), Vec::new())
+                            .map_err(std::io::Error::from)?;
+                        if actual.into_string().map_err(|_| refuse())? != *target {
+                            return Err(refuse());
+                        }
+                        let after = statat(dir, name.as_str(), AtFlags::SYMLINK_NOFOLLOW)
+                            .map_err(std::io::Error::from)?;
+                        if (metadata.st_dev, metadata.st_ino) != (after.st_dev, after.st_ino) {
+                            return Err(refuse());
+                        }
+                    }
+                }
+            }
+            if stamp(&before) != stamp(&dir.metadata()?) {
+                return Err(refuse());
+            }
+            Ok(())
+        }
+        let mut seen = 0;
+        walk(root, "", 0, expected, skipped, permissions, &mut seen)?;
+        if seen != expected.len() {
             return Err(refuse());
         }
-        let dir = project_fs::directory(root, prefix)?;
-        for entry in Dir::read_from(&dir).map_err(std::io::Error::from)? {
-            let entry = entry.map_err(std::io::Error::from)?;
-            let name = entry.file_name().to_str().map_err(|_| refuse())?;
-            if name == "." || name == ".." {
-                continue;
-            }
-            if found.len() >= 262144 {
-                return Err(refuse());
-            }
-            let path = if prefix.is_empty() {
-                name.to_owned()
-            } else {
-                format!("{prefix}/{name}")
-            };
-            if skipped.contains(&path) {
-                continue;
-            }
-            if !allowed(&path) {
-                return Err(refuse());
-            }
-            let metadata =
-                statat(&dir, name, AtFlags::SYMLINK_NOFOLLOW).map_err(std::io::Error::from)?;
-            match FileType::from_raw_mode(metadata.st_mode) {
-                FileType::Directory => {
-                    found.insert(path.clone(), 1);
-                    tree_filtered(root, &path, found, links, skipped)?;
-                }
-                FileType::RegularFile => {
-                    found.insert(path, 0);
-                }
-                FileType::Symlink if links => {
-                    found.insert(path, 2);
-                }
-                _ => return Err(refuse()),
-            }
-        }
         Ok(())
+    }
+    fn copy_context_tree(
+        source: &File,
+        destination: &File,
+        entries: &BTreeMap<String, ProjectContextEntry>,
+    ) -> Result<(), Error> {
+        let mut children: BTreeMap<&str, Vec<&str>> = BTreeMap::new();
+        for path in entries.keys() {
+            let parent = path.rsplit_once('/').map_or("", |(parent, _)| parent);
+            children.entry(parent).or_default().push(path);
+        }
+        fn walk(
+            source_root: &File,
+            destination: &File,
+            prefix: &str,
+            depth: usize,
+            children: &BTreeMap<&str, Vec<&str>>,
+            entries: &BTreeMap<String, ProjectContextEntry>,
+        ) -> Result<(), Error> {
+            if depth > 128 {
+                return Err(refuse());
+            }
+            let Some(paths) = children.get(prefix) else {
+                return Ok(());
+            };
+            let mut source: Option<File> = None;
+            for path in paths {
+                let name = path.rsplit('/').next().ok_or_else(refuse)?;
+                match &entries[*path] {
+                    ProjectContextEntry::Directory { mode: want } => {
+                        drop(source.take());
+                        rustix::fs::mkdirat(destination, name, Mode::from_bits_truncate(0o700))
+                            .map_err(std::io::Error::from)?;
+                        let output = project_fs::directory(destination, name)?;
+                        walk(source_root, &output, path, depth + 1, children, entries)?;
+                        rustix::fs::fchmod(
+                            &output,
+                            Mode::from_bits_truncate(want.get().try_into().map_err(|_| refuse())?),
+                        )
+                        .map_err(std::io::Error::from)?;
+                    }
+                    ProjectContextEntry::File {
+                        digest,
+                        byte_length,
+                        mode: want,
+                    } => {
+                        if source.is_none() {
+                            source = Some(project_fs::directory(source_root, prefix)?);
+                        }
+                        let mut output = File::from(
+                            rustix::fs::openat(
+                                destination,
+                                name,
+                                rustix::fs::OFlags::WRONLY
+                                    | rustix::fs::OFlags::CREATE
+                                    | rustix::fs::OFlags::EXCL
+                                    | rustix::fs::OFlags::NOFOLLOW
+                                    | rustix::fs::OFlags::CLOEXEC,
+                                Mode::from_bits_truncate(0o600),
+                            )
+                            .map_err(std::io::Error::from)?,
+                        );
+                        if bytes(
+                            crate::project::open_project_file(
+                                source.as_ref().ok_or_else(refuse)?,
+                                name,
+                            )?,
+                            Some(&mut output),
+                        )? != (digest.clone(), byte_length.get())
+                        {
+                            return Err(refuse());
+                        }
+                        rustix::fs::fchmod(
+                            &output,
+                            Mode::from_bits_truncate(want.get().try_into().map_err(|_| refuse())?),
+                        )
+                        .map_err(std::io::Error::from)?;
+                    }
+                    ProjectContextEntry::Symlink { target } => {
+                        rustix::fs::symlinkat(target.as_str(), destination, name)
+                            .map_err(std::io::Error::from)?;
+                    }
+                }
+            }
+            Ok(())
+        }
+        walk(source, destination, "", 0, &children, entries)
     }
     fn root_identity(path: &Path, held: &File) -> Result<(), Error> {
         let expected = held.metadata()?;
@@ -534,32 +721,17 @@ mod unix {
         let manifest: ProjectContextManifest = read_json(&root, "manifest.json")?;
         validate(&definition, &manifest)?;
         let data = project_fs::directory(&root, "data")?;
-        let mut found = BTreeMap::new();
-        tree(&data, "", &mut found, false)?;
         let expected = manifest
             .entries
             .iter()
-            .filter_map(|(p, e)| match e {
-                ProjectContextEntry::Directory { .. } => Some((p.clone(), 1)),
-                ProjectContextEntry::File { .. } => Some((p.clone(), 0)),
-                _ => None,
-            })
+            .filter(|(_, entry)| !matches!(entry, ProjectContextEntry::Symlink { .. }))
+            .map(|(path, entry)| (path.clone(), entry.clone()))
             .collect::<BTreeMap<_, _>>();
-        if found != expected {
+        verify_tree(&data, &expected, &[], false)?;
+        let visible = project_fs::directory(&root, "data")?.metadata()?;
+        let held = data.metadata()?;
+        if (visible.dev(), visible.ino()) != (held.dev(), held.ino()) {
             return Err(refuse());
-        }
-        for (path, entry) in &manifest.entries {
-            if let ProjectContextEntry::File {
-                digest,
-                byte_length,
-                ..
-            } = entry
-            {
-                let actual = bytes(crate::project::open_project_file(&data, path)?, None)?;
-                if actual != (digest.clone(), byte_length.get()) {
-                    return Err(refuse());
-                }
-            }
         }
         root_identity(snapshot, &root)?;
         Ok((root, definition, manifest))
@@ -675,52 +847,7 @@ mod unix {
         let (_, manifest) = build_metadata(metadata)?;
         let expected = effective_entries(binding, &manifest, inputs)?;
         let root = project_fs::root(candidate)?;
-        let mut found = BTreeMap::new();
-        tree_filtered(&root, "", &mut found, true, &binding.writable_paths)?;
-        let kinds = expected
-            .iter()
-            .map(|(p, e)| {
-                (
-                    p.clone(),
-                    match e {
-                        ProjectContextEntry::File { .. } => 0,
-                        ProjectContextEntry::Directory { .. } => 1,
-                        ProjectContextEntry::Symlink { .. } => 2,
-                    },
-                )
-            })
-            .collect::<BTreeMap<_, _>>();
-        if found != kinds {
-            return Err(refuse());
-        }
-        for (path, entry) in expected {
-            match (&entry, describe(&root, &path)?) {
-                (
-                    ProjectContextEntry::File {
-                        digest,
-                        byte_length,
-                        mode,
-                    },
-                    ProjectContextEntry::File { mode: now, .. },
-                ) => {
-                    if *mode != now
-                        || bytes(crate::project::open_project_file(&root, &path)?, None)?
-                            != (digest.clone(), byte_length.get())
-                    {
-                        return Err(refuse());
-                    }
-                }
-                (
-                    ProjectContextEntry::Directory { mode },
-                    ProjectContextEntry::Directory { mode: now },
-                ) if *mode == now => {}
-                (
-                    ProjectContextEntry::Symlink { target },
-                    ProjectContextEntry::Symlink { target: now },
-                ) if *target == now => {}
-                _ => return Err(refuse()),
-            }
-        }
+        verify_tree(&root, &expected, &binding.writable_paths, true)?;
         root_identity(candidate, &root)?;
         Ok(())
     }
@@ -907,107 +1034,11 @@ mod unix {
         let (root, _, manifest) = load(snapshot)?;
         let data = project_fs::directory(&root, "data")?;
         let stage = StageRoot::create(destination)?;
-        for (path, entry) in &manifest.entries {
-            match entry {
-                ProjectContextEntry::Directory { .. } => {
-                    stage.mkdir(path)?;
-                }
-                ProjectContextEntry::File {
-                    digest,
-                    byte_length,
-                    mode,
-                } => {
-                    let mut out = stage.file(path)?;
-                    if bytes(
-                        crate::project::open_project_file(&data, path)?,
-                        Some(&mut out),
-                    )? != (digest.clone(), byte_length.get())
-                    {
-                        return Err(refuse());
-                    }
-                    rustix::fs::fchmod(
-                        &out,
-                        Mode::from_bits_truncate(mode.get().try_into().map_err(|_| refuse())?),
-                    )
-                    .map_err(std::io::Error::from)?;
-                }
-                ProjectContextEntry::Symlink { target } => stage.symlink(path, target)?,
-            }
-        }
-        let mut directories = manifest
-            .entries
-            .iter()
-            .filter_map(|(p, e)| {
-                if let ProjectContextEntry::Directory { mode } = e {
-                    Some((p, mode))
-                } else {
-                    None
-                }
-            })
-            .collect::<Vec<_>>();
-        directories.sort_by_key(|(p, _)| std::cmp::Reverse(p.split('/').count()));
-        for (path, mode) in directories {
-            rustix::fs::fchmod(
-                project_fs::directory(&stage.directory, path)?,
-                Mode::from_bits_truncate(mode.get().try_into().map_err(|_| refuse())?),
-            )
-            .map_err(std::io::Error::from)?;
-        }
-        for (path, entry) in &manifest.entries {
-            match (entry, describe(&stage.directory, path)?) {
-                (
-                    ProjectContextEntry::File {
-                        digest,
-                        byte_length,
-                        mode,
-                    },
-                    ProjectContextEntry::File { mode: now, .. },
-                ) => {
-                    if *mode != now
-                        || bytes(
-                            crate::project::open_project_file(&stage.directory, path)?,
-                            None,
-                        )? != (digest.clone(), byte_length.get())
-                    {
-                        return Err(refuse());
-                    }
-                }
-                (
-                    ProjectContextEntry::Directory { mode },
-                    ProjectContextEntry::Directory { mode: now },
-                ) => {
-                    if *mode != now {
-                        return Err(refuse());
-                    }
-                }
-                (
-                    ProjectContextEntry::Symlink { target },
-                    ProjectContextEntry::Symlink { target: now },
-                ) => {
-                    if *target != now {
-                        return Err(refuse());
-                    }
-                }
-                _ => return Err(refuse()),
-            }
-        }
-        let mut staged = BTreeMap::new();
-        tree(&stage.directory, "", &mut staged, true)?;
-        let expected = manifest
-            .entries
-            .iter()
-            .map(|(p, e)| {
-                (
-                    p.clone(),
-                    match e {
-                        ProjectContextEntry::File { .. } => 0,
-                        ProjectContextEntry::Directory { .. } => 1,
-                        ProjectContextEntry::Symlink { .. } => 2,
-                    },
-                )
-            })
-            .collect::<BTreeMap<_, _>>();
-        if staged != expected {
+        copy_context_tree(&data, &stage.directory, &manifest.entries)?;
+        verify_tree(&stage.directory, &manifest.entries, &[], true)?;
+        let visible = project_fs::directory(&root, "data")?.metadata()?;
+        let held = data.metadata()?;
+        if (visible.dev(), visible.ino()) != (held.dev(), held.ino()) {
             return Err(refuse());
         }
         stage.verify_identity()?;
@@ -1201,5 +1232,48 @@ mod tests {
         let dest = tmp.0.join("escape");
         assert!(stage_project_context(&snapshot, &dest).is_err());
         assert!(!dest.exists());
+    }
+
+    #[test]
+    fn closed_walk_preserves_maximum_depth_siblings_and_repeat_verification() {
+        let base = Temp::new();
+        let source = base.0.join("owner");
+        fs::create_dir(&source).unwrap();
+        let deep = std::iter::repeat_n("d", 127).collect::<Vec<_>>().join("/") + "/payload.bin";
+        fs::create_dir_all(source.join(&deep).parent().unwrap()).unwrap();
+        fs::write(source.join(&deep), [0, 255, 128, 1]).unwrap();
+        let mut paths = vec![deep.clone()];
+        for i in 0..24 {
+            let name = format!("sibling-{i}.bin");
+            fs::write(source.join(&name), [i as u8, 0, 255]).unwrap();
+            paths.push(name);
+        }
+        let definition = ProjectContextDefinition {
+            profile: CONTEXT_PROFILE.into(),
+            id: "urn:test:maximum-depth-context".into(),
+            nonsecret_inputs: true,
+            paths,
+            symlinks: ContextSymlinks::Refuse,
+        };
+        let snapshot = base.0.join("snapshot");
+        let captured = capture_project_context(&source, &snapshot, &definition).unwrap();
+        for _ in 0..2 {
+            assert_eq!(
+                verify_project_context(&snapshot).unwrap()["digest"],
+                captured["digest"]
+            );
+        }
+        let staged = base.0.join("staged");
+        assert_eq!(
+            stage_project_context(&snapshot, &staged).unwrap()["digest"],
+            captured["digest"]
+        );
+        assert_eq!(fs::read(staged.join(&deep)).unwrap(), [0, 255, 128, 1]);
+        for i in 0..24 {
+            assert_eq!(
+                fs::read(staged.join(format!("sibling-{i}.bin"))).unwrap(),
+                [i as u8, 0, 255]
+            );
+        }
     }
 }
