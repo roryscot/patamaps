@@ -320,7 +320,7 @@ def verify(root, work, env, run):
     observed.append({"control": "m1-rehashed-native-workspace-lineage", "result": "refused",
                      "code": "WORKSPACE_COMPOSITION_BINDING"})
 
-    return {"status": "passed", "controls": observed, "engines": engine, "nativeBinaryDigest": sha(cli), "newNativeTomlUnitTests": 10, "memberExpansionUnitTests": 1,
+    return {"status": "passed", "controls": observed, "engines": engine, "nativeBinaryDigest": sha(cli), "newNativeTomlUnitTests": 10, "memberExpansionUnitTests": 2,
             "existingBoundedProcessTests": 2, "cargo": {"path": str(cargo), "digest": sha(cargo)},
             "rustc": {"path": str(rustc), "digest": sha(rustc)}, "compiledFixtureEstablishedByTheseObservations": False,
             "limits": {"workspaceMembers": "literal default; opt-in one-star directory glob, exact captured expansion, exclusions refuse",

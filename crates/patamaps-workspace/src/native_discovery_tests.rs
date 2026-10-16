@@ -488,3 +488,49 @@ fn bounded_member_expansion_requires_captured_ordinary_manifests() {
     }
     eprintln!("Retained member expansion fixture: {}", root.display());
 }
+
+#[test]
+fn literal_members_do_not_inherit_the_opt_in_glob_declaration_limit() {
+    use std::sync::atomic::{AtomicU64, Ordering};
+    static SEQ: AtomicU64 = AtomicU64::new(0);
+    let root = std::env::temp_dir().join(format!(
+        "patamaps-literal-members-{}-{}",
+        std::process::id(),
+        SEQ.fetch_add(1, Ordering::Relaxed)
+    ));
+    fs::create_dir(&root).unwrap();
+    let root = fs::canonicalize(root).unwrap();
+    let mut captured = BTreeMap::new();
+    let mut members = Vec::new();
+    for n in 0..129 {
+        let name = format!("m{n}");
+        members.push(format!("'{name}'"));
+        fs::create_dir(root.join(&name)).unwrap();
+        let raw = format!("[package]\nname='{name}'\nversion='0.1.0'\n");
+        fs::write(root.join(&name).join("Cargo.toml"), &raw).unwrap();
+        captured.insert(format!("{name}/Cargo.toml"), raw);
+    }
+    let raw = format!("[workspace]\nmembers=[{}]\n", members.join(","));
+    fs::write(root.join("Cargo.toml"), &raw).unwrap();
+    captured.insert("Cargo.toml".into(), raw);
+    let inputs = captured
+        .iter()
+        .map(|(k, v)| (k.as_str(), v.as_str()))
+        .collect::<Inputs<'_>>();
+    assert!(
+        validate_manifest_paths(&root, &inputs, CargoMemberMode::LiteralPaths)
+            .unwrap()
+            .is_empty()
+    );
+    assert!(matches!(
+        validate_manifest_paths(&root, &inputs, CargoMemberMode::BoundedDirectoryGlobs),
+        Err(Error::Refused {
+            code: "NATIVE_CARGO_MEMBERS",
+            ..
+        })
+    ));
+    eprintln!(
+        "Retained literal-member compatibility fixture: {}",
+        root.display()
+    );
+}

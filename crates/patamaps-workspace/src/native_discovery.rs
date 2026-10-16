@@ -746,7 +746,7 @@ fn validate_manifest_paths(
         if let Some(workspace) = document.get("workspace").and_then(Item::as_table_like)
             && let Some(members) = workspace.get("members").and_then(Item::as_array)
         {
-            if members.len() > 128 {
+            if mode == CargoMemberMode::BoundedDirectoryGlobs && members.len() > 128 {
                 return Err(refused(
                     "NATIVE_CARGO_MEMBERS",
                     "At most 128 member declarations are supported",
