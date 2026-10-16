@@ -106,6 +106,20 @@ enum Intent {
 enum Command {
     /// Bounded native Cargo/TOML provider using the existing workspace process protocol.
     DiscoverNative,
+    /// Capture explicitly selected nonsecret project inputs without executing project tools.
+    ProjectCapture {
+        profile: PathBuf,
+        #[arg(long)]
+        root: PathBuf,
+        #[command(flatten)]
+        output: Output,
+    },
+    /// Verify captured project input bindings offline; confers no admission or authorization.
+    ProjectVerify {
+        capture: PathBuf,
+        #[command(flatten)]
+        output: Output,
+    },
     #[command(hide = true, name = "__tool-supervisor")]
     ToolSupervisor,
     /// Read-only matching proposals; does not evaluate policy or confer admission.
@@ -972,6 +986,22 @@ fn run(command: Command) -> Result<(), Failure> {
                 &output,
                 &serde_json::json!({"status":"observed-matches", "graph":{"id":checked.document().id,"digest":checked.digest()},"constraint":constraint.id,"matches":matches,"admission":"not-performed","activeBindings":"not-evaluated","authorization":"not-evaluated"}),
             )
+        }
+        Command::ProjectCapture {
+            profile,
+            root,
+            output,
+        } => {
+            let definition = read::<patamaps_workspace::ProjectProfile>(&profile)?;
+            let record = patamaps_workspace::capture_project(&root, definition)
+                .map_err(|e| Failure::Operational(e.to_string()))?;
+            json(&output, &record)
+        }
+        Command::ProjectVerify { capture, output } => {
+            let record = read::<patamaps_workspace::ProjectCapture>(&capture)?;
+            let report = patamaps_workspace::verify_project_capture(&record)
+                .map_err(|e| Failure::Operational(e.to_string()))?;
+            json(&output, &report)
         }
         Command::DiscoverNative => {
             let mut input = Vec::new();
