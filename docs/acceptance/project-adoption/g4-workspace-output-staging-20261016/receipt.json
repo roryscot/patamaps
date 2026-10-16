@@ -128,5 +128,64 @@
     "activation": "not-performed",
     "fullG4": "incomplete"
   },
-  "ci": "pending-after-push"
+  "ci": "passed-scoped-controls",
+  "ciVerification": {
+    "sourceRevision": "3de61750f2f6093e4abeb5cfa6393a98cfe9ea3d",
+    "runId": 38857902614,
+    "url": "https://github.com/roryscot/patamaps/actions/runs/38857902614",
+    "jobs": [
+      {
+        "id": 116833393751,
+        "name": "Linux aarch64",
+        "conclusion": "success"
+      },
+      {
+        "id": 116833393842,
+        "name": "Linux x86_64",
+        "conclusion": "success"
+      },
+      {
+        "id": 116833393970,
+        "name": "Cross-stack source bindings (Linux x86_64)",
+        "conclusion": "success"
+      },
+      {
+        "id": 116833394036,
+        "name": "Cross-stack Linux image and browser (amd64)",
+        "conclusion": "success"
+      }
+    ],
+    "diagnostics": {
+      "artifactId": 12027958852,
+      "bytes": 67403,
+      "digest": "sha256:47d816746fc791b8de660a2e1e56d59091d527b06d7acf067e66c8c1fbde303d"
+    },
+    "transportStatus": "passed-transport-and-axum-controls",
+    "transportControlCount": 93,
+    "stagingControls": [
+      {
+        "label": "workspace-output-stage",
+        "stage": "workspace",
+        "result": "staged",
+        "sourcePathsUnavailable": true,
+        "externalProgramsAbsentFromPath": true,
+        "outputs": 2,
+        "consumer": "native-staged-bytes-used-by-subsequent-real-build"
+      },
+      {
+        "label": "workspace-output-stage-existing",
+        "stage": "workspace",
+        "result": "refused",
+        "code": "PROJECT_STAGE_DESTINATION_UNAVAILABLE",
+        "outputBytesPreserved": true
+      },
+      {
+        "label": "workspace-output-stage-tamper",
+        "stage": "workspace",
+        "result": "refused",
+        "code": "WORKSPACE_COMPOSITION_BINDING",
+        "destinationCreated": false
+      }
+    ]
+  }
 }

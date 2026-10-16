@@ -1,0 +1,192 @@
+{
+  "status": "passed-two-existing-project-next-observations",
+  "baseCommit": "61dfbc319b19b7d95aa68b32e5c2123060c134d6",
+  "qualificationDriverDigest": "sha256:04e63649e0e200be577f23f7d0c8cae10b014355ced5ed5c517f34437a551da2",
+  "projects": [
+    {
+      "project": "wargame",
+      "sourceCommit": "7058bbb4e5f99bc3846b5c5ae35c46e3287061c8",
+      "captureDigest": "sha256:54b1a80880dd6e8145bbf3828816219395e03958e9635612826307ab4bd91b64",
+      "baselineDigest": "sha256:3fa6dfde45ec6e63ee806c4eaa44532cd0e521f1a50bce09a2f45cbb51a5b92a",
+      "selectedInputCount": 14,
+      "specialFileCount": 12,
+      "entityKindCounts": {
+        "build:input": 14,
+        "routing:endpoint": 8,
+        "routing:handler": 8,
+        "routing:route": 8,
+        "topology:application": 1,
+        "topology:container": 1,
+        "topology:loader": 1,
+        "topology:page": 4,
+        "topology:segment": 13
+      },
+      "segmentKindCounts": {
+        "root": 1,
+        "static": 12
+      },
+      "requiredEndpointObservations": [
+        {
+          "method": "POST",
+          "path": "/api/evaluate",
+          "observedId": "urn:project-next-qualification:next-endpoint:urn%3Aqualification%3Awargame%3Anext-layout%3Anext-observations%3Anext%3Aapi%2Fevaluate%3APOST"
+        },
+        {
+          "method": "POST",
+          "path": "/api/logistics",
+          "observedId": "urn:project-next-qualification:next-endpoint:urn%3Aqualification%3Awargame%3Anext-layout%3Anext-observations%3Anext%3Aapi%2Flogistics%3APOST"
+        }
+      ],
+      "selectedSourcesUnchanged": true,
+      "originalHeadAndStatusUnchanged": true,
+      "missingSelectedInput": "refused",
+      "offlineReplay": "passed-source-and-tools-configured-paths-unavailable",
+      "externalProgramsAbsentFromPath": true,
+      "compilerDigest": "sha256:cd473c4aa9f979556f9f36defff12037fdda078d338415d53634083ef3e8469d",
+      "nodeDigest": "sha256:7abcf39bd37ab251015337ff75304d7555f0d8e88c6e0fbf04bce8ce34636f49",
+      "commands": [
+        {
+          "label": "profile",
+          "exitCode": 0
+        },
+        {
+          "label": "capture",
+          "exitCode": 0
+        },
+        {
+          "label": "stage",
+          "exitCode": 0
+        },
+        {
+          "label": "generate",
+          "exitCode": 0
+        },
+        {
+          "label": "missing-input",
+          "exitCode": 2
+        },
+        {
+          "label": "offline",
+          "exitCode": 0
+        },
+        {
+          "label": "recapture-original",
+          "exitCode": 0
+        }
+      ],
+      "retainedEvidence": ".tools/project-adoption/next-real-20261016/wargame-run3",
+      "scope": {
+        "nextConfiguration": "captured-as-file-bytes; not-executed-or-interpreted",
+        "routeRuntime": "not-performed",
+        "serverActionSemantics": "not-established",
+        "proxySemantics": "not-established",
+        "processDependencyClosure": "not-proved; cache-disabled",
+        "admission": "observations-only",
+        "activation": "not-performed",
+        "fullGoalComplete": false
+      }
+    },
+    {
+      "project": "seeder",
+      "sourceCommit": "c61d51a57120abbbca65d4cb4a432c1cef9343bb",
+      "captureDigest": "sha256:b478f2321ec32a39e89a4dd1b816d1ad88274e3063c616290d5af892d4be3f61",
+      "baselineDigest": "sha256:c5b85b0af1d9e49143bb2d9173c103779408215271eeeeb13ec4f1afb37becfc",
+      "selectedInputCount": 53,
+      "specialFileCount": 50,
+      "entityKindCounts": {
+        "build:input": 53,
+        "routing:endpoint": 7,
+        "routing:handler": 7,
+        "routing:route": 7,
+        "routing:schema": 2,
+        "topology:application": 1,
+        "topology:boundary": 2,
+        "topology:container": 5,
+        "topology:context": 9,
+        "topology:context-provider": 10,
+        "topology:hydration-boundary": 36,
+        "topology:loader": 6,
+        "topology:page": 40,
+        "topology:segment": 51
+      },
+      "segmentKindCounts": {
+        "root": 1,
+        "static": 47,
+        "dynamic": 3
+      },
+      "requiredEndpointObservations": [],
+      "selectedSourcesUnchanged": true,
+      "originalHeadAndStatusUnchanged": true,
+      "missingSelectedInput": "refused",
+      "offlineReplay": "passed-source-and-tools-configured-paths-unavailable",
+      "externalProgramsAbsentFromPath": true,
+      "compilerDigest": "sha256:cd473c4aa9f979556f9f36defff12037fdda078d338415d53634083ef3e8469d",
+      "nodeDigest": "sha256:7abcf39bd37ab251015337ff75304d7555f0d8e88c6e0fbf04bce8ce34636f49",
+      "commands": [
+        {
+          "label": "profile",
+          "exitCode": 0
+        },
+        {
+          "label": "capture",
+          "exitCode": 0
+        },
+        {
+          "label": "stage",
+          "exitCode": 0
+        },
+        {
+          "label": "generate",
+          "exitCode": 0
+        },
+        {
+          "label": "missing-input",
+          "exitCode": 2
+        },
+        {
+          "label": "offline",
+          "exitCode": 0
+        },
+        {
+          "label": "recapture-original",
+          "exitCode": 0
+        }
+      ],
+      "retainedEvidence": ".tools/project-adoption/next-real-20261016/seeder-run1",
+      "scope": {
+        "nextConfiguration": "captured-as-file-bytes; not-executed-or-interpreted",
+        "routeRuntime": "not-performed",
+        "serverActionSemantics": "not-established",
+        "proxySemantics": "not-established",
+        "processDependencyClosure": "not-proved; cache-disabled",
+        "admission": "observations-only",
+        "activation": "not-performed",
+        "fullGoalComplete": false
+      }
+    }
+  ],
+  "precedingAttempts": [
+    {
+      "path": ".tools/project-adoption/next-real-20261016/wargame-run1",
+      "status": "passed-observations-before-endpoint-expectations"
+    },
+    {
+      "path": ".tools/project-adoption/next-real-20261016/wargame-run2",
+      "status": "aggregate-refused",
+      "reason": "original Git HEAD changed during execution; selected bytes recaptured identically; no final pass receipt"
+    }
+  ],
+  "privateSourcesAndSchemasPublished": false,
+  "scope": {
+    "routeGroups": "not-exercised-in-these-project-captures",
+    "dynamicSegments": "three-observed-in-Seeder",
+    "nextConfiguration": "selected-bytes-only; no interpretation or execution",
+    "rewrites": "not-qualified",
+    "serverActions": "not-qualified",
+    "proxyRuntime": "not-qualified",
+    "applicationBuild": "not-performed",
+    "fullG3": "incomplete",
+    "fullG4": "incomplete",
+    "activation": "not-performed"
+  }
+}
