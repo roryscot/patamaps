@@ -1,0 +1,9 @@
+# Existing Next project through native context builds
+
+The pinned d0bee34 compiler ran the existing Next monorepo through native project-build with its declared 1.60 GB context, 883 selected text inputs, explicit nonsecret environment and selected standalone/static/public artifacts. The model input was retained actual Next observations. Verification required exact fresh routes-manifest.json and app-path-routes-manifest.json witnesses, separate TypeScript checking, immutable selected bytes and tool identities. The original checkout remained unchanged; the older configured candidate path was unavailable during the build.
+
+Native selected-build replay passed with the new working source and original context snapshot paths unavailable. After restoration, no-op returned the same selection, verification not repeated, and zero cache hits. Every temporary rename was restored. The source commit identifies the retained project version; exact working bytes and qualification additions are separately bound by the context, source-capture, candidate-capture and plan digests.
+
+The measured debug native build took 1,111.787 seconds, compared with 17.297 seconds for its Next command. Offline integrity verification took 193.352 seconds and no-op binding/integrity checks took 201.465 seconds. Thus practical watch/edit latency remains unqualified. No-op does not repeat owner verification commands, but still performs retained-binding and selected-byte integrity checks. Release measurement and traversal performance work are still needed.
+
+The emitted observation model was selected as an artifact; this is not proof of replacement of an existing generated application contract. Runtime, browser, Linux image, installed general workflow and existing Rust/Wargame boundary requirements remain open. All private source, snapshots, app binaries and detailed logs remain on Intel; this public receipt contains scoped identities, counts and outcomes.
