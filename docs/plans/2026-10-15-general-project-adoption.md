@@ -310,3 +310,24 @@ passed; Python AST parsing and diff whitespace checks also pass. A draft branch
 is being published for independent existing Linux CI while the Intel shared
 heavy lease is occupied. This is not native compilation or application acceptance;
 the full native suite and Rust candidate controls remain pending.
+
+## Native owner preparation control checkpoint
+The [scoped native receipt](../acceptance/project-adoption/g6-native-preparation-2026-10-16/receipt.json)
+records passed native workspace tests, strict workspace/CLI Clippy, CLI build and
+all existing build/context plus new preparation controls. Regenerated controlled
+contracts are consumed by build verification; owner edits, no-op, failure/stale
+preimage/unsafe output/undeclared write controls and source/snapshot-free replay
+passed. These results supersede the earlier UNVERIFIED implementation checkpoint
+only for their recorded scope. Actual owner generator integration and Next
+application build/edit/failure, native watch, runtime and installed/deployment
+requirements remain open. Draft PR #1 keeps main unchanged while Linux CI runs.
+
+## Actual Rust handler rejection checkpoint
+The [four retained-candidate type controls](../acceptance/project-adoption/g6-rust-native-candidate-2026-10-16/type-controls.json)
+passed under the candidate's own unchanged approved policy: valid witnesses
+compile, wrong handler and return bindings fail with their expected Rust type
+errors, and restoring the valid witness compiles. The three captured actual lab
+handlers are checked; source, native evidence and policy remain unchanged.
+This closes the compile-time negative binding controls only. Runtime HTTP,
+actual Next boundary, managed application paths and installed/deployment
+qualification remain open.
