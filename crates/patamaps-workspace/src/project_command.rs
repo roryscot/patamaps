@@ -28,7 +28,7 @@ fn refuse(code: &'static str) -> Error {
     Error::refused(code, "Explicit project command contract refused")
 }
 
-fn directory(root: &Path, relative: &str) -> Result<PathBuf, Error> {
+pub(crate) fn directory(root: &Path, relative: &str) -> Result<PathBuf, Error> {
     if relative != "." && !relative_path(relative) {
         return Err(refuse("PROJECT_COMMAND_DIRECTORY"));
     }

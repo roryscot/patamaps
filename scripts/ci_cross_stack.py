@@ -88,6 +88,8 @@ def main():
             receipt["toolSupervision"] = verify_supervision(ROOT, work, env, run)
             from project_command_controls import verify as verify_commands
             receipt["projectCommands"] = verify_commands(ROOT, work, env, run)
+            from project_build_controls import verify as verify_builds
+            receipt["projectBuilds"] = verify_builds(ROOT, work, env, run)
             from project_http_json import verify as verify_http_json
             receipt["jsonHttpContracts"] = verify_http_json(ROOT, work, env, run)
             from project_http_transport import verify as verify_http_transport

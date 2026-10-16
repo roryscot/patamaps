@@ -142,10 +142,13 @@ impl ProjectProfile {
 /// Open each path component relative to a held directory with NOFOLLOW.
 /// No project code is executed; this is not an OS snapshot or a malicious-host sandbox.
 #[cfg(unix)]
-fn read_input(root: &File, path: &str, remaining: usize) -> Result<Vec<u8>, Error> {
+pub(crate) fn open_project_file(root: &File, path: &str) -> Result<File, Error> {
     use rustix::fs::{Mode, OFlags, openat};
+    if !relative_path(path) {
+        return Err(refuse("PROJECT_INPUT_PATH"));
+    }
     let mut directory = root.try_clone()?;
-    let parts: Vec<_> = path.split('/').collect();
+    let parts = path.split('/').collect::<Vec<_>>();
     for (i, part) in parts.iter().enumerate() {
         let last = i + 1 == parts.len();
         let flags = OFlags::RDONLY
@@ -163,16 +166,22 @@ fn read_input(root: &File, path: &str, remaining: usize) -> Result<Vec<u8>, Erro
             if !file.metadata()?.is_file() {
                 return Err(refuse("PROJECT_INPUT_NOT_REGULAR"));
             }
-            let mut raw = Vec::new();
-            file.take((remaining + 1) as u64).read_to_end(&mut raw)?;
-            if raw.len() > remaining {
-                return Err(refuse("PROJECT_INPUT_LIMIT"));
-            }
-            return Ok(raw);
+            return Ok(file);
         }
         directory = file;
     }
     Err(refuse("PROJECT_INPUT_PATH"))
+}
+
+#[cfg(unix)]
+fn read_input(root: &File, path: &str, remaining: usize) -> Result<Vec<u8>, Error> {
+    let file = open_project_file(root, path)?;
+    let mut raw = Vec::new();
+    file.take((remaining + 1) as u64).read_to_end(&mut raw)?;
+    if raw.len() > remaining {
+        return Err(refuse("PROJECT_INPUT_LIMIT"));
+    }
+    Ok(raw)
 }
 
 #[cfg(not(unix))]

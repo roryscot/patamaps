@@ -306,5 +306,122 @@
     "selectionPublication": "not-performed",
     "activation": "not-performed"
   },
-  "ci": "pending-after-push"
+  "ci": "passed-scoped-controls",
+  "ciVerification": {
+    "sourceRevision": "fe8bbb339c94ca8b7b63678a4e4c303457bfa21c",
+    "runId": 38862268958,
+    "url": "https://github.com/roryscot/patamaps/actions/runs/38862268958",
+    "jobs": [
+      {
+        "id": 116847020420,
+        "name": "Cross-stack source bindings (Linux x86_64)",
+        "conclusion": "success"
+      },
+      {
+        "id": 116847020810,
+        "name": "Cross-stack Linux image and browser (amd64)",
+        "conclusion": "success"
+      },
+      {
+        "id": 116847020818,
+        "name": "Linux x86_64",
+        "conclusion": "success"
+      },
+      {
+        "id": 116847020868,
+        "name": "Linux aarch64",
+        "conclusion": "success"
+      }
+    ],
+    "diagnostics": {
+      "artifactId": 12030495173,
+      "bytes": 85987,
+      "digest": "sha256:61d11455219ab1c575684d11c23f36108a2c49979fa7392e441f2166e9bab9b9"
+    },
+    "commandControls": [
+      {
+        "control": "command-environment",
+        "result": "completed-project-command",
+        "exitCode": 0,
+        "selectedInputsUnchanged": true,
+        "executableUnchanged": true
+      },
+      {
+        "control": "command-nonzero",
+        "result": "refused-project-command",
+        "exitCode": 9,
+        "selectedInputsUnchanged": true,
+        "executableUnchanged": true
+      },
+      {
+        "control": "command-source-change",
+        "result": "refused-project-command",
+        "exitCode": 0,
+        "selectedInputsUnchanged": false,
+        "executableUnchanged": true
+      },
+      {
+        "control": "command-directory",
+        "result": "refused",
+        "code": "PROJECT_COMMAND_DIRECTORY"
+      },
+      {
+        "control": "command-environment-reference",
+        "result": "refused",
+        "code": "PROJECT_COMMAND_ENVIRONMENT"
+      },
+      {
+        "control": "command-helper-binding",
+        "result": "refused",
+        "code": "PROJECT_COMMAND_CODE_INPUTS"
+      },
+      {
+        "control": "command-deadline",
+        "result": "refused",
+        "code": "ADAPTER_TIMEOUT"
+      },
+      {
+        "control": "command-pipe-limit",
+        "result": "refused",
+        "code": "ADAPTER_OUTPUT_LIMIT"
+      },
+      {
+        "control": "command-binary-output",
+        "result": "completed-project-command",
+        "exitCode": 0,
+        "selectedInputsUnchanged": true,
+        "executableUnchanged": true
+      },
+      {
+        "control": "command-executable-alias",
+        "result": "completed-project-command",
+        "exitCode": 0,
+        "selectedInputsUnchanged": true,
+        "executableUnchanged": true
+      },
+      {
+        "control": "command-cargo-version",
+        "result": "completed-project-command",
+        "exitCode": 0,
+        "selectedInputsUnchanged": true,
+        "executableUnchanged": true
+      },
+      {
+        "control": "command-tool-change",
+        "result": "refused-project-command",
+        "exitCode": 0,
+        "selectedInputsUnchanged": true,
+        "executableUnchanged": false
+      },
+      {
+        "control": "command-parent-death",
+        "result": "owned-descendant-stopped",
+        "parentSignal": "SIGKILL",
+        "ordinaryProcessGroupOnly": true
+      }
+    ],
+    "commandControlCount": 13,
+    "discoveryControlCount": 49,
+    "transportControlCount": 93
+  }
 }

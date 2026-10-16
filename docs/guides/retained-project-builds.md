@@ -1,0 +1,26 @@
+# Retained project builds
+
+Run project-build through the applicable project/application storage supervisor:
+
+    patamaps project-build build-plan.json --source /work/service --state /work/build-states/service
+    patamaps project-build-verify /work/build-states/service
+
+The state parent must already exist. State must be outside the original source tree and outside every enclosing Cargo workspace. The original source supplies selected bytes; programs run in a new retained candidate, with owner-declared cwd and absolute executable paths.
+
+The plan uses profile patamaps-project-build-1 and embeds five existing declarations:
+
+- project: a patamaps-project-inputs-1 ProjectProfile, explicitly selecting immutable UTF-8 source/configuration/tooling inputs.
+- workspace: a WorkspaceConfig whose paths are relative to that staged source. Every capture must be viable before build commands start.
+- buildSteps: one or more ProjectCommand declarations.
+- verificationSteps: one or more ProjectCommand declarations, run after the initial artifact snapshot.
+- outputs: explicit objects with path and kind (file or tree), relative to the candidate.
+
+Generated workspace outputs are staged alongside source and become immutable selected command inputs. Do not also select old copies of those output paths as original source inputs. Program environmentReferences resolve only captured nonsecretConfiguration strings; ambient environment and secret references remain unresolved. See decision0038 for command JSON.
+
+Declared artifact bytes, Unix mode bits and tree membership must stay unchanged through verification and the final source/tool checks. Directory symlinks, file symlinks and special files refuse. File size is bounded at4GiB, combined artifact bytes at16GiB, tree depth at128 and entries at32768, with the normal record byte limit. These observations do not attest ACLs, xattrs, dynamic dependencies or runnable architecture.
+
+A successful update atomically replaces selected.json and preserves the exact previous pointer in the new attempt. Failed, raced and interrupted attempts remain; pre-publication failures preserve the old pointer. A matching input key checks stored bindings/current selected bytes and reports verification:not-repeated with cacheHits:0. Use --force to execute a fresh attempt rather than taking that no-op path.
+
+project-build-verify rechecks retained records and candidate artifact bytes without rediscovering original source or executing recorded tools. Relocated state was tested when bytes/modes are preserved. Pin the creating Patamaps executor source/identity for historical verification. Saved command evidence is not a signed execution attestation, current authorization or deployment activation.
+
+The current workflow inherits bounded selected text capture; it does not restore opaque source dependencies, package installs, original executable metadata or an entire arbitrary project automatically. Verification commands can own runtime checks, but readiness/HTTP semantics require actual qualification. Foreground watch, actual-project measurements, installed-consumer workflow and full real application acceptance remain separate required work.

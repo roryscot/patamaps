@@ -141,6 +141,20 @@ enum Command {
         #[arg(long)]
         root: PathBuf,
     },
+    /// Run a retained build plan and atomically select its verified declared artifacts.
+    ProjectBuild {
+        plan: PathBuf,
+        #[arg(long)]
+        source: PathBuf,
+        #[arg(long)]
+        state: PathBuf,
+        #[arg(long)]
+        force: bool,
+    },
+    /// Verify local selected build bindings/artifacts without source rediscovery or tool execution.
+    ProjectBuildVerify {
+        state: PathBuf,
+    },
     #[command(hide = true, name = "__tool-supervisor")]
     ToolSupervisor,
     /// Read-only matching proposals; does not evaluate policy or confer admission.
@@ -1057,6 +1071,29 @@ fn run(command: Command) -> Result<(), Failure> {
             } else {
                 Err(Failure::ReportedRejection)
             }
+        }
+        Command::ProjectBuild {
+            plan,
+            source,
+            state,
+            force,
+        } => {
+            let plan = read::<patamaps_workspace::ProjectBuildPlan>(&plan)?;
+            let report = patamaps_workspace::build_project(&source, &state, &plan, force)
+                .map_err(|e| Failure::Operational(e.to_string()))?;
+            stdout_json(&report)?;
+            if report["status"] == "selected-project-build"
+                || report["status"] == "unchanged-project-build"
+            {
+                Ok(())
+            } else {
+                Err(Failure::ReportedRejection)
+            }
+        }
+        Command::ProjectBuildVerify { state } => {
+            let report = patamaps_workspace::verify_project_build_selection(&state)
+                .map_err(|e| Failure::Operational(e.to_string()))?;
+            stdout_json(&report)
         }
         Command::DiscoverNative => {
             let mut input = Vec::new();

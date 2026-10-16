@@ -678,3 +678,302 @@ fn workspace_output_staging_refuses_tampering_and_prefix_conflicts_before_creati
     ));
     assert!(!destination.exists());
 }
+
+#[cfg(unix)]
+fn build_fixture() -> (Temp, Temp, ProjectBuildPlan) {
+    use patamaps_contracts::SafeInteger;
+    let root = Temp::new();
+    let source = Temp(root.0.join("owner"));
+    fs::create_dir(&source.0).unwrap();
+    let workspace = fixture(&source);
+    fs::write(source.0.join("input.txt"), "selected original\n").unwrap();
+    let project: ProjectProfile = serde_json::from_value(serde_json::json!({
+        "profile":"patamaps-project-inputs-1","id":"urn:test:retained-build","nonsecretInputs":true,
+        "inputs":["graph.json","pack.json","policy.json","projection.json","input.txt"],
+        "components":[{"id":"sources","kind":"contracts","root":".","entrypoints":["graph.json"]}],
+        "nonsecretConfiguration":{},"secretReferences":{}
+    }))
+    .unwrap();
+    let command = |body: &str| ProjectCommand {
+        profile: PROJECT_COMMAND_PROFILE.into(),
+        working_directory: ".".into(),
+        environment_references: Default::default(),
+        invocation: Invocation {
+            executable: "/bin/sh".into(),
+            arguments: vec!["-c".into(), body.into()],
+            code_inputs: vec![],
+            bounds: ProcessBounds {
+                maximum_elapsed_ms: SafeInteger::new(5000).unwrap(),
+                maximum_stdout_bytes: SafeInteger::new(65536).unwrap(),
+                maximum_stderr_bytes: SafeInteger::new(4096).unwrap(),
+            },
+        },
+    };
+    let plan = ProjectBuildPlan {
+        profile: PROJECT_BUILD_PROFILE.into(),
+        project,
+        workspace,
+        build_steps: vec![command(
+            "/bin/mkdir -p bundle/nested; printf artifact > bundle/nested/app; printf executed > execution-marker",
+        )],
+        verification_steps: vec![command("test \"$(/bin/cat bundle/nested/app)\" = artifact")],
+        outputs: vec![ArtifactSelection {
+            path: "bundle".into(),
+            kind: ArtifactKind::Tree,
+        }],
+    };
+    (root, source, plan)
+}
+
+#[test]
+#[cfg(unix)]
+fn retained_build_selects_coherent_artifacts_and_reports_noop_without_reexecution() {
+    let (root, source, plan) = build_fixture();
+    let state = root.0.join("state");
+    let selected = build_project(&source.0, &state, &plan, false).unwrap();
+    assert_eq!(selected["status"], "selected-project-build");
+    let pointer = fs::read(state.join("selected.json")).unwrap();
+    let candidate = state
+        .join(selected["attempt"].as_str().unwrap())
+        .join("candidate");
+    assert_eq!(
+        fs::read_to_string(candidate.join("bundle/nested/app")).unwrap(),
+        "artifact"
+    );
+    assert!(candidate.join("bindings.rs").is_file());
+    assert!(!source.0.join("bindings.rs").exists());
+    assert_eq!(
+        verify_project_build_selection(&state).unwrap()["status"],
+        "verified-selected-build-bindings"
+    );
+    let noop = build_project(&source.0, &state, &plan, false).unwrap();
+    assert_eq!(noop["status"], "unchanged-project-build");
+    assert_eq!(noop["verification"], "not-repeated");
+    assert_eq!(noop["cacheHits"], 0);
+    assert_eq!(fs::read(state.join("selected.json")).unwrap(), pointer);
+    assert_eq!(fs::read_dir(state.join("attempts")).unwrap().count(), 1);
+}
+
+#[test]
+#[cfg(unix)]
+fn failed_mutating_and_raced_builds_preserve_the_previous_selection() {
+    let (root, source, plan) = build_fixture();
+    let state = root.0.join("state");
+    assert_eq!(
+        build_project(&source.0, &state, &plan, false).unwrap()["status"],
+        "selected-project-build"
+    );
+    let previous = fs::read(state.join("selected.json")).unwrap();
+    let mut failing = plan.clone();
+    failing.build_steps[0].invocation.arguments =
+        vec!["-c".into(), "printf failed >&2; exit 9".into()];
+    let failure = build_project(&source.0, &state, &failing, false).unwrap();
+    assert_eq!(failure["status"], "refused-project-build");
+    assert_eq!(failure["previousSelectionPreserved"], true);
+    assert_eq!(fs::read(state.join("selected.json")).unwrap(), previous);
+    let mut changing = plan.clone();
+    changing.verification_steps[0].invocation.arguments =
+        vec!["-c".into(), "printf altered > bundle/nested/app".into()];
+    let result = build_project(&source.0, &state, &changing, false).unwrap();
+    assert_eq!(result["status"], "refused-project-build");
+    assert_eq!(result["previousSelectionPreserved"], true);
+    assert!(
+        result["reason"]
+            .as_str()
+            .unwrap()
+            .contains("PROJECT_BUILD_ARTIFACT_CHANGED")
+    );
+    assert_eq!(fs::read(state.join("selected.json")).unwrap(), previous);
+    let mut raced = plan.clone();
+    raced.build_steps[0].invocation.arguments = vec![
+        "-c".into(),
+        "/bin/mkdir -p bundle/nested; printf artifact > bundle/nested/app; printf changed > \"$1\""
+            .into(),
+        "source-race".into(),
+        source.0.join("input.txt").to_str().unwrap().into(),
+    ];
+    let result = build_project(&source.0, &state, &raced, false).unwrap();
+    assert_eq!(result["status"], "refused-project-build");
+    assert_eq!(result["previousSelectionPreserved"], true);
+    assert!(
+        result["reason"]
+            .as_str()
+            .unwrap()
+            .contains("PROJECT_BUILD_SOURCE_OR_TOOL_CHANGED")
+    );
+    assert_eq!(fs::read(state.join("selected.json")).unwrap(), previous);
+    verify_project_build_selection(&state).unwrap();
+}
+
+#[test]
+#[cfg(unix)]
+fn retained_build_refuses_unsafe_state_before_creating_it() {
+    let (root, source, plan) = build_fixture();
+    let inside = source.0.join("state");
+    assert!(matches!(
+        build_project(&source.0, &inside, &plan, false),
+        Err(Error::Refused {
+            code: "PROJECT_BUILD_STATE_ISOLATION",
+            ..
+        })
+    ));
+    assert!(!inside.exists());
+    let cargo = root.0.join("cargo-parent");
+    fs::create_dir(&cargo).unwrap();
+    fs::write(cargo.join("Cargo.toml"), "[workspace]\n").unwrap();
+    let nested = cargo.join("state");
+    assert!(matches!(
+        build_project(&source.0, &nested, &plan, false),
+        Err(Error::Refused {
+            code: "PROJECT_BUILD_STATE_ISOLATION",
+            ..
+        })
+    ));
+    assert!(!nested.exists());
+}
+
+#[test]
+#[cfg(unix)]
+fn selected_artifact_tampering_refuses_noop_and_force_retains_history() {
+    let (root, source, plan) = build_fixture();
+    let state = root.0.join("state");
+    let first = build_project(&source.0, &state, &plan, false).unwrap();
+    let previous = fs::read(state.join("selected.json")).unwrap();
+    let old = state
+        .join(first["attempt"].as_str().unwrap())
+        .join("candidate/bundle/nested/app");
+    fs::write(&old, "poisoned").unwrap();
+    assert!(verify_project_build_selection(&state).is_err());
+    assert!(build_project(&source.0, &state, &plan, false).is_err());
+    assert_eq!(fs::read(state.join("selected.json")).unwrap(), previous);
+    let forced = build_project(&source.0, &state, &plan, true).unwrap();
+    assert_eq!(forced["status"], "selected-project-build");
+    let history = state
+        .join(forced["attempt"].as_str().unwrap())
+        .join("previous-selection.json");
+    assert_eq!(fs::read(history).unwrap(), previous);
+    assert_eq!(fs::read_to_string(old).unwrap(), "poisoned");
+    verify_project_build_selection(&state).unwrap();
+}
+
+#[test]
+#[cfg(unix)]
+fn retained_build_bindings_replay_without_original_source_or_tool_path() {
+    use std::os::unix::fs::PermissionsExt;
+    let (root, source, mut plan) = build_fixture();
+    let state = root.0.join("state");
+    let tools = root.0.join("tools");
+    fs::create_dir(&tools).unwrap();
+    let executable = tools.join("build.sh");
+    fs::write(
+        &executable,
+        "#!/bin/sh\n/bin/mkdir -p bundle/nested\nprintf artifact > bundle/nested/app\n",
+    )
+    .unwrap();
+    fs::set_permissions(&executable, fs::Permissions::from_mode(0o700)).unwrap();
+    plan.build_steps[0].invocation.executable = executable.to_str().unwrap().into();
+    plan.build_steps[0].invocation.arguments.clear();
+    assert_eq!(
+        build_project(&source.0, &state, &plan, false).unwrap()["status"],
+        "selected-project-build"
+    );
+    fs::rename(&source.0, root.0.join("owner.retained")).unwrap();
+    fs::rename(&tools, root.0.join("tools.retained")).unwrap();
+    assert_eq!(
+        verify_project_build_selection(&state).unwrap()["status"],
+        "verified-selected-build-bindings"
+    );
+}
+
+#[test]
+#[cfg(unix)]
+fn rehashed_contradictory_command_evidence_cannot_validate_a_selection() {
+    use patamaps_contracts::{byte_digest, canonical_digest};
+    let (root, source, plan) = build_fixture();
+    let state = root.0.join("state");
+    let selected = build_project(&source.0, &state, &plan, false).unwrap();
+    let attempt = state.join(selected["attempt"].as_str().unwrap());
+    let pointer_path = state.join("selected.json");
+    let mut pointer: serde_json::Value =
+        serde_json::from_slice(&fs::read(&pointer_path).unwrap()).unwrap();
+    let receipt_path = attempt.join("receipt.json");
+    let mut receipt: serde_json::Value =
+        serde_json::from_slice(&fs::read(&receipt_path).unwrap()).unwrap();
+    let command_path = attempt.join("verify-001.json");
+    fs::copy(
+        &command_path,
+        attempt.join("verify-001.valid-before-mutation.json"),
+    )
+    .unwrap();
+    fs::copy(
+        &receipt_path,
+        attempt.join("receipt.valid-before-mutation.json"),
+    )
+    .unwrap();
+    fs::copy(
+        &pointer_path,
+        state.join("selected.valid-before-mutation.json"),
+    )
+    .unwrap();
+    let mut command: serde_json::Value =
+        serde_json::from_slice(&fs::read(&command_path).unwrap()).unwrap();
+    command["programSucceeded"] = serde_json::json!(false);
+    let bytes = canonical_bytes(&command).unwrap();
+    fs::write(&command_path, &bytes).unwrap();
+    receipt["commands"][1]["digest"] = serde_json::json!(byte_digest(&bytes));
+    let bytes = canonical_bytes(&receipt).unwrap();
+    fs::write(&receipt_path, &bytes).unwrap();
+    pointer["receiptDigest"] = serde_json::json!(byte_digest(&bytes));
+    pointer.as_object_mut().unwrap().remove("digest");
+    let digest = canonical_digest(&pointer).unwrap();
+    pointer["digest"] = serde_json::json!(digest);
+    fs::write(&pointer_path, canonical_bytes(&pointer).unwrap()).unwrap();
+    assert!(matches!(
+        verify_project_build_selection(&state),
+        Err(Error::Refused {
+            code: "PROJECT_BUILD_SELECTION_BINDING",
+            ..
+        })
+    ));
+}
+
+#[test]
+#[cfg(unix)]
+fn changing_an_earlier_tool_during_verification_preserves_selection() {
+    use std::os::unix::fs::PermissionsExt;
+    let (root, source, plan) = build_fixture();
+    let state = root.0.join("state");
+    assert_eq!(
+        build_project(&source.0, &state, &plan, false).unwrap()["status"],
+        "selected-project-build"
+    );
+    let previous = fs::read(state.join("selected.json")).unwrap();
+    let executable = root.0.join("builder.sh");
+    fs::write(
+        &executable,
+        "#!/bin/sh\n/bin/mkdir -p bundle/nested\nprintf artifact > bundle/nested/app\n",
+    )
+    .unwrap();
+    fs::set_permissions(&executable, fs::Permissions::from_mode(0o700)).unwrap();
+    fs::copy(&executable, root.0.join("builder.valid-before-mutation.sh")).unwrap();
+    let mut changed = plan.clone();
+    changed.build_steps[0].invocation.executable = executable.to_str().unwrap().into();
+    changed.build_steps[0].invocation.arguments.clear();
+    changed.verification_steps[0].invocation.arguments = vec![
+        "-c".into(),
+        "printf '# changed\\n' >> \"$1\"".into(),
+        "tool-change".into(),
+        executable.to_str().unwrap().into(),
+    ];
+    let result = build_project(&source.0, &state, &changed, false).unwrap();
+    assert_eq!(result["status"], "refused-project-build");
+    assert_eq!(result["previousSelectionPreserved"], true);
+    assert!(
+        result["reason"]
+            .as_str()
+            .unwrap()
+            .contains("PROJECT_BUILD_SOURCE_OR_TOOL_CHANGED")
+    );
+    assert_eq!(fs::read(state.join("selected.json")).unwrap(), previous);
+    verify_project_build_selection(&state).unwrap();
+}

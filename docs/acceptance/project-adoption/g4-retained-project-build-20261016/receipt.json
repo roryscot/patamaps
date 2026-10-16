@@ -1,0 +1,324 @@
+{
+  "status": "passed-native-retained-project-build-scope",
+  "baseCommit": "fe8bbb339c94ca8b7b63678a4e4c303457bfa21c",
+  "implementationSha256": {
+    "crates/patamaps-workspace/src/project_build.rs": "628a4cc03e5eff27cd23c1b02a98a134b83883f854542bc94661bfbb1e3286d5",
+    "crates/patamaps-workspace/src/project.rs": "82d8fe72c273119eeb858c9b1db1b040b0ec521d9a1608d17115eb85ab36e38d",
+    "crates/patamaps-workspace/src/project_command.rs": "5682d80c54026544e7d584394f18ba487c2549253bbc2f0827b63be22dab33b2",
+    "crates/patamaps-workspace/src/lib.rs": "0d505c78b89286ff9774036abd0461f4451af5e2e3470d0a58a21b64b76fcd7e",
+    "crates/patamaps-cli/src/main.rs": "c2c6a0df0bf44d19f2a4f4b942451bcc048873c2a9bd2003a2427a8477550a43",
+    "crates/patamaps-workspace/tests/workspace.rs": "c7817040123446121d20abc98812d1a6f29d443dd2b9efcfbe937e7ee07a8107",
+    "scripts/project_build_controls.py": "036a885fef363a04018c78a28d4ee8b75d386d6880bee7a581002f644eb32070",
+    "scripts/ci_cross_stack.py": "69f3edd6b2f2d4bb9d5d929ad2756c09dde6c20dd66bb94399c82577b1a52e32",
+    "scripts/test_cross_stack.py": "da522f2ed07083f17504d7f454569cc8d4e38bc13af7ee002493c18c1828e2ee",
+    ".github/workflows/native-capabilities.yml": "3785efa2a6293f014a0450c8d817ea2e5949e5a277a1da7a2ae9b3470c95838c"
+  },
+  "finalSourceUnchangedDuringVerification": true,
+  "commands": [
+    {
+      "label": "format",
+      "argv": [
+        "cargo",
+        "fmt",
+        "--all"
+      ],
+      "exitCode": 0,
+      "seconds": 1.611
+    },
+    {
+      "label": "format-check",
+      "argv": [
+        "cargo",
+        "fmt",
+        "--all",
+        "--",
+        "--check"
+      ],
+      "exitCode": 0,
+      "seconds": 1.123
+    },
+    {
+      "label": "cli",
+      "argv": [
+        "cargo",
+        "build",
+        "-p",
+        "patamaps-cli",
+        "--locked",
+        "--offline"
+      ],
+      "exitCode": 0,
+      "seconds": 0.874
+    },
+    {
+      "label": "workspace",
+      "argv": [
+        "cargo",
+        "test",
+        "-p",
+        "patamaps-workspace",
+        "--locked",
+        "--offline"
+      ],
+      "exitCode": 0,
+      "seconds": 27.87
+    },
+    {
+      "label": "build-plan",
+      "argv": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/intel-python-3.13.16-20261013/runtime/python/bin/python3",
+        "-B",
+        "scripts/test_cross_stack.py",
+        "--phase",
+        "build-plan"
+      ],
+      "exitCode": 0,
+      "seconds": 9.618
+    },
+    {
+      "label": "clippy",
+      "argv": [
+        "cargo",
+        "clippy",
+        "-p",
+        "patamaps-workspace",
+        "-p",
+        "patamaps-cli",
+        "--all-targets",
+        "--locked",
+        "--offline",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exitCode": 0,
+      "seconds": 1.401
+    }
+  ],
+  "workflowControlCount": 12,
+  "workflowControls": [
+    {
+      "control": "build-selection",
+      "result": "selected",
+      "workspaceAdmissionRequired": true,
+      "separateVerificationCommands": true,
+      "artifactTree": true
+    },
+    {
+      "control": "build-noop",
+      "result": "unchanged",
+      "verification": "not-repeated",
+      "cacheHits": 0
+    },
+    {
+      "control": "build-failure",
+      "result": "refused",
+      "previousSelectionPreserved": true
+    },
+    {
+      "control": "build-artifact-change",
+      "result": "refused",
+      "previousSelectionPreserved": true
+    },
+    {
+      "control": "build-admission-before-commands",
+      "result": "refused",
+      "buildCommandStarted": false
+    },
+    {
+      "control": "build-concurrent-writer",
+      "result": "refused",
+      "ownerConfirmedLive": true
+    },
+    {
+      "control": "build-interruption-sigkill",
+      "result": "owned-child-stopped",
+      "previousSelectionPreserved": true,
+      "signal": "SIGKILL",
+      "ordinaryProcessGroupOnly": true
+    },
+    {
+      "control": "build-interruption-sigterm",
+      "result": "owned-child-stopped",
+      "previousSelectionPreserved": true,
+      "signal": "SIGTERM",
+      "ordinaryProcessGroupOnly": true
+    },
+    {
+      "control": "build-interruption-sigint",
+      "result": "owned-child-stopped",
+      "previousSelectionPreserved": true,
+      "signal": "SIGINT",
+      "ordinaryProcessGroupOnly": true
+    },
+    {
+      "control": "build-permission-tamper",
+      "result": "refused"
+    },
+    {
+      "control": "build-offline-bindings",
+      "result": "verified",
+      "originalSourcePathUnavailable": true,
+      "externalProgramsAbsentFromPath": true,
+      "verification": "records-and-selected-bytes-only"
+    },
+    {
+      "control": "build-state-relocation",
+      "result": "verified",
+      "originalStateRetained": true
+    }
+  ],
+  "fullRegression": {
+    "retainedEvidence": ".tools/project-adoption/project-build-fixed-native-20261016",
+    "commands": [
+      {
+        "label": "format",
+        "argv": [
+          "cargo",
+          "fmt",
+          "--all"
+        ],
+        "exitCode": 0,
+        "seconds": 1.617
+      },
+      {
+        "label": "format-check",
+        "argv": [
+          "cargo",
+          "fmt",
+          "--all",
+          "--",
+          "--check"
+        ],
+        "exitCode": 0,
+        "seconds": 1.154
+      },
+      {
+        "label": "cli",
+        "argv": [
+          "cargo",
+          "build",
+          "-p",
+          "patamaps-cli",
+          "--locked",
+          "--offline"
+        ],
+        "exitCode": 0,
+        "seconds": 11.634
+      },
+      {
+        "label": "workspace",
+        "argv": [
+          "cargo",
+          "test",
+          "-p",
+          "patamaps-workspace",
+          "--locked",
+          "--offline"
+        ],
+        "exitCode": 0,
+        "seconds": 32.435
+      },
+      {
+        "label": "commands",
+        "argv": [
+          "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/intel-python-3.13.16-20261013/runtime/python/bin/python3",
+          "-B",
+          "scripts/test_cross_stack.py",
+          "--phase",
+          "commands"
+        ],
+        "exitCode": 0,
+        "seconds": 7.193
+      },
+      {
+        "label": "build-plan",
+        "argv": [
+          "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/intel-python-3.13.16-20261013/runtime/python/bin/python3",
+          "-B",
+          "scripts/test_cross_stack.py",
+          "--phase",
+          "build-plan"
+        ],
+        "exitCode": 0,
+        "seconds": 7.385
+      },
+      {
+        "label": "discovery",
+        "argv": [
+          "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/intel-python-3.13.16-20261013/runtime/python/bin/python3",
+          "-B",
+          "scripts/test_cross_stack.py",
+          "--phase",
+          "discovery"
+        ],
+        "exitCode": 0,
+        "seconds": 113.931
+      },
+      {
+        "label": "transport",
+        "argv": [
+          "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/intel-python-3.13.16-20261013/runtime/python/bin/python3",
+          "-B",
+          "scripts/test_cross_stack.py",
+          "--phase",
+          "transport-http"
+        ],
+        "exitCode": 0,
+        "seconds": 22.231
+      },
+      {
+        "label": "clippy",
+        "argv": [
+          "cargo",
+          "clippy",
+          "-p",
+          "patamaps-workspace",
+          "-p",
+          "patamaps-cli",
+          "--all-targets",
+          "--locked",
+          "--offline",
+          "--",
+          "-D",
+          "warnings"
+        ],
+        "exitCode": 0,
+        "seconds": 4.642
+      }
+    ],
+    "implementationFilesUnchangedThroughAdditionalInterruptionControls": true,
+    "commandControlCount": 13,
+    "discoveryControlCount": 49,
+    "transportControlCount": 93
+  },
+  "finalEvidence": ".tools/project-adoption/project-build-interruption-native-20261016",
+  "controlledState": "/var/folders/f7/_7nmd4jd3_j5ycc8plwxnv800000gn/T/patamaps-project-build-i1v1g9wh/state",
+  "controlledStateCopy": "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/cross-stack/build-plan-20261016T073429.667714Z/project-builds/state.retained-copy",
+  "filesDeleted": 0,
+  "initialFailure": {
+    "evidence": ".tools/project-adoption/project-build-initial-20261016",
+    "workspaceTestExitCode": 101,
+    "passed": 15,
+    "failed": 4,
+    "cause": "Strict JCS reader normalizes numeric values to binary64; integer-valued serde_json::Value equality incorrectly rejected persisted exit codes and artifact metadata.",
+    "repair": "Compare exit-code numeric value and canonical artifact bytes; retain all checksums and bind source, workspace, command, tool, artifact and mode data; contradictory rehashed report control added."
+  },
+  "scope": {
+    "platform": "x86_64-apple-darwin",
+    "workspaceIntegrationTests": 21,
+    "newWorkflowIntegrationTests": 7,
+    "sourceProfile": "existing bounded selected UTF-8 capture; no complete opaque dependency restoration",
+    "artifacts": "declared files/trees: bytes, Unix mode bits, membership; no symlinks/special files; no ACL/xattr attestation",
+    "processCleanup": "ordinary groups only; not an escape-resistant sandbox",
+    "noOp": "records/selected bytes checked; commands not repeated; zero cache hits",
+    "runtimeReadiness": "meaning belongs to owner verification commands; not qualified by these controlled artifacts",
+    "foregroundWatch": "not-implemented",
+    "actualProjectPerformance": "not-measured",
+    "installedWorkflow": "not-qualified",
+    "applicationQualification": "not-performed",
+    "fullG4": "incomplete",
+    "activation": "not-performed"
+  },
+  "ci": "pending-after-push"
+}
