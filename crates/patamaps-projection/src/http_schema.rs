@@ -672,6 +672,41 @@ impl Schema {
     }
 }
 
+pub(super) const RUST_RUNTIME: &str = r#"
+fn http_json_boundary(value: &serde_json::Value) -> bool {
+    fn visit(value: &serde_json::Value, depth: usize, work: &mut usize) -> bool {
+        *work += 1;
+        if depth > 64 || *work > 16384 { return false; }
+        match value {
+            serde_json::Value::Array(values) => values.iter().all(|v| visit(v, depth + 1, work)),
+            serde_json::Value::Object(values) => values.values().all(|v| visit(v, depth + 1, work)),
+            serde_json::Value::Number(n) => n.as_f64().is_some_and(|n| n.is_finite() && (n.fract() != 0.0 || n.abs() <= 9007199254740991.0)),
+            _ => true,
+        }
+    }
+    visit(value, 0, &mut 0)
+}
+
+"#;
+
+pub(super) const TYPESCRIPT_RUNTIME: &str = r#"
+function httpJsonBoundary(value: unknown): boolean {
+ let work = 0;
+ function visit(value: unknown, depth: number): boolean {
+  if (++work > 16384 || depth > 64) return false;
+  if (value === null || typeof value === 'boolean') return true;
+  if (typeof value === 'number') return Number.isFinite(value) && (!Number.isInteger(value) || Number.isSafeInteger(value));
+  if (typeof value === 'string') return unicodeScalars(value);
+  if (typeof value !== 'object') return false;
+  if (Array.isArray(value)) return Array.from(value).every(v => visit(v, depth + 1));
+  const prototype = Object.getPrototypeOf(value);
+  if (prototype !== Object.prototype && prototype !== null) return false;
+  return Object.keys(value).every(key => unicodeScalars(key) && visit((value as Record<string,unknown>)[key], depth + 1));
+ }
+ return visit(value, 0);
+}
+"#;
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -711,38 +746,3 @@ mod tests {
         assert!(parsed.typescript().contains("length === 1"));
     }
 }
-
-pub(super) const RUST_RUNTIME: &str = r#"
-fn http_json_boundary(value: &serde_json::Value) -> bool {
-    fn visit(value: &serde_json::Value, depth: usize, work: &mut usize) -> bool {
-        *work += 1;
-        if depth > 64 || *work > 16384 { return false; }
-        match value {
-            serde_json::Value::Array(values) => values.iter().all(|v| visit(v, depth + 1, work)),
-            serde_json::Value::Object(values) => values.values().all(|v| visit(v, depth + 1, work)),
-            serde_json::Value::Number(n) => n.as_f64().is_some_and(|n| n.is_finite() && (n.fract() != 0.0 || n.abs() <= 9007199254740991.0)),
-            _ => true,
-        }
-    }
-    visit(value, 0, &mut 0)
-}
-
-"#;
-
-pub(super) const TYPESCRIPT_RUNTIME: &str = r#"
-function httpJsonBoundary(value: unknown): boolean {
- let work = 0;
- function visit(value: unknown, depth: number): boolean {
-  if (++work > 16384 || depth > 64) return false;
-  if (value === null || typeof value === 'boolean') return true;
-  if (typeof value === 'number') return Number.isFinite(value) && (!Number.isInteger(value) || Number.isSafeInteger(value));
-  if (typeof value === 'string') return unicodeScalars(value);
-  if (typeof value !== 'object') return false;
-  if (Array.isArray(value)) return Array.from(value).every(v => visit(v, depth + 1));
-  const prototype = Object.getPrototypeOf(value);
-  if (prototype !== Object.prototype && prototype !== null) return false;
-  return Object.keys(value).every(key => unicodeScalars(key) && visit((value as Record<string,unknown>)[key], depth + 1));
- }
- return visit(value, 0);
-}
-"#;

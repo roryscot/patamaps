@@ -135,8 +135,17 @@ def verify(root,work,env,run):
         command(label+"-cargo",["cargo","build","--manifest-path",app/"service/Cargo.toml","--locked","--offline"])
         executable=app/"service.native"
         shutil.copy2(target/"debug/catalog-service",executable)
+        typed=app/"web/generated/client-types.ts"
+        typed.write_text("import {callOperation, type Requests} from './operations';\nconst id='urn:example:operation:create-item';\nconst input: Requests[typeof id] = "+json.dumps(base,ensure_ascii=False)+";\nexport const invoke = () => callOperation(id,input);\n")
+        for bad_label,property_name,bad_value in [("count","count","one"),("enum","tags",["admin"])]:
+            invalid=copy.deepcopy(base);invalid[property_name]=bad_value
+            invalid_path=app/("web/generated/bad-"+bad_label+".ts")
+            invalid_path.write_text("import {type Requests} from './operations';\nconst input: Requests['urn:example:operation:create-item'] = "+json.dumps(invalid,ensure_ascii=False)+";\nexport {input};\n")
+            diagnostics=command(label+"-typescript-refuse-"+bad_label,[node,fixture/"web/node_modules/typescript/lib/tsc.js","--target","ES2022","--module","commonjs","--lib","ES2022,DOM","--strict","--skipLibCheck","--noEmit",invalid_path],expected_success=False)
+            assert b"TS2322" in diagnostics
+            controls.append(dict(label=label+"-typescript-refuse-"+bad_label,stage="typescript",result="refused",code="TS2322"))
         client=app/"client"
-        command(label+"-typescript",[node,fixture/"web/node_modules/typescript/lib/tsc.js","--target","ES2022","--module","commonjs","--lib","ES2022,DOM","--strict","--skipLibCheck","--outDir",client,app/"web/generated/operations.ts"])
+        command(label+"-typescript",[node,fixture/"web/node_modules/typescript/lib/tsc.js","--target","ES2022","--module","commonjs","--lib","ES2022,DOM","--strict","--skipLibCheck","--outDir",client,app/"web/generated/operations.ts",typed])
         (app/"client-check.cjs").write_text(r'''
 const fs=require('node:fs');
 const api=require(process.argv[2]);
