@@ -392,3 +392,18 @@ generation-failure control was refused before launch because another project
 acquired the lease; no failure recovery pass is claimed. Browser/runtime,
 installed/deployment and remaining G2-G6 gates stay open. Watch budget commit
 d104864 passed all four CI38947765476 jobs; this evidence commit CI is pending.
+
+## Real owner generation-failure recovery checkpoint (2026-10-17)
+
+The separate supervised negative control passed: invalid owner graph generation
+refused with PROJECT_BUILD_PREPARATION_COMMAND before any build step, the exact
+selected pointer was preserved, and restoring valid input produced a no-op
+with verification not repeated plus successful native selected-binding replay.
+Original Git state and pinned driver were unchanged. See the
+[scoped failure receipt](../acceptance/project-adoption/g6-owner-native-preparation-2026-10-16/generation-failure.json).
+The first attempt refused an externally migrated symlink state root; its evidence
+was preserved and the retry used the existing canonical directory with unchanged
+acceptance checks. Invalid-generation control258.443s, restored no-op76.199s,
+selected verification82.319s: practical performance remains unaccepted.
+Actual Rust transport controls remain unrun while another job owns the lease;
+no runtime, browser, installed/deployment or whole-goal completion is claimed.
