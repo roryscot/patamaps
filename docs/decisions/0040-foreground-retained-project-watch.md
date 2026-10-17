@@ -35,3 +35,11 @@ failure retention must be measured rather than inferred from process code.
 The scoped workflow is not complete application context/dependency capture,
 arbitrary readiness/HTTP semantics, real-project performance, deployed behavior
 or installed-consumer qualification. Those G4–G6 requirements remain open.
+
+Inspection deadlines are owner-configurable with --inspection-timeout-ms,
+1000..3600000 milliseconds, preserving the 30000 default. The same bounded
+budget applies separately to input observation and selected-binding verification.
+A timeout still refuses the update; it does not retry the same failed key or
+skip native verification. Controlled subprocess checks cover both timeout paths,
+success with an explicit budget, invalid declarations and unchanged key matching.
+This is budget configurability, not measured native watch/performance acceptance.

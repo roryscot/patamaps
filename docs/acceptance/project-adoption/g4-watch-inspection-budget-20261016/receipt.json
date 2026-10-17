@@ -1,0 +1,93 @@
+{
+  "status": "passed-controlled-watch-inspections",
+  "controls": [
+    {
+      "control": "bounded-watch-native-inspections",
+      "result": "passed",
+      "cases": [
+        {
+          "case": "default-30000ms-preserved",
+          "result": "passed"
+        },
+        {
+          "case": "invalid-budget-999",
+          "result": "refused"
+        },
+        {
+          "case": "invalid-budget-3600001",
+          "result": "refused"
+        },
+        {
+          "case": "invalid-budget-invalid",
+          "result": "refused"
+        },
+        {
+          "case": "project-build-input-key-short-budget",
+          "result": "timed-out"
+        },
+        {
+          "case": "project-build-input-key-explicit-budget",
+          "result": "passed"
+        },
+        {
+          "case": "project-build-verify-short-budget",
+          "result": "timed-out"
+        },
+        {
+          "case": "project-build-verify-explicit-budget",
+          "result": "passed"
+        },
+        {
+          "case": "larger-budget-keeps-key-match",
+          "result": "refused"
+        }
+      ],
+      "scope": "controlled subprocess deadlines and protocol, not native/application acceptance"
+    },
+    {
+      "control": "ordinary-exit-and-empty-group-permission",
+      "result": "passed",
+      "cases": [
+        {
+          "case": "ordinary-success",
+          "result": "passed",
+          "exitCode": 0
+        },
+        {
+          "case": "ordinary-failure",
+          "result": "passed",
+          "exitCode": 7
+        },
+        {
+          "case": "timed-success",
+          "result": "passed",
+          "exitCode": 0
+        },
+        {
+          "case": "empty-group-EPERM",
+          "result": "passed"
+        },
+        {
+          "case": "live-group-EPERM",
+          "result": "refused"
+        }
+      ]
+    }
+  ],
+  "platform": "Intel macOS x86_64",
+  "scope": "Actual controlled Python subprocess deadline/protocol and process-exit controls only; no native/application/performance acceptance",
+  "sources": {
+    "scripts/project_watch.py": "sha256:e71e1d6bd303ad7bb4d80e90a7e43e90213aef99a5952f25f1a8f150c78d98a2",
+    "scripts/project_watch_controls.py": "sha256:f8ac3255eabcaf52f280f952d70e3ac3ea407577c9104adf585902367e010a9b",
+    "scripts/project_watch_guard_controls.py": "sha256:714fcfeffd5e4ab9cc447d2dbd9e2c331f014dd2a0dedd827600d1be6c2f2e63"
+  },
+  "verificationCommands": [
+    "Python AST parse of three changed scripts",
+    "verify_inspection_budget(controller, retained-work/budget)",
+    "verify_exits(controller, retained-work/exits)",
+    "git diff --check"
+  ],
+  "fullNativeWatch": "not run; shared Intel lease held by another qualification",
+  "ci": "pending after push",
+  "filesDeleted": 0
+}

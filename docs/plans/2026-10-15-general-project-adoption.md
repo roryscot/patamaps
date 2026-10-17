@@ -291,3 +291,104 @@ Observable acceptance: an actual owner graph edit changes the existing consumed 
 
 ## Projection ordering regression checkpoint
 The [scoped regression receipt](../acceptance/project-adoption/g6-projection-ordering-2026-10-16/receipt.json) records 116 core tests, strict core/CLI Clippy and all 68 original differential cases passing. Two distinct Unicode target IDs that collate equally now preserve original encounter order, checked in both directions and repeated 32 times per case. Existing frozen66 expectations are unchanged. Two malformed initial controls were retained as failures, corrected rather than accepted. Application integration requirements above remain open.
+
+## Owner preparation implementation in progress
+The opt-in preparation contract now has a candidate implementation in the existing
+native build driver, CLI input observation and foreground watch. Generated output
+preimages and commands contribute to the input key. Preparation command records
+and generated selected bytes are retained for source-free replay. Preparation has
+no build writable-path allowance; final undeclared changes must refuse before
+build commands. Existing plan types and old Rust entry points are preserved.
+Controlled preparation and watch cases are wired into the existing Linux source
+qualification. This checkpoint is UNVERIFIED: Intel compilation, strict Clippy,
+native controlled runs, watch and actual owner qualification have not run for
+these source changes. The live shared Intel job prevents heavy verification;
+no lease or policy bypass is authorized. Do not count implementation as acceptance.
+
+Native Intel rustfmt parsed/formatted the changed Rust files and its check
+passed; Python AST parsing and diff whitespace checks also pass. A draft branch
+is being published for independent existing Linux CI while the Intel shared
+heavy lease is occupied. This is not native compilation or application acceptance;
+the full native suite and Rust candidate controls remain pending.
+
+## Native owner preparation control checkpoint
+The [scoped native receipt](../acceptance/project-adoption/g6-native-preparation-2026-10-16/receipt.json)
+records passed native workspace tests, strict workspace/CLI Clippy, CLI build and
+all existing build/context plus new preparation controls. Regenerated controlled
+contracts are consumed by build verification; owner edits, no-op, failure/stale
+preimage/unsafe output/undeclared write controls and source/snapshot-free replay
+passed. These results supersede the earlier UNVERIFIED implementation checkpoint
+only for their recorded scope. Actual owner generator integration and Next
+application build/edit/failure, native watch, runtime and installed/deployment
+requirements remain open. Draft PR #1 keeps main unchanged while Linux CI runs.
+
+## Actual Rust handler rejection checkpoint
+The [four retained-candidate type controls](../acceptance/project-adoption/g6-rust-native-candidate-2026-10-16/type-controls.json)
+passed under the candidate's own unchanged approved policy: valid witnesses
+compile, wrong handler and return bindings fail with their expected Rust type
+errors, and restoring the valid witness compiles. The three captured actual lab
+handlers are checked; source, native evidence and policy remain unchanged.
+This closes the compile-time negative binding controls only. Runtime HTTP,
+actual Next boundary, managed application paths and installed/deployment
+qualification remain open.
+
+## Linux preparation-aware watch checkpoint
+All four implementation CI jobs passed. The [verified diagnostics record](../acceptance/project-adoption/g6-native-preparation-2026-10-16/linux-watch.json)
+binds the artifact's API size/SHA-256 and actual controller/control hashes.
+Its receipts contain 24 preparation and 15 foreground watch controls, including
+consumed regenerated output and preparation-key failure suppression/recovery.
+This is controlled Linux CI qualification. Native Intel watch performance and
+actual application generator/build/edit/failure/runtime qualification remain open.
+
+## Real owner closed-tooling context checkpoint
+[Staging and capture](../acceptance/project-adoption/g6-owner-native-preparation-2026-10-16/context.json)
+passed for the existing Next owner context: 195,999 entries and 1,674,434,053 file
+bytes now include the pinned native compiler, SDK, relative loader and shim.
+This removes the prototype's external dependency-tree link from the planned
+native preparation workflow. The owner generator is unchanged. It has not yet
+run in this workflow; actual build/edit/failure/runtime qualification remains open.
+The optimized-driver build was refused before startup by another live shared
+lease; its refusal and the finished capture are retained.
+
+## Real owner native preparation baseline checkpoint
+The [actual owner baseline](../acceptance/project-adoption/g6-owner-native-preparation-2026-10-16/baseline.json)
+passed: the unchanged generator used captured Patamaps tooling in native
+preparation, all three emitted artifacts were byte-identical to the captured
+originals, and actual Next build, TypeScript and fresh manifest witness commands
+passed. Source/snapshot-unavailable replay and native no-op preserved selection;
+original Git state and pinned tools remained unchanged.
+
+The optimized driver is recorded separately from the captured generation
+compiler. Full build took 500.397 seconds, including owner generation 2.807,
+Next 18.609, TypeScript 17.325 and manifest witness 0.125 seconds. Offline replay
+took 31.823 seconds and no-op 34.716 seconds. Practical edit/watch latency is
+not accepted. The actual owner edit/failure controls are prepared but their first
+launch was refused before startup by another live shared lease. Runtime/browser,
+installed/deployment and broader framework requirements remain open.
+
+## Watch inspection budget checkpoint
+
+The foreground controller accepts --inspection-timeout-ms (1000..3600000),
+preserving its 30000 default for each native observation and selection check.
+Real-project replay measured about32s overall; this motivates configurability,
+not a claim that the 30s native watch verifier has demonstrably timed out.
+Intel controlled subprocess deadline/protocol checks passed9 cases and existing
+process-exit controls passed5; see [scoped receipt](../acceptance/project-adoption/g4-watch-inspection-budget-20261016/receipt.json).
+Both native inspections still run; larger budgets do not admit mismatched keys.
+Full native watch/application/performance qualification remains open. Existing
+Linux watch CI now runs these budget controls; current-source CI is pending.
+
+## Real owner edit checkpoint (2026-10-17)
+
+The actual retained Next monorepo owner edit passed under the Intel supervisor:
+a declared navigation-label edit changed the native input key, ran the unchanged
+owner generator, passed Next build, TypeScript and fresh manifest witness, and
+appeared in two selected compiled client JavaScript files. Native selected bindings
+verified. Original Git state and pinned driver were unchanged. See the
+[scoped positive edit receipt](../acceptance/project-adoption/g6-owner-native-preparation-2026-10-16/positive-edit.json).
+The build took651.051s and subsequent selected-binding verification48.579s;
+practical edit/watch performance remains unaccepted. The separately supervised
+generation-failure control was refused before launch because another project
+acquired the lease; no failure recovery pass is claimed. Browser/runtime,
+installed/deployment and remaining G2-G6 gates stay open. Watch budget commit
+d104864 passed all four CI38947765476 jobs; this evidence commit CI is pending.

@@ -152,6 +152,8 @@ enum Command {
         force: bool,
         #[arg(long)]
         context: Option<PathBuf>,
+        #[arg(long)]
+        preparation: Option<PathBuf>,
     },
     /// Observe declared build inputs/tool identities without commands or build-state writes.
     ProjectBuildInputKey {
@@ -160,6 +162,8 @@ enum Command {
         source: PathBuf,
         #[arg(long)]
         context: Option<PathBuf>,
+        #[arg(long)]
+        preparation: Option<PathBuf>,
     },
     /// Capture explicit binary files and closed internal links into a fresh retained snapshot.
     ProjectContextCapture {
@@ -1106,17 +1110,23 @@ fn run(command: Command) -> Result<(), Failure> {
             state,
             force,
             context,
+            preparation,
         } => {
             let plan = read::<patamaps_workspace::ProjectBuildPlan>(&plan)?;
             let context = context
                 .as_ref()
                 .map(|p| read::<patamaps_workspace::ProjectBuildContext>(p))
                 .transpose()?;
-            let report = patamaps_workspace::build_project_with_context(
+            let preparation = preparation
+                .as_ref()
+                .map(|p| read::<patamaps_workspace::ProjectPreparation>(p))
+                .transpose()?;
+            let report = patamaps_workspace::build_project_with_preparation(
                 &source,
                 &state,
                 &plan,
                 context.as_ref(),
+                preparation.as_ref(),
                 force,
             )
             .map_err(|e| Failure::Operational(e.to_string()))?;
@@ -1133,16 +1143,22 @@ fn run(command: Command) -> Result<(), Failure> {
             plan,
             source,
             context,
+            preparation,
         } => {
             let plan = read::<patamaps_workspace::ProjectBuildPlan>(&plan)?;
             let context = context
                 .as_ref()
                 .map(|p| read::<patamaps_workspace::ProjectBuildContext>(p))
                 .transpose()?;
-            let report = patamaps_workspace::project_build_input_key_with_context(
+            let preparation = preparation
+                .as_ref()
+                .map(|p| read::<patamaps_workspace::ProjectPreparation>(p))
+                .transpose()?;
+            let report = patamaps_workspace::project_build_input_key_with_preparation(
                 &source,
                 &plan,
                 context.as_ref(),
+                preparation.as_ref(),
             )
             .map_err(|e| Failure::Operational(e.to_string()))?;
             stdout_json(&report)
