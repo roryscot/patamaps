@@ -377,3 +377,18 @@ process-exit controls passed5; see [scoped receipt](../acceptance/project-adopti
 Both native inspections still run; larger budgets do not admit mismatched keys.
 Full native watch/application/performance qualification remains open. Existing
 Linux watch CI now runs these budget controls; current-source CI is pending.
+
+## Real owner edit checkpoint (2026-10-17)
+
+The actual retained Next monorepo owner edit passed under the Intel supervisor:
+a declared navigation-label edit changed the native input key, ran the unchanged
+owner generator, passed Next build, TypeScript and fresh manifest witness, and
+appeared in two selected compiled client JavaScript files. Native selected bindings
+verified. Original Git state and pinned driver were unchanged. See the
+[scoped positive edit receipt](../acceptance/project-adoption/g6-owner-native-preparation-2026-10-16/positive-edit.json).
+The build took651.051s and subsequent selected-binding verification48.579s;
+practical edit/watch performance remains unaccepted. The separately supervised
+generation-failure control was refused before launch because another project
+acquired the lease; no failure recovery pass is claimed. Browser/runtime,
+installed/deployment and remaining G2-G6 gates stay open. Watch budget commit
+d104864 passed all four CI38947765476 jobs; this evidence commit CI is pending.
