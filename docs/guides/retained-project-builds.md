@@ -280,3 +280,15 @@ declared nonsecret configuration projection instead of raw secret-bearing files.
 A captured tool/dependency tree does not itself establish complete executable
 dependency closure or practical development-loop performance. The retained case's
 500.397-second full build and 34.716-second no-op leave that performance work open.
+
+### Declare frontend and backend error boundaries
+
+A generated transport client validates the errors declared by its owner profile.
+When a frontend proxy adds a status that the native service does not emit, include
+that status and its actual response schema in the explicit transport declaration.
+For example, a Next proxy may return 503 when its Rust upstream is unavailable;
+an undeclared 503 correctly refuses as HTTP_ERROR_CONTRACT rather than inventing
+a typed error. Keep tests for the legacy refusal, declared error admission and
+malformed error-body refusal. Controlled transport replies establish client
+contract behavior; qualify actual production listeners and proxy branches
+separately before claiming runtime compatibility.

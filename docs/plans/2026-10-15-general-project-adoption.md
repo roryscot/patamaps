@@ -426,3 +426,18 @@ watch performance and all remaining G2-G6 requirements stay open. No completion
 or activation is claimed. This evidence was published through GitHub after
 Intel SSH and the mounted share became unavailable; Intel must synchronize it
 when access returns. CI for this documentation/evidence commit is pending.
+
+## Owner proxy-error profile checkpoint (2026-10-18)
+
+Captured existing Next proxy source returns 503, while the prior transport profile
+omits it. A separate owner revision declares observed 415/503 errors, preserving
+the original profile and application. Native client/witness emission, strict
+TypeScript compilation of both clients and five controlled client cases passed;
+legacy undeclared 503 and malformed error bodies still refuse. See the
+[scoped receipt](../acceptance/project-adoption/g2-owner-proxy-errors-2026-10-18/receipt.json).
+On recheck, all generated outputs and 16 remaining inputs match; the pinned
+emitter is absent from its recorded path, so emission rerun readiness is unproven.
+No actual Next/Rust TCP runtime or new Rust-witness compilation is established
+by these controls. A separate guarded production-listener qualification with 13
+frozen cases is prepared but unrun while another job holds the shared lease.
+G2-G6 requirements and whole-goal scope remain unchanged and incomplete.
