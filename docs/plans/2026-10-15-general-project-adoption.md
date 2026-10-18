@@ -441,3 +441,19 @@ No actual Next/Rust TCP runtime or new Rust-witness compilation is established
 by these controls. A separate guarded production-listener qualification with 13
 frozen cases is prepared but unrun while another job holds the shared lease.
 G2-G6 requirements and whole-goal scope remain unchanged and incomplete.
+
+## Real production Next/Rust network checkpoint (2026-10-18)
+
+The [scoped production-network receipt](../acceptance/project-adoption/g6-wargame-production-network-2026-10-18/receipt.json)
+records 13 frozen cases and 22 loopback HTTP exchanges passing against the retained
+existing Wargame candidate. Fresh offline root/web installs, unchanged owner
+generation of 294 artifacts, and actual production build passed under the
+candidate's own approved guard. Real Rust evaluation/replay and frozen logistics
+metrics match the production Next proxy; malformed/MIME/oversized/streamed bodies,
+stale/tampered replay and declared-versus-legacy upstream503 controls pass.
+All 71 selected source/tool/evidence/policy inputs remained unchanged, and the
+owned service wrappers/listeners stopped. Owner generation took227.881s, build
+182.838s, HTTP controls0.473s; these are functional observations, not accepted
+performance measurements. This closes the prepared TCP/proxy control set only.
+Browser, managed application paths, installed/deployment qualification, practical
+watch performance and remaining G2-G6 scope stay open; the goal is incomplete.
