@@ -407,3 +407,22 @@ acceptance checks. Invalid-generation control258.443s, restored no-op76.199s,
 selected verification82.319s: practical performance remains unaccepted.
 Actual Rust transport controls remain unrun while another job owns the lease;
 no runtime, browser, installed/deployment or whole-goal completion is claimed.
+
+## Real Rust router transport checkpoint (2026-10-17)
+
+Four scoped native transport tests passed on the retained Wargame candidate under
+its own supervisor: exact quantity encoding, actual router JSON/MIME/body errors,
+evaluation/replay preservation, and frozen logistics metrics/native limits.
+Cargo took129.469s; test bodies reported0.02s. The runner verified41 retained
+native-evidence input digests and checked49 selected source/evidence/policy/scenario
+digests unchanged. The prior98-test receipt was checked, not rerun. See the
+[scoped transport receipt](../acceptance/project-adoption/g6-wargame-router-transport-2026-10-17/receipt.json).
+The initial helper preflight expected a numeric test count; its preserved retry
+reads the existing98-name array with the same exact count and input checks.
+These are in-process Axum HTTP checks with a controlled generation label, not
+TCP/Next proxy/generated-client/browser/deployment or managed admission evidence.
+The actual owner edit and generation-failure recovery now also pass; practical
+watch performance and all remaining G2-G6 requirements stay open. No completion
+or activation is claimed. This evidence was published through GitHub after
+Intel SSH and the mounted share became unavailable; Intel must synchronize it
+when access returns. CI for this documentation/evidence commit is pending.
