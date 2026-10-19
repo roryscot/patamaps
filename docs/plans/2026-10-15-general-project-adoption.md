@@ -484,3 +484,14 @@ visible-navigation expectation at the narrow breakpoint. No app guard or source
 was changed. The generated label remains hidden without authenticated permissions
 and is explicitly not accepted by these public-route checks. Managed/backend,
 installed workflow, Linux deployment and practical watch/performance gates remain.
+
+## Exact existing-project context recovery checkpoint (2026-10-19)
+
+The [scoped recovery receipt](../acceptance/project-adoption/g4-exact-context-recovery-2026-10-19/receipt.json)
+records correct refusal of an old owner snapshot missing 107 data members, followed
+by recovery into a new copy using only matching retained bytes. The installed
+native CLI verified the unchanged original 195,999-entry context digest. No file
+was deleted and the incomplete original stayed untouched. An initial permission
+hypothesis was disproved: private blob modes are part of the snapshot format.
+The installed workflow retry depends on this verified copy and still needs its
+own staging, capture, actual build and replay evidence. Whole-goal scope is open.

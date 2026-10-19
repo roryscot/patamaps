@@ -60,3 +60,21 @@ Composition retains the context's path/depth, node and aggregate-byte bounds. Th
 Native unit and CLI controls cover binary dependency consumption, preimage-bound overlays, no-op behavior, source/snapshot-free replay, corruption, dependency mutation, unexpected writes and command failure. Real Next reconstruction/build evidence above used a qualification driver. The actual 1.60 GB Next project has now passed this native binding workflow, fresh compiled-manifest witnesses, source/snapshot-free selected-build replay and no-op selection preservation; see the [native real-project receipt](../acceptance/project-adoption/g4-native-next-2026-10-16/receipt.json). Debug validation and materialization took minutes, so practical edit latency remains unqualified. Generated-contract replacement, runtime and installed-consumer checks remain required.
 
 The [native binding receipt](../acceptance/project-adoption/g4-native-context-binding-2026-10-16/receipt.json) records 82 package tests, 10 CLI controls and the 13-control context-backed watch suite through Intel's actual per-update supervisor. These are controlled workflow checks, not qualification of the full existing application through this API.
+
+## Recovering unavailable snapshot members
+
+A successful selected-build replay does not prove the original snapshot store is
+still complete. In the [retained Next owner case](../acceptance/project-adoption/g4-exact-context-recovery-2026-10-19/receipt.json),
+staging refused an input snapshot with 107 missing data files even though its
+selection and manifest digests were unchanged. Exact matching bytes from a
+retained selected candidate restored a separate copy; native context verification
+confirmed the original 195,999-entry digest. The incomplete original and failed
+staging records remained in place.
+
+Verify a proposed recovery with project-context-verify before staging it. Restore
+only bytes matching the recorded hashes and keep the original addressed metadata;
+changed inputs require a new capture and digest. Snapshot blobs deliberately use
+private storage modes. Original modes and links are reconstructed during staging,
+so storage-mode differences alone are not corruption. Exact recovery depends on
+retained matching data; these commands neither synthesize missing bytes nor
+guarantee backups or crash durability.
