@@ -647,3 +647,12 @@ Execution of this refinement is pending; the459-test receipt predates it.
 Rust archive object architectures are not independently inspected by that header
 check. Artifact retention does not establish installation, HTTP deployment or
 production release authorization.
+
+The [retained Linux payload follow-up](../acceptance/project-adoption/g5-linux-tool-payload-2026-10-19/receipt.json)
+passed all four CI39301564209 jobs at2cf2eb9 (tested mergebf16fee, identical
+tracked tree). All459 upstream tests passed with the explicit Linux target.
+Independent bounded inspection verified the uploaded archive SHA-256, all ten
+payload members, and compiler/proc-macro ELF64/x86_64 headers. The retained
+payload is52,937,102 logical bytes (17,629,458 compressed bytes). Rust archive
+object architecture and Intel/application runtime acceptance remain separate.
+No library payload was installed or executed by this independent inspection.
