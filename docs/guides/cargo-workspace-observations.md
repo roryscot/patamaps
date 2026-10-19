@@ -96,3 +96,12 @@ Literal members remain the default. `bounded-directory-globs` allows a whole `*`
 Capture all required manifests and applicable nonsecret configuration/toolchain files. The supported Cargo config subset is matching `build.target` and `net.offline=true`; executable overrides and other unimplemented keys refuse. A selected toolchain file must name the exact selected rustc release. Private ambient config is not copied to make discovery succeed.
 
 These records bind selected inputs and observed tool/cache output. Cargo can consult source-file presence and cached dependency metadata beyond the selected manifests; this is not a hermetic build or complete source/executable dependency closure. Use [retained contexts](retained-contexts.md) and [retained builds](retained-project-builds.md) for explicit build inputs and execution. Configured-path-unavailable replay is separate from operating-system denial of all host source/tools. The [support matrix](project-support-matrix.md) records current acceptance limits. This guide was added after the frozen 2026-10-19 package qualification; that archive's inventory remains authoritative for its contents.
+
+For the separate existing-project Linux compilation gate, CI runs
+[scripts/qualify_axum_linux.py](../../scripts/qualify_axum_linux.py) on the pinned
+public Axum workspace. It explicitly fetches that source and locked registry
+dependencies before offline metadata/build/test commands; this network
+preparation is outside the native observation provider. A passing receipt must
+include compilation of every observed workspace member and unchanged tracked
+source, not merely successful metadata. The gate is pending execution when
+introduced. It does not qualify a deployed server or hermetic dependencies.

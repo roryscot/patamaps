@@ -92,11 +92,20 @@ jobs:
         run: python3 -B scripts/ci_cross_stack.py --phase development
       - name: Verify explicit MetaMap conversion and paired source decisions
         run: python3 -B scripts/ci_cross_stack.py --phase compatibility
+      - name: Qualify pinned actual Axum workspace on Linux
+        run: >-
+          python3 -B scripts/qualify_axum_linux.py
+          --cli target/release/patamaps
+          --work "${RUNNER_TEMP}/patamaps-actual-axum-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
+          --evidence ci-evidence/existing-axum-linux
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         if: always()
         with:
           name: cross-stack-diagnostics-source-${{ github.sha }}
           path: |
+            ci-evidence/existing-axum-linux/receipt.json
+            ci-evidence/existing-axum-linux/*.log
+            ci-evidence/existing-axum-linux/request.json
             ci-evidence/cross-stack-*/receipt.json
             ci-evidence/transport-lock/Cargo.lock
             ci-evidence/cross-stack-discovery/m1-unit-and-process-tests.*.log

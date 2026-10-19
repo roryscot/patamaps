@@ -613,3 +613,18 @@ infer business viability or operational admission. Artifact bytes are published
 for inspection. Metadata/replay is not target compilation, runtime or hermetic
 source/dependency closure. Existing-project Linux deployment, framework/runtime
 boundaries, managed application tests and practical watch/performance remain open.
+
+## Pinned actual Rust Linux compilation gate (2026-10-19; pending execution)
+
+The existing cross-stack source CI lane now additionally invokes
+scripts/qualify_axum_linux.py against the actual MIT-licensed tokio-rs/axum
+workspace at fc78d5bcdb276bd6fb53cf2db55e91757eabb469. This is a separate
+qualification driver: the native metadata provider remains offline and never
+claims compilation. The driver records full tracked-source inventories, exact
+tool digests and host triple, prepares locked Linux registry dependencies, then
+observes resolved metadata with axum/ws, builds all four observed workspace
+libraries offline and runs their existing library tests offline. Artifact
+digests, command outcomes and source stability are retained even on failure.
+The new gate is unrun at this checkpoint; syntax checks are not acceptance.
+It does not establish application HTTP deployment, a Linux Next build, complete
+dependency hermeticity, image/browser acceptance or a release decision.
