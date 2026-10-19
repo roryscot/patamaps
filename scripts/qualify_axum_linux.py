@@ -28,6 +28,38 @@ def elf_x86_64_header(header):
             and int.from_bytes(header[18:20], "little") == 62)
 
 
+def inspect_rlib(path, ar):
+    """Inspect every regular Rust archive object header; never extract or execute it."""
+    path = Path(path)
+    assert path.stat().st_size <= 256 * 1024 * 1024, "Archive inspection byte bound"
+    with path.open("rb") as source:
+        assert source.read(8) == b"!<arch>\n", "Thin or unsupported archive refused"
+    listing = subprocess.check_output([str(ar), "t", str(path)], timeout=30)
+    assert len(listing) <= 1024 * 1024, "Archive listing byte bound"
+    names = listing.decode("ascii").splitlines()
+    assert 1 <= len(names) <= 4096 and len(names) == len(set(names)), "Ambiguous archive membership"
+    assert names.count("lib.rmeta") == 1, "Expected exactly one Rust metadata member"
+    objects = []
+    for name in names:
+        assert name and len(name) <= 1024 and name[0].isalnum()
+        assert all(c.isalnum() or c in "._-" for c in name), "Unsupported archive member name"
+        assert name == "lib.rmeta" or name.endswith(".o"), "Unexpected non-object archive member"
+        data = subprocess.check_output([str(ar), "p", str(path), name], timeout=30)
+        assert len(data) <= 64 * 1024 * 1024, "Archive member byte bound"
+        if name == "lib.rmeta":
+            assert data, "Empty Rust metadata"
+            continue
+        header = data[:64]
+        assert elf_x86_64_header(header), "Wrong archive object architecture: " + name
+        assert int.from_bytes(header[16:18], "little") == 1, "Archive member is not relocatable"
+        objects.append({"member": name, "bytes": len(data),
+                        "digest": "sha256:" + hashlib.sha256(data).hexdigest()})
+    assert objects, "No compiled object members"
+    return {"objects": objects, "metadataMembers": 1, "format": "ELF64",
+            "byteOrder": "little", "machine": 62, "elfType": 1,
+            "scope": "All .o member headers and byte digests, not full ELF/link/dependency validity"}
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--cli", type=Path, required=True)
@@ -166,10 +198,80 @@ def main():
             "file": shared[0]["file"], "format": "ELF64", "byteOrder": "little",
             "machine": 62, "wrongArchitectureHeaderRefused": True,
             "truncatedHeaderRefused": True,
-            "scope": "Actual proc-macro shared-library header; Rust archive objects not independently inspected"
+            "scope": "Actual proc-macro shared-library header; Rust archive member inspection recorded separately"
         }
         receipt["controls"].extend(["actual-shared-library-ELF64-x86_64-header",
                                     "tampered-architecture-header-refusal", "truncated-ELF-header-refusal"])
+        ar = Path(shutil.which("ar")).resolve(strict=True)
+        ar_digest = digest(ar)
+        ar_version = run("archive-inspector-version", [ar, "--version"]).decode()
+        assert "GNU ar" in ar_version, "Qualification expects the recorded GNU archive inspector"
+        archive_observations = []
+        for item in artifacts:
+            if item["file"].endswith(".rlib"):
+                archive_path = work / item["file"]
+                assert digest(archive_path) == item["digest"]
+                inspected = inspect_rlib(archive_path, ar)
+                assert digest(archive_path) == item["digest"], "Archive changed during inspection"
+                archive_observations.append({"file": item["file"], **inspected})
+        assert archive_observations, "No actual Rust archives inspected"
+        # Exercise the full archive inspector using corrupt copies of actual member bytes.
+        sample = work / archive_observations[0]["file"]
+        object_name = archive_observations[0]["objects"][0]["member"]
+        actual_object = subprocess.check_output([str(ar), "p", str(sample), object_name], timeout=30)
+        actual_metadata = subprocess.check_output([str(ar), "p", str(sample), "lib.rmeta"], timeout=30)
+        negative_controls = []
+        variants = [("wrong-architecture", "Wrong archive object architecture"),
+                    ("truncated-header", "Wrong archive object architecture"),
+                    ("non-relocatable", "Archive member is not relocatable"),
+                    ("duplicate-member", "Ambiguous archive membership"),
+                    ("missing-metadata", "Expected exactly one Rust metadata member")]
+        for label, expected_error in variants:
+            folder = evidence / ("archive-refusal-" + label)
+            folder.mkdir()
+            data = bytearray(actual_object)
+            if label == "wrong-architecture":
+                data[18:20] = (183).to_bytes(2, "little")
+            elif label == "truncated-header":
+                data = data[:19]
+            elif label == "non-relocatable":
+                data[16:18] = (3).to_bytes(2, "little")
+            object_file = folder / "control.o"
+            object_file.write_bytes(data)
+            metadata_file = folder / "lib.rmeta"
+            metadata_file.write_bytes(actual_metadata)
+            archive = folder / "control.rlib"
+            files = [object_file] if label == "missing-metadata" else [metadata_file, object_file]
+            subprocess.run([str(ar), "qc", str(archive), *map(str, files)], check=True, timeout=30)
+            if label == "duplicate-member":
+                subprocess.run([str(ar), "q", str(archive), str(object_file)], check=True, timeout=30)
+            try:
+                inspect_rlib(archive, ar)
+            except AssertionError as error:
+                assert expected_error in str(error), (label, str(error))
+            else:
+                raise AssertionError("Corrupt archive accepted: " + label)
+            negative_controls.append({"case": label, "archiveDigest": digest(archive),
+                                      "expectedRefusal": expected_error})
+        thin = evidence / "refused-thin.rlib"
+        thin.write_bytes(b"!<thin>\n")
+        try:
+            inspect_rlib(thin, ar)
+        except AssertionError as error:
+            assert "Thin or unsupported archive refused" in str(error)
+        else:
+            raise AssertionError("Thin archive accepted")
+        negative_controls.append({"case": "thin-archive", "archiveDigest": digest(thin)})
+        assert all(digest(work / item["file"]) == item["digest"] for item in artifacts)
+        assert digest(ar) == ar_digest
+        receipt["rustArchiveArchitecture"] = {
+            "inspectorDigest": ar_digest, "inspectorVersion": ar_version,
+            "archives": archive_observations, "archiveCount": len(archive_observations),
+            "negativeControls": negative_controls,
+            "objectCount": sum(len(x["objects"]) for x in archive_observations),
+            "fullElfValidation": False, "dependencyClosureEstablished": False}
+        receipt["controls"].extend(["all-actual-rlib-object-ELF64-x86_64-relocatable-headers",
+                                    "actual-member-corrupt-archive-refusals-six-cases"])
         receipt["controls"].append("all-four-actual-workspace-libraries-compiled-on-linux")
         run("test-actual-workspace", [cargo, "test", "--workspace", "--lib", "--locked", "--offline",
                                      "--features", "axum/ws", "--target", "x86_64-unknown-linux-gnu"], cwd=owner)
