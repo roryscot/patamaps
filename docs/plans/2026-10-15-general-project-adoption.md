@@ -557,3 +557,21 @@ the recorded source revision plus packager working change. Fresh installed
 application qualification for this exact package remains required; the older
 installed-owner pass does not automatically transfer. Binary rebuild
 reproducibility and whole-project deployment/performance acceptance remain open.
+
+## Independent actual Cargo declared-workspace checkpoint (2026-10-19)
+
+[Actual Axum partial evidence](../acceptance/project-adoption/g3-actual-axum-declared-2026-10-19/receipt.json)
+binds exact upstreamfc78d5bcdb276bd6fb53cf2db55e91757eabb469, six unchanged
+manifest/lock inputs, four real packages and six declared targets. The isolated
+copy passed explicit expansion, legacy-mode/missing-member/missing-lock/wrong-tool
+refusals, Clippy and CLI compilation. Darwin/Linux declared-local requests yielded
+identical metadata; neither target compilation nor platform-filter behavior is
+proved. Resolved default/disabled/axum-ws views were unavailable offline; the
+overall run exited1 and remains incomplete. Direct Cargo diagnosis and conditional
+locked dependency preparation are queued, followed by unchanged native controls.
+
+The enclosing-workspace ambient-config refusal is preserved. It was addressed
+by relocating only the retained copy outside Patamaps' toolchain ancestry, under
+the same supervisor's monitored temporary prefix. The provider was not relaxed.
+Fresh installed qualification for the current exact package has passed inventory,
+context stage and capture; its actual build/replay/no-op phase remains queued.
