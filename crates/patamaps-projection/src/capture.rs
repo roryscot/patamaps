@@ -94,7 +94,10 @@ pub fn executor_id() -> &'static str {
     ID.get_or_init(|| {
         canonical_digest(&std::collections::BTreeMap::from([
             ("profile", PROFILE),
-            ("legacyProjection", patamaps_core::source_identity::LEGACY_PROJECTION),
+            (
+                "legacyProjection",
+                patamaps_core::source_identity::LEGACY_PROJECTION,
+            ),
             (
                 "contractsPackageInputs",
                 patamaps_contracts::source_identity::PACKAGE_INPUTS_DIGEST,
@@ -121,8 +124,11 @@ pub fn executor_id() -> &'static str {
                 "toolchain",
                 include_str!("../package-inputs/rust-toolchain.toml"),
             ),
-            ("lock", include_str!("../package-inputs/Cargo.lock")),
-            ("workspace", include_str!("../package-inputs/Cargo.toml")),
+            ("lock", include_str!("../package-inputs/workspace.lock")),
+            (
+                "workspace",
+                include_str!("../package-inputs/workspace-manifest.toml"),
+            ),
             (
                 "contractsManifest",
                 patamaps_contracts::source_identity::CONTRACTS_MANIFEST,

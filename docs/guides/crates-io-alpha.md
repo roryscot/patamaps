@@ -62,3 +62,10 @@ Current existing-project qualification remains partial. Protected activation is
 a separately qualified Linux-only profile; crate installation does not configure
 trust or activate a consumer. Windows and performance claims require separate
 evidence. The alpha's exact tested platform and limitations belong in its receipt.
+
+Workspace metadata snapshots use workspace-manifest.toml and workspace.lock.
+Cargo excludes any nested directory containing a file named Cargo.toml, even
+when include patterns select it; these names keep the bundled inputs eligible.
+See https://doc.rust-lang.org/cargo/reference/manifest.html#the-exclude-and-include-fields.
+
+Before freezing publication inputs, prepare the standalone fork dependency closure with cargo fetch --manifest-path vendor/icu_collator/Cargo.toml through the existing Intel supervisor. Optional upstream dependencies may require a public registry download; root native checks remain locked and offline.

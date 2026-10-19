@@ -172,6 +172,9 @@ class Gate:
                         'filesDeleted': 0, 'startedAt': time.time(),
                         'driverDigest': digest(Path(__file__))}
         self.check_source()
+        self.receipt['cargoVersion'] = subprocess.check_output(['cargo', '--version'], env=self.environment, text=True).strip()
+        self.receipt['rustcVersionVerbose'] = subprocess.check_output(['rustc', '-vV'], env=self.environment, text=True)
+        self.receipt['pythonVersion'] = sys.version
 
     def check_source(self):
         observed = subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=self.source, text=True).strip()
@@ -225,6 +228,7 @@ class Gate:
     def seed(self):
         self.registry.mkdir(exist_ok=False)
         (self.registry / 'index').mkdir()
+        save(self.registry / 'index/config.json', {'dl': self.registry.as_uri() + '/{crate}-{version}.crate'})
         locked = {}
         for lock in [self.source / 'Cargo.lock', self.source / 'vendor/icu_collator/Cargo.lock']:
             for package in tomllib.loads(lock.read_text())['package']:
@@ -426,7 +430,16 @@ print("development source reads denied")
                          '2026-10-19T12:00:00Z', '--relation-pack', 'routing.json', '--generation', 'generation.json',
                          '--binding-slot', 'handler', '--format', 'rust', '-o', 'bindings.rs'], **common)
             self.command(label + '-rustc', [rustc, '--edition=2024', 'main.rs', '-o', 'generated-consumer'], **common)
-            runtime_profile = self.profile(label + '-runtime.sb', extra=[cli, Path(rustc)])
+            tools = [cli.resolve(), Path(rustc).resolve()]
+            runtime_profile = self.profile(label + '-runtime.sb', extra=tools)
+            calibration = 'from pathlib import Path\nfor name in ' + repr(list(map(str, tools))) + ''':
+ try: Path(name).read_bytes()
+ except PermissionError: continue
+ raise AssertionError("selected compiler was readable")
+print("selected graph and Rust compiler reads denied")
+'''
+            self.command(label + '-compiler-denial', [Path(sys.executable).resolve(), '-c', calibration],
+                         cwd=work, sandbox=runtime_profile, minimal_path=True)
             text = self.command(label + '-runtime', [work / 'generated-consumer'], cwd=work, sandbox=runtime_profile, minimal_path=True)
             assert text.strip() == 'Hello, Ada!'
             artifacts.append(digest(work / 'bindings.rs'))

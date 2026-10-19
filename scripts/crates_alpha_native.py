@@ -106,7 +106,6 @@ def main():
         ('template-format', ['rustfmt', '--edition', '2024', 'scripts/crate_package_build.rs']),
         ('fork-format', ['rustfmt', '--edition', '2021', 'vendor/icu_collator/build.rs']),
         ('lock', ['cargo', 'generate-lockfile', '--offline']),
-        ('fork-lock', ['cargo', 'generate-lockfile', '--manifest-path', 'vendor/icu_collator/Cargo.toml', '--offline']),
         ('source-format', ['cargo', 'fmt', '--all']),
         ('sync', [sys.executable, 'scripts/sync_crate_inputs.py']),
         ('inputs', [sys.executable, 'scripts/sync_crate_inputs.py', '--check']),
