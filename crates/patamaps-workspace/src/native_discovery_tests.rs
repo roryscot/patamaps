@@ -689,6 +689,8 @@ fn segment_mode_suffix_capture_exclusions_and_matching_file_refusals() {
     fs::write(root.join("db-service/Cargo.toml"), [0xff, 0xfe]).unwrap();
     let inputs = Inputs::from([("api-service/Cargo.toml", "a")]);
     let excluded = BTreeSet::from(["db-service".to_owned()]);
+    let empty_inputs = Inputs::new();
+    let empty_exclusions = BTreeSet::new();
     let expand = |pattern, selected, excluded| {
         expand_member_filtered_mode(
             &root,
@@ -707,23 +709,25 @@ fn segment_mode_suffix_capture_exclusions_and_matching_file_refusals() {
         )
     );
     assert_eq!(
-        expand("a*ce", &inputs, &BTreeSet::new()).unwrap().0,
+        expand("a*ce", &inputs, &empty_exclusions).unwrap().0,
         vec!["api-service/Cargo.toml".to_owned()]
     );
     assert_eq!(
-        expand("api*-service", &inputs, &BTreeSet::new()).unwrap().0,
+        expand("api*-service", &inputs, &empty_exclusions)
+            .unwrap()
+            .0,
         vec!["api-service/Cargo.toml".to_owned()]
     );
-    assert!(expand("api-service*service", &inputs, &BTreeSet::new()).is_err());
+    assert!(expand("api-service*service", &inputs, &empty_exclusions).is_err());
     assert!(matches!(
-        expand("*-service", &Inputs::new(), &excluded),
+        expand("*-service", &empty_inputs, &excluded),
         Err(Error::Refused {
             code: "NATIVE_CARGO_MANIFEST_INPUT",
             ..
         })
     ));
     assert!(matches!(
-        expand("a*ce", &Inputs::new(), &BTreeSet::new()),
+        expand("a*ce", &empty_inputs, &empty_exclusions),
         Err(Error::Refused {
             code: "NATIVE_CARGO_MANIFEST_INPUT",
             ..
