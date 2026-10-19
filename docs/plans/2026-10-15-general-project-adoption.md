@@ -596,3 +596,20 @@ explicitaxum/ws addsws. No-default retains the same workspace feature set, so no
 minimal-feature build is claimed. ResolvedLinux, actual mutation and baseline
 replay controls remain open, as do compilation/runtime gates. Previous failed
 and partial receipts stay historical.
+
+## Actual Cargo Linux metadata, mutation and baseline replay (2026-10-19)
+
+[Actual Axum follow-up](../acceptance/project-adoption/g3-actual-axum-replay-2026-10-19/receipt.json)
+passed with installednativec202611f: resolvedLinux metadata, captured-manifest
+mutation refusal, post-metadata member race refusal, a checked four-package JSON
+inventory, baseline replay with configured provider/Cargo/rustc/source paths
+unavailable and externalPATH empty, and rehashed-adapter-lineage refusal.
+All moves restored; selected originalmanifest/lock hashes and Gitstatus unchanged.
+
+The failed first profile omitted a required projection and remains failed. The
+corrected profile selects only actualCargo package entities with zero relation
+slots and empty business policy; it adds no unrelated fixture shard and does not
+infer business viability or operational admission. Artifact bytes are published
+for inspection. Metadata/replay is not target compilation, runtime or hermetic
+source/dependency closure. Existing-project Linux deployment, framework/runtime
+boundaries, managed application tests and practical watch/performance remain open.

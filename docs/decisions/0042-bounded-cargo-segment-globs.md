@@ -1,7 +1,7 @@
 # Decision 0042: opt-in Cargo segment globs
 
-Status: controlled unit/CLI qualification passed; independent upstream qualification
-pending. See the [provider receipt](../acceptance/project-adoption/g3-cargo-segment-cli-2026-10-19/receipt.json)
+Status: controlled and actual pinned Axum metadata/mutation/replay qualification
+passed; target compilation/runtime and whole-project adoption remain separate. See the [provider receipt](../acceptance/project-adoption/g3-cargo-segment-cli-2026-10-19/receipt.json)
 and [focused Intel tests](../acceptance/project-adoption/g3-cargo-segment-unit-2026-10-19/receipt.json).
 This extends the general project-adoption plan, not its acceptance scope.
 
@@ -29,7 +29,10 @@ existing bounded-directory-globs behavior remain unchanged.
 Verification must preserve all old controls and cover real-shaped prefix
 expansion, suffix/combined matching, exclusions, missing capture, matching files
 and symlinks, unsupported grammar, nonmatching-entry enumeration bounds, full CLI
-receipts and post-metadata mutation refusal. The upstream Axum workspace remains
-unqualified until its exact pinned bytes, tools, configuration, feature/platform
-selection and actual Cargo metadata are captured and compared. No build-script
+receipts and post-metadata mutation refusal. Upstream metadata qualification requires its exact pinned bytes, tools,
+configuration, feature/platform selection and actual Cargo metadata to be captured
+and compared. Those scoped checks are recorded below; target builds/runtime are
+not inferred from them. No build-script
 execution or domain correspondence inference is added.
+
+Actual upstream evidence: [resolved metadata](../acceptance/project-adoption/g3-actual-axum-resolved-2026-10-19/receipt.json) and [Linux metadata/mutation/replay](../acceptance/project-adoption/g3-actual-axum-replay-2026-10-19/receipt.json). These bind selected manifest/lock inputs and observed tool/cache output; they do not establish a hermetic build or arbitrary source/dependency closure.
