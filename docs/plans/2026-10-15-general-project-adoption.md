@@ -575,3 +575,24 @@ by relocating only the retained copy outside Patamaps' toolchain ancestry, under
 the same supervisor's monitored temporary prefix. The provider was not relaxed.
 Fresh installed qualification for the current exact package has passed inventory,
 context stage and capture; its actual build/replay/no-op phase remains queued.
+
+## Current installed owner and resolved Cargo checkpoints (2026-10-19)
+
+The [fresh current installed-owner receipt](../acceptance/project-adoption/g5-installed-current-owner-2026-10-19/receipt.json)
+passed with nativec202611f: all14338 installedsource members verified; all447
+packaged program inputs4216053bytes match the current checkout. Build475.080s,
+selected offline replay50.512s, no-op34.602s. Actual owner generation/Next/TSC/
+manifest witness, compiled marker, native compile/projection trace, unavailable
+configured source/snapshot/provider replay and pointer/trace preservation passed.
+The frozen archive predates later qualification docs, not the checked program
+inputs. Linux/runtime isolation/authenticated browser and practical performance
+remain required.
+
+The [real Axum resolved receipt](../acceptance/project-adoption/g3-actual-axum-resolved-2026-10-19/receipt.json)
+passed allnine scoped native controls after direct Cargo confirmed offlinecache
+absence and lockedregistryfetch restored offline resolution. All source inputs/
+lock/status unchanged. Native feature sets independently match raw Cargo nodes;
+explicitaxum/ws addsws. No-default retains the same workspace feature set, so no
+minimal-feature build is claimed. ResolvedLinux, actual mutation and baseline
+replay controls remain open, as do compilation/runtime gates. Previous failed
+and partial receipts stay historical.
