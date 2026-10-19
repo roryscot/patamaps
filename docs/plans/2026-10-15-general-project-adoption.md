@@ -457,3 +457,13 @@ owned service wrappers/listeners stopped. Owner generation took227.881s, build
 performance measurements. This closes the prepared TCP/proxy control set only.
 Browser, managed application paths, installed/deployment qualification, practical
 watch performance and remaining G2-G6 scope stay open; the goal is incomplete.
+
+## Installed source documentation checkpoint (2026-10-18)
+
+Source packaging now includes the five development guides that were previously
+omitted from exact source installations. The [archive receipt](../acceptance/project-adoption/g5-source-package-guides-2026-10-18/receipt.json)
+records two byte-identical source/native archive pairs, verified inventory
+identity and all five guide byte digests matching current source. The identified
+release driver matches current native engine identities; this is not evidence
+of independent binary reproducibility or a registry publication. Actual installed
+existing-project workflow, browser/deployment and remaining G2-G6 gates stay open.

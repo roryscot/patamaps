@@ -53,6 +53,9 @@ for directory in ["crates", "fixtures", "relation-packs", "schemas", "sdk", "ada
             source[relative.as_posix()] = path.read_bytes()
 for name in ["Cargo.toml", "Cargo.lock", "rust-toolchain.toml", "LICENSE", "NOTICE", "README.md", "BUILD_PLAN.md", "docs/SPEC.md", "docs/TEST_CLASSIFICATION.md"]:
     source[name] = (ROOT / name).read_bytes()
+# Ship the user-facing development workflow with exact source installations.
+for path in sorted((ROOT / "docs/guides").glob("*.md")):
+    source[path.relative_to(ROOT).as_posix()] = path.read_bytes()
 for path in (ROOT / "docs/decisions").glob("*.md"):
     source[path.relative_to(ROOT).as_posix()] = path.read_bytes()
 for path in (ROOT / "docs/licenses").rglob("*"):
