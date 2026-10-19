@@ -38,7 +38,7 @@ fn frozen_original_pack_outputs_match_without_relaxing_native_admission() {
         value: Box<serde_json::value::RawValue>,
         expected: Value,
     }
-    let corpus_bytes = include_bytes!("../../../fixtures/parity/pack-json-controls.json");
+    let corpus_bytes = include_bytes!("../package-inputs/fixtures/parity/pack-json-controls.json");
     assert_eq!(
         byte_digest(corpus_bytes),
         "sha256:d839dd6bda9994dae6f7289e4c67fbf31237a213af46165d0fc53d5f8c055e49"
@@ -108,7 +108,7 @@ fn frozen_original_nested_pack_outputs_match() {
         reference_engine: String,
         cases: Vec<Case>,
     }
-    let bytes = include_bytes!("../../../fixtures/parity/pack-nested-controls.json");
+    let bytes = include_bytes!("../package-inputs/fixtures/parity/pack-nested-controls.json");
     assert_eq!(
         byte_digest(bytes),
         "sha256:e2f9970280e92ddb31b37f2c180b977f1963a51bfa84c697297b3aabada92909"

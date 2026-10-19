@@ -1,0 +1,39 @@
+{
+  "schemaVersion": "0.1.0",
+  "documentType": "policy",
+  "id": "urn:example:policy",
+  "graph": {
+    "id": "urn:example:graph",
+    "revision": "1"
+  },
+  "mappings": [
+    {
+      "select": {
+        "relations": [
+          "example:r",
+          "example:s",
+          "example:t",
+          "example:exact",
+          "example:close",
+          "example:excluded"
+        ]
+      },
+      "coverage": "total",
+      "determinism": "deterministic",
+      "reversibility": "reversible"
+    }
+  ],
+  "constraints": [],
+  "evidence": [],
+  "semantics": {
+    "interpretation": "declared-law-application",
+    "derivations": [],
+    "derivationLimits": {
+      "maxDepth": 8,
+      "maxDerivations": 32
+    },
+    "assessments": [],
+    "uncertaintyRequirements": [],
+    "riskBudgets": []
+  }
+}

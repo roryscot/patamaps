@@ -4,7 +4,8 @@ use serde_json::{Value, json};
 
 #[test]
 fn independently_frozen_original_semantic_shape_bindings_and_parser_diagnostics() {
-    let bytes = include_bytes!("../../../fixtures/parity/semantic-validation-controls.json");
+    let bytes =
+        include_bytes!("../package-inputs/fixtures/parity/semantic-validation-controls.json");
     assert_eq!(
         byte_digest(bytes),
         "sha256:f8b33a4c6666d454220bddd015b488846ffd8b4347c860d4bfa8b6dfe7e452ee"

@@ -20,7 +20,7 @@ struct Case {
 }
 #[test]
 fn all_frozen_original_diff_and_report_outputs_match() {
-    let raw = include_bytes!("../../../fixtures/parity/reporting-controls.json");
+    let raw = include_bytes!("../package-inputs/fixtures/parity/reporting-controls.json");
     assert_eq!(
         byte_digest(raw),
         "sha256:6374b76bcd45d9e47dee7d4ae59547d4aaccb18a10a20736946c9b3578d97d0e"

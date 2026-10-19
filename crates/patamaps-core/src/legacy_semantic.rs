@@ -12,14 +12,14 @@ use std::collections::{HashMap, HashSet};
 use std::sync::OnceLock;
 
 pub(crate) const RESOURCES: [&str; 8] = [
-    include_str!("../../../fixtures/reference/schemas/metamap-graph.schema.json"),
-    include_str!("../../../fixtures/reference/schemas/metamap-viability.schema.json"),
-    include_str!("../../../fixtures/reference/schemas/metamap-generation.schema.json"),
-    include_str!("../../../fixtures/reference/schemas/relation-pack.schema.json"),
-    include_str!("../../../fixtures/reference/schemas/relation-pack-v2.schema.json"),
-    include_str!("../../../fixtures/reference/schemas/metamap-derivation.schema.json"),
-    include_str!("../../../fixtures/reference/schemas/metamap-viability-v2.schema.json"),
-    include_str!("../../../fixtures/reference/schemas/metamap-generation-v2.schema.json"),
+    include_str!("../package-inputs/fixtures/reference/schemas/metamap-graph.schema.json"),
+    include_str!("../package-inputs/fixtures/reference/schemas/metamap-viability.schema.json"),
+    include_str!("../package-inputs/fixtures/reference/schemas/metamap-generation.schema.json"),
+    include_str!("../package-inputs/fixtures/reference/schemas/relation-pack.schema.json"),
+    include_str!("../package-inputs/fixtures/reference/schemas/relation-pack-v2.schema.json"),
+    include_str!("../package-inputs/fixtures/reference/schemas/metamap-derivation.schema.json"),
+    include_str!("../package-inputs/fixtures/reference/schemas/metamap-viability-v2.schema.json"),
+    include_str!("../package-inputs/fixtures/reference/schemas/metamap-generation-v2.schema.json"),
 ];
 fn schema(kind: &str) -> &'static LegacyPortableSchema {
     static POLICY: OnceLock<LegacyPortableSchema> = OnceLock::new();

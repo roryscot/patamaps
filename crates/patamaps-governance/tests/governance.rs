@@ -92,7 +92,12 @@ fn candidate() -> GovernedCandidate {
         CaptureInputs {
             projection_specs: vec![],
             graph,
-            packs: vec![parse(include_bytes!("../../../relation-packs/routing.json")).unwrap()],
+            packs: vec![
+                parse(include_bytes!(
+                    "../package-inputs/relation-packs/routing.json"
+                ))
+                .unwrap(),
+            ],
             policy,
             context: JsonObject::new(),
             evaluated_at: "2026-10-09T12:00:00Z".into(),

@@ -2,7 +2,7 @@ use patamaps_contracts::{Lossiness, canonical_bytes};
 use patamaps_scientific::*;
 use std::collections::BTreeSet;
 const FIXTURE: &[u8] = include_bytes!(
-    "../../../fixtures/reference/examples/scientific-mapping/fixtures/mgi-subset.sssom.tsv"
+    "../package-inputs/fixtures/reference/examples/scientific-mapping/fixtures/mgi-subset.sssom.tsv"
 );
 fn options() -> ImportOptions {
     ImportOptions {

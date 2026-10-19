@@ -23,7 +23,7 @@ fn fixture() -> (GraphDocument, PolicyDocument) {
 fn evaluate(graph: GraphDocument, policy: PolicyDocument) -> Result<(), CheckError> {
     let checked = CheckedGraph::check(
         graph,
-        vec![parse(include_bytes!("../../../relation-packs/core.json")).unwrap()],
+        vec![parse(include_bytes!("../package-inputs/relation-packs/core.json")).unwrap()],
     )?;
     admit(
         &checked,
@@ -140,7 +140,7 @@ fn matching_query_returns_all_candidates_without_minting_admission() {
     g.entities.push(duplicate);
     let checked = CheckedGraph::check(
         g.clone(),
-        vec![parse(include_bytes!("../../../relation-packs/core.json")).unwrap()],
+        vec![parse(include_bytes!("../package-inputs/relation-packs/core.json")).unwrap()],
     )
     .unwrap();
     assert_eq!(

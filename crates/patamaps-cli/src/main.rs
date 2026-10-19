@@ -788,7 +788,7 @@ fn packs(paths: &[PathBuf]) -> Result<Vec<RelationPack>, Failure> {
         .iter()
         .map(|p| read::<RelationPack>(p))
         .collect::<Result<Vec<_>, _>>()?;
-    let core: RelationPack = parse(include_bytes!("../../../relation-packs/core.json"))?;
+    let core: RelationPack = parse(include_bytes!("../package-inputs/relation-packs/core.json"))?;
     if !packs.iter().any(|p| p.id == core.id) {
         packs.push(core);
     }

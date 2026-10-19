@@ -1,6 +1,9 @@
 //! Draft wire records carry no checked, admitted, or authorized status.
 #![forbid(unsafe_code)]
 
+#[doc(hidden)]
+pub mod source_identity;
+
 mod integer;
 mod json;
 mod json_scan;
@@ -19,7 +22,7 @@ pub use legacy_json::{LegacyPackJson, LegacyReadOnlyJson};
 #[doc(hidden)]
 pub use legacy_stable::LegacyOrderedJson;
 #[doc(hidden)]
-pub const LEGACY_COLLATOR_SOURCE_DIGEST: &str = env!("PATAMAPS_COLLATOR_SOURCE_DIGEST");
+pub const LEGACY_COLLATOR_SOURCE_DIGEST: &str = icu_collator::PATAMAPS_SOURCE_DIGEST;
 pub use model::*;
 pub use semantic::*;
 

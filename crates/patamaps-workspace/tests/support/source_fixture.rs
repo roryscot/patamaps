@@ -26,8 +26,10 @@ pub fn fixture() -> Fixture {
         SEQUENCE.fetch_add(1, Ordering::Relaxed)
     ));
     fs::create_dir(&root).unwrap();
-    let mut graph: GraphDocument =
-        parse(include_bytes!("../../../../fixtures/routing/graph.json")).unwrap();
+    let mut graph: GraphDocument = parse(include_bytes!(
+        "../../package-inputs/fixtures/routing/graph.json"
+    ))
+    .unwrap();
     graph
         .entities
         .iter_mut()
@@ -51,16 +53,18 @@ pub fn fixture() -> Fixture {
     fs::write(root.join("two.json"), canonical_bytes(&empty).unwrap()).unwrap();
     fs::write(
         root.join("pack.json"),
-        include_bytes!("../../../../relation-packs/routing.json"),
+        include_bytes!("../../package-inputs/relation-packs/routing.json"),
     )
     .unwrap();
     fs::write(
         root.join("projection.json"),
-        include_bytes!("../../../../fixtures/routing/projection-spec.json"),
+        include_bytes!("../../package-inputs/fixtures/routing/projection-spec.json"),
     )
     .unwrap();
-    let mut policy: PolicyDocument =
-        parse(include_bytes!("../../../../fixtures/routing/policy.json")).unwrap();
+    let mut policy: PolicyDocument = parse(include_bytes!(
+        "../../package-inputs/fixtures/routing/policy.json"
+    ))
+    .unwrap();
     policy.graph.id = "urn:source-evaluation:test".into();
     policy.graph.revision = Some("1".into());
     policy.graph.digest = None;

@@ -36,8 +36,10 @@ pub fn consumer_capture(revision: &str, module: &str) -> CaptureRecord {
             "delegatedFrom":"urn:authority:concept",
             "provenance":{"status":"declared", "assertedBy":"concept-owner"}}]
     }));
-    let routing: RelationPack =
-        parse(include_bytes!("../../../../relation-packs/routing.json")).unwrap();
+    let routing: RelationPack = parse(include_bytes!(
+        "../../package-inputs/relation-packs/routing.json"
+    ))
+    .unwrap();
     let law: RelationPack = typed(json!({
         "schemaVersion":"0.1.0", "documentType":"relation-pack", "id":"urn:pack:linux:lifecycle", "version":"1.0.0",
         "imports":[{"id":routing.id, "version":routing.version, "digest":canonical_digest(&routing).unwrap()}],

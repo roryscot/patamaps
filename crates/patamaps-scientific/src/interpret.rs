@@ -26,7 +26,7 @@ pub(crate) fn slots() -> &'static Slots {
     static SLOTS: OnceLock<Slots> = OnceLock::new();
     SLOTS.get_or_init(|| {
         serde_json::from_slice(include_bytes!(
-            "../../../fixtures/reference/schemas/sssom-1.0.0-slots.json"
+            "../package-inputs/fixtures/reference/schemas/sssom-1.0.0-slots.json"
         ))
         .expect("pinned slot index")
     })
@@ -34,7 +34,7 @@ pub(crate) fn slots() -> &'static Slots {
 fn validator() -> &'static jsonschema::Validator {
     static MODEL: OnceLock<jsonschema::Validator> = OnceLock::new();
     MODEL.get_or_init(|| {
-        let upstream: Value = serde_json::from_slice(include_bytes!("../../../fixtures/reference/schemas/sssom-1.0.0.schema.json")).expect("pinned schema");
+        let upstream: Value = serde_json::from_slice(include_bytes!("../package-inputs/fixtures/reference/schemas/sssom-1.0.0.schema.json")).expect("pinned schema");
         jsonschema::options().with_draft(jsonschema::Draft::Draft201909).should_validate_formats(true)
             .build(&json!({"$schema":"https://json-schema.org/draft/2019-09/schema","$defs":upstream["$defs"],"$ref":"#/$defs/MappingSet"})).expect("pinned offline MappingSet schema")
     })

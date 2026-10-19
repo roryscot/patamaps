@@ -40,8 +40,10 @@ fn setup() -> (Temp, AdapterRequest, AdapterResponse, Invocation) {
         request_digest: String::new(),
     };
     request.request_digest = canonical_digest(&request).unwrap();
-    let graph: GraphDocument =
-        parse(include_bytes!("../../../fixtures/routing/graph.json")).unwrap();
+    let graph: GraphDocument = parse(include_bytes!(
+        "../package-inputs/fixtures/routing/graph.json"
+    ))
+    .unwrap();
     let response = AdapterResponse {
         schema_version: ProtocolVersion::Draft1,
         document_type: ResponseType::Record,

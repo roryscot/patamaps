@@ -77,19 +77,19 @@ pub fn scientific_engine_id() -> &'static str {
     ID.get_or_init(|| canonical_digest(&json!({
         "profile": PROFILE, "compiler": patamaps_projection::executor_id(),
         "artifacts": patamaps_governance::governance_executor_id(),
-        "manifest": include_str!("../Cargo.toml"), "lib": include_str!("lib.rs"),
+        "packageInputs":env!("PATAMAPS_PACKAGE_INPUTS_DIGEST"),"packageBuild": include_str!("../build.rs"), "manifest": include_str!("../Cargo.toml"), "lib": include_str!("lib.rs"),
         "model": include_str!("model.rs"), "syntax": include_str!("syntax.rs"),
         "interpret": include_str!("interpret.rs"), "export": include_str!("export.rs"),
         "source": include_str!("source.rs"),
         "legacyConfig": include_str!("legacy_config.rs"),
-        "legacyConfigSchema": include_str!("../../../fixtures/reference/schemas/metamap-config.schema.json"),
-        "sourceSchema": include_str!("../../../fixtures/reference/schemas/metamap-sssom-source.schema.json"),
+        "legacyConfigSchema": include_str!("../package-inputs/fixtures/reference/schemas/metamap-config.schema.json"),
+        "sourceSchema": include_str!("../package-inputs/fixtures/reference/schemas/metamap-sssom-source.schema.json"),
         "graph": include_str!("graph.rs"), "crate": include_str!("crate_export.rs"),
-        "modelSource": include_str!("../../../fixtures/reference/standards/sssom-1.0.0/sssom_schema.yaml"),
-        "schema": include_str!("../../../fixtures/reference/schemas/sssom-1.0.0.schema.json"),
-        "slots": include_str!("../../../fixtures/reference/schemas/sssom-1.0.0-slots.json"),
-        "pack": include_str!("../../../relation-packs/scientific-skos.json"),
-        "context": include_str!("../../../fixtures/scientific/ro-crate-1.2-context.jsonld")
+        "modelSource": include_str!("../package-inputs/fixtures/reference/standards/sssom-1.0.0/sssom_schema.yaml"),
+        "schema": include_str!("../package-inputs/fixtures/reference/schemas/sssom-1.0.0.schema.json"),
+        "slots": include_str!("../package-inputs/fixtures/reference/schemas/sssom-1.0.0-slots.json"),
+        "pack": include_str!("../package-inputs/relation-packs/scientific-skos.json"),
+        "context": include_str!("../package-inputs/fixtures/scientific/ro-crate-1.2-context.jsonld")
     })).expect("finite embedded sources"))
 }
 fn text(s: &str) -> bool {
@@ -348,7 +348,7 @@ pub fn create_crate(c: &CaptureRecord, o: &CrateOptions) -> Result<CheckedScient
     files.insert("export-loss.json".into(), json_text(&exported.loss)?);
     files.insert(
         "ro-crate-context.jsonld".into(),
-        include_str!("../../../fixtures/scientific/ro-crate-1.2-context.jsonld").into(),
+        include_str!("../package-inputs/fixtures/scientific/ro-crate-1.2-context.jsonld").into(),
     );
     let mut source_parts = Vec::new();
     let mut absent = Vec::new();

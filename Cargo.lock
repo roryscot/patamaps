@@ -200,7 +200,7 @@ dependencies = [
  "heck",
  "proc-macro2",
  "quote",
- "syn 3.0.7",
+ "syn 3.0.9",
 ]
 
 [[package]]
@@ -307,7 +307,7 @@ checksum = "c6232dd377dcc64799954cbd3a9bb882e9cdc1308ccd87b1c098f1fb2eaf82a8"
 dependencies = [
  "proc-macro2",
  "quote",
- "syn 3.0.7",
+ "syn 3.0.9",
 ]
 
 [[package]]
@@ -345,9 +345,9 @@ dependencies = [
 
 [[package]]
 name = "equivalent"
-version = "1.0.2"
+version = "1.0.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "877a4ace8713b0bcf2a4e7eec82529c029f1d0619886d18145fea96c3ffe5c0f"
+checksum = "00d174d5400e5e8fd687ad1049e2f578285fa914201b1af7e8b112a4546bd826"
 
 [[package]]
 name = "errno"
@@ -469,23 +469,6 @@ name = "heck"
 version = "0.5.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "2304e00983f87ffb38b55b444b5e3b60a884b5d30c0fca7d82fe33449bbe55ea"
-
-[[package]]
-name = "icu_collator"
-version = "2.2.1"
-dependencies = [
- "icu_collator_data",
- "icu_collections",
- "icu_locale",
- "icu_locale_core",
- "icu_normalizer",
- "icu_properties",
- "icu_provider",
- "smallvec",
- "utf16_iter",
- "utf8_iter",
- "zerovec",
-]
 
 [[package]]
 name = "icu_collator_data"
@@ -853,7 +836,7 @@ dependencies = [
 
 [[package]]
 name = "patamaps-activator"
-version = "0.1.0"
+version = "0.1.0-alpha.1"
 dependencies = [
  "base64",
  "ed25519-dalek",
@@ -864,13 +847,14 @@ dependencies = [
  "rustix",
  "serde",
  "serde_json",
+ "sha2",
  "thiserror",
  "time",
 ]
 
 [[package]]
 name = "patamaps-cli"
-version = "0.1.0"
+version = "0.1.0-alpha.1"
 dependencies = [
  "base64",
  "clap",
@@ -884,13 +868,14 @@ dependencies = [
  "rustix",
  "serde",
  "serde_json",
+ "sha2",
 ]
 
 [[package]]
 name = "patamaps-contracts"
-version = "0.1.0"
+version = "0.1.0-alpha.1"
 dependencies = [
- "icu_collator",
+ "patamaps-icu-collator",
  "serde",
  "serde_json",
  "serde_json_canonicalizer",
@@ -900,20 +885,21 @@ dependencies = [
 
 [[package]]
 name = "patamaps-core"
-version = "0.1.0"
+version = "0.1.0-alpha.1"
 dependencies = [
- "icu_collator",
  "jsonschema",
  "patamaps-contracts",
+ "patamaps-icu-collator",
  "serde",
  "serde_json",
+ "sha2",
  "thiserror",
  "time",
 ]
 
 [[package]]
 name = "patamaps-governance"
-version = "0.1.0"
+version = "0.1.0-alpha.1"
 dependencies = [
  "base64",
  "ed25519-dalek",
@@ -922,12 +908,31 @@ dependencies = [
  "patamaps-projection",
  "serde",
  "serde_json",
+ "sha2",
  "time",
 ]
 
 [[package]]
+name = "patamaps-icu-collator"
+version = "2.2.1-patamaps.1"
+dependencies = [
+ "icu_collator_data",
+ "icu_collections",
+ "icu_locale",
+ "icu_locale_core",
+ "icu_normalizer",
+ "icu_properties",
+ "icu_provider",
+ "sha2",
+ "smallvec",
+ "utf16_iter",
+ "utf8_iter",
+ "zerovec",
+]
+
+[[package]]
 name = "patamaps-inspect"
-version = "0.1.0"
+version = "0.1.0-alpha.1"
 dependencies = [
  "base64",
  "ed25519-dalek",
@@ -938,22 +943,24 @@ dependencies = [
  "patamaps-workspace",
  "serde",
  "serde_json",
+ "sha2",
 ]
 
 [[package]]
 name = "patamaps-projection"
-version = "0.1.0"
+version = "0.1.0-alpha.1"
 dependencies = [
  "patamaps-contracts",
  "patamaps-core",
  "serde",
  "serde_json",
+ "sha2",
  "thiserror",
 ]
 
 [[package]]
 name = "patamaps-scientific"
-version = "0.1.0"
+version = "0.1.0-alpha.1"
 dependencies = [
  "fluent-uri",
  "jsonschema",
@@ -963,6 +970,7 @@ dependencies = [
  "patamaps-projection",
  "serde",
  "serde_json",
+ "sha2",
  "thiserror",
  "time",
  "yaml-rust2",
@@ -970,7 +978,7 @@ dependencies = [
 
 [[package]]
 name = "patamaps-workspace"
-version = "0.1.0"
+version = "0.1.0-alpha.1"
 dependencies = [
  "patamaps-contracts",
  "patamaps-core",
@@ -1077,7 +1085,7 @@ checksum = "92ecd8964f8453721699a1ed72037b0db49ce2f5a5138486ee89bed6f67cdf3a"
 dependencies = [
  "proc-macro2",
  "quote",
- "syn 3.0.7",
+ "syn 3.0.9",
 ]
 
 [[package]]
@@ -1199,7 +1207,7 @@ checksum = "e7a5d71263a5a7d47b41f6b3f06ba276f10cc18b0931f1799f710578e2309348"
 dependencies = [
  "proc-macro2",
  "quote",
- "syn 3.0.7",
+ "syn 3.0.9",
 ]
 
 [[package]]
@@ -1327,9 +1335,9 @@ dependencies = [
 
 [[package]]
 name = "syn"
-version = "3.0.7"
+version = "3.0.9"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "d62a2e0561533f2ca2561d0cf27fd9fedb640a1bf2616ff5d5c80d99017faadc"
+checksum = "d78c8dee4c7bf0e14673097256fed6142ce9d3b85a408189d07482442145823b"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -1344,7 +1352,7 @@ checksum = "901704edd0dfe137f1987838ee4f259e4e063c31371bdb423f7ae38ec6f77f02"
 dependencies = [
  "proc-macro2",
  "quote",
- "syn 3.0.7",
+ "syn 3.0.9",
 ]
 
 [[package]]
@@ -1364,7 +1372,7 @@ checksum = "fe5197923287db20a58125f0bc85c062f7f2c892de97b18c356f9efb14b28524"
 dependencies = [
  "proc-macro2",
  "quote",
- "syn 3.0.7",
+ "syn 3.0.9",
 ]
 
 [[package]]
@@ -1482,9 +1490,9 @@ checksum = "0b993bddc193ae5bd0d623b49ec06ac3e9312875fdae725a975c51db1cc1677f"
 
 [[package]]
 name = "unicode-ident"
-version = "1.0.26"
+version = "1.0.27"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "d245f478577f809a851594d02313b640fb437e0bb33866753cff937863096954"
+checksum = "a2c754d6c33795a1c324727428e5a7dedb5b06195f9890bdbcba760d3e246563"
 
 [[package]]
 name = "utf16_iter"
@@ -1573,7 +1581,7 @@ dependencies = [
  "bumpalo",
  "proc-macro2",
  "quote",
- "syn 3.0.7",
+ "syn 3.0.9",
  "wasm-bindgen-shared",
 ]
 
@@ -1663,7 +1671,7 @@ checksum = "ec8ebde2db3681e8c9980cc27822030e68752690ddfa9473e739aeb4dbde6d71"
 dependencies = [
  "proc-macro2",
  "quote",
- "syn 3.0.7",
+ "syn 3.0.9",
  "synstructure",
 ]
 
@@ -1704,7 +1712,7 @@ checksum = "f75b4683f6c7f45248d4d64056a24298c6281e0993356d7d1b4a1a962ef10d4a"
 dependencies = [
  "proc-macro2",
  "quote",
- "syn 3.0.7",
+ "syn 3.0.9",
  "synstructure",
 ]
 
@@ -1746,7 +1754,7 @@ checksum = "34df6fc39dbd26ddc9c10e6a2984476e13acce22e64e4487636ef494369225da"
 dependencies = [
  "proc-macro2",
  "quote",
- "syn 3.0.7",
+ "syn 3.0.9",
 ]
 
 [[package]]

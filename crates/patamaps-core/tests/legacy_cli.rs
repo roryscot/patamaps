@@ -25,7 +25,7 @@ fn frozen_catalog_values_and_uri_errors_match_original() {
         reference_engine: String,
         cases: Vec<Case>,
     }
-    let bytes = include_bytes!("../../../fixtures/parity/migration-controls.json");
+    let bytes = include_bytes!("../package-inputs/fixtures/parity/migration-controls.json");
     assert_eq!(
         byte_digest(bytes),
         "sha256:84488b2e1c3f03a296051579067c43d50daa04f6e385062e342ce050cbb0fa51"
@@ -93,7 +93,7 @@ fn frozen_cli_usage_and_argument_errors_match_original_streams() {
     struct Corpus {
         cases: Vec<Case>,
     }
-    let bytes = include_bytes!("../../../fixtures/parity/cli-controls.json");
+    let bytes = include_bytes!("../package-inputs/fixtures/parity/cli-controls.json");
     assert_eq!(
         byte_digest(bytes),
         "sha256:0296a5ea1a9dbd91b97a13f4dfea0dffa51d911882fcbc5131e8b1f494438f5a"

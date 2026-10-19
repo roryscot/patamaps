@@ -1,0 +1,58 @@
+[workspace]
+exclude = ["vendor/icu_collator"]
+resolver = "3"
+members = [
+    "crates/patamaps-contracts",
+    "crates/patamaps-core",
+    "crates/patamaps-projection",
+    "crates/patamaps-cli",
+    "crates/patamaps-governance",
+    "crates/patamaps-activator",
+    "crates/patamaps-inspect",
+    "crates/patamaps-workspace",
+    "crates/patamaps-scientific",
+]
+
+[workspace.package]
+version = "0.1.0-alpha.1"
+edition = "2024"
+rust-version = "1.99"
+license = "Apache-2.0"
+repository = "https://github.com/roryscot/patamaps"
+
+[workspace.dependencies]
+patamaps-contracts = { path = "crates/patamaps-contracts", version = "=0.1.0-alpha.1" }
+patamaps-core = { path = "crates/patamaps-core", version = "=0.1.0-alpha.1" }
+patamaps-projection = { path = "crates/patamaps-projection", version = "=0.1.0-alpha.1" }
+patamaps-governance = { path = "crates/patamaps-governance", version = "=0.1.0-alpha.1" }
+patamaps-inspect = { path = "crates/patamaps-inspect", version = "=0.1.0-alpha.1" }
+patamaps-workspace = { path = "crates/patamaps-workspace", version = "=0.1.0-alpha.1" }
+patamaps-scientific = { path = "crates/patamaps-scientific", version = "=0.1.0-alpha.1" }
+base64 = "=0.22.1"
+ed25519-dalek = { version = "=2.2.0", default-features = false, features = ["std", "fast"] }
+serde = { version = "1.0.229", features = ["derive"] }
+serde_json = { version = "1.0.151", features = ["float_roundtrip", "unbounded_depth", "raw_value"] }
+serde_json_canonicalizer = "=0.3.2"
+sha2 = "0.10.9"
+toml_edit = { version = "=0.23.7", default-features = false, features = ["parse"] }
+tree-sitter = "=0.26.5"
+tree-sitter-containerfile = "=0.9.2"
+thiserror = "2.0.21"
+clap = { version = "4.6.7", features = ["derive"] }
+time = { version = "0.3.55", features = ["parsing", "formatting"] }
+rustix = { version = "=1.1.5", features = ["fs", "process"] }
+yaml-rust2 = { version = "=0.13.0", default-features = false }
+jsonschema = { version = "=0.58.6", default-features = false }
+fluent-uri = "=0.4.1"
+icu_collator = { package = "patamaps-icu-collator", path = "vendor/icu_collator", version = "=2.2.1-patamaps.1" }
+
+[workspace.lints.rust]
+unsafe_code = "forbid"
+
+[workspace.lints.clippy]
+all = "warn"
+
+[profile.release]
+lto = "thin"
+codegen-units = 1
+strip = "debuginfo"

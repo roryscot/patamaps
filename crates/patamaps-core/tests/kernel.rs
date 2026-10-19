@@ -3,15 +3,24 @@ use patamaps_core::*;
 use serde_json::json;
 
 fn doc() -> GraphDocument {
-    parse(include_bytes!("../../../fixtures/routing/graph.json")).unwrap()
+    parse(include_bytes!(
+        "../package-inputs/fixtures/routing/graph.json"
+    ))
+    .unwrap()
 }
 fn policy() -> PolicyDocument {
-    parse(include_bytes!("../../../fixtures/routing/policy.json")).unwrap()
+    parse(include_bytes!(
+        "../package-inputs/fixtures/routing/policy.json"
+    ))
+    .unwrap()
 }
 fn packs() -> Vec<RelationPack> {
     vec![
-        parse(include_bytes!("../../../relation-packs/core.json")).unwrap(),
-        parse(include_bytes!("../../../relation-packs/routing.json")).unwrap(),
+        parse(include_bytes!("../package-inputs/relation-packs/core.json")).unwrap(),
+        parse(include_bytes!(
+            "../package-inputs/relation-packs/routing.json"
+        ))
+        .unwrap(),
     ]
 }
 fn checked(doc: GraphDocument) -> CheckedGraph {

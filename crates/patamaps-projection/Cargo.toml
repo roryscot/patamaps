@@ -1,4 +1,6 @@
 [package]
+readme = "README.md"
+include = ["src/**", "tests/**", "package-inputs/**", "package-inputs.tsv", "Cargo.toml", "build.rs", "README.md", "LICENSE", "NOTICE"]
 name = "patamaps-projection"
 version.workspace = true
 edition.workspace = true
@@ -13,6 +15,9 @@ patamaps-core.workspace = true
 serde.workspace = true
 serde_json.workspace = true
 thiserror.workspace = true
+
+[build-dependencies]
+sha2.workspace = true
 
 [lints]
 workspace = true

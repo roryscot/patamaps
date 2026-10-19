@@ -3,16 +3,22 @@ use patamaps_core::*;
 use serde_json::{Value, json};
 
 fn graph() -> GraphDocument {
-    parse(include_bytes!("../../../fixtures/laws/graph.json")).unwrap()
+    parse(include_bytes!("../package-inputs/fixtures/laws/graph.json")).unwrap()
 }
 fn pack() -> RelationPack {
-    parse(include_bytes!("../../../fixtures/laws/pack.json")).unwrap()
+    parse(include_bytes!("../package-inputs/fixtures/laws/pack.json")).unwrap()
 }
 fn request() -> CompositionRequest {
-    parse(include_bytes!("../../../fixtures/laws/request.json")).unwrap()
+    parse(include_bytes!(
+        "../package-inputs/fixtures/laws/request.json"
+    ))
+    .unwrap()
 }
 fn policy() -> PolicyDocument {
-    parse(include_bytes!("../../../fixtures/laws/policy.json")).unwrap()
+    parse(include_bytes!(
+        "../package-inputs/fixtures/laws/policy.json"
+    ))
+    .unwrap()
 }
 fn checked(g: GraphDocument, p: RelationPack) -> CheckedGraph {
     CheckedGraph::check(g, vec![p]).unwrap()

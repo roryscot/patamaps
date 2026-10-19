@@ -83,13 +83,13 @@ fn schema(generation: bool) -> &'static LegacyPortableSchema {
     if generation {
         GENERATION.get_or_init(|| {
             LegacyPortableSchema::new(include_str!(
-                "../../../fixtures/reference/schemas/metamap-generation.schema.json"
+                "../package-inputs/fixtures/reference/schemas/metamap-generation.schema.json"
             ))
         })
     } else {
         POLICY.get_or_init(|| {
             LegacyPortableSchema::new(include_str!(
-                "../../../fixtures/reference/schemas/metamap-viability.schema.json"
+                "../package-inputs/fixtures/reference/schemas/metamap-viability.schema.json"
             ))
         })
     }

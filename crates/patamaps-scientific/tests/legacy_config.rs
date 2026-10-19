@@ -16,7 +16,7 @@ struct Case {
 }
 #[test]
 fn frozen_original_config_contracts() {
-    let bytes = include_bytes!("../../../fixtures/parity/config-controls.json");
+    let bytes = include_bytes!("../package-inputs/fixtures/parity/config-controls.json");
     assert_eq!(
         byte_digest(bytes),
         "sha256:8e8679fa88f457687ab06614a2e6b98d778cbd17af6257474a7682bafde30aed"

@@ -9,15 +9,24 @@ fn input() -> (
     Vec<RelationPack>,
 ) {
     (
-        parse(include_bytes!("../../../fixtures/routing/graph.json")).unwrap(),
-        parse(include_bytes!("../../../fixtures/routing/policy.json")).unwrap(),
         parse(include_bytes!(
-            "../../../fixtures/routing/projection-spec.json"
+            "../package-inputs/fixtures/routing/graph.json"
+        ))
+        .unwrap(),
+        parse(include_bytes!(
+            "../package-inputs/fixtures/routing/policy.json"
+        ))
+        .unwrap(),
+        parse(include_bytes!(
+            "../package-inputs/fixtures/routing/projection-spec.json"
         ))
         .unwrap(),
         vec![
-            parse(include_bytes!("../../../relation-packs/core.json")).unwrap(),
-            parse(include_bytes!("../../../relation-packs/routing.json")).unwrap(),
+            parse(include_bytes!("../package-inputs/relation-packs/core.json")).unwrap(),
+            parse(include_bytes!(
+                "../package-inputs/relation-packs/routing.json"
+            ))
+            .unwrap(),
         ],
     )
 }

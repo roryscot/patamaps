@@ -5,17 +5,26 @@ use serde_json::json;
 fn inputs() -> CaptureInputs {
     CaptureInputs {
         projection_specs: vec![],
-        graph: parse(include_bytes!("../../../fixtures/routing/graph.json")).unwrap(),
-        policy: parse(include_bytes!("../../../fixtures/routing/policy.json")).unwrap(),
+        graph: parse(include_bytes!(
+            "../package-inputs/fixtures/routing/graph.json"
+        ))
+        .unwrap(),
+        policy: parse(include_bytes!(
+            "../package-inputs/fixtures/routing/policy.json"
+        ))
+        .unwrap(),
         packs: vec![
-            parse(include_bytes!("../../../relation-packs/core.json")).unwrap(),
-            parse(include_bytes!("../../../relation-packs/routing.json")).unwrap(),
+            parse(include_bytes!("../package-inputs/relation-packs/core.json")).unwrap(),
+            parse(include_bytes!(
+                "../package-inputs/relation-packs/routing.json"
+            ))
+            .unwrap(),
         ],
         context: JsonObject::new(),
         evaluated_at: "2026-10-10T12:00:00Z".into(),
         projection_spec: Some(
             parse(include_bytes!(
-                "../../../fixtures/routing/projection-spec.json"
+                "../package-inputs/fixtures/routing/projection-spec.json"
             ))
             .unwrap(),
         ),
@@ -403,10 +412,13 @@ fn collection_version_and_duplicate_specs_cannot_be_laundered_through_readdressi
 
 fn semantic_comparison_fixture() -> CaptureRecord {
     let mut graph: GraphDocument =
-        parse(include_bytes!("../../../fixtures/laws/graph.json")).unwrap();
-    let pack: RelationPack = parse(include_bytes!("../../../fixtures/laws/pack.json")).unwrap();
-    let request: CompositionRequest =
-        parse(include_bytes!("../../../fixtures/laws/request.json")).unwrap();
+        parse(include_bytes!("../package-inputs/fixtures/laws/graph.json")).unwrap();
+    let pack: RelationPack =
+        parse(include_bytes!("../package-inputs/fixtures/laws/pack.json")).unwrap();
+    let request: CompositionRequest = parse(include_bytes!(
+        "../package-inputs/fixtures/laws/request.json"
+    ))
+    .unwrap();
     let proposal = patamaps_core::derive(
         &patamaps_core::CheckedGraph::check(graph.clone(), vec![pack.clone()]).unwrap(),
         &request,
@@ -414,8 +426,10 @@ fn semantic_comparison_fixture() -> CaptureRecord {
     assert_eq!(proposal.status, patamaps_core::DerivationStatus::Proposed);
     graph.mappings.push(proposal.mapping.unwrap());
     let proof = proposal.derivation.unwrap();
-    let mut policy: PolicyDocument =
-        parse(include_bytes!("../../../fixtures/laws/policy.json")).unwrap();
+    let mut policy: PolicyDocument = parse(include_bytes!(
+        "../package-inputs/fixtures/laws/policy.json"
+    ))
+    .unwrap();
     policy
         .semantics
         .as_mut()
@@ -423,7 +437,7 @@ fn semantic_comparison_fixture() -> CaptureRecord {
         .derivations
         .push(proof.clone());
     let spec: ProjectionSpec = parse(include_bytes!(
-        "../../../fixtures/laws/projection-spec.json"
+        "../package-inputs/fixtures/laws/projection-spec.json"
     ))
     .unwrap();
     let input = CaptureInputs {

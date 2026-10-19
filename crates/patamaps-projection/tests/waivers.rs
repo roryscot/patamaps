@@ -3,10 +3,14 @@ use patamaps_projection::*;
 
 #[test]
 fn a_compiler_waiver_cannot_opt_a_consumer_into_unknown_loss_and_replay_keeps_refusal() {
-    let mut graph: GraphDocument =
-        parse(include_bytes!("../../../fixtures/routing/graph.json")).unwrap();
-    let mut policy: PolicyDocument =
-        parse(include_bytes!("../../../fixtures/routing/policy.json")).unwrap();
+    let mut graph: GraphDocument = parse(include_bytes!(
+        "../package-inputs/fixtures/routing/graph.json"
+    ))
+    .unwrap();
+    let mut policy: PolicyDocument = parse(include_bytes!(
+        "../package-inputs/fixtures/routing/policy.json"
+    ))
+    .unwrap();
     graph.mappings[0].lossiness = Lossiness::Unknown;
     policy.waivers = Some(vec![Waiver {
         id: "urn:waiver:temporary-loss".into(),
@@ -20,15 +24,18 @@ fn a_compiler_waiver_cannot_opt_a_consumer_into_unknown_loss_and_replay_keeps_re
         graph,
         policy,
         packs: vec![
-            parse(include_bytes!("../../../relation-packs/core.json")).unwrap(),
-            parse(include_bytes!("../../../relation-packs/routing.json")).unwrap(),
+            parse(include_bytes!("../package-inputs/relation-packs/core.json")).unwrap(),
+            parse(include_bytes!(
+                "../package-inputs/relation-packs/routing.json"
+            ))
+            .unwrap(),
         ],
         context: JsonObject::new(),
         evaluated_at: "2026-10-10T12:00:00Z".into(),
         projection_spec: None,
         projection_specs: vec![
             parse(include_bytes!(
-                "../../../fixtures/routing/projection-spec.json"
+                "../package-inputs/fixtures/routing/projection-spec.json"
             ))
             .unwrap(),
         ],

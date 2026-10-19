@@ -1,4 +1,6 @@
 [package]
+readme = "README.md"
+include = ["src/**", "tests/**", "package-inputs/**", "package-inputs.tsv", "Cargo.toml", "build.rs", "README.md", "LICENSE", "NOTICE"]
 name = "patamaps-cli"
 version.workspace = true
 edition.workspace = true
@@ -24,6 +26,9 @@ serde_json.workspace = true
 clap.workspace = true
 base64.workspace = true
 rustix.workspace = true
+
+[build-dependencies]
+sha2.workspace = true
 
 [lints]
 workspace = true

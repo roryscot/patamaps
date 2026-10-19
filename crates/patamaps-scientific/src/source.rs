@@ -72,7 +72,7 @@ fn validator() -> &'static jsonschema::Validator {
     static SOURCE: OnceLock<jsonschema::Validator> = OnceLock::new();
     SOURCE.get_or_init(|| {
         let schema: Value = serde_json::from_slice(include_bytes!(
-            "../../../fixtures/reference/schemas/metamap-sssom-source.schema.json"
+            "../package-inputs/fixtures/reference/schemas/metamap-sssom-source.schema.json"
         ))
         .expect("pinned source schema");
         assert_eq!(schema["required"], serde_json::json!(REQUIRED));
@@ -174,7 +174,7 @@ pub fn propagatable_slots() -> &'static [String] {
             mapping_set: OrderedKeys,
         }
         let order: SlotOrder = serde_json::from_slice(include_bytes!(
-            "../../../fixtures/reference/schemas/sssom-1.0.0-slots.json"
+            "../package-inputs/fixtures/reference/schemas/sssom-1.0.0-slots.json"
         ))
         .expect("pinned slot index");
         order

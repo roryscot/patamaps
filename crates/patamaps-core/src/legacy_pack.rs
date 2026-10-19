@@ -439,10 +439,12 @@ fn schema(executable: bool) -> &'static jsonschema::Validator {
     let slot = if executable { &EXECUTABLE } else { &LEGACY };
     slot.get_or_init(|| {
         let raw = if executable {
-            include_bytes!("../../../fixtures/reference/schemas/relation-pack-v2.schema.json")
-                .as_slice()
+            include_bytes!(
+                "../package-inputs/fixtures/reference/schemas/relation-pack-v2.schema.json"
+            )
+            .as_slice()
         } else {
-            include_bytes!("../../../fixtures/reference/schemas/relation-pack.schema.json")
+            include_bytes!("../package-inputs/fixtures/reference/schemas/relation-pack.schema.json")
                 .as_slice()
         };
         let schema: Value = serde_json::from_slice(raw).expect("preserved relation-pack schema");
@@ -975,9 +977,11 @@ fn schema_ordering(executable: bool) -> &'static SchemaOrdering {
     let slot = if executable { &EXECUTABLE } else { &PORTABLE };
     slot.get_or_init(|| {
         let text = if executable {
-            include_str!("../../../fixtures/reference/schemas/relation-pack-v2.schema.json")
+            include_str!(
+                "../package-inputs/fixtures/reference/schemas/relation-pack-v2.schema.json"
+            )
         } else {
-            include_str!("../../../fixtures/reference/schemas/relation-pack.schema.json")
+            include_str!("../package-inputs/fixtures/reference/schemas/relation-pack.schema.json")
         };
         let mut ordering = SchemaOrdering {
             schema: serde_json::from_str(text).expect("preserved schema"),

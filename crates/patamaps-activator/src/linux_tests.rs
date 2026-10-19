@@ -121,7 +121,12 @@ impl Fixture {
             CaptureInputs {
                 projection_specs: vec![],
                 graph,
-                packs: vec![parse(include_bytes!("../../../relation-packs/routing.json")).unwrap()],
+                packs: vec![
+                    parse(include_bytes!(
+                        "../package-inputs/relation-packs/routing.json"
+                    ))
+                    .unwrap(),
+                ],
                 policy,
                 context: Default::default(),
                 evaluated_at: "2026-10-10T00:00:00Z".into(),

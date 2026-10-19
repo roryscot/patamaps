@@ -23,7 +23,7 @@ fn registry_queries_preserve_order_and_registration_is_atomic() {
     assert!(registry.get_law("urn:missing").is_none());
 
     let scientific: RelationPack = parse(include_bytes!(
-        "../../../relation-packs/scientific-skos.json"
+        "../package-inputs/relation-packs/scientific-skos.json"
     ))
     .unwrap();
     registry.register_pack(scientific.clone()).unwrap();

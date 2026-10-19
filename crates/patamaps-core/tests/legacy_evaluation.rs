@@ -20,7 +20,7 @@ fn independent_original_context_selector_and_impact_values() {
         reference_engine: String,
         cases: Vec<Case>,
     }
-    let bytes = include_bytes!("../../../fixtures/parity/evaluation-controls.json");
+    let bytes = include_bytes!("../package-inputs/fixtures/parity/evaluation-controls.json");
     assert_eq!(
         byte_digest(bytes),
         "sha256:e7f5814db4c87eeedbd225c15ff3ae98ce90ced48cfa0f0aee53e72d71eebb01"

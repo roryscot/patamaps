@@ -108,7 +108,7 @@ fn frozen_file_syntax_messages_preserve_original_findings_and_native_causes() {
         reference_engine: String,
         cases: Vec<Case>,
     }
-    let bytes = include_bytes!("../../../fixtures/parity/pack-file-syntax-controls.json");
+    let bytes = include_bytes!("../package-inputs/fixtures/parity/pack-file-syntax-controls.json");
     assert_eq!(
         patamaps_contracts::byte_digest(bytes),
         "sha256:eed27b7c48a08c346f7c86382ed244fc54aa43c949139ffdf1915e94d7ec9949"

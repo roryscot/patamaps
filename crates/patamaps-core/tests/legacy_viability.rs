@@ -7,7 +7,8 @@ use serde::Deserialize;
 use serde_json::value::RawValue;
 
 fn callback_corpus() -> serde_json::Value {
-    let bytes = include_bytes!("../../../fixtures/parity/constraint-callback-controls.json");
+    let bytes =
+        include_bytes!("../package-inputs/fixtures/parity/constraint-callback-controls.json");
     assert_eq!(
         byte_digest(bytes),
         "sha256:b2b0b824ecadc544de6bb5d6748f874707879112ce47435c8d537e5f46c232f7"
@@ -26,7 +27,7 @@ fn callback_request(operation: &str, input: serde_json::Value) -> serde_json::Va
 
 #[test]
 fn independently_frozen_original_memory_refusal_and_publication_observations() {
-    let bytes = include_bytes!("../../../fixtures/parity/memory-activation-controls.json");
+    let bytes = include_bytes!("../package-inputs/fixtures/parity/memory-activation-controls.json");
     assert_eq!(
         byte_digest(bytes),
         "sha256:a075af3abaa522533bd43d5b9ce9335215a1c6ed77c7e7518b8176ed8a403e2c"
@@ -141,7 +142,9 @@ fn independently_frozen_original_builtin_constraint_evaluators() {
 
 #[test]
 fn independently_frozen_original_memory_receiver_errors() {
-    let bytes = include_bytes!("../../../fixtures/parity/memory-activation-receiver-controls.json");
+    let bytes = include_bytes!(
+        "../package-inputs/fixtures/parity/memory-activation-receiver-controls.json"
+    );
     assert_eq!(
         byte_digest(bytes),
         "sha256:7b21f42ffd669bf346aa80f0144fdf53f5601a22fad998b7fd218411cd926ccc"
@@ -216,7 +219,7 @@ fn original_callback_continuation_preserves_validation_and_hashes_live_inputs() 
 #[test]
 fn independently_frozen_original_v1_compiler_and_validation_observations() {
     verify_frozen_observations(
-        include_bytes!("../../../fixtures/parity/viability-controls.json"),
+        include_bytes!("../package-inputs/fixtures/parity/viability-controls.json"),
         "sha256:df246fe562839235f187e2f61e21a329d01c3e4f2c20d90c03d37c8191a464fc",
         404,
         false,
@@ -226,7 +229,7 @@ fn independently_frozen_original_v1_compiler_and_validation_observations() {
 #[test]
 fn independently_frozen_original_signed_zero_compiler_observations() {
     verify_frozen_observations(
-        include_bytes!("../../../fixtures/parity/viability-signed-zero-controls.json"),
+        include_bytes!("../package-inputs/fixtures/parity/viability-signed-zero-controls.json"),
         "sha256:56f166b4418990175a91f512c5bc22ab90eaf6393932d9aa51bc2f80c3d88244",
         54,
         true,
@@ -236,7 +239,7 @@ fn independently_frozen_original_signed_zero_compiler_observations() {
 #[test]
 fn independently_frozen_original_nonfinite_and_sparse_viability_observations() {
     verify_frozen_observations(
-        include_bytes!("../../../fixtures/parity/viability-numeric-controls.json"),
+        include_bytes!("../package-inputs/fixtures/parity/viability-numeric-controls.json"),
         "sha256:eca5ec36bac010643489dc929f834b086b909e6772371bc3e091006556680361",
         400,
         true,

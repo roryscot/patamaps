@@ -51,3 +51,15 @@ public crates.io name ownership, verified email, Cargo publishing credentials an
 actual registry acceptance remain pending. Signing in on the website does not
 publish or authorize a protected consumer. No general-adoption or performance
 claim follows from crate installation.
+
+## Implementation checkpoint
+
+The alpha source changes use dependency-owned source fragments, self-contained
+input inventories and per-crate actual-input digests. The separately named fork
+is an explicit standalone workspace. Its original notices and inputs remain.
+The source audit identified and repaired the missing legacy projection identity
+binding. Native Python syntax, 256 crate-contained literal includes and all 79
+production source bindings pass. Formatting/input synchronization passed in the
+second preparation run. The first preparation refusal (nested Cargo workspace)
+is retained. Locked native compilation/tests and exact archive/clean-install
+acceptance remain pending under the shared Intel build reservation.

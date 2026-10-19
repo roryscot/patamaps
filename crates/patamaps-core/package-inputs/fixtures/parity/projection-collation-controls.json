@@ -1,0 +1,189 @@
+{
+  "referenceLockDigest": "82826c6f95fbae6c25b6114a2252713441b652bf5bda24fe19e04863616db35c",
+  "cases": [
+    {
+      "name": "collation-equal-targets-forward",
+      "operation": "projection-compile",
+      "input": "{\"value\":{\"document\":{\"schemaVersion\":\"2.0.0\",\"id\":\"urn:projection:test:graph\",\"namespace\":\"projection-test\",\"revision\":\"1\",\"relationPacks\":[{\"id\":\"urn:metamap:relation-pack:core\",\"version\":\"1.0.0\"},{\"id\":\"urn:metamap:relation-pack:routing\",\"version\":\"1.0.0\"}],\"entities\":[{\"id\":\"urn:test:command:z\",\"kind\":\"routing:command\",\"label\":\"Z\",\"attributes\":{\"path\":\"/z\",\"nested\":{\"x\":1}}},{\"id\":\"urn:test:command:a\",\"kind\":\"routing:command\",\"label\":\"A\",\"provenance\":{\"status\":\"declared\",\"assertedBy\":\"test:owner\"}},{\"id\":\"urn:test:handler:z\",\"kind\":\"routing:handler\",\"locators\":[{\"uri\":\"typescript:src/z.ts#handler\"}]},{\"id\":\"urn:test:handler:a\",\"kind\":\"routing:handler\"},{\"id\":\"urn:test:policy:a\",\"kind\":\"routing:policy\"},{\"id\":\"urn:test:handler:é\",\"kind\":\"routing:handler\"},{\"id\":\"urn:test:handler:é\",\"kind\":\"routing:handler\"}],\"mappings\":[{\"id\":\"urn:test:link:z\",\"relation\":\"routing:handled_by\",\"sources\":[\"urn:test:command:z\"],\"targets\":[\"urn:test:handler:é\"],\"cardinality\":\"one-to-one\",\"lossiness\":\"lossless\",\"provenance\":{\"status\":\"declared\",\"assertedBy\":\"test:owner\"}},{\"id\":\"urn:test:link:a\",\"relation\":\"routing:handled_by\",\"sources\":[\"urn:test:command:a\"],\"targets\":[\"urn:test:handler:a\"],\"cardinality\":\"one-to-one\",\"lossiness\":\"lossless\",\"provenance\":{\"status\":\"declared\",\"assertedBy\":\"test:owner\"}},{\"id\":\"urn:test:link:zz\",\"relation\":\"routing:handled_by\",\"sources\":[\"urn:test:command:z\"],\"targets\":[\"urn:test:handler:é\"],\"cardinality\":\"one-to-one\",\"lossiness\":\"lossless\",\"provenance\":{\"status\":\"declared\",\"assertedBy\":\"test:owner\"}}],\"authorities\":[]},\"generation\":{\"$schema\":\"https://raw.githubusercontent.com/roryscot/metamap/v0.3.0/schemas/metamap-generation.schema.json\",\"schemaVersion\":\"1.0.0\",\"evaluatedAt\":\"2026-09-02T00:00:00.000Z\",\"graph\":{\"id\":\"urn:projection:test:graph\",\"revision\":\"1\",\"digest\":\"sha256:f051e78010d926f17bff27d920d77907cdb4909161985bb318cf0da94036f1b5\"},\"policy\":{\"id\":\"urn:projection:test:policy\",\"digest\":\"sha256:a1c2382653fcc402d9a9da476e844cd687723e320ad6b5efb6913ba96ca151ac\"},\"context\":{},\"activeMappings\":[\"urn:test:link:a\",\"urn:test:link:z\",\"urn:test:link:zz\"],\"inactiveMappings\":[],\"evidence\":[],\"waiversApplied\":[],\"id\":\"urn:metamap:generation:d54f8b3aa58b9464eb58395b435cbdbde1a6f6f6836659153107a2c9d15932f1\",\"digest\":\"sha256:d54f8b3aa58b9464eb58395b435cbdbde1a6f6f6836659153107a2c9d15932f1\"},\"spec\":{\"schemaVersion\":\"1.0.0\",\"id\":\"urn:projection:test:spec\",\"select\":{\"kinds\":[\"routing:command\"]},\"slots\":[{\"name\":\"handler\",\"relation\":\"routing:handled_by\",\"direction\":\"outgoing\",\"cardinality\":\"many\",\"targetKinds\":[\"routing:handler\"]}]},\"registry\":{\"packs\":[{\"key\":\"urn:metamap:relation-pack:core\",\"version\":\"1.0.0\"},{\"key\":\"urn:metamap:relation-pack:routing\",\"version\":\"1.0.0\"}],\"definitions\":[{\"key\":\"core:contains\",\"value\":{\"id\":\"core:contains\",\"cyclePolicy\":\"forbid\",\"transitive\":true,\"impactDirection\":\"both\",\"cardinalities\":[\"one-to-one\",\"one-to-many\",\"many-to-many\"]}},{\"key\":\"core:implements\",\"value\":{\"id\":\"core:implements\",\"cyclePolicy\":\"forbid\",\"impactDirection\":\"source-to-target\",\"cardinalities\":[\"one-to-one\",\"one-to-many\",\"many-to-many\"]}},{\"key\":\"core:conforms_to\",\"value\":{\"id\":\"core:conforms_to\",\"cyclePolicy\":\"forbid\",\"impactDirection\":\"target-to-source\",\"cardinalities\":[\"one-to-one\",\"many-to-one\",\"many-to-many\"]}},{\"key\":\"core:derives_from\",\"value\":{\"id\":\"core:derives_from\",\"cyclePolicy\":\"forbid\",\"transitive\":true,\"impactDirection\":\"target-to-source\",\"cardinalities\":[\"one-to-one\",\"one-to-many\",\"many-to-one\",\"many-to-many\"]}},{\"key\":\"core:generates\",\"value\":{\"id\":\"core:generates\",\"cyclePolicy\":\"forbid\",\"impactDirection\":\"source-to-target\",\"cardinalities\":[\"one-to-one\",\"one-to-many\",\"many-to-many\"]}},{\"key\":\"core:depends_on\",\"value\":{\"id\":\"core:depends_on\",\"cyclePolicy\":\"forbid\",\"transitive\":true,\"impactDirection\":\"target-to-source\",\"cardinalities\":[\"one-to-one\",\"one-to-many\",\"many-to-many\"]}},{\"key\":\"core:mirrors\",\"value\":{\"id\":\"core:mirrors\",\"cyclePolicy\":\"allow\",\"symmetric\":true,\"impactDirection\":\"both\",\"cardinalities\":[\"one-to-one\",\"many-to-many\"]}},{\"key\":\"core:documents\",\"value\":{\"id\":\"core:documents\",\"cyclePolicy\":\"allow\",\"impactDirection\":\"target-to-source\",\"cardinalities\":[\"one-to-one\",\"one-to-many\",\"many-to-many\"]}},{\"key\":\"core:tests\",\"value\":{\"id\":\"core:tests\",\"cyclePolicy\":\"allow\",\"impactDirection\":\"target-to-source\",\"cardinalities\":[\"one-to-one\",\"one-to-many\",\"many-to-many\"]}},{\"key\":\"core:exposes\",\"value\":{\"id\":\"core:exposes\",\"cyclePolicy\":\"forbid\",\"impactDirection\":\"both\",\"cardinalities\":[\"one-to-one\",\"one-to-many\",\"many-to-many\"]}},{\"key\":\"core:references\",\"value\":{\"id\":\"core:references\",\"cyclePolicy\":\"allow\",\"impactDirection\":\"target-to-source\",\"cardinalities\":[\"one-to-one\",\"one-to-many\",\"many-to-one\",\"many-to-many\"]}},{\"key\":\"core:specified_by\",\"value\":{\"id\":\"core:specified_by\",\"cyclePolicy\":\"forbid\",\"impactDirection\":\"target-to-source\",\"cardinalities\":[\"one-to-one\",\"many-to-one\",\"many-to-many\"]}},{\"key\":\"routing:handled_by\",\"value\":{\"id\":\"routing:handled_by\",\"description\":\"The target handler executes the source command, event, or route.\",\"sourceKinds\":[\"routing:command\",\"routing:event\",\"routing:route\"],\"targetKinds\":[\"routing:handler\"],\"cardinalities\":[\"one-to-one\",\"many-to-one\"],\"cyclePolicy\":\"forbid\",\"impactDirection\":\"source-to-target\"}},{\"key\":\"routing:accepts\",\"value\":{\"id\":\"routing:accepts\",\"description\":\"The source accepts input conforming to the target schema.\",\"sourceKinds\":[\"routing:command\",\"routing:event\",\"routing:route\"],\"targetKinds\":[\"routing:schema\"],\"cardinalities\":[\"one-to-one\",\"many-to-one\"],\"cyclePolicy\":\"forbid\",\"impactDirection\":\"target-to-source\"}},{\"key\":\"routing:authorized_by\",\"value\":{\"id\":\"routing:authorized_by\",\"description\":\"The source is gated by the target authorization policy.\",\"sourceKinds\":[\"routing:command\",\"routing:event\",\"routing:route\"],\"targetKinds\":[\"routing:policy\"],\"cardinalities\":[\"one-to-one\",\"many-to-one\",\"many-to-many\"],\"cyclePolicy\":\"forbid\",\"impactDirection\":\"target-to-source\"}},{\"key\":\"routing:emits\",\"value\":{\"id\":\"routing:emits\",\"description\":\"Executing the source may emit the target event.\",\"sourceKinds\":[\"routing:command\",\"routing:handler\",\"routing:route\"],\"targetKinds\":[\"routing:event\"],\"cardinalities\":[\"one-to-one\",\"one-to-many\",\"many-to-many\"],\"cyclePolicy\":\"allow\",\"impactDirection\":\"source-to-target\"}},{\"key\":\"routing:exposed_as\",\"value\":{\"id\":\"routing:exposed_as\",\"description\":\"The source semantic operation is exposed through the target transport endpoint.\",\"sourceKinds\":[\"routing:command\",\"routing:event\",\"routing:route\"],\"targetKinds\":[\"routing:endpoint\"],\"cardinalities\":[\"one-to-one\",\"one-to-many\",\"many-to-many\"],\"cyclePolicy\":\"forbid\",\"impactDirection\":\"both\"}},{\"key\":\"routing:transitions_to\",\"value\":{\"id\":\"routing:transitions_to\",\"description\":\"The source workflow state permits a transition to the target state.\",\"sourceKinds\":[\"routing:state\"],\"targetKinds\":[\"routing:state\"],\"cardinalities\":[\"one-to-one\",\"one-to-many\",\"many-to-many\"],\"cyclePolicy\":\"allow\",\"impactDirection\":\"both\"}}]},\"executablePackCount\":0,\"semanticPolicyPresent\":false},\"numbers\":[]}",
+      "expectedWire": {
+        "value": {
+          "status": "projected",
+          "issues": [],
+          "projection": {
+            "$schema": "https://raw.githubusercontent.com/roryscot/metamap/v0.4.0/schemas/metamap-projection.schema.json",
+            "schemaVersion": "1.0.0",
+            "generation": {
+              "id": "urn:metamap:generation:d54f8b3aa58b9464eb58395b435cbdbde1a6f6f6836659153107a2c9d15932f1",
+              "digest": "sha256:d54f8b3aa58b9464eb58395b435cbdbde1a6f6f6836659153107a2c9d15932f1"
+            },
+            "graph": {
+              "id": "urn:projection:test:graph",
+              "digest": "sha256:f051e78010d926f17bff27d920d77907cdb4909161985bb318cf0da94036f1b5"
+            },
+            "spec": {
+              "id": "urn:projection:test:spec",
+              "digest": "sha256:0ce0c743528f45c153bc9cabefb94b3c9d3af8c2f2251a837ab4f1a3c9386306"
+            },
+            "entries": [
+              {
+                "subject": {
+                  "id": "urn:test:command:a",
+                  "kind": "routing:command",
+                  "label": "A"
+                },
+                "slots": [
+                  {
+                    "name": "handler",
+                    "relation": "routing:handled_by",
+                    "direction": "outgoing",
+                    "cardinality": "many",
+                    "mappings": [
+                      "urn:test:link:a"
+                    ],
+                    "targets": [
+                      {
+                        "id": "urn:test:handler:a",
+                        "kind": "routing:handler"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "subject": {
+                  "id": "urn:test:command:z",
+                  "kind": "routing:command",
+                  "label": "Z",
+                  "attributes": {
+                    "path": "/z",
+                    "nested": {
+                      "x": 1
+                    }
+                  }
+                },
+                "slots": [
+                  {
+                    "name": "handler",
+                    "relation": "routing:handled_by",
+                    "direction": "outgoing",
+                    "cardinality": "many",
+                    "mappings": [
+                      "urn:test:link:z",
+                      "urn:test:link:zz"
+                    ],
+                    "targets": [
+                      {
+                        "id": "urn:test:handler:é",
+                        "kind": "routing:handler"
+                      },
+                      {
+                        "id": "urn:test:handler:é",
+                        "kind": "routing:handler"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "id": "urn:metamap:projection:f38353b4a12ff0617f0445f5716727264282ac3a115122a5e1d874bc0ef2c3a4",
+            "digest": "sha256:f38353b4a12ff0617f0445f5716727264282ac3a115122a5e1d874bc0ef2c3a4"
+          }
+        },
+        "numbers": []
+      },
+      "expectedError": null
+    },
+    {
+      "name": "collation-equal-targets-reverse",
+      "operation": "projection-compile",
+      "input": "{\"value\":{\"document\":{\"schemaVersion\":\"2.0.0\",\"id\":\"urn:projection:test:graph\",\"namespace\":\"projection-test\",\"revision\":\"1\",\"relationPacks\":[{\"id\":\"urn:metamap:relation-pack:core\",\"version\":\"1.0.0\"},{\"id\":\"urn:metamap:relation-pack:routing\",\"version\":\"1.0.0\"}],\"entities\":[{\"id\":\"urn:test:command:z\",\"kind\":\"routing:command\",\"label\":\"Z\",\"attributes\":{\"path\":\"/z\",\"nested\":{\"x\":1}}},{\"id\":\"urn:test:command:a\",\"kind\":\"routing:command\",\"label\":\"A\",\"provenance\":{\"status\":\"declared\",\"assertedBy\":\"test:owner\"}},{\"id\":\"urn:test:handler:z\",\"kind\":\"routing:handler\",\"locators\":[{\"uri\":\"typescript:src/z.ts#handler\"}]},{\"id\":\"urn:test:handler:a\",\"kind\":\"routing:handler\"},{\"id\":\"urn:test:policy:a\",\"kind\":\"routing:policy\"},{\"id\":\"urn:test:handler:é\",\"kind\":\"routing:handler\"},{\"id\":\"urn:test:handler:é\",\"kind\":\"routing:handler\"}],\"mappings\":[{\"id\":\"urn:test:link:z\",\"relation\":\"routing:handled_by\",\"sources\":[\"urn:test:command:z\"],\"targets\":[\"urn:test:handler:é\"],\"cardinality\":\"one-to-one\",\"lossiness\":\"lossless\",\"provenance\":{\"status\":\"declared\",\"assertedBy\":\"test:owner\"}},{\"id\":\"urn:test:link:a\",\"relation\":\"routing:handled_by\",\"sources\":[\"urn:test:command:a\"],\"targets\":[\"urn:test:handler:a\"],\"cardinality\":\"one-to-one\",\"lossiness\":\"lossless\",\"provenance\":{\"status\":\"declared\",\"assertedBy\":\"test:owner\"}},{\"id\":\"urn:test:link:zz\",\"relation\":\"routing:handled_by\",\"sources\":[\"urn:test:command:z\"],\"targets\":[\"urn:test:handler:é\"],\"cardinality\":\"one-to-one\",\"lossiness\":\"lossless\",\"provenance\":{\"status\":\"declared\",\"assertedBy\":\"test:owner\"}}],\"authorities\":[]},\"generation\":{\"$schema\":\"https://raw.githubusercontent.com/roryscot/metamap/v0.3.0/schemas/metamap-generation.schema.json\",\"schemaVersion\":\"1.0.0\",\"evaluatedAt\":\"2026-09-02T00:00:00.000Z\",\"graph\":{\"id\":\"urn:projection:test:graph\",\"revision\":\"1\",\"digest\":\"sha256:764d28e6433491520847721bca17ed05eeaa30432ff6e46a1c22af342fe2ca89\"},\"policy\":{\"id\":\"urn:projection:test:policy\",\"digest\":\"sha256:a1c2382653fcc402d9a9da476e844cd687723e320ad6b5efb6913ba96ca151ac\"},\"context\":{},\"activeMappings\":[\"urn:test:link:a\",\"urn:test:link:z\",\"urn:test:link:zz\"],\"inactiveMappings\":[],\"evidence\":[],\"waiversApplied\":[],\"id\":\"urn:metamap:generation:effb97e6e5f244e98da4a75ce2b7e5e4d572e2f641202aadeb8a1864ae0fcc4b\",\"digest\":\"sha256:effb97e6e5f244e98da4a75ce2b7e5e4d572e2f641202aadeb8a1864ae0fcc4b\"},\"spec\":{\"schemaVersion\":\"1.0.0\",\"id\":\"urn:projection:test:spec\",\"select\":{\"kinds\":[\"routing:command\"]},\"slots\":[{\"name\":\"handler\",\"relation\":\"routing:handled_by\",\"direction\":\"outgoing\",\"cardinality\":\"many\",\"targetKinds\":[\"routing:handler\"]}]},\"registry\":{\"packs\":[{\"key\":\"urn:metamap:relation-pack:core\",\"version\":\"1.0.0\"},{\"key\":\"urn:metamap:relation-pack:routing\",\"version\":\"1.0.0\"}],\"definitions\":[{\"key\":\"core:contains\",\"value\":{\"id\":\"core:contains\",\"cyclePolicy\":\"forbid\",\"transitive\":true,\"impactDirection\":\"both\",\"cardinalities\":[\"one-to-one\",\"one-to-many\",\"many-to-many\"]}},{\"key\":\"core:implements\",\"value\":{\"id\":\"core:implements\",\"cyclePolicy\":\"forbid\",\"impactDirection\":\"source-to-target\",\"cardinalities\":[\"one-to-one\",\"one-to-many\",\"many-to-many\"]}},{\"key\":\"core:conforms_to\",\"value\":{\"id\":\"core:conforms_to\",\"cyclePolicy\":\"forbid\",\"impactDirection\":\"target-to-source\",\"cardinalities\":[\"one-to-one\",\"many-to-one\",\"many-to-many\"]}},{\"key\":\"core:derives_from\",\"value\":{\"id\":\"core:derives_from\",\"cyclePolicy\":\"forbid\",\"transitive\":true,\"impactDirection\":\"target-to-source\",\"cardinalities\":[\"one-to-one\",\"one-to-many\",\"many-to-one\",\"many-to-many\"]}},{\"key\":\"core:generates\",\"value\":{\"id\":\"core:generates\",\"cyclePolicy\":\"forbid\",\"impactDirection\":\"source-to-target\",\"cardinalities\":[\"one-to-one\",\"one-to-many\",\"many-to-many\"]}},{\"key\":\"core:depends_on\",\"value\":{\"id\":\"core:depends_on\",\"cyclePolicy\":\"forbid\",\"transitive\":true,\"impactDirection\":\"target-to-source\",\"cardinalities\":[\"one-to-one\",\"one-to-many\",\"many-to-many\"]}},{\"key\":\"core:mirrors\",\"value\":{\"id\":\"core:mirrors\",\"cyclePolicy\":\"allow\",\"symmetric\":true,\"impactDirection\":\"both\",\"cardinalities\":[\"one-to-one\",\"many-to-many\"]}},{\"key\":\"core:documents\",\"value\":{\"id\":\"core:documents\",\"cyclePolicy\":\"allow\",\"impactDirection\":\"target-to-source\",\"cardinalities\":[\"one-to-one\",\"one-to-many\",\"many-to-many\"]}},{\"key\":\"core:tests\",\"value\":{\"id\":\"core:tests\",\"cyclePolicy\":\"allow\",\"impactDirection\":\"target-to-source\",\"cardinalities\":[\"one-to-one\",\"one-to-many\",\"many-to-many\"]}},{\"key\":\"core:exposes\",\"value\":{\"id\":\"core:exposes\",\"cyclePolicy\":\"forbid\",\"impactDirection\":\"both\",\"cardinalities\":[\"one-to-one\",\"one-to-many\",\"many-to-many\"]}},{\"key\":\"core:references\",\"value\":{\"id\":\"core:references\",\"cyclePolicy\":\"allow\",\"impactDirection\":\"target-to-source\",\"cardinalities\":[\"one-to-one\",\"one-to-many\",\"many-to-one\",\"many-to-many\"]}},{\"key\":\"core:specified_by\",\"value\":{\"id\":\"core:specified_by\",\"cyclePolicy\":\"forbid\",\"impactDirection\":\"target-to-source\",\"cardinalities\":[\"one-to-one\",\"many-to-one\",\"many-to-many\"]}},{\"key\":\"routing:handled_by\",\"value\":{\"id\":\"routing:handled_by\",\"description\":\"The target handler executes the source command, event, or route.\",\"sourceKinds\":[\"routing:command\",\"routing:event\",\"routing:route\"],\"targetKinds\":[\"routing:handler\"],\"cardinalities\":[\"one-to-one\",\"many-to-one\"],\"cyclePolicy\":\"forbid\",\"impactDirection\":\"source-to-target\"}},{\"key\":\"routing:accepts\",\"value\":{\"id\":\"routing:accepts\",\"description\":\"The source accepts input conforming to the target schema.\",\"sourceKinds\":[\"routing:command\",\"routing:event\",\"routing:route\"],\"targetKinds\":[\"routing:schema\"],\"cardinalities\":[\"one-to-one\",\"many-to-one\"],\"cyclePolicy\":\"forbid\",\"impactDirection\":\"target-to-source\"}},{\"key\":\"routing:authorized_by\",\"value\":{\"id\":\"routing:authorized_by\",\"description\":\"The source is gated by the target authorization policy.\",\"sourceKinds\":[\"routing:command\",\"routing:event\",\"routing:route\"],\"targetKinds\":[\"routing:policy\"],\"cardinalities\":[\"one-to-one\",\"many-to-one\",\"many-to-many\"],\"cyclePolicy\":\"forbid\",\"impactDirection\":\"target-to-source\"}},{\"key\":\"routing:emits\",\"value\":{\"id\":\"routing:emits\",\"description\":\"Executing the source may emit the target event.\",\"sourceKinds\":[\"routing:command\",\"routing:handler\",\"routing:route\"],\"targetKinds\":[\"routing:event\"],\"cardinalities\":[\"one-to-one\",\"one-to-many\",\"many-to-many\"],\"cyclePolicy\":\"allow\",\"impactDirection\":\"source-to-target\"}},{\"key\":\"routing:exposed_as\",\"value\":{\"id\":\"routing:exposed_as\",\"description\":\"The source semantic operation is exposed through the target transport endpoint.\",\"sourceKinds\":[\"routing:command\",\"routing:event\",\"routing:route\"],\"targetKinds\":[\"routing:endpoint\"],\"cardinalities\":[\"one-to-one\",\"one-to-many\",\"many-to-many\"],\"cyclePolicy\":\"forbid\",\"impactDirection\":\"both\"}},{\"key\":\"routing:transitions_to\",\"value\":{\"id\":\"routing:transitions_to\",\"description\":\"The source workflow state permits a transition to the target state.\",\"sourceKinds\":[\"routing:state\"],\"targetKinds\":[\"routing:state\"],\"cardinalities\":[\"one-to-one\",\"one-to-many\",\"many-to-many\"],\"cyclePolicy\":\"allow\",\"impactDirection\":\"both\"}}]},\"executablePackCount\":0,\"semanticPolicyPresent\":false},\"numbers\":[]}",
+      "expectedWire": {
+        "value": {
+          "status": "projected",
+          "issues": [],
+          "projection": {
+            "$schema": "https://raw.githubusercontent.com/roryscot/metamap/v0.4.0/schemas/metamap-projection.schema.json",
+            "schemaVersion": "1.0.0",
+            "generation": {
+              "id": "urn:metamap:generation:effb97e6e5f244e98da4a75ce2b7e5e4d572e2f641202aadeb8a1864ae0fcc4b",
+              "digest": "sha256:effb97e6e5f244e98da4a75ce2b7e5e4d572e2f641202aadeb8a1864ae0fcc4b"
+            },
+            "graph": {
+              "id": "urn:projection:test:graph",
+              "digest": "sha256:764d28e6433491520847721bca17ed05eeaa30432ff6e46a1c22af342fe2ca89"
+            },
+            "spec": {
+              "id": "urn:projection:test:spec",
+              "digest": "sha256:0ce0c743528f45c153bc9cabefb94b3c9d3af8c2f2251a837ab4f1a3c9386306"
+            },
+            "entries": [
+              {
+                "subject": {
+                  "id": "urn:test:command:a",
+                  "kind": "routing:command",
+                  "label": "A"
+                },
+                "slots": [
+                  {
+                    "name": "handler",
+                    "relation": "routing:handled_by",
+                    "direction": "outgoing",
+                    "cardinality": "many",
+                    "mappings": [
+                      "urn:test:link:a"
+                    ],
+                    "targets": [
+                      {
+                        "id": "urn:test:handler:a",
+                        "kind": "routing:handler"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "subject": {
+                  "id": "urn:test:command:z",
+                  "kind": "routing:command",
+                  "label": "Z",
+                  "attributes": {
+                    "path": "/z",
+                    "nested": {
+                      "x": 1
+                    }
+                  }
+                },
+                "slots": [
+                  {
+                    "name": "handler",
+                    "relation": "routing:handled_by",
+                    "direction": "outgoing",
+                    "cardinality": "many",
+                    "mappings": [
+                      "urn:test:link:z",
+                      "urn:test:link:zz"
+                    ],
+                    "targets": [
+                      {
+                        "id": "urn:test:handler:é",
+                        "kind": "routing:handler"
+                      },
+                      {
+                        "id": "urn:test:handler:é",
+                        "kind": "routing:handler"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "id": "urn:metamap:projection:5b927b41ce0f574c6dbc5751189f3fd4e9010104e4314849248bc50786939fc9",
+            "digest": "sha256:5b927b41ce0f574c6dbc5751189f3fd4e9010104e4314849248bc50786939fc9"
+          }
+        },
+        "numbers": []
+      },
+      "expectedError": null
+    }
+  ]
+}

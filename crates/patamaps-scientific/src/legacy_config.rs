@@ -28,7 +28,7 @@ fn schema() -> &'static LegacyPortableSchema {
     static CONFIG: OnceLock<LegacyPortableSchema> = OnceLock::new();
     CONFIG.get_or_init(|| {
         LegacyPortableSchema::new(include_str!(
-            "../../../fixtures/reference/schemas/metamap-config.schema.json"
+            "../package-inputs/fixtures/reference/schemas/metamap-config.schema.json"
         ))
     })
 }

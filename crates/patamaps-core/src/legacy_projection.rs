@@ -123,13 +123,13 @@ fn schema(record: bool) -> &'static LegacyPortableSchema {
     if record {
         RECORD.get_or_init(|| {
             LegacyPortableSchema::new(include_str!(
-                "../../../fixtures/reference/schemas/metamap-projection.schema.json"
+                "../package-inputs/fixtures/reference/schemas/metamap-projection.schema.json"
             ))
         })
     } else {
         SPEC.get_or_init(|| {
             LegacyPortableSchema::new(include_str!(
-                "../../../fixtures/reference/schemas/metamap-projection-spec.schema.json"
+                "../package-inputs/fixtures/reference/schemas/metamap-projection-spec.schema.json"
             ))
         })
     }

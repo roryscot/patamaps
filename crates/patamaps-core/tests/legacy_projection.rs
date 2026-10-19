@@ -88,7 +88,7 @@ struct FrozenCorpus {
 }
 #[test]
 fn original_v1_projection_corpus_preserves_records_errors_and_numeric_transport() {
-    let bytes = include_bytes!("../../../fixtures/parity/projection-controls.json");
+    let bytes = include_bytes!("../package-inputs/fixtures/parity/projection-controls.json");
     assert_eq!(
         byte_digest(bytes),
         "sha256:38d7d483f9cca50028765f91d8c11b141ceb9f64beedca9f8ebdb2bcc081e515"
@@ -96,7 +96,9 @@ fn original_v1_projection_corpus_preserves_records_errors_and_numeric_transport(
     let corpus: FrozenCorpus = serde_json::from_slice(bytes).unwrap();
     assert_eq!(
         format!("sha256:{}", corpus.reference_lock_digest),
-        byte_digest(include_bytes!("../../../fixtures/parity/supplement.json"))
+        byte_digest(include_bytes!(
+            "../package-inputs/fixtures/parity/supplement.json"
+        ))
     );
     assert_eq!(corpus.cases.len(), 66);
     check_corpus(corpus);
@@ -104,7 +106,8 @@ fn original_v1_projection_corpus_preserves_records_errors_and_numeric_transport(
 
 #[test]
 fn collation_equal_target_order_matches_original_repeatedly() {
-    let bytes = include_bytes!("../../../fixtures/parity/projection-collation-controls.json");
+    let bytes =
+        include_bytes!("../package-inputs/fixtures/parity/projection-collation-controls.json");
     let corpus: FrozenCorpus = serde_json::from_slice(bytes).unwrap();
     assert_eq!(corpus.cases.len(), 2);
     for _ in 0..32 {
@@ -115,7 +118,9 @@ fn collation_equal_target_order_matches_original_repeatedly() {
 fn check_corpus(corpus: FrozenCorpus) {
     assert_eq!(
         format!("sha256:{}", corpus.reference_lock_digest),
-        byte_digest(include_bytes!("../../../fixtures/parity/supplement.json"))
+        byte_digest(include_bytes!(
+            "../package-inputs/fixtures/parity/supplement.json"
+        ))
     );
     let locale = Collator::try_new(
         icu_collator::CollatorPreferences::from_locale_strict(&"en-US".parse().unwrap()).unwrap(),

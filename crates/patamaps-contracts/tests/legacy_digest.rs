@@ -3,7 +3,7 @@ use serde_json::Value;
 
 #[test]
 fn frozen_unchecked_digest_and_stable_bytes_match_original() {
-    let raw = include_bytes!("../../../fixtures/parity/digest-controls.json");
+    let raw = include_bytes!("../package-inputs/fixtures/parity/digest-controls.json");
     assert_eq!(
         byte_digest(raw),
         "sha256:b3738bc0f7c9816d6a4276e3eea40bb16d691889e9384facef62b55519a54b34"
@@ -77,7 +77,7 @@ fn unknown_legacy_collation_does_not_fall_back_silently() {
 
 #[test]
 fn every_unpaired_unit_and_mixed_context_matches_frozen_original_bytes() {
-    let raw = include_bytes!("../../../fixtures/parity/digest-utf16-controls.json");
+    let raw = include_bytes!("../package-inputs/fixtures/parity/digest-utf16-controls.json");
     assert_eq!(
         byte_digest(raw),
         "sha256:6fd875e4a72fe9fc2920d12ecc4fef701f2fb7554da238a5ed66abc11d659b3f"

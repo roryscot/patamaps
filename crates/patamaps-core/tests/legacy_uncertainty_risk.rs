@@ -7,8 +7,10 @@ use serde_json::{Value, json};
 #[test]
 fn original_uncertainty_and_budget_controls_run_in_the_native_library() {
     let corpora: [&[u8]; 2] = [
-        include_bytes!("../../../fixtures/parity/uncertainty-risk-controls.json"),
-        include_bytes!("../../../fixtures/parity/uncertainty-risk-assessment-controls.json"),
+        include_bytes!("../package-inputs/fixtures/parity/uncertainty-risk-controls.json"),
+        include_bytes!(
+            "../package-inputs/fixtures/parity/uncertainty-risk-assessment-controls.json"
+        ),
     ];
     let mut checked = 0;
     for (index, bytes) in corpora.into_iter().enumerate() {

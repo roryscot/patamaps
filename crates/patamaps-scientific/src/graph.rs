@@ -25,7 +25,7 @@ pub struct ImportOptions {
 }
 pub fn scientific_pack() -> RelationPack {
     parse(include_bytes!(
-        "../../../relation-packs/scientific-skos.json"
+        "../package-inputs/relation-packs/scientific-skos.json"
     ))
     .expect("pinned draft SKOS pack")
 }

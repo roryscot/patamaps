@@ -375,3 +375,7 @@ pub mod preferences {
     #[doc = "\n"] // prevent autoformatting
     pub use icu_locale_core::preferences::extensions::unicode::keywords::CollationType;
 }
+
+/// Exact production-source digest of the independently packaged Patamaps fork.
+#[doc(hidden)]
+pub const PATAMAPS_SOURCE_DIGEST: &str = env!("PATAMAPS_COLLATOR_SOURCE_DIGEST");

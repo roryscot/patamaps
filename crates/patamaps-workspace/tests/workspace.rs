@@ -26,8 +26,10 @@ impl Drop for Temp {
     }
 }
 fn fixture(root: &Temp) -> WorkspaceConfig {
-    let mut graph: GraphDocument =
-        parse(include_bytes!("../../../fixtures/routing/graph.json")).unwrap();
+    let mut graph: GraphDocument = parse(include_bytes!(
+        "../package-inputs/fixtures/routing/graph.json"
+    ))
+    .unwrap();
     graph
         .entities
         .iter_mut()
@@ -45,16 +47,18 @@ fn fixture(root: &Temp) -> WorkspaceConfig {
     fs::write(root.0.join("graph.json"), canonical_bytes(&graph).unwrap()).unwrap();
     fs::write(
         root.0.join("pack.json"),
-        include_bytes!("../../../relation-packs/routing.json"),
+        include_bytes!("../package-inputs/relation-packs/routing.json"),
     )
     .unwrap();
     fs::write(
         root.0.join("projection.json"),
-        include_bytes!("../../../fixtures/routing/projection-spec.json"),
+        include_bytes!("../package-inputs/fixtures/routing/projection-spec.json"),
     )
     .unwrap();
-    let mut policy: PolicyDocument =
-        parse(include_bytes!("../../../fixtures/routing/policy.json")).unwrap();
+    let mut policy: PolicyDocument = parse(include_bytes!(
+        "../package-inputs/fixtures/routing/policy.json"
+    ))
+    .unwrap();
     policy.graph.id = "urn:patamaps:workspace:test".into();
     policy.graph.revision = Some("1".into());
     policy.graph.digest = None;
@@ -461,7 +465,7 @@ fn source_symlink_escape_and_absolute_locator_paths_refuse() {
     let mut config = fixture(&root);
     fs::write(
         outside.0.join("outside.json"),
-        include_bytes!("../../../fixtures/routing/graph.json"),
+        include_bytes!("../package-inputs/fixtures/routing/graph.json"),
     )
     .unwrap();
     symlink(outside.0.join("outside.json"), root.0.join("escape.json")).unwrap();

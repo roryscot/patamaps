@@ -94,16 +94,42 @@ pub fn executor_id() -> &'static str {
     ID.get_or_init(|| {
         canonical_digest(&std::collections::BTreeMap::from([
             ("profile", PROFILE),
-            ("toolchain", include_str!("../../../rust-toolchain.toml")),
-            ("lock", include_str!("../../../Cargo.lock")),
-            ("workspace", include_str!("../../../Cargo.toml")),
+            ("legacyProjection", patamaps_core::source_identity::LEGACY_PROJECTION),
+            (
+                "contractsPackageInputs",
+                patamaps_contracts::source_identity::PACKAGE_INPUTS_DIGEST,
+            ),
+            (
+                "corePackageInputs",
+                patamaps_core::source_identity::PACKAGE_INPUTS_DIGEST,
+            ),
+            (
+                "projectionPackageInputs",
+                env!("PATAMAPS_PACKAGE_INPUTS_DIGEST"),
+            ),
+            (
+                "contractsSourceIdentity",
+                patamaps_contracts::source_identity::IDENTITY_RECIPE,
+            ),
+            (
+                "coreSourceIdentity",
+                patamaps_core::source_identity::IDENTITY_RECIPE,
+            ),
+            ("coreBuild", patamaps_core::source_identity::PACKAGE_BUILD),
+            ("projectionBuild", include_str!("../build.rs")),
+            (
+                "toolchain",
+                include_str!("../package-inputs/rust-toolchain.toml"),
+            ),
+            ("lock", include_str!("../package-inputs/Cargo.lock")),
+            ("workspace", include_str!("../package-inputs/Cargo.toml")),
             (
                 "contractsManifest",
-                include_str!("../../patamaps-contracts/Cargo.toml"),
+                patamaps_contracts::source_identity::CONTRACTS_MANIFEST,
             ),
             (
                 "contractsBuild",
-                include_str!("../../patamaps-contracts/build.rs"),
+                patamaps_contracts::source_identity::CONTRACTS_BUILD,
             ),
             (
                 "legacyCollatorSource",
@@ -111,191 +137,161 @@ pub fn executor_id() -> &'static str {
             ),
             (
                 "coreManifest",
-                include_str!("../../patamaps-core/Cargo.toml"),
+                patamaps_core::source_identity::CORE_MANIFEST,
             ),
             ("projectionManifest", include_str!("../Cargo.toml")),
             (
                 "buildObservations",
-                include_str!("../../patamaps-core/src/build_observations.rs"),
+                patamaps_core::source_identity::BUILD_OBSERVATIONS,
             ),
             ("httpBindings", include_str!("http.rs")),
             ("httpJsonSchema", include_str!("http_schema.rs")),
             ("httpTransport", include_str!("http_transport.rs")),
             (
                 "contractsLib",
-                include_str!("../../patamaps-contracts/src/lib.rs"),
+                patamaps_contracts::source_identity::CONTRACTS_LIB,
             ),
-            ("coreLib", include_str!("../../patamaps-core/src/lib.rs")),
-            (
-                "contracts",
-                include_str!("../../patamaps-contracts/src/model.rs"),
-            ),
+            ("coreLib", patamaps_core::source_identity::CORE_LIB),
+            ("contracts", patamaps_contracts::source_identity::CONTRACTS),
             (
                 "semanticTypes",
-                include_str!("../../patamaps-contracts/src/semantic.rs"),
+                patamaps_contracts::source_identity::SEMANTIC_TYPES,
             ),
-            ("json", include_str!("../../patamaps-contracts/src/json.rs")),
-            (
-                "jsonScan",
-                include_str!("../../patamaps-contracts/src/json_scan.rs"),
-            ),
+            ("json", patamaps_contracts::source_identity::JSON),
+            ("jsonScan", patamaps_contracts::source_identity::JSON_SCAN),
             (
                 "legacyJson",
-                include_str!("../../patamaps-contracts/src/legacy_json.rs"),
+                patamaps_contracts::source_identity::LEGACY_JSON,
             ),
             (
                 "legacyStable",
-                include_str!("../../patamaps-contracts/src/legacy_stable.rs"),
+                patamaps_contracts::source_identity::LEGACY_STABLE,
             ),
-            (
-                "integer",
-                include_str!("../../patamaps-contracts/src/integer.rs"),
-            ),
-            ("graph", include_str!("../../patamaps-core/src/graph.rs")),
-            (
-                "registry",
-                include_str!("../../patamaps-core/src/registry.rs"),
-            ),
-            (
-                "legacyPack",
-                include_str!("../../patamaps-core/src/legacy_pack.rs"),
-            ),
+            ("integer", patamaps_contracts::source_identity::INTEGER),
+            ("graph", patamaps_core::source_identity::GRAPH),
+            ("registry", patamaps_core::source_identity::REGISTRY),
+            ("legacyPack", patamaps_core::source_identity::LEGACY_PACK),
             (
                 "legacyRegistry",
-                include_str!("../../patamaps-core/src/legacy_registry.rs"),
+                patamaps_core::source_identity::LEGACY_REGISTRY,
             ),
-            (
-                "legacyGraph",
-                include_str!("../../patamaps-core/src/legacy_graph.rs"),
-            ),
+            ("legacyGraph", patamaps_core::source_identity::LEGACY_GRAPH),
             (
                 "legacyComposition",
-                include_str!("../../patamaps-core/src/legacy_composition.rs"),
+                patamaps_core::source_identity::LEGACY_COMPOSITION,
             ),
             (
                 "legacyReporting",
-                include_str!("../../patamaps-core/src/legacy_reporting.rs"),
+                patamaps_core::source_identity::LEGACY_REPORTING,
             ),
             (
                 "legacyCorrespondence",
-                include_str!("../../patamaps-core/src/legacy_correspondence.rs"),
+                patamaps_core::source_identity::LEGACY_CORRESPONDENCE,
             ),
             (
                 "legacyEvaluation",
-                include_str!("../../patamaps-core/src/legacy_evaluation.rs"),
+                patamaps_core::source_identity::LEGACY_EVALUATION,
             ),
             (
                 "legacyViability",
-                include_str!("../../patamaps-core/src/legacy_viability.rs"),
+                patamaps_core::source_identity::LEGACY_VIABILITY,
             ),
             (
                 "legacySemantic",
-                include_str!("../../patamaps-core/src/legacy_semantic.rs"),
+                patamaps_core::source_identity::LEGACY_SEMANTIC,
             ),
             (
                 "legacyUncertaintyRisk",
-                include_str!("../../patamaps-core/src/legacy_uncertainty_risk.rs"),
+                patamaps_core::source_identity::LEGACY_UNCERTAINTY_RISK,
             ),
             (
                 "legacySemanticPolicySchema",
                 include_str!(
-                    "../../../fixtures/reference/schemas/metamap-viability-v2.schema.json"
+                    "../package-inputs/fixtures/reference/schemas/metamap-viability-v2.schema.json"
                 ),
             ),
             (
                 "legacySemanticGenerationSchema",
                 include_str!(
-                    "../../../fixtures/reference/schemas/metamap-generation-v2.schema.json"
+                    "../package-inputs/fixtures/reference/schemas/metamap-generation-v2.schema.json"
                 ),
             ),
             (
                 "legacySemanticDerivationSchema",
-                include_str!("../../../fixtures/reference/schemas/metamap-derivation.schema.json"),
+                include_str!(
+                    "../package-inputs/fixtures/reference/schemas/metamap-derivation.schema.json"
+                ),
             ),
             (
                 "legacySemanticGraphSchema",
-                include_str!("../../../fixtures/reference/schemas/metamap-graph.schema.json"),
+                include_str!(
+                    "../package-inputs/fixtures/reference/schemas/metamap-graph.schema.json"
+                ),
             ),
             (
                 "legacySemanticV1PolicySchema",
-                include_str!("../../../fixtures/reference/schemas/metamap-viability.schema.json"),
+                include_str!(
+                    "../package-inputs/fixtures/reference/schemas/metamap-viability.schema.json"
+                ),
             ),
             (
                 "legacySemanticV1GenerationSchema",
-                include_str!("../../../fixtures/reference/schemas/metamap-generation.schema.json"),
+                include_str!(
+                    "../package-inputs/fixtures/reference/schemas/metamap-generation.schema.json"
+                ),
             ),
             (
                 "legacyConstraints",
-                include_str!("../../patamaps-core/src/legacy_constraints.rs"),
+                patamaps_core::source_identity::LEGACY_CONSTRAINTS,
             ),
-            (
-                "legacyCli",
-                include_str!("../../patamaps-core/src/legacy_cli.rs"),
-            ),
+            ("legacyCli", patamaps_core::source_identity::LEGACY_CLI),
             (
                 "legacyCliUsage",
-                include_str!("../../patamaps-core/src/legacy_cli_usage.txt"),
+                patamaps_core::source_identity::LEGACY_CLI_USAGE,
             ),
             (
                 "legacyWorkspace",
-                include_str!("../../patamaps-core/src/legacy_workspace.rs"),
+                patamaps_core::source_identity::LEGACY_WORKSPACE,
             ),
             (
                 "legacyReferences",
-                include_str!("../../patamaps-core/src/legacy_references.rs"),
+                patamaps_core::source_identity::LEGACY_REFERENCES,
             ),
             (
                 "legacyUriReference",
-                include_str!("../../patamaps-core/src/legacy_uri_reference.json"),
+                patamaps_core::source_identity::LEGACY_URI_REFERENCE,
             ),
             (
                 "legacyPackSchema",
-                include_str!("../../../fixtures/reference/schemas/relation-pack.schema.json"),
+                include_str!(
+                    "../package-inputs/fixtures/reference/schemas/relation-pack.schema.json"
+                ),
             ),
             (
                 "executableLegacyPackSchema",
-                include_str!("../../../fixtures/reference/schemas/relation-pack-v2.schema.json"),
+                include_str!(
+                    "../package-inputs/fixtures/reference/schemas/relation-pack-v2.schema.json"
+                ),
             ),
             (
                 "legacyValidation",
-                include_str!("../../patamaps-core/src/legacy_validation.rs"),
+                patamaps_core::source_identity::LEGACY_VALIDATION,
             ),
-            (
-                "legacyCore",
-                include_str!("../../patamaps-core/src/legacy_core.json"),
-            ),
-            (
-                "admission",
-                include_str!("../../patamaps-core/src/admission.rs"),
-            ),
+            ("legacyCore", patamaps_core::source_identity::LEGACY_CORE),
+            ("admission", patamaps_core::source_identity::ADMISSION),
             (
                 "nativeConstraints",
-                include_str!("../../patamaps-core/src/constraints.rs"),
+                patamaps_core::source_identity::NATIVE_CONSTRAINTS,
             ),
-            (
-                "topology",
-                include_str!("../../patamaps-core/src/topology.rs"),
-            ),
-            ("laws", include_str!("../../patamaps-core/src/laws.rs")),
-            (
-                "derivation",
-                include_str!("../../patamaps-core/src/derivation.rs"),
-            ),
-            (
-                "uncertainty",
-                include_str!("../../patamaps-core/src/uncertainty.rs"),
-            ),
-            ("risk", include_str!("../../patamaps-core/src/risk.rs")),
-            ("diff", include_str!("../../patamaps-core/src/diff.rs")),
-            ("impact", include_str!("../../patamaps-core/src/impact.rs")),
-            (
-                "preflight",
-                include_str!("../../patamaps-core/src/preflight.rs"),
-            ),
-            (
-                "control",
-                include_str!("../../patamaps-core/src/control.rs"),
-            ),
+            ("topology", patamaps_core::source_identity::TOPOLOGY),
+            ("laws", patamaps_core::source_identity::LAWS),
+            ("derivation", patamaps_core::source_identity::DERIVATION),
+            ("uncertainty", patamaps_core::source_identity::UNCERTAINTY),
+            ("risk", patamaps_core::source_identity::RISK),
+            ("diff", patamaps_core::source_identity::DIFF),
+            ("impact", patamaps_core::source_identity::IMPACT),
+            ("preflight", patamaps_core::source_identity::PREFLIGHT),
+            ("control", patamaps_core::source_identity::CONTROL),
             ("projection", include_str!("lib.rs")),
             ("capture", include_str!("capture.rs")),
             ("comparison", include_str!("compare.rs")),

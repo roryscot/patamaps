@@ -51,3 +51,16 @@ activator. Its byte digest is explicit in the distribution receipt. Bundling
 does not perform owner installation, trust bootstrap or activation; actual
 protected-host acceptance is recorded separately. The installation harness
 records the actual operating system rather than inheriting a macOS label.
+
+## Experimental registry-crate preparation
+
+The source-bundle acceptance above remains bound to its original profile. The
+separate 0.1.0-alpha.1 crates.io preparation makes each Rust crate self-contained,
+with origin-checked bundled inputs and source fragments supplied by their actual
+owner dependencies. The patched collation implementation has its own explicit
+registry name and production-source digest. Cargo-normalized manifests can give
+registry builds distinct executors; original captures/approvals remain historical.
+The alpha gate must verify Cargo archives and a source-unavailable clean consumer
+before registry readiness is claimed. See [the alpha guide](../guides/crates-io-alpha.md).
+This does not change the earlier complete-workspace source installation record,
+publish a registry package, ship the optional Node tooling or activate a consumer.

@@ -1,0 +1,25 @@
+{
+  "schemaVersion": "0.1.0",
+  "documentType": "projection-spec",
+  "id": "urn:example:projection",
+  "select": {
+    "ids": [
+      "urn:a"
+    ]
+  },
+  "slots": [
+    {
+      "name": "derived",
+      "relation": "example:t",
+      "direction": "outgoing",
+      "cardinality": "exactly-one",
+      "targetKinds": [
+        "concept"
+      ]
+    }
+  ],
+  "semantics": {
+    "consumer": "urn:consumer:example",
+    "budget": null
+  }
+}

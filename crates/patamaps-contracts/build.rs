@@ -1,38 +1,71 @@
+// Generated from scripts/crate_package_build.rs; run scripts/sync_crate_inputs.py.
 use sha2::{Digest, Sha256};
-use std::{fs, path::Path};
+use std::{
+    fs,
+    path::{Component, Path},
+};
 
-fn files(directory: &Path, output: &mut Vec<std::path::PathBuf>) {
-    for entry in fs::read_dir(directory).expect("vendored collation sources") {
-        let path = entry.expect("source entry").path();
-        if path.is_dir() {
-            files(&path, output);
-        } else {
-            output.push(path);
-        }
-    }
+fn relative(value: &str) -> &Path {
+    let path = Path::new(value);
+    assert!(
+        !value.is_empty() && path.components().all(|c| matches!(c, Component::Normal(_))),
+        "invalid packaged input path: {value}"
+    );
+    path
 }
 
 fn main() {
-    let manifest = std::env::var("CARGO_MANIFEST_DIR").expect("Cargo manifest path");
-    let root = Path::new(&manifest).join("../../vendor/icu_collator");
-    // Watch additions/removals as well as changes to already inventoried files.
-    println!("cargo:rerun-if-changed={}", root.display());
-    let mut paths = Vec::new();
-    files(&root, &mut paths);
-    paths.sort();
+    let manifest = std::env::var("CARGO_MANIFEST_DIR").expect("crate root");
+    let root = Path::new(&manifest);
+    let origins = root.join("package-inputs.tsv");
+    println!("cargo:rerun-if-changed={}", origins.display());
+    let workspace = root.join("../..");
+    let marker = workspace.join(".patamaps-crate-inputs");
+    println!("cargo:rerun-if-changed={}", marker.display());
+    let source_workspace = match fs::read(&marker) {
+        Ok(bytes) => {
+            assert_eq!(
+                bytes, b"patamaps-crate-inputs-v1\n",
+                "invalid workspace input marker"
+            );
+            true
+        }
+        Err(error) if error.kind() == std::io::ErrorKind::NotFound => false,
+        Err(error) => panic!("workspace input marker: {error}"),
+    };
+    let inputs = fs::read_to_string(&origins).expect("packaged input origins");
     let mut hash = Sha256::new();
-    for path in paths {
+    hash.update(b"patamaps-package-inputs-v1\0");
+    hash.update(inputs.as_bytes());
+    for line in inputs.lines() {
+        let (local, original) = line.split_once('\t').expect("packaged input origin pair");
+        let path = root.join(relative(local));
         println!("cargo:rerun-if-changed={}", path.display());
-        let relative = path.strip_prefix(&root).expect("vendor relative source");
-        let bytes = fs::read(&path).expect("vendored source bytes");
-        hash.update(relative.to_string_lossy().as_bytes());
+        assert!(
+            !fs::symlink_metadata(&path)
+                .expect("packaged input metadata")
+                .file_type()
+                .is_symlink(),
+            "packaged input must be an ordinary file"
+        );
+        let bytes = fs::read(&path).expect("required packaged input missing");
+        hash.update(local.as_bytes());
         hash.update([0]);
         hash.update(bytes.len().to_string().as_bytes());
         hash.update([0]);
-        hash.update(bytes);
+        hash.update(&bytes);
+        if source_workspace {
+            let original = workspace.join(relative(original));
+            println!("cargo:rerun-if-changed={}", original.display());
+            assert_eq!(
+                bytes,
+                fs::read(original).expect("workspace input missing"),
+                "stale packaged input {local}; run scripts/sync_crate_inputs.py"
+            );
+        }
     }
     println!(
-        "cargo:rustc-env=PATAMAPS_COLLATOR_SOURCE_DIGEST=sha256:{:x}",
+        "cargo:rustc-env=PATAMAPS_PACKAGE_INPUTS_DIGEST=sha256:{:x}",
         hash.finalize()
     );
 }

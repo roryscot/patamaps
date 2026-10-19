@@ -131,8 +131,10 @@ fn compatibility_nesting_preserves_the_reference_domain_without_weakening_strict
 
 #[test]
 fn draft_wire_is_closed_and_absent_differs_from_null() {
-    let value: Value =
-        serde_json::from_slice(include_bytes!("../../../fixtures/routing/graph.json")).unwrap();
+    let value: Value = serde_json::from_slice(include_bytes!(
+        "../package-inputs/fixtures/routing/graph.json"
+    ))
+    .unwrap();
     assert!(parse::<GraphDocument>(&serde_json::to_vec(&value).unwrap()).is_ok());
     for (field, replacement) in [
         ("schemaVersion", json!("1.0.0")),

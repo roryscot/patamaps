@@ -27,7 +27,9 @@ impl RelationRegistry {
     }
 
     pub fn with_core() -> Result<Self, CheckError> {
-        Self::new([parse(include_bytes!("../../../relation-packs/core.json"))?])
+        Self::new([parse(include_bytes!(
+            "../package-inputs/relation-packs/core.json"
+        ))?])
     }
 
     /// Interpret the pinned legacy core's definitions with their original pack

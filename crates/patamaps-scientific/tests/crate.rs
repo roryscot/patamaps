@@ -5,7 +5,7 @@ use patamaps_scientific::*;
 use serde::de::DeserializeOwned;
 use serde_json::{Value, json};
 const RAW: &[u8] = include_bytes!(
-    "../../../fixtures/reference/examples/scientific-mapping/fixtures/mgi-subset.sssom.tsv"
+    "../package-inputs/fixtures/reference/examples/scientific-mapping/fixtures/mgi-subset.sssom.tsv"
 );
 fn decode<T: DeserializeOwned>(v: Value) -> T {
     parse(&canonical_bytes(&v).unwrap()).unwrap()

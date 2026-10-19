@@ -1,0 +1,120 @@
+{
+  "schemaVersion": "0.1.0",
+  "documentType": "relation-pack",
+  "id": "urn:example:pack",
+  "version": "1.0.0",
+  "relations": [
+    {
+      "id": "example:r",
+      "cyclePolicy": "allow",
+      "impactDirection": "both",
+      "sourceKinds": [
+        "concept"
+      ],
+      "targetKinds": [
+        "concept"
+      ]
+    },
+    {
+      "id": "example:s",
+      "cyclePolicy": "allow",
+      "impactDirection": "both"
+    },
+    {
+      "id": "example:t",
+      "cyclePolicy": "allow",
+      "impactDirection": "both",
+      "disjointWith": [
+        "example:excluded"
+      ]
+    },
+    {
+      "id": "example:excluded",
+      "cyclePolicy": "allow",
+      "impactDirection": "both"
+    },
+    {
+      "id": "example:exact",
+      "cyclePolicy": "allow",
+      "impactDirection": "both",
+      "transitive": true,
+      "symmetric": true
+    },
+    {
+      "id": "example:close",
+      "cyclePolicy": "allow",
+      "impactDirection": "both",
+      "transitive": false,
+      "symmetric": true
+    }
+  ],
+  "laws": [
+    {
+      "id": "urn:example:law:chain",
+      "operation": "chain",
+      "operands": [
+        "example:r",
+        "example:s"
+      ],
+      "resultRelation": "example:t",
+      "handling": {
+        "lossiness": "conservative",
+        "uncertainty": "conservative",
+        "authority": "none"
+      }
+    },
+    {
+      "id": "urn:example:law:reverse",
+      "operation": "reverse",
+      "operands": [
+        "example:r"
+      ],
+      "resultRelation": "example:s",
+      "handling": {
+        "lossiness": "conservative",
+        "uncertainty": "conservative",
+        "authority": "none"
+      }
+    },
+    {
+      "id": "urn:example:law:exact-chain",
+      "operation": "chain",
+      "operands": [
+        "example:exact",
+        "example:exact"
+      ],
+      "resultRelation": "example:exact",
+      "handling": {
+        "lossiness": "conservative",
+        "uncertainty": "conservative",
+        "authority": "none"
+      }
+    },
+    {
+      "id": "urn:example:law:exact-reverse",
+      "operation": "reverse",
+      "operands": [
+        "example:exact"
+      ],
+      "resultRelation": "example:exact",
+      "handling": {
+        "lossiness": "conservative",
+        "uncertainty": "conservative",
+        "authority": "none"
+      }
+    },
+    {
+      "id": "urn:example:law:close-reverse",
+      "operation": "reverse",
+      "operands": [
+        "example:close"
+      ],
+      "resultRelation": "example:close",
+      "handling": {
+        "lossiness": "conservative",
+        "uncertainty": "conservative",
+        "authority": "none"
+      }
+    }
+  ]
+}

@@ -415,7 +415,7 @@ fn assemble(
         origins: HashMap::new(),
     };
     let core: Value = serde_json::from_str(include_str!(
-        "../../../fixtures/reference/relation-packs/core.json"
+        "../package-inputs/fixtures/reference/relation-packs/core.json"
     ))
     .expect("pinned core pack");
     let core_j = native(&core);

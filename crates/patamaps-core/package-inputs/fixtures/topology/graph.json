@@ -1,0 +1,256 @@
+{
+  "schemaVersion": "0.1.0",
+  "id": "urn:test:graph:application-topology",
+  "namespace": "test",
+  "revision": "1",
+  "relationPacks": [
+    {
+      "id": "urn:metamap:relation-pack:core",
+      "version": "1.0.0"
+    },
+    {
+      "id": "urn:metamap:relation-pack:routing",
+      "version": "1.0.0"
+    },
+    {
+      "id": "urn:metamap:relation-pack:application-topology",
+      "version": "1.0.0"
+    }
+  ],
+  "entities": [
+    {
+      "id": "urn:test:app",
+      "kind": "topology:application"
+    },
+    {
+      "id": "urn:test:segment:root",
+      "kind": "topology:segment"
+    },
+    {
+      "id": "urn:test:container:root",
+      "kind": "topology:container"
+    },
+    {
+      "id": "urn:test:page:home",
+      "kind": "topology:page",
+      "attributes": {
+        "runtime": "client"
+      }
+    },
+    {
+      "id": "urn:test:route:home",
+      "kind": "routing:route",
+      "attributes": {
+        "topologySurface": "semantic-page"
+      }
+    },
+    {
+      "id": "urn:test:content:home",
+      "kind": "topology:content"
+    },
+    {
+      "id": "urn:test:context:web",
+      "kind": "topology:context"
+    },
+    {
+      "id": "urn:test:hydration:home",
+      "kind": "topology:hydration-boundary"
+    }
+  ],
+  "mappings": [
+    {
+      "id": "urn:test:mapping:app-segment",
+      "relation": "topology:contains",
+      "sources": [
+        "urn:test:app"
+      ],
+      "targets": [
+        "urn:test:segment:root"
+      ],
+      "cardinality": "one-to-one",
+      "lossiness": "lossless",
+      "provenance": {
+        "status": "observed",
+        "assertedBy": "test:application-topology"
+      }
+    },
+    {
+      "id": "urn:test:mapping:segment-container",
+      "relation": "topology:contains",
+      "sources": [
+        "urn:test:segment:root"
+      ],
+      "targets": [
+        "urn:test:container:root"
+      ],
+      "cardinality": "one-to-one",
+      "lossiness": "lossless",
+      "provenance": {
+        "status": "observed",
+        "assertedBy": "test:application-topology"
+      }
+    },
+    {
+      "id": "urn:test:mapping:segment-page",
+      "relation": "topology:contains",
+      "sources": [
+        "urn:test:segment:root"
+      ],
+      "targets": [
+        "urn:test:page:home"
+      ],
+      "cardinality": "one-to-one",
+      "lossiness": "lossless",
+      "provenance": {
+        "status": "observed",
+        "assertedBy": "test:application-topology"
+      }
+    },
+    {
+      "id": "urn:test:mapping:segment-hydration",
+      "relation": "topology:contains",
+      "sources": [
+        "urn:test:segment:root"
+      ],
+      "targets": [
+        "urn:test:hydration:home"
+      ],
+      "cardinality": "one-to-one",
+      "lossiness": "lossless",
+      "provenance": {
+        "status": "observed",
+        "assertedBy": "test:application-topology"
+      }
+    },
+    {
+      "id": "urn:test:mapping:container-page",
+      "relation": "topology:wraps",
+      "sources": [
+        "urn:test:container:root"
+      ],
+      "targets": [
+        "urn:test:page:home"
+      ],
+      "cardinality": "one-to-one",
+      "lossiness": "lossless",
+      "provenance": {
+        "status": "observed",
+        "assertedBy": "test:application-topology"
+      }
+    },
+    {
+      "id": "urn:test:mapping:page-container",
+      "relation": "topology:rendered_in",
+      "sources": [
+        "urn:test:page:home"
+      ],
+      "targets": [
+        "urn:test:container:root"
+      ],
+      "cardinality": "one-to-one",
+      "lossiness": "lossless",
+      "provenance": {
+        "status": "observed",
+        "assertedBy": "test:application-topology"
+      }
+    },
+    {
+      "id": "urn:test:mapping:route-page",
+      "relation": "topology:implemented_by",
+      "sources": [
+        "urn:test:route:home"
+      ],
+      "targets": [
+        "urn:test:page:home"
+      ],
+      "cardinality": "one-to-one",
+      "lossiness": "lossless",
+      "provenance": {
+        "status": "declared",
+        "assertedBy": "test:application-topology"
+      }
+    },
+    {
+      "id": "urn:test:mapping:route-container",
+      "relation": "topology:rendered_in",
+      "sources": [
+        "urn:test:route:home"
+      ],
+      "targets": [
+        "urn:test:container:root"
+      ],
+      "cardinality": "one-to-one",
+      "lossiness": "lossless",
+      "provenance": {
+        "status": "declared",
+        "assertedBy": "test:application-topology"
+      }
+    },
+    {
+      "id": "urn:test:mapping:route-content",
+      "relation": "topology:resolves_content",
+      "sources": [
+        "urn:test:route:home"
+      ],
+      "targets": [
+        "urn:test:content:home"
+      ],
+      "cardinality": "one-to-one",
+      "lossiness": "lossless",
+      "provenance": {
+        "status": "declared",
+        "assertedBy": "test:application-topology"
+      }
+    },
+    {
+      "id": "urn:test:mapping:route-context",
+      "relation": "topology:requires_context",
+      "sources": [
+        "urn:test:route:home"
+      ],
+      "targets": [
+        "urn:test:context:web"
+      ],
+      "cardinality": "one-to-one",
+      "lossiness": "lossless",
+      "provenance": {
+        "status": "declared",
+        "assertedBy": "test:application-topology"
+      }
+    },
+    {
+      "id": "urn:test:mapping:container-context",
+      "relation": "topology:provides_context",
+      "sources": [
+        "urn:test:container:root"
+      ],
+      "targets": [
+        "urn:test:context:web"
+      ],
+      "cardinality": "one-to-one",
+      "lossiness": "lossless",
+      "provenance": {
+        "status": "declared",
+        "assertedBy": "test:application-topology"
+      }
+    },
+    {
+      "id": "urn:test:mapping:hydration-page",
+      "relation": "topology:hydrates",
+      "sources": [
+        "urn:test:hydration:home"
+      ],
+      "targets": [
+        "urn:test:page:home"
+      ],
+      "cardinality": "one-to-one",
+      "lossiness": "lossless",
+      "provenance": {
+        "status": "observed",
+        "assertedBy": "test:application-topology"
+      }
+    }
+  ],
+  "authorities": [],
+  "documentType": "graph"
+}

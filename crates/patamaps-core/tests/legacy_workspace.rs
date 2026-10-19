@@ -23,7 +23,7 @@ fn comparable(value: &J) -> Vec<u8> {
 }
 #[test]
 fn all_frozen_workspace_values_and_errors_match_original() {
-    let bytes = include_bytes!("../../../fixtures/parity/workspace-controls.json");
+    let bytes = include_bytes!("../package-inputs/fixtures/parity/workspace-controls.json");
     assert_eq!(
         byte_digest(bytes),
         "sha256:7180988e57237db46577c1f8220ceaaf3fc38f5917642c983eec02586cd9c1cd"

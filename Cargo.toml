@@ -14,20 +14,20 @@ members = [
 ]
 
 [workspace.package]
-version = "0.1.0"
+version = "0.1.0-alpha.1"
 edition = "2024"
 rust-version = "1.99"
 license = "Apache-2.0"
 repository = "https://github.com/roryscot/patamaps"
 
 [workspace.dependencies]
-patamaps-contracts = { path = "crates/patamaps-contracts", version = "0.1.0" }
-patamaps-core = { path = "crates/patamaps-core", version = "0.1.0" }
-patamaps-projection = { path = "crates/patamaps-projection", version = "0.1.0" }
-patamaps-governance = { path = "crates/patamaps-governance", version = "0.1.0" }
-patamaps-inspect = { path = "crates/patamaps-inspect", version = "0.1.0" }
-patamaps-workspace = { path = "crates/patamaps-workspace", version = "0.1.0" }
-patamaps-scientific = { path = "crates/patamaps-scientific", version = "0.1.0" }
+patamaps-contracts = { path = "crates/patamaps-contracts", version = "=0.1.0-alpha.1" }
+patamaps-core = { path = "crates/patamaps-core", version = "=0.1.0-alpha.1" }
+patamaps-projection = { path = "crates/patamaps-projection", version = "=0.1.0-alpha.1" }
+patamaps-governance = { path = "crates/patamaps-governance", version = "=0.1.0-alpha.1" }
+patamaps-inspect = { path = "crates/patamaps-inspect", version = "=0.1.0-alpha.1" }
+patamaps-workspace = { path = "crates/patamaps-workspace", version = "=0.1.0-alpha.1" }
+patamaps-scientific = { path = "crates/patamaps-scientific", version = "=0.1.0-alpha.1" }
 base64 = "=0.22.1"
 ed25519-dalek = { version = "=2.2.0", default-features = false, features = ["std", "fast"] }
 serde = { version = "1.0.229", features = ["derive"] }
@@ -44,7 +44,7 @@ rustix = { version = "=1.1.5", features = ["fs", "process"] }
 yaml-rust2 = { version = "=0.13.0", default-features = false }
 jsonschema = { version = "=0.58.6", default-features = false }
 fluent-uri = "=0.4.1"
-icu_collator = { path = "vendor/icu_collator", version = "=2.2.1" }
+icu_collator = { package = "patamaps-icu-collator", path = "vendor/icu_collator", version = "=2.2.1-patamaps.1" }
 
 [workspace.lints.rust]
 unsafe_code = "forbid"

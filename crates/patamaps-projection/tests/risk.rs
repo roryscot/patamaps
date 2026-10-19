@@ -4,24 +4,30 @@ use patamaps_projection::*;
 use serde_json::json;
 
 fn initial() -> (GraphDocument, RelationPack, PolicyDocument, ProjectionSpec) {
-    let mut g: GraphDocument = parse(include_bytes!("../../../fixtures/laws/graph.json")).unwrap();
-    let pack: RelationPack = parse(include_bytes!("../../../fixtures/laws/pack.json")).unwrap();
-    let r: CompositionRequest =
-        parse(include_bytes!("../../../fixtures/laws/request.json")).unwrap();
+    let mut g: GraphDocument =
+        parse(include_bytes!("../package-inputs/fixtures/laws/graph.json")).unwrap();
+    let pack: RelationPack =
+        parse(include_bytes!("../package-inputs/fixtures/laws/pack.json")).unwrap();
+    let r: CompositionRequest = parse(include_bytes!(
+        "../package-inputs/fixtures/laws/request.json"
+    ))
+    .unwrap();
     let result = derive(
         &CheckedGraph::check(g.clone(), vec![pack.clone()]).unwrap(),
         &r,
     );
     assert_eq!(result.status, DerivationStatus::Proposed);
     g.mappings.push(result.mapping.unwrap());
-    let mut p: PolicyDocument =
-        parse(include_bytes!("../../../fixtures/laws/policy.json")).unwrap();
+    let mut p: PolicyDocument = parse(include_bytes!(
+        "../package-inputs/fixtures/laws/policy.json"
+    ))
+    .unwrap();
     let s = p.semantics.as_mut().unwrap();
     s.derivations.push(result.derivation.unwrap());
     let budget:ConsumerRiskBudget=parse(&canonical_bytes(&json!({"id":"urn:budget:example","consumer":"urn:consumer:example","maximumTotalCost":5,"requireCompleteClassification":true,"requireCompleteDependencies":true,"classifications":[{"id":"urn:cost:ab","select":{"ids":["urn:m:ab"]},"classification":"recorded-source","cost":2},{"id":"urn:cost:bc","select":{"ids":["urn:m:bc"]},"classification":"recorded-source","cost":3},{"id":"urn:cost:ac","select":{"ids":["urn:m:ac"]},"classification":"explicit-inference","cost":0}]})).unwrap()).unwrap();
     s.risk_budgets.push(budget);
     let mut spec: ProjectionSpec = parse(include_bytes!(
-        "../../../fixtures/laws/projection-spec.json"
+        "../package-inputs/fixtures/laws/projection-spec.json"
     ))
     .unwrap();
     spec.semantics.as_mut().unwrap().budget = Some("urn:budget:example".into());
@@ -87,8 +93,10 @@ fn branching_proofs_reuse_a_shared_proof_and_mapping_closure_once() {
     law.id = "urn:law:follow-t".into();
     law.operands = vec!["example:t".into(), "example:s".into()];
     pack.laws.as_mut().unwrap().push(law);
-    let mut request: CompositionRequest =
-        parse(include_bytes!("../../../fixtures/laws/request.json")).unwrap();
+    let mut request: CompositionRequest = parse(include_bytes!(
+        "../package-inputs/fixtures/laws/request.json"
+    ))
+    .unwrap();
     let first = derive(
         &CheckedGraph::check(g.clone(), vec![pack.clone()]).unwrap(),
         &request,
@@ -253,8 +261,10 @@ fn unique_lossy_and_inferred_limits_include_the_premise_closure() {
     g.mappings.pop();
     g.mappings[0].lossiness = Lossiness::Lossy;
     p.mappings[0].reversibility = Reversibility::Irreversible;
-    let r: CompositionRequest =
-        parse(include_bytes!("../../../fixtures/laws/request.json")).unwrap();
+    let r: CompositionRequest = parse(include_bytes!(
+        "../package-inputs/fixtures/laws/request.json"
+    ))
+    .unwrap();
     let result = derive(
         &CheckedGraph::check(g.clone(), vec![pack.clone()]).unwrap(),
         &r,

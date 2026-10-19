@@ -8,7 +8,7 @@ pub fn governance_executor_id() -> &'static str {
     static ID: OnceLock<String> = OnceLock::new();
     ID.get_or_init(||canonical_digest(&serde_json::json!({
         "profile":"patamaps-governance-draft-1","kernel":patamaps_projection::executor_id(),
-        "manifest":include_str!("../Cargo.toml"),"lib":include_str!("lib.rs"),
+        "packageInputs":env!("PATAMAPS_PACKAGE_INPUTS_DIGEST"),"packageBuild":include_str!("../build.rs"),"manifest":include_str!("../Cargo.toml"),"lib":include_str!("lib.rs"),
         "model":include_str!("model.rs"),"util":include_str!("util.rs"),"trust":include_str!("trust.rs"),
         "artifacts":include_str!("artifacts.rs"),"delta":include_str!("delta.rs"),
         "proposal":include_str!("proposal.rs"),"approval":include_str!("approval.rs")

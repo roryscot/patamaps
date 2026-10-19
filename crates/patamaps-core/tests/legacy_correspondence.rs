@@ -25,7 +25,7 @@ fn comparable(raw: &str) -> Vec<u8> {
 }
 #[test]
 fn complete_frozen_correspondence_values_match_original() {
-    let raw = include_bytes!("../../../fixtures/parity/correspondence-controls.json");
+    let raw = include_bytes!("../package-inputs/fixtures/parity/correspondence-controls.json");
     assert_eq!(
         byte_digest(raw),
         "sha256:3061410d68ab3fb14a4de5aaaa13088cf187302c5e1876c09c709303fe8df860"
@@ -87,7 +87,7 @@ fn complete_frozen_correspondence_values_match_original() {
 }
 #[test]
 fn complete_frozen_reference_values_and_refusals_match_original() {
-    let raw = include_bytes!("../../../fixtures/parity/reference-controls.json");
+    let raw = include_bytes!("../package-inputs/fixtures/parity/reference-controls.json");
     assert_eq!(
         byte_digest(raw),
         "sha256:44bf09feb2bf64a9162116630c511d16446e6a24621c1f7b57a1cf00481c5a37"

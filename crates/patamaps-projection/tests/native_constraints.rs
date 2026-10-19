@@ -7,17 +7,26 @@ use std::time::Duration;
 #[test]
 fn native_extension_projects_but_serialized_results_cannot_install_code_or_bypass_replay() {
     let mut inputs = CaptureInputs {
-        graph: parse(include_bytes!("../../../fixtures/routing/graph.json")).unwrap(),
-        policy: parse(include_bytes!("../../../fixtures/routing/policy.json")).unwrap(),
+        graph: parse(include_bytes!(
+            "../package-inputs/fixtures/routing/graph.json"
+        ))
+        .unwrap(),
+        policy: parse(include_bytes!(
+            "../package-inputs/fixtures/routing/policy.json"
+        ))
+        .unwrap(),
         packs: vec![
-            parse(include_bytes!("../../../relation-packs/core.json")).unwrap(),
-            parse(include_bytes!("../../../relation-packs/routing.json")).unwrap(),
+            parse(include_bytes!("../package-inputs/relation-packs/core.json")).unwrap(),
+            parse(include_bytes!(
+                "../package-inputs/relation-packs/routing.json"
+            ))
+            .unwrap(),
         ],
         context: JsonObject::new(),
         evaluated_at: "2026-10-10T12:00:00Z".into(),
         projection_spec: Some(
             parse(include_bytes!(
-                "../../../fixtures/routing/projection-spec.json"
+                "../package-inputs/fixtures/routing/projection-spec.json"
             ))
             .unwrap(),
         ),

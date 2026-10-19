@@ -1,4 +1,6 @@
 [package]
+readme = "README.md"
+include = ["src/**", "tests/**", "package-inputs/**", "package-inputs.tsv", "Cargo.toml", "build.rs", "README.md", "LICENSE", "NOTICE"]
 name = "patamaps-activator"
 version.workspace = true
 edition.workspace = true
@@ -21,6 +23,9 @@ rustix.workspace = true
 patamaps-projection.workspace = true
 base64.workspace = true
 ed25519-dalek.workspace = true
+
+[build-dependencies]
+sha2.workspace = true
 
 [lints]
 workspace = true

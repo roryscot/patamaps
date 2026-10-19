@@ -5,7 +5,7 @@ use serde_json::Value;
 #[test]
 fn frozen_independent_legacy_diagnostics_preserve_every_field_and_order() {
     let corpus: Value = serde_json::from_str(include_str!(
-        "../../../fixtures/parity/legacy-validation-controls.json"
+        "../package-inputs/fixtures/parity/legacy-validation-controls.json"
     ))
     .unwrap();
     assert_eq!(

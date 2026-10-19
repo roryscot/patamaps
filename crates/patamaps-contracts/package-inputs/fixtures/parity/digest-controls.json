@@ -1,0 +1,391 @@
+{
+  "schemaVersion": "1.0.0",
+  "referenceEngine": "399747a4ad05a37cd8db1cedd53048fad2175be4",
+  "originalRuntime": "v22.16.0",
+  "originalIcu": "77.1",
+  "originalCollation": {
+    "locale": "en-US",
+    "usage": "sort",
+    "sensitivity": "variant",
+    "ignorePunctuation": false,
+    "collation": "default",
+    "numeric": false,
+    "caseFirst": "false"
+  },
+  "originalArtifacts": [
+    {
+      "path": "dist/relation-pack.js",
+      "digest": "sha256:8460a18d2b0d3685342eac03c68cc0cbc2c397419299bb674b28a8c6ac35b75e"
+    },
+    {
+      "path": "dist/stable.js",
+      "digest": "sha256:d0557e48e5549d572802bb4500a74fe7736b7e9d63c94540c93304eaa8a73fca"
+    },
+    {
+      "path": "dist/canonical.js",
+      "digest": "sha256:e0dc225f2f2bd7eb7dc9d6648ce7befc5e84623033ed800eea11bb579df8fb5e"
+    }
+  ],
+  "scope": "Finite unchecked JSON digest observations. No arbitrary JavaScript, exhaustive collation/version, resource, package or platform obligation is closed.",
+  "cases": [
+    {
+      "name": "null-dispatch",
+      "text": "null",
+      "expected": {
+        "status": "threw",
+        "error": {
+          "name": "TypeError",
+          "message": "Cannot read properties of null (reading 'schemaVersion')"
+        }
+      }
+    },
+    {
+      "name": "empty-unchecked",
+      "text": "{}",
+      "expected": {
+        "status": "observed",
+        "digest": "sha256:ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356"
+      },
+      "stableJson": "{}\n"
+    },
+    {
+      "name": "boolean",
+      "text": "true",
+      "expected": {
+        "status": "observed",
+        "digest": "sha256:a17fcf0a2f50e2d495e4f90ce263410edc183add6c62699a2facbccf60410f74"
+      },
+      "stableJson": "true\n"
+    },
+    {
+      "name": "number",
+      "text": "42",
+      "expected": {
+        "status": "observed",
+        "digest": "sha256:084c799cd551dd1d8d5c5f9a5d593b2e931f5e36122ee5c793c1d08a19839cc0"
+      },
+      "stableJson": "42\n"
+    },
+    {
+      "name": "string",
+      "text": "\"hello\"",
+      "expected": {
+        "status": "observed",
+        "digest": "sha256:11fc90bd25a4139f105bf5c0423c47ba4b1066cd221fabd4e255bd7d0f1b3758"
+      },
+      "stableJson": "\"hello\"\n"
+    },
+    {
+      "name": "array",
+      "text": "[3,{\"z\":1,\"A\":2,\"a\":3},null]",
+      "expected": {
+        "status": "observed",
+        "digest": "sha256:2d47f389bf911086d128e60b134c178de09becc252fb2f875217ca5c5581cfe0"
+      },
+      "stableJson": "[3,{\"a\":3,\"A\":2,\"z\":1},null]\n"
+    },
+    {
+      "name": "case-order",
+      "text": "{\"schemaVersion\":\"1.0.0\",\"Z\":1,\"a\":2,\"A\":3,\"z\":4}",
+      "expected": {
+        "status": "observed",
+        "digest": "sha256:da86d5c89002e4533e679cfa1d794c9bf84fc8bfe251807a09b2072fe21d5a24"
+      },
+      "stableJson": "{\"a\":2,\"A\":3,\"schemaVersion\":\"1.0.0\",\"z\":4,\"Z\":1}\n"
+    },
+    {
+      "name": "numeric-keys",
+      "text": "{\"20\":1,\"3\":2,\"10\":3,\"2\":4,\"01\":5,\"4294967295\":6,\"4294967294\":7,\"-0\":8}",
+      "expected": {
+        "status": "observed",
+        "digest": "sha256:4a532b537c4c65b47df630feec4e8143131d2da0e5b0698c31d453ccdec35ef2"
+      },
+      "stableJson": "{\"2\":4,\"3\":2,\"10\":3,\"20\":1,\"4294967294\":7,\"-0\":8,\"01\":5,\"4294967295\":6}\n"
+    },
+    {
+      "name": "nested",
+      "text": "{\"schemaVersion\":\"1.0.0\",\"payload\":{\"z\":[],\"A\":{\"b\":1,\"a\":2},\"a\":[{\"B\":true,\"b\":false}]}}",
+      "expected": {
+        "status": "observed",
+        "digest": "sha256:150f4c912cd93ec664a446bc3bd5e2bede49de321efc0c4eea5e89f297a430f5"
+      },
+      "stableJson": "{\"payload\":{\"a\":[{\"b\":false,\"B\":true}],\"A\":{\"a\":2,\"b\":1},\"z\":[]},\"schemaVersion\":\"1.0.0\"}\n"
+    },
+    {
+      "name": "duplicate-retains-first-key-position",
+      "text": "{\"é\":1,\"é\":2,\"é\":3}",
+      "expected": {
+        "status": "observed",
+        "digest": "sha256:00fdfbec316c94ca0dd5b6deb5a825102ed7db1ba6deaac48d7e7e9a61cb7b4b"
+      },
+      "stableJson": "{\"é\":3,\"é\":2}\n"
+    },
+    {
+      "name": "escaped-duplicate-retains-position",
+      "text": "{\"é\":1,\"é\":2,\"\\u00e9\":3}",
+      "expected": {
+        "status": "observed",
+        "digest": "sha256:00fdfbec316c94ca0dd5b6deb5a825102ed7db1ba6deaac48d7e7e9a61cb7b4b"
+      },
+      "stableJson": "{\"é\":3,\"é\":2}\n"
+    },
+    {
+      "name": "prototype-names",
+      "text": "{\"__proto__\":{\"z\":1,\"a\":2},\"constructor\":3,\"toString\":4}",
+      "expected": {
+        "status": "observed",
+        "digest": "sha256:3aa1bf716705195cd56d6990754054ca4cc0e390f4a19ab4526335a63c139f44"
+      },
+      "stableJson": "{\"__proto__\":{\"a\":2,\"z\":1},\"constructor\":3,\"toString\":4}\n"
+    },
+    {
+      "name": "unknown-version",
+      "text": "{\"schemaVersion\":\"99.0.0\",\"Z\":1,\"a\":2}",
+      "expected": {
+        "status": "observed",
+        "digest": "sha256:37634d09583253eb7fcea0954c26eff2c7e6ce11c850c7620ea1b8844d98e494"
+      },
+      "stableJson": "{\"a\":2,\"schemaVersion\":\"99.0.0\",\"Z\":1}\n"
+    },
+    {
+      "name": "invalid-executable-shape",
+      "text": "{\"schemaVersion\":\"2.0.0\",\"Z\":1,\"a\":2}",
+      "expected": {
+        "status": "observed",
+        "digest": "sha256:803ed999e16de83762c3490b7c1a0c8597e882057d44f33279f514cf4592915c"
+      }
+    },
+    {
+      "name": "executable-jcs-order",
+      "text": "{\"schemaVersion\":\"2.0.0\",\"20\":1,\"3\":2,\"Z\":3,\"a\":4,\"é\":5}",
+      "expected": {
+        "status": "observed",
+        "digest": "sha256:046f13e89a974f3fa97edf3380af623af1b0b8136dc394fd1061c8f4a05f7e1d"
+      }
+    },
+    {
+      "name": "executable-last-version",
+      "text": "{\"schemaVersion\":\"1.0.0\",\"schemaVersion\":\"2.0.0\",\"z\":1}",
+      "expected": {
+        "status": "observed",
+        "digest": "sha256:ea44e3de524abf44585d3a9424af438939b2b823c0b9892102c12b9ecca4a11c"
+      }
+    },
+    {
+      "name": "legacy-last-version",
+      "text": "{\"schemaVersion\":\"2.0.0\",\"schemaVersion\":\"1.0.0\",\"Z\":1,\"a\":2}",
+      "expected": {
+        "status": "observed",
+        "digest": "sha256:c8005e1fda5f5424b734a255f36a1753104f7453f8a5a5ea650f7e4d88e0ab1f"
+      },
+      "stableJson": "{\"a\":2,\"schemaVersion\":\"1.0.0\",\"Z\":1}\n"
+    },
+    {
+      "name": "accent-forward",
+      "text": "{\"é\":0,\"e\":1,\"E\":2,\"é\":3,\"è\":4,\"ê\":5}",
+      "expected": {
+        "status": "observed",
+        "digest": "sha256:c915953f484382b29920f3a8ccd3236b41ad23c78c5f06b0cd5dfb72bb5bdc15"
+      },
+      "stableJson": "{\"e\":1,\"E\":2,\"é\":0,\"é\":3,\"è\":4,\"ê\":5}\n"
+    },
+    {
+      "name": "accent-reverse",
+      "text": "{\"ê\":5,\"è\":4,\"é\":3,\"E\":2,\"e\":1,\"é\":0}",
+      "expected": {
+        "status": "observed",
+        "digest": "sha256:f54022f31e8c3b8df07c25ad4354599797d8fac5699de49ce3e7a0b3c2b2764d"
+      },
+      "stableJson": "{\"e\":1,\"E\":2,\"é\":3,\"é\":0,\"è\":4,\"ê\":5}\n"
+    },
+    {
+      "name": "canonical-tie-forward",
+      "text": "{\"é\":0,\"é\":1}",
+      "expected": {
+        "status": "observed",
+        "digest": "sha256:f1d316468cad2040fc7a3f841988c397e09e061a3fecd7467b65715f6ddb8503"
+      },
+      "stableJson": "{\"é\":0,\"é\":1}\n"
+    },
+    {
+      "name": "canonical-tie-reverse",
+      "text": "{\"é\":1,\"é\":0}",
+      "expected": {
+        "status": "observed",
+        "digest": "sha256:6b822be8174807a88fa98017c20b9b3191c4ea364a8135047a3a2e81f89f2f6a"
+      },
+      "stableJson": "{\"é\":1,\"é\":0}\n"
+    },
+    {
+      "name": "ignorable-tie-forward",
+      "text": "{\"a\":0,\"a\\u0000\":1,\"a‍\":2}",
+      "expected": {
+        "status": "observed",
+        "digest": "sha256:f423769893255212621c903e105809aef51b17a2f2754931bcceaaa02a844f5d"
+      },
+      "stableJson": "{\"a\":0,\"a\\u0000\":1,\"a‍\":2}\n"
+    },
+    {
+      "name": "ignorable-tie-reverse",
+      "text": "{\"a‍\":2,\"a\\u0000\":1,\"a\":0}",
+      "expected": {
+        "status": "observed",
+        "digest": "sha256:a2ebb3a32ab87aa354a78169b898a54546d416ea6819d8e9523bb2503257690a"
+      },
+      "stableJson": "{\"a‍\":2,\"a\\u0000\":1,\"a\":0}\n"
+    },
+    {
+      "name": "punctuation-forward",
+      "text": "{\"a-b\":0,\"ab\":1,\"a_b\":2,\"a b\":3,\"a.b\":4}",
+      "expected": {
+        "status": "observed",
+        "digest": "sha256:41a53d5f2124030641c80e6f77b82f0a1a4e055dddea158a0137b93a640a0442"
+      },
+      "stableJson": "{\"a b\":3,\"a_b\":2,\"a-b\":0,\"a.b\":4,\"ab\":1}\n"
+    },
+    {
+      "name": "punctuation-reverse",
+      "text": "{\"a.b\":4,\"a b\":3,\"a_b\":2,\"ab\":1,\"a-b\":0}",
+      "expected": {
+        "status": "observed",
+        "digest": "sha256:41a53d5f2124030641c80e6f77b82f0a1a4e055dddea158a0137b93a640a0442"
+      },
+      "stableJson": "{\"a b\":3,\"a_b\":2,\"a-b\":0,\"a.b\":4,\"ab\":1}\n"
+    },
+    {
+      "name": "turkish-forward",
+      "text": "{\"I\":0,\"ı\":1,\"İ\":2,\"i\":3}",
+      "expected": {
+        "status": "observed",
+        "digest": "sha256:f9e84538f5bcac181ccaff35e251ec615a296a89686827f2cee88f06b0df9d41"
+      },
+      "stableJson": "{\"i\":3,\"I\":0,\"İ\":2,\"ı\":1}\n"
+    },
+    {
+      "name": "turkish-reverse",
+      "text": "{\"i\":3,\"İ\":2,\"ı\":1,\"I\":0}",
+      "expected": {
+        "status": "observed",
+        "digest": "sha256:f9e84538f5bcac181ccaff35e251ec615a296a89686827f2cee88f06b0df9d41"
+      },
+      "stableJson": "{\"i\":3,\"I\":0,\"İ\":2,\"ı\":1}\n"
+    },
+    {
+      "name": "swedish-forward",
+      "text": "{\"ä\":0,\"å\":1,\"z\":2,\"ö\":3,\"a\":4}",
+      "expected": {
+        "status": "observed",
+        "digest": "sha256:83bff2c31845fc922877d4fe855ff5f9e1890c107910efc30f7c9edfb2f23ec2"
+      },
+      "stableJson": "{\"a\":4,\"å\":1,\"ä\":0,\"ö\":3,\"z\":2}\n"
+    },
+    {
+      "name": "swedish-reverse",
+      "text": "{\"a\":4,\"ö\":3,\"z\":2,\"å\":1,\"ä\":0}",
+      "expected": {
+        "status": "observed",
+        "digest": "sha256:83bff2c31845fc922877d4fe855ff5f9e1890c107910efc30f7c9edfb2f23ec2"
+      },
+      "stableJson": "{\"a\":4,\"å\":1,\"ä\":0,\"ö\":3,\"z\":2}\n"
+    },
+    {
+      "name": "nonlatin-forward",
+      "text": "{\"日\":0,\"あ\":1,\"ア\":2,\"Ω\":3,\"ж\":4,\"한\":5,\"中\":6}",
+      "expected": {
+        "status": "observed",
+        "digest": "sha256:656ccbf5f132255f34d69b29c1d288c95370ff9fe845713ba1a91666ec842499"
+      },
+      "stableJson": "{\"Ω\":3,\"ж\":4,\"한\":5,\"あ\":1,\"ア\":2,\"中\":6,\"日\":0}\n"
+    },
+    {
+      "name": "nonlatin-reverse",
+      "text": "{\"中\":6,\"한\":5,\"ж\":4,\"Ω\":3,\"ア\":2,\"あ\":1,\"日\":0}",
+      "expected": {
+        "status": "observed",
+        "digest": "sha256:656ccbf5f132255f34d69b29c1d288c95370ff9fe845713ba1a91666ec842499"
+      },
+      "stableJson": "{\"Ω\":3,\"ж\":4,\"한\":5,\"あ\":1,\"ア\":2,\"中\":6,\"日\":0}\n"
+    },
+    {
+      "name": "astral-forward",
+      "text": "{\"😀\":0,\"𝒜\":1,\"𐀀\":2,\"A\":3}",
+      "expected": {
+        "status": "observed",
+        "digest": "sha256:5c6c7b1a04e325ef850e8934dd2685e8089907efef01846d38dfdd2248e4f1ee"
+      },
+      "stableJson": "{\"😀\":0,\"A\":3,\"𝒜\":1,\"𐀀\":2}\n"
+    },
+    {
+      "name": "astral-reverse",
+      "text": "{\"A\":3,\"𐀀\":2,\"𝒜\":1,\"😀\":0}",
+      "expected": {
+        "status": "observed",
+        "digest": "sha256:5c6c7b1a04e325ef850e8934dd2685e8089907efef01846d38dfdd2248e4f1ee"
+      },
+      "stableJson": "{\"😀\":0,\"A\":3,\"𝒜\":1,\"𐀀\":2}\n"
+    },
+    {
+      "name": "unpaired-forward",
+      "text": "{\"\\ud800\":0,\"\\udfff\":1,\"�\":2,\"\":3,\"\":4}",
+      "expected": {
+        "status": "observed",
+        "digest": "sha256:d9504ffd3ecfbd97fa3c518b89671547bfaf4ead7d1f962518b7b630ded2428e"
+      },
+      "stableJson": "{\"\\ud800\":0,\"\\udfff\":1,\"\":3,\"\":4,\"�\":2}\n"
+    },
+    {
+      "name": "unpaired-reverse",
+      "text": "{\"\":4,\"\":3,\"�\":2,\"\\udfff\":1,\"\\ud800\":0}",
+      "expected": {
+        "status": "observed",
+        "digest": "sha256:d9504ffd3ecfbd97fa3c518b89671547bfaf4ead7d1f962518b7b630ded2428e"
+      },
+      "stableJson": "{\"\\ud800\":0,\"\\udfff\":1,\"\":3,\"\":4,\"�\":2}\n"
+    },
+    {
+      "name": "negative-zero",
+      "text": "{\"z\":-0,\"a\":0}",
+      "expected": {
+        "status": "observed",
+        "digest": "sha256:1feb6967a0c217481cf1f9bb61bc51ab86cd92deead4f7407f8138550e37a9be"
+      },
+      "stableJson": "{\"a\":0,\"z\":0}\n"
+    },
+    {
+      "name": "number-thresholds",
+      "text": "{\"a\":1e-7,\"b\":1e-6,\"c\":1e20,\"d\":1e21,\"e\":5e-324,\"f\":1.7976931348623157e308}",
+      "expected": {
+        "status": "observed",
+        "digest": "sha256:8d000897a5fa336bfe0d5fd30b4963788c62fe4a37106288b571b13b118ae32c"
+      },
+      "stableJson": "{\"a\":1e-7,\"b\":0.000001,\"c\":100000000000000000000,\"d\":1e+21,\"e\":5e-324,\"f\":1.7976931348623157e+308}\n"
+    },
+    {
+      "name": "rounded-integer",
+      "text": "{\"n\":9007199254740993,\"m\":18446744073709551615}",
+      "expected": {
+        "status": "observed",
+        "digest": "sha256:9aa331f50b65c626b5eeb5ba05927e3bda0f8c8f6887a02f814c13929f77a793"
+      },
+      "stableJson": "{\"m\":18446744073709552000,\"n\":9007199254740992}\n"
+    },
+    {
+      "name": "strings",
+      "text": "{\"z\":\"\\ud800\\udc00\\udfff\\ue000\\ue001\",\"a\":\"\\b\\t\\n\\r\\f\\u0000\\\"\\\\/\"}",
+      "expected": {
+        "status": "observed",
+        "digest": "sha256:f9ad7edcd806d9937eec3c78e5a6fe4dcafe386f0cfdf631039b1003605108d6"
+      },
+      "stableJson": "{\"a\":\"\\b\\t\\n\\r\\f\\u0000\\\"\\\\/\",\"z\":\"𐀀\\udfff\"}\n"
+    },
+    {
+      "name": "values-not-normalized",
+      "text": "{\"é\":\"é\",\"é\":\"é\"}",
+      "expected": {
+        "status": "observed",
+        "digest": "sha256:8110fa3c625bd5d88402413c1c21b8b2b99d6f6d54ac6eb60ff3539c3f0027fb"
+      },
+      "stableJson": "{\"é\":\"é\",\"é\":\"é\"}\n"
+    }
+  ]
+}

@@ -1,0 +1,152 @@
+Metamap
+Copyright 2026 Rory Dahl
+
+This product includes software developed by Rory Dahl.
+The schemas, relation packs, reference compiler, CLI, and built-in adapters
+in this repository are licensed under the Apache License, Version 2.0.
+
+The JavaScript marshalling checks in sdk/typescript/canonical.mjs adapt
+src/canonical.ts from MetaMap 0.7.1, revision
+399747a4ad05a37cd8db1cedd53048fad2175be4 (Apache-2.0, Rory Dahl).
+Patamaps executes canonical encoding, strict parsing and hashing in Rust.
+
+The read-only legacy graph validator in patamaps-core adapts the shape and
+semantic validation contract from src/validator.ts at the same pinned
+Apache-2.0 revision. Its reports cannot construct an admitted generation or
+authorize a protected transaction.
+legacy_core.json preserves the default core relation data exported by
+src/relations.ts at that pinned revision, under the same license.
+The native legacy CLI planner/renderer, its preserved usage text, and source
+catalog migration adapt src/cli.ts and src/adapters/source-of-truth.ts at
+that revision, under the same Apache-2.0 license. The compatibility entry
+uses the Patamaps engine and optional fact providers.
+The version-dispatched legacy pack importer interprets the preserved 1.0/2.0
+relation-pack schemas from that revision. Original documents and digest
+conventions remain separate from native draft views; importing confers no
+admission or authorization. Executable dependency checking shares the native
+law checker. Full original JavaScript registry behavior remains a parity target.
+
+adapters/discovery extracts the Apache-2.0 Prisma, TypeScript/Zod, Next.js,
+JSON collection, legacy catalog, SSSOM and portable-shard fact providers and their type/fact helpers
+from the same pinned MetaMap revision. Its provenance.json identifies the
+original source and compiled bytes and the limited declaration adaptations.
+The shard wrapper's sole code relocation points to its unmodified bundled
+graph schema; Ajv performs shape checking without reference semantic validation.
+It includes no reference policy, admission, governance or graph compiler.
+The SSSOM fact wrapper delegates its parser, interpretation, source schema
+validation and canonical encoding to the Rust scientific engine. The fixed
+scientific relation data retains its original license and versioned digest.
+
+Consuming repositories remain responsible for their own graph documents,
+correspondences, authority decisions, viability policies, and generated
+projections. Those artifacts are not licensed by this NOTICE unless they
+are published as part of this repository's examples.
+
+The unmodified SSSOM 1.0.0 model and license are retained under
+fixtures/reference/standards/sssom-1.0.0 (BSD-3-Clause). The MGI seven-record
+producer subset retains its source-declared CC BY 4.0 license, creator IDs,
+selection manifest and provenance under fixtures/reference/examples/scientific-mapping.
+These source licenses are not replaced by this repository's code license.
+
+The pinned RO-Crate 1.2 JSON-LD context is distributed by the Research Object
+Crate contributors under CC0 1.0 Universal. Its exact bytes and source URL are
+recorded in fixtures/scientific/ro-crate-context-pin.json. Upstream attribution:
+https://github.com/ResearchObject/ro-crate#license
+
+The preserved legacy URI-reference format pattern derives from ajv-formats
+3.0.1 (dist/formats.js), used by the pinned MetaMap parser. Its ASCII
+case/digit and regex-literal escapes are adapted for the native regex engine.
+The following upstream license applies to that derived pattern:
+
+MIT License
+
+Copyright (c) 2020 Evgeny Poberezkin
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+The legacy graph query and shard composition interfaces adapt src/graph.ts and
+src/composer.ts at the pinned Apache-2.0 MetaMap revision. Native Rust decides
+legacy indexes, queries, equivalence, merge handles and conflicts; SDK handles
+retain caller objects. These observations grant no admission or authorization.
+
+The native legacy composer and unchecked legacy digests use the Unicode
+Consortium's ICU4X icu_collator 2.2.1 with its locked compiled collation data.
+The vendored copy adds a tagged UTF-16 comparison path for unpaired units;
+only src/comparison.rs and src/elements.rs are patched, and the complete
+vendored source is bound into the compiler identity. The patch and original
+file inventory are documented in vendor/icu_collator/PATAMAPS-PATCH.md and
+vendor/icu_collator/PATAMAPS-UPSTREAM.json. The upstream source is
+https://github.com/unicode-org/icu4x and its API is documented at
+https://docs.rs/icu_collator/2.2.1/icu_collator/struct.Collator.html .
+The original runtime locale is an explicit observation input. Complete
+collation-data equivalence across ICU versions/platforms remains unverified.
+The accompanying Unicode license follows verbatim:
+
+UNICODE LICENSE V3
+
+COPYRIGHT AND PERMISSION NOTICE
+
+Copyright © 2020-2024 Unicode, Inc.
+
+NOTICE TO USER: Carefully read the following legal agreement. BY
+DOWNLOADING, INSTALLING, COPYING OR OTHERWISE USING DATA FILES, AND/OR
+SOFTWARE, YOU UNEQUIVOCALLY ACCEPT, AND AGREE TO BE BOUND BY, ALL OF THE
+TERMS AND CONDITIONS OF THIS AGREEMENT. IF YOU DO NOT AGREE, DO NOT
+DOWNLOAD, INSTALL, COPY, DISTRIBUTE OR USE THE DATA FILES OR SOFTWARE.
+
+Permission is hereby granted, free of charge, to any person obtaining a
+copy of data files and any associated documentation (the "Data Files") or
+software and any associated documentation (the "Software") to deal in the
+Data Files or Software without restriction, including without limitation
+the rights to use, copy, modify, merge, publish, distribute, and/or sell
+copies of the Data Files or Software, and to permit persons to whom the
+Data Files or Software are furnished to do so, provided that either (a)
+this copyright and permission notice appear with all copies of the Data
+Files or Software, or (b) this copyright and permission notice appear in
+associated Documentation.
+
+THE DATA FILES AND SOFTWARE ARE PROVIDED "AS IS", WITHOUT WARRANTY OF ANY
+KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT OF
+THIRD PARTY RIGHTS.
+
+IN NO EVENT SHALL THE COPYRIGHT HOLDER OR HOLDERS INCLUDED IN THIS NOTICE
+BE LIABLE FOR ANY CLAIM, OR ANY SPECIAL INDIRECT OR CONSEQUENTIAL DAMAGES,
+OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS,
+WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION,
+ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THE DATA
+FILES OR SOFTWARE.
+
+Except as contained in this notice, the name of a copyright holder shall
+not be used in advertising or otherwise to promote the sale, use or other
+dealings in these Data Files or Software without prior written
+authorization of the copyright holder.
+
+SPDX-License-Identifier: Unicode-3.0
+
+—
+
+Portions of ICU4X may have been adapted from ICU4C and/or ICU4J.
+ICU 1.8.1 to ICU 57.1 © 1995-2016 International Business Machines Corporation and others.
+
+Native Dockerfile observations use tree-sitter-containerfile 0.9.2, retaining
+WharfLab's 2026 MIT notice and Camden Cheek's upstream MIT notice, and
+tree-sitter 0.26.5 / tree-sitter-language 0.1.9 under MIT. Their exact
+notices are included under docs/licenses in source and native bundles.
+These dependency licenses do not replace the repository's Apache-2.0 license.

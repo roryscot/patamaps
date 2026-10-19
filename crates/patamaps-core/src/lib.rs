@@ -1,5 +1,8 @@
 #![forbid(unsafe_code)]
 
+#[doc(hidden)]
+pub mod source_identity;
+
 mod admission;
 mod build_observations;
 pub use build_observations::observation_matches;

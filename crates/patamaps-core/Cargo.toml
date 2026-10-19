@@ -1,4 +1,6 @@
 [package]
+readme = "README.md"
+include = ["src/**", "tests/**", "package-inputs/**", "package-inputs.tsv", "Cargo.toml", "build.rs", "README.md", "LICENSE", "NOTICE"]
 name = "patamaps-core"
 version.workspace = true
 edition.workspace = true
@@ -15,6 +17,9 @@ time.workspace = true
 thiserror.workspace = true
 jsonschema.workspace = true
 icu_collator.workspace = true
+
+[build-dependencies]
+sha2.workspace = true
 
 [lints]
 workspace = true

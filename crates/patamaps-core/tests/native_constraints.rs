@@ -6,14 +6,22 @@ const KIND: &str = "consumer:requires-locator";
 const SUBJECT: &str = "urn:example:handler:create-user";
 
 fn fixture() -> (CheckedGraph, PolicyDocument) {
-    let graph = parse(include_bytes!("../../../fixtures/routing/graph.json")).unwrap();
+    let graph = parse(include_bytes!(
+        "../package-inputs/fixtures/routing/graph.json"
+    ))
+    .unwrap();
     let packs = vec![
-        parse(include_bytes!("../../../relation-packs/core.json")).unwrap(),
-        parse(include_bytes!("../../../relation-packs/routing.json")).unwrap(),
+        parse(include_bytes!("../package-inputs/relation-packs/core.json")).unwrap(),
+        parse(include_bytes!(
+            "../package-inputs/relation-packs/routing.json"
+        ))
+        .unwrap(),
     ];
     let graph = CheckedGraph::check(graph, packs).unwrap();
-    let mut policy: PolicyDocument =
-        parse(include_bytes!("../../../fixtures/routing/policy.json")).unwrap();
+    let mut policy: PolicyDocument = parse(include_bytes!(
+        "../package-inputs/fixtures/routing/policy.json"
+    ))
+    .unwrap();
     policy.constraints.push(Constraint {
         id: "urn:constraint:native-locator".into(),
         kind: KIND.into(),
