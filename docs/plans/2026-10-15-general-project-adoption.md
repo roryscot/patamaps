@@ -510,3 +510,16 @@ This is UNVERIFIED implementation: no new Rust compilation, CLI execution or
 actual upstream metadata pass is claimed. Native tests must wait for the shared
 reservation; existing Linux CI may verify the draft independently. The queued
 installed-owner workflow still uses its exact previously identified archive pair.
+
+## Cargo segment provider verification checkpoint (2026-10-19)
+
+The repaired candidate passed all four CI39264678054 jobs. Its tested PR merge
+38107df7b3b8d8f1ed0eeaa25ddd438a67bbb006 has byte-identical native discovery,
+unit-test and provider-control files to the current implementation. The API-digest
+verified small diagnostics archive records all five new full-provider controls,
+including old-mode refusal, exact expansion, missing capture, unsupported grammar
+and post-metadata mutation refusal. See the [scoped receipt](../acceptance/project-adoption/g3-cargo-segment-cli-2026-10-19/receipt.json).
+Independent pinned Axum source intake passed; actual metadata/refusal qualification
+is queued. No upstream, target compilation or whole-goal pass follows from these
+controlled results. The existing package's installed-owner build is independently
+running and does not contain this newer discovery change.

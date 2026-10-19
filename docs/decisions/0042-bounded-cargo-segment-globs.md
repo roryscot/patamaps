@@ -1,8 +1,9 @@
 # Decision 0042: opt-in Cargo segment globs
 
-Status: implemented candidate; compilation, CLI/native execution and upstream
-qualification pending. This extends the general project-adoption plan, not its
-acceptance scope.
+Status: controlled unit/CLI qualification passed; independent upstream qualification
+pending. See the [provider receipt](../acceptance/project-adoption/g3-cargo-segment-cli-2026-10-19/receipt.json)
+and [focused Intel tests](../acceptance/project-adoption/g3-cargo-segment-unit-2026-10-19/receipt.json).
+This extends the general project-adoption plan, not its acceptance scope.
 
 The public tokio-rs/axum workspace at
 fc78d5bcdb276bd6fb53cf2db55e91757eabb469 declares members=["axum","axum-*"].
