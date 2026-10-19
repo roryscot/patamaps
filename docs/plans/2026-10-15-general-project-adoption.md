@@ -523,3 +523,21 @@ Independent pinned Axum source intake passed; actual metadata/refusal qualificat
 is queued. No upstream, target compilation or whole-goal pass follows from these
 controlled results. The existing package's installed-owner build is independently
 running and does not contain this newer discovery change.
+
+## Actual installed-owner workflow checkpoint (2026-10-19)
+
+The [exact installed-owner receipt](../acceptance/project-adoption/g5-installed-owner-2026-10-19/receipt.json)
+records native generation by the unchanged real owner generator, actual Next
+production build, TypeScript and fresh compiled-manifest checks. All14329 installed
+source members and native/SDK bytes match the identified package; the selected
+label reached compiled clientJavaScript. Build473.131s, offline selected replay32.169s,
+no-op32.972s. Owner source, opaque snapshot and configured external native provider
+were unavailable during replay and restored afterward. No-op preserved selection
+and trace and reported verification not repeated/cacheHits0.
+
+The first two staging failures remain retained. The successful fresh attempt used
+exact recovered context bytes and all960 selected text inputs reconstructed by
+native project-stage from the retained source-capture, including the missing lock.
+The exact package predates Cargo segment-glob implementation; it is not installed
+acceptance of the latest branch head. Authenticated/browser/Linux deployment,
+runtime source/tool isolation and practical watch/performance gates remain open.
