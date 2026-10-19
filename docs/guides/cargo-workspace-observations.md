@@ -105,3 +105,13 @@ preparation is outside the native observation provider. A passing receipt must
 include compilation of every observed workspace member and unchanged tracked
 source, not merely successful metadata. The gate is pending execution when
 introduced. It does not qualify a deployed server or hermetic dependencies.
+
+The [actual Linux build follow-up](../acceptance/project-adoption/g3-actual-axum-linux-build-2026-10-19/receipt.json)
+passed in CI39296124316 at4f31b73 (tested merge847b0e7, identical tracked tree):
+all four pinned Axum workspace libraries compiled, and459 upstream library tests
+passed with zero failures/ignored tests. All505 tracked source hashes remained
+unchanged. The metadata provider continued to report compilation false; separate
+Cargo commands established this build/test result. Registry/cache closure,
+retained-project-build orchestration, independently inspected binary architecture,
+HTTP deployment, Next Linux/application/browser qualification and performance
+acceptance remain open. Timings are observations, not a cold-build benchmark.

@@ -628,3 +628,13 @@ digests, command outcomes and source stability are retained even on failure.
 The new gate is unrun at this checkpoint; syntax checks are not acceptance.
 It does not establish application HTTP deployment, a Linux Next build, complete
 dependency hermeticity, image/browser acceptance or a release decision.
+
+The [actual Linux build follow-up](../acceptance/project-adoption/g3-actual-axum-linux-build-2026-10-19/receipt.json)
+passed in CI39296124316 at4f31b73 (tested merge847b0e7, identical tracked tree):
+all four pinned Axum workspace libraries compiled, and459 upstream library tests
+passed with zero failures/ignored tests. All505 tracked source hashes remained
+unchanged. The metadata provider continued to report compilation false; separate
+Cargo commands established this build/test result. Registry/cache closure,
+retained-project-build orchestration, independently inspected binary architecture,
+HTTP deployment, Next Linux/application/browser qualification and performance
+acceptance remain open. Timings are observations, not a cold-build benchmark.
