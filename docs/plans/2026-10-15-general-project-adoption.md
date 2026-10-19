@@ -638,3 +638,12 @@ Cargo commands established this build/test result. Registry/cache closure,
 retained-project-build orchestration, independently inspected binary architecture,
 HTTP deployment, Next Linux/application/browser qualification and performance
 acceptance remain open. Timings are observations, not a cold-build benchmark.
+
+A follow-up CI refinement makes the Linux build/test target explicit, checks the
+actual proc-macro shared library's ELF64/little-endian/x86_64 header and refuses
+tampered architecture/truncated header controls. It also retains an exact
+compiler/engine/library payload with member-by-member digest verification.
+Execution of this refinement is pending; the459-test receipt predates it.
+Rust archive object architectures are not independently inspected by that header
+check. Artifact retention does not establish installation, HTTP deployment or
+production release authorization.

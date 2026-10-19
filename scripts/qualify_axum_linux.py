@@ -8,6 +8,7 @@ import platform
 from pathlib import Path
 import shutil
 import subprocess
+import tarfile
 import time
 
 UPSTREAM = "https://github.com/tokio-rs/axum.git"
@@ -19,6 +20,12 @@ PACKAGES = ["axum", "axum-core", "axum-extra", "axum-macros"]
 
 def digest(path):
     return "sha256:" + hashlib.sha256(Path(path).read_bytes()).hexdigest()
+
+
+def elf_x86_64_header(header):
+    """Check the bounded ELF identification and e_machine fields, not whole-file validity."""
+    return (len(header) >= 20 and header[:6] == b"\x7fELF\x02\x01"
+            and int.from_bytes(header[18:20], "little") == 62)
 
 
 def main():
@@ -84,7 +91,15 @@ def main():
                        hashlib.sha256(json.dumps(before, sort_keys=True).encode()).hexdigest())
         cargo_home = Path(os.environ.get("CARGO_HOME", str(Path.home() / ".cargo"))).resolve()
         os.environ["RUSTC"] = str(rustc)
+        os.environ["CARGO_HOME"] = str(cargo_home)
         os.environ["CARGO_TARGET_DIR"] = str(work / "target")
+        receipt["buildPlatform"] = "x86_64-unknown-linux-gnu"
+        receipt["buildEnvironment"] = {
+            name: os.environ.get(name) for name in [
+                "RUSTC", "CARGO_TARGET_DIR", "CARGO_HOME", "CARGO_INCREMENTAL",
+                "CARGO_BUILD_JOBS", "CARGO_PROFILE_DEV_DEBUG", "CARGO_PROFILE_TEST_DEBUG",
+                "RUST_TEST_THREADS"]
+        }
         # An explicit preparation phase precedes all offline observation and build phases.
         lock_digest = digest(owner / "Cargo.lock")
         run("fetch-locked-linux", [cargo, "fetch", "--locked", "--target", "x86_64-unknown-linux-gnu"], cwd=owner)
@@ -122,7 +137,8 @@ def main():
         receipt["controls"].append("actual-resolved-linux-metadata-with-explicit-ws")
         members = set(metadata["workspace_members"])
         messages = run("build-actual-workspace", [cargo, "build", "--workspace", "--lib", "--locked", "--offline",
-                        "--features", "axum/ws", "--message-format=json"], cwd=owner)
+                        "--features", "axum/ws", "--target", "x86_64-unknown-linux-gnu",
+                        "--message-format=json"], cwd=owner)
         artifacts = []
         compiled = set()
         for line in messages.splitlines():
@@ -136,13 +152,61 @@ def main():
                                       "bytes": path.stat().st_size, "target": message["target"]["name"]})
         assert compiled == members and artifacts, "Every observed workspace member must compile"
         receipt["artifacts"] = artifacts
+        shared = [item for item in artifacts if item["file"].endswith(".so")]
+        assert len(shared) == 1, "Expected the actual workspace proc-macro shared library"
+        shared_path = work / shared[0]["file"]
+        with shared_path.open("rb") as source:
+            header = source.read(64)
+        assert elf_x86_64_header(header), "Wrong or unsupported actual shared-library architecture"
+        wrong_arch = bytearray(header)
+        wrong_arch[18:20] = (183).to_bytes(2, "little")
+        assert not elf_x86_64_header(wrong_arch), "Forged AArch64 header accepted"
+        assert not elf_x86_64_header(header[:19]), "Truncated ELF header accepted"
+        receipt["sharedLibraryArchitecture"] = {
+            "file": shared[0]["file"], "format": "ELF64", "byteOrder": "little",
+            "machine": 62, "wrongArchitectureHeaderRefused": True,
+            "truncatedHeaderRefused": True,
+            "scope": "Actual proc-macro shared-library header; Rust archive objects not independently inspected"
+        }
+        receipt["controls"].extend(["actual-shared-library-ELF64-x86_64-header",
+                                    "tampered-architecture-header-refusal", "truncated-ELF-header-refusal"])
         receipt["controls"].append("all-four-actual-workspace-libraries-compiled-on-linux")
         run("test-actual-workspace", [cargo, "test", "--workspace", "--lib", "--locked", "--offline",
-                                     "--features", "axum/ws"], cwd=owner)
+                                     "--features", "axum/ws", "--target", "x86_64-unknown-linux-gnu"], cwd=owner)
         receipt["controls"].append("actual-upstream-workspace-library-tests")
         assert before == tracked_inventory(), "Tracked source changed"
         assert not run("source-status-after", ["git", "status", "--porcelain=v1"], cwd=owner)
         assert digest(cli) == receipt["compilerDigest"]
+        engine_bytes = run("retained-tool-engine", [cli, "engine"])
+        engine = json.loads(engine_bytes)
+        (evidence / "engine.json").write_bytes(engine_bytes)
+        payload = evidence / "qualified-artifacts.tar.gz"
+        with tarfile.open(payload, "w:gz") as archive:
+            archive.add(cli, arcname="tool/bin/patamaps", recursive=False)
+            archive.add(evidence / "engine.json", arcname="tool/engine.json", recursive=False)
+            archive.add(owner / "LICENSE", arcname="licenses/axum-LICENSE", recursive=False)
+            for item in artifacts:
+                archive.add(work / item["file"], arcname="libraries/" + item["file"], recursive=False)
+        expected_members = {
+            "tool/bin/patamaps": receipt["compilerDigest"],
+            "tool/engine.json": digest(evidence / "engine.json"),
+            "licenses/axum-LICENSE": digest(owner / "LICENSE"),
+            **{"libraries/" + item["file"]: item["digest"] for item in artifacts}
+        }
+        with tarfile.open(payload, "r:gz") as archive:
+            assert sorted(m.name for m in archive.getmembers()) == sorted(expected_members)
+            for member, expected in expected_members.items():
+                entry = archive.getmember(member)
+                assert entry.isfile()
+                with archive.extractfile(entry) as source:
+                    assert "sha256:" + hashlib.sha256(source.read()).hexdigest() == expected
+        assert digest(cli) == receipt["compilerDigest"]
+        receipt["retainedPayload"] = {
+            "file": payload.name, "digest": digest(payload), "bytes": payload.stat().st_size,
+            "compilerMember": "tool/bin/patamaps", "compilerDigest": digest(cli),
+            "engine": engine, "libraryFiles": len(artifacts), "allPayloadMembersVerified": True,
+            "scope": "Exact qualification tools/libraries; no registry publication or deployment activation"
+        }
         receipt.update(status="passed-actual-axum-linux-build-scope",
                        sourceInputsUnchanged=True, linuxTargetCompilationEstablished=True,
                        metadataCompilationClaimRemainsFalse=True)
