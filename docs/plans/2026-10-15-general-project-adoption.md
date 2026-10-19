@@ -541,3 +541,19 @@ native project-stage from the retained source-capture, including the missing loc
 The exact package predates Cargo segment-glob implementation; it is not installed
 acceptance of the latest branch head. Authenticated/browser/Linux deployment,
 runtime source/tool isolation and practical watch/performance gates remain open.
+
+## Current package documentation closure checkpoint (2026-10-19)
+
+The support guide exposed an omitted package dependency: docs/plans was absent.
+The packager now includes those Markdown plans. The [current-package receipt](../acceptance/project-adoption/g5-current-package-links-2026-10-19/receipt.json)
+records a fresh native release build240.588s and two byte-identical source/native
+archive pairs. Six guides and the active plan match exact source bytes; their
+local Markdown links resolve inside the source inventory. This package includes
+the segment-glob implementation and its current workspace engine identity. The
+previous release binary is retained. No deletion or policy change occurred.
+
+The package is identified by its precise inventory/native/archive digests and
+the recorded source revision plus packager working change. Fresh installed
+application qualification for this exact package remains required; the older
+installed-owner pass does not automatically transfer. Binary rebuild
+reproducibility and whole-project deployment/performance acceptance remain open.

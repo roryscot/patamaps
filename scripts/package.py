@@ -56,6 +56,9 @@ for name in ["Cargo.toml", "Cargo.lock", "rust-toolchain.toml", "LICENSE", "NOTI
 # Ship the user-facing development workflow with exact source installations.
 for path in sorted((ROOT / "docs/guides").glob("*.md")):
     source[path.relative_to(ROOT).as_posix()] = path.read_bytes()
+# The support guide links to the adoption plan; keep that source navigation usable.
+for path in sorted((ROOT / "docs/plans").glob("*.md")):
+    source[path.relative_to(ROOT).as_posix()] = path.read_bytes()
 for path in (ROOT / "docs/decisions").glob("*.md"):
     source[path.relative_to(ROOT).as_posix()] = path.read_bytes()
 for path in (ROOT / "docs/licenses").rglob("*"):
