@@ -5,7 +5,7 @@ Run project-build through the applicable project/application storage supervisor:
     patamaps project-build build-plan.json --source /work/service --state /work/build-states/service
     patamaps project-build-verify /work/build-states/service
 
-The state parent must already exist. State must be outside the original source tree and outside every enclosing Cargo workspace. The original source supplies selected bytes; programs run in a new retained candidate, with owner-declared cwd and absolute executable paths.
+The state parent must already exist. Its canonical directory must be included in the storage supervisor’s retained-allocation and free-space checks. A symlink inside a counted root is insufficient when accounting skips symlinks. Intel’s Patamaps guard uses explicit retentionRoots for the canonical state parent; verify the check reports that root before building. State must be outside the original source tree and outside every enclosing Cargo workspace. The original source supplies selected bytes; programs run in a new retained candidate, with owner-declared cwd and absolute executable paths.
 
 The plan uses profile patamaps-project-build-1 and embeds five existing declarations:
 

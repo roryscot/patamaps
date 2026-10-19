@@ -656,3 +656,9 @@ payload members, and compiler/proc-macro ELF64/x86_64 headers. The retained
 payload is52,937,102 logical bytes (17,629,458 compressed bytes). Rust archive
 object architecture and Intel/application runtime acceptance remain separate.
 No library payload was installed or executed by this independent inspection.
+
+## Actual Linux runtime and retained Rust workflow checkpoint (2026-10-19)
+
+The [actual Next Linux runtime receipt](../acceptance/project-adoption/g5-actual-next-linux-runtime-2026-10-19/receipt.json) records selected standalone output running under pinned Linux Node with source/compiler paths unavailable, public HTTP controls and confirmed listener shutdown. The output was compiled on Darwin; Linux compilation and browser/authentication remain open.
+
+The [Intel follow-up receipt](../acceptance/project-adoption/intel-reservations-followup-2026-10-19/receipt.json) records actual retained Axum build, 459 passing library tests, configured-source/tool-unavailable replay and unchanged no-op selection on Darwin. External Cargo cache/linker closure and Linux retained orchestration remain separate. It also records stage-two scheduler qualification and a storage-accounting correction: the canonical retained-state directory is now explicitly counted by native and managed guards. No policy limit increased; old functional passes are not retroactive storage-enforcement attestations. The initial Rust attempt was cancelled and recovered only after reviewed process/container stop evidence; its records remain.
