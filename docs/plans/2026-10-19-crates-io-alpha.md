@@ -63,3 +63,7 @@ production source bindings pass. Formatting/input synchronization passed in the
 second preparation run. The first preparation refusal (nested Cargo workspace)
 is retained. Locked native compilation/tests and exact archive/clean-install
 acceptance remain pending under the shared Intel build reservation.
+
+## Linux source acceptance
+
+[Hosted run 39341691837](https://github.com/roryscot/patamaps/actions/runs/39341691837) passed all four jobs on source commit 6d6f31d1bb5a1e64380491b7053a3e2d84f57fe0: native Linux x86_64, native Linux aarch64, cross-stack source bindings and the Linux image/browser flow. The exact run/job state is retained in docs/acceptance/crates-io/2026-10-19/linux-ci.json. This is source acceptance; candidate archives, native Intel checks and source-unavailable clean installation remain pending.
