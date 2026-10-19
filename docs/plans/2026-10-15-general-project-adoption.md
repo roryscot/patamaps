@@ -495,3 +495,16 @@ was deleted and the incomplete original stayed untouched. An initial permission
 hypothesis was disproved: private blob modes are part of the snapshot format.
 The installed workflow retry depends on this verified copy and still needs its
 own staging, capture, actual build and replay evidence. Whole-goal scope is open.
+
+## Additive Cargo segment-glob candidate (2026-10-19)
+
+Decision0042 adds an opt-in bounded-segment-globs mode for an independently
+observed upstream workspace: tokio-rs/axum at
+fc78d5bcdb276bd6fb53cf2db55e91757eabb469 uses members=["axum","axum-*"].
+The old whole-star mode and default literal refusals remain frozen. Existing
+enumeration, captured-manifest, exclusion and pre/post-metadata contracts are
+reused. Four new unit controls and five full-provider controls are defined.
+This is UNVERIFIED implementation: no new Rust compilation, CLI execution or
+actual upstream metadata pass is claimed. Native tests must wait for the shared
+reservation; existing Linux CI may verify the draft independently. The queued
+installed-owner workflow still uses its exact previously identified archive pair.
