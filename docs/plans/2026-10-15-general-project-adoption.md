@@ -4,6 +4,8 @@ Status: active. Owner authorization: create and pursue on Intel with regular com
 Baseline: 591e313cc770ab256a045e4e101a6a2358262b1f. The completed cross-stack M0–M7/X01–X20 plan and receipts remain historical, unchanged.
 Scope: usable, explicitly bounded Next.js/Rust project integration beyond the catalog fixture. Completion requires independent existing-project evidence, not another invented example.
 
+Current evidence: [scoped support matrix](../guides/project-support-matrix.md). Open rows remain required by this plan.
+
 ## Authority and exclusions
 
 Rust owns parsing, validation, admission, capture/replay and emission. Reuse existing workspace/process providers, graph laws, checked projections, candidate publication and package contracts. Owner profiles declare semantic correspondences and intent; discovery never invents business meaning. Do not replace the kernel, introduce a parallel graph framework or infer arbitrary macro/shell effects.

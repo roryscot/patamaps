@@ -1,0 +1,26 @@
+# Existing-project support and qualification
+
+Status at 2026-10-19: **partial qualification; general adoption is not accepted**.
+The [G0–G6 plan](../plans/2026-10-15-general-project-adoption.md) defines completion.
+A pass below covers the named inputs, tools and controls in its receipt. It does
+not automatically qualify newer binaries, other projects, or deployment.
+
+| Capability | Observed result | Evidence and remaining acceptance |
+| --- | --- | --- |
+| Nonsecret selected-input capture, staging and offline replay | Passed on actual Wargame and Seeder selections | [Fixed-source receipt](../acceptance/project-adoption/native-fixed-383d0c5/receipt.json). Original selected bytes/status preserved; tamper and existing-destination refusals passed. Capture alone is not a usable application workflow. |
+| Stateful Axum transport and Next proxy | Passed for the selected Wargame contract in explicit lab mode | [Production-network receipt](../acceptance/project-adoption/g6-wargame-production-network-2026-10-18/receipt.json): 13 controls, 22 TCP exchanges, actual generator and Next production build. Managed/authenticated acceptance remains open. |
+| Standalone Cargo observation | Passed for actual Wargame, declared-local view | [Fixed-source receipt](../acceptance/project-adoption/native-fixed-383d0c5/receipt.json): 16 targets. This is metadata, not target compilation or resolved dependency qualification. |
+| Bounded Cargo directory globs and exclusions | Passed in controlled workspaces | [Directory-glob controls](../acceptance/project-adoption/g3-cargo-members-63abaed/receipt.json), [literal-exclusion controls](../acceptance/project-adoption/g3-literal-exclusions-2a9a22f/receipt.json). Independent real workspace and feature/platform qualification remain open. |
+| Opt-in Cargo segment globs, such as axum-* | Native unit controls passed; provider and upstream acceptance pending | [20 focused tests](../acceptance/project-adoption/g3-cargo-segment-unit-2026-10-19/receipt.json), including four additive segment controls. Earlier test compilation failed and was repaired. Independent pinned Axum intake is queued; no upstream pass is claimed. |
+| Compiled Next observations and nonsecret config projection | Passed for selected Seeder Next 16.1.6 manifests | [Receipt](../acceptance/project-adoption/g3-next-compiled-20261016/receipt.json): 43 static routes, 3 dynamic routes, 46 aliases, one compiled rule, source/provider-unavailable replay. Actual nonempty rewrites, route-group and Server Action runtime boundaries remain open. |
+| Existing owner generation, Next build and consumer edit | Passed on retained Seeder candidate | [Baseline](../acceptance/project-adoption/g6-owner-native-preparation-2026-10-16/baseline.json), [positive edit](../acceptance/project-adoption/g6-owner-native-preparation-2026-10-16/positive-edit.json), [generation failure](../acceptance/project-adoption/g6-owner-native-preparation-2026-10-16/generation-failure.json). Changed label reached compiled client JS; failed generation preserved the selection. Practical edit/watch performance is not accepted. |
+| Public browser paths | Six cases passed on actual retained Next standalone app | [Browser receipt](../acceptance/project-adoption/g6-owner-public-browser-2026-10-19/receipt.json): desktop/narrow home, login and auth redirect. Authenticated permissions and changed-label visibility remain unaccepted; native macOS is not Linux deployment. |
+| Foreground watch and failure/cancellation recovery | Controlled lifecycle checks passed with actual Intel supervisor | [Watch receipt](../acceptance/project-adoption/g4-foreground-watch-20261016/receipt.json). Actual-project watch performance, memory and retained-disk acceptance remain open. |
+| Retained context recovery | Exact recovery passed into a new copy | [Recovery receipt](../acceptance/project-adoption/g4-exact-context-recovery-2026-10-19/receipt.json): 107 unavailable files recovered from exact retained bytes, original digest verified. This is explicit operator recovery, not automatic repair or crash durability. |
+| Exact source/native packages and included development guides | Archive controls passed | [Packaging receipt](../acceptance/project-adoption/g5-source-package-guides-2026-10-18/receipt.json): two byte-identical archive pairs and five included guides. Actual installed-owner build/replay/no-op is pending; independent native binary reproducibility is not established. |
+| Actual-project Linux deployment | Open | Controlled cross-stack CI is regression evidence. Existing-project image/config/architecture/listener checks, wrong binary and stale-contract refusals, and runtime source/tool denial still require actual-project evidence. |
+| Release decision | Open | Remaining G3–G6 requirements include broader framework boundaries, independent Cargo qualification, installed workflow, managed application acceptance and practical development-loop measurements. No registry publication, trust activation or production deployment has occurred. |
+
+Historical receipts retain the limitations true when they were written. Later
+receipts can close a specifically named gap without rewriting earlier failures.
+Read the linked scope and exact source/tool identities before applying any result.
