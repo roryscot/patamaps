@@ -1,0 +1,115 @@
+{
+  "status": "verified-stage-two-active",
+  "qualificationSha256": "6026c345734ce69896df420a40977d2b020d56018e52124424029ec3025d0794",
+  "qualificationStatus": "passed-stage-two-runtime",
+  "controls": [
+    "persistent-output-restart",
+    "writable-enospc",
+    "fixed-image-bound",
+    "two-job-overlap",
+    "simultaneous-acquisition",
+    "kernel-limits",
+    "running-cancellation",
+    "owner-crash-surviving-container",
+    "confirmed-crash-recovery",
+    "output-conflict",
+    "queued-cancellation",
+    "instance-conflict",
+    "native-barrier",
+    "benchmark-exclusive",
+    "fair-queue",
+    "unmanaged-fallback",
+    "capacity-refusal",
+    "altered-enforcement-refusal",
+    "pause-preserved",
+    "cli-integration"
+  ],
+  "unitAndCompatibilityTests": 48,
+  "runtimeControls": 20,
+  "qualifiedAt": "2026-10-18T22:45:57.732Z",
+  "activatedAt": "2026-10-18T22:47:32.679Z",
+  "maxConcurrent": 2,
+  "nativeExclusive": true,
+  "unmanagedContainersForceExclusive": true,
+  "coreBindingsVerified": [
+    {
+      "file": "buildctl.mjs",
+      "sha256": "b56b8d4db14ce4ac0ab8590739d446ec828851d549fc9a8160efe686bd69b594"
+    },
+    {
+      "file": "resource-executor.mjs",
+      "sha256": "6f7759df557ae462a9347d7705277deb03b17fbcae569a1e487df4318b9a67de"
+    },
+    {
+      "file": "buildctl-cli.mjs",
+      "sha256": "b429cc96b9f2785ebe7f9ec99e4779c7d380041509875e73f25a278c4cef1fb5"
+    }
+  ],
+  "accountingCorrection": {
+    "status": "verified-expanded-accounting-roots",
+    "stateParentCounted": true,
+    "retainedAllocatedBytesUpperBound": 85935218688,
+    "policy": {
+      "version": 1,
+      "minimumFreeBytes": 0,
+      "reserveFreeBytes": 500000000,
+      "maximumRunGrowthBytes": 4000000000,
+      "maximumRetainedBytes": 100000000000,
+      "monitorIntervalMs": 2000,
+      "terminationGraceMs": 15000
+    },
+    "unrelatedProjectConfigurationUnchanged": true,
+    "executorRegistryOnlyAddsAccountingRoot": true,
+    "filesDeleted": 0,
+    "additionalRootsIncludedInFreeSpaceChecks": true,
+    "stateParentSharesProjectFilesystem": true
+  },
+  "accountingCorrectionScope": "Canonical retained-state root now counted by native and managed guards; no policy limits raised. Previous functional receipts are not retroactive storage-enforcement attestations.",
+  "rustRetainedWorkflow": {
+    "status": "passed-actual-rust-retained-build-scope",
+    "sourceCommit": "fc78d5bcdb276bd6fb53cf2db55e91757eabb469",
+    "commands": [
+      {
+        "label": "actual-rust-build",
+        "exitCode": 0,
+        "seconds": 132.678
+      },
+      {
+        "label": "actual-rust-offline-replay",
+        "exitCode": 0,
+        "seconds": 1.006
+      },
+      {
+        "label": "actual-rust-noop",
+        "exitCode": 0,
+        "seconds": 1.443
+      }
+    ],
+    "upstreamLibraryTests": {
+      "passed": 459,
+      "failed": 0,
+      "ignored": 0,
+      "perHarness": [
+        423,
+        16,
+        15,
+        5
+      ]
+    },
+    "sourceSnapshotAndConfiguredToolsUnavailableReplay": true,
+    "osDenialOfAllHostPaths": false,
+    "noOpSelectionPreserved": true,
+    "noOpVerificationNotRepeated": true,
+    "limitations": [
+      "Native Darwin library workflow; independent Linux compilation was qualified separately.",
+      "External Cargo cache/linker/toolchain closure is not established.",
+      "No watch/performance, HTTP application, image/browser or operational acceptance is claimed."
+    ]
+  },
+  "sourceReceiptDigests": {
+    "accounting-verification.json": "12768ce4902a5912718284dcf3ec13862f6aa62f31e73ad0d7017daf20b3f98a",
+    "build.receipt.json": "1df7fbdd61d2816a12259a0b68e6f153f582a65a49a6bb634ea76d29be7b87e2"
+  },
+  "filesDeleted": 0,
+  "goalComplete": false
+}
