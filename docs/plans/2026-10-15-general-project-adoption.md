@@ -467,3 +467,20 @@ identity and all five guide byte digests matching current source. The identified
 release driver matches current native engine identities; this is not evidence
 of independent binary reproducibility or a registry publication. Actual installed
 existing-project workflow, browser/deployment and remaining G2-G6 gates stay open.
+
+## Actual owner standalone browser checkpoint (2026-10-19)
+
+The [scoped public-browser receipt](../acceptance/project-adoption/g6-owner-public-browser-2026-10-19/receipt.json)
+records six real desktop/narrow public-route checks passing against the actual
+retained Next16.1.6 standalone owner output. Native bindings verified before and
+after; selection stayed unchanged, the bot-User-Agent403 remained enforced, and
+no owned listener survived shutdown. Existing native Chrome155 and Playwright1.64
+used fresh retained profiles. Source and generation compiler were absent from the
+owned runtime tree, but OS-level source access denial was not tested.
+
+Three earlier harness failures remain retained: next-start readiness on a
+standalone build, the app's intentional Python-User-Agent403, and an incorrect
+visible-navigation expectation at the narrow breakpoint. No app guard or source
+was changed. The generated label remains hidden without authenticated permissions
+and is explicitly not accepted by these public-route checks. Managed/backend,
+installed workflow, Linux deployment and practical watch/performance gates remain.
