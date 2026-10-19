@@ -39,25 +39,25 @@ def inspect_rlib(path, ar):
     names = listing.decode("ascii").splitlines()
     assert 1 <= len(names) <= 4096 and len(names) == len(set(names)), "Ambiguous archive membership"
     assert names.count("lib.rmeta") == 1, "Expected exactly one Rust metadata member"
+    assert names.count("lib.rmeta-link") == 1, "Expected exactly one Rust late-metadata member"
     objects = []
+    metadata_headers = []
     for name in names:
         assert name and len(name) <= 1024 and name[0].isalnum()
         assert all(c.isalnum() or c in "._-" for c in name), "Unsupported archive member name"
-        assert name == "lib.rmeta" or name.endswith(".o"), "Unexpected non-object archive member"
+        assert name in ["lib.rmeta", "lib.rmeta-link"] or name.endswith(".o"), "Unexpected non-object archive member"
         data = subprocess.check_output([str(ar), "p", str(path), name], timeout=30)
         assert len(data) <= 64 * 1024 * 1024, "Archive member byte bound"
-        if name == "lib.rmeta":
-            assert data, "Empty Rust metadata"
-            continue
         header = data[:64]
         assert elf_x86_64_header(header), "Wrong archive object architecture: " + name
         assert int.from_bytes(header[16:18], "little") == 1, "Archive member is not relocatable"
-        objects.append({"member": name, "bytes": len(data),
-                        "digest": "sha256:" + hashlib.sha256(data).hexdigest()})
+        item = {"member": name, "bytes": len(data),
+                "digest": "sha256:" + hashlib.sha256(data).hexdigest()}
+        (metadata_headers if name in ["lib.rmeta", "lib.rmeta-link"] else objects).append(item)
     assert objects, "No compiled object members"
-    return {"objects": objects, "metadataMembers": 1, "format": "ELF64",
+    return {"objects": objects, "metadataMembers": 2, "metadataHeaders": metadata_headers, "format": "ELF64",
             "byteOrder": "little", "machine": 62, "elfType": 1,
-            "scope": "All .o member headers and byte digests, not full ELF/link/dependency validity"}
+            "scope": "All code and both pinned-rustc metadata member headers/digests, not full ELF/link/dependency validity"}
 
 
 def main():
@@ -220,12 +220,15 @@ def main():
         object_name = archive_observations[0]["objects"][0]["member"]
         actual_object = subprocess.check_output([str(ar), "p", str(sample), object_name], timeout=30)
         actual_metadata = subprocess.check_output([str(ar), "p", str(sample), "lib.rmeta"], timeout=30)
+        actual_late_metadata = subprocess.check_output([str(ar), "p", str(sample), "lib.rmeta-link"], timeout=30)
         negative_controls = []
         variants = [("wrong-architecture", "Wrong archive object architecture"),
                     ("truncated-header", "Wrong archive object architecture"),
                     ("non-relocatable", "Archive member is not relocatable"),
                     ("duplicate-member", "Ambiguous archive membership"),
-                    ("missing-metadata", "Expected exactly one Rust metadata member")]
+                    ("missing-metadata", "Expected exactly one Rust metadata member"),
+                    ("late-metadata-wrong-architecture", "Wrong archive object architecture"),
+                    ("unknown-member", "Unexpected non-object archive member")]
         for label, expected_error in variants:
             folder = evidence / ("archive-refusal-" + label)
             folder.mkdir()
@@ -240,8 +243,17 @@ def main():
             object_file.write_bytes(data)
             metadata_file = folder / "lib.rmeta"
             metadata_file.write_bytes(actual_metadata)
+            late_metadata = folder / "lib.rmeta-link"
+            late_data = bytearray(actual_late_metadata)
+            if label == "late-metadata-wrong-architecture":
+                late_data[18:20] = (183).to_bytes(2, "little")
+            late_metadata.write_bytes(late_data)
             archive = folder / "control.rlib"
-            files = [object_file] if label == "missing-metadata" else [metadata_file, object_file]
+            files = [object_file] if label == "missing-metadata" else [metadata_file, late_metadata, object_file]
+            if label == "unknown-member":
+                unknown = folder / "unexpected.txt"
+                unknown.write_bytes(b"not an allowed archive member")
+                files.append(unknown)
             subprocess.run([str(ar), "qc", str(archive), *map(str, files)], check=True, timeout=30)
             if label == "duplicate-member":
                 subprocess.run([str(ar), "q", str(archive), str(object_file)], check=True, timeout=30)
@@ -271,7 +283,7 @@ def main():
             "objectCount": sum(len(x["objects"]) for x in archive_observations),
             "fullElfValidation": False, "dependencyClosureEstablished": False}
         receipt["controls"].extend(["all-actual-rlib-object-ELF64-x86_64-relocatable-headers",
-                                    "actual-member-corrupt-archive-refusals-six-cases"])
+                                    "actual-member-corrupt-archive-refusals-eight-cases"])
         receipt["controls"].append("all-four-actual-workspace-libraries-compiled-on-linux")
         run("test-actual-workspace", [cargo, "test", "--workspace", "--lib", "--locked", "--offline",
                                      "--features", "axum/ws", "--target", "x86_64-unknown-linux-gnu"], cwd=owner)
