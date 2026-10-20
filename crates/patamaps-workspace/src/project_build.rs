@@ -768,7 +768,7 @@ mod unix {
             .take(maximum_retained_attempts)
             .collect::<Result<Vec<_>, _>>()?
             .len()
-            >= plan.maximum_retained_attempts
+            >= maximum_retained_attempts
         {
             return Err(refuse("PROJECT_BUILD_RETENTION_REVIEW_REQUIRED"));
         }

@@ -22,3 +22,5 @@ Exact machine-local deletion proposals are linked in the private Intel handoff a
 Retention changes: native per-state attempt ceiling (default 8, max 64), no-op at capacity, refusal before copying another candidate, and supervisor full-run headroom reservation. Test/installation state is tracked separately; no automatic purge or approved-limit increase is introduced.
 
 Archive verification completed: 118,202 files / 7,764,934,656 allocated bytes match their exact members in nine retained source archives; all archive digests match distribution records. No restoration was exercised. Together with the 5,879-file compiler proposal, this is 124,081 files / 16,045,592,576 bytes of summed allocation. Neither inventory is deletion authorization.
+
+Supervisor installation verified: eight CI admission tests passed on source 3f82633 / identical-tree merge 572324e. Actual installed guard probe a7bff2e5 refused for insufficient headroom (exit 75) before launching its sentinel; no data was deleted and limits are unchanged. Native attempt-ceiling verification remains pending after the preserved canonical-number failure and correction.
