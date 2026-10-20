@@ -1,0 +1,69 @@
+{
+  "sourceCommit": "3f54166f8ad4f2071c88de145e2b20ed38355502",
+  "publishingSource": "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/crates-io/alpha-20261019/publishing-source-0001",
+  "startedAt": 1792454921.091559,
+  "filesDeleted": 0,
+  "publicRegistryUpload": false,
+  "commands": [
+    {
+      "id": "create",
+      "command": [
+        "git",
+        "worktree",
+        "add",
+        "--no-checkout",
+        "--detach",
+        "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/crates-io/alpha-20261019/publishing-source-0001",
+        "3f54166f8ad4f2071c88de145e2b20ed38355502"
+      ],
+      "exitCode": 0
+    },
+    {
+      "id": "sparse-init",
+      "command": [
+        "git",
+        "sparse-checkout",
+        "init",
+        "--cone"
+      ],
+      "exitCode": 0
+    },
+    {
+      "id": "sparse-set",
+      "command": [
+        "git",
+        "sparse-checkout",
+        "set",
+        "crates",
+        "vendor",
+        "fixtures",
+        "relation-packs",
+        "scripts",
+        "schemas",
+        "docs/licenses"
+      ],
+      "exitCode": 0
+    },
+    {
+      "id": "checkout",
+      "command": [
+        "git",
+        "checkout",
+        "--detach",
+        "3f54166f8ad4f2071c88de145e2b20ed38355502"
+      ],
+      "exitCode": 0
+    },
+    {
+      "id": "inputs",
+      "command": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/intel-python-3.13.16-20261013/runtime/python/bin/python3",
+        "scripts/sync_crate_inputs.py",
+        "--check"
+      ],
+      "exitCode": 0
+    }
+  ],
+  "status": "passed",
+  "finishedAt": 1792454922.704614
+}

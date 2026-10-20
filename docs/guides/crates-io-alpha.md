@@ -1,6 +1,6 @@
 # crates.io alpha
 
-Status: preparation in progress. No package has been uploaded. The experimental
+Status: all ten candidate archives are built and Cargo-verified; clean installation is pending. No package has been uploaded. The experimental
 Patamaps version is `0.1.0-alpha.1`; APIs and wire profiles remain draft.
 
 ## Packages and publication order
@@ -46,7 +46,7 @@ cargo install patamaps-cli --version 0.1.0-alpha.1 --locked
 cargo add 'patamaps-core@=0.1.0-alpha.1'
 ```
 
-Registry preparation and clean-install receipts will be linked here when run.
+The [candidate inventory](../acceptance/crates-io/2026-10-19/candidate-inventory.json) records all ten archive/member hashes and dependency order from frozen source commit 3f54166f8ad4f2071c88de145e2b20ed38355502. The native Intel source checks and all four hosted Linux jobs passed; fresh installation is pending.
 Before upload, a disclosed offline candidate-registry rehearsal must install the
 exact `.crate` archives with a fresh Cargo home and consumer. That rehearsal does
 not claim a public crates.io download, name ownership, verified publisher email,
