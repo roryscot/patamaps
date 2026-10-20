@@ -25,3 +25,5 @@ not automatically qualify newer binaries, other projects, or deployment.
 Historical receipts retain the limitations true when they were written. Later
 receipts can close a specifically named gap without rewriting earlier failures.
 Read the linked scope and exact source/tool identities before applying any result.
+
+Actual Linux Next build checkpoint (2026-10-20): [selected existing-project build](../acceptance/project-adoption/g5-actual-next-linux-build-2026-10-20/receipt.json) passes production build, TypeScript and manifest witness with an explicit Next16.1.6 captured-font adapter. Linux-built-output runtime/browser/authentication and general offline-font support remain separate; the earlier Darwin-built-output runtime receipt does not attest this new output.
