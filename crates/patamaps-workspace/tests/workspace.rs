@@ -710,7 +710,7 @@ fn build_fixture() -> (Temp, Temp, ProjectBuildPlan) {
         },
     };
     let plan = ProjectBuildPlan {
-        maximum_retained_attempts: 8,
+        maximum_retained_attempts: SafeInteger::new(8).unwrap(),
         profile: PROJECT_BUILD_PROFILE.into(),
         project,
         workspace,
@@ -1193,7 +1193,7 @@ fn contextual_build_refusals_preserve_selection_for_bad_overlays_dependency_muta
 #[cfg(unix)]
 fn retained_build_ceiling_preserves_selection_and_allows_noop_at_capacity() {
     let (root, source, mut plan) = build_fixture();
-    plan.maximum_retained_attempts = 2;
+    plan.maximum_retained_attempts = patamaps_contracts::SafeInteger::new(2).unwrap();
     let state = root.0.join("state");
     build_project(&source.0, &state, &plan, false).unwrap();
     build_project(&source.0, &state, &plan, true).unwrap();
@@ -1219,13 +1219,13 @@ fn retained_build_ceiling_preserves_selection_and_allows_noop_at_capacity() {
 fn failed_attempts_count_toward_retention_and_invalid_limits_create_no_state() {
     let (root, source, mut plan) = build_fixture();
     let state = root.0.join("state");
-    plan.maximum_retained_attempts = 0;
+    plan.maximum_retained_attempts = patamaps_contracts::SafeInteger::new(0).unwrap();
     assert!(build_project(&source.0, &state, &plan, false).is_err());
     assert!(!state.exists());
-    plan.maximum_retained_attempts = 65;
+    plan.maximum_retained_attempts = patamaps_contracts::SafeInteger::new(65).unwrap();
     assert!(build_project(&source.0, &state, &plan, false).is_err());
     assert!(!state.exists());
-    plan.maximum_retained_attempts = 1;
+    plan.maximum_retained_attempts = patamaps_contracts::SafeInteger::new(1).unwrap();
     plan.build_steps[0].invocation.arguments = vec!["-c".into(), "exit 9".into()];
     assert_eq!(
         build_project(&source.0, &state, &plan, false).unwrap()["status"],
@@ -1248,5 +1248,5 @@ fn omitted_retention_limit_keeps_legacy_plan_serialization() {
     let raw = serde_json::to_value(&plan).unwrap();
     assert!(raw.get("maximumRetainedAttempts").is_none());
     let decoded: ProjectBuildPlan = serde_json::from_value(raw).unwrap();
-    assert_eq!(decoded.maximum_retained_attempts, 8);
+    assert_eq!(decoded.maximum_retained_attempts.get(), 8);
 }

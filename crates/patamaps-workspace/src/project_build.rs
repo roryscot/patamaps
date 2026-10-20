@@ -24,7 +24,7 @@ pub struct ProjectBuildPlan {
         default = "default_retained_attempts",
         skip_serializing_if = "default_attempt_limit"
     )]
-    pub maximum_retained_attempts: usize,
+    pub maximum_retained_attempts: patamaps_contracts::SafeInteger,
     pub profile: String,
     pub project: ProjectProfile,
     pub workspace: WorkspaceConfig,
@@ -33,10 +33,10 @@ pub struct ProjectBuildPlan {
     pub outputs: Vec<ArtifactSelection>,
 }
 
-fn default_retained_attempts() -> usize {
-    8
+fn default_retained_attempts() -> patamaps_contracts::SafeInteger {
+    patamaps_contracts::SafeInteger::new(8).unwrap()
 }
-fn default_attempt_limit(value: &usize) -> bool {
+fn default_attempt_limit(value: &patamaps_contracts::SafeInteger) -> bool {
     *value == default_retained_attempts()
 }
 
@@ -117,7 +117,7 @@ mod unix {
     fn validate(plan: &ProjectBuildPlan) -> Result<(), Error> {
         plan.project.validate()?;
         if plan.profile != PROJECT_BUILD_PROFILE
-            || !(1..=64).contains(&plan.maximum_retained_attempts)
+            || !(1..=64).contains(&plan.maximum_retained_attempts.get())
             || !(1..=32).contains(&plan.build_steps.len())
             || !(1..=32).contains(&plan.verification_steps.len())
             || !(1..=64).contains(&plan.outputs.len())
@@ -762,8 +762,10 @@ mod unix {
             }
         }
         directory(&state.join("attempts"))?;
+        let maximum_retained_attempts = usize::try_from(plan.maximum_retained_attempts.get())
+            .map_err(|_| refuse("PROJECT_BUILD_PLAN"))?;
         if fs::read_dir(state.join("attempts"))?
-            .take(plan.maximum_retained_attempts)
+            .take(maximum_retained_attempts)
             .collect::<Result<Vec<_>, _>>()?
             .len()
             >= plan.maximum_retained_attempts
