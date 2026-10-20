@@ -710,6 +710,7 @@ fn build_fixture() -> (Temp, Temp, ProjectBuildPlan) {
         },
     };
     let plan = ProjectBuildPlan {
+        maximum_retained_attempts: 8,
         profile: PROJECT_BUILD_PROFILE.into(),
         project,
         workspace,
@@ -1186,4 +1187,66 @@ fn contextual_build_refusals_preserve_selection_for_bad_overlays_dependency_muta
     assert_eq!(result["status"], "refused-project-build");
     assert_eq!(fs::read(state.join("selected.json")).unwrap(), pointer);
     verify_project_build_selection(&state).unwrap();
+}
+
+#[test]
+#[cfg(unix)]
+fn retained_build_ceiling_preserves_selection_and_allows_noop_at_capacity() {
+    let (root, source, mut plan) = build_fixture();
+    plan.maximum_retained_attempts = 2;
+    let state = root.0.join("state");
+    build_project(&source.0, &state, &plan, false).unwrap();
+    build_project(&source.0, &state, &plan, true).unwrap();
+    let previous = fs::read(state.join("selected.json")).unwrap();
+    assert_eq!(
+        build_project(&source.0, &state, &plan, false).unwrap()["status"],
+        "unchanged-project-build"
+    );
+    assert!(matches!(
+        build_project(&source.0, &state, &plan, true),
+        Err(Error::Refused {
+            code: "PROJECT_BUILD_RETENTION_REVIEW_REQUIRED",
+            ..
+        })
+    ));
+    assert_eq!(fs::read_dir(state.join("attempts")).unwrap().count(), 2);
+    assert_eq!(fs::read(state.join("selected.json")).unwrap(), previous);
+    verify_project_build_selection(&state).unwrap();
+}
+
+#[test]
+#[cfg(unix)]
+fn failed_attempts_count_toward_retention_and_invalid_limits_create_no_state() {
+    let (root, source, mut plan) = build_fixture();
+    let state = root.0.join("state");
+    plan.maximum_retained_attempts = 0;
+    assert!(build_project(&source.0, &state, &plan, false).is_err());
+    assert!(!state.exists());
+    plan.maximum_retained_attempts = 65;
+    assert!(build_project(&source.0, &state, &plan, false).is_err());
+    assert!(!state.exists());
+    plan.maximum_retained_attempts = 1;
+    plan.build_steps[0].invocation.arguments = vec!["-c".into(), "exit 9".into()];
+    assert_eq!(
+        build_project(&source.0, &state, &plan, false).unwrap()["status"],
+        "refused-project-build"
+    );
+    assert!(matches!(
+        build_project(&source.0, &state, &plan, true),
+        Err(Error::Refused {
+            code: "PROJECT_BUILD_RETENTION_REVIEW_REQUIRED",
+            ..
+        })
+    ));
+    assert_eq!(fs::read_dir(state.join("attempts")).unwrap().count(), 1);
+}
+
+#[test]
+#[cfg(unix)]
+fn omitted_retention_limit_keeps_legacy_plan_serialization() {
+    let (_, _, plan) = build_fixture();
+    let raw = serde_json::to_value(&plan).unwrap();
+    assert!(raw.get("maximumRetainedAttempts").is_none());
+    let decoded: ProjectBuildPlan = serde_json::from_value(raw).unwrap();
+    assert_eq!(decoded.maximum_retained_attempts, 8);
 }

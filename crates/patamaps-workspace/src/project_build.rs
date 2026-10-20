@@ -19,12 +19,25 @@ pub struct ArtifactSelection {
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase", deny_unknown_fields)]
 pub struct ProjectBuildPlan {
+    /// Retained successes and failures both consume a slot; cleanup is explicit.
+    #[serde(
+        default = "default_retained_attempts",
+        skip_serializing_if = "default_attempt_limit"
+    )]
+    pub maximum_retained_attempts: usize,
     pub profile: String,
     pub project: ProjectProfile,
     pub workspace: WorkspaceConfig,
     pub build_steps: Vec<ProjectCommand>,
     pub verification_steps: Vec<ProjectCommand>,
     pub outputs: Vec<ArtifactSelection>,
+}
+
+fn default_retained_attempts() -> usize {
+    8
+}
+fn default_attempt_limit(value: &usize) -> bool {
+    *value == default_retained_attempts()
 }
 
 /// Explicit trusted owner generation before the immutable candidate capture.
@@ -104,6 +117,7 @@ mod unix {
     fn validate(plan: &ProjectBuildPlan) -> Result<(), Error> {
         plan.project.validate()?;
         if plan.profile != PROJECT_BUILD_PROFILE
+            || !(1..=64).contains(&plan.maximum_retained_attempts)
             || !(1..=32).contains(&plan.build_steps.len())
             || !(1..=32).contains(&plan.verification_steps.len())
             || !(1..=64).contains(&plan.outputs.len())
@@ -748,6 +762,14 @@ mod unix {
             }
         }
         directory(&state.join("attempts"))?;
+        if fs::read_dir(state.join("attempts"))?
+            .take(plan.maximum_retained_attempts)
+            .collect::<Result<Vec<_>, _>>()?
+            .len()
+            >= plan.maximum_retained_attempts
+        {
+            return Err(refuse("PROJECT_BUILD_RETENTION_REVIEW_REQUIRED"));
+        }
         let id = format!(
             "{}-{}",
             SystemTime::now()

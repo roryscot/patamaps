@@ -92,7 +92,7 @@ def main():
         original_preparation = json.dumps(preparation)
         preparation_path.write_text(original_preparation)
         good += "; /usr/bin/cmp input.txt generated-owner.txt; /bin/cp generated-owner.txt bundle/owner-contract"
-    plan = dict(profile="patamaps-project-build-1", project=project, workspace=workspace,
+    plan = dict(profile="patamaps-project-build-1", maximumRetainedAttempts=64, project=project, workspace=workspace,
                 buildSteps=[command(good)], verificationSteps=[command('test "$(/bin/cat bundle/app)" = artifact')],
                 outputs=[dict(path="bundle", kind="tree")])
     plan_path = work / "plan.json"

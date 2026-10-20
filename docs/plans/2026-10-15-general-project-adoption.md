@@ -686,3 +686,7 @@ The [archive member receipt](../acceptance/project-adoption/g5-linux-archive-mem
 ## Reservation handoff requalification (2026-10-20)
 
 The [isolated Intel requalification receipt](../acceptance/project-adoption/g5-reservation-handoff-2026-10-20/receipt.json) records 57 passing unit/compatibility tests and 22 real-backend controls. These include native-owner finalization, two-job overlap, fixed writable-output quota exhaustion, system metadata write refusal, cancellation, surviving-container crash recovery, output/instance exclusion and fair queuing. All 19 owned containers were independently rechecked stopped after qualification. Candidate source hashes match both test records. Production repair installation and parallel activation remain pending; this does not establish application Linux build or deployment acceptance.
+
+## Retention repair and evidence audit (2026-10-20)
+
+The [audit](../acceptance/project-adoption/retention-audit-20261020/AUDIT.md) separates compact evidence, selected/private context, archive-identical extractions and rebuildable compiler outputs. Exact deletion proposals require separate approval; no automatic purge is authorized. The [retention guide](../guides/retention-and-evidence.md) defines a native per-state attempt ceiling and supervisor full-run growth reservation. Source and tests are prepared; CI and supervisor installation are recorded separately. The earlier 57-unit/22-runtime reservation repair remains qualified but uninstalled because its installer was refused by the unchanged 100 GB guard.
