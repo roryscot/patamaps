@@ -1,0 +1,110 @@
+{
+  "status": "passed-bounded-source-package-scope",
+  "scope": "Actual current source/native bundle scope and determinism, not installed-consumer acceptance",
+  "sourceBindings": {
+    "scripts/package.py": "2065e0f0ced72f6b5e2a3bf62e0aad1c4054912c0015621c76542111f9c97e80",
+    "scripts/package_source.py": "395d0e362d62f027055dedd26e0f7758a464fb94c0114f82d3bae64f54972fd8",
+    "scripts/test_package_source.py": "376925c431976aa2b583786bb5ee531bf61a96715f228efe47436ab60fb1b84a"
+  },
+  "binarySha256": "496bc10e6a2ff71d18ef667cfa4f9b02a935486732577ce04cf428c4ac7abd77",
+  "steps": [
+    {
+      "step": "index-red-tests",
+      "argv": [
+        "/usr/bin/python3",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "scripts",
+        "-p",
+        "test_package_source.py"
+      ],
+      "exitCode": 1,
+      "elapsedSeconds": 0.366
+    },
+    {
+      "step": "scope-unit-tests",
+      "argv": [
+        "/usr/bin/python3",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "scripts",
+        "-p",
+        "test_package_source.py"
+      ],
+      "exitCode": 0,
+      "elapsedSeconds": 0.19
+    },
+    {
+      "step": "package-first",
+      "argv": [
+        "/usr/bin/python3",
+        "-B",
+        "/Volumes/dev_src_case_sensitive/projects/patamaps/scripts/package.py",
+        "--binary",
+        "/Volumes/dev_src_case_sensitive/projects/patamaps/target/release/patamaps",
+        "--build-profile",
+        "release",
+        "--output",
+        "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/retention-audit-20261020/package-scope-final-verification/first",
+        "--acceptance-output",
+        "/Volumes/dev_src_case_sensitive/projects/patamaps/docs/acceptance/project-adoption/package-source-scope-20261020"
+      ],
+      "exitCode": 0,
+      "elapsedSeconds": 13.528
+    },
+    {
+      "step": "package-second",
+      "argv": [
+        "/usr/bin/python3",
+        "-B",
+        "/Volumes/dev_src_case_sensitive/projects/patamaps/scripts/package.py",
+        "--binary",
+        "/Volumes/dev_src_case_sensitive/projects/patamaps/target/release/patamaps",
+        "--build-profile",
+        "release",
+        "--output",
+        "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/retention-audit-20261020/package-scope-final-verification/second",
+        "--acceptance-output",
+        "/Volumes/dev_src_case_sensitive/projects/patamaps/docs/acceptance/project-adoption/package-source-scope-20261020"
+      ],
+      "exitCode": 0,
+      "elapsedSeconds": 11.887
+    }
+  ],
+  "filesDeleted": 0,
+  "redSourceBindings": {
+    "scripts/package.py": "2065e0f0ced72f6b5e2a3bf62e0aad1c4054912c0015621c76542111f9c97e80",
+    "scripts/package_source.py": "f4819b90e90e31ac635dbd3c11e8b3368ebe4461a07028044fe2f2d139360aca",
+    "scripts/test_package_source.py": "376925c431976aa2b583786bb5ee531bf61a96715f228efe47436ab60fb1b84a"
+  },
+  "unpackedBytes": 75367286,
+  "sourceMembers": 994,
+  "guideAndPlanFileLinksVerified": 115,
+  "sourceEvidence": {
+    "policy": "markdown-reference-closure",
+    "files": 161,
+    "bytes": 25633942,
+    "maximumBytes": 33554432,
+    "maximumFiles": 512
+  },
+  "archives": {
+    "sourceArchive": {
+      "bytes": 8958193,
+      "sha256": "bc0899bde1295ea8984dc38712192ec774de0a2adde12c9d21d529663a3dd180"
+    },
+    "nativeArchive": {
+      "bytes": 9749492,
+      "sha256": "76175c661fa2c4e8019af2a5d8e6c82fc6590db99e779942a1f0cf08226998e0"
+    }
+  },
+  "sourceAndNativeArchivesByteIdentical": true,
+  "allInventoryBytesMatchCheckout": true,
+  "requiredCodeTestsFixturesVendorPreserved": true,
+  "recordedAt": "2026-10-20T19:04:18.091904+00:00"
+}

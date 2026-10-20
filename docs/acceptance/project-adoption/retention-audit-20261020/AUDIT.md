@@ -1,6 +1,6 @@
 # Intel retained-data audit
 
-Scope: Patamaps qualification outputs and the roots counted by its storage supervisor. No files were deleted during this audit. No application source is published by this report.
+Scope: Patamaps qualification outputs and the roots counted by its storage supervisor. The initial audit deleted nothing; the separately approved execution is recorded below. No application source is published by this report.
 
 The refused run recorded 100,614,709,248 retained bytes, including 1,970 roots (1,965 scratch roots). These are conservative path-allocation totals, not unique physical storage. Separate `du` observations are a later snapshot and must not be added as a precise decomposition of the earlier guard total.
 
@@ -24,3 +24,15 @@ Retention changes: native per-state attempt ceiling (default 8, max 64), no-op a
 Archive verification completed: 118,202 files / 7,764,934,656 allocated bytes match their exact members in nine retained source archives; all archive digests match distribution records. No restoration was exercised. Together with the 5,879-file compiler proposal, this is 124,081 files / 16,045,592,576 bytes of summed allocation. Neither inventory is deletion authorization.
 
 Supervisor installation verified: eight CI admission tests passed on source 3f82633 / identical-tree merge 572324e. Actual installed guard probe a7bff2e5 refused for insufficient headroom (exit 75) before launching its sentinel; no data was deleted and limits are unchanged. Native attempt-ceiling verification remains pending after the preserved canonical-number failure and correction.
+
+## Approved execution and verified prevention
+
+The user approved exactly the two inventoried lists. Exclusive maintenance rechecked inventory digests, file identities, archive hashes and job ownership before unlinking. It removed 124,081 approved files, no directories and no unlisted files. Nine recovery archives and four excluded compiler entries remain. See [completed receipt](approved-cleanup-completed.json). The summed allocation was 16,045,592,576 bytes; observed free space immediately increased by 3,421,507,584 bytes. APFS sharing and other filesystem activity prevent treating the allocation sum as physical reclamation. Rebuilding subsequently consumed space.
+
+The earlier pending statements above describe the proposal stage and are superseded by this execution. Files outside those exact lists remain. Compiler outputs require recompilation; matching retained archive bytes were verified but filesystem restoration was not exercised.
+
+The corrected source passed all five Linux capability CI jobs, including 27 native workspace tests and the three retention regressions. Intel rebuilt the development release CLI and independently passed all 27 workspace tests. See [CI receipt](corrected-native-ci.json), [Intel build](native-retention-build.json) and [artifact identity](native-retention-artifact.json). Older installed distributions remain unchanged.
+
+A sampled old extraction contained 822,896,360 logical bytes under docs/acceptance. The source packager had copied historical generated evidence into every new distribution. It now retains required code, tests, fixtures and vendor inputs, plus bounded inline-Markdown-linked evidence. It refuses above 128 MiB total source payload, 16,384 source members, or 32 MiB / 512 linked evidence files. Directory references select an explicit index or receipt rather than a recursive copy. Existing historical records are not deleted.
+
+[Local packaging verification](bounded-package-verification.json) passed 13 scope tests, checked 115 guide/plan file links, matched every inventory byte to the checkout and produced byte-identical source/native archives twice. Source payload was 75,367,286 bytes, compressed source archive 8,958,193 bytes. This receipt binds the exact precommit source hashes; installed-consumer CI for the packaging change is a separate gate. Production parallel execution remains disabled.

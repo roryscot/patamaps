@@ -21,6 +21,10 @@ jobs:
           node-version: '22.23.3'
       - name: Check retention headroom without allocating build outputs
         run: node --test scripts/retention_admission.test.mjs
+      - name: Check bounded source-package evidence closure
+        run: |
+          mkdir -p "$RUNNER_TEMP/patamaps-package-scope-tests"
+          PATAMAPS_TEST_RETAIN_ROOT="$RUNNER_TEMP/patamaps-package-scope-tests" python3 -B -m unittest discover -s scripts -p test_package_source.py
 
   linux:
     name: Linux ${{ matrix.architecture }}
