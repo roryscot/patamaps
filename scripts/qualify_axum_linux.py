@@ -11,6 +11,8 @@ import subprocess
 import tarfile
 import time
 
+from qualify_axum_retained import qualify_retained
+
 UPSTREAM = "https://github.com/tokio-rs/axum.git"
 REVISION = "fc78d5bcdb276bd6fb53cf2db55e91757eabb469"
 MANIFESTS = ["Cargo.toml", "Cargo.lock", "axum/Cargo.toml",
@@ -79,14 +81,14 @@ def main():
                                "No actual Next deployment or image/browser acceptance is established."]}
     owner = work / "source"
 
-    def run(label, command, cwd=None, data=None, expected=0, timeout=900):
+    def run(label, command, cwd=None, data=None, expected=0, timeout=900, env=None):
         began = time.monotonic()
         with (evidence / (label + ".stdout.log")).open("xb") as out, \
                 (evidence / (label + ".stderr.log")).open("xb") as err:
             result = subprocess.run([str(x) for x in command], cwd=cwd, input=data,
-                                    stdout=out, stderr=err, timeout=timeout)
+                                    stdout=out, stderr=err, timeout=timeout, env=env)
         receipt["commands"].append({"label": label, "argv": [str(x) for x in command],
-                                    "exitCode": result.returncode,
+                                    "exitCode": result.returncode, "expectedExitCode": expected,
                                     "seconds": round(time.monotonic() - began, 3)})
         print(json.dumps(receipt["commands"][-1]), flush=True)
         assert result.returncode == expected, (label, result.returncode)
@@ -291,6 +293,15 @@ def main():
         assert before == tracked_inventory(), "Tracked source changed"
         assert not run("source-status-after", ["git", "status", "--porcelain=v1"], cwd=owner)
         assert digest(cli) == receipt["compilerDigest"]
+        try:
+            receipt["retainedWorkflow"] = qualify_retained(
+                cli, owner, before, config, artifacts, work, evidence, run, inspect_rlib, ar)
+        finally:
+            retained_receipt = evidence / "retained-workflow.json"
+            if retained_receipt.exists():
+                receipt["retainedWorkflow"] = json.loads(retained_receipt.read_text())
+        assert before == tracked_inventory(), "Tracked source changed during retained workflow"
+        assert not run("source-status-after-retained", ["git", "status", "--porcelain=v1"], cwd=owner)
         engine_bytes = run("retained-tool-engine", [cli, "engine"])
         engine = json.loads(engine_bytes)
         (evidence / "engine.json").write_bytes(engine_bytes)

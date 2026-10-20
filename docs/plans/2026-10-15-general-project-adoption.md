@@ -742,3 +742,11 @@ The [existing-project refusal receipt](../acceptance/project-adoption/g5-next-de
 The original aggregation failed after successful workload exit because its expected redundant receipt field was absent. That record remains failed. Independent read-only verification bound the saved behavioral receipt to the prior successful Linux build, checked the exact original bytes/pointer and stopped container, and succeeded without rerunning the workload or weakening controls. Private source/variant/logs remain on Intel; only scoped metadata is published.
 
 Wrong-architecture runtime and stale-contract refusals, authenticated backend/permissions, broader framework boundaries, actual edit/watch performance, latest-package adoption and final release acceptance remain open. The pinned Node ELF header pass does not close architecture runtime refusal.
+
+## Linux retained Rust orchestration gate (prepared, execution pending)
+
+The existing pinned-Axum Linux qualifier now composes the native context/project-build APIs rather than inferring retained orchestration from separate Cargo commands. It declares 335 actual source paths / 333 selected text inputs, five closed symlinks, explicit Linux target/features/configuration and provider/Cargo/rustc bindings. Acceptance requires four selected compiled libraries, generated four-package inventory, 459 upstream library tests, retained ELF/archive-member inspection, selected-output corruption refusal, source/snapshot/configured-tool-unavailable replay and unchanged-key no-op with zero cache hits.
+
+A separate 128 MiB / 8,192-member archive retains only the native tool, license, replay metadata, immutable candidate and selected outputs. Unselected writable compiler-cache files are excluded. Every member must match its recorded bytes/link, and fresh restoration must pass native replay while configured inputs/tools remain unavailable. This bounds retained evidence without deleting any original CI data or claiming hermetic cache/linker/toolchain closure.
+
+The implementation and syntax checks are prepared; Linux execution is pending. A pass must be independently inspected before updating the support matrix. Deployment, authenticated behavior, practical performance and other G3–G6 requirements remain open.
