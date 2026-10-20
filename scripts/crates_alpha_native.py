@@ -142,7 +142,7 @@ def main():
             spec = importlib.util.spec_from_file_location('alpha_identity', ROOT / 'scripts/parity/identity.py')
             module = importlib.util.module_from_spec(spec)
             spec.loader.exec_module(module)
-            expected = module.identities(ROOT)
+            expected = {'schemaVersion': '0.1.0', 'documentType': 'executor-description', **module.identities(ROOT)}
             assert observed == expected, (observed, expected)
             receipt['engines'] = observed
             receipt['binaryDigest'] = sha(binary)

@@ -1,0 +1,171 @@
+{
+  "profile": "patamaps-crates-alpha-native-1",
+  "stage": "native",
+  "root": "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/crates-io/alpha-20261019/checkout",
+  "commands": [
+    {
+      "id": "inputs",
+      "command": [
+        "/Volumes/dev_src_case_sensitive/patamaps-intel-20261014/.tools/intel-python-3.13.16-20261013/runtime/python/bin/python3",
+        "scripts/sync_crate_inputs.py",
+        "--check"
+      ],
+      "exitCode": 0,
+      "elapsedSeconds": 0.18178602203261107,
+      "stdout": "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/crates-io/alpha-20261019/native-0001/inputs.stdout",
+      "stderr": "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/crates-io/alpha-20261019/native-0001/inputs.stderr",
+      "stdoutDigest": "sha256:7040395b6b25364c4e6dbf17a202f31466d33f8eb7b736ee9ad6f602bf9ac9b4",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "format",
+      "command": [
+        "cargo",
+        "fmt",
+        "--all",
+        "--",
+        "--check"
+      ],
+      "exitCode": 0,
+      "elapsedSeconds": 1.7378495569573715,
+      "stdout": "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/crates-io/alpha-20261019/native-0001/format.stdout",
+      "stderr": "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/crates-io/alpha-20261019/native-0001/format.stderr",
+      "stdoutDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "check",
+      "command": [
+        "cargo",
+        "check",
+        "--workspace",
+        "--all-targets",
+        "--locked",
+        "--offline"
+      ],
+      "exitCode": 0,
+      "elapsedSeconds": 104.12304178695194,
+      "stdout": "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/crates-io/alpha-20261019/native-0001/check.stdout",
+      "stderr": "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/crates-io/alpha-20261019/native-0001/check.stderr",
+      "stdoutDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrDigest": "sha256:fb31b1d4e5b4369d62a138bfa3784f79bfc447c8035fb61c37221725124de9cb"
+    },
+    {
+      "id": "clippy",
+      "command": [
+        "cargo",
+        "clippy",
+        "--workspace",
+        "--all-targets",
+        "--locked",
+        "--offline",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exitCode": 0,
+      "elapsedSeconds": 27.973556176992133,
+      "stdout": "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/crates-io/alpha-20261019/native-0001/clippy.stdout",
+      "stderr": "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/crates-io/alpha-20261019/native-0001/clippy.stderr",
+      "stdoutDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrDigest": "sha256:47cc5e883191c9dbb74cdab2d9b287318336bea76e50da9b1499e3a40bf9b1ec"
+    },
+    {
+      "id": "tests",
+      "command": [
+        "cargo",
+        "test",
+        "--workspace",
+        "--locked",
+        "--offline"
+      ],
+      "exitCode": 0,
+      "elapsedSeconds": 263.2423142850166,
+      "stdout": "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/crates-io/alpha-20261019/native-0001/tests.stdout",
+      "stderr": "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/crates-io/alpha-20261019/native-0001/tests.stderr",
+      "stdoutDigest": "sha256:02aef393aa8d8e94e3750d6c2c83b67c2e9757cbf1b6231eadfa535ba1294337",
+      "stderrDigest": "sha256:e6e58a31f336752f73421c27d27ccb076a282436422407c05f1a179ac6665d90"
+    },
+    {
+      "id": "doc-tests",
+      "command": [
+        "cargo",
+        "test",
+        "--workspace",
+        "--doc",
+        "--locked",
+        "--offline"
+      ],
+      "exitCode": 0,
+      "elapsedSeconds": 4.390040994971059,
+      "stdout": "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/crates-io/alpha-20261019/native-0001/doc-tests.stdout",
+      "stderr": "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/crates-io/alpha-20261019/native-0001/doc-tests.stderr",
+      "stdoutDigest": "sha256:889088cb2a11712ebf4de43a9f627be61cf0043612b6133ff2021aa513eba6b2",
+      "stderrDigest": "sha256:663b7230879f35d0e01154eefda08043a4a76acadaf9adb8b403cdc231ddfee7"
+    },
+    {
+      "id": "cli",
+      "command": [
+        "cargo",
+        "build",
+        "-p",
+        "patamaps-cli",
+        "--locked",
+        "--offline"
+      ],
+      "exitCode": 0,
+      "elapsedSeconds": 3.2768711550161242,
+      "stdout": "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/crates-io/alpha-20261019/native-0001/cli.stdout",
+      "stderr": "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/crates-io/alpha-20261019/native-0001/cli.stderr",
+      "stdoutDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrDigest": "sha256:bd5f04b7114b20b57817b52bedf39820b6ade54d1237c14430a1271774c1da16"
+    }
+  ],
+  "status": "failed",
+  "publicRegistryUpload": false,
+  "filesDeleted": 0,
+  "target": "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/crates-io/alpha-20261019/native-target",
+  "startedAt": 1792453877.854514,
+  "includeCheck": {
+    "checkedLiteralIncludes": 256,
+    "externalIncludes": 0
+  },
+  "engineSourceCoverage": {
+    "patamaps-contracts": {
+      "productionFiles": 9,
+      "missingBindings": [],
+      "explicitTestModuleExclusions": []
+    },
+    "patamaps-core": {
+      "productionFiles": 32,
+      "missingBindings": [],
+      "explicitTestModuleExclusions": []
+    },
+    "patamaps-projection": {
+      "productionFiles": 7,
+      "missingBindings": [],
+      "explicitTestModuleExclusions": []
+    },
+    "patamaps-governance": {
+      "productionFiles": 8,
+      "missingBindings": [],
+      "explicitTestModuleExclusions": []
+    },
+    "patamaps-workspace": {
+      "productionFiles": 14,
+      "missingBindings": [],
+      "explicitTestModuleExclusions": [
+        "src/native_discovery_tests.rs",
+        "src/native_docker_tests.rs",
+        "src/process_tests.rs"
+      ]
+    },
+    "patamaps-scientific": {
+      "productionFiles": 9,
+      "missingBindings": [],
+      "explicitTestModuleExclusions": []
+    }
+  },
+  "error": "AssertionError: ({'compiler': 'sha256:f00596e91b6f26af5daa084dd10052cc456c83b5421d2625e21dcc4a487c279b', 'documentType': 'executor-description', 'governance': 'sha256:d82697f479a6b7bf5bb872feb33c4792f822e3accd8e6030cc08e9ec7bf88504', 'schemaVersion': '0.1.0', 'scientific': 'sha256:6b753c03b8cefffe6c02bb7f8c7600fbdb531d1185b8332e1a8b921aff7b11e2', 'workspace': 'sha256:dcebf794933e47857acbc492cf3ed28f88b09f342130803d74e962bdffd24dfc'}, {'compiler': 'sha256:f00596e91b6f26af5daa084dd10052cc456c83b5421d2625e21dcc4a487c279b', 'governance': 'sha256:d82697f479a6b7bf5bb872feb33c4792f822e3accd8e6030cc08e9ec7bf88504', 'workspace': 'sha256:dcebf794933e47857acbc492cf3ed28f88b09f342130803d74e962bdffd24dfc', 'scientific': 'sha256:6b753c03b8cefffe6c02bb7f8c7600fbdb531d1185b8332e1a8b921aff7b11e2'})",
+  "finishedAt": 1792454284.263942
+}

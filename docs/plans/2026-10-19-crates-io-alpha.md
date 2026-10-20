@@ -67,3 +67,9 @@ acceptance remain pending under the shared Intel build reservation.
 ## Linux source acceptance
 
 [Hosted run 39341691837](https://github.com/roryscot/patamaps/actions/runs/39341691837) passed all four jobs on source commit 6d6f31d1bb5a1e64380491b7053a3e2d84f57fe0: native Linux x86_64, native Linux aarch64, cross-stack source bindings and the Linux image/browser flow. The exact run/job state is retained in docs/acceptance/crates-io/2026-10-19/linux-ci.json. This is source acceptance; candidate archives, native Intel checks and source-unavailable clean installation remain pending.
+
+## Intel source acceptance
+
+All seven commands in native-0001 completed successfully: input synchronization, formatting, locked/offline all-target compilation and Clippy, workspace tests, doc tests and CLI build. Its final comparison failed because the verifier compared the complete executor-description envelope against only the four independently calculated digests; all four already matched. The corrected native-0002 focused rerun passed the complete envelope, four identities, 256 contained includes, all 79 production source bindings and unchanged-source check. The only inventoried differences between runs were the verification script and the standalone fork lockfile; Rust production sources were unchanged. Original failure and successful rerun are retained in the acceptance records.
+
+The standalone fork fetch passed and updated its lockfile for the renamed package and build digest dependency, retaining upstream versions. The offline rehearsal now compares archive identity/checksum separately from optional dependency graphs; three valid ICU graph differences demonstrated the earlier over-strict equality. Candidate archives and clean installation remain pending.

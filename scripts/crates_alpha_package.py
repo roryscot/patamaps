@@ -236,9 +236,14 @@ class Gate:
                     continue
                 assert package['source'] == 'registry+https://github.com/rust-lang/crates.io-index'
                 key = package['name'], package['version']
+                # A lockfile records the enabled dependency graph as well as
+                # archive identity. Optional features can change that graph
+                # between the workspace and standalone fork without changing
+                # the upstream archive or its verified checksum.
+                identity = {field: package[field] for field in ['name', 'version', 'source', 'checksum']}
                 if key in locked:
-                    assert locked[key] == package
-                locked[key] = package
+                    assert locked[key] == identity
+                locked[key] = identity
         records = []
         for package in sorted(locked.values(), key=lambda p: (p['name'], p['version'])):
             name = f"{package['name']}-{package['version']}.crate"
@@ -349,7 +354,7 @@ print("development source reads denied")
         engines = json.loads(self.command('installed-engine', [cli, 'engine'], cwd=consumer, sandbox=profile, minimal_path=True))
         code = 'import importlib.util,json; from pathlib import Path; s=importlib.util.spec_from_file_location("identity",' + repr(str(verifier)) + '); m=importlib.util.module_from_spec(s); s.loader.exec_module(m); print(json.dumps(m.identities(Path(' + repr(str(unpacked)) + '))))'
         expected = json.loads(self.command('archive-identities', [python, '-c', code], cwd=consumer, sandbox=profile))
-        assert engines == expected
+        assert engines == {'schemaVersion': '0.1.0', 'documentType': 'executor-description', **expected}
         self.receipt['engines'] = engines
         self.receipt['independentArchiveIdentityMatched'] = True
         self.receipt['installedBinaryDigest'] = digest(cli)
