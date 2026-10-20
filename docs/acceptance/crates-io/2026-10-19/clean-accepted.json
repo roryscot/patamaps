@@ -1,0 +1,563 @@
+{
+  "profile": "patamaps-crates-alpha-package-1",
+  "stage": "clean",
+  "source": "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/crates-io/alpha-20261019/publishing-source-0001",
+  "sourceCommit": "3f54166f8ad4f2071c88de145e2b20ed38355502",
+  "state": "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/crates-io/alpha-20261019/candidate-0001",
+  "commands": [
+    {
+      "id": "source-denial",
+      "command": [
+        "/usr/bin/sandbox-exec",
+        "-f",
+        "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/crates-io/alpha-20261019/candidate-0001/clean-0002/source-unavailable.sb",
+        "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/intel-python-3.13.16-20261013/runtime/python/bin/python3.13",
+        "-c",
+        "from pathlib import Path\nimport errno\nfor name in ['/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/crates-io/alpha-20261019/publishing-source-0001/Cargo.toml', '/Volumes/dev_src_case_sensitive/projects/patamaps/crates/patamaps-core/src/lib.rs']:\n try: Path(name).read_bytes()\n except PermissionError: continue\n raise AssertionError(\"development source was readable\")\nprint(\"development source reads denied\")\n"
+      ],
+      "cwd": "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/crates-io/alpha-20261019/candidate-0001/clean-0002/work/rust-consumer",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "elapsedSeconds": 0.07922987395431846,
+      "stdout": "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/crates-io/alpha-20261019/candidate-0001/clean-0002/source-denial.stdout",
+      "stderr": "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/crates-io/alpha-20261019/candidate-0001/clean-0002/source-denial.stderr",
+      "stdoutDigest": "9841a2bf4a86d52c09151328fc93c004c9e6a02e59e2183101d396c2bee9ec54",
+      "stderrDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "installed-engine",
+      "command": [
+        "/usr/bin/sandbox-exec",
+        "-f",
+        "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/crates-io/alpha-20261019/candidate-0001/clean-0002/source-unavailable.sb",
+        "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/crates-io/alpha-20261019/candidate-0001/installation/bin/patamaps",
+        "engine"
+      ],
+      "cwd": "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/crates-io/alpha-20261019/candidate-0001/clean-0002/work/rust-consumer",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "elapsedSeconds": 0.044099500053562224,
+      "stdout": "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/crates-io/alpha-20261019/candidate-0001/clean-0002/installed-engine.stdout",
+      "stderr": "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/crates-io/alpha-20261019/candidate-0001/clean-0002/installed-engine.stderr",
+      "stdoutDigest": "a443a05fef1203ef1e6b75523963288dc537b2239c8b542dd8596bcea4f556d8",
+      "stderrDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "archive-identities",
+      "command": [
+        "/usr/bin/sandbox-exec",
+        "-f",
+        "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/crates-io/alpha-20261019/candidate-0001/clean-0002/source-unavailable.sb",
+        "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/intel-python-3.13.16-20261013/runtime/python/bin/python3.13",
+        "-c",
+        "import importlib.util,json; from pathlib import Path; s=importlib.util.spec_from_file_location(\"identity\",'/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/crates-io/alpha-20261019/candidate-0001/clean-0002/work/identity-verifier.py'); m=importlib.util.module_from_spec(s); s.loader.exec_module(m); print(json.dumps(m.identities(Path('/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/crates-io/alpha-20261019/candidate-0001/clean-0002/work/unpacked-candidates'))))"
+      ],
+      "cwd": "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/crates-io/alpha-20261019/candidate-0001/clean-0002/work/rust-consumer",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "elapsedSeconds": 0.195624241954647,
+      "stdout": "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/crates-io/alpha-20261019/candidate-0001/clean-0002/archive-identities.stdout",
+      "stderr": "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/crates-io/alpha-20261019/candidate-0001/clean-0002/archive-identities.stderr",
+      "stdoutDigest": "66868447444962e965ba41daf01567d554f2137987568ddd7d717798460055a4",
+      "stderrDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "before-compose",
+      "command": [
+        "/usr/bin/sandbox-exec",
+        "-f",
+        "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/crates-io/alpha-20261019/candidate-0001/clean-0002/source-unavailable.sb",
+        "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/crates-io/alpha-20261019/candidate-0001/installation/bin/patamaps",
+        "compose",
+        "contract.json",
+        "service.json",
+        "links.json",
+        "--id",
+        "urn:graph:alpha",
+        "--namespace",
+        "alpha",
+        "--relation-pack",
+        "routing.json",
+        "--output",
+        "graph.json"
+      ],
+      "cwd": "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/crates-io/alpha-20261019/candidate-0001/clean-0002/work/rust-consumer/cases/before",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "elapsedSeconds": 0.07979876291938126,
+      "stdout": "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/crates-io/alpha-20261019/candidate-0001/clean-0002/before-compose.stdout",
+      "stderr": "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/crates-io/alpha-20261019/candidate-0001/clean-0002/before-compose.stderr",
+      "stdoutDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "before-validate",
+      "command": [
+        "/usr/bin/sandbox-exec",
+        "-f",
+        "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/crates-io/alpha-20261019/candidate-0001/clean-0002/source-unavailable.sb",
+        "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/crates-io/alpha-20261019/candidate-0001/installation/bin/patamaps",
+        "validate",
+        "graph.json",
+        "--relation-pack",
+        "routing.json"
+      ],
+      "cwd": "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/crates-io/alpha-20261019/candidate-0001/clean-0002/work/rust-consumer/cases/before",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "elapsedSeconds": 0.04505658196285367,
+      "stdout": "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/crates-io/alpha-20261019/candidate-0001/clean-0002/before-validate.stdout",
+      "stderr": "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/crates-io/alpha-20261019/candidate-0001/clean-0002/before-validate.stderr",
+      "stdoutDigest": "8e3d45b1da840fb1c0b37a403c9c1dc5bdbc19b04bc96500f0201bf0372dedfc",
+      "stderrDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "before-compile",
+      "command": [
+        "/usr/bin/sandbox-exec",
+        "-f",
+        "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/crates-io/alpha-20261019/candidate-0001/clean-0002/source-unavailable.sb",
+        "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/crates-io/alpha-20261019/candidate-0001/installation/bin/patamaps",
+        "compile",
+        "graph.json",
+        "policy.json",
+        "--as-of",
+        "2026-10-19T12:00:00Z",
+        "--relation-pack",
+        "routing.json",
+        "-o",
+        "generation.json"
+      ],
+      "cwd": "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/crates-io/alpha-20261019/candidate-0001/clean-0002/work/rust-consumer/cases/before",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "elapsedSeconds": 0.08386705699376762,
+      "stdout": "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/crates-io/alpha-20261019/candidate-0001/clean-0002/before-compile.stdout",
+      "stderr": "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/crates-io/alpha-20261019/candidate-0001/clean-0002/before-compile.stderr",
+      "stdoutDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "before-link",
+      "command": [
+        "/usr/bin/sandbox-exec",
+        "-f",
+        "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/crates-io/alpha-20261019/candidate-0001/clean-0002/source-unavailable.sb",
+        "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/crates-io/alpha-20261019/candidate-0001/installation/bin/patamaps",
+        "link",
+        "graph.json",
+        "policy.json",
+        "spec.json",
+        "--as-of",
+        "2026-10-19T12:00:00Z",
+        "--relation-pack",
+        "routing.json",
+        "--generation",
+        "generation.json",
+        "--binding-slot",
+        "handler",
+        "--format",
+        "rust",
+        "-o",
+        "bindings.rs"
+      ],
+      "cwd": "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/crates-io/alpha-20261019/candidate-0001/clean-0002/work/rust-consumer/cases/before",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "elapsedSeconds": 0.08928816707339138,
+      "stdout": "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/crates-io/alpha-20261019/candidate-0001/clean-0002/before-link.stdout",
+      "stderr": "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/crates-io/alpha-20261019/candidate-0001/clean-0002/before-link.stderr",
+      "stdoutDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "before-rustc",
+      "command": [
+        "/usr/bin/sandbox-exec",
+        "-f",
+        "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/crates-io/alpha-20261019/candidate-0001/clean-0002/source-unavailable.sb",
+        "/Users/admin/.rustup/toolchains/patamaps-intel-1.99.0/bin/rustc",
+        "--edition=2024",
+        "main.rs",
+        "-o",
+        "generated-consumer"
+      ],
+      "cwd": "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/crates-io/alpha-20261019/candidate-0001/clean-0002/work/rust-consumer/cases/before",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "elapsedSeconds": 1.4941912910435349,
+      "stdout": "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/crates-io/alpha-20261019/candidate-0001/clean-0002/before-rustc.stdout",
+      "stderr": "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/crates-io/alpha-20261019/candidate-0001/clean-0002/before-rustc.stderr",
+      "stdoutDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrDigest": "24dc5bb5152672aeea18e85edba379204570d4da63afc94d3055d7cc563f441a"
+    },
+    {
+      "id": "before-compiler-denial",
+      "command": [
+        "/usr/bin/sandbox-exec",
+        "-f",
+        "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/crates-io/alpha-20261019/candidate-0001/clean-0002/before-runtime.sb",
+        "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/intel-python-3.13.16-20261013/runtime/python/bin/python3.13",
+        "-c",
+        "from pathlib import Path\nfor name in ['/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/crates-io/alpha-20261019/candidate-0001/installation/bin/patamaps', '/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/intel-toolchain/installed/bin/rustc']:\n try: Path(name).read_bytes()\n except PermissionError: continue\n raise AssertionError(\"selected compiler was readable\")\nprint(\"selected graph and Rust compiler reads denied\")\n"
+      ],
+      "cwd": "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/crates-io/alpha-20261019/candidate-0001/clean-0002/work/rust-consumer/cases/before",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "elapsedSeconds": 0.08140229096170515,
+      "stdout": "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/crates-io/alpha-20261019/candidate-0001/clean-0002/before-compiler-denial.stdout",
+      "stderr": "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/crates-io/alpha-20261019/candidate-0001/clean-0002/before-compiler-denial.stderr",
+      "stdoutDigest": "af5a5503da91797caeb28d7c73a4cdcf83a5448bc4945e93d3eb804bea066434",
+      "stderrDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "before-runtime",
+      "command": [
+        "/usr/bin/sandbox-exec",
+        "-f",
+        "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/crates-io/alpha-20261019/candidate-0001/clean-0002/before-runtime.sb",
+        "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/crates-io/alpha-20261019/candidate-0001/clean-0002/work/rust-consumer/cases/before/generated-consumer"
+      ],
+      "cwd": "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/crates-io/alpha-20261019/candidate-0001/clean-0002/work/rust-consumer/cases/before",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "elapsedSeconds": 0.2966531979618594,
+      "stdout": "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/crates-io/alpha-20261019/candidate-0001/clean-0002/before-runtime.stdout",
+      "stderr": "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/crates-io/alpha-20261019/candidate-0001/clean-0002/before-runtime.stderr",
+      "stdoutDigest": "902f4d30a6318ad21ab741f67b38666b0049d410161f1b813e69f49ba1e3897a",
+      "stderrDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "after-compose",
+      "command": [
+        "/usr/bin/sandbox-exec",
+        "-f",
+        "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/crates-io/alpha-20261019/candidate-0001/clean-0002/source-unavailable.sb",
+        "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/crates-io/alpha-20261019/candidate-0001/installation/bin/patamaps",
+        "compose",
+        "contract.json",
+        "service.json",
+        "links.json",
+        "--id",
+        "urn:graph:alpha",
+        "--namespace",
+        "alpha",
+        "--relation-pack",
+        "routing.json",
+        "--output",
+        "graph.json"
+      ],
+      "cwd": "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/crates-io/alpha-20261019/candidate-0001/clean-0002/work/rust-consumer/cases/after",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "elapsedSeconds": 0.07760205096565187,
+      "stdout": "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/crates-io/alpha-20261019/candidate-0001/clean-0002/after-compose.stdout",
+      "stderr": "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/crates-io/alpha-20261019/candidate-0001/clean-0002/after-compose.stderr",
+      "stdoutDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "after-validate",
+      "command": [
+        "/usr/bin/sandbox-exec",
+        "-f",
+        "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/crates-io/alpha-20261019/candidate-0001/clean-0002/source-unavailable.sb",
+        "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/crates-io/alpha-20261019/candidate-0001/installation/bin/patamaps",
+        "validate",
+        "graph.json",
+        "--relation-pack",
+        "routing.json"
+      ],
+      "cwd": "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/crates-io/alpha-20261019/candidate-0001/clean-0002/work/rust-consumer/cases/after",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "elapsedSeconds": 0.04438333795405924,
+      "stdout": "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/crates-io/alpha-20261019/candidate-0001/clean-0002/after-validate.stdout",
+      "stderr": "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/crates-io/alpha-20261019/candidate-0001/clean-0002/after-validate.stderr",
+      "stdoutDigest": "29dedbcfcc5079c8a3f693f82bc837e44bfedcaeab3f9442f27ac79462a67f88",
+      "stderrDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "after-compile",
+      "command": [
+        "/usr/bin/sandbox-exec",
+        "-f",
+        "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/crates-io/alpha-20261019/candidate-0001/clean-0002/source-unavailable.sb",
+        "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/crates-io/alpha-20261019/candidate-0001/installation/bin/patamaps",
+        "compile",
+        "graph.json",
+        "policy.json",
+        "--as-of",
+        "2026-10-19T12:00:00Z",
+        "--relation-pack",
+        "routing.json",
+        "-o",
+        "generation.json"
+      ],
+      "cwd": "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/crates-io/alpha-20261019/candidate-0001/clean-0002/work/rust-consumer/cases/after",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "elapsedSeconds": 0.0857497260440141,
+      "stdout": "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/crates-io/alpha-20261019/candidate-0001/clean-0002/after-compile.stdout",
+      "stderr": "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/crates-io/alpha-20261019/candidate-0001/clean-0002/after-compile.stderr",
+      "stdoutDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "after-link",
+      "command": [
+        "/usr/bin/sandbox-exec",
+        "-f",
+        "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/crates-io/alpha-20261019/candidate-0001/clean-0002/source-unavailable.sb",
+        "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/crates-io/alpha-20261019/candidate-0001/installation/bin/patamaps",
+        "link",
+        "graph.json",
+        "policy.json",
+        "spec.json",
+        "--as-of",
+        "2026-10-19T12:00:00Z",
+        "--relation-pack",
+        "routing.json",
+        "--generation",
+        "generation.json",
+        "--binding-slot",
+        "handler",
+        "--format",
+        "rust",
+        "-o",
+        "bindings.rs"
+      ],
+      "cwd": "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/crates-io/alpha-20261019/candidate-0001/clean-0002/work/rust-consumer/cases/after",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "elapsedSeconds": 0.08268160000443459,
+      "stdout": "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/crates-io/alpha-20261019/candidate-0001/clean-0002/after-link.stdout",
+      "stderr": "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/crates-io/alpha-20261019/candidate-0001/clean-0002/after-link.stderr",
+      "stdoutDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "after-rustc",
+      "command": [
+        "/usr/bin/sandbox-exec",
+        "-f",
+        "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/crates-io/alpha-20261019/candidate-0001/clean-0002/source-unavailable.sb",
+        "/Users/admin/.rustup/toolchains/patamaps-intel-1.99.0/bin/rustc",
+        "--edition=2024",
+        "main.rs",
+        "-o",
+        "generated-consumer"
+      ],
+      "cwd": "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/crates-io/alpha-20261019/candidate-0001/clean-0002/work/rust-consumer/cases/after",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "elapsedSeconds": 0.193457767018117,
+      "stdout": "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/crates-io/alpha-20261019/candidate-0001/clean-0002/after-rustc.stdout",
+      "stderr": "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/crates-io/alpha-20261019/candidate-0001/clean-0002/after-rustc.stderr",
+      "stdoutDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrDigest": "89909c9cb1a12e7d9a8bb6b391b9de523a3d03f5eef9b3d0186c6582bebd991e"
+    },
+    {
+      "id": "after-compiler-denial",
+      "command": [
+        "/usr/bin/sandbox-exec",
+        "-f",
+        "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/crates-io/alpha-20261019/candidate-0001/clean-0002/after-runtime.sb",
+        "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/intel-python-3.13.16-20261013/runtime/python/bin/python3.13",
+        "-c",
+        "from pathlib import Path\nfor name in ['/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/crates-io/alpha-20261019/candidate-0001/installation/bin/patamaps', '/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/intel-toolchain/installed/bin/rustc']:\n try: Path(name).read_bytes()\n except PermissionError: continue\n raise AssertionError(\"selected compiler was readable\")\nprint(\"selected graph and Rust compiler reads denied\")\n"
+      ],
+      "cwd": "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/crates-io/alpha-20261019/candidate-0001/clean-0002/work/rust-consumer/cases/after",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "elapsedSeconds": 0.08065676293335855,
+      "stdout": "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/crates-io/alpha-20261019/candidate-0001/clean-0002/after-compiler-denial.stdout",
+      "stderr": "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/crates-io/alpha-20261019/candidate-0001/clean-0002/after-compiler-denial.stderr",
+      "stdoutDigest": "af5a5503da91797caeb28d7c73a4cdcf83a5448bc4945e93d3eb804bea066434",
+      "stderrDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "after-runtime",
+      "command": [
+        "/usr/bin/sandbox-exec",
+        "-f",
+        "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/crates-io/alpha-20261019/candidate-0001/clean-0002/after-runtime.sb",
+        "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/crates-io/alpha-20261019/candidate-0001/clean-0002/work/rust-consumer/cases/after/generated-consumer"
+      ],
+      "cwd": "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/crates-io/alpha-20261019/candidate-0001/clean-0002/work/rust-consumer/cases/after",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "elapsedSeconds": 0.24188639502972364,
+      "stdout": "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/crates-io/alpha-20261019/candidate-0001/clean-0002/after-runtime.stdout",
+      "stderr": "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/crates-io/alpha-20261019/candidate-0001/clean-0002/after-runtime.stderr",
+      "stdoutDigest": "902f4d30a6318ad21ab741f67b38666b0049d410161f1b813e69f49ba1e3897a",
+      "stderrDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "consumer-lock",
+      "command": [
+        "/usr/bin/sandbox-exec",
+        "-f",
+        "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/crates-io/alpha-20261019/candidate-0001/clean-0002/source-unavailable.sb",
+        "cargo",
+        "generate-lockfile",
+        "--offline"
+      ],
+      "cwd": "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/crates-io/alpha-20261019/candidate-0001/clean-0002/work/rust-consumer",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "elapsedSeconds": 0.2426000179257244,
+      "stdout": "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/crates-io/alpha-20261019/candidate-0001/clean-0002/consumer-lock.stdout",
+      "stderr": "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/crates-io/alpha-20261019/candidate-0001/clean-0002/consumer-lock.stderr",
+      "stdoutDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrDigest": "7789615b23e4249c060ab9791edb0beff19f2afe7a4684287a3a7f482587d69d"
+    },
+    {
+      "id": "library-consumer",
+      "command": [
+        "/usr/bin/sandbox-exec",
+        "-f",
+        "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/crates-io/alpha-20261019/candidate-0001/clean-0002/source-unavailable.sb",
+        "cargo",
+        "run",
+        "--locked",
+        "--offline",
+        "--",
+        "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/crates-io/alpha-20261019/candidate-0001/clean-0002/work/rust-consumer/cases/after"
+      ],
+      "cwd": "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/crates-io/alpha-20261019/candidate-0001/clean-0002/work/rust-consumer",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "elapsedSeconds": 79.99458873504773,
+      "stdout": "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/crates-io/alpha-20261019/candidate-0001/clean-0002/library-consumer.stdout",
+      "stderr": "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/crates-io/alpha-20261019/candidate-0001/clean-0002/library-consumer.stderr",
+      "stdoutDigest": "488564581f60101a38340d4339eef22eec7f435ebc020f799b3540fd95886ef7",
+      "stderrDigest": "f283cee3f5869e7d7e86322af08ecd17796dd941ec3e77377bc62b14884a9138"
+    },
+    {
+      "id": "consumer-metadata",
+      "command": [
+        "/usr/bin/sandbox-exec",
+        "-f",
+        "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/crates-io/alpha-20261019/candidate-0001/clean-0002/source-unavailable.sb",
+        "cargo",
+        "metadata",
+        "--locked",
+        "--offline",
+        "--format-version",
+        "1"
+      ],
+      "cwd": "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/crates-io/alpha-20261019/candidate-0001/clean-0002/work/rust-consumer",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "elapsedSeconds": 0.9701150599867105,
+      "stdout": "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/crates-io/alpha-20261019/candidate-0001/clean-0002/consumer-metadata.stdout",
+      "stderr": "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/crates-io/alpha-20261019/candidate-0001/clean-0002/consumer-metadata.stderr",
+      "stdoutDigest": "c6330d521331d5bed0e796ed526ba368d84660a64db8ec4c292adf1227811998",
+      "stderrDigest": "2c4f215fc1c49793fe09c6d82f20d9c6f4d53df0aab7a7041579622706412022"
+    },
+    {
+      "id": "archive-checksum-refusal",
+      "command": [
+        "/usr/bin/sandbox-exec",
+        "-f",
+        "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/crates-io/alpha-20261019/candidate-0001/clean-0002/source-unavailable.sb",
+        "cargo",
+        "fetch",
+        "--locked",
+        "--offline"
+      ],
+      "cwd": "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/crates-io/alpha-20261019/candidate-0001/clean-0002/work/rust-consumer",
+      "exitCode": 101,
+      "expectedExitCode": null,
+      "elapsedSeconds": 2.9881833440158516,
+      "stdout": "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/crates-io/alpha-20261019/candidate-0001/clean-0002/archive-checksum-refusal.stdout",
+      "stderr": "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/crates-io/alpha-20261019/candidate-0001/clean-0002/archive-checksum-refusal.stderr",
+      "stdoutDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrDigest": "4143a347882b42fe62c73b7f7fbebb866c998cc9343be5e9a8a78434c8be4b5b"
+    }
+  ],
+  "status": "passed",
+  "publicRegistryUpload": false,
+  "publicRegistryDownload": false,
+  "candidateSourceReplacement": true,
+  "pathDependencyOverrides": 0,
+  "filesDeleted": 0,
+  "startedAt": 1792456102.088979,
+  "driverDigest": "765cf5149a03469093d0067a3739554c85ace3ace92beadde687114c7bf5ec47",
+  "cargoVersion": "cargo 1.99.0 (5f94df478 2026-08-27)",
+  "rustcVersionVerbose": "rustc 1.99.0 (b940084d7 2026-09-28)\nbinary: rustc\ncommit-hash: b940084d7eb6a299eb4bfeb8e34901bc051e7ac4\ncommit-date: 2026-09-28\nhost: x86_64-apple-darwin\nrelease: 1.99.0\nLLVM version: 23.1.1\n",
+  "pythonVersion": "3.13.16 (main, Oct 14 2026, 00:55:35) [Clang 23.1.3 ]",
+  "cleanAttemptRoot": "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/crates-io/alpha-20261019/candidate-0001/clean-0002/work",
+  "reusedFreshInstallation": {
+    "record": "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/crates-io/alpha-20261019/candidate-0001/clean-0001/receipt.json",
+    "recordDigest": "4d96527349fd873e2ef5d4b3e7dc625f966a91608834f663515fb311ef2ceb0b",
+    "binaryDigest": "a7aaf7de567faaa0e1cce2d4b891df53a9a1537d400cc5c20af4dcca454f4ef5",
+    "cargoHomeFreshForThisAttempt": false
+  },
+  "consumerSerdeJsonVersion": "1.0.152",
+  "engines": {
+    "compiler": "sha256:f322cc0745b9c21e8f853d3774feb5a48f072906a24137d516ebd7a115b595fb",
+    "documentType": "executor-description",
+    "governance": "sha256:25ff5566a072f7ff8696b0ac9c66855dcdc114addc567cd819061c1470c9f634",
+    "schemaVersion": "0.1.0",
+    "scientific": "sha256:9b1c1edfbe041945bd52e0d2584fcd1de4b65e0f54a87639577f8c790918ab49",
+    "workspace": "sha256:7d34772ff1e53594ba9d059a03846cf7715c13f6fa3309728989ce7c80ca78f0"
+  },
+  "independentArchiveIdentityMatched": true,
+  "installedBinaryDigest": "a7aaf7de567faaa0e1cce2d4b891df53a9a1537d400cc5c20af4dcca454f4ef5",
+  "identityVerifierDigest": "7009371bc07c881f1d52ff7f92e839c0bce945a23e75593bbcf5d750ffffe15b",
+  "generatedRuntimeWithoutCompiler": true,
+  "stableIdentityAcrossActualModuleMove": true,
+  "generatedRustArtifactDigests": [
+    "497cda924df2e464fbf29ab941454e22ce2db7469407b4e26f55fbaa1037d698",
+    "0c682ce040acab6742cd386d28a4bd0737e7badb980624c1fdab3b8d7fef98af"
+  ],
+  "registryLibraryOrigins": [
+    {
+      "name": "patamaps-contracts",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "manifestPath": "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/crates-io/alpha-20261019/candidate-0001/clean-home/registry/src/-7b179e47a0cea1c0/patamaps-contracts-0.1.0-alpha.1/Cargo.toml"
+    },
+    {
+      "name": "patamaps-core",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "manifestPath": "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/crates-io/alpha-20261019/candidate-0001/clean-home/registry/src/-7b179e47a0cea1c0/patamaps-core-0.1.0-alpha.1/Cargo.toml"
+    },
+    {
+      "name": "patamaps-governance",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "manifestPath": "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/crates-io/alpha-20261019/candidate-0001/clean-home/registry/src/-7b179e47a0cea1c0/patamaps-governance-0.1.0-alpha.1/Cargo.toml"
+    },
+    {
+      "name": "patamaps-icu-collator",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "manifestPath": "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/crates-io/alpha-20261019/candidate-0001/clean-home/registry/src/-7b179e47a0cea1c0/patamaps-icu-collator-2.2.1-patamaps.1/Cargo.toml"
+    },
+    {
+      "name": "patamaps-inspect",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "manifestPath": "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/crates-io/alpha-20261019/candidate-0001/clean-home/registry/src/-7b179e47a0cea1c0/patamaps-inspect-0.1.0-alpha.1/Cargo.toml"
+    },
+    {
+      "name": "patamaps-projection",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "manifestPath": "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/crates-io/alpha-20261019/candidate-0001/clean-home/registry/src/-7b179e47a0cea1c0/patamaps-projection-0.1.0-alpha.1/Cargo.toml"
+    },
+    {
+      "name": "patamaps-scientific",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "manifestPath": "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/crates-io/alpha-20261019/candidate-0001/clean-home/registry/src/-7b179e47a0cea1c0/patamaps-scientific-0.1.0-alpha.1/Cargo.toml"
+    },
+    {
+      "name": "patamaps-workspace",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "manifestPath": "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/crates-io/alpha-20261019/candidate-0001/clean-home/registry/src/-7b179e47a0cea1c0/patamaps-workspace-0.1.0-alpha.1/Cargo.toml"
+    }
+  ],
+  "sourceUnavailableCleanInstall": true,
+  "tamperedArchiveRefused": true,
+  "activationAttempted": false,
+  "sourceUnchanged": true,
+  "finishedAt": 1792456191.3137028
+}

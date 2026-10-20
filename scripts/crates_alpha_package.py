@@ -320,23 +320,46 @@ class Gate:
         records = [json.loads((self.state / 'package-records' / f'{name}.json').read_text()) for name in ORDER]
         for record in records:
             assert digest(Path(record['path'])) == record['sha256']
-        unpacked = self.state / 'unpacked-candidates'
-        unpacked.mkdir(exist_ok=False)
+        unpacked = self.output / 'work/unpacked-candidates'
+        unpacked.mkdir(parents=True, exist_ok=False)
+        self.receipt['cleanAttemptRoot'] = str(self.output / 'work')
         for record in records:
             destination = unpacked / ('vendor/icu_collator' if record['name'] == FORK else f"crates/{record['name']}")
             inspect_archive(Path(record['path']), record['name'], record['version'], destination)
-        verifier = self.state / 'identity-verifier.py'
+        verifier = self.output / 'work/identity-verifier.py'
         with (self.source / 'scripts/parity/identity.py').open('rb') as source, verifier.open('xb') as destination:
             shutil.copyfileobj(source, destination)
-        home = self.home('clean-home')
-        target = self.state / 'clean-target'
-        installation = self.state / 'installation'
-        consumer = self.state / 'rust-consumer'
+        previous_install = None
+        if self.args.reuse_install_record:
+            prior_path = self.state / self.args.reuse_install_record / 'receipt.json'
+            previous_install = json.loads(prior_path.read_text())
+            assert previous_install['stage'] == 'clean' and previous_install['status'] == 'failed'
+            assert previous_install['sourceCommit'] == self.args.expected_source
+            assert previous_install['source'] == str(self.source) and previous_install['state'] == str(self.state)
+            assert previous_install['driverDigest'] == digest(self.source / 'scripts/crates_alpha_package.py')
+            assert previous_install['independentArchiveIdentityMatched'] is True
+            assert any(c['id'] == 'install-cli' and c['exitCode'] == 0 for c in previous_install['commands'])
+            # The original driver exclusively created these fresh directories.
+            # Reuse only its exact installed executable; recheck source denial,
+            # archive identities, runtime cases, libraries and corruption below.
+            home, target, installation = [self.state / name for name in ['clean-home', 'clean-target', 'installation']]
+            assert all(path.is_dir() for path in [home, target, installation])
+            assert digest(installation / 'bin/patamaps') == previous_install['installedBinaryDigest']
+            self.receipt['reusedFreshInstallation'] = {'record': str(prior_path), 'recordDigest': digest(prior_path),
+                'binaryDigest': previous_install['installedBinaryDigest'], 'cargoHomeFreshForThisAttempt': False}
+        else:
+            home = self.home(Path(self.args.record) / 'work/clean-home')
+            target = self.output / 'work/clean-target'
+            installation = self.output / 'work/installation'
+        consumer = self.output / 'work/rust-consumer'
         (consumer / 'src').mkdir(parents=True)
         libraries = [name for name in ORDER if name not in {FORK, 'patamaps-cli', 'patamaps-activator'}]
+        json_versions = [package['version'] for package in tomllib.loads((self.source / 'Cargo.lock').read_text())['package'] if package['name'] == 'serde_json']
+        assert len(json_versions) == 1
+        self.receipt['consumerSerdeJsonVersion'] = json_versions[0]
         (consumer / 'Cargo.toml').write_text('[package]\nname = "alpha-independent-consumer"\nversion = "0.0.0"\nedition = "2024"\n'
             '[dependencies]\n' + ''.join(name + ' = "=' + ALPHA + '"\n' for name in libraries) +
-            'serde_json = "=1.0.151"\n[workspace]\n')
+            'serde_json = "=' + json_versions[0] + '"\n[workspace]\n')
         (consumer / 'src/main.rs').write_text('fn main() {}\n')
         profile = self.profile('source-unavailable.sb')
         python = Path(sys.executable).resolve()
@@ -348,8 +371,9 @@ class Gate:
 print("development source reads denied")
 '''
         self.command('source-denial', [python, '-c', denial], cwd=consumer, sandbox=profile)
-        self.command('install-cli', ['cargo', 'install', 'patamaps-cli', '--version', ALPHA,
-                     '--locked', '--offline', '--root', installation], cwd=consumer, home=home, target=target, sandbox=profile)
+        if previous_install is None:
+            self.command('install-cli', ['cargo', 'install', 'patamaps-cli', '--version', ALPHA,
+                         '--locked', '--offline', '--root', installation], cwd=consumer, home=home, target=target, sandbox=profile)
         cli = installation / 'bin/patamaps'
         engines = json.loads(self.command('installed-engine', [cli, 'engine'], cwd=consumer, sandbox=profile, minimal_path=True))
         code = 'import importlib.util,json; from pathlib import Path; s=importlib.util.spec_from_file_location("identity",' + repr(str(verifier)) + '); m=importlib.util.module_from_spec(s); s.loader.exec_module(m); print(json.dumps(m.identities(Path(' + repr(str(unpacked)) + '))))'
@@ -475,7 +499,7 @@ fn main() {
     def tamper_control(self, consumer, profile):
         name = 'patamaps-contracts'
         archive = self.registry / f'{name}-{ALPHA}.crate'
-        bad = self.state / 'tampered-candidate-registry'
+        bad = self.output / 'work/tampered-candidate-registry'
         bad.mkdir(exist_ok=False)
         shutil.copytree(self.registry / 'index', bad / 'index')
         for candidate in self.registry.glob('*.crate'):
@@ -488,7 +512,7 @@ fn main() {
                 with candidate.open('rb') as source, (bad / candidate.name).open('xb') as destination:
                     shutil.copyfileobj(source, destination)
         assert digest(bad / archive.name) != digest(archive)
-        home = self.home('tamper-home', registry=bad)
+        home = self.home(Path(self.args.record) / 'work/tamper-home', registry=bad)
         self.command('archive-checksum-refusal', ['cargo', 'fetch', '--locked', '--offline'],
                      cwd=consumer, home=home, sandbox=profile, expected=None,
                      required_error=['checksum', name])
@@ -503,8 +527,11 @@ def main():
     parser.add_argument('--expected-source', required=True)
     parser.add_argument('--state', type=Path, required=True)
     parser.add_argument('--record', required=True)
+    parser.add_argument('--reuse-install-record', help='Reuse the exact successful fresh CLI installation from a retained later-failed clean record')
     args = parser.parse_args()
     assert Path(args.record).name == args.record
+    if args.reuse_install_record:
+        assert args.stage == 'clean' and Path(args.reuse_install_record).name == args.reuse_install_record
     gate = Gate(args)
     try:
         getattr(gate, args.stage)()
