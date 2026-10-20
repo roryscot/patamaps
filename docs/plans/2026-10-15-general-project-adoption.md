@@ -9,7 +9,7 @@ Current evidence: [scoped support matrix](../guides/project-support-matrix.md). 
 ## Authority and exclusions
 
 Rust owns parsing, validation, admission, capture/replay and emission. Reuse existing workspace/process providers, graph laws, checked projections, candidate publication and package contracts. Owner profiles declare semantic correspondences and intent; discovery never invents business meaning. Do not replace the kernel, introduce a parallel graph framework or infer arbitrary macro/shell effects.
-All heavy execution uses Intel's existing shared storage supervisor, its 4 GB growth / 500 MB reserve / 100 GB retention policy and retained outputs. Wait for another project's lease; do not interrupt it or use another runtime/VM. No deletions, production deployment, registry publication, secrets ingestion or trust activation. Keep regular verified commits and Rory pushes; no history rewrite.
+All heavy execution uses Intel's shared storage supervisor, its 4 GB growth / 500 MB reserve / 100 GB retention policy and retained outputs. Follow fair resource admission: verified managed jobs may share only when enforced reservations and output ownership fit; native work, benchmarks and uncertain ownership remain exclusive. Wait when admission is blocked; do not interrupt another project or use another runtime/VM. No deletion without separate exact-list approval, production deployment, registry publication, secrets ingestion or trust activation. Keep regular verified commits and Rory pushes; no history rewrite.
 
 ## Milestones and observable acceptance
 
