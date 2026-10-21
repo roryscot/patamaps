@@ -30,16 +30,21 @@ failed at owner command pnpm --filter docs run build:pre in workflow
 39625379329 on Patamaps commit 5048d309. Three source-acquisition tests, the
 native release CLI build, source privacy/capture/staging and frozen install
 passed. The selected source contained 2,792 paths / 47,825,903 bytes; copy
-digests were checked before the pre-build. fuma-cli/compiler reported unresolved
-package-local aliases and relative imports. Those files existed in the selected
-input inventory, so source omission is not established as the cause. The error
-is undetermined between the owner registry/build setup and qualification
-environment; it does not demonstrate a Patamaps product defect. Next production
-build never started. Owner post-build / Orama, runtime, HTTP, browser, deployment
-and installed workflows remain unverified. Preserve this failed run and its
-artifact. Next, isolate the exact upstream build preconditions or choose another
-real Next.js application with a reproducible, unchanged production build before
-claiming G3 acceptance. Do not patch the upstream candidate to force a pass.
+digests were checked before the pre-build. A read-only audit of the exact pinned
+upstream commit 2919bf9 confirmed apps/docs defines build as
+pnpm build:pre && next build && pnpm build:post; build:pre runs the owner's
+fuma-cli/compiler registry generation. The compiler reported unresolved
+package-local aliases and relative imports in packages/radix-ui. The source
+files and their declared TypeScript alias configuration were present in the
+pinned tree and selected inventory. This is evidence against source omission,
+but does not establish whether the cause is an upstream compiler defect or an
+unsupported build precondition. Next production compilation never started, so
+this remains a failed project candidate, not a Patamaps product failure or a
+G3 pass. Owner post-build / Orama, runtime, HTTP, browser, deployment and
+installed workflows remain unverified. Preserve this failed run and its
+artifact; do not patch the upstream candidate or retry the unchanged build.
+Continue G3 with another unchanged real Next.js application whose production
+build can run without unresolved owner-side prerequisites.
 
 ## Unfinished Next preparation checkpoint
 
