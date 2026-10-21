@@ -286,9 +286,9 @@ def main():
             documentation.append({"path": path.relative_to(docs).as_posix(), "digest": sha(path), "bytes": len(data)})
         next_build = None
         if args.next_build:
+            report["preBuildExecuted"] = True
             run("fumadocs-pre-build", [*pnpm, "--filter", "docs", "run", "build:pre"],
                 cwd=build_owner, timeout=600)
-            report["preBuildExecuted"] = True
             run("fumadocs-next-production-build", [*pnpm, "--filter", "docs", "exec", "next", "build"],
                 cwd=build_owner, timeout=1200)
             report["nextBuildExecuted"] = True
