@@ -247,7 +247,7 @@ def main():
         assert all(name in names for name in ["root", "docs", "fumadocs-core", "fumadocs-mdx", "@fumadocs/story"])
         run("frozen-dependency-preparation", [*pnpm, *filters, "install", "--frozen-lockfile",
             "--ignore-scripts", "--store-dir", work / "store", "--network-concurrency=4",
-            "--child-concurrency=1", "--fetch-retries=1"], cwd=owner)
+            "--child-concurrency=1"], cwd=owner)
         installed = json.loads(run("installed-package-versions", [node, "-e",
             "const fs=require('node:fs');const p=require.resolve('next/package.json',{paths:[process.cwd()+'/apps/docs']});"
             "const t=require.resolve('turbo/package.json');console.log(JSON.stringify({next:JSON.parse(fs.readFileSync(p)).version,turboPath:t,turbo:JSON.parse(fs.readFileSync(t)).version}))"], cwd=owner))
