@@ -87,6 +87,49 @@ fn route_path(value: &str) -> bool {
         && !value.contains(['\\', '?', '#'])
         && !value.split('/').any(|p| p == "." || p == "..")
 }
+fn page_route_collision_key(value: &str) -> String {
+    let segments = value
+        .split('/')
+        .filter(|segment| !segment.is_empty())
+        .map(|segment| {
+            if let Some(name) = segment
+                .strip_prefix("[[...")
+                .and_then(|value| value.strip_suffix("]]"))
+                && !name.is_empty()
+                && !name.contains(['[', ']'])
+            {
+                "[[...]]"
+            } else if let Some(name) = segment
+                .strip_prefix("[...")
+                .and_then(|value| value.strip_suffix(']'))
+                && !name.is_empty()
+                && !name.contains(['[', ']'])
+            {
+                "[...]"
+            } else if let Some(name) = segment
+                .strip_prefix('[')
+                .and_then(|value| value.strip_suffix(']'))
+                && !name.is_empty()
+                && !name.contains(['[', ']'])
+            {
+                "[]"
+            } else {
+                segment
+            }
+        })
+        .collect::<Vec<_>>();
+    format!("/{}", segments.join("/"))
+}
+fn is_top_level_page(app_path: &str) -> bool {
+    let segments = app_path.split('/').filter(|segment| !segment.is_empty());
+    let mut last = None;
+    let mut parallel = false;
+    for segment in segments {
+        last = Some(segment);
+        parallel |= segment.starts_with('@');
+    }
+    last == Some("page") && !parallel
+}
 fn env_name(value: &str) -> bool {
     !value.is_empty()
         && value.len() <= 128
@@ -387,9 +430,19 @@ pub(crate) fn observe(
             )?;
         }
     }
+    let mut page_routes = BTreeMap::new();
     for (app, path) in &apps {
         if !route_path(app) || !route_path(path) {
             return Err(refuse());
+        }
+        if is_top_level_page(app) {
+            let route = page_route_collision_key(path);
+            if page_routes.insert(route, app).is_some() {
+                return Err(Error::refused(
+                    "NATIVE_NEXT_ROUTE_COLLISION",
+                    "Multiple non-parallel Next page modules resolve to the same public route",
+                ));
+            }
         }
         emit(
             "next-build-module",
@@ -547,6 +600,38 @@ mod tests {
             v["configuration"]["environment"]["NEXT_PUBLIC_SIGNING_ENABLED"] = json!("false");
         });
         assert!(run(&inputs, &config).is_ok());
+    }
+    #[test]
+    fn duplicate_route_group_pages_are_refused_but_parallel_and_nonpage_paths_are_allowed() {
+        let (mut inputs, config) = fixture();
+        mutate(&mut inputs, "apps.json", |v| {
+            v["/@modal/page"] = json!("/");
+            v["/dashboard/layout"] = json!("/dashboard");
+        });
+        rebind(&mut inputs);
+        assert!(run(&inputs, &config).is_ok());
+
+        mutate(&mut inputs, "apps.json", |v| {
+            v["/(advertiser)/dashboard/page"] = json!("/dashboard");
+            v["/(evaluator)/dashboard/page"] = json!("/dashboard");
+        });
+        rebind(&mut inputs);
+        let error = run(&inputs, &config).unwrap_err();
+        assert!(
+            error
+                .to_string()
+                .starts_with("NATIVE_NEXT_ROUTE_COLLISION:")
+        );
+    }
+    #[test]
+    fn renamed_dynamic_parameters_do_not_hide_duplicate_page_routes() {
+        let (mut inputs, config) = fixture();
+        mutate(&mut inputs, "apps.json", |v| {
+            v["/(advertiser)/[id]/page"] = json!("/[id]");
+            v["/(evaluator)/[slug]/page"] = json!("/[slug]");
+        });
+        rebind(&mut inputs);
+        assert!(run(&inputs, &config).is_err());
     }
     #[test]
     fn secret_looking_public_environment_names_are_refused() {
