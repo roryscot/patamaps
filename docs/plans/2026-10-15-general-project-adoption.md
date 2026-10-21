@@ -1,10 +1,14 @@
 # General project adoption build plan
 
-Status: active. Owner authorization: create and pursue on Intel with regular commits and pushes.
+Status: deferred enhancement program as of 2026-10-21, by owner scope revision.
+Current work selection is controlled by [the enhancement backlog](integration-enhancement-backlog.md).
+The former authorization and checkpoints below are retained as history; statements
+that stages remain active/required refer to this program's former gates, not the
+product's C01–C19 capability milestone. No stage is newly accepted here.
 Baseline: 591e313cc770ab256a045e4e101a6a2358262b1f. The completed cross-stack M0–M7/X01–X20 plan and receipts remain historical, unchanged.
 Scope: usable, explicitly bounded Next.js/Rust project integration beyond the catalog fixture. Completion requires independent existing-project evidence, not another invented example.
 
-Current evidence: [scoped support matrix](../guides/project-support-matrix.md). Open rows remain required by this plan.
+Current evidence: [scoped support matrix](../guides/project-support-matrix.md). Open rows remain unverified enhancement requirements if that work is selected; they do not block native capability completion.
 
 ## Authority and exclusions
 

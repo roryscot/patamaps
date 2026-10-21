@@ -2,6 +2,28 @@
 
 Updated 2026-10-15 UTC. **The capability objective is a Rust-native implementation of MetaMap’s substantive capabilities and guarantees.** Reference: `@roryscot/metamap` 0.7.1, engine `399747a4ad05a37cd8db1cedd53048fad2175be4`.
 
+## Current goal and stopping boundary — 2026-10-21
+
+Deliver MetaMap 0.7.1's substantive capabilities and required interoperability
+through Rust-native workflows, as enumerated by C01–C19 below. The
+[identified-source acceptance record](docs/acceptance/capabilities/package-reproducibility-956f1a8/capability-acceptance.json)
+records all 19 as implemented and workflow-verified at source 956f1a8.
+That milestone is complete within its declared limits. Later source changes do
+not inherit a fresh verification claim merely because this record exists.
+
+A new parity issue requires a named C01–C19 requirement, a reproducible product
+failure and focused acceptance controls. Exact JavaScript identity, prototypes,
+incidental mutation and exception wording remain integration-specific under the
+existing classification policy. Required semantic/security/wire guarantees
+cannot be reclassified as optional to obtain a pass.
+
+The broader G0–G6 adoption program and supporting qualification/infrastructure
+are now a [separate enhancement backlog](docs/plans/integration-enhancement-backlog.md).
+No open G-stage is a prerequisite for this capability milestone. Select a
+separate deliverable before execution resumes; this update does not authorize
+more full CI runs or infrastructure expansion. A qualification-helper failure
+alone is not evidence of a product defect.
+
 The owner replaced exact JavaScript/API parity as the completion criterion. This plan supersedes the previous R0–R11/P0–P9 delivery gates. [The previous plan, README and conformance manifest](docs/history/capability-goal-transition-2026-10-14T15-22-48.455971Z/receipt.json) are byte-preserved history. The original 1,293-obligation ledger, reference tests, expectations, captures and failed runs remain evidence; they do not determine completion of this goal.
 
 The README controls product scope, this plan controls implementation order and acceptance, and [SPEC.md](docs/SPEC.md) controls the current draft protocol. The [test classification and compatibility policy](docs/TEST_CLASSIFICATION.md) defines how reference evidence is used. A successful test, historical profile or implemented function alone does not establish current workflow acceptance.
