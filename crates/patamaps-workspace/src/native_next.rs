@@ -95,6 +95,25 @@ fn env_name(value: &str) -> bool {
             .enumerate()
             .all(|(i, b)| b == b'_' || b.is_ascii_uppercase() || i > 0 && b.is_ascii_digit())
 }
+fn public_environment_name(value: &str) -> bool {
+    if !env_name(value) || !value.starts_with("NEXT_PUBLIC_") {
+        return false;
+    }
+    let words = value.split('_').collect::<BTreeSet<_>>();
+    let credential_words = [
+        "SECRET",
+        "TOKEN",
+        "PASSWORD",
+        "PASSWD",
+        "CREDENTIAL",
+        "CREDENTIALS",
+        "BEARER",
+    ];
+    !credential_words.iter().any(|word| words.contains(word))
+        && !["_PRIVATE_KEY", "_SIGNING_KEY", "_ENCRYPTION_KEY"]
+            .iter()
+            .any(|suffix| value.contains(suffix))
+}
 fn version(value: &str) -> bool {
     let parts = value.split('.').collect::<Vec<_>>();
     parts.len() == 3
@@ -281,7 +300,7 @@ pub(crate) fn observe(
         || config
             .environment
             .iter()
-            .any(|(k, v)| !env_name(k) || !k.starts_with("NEXT_PUBLIC_") || !bounded(v))
+            .any(|(k, v)| !public_environment_name(k) || !bounded(v))
         || config
             .secret_references
             .iter()
@@ -518,6 +537,36 @@ mod tests {
         assert!(run(&inputs, &config).is_ok());
         config.app_paths_manifest = config.routes_manifest.clone();
         assert!(run(&inputs, &config).is_err());
+    }
+    #[test]
+    fn ordinary_public_environment_names_remain_allowed() {
+        let (mut inputs, config) = fixture();
+        mutate(&mut inputs, "config.json", |v| {
+            v["configuration"]["environment"]["NEXT_PUBLIC_AUTH_URL"] =
+                json!("https://auth.example.invalid");
+            v["configuration"]["environment"]["NEXT_PUBLIC_SIGNING_ENABLED"] = json!("false");
+        });
+        assert!(run(&inputs, &config).is_ok());
+    }
+    #[test]
+    fn secret_looking_public_environment_names_are_refused() {
+        for name in [
+            "NEXT_PUBLIC_SENTRY_AUTH_TOKEN",
+            "NEXT_PUBLIC_CLIENT_SECRET",
+            "NEXT_PUBLIC_DATABASE_PASSWORD",
+            "NEXT_PUBLIC_JWT_PRIVATE_KEY",
+            "NEXT_PUBLIC_SIGNING_KEY",
+        ] {
+            let (mut inputs, config) = fixture();
+            mutate(&mut inputs, "config.json", |v| {
+                v["configuration"]["environment"][name] = json!("must-not-be-retained")
+            });
+            let error = run(&inputs, &config).expect_err(name);
+            assert!(
+                !error.to_string().contains("must-not-be-retained"),
+                "{name}"
+            );
+        }
     }
     #[test]
     fn frozen_invalid_manifest_and_projection_cases_refuse_after_rebinding() {
