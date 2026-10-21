@@ -23,17 +23,23 @@ a passed fixture or metadata observation is not general support.
 
 ## Current selected work
 
-The pinned Fumadocs Next.js source/dependency preparation passed. See the
-[receipt](../acceptance/project-adoption/g3-fumadocs-source-preparation-2026-10-21/receipt.json).
-Commit dcd0cb79ddfd0cb54791733f744f86a7882841c2 fixes final report aggregation.
-Workflow 39622949635 passed its three source-acquisition tests, built the native
-CLI, and prepared the 2,792-path source and frozen docs dependency closure.
-Full capability and cross-stack jobs were skipped. The next stage now runs the owner pre-build and actual Next production build
-in a separate candidate copy, with a four-gigabyte workflow growth cap. Static
-review confirmed the pre-build writes generated registry files only inside the
-candidate; the post-build can update Orama and is deliberately skipped. The
-hosted result is pending. Application runtime, HTTP behavior, deployment and
-installed workflow remain unverified.
+Pinned Fumadocs source and frozen dependency preparation passed; see the
+[preparation receipt](../acceptance/project-adoption/g3-fumadocs-source-preparation-2026-10-21/receipt.json).
+The subsequent [production-build attempt](../acceptance/project-adoption/g3-fumadocs-next-build-2026-10-21/receipt.json)
+failed at owner command pnpm --filter docs run build:pre in workflow
+39625379329 on Patamaps commit 5048d309. Three source-acquisition tests, the
+native release CLI build, source privacy/capture/staging and frozen install
+passed. The selected source contained 2,792 paths / 47,825,903 bytes; copy
+digests were checked before the pre-build. fuma-cli/compiler reported unresolved
+package-local aliases and relative imports. Those files existed in the selected
+input inventory, so source omission is not established as the cause. The error
+is undetermined between the owner registry/build setup and qualification
+environment; it does not demonstrate a Patamaps product defect. Next production
+build never started. Owner post-build / Orama, runtime, HTTP, browser, deployment
+and installed workflows remain unverified. Preserve this failed run and its
+artifact. Next, isolate the exact upstream build preconditions or choose another
+real Next.js application with a reproducible, unchanged production build before
+claiming G3 acceptance. Do not patch the upstream candidate to force a pass.
 
 ## Unfinished Next preparation checkpoint
 
