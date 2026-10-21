@@ -15,16 +15,17 @@ Start with the [real Rust project guide](docs/guides/rust-project-quickstart.md)
 declare one correspondence, validate it, generate static Rust and connect that
 artifact to your own handler. The application need not run the compiler.
 
-General Next.js/Rust onboarding, retained application builds, broader deployment,
-browser/installed-workflow qualification and performance work belong to the
-[separate enhancement backlog](docs/plans/integration-enhancement-backlog.md).
-They are not prerequisites for the capability milestone. Existing implementations,
+The broader Intel project-adoption goal continues as a separate program tracked in
+the [integration backlog](docs/plans/integration-enhancement-backlog.md): real
+Next.js/Rust onboarding, retained application builds, deployment, browser and
+installed-workflow qualification, and performance work. These are not prerequisites
+for the completed capability milestone. Existing implementations,
 historical receipts and unfinished work remain intact. No open enhancement
 becomes a pass through this scope change.
 
 The [cross-stack fixture](examples/cross-stack/README.md) passes its [declared first-release profile](docs/acceptance/cross-stack/release-profile-1/receipt.json), covering M0–M7 and X01–X20. Its real Next.js page, generated HTTP client, Rust handler, Cargo target and Linux image are checked through actual compilation, HTTP and Chromium interaction. Intel/Linux preview controls preserve complete selected generations; paired MetaMap decisions and exact installed consumers also pass. This accepts the [pinned support profile](examples/cross-stack/support.json); arbitrary frameworks, macros, shell effects and production deployment require separate work.
 
-[General project adoption](docs/plans/2026-10-15-general-project-adoption.md) is a deferred enhancement program. Native [project-capture/project-verify](docs/decisions/0031-explicit-project-inputs.md) accept explicit nonsecret input lists and arbitrary component layouts without executing project code or resolving secret references. The [G1 Linux native regressions](docs/acceptance/project-adoption/g1-linux-native-ec79db4/receipt.json) pass on both architectures at the identified source. [Richer JSON DTO HTTP bindings](docs/decisions/0032-finite-json-http-contracts.md) also pass scoped Rust/TypeScript/wire regressions. Broader existing-project runtime qualification and a portable general development workflow remain enhancement work; scoped stateful Axum results are recorded in the support matrix.
+[General project adoption](docs/plans/2026-10-15-general-project-adoption.md) continues as a separate Intel goal. Native [project-capture/project-verify](docs/decisions/0031-explicit-project-inputs.md) accept explicit nonsecret input lists and arbitrary component layouts without executing project code or resolving secret references. The [G1 Linux native regressions](docs/acceptance/project-adoption/g1-linux-native-ec79db4/receipt.json) pass on both architectures at the identified source. [Richer JSON DTO HTTP bindings](docs/decisions/0032-finite-json-http-contracts.md) also pass scoped Rust/TypeScript/wire regressions. Broader existing-project runtime qualification and a portable general development workflow remain enhancement work; scoped stateful Axum results are recorded in the support matrix.
 
 The [retained project workflow](docs/guides/retained-project-builds.md) composes explicit source capture, workspace admission/emission, build and verification commands, exact artifacts and atomic selection. Its foreground controller runs outside examples and acquires the configured policy runner per update; [decision0040](docs/decisions/0040-foreground-retained-project-watch.md) scopes cancellation and parent-death behavior. Real-project readiness, complete build contexts, performance and installed general-workflow qualification remain open.
 

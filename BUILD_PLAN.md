@@ -17,12 +17,11 @@ incidental mutation and exception wording remain integration-specific under the
 existing classification policy. Required semantic/security/wire guarantees
 cannot be reclassified as optional to obtain a pass.
 
-The broader G0–G6 adoption program and supporting qualification/infrastructure
-are now a [separate enhancement backlog](docs/plans/integration-enhancement-backlog.md).
-No open G-stage is a prerequisite for this capability milestone. Select a
-separate deliverable before execution resumes; this update does not authorize
-more full CI runs or infrastructure expansion. A qualification-helper failure
-alone is not evidence of a product defect.
+The broader G0–G6 adoption goal continues separately under the
+[integration backlog](docs/plans/integration-enhancement-backlog.md). Open G-stages
+are not prerequisites for this capability milestone, but remain in scope for that
+adoption goal. A qualification-helper failure alone is not evidence of a product
+defect.
 
 The owner replaced exact JavaScript/API parity as the completion criterion. This plan supersedes the previous R0–R11/P0–P9 delivery gates. [The previous plan, README and conformance manifest](docs/history/capability-goal-transition-2026-10-14T15-22-48.455971Z/receipt.json) are byte-preserved history. The original 1,293-obligation ledger, reference tests, expectations, captures and failed runs remain evidence; they do not determine completion of this goal.
 

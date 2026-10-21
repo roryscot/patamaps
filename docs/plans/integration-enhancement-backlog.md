@@ -2,9 +2,9 @@
 
 Owner scope revision: 2026-10-21. The product stopping boundary is the
 [C01–C19 native capability goal](../../BUILD_PLAN.md), with its identified-source
-acceptance and explicit compatibility limits. This backlog is separate work,
-not a prerequisite for that milestone. No execution is selected here.
-Existing implementations, failed runs and evidence are preserved.
+acceptance and explicit compatibility limits. The separate Intel adoption goal remains active and uses this backlog for priorities.
+These tasks are not prerequisites for the capability milestone. Existing
+implementations, failed runs and evidence are preserved.
 
 The [former adoption plan](2026-10-15-general-project-adoption.md) retains detailed
 G0–G6 requirements and historical checkpoints. The
@@ -20,6 +20,17 @@ a passed fixture or metadata observation is not general support.
 | Performance acceptance | Existing functional timing records | Define comparison and acceptance budgets before exclusive measured execution. Diagnostic profiling remains separate. |
 | Storage and reservation infrastructure | Installed qualified protocol3 reservations and bounded retention controls | Maintenance for demonstrated failures; no infrastructure prerequisite for parity. Preserve native/benchmark exclusive fallback. |
 | Qualification tooling | Source-preparation privacy controls and retained failed runs | Repair only for selected qualification work; collector defects are not product defects without a reproduced product failure. |
+
+## Current selected work
+
+Continue the pinned Fumadocs Next.js source/dependency preparation. Commit
+dcd0cb79ddfd0cb54791733f744f86a7882841c2 fixes final report aggregation after
+the preparation commands had succeeded. Targeted workflow 39622949635 was
+dispatched on that revision; its hosted runner remains queued.
+The workflow runs source acquisition tests with a retained fixture root, then
+rebuilds the CLI and repeats preparation. It skips full capability and
+cross-stack jobs. A successful preparation still does not establish a Next
+application build, runtime behavior, deployment or installed workflow.
 
 ## Unfinished Next preparation checkpoint
 
