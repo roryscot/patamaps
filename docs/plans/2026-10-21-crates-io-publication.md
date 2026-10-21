@@ -1,6 +1,6 @@
 # crates.io alpha publication
 
-Status: six of ten crates publicly verified on native Intel (`norway.local`).
+Status: eight of ten crates publicly verified on native Intel (`norway.local`).
 
 The user authorized public crates.io publication of the prepared alpha. The
 [release guide](../guides/crates-io-alpha.md) controls names, versions, dependency
@@ -42,8 +42,8 @@ or establish Windows, performance, optional Node/Python integration or general
 project-adoption claims.
 
 The [publication checkpoint](../acceptance/crates-io/2026-10-21/publication-progress.json)
-preserves six verified public archives, the initial rate-limit refusal, measured
-headroom and accepted smaller-budget admission. The remaining four uploads
+preserves eight verified public archives, the initial rate-limit refusal, measured
+headroom and accepted smaller-budget admission. The final two uploads
 continue under the quota. CLI verification can overlap the independent final
 activator upload; all ten public versions and the installation receipt remain
 required. Source, replay, tamper and module-move criteria are unchanged.

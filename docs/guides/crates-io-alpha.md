@@ -1,6 +1,6 @@
 # crates.io alpha
 
-Status: publication in progress on Intel; six of ten crates are publicly verified.
+Status: publication in progress on Intel; eight of ten crates are publicly verified.
 The Rust libraries and CLI are `0.1.0-alpha.1`. APIs and wire profiles remain draft.
 
 ## Exact release candidate
