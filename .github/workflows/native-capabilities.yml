@@ -5,12 +5,22 @@ on:
     branches: [main]
   pull_request:
   workflow_dispatch:
+    inputs:
+      qualification:
+        description: Select full capability acceptance or real Next preparation
+        required: true
+        type: choice
+        default: all
+        options:
+          - all
+          - next-preparation
 
 permissions:
   contents: read
 
 jobs:
   retention-admission:
+    if: github.event_name != 'workflow_dispatch' || inputs.qualification != 'next-preparation'
     name: Retention admission boundaries
     runs-on: ubuntu-24.04
     timeout-minutes: 5
@@ -27,6 +37,7 @@ jobs:
           PATAMAPS_TEST_RETAIN_ROOT="$RUNNER_TEMP/patamaps-package-scope-tests" python3 -B -m unittest discover -s scripts -p test_package_source.py
 
   linux:
+    if: github.event_name != 'workflow_dispatch' || inputs.qualification != 'next-preparation'
     name: Linux ${{ matrix.architecture }}
     strategy:
       fail-fast: false
@@ -74,6 +85,7 @@ jobs:
           if-no-files-found: error
 
   cross-stack-source:
+    if: github.event_name != 'workflow_dispatch' || inputs.qualification != 'next-preparation'
     name: Cross-stack source bindings (Linux x86_64)
     runs-on: ubuntu-24.04
     timeout-minutes: 30
@@ -191,6 +203,7 @@ jobs:
           path: ci-evidence/cross-stack-source.tar.gz
           if-no-files-found: error
   cross-stack-image:
+    if: github.event_name != 'workflow_dispatch' || inputs.qualification != 'next-preparation'
     name: Cross-stack Linux image and browser (amd64)
     runs-on: ubuntu-24.04
     timeout-minutes: 45
@@ -254,3 +267,39 @@ jobs:
             ci-evidence/cross-stack-owned-images.tar.gz
             ci-evidence/cross-stack-image-archive-receipt.json
           if-no-files-found: error
+
+  next-project-preparation:
+    if: github.event_name == 'workflow_dispatch' && inputs.qualification == 'next-preparation'
+    name: Pinned Fumadocs source and dependency preparation
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    env:
+      CARGO_INCREMENTAL: '0'
+      CARGO_PROFILE_DEV_DEBUG: '0'
+      CARGO_PROFILE_TEST_DEBUG: '0'
+      CARGO_BUILD_JOBS: '2'
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - name: Test exact Git acquisition boundaries without deleting fixtures
+        run: |
+          mkdir -p "${RUNNER_TEMP}/patamaps-next-source-controls"
+          PATAMAPS_TEST_RETAIN_ROOT="${RUNNER_TEMP}/patamaps-next-source-controls" python3 -B -m unittest discover -s scripts -p test_next_source_acquisition.py
+      - name: Build exact native context tool
+        run: |
+          rustup toolchain install 1.99.0 --profile minimal
+          cargo build --locked --release -p patamaps-cli
+      - name: Prepare reviewed public source without raw environment files
+        run: >-
+          python3 -B scripts/qualify_fumadocs_next.py
+          --cli target/release/patamaps
+          --work "${RUNNER_TEMP}/patamaps-fumadocs-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
+          --evidence ci-evidence/fumadocs-preparation
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: fumadocs-preparation-${{ github.sha }}
+          path: |
+            ci-evidence/fumadocs-preparation/*.json
+            ci-evidence/fumadocs-preparation/*.log
+            ci-evidence/fumadocs-preparation/turbo-docs/
+          if-no-files-found: warn
