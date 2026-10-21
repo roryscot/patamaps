@@ -12,6 +12,24 @@ def digest(path):
     return "sha256:" + hashlib.sha256(Path(path).read_bytes()).hexdigest()
 
 
+def copy_selected_source(source, owner, names, tracked):
+    for name in names:
+        src, dst = source / name, owner / name
+        dst.parent.mkdir(parents=True, exist_ok=True)
+        if src.is_symlink():
+            src.resolve(strict=True).relative_to(source.resolve())
+            dst.symlink_to(os.readlink(src))
+        else:
+            src.read_text(encoding="utf8")
+            shutil.copy2(src, dst)
+    # A lexically early link may target a later selected file (the real README does).
+    # Check the complete copied graph only after every selected entry exists.
+    for name in names:
+        assert digest(owner / name) == tracked[name]
+        if (source / name).is_symlink():
+            assert os.readlink(owner / name) == os.readlink(source / name)
+
+
 def qualify_retained(cli, source, tracked, config, artifacts, work, evidence, run, inspect_rlib, ar):
     root = work / "retained-workflow"
     root.mkdir()
@@ -27,16 +45,7 @@ def qualify_retained(cli, source, tracked, config, artifacts, work, evidence, ru
         assert len(names) == 335, "Pinned source selection changed; review before changing acceptance"
         links = [n for n in names if (source / n).is_symlink()]
         assert len(links) == 5
-        for name in names:
-            src, dst = source / name, owner / name
-            dst.parent.mkdir(parents=True, exist_ok=True)
-            if src.is_symlink():
-                src.resolve(strict=True).relative_to(source.resolve())
-                dst.symlink_to(os.readlink(src))
-            else:
-                src.read_text(encoding="utf8")
-                shutil.copy2(src, dst)
-            assert digest(dst) == tracked[name]
+        copy_selected_source(source, owner, names, tracked)
         provider, cargo, rustc = [root / n for n in ["configured-provider", "configured-cargo", "configured-rustc"]]
         shutil.copy2(cli, provider)
         cargo.symlink_to(config["cargo"])
