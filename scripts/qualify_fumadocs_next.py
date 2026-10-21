@@ -6,7 +6,6 @@ Preparation is not framework build, runtime, dependency closure or release accep
 import argparse
 import base64
 import hashlib
-import io
 import json
 import os
 from pathlib import Path
@@ -274,7 +273,7 @@ def main():
             sourceInventoryDigest=sha(evidence / "selected-source.json"),
             omittedReservedPaths=[e["path"] for e in omitted],
             excludedUniqueBlobsAbsent=True, excludedPathsNeverMaterialized=True,
-            sharedAllowedBlobIds=len({e["gitBlob"] for e in omitted} & safe_oids),
+            sharedAllowedBlobIds=len({e["gitBlob"] for e in omitted} & {e["gitBlob"] for e in selected}),
             sourceContextDigest=capture["digest"], nativeSourceCaptureVerifiedAndStaged=True,
             originalSelectedSourceUnchanged=True, workspacePackages=names,
             installedNextVersion=installed["next"], installedTurboVersion=installed["turbo"],
