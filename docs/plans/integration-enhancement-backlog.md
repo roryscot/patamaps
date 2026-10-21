@@ -56,6 +56,27 @@ No application build/runtime acceptance follows. Run 39533833003 previously
 failed on an unsupported pnpm retry option. Preserve both failures; neither
 demonstrates a Patamaps product defect. This work is deferred, not accepted.
 
+## Hyperbound Next source candidate (2026-10-21)
+
+The unchanged Hyperbound checkout at commit `7721da50e4a817dafb13a8e4cd10347e7ee884f7`
+is a real Next 14.2.14 candidate with 54 App Router pages and explicit route-group
+structure. Its declared Node version is 22.8.0 and installed TypeScript is 5.5.4.
+A path-only profile selects 66 tracked inputs: 61 Next special files and the
+package/runtime/configuration/lock files. It excludes `.env`, `node_modules`
+and `.next`; no source bytes were added to the profile.
+
+The supervised observation request `b8283792-531e-49b8-8fbb-ca7663bc5eca`
+finished with confirmed workload stop and lease release, but the guard refused
+before capture or staging because retained-output headroom was insufficient.
+The failed guard record is retained at
+`/Users/admin/Documents/Codex/.storage-control/heavy-builds/runs/d5c00cfa-dd7c-4720-a9bf-5d38900dd7d0/run.json`.
+No Next build ran. Route-group/dynamic observations, configuration semantics,
+runtime, browser, deployment and installed-consumer acceptance remain unverified.
+The compact [receipt](../acceptance/project-adoption/hyperbound-next-source-20261021/receipt.json)
+preserves the scope and exact result. Continue only after resolving headroom under
+the existing retention policy; do not bypass the guard or remove files without a
+fresh exact-list approval.
+
 ## Selection and completion rule
 
 Select one workstream, named project, observable outcome, resource budget and
