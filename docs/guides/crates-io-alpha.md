@@ -1,6 +1,6 @@
 # crates.io alpha
 
-Status: prepared and verified on Intel; public upload remains pending.
+Status: publication in progress on Intel; six of ten crates are publicly verified.
 The Rust libraries and CLI are `0.1.0-alpha.1`. APIs and wire profiles remain draft.
 
 ## Exact release candidate
@@ -71,7 +71,9 @@ installation. Both records and all raw outputs remain on Intel.
 
 This rehearses unpublished names with explicit source replacement. It establishes
 the recorded local installation result. Public crates.io upload, download,
-publisher authorization and registry acceptance remain unverified.
+publisher authorization and registry acceptance were not exercised by that rehearsal.
+The [public checkpoint](../acceptance/crates-io/2026-10-21/publication-progress.json)
+separately records actual published archives and remaining work.
 
 ## Self-contained inputs and identity
 
@@ -152,3 +154,22 @@ Optional Node discovery providers and the Python watch controller remain separat
 source tooling. This alpha does not publish an npm adapter or bundle that
 ecosystem. Protected activation remains a separately qualified Linux profile;
 package preparation and installation do not provision trust or activate consumers.
+
+## Publication continuation
+
+The [authorized publication plan](../plans/2026-10-21-crates-io-publication.md)
+tracks public acceptance separately. Crates.io permits five initial new crates,
+then one additional new crate every ten minutes. The uploader supports
+`--new-crate-limit 1` and `--not-before TIMESTAMP`; every run rechecks already
+published versions and retains its own receipt. The original HTTP 429 remains.
+
+The standard 4 GB reservation no longer fit measured retained-output headroom
+of 2.82 GB. A scoped adapter uses the existing supervisor API to enforce smaller
+per-run budgets: 500 MB per upload and 1.5 GB for the fresh install. Scheduling,
+all retention roots, live growth monitoring and the 500 MB reserve stay in force.
+The shared 4 GB maximum and 100 GB cap are unchanged. [Admission records](../acceptance/crates-io/2026-10-21/bounded-admissions.json)
+retain the policy digest and actual observations. No files were deleted.
+
+Once the first nine crates are published, CLI/library installation checks can run
+while the independent activator upload waits. Final acceptance still requires
+all ten published archives and a passing fresh public installation.

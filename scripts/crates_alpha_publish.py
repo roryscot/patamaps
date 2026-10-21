@@ -24,7 +24,10 @@ def main():
     parser.add_argument("--state", required=True, type=Path)
     parser.add_argument("--record", required=True)
     parser.add_argument("--check-only", action="store_true")
+    parser.add_argument("--new-crate-limit", type=int, default=0)
+    parser.add_argument("--not-before", help="Earliest UTC upload time from the registry's rate limit")
     args = parser.parse_args()
+    assert args.new_crate_limit >= 0
     source = args.source.resolve()
     inventory = json.loads(args.inventory.read_text())
     expected_commit = "3f54166f8ad4f2071c88de145e2b20ed38355502"
@@ -117,6 +120,7 @@ def main():
                                 "emailVerification": "enforced by crates.io at upload",
                                 "identityVerification": "published_by and owners after each upload"}
         print(json.dumps({"publisher": summary["publisher"]}), flush=True)
+        uploaded = 0
         for item in inventory:
             name, version = item["name"], item["version"]
             url = f"https://crates.io/api/v1/crates/{name}/{version}"
@@ -130,8 +134,14 @@ def main():
                 cargo("preflight-" + name, ["package", "--locked", "--registry", "crates-io", *selection])
                 regenerated = args.state / "package-target/package" / Path(item["path"]).name
                 assert digest(regenerated) == item["sha256"], f"Regenerated {name} archive differs"
+                if args.not_before:
+                    deadline = datetime.datetime.fromisoformat(args.not_before)
+                    assert deadline.tzinfo is not None
+                    while (remaining := (deadline - datetime.datetime.now(datetime.timezone.utc)).total_seconds()) > 0:
+                        time.sleep(min(remaining, 10))
                 cargo("publish-" + name, ["publish", "--locked", "--registry", "crates-io", *selection])
                 action = "published"
+                uploaded += 1
             index_url = "https://index.crates.io/pa/ta/" + name
             indexed = None
             for attempt in range(30):
@@ -158,8 +168,11 @@ def main():
             write_json(output / (name + ".json"), result)
             summary["packages"].append(result)
             print(json.dumps({key: result[key] for key in ["name", "version", "action", "sha256"]}), flush=True)
+            if args.new_crate_limit and uploaded >= args.new_crate_limit:
+                break
         source_guard()
-        summary["status"] = "passed"
+        summary["status"] = "passed" if len(summary["packages"]) == len(inventory) else "partial"
+        summary["remainingNames"] = [item["name"] for item in inventory[len(summary["packages"]):]]
     except Exception as error:
         summary.update(status="failed", error=str(error).replace(token, "[REDACTED]"))
         raise

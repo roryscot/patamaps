@@ -1,6 +1,6 @@
 # crates.io alpha publication
 
-Status: publication in progress on native Intel (`norway.local`).
+Status: six of ten crates publicly verified on native Intel (`norway.local`).
 
 The user authorized public crates.io publication of the prepared alpha. The
 [release guide](../guides/crates-io-alpha.md) controls names, versions, dependency
@@ -19,7 +19,7 @@ and downloaded archive bytes. Versions already present may only be reused when
 those checks agree. A failed upload requires inspection of public state before
 retrying, because the registry may have accepted the upload.
 
-After all ten uploads, create an empty Cargo home, fresh target and installation
+Once the CLI and its dependencies are published, create an empty Cargo home, fresh target and installation
 root with ordinary crates.io resolution. Install the CLI using the release
 profile and locked dependencies while development-source reads are denied.
 Independently recompute executor identities from the downloaded public archives.
@@ -40,3 +40,10 @@ Public installation acceptance is separate from the existing offline candidate
 rehearsal. It does not extend Linux source CI into a Linux registry-install claim
 or establish Windows, performance, optional Node/Python integration or general
 project-adoption claims.
+
+The [publication checkpoint](../acceptance/crates-io/2026-10-21/publication-progress.json)
+preserves six verified public archives, the initial rate-limit refusal, measured
+headroom and accepted smaller-budget admission. The remaining four uploads
+continue under the quota. CLI verification can overlap the independent final
+activator upload; all ten public versions and the installation receipt remain
+required. Source, replay, tamper and module-move criteria are unchanged.

@@ -1,0 +1,647 @@
+{
+  "startedAt": "2026-10-21T14:13:48.807038+00:00",
+  "sourceCommit": "3f54166f8ad4f2071c88de145e2b20ed38355502",
+  "inventorySha256": "0204174baaf163bb8b52212577df3107262821608da61a526d73786ec2102762",
+  "driverSha256": "480cdb1a82e0350e9ba7b1ea77d0788f8d08e2dd2f59ee06cff22c03b7f3f600",
+  "registry": "crates-io",
+  "packages": [
+    {
+      "name": "patamaps-icu-collator",
+      "version": "2.2.1-patamaps.1",
+      "action": "published",
+      "sha256": "d6df50a2e7f16388d9796fa16c1a5377989d38f07e28eb2e2b344b065ffe7466",
+      "publicDownload": "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/crates-io/alpha-20261019/publication-20261021/publish-0001/patamaps-icu-collator-2.2.1-patamaps.1.crate",
+      "publicBytes": 1335236,
+      "owners": [
+        "roryscot"
+      ],
+      "index": {
+        "name": "patamaps-icu-collator",
+        "vers": "2.2.1-patamaps.1",
+        "deps": [
+          {
+            "name": "arraystring",
+            "req": "^0.3.0",
+            "features": [],
+            "optional": false,
+            "default_features": true,
+            "target": null,
+            "kind": "dev"
+          },
+          {
+            "name": "atoi",
+            "req": "^2.0.0",
+            "features": [],
+            "optional": false,
+            "default_features": true,
+            "target": null,
+            "kind": "dev"
+          },
+          {
+            "name": "criterion",
+            "req": "^0.5.0",
+            "features": [],
+            "optional": false,
+            "default_features": true,
+            "target": "cfg(not(target_arch = \"wasm32\"))",
+            "kind": "dev"
+          },
+          {
+            "name": "databake",
+            "req": "^0.2.0",
+            "features": [
+              "derive"
+            ],
+            "optional": true,
+            "default_features": false,
+            "target": null,
+            "kind": "normal"
+          },
+          {
+            "name": "icu_collator_data",
+            "req": "~2.2.0",
+            "features": [],
+            "optional": true,
+            "default_features": false,
+            "target": null,
+            "kind": "normal"
+          },
+          {
+            "name": "icu_collections",
+            "req": "~2.2.0",
+            "features": [],
+            "optional": false,
+            "default_features": false,
+            "target": null,
+            "kind": "normal"
+          },
+          {
+            "name": "icu_locale",
+            "req": "~2.2.0",
+            "features": [],
+            "optional": true,
+            "default_features": false,
+            "target": null,
+            "kind": "normal"
+          },
+          {
+            "name": "icu_locale_core",
+            "req": "^2.2.0",
+            "features": [
+              "alloc"
+            ],
+            "optional": false,
+            "default_features": false,
+            "target": null,
+            "kind": "normal"
+          },
+          {
+            "name": "icu_normalizer",
+            "req": "~2.2.0",
+            "features": [
+              "utf8_iter",
+              "utf16_iter"
+            ],
+            "optional": false,
+            "default_features": false,
+            "target": null,
+            "kind": "normal"
+          },
+          {
+            "name": "icu_normalizer_data",
+            "req": "~2.2.0",
+            "features": [],
+            "optional": false,
+            "default_features": false,
+            "target": null,
+            "kind": "dev"
+          },
+          {
+            "name": "icu_properties",
+            "req": "~2.2.0",
+            "features": [],
+            "optional": false,
+            "default_features": false,
+            "target": null,
+            "kind": "normal"
+          },
+          {
+            "name": "icu_provider",
+            "req": "^2.2.0",
+            "features": [],
+            "optional": false,
+            "default_features": false,
+            "target": null,
+            "kind": "normal"
+          },
+          {
+            "name": "serde",
+            "req": "^1.0.220",
+            "features": [
+              "derive",
+              "alloc"
+            ],
+            "optional": true,
+            "default_features": false,
+            "target": null,
+            "kind": "normal"
+          },
+          {
+            "name": "sha2",
+            "req": "=0.10.9",
+            "features": [],
+            "optional": false,
+            "default_features": true,
+            "target": null,
+            "kind": "build"
+          },
+          {
+            "name": "smallvec",
+            "req": "^1.10.0",
+            "features": [
+              "union",
+              "const_generics",
+              "const_new"
+            ],
+            "optional": false,
+            "default_features": false,
+            "target": null,
+            "kind": "normal"
+          },
+          {
+            "name": "utf16_iter",
+            "req": "^1.0.2",
+            "features": [],
+            "optional": false,
+            "default_features": false,
+            "target": null,
+            "kind": "normal"
+          },
+          {
+            "name": "utf8_iter",
+            "req": "^1.0.2",
+            "features": [],
+            "optional": false,
+            "default_features": false,
+            "target": null,
+            "kind": "normal"
+          },
+          {
+            "name": "zerovec",
+            "req": "^0.11.6",
+            "features": [],
+            "optional": false,
+            "default_features": false,
+            "target": null,
+            "kind": "normal"
+          }
+        ],
+        "cksum": "d6df50a2e7f16388d9796fa16c1a5377989d38f07e28eb2e2b344b065ffe7466",
+        "features": {
+          "latin1": [],
+          "unstable": []
+        },
+        "features2": {
+          "compiled_data": [
+            "dep:icu_collator_data",
+            "icu_normalizer/compiled_data",
+            "dep:icu_locale",
+            "icu_locale?/compiled_data",
+            "icu_provider/baked"
+          ],
+          "datagen": [
+            "serde",
+            "dep:databake",
+            "zerovec/databake",
+            "icu_properties/datagen",
+            "icu_normalizer/datagen",
+            "icu_collections/databake",
+            "icu_provider/export"
+          ],
+          "default": [
+            "compiled_data"
+          ],
+          "serde": [
+            "dep:serde",
+            "zerovec/serde",
+            "icu_properties/serde",
+            "icu_normalizer/serde",
+            "icu_collections/serde",
+            "icu_provider/serde"
+          ]
+        },
+        "yanked": false,
+        "rust_version": "1.86",
+        "pubtime": "2026-10-21T14:14:02Z",
+        "v": 2
+      },
+      "createdAt": "2026-10-21T14:14:02.030129Z"
+    },
+    {
+      "name": "patamaps-contracts",
+      "version": "0.1.0-alpha.1",
+      "action": "published",
+      "sha256": "7a926ecb8efe7e0fe5254187ac48fe6f9907543594fc8119f027ddd7bfc925d5",
+      "publicDownload": "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/crates-io/alpha-20261019/publication-20261021/publish-0001/patamaps-contracts-0.1.0-alpha.1.crate",
+      "publicBytes": 86455,
+      "owners": [
+        "roryscot"
+      ],
+      "index": {
+        "name": "patamaps-contracts",
+        "vers": "0.1.0-alpha.1",
+        "deps": [
+          {
+            "name": "icu_collator",
+            "req": "=2.2.1-patamaps.1",
+            "features": [],
+            "optional": false,
+            "default_features": true,
+            "target": null,
+            "kind": "normal",
+            "package": "patamaps-icu-collator"
+          },
+          {
+            "name": "serde",
+            "req": "^1.0.229",
+            "features": [
+              "derive"
+            ],
+            "optional": false,
+            "default_features": true,
+            "target": null,
+            "kind": "normal"
+          },
+          {
+            "name": "serde_json",
+            "req": "^1.0.151",
+            "features": [
+              "float_roundtrip",
+              "unbounded_depth",
+              "raw_value"
+            ],
+            "optional": false,
+            "default_features": true,
+            "target": null,
+            "kind": "normal"
+          },
+          {
+            "name": "serde_json_canonicalizer",
+            "req": "=0.3.2",
+            "features": [],
+            "optional": false,
+            "default_features": true,
+            "target": null,
+            "kind": "normal"
+          },
+          {
+            "name": "sha2",
+            "req": "^0.10.9",
+            "features": [],
+            "optional": false,
+            "default_features": true,
+            "target": null,
+            "kind": "normal"
+          },
+          {
+            "name": "sha2",
+            "req": "^0.10.9",
+            "features": [],
+            "optional": false,
+            "default_features": true,
+            "target": null,
+            "kind": "build"
+          },
+          {
+            "name": "thiserror",
+            "req": "^2.0.21",
+            "features": [],
+            "optional": false,
+            "default_features": true,
+            "target": null,
+            "kind": "normal"
+          }
+        ],
+        "cksum": "7a926ecb8efe7e0fe5254187ac48fe6f9907543594fc8119f027ddd7bfc925d5",
+        "features": {},
+        "yanked": false,
+        "rust_version": "1.99",
+        "pubtime": "2026-10-21T14:14:42Z"
+      },
+      "createdAt": "2026-10-21T14:14:42.167683Z"
+    },
+    {
+      "name": "patamaps-core",
+      "version": "0.1.0-alpha.1",
+      "action": "published",
+      "sha256": "3db28437ff09053607341b2184018f3ee3cbfbb39d6185d1178355c7dec06c37",
+      "publicDownload": "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/crates-io/alpha-20261019/publication-20261021/publish-0001/patamaps-core-0.1.0-alpha.1.crate",
+      "publicBytes": 1173233,
+      "owners": [
+        "roryscot"
+      ],
+      "index": {
+        "name": "patamaps-core",
+        "vers": "0.1.0-alpha.1",
+        "deps": [
+          {
+            "name": "icu_collator",
+            "req": "=2.2.1-patamaps.1",
+            "features": [],
+            "optional": false,
+            "default_features": true,
+            "target": null,
+            "kind": "normal",
+            "package": "patamaps-icu-collator"
+          },
+          {
+            "name": "jsonschema",
+            "req": "=0.58.6",
+            "features": [],
+            "optional": false,
+            "default_features": false,
+            "target": null,
+            "kind": "normal"
+          },
+          {
+            "name": "patamaps-contracts",
+            "req": "=0.1.0-alpha.1",
+            "features": [],
+            "optional": false,
+            "default_features": true,
+            "target": null,
+            "kind": "normal"
+          },
+          {
+            "name": "serde",
+            "req": "^1.0.229",
+            "features": [
+              "derive"
+            ],
+            "optional": false,
+            "default_features": true,
+            "target": null,
+            "kind": "normal"
+          },
+          {
+            "name": "serde_json",
+            "req": "^1.0.151",
+            "features": [
+              "float_roundtrip",
+              "unbounded_depth",
+              "raw_value"
+            ],
+            "optional": false,
+            "default_features": true,
+            "target": null,
+            "kind": "normal"
+          },
+          {
+            "name": "sha2",
+            "req": "^0.10.9",
+            "features": [],
+            "optional": false,
+            "default_features": true,
+            "target": null,
+            "kind": "build"
+          },
+          {
+            "name": "thiserror",
+            "req": "^2.0.21",
+            "features": [],
+            "optional": false,
+            "default_features": true,
+            "target": null,
+            "kind": "normal"
+          },
+          {
+            "name": "time",
+            "req": "^0.3.55",
+            "features": [
+              "parsing",
+              "formatting"
+            ],
+            "optional": false,
+            "default_features": true,
+            "target": null,
+            "kind": "normal"
+          }
+        ],
+        "cksum": "3db28437ff09053607341b2184018f3ee3cbfbb39d6185d1178355c7dec06c37",
+        "features": {},
+        "yanked": false,
+        "rust_version": "1.99",
+        "pubtime": "2026-10-21T14:16:02Z"
+      },
+      "createdAt": "2026-10-21T14:16:02.386759Z"
+    },
+    {
+      "name": "patamaps-projection",
+      "version": "0.1.0-alpha.1",
+      "action": "published",
+      "sha256": "ebee3977782788c1df7829594bdf0e44c47c1c987555c3d0c6d9f93a362ccefe",
+      "publicDownload": "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/crates-io/alpha-20261019/publication-20261021/publish-0001/patamaps-projection-0.1.0-alpha.1.crate",
+      "publicBytes": 97503,
+      "owners": [
+        "roryscot"
+      ],
+      "index": {
+        "name": "patamaps-projection",
+        "vers": "0.1.0-alpha.1",
+        "deps": [
+          {
+            "name": "patamaps-contracts",
+            "req": "=0.1.0-alpha.1",
+            "features": [],
+            "optional": false,
+            "default_features": true,
+            "target": null,
+            "kind": "normal"
+          },
+          {
+            "name": "patamaps-core",
+            "req": "=0.1.0-alpha.1",
+            "features": [],
+            "optional": false,
+            "default_features": true,
+            "target": null,
+            "kind": "normal"
+          },
+          {
+            "name": "serde",
+            "req": "^1.0.229",
+            "features": [
+              "derive"
+            ],
+            "optional": false,
+            "default_features": true,
+            "target": null,
+            "kind": "normal"
+          },
+          {
+            "name": "serde_json",
+            "req": "^1.0.151",
+            "features": [
+              "float_roundtrip",
+              "unbounded_depth",
+              "raw_value"
+            ],
+            "optional": false,
+            "default_features": true,
+            "target": null,
+            "kind": "normal"
+          },
+          {
+            "name": "sha2",
+            "req": "^0.10.9",
+            "features": [],
+            "optional": false,
+            "default_features": true,
+            "target": null,
+            "kind": "build"
+          },
+          {
+            "name": "thiserror",
+            "req": "^2.0.21",
+            "features": [],
+            "optional": false,
+            "default_features": true,
+            "target": null,
+            "kind": "normal"
+          }
+        ],
+        "cksum": "ebee3977782788c1df7829594bdf0e44c47c1c987555c3d0c6d9f93a362ccefe",
+        "features": {},
+        "yanked": false,
+        "rust_version": "1.99",
+        "pubtime": "2026-10-21T14:16:31Z"
+      },
+      "createdAt": "2026-10-21T14:16:31.196494Z"
+    },
+    {
+      "name": "patamaps-governance",
+      "version": "0.1.0-alpha.1",
+      "action": "published",
+      "sha256": "95ba31ddda4b15a66d1d03126255542256e5a67319bc3d04c65dd6743fa7b004",
+      "publicDownload": "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/crates-io/alpha-20261019/publication-20261021/publish-0001/patamaps-governance-0.1.0-alpha.1.crate",
+      "publicBytes": 41680,
+      "owners": [
+        "roryscot"
+      ],
+      "index": {
+        "name": "patamaps-governance",
+        "vers": "0.1.0-alpha.1",
+        "deps": [
+          {
+            "name": "base64",
+            "req": "=0.22.1",
+            "features": [],
+            "optional": false,
+            "default_features": true,
+            "target": null,
+            "kind": "normal"
+          },
+          {
+            "name": "ed25519-dalek",
+            "req": "=2.2.0",
+            "features": [
+              "std",
+              "fast"
+            ],
+            "optional": false,
+            "default_features": false,
+            "target": null,
+            "kind": "normal"
+          },
+          {
+            "name": "patamaps-contracts",
+            "req": "=0.1.0-alpha.1",
+            "features": [],
+            "optional": false,
+            "default_features": true,
+            "target": null,
+            "kind": "normal"
+          },
+          {
+            "name": "patamaps-core",
+            "req": "=0.1.0-alpha.1",
+            "features": [],
+            "optional": false,
+            "default_features": true,
+            "target": null,
+            "kind": "normal"
+          },
+          {
+            "name": "patamaps-projection",
+            "req": "=0.1.0-alpha.1",
+            "features": [],
+            "optional": false,
+            "default_features": true,
+            "target": null,
+            "kind": "normal"
+          },
+          {
+            "name": "serde",
+            "req": "^1.0.229",
+            "features": [
+              "derive"
+            ],
+            "optional": false,
+            "default_features": true,
+            "target": null,
+            "kind": "normal"
+          },
+          {
+            "name": "serde_json",
+            "req": "^1.0.151",
+            "features": [
+              "float_roundtrip",
+              "unbounded_depth",
+              "raw_value"
+            ],
+            "optional": false,
+            "default_features": true,
+            "target": null,
+            "kind": "normal"
+          },
+          {
+            "name": "sha2",
+            "req": "^0.10.9",
+            "features": [],
+            "optional": false,
+            "default_features": true,
+            "target": null,
+            "kind": "build"
+          },
+          {
+            "name": "time",
+            "req": "^0.3.55",
+            "features": [
+              "parsing",
+              "formatting"
+            ],
+            "optional": false,
+            "default_features": true,
+            "target": null,
+            "kind": "normal"
+          }
+        ],
+        "cksum": "95ba31ddda4b15a66d1d03126255542256e5a67319bc3d04c65dd6743fa7b004",
+        "features": {},
+        "yanked": false,
+        "rust_version": "1.99",
+        "pubtime": "2026-10-21T14:17:14Z"
+      },
+      "createdAt": "2026-10-21T14:17:14.084529Z"
+    }
+  ],
+  "publisher": {
+    "expectedLogin": "roryscot",
+    "authentication": "Intel Cargo credential provider",
+    "emailVerification": "enforced by crates.io at upload",
+    "identityVerification": "published_by and owners after each upload"
+  },
+  "status": "failed",
+  "error": "publish-patamaps-workspace exited 101; inspect registry before any retry",
+  "finishedAt": "2026-10-21T14:17:47.156597+00:00"
+}
