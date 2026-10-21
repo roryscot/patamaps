@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-"""Prepare the pinned real Next application with native nonsecret source capture.
+"""Qualify pinned Fumadocs source and, optionally, its isolated Next production build.
 
-Preparation is not framework build, runtime, dependency closure or release acceptance.
+This does not establish runtime, deployment, hermetic dependencies or release acceptance.
 """
 import argparse
 import base64
@@ -11,6 +11,7 @@ import os
 from pathlib import Path
 import platform
 import signal
+import shutil
 import subprocess
 import tarfile
 import time
@@ -64,12 +65,12 @@ def acquire_source(run, work, evidence, upstream=UPSTREAM, revision=REVISION):
     safe_oids = {e["gitBlob"] for e in selected}
     excluded_only_oids = {e["gitBlob"] for e in omitted} - safe_oids
 
-    def audit(label):
+    def audit(label, repo=owner):
         objects = run(label, ["git", "cat-file", "--batch-all-objects",
-                             "--batch-check=%(objectname) %(objecttype)"], cwd=owner)
+                             "--batch-check=%(objectname) %(objecttype)"], cwd=repo)
         local = {line.split()[0].decode() for line in objects.splitlines()}
         assert not local & excluded_only_oids, "Excluded unique blob unexpectedly fetched"
-        assert all(not os.path.lexists(owner / e["path"]) for e in omitted)
+        assert all(not os.path.lexists(repo / e["path"]) for e in omitted)
 
     audit("excluded-blobs-before-checkout")
     run("git-head", ["git", "update-ref", "HEAD", revision], cwd=owner)
@@ -106,6 +107,7 @@ def main():
     parser.add_argument("--cli", type=Path, required=True)
     parser.add_argument("--work", type=Path, required=True)
     parser.add_argument("--evidence", type=Path, required=True)
+    parser.add_argument("--next-build", action="store_true", help="Run owner pre-build and Next production build in a separate source copy; skip post-build")
     args = parser.parse_args()
     work, evidence = args.work.resolve(), args.evidence.resolve()
     assert not work.exists() and not evidence.exists(), "Use fresh retained paths"
@@ -130,7 +132,8 @@ def main():
     report = {"status": "failed", "sourceCommit": REVISION, "upstream": UPSTREAM,
               "commands": [], "frameworkBuildEstablished": False, "runtimeEstablished": False,
               "dependencyClosureEstablished": False, "applicationAcceptance": False,
-              "filesDeleted": 0, "maximumPreparationGrowthBytes": maximum_growth}
+              "nextBuildExecuted": False, "preBuildExecuted": False, "postBuildExecuted": False,
+              "filesDeleted": 0, "maximumWorkflowGrowthBytes": maximum_growth}
 
     def capacity():
         free = os.statvfs(work).f_bavail * os.statvfs(work).f_frsize
@@ -219,12 +222,28 @@ def main():
                            "compilerDigest": sha(cli)}
 
         owner, selected, omitted, inventory, audit = acquire_source(run, work, evidence)
-        package = json.loads((owner / "package.json").read_text())
-        app = json.loads((owner / "apps/docs/package.json").read_text())
+        build_owner = owner
+        if args.next_build:
+            capacity()
+            build_owner = work / "build-candidate"
+            shutil.copytree(owner, build_owner, symlinks=True)
+            for entry in inventory:
+                path = build_owner / entry["path"]
+                if entry["symlink"]:
+                    assert path.is_symlink()
+                    copied = os.readlink(path).encode()
+                else:
+                    assert path.is_file()
+                    copied = path.read_bytes()
+                assert hashlib.sha256(copied).hexdigest() == entry["digest"].removeprefix("sha256:")
+            audit("excluded-blobs-after-build-copy", build_owner)
+            capacity()
+        package = json.loads((build_owner / "package.json").read_text())
+        app = json.loads((build_owner / "apps/docs/package.json").read_text())
         assert package["packageManager"] == "pnpm@12.14.0" and app["dependencies"]["next"] == "16.4.2"
         assert package["engines"]["node"] == ">= 24.14.0"
         # No unreviewed package-manager hook executes during dependency preparation.
-        assert not any((owner / p).exists() for p in [".pnpmfile.cjs", ".pnpmfile.mjs", "pnpmfile.cjs"])
+        assert not any((build_owner / p).exists() for p in [".pnpmfile.cjs", ".pnpmfile.mjs", "pnpmfile.cjs"])
         selection = {"profile": "patamaps-project-context-selection-1",
                      "id": "urn:qualification:fumadocs:source", "nonsecretInputs": True,
                      "paths": [e["path"] for e in selected], "symlinks": "internal-closed"}
@@ -236,20 +255,20 @@ def main():
         run("native-source-stage", [cli, "project-context-stage", work / "source-context",
                                    "--destination", work / "restaged-source"])
         assert all(not os.path.lexists(work / "restaged-source" / e["path"]) for e in omitted)
-        help_text = run("pnpm-install-help", [*pnpm, "help", "install"], cwd=owner).decode()
+        help_text = run("pnpm-install-help", [*pnpm, "help", "install"], cwd=build_owner).decode()
         assert "--frozen-lockfile" in help_text and "--ignore-scripts" in help_text
         # Include the owner's root tooling and the docs workspace dependency closure, not other applications.
         filters = ["--filter", "root", "--filter", "docs..."]
         packages = json.loads(run("declared-workspace-closure", [*pnpm, *filters, "list",
-                                 "--recursive", "--depth", "-1", "--json"], cwd=owner))
+                                 "--recursive", "--depth", "-1", "--json"], cwd=build_owner))
         names = sorted(p["name"] for p in packages)
         assert all(name in names for name in ["root", "docs", "fumadocs-core", "fumadocs-mdx", "@fumadocs/story"])
         run("frozen-dependency-preparation", [*pnpm, *filters, "install", "--frozen-lockfile",
             "--ignore-scripts", "--store-dir", work / "store", "--network-concurrency=4",
-            "--child-concurrency=1"], cwd=owner)
+            "--child-concurrency=1"], cwd=build_owner)
         installed = json.loads(run("installed-package-versions", [node, "-e",
             "const fs=require('node:fs');const p=require.resolve('next/package.json',{paths:[process.cwd()+'/apps/docs']});"
-            "const t=require.resolve('turbo/package.json');console.log(JSON.stringify({next:JSON.parse(fs.readFileSync(p)).version,turboPath:t,turbo:JSON.parse(fs.readFileSync(t)).version}))"], cwd=owner))
+            "const t=require.resolve('turbo/package.json');console.log(JSON.stringify({next:JSON.parse(fs.readFileSync(p)).version,turboPath:t,turbo:JSON.parse(fs.readFileSync(t)).version}))"], cwd=build_owner))
         assert installed["next"] == "16.4.2"
         turbo = Path(installed["turboPath"]).parent
         docs = turbo / "docs"
@@ -265,10 +284,29 @@ def main():
             destination.parent.mkdir(exist_ok=True, parents=True)
             destination.write_bytes(data)
             documentation.append({"path": path.relative_to(docs).as_posix(), "digest": sha(path), "bytes": len(data)})
+        next_build = None
+        if args.next_build:
+            run("fumadocs-pre-build", [*pnpm, "--filter", "docs", "run", "build:pre"],
+                cwd=build_owner, timeout=600)
+            report["preBuildExecuted"] = True
+            run("fumadocs-next-production-build", [*pnpm, "--filter", "docs", "exec", "next", "build"],
+                cwd=build_owner, timeout=1200)
+            report["nextBuildExecuted"] = True
+            report["frameworkBuildEstablished"] = True
+            output = build_owner / "apps/docs/.next"
+            build_id = output / "BUILD_ID"
+            app_paths = output / "server/app-paths-manifest.json"
+            assert build_id.is_file() and app_paths.is_file(), "Next build outputs missing"
+            manifest = json.loads(app_paths.read_text())
+            next_build = {"buildIdDigest": sha(build_id), "buildIdBytes": build_id.stat().st_size,
+                          "appPathCount": len(manifest), "appPathsManifestDigest": sha(app_paths)}
+            (evidence / "next-build.json").write_text(json.dumps(next_build, indent=2) + "\n")
+            audit("excluded-blobs-after-next-build", build_owner)
         assert all(sha(owner / e["path"]) == e["digest"] for e in inventory if not e["symlink"])
         assert not run("source-status-after", ["git", "status", "--porcelain=v1"], cwd=owner)
-        audit("excluded-blobs-after-install")
-        report.update(status="prepared-pinned-fumadocs-source-and-dependencies-not-built",
+        audit("excluded-blobs-after-install", build_owner)
+        report.update(status=("passed-pinned-fumadocs-next-production-build"
+                              if args.next_build else "prepared-pinned-fumadocs-source-and-dependencies-not-built"),
             sourcePaths=len(selected), sourceBytes=sum(e["bytes"] for e in inventory),
             sourceInventoryDigest=sha(evidence / "selected-source.json"),
             omittedReservedPaths=[e["path"] for e in omitted],
@@ -278,12 +316,14 @@ def main():
             originalSelectedSourceUnchanged=True, workspacePackages=names,
             installedNextVersion=installed["next"], installedTurboVersion=installed["turbo"],
             reviewedInstalledTurboDocs=documentation, dependencyLifecycleScriptsExecuted=False,
-            nextBuildExecuted=False, preBuildExecuted=False, postBuildExecuted=False,
-            githubDiscussionPosted=False, oramaIndexUpdated=False,
-            availableBytesAfter=capacity(), preparationFreeSpaceDeltaBytes=baseline_free-capacity(),
-            limitations=["Preparation only; actual Next build/manifests/HTTP/browser/ServerAction boundaries unrun.",
+            nextBuildExecuted=report["nextBuildExecuted"], preBuildExecuted=report["preBuildExecuted"],
+            postBuildExecuted=report["postBuildExecuted"],
+            githubDiscussionPosted=False, oramaIndexUpdated=False, nextBuild=next_build,
+            availableBytesAfter=capacity(), workflowFreeSpaceDeltaBytes=baseline_free-capacity(),
+            limitations=(["Next production build passed; runtime/HTTP/browser/ServerAction boundaries unrun."
+                          if args.next_build else "Preparation only; actual Next build/runtime/HTTP/browser/ServerAction boundaries unrun.",
                          "Only explicit nonsecret source is natively captured; installed dependency closure is not qualified.",
-                         "No source-context backup/restoration archive, package release or performance claim."])
+                         "No source-context backup/restoration archive, package release or performance claim."]))
     except BaseException as error:
         report["error"] = type(error).__name__ + ": " + str(error)
         raise

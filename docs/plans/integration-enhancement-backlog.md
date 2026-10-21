@@ -23,14 +23,17 @@ a passed fixture or metadata observation is not general support.
 
 ## Current selected work
 
-Continue the pinned Fumadocs Next.js source/dependency preparation. Commit
-dcd0cb79ddfd0cb54791733f744f86a7882841c2 fixes final report aggregation after
-the preparation commands had succeeded. Targeted workflow 39622949635 was
-dispatched on that revision; its hosted runner remains queued.
-The workflow runs source acquisition tests with a retained fixture root, then
-rebuilds the CLI and repeats preparation. It skips full capability and
-cross-stack jobs. A successful preparation still does not establish a Next
-application build, runtime behavior, deployment or installed workflow.
+The pinned Fumadocs Next.js source/dependency preparation passed. See the
+[receipt](../acceptance/project-adoption/g3-fumadocs-source-preparation-2026-10-21/receipt.json).
+Commit dcd0cb79ddfd0cb54791733f744f86a7882841c2 fixes final report aggregation.
+Workflow 39622949635 passed its three source-acquisition tests, built the native
+CLI, and prepared the 2,792-path source and frozen docs dependency closure.
+Full capability and cross-stack jobs were skipped. The next stage now runs the owner pre-build and actual Next production build
+in a separate candidate copy, with a four-gigabyte workflow growth cap. Static
+review confirmed the pre-build writes generated registry files only inside the
+candidate; the post-build can update Orama and is deliberately skipped. The
+hosted result is pending. Application runtime, HTTP behavior, deployment and
+installed workflow remain unverified.
 
 ## Unfinished Next preparation checkpoint
 

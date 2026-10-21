@@ -268,9 +268,9 @@ jobs:
             ci-evidence/cross-stack-image-archive-receipt.json
           if-no-files-found: error
 
-  next-project-preparation:
+  fumadocs-next-build:
     if: github.event_name == 'workflow_dispatch' && inputs.qualification == 'next-preparation'
-    name: Pinned Fumadocs source and dependency preparation
+    name: Pinned Fumadocs source and Next production build
     runs-on: ubuntu-24.04
     timeout-minutes: 40
     env:
@@ -288,16 +288,17 @@ jobs:
         run: |
           rustup toolchain install 1.99.0 --profile minimal
           cargo build --locked --release -p patamaps-cli
-      - name: Prepare reviewed public source without raw environment files
+      - name: Prepare selected public source and build isolated Next application
         run: >-
           python3 -B scripts/qualify_fumadocs_next.py
           --cli target/release/patamaps
           --work "${RUNNER_TEMP}/patamaps-fumadocs-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
           --evidence ci-evidence/fumadocs-preparation
+          --next-build
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         if: always()
         with:
-          name: fumadocs-preparation-${{ github.sha }}
+          name: fumadocs-next-build-${{ github.sha }}
           path: |
             ci-evidence/fumadocs-preparation/*.json
             ci-evidence/fumadocs-preparation/*.log
