@@ -11,6 +11,7 @@ pub(crate) struct NextBuildConfig {
     pub nonsecret_inputs: bool,
     pub routes_manifest: String,
     pub app_paths_manifest: String,
+    pub app_path_routes_manifest: String,
     pub configuration_projection: String,
 }
 #[derive(Deserialize)]
@@ -21,6 +22,7 @@ struct Projection {
     build_receipt_digest: String,
     routes_digest: String,
     app_paths_digest: String,
+    app_path_routes_digest: String,
     configuration: Configuration,
 }
 #[derive(Deserialize)]
@@ -342,10 +344,11 @@ pub(crate) fn observe(
     let paths = [
         &selection.routes_manifest,
         &selection.app_paths_manifest,
+        &selection.app_path_routes_manifest,
         &selection.configuration_projection,
     ];
-    if paths.iter().collect::<BTreeSet<_>>().len() != 3
-        || inputs.len() != 3
+    if paths.iter().collect::<BTreeSet<_>>().len() != 4
+        || inputs.len() != 4
         || paths
             .iter()
             .any(|p| !crate::relative_path(p) || !inputs.contains_key(p.as_str()))
@@ -358,6 +361,8 @@ pub(crate) fn observe(
     let manifest: Manifest = parse(inputs[selection.routes_manifest.as_str()].as_bytes())?;
     let apps: BTreeMap<String, String> =
         parse(inputs[selection.app_paths_manifest.as_str()].as_bytes())?;
+    let app_routes: BTreeMap<String, String> =
+        parse(inputs[selection.app_path_routes_manifest.as_str()].as_bytes())?;
     let config = &projection.configuration;
     let Some(framework_major) = version(&projection.framework_version) else {
         return Err(refuse());
@@ -369,6 +374,8 @@ pub(crate) fn observe(
             != byte_digest(inputs[selection.routes_manifest.as_str()].as_bytes())
         || projection.app_paths_digest
             != byte_digest(inputs[selection.app_paths_manifest.as_str()].as_bytes())
+        || projection.app_path_routes_digest
+            != byte_digest(inputs[selection.app_path_routes_manifest.as_str()].as_bytes())
         || manifest.version.get() != 3
         || match framework_major {
             14 => {
@@ -413,6 +420,14 @@ pub(crate) fn observe(
                     .is_some_and(|v| v.is_empty() || !bounded(v))
         })
         || apps.len() > 4096
+        || app_routes.len() > 4096
+        || apps.keys().collect::<Vec<_>>() != app_routes.keys().collect::<Vec<_>>()
+        || apps
+            .iter()
+            .any(|(app, module_file)| !route_path(app) || !crate::relative_path(module_file))
+        || app_routes
+            .iter()
+            .any(|(app, route)| !route_path(app) || !route_path(route))
         || !manifest.data_routes.is_empty()
         || !manifest.rsc.is_object()
         || manifest
@@ -497,10 +512,8 @@ pub(crate) fn observe(
         }
     }
     let mut page_routes = BTreeMap::new();
-    for (app, path) in &apps {
-        if !route_path(app) || !route_path(path) {
-            return Err(refuse());
-        }
+    for (app, module_file) in &apps {
+        let path = &app_routes[app];
         if is_top_level_page(app) {
             let route = page_route_collision_key(path);
             if page_routes.insert(route, app).is_some() {
@@ -513,8 +526,14 @@ pub(crate) fn observe(
         emit(
             "next-build-module",
             &selection.app_paths_manifest,
-            json!([selection.app_paths_manifest, app]),
-            json!({"appPath":app,"routePath":path,"businessCorrespondence":"not-inferred","httpMethods":"not-observed"}),
+            json!([
+                selection.app_paths_manifest,
+                selection.app_path_routes_manifest,
+                app
+            ]),
+            json!({"appPath":app,"routePath":path,"moduleFile":module_file,
+                "routePathOrigin":"captured-app-path-routes-manifest",
+                "businessCorrespondence":"not-inferred","httpMethods":"not-observed"}),
         )?;
     }
     emit(
@@ -562,14 +581,17 @@ mod tests {
             "staticRoutes":[{"page":"/","regex":"^/docs(?:/)?$","routeKeys":{},"namedRegex":"^/docs(?:/)?$"}],
             "dynamicRoutes":[{"page":"/shop/[id]","regex":"^/docs/shop/([^/]+?)$","routeKeys":{"nxtPid":"nxtPid"},"namedRegex":"^/docs/shop/(?<nxtPid>[^/]+?)$"}],
             "dataRoutes":[],"rsc":{"header":"rsc"},"rewriteHeaders":{"pathHeader":"x-nextjs-rewritten-path"}});
-        let apps = json!({"/(group)/page":"/","/shop/[id]/page":"/shop/[id]","/api/items/route":"/api/items"});
+        let apps = json!({"/(group)/page":"app/(group)/page.js","/shop/[id]/page":"app/shop/[id]/page.js","/api/items/route":"app/api/items/route.js"});
+        let app_routes = json!({"/(group)/page":"/","/shop/[id]/page":"/shop/[id]","/api/items/route":"/api/items"});
         let mut inputs = BTreeMap::from([
             ("routes.json".into(), routes.to_string()),
             ("apps.json".into(), apps.to_string()),
+            ("app-routes.json".into(), app_routes.to_string()),
         ]);
         let projection = json!({"profile":"patamaps-next-build-config-1","frameworkVersion":"16.1.6",
             "buildReceiptDigest":format!("sha256:{}", "a".repeat(64)),
             "routesDigest":byte_digest(inputs["routes.json"].as_bytes()),"appPathsDigest":byte_digest(inputs["apps.json"].as_bytes()),
+            "appPathRoutesDigest":byte_digest(inputs["app-routes.json"].as_bytes()),
             "configuration":{"basePath":"/docs","output":"standalone","trailingSlash":false,
                 "environment":{"NEXT_PUBLIC_API_URL":"http://127.0.0.1:1234"},
                 "secretReferences":{"AUTH_TOKEN":"OWNER_AUTH_TOKEN"},"transpilePackages":["@owner/shared"],
@@ -581,6 +603,7 @@ mod tests {
                 nonsecret_inputs: true,
                 routes_manifest: "routes.json".into(),
                 app_paths_manifest: "apps.json".into(),
+                app_path_routes_manifest: "app-routes.json".into(),
                 configuration_projection: "config.json".into(),
             },
         )
@@ -606,10 +629,17 @@ mod tests {
     fn rebind(inputs: &mut BTreeMap<String, String>) {
         let routes = byte_digest(inputs["routes.json"].as_bytes());
         let apps = byte_digest(inputs["apps.json"].as_bytes());
+        let app_routes = byte_digest(inputs["app-routes.json"].as_bytes());
         mutate(inputs, "config.json", |v| {
             v["routesDigest"] = json!(routes);
             v["appPathsDigest"] = json!(apps);
+            v["appPathRoutesDigest"] = json!(app_routes);
         });
+    }
+    fn set_app(inputs: &mut BTreeMap<String, String>, app: &str, module_file: &str, route: &str) {
+        mutate(inputs, "apps.json", |v| v[app] = json!(module_file));
+        mutate(inputs, "app-routes.json", |v| v[app] = json!(route));
+        rebind(inputs);
     }
     #[test]
     fn captures_compiled_routes_groups_conditions_and_configuration_without_execution() {
@@ -624,6 +654,11 @@ mod tests {
             .find(|e| e["attributes"]["appPath"] == "/(group)/page")
             .unwrap();
         assert_eq!(alias["attributes"]["routePath"], "/");
+        assert_eq!(alias["attributes"]["moduleFile"], "app/(group)/page.js");
+        assert_eq!(
+            alias["attributes"]["routePathOrigin"],
+            "captured-app-path-routes-manifest"
+        );
         assert_eq!(
             alias["attributes"]["businessCorrespondence"],
             "not-inferred"
@@ -721,6 +756,19 @@ mod tests {
         assert!(run(&inputs, &config).is_err());
     }
     #[test]
+    fn paired_module_and_route_manifests_require_the_same_keys() {
+        let (mut inputs, config) = fixture();
+        inputs.remove("app-routes.json");
+        assert!(run(&inputs, &config).is_err());
+
+        let (mut inputs, config) = fixture();
+        mutate(&mut inputs, "app-routes.json", |v| {
+            v.as_object_mut().unwrap().remove("/shop/[id]/page");
+        });
+        rebind(&mut inputs);
+        assert!(run(&inputs, &config).is_err());
+    }
+    #[test]
     fn ordinary_public_environment_names_remain_allowed() {
         let (mut inputs, config) = fixture();
         mutate(&mut inputs, "config.json", |v| {
@@ -733,18 +781,27 @@ mod tests {
     #[test]
     fn duplicate_route_group_pages_are_refused_but_parallel_and_nonpage_paths_are_allowed() {
         let (mut inputs, config) = fixture();
-        mutate(&mut inputs, "apps.json", |v| {
-            v["/@modal/page"] = json!("/");
-            v["/dashboard/layout"] = json!("/dashboard");
-        });
-        rebind(&mut inputs);
+        set_app(&mut inputs, "/@modal/page", "app/@modal/page.js", "/");
+        set_app(
+            &mut inputs,
+            "/dashboard/layout",
+            "app/dashboard/layout.js",
+            "/dashboard",
+        );
         assert!(run(&inputs, &config).is_ok());
 
-        mutate(&mut inputs, "apps.json", |v| {
-            v["/(advertiser)/dashboard/page"] = json!("/dashboard");
-            v["/(evaluator)/dashboard/page"] = json!("/dashboard");
-        });
-        rebind(&mut inputs);
+        set_app(
+            &mut inputs,
+            "/(advertiser)/dashboard/page",
+            "app/(advertiser)/dashboard/page.js",
+            "/dashboard",
+        );
+        set_app(
+            &mut inputs,
+            "/(evaluator)/dashboard/page",
+            "app/(evaluator)/dashboard/page.js",
+            "/dashboard",
+        );
         let error = run(&inputs, &config).unwrap_err();
         assert!(
             error
@@ -755,11 +812,18 @@ mod tests {
     #[test]
     fn renamed_dynamic_parameters_do_not_hide_duplicate_page_routes() {
         let (mut inputs, config) = fixture();
-        mutate(&mut inputs, "apps.json", |v| {
-            v["/(advertiser)/[id]/page"] = json!("/[id]");
-            v["/(evaluator)/[slug]/page"] = json!("/[slug]");
-        });
-        rebind(&mut inputs);
+        set_app(
+            &mut inputs,
+            "/(advertiser)/[id]/page",
+            "app/(advertiser)/[id]/page.js",
+            "/[id]",
+        );
+        set_app(
+            &mut inputs,
+            "/(evaluator)/[slug]/page",
+            "app/(evaluator)/[slug]/page.js",
+            "/[slug]",
+        );
         assert!(run(&inputs, &config).is_err());
     }
     #[test]
@@ -805,7 +869,10 @@ mod tests {
             ("rule-unknown", "routes.json", |v| {
                 v["redirects"][0]["unreviewed"] = json!(true)
             }),
-            ("bad-path", "apps.json", |v| {
+            ("bad-module-path", "apps.json", |v| {
+                v["/api/items/route"] = json!("../escape.js")
+            }),
+            ("bad-route-path", "app-routes.json", |v| {
                 v["/api/items/route"] = json!("/../escape")
             }),
             ("secret-value", "config.json", |v| {
