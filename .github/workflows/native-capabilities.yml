@@ -32,12 +32,8 @@ jobs:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
       - name: Install pinned Rust toolchain
         run: rustup toolchain install 1.99.0 --profile minimal
-      - name: Test lockless declared-local and lockfile-required resolved contract
-        run: cargo +1.99.0 test --locked -p patamaps-workspace --lib cargo_declared_local_allows_omitted_lockfile_but_resolved_requires_one
-      - name: Test Next 14.2 flat and phased manifest shapes
-        run: cargo +1.99.0 test --locked -p patamaps-workspace --lib captures_reviewed_next_14_2_rewrite_manifest_shapes
-      - name: Test refusal of unreviewed Next 14.2 manifest variants
-        run: cargo +1.99.0 test --locked -p patamaps-workspace --lib refuses_unreviewed_next_14_2_i18n_and_manifest_variants
+      - name: Test patamaps-workspace library suite, including Next manifest boundaries
+        run: cargo +1.99.0 test --locked -p patamaps-workspace --lib
 
   retention-admission:
     if: (github.event_name != 'push' || github.ref == 'refs/heads/main') && (github.event_name != 'workflow_dispatch' || inputs.qualification != 'next-preparation')
