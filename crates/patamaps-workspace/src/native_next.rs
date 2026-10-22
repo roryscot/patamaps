@@ -415,7 +415,10 @@ pub(crate) fn observe(
         || apps.len() > 4096
         || !manifest.data_routes.is_empty()
         || !manifest.rsc.is_object()
-        || !manifest.rewrite_headers.is_object()
+        || manifest
+            .rewrite_headers
+            .as_ref()
+            .is_some_and(|value| !value.is_object())
     {
         return Err(refuse());
     }
