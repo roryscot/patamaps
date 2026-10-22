@@ -18,6 +18,14 @@ def digest(raw):
     return "sha256:" + hashlib.sha256(raw).hexdigest()
 
 
+def executable_path(path):
+    # Keep the named cargo/rustc shim; resolving it follows Rustup's symlink to rustup itself.
+    candidate = Path(os.path.abspath(os.path.expanduser(os.fspath(path))))
+    if not candidate.is_file():
+        raise FileNotFoundError(candidate)
+    return candidate
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--cargo", type=Path, required=True)
@@ -25,9 +33,8 @@ def main():
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     assert platform.system() == "Linux" and platform.machine() == "x86_64", "Use the isolated Linux x86_64 runner"
-    cargo = args.cargo.resolve(strict=True)
-    rustc = cargo.with_name("rustc")
-    assert rustc.is_file(), "Rustup rustc proxy must accompany Cargo"
+    cargo = executable_path(args.cargo)
+    rustc = executable_path(cargo.with_name("rustc"))
     work = args.work_root.resolve() / "patamaps-published-cli-install"
     output = args.output.resolve()
     assert not work.exists(), "Use a fresh registry-install workspace"
