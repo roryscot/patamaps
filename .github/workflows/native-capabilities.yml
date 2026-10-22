@@ -34,6 +34,8 @@ jobs:
         run: rustup toolchain install 1.99.0 --profile minimal
       - name: Test patamaps-workspace library suite, including Next manifest boundaries
         run: cargo +1.99.0 test --locked -p patamaps-workspace --lib
+      - name: Build Patamaps CLI with the updated workspace adapter
+        run: cargo +1.99.0 build --locked -p patamaps-cli --bin patamaps
 
   retention-admission:
     if: (github.event_name != 'push' || github.ref == 'refs/heads/main') && (github.event_name != 'workflow_dispatch' || inputs.qualification != 'next-preparation')
