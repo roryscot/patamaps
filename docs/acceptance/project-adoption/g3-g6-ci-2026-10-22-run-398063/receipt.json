@@ -1,0 +1,68 @@
+{
+  "schemaVersion": 1,
+  "status": "passed-defined-branch-adoption-ci-scopes-and-artifact-retention",
+  "date": "2026-10-22",
+  "sourceCommit": "a2d40b2bb35d0ad2ddd040935b0b0cd94b7f3266",
+  "workflow": {
+    "id": 39806384339,
+    "runNumber": 213,
+    "url": "https://github.com/roryscot/patamaps/actions/runs/39806384339",
+    "result": "success"
+  },
+  "jobs": {
+    "rustCargoMetadataContract": "passed",
+    "linuxX86_64NativeAndPublishedCliConsumer": "passed",
+    "linuxAarch64NativeAcceptance": "passed",
+    "crossStackSourceBindingsLinuxX86_64": "passed",
+    "crossStackLinuxImageBrowserAndInstalledConsumer": "passed",
+    "retentionAdmission": "passed",
+    "pinnedFumadocsBuild": "skipped"
+  },
+  "retention": {
+    "previousSuccessfulRunArtifactBytes": 2115006152,
+    "currentSuccessfulRunArtifactBytes": 80555809,
+    "reductionPercent": 96.19014365874052,
+    "artifactCount": 5,
+    "largeSourceReplayBundlePresent": false,
+    "largeImageReplayBundlePresent": false,
+    "regularEvidenceDays": 14,
+    "publishedCliEvidenceDays": 30,
+    "failureReplayBundleDaysConfigured": 7,
+    "failureBundleExpiryNotExercised": true,
+    "artifacts": [
+      {
+        "prefix": "cross-stack-diagnostics-source",
+        "bytes": 34099720,
+        "expiresUtc": "2026-11-05T15:52:02Z"
+      },
+      {
+        "prefix": "native-linux-x86_64",
+        "bytes": 23817724,
+        "expiresUtc": "2026-11-05T15:43:36Z"
+      },
+      {
+        "prefix": "native-linux-aarch64",
+        "bytes": 21690723,
+        "expiresUtc": "2026-11-05T15:43:23Z"
+      },
+      {
+        "prefix": "published-cli-install",
+        "bytes": 9226,
+        "expiresUtc": "2026-11-21T15:43:33Z"
+      },
+      {
+        "prefix": "cross-stack-diagnostics-image",
+        "bytes": 938416,
+        "expiresUtc": "2026-11-05T15:44:41Z"
+      }
+    ]
+  },
+  "limitations": [
+    "This records the defined CI scopes only; it does not complete broader G2-G6 adoption requirements.",
+    "Pinned Fumadocs production build was skipped.",
+    "Linux aarch64 published-CLI installer and fresh-consumer steps were skipped.",
+    "Failure-only replay-bundle upload and its seven-day expiry are configured but were not exercised by this successful run.",
+    "Replay of the existing Next.js 14.2.14 manifests remains pending on Intel.",
+    "Production deployment acceptance is not established."
+  ]
+}
