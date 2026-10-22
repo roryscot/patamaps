@@ -113,3 +113,26 @@ records all 50 workspace tests and 11 artifact checks passing, including real
 x86_64/ARM64 matches and wrong-target refusals. The native guard completed and
 released its reservation. No architecture runtime or stale-contract gate is
 reclassified; no parallel activation, package publication or deletion occurred.
+
+
+## Selected follow-up: captured isolated Next configuration (2026-10-22)
+
+Use the unchanged 923-file Next 14.2.23 source snapshot with an explicitly
+build-only API URL http://127.0.0.1:1; keep network denied and Sentry disabled.
+This is a lab projection, not the missing owner's real API configuration.
+Capture and replay nonsecret configuration plus sandbox bytes independently,
+refuse a missing environment reference before launch, and run Next through
+native ProjectCommand using captured environment references only. Retain the
+prior application failure; observe actual child status without suppressing
+further prerequisites. Use one exclusive 512 MiB guarded attempt and preserve
+source/dependencies, failed evidence and every unapproved file.
+
+
+Owner decision (2026-10-22): defer this app and continue other gaps.
+The [captured-configuration receipt](../acceptance/project-adoption/g3-next14-captured-lab-config-20261022/receipt.json)
+passes captured-only native environment resolution, missing-reference refusal,
+bounded launcher/log bindings and configuration replay with inputs unavailable.
+Next compiled/typechecked, then prerendering failed Missing Nango public key
+(NEXT_PUBLIC_NANGO_PUBLIC_KEY). No key was fabricated or raw dotenv ingested.
+Preserve the application failure and earlier qualifier-bound failure. Do not
+retry until reviewed configuration is available. Continue Linux deployment gaps.

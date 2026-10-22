@@ -869,3 +869,24 @@ A matching header is not loader/library/CPU/OS/runtime acceptance, and the
 separate check does not prevent replacement before a later launch. G5 actual
 wrong-architecture runtime and stale generated-artifact refusal remain open.
 The source-bound Next case still awaits reviewed nonsecret API configuration.
+
+
+## Captured configuration and owner-directed Next deferral (2026-10-22)
+
+The [independently verified case](../acceptance/project-adoption/g3-next14-captured-lab-config-20261022/receipt.json)
+passes captured-only native command environment, unresolved-reference refusal,
+three-input offline configuration replay and log/child-status bindings. The
+qualifier first exceeded the existing stderr bound; that failure remains.
+The corrected run preserves the 64 KiB native stderr limit through a captured,
+bounded-log launcher. Guard/collector exited0; the actual Next child exited1.
+
+Next reached typechecking, page-data collection and static-page generation,
+then failed prerendering with Missing Nango public key. Linting was skipped by
+unchanged owner configuration. All three compiled manifest semantic maps match
+the prior producer; two serialized key orders changed. No redundant replay was
+run. The owner selected deferral: no invented key, raw dotenv or unchanged retry.
+G3/G6 application acceptance stays open; continue other adoption requirements.
+
+[Full applicable CI](../acceptance/project-adoption/g5-elf-target-preflight-20261022/ci-39847645841.json)
+passed six jobs for PR head d6433e2 on merge checkout 7a5e30b. Fumadocs was skipped.
+This does not establish installed ELF-check or external app deployment acceptance.
