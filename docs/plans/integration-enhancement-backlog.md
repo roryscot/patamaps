@@ -222,3 +222,40 @@ selected-execution controls. The Fumadocs workflow-dispatch-only job was skipped
 The final evidence/docs checkpoint changes no implementation and skips redundant
 CI. The enhancement goal remains active; this is scoped acceptance, not completion
 of all G0–G6 requirements.
+
+## Selected increment: external Rust service deployment (2026-10-22)
+
+Project: upstream Miniserve v0.35.0, annotated tag object
+0d5748f579c6c4895d170fe1e5cb752f38479c71, source commit
+2cd9c495ef25f2fcef505615f603e9de8f981915. Primary provenance:
+https://github.com/svenstaro/miniserve/releases/tag/v0.35.0 .
+Freeze the GitHub release asset metadata and check each downloaded digest.
+Phase one uses official linux-musl x86_64/ARM64 binaries; this is prebuilt-runtime
+qualification, not rebuilding that source or attesting reproducibility.
+
+Reuse native ProjectContext/ProjectBuild/ProjectCommand and the existing managed
+Linux executor. Capture a reviewed nonsecret service configuration, explicit
+static document, bundle-preparation code and HTTP probe. Select exact bundle
+outputs; refuse wrong config, digest and ARM target while preserving selection.
+Export only through project-exec-selected, then independently verify all exported
+bytes before starting the owned container. With configured snapshot/source
+unavailable, selected binding replay must still pass.
+
+Runtime acceptance: actual Linux x86_64 startup; exact GET body, HEAD length,
+directory listing and missing/out-of-prefix refusals; invalid CLI port and a
+wrong-listener readiness refusal. Preserve all HTTP/process logs. Inspect actual
+CPU/memory/swap/quota, readonly root, no host networking/source mount, and only
+/work writable before launch; confirm owned processes/container stopped afterward.
+No browser, authenticated service, source build, complete dependency closure,
+production deployment, trust activation or installed-package pass follows.
+
+Budget: native exclusive preparation with 192 MiB per-run maximum growth under
+the unchanged existing retention/reserve policy; managed CPU1, memory256MiB,
+64MiB output quota. Reuse the pinned cached Ubuntu image; no Docker restart or
+unrelated service changes. No deletion. If admission fails, retain evidence and
+use another safe action rather than bypassing accounting.
+
+Phase two remains required: build the same pinned application's source on Linux,
+repeat the native selected runtime workflow with its produced artifact, and
+qualify an exact installed Patamaps consumer. Practical exclusive edit-loop
+measurements and broader framework boundaries remain separate open requirements.
