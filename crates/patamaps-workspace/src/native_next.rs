@@ -45,7 +45,7 @@ struct ServerActions {
 struct Manifest {
     version: SafeInteger,
     pages404: bool,
-    app_type: String,
+    app_type: Option<String>,
     case_sensitive: bool,
     base_path: String,
     redirects: Vec<Value>,
@@ -55,14 +55,41 @@ struct Manifest {
     static_routes: Vec<Route>,
     data_routes: Vec<Value>,
     rsc: Value,
-    rewrite_headers: Value,
+    rewrite_headers: Option<Value>,
+    i18n: Option<Value>,
+    skip_middleware_url_normalize: Option<bool>,
 }
 #[derive(Deserialize)]
 #[serde(rename_all = "camelCase", deny_unknown_fields)]
-struct Rewrites {
+struct RewritePhases {
     before_files: Vec<Value>,
     after_files: Vec<Value>,
     fallback: Vec<Value>,
+}
+#[derive(Deserialize)]
+#[serde(untagged)]
+enum Rewrites {
+    Phased(RewritePhases),
+    Next14AfterFiles(Vec<Value>),
+}
+impl Rewrites {
+    fn is_phased(&self) -> bool {
+        matches!(self, Self::Phased(_))
+    }
+    fn categories(&self) -> [(&'static str, &[Value]); 3] {
+        match self {
+            Self::Phased(phases) => [
+                ("beforeFiles", phases.before_files.as_slice()),
+                ("afterFiles", phases.after_files.as_slice()),
+                ("fallback", phases.fallback.as_slice()),
+            ],
+            Self::Next14AfterFiles(after_files) => [
+                ("beforeFiles", &[]),
+                ("afterFiles", after_files.as_slice()),
+                ("fallback", &[]),
+            ],
+        }
+    }
 }
 #[derive(Deserialize)]
 #[serde(rename_all = "camelCase", deny_unknown_fields)]
@@ -157,15 +184,22 @@ fn public_environment_name(value: &str) -> bool {
             .iter()
             .any(|suffix| value.contains(suffix))
 }
-fn version(value: &str) -> bool {
+fn version(value: &str) -> Option<u8> {
     let parts = value.split('.').collect::<Vec<_>>();
-    parts.len() == 3
-        && parts[0] == "16"
-        && parts.iter().all(|p| {
+    if parts.len() != 3
+        || !parts.iter().all(|p| {
             !p.is_empty()
                 && p.bytes().all(|b| b.is_ascii_digit())
                 && (*p == "0" || !p.starts_with('0'))
         })
+    {
+        return None;
+    }
+    match parts[0] {
+        "14" if parts[1] == "2" => Some(14),
+        "16" => Some(16),
+        _ => None,
+    }
 }
 fn digest(value: &str) -> bool {
     value.strip_prefix("sha256:").is_some_and(|v| {
@@ -325,8 +359,10 @@ pub(crate) fn observe(
     let apps: BTreeMap<String, String> =
         parse(inputs[selection.app_paths_manifest.as_str()].as_bytes())?;
     let config = &projection.configuration;
+    let Some(framework_major) = version(&projection.framework_version) else {
+        return Err(refuse());
+    };
     if projection.profile != "patamaps-next-build-config-1"
-        || !version(&projection.framework_version)
         || projection.framework_version.len() > 64
         || !digest(&projection.build_receipt_digest)
         || projection.routes_digest
@@ -334,7 +370,23 @@ pub(crate) fn observe(
         || projection.app_paths_digest
             != byte_digest(inputs[selection.app_paths_manifest.as_str()].as_bytes())
         || manifest.version.get() != 3
-        || manifest.app_type != "app"
+        || match framework_major {
+            14 => {
+                manifest.app_type.is_some()
+                    || manifest.rewrite_headers.is_some()
+                    || manifest.i18n.is_some()
+            }
+            16 => {
+                manifest.app_type.as_deref() != Some("app")
+                    || manifest
+                        .rewrite_headers
+                        .as_ref()
+                        .is_none_or(|value| !value.is_object())
+                    || manifest.i18n.is_some()
+                    || !manifest.rewrites.is_phased()
+            }
+            _ => true,
+        }
         || config.base_path != manifest.base_path
         || !config.base_path.is_empty() && !route_path(&config.base_path)
         || !["standalone", "export", "server"].contains(&config.output.as_str())
@@ -413,10 +465,21 @@ pub(crate) fn observe(
     for (category, rules) in [
         ("redirect", &manifest.redirects),
         ("header", &manifest.headers),
-        ("beforeFiles", &manifest.rewrites.before_files),
-        ("afterFiles", &manifest.rewrites.after_files),
-        ("fallback", &manifest.rewrites.fallback),
     ] {
+        if rules.len() > 4096 {
+            return Err(refuse());
+        }
+        for (index, value) in rules.iter().enumerate() {
+            rule(value, category)?;
+            emit(
+                "next-build-rule",
+                &selection.routes_manifest,
+                json!([selection.routes_manifest, category, index]),
+                json!({"category":category,"index":index,"rule":value,"matchingAndExecution":"not-performed"}),
+            )?;
+        }
+    }
+    for (category, rules) in manifest.rewrites.categories() {
         if rules.len() > 4096 {
             return Err(refuse());
         }
@@ -466,12 +529,16 @@ pub(crate) fn observe(
         "next-build-protocol",
         &selection.routes_manifest,
         json!([selection.routes_manifest, "protocol"]),
-        json!({"rsc":manifest.rsc,"rewriteHeaders":manifest.rewrite_headers,"interpretation":"opaque-captured-metadata"}),
+        json!({"rsc":manifest.rsc,"rewriteHeaders":manifest.rewrite_headers.clone().unwrap_or(Value::Null),
+            "skipMiddlewareUrlNormalize":manifest.skip_middleware_url_normalize,
+            "interpretation":"opaque-captured-metadata"}),
     )?;
     Ok((
         entities,
         json!({"profile":"patamaps-next-build-observations-1","manifestVersion":3,
-        "frameworkVersionDeclared":projection.framework_version,"buildReceiptDigestDeclared":projection.build_receipt_digest,
+        "frameworkVersionDeclared":projection.framework_version,"frameworkMajor":framework_major,
+        "manifestShape":if framework_major == 14 {"next14.2-v3"} else {"next16-v3"},
+        "buildReceiptDigestDeclared":projection.build_receipt_digest,
         "compilationEstablished":false,"runtimeEstablished":false,"regexExecuted":false,
         "configurationOrigin":"independent-owner-projection","semanticMeaning":"owner-authored",
         "dataRoutes":"refused","methodsAndServerActionHandlers":"not-observed"}),
@@ -572,6 +639,65 @@ mod tests {
             "OWNER_AUTH_TOKEN"
         );
         assert_eq!(run(&inputs, &fixture().1).unwrap().0, entities);
+    }
+    #[test]
+    fn captures_reviewed_next_14_2_rewrite_manifest_shapes() {
+        for flat_rewrites in [true, false] {
+            let (mut inputs, _) = fixture();
+            mutate(&mut inputs, "routes.json", |v| {
+                v.as_object_mut().unwrap().remove("appType");
+                v.as_object_mut().unwrap().remove("rewriteHeaders");
+                v["skipMiddlewareUrlNormalize"] = json!(false);
+                if flat_rewrites {
+                    let after_file = v["rewrites"]["afterFiles"][0].clone();
+                    v["rewrites"] = json!([after_file]);
+                }
+            });
+            mutate(&mut inputs, "config.json", |v| {
+                v["frameworkVersion"] = json!("14.2.23")
+            });
+            rebind(&mut inputs);
+
+            let (entities, metadata) = run(&inputs, &fixture().1).unwrap();
+            assert_eq!(metadata["frameworkMajor"], 14);
+            assert_eq!(metadata["manifestShape"], "next14.2-v3");
+            let after_file = entities
+                .iter()
+                .find(|e| {
+                    e["kind"] == "next-build-rule" && e["attributes"]["category"] == "afterFiles"
+                })
+                .unwrap();
+            assert_eq!(after_file["attributes"]["rule"]["source"], "/proxy");
+            let protocol = entities
+                .iter()
+                .find(|e| e["kind"] == "next-build-protocol")
+                .unwrap();
+            assert_eq!(protocol["attributes"]["rewriteHeaders"], Value::Null);
+            assert_eq!(protocol["attributes"]["skipMiddlewareUrlNormalize"], false);
+            assert_eq!(metadata["runtimeEstablished"], false);
+        }
+    }
+    #[test]
+    fn refuses_unreviewed_next_14_2_i18n_and_manifest_variants() {
+        let (mut inputs, config) = fixture();
+        mutate(&mut inputs, "routes.json", |v| {
+            v.as_object_mut().unwrap().remove("appType");
+            v.as_object_mut().unwrap().remove("rewriteHeaders");
+            v["i18n"] = json!({"locales":["en"],"defaultLocale":"en"});
+        });
+        mutate(&mut inputs, "config.json", |v| {
+            v["frameworkVersion"] = json!("14.2.23")
+        });
+        rebind(&mut inputs);
+        assert!(run(&inputs, &config).is_err());
+
+        for unsupported in ["14.1.9", "15.0.0", "17.0.0"] {
+            let (mut inputs, config) = fixture();
+            mutate(&mut inputs, "config.json", |v| {
+                v["frameworkVersion"] = json!(unsupported)
+            });
+            assert!(run(&inputs, &config).is_err(), "{unsupported}");
+        }
     }
     #[test]
     fn cross_document_binding_inventory_and_nonsecret_declaration_are_required() {
