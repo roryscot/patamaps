@@ -427,7 +427,10 @@ mod unix {
             return Err(refuse("PROJECT_BUILD_DIRECTORY"));
         }
         let raw = selected_bytes(state)?.ok_or_else(|| refuse("PROJECT_BUILD_NO_SELECTION"))?;
-        let selected = selection(&raw)?;
+        verify_selected_record(state, &raw)
+    }
+    fn verify_selected_record(state: &Path, raw: &[u8]) -> Result<Value, Error> {
+        let selected = selection(raw)?;
         crate::project_command::directory(state, &selected.attempt)?;
         let attempt = state.join(&selected.attempt);
         let receipt_raw = read_bytes(&attempt, "receipt.json")?;
@@ -582,6 +585,87 @@ mod unix {
             "authorizationNow":"not-evaluated","activation":"not-performed"}),
         )
     }
+    /// Run an explicit trusted command only after verifying the selected artifacts.
+    /// Hold the cooperative state lock through execution and post-verification.
+    /// This does not sandbox command effects or grant deployment authorization.
+    pub fn execute_selected_project_command(
+        state: &Path,
+        command: &ProjectCommand,
+    ) -> Result<Value, Error> {
+        let metadata = fs::symlink_metadata(state)?;
+        if metadata.file_type().is_symlink() || !metadata.is_dir() {
+            return Err(refuse("PROJECT_BUILD_DIRECTORY"));
+        }
+        let state = state.canonicalize()?;
+        if state.ancestors().any(|p| p.join("Cargo.toml").exists()) {
+            return Err(refuse("PROJECT_BUILD_STATE_ISOLATION"));
+        }
+        let lock = OpenOptions::new()
+            .read(true)
+            .write(true)
+            .custom_flags(
+                (rustix::fs::OFlags::NOFOLLOW | rustix::fs::OFlags::NONBLOCK).bits() as i32,
+            )
+            .open(state.join("driver.lock"))?;
+        if !lock.metadata()?.is_file() {
+            return Err(refuse("PROJECT_BUILD_LOCK_UNAVAILABLE"));
+        }
+        lock.try_lock()
+            .map_err(|_| refuse("PROJECT_BUILD_LOCK_UNAVAILABLE"))?;
+        // Verify the same pinned pointer whose candidate will be executed.
+        let pointer =
+            selected_bytes(&state)?.ok_or_else(|| refuse("PROJECT_BUILD_NO_SELECTION"))?;
+        let selected = selection(&pointer)?;
+        let before = verify_selected_record(&state, &pointer)?;
+        if selected_bytes(&state)?.as_deref() != Some(pointer.as_slice()) {
+            return Err(refuse("PROJECT_BUILD_SELECTION_CHANGED"));
+        }
+        let attempt = state.join(&selected.attempt);
+        let capture: ProjectCapture = read(&attempt, "candidate-capture.json")?;
+        let result = execute_project_command(&attempt.join("candidate"), &capture, command);
+        let after = verify_project_build_selection(&state);
+        let pointer_unchanged =
+            selected_bytes(&state).is_ok_and(|p| p.as_deref() == Some(pointer.as_slice()));
+        let (command_report, command_completed) = match result {
+            Ok(report) => {
+                let completed = report["status"] == "completed-project-command";
+                (report, completed)
+            }
+            Err(error) => (
+                json!({"status":"refused-project-command","error":error.to_string()}),
+                false,
+            ),
+        };
+        let selection_after_verified = after.is_ok();
+        let after_report = match after {
+            Ok(report) => report,
+            Err(error) => {
+                json!({"status":"refused-selected-build-bindings","error":error.to_string()})
+            }
+        };
+        Ok(json!({
+            "status": if command_completed && selection_after_verified && pointer_unchanged {
+                "completed-selected-project-command"
+            } else {
+                "refused-selected-project-command"
+            },
+            "profile":"patamaps-selected-project-command-1",
+            "attempt":selected.attempt,
+            "selectionDigest":selected.digest,
+            "inputKey":before["inputKey"],
+            "preExecutionSelectionVerified":true,
+            "selectionPointerUnchanged":pointer_unchanged,
+            "postExecutionSelectionVerified":selection_after_verified,
+            "command":command_report,
+            "postExecutionVerification":after_report,
+            "stateLock":"held-through-command-and-post-verification",
+            "sourceRediscovery":"not-performed",
+            "selectionPublication":"not-performed",
+            "authorizationNow":"not-evaluated",
+            "activation":"not-performed"
+        }))
+    }
+
     fn input_key(
         source: &ProjectCapture,
         plan_digest: &str,
@@ -995,8 +1079,9 @@ mod unix {
 #[cfg(unix)]
 pub use unix::{
     build_project, build_project_with_context, build_project_with_preparation,
-    project_build_input_key, project_build_input_key_with_context,
-    project_build_input_key_with_preparation, verify_project_build_selection,
+    execute_selected_project_command, project_build_input_key,
+    project_build_input_key_with_context, project_build_input_key_with_preparation,
+    verify_project_build_selection,
 };
 
 #[cfg(not(unix))]
@@ -1079,5 +1164,16 @@ pub fn project_build_input_key_with_preparation(
     Err(Error::refused(
         "PROJECT_BUILD_PLATFORM",
         "Retained builds require Unix",
+    ))
+}
+
+#[cfg(not(unix))]
+pub fn execute_selected_project_command(
+    _: &std::path::Path,
+    _: &ProjectCommand,
+) -> Result<serde_json::Value, Error> {
+    Err(Error::refused(
+        "PROJECT_BUILD_PLATFORM",
+        "Selected project commands require Unix",
     ))
 }

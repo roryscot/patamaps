@@ -149,6 +149,11 @@ enum Command {
         #[arg(long)]
         root: PathBuf,
     },
+    /// Verify a selected build, lock its state, execute a trusted command and recheck bindings.
+    ProjectExecSelected {
+        state: PathBuf,
+        command: PathBuf,
+    },
     /// Run a retained build plan and atomically select its verified declared artifacts.
     ProjectBuild {
         plan: PathBuf,
@@ -1116,6 +1121,17 @@ fn run(command: Command) -> Result<(), Failure> {
                 .map_err(|e| Failure::Operational(e.to_string()))?;
             stdout_json(&report)?;
             if report["status"] == "completed-project-command" {
+                Ok(())
+            } else {
+                Err(Failure::ReportedRejection)
+            }
+        }
+        Command::ProjectExecSelected { state, command } => {
+            let command = read::<patamaps_workspace::ProjectCommand>(&command)?;
+            let report = patamaps_workspace::execute_selected_project_command(&state, &command)
+                .map_err(|e| Failure::Operational(e.to_string()))?;
+            stdout_json(&report)?;
+            if report["status"] == "completed-selected-project-command" {
                 Ok(())
             } else {
                 Err(Failure::ReportedRejection)

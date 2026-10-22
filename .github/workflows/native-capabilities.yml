@@ -36,6 +36,11 @@ jobs:
         run: cargo +1.99.0 test --locked -p patamaps-workspace --lib
       - name: Build Patamaps CLI with the updated workspace adapter
         run: cargo +1.99.0 build --locked -p patamaps-cli --bin patamaps
+      - name: Check selected-artifact execution and owner crash cleanup
+        run: >-
+          python3 -B scripts/project_selected_exec_controls.py
+          --compiler "$GITHUB_WORKSPACE/target/debug/patamaps"
+          --work-root "$RUNNER_TEMP/patamaps-selected-exec-${{ github.run_id }}-${{ github.run_attempt }}"
 
   retention-admission:
     if: (github.event_name != 'push' || github.ref == 'refs/heads/main') && (github.event_name != 'workflow_dispatch' || inputs.qualification != 'next-preparation')

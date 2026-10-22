@@ -292,3 +292,43 @@ a typed error. Keep tests for the legacy refusal, declared error admission and
 malformed error-body refusal. Controlled transport replies establish client
 contract behavior; qualify actual production listeners and proxy branches
 separately before claiming runtime compatibility.
+
+## Execute a verified selection
+
+This command is a checkout feature added after the published 0.1.0-alpha.1 CLI.
+Use a CLI built from this revision and the same storage supervisor as the build:
+
+    patamaps project-exec-selected /work/build-states/service run-command.json
+
+The command uses the existing patamaps-project-command-1 schema. Its working
+directory is relative to the selected candidate, and environmentReferences
+resolve only through the retained nonsecretConfiguration. It does not inherit
+the caller's environment or rediscover the original source.
+
+Patamaps acquires the same cooperative driver.lock used by project-build,
+verifies the pinned selection and its declared source, generated, context and
+compiled output bindings, then launches the explicit trusted command. A stale
+declared artifact is refused before the command starts. A competing build or
+selected execution is refused while this lock is held. The lock remains held
+through command execution and a second selection verification.
+
+Exit 0 means completed-selected-project-command: the command completed under
+its bounds, bindings still verify, and the selection pointer is unchanged.
+Exit 1 reports refused-selected-project-command after command admission,
+including a nonzero command, unresolved environment reference, output mutation
+or pointer mutation. Exit 2 reports an operational/preflight refusal; no command
+is launched when the selected bindings or lock fail preflight.
+
+The report includes the underlying ProjectCommand report, pointer comparison
+and postExecutionVerification. Post-command refusal cannot undo command effects.
+These are declared-byte checks and a cooperative lock, not filesystem isolation
+against hostile writers, dependency closure, continuous runtime monitoring, or
+permission to deploy or activate anything. An undeclared output is not covered.
+Use bounded startup probes or functional checks; long-running services hold the
+lock until they finish. Ordinary child process groups retain the CLI's existing
+parent-death cleanup; detached processes and external services require their
+own lifecycle controls.
+
+Build verification is tied to the creating engine. Preserve the creating CLI
+and evidence before changing engine source; do not silently reinterpret old
+selections under a different engine.

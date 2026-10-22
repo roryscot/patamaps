@@ -165,3 +165,33 @@ CPU/memory/quota/mount restrictions were inspected before launch; container
 stopped and all reservations cleared. No deletion, trust/activation or parallel
 rollout. External deployment, stale generated contracts and performance remain
 open. The owner-deferred Next app remains deferred.
+
+
+## Selected increment: verified selected-artifact execution (2026-10-22)
+
+Add a Rust API and project-exec-selected CLI entrypoint using the existing
+ProjectCommand/capture/build-selection contracts. Hold the cooperative state
+lock, verify selected source/generated/compiled bytes before command execution,
+and recheck selection/pointer afterward. Preserve existing project-exec behavior.
+Preflight failure must prevent command effects. Failed/mutating commands remain
+refused; no automatic rollback of arbitrary effects or deployment authorization.
+
+Acceptance: captured cwd/environment execution; stale output prevents a marker
+side effect; competing build/run cannot acquire the live lock; post-execution
+artifact/pointer mutation refuses; owner death stops ordinary descendants and
+releases the cooperative lock. Then qualify an authentic older Wargame-generated
+client against a native selected current client before any module/network use.
+Keep application sources/compiler unchanged; preserve genuine failures.
+Use native exclusive fallback and existing storage policy, with 384 MiB growth
+ceiling for the implementation checks. Preserve the creating CLI as a verified
+compressed recovery copy before rebuilding. No deletion or registry publication.
+
+
+Implementation checkpoint: the [selected-execution receipt](../acceptance/project-adoption/g5-selected-project-exec-20261022/receipt.json)
+passes 50 workspace tests and 10 CLI controls on Intel, including three termination
+signals, competing executor/builder refusal and stale-before-effects refusal.
+The 384 MiB exclusive guard completed with exit 0. The creating CLI has a
+compressed recovery copy whose decompressed digest was checked; restoration
+and re-execution were not exercised. Authentic generated-client qualification
+is still pending at this checkpoint. Existing project-exec remains available;
+the new selected gate is opt-in and has not been published to crates.io.
