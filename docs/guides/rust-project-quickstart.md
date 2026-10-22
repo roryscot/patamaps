@@ -15,10 +15,11 @@ The CLI is published on crates.io as `patamaps-cli` version
 cargo install patamaps-cli --version 0.1.0-alpha.1 --locked
 ~~~
 
-The published-package install and generated-Rust consumer check are now part of
-the Linux x86_64 acceptance workflow. Until that workflow passes, use the
-checkout-built path below as the verified route. Building this checkout requires
-Rust 1.99 as declared in `rust-toolchain.toml`:
+The published-package install and generated-Rust consumer check passed in the
+[Linux x86_64 acceptance run](https://github.com/roryscot/patamaps/actions/runs/39847645841).
+For newer checkout features, including project-exec-selected, build from the
+checkout; the published alpha does not contain them. Building this checkout
+requires Rust 1.99 as declared in `rust-toolchain.toml`:
 
 ~~~sh
 cargo build --release --locked -p patamaps-cli

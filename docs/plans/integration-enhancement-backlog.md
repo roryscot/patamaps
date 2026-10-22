@@ -193,5 +193,32 @@ signals, competing executor/builder refusal and stale-before-effects refusal.
 The 384 MiB exclusive guard completed with exit 0. The creating CLI has a
 compressed recovery copy whose decompressed digest was checked; restoration
 and re-execution were not exercised. Authentic generated-client qualification
-is still pending at this checkpoint. Existing project-exec remains available;
+subsequently passed in the scoped result below. Existing project-exec remains available;
 the new selected gate is opt-in and has not been published to crates.io.
+
+
+The [authentic generated-client receipt](../acceptance/project-adoption/g5-authentic-client-selected-exec-20261022/receipt.json)
+passes native HTTP TypeScript compilation using 106 captured compiler files
+(9,947,809 bytes), selection-bound module loading, authentic older-client
+refusal before module loading, and restored-current-client execution with the
+selection pointer unchanged. Source snapshot unavailable; original app untouched.
+The exclusive 128 MiB guard completed and released its reservation.
+
+The first retained prebuilt-client attempt failed because its TypeScript source
+did not equal the new native emission. It remains failed and preserved; the
+corrected attempt compiled that actual emission. Byte selection does not infer
+a source/compiled relationship that owner verification failed to establish.
+This closes the selected-artifact startup refusal increment, not deployment G5:
+external deployment and performance remain open. Backend/client-generation
+compatibility is not established by this startup-only check. No new network qualification, production activation,
+parallel execution, publication or deletion. The Nango-dependent app stays deferred.
+
+
+The [CI receipt](../acceptance/project-adoption/g5-selected-project-exec-20261022/ci.json)
+records all six applicable PR jobs passing for implementation a22ff8d, including
+x86_64/ARM64 native acceptance, source binding/replay, actual Axum qualification
+and the Linux image/browser path. The focused push job also passed the new
+selected-execution controls. The Fumadocs workflow-dispatch-only job was skipped.
+The final evidence/docs checkpoint changes no implementation and skips redundant
+CI. The enhancement goal remains active; this is scoped acceptance, not completion
+of all G0–G6 requirements.

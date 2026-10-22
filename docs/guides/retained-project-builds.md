@@ -320,7 +320,8 @@ or pointer mutation. Exit 2 reports an operational/preflight refusal; no command
 is launched when the selected bindings or lock fail preflight.
 
 The report includes the underlying ProjectCommand report, pointer comparison
-and postExecutionVerification. Post-command refusal cannot undo command effects.
+and postExecutionVerification. Post-command refusal cannot undo command effects. A selected file digest does not prove it was compiled from the emitted
+source; the build verification steps must establish that relationship.
 These are declared-byte checks and a cooperative lock, not filesystem isolation
 against hostile writers, dependency closure, continuous runtime monitoring, or
 permission to deploy or activate anything. An undeclared output is not covered.
@@ -332,3 +333,8 @@ own lifecycle controls.
 Build verification is tied to the creating engine. Preserve the creating CLI
 and evidence before changing engine source; do not silently reinterpret old
 selections under a different engine.
+
+The [authentic client receipt](../acceptance/project-adoption/g5-authentic-client-selected-exec-20261022/receipt.json)
+records native TypeScript emission, compilation from captured compiler inputs,
+selected module loading, older-artifact refusal before module load, and restoration.
+It does not repeat real application/network acceptance.
