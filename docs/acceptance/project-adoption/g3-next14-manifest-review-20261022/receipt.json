@@ -3,10 +3,12 @@
   "status": "passed-read-only-existing-next-manifest-schema-review",
   "date": "2026-10-22",
   "source": {
-    "identity": "existing private Next.js project; manifest checkout identity and paths retained on Intel",
+    "identity": "same private Next.js project checkout as the earlier route-shape capture; project paths retained on Intel",
     "observedCheckoutHead": "7721da50e4a817dafb13a8e4cd10347e7ee884f7",
     "installedFrameworkVersion": "14.2.14",
-    "relationToEarlierCapturedSource": "sibling checkout; exact source-revision binding not established"
+    "relationToEarlierCapturedSource": "same checkout path and HEAD as the retained route-shape receipt",
+    "capturedSourceCommit": "7721da50e4a817dafb13a8e4cd10347e7ee884f7",
+    "manifestBuildProvenance": "not recorded; manifest generation is not cryptographically bound to the source commit"
   },
   "manifests": {
     "routesManifestSha256": "aafba6a8f446fe8072c0f5873c7c731adfdb16f0badda9e449800ecf3ad0550d",
@@ -41,10 +43,12 @@
   "controls": {
     "inspectionWasReadOnly": true,
     "privateRouteNamesCommitted": false,
-    "activeIntelReservations": 0
+    "activeIntelReservations": 0,
+    "checkoutHeadMatchesCapturedSourceCommit": true,
+    "checkoutCleanAtReview": true
   },
   "notEstablished": [
-    "That this sibling manifest was built from the exact source snapshot in the earlier route-shape receipt",
+    "That the existing generated manifests were produced from the recorded source commit; the build output has no source/build identifier",
     "Execution of the new Patamaps Next 14.2 parser against these manifest bytes",
     "Intel CLI rebuild; at inspection, free-memory measure was 3377340416 bytes, below the 4 GiB interactive reserve",
     "Next application build, HTTP/browser behavior, dependency closure, or deployment"
