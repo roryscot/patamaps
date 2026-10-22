@@ -78,3 +78,10 @@ private storage modes. Original modes and links are reconstructed during staging
 so storage-mode differences alone are not corruption. Exact recovery depends on
 retained matching data; these commands neither synthesize missing bytes nor
 guarantee backups or crash durability.
+
+
+## Resource controls are declared build inputs
+
+The [Next 14.2.23 qualification](../acceptance/project-adoption/g3-next14-fresh-source-replay-20261022/receipt.json) recorded a candidate-only configuration overlay with original/modified digests. It delegated the owner webpack hook, disabled persistent webpack caching and set experimental.cpus to one; captured environment declared a 1 GiB Node heap and one Rayon thread. Original source stayed unchanged. The tested candidate has no Webpack pack files; this is not a global recommendation for other Next versions or a performance claim.
+
+Keep resource/configuration changes in explicit plan/context lineage. Framework worker/heap controls do not impose kernel CPU/RSS quotas or make native work eligible for concurrent admission. Retain exclusive fallback and the storage supervisor. Missing application configuration requires reviewed nonsecret inputs; a resource profile cannot establish backend/authenticated acceptance.
