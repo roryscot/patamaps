@@ -136,3 +136,32 @@ Next compiled/typechecked, then prerendering failed Missing Nango public key
 (NEXT_PUBLIC_NANGO_PUBLIC_KEY). No key was fabricated or raw dotenv ingested.
 Preserve the application failure and earlier qualifier-bound failure. Do not
 retry until reviewed configuration is available. Continue Linux deployment gaps.
+
+
+## Selected deployment increment: native architecture selection (2026-10-22)
+
+Use the same actual Rust runtime from successful x86_64/aarch64 CI artifacts,
+with exact source/binary receipt binding. Native ProjectBuild must select the
+declared linux/amd64 runtime and refuse the ARM candidate during verification,
+preserving the prior selection; replay its bindings and run a harmless selected
+runtime probe through the managed Linux executor. Reuse existing context/build
+contracts. This self-hosting case complements independent project evidence; it
+does not claim generic ELF loader validity or external application deployment.
+Budgets: exclusive native 384 MiB growth (including retained CI archives and quota image); managed CPU1/memory256MiB/quota128MiB.
+No production trust/activation, deletion or policy increase.
+
+
+Verification: the [native architecture-selection receipt](../acceptance/project-adoption/g5-native-architecture-selection-20261022/receipt.json)
+passes x86_64 selection, authentic ARM64 ELF_ARCHITECTURE refusal with the old
+pointer unchanged, source/snapshot-unavailable replay and selected-runtime
+usage-only Linux execution. Exact CI source/binary bindings were checked.
+This is self-hosting evidence, not independent application deployment.
+
+The initial state-location error remains failed. Later 128 MiB quota preparation
+exhausted a lowered native aggregate growth budget and required reviewed stop
+recovery. All original records/image remain. A preparation-only retry used a
+64 MiB quota/448 MiB native ceiling, reused passed selections and succeeded.
+CPU/memory/quota/mount restrictions were inspected before launch; container
+stopped and all reservations cleared. No deletion, trust/activation or parallel
+rollout. External deployment, stale generated contracts and performance remain
+open. The owner-deferred Next app remains deferred.

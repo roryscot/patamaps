@@ -890,3 +890,27 @@ G3/G6 application acceptance stays open; continue other adoption requirements.
 [Full applicable CI](../acceptance/project-adoption/g5-elf-target-preflight-20261022/ci-39847645841.json)
 passed six jobs for PR head d6433e2 on merge checkout 7a5e30b. Fumadocs was skipped.
 This does not establish installed ELF-check or external app deployment acceptance.
+
+
+## Native architecture selection and Linux execution (2026-10-22)
+
+The [independently checked self-hosting case](../acceptance/project-adoption/g5-native-architecture-selection-20261022/receipt.json)
+uses the same actual Rust component from successful x86_64/aarch64 CI. Native
+context/build selection accepted x86_64. ARM64, with its correct digest but
+declared linux/amd64 target, failed ELF_ARCHITECTURE verification before
+selection. The prior pointer stayed byte-identical. Replay passed with
+configured source and snapshot paths unavailable.
+
+The selected x86_64 component then started in managed Linux and returned its
+defined no-argument usage refusal (program exit1; probe/control exit0). No trust
+or activation was used. CPU1/memory256MiB/fixed64MiB quota, read-only root,
+absent source/network mounts and input hashes were checked before launch.
+Container stopped and all reservations cleared. This is not kernel rejection of
+ARM or external application deployment.
+
+Preserve the initial state-path failure and interrupted larger quota preparation.
+The latter exhausted the lowered native aggregate growth budget; kill EPERM
+left ownership for review. Stop proof/original records were preserved before
+scoped recovery. The smaller preparation-only retry succeeded without repeating
+passed build controls. No files deleted. Stale contracts, external deployment
+and G4 actual edit-performance requirements remain open.

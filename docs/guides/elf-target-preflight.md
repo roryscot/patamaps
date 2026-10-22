@@ -35,3 +35,46 @@ does not close G5 wrong-architecture runtime or stale generated-contract gates.
 Header fields and machine values follow the primary
 [ELF header specification](https://gabi.xinuos.com/elf/02-eheader.html) and
 [assigned machine registry](https://gabi.xinuos.com/elf/a-emachine.html).
+
+
+## Verify a known runtime before selection
+
+Put the following command in an existing ProjectBuild plan's verificationSteps.
+Replace the checker path and digest with your pinned checker and reviewed
+producer receipt. Capture the opaque runtime through the normal context binding.
+Select runtime as an explicit file output.
+
+```json
+{
+  "profile": "patamaps-project-command-1",
+  "workingDirectory": ".",
+  "environmentReferences": {},
+  "invocation": {
+    "executable": "/absolute/path/patamaps",
+    "arguments": [
+      "elf-target-check",
+      "runtime",
+      "--target",
+      "linux/amd64",
+      "--digest",
+      "sha256:REPLACE_WITH_REVIEWED_64_LOWERCASE_HEX_DIGEST"
+    ],
+    "codeInputs": [],
+    "bounds": {
+      "maximumElapsedMs": 60000,
+      "maximumStdoutBytes": 65536,
+      "maximumStderrBytes": 65536
+    }
+  }
+}
+```
+
+Failure preserves the prior selected.json. State must be outside the source and
+every enclosing Cargo workspace, in a root counted by the storage supervisor.
+This pattern checks a prebuilt artifact with a known producer digest; it does
+not infer one for arbitrary fresh build output.
+
+The [actual Rust component case](../acceptance/project-adoption/g5-native-architecture-selection-20261022/receipt.json)
+verified x86_64 selection, authentic ARM64 refusal, unchanged pointer, offline
+replay and harmless selected Linux execution. It did not activate the component
+or qualify an external project's deployment.
