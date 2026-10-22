@@ -108,6 +108,14 @@ enum Intent {
 enum Command {
     /// Bounded native Cargo/TOML provider using the existing workspace process protocol.
     DiscoverNative,
+    /// Check an artifact digest and ELF target header without executing the artifact.
+    ElfTargetCheck {
+        artifact: PathBuf,
+        #[arg(long)]
+        target: String,
+        #[arg(long)]
+        digest: String,
+    },
     /// Capture explicitly selected nonsecret project inputs without executing project tools.
     ProjectCapture {
         profile: PathBuf,
@@ -1053,6 +1061,15 @@ fn run(command: Command) -> Result<(), Failure> {
                 &output,
                 &serde_json::json!({"status":"observed-matches", "graph":{"id":checked.document().id,"digest":checked.digest()},"constraint":constraint.id,"matches":matches,"admission":"not-performed","activeBindings":"not-evaluated","authorization":"not-evaluated"}),
             )
+        }
+        Command::ElfTargetCheck {
+            artifact,
+            target,
+            digest,
+        } => {
+            let report = patamaps_workspace::check_elf_target(&artifact, &target, &digest)
+                .map_err(|e| Failure::Operational(e.to_string()))?;
+            stdout_json(&report)
         }
         Command::ProjectCapture {
             profile,

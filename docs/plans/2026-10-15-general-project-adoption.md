@@ -849,3 +849,23 @@ The [fresh-source follow-up](../acceptance/project-adoption/g3-next14-fresh-sour
 The failed producer receipt binds all three fresh manifests to the 923-file source inventory and resource overlay. Native parsing passed with 53 routes, 20 header rules, one redirect and 53 module/route aliases. Independent inspection matched every route regex/key, rule condition/value/index and module/route mapping. Byte-digest and missing-projection controls refused; replay passed with configured inputs/provider unavailable and PATH empty. This closes the fresh-source parser-replay subgate, not successful application build, effective configuration/authentication, runtime header matching or G3–G6 completion. The producer receipt is orchestration evidence and its buildReceiptDigest remains opaque declared metadata to the adapter, not Next/admission attestation.
 
 The candidate has 28,250,112 allocated output bytes and zero persistent Webpack packs. Sampled group RSS and aggregate free-space changes do not establish paired performance, exact write attribution or a kernel memory quota. Both completed native reservations released normally. Continue the application case with a reviewed nonsecret API URL/projection or explicitly scoped isolated lab value; further prerequisites may emerge. Do not ingest raw dotenv/secret files to obtain a pass.
+
+
+## Digest-bound ELF target-header preflight (2026-10-22)
+
+The scoped [receipt](../acceptance/project-adoption/g5-elf-target-preflight-20261022/receipt.json)
+records 50 passing workspace tests, a native CLI build and 11 artifact checks.
+The opt-in Rust/CLI preflight checks the declared digest plus ELF64 little-endian
+machine for linux/amd64 or linux/arm64; both real official Node 24.11.1 binaries
+matched their own target and refused the other. Digest mismatch, malformed
+header, symlink, FIFO, directory and oversized file refused. No artifact ran.
+The exclusive 1 GiB guarded run finished and released normally; no files were
+deleted and parallel activation remains disabled.
+
+This extends an existing owner's verificationSteps without changing the build
+or command model. See the [usage contract](../guides/elf-target-preflight.md).
+It is a development-tree enhancement, not part of the published alpha CLI.
+A matching header is not loader/library/CPU/OS/runtime acceptance, and the
+separate check does not prevent replacement before a later launch. G5 actual
+wrong-architecture runtime and stale generated-artifact refusal remain open.
+The source-bound Next case still awaits reviewed nonsecret API configuration.

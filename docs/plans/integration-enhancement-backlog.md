@@ -88,3 +88,28 @@ large evidence capture or storage scans merely to maintain momentum.
 New evidence may expose a genuine C01–C19 defect; record its requirement and
 reproduction in the capability plan. An enhancement does not become a parity
 blocker simply because a qualification harness has a failing test.
+
+
+## Selected increment: digest-bound ELF target preflight (2026-10-22)
+
+Scope: add one native Rust read-only check usable as an existing owner build
+verification command. Declare an exact artifact digest and linux/amd64 or
+linux/arm64 target. Preserve existing project command/build contracts. Reject
+unsupported targets, nonregular/oversize inputs, digest mismatch, truncated or
+unsupported headers and mismatched machine; never execute the inspected binary.
+
+Acceptance: focused malformed/binding/short-read tests; matching and wrong-target
+checks on actual retained Linux binaries; CLI build and exact exit-status checks.
+Use one exclusive guarded native run with a 1 GiB growth budget, two Cargo jobs
+and incremental compilation disabled. No deletions or policy increases. This is
+an enhancement: a header match does not establish loader, libraries, Linux OS,
+runtime acceptance or immutability between a later separate check and launch.
+G5 wrong-architecture runtime and stale generated-artifact controls stay open.
+The source-bound Next case still waits for reviewed nonsecret API configuration.
+
+
+Verification result: [scoped receipt](../acceptance/project-adoption/g5-elf-target-preflight-20261022/receipt.json)
+records all 50 workspace tests and 11 artifact checks passing, including real
+x86_64/ARM64 matches and wrong-target refusals. The native guard completed and
+released its reservation. No architecture runtime or stale-contract gate is
+reclassified; no parallel activation, package publication or deletion occurred.
