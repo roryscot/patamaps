@@ -699,6 +699,15 @@ mod tests {
             let (entities, metadata) = run(&inputs, &fixture().1).unwrap();
             assert_eq!(metadata["frameworkMajor"], 14);
             assert_eq!(metadata["manifestShape"], "next14.2-v3");
+            let module = entities
+                .iter()
+                .find(|e| {
+                    e["kind"] == "next-build-module"
+                        && e["attributes"]["appPath"] == "/(group)/page"
+                })
+                .unwrap();
+            assert_eq!(module["attributes"]["moduleFile"], "app/(group)/page.js");
+            assert_eq!(module["attributes"]["routePath"], "/");
             let after_file = entities
                 .iter()
                 .find(|e| {
