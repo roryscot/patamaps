@@ -67,7 +67,8 @@ struct CargoConfig {
     workspace_members: CargoMemberMode,
     #[serde(default)]
     workspace_exclusions: CargoExclusionMode,
-    lockfile: String,
+    #[serde(default)]
+    lockfile: Option<String>,
     cargo: String,
     cargo_digest: String,
     rustc: String,
@@ -994,6 +995,39 @@ fn tool(
     })?;
     Ok(out)
 }
+fn validate_cargo_lockfile(
+    view: DependencyView,
+    lockfile: Option<&str>,
+    inputs: &Inputs<'_>,
+    root: &Path,
+    workspace_root: &Path,
+) -> Result<(), Error> {
+    let Some(lockfile) = lockfile else {
+        return if view == DependencyView::Resolved {
+            Err(refused(
+                "NATIVE_CARGO_LOCK",
+                "Resolved Cargo observations require a captured workspace Cargo.lock",
+            ))
+        } else {
+            Ok(())
+        };
+    };
+    let Some(content) = inputs.get(lockfile) else {
+        return Err(refused(
+            "NATIVE_CARGO_INPUT",
+            format!("Required captured input unavailable: {lockfile}"),
+        ));
+    };
+    parse_toml(lockfile, content)?;
+    if live_path(root, lockfile)? != workspace_root.join("Cargo.lock") {
+        return Err(refused(
+            "NATIVE_CARGO_LOCK",
+            "Lockfile does not belong to declared workspace root",
+        ));
+    }
+    Ok(())
+}
+
 fn cargo_entities(
     request: &AdapterRequest,
     inputs: &Inputs<'_>,
@@ -1002,7 +1036,7 @@ fn cargo_entities(
 ) -> Result<(Vec<Value>, Value), Error> {
     let manifest = config.manifest.as_str();
     let workspace_manifest = config.workspace_manifest.as_str();
-    let lockfile = config.lockfile.as_str();
+    let lockfile = config.lockfile.as_deref();
     let cargo = config.cargo.as_str();
     let cargo_digest = config.cargo_digest.as_str();
     let rustc = config.rustc.as_str();
@@ -1012,7 +1046,7 @@ fn cargo_entities(
     let features = config.features.as_slice();
     let default_features = config.default_features;
     let view = config.view;
-    for path in [manifest, workspace_manifest, lockfile] {
+    for path in [manifest, workspace_manifest] {
         if !inputs.contains_key(path) {
             return Err(refused(
                 "NATIVE_CARGO_INPUT",
@@ -1039,19 +1073,12 @@ fn cargo_entities(
             "Invalid feature/platform context",
         ));
     }
-    parse_toml(lockfile, inputs[lockfile])?;
     let manifest_path = live_path(root, manifest)?;
     let workspace_path = live_path(root, workspace_manifest)?;
     let workspace_root = workspace_path.parent().expect("manifest parent");
     let declared = parse_toml(workspace_manifest, inputs[workspace_manifest])?;
     validate_cargo_root(config.root_mode, &manifest_path, &workspace_path, &declared)?;
-
-    if live_path(root, lockfile)? != workspace_root.join("Cargo.lock") {
-        return Err(refused(
-            "NATIVE_CARGO_LOCK",
-            "Lockfile does not belong to declared workspace root",
-        ));
-    }
+    validate_cargo_lockfile(view, lockfile, inputs, root, workspace_root)?;
     let cargo_home = Path::new(cargo_home);
     if !cargo_home.is_absolute() || !cargo_home.is_dir() {
         return Err(refused(

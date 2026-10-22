@@ -2,7 +2,7 @@ name: Native capability acceptance
 
 on:
   push:
-    branches: [main]
+    branches: ['**']
   pull_request:
   workflow_dispatch:
     inputs:
@@ -19,8 +19,24 @@ permissions:
   contents: read
 
 jobs:
-  retention-admission:
+  cargo-metadata-contract:
     if: github.event_name != 'workflow_dispatch' || inputs.qualification != 'next-preparation'
+    name: Rust Cargo metadata contract
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    env:
+      CARGO_INCREMENTAL: '0'
+      CARGO_PROFILE_DEV_DEBUG: '0'
+      CARGO_PROFILE_TEST_DEBUG: '0'
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - name: Install pinned Rust toolchain
+        run: rustup toolchain install 1.99.0 --profile minimal
+      - name: Test lockless declared-local and lockfile-required resolved contract
+        run: cargo +1.99.0 test --locked -p patamaps-workspace --lib cargo_declared_local_allows_omitted_lockfile_but_resolved_requires_one
+
+  retention-admission:
+    if: (github.event_name != 'push' || github.ref == 'refs/heads/main') && (github.event_name != 'workflow_dispatch' || inputs.qualification != 'next-preparation')
     name: Retention admission boundaries
     runs-on: ubuntu-24.04
     timeout-minutes: 5
@@ -37,7 +53,7 @@ jobs:
           PATAMAPS_TEST_RETAIN_ROOT="$RUNNER_TEMP/patamaps-package-scope-tests" python3 -B -m unittest discover -s scripts -p test_package_source.py
 
   linux:
-    if: github.event_name != 'workflow_dispatch' || inputs.qualification != 'next-preparation'
+    if: (github.event_name != 'push' || github.ref == 'refs/heads/main') && (github.event_name != 'workflow_dispatch' || inputs.qualification != 'next-preparation')
     name: Linux ${{ matrix.architecture }}
     strategy:
       fail-fast: false
@@ -102,7 +118,7 @@ jobs:
           if-no-files-found: error
 
   cross-stack-source:
-    if: github.event_name != 'workflow_dispatch' || inputs.qualification != 'next-preparation'
+    if: (github.event_name != 'push' || github.ref == 'refs/heads/main') && (github.event_name != 'workflow_dispatch' || inputs.qualification != 'next-preparation')
     name: Cross-stack source bindings (Linux x86_64)
     runs-on: ubuntu-24.04
     timeout-minutes: 30
@@ -220,7 +236,7 @@ jobs:
           path: ci-evidence/cross-stack-source.tar.gz
           if-no-files-found: error
   cross-stack-image:
-    if: github.event_name != 'workflow_dispatch' || inputs.qualification != 'next-preparation'
+    if: (github.event_name != 'push' || github.ref == 'refs/heads/main') && (github.event_name != 'workflow_dispatch' || inputs.qualification != 'next-preparation')
     name: Cross-stack Linux image and browser (amd64)
     runs-on: ubuntu-24.04
     timeout-minutes: 45

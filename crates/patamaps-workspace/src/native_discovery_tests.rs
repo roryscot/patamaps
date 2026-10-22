@@ -818,3 +818,54 @@ fn segment_mode_bounds_all_inspected_names_even_when_they_do_not_match() {
         })
     ));
 }
+
+#[test]
+fn cargo_declared_local_allows_omitted_lockfile_but_resolved_requires_one() {
+    let config = serde_json::from_value::<Config>(json!({
+        "provider": "cargo",
+        "nonsecretInputs": true,
+        "manifest": "src-tauri/Cargo.toml",
+        "workspaceManifest": "src-tauri/Cargo.toml",
+        "cargo": "/toolchain/bin/cargo",
+        "cargoDigest": format!("sha256:{}", "0".repeat(64)),
+        "rustc": "/toolchain/bin/rustc",
+        "rustcDigest": format!("sha256:{}", "0".repeat(64)),
+        "cargoHome": "/tmp/cargo-home",
+        "platform": "x86_64-apple-darwin",
+        "features": [],
+        "defaultFeatures": true,
+        "view": "declared-local"
+    }))
+    .unwrap();
+    let Config::Cargo(config) = config else {
+        panic!("Cargo config expected");
+    };
+    assert!(config.lockfile.is_none());
+
+    let empty_inputs = BTreeMap::new();
+    let root = Path::new("/not-a-live-owner-root");
+    let workspace_root = root;
+    assert!(
+        validate_cargo_lockfile(
+            DependencyView::DeclaredLocal,
+            None,
+            &empty_inputs,
+            root,
+            workspace_root,
+        )
+        .is_ok()
+    );
+    assert!(matches!(
+        validate_cargo_lockfile(
+            DependencyView::Resolved,
+            None,
+            &empty_inputs,
+            root,
+            workspace_root,
+        ),
+        Err(Error::Refused {
+            code: "NATIVE_CARGO_LOCK",
+            ..
+        })
+    ));
+}
