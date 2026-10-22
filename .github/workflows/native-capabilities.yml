@@ -73,7 +73,13 @@ jobs:
           python3 -B scripts/ci_published_cli_install.py
           --cargo "$HOME/.cargo/bin/cargo"
           --work-root "$RUNNER_TEMP"
-          --output "$GITHUB_WORKSPACE/ci-evidence/published-cli-install"
+          --output "$RUNNER_TEMP/patamaps-published-cli-install-evidence"
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        if: always() && matrix.architecture == 'x86_64'
+        with:
+          name: published-cli-install-${{ github.sha }}
+          path: ${{ runner.temp }}/patamaps-published-cli-install-evidence/
+          if-no-files-found: error
       - name: Retain Linux fixture material
         if: always()
         shell: bash
