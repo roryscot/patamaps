@@ -102,6 +102,7 @@ jobs:
           name: published-cli-install-${{ github.sha }}
           path: ${{ runner.temp }}/patamaps-published-cli-install-evidence/
           if-no-files-found: error
+          retention-days: 30
       - name: Retain Linux fixture material
         if: always()
         shell: bash
@@ -118,6 +119,7 @@ jobs:
           name: native-linux-${{ matrix.architecture }}-${{ github.sha }}
           path: ci-evidence/
           if-no-files-found: error
+          retention-days: 14
 
   cross-stack-source:
     if: (github.event_name != 'push' || github.ref == 'refs/heads/main') && (github.event_name != 'workflow_dispatch' || inputs.qualification != 'next-preparation')
@@ -207,8 +209,9 @@ jobs:
             ci-evidence/cross-stack-installed/installed-workflow/*.stderr.log
             ci-evidence/cross-stack-installed/installed-workflow/m6-runtime-*.log
           if-no-files-found: warn
+          retention-days: 14
       - name: Retain source fixtures and tool symlink metadata
-        if: always()
+        if: failure() || cancelled()
         shell: bash
         run: |
           python3 -B - <<'PY'
@@ -232,11 +235,12 @@ jobs:
                           archive.add(child, arcname=workspace.name + "/" + child.name)
           PY
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
-        if: always()
+        if: failure() || cancelled()
         with:
           name: cross-stack-source-linux-x86_64-${{ github.sha }}
           path: ci-evidence/cross-stack-source.tar.gz
           if-no-files-found: error
+          retention-days: 7
   cross-stack-image:
     if: (github.event_name != 'push' || github.ref == 'refs/heads/main') && (github.event_name != 'workflow_dispatch' || inputs.qualification != 'next-preparation')
     name: Cross-stack Linux image and browser (amd64)
@@ -290,11 +294,12 @@ jobs:
             ci-evidence/cross-stack-installed/installed-workflow/*.stderr.log
             ci-evidence/cross-stack-installed/installed-workflow/m6-runtime-*.log
           if-no-files-found: warn
+          retention-days: 14
       - name: Retain owned images, candidates, traces and logs
-        if: always()
+        if: failure() || cancelled()
         run: python3 -B scripts/archive_cross_stack_ci.py --phase image
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
-        if: always()
+        if: failure() || cancelled()
         with:
           name: cross-stack-linux-image-browser-${{ github.sha }}
           path: |
@@ -302,6 +307,7 @@ jobs:
             ci-evidence/cross-stack-owned-images.tar.gz
             ci-evidence/cross-stack-image-archive-receipt.json
           if-no-files-found: error
+          retention-days: 7
 
   fumadocs-next-build:
     if: github.event_name == 'workflow_dispatch' && inputs.qualification == 'next-preparation'
@@ -339,3 +345,4 @@ jobs:
             ci-evidence/fumadocs-preparation/*.log
             ci-evidence/fumadocs-preparation/turbo-docs/
           if-no-files-found: warn
+          retention-days: 14
