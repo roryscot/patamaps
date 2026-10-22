@@ -8,9 +8,17 @@ and test that connection.
 
 ## Get the compiler
 
-Use a known checkout and its recorded native executable. Registry publication
-is not established; do not assume cargo install patamaps works. Building this
-checkout requires Rust 1.99 as declared in rust-toolchain.toml. From the checkout:
+The CLI is published on crates.io as `patamaps-cli` version
+`0.1.0-alpha.1`. Install that exact alpha version with:
+
+~~~sh
+cargo install patamaps-cli --version 0.1.0-alpha.1 --locked
+~~~
+
+The published-package install and generated-Rust consumer check are now part of
+the Linux x86_64 acceptance workflow. Until that workflow passes, use the
+checkout-built path below as the verified route. Building this checkout requires
+Rust 1.99 as declared in `rust-toolchain.toml`:
 
 ~~~sh
 cargo build --release --locked -p patamaps-cli

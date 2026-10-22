@@ -67,6 +67,13 @@ jobs:
               --output "$GITHUB_WORKSPACE/ci-evidence" \
               --architecture "${{ matrix.architecture }}" \
               --fixtures "/tmp/patamaps-ci-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
+      - name: Install published CLI in a fresh Cargo home and consumer
+        if: matrix.architecture == 'x86_64'
+        run: >-
+          python3 -B scripts/ci_published_cli_install.py
+          --cargo "$HOME/.cargo/bin/cargo"
+          --work-root "$RUNNER_TEMP"
+          --output "$GITHUB_WORKSPACE/ci-evidence/published-cli-install"
       - name: Retain Linux fixture material
         if: always()
         shell: bash
