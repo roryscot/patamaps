@@ -23,7 +23,7 @@ a passed fixture or metadata observation is not general support.
 
 ## Current selected work
 
-The current increment is [real Next production Server Action and private-resource qualification](../guides/next-production-auth-qualification.md) on the pinned unchanged Chatbot source. The source/build observations and full Rust-engine regressions passed. Runtime has four preserved failed attempts. The latest bootstrap and live proxy collector passed; real registration/login, duplicate/wrong-password refusals and off-origin action refusal were observed. The paired valid-origin account was created, but its session assertion failed, so full runtime/authentication/permission acceptance remains open. Session-readiness and nonsecret diagnostics are being verified next. The earlier Miniserve results remain scoped. Complete dependency/test-context closure, broader framework boundaries, current-engine external installed replay and practical exclusive edit-loop measurements remain open. Nango stays owner-deferred; G0–G6 adoption is not complete.
+The production Server Action/private-document increment is now [verified for unchanged pinned Chatbot](../acceptance/project-adoption/g3-chatbot-production-auth-20261023/independent-verification.json). Focused CI40013461564 at 00c9168 passed the source/build/native gates, four unchanged owner page tests and all sixteen named runtime groups. The [usage guide](../guides/next-production-auth-qualification.md) bounds this HTTPS/new-CI-database profile; earlier failed attempts remain preserved. Initial session readiness was made explicit; the historical underlying mismatch is not retroactively diagnosed. Continue original G0–G6 work: complete dependency/test-context closure, current-engine external installed replay, remaining actual rewrite/framework and deployment controls, and practical exclusive edit-loop measurements. The earlier Miniserve evidence remains scoped; Nango stays owner-deferred. General adoption is not complete.
 
 ## Earlier Next candidate checkpoint
 
@@ -662,3 +662,46 @@ paired-origin criteria remain; no login is substituted for the required
 valid-origin session. This is a hypothesis-driven readiness repair, not an
 established diagnosis of the historical session mismatch. All sixteen named
 controls and complete document-version preservation remain mandatory.
+
+
+## Verified production Server Actions and private documents (2026-10-23)
+
+[Focused run 40013461564](https://github.com/roryscot/patamaps/actions/runs/40013461564),
+source 00c9168a3912e3324a81a9e246159a4d1ec6f010, passed. The
+[CI provenance](../acceptance/project-adoption/g3-chatbot-production-auth-20261023/ci.json),
+[runtime](../acceptance/project-adoption/g3-chatbot-production-auth-20261023/runtime.json),
+[browser](../acceptance/project-adoption/g3-chatbot-production-auth-20261023/browser-auth.json)
+and [independent intake](../acceptance/project-adoption/g3-chatbot-production-auth-20261023/independent-verification.json)
+verify four unchanged owner page tests and exactly sixteen distinct passed groups.
+Actual invalid/duplicate registration, invalid/wrong-password login, successful
+registration/login and secure session cookies passed. The off-origin action had
+no new-principal effect; its matched valid-origin payload created that principal
+and established the correct regular session. The server issued its session
+cookie and the client cookie bytes changed. Five auth-page initial session
+requests completed before control execution; no timeout was extended.
+
+The real owner document API accepted its owner and refused another user's read
+and write plus guest read. The entire owner document-version array was equal
+after the denied write. Secret/cookie scans passed. Source bytes/modes and
+exclusion audit stayed unchanged. Exact compiler engine and driver digests were
+independently matched to the frozen checkout; PostgreSQL/Next/browser/proxy and
+all three listeners stopped. Bootstrap used an actual unprivileged browser
+launch with the locked package and no OS package installation request.
+
+Artifact 12526829032 is335,616bytes, independently verified SHA-256
+05e209fc3d9c8e68b26741c7936eaa1000b763bba06f825cc49a953153e0ed67.
+Only compact receipts were retained on Intel and committed; no duplicate ZIP,
+private runtime logs, HTTP bodies/cookies, credentials, encryption material or
+compiled app directory was copied into public evidence. Earlier four failures
+remain unchanged, including unverified root-installer stop proof in attempt3.
+The earlier session mismatch's underlying cause remains unestablished; a later
+pass after explicit readiness does not rewrite its history.
+
+This closes the named pinned production-auth/document increment, not all G3/G6
+or the adoption goal. External model/upload/providers, actual external BotID
+rewrite execution, complete dependency/test-context closure, current-engine
+external installed replay and practical exclusive edit-loop measurements remain
+open. No registry publication, production/trust activation, deletion, Intel
+policy increase or unguarded native build occurred. The next work starts by
+reviewing existing Miniserve/Axum dependency and test-context receipts against
+the original plan before selecting the smallest complete remaining increment.

@@ -1,7 +1,11 @@
 # Pinned Next production authentication qualification
 
-Implementation is present; complete runtime acceptance is pending the focused
-CI result. Earlier failed receipts remain preserved.
+Scoped production authentication and private-document qualification passed in
+[run 40013461564](https://github.com/roryscot/patamaps/actions/runs/40013461564),
+source 00c9168. The [runtime receipt](../acceptance/project-adoption/g3-chatbot-production-auth-20261023/runtime.json)
+and [independent verification](../acceptance/project-adoption/g3-chatbot-production-auth-20261023/independent-verification.json)
+record the exact scope. Earlier failed receipts remain preserved. General
+adoption, production deployment and complete dependency closure are unaccepted.
 
 This is the focused qualification recipe for unchanged `vercel/chatbot` commit
 `c2f8235e1f3ea903ad8b7f61447c4f74164b5c58`, Next 16.2.10 and the exact locked
@@ -26,7 +30,8 @@ The new private database is stopped when the qualification ends.
 
 Browser bootstrap installs the locked Chromium revision without privileged OS
 package changes, then launches and closes that actual browser to check the
-runner's existing libraries. A missing dependency remains a failure; the four
+runner's existing libraries. Initial auth-page readiness waits for the real browser session request to
+finish within the existing twenty-second deadline. A missing dependency remains a failure; the four
 upstream browser tests and all action/permission controls are still required.
 Browser downloads retain their original ten-minute deadline. Playwright
 [documents browser and system dependency installation separately](https://playwright.dev/docs/browsers#install-system-dependencies).
