@@ -489,7 +489,7 @@ Review of pinned Next v16.2.10 build/index.ts and build-prefetch-segment-data-ro
 
 [Focused run 39910031175](https://github.com/roryscot/patamaps/actions/runs/39910031175), source e95e1febb3e3f366bf943200dc0d9cf02dfdfa59, passed formatting, all 59 workspace library tests, strict all-target workspace Clippy, four Git acquisition controls and the genuine unchanged-owner production build/manifest qualification. The [receipt](../acceptance/project-adoption/g3-chatbot-source-20261023/receipt.json) and [CI provenance](../acceptance/project-adoption/g3-chatbot-source-20261023/ci.json) bind exact source/engine identities. Independent intake compared all route fields, 20 module files/routes, rule category/index order and partial-prerender resume metadata against the generated manifests: 17 static routes, 3 dynamic routes and two actual BotID-generated rewrite declarations. Canonical entity arrays sort by physical ID; rule evaluation order is retained explicitly through category/index, not output array position.
 
-Artifact 12482607087 is 332,121 bytes, independently verified SHA-256 d10d383c234639651361af338b462c3e68c8d56de89f118edba12b9a94bb344b. Only compact receipts/native observations were retained; no local archive duplicate. Secret references stayed labels. The owner's migration skip is explicit; no database/authentication/actual action/external rewrite execution or production acceptance is claimed. Current workspace engine is sha256:9d9c1f240d57f8bd2acbc281fec158990c52f701b093472444bb0fa46ca0e804. Full current capability regression [39910538890](https://github.com/roryscot/patamaps/actions/runs/39910538890) is pending.
+Artifact 12482607087 is 332,121 bytes, independently verified SHA-256 d10d383c234639651361af338b462c3e68c8d56de89f118edba12b9a94bb344b. Only compact receipts/native observations were retained; no local archive duplicate. Secret references stayed labels. The owner's migration skip is explicit; no database/authentication/actual action/external rewrite execution or production acceptance is claimed. Current workspace engine is sha256:9d9c1f240d57f8bd2acbc281fec158990c52f701b093472444bb0fa46ca0e804. Full current capability regression [39910538890](https://github.com/roryscot/patamaps/actions/runs/39910538890) passed all six required jobs; the [terminal API summary](../acceptance/project-adoption/g3-chatbot-source-20261023/regression.json) records exact source and individual conclusions. No large artifacts were downloaded or described as locally digest-verified.
 
 The Intel-native 128MiB guard preflight refused before executing tests or rebuilding the CLI: retained-output headroom was insufficient under the unchanged 100GB cap. Physical free space was about 36.6GB; that is a different constraint. [Reservation c8cfbce0-150e-4a96-a1c8-53795ea0d1de finished and released normally](../acceptance/project-adoption/g3-chatbot-source-20261023/intel-preflight-refusal.json). No stale recovery, policy change or deletion occurred. Linux verification passed; Darwin verification remains unrun, and the prior native compiler remains intact.
 
@@ -542,3 +542,11 @@ source/engine identities. Implemented controls remain pending until the focused
 lane passes. Preserve all failures. These checks do not establish broader
 backend/model permissions, complete dependency closure, performance, production
 authentication, deployment or all G0–G6 completion.
+
+
+Implementation checkpoint: the trusted-owner PostgreSQL/Next launcher and
+production browser/action controls are prepared. Python AST, Node syntax and
+`git diff --check` passed on Intel; no native compilation was admitted below its
+interactive memory reserve. The focused lane retains all existing manifest,
+workspace-regression and strict Clippy gates. Actual runtime, credential
+barriers and shutdown checks remain pending execution, not accepted results.

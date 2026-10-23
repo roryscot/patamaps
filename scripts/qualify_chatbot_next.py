@@ -18,7 +18,7 @@ def write(path,value):path.write_text(json.dumps(value,indent=2)+"\n")
 def main():
  p=argparse.ArgumentParser(description=__doc__)
  for n in ["work","evidence","cli"]:p.add_argument("--"+n,type=Path,required=True)
- p.add_argument("--build-cli",action="store_true");a=p.parse_args()
+ p.add_argument("--build-cli",action="store_true");p.add_argument("--runtime",action="store_true");a=p.parse_args()
  assert platform.system()=="Linux" and platform.machine()=="x86_64" and os.environ.get("GITHUB_ACTIONS")=="true","Use focused Linux CI; native Intel allocation requires its existing guard"
  work,out,cli=a.work.resolve(),a.evidence.resolve(),a.cli.resolve()
  work.mkdir(parents=True,exist_ok=False);out.mkdir(parents=True,exist_ok=False);(out/"logs").mkdir()
@@ -103,10 +103,16 @@ def main():
   request["requestDigest"]=json.loads(run("manifest-request-digest",[cli,"json","digest"],data=json.dumps(request).encode()))
   observed=json.loads(run("native-compiled-next-observations",[cli,"discover-native"],data=json.dumps(request).encode(),cwd=observations));write(out/"native-observations.json",observed)
   assert observed["requestDigest"]==request["requestDigest"] and observed["shard"]["metadata"]["observation"]["runtimeEstablished"] is False
+  if a.runtime:
+   run("owner-pinned-browser-install",[pnpm,"exec","playwright","install","--with-deps","chromium"],cwd=staged,timeout=600)
+   from qualify_chatbot_runtime import qualify
+   runtime=qualify(staged,work,out,pnpm,env,capacity)
+   assert runtime["status"]=="passed" and runtime["ownedProcessGroupsStopped"]
+   r.update(runtimeEstablished=True,authenticationAccepted=True,ownerRuntimeMigrationExecuted=True,runtimeBoundary="trusted owner; new isolated CI PostgreSQL and HTTPS loopback; no production secrets")
   audit("source-exclusion-final-audit");assert source_unchanged(owner) and source_unchanged(staged)
-  r.update(status="passed-pinned-chatbot-source-build-observations",frameworkVersion=version,sourceContextDigest=capture["digest"],textSourceDigest=source["digest"],sourceTextFiles=len(texts),selectedSourceBytesAndModesUnchanged=True,sourceExclusionAudited=True,dependencyLifecycleScriptsExecuted=False,nativeCompiledObservation=True,ownerTestMode="CI_PLAYWRIGHT=1 selects the owner's model-test mode; no model behavior accepted")
+  r.update(status="passed-pinned-chatbot-source-build-auth" if a.runtime else "passed-pinned-chatbot-source-build-observations",frameworkVersion=version,sourceContextDigest=capture["digest"],textSourceDigest=source["digest"],sourceTextFiles=len(texts),selectedSourceBytesAndModesUnchanged=True,sourceExclusionAudited=True,dependencyLifecycleScriptsExecuted=False,nativeCompiledObservation=True,ownerTestMode="CI_PLAYWRIGHT=1 selects the owner's model-test mode; no model behavior accepted")
  except BaseException as error:r.update(status="failed",error=str(error));save();raise
- save();print(json.dumps(dict(status=r["status"],frameworkBuildEstablished=True,runtimeEstablished=False)))
+ save();print(json.dumps(dict(status=r["status"],frameworkBuildEstablished=True,runtimeEstablished=r["runtimeEstablished"])))
 
 
 if __name__=="__main__":main()
