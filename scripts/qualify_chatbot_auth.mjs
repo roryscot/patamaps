@@ -88,7 +88,10 @@ async function context() {
 async function pageFor(ctx, path) {
   const page = await ctx.newPage();
   page.setDefaultTimeout(20000);
-  await page.goto(path, { waitUntil: 'domcontentloaded' });
+  const initialSession = page.waitForResponse(response => response.request().method() === 'GET' && new URL(response.url()).pathname === '/api/auth/session');
+  const [, ready] = await Promise.all([page.goto(path, { waitUntil: 'domcontentloaded' }), initialSession]);
+  check(ready.status() === 200 && await ready.finished() === null, 'initial browser session readiness');
+  report.initialSessionReadyPages = (report.initialSessionReadyPages ?? 0) + 1;
   return page;
 }
 async function submit(page, email, password, button, state) {
@@ -126,6 +129,11 @@ async function session(ctx) {
 }
 async function regular(ctx, email) {
   const value = await session(ctx);
+  report.lastSessionObservation = {
+    principalType: ['guest', 'regular'].includes(value.user?.type) ? value.user.type : 'absent-or-unknown',
+    expectedEmailMatches: value.user?.email === email,
+    principalIdPresent: typeof value.user?.id === 'string',
+  };
   check(value.user?.type === 'regular' && value.user.email === email && typeof value.user.id === 'string', 'real credential session');
   return value.user.id;
 }
@@ -229,7 +237,14 @@ async function main() {
     await guest(originContext);
     pass(stage);
     stage = 'same-request-valid-origin-positive-control';
+    const beforeSessionCookies = (await originContext.cookies()).filter(cookie => cookie.name.startsWith('__Secure-authjs.session-token')).map(cookie => cookie.value).join('|');
     const allowed = await originContext.request.post('/register', { headers: { ...headers, origin: config.origin }, data: payload, maxRedirects: 0 });
+    const afterSessionCookies = (await originContext.cookies()).filter(cookie => cookie.name.startsWith('__Secure-authjs.session-token')).map(cookie => cookie.value).join('|');
+    report.originPositiveCookieObservation = {
+      serverIssuedSessionCookie: (await allowed.headersArray()).some(header => header.name.toLowerCase() === 'set-cookie' && /^__Secure-authjs\.session-token(?:\.\d+)?=/.test(header.value)),
+      sessionCookieChanged: beforeSessionCookies !== afterSessionCookies,
+    };
+    save();
     check(allowed.status() === 200 && (await allowed.text()).includes('"success"'), 'same action payload must work at valid origin');
     check(await count(emailOrigin) === 1, 'valid-origin control persists user');
     await regular(originContext, emailOrigin);

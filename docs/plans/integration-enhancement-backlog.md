@@ -23,7 +23,7 @@ a passed fixture or metadata observation is not general support.
 
 ## Current selected work
 
-The current increment is [real Next production Server Action and private-resource qualification](../guides/next-production-auth-qualification.md) on the pinned unchanged Chatbot source. The source/build observations and full Rust-engine regressions passed. Runtime qualification has three preserved failed attempts; its request-bound HTTPS collector repair is pushed at 9e6eff5. [Focused run 40010250913](https://github.com/roryscot/patamaps/actions/runs/40010250913) owns the next result; inspect that exact run rather than dispatching a duplicate. No full runtime/authentication/permission acceptance is claimed at this checkpoint. The earlier Miniserve deployment/installed/image and native binary-context results remain in their scoped receipts. Complete dependency/test-context closure, broader framework boundaries, current-engine external installed replay and practical exclusive edit-loop measurements remain open. The Nango app stays owner-deferred; G0–G6 general adoption is not complete.
+The current increment is [real Next production Server Action and private-resource qualification](../guides/next-production-auth-qualification.md) on the pinned unchanged Chatbot source. The source/build observations and full Rust-engine regressions passed. Runtime has four preserved failed attempts. The latest bootstrap and live proxy collector passed; real registration/login, duplicate/wrong-password refusals and off-origin action refusal were observed. The paired valid-origin account was created, but its session assertion failed, so full runtime/authentication/permission acceptance remains open. Session-readiness and nonsecret diagnostics are being verified next. The earlier Miniserve results remain scoped. Complete dependency/test-context closure, broader framework boundaries, current-engine external installed replay and practical exclusive edit-loop measurements remain open. Nango stays owner-deferred; G0–G6 adoption is not complete.
 
 ## Earlier Next candidate checkpoint
 
@@ -640,3 +640,25 @@ upgrades and their unowned stop boundary in this qualification. All sixteen
 named groups and full document-version immutability from 6b498ea remain required.
 The next focused run must verify both that repair and the still-unverified
 live proxy collector. Do not treat a bootstrap-only failure as a product defect.
+
+
+Fourth attempt [40012538740](https://github.com/roryscot/patamaps/actions/runs/40012538740),
+source e7b3293, passed the unprivileged actual browser-launch preflight, source
+build/observations and nine named runtime groups through off-origin refusal.
+The [verified partial result](../acceptance/project-adoption/g3-chatbot-source-20261023/auth-fourth-attempt.json)
+then failed real-credential-session verification in the matched valid-origin
+control, after its action returned success and the new account count was one.
+It does not identify which session property differed. Full original source
+bytes/modes stayed unchanged; all owned processes/listeners stopped.
+
+The next diagnostic increment explicitly awaits each auth page's initial
+browser GET /api/auth/session completion within the existing twenty-second
+page deadline. This avoids treating DOMContentLoaded as session readiness.
+It also records only a whitelisted principal type, expected-email/id-presence
+booleans, whether the valid-origin response issued a session cookie and whether
+the context's session-cookie bytes changed. No cookie/header values, principal
+identifiers, passwords or raw responses are published. The same payload and
+paired-origin criteria remain; no login is substituted for the required
+valid-origin session. This is a hypothesis-driven readiness repair, not an
+established diagnosis of the historical session mismatch. All sixteen named
+controls and complete document-version preservation remain mandatory.
