@@ -59,6 +59,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     for name in ["work", "evidence"]:
         parser.add_argument("--" + name, type=Path, required=True)
+    parser.add_argument("--application-image", action="store_true")
     args = parser.parse_args()
     assert platform.system() == "Linux" and platform.machine() == "x86_64" and os.environ.get("GITHUB_ACTIONS") == "true", "Use focused Linux CI; Intel native work requires its existing guard"
     work, out = args.work.resolve(), args.evidence.resolve()
@@ -124,7 +125,7 @@ def main():
         producer.mkdir()
         with zipfile.ZipFile(archive) as zipped:
             assert len(zipped.namelist()) == len(set(zipped.namelist()))
-            for name, destination, limit in [("receipt.json", producer / "receipt.json", 2000000), ("artifacts/patamaps", producer / "patamaps", 40000000), ("artifacts/selected-state.tar.gz", producer / "selected-state.tar.gz", 10000000)]:
+            for name, destination, limit in [("receipt.json", producer / "receipt.json", 2000000), ("artifacts/MINISERVE-LICENSE", producer / "MINISERVE-LICENSE", 100000), ("artifacts/patamaps", producer / "patamaps", 40000000), ("artifacts/selected-state.tar.gz", producer / "selected-state.tar.gz", 10000000)]:
                 assert zipped.getinfo(name).file_size <= limit
                 destination.write_bytes(zipped.read(name))
         frozen = json.loads((producer / "receipt.json").read_bytes())
@@ -193,6 +194,10 @@ def main():
         backup.rename(artifact)
         restored = json.loads(run("restored-selection", [source_cli, "project-build-verify", state]))
         assert restored["status"] == "verified-selected-build-bindings"
+        if args.application_image:
+            from deployment_miniserve_image import verify
+            record["applicationImage"] = verify(source, work, out, candidate, native_cli, work / "producer.retained-offline/MINISERVE-LICENSE", run)
+            record["actualBrowser"] = True
         for compiler in [native_cli, source_cli]:
             retained = compiler.with_name("patamaps.unavailable-after-verification")
             compiler.rename(retained)

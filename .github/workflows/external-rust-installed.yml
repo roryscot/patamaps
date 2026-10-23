@@ -1,6 +1,10 @@
 name: Installed external Rust qualification
 on:
   workflow_call:
+    inputs:
+      application-image:
+        type: boolean
+        default: false
 permissions:
   contents: read
   actions: read
@@ -13,6 +17,10 @@ jobs:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
           persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        if: inputs.application-image
+        with:
+          node-version: '22.23.3'
       - name: Install pinned source-package toolchain
         run: rustup toolchain install 1.99.0 --profile minimal
       - name: Check archive extraction controls
@@ -26,6 +34,10 @@ jobs:
           python3 -B scripts/qualify_installed_miniserve.py
           --work "$RUNNER_TEMP/patamaps-installed-miniserve-${{ github.run_id }}-${{ github.run_attempt }}"
           --evidence ci-evidence/installed-miniserve
+          ${{ inputs.application-image && '--application-image' || '' }}
+      - name: Confirm owned application containers stopped
+        if: always() && inputs.application-image
+        run: python3 -B scripts/deployment_miniserve_image.py --stop-owned ci-evidence/installed-miniserve/image-owned.json
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         if: always()
         with:

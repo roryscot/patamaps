@@ -16,6 +16,7 @@ on:
           - next-preparation
           - external-rust
           - external-rust-installed
+          - external-rust-image
 
 permissions:
   contents: read
@@ -366,3 +367,13 @@ jobs:
       contents: read
       actions: read
     uses: ./.github/workflows/external-rust-installed.yml
+
+  external-rust-image:
+    if: github.event_name == 'workflow_dispatch' && inputs.qualification == 'external-rust-image'
+    name: External Rust application image and browser
+    permissions:
+      contents: read
+      actions: read
+    uses: ./.github/workflows/external-rust-installed.yml
+    with:
+      application-image: true
