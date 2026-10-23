@@ -104,7 +104,10 @@ def main():
   observed=json.loads(run("native-compiled-next-observations",[cli,"discover-native"],data=json.dumps(request).encode(),cwd=observations));write(out/"native-observations.json",observed)
   assert observed["requestDigest"]==request["requestDigest"] and observed["shard"]["metadata"]["observation"]["runtimeEstablished"] is False
   if a.runtime:
-   run("owner-pinned-browser-install",[pnpm,"exec","playwright","install","--with-deps","chromium"],cwd=staged,timeout=600)
+   run("owner-pinned-browser-install",[pnpm,"exec","playwright","install","chromium"],cwd=staged,timeout=600)
+   browser_bootstrap=json.loads(run("owner-browser-runtime-dependency-preflight",["node","-e",'const {chromium}=require("@playwright/test"); (async()=>{let browser;try{browser=await chromium.launch({headless:true});console.log(JSON.stringify({browserLaunchSucceeded:true,browserVersion:browser.version()}));}finally{if(browser)await browser.close();}})().catch(()=>{console.error("Unprivileged browser launch preflight failed");process.exitCode=1;});'],cwd=staged,timeout=45))
+   assert browser_bootstrap["browserLaunchSucceeded"] is True
+   r["browserBootstrap"]=dict(**browser_bootstrap,systemPackageInstallationRequested=False)
    from qualify_chatbot_runtime import qualify
    runtime=qualify(staged,work,out,pnpm,env,capacity)
    assert runtime["status"]=="passed" and runtime["ownedProcessGroupsStopped"]

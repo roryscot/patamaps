@@ -24,6 +24,13 @@ small owned loopback proxy. It does not replace the production cookie policy,
 patch upstream source, use the development server, or connect to a user database.
 The new private database is stopped when the qualification ends.
 
+Browser bootstrap installs the locked Chromium revision without privileged OS
+package changes, then launches and closes that actual browser to check the
+runner's existing libraries. A missing dependency remains a failure; the four
+upstream browser tests and all action/permission controls are still required.
+Browser downloads retain their original ten-minute deadline. Playwright
+[documents browser and system dependency installation separately](https://playwright.dev/docs/browsers#install-system-dependencies).
+
 The owner boundary is explicit: after Patamaps captures have finished, the
 launcher generates disposable database/signing material and a local TLS key.
 These values are passed directly to the trusted owner process environment.

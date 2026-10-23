@@ -23,7 +23,7 @@ a passed fixture or metadata observation is not general support.
 
 ## Current selected work
 
-The current increment is [real Next production Server Action and private-resource qualification](../guides/next-production-auth-qualification.md) on the pinned unchanged Chatbot source. The source/build observations and full Rust-engine regressions passed. Runtime qualification has two preserved failed attempts; its request-bound HTTPS collector repair is pushed at 9e6eff5. [Focused run 40010250913](https://github.com/roryscot/patamaps/actions/runs/40010250913) owns the next result; inspect that exact run rather than dispatching a duplicate. No full runtime/authentication/permission acceptance is claimed at this checkpoint. The earlier Miniserve deployment/installed/image and native binary-context results remain in their scoped receipts. Complete dependency/test-context closure, broader framework boundaries, current-engine external installed replay and practical exclusive edit-loop measurements remain open. The Nango app stays owner-deferred; G0–G6 general adoption is not complete.
+The current increment is [real Next production Server Action and private-resource qualification](../guides/next-production-auth-qualification.md) on the pinned unchanged Chatbot source. The source/build observations and full Rust-engine regressions passed. Runtime qualification has three preserved failed attempts; its request-bound HTTPS collector repair is pushed at 9e6eff5. [Focused run 40010250913](https://github.com/roryscot/patamaps/actions/runs/40010250913) owns the next result; inspect that exact run rather than dispatching a duplicate. No full runtime/authentication/permission acceptance is claimed at this checkpoint. The earlier Miniserve deployment/installed/image and native binary-context results remain in their scoped receipts. Complete dependency/test-context closure, broader framework boundaries, current-engine external installed replay and practical exclusive edit-loop measurements remain open. The Nango app stays owner-deferred; G0–G6 general adoption is not complete.
 
 ## Earlier Next candidate checkpoint
 
@@ -618,3 +618,25 @@ membership and all values, rather than checking only the first content field.
 This strengthens the already declared unchanged-owner-content requirement.
 The running 40010250913 checkout is unchanged; do not restart it. These newer
 verifier edits require their own focused verification after that run terminates.
+
+
+Third attempt [40010250913](https://github.com/roryscot/patamaps/actions/runs/40010250913)
+terminated at the unchanged 600-second browser-install deadline, before creating
+the runtime launcher, test database or browser-auth receipt. The owner production
+build/manifests and selected-source immutability passed. The
+[verified failure](../acceptance/project-adoption/g3-chatbot-source-20261023/auth-third-attempt.json)
+shows apt stalled downloading fonts-wqy-zenhei from Ubuntu's mirror while trying
+to upgrade/install system packages. Its guardian then reported PermissionError
+signalling a privileged process group. The job terminated, but complete stop
+proof for that root installer is unavailable; do not claim it. No authentication,
+permission or proxy-collector result follows from this attempt.
+
+Bootstrap repair: install the exact locked Chromium without --with-deps, then
+require an actual unprivileged launch/close preflight against existing runner
+libraries. Missing dependencies still fail; no browser, native regression,
+authentication or permission check is removed. The 600-second download deadline,
+4 GB growth and 500 MB reserve stay unchanged. This avoids privileged package
+upgrades and their unowned stop boundary in this qualification. All sixteen
+named groups and full document-version immutability from 6b498ea remain required.
+The next focused run must verify both that repair and the still-unverified
+live proxy collector. Do not treat a bootstrap-only failure as a product defect.
