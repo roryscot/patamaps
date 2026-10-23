@@ -569,3 +569,27 @@ names, numeric HTTP status/database counts and a whitelisted error class.
 Credentials, cookies, raw responses and traces remain private. All existing
 acceptance controls remain. Failure paths now also attempt selected-source
 byte/mode verification without replacing the original failed result.
+
+
+Second attempt [40009191233](https://github.com/roryscot/patamaps/actions/runs/40009191233),
+source 0dedd23, failed before extracting the successful-registration action
+state: the diagnostic report has HTTP200/RSC but no observedStates or failed
+assertion, and an Error class. The collector's control flow places the failure
+between response receipt and state extraction, consistent with browser response
+body retrieval failing. The original exception text was private and is not
+available; its underlying browser/network cause is not established. This does
+not demonstrate an application refusal. Four unchanged upstream page tests and
+invalid registration passed; all owned processes/listeners stopped, and the
+post-failure selected-source byte/mode checks passed. The
+[second digest-verified receipts](../acceptance/project-adoption/g3-chatbot-source-20261023/auth-second-attempt.json)
+preserve the failed outcome.
+
+Repair only the collector: tee a bounded live action response in the existing
+owned HTTPS proxy, correlate it to the exact request payload digest, and retain
+only whitelisted state names/status. Request action/body/auth/origin headers
+and returned status/body are not rewritten; request Accept-Encoding is set to
+identity for this observation. No action is retried or synthesized. Browser
+navigation no longer has to retain its response body for later collection.
+Keep the same expected state, database effects, session, origin and permission
+criteria, 1MiB response cap and twenty-second observation deadline. The focused
+repeat remains pending; no new runtime acceptance follows from this repair alone.

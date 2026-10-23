@@ -16,6 +16,8 @@ const report = {
   status: 'running', controls: [], upstreamPageTests: 0,
   credentialsCaptured: false, rawHttpUploaded: false, traceEnabled: false,
   origin: 'owned HTTPS loopback', productionServer: true,
+  actionResponseCollector: 'request-body-digest-bound HTTPS proxy; identity encoding; no body rewrite',
+  actionResponseMaximumBytes: 1048576,
 };
 let stage = 'https-proxy';
 const save = () => writeFileSync(config.receipt, JSON.stringify(report, null, 2) + '\n');
@@ -25,6 +27,7 @@ const check = (value, label) => {
   assert.ok(value, label);
 };
 const contexts = [];
+const actionResponses = new Map();
 let browser;
 const sql = postgres(process.env.POSTGRES_URL, { max: 2, connect_timeout: 5 });
 const proxy = createHttpsServer({
@@ -32,15 +35,44 @@ const proxy = createHttpsServer({
   cert: readFileSync(join(config.private, 'cert.pem')),
 }, (req, res) => {
   const origin = new URL(config.origin);
+  const action = req.method === 'POST' && req.headers['next-action'];
+  const requestHash = action ? createHash('sha256') : null;
+  let requestDigest;
   const forward = httpRequest({ host: '127.0.0.1', port: config.nextPort, path: req.url,
     method: req.method, headers: { ...req.headers, host: origin.host,
+      ...(action ? { 'accept-encoding': 'identity' } : {}),
       'x-forwarded-host': origin.host, 'x-forwarded-proto': 'https' } }, upstream => {
+    if (action) {
+      let length = 0;
+      const chunks = [];
+      upstream.on('data', chunk => {
+        length += chunk.length;
+        if (length > 1048576) { upstream.destroy(); res.destroy(); return; }
+        chunks.push(chunk);
+      });
+      upstream.on('end', () => {
+        if (!requestDigest || length > 1048576 || actionResponses.size >= 32 ||
+            (upstream.headers['content-encoding'] && upstream.headers['content-encoding'] !== 'identity')) return;
+        const body = Buffer.concat(chunks).toString('utf8');
+        actionResponses.set(action + ':' + requestDigest, {
+          httpStatus: upstream.statusCode,
+          responseIsRsc: (upstream.headers['content-type'] ?? '').includes('text/x-component'),
+          observedStates: ['idle', 'in_progress', 'success', 'failed', 'invalid_data', 'user_exists'].filter(value => body.includes('"' + value + '"')),
+        });
+      });
+    }
+    upstream.on('error', () => res.destroy());
     res.writeHead(upstream.statusCode, upstream.headers); upstream.pipe(res);
   });
   forward.on('error', () => { if (!res.headersSent) res.writeHead(502); res.end(); });
   req.on('error', () => forward.destroy());
   let bytes = 0;
-  req.on('data', data => { bytes += data.length; if (bytes > 1048576) { forward.destroy(); req.destroy(); } });
+  req.on('data', data => {
+    bytes += data.length;
+    if (requestHash) requestHash.update(data);
+    if (bytes > 1048576) { forward.destroy(); req.destroy(); }
+  });
+  req.on('end', () => { if (requestHash) requestDigest = requestHash.digest('hex'); });
   req.pipe(forward);
 });
 proxy.requestTimeout = 30000;
@@ -66,15 +98,20 @@ async function submit(page, email, password, button, state) {
   const awaited = page.waitForResponse(response => response.request().method() === 'POST' && Boolean(response.request().headers()['next-action']));
   await page.getByRole('button', { name: button, exact: true }).click();
   const response = await awaited;
-  report.lastAction = { httpStatus: response.status(),
-    responseIsRsc: (response.headers()['content-type'] ?? '').includes('text/x-component'), expectedState: state };
+  const request = response.request();
+  const requestBody = request.postDataBuffer();
+  check(requestBody !== null, 'real action request payload');
+  const key = request.headers()['next-action'] + ':' + createHash('sha256').update(requestBody).digest('hex');
+  const deadline = Date.now() + 20000;
+  while (!actionResponses.has(key) && Date.now() < deadline) await new Promise(resolve => setTimeout(resolve, 20));
+  const observed = actionResponses.get(key);
+  check(observed, 'request-bound proxy action response');
+  actionResponses.delete(key);
+  report.lastAction = { ...observed, expectedState: state };
   save();
-  check(response.status() === 200 && (response.headers()['content-type'] ?? '').includes('text/x-component'), 'real action response');
-  const body = await response.text();
-  report.lastAction.observedStates = ['idle', 'in_progress', 'success', 'failed', 'invalid_data', 'user_exists'].filter(value => body.includes('"' + value + '"'));
-  save();
-  check(body.includes('"' + state + '"'), 'expected action state');
-  return response.request();
+  check(response.status() === observed.httpStatus && observed.httpStatus === 200 && observed.responseIsRsc, 'real action response');
+  check(observed.observedStates.includes(state), 'expected action state');
+  return request;
 }
 async function count(email) {
   const rows = await sql`select count(*)::int as count from "User" where email=${email}`;
