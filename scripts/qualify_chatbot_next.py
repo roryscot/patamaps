@@ -73,6 +73,7 @@ def main():
   run("pnpm-install-tool",["npm","install","--prefix",work/"tools","pnpm@10.32.1","--ignore-scripts","--no-audit","--no-fund"])
   pnpm=work/"tools/node_modules/pnpm/bin/pnpm.cjs";assert pnpm.is_file()
   r["pnpmTool"]=dict(version=json.loads((work/"tools/node_modules/pnpm/package.json").read_bytes())["version"],entryDigest=sha(pnpm),toolLockDigest=sha(work/"tools/package-lock.json"))
+  assert r["pnpmTool"]["version"]=="10.32.1"
   run("owner-frozen-dependencies",[pnpm,"install","--frozen-lockfile","--ignore-scripts","--store-dir",work/"store"],cwd=staged)
   assert source_unchanged(staged) and source_unchanged(owner)
   texts=[]
@@ -82,10 +83,10 @@ def main():
    except UnicodeDecodeError:continue
    if "\0" in text:continue
    texts.append(e["path"])
-  cfg=dict(path=env["PATH"],home=env["HOME"],tmp=env["TMPDIR"],ci="true",nodeOptions=env["NODE_OPTIONS"],telemetry="1",ownerTestMode="1")
+  cfg=dict(path=env["PATH"],home=env["HOME"],tmp=env["TMPDIR"],ci="true",nodeOptions=env["NODE_OPTIONS"],telemetry="1",ownerTestMode="1",npmUser=env["npm_config_userconfig"],npmGlobal=env["npm_config_globalconfig"])
   profile=work/"profile.json";write(profile,dict(profile="patamaps-project-inputs-1",id="urn:qualification:chatbot:inputs",nonsecretInputs=True,inputs=texts,components=[dict(id="web",kind="next-app",root=".",entrypoints=["package.json","next.config.ts","app/layout.tsx","app/(auth)/actions.ts"])],nonsecretConfiguration=cfg,secretReferences=dict(AUTH_SECRET="OWNER_AUTH_SECRET",POSTGRES_URL="OWNER_POSTGRES_URL")))
   source=native("text-source-capture",["project-capture",profile,"--root",staged]);source_path=work/"capture.json";write(source_path,source)
-  command=work/"build.command.json";write(command,dict(profile="patamaps-project-command-1",workingDirectory=".",environmentReferences=dict(PATH="path",HOME="home",TMPDIR="tmp",CI="ci",NODE_OPTIONS="nodeOptions",NEXT_TELEMETRY_DISABLED="telemetry",CI_PLAYWRIGHT="ownerTestMode"),invocation=dict(executable=str(pnpm),arguments=["build"],codeInputs=[],bounds=dict(maximumElapsedMs=1200000,maximumStdoutBytes=16777216,maximumStderrBytes=65536))))
+  command=work/"build.command.json";write(command,dict(profile="patamaps-project-command-1",workingDirectory=".",environmentReferences=dict(PATH="path",HOME="home",TMPDIR="tmp",CI="ci",NODE_OPTIONS="nodeOptions",NEXT_TELEMETRY_DISABLED="telemetry",CI_PLAYWRIGHT="ownerTestMode",NPM_CONFIG_USERCONFIG="npmUser",NPM_CONFIG_GLOBALCONFIG="npmGlobal"),invocation=dict(executable=str(pnpm),arguments=["build"],codeInputs=[],bounds=dict(maximumElapsedMs=1200000,maximumStdoutBytes=1048576,maximumStderrBytes=65536))))
   result=native("owner-production-build",["project-exec",source_path,command,"--root",staged],timeout=1250)
   assert result["status"]=="completed-project-command" and result["programSucceeded"] and result["selectedInputsUnchanged"]
   r["frameworkBuildEstablished"]=True;r["ownerMigrationSkippedBecauseNoDatabaseConfigured"]="POSTGRES_URL not defined, skipping migrations" in result["stdout"]["text"]
@@ -103,7 +104,7 @@ def main():
   observed=json.loads(run("native-compiled-next-observations",[cli,"discover-native"],data=json.dumps(request).encode(),cwd=observations));write(out/"native-observations.json",observed)
   assert observed["requestDigest"]==request["requestDigest"] and observed["shard"]["metadata"]["observation"]["runtimeEstablished"] is False
   audit("source-exclusion-final-audit");assert source_unchanged(owner) and source_unchanged(staged)
-  r.update(status="passed-pinned-chatbot-source-build-observations",frameworkVersion=version,sourceContextDigest=capture["digest"],textSourceDigest=source["digest"],sourceTextFiles=len(texts),sourceAndStageUnchanged=True,sourceExclusionAudited=True,sourceLifecycleScriptsExecuted=False,nativeCompiledObservation=True,ownerTestMode="CI_PLAYWRIGHT=1 selects the owner's model-test mode; no model behavior accepted")
+  r.update(status="passed-pinned-chatbot-source-build-observations",frameworkVersion=version,sourceContextDigest=capture["digest"],textSourceDigest=source["digest"],sourceTextFiles=len(texts),selectedSourceBytesAndModesUnchanged=True,sourceExclusionAudited=True,dependencyLifecycleScriptsExecuted=False,nativeCompiledObservation=True,ownerTestMode="CI_PLAYWRIGHT=1 selects the owner's model-test mode; no model behavior accepted")
  except BaseException as error:r.update(status="failed",error=str(error));save();raise
  save();print(json.dumps(dict(status=r["status"],frameworkBuildEstablished=True,runtimeEstablished=False)))
 
