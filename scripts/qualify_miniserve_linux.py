@@ -13,6 +13,8 @@ def select_captured_source(names,blobs):
  selected=[n for n in names if n not in external]
  if any(Path(n).name==".env" or Path(n).name.startswith(".env.") or Path(n).suffix in [".pem",".key",".p12"] for n in selected):raise ValueError("FORBIDDEN_SOURCE_INPUT")
  return selected
+def build_source_profile(inputs,configuration):
+ return dict(profile="patamaps-project-inputs-1",id="urn:qualification:miniserve:build-source",nonsecretInputs=True,inputs=inputs,components=[dict(id="application",kind="cargo-package",root=".",entrypoints=["Cargo.toml"])],nonsecretConfiguration=configuration,secretReferences={})
 def sha(p):return hashlib.sha256(Path(p).read_bytes()).hexdigest()
 def write(p,v):p.write_text(json.dumps(v,indent=2)+"\n")
 def main():
@@ -71,14 +73,14 @@ def main():
   selected=[n for n in names if (n.endswith(".rs") or n.endswith(".toml") or n in ["Cargo.lock","LICENSE"]) and not (staged/n).is_symlink()]
   cfg=dict(path=str(cargo.parent)+":/usr/bin:/bin",cargoHome=env.get("CARGO_HOME",str(Path.home()/".cargo")),rustc=str(rustc),home=str(work/"home"),tmp=str(work/"tmp"),jobs="2",offline="true",debug="0",incremental="0",threads="1",targetDir=str(staged/"target"))
   for n in ["home","tmp"]:(work/n).mkdir()
-  profilepath=work/"source-profile.json";write(profilepath,dict(profile="patamaps-project-inputs-1",id="urn:qualification:miniserve:build-source",nonsecretInputs=True,inputs=selected,components=[dict(id="application",kind="rust",root=".",entrypoints=["Cargo.toml"])],nonsecretConfiguration=cfg,secretReferences={}))
+  profilepath=work/"source-profile.json";write(profilepath,build_source_profile(selected,cfg))
   capture=native("source-capture",["project-capture",profilepath,"--root",staged]);capturepath=work/"source-capture.json";write(capturepath,capture)
   refs=dict(PATH="path",CARGO_HOME="cargoHome",RUSTC="rustc",HOME="home",TMPDIR="tmp",CARGO_BUILD_JOBS="jobs",CARGO_NET_OFFLINE="offline",CARGO_PROFILE_DEV_DEBUG="debug",CARGO_PROFILE_TEST_DEBUG="debug",CARGO_INCREMENTAL="incremental",RUST_TEST_THREADS="threads",CARGO_TARGET_DIR="targetDir")
-  for label,args in [("application-build",["build","--release","--locked","--offline","--bin","miniserve"]),("application-owner-tests",["test","--release","--locked","--offline"])]:
+  for label,args in [("application-build",["build","--release","--locked","--offline","--target","x86_64-unknown-linux-gnu","--bin","miniserve"]),("application-owner-tests",["test","--release","--locked","--offline","--target","x86_64-unknown-linux-gnu"])]:
    cp=work/(label+".command.json");write(cp,command(cargo,args,refs,maximum=1200000))
    result=native(label,["project-exec",capturepath,cp,"--root",staged if label=="application-build" else source]);assert result["status"]=="completed-project-command" and result["programSucceeded"] and result["selectedInputsUnchanged"]
    if label=="application-build":
-    binary=work/"source-built-miniserve";shutil.copy2(staged/"target/release/miniserve",binary)
+    binary=work/"source-built-miniserve";shutil.copy2(staged/"target/x86_64-unknown-linux-gnu/release/miniserve",binary)
     r["applicationBinary"]=dict(sha256=sha(binary),bytes=binary.stat().st_size,target="x86_64-unknown-linux-gnu",producer="captured/staged source build before owner tests")
     shutil.copy2(binary,out/"artifacts/miniserve");shutil.copyfile(source/"LICENSE",out/"artifacts/MINISERVE-LICENSE")
    if label.endswith("tests"):

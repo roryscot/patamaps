@@ -315,7 +315,7 @@ passed under a fresh exclusive 16 MiB Intel guard. It validates the privacy
 selection correction, not the application source/runtime pipeline; one focused
 CI retry is required. The prior failure remains authoritative for its run.
 
-Current continuation handle: [focused retry 39882477708](https://github.com/roryscot/patamaps/actions/runs/39882477708)
+Previous continuation handle (subsequently failed): [focused retry 39882477708](https://github.com/roryscot/patamaps/actions/runs/39882477708)
 at source 303bc19728d37b5ea29cfa98bae17a4cce4a99b2, job 120182858099.
 The job was confirmed live in compiler/source/test/HTTP qualification after its
 configuration controls passed. Inspect the [observation](../acceptance/project-adoption/g5-miniserve-config-preflight-20261022/retry-39882477708.json)
@@ -323,3 +323,21 @@ and poll this exact handle; do not restart on an observation timeout. On termina
 success inspect commands/default-test totals, refusal/pointer/runtime assertions
 and artifact digests before any acceptance, then do the existing bounded Intel
 managed replay. Package-installer, managed runtime and performance remain open.
+
+Run 39882477708 then passed privacy review/context capture/staging and failed
+when the qualifier used unsupported component kind rust. This is a qualifier
+error, not a demonstrated product defect; its [verified artifact and compiler](../acceptance/project-adoption/g5-miniserve-config-preflight-20261022/failure-39882477708.json) remain preserved.
+A shared source-profile constructor now uses the declared cargo-package kind.
+The [real-source Intel intake](../acceptance/project-adoption/g5-miniserve-config-preflight-20261022/native-source-intake.json)
+passes 60-file exact staging, 39-text-input native capture/verification and all
+fifteen config/privacy controls under a completed exclusive 64 MiB guard.
+Cargo build/tests now explicitly select x86_64-unknown-linux-gnu. No application
+build or runtime acceptance follows from the intake.
+
+After committing this correction, dispatch only qualification=external-rust.
+The latest exact handle will be saved in
+.tools/project-adoption/miniserve-deployment-20261022/CURRENT_RUN.json; inspect it
+and revalidate that exact run before waiting or retrying. Preserve both earlier
+failures. Do not rerun unrelated suites or treat this source intake as G5/G6
+completion. On success inspect actual owner-test/runtime/refusal results before
+bounded Intel managed replay and installed-package work.
