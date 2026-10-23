@@ -42,5 +42,28 @@
     "newSurvivingContainers": []
   },
   "linuxEngineEqual": true,
-  "performanceAcceptance": false
+  "performanceAcceptance": false,
+  "verificationCommands": [
+    [
+      "cargo",
+      "test",
+      "--locked",
+      "-p",
+      "patamaps-workspace",
+      "--lib"
+    ],
+    [
+      "cargo",
+      "build",
+      "--locked",
+      "-p",
+      "patamaps-cli",
+      "--bin",
+      "patamaps"
+    ],
+    [
+      "/Volumes/dev_src_case_sensitive/projects/patamaps/target/debug/patamaps",
+      "engine"
+    ]
+  ]
 }

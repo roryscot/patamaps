@@ -81,7 +81,7 @@ digest chain are not an independently reproduced build or a signed attestation.
 
 The new selected-execution command is a checkout feature added after published
 patamaps-cli 0.1.0-alpha.1. For a first Rust integration, use the
-[Rust quickstart](rust-project-quickstart.md). Binary-bearing Docker context discovery, complete dependency closure and exclusive
+[Rust quickstart](rust-project-quickstart.md). Broader Docker context coverage, complete dependency closure and exclusive
 edit-loop measurements remain in the [enhancement backlog](../plans/integration-enhancement-backlog.md).
 
 ## Exact installed consumer
@@ -106,6 +106,6 @@ The image runs as 65532:65532 with readonly root, no source bind mount, one CPU,
 
 The same lane repeats fresh source/native installation, all nine archive controls and two Linux socket controls. The [receipt](../acceptance/project-adoption/g5-miniserve-image-browser-20261023/ci-receipt.json) freezes its 1,078-file installed source inventory; this is a later package than the 1,071-file installed-only milestone. The artifact retains compressed image and packages for 14 days; committed receipts and the [listing screenshot](../acceptance/project-adoption/g5-miniserve-image-browser-20261023/browser-listing.png) remain. Archive digests were checked at intake, but fresh image reload was not exercised.
 
-Native Docker discovery currently requires a complete UTF-8 context inventory. This actual image context contains the binary and is therefore verified through context/binary digests plus real BuildKit/image observations, without claiming complete native Docker source discovery. Binary-context support, complete dependency/test-context closure, broader framework boundaries and practical development performance remain open. No registry publication or production/trust activation occurred.
+At this historical image/browser snapshot, native Docker discovery required a complete UTF-8 context inventory. That run verified its binary-bearing context through digests and actual BuildKit/image observations. The newer [native snapshot-backed context](docker-context-snapshots.md) now qualifies opaque binary discovery, staging and actual image runtime under a new engine. Complete dependency/test-context closure, current external installed/browser replay, broader framework boundaries and practical development performance remain open. No registry publication or production/trust activation occurred.
 
 The current native binary-context feature changes the workspace engine. Historical installed/image receipts remain frozen to their tested compiler; use the rerun commands above for those jobs. The [snapshot-backed Docker guide](docker-context-snapshots.md) describes the new contract and its separately qualified current-compiler path.
