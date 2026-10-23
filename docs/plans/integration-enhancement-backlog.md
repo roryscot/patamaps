@@ -973,3 +973,21 @@ when terminal, then check all original release/default325-test/HTTP/refusal /
 registry-tamper/offline-replay gates before accepting this increment. No real
 registry execution acceptance is recorded yet. The current guide is
 [cargo-registry-contexts](../guides/cargo-registry-contexts.md).
+
+
+Fourth attempt40039233532 atd529dff passed the OS/startup gates and reached the
+release-binary handoff after139seconds. The captured recipe creates build.ready
+only after the unchanged release build returns zero; the executor read the
+produced executable digest. Binary export then failed: Docker cp returned an
+empty archive for the live container's tmpfs path. No host binary was accepted
+and the owner-test release marker was never written, so325-test acceptance remains
+unrun. Actual container stop and guardian cleanup confirmation both passed.
+[Verified records](../acceptance/project-adoption/g3-cargo-registry-context-20261023/registry-attempt-4/native-attempt-records.json)
+preserve that distinction; this is a qualification transfer failure.
+
+Use docker exec with the original system tar to stream the same single file from
+the running tmpfs, through the existing regular-member/name/byte/trailer/digest
+checks. Keep the32MiB executable/1MiB log bounds. No host writable mount, larger
+quota, skipped test or synthetic output. Record the observed producer digest
+before transfer to retain evidence if export fails. Expected no-route failure
+uses an if branch so the ERR trap does not mislabel it as a startup failure.

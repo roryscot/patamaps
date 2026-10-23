@@ -19,10 +19,11 @@ ln -s /registry/index /work/cargo-home/registry/index
  test "$(ls /sys/class/net)" = lo
  printf 'lo\n'
  test -x /usr/sbin/ip
- set +e
- /usr/sbin/ip route get 192.0.2.1 >/work/no-external-route 2>&1
- route_status=$?
- set -e
+ if /usr/sbin/ip route get 192.0.2.1 >/work/no-external-route 2>&1; then
+  route_status=0
+ else
+  route_status=$?
+ fi
  test "$route_status" = 2
  grep -q 'Network is unreachable' /work/no-external-route
  printf 'external-route-absent\n'

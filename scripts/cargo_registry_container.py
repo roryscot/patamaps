@@ -78,7 +78,7 @@ def main():
     def copy_file(remote, destination, maximum):
         # Read exactly one regular tar member under a byte bound; never extract
         # names, links, directories or a daemon-supplied archive to disk.
-        process = subprocess.Popen(['docker', 'cp', container+':'+remote, '-'],
+        process = subprocess.Popen(['docker', 'exec', container, '/usr/bin/tar', '-C', str(Path(remote).parent), '-cf', '-', Path(remote).name],
                                    stdout=subprocess.PIPE, stderr=subprocess.DEVNULL, start_new_session=True)
         try:
             with tarfile.open(fileobj=process.stdout, mode='r|') as archive:
@@ -166,6 +166,8 @@ def main():
                     assert int(length)<=1048576, 'Application log byte limit'
                 if '/work/build.ready=' in status and not copied:
                     expected = run(['docker', 'exec', container, '/usr/bin/sha256sum', '/work/export/miniserve']).split()[0]
+                    report['releaseBuildObserved'] = True
+                    report['producedBinaryDigest'] = 'sha256:'+expected
                     copy_file('/work/export/miniserve', bundle/'miniserve', MAXIMUM_BINARY)
                     (bundle/'miniserve').chmod(0o755)
                     assert sha(bundle/'miniserve') == 'sha256:'+expected
