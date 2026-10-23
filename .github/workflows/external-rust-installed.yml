@@ -1,0 +1,35 @@
+name: Installed external Rust qualification
+on:
+  workflow_call:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  installed-miniserve:
+    name: Fresh source/native installations with real Rust runtime
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - name: Install pinned source-package toolchain
+        run: rustup toolchain install 1.99.0 --profile minimal
+      - name: Check archive extraction controls
+        run: |
+          mkdir -p "$RUNNER_TEMP/exact-archive-controls"
+          PATAMAPS_TEST_RETAIN_ROOT="$RUNNER_TEMP/exact-archive-controls" python3 -B -m unittest discover -s scripts -p test_exact_archive_install.py
+      - name: Install exact packages and replay the frozen real Rust application
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: >-
+          python3 -B scripts/qualify_installed_miniserve.py
+          --work "$RUNNER_TEMP/patamaps-installed-miniserve-${{ github.run_id }}-${{ github.run_attempt }}"
+          --evidence ci-evidence/installed-miniserve
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        if: always()
+        with:
+          name: installed-miniserve-${{ github.sha }}
+          path: ci-evidence/installed-miniserve/
+          if-no-files-found: error
+          retention-days: 14

@@ -15,6 +15,7 @@ on:
           - all
           - next-preparation
           - external-rust
+          - external-rust-installed
 
 permissions:
   contents: read
@@ -357,3 +358,11 @@ jobs:
     if: github.event_name == 'workflow_dispatch' && inputs.qualification == 'external-rust'
     name: External Rust deployment
     uses: ./.github/workflows/external-rust-deployment.yml
+
+  external-rust-installed:
+    if: github.event_name == 'workflow_dispatch' && inputs.qualification == 'external-rust-installed'
+    name: Installed external Rust
+    permissions:
+      contents: read
+      actions: read
+    uses: ./.github/workflows/external-rust-installed.yml

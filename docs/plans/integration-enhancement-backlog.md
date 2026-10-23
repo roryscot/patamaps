@@ -373,3 +373,36 @@ edit-loop evidence. Reuse the frozen successful compiler/application/state rathe
 than repeating source builds without a new reason. Broader framework boundaries,
 full dependency closure and the owner-deferred Nango app remain unaccepted.
 No registry publication, production/trust activation, parallel rollout or deletion.
+
+## Selected increment: exact installed external Rust consumer (2026-10-23 UTC)
+
+Reuse successful Miniserve run 39884102308 and artifact 12472158570, SHA-256
+8fe5985620e6f584024499d5936ce2528d256a6145a35c94dd2f0aa866755d39.
+No new Miniserve compilation/default-test run is needed. Freeze and verify the
+producer's production-source Git tree/blob identities before pairing its native
+compiler with the current source payload. Keep the existing bounded package
+format and archive installer; share the existing installer instead of copying
+the fixture workflow. Refuse duplicate normalized members and retain all failures.
+
+Acceptance: exact source/native archive digests; complete installed inventory
+membership/bytes; fresh native archive prefix and fresh Cargo install from that
+source; both installed compiler engine identities; selected bindings and all
+eight real Miniserve controls from a driver inside installed source, outside
+examples; late-artifact refusal before effects; restored selected state; runtime
+with both test-installation compilers and the producer compiler unavailable.
+Verify source inventories again afterward. No graph compiler on request paths.
+
+First run eight frozen extraction controls and actual package-scope validation
+under a native-exclusive 32 MiB Intel guard. A --check-scope packaging option
+performs the existing bounded selection without creating unused archives or
+executing a binary. Existing size/evidence limits are unchanged.
+
+Use one focused manual CI lane with two Cargo jobs, per-command deadlines/log
+bounds and monitored 4 GB disk growth / 500 MB reserve. Only artifact download
+receives GitHub's scoped workflow credential; no credential enters capture or
+application commands. Do not repeat the unrelated six-job suite unless changes
+or failures require it. No registry/trust/production activation, deletion or
+parallel rollout. Application-image/browser, dependency closure and performance
+remain separate unaccepted requirements.
+
+Intel preflight completed under native guard 261c9e93-29d8-4a58-9bc5-7d74ea936c16 (exit 0): eight archive controls passed; actual bounded source selection passed with 1,071 files and 75,840,756 bytes including its inventory. No package archives or binary execution occurred in that preflight. All nine production Git identities match the frozen compiler's source. The focused `external-rust-installed` workflow is prepared; installed application acceptance remains pending its execution.

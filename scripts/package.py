@@ -5,6 +5,7 @@ import hashlib
 import io
 import json
 import subprocess
+import sys
 import tarfile
 from pathlib import Path
 from package_source import SourcePayload, include_linked_evidence, MAX_SOURCE_BYTES
@@ -16,6 +17,7 @@ parser.add_argument("--activator-binary", type=Path, help="Optional separately v
 parser.add_argument("--output", type=Path, required=True)
 parser.add_argument("--build-profile", choices=["release", "development", "unspecified"], default="unspecified")
 parser.add_argument("--acceptance-output", type=Path, help="Exact current receipt directory kept beside this package, outside its source payload")
+parser.add_argument("--check-scope", action="store_true", help="Validate bounded source/evidence selection without creating archives or executing a binary")
 args = parser.parse_args()
 binary = args.binary.resolve()
 output = args.output.resolve()
@@ -76,6 +78,9 @@ inventory = [{"path": name, "digest": digest(data), "bytes": len(data)} for name
 source["source-inventory.json"] = (json.dumps(inventory, indent=2) + "\n").encode()
 if sum(map(len, source.values())) > MAX_SOURCE_BYTES:
     raise ValueError("Source payload plus inventory exceeds the package budget")
+if args.check_scope:
+    print(json.dumps({"status":"validated-source-package-scope","sourceFiles":len(inventory),"sourceBytesIncludingInventory":sum(map(len,source.values())),"linkedEvidence":source_evidence,"archivesCreated":False,"binaryExecuted":False},indent=2))
+    sys.exit(0)
 engine = json.loads(subprocess.check_output([str(binary), "engine"]))
 rustc = str(Path.home() / ".cargo/bin/rustc")
 toolchain = subprocess.check_output([rustc, "-vV"], text=True)
