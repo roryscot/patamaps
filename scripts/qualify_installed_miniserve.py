@@ -35,6 +35,26 @@ def write(path, value):
     path.write_text(json.dumps(value, indent=2) + "\n")
 
 
+def install_selected_state(archive, destination):
+    """Import a closed, digest-verified state without changing bound directory modes."""
+    destination.mkdir(parents=True, exist_ok=False)
+    with tarfile.open(archive, "r:gz") as tar:
+        members = tar.getmembers()
+        assert len(members) < 2000 and sum(m.size for m in members) < 64000000
+        assert len({Path(m.name).parts for m in members}) == len(members)
+        for member in members:
+            p = Path(member.name)
+            assert not p.is_absolute() and ".." not in p.parts and p.parts[0] == "selected-state"
+            assert (member.isfile() or member.isdir()) and not member.mode & 0o7000
+        def preserve_modes(member, path):
+            # data_filter intentionally discards directory modes. Those modes
+            # are bound inputs here, so retain them after its path/type checks.
+            filtered = tarfile.data_filter(member, path)
+            return filtered.replace(mode=member.mode)
+        tar.extractall(destination, members=members, filter=preserve_modes)
+    return destination / "selected-state"
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     for name in ["work", "evidence"]:
@@ -115,16 +135,7 @@ def main():
         assert engine == frozen["relocatedCompiler"]["engine"]
         consumer = work / "consumer"
         consumer.mkdir()
-        with tarfile.open(producer / "selected-state.tar.gz", "r:gz") as tar:
-            members = tar.getmembers()
-            assert len(members) < 2000 and sum(m.size for m in members) < 64000000
-            assert len({Path(m.name).parts for m in members}) == len(members)
-            for member in members:
-                p = Path(member.name)
-                assert not p.is_absolute() and ".." not in p.parts and p.parts[0] == "selected-state"
-                assert (member.isfile() or member.isdir()) and not member.mode & 0o7000
-            tar.extractall(consumer, members=members, filter="data")
-        state = consumer / "selected-state"
+        state = install_selected_state(producer / "selected-state.tar.gz", consumer / "state-installation")
         pointer = state / "selected.json"
         assert sha(pointer) == POINTER_SHA
         selection = json.loads(pointer.read_bytes())

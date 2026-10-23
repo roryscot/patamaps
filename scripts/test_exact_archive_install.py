@@ -1,5 +1,6 @@
 """Archive install boundaries; preserve all generated cases."""
-import io,os,tarfile,tempfile,unittest
+import io,os,stat,tarfile,tempfile,unittest
+from qualify_installed_miniserve import install_selected_state
 from pathlib import Path
 from cross_stack_package import install_archive
 class InstallArchiveControls(unittest.TestCase):
@@ -29,6 +30,14 @@ class InstallArchiveControls(unittest.TestCase):
  def test_multiple_prefixes(self):self.reject([("first/a",b"a",None),("second/b",b"b",None)])
  def test_duplicate(self):self.reject([("package/a",b"a",None),("package/a",b"b",None)])
  def test_normalized_duplicate(self):self.reject([("package/a",b"a",None),("package/./a",b"b",None)])
+ def test_selected_state_directory_modes(self):
+  case=self.work/self._testMethodName;case.mkdir();archive=case/"state.tar.gz"
+  with tarfile.open(archive,"w:gz") as t:
+   d=tarfile.TarInfo("selected-state/context");d.type=tarfile.DIRTYPE;d.mode=0o700;t.addfile(d)
+   f=tarfile.TarInfo("selected-state/context/runtime");f.size=1;f.mode=0o755;t.addfile(f,io.BytesIO(b"x"))
+  installed=install_selected_state(archive,case/"import")
+  self.assertEqual(stat.S_IMODE((installed/"context").stat().st_mode),0o700)
+  self.assertEqual(stat.S_IMODE((installed/"context/runtime").stat().st_mode),0o755)
  def test_existing_destination(self):
   case,path=self.archive([("package/a",b"a",None)]);target=case/"installed";target.mkdir();(target/"sentinel").write_text("keep")
   with self.assertRaises(FileExistsError):install_archive(path,target,case)
