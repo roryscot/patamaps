@@ -692,6 +692,7 @@ mod unix {
     }
     fn load(
         snapshot: &Path,
+        file_limits: Option<(&str, usize, u64)>,
     ) -> Result<(File, ProjectContextDefinition, ProjectContextManifest), Error> {
         let root = project_fs::root(snapshot)?;
         let names = Dir::read_from(&root)
@@ -720,6 +721,32 @@ mod unix {
         let definition = read_json(&root, "selection.json")?;
         let manifest: ProjectContextManifest = read_json(&root, "manifest.json")?;
         validate(&definition, &manifest)?;
+        if let Some((digest, maximum_files, maximum_bytes)) = file_limits {
+            if manifest.digest != digest {
+                return Err(refuse());
+            }
+            let mut files = 0usize;
+            let mut bytes = 0u64;
+            for entry in manifest.entries.values() {
+                match entry {
+                    ProjectContextEntry::File { byte_length, .. } => {
+                        files += 1;
+                        bytes = bytes.checked_add(byte_length.get()).ok_or_else(refuse)?;
+                    }
+                    ProjectContextEntry::Directory { .. } => {}
+                    ProjectContextEntry::Symlink { .. } => return Err(refuse()),
+                }
+            }
+            if files > maximum_files
+                || manifest.entries.len() > maximum_files.saturating_mul(8)
+                || bytes > maximum_bytes
+            {
+                return Err(Error::refused(
+                    "PROJECT_CONTEXT_LIMIT",
+                    "Bounded file-context inventory exceeded before payload traversal",
+                ));
+            }
+        }
         let data = project_fs::directory(&root, "data")?;
         let expected = manifest
             .entries
@@ -1124,8 +1151,15 @@ mod unix {
             "fileBytes":total,"completeBuildContextEstablished":false,"activation":"not-performed","durability":"not-attested"}),
         )
     }
+    pub(crate) fn verified_file_context(
+        snapshot: &Path,
+        digest: &str,
+    ) -> Result<ProjectContextManifest, Error> {
+        let (_, _, manifest) = load(snapshot, Some((digest, 1024, 512 * 1024 * 1024)))?;
+        Ok(manifest)
+    }
     pub fn verify_project_context(snapshot: &Path) -> Result<serde_json::Value, Error> {
-        let (_, _, manifest) = load(snapshot)?;
+        let (_, _, manifest) = load(snapshot, None)?;
         Ok(
             serde_json::json!({"status":"verified-project-context","digest":manifest.digest,"entries":manifest.entries.len(),
             "originalSourceAccess":"not-required","toolExecution":"not-performed","activation":"not-performed"}),
@@ -1136,7 +1170,7 @@ mod unix {
         destination: &Path,
     ) -> Result<serde_json::Value, Error> {
         isolated_destination(snapshot, destination)?;
-        let (root, _, manifest) = load(snapshot)?;
+        let (root, _, manifest) = load(snapshot, None)?;
         let data = project_fs::directory(&root, "data")?;
         let stage = StageRoot::create(destination)?;
         copy_context_tree(&data, &stage.directory, &manifest.entries)?;
@@ -1158,7 +1192,7 @@ mod unix {
 pub use unix::{capture_project_context, stage_project_context, verify_project_context};
 #[cfg(unix)]
 pub(crate) use unix::{
-    prepared_context_binding, stage_build_context, verify_build_context,
+    prepared_context_binding, stage_build_context, verified_file_context, verify_build_context,
     verify_preparation_preimages, verify_prepared_build_context,
 };
 #[cfg(not(unix))]
@@ -1167,6 +1201,13 @@ pub fn capture_project_context(
     _: &std::path::Path,
     _: &ProjectContextDefinition,
 ) -> Result<serde_json::Value, Error> {
+    Err(refuse())
+}
+#[cfg(not(unix))]
+pub(crate) fn verified_file_context(
+    _: &std::path::Path,
+    _: &str,
+) -> Result<ProjectContextManifest, Error> {
     Err(refuse())
 }
 #[cfg(not(unix))]
@@ -1381,6 +1422,74 @@ mod tests {
             assert_eq!(
                 fs::read(staged.join(format!("sibling-{i}.bin"))).unwrap(),
                 [i as u8, 0, 255]
+            );
+        }
+    }
+    #[test]
+    fn bounded_file_context_refuses_inventory_before_payload_traversal() {
+        for case in ["bytes", "files", "entries"] {
+            let tmp = Temp::new();
+            let snapshot = tmp.0.join("bounded");
+            fs::create_dir(&snapshot).unwrap();
+            fs::create_dir(snapshot.join("data")).unwrap();
+            let count = if case == "files" { 1025 } else { 1 };
+            let mut entries = BTreeMap::new();
+            for index in 0..count {
+                entries.insert(
+                    format!("file-{index}"),
+                    ProjectContextEntry::File {
+                        digest: format!("sha256:{}", "0".repeat(64)),
+                        byte_length: SafeInteger::new(if case == "bytes" {
+                            512 * 1024 * 1024 + 1
+                        } else {
+                            1
+                        })
+                        .unwrap(),
+                        mode: SafeInteger::new(0o644).unwrap(),
+                    },
+                );
+            }
+            if case == "entries" {
+                for index in 0..8192 {
+                    entries.insert(
+                        format!("directory-{index}"),
+                        ProjectContextEntry::Directory {
+                            mode: SafeInteger::new(0o700).unwrap(),
+                        },
+                    );
+                }
+            }
+            let definition = ProjectContextDefinition {
+                profile: CONTEXT_PROFILE.into(),
+                id: "urn:test:bounded-docker-context".into(),
+                nonsecret_inputs: true,
+                paths: entries.keys().cloned().collect(),
+                symlinks: ContextSymlinks::Refuse,
+            };
+            let mut manifest = ProjectContextManifest {
+                profile: CONTEXT_RECORD.into(),
+                definition_digest: canonical_digest(&definition).unwrap(),
+                entries,
+                digest: String::new(),
+            };
+            manifest.digest = address(&manifest).unwrap();
+            validate(&definition, &manifest).unwrap();
+            fs::write(
+                snapshot.join("selection.json"),
+                canonical_bytes(&definition).unwrap(),
+            )
+            .unwrap();
+            fs::write(
+                snapshot.join("manifest.json"),
+                canonical_bytes(&manifest).unwrap(),
+            )
+            .unwrap();
+            // No file payload exists: the distinct limit error demonstrates
+            // refusal before any attempt to open or hash those payloads.
+            let error = verified_file_context(&snapshot, &manifest.digest).unwrap_err();
+            assert!(
+                error.to_string().contains("PROJECT_CONTEXT_LIMIT"),
+                "{case}: {error}"
             );
         }
     }

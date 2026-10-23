@@ -18,11 +18,148 @@ pub(crate) struct DockerConfig {
     pub dockerfile: String,
     pub context: String,
     pub context_files: Vec<String>,
+    #[serde(default)]
+    pub context_snapshot: Option<DockerContextSnapshot>,
     pub complete_context_snapshot: bool,
     pub target: String,
     pub platform: String,
     pub frontend: String,
     pub build_args: BTreeMap<String, String>,
+}
+
+#[derive(Deserialize)]
+#[serde(rename_all = "camelCase", deny_unknown_fields)]
+pub(crate) struct DockerContextSnapshot {
+    pub snapshot: String,
+    pub digest: String,
+}
+struct CapturedContext {
+    files: BTreeMap<String, crate::InputReceipt>,
+    snapshot: Option<Value>,
+}
+fn captured_context(
+    inputs: &BTreeMap<&str, &str>,
+    config: &DockerConfig,
+) -> Result<CapturedContext, Error> {
+    let mut files = BTreeMap::new();
+    let mut snapshot = None;
+    if let Some(reference) = &config.context_snapshot {
+        let valid_digest = reference.digest.strip_prefix("sha256:").is_some_and(|hex| {
+            hex.len() == 64
+                && hex
+                    .bytes()
+                    .all(|b| b.is_ascii_digit() || (b'a'..=b'f').contains(&b))
+        });
+        if !std::path::Path::new(&reference.snapshot).is_absolute()
+            || reference.snapshot.split('/').any(|part| part == "..")
+            || reference.snapshot.len() > 4096
+            || reference.snapshot.chars().any(char::is_control)
+            || !valid_digest
+        {
+            return Err(refused(
+                "NATIVE_DOCKER_CONTEXT_SNAPSHOT",
+                "Invalid sealed context reference",
+            ));
+        }
+        let manifest = crate::project_context::verified_file_context(
+            std::path::Path::new(&reference.snapshot),
+            &reference.digest,
+        )?;
+        let mut file_entries = BTreeMap::new();
+        let mut total = 0u64;
+        for (path, entry) in &manifest.entries {
+            match entry {
+                crate::ProjectContextEntry::File {
+                    digest,
+                    byte_length,
+                    ..
+                } => {
+                    if within(&config.context, path).is_none() {
+                        return Err(refused(
+                            "NATIVE_DOCKER_CONTEXT",
+                            "Snapshot file is outside the declared context",
+                        ));
+                    }
+                    files.insert(
+                        path.clone(),
+                        crate::InputReceipt {
+                            path: path.clone(),
+                            digest: digest.clone(),
+                            byte_length: *byte_length,
+                        },
+                    );
+                    file_entries.insert(path.clone(), entry.clone());
+                    total += byte_length.get();
+                }
+                crate::ProjectContextEntry::Directory { .. } => {
+                    if config.context != "."
+                        && path != &config.context
+                        && !path.starts_with(&(config.context.clone() + "/"))
+                        && !config.context.starts_with(&(path.clone() + "/"))
+                    {
+                        return Err(refused(
+                            "NATIVE_DOCKER_CONTEXT",
+                            "Snapshot directory is outside the declared context",
+                        ));
+                    }
+                }
+                crate::ProjectContextEntry::Symlink { .. } => {
+                    unreachable!("file-context loader refuses links")
+                }
+            }
+        }
+        for (path, content) in inputs {
+            if within(&config.context, path).is_some() {
+                let receipt = files.get(*path).ok_or_else(|| {
+                    refused(
+                        "NATIVE_DOCKER_CONTEXT_TEXT",
+                        "Text input is absent from the sealed context",
+                    )
+                })?;
+                if receipt.digest != byte_digest(content.as_bytes())
+                    || receipt.byte_length.get() != content.len() as u64
+                {
+                    return Err(refused(
+                        "NATIVE_DOCKER_CONTEXT_TEXT",
+                        "Text input differs from the sealed context",
+                    ));
+                }
+            }
+        }
+        // Ignore semantics require exact text, never opaque bytes silently
+        // treated as an absent ignore file.
+        for path in [
+            format!("{}.dockerignore", config.dockerfile),
+            context_path(&config.context, ".dockerignore"),
+        ] {
+            if files.contains_key(&path) && !inputs.contains_key(path.as_str()) {
+                return Err(refused(
+                    "NATIVE_DOCKER_CONTEXT_TEXT",
+                    "Supply captured text for each context ignore file",
+                ));
+            }
+        }
+        snapshot = Some(json!({
+            "profile":manifest.profile,"digest":manifest.digest,"files":file_entries,
+            "fileCount":files.len(),"fileBytes":total,"snapshotBytesAndModesVerified":true,
+            "originalSourceAccess":"not-required","toolExecution":"not-performed"
+        }));
+    } else {
+        for (path, content) in inputs {
+            if within(&config.context, path).is_some() {
+                files.insert(
+                    (*path).to_owned(),
+                    crate::InputReceipt {
+                        path: (*path).to_owned(),
+                        digest: byte_digest(content.as_bytes()),
+                        byte_length: patamaps_contracts::SafeInteger::new(content.len() as u64)
+                            .expect("bounded text"),
+                    },
+                );
+            }
+        }
+    }
+    Ok(CapturedContext { files, snapshot })
 }
 
 fn refused(code: &'static str, message: impl Into<String>) -> Error {
@@ -243,16 +380,13 @@ pub(crate) fn observe(
         ));
     }
     let declared: BTreeSet<_> = config.context_files.iter().map(String::as_str).collect();
-    let captured: BTreeSet<_> = inputs
-        .keys()
-        .copied()
-        .filter(|p| within(&config.context, p).is_some())
-        .collect();
+    let captured = captured_context(inputs, config)?;
+    let captured_paths: BTreeSet<_> = captured.files.keys().map(String::as_str).collect();
     if declared.len() != config.context_files.len()
-        || declared != captured
+        || declared != captured_paths
         || declared
             .iter()
-            .any(|p| !relative_path(p) || !inputs.contains_key(p))
+            .any(|p| !relative_path(p) || !captured.files.contains_key(*p))
     {
         return Err(refused(
             "NATIVE_DOCKER_CONTEXT",
@@ -700,7 +834,14 @@ pub(crate) fn observe(
                                     d.clone()
                                 }
                             });
-                            members.push(json!({"source":full,"destination":destination,"digest":byte_digest(inputs[full].as_bytes()),"bytesCaptured":true}));
+                            let receipt = &captured.files[*full];
+                            let mut member = json!({"source":full,"destination":destination,"digest":receipt.digest,"bytesCaptured":true});
+                            if let Some(reference) = &config.context_snapshot {
+                                member["byteLength"] = json!(receipt.byte_length);
+                                member["contextSnapshotDigest"] = json!(reference.digest);
+                                member["contentSuppliedAsText"] = json!(inputs.contains_key(full));
+                            }
+                            members.push(member);
                         }
                     }
                     if existing == 0 {
@@ -764,12 +905,30 @@ pub(crate) fn observe(
             "Docker observations exceed their aggregate bound",
         ));
     }
-    Ok((
-        entities,
-        json!({"profile":"patamaps-docker-captured-syntax-1","evidenceClass":"observed-captured-syntax","parser":{"grammar":"tree-sitter-containerfile=0.9.2","engine":"tree-sitter=0.26.5","nodeTypesDigest":byte_digest(tree_sitter_containerfile::NODE_TYPES.as_bytes())},"dockerfile":config.dockerfile,"context":config.context,"capturedContextFiles":config.context_files,"contextCompleteness":"caller-declared complete captured snapshot; live filesystem not rediscovered","ignoreFile":ignore_path,"dockerfileSpecificIgnorePrecedence":true,"buildArgs":config.build_args,"selectedStage":selected.value(),"unsupported":unsupported,"compilationEstablished":false,"instructionsExecuted":false,"imageContentsEstablished":false,"runtimeListenerEstablished":false,"baseImageIdentitiesObserved":false,"processCaching":false}),
-    ))
+    let mut metadata = json!({"profile":"patamaps-docker-captured-syntax-1","evidenceClass":"observed-captured-syntax","parser":{"grammar":"tree-sitter-containerfile=0.9.2","engine":"tree-sitter=0.26.5","nodeTypesDigest":byte_digest(tree_sitter_containerfile::NODE_TYPES.as_bytes())},"dockerfile":config.dockerfile,"context":config.context,"capturedContextFiles":config.context_files,"contextCompleteness":"caller-declared complete captured snapshot; live filesystem not rediscovered","ignoreFile":ignore_path,"dockerfileSpecificIgnorePrecedence":true,"buildArgs":config.build_args,"selectedStage":selected.value(),"unsupported":unsupported,"compilationEstablished":false,"instructionsExecuted":false,"imageContentsEstablished":false,"runtimeListenerEstablished":false,"baseImageIdentitiesObserved":false,"processCaching":false});
+    if let Some(snapshot) = captured.snapshot {
+        metadata["contextSnapshot"] = snapshot;
+        metadata["contextCompleteness"] =
+            json!("verified sealed file-context inventory; original owner not rediscovered");
+        if serde_json::to_vec(&metadata)
+            .map_err(|e| refused("NATIVE_DOCKER_LIMIT", e.to_string()))?
+            .len()
+            .saturating_add(encoded)
+            > 8 * 1024 * 1024
+        {
+            return Err(refused(
+                "NATIVE_DOCKER_LIMIT",
+                "Snapshot-backed observations exceed their aggregate bound",
+            ));
+        }
+    }
+    Ok((entities, metadata))
 }
 
 #[cfg(test)]
 #[path = "native_docker_tests.rs"]
 mod tests;
+
+#[cfg(all(test, unix))]
+#[path = "native_docker_context_tests.rs"]
+mod context_tests;
