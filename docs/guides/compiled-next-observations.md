@@ -107,4 +107,11 @@ onMatchHeader rules with the existing header validation, and preserves the
 bounded resume-header map in next-build-protocol. Unknown nested fields refuse;
 Next14 inputs containing these active features refuse. These remain observations:
 prefetch regexes, resume chains and on-match headers are never executed.
-Application qualification for these new shapes is pending the focused run.
+[Pinned Chatbot qualification](../acceptance/project-adoption/g3-chatbot-source-20261023/receipt.json)
+passed the unchanged owner production build and exact native observations for
+Next16.2.10: 17 static routes, 3 dynamic routes, 20 module mappings and two real
+BotID-generated rewrite declarations. Those external rewrites were observed,
+not requested or executed. Resume and prefetch metadata matched the genuine
+manifest exactly. Database migrations were skipped by the owner's build script
+because no database was configured. Authentication, actual Server Action calls
+and permission checks remain unverified.
