@@ -19,6 +19,7 @@ on:
           - external-rust-image
           - binary-docker-context
           - next-server-actions
+          - cargo-registry-preflight
 
 permissions:
   contents: read
@@ -392,3 +393,10 @@ jobs:
     if: github.event_name == 'workflow_dispatch' && inputs.qualification == 'next-server-actions'
     name: Real Next Server Action candidate
     uses: ./.github/workflows/next-server-actions.yml
+
+  cargo-registry-preflight:
+    if: github.event_name == 'workflow_dispatch' && inputs.qualification == 'cargo-registry-preflight'
+    name: Cargo registry isolation prerequisite
+    uses: ./.github/workflows/external-rust-deployment.yml
+    with:
+      registry-preflight-only: true

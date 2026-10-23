@@ -754,3 +754,15 @@ parallel activation, registry/production publication, or unguarded Intel build.
 Intel is used for reviewed edits, syntax inspection and regular Rory pushes.
 Full dependency/test-context, current installed replay, remaining framework /
 deployment boundaries and performance stay open until their own evidence exists.
+
+
+Preflight implementation checkpoint: a separately named manual
+cargo-registry-preflight choice reuses the existing external-Rust workflow.
+Its dedicated prerequisite job runs no application or compiler build; the
+original external-rust job and all of its checks remain the default path.
+The Python driver uses the existing guardian for a real user/network namespace,
+loopback/external-route controls, cancellation and owner SIGKILL. It confirms
+live child UID/process-group identities before termination and actual stopped
+processes/groups afterward. Kernel refusal remains a failure, never an offline
+fallback. Intel Python AST and diff checks precede dispatch. Full registry
+capture/build/default-tests/runtime verification remains unimplemented and open.
