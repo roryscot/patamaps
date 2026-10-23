@@ -805,3 +805,20 @@ The existing full Rust lane remains the default. Only after this prerequisite
 passes should the current plan implement native registry snapshots, real source
 build/default tests, corruption-before-effects refusal and offline selected
 replay. Full dependency/test-context closure is still not accepted.
+
+
+Managed backend implementation checkpoint: the opt-in __guard-container path
+freezes one ownership record and derives docker start --attach internally. Its
+cleanup validates unchanged ownership and invokes the existing stop_owned before
+ordinary group cleanup. Default __guard behavior is preserved. The dedicated
+cargo-registry-container-preflight dispatch retains ordinary guardian regression
+controls and adds real kernel/network/quota probes, wrong-token refusal before
+startup, cancellation, actual owner SIGKILL and changed-record refusal followed
+by recovery of an observed surviving container from a separate matching record.
+No global Docker prune/removal, host mount, application build or Cargo closure
+claim is introduced. Implementation is awaiting its actual focused CI result.
+
+Intel ordinary-guardian verification passed the real no-detach parent-death /
+independent-group control and all five ordinary exit/EPERM cases with the new
+source. [Receipt](../acceptance/project-adoption/g3-cargo-registry-context-20261023/guardian-darwin.json)
+binds the exact guardian digest. No compiler or container was run on Intel.

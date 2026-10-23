@@ -20,6 +20,7 @@ on:
           - binary-docker-context
           - next-server-actions
           - cargo-registry-preflight
+          - cargo-registry-container-preflight
 
 permissions:
   contents: read
@@ -400,3 +401,10 @@ jobs:
     uses: ./.github/workflows/external-rust-deployment.yml
     with:
       registry-preflight-only: true
+
+  cargo-registry-container-preflight:
+    if: github.event_name == 'workflow_dispatch' && inputs.qualification == 'cargo-registry-container-preflight'
+    name: Managed Cargo registry isolation prerequisite
+    uses: ./.github/workflows/external-rust-deployment.yml
+    with:
+      registry-container-preflight-only: true

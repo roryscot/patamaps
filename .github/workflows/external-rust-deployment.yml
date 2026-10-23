@@ -5,11 +5,14 @@ on:
       registry-preflight-only:
         type: boolean
         default: false
+      registry-container-preflight-only:
+        type: boolean
+        default: false
 permissions:
   contents: read
 jobs:
   miniserve:
-    if: ${{ !inputs['registry-preflight-only'] }}
+    if: ${{ !inputs['registry-preflight-only'] && !inputs['registry-container-preflight-only'] }}
     name: Pinned Miniserve source build and retained HTTP
     runs-on: ubuntu-24.04
     timeout-minutes: 45
@@ -61,5 +64,31 @@ jobs:
         with:
           name: cargo-registry-network-${{ github.sha }}
           path: ci-evidence/cargo-registry-network/receipt.json
+          if-no-files-found: error
+          retention-days: 14
+
+  registry-container-preflight:
+    if: ${{ inputs['registry-container-preflight-only'] }}
+    name: Managed Cargo registry container prerequisite only
+    runs-on: ubuntu-24.04
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - name: Verify kernel limits, writable quota and actual owner cleanup
+        run: >-
+          python3 -B scripts/cargo_registry_container_preflight.py
+          --evidence ci-evidence/cargo-registry-container
+      - name: Confirm only named owned containers stopped
+        if: always()
+        run: >-
+          python3 -B scripts/deployment_miniserve_image.py
+          --stop-owned ci-evidence/cargo-registry-container/owned.json
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        if: always()
+        with:
+          name: cargo-registry-container-${{ github.sha }}
+          path: ci-evidence/cargo-registry-container/*.json
           if-no-files-found: error
           retention-days: 14

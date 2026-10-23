@@ -4,6 +4,7 @@ import argparse
 import hashlib
 import json
 import os
+import re
 from pathlib import Path
 import signal
 import subprocess
@@ -46,7 +47,7 @@ def stop(child, grace=10):
     child.wait()
 
 
-def guard(argv):
+def guard(argv, cleanup=None):
     """Watch the actual spawning parent, including after its SIGKILL.
 
     Used around the policy runner and inside it around the native CLI. The
@@ -79,7 +80,46 @@ def guard(argv):
                 return code if code >= 0 else 128 - code
             time.sleep(.05)
     finally:
-        stop(child)
+        # Docker workloads outlive their attach CLI. Stop the owned container
+        # before group cleanup can terminate the guardian or attach process.
+        try:
+            if cleanup is not None:
+                cleanup()
+        finally:
+            stop(child)
+
+
+def container_guard(path):
+    """Internal opt-in managed-container attachment; never remove owned objects."""
+    from deployment_miniserve_image import stop_owned
+    path = Path(path).absolute()
+    if path.is_symlink() or not path.is_file():
+        raise ValueError("CONTAINER_OWNERSHIP_FILE")
+    frozen = path.read_bytes()
+    owned = json.loads(frozen)
+    token = owned.get("token")
+    items = owned.get("containers")
+    if not isinstance(token, str) or not re.fullmatch("[0-9a-f]{32}", token):
+        raise ValueError("CONTAINER_OWNERSHIP_TOKEN")
+    if not isinstance(items, list) or len(items) != 1:
+        raise ValueError("CONTAINER_OWNERSHIP_SINGLE_ID")
+    identity = items[0].get("id")
+    if not isinstance(identity, str) or not re.fullmatch("[0-9a-f]{64}", identity):
+        raise ValueError("CONTAINER_OWNERSHIP_ID")
+    info = json.loads(subprocess.check_output(["docker", "inspect", identity], timeout=15))[0]
+    if info["Config"].get("Labels", {}).get("org.patamaps.qualification-owner") != token:
+        raise ValueError("CONTAINER_OWNERSHIP_LABEL")
+    state = info["State"]
+    if state["Running"] or state["Status"] != "created" or not state["StartedAt"].startswith("0001-"):
+        raise ValueError("CONTAINER_ALREADY_STARTED")
+
+    def cleanup():
+        if path.is_symlink() or path.read_bytes() != frozen:
+            raise ValueError("CONTAINER_OWNERSHIP_CHANGED")
+        # Rechecks the immutable ID and live Docker owner label before stopping.
+        stop_owned(path)
+
+    return guard(["docker", "start", "--attach", identity], cleanup=cleanup)
 
 
 def arguments():
@@ -260,6 +300,10 @@ if __name__ == "__main__":
             raise SystemExit(2)
         raise SystemExit(guard(sys.argv[2:]))
     try:
+        if len(sys.argv) > 1 and sys.argv[1] == "__guard-container":
+            if len(sys.argv) != 3:
+                raise SystemExit(2)
+            raise SystemExit(container_guard(sys.argv[2]))
         main()
     except KeyboardInterrupt:
         event("cancelled-project-watch")
