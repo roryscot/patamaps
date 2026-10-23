@@ -29,4 +29,21 @@ class ConfigurationControls(unittest.TestCase):
  def test_traversal(self):self.exercise(json.dumps({**self.config(),"documentRoot":"../outside"}))
  def test_unknown_target(self):self.exercise(json.dumps({**self.config(),"target":"windows/amd64"}))
  def test_not_nonsecret(self):self.exercise(json.dumps({**self.config(),"nonsecret":False}))
+
+class SourceSelectionControls(unittest.TestCase):
+ def selected(self,extra=None,changed=None):
+  from qualify_miniserve_linux import select_captured_source,PUBLIC_TEST_FIXTURES
+  names=["Cargo.toml","Cargo.lock","src/main.rs",*PUBLIC_TEST_FIXTURES]
+  return select_captured_source(names+(extra or []),{**PUBLIC_TEST_FIXTURES,**(changed or {})})
+ def test_public_fixture_bytes_stay_out_of_capture(self):
+  self.assertEqual(self.selected(),["Cargo.toml","Cargo.lock","src/main.rs"])
+ def test_new_key_refuses(self):
+  with self.assertRaisesRegex(ValueError,"FORBIDDEN_SOURCE_INPUT"):self.selected(["settings/private.pem"])
+ def test_dotenv_refuses(self):
+  with self.assertRaisesRegex(ValueError,"FORBIDDEN_SOURCE_INPUT"):self.selected([".env.production"])
+ def test_changed_fixture_refuses(self):
+  with self.assertRaisesRegex(ValueError,"REVIEW_PUBLIC_TEST_FIXTURE_BLOB"):self.selected(changed={"tests/data/key_ec.pem":"0"*40})
+ def test_new_fixture_refuses(self):
+  with self.assertRaisesRegex(ValueError,"REVIEW_PUBLIC_TEST_FIXTURE_SET"):self.selected(["tests/data/extra.pem"])
+
 if __name__=="__main__":unittest.main()

@@ -288,3 +288,29 @@ before this increment can be accepted.
 [Intel configuration preflight](../acceptance/project-adoption/g5-miniserve-config-preflight-20261022/receipt.json)
 passed ten frozen cases and syntax checks under the exclusive 16 MiB guard.
 Actual application source/build/test/runtime acceptance awaits the focused CI.
+
+The [dispatch checkpoint](../acceptance/project-adoption/g5-miniserve-config-preflight-20261022/ci-dispatch.json)
+records run 39880581447 at 3a043e7. Its focused external-Rust job was confirmed
+live after the configuration controls passed; unrelated suites were skipped.
+Resume by polling that same run, never restarting because an observation timed
+out. On success inspect its actual command/runtime receipts and preserve exact
+compiler, application and selected-state artifacts before the bounded Intel
+managed replay. On failure inspect the frozen diagnostic before changing code.
+No source/runtime/installed/deployment gate is accepted by this dispatch record.
+
+Run 39880581447 subsequently failed before source capture at the privacy guard.
+The [verified failure artifact](../acceptance/project-adoption/g5-miniserve-config-preflight-20261022/failure-39880581447.json)
+is retained. Review found eight fixed public tests/data Git blobs, including TLS
+fixtures. The correction excludes all eight fixture contents from every Patamaps capture and
+published payload, rejects unknown/changed fixtures or new key/dotenv paths,
+and keeps the complete default test suite in its original pinned public Git clone.
+Its target cache is shared with the staged build; the produced runtime is frozen
+before owner tests. These public test data remain an explicit external dependency;
+no hermetic/full test-context acceptance follows. The staged application build
+still uses captured source. No upstream code/test/fixture bytes are patched.
+Five frozen selection/privacy controls must pass before one focused retry.
+
+The corrected [fifteen-control preflight](../acceptance/project-adoption/g5-miniserve-config-preflight-20261022/source-privacy-controls.json)
+passed under a fresh exclusive 16 MiB Intel guard. It validates the privacy
+selection correction, not the application source/runtime pipeline; one focused
+CI retry is required. The prior failure remains authoritative for its run.

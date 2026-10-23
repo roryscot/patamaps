@@ -5,6 +5,14 @@ from project_watch import stop
 ROOT=Path(__file__).resolve().parent.parent
 REV="2cd9c495ef25f2fcef505615f603e9de8f981915"
 ARM_SHA="732b1d5b30a3903580cee9ca24b2ff04ba2a5c78fa1ba6579dc5154fc431b40a"
+PUBLIC_TEST_FIXTURES={"tests/data/auth1.txt":"3744d61850e90a0da0b6477b548bca8c4f1e278d","tests/data/cert.pem":"c907ef259f08d6f9833e17e6839554924d5161e2","tests/data/cert_ec.pem":"42d4a086b7f93a7b4b61cd5bbbe36d5f402c79c7","tests/data/cert_rsa.pem":"54482008bde8184e0600600c10c2c287a1077946","tests/data/generate_tls_certs.sh":"facd0336564412d77cec8fb5d74d5adb80b670ca","tests/data/key_ec.pem":"484e5d8135c75c61e326ba3e00722d7f3e194160","tests/data/key_pkcs1.pem":"695ff0919c9ba5b0ba6ae293396e9fdccd59ec7f","tests/data/key_pkcs8.pem":"695ff0919c9ba5b0ba6ae293396e9fdccd59ec7f"}
+def select_captured_source(names,blobs):
+ external={n for n in names if n.startswith("tests/data/")}
+ if external!=set(PUBLIC_TEST_FIXTURES):raise ValueError("REVIEW_PUBLIC_TEST_FIXTURE_SET")
+ if any(blobs.get(n)!=h for n,h in PUBLIC_TEST_FIXTURES.items()):raise ValueError("REVIEW_PUBLIC_TEST_FIXTURE_BLOB")
+ selected=[n for n in names if n not in external]
+ if any(Path(n).name==".env" or Path(n).name.startswith(".env.") or Path(n).suffix in [".pem",".key",".p12"] for n in selected):raise ValueError("FORBIDDEN_SOURCE_INPUT")
+ return selected
 def sha(p):return hashlib.sha256(Path(p).read_bytes()).hexdigest()
 def write(p,v):p.write_text(json.dumps(v,indent=2)+"\n")
 def main():
@@ -43,11 +51,15 @@ def main():
   if a.build_cli:run("build-native-compiler",["cargo","+1.99.0","build","--locked","--release","-p","patamaps-cli","--bin","patamaps"],cwd=ROOT)
   installed=work/"relocated-native/bin";installed.mkdir(parents=True);cli=installed/"patamaps";shutil.copy2(a.cli.resolve(strict=True),cli)
   assert sha(cli)==sha(a.cli);r["relocatedCompiler"]=dict(sha256=sha(cli),freshDirectory=True,engine=native("relocated-engine",["engine"]))
+  shutil.copy2(cli,out/"artifacts/patamaps");shutil.copyfile(ROOT/"LICENSE",out/"artifacts/PATAMAPS-LICENSE")
   source=work/"upstream";run("source-init",["git","init",source]);run("source-fetch",["git","fetch","--depth=1",r["upstream"],REV],cwd=source);run("source-checkout",["git","checkout","--detach","FETCH_HEAD"],cwd=source)
   assert run("source-head",["git","rev-parse","HEAD"],cwd=source).strip()==REV
   names=sorted(n for n in run("source-members",["git","ls-files","-z"],cwd=source).split("\0") if n)
   assert not any(Path(n).name=="AGENTS.md" for n in names),"Review upstream instructions"
-  assert not any(Path(n).name==".env" or Path(n).name.startswith(".env.") or Path(n).suffix in [".pem",".key",".p12"] for n in names),"Review forbidden source input"
+  index=run("source-fixture-index",["git","ls-files","--stage","-z"],cwd=source)
+  blobs={row.split("\t",1)[1]:row.split("\t",1)[0].split()[1] for row in index.split("\0") if row}
+  names=select_captured_source(names,blobs)
+  r["uncapturedPublicTestFixtures"]={n:dict(gitBlob=h,source="pinned public Git clone",captured=False,published=False) for n,h in PUBLIC_TEST_FIXTURES.items()}
   before={n:sha(source/n) for n in names};r["upstreamInventory"]=before
   cargo=Path(run("cargo-path",["rustup","which","--toolchain","1.99.0","cargo"]).strip());rustc=cargo.with_name("rustc")
   r["rustcVersion"]=run("rustc-version",[rustc,"-vV"]);assert "host: x86_64-unknown-linux-gnu" in r["rustcVersion"]
@@ -57,18 +69,23 @@ def main():
   snapshot=work/"source-snapshot";native("source-context",["project-context-capture",selection,"--root",source,"--destination",snapshot])
   staged=work/"source-staged";native("source-stage",["project-context-stage",snapshot,"--destination",staged])
   selected=[n for n in names if (n.endswith(".rs") or n.endswith(".toml") or n in ["Cargo.lock","LICENSE"]) and not (staged/n).is_symlink()]
-  cfg=dict(path=str(cargo.parent)+":/usr/bin:/bin",cargoHome=env.get("CARGO_HOME",str(Path.home()/".cargo")),rustc=str(rustc),home=str(work/"home"),tmp=str(work/"tmp"),jobs="2",offline="true",debug="0",incremental="0",threads="1")
+  cfg=dict(path=str(cargo.parent)+":/usr/bin:/bin",cargoHome=env.get("CARGO_HOME",str(Path.home()/".cargo")),rustc=str(rustc),home=str(work/"home"),tmp=str(work/"tmp"),jobs="2",offline="true",debug="0",incremental="0",threads="1",targetDir=str(staged/"target"))
   for n in ["home","tmp"]:(work/n).mkdir()
   profilepath=work/"source-profile.json";write(profilepath,dict(profile="patamaps-project-inputs-1",id="urn:qualification:miniserve:build-source",nonsecretInputs=True,inputs=selected,components=[dict(id="application",kind="rust",root=".",entrypoints=["Cargo.toml"])],nonsecretConfiguration=cfg,secretReferences={}))
   capture=native("source-capture",["project-capture",profilepath,"--root",staged]);capturepath=work/"source-capture.json";write(capturepath,capture)
-  refs=dict(PATH="path",CARGO_HOME="cargoHome",RUSTC="rustc",HOME="home",TMPDIR="tmp",CARGO_BUILD_JOBS="jobs",CARGO_NET_OFFLINE="offline",CARGO_PROFILE_DEV_DEBUG="debug",CARGO_PROFILE_TEST_DEBUG="debug",CARGO_INCREMENTAL="incremental",RUST_TEST_THREADS="threads")
+  refs=dict(PATH="path",CARGO_HOME="cargoHome",RUSTC="rustc",HOME="home",TMPDIR="tmp",CARGO_BUILD_JOBS="jobs",CARGO_NET_OFFLINE="offline",CARGO_PROFILE_DEV_DEBUG="debug",CARGO_PROFILE_TEST_DEBUG="debug",CARGO_INCREMENTAL="incremental",RUST_TEST_THREADS="threads",CARGO_TARGET_DIR="targetDir")
   for label,args in [("application-build",["build","--release","--locked","--offline","--bin","miniserve"]),("application-owner-tests",["test","--release","--locked","--offline"])]:
    cp=work/(label+".command.json");write(cp,command(cargo,args,refs,maximum=1200000))
-   result=native(label,["project-exec",capturepath,cp,"--root",staged]);assert result["status"]=="completed-project-command" and result["programSucceeded"] and result["selectedInputsUnchanged"]
+   result=native(label,["project-exec",capturepath,cp,"--root",staged if label=="application-build" else source]);assert result["status"]=="completed-project-command" and result["programSucceeded"] and result["selectedInputsUnchanged"]
+   if label=="application-build":
+    binary=work/"source-built-miniserve";shutil.copy2(staged/"target/release/miniserve",binary)
+    r["applicationBinary"]=dict(sha256=sha(binary),bytes=binary.stat().st_size,target="x86_64-unknown-linux-gnu",producer="captured/staged source build before owner tests")
+    shutil.copy2(binary,out/"artifacts/miniserve");shutil.copyfile(source/"LICENSE",out/"artifacts/MINISERVE-LICENSE")
    if label.endswith("tests"):
     summaries=re.findall(r"test result: ok\. (\d+) passed; (\d+) failed; (\d+) ignored",result["stdout"]["text"]);assert summaries and sum(int(p) for p,f,i in summaries)>0 and all(f=="0" for p,f,i in summaries),result["stdout"]["text"][-1000:];r["upstreamTestSummaries"]=summaries
   assert {n:sha(staged/n) for n in names}==before and {n:sha(source/n) for n in names}==before
-  binary=staged/"target/release/miniserve";r["applicationBinary"]=dict(sha256=sha(binary),bytes=binary.stat().st_size,target="x86_64-unknown-linux-gnu")
+  assert not run("upstream-status-after-tests",["git","status","--porcelain=v1","--untracked-files=no"],cwd=source).strip()
+  r["ownerTestContext"]="Original pinned public Git clone; reviewed public test data stays outside all Patamaps captures"
   recipe=ROOT/"scripts/deployment/miniserve";owner=work/"owner";owner.mkdir();(owner/"public").mkdir()
   for n in ["prepare_bundle.py","probe.sh"]:shutil.copyfile(recipe/n,owner/n)
   (owner/"public/status.txt").write_text("patamaps-miniserve-qualified\n")
@@ -119,9 +136,8 @@ def main():
   failures={d.name:{f.name:json.loads(f.read_text()) for f in d.glob("*.json")} for d in (state/"attempts").iterdir() if d.name!=Path(good["attempt"]).name}
   write(out/"failed-attempt-records.json",failures)
   r["portableSelectedState"]=dict(sha256=sha(archive),bytes=archive.stat().st_size,selectionDigest=sha(state/"selected.json"),creatingCompilerDigest=sha(cli),scope="Selected attempt only; failed JSON records preserved separately")
-  shutil.copy2(binary,out/"artifacts/miniserve");shutil.copy2(cli,out/"artifacts/patamaps")
-  for src,dst in [(ROOT/"LICENSE","PATAMAPS-LICENSE"),(source/"LICENSE","MINISERVE-LICENSE")]:shutil.copyfile(src,out/"artifacts"/dst)
-  r.update(status="passed-source-built-miniserve-linux-deployment",sourceBuild=True,upstreamSourceUnchanged=True,sourceStageMatchesFrozenInventory=True,configuredSourceAndSnapshotUnavailableReplay=True,previousSelectionPreservedOnFourRefusals=True,staleRuntimeRefusedBeforeCommand=True,restoredSelectedRuntimePassed=True,runtimeVerificationBeforeSelection=True,actualHttp=True,actualBrowser=False)
+
+  r.update(status="passed-source-built-miniserve-linux-deployment",sourceBuild=True,upstreamSourceUnchanged=True,capturedSourceStageMatchesFrozenInventory=True,configuredSourceAndSnapshotUnavailableReplay=True,previousSelectionPreservedOnFourRefusals=True,staleRuntimeRefusedBeforeCommand=True,restoredSelectedRuntimePassed=True,runtimeVerificationBeforeSelection=True,actualHttp=True,actualBrowser=False)
  except BaseException as e:r.update(status="failed",error=type(e).__name__+": "+str(e));save();raise
  save()
 if __name__=="__main__":main()
