@@ -74,14 +74,14 @@ confirms its own container/processes stopped before releasing the reservation.
 ## Acceptance limits
 
 The result covers this source, target, configuration and controls. It does not
-accept browser rendering, application-image builds/observations, arbitrary Miniserve options, authenticated applications,
+accept arbitrary Miniserve options, authenticated applications,
 full dependency/test-context closure, performance, production activation or
 registry publication. Fresh exact source/native package installation is now qualified for the frozen application as described below. A CI receipt and
 digest chain are not an independently reproduced build or a signed attestation.
 
 The new selected-execution command is a checkout feature added after published
 patamaps-cli 0.1.0-alpha.1. For a first Rust integration, use the
-[Rust quickstart](rust-project-quickstart.md). Application-image/browser coverage, complete dependency closure and exclusive
+[Rust quickstart](rust-project-quickstart.md). Binary-bearing Docker context discovery, complete dependency closure and exclusive
 edit-loop measurements remain in the [enhancement backlog](../plans/integration-enhancement-backlog.md).
 
 ## Exact installed consumer
@@ -95,3 +95,15 @@ To repeat this focused maintainer qualification while the frozen artifact remain
     gh workflow run native-capabilities.yml --ref feat/retained-owner-preparation -f qualification=external-rust-installed
 
 The lane refuses expired or changed frozen evidence. Its exact unpublished source/native packages remain in the linked run's 14-day artifact; compact receipts are committed. Import retained state with its archived directory modes intact. Python's default data filter discards those modes: the first attempt was refused, and a mode-preserving importer passed nine controls plus direct verification of the exact frozen state before the successful rerun. No stored binding was regenerated to make that import pass.
+
+## Actual image and browser profile
+
+The [image/browser qualification](../acceptance/project-adoption/g5-miniserve-image-browser-20261023/ci.json) builds a linux/amd64 image from the exact selected bundle and digest-pinned Ubuntu base. The observed executable inside the running image matches the selected SHA-256 and native ELF target. Image/entrypoint/user/workdir settings were inspected; an actual entrypoint override was refused before startup. The original Miniserve executable, configuration, launcher and document were unchanged.
+
+The image runs as 65532:65532 with readonly root, no source bind mount, one CPU, 256 MiB memory, zero swap, 64 PIDs, and kernel-verified 1 MiB /tmp and /dev/shm mounts. Its fixed loopback launcher uses host networking in dedicated Linux CI; this result does not establish network isolation. Chromium completed six controls: rendered listing, real file-link navigation and document text, history return, missing-document refusal, out-of-prefix refusal, and no script errors/off-origin requests. Both owned containers and the listener were confirmed stopped.
+
+    gh workflow run native-capabilities.yml --ref feat/retained-owner-preparation -f qualification=external-rust-image
+
+The same lane repeats fresh source/native installation, all nine archive controls and two Linux socket controls. The [receipt](../acceptance/project-adoption/g5-miniserve-image-browser-20261023/ci-receipt.json) freezes its 1,078-file installed source inventory; this is a later package than the 1,071-file installed-only milestone. The artifact retains compressed image and packages for 14 days; committed receipts and the [listing screenshot](../acceptance/project-adoption/g5-miniserve-image-browser-20261023/browser-listing.png) remain. Archive digests were checked at intake, but fresh image reload was not exercised.
+
+Native Docker discovery currently requires a complete UTF-8 context inventory. This actual image context contains the binary and is therefore verified through context/binary digests plus real BuildKit/image observations, without claiming complete native Docker source discovery. Binary-context support, complete dependency/test-context closure, broader framework boundaries and practical development performance remain open. No registry publication or production/trust activation occurred.
