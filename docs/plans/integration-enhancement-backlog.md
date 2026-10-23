@@ -494,3 +494,51 @@ Artifact 12482607087 is 332,121 bytes, independently verified SHA-256 d10d383c23
 The Intel-native 128MiB guard preflight refused before executing tests or rebuilding the CLI: retained-output headroom was insufficient under the unchanged 100GB cap. Physical free space was about 36.6GB; that is a different constraint. [Reservation c8cfbce0-150e-4a96-a1c8-53795ea0d1de finished and released normally](../acceptance/project-adoption/g3-chatbot-source-20261023/intel-preflight-refusal.json). No stale recovery, policy change or deletion occurred. Linux verification passed; Darwin verification remains unrun, and the prior native compiler remains intact.
 
 Next bounded acceptance remains actual production Server Action behavior on this same pinned unchanged owner: login/register page controls, invalid form data, duplicate registration, wrong-password refusal, successful credential session, off-origin action refusal and cross-user private-resource denial. Use only a newly owned isolated CI database plus disposable generated test signing material outside captures/public evidence; keep cookies, passwords, environment and action encryption material out of uploaded logs/traces. Review the owner's production secure-cookie/proxy handling before choosing the test origin. Page rendering alone cannot establish authentication or action security. Complete dependency/test-context closure, current-engine external installed replay and practical exclusive edit-loop/performance requirements remain open. Nango stays owner-deferred and the entire G0–G6 adoption goal stays active.
+
+
+## Selected increment: production Server Action and private-resource qualification (2026-10-23)
+
+Continue the unchanged Chatbot source pinned above. Scope: run the owner's four
+existing authentication-page tests against `next start`, then exercise actual
+registration/login Server Action requests, server-side invalid-form refusal,
+duplicate registration, wrong-password refusal and real credential sessions.
+Use a valid-origin replay of the same genuine action payload as the independent
+positive control for off-origin refusal; verify the refused request did not
+create the new principal. Create a private document through its real owner API;
+verify owner read, another authenticated user's GET/POST refusal, unchanged
+owner content and guest refusal. No model or upload endpoint is exercised.
+
+Source review: `proxy.ts` explicitly chooses secure cookies outside development;
+`auth.config.ts` trusts the host, and auth actions call the real database and
+Auth.js credentials provider. Preserve that production behavior with an owned
+HTTPS loopback reverse proxy, TLS certificate and a separately started Next
+server. Do not patch upstream cookie policy or set development mode to pass.
+Use a fresh CI-only PostgreSQL data directory and execute the owner's actual
+migration program before runtime. Never connect to Intel's existing database.
+
+Patamaps builds and observes the unchanged source using existing native
+contracts. Runtime secrets belong to an explicitly trusted owner launcher:
+generate disposable database/signing credentials only after source captures,
+keep them and TLS keys in a private directory/environment outside captures,
+and never resolve secret-reference labels inside Patamaps. Runtime raw logs,
+HTTP bodies/headers, cookies, browser traces and test reports stay outside
+uploaded evidence. Publish only fixed control names, outcomes and digests;
+check generated credentials/cookies/signing material are absent from evidence.
+Do not upload compiled server-reference/encryption material.
+
+Dependencies: the successful pinned source/production-build increment, its
+locked Playwright package/Chromium, installed PostgreSQL tools and the same
+focused manual Linux lane. Preserve the 4 GB workflow growth/500 MB reserve,
+2 GiB Node heap, bounded command logs/time and owned-process cleanup. No policy
+increase, deletion, registry publication or production activation. Intel is used
+for source edits, syntax inspection and commits; a native build must still pass
+its existing admission reserve. The observed Intel memory is currently below
+4 GiB, so no native compiler/test workload is started.
+
+Acceptance: unchanged upstream four page tests plus the named real-action and
+permission controls; source/exclusion audit after runtime; verified stopped
+Next/PostgreSQL/browser/proxy processes; sanitized receipts with exact
+source/engine identities. Implemented controls remain pending until the focused
+lane passes. Preserve all failures. These checks do not establish broader
+backend/model permissions, complete dependency closure, performance, production
+authentication, deployment or all G0–G6 completion.
