@@ -766,3 +766,42 @@ live child UID/process-group identities before termination and actual stopped
 processes/groups afterward. Kernel refusal remains a failure, never an offline
 fallback. Intel Python AST and diff checks precede dispatch. Full registry
 capture/build/default-tests/runtime verification remains unimplemented and open.
+
+
+## Enforced backend decision for Cargo registry work (2026-10-23)
+
+[Prerequisite run40016819653](https://github.com/roryscot/patamaps/actions/runs/40016819653),
+source3d5a4e4, failed before any namespace workload: the runner refused writing
+/proc/self/uid_map. The [verified receipt](../acceptance/project-adoption/g3-cargo-registry-context-20261023/unshare-refusal.json)
+and [CI artifact binding](../acceptance/project-adoption/g3-cargo-registry-context-20261023/unshare-ci.json)
+preserve the refusal (905bytes, SHA-256 a0c0db64c5b8616e37c7a3bacff6702c8c0306df882aa8a5448359e7bfd5e9e6).
+Only the owned guardian stopped; no application/Cargo/context build ran, and
+cancellation/owner-crash acceptance was not reached. No sysctl/profile change.
+
+Select the existing managed-container model instead. Reuse the already qualified
+deployment_miniserve_image.stop_owned ownership-token/ID check and add only an
+opt-in container cleanup callback to the existing project_watch guardian. Freeze
+one ownership record before start; reject label/file changes and never remove
+containers or images. The guardian must stop/inspect its owned container before
+finishing descendant cleanup, including after actual owner SIGKILL. Ordinary
+__guard behavior stays unchanged and must pass its existing real regressions.
+
+First verify that backend with the original public BusyBox1.37.0-musl linux/amd64
+manifest busybox@sha256:dc88b80842580654294472735332ec7c7789a4010ec9a68b69f9b88c19abede6.
+[Official tag metadata](https://hub.docker.com/v2/repositories/library/busybox/tags/1.37.0-musl)
+identified its871,090-byte compressed platform image. This is a tiny isolation
+probe, not a Cargo builder or application acceptance. Declare/inspect CPU0.5,
+memory64MiB, zero swap, PIDs32, network none, readonly root, nonroot65532:65532,
+no host mounts, capabilities dropped, no-new-privileges, /tmp and /dev/shm1MiB.
+Read kernel limits, require loopback HTTP success and absent external route,
+and make a real2MiB write fail at the1MiB writable-filesystem limit. Reject a
+wrong ownership token before startup. Check cancellation and owner SIGKILL on
+containers that ignore termination, with actual running state observed before
+and Running=false/Pid=0 afterward. Preserve all owned stopped objects.
+
+Keep the sixty-second/32MiB preflight budget and500MB free reserve; no new VM,
+privileged host package work, global policy change, deletion or parallel rollout.
+The existing full Rust lane remains the default. Only after this prerequisite
+passes should the current plan implement native registry snapshots, real source
+build/default tests, corruption-before-effects refusal and offline selected
+replay. Full dependency/test-context closure is still not accepted.
