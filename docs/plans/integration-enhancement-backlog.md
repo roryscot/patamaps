@@ -962,3 +962,14 @@ its active Docker cleanup clients. The independent master remains available and
 actual Running=false/Pid=0 plus guardian cleanup confirmation are still required.
 This does not retroactively establish the earlier unconfirmed cleanup's cause.
 All previous failures, limits and all325 test/runtime/refusal/replay gates remain.
+
+
+Live continuation checkpoint: [run40039233532](https://github.com/roryscot/patamaps/actions/runs/40039233532)
+at d529dff20182959af065436d09552ce966267f5a is confirmed in progress after the
+read-only alternatives / no-bytecode / guardian-PID repair. Wait on this exact
+run; do not launch a duplicate because an old watcher stops reporting. Query its
+authoritative run/job state. Inspect and independently digest-verify its artifact
+when terminal, then check all original release/default325-test/HTTP/refusal /
+registry-tamper/offline-replay gates before accepting this increment. No real
+registry execution acceptance is recorded yet. The current guide is
+[cargo-registry-contexts](../guides/cargo-registry-contexts.md).

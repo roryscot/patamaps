@@ -1,8 +1,12 @@
 # Explicit Cargo registry contexts
 
-Status: implemented qualification path; real build/test/runtime acceptance is
-pending CI at source 163b123. The previous managed-backend prerequisite passed.
-This guide does not assert complete dependency closure or general Rust support.
+Status: implemented qualification path; real build/test/runtime acceptance remains
+pending. The managed-backend prerequisite, strict inventory controls and native
+capture of all 456 packages passed. Three failed executions are preserved in the
+[integration backlog](../plans/integration-enhancement-backlog.md). The repaired
+[run40039233532](https://github.com/roryscot/patamaps/actions/runs/40039233532)
+is executing at source d529dff. No complete dependency closure or general Rust
+support is asserted by this guide.
 
 Patamaps already accepts opaque inputs through ProjectContext and composes them
 with source, workspace admission, commands and artifact selection in ProjectBuild.
