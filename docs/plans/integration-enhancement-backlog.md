@@ -341,3 +341,35 @@ and revalidate that exact run before waiting or retrying. Preserve both earlier
 failures. Do not rerun unrelated suites or treat this source intake as G5/G6
 completion. On success inspect actual owner-test/runtime/refusal results before
 bounded Intel managed replay and installed-package work.
+
+
+## Verified external Rust source/runtime checkpoint (2026-10-23 UTC)
+
+Run 39884102308 at 36e6525 completed successfully. The [source/runtime receipt](../acceptance/project-adoption/g5-miniserve-source-runtime-20261023/ci-receipt.json)
+binds the unchanged Miniserve 0.35.0 revision, 325 default upstream tests
+(19 harnesses, zero failures/ignored), eight startup/HTTP controls, four native
+config/listener/digest/architecture refusals with old selection preserved,
+source-unavailable replay and stale runtime refusal before effects.
+The exact creating compiler, application and selected-state archive were retained
+and digest-verified. Its test data remains an explicitly external public Git
+fixture dependency outside all captures.
+
+The [Intel replay](../acceptance/project-adoption/g5-miniserve-source-runtime-20261023/managed-replay.json)
+imported the exact state without changing archived modes. Native verification
+passed on Darwin with the same engine record; the creating Linux CLI then
+verified and executed it inside the existing managed executor. Actual kernel
+CPU1/memory256MiB/zero-swap and a 64MiB writable quota were verified, root remained
+readonly, networking isolated and no source was mounted. /work was the only writable bind mount for outputs. All eight runtime
+controls passed again, every imported byte and selected pointer stayed unchanged,
+and only the owned container/process group was stopped before reservation release.
+Preparation transport reset after completion was resolved by checking authoritative
+finished guard/request state before launch; no work was restarted or lease forced.
+
+This closes this external source-built runtime/selection/replay increment, not
+all G5/G6. The [guide](../guides/external-rust-deployment.md) records usable command
+contracts and limits. Next work is fresh exact source/native package installation
+on this same selected application workflow, then application-image/browser and practical exclusive
+edit-loop evidence. Reuse the frozen successful compiler/application/state rather
+than repeating source builds without a new reason. Broader framework boundaries,
+full dependency closure and the owner-deferred Nango app remain unaccepted.
+No registry publication, production/trust activation, parallel rollout or deletion.
