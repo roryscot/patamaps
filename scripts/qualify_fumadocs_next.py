@@ -38,7 +38,7 @@ def excluded(path):
                for p in Path(path).parts)
 
 
-def acquire_source(run, work, evidence, upstream=UPSTREAM, revision=REVISION):
+def acquire_source(run, work, evidence, upstream=UPSTREAM, revision=REVISION, required_omissions=("apps/docs/.env",)):
     owner = work / "source"
     run("git-init", ["git", "init", owner])
     run("git-origin", ["git", "remote", "add", "origin", upstream], cwd=owner)
@@ -61,7 +61,7 @@ def acquire_source(run, work, evidence, upstream=UPSTREAM, revision=REVISION):
         entries.append({"path": name, "mode": mode, "gitBlob": oid})
     selected, omitted = [[e for e in entries if excluded(e["path"]) == value] for value in [False, True]]
     assert selected and len(selected) <= 16384
-    assert any(e["path"] == "apps/docs/.env" for e in omitted)
+    assert set(required_omissions).issubset({e["path"] for e in omitted}), "Required reserved-path omissions absent"
     safe_oids = {e["gitBlob"] for e in selected}
     excluded_only_oids = {e["gitBlob"] for e in omitted} - safe_oids
 

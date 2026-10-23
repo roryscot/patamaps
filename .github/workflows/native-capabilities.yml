@@ -18,6 +18,7 @@ on:
           - external-rust-installed
           - external-rust-image
           - binary-docker-context
+          - next-server-actions
 
 permissions:
   contents: read
@@ -386,3 +387,8 @@ jobs:
       contents: read
       actions: read
     uses: ./.github/workflows/binary-docker-context.yml
+
+  next-server-actions:
+    if: github.event_name == 'workflow_dispatch' && inputs.qualification == 'next-server-actions'
+    name: Real Next Server Action candidate
+    uses: ./.github/workflows/next-server-actions.yml

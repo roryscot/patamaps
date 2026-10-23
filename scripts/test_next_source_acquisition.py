@@ -66,6 +66,15 @@ class SourceAcquisition(unittest.TestCase):
         self.assertTrue((owner / "apps/docs/app/(group)/[id]/page.tsx").is_file())
         audit("test-final-audit")
 
+    def test_explicit_other_project_omission_profile_keeps_blob_audits(self):
+        origin, work, evidence, revision, run = self.fixture()
+        owner, selected, omitted, inventory, audit = acquire_source(
+            run, work, evidence, upstream=origin.as_uri(), revision=revision,
+            required_omissions=(".env.empty",))
+        self.assertFalse((owner / ".env.empty").exists())
+        self.assertEqual(len(inventory), 5)
+        audit("other-profile-final-audit")
+
     def test_link_to_excluded_path_refuses_closed_source(self):
         origin, work, evidence, revision, run = self.fixture(unsafe_link=True)
         with self.assertRaises(FileNotFoundError):
