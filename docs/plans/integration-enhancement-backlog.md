@@ -23,7 +23,7 @@ a passed fixture or metadata observation is not general support.
 
 ## Current selected work
 
-The latest focused increment is [native snapshot-backed Docker discovery and actual Miniserve image execution](../acceptance/project-adoption/g5-native-binary-docker-context-20261023/ci.json): the authentic binary is now captured opaquely and bound to COPY observations instead of being excluded from native discovery. Its current-engine Linux checks passed. Intel-native verification passed all 57 tests and rebuilt the CLI with the same engine; all six current capability regression jobs also passed. Earlier installed/browser receipts remain frozen to their tested engines. After these regression checks, continue broader Next boundaries, complete dependency/test-context closure and practical exclusive edit-loop measurements. The Nango-dependent app remains owner-deferred. G0–G6 general adoption is not complete.
+The current increment is [real Next production Server Action and private-resource qualification](../guides/next-production-auth-qualification.md) on the pinned unchanged Chatbot source. The source/build observations and full Rust-engine regressions passed. Runtime qualification has two preserved failed attempts; its request-bound HTTPS collector repair is pushed at 9e6eff5. [Focused run 40010250913](https://github.com/roryscot/patamaps/actions/runs/40010250913) owns the next result; inspect that exact run rather than dispatching a duplicate. No full runtime/authentication/permission acceptance is claimed at this checkpoint. The earlier Miniserve deployment/installed/image and native binary-context results remain in their scoped receipts. Complete dependency/test-context closure, broader framework boundaries, current-engine external installed replay and practical exclusive edit-loop measurements remain open. The Nango app stays owner-deferred; G0–G6 general adoption is not complete.
 
 ## Earlier Next candidate checkpoint
 
@@ -593,3 +593,17 @@ navigation no longer has to retain its response body for later collection.
 Keep the same expected state, database effects, session, origin and permission
 criteria, 1MiB response cap and twenty-second observation deadline. The focused
 repeat remains pending; no new runtime acceptance follows from this repair alone.
+
+
+Continuation checkpoint: Intel SSH works from an existing local working
+directory (`/private/tmp`); this chat's removed ARM checkout path is unsuitable
+as a process cwd. Do not recreate a local source clone or repeat SSH setup.
+Current Intel source branch remains feat/retained-owner-preparation. Latest
+runtime implementation is 9e6eff5; focused workflow 40010250913 is the existing
+execution to inspect. The readonly watch handle was live at checkpoint. A
+missing log download before job completion is not stop proof or a reason to
+restart. Verify the terminal workflow head and outcome, independently verify
+its artifact digest, and check every named browser/auth/origin/permission,
+source-preservation, evidence-barrier and shutdown criterion before changing
+support status. Native compilation remains subject to the unchanged Intel
+memory/retention admission policy; no new native build has been admitted here.
