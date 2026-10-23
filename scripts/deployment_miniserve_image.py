@@ -42,6 +42,14 @@ def stop_owned(path):
     write(path, owned)
 
 
+def require_free_listener(port):
+    # Permit completed connections' TIME_WAIT state; an active TCP listener
+    # still prevents this bind even when it also uses SO_REUSEADDR.
+    with socket.socket() as probe:
+        probe.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+        probe.bind(("127.0.0.1", port))
+
+
 def verify(root, work, out, candidate, cli, license_path, run):
     folder = work / "application-image"
     folder.mkdir()
@@ -120,8 +128,14 @@ def verify(root, work, out, candidate, cli, license_path, run):
             raise AssertionError("Entrypoint override was admitted")
         assert not refused_info["State"]["Running"] and refused_info["State"]["StartedAt"].startswith("0001-")
         result["actualEntrypointOverrideRefusedBeforeStart"] = True
-        with socket.socket() as probe:
-            probe.bind(("127.0.0.1", 9100))
+        states = []
+        for table in [Path("/proc/net/tcp"), Path("/proc/net/tcp6")]:
+            for row in table.read_text().splitlines()[1:]:
+                fields = row.split()
+                if fields[1].endswith(":238C"):
+                    states.append(dict(table=table.name, local=fields[1], state=fields[3]))
+        write(out / "image-port-preflight.json", dict(port=9100, observedTcpStates=states))
+        require_free_listener(9100)
         container = create("positive")
         info = json.loads(run("image-runtime-inspect-before", ["docker", "inspect", container]))[0]
         check_launch(info, identity)
