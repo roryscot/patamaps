@@ -20,7 +20,7 @@ def write(p,v):p.write_text(json.dumps(v,indent=2)+"\n")
 def main():
  p=argparse.ArgumentParser(description=__doc__)
  for n in ["cli","work","evidence"]:p.add_argument("--"+n,type=Path,required=True)
- p.add_argument("--build-cli",action="store_true");a=p.parse_args()
+ p.add_argument("--build-cli",action="store_true");p.add_argument("--registry-context",action="store_true");a=p.parse_args()
  assert platform.system()=="Linux" and platform.machine()=="x86_64" and os.environ.get("GITHUB_ACTIONS")=="true","Use dedicated Linux CI; Intel requires its supervisor"
  work=a.work.resolve();out=a.evidence.resolve();assert not work.exists() and not out.exists()
  work.mkdir(parents=True);out.mkdir(parents=True);(out/"logs").mkdir();(out/"artifacts").mkdir()
@@ -65,26 +65,33 @@ def main():
   before={n:sha(source/n) for n in names};r["upstreamInventory"]=before
   cargo=Path(run("cargo-path",["rustup","which","--toolchain","1.99.0","cargo"]).strip());rustc=cargo.with_name("rustc")
   r["rustcVersion"]=run("rustc-version",[rustc,"-vV"]);assert "host: x86_64-unknown-linux-gnu" in r["rustcVersion"]
-  run("locked-dependencies",[cargo,"fetch","--locked","--target","x86_64-unknown-linux-gnu"],cwd=source)
+  if not a.registry_context:run("locked-dependencies",[cargo,"fetch","--locked","--target","x86_64-unknown-linux-gnu"],cwd=source)
   assert {n:sha(source/n) for n in names}==before
   selection=work/"source-selection.json";write(selection,dict(profile="patamaps-project-context-selection-1",id="urn:qualification:miniserve:source",nonsecretInputs=True,paths=names,symlinks="internal-closed"))
   snapshot=work/"source-snapshot";native("source-context",["project-context-capture",selection,"--root",source,"--destination",snapshot])
   staged=work/"source-staged";native("source-stage",["project-context-stage",snapshot,"--destination",staged])
-  selected=[n for n in names if (n.endswith(".rs") or n.endswith(".toml") or n in ["Cargo.lock","LICENSE"]) and not (staged/n).is_symlink()]
-  cfg=dict(path=str(cargo.parent)+":/usr/bin:/bin",cargoHome=env.get("CARGO_HOME",str(Path.home()/".cargo")),rustc=str(rustc),home=str(work/"home"),tmp=str(work/"tmp"),jobs="2",offline="true",debug="0",incremental="0",threads="1",targetDir=str(staged/"target"))
-  for n in ["home","tmp"]:(work/n).mkdir()
-  profilepath=work/"source-profile.json";write(profilepath,build_source_profile(selected,cfg))
-  capture=native("source-capture",["project-capture",profilepath,"--root",staged]);capturepath=work/"source-capture.json";write(capturepath,capture)
-  refs=dict(PATH="path",CARGO_HOME="cargoHome",RUSTC="rustc",HOME="home",TMPDIR="tmp",CARGO_BUILD_JOBS="jobs",CARGO_NET_OFFLINE="offline",CARGO_PROFILE_DEV_DEBUG="debug",CARGO_PROFILE_TEST_DEBUG="debug",CARGO_INCREMENTAL="incremental",RUST_TEST_THREADS="threads",CARGO_TARGET_DIR="targetDir")
-  for label,args in [("application-build",["build","--release","--locked","--offline","--target","x86_64-unknown-linux-gnu","--bin","miniserve"]),("application-owner-tests",["test","--release","--locked","--offline","--target","x86_64-unknown-linux-gnu"])]:
-   cp=work/(label+".command.json");write(cp,command(cargo,args,refs,maximum=1200000))
-   result=native(label,["project-exec",capturepath,cp,"--root",staged if label=="application-build" else source]);assert result["status"]=="completed-project-command" and result["programSucceeded"] and result["selectedInputsUnchanged"]
-   if label=="application-build":
-    binary=work/"source-built-miniserve";shutil.copy2(staged/"target/x86_64-unknown-linux-gnu/release/miniserve",binary)
-    r["applicationBinary"]=dict(sha256=sha(binary),bytes=binary.stat().st_size,target="x86_64-unknown-linux-gnu",producer="captured/staged source build before owner tests")
-    shutil.copy2(binary,out/"artifacts/miniserve");shutil.copyfile(source/"LICENSE",out/"artifacts/MINISERVE-LICENSE")
-   if label.endswith("tests"):
-    summaries=re.findall(r"test result: ok\. (\d+) passed; (\d+) failed; (\d+) ignored",result["stdout"]["text"]);assert summaries and sum(int(p) for p,f,i in summaries)>0 and all(f=="0" for p,f,i in summaries),result["stdout"]["text"][-1000:];r["upstreamTestSummaries"]=summaries
+  if a.registry_context:
+   from qualify_cargo_registry import qualify
+   produced=qualify(ROOT,work,out,source,staged,names,cargo,cli,env,run,native,command,r)
+   binary=work/"source-built-miniserve";shutil.copy2(produced,binary)
+   r["applicationBinary"]=dict(sha256=sha(binary),bytes=binary.stat().st_size,target="x86_64-unknown-linux-gnu",producer="native immutable registry context; copied before unchanged owner tests")
+   shutil.copy2(binary,out/"artifacts/miniserve");shutil.copyfile(source/"LICENSE",out/"artifacts/MINISERVE-LICENSE")
+  else:
+   selected=[n for n in names if (n.endswith(".rs") or n.endswith(".toml") or n in ["Cargo.lock","LICENSE"]) and not (staged/n).is_symlink()]
+   cfg=dict(path=str(cargo.parent)+":/usr/bin:/bin",cargoHome=env.get("CARGO_HOME",str(Path.home()/".cargo")),rustc=str(rustc),home=str(work/"home"),tmp=str(work/"tmp"),jobs="2",offline="true",debug="0",incremental="0",threads="1",targetDir=str(staged/"target"))
+   for n in ["home","tmp"]:(work/n).mkdir()
+   profilepath=work/"source-profile.json";write(profilepath,build_source_profile(selected,cfg))
+   capture=native("source-capture",["project-capture",profilepath,"--root",staged]);capturepath=work/"source-capture.json";write(capturepath,capture)
+   refs=dict(PATH="path",CARGO_HOME="cargoHome",RUSTC="rustc",HOME="home",TMPDIR="tmp",CARGO_BUILD_JOBS="jobs",CARGO_NET_OFFLINE="offline",CARGO_PROFILE_DEV_DEBUG="debug",CARGO_PROFILE_TEST_DEBUG="debug",CARGO_INCREMENTAL="incremental",RUST_TEST_THREADS="threads",CARGO_TARGET_DIR="targetDir")
+   for label,args in [("application-build",["build","--release","--locked","--offline","--target","x86_64-unknown-linux-gnu","--bin","miniserve"]),("application-owner-tests",["test","--release","--locked","--offline","--target","x86_64-unknown-linux-gnu"])]:
+    cp=work/(label+".command.json");write(cp,command(cargo,args,refs,maximum=1200000))
+    result=native(label,["project-exec",capturepath,cp,"--root",staged if label=="application-build" else source]);assert result["status"]=="completed-project-command" and result["programSucceeded"] and result["selectedInputsUnchanged"]
+    if label=="application-build":
+     binary=work/"source-built-miniserve";shutil.copy2(staged/"target/x86_64-unknown-linux-gnu/release/miniserve",binary)
+     r["applicationBinary"]=dict(sha256=sha(binary),bytes=binary.stat().st_size,target="x86_64-unknown-linux-gnu",producer="captured/staged source build before owner tests")
+     shutil.copy2(binary,out/"artifacts/miniserve");shutil.copyfile(source/"LICENSE",out/"artifacts/MINISERVE-LICENSE")
+    if label.endswith("tests"):
+     summaries=re.findall(r"test result: ok\. (\d+) passed; (\d+) failed; (\d+) ignored",result["stdout"]["text"]);assert summaries and sum(int(p) for p,f,i in summaries)>0 and all(f=="0" for p,f,i in summaries),result["stdout"]["text"][-1000:];r["upstreamTestSummaries"]=summaries
   assert {n:sha(staged/n) for n in names}==before and {n:sha(source/n) for n in names}==before
   assert not run("upstream-status-after-tests",["git","status","--porcelain=v1","--untracked-files=no"],cwd=source).strip()
   r["ownerTestContext"]="Original pinned public Git clone; reviewed public test data stays outside all Patamaps captures"

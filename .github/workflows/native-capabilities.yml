@@ -21,6 +21,7 @@ on:
           - next-server-actions
           - cargo-registry-preflight
           - cargo-registry-container-preflight
+          - cargo-registry-context
 
 permissions:
   contents: read
@@ -408,3 +409,10 @@ jobs:
     uses: ./.github/workflows/external-rust-deployment.yml
     with:
       registry-container-preflight-only: true
+
+  cargo-registry-context:
+    if: github.event_name == 'workflow_dispatch' && inputs.qualification == 'cargo-registry-context'
+    name: Real Cargo retained registry context
+    uses: ./.github/workflows/external-rust-deployment.yml
+    with:
+      registry-context: true

@@ -864,3 +864,49 @@ This accepts only the opt-in managed prerequisite. No application/compiler build
 registry capture, complete dependency/test-context closure, performance measure,
 production/parallel activation, Intel build or policy increase occurred. The
 failed unshare experiment remains preserved and failed.
+
+
+Cargo execution layout: use the verified tiny BusyBox image and explicit read-only
+mounts for the staged native candidate, the pinned public owner-test clone, the
+selected Rust toolchain and the runner's /usr, /bin, /lib and /lib64 system tools.
+Do not mount a user home, credentials, the configured download cache or Docker's
+socket into the workload. These external toolchain/OS inputs remain an explicit
+closure limitation. Require capacity before start: two CPU cores, 6 GiB memory,
+zero swap, 512 PIDs, read-only root and a 3 GiB executable /work tmpfs. Account
+separately for Docker's bounded /dev and /dev/shm mounts. No source/cache host
+mount is writable. Only bounded host-side output extraction is allowed: inspect
+and copy the produced executable while the owned container is alive; cap its
+bytes and preserve its hash before unchanged default tests run in the same
+container. Raw build/test logs remain bounded private qualification data.
+
+The native ProjectBuild context binds application inputs and original registry
+archives/index bytes. Its only writable host candidate subtree is bundle; the
+Cargo cache extractions, lock files and target directory live inside /work and
+disappear when the owned container stops. This avoids allowing a mutable registry
+archive/index subtree and avoids unbounded host target output. The existing
+qualifier's eight HTTP and four selection-refusal checks still run on the exact
+produced binary. Keep the configured original cache hidden, test registry
+corruption before any marker command, restore its retained original and verify
+selected bindings with original owner/cache/snapshot unavailable. No full test
+fixture, toolchain/OS, performance or general deployment claim follows.
+
+
+Implementation checkpoint: cargo-registry-context dispatch now composes the
+existing Miniserve qualifier with native opaque capture and ProjectBuild. The
+strict inventory refuses checksum/membership/source/configuration/symlink and
+byte-bound violations; thirteen focused controls plus the fifteen existing
+Miniserve controls passed on Intel Python3.13. Original fixtures stay excluded.
+Cargo/rustc/Docker executable hashes are captured and checked before/after the
+managed build. Original release settings and all325 default tests are retained;
+network/kernel/work-filesystem checks must pass before Cargo starts. The exact
+binary is copied under a32MiB bound before the test phase is released. Native
+snapshot/selected registry corruption must refuse before markers; restored state
+must verify with configured original owner/cache/snapshot unavailable.
+
+A single successful native registry selected-state archive (maximum320MiB) keeps
+one copy of each original registry archive/index member, without publishing the
+fresh extracted cache, clone, private logs, failed candidate copies or original
+snapshot. It is a bounded reusable CI artifact, not a duplicate Intel archive or
+a Git addition of dependency bytes. Compact JSON receipts are the durable review
+record. End-to-end application/registry acceptance is pending actual CI; no pass
+is inferred from syntax or inventory tests.

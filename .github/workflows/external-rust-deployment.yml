@@ -8,6 +8,9 @@ on:
       registry-container-preflight-only:
         type: boolean
         default: false
+      registry-context:
+        type: boolean
+        default: false
 permissions:
   contents: read
 jobs:
@@ -32,12 +35,19 @@ jobs:
         run: |
           mkdir -p "$RUNNER_TEMP/miniserve-config-controls"
           PATAMAPS_TEST_RETAIN_ROOT="$RUNNER_TEMP/miniserve-config-controls" python3 -B -m unittest discover -s scripts -p test_deployment_miniserve.py
+          PATAMAPS_TEST_RETAIN_ROOT="$RUNNER_TEMP/miniserve-config-controls" python3 -B -m unittest discover -s scripts -p test_cargo_registry_context.py
       - name: Build compiler and qualify actual external Rust source and HTTP
         run: >-
           python3 -B scripts/qualify_miniserve_linux.py
           --cli target/release/patamaps --build-cli
+          ${{ inputs['registry-context'] && '--registry-context' || '' }}
           --work "$RUNNER_TEMP/patamaps-miniserve-${{ github.run_id }}-${{ github.run_attempt }}"
           --evidence ci-evidence/miniserve
+      - name: Stop only the named registry build container
+        if: always() && inputs['registry-context']
+        run: >-
+          python3 -B scripts/deployment_miniserve_image.py
+          --stop-owned "$RUNNER_TEMP/patamaps-miniserve-${{ github.run_id }}-${{ github.run_attempt }}/registry-build/private-execution/owned.json"
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         if: always()
         with:
