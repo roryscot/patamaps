@@ -102,10 +102,7 @@ fn canonical_binary_context_copy_and_ignore_replay_without_owner_or_execution() 
     fs::rename(&f.owner, f.root.join("owner.retained-offline")).unwrap();
     let response = f.discover(f.config.clone(), &f.texts).unwrap();
     let value = observation(&response);
-    assert_eq!(
-        value["contextSnapshot"]["snapshotBytesAndModesVerified"],
-        true
-    );
+    assert_eq!(value["contextSnapshot"]["snapshotBytesVerified"], true);
     assert_eq!(value["contextSnapshot"]["fileCount"], 5);
     assert_eq!(value["instructionsExecuted"], false);
     assert_eq!(value["imageContentsEstablished"], false);
@@ -137,6 +134,15 @@ fn canonical_binary_context_copy_and_ignore_replay_without_owner_or_execution() 
         fs::read(staged.join("assets/runtime")).unwrap(),
         [0, 255, 128, 1, 0]
     );
+    assert_eq!(
+        fs::metadata(staged.join("assets/runtime"))
+            .unwrap()
+            .permissions()
+            .mode()
+            & 0o777,
+        0o755
+    );
+    assert_eq!(value["contextSnapshot"]["capturedModesBound"], true);
     assert_eq!(f.discover(f.config.clone(), &f.texts).unwrap(), response);
 }
 
@@ -174,7 +180,13 @@ fn changed_binary_modes_and_extra_members_refuse() {
                 fs::rename(&runtime, f.root.join("runtime.retained")).unwrap();
                 fs::write(&runtime, [7, 8, 9]).unwrap();
             }
-            "mode" => fs::set_permissions(&runtime, fs::Permissions::from_mode(0o644)).unwrap(),
+            "mode" => {
+                let path = f.snapshot.join("manifest.json");
+                let mut manifest: Value =
+                    serde_json::from_slice(&fs::read(&path).unwrap()).unwrap();
+                manifest["entries"]["assets/runtime"]["mode"] = json!(0o644);
+                fs::write(path, canonical_bytes(&manifest).unwrap()).unwrap();
+            }
             "extra" => fs::write(f.snapshot.join("data/unselected"), "extra").unwrap(),
             _ => {
                 fs::rename(&runtime, f.root.join("runtime.retained")).unwrap();

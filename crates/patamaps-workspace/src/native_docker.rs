@@ -141,7 +141,7 @@ fn captured_context(
         }
         snapshot = Some(json!({
             "profile":manifest.profile,"digest":manifest.digest,"files":file_entries,
-            "fileCount":files.len(),"fileBytes":total,"snapshotBytesAndModesVerified":true,
+            "fileCount":files.len(),"fileBytes":total,"snapshotBytesVerified":true,"capturedModesBound":true,
             "originalSourceAccess":"not-required","toolExecution":"not-performed"
         }));
     } else {
