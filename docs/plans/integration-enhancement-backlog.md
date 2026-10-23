@@ -688,7 +688,7 @@ independently matched to the frozen checkout; PostgreSQL/Next/browser/proxy and
 all three listeners stopped. Bootstrap used an actual unprivileged browser
 launch with the locked package and no OS package installation request.
 
-Artifact 12526829032 is335,616bytes, independently verified SHA-256
+Artifact 12526829032 is 335,616 bytes, independently verified SHA-256
 05e209fc3d9c8e68b26741c7936eaa1000b763bba06f825cc49a953153e0ed67.
 Only compact receipts were retained on Intel and committed; no duplicate ZIP,
 private runtime logs, HTTP bodies/cookies, credentials, encryption material or
@@ -705,3 +705,52 @@ open. No registry publication, production/trust activation, deletion, Intel
 policy increase or unguarded native build occurred. The next work starts by
 reviewing existing Miniserve/Axum dependency and test-context receipts against
 the original plan before selecting the smallest complete remaining increment.
+
+
+## Selected increment: sealed Cargo registry inputs for real Rust execution (2026-10-23)
+
+Reuse unchanged Miniserve0.35.0 at 2cd9c495ef25f2fcef505615f603e9de8f981915,
+the current compiler, native opaque ProjectContext and ProjectBuild contracts,
+and the existing focused external-Rust workflow. Original public test fixtures
+stay outside Patamaps capture under their existing eight-item Git-blob contract.
+Do not relabel them or capture raw TLS/auth material to obtain closure.
+
+The intended full increment is an actual source build and all325default tests
+with a fresh, native-staged CARGO_HOME: retain only original public crates.io
+.crate distribution archives matching the pinned Cargo.lock checksums and exact
+sparse-index/configuration bytes from a fresh credential-free download home.
+These are original public registry artifacts, not archives constructed to hide
+excluded owner files. Refuse other registries, missing/extra/corrupt package
+archives, symlinks or credentials/configuration injection. Keep registry files
+immutable through native context verification; only explicitly declared generated
+cache/source/target paths may be writable. Hide the original configured cache
+before execution. Preserve package/index inventories and digests, native bindings,
+selected build output, failure evidence and source immutability.
+
+A Cargo offline flag alone does not deny networking by arbitrary build scripts.
+First test a dedicated Linux user/network namespace without sudo: only loopback
+may exist, loopback HTTP/TCP must work, and an external route must be absent.
+Verify host UID mapping, cancellation and actual owner-SIGKILL cleanup through
+the existing project_watch guardian. Do not change runner sysctls or global
+security policy. This first preflight performs no application/compiler build;
+its receipt must leave registry/application/full-dependency acceptance false.
+If the runner refuses the unprivileged namespace, preserve the refusal and select
+the existing managed Linux isolation backend before further compilation.
+
+After that enforcement gate, use native retained build/context commands to run
+the actual release build and unchanged default tests with external networking
+denied and the original configured Cargo home unavailable. Keep the produced
+binary before tests, and reuse the existing eight real HTTP controls. Corrupt a
+bound registry member and require native refusal before a marker side effect;
+restore from the retained original and verify selected state with the configured
+cache/snapshot paths unavailable. No invented cache hit, reproducible-binary,
+complete OS/toolchain closure or fixture-capture claim follows.
+
+Retain the existing4GB CI growth/500MB reserve, two Cargo jobs and bounded logs /
+command deadlines. Registry capture has a proposed256MiB file-byte ceiling;
+measure before admitting the full build. Preflight itself is bounded to32MiB
+and sixty seconds. No deletion, privileged package installation, policy increase,
+parallel activation, registry/production publication, or unguarded Intel build.
+Intel is used for reviewed edits, syntax inspection and regular Rory pushes.
+Full dependency/test-context, current installed replay, remaining framework /
+deployment boundaries and performance stay open until their own evidence exists.
