@@ -23,6 +23,10 @@ a passed fixture or metadata observation is not general support.
 
 ## Current selected work
 
+The latest completed increment is [fresh exact source/native installation on the real Miniserve application](../acceptance/project-adoption/g5-miniserve-installed-20261023/ci.json). Both installed compilers passed the same eight HTTP controls; changed-artifact refusal, restored bindings and runtime with producer/test compiler paths unavailable passed. The unchanged Nango-dependent app remains owner-deferred. Next select a bounded application-image increment for this same Rust profile; browser, complete dependency/test-context closure, broader framework coverage and exclusive edit-loop measurements remain open. G0–G6 general adoption is not complete.
+
+## Earlier Next candidate checkpoint
+
 Pinned Fumadocs source and frozen dependency preparation passed; see the
 [preparation receipt](../acceptance/project-adoption/g3-fumadocs-source-preparation-2026-10-21/receipt.json).
 The subsequent [production-build attempt](../acceptance/project-adoption/g3-fumadocs-next-build-2026-10-21/receipt.json)
@@ -410,3 +414,9 @@ Intel preflight completed under native guard 261c9e93-29d8-4a58-9bc5-7d74ea936c1
 The first installed-consumer CI run [39897080202](https://github.com/roryscot/patamaps/actions/runs/39897080202) failed after successful exact packaging and fresh locked/offline Cargo installation. The installed native compiler matched its source identity, then refused imported context with PROJECT_CONTEXT. Read-only comparison showed Python data_filter discards directory modes (including bound 0700 context directories); the frozen archive itself was unchanged. The importer now retains validated archive modes while keeping data_filter path/type checks. A ninth regression control and direct native verification of the exact frozen state are pending under the same 32 MiB native guard. No product binding, archived state or acceptance criterion was changed.
 
 The correction passed Intel native guard 9ff566ec-2568-4cbd-9d09-823336cda845 (exit 0): all nine archive controls, followed by actual project-build-verify on the exact restored frozen state. Native source/binary behavior and declared state bindings were unchanged. This directly verifies the import repair before repeating the focused installed-consumer CI lane.
+
+## Completed installed external Rust increment (2026-10-23 UTC)
+
+[Run 39897900519](https://github.com/roryscot/patamaps/actions/runs/39897900519), source c6b58517e19ef68b99ca9a7a215ed661cf01c390, passed the focused lane after the independently verified mode-preserving import repair. The [CI provenance](../acceptance/project-adoption/g5-miniserve-installed-20261023/ci.json) and [receipt](../acceptance/project-adoption/g5-miniserve-installed-20261023/ci-receipt.json) freeze exact package/engine identities and 1,071 installed source files. Fresh native extraction and locked/offline Cargo source installation both passed installed-source execution of all eight real runtime controls. Late artifact mutation refused before effects; restoration passed; runtime passed again with the producer and both test-installed compiler paths unavailable. Selected bytes/pointer and the complete installed-source inventory remained unchanged. Miniserve was not recompiled or retested.
+
+Artifact 12477786702 is 18,287,962 bytes, digest sha256:ccb9af37ece3fb209aeec5681462abd6864a09ed8a717d78945399d51910d067, independently verified at intake. Raw package archives remain in that 14-day CI artifact; only compact receipts were retained locally and committed. This is an unpublished exact-package qualification, not registry publication, independent binary reproducibility, complete dependency closure or all G5/G6 acceptance. The first failed attempt remains preserved. Both Intel preflight reservations finished without forced recovery, policy changes or deletion.
