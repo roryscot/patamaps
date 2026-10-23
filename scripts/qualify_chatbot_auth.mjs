@@ -1,5 +1,6 @@
 /** Real production browser/actions. Raw credentials, HTTP and child logs stay private. */
 import assert from 'node:assert/strict';
+import { isDeepStrictEqual } from 'node:util';
 import { createHash, randomBytes, randomUUID } from 'node:crypto';
 import { createServer as createHttpsServer } from 'node:https';
 import { request as httpRequest } from 'node:http';
@@ -247,7 +248,8 @@ async function main() {
     const created = await ctxA.request.post(endpoint, { data: { title: 'Qualification private document', content, kind: 'text' } });
     check(created.status() === 200, 'owner document creation');
     const own = await ctxA.request.get(endpoint);
-    check(own.status() === 200 && (await own.json())[0]?.content === content, 'owner private document read');
+    const expectedOwnerDocuments = await own.json();
+    check(own.status() === 200 && expectedOwnerDocuments.length === 1 && expectedOwnerDocuments[0]?.content === content && expectedOwnerDocuments[0]?.userId === idA, 'owner private document read');
     pass(stage);
     stage = 'cross-user-private-document-read-refusal';
     const forbidden = await ctxB.request.get(endpoint);
@@ -257,7 +259,7 @@ async function main() {
     const mutation = await ctxB.request.post(endpoint, { data: { title: 'Unauthorized', content: 'overwrite', kind: 'text', isManualEdit: true } });
     check(mutation.status() === 403, 'cross-user private write refused');
     const preserved = await ctxA.request.get(endpoint);
-    check(preserved.status() === 200 && (await preserved.json())[0]?.content === content, 'refused write preserves owner content');
+    check(preserved.status() === 200 && isDeepStrictEqual(await preserved.json(), expectedOwnerDocuments), 'refused write preserves every owner document version');
     pass(stage);
     stage = 'guest-private-document-read-refusal';
     const deniedGuest = await duplicate.request.get(endpoint);

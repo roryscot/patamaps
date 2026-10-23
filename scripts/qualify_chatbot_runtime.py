@@ -12,6 +12,24 @@ from pathlib import Path
 from project_watch import stop
 
 ROOT = Path(__file__).resolve().parent.parent
+EXPECTED_CONTROLS = frozenset([
+    'unchanged-upstream-four-auth-page-tests',
+    'invalid-registration-action',
+    'successful-registration-action',
+    'production-secure-session-cookie',
+    'duplicate-registration-action-refusal',
+    'invalid-login-action',
+    'wrong-password-action-refusal',
+    'successful-login-action',
+    'off-origin-action-refusal-before-database-effect',
+    'same-request-valid-origin-positive-control',
+    'independent-second-user-registration',
+    'owner-private-document-create-and-read',
+    'cross-user-private-document-read-refusal',
+    'cross-user-private-document-write-refusal',
+    'guest-private-document-read-refusal',
+    'credential-and-cookie-evidence-barrier',
+])
 
 
 def available_port():
@@ -121,7 +139,10 @@ def qualify(owner, work, evidence, pnpm, environment, capacity):
         stage = "production-server-actions-and-permissions"
         execute(stage, ["node", ROOT / "scripts/qualify_chatbot_auth.mjs", config], trusted, timeout=600)
         browser = json.loads((evidence / "browser-auth.json").read_text())
-        assert browser["status"] == "passed" and len(browser["controls"]) >= 15
+        controls = browser["controls"]
+        assert browser["status"] == "passed" and len(controls) == len(EXPECTED_CONTROLS)
+        assert {c["name"] for c in controls} == EXPECTED_CONTROLS and all(c["passed"] is True for c in controls)
+        assert browser["upstreamPageTests"] == 4 and browser["ownedBrowserStopped"] and browser["ownedHttpsProxyStopped"]
         forbidden = [password.encode(), trusted["AUTH_SECRET"].encode(), trusted["POSTGRES_URL"].encode(), (private / "key.pem").read_bytes()]
         for published in evidence.rglob("*"):
             if published.is_file():

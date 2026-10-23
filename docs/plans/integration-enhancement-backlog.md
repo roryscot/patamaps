@@ -607,3 +607,14 @@ its artifact digest, and check every named browser/auth/origin/permission,
 source-preservation, evidence-barrier and shutdown criterion before changing
 support status. Native compilation remains subject to the unchanged Intel
 memory/retention admission policy; no new native build has been admitted here.
+
+
+Acceptance-verifier refinement while the existing CI run remains live: require
+all sixteen distinct named control groups with passed=true, the four unchanged
+upstream page tests and explicit browser/proxy shutdown. A raw count is not an
+adequate completeness check. The cross-user write refusal now compares the
+entire document-version array against the owner-read snapshot, including row
+membership and all values, rather than checking only the first content field.
+This strengthens the already declared unchanged-owner-content requirement.
+The running 40010250913 checkout is unchanged; do not restart it. These newer
+verifier edits require their own focused verification after that run terminates.
