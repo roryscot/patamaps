@@ -1,5 +1,6 @@
 #!/bin/bash
 set -euo pipefail
+trap 'printf "REGISTRY_STARTUP_FAILED_LINE=%s\n" "$LINENO" >&2' ERR
 trap 'exit 130' TERM INT HUP
 mkdir -p /work/{home,tmp,logs,export,cargo-home/registry}
 ln -s /registry/cache /work/cargo-home/registry/cache

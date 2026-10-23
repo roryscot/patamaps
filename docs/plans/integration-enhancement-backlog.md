@@ -932,3 +932,15 @@ fresh compiler/installed-package claim. The existing default Rust lane still
 builds its own CLI. Reuse avoids repeating unrelated compiler work while fixing
 qualification diagnostics. Application source, registry checks, resource quotas,
 all325 tests, HTTP/refusal/tamper/replay criteria remain intact.
+
+
+Second attempt40038561684 at08a54e9 reused the exact current-engine CLI and
+retained the [inner diagnostic](../acceptance/project-adoption/g3-cargo-registry-context-20261023/registry-attempt-2/native-attempt-records.json).
+The runner had four CPUs and about15.5GB available; the unchanged reservation
+was admitted. Docker settings/mount inspection passed, then the container exited
+before the polling command could run. The independent master confirmed it stopped,
+but the guardian's own cleanup receipt was not confirmed. Neither the container
+startup cause nor application compilation is established by this record. Keep it
+failed. Add only bounded trusted startup/guardian diagnostics and fixed failing
+shell-line markers; raw owner test logs stay private. No capacity, quota, source,
+fixture exclusion, test or acceptance condition is changed for the next attempt.

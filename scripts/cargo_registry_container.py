@@ -194,6 +194,11 @@ def main():
                       logDigests={name:sha(logs/name) for name in ['limits.txt','build.stdout','build.stderr','test.stdout','test.stderr']})
     except BaseException as error:
         report.update(status='failed', errorClass=type(error).__name__, error=str(error)[:1024])
+        if owned['containers']:
+            state = inspect()['State']
+            report['failureContainerState'] = {k:state[k] for k in ['Status','Running','Pid','ExitCode','Error','OOMKilled']}
+            startup = subprocess.run(['docker','logs','--tail','20',container],capture_output=True,text=True,timeout=10)
+            report['startupDiagnostics'] = dict(exitCode=startup.returncode,stdout=startup.stdout[-4096:],stderr=startup.stderr[-4096:])
         raise
     finally:
         try:
@@ -215,6 +220,9 @@ def main():
             raise
         finally:
             stop(child)
+            report['guardianExit'] = None if child is None else child.returncode
+            report['guardianDiagnostics'] = {name:(logs/name).read_text(errors='replace')[-4096:]
+                                             for name in ['guardian.stdout','guardian.stderr'] if (logs/name).exists()}
             report['elapsedMs'] = round((time.monotonic()-started)*1000)
             (bundle/'registry-execution.json').write_text(json.dumps(report, indent=2)+'\n')
     print(json.dumps(dict(status=report['status'], defaultTestsPassed=325, binaryDigest=report['binaryDigest'])))
