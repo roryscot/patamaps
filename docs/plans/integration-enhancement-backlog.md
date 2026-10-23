@@ -314,3 +314,12 @@ The corrected [fifteen-control preflight](../acceptance/project-adoption/g5-mini
 passed under a fresh exclusive 16 MiB Intel guard. It validates the privacy
 selection correction, not the application source/runtime pipeline; one focused
 CI retry is required. The prior failure remains authoritative for its run.
+
+Current continuation handle: [focused retry 39882477708](https://github.com/roryscot/patamaps/actions/runs/39882477708)
+at source 303bc19728d37b5ea29cfa98bae17a4cce4a99b2, job 120182858099.
+The job was confirmed live in compiler/source/test/HTTP qualification after its
+configuration controls passed. Inspect the [observation](../acceptance/project-adoption/g5-miniserve-config-preflight-20261022/retry-39882477708.json)
+and poll this exact handle; do not restart on an observation timeout. On terminal
+success inspect commands/default-test totals, refusal/pointer/runtime assertions
+and artifact digests before any acceptance, then do the existing bounded Intel
+managed replay. Package-installer, managed runtime and performance remain open.
