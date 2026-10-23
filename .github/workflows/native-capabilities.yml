@@ -14,13 +14,14 @@ on:
         options:
           - all
           - next-preparation
+          - external-rust
 
 permissions:
   contents: read
 
 jobs:
   cargo-metadata-contract:
-    if: github.event_name != 'workflow_dispatch' || inputs.qualification != 'next-preparation'
+    if: github.event_name != 'workflow_dispatch' || inputs.qualification == 'all'
     name: Rust Cargo metadata contract
     runs-on: ubuntu-24.04
     timeout-minutes: 20
@@ -43,7 +44,7 @@ jobs:
           --work-root "$RUNNER_TEMP/patamaps-selected-exec-${{ github.run_id }}-${{ github.run_attempt }}"
 
   retention-admission:
-    if: (github.event_name != 'push' || github.ref == 'refs/heads/main') && (github.event_name != 'workflow_dispatch' || inputs.qualification != 'next-preparation')
+    if: (github.event_name != 'push' || github.ref == 'refs/heads/main') && (github.event_name != 'workflow_dispatch' || inputs.qualification == 'all')
     name: Retention admission boundaries
     runs-on: ubuntu-24.04
     timeout-minutes: 5
@@ -60,7 +61,7 @@ jobs:
           PATAMAPS_TEST_RETAIN_ROOT="$RUNNER_TEMP/patamaps-package-scope-tests" python3 -B -m unittest discover -s scripts -p test_package_source.py
 
   linux:
-    if: (github.event_name != 'push' || github.ref == 'refs/heads/main') && (github.event_name != 'workflow_dispatch' || inputs.qualification != 'next-preparation')
+    if: (github.event_name != 'push' || github.ref == 'refs/heads/main') && (github.event_name != 'workflow_dispatch' || inputs.qualification == 'all')
     name: Linux ${{ matrix.architecture }}
     strategy:
       fail-fast: false
@@ -127,7 +128,7 @@ jobs:
           retention-days: 14
 
   cross-stack-source:
-    if: (github.event_name != 'push' || github.ref == 'refs/heads/main') && (github.event_name != 'workflow_dispatch' || inputs.qualification != 'next-preparation')
+    if: (github.event_name != 'push' || github.ref == 'refs/heads/main') && (github.event_name != 'workflow_dispatch' || inputs.qualification == 'all')
     name: Cross-stack source bindings (Linux x86_64)
     runs-on: ubuntu-24.04
     timeout-minutes: 30
@@ -247,7 +248,7 @@ jobs:
           if-no-files-found: error
           retention-days: 7
   cross-stack-image:
-    if: (github.event_name != 'push' || github.ref == 'refs/heads/main') && (github.event_name != 'workflow_dispatch' || inputs.qualification != 'next-preparation')
+    if: (github.event_name != 'push' || github.ref == 'refs/heads/main') && (github.event_name != 'workflow_dispatch' || inputs.qualification == 'all')
     name: Cross-stack Linux image and browser (amd64)
     runs-on: ubuntu-24.04
     timeout-minutes: 45
@@ -351,3 +352,8 @@ jobs:
             ci-evidence/fumadocs-preparation/turbo-docs/
           if-no-files-found: warn
           retention-days: 14
+
+  external-rust-deployment:
+    if: github.event_name == 'workflow_dispatch' && inputs.qualification == 'external-rust'
+    name: External Rust deployment
+    uses: ./.github/workflows/external-rust-deployment.yml

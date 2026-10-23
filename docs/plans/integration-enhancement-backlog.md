@@ -259,3 +259,32 @@ Phase two remains required: build the same pinned application's source on Linux,
 repeat the native selected runtime workflow with its produced artifact, and
 qualify an exact installed Patamaps consumer. Practical exclusive edit-loop
 measurements and broader framework boundaries remain separate open requirements.
+
+Execution refinement before application work: cached native test archives do not
+contain a Linux Patamaps CLI suitable for pre-publication service verification.
+Use a dedicated, manually dispatched Linux CI job first. It builds the unchanged
+Rust implementation and pinned Miniserve source, runs the owner's default test
+suite, and verifies HTTP before native build publication. Failure controls reuse
+that compiled binary; they do not repeat the Rust compilation. Commands have
+existing parent-death cleanup, bounded logs/deadlines, and two-second-or-faster
+4 GB growth/500 MB reserve monitoring on the isolated CI host. This is separate
+from Intel's still-required managed CPU/memory/quota acceptance.
+
+The native Intel configuration preflight uses a smaller 16 MiB exclusive growth
+ceiling. Its ten controls cover valid projection, duplicates, unknown/auth-file
+settings, boolean/overflow/privileged ports, public binds, path traversal, target
+and nonsecret declarations. No full six-job regression rerun is required for
+these script-only changes; the focused manual workflow must pass. Preserve
+failed runs, and do not claim fresh package-installer acceptance from a copied
+standalone compiler. The goal and managed-runtime/installed/performance
+requirements remain intact.
+
+The focused job is called through the existing registered native-capabilities
+workflow with qualification=external-rust. Its reusable workflow runs only that
+manual selection; unrelated native/Next lanes are skipped. Original source
+compilation/default tests, runtime gates and retained artifact export must pass
+before this increment can be accepted.
+
+[Intel configuration preflight](../acceptance/project-adoption/g5-miniserve-config-preflight-20261022/receipt.json)
+passed ten frozen cases and syntax checks under the exclusive 16 MiB guard.
+Actual application source/build/test/runtime acceptance awaits the focused CI.
