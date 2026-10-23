@@ -17,6 +17,7 @@ on:
           - external-rust
           - external-rust-installed
           - external-rust-image
+          - binary-docker-context
 
 permissions:
   contents: read
@@ -377,3 +378,11 @@ jobs:
     uses: ./.github/workflows/external-rust-installed.yml
     with:
       application-image: true
+
+  binary-docker-context:
+    if: github.event_name == 'workflow_dispatch' && inputs.qualification == 'binary-docker-context'
+    name: Binary-bearing Docker contexts
+    permissions:
+      contents: read
+      actions: read
+    uses: ./.github/workflows/binary-docker-context.yml
