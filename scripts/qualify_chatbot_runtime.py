@@ -27,7 +27,7 @@ def qualify(owner, work, evidence, pnpm, environment, capacity):
     report_path = evidence / "runtime.json"
     report = dict(
         status="preparing", controls=[], credentialsCaptured=False,
-        rawRuntimeLogsUploaded=False, applicationSourceModified=False,
+        rawRuntimeLogsUploaded=False, sourceMutationRequested=False,
         testBoundary="new CI-only PostgreSQL; trusted-owner secret environment; HTTPS loopback",
         productionActivation=False, externalModelAccepted=False,
     )

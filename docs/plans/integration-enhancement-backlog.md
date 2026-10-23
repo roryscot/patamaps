@@ -550,3 +550,22 @@ production browser/action controls are prepared. Python AST, Node syntax and
 interactive memory reserve. The focused lane retains all existing manifest,
 workspace-regression and strict Clippy gates. Actual runtime, credential
 barriers and shutdown checks remain pending execution, not accepted results.
+
+
+First production-auth attempt [40008362094](https://github.com/roryscot/patamaps/actions/runs/40008362094),
+source 22d53de, passed the unchanged production build/manifests, real isolated
+PostgreSQL initialization and owner migrations, production readiness, the four
+upstream page tests, invalid registration, real registration and the production
+secure-session cookie check. It failed at duplicate-registration refusal; the
+first sanitized report cannot identify which assertion failed. The
+[digest-verified failed receipts](../acceptance/project-adoption/g3-chatbot-source-20261023/auth-first-attempt.json)
+are preserved. Next/PostgreSQL/browser/proxy stopped, and all three listeners
+were confirmed absent. No whole-runtime or permission acceptance is claimed;
+post-runtime source audit was not reached. There is insufficient evidence to
+call this an upstream or Patamaps product defect.
+
+The focused repeat adds only fixed assertion labels, whitelisted action-state
+names, numeric HTTP status/database counts and a whitelisted error class.
+Credentials, cookies, raw responses and traces remain private. All existing
+acceptance controls remain. Failure paths now also attempt selected-source
+byte/mode verification without replacing the original failed result.

@@ -20,7 +20,10 @@ const report = {
 let stage = 'https-proxy';
 const save = () => writeFileSync(config.receipt, JSON.stringify(report, null, 2) + '\n');
 const pass = name => { report.controls.push({ name, passed: true }); save(); };
-const check = (value, label) => assert.ok(value, label);
+const check = (value, label) => {
+  if (!value) { report.failedCheck = label; save(); }
+  assert.ok(value, label);
+};
 const contexts = [];
 let browser;
 const sql = postgres(process.env.POSTGRES_URL, { max: 2, connect_timeout: 5 });
@@ -63,13 +66,19 @@ async function submit(page, email, password, button, state) {
   const awaited = page.waitForResponse(response => response.request().method() === 'POST' && Boolean(response.request().headers()['next-action']));
   await page.getByRole('button', { name: button, exact: true }).click();
   const response = await awaited;
+  report.lastAction = { httpStatus: response.status(),
+    responseIsRsc: (response.headers()['content-type'] ?? '').includes('text/x-component'), expectedState: state };
+  save();
   check(response.status() === 200 && (response.headers()['content-type'] ?? '').includes('text/x-component'), 'real action response');
   const body = await response.text();
+  report.lastAction.observedStates = ['idle', 'in_progress', 'success', 'failed', 'invalid_data', 'user_exists'].filter(value => body.includes('"' + value + '"'));
+  save();
   check(body.includes('"' + state + '"'), 'expected action state');
   return response.request();
 }
 async function count(email) {
   const rows = await sql`select count(*)::int as count from "User" where email=${email}`;
+  report.lastDatabaseCount = rows[0].count;
   return rows[0].count;
 }
 async function session(ctx) {
@@ -83,7 +92,9 @@ async function regular(ctx, email) {
   return value.user.id;
 }
 async function guest(ctx) {
-  check((await session(ctx)).user?.type !== 'regular', 'refusal must not create a regular session');
+  const type = (await session(ctx)).user?.type;
+  report.lastSessionType = ['guest', 'regular'].includes(type) ? type : 'absent-or-unknown';
+  check(type !== 'regular', 'refusal must not create a regular session');
 }
 async function upstreamPages() {
   const path = join(config.private, 'upstream.config.mjs');
@@ -235,8 +246,9 @@ async function main() {
     inspect(dirname(config.receipt));
     pass(stage);
     report.status = 'passed';
-  } catch {
+  } catch (error) {
     report.status = 'failed'; report.failedStage = stage;
+    report.errorClass = ['AssertionError', 'TimeoutError', 'Error', 'TypeError'].includes(error.name) ? error.name : 'Other';
     process.exitCode = 1;
   } finally {
     for (const ctx of contexts) await ctx.close().catch(() => {});

@@ -111,7 +111,12 @@ def main():
    r.update(runtimeEstablished=True,authenticationAccepted=True,ownerRuntimeMigrationExecuted=True,runtimeBoundary="trusted owner; new isolated CI PostgreSQL and HTTPS loopback; no production secrets")
   audit("source-exclusion-final-audit");assert source_unchanged(owner) and source_unchanged(staged)
   r.update(status="passed-pinned-chatbot-source-build-auth" if a.runtime else "passed-pinned-chatbot-source-build-observations",frameworkVersion=version,sourceContextDigest=capture["digest"],textSourceDigest=source["digest"],sourceTextFiles=len(texts),selectedSourceBytesAndModesUnchanged=True,sourceExclusionAudited=True,dependencyLifecycleScriptsExecuted=False,nativeCompiledObservation=True,ownerTestMode="CI_PLAYWRIGHT=1 selects the owner's model-test mode; no model behavior accepted")
- except BaseException as error:r.update(status="failed",error=str(error));save();raise
+ except BaseException as error:
+  r.update(status="failed",error=str(error))
+  if "source_unchanged" in locals():
+   try:r["selectedSourcesUnchangedAfterFailure"]=source_unchanged(owner) and source_unchanged(staged)
+   except (OSError,ValueError):r["selectedSourcesUnchangedAfterFailure"]=None
+  save();raise
  save();print(json.dumps(dict(status=r["status"],frameworkBuildEstablished=True,runtimeEstablished=r["runtimeEstablished"])))
 
 
