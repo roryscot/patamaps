@@ -52,7 +52,8 @@ The managed workload sees the candidate and original archive/index directories
 through read-only mounts. Cargo extraction, locks, target files, HOME and TMPDIR
 live in a fresh bounded /work filesystem. The original configured download home
 is renamed before execution and is not mounted. No host user home, credentials
-or Docker socket is mounted. Host tools, Rust toolchain and the original pinned
+or Docker socket is mounted. The read-only /etc/alternatives mount supplies OS command aliases.
+Host tools, Rust toolchain and the original pinned
 public test clone remain read-only external inputs; they are not closed by this
 registry snapshot.
 

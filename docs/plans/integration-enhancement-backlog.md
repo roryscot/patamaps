@@ -944,3 +944,21 @@ startup cause nor application compilation is established by this record. Keep it
 failed. Add only bounded trusted startup/guardian diagnostics and fixed failing
 shell-line markers; raw owner test logs stay private. No capacity, quota, source,
 fixture exclusion, test or acceptance condition is changed for the next attempt.
+
+
+Third attempt40038899657 atf25a672 preserved the actual cause: /source/registry-build.sh
+line14 failed because awk was unavailable. The runner's awk alias resolves through
+/etc/alternatives, absent from the explicit read-only system mounts. The script
+exited1, OOMKilled=false, before Cargo. The
+[verified diagnostic](../acceptance/project-adoption/g3-cargo-registry-context-20261023/registry-attempt-3/native-attempt-records.json)
+also confirms the container and guardian cleanup completed on this attempt.
+Add only the read-only OS alternatives directory, retaining the explicit external
+OS/toolchain limitation. No home, credential directory or Docker socket is added.
+
+Two lifecycle details are tightened without changing acceptance: invoke captured
+Python helpers with -B so imports cannot add undeclared bytecode files; signal the
+guardian PID and await its completion before fallback rather than group-signaling
+its active Docker cleanup clients. The independent master remains available and
+actual Running=false/Pid=0 plus guardian cleanup confirmation are still required.
+This does not retroactively establish the earlier unconfirmed cleanup's cause.
+All previous failures, limits and all325 test/runtime/refusal/replay gates remain.

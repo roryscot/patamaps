@@ -112,7 +112,7 @@ def qualify(root, work, out, source, staged, names, cargo, cli, env, run, native
                      projections=[dict(path='projection.json',emissions=[dict(path='generated/registry.json',language='json')])],
                      context=dict(scope='explicit original crates.io input qualification'),evaluatedAt='2026-10-23T00:00:00Z')
     def invocation(verify=False):
-        return command(sys.executable, ['cargo_registry_container.py','--spec','registry-executor.json',*(['--verify'] if verify else [])],
+        return command(sys.executable, ['-B','cargo_registry_container.py','--spec','registry-executor.json',*(['--verify'] if verify else [])],
                        refs=dict(PATH='path'), inputs=[*scripts,'registry-build.sh'], maximum=2400000 if not verify else 60000)
     plan = dict(profile='patamaps-project-build-1', maximumRetainedAttempts=8, project=project, workspace=workspace,
                 buildSteps=[invocation()], verificationSteps=[invocation(True)], outputs=[dict(path='bundle',kind='tree')])

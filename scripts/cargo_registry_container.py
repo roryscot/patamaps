@@ -105,7 +105,7 @@ def main():
         assert IMAGE in image['RepoDigests'] and (image['Os'], image['Architecture']) == ('linux', 'amd64')
         mounts = [(source, '/source'), (source/'.cargo-home/registry', '/registry'),
                   (tests, '/test-source'), (toolchain, str(toolchain))]
-        for name in ['/usr', '/bin', '/lib', '/lib64']:
+        for name in ['/usr', '/bin', '/lib', '/lib64', '/etc/alternatives']:
             if Path(name).exists():
                 mounts.append((Path(name), name))
         mounts = [(host.resolve(strict=True), dest) for host, dest in mounts]
@@ -205,7 +205,10 @@ def main():
             # Signal the guardian, whose own cleanup stops Docker before its
             # attach group. The independent master stays available for fallback.
             try:
-                stop(child)
+                if child is not None and child.poll() is None:
+                    # Do not group-signal its in-flight Docker cleanup clients.
+                    child.terminate()
+                    child.wait(timeout=45)
             finally:
                 stop_owned(record_path)
             if owned['containers']:
