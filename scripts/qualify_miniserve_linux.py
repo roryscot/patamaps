@@ -20,7 +20,7 @@ def write(p,v):p.write_text(json.dumps(v,indent=2)+"\n")
 def main():
  p=argparse.ArgumentParser(description=__doc__)
  for n in ["cli","work","evidence"]:p.add_argument("--"+n,type=Path,required=True)
- p.add_argument("--build-cli",action="store_true");p.add_argument("--registry-context",action="store_true");a=p.parse_args()
+ p.add_argument("--build-cli",action="store_true");p.add_argument("--registry-context",action="store_true");p.add_argument("--reuse-registry-cli",action="store_true");a=p.parse_args()
  assert platform.system()=="Linux" and platform.machine()=="x86_64" and os.environ.get("GITHUB_ACTIONS")=="true","Use dedicated Linux CI; Intel requires its supervisor"
  work=a.work.resolve();out=a.evidence.resolve();assert not work.exists() and not out.exists()
  work.mkdir(parents=True);out.mkdir(parents=True);(out/"logs").mkdir();(out/"artifacts").mkdir()
@@ -50,6 +50,10 @@ def main():
  def command(exe,args,refs=None,inputs=None,maximum=60000):
   return dict(profile="patamaps-project-command-1",workingDirectory=".",environmentReferences=refs or {},invocation=dict(executable=str(exe),arguments=list(map(str,args)),codeInputs=inputs or [],bounds=dict(maximumElapsedMs=maximum,maximumStdoutBytes=65536,maximumStderrBytes=65536)))
  try:
+  if a.reuse_registry_cli:
+   assert a.registry_context and not a.build_cli
+   from qualify_cargo_registry import restore_compiler
+   r["compilerArtifactReuse"]=restore_compiler(ROOT,a.cli);save()
   if a.build_cli:run("build-native-compiler",["cargo","+1.99.0","build","--locked","--release","-p","patamaps-cli","--bin","patamaps"],cwd=ROOT)
   installed=work/"relocated-native/bin";installed.mkdir(parents=True);cli=installed/"patamaps";shutil.copy2(a.cli.resolve(strict=True),cli)
   assert sha(cli)==sha(a.cli);r["relocatedCompiler"]=dict(sha256=sha(cli),freshDirectory=True,engine=native("relocated-engine",["engine"]))

@@ -363,6 +363,9 @@ jobs:
   external-rust-deployment:
     if: github.event_name == 'workflow_dispatch' && inputs.qualification == 'external-rust'
     name: External Rust deployment
+    permissions:
+      contents: read
+      actions: read
     uses: ./.github/workflows/external-rust-deployment.yml
 
   external-rust-installed:
@@ -399,6 +402,9 @@ jobs:
   cargo-registry-preflight:
     if: github.event_name == 'workflow_dispatch' && inputs.qualification == 'cargo-registry-preflight'
     name: Cargo registry isolation prerequisite
+    permissions:
+      contents: read
+      actions: read
     uses: ./.github/workflows/external-rust-deployment.yml
     with:
       registry-preflight-only: true
@@ -406,6 +412,9 @@ jobs:
   cargo-registry-container-preflight:
     if: github.event_name == 'workflow_dispatch' && inputs.qualification == 'cargo-registry-container-preflight'
     name: Managed Cargo registry isolation prerequisite
+    permissions:
+      contents: read
+      actions: read
     uses: ./.github/workflows/external-rust-deployment.yml
     with:
       registry-container-preflight-only: true
@@ -413,6 +422,10 @@ jobs:
   cargo-registry-context:
     if: github.event_name == 'workflow_dispatch' && inputs.qualification == 'cargo-registry-context'
     name: Real Cargo retained registry context
+    permissions:
+      contents: read
+      actions: read
     uses: ./.github/workflows/external-rust-deployment.yml
     with:
       registry-context: true
+      registry-reuse-compiler: true

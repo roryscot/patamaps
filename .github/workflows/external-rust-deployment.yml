@@ -11,12 +11,18 @@ on:
       registry-context:
         type: boolean
         default: false
+      registry-reuse-compiler:
+        type: boolean
+        default: false
 permissions:
   contents: read
 jobs:
   miniserve:
     if: ${{ !inputs['registry-preflight-only'] && !inputs['registry-container-preflight-only'] }}
     name: Pinned Miniserve source build and retained HTTP
+    permissions:
+      contents: read
+      actions: read
     runs-on: ubuntu-24.04
     timeout-minutes: 45
     env:
@@ -37,9 +43,12 @@ jobs:
           PATAMAPS_TEST_RETAIN_ROOT="$RUNNER_TEMP/miniserve-config-controls" python3 -B -m unittest discover -s scripts -p test_deployment_miniserve.py
           PATAMAPS_TEST_RETAIN_ROOT="$RUNNER_TEMP/miniserve-config-controls" python3 -B -m unittest discover -s scripts -p test_cargo_registry_context.py
       - name: Build compiler and qualify actual external Rust source and HTTP
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: >-
           python3 -B scripts/qualify_miniserve_linux.py
-          --cli target/release/patamaps --build-cli
+          --cli target/release/patamaps
+          ${{ inputs['registry-reuse-compiler'] && '--reuse-registry-cli' || '--build-cli' }}
           ${{ inputs['registry-context'] && '--registry-context' || '' }}
           --work "$RUNNER_TEMP/patamaps-miniserve-${{ github.run_id }}-${{ github.run_attempt }}"
           --evidence ci-evidence/miniserve

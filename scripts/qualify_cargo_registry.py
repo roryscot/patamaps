@@ -1,15 +1,48 @@
 """Compose existing opaque context and retained build contracts for real Cargo."""
 import copy
+import hashlib
+import io
 import json
 import os
 import shutil
 import subprocess
 import sys
 import tarfile
+import zipfile
 from pathlib import Path
 
 from cargo_registry_context import inventory, sha, stage
 from cargo_registry_container import IMAGE
+
+
+def restore_compiler(root, destination):
+    """Reuse exact current-engine output; no installation or fresh-build claim."""
+    artifact = 12531199013
+    producer = '163b1235c9eb4996268e49899aba3b2de3d258aa'
+    digest = 'sha256:d2fe67d0d209481bcb2c5500f6d2c58bafee81bf15c1ff2ebe4aba9912f33cb9'
+    meta = json.loads(subprocess.check_output(['gh','api',f'repos/roryscot/patamaps/actions/artifacts/{artifact}'],timeout=30))
+    assert not meta['expired'] and meta['workflow_run']['id']==40024281589 and meta['workflow_run']['head_sha']==producer
+    assert meta['digest']==digest and meta['size_in_bytes']==10395729
+    raw = subprocess.check_output(['gh','api',f'repos/roryscot/patamaps/actions/artifacts/{artifact}/zip'],timeout=60)
+    assert len(raw)==10395729 and 'sha256:'+hashlib.sha256(raw).hexdigest()==digest
+    with zipfile.ZipFile(io.BytesIO(raw)) as archive:
+        receipt = json.loads(archive.read('receipt.json'))
+        info = archive.getinfo('artifacts/patamaps')
+        assert info.file_size<=33554432
+        binary = archive.read(info)
+        assert hashlib.sha256(binary).hexdigest()==receipt['relocatedCompiler']['sha256']
+    destination = Path(destination).resolve()
+    assert not destination.exists()
+    destination.parent.mkdir(parents=True,exist_ok=True)
+    with destination.open('xb') as stream:
+        stream.write(binary)
+    destination.chmod(0o755)
+    engine = json.loads(subprocess.check_output([destination,'engine'],env={'PATH':'/usr/bin:/bin'},timeout=10))
+    sys.path.insert(0,str(root/'scripts/parity'))
+    from identity import identities
+    assert engine==receipt['relocatedCompiler']['engine']==dict(schemaVersion='0.1.0',documentType='executor-description',**identities(root))
+    return dict(artifactId=artifact,artifactDigest=digest,producerRevision=producer,binaryDigest=sha(destination),
+                currentEngineVerified=True,freshCompilerBuild=False,installedPackageClaim=False)
 
 
 def qualify(root, work, out, source, staged, names, cargo, cli, env, run, native, command, record):
@@ -85,7 +118,25 @@ def qualify(root, work, out, source, staged, names, cargo, cli, env, run, native
                 buildSteps=[invocation()], verificationSteps=[invocation(True)], outputs=[dict(path='bundle',kind='tree')])
     plan_path, state = base/'plan.json', base/'state'
     write(plan_path, plan)
-    selected = json.loads(run('registry-native-real-build', [cli,'project-build',plan_path,'--source',owner,'--state',state,'--context',binding_path], timeout=2400))
+    try:
+        selected = json.loads(run('registry-native-real-build', [cli,'project-build',plan_path,'--source',owner,'--state',state,'--context',binding_path], timeout=2400))
+    finally:
+        # Keep bounded executor diagnostics even when native selection refuses.
+        # These helpers never emit the raw owner test logs or fixture contents.
+        diagnostics = {}
+        if (state/'attempts').exists():
+            for attempt in (state/'attempts').iterdir():
+                row = {}
+                for item in attempt.glob('*.json'):
+                    if item.name.startswith(('build-', 'verify-')) or item.name=='failure.json':
+                        assert item.stat().st_size<2097152
+                        row[item.name] = json.loads(item.read_text())
+                execution_path = attempt/'candidate/bundle/registry-execution.json'
+                if execution_path.is_file():
+                    assert execution_path.stat().st_size<65536
+                    row['registry-execution.json'] = json.loads(execution_path.read_text())
+                diagnostics[attempt.name] = row
+        write(evidence/'native-attempt-records.json', diagnostics)
     assert selected['status']=='selected-project-build' and selected['verification']=='commands-executed'
     pointer = (state/'selected.json').read_bytes()
     candidate = state/selected['attempt']/'candidate'

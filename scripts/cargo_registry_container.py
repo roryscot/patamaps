@@ -40,9 +40,7 @@ def main():
         assert receipt['defaultTestsPassed'] == 325 and receipt['containerStopped']
         print(json.dumps(dict(status='verified-real-cargo-registry-execution', binaryDigest=receipt['binaryDigest'])))
         return
-    assert os.geteuid() != 0 and (os.cpu_count() or 0) >= 3, 'Dedicated nonroot CI capacity required'
     available = int(next(line for line in Path('/proc/meminfo').read_text().splitlines() if line.startswith('MemAvailable:')).split()[1])*1024
-    assert available >= MEMORY+500000000, 'Container memory reservation plus reserve unavailable'
     source = Path.cwd().resolve()
     cargo = Path(spec['cargo']).resolve(strict=True)
     toolchain = cargo.parent.parent
@@ -58,6 +56,8 @@ def main():
                   cargoHome='/work/cargo-home', workFilesystemBytes=WORK_BYTES,
                   cpuAllowance=2, memoryAllowance=MEMORY, memorySwapAllowance=0, pidsAllowance=512,
                   toolchainClosed=False, ownerTestFixturesClosed=False, filesDeleted=0)
+    report['capacityObservation'] = dict(uid=os.geteuid(), cpuCount=os.cpu_count(), availableMemoryBytes=available,
+                                       requiredMemoryBytes=MEMORY+500000000)
     assert all(sha(path)==digest for path,digest in spec['toolIdentities'].items()), 'Configured executor bytes changed'
     report['executorIdentities'] = spec['toolIdentities']
     record_path = logs/'owned.json'
@@ -99,6 +99,8 @@ def main():
             stop(process)
 
     try:
+        assert os.geteuid() != 0 and (os.cpu_count() or 0) >= 3, 'Dedicated nonroot CI capacity required'
+        assert available >= MEMORY+500000000, 'Container memory reservation plus reserve unavailable'
         image = json.loads(run(['docker', 'image', 'inspect', IMAGE]))[0]
         assert IMAGE in image['RepoDigests'] and (image['Os'], image['Architecture']) == ('linux', 'amd64')
         mounts = [(source, '/source'), (source/'.cargo-home/registry', '/registry'),

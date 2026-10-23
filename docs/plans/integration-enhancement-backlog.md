@@ -910,3 +910,25 @@ snapshot. It is a bounded reusable CI artifact, not a duplicate Intel archive or
 a Git addition of dependency bytes. Compact JSON receipts are the durable review
 record. End-to-end application/registry acceptance is pending actual CI; no pass
 is inferred from syntax or inventory tests.
+
+
+First registry application attempt: run40024281589 at163b123 failed after native
+build-command admission. All456 original archives matched the unchanged lock,
+with87,923,438bytes across874 selected registry files; native source and registry
+capture/staging passed. The [verified failed receipt](../acceptance/project-adoption/g3-cargo-registry-context-20261023/registry-attempt-1/ci.json)
+preserves the artifact digest and native refusal. Inner command diagnostics were
+not retained, so the specific executor failure and whether compilation began
+remain unknown. Do not infer a product defect, missing capacity or an application
+pass. The collector now retains bounded native command/compact executor records,
+without raw test logs. Capacity observations are recorded before refusal; limits
+and all application acceptance conditions remain unchanged.
+
+The focused retry explicitly reuses only this attempt's successfully built CLI:
+artifact12531199013, exact ZIP SHA-256 d2fe67d0d209481bcb2c5500f6d2c58bafee81bf15c1ff2ebe4aba9912f33cb9.
+The CLI byte digest must match its producing receipt and its actual engine must
+match both that receipt and the current source-derived identity. No Rust source
+changed. Expired/changed artifacts or engine drift refuse; no hidden fallback or
+fresh compiler/installed-package claim. The existing default Rust lane still
+builds its own CLI. Reuse avoids repeating unrelated compiler work while fixing
+qualification diagnostics. Application source, registry checks, resource quotas,
+all325 tests, HTTP/refusal/tamper/replay criteria remain intact.
