@@ -43,3 +43,18 @@ A timeout still refuses the update; it does not retry the same failed key or
 skip native verification. Controlled subprocess checks cover both timeout paths,
 success with an explicit budget, invalid declarations and unchanged key matching.
 This is budget configurability, not measured native watch/performance acceptance.
+
+
+An internal opt-in __guard-container OWNERSHIP_JSON path is separately qualified
+by [seven managed controls](../acceptance/project-adoption/g3-cargo-registry-context-20261023/container-ci.json).
+It accepts exactly one never-started container with a valid frozen ID/token and
+matching Docker owner label, derives docker start --attach internally and stops
+that container through the existing stop_owned helper before ordinary attach
+process cleanup. Changed ownership refuses cleanup; a heartbeat or exited attach
+process is never proof that the container stopped. The qualification observes
+actual Docker Running/Pid state, including owner SIGKILL and recovery of an
+observed survivor from an independent matching ownership record. It removes no
+objects. This path is not invoked by the default foreground watch loop, does not
+auto-discover containers, does not enforce arbitrary owner build reservations,
+and does not activate concurrent execution. Ordinary __guard behavior and its
+existing regression controls remain intact.

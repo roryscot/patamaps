@@ -23,6 +23,16 @@ a passed fixture or metadata observation is not general support.
 
 ## Current selected work
 
+The Cargo managed-container prerequisite is now independently verified in
+[run 40019067506](https://github.com/roryscot/patamaps/actions/runs/40019067506)
+at 0e35284. All seven named groups passed, including kernel limits, loopback /
+external-route isolation, a real quota failure, cancellation, owner SIGKILL and
+recovery of an observed survivor after changed-record refusal. The next selected
+work is the already specified native Cargo registry capture, real unchanged
+Miniserve source/default-test execution with networking denied, registry-tamper
+refusal before effects and offline selected replay. None of those application /
+registry controls was run by this prerequisite; complete closure stays open.
+
 The production Server Action/private-document increment is now [verified for unchanged pinned Chatbot](../acceptance/project-adoption/g3-chatbot-production-auth-20261023/independent-verification.json). Focused CI40013461564 at 00c9168 passed the source/build/native gates, four unchanged owner page tests and all sixteen named runtime groups. The [usage guide](../guides/next-production-auth-qualification.md) bounds this HTTPS/new-CI-database profile; earlier failed attempts remain preserved. Initial session readiness was made explicit; the historical underlying mismatch is not retroactively diagnosed. Continue original G0–G6 work: complete dependency/test-context closure, current-engine external installed replay, remaining actual rewrite/framework and deployment controls, and practical exclusive edit-loop measurements. The earlier Miniserve evidence remains scoped; Nango stays owner-deferred. General adoption is not complete.
 
 ## Earlier Next candidate checkpoint
@@ -822,3 +832,35 @@ Intel ordinary-guardian verification passed the real no-detach parent-death /
 independent-group control and all five ordinary exit/EPERM cases with the new
 source. [Receipt](../acceptance/project-adoption/g3-cargo-registry-context-20261023/guardian-darwin.json)
 binds the exact guardian digest. No compiler or container was run on Intel.
+
+
+## Managed Cargo backend prerequisite accepted (2026-10-23)
+
+[Independently verified CI binding](../acceptance/project-adoption/g3-cargo-registry-context-20261023/container-ci.json)
+and [actual controls](../acceptance/project-adoption/g3-cargo-registry-context-20261023/container-receipt.json)
+match the exact four driver/guardian/helper source digests at 0e35284. Seven
+distinct named groups passed in 14.510 seconds with 2,486,272 bytes observed disk
+growth. The original BusyBox platform manifest was used. Kernel readback was
+CPU 50000/100000, memory 67,108,864 bytes, swap 0 and PIDs 32. Actual loopback HTTP
+passed with no external route. A 2 MiB write failed after 1,040,384 bytes in the
+1 MiB /tmp filesystem; this was an observed capacity failure, not just a bad
+command exit. User/root/mount/capability/security settings were checked before
+start. The read-only root had no host mounts.
+
+A wrong owner token refused before the container ever started. Cancellation and
+actual owner SIGKILL stopped workloads deliberately ignoring TERM, confirmed
+with Running=false/Pid=0 and matching cleanup receipts. Changed ownership
+refused automatic container cleanup; the still-running container was observed
+and stopped using a separately retained record matching its actual owner label.
+All five named containers are confirmed stopped in the
+[ownership ledger](../acceptance/project-adoption/g3-cargo-registry-context-20261023/container-owned.json).
+No objects were removed. Default ordinary guardian regressions passed on Linux
+and Intel; no ordinary lifecycle promise was expanded to arbitrary Docker work.
+
+Artifact 12529777083 is 2,346 bytes with independently checked SHA-256
+e68e79ad1361c40dec4eee043a73c6ac1bed71f43b78ef6650a370d44858ca7b.
+Only compact JSON receipts were retained, without a duplicate ZIP or image.
+This accepts only the opt-in managed prerequisite. No application/compiler build,
+registry capture, complete dependency/test-context closure, performance measure,
+production/parallel activation, Intel build or policy increase occurred. The
+failed unshare experiment remains preserved and failed.
