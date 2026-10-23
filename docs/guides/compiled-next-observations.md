@@ -97,3 +97,14 @@ controlled data cases, not real proxy execution. HTTP/browser, generated-contrac
 integration, complete contexts, deployment and installed qualification remain open.
 
 Inputs total at most 8 MiB; at most 10000 observation entities are emitted. Selected arrays/maps and strings have further explicit bounds. This profile refuses control characters in observed text fields. It provides structured observations, not a complete validator for all Next runtime semantics.
+
+Next 16.2.10 adds optional route prefetchSegmentDataRoutes, onMatchHeaders and
+ppr.chain.headers in the reviewed [build manifest definition](https://github.com/vercel/next.js/blob/v16.2.10/packages/next/src/build/index.ts).
+The [segment route definition](https://github.com/vercel/next.js/blob/v16.2.10/packages/next/src/server/lib/router-utils/build-prefetch-segment-data-route.ts)
+contains source, destination and routeKeys. The current reader preserves those
+typed route records (at most 128 per route, with bounded strings/maps), records
+onMatchHeader rules with the existing header validation, and preserves the
+bounded resume-header map in next-build-protocol. Unknown nested fields refuse;
+Next14 inputs containing these active features refuse. These remain observations:
+prefetch regexes, resume chains and on-match headers are never executed.
+Application qualification for these new shapes is pending the focused run.

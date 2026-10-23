@@ -1,7 +1,7 @@
 //! Captured Next App Router build observations. Never executes config, regex or HTTP.
 use crate::Error;
 use patamaps_contracts::{SafeInteger, byte_digest, parse};
-use serde::Deserialize;
+use serde::{Deserialize, Serialize};
 use serde_json::{Value, json};
 use std::collections::{BTreeMap, BTreeSet};
 
@@ -52,6 +52,9 @@ struct Manifest {
     base_path: String,
     redirects: Vec<Value>,
     headers: Vec<Value>,
+    #[serde(default)]
+    on_match_headers: Vec<Value>,
+    ppr: Option<PartialPrerender>,
     rewrites: Rewrites,
     dynamic_routes: Vec<Route>,
     static_routes: Vec<Route>,
@@ -93,6 +96,23 @@ impl Rewrites {
         }
     }
 }
+#[derive(Deserialize, Serialize)]
+#[serde(rename_all = "camelCase", deny_unknown_fields)]
+struct PartialPrerender {
+    chain: ResumeChain,
+}
+#[derive(Deserialize, Serialize)]
+#[serde(deny_unknown_fields)]
+struct ResumeChain {
+    headers: BTreeMap<String, String>,
+}
+#[derive(Deserialize, Serialize)]
+#[serde(rename_all = "camelCase", deny_unknown_fields)]
+struct PrefetchSegmentDataRoute {
+    source: String,
+    destination: String,
+    route_keys: BTreeMap<String, String>,
+}
 #[derive(Deserialize)]
 #[serde(rename_all = "camelCase", deny_unknown_fields)]
 struct Route {
@@ -100,6 +120,8 @@ struct Route {
     regex: String,
     route_keys: BTreeMap<String, String>,
     named_regex: String,
+    #[serde(default)]
+    prefetch_segment_data_routes: Vec<PrefetchSegmentDataRoute>,
 }
 fn refuse() -> Error {
     Error::refused(
@@ -382,6 +404,8 @@ pub(crate) fn observe(
                 manifest.app_type.is_some()
                     || manifest.rewrite_headers.is_some()
                     || manifest.i18n.is_some()
+                    || manifest.ppr.is_some()
+                    || !manifest.on_match_headers.is_empty()
             }
             16 => {
                 manifest.app_type.as_deref() != Some("app")
@@ -418,6 +442,13 @@ pub(crate) fn observe(
                 || a.body_size_limit
                     .as_ref()
                     .is_some_and(|v| v.is_empty() || !bounded(v))
+        })
+        || manifest.ppr.as_ref().is_some_and(|p| {
+            p.chain.headers.len() > 128
+                || p.chain
+                    .headers
+                    .iter()
+                    .any(|(k, v)| k.is_empty() || !bounded(k) || !bounded(v))
         })
         || apps.len() > 4096
         || app_routes.len() > 4096
@@ -463,6 +494,15 @@ pub(crate) fn observe(
                 || !pages.insert(&route.page)
                 || !bounded(&route.regex)
                 || !bounded(&route.named_regex)
+                || route.prefetch_segment_data_routes.len() > 128
+                || framework_major == 14 && !route.prefetch_segment_data_routes.is_empty()
+                || route.prefetch_segment_data_routes.iter().any(|p| {
+                    p.source.is_empty()
+                        || !bounded(&p.source)
+                        || !route_path(&p.destination)
+                        || p.route_keys.len() > 128
+                        || p.route_keys.iter().any(|(k, v)| !bounded(k) || !bounded(v))
+                })
                 || route.route_keys.len() > 128
                 || route
                     .route_keys
@@ -471,24 +511,36 @@ pub(crate) fn observe(
             {
                 return Err(refuse());
             }
+            let mut attributes = json!({"category":category,"index":index,"page":route.page,"regex":route.regex,
+                "namedRegex":route.named_regex,"routeKeys":route.route_keys,"regexExecuted":false,"httpMethods":"not-observed"});
+            if !route.prefetch_segment_data_routes.is_empty() {
+                attributes["prefetchSegmentDataRoutes"] = json!(route.prefetch_segment_data_routes);
+            }
             emit(
                 "next-build-route",
                 &selection.routes_manifest,
                 json!([selection.routes_manifest, category, route.page]),
-                json!({"category":category,"index":index,"page":route.page,"regex":route.regex,
-                    "namedRegex":route.named_regex,"routeKeys":route.route_keys,"regexExecuted":false,"httpMethods":"not-observed"}),
+                attributes,
             )?;
         }
     }
     for (category, rules) in [
         ("redirect", &manifest.redirects),
         ("header", &manifest.headers),
+        ("onMatchHeader", &manifest.on_match_headers),
     ] {
         if rules.len() > 4096 {
             return Err(refuse());
         }
         for (index, value) in rules.iter().enumerate() {
-            rule(value, category)?;
+            rule(
+                value,
+                if category == "onMatchHeader" {
+                    "header"
+                } else {
+                    category
+                },
+            )?;
             emit(
                 "next-build-rule",
                 &selection.routes_manifest,
@@ -547,13 +599,17 @@ pub(crate) fn observe(
             "serverActions":config.server_actions.as_ref().map(|a| json!({"bodySizeLimit":a.body_size_limit,"allowedOrigins":a.allowed_origins})),
             "configurationOrigin":"independent-owner-projection","secretResolution":"not-performed"}),
     )?;
+    let mut protocol = json!({"rsc":manifest.rsc,"rewriteHeaders":manifest.rewrite_headers.clone().unwrap_or(Value::Null),
+        "skipMiddlewareUrlNormalize":manifest.skip_middleware_url_normalize,
+        "interpretation":"opaque-captured-metadata"});
+    if let Some(ppr) = &manifest.ppr {
+        protocol["ppr"] = json!(ppr);
+    }
     emit(
         "next-build-protocol",
         &selection.routes_manifest,
         json!([selection.routes_manifest, "protocol"]),
-        json!({"rsc":manifest.rsc,"rewriteHeaders":manifest.rewrite_headers.clone().unwrap_or(Value::Null),
-            "skipMiddlewareUrlNormalize":manifest.skip_middleware_url_normalize,
-            "interpretation":"opaque-captured-metadata"}),
+        protocol,
     )?;
     Ok((
         entities,
@@ -640,6 +696,108 @@ mod tests {
         mutate(inputs, "apps.json", |v| v[app] = json!(module_file));
         mutate(inputs, "app-routes.json", |v| v[app] = json!(route));
         rebind(inputs);
+    }
+    fn add_next162(inputs: &mut BTreeMap<String, String>) {
+        mutate(inputs, "config.json", |v| {
+            v["frameworkVersion"] = json!("16.2.10")
+        });
+        mutate(inputs, "routes.json", |v| {
+            v["dynamicRoutes"][0]["prefetchSegmentDataRoutes"] = json!([{
+                "source":"^/docs/shop/(?<nxtPid>[^/]+?)\\.segments(?<segment>/__PAGE__\\.segment\\.rsc|\\.segment\\.rsc)(?:/)?$",
+                "destination":"/shop/[id].segments$segment", "routeKeys":{"nxtPid":"nxtPid"}
+            }]);
+            v["onMatchHeaders"] = json!([{"source":"/shop/:id", "regex":"^/shop/([^/]+?)$",
+                "headers":[{"key":"x-observed", "value":"one"}]}]);
+            v["ppr"] = json!({"chain":{"headers":{"next-resume":"1"}}});
+        });
+        rebind(inputs);
+    }
+    #[test]
+    fn next162_prefetch_resume_and_on_match_headers_are_observed_without_execution() {
+        let (mut inputs, config) = fixture();
+        add_next162(&mut inputs);
+        let (entities, metadata) = run(&inputs, &config).unwrap();
+        let route = entities
+            .iter()
+            .find(|e| e["attributes"]["page"] == "/shop/[id]")
+            .unwrap();
+        assert_eq!(
+            route["attributes"]["prefetchSegmentDataRoutes"][0]["destination"],
+            "/shop/[id].segments$segment"
+        );
+        assert_eq!(route["attributes"]["regexExecuted"], false);
+        let protocol = entities
+            .iter()
+            .find(|e| e["kind"] == "next-build-protocol")
+            .unwrap();
+        assert_eq!(
+            protocol["attributes"]["ppr"]["chain"]["headers"]["next-resume"],
+            "1"
+        );
+        let header = entities
+            .iter()
+            .find(|e| e["attributes"]["category"] == "onMatchHeader")
+            .unwrap();
+        assert_eq!(
+            header["attributes"]["rule"]["headers"][0]["key"],
+            "x-observed"
+        );
+        assert_eq!(
+            header["attributes"]["matchingAndExecution"],
+            "not-performed"
+        );
+        assert_eq!(metadata["runtimeEstablished"], false);
+    }
+    #[test]
+    fn next162_nested_shapes_limits_and_next14_mislabel_refuse() {
+        let mutations: Vec<fn(&mut Value)> = vec![
+            |v| v["dynamicRoutes"][0]["prefetchSegmentDataRoutes"][0]["future"] = json!(true),
+            |v| v["dynamicRoutes"][0]["prefetchSegmentDataRoutes"][0]["routeKeys"] = json!([]),
+            |v| {
+                v["dynamicRoutes"][0]["prefetchSegmentDataRoutes"][0]["source"] =
+                    json!("bad\nregex")
+            },
+            |v| {
+                v["dynamicRoutes"][0]["prefetchSegmentDataRoutes"][0]["destination"] =
+                    json!("/../escape")
+            },
+            |v| {
+                v["dynamicRoutes"][0]["prefetchSegmentDataRoutes"] = json!(vec![
+                    json!({"source":"x","destination":"/x","routeKeys":{}});
+                    129
+                ])
+            },
+            |v| v["ppr"]["chain"]["future"] = json!(true),
+            |v| v["ppr"]["chain"]["headers"]["next-resume"] = json!(1),
+            |v| v["ppr"]["chain"]["headers"]["bad\nheader"] = json!("x"),
+            |v| {
+                v["ppr"]["chain"]["headers"] = json!(
+                    (0..129)
+                        .map(|i| (format!("x-{i}"), "v"))
+                        .collect::<BTreeMap<_, _>>()
+                )
+            },
+            |v| v["onMatchHeaders"][0]["destination"] = json!("/unexpected"),
+            |v| v["onMatchHeaders"] = Value::Null,
+        ];
+        for (index, change) in mutations.into_iter().enumerate() {
+            let (mut inputs, config) = fixture();
+            add_next162(&mut inputs);
+            mutate(&mut inputs, "routes.json", change);
+            rebind(&mut inputs);
+            assert!(run(&inputs, &config).is_err(), "case {index}");
+        }
+        let (mut inputs, config) = fixture();
+        add_next162(&mut inputs);
+        mutate(&mut inputs, "config.json", |v| {
+            v["frameworkVersion"] = json!("14.2.35")
+        });
+        mutate(&mut inputs, "routes.json", |v| {
+            v.as_object_mut().unwrap().remove("appType");
+            v.as_object_mut().unwrap().remove("rewriteHeaders");
+        });
+        rebind(&mut inputs);
+        assert!(run(&inputs, &config).is_err());
     }
     #[test]
     fn captures_compiled_routes_groups_conditions_and_configuration_without_execution() {

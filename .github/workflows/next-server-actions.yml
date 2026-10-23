@@ -16,7 +16,17 @@ jobs:
         with:
           node-version: '22.23.3'
       - name: Install compiler toolchain
-        run: rustup toolchain install 1.99.0 --profile minimal
+        run: rustup toolchain install 1.99.0 --profile minimal --component clippy --component rustfmt
+      - name: Verify strict manifest compatibility and workspace regressions
+        env:
+          CARGO_INCREMENTAL: '0'
+          CARGO_PROFILE_DEV_DEBUG: '0'
+          CARGO_PROFILE_TEST_DEBUG: '0'
+          CARGO_BUILD_JOBS: '2'
+        run: |
+          cargo +1.99.0 fmt --all --check
+          cargo +1.99.0 test --locked -p patamaps-workspace --lib
+          cargo +1.99.0 clippy --locked -p patamaps-workspace --all-targets -- -D warnings
       - name: Verify partial source acquisition controls
         run: |
           mkdir -p "$RUNNER_TEMP/next-source-controls"
