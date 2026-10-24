@@ -104,3 +104,14 @@ listen_addresses127.0.0.1 and inet_server_addr127.0.0.1 are required.
 Only a fixed verification result enters evidence. Both installed owner runs
 must pass this check plus every existing native/browser/cleanup requirement.
 No full Next bundle or performance claim changes.
+
+
+Attempt3 (40060612041) confirmed database TCP readiness, then the new verification
+refused. Its query incorrectly compared inet_server_addr()::text with a bare
+address. PostgreSQL's explicit inet-to-text conversion retains /32; use host()
+to compare the address itself. This is a demonstrated error in the new checker;
+the exact private historical stderr is not claimed.
+[PostgreSQL network functions](https://www.postgresql.org/docs/16/functions-net.html)
+define both conversions. The check now records only four fixed booleans for
+authenticated query, disabled Unix sockets, loopback listener and loopback server.
+All four remain required; no expected runtime behavior is waived.

@@ -127,16 +127,35 @@ def qualify(owner, work, evidence, pnpm, environment, capacity, *, rewrite_profi
         trusted = dict(env, AUTH_SECRET=secrets.token_urlsafe(48), POSTGRES_URL=f"postgres://qualification:{password}@127.0.0.1:{database_port}/postgres", AUTH_URL=origin, AUTH_TRUST_HOST="true", NODE_ENV="production")
         stage = "isolated-database-tcp-only-verification"
         transport_check = (
-            "const assert = require('node:assert/strict');"
             "const sql = require('postgres')(process.env.POSTGRES_URL, {max:1,connect_timeout:5});"
+            "const checks={authenticatedQuery:false,unixSocketsDisabled:false,loopbackListener:false,loopbackServer:false};"
             "(async () => {try {"
             "const rows = await sql.unsafe(\"SELECT current_setting('unix_socket_directories') AS sockets, "
-            "current_setting('listen_addresses') AS listeners, inet_server_addr()::text AS address\");"
-            "assert.equal(rows.length,1);assert.equal(rows[0].sockets,'');"
-            "assert.equal(rows[0].listeners,'127.0.0.1');assert.equal(rows[0].address,'127.0.0.1');"
-            "} finally {await sql.end({timeout:5});}})().catch(() => {process.exitCode=1;});"
+            "current_setting('listen_addresses') AS listeners, host(inet_server_addr()) AS address\");"
+            "checks.authenticatedQuery=rows.length===1;"
+            "checks.unixSocketsDisabled=rows.length===1&&rows[0].sockets==='';"
+            "checks.loopbackListener=rows.length===1&&rows[0].listeners==='127.0.0.1';"
+            "checks.loopbackServer=rows.length===1&&rows[0].address==='127.0.0.1';"
+            "} catch {process.exitCode=1;} finally {"
+            "try {await sql.end({timeout:5});} catch {process.exitCode=1;}"
+            "console.log(JSON.stringify(checks));"
+            "if(!Object.values(checks).every(Boolean))process.exitCode=1;"
+            "}})();"
         )
-        execute(stage, ["node", "-e", transport_check], trusted, timeout=30)
+        expected = {"authenticatedQuery", "unixSocketsDisabled", "loopbackListener", "loopbackServer"}
+        try:
+            execute(stage, ["node", "-e", transport_check], trusted, timeout=30)
+        finally:
+            transport_path = private / (stage + ".stdout")
+            if transport_path.is_file() and transport_path.stat().st_size <= 1024:
+                try:
+                    checks = json.loads(transport_path.read_bytes())
+                    if isinstance(checks, dict) and set(checks) == expected and all(type(v) is bool for v in checks.values()):
+                        report["databaseTransportChecks"] = checks
+                        save()
+                except (ValueError, OSError):
+                    pass
+        assert set(report.get("databaseTransportChecks", {})) == expected and all(report["databaseTransportChecks"].values())
         report.update(databaseTransportVerified="authenticated IPv4 loopback TCP", databaseUnixSocketsDisabled=True)
         stage = "owner-real-migrations"
         execute(stage, [pnpm, "exec", "tsx", "lib/db/migrate.ts"], trusted)
