@@ -37,10 +37,15 @@ the single 83,863,862-byte CI artifact expires 2026-11-07, and no duplicate arch
 or extracted dependency tree is retained on Intel.
 
 Next selected work: fresh current-engine source/native installed replay against
-this exact successful producer. The fourteen-control archive import and optional
-registry replay implementation are prepared, but producer pins still target the
-older `36e6525` runtime. Retarget only after checking this producer's exact ZIP,
-CLI/runtime-state/pointer digests and nine production Git objects. Then verify
+this exact successful producer. The archive import and optional registry replay implementation now pin
+this successful producer's exact ZIP, CLI/runtime-state/pointer digests and nine
+matching production Git objects. [Preflight](../acceptance/project-adoption/g3-cargo-registry-context-20261023/installed-pin-preflight.json)
+passed all fourteen archive controls and the bounded source-package selection
+(1,144 files /76,451,969 bytes including inventory;271 linked evidence files /
+26,136,958 bytes). Source scope alone is not installed acceptance.
+The shared binary Docker-context verifier receives the same frozen producer;
+only its exact artifact download bound changes, with metadata size/digest checks
+and existing log limits retained. Run both focused workflows from these pins. Then verify
 fresh installed compiler identities, registry verification/version execution,
 corrupted selected archive refusal before a marker, restored replay and the
 existing actual runtime controls. Do not rebuild Miniserve to fabricate a fresh

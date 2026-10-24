@@ -3,7 +3,7 @@ import argparse, hashlib, io, json, os, platform, re, shutil, subprocess, sys, t
 from pathlib import Path
 from project_watch import stop
 from deployment_miniserve_image import BASE, stop_owned
-from qualify_installed_miniserve import ARTIFACT, RUN, PRODUCER, ZIP_SHA, STATE_SHA
+from qualify_installed_miniserve import ARTIFACT, RUN, PRODUCER, ZIP_SHA, ZIP_BYTES, STATE_SHA
 ROOT = Path(__file__).resolve().parent.parent
 
 
@@ -47,7 +47,7 @@ def main():
                 try:
                     while child.poll() is None:
                         capacity();assert time.monotonic()-start<timeout,(label,"timeout")
-                        assert stdout.tell()<67108864 and stderr.tell()<67108864,(label,"log limit");time.sleep(.25)
+                        assert stdout.tell()<(max(67108864,ZIP_BYTES+1) if binary and label=="frozen-artifact" else 67108864) and stderr.tell()<67108864,(label,"log limit");time.sleep(.25)
                     code=child.returncode
                 finally:stop(child)
             finally:
@@ -81,7 +81,7 @@ def main():
         record["compiler"]=dict(digest=sha(cli),engine=engine,buildProfile="development")
         token={"GH_TOKEN":os.environ["GH_TOKEN"]}
         meta=json.loads(run("frozen-artifact-metadata",["gh","api",f"repos/roryscot/patamaps/actions/artifacts/{ARTIFACT}"],extra=token))
-        assert meta["workflow_run"]["id"]==RUN and meta["workflow_run"]["head_sha"]==PRODUCER and not meta["expired"] and meta["digest"]=="sha256:"+ZIP_SHA
+        assert meta["workflow_run"]["id"]==RUN and meta["workflow_run"]["head_sha"]==PRODUCER and not meta["expired"] and meta["size_in_bytes"]==ZIP_BYTES and meta["digest"]=="sha256:"+ZIP_SHA
         frozen=work/"frozen.zip";run("frozen-artifact",["gh","api",f"repos/roryscot/patamaps/actions/artifacts/{ARTIFACT}/zip"],extra=token,binary=frozen,timeout=180)
         assert sha(frozen)=="sha256:"+ZIP_SHA
         owner=work/"owner";owner.mkdir()
