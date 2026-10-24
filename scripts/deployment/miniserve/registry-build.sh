@@ -27,6 +27,41 @@ ln -s /registry/index /work/cargo-home/registry/index
  test "$route_status" = 2
  grep -q 'Network is unreachable' /work/no-external-route
  printf 'external-route-absent\n'
+ test "$(cat /proc/sys/net/ipv6/conf/all/disable_ipv6)" = 0
+ test "$(cat /proc/sys/net/ipv6/conf/lo/disable_ipv6)" = 0
+ /usr/bin/python3 -B - <<'IPV6'
+import socket
+addresses=socket.getaddrinfo('localhost',0)
+assert any(row[0]==socket.AF_INET6 and row[4][0]=='::1' for row in addresses)
+assert any(row[0]==socket.AF_INET and row[4][0]=='127.0.0.1' for row in addresses)
+with socket.socket(socket.AF_INET6) as server:
+ server.bind(('::1',0));server.listen(1)
+ with socket.socket(socket.AF_INET6) as client:
+  client.connect(server.getsockname())
+  peer,_=server.accept()
+  with peer:
+   client.sendall(b'loopback');assert peer.recv(32)==b'loopback'
+print('ipv6-loopback-passed')
+IPV6
+ if /usr/sbin/ip -6 route get 2001:db8::1 >/work/no-ipv6-external-route 2>&1; then
+  exit 72
+ else
+  test "$?" = 2
+  grep -q 'Network is unreachable' /work/no-ipv6-external-route
+ fi
+ printf 'ipv6-external-route-absent\n'
+ cat >/work/loopback-probe.rs <<'RUST'
+use std::net::{TcpListener, TcpStream};
+fn main() {
+    for address in ["127.0.0.1", "::1"] {
+        let server = TcpListener::bind((address, 0)).expect("literal loopback bind");
+        let _client = TcpStream::connect(("localhost", server.local_addr().unwrap().port()))
+            .expect("dual-stack localhost fixture lookup");
+    }
+}
+RUST
+ "$RUSTC" /work/loopback-probe.rs -o /work/loopback-probe
+ /work/loopback-probe
 } >/work/logs/limits.txt
 finish() {
  printf '%s\n' "$1" >/work/exit

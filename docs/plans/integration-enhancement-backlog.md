@@ -1055,3 +1055,31 @@ remain unchanged. The frozen ZIP transport uses its exact pinned size when it
 exceeds the ordinary log bound. No producer pin was changed and no dependent
 heavy job was dispatched. Fourteen archive controls and Python syntax passed;
 actual current-engine source/native/registry replay is still unrun.
+
+
+Sixth attempt40045090305 at5097206 finally identifies the unchanged owner failure:
+bind_ipv4_ipv6::case_2 timed out at tests/fixtures/mod.rs:201 while waiting on
+localhost. Earlier suites passed101 cases; the bind suite passed12/13 and Cargo
+stopped before later test binaries. No325-test pass. Work usage was1,703,997,440
+of3,221,225,472bytes (53%); memory event counters were all zero. No disk/memory
+shortage. Both container and guardian stopped.
+[Verified safe diagnostics](../acceptance/project-adoption/g3-cargo-registry-context-20261023/registry-attempt-6/native-attempt-records.json)
+retain names, source locations and resource facts without assertion payloads.
+
+Exact pinned source review shows case_2 serves IPv6 only and the fixture checks
+localhost through port_check0.3.0 / TcpStream::connect. Other bind cases passed
+including direct IPv6 requests, evidence against globally unavailable IPv6.
+Therefore leave all kernel/sysctl settings unchanged. Declare explicit container
+localhost mappings to127.0.0.1 and::1, inspect those mappings before start, and
+require actual dual-stack name resolution / IPv6 TCP before Cargo. Keep onlylo
+and require both IPv4 and IPv6 external-route refusal. The earlier general IPv6
+availability hypothesis is not an established historical cause; no sysctl change
+is needed or applied. No test/source mutation, quota change or skipped case.
+The next full run must prove whether this environment repair resolves the case.
+
+The pre-build check also compiles/runs a tiny standard-library Rust probe with the
+exact selected rustc: IPv4-only and IPv6-only listeners must both be reachable by
+TcpStream::connect((localhost, port)), the same API used by the frozen port-check
+dependency. This rejects a name-resolution mismatch before another full Cargo
+build. It is qualification code, not a changed upstream test or counted owner
+case. Quota/resource and external-route checks still precede execution.
