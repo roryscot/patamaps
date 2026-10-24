@@ -1368,3 +1368,13 @@ root itself. This records the limitation rather than asserting whole output
 closure. Keep targets/paths private and publish only counts/digests/categories.
 All owner positives/refusals remain unchanged, I2 remains open, and39 focused
 controls passed. Retry actual source/native owner runtime under the same limits.
+
+
+Retained Next runtime subgate now passes at0a40a4c under engine2fc8a201:
+[reviewed run40069762886](../acceptance/project-adoption/g5-next-retained-runtime-20261024/accepted-40069762886/independent-verification.json).
+Read-only image/enforced cache, producer/tool-unavailable browser execution,
+native admission/post-verification and restoration/cleanup passed. The separate
+[installed Next plan](2026-10-24-installed-next.md) still requires exact fresh
+source/native installed replay on this engine; performance, dependency context
+and remaining adoption/deployment items are unchanged. MetaMaps parity remains
+a completed, separate boundary.

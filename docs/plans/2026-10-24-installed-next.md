@@ -1,6 +1,6 @@
 # Fresh installed Next workflow
 
-Status: I1 and native closed-tree increment independently verified at identified sources; I2 runtime/installed completion remains open. Baseline79bf9c6.
+Status: I1, native closed-tree selection, and I2 retained runtime independently verified at identified sources; fresh installed replay on the new engine remains open. Baseline79bf9c6.
 Continue the original G5/G6 adoption requirement. The accepted Rust-only
 installed replay and checkout-based Next case do not prove this requirement.
 
@@ -403,3 +403,34 @@ container started. Two npm configuration names were lowercase; the existing
 native contract requires uppercase environment variable names. Preserve their
 captured configuration keys and map the process names to uppercase, with
 collision/invalid-name refusal. No native validation rule is relaxed.
+
+
+## I2 retained runtime acceptance
+
+[Run40069762886](https://github.com/roryscot/patamaps/actions/runs/40069762886)
+at0a40a4c passed; its [independent receipt review](../acceptance/project-adoption/g5-next-retained-runtime-20261024/accepted-40069762886/independent-verification.json)
+verified the exact artifact digest, source/engine identity,175 captured text
+inputs and eight driver digests against Git. All59 library and31 integration
+tests, strict Clippy,32 focused Python controls,28 browser groups and four
+unchanged upstream page tests passed.
+
+Native selection contains2,323 files/78 internal links plus the empty cache
+mountpoint. The read-only pinned Node22.23.3 image passed private byte/mode/link
+comparison in CI. Actual cgroup values enforce one CPU,3GiB memory, no swap and
+128 PIDs; controlled writes proved EROFS outside the64MiB cache and ENOSPC at
+its quota. Application requests created four cache files totaling27,371 bytes
+in separate tmpfs; the selected generation and original producer output stayed
+unchanged. Host networking is explicit; network isolation is not claimed.
+
+Three real-member/link mutations refused before sentinel execution. The actual
+selected-command run held native selection locking through post-verification.
+Eight producer/source/snapshot/configured-tool paths stayed unavailable during
+requests. All renamed originals were restored, both owned containers stopped,
+and all PostgreSQL/browser/HTTPS/listener cleanup checks passed. The external
+reviewer checked public receipts rather than independently rehashing private
+image bytes; those remain excluded from public evidence.
+
+This closes the checkout-based retained runtime/cache subgate. Exact fresh
+source/native installed replay on engine2fc8a201 remains required before calling
+the complete I2 bundle workflow accepted. Dependency/OS closure, performance,
+other application configurations and production activation remain open.
