@@ -96,6 +96,30 @@ To repeat this focused maintainer qualification while the frozen artifact remain
 
 The lane refuses expired or changed frozen evidence. Its exact unpublished source/native packages remain in the linked run's 14-day artifact; compact receipts are committed. Import retained state with its archived directory modes intact. Python's default data filter discards those modes: the first attempt was refused, and a mode-preserving importer passed nine controls plus direct verification of the exact frozen state before the successful rerun. No stored binding was regenerated to make that import pass.
 
+## Current-engine installed registry replay
+
+[Run 40051317674](https://github.com/roryscot/patamaps/actions/runs/40051317674)
+at `77db119` now qualifies fresh source/native packages against the
+[registry-produced application](cargo-registry-contexts.md).
+[Independent review](../acceptance/project-adoption/g3-cargo-registry-context-20261023/installed-accepted-40051317674/independent-verification.json)
+verified all 1,145 source files, 450 program files against that Git revision,
+exact archive digests and both installed engine identities. Both installed
+compilers passed registry bindings, actual Miniserve version execution and all
+eight HTTP controls. Registry and runtime tampering refused before effects;
+restored bytes and pointers passed. The final runtime also passed with producer
+and test compiler paths unavailable. Miniserve was not rebuilt, and full
+dependency/toolchain/test-fixture closure is not claimed.
+
+    gh run rerun 40051317674
+
+Its exact unpublished packages remain in the 14-day CI artifact; the lane
+refuses expired or changed producer evidence. This supersedes the older
+installed-only engine gap without changing the historical results above.
+The affected opaque Docker context also passed [current review](../acceptance/project-adoption/g3-cargo-registry-context-20261023/binary-context-accepted-40051319050/independent-verification.json):
+59 library tests, strict Clippy, ten native controls and the real network-isolated
+image with eight HTTP controls. Browser coverage remains at its older pinned
+profile below.
+
 ## Actual image and browser profile
 
 The [image/browser qualification](../acceptance/project-adoption/g5-miniserve-image-browser-20261023/ci.json) builds a linux/amd64 image from the exact selected bundle and digest-pinned Ubuntu base. The observed executable inside the running image matches the selected SHA-256 and native ELF target. Image/entrypoint/user/workdir settings were inspected; an actual entrypoint override was refused before startup. The original Miniserve executable, configuration, launcher and document were unchanged.
@@ -106,6 +130,6 @@ The image runs as 65532:65532 with readonly root, no source bind mount, one CPU,
 
 The same lane repeats fresh source/native installation, all nine archive controls and two Linux socket controls. The [receipt](../acceptance/project-adoption/g5-miniserve-image-browser-20261023/ci-receipt.json) freezes its 1,078-file installed source inventory; this is a later package than the 1,071-file installed-only milestone. The artifact retains compressed image and packages for 14 days; committed receipts and the [listing screenshot](../acceptance/project-adoption/g5-miniserve-image-browser-20261023/browser-listing.png) remain. Archive digests were checked at intake, but fresh image reload was not exercised.
 
-At this historical image/browser snapshot, native Docker discovery required a complete UTF-8 context inventory. That run verified its binary-bearing context through digests and actual BuildKit/image observations. The newer [native snapshot-backed context](docker-context-snapshots.md) now qualifies opaque binary discovery, staging and actual image runtime under a new engine. Complete dependency/test-context closure, current external installed/browser replay, broader framework boundaries and practical development performance remain open. No registry publication or production/trust activation occurred.
+At this historical image/browser snapshot, native Docker discovery required a complete UTF-8 context inventory. That run verified its binary-bearing context through digests and actual BuildKit/image observations. The newer [native snapshot-backed context](docker-context-snapshots.md) now qualifies opaque binary discovery, staging and actual image runtime under a new engine. Current-engine installed replay is covered above. Complete dependency/test-context closure, current browser replay, broader framework boundaries and practical development performance remain open. No registry publication or production/trust activation occurred.
 
-The current native binary-context feature changes the workspace engine. Historical installed/image receipts remain frozen to their tested compiler; use the rerun commands above for those jobs. The [snapshot-backed Docker guide](docker-context-snapshots.md) describes the new contract and its separately qualified current-compiler path.
+The current native binary-context feature changes the workspace engine. Historical installed/image receipts remain frozen to their tested compiler; the current installed result above and historical browser run have separate rerun commands. The [snapshot-backed Docker guide](docker-context-snapshots.md) describes the new contract and its separately qualified current-compiler path.

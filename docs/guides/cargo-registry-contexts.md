@@ -8,8 +8,12 @@ registry/snapshot corruption refusals before effects and restored offline replay
 verified all 456 package checksums,874 registry files and60 selected application
 files from the exact artifact. Previous failed executions remain preserved in
 the [integration backlog](../plans/integration-enhancement-backlog.md).
-No complete dependency closure, current installed replay or general Rust support
-is asserted by this result.
+Fresh current-engine source/native installation and registry replay now also
+[passed independent review](../acceptance/project-adoption/g3-cargo-registry-context-20261023/installed-accepted-40051317674/independent-verification.json):
+both installed compilers verified/executed the selected application, registry
+tampering refused before effects, and restored bindings/bytes remained unchanged.
+All eight HTTP controls passed with each installed compiler. No complete
+dependency closure or general Rust support is asserted by these results.
 
 Patamaps already accepts opaque inputs through ProjectContext and composes them
 with source, workspace admission, commands and artifact selection in ProjectBuild.
@@ -106,8 +110,9 @@ exact artifact digests; it is not a dependency mirror.
 The eight original Miniserve TLS/auth test fixture files remain outside every
 Patamaps capture. Tests use the pinned public clone. This preserves the existing
 privacy boundary while leaving owner test-context closure explicitly open.
-Performance, full OS/toolchain closure, installed-consumer replay and production
-activation require their own evidence.
+Performance, full OS/toolchain closure and production activation remain open.
+The installed result above covers exact registry/selected-state replay; it does
+not rerun Cargo or establish an installed full owner build.
 
 
 The unchanged QR test requires a URL outside the loopback address ranges. Its

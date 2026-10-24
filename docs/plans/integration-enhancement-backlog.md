@@ -13,8 +13,8 @@ a passed fixture or metadata observation is not general support.
 
 | Workstream | Existing result | Remaining work if selected |
 | --- | --- | --- |
-| Real Rust application onboarding | Explicit project capture, Cargo observations, scoped Axum transport and pinned upstream Axum build/tests/replay | Choose one owner application and correspondence; wire generated artifacts into its real handler and run its own positive/refusal tests. |
-| Broader Next.js/framework integration | Selected production build, public HTTP/browser paths and declared observations | Qualify a named rewrite, route-group or Server Action boundary with non-writing controls. Authenticated backend/permissions remain unaccepted. |
+| Real Rust application onboarding | Explicit project capture, Cargo observations, scoped Axum transport and pinned upstream Axum build/tests/replay | Retained Wargame router and thirteen production-network controls passed; extend only for uncovered owner schemas/semantics. Independent Miniserve registry/runtime and current installed workflow also passed. |
+| Broader Next.js/framework integration | Selected production build, public HTTP/browser paths and declared observations | Pinned Chatbot auth/Server Actions/private-document controls passed; actual rewrites, remaining route behavior and installed Next workflow remain open. |
 | Retained builds and portable development loop | Controlled watch/recovery and scoped actual Rust retained workflow | Application-specific dependency closure, fresh installed workflow and measured edit-loop behavior; no blanket hermeticity or speed claim. |
 | Deployment expansion | Scoped actual Linux output/runtime and deployment refusals | Remaining wrong-architecture/stale-contract controls or a chosen deployment profile. Production activation remains separate. |
 | Performance acceptance | Existing functional timing records | Define comparison and acceptance budgets before exclusive measured execution. Diagnostic profiling remains separate. |
@@ -25,7 +25,7 @@ a passed fixture or metadata observation is not general support.
 
 The real Cargo registry increment is now [independently verified](../acceptance/project-adoption/g3-cargo-registry-context-20261023/registry-accepted-40050181349/independent-verification.json)
 in [run 40050181349](https://github.com/roryscot/patamaps/actions/runs/40050181349)
-at `73c7c882df86696d9990035d40f233cab19a0398`. All456 original package checksums,
+at `73c7c882df86696d9990035d40f233cab19a0398`. All 456 original package checksums,
 874 retained registry files, 60 selected application files, the unchanged 325
 upstream tests, eight HTTP controls, four selection refusals, registry corruption
 refusals before marker effects and restored offline selected replay passed.
@@ -36,23 +36,42 @@ Twelve earlier failed attempts remain preserved. Compact evidence is committed;
 the single 83,863,862-byte CI artifact expires 2026-11-07, and no duplicate archive
 or extracted dependency tree is retained on Intel.
 
-Next selected work: fresh current-engine source/native installed replay against
-this exact successful producer. The archive import and optional registry replay implementation now pin
-this successful producer's exact ZIP, CLI/runtime-state/pointer digests and nine
-matching production Git objects. [Preflight](../acceptance/project-adoption/g3-cargo-registry-context-20261023/installed-pin-preflight.json)
-passed all fourteen archive controls and the bounded source-package selection
-(1,144 files /76,451,969 bytes including inventory;271 linked evidence files /
-26,136,958 bytes). Source scope alone is not installed acceptance.
-The shared binary Docker-context verifier receives the same frozen producer;
-only its exact artifact download bound changes, with metadata size/digest checks
-and existing log limits retained. Run both focused workflows from these pins. Then verify
-fresh installed compiler identities, registry verification/version execution,
-corrupted selected archive refusal before a marker, restored replay and the
-existing actual runtime controls. Do not rebuild Miniserve to fabricate a fresh
-producer claim. Installed registry acceptance is still false.
-Full OS/toolchain/test-fixture closure, remaining framework/deployment controls,
-performance measurements and broader G0–G6 acceptance remain open. This work is
-a separate enhancement, not a prerequisite for the completed C01–C19 milestone.
+Fresh current-engine source/native installation is now [independently verified](../acceptance/project-adoption/g3-cargo-registry-context-20261023/installed-accepted-40051317674/independent-verification.json)
+in [run 40051317674](https://github.com/roryscot/patamaps/actions/runs/40051317674)
+at `77db11936f3e7e2f71a923e0d49c2b290d0df8a7`. All 1,145 shipped source files and
+450 program files matched their package inventory / producing Git revision.
+Both fresh installed compilers matched the current engine, verified and executed
+the retained registry-produced application and passed all eight HTTP controls.
+Changed registry/runtime members refused before marker effects; restored bytes,
+bindings and pointers passed. The original producer and both test compilers were
+then unavailable while the standalone runtime passed again. Miniserve was not
+recompiled. The exact source/native package remains in the 14-day CI artifact;
+only compact receipts and executed review source are added to Git.
+
+The affected shared binary Docker-context lane also [passed independent review](../acceptance/project-adoption/g3-cargo-registry-context-20261023/binary-context-accepted-40051319050/independent-verification.json)
+in [run 40051319050](https://github.com/roryscot/patamaps/actions/runs/40051319050):
+59 current workspace tests, strict Clippy, ten snapshot/refusal controls, real
+image creation and all eight HTTP controls with no network, read-only root and
+kernel-verified limits. Its executable matches this registry producer exactly.
+All owned containers stopped. The earlier 57-test receipts remain historical;
+the current suite has 59 tests and the expected engine is unchanged.
+
+Next selected work: the original G3 actual rewrite/framework boundary. Reuse the
+pinned Chatbot source/build/native-observation/runtime path; first inspect its
+exact configuration and native projection contract, then freeze actual HTTP
+positive/refusal expectations. An internal rewrite added for qualification must
+be an explicit retained configuration overlay with separate original/derived
+digests, not described as unchanged upstream behavior. Keep original source,
+public registry dependencies and external BotID behavior accurately identified.
+Verify compiled rule binding plus real origin/path behavior; metadata alone is
+not a runtime pass. Preserve the already accepted auth/document controls.
+
+The original G0–G6 scope remains active: remaining Next/framework and deployment
+controls, installed Next workflow, applicable dependency/test-context treatment,
+and actual-project exclusive cold/warm/edit latency, memory and retained-disk
+measurements still require evidence. Full OS/toolchain/test-fixture closure and
+production activation are not established by either successful run. These remain
+separate enhancements, not prerequisites for the completed C01–C19 milestone.
 
 The Cargo managed-container prerequisite is now independently verified in
 [run 40019067506](https://github.com/roryscot/patamaps/actions/runs/40019067506)
@@ -944,7 +963,7 @@ is inferred from syntax or inventory tests.
 
 
 First registry application attempt: run40024281589 at163b123 failed after native
-build-command admission. All456 original archives matched the unchanged lock,
+build-command admission. All 456 original archives matched the unchanged lock,
 with87,923,438bytes across874 selected registry files; native source and registry
 capture/staging passed. The [verified failed receipt](../acceptance/project-adoption/g3-cargo-registry-context-20261023/registry-attempt-1/ci.json)
 preserves the artifact digest and native refusal. Inner command diagnostics were
