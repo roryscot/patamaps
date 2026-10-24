@@ -46,7 +46,7 @@ def main():
  p.add_argument("--retained-runtime",action="store_true");p.add_argument("--standalone-probe",action="store_true");p.add_argument("--build-cli",action="store_true");p.add_argument("--runtime",action="store_true");p.add_argument("--rewrites",action="store_true");a=p.parse_args()
  if a.dynamic_routes:
   from chatbot_dynamic_profile import validate_mode
-  validate_mode(runtime=a.runtime,rewrites=a.rewrites,standalone=a.standalone_probe,retained=a.retained_runtime,installed=bool(a.installed_inventory_digest))
+  validate_mode(runtime=a.runtime,rewrites=a.rewrites,standalone=a.standalone_probe,retained=a.retained_runtime)
  assert not a.rewrites or a.runtime, "Rewrite acceptance requires actual production runtime"
  assert not a.standalone_probe or (a.rewrites and a.runtime), "Standalone probe requires the existing real runtime and rewrite controls"
  assert not a.retained_runtime or a.standalone_probe, "Retained runtime requires the standalone source/build/refusal profile"
@@ -60,6 +60,8 @@ def main():
  else:
   assert not (ROOT/"source-inventory.json").exists(), "Installed source requires its explicit inventory binding"
   source_revision=subprocess.check_output(["git","rev-parse","HEAD"],cwd=ROOT,text=True).strip()
+ if a.dynamic_routes:
+  validate_mode(runtime=a.runtime,installed=bool(a.installed_inventory_digest),verified_installation=installed_identity is not None)
  work,out,cli=a.work.resolve(),a.evidence.resolve(),a.cli.resolve()
  work.mkdir(parents=True,exist_ok=False);out.mkdir(parents=True,exist_ok=False);(out/"logs").mkdir()
  assert not any((v/"Cargo.toml").exists() for v in work.parents)

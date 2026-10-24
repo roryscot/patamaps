@@ -10,8 +10,8 @@ MODULES={
  '/api/messages':('static','/(chat)/api/messages/route','app/(chat)/api/messages/route.js'),
 }
 
-def validate_mode(*,runtime,rewrites=False,standalone=False,retained=False,installed=False):
- assert runtime and not any([rewrites,standalone,retained,installed]),'DYNAMIC_QUALIFICATION_PROFILE'
+def validate_mode(*,runtime,rewrites=False,standalone=False,retained=False,installed=False,verified_installation=False):
+ assert runtime and not any([rewrites,standalone,retained]) and (not installed or verified_installation is True),'DYNAMIC_QUALIFICATION_PROFILE'
 
 def verify_sources(owner):
  owner=Path(owner);result={}

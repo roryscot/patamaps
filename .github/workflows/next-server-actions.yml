@@ -40,7 +40,7 @@ jobs:
           CARGO_PROFILE_TEST_DEBUG: '0'
           CARGO_BUILD_JOBS: '2'
         run: |
-          if [ "${{ inputs.installed-controls && inputs.retained-runtime-controls }}" = "true" ]; then
+          if [ "${{ inputs.installed-controls && (inputs.retained-runtime-controls || inputs.dynamic-route-controls) }}" = "true" ]; then
             export CARGO_BUILD_TARGET=x86_64-unknown-linux-gnu
           fi
           cargo +1.99.0 fmt --all --check
@@ -98,12 +98,14 @@ jobs:
           mkdir -p "$RUNNER_TEMP/installed-next-controls"
           PATAMAPS_TEST_RETAIN_ROOT="$RUNNER_TEMP/installed-next-controls" python3 -B -m unittest discover -s scripts -p test_installed_source_identity.py
           python3 -B -m unittest discover -s scripts -p test_installed_retained_next.py
+          PATAMAPS_TEST_RETAIN_ROOT="$RUNNER_TEMP/installed-next-controls" python3 -B -m unittest discover -s scripts -p test_installed_dynamic_next.py
           PATAMAPS_TEST_RETAIN_ROOT="$RUNNER_TEMP/installed-next-controls" python3 -B -m unittest discover -s scripts -p test_exact_archive_install.py
           PATAMAPS_TEST_RETAIN_ROOT="$RUNNER_TEMP/installed-next-controls" python3 -B -m unittest discover -s scripts -p test_next_output_inventory.py
       - name: Qualify fresh source and native installations on real Next
         if: inputs.installed-controls
         run: >-
           python3 -B scripts/qualify_installed_next.py
+          ${{ inputs.dynamic-route-controls && '--dynamic-routes' || '' }}
           ${{ inputs.retained-runtime-controls && '--retained-runtime' || '' }}
           --work "$RUNNER_TEMP/patamaps-installed-next-${{ github.run_id }}-${{ github.run_attempt }}"
           --evidence ci-evidence/installed-next
@@ -125,7 +127,7 @@ jobs:
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         if: always()
         with:
-          name: ${{ inputs.dynamic-route-controls && 'chatbot-dynamic' || inputs.installed-controls && inputs.retained-runtime-controls && 'installed-retained-next' || inputs.retained-runtime-controls && 'retained-next-runtime' || inputs.standalone-controls && 'standalone-next-probe' || inputs.installed-controls && 'installed-next' || 'chatbot-source' }}-${{ github.sha }}
+          name: ${{ inputs.installed-controls && inputs.dynamic-route-controls && 'installed-dynamic-next' || inputs.dynamic-route-controls && 'chatbot-dynamic' || inputs.installed-controls && inputs.retained-runtime-controls && 'installed-retained-next' || inputs.retained-runtime-controls && 'retained-next-runtime' || inputs.standalone-controls && 'standalone-next-probe' || inputs.installed-controls && 'installed-next' || 'chatbot-source' }}-${{ github.sha }}
           path: ${{ inputs.installed-controls && 'ci-evidence/installed-next/' || 'ci-evidence/chatbot-source/' }}
           if-no-files-found: error
           retention-days: 14

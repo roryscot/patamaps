@@ -20,6 +20,7 @@ on:
           - binary-docker-context
           - next-server-actions
           - next-dynamic-routes
+          - next-installed-dynamic
           - next-rewrites
           - next-installed
           - next-installed-retained
@@ -510,3 +511,11 @@ jobs:
     uses: ./.github/workflows/next-server-actions.yml
     with:
       dynamic-route-controls: true
+
+  next-installed-dynamic:
+    if: github.event_name == 'workflow_dispatch' && inputs.qualification == 'next-installed-dynamic'
+    name: Fresh installed Next dynamic page and data boundaries
+    uses: ./.github/workflows/next-server-actions.yml
+    with:
+      dynamic-route-controls: true
+      installed-controls: true

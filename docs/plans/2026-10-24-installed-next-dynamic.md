@@ -1,6 +1,6 @@
 # Fresh installed Next dynamic profile
 
-Status: planned; no installed dynamic-route acceptance.
+Status: implemented and focused-preflight verified; runtime acceptance pending.
 This closes the identified G5 installed replay gap for the original-config
 dynamic profile, without replacing the remaining Wargame/Seeder or G4 gates.
 
@@ -63,3 +63,13 @@ source against Git, engines, both owners' source/build/driver identities and all
 
 Retain reviewed compact receipts and executed review source on Intel; no
 dependency trees or duplicate archives. Existing artifacts expire after14 days.
+
+## Implementation preflight
+
+All59 focused controls passed on Intel:14 installed-dynamic admission/refusal,
+11 pinned dynamic source/module, six existing retained-installation, ten source
+integrity,14 exact archive and four acquisition controls. Python AST, both
+workflow YAML files and git diff checks passed. The installed profile uses only
+explicit verified source inventory and the existing shared-dependency compiler
+preparation. No runtime acceptance follows until the selected lane and artifact
+review complete.

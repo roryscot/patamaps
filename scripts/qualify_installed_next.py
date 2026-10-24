@@ -28,11 +28,39 @@ def retained_case_result(result,runtime,probe,owned):
  assert len(owned["containers"])==2 and {c["role"] for c in owned["containers"]}=={"probe","app"} and all(c["confirmedStopped"] is True for c in owned["containers"]), "INSTALLED_RETAINED_OWNED_CONTAINERS"
  return dict(retainedRuntimeAccepted=True,selectedGenerationUnchanged=True,producerUnavailableDuringRequests=True,producerRestored=True,allOwnedContainersStopped=True)
 
+def dynamic_case_result(result,runtime,browser):
+ """Keep installed acceptance bound to the original dynamic profile."""
+ from chatbot_dynamic_profile import DYNAMIC_CONTROLS,SOURCE_BLOBS
+ from qualify_chatbot_runtime import EXPECTED_CONTROLS
+ assert result["sourceFiles"]==180 and result["sourceTextFiles"]==174, "INSTALLED_DYNAMIC_OWNER_SOURCE"
+ assert result["dynamicSourceBindings"]["gitBlobs"]==SOURCE_BLOBS and result["dynamicSourceBindings"]["sourceFiles"]==9 and result["dynamicSourceBindings"]["sourceMutated"] is False, "INSTALLED_DYNAMIC_SOURCE_BINDINGS"
+ assert "rewriteQualification" not in result and "standaloneProbe" not in result and "retainedSelectedExecution" not in result, "INSTALLED_DYNAMIC_ORIGINAL_PROFILE"
+ qualification=result["dynamicRouteQualification"]
+ for key in ["buildBindingsVerified","runtimeAccepted","sourceBytesUnchanged","privateEvidenceBarrierPassed","ownedRuntimesStopped"]:
+  assert qualification[key] is True, "INSTALLED_DYNAMIC_QUALIFICATION"
+ for key in ["sourceMutationRequested","qualificationConfigurationOverlay","credentialsCaptured","rawRuntimeLogsUploaded","externalModelAccepted"]:
+  assert runtime[key] is False, "INSTALLED_DYNAMIC_RUNTIME_SCOPE"
+ for controls in [browser["controls"],runtime["browserControls"]]:
+  assert len(controls)==29 and {c["name"] for c in controls}==EXPECTED_CONTROLS|DYNAMIC_CONTROLS and all(c["passed"] is True for c in controls), "INSTALLED_DYNAMIC_EXACT_CONTROLS"
+ assert browser["upstreamPageTests"]==runtime["upstreamPageTests"]==4, "INSTALLED_DYNAMIC_UPSTREAM_TESTS"
+ assert browser["ownedBrowserStopped"] is True and browser["ownedHttpsProxyStopped"] is True, "INSTALLED_DYNAMIC_BROWSER_CLEANUP"
+ witness=runtime["dynamicRouteWitness"]
+ assert witness==browser["dynamicRouteWitness"], "INSTALLED_DYNAMIC_WITNESS_BINDING"
+ for key in ["fixturesUnchanged","ownerPathAndQueryIdMatched","ownerPrivateMessageRendered","distinctSecondIdRendered","crossUserPublicReadonly","guestPublicReadonly","unseenIdEmptyAndNotPersisted"]:
+  assert witness[key] is True, "INSTALLED_DYNAMIC_WITNESS"
+ for key,status in [("crossUserPrivateStatus",403),("guestPrivateStatus",403),("missingQueryStatus",400),("extraPageSegmentStatus",404),("streamGetStatus",204),("streamPostStatus",405),("extraStreamSegmentStatus",404)]:
+  assert witness[key]==status, "INSTALLED_DYNAMIC_REFUSAL_STATUS"
+ assert witness["generationPostAttempts"]==0 and witness["rawFixtureValuesPublished"] is False, "INSTALLED_DYNAMIC_GENERATION_OR_DISCLOSURE"
+ return dict(dynamicRouteQualification=qualification,dynamicRouteWitness=witness,originalOwnerConfigurationPreserved=True)
+
 def main():
  parser=argparse.ArgumentParser(description=__doc__)
  for name in ["work","evidence"]:parser.add_argument("--"+name,type=Path,required=True)
  parser.add_argument("--retained-runtime",action="store_true",help="Repeat complete immutable selected runtime with both fresh installations")
+ parser.add_argument("--dynamic-routes",action="store_true",help="Repeat the original-config29-group dynamic profile with both fresh installations")
  args=parser.parse_args()
+ assert not (args.dynamic_routes and args.retained_runtime),"INSTALLED_DYNAMIC_PROFILE_COMBINATION"
+ shared_compilation=args.retained_runtime or args.dynamic_routes
  assert platform.system()=="Linux" and platform.machine()=="x86_64" and os.environ.get("GITHUB_ACTIONS")=="true","Use focused Linux CI; Intel heavy work needs its existing supervisor"
  work,out=args.work.resolve(),args.evidence.resolve()
  work.mkdir(parents=True,exist_ok=False);out.mkdir(parents=True,exist_ok=False);(out/"logs").mkdir()
@@ -67,14 +95,15 @@ def main():
    print(stderr_path.read_text(errors="replace")[-5000:],flush=True)
    raise AssertionError((label,code,expected))
   return stdout_path.read_text()
- checkout_cli=ROOT/("target/x86_64-unknown-linux-gnu/debug/patamaps" if args.retained_runtime else "target/debug/patamaps")
+ checkout_cli=ROOT/("target/x86_64-unknown-linux-gnu/debug/patamaps" if shared_compilation else "target/debug/patamaps")
  checkout_driver=ROOT/"scripts/qualify_chatbot_next.py"
- runtime_options=["--standalone-probe","--retained-runtime"] if args.retained_runtime else []
+ checkout_driver_digest=sha(checkout_driver)
+ runtime_options=["--dynamic-routes"] if args.dynamic_routes else ["--rewrites",*(["--standalone-probe","--retained-runtime"] if args.retained_runtime else [])]
  cli_backup=work/"checkout-cli.unavailable"
  driver_backup=work/"checkout-driver.unavailable"
  source_build_output=work/"fresh-source-build-output.retained"
  try:
-  target_options=["--target","x86_64-unknown-linux-gnu"] if args.retained_runtime else []
+  target_options=["--target","x86_64-unknown-linux-gnu"] if shared_compilation else []
   run("checkout-cli-for-package",["cargo","+1.99.0","build","--locked","-p","patamaps-cli","--bin","patamaps",*target_options],cwd=ROOT,timeout=600)
   engine=json.loads(run("package-engine",[checkout_cli,"engine"]))
   package=out/"package"
@@ -89,13 +118,15 @@ def main():
   source_identity=verify_installed_source(source,binding)
   assert not (source/".git").exists()
   native_cli=native/"bin/patamaps";assert sha(native_cli)==distribution["binaryDigest"] and os.access(native_cli,os.X_OK)
-  if args.retained_runtime:
+  if shared_compilation:
    checkout_cli.rename(cli_backup)
-  env["CARGO_TARGET_DIR"]=str(ROOT/"target" if args.retained_runtime else work/"source-target")
+   assert not checkout_cli.exists() and sha(cli_backup)==distribution["binaryDigest"]
+   record["checkoutCompilerUnavailableBeforeFreshSourceBuild"]=True
+  env["CARGO_TARGET_DIR"]=str(ROOT/"target" if shared_compilation else work/"source-target")
   run("source-locked-fetch",["cargo","+1.99.0","fetch","--locked","--target","x86_64-unknown-linux-gnu"],cwd=source,timeout=300)
   prefix=work/"source-cli-installation";assert not prefix.exists()
   run("fresh-source-cargo-install",["cargo","+1.99.0","install","--path",source/"crates/patamaps-cli","--locked","--offline","--debug","--target","x86_64-unknown-linux-gnu","--root",prefix],cwd=source,timeout=1200)
-  if args.retained_runtime:
+  if shared_compilation:
    compile_log=(out/"logs/fresh-source-cargo-install.stderr").read_text()
    required=["patamaps-cli","patamaps-workspace"]
    for name in required:
@@ -105,7 +136,7 @@ def main():
    record["freshSourcePackagesConfirmed"]=required
   source_cli=prefix/"bin/patamaps"
   assert verify_installed_source(source,binding)==source_identity
-  if args.retained_runtime:
+  if shared_compilation:
    assert sha(checkout_cli)==sha(source_cli), "INSTALLED_SOURCE_BUILD_OUTPUT"
    checkout_cli.rename(source_build_output)
   else:
@@ -117,15 +148,19 @@ def main():
    assert not checkout_cli.exists() and not checkout_driver.exists()
    assert json.loads(run(label+"-installed-engine",[compiler,"engine"]))==engine
    case_work,case_out=work/(label+"-owner"),out/label
-   run(label+"-installed-next",[sys.executable,"-B",source/"scripts/qualify_chatbot_next.py","--cli",compiler,"--runtime","--rewrites",*runtime_options,"--installed-inventory-digest",binding,"--shared-cache-root",shared,"--work",case_work,"--evidence",case_out],timeout=1200)
+   run(label+"-installed-next",[sys.executable,"-B",source/"scripts/qualify_chatbot_next.py","--cli",compiler,"--runtime",*runtime_options,"--installed-inventory-digest",binding,"--shared-cache-root",shared,"--work",case_work,"--evidence",case_out],timeout=1200)
    result=json.loads((case_out/"receipt.json").read_bytes());runtime=json.loads((case_out/"runtime.json").read_bytes());browser=json.loads((case_out/"browser-auth.json").read_bytes())
    assert result["status"]=="passed-pinned-chatbot-source-build-auth" and result["sourceRevision"] is None and result["installedSourceIdentity"]==source_identity and result["installedSourceInventoryUnchanged"]
    assert result["compiler"]["engine"]==engine and result["compiler"]["sha256"]==sha(compiler)
-   assert result["generatedOutputObservation"]["publicManifestsUnchanged"] and result["rewritePortReservationClosed"]
+   assert result["generatedOutputObservation"]["publicManifestsUnchanged"]
+   if not args.dynamic_routes:assert result["rewritePortReservationClosed"]
    assert runtime["ownedProcessGroupsStopped"] and runtime["ownedListenersStopped"] and runtime["generatedOwnerSecretsAbsentFromEvidence"]
    assert runtime["databaseTransportVerified"]=="authenticated IPv4 loopback TCP" and runtime["databaseUnixSocketsDisabled"] is True
-   assert len(browser["controls"])==28 and all(row["passed"] for row in browser["controls"]) and browser["upstreamPageTests"]==4
-   record["cases"][label]=dict(status=result["status"],compilerDigest=sha(compiler),engine=engine,sourceInventoryDigest=binding,sourceFiles=source_identity["sourceFiles"],upstreamCommit=result["upstreamCommit"],runtimeGroupsPassed=28,upstreamPageTestsPassed=4,generatedOutputObservation=result["generatedOutputObservation"],sourceWithoutGit=True,checkoutCompilerAndDriverUnavailable=True,allOwnedRuntimesStopped=True)
+   groups=29 if args.dynamic_routes else 28
+   assert len(browser["controls"])==groups and all(row["passed"] for row in browser["controls"]) and browser["upstreamPageTests"]==4
+   record["cases"][label]=dict(status=result["status"],compilerDigest=sha(compiler),engine=engine,sourceInventoryDigest=binding,sourceFiles=source_identity["sourceFiles"],upstreamCommit=result["upstreamCommit"],runtimeGroupsPassed=groups,upstreamPageTestsPassed=4,generatedOutputObservation=result["generatedOutputObservation"],sourceWithoutGit=True,checkoutCompilerAndDriverUnavailable=True,allOwnedRuntimesStopped=True)
+   if args.dynamic_routes:
+    record["cases"][label].update(dynamic_case_result(result,runtime,browser))
    if args.retained_runtime:
     probe=json.loads((case_out/"standalone-probe.json").read_bytes())
     owned=json.loads((case_out/"retained-owned.json").read_bytes())
@@ -136,24 +171,27 @@ def main():
   original.rename(backup);original.write_text("controlled installed source mutation\n")
   marker=work/"forbidden.marker";sentinel=work/"sentinel-compiler.sh";sentinel.write_text("#!/bin/sh\nprintf invoked > "+shlex.quote(str(marker))+"\nexit 91\n");sentinel.chmod(0o700)
   try:
-   run("changed-installed-source-before-compiler",[sys.executable,"-B",source/"scripts/qualify_chatbot_next.py","--cli",sentinel,"--runtime","--rewrites",*runtime_options,"--installed-inventory-digest",binding,"--work",work/"refused-owner","--evidence",out/"refused-owner"],expected=1,timeout=30)
+   run("changed-installed-source-before-compiler",[sys.executable,"-B",source/"scripts/qualify_chatbot_next.py","--cli",sentinel,"--runtime",*runtime_options,"--installed-inventory-digest",binding,"--work",work/"refused-owner","--evidence",out/"refused-owner"],expected=1,timeout=30)
    assert not marker.exists() and "INSTALLED_SOURCE_BYTES_CHANGED" in (out/"logs/changed-installed-source-before-compiler.stderr").read_text()
+   assert not (work/"refused-owner").exists() and not (out/"refused-owner").exists(),"INSTALLED_SOURCE_REFUSAL_EFFECTS"
   finally:
    original.rename(work/"installed-guide.changed-retained");backup.rename(original)
   assert verify_installed_source(source,binding)==source_identity and sha(native_cli)==distribution["binaryDigest"]
-  record.update(status="passed-installed-next-retained-runtime-workflows" if args.retained_runtime else "passed-installed-next-native-command-workflows",fullRetainedNextBundleAccepted=args.retained_runtime,distribution=distribution,sourceIdentity=source_identity,checkoutCompilerAndDriverUnavailableDuringOwners=True,changedSourceRefusedBeforeCompilerMarker=True,restoredSourceInventoryVerified=True,privateGeneratedOutputsPublished=False,publicCachesShared=True)
+  record.update(status="passed-installed-next-dynamic-workflows" if args.dynamic_routes else ("passed-installed-next-retained-runtime-workflows" if args.retained_runtime else "passed-installed-next-native-command-workflows"),installedDynamicProfileAccepted=args.dynamic_routes,fullRetainedNextBundleAccepted=args.retained_runtime,distribution=distribution,sourceIdentity=source_identity,checkoutCompilerAndDriverUnavailableDuringOwners=True,changedSourceRefusedBeforeCompilerMarker=True,restoredSourceInventoryVerified=True,privateGeneratedOutputsPublished=False,publicCachesShared=True)
  except BaseException as error:
   record.update(status="failed",error=type(error).__name__+": "+str(error));save();raise
  finally:
   if cli_backup.exists():
    if checkout_cli.exists():
-    assert args.retained_runtime and not source_build_output.exists()
+    assert shared_compilation and not source_build_output.exists()
     checkout_cli.rename(source_build_output)
    cli_backup.rename(checkout_cli)
    assert sha(checkout_cli)==distribution["binaryDigest"], "CHECKOUT_COMPILER_RESTORATION"
    record["checkoutCompilerBytesRestored"]=True
   if driver_backup.exists():
    assert not checkout_driver.exists();driver_backup.rename(checkout_driver)
+   assert sha(checkout_driver)==checkout_driver_digest,"CHECKOUT_DRIVER_RESTORATION"
+   record["checkoutDriverBytesRestored"]=True
  save();print(json.dumps(dict(status=record["status"],sourceFiles=record["sourceIdentity"]["sourceFiles"],cases=list(record["cases"]))))
 
 if __name__=="__main__":main()
