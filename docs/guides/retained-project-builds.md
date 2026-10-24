@@ -31,8 +31,12 @@ limits apply. Ordinary tree output still refuses every symlink.
 Closed trees are private output artifacts, not nonsecret captured inputs.
 Their binding and selected execution receive the same pre/post verification as
 other artifacts. This does not admit mutable runtime caches or prove standalone
-application/dependency closure. Source implementation and native tests are
-pending focused Linux verification; installed publication remains separate.
+application/dependency closure. [Native verification](../acceptance/project-adoption/g5-native-closed-tree-20261024/attempt-2/independent-verification.json)
+at6b5404d passed59 library tests,31 integration tests and strict Clippy, and
+selected/verified the real78-link Next standalone tree. The complete runtime
+profile remains failed because its separate served producer tree acquired cache
+files; enforced cache isolation/source-tool-unavailable execution and fresh
+installed publication remain separate.
 
 A successful update atomically replaces selected.json and preserves the exact previous pointer in the new attempt. Failed, raced and interrupted attempts remain; pre-publication failures preserve the old pointer. A matching input key checks stored bindings/current selected bytes and reports verification:not-repeated with cacheHits:0. Use --force to execute a fresh attempt rather than taking that no-op path.
 

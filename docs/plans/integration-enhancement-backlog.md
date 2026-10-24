@@ -126,6 +126,18 @@ opt-in native closed-tree validation, immutable selected bundle, separate bounde
 instance cache, source/build-tool-unavailable retained runtime and installed replay.
 Full I2 remains unaccepted.
 
+The [native closed-tree increment](../acceptance/project-adoption/g5-native-closed-tree-20261024/attempt-2/independent-verification.json)
+now passes at6b5404d in run40065453815:59 library/31 integration tests, strict
+Clippy, unchanged ordinary-tree refusal and actual78-link bundle selection/
+verification. Engine2fc8a201 replaces the earlier workspace engine; prior
+installed/real-Rust records remain accepted only at their identified sources.
+All28 standalone groups/four page tests still pass; six cache additions keep the
+whole runtime profile failed. Next implement the planned read-only selected
+runtime, enforced separate64MiB cache, source/tool-unavailable execution and
+fresh installed replay. The official Node manifest/config and minimal unchanged
+test imports are [read-only verified inputs](../acceptance/project-adoption/g5-next-retained-runtime-20261024/runtime-intake.json);
+no image was pulled or run on Intel.
+
 The original G0–G6 scope remains active: remaining Next/framework and deployment
 controls, full retained Next bundle and its installed replay, applicable dependency/test-context treatment,
 and actual-project exclusive cold/warm/edit latency, memory and retained-disk
