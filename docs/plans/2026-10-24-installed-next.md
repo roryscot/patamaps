@@ -434,3 +434,38 @@ This closes the checkout-based retained runtime/cache subgate. Exact fresh
 source/native installed replay on engine2fc8a201 remains required before calling
 the complete I2 bundle workflow accepted. Dependency/OS closure, performance,
 other application configurations and production activation remain open.
+
+
+## I2 exact installed retained replay execution
+
+Reuse qualify_installed_next.py and the existing reusable Next workflow, adding
+an opt-in installed retained mode. Build/package the current CLI and verified
+source inventory, then perform the fresh locked/offline source installation and
+separate native archive installation already required by I1. Keep checkout
+compiler and main qualifier paths unavailable throughout both real owners.
+
+Each packaged qualifier must use standalone-probe plus retained-runtime, repeat
+all three real output tamper refusals, and pass native selected-command
+admission/post-verification, actual read-only/cache/kernel enforcement and
+28 browser groups/four unchanged upstream tests. Require zero producer-output
+changes, unchanged selection pointer/generation, unavailable producer paths,
+restored originals, stopped owned containers and no active listeners. Verify
+installed inventory before/after each owner. Preserve the changed-installed-
+source refusal before compiler invocation.
+
+Retain default I1 behavior, sequential execution and only explicit public tool
+caches. The parent continues monitoring aggregate growth at4GB and500MB reserve,
+including source compilation and both runtime images. The always cleanup step
+checks both fixed installed-case ownership records. No deletion, new disk policy,
+native Intel heavy work or registry publication is authorized by this increment.
+
+Acceptance requires a successful focused Linux run and independent review of
+both exact archives, source inventory/program bytes versus Git, fresh engine
+identities, both runtime/source guards and mutation refusals, plus cleanup.
+Do not infer success from checkout runtime acceptance or source-only controls.
+
+
+[Installed retained preflight](../acceptance/project-adoption/g5-installed-retained-next-20261024/preflight.json)
+passes62 focused controls, Python/YAML/diff checks and bounded source package
+selection on Intel. These are admission/source controls; neither fresh installed
+retained owner runtime has run for this increment yet.

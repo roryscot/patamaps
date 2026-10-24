@@ -21,6 +21,7 @@ on:
           - next-server-actions
           - next-rewrites
           - next-installed
+          - next-installed-retained
           - next-standalone-probe
           - next-retained-runtime
           - cargo-registry-preflight
@@ -463,5 +464,15 @@ jobs:
     uses: ./.github/workflows/next-server-actions.yml
     with:
       rewrite-controls: true
+      standalone-controls: true
+      retained-runtime-controls: true
+
+  next-installed-retained:
+    if: github.event_name == 'workflow_dispatch' && inputs.qualification == 'next-installed-retained'
+    name: Fresh installed Next retained runtime replay
+    uses: ./.github/workflows/next-server-actions.yml
+    with:
+      rewrite-controls: true
+      installed-controls: true
       standalone-controls: true
       retained-runtime-controls: true

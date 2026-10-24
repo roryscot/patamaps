@@ -1,4 +1,4 @@
-"""Fresh installed Next native-command qualification; full bundle selection stays separate."""
+"""Fresh installed Next qualification; opt-in immutable retained runtime replay."""
 import argparse,hashlib,json,os,platform,shlex,shutil,subprocess,sys,time
 from pathlib import Path
 from cross_stack_package import install_archive
@@ -12,9 +12,26 @@ def sha(path):
 
 def write(path,value):path.write_text(json.dumps(value,indent=2)+"\n")
 
+def retained_case_result(result,runtime,probe,owned):
+ """Admit a complete installed case only after its real child runtime and cleanup."""
+ assert result["generatedOutputObservation"]["changedFiles"]==0, "INSTALLED_RETAINED_PRODUCER_CHANGED"
+ assert result["generatedOutputObservation"]["before"]==result["generatedOutputObservation"]["after"], "INSTALLED_RETAINED_PRODUCER_CHANGED"
+ assert result["retainedPortHandoffVerified"] is True, "INSTALLED_RETAINED_PORT"
+ assert result["retainedSelectedExecution"]==dict(status="completed-selected-project-command",postExecutionSelectionVerified=True,selectionPointerUnchanged=True), "INSTALLED_RETAINED_SELECTION"
+ for key in ["closedTreeSelected","realMemberAndLinkRefusalsBeforeEffects","standaloneTreeUnchanged","producerSourceAndToolsUnavailable","retainedRuntimeAccepted"]:
+  assert probe[key] is True, "INSTALLED_RETAINED_OUTPUT_OR_SOURCE"
+ assert probe["runtimeMutationObservation"]["changedEntries"]==0, "INSTALLED_RETAINED_GENERATION_CHANGED"
+ actual=runtime["retainedRuntime"]
+ assert actual["status"]=="passed-private-retained-next-runtime", "INSTALLED_RETAINED_RUNTIME"
+ for key in ["imageBytesModesAndLinkTargetsVerified","readonlyWriteRefused","cacheWritePassed","cacheQuotaFailurePassed","producerUnavailableThroughoutBrowser","selectedGenerationUnchanged","renamedProducerPathsRestored","allOwnedContainersStopped"]:
+  assert actual[key] is True, "INSTALLED_RETAINED_ENFORCEMENT_OR_CLEANUP"
+ assert len(owned["containers"])==2 and {c["role"] for c in owned["containers"]}=={"probe","app"} and all(c["confirmedStopped"] is True for c in owned["containers"]), "INSTALLED_RETAINED_OWNED_CONTAINERS"
+ return dict(retainedRuntimeAccepted=True,selectedGenerationUnchanged=True,producerUnavailableDuringRequests=True,producerRestored=True,allOwnedContainersStopped=True)
+
 def main():
  parser=argparse.ArgumentParser(description=__doc__)
  for name in ["work","evidence"]:parser.add_argument("--"+name,type=Path,required=True)
+ parser.add_argument("--retained-runtime",action="store_true",help="Repeat complete immutable selected runtime with both fresh installations")
  args=parser.parse_args()
  assert platform.system()=="Linux" and platform.machine()=="x86_64" and os.environ.get("GITHUB_ACTIONS")=="true","Use focused Linux CI; Intel heavy work needs its existing supervisor"
  work,out=args.work.resolve(),args.evidence.resolve()
@@ -48,6 +65,7 @@ def main():
   return stdout_path.read_text()
  checkout_cli=ROOT/"target/debug/patamaps"
  checkout_driver=ROOT/"scripts/qualify_chatbot_next.py"
+ runtime_options=["--standalone-probe","--retained-runtime"] if args.retained_runtime else []
  cli_backup=work/"checkout-cli.unavailable"
  driver_backup=work/"checkout-driver.unavailable"
  try:
@@ -78,7 +96,7 @@ def main():
    assert not checkout_cli.exists() and not checkout_driver.exists()
    assert json.loads(run(label+"-installed-engine",[compiler,"engine"]))==engine
    case_work,case_out=work/(label+"-owner"),out/label
-   run(label+"-installed-next",[sys.executable,"-B",source/"scripts/qualify_chatbot_next.py","--cli",compiler,"--runtime","--rewrites","--installed-inventory-digest",binding,"--shared-cache-root",shared,"--work",case_work,"--evidence",case_out],timeout=1200)
+   run(label+"-installed-next",[sys.executable,"-B",source/"scripts/qualify_chatbot_next.py","--cli",compiler,"--runtime","--rewrites",*runtime_options,"--installed-inventory-digest",binding,"--shared-cache-root",shared,"--work",case_work,"--evidence",case_out],timeout=1200)
    result=json.loads((case_out/"receipt.json").read_bytes());runtime=json.loads((case_out/"runtime.json").read_bytes());browser=json.loads((case_out/"browser-auth.json").read_bytes())
    assert result["status"]=="passed-pinned-chatbot-source-build-auth" and result["sourceRevision"] is None and result["installedSourceIdentity"]==source_identity and result["installedSourceInventoryUnchanged"]
    assert result["compiler"]["engine"]==engine and result["compiler"]["sha256"]==sha(compiler)
@@ -87,18 +105,22 @@ def main():
    assert runtime["databaseTransportVerified"]=="authenticated IPv4 loopback TCP" and runtime["databaseUnixSocketsDisabled"] is True
    assert len(browser["controls"])==28 and all(row["passed"] for row in browser["controls"]) and browser["upstreamPageTests"]==4
    record["cases"][label]=dict(status=result["status"],compilerDigest=sha(compiler),engine=engine,sourceInventoryDigest=binding,sourceFiles=source_identity["sourceFiles"],upstreamCommit=result["upstreamCommit"],runtimeGroupsPassed=28,upstreamPageTestsPassed=4,generatedOutputObservation=result["generatedOutputObservation"],sourceWithoutGit=True,checkoutCompilerAndDriverUnavailable=True,allOwnedRuntimesStopped=True)
+   if args.retained_runtime:
+    probe=json.loads((case_out/"standalone-probe.json").read_bytes())
+    owned=json.loads((case_out/"retained-owned.json").read_bytes())
+    record["cases"][label].update(retained_case_result(result,runtime,probe,owned))
    assert verify_installed_source(source,binding)==source_identity
    save()
   original=source/"docs/guides/rust-project-quickstart.md";backup=work/"installed-guide.original-retained"
   original.rename(backup);original.write_text("controlled installed source mutation\n")
   marker=work/"forbidden.marker";sentinel=work/"sentinel-compiler.sh";sentinel.write_text("#!/bin/sh\nprintf invoked > "+shlex.quote(str(marker))+"\nexit 91\n");sentinel.chmod(0o700)
   try:
-   run("changed-installed-source-before-compiler",[sys.executable,"-B",source/"scripts/qualify_chatbot_next.py","--cli",sentinel,"--runtime","--rewrites","--installed-inventory-digest",binding,"--work",work/"refused-owner","--evidence",out/"refused-owner"],expected=1,timeout=30)
+   run("changed-installed-source-before-compiler",[sys.executable,"-B",source/"scripts/qualify_chatbot_next.py","--cli",sentinel,"--runtime","--rewrites",*runtime_options,"--installed-inventory-digest",binding,"--work",work/"refused-owner","--evidence",out/"refused-owner"],expected=1,timeout=30)
    assert not marker.exists() and "INSTALLED_SOURCE_BYTES_CHANGED" in (out/"logs/changed-installed-source-before-compiler.stderr").read_text()
   finally:
    original.rename(work/"installed-guide.changed-retained");backup.rename(original)
   assert verify_installed_source(source,binding)==source_identity and sha(native_cli)==distribution["binaryDigest"]
-  record.update(status="passed-installed-next-native-command-workflows",distribution=distribution,sourceIdentity=source_identity,checkoutCompilerAndDriverUnavailableDuringOwners=True,changedSourceRefusedBeforeCompilerMarker=True,restoredSourceInventoryVerified=True,privateGeneratedOutputsPublished=False,publicCachesShared=True)
+  record.update(status="passed-installed-next-retained-runtime-workflows" if args.retained_runtime else "passed-installed-next-native-command-workflows",fullRetainedNextBundleAccepted=args.retained_runtime,distribution=distribution,sourceIdentity=source_identity,checkoutCompilerAndDriverUnavailableDuringOwners=True,changedSourceRefusedBeforeCompilerMarker=True,restoredSourceInventoryVerified=True,privateGeneratedOutputsPublished=False,publicCachesShared=True)
  except BaseException as error:
   record.update(status="failed",error=type(error).__name__+": "+str(error));save();raise
  finally:
