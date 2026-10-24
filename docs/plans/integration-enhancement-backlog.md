@@ -25,6 +25,16 @@ a passed fixture or metadata observation is not general support.
 
 The next original G4 gate follows the [frozen actual-project measurement plan](2026-10-24-project-measurements.md): native Axum initial/warm/edit phases with explicit RSS units, retained disk and a separate exclusive benchmark reservation. No new measurement is accepted yet.
 
+The driver and23 focused controls now pass on Intel and Linux at84922fa;
+[Linux verification](../acceptance/project-adoption/g4-project-measurements-20261024/linux-driver-controls.json).
+The actual Intel unleased entry also refuses before writes. A
+[fresh canonical admission check](../acceptance/project-adoption/g4-project-measurements-20261024/admission-recheck.json)
+still refuses the next native preparation for retained-output headroom.
+The pending exact3,491-file cleanup approval has not been exercised. Native
+preparation and all real measurements remain unrun; independent source-only
+controls are complete. This blocker has persisted across three goal turns.
+
+
 The complete pinned Next I2 installed workflow now [passes independent review](../acceptance/project-adoption/g5-installed-retained-next-20261024/accepted-40071420581/independent-verification.json)
 at80ae616/engine2fc8a201. Both fresh source/native installations passed the full
 retained runtime with enforced cache, source/tool absence, mutation refusals and

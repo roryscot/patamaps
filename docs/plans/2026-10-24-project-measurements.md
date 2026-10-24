@@ -211,3 +211,26 @@ at84922fa passed all23 controls; only the control job executed. The
 matches the Intel control source and workflow. This adds platform verification
 of the driver controls, with actual native preparation and measurements still
 unrun and unaccepted.
+
+## Native admission blocker after driver verification
+
+A [fresh canonical check](../acceptance/project-adoption/g4-project-measurements-20261024/admission-recheck.json)
+at51f285e again returned75: insufficient retained-output headroom. The installed
+run-project entry point loads the approved policy and reserves its full maximum;
+it exposes no per-job lower-growth option. No direct-engine substitute,
+installed-control edit or policy change was used. No native preparation began.
+
+The [actual Intel unleased-entry control](../acceptance/project-adoption/g4-project-measurements-20261024/unleased-entry-refusal.json)
+exercised the installed supervisor imports and the coordinator entry point.
+Preparation refused MEASUREMENT_OWNERSHIP_UNAVAILABLE before destination
+creation. This adds a real refusal-path check; it is not a live-owned success,
+application build, calibration or timed acceptance result.
+
+The same retention/approval blocker was present at the fa50041 collector
+checkpoint, the51f285e driver checkpoint, and this fresh check. Independent
+driver controls are finished. The next required native preparation and measured
+execution cannot proceed under the unchanged admission rules without an external
+state change. The pending exact3,491-file inventory still has its original
+digest; approval has not been exercised and per-file identities must be checked
+again before any removal. A quiet benchmark window is a separate later
+requirement; the unrelated running container remains untouched.
