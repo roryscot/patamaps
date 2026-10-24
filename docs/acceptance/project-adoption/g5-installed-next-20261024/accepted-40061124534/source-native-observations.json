@@ -1,0 +1,1012 @@
+{
+  "schemaVersion": "0.1.0",
+  "documentType": "adapter-response",
+  "profile": "patamaps-workspace-draft-1",
+  "sourceId": "urn:qualification:chatbot:next",
+  "adapterVersion": "patamaps-native-observations-1",
+  "requestDigest": "sha256:146ea81c61e9babaef57817c45cd57b07e21325e14a68abf3edb1dbe65c181d2",
+  "inputs": [
+    {
+      "path": "app-paths.json",
+      "digest": "sha256:78b45a543fddc5e31a0db0f02f391ab00864e9dbb76c0f9976892b4f38790f9e",
+      "byteLength": 1334
+    },
+    {
+      "path": "app-routes.json",
+      "digest": "sha256:e85ad44ebe03c326cc8772d2e0bc68993a5b8446aa7b1bb211e5a920891e3dfc",
+      "byteLength": 982
+    },
+    {
+      "path": "config.json",
+      "digest": "sha256:5366c107a69631ca8250929e2743002b046d0d230b1b63551e1b5fca3d6e7068",
+      "byteLength": 801
+    },
+    {
+      "path": "routes.json",
+      "digest": "sha256:53b93246fa6951707c78dd38a6203954d5e3660f23f274fa948541066baa5c3f",
+      "byteLength": 6803
+    }
+  ],
+  "shard": {
+    "schemaVersion": "0.1.0",
+    "documentType": "graph",
+    "id": "urn:patamaps:observed:shard:sha256:c60085d670ce81564ed66b4c651d54698acbc72bef932d6187926d9cef5cd112",
+    "namespace": "chatbot-next-build",
+    "entities": [
+      {
+        "id": "urn:patamaps:observed:next-build-configuration:sha256:b1db7a57de23e95297d5cb57489619f4e681bd43bc85e36199491a49a0ac81a0",
+        "kind": "next-build-configuration",
+        "locators": [
+          {
+            "uri": "workspace:config.json"
+          }
+        ],
+        "attributes": {
+          "basePath": "",
+          "buildReceiptDigestDeclared": "sha256:be6d2c7c20cd7692de945fe28f79cfe3ee614747f4ba895ec4da217b5ab41241",
+          "caseSensitive": false,
+          "configurationOrigin": "independent-owner-projection",
+          "environment": {
+            "NEXT_PUBLIC_BASE_PATH": ""
+          },
+          "frameworkVersionDeclared": "16.2.10",
+          "output": "server",
+          "pages404": true,
+          "secretReferences": {
+            "AUTH_SECRET": "OWNER_AUTH_SECRET",
+            "POSTGRES_URL": "OWNER_POSTGRES_URL"
+          },
+          "secretResolution": "not-performed",
+          "serverActions": null,
+          "trailingSlash": false,
+          "transpilePackages": []
+        }
+      },
+      {
+        "id": "urn:patamaps:observed:next-build-module:sha256:01eaddc4feb078f690e12f8ec31720f456061c4e4b3002dbd17db6af8321ab97",
+        "kind": "next-build-module",
+        "locators": [
+          {
+            "uri": "workspace:app-paths.json"
+          }
+        ],
+        "attributes": {
+          "appPath": "/(chat)/api/chat/route",
+          "businessCorrespondence": "not-inferred",
+          "httpMethods": "not-observed",
+          "moduleFile": "app/(chat)/api/chat/route.js",
+          "routePath": "/api/chat",
+          "routePathOrigin": "captured-app-path-routes-manifest"
+        }
+      },
+      {
+        "id": "urn:patamaps:observed:next-build-module:sha256:13c27c30ca4e60ab31a4d46562599315663b71395ab770df1417b04ff959d2b4",
+        "kind": "next-build-module",
+        "locators": [
+          {
+            "uri": "workspace:app-paths.json"
+          }
+        ],
+        "attributes": {
+          "appPath": "/(chat)/api/models/route",
+          "businessCorrespondence": "not-inferred",
+          "httpMethods": "not-observed",
+          "moduleFile": "app/(chat)/api/models/route.js",
+          "routePath": "/api/models",
+          "routePathOrigin": "captured-app-path-routes-manifest"
+        }
+      },
+      {
+        "id": "urn:patamaps:observed:next-build-module:sha256:173593dd8ba3bfa54ddc8518c1802ad281359bb774a57f8978ac3cc971409bab",
+        "kind": "next-build-module",
+        "locators": [
+          {
+            "uri": "workspace:app-paths.json"
+          }
+        ],
+        "attributes": {
+          "appPath": "/(chat)/api/suggestions/route",
+          "businessCorrespondence": "not-inferred",
+          "httpMethods": "not-observed",
+          "moduleFile": "app/(chat)/api/suggestions/route.js",
+          "routePath": "/api/suggestions",
+          "routePathOrigin": "captured-app-path-routes-manifest"
+        }
+      },
+      {
+        "id": "urn:patamaps:observed:next-build-module:sha256:1b53e37f1b374c4d6f9fa5991d1c97dbf883e7651fbc35434b9f8e6611c05eb4",
+        "kind": "next-build-module",
+        "locators": [
+          {
+            "uri": "workspace:app-paths.json"
+          }
+        ],
+        "attributes": {
+          "appPath": "/(chat)/api/vote/route",
+          "businessCorrespondence": "not-inferred",
+          "httpMethods": "not-observed",
+          "moduleFile": "app/(chat)/api/vote/route.js",
+          "routePath": "/api/vote",
+          "routePathOrigin": "captured-app-path-routes-manifest"
+        }
+      },
+      {
+        "id": "urn:patamaps:observed:next-build-module:sha256:24eaa320e5892d7aa4603177e288ff64b494fa93937c82aea87e8f3e9912d102",
+        "kind": "next-build-module",
+        "locators": [
+          {
+            "uri": "workspace:app-paths.json"
+          }
+        ],
+        "attributes": {
+          "appPath": "/(auth)/api/auth/guest/route",
+          "businessCorrespondence": "not-inferred",
+          "httpMethods": "not-observed",
+          "moduleFile": "app/(auth)/api/auth/guest/route.js",
+          "routePath": "/api/auth/guest",
+          "routePathOrigin": "captured-app-path-routes-manifest"
+        }
+      },
+      {
+        "id": "urn:patamaps:observed:next-build-module:sha256:254f015aabc210ffd9d0002d94be7b477a7b6bedca785a7d7dc594c56da3cb3f",
+        "kind": "next-build-module",
+        "locators": [
+          {
+            "uri": "workspace:app-paths.json"
+          }
+        ],
+        "attributes": {
+          "appPath": "/(chat)/chat/[id]/page",
+          "businessCorrespondence": "not-inferred",
+          "httpMethods": "not-observed",
+          "moduleFile": "app/(chat)/chat/[id]/page.js",
+          "routePath": "/chat/[id]",
+          "routePathOrigin": "captured-app-path-routes-manifest"
+        }
+      },
+      {
+        "id": "urn:patamaps:observed:next-build-module:sha256:45bc3164b483e4f012ffc844aceacfbdddbb51b74a15d735f37b1c99e811cd8b",
+        "kind": "next-build-module",
+        "locators": [
+          {
+            "uri": "workspace:app-paths.json"
+          }
+        ],
+        "attributes": {
+          "appPath": "/(auth)/register/page",
+          "businessCorrespondence": "not-inferred",
+          "httpMethods": "not-observed",
+          "moduleFile": "app/(auth)/register/page.js",
+          "routePath": "/register",
+          "routePathOrigin": "captured-app-path-routes-manifest"
+        }
+      },
+      {
+        "id": "urn:patamaps:observed:next-build-module:sha256:5ace113377e21ce279f698b77e33a0523849d8b2932e28487f98cd6f661534f7",
+        "kind": "next-build-module",
+        "locators": [
+          {
+            "uri": "workspace:app-paths.json"
+          }
+        ],
+        "attributes": {
+          "appPath": "/(auth)/login/page",
+          "businessCorrespondence": "not-inferred",
+          "httpMethods": "not-observed",
+          "moduleFile": "app/(auth)/login/page.js",
+          "routePath": "/login",
+          "routePathOrigin": "captured-app-path-routes-manifest"
+        }
+      },
+      {
+        "id": "urn:patamaps:observed:next-build-module:sha256:5cc0a243e19c667ad793f05a286c0cd2abb9cc779591f38028c7a7d6660fdbb9",
+        "kind": "next-build-module",
+        "locators": [
+          {
+            "uri": "workspace:app-paths.json"
+          }
+        ],
+        "attributes": {
+          "appPath": "/(chat)/api/chat/[id]/stream/route",
+          "businessCorrespondence": "not-inferred",
+          "httpMethods": "not-observed",
+          "moduleFile": "app/(chat)/api/chat/[id]/stream/route.js",
+          "routePath": "/api/chat/[id]/stream",
+          "routePathOrigin": "captured-app-path-routes-manifest"
+        }
+      },
+      {
+        "id": "urn:patamaps:observed:next-build-module:sha256:6014650810d4563baab6c14267388be8594a82c5975f99f938979298afb2bbca",
+        "kind": "next-build-module",
+        "locators": [
+          {
+            "uri": "workspace:app-paths.json"
+          }
+        ],
+        "attributes": {
+          "appPath": "/(chat)/twitter-image-12cog0.png/route",
+          "businessCorrespondence": "not-inferred",
+          "httpMethods": "not-observed",
+          "moduleFile": "app/(chat)/twitter-image-12cog0.png/route.js",
+          "routePath": "/twitter-image-12cog0.png",
+          "routePathOrigin": "captured-app-path-routes-manifest"
+        }
+      },
+      {
+        "id": "urn:patamaps:observed:next-build-module:sha256:6128e1bb938a7e0fa377fdec3073fa636db8184a8032d1867158f8fce2b8ea0d",
+        "kind": "next-build-module",
+        "locators": [
+          {
+            "uri": "workspace:app-paths.json"
+          }
+        ],
+        "attributes": {
+          "appPath": "/favicon.ico/route",
+          "businessCorrespondence": "not-inferred",
+          "httpMethods": "not-observed",
+          "moduleFile": "app/favicon.ico/route.js",
+          "routePath": "/favicon.ico",
+          "routePathOrigin": "captured-app-path-routes-manifest"
+        }
+      },
+      {
+        "id": "urn:patamaps:observed:next-build-module:sha256:778e8a371d1b8f7d2914cd20b5981c4898cc6665def51ab6be067c74f94c6f41",
+        "kind": "next-build-module",
+        "locators": [
+          {
+            "uri": "workspace:app-paths.json"
+          }
+        ],
+        "attributes": {
+          "appPath": "/_not-found/page",
+          "businessCorrespondence": "not-inferred",
+          "httpMethods": "not-observed",
+          "moduleFile": "app/_not-found/page.js",
+          "routePath": "/_not-found",
+          "routePathOrigin": "captured-app-path-routes-manifest"
+        }
+      },
+      {
+        "id": "urn:patamaps:observed:next-build-module:sha256:791c83af8062cc01de5a6965225475a031ea288738bc1ffc4669483d1ccd5c05",
+        "kind": "next-build-module",
+        "locators": [
+          {
+            "uri": "workspace:app-paths.json"
+          }
+        ],
+        "attributes": {
+          "appPath": "/(chat)/api/messages/route",
+          "businessCorrespondence": "not-inferred",
+          "httpMethods": "not-observed",
+          "moduleFile": "app/(chat)/api/messages/route.js",
+          "routePath": "/api/messages",
+          "routePathOrigin": "captured-app-path-routes-manifest"
+        }
+      },
+      {
+        "id": "urn:patamaps:observed:next-build-module:sha256:87ce993249d842ad65b1e7aa2e3f79de42050a4566d257ffa51129f1a96158d6",
+        "kind": "next-build-module",
+        "locators": [
+          {
+            "uri": "workspace:app-paths.json"
+          }
+        ],
+        "attributes": {
+          "appPath": "/(chat)/opengraph-image-12cog0.png/route",
+          "businessCorrespondence": "not-inferred",
+          "httpMethods": "not-observed",
+          "moduleFile": "app/(chat)/opengraph-image-12cog0.png/route.js",
+          "routePath": "/opengraph-image-12cog0.png",
+          "routePathOrigin": "captured-app-path-routes-manifest"
+        }
+      },
+      {
+        "id": "urn:patamaps:observed:next-build-module:sha256:8d6b2f976d00f2d3d7b51f0ca186972e3ea92056ef35d0c900533e71d15ffb14",
+        "kind": "next-build-module",
+        "locators": [
+          {
+            "uri": "workspace:app-paths.json"
+          }
+        ],
+        "attributes": {
+          "appPath": "/_global-error/page",
+          "businessCorrespondence": "not-inferred",
+          "httpMethods": "not-observed",
+          "moduleFile": "app/_global-error/page.js",
+          "routePath": "/_global-error",
+          "routePathOrigin": "captured-app-path-routes-manifest"
+        }
+      },
+      {
+        "id": "urn:patamaps:observed:next-build-module:sha256:a32cddd381ec577b415cdeef543286c3a72ca2e00f011e7a3d2f9941df6a9f8b",
+        "kind": "next-build-module",
+        "locators": [
+          {
+            "uri": "workspace:app-paths.json"
+          }
+        ],
+        "attributes": {
+          "appPath": "/(chat)/api/files/upload/route",
+          "businessCorrespondence": "not-inferred",
+          "httpMethods": "not-observed",
+          "moduleFile": "app/(chat)/api/files/upload/route.js",
+          "routePath": "/api/files/upload",
+          "routePathOrigin": "captured-app-path-routes-manifest"
+        }
+      },
+      {
+        "id": "urn:patamaps:observed:next-build-module:sha256:a7e5db0b6bb9714301b06ab70a3a3911bf8a5db9e2205fd1d13e94cf815abb47",
+        "kind": "next-build-module",
+        "locators": [
+          {
+            "uri": "workspace:app-paths.json"
+          }
+        ],
+        "attributes": {
+          "appPath": "/(auth)/api/auth/[...nextauth]/route",
+          "businessCorrespondence": "not-inferred",
+          "httpMethods": "not-observed",
+          "moduleFile": "app/(auth)/api/auth/[...nextauth]/route.js",
+          "routePath": "/api/auth/[...nextauth]",
+          "routePathOrigin": "captured-app-path-routes-manifest"
+        }
+      },
+      {
+        "id": "urn:patamaps:observed:next-build-module:sha256:ce80c68b9d04bf6258ad298c146503f4d663c45631231c26564d1bdd06991c20",
+        "kind": "next-build-module",
+        "locators": [
+          {
+            "uri": "workspace:app-paths.json"
+          }
+        ],
+        "attributes": {
+          "appPath": "/(chat)/api/history/route",
+          "businessCorrespondence": "not-inferred",
+          "httpMethods": "not-observed",
+          "moduleFile": "app/(chat)/api/history/route.js",
+          "routePath": "/api/history",
+          "routePathOrigin": "captured-app-path-routes-manifest"
+        }
+      },
+      {
+        "id": "urn:patamaps:observed:next-build-module:sha256:d35b4dad7aaa4e914b7f27cec9c69de7d1167974ccc797ae0e4b77fbcf7f0ca4",
+        "kind": "next-build-module",
+        "locators": [
+          {
+            "uri": "workspace:app-paths.json"
+          }
+        ],
+        "attributes": {
+          "appPath": "/(chat)/page",
+          "businessCorrespondence": "not-inferred",
+          "httpMethods": "not-observed",
+          "moduleFile": "app/(chat)/page.js",
+          "routePath": "/",
+          "routePathOrigin": "captured-app-path-routes-manifest"
+        }
+      },
+      {
+        "id": "urn:patamaps:observed:next-build-module:sha256:fb8e109d3c9858cf7c9a475ef1df6bda21326d1c9858fa497809127dafe224ed",
+        "kind": "next-build-module",
+        "locators": [
+          {
+            "uri": "workspace:app-paths.json"
+          }
+        ],
+        "attributes": {
+          "appPath": "/(chat)/api/document/route",
+          "businessCorrespondence": "not-inferred",
+          "httpMethods": "not-observed",
+          "moduleFile": "app/(chat)/api/document/route.js",
+          "routePath": "/api/document",
+          "routePathOrigin": "captured-app-path-routes-manifest"
+        }
+      },
+      {
+        "id": "urn:patamaps:observed:next-build-protocol:sha256:a6a25c9cc82a6e0a781efa5896ac463a4614b86b463584fc1c3086a7fd15e602",
+        "kind": "next-build-protocol",
+        "locators": [
+          {
+            "uri": "workspace:routes.json"
+          }
+        ],
+        "attributes": {
+          "interpretation": "opaque-captured-metadata",
+          "ppr": {
+            "chain": {
+              "headers": {
+                "next-resume": "1"
+              }
+            }
+          },
+          "rewriteHeaders": {
+            "pathHeader": "x-nextjs-rewritten-path",
+            "queryHeader": "x-nextjs-rewritten-query"
+          },
+          "rsc": {
+            "clientParamParsing": true,
+            "contentTypeHeader": "text/x-component",
+            "didPostponeHeader": "x-nextjs-postponed",
+            "dynamicRSCPrerender": true,
+            "header": "rsc",
+            "prefetchHeader": "next-router-prefetch",
+            "prefetchSegmentDirSuffix": ".segments",
+            "prefetchSegmentHeader": "next-router-segment-prefetch",
+            "prefetchSegmentSuffix": ".segment.rsc",
+            "suffix": ".rsc",
+            "varyHeader": "rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch"
+          },
+          "skipMiddlewareUrlNormalize": null
+        }
+      },
+      {
+        "id": "urn:patamaps:observed:next-build-route:sha256:0e3b51d5198cbc7d7918a5923eebe647704ae3bcc36e2bc7a56008c6aee4ca1b",
+        "kind": "next-build-route",
+        "locators": [
+          {
+            "uri": "workspace:routes.json"
+          }
+        ],
+        "attributes": {
+          "category": "static",
+          "httpMethods": "not-observed",
+          "index": 16.0,
+          "namedRegex": "^/twitter\\-image\\-12cog0\\.png(?:/)?$",
+          "page": "/twitter-image-12cog0.png",
+          "regex": "^/twitter\\-image\\-12cog0\\.png(?:/)?$",
+          "regexExecuted": false,
+          "routeKeys": {}
+        }
+      },
+      {
+        "id": "urn:patamaps:observed:next-build-route:sha256:14783587071a383a7e969cd891bd057fe7f54dd72b34bca4c807846194914470",
+        "kind": "next-build-route",
+        "locators": [
+          {
+            "uri": "workspace:routes.json"
+          }
+        ],
+        "attributes": {
+          "category": "static",
+          "httpMethods": "not-observed",
+          "index": 9.0,
+          "namedRegex": "^/api/models(?:/)?$",
+          "page": "/api/models",
+          "regex": "^/api/models(?:/)?$",
+          "regexExecuted": false,
+          "routeKeys": {}
+        }
+      },
+      {
+        "id": "urn:patamaps:observed:next-build-route:sha256:14efd6ee583295b8300d8c134cd277dace98fc89d068e8eae4a5ad30ad0ff506",
+        "kind": "next-build-route",
+        "locators": [
+          {
+            "uri": "workspace:routes.json"
+          }
+        ],
+        "attributes": {
+          "category": "static",
+          "httpMethods": "not-observed",
+          "index": 13.0,
+          "namedRegex": "^/login(?:/)?$",
+          "page": "/login",
+          "regex": "^/login(?:/)?$",
+          "regexExecuted": false,
+          "routeKeys": {}
+        }
+      },
+      {
+        "id": "urn:patamaps:observed:next-build-route:sha256:215dbc4e94139b2efafc24b301507e3f56dc5c1254a6e6ed3e72379de3776ae9",
+        "kind": "next-build-route",
+        "locators": [
+          {
+            "uri": "workspace:routes.json"
+          }
+        ],
+        "attributes": {
+          "category": "static",
+          "httpMethods": "not-observed",
+          "index": 12.0,
+          "namedRegex": "^/favicon\\.ico(?:/)?$",
+          "page": "/favicon.ico",
+          "regex": "^/favicon\\.ico(?:/)?$",
+          "regexExecuted": false,
+          "routeKeys": {}
+        }
+      },
+      {
+        "id": "urn:patamaps:observed:next-build-route:sha256:2ac5d4563309fab433ba2a01b8ae4eba5a2d1be59246360ebe8d6ca3de886668",
+        "kind": "next-build-route",
+        "locators": [
+          {
+            "uri": "workspace:routes.json"
+          }
+        ],
+        "attributes": {
+          "category": "dynamic",
+          "httpMethods": "not-observed",
+          "index": 2.0,
+          "namedRegex": "^/chat/(?<nxtPid>[^/]+?)(?:/)?$",
+          "page": "/chat/[id]",
+          "prefetchSegmentDataRoutes": [
+            {
+              "destination": "/chat/[id].segments$segment",
+              "routeKeys": {
+                "nxtPid": "nxtPid"
+              },
+              "source": "^/chat/(?<nxtPid>[^/]+?)\\.segments(?<segment>/__PAGE__\\.segment\\.rsc|\\.segment\\.rsc)(?:/)?$"
+            }
+          ],
+          "regex": "^/chat/([^/]+?)(?:/)?$",
+          "regexExecuted": false,
+          "routeKeys": {
+            "nxtPid": "nxtPid"
+          }
+        }
+      },
+      {
+        "id": "urn:patamaps:observed:next-build-route:sha256:2d4622494f613027f0d4e2f40ceea1c33b0d7d92caae2a58b4dfd7317c71ed49",
+        "kind": "next-build-route",
+        "locators": [
+          {
+            "uri": "workspace:routes.json"
+          }
+        ],
+        "attributes": {
+          "category": "static",
+          "httpMethods": "not-observed",
+          "index": 14.0,
+          "namedRegex": "^/opengraph\\-image\\-12cog0\\.png(?:/)?$",
+          "page": "/opengraph-image-12cog0.png",
+          "regex": "^/opengraph\\-image\\-12cog0\\.png(?:/)?$",
+          "regexExecuted": false,
+          "routeKeys": {}
+        }
+      },
+      {
+        "id": "urn:patamaps:observed:next-build-route:sha256:44aef2453dd5794024b5d7692a696e49d703b221e3a68f537c3ca0d7fc54b96d",
+        "kind": "next-build-route",
+        "locators": [
+          {
+            "uri": "workspace:routes.json"
+          }
+        ],
+        "attributes": {
+          "category": "dynamic",
+          "httpMethods": "not-observed",
+          "index": 0.0,
+          "namedRegex": "^/api/auth/(?<nxtPnextauth>.+?)(?:/)?$",
+          "page": "/api/auth/[...nextauth]",
+          "regex": "^/api/auth/(.+?)(?:/)?$",
+          "regexExecuted": false,
+          "routeKeys": {
+            "nxtPnextauth": "nxtPnextauth"
+          }
+        }
+      },
+      {
+        "id": "urn:patamaps:observed:next-build-route:sha256:69fe5e06385fb690c6a8dde1ba8c52ab27be61b65f307f69d32613536d665a11",
+        "kind": "next-build-route",
+        "locators": [
+          {
+            "uri": "workspace:routes.json"
+          }
+        ],
+        "attributes": {
+          "category": "static",
+          "httpMethods": "not-observed",
+          "index": 4.0,
+          "namedRegex": "^/api/chat(?:/)?$",
+          "page": "/api/chat",
+          "regex": "^/api/chat(?:/)?$",
+          "regexExecuted": false,
+          "routeKeys": {}
+        }
+      },
+      {
+        "id": "urn:patamaps:observed:next-build-route:sha256:70bd0ca3e0db585a7701eaae192f44a37282ef5c33b73b8adf4cc694b8094ec2",
+        "kind": "next-build-route",
+        "locators": [
+          {
+            "uri": "workspace:routes.json"
+          }
+        ],
+        "attributes": {
+          "category": "static",
+          "httpMethods": "not-observed",
+          "index": 11.0,
+          "namedRegex": "^/api/vote(?:/)?$",
+          "page": "/api/vote",
+          "regex": "^/api/vote(?:/)?$",
+          "regexExecuted": false,
+          "routeKeys": {}
+        }
+      },
+      {
+        "id": "urn:patamaps:observed:next-build-route:sha256:792ad0f9cebae117425a83d6488bbbe7ed42a6797d368195fc751cef80c5da9b",
+        "kind": "next-build-route",
+        "locators": [
+          {
+            "uri": "workspace:routes.json"
+          }
+        ],
+        "attributes": {
+          "category": "static",
+          "httpMethods": "not-observed",
+          "index": 6.0,
+          "namedRegex": "^/api/files/upload(?:/)?$",
+          "page": "/api/files/upload",
+          "regex": "^/api/files/upload(?:/)?$",
+          "regexExecuted": false,
+          "routeKeys": {}
+        }
+      },
+      {
+        "id": "urn:patamaps:observed:next-build-route:sha256:8c0aeddcf49f85715603391376fc9911a73d88b41644edd456ad5663a47910e1",
+        "kind": "next-build-route",
+        "locators": [
+          {
+            "uri": "workspace:routes.json"
+          }
+        ],
+        "attributes": {
+          "category": "static",
+          "httpMethods": "not-observed",
+          "index": 8.0,
+          "namedRegex": "^/api/messages(?:/)?$",
+          "page": "/api/messages",
+          "regex": "^/api/messages(?:/)?$",
+          "regexExecuted": false,
+          "routeKeys": {}
+        }
+      },
+      {
+        "id": "urn:patamaps:observed:next-build-route:sha256:9eb51a993a63962e0c0ba59e8018ab9c50c5e344e792261e962eee44d726889c",
+        "kind": "next-build-route",
+        "locators": [
+          {
+            "uri": "workspace:routes.json"
+          }
+        ],
+        "attributes": {
+          "category": "static",
+          "httpMethods": "not-observed",
+          "index": 1.0,
+          "namedRegex": "^/_global\\-error(?:/)?$",
+          "page": "/_global-error",
+          "regex": "^/_global\\-error(?:/)?$",
+          "regexExecuted": false,
+          "routeKeys": {}
+        }
+      },
+      {
+        "id": "urn:patamaps:observed:next-build-route:sha256:ab0f041e59762ee1d0485696c5fcdaea5457dd09592be3ecaadae0f3e1f0c45a",
+        "kind": "next-build-route",
+        "locators": [
+          {
+            "uri": "workspace:routes.json"
+          }
+        ],
+        "attributes": {
+          "category": "static",
+          "httpMethods": "not-observed",
+          "index": 3.0,
+          "namedRegex": "^/api/auth/guest(?:/)?$",
+          "page": "/api/auth/guest",
+          "regex": "^/api/auth/guest(?:/)?$",
+          "regexExecuted": false,
+          "routeKeys": {}
+        }
+      },
+      {
+        "id": "urn:patamaps:observed:next-build-route:sha256:ac7752f245c4f652b41863c5cbdfea28cc7ac06a5d0a975890778aa943ccf87c",
+        "kind": "next-build-route",
+        "locators": [
+          {
+            "uri": "workspace:routes.json"
+          }
+        ],
+        "attributes": {
+          "category": "static",
+          "httpMethods": "not-observed",
+          "index": 5.0,
+          "namedRegex": "^/api/document(?:/)?$",
+          "page": "/api/document",
+          "regex": "^/api/document(?:/)?$",
+          "regexExecuted": false,
+          "routeKeys": {}
+        }
+      },
+      {
+        "id": "urn:patamaps:observed:next-build-route:sha256:ae29c39010bccca0abbc6943b574497ad78cd289b823afb9cce06bc3591686f9",
+        "kind": "next-build-route",
+        "locators": [
+          {
+            "uri": "workspace:routes.json"
+          }
+        ],
+        "attributes": {
+          "category": "dynamic",
+          "httpMethods": "not-observed",
+          "index": 1.0,
+          "namedRegex": "^/api/chat/(?<nxtPid>[^/]+?)/stream(?:/)?$",
+          "page": "/api/chat/[id]/stream",
+          "regex": "^/api/chat/([^/]+?)/stream(?:/)?$",
+          "regexExecuted": false,
+          "routeKeys": {
+            "nxtPid": "nxtPid"
+          }
+        }
+      },
+      {
+        "id": "urn:patamaps:observed:next-build-route:sha256:aec6ceb6f8c03f8bb5ac1b722ba71b3e4285f51ee8039c290bf0b1e0f39fbf6f",
+        "kind": "next-build-route",
+        "locators": [
+          {
+            "uri": "workspace:routes.json"
+          }
+        ],
+        "attributes": {
+          "category": "static",
+          "httpMethods": "not-observed",
+          "index": 2.0,
+          "namedRegex": "^/_not\\-found(?:/)?$",
+          "page": "/_not-found",
+          "regex": "^/_not\\-found(?:/)?$",
+          "regexExecuted": false,
+          "routeKeys": {}
+        }
+      },
+      {
+        "id": "urn:patamaps:observed:next-build-route:sha256:b5f7072aab5a379685e73aac550605b4f45b75961f5b2b740313c2e3739256ac",
+        "kind": "next-build-route",
+        "locators": [
+          {
+            "uri": "workspace:routes.json"
+          }
+        ],
+        "attributes": {
+          "category": "static",
+          "httpMethods": "not-observed",
+          "index": 15.0,
+          "namedRegex": "^/register(?:/)?$",
+          "page": "/register",
+          "regex": "^/register(?:/)?$",
+          "regexExecuted": false,
+          "routeKeys": {}
+        }
+      },
+      {
+        "id": "urn:patamaps:observed:next-build-route:sha256:c5c823741a98fb8204029bd66f2c30224f60151a63f550ba6046f3306d360dfe",
+        "kind": "next-build-route",
+        "locators": [
+          {
+            "uri": "workspace:routes.json"
+          }
+        ],
+        "attributes": {
+          "category": "static",
+          "httpMethods": "not-observed",
+          "index": 0.0,
+          "namedRegex": "^/(?:/)?$",
+          "page": "/",
+          "regex": "^/(?:/)?$",
+          "regexExecuted": false,
+          "routeKeys": {}
+        }
+      },
+      {
+        "id": "urn:patamaps:observed:next-build-route:sha256:dd3500a693a4c64272fe21863ce1c461d1597958ea9e628feece918cd4def742",
+        "kind": "next-build-route",
+        "locators": [
+          {
+            "uri": "workspace:routes.json"
+          }
+        ],
+        "attributes": {
+          "category": "static",
+          "httpMethods": "not-observed",
+          "index": 7.0,
+          "namedRegex": "^/api/history(?:/)?$",
+          "page": "/api/history",
+          "regex": "^/api/history(?:/)?$",
+          "regexExecuted": false,
+          "routeKeys": {}
+        }
+      },
+      {
+        "id": "urn:patamaps:observed:next-build-route:sha256:f2aacdfa7d396038434cba8769cc898c846853eec66f9159543591e0a6eead7d",
+        "kind": "next-build-route",
+        "locators": [
+          {
+            "uri": "workspace:routes.json"
+          }
+        ],
+        "attributes": {
+          "category": "static",
+          "httpMethods": "not-observed",
+          "index": 10.0,
+          "namedRegex": "^/api/suggestions(?:/)?$",
+          "page": "/api/suggestions",
+          "regex": "^/api/suggestions(?:/)?$",
+          "regexExecuted": false,
+          "routeKeys": {}
+        }
+      },
+      {
+        "id": "urn:patamaps:observed:next-build-rule:sha256:01f9839dd9470546e0b5f3ab9f508fb645b694618b2be295cd6dd818d21616fe",
+        "kind": "next-build-rule",
+        "locators": [
+          {
+            "uri": "workspace:routes.json"
+          }
+        ],
+        "attributes": {
+          "category": "redirect",
+          "index": 0.0,
+          "matchingAndExecution": "not-performed",
+          "rule": {
+            "destination": "/:path+",
+            "internal": true,
+            "priority": true,
+            "regex": "^(?:/((?:[^/]+?)(?:/(?:[^/]+?))*))/$",
+            "source": "/:path+/",
+            "statusCode": 308.0
+          }
+        }
+      },
+      {
+        "id": "urn:patamaps:observed:next-build-rule:sha256:049b871693f92e1e0c425f6ef41c6401d7d148641bdd5c5d5d8e409a389a1c04",
+        "kind": "next-build-rule",
+        "locators": [
+          {
+            "uri": "workspace:routes.json"
+          }
+        ],
+        "attributes": {
+          "category": "afterFiles",
+          "index": 1.0,
+          "matchingAndExecution": "not-performed",
+          "rule": {
+            "destination": "https://api.vercel.com/bot-protection/v1/proxy/:path*",
+            "regex": "^/149e9513-01fa-4fb0-aad4-566afd725d1b/2d206a39-8ed7-437e-a3be-862e0f06eea3(?:/((?:[^/]+?)(?:/(?:[^/]+?))*))?(?:/)?$",
+            "source": "/149e9513-01fa-4fb0-aad4-566afd725d1b/2d206a39-8ed7-437e-a3be-862e0f06eea3/:path*"
+          }
+        }
+      },
+      {
+        "id": "urn:patamaps:observed:next-build-rule:sha256:1e0ad9c20dd4844f8cca435f83c3a59994d4a5ea1133d8ebbab22201ef113b2e",
+        "kind": "next-build-rule",
+        "locators": [
+          {
+            "uri": "workspace:routes.json"
+          }
+        ],
+        "attributes": {
+          "category": "afterFiles",
+          "index": 2.0,
+          "matchingAndExecution": "not-performed",
+          "rule": {
+            "destination": "http://127.0.0.1:58905/api/auth/session",
+            "has": [
+              {
+                "key": "view",
+                "type": "query",
+                "value": "session"
+              }
+            ],
+            "missing": [
+              {
+                "key": "x-patamaps-block",
+                "type": "header"
+              }
+            ],
+            "regex": "^/qualified/session(?:/)?$",
+            "source": "/qualified/session"
+          }
+        }
+      },
+      {
+        "id": "urn:patamaps:observed:next-build-rule:sha256:41d628daebdf7af9d1141489e0d8fb0ae1f40091cd9276f6082e9bdeb659f914",
+        "kind": "next-build-rule",
+        "locators": [
+          {
+            "uri": "workspace:routes.json"
+          }
+        ],
+        "attributes": {
+          "category": "afterFiles",
+          "index": 0.0,
+          "matchingAndExecution": "not-performed",
+          "rule": {
+            "destination": "https://api.vercel.com/bot-protection/v1/challenge",
+            "regex": "^/149e9513-01fa-4fb0-aad4-566afd725d1b/2d206a39-8ed7-437e-a3be-862e0f06eea3/a-4-a/c\\.js(?:/)?$",
+            "source": "/149e9513-01fa-4fb0-aad4-566afd725d1b/2d206a39-8ed7-437e-a3be-862e0f06eea3/a-4-a/c.js"
+          }
+        }
+      },
+      {
+        "id": "urn:patamaps:observed:next-build-rule:sha256:df0053d602ca5677bf94aaf20374d5ad30dc471f7eee5a4e36e0be81ccad97f6",
+        "kind": "next-build-rule",
+        "locators": [
+          {
+            "uri": "workspace:routes.json"
+          }
+        ],
+        "attributes": {
+          "category": "header",
+          "index": 0.0,
+          "matchingAndExecution": "not-performed",
+          "rule": {
+            "headers": [
+              {
+                "key": "X-Frame-Options",
+                "value": "SAMEORIGIN"
+              },
+              {
+                "key": "Content-Security-Policy",
+                "value": "frame-ancestors 'self'"
+              }
+            ],
+            "regex": "^/149e9513-01fa-4fb0-aad4-566afd725d1b/2d206a39-8ed7-437e-a3be-862e0f06eea3(?:/((?:[^/]+?)(?:/(?:[^/]+?))*))?(?:/)?$",
+            "source": "/149e9513-01fa-4fb0-aad4-566afd725d1b/2d206a39-8ed7-437e-a3be-862e0f06eea3/:path*"
+          }
+        }
+      },
+      {
+        "id": "urn:patamaps:observed:next-build-rule:sha256:fec49186576dc524cdaf4c5e5aa5b0e8d04fc957ed42f78874c354c4786e4d15",
+        "kind": "next-build-rule",
+        "locators": [
+          {
+            "uri": "workspace:routes.json"
+          }
+        ],
+        "attributes": {
+          "category": "beforeFiles",
+          "index": 0.0,
+          "matchingAndExecution": "not-performed",
+          "rule": {
+            "destination": "/:page",
+            "has": [
+              {
+                "key": "x-patamaps-rewrite",
+                "type": "header",
+                "value": "enabled"
+              }
+            ],
+            "missing": [
+              {
+                "key": "blocked",
+                "type": "query"
+              }
+            ],
+            "regex": "^/qualified/auth(?:/(login|register))(?:/)?$",
+            "source": "/qualified/auth/:page(login|register)"
+          }
+        }
+      }
+    ],
+    "mappings": [],
+    "authorities": [],
+    "metadata": {
+      "observation": {
+        "buildReceiptDigestDeclared": "sha256:be6d2c7c20cd7692de945fe28f79cfe3ee614747f4ba895ec4da217b5ab41241",
+        "compilationEstablished": false,
+        "configurationOrigin": "independent-owner-projection",
+        "dataRoutes": "refused",
+        "frameworkMajor": 16.0,
+        "frameworkVersionDeclared": "16.2.10",
+        "manifestShape": "next16-v3",
+        "manifestVersion": 3.0,
+        "methodsAndServerActionHandlers": "not-observed",
+        "profile": "patamaps-next-build-observations-1",
+        "regexExecuted": false,
+        "runtimeEstablished": false,
+        "semanticMeaning": "owner-authored"
+      },
+      "profile": "patamaps-native-observations-1"
+    }
+  },
+  "diagnostics": []
+}

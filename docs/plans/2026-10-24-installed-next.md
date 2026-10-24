@@ -1,6 +1,6 @@
 # Fresh installed Next workflow
 
-Status: implemented; installed qualification pending. Baseline79bf9c6.
+Status: I1 independently verified; I2 remains open. Baseline79bf9c6.
 Continue the original G5/G6 adoption requirement. The accepted Rust-only
 installed replay and checkout-based Next case do not prove this requirement.
 
@@ -115,3 +115,47 @@ the exact private historical stderr is not claimed.
 define both conversions. The check now records only four fixed booleans for
 authenticated query, disabled Unix sockets, loopback listener and loopback server.
 All four remain required; no expected runtime behavior is waived.
+
+
+## I1 acceptance and next I2 increment
+
+[Run40061124534](https://github.com/roryscot/patamaps/actions/runs/40061124534)
+at13faaa4 passed [independent review](../acceptance/project-adoption/g5-installed-next-20261024/accepted-40061124534/independent-verification.json).
+The exact21,722,859-byte artifact digest, both archives,1,164 source members and
+455 shipped program files against Git were verified. Each fresh source/native
+installation completed the actual build/native refusals,28 browser groups and
+four upstream tests with checkout CLI/qualifier paths unavailable. Both source
+guards, changed-source-before-marker refusal, restoration, authenticated TCP-only
+database settings and owned process/listener/browser/proxy shutdown passed.
+The single artifact expires2026-11-07; Intel retains compact receipts and the
+executed reviewer, not another archive/dependency extraction.
+
+Each private output inventory observed1,081 entries including one un-followed
+symlink, about103.5MB, with zero changes during its runtime. The three public
+manifest bindings stayed unchanged. This observation covers the exercised paths;
+it does not show that every route leaves outputs immutable or close node_modules,
+test fixtures, OS libraries or the complete deployment bundle.
+
+I2 is the next selected increment. Start with an explicitly captured derived
+standalone profile on this same pinned owner, preserving the accepted canonical
+proxy and all original source. Native Next projection already accepts standalone;
+the declaration must reflect the actual build mode. Reuse native retained
+project-build/verify/selection and its unchanged symlink/byte/mode limits.
+
+The [pinned Next16.2.10 output documentation](https://github.com/vercel/next.js/blob/v16.2.10/docs/01-app/03-api-reference/05-config/01-next-config-js/output.mdx)
+describes traced standalone dependencies, its server.js entrypoint and separately
+needed public/static assets. First inventory that exact produced bundle privately.
+Do not claim full deployment closure from tracing alone. If links or escapes
+prevent native selection, retain the refusal and specify a bounded internal
+materialization using existing capture contracts before implementing it.
+
+Freeze acceptance before the producer change: exact full declared runtime tree,
+independently captured configuration, preserved previous selection on failures,
+tamper/missing-member refusals before runtime effects, final selection recheck,
+then the same28 groups/four tests from retained execution with producer source
+and configured build-tool paths unavailable. Declare the separate Node runtime,
+database/browser/test inputs and OS boundary explicitly. Keep generated signing/
+Action material private; publish only bounded identities/counts. Any observed
+writes need an explicit mutable-state contract rather than silently omitting
+changed files. Installed full-bundle replay and actual-project exclusive latency/
+memory/disk measurements remain subsequent required evidence, not I1 claims.

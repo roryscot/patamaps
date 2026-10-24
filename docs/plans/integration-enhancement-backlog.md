@@ -14,8 +14,8 @@ a passed fixture or metadata observation is not general support.
 | Workstream | Existing result | Remaining work if selected |
 | --- | --- | --- |
 | Real Rust application onboarding | Explicit project capture, Cargo observations, scoped Axum transport and pinned upstream Axum build/tests/replay | Retained Wargame router and thirteen production-network controls passed; extend only for uncovered owner schemas/semantics. Independent Miniserve registry/runtime and current installed workflow also passed. |
-| Broader Next.js/framework integration | Selected production build, public HTTP/browser paths and declared observations | Pinned Chatbot auth/private-document and explicit page-rewrite/canonical-session-proxy controls passed; remaining owner route/deployment behavior and installed Next workflow remain open. |
-| Retained builds and portable development loop | Controlled watch/recovery and scoped actual Rust retained workflow | Application-specific dependency closure, fresh installed workflow and measured edit-loop behavior; no blanket hermeticity or speed claim. |
+| Broader Next.js/framework integration | Selected production build, public HTTP/browser paths and declared observations | Pinned Chatbot auth/private-document and explicit page-rewrite/canonical-session-proxy controls passed; fresh installed native commands now pass below; remaining owner route/deployment behavior and full retained Next bundle remain open. |
+| Retained builds and portable development loop | Controlled watch/recovery and scoped actual Rust retained workflow | Application-specific dependency closure, full retained Next bundle/installed replay and measured edit-loop behavior; no blanket hermeticity or speed claim. |
 | Deployment expansion | Scoped actual Linux output/runtime and deployment refusals | Remaining wrong-architecture/stale-contract controls or a chosen deployment profile. Production activation remains separate. |
 | Performance acceptance | Existing functional timing records | Define comparison and acceptance budgets before exclusive measured execution. Diagnostic profiling remains separate. |
 | Storage and reservation infrastructure | Installed qualified protocol3 reservations and bounded retention controls | Maintenance for demonstrated failures; no infrastructure prerequisite for parity. Preserve native/benchmark exclusive fallback. |
@@ -87,7 +87,24 @@ public pnpm/Chromium caches are shared, and the parent monitors the combined
 passed39 controls: ten source-integrity, three private-output, fourteen archive,
 eight rewrite and four acquisition cases. Source-scope selection remains within
 the unchanged128MiB/32MiB-evidence bounds. Python AST, workflow YAML and diff
-checks passed. Actual installed Next acceptance is pending the focused next-installed Linux CI lane.
+checks passed. I1 now passes [independent installed-Next review](../acceptance/project-adoption/g5-installed-next-20261024/accepted-40061124534/independent-verification.json)
+in [run40061124534](https://github.com/roryscot/patamaps/actions/runs/40061124534)
+at13faaa4. Both fresh source/native installations built the real owner and passed
+all28 auth/rewrite groups and four upstream page tests each, with checkout CLI
+and qualifier unavailable. Review verified1,164 source members,455 program files
+against Git, both archive digests/engines, final source guards, changed-source
+refusal before a marker, restored inventory and all owned-runtime shutdown.
+Authenticated TCP-only database settings passed. Three earlier failures remain
+recorded; the latest was a checker address-format defect, not a product failure.
+
+Each private Next tree had1,081 entries/one un-followed symlink and about103.5MB,
+with zero runtime changes in this profile; all public manifest bindings stayed
+unchanged. This does not admit output symlinks or establish complete closure.
+The [next I2 increment](2026-10-24-installed-next.md#i1-acceptance-and-next-i2-increment)
+uses an explicit pinned standalone profile and existing retained selection
+contracts. Full bundle replay and exclusive performance measurements remain open.
+Only compact reviewed evidence is retained on Intel; the21.7MB package/evidence
+artifact expires2026-11-07.
 
 I1 also privately characterizes generated-output changes and requires the three
 public compiled manifests to retain their bindings through actual runtime.
@@ -98,7 +115,7 @@ HTTP stay outside public captures/evidence. Actual-project exclusive cold/warm/
 edit latency, memory and retained-disk measurements remain required.
 
 The original G0–G6 scope remains active: remaining Next/framework and deployment
-controls, installed Next workflow, applicable dependency/test-context treatment,
+controls, full retained Next bundle and its installed replay, applicable dependency/test-context treatment,
 and actual-project exclusive cold/warm/edit latency, memory and retained-disk
 measurements still require evidence. Full OS/toolchain/test-fixture closure and
 production activation are not established by either successful run. These remain

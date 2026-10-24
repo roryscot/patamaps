@@ -914,3 +914,21 @@ left ownership for review. Stop proof/original records were preserved before
 scoped recovery. The smaller preparation-only retry succeeded without repeating
 passed build controls. No files deleted. Stale contracts, external deployment
 and G4 actual edit-performance requirements remain open.
+
+
+## Fresh installed Next command checkpoint (2026-10-24)
+
+I1 passes [independent review](../acceptance/project-adoption/g5-installed-next-20261024/accepted-40061124534/independent-verification.json)
+at13faaa4: both fresh source/native installations completed the real pinned
+Chatbot build/native checks,28 auth/rewrite groups and four upstream tests each,
+with checkout compiler/qualifier unavailable. Exact packages,1,164 shipped source
+members,455 program files against Git, unchanged/restored source inventory and
+before-marker refusal passed. All owned runtimes stopped; actual TCP-only test
+database settings were verified. Earlier failed runs remain recorded.
+
+Private output observations showed zero changes across1,081 entries, including
+one un-followed symlink, per owner. No full runtime tree was selected and no
+dependency closure or performance was established. Continue
+[I2 retained Next bundle](2026-10-24-installed-next.md#i1-acceptance-and-next-i2-increment),
+applicable dependency/test-context treatment, remaining deployment controls and
+exclusive actual-project latency/memory/disk measurements. G4–G6 stay open.

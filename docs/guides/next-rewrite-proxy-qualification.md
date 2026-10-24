@@ -75,3 +75,29 @@ This result does not accept external BotID execution, every rewrite pattern or
 HTTP method, installed Next workflows, full dependency/toolchain closure,
 performance or production activation. Declare another owner's actual intent,
 configuration and verification requirements explicitly.
+
+
+## Fresh installed command qualification
+
+The same pinned profile now passes with fresh source and native installations in
+[run40061124534](https://github.com/roryscot/patamaps/actions/runs/40061124534)
+at13faaa4; [independent review](../acceptance/project-adoption/g5-installed-next-20261024/accepted-40061124534/independent-verification.json)
+checks exact packages/source/engine and both actual owner workflows. This adds
+installed command usability. Full retained Next runtime-bundle selection and
+producer/build-tool-unavailable replay remain open in the
+[I1/I2 plan](../plans/2026-10-24-installed-next.md).
+
+Maintainers can repeat this CI-only Linux qualification with:
+
+    gh workflow run native-capabilities.yml --ref feat/retained-owner-preparation -f qualification=next-installed
+
+The installed source package supplies its own qualifier and guides. An explicit
+expected source-inventory digest replaces Git provenance; every source path and
+byte is checked before commands and after execution. Checkout CLI/qualifier paths
+are unavailable. Owner states remain separate; only newly created public pnpm/
+browser caches are shared sequentially. The combined4GB growth/500MB reserve and
+all previous native/browser refusals stay required. The test database uses
+authenticated IPv4 loopback TCP, with its actual settings queried before
+migrations. Generated credentials, Action keys and detailed output inventories
+stay private. These development-profile packages are scoped CI evidence, not a
+new registry publication or an arbitrary-project installer claim.
