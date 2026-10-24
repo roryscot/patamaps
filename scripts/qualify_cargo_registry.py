@@ -96,8 +96,12 @@ def qualify(root, work, out, source, staged, names, cargo, cli, env, run, native
     shutil.copyfile(root/'scripts/deployment/miniserve/registry-host.conf', owner/'network-host.conf')
     write(owner/'registry-record.json', registry)
     tool_identities = {str(path):sha(path) for path in [cargo, cargo.with_name('rustc'), Path(shutil.which('docker')).resolve()]}
+    system_ca = Path('/etc/ssl/certs/ca-certificates.crt')
+    public_ca = system_ca.read_bytes()
+    assert len(public_ca)<2097152 and b'BEGIN CERTIFICATE' in public_ca and b'PRIVATE KEY' not in public_ca
+    os_inputs = {str(system_ca):sha(system_ca)}
     write(owner/'registry-executor.json', dict(cargo=str(cargo), ownerTestSource=str(source),
-                                             privateLogs=str(base/'private-execution'), toolIdentities=tool_identities))
+                                             privateLogs=str(base/'private-execution'), toolIdentities=tool_identities, osInputIdentities=os_inputs))
     identity = 'urn:qualification:miniserve:registry-build'
     graph = dict(schemaVersion='0.1.0', documentType='graph', id=identity+':source', namespace='miniserve-registry', revision='1',
                  entities=[dict(id=identity+':application', kind='cargo-registry-build', label='Miniserve registry execution',

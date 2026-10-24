@@ -68,6 +68,12 @@ fn main() {
 }
 RUST
  "$RUSTC" /work/loopback-probe.rs -o /work/loopback-probe
+ /usr/bin/python3 -B - <<'SYSTEM_CA'
+import ssl
+context=ssl.create_default_context()
+assert context.verify_mode==ssl.CERT_REQUIRED and context.cert_store_stats()['x509_ca']>0
+print('system-ca-store-passed')
+SYSTEM_CA
  /work/loopback-probe
 } >/work/logs/limits.txt
 finish() {

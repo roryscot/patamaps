@@ -32,7 +32,8 @@ def failure_summary(stdout, stderr):
     text = stdout + "\n" + stderr
     categories = {"disk-full": "No space left on device", "memory-allocation": "Cannot allocate memory",
                   "permission": "Permission denied", "read-only": "Read-only file system",
-                  "open-files": "Too many open files", "resources": "Resource temporarily unavailable"}
+                  "open-files": "Too many open files", "resources": "Resource temporarily unavailable",
+                  "system-ca-empty": "No CA certificates were loaded from the system"}
     return dict(categories=[key for key, token in categories.items() if token in text],
                 rustcErrorCodes=sorted(set(re.findall(r"error\[(E[0-9]{4})\]", text)))[:64],
                 compileFailures=sorted(set(re.findall(r"error: could not compile `([A-Za-z0-9_-]+)`", text)))[:64],
@@ -78,6 +79,9 @@ def main():
                                        requiredMemoryBytes=MEMORY+33554432+500000000)
     assert all(sha(path)==digest for path,digest in spec['toolIdentities'].items()), 'Configured executor bytes changed'
     report['executorIdentities'] = spec['toolIdentities']
+    assert set(spec['osInputIdentities'])=={'/etc/ssl/certs/ca-certificates.crt'}
+    assert all(sha(path)==digest for path,digest in spec['osInputIdentities'].items())
+    report['externalOsInputIdentities'] = spec['osInputIdentities']
     record_path = logs/'owned.json'
     owned = dict(token=uuid.uuid4().hex, containers=[], filesDeleted=0)
     record_path.write_text(json.dumps(owned))
@@ -125,6 +129,7 @@ def main():
                   (source/'network-nsswitch.conf','/etc/nsswitch.conf'),
                   (source/'network-hosts.conf','/etc/hosts'),
                   (source/'network-host.conf','/etc/host.conf'),
+                  (Path('/etc/ssl/certs/ca-certificates.crt'),'/etc/ssl/certs/ca-certificates.crt'),
                   (tests, '/test-source'), (toolchain, str(toolchain))]
         for name in ['/usr', '/bin', '/lib', '/lib64', '/etc/alternatives']:
             if Path(name).exists():
@@ -146,7 +151,8 @@ def main():
                            CARGO_INCREMENTAL='0', CARGO_CACHE_AUTO_CLEAN_FREQUENCY='never',
                            CARGO_PROFILE_DEV_DEBUG='0', CARGO_PROFILE_TEST_DEBUG='0',
                            CARGO_TERM_COLOR='never', CARGO_TARGET_X86_64_UNKNOWN_LINUX_GNU_LINKER='/usr/bin/gcc',
-                           CC='/usr/bin/gcc', CXX='/usr/bin/g++', LANG='C.UTF-8')
+                           CC='/usr/bin/gcc', CXX='/usr/bin/g++', LANG='C.UTF-8',
+                           SSL_CERT_FILE='/etc/ssl/certs/ca-certificates.crt')
         for key, value in environment.items():
             argv += ['--env', key+'='+value]
         argv += [image['Id'], '/source/registry-build.sh']
@@ -253,9 +259,10 @@ def main():
         assert copied
         summaries = re.findall(r'test result: ok\. (\d+) passed; (\d+) failed; (\d+) ignored', (logs/'test.stdout').read_text())
         assert summaries and all(f=='0' for p,f,i in summaries) and sum(int(p) for p,f,i in summaries)==325
-        assert (logs/'limits.txt').read_text().splitlines() == ['200000 100000', str(MEMORY), '0', '512', '3221225472', '65536', '1024', 'lo', 'external-route-absent', 'ipv6-loopback-passed', 'ipv6-external-route-absent']
+        assert (logs/'limits.txt').read_text().splitlines() == ['200000 100000', str(MEMORY), '0', '512', '3221225472', '65536', '1024', 'lo', 'external-route-absent', 'ipv6-loopback-passed', 'ipv6-external-route-absent', 'system-ca-store-passed']
         assert sha(bundle/'miniserve') == report['binaryDigest']
         assert all(sha(path)==digest for path,digest in spec['toolIdentities'].items()), 'Configured executor bytes changed'
+        assert all(sha(path)==digest for path,digest in spec['osInputIdentities'].items()), 'Declared OS input changed'
         report.update(status='passed-real-cargo-registry-execution', defaultTestsPassed=325, testSummaries=summaries,
                       kernelLimitsVerified=True, externalRouteAbsent=True, loopbackAvailableForOwnerTests=True, ipv6LoopbackVerified=True, ipv6ExternalRouteAbsent=True,
                       retainedArchiveIndexReadOnly=True,

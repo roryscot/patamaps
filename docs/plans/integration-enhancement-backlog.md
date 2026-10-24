@@ -1168,3 +1168,19 @@ binary:1,139source files /76,407,071bytes including inventory;266linked evidence
 files /26,106,018bytes, below unchanged128MiB source /32MiB evidence /512 evidence
 file bounds. [Receipt](../acceptance/project-adoption/g3-cargo-registry-context-20261023/package-scope-17a88a4.json).
 This is a source-selection check, not a new installed-package acceptance.
+
+
+Twelfth attempt40048759023 at82f4ff7 passed resolver, all bind and all five QR
+controls. The capped namespace-local address provision and sole NET_ADMIN kernel
+check passed; its helper stopped before Cargo and all owned containers stopped at
+completion. The final WebDAV binary had five failures, so full325-test acceptance
+is still false. [Verified record](../acceptance/project-adoption/g3-cargo-registry-context-20261023/registry-attempt-12/native-attempt-records.json).
+Pinned reqwest_dav0.3.3 constructs reqwest0.13.2's default client; its platform
+verifier0.6.2 returns an error if no system CA roots can load. The minimal image
+lacks that OS input. Test this specific source-derived cause by providing only
+the runner's public CA bundle as a declared digest-bound/read-only external OS
+input. Refuse private-key markers, bind SSL_CERT_FILE explicitly, check a real
+normal SSL context loads CA roots before Cargo, and recheck bytes afterward.
+No TLS-validation disabling, private key/config mount, external network, quota
+increase, source/test change or installed acceptance. OS/toolchain closure stays
+explicitly false; a subsequent full pass is required.

@@ -17,6 +17,10 @@ class DiagnosticControls(unittest.TestCase):
   self.assertEqual(value['signals'],[('9','KILL')])
   self.assertEqual(value['missingLibraries'],['ssl'])
   self.assertNotIn('PRIVATE_SOURCE_TEXT',json.dumps(value))
+ def test_empty_system_ca_has_fixed_category(self):
+  value=failure_summary('', 'No CA certificates were loaded from the system: PRIVATE_CA_PAYLOAD')
+  self.assertEqual(value['categories'],['system-ca-empty'])
+  self.assertNotIn('PRIVATE_CA_PAYLOAD',json.dumps(value))
  def test_unknown_payload_stays_private(self):
   self.assertTrue(all(not v for v in failure_summary('PRIVATE_UNKNOWN_PAYLOAD','').values()))
  def test_success_summary(self):
