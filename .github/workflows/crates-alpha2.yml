@@ -1,6 +1,12 @@
 name: Alpha 2 crate release checks
 on:
   workflow_dispatch:
+  push:
+    branches: [feat/retained-owner-preparation]
+    paths:
+      - .github/workflows/crates-alpha2.yml
+      - scripts/prepare_alpha2.py
+      - scripts/check_alpha2_install.py
 permissions:
   contents: read
 jobs:
