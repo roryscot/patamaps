@@ -43,8 +43,9 @@ def main():
  p=argparse.ArgumentParser(description=__doc__)
  for n in ["work","evidence","cli"]:p.add_argument("--"+n,type=Path,required=True)
  p.add_argument("--installed-inventory-digest");p.add_argument("--shared-cache-root",type=Path)
- p.add_argument("--build-cli",action="store_true");p.add_argument("--runtime",action="store_true");p.add_argument("--rewrites",action="store_true");a=p.parse_args()
+ p.add_argument("--standalone-probe",action="store_true");p.add_argument("--build-cli",action="store_true");p.add_argument("--runtime",action="store_true");p.add_argument("--rewrites",action="store_true");a=p.parse_args()
  assert not a.rewrites or a.runtime, "Rewrite acceptance requires actual production runtime"
+ assert not a.standalone_probe or (a.rewrites and a.runtime), "Standalone probe requires the existing real runtime and rewrite controls"
  assert platform.system()=="Linux" and platform.machine()=="x86_64" and os.environ.get("GITHUB_ACTIONS")=="true","Use focused Linux CI; native Intel allocation requires its existing guard"
  installed_identity=None
  if a.installed_inventory_digest:
@@ -113,7 +114,7 @@ def main():
   if a.rewrites:
    from chatbot_rewrite_profile import apply, reserve_owner_port
    rewrite_port_reservation=reserve_owner_port()
-   staged_inventory,rewrite_overlay=apply(staged,inventory,canonical_port=rewrite_port_reservation.getsockname()[1])
+   staged_inventory,rewrite_overlay=apply(staged,inventory,canonical_port=rewrite_port_reservation.getsockname()[1],standalone=a.standalone_probe)
    write(out/"rewrite-overlay.json",rewrite_overlay)
    write(out/"derived-source.json",staged_inventory)
    derived_definition=work/"derived-selection.json";write(derived_definition,dict(profile="patamaps-project-context-selection-1",id="urn:qualification:chatbot:derived-rewrites",nonsecretInputs=True,paths=[e["path"] for e in staged_inventory],symlinks="internal-closed"))
@@ -166,7 +167,7 @@ def main():
   files={"routes.json":staged/".next/routes-manifest.json","app-paths.json":staged/".next/server/app-paths-manifest.json","app-routes.json":staged/".next/app-path-routes-manifest.json"}
   for name,path in files.items():shutil.copyfile(path,observations/name)
   version=json.loads((staged/"node_modules/next/package.json").read_bytes())["version"];assert version=="16.2.10"
-  projection=dict(profile="patamaps-next-build-config-1",frameworkVersion=version,buildReceiptDigest=sha(out/"logs/owner-production-build.stdout"),routesDigest=sha(observations/"routes.json"),appPathsDigest=sha(observations/"app-paths.json"),appPathRoutesDigest=sha(observations/"app-routes.json"),configuration=dict(basePath="",output="server",trailingSlash=False,environment={"NEXT_PUBLIC_BASE_PATH":""},secretReferences={"AUTH_SECRET":"OWNER_AUTH_SECRET","POSTGRES_URL":"OWNER_POSTGRES_URL"},transpilePackages=[],serverActions=None))
+  projection=dict(profile="patamaps-next-build-config-1",frameworkVersion=version,buildReceiptDigest=sha(out/"logs/owner-production-build.stdout"),routesDigest=sha(observations/"routes.json"),appPathsDigest=sha(observations/"app-paths.json"),appPathRoutesDigest=sha(observations/"app-routes.json"),configuration=dict(basePath="",output="standalone" if a.standalone_probe else "server",trailingSlash=False,environment={"NEXT_PUBLIC_BASE_PATH":""},secretReferences={"AUTH_SECRET":"OWNER_AUTH_SECRET","POSTGRES_URL":"OWNER_POSTGRES_URL"},transpilePackages=[],serverActions=None))
   write(observations/"config.json",projection)
   config=dict(provider="next-build",nonsecretInputs=True,routesManifest="routes.json",appPathsManifest="app-paths.json",appPathRoutesManifest="app-routes.json",configurationProjection="config.json")
   inputs=[dict(receipt=dict(path=p.name,digest=sha(p),byteLength=p.stat().st_size),content=p.read_text()) for p in sorted(observations.iterdir())]
@@ -192,6 +193,16 @@ def main():
    route["content"]=json.dumps(manifest);raw=route["content"].encode();route["receipt"].update(digest="sha256:"+hashlib.sha256(raw).hexdigest(),byteLength=len(raw))
    refuse_observation("rewrite-stale-projection-binding",changed)
    r["rewriteQualification"].update(compiledRulesBound=True,originalRulesPreserved=bound["originalRulesPreserved"],missingProjectionRefused=True,staleProjectionRefusedAfterRequestRehash=True)
+  standalone_root=None
+  if a.standalone_probe:
+   from qualify_next_standalone import observe, inventory as standalone_inventory
+   standalone_root=staged/".next/standalone"
+   assert (standalone_root/"server.js").is_file() and not standalone_root.is_symlink()
+   for src,dst in [(staged/"public",standalone_root/"public"),(staged/".next/static",standalone_root/".next/static")]:
+    assert src.is_dir() and not dst.exists()
+    shutil.copytree(src,dst,symlinks=True)
+   r["standaloneProbe"]=observe(cli,standalone_root,work,out,run,dict(sourceCaptureDigest=source["digest"],compiledBuildReceiptDigest=sha(out/"logs/owner-production-build.stdout"),configurationProjectionDigest=sha(observations/"config.json")))
+   standalone_before=standalone_inventory(standalone_root)
   output_before,output_summary_before=private_output_inventory(staged,work,"before")
   manifest_before={name:sha(path) for name,path in files.items()}
   if a.runtime:
@@ -200,9 +211,14 @@ def main():
    assert browser_bootstrap["browserLaunchSucceeded"] is True
    r["browserBootstrap"]=dict(**browser_bootstrap,systemPackageInstallationRequested=False)
    from qualify_chatbot_runtime import qualify
-   runtime=qualify(staged,work,out,pnpm,env,capacity,rewrite_profile=rewrite_overlay,rewrite_reservation=rewrite_port_reservation)
+   runtime=qualify(staged,work,out,pnpm,env,capacity,rewrite_profile=rewrite_overlay,rewrite_reservation=rewrite_port_reservation,standalone_root=standalone_root)
    assert runtime["status"]=="passed" and runtime["ownedProcessGroupsStopped"]
    r.update(runtimeEstablished=True,authenticationAccepted=True,ownerRuntimeMigrationExecuted=True,runtimeBoundary="trusted owner; new isolated CI PostgreSQL and HTTPS loopback; no production secrets")
+  if standalone_root is not None:
+   standalone_after=standalone_inventory(standalone_root)
+   assert standalone_after==standalone_before,"Standalone tree changed during runtime"
+   r["standaloneProbe"].update(actualStandaloneRuntimePassed=True,standaloneTreeUnchanged=True,producerSourceAndToolsUnavailable=False,fullRetainedBundleAccepted=False)
+   write(out/"standalone-probe.json",r["standaloneProbe"])
   output_after,output_summary_after=private_output_inventory(staged,work,"after")
   changed={name for name in set(output_before)|set(output_after) if output_before.get(name)!=output_after.get(name)}
   categories={"cache":0,"diagnostics":0,"runtime-output":0}

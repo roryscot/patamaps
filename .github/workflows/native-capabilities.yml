@@ -21,6 +21,7 @@ on:
           - next-server-actions
           - next-rewrites
           - next-installed
+          - next-standalone-probe
           - cargo-registry-preflight
           - cargo-registry-container-preflight
           - cargo-registry-context
@@ -446,3 +447,11 @@ jobs:
     with:
       rewrite-controls: true
       installed-controls: true
+
+  next-standalone-probe:
+    if: github.event_name == 'workflow_dispatch' && inputs.qualification == 'next-standalone-probe'
+    name: Real Next standalone runtime and output boundary
+    uses: ./.github/workflows/next-server-actions.yml
+    with:
+      rewrite-controls: true
+      standalone-controls: true

@@ -47,8 +47,9 @@ def rules_for_port(port):
     return rules
 
 
-def apply(owner, inventory, *, canonical_port):
+def apply(owner, inventory, *, canonical_port, standalone=False):
     """Original capture stays separate. Refuse unknown config or existing profile."""
+    assert type(standalone) is bool, "REWRITE_STANDALONE_PROFILE"
     rules = rules_for_port(canonical_port)
     owner = Path(owner)
     config = owner / 'next.config.ts'
@@ -67,6 +68,8 @@ def apply(owner, inventory, *, canonical_port):
                    canonicalOwnerPort=canonical_port, canonicalOwnerOrigin='http://127.0.0.1:'+str(canonical_port),
                    originalInternalSessionRewriteAccepted=False,
                    originalUpstreamUnchanged=True, qualificationOverlay=True)
+    if standalone:
+        profile.update(profile="patamaps-chatbot-standalone-proxy-3", output="standalone")
     encoded = (json.dumps(profile, indent=2) + '\n').encode()
     # Preserve the plugin's original flat rewrite array before adding phases.
     # BotID1.5.11 moves its rules to beforeFiles if passed a phased base config.
@@ -85,6 +88,8 @@ def apply(owner, inventory, *, canonical_port):
         '};\n'
         'export default qualifiedNextConfig;'
     )
+    if standalone:
+        composed = composed.replace("const originalRewrites =", 'qualifiedNextConfig.output = "standalone";\nconst originalRewrites =')
     rewritten = text.replace(anchor, composed).encode()
     # Validate all conditions before either write. Both outputs remain on failure.
     with target.open('xb') as stream:

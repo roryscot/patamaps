@@ -111,5 +111,28 @@ class RewriteOverlayControls(unittest.TestCase):
         self.assertEqual(stat.S_IMODE((root/profile.PROFILE_PATH).stat().st_mode), 0o644)
         self.assertEqual(json.loads((root/profile.PROFILE_PATH).read_text())['rules'], profile.rules_for_port(39123))
 
+
+    def test_standalone_output_is_explicit_and_captured(self):
+        root, rows = self.prepare()
+        before = copy.deepcopy(rows)
+        with patch.object(profile, "ORIGINAL_CONFIG_SHA", profile.digest(CONTROLLED)):
+            derived, record = profile.apply(root, rows, canonical_port=39123, standalone=True)
+        text = (root/"next.config.ts").read_text()
+        self.assertIn('qualifiedNextConfig.output = "standalone";\nconst originalRewrites', text)
+        self.assertNotIn(chr(92)+"n", text)
+        self.assertEqual(record["profile"]["profile"],"patamaps-chatbot-standalone-proxy-3")
+        self.assertEqual(record["profile"]["output"],"standalone")
+        self.assertEqual(record["profileDigest"],profile.digest((root/profile.PROFILE_PATH).read_bytes()))
+        self.assertEqual(record["profile"]["rules"],profile.rules_for_port(39123))
+        self.assertEqual(rows,before)
+        self.assertEqual(next(v for v in derived if v["path"]=="next.config.ts")["digest"],profile.digest(text.encode()))
+
+    def test_non_boolean_standalone_refuses_before_writes(self):
+        root, rows = self.prepare()
+        with self.assertRaisesRegex(AssertionError,"STANDALONE_PROFILE"):
+            profile.apply(root,rows,canonical_port=39123,standalone="true")
+        self.assertEqual((root/"next.config.ts").read_bytes(),CONTROLLED)
+        self.assertFalse((root/profile.PROFILE_PATH).exists())
+
 if __name__ == '__main__':
     unittest.main()

@@ -38,7 +38,7 @@ def available_port():
         return listener.getsockname()[1]
 
 
-def qualify(owner, work, evidence, pnpm, environment, capacity, *, rewrite_profile=None, rewrite_reservation=None):
+def qualify(owner, work, evidence, pnpm, environment, capacity, *, rewrite_profile=None, rewrite_reservation=None, standalone_root=None):
     assert sys.platform == "linux" and os.environ.get("GITHUB_ACTIONS") == "true"
     private = work / "trusted-owner-runtime"
     private.mkdir(mode=0o700)
@@ -166,7 +166,17 @@ def qualify(owner, work, evidence, pnpm, environment, capacity, *, rewrite_profi
             assert rewrite_reservation.getsockname() == ("127.0.0.1", next_port)
             rewrite_reservation.close()
             report["configuredPortReservationReleasedForOwnerStart"] = True
-        server = launch("owner-production-server", [pnpm, "start", "--hostname", "127.0.0.1", "--port", str(next_port)], trusted)
+        if standalone_root is None:
+            server_argv = [pnpm, "start", "--hostname", "127.0.0.1", "--port", str(next_port)]
+        else:
+            assert standalone_root == owner / ".next/standalone"
+            assert standalone_root.is_dir() and not standalone_root.is_symlink()
+            assert (standalone_root / "server.js").is_file()
+            trusted.update(HOSTNAME="127.0.0.1", PORT=str(next_port))
+            server_argv = ["node", standalone_root / "server.js"]
+            report["standaloneServerEntrypoint"] = True
+            report["producerSourceAndToolsUnavailable"] = False
+        server = launch("owner-production-server", server_argv, trusted)
         import urllib.request
         stage = "owner-production-readiness"
         started = time.monotonic()
@@ -211,7 +221,7 @@ def qualify(owner, work, evidence, pnpm, environment, capacity, *, rewrite_profi
         report["generatedOwnerSecretsAbsentFromEvidence"] = True
         report["driverDigests"] = {
             name: "sha256:" + hashlib.sha256((ROOT / "scripts" / name).read_bytes()).hexdigest()
-            for name in ["qualify_chatbot_runtime.py", "qualify_chatbot_auth.mjs", *(["chatbot_rewrite_profile.py", "qualify_chatbot_next.py"] if rewrite_profile else [])]
+            for name in ["qualify_chatbot_runtime.py", "qualify_chatbot_auth.mjs", *(["chatbot_rewrite_profile.py", "qualify_chatbot_next.py"] if rewrite_profile else []), *(["qualify_next_standalone.py"] if standalone_root is not None else [])]
         }
         report.update(status="passed", browserControls=browser["controls"], upstreamPageTests=browser["upstreamPageTests"], runtimeEstablished=True, authenticationAccepted=True, ownerMigrationExecuted=True)
     except BaseException:

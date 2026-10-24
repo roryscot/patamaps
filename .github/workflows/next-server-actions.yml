@@ -8,6 +8,9 @@ on:
       installed-controls:
         type: boolean
         default: false
+      standalone-controls:
+        type: boolean
+        default: false
 permissions:
   contents: read
 jobs:
@@ -45,12 +48,19 @@ jobs:
         run: |
           mkdir -p "$RUNNER_TEMP/rewrite-overlay-controls"
           PATAMAPS_TEST_RETAIN_ROOT="$RUNNER_TEMP/rewrite-overlay-controls" python3 -B -m unittest discover -s scripts -p test_chatbot_rewrite_profile.py
+      - name: Check private standalone output boundaries
+        if: inputs.standalone-controls
+        run: |
+          mkdir -p "$RUNNER_TEMP/standalone-controls"
+          PATAMAPS_TEST_RETAIN_ROOT="$RUNNER_TEMP/standalone-controls" python3 -B -m unittest discover -s scripts -p test_next_standalone.py
+          PATAMAPS_TEST_RETAIN_ROOT="$RUNNER_TEMP/standalone-controls" python3 -B -m unittest discover -s scripts -p test_next_output_inventory.py
       - name: Capture frozen source, build, and qualify real production auth
         if: inputs.installed-controls == false
         run: >-
           python3 -B scripts/qualify_chatbot_next.py
           --build-cli --runtime --cli target/debug/patamaps
           ${{ inputs.rewrite-controls && '--rewrites' || '' }}
+          ${{ inputs.standalone-controls && '--standalone-probe' || '' }}
           --work "$RUNNER_TEMP/patamaps-chatbot-${{ github.run_id }}-${{ github.run_attempt }}"
           --evidence ci-evidence/chatbot-source
       - name: Check installed-source and archive boundaries
@@ -69,7 +79,7 @@ jobs:
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         if: always()
         with:
-          name: ${{ inputs.installed-controls && 'installed-next' || 'chatbot-source' }}-${{ github.sha }}
+          name: ${{ inputs.standalone-controls && 'standalone-next-probe' || inputs.installed-controls && 'installed-next' || 'chatbot-source' }}-${{ github.sha }}
           path: ${{ inputs.installed-controls && 'ci-evidence/installed-next/' || 'ci-evidence/chatbot-source/' }}
           if-no-files-found: error
           retention-days: 14
