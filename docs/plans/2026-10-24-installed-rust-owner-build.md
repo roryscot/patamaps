@@ -97,3 +97,10 @@ used solely as a schema fixture, not new owner evidence. No new application buil
 has run or been accepted. The opt-in cargo-registry-installed-build lane reuses
 the existing Linux workflow, keeps sequential execution and the4GB/500MB limits,
 checks the320MiB evidence ceiling and stops only named owned containers.
+
+Initial run40118364424 at a482888 failed workflow validation before any job.
+GitHub reports that the nested miniserve job requests actions:read but the new
+caller allowed actions:none. The first bounded repair adds only contents:read
+and actions:read to that caller, matching the existing registry caller. YAML
+and diff checks pass; no application, storage, resource or acceptance criterion
+changed. [Failure record](../acceptance/project-adoption/g5-installed-rust-owner-build-20261024/startup-failure.json).

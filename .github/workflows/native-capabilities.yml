@@ -496,6 +496,9 @@ jobs:
   cargo-registry-installed-build:
     if: github.event_name == 'workflow_dispatch' && inputs.qualification == 'cargo-registry-installed-build'
     name: Fresh installed Rust owner builds
+    permissions:
+      contents: read
+      actions: read
     uses: ./.github/workflows/external-rust-deployment.yml
     with:
       installed-owner-build: true
