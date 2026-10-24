@@ -4,9 +4,9 @@ Status: implemented qualification path; real build/test/runtime acceptance remai
 pending. The managed-backend prerequisite, strict inventory controls and native
 capture of all 456 packages passed. Previous failed executions are preserved in
 the [integration backlog](../plans/integration-enhancement-backlog.md). The current
-[run40047064763](https://github.com/roryscot/patamaps/actions/runs/40047064763)
-executes source cf39ff6 with captured local resolver configuration and payload-free
-Cargo diagnostics. No complete dependency
+[run40048759023](https://github.com/roryscot/patamaps/actions/runs/40048759023)
+executes source 82f4ff7 with captured local resolver configuration, a capped local
+address provision and payload-free Cargo diagnostics. No complete dependency
 closure or general Rust support is asserted by this guide.
 
 Patamaps already accepts opaque inputs through ProjectContext and composes them
@@ -100,3 +100,13 @@ Patamaps capture. Tests use the pinned public clone. This preserves the existing
 privacy boundary while leaving owner test-context closure explicitly open.
 Performance, full OS/toolchain closure, installed-consumer replay and production
 activation require their own evidence.
+
+
+The unchanged QR test requires a URL outside the loopback address ranges. Its
+profile assigns192.0.2.2/32 to the existing owned lo interface before Cargo. A
+separate original-image helper shares only that network namespace, has only
+NET_ADMIN, no host mounts and strict CPU/memory/PID limits, and must exit with
+Running=false/Pid=0 before the workload starts. The workload has zero effective
+capabilities. Onlylo remains; the address has no external peer/gateway and both
+external-route checks still refuse. This is an explicit local qualification
+address, not general network/deployment support or changed upstream behavior.

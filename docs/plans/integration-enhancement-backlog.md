@@ -23,20 +23,21 @@ a passed fixture or metadata observation is not general support.
 
 ## Current selected work
 
-Current live producer: [40047064763](https://github.com/roryscot/patamaps/actions/runs/40047064763)
-at cf39ff664f1580185a45ac52e7baeb3204544996. This supersedes prior live-run
-checkpoints below. The recipe now captures hosts, nsswitch.conf and host.conf
-(multi on) as nonsecret read-only inputs, compares their mounted bytes and
-requires Python/Rust dual-stack localhost probes before Cargo. No kernel change,
-external route, larger quota or modified owner test. Earlier failed attempts are
-preserved, including the original IPv6-only fixture timeout and subsequent early
-resolver refusals. Wait on this exact run; inspect/digest-verify its terminal
-artifact before another repair or dependent job. No registry execution acceptance
-yet. Installed source/native registry replay is prepared with fourteen import
-controls, but its producer pin is unchanged and actual installed registry replay
-has not run. A producer pass must prove all325 tests, eight HTTP checks,
-selection/registry refusals and offline replay. Broader G0–G6 requirements remain
-active.
+Current live producer: [40048759023](https://github.com/roryscot/patamaps/actions/runs/40048759023)
+at 82f4ff712b93082fda7c35a02d5f84f4f7a2d297. This supersedes prior live-run
+checkpoints below. The previous full run passed resolver and bind controls but
+failed the unchanged QR test, whose implementation excludes loopback-range URLs.
+The new recipe provisions only192.0.2.2/32 on the owned lo interface through a
+capped NET_ADMIN-only helper; inspect namespace/capabilities and confirm it stopped
+before releasing the capability-free workload. No bridge, external route, kernel
+global setting, larger workload quota or modified owner test. All owned container
+Running=false/Pid=0 checks remain mandatory. Wait on this exact run and inspect its
+terminal artifact before another repair or dependent job. No full registry
+execution acceptance yet. Installed source/native registry replay is prepared
+with fourteen import controls, but its producer pin is unchanged and actual
+installed registry replay has not run. A producer pass must prove all325 tests,
+eight HTTP checks, selection/registry refusals and offline replay. Broader G0–G6
+requirements remain active.
 
 The Cargo managed-container prerequisite is now independently verified in
 [run 40019067506](https://github.com/roryscot/patamaps/actions/runs/40019067506)
@@ -1160,3 +1161,10 @@ when checking that NET_ADMIN is the sole added capability. No additional
 capability is accepted; the runtime CapEff equality0x1000 is still mandatory
 before the fixed address command. Preserve all ownership/resource/namespace /
 stop-before-Cargo checks. No actual local-address or QR acceptance yet.
+
+
+Package-scope check at17a88a4 passed without creating archives or executing a
+binary:1,139source files /76,407,071bytes including inventory;266linked evidence
+files /26,106,018bytes, below unchanged128MiB source /32MiB evidence /512 evidence
+file bounds. [Receipt](../acceptance/project-adoption/g3-cargo-registry-context-20261023/package-scope-17a88a4.json).
+This is a source-selection check, not a new installed-package acceptance.
