@@ -104,3 +104,11 @@ caller allowed actions:none. The first bounded repair adds only contents:read
 and actions:read to that caller, matching the existing registry caller. YAML
 and diff checks pass; no application, storage, resource or acceptance criterion
 changed. [Failure record](../acceptance/project-adoption/g5-installed-rust-owner-build-20261024/startup-failure.json).
+
+The repaired [run40118700332](https://github.com/roryscot/patamaps/actions/runs/40118700332)
+at8c6de4 has started the owner workflow after toolchain and focused controls
+passed. [Observed run/job handle](../acceptance/project-adoption/g5-installed-rust-owner-build-20261024/run-40118700332.json).
+No actual owner success or acceptance is claimed from a running job. Follow
+this same handle to a terminal result; the separate in-memory review is prepared.
+The native G4 cleanup approval remains pending. One of two permitted repairs
+has been used, solely for reusable-workflow permissions.
