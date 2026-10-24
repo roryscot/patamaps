@@ -35,16 +35,21 @@ def write(path, value):
     path.write_text(json.dumps(value, indent=2) + "\n")
 
 
-def install_selected_state(archive, destination):
+def install_selected_state(archive, destination, *, profile="runtime"):
     """Import a closed, digest-verified state without changing bound directory modes."""
+    profiles = {"runtime": ("selected-state", 2000, 64000000),
+                "registry": ("registry-state", 10000, 320 * 1024**2)}
+    if profile not in profiles:
+        raise ValueError("SELECTED_STATE_IMPORT_PROFILE")
+    root, maximum_members, maximum_bytes = profiles[profile]
     destination.mkdir(parents=True, exist_ok=False)
     with tarfile.open(archive, "r:gz") as tar:
         members = tar.getmembers()
-        assert len(members) < 2000 and sum(m.size for m in members) < 64000000
+        assert len(members) < maximum_members and sum(m.size for m in members) < maximum_bytes
         assert len({Path(m.name).parts for m in members}) == len(members)
         for member in members:
             p = Path(member.name)
-            assert not p.is_absolute() and ".." not in p.parts and p.parts[0] == "selected-state"
+            assert not p.is_absolute() and ".." not in p.parts and p.parts[0] == root
             assert (member.isfile() or member.isdir()) and not member.mode & 0o7000
         def preserve_modes(member, path):
             # data_filter intentionally discards directory modes. Those modes
@@ -52,7 +57,7 @@ def install_selected_state(archive, destination):
             filtered = tarfile.data_filter(member, path)
             return filtered.replace(mode=member.mode)
         tar.extractall(destination, members=members, filter=preserve_modes)
-    return destination / "selected-state"
+    return destination / root
 
 
 def main():

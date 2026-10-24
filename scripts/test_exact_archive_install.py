@@ -42,4 +42,23 @@ class InstallArchiveControls(unittest.TestCase):
   case,path=self.archive([("package/a",b"a",None)]);target=case/"installed";target.mkdir();(target/"sentinel").write_text("keep")
   with self.assertRaises(FileExistsError):install_archive(path,target,case)
   self.assertEqual((target/"sentinel").read_text(),"keep")
+ def test_registry_state_explicit_profile(self):
+  case,path=self.archive([("registry-state/candidate/cache/member.crate",b"original controlled bytes",None)])
+  installed=install_selected_state(path,case/"import",profile="registry")
+  self.assertEqual((installed/"candidate/cache/member.crate").read_bytes(),b"original controlled bytes")
+  with self.assertRaises(AssertionError):install_selected_state(path,case/"default-refuses")
+ def test_registry_state_unknown_profile(self):
+  case,path=self.archive([("registry-state/member",b"x",None)])
+  with self.assertRaisesRegex(ValueError,"IMPORT_PROFILE"):install_selected_state(path,case/"import",profile="unknown")
+  self.assertFalse((case/"import").exists())
+ def test_registry_state_traversal(self):
+  case,path=self.archive([("registry-state/../../outside",b"x",None)])
+  with self.assertRaises(AssertionError):install_selected_state(path,case/"import",profile="registry")
+  self.assertFalse((case/"outside").exists())
+ def test_registry_state_symlink(self):
+  case,path=self.archive([("registry-state/link",b"","symlink")])
+  with self.assertRaises(AssertionError):install_selected_state(path,case/"import",profile="registry")
+ def test_registry_state_duplicate(self):
+  case,path=self.archive([("registry-state/a",b"a",None),("registry-state/a",b"b",None)])
+  with self.assertRaises(AssertionError):install_selected_state(path,case/"import",profile="registry")
 if __name__=="__main__":unittest.main()

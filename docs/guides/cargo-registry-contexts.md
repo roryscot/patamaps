@@ -72,7 +72,8 @@ loopback remains available for actual upstream HTTP tests. Both --locked and
 
 The original release build runs first. A single executable is copied through a
 bounded regular-member tar reader, capped at 32 MiB and digest checked, before
-the unchanged default upstream tests are released. Raw stdout/stderr stay in
+the unchanged default upstream tests are released. Files in tmpfs are streamed
+with docker exec and tar; Docker documents this [copy limitation and alternative](https://docs.docker.com/reference/cli/docker/container/cp/#corner-cases). Raw stdout/stderr stay in
 bounded private qualification logs. The selected bundle contains the exact
 executable and compact execution receipt. The existing deployment qualifier
 then exercises its eight actual HTTP checks and four selection refusals.

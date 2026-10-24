@@ -991,3 +991,27 @@ checks. Keep the32MiB executable/1MiB log bounds. No host writable mount, larger
 quota, skipped test or synthetic output. Record the observed producer digest
 before transfer to retain evidence if export fails. Expected no-route failure
 uses an if branch so the ERR trap does not mislabel it as a startup failure.
+
+
+Installed continuation preparation (no dispatch before registry acceptance): reuse
+the existing fresh source/native installer and the successful producer's selected
+runtime; do not recompile Miniserve. Import its separate registry selected-state
+under an explicit registry profile capped at10,000 entries/320MiB. Preserve the
+original selected-state default's2,000-entry/64,000,000-byte bounds. Both profiles
+must preserve bound directory/executable modes and reject links, traversal,
+duplicates and wrong roots. Unknown profiles refuse before destination creation.
+Run the import safety controls first. After a verified successful producer exists,
+pin its exact identities, install current-engine source/native packages, repeat
+the original eight HTTP/refusal controls, and verify the relocated registry state
+with both installed compilers. A selected registry-member mutation must refuse
+before a marker command and restored state must verify. No installed acceptance
+is inferred from the importer tests or a source-only compile.
+
+
+The explicit registry importer now passes14 real archive controls on Intel,
+including the original nine cases and five added profile/root/traversal/link /
+duplicate cases. Unknown profiles refuse before creating their destination;
+default import continues to refuse the registry root and retains its exact old
+bounds. [Source-bound receipt](../acceptance/project-adoption/g3-cargo-registry-context-20261023/import-controls-darwin.json).
+No current-engine installed replay was run by these tests; the producer run
+40039847865 is still the existing job to inspect before dependent dispatch.
