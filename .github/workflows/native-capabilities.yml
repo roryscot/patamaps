@@ -28,6 +28,7 @@ on:
           - cargo-registry-preflight
           - cargo-registry-container-preflight
           - cargo-registry-context
+          - cargo-registry-installed-build
 
 permissions:
   contents: read
@@ -491,3 +492,10 @@ jobs:
         run: |
           mkdir -p "$RUNNER_TEMP/patamaps-measurement-controls"
           PATAMAPS_TEST_RETAIN_ROOT="$RUNNER_TEMP/patamaps-measurement-controls" python3 -B -m unittest discover -s scripts -p 'test_bench_*.py'
+
+  cargo-registry-installed-build:
+    if: github.event_name == 'workflow_dispatch' && inputs.qualification == 'cargo-registry-installed-build'
+    name: Fresh installed Rust owner builds
+    uses: ./.github/workflows/external-rust-deployment.yml
+    with:
+      installed-owner-build: true

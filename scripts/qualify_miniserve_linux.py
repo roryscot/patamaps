@@ -17,22 +17,37 @@ def build_source_profile(inputs,configuration):
  return dict(profile="patamaps-project-inputs-1",id="urn:qualification:miniserve:build-source",nonsecretInputs=True,inputs=inputs,components=[dict(id="application",kind="cargo-package",root=".",entrypoints=["Cargo.toml"])],nonsecretConfiguration=configuration,secretReferences={})
 def sha(p):return hashlib.sha256(Path(p).read_bytes()).hexdigest()
 def write(p,v):p.write_text(json.dumps(v,indent=2)+"\n")
+def qualification_source(root, inventory_digest, build_cli=False, reuse_registry_cli=False):
+ if inventory_digest:
+  assert not build_cli and not reuse_registry_cli, "INSTALLED_QUALIFICATION_CANNOT_BUILD_CHECKOUT_COMPILER"
+  from installed_selected import verify_installed_source
+  return None,verify_installed_source(root,inventory_digest)
+ assert not (root/"source-inventory.json").exists(), "INSTALLED_SOURCE_REQUIRES_EXPLICIT_BINDING"
+ return subprocess.check_output(["git","rev-parse","HEAD"],cwd=root,text=True).strip(),None
+
 def main():
  p=argparse.ArgumentParser(description=__doc__)
  for n in ["cli","work","evidence"]:p.add_argument("--"+n,type=Path,required=True)
- p.add_argument("--build-cli",action="store_true");p.add_argument("--registry-context",action="store_true");p.add_argument("--reuse-registry-cli",action="store_true");a=p.parse_args()
+ p.add_argument("--build-cli",action="store_true");p.add_argument("--registry-context",action="store_true");p.add_argument("--reuse-registry-cli",action="store_true");p.add_argument("--installed-inventory-digest");a=p.parse_args()
  assert platform.system()=="Linux" and platform.machine()=="x86_64" and os.environ.get("GITHUB_ACTIONS")=="true","Use dedicated Linux CI; Intel requires its supervisor"
+ source_revision,installed_identity=qualification_source(ROOT,a.installed_inventory_digest,a.build_cli,a.reuse_registry_cli)
  work=a.work.resolve();out=a.evidence.resolve();assert not work.exists() and not out.exists()
  work.mkdir(parents=True);out.mkdir(parents=True);(out/"logs").mkdir();(out/"artifacts").mkdir()
  assert not any((x/"Cargo.toml").exists() for x in work.parents)
  baseline=shutil.disk_usage(ROOT).used
- r=dict(status="running",sourceRevision=subprocess.check_output(["git","rev-parse","HEAD"],cwd=ROOT,text=True).strip(),upstream="https://github.com/svenstaro/miniserve.git",upstreamCommit=REV,commands=[],filesDeleted=0,productionActivation=False,registryPublication=False,completeDependencyClosure=False,nativePackageInstallerExercised=False)
+ r=dict(status="running",sourceRevision=source_revision,installedSourceIdentity=installed_identity,upstream="https://github.com/svenstaro/miniserve.git",upstreamCommit=REV,commands=[],filesDeleted=0,productionActivation=False,registryPublication=False,completeDependencyClosure=False,nativePackageInstallerExercised=False)
  env={k:v for k,v in os.environ.items() if k in ["PATH","HOME","CARGO_HOME","RUSTUP_HOME"]}
  env.update(PYTHONDONTWRITEBYTECODE="1",CARGO_INCREMENTAL="0",CARGO_BUILD_JOBS="2",RUST_TEST_THREADS="1",CARGO_PROFILE_DEV_DEBUG="0",CARGO_PROFILE_TEST_DEBUG="0",CARGO_TERM_COLOR="never")
  def save():write(out/"receipt.json",r)
  def capacity():
   d=shutil.disk_usage(ROOT);assert d.free>=500000000 and d.used-baseline<=4000000000,"CI storage boundary reached"
+ def installed_unchanged():
+  if installed_identity:
+   from installed_selected import verify_installed_source
+   assert verify_installed_source(ROOT,a.installed_inventory_digest)==installed_identity
+  return True
  def run(label,argv,cwd=None,expected=0,timeout=1200):
+  assert installed_unchanged()
   capacity();start=time.monotonic()
   with (out/"logs"/(label+".stdout")).open("xb") as stdout,(out/"logs"/(label+".stderr")).open("xb") as stderr:
    child=subprocess.Popen([sys.executable,str(ROOT/"scripts/project_watch.py"),"__guard",*map(str,argv)],cwd=cwd,env=env,stdout=stdout,stderr=stderr,start_new_session=True)
@@ -42,6 +57,7 @@ def main():
      assert stdout.tell()<67108864 and stderr.tell()<67108864,"log limit";time.sleep(.5)
     code=child.returncode
    finally:stop(child)
+  assert installed_unchanged()
   r["commands"].append(dict(label=label,argv=list(map(str,argv)),exitCode=code,expectedExitCode=expected,elapsedMs=round((time.monotonic()-start)*1000)));save();print(json.dumps(r["commands"][-1]),flush=True)
   if code!=expected:
    print((out/"logs"/(label+".stderr")).read_text()[-5000:]);print((out/"logs"/(label+".stdout")).read_text()[-2000:]);raise AssertionError((label,code,expected))
@@ -57,6 +73,8 @@ def main():
   if a.build_cli:run("build-native-compiler",["cargo","+1.99.0","build","--locked","--release","-p","patamaps-cli","--bin","patamaps"],cwd=ROOT)
   installed=work/"relocated-native/bin";installed.mkdir(parents=True);cli=installed/"patamaps";shutil.copy2(a.cli.resolve(strict=True),cli)
   assert sha(cli)==sha(a.cli);r["relocatedCompiler"]=dict(sha256=sha(cli),freshDirectory=True,engine=native("relocated-engine",["engine"]))
+  sys.path.insert(0,str(ROOT/"scripts/parity"));from identity import identities
+  assert r["relocatedCompiler"]["engine"]==dict(schemaVersion="0.1.0",documentType="executor-description",**identities(ROOT)), "INSTALLED_RUST_ENGINE_SOURCE_MISMATCH"
   shutil.copy2(cli,out/"artifacts/patamaps");shutil.copyfile(ROOT/"LICENSE",out/"artifacts/PATAMAPS-LICENSE")
   source=work/"upstream";run("source-init",["git","init",source]);run("source-fetch",["git","fetch","--depth=1",r["upstream"],REV],cwd=source);run("source-checkout",["git","checkout","--detach","FETCH_HEAD"],cwd=source)
   assert run("source-head",["git","rev-parse","HEAD"],cwd=source).strip()==REV
@@ -150,7 +168,8 @@ def main():
   write(out/"failed-attempt-records.json",failures)
   r["portableSelectedState"]=dict(sha256=sha(archive),bytes=archive.stat().st_size,selectionDigest=sha(state/"selected.json"),creatingCompilerDigest=sha(cli),scope="Selected attempt only; failed JSON records preserved separately")
 
-  r.update(status="passed-source-built-miniserve-linux-deployment",sourceBuild=True,upstreamSourceUnchanged=True,capturedSourceStageMatchesFrozenInventory=True,configuredSourceAndSnapshotUnavailableReplay=True,previousSelectionPreservedOnFourRefusals=True,staleRuntimeRefusedBeforeCommand=True,restoredSelectedRuntimePassed=True,runtimeVerificationBeforeSelection=True,actualHttp=True,actualBrowser=False)
+  assert installed_unchanged()
+  r.update(installedSourceInventoryUnchanged=True if installed_identity else None,status="passed-source-built-miniserve-linux-deployment",sourceBuild=True,upstreamSourceUnchanged=True,capturedSourceStageMatchesFrozenInventory=True,configuredSourceAndSnapshotUnavailableReplay=True,previousSelectionPreservedOnFourRefusals=True,staleRuntimeRefusedBeforeCommand=True,restoredSelectedRuntimePassed=True,runtimeVerificationBeforeSelection=True,actualHttp=True,actualBrowser=False)
  except BaseException as e:r.update(status="failed",error=type(e).__name__+": "+str(e));save();raise
  save()
 if __name__=="__main__":main()

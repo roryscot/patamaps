@@ -75,3 +75,25 @@ at most two repairs for demonstrated implementation/harness defects before
 returning the exact unresolved cause. Do not repeat already accepted unrelated
 Next or scheduler suites. G4 performance and owner-deferred applications retain
 their existing status.
+
+## Implementation preflight
+
+The existing Miniserve qualifier now accepts an explicit installed inventory
+binding, validates it before effects and around each command, and checks the
+relocated compiler against packaged source identities. Installed mode refuses
+checkout compilation/artifact fallback; ordinary checkout mode remains available.
+
+scripts/qualify_installed_rust_build.py packages current source/native archives,
+compiles a fresh installed-source CLI with declared reusable dependency objects,
+and makes the checkout compiler/qualifier unavailable during both independent
+registry-backed application workflows. It requires the frozen19 harnesses,
+named HTTP controls, native refusal/replay checks and actual executor cleanup.
+Changed installed source must refuse before a sentinel compiler marker.
+
+[Focused Intel preflight](../acceptance/project-adoption/g5-installed-rust-owner-build-20261024/preflight.json)
+passed62 cases across five suites, plus three Python syntax/two workflow YAML
+checks and diff validation. Ten cases are new; a historical passed receipt is
+used solely as a schema fixture, not new owner evidence. No new application build
+has run or been accepted. The opt-in cargo-registry-installed-build lane reuses
+the existing Linux workflow, keeps sequential execution and the4GB/500MB limits,
+checks the320MiB evidence ceiling and stops only named owned containers.
