@@ -14,7 +14,7 @@ a passed fixture or metadata observation is not general support.
 | Workstream | Existing result | Remaining work if selected |
 | --- | --- | --- |
 | Real Rust application onboarding | Explicit project capture, Cargo observations, scoped Axum transport and pinned upstream Axum build/tests/replay | Retained Wargame router and thirteen production-network controls passed; extend only for uncovered owner schemas/semantics. Independent Miniserve registry/runtime and current installed workflow also passed. |
-| Broader Next.js/framework integration | Selected production build, public HTTP/browser paths and declared observations | Pinned Chatbot auth/Server Actions/private-document controls passed; actual rewrites, remaining route behavior and installed Next workflow remain open. |
+| Broader Next.js/framework integration | Selected production build, public HTTP/browser paths and declared observations | Pinned Chatbot auth/private-document and explicit page-rewrite/canonical-session-proxy controls passed; remaining owner route/deployment behavior and installed Next workflow remain open. |
 | Retained builds and portable development loop | Controlled watch/recovery and scoped actual Rust retained workflow | Application-specific dependency closure, fresh installed workflow and measured edit-loop behavior; no blanket hermeticity or speed claim. |
 | Deployment expansion | Scoped actual Linux output/runtime and deployment refusals | Remaining wrong-architecture/stale-contract controls or a chosen deployment profile. Production activation remains separate. |
 | Performance acceptance | Existing functional timing records | Define comparison and acceptance budgets before exclusive measured execution. Diagnostic profiling remains separate. |
@@ -56,21 +56,34 @@ kernel-verified limits. Its executable matches this registry producer exactly.
 All owned containers stopped. The earlier 57-test receipts remain historical;
 the current suite has 59 tests and the expected engine is unchanged.
 
-The original G3 rewrite/framework increment now follows a [frozen plan](2026-10-24-next-rewrite-runtime.md)
-at \`93432ce\`. The opt-in existing Chatbot lane applies a declared staged-only
-configuration overlay for two internal aliases; original/derived context and
-configuration digests remain separate. Twelve actual browser/HTTP cases must
-verify path/parameter/header/query conditions and preserved browser URLs. Five
-native checks cover exact compiled rule preservation, original BotID/redirect/
-header records, missing projection, stale digest after request rehash, and
-captured-config mutation refusal before marker effects. All original sixteen
-auth/document groups and four upstream page tests remain mandatory.
-[Focused preflight](../acceptance/project-adoption/g3-next-rewrite-runtime-20261024/preflight.json)
-passed six controlled overlay boundaries, four source-acquisition controls,
-Python AST, workflow YAML parsing and diff checks. Actual pinned-source overlay,
-Next production build, compiled observations and runtime remain unaccepted until
-the focused Linux run completes. The default unchanged-source auth path remains
-available; no external BotID behavior or complete dependency closure is claimed.
+The G3 internal-page/canonical-session-proxy increment now [passes independent review](../acceptance/project-adoption/g3-next-rewrite-runtime-20261024/accepted-40055414930/independent-verification.json)
+in [run 40055414930](https://github.com/roryscot/patamaps/actions/runs/40055414930)
+at \`3cfe969298dc35b2082138aab98e13aaf6f565ca\`. All twelve frozen HTTP/browser
+positive/refusal cases, original sixteen auth/document groups and four unchanged
+upstream page tests passed. Five native checks passed: exact added/original
+compiled rules, missing projection, stale binding after request rehash and
+captured-config mutation refusal before a marker. Review checked 180 upstream
+Git identities, 181 derived entries, 175 captured text files, all four driver
+digests and the declared/runtime origin. All owned runtimes and the held port
+reservation stopped. [Usage and limits](../guides/next-rewrite-proxy-qualification.md).
+
+Five failed attempts remain preserved. The version1 internal-session alias is
+still failed: matched canonical query200 versus alias400. [Revision2](2026-10-24-next-canonical-proxy.md)
+uses an explicitly captured canonical HTTP loopback proxy to the same session
+endpoint, preserving every original positive/refusal expectation and original
+BotID rule phase. It does not claim unchanged upstream configuration, external
+BotID behavior or arbitrary NextAuth alias compatibility.
+
+Next selected work: the original fresh installed Next workflow. Reuse the exact
+source/native packaging and consumer contracts; inspect the installed-source
+qualifier's Git/checkout assumptions before implementation. A package must expose
+usable owner commands without copying example scripts. Verify actual Next build/
+manifest/runtime behavior through fresh installed compilers with source inventory,
+engine, selected output and previous-selection bindings intact. Keep generated
+signing/Action material and private database/cookie data outside public captures
+and evidence. Do not relabel the installed Rust-only replay as installed Next
+acceptance. Actual-project exclusive cold/warm/edit latency, memory and retained
+disk measurements still require their original evidence.
 
 The original G0–G6 scope remains active: remaining Next/framework and deployment
 controls, installed Next workflow, applicable dependency/test-context treatment,

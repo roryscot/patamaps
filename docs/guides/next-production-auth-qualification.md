@@ -76,3 +76,8 @@ runtime authentication are separate outcomes. Read the precise receipt and
 failed-stage fields. These results do not establish production deployment,
 external authentication providers, complete dependency closure, general project
 support or practical edit-loop performance.
+
+The separate [page-rewrite/canonical-session-proxy profile](next-rewrite-proxy-qualification.md)
+now passes with an explicitly derived configuration and the same auth/document
+controls. Its original internal session alias remains failed; it does not change
+the unchanged-source result documented here.

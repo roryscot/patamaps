@@ -1,6 +1,6 @@
 # Canonical owner-session proxy profile
 
-Status: revision2 plan before implementation; no accepted runtime result.
+Status: revision2 independently verified in [run 40055414930](https://github.com/roryscot/patamaps/actions/runs/40055414930) at `3cfe969`. [Evidence](../acceptance/project-adoption/g3-next-rewrite-runtime-20261024/accepted-40055414930/independent-verification.json) proves the twelve rewrite/proxy cases, original sixteen auth/document groups, four upstream page tests and all native/ownership/cleanup controls. The original internal-session profile remains failed.
 Continue the original G3/G6 adoption goal, preserving all requirements in the
 [rewrite increment](2026-10-24-next-rewrite-runtime.md). This changes the
 configuration recipe after contrary evidence, not its positive/refusal behavior.
@@ -22,7 +22,7 @@ observed incompatibility; it does not establish arbitrary NextAuth behavior.
 ## Explicit configuration
 
 Keep the same alias paths, query/header conditions, canonical session endpoint,
-HTTP200/same-guest-identity positive, all HTTP404 refusals, original rule/phase
+HTTP 200/same-guest-identity positive, all HTTP 404 refusals, original rule/phase
 preservation, native projection/config mutation refusals and all original
 sixteen auth/document groups/four page tests. No target substitution, handler
 patch, skipped typecheck, changed success threshold or fabricated user response.
