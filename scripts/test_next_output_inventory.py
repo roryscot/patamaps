@@ -21,11 +21,15 @@ class PrivateOutputControls(unittest.TestCase):
   (base/"server-reference-manifest.json").write_bytes(secret+b"x")
   _,changed=private_output_inventory(staged,work,"after")
   self.assertNotEqual(summary["inventoryDigest"],changed["inventoryDigest"])
- def test_member_symlink_refuses_before_hash(self):
-  work,staged=self.case();base=staged/".next";base.mkdir();outside=work/"private";outside.write_text("preserved")
-  (base/"link").symlink_to(outside)
+ def test_member_symlink_records_metadata_without_following(self):
+  work,staged=self.case();base=staged/".next";base.mkdir();outside=work/"private-directory";outside.mkdir();(outside/"private").write_text("preserved")
+  (base/"link").symlink_to(outside,target_is_directory=True)
   with patch("qualify_chatbot_next.sha",side_effect=AssertionError("HASH_CALLED")):
-   with self.assertRaisesRegex(AssertionError,"symlink"):private_output_inventory(staged,work,"refused")
+   records,summary=private_output_inventory(staged,work,"observed")
+  self.assertEqual(summary["symlinks"],1)
+  self.assertFalse(summary["symlinkTargetsFollowed"])
+  self.assertFalse(records["link"]["targetFollowed"])
+  self.assertEqual(set(records),{"link"})
  def test_root_symlink_refuses_before_hash(self):
   work,staged=self.case();outside=work/"private-directory";outside.mkdir();(outside/"private").write_text("preserved")
   (staged/".next").symlink_to(outside,target_is_directory=True)

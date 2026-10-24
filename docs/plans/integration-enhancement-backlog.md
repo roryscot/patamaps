@@ -87,7 +87,7 @@ public pnpm/Chromium caches are shared, and the parent monitors the combined
 passed39 controls: ten source-integrity, three private-output, fourteen archive,
 eight rewrite and four acquisition cases. Source-scope selection remains within
 the unchanged128MiB/32MiB-evidence bounds. Python AST, workflow YAML and diff
-checks passed. Actual installed Next acceptance is pending focused Linux CI.
+checks passed. Actual installed Next acceptance is pending the focused next-installed Linux CI lane.
 
 I1 also privately characterizes generated-output changes and requires the three
 public compiled manifests to retain their bindings through actual runtime.
@@ -1312,3 +1312,18 @@ passed eight overlay/port controls and four source-acquisition controls, includi
 real contention/handoff and invalid-port refusal before writes. Keep the same
 twelve runtime cases and original sixteen auth/document groups. The version1
 internal-session profile remains failed; actual version2 acceptance is pending.
+
+First installed Next attempt40058820129 ate15e970 packaged/installed both exact
+archives, freshly compiled the source CLI, matched its engine, ran the packaged
+qualifier without Git, built the real owner and completed native observations/
+refusals. It stopped before browser runtime because generated .next contained
+a symlink. [Sanitized verified failure](../acceptance/project-adoption/g5-installed-next-20261024/attempt-1/sanitized-failure.json)
+preserves exits/categories without raw stderr. The child final source-status
+flag was absent, so its status is unrecorded, not false; fix final receipt saving.
+
+Characterize generated links as private link metadata without following targets;
+continue refusing all symlinks in installed program source and the generated
+root itself. This records the limitation rather than asserting whole output
+closure. Keep targets/paths private and publish only counts/digests/categories.
+All owner positives/refusals remain unchanged, I2 remains open, and39 focused
+controls passed. Retry actual source/native owner runtime under the same limits.

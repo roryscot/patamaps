@@ -21,7 +21,12 @@ def private_output_inventory(staged,work,label):
  base=staged/".next";records={};total=0
  assert base.is_dir() and not base.is_symlink(),"Review generated output root symlink"
  for path in sorted(base.rglob("*")):
-  assert not path.is_symlink(),"Review generated output symlink before inventory"
+  if path.is_symlink():
+   target=os.readlink(path);encoded=target.encode()
+   assert len(records)<32768 and len(encoded)<=8192
+   total+=len(encoded);assert total<=1024**3
+   records[path.relative_to(base).as_posix()]=dict(kind="symlink",target=target,targetDigest="sha256:"+hashlib.sha256(encoded).hexdigest(),targetFollowed=False)
+   continue
   if path.is_dir():continue
   assert path.is_file() and len(records)<32768
   before=path.stat();total+=before.st_size
@@ -32,7 +37,7 @@ def private_output_inventory(staged,work,label):
  assert records
  (work/("private-next-output-"+label+".json")).write_text(json.dumps(records,indent=2)+"\n")
  raw=json.dumps(records,sort_keys=True,separators=(",",":")).encode()
- return records,dict(files=len(records),bytes=total,inventoryDigest="sha256:"+hashlib.sha256(raw).hexdigest())
+ return records,dict(files=len(records),symlinks=sum(row.get("kind")=="symlink" for row in records.values()),symlinkTargetsFollowed=False,bytes=total,inventoryDigest="sha256:"+hashlib.sha256(raw).hexdigest())
 
 def main():
  p=argparse.ArgumentParser(description=__doc__)
@@ -223,8 +228,9 @@ def main():
    try:
     verify_installed_source(ROOT,a.installed_inventory_digest)
     r["installedSourceInventoryUnchanged"]=True
+    save()
    except BaseException:
-    r["installedSourceInventoryUnchanged"]=False
+    r.update(status="failed",installedSourceInventoryUnchanged=False,error="INSTALLED_SOURCE_FINAL_VERIFICATION_FAILED")
     save()
     raise
  save();print(json.dumps(dict(status=r["status"],frameworkBuildEstablished=True,runtimeEstablished=r["runtimeEstablished"])))
