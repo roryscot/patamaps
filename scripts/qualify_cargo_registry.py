@@ -92,6 +92,7 @@ def qualify(root, work, out, source, staged, names, cargo, cli, env, run, native
         shutil.copyfile(root/'scripts'/name, owner/name)
     shutil.copyfile(root/'scripts/deployment/miniserve/registry-build.sh', owner/'registry-build.sh')
     shutil.copyfile(root/'scripts/deployment/miniserve/registry-nsswitch.conf', owner/'network-nsswitch.conf')
+    shutil.copyfile(root/'scripts/deployment/miniserve/registry-hosts.conf', owner/'network-hosts.conf')
     write(owner/'registry-record.json', registry)
     tool_identities = {str(path):sha(path) for path in [cargo, cargo.with_name('rustc'), Path(shutil.which('docker')).resolve()]}
     write(owner/'registry-executor.json', dict(cargo=str(cargo), ownerTestSource=str(source),

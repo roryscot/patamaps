@@ -123,6 +123,7 @@ def main():
         assert IMAGE in image['RepoDigests'] and (image['Os'], image['Architecture']) == ('linux', 'amd64')
         mounts = [(source, '/source'), (source/'.cargo-home/registry', '/registry'),
                   (source/'network-nsswitch.conf','/etc/nsswitch.conf'),
+                  (source/'network-hosts.conf','/etc/hosts'),
                   (tests, '/test-source'), (toolchain, str(toolchain))]
         for name in ['/usr', '/bin', '/lib', '/lib64', '/etc/alternatives']:
             if Path(name).exists():
@@ -132,7 +133,6 @@ def main():
         user = str(os.geteuid())+':'+str(os.getegid())
         argv = ['docker', 'create', '--label', 'org.patamaps.qualification-owner='+owned['token'],
                 '--platform', 'linux/amd64', '--network', 'none', '--read-only', '--user', user,
-                '--add-host','localhost:127.0.0.1','--add-host','localhost:::1',
                 '--cpus', '2', '--memory', str(MEMORY), '--memory-swap', str(MEMORY), '--pids-limit', '512',
                 '--shm-size', '1048576', '--cap-drop', 'ALL', '--security-opt', 'no-new-privileges',
                 '--tmpfs', '/work:rw,exec,nosuid,nodev,size='+str(WORK_BYTES)+',mode=1777',
@@ -160,14 +160,14 @@ def main():
         assert info['Image'] == image['Id'] and info['Config']['User'] == user
         assert host['NanoCpus'] == 2000000000 and host['Memory'] == host['MemorySwap'] == MEMORY
         assert host['PidsLimit'] == 512 and host['NetworkMode'] == 'none' and host['ReadonlyRootfs']
-        assert set(host['ExtraHosts']) == {'localhost:127.0.0.1','localhost:::1'}
         assert host['Tmpfs'] == {'/work': 'rw,exec,nosuid,nodev,size='+str(WORK_BYTES)+',mode=1777'}
         assert host['ShmSize'] == 1048576 and host['CapDrop'] == ['ALL'] and not host['CapAdd'] and not host['Privileged']
         assert host['SecurityOpt'] == ['no-new-privileges']
         actual_mounts = {(m['Source'], m['Destination']) for m in info['Mounts'] if m['Type'] == 'bind'}
         assert actual_mounts == {(str(a.resolve()), b) for a, b in mounts} and all(not m['RW'] for m in info['Mounts'] if m['Type']=='bind')
         report.update(containerId=container, imageId=image['Id'], readOnlyMounts=[dict(source=str(a), destination=b) for a,b in mounts],
-                      hostConfigurationVerifiedBeforeStart=True, hostUser=user, explicitLocalhostAddresses=['127.0.0.1','::1'])
+                      hostConfigurationVerifiedBeforeStart=True, hostUser=user, explicitLocalhostAddresses=['127.0.0.1','::1'],
+                      networkConfigurationDigests={name:sha(source/name) for name in ['network-hosts.conf','network-nsswitch.conf']})
         with (logs/'guardian.stdout').open('xb') as stdout, (logs/'guardian.stderr').open('xb') as stderr:
             child = subprocess.Popen([sys.executable, '-B', str(source/'project_watch.py'), '__guard-container', guard_record],
                                      stdout=stdout, stderr=stderr, start_new_session=True)

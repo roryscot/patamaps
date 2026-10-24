@@ -1101,3 +1101,16 @@ declared loopback addresses in getaddrinfo, a real IPv6 TCP exchange, and the Ru
 IPv4-only/IPv6-only localhost probe before Cargo. Both external-route refusals,
 all325 tests and all original quotas remain. This is an explicit bounded local
 qualification resolver profile, not general DNS support or full OS closure.
+
+
+Eighth attempt40046614901 at9304c17 stopped before Cargo with the safe fact
+LOCALHOST_RESOLUTION:[127.0.0.1], despite the declared Docker ExtraHosts and the
+explicit files resolver. Both cleanup proofs passed. [Verified record](../acceptance/project-adoption/g3-cargo-registry-context-20261023/registry-attempt-8/native-attempt-records.json).
+Do not claim that the resolver-file change alone fixed this environment.
+
+Bind a second explicit captured nonsecret hosts file (127.0.0.1 localhost and
+::1 localhost), read-only at /etc/hosts, instead of Docker-generated ExtraHosts.
+The owner capture binds both files, Docker mount inspection requires read-only
+identity, and in-container cmp checks their exact bytes before name/TCP probes.
+No inherited host aliases or private resolver configuration. Leave kernel values,
+network none, both external-route refusals, quotas and all owner tests unchanged.
