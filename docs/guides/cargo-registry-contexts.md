@@ -1,13 +1,15 @@
 # Explicit Cargo registry contexts
 
-Status: implemented qualification path; real build/test/runtime acceptance remains
-pending. The managed-backend prerequisite, strict inventory controls and native
-capture of all 456 packages passed. Previous failed executions are preserved in
-the [integration backlog](../plans/integration-enhancement-backlog.md). The current
-[run40048759023](https://github.com/roryscot/patamaps/actions/runs/40048759023)
-executes source 82f4ff7 with captured local resolver configuration, a capped local
-address provision and payload-free Cargo diagnostics. No complete dependency
-closure or general Rust support is asserted by this guide.
+Status: passed for pinned Miniserve 0.35.0 in the bounded Linux profile.
+[Run 40050181349](https://github.com/roryscot/patamaps/actions/runs/40050181349)
+at `73c7c88` passed all 325 unchanged upstream tests, eight actual HTTP controls,
+registry/snapshot corruption refusals before effects and restored offline replay.
+[Independent review](../acceptance/project-adoption/g3-cargo-registry-context-20261023/registry-accepted-40050181349/independent-verification.json)
+verified all 456 package checksums,874 registry files and60 selected application
+files from the exact artifact. Previous failed executions remain preserved in
+the [integration backlog](../plans/integration-enhancement-backlog.md).
+No complete dependency closure, current installed replay or general Rust support
+is asserted by this result.
 
 Patamaps already accepts opaque inputs through ProjectContext and composes them
 with source, workspace admission, commands and artifact selection in ProjectBuild.
@@ -58,6 +60,12 @@ through read-only mounts. Cargo extraction, locks, target files, HOME and TMPDIR
 live in a fresh bounded /work filesystem. The original configured download home
 is renamed before execution and is not mounted. No host user home, credentials
 or Docker socket is mounted. The read-only /etc/alternatives mount supplies OS command aliases.
+Only the runner's public CA bundle at /etc/ssl/certs/ca-certificates.crt is
+mounted for the default WebDAV client's system trust store. Its bytes are bound
+in captured executor configuration, private-key markers refuse, SSL_CERT_FILE is
+explicit, a normal verifying SSL context must load CA roots before Cargo, and
+the bundle digest is checked afterward. No private certificate directory or user
+key is mounted. This remains an external OS input.
 Host tools, Rust toolchain and the original pinned
 public test clone remain read-only external inputs; they are not closed by this
 registry snapshot.

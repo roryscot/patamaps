@@ -23,21 +23,31 @@ a passed fixture or metadata observation is not general support.
 
 ## Current selected work
 
-Current live producer: [40048759023](https://github.com/roryscot/patamaps/actions/runs/40048759023)
-at 82f4ff712b93082fda7c35a02d5f84f4f7a2d297. This supersedes prior live-run
-checkpoints below. The previous full run passed resolver and bind controls but
-failed the unchanged QR test, whose implementation excludes loopback-range URLs.
-The new recipe provisions only192.0.2.2/32 on the owned lo interface through a
-capped NET_ADMIN-only helper; inspect namespace/capabilities and confirm it stopped
-before releasing the capability-free workload. No bridge, external route, kernel
-global setting, larger workload quota or modified owner test. All owned container
-Running=false/Pid=0 checks remain mandatory. Wait on this exact run and inspect its
-terminal artifact before another repair or dependent job. No full registry
-execution acceptance yet. Installed source/native registry replay is prepared
-with fourteen import controls, but its producer pin is unchanged and actual
-installed registry replay has not run. A producer pass must prove all325 tests,
-eight HTTP checks, selection/registry refusals and offline replay. Broader G0–G6
-requirements remain active.
+The real Cargo registry increment is now [independently verified](../acceptance/project-adoption/g3-cargo-registry-context-20261023/registry-accepted-40050181349/independent-verification.json)
+in [run 40050181349](https://github.com/roryscot/patamaps/actions/runs/40050181349)
+at `73c7c882df86696d9990035d40f233cab19a0398`. All456 original package checksums,
+874 retained registry files, 60 selected application files, the unchanged 325
+upstream tests, eight HTTP controls, four selection refusals, registry corruption
+refusals before marker effects and restored offline selected replay passed.
+The sole NET_ADMIN helper stopped before Cargo; the capability-free workload
+kept its network and writable-memory limits; both owned containers stopped.
+The public CA bundle is now an explicit digest-bound, read-only external OS input.
+Twelve earlier failed attempts remain preserved. Compact evidence is committed;
+the single 83,863,862-byte CI artifact expires 2026-11-07, and no duplicate archive
+or extracted dependency tree is retained on Intel.
+
+Next selected work: fresh current-engine source/native installed replay against
+this exact successful producer. The fourteen-control archive import and optional
+registry replay implementation are prepared, but producer pins still target the
+older `36e6525` runtime. Retarget only after checking this producer's exact ZIP,
+CLI/runtime-state/pointer digests and nine production Git objects. Then verify
+fresh installed compiler identities, registry verification/version execution,
+corrupted selected archive refusal before a marker, restored replay and the
+existing actual runtime controls. Do not rebuild Miniserve to fabricate a fresh
+producer claim. Installed registry acceptance is still false.
+Full OS/toolchain/test-fixture closure, remaining framework/deployment controls,
+performance measurements and broader G0–G6 acceptance remain open. This work is
+a separate enhancement, not a prerequisite for the completed C01–C19 milestone.
 
 The Cargo managed-container prerequisite is now independently verified in
 [run 40019067506](https://github.com/roryscot/patamaps/actions/runs/40019067506)
@@ -735,13 +745,13 @@ the original plan before selecting the smallest complete remaining increment.
 
 ## Selected increment: sealed Cargo registry inputs for real Rust execution (2026-10-23)
 
-Reuse unchanged Miniserve0.35.0 at 2cd9c495ef25f2fcef505615f603e9de8f981915,
+Reuse unchanged Miniserve 0.35.0 at 2cd9c495ef25f2fcef505615f603e9de8f981915,
 the current compiler, native opaque ProjectContext and ProjectBuild contracts,
 and the existing focused external-Rust workflow. Original public test fixtures
 stay outside Patamaps capture under their existing eight-item Git-blob contract.
 Do not relabel them or capture raw TLS/auth material to obtain closure.
 
-The intended full increment is an actual source build and all325default tests
+The intended full increment is an actual source build and all 325default tests
 with a fresh, native-staged CARGO_HOME: retain only original public crates.io
 .crate distribution archives matching the pinned Cargo.lock checksums and exact
 sparse-index/configuration bytes from a fresh credential-free download home.
@@ -913,7 +923,7 @@ strict inventory refuses checksum/membership/source/configuration/symlink and
 byte-bound violations; thirteen focused controls plus the fifteen existing
 Miniserve controls passed on Intel Python3.13. Original fixtures stay excluded.
 Cargo/rustc/Docker executable hashes are captured and checked before/after the
-managed build. Original release settings and all325 default tests are retained;
+managed build. Original release settings and all 325 default tests are retained;
 network/kernel/work-filesystem checks must pass before Cargo starts. The exact
 binary is copied under a32MiB bound before the test phase is released. Native
 snapshot/selected registry corruption must refuse before markers; restored state
@@ -947,7 +957,7 @@ changed. Expired/changed artifacts or engine drift refuse; no hidden fallback or
 fresh compiler/installed-package claim. The existing default Rust lane still
 builds its own CLI. Reuse avoids repeating unrelated compiler work while fixing
 qualification diagnostics. Application source, registry checks, resource quotas,
-all325 tests, HTTP/refusal/tamper/replay criteria remain intact.
+all 325 tests, HTTP/refusal/tamper/replay criteria remain intact.
 
 
 Second attempt40038561684 at08a54e9 reused the exact current-engine CLI and
@@ -977,7 +987,7 @@ guardian PID and await its completion before fallback rather than group-signalin
 its active Docker cleanup clients. The independent master remains available and
 actual Running=false/Pid=0 plus guardian cleanup confirmation are still required.
 This does not retroactively establish the earlier unconfirmed cleanup's cause.
-All previous failures, limits and all325 test/runtime/refusal/replay gates remain.
+All previous failures, limits and all 325 test/runtime/refusal/replay gates remain.
 
 
 Live continuation checkpoint: [run40039233532](https://github.com/roryscot/patamaps/actions/runs/40039233532)
@@ -1101,7 +1111,7 @@ profile and mount only that file read-only at /etc/nsswitch.conf. Do not inherit
 host resolver/user configuration or change kernel/network policy. Require both
 declared loopback addresses in getaddrinfo, a real IPv6 TCP exchange, and the Rust
 IPv4-only/IPv6-only localhost probe before Cargo. Both external-route refusals,
-all325 tests and all original quotas remain. This is an explicit bounded local
+all 325 tests and all original quotas remain. This is an explicit bounded local
 qualification resolver profile, not general DNS support or full OS closure.
 
 

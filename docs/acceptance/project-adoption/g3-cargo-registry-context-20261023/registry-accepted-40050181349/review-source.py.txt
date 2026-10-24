@@ -1,0 +1,71 @@
+from pathlib import Path,PurePosixPath
+import subprocess,json,io,zipfile,tarfile,hashlib
+r=Path("/Volumes/dev_src_case_sensitive/projects/patamaps");gh=r/".tools/intel-gh-2.102.0-20261015/unpacked/gh_2.102.0_macOS_amd64/bin/gh"
+revision="73c7c882df86696d9990035d40f233cab19a0398";runid=40050181349;aid=12543262113
+def api(path,raw=False):
+ v=subprocess.check_output([str(gh),"api","repos/roryscot/patamaps/"+path],cwd=r,timeout=90)
+ return v if raw else json.loads(v)
+def digest(value):return "sha256:"+hashlib.sha256(value).hexdigest()
+def normalized(value):return value if value.startswith("sha256:") else "sha256:"+value
+run=api(f"actions/runs/{runid}");assert run["conclusion"]=="success" and run["head_sha"]==revision
+meta=api(f"actions/artifacts/{aid}");assert not meta["expired"] and meta["workflow_run"]["id"]==runid and meta["workflow_run"]["head_sha"]==revision
+assert meta["size_in_bytes"]==83863862 and meta["digest"]=="sha256:6c662e0d29292a8cc6e49a4cceebc5667ac06089d4f8089e96fcf70ee01633a0"
+raw=api(f"actions/artifacts/{aid}/zip",True);assert len(raw)==meta["size_in_bytes"] and digest(raw)==meta["digest"]
+z=zipfile.ZipFile(io.BytesIO(raw));assert len(z.namelist())==len(set(z.namelist()))
+def load(name):return json.loads(z.read(name))
+receipt=load("receipt.json");registry=load("registry/receipt.json");execution=load("registry/execution.json");inventory=load("registry/inventory.json")
+assert receipt["sourceRevision"]==revision and receipt["status"]=="passed-source-built-miniserve-linux-deployment"
+assert receipt["upstreamCommit"]=="2cd9c495ef25f2fcef505615f603e9de8f981915"
+assert all(c["exitCode"]==c["expectedExitCode"] for c in receipt["commands"])
+for key in ["upstreamSourceUnchanged","capturedSourceStageMatchesFrozenInventory","configuredSourceAndSnapshotUnavailableReplay","previousSelectionPreservedOnFourRefusals","staleRuntimeRefusedBeforeCommand","restoredSelectedRuntimePassed","runtimeVerificationBeforeSelection","actualHttp"]:assert receipt[key],key
+assert len(receipt["runtimeControls"])==8 and len(receipt["uncapturedPublicTestFixtures"])==8
+assert all(not v["captured"] and not v["published"] for v in receipt["uncapturedPublicTestFixtures"].values())
+assert registry==receipt["cargoRegistryContext"] and registry["status"]=="passed-native-registry-context-execution"
+for key in ["configuredDownloadHomeUnavailable","immutableRegistryContext","generatedCargoPathsInsideQuota","snapshotCorruptionRefusedBeforeMarker","selectedRegistryCorruptionRefusedBeforeMarker","previousSelectionPreserved","restoredOfflineSelectedReplay","configuredOwnerAndSnapshotUnavailable","originalPublicArchives","originalSourceInputsUnchanged"]:assert registry[key],key
+assert not any(registry[k] for k in ["completeDependencyClosure","ownerTestFixturesClosed","toolchainClosed"])
+assert inventory["lockDigest"]=="sha256:057863a87232aa5afef339ade3ed0bcaf6838fecca0efe3ff6ce9d181ac6f948"
+assert inventory["packageCount"]==registry["packageCount"]==456 and inventory["fileBytes"]==registry["registryFileBytes"]<=256*1024**2
+assert execution["status"]=="passed-real-cargo-registry-execution" and execution["defaultTestsPassed"]==325 and execution["cargoExitCode"]==0
+assert sum(int(p) for p,f,i in execution["testSummaries"])==325 and all(f=="0" for p,f,i in execution["testSummaries"])
+assert execution["testSummaries"]==receipt["upstreamTestSummaries"] and not execution["cargoDiagnostics"]["failedTests"]
+for key in ["binaryCopiedBeforeOwnerTests","kernelLimitsVerified","externalRouteAbsent","ipv6LoopbackVerified","ipv6ExternalRouteAbsent","hostConfigurationVerifiedBeforeStart","containerStopped","allOwnedContainersStopped","guardianCleanupConfirmed"]:assert execution[key],key
+provision=execution["localAddressProvision"];assert provision["helperStoppedBeforeCargo"] and provision["workloadCapabilitiesDropped"] and not provision["bridgeOrExternalNetworkCreated"] and provision["effectiveCapability"]=="NET_ADMIN only"
+assert execution["cpuAllowance"]==2 and execution["memoryAllowance"]==6442450944 and execution["memorySwapAllowance"]==0 and execution["pidsAllowance"]==512 and execution["workFilesystemBytes"]==3221225472
+assert set(execution["externalOsInputIdentities"])=={"/etc/ssl/certs/ca-certificates.crt"}
+binary_digest=digest(z.read("artifacts/miniserve"));assert binary_digest==normalized(receipt["applicationBinary"]["sha256"])==execution["binaryDigest"]
+assert digest(z.read("artifacts/patamaps"))==normalized(receipt["relocatedCompiler"]["sha256"])
+state_bytes=z.read("artifacts/registry-selected-state.tar.gz")
+assert digest(state_bytes)==registry["retainedStateArchive"]["digest"] and len(state_bytes)==registry["retainedStateArchive"]["bytes"]
+runtime=z.read("artifacts/selected-state.tar.gz");assert digest(runtime)==normalized(receipt["portableSelectedState"]["sha256"])
+seen=set();registry_seen={};app_seen={};pointer=None;recipe_seen={};selected_binary=None;selected_execution=None;spec=None
+with tarfile.open(fileobj=io.BytesIO(state_bytes),mode="r|gz") as tar:
+ for member in tar:
+  path=PurePosixPath(member.name);assert not path.is_absolute() and ".." not in path.parts and path.parts[0]=="registry-state" and member.name not in seen
+  seen.add(member.name);assert member.isfile() or member.isdir()
+  if not member.isfile():continue
+  data=tar.extractfile(member).read();value=digest(data)
+  if member.name=="registry-state/selected.json":pointer=value
+  if "/candidate/" not in member.name:continue
+  relative=member.name.split("/candidate/",1)[1]
+  if relative.startswith(".cargo-home/"):
+   key=relative[len(".cargo-home/"):];assert value==inventory["files"][key]["digest"];registry_seen[key]=len(data)
+   if relative.endswith(".crate"):
+    package=inventory["packages"][path.name];assert value==package["checksum"]
+  elif relative.startswith("application/"):
+   key=relative[len("application/"):];assert value==normalized(receipt["upstreamInventory"][key]);app_seen[key]=value
+  elif relative=="bundle/miniserve":assert value==binary_digest;selected_binary=value
+  elif relative=="bundle/registry-execution.json":selected_execution=json.loads(data)
+  elif relative=="registry-executor.json":spec=json.loads(data)
+  elif relative in ["cargo_registry_container.py","project_watch.py","deployment_miniserve_image.py","registry-build.sh"]:
+   source="scripts/deployment/miniserve/registry-build.sh" if relative=="registry-build.sh" else "scripts/"+relative
+   original=subprocess.check_output(["git","show",revision+":"+source],cwd=r,timeout=10);assert value==digest(original);recipe_seen[relative]=value
+assert set(registry_seen)==set(inventory["files"]) and len(registry_seen)==inventory["fileCount"] and sum(registry_seen.values())==inventory["fileBytes"]
+assert set(app_seen)==set(receipt["upstreamInventory"]) and not set(app_seen)&set(receipt["uncapturedPublicTestFixtures"])
+assert pointer==registry["selectionDigest"] and selected_binary==binary_digest and selected_execution==execution and len(recipe_seen)==4
+assert spec["osInputIdentities"]==execution["externalOsInputIdentities"] and spec["toolIdentities"]==execution["executorIdentities"]
+ci=dict(runId=runid,sourceRevision=revision,artifactId=aid,artifactDigest=meta["digest"],artifactBytes=len(raw),status="independently-verified-passed",fullArchiveRetained=False,artifactExpiresAt=meta["expires_at"])
+verification=dict(status="passed-independent-cargo-registry-review",**{k:v for k,v in ci.items() if k!="status"},defaultTestsPassed=325,actualHttpControls=receipt["runtimeControls"],registryPackagesVerified=456,registryFilesVerified=len(registry_seen),registryFileBytesVerified=sum(registry_seen.values()),applicationFilesVerified=len(app_seen),selectedRecipeDigests=recipe_seen,binaryDigest=binary_digest,selectionDigest=pointer,osInputIdentities=execution["externalOsInputIdentities"],snapshotAndSelectedTamperRefusedBeforeEffects=True,restoredOfflineReplay=True,allOwnedContainersStopped=True,completeDependencyClosure=False,toolchainClosed=False,ownerTestFixturesClosed=False,installedAcceptance=False,productionActivation=False,filesDeleted=0)
+base=r/"docs/acceptance/project-adoption/g3-cargo-registry-context-20261023/registry-accepted-40050181349";base.mkdir(exist_ok=False)
+for name,value in [("receipt.json",receipt),("registry-receipt.json",registry),("execution.json",execution),("inventory.json",inventory),("ci.json",ci),("independent-verification.json",verification)]:
+ (base/name).write_text(json.dumps(value,indent=2)+"\n")
+print(json.dumps(dict(status=verification["status"],tests=325,httpControls=8,registryPackages=456,registryFiles=len(registry_seen),applicationFiles=len(app_seen),allOwnedContainersStopped=True,archiveRetained=False,evidence=str(base))))
