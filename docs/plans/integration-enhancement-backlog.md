@@ -23,19 +23,20 @@ a passed fixture or metadata observation is not general support.
 
 ## Current selected work
 
-Current live producer: [40046190259](https://github.com/roryscot/patamaps/actions/runs/40046190259)
-at c4f0f61c00f567bdaa02f34f1baa3de22bda8d5c. This supersedes earlier live-run
-checkpoints below. The prior run40045090305 failed only bind_ipv4_ipv6::case_2
-before later test binaries, with no capacity exhaustion. Explicit container-local
-IPv4/IPv6 localhost mappings and a matching Rust TcpStream pre-build probe are
-now required; kernel settings, quotas and owner tests are unchanged. Wait on this
-exact run and inspect its terminal artifact before another repair or dependent
-job. No registry execution acceptance yet. Installed source/native registry replay
-is prepared at74b707e and passes fourteen import controls, but its producer pin
-is unchanged and actual installed registry replay has not run. After a producer
-passes, independently verify all325 tests, eight HTTP checks, selection/registry
-refusals and offline replay before pinning it for installation. Broader G0–G6
-requirements remain active.
+Current live producer: [40047064763](https://github.com/roryscot/patamaps/actions/runs/40047064763)
+at cf39ff664f1580185a45ac52e7baeb3204544996. This supersedes prior live-run
+checkpoints below. The recipe now captures hosts, nsswitch.conf and host.conf
+(multi on) as nonsecret read-only inputs, compares their mounted bytes and
+requires Python/Rust dual-stack localhost probes before Cargo. No kernel change,
+external route, larger quota or modified owner test. Earlier failed attempts are
+preserved, including the original IPv6-only fixture timeout and subsequent early
+resolver refusals. Wait on this exact run; inspect/digest-verify its terminal
+artifact before another repair or dependent job. No registry execution acceptance
+yet. Installed source/native registry replay is prepared with fourteen import
+controls, but its producer pin is unchanged and actual installed registry replay
+has not run. A producer pass must prove all325 tests, eight HTTP checks,
+selection/registry refusals and offline replay. Broader G0–G6 requirements remain
+active.
 
 The Cargo managed-container prerequisite is now independently verified in
 [run 40019067506](https://github.com/roryscot/patamaps/actions/runs/40019067506)

@@ -4,9 +4,9 @@ Status: implemented qualification path; real build/test/runtime acceptance remai
 pending. The managed-backend prerequisite, strict inventory controls and native
 capture of all 456 packages passed. Previous failed executions are preserved in
 the [integration backlog](../plans/integration-enhancement-backlog.md). The current
-[run40046190259](https://github.com/roryscot/patamaps/actions/runs/40046190259)
-executes source c4f0f61 with explicit dual-stack localhost and payload-free Cargo
-diagnostics. No complete dependency
+[run40047064763](https://github.com/roryscot/patamaps/actions/runs/40047064763)
+executes source cf39ff6 with captured local resolver configuration and payload-free
+Cargo diagnostics. No complete dependency
 closure or general Rust support is asserted by this guide.
 
 Patamaps already accepts opaque inputs through ProjectContext and composes them
@@ -67,7 +67,8 @@ The CI executor requires capacity for two CPUs, 6 GiB memory with zero swap and
 Cargo. The root is read-only; /work has a 3 GiB quota, with Docker's separate
 64 MiB /dev and 1 MiB /dev/shm also checked. External networking is absent;
 dual-stack loopback remains available for actual upstream HTTP tests. Explicit
-container-local localhost mappings and a Rust TcpStream probe cover both address
+container-local hosts, nsswitch.conf and host.conf (multi on) are captured as
+nonsecret inputs and mounted read-only. A Rust TcpStream probe covers both address
 families before Cargo; host/global kernel settings stay unchanged. Both --locked and
 --offline remain set, but physical networking enforcement is a separate check.
 
