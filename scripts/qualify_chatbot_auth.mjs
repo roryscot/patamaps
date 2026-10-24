@@ -28,6 +28,8 @@ const check = (value, label) => {
   assert.ok(value, label);
 };
 const contexts = [];
+const dynamicEvidenceValues = [];
+let generationPostAttempts = 0;
 const actionResponses = new Map();
 let browser;
 const sql = postgres(process.env.POSTGRES_URL, { max: 2, connect_timeout: 5 });
@@ -81,7 +83,15 @@ proxy.headersTimeout = 15000;
 
 async function context() {
   const value = await browser.newContext({ baseURL: config.origin, ignoreHTTPSErrors: true });
-  await value.route('**/*', route => new URL(route.request().url()).origin === config.origin ? route.continue() : route.abort());
+  await value.route('**/*', route => {
+    const request = route.request();
+    const url = new URL(request.url());
+    if (config.dynamicRoutes && request.method() === 'POST' && url.pathname === '/api/chat') {
+      generationPostAttempts++;
+      return route.abort();
+    }
+    return url.origin === config.origin ? route.continue() : route.abort();
+  });
   contexts.push(value);
   return value;
 }
@@ -227,6 +237,158 @@ async function rewriteControls() {
   await page.close();
 }
 
+
+async function dynamicControls(ctxA, ctxB, ownerId) {
+  const privateId = randomUUID();
+  const publicId = randomUUID();
+  const unseenId = randomUUID();
+  const privateMessageId = randomUUID();
+  const publicMessageId = randomUUID();
+  const privateText = 'qualified-private-chat-' + randomBytes(12).toString('hex');
+  const publicText = 'qualified-public-chat-' + randomBytes(12).toString('hex');
+  dynamicEvidenceValues.push(privateId, publicId, unseenId, privateMessageId, publicMessageId, privateText, publicText);
+  await sql`insert into "Chat" ("id","createdAt","title","userId","visibility") values (${privateId},current_timestamp,'Qualification private chat',${ownerId},'private')`;
+  await sql`insert into "Chat" ("id","createdAt","title","userId","visibility") values (${publicId},current_timestamp,'Qualification public chat',${ownerId},'public')`;
+  for (const [id, chatId, text] of [[privateMessageId, privateId, privateText], [publicMessageId, publicId, publicText]]) {
+    await sql`insert into "Message_v2" ("id","chatId","role","parts","attachments","createdAt") values (${id},${chatId},'assistant',${sql.json([{ type:'text', text }])},${sql.json([])},current_timestamp)`;
+  }
+  async function snapshot() {
+    const chats = await sql`select "id","createdAt","title","userId","visibility" from "Chat" where "id"=${privateId} or "id"=${publicId} order by "id"`;
+    const messages = await sql`select "id","chatId","createdAt","role","parts","attachments" from "Message_v2" where "chatId"=${privateId} or "chatId"=${publicId} order by "id"`;
+    check(chats.length === 2 && messages.length === 2, 'two owned dynamic fixtures');
+    return JSON.parse(JSON.stringify({ chats, messages }));
+  }
+  const before = await snapshot();
+  report.dynamicRouteWitness = {
+    profile:'patamaps-pinned-dynamic-runtime-1', pagePattern:'/chat/[id]',
+    dataEndpoint:'/api/messages', fixturesUnchanged:false, generationPostAttempts:0,
+    rawFixtureValuesPublished:false, pageAuthorization:'client shell; data API enforces private visibility',
+    streamBehavior:'constant204 stub; no resumable generation claim',
+  };
+  const witness = report.dynamicRouteWitness;
+  async function openChat(ctx, id, status, page = null) {
+    page ??= await ctx.newPage();
+    page.setDefaultTimeout(20000);
+    const pending = page.waitForResponse(response => {
+      const url = new URL(response.url());
+      return response.request().method() === 'GET' && url.origin === config.origin &&
+        url.pathname === '/api/messages' && url.searchParams.get('chatId') === id;
+    });
+    const [navigation, data] = await Promise.all([page.goto('/chat/' + id, { waitUntil:'domcontentloaded' }), pending]);
+    check(navigation?.status() === 200 && navigation.request().redirectedFrom() === null, 'dynamic page serves original URL');
+    check(new URL(page.url()).origin === config.origin && new URL(page.url()).pathname === '/chat/' + id, 'exact dynamic browser path');
+    check(data.status() === status && await data.finished() === null, 'id-bound dynamic data status');
+    const raw = await data.text();
+    check(Buffer.byteLength(raw) <= 65536, 'bounded dynamic JSON response');
+    return { page, body:JSON.parse(raw) };
+  }
+  async function visible(page, text) {
+    await page.getByTestId('message-content').filter({ hasText:text }).waitFor({ state:'visible' });
+  }
+  function exactData(body, text, readonly, visibility) {
+    check(body.isReadonly === readonly && body.visibility === visibility && body.userId === ownerId, 'actual dynamic owner and visibility');
+    check(Array.isArray(body.messages) && body.messages.length === 1 && body.messages[0].role === 'assistant', 'exact seeded message');
+    check(body.messages[0].parts.length === 1 && body.messages[0].parts[0].type === 'text' && body.messages[0].parts[0].text === text, 'exact seeded parts');
+  }
+
+  stage = 'dynamic-owner-private-page-and-id-bound-data';
+  const ownPrivate = await openChat(ctxA, privateId, 200);
+  exactData(ownPrivate.body, privateText, false, 'private');
+  await visible(ownPrivate.page, privateText);
+  await ownPrivate.page.getByTestId('multimodal-input').waitFor({ state:'visible' });
+  witness.ownerPathAndQueryIdMatched = true; witness.ownerPrivateMessageRendered = true;
+  pass(stage);
+
+  stage = 'dynamic-owner-second-id-replaces-visible-data';
+  const ownPublic = await openChat(ctxA, publicId, 200, ownPrivate.page);
+  exactData(ownPublic.body, publicText, false, 'public');
+  await visible(ownPublic.page, publicText);
+  check(await ownPublic.page.getByTestId('message-content').filter({ hasText:privateText }).count() === 0, 'second dynamic ID cannot show first message');
+  witness.distinctSecondIdRendered = true;
+  pass(stage);
+
+  stage = 'dynamic-cross-user-public-page-readonly';
+  const shared = await openChat(ctxB, publicId, 200);
+  exactData(shared.body, publicText, true, 'public');
+  await visible(shared.page, publicText);
+  check(await shared.page.getByTestId('multimodal-input').count() === 0, 'public nonowner has no composer');
+  witness.crossUserPublicReadonly = true;
+  pass(stage);
+
+  stage = 'dynamic-cross-user-private-data-refusal';
+  const forbidden = await openChat(ctxB, privateId, 403);
+  check(isDeepStrictEqual(forbidden.body, { error:'forbidden' }), 'cross-user private API returns only refusal');
+  check(await forbidden.page.getByTestId('message-content').filter({ hasText:privateText }).count() === 0, 'cross-user private message stays absent');
+  witness.crossUserPrivateStatus = 403;
+  pass(stage);
+
+  const guestContext = await context();
+  const guestLogin = await pageFor(guestContext, '/login');
+  const guestValue = await session(guestContext);
+  check(guestValue.user?.type === 'guest' && typeof guestValue.user.id === 'string', 'actual dynamic guest session');
+  await guestLogin.close();
+  stage = 'dynamic-guest-public-page-readonly';
+  const guestPublic = await openChat(guestContext, publicId, 200);
+  exactData(guestPublic.body, publicText, true, 'public');
+  await visible(guestPublic.page, publicText);
+  check(await guestPublic.page.getByTestId('multimodal-input').count() === 0, 'guest public reader has no composer');
+  witness.guestPublicReadonly = true;
+  pass(stage);
+
+  stage = 'dynamic-guest-private-data-refusal';
+  const guestPrivate = await openChat(guestContext, privateId, 403);
+  check(isDeepStrictEqual(guestPrivate.body, { error:'forbidden' }), 'guest private API returns only refusal');
+  check(await guestPrivate.page.getByTestId('message-content').filter({ hasText:privateText }).count() === 0, 'guest private message stays absent');
+  witness.guestPrivateStatus = 403;
+  pass(stage);
+
+  stage = 'dynamic-unseen-id-empty-response';
+  const unseen = await ctxA.request.get('/api/messages?chatId=' + unseenId, { maxRedirects:0 });
+  check(unseen.status() === 200 && isDeepStrictEqual(await unseen.json(), { isReadonly:false,messages:[],userId:null,visibility:'private' }), 'owner-defined empty unseen chat');
+  const persisted = await sql`select count(*)::int as count from "Chat" where id=${unseenId}`;
+  check(persisted[0].count === 0, 'unseen GET cannot persist a chat');
+  witness.unseenIdEmptyAndNotPersisted = true;
+  pass(stage);
+
+  stage = 'dynamic-missing-chat-id-query-refusal';
+  const missing = await ctxA.request.get('/api/messages', { maxRedirects:0 });
+  check(missing.status() === 400 && isDeepStrictEqual(await missing.json(), { error:'chatId required' }), 'missing required query refuses');
+  witness.missingQueryStatus = 400;
+  pass(stage);
+
+  stage = 'dynamic-extra-page-segment-refusal';
+  const extra = await ctxA.request.get('/chat/' + privateId + '/extra', { maxRedirects:0 });
+  check(extra.status() === 404, 'dynamic page extra segment refuses');
+  witness.extraPageSegmentStatus = 404;
+  pass(stage);
+
+  stage = 'dynamic-stream-route-204';
+  const stream = await ctxA.request.get('/api/chat/' + privateId + '/stream', { maxRedirects:0 });
+  check(stream.status() === 204 && (await stream.body()).length === 0, 'original dynamic stream stub');
+  witness.streamGetStatus = 204;
+  pass(stage);
+
+  stage = 'dynamic-stream-post-method-refusal';
+  const post = await ctxA.request.post('/api/chat/' + privateId + '/stream', { data:{},maxRedirects:0 });
+  check(post.status() === 405, 'unimplemented stream POST refuses');
+  witness.streamPostStatus = 405;
+  pass(stage);
+
+  stage = 'dynamic-stream-extra-segment-refusal';
+  const extraStream = await ctxA.request.get('/api/chat/' + privateId + '/stream/extra', { maxRedirects:0 });
+  check(extraStream.status() === 404, 'dynamic stream extra segment refuses');
+  witness.extraStreamSegmentStatus = 404;
+  pass(stage);
+
+  stage = 'dynamic-fixtures-unchanged-and-no-generation';
+  check(isDeepStrictEqual(await snapshot(), before), 'all seeded chat and message rows preserved');
+  check(generationPostAttempts === 0, 'no generation POST attempted');
+  witness.fixturesUnchanged = true;
+  witness.fixtureDigest = 'sha256:' + createHash('sha256').update(JSON.stringify(before)).digest('hex');
+  witness.generationPostAttempts = generationPostAttempts;
+  pass(stage);
+}
+
 async function main() {
   save();
   try {
@@ -340,8 +502,9 @@ async function main() {
     const deniedGuest = await duplicate.request.get(endpoint);
     check(deniedGuest.status() === 403 && !(await deniedGuest.text()).includes(content), 'guest private content refused');
     pass(stage);
+    if (config.dynamicRoutes) await dynamicControls(ctxA, ctxB, idA);
     stage = 'credential-and-cookie-evidence-barrier';
-    const secretValues = [password, emailA, emailB, emailOrigin];
+    const secretValues = [password, emailA, emailB, emailOrigin, ...dynamicEvidenceValues];
     for (const ctx of contexts) for (const cookie of await ctx.cookies()) {
       if (cookie.value.length > 16) secretValues.push(cookie.value);
     }

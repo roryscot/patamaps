@@ -42,8 +42,11 @@ def private_output_inventory(staged,work,label):
 def main():
  p=argparse.ArgumentParser(description=__doc__)
  for n in ["work","evidence","cli"]:p.add_argument("--"+n,type=Path,required=True)
- p.add_argument("--installed-inventory-digest");p.add_argument("--shared-cache-root",type=Path)
+ p.add_argument("--dynamic-routes",action="store_true");p.add_argument("--installed-inventory-digest");p.add_argument("--shared-cache-root",type=Path)
  p.add_argument("--retained-runtime",action="store_true");p.add_argument("--standalone-probe",action="store_true");p.add_argument("--build-cli",action="store_true");p.add_argument("--runtime",action="store_true");p.add_argument("--rewrites",action="store_true");a=p.parse_args()
+ if a.dynamic_routes:
+  from chatbot_dynamic_profile import validate_mode
+  validate_mode(runtime=a.runtime,rewrites=a.rewrites,standalone=a.standalone_probe,retained=a.retained_runtime,installed=bool(a.installed_inventory_digest))
  assert not a.rewrites or a.runtime, "Rewrite acceptance requires actual production runtime"
  assert not a.standalone_probe or (a.rewrites and a.runtime), "Standalone probe requires the existing real runtime and rewrite controls"
  assert not a.retained_runtime or a.standalone_probe, "Retained runtime requires the standalone source/build/refusal profile"
@@ -116,6 +119,9 @@ def main():
   assert engine==dict(schemaVersion="0.1.0",documentType="executor-description",**identities(ROOT));r["compiler"]=dict(sha256=sha(cli),engine=engine)
   owner,selected,omitted,inventory,audit=acquire_source(run,work,out,upstream=UPSTREAM,revision=REV,required_omissions=(".env.example",))
   assert not any(Path(e["path"]).name=="AGENTS.md" for e in selected),"Review new upstream instructions"
+  if a.dynamic_routes:
+   from chatbot_dynamic_profile import verify_sources
+   r["dynamicSourceBindings"]=verify_sources(owner)
   package=json.loads((owner/"package.json").read_bytes());assert package["packageManager"]=="pnpm@10.32.1" and package["dependencies"]["next"]=="16.2.10" and package["scripts"]["build"]=="tsx lib/db/migrate && next build"
   r["sourceFiles"]=len(selected);r["omittedPaths"]=[e["path"] for e in omitted]
   definition=work/"selection.json";write(definition,dict(profile="patamaps-project-context-selection-1",id="urn:qualification:chatbot:source",nonsecretInputs=True,paths=[e["path"] for e in selected],symlinks="internal-closed"))
@@ -187,6 +193,13 @@ def main():
   request["requestDigest"]=json.loads(run("manifest-request-digest",[cli,"json","digest"],data=json.dumps(request).encode()))
   observed=json.loads(run("native-compiled-next-observations",[cli,"discover-native"],data=json.dumps(request).encode(),cwd=observations));write(out/"native-observations.json",observed)
   assert observed["requestDigest"]==request["requestDigest"] and observed["shard"]["metadata"]["observation"]["runtimeEstablished"] is False
+  if a.dynamic_routes:
+   from chatbot_dynamic_profile import verify_compiled as verify_dynamic_compiled
+   bound_dynamic=verify_dynamic_compiled(observed)
+   bound_dynamic["nativeObservationDigest"]=sha(out/"native-observations.json")
+   bound_dynamic["ownerSourceBindings"]=r["dynamicSourceBindings"]
+   write(out/"dynamic-build-bindings.json",bound_dynamic)
+   r["dynamicRouteQualification"]=dict(buildBindingsVerified=True,nativeObservationDigest=bound_dynamic["nativeObservationDigest"],runtimeAccepted=False)
   if a.rewrites:
    from chatbot_rewrite_profile import verify_compiled
    baseline_observation=json.loads((ROOT/"docs/acceptance/project-adoption/g3-chatbot-source-20261023/native-observations.json").read_bytes())
@@ -245,7 +258,7 @@ def main():
     r["retainedSelectedExecution"]=dict(status=selected_runtime["status"],postExecutionSelectionVerified=True,selectionPointerUnchanged=True)
    else:
     from qualify_chatbot_runtime import qualify
-    runtime=qualify(staged,work,out,pnpm,env,capacity,rewrite_profile=rewrite_overlay,rewrite_reservation=rewrite_port_reservation,standalone_root=standalone_root)
+    runtime=qualify(staged,work,out,pnpm,env,capacity,rewrite_profile=rewrite_overlay,rewrite_reservation=rewrite_port_reservation,standalone_root=standalone_root,dynamic_routes=a.dynamic_routes)
    assert runtime["status"]=="passed" and runtime["ownedProcessGroupsStopped"]
    r.update(runtimeEstablished=True,authenticationAccepted=True,ownerRuntimeMigrationExecuted=True,runtimeBoundary="trusted owner; new isolated CI PostgreSQL and HTTPS loopback; no production secrets")
   if standalone_root is not None:
@@ -266,6 +279,9 @@ def main():
   assert {name:sha(path) for name,path in files.items()}==manifest_before,"Public compiled manifests changed during runtime"
   r["generatedOutputObservation"]=dict(before=output_summary_before,after=output_summary_after,changedFiles=len(changed),changedCategories=categories,publicManifestsUnchanged=True,detailedInventoryPublished=False,fullRuntimeBundleSelected=a.retained_runtime)
   audit("source-exclusion-final-audit");assert source_unchanged(owner) and source_unchanged(staged,staged_inventory)
+  if a.dynamic_routes:
+   assert runtime["dynamicRouteWitness"]["fixturesUnchanged"] and runtime["dynamicRouteWitness"]["generationPostAttempts"]==0
+   r["dynamicRouteQualification"].update(runtimeAccepted=True,sourceBytesUnchanged=True,privateEvidenceBarrierPassed=runtime["generatedOwnerSecretsAbsentFromEvidence"],ownedRuntimesStopped=runtime["ownedProcessGroupsStopped"] and runtime["ownedListenersStopped"])
   r.update(status="passed-pinned-chatbot-source-build-auth" if a.runtime else "passed-pinned-chatbot-source-build-observations",frameworkVersion=version,sourceContextDigest=capture["digest"],textSourceDigest=source["digest"],sourceTextFiles=len(texts),selectedSourceBytesAndModesUnchanged=True,sourceExclusionAudited=True,dependencyLifecycleScriptsExecuted=False,nativeCompiledObservation=True,ownerTestMode="CI_PLAYWRIGHT=1 selects the owner's model-test mode; no model behavior accepted")
  except BaseException as error:
   r.update(status="failed",error=str(error))

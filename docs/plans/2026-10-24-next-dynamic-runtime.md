@@ -1,6 +1,6 @@
 # Pinned Next dynamic page and data-boundary qualification
 
-Status: planned; no dynamic-chat-page runtime acceptance.
+Status: implemented and focused-preflight verified; runtime qualification pending.
 This closes a specific original G3/G6 gap beyond the existing source/manifests,
 auth/document and rewrite checks. Develop on Intel; run the existing bounded
 Linux Next lane. Native G4 measurements still await storage admission.
@@ -87,3 +87,12 @@ driver/engine/source/manifest bindings, all29 groups/four owner tests, private
 evidence barriers and actual shutdown independently before updating support.
 Performance, external models/BotID/upload providers, complete dependency closure,
 other dynamic shapes and fresh installed replay of this increment remain open.
+
+## Implementation checkpoint
+
+The opt-in qualifier, pinned Git-blob/compiled-module bindings and thirteen
+browser/API controls are implemented. All eleven new focused controls and four
+source-acquisition controls passed on Intel, together with Node syntax, Python
+AST, workflow YAML and diff checks. Fixtures remain in the recorded private
+preflight directory. Runtime and support claims await the single selected Linux
+lane and independent artifact review; no dynamic runtime acceptance is implied.

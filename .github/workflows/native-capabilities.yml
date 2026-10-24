@@ -19,6 +19,7 @@ on:
           - external-rust-image
           - binary-docker-context
           - next-server-actions
+          - next-dynamic-routes
           - next-rewrites
           - next-installed
           - next-installed-retained
@@ -502,3 +503,10 @@ jobs:
     uses: ./.github/workflows/external-rust-deployment.yml
     with:
       installed-owner-build: true
+
+  next-dynamic-routes:
+    if: github.event_name == 'workflow_dispatch' && inputs.qualification == 'next-dynamic-routes'
+    name: Real Next dynamic page and data boundaries
+    uses: ./.github/workflows/next-server-actions.yml
+    with:
+      dynamic-route-controls: true

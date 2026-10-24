@@ -38,8 +38,11 @@ def available_port():
         return listener.getsockname()[1]
 
 
-def qualify(owner, work, evidence, pnpm, environment, capacity, *, rewrite_profile=None, rewrite_reservation=None, standalone_root=None, retained=None):
+def qualify(owner, work, evidence, pnpm, environment, capacity, *, rewrite_profile=None, rewrite_reservation=None, standalone_root=None, retained=None, dynamic_routes=False):
     assert sys.platform == "linux" and os.environ.get("GITHUB_ACTIONS") == "true"
+    if dynamic_routes:
+        from chatbot_dynamic_profile import validate_mode
+        validate_mode(runtime=True,rewrites=bool(rewrite_profile),standalone=standalone_root is not None,retained=retained is not None)
     private = work / "trusted-owner-runtime"
     private.mkdir(mode=0o700)
     report_path = evidence / "runtime.json"
@@ -212,7 +215,7 @@ def qualify(owner, work, evidence, pnpm, environment, capacity, *, rewrite_profi
             time.sleep(.4)
         report["controls"].append(dict(name=stage, passed=True))
         config = private / "browser.json"
-        config.write_text(json.dumps(dict(owner=str(test_owner), private=str(private), origin=origin, nextPort=next_port, tlsPort=tls_port, receipt=str(evidence / "browser-auth.json"),rewriteControls=bool(rewrite_profile))))
+        config.write_text(json.dumps(dict(owner=str(test_owner), private=str(private), origin=origin, nextPort=next_port, tlsPort=tls_port, receipt=str(evidence / "browser-auth.json"),rewriteControls=bool(rewrite_profile),dynamicRoutes=dynamic_routes)))
         config.chmod(0o600)
         stage = "production-server-actions-and-permissions"
         execute(stage, ["node", ROOT / "scripts/qualify_chatbot_auth.mjs", config], trusted, timeout=600, cwd=test_owner)
@@ -223,6 +226,11 @@ def qualify(owner, work, evidence, pnpm, environment, capacity, *, rewrite_profi
             from chatbot_rewrite_profile import REWRITE_CONTROLS
             expected_controls = EXPECTED_CONTROLS | REWRITE_CONTROLS
             report["rewriteProfileDigest"] = rewrite_profile["profileDigest"]
+        if dynamic_routes:
+            from chatbot_dynamic_profile import DYNAMIC_CONTROLS
+            expected_controls = expected_controls | DYNAMIC_CONTROLS
+            report["dynamicRouteWitness"] = browser["dynamicRouteWitness"]
+            assert report["dynamicRouteWitness"]["fixturesUnchanged"] and report["dynamicRouteWitness"]["generationPostAttempts"] == 0
         assert browser["status"] == "passed" and len(controls) == len(expected_controls)
         assert {c["name"] for c in controls} == expected_controls and all(c["passed"] is True for c in controls)
         assert browser["upstreamPageTests"] == 4 and browser["ownedBrowserStopped"] and browser["ownedHttpsProxyStopped"]
@@ -244,7 +252,7 @@ def qualify(owner, work, evidence, pnpm, environment, capacity, *, rewrite_profi
         report["generatedOwnerSecretsAbsentFromEvidence"] = True
         report["driverDigests"] = {
             name: "sha256:" + hashlib.sha256((ROOT / "scripts" / name).read_bytes()).hexdigest()
-            for name in ["qualify_chatbot_runtime.py", "qualify_chatbot_auth.mjs", *(["chatbot_rewrite_profile.py", "qualify_chatbot_next.py"] if rewrite_profile else []), *(["qualify_next_standalone.py"] if standalone_root is not None else []), *(["next_retained_runtime.py", "deployment_miniserve_image.py", "project_watch.py"] if retained is not None else [])]
+            for name in ["qualify_chatbot_runtime.py", "qualify_chatbot_auth.mjs", *(["chatbot_dynamic_profile.py","qualify_chatbot_next.py"] if dynamic_routes else []), *(["chatbot_rewrite_profile.py", "qualify_chatbot_next.py"] if rewrite_profile else []), *(["qualify_next_standalone.py"] if standalone_root is not None else []), *(["next_retained_runtime.py", "deployment_miniserve_image.py", "project_watch.py"] if retained is not None else [])]
         }
         report.update(status="passed", browserControls=browser["controls"], upstreamPageTests=browser["upstreamPageTests"], runtimeEstablished=True, authenticationAccepted=True, ownerMigrationExecuted=True)
     except BaseException:

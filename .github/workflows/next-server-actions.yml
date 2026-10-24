@@ -2,6 +2,9 @@ name: Existing Next Server Action candidate
 on:
   workflow_call:
     inputs:
+      dynamic-route-controls:
+        type: boolean
+        default: false
       rewrite-controls:
         type: boolean
         default: false
@@ -18,7 +21,7 @@ permissions:
   contents: read
 jobs:
   chatbot-source:
-    name: ${{ inputs.rewrite-controls && 'Pinned Chatbot internal rewrites, auth and permissions' || 'Pinned Chatbot production Server Actions and permissions' }}
+    name: ${{ inputs.dynamic-route-controls && 'Pinned Chatbot dynamic page and data boundaries' || inputs.rewrite-controls && 'Pinned Chatbot internal rewrites, auth and permissions' || 'Pinned Chatbot production Server Actions and permissions' }}
     runs-on: ubuntu-24.04
     timeout-minutes: 45
     steps:
@@ -48,6 +51,11 @@ jobs:
         run: |
           mkdir -p "$RUNNER_TEMP/next-source-controls"
           PATAMAPS_TEST_RETAIN_ROOT="$RUNNER_TEMP/next-source-controls" python3 -B -m unittest discover -s scripts -p test_next_source_acquisition.py
+      - name: Check pinned dynamic source and compiled bindings
+        if: inputs.dynamic-route-controls
+        run: |
+          mkdir -p "$RUNNER_TEMP/dynamic-route-controls"
+          PATAMAPS_TEST_RETAIN_ROOT="$RUNNER_TEMP/dynamic-route-controls" python3 -B -m unittest discover -s scripts -p test_chatbot_dynamic_profile.py
       - name: Check browser driver syntax
         run: node --check scripts/qualify_chatbot_auth.mjs
       - name: Check explicit rewrite overlay boundaries
@@ -78,6 +86,7 @@ jobs:
         run: >-
           python3 -B scripts/qualify_chatbot_next.py
           --build-cli --runtime --cli target/debug/patamaps
+          ${{ inputs.dynamic-route-controls && '--dynamic-routes' || '' }}
           ${{ inputs.rewrite-controls && '--rewrites' || '' }}
           ${{ inputs.standalone-controls && '--standalone-probe' || '' }}
           ${{ inputs.retained-runtime-controls && '--retained-runtime' || '' }}
@@ -116,7 +125,7 @@ jobs:
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         if: always()
         with:
-          name: ${{ inputs.installed-controls && inputs.retained-runtime-controls && 'installed-retained-next' || inputs.retained-runtime-controls && 'retained-next-runtime' || inputs.standalone-controls && 'standalone-next-probe' || inputs.installed-controls && 'installed-next' || 'chatbot-source' }}-${{ github.sha }}
+          name: ${{ inputs.dynamic-route-controls && 'chatbot-dynamic' || inputs.installed-controls && inputs.retained-runtime-controls && 'installed-retained-next' || inputs.retained-runtime-controls && 'retained-next-runtime' || inputs.standalone-controls && 'standalone-next-probe' || inputs.installed-controls && 'installed-next' || 'chatbot-source' }}-${{ github.sha }}
           path: ${{ inputs.installed-controls && 'ci-evidence/installed-next/' || 'ci-evidence/chatbot-source/' }}
           if-no-files-found: error
           retention-days: 14
