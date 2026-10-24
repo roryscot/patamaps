@@ -113,7 +113,8 @@ def qualify(owner, work, evidence, pnpm, environment, capacity, *, rewrite_profi
         password_file.chmod(0o600)
         stage = "isolated-database-init"
         execute(stage, [bindir / "initdb", "-D", private / "database", "-U", "qualification", "--pwfile", password_file, "--auth-host=scram-sha-256", "--auth-local=trust", "--no-locale", "--encoding=UTF8"], env)
-        database = launch("isolated-database", [bindir / "postgres", "-D", private / "database", "-h", "127.0.0.1", "-p", str(database_port), "-k", private, "-c", "shared_buffers=16MB", "-c", "max_connections=16", "-c", "log_statement=none", "-c", "log_min_error_statement=panic"], env)
+        stage = "isolated-database-tcp-readiness"
+        database = launch("isolated-database", [bindir / "postgres", "-D", private / "database", "-h", "127.0.0.1", "-p", str(database_port), "-k", "", "-c", "shared_buffers=16MB", "-c", "max_connections=16", "-c", "log_statement=none", "-c", "log_min_error_statement=panic"], env)
         started = time.monotonic()
         while True:
             monitor()
@@ -124,6 +125,19 @@ def qualify(owner, work, evidence, pnpm, environment, capacity, *, rewrite_profi
             time.sleep(.4)
         origin = "https://127.0.0.1:" + str(tls_port)
         trusted = dict(env, AUTH_SECRET=secrets.token_urlsafe(48), POSTGRES_URL=f"postgres://qualification:{password}@127.0.0.1:{database_port}/postgres", AUTH_URL=origin, AUTH_TRUST_HOST="true", NODE_ENV="production")
+        stage = "isolated-database-tcp-only-verification"
+        transport_check = (
+            "const assert = require('node:assert/strict');"
+            "const sql = require('postgres')(process.env.POSTGRES_URL, {max:1,connect_timeout:5});"
+            "(async () => {try {"
+            "const rows = await sql.unsafe(\"SELECT current_setting('unix_socket_directories') AS sockets, "
+            "current_setting('listen_addresses') AS listeners, inet_server_addr()::text AS address\");"
+            "assert.equal(rows.length,1);assert.equal(rows[0].sockets,'');"
+            "assert.equal(rows[0].listeners,'127.0.0.1');assert.equal(rows[0].address,'127.0.0.1');"
+            "} finally {await sql.end({timeout:5});}})().catch(() => {process.exitCode=1;});"
+        )
+        execute(stage, ["node", "-e", transport_check], trusted, timeout=30)
+        report.update(databaseTransportVerified="authenticated IPv4 loopback TCP", databaseUnixSocketsDisabled=True)
         stage = "owner-real-migrations"
         execute(stage, [pnpm, "exec", "tsx", "lib/db/migrate.ts"], trusted)
         stage = "owned-loopback-certificate"

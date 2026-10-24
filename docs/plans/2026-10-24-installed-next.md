@@ -1,6 +1,6 @@
 # Fresh installed Next workflow
 
-Status: plan before implementation. Baseline79bf9c6.
+Status: implemented; installed qualification pending. Baseline79bf9c6.
 Continue the original G5/G6 adoption requirement. The accepted Rust-only
 installed replay and checkout-based Next case do not prove this requirement.
 
@@ -79,3 +79,28 @@ use force/update-checksums or weaken owner type/runtime checks.
 Commit and push plan, verified implementation and exact accepted/failed evidence
 with the configured Rory identity. Retain compact receipts; do not upload raw
 private app outputs or duplicate full source/dependency trees.
+
+
+## Retained qualification failures and narrow database repair
+
+Attempt1 (40058820129) passed fresh source installation and the real owner build,
+then the diagnostic inventory refused a generated Next link. Link observations
+now record private metadata without following targets; this does not admit
+symlinks into retained Patamaps output selection.
+
+Attempt2 (40059467484) passed installation/build/native checks and the final
+installed-source guard, then failed database readiness. The configured
+filesystem socket pathname would be111bytes. This is a source-derived
+explanation, not a claim to have inspected private PostgreSQL stderr.
+[Linux pathname sockets](https://man7.org/linux/man-pages/man7/unix.7.html)
+have108bytes including the required terminator. Existing clients already use
+authenticated IPv4 loopback TCP. Disable unused Unix sockets with an empty
+[PostgreSQL unix_socket_directories](https://www.postgresql.org/docs/16/runtime-config-connection.html)
+setting, retaining the existing loopback listener and SCRAM authentication.
+
+Before migrations, the existing application PostgreSQL client must authenticate
+over TCP and query the running server: empty unix_socket_directories,
+listen_addresses127.0.0.1 and inet_server_addr127.0.0.1 are required.
+Only a fixed verification result enters evidence. Both installed owner runs
+must pass this check plus every existing native/browser/cleanup requirement.
+No full Next bundle or performance claim changes.

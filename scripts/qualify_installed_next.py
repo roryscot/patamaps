@@ -84,6 +84,7 @@ def main():
    assert result["compiler"]["engine"]==engine and result["compiler"]["sha256"]==sha(compiler)
    assert result["generatedOutputObservation"]["publicManifestsUnchanged"] and result["rewritePortReservationClosed"]
    assert runtime["ownedProcessGroupsStopped"] and runtime["ownedListenersStopped"] and runtime["generatedOwnerSecretsAbsentFromEvidence"]
+   assert runtime["databaseTransportVerified"]=="authenticated IPv4 loopback TCP" and runtime["databaseUnixSocketsDisabled"] is True
    assert len(browser["controls"])==28 and all(row["passed"] for row in browser["controls"]) and browser["upstreamPageTests"]==4
    record["cases"][label]=dict(status=result["status"],compilerDigest=sha(compiler),engine=engine,sourceInventoryDigest=binding,sourceFiles=source_identity["sourceFiles"],upstreamCommit=result["upstreamCommit"],runtimeGroupsPassed=28,upstreamPageTestsPassed=4,generatedOutputObservation=result["generatedOutputObservation"],sourceWithoutGit=True,checkoutCompilerAndDriverUnavailable=True,allOwnedRuntimesStopped=True)
    assert verify_installed_source(source,binding)==source_identity
