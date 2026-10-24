@@ -168,6 +168,57 @@ async function upstreamPages() {
   } finally { clearTimeout(deadline); closeSync(stdout); closeSync(stderr); }
 }
 
+
+async function rewriteControls() {
+  const ctx = await context();
+  const page = await pageFor(ctx, '/login');
+  const direct = await session(ctx);
+  check(direct.user?.type === 'guest' && typeof direct.user.id === 'string', 'rewrite probes require an actual guest session');
+  await page.setExtraHTTPHeaders({ 'x-patamaps-rewrite': 'enabled' });
+  for (const [suffix, heading, name] of [
+    ['login', 'Welcome back', 'rewrite-login-url-preserved'],
+    ['register', 'Create account', 'rewrite-register-url-preserved'],
+  ]) {
+    stage = name;
+    const path = '/qualified/auth/' + suffix;
+    const response = await page.goto(path, { waitUntil: 'domcontentloaded' });
+    check(response?.status() === 200 && response.request().redirectedFrom() === null, 'rewrite must serve without redirect');
+    check(new URL(page.url()).origin === config.origin && new URL(page.url()).pathname === path, 'rewrite browser URL stays at original alias');
+    await page.getByRole('heading', { name: heading, exact: true }).waitFor({ state: 'visible' });
+    pass(stage);
+  }
+  for (const [path, headers, name] of [
+    ['/qualified/auth/login', {}, 'rewrite-missing-header-refused'],
+    ['/qualified/auth/login', { 'x-patamaps-rewrite': 'wrong' }, 'rewrite-wrong-header-refused'],
+    ['/qualified/auth/login?blocked=1', { 'x-patamaps-rewrite': 'enabled' }, 'rewrite-blocked-query-refused'],
+    ['/wrong/qualified/auth/login', { 'x-patamaps-rewrite': 'enabled' }, 'rewrite-prefix-refused'],
+    ['/qualified/auth/login/extra', { 'x-patamaps-rewrite': 'enabled' }, 'rewrite-extra-segment-refused'],
+    ['/qualified/auth/admin', { 'x-patamaps-rewrite': 'enabled' }, 'rewrite-page-parameter-refused'],
+  ]) {
+    stage = name;
+    const response = await ctx.request.get(path, { headers, maxRedirects: 0 });
+    check(response.status() === 404, 'unmatched rewrite must return HTTP404 without redirect following');
+    pass(stage);
+  }
+  stage = 'rewrite-session-query-positive';
+  const response = await ctx.request.get('/qualified/session?view=session', { maxRedirects: 0 });
+  check(response.status() === 200, 'query-conditioned session rewrite response');
+  const aliased = await response.json();
+  check(isDeepStrictEqual(aliased.user, direct.user), 'session rewrite returns the same actual guest identity');
+  pass(stage);
+  for (const [path, headers, name] of [
+    ['/qualified/session', {}, 'rewrite-session-query-missing-refused'],
+    ['/qualified/session?view=wrong', {}, 'rewrite-session-query-wrong-refused'],
+    ['/qualified/session?view=session', { 'x-patamaps-block': '1' }, 'rewrite-session-block-header-refused'],
+  ]) {
+    stage = name;
+    const response = await ctx.request.get(path, { headers, maxRedirects: 0 });
+    check(response.status() === 404, 'session rewrite condition must refuse HTTP404 without redirect following');
+    pass(stage);
+  }
+  await page.close();
+}
+
 async function main() {
   save();
   try {
@@ -176,6 +227,7 @@ async function main() {
     await upstreamPages();
     browser = await chromium.launch({ headless: true });
     report.browserVersion = browser.version();
+    if (config.rewriteControls) await rewriteControls();
     const suffix = randomBytes(10).toString('hex');
     const emailA = `a-${suffix}@qualification.invalid`;
     const emailB = `b-${suffix}@qualification.invalid`;

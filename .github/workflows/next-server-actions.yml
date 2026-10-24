@@ -1,11 +1,15 @@
 name: Existing Next Server Action candidate
 on:
   workflow_call:
+    inputs:
+      rewrite-controls:
+        type: boolean
+        default: false
 permissions:
   contents: read
 jobs:
   chatbot-source:
-    name: Pinned Chatbot production Server Actions and permissions
+    name: ${{ inputs.rewrite-controls && 'Pinned Chatbot internal rewrites, auth and permissions' || 'Pinned Chatbot production Server Actions and permissions' }}
     runs-on: ubuntu-24.04
     timeout-minutes: 45
     steps:
@@ -31,10 +35,18 @@ jobs:
         run: |
           mkdir -p "$RUNNER_TEMP/next-source-controls"
           PATAMAPS_TEST_RETAIN_ROOT="$RUNNER_TEMP/next-source-controls" python3 -B -m unittest discover -s scripts -p test_next_source_acquisition.py
+      - name: Check browser driver syntax
+        run: node --check scripts/qualify_chatbot_auth.mjs
+      - name: Check explicit rewrite overlay boundaries
+        if: inputs.rewrite-controls
+        run: |
+          mkdir -p "$RUNNER_TEMP/rewrite-overlay-controls"
+          PATAMAPS_TEST_RETAIN_ROOT="$RUNNER_TEMP/rewrite-overlay-controls" python3 -B -m unittest discover -s scripts -p test_chatbot_rewrite_profile.py
       - name: Capture frozen source, build, and qualify real production auth
         run: >-
           python3 -B scripts/qualify_chatbot_next.py
           --build-cli --runtime --cli target/debug/patamaps
+          ${{ inputs.rewrite-controls && '--rewrites' || '' }}
           --work "$RUNNER_TEMP/patamaps-chatbot-${{ github.run_id }}-${{ github.run_attempt }}"
           --evidence ci-evidence/chatbot-source
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4

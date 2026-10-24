@@ -56,15 +56,21 @@ kernel-verified limits. Its executable matches this registry producer exactly.
 All owned containers stopped. The earlier 57-test receipts remain historical;
 the current suite has 59 tests and the expected engine is unchanged.
 
-Next selected work: the original G3 actual rewrite/framework boundary. Reuse the
-pinned Chatbot source/build/native-observation/runtime path; first inspect its
-exact configuration and native projection contract, then freeze actual HTTP
-positive/refusal expectations. An internal rewrite added for qualification must
-be an explicit retained configuration overlay with separate original/derived
-digests, not described as unchanged upstream behavior. Keep original source,
-public registry dependencies and external BotID behavior accurately identified.
-Verify compiled rule binding plus real origin/path behavior; metadata alone is
-not a runtime pass. Preserve the already accepted auth/document controls.
+The original G3 rewrite/framework increment now follows a [frozen plan](2026-10-24-next-rewrite-runtime.md)
+at \`93432ce\`. The opt-in existing Chatbot lane applies a declared staged-only
+configuration overlay for two internal aliases; original/derived context and
+configuration digests remain separate. Twelve actual browser/HTTP cases must
+verify path/parameter/header/query conditions and preserved browser URLs. Five
+native checks cover exact compiled rule preservation, original BotID/redirect/
+header records, missing projection, stale digest after request rehash, and
+captured-config mutation refusal before marker effects. All original sixteen
+auth/document groups and four upstream page tests remain mandatory.
+[Focused preflight](../acceptance/project-adoption/g3-next-rewrite-runtime-20261024/preflight.json)
+passed six controlled overlay boundaries, four source-acquisition controls,
+Python AST, workflow YAML parsing and diff checks. Actual pinned-source overlay,
+Next production build, compiled observations and runtime remain unaccepted until
+the focused Linux run completes. The default unchanged-source auth path remains
+available; no external BotID behavior or complete dependency closure is claimed.
 
 The original G0–G6 scope remains active: remaining Next/framework and deployment
 controls, installed Next workflow, applicable dependency/test-context treatment,

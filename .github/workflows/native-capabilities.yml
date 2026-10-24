@@ -19,6 +19,7 @@ on:
           - external-rust-image
           - binary-docker-context
           - next-server-actions
+          - next-rewrites
           - cargo-registry-preflight
           - cargo-registry-container-preflight
           - cargo-registry-context
@@ -429,3 +430,10 @@ jobs:
     with:
       registry-context: true
       registry-reuse-compiler: true
+
+  next-rewrites:
+    if: github.event_name == 'workflow_dispatch' && inputs.qualification == 'next-rewrites'
+    name: Real Next internal rewrite qualification
+    uses: ./.github/workflows/next-server-actions.yml
+    with:
+      rewrite-controls: true

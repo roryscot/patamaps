@@ -38,14 +38,15 @@ def available_port():
         return listener.getsockname()[1]
 
 
-def qualify(owner, work, evidence, pnpm, environment, capacity):
+def qualify(owner, work, evidence, pnpm, environment, capacity, *, rewrite_profile=None):
     assert sys.platform == "linux" and os.environ.get("GITHUB_ACTIONS") == "true"
     private = work / "trusted-owner-runtime"
     private.mkdir(mode=0o700)
     report_path = evidence / "runtime.json"
     report = dict(
         status="preparing", controls=[], credentialsCaptured=False,
-        rawRuntimeLogsUploaded=False, sourceMutationRequested=False,
+        rawRuntimeLogsUploaded=False, sourceMutationRequested=bool(rewrite_profile),
+        qualificationConfigurationOverlay=bool(rewrite_profile),
         testBoundary="new CI-only PostgreSQL; trusted-owner secret environment; HTTPS loopback",
         productionActivation=False, externalModelAccepted=False,
     )
@@ -134,14 +135,19 @@ def qualify(owner, work, evidence, pnpm, environment, capacity):
             time.sleep(.4)
         report["controls"].append(dict(name=stage, passed=True))
         config = private / "browser.json"
-        config.write_text(json.dumps(dict(owner=str(owner), private=str(private), origin=origin, nextPort=next_port, tlsPort=tls_port, receipt=str(evidence / "browser-auth.json"))))
+        config.write_text(json.dumps(dict(owner=str(owner), private=str(private), origin=origin, nextPort=next_port, tlsPort=tls_port, receipt=str(evidence / "browser-auth.json"),rewriteControls=bool(rewrite_profile))))
         config.chmod(0o600)
         stage = "production-server-actions-and-permissions"
         execute(stage, ["node", ROOT / "scripts/qualify_chatbot_auth.mjs", config], trusted, timeout=600)
         browser = json.loads((evidence / "browser-auth.json").read_text())
         controls = browser["controls"]
-        assert browser["status"] == "passed" and len(controls) == len(EXPECTED_CONTROLS)
-        assert {c["name"] for c in controls} == EXPECTED_CONTROLS and all(c["passed"] is True for c in controls)
+        expected_controls = EXPECTED_CONTROLS
+        if rewrite_profile is not None:
+            from chatbot_rewrite_profile import REWRITE_CONTROLS
+            expected_controls = EXPECTED_CONTROLS | REWRITE_CONTROLS
+            report["rewriteProfileDigest"] = rewrite_profile["profileDigest"]
+        assert browser["status"] == "passed" and len(controls) == len(expected_controls)
+        assert {c["name"] for c in controls} == expected_controls and all(c["passed"] is True for c in controls)
         assert browser["upstreamPageTests"] == 4 and browser["ownedBrowserStopped"] and browser["ownedHttpsProxyStopped"]
         forbidden = [password.encode(), trusted["AUTH_SECRET"].encode(), trusted["POSTGRES_URL"].encode(), (private / "key.pem").read_bytes()]
         for published in evidence.rglob("*"):
@@ -158,7 +164,7 @@ def qualify(owner, work, evidence, pnpm, environment, capacity):
         report["generatedOwnerSecretsAbsentFromEvidence"] = True
         report["driverDigests"] = {
             name: "sha256:" + hashlib.sha256((ROOT / "scripts" / name).read_bytes()).hexdigest()
-            for name in ["qualify_chatbot_runtime.py", "qualify_chatbot_auth.mjs"]
+            for name in ["qualify_chatbot_runtime.py", "qualify_chatbot_auth.mjs", *(["chatbot_rewrite_profile.py", "qualify_chatbot_next.py"] if rewrite_profile else [])]
         }
         report.update(status="passed", browserControls=browser["controls"], upstreamPageTests=browser["upstreamPageTests"], runtimeEstablished=True, authenticationAccepted=True, ownerMigrationExecuted=True)
     except BaseException:
