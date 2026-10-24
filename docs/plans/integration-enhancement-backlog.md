@@ -23,6 +23,8 @@ a passed fixture or metadata observation is not general support.
 
 ## Current selected work
 
+The next original G4 gate follows the [frozen actual-project measurement plan](2026-10-24-project-measurements.md): native Axum initial/warm/edit phases with explicit RSS units, retained disk and a separate exclusive benchmark reservation. No new measurement is accepted yet.
+
 The complete pinned Next I2 installed workflow now [passes independent review](../acceptance/project-adoption/g5-installed-retained-next-20261024/accepted-40071420581/independent-verification.json)
 at80ae616/engine2fc8a201. Both fresh source/native installations passed the full
 retained runtime with enforced cache, source/tool absence, mutation refusals and
