@@ -31,6 +31,7 @@ ln -s /registry/index /work/cargo-home/registry/index
  test "$(cat /proc/sys/net/ipv6/conf/lo/disable_ipv6)" = 0
  cmp /etc/hosts /source/network-hosts.conf
  cmp /etc/nsswitch.conf /source/network-nsswitch.conf
+ cmp /etc/host.conf /source/network-host.conf
  /usr/bin/python3 -B - <<'IPV6'
 import socket
 addresses=socket.getaddrinfo('localhost',0)

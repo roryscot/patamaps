@@ -124,6 +124,7 @@ def main():
         mounts = [(source, '/source'), (source/'.cargo-home/registry', '/registry'),
                   (source/'network-nsswitch.conf','/etc/nsswitch.conf'),
                   (source/'network-hosts.conf','/etc/hosts'),
+                  (source/'network-host.conf','/etc/host.conf'),
                   (tests, '/test-source'), (toolchain, str(toolchain))]
         for name in ['/usr', '/bin', '/lib', '/lib64', '/etc/alternatives']:
             if Path(name).exists():
@@ -167,7 +168,7 @@ def main():
         assert actual_mounts == {(str(a.resolve()), b) for a, b in mounts} and all(not m['RW'] for m in info['Mounts'] if m['Type']=='bind')
         report.update(containerId=container, imageId=image['Id'], readOnlyMounts=[dict(source=str(a), destination=b) for a,b in mounts],
                       hostConfigurationVerifiedBeforeStart=True, hostUser=user, explicitLocalhostAddresses=['127.0.0.1','::1'],
-                      networkConfigurationDigests={name:sha(source/name) for name in ['network-hosts.conf','network-nsswitch.conf']})
+                      networkConfigurationDigests={name:sha(source/name) for name in ['network-hosts.conf','network-nsswitch.conf','network-host.conf']})
         with (logs/'guardian.stdout').open('xb') as stdout, (logs/'guardian.stderr').open('xb') as stderr:
             child = subprocess.Popen([sys.executable, '-B', str(source/'project_watch.py'), '__guard-container', guard_record],
                                      stdout=stdout, stderr=stderr, start_new_session=True)

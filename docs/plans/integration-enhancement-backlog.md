@@ -1114,3 +1114,17 @@ The owner capture binds both files, Docker mount inspection requires read-only
 identity, and in-container cmp checks their exact bytes before name/TCP probes.
 No inherited host aliases or private resolver configuration. Leave kernel values,
 network none, both external-route refusals, quotas and all owner tests unchanged.
+
+
+Ninth attempt40046851034 at3be2369 proved both explicit hosts/resolver files
+matched their captured bytes, yet getaddrinfo still returned only127.0.0.1.
+It stopped before Cargo, with both cleanup proofs. [Verified record](../acceptance/project-adoption/g3-cargo-registry-context-20261023/registry-attempt-9/native-attempt-records.json).
+Primary glibc source provides a specific explanation to test:
+[nss_files_gethostbyname4_r](https://raw.githubusercontent.com/bminor/glibc/master/nss/nss_files/files-hosts.c)
+stops after the first matching hosts record unless HCONF_FLAG_MULTI is set.
+The minimal image lacks the host's normal multi-address configuration. Capture
+and read-only bind /etc/host.conf with multi on, alongside the two already bound
+nonsecret resolver inputs; compare its bytes before the same Python/Rust probes.
+No kernel changes, extra interface, external route, host credentials, capacity
+increase or test change. A subsequent pass is required; this source-based cause
+is not a retroactive acceptance of any failed attempt.
