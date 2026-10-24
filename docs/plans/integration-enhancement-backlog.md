@@ -23,6 +23,17 @@ a passed fixture or metadata observation is not general support.
 
 ## Current selected work
 
+Current live producer: [40045090305](https://github.com/roryscot/patamaps/actions/runs/40045090305)
+at 509720654d96764b15cfce27d78cc5b2f2c11775. This supersedes earlier live-run
+checkpoints below. The source has the safe Cargo failure summaries; verify its
+terminal result/artifact before any repair or accepting the registry increment.
+Do not launch a duplicate. Installed source/native registry replay is prepared
+at 74b707e with fourteen archive controls, but its producer pin is unchanged and
+no installed registry execution has run. Wait on this producer, inspect the safe
+failure facts if it fails, or independently verify all325 tests, eight HTTP checks,
+selection/registry refusals and offline replay if it passes. All broader G0–G6
+requirements remain active.
+
 The Cargo managed-container prerequisite is now independently verified in
 [run 40019067506](https://github.com/roryscot/patamaps/actions/runs/40019067506)
 at 0e35284. All seven named groups passed, including kernel limits, loopback /

@@ -2,11 +2,11 @@
 
 Status: implemented qualification path; real build/test/runtime acceptance remains
 pending. The managed-backend prerequisite, strict inventory controls and native
-capture of all 456 packages passed. Three failed executions are preserved in the
-[integration backlog](../plans/integration-enhancement-backlog.md). The repaired
-[run40039233532](https://github.com/roryscot/patamaps/actions/runs/40039233532)
-is executing at source d529dff. No complete dependency closure or general Rust
-support is asserted by this guide.
+capture of all 456 packages passed. Previous failed executions are preserved in
+the [integration backlog](../plans/integration-enhancement-backlog.md). The current
+[run40045090305](https://github.com/roryscot/patamaps/actions/runs/40045090305)
+executes source 5097206 with payload-free Cargo diagnostics. No complete dependency
+closure or general Rust support is asserted by this guide.
 
 Patamaps already accepts opaque inputs through ProjectContext and composes them
 with source, workspace admission, commands and artifact selection in ProjectBuild.
