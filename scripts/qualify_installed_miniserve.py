@@ -10,6 +10,7 @@ PRODUCER = "36e6525fcc3f7fdb513efa8eb1fff329ffe67034"
 RUN = 39884102308
 ARTIFACT = 12472158570
 ZIP_SHA = "8fe5985620e6f584024499d5936ce2528d256a6145a35c94dd2f0aa866755d39"
+ZIP_BYTES = 20152061
 STATE_SHA = "ab1b6163d4c8cb8448c20870398866ab97c0087f216f6b6307440dde097505b3"
 CLI_SHA = "5e0b1d10bcb0f5f82090df17a0fba8d838c8f28016a949476289de6f3f7a40b6"
 POINTER_SHA = "843b67c6e27eb66938318aaee95a7993f43db0b3268bf020ef480e73c89171ed"
@@ -95,7 +96,7 @@ def main():
                 while child.poll() is None:
                     capacity()
                     assert time.monotonic() - started < timeout, (label, "timeout")
-                    assert stdout.tell() < 67108864 and stderr.tell() < 67108864, (label, "log limit")
+                    assert stdout.tell() < (max(67108864, ZIP_BYTES + 1) if binary and label == "download-frozen-artifact" else 67108864) and stderr.tell() < 67108864, (label, "log limit")
                     time.sleep(.5)
                 code = child.returncode
             finally:
@@ -121,7 +122,7 @@ def main():
         metadata = json.loads(run("artifact-metadata", ["gh", "api", f"repos/{REPOSITORY}/actions/artifacts/{ARTIFACT}"], extra={"GH_TOKEN": token}))
         producer_run = json.loads(run("producer-run", ["gh", "api", f"repos/{REPOSITORY}/actions/runs/{RUN}"], extra={"GH_TOKEN": token}))
         assert producer_run["conclusion"] == "success" and producer_run["head_sha"] == PRODUCER
-        assert metadata["workflow_run"]["id"] == RUN and not metadata["expired"] and metadata["size_in_bytes"] == 20152061
+        assert metadata["workflow_run"]["id"] == RUN and not metadata["expired"] and metadata["size_in_bytes"] == ZIP_BYTES
         assert metadata.get("digest") == "sha256:" + ZIP_SHA
         archive = work / "frozen-artifact.zip"
         run("download-frozen-artifact", ["gh", "api", f"repos/{REPOSITORY}/actions/artifacts/{ARTIFACT}/zip"], extra={"GH_TOKEN": token}, binary=archive, timeout=180)
@@ -135,6 +136,17 @@ def main():
                 destination.write_bytes(zipped.read(name))
         frozen = json.loads((producer / "receipt.json").read_bytes())
         assert frozen["sourceRevision"] == PRODUCER and frozen["restoredSelectedRuntimePassed"]
+        registry_state = None
+        registry_producer = frozen.get("cargoRegistryContext")
+        if registry_producer is not None:
+            assert registry_producer["status"] == "passed-native-registry-context-execution"
+            with zipfile.ZipFile(archive) as zipped:
+                entry = zipped.getinfo("artifacts/registry-selected-state.tar.gz")
+                assert entry.file_size <= 320 * 1024**2
+                registry_archive = producer / "registry-selected-state.tar.gz"
+                registry_archive.write_bytes(zipped.read(entry))
+            assert "sha256:" + sha(registry_archive) == registry_producer["retainedStateArchive"]["digest"]
+            assert registry_archive.stat().st_size == registry_producer["retainedStateArchive"]["bytes"]
         assert sha(producer / "patamaps") == CLI_SHA and sha(producer / "selected-state.tar.gz") == STATE_SHA
         (producer / "patamaps").chmod(0o755)
         engine = json.loads(run("frozen-engine", [producer / "patamaps", "engine"]))
@@ -142,6 +154,9 @@ def main():
         consumer = work / "consumer"
         consumer.mkdir()
         state = install_selected_state(producer / "selected-state.tar.gz", consumer / "state-installation")
+        if registry_producer is not None:
+            registry_state = install_selected_state(registry_archive, consumer / "registry-state-installation", profile="registry")
+            assert "sha256:" + sha(registry_state / "selected.json") == registry_producer["selectionDigest"]
         pointer = state / "selected.json"
         assert sha(pointer) == POINTER_SHA
         selection = json.loads(pointer.read_bytes())
@@ -186,6 +201,45 @@ def main():
             controls = (runtime / "passed-controls.txt").read_text().splitlines()
             assert controls == frozen["runtimeControls"] and len(controls) == 8
             record["installations"][label] = dict(compilerDigest="sha256:" + sha(compiler), engine=result["engine"], sourceFiles=result["sourceFiles"], runtimeControls=controls, postExecutionSelectionVerified=result["execution"]["postExecutionSelectionVerified"])
+        if registry_state is not None:
+            registry_pointer = registry_state / "selected.json"
+            registry_selection = json.loads(registry_pointer.read_bytes())
+            registry_candidate = registry_state / registry_selection["attempt"] / "candidate"
+            registry_before = {p.relative_to(registry_candidate).as_posix(): sha(p) for p in registry_candidate.rglob("*") if p.is_file()}
+            registry_runtime = registry_candidate / "bundle/miniserve"
+            assert sha(registry_runtime) == frozen["applicationBinary"]["sha256"]
+            registry_command = work / "registry-version.command.json"
+            write(registry_command, dict(profile="patamaps-project-command-1",workingDirectory=".",environmentReferences={},
+                invocation=dict(executable=str(registry_runtime),arguments=["--version"],codeInputs=[],
+                    bounds=dict(maximumElapsedMs=10000,maximumStdoutBytes=65536,maximumStderrBytes=65536))))
+            installed_registry = {}
+            for label, compiler in [("native",native_cli),("source",source_cli)]:
+                verified = json.loads(run(label+"-registry-state",[compiler,"project-build-verify",registry_state]))
+                assert verified["status"] == "verified-selected-build-bindings"
+                executed = json.loads(run(label+"-registry-runtime",[compiler,"project-exec-selected",registry_state,registry_command]))
+                assert executed["status"] == "completed-selected-project-command" and executed["postExecutionSelectionVerified"] and executed["selectionPointerUnchanged"]
+                assert "miniserve 0.35.0" in executed["command"]["stdout"]["text"]
+                installed_registry[label] = dict(bindingsVerified=True,runtimeVersionPassed=True,selectionUnchanged=executed["selectionPointerUnchanged"])
+            member = next(p for p in sorted(registry_before) if p.startswith(".cargo-home/") and p.endswith(".crate"))
+            original = registry_candidate / member
+            backup = work / "installed-registry-member.retained"
+            original.rename(backup);original.write_bytes(b"controlled changed registry member")
+            marker_command = work / "registry-marker.command.json"
+            write(marker_command,dict(profile="patamaps-project-command-1",workingDirectory=".",environmentReferences={},
+                invocation=dict(executable="/bin/sh",arguments=["-c","printf invoked > bundle/forbidden.marker"],codeInputs=[],
+                    bounds=dict(maximumElapsedMs=10000,maximumStdoutBytes=65536,maximumStderrBytes=65536))))
+            refused = run("installed-registry-before-effects",[native_cli,"project-exec-selected",registry_state,marker_command],expected=2)
+            assert "PROJECT_CONTEXT" in refused+(out/"logs/installed-registry-before-effects.stderr").read_text()
+            assert not (registry_candidate/"bundle/forbidden.marker").exists()
+            original.rename(work/"installed-registry-member.changed-retained");backup.rename(original)
+            restored_registry = json.loads(run("installed-registry-restored",[source_cli,"project-build-verify",registry_state]))
+            assert restored_registry["status"] == "verified-selected-build-bindings"
+            assert "sha256:"+sha(registry_pointer) == registry_producer["selectionDigest"]
+            assert {p.relative_to(registry_candidate).as_posix():sha(p) for p in registry_candidate.rglob("*") if p.is_file()} == registry_before
+            record["registryReplay"] = dict(status="passed-source-native-installed-registry-replay",installations=installed_registry,
+                registryMemberTamperRefusedBeforeEffects=True,restoredBindingsVerified=True,selectedBytesUnchanged=True,
+                archiveDigest=registry_producer["retainedStateArchive"]["digest"],registryContextDigest=registry_producer["snapshotDigest"],
+                completeDependencyClosure=False,ownerTestFixturesClosed=False,toolchainClosed=False)
         artifact = candidate / "bundle/public/status.txt"
         backup = work / "status.original.retained"
         artifact.rename(backup)

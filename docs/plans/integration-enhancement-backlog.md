@@ -1032,3 +1032,15 @@ publish assertion bodies or arbitrary compiler/source payloads. Four controls
 verify that known facts survive while private sentinel/unknown payloads do not.
 No test, source, profile, quota or privacy condition is changed. Retry the same
 full application lane with exact CLI reuse and inspect these facts before repair.
+
+
+Installed replay is prepared in the existing qualifier, still gated on a verified
+successful producer: import an optional digest-bound registry-state artifact,
+verify it and execute its exact Miniserve --version through both newly installed
+compilers, then corrupt a selected archive and require refusal before a marker,
+restore it and check all selected bytes/pointer. Existing eight HTTP controls,
+late-artifact refusal, source-inventory checks and compiler-unavailable runtime
+remain unchanged. The frozen ZIP transport uses its exact pinned size when it
+exceeds the ordinary log bound. No producer pin was changed and no dependent
+heavy job was dispatched. Fourteen archive controls and Python syntax passed;
+actual current-engine source/native/registry replay is still unrun.
