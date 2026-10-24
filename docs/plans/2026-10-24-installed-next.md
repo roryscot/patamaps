@@ -309,3 +309,11 @@ passes pinned formatting, Python AST, YAML and diff checks. It is not native
 acceptance. The whole standalone profile still requires an immutable selected
 generation and separately enforced cache/runtime/source-unavailable contracts;
 its known immutable-producer-tree assertion is retained until those are tested.
+
+
+The first native closed-tree run40065213177 ata8304d3 failed compilation
+before library/integration tests or owner execution. E0599 at project_build.rs
+identified a Result-style map_err call on SafeInteger::new, whose existing
+contract returns Option. Use ok_or_else to retain the same out-of-range refusal.
+The failed source and sanitized compiler record remain preserved; no native or
+application pass is inferred from that run.

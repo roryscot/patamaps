@@ -363,7 +363,7 @@ mod unix {
                         .as_u64()
                         .ok_or_else(|| refuse("PROJECT_BUILD_OUTPUT_LINK_CLOSURE"))?,
                 )
-                .map_err(|_| refuse("PROJECT_BUILD_OUTPUT_LINK_CLOSURE"))
+                .ok_or_else(|| refuse("PROJECT_BUILD_OUTPUT_LINK_CLOSURE"))
             };
             let member = match value["kind"].as_str() {
                 Some("directory") => ProjectContextEntry::Directory {
