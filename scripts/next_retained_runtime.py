@@ -53,6 +53,12 @@ walk('/bundle/.next/cache');const limits={};for(const [k,n] of Object.entries({c
 console.log(JSON.stringify({files,directories:dirs,symlinks:links,bytes,limits,nodeVersion:process.version}));
 """
 
+def environment_references(configuration):
+    references={key.upper():key for key in configuration}
+    assert len(references)==len(configuration), "RETAINED_ENVIRONMENT_COLLISION"
+    assert all(re.fullmatch("[A-Z_][A-Z_0-9]*",key) for key in references), "RETAINED_ENVIRONMENT_NAME"
+    return references
+
 def write(path, value):
     path.write_text(json.dumps(value, indent=2)+"\n")
 

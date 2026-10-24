@@ -394,3 +394,12 @@ records31 focused Python controls and syntax/YAML/diff checks on Intel. These
 controls do not establish actual container enforcement or browser acceptance.
 The focused Linux run remains required; fresh installed replay on this engine
 and all other open enhancement requirements remain separate gates.
+
+
+Retained runtime attempt40069401687 atcdc9a26 passed the native regressions,
+real Next build and all three real-member/link before-effects refusals. Native
+command admission then returned PROJECT_COMMAND_ENVIRONMENT before any runtime
+container started. Two npm configuration names were lowercase; the existing
+native contract requires uppercase environment variable names. Preserve their
+captured configuration keys and map the process names to uppercase, with
+collision/invalid-name refusal. No native validation rule is relaxed.

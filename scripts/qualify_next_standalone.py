@@ -123,7 +123,7 @@ def observe(cli, standalone, work, evidence, run, producer, *, runtime=None):
     public_environment = {}
     executable = sys.executable
     if runtime is not None:
-        from next_retained_runtime import DRIVERS, ENVIRONMENT
+        from next_retained_runtime import DRIVERS, ENVIRONMENT, environment_references
         executable = str(work/"configured-build-python")
         Path(executable).symlink_to(sys.executable)
         public_environment = {key:runtime["environment"][key] for key in ENVIRONMENT if key in runtime["environment"]}
@@ -225,7 +225,7 @@ def observe(cli, standalone, work, evidence, run, producer, *, runtime=None):
     assert inventory(standalone) == rows
     if runtime is not None:
         runtime_command=dict(profile="patamaps-project-command-1",workingDirectory=".",
-            environmentReferences={key:key for key in public_environment},
+            environmentReferences=environment_references(public_environment),
             invocation=dict(executable=sys.executable,
                 arguments=["scripts/next_retained_runtime.py","runtime-descriptor.json"],
                 codeInputs=driver_paths,bounds=dict(maximumElapsedMs=1200000,

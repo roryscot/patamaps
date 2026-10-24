@@ -1,7 +1,7 @@
 """Retained runtime privacy/move/limit guards; real kernel enforcement remains a CI gate."""
 import copy,json,os,tempfile,unittest
 from pathlib import Path
-from next_retained_runtime import ProducerMoves,check_container,check_limits,MEMORY_BYTES,PROBE_NODE
+from next_retained_runtime import ProducerMoves,check_container,check_limits,MEMORY_BYTES,PROBE_NODE,environment_references
 
 class RetainedRuntimeControls(unittest.TestCase):
     @classmethod
@@ -48,6 +48,11 @@ class RetainedRuntimeControls(unittest.TestCase):
         self.assertFalse(alias.exists());self.assertEqual(program.read_text(),"program")
         moves.restore()
         self.assertTrue(alias.is_symlink());self.assertEqual(os.readlink(alias),str(program))
+    def test_environment_names_follow_native_contract_and_preserve_capture_keys(self):
+        self.assertEqual(environment_references(dict(PATH="public",npm_config_userconfig="private-home/config")),
+            dict(PATH="PATH",NPM_CONFIG_USERCONFIG="npm_config_userconfig"))
+        for configuration in [dict(PATH="a",path="b"),{"invalid-name":"value"}]:
+            with self.assertRaises(AssertionError):environment_references(configuration)
     def test_valid_declared_app_and_probe_configurations(self):
         check_container(self.container(),"sha256:controlled","app")
         check_container(self.container("probe"),"sha256:controlled","probe")
