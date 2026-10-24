@@ -23,15 +23,18 @@ a passed fixture or metadata observation is not general support.
 
 ## Current selected work
 
-Current live producer: [40045090305](https://github.com/roryscot/patamaps/actions/runs/40045090305)
-at 509720654d96764b15cfce27d78cc5b2f2c11775. This supersedes earlier live-run
-checkpoints below. The source has the safe Cargo failure summaries; verify its
-terminal result/artifact before any repair or accepting the registry increment.
-Do not launch a duplicate. Installed source/native registry replay is prepared
-at 74b707e with fourteen archive controls, but its producer pin is unchanged and
-no installed registry execution has run. Wait on this producer, inspect the safe
-failure facts if it fails, or independently verify all325 tests, eight HTTP checks,
-selection/registry refusals and offline replay if it passes. All broader G0–G6
+Current live producer: [40046190259](https://github.com/roryscot/patamaps/actions/runs/40046190259)
+at c4f0f61c00f567bdaa02f34f1baa3de22bda8d5c. This supersedes earlier live-run
+checkpoints below. The prior run40045090305 failed only bind_ipv4_ipv6::case_2
+before later test binaries, with no capacity exhaustion. Explicit container-local
+IPv4/IPv6 localhost mappings and a matching Rust TcpStream pre-build probe are
+now required; kernel settings, quotas and owner tests are unchanged. Wait on this
+exact run and inspect its terminal artifact before another repair or dependent
+job. No registry execution acceptance yet. Installed source/native registry replay
+is prepared at74b707e and passes fourteen import controls, but its producer pin
+is unchanged and actual installed registry replay has not run. After a producer
+passes, independently verify all325 tests, eight HTTP checks, selection/registry
+refusals and offline replay before pinning it for installation. Broader G0–G6
 requirements remain active.
 
 The Cargo managed-container prerequisite is now independently verified in
