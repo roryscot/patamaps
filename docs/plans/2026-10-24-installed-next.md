@@ -469,3 +469,36 @@ Do not infer success from checkout runtime acceptance or source-only controls.
 passes62 focused controls, Python/YAML/diff checks and bounded source package
 selection on Intel. These are admission/source controls; neither fresh installed
 retained owner runtime has run for this increment yet.
+
+
+Installed retained attempt40070401886 at851e375 passed the complete fresh
+source-installed owner, including all28 browser groups/four unchanged tests,
+actual read-only/cache/kernel enforcement, unchanged generation and cleanup.
+The parent then stopped the native-installed owner at the unchanged combined
+4GB growth ceiling before its runtime. Overall installed acceptance stays failed.
+
+Use one explicitly targeted external Cargo artifact directory for the sequential
+workspace checks, package CLI build and fresh installed-source cargo install.
+This reuses compiler dependency artifacts instead of retaining a second target
+tree; it does not borrow a checkout binary or combine application state. The
+fresh prefix stays initially absent. Require Cargo compilation records for both
+patamaps-cli and patamaps-workspace from the exact installed source paths, then
+verify inventory/engines and all original runtime gates. Keep4GB/500MB unchanged
+and record numeric current/peak growth/free space without a recursive scan.
+This cache reuse makes no clean-build or independent-dependency claim.
+
+
+BuildKit also reads bundle/ directly from the locked native selected candidate
+using a separate private Dockerfile, avoiding another85MB image-context copy
+per owner. The exact in-image byte/mode/link comparison, read-only/cache probes
+and native post-verification remain mandatory. No file is deleted or replaced
+by a shared mutable runtime tree. Preserve the original checkout compiler before
+shared-target compilation, retain the newly compiled output separately, and
+verify the original compiler digest on restoration.
+
+
+The [failed-run review](../acceptance/project-adoption/g5-installed-retained-next-20261024/attempt-1/review.json)
+retains the completed source-case receipts without promoting native/full workflow
+acceptance. The [storage repair preflight](../acceptance/project-adoption/g5-installed-retained-next-20261024/storage-repair-preflight.json)
+passes the same62 controls and syntax/YAML/diff checks. Both complete installed
+cases must still run under the original combined limit.

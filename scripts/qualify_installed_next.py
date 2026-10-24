@@ -44,7 +44,11 @@ def main():
  def save():write(out/"receipt.json",record)
  def capacity():
   disk=shutil.disk_usage(ROOT)
-  assert disk.free>=500000000 and disk.used-baseline_bytes<=4000000000,"Combined installed Next qualification storage boundary"
+  growth=disk.used-baseline_bytes
+  record["storageObservation"]=dict(currentGrowthBytes=growth,peakGrowthBytes=max(growth,record.get("storageObservation",{}).get("peakGrowthBytes",0)),freeBytes=disk.free)
+  if disk.free<500000000 or growth>4000000000:
+   save()
+   raise AssertionError("Combined installed Next qualification storage boundary")
   assert time.monotonic()-started<2400,"Combined installed Next deadline"
  def run(label,argv,cwd=None,expected=0,timeout=1200):
   capacity();begin=time.monotonic()
@@ -63,13 +67,15 @@ def main():
    print(stderr_path.read_text(errors="replace")[-5000:],flush=True)
    raise AssertionError((label,code,expected))
   return stdout_path.read_text()
- checkout_cli=ROOT/"target/debug/patamaps"
+ checkout_cli=ROOT/("target/x86_64-unknown-linux-gnu/debug/patamaps" if args.retained_runtime else "target/debug/patamaps")
  checkout_driver=ROOT/"scripts/qualify_chatbot_next.py"
  runtime_options=["--standalone-probe","--retained-runtime"] if args.retained_runtime else []
  cli_backup=work/"checkout-cli.unavailable"
  driver_backup=work/"checkout-driver.unavailable"
+ source_build_output=work/"fresh-source-build-output.retained"
  try:
-  run("checkout-cli-for-package",["cargo","+1.99.0","build","--locked","-p","patamaps-cli","--bin","patamaps"],cwd=ROOT,timeout=600)
+  target_options=["--target","x86_64-unknown-linux-gnu"] if args.retained_runtime else []
+  run("checkout-cli-for-package",["cargo","+1.99.0","build","--locked","-p","patamaps-cli","--bin","patamaps",*target_options],cwd=ROOT,timeout=600)
   engine=json.loads(run("package-engine",[checkout_cli,"engine"]))
   package=out/"package"
   run("package-exact-current-pair",[sys.executable,"-B",ROOT/"scripts/package.py","--binary",checkout_cli,"--build-profile","development","--output",package],cwd=ROOT,timeout=300)
@@ -83,13 +89,28 @@ def main():
   source_identity=verify_installed_source(source,binding)
   assert not (source/".git").exists()
   native_cli=native/"bin/patamaps";assert sha(native_cli)==distribution["binaryDigest"] and os.access(native_cli,os.X_OK)
-  env["CARGO_TARGET_DIR"]=str(work/"source-target")
+  if args.retained_runtime:
+   checkout_cli.rename(cli_backup)
+  env["CARGO_TARGET_DIR"]=str(ROOT/"target" if args.retained_runtime else work/"source-target")
   run("source-locked-fetch",["cargo","+1.99.0","fetch","--locked","--target","x86_64-unknown-linux-gnu"],cwd=source,timeout=300)
   prefix=work/"source-cli-installation";assert not prefix.exists()
   run("fresh-source-cargo-install",["cargo","+1.99.0","install","--path",source/"crates/patamaps-cli","--locked","--offline","--debug","--target","x86_64-unknown-linux-gnu","--root",prefix],cwd=source,timeout=1200)
+  if args.retained_runtime:
+   compile_log=(out/"logs/fresh-source-cargo-install.stderr").read_text()
+   required=["patamaps-cli","patamaps-workspace"]
+   for name in required:
+    assert any("Compiling "+name+" v" in line and "("+str(source/"crates"/name)+")" in line for line in compile_log.splitlines()), "INSTALLED_SOURCE_COMPILATION_REQUIRED"
+   record["sourceCompilerBuiltFromInstalledSource"]=True
+   record["sharedCargoDependencyArtifacts"]=True
+   record["freshSourcePackagesConfirmed"]=required
   source_cli=prefix/"bin/patamaps"
   assert verify_installed_source(source,binding)==source_identity
-  checkout_cli.rename(cli_backup);checkout_driver.rename(driver_backup)
+  if args.retained_runtime:
+   assert sha(checkout_cli)==sha(source_cli), "INSTALLED_SOURCE_BUILD_OUTPUT"
+   checkout_cli.rename(source_build_output)
+  else:
+   checkout_cli.rename(cli_backup)
+  checkout_driver.rename(driver_backup)
   assert not checkout_cli.exists() and not checkout_driver.exists() and not (ROOT/"target/debug/patamaps").exists() and not (ROOT/"target/release/patamaps").exists()
   shared=work/"public-tool-caches";shared.mkdir(mode=0o700)
   for label,compiler in [("source",source_cli),("native",native_cli)]:
@@ -125,7 +146,12 @@ def main():
   record.update(status="failed",error=type(error).__name__+": "+str(error));save();raise
  finally:
   if cli_backup.exists():
-   assert not checkout_cli.exists();cli_backup.rename(checkout_cli)
+   if checkout_cli.exists():
+    assert args.retained_runtime and not source_build_output.exists()
+    checkout_cli.rename(source_build_output)
+   cli_backup.rename(checkout_cli)
+   assert sha(checkout_cli)==distribution["binaryDigest"], "CHECKOUT_COMPILER_RESTORATION"
+   record["checkoutCompilerBytesRestored"]=True
   if driver_backup.exists():
    assert not checkout_driver.exists();driver_backup.rename(checkout_driver)
  save();print(json.dumps(dict(status=record["status"],sourceFiles=record["sourceIdentity"]["sourceFiles"],cases=list(record["cases"]))))

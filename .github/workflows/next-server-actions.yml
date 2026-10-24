@@ -37,6 +37,9 @@ jobs:
           CARGO_PROFILE_TEST_DEBUG: '0'
           CARGO_BUILD_JOBS: '2'
         run: |
+          if [ "${{ inputs.installed-controls && inputs.retained-runtime-controls }}" = "true" ]; then
+            export CARGO_BUILD_TARGET=x86_64-unknown-linux-gnu
+          fi
           cargo +1.99.0 fmt --all --check
           cargo +1.99.0 test --locked -p patamaps-workspace --lib
           cargo +1.99.0 test --locked -p patamaps-workspace --test workspace

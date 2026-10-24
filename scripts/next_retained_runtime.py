@@ -160,18 +160,18 @@ class RetainedNextRuntime:
         self.bundle=Path(self.config["state"])/self.config["attempt"]/"candidate/bundle"
         self.expected=inventory(self.bundle)
         assert (self.bundle/".next/cache").is_dir() and not list((self.bundle/".next/cache").iterdir()),"RETAINED_CACHE_PREIMAGE"
-        context=self.private/"image-context";context.mkdir()
-        shutil.copytree(self.bundle,context/"bundle",symlinks=True)
-        assert inventory(context/"bundle")==self.expected,"RETAINED_IMAGE_COPY"
+        context=self.bundle.parent
+        dockerfile=self.private/"retained-runtime.Dockerfile"
+        self.report["imageContext"]="native-selected-candidate"
         root_mode=self.expected["."]["mode"]
         assert type(root_mode) is int and 0<=root_mode<=0o7777
-        (context/"Dockerfile").write_text("FROM "+BASE+"\nWORKDIR /bundle\nCOPY --chown=1000:1000 bundle/ /bundle/\nRUN chown 1000:1000 /bundle && chmod "+format(root_mode,"04o")+" /bundle\nUSER 1000:1000\nENTRYPOINT [\"/usr/local/bin/node\",\"/bundle/server.js\"]\nCMD []\n")
+        dockerfile.write_text("FROM "+BASE+"\nWORKDIR /bundle\nCOPY --chown=1000:1000 bundle/ /bundle/\nRUN chown 1000:1000 /bundle && chmod "+format(root_mode,"04o")+" /bundle\nUSER 1000:1000\nENTRYPOINT [\"/usr/local/bin/node\",\"/bundle/server.js\"]\nCMD []\n")
         self.report["phase"]="pinned-image-build"
         self.call("retained-pull-node",["docker","pull","--platform","linux/amd64",BASE],timeout=180)
         base=json.loads(self.call("retained-node-inspect",["docker","image","inspect",BASE]))[0]
         assert base["Id"]==BASE_CONFIG and (base["Os"],base["Architecture"])==("linux","amd64"),"RETAINED_NODE_BASE"
         iid=self.private/"image.iid"
-        self.call("retained-build-image",["docker","buildx","build","--load","--platform","linux/amd64","--network","none","--provenance=false","--progress","plain","--iidfile",str(iid),str(context)],timeout=300)
+        self.call("retained-build-image",["docker","buildx","build","--load","--platform","linux/amd64","--network","none","--provenance=false","--progress","plain","--iidfile",str(iid),"--file",str(dockerfile),str(context)],timeout=300)
         self.image=iid.read_text().strip();assert re.fullmatch("sha256:[0-9a-f]{64}",self.image)
         image=json.loads(self.call("retained-image-inspect",["docker","image","inspect",self.image]))[0]
         assert image["Size"]<536870912 and (image["Os"],image["Architecture"])==("linux","amd64"),"RETAINED_IMAGE_PLATFORM"
