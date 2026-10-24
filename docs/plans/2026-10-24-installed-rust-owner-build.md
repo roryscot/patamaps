@@ -1,0 +1,77 @@
+# Fresh installed Rust owner builds
+
+Status: planned; no new installed-owner build is accepted.
+This is the original G5/G6 installed-consumer requirement, independent of the
+storage-blocked native G4 measurement run. Develop on Intel; use the existing
+opt-in Linux qualification infrastructure for actual work. No Intel guard bypass,
+cleanup, policy increase, registry publication or production activation.
+
+## Fixed workload and reused contracts
+
+Reuse scripts/qualify_miniserve_linux.py with its pinned Miniserve0.35.0 Git
+revision, explicit selected source, original public test clone and unchanged
+Cargo-registry context/executor. Reuse package.py, exact archive installation,
+verify_installed_source, project-context/build/verify/exec-selected, existing
+guardian and HTTP/refusal recipe. Do not add a build framework or replace tests.
+The public CA bundle, host toolchain and eight uncaptured public test fixtures
+remain explicit external inputs; complete dependency/OS/test-context closure
+stays false.
+
+The earlier fresh installed result verified retained-state/runtime replay and
+explicitly set applicationRecompiled=false. It cannot prove this increment.
+
+## Observable acceptance
+
+1. Build a current checkout CLI solely for producing exact source/native
+   archives. Verify archive SHA-256, distribution engines, installed source
+   inventory and every shipped source member against the producing tracked
+   checkout. A clean Git source must precede packaging.
+2. Install the exact native archive. Independently cargo install the CLI from
+   the fresh source archive with locked/offline inputs, an external target and
+   prefix, and proof that CLI/workspace compilation used installed source paths.
+   Declared dependency artifacts may be reused; do not call that a clean build.
+3. Run the packaged Miniserve qualifier without Git, bound to its explicit
+   source-inventory digest. Refuse missing binding or changed source before
+   compiler/owner effects. Never fall back to a checkout compiler or qualifier.
+   Make both producing checkout paths unavailable during both owner workflows;
+   restore and verify them afterward.
+4. Each installed compiler must build Miniserve from the selected source and
+   original public registry inputs in a newly owned bounded executor. Recheck
+   CPU2/memory6GiB/zero-swap/PID512,3GiB work quota, immutable input mounts,
+   loopback-only network, stopped setup helper and capability-free workload.
+   Copy the actual release binary before releasing unchanged upstream tests.
+5. Each owner must pass the frozen19 upstream harness counts:
+   43,15,15,22,6,13,4,9,2,11,2,5,8,15,57,45,5,39,9; total325, zero failed/ignored.
+   Require all eight existing named HTTP controls, not merely eight arbitrary
+   lines. Invalid config, wrong listener, wrong digest and authentic ARM64 must
+   preserve the old selection. Stale runtime must refuse before marker effects;
+   restored selected runtime and source/snapshot-unavailable verification pass.
+   Registry snapshot/selected-member corruption likewise refuses before effects.
+6. Verify source/package/CLI identities, unchanged upstream selected bytes,
+   stopped owned containers/listeners, restored checkout paths and source
+   inventory at completion. A changed installed member must refuse before a
+   sentinel compiler writes its marker, then exact restoration must verify.
+7. Review the exact CI source, archive/member hashes, both child receipts,
+   registry/kernel/cleanup records and individual command outcomes independently.
+   Publish compact scoped evidence and update the support matrix only after
+   actual success. Preserve failed receipts; controls alone are not acceptance.
+
+## Execution and retention
+
+One focused manual Linux lane runs the two owner workflows sequentially.
+Keep the existing combined4GB disk-growth/500MB reserve, per-command bounded
+logs/deadlines and explicit external Cargo outputs. The whole qualification has
+a60-minute deadline. No evidence/limit relaxation after observing failures.
+Stop both owned executor records on failure; never stop another project's job.
+
+Upload one bounded source/native package plus compact reviewed receipts and the
+existing selected-state evidence, under a320MiB artifact ceiling and14-day
+retention. Do not copy archives, extracted dependencies or raw owner logs to Intel.
+Retain only compact reviewed evidence there. No automatic local deletion.
+
+Commit/push this plan, then the minimal installed-mode/driver/workflow change
+with focused source-integrity and contract controls. Allow one initial full run;
+at most two repairs for demonstrated implementation/harness defects before
+returning the exact unresolved cause. Do not repeat already accepted unrelated
+Next or scheduler suites. G4 performance and owner-deferred applications retain
+their existing status.

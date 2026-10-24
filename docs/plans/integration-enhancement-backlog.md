@@ -23,6 +23,12 @@ a passed fixture or metadata observation is not general support.
 
 ## Current selected work
 
+An independent original G5/G6 increment now follows the [fresh installed Rust
+owner-build plan](2026-10-24-installed-rust-owner-build.md). Existing installed
+Miniserve evidence replays retained artifacts; actual owner rebuilds with each
+fresh installed compiler remain unverified. Reuse the existing bounded Linux
+registry/HTTP qualification. The native G4 storage approval remains pending.
+
 The next original G4 gate follows the [frozen actual-project measurement plan](2026-10-24-project-measurements.md): native Axum initial/warm/edit phases with explicit RSS units, retained disk and a separate exclusive benchmark reservation. No new measurement is accepted yet.
 
 The driver and23 focused controls now pass on Intel and Linux at84922fa;
