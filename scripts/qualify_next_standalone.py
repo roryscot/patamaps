@@ -82,6 +82,10 @@ def helper_main():
 def observe(cli, standalone, work, evidence, run, producer):
     rows = inventory(standalone)
     observed = summary(rows)
+    (evidence/"standalone-probe.json").write_text(json.dumps(dict(
+        status="observed-private-tree-before-native-selection", producedTree=observed,
+        detailedInventoryPublished=False, rawGeneratedOutputsPublished=False,
+        producerSourceAndToolsUnavailable=False, fullRetainedBundleAccepted=False), indent=2)+"\n")
     private_inventory = work / "private-standalone-inventory.json"
     private_inventory.write_bytes(encoded(rows))
     private_inventory.chmod(0o600)
@@ -105,7 +109,7 @@ def observe(cli, standalone, work, evidence, run, producer):
         (owner/name).write_text(json.dumps(value, indent=2)+"\n")
     (owner/"copy-helper.py").write_bytes(Path(__file__).read_bytes())
     project = dict(profile="patamaps-project-inputs-1", id=identity+":inputs", nonsecretInputs=True,
-        inputs=[*values, "copy-helper.py"], components=[dict(id="producer", kind="qualification",
+        inputs=[*values, "copy-helper.py"], components=[dict(id="producer", kind="deployment",
         root=".", entrypoints=["descriptor.json"])], nonsecretConfiguration={}, secretReferences={})
     workspace = dict(schemaVersion="0.1.0", documentType="workspace-config", id=identity,
         namespace="standalone-output-probe", revision="1", packs=[],

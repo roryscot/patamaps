@@ -187,3 +187,14 @@ existing good selection first so a refused bundle demonstrates previous-pointer
 preservation. No private raw manifests, keys, dependency trees or full bundle
 archives enter public evidence; only compact receipts. All existing I2 and
 performance requirements remain open until their own evidence is verified.
+
+
+The first I2a run40062542052 at00c3055 passed the actual standalone production
+build and native compiled observations/refusals, then the probe's prior-generation
+plan refused before execution: INVALID_CANONICAL_VALUE identified the unsupported
+qualification component kind. Use the existing deployment kind. The recorded
+failure remains failed, and no browser or native output-tree result is claimed.
+The existing Intel CLI's read-only input-key parser now accepts the generated
+plan; its older engine is explicitly recorded and is not current-source runtime
+acceptance. The bounded produced-tree summary is saved before native selection
+so later failures retain that observation without publishing private inventory.
