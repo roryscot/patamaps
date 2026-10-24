@@ -110,3 +110,51 @@ in Git; do not duplicate dependency trees or publish raw application artifacts.
 Remaining G4 Next.js-scale measurements and all other open owner/deployment
 requirements retain their original scope. No release, registry publication,
 production activation or blanket performance/support conclusion follows.
+
+
+## Collector implementation and current admission
+
+The existing bench_phases.measured function now accepts retained output paths,
+a monitoring callback and bounded logs; it records exact-child wait4 usage and
+private stdout/stderr/stdin without deleting files or publishing stderr text.
+It reserves its measurement record before command effects and retains failure
+records. Explicit RSS units reject unsupported platforms/values; failed launch
+records use unknown memory rather than inventing a zero observation. Darwin
+exit-race cleanup reuses the existing qualified process-group helper. Recorded
+command arguments must be nonsecret; private input belongs in retained stdin.
+
+[Focused native controls](../acceptance/project-adoption/g4-project-measurements-20261024/collector-preflight.json)
+passed9 cases on Intel: success/privacy, nonzero, timeout, monitor cancellation
+with an unrelated session preserved, log refusal, existing output/record refusal
+before effects, launch failure and RSS units. These small controls do not execute
+the64MiB calibration or an application benchmark. The opt-in Linux control lane
+checks the same platform-sensitive collector without heavy application builds.
+
+[Storage admission](../acceptance/project-adoption/g4-project-measurements-20261024/storage-admission.json)
+refused with exit75 for insufficient retained-output headroom. No native compiler
+preparation or measurements ran. The earlier approved13,132-file inventory now
+has10,924 absent paths and2,208 changed files, with zero unchanged entries; that
+approval cannot authorize deleting the regenerated files. All files and limits
+remain unchanged by cleanup. Prepare an exact current redundant-data review
+before requesting further deletion approval; preserve the current compiler cache
+needed for preparation. The measurement driver and actual performance gates
+remain unimplemented/unrun at this checkpoint.
+
+
+A targeted follow-up found mounted, finished quota volumes whose backing images
+and mounted contents both contribute to conservative retention accounting.
+Actual container state/labels confirmed the two owners stopped; normal detach
+returned exit16 and a virtualization process has a filesystem handle. No force,
+container stop/deletion or image deletion followed. [Diagnostics](../acceptance/project-adoption/g4-project-measurements-20261024/storage-followup.json).
+The independent running container remains untouched and also precludes the
+frozen exclusive benchmark until an appropriate quiet window is authorized.
+
+The alternative [exact cleanup review](../acceptance/project-adoption/g4-project-measurements-20261024/publication-cleanup-review.json)
+proposes3,491 generated compiler files in five old alpha-publication dependency
+directories, totaling4,592,123,904 allocated bytes. The full inventory remains
+under .tools/retention-review-20261024-publication-deps/, outside the package
+payload.845 excluded entries, all directories, current target cache, source,
+archives, installed executables and receipts remain. All ten frozen crates
+match their publication hashes. Compiler-file backup/recompilation/exact-byte
+recovery have not been verified. This changed list needs fresh user approval;
+no proposed file has been deleted.

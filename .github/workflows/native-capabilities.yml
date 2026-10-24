@@ -22,6 +22,7 @@ on:
           - next-rewrites
           - next-installed
           - next-installed-retained
+          - project-measurement-controls
           - next-standalone-probe
           - next-retained-runtime
           - cargo-registry-preflight
@@ -476,3 +477,17 @@ jobs:
       installed-controls: true
       standalone-controls: true
       retained-runtime-controls: true
+
+  project-measurement-controls:
+    if: github.event_name == 'workflow_dispatch' && inputs.qualification == 'project-measurement-controls'
+    name: Retained measurement ownership privacy and RSS units
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - name: Verify retained measurement controls
+        run: |
+          mkdir -p "$RUNNER_TEMP/patamaps-measurement-controls"
+          PATAMAPS_TEST_RETAIN_ROOT="$RUNNER_TEMP/patamaps-measurement-controls" python3 -B -m unittest discover -s scripts -p test_bench_phases.py

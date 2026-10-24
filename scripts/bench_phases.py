@@ -5,6 +5,7 @@ Only the optional discovery measurement uses an explicitly selected Node binary.
 """
 import argparse
 import copy
+import contextlib
 import hashlib
 import json
 import os
@@ -40,38 +41,95 @@ def distribution(values):
             "maximum": values[-1], "p95NearestRank": values[-1]}
 
 
-def measured(argv, cwd, env, stdin=None, deadline=180):
-    # Files avoid pipe backpressure and allow wait4 to reap this exact child.
-    with tempfile.TemporaryFile() as out, tempfile.TemporaryFile() as err, tempfile.TemporaryFile() as inp:
+def rss_observation(raw, system=None):
+    system = system or platform.system()
+    if type(raw) is not int or raw < 0:
+        raise ValueError("Invalid wait4 RSS value")
+    if system not in {"Darwin", "Linux"}:
+        raise ValueError("Unverified wait4 RSS unit")
+    unit = "bytes" if system == "Darwin" else "KiB"
+    return {"peakRssRaw": raw, "peakRssRawUnit": unit,
+            "peakRssBytes": raw * (1 if unit == "bytes" else 1024)}
+
+
+def measured(argv, cwd, env, stdin=None, deadline=180, *, retained=None,
+             monitor=None, maximum_log_bytes=LIMIT):
+    """Measure this exact child; retained mode never removes files or publishes stderr."""
+    if type(maximum_log_bytes) is not int or not 0 < maximum_log_bytes <= LIMIT:
+        raise ValueError("Measurement log bound")
+    if not 0 < deadline <= 3600:
+        raise ValueError("Measurement deadline")
+    if stdin is not None and (not isinstance(stdin, bytes) or len(stdin) > LIMIT):
+        raise ValueError("Measurement stdin bound")
+    rss_observation(0)
+    with contextlib.ExitStack() as files:
+        if retained is None:
+            out, err, inp = [files.enter_context(tempfile.TemporaryFile()) for _ in range(3)]
+            paths = None
+            measurement_record = None
+        else:
+            stem = Path(retained)
+            paths = {name: Path(str(stem) + "." + name) for name in ["stdout", "stderr", "stdin"]}
+            out, err, inp = [files.enter_context(paths[name].open("xb+")) for name in ["stdout", "stderr", "stdin"]]
+            for path in paths.values():
+                path.chmod(0o600)
+            measurement_path = Path(str(retained) + ".measurement.json")
+            measurement_record = files.enter_context(measurement_path.open("x"))
+            measurement_path.chmod(0o600)
         if stdin is not None:
             inp.write(stdin)
         inp.seek(0)
         start = time.perf_counter_ns()
-        child = subprocess.Popen([str(a) for a in argv], cwd=cwd, env=env,
-                                 stdin=inp, stdout=out, stderr=err, start_new_session=True)
-        while True:
-            pid, status, usage = os.wait4(child.pid, os.WNOHANG)
-            if pid:
-                break
-            if (time.perf_counter_ns() - start) / 1e9 > deadline:
-                os.killpg(child.pid, signal.SIGKILL)
-                os.wait4(child.pid, 0)
-                child.returncode = -signal.SIGKILL
-                raise TimeoutError(f"Own benchmark child exceeded {deadline}s: {argv}")
-            time.sleep(0.002)
-        elapsed = time.perf_counter_ns() - start
-        child.returncode = os.waitstatus_to_exitcode(status)
-        out.seek(0)
-        err.seek(0)
-        stdout, stderr = out.read(), err.read()
-        # Darwin's kernel copies task_info.resident_size_max (bytes) into ru_maxrss.
-        unit = "bytes" if platform.system() == "Darwin" else "KiB"
-        sample = {"argv": [str(a) for a in argv], "exitCode": child.returncode,
-                  "wallNanoseconds": elapsed, "userSeconds": usage.ru_utime,
-                  "systemSeconds": usage.ru_stime, "peakRssRaw": usage.ru_maxrss,
-                  "peakRssRawUnit": unit, "peakRssBytes": usage.ru_maxrss * (1 if unit == "bytes" else 1024),
-                  "stdoutBytes": len(stdout), "stdoutDigest": digest(stdout),
-                  "stderr": stderr.decode("utf-8", errors="replace")}
+        child, usage, reaped, failure = None, None, False, None
+        try:
+            child = subprocess.Popen([str(a) for a in argv], cwd=cwd, env=env,
+                                     stdin=inp, stdout=out, stderr=err, start_new_session=True)
+            while True:
+                pid, status, observed = os.wait4(child.pid, os.WNOHANG)
+                if pid:
+                    usage, reaped = observed, True
+                    child.returncode = os.waitstatus_to_exitcode(status)
+                if max(os.fstat(out.fileno()).st_size, os.fstat(err.fileno()).st_size) > maximum_log_bytes:
+                    raise ValueError("Measurement log bound exceeded")
+                if monitor is not None:
+                    monitor()
+                if reaped:
+                    break
+                if (time.perf_counter_ns() - start) / 1e9 > deadline:
+                    raise TimeoutError("Own benchmark child exceeded deadline")
+                time.sleep(0.002)
+        except BaseException as error:
+            failure = error
+        finally:
+            if child is not None and not reaped:
+                from project_watch import signal_group
+                signal_group(child.pid, signal.SIGKILL)
+                _, status, usage = os.wait4(child.pid, 0)
+                child.returncode = os.waitstatus_to_exitcode(status)
+            elapsed = time.perf_counter_ns() - start
+            sizes = {name: os.fstat(handle.fileno()).st_size for name, handle in [("stdout", out), ("stderr", err)]}
+            out.seek(0); err.seek(0)
+            stdout = out.read(maximum_log_bytes + 1)
+            stderr = err.read(maximum_log_bytes + 1)
+            sample = {"argv": [str(a) for a in argv], "pid": child.pid if child else None, "exitCode": child.returncode if child else None,
+                      "wallNanoseconds": elapsed, "userSeconds": usage.ru_utime if usage else None,
+                      "systemSeconds": usage.ru_stime if usage else None,
+                      **(rss_observation(usage.ru_maxrss) if usage else dict(peakRssRaw=None, peakRssRawUnit=rss_observation(0)["peakRssRawUnit"], peakRssBytes=None)),
+                      "stdoutBytes": sizes["stdout"],
+                      "stdoutDigest": digest(stdout) if sizes["stdout"] <= maximum_log_bytes else None}
+            if paths is None:
+                sample["stderr"] = stderr.decode("utf-8", errors="replace")
+            else:
+                sample.update(stderrBytes=sizes["stderr"],
+                              stderrDigest=digest(stderr) if sizes["stderr"] <= maximum_log_bytes else None,
+                              retainedOutputs={name: str(path) for name, path in paths.items()},
+                              measurementStatus="failed" if failure else "completed",
+                              failureType=type(failure).__name__ if failure else None,
+                              rssScope="largest-reaped-process-high-water-mark-not-concurrent-job-sum")
+                json.dump(sample, measurement_record, indent=2)
+                measurement_record.write("\n")
+        if failure is not None:
+            raise failure
         return sample, stdout
 
 
