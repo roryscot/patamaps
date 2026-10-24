@@ -31,6 +31,7 @@ def main():
  env.update(HOME=str(work/"home"),TMPDIR=str(work/"tmp"),CI="true",LANG="C.UTF-8",TZ="UTC",CARGO_INCREMENTAL="0",CARGO_BUILD_JOBS="2",CARGO_PROFILE_DEV_DEBUG="0",CARGO_PROFILE_TEST_DEBUG="0",RUSTUP_TOOLCHAIN="1.99.0",CARGO_TERM_COLOR="never",PYTHONDONTWRITEBYTECODE="1",NEXT_TELEMETRY_DISABLED="1",NODE_OPTIONS="--max-old-space-size=2048",GIT_TERMINAL_PROMPT="0",GIT_CONFIG_GLOBAL="/dev/null",GIT_CONFIG_SYSTEM="/dev/null",npm_config_userconfig="/dev/null",npm_config_globalconfig="/dev/null",CI_PLAYWRIGHT="1")
  for key,name in [("npm_config_userconfig","npm-user.conf"),("npm_config_globalconfig","npm-global.conf")]:
   path=work/"tools"/name;path.write_text("");env[key]=str(path)
+ rewrite_port_reservation=None
  r=dict(status="running",sourceRevision=subprocess.check_output(["git","rev-parse","HEAD"],cwd=ROOT,text=True).strip(),upstream=UPSTREAM,upstreamCommit=REV,commands=[],frameworkBuildEstablished=False,runtimeEstablished=False,authenticationAccepted=False,dependencyClosureEstablished=False,applicationAcceptance=False,productionActivation=False,filesDeleted=0,maximumWorkflowGrowthBytes=4000000000)
  def save():write(out/"receipt.json",r)
  def capacity():
@@ -68,8 +69,9 @@ def main():
   staged_inventory=inventory
   rewrite_overlay=None
   if a.rewrites:
-   from chatbot_rewrite_profile import apply
-   staged_inventory,rewrite_overlay=apply(staged,inventory)
+   from chatbot_rewrite_profile import apply, reserve_owner_port
+   rewrite_port_reservation=reserve_owner_port()
+   staged_inventory,rewrite_overlay=apply(staged,inventory,canonical_port=rewrite_port_reservation.getsockname()[1])
    write(out/"rewrite-overlay.json",rewrite_overlay)
    write(out/"derived-source.json",staged_inventory)
    derived_definition=work/"derived-selection.json";write(derived_definition,dict(profile="patamaps-project-context-selection-1",id="urn:qualification:chatbot:derived-rewrites",nonsecretInputs=True,paths=[e["path"] for e in staged_inventory],symlinks="internal-closed"))
@@ -95,6 +97,7 @@ def main():
    if "\0" in text:continue
    texts.append(e["path"])
   cfg=dict(path=env["PATH"],home=env["HOME"],tmp=env["TMPDIR"],ci="true",nodeOptions=env["NODE_OPTIONS"],telemetry="1",ownerTestMode="1",npmUser=env["npm_config_userconfig"],npmGlobal=env["npm_config_globalconfig"])
+  if rewrite_overlay is not None:cfg["qualifiedOwnerOrigin"]=rewrite_overlay["profile"]["canonicalOwnerOrigin"]
   profile=work/"profile.json";write(profile,dict(profile="patamaps-project-inputs-1",id="urn:qualification:chatbot:inputs",nonsecretInputs=True,inputs=texts,components=[dict(id="web",kind="next-app",root=".",entrypoints=["package.json","next.config.ts","app/layout.tsx","app/(auth)/actions.ts"])],nonsecretConfiguration=cfg,secretReferences=dict(AUTH_SECRET="OWNER_AUTH_SECRET",POSTGRES_URL="OWNER_POSTGRES_URL")))
   source=native("text-source-capture",["project-capture",profile,"--root",staged]);source_path=work/"capture.json";write(source_path,source)
   if a.rewrites:
@@ -129,7 +132,7 @@ def main():
   if a.rewrites:
    from chatbot_rewrite_profile import verify_compiled
    baseline_observation=json.loads((ROOT/"docs/acceptance/project-adoption/g3-chatbot-source-20261023/native-observations.json").read_bytes())
-   bound=verify_compiled(json.loads(files["routes.json"].read_bytes()),observed,baseline_observation)
+   bound=verify_compiled(json.loads(files["routes.json"].read_bytes()),observed,baseline_observation,profile=rewrite_overlay["profile"])
    bound["baselineObservationDigest"]=sha(ROOT/"docs/acceptance/project-adoption/g3-chatbot-source-20261023/native-observations.json")
    write(out/"rewrite-compiled.json",bound)
    def refuse_observation(label,changed):
@@ -150,7 +153,7 @@ def main():
    assert browser_bootstrap["browserLaunchSucceeded"] is True
    r["browserBootstrap"]=dict(**browser_bootstrap,systemPackageInstallationRequested=False)
    from qualify_chatbot_runtime import qualify
-   runtime=qualify(staged,work,out,pnpm,env,capacity,rewrite_profile=rewrite_overlay)
+   runtime=qualify(staged,work,out,pnpm,env,capacity,rewrite_profile=rewrite_overlay,rewrite_reservation=rewrite_port_reservation)
    assert runtime["status"]=="passed" and runtime["ownedProcessGroupsStopped"]
    r.update(runtimeEstablished=True,authenticationAccepted=True,ownerRuntimeMigrationExecuted=True,runtimeBoundary="trusted owner; new isolated CI PostgreSQL and HTTPS loopback; no production secrets")
   audit("source-exclusion-final-audit");assert source_unchanged(owner) and source_unchanged(staged,staged_inventory)
@@ -161,6 +164,11 @@ def main():
    try:r["selectedSourcesUnchangedAfterFailure"]=source_unchanged(owner) and source_unchanged(staged,staged_inventory)
    except (OSError,ValueError):r["selectedSourcesUnchangedAfterFailure"]=None
   save();raise
+ finally:
+  if rewrite_port_reservation is not None:
+   rewrite_port_reservation.close()
+   r["rewritePortReservationClosed"]=True
+   save()
  save();print(json.dumps(dict(status=r["status"],frameworkBuildEstablished=True,runtimeEstablished=r["runtimeEstablished"])))
 
 

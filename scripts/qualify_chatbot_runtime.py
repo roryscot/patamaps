@@ -38,7 +38,7 @@ def available_port():
         return listener.getsockname()[1]
 
 
-def qualify(owner, work, evidence, pnpm, environment, capacity, *, rewrite_profile=None):
+def qualify(owner, work, evidence, pnpm, environment, capacity, *, rewrite_profile=None, rewrite_reservation=None):
     assert sys.platform == "linux" and os.environ.get("GITHUB_ACTIONS") == "true"
     private = work / "trusted-owner-runtime"
     private.mkdir(mode=0o700)
@@ -95,6 +95,16 @@ def qualify(owner, work, evidence, pnpm, environment, capacity, *, rewrite_profi
         report["postgresVersion"] = subprocess.check_output([bindir / "postgres", "--version"], text=True).strip()
         report["postgresBinaryDigest"] = "sha256:" + hashlib.sha256((bindir / "postgres").read_bytes()).hexdigest()
         database_port, next_port, tls_port = available_port(), available_port(), available_port()
+        if rewrite_profile is not None:
+            port = rewrite_profile["profile"]["canonicalOwnerPort"]
+            assert type(port) is int and 1024 < port <= 65535
+            assert rewrite_reservation is not None and rewrite_reservation.getsockname() == ("127.0.0.1", port)
+            assert rewrite_profile["profile"]["canonicalOwnerOrigin"] == "http://127.0.0.1:" + str(port)
+            next_port = port
+            report["canonicalRewriteOwnerOrigin"] = rewrite_profile["profile"]["canonicalOwnerOrigin"]
+            report["configuredPortReservationVerified"] = True
+        else:
+            assert rewrite_reservation is None
         assert len({database_port, next_port, tls_port}) == 3
         runtime_ports.extend([database_port, next_port, tls_port])
         password = secrets.token_urlsafe(32)
@@ -119,6 +129,10 @@ def qualify(owner, work, evidence, pnpm, environment, capacity, *, rewrite_profi
         stage = "owned-loopback-certificate"
         execute(stage, ["openssl", "req", "-x509", "-newkey", "rsa:2048", "-nodes", "-keyout", private / "key.pem", "-out", private / "cert.pem", "-days", "1", "-subj", "/CN=localhost", "-addext", "subjectAltName=DNS:localhost,IP:127.0.0.1"], env)
         (private / "key.pem").chmod(0o600)
+        if rewrite_reservation is not None:
+            assert rewrite_reservation.getsockname() == ("127.0.0.1", next_port)
+            rewrite_reservation.close()
+            report["configuredPortReservationReleasedForOwnerStart"] = True
         server = launch("owner-production-server", [pnpm, "start", "--hostname", "127.0.0.1", "--port", str(next_port)], trusted)
         import urllib.request
         stage = "owner-production-readiness"

@@ -1276,3 +1276,14 @@ positive200/same-identity and every refusal/auth control. Declare a captured
 HTTP origin for the owned loopback Next listener and proxy the session alias to
 its canonical pathname. Do not substitute an easier endpoint, patch NextAuth,
 disable typechecks, or relabel the original failure. A new actual pass is needed.
+
+Revision2 implementation follows [the canonical proxy plan](2026-10-24-next-canonical-proxy.md).
+It captures the validated literal loopback origin and integer port in both the
+derived profile/config and nonsecret command configuration. A real bound socket
+holds that port before build and is released only for the owned production
+server; failure cleanup closes it. The runtime consumes the same captured port.
+[Preflight](../acceptance/project-adoption/g3-next-rewrite-runtime-20261024/canonical-port-preflight.json)
+passed eight overlay/port controls and four source-acquisition controls, including
+real contention/handoff and invalid-port refusal before writes. Keep the same
+twelve runtime cases and original sixteen auth/document groups. The version1
+internal-session profile remains failed; actual version2 acceptance is pending.

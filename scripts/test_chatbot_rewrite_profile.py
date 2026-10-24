@@ -3,6 +3,7 @@ import copy
 import json
 import os
 import stat
+import socket
 import tempfile
 import unittest
 from pathlib import Path
@@ -29,7 +30,7 @@ class RewriteOverlayControls(unittest.TestCase):
     def test_unknown_config_refuses_before_writes(self):
         root, rows = self.prepare()
         with self.assertRaisesRegex(AssertionError, 'UNKNOWN_ORIGINAL'):
-            profile.apply(root, rows)
+            profile.apply(root, rows, canonical_port=39123)
         self.assertEqual((root/'next.config.ts').read_bytes(), CONTROLLED)
         self.assertFalse((root/profile.PROFILE_PATH).exists())
 
@@ -39,7 +40,7 @@ class RewriteOverlayControls(unittest.TestCase):
         target.write_bytes(b'preserve existing')
         with patch.object(profile, 'ORIGINAL_CONFIG_SHA', profile.digest(CONTROLLED)):
             with self.assertRaisesRegex(AssertionError, 'PROFILE_EXISTS'):
-                profile.apply(root, rows)
+                profile.apply(root, rows, canonical_port=39123)
         self.assertEqual(target.read_bytes(), b'preserve existing')
         self.assertEqual((root/'next.config.ts').read_bytes(), CONTROLLED)
 
@@ -49,7 +50,7 @@ class RewriteOverlayControls(unittest.TestCase):
         target.symlink_to('missing-preserved-target')
         with patch.object(profile, 'ORIGINAL_CONFIG_SHA', profile.digest(CONTROLLED)):
             with self.assertRaisesRegex(AssertionError, 'PROFILE_EXISTS'):
-                profile.apply(root, rows)
+                profile.apply(root, rows, canonical_port=39123)
         self.assertTrue(target.is_symlink())
         self.assertFalse((root/'missing-preserved-target').exists())
         self.assertEqual((root/'next.config.ts').read_bytes(), CONTROLLED)
@@ -59,7 +60,7 @@ class RewriteOverlayControls(unittest.TestCase):
         rows.append(copy.deepcopy(rows[0]))
         with patch.object(profile, 'ORIGINAL_CONFIG_SHA', profile.digest(CONTROLLED)):
             with self.assertRaises(AssertionError):
-                profile.apply(root, rows)
+                profile.apply(root, rows, canonical_port=39123)
         self.assertFalse((root/profile.PROFILE_PATH).exists())
         self.assertEqual((root/'next.config.ts').read_bytes(), CONTROLLED)
 
@@ -68,15 +69,37 @@ class RewriteOverlayControls(unittest.TestCase):
         root, rows = self.prepare(bad)
         with patch.object(profile, 'ORIGINAL_CONFIG_SHA', profile.digest(bad)):
             with self.assertRaisesRegex(AssertionError, 'CONFIG_SHAPE'):
-                profile.apply(root, rows)
+                profile.apply(root, rows, canonical_port=39123)
         self.assertFalse((root/profile.PROFILE_PATH).exists())
         self.assertEqual((root/'next.config.ts').read_bytes(), bad)
+
+    def test_invalid_port_refuses_before_writes(self):
+        root, rows = self.prepare()
+        for port in [True, 0, 1024, 65536, '39123', None]:
+            with self.assertRaisesRegex(AssertionError, 'OWNER_PORT'):
+                profile.apply(root, rows, canonical_port=port)
+        self.assertFalse((root/profile.PROFILE_PATH).exists())
+        self.assertEqual((root/'next.config.ts').read_bytes(), CONTROLLED)
+
+    def test_real_port_reservation_and_handoff(self):
+        reservation = profile.reserve_owner_port()
+        address = reservation.getsockname()
+        try:
+            self.assertEqual(address[0], '127.0.0.1')
+            with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as contender:
+                with self.assertRaises(OSError):
+                    contender.bind(address)
+        finally:
+            reservation.close()
+        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as owner:
+            owner.bind(address)
+        self.assertEqual(reservation.fileno(), -1)
 
     def test_derived_bytes_and_provenance_are_separate(self):
         root, rows = self.prepare()
         before = copy.deepcopy(rows)
         with patch.object(profile, 'ORIGINAL_CONFIG_SHA', profile.digest(CONTROLLED)):
-            derived, record = profile.apply(root, rows)
+            derived, record = profile.apply(root, rows, canonical_port=39123)
         self.assertEqual(rows, before)
         changed = next(row for row in derived if row['path']=='next.config.ts')
         self.assertNotIn('gitBlob', changed)
@@ -86,7 +109,7 @@ class RewriteOverlayControls(unittest.TestCase):
         self.assertEqual(record['profileDigest'], profile.digest((root/profile.PROFILE_PATH).read_bytes()))
         self.assertFalse(record['upstreamBehaviorClaim'])
         self.assertEqual(stat.S_IMODE((root/profile.PROFILE_PATH).stat().st_mode), 0o644)
-        self.assertEqual(json.loads((root/profile.PROFILE_PATH).read_text())['rules'], profile.RULES)
+        self.assertEqual(json.loads((root/profile.PROFILE_PATH).read_text())['rules'], profile.rules_for_port(39123))
 
 if __name__ == '__main__':
     unittest.main()

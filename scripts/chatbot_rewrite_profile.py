@@ -2,6 +2,7 @@
 import copy
 import hashlib
 import json
+import socket
 from pathlib import Path
 
 ORIGINAL_CONFIG_SHA = 'sha256:856cc04806b203481ad9722b92d3f52907a618468ee79129f98373b4ae86e075'
@@ -29,8 +30,26 @@ def digest(data):
     return 'sha256:' + hashlib.sha256(data).hexdigest()
 
 
-def apply(owner, inventory):
+def reserve_owner_port():
+    reservation = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    try:
+        reservation.bind(('127.0.0.1', 0))
+    except BaseException:
+        reservation.close()
+        raise
+    return reservation
+
+
+def rules_for_port(port):
+    assert type(port) is int and 1024 < port <= 65535, 'REWRITE_OWNER_PORT'
+    rules = copy.deepcopy(RULES)
+    rules['afterFiles'][0]['destination'] = 'http://127.0.0.1:' + str(port) + '/api/auth/session'
+    return rules
+
+
+def apply(owner, inventory, *, canonical_port):
     """Original capture stays separate. Refuse unknown config or existing profile."""
+    rules = rules_for_port(canonical_port)
     owner = Path(owner)
     config = owner / 'next.config.ts'
     assert not config.is_symlink() and config.is_file()
@@ -43,14 +62,16 @@ def apply(owner, inventory):
     assert text.count(anchor) == 1 and 'rewrites:' not in text, 'REWRITE_CONFIG_SHAPE'
     indices = [i for i, row in enumerate(inventory) if row['path'] == 'next.config.ts']
     assert len(indices) == 1 and inventory[indices[0]]['digest'] == ORIGINAL_CONFIG_SHA
-    profile = dict(profile='patamaps-chatbot-internal-rewrites-1',
-                   upstreamConfigDigest=ORIGINAL_CONFIG_SHA, rules=RULES,
+    profile = dict(profile='patamaps-chatbot-canonical-session-proxy-2',
+                   upstreamConfigDigest=ORIGINAL_CONFIG_SHA, rules=rules,
+                   canonicalOwnerPort=canonical_port, canonicalOwnerOrigin='http://127.0.0.1:'+str(canonical_port),
+                   originalInternalSessionRewriteAccepted=False,
                    originalUpstreamUnchanged=True, qualificationOverlay=True)
     encoded = (json.dumps(profile, indent=2) + '\n').encode()
     # Preserve the plugin's original flat rewrite array before adding phases.
     # BotID1.5.11 moves its rules to beforeFiles if passed a phased base config.
     composed = (
-        'const qualificationRewrites = ' + json.dumps(RULES) + ' satisfies Awaited<ReturnType<NonNullable<NextConfig["rewrites"]>>>;\n'
+        'const qualificationRewrites = ' + json.dumps(rules) + ' satisfies Awaited<ReturnType<NonNullable<NextConfig["rewrites"]>>>;\n'
         'const qualifiedNextConfig: NextConfig = withBotId(nextConfig);\n'
         'const originalRewrites = qualifiedNextConfig.rewrites;\n'
         'qualifiedNextConfig.rewrites = async () => {\n'
@@ -84,10 +105,10 @@ def apply(owner, inventory):
         upstreamConfigGitBlob=original_blob)
 
 
-def verify_compiled(manifest, observed, baseline):
+def verify_compiled(manifest, observed, baseline, *, profile):
     """Compare complete compiled rules; native metadata is not runtime proof."""
     wanted = {rule['source']: (phase, rule)
-              for phase, rules in RULES.items() for rule in rules}
+              for phase, rules in profile['rules'].items() for rule in rules}
     actual = {}
     for phase, rules in manifest['rewrites'].items():
         for rule in rules:
