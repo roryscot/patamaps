@@ -43,9 +43,10 @@ def main():
  p=argparse.ArgumentParser(description=__doc__)
  for n in ["work","evidence","cli"]:p.add_argument("--"+n,type=Path,required=True)
  p.add_argument("--installed-inventory-digest");p.add_argument("--shared-cache-root",type=Path)
- p.add_argument("--standalone-probe",action="store_true");p.add_argument("--build-cli",action="store_true");p.add_argument("--runtime",action="store_true");p.add_argument("--rewrites",action="store_true");a=p.parse_args()
+ p.add_argument("--retained-runtime",action="store_true");p.add_argument("--standalone-probe",action="store_true");p.add_argument("--build-cli",action="store_true");p.add_argument("--runtime",action="store_true");p.add_argument("--rewrites",action="store_true");a=p.parse_args()
  assert not a.rewrites or a.runtime, "Rewrite acceptance requires actual production runtime"
  assert not a.standalone_probe or (a.rewrites and a.runtime), "Standalone probe requires the existing real runtime and rewrite controls"
+ assert not a.retained_runtime or a.standalone_probe, "Retained runtime requires the standalone source/build/refusal profile"
  assert platform.system()=="Linux" and platform.machine()=="x86_64" and os.environ.get("GITHUB_ACTIONS")=="true","Use focused Linux CI; native Intel allocation requires its existing guard"
  installed_identity=None
  if a.installed_inventory_digest:
@@ -75,10 +76,21 @@ def main():
   env["PLAYWRIGHT_BROWSERS_PATH"]=str(browsers)
   env["PLAYWRIGHT_SKIP_BROWSER_GC"]="1"
  rewrite_port_reservation=None
+ retained_active=False
  r=dict(status="running",sourceRevision=source_revision,installedSourceIdentity=installed_identity,upstream=UPSTREAM,upstreamCommit=REV,commands=[],frameworkBuildEstablished=False,runtimeEstablished=False,authenticationAccepted=False,dependencyClosureEstablished=False,applicationAcceptance=False,productionActivation=False,filesDeleted=0,maximumWorkflowGrowthBytes=4000000000)
  def save():write(out/"receipt.json",r)
  def capacity():
   d=shutil.disk_usage(ROOT);assert d.free>=500000000 and d.used-storage_baseline_bytes<=4000000000,"CI workflow storage boundary"
+  request=work/"retained-port.request.json"
+  if a.retained_runtime and retained_active and rewrite_port_reservation is not None and rewrite_port_reservation.fileno()>=0 and request.exists():
+   assert request.stat().st_size<4096
+   wanted=dict(port=rewrite_overlay["profile"]["canonicalOwnerPort"],profileDigest=rewrite_overlay["profileDigest"])
+   assert json.loads(request.read_bytes())==wanted
+   assert rewrite_port_reservation.getsockname()==("127.0.0.1",wanted["port"])
+   rewrite_port_reservation.close()
+   write(work/"retained-port.ack.json",wanted)
+   r["retainedPortHandoffVerified"]=True
+   save()
  def run(label,argv,cwd=None,data=None,timeout=1200,expected=0):
   capacity();began=time.monotonic();stdout_path=out/"logs"/(label+".stdout");stderr_path=out/"logs"/(label+".stderr");input_path=out/"logs"/(label+".input")
   if data is not None:input_path.write_bytes(data)
@@ -201,7 +213,17 @@ def main():
    for src,dst in [(staged/"public",standalone_root/"public"),(staged/".next/static",standalone_root/".next/static")]:
     assert src.is_dir() and not dst.exists()
     shutil.copytree(src,dst,symlinks=True)
-   r["standaloneProbe"]=observe(cli,standalone_root,work,out,run,dict(sourceCaptureDigest=source["digest"],compiledBuildReceiptDigest=sha(out/"logs/owner-production-build.stdout"),configurationProjectionDigest=sha(observations/"config.json")))
+   retained_config=None
+   if a.retained_runtime:
+    assert work.stat().st_dev==ROOT.stat().st_dev,"Retained image storage must share the monitored filesystem"
+    cache=standalone_root/".next/cache"
+    assert not cache.exists()
+    cache.mkdir(mode=0o700)
+    retained_config=dict(owner=str(staged),originalSource=str(owner),pnpm=str(pnpm),
+       standalone=str(standalone_root),rewrite=rewrite_overlay,environment=env)
+   r["standaloneProbe"]=observe(cli,standalone_root,work,out,run,
+       dict(sourceCaptureDigest=source["digest"],compiledBuildReceiptDigest=sha(out/"logs/owner-production-build.stdout"),configurationProjectionDigest=sha(observations/"config.json")),
+       runtime=retained_config)
    standalone_before=standalone_inventory(standalone_root)
   output_before,output_summary_before=private_output_inventory(staged,work,"before")
   manifest_before={name:sha(path) for name,path in files.items()}
@@ -210,8 +232,20 @@ def main():
    browser_bootstrap=json.loads(run("owner-browser-runtime-dependency-preflight",["node","-e",'const {chromium}=require("@playwright/test"); (async()=>{let browser;try{browser=await chromium.launch({headless:true});console.log(JSON.stringify({browserLaunchSucceeded:true,browserVersion:browser.version()}));}finally{if(browser)await browser.close();}})().catch(()=>{console.error("Unprivileged browser launch preflight failed");process.exitCode=1;});'],cwd=staged,timeout=45))
    assert browser_bootstrap["browserLaunchSucceeded"] is True
    r["browserBootstrap"]=dict(**browser_bootstrap,systemPackageInstallationRequested=False)
-   from qualify_chatbot_runtime import qualify
-   runtime=qualify(staged,work,out,pnpm,env,capacity,rewrite_profile=rewrite_overlay,rewrite_reservation=rewrite_port_reservation,standalone_root=standalone_root)
+   if a.retained_runtime:
+    retained_active=True
+    try:
+     selected_runtime=native("retained-native-runtime",
+         ["project-exec-selected",Path(r["standaloneProbe"]["closedTreeState"]),work/"retained-runtime.command.json"],timeout=1300)
+    finally:
+     retained_active=False
+    assert selected_runtime["status"]=="completed-selected-project-command" and selected_runtime["postExecutionSelectionVerified"] and selected_runtime["selectionPointerUnchanged"]
+    runtime=json.loads((out/"runtime.json").read_bytes())
+    assert runtime["retainedRuntime"]["selectedGenerationUnchanged"] and runtime["retainedRuntime"]["allOwnedContainersStopped"]
+    r["retainedSelectedExecution"]=dict(status=selected_runtime["status"],postExecutionSelectionVerified=True,selectionPointerUnchanged=True)
+   else:
+    from qualify_chatbot_runtime import qualify
+    runtime=qualify(staged,work,out,pnpm,env,capacity,rewrite_profile=rewrite_overlay,rewrite_reservation=rewrite_port_reservation,standalone_root=standalone_root)
    assert runtime["status"]=="passed" and runtime["ownedProcessGroupsStopped"]
    r.update(runtimeEstablished=True,authenticationAccepted=True,ownerRuntimeMigrationExecuted=True,runtimeBoundary="trusted owner; new isolated CI PostgreSQL and HTTPS loopback; no production secrets")
   if standalone_root is not None:
@@ -221,7 +255,7 @@ def main():
    write(out/"standalone-probe.json",r["standaloneProbe"])
    save()
    assert standalone_after==standalone_before,"Standalone tree changed during runtime"
-   r["standaloneProbe"].update(actualStandaloneRuntimePassed=True,standaloneTreeUnchanged=True,producerSourceAndToolsUnavailable=False,fullRetainedBundleAccepted=False)
+   r["standaloneProbe"].update(actualStandaloneRuntimePassed=True,standaloneTreeUnchanged=True,producerSourceAndToolsUnavailable=a.retained_runtime,retainedRuntimeAccepted=a.retained_runtime,fullRetainedBundleAccepted=False)
    write(out/"standalone-probe.json",r["standaloneProbe"])
   output_after,output_summary_after=private_output_inventory(staged,work,"after")
   changed={name for name in set(output_before)|set(output_after) if output_before.get(name)!=output_after.get(name)}
@@ -230,7 +264,7 @@ def main():
    category="cache" if name.startswith("cache/") else "diagnostics" if name in {"trace","trace-build"} or name.startswith("diagnostics/") else "runtime-output"
    categories[category]+=1
   assert {name:sha(path) for name,path in files.items()}==manifest_before,"Public compiled manifests changed during runtime"
-  r["generatedOutputObservation"]=dict(before=output_summary_before,after=output_summary_after,changedFiles=len(changed),changedCategories=categories,publicManifestsUnchanged=True,detailedInventoryPublished=False,fullRuntimeBundleSelected=False)
+  r["generatedOutputObservation"]=dict(before=output_summary_before,after=output_summary_after,changedFiles=len(changed),changedCategories=categories,publicManifestsUnchanged=True,detailedInventoryPublished=False,fullRuntimeBundleSelected=a.retained_runtime)
   audit("source-exclusion-final-audit");assert source_unchanged(owner) and source_unchanged(staged,staged_inventory)
   r.update(status="passed-pinned-chatbot-source-build-auth" if a.runtime else "passed-pinned-chatbot-source-build-observations",frameworkVersion=version,sourceContextDigest=capture["digest"],textSourceDigest=source["digest"],sourceTextFiles=len(texts),selectedSourceBytesAndModesUnchanged=True,sourceExclusionAudited=True,dependencyLifecycleScriptsExecuted=False,nativeCompiledObservation=True,ownerTestMode="CI_PLAYWRIGHT=1 selects the owner's model-test mode; no model behavior accepted")
  except BaseException as error:

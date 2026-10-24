@@ -376,3 +376,21 @@ Implement the remaining runtime using these existing components and boundaries:
 - Repeat usable execution with exact fresh source/native installs on this new
   engine, keeping the compiler off HTTP request paths. Performance and remaining
   adoption/deployment context requirements stay open after runtime acceptance.
+
+
+## Retained runtime implementation checkpoint
+
+The opt-in next-retained-runtime lane now supplies the captured coordinator,
+native selected-command admission/post-verification, producer/tool relocation
+and restoration, a pinned non-root read-only Node image, and a separate64MiB
+tmpfs cache. Before-effects controls mutate/remove a real bundle member and
+redirect a real link to a retained identical external target; none may invoke
+the sentinel. The image probe compares private bytes/modes/link targets and
+checks actual kernel limits, EROFS and cache ENOSPC before application requests.
+The real producer tree and native selected generation must remain unchanged.
+
+[Preflight](../acceptance/project-adoption/g5-next-retained-runtime-20261024/preflight.json)
+records31 focused Python controls and syntax/YAML/diff checks on Intel. These
+controls do not establish actual container enforcement or browser acceptance.
+The focused Linux run remains required; fresh installed replay on this engine
+and all other open enhancement requirements remain separate gates.

@@ -22,6 +22,7 @@ on:
           - next-rewrites
           - next-installed
           - next-standalone-probe
+          - next-retained-runtime
           - cargo-registry-preflight
           - cargo-registry-container-preflight
           - cargo-registry-context
@@ -455,3 +456,12 @@ jobs:
     with:
       rewrite-controls: true
       standalone-controls: true
+
+  next-retained-runtime:
+    if: github.event_name == 'workflow_dispatch' && inputs.qualification == 'next-retained-runtime'
+    name: Retained Next immutable generation and private cache
+    uses: ./.github/workflows/next-server-actions.yml
+    with:
+      rewrite-controls: true
+      standalone-controls: true
+      retained-runtime-controls: true

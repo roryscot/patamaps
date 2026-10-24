@@ -28,7 +28,7 @@ def inventory(base):
         if stat.S_ISLNK(before.st_mode):
             target = os.readlink(path)
             assert len(target.encode()) <= 8192, "STANDALONE_LINK_BOUND"
-            rows[name] = dict(kind="symlink", target=target, targetFollowed=False)
+            rows[name] = dict(kind="symlink", mode=stat.S_IMODE(before.st_mode), target=target, targetFollowed=False)
         elif stat.S_ISDIR(before.st_mode):
             rows[name] = dict(kind="directory", mode=stat.S_IMODE(before.st_mode))
         else:
@@ -92,7 +92,7 @@ def helper_main():
         raise AssertionError("STANDALONE_HELPER_MODE")
     print("standalone-private-output-check-passed")
 
-def observe(cli, standalone, work, evidence, run, producer):
+def observe(cli, standalone, work, evidence, run, producer, *, runtime=None):
     rows = inventory(standalone)
     observed = summary(rows)
     (evidence/"standalone-probe.json").write_text(json.dumps(dict(
@@ -118,12 +118,35 @@ def observe(cli, standalone, work, evidence, run, producer):
             privateSourceRoot=str(standalone), privateInventoryPath=str(private_inventory),
             inventoryDigest=observed["inventoryDigest"], producer=producer),
     }
+    state = work/"standalone-selection-state"
+    driver_paths = []
+    public_environment = {}
+    executable = sys.executable
+    if runtime is not None:
+        from next_retained_runtime import DRIVERS, ENVIRONMENT
+        executable = str(work/"configured-build-python")
+        Path(executable).symlink_to(sys.executable)
+        public_environment = {key:runtime["environment"][key] for key in ENVIRONMENT if key in runtime["environment"]}
+        public_environment.update(GITHUB_ACTIONS="true", PYTHONDONTWRITEBYTECODE="1")
+        config = {key:value for key,value in runtime.items() if key!="environment"}
+        config.update(profile="patamaps-retained-next-runtime-1", state=str(state),
+            parentWork=str(work), runtimeWork=str(work/"retained-runtime-work"), evidence=str(evidence),
+            handoffRequest=str(work/"retained-port.request.json"),handoffAck=str(work/"retained-port.ack.json"),
+            unavailablePaths=[runtime["originalSource"],runtime["owner"],
+                str(work/"source-snapshot"),str(work/"derived-snapshot"),str(private_inventory),
+                executable,runtime["pnpm"],str(cli)])
+        values["runtime-descriptor.json"] = config
+        (owner/"scripts").mkdir()
+        for name in DRIVERS:
+            relative="scripts/"+name
+            (owner/relative).write_bytes((ROOT/relative).read_bytes())
+            driver_paths.append(relative)
     for name, value in values.items():
         (owner/name).write_text(json.dumps(value, indent=2)+"\n")
     (owner/"copy-helper.py").write_bytes(Path(__file__).read_bytes())
     project = dict(profile="patamaps-project-inputs-1", id=identity+":inputs", nonsecretInputs=True,
-        inputs=[*values, "copy-helper.py"], components=[dict(id="producer", kind="deployment",
-        root=".", entrypoints=["descriptor.json"])], nonsecretConfiguration={}, secretReferences={})
+        inputs=[*values, "copy-helper.py", *driver_paths], components=[dict(id="producer", kind="deployment",
+        root=".", entrypoints=["descriptor.json"])], nonsecretConfiguration=public_environment, secretReferences={})
     workspace = dict(schemaVersion="0.1.0", documentType="workspace-config", id=identity,
         namespace="standalone-output-probe", revision="1", packs=[],
         sources=[dict(adapter="portable-shard", id=identity+":source", path="graph.json")],
@@ -133,7 +156,7 @@ def observe(cli, standalone, work, evidence, run, producer):
         evaluatedAt="2026-10-24T00:00:00Z")
     def command(mode):
         return dict(profile="patamaps-project-command-1", workingDirectory=".", environmentReferences={},
-            invocation=dict(executable=sys.executable, arguments=["copy-helper.py", mode],
+            invocation=dict(executable=executable, arguments=["copy-helper.py", mode],
                 codeInputs=["copy-helper.py"], bounds=dict(maximumElapsedMs=120000,
                 maximumStdoutBytes=4096, maximumStderrBytes=4096)))
     def plan(label, build, verify, kind="tree"):
@@ -143,7 +166,6 @@ def observe(cli, standalone, work, evidence, run, producer):
             buildSteps=[command(build)], verificationSteps=[command(verify)],
             outputs=[dict(path="bundle", kind=kind)]), indent=2)+"\n")
         return path
-    state = work/"standalone-selection-state"
     def native(label, path, expected=0):
         return json.loads(run(label, [cli, "project-build", path, "--source", owner,
             "--state", state], expected=expected))
@@ -164,9 +186,51 @@ def observe(cli, standalone, work, evidence, run, producer):
     closed = native("standalone-closed-tree-select",
                     plan("closed", "--copy", "--verify-copy", kind="closed-tree"))
     assert closed["status"] == "selected-project-build"
+    if runtime is not None:
+        candidate=state/closed["attempt"]/"candidate"
+        sentinel=work/"retained-before-effects.command.json"
+        sentinel.write_text(json.dumps(dict(profile="patamaps-project-command-1",workingDirectory=".",
+            environmentReferences={},invocation=dict(executable="/bin/sh",
+                arguments=["-c","printf invoked > retained-forbidden.marker"],codeInputs=[],
+                bounds=dict(maximumElapsedMs=5000,maximumStdoutBytes=1024,maximumStderrBytes=4096))),indent=2)+"\n")
+        server=candidate/"bundle/server.js";original=work/"retained-server.original"
+        server.rename(original);server.write_text("controlled stale server\n")
+        try:
+            run("retained-stale-member-before-effects",[cli,"project-exec-selected",state,sentinel],expected=2)
+            assert not (candidate/"retained-forbidden.marker").exists()
+        finally:
+            server.rename(work/"retained-server.changed");original.rename(server)
+        server.rename(original)
+        try:
+            run("retained-missing-member-before-effects",[cli,"project-exec-selected",state,sentinel],expected=2)
+            assert not (candidate/"retained-forbidden.marker").exists()
+        finally:
+            original.rename(server)
+        links=[name for name,row in rows.items() if row["kind"]=="symlink"]
+        assert links,"Pinned bundle requires a real link for the before-effects control"
+        link=candidate/"bundle"/sorted(links)[0]
+        outside=work/"private-identical-link-target"
+        if link.resolve().is_dir():
+            shutil.copytree(link.resolve(),outside,symlinks=True)
+        else:
+            shutil.copyfile(link.resolve(),outside);outside.chmod(0o600)
+        link_backup=work/"retained-link.original";link.rename(link_backup);link.symlink_to(outside)
+        try:
+            run("retained-external-identical-link-before-effects",[cli,"project-exec-selected",state,sentinel],expected=2)
+            assert not (candidate/"retained-forbidden.marker").exists()
+        finally:
+            link.rename(work/"retained-link.changed");link_backup.rename(link)
     verified = json.loads(run("standalone-final-native-selection-verify", [cli, "project-build-verify", state]))
     assert verified["status"] == "verified-selected-build-bindings"
     assert inventory(standalone) == rows
+    if runtime is not None:
+        runtime_command=dict(profile="patamaps-project-command-1",workingDirectory=".",
+            environmentReferences={key:key for key in public_environment},
+            invocation=dict(executable=sys.executable,
+                arguments=["scripts/next_retained_runtime.py","runtime-descriptor.json"],
+                codeInputs=driver_paths,bounds=dict(maximumElapsedMs=1200000,
+                    maximumStdoutBytes=1048576,maximumStderrBytes=65536)))
+        (work/"retained-runtime.command.json").write_text(json.dumps(runtime_command,indent=2)+"\n")
     report = dict(status="observed-standalone-native-output-boundary", producedTree=observed,
         nativeTreeSelected=not bool(observed["symlinks"]),
         closedTreeSelected=True, closedTreeAttempt=closed["attempt"], closedTreeState=str(state),
@@ -174,7 +238,8 @@ def observe(cli, standalone, work, evidence, run, producer):
         priorAndFinalSelectionVerified=True, exactPrivateCopyVerified=True,
         detailedInventoryPublished=False, rawGeneratedOutputsPublished=False,
         producerSourceAndToolsUnavailable=False, fullRetainedBundleAccepted=False,
-        sourceBuildLineage=producer, helperDigest=digest(Path(__file__).read_bytes()), filesDeleted=0)
+        sourceBuildLineage=producer, helperDigest=digest(Path(__file__).read_bytes()), filesDeleted=0,
+        realMemberAndLinkRefusalsBeforeEffects=runtime is not None)
     (evidence/"standalone-probe.json").write_text(json.dumps(report, indent=2)+"\n")
     return report
 

@@ -38,7 +38,7 @@ def available_port():
         return listener.getsockname()[1]
 
 
-def qualify(owner, work, evidence, pnpm, environment, capacity, *, rewrite_profile=None, rewrite_reservation=None, standalone_root=None):
+def qualify(owner, work, evidence, pnpm, environment, capacity, *, rewrite_profile=None, rewrite_reservation=None, standalone_root=None, retained=None):
     assert sys.platform == "linux" and os.environ.get("GITHUB_ACTIONS") == "true"
     private = work / "trusted-owner-runtime"
     private.mkdir(mode=0o700)
@@ -54,6 +54,8 @@ def qualify(owner, work, evidence, pnpm, environment, capacity, *, rewrite_profi
     handles = []
     runtime_ports = []
     stage = "preparation"
+    backend = None
+    test_owner = owner
     begin = time.monotonic()
 
     def save():
@@ -64,21 +66,21 @@ def qualify(owner, work, evidence, pnpm, environment, capacity, *, rewrite_profi
         assert time.monotonic() - begin < 900, "runtime deadline"
         assert all(h.tell() < 33554432 for h in handles), "private runtime log bound"
 
-    def launch(label, argv, env):
+    def launch(label, argv, env, cwd=None):
         stdout = (private / (label + ".stdout")).open("xb")
         stderr = (private / (label + ".stderr")).open("xb")
         handles.extend([stdout, stderr])
         child = subprocess.Popen(
             [sys.executable, str(ROOT / "scripts/project_watch.py"), "__guard", *map(str, argv)],
-            cwd=owner, env=env, stdin=subprocess.DEVNULL,
+            cwd=cwd or owner, env=env, stdin=subprocess.DEVNULL,
             stdout=stdout, stderr=stderr, start_new_session=True,
         )
         active.append(child)
         return child
 
-    def execute(label, argv, env, timeout=120):
+    def execute(label, argv, env, timeout=120, cwd=None):
         started = time.monotonic()
-        child = launch(label, argv, env)
+        child = launch(label, argv, env, cwd=cwd)
         while child.poll() is None:
             monitor()
             assert time.monotonic() - started < timeout, "trusted-owner command deadline"
@@ -90,6 +92,11 @@ def qualify(owner, work, evidence, pnpm, environment, capacity, *, rewrite_profi
     save()
     try:
         env = dict(environment)
+        if retained is not None:
+            from next_retained_runtime import RetainedNextRuntime
+            assert retained["owner"]==str(owner) and standalone_root is not None
+            backend=RetainedNextRuntime(retained,owner,work,private,evidence,env,execute,monitor)
+            report["retainedRuntime"]=backend.report
         bindir = Path(subprocess.check_output(["pg_config", "--bindir"], text=True).strip())
         assert (bindir / "initdb").is_file() and (bindir / "postgres").is_file()
         report["postgresVersion"] = subprocess.check_output([bindir / "postgres", "--version"], text=True).strip()
@@ -98,7 +105,10 @@ def qualify(owner, work, evidence, pnpm, environment, capacity, *, rewrite_profi
         if rewrite_profile is not None:
             port = rewrite_profile["profile"]["canonicalOwnerPort"]
             assert type(port) is int and 1024 < port <= 65535
-            assert rewrite_reservation is not None and rewrite_reservation.getsockname() == ("127.0.0.1", port)
+            if retained is None:
+                assert rewrite_reservation is not None and rewrite_reservation.getsockname() == ("127.0.0.1", port)
+            else:
+                assert rewrite_reservation is None and retained["rewrite"]==rewrite_profile
             assert rewrite_profile["profile"]["canonicalOwnerOrigin"] == "http://127.0.0.1:" + str(port)
             next_port = port
             report["canonicalRewriteOwnerOrigin"] = rewrite_profile["profile"]["canonicalOwnerOrigin"]
@@ -162,6 +172,9 @@ def qualify(owner, work, evidence, pnpm, environment, capacity, *, rewrite_profi
         stage = "owned-loopback-certificate"
         execute(stage, ["openssl", "req", "-x509", "-newkey", "rsa:2048", "-nodes", "-keyout", private / "key.pem", "-out", private / "cert.pem", "-days", "1", "-subj", "/CN=localhost", "-addext", "subjectAltName=DNS:localhost,IP:127.0.0.1"], env)
         (private / "key.pem").chmod(0o600)
+        if backend is not None:
+            stage = "retained-image-and-kernel-enforcement"
+            backend.prepare()
         if rewrite_reservation is not None:
             assert rewrite_reservation.getsockname() == ("127.0.0.1", next_port)
             rewrite_reservation.close()
@@ -173,10 +186,17 @@ def qualify(owner, work, evidence, pnpm, environment, capacity, *, rewrite_profi
             assert standalone_root.is_dir() and not standalone_root.is_symlink()
             assert (standalone_root / "server.js").is_file()
             trusted.update(HOSTNAME="127.0.0.1", PORT=str(next_port))
-            server_argv = ["node", standalone_root / "server.js"]
+            if backend is None:
+                server_argv = ["node", standalone_root / "server.js"]
+                report["producerSourceAndToolsUnavailable"] = False
+            else:
+                stage = "retained-source-tool-unavailable-start"
+                server_argv = backend.server(trusted,next_port)
+                test_owner = backend.harness
+                report["producerSourceAndToolsUnavailable"] = True
+                report["configuredPortReservationReleasedForOwnerStart"] = True
             report["standaloneServerEntrypoint"] = True
-            report["producerSourceAndToolsUnavailable"] = False
-        server = launch("owner-production-server", server_argv, trusted)
+        server = launch("owner-production-server", server_argv, trusted, cwd=test_owner)
         import urllib.request
         stage = "owner-production-readiness"
         started = time.monotonic()
@@ -192,10 +212,10 @@ def qualify(owner, work, evidence, pnpm, environment, capacity, *, rewrite_profi
             time.sleep(.4)
         report["controls"].append(dict(name=stage, passed=True))
         config = private / "browser.json"
-        config.write_text(json.dumps(dict(owner=str(owner), private=str(private), origin=origin, nextPort=next_port, tlsPort=tls_port, receipt=str(evidence / "browser-auth.json"),rewriteControls=bool(rewrite_profile))))
+        config.write_text(json.dumps(dict(owner=str(test_owner), private=str(private), origin=origin, nextPort=next_port, tlsPort=tls_port, receipt=str(evidence / "browser-auth.json"),rewriteControls=bool(rewrite_profile))))
         config.chmod(0o600)
         stage = "production-server-actions-and-permissions"
-        execute(stage, ["node", ROOT / "scripts/qualify_chatbot_auth.mjs", config], trusted, timeout=600)
+        execute(stage, ["node", ROOT / "scripts/qualify_chatbot_auth.mjs", config], trusted, timeout=600, cwd=test_owner)
         browser = json.loads((evidence / "browser-auth.json").read_text())
         controls = browser["controls"]
         expected_controls = EXPECTED_CONTROLS
@@ -206,6 +226,9 @@ def qualify(owner, work, evidence, pnpm, environment, capacity, *, rewrite_profi
         assert browser["status"] == "passed" and len(controls) == len(expected_controls)
         assert {c["name"] for c in controls} == expected_controls and all(c["passed"] is True for c in controls)
         assert browser["upstreamPageTests"] == 4 and browser["ownedBrowserStopped"] and browser["ownedHttpsProxyStopped"]
+        if backend is not None:
+            stage = "retained-cache-and-generation-postcheck"
+            backend.after_browser()
         forbidden = [password.encode(), trusted["AUTH_SECRET"].encode(), trusted["POSTGRES_URL"].encode(), (private / "key.pem").read_bytes()]
         for published in evidence.rglob("*"):
             if published.is_file():
@@ -221,7 +244,7 @@ def qualify(owner, work, evidence, pnpm, environment, capacity, *, rewrite_profi
         report["generatedOwnerSecretsAbsentFromEvidence"] = True
         report["driverDigests"] = {
             name: "sha256:" + hashlib.sha256((ROOT / "scripts" / name).read_bytes()).hexdigest()
-            for name in ["qualify_chatbot_runtime.py", "qualify_chatbot_auth.mjs", *(["chatbot_rewrite_profile.py", "qualify_chatbot_next.py"] if rewrite_profile else []), *(["qualify_next_standalone.py"] if standalone_root is not None else [])]
+            for name in ["qualify_chatbot_runtime.py", "qualify_chatbot_auth.mjs", *(["chatbot_rewrite_profile.py", "qualify_chatbot_next.py"] if rewrite_profile else []), *(["qualify_next_standalone.py"] if standalone_root is not None else []), *(["next_retained_runtime.py", "deployment_miniserve_image.py", "project_watch.py"] if retained is not None else [])]
         }
         report.update(status="passed", browserControls=browser["controls"], upstreamPageTests=browser["upstreamPageTests"], runtimeEstablished=True, authenticationAccepted=True, ownerMigrationExecuted=True)
     except BaseException:
@@ -229,6 +252,13 @@ def qualify(owner, work, evidence, pnpm, environment, capacity, *, rewrite_profi
         raise RuntimeError("Production auth qualification failed at " + stage) from None
     finally:
         stopped = True
+        backend_cleanup = True
+        if backend is not None:
+            try:
+                backend.finish()
+            except BaseException:
+                backend_cleanup = False
+                report["retainedCleanupRequiresReview"] = True
         for child in reversed(active):
             try:
                 stop(child)
@@ -248,6 +278,8 @@ def qualify(owner, work, evidence, pnpm, environment, capacity, *, rewrite_profi
         report["ownedListenersStopped"] = listeners_stopped
         report["ownedProcessGroupsStopped"] = stopped
         report["elapsedMs"] = round((time.monotonic() - begin) * 1000)
+        if not (stopped and backend_cleanup):
+            report.update(status="failed",failedStage="owned-runtime-cleanup")
         save()
-        assert stopped, "owned runtime processes require review"
+        assert stopped and backend_cleanup, "owned runtime cleanup requires review"
     return report
