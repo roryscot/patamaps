@@ -204,3 +204,10 @@ The previous storage refusal and exact3,491-file deletion proposal remain pendin
 no listed data, container or policy was changed. Actual native CLI preparation,
 RSS calibration and all seven real-project samples remain unrun. This measurement
 work remains an integration enhancement beyond completed MetaMaps native parity.
+
+The [focused Linux driver run40080670912](https://github.com/roryscot/patamaps/actions/runs/40080670912)
+at84922fa passed all23 controls; only the control job executed. The
+[verified log/source record](../acceptance/project-adoption/g4-project-measurements-20261024/linux-driver-controls.json)
+matches the Intel control source and workflow. This adds platform verification
+of the driver controls, with actual native preparation and measurements still
+unrun and unaccepted.
