@@ -36,9 +36,17 @@ All180 selected source files, three physical module bindings, manifest/build
 digests and driver identities were independently checked. Actual owner,
 independent-user and guest dynamic-page/data access, readonly public UI,
 query/path/method refusals, unchanged fixtures, zero generation attempts and
-owned-runtime cleanup passed. This closes that named increment only; its
-installed replay, other dynamic shapes and external providers remain open.
-Native G4 measurements retain the existing storage/quiet-window blockers.
+owned-runtime cleanup passed. Its [fresh installed source/native extension](2026-10-24-installed-next-dynamic.md)
+now [passes independent review](../acceptance/project-adoption/g5-installed-next-dynamic-20261024/accepted-40127431158/independent-verification.json)
+at9276b07/enginea5d602de: all1,216 package source members matched Git;
+both installations rebuilt the unchanged owner and passed29 groups/four page
+tests each, with checkout CLI/qualifier unavailable, before-effects changed-source
+refusal and exact restoration. Each180-member owner inventory and all compiled/
+driver bindings were independently checked. Parent-monitored growth peaked
+at2,853,916,672 bytes; only compact evidence remains on Intel.
+This closes the named installed extension, not retained replay of these added
+controls, other dynamic shapes or external providers. Native G4 and complete
+original Wargame/Seeder workflows retain their existing blockers.
 
 The independent original G5/G6 [fresh installed Rust owner-build increment](2026-10-24-installed-rust-owner-build.md)
 now [passes independent review](../acceptance/project-adoption/g5-installed-rust-owner-build-20261024/accepted-40118700332/independent-verification.json)

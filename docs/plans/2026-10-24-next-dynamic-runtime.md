@@ -131,3 +131,13 @@ Native G4 measurements still await unchanged storage admission and a quiet
 exclusive window. Installed replay of these new controls, other dynamic shapes,
 external model/BotID/upload providers, full dependency closure, performance and
 production deployment remain unaccepted.
+
+## Installed extension
+
+The [separate fresh-installation plan](2026-10-24-installed-next-dynamic.md) now
+[passes independent review](../acceptance/project-adoption/g5-installed-next-dynamic-20261024/accepted-40127431158/independent-verification.json)
+at9276b07 with the same workspace enginea5d602de. Both current source/native
+installations rebuilt the unchanged owner and repeated all29 groups/four page
+tests each. This supersedes the installed-dynamic pending status of the original
+checkout-only milestone above; its retained-runtime and other owner/performance
+limits are unchanged.
