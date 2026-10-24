@@ -50,15 +50,16 @@ def apply(owner, inventory):
     # Preserve the plugin's original flat rewrite array before adding phases.
     # BotID1.5.11 moves its rules to beforeFiles if passed a phased base config.
     composed = (
+        'const qualificationRewrites = ' + json.dumps(RULES) + ' satisfies Awaited<ReturnType<NonNullable<NextConfig["rewrites"]>>>;\n'
         'const qualifiedNextConfig: NextConfig = withBotId(nextConfig);\n'
         'const originalRewrites = qualifiedNextConfig.rewrites;\n'
         'qualifiedNextConfig.rewrites = async () => {\n'
         '  const original = await originalRewrites?.();\n'
         '  if (!Array.isArray(original)) throw new Error("Unexpected pinned BotID rewrite shape");\n'
         '  return {\n'
-        '    beforeFiles: ' + json.dumps(RULES['beforeFiles']) + ',\n'
-        '    afterFiles: [...original, ...' + json.dumps(RULES['afterFiles']) + '],\n'
-        '    fallback: [],\n'
+        '    beforeFiles: qualificationRewrites.beforeFiles,\n'
+        '    afterFiles: [...original, ...qualificationRewrites.afterFiles],\n'
+        '    fallback: qualificationRewrites.fallback,\n'
         '  };\n'
         '};\n'
         'export default qualifiedNextConfig;'

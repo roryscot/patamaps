@@ -1237,3 +1237,12 @@ require the original flat rewrite array, retain it in afterFiles, then add the
 declared aliases. Preserve the exact original-rule check and every frozen
 runtime/refusal expectation; do not waive phase changes. Ten focused controls
 passed again; a full subsequent run is still required.
+
+Second rewrite attempt40053433543 at5057256 passed source/capture/refusal and
+framework compilation, then failed the unchanged owner TypeScript check.
+[Verified failed evidence](../acceptance/project-adoption/g3-next-rewrite-runtime-20261024/attempt-2/ci.json)
+identifies widened string types in the composed rule conditions. Contextually
+check the phase object using satisfies against NextConfig's public rewrite
+return type, preserving its literal discriminants without casts, ts-ignore,
+skipLibCheck changes or owner compiler/test changes. Ten focused controls passed;
+actual type/build/compiled/native/runtime acceptance remains required.
