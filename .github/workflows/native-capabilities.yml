@@ -20,6 +20,7 @@ on:
           - binary-docker-context
           - next-server-actions
           - next-rewrites
+          - next-installed
           - cargo-registry-preflight
           - cargo-registry-container-preflight
           - cargo-registry-context
@@ -437,3 +438,11 @@ jobs:
     uses: ./.github/workflows/next-server-actions.yml
     with:
       rewrite-controls: true
+
+  next-installed:
+    if: github.event_name == 'workflow_dispatch' && inputs.qualification == 'next-installed'
+    name: Fresh installed Next native commands
+    uses: ./.github/workflows/next-server-actions.yml
+    with:
+      rewrite-controls: true
+      installed-controls: true

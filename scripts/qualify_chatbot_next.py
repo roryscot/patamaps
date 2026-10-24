@@ -15,12 +15,41 @@ def sha(path):
 def write(path,value):path.write_text(json.dumps(value,indent=2)+"\n")
 
 
+
+def private_output_inventory(staged,work,label):
+ """Hash generated files locally; publish only bounded category/count summaries."""
+ base=staged/".next";records={};total=0
+ assert base.is_dir() and not base.is_symlink(),"Review generated output root symlink"
+ for path in sorted(base.rglob("*")):
+  assert not path.is_symlink(),"Review generated output symlink before inventory"
+  if path.is_dir():continue
+  assert path.is_file() and len(records)<32768
+  before=path.stat();total+=before.st_size
+  assert total<=1024**3,"Generated output inventory byte bound"
+  value=sha(path);after=path.stat()
+  assert (before.st_dev,before.st_ino,before.st_size,before.st_mtime_ns)==(after.st_dev,after.st_ino,after.st_size,after.st_mtime_ns)
+  records[path.relative_to(base).as_posix()]=dict(digest=value,bytes=before.st_size,mode=before.st_mode&0o777)
+ assert records
+ (work/("private-next-output-"+label+".json")).write_text(json.dumps(records,indent=2)+"\n")
+ raw=json.dumps(records,sort_keys=True,separators=(",",":")).encode()
+ return records,dict(files=len(records),bytes=total,inventoryDigest="sha256:"+hashlib.sha256(raw).hexdigest())
+
 def main():
  p=argparse.ArgumentParser(description=__doc__)
  for n in ["work","evidence","cli"]:p.add_argument("--"+n,type=Path,required=True)
+ p.add_argument("--installed-inventory-digest");p.add_argument("--shared-cache-root",type=Path)
  p.add_argument("--build-cli",action="store_true");p.add_argument("--runtime",action="store_true");p.add_argument("--rewrites",action="store_true");a=p.parse_args()
  assert not a.rewrites or a.runtime, "Rewrite acceptance requires actual production runtime"
  assert platform.system()=="Linux" and platform.machine()=="x86_64" and os.environ.get("GITHUB_ACTIONS")=="true","Use focused Linux CI; native Intel allocation requires its existing guard"
+ installed_identity=None
+ if a.installed_inventory_digest:
+  assert not a.build_cli, "Installed qualification cannot rebuild a checkout CLI"
+  from installed_selected import verify_installed_source
+  installed_identity=verify_installed_source(ROOT,a.installed_inventory_digest)
+  source_revision=None
+ else:
+  assert not (ROOT/"source-inventory.json").exists(), "Installed source requires its explicit inventory binding"
+  source_revision=subprocess.check_output(["git","rev-parse","HEAD"],cwd=ROOT,text=True).strip()
  work,out,cli=a.work.resolve(),a.evidence.resolve(),a.cli.resolve()
  work.mkdir(parents=True,exist_ok=False);out.mkdir(parents=True,exist_ok=False);(out/"logs").mkdir()
  assert not any((v/"Cargo.toml").exists() for v in work.parents)
@@ -31,8 +60,16 @@ def main():
  env.update(HOME=str(work/"home"),TMPDIR=str(work/"tmp"),CI="true",LANG="C.UTF-8",TZ="UTC",CARGO_INCREMENTAL="0",CARGO_BUILD_JOBS="2",CARGO_PROFILE_DEV_DEBUG="0",CARGO_PROFILE_TEST_DEBUG="0",RUSTUP_TOOLCHAIN="1.99.0",CARGO_TERM_COLOR="never",PYTHONDONTWRITEBYTECODE="1",NEXT_TELEMETRY_DISABLED="1",NODE_OPTIONS="--max-old-space-size=2048",GIT_TERMINAL_PROMPT="0",GIT_CONFIG_GLOBAL="/dev/null",GIT_CONFIG_SYSTEM="/dev/null",npm_config_userconfig="/dev/null",npm_config_globalconfig="/dev/null",CI_PLAYWRIGHT="1")
  for key,name in [("npm_config_userconfig","npm-user.conf"),("npm_config_globalconfig","npm-global.conf")]:
   path=work/"tools"/name;path.write_text("");env[key]=str(path)
+ shared_store=work/"store"
+ if a.shared_cache_root is not None:
+  shared=a.shared_cache_root.resolve(strict=True)
+  assert shared.is_dir() and not shared.is_relative_to(ROOT) and not ROOT.is_relative_to(shared), "Public cache must be outside installed/check-out sources"
+  shared_store=shared/"pnpm-store";shared_store.mkdir(exist_ok=True)
+  browsers=shared/"playwright-browsers";browsers.mkdir(exist_ok=True)
+  env["PLAYWRIGHT_BROWSERS_PATH"]=str(browsers)
+  env["PLAYWRIGHT_SKIP_BROWSER_GC"]="1"
  rewrite_port_reservation=None
- r=dict(status="running",sourceRevision=subprocess.check_output(["git","rev-parse","HEAD"],cwd=ROOT,text=True).strip(),upstream=UPSTREAM,upstreamCommit=REV,commands=[],frameworkBuildEstablished=False,runtimeEstablished=False,authenticationAccepted=False,dependencyClosureEstablished=False,applicationAcceptance=False,productionActivation=False,filesDeleted=0,maximumWorkflowGrowthBytes=4000000000)
+ r=dict(status="running",sourceRevision=source_revision,installedSourceIdentity=installed_identity,upstream=UPSTREAM,upstreamCommit=REV,commands=[],frameworkBuildEstablished=False,runtimeEstablished=False,authenticationAccepted=False,dependencyClosureEstablished=False,applicationAcceptance=False,productionActivation=False,filesDeleted=0,maximumWorkflowGrowthBytes=4000000000)
  def save():write(out/"receipt.json",r)
  def capacity():
   d=shutil.disk_usage(ROOT);assert d.free>=500000000 and d.used-storage_baseline_bytes<=4000000000,"CI workflow storage boundary"
@@ -87,7 +124,7 @@ def main():
   pnpm=work/"tools/node_modules/pnpm/bin/pnpm.cjs";assert pnpm.is_file()
   r["pnpmTool"]=dict(version=json.loads((work/"tools/node_modules/pnpm/package.json").read_bytes())["version"],entryDigest=sha(pnpm),toolLockDigest=sha(work/"tools/package-lock.json"))
   assert r["pnpmTool"]["version"]=="10.32.1"
-  run("owner-frozen-dependencies",[pnpm,"install","--frozen-lockfile","--ignore-scripts","--store-dir",work/"store"],cwd=staged)
+  run("owner-frozen-dependencies",[pnpm,"install","--frozen-lockfile","--ignore-scripts","--store-dir",shared_store],cwd=staged)
   assert source_unchanged(staged,staged_inventory) and source_unchanged(owner)
   texts=[]
   for e in staged_inventory:
@@ -98,6 +135,9 @@ def main():
    texts.append(e["path"])
   cfg=dict(path=env["PATH"],home=env["HOME"],tmp=env["TMPDIR"],ci="true",nodeOptions=env["NODE_OPTIONS"],telemetry="1",ownerTestMode="1",npmUser=env["npm_config_userconfig"],npmGlobal=env["npm_config_globalconfig"])
   if rewrite_overlay is not None:cfg["qualifiedOwnerOrigin"]=rewrite_overlay["profile"]["canonicalOwnerOrigin"]
+  if a.shared_cache_root is not None:
+   cfg["pnpmStorePath"]=str(shared_store)
+   cfg["playwrightBrowserCache"]=env["PLAYWRIGHT_BROWSERS_PATH"]
   profile=work/"profile.json";write(profile,dict(profile="patamaps-project-inputs-1",id="urn:qualification:chatbot:inputs",nonsecretInputs=True,inputs=texts,components=[dict(id="web",kind="next-app",root=".",entrypoints=["package.json","next.config.ts","app/layout.tsx","app/(auth)/actions.ts"])],nonsecretConfiguration=cfg,secretReferences=dict(AUTH_SECRET="OWNER_AUTH_SECRET",POSTGRES_URL="OWNER_POSTGRES_URL")))
   source=native("text-source-capture",["project-capture",profile,"--root",staged]);source_path=work/"capture.json";write(source_path,source)
   if a.rewrites:
@@ -147,6 +187,8 @@ def main():
    route["content"]=json.dumps(manifest);raw=route["content"].encode();route["receipt"].update(digest="sha256:"+hashlib.sha256(raw).hexdigest(),byteLength=len(raw))
    refuse_observation("rewrite-stale-projection-binding",changed)
    r["rewriteQualification"].update(compiledRulesBound=True,originalRulesPreserved=bound["originalRulesPreserved"],missingProjectionRefused=True,staleProjectionRefusedAfterRequestRehash=True)
+  output_before,output_summary_before=private_output_inventory(staged,work,"before")
+  manifest_before={name:sha(path) for name,path in files.items()}
   if a.runtime:
    run("owner-pinned-browser-install",[pnpm,"exec","playwright","install","chromium"],cwd=staged,timeout=600)
    browser_bootstrap=json.loads(run("owner-browser-runtime-dependency-preflight",["node","-e",'const {chromium}=require("@playwright/test"); (async()=>{let browser;try{browser=await chromium.launch({headless:true});console.log(JSON.stringify({browserLaunchSucceeded:true,browserVersion:browser.version()}));}finally{if(browser)await browser.close();}})().catch(()=>{console.error("Unprivileged browser launch preflight failed");process.exitCode=1;});'],cwd=staged,timeout=45))
@@ -156,6 +198,14 @@ def main():
    runtime=qualify(staged,work,out,pnpm,env,capacity,rewrite_profile=rewrite_overlay,rewrite_reservation=rewrite_port_reservation)
    assert runtime["status"]=="passed" and runtime["ownedProcessGroupsStopped"]
    r.update(runtimeEstablished=True,authenticationAccepted=True,ownerRuntimeMigrationExecuted=True,runtimeBoundary="trusted owner; new isolated CI PostgreSQL and HTTPS loopback; no production secrets")
+  output_after,output_summary_after=private_output_inventory(staged,work,"after")
+  changed={name for name in set(output_before)|set(output_after) if output_before.get(name)!=output_after.get(name)}
+  categories={"cache":0,"diagnostics":0,"runtime-output":0}
+  for name in changed:
+   category="cache" if name.startswith("cache/") else "diagnostics" if name in {"trace","trace-build"} or name.startswith("diagnostics/") else "runtime-output"
+   categories[category]+=1
+  assert {name:sha(path) for name,path in files.items()}==manifest_before,"Public compiled manifests changed during runtime"
+  r["generatedOutputObservation"]=dict(before=output_summary_before,after=output_summary_after,changedFiles=len(changed),changedCategories=categories,publicManifestsUnchanged=True,detailedInventoryPublished=False,fullRuntimeBundleSelected=False)
   audit("source-exclusion-final-audit");assert source_unchanged(owner) and source_unchanged(staged,staged_inventory)
   r.update(status="passed-pinned-chatbot-source-build-auth" if a.runtime else "passed-pinned-chatbot-source-build-observations",frameworkVersion=version,sourceContextDigest=capture["digest"],textSourceDigest=source["digest"],sourceTextFiles=len(texts),selectedSourceBytesAndModesUnchanged=True,sourceExclusionAudited=True,dependencyLifecycleScriptsExecuted=False,nativeCompiledObservation=True,ownerTestMode="CI_PLAYWRIGHT=1 selects the owner's model-test mode; no model behavior accepted")
  except BaseException as error:
@@ -169,6 +219,14 @@ def main():
    rewrite_port_reservation.close()
    r["rewritePortReservationClosed"]=True
    save()
+  if installed_identity is not None:
+   try:
+    verify_installed_source(ROOT,a.installed_inventory_digest)
+    r["installedSourceInventoryUnchanged"]=True
+   except BaseException:
+    r["installedSourceInventoryUnchanged"]=False
+    save()
+    raise
  save();print(json.dumps(dict(status=r["status"],frameworkBuildEstablished=True,runtimeEstablished=r["runtimeEstablished"])))
 
 

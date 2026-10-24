@@ -4,6 +4,44 @@ from pathlib import Path
 ROOT=Path(__file__).resolve().parent.parent
 sys.path.insert(0,str(ROOT/"scripts"));from project_watch import stop
 def sha(p):return "sha256:"+hashlib.sha256(p.read_bytes()).hexdigest()
+
+def verify_installed_source(root, expected_digest):
+ """Verify a bound package inventory without Git or following source symlinks."""
+ from pathlib import PurePosixPath
+ import re
+ from package_source import MAX_SOURCE_BYTES
+ root=Path(root)
+ assert root.is_dir() and not root.is_symlink(), "INSTALLED_SOURCE_ROOT"
+ manifest=root/"source-inventory.json"
+ assert manifest.is_file() and not manifest.is_symlink(), "INSTALLED_SOURCE_INVENTORY"
+ assert re.fullmatch(r"sha256:[0-9a-f]{64}",expected_digest), "INSTALLED_SOURCE_DIGEST"
+ assert manifest.stat().st_size <= 4*1024**2 and sha(manifest)==expected_digest, "INSTALLED_SOURCE_INVENTORY_CHANGED"
+ entries=json.loads(manifest.read_bytes())
+ assert isinstance(entries,list) and 0<len(entries)<=16384, "INSTALLED_SOURCE_INVENTORY"
+ expected=set()
+ total=manifest.stat().st_size
+ for item in entries:
+  assert isinstance(item,dict) and set(item)=={"path","digest","bytes"}, "INSTALLED_SOURCE_ENTRY"
+  name=item["path"]
+  assert isinstance(name,str), "INSTALLED_SOURCE_PATH"
+  path=PurePosixPath(name)
+  assert name and not path.is_absolute() and ".." not in path.parts and path.as_posix()==name and name!="source-inventory.json", "INSTALLED_SOURCE_PATH"
+  assert name not in expected and re.fullmatch(r"sha256:[0-9a-f]{64}",item["digest"]), "INSTALLED_SOURCE_ENTRY"
+  assert type(item["bytes"]) is int and 0<=item["bytes"]<=MAX_SOURCE_BYTES, "INSTALLED_SOURCE_BYTES"
+  expected.add(name);total+=item["bytes"]
+ assert total<=MAX_SOURCE_BYTES, "INSTALLED_SOURCE_BYTES"
+ actual=set()
+ for path in root.rglob("*"):
+  assert not path.is_symlink(), "INSTALLED_SOURCE_SYMLINK"
+  if path.is_dir():continue
+  assert path.is_file(), "INSTALLED_SOURCE_MEMBER"
+  actual.add(path.relative_to(root).as_posix())
+ assert actual==expected|{"source-inventory.json"}, "INSTALLED_SOURCE_MEMBERS_CHANGED"
+ for item in entries:
+  path=root/item["path"]
+  assert path.stat().st_size==item["bytes"] and sha(path)==item["digest"], "INSTALLED_SOURCE_BYTES_CHANGED"
+ return dict(sourceInventoryDigest=expected_digest,sourceFiles=len(entries),sourceIsInstalled=True)
+
 def main():
  p=argparse.ArgumentParser(description=__doc__)
  for n in ["compiler","state","command","output"]:p.add_argument("--"+n,type=Path,required=True)
@@ -14,9 +52,10 @@ def main():
   if not module.live_parent():raise RuntimeError("A live existing storage supervisor is required")
  output=a.output.resolve();output.mkdir(parents=True,exist_ok=False)
  inventory=json.loads((ROOT/"source-inventory.json").read_bytes())
+ inventory_digest=sha(ROOT/"source-inventory.json")
  def unchanged():
-  names={p.relative_to(ROOT).as_posix() for p in ROOT.rglob("*") if p.is_file()}
-  return names=={i["path"] for i in inventory}|{"source-inventory.json"} and all((ROOT/i["path"]).is_file() and (ROOT/i["path"]).stat().st_size==i["bytes"] and sha(ROOT/i["path"])==i["digest"] for i in inventory)
+  verify_installed_source(ROOT,inventory_digest)
+  return True
  assert unchanged()
  sys.path.insert(0,str(ROOT/"scripts/parity"));from identity import identities
  r=dict(status="running",sourceInventoryDigest=sha(ROOT/"source-inventory.json"),sourceFiles=len(inventory),commands=[],productionActivation=False)

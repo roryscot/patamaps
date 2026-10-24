@@ -74,16 +74,28 @@ endpoint, preserving every original positive/refusal expectation and original
 BotID rule phase. It does not claim unchanged upstream configuration, external
 BotID behavior or arbitrary NextAuth alias compatibility.
 
-Next selected work: the original fresh installed Next workflow. Reuse the exact
-source/native packaging and consumer contracts; inspect the installed-source
-qualifier's Git/checkout assumptions before implementation. A package must expose
-usable owner commands without copying example scripts. Verify actual Next build/
-manifest/runtime behavior through fresh installed compilers with source inventory,
-engine, selected output and previous-selection bindings intact. Keep generated
-signing/Action material and private database/cookie data outside public captures
-and evidence. Do not relabel the installed Rust-only replay as installed Next
-acceptance. Actual-project exclusive cold/warm/edit latency, memory and retained
-disk measurements still require their original evidence.
+Fresh installed Next work now follows the [I1/I2 plan](2026-10-24-installed-next.md)
+at16be60f. I1 adds an explicit exact source-inventory binding so packaged commands
+can run without Git metadata, then exercises the real Next build/compiled/native/
+runtime workflow with both fresh source and native installations. The checkout
+CLI and checkout qualifier path are unavailable during those owner workflows.
+Each app has private source/output/database/browser state; only new declared
+public pnpm/Chromium caches are shared, and the parent monitors the combined
+4GB growth/500MB reserve. No example scripts are copied into the consumers.
+
+[Focused preflight](../acceptance/project-adoption/g5-installed-next-20261024/preflight.json)
+passed39 controls: ten source-integrity, three private-output, fourteen archive,
+eight rewrite and four acquisition cases. Source-scope selection remains within
+the unchanged128MiB/32MiB-evidence bounds. Python AST, workflow YAML and diff
+checks passed. Actual installed Next acceptance is pending focused Linux CI.
+
+I1 also privately characterizes generated-output changes and requires the three
+public compiled manifests to retain their bindings through actual runtime.
+It does not replace I2's full retained Next bundle selection, previous-selection
+preservation or source/configured-tool-unavailable runtime requirements. Private
+signing/Action bytes, detailed output inventories, database/cookie state and raw
+HTTP stay outside public captures/evidence. Actual-project exclusive cold/warm/
+edit latency, memory and retained-disk measurements remain required.
 
 The original G0–G6 scope remains active: remaining Next/framework and deployment
 controls, installed Next workflow, applicable dependency/test-context treatment,
