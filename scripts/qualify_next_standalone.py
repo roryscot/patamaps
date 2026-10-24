@@ -136,12 +136,12 @@ def observe(cli, standalone, work, evidence, run, producer):
             invocation=dict(executable=sys.executable, arguments=["copy-helper.py", mode],
                 codeInputs=["copy-helper.py"], bounds=dict(maximumElapsedMs=120000,
                 maximumStdoutBytes=4096, maximumStderrBytes=4096)))
-    def plan(label, build, verify):
+    def plan(label, build, verify, kind="tree"):
         path = work/("standalone-"+label+".json")
         path.write_text(json.dumps(dict(profile="patamaps-project-build-1",
             maximumRetainedAttempts=8, project=project, workspace=workspace,
             buildSteps=[command(build)], verificationSteps=[command(verify)],
-            outputs=[dict(path="bundle", kind="tree")]), indent=2)+"\n")
+            outputs=[dict(path="bundle", kind=kind)]), indent=2)+"\n")
         return path
     state = work/"standalone-selection-state"
     def native(label, path, expected=0):
@@ -161,11 +161,15 @@ def observe(cli, standalone, work, evidence, run, producer):
         pointer = (state/"selected.json").read_bytes()
         failed = native("standalone-failed-selection", plan("failed", "--fail", "--verify-copy"), 1)
         assert failed["previousSelectionPreserved"] and (state/"selected.json").read_bytes() == pointer
+    closed = native("standalone-closed-tree-select",
+                    plan("closed", "--copy", "--verify-copy", kind="closed-tree"))
+    assert closed["status"] == "selected-project-build"
     verified = json.loads(run("standalone-final-native-selection-verify", [cli, "project-build-verify", state]))
     assert verified["status"] == "verified-selected-build-bindings"
     assert inventory(standalone) == rows
     report = dict(status="observed-standalone-native-output-boundary", producedTree=observed,
         nativeTreeSelected=not bool(observed["symlinks"]),
+        closedTreeSelected=True, closedTreeAttempt=closed["attempt"], closedTreeState=str(state),
         generatedSymlinkRefused=bool(observed["symlinks"]), previousSelectionPreserved=True,
         priorAndFinalSelectionVerified=True, exactPrivateCopyVerified=True,
         detailedInventoryPublished=False, rawGeneratedOutputsPublished=False,

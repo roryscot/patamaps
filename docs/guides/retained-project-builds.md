@@ -19,6 +19,21 @@ Generated workspace outputs are staged alongside source and become immutable sel
 
 Declared artifact bytes, Unix mode bits and tree membership must stay unchanged through verification and the final source/tool checks. Directory symlinks, file symlinks and special files refuse. File size is bounded at4GiB, combined artifact bytes at16GiB, tree depth at128 and entries at32768, with the normal record byte limit. These observations do not attest ACLs, xattrs, dynamic dependencies or runnable architecture.
 
+An explicit output kind closed-tree additionally permits symlinks only when
+their resolution stays inside that individual declared tree. The native
+fingerprint binds link text and mode, all physical directory/file members and
+file bytes/modes, without traversing link targets during enumeration. The
+existing internal-context closure validator checks bounded resolution over
+that inventory, rejecting absolute/escaping/dangling/cyclic targets. Links cannot
+borrow a target from another output root. All existing entry/depth/byte/record
+limits apply. Ordinary tree output still refuses every symlink.
+
+Closed trees are private output artifacts, not nonsecret captured inputs.
+Their binding and selected execution receive the same pre/post verification as
+other artifacts. This does not admit mutable runtime caches or prove standalone
+application/dependency closure. Source implementation and native tests are
+pending focused Linux verification; installed publication remains separate.
+
 A successful update atomically replaces selected.json and preserves the exact previous pointer in the new attempt. Failed, raced and interrupted attempts remain; pre-publication failures preserve the old pointer. A matching input key checks stored bindings/current selected bytes and reports verification:not-repeated with cacheHits:0. Use --force to execute a fresh attempt rather than taking that no-op path.
 
 project-build-verify rechecks retained records and candidate artifact bytes without rediscovering original source or executing recorded tools. Relocated state was tested when bytes/modes are preserved. Pin the creating Patamaps executor source/identity for historical verification. Saved command evidence is not a signed execution attestation, current authorization or deployment activation.

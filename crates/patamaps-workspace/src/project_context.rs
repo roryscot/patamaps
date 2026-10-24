@@ -170,7 +170,8 @@ fn address(manifest: &ProjectContextManifest) -> Result<String, Error> {
         entries: &manifest.entries,
     })?)
 }
-fn closure(entries: &BTreeMap<String, ProjectContextEntry>) -> Result<(), Error> {
+/// Resolve only inventoried members; input secrecy checks belong to the caller.
+pub(crate) fn closure(entries: &BTreeMap<String, ProjectContextEntry>) -> Result<(), Error> {
     use std::collections::VecDeque;
     for (path, entry) in entries {
         for (i, _) in path.match_indices('/') {

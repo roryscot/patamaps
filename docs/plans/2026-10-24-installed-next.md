@@ -284,3 +284,28 @@ No runtime/performance acceptance is inferred from a selected archive or private
 fingerprint alone. I1 remains scoped and accepted at its identified source; I2,
 applicable dependency/test-context treatment, remaining deployment checks and
 exclusive actual-project latency/memory/disk requirements remain active.
+
+
+## Native closed-tree implementation checkpoint
+
+The explicit closed-tree artifact kind is implemented in source; native
+compilation and execution are pending focused Linux CI. It retains ordinary tree
+refusal, fingerprints symlink text/mode through descriptor-relative NOFOLLOW
+operations, counts link text toward the total byte ceiling, and reuses the
+existing internal-closure validator over each declared output root separately.
+No private byte payload enters captures or reports.
+
+Four native integration tests cover accepted file/directory/chained links,
+offline replay/configured-tool absence, unchanged-key verification, seven unsafe
+selection cases (including ordinary-tree and cross-output refusal), seven
+before-effects tamper cases and successful-command link mutation detected by
+post-verification. Fixtures retain originals/changed instances without deletion.
+The existing focused Next lane now executes the whole workspace integration
+suite before the real owner. The real probe retains ordinary-tree refusal, then
+must select the exact produced78-link bundle with closed-tree and verify it.
+
+[Source preflight](../acceptance/project-adoption/g5-native-closed-tree-20261024/preflight.json)
+passes pinned formatting, Python AST, YAML and diff checks. It is not native
+acceptance. The whole standalone profile still requires an immutable selected
+generation and separately enforced cache/runtime/source-unavailable contracts;
+its known immutable-producer-tree assertion is retained until those are tested.

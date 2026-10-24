@@ -9,6 +9,8 @@ pub const PROJECT_PREPARATION_PROFILE: &str = "patamaps-project-preparation-1";
 pub enum ArtifactKind {
     File,
     Tree,
+    /// Exact physical members plus bounded, internal-only link resolution.
+    ClosedTree,
 }
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase", deny_unknown_fields)]
@@ -323,6 +325,71 @@ mod unix {
             json!({"kind":"file","bytes":count,"mode":after.mode()&0o7777,"digest":format!("sha256:{:x}",hash.finalize())}),
         )
     }
+    fn fingerprint_link(root: &File, path: &str) -> Result<Value, Error> {
+        use rustix::fs::{AtFlags, FileType, readlinkat, statat};
+        let (parent, leaf) = crate::project_fs::parent(root, path, false)?;
+        let before = statat(&parent, leaf.as_str(), AtFlags::SYMLINK_NOFOLLOW)
+            .map_err(std::io::Error::from)?;
+        if FileType::from_raw_mode(before.st_mode) != FileType::Symlink {
+            return Err(refuse("PROJECT_BUILD_ARTIFACT_CHANGED"));
+        }
+        let target = readlinkat(&parent, leaf.as_str(), Vec::new())
+            .map_err(std::io::Error::from)?
+            .into_string()
+            .map_err(|_| refuse("PROJECT_BUILD_OUTPUT_PATH"))?;
+        let after = statat(&parent, leaf.as_str(), AtFlags::SYMLINK_NOFOLLOW)
+            .map_err(std::io::Error::from)?;
+        if (before.st_dev, before.st_ino, before.st_mode, before.st_size)
+            != (after.st_dev, after.st_ino, after.st_mode, after.st_size)
+        {
+            return Err(refuse("PROJECT_BUILD_ARTIFACT_CHANGED"));
+        }
+        if target.len() > 4096 {
+            return Err(refuse("PROJECT_BUILD_OUTPUT_LINK_CLOSURE"));
+        }
+        Ok(json!({"kind":"symlink","target":target,"mode":before.st_mode&0o7777}))
+    }
+    fn closed_tree(entries: &BTreeMap<String, Value>, path: &str) -> Result<(), Error> {
+        use crate::ProjectContextEntry;
+        let prefix = format!("{path}/");
+        let mut members = BTreeMap::new();
+        for (name, value) in entries {
+            let Some(relative) = name.strip_prefix(&prefix) else {
+                continue;
+            };
+            let number = |key: &str| -> Result<SafeInteger, Error> {
+                SafeInteger::new(
+                    value[key]
+                        .as_u64()
+                        .ok_or_else(|| refuse("PROJECT_BUILD_OUTPUT_LINK_CLOSURE"))?,
+                )
+                .map_err(|_| refuse("PROJECT_BUILD_OUTPUT_LINK_CLOSURE"))
+            };
+            let member = match value["kind"].as_str() {
+                Some("directory") => ProjectContextEntry::Directory {
+                    mode: number("mode")?,
+                },
+                Some("file") => ProjectContextEntry::File {
+                    digest: value["digest"]
+                        .as_str()
+                        .ok_or_else(|| refuse("PROJECT_BUILD_OUTPUT_LINK_CLOSURE"))?
+                        .into(),
+                    byte_length: number("bytes")?,
+                    mode: number("mode")?,
+                },
+                Some("symlink") => ProjectContextEntry::Symlink {
+                    target: value["target"]
+                        .as_str()
+                        .ok_or_else(|| refuse("PROJECT_BUILD_OUTPUT_LINK_CLOSURE"))?
+                        .into(),
+                },
+                _ => return Err(refuse("PROJECT_BUILD_OUTPUT_LINK_CLOSURE")),
+            };
+            members.insert(relative.into(), member);
+        }
+        crate::project_context::closure(&members)
+            .map_err(|_| refuse("PROJECT_BUILD_OUTPUT_LINK_CLOSURE"))
+    }
     fn tree(
         root_path: &Path,
         root: &File,
@@ -330,6 +397,7 @@ mod unix {
         depth: usize,
         entries: &mut BTreeMap<String, Value>,
         total: &mut u64,
+        closed_links: bool,
     ) -> Result<(), Error> {
         if depth > 128 || entries.len() >= 32768 {
             return Err(refuse("PROJECT_BUILD_ARTIFACT_LIMIT"));
@@ -353,10 +421,33 @@ mod unix {
             }
             let meta = fs::symlink_metadata(entry.path())?;
             if meta.file_type().is_symlink() {
-                return Err(refuse("PROJECT_BUILD_OUTPUT_SYMLINK"));
+                if !closed_links {
+                    return Err(refuse("PROJECT_BUILD_OUTPUT_SYMLINK"));
+                }
+                let link = fingerprint_link(root, &relative)?;
+                let length = link["target"]
+                    .as_str()
+                    .ok_or_else(|| refuse("PROJECT_BUILD_OUTPUT_LINK_CLOSURE"))?
+                    .len() as u64;
+                *total = total
+                    .checked_add(length)
+                    .ok_or_else(|| refuse("PROJECT_BUILD_ARTIFACT_LIMIT"))?;
+                if *total > 16 * 1024 * 1024 * 1024 {
+                    return Err(refuse("PROJECT_BUILD_ARTIFACT_LIMIT"));
+                }
+                entries.insert(relative.clone(), link);
+                continue;
             }
             if meta.is_dir() {
-                tree(root_path, root, &relative, depth + 1, entries, total)?;
+                tree(
+                    root_path,
+                    root,
+                    &relative,
+                    depth + 1,
+                    entries,
+                    total,
+                    closed_links,
+                )?;
             } else {
                 entries.insert(relative.clone(), fingerprint_file(root, &relative, total)?);
             }
@@ -378,8 +469,26 @@ mod unix {
                         fingerprint_file(&root, &output.path, &mut total)?,
                     );
                 }
-                ArtifactKind::Tree => {
-                    tree(root_path, &root, &output.path, 0, &mut entries, &mut total)?
+                ArtifactKind::Tree => tree(
+                    root_path,
+                    &root,
+                    &output.path,
+                    0,
+                    &mut entries,
+                    &mut total,
+                    false,
+                )?,
+                ArtifactKind::ClosedTree => {
+                    tree(
+                        root_path,
+                        &root,
+                        &output.path,
+                        0,
+                        &mut entries,
+                        &mut total,
+                        true,
+                    )?;
+                    closed_tree(&entries, &output.path)?;
                 }
             }
         }

@@ -36,6 +36,7 @@ jobs:
         run: |
           cargo +1.99.0 fmt --all --check
           cargo +1.99.0 test --locked -p patamaps-workspace --lib
+          cargo +1.99.0 test --locked -p patamaps-workspace --test workspace
           cargo +1.99.0 clippy --locked -p patamaps-workspace --all-targets -- -D warnings
       - name: Verify partial source acquisition controls
         run: |

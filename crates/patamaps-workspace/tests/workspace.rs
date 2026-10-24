@@ -1250,3 +1250,279 @@ fn omitted_retention_limit_keeps_legacy_plan_serialization() {
     let decoded: ProjectBuildPlan = serde_json::from_value(raw).unwrap();
     assert_eq!(decoded.maximum_retained_attempts.get(), 8);
 }
+
+#[cfg(unix)]
+fn closed_build_fixture() -> (Temp, Temp, ProjectBuildPlan) {
+    let (root, source, mut plan) = build_fixture();
+    plan.outputs[0].kind = ArtifactKind::ClosedTree;
+    plan.build_steps[0].invocation.arguments = vec![
+        "-c".into(),
+        "/bin/mkdir -p bundle/nested; printf artifact > bundle/nested/app; \
+         /bin/cp bundle/nested/app bundle/nested/twin; \
+         /bin/ln -s nested/app bundle/file-link; /bin/ln -s nested bundle/dir-link; \
+         /bin/ln -s file-link bundle/chained-link"
+            .into(),
+    ];
+    plan.verification_steps[0].invocation.arguments = vec![
+        "-c".into(),
+        "test \"$(/bin/cat bundle/file-link)\" = artifact && \
+         test \"$(/bin/cat bundle/dir-link/app)\" = artifact && \
+         test \"$(/bin/cat bundle/chained-link)\" = artifact"
+            .into(),
+    ];
+    (root, source, plan)
+}
+
+#[test]
+#[cfg(unix)]
+fn closed_tree_selects_links_and_replays_without_original_source_or_build_tools() {
+    use std::os::unix::fs::symlink;
+    let (root, source, mut plan) = closed_build_fixture();
+    let tools = root.0.join("configured-tools");
+    fs::create_dir(&tools).unwrap();
+    let configured = tools.join("shell");
+    symlink("/bin/sh", &configured).unwrap();
+    for command in plan
+        .build_steps
+        .iter_mut()
+        .chain(&mut plan.verification_steps)
+    {
+        command.invocation.executable = configured.to_str().unwrap().into();
+    }
+    let state = root.0.join("state");
+    let selected = build_project(&source.0, &state, &plan, false).unwrap();
+    assert_eq!(selected["status"], "selected-project-build");
+    let attempt = state.join(selected["attempt"].as_str().unwrap());
+    let artifacts: serde_json::Value =
+        serde_json::from_slice(&fs::read(attempt.join("artifacts.json")).unwrap()).unwrap();
+    for (name, target) in [
+        ("file-link", "nested/app"),
+        ("dir-link", "nested"),
+        ("chained-link", "file-link"),
+    ] {
+        let record = &artifacts[format!("bundle/{name}")];
+        assert_eq!(record["kind"], "symlink");
+        assert_eq!(record["target"], target);
+        assert!(record["mode"].is_number());
+    }
+    let pointer = fs::read(state.join("selected.json")).unwrap();
+    let noop = build_project(&source.0, &state, &plan, false).unwrap();
+    assert_eq!(noop["status"], "unchanged-project-build");
+    assert_eq!(noop["verification"], "not-repeated");
+    fs::rename(&source.0, root.0.join("owner.offline-retained")).unwrap();
+    fs::rename(&tools, root.0.join("tools.offline-retained")).unwrap();
+    assert_eq!(
+        verify_project_build_selection(&state).unwrap()["status"],
+        "verified-selected-build-bindings"
+    );
+    let mut runtime = plan.verification_steps[0].clone();
+    runtime.invocation.executable = "/bin/sh".into();
+    let executed = execute_selected_project_command(&state, &runtime).unwrap();
+    assert_eq!(executed["status"], "completed-selected-project-command");
+    assert_eq!(executed["postExecutionSelectionVerified"], true);
+    assert_eq!(executed["selectionPointerUnchanged"], true);
+    assert_eq!(fs::read(state.join("selected.json")).unwrap(), pointer);
+}
+
+#[test]
+#[cfg(unix)]
+fn closed_tree_refuses_unsafe_targets_without_replacing_previous_selection() {
+    for (name, body, ordinary) in [
+        ("ordinary", "/bin/ln -s nested/app bundle/link", true),
+        (
+            "absolute",
+            "/bin/ln -s /unselected-outside bundle/link",
+            false,
+        ),
+        (
+            "escape",
+            "printf artifact > outside; /bin/ln -s ../outside bundle/link",
+            false,
+        ),
+        ("missing", "/bin/ln -s missing bundle/link", false),
+        ("self-cycle", "/bin/ln -s link bundle/link", false),
+        (
+            "chain-cycle",
+            "/bin/ln -s other bundle/link; /bin/ln -s link bundle/other",
+            false,
+        ),
+        (
+            "other-output",
+            "printf artifact > outside; /bin/ln -s ../outside bundle/link",
+            false,
+        ),
+    ] {
+        let (root, source, original) = build_fixture();
+        let state = root.0.join("state");
+        assert_eq!(
+            build_project(&source.0, &state, &original, false).unwrap()["status"],
+            "selected-project-build"
+        );
+        let pointer = fs::read(state.join("selected.json")).unwrap();
+        let mut plan = original.clone();
+        if !ordinary {
+            plan.outputs[0].kind = ArtifactKind::ClosedTree;
+        }
+        if name == "other-output" {
+            plan.outputs.push(ArtifactSelection {
+                path: "outside".into(),
+                kind: ArtifactKind::File,
+            });
+        }
+        plan.build_steps[0].invocation.arguments = vec![
+            "-c".into(),
+            format!("/bin/mkdir -p bundle/nested; printf artifact > bundle/nested/app; {body}"),
+        ];
+        plan.verification_steps[0].invocation.arguments =
+            vec!["-c".into(), "printf invoked > forbidden.marker".into()];
+        let refused = build_project(&source.0, &state, &plan, false).unwrap();
+        assert_eq!(
+            refused["status"], "refused-project-build",
+            "{name}: {refused}"
+        );
+        let expected = if ordinary {
+            "PROJECT_BUILD_OUTPUT_SYMLINK"
+        } else {
+            "PROJECT_BUILD_OUTPUT_LINK_CLOSURE"
+        };
+        assert!(
+            refused["reason"].as_str().unwrap().contains(expected),
+            "{name}: {refused}"
+        );
+        assert_eq!(refused["previousSelectionPreserved"], true);
+        assert!(
+            !state
+                .join(refused["attempt"].as_str().unwrap())
+                .join("candidate/forbidden.marker")
+                .exists()
+        );
+        assert_eq!(fs::read(state.join("selected.json")).unwrap(), pointer);
+        verify_project_build_selection(&state).unwrap();
+    }
+}
+
+#[test]
+#[cfg(unix)]
+fn closed_tree_member_and_link_changes_refuse_before_selected_command_effects() {
+    use std::os::unix::fs::{PermissionsExt, symlink};
+    for kind in [
+        "identical-external-link",
+        "identical-internal-link",
+        "missing-target",
+        "extra-member",
+        "file-mode",
+        "directory-mode",
+        "file-bytes",
+    ] {
+        let (root, source, plan) = closed_build_fixture();
+        let state = root.0.join("state");
+        let selected = build_project(&source.0, &state, &plan, false).unwrap();
+        assert_eq!(selected["status"], "selected-project-build");
+        let candidate = state
+            .join(selected["attempt"].as_str().unwrap())
+            .join("candidate");
+        let pointer = fs::read(state.join("selected.json")).unwrap();
+        let mut moved = None;
+        let mut changed_mode = None;
+        match kind {
+            "identical-external-link" | "identical-internal-link" => {
+                let path = candidate.join("bundle/file-link");
+                let backup = root.0.join("original-link.retained");
+                fs::rename(&path, &backup).unwrap();
+                if kind == "identical-external-link" {
+                    let outside = root.0.join("outside-identical");
+                    fs::write(&outside, "artifact").unwrap();
+                    symlink(&outside, &path).unwrap();
+                } else {
+                    symlink("nested/twin", &path).unwrap();
+                }
+                moved = Some((path, backup));
+            }
+            "missing-target" | "file-bytes" => {
+                let path = candidate.join("bundle/nested/app");
+                let backup = root.0.join("original-member.retained");
+                fs::rename(&path, &backup).unwrap();
+                if kind == "file-bytes" {
+                    fs::write(&path, "changed artifact").unwrap();
+                }
+                moved = Some((path, backup));
+            }
+            "extra-member" => {
+                fs::write(candidate.join("bundle/extra"), "unselected").unwrap();
+            }
+            "file-mode" | "directory-mode" => {
+                let path = candidate.join(if kind == "file-mode" {
+                    "bundle/nested/app"
+                } else {
+                    "bundle/nested"
+                });
+                let mode = fs::metadata(&path).unwrap().permissions().mode();
+                fs::set_permissions(&path, fs::Permissions::from_mode(mode ^ 0o010)).unwrap();
+                changed_mode = Some((path, mode));
+            }
+            _ => unreachable!(),
+        }
+        let mut command = plan.verification_steps[0].clone();
+        command.invocation.arguments =
+            vec!["-c".into(), "printf invoked > forbidden.marker".into()];
+        assert!(
+            execute_selected_project_command(&state, &command).is_err(),
+            "{kind}"
+        );
+        assert!(!candidate.join("forbidden.marker").exists(), "{kind}");
+        assert_eq!(fs::read(state.join("selected.json")).unwrap(), pointer);
+        if let Some((path, backup)) = moved {
+            if fs::symlink_metadata(&path).is_ok() {
+                fs::rename(&path, root.0.join("changed-member.retained")).unwrap();
+            }
+            fs::rename(&backup, &path).unwrap();
+        }
+        if kind == "extra-member" {
+            fs::rename(
+                candidate.join("bundle/extra"),
+                root.0.join("extra-member.retained"),
+            )
+            .unwrap();
+        }
+        if let Some((path, mode)) = changed_mode {
+            fs::set_permissions(path, fs::Permissions::from_mode(mode)).unwrap();
+        }
+        verify_project_build_selection(&state).unwrap();
+    }
+}
+
+#[test]
+#[cfg(unix)]
+fn closed_tree_successful_command_link_mutation_is_refused_after_execution() {
+    let (root, source, plan) = closed_build_fixture();
+    let state = root.0.join("state");
+    let selected = build_project(&source.0, &state, &plan, false).unwrap();
+    assert_eq!(selected["status"], "selected-project-build");
+    let candidate = state
+        .join(selected["attempt"].as_str().unwrap())
+        .join("candidate");
+    let pointer = fs::read(state.join("selected.json")).unwrap();
+    let mut command = plan.verification_steps[0].clone();
+    command.invocation.arguments = vec![
+        "-c".into(),
+        "/bin/mv bundle/file-link original-link.retained; /bin/ln -s nested/twin bundle/file-link"
+            .into(),
+    ];
+    let result = execute_selected_project_command(&state, &command).unwrap();
+    assert_eq!(result["command"]["programSucceeded"], true);
+    assert_eq!(result["status"], "refused-selected-project-command");
+    assert_eq!(result["postExecutionSelectionVerified"], false);
+    assert_eq!(result["selectionPointerUnchanged"], true);
+    assert_eq!(fs::read(state.join("selected.json")).unwrap(), pointer);
+    fs::rename(
+        candidate.join("bundle/file-link"),
+        root.0.join("changed-link.retained"),
+    )
+    .unwrap();
+    fs::rename(
+        candidate.join("original-link.retained"),
+        candidate.join("bundle/file-link"),
+    )
+    .unwrap();
+    verify_project_build_selection(&state).unwrap();
+}
