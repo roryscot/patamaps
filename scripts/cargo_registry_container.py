@@ -191,9 +191,10 @@ def main():
             record_path.write_text(json.dumps(owned))
             setup_info = json.loads(run(['docker','inspect',setup_id]))[0]
             shost = setup_info['HostConfig']
+            report['setupHostConfiguration'] = {key:shost.get(key) for key in ['NetworkMode','ReadonlyRootfs','Privileged','CapDrop','CapAdd','SecurityOpt','NanoCpus','Memory','MemorySwap','PidsLimit']}
             assert setup_info['Image']==image['Id'] and setup_info['Config']['User']=='0:0'
             assert shost['NetworkMode']=='container:'+container and shost['ReadonlyRootfs'] and not shost['Privileged']
-            assert shost['CapDrop']==['ALL'] and shost['CapAdd']==['NET_ADMIN'] and shost['SecurityOpt']==['no-new-privileges']
+            assert shost['CapDrop']==['ALL'] and {cap.removeprefix('CAP_') for cap in shost['CapAdd']}=={'NET_ADMIN'} and shost['SecurityOpt']==['no-new-privileges']
             assert shost['NanoCpus']==100000000 and shost['Memory']==shost['MemorySwap']==33554432
             assert shost['PidsLimit']==16 and shost['ShmSize']==1048576 and not setup_info['Mounts']
             setup_owned = logs/'network-setup-owned.json'

@@ -1150,3 +1150,13 @@ cap-drop ALL/nonroot/read-only mounts and all original limits. Combined transien
 reservation must fit the runner plus reserve. No bridge/veth, external route,
 host network, kernel/global policy change, persistent setup process, source/test
 mutation or fabricated QR output. All original325 tests still must pass.
+
+
+Eleventh attempt40048482344 at28b6beb refused the setup helper's strict capability
+metadata comparison before it started. All owned containers were confirmed
+stopped. [Verified record](../acceptance/project-adoption/g3-cargo-registry-context-20261023/registry-attempt-11/native-attempt-records.json).
+Retain the selected setup metadata and normalize only the optional CAP_ prefix
+when checking that NET_ADMIN is the sole added capability. No additional
+capability is accepted; the runtime CapEff equality0x1000 is still mandatory
+before the fixed address command. Preserve all ownership/resource/namespace /
+stop-before-Cargo checks. No actual local-address or QR acceptance yet.
