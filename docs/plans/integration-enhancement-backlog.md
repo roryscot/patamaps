@@ -23,6 +23,13 @@ a passed fixture or metadata observation is not general support.
 
 ## Current selected work
 
+The original G3/G6 [dynamic Next page/data-boundary increment](2026-10-24-next-dynamic-runtime.md)
+is now selected alongside the storage-blocked G4 measurements. Existing source
+and manifest observations do not exercise the pinned non-catch-all chat page.
+Read-only source intake distinguishes its client shell/data API, private/public
+permissions, empty200 for unseen IDs and constant204 stream stub. No dynamic
+page runtime acceptance follows from that intake.
+
 The independent original G5/G6 [fresh installed Rust owner-build increment](2026-10-24-installed-rust-owner-build.md)
 now [passes independent review](../acceptance/project-adoption/g5-installed-rust-owner-build-20261024/accepted-40118700332/independent-verification.json)
 at8c6de4/workspace enginea5d602de: both installed compilers rebuilt pinned
