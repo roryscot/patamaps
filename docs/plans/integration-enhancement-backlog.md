@@ -118,10 +118,13 @@ The first standalone boundary has [verified subcontrols in a failed run](../acce
 run40063041691 atc38b9b9 passed all28 runtime groups/four upstream tests and cleanup.
 The86.1MB private tree reports2,323 files/78 links. Strict native tree selection
 refused those links and preserved the previous pointer. Runtime changed the
-standalone tree, failing its unchanged-tree assertion. Changed-entry categories
-are not yet known. Next: bounded mutation observations, an explicit closed-link
-artifact contract if needed, separate declared mutable instance state and
-source/build-tool-unavailable retained runtime. Full I2 remains unaccepted.
+standalone tree, failing its unchanged-tree assertion. The [later characterization](../acceptance/project-adoption/g5-next-standalone-probe-20261024/attempt-3/independent-verification.json)
+in run40063648666 found six final-state cache additions (two directories/four
+files,27,407 bytes), with no final changes in other categories. Its whole run
+remains failed. Next: the [frozen I2b contract](2026-10-24-installed-next.md#i2b-frozen-contract-from-measured-runtime-changes):
+opt-in native closed-tree validation, immutable selected bundle, separate bounded
+instance cache, source/build-tool-unavailable retained runtime and installed replay.
+Full I2 remains unaccepted.
 
 The original G0–G6 scope remains active: remaining Next/framework and deployment
 controls, full retained Next bundle and its installed replay, applicable dependency/test-context treatment,
