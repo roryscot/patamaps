@@ -195,7 +195,7 @@ def main():
    r["rewriteQualification"].update(compiledRulesBound=True,originalRulesPreserved=bound["originalRulesPreserved"],missingProjectionRefused=True,staleProjectionRefusedAfterRequestRehash=True)
   standalone_root=None
   if a.standalone_probe:
-   from qualify_next_standalone import observe, inventory as standalone_inventory
+   from qualify_next_standalone import observe, inventory as standalone_inventory, changed_summary
    standalone_root=staged/".next/standalone"
    assert (standalone_root/"server.js").is_file() and not standalone_root.is_symlink()
    for src,dst in [(staged/"public",standalone_root/"public"),(staged/".next/static",standalone_root/".next/static")]:
@@ -216,6 +216,10 @@ def main():
    r.update(runtimeEstablished=True,authenticationAccepted=True,ownerRuntimeMigrationExecuted=True,runtimeBoundary="trusted owner; new isolated CI PostgreSQL and HTTPS loopback; no production secrets")
   if standalone_root is not None:
    standalone_after=standalone_inventory(standalone_root)
+   r["standaloneProbe"]["runtimeMutationObservation"]=changed_summary(standalone_before,standalone_after)
+   r["standaloneProbe"]["actualStandaloneRuntimePassed"]=True
+   write(out/"standalone-probe.json",r["standaloneProbe"])
+   save()
    assert standalone_after==standalone_before,"Standalone tree changed during runtime"
    r["standaloneProbe"].update(actualStandaloneRuntimePassed=True,standaloneTreeUnchanged=True,producerSourceAndToolsUnavailable=False,fullRetainedBundleAccepted=False)
    write(out/"standalone-probe.json",r["standaloneProbe"])

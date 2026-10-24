@@ -5,7 +5,7 @@ from pathlib import Path
 import tempfile
 import unittest
 from unittest.mock import patch
-from qualify_next_standalone import inventory, summary, encoded, digest, copy_bound
+from qualify_next_standalone import inventory, summary, encoded, digest, copy_bound, changed_summary
 
 class StandalonePrivateControls(unittest.TestCase):
     @classmethod
@@ -66,6 +66,21 @@ class StandalonePrivateControls(unittest.TestCase):
         descriptor=self.descriptor(work,source);Path(descriptor["privateInventoryPath"]).write_bytes(b"{}")
         with self.assertRaisesRegex(AssertionError,"INVENTORY_CHANGED"):copy_bound(descriptor,work/"bundle")
         self.assertFalse((work/"bundle").exists())
+    def test_changed_summary_counts_only_no_private_paths_or_bytes(self):
+        work,source=self.case()
+        (source/"server-reference-manifest.json").write_text("PRIVATE_INITIAL_ACTION_KEY")
+        before=inventory(source)
+        (source/".next/cache").mkdir(parents=True)
+        (source/".next/cache/private-session-name").write_text("PRIVATE_NEW_BYTES")
+        (source/"server-reference-manifest.json").write_text("PRIVATE_CHANGED_ACTION_KEY")
+        after=inventory(source);observation=changed_summary(before,after)
+        self.assertEqual(observation["changedEntries"],4)
+        self.assertEqual(observation["categories"],dict(cache=2,diagnostics=0,**{"server-rendered":0,"other":2}))
+        self.assertEqual(observation["changes"],dict(added=3,removed=0,changed=1))
+        public=json.dumps(observation)
+        for private in ["private-session-name","PRIVATE_NEW_BYTES","PRIVATE_CHANGED_ACTION_KEY","server-reference-manifest.json"]:
+            self.assertNotIn(private,public)
+        self.assertFalse(observation["detailedInventoryPublished"])
     def test_unknown_descriptor_refuses_before_copy(self):
         work,source=self.case();descriptor=self.descriptor(work,source);descriptor["unknown"]=True
         with self.assertRaisesRegex(AssertionError,"DESCRIPTOR"):copy_bound(descriptor,work/"bundle")

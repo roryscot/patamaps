@@ -48,6 +48,19 @@ def summary(rows):
                 bytes=sum(v.get("bytes", 0) for v in rows.values()),
                 inventoryDigest=digest(encoded(rows)), symlinkTargetsFollowed=False)
 
+def changed_summary(before, after):
+    changed = {name for name in set(before) | set(after) if before.get(name) != after.get(name)}
+    categories = {"cache": 0, "diagnostics": 0, "server-rendered": 0, "other": 0}
+    kinds = {"added": 0, "removed": 0, "changed": 0}
+    for name in changed:
+        category = ("cache" if name == ".next/cache" or name.startswith(".next/cache/") else
+                    "diagnostics" if name in {".next/trace", ".next/trace-build"} or name.startswith(".next/diagnostics/") else
+                    "server-rendered" if name.startswith(".next/server/") else "other")
+        categories[category] += 1
+        kinds["added" if name not in before else "removed" if name not in after else "changed"] += 1
+    return dict(changedEntries=len(changed), categories=categories, changes=kinds,
+                before=summary(before), after=summary(after), detailedInventoryPublished=False)
+
 def copy_bound(descriptor, target):
     assert set(descriptor) == {"profile", "privateSourceRoot", "privateInventoryPath", "inventoryDigest", "producer"}, "STANDALONE_DESCRIPTOR"
     assert descriptor["profile"] == "patamaps-standalone-owner-probe-1", "STANDALONE_DESCRIPTOR"

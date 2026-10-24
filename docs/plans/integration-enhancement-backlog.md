@@ -114,6 +114,15 @@ signing/Action bytes, detailed output inventories, database/cookie state and raw
 HTTP stay outside public captures/evidence. Actual-project exclusive cold/warm/
 edit latency, memory and retained-disk measurements remain required.
 
+The first standalone boundary has [verified subcontrols in a failed run](../acceptance/project-adoption/g5-next-standalone-probe-20261024/attempt-2/independent-verification.json):
+run40063041691 atc38b9b9 passed all28 runtime groups/four upstream tests and cleanup.
+The86.1MB private tree reports2,323 files/78 links. Strict native tree selection
+refused those links and preserved the previous pointer. Runtime changed the
+standalone tree, failing its unchanged-tree assertion. Changed-entry categories
+are not yet known. Next: bounded mutation observations, an explicit closed-link
+artifact contract if needed, separate declared mutable instance state and
+source/build-tool-unavailable retained runtime. Full I2 remains unaccepted.
+
 The original G0–G6 scope remains active: remaining Next/framework and deployment
 controls, full retained Next bundle and its installed replay, applicable dependency/test-context treatment,
 and actual-project exclusive cold/warm/edit latency, memory and retained-disk

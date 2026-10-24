@@ -198,3 +198,40 @@ The existing Intel CLI's read-only input-key parser now accepts the generated
 plan; its older engine is explicitly recorded and is not current-source runtime
 acceptance. The bounded produced-tree summary is saved before native selection
 so later failures retain that observation without publishing private inventory.
+
+
+## I2a real boundary observed; whole run remains failed
+
+[Run40063041691](https://github.com/roryscot/patamaps/actions/runs/40063041691)
+atc38b9b9 has [independently verified subcontrols](../acceptance/project-adoption/g5-next-standalone-probe-20261024/attempt-2/independent-verification.json),
+but the whole qualification failed. The actual standalone server passed all28
+auth/rewrite groups and four unchanged upstream tests. All owned browser/proxy/
+process/listener cleanup passed. The compiled standalone mode and175 captured
+text inputs, five driver digests and producer/configuration bindings were checked.
+
+The private reported tree has2,852 entries:2,323 files,78 symlinks and86,092,135
+file bytes. Its raw bytes are excluded from public artifacts and were not
+independently rehashed by the reviewer. The unchanged native tree selector
+refused PROJECT_BUILD_OUTPUT_SYMLINK after exact-copy preparation; its existing
+prior selection and final verification passed. The complete standalone tree
+changed during runtime, so its immutable-tree assertion correctly failed.
+The first collector did not retain bounded change categories before that
+assertion; the concrete changed paths remain unknown. Do not claim cache-only
+writes, full bundle acceptance, unchanged output or source/tool-unavailable replay.
+
+The next run records only before/after digests, changed-entry counts and fixed
+category counts before retaining that same assertion. Ten focused private
+inventory/mutation controls pass. No raw generated names/content enters public
+evidence and no failing expectation is removed.
+
+After that observation, implement an explicit exact runtime contract:
+preserve ordinary tree rejection; if needed add an opt-in closed-link artifact
+kind using the existing native internal-closure validator. Bind link text,
+member bytes and modes, refuse outside/dangling/cyclic resolution and keep limits.
+Private output artifacts must not become nonsecret captured contexts. Keep the
+selected generation immutable and define separately bounded per-instance mutable
+state from observed writes; never silently exclude changed files. Then qualify
+actual retained runtime with source/configured build tools unavailable, corruption/
+missing-member refusals before effects, previous-pointer preservation, post-run
+selection verification, all28 groups/four tests and exact installed replay.
+The original I2 and performance requirements remain open.
