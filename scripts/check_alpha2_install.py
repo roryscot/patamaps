@@ -138,7 +138,7 @@ def main():
         else:download("https://static.crates.io/crates/"+package["name"]+"/"+filename,dest,package["checksum"])
         index_write(registry,metadata_from_cache(original,package,output))
     archives=[]
-    for name in ["patamaps-workspace","patamaps-cli"]:
+    for name in ["patamaps-workspace","patamaps-inspect","patamaps-cli"]:
         archive=stage/"target/package"/(name+"-0.1.0-alpha.2.crate")
         manifest,members=inspect_archive(archive,name,"0.1.0-alpha.2")
         shutil.copyfile(archive,registry/archive.name)

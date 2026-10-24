@@ -3,16 +3,16 @@ import argparse, hashlib, json, os, re, shutil, subprocess
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-NAMES = ("patamaps-workspace", "patamaps-cli")
+NAMES = ("patamaps-workspace", "patamaps-inspect", "patamaps-cli")
 VERSION = "0.1.0-alpha.2"
 
 def prepare(out):
     out.mkdir(parents=True, exist_ok=False)
     manifest = (ROOT / "Cargo.toml").read_text()
-    manifest = re.sub(r'members = \[.*?\]', 'members = ["crates/patamaps-workspace", "crates/patamaps-cli"]', manifest, count=1, flags=re.S)
+    manifest = re.sub(r'members = \[.*?\]', 'members = ["crates/patamaps-workspace", "crates/patamaps-inspect", "crates/patamaps-cli"]', manifest, count=1, flags=re.S)
     manifest = manifest.replace('exclude = ["vendor/icu_collator"]\n', '')
     for name in re.findall(r'^(patamaps-[a-z-]+) = \{ path = .*$', manifest, re.M):
-        value = '{ path = "crates/patamaps-workspace", version = "=0.1.0-alpha.2" }' if name == "patamaps-workspace" else '{ version = "=0.1.0-alpha.1" }'
+        value = '{ path = "crates/' + name + '", version = "=0.1.0-alpha.2" }' if name in NAMES else '{ version = "=0.1.0-alpha.1" }'
         manifest = re.sub(r'^' + re.escape(name) + r' = .*$', name + ' = ' + value, manifest, flags=re.M)
     manifest = re.sub(r'^icu_collator = .*$', 'icu_collator = { package = "patamaps-icu-collator", version = "=2.2.1-patamaps.1" }', manifest, flags=re.M)
     (out / "Cargo.toml").write_text(manifest)

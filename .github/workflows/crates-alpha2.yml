@@ -22,7 +22,7 @@ jobs:
       - uses: actions/checkout@v4
       - name: Install declared toolchain
         run: rustup toolchain install 1.99.0 --profile minimal
-      - name: Stage two release crates
+      - name: Stage release crates and required dependency
         run: python3 scripts/prepare_alpha2.py --output "$RUNNER_TEMP/alpha2"
       - name: Resolve published dependencies and test workspace
         run: |
@@ -34,7 +34,7 @@ jobs:
         run: |
           cd "$RUNNER_TEMP/alpha2"
           export CARGO_TARGET_DIR="$RUNNER_TEMP/alpha2/target"
-          cargo package --locked --allow-dirty -p patamaps-workspace -p patamaps-cli
+          cargo package --locked --allow-dirty -p patamaps-workspace -p patamaps-inspect -p patamaps-cli
       - name: Clean Cargo home installation and Rust consumer
         run: python3 scripts/check_alpha2_install.py --stage "$RUNNER_TEMP/alpha2"
       - uses: actions/upload-artifact@v4
