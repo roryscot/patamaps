@@ -39,7 +39,7 @@ def apply(owner, inventory):
     target = owner / PROFILE_PATH
     assert not target.exists() and not target.is_symlink(), 'REWRITE_PROFILE_EXISTS'
     text = original.decode('utf8')
-    anchor = '  cacheComponents: true,'
+    anchor = 'export default withBotId(nextConfig);'
     assert text.count(anchor) == 1 and 'rewrites:' not in text, 'REWRITE_CONFIG_SHAPE'
     indices = [i for i, row in enumerate(inventory) if row['path'] == 'next.config.ts']
     assert len(indices) == 1 and inventory[indices[0]]['digest'] == ORIGINAL_CONFIG_SHA
@@ -47,7 +47,23 @@ def apply(owner, inventory):
                    upstreamConfigDigest=ORIGINAL_CONFIG_SHA, rules=RULES,
                    originalUpstreamUnchanged=True, qualificationOverlay=True)
     encoded = (json.dumps(profile, indent=2) + '\n').encode()
-    rewritten = text.replace(anchor, '  rewrites: async () => (' + json.dumps(RULES) + '),\n' + anchor).encode()
+    # Preserve the plugin's original flat rewrite array before adding phases.
+    # BotID1.5.11 moves its rules to beforeFiles if passed a phased base config.
+    composed = (
+        'const qualifiedNextConfig: NextConfig = withBotId(nextConfig);\n'
+        'const originalRewrites = qualifiedNextConfig.rewrites;\n'
+        'qualifiedNextConfig.rewrites = async () => {\n'
+        '  const original = await originalRewrites?.();\n'
+        '  if (!Array.isArray(original)) throw new Error("Unexpected pinned BotID rewrite shape");\n'
+        '  return {\n'
+        '    beforeFiles: ' + json.dumps(RULES['beforeFiles']) + ',\n'
+        '    afterFiles: [...original, ...' + json.dumps(RULES['afterFiles']) + '],\n'
+        '    fallback: [],\n'
+        '  };\n'
+        '};\n'
+        'export default qualifiedNextConfig;'
+    )
+    rewritten = text.replace(anchor, composed).encode()
     # Validate all conditions before either write. Both outputs remain on failure.
     with target.open('xb') as stream:
         stream.write(encoded)

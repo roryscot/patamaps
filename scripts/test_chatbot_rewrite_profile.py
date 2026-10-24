@@ -9,7 +9,7 @@ from pathlib import Path
 from unittest.mock import patch
 import chatbot_rewrite_profile as profile
 
-CONTROLLED = b"const nextConfig = {\n  cacheComponents: true,\n};\n"
+CONTROLLED = b"const nextConfig = {\n  cacheComponents: true,\n};\nexport default withBotId(nextConfig);\n"
 
 class RewriteOverlayControls(unittest.TestCase):
     @classmethod

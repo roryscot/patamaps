@@ -1224,3 +1224,16 @@ normal SSL context loads CA roots before Cargo, and recheck bytes afterward.
 No TLS-validation disabling, private key/config mount, external network, quota
 increase, source/test change or installed acceptance. OS/toolchain closure stays
 explicitly false; a subsequent full pass is required.
+
+First rewrite attempt40052814394 at530e6da passed the real source overlay,
+native captured-config refusal, owner production build and native compiled
+observations, then refused REWRITE_ORIGINAL_RULES_CHANGED before any runtime.
+[Verified failed evidence](../acceptance/project-adoption/g3-next-rewrite-runtime-20261024/attempt-1/ci.json)
+shows the two BotID rules moved from afterFiles to beforeFiles. Inspection of
+the original BotID1.5.11 npm archive, verified against the pinned pnpm lock's
+SHA-512, confirms its phased-input branch appends its rules to beforeFiles.
+Compose the qualification additions after its unchanged wrapper output instead:
+require the original flat rewrite array, retain it in afterFiles, then add the
+declared aliases. Preserve the exact original-rule check and every frozen
+runtime/refusal expectation; do not waive phase changes. Ten focused controls
+passed again; a full subsequent run is still required.
