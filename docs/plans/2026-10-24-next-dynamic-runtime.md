@@ -1,6 +1,6 @@
 # Pinned Next dynamic page and data-boundary qualification
 
-Status: implemented and focused-preflight verified; runtime qualification pending.
+Status: accepted for the exact original-config pinned owner and current development engine; installed replay and broader shapes remain open.
 This closes a specific original G3/G6 gap beyond the existing source/manifests,
 auth/document and rewrite checks. Develop on Intel; run the existing bounded
 Linux Next lane. Native G4 measurements still await storage admission.
@@ -96,3 +96,38 @@ source-acquisition controls passed on Intel, together with Node syntax, Python
 AST, workflow YAML and diff checks. Fixtures remain in the recorded private
 preflight directory. Runtime and support claims await the single selected Linux
 lane and independent artifact review; no dynamic runtime acceptance is implied.
+
+## Accepted runtime result
+
+[Run40125656603](https://github.com/roryscot/patamaps/actions/runs/40125656603),
+source0f0ce3340e4b9a823fb888c6a6d85b517aa5648a, passed the selected Linux lane.
+The [independent review](../acceptance/project-adoption/g3-next-dynamic-runtime-20261024/accepted-40125656603/independent-verification.json)
+rehashes all180 original selected source files against the pinned public Git
+tree/blobs:174 captured text inputs and six selected binary inputs. All three
+physical App Router bindings, generated manifest/build-receipt digests, four
+driver digests and enginea5d602de match the producing source. The original
+owner configuration and source bytes were preserved.
+
+All29 frozen browser/API groups and four unchanged upstream page tests passed.
+Owner, independent regular user and real guest cases showed the expected
+private/public data boundaries and read-only UI. Exact dynamic URL/query IDs
+and distinct visible message content passed; unseen valid IDs returned empty200
+without persistence; missing query400, extra segments404 and GET-only stream
+POST405 passed. The stream GET remains the original empty204 stub. Seeded
+rows remained unchanged, generation POST attempts were zero, evidence barriers
+passed, and owned listeners/process groups, browser and HTTPS proxy stopped.
+
+The first inspector attempt referenced a historical inventory that had never
+been retained at its assumed path. One review-only repair replaced that
+assumption with direct pinned Git-tree and byte checks; the successful workload
+was not rerun. The failure record remains beside the accepted review. No
+expectation, resource limit or privacy boundary changed. The338,872-byte
+artifact was independently SHA-256 verified and expires2026-11-07; only compact
+receipts, observations, source inventory, tree metadata and review source remain
+on Intel. No archive or generated owner/dependency tree was copied there.
+
+This closes only the named non-catch-all dynamic page/data-boundary increment.
+Native G4 measurements still await unchanged storage admission and a quiet
+exclusive window. Installed replay of these new controls, other dynamic shapes,
+external model/BotID/upload providers, full dependency closure, performance and
+production deployment remain unaccepted.
