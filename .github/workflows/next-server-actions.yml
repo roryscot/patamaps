@@ -1,0 +1,133 @@
+name: Existing Next Server Action candidate
+on:
+  workflow_call:
+    inputs:
+      dynamic-route-controls:
+        type: boolean
+        default: false
+      rewrite-controls:
+        type: boolean
+        default: false
+      installed-controls:
+        type: boolean
+        default: false
+      standalone-controls:
+        type: boolean
+        default: false
+      retained-runtime-controls:
+        type: boolean
+        default: false
+permissions:
+  contents: read
+jobs:
+  chatbot-source:
+    name: ${{ inputs.dynamic-route-controls && 'Pinned Chatbot dynamic page and data boundaries' || inputs.rewrite-controls && 'Pinned Chatbot internal rewrites, auth and permissions' || 'Pinned Chatbot production Server Actions and permissions' }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: '22.23.3'
+      - name: Install compiler toolchain
+        run: rustup toolchain install 1.99.0 --profile minimal --component clippy --component rustfmt
+      - name: Verify strict manifest compatibility and workspace regressions
+        env:
+          CARGO_INCREMENTAL: '0'
+          CARGO_PROFILE_DEV_DEBUG: '0'
+          CARGO_PROFILE_TEST_DEBUG: '0'
+          CARGO_BUILD_JOBS: '2'
+        run: |
+          if [ "${{ inputs.installed-controls && (inputs.retained-runtime-controls || inputs.dynamic-route-controls) }}" = "true" ]; then
+            export CARGO_BUILD_TARGET=x86_64-unknown-linux-gnu
+          fi
+          cargo +1.99.0 fmt --all --check
+          cargo +1.99.0 test --locked -p patamaps-workspace --lib
+          cargo +1.99.0 test --locked -p patamaps-workspace --test workspace
+          cargo +1.99.0 clippy --locked -p patamaps-workspace --all-targets -- -D warnings
+      - name: Verify partial source acquisition controls
+        run: |
+          mkdir -p "$RUNNER_TEMP/next-source-controls"
+          PATAMAPS_TEST_RETAIN_ROOT="$RUNNER_TEMP/next-source-controls" python3 -B -m unittest discover -s scripts -p test_next_source_acquisition.py
+      - name: Check pinned dynamic source and compiled bindings
+        if: inputs.dynamic-route-controls
+        run: |
+          mkdir -p "$RUNNER_TEMP/dynamic-route-controls"
+          PATAMAPS_TEST_RETAIN_ROOT="$RUNNER_TEMP/dynamic-route-controls" python3 -B -m unittest discover -s scripts -p test_chatbot_dynamic_profile.py
+      - name: Check browser driver syntax
+        run: node --check scripts/qualify_chatbot_auth.mjs
+      - name: Check explicit rewrite overlay boundaries
+        if: inputs.rewrite-controls
+        run: |
+          mkdir -p "$RUNNER_TEMP/rewrite-overlay-controls"
+          PATAMAPS_TEST_RETAIN_ROOT="$RUNNER_TEMP/rewrite-overlay-controls" python3 -B -m unittest discover -s scripts -p test_chatbot_rewrite_profile.py
+      - name: Check private standalone output boundaries
+        if: inputs.standalone-controls
+        run: |
+          mkdir -p "$RUNNER_TEMP/standalone-controls"
+          PATAMAPS_TEST_RETAIN_ROOT="$RUNNER_TEMP/standalone-controls" python3 -B -m unittest discover -s scripts -p test_next_standalone.py
+          PATAMAPS_TEST_RETAIN_ROOT="$RUNNER_TEMP/standalone-controls" python3 -B -m unittest discover -s scripts -p test_next_output_inventory.py
+      - name: Check retained runtime admission and private coordinator syntax
+        if: inputs.retained-runtime-controls
+        run: |
+          mkdir -p "$RUNNER_TEMP/retained-runtime-controls"
+          PATAMAPS_TEST_RETAIN_ROOT="$RUNNER_TEMP/retained-runtime-controls" python3 -B -m unittest discover -s scripts -p test_next_retained_runtime.py
+          python3 -B - <<'PY'
+          import subprocess, sys
+          sys.path.insert(0, "scripts")
+          from next_retained_runtime import PROBE_NODE, CACHE_NODE
+          for source in [PROBE_NODE, CACHE_NODE]:
+              subprocess.run(["node", "--check"], input=source, text=True, check=True)
+          PY
+      - name: Capture frozen source, build, and qualify real production auth
+        if: inputs.installed-controls == false
+        run: >-
+          python3 -B scripts/qualify_chatbot_next.py
+          --build-cli --runtime --cli target/debug/patamaps
+          ${{ inputs.dynamic-route-controls && '--dynamic-routes' || '' }}
+          ${{ inputs.rewrite-controls && '--rewrites' || '' }}
+          ${{ inputs.standalone-controls && '--standalone-probe' || '' }}
+          ${{ inputs.retained-runtime-controls && '--retained-runtime' || '' }}
+          --work "$RUNNER_TEMP/patamaps-chatbot-${{ github.run_id }}-${{ github.run_attempt }}"
+          --evidence ci-evidence/chatbot-source
+      - name: Check installed-source and archive boundaries
+        if: inputs.installed-controls
+        run: |
+          mkdir -p "$RUNNER_TEMP/installed-next-controls"
+          PATAMAPS_TEST_RETAIN_ROOT="$RUNNER_TEMP/installed-next-controls" python3 -B -m unittest discover -s scripts -p test_installed_source_identity.py
+          python3 -B -m unittest discover -s scripts -p test_installed_retained_next.py
+          PATAMAPS_TEST_RETAIN_ROOT="$RUNNER_TEMP/installed-next-controls" python3 -B -m unittest discover -s scripts -p test_installed_dynamic_next.py
+          PATAMAPS_TEST_RETAIN_ROOT="$RUNNER_TEMP/installed-next-controls" python3 -B -m unittest discover -s scripts -p test_exact_archive_install.py
+          PATAMAPS_TEST_RETAIN_ROOT="$RUNNER_TEMP/installed-next-controls" python3 -B -m unittest discover -s scripts -p test_next_output_inventory.py
+      - name: Qualify fresh source and native installations on real Next
+        if: inputs.installed-controls
+        run: >-
+          python3 -B scripts/qualify_installed_next.py
+          ${{ inputs.dynamic-route-controls && '--dynamic-routes' || '' }}
+          ${{ inputs.retained-runtime-controls && '--retained-runtime' || '' }}
+          --work "$RUNNER_TEMP/patamaps-installed-next-${{ github.run_id }}-${{ github.run_attempt }}"
+          --evidence ci-evidence/installed-next
+      - name: Confirm only owned retained containers stopped
+        if: always() && inputs.retained-runtime-controls
+        run: |
+          python3 -B - <<'PY'
+          import sys
+          from pathlib import Path
+          sys.path.insert(0, "scripts")
+          from deployment_miniserve_image import stop_owned
+          paths=[Path("ci-evidence/chatbot-source/retained-owned.json"),
+                 Path("ci-evidence/installed-next/source/retained-owned.json"),
+                 Path("ci-evidence/installed-next/native/retained-owned.json")]
+          for path in paths:
+              stop_owned(path)
+          print("Owned retained runtime containers checked")
+          PY
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        if: always()
+        with:
+          name: ${{ inputs.installed-controls && inputs.dynamic-route-controls && 'installed-dynamic-next' || inputs.dynamic-route-controls && 'chatbot-dynamic' || inputs.installed-controls && inputs.retained-runtime-controls && 'installed-retained-next' || inputs.retained-runtime-controls && 'retained-next-runtime' || inputs.standalone-controls && 'standalone-next-probe' || inputs.installed-controls && 'installed-next' || 'chatbot-source' }}-${{ github.sha }}
+          path: ${{ inputs.installed-controls && 'ci-evidence/installed-next/' || 'ci-evidence/chatbot-source/' }}
+          if-no-files-found: error
+          retention-days: 14

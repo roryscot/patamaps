@@ -2,15 +2,82 @@ name: Native capability acceptance
 
 on:
   push:
-    branches: [main]
+    branches: ['**']
   pull_request:
   workflow_dispatch:
+    inputs:
+      qualification:
+        description: Select full capability acceptance or real Next preparation
+        required: true
+        type: choice
+        default: all
+        options:
+          - all
+          - next-preparation
+          - external-rust
+          - external-rust-installed
+          - external-rust-image
+          - binary-docker-context
+          - next-server-actions
+          - next-dynamic-routes
+          - next-installed-dynamic
+          - next-rewrites
+          - next-installed
+          - next-installed-retained
+          - project-measurement-controls
+          - next-standalone-probe
+          - next-retained-runtime
+          - cargo-registry-preflight
+          - cargo-registry-container-preflight
+          - cargo-registry-context
+          - cargo-registry-installed-build
 
 permissions:
   contents: read
 
 jobs:
+  cargo-metadata-contract:
+    if: github.event_name != 'workflow_dispatch' || inputs.qualification == 'all'
+    name: Rust Cargo metadata contract
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    env:
+      CARGO_INCREMENTAL: '0'
+      CARGO_PROFILE_DEV_DEBUG: '0'
+      CARGO_PROFILE_TEST_DEBUG: '0'
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - name: Install pinned Rust toolchain
+        run: rustup toolchain install 1.99.0 --profile minimal
+      - name: Test patamaps-workspace library suite, including Next manifest boundaries
+        run: cargo +1.99.0 test --locked -p patamaps-workspace --lib
+      - name: Build Patamaps CLI with the updated workspace adapter
+        run: cargo +1.99.0 build --locked -p patamaps-cli --bin patamaps
+      - name: Check selected-artifact execution and owner crash cleanup
+        run: >-
+          python3 -B scripts/project_selected_exec_controls.py
+          --compiler "$GITHUB_WORKSPACE/target/debug/patamaps"
+          --work-root "$RUNNER_TEMP/patamaps-selected-exec-${{ github.run_id }}-${{ github.run_attempt }}"
+
+  retention-admission:
+    if: (github.event_name != 'push' || github.ref == 'refs/heads/main') && (github.event_name != 'workflow_dispatch' || inputs.qualification == 'all')
+    name: Retention admission boundaries
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: '22.23.3'
+      - name: Check retention headroom without allocating build outputs
+        run: node --test scripts/retention_admission.test.mjs
+      - name: Check bounded source-package evidence closure
+        run: |
+          mkdir -p "$RUNNER_TEMP/patamaps-package-scope-tests"
+          PATAMAPS_TEST_RETAIN_ROOT="$RUNNER_TEMP/patamaps-package-scope-tests" python3 -B -m unittest discover -s scripts -p test_package_source.py
+
   linux:
+    if: (github.event_name != 'push' || github.ref == 'refs/heads/main') && (github.event_name != 'workflow_dispatch' || inputs.qualification == 'all')
     name: Linux ${{ matrix.architecture }}
     strategy:
       fail-fast: false
@@ -40,6 +107,24 @@ jobs:
               --output "$GITHUB_WORKSPACE/ci-evidence" \
               --architecture "${{ matrix.architecture }}" \
               --fixtures "/tmp/patamaps-ci-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
+      - name: Test published CLI installer path handling
+        if: matrix.architecture == 'x86_64'
+        run: python3 -B -m unittest discover -s scripts -p test_ci_published_cli_install.py
+      - name: Install published CLI in a fresh Cargo home and consumer
+        id: published_cli_install
+        if: matrix.architecture == 'x86_64'
+        run: >-
+          python3 -B scripts/ci_published_cli_install.py
+          --cargo "$HOME/.cargo/bin/cargo"
+          --work-root "$RUNNER_TEMP"
+          --output "$RUNNER_TEMP/patamaps-published-cli-install-evidence"
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        if: always() && matrix.architecture == 'x86_64' && steps.published_cli_install.outcome != 'skipped'
+        with:
+          name: published-cli-install-${{ github.sha }}
+          path: ${{ runner.temp }}/patamaps-published-cli-install-evidence/
+          if-no-files-found: error
+          retention-days: 30
       - name: Retain Linux fixture material
         if: always()
         shell: bash
@@ -56,8 +141,10 @@ jobs:
           name: native-linux-${{ matrix.architecture }}-${{ github.sha }}
           path: ci-evidence/
           if-no-files-found: error
+          retention-days: 14
 
   cross-stack-source:
+    if: (github.event_name != 'push' || github.ref == 'refs/heads/main') && (github.event_name != 'workflow_dispatch' || inputs.qualification == 'all')
     name: Cross-stack source bindings (Linux x86_64)
     runs-on: ubuntu-24.04
     timeout-minutes: 30
@@ -92,11 +179,23 @@ jobs:
         run: python3 -B scripts/ci_cross_stack.py --phase development
       - name: Verify explicit MetaMap conversion and paired source decisions
         run: python3 -B scripts/ci_cross_stack.py --phase compatibility
+      - name: Qualify pinned actual Axum workspace on Linux
+        run: >-
+          python3 -B scripts/qualify_axum_linux.py
+          --cli target/release/patamaps
+          --work "${RUNNER_TEMP}/patamaps-actual-axum-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
+          --evidence ci-evidence/existing-axum-linux
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         if: always()
         with:
           name: cross-stack-diagnostics-source-${{ github.sha }}
           path: |
+            ci-evidence/existing-axum-linux/receipt.json
+            ci-evidence/existing-axum-linux/*.log
+            ci-evidence/existing-axum-linux/request.json
+            ci-evidence/existing-axum-linux/retained-workflow.json
+            ci-evidence/existing-axum-linux/engine.json
+            ci-evidence/existing-axum-linux/*.tar.gz
             ci-evidence/cross-stack-*/receipt.json
             ci-evidence/transport-lock/Cargo.lock
             ci-evidence/cross-stack-discovery/m1-unit-and-process-tests.*.log
@@ -106,6 +205,11 @@ jobs:
             ci-evidence/cross-stack-source/project-commands/receipt.json
             ci-evidence/cross-stack-source/project-builds/receipt.json
             ci-evidence/cross-stack-source/project-build-contexts/receipt.json
+            ci-evidence/cross-stack-source/project-preparation/receipt.json
+            ci-evidence/cross-stack-source/prep-*.log
+            ci-evidence/cross-stack-source/project-watch-preparation/receipt.json
+            ci-evidence/cross-stack-source/project-watch-preparation/*.stdout.log
+            ci-evidence/cross-stack-source/project-watch-preparation/*.stderr.log
             ci-evidence/cross-stack-source/next-build-observations/receipt.json
             ci-evidence/cross-stack-source/project-contexts/receipt.json
             ci-evidence/cross-stack-source/context-*.log
@@ -127,8 +231,9 @@ jobs:
             ci-evidence/cross-stack-installed/installed-workflow/*.stderr.log
             ci-evidence/cross-stack-installed/installed-workflow/m6-runtime-*.log
           if-no-files-found: warn
+          retention-days: 14
       - name: Retain source fixtures and tool symlink metadata
-        if: always()
+        if: failure() || cancelled()
         shell: bash
         run: |
           python3 -B - <<'PY'
@@ -152,12 +257,14 @@ jobs:
                           archive.add(child, arcname=workspace.name + "/" + child.name)
           PY
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
-        if: always()
+        if: failure() || cancelled()
         with:
           name: cross-stack-source-linux-x86_64-${{ github.sha }}
           path: ci-evidence/cross-stack-source.tar.gz
           if-no-files-found: error
+          retention-days: 7
   cross-stack-image:
+    if: (github.event_name != 'push' || github.ref == 'refs/heads/main') && (github.event_name != 'workflow_dispatch' || inputs.qualification == 'all')
     name: Cross-stack Linux image and browser (amd64)
     runs-on: ubuntu-24.04
     timeout-minutes: 45
@@ -209,11 +316,12 @@ jobs:
             ci-evidence/cross-stack-installed/installed-workflow/*.stderr.log
             ci-evidence/cross-stack-installed/installed-workflow/m6-runtime-*.log
           if-no-files-found: warn
+          retention-days: 14
       - name: Retain owned images, candidates, traces and logs
-        if: always()
+        if: failure() || cancelled()
         run: python3 -B scripts/archive_cross_stack_ci.py --phase image
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
-        if: always()
+        if: failure() || cancelled()
         with:
           name: cross-stack-linux-image-browser-${{ github.sha }}
           path: |
@@ -221,3 +329,193 @@ jobs:
             ci-evidence/cross-stack-owned-images.tar.gz
             ci-evidence/cross-stack-image-archive-receipt.json
           if-no-files-found: error
+          retention-days: 7
+
+  fumadocs-next-build:
+    if: github.event_name == 'workflow_dispatch' && inputs.qualification == 'next-preparation'
+    name: Pinned Fumadocs source and Next production build
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    env:
+      CARGO_INCREMENTAL: '0'
+      CARGO_PROFILE_DEV_DEBUG: '0'
+      CARGO_PROFILE_TEST_DEBUG: '0'
+      CARGO_BUILD_JOBS: '2'
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - name: Test exact Git acquisition boundaries without deleting fixtures
+        run: |
+          mkdir -p "${RUNNER_TEMP}/patamaps-next-source-controls"
+          PATAMAPS_TEST_RETAIN_ROOT="${RUNNER_TEMP}/patamaps-next-source-controls" python3 -B -m unittest discover -s scripts -p test_next_source_acquisition.py
+      - name: Build exact native context tool
+        run: |
+          rustup toolchain install 1.99.0 --profile minimal
+          cargo build --locked --release -p patamaps-cli
+      - name: Prepare selected public source and build isolated Next application
+        run: >-
+          python3 -B scripts/qualify_fumadocs_next.py
+          --cli target/release/patamaps
+          --work "${RUNNER_TEMP}/patamaps-fumadocs-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
+          --evidence ci-evidence/fumadocs-preparation
+          --next-build
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: fumadocs-next-build-${{ github.sha }}
+          path: |
+            ci-evidence/fumadocs-preparation/*.json
+            ci-evidence/fumadocs-preparation/*.log
+            ci-evidence/fumadocs-preparation/turbo-docs/
+          if-no-files-found: warn
+          retention-days: 14
+
+  external-rust-deployment:
+    if: github.event_name == 'workflow_dispatch' && inputs.qualification == 'external-rust'
+    name: External Rust deployment
+    permissions:
+      contents: read
+      actions: read
+    uses: ./.github/workflows/external-rust-deployment.yml
+
+  external-rust-installed:
+    if: github.event_name == 'workflow_dispatch' && inputs.qualification == 'external-rust-installed'
+    name: Installed external Rust
+    permissions:
+      contents: read
+      actions: read
+    uses: ./.github/workflows/external-rust-installed.yml
+
+  external-rust-image:
+    if: github.event_name == 'workflow_dispatch' && inputs.qualification == 'external-rust-image'
+    name: External Rust application image and browser
+    permissions:
+      contents: read
+      actions: read
+    uses: ./.github/workflows/external-rust-installed.yml
+    with:
+      application-image: true
+
+  binary-docker-context:
+    if: github.event_name == 'workflow_dispatch' && inputs.qualification == 'binary-docker-context'
+    name: Binary-bearing Docker contexts
+    permissions:
+      contents: read
+      actions: read
+    uses: ./.github/workflows/binary-docker-context.yml
+
+  next-server-actions:
+    if: github.event_name == 'workflow_dispatch' && inputs.qualification == 'next-server-actions'
+    name: Real Next Server Action candidate
+    uses: ./.github/workflows/next-server-actions.yml
+
+  cargo-registry-preflight:
+    if: github.event_name == 'workflow_dispatch' && inputs.qualification == 'cargo-registry-preflight'
+    name: Cargo registry isolation prerequisite
+    permissions:
+      contents: read
+      actions: read
+    uses: ./.github/workflows/external-rust-deployment.yml
+    with:
+      registry-preflight-only: true
+
+  cargo-registry-container-preflight:
+    if: github.event_name == 'workflow_dispatch' && inputs.qualification == 'cargo-registry-container-preflight'
+    name: Managed Cargo registry isolation prerequisite
+    permissions:
+      contents: read
+      actions: read
+    uses: ./.github/workflows/external-rust-deployment.yml
+    with:
+      registry-container-preflight-only: true
+
+  cargo-registry-context:
+    if: github.event_name == 'workflow_dispatch' && inputs.qualification == 'cargo-registry-context'
+    name: Real Cargo retained registry context
+    permissions:
+      contents: read
+      actions: read
+    uses: ./.github/workflows/external-rust-deployment.yml
+    with:
+      registry-context: true
+      registry-reuse-compiler: true
+
+  next-rewrites:
+    if: github.event_name == 'workflow_dispatch' && inputs.qualification == 'next-rewrites'
+    name: Real Next internal rewrite qualification
+    uses: ./.github/workflows/next-server-actions.yml
+    with:
+      rewrite-controls: true
+
+  next-installed:
+    if: github.event_name == 'workflow_dispatch' && inputs.qualification == 'next-installed'
+    name: Fresh installed Next native commands
+    uses: ./.github/workflows/next-server-actions.yml
+    with:
+      rewrite-controls: true
+      installed-controls: true
+
+  next-standalone-probe:
+    if: github.event_name == 'workflow_dispatch' && inputs.qualification == 'next-standalone-probe'
+    name: Real Next standalone runtime and output boundary
+    uses: ./.github/workflows/next-server-actions.yml
+    with:
+      rewrite-controls: true
+      standalone-controls: true
+
+  next-retained-runtime:
+    if: github.event_name == 'workflow_dispatch' && inputs.qualification == 'next-retained-runtime'
+    name: Retained Next immutable generation and private cache
+    uses: ./.github/workflows/next-server-actions.yml
+    with:
+      rewrite-controls: true
+      standalone-controls: true
+      retained-runtime-controls: true
+
+  next-installed-retained:
+    if: github.event_name == 'workflow_dispatch' && inputs.qualification == 'next-installed-retained'
+    name: Fresh installed Next retained runtime replay
+    uses: ./.github/workflows/next-server-actions.yml
+    with:
+      rewrite-controls: true
+      installed-controls: true
+      standalone-controls: true
+      retained-runtime-controls: true
+
+  project-measurement-controls:
+    if: github.event_name == 'workflow_dispatch' && inputs.qualification == 'project-measurement-controls'
+    name: Retained measurement ownership privacy and RSS units
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - name: Verify retained measurement controls
+        run: |
+          mkdir -p "$RUNNER_TEMP/patamaps-measurement-controls"
+          PATAMAPS_TEST_RETAIN_ROOT="$RUNNER_TEMP/patamaps-measurement-controls" python3 -B -m unittest discover -s scripts -p 'test_bench_*.py'
+
+  cargo-registry-installed-build:
+    if: github.event_name == 'workflow_dispatch' && inputs.qualification == 'cargo-registry-installed-build'
+    name: Fresh installed Rust owner builds
+    permissions:
+      contents: read
+      actions: read
+    uses: ./.github/workflows/external-rust-deployment.yml
+    with:
+      installed-owner-build: true
+
+  next-dynamic-routes:
+    if: github.event_name == 'workflow_dispatch' && inputs.qualification == 'next-dynamic-routes'
+    name: Real Next dynamic page and data boundaries
+    uses: ./.github/workflows/next-server-actions.yml
+    with:
+      dynamic-route-controls: true
+
+  next-installed-dynamic:
+    if: github.event_name == 'workflow_dispatch' && inputs.qualification == 'next-installed-dynamic'
+    name: Fresh installed Next dynamic page and data boundaries
+    uses: ./.github/workflows/next-server-actions.yml
+    with:
+      dynamic-route-controls: true
+      installed-controls: true

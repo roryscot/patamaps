@@ -1,0 +1,712 @@
+{
+  "status": "passed-source-built-miniserve-linux-deployment",
+  "sourceRevision": "73c7c882df86696d9990035d40f233cab19a0398",
+  "upstream": "https://github.com/svenstaro/miniserve.git",
+  "upstreamCommit": "2cd9c495ef25f2fcef505615f603e9de8f981915",
+  "commands": [
+    {
+      "label": "relocated-engine",
+      "argv": [
+        "/home/runner/work/_temp/patamaps-miniserve-40050181349-1/relocated-native/bin/patamaps",
+        "engine"
+      ],
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "elapsedMs": 501
+    },
+    {
+      "label": "source-init",
+      "argv": [
+        "git",
+        "init",
+        "/home/runner/work/_temp/patamaps-miniserve-40050181349-1/upstream"
+      ],
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "elapsedMs": 501
+    },
+    {
+      "label": "source-fetch",
+      "argv": [
+        "git",
+        "fetch",
+        "--depth=1",
+        "https://github.com/svenstaro/miniserve.git",
+        "2cd9c495ef25f2fcef505615f603e9de8f981915"
+      ],
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "elapsedMs": 501
+    },
+    {
+      "label": "source-checkout",
+      "argv": [
+        "git",
+        "checkout",
+        "--detach",
+        "FETCH_HEAD"
+      ],
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "elapsedMs": 501
+    },
+    {
+      "label": "source-head",
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "elapsedMs": 501
+    },
+    {
+      "label": "source-members",
+      "argv": [
+        "git",
+        "ls-files",
+        "-z"
+      ],
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "elapsedMs": 501
+    },
+    {
+      "label": "source-fixture-index",
+      "argv": [
+        "git",
+        "ls-files",
+        "--stage",
+        "-z"
+      ],
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "elapsedMs": 501
+    },
+    {
+      "label": "cargo-path",
+      "argv": [
+        "rustup",
+        "which",
+        "--toolchain",
+        "1.99.0",
+        "cargo"
+      ],
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "elapsedMs": 501
+    },
+    {
+      "label": "rustc-version",
+      "argv": [
+        "/home/runner/.rustup/toolchains/1.99.0-x86_64-unknown-linux-gnu/bin/rustc",
+        "-vV"
+      ],
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "elapsedMs": 501
+    },
+    {
+      "label": "source-context",
+      "argv": [
+        "/home/runner/work/_temp/patamaps-miniserve-40050181349-1/relocated-native/bin/patamaps",
+        "project-context-capture",
+        "/home/runner/work/_temp/patamaps-miniserve-40050181349-1/source-selection.json",
+        "--root",
+        "/home/runner/work/_temp/patamaps-miniserve-40050181349-1/upstream",
+        "--destination",
+        "/home/runner/work/_temp/patamaps-miniserve-40050181349-1/source-snapshot"
+      ],
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "elapsedMs": 501
+    },
+    {
+      "label": "source-stage",
+      "argv": [
+        "/home/runner/work/_temp/patamaps-miniserve-40050181349-1/relocated-native/bin/patamaps",
+        "project-context-stage",
+        "/home/runner/work/_temp/patamaps-miniserve-40050181349-1/source-snapshot",
+        "--destination",
+        "/home/runner/work/_temp/patamaps-miniserve-40050181349-1/source-staged"
+      ],
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "elapsedMs": 501
+    },
+    {
+      "label": "fresh-registry-locked-fetch",
+      "argv": [
+        "/home/runner/.rustup/toolchains/1.99.0-x86_64-unknown-linux-gnu/bin/cargo",
+        "fetch",
+        "--locked"
+      ],
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "elapsedMs": 3502
+    },
+    {
+      "label": "registry-image-pull",
+      "argv": [
+        "docker",
+        "pull",
+        "--platform",
+        "linux/amd64",
+        "busybox@sha256:dc88b80842580654294472735332ec7c7789a4010ec9a68b69f9b88c19abede6"
+      ],
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "elapsedMs": 1501
+    },
+    {
+      "label": "registry-context-capture",
+      "argv": [
+        "/home/runner/work/_temp/patamaps-miniserve-40050181349-1/relocated-native/bin/patamaps",
+        "project-context-capture",
+        "/home/runner/work/_temp/patamaps-miniserve-40050181349-1/registry-build/selection.json",
+        "--root",
+        "/home/runner/work/_temp/patamaps-miniserve-40050181349-1/registry-build/context-owner",
+        "--destination",
+        "/home/runner/work/_temp/patamaps-miniserve-40050181349-1/registry-build/snapshot"
+      ],
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "elapsedMs": 501
+    },
+    {
+      "label": "registry-native-real-build",
+      "argv": [
+        "/home/runner/work/_temp/patamaps-miniserve-40050181349-1/relocated-native/bin/patamaps",
+        "project-build",
+        "/home/runner/work/_temp/patamaps-miniserve-40050181349-1/registry-build/plan.json",
+        "--source",
+        "/home/runner/work/_temp/patamaps-miniserve-40050181349-1/registry-build/owner",
+        "--state",
+        "/home/runner/work/_temp/patamaps-miniserve-40050181349-1/registry-build/state",
+        "--context",
+        "/home/runner/work/_temp/patamaps-miniserve-40050181349-1/registry-build/binding.json"
+      ],
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "elapsedMs": 462146
+    },
+    {
+      "label": "registry-snapshot-before-effects",
+      "argv": [
+        "/home/runner/work/_temp/patamaps-miniserve-40050181349-1/relocated-native/bin/patamaps",
+        "project-build",
+        "/home/runner/work/_temp/patamaps-miniserve-40050181349-1/registry-build/marker-plan.json",
+        "--source",
+        "/home/runner/work/_temp/patamaps-miniserve-40050181349-1/registry-build/owner",
+        "--state",
+        "/home/runner/work/_temp/patamaps-miniserve-40050181349-1/registry-build/state",
+        "--context",
+        "/home/runner/work/_temp/patamaps-miniserve-40050181349-1/registry-build/binding.json"
+      ],
+      "exitCode": 1,
+      "expectedExitCode": 1,
+      "elapsedMs": 501
+    },
+    {
+      "label": "registry-selected-before-effects",
+      "argv": [
+        "/home/runner/work/_temp/patamaps-miniserve-40050181349-1/relocated-native/bin/patamaps",
+        "project-exec-selected",
+        "/home/runner/work/_temp/patamaps-miniserve-40050181349-1/registry-build/state",
+        "/home/runner/work/_temp/patamaps-miniserve-40050181349-1/registry-build/marker-command.json"
+      ],
+      "exitCode": 2,
+      "expectedExitCode": 2,
+      "elapsedMs": 501
+    },
+    {
+      "label": "registry-offline-selected-replay",
+      "argv": [
+        "/home/runner/work/_temp/patamaps-miniserve-40050181349-1/relocated-native/bin/patamaps",
+        "project-build-verify",
+        "/home/runner/work/_temp/patamaps-miniserve-40050181349-1/registry-build/state"
+      ],
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "elapsedMs": 501
+    },
+    {
+      "label": "upstream-status-after-tests",
+      "argv": [
+        "git",
+        "status",
+        "--porcelain=v1",
+        "--untracked-files=no"
+      ],
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "elapsedMs": 501
+    },
+    {
+      "label": "built-context",
+      "argv": [
+        "/home/runner/work/_temp/patamaps-miniserve-40050181349-1/relocated-native/bin/patamaps",
+        "project-context-capture",
+        "/home/runner/work/_temp/patamaps-miniserve-40050181349-1/built-selection.json",
+        "--root",
+        "/home/runner/work/_temp/patamaps-miniserve-40050181349-1/built-binary",
+        "--destination",
+        "/home/runner/work/_temp/patamaps-miniserve-40050181349-1/built-snapshot"
+      ],
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "elapsedMs": 501
+    },
+    {
+      "label": "native-deployment-select",
+      "argv": [
+        "/home/runner/work/_temp/patamaps-miniserve-40050181349-1/relocated-native/bin/patamaps",
+        "project-build",
+        "/home/runner/work/_temp/patamaps-miniserve-40050181349-1/positive-plan.json",
+        "--source",
+        "/home/runner/work/_temp/patamaps-miniserve-40050181349-1/owner",
+        "--state",
+        "/home/runner/work/_temp/patamaps-miniserve-40050181349-1/state",
+        "--context",
+        "/home/runner/work/_temp/patamaps-miniserve-40050181349-1/built-binding.json"
+      ],
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "elapsedMs": 1501
+    },
+    {
+      "label": "invalid-config-selection",
+      "argv": [
+        "/home/runner/work/_temp/patamaps-miniserve-40050181349-1/relocated-native/bin/patamaps",
+        "project-build",
+        "/home/runner/work/_temp/patamaps-miniserve-40050181349-1/invalid-config-plan.json",
+        "--source",
+        "/home/runner/work/_temp/patamaps-miniserve-40050181349-1/owner",
+        "--state",
+        "/home/runner/work/_temp/patamaps-miniserve-40050181349-1/state",
+        "--context",
+        "/home/runner/work/_temp/patamaps-miniserve-40050181349-1/built-binding.json"
+      ],
+      "exitCode": 1,
+      "expectedExitCode": 1,
+      "elapsedMs": 501
+    },
+    {
+      "label": "wrong-listener-selection",
+      "argv": [
+        "/home/runner/work/_temp/patamaps-miniserve-40050181349-1/relocated-native/bin/patamaps",
+        "project-build",
+        "/home/runner/work/_temp/patamaps-miniserve-40050181349-1/wrong-listener-plan.json",
+        "--source",
+        "/home/runner/work/_temp/patamaps-miniserve-40050181349-1/owner",
+        "--state",
+        "/home/runner/work/_temp/patamaps-miniserve-40050181349-1/state",
+        "--context",
+        "/home/runner/work/_temp/patamaps-miniserve-40050181349-1/built-binding.json"
+      ],
+      "exitCode": 1,
+      "expectedExitCode": 1,
+      "elapsedMs": 1001
+    },
+    {
+      "label": "wrong-digest-selection",
+      "argv": [
+        "/home/runner/work/_temp/patamaps-miniserve-40050181349-1/relocated-native/bin/patamaps",
+        "project-build",
+        "/home/runner/work/_temp/patamaps-miniserve-40050181349-1/wrong-digest-plan.json",
+        "--source",
+        "/home/runner/work/_temp/patamaps-miniserve-40050181349-1/owner",
+        "--state",
+        "/home/runner/work/_temp/patamaps-miniserve-40050181349-1/state",
+        "--context",
+        "/home/runner/work/_temp/patamaps-miniserve-40050181349-1/built-binding.json"
+      ],
+      "exitCode": 1,
+      "expectedExitCode": 1,
+      "elapsedMs": 501
+    },
+    {
+      "label": "official-arm64",
+      "argv": [
+        "curl",
+        "--fail",
+        "--location",
+        "--max-time",
+        "120",
+        "--max-filesize",
+        "3145728",
+        "--output",
+        "/home/runner/work/_temp/patamaps-miniserve-40050181349-1/official-arm64",
+        "https://github.com/svenstaro/miniserve/releases/download/v0.35.0/miniserve-0.35.0-aarch64-unknown-linux-musl"
+      ],
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "elapsedMs": 501
+    },
+    {
+      "label": "arm64-context",
+      "argv": [
+        "/home/runner/work/_temp/patamaps-miniserve-40050181349-1/relocated-native/bin/patamaps",
+        "project-context-capture",
+        "/home/runner/work/_temp/patamaps-miniserve-40050181349-1/arm64-selection.json",
+        "--root",
+        "/home/runner/work/_temp/patamaps-miniserve-40050181349-1/arm64-binary",
+        "--destination",
+        "/home/runner/work/_temp/patamaps-miniserve-40050181349-1/arm64-snapshot"
+      ],
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "elapsedMs": 501
+    },
+    {
+      "label": "wrong-architecture-selection",
+      "argv": [
+        "/home/runner/work/_temp/patamaps-miniserve-40050181349-1/relocated-native/bin/patamaps",
+        "project-build",
+        "/home/runner/work/_temp/patamaps-miniserve-40050181349-1/wrong-architecture-plan.json",
+        "--source",
+        "/home/runner/work/_temp/patamaps-miniserve-40050181349-1/owner",
+        "--state",
+        "/home/runner/work/_temp/patamaps-miniserve-40050181349-1/state",
+        "--context",
+        "/home/runner/work/_temp/patamaps-miniserve-40050181349-1/arm64-binding.json"
+      ],
+      "exitCode": 1,
+      "expectedExitCode": 1,
+      "elapsedMs": 501
+    },
+    {
+      "label": "offline-selected-replay",
+      "argv": [
+        "/home/runner/work/_temp/patamaps-miniserve-40050181349-1/relocated-native/bin/patamaps",
+        "project-build-verify",
+        "/home/runner/work/_temp/patamaps-miniserve-40050181349-1/state"
+      ],
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "elapsedMs": 501
+    },
+    {
+      "label": "stale-before-effects",
+      "argv": [
+        "/home/runner/work/_temp/patamaps-miniserve-40050181349-1/relocated-native/bin/patamaps",
+        "project-exec-selected",
+        "/home/runner/work/_temp/patamaps-miniserve-40050181349-1/state",
+        "/home/runner/work/_temp/patamaps-miniserve-40050181349-1/stale.command.json"
+      ],
+      "exitCode": 2,
+      "expectedExitCode": 2,
+      "elapsedMs": 501
+    },
+    {
+      "label": "selected-runtime-repeat",
+      "argv": [
+        "/home/runner/work/_temp/patamaps-miniserve-40050181349-1/relocated-native/bin/patamaps",
+        "project-exec-selected",
+        "/home/runner/work/_temp/patamaps-miniserve-40050181349-1/state",
+        "/home/runner/work/_temp/patamaps-miniserve-40050181349-1/selected-runtime.command.json"
+      ],
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "elapsedMs": 1001
+    }
+  ],
+  "filesDeleted": 0,
+  "productionActivation": false,
+  "registryPublication": false,
+  "completeDependencyClosure": false,
+  "nativePackageInstallerExercised": false,
+  "compilerArtifactReuse": {
+    "artifactId": 12531199013,
+    "artifactDigest": "sha256:d2fe67d0d209481bcb2c5500f6d2c58bafee81bf15c1ff2ebe4aba9912f33cb9",
+    "producerRevision": "163b1235c9eb4996268e49899aba3b2de3d258aa",
+    "binaryDigest": "sha256:ef5170acf6d70d24ed80811eca741a78bc32924c886abb605d092dd7e4395e45",
+    "currentEngineVerified": true,
+    "freshCompilerBuild": false,
+    "installedPackageClaim": false
+  },
+  "relocatedCompiler": {
+    "sha256": "ef5170acf6d70d24ed80811eca741a78bc32924c886abb605d092dd7e4395e45",
+    "freshDirectory": true,
+    "engine": {
+      "compiler": "sha256:97c1a1fa1b1721e774bc7ac1bd456f9307835aeae40c25b620965316f8de1e03",
+      "documentType": "executor-description",
+      "governance": "sha256:5f0282418fabb491259c63d396880df37137d4812e5b25ac7b4eaf5c19458524",
+      "schemaVersion": "0.1.0",
+      "scientific": "sha256:4922a8e184b9a56f39f128577068e6c59295fcbdb5cce819e4b5946eea1499b1",
+      "workspace": "sha256:9d9c1f240d57f8bd2acbc281fec158990c52f701b093472444bb0fa46ca0e804"
+    }
+  },
+  "uncapturedPublicTestFixtures": {
+    "tests/data/auth1.txt": {
+      "gitBlob": "3744d61850e90a0da0b6477b548bca8c4f1e278d",
+      "source": "pinned public Git clone",
+      "captured": false,
+      "published": false
+    },
+    "tests/data/cert.pem": {
+      "gitBlob": "c907ef259f08d6f9833e17e6839554924d5161e2",
+      "source": "pinned public Git clone",
+      "captured": false,
+      "published": false
+    },
+    "tests/data/cert_ec.pem": {
+      "gitBlob": "42d4a086b7f93a7b4b61cd5bbbe36d5f402c79c7",
+      "source": "pinned public Git clone",
+      "captured": false,
+      "published": false
+    },
+    "tests/data/cert_rsa.pem": {
+      "gitBlob": "54482008bde8184e0600600c10c2c287a1077946",
+      "source": "pinned public Git clone",
+      "captured": false,
+      "published": false
+    },
+    "tests/data/generate_tls_certs.sh": {
+      "gitBlob": "facd0336564412d77cec8fb5d74d5adb80b670ca",
+      "source": "pinned public Git clone",
+      "captured": false,
+      "published": false
+    },
+    "tests/data/key_ec.pem": {
+      "gitBlob": "484e5d8135c75c61e326ba3e00722d7f3e194160",
+      "source": "pinned public Git clone",
+      "captured": false,
+      "published": false
+    },
+    "tests/data/key_pkcs1.pem": {
+      "gitBlob": "695ff0919c9ba5b0ba6ae293396e9fdccd59ec7f",
+      "source": "pinned public Git clone",
+      "captured": false,
+      "published": false
+    },
+    "tests/data/key_pkcs8.pem": {
+      "gitBlob": "695ff0919c9ba5b0ba6ae293396e9fdccd59ec7f",
+      "source": "pinned public Git clone",
+      "captured": false,
+      "published": false
+    }
+  },
+  "upstreamInventory": {
+    ".cargo/config.toml": "2f85dfd9a0c47079421677ad29014b4b85a576c949f2866e67a4c876815c3ef8",
+    ".dockerignore": "c97ecfda4d205190b973232dcfdb0c29748521c2534dd866bcc782f30b086738",
+    ".editorconfig": "4404d692af20e233ad679ffde2b1c327b0b73efc0e87c68ccfd8bc381f3d606d",
+    ".github/FUNDING.yml": "c637ed23c1fbd247689248250c3258d210810c1a003ac7db2b6085094f470c97",
+    ".github/dependabot.yml": "88116932b374a279b16947dbf363a61a7c0343d651fa7ac331652020be3e9c73",
+    ".github/workflows/build-release.yml": "d80e069e918fb6b01884e76a3aa209465c794167ebfeeea673ee9302d6def13e",
+    ".github/workflows/ci.yml": "4506fba258e11a3b3e3f2374ce0bab0dcaa6c510c2e03115756cb0c85fa0d7b1",
+    ".gitignore": "75c3bd4e2037c780e11dc64d106cc96e24d0b6bbbfdec1e8721fdc335b5511bb",
+    "CHANGELOG.md": "afd8785296eedb7f4e9f36601e322824d554cbc7a33af99cd59d9783ae7e74db",
+    "Cargo.lock": "057863a87232aa5afef339ade3ed0bcaf6838fecca0efe3ff6ce9d181ac6f948",
+    "Cargo.toml": "1f991386abb56330741478a4f3283f8158bbe1ac927ecf70513e1904aa5793de",
+    "Containerfile": "c6912b2170dc0e3df13c619caf754ea77c8a02359726ca08c64e8930e3f3c726",
+    "Containerfile.alpine": "e4de8f5d5dad9bf4c516bee78f0638b81725b27d64efdbbac4187dac0cdd3177",
+    "LICENSE": "bedb87f0760796c7be677651eb10ad949410e90c55bc7f607d848e8e9d65375a",
+    "Makefile": "ad4b17d0802c2cdcca5ae3693bdee6b15133f8c62a19558ed2b270e5983ab5cb",
+    "README.md": "d33d4d72d0ca6a5d03af84d72beec5148e6e63fe80a256b678300e2a1e185fa9",
+    "data/logo.svg": "eb3af8aee136828d57ca55fb7dd8c833f8800c8d53eef8859e47b2175e6d1ef7",
+    "data/style.scss": "9edf0c7358e010fe04ca18f63336e2b6b34faf4160664358640ea886e0cd1909",
+    "data/themes/archlinux.scss": "c69871823a97dfeac30a012202b4af4d66095cf775e2935a63084f475bf8ab9b",
+    "data/themes/ayu_dark.scss": "e1348c5bccc195b3cf42032558fa3d93405b5fdb4205a39a392da835740522cf",
+    "data/themes/monokai.scss": "8596eff6aade10dc97b67ad5120b071ac5ae1f1a5be5259c264bbf4b3c279a34",
+    "data/themes/squirrel.scss": "a99755d8ec27ca967bae10f4b35e9dd8ab0ca8e9221c4b61d974e2fd569fcaf3",
+    "data/themes/zenburn.scss": "f92e9889b5a6a0ede0b42963be919c8f472bf324abc281ff40a032755ef25a6d",
+    "packaging/miniserve@.service": "7f44a93b8963bfd3c8ddc9809b6eca44ddc5c5c93fd2f8b04eb2099789343c37",
+    "release.toml": "385aa94dc4a168fa64b544a48dbc0d5a4a45ece198bf993c1b9554b81fdcb969",
+    "rustfmt.toml": "997cefc3fa4f7286440aeff64236e293f1a53f7e38a05e7eb00c04fd98a9f122",
+    "screenshot.png": "06903b839e593e3a9cfd0c261635e6427a71481f5a92cbb0fa4b799df30a3e08",
+    "src/archive.rs": "41155ca5d0676d7abf6c7f582054f933da53d37432437221670eb5c1f41ffaa9",
+    "src/args.rs": "65a1db7eda09373a2a2069042cd3bb1e77737e4ebfcfa8f26413333dfe695a4e",
+    "src/auth.rs": "985c78ba34aae8dd4beb4dd1a94a655a02a74a14ed326e50119fc0e035facbed",
+    "src/config.rs": "8066da5ee3894dab572602f9d1eb02d2d6ab23366ad71de19c05a73c965207b1",
+    "src/consts.rs": "5cba9f2a75cafa72a63b4354d1592a54e946dcd60515a7bc60c8f669355ddb3c",
+    "src/errors.rs": "f8982296dd54b63da9e3d1b393c73f27cf898fb73b72e026f5a4cd6ce12e008d",
+    "src/file_op.rs": "5c7d596273f709339efe5f82ffaea943b49e18af5341c4f8ff6966e9621d3211",
+    "src/file_utils.rs": "e0a786f02bab28e9612111efde83d7048b42954e94604acbac2e58c9c41f5f88",
+    "src/listing.rs": "f8cab2087d50554885e9b65493b74ba34a38fa237d39de211f87b77d0db1942f",
+    "src/main.rs": "81801156aed991b60414aa321f24adf979bbb6f14fe618521fcd61e201638cbc",
+    "src/pipe.rs": "4795a43bd9d1c76ebde14de9e1824e83e59e055c5ba54660cdcb2d1f133c5502",
+    "src/renderer.rs": "dd2ee28359badf201dbed7353db2c72e0a2982e623c99629672da6b6a498bec2",
+    "src/webdav_fs.rs": "7a9430b0598f8a71caa0ee7a87343ea5252c3924aedec1b2b5e934888afd16a2",
+    "tests/api.rs": "cba2274847458d8cc1866e11349f594cd1446da3060fdb3803adecf1d812b4a8",
+    "tests/archive.rs": "9516c3bdb02915d1b3663e476b0fbfdd301f7d08956d190761672594043ec03c",
+    "tests/auth.rs": "d1bbf70efe602958044ab641e3916e7ab492719bbd32a6483bbfe138b69928b3",
+    "tests/auth_file.rs": "a492a844b2d076e7f0eede6b8f405529a3b133d51d1d1c6f94922cfacea412a9",
+    "tests/bind.rs": "06a84eafaf5c97868e0d1aed5bcd54f0a678a63dc47bb111a242a39be2609183",
+    "tests/cli.rs": "9d47be4e8e3df3982a0e278d36ff11f9745c20e3d900517056198bf00db3ffa4",
+    "tests/create_directories.rs": "14b20669884bb10c1f562808cbdc2b7fa8de7e9b4c852db58f7b57168bfbabfa",
+    "tests/fixtures/mod.rs": "09e4cffa7033281a6522b769909f691bda30ed62805380889d2874b83800c69d",
+    "tests/header.rs": "8ba49eb406251888ed6b51cc6e13c7f4f195aa0d3db88c52de5c90652d63b0e6",
+    "tests/navigation.rs": "3d8cba787fdd396a0abdbff0891885a83c50a9e9256ee0837c5304d2e8942de8",
+    "tests/paste.rs": "23fc5b3da0f0a521f715e8672500d5ef88946c5412e8465d81469f5af1b2126b",
+    "tests/qrcode.rs": "b89060802e33615439506420def2720090db689784eaf0d4ef44f5a8bc92f30c",
+    "tests/raw.rs": "8a342ed0f3e96bddb24dfa344a138b2f183aa3ea0db7cd31e62d699891e9c51e",
+    "tests/readme.rs": "1b7eae5cadb3c0f5bf770ea700e9562d0ce1470afb4a2185a5a606c36aca73e2",
+    "tests/rm_files.rs": "a91c3b1af0944fe840c41f07e9b7ab9640c0eee799d225b25998e6ad631f4e85",
+    "tests/serve_request.rs": "9386addec6f1f28f5545fe7eee253a1b6136f1dbd28a520ece9f5d06921282db",
+    "tests/tls.rs": "6517be93fe4be28519347cc8fa2215eca89f6efe390b6c4e16994b08b2e077e4",
+    "tests/upload_files.rs": "ac2a146970e9df9503ffa158ee269efe137cd81a1c0b70d16cdcf01cc4525f08",
+    "tests/utils/mod.rs": "ae9dbb77f6fae52bd0e39a4e45af6da1a4904ffa5952251e372cb1e3c64bb542",
+    "tests/webdav.rs": "9162b61833befa39ff4a27e597d9eac2257ce29195c05dd05e9bd2b1ae9d7f5e"
+  },
+  "rustcVersion": "rustc 1.99.0 (b940084d7 2026-09-28)\nbinary: rustc\ncommit-hash: b940084d7eb6a299eb4bfeb8e34901bc051e7ac4\ncommit-date: 2026-09-28\nhost: x86_64-unknown-linux-gnu\nrelease: 1.99.0\nLLVM version: 23.1.1\n",
+  "cargoRegistryContext": {
+    "status": "passed-native-registry-context-execution",
+    "snapshotDigest": "sha256:5eac3278634059a2bbae47b21052406f1f2429f1286ca18d3dd2518bc130fa89",
+    "inputKey": "sha256:e3655062d8a8cfa9124d56ef2f529bd5fe91ef323b9e229a25ce77ddb48e6da8",
+    "packageCount": 456,
+    "registryFileBytes": 87931869,
+    "defaultTestsPassed": 325,
+    "configuredDownloadHomeUnavailable": true,
+    "immutableRegistryContext": true,
+    "generatedCargoPathsInsideQuota": true,
+    "snapshotCorruptionRefusedBeforeMarker": true,
+    "selectedRegistryCorruptionRefusedBeforeMarker": true,
+    "previousSelectionPreserved": true,
+    "restoredOfflineSelectedReplay": true,
+    "configuredOwnerAndSnapshotUnavailable": true,
+    "selectionDigest": "sha256:fcac2c6640a3026c386c827e44dc8d990b42510bc37cad181aafebaf3c37db7f",
+    "retainedStateArchive": {
+      "digest": "sha256:f7769746a2c173f6169f96e0c6ce2bb4e12cc51cc1a3921ca0cafe4ab40a0a89",
+      "bytes": 63758693
+    },
+    "completeDependencyClosure": false,
+    "ownerTestFixturesClosed": false,
+    "toolchainClosed": false,
+    "originalPublicArchives": true,
+    "originalSourceInputsUnchanged": true,
+    "filesDeleted": 0
+  },
+  "upstreamTestSummaries": [
+    [
+      "43",
+      "0",
+      "0"
+    ],
+    [
+      "15",
+      "0",
+      "0"
+    ],
+    [
+      "15",
+      "0",
+      "0"
+    ],
+    [
+      "22",
+      "0",
+      "0"
+    ],
+    [
+      "6",
+      "0",
+      "0"
+    ],
+    [
+      "13",
+      "0",
+      "0"
+    ],
+    [
+      "4",
+      "0",
+      "0"
+    ],
+    [
+      "9",
+      "0",
+      "0"
+    ],
+    [
+      "2",
+      "0",
+      "0"
+    ],
+    [
+      "11",
+      "0",
+      "0"
+    ],
+    [
+      "2",
+      "0",
+      "0"
+    ],
+    [
+      "5",
+      "0",
+      "0"
+    ],
+    [
+      "8",
+      "0",
+      "0"
+    ],
+    [
+      "15",
+      "0",
+      "0"
+    ],
+    [
+      "57",
+      "0",
+      "0"
+    ],
+    [
+      "45",
+      "0",
+      "0"
+    ],
+    [
+      "5",
+      "0",
+      "0"
+    ],
+    [
+      "39",
+      "0",
+      "0"
+    ],
+    [
+      "9",
+      "0",
+      "0"
+    ]
+  ],
+  "applicationBinary": {
+    "sha256": "ed96e136acc8e3377415fe7b5dd97ef27a1a8919d4ae690384be8399e2578e34",
+    "bytes": 7649648,
+    "target": "x86_64-unknown-linux-gnu",
+    "producer": "native immutable registry context; copied before unchanged owner tests"
+  },
+  "ownerTestContext": "Original pinned public Git clone; reviewed public test data stays outside all Patamaps captures",
+  "runtimeControls": [
+    "pinned-version-startup",
+    "exact-get-body",
+    "head-length-and-empty-body",
+    "directory-listing",
+    "missing-document-refused",
+    "out-of-prefix-refused",
+    "invalid-port-refused",
+    "wrong-listener-readiness-refused"
+  ],
+  "portableSelectedState": {
+    "sha256": "e0e211746d7c503749d71ef5f3196688a1f4bb114b4c2b77197489e2d3038802",
+    "bytes": 6454432,
+    "selectionDigest": "25e642041ddcfa5fb218e839872e30d009c0cc5daf1445dfae783bb031c6699a",
+    "creatingCompilerDigest": "ef5170acf6d70d24ed80811eca741a78bc32924c886abb605d092dd7e4395e45",
+    "scope": "Selected attempt only; failed JSON records preserved separately"
+  },
+  "sourceBuild": true,
+  "upstreamSourceUnchanged": true,
+  "capturedSourceStageMatchesFrozenInventory": true,
+  "configuredSourceAndSnapshotUnavailableReplay": true,
+  "previousSelectionPreservedOnFourRefusals": true,
+  "staleRuntimeRefusedBeforeCommand": true,
+  "restoredSelectedRuntimePassed": true,
+  "runtimeVerificationBeforeSelection": true,
+  "actualHttp": true,
+  "actualBrowser": false
+}

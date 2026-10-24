@@ -1,0 +1,2967 @@
+{
+  "status": "passed-installed-consumer-scope",
+  "sourceRevision": "f81e6a464d779d1107178a7b08b9c41f7f2311d7",
+  "startedUtc": "2026-10-21T16:32:33.713883+00:00",
+  "commands": [
+    {
+      "label": "rust-version",
+      "argv": [
+        "rustc",
+        "-Vv"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.032,
+      "stdoutDigest": "sha256:b569b0c98ea3133c7252b4b8ea6b39b7b353813df0dd5f5c412c355691424112",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "cargo-version",
+      "argv": [
+        "cargo",
+        "--version"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.032,
+      "stdoutDigest": "sha256:1f88eaf7fe1aaec83184752cf4c944cd22f00184136ff36a3e4c318cc60ef566",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "node-version",
+      "argv": [
+        "node",
+        "--version"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.008,
+      "stdoutDigest": "sha256:33e26f35db6e57ce0c486ddc815fe966867e4f649e418eaf323f75f4720eb8e9",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "installed-cli-build",
+      "argv": [
+        "cargo",
+        "build",
+        "--release",
+        "-p",
+        "patamaps-cli",
+        "--locked",
+        "--offline"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.164,
+      "stdoutDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrDigest": "sha256:3997fc6790b8063b86c119e91f87ac7395ac6cf26135da637dcb229006bc32dc"
+    },
+    {
+      "label": "installed-exact-package",
+      "argv": [
+        "/usr/bin/python3",
+        "-B",
+        "/home/runner/work/patamaps/patamaps/scripts/package.py",
+        "--binary",
+        "/home/runner/work/patamaps/patamaps/target/release/patamaps",
+        "--build-profile",
+        "release",
+        "--output",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/package"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 8.489,
+      "stdoutDigest": "sha256:bcf6c91a9f0e064a16112dddb833f60b73905358d15e7cee67b2bdcf4f52bcb6",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "installed-real-mixed-workflow",
+      "argv": [
+        "/usr/bin/python3",
+        "-B",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/consumer-source/patamaps-draft-97c1a1fa1b17/scripts/cross_stack_installed.py",
+        "--root",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/consumer-source/patamaps-draft-97c1a1fa1b17",
+        "--compiler",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/consumer-native/patamaps-draft-97c1a1fa1b17/bin/patamaps",
+        "--node",
+        "/opt/hostedtoolcache/node/22.23.3/x64/bin/node",
+        "--output",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow",
+        "--mode",
+        "image"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/consumer-source/patamaps-draft-97c1a1fa1b17",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 85.33,
+      "stdoutDigest": "sha256:77d2bb4c63c219c9e3835ab2f94e781dac92bc0c65207d721128e76d77498b0b",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "fullCrossStackAcceptance": false,
+  "linuxImage": "pending",
+  "browser": "pending",
+  "deleted": [],
+  "ciResourceChecks": {
+    "growthBytes": 4000000000,
+    "reserveBytes": 500000000,
+    "checkedBetweenCommands": true,
+    "diskUsedBefore": 69344620544,
+    "localIntelPolicyChanged": false,
+    "diskUsedAfter": 70830657536
+  },
+  "installedConsumer": {
+    "status": "passed-installed-consumer-scope",
+    "mode": "image",
+    "distribution": {
+      "schemaVersion": "0.1.0",
+      "status": "unpublished-draft",
+      "target": "x86_64-unknown-linux-gnu",
+      "toolchain": "rustc 1.99.0 (b940084d7 2026-09-28)\nbinary: rustc\ncommit-hash: b940084d7eb6a299eb4bfeb8e34901bc051e7ac4\ncommit-date: 2026-09-28\nhost: x86_64-unknown-linux-gnu\nrelease: 1.99.0\nLLVM version: 23.1.1\n",
+      "engines": {
+        "compiler": "sha256:97c1a1fa1b1721e774bc7ac1bd456f9307835aeae40c25b620965316f8de1e03",
+        "documentType": "executor-description",
+        "governance": "sha256:5f0282418fabb491259c63d396880df37137d4812e5b25ac7b4eaf5c19458524",
+        "schemaVersion": "0.1.0",
+        "scientific": "sha256:4922a8e184b9a56f39f128577068e6c59295fcbdb5cce819e4b5946eea1499b1",
+        "workspace": "sha256:58d7706c0a7d701e8fab3d3152860bc3fc9d406b4e1b11bbb2ad82099647d42f"
+      },
+      "binaryDigest": "sha256:fcae794c28d46c7d340c9d4c1900778d7afb1969714da2bf231031f493b9f747",
+      "buildProfile": "release",
+      "buildProvenance": "Caller-declared profile; hashing and source identity do not attest a reproducible or authorized binary",
+      "sourceInventoryDigest": "sha256:4d0ca6a2faa36533ec9f7328dc138815a4ae8a50cc35301d238b6dd98838bb98",
+      "protectedActivationAcceptance": "recorded-separately",
+      "sourceEvidence": {
+        "policy": "markdown-reference-closure",
+        "files": 179,
+        "bytes": 25694073,
+        "maximumBytes": 33554432,
+        "maximumFiles": 512
+      },
+      "maximumSourcePayloadBytes": 134217728,
+      "sourceArchive": {
+        "path": "patamaps-draft-97c1a1fa1b17-source.tar.gz",
+        "digest": "sha256:8e57735f6dde1a61b5692f8832997b9c89b4cc1954af5334f794d960080abd1b"
+      },
+      "nativeArchive": {
+        "path": "patamaps-draft-97c1a1fa1b17-x86_64-unknown-linux-gnu.tar.gz",
+        "digest": "sha256:baa9cb616531a1820c932d254f096a6aa3fa89a5e247357e595d95e85a5c1765"
+      }
+    },
+    "sourceInventoryFiles": 1016,
+    "allInstalledSourceBytesVerified": true,
+    "nativeBinaryMatchesPackagedAndSelected": true,
+    "mixedWorkflow": {
+      "status": "passed-installed-consumer-scope",
+      "mode": "image",
+      "sourceRoot": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/consumer-source/patamaps-draft-97c1a1fa1b17",
+      "compiler": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/consumer-native/patamaps-draft-97c1a1fa1b17/bin/patamaps",
+      "startedUtc": "2026-10-21T16:32:44.722120+00:00",
+      "commands": [
+        {
+          "label": "installed-engine",
+          "argv": [
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/consumer-native/patamaps-draft-97c1a1fa1b17/bin/patamaps",
+            "engine"
+          ],
+          "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/consumer-source/patamaps-draft-97c1a1fa1b17",
+          "expectedSuccess": true,
+          "pid": 11716,
+          "exitCode": 0,
+          "seconds": 0.016
+        },
+        {
+          "label": "installed-web-dependencies",
+          "argv": [
+            "npm",
+            "ci",
+            "--ignore-scripts",
+            "--no-audit",
+            "--no-fund"
+          ],
+          "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/consumer-source/patamaps-draft-97c1a1fa1b17/examples/cross-stack/web",
+          "expectedSuccess": true,
+          "pid": 11717,
+          "exitCode": 0,
+          "seconds": 7.634
+        },
+        {
+          "label": "installed-browser-dependencies",
+          "argv": [
+            "npm",
+            "ci",
+            "--ignore-scripts",
+            "--no-audit",
+            "--no-fund"
+          ],
+          "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/consumer-source/patamaps-draft-97c1a1fa1b17/examples/cross-stack/acceptance/browser",
+          "expectedSuccess": true,
+          "pid": 11730,
+          "exitCode": 0,
+          "seconds": 0.516
+        },
+        {
+          "label": "m6-docker-version",
+          "argv": [
+            "docker",
+            "version",
+            "--format",
+            "{{json .}}"
+          ],
+          "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/consumer-source/patamaps-draft-97c1a1fa1b17",
+          "expectedSuccess": null,
+          "pid": 11742,
+          "exitCode": 0,
+          "seconds": 0.032
+        },
+        {
+          "label": "m6-buildkit-info",
+          "argv": [
+            "docker",
+            "buildx",
+            "inspect",
+            "--bootstrap"
+          ],
+          "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/consumer-source/patamaps-draft-97c1a1fa1b17",
+          "expectedSuccess": null,
+          "pid": 11757,
+          "exitCode": 0,
+          "seconds": 0.115
+        },
+        {
+          "label": "m6-browser-availability",
+          "argv": [
+            "/opt/hostedtoolcache/node/22.23.3/x64/bin/node",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/consumer-source/patamaps-draft-97c1a1fa1b17/examples/cross-stack/acceptance/browser/probe.cjs"
+          ],
+          "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/consumer-source/patamaps-draft-97c1a1fa1b17",
+          "expectedSuccess": null,
+          "pid": 11798,
+          "exitCode": 0,
+          "seconds": 0.516
+        },
+        {
+          "label": "m6-buildx-version",
+          "argv": [
+            "docker",
+            "buildx",
+            "version"
+          ],
+          "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/consumer-source/patamaps-draft-97c1a1fa1b17",
+          "expectedSuccess": true,
+          "pid": 11867,
+          "exitCode": 0,
+          "seconds": 0.065
+        },
+        {
+          "label": "m6-clang-version",
+          "argv": [
+            "clang",
+            "--version"
+          ],
+          "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/consumer-source/patamaps-draft-97c1a1fa1b17",
+          "expectedSuccess": true,
+          "pid": 11890,
+          "exitCode": 0,
+          "seconds": 0.032
+        },
+        {
+          "label": "m6-linker-version",
+          "argv": [
+            "ld.lld",
+            "--version"
+          ],
+          "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/consumer-source/patamaps-draft-97c1a1fa1b17",
+          "expectedSuccess": true,
+          "pid": 11891,
+          "exitCode": 0,
+          "seconds": 0.016
+        },
+        {
+          "label": "m6-cargo",
+          "argv": [
+            "rustup",
+            "which",
+            "cargo"
+          ],
+          "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/consumer-source/patamaps-draft-97c1a1fa1b17",
+          "expectedSuccess": true,
+          "pid": 11892,
+          "exitCode": 0,
+          "seconds": 0.032
+        },
+        {
+          "label": "m6-rustc",
+          "argv": [
+            "rustup",
+            "which",
+            "rustc"
+          ],
+          "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/consumer-source/patamaps-draft-97c1a1fa1b17",
+          "expectedSuccess": true,
+          "pid": 11897,
+          "exitCode": 0,
+          "seconds": 0.032
+        },
+        {
+          "label": "owner-json",
+          "argv": [
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/consumer-native/patamaps-draft-97c1a1fa1b17/bin/patamaps",
+            "json",
+            "parse"
+          ],
+          "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/consumer-source/patamaps-draft-97c1a1fa1b17/examples/cross-stack/contracts",
+          "expectedSuccess": true,
+          "pid": 11902,
+          "exitCode": 0,
+          "seconds": 0.004
+        },
+        {
+          "label": "http-owner-json",
+          "argv": [
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/consumer-native/patamaps-draft-97c1a1fa1b17/bin/patamaps",
+            "json",
+            "parse"
+          ],
+          "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/release-candidate/app",
+          "expectedSuccess": true,
+          "pid": 11903,
+          "exitCode": 0,
+          "seconds": 0.004
+        },
+        {
+          "label": "http-response-schema-0",
+          "argv": [
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/consumer-native/patamaps-draft-97c1a1fa1b17/bin/patamaps",
+            "json",
+            "parse"
+          ],
+          "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/release-candidate/app",
+          "expectedSuccess": true,
+          "pid": 11904,
+          "exitCode": 0,
+          "seconds": 0.002
+        },
+        {
+          "label": "http-request-schema-0",
+          "argv": [
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/consumer-native/patamaps-draft-97c1a1fa1b17/bin/patamaps",
+            "json",
+            "parse"
+          ],
+          "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/release-candidate/app",
+          "expectedSuccess": true,
+          "pid": 11905,
+          "exitCode": 0,
+          "seconds": 0.002
+        },
+        {
+          "label": "http-projection",
+          "argv": [
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/consumer-native/patamaps-draft-97c1a1fa1b17/bin/patamaps",
+            "link",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/release-candidate/app/.patamaps/graph.json",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/release-candidate/app/.patamaps/policy.json",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/release-candidate/app/.patamaps/projection-spec.json",
+            "--relation-pack",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/release-candidate/app/mappings/routing-pack.json",
+            "--as-of",
+            "2026-10-15T00:00:00Z",
+            "--context",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/release-candidate/app/.patamaps/context.json"
+          ],
+          "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/release-candidate/app",
+          "expectedSuccess": true,
+          "pid": 11906,
+          "exitCode": 0,
+          "seconds": 0.004
+        },
+        {
+          "label": "http-rust",
+          "argv": [
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/consumer-native/patamaps-draft-97c1a1fa1b17/bin/patamaps",
+            "link",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/release-candidate/app/.patamaps/graph.json",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/release-candidate/app/.patamaps/policy.json",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/release-candidate/app/.patamaps/projection-spec.json",
+            "--relation-pack",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/release-candidate/app/mappings/routing-pack.json",
+            "--as-of",
+            "2026-10-15T00:00:00Z",
+            "--context",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/release-candidate/app/.patamaps/context.json",
+            "--format",
+            "http-rust"
+          ],
+          "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/release-candidate/app",
+          "expectedSuccess": true,
+          "pid": 11907,
+          "exitCode": 0,
+          "seconds": 0.004
+        },
+        {
+          "label": "http-typescript",
+          "argv": [
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/consumer-native/patamaps-draft-97c1a1fa1b17/bin/patamaps",
+            "link",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/release-candidate/app/.patamaps/graph.json",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/release-candidate/app/.patamaps/policy.json",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/release-candidate/app/.patamaps/projection-spec.json",
+            "--relation-pack",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/release-candidate/app/mappings/routing-pack.json",
+            "--as-of",
+            "2026-10-15T00:00:00Z",
+            "--context",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/release-candidate/app/.patamaps/context.json",
+            "--format",
+            "http-typescript"
+          ],
+          "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/release-candidate/app",
+          "expectedSuccess": true,
+          "pid": 11908,
+          "exitCode": 0,
+          "seconds": 0.004
+        },
+        {
+          "label": "http-rust-format",
+          "argv": [
+            "/home/runner/.rustup/toolchains/1.99.0-x86_64-unknown-linux-gnu/bin/rustfmt",
+            "--edition",
+            "2024",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/release-candidate/app/service/src/generated.rs"
+          ],
+          "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/release-candidate/app",
+          "expectedSuccess": true,
+          "pid": 11909,
+          "exitCode": 0,
+          "seconds": 0.008
+        },
+        {
+          "label": "workspace-observe",
+          "argv": [
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/consumer-native/patamaps-draft-97c1a1fa1b17/bin/patamaps",
+            "generate",
+            "pre-workspace.json",
+            "--root",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/release-candidate"
+          ],
+          "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/release-candidate",
+          "expectedSuccess": true,
+          "pid": 11910,
+          "exitCode": 0,
+          "seconds": 1.117
+        },
+        {
+          "label": "query-catalog-page",
+          "argv": [
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/consumer-native/patamaps-draft-97c1a1fa1b17/bin/patamaps",
+            "match-observations",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/release-candidate/observed-graph.json",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/release-candidate/queries/catalog-page.json",
+            "--relation-pack",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/release-candidate/routing.json",
+            "--relation-pack",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/release-candidate/application-topology.json",
+            "--relation-pack",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/release-candidate/build-deployment.json"
+          ],
+          "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/release-candidate",
+          "expectedSuccess": true,
+          "pid": 12019,
+          "exitCode": 0,
+          "seconds": 0.008
+        },
+        {
+          "label": "query-item-page",
+          "argv": [
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/consumer-native/patamaps-draft-97c1a1fa1b17/bin/patamaps",
+            "match-observations",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/release-candidate/observed-graph.json",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/release-candidate/queries/item-page.json",
+            "--relation-pack",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/release-candidate/routing.json",
+            "--relation-pack",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/release-candidate/application-topology.json",
+            "--relation-pack",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/release-candidate/build-deployment.json"
+          ],
+          "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/release-candidate",
+          "expectedSuccess": true,
+          "pid": 12020,
+          "exitCode": 0,
+          "seconds": 0.008
+        },
+        {
+          "label": "query-operation-next-route",
+          "argv": [
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/consumer-native/patamaps-draft-97c1a1fa1b17/bin/patamaps",
+            "match-observations",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/release-candidate/observed-graph.json",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/release-candidate/queries/operation-next-route.json",
+            "--relation-pack",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/release-candidate/routing.json",
+            "--relation-pack",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/release-candidate/application-topology.json",
+            "--relation-pack",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/release-candidate/build-deployment.json"
+          ],
+          "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/release-candidate",
+          "expectedSuccess": true,
+          "pid": 12021,
+          "exitCode": 0,
+          "seconds": 0.008
+        },
+        {
+          "label": "query-operation-next-handler",
+          "argv": [
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/consumer-native/patamaps-draft-97c1a1fa1b17/bin/patamaps",
+            "match-observations",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/release-candidate/observed-graph.json",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/release-candidate/queries/operation-next-handler.json",
+            "--relation-pack",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/release-candidate/routing.json",
+            "--relation-pack",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/release-candidate/application-topology.json",
+            "--relation-pack",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/release-candidate/build-deployment.json"
+          ],
+          "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/release-candidate",
+          "expectedSuccess": true,
+          "pid": 12022,
+          "exitCode": 0,
+          "seconds": 0.008
+        },
+        {
+          "label": "query-operation-next-endpoint",
+          "argv": [
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/consumer-native/patamaps-draft-97c1a1fa1b17/bin/patamaps",
+            "match-observations",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/release-candidate/observed-graph.json",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/release-candidate/queries/operation-next-endpoint.json",
+            "--relation-pack",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/release-candidate/routing.json",
+            "--relation-pack",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/release-candidate/application-topology.json",
+            "--relation-pack",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/release-candidate/build-deployment.json"
+          ],
+          "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/release-candidate",
+          "expectedSuccess": true,
+          "pid": 12023,
+          "exitCode": 0,
+          "seconds": 0.008
+        },
+        {
+          "label": "query-cargo-package",
+          "argv": [
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/consumer-native/patamaps-draft-97c1a1fa1b17/bin/patamaps",
+            "match-observations",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/release-candidate/observed-graph.json",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/release-candidate/queries/cargo-package.json",
+            "--relation-pack",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/release-candidate/routing.json",
+            "--relation-pack",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/release-candidate/application-topology.json",
+            "--relation-pack",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/release-candidate/build-deployment.json"
+          ],
+          "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/release-candidate",
+          "expectedSuccess": true,
+          "pid": 12024,
+          "exitCode": 0,
+          "seconds": 0.008
+        },
+        {
+          "label": "query-cargo-target",
+          "argv": [
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/consumer-native/patamaps-draft-97c1a1fa1b17/bin/patamaps",
+            "match-observations",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/release-candidate/observed-graph.json",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/release-candidate/queries/cargo-target.json",
+            "--relation-pack",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/release-candidate/routing.json",
+            "--relation-pack",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/release-candidate/application-topology.json",
+            "--relation-pack",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/release-candidate/build-deployment.json"
+          ],
+          "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/release-candidate",
+          "expectedSuccess": true,
+          "pid": 12025,
+          "exitCode": 0,
+          "seconds": 0.008
+        },
+        {
+          "label": "query-listener",
+          "argv": [
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/consumer-native/patamaps-draft-97c1a1fa1b17/bin/patamaps",
+            "match-observations",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/release-candidate/observed-graph.json",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/release-candidate/queries/listener.json",
+            "--relation-pack",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/release-candidate/routing.json",
+            "--relation-pack",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/release-candidate/application-topology.json",
+            "--relation-pack",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/release-candidate/build-deployment.json"
+          ],
+          "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/release-candidate",
+          "expectedSuccess": true,
+          "pid": 12026,
+          "exitCode": 0,
+          "seconds": 0.008
+        },
+        {
+          "label": "query-next-config",
+          "argv": [
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/consumer-native/patamaps-draft-97c1a1fa1b17/bin/patamaps",
+            "match-observations",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/release-candidate/observed-graph.json",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/release-candidate/queries/next-config.json",
+            "--relation-pack",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/release-candidate/routing.json",
+            "--relation-pack",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/release-candidate/application-topology.json",
+            "--relation-pack",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/release-candidate/build-deployment.json"
+          ],
+          "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/release-candidate",
+          "expectedSuccess": true,
+          "pid": 12027,
+          "exitCode": 0,
+          "seconds": 0.008
+        },
+        {
+          "label": "query-builder",
+          "argv": [
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/consumer-native/patamaps-draft-97c1a1fa1b17/bin/patamaps",
+            "match-observations",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/release-candidate/observed-graph.json",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/release-candidate/queries/builder.json",
+            "--relation-pack",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/release-candidate/routing.json",
+            "--relation-pack",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/release-candidate/application-topology.json",
+            "--relation-pack",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/release-candidate/build-deployment.json"
+          ],
+          "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/release-candidate",
+          "expectedSuccess": true,
+          "pid": 12028,
+          "exitCode": 0,
+          "seconds": 0.008
+        },
+        {
+          "label": "query-runtime",
+          "argv": [
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/consumer-native/patamaps-draft-97c1a1fa1b17/bin/patamaps",
+            "match-observations",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/release-candidate/observed-graph.json",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/release-candidate/queries/runtime.json",
+            "--relation-pack",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/release-candidate/routing.json",
+            "--relation-pack",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/release-candidate/application-topology.json",
+            "--relation-pack",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/release-candidate/build-deployment.json"
+          ],
+          "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/release-candidate",
+          "expectedSuccess": true,
+          "pid": 12029,
+          "exitCode": 0,
+          "seconds": 0.008
+        },
+        {
+          "label": "query-binary-copy",
+          "argv": [
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/consumer-native/patamaps-draft-97c1a1fa1b17/bin/patamaps",
+            "match-observations",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/release-candidate/observed-graph.json",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/release-candidate/queries/binary-copy.json",
+            "--relation-pack",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/release-candidate/routing.json",
+            "--relation-pack",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/release-candidate/application-topology.json",
+            "--relation-pack",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/release-candidate/build-deployment.json"
+          ],
+          "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/release-candidate",
+          "expectedSuccess": true,
+          "pid": 12030,
+          "exitCode": 0,
+          "seconds": 0.008
+        },
+        {
+          "label": "query-config-copy",
+          "argv": [
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/consumer-native/patamaps-draft-97c1a1fa1b17/bin/patamaps",
+            "match-observations",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/release-candidate/observed-graph.json",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/release-candidate/queries/config-copy.json",
+            "--relation-pack",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/release-candidate/routing.json",
+            "--relation-pack",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/release-candidate/application-topology.json",
+            "--relation-pack",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/release-candidate/build-deployment.json"
+          ],
+          "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/release-candidate",
+          "expectedSuccess": true,
+          "pid": 12031,
+          "exitCode": 0,
+          "seconds": 0.008
+        },
+        {
+          "label": "query-build-recipe",
+          "argv": [
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/consumer-native/patamaps-draft-97c1a1fa1b17/bin/patamaps",
+            "match-observations",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/release-candidate/observed-graph.json",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/release-candidate/queries/build-recipe.json",
+            "--relation-pack",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/release-candidate/routing.json",
+            "--relation-pack",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/release-candidate/application-topology.json",
+            "--relation-pack",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/release-candidate/build-deployment.json"
+          ],
+          "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/release-candidate",
+          "expectedSuccess": true,
+          "pid": 12032,
+          "exitCode": 0,
+          "seconds": 0.008
+        },
+        {
+          "label": "workspace-admit",
+          "argv": [
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/consumer-native/patamaps-draft-97c1a1fa1b17/bin/patamaps",
+            "generate",
+            "workspace.json",
+            "--root",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/release-candidate"
+          ],
+          "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/release-candidate",
+          "expectedSuccess": true,
+          "pid": 12033,
+          "exitCode": 0,
+          "seconds": 1.119
+        },
+        {
+          "label": "workspace-offline",
+          "argv": [
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/consumer-native/patamaps-draft-97c1a1fa1b17/bin/patamaps",
+            "verify-workspace",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/release-candidate/baseline.json"
+          ],
+          "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/release-candidate",
+          "expectedSuccess": true,
+          "pid": 12143,
+          "exitCode": 0,
+          "seconds": 0.516
+        },
+        {
+          "label": "m6-next-build",
+          "argv": [
+            "/opt/hostedtoolcache/node/22.23.3/x64/bin/node",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/release-candidate/app/web/node_modules/next/dist/bin/next",
+            "build",
+            "--webpack"
+          ],
+          "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/release-candidate/app/web",
+          "expectedSuccess": true,
+          "pid": 12144,
+          "exitCode": 0,
+          "seconds": 27.68
+        },
+        {
+          "label": "m6-next-typecheck",
+          "argv": [
+            "/opt/hostedtoolcache/node/22.23.3/x64/bin/node",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/release-candidate/app/web/node_modules/typescript/lib/tsc.js",
+            "--noEmit"
+          ],
+          "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/release-candidate/app/web",
+          "expectedSuccess": true,
+          "pid": 12274,
+          "exitCode": 0,
+          "seconds": 1.673
+        },
+        {
+          "label": "m6-client",
+          "argv": [
+            "/opt/hostedtoolcache/node/22.23.3/x64/bin/node",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/release-candidate/app/web/node_modules/typescript/lib/tsc.js",
+            "--target",
+            "ES2022",
+            "--module",
+            "commonjs",
+            "--lib",
+            "ES2022,DOM",
+            "--strict",
+            "--skipLibCheck",
+            "--outDir",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/client-js",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/release-candidate/app/web/generated/operations.ts"
+          ],
+          "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/consumer-source/patamaps-draft-97c1a1fa1b17",
+          "expectedSuccess": true,
+          "pid": 12282,
+          "exitCode": 0,
+          "seconds": 0.618
+        },
+        {
+          "label": "m6-buildkit-targets",
+          "argv": [
+            "docker",
+            "buildx",
+            "build",
+            "--call=targets",
+            "--file",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/release-candidate/build-context/deploy/Dockerfile",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/release-candidate/build-context"
+          ],
+          "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/consumer-source/patamaps-draft-97c1a1fa1b17",
+          "expectedSuccess": true,
+          "pid": 12290,
+          "exitCode": 0,
+          "seconds": 1.618
+        },
+        {
+          "label": "m6-positive-image",
+          "argv": [
+            "docker",
+            "buildx",
+            "build",
+            "--load",
+            "--platform",
+            "linux/amd64",
+            "--target",
+            "runtime",
+            "--progress",
+            "plain",
+            "--metadata-file",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/m6-positive-image.metadata.json",
+            "--iidfile",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/m6-positive-image.iid",
+            "--file",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/release-candidate/build-context/deploy/Dockerfile",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/release-candidate/build-context"
+          ],
+          "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/consumer-source/patamaps-draft-97c1a1fa1b17",
+          "expectedSuccess": true,
+          "pid": 12376,
+          "exitCode": 0,
+          "seconds": 0.566
+        },
+        {
+          "label": "m6-image-inspect",
+          "argv": [
+            "docker",
+            "image",
+            "inspect",
+            "sha256:d699b2a62d6903e8f11ce0ce84f7e49f5ea1f047e471bccbbd151b454a2a0619"
+          ],
+          "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/consumer-source/patamaps-draft-97c1a1fa1b17",
+          "expectedSuccess": true,
+          "pid": 12458,
+          "exitCode": 0,
+          "seconds": 0.017
+        },
+        {
+          "label": "m6-builder-evidence",
+          "argv": [
+            "docker",
+            "buildx",
+            "build",
+            "--platform",
+            "linux/amd64",
+            "--target",
+            "inspection",
+            "--progress",
+            "plain",
+            "--metadata-file",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/m6-builder-evidence.metadata.json",
+            "--output",
+            "type=local,dest=/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/builder-evidence",
+            "--file",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/inspection.Dockerfile",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/release-candidate/build-context"
+          ],
+          "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/consumer-source/patamaps-draft-97c1a1fa1b17",
+          "expectedSuccess": true,
+          "pid": 12466,
+          "exitCode": 0,
+          "seconds": 0.466
+        },
+        {
+          "label": "m6-elf-loader",
+          "argv": [
+            "readelf",
+            "--program-headers",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/builder-evidence/catalog-service"
+          ],
+          "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/consumer-source/patamaps-draft-97c1a1fa1b17",
+          "expectedSuccess": true,
+          "pid": 12543,
+          "exitCode": 0,
+          "seconds": 0.002
+        },
+        {
+          "label": "m6-elf-libraries",
+          "argv": [
+            "readelf",
+            "--dynamic",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/builder-evidence/catalog-service"
+          ],
+          "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/consumer-source/patamaps-draft-97c1a1fa1b17",
+          "expectedSuccess": true,
+          "pid": 12544,
+          "exitCode": 0,
+          "seconds": 0.002
+        },
+        {
+          "label": "m6-positive-create",
+          "argv": [
+            "docker",
+            "create",
+            "--name",
+            "patamaps-cross-stack-81ab7e0891704f8aab25523199eb4143",
+            "--platform",
+            "linux/amd64",
+            "--memory",
+            "256m",
+            "--cpus",
+            "1",
+            "--pids-limit",
+            "64",
+            "--read-only",
+            "--cap-drop",
+            "ALL",
+            "--security-opt",
+            "no-new-privileges",
+            "--publish",
+            "127.0.0.1::8080",
+            "--publish",
+            "127.0.0.1::9090",
+            "sha256:d699b2a62d6903e8f11ce0ce84f7e49f5ea1f047e471bccbbd151b454a2a0619"
+          ],
+          "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/consumer-source/patamaps-draft-97c1a1fa1b17",
+          "expectedSuccess": true,
+          "pid": 12545,
+          "exitCode": 0,
+          "seconds": 0.033
+        },
+        {
+          "label": "m6-positive-start",
+          "argv": [
+            "docker",
+            "start",
+            "3f9f05322eadd39f2132ab18924c5d7deda2bc53ef509a10e7999da6848b85a9"
+          ],
+          "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/consumer-source/patamaps-draft-97c1a1fa1b17",
+          "expectedSuccess": null,
+          "pid": 12553,
+          "exitCode": 0,
+          "seconds": 0.165
+        },
+        {
+          "label": "m6-positive-inspect",
+          "argv": [
+            "docker",
+            "inspect",
+            "3f9f05322eadd39f2132ab18924c5d7deda2bc53ef509a10e7999da6848b85a9"
+          ],
+          "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/consumer-source/patamaps-draft-97c1a1fa1b17",
+          "expectedSuccess": true,
+          "pid": 12666,
+          "exitCode": 0,
+          "seconds": 0.017
+        },
+        {
+          "label": "m6-copy-binary",
+          "argv": [
+            "docker",
+            "cp",
+            "3f9f05322eadd39f2132ab18924c5d7deda2bc53ef509a10e7999da6848b85a9:/usr/local/bin/catalog-service",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/image-contents/catalog-service"
+          ],
+          "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/consumer-source/patamaps-draft-97c1a1fa1b17",
+          "expectedSuccess": true,
+          "pid": 12674,
+          "exitCode": 0,
+          "seconds": 0.033
+        },
+        {
+          "label": "m6-copy-config",
+          "argv": [
+            "docker",
+            "cp",
+            "3f9f05322eadd39f2132ab18924c5d7deda2bc53ef509a10e7999da6848b85a9:/app/service.toml",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/image-contents/service.toml"
+          ],
+          "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/consumer-source/patamaps-draft-97c1a1fa1b17",
+          "expectedSuccess": true,
+          "pid": 12682,
+          "exitCode": 0,
+          "seconds": 0.018
+        },
+        {
+          "label": "m6-copy-notices",
+          "argv": [
+            "docker",
+            "cp",
+            "3f9f05322eadd39f2132ab18924c5d7deda2bc53ef509a10e7999da6848b85a9:/usr/share/licenses/catalog-service",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/image-contents/licenses"
+          ],
+          "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/consumer-source/patamaps-draft-97c1a1fa1b17",
+          "expectedSuccess": true,
+          "pid": 12691,
+          "exitCode": 0,
+          "seconds": 0.065
+        },
+        {
+          "label": "m6-runtime-contract",
+          "argv": [
+            "/opt/hostedtoolcache/node/22.23.3/x64/bin/node",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/consumer-source/patamaps-draft-97c1a1fa1b17/examples/cross-stack/acceptance/check-runtime.cjs",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/client-js/operations.js",
+            "http://127.0.0.1:37749",
+            "http://127.0.0.1:32788"
+          ],
+          "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/consumer-source/patamaps-draft-97c1a1fa1b17",
+          "expectedSuccess": true,
+          "pid": 12714,
+          "exitCode": 0,
+          "seconds": 0.266
+        },
+        {
+          "label": "m6-browser",
+          "argv": [
+            "/opt/hostedtoolcache/node/22.23.3/x64/bin/node",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/consumer-source/patamaps-draft-97c1a1fa1b17/examples/cross-stack/acceptance/browser/check.cjs",
+            "http://127.0.0.1:37749",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/browser"
+          ],
+          "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/consumer-source/patamaps-draft-97c1a1fa1b17",
+          "expectedSuccess": true,
+          "pid": 12722,
+          "exitCode": 0,
+          "seconds": 1.722
+        },
+        {
+          "label": "m6-stale-client-compile",
+          "argv": [
+            "/opt/hostedtoolcache/node/22.23.3/x64/bin/node",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/release-candidate/app/web/node_modules/typescript/lib/tsc.js",
+            "--target",
+            "ES2022",
+            "--module",
+            "commonjs",
+            "--lib",
+            "ES2022,DOM",
+            "--strict",
+            "--skipLibCheck",
+            "--outDir",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/stale-client/js",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/stale-client/operations.ts"
+          ],
+          "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/consumer-source/patamaps-draft-97c1a1fa1b17",
+          "expectedSuccess": true,
+          "pid": 12805,
+          "exitCode": 0,
+          "seconds": 0.619
+        },
+        {
+          "label": "m6-stale-client-http",
+          "argv": [
+            "/opt/hostedtoolcache/node/22.23.3/x64/bin/node",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/consumer-source/patamaps-draft-97c1a1fa1b17/examples/cross-stack/acceptance/check-runtime.cjs",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/stale-client/js/operations.js",
+            "http://127.0.0.1:37749",
+            "http://127.0.0.1:32788"
+          ],
+          "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/consumer-source/patamaps-draft-97c1a1fa1b17",
+          "expectedSuccess": false,
+          "pid": 12812,
+          "exitCode": 1,
+          "seconds": 0.165
+        },
+        {
+          "label": "m6-positive-stop",
+          "argv": [
+            "docker",
+            "stop",
+            "--time",
+            "2",
+            "3f9f05322eadd39f2132ab18924c5d7deda2bc53ef509a10e7999da6848b85a9"
+          ],
+          "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/consumer-source/patamaps-draft-97c1a1fa1b17",
+          "expectedSuccess": true,
+          "pid": 12824,
+          "exitCode": 0,
+          "seconds": 2.17
+        },
+        {
+          "label": "m6-positive-logs",
+          "argv": [
+            "docker",
+            "logs",
+            "3f9f05322eadd39f2132ab18924c5d7deda2bc53ef509a10e7999da6848b85a9"
+          ],
+          "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/consumer-source/patamaps-draft-97c1a1fa1b17",
+          "expectedSuccess": true,
+          "pid": 12901,
+          "exitCode": 0,
+          "seconds": 0.017
+        },
+        {
+          "label": "m6-positive-final-inspect",
+          "argv": [
+            "docker",
+            "inspect",
+            "3f9f05322eadd39f2132ab18924c5d7deda2bc53ef509a10e7999da6848b85a9"
+          ],
+          "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/consumer-source/patamaps-draft-97c1a1fa1b17",
+          "expectedSuccess": true,
+          "pid": 12909,
+          "exitCode": 0,
+          "seconds": 0.017
+        },
+        {
+          "label": "m6-alias-index",
+          "argv": [
+            "docker",
+            "buildx",
+            "build",
+            "--load",
+            "--platform",
+            "linux/amd64",
+            "--target",
+            "runtime",
+            "--progress",
+            "plain",
+            "--metadata-file",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/m6-alias-index.metadata.json",
+            "--iidfile",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/m6-alias-index.iid",
+            "--file",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/image-cases/alias-index/deploy/Dockerfile",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/image-cases/alias-index"
+          ],
+          "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/consumer-source/patamaps-draft-97c1a1fa1b17",
+          "expectedSuccess": true,
+          "pid": 12917,
+          "exitCode": 0,
+          "seconds": 0.416
+        },
+        {
+          "label": "m6-alias-runtime-create",
+          "argv": [
+            "docker",
+            "create",
+            "--name",
+            "patamaps-cross-stack-e325241aa439406083c3291b2c084e2b",
+            "--platform",
+            "linux/amd64",
+            "--memory",
+            "256m",
+            "--cpus",
+            "1",
+            "--pids-limit",
+            "64",
+            "--read-only",
+            "--cap-drop",
+            "ALL",
+            "--security-opt",
+            "no-new-privileges",
+            "--publish",
+            "127.0.0.1::8080",
+            "--publish",
+            "127.0.0.1::9090",
+            "sha256:d699b2a62d6903e8f11ce0ce84f7e49f5ea1f047e471bccbbd151b454a2a0619"
+          ],
+          "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/consumer-source/patamaps-draft-97c1a1fa1b17",
+          "expectedSuccess": true,
+          "pid": 13001,
+          "exitCode": 0,
+          "seconds": 0.033
+        },
+        {
+          "label": "m6-alias-runtime-start",
+          "argv": [
+            "docker",
+            "start",
+            "2cda910fd60d3ce7927035f8f3be187dcb1b02102583d694ad1a4c6a5d6176a8"
+          ],
+          "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/consumer-source/patamaps-draft-97c1a1fa1b17",
+          "expectedSuccess": null,
+          "pid": 13009,
+          "exitCode": 0,
+          "seconds": 0.165
+        },
+        {
+          "label": "m6-alias-runtime-inspect",
+          "argv": [
+            "docker",
+            "inspect",
+            "2cda910fd60d3ce7927035f8f3be187dcb1b02102583d694ad1a4c6a5d6176a8"
+          ],
+          "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/consumer-source/patamaps-draft-97c1a1fa1b17",
+          "expectedSuccess": true,
+          "pid": 13118,
+          "exitCode": 0,
+          "seconds": 0.017
+        },
+        {
+          "label": "m6-alias-runtime-stop",
+          "argv": [
+            "docker",
+            "stop",
+            "--time",
+            "2",
+            "2cda910fd60d3ce7927035f8f3be187dcb1b02102583d694ad1a4c6a5d6176a8"
+          ],
+          "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/consumer-source/patamaps-draft-97c1a1fa1b17",
+          "expectedSuccess": true,
+          "pid": 13126,
+          "exitCode": 0,
+          "seconds": 2.171
+        },
+        {
+          "label": "m6-alias-runtime-logs",
+          "argv": [
+            "docker",
+            "logs",
+            "2cda910fd60d3ce7927035f8f3be187dcb1b02102583d694ad1a4c6a5d6176a8"
+          ],
+          "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/consumer-source/patamaps-draft-97c1a1fa1b17",
+          "expectedSuccess": true,
+          "pid": 13198,
+          "exitCode": 0,
+          "seconds": 0.017
+        },
+        {
+          "label": "m6-alias-runtime-final-inspect",
+          "argv": [
+            "docker",
+            "inspect",
+            "2cda910fd60d3ce7927035f8f3be187dcb1b02102583d694ad1a4c6a5d6176a8"
+          ],
+          "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/consumer-source/patamaps-draft-97c1a1fa1b17",
+          "expectedSuccess": true,
+          "pid": 13207,
+          "exitCode": 0,
+          "seconds": 0.017
+        },
+        {
+          "label": "m6-explicit-arg-json-copy",
+          "argv": [
+            "docker",
+            "buildx",
+            "build",
+            "--load",
+            "--platform",
+            "linux/amd64",
+            "--target",
+            "runtime",
+            "--progress",
+            "plain",
+            "--metadata-file",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/m6-explicit-arg-json-copy.metadata.json",
+            "--iidfile",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/m6-explicit-arg-json-copy.iid",
+            "--file",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/image-cases/explicit-arg-json-copy/deploy/Dockerfile",
+            "--build-arg",
+            "BASE=rust:1.99.0-bookworm",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/image-cases/explicit-arg-json-copy"
+          ],
+          "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/consumer-source/patamaps-draft-97c1a1fa1b17",
+          "expectedSuccess": true,
+          "pid": 13215,
+          "exitCode": 0,
+          "seconds": 0.466
+        },
+        {
+          "label": "m6-arg-runtime-create",
+          "argv": [
+            "docker",
+            "create",
+            "--name",
+            "patamaps-cross-stack-d30cb4ee95364f57a3b52aabe59e535a",
+            "--platform",
+            "linux/amd64",
+            "--memory",
+            "256m",
+            "--cpus",
+            "1",
+            "--pids-limit",
+            "64",
+            "--read-only",
+            "--cap-drop",
+            "ALL",
+            "--security-opt",
+            "no-new-privileges",
+            "--publish",
+            "127.0.0.1::8080",
+            "--publish",
+            "127.0.0.1::9090",
+            "sha256:d699b2a62d6903e8f11ce0ce84f7e49f5ea1f047e471bccbbd151b454a2a0619"
+          ],
+          "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/consumer-source/patamaps-draft-97c1a1fa1b17",
+          "expectedSuccess": true,
+          "pid": 13297,
+          "exitCode": 0,
+          "seconds": 0.033
+        },
+        {
+          "label": "m6-arg-runtime-start",
+          "argv": [
+            "docker",
+            "start",
+            "d4833a74ee461125f81f1345d2407e3f5494e4472213239aa78c03d6a6831d7a"
+          ],
+          "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/consumer-source/patamaps-draft-97c1a1fa1b17",
+          "expectedSuccess": null,
+          "pid": 13305,
+          "exitCode": 0,
+          "seconds": 0.216
+        },
+        {
+          "label": "m6-arg-runtime-inspect",
+          "argv": [
+            "docker",
+            "inspect",
+            "d4833a74ee461125f81f1345d2407e3f5494e4472213239aa78c03d6a6831d7a"
+          ],
+          "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/consumer-source/patamaps-draft-97c1a1fa1b17",
+          "expectedSuccess": true,
+          "pid": 13409,
+          "exitCode": 0,
+          "seconds": 0.017
+        },
+        {
+          "label": "m6-arg-runtime-stop",
+          "argv": [
+            "docker",
+            "stop",
+            "--time",
+            "2",
+            "d4833a74ee461125f81f1345d2407e3f5494e4472213239aa78c03d6a6831d7a"
+          ],
+          "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/consumer-source/patamaps-draft-97c1a1fa1b17",
+          "expectedSuccess": true,
+          "pid": 13417,
+          "exitCode": 0,
+          "seconds": 2.171
+        },
+        {
+          "label": "m6-arg-runtime-logs",
+          "argv": [
+            "docker",
+            "logs",
+            "d4833a74ee461125f81f1345d2407e3f5494e4472213239aa78c03d6a6831d7a"
+          ],
+          "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/consumer-source/patamaps-draft-97c1a1fa1b17",
+          "expectedSuccess": true,
+          "pid": 13488,
+          "exitCode": 0,
+          "seconds": 0.017
+        },
+        {
+          "label": "m6-arg-runtime-final-inspect",
+          "argv": [
+            "docker",
+            "inspect",
+            "d4833a74ee461125f81f1345d2407e3f5494e4472213239aa78c03d6a6831d7a"
+          ],
+          "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/consumer-source/patamaps-draft-97c1a1fa1b17",
+          "expectedSuccess": true,
+          "pid": 13496,
+          "exitCode": 0,
+          "seconds": 0.017
+        },
+        {
+          "label": "m6-specific-ignore",
+          "argv": [
+            "docker",
+            "buildx",
+            "build",
+            "--load",
+            "--platform",
+            "linux/amd64",
+            "--target",
+            "runtime",
+            "--progress",
+            "plain",
+            "--metadata-file",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/m6-specific-ignore.metadata.json",
+            "--iidfile",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/m6-specific-ignore.iid",
+            "--file",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/image-cases/specific-ignore/deploy/Dockerfile",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/image-cases/specific-ignore"
+          ],
+          "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/consumer-source/patamaps-draft-97c1a1fa1b17",
+          "expectedSuccess": true,
+          "pid": 13504,
+          "exitCode": 0,
+          "seconds": 0.416
+        },
+        {
+          "label": "m6-specific-runtime-create",
+          "argv": [
+            "docker",
+            "create",
+            "--name",
+            "patamaps-cross-stack-601ddf88c5b5421dad06ce56f59ba0c1",
+            "--platform",
+            "linux/amd64",
+            "--memory",
+            "256m",
+            "--cpus",
+            "1",
+            "--pids-limit",
+            "64",
+            "--read-only",
+            "--cap-drop",
+            "ALL",
+            "--security-opt",
+            "no-new-privileges",
+            "--publish",
+            "127.0.0.1::8080",
+            "--publish",
+            "127.0.0.1::9090",
+            "sha256:d699b2a62d6903e8f11ce0ce84f7e49f5ea1f047e471bccbbd151b454a2a0619"
+          ],
+          "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/consumer-source/patamaps-draft-97c1a1fa1b17",
+          "expectedSuccess": true,
+          "pid": 13586,
+          "exitCode": 0,
+          "seconds": 0.033
+        },
+        {
+          "label": "m6-specific-runtime-start",
+          "argv": [
+            "docker",
+            "start",
+            "21142ca627930a27a96ceb0c3461b4813f1fec9eead954b750863d06f2af7d8c"
+          ],
+          "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/consumer-source/patamaps-draft-97c1a1fa1b17",
+          "expectedSuccess": null,
+          "pid": 13594,
+          "exitCode": 0,
+          "seconds": 0.165
+        },
+        {
+          "label": "m6-specific-runtime-inspect",
+          "argv": [
+            "docker",
+            "inspect",
+            "21142ca627930a27a96ceb0c3461b4813f1fec9eead954b750863d06f2af7d8c"
+          ],
+          "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/consumer-source/patamaps-draft-97c1a1fa1b17",
+          "expectedSuccess": true,
+          "pid": 13696,
+          "exitCode": 0,
+          "seconds": 0.017
+        },
+        {
+          "label": "m6-specific-runtime-stop",
+          "argv": [
+            "docker",
+            "stop",
+            "--time",
+            "2",
+            "21142ca627930a27a96ceb0c3461b4813f1fec9eead954b750863d06f2af7d8c"
+          ],
+          "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/consumer-source/patamaps-draft-97c1a1fa1b17",
+          "expectedSuccess": true,
+          "pid": 13704,
+          "exitCode": 0,
+          "seconds": 2.171
+        },
+        {
+          "label": "m6-specific-runtime-logs",
+          "argv": [
+            "docker",
+            "logs",
+            "21142ca627930a27a96ceb0c3461b4813f1fec9eead954b750863d06f2af7d8c"
+          ],
+          "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/consumer-source/patamaps-draft-97c1a1fa1b17",
+          "expectedSuccess": true,
+          "pid": 13786,
+          "exitCode": 0,
+          "seconds": 0.017
+        },
+        {
+          "label": "m6-specific-runtime-final-inspect",
+          "argv": [
+            "docker",
+            "inspect",
+            "21142ca627930a27a96ceb0c3461b4813f1fec9eead954b750863d06f2af7d8c"
+          ],
+          "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/consumer-source/patamaps-draft-97c1a1fa1b17",
+          "expectedSuccess": true,
+          "pid": 13794,
+          "exitCode": 0,
+          "seconds": 0.017
+        },
+        {
+          "label": "m6-buildkit-broken-copy",
+          "argv": [
+            "docker",
+            "buildx",
+            "build",
+            "--load",
+            "--platform",
+            "linux/amd64",
+            "--target",
+            "runtime",
+            "--progress",
+            "plain",
+            "--metadata-file",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/m6-buildkit-broken-copy.metadata.json",
+            "--iidfile",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/m6-buildkit-broken-copy.iid",
+            "--file",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/image-cases/broken-copy/deploy/Dockerfile",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/image-cases/broken-copy"
+          ],
+          "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/consumer-source/patamaps-draft-97c1a1fa1b17",
+          "expectedSuccess": false,
+          "pid": 13802,
+          "exitCode": 1,
+          "seconds": 0.416
+        },
+        {
+          "label": "m6-buildkit-ignored-config",
+          "argv": [
+            "docker",
+            "buildx",
+            "build",
+            "--load",
+            "--platform",
+            "linux/amd64",
+            "--target",
+            "runtime",
+            "--progress",
+            "plain",
+            "--metadata-file",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/m6-buildkit-ignored-config.metadata.json",
+            "--iidfile",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/m6-buildkit-ignored-config.iid",
+            "--file",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/image-cases/ignored-config/deploy/Dockerfile",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/image-cases/ignored-config"
+          ],
+          "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/consumer-source/patamaps-draft-97c1a1fa1b17",
+          "expectedSuccess": false,
+          "pid": 13884,
+          "exitCode": 1,
+          "seconds": 0.416
+        },
+        {
+          "label": "m6-buildkit-wrong-stage",
+          "argv": [
+            "docker",
+            "buildx",
+            "build",
+            "--load",
+            "--platform",
+            "linux/amd64",
+            "--target",
+            "runtime",
+            "--progress",
+            "plain",
+            "--metadata-file",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/m6-buildkit-wrong-stage.metadata.json",
+            "--iidfile",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/m6-buildkit-wrong-stage.iid",
+            "--file",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/image-cases/wrong-stage/deploy/Dockerfile",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/image-cases/wrong-stage"
+          ],
+          "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/consumer-source/patamaps-draft-97c1a1fa1b17",
+          "expectedSuccess": false,
+          "pid": 13968,
+          "exitCode": 1,
+          "seconds": 0.316
+        },
+        {
+          "label": "m6-image-wrong-binary",
+          "argv": [
+            "docker",
+            "buildx",
+            "build",
+            "--load",
+            "--platform",
+            "linux/amd64",
+            "--target",
+            "runtime",
+            "--progress",
+            "plain",
+            "--metadata-file",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/m6-image-wrong-binary.metadata.json",
+            "--iidfile",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/m6-image-wrong-binary.iid",
+            "--file",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/image-cases/wrong-binary/deploy/Dockerfile",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/image-cases/wrong-binary"
+          ],
+          "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/consumer-source/patamaps-draft-97c1a1fa1b17",
+          "expectedSuccess": true,
+          "pid": 14051,
+          "exitCode": 0,
+          "seconds": 0.416
+        },
+        {
+          "label": "m6-runtime-wrong-binary-create",
+          "argv": [
+            "docker",
+            "create",
+            "--name",
+            "patamaps-cross-stack-1e066d61bdce440a929a1a851e6abfe8",
+            "--platform",
+            "linux/amd64",
+            "--memory",
+            "256m",
+            "--cpus",
+            "1",
+            "--pids-limit",
+            "64",
+            "--read-only",
+            "--cap-drop",
+            "ALL",
+            "--security-opt",
+            "no-new-privileges",
+            "--publish",
+            "127.0.0.1::8080",
+            "--publish",
+            "127.0.0.1::9090",
+            "sha256:6d18e630e626d765f30653494848e426fcb7da28db39894eae127daa2d80e0cd"
+          ],
+          "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/consumer-source/patamaps-draft-97c1a1fa1b17",
+          "expectedSuccess": true,
+          "pid": 14132,
+          "exitCode": 0,
+          "seconds": 0.033
+        },
+        {
+          "label": "m6-runtime-wrong-binary-start",
+          "argv": [
+            "docker",
+            "start",
+            "e65553aa15fee88b03a2432242d685df1abadec9c0204f35f862c004c06da8a9"
+          ],
+          "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/consumer-source/patamaps-draft-97c1a1fa1b17",
+          "expectedSuccess": null,
+          "pid": 14140,
+          "exitCode": 0,
+          "seconds": 0.166
+        },
+        {
+          "label": "m6-runtime-wrong-binary-inspect",
+          "argv": [
+            "docker",
+            "inspect",
+            "e65553aa15fee88b03a2432242d685df1abadec9c0204f35f862c004c06da8a9"
+          ],
+          "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/consumer-source/patamaps-draft-97c1a1fa1b17",
+          "expectedSuccess": true,
+          "pid": 14262,
+          "exitCode": 0,
+          "seconds": 0.115
+        },
+        {
+          "label": "m6-runtime-wrong-binary-stop",
+          "argv": [
+            "docker",
+            "stop",
+            "--time",
+            "2",
+            "e65553aa15fee88b03a2432242d685df1abadec9c0204f35f862c004c06da8a9"
+          ],
+          "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/consumer-source/patamaps-draft-97c1a1fa1b17",
+          "expectedSuccess": true,
+          "pid": 14295,
+          "exitCode": 0,
+          "seconds": 0.017
+        },
+        {
+          "label": "m6-runtime-wrong-binary-logs",
+          "argv": [
+            "docker",
+            "logs",
+            "e65553aa15fee88b03a2432242d685df1abadec9c0204f35f862c004c06da8a9"
+          ],
+          "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/consumer-source/patamaps-draft-97c1a1fa1b17",
+          "expectedSuccess": true,
+          "pid": 14303,
+          "exitCode": 0,
+          "seconds": 0.017
+        },
+        {
+          "label": "m6-runtime-wrong-binary-final-inspect",
+          "argv": [
+            "docker",
+            "inspect",
+            "e65553aa15fee88b03a2432242d685df1abadec9c0204f35f862c004c06da8a9"
+          ],
+          "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/consumer-source/patamaps-draft-97c1a1fa1b17",
+          "expectedSuccess": true,
+          "pid": 14311,
+          "exitCode": 0,
+          "seconds": 0.017
+        },
+        {
+          "label": "m6-image-missing-config",
+          "argv": [
+            "docker",
+            "buildx",
+            "build",
+            "--load",
+            "--platform",
+            "linux/amd64",
+            "--target",
+            "runtime",
+            "--progress",
+            "plain",
+            "--metadata-file",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/m6-image-missing-config.metadata.json",
+            "--iidfile",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/m6-image-missing-config.iid",
+            "--file",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/image-cases/missing-config/deploy/Dockerfile",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/image-cases/missing-config"
+          ],
+          "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/consumer-source/patamaps-draft-97c1a1fa1b17",
+          "expectedSuccess": true,
+          "pid": 14319,
+          "exitCode": 0,
+          "seconds": 0.466
+        },
+        {
+          "label": "m6-runtime-missing-config-create",
+          "argv": [
+            "docker",
+            "create",
+            "--name",
+            "patamaps-cross-stack-19434869abf844d9b05a196df6523bd9",
+            "--platform",
+            "linux/amd64",
+            "--memory",
+            "256m",
+            "--cpus",
+            "1",
+            "--pids-limit",
+            "64",
+            "--read-only",
+            "--cap-drop",
+            "ALL",
+            "--security-opt",
+            "no-new-privileges",
+            "--publish",
+            "127.0.0.1::8080",
+            "--publish",
+            "127.0.0.1::9090",
+            "sha256:65ee5a0133f600ea33ac577c176fea060662252647c8f0efa369ea4d999dbd96"
+          ],
+          "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/consumer-source/patamaps-draft-97c1a1fa1b17",
+          "expectedSuccess": true,
+          "pid": 14403,
+          "exitCode": 0,
+          "seconds": 0.033
+        },
+        {
+          "label": "m6-runtime-missing-config-start",
+          "argv": [
+            "docker",
+            "start",
+            "97301314bf5a8a6e99c8c8c83bd1b55d50049d1da1b1a4dbaf4bceb220f17502"
+          ],
+          "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/consumer-source/patamaps-draft-97c1a1fa1b17",
+          "expectedSuccess": null,
+          "pid": 14412,
+          "exitCode": 0,
+          "seconds": 0.166
+        },
+        {
+          "label": "m6-runtime-missing-config-inspect",
+          "argv": [
+            "docker",
+            "inspect",
+            "97301314bf5a8a6e99c8c8c83bd1b55d50049d1da1b1a4dbaf4bceb220f17502"
+          ],
+          "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/consumer-source/patamaps-draft-97c1a1fa1b17",
+          "expectedSuccess": true,
+          "pid": 14524,
+          "exitCode": 0,
+          "seconds": 0.169
+        },
+        {
+          "label": "m6-runtime-missing-config-stop",
+          "argv": [
+            "docker",
+            "stop",
+            "--time",
+            "2",
+            "97301314bf5a8a6e99c8c8c83bd1b55d50049d1da1b1a4dbaf4bceb220f17502"
+          ],
+          "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/consumer-source/patamaps-draft-97c1a1fa1b17",
+          "expectedSuccess": true,
+          "pid": 14565,
+          "exitCode": 0,
+          "seconds": 0.018
+        },
+        {
+          "label": "m6-runtime-missing-config-logs",
+          "argv": [
+            "docker",
+            "logs",
+            "97301314bf5a8a6e99c8c8c83bd1b55d50049d1da1b1a4dbaf4bceb220f17502"
+          ],
+          "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/consumer-source/patamaps-draft-97c1a1fa1b17",
+          "expectedSuccess": true,
+          "pid": 14573,
+          "exitCode": 0,
+          "seconds": 0.018
+        },
+        {
+          "label": "m6-runtime-missing-config-final-inspect",
+          "argv": [
+            "docker",
+            "inspect",
+            "97301314bf5a8a6e99c8c8c83bd1b55d50049d1da1b1a4dbaf4bceb220f17502"
+          ],
+          "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/consumer-source/patamaps-draft-97c1a1fa1b17",
+          "expectedSuccess": true,
+          "pid": 14581,
+          "exitCode": 0,
+          "seconds": 0.017
+        },
+        {
+          "label": "m6-image-missing-loader-library",
+          "argv": [
+            "docker",
+            "buildx",
+            "build",
+            "--load",
+            "--platform",
+            "linux/amd64",
+            "--target",
+            "runtime",
+            "--progress",
+            "plain",
+            "--metadata-file",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/m6-image-missing-loader-library.metadata.json",
+            "--iidfile",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/m6-image-missing-loader-library.iid",
+            "--file",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/image-cases/missing-loader-library/deploy/Dockerfile",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/image-cases/missing-loader-library"
+          ],
+          "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/consumer-source/patamaps-draft-97c1a1fa1b17",
+          "expectedSuccess": true,
+          "pid": 14589,
+          "exitCode": 0,
+          "seconds": 0.416
+        },
+        {
+          "label": "m6-runtime-missing-loader-library-create",
+          "argv": [
+            "docker",
+            "create",
+            "--name",
+            "patamaps-cross-stack-8a8a0b48880d4b9da6588972b581eb0e",
+            "--platform",
+            "linux/amd64",
+            "--memory",
+            "256m",
+            "--cpus",
+            "1",
+            "--pids-limit",
+            "64",
+            "--read-only",
+            "--cap-drop",
+            "ALL",
+            "--security-opt",
+            "no-new-privileges",
+            "--publish",
+            "127.0.0.1::8080",
+            "--publish",
+            "127.0.0.1::9090",
+            "sha256:a8ccfdb564593758ad66626144e835cecb2426cf626d52e36d1c7dcd144bd33c"
+          ],
+          "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/consumer-source/patamaps-draft-97c1a1fa1b17",
+          "expectedSuccess": true,
+          "pid": 14680,
+          "exitCode": 0,
+          "seconds": 0.033
+        },
+        {
+          "label": "m6-runtime-missing-loader-library-start",
+          "argv": [
+            "docker",
+            "start",
+            "b17ce8419faebd7fb83aecaec79c3c6fb8792c2d7c8eca83b2ee9c4157ae9794"
+          ],
+          "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/consumer-source/patamaps-draft-97c1a1fa1b17",
+          "expectedSuccess": null,
+          "pid": 14688,
+          "exitCode": 0,
+          "seconds": 0.166
+        },
+        {
+          "label": "m6-runtime-missing-loader-library-inspect",
+          "argv": [
+            "docker",
+            "inspect",
+            "b17ce8419faebd7fb83aecaec79c3c6fb8792c2d7c8eca83b2ee9c4157ae9794"
+          ],
+          "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/consumer-source/patamaps-draft-97c1a1fa1b17",
+          "expectedSuccess": true,
+          "pid": 14811,
+          "exitCode": 0,
+          "seconds": 0.116
+        },
+        {
+          "label": "m6-runtime-missing-loader-library-stop",
+          "argv": [
+            "docker",
+            "stop",
+            "--time",
+            "2",
+            "b17ce8419faebd7fb83aecaec79c3c6fb8792c2d7c8eca83b2ee9c4157ae9794"
+          ],
+          "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/consumer-source/patamaps-draft-97c1a1fa1b17",
+          "expectedSuccess": true,
+          "pid": 14845,
+          "exitCode": 0,
+          "seconds": 0.017
+        },
+        {
+          "label": "m6-runtime-missing-loader-library-logs",
+          "argv": [
+            "docker",
+            "logs",
+            "b17ce8419faebd7fb83aecaec79c3c6fb8792c2d7c8eca83b2ee9c4157ae9794"
+          ],
+          "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/consumer-source/patamaps-draft-97c1a1fa1b17",
+          "expectedSuccess": true,
+          "pid": 14853,
+          "exitCode": 0,
+          "seconds": 0.017
+        },
+        {
+          "label": "m6-runtime-missing-loader-library-final-inspect",
+          "argv": [
+            "docker",
+            "inspect",
+            "b17ce8419faebd7fb83aecaec79c3c6fb8792c2d7c8eca83b2ee9c4157ae9794"
+          ],
+          "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/consumer-source/patamaps-draft-97c1a1fa1b17",
+          "expectedSuccess": true,
+          "pid": 14862,
+          "exitCode": 0,
+          "seconds": 0.017
+        },
+        {
+          "label": "m6-image-wrong-listener",
+          "argv": [
+            "docker",
+            "buildx",
+            "build",
+            "--load",
+            "--platform",
+            "linux/amd64",
+            "--target",
+            "runtime",
+            "--progress",
+            "plain",
+            "--metadata-file",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/m6-image-wrong-listener.metadata.json",
+            "--iidfile",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/m6-image-wrong-listener.iid",
+            "--file",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/image-cases/wrong-listener/deploy/Dockerfile",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/image-cases/wrong-listener"
+          ],
+          "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/consumer-source/patamaps-draft-97c1a1fa1b17",
+          "expectedSuccess": true,
+          "pid": 14870,
+          "exitCode": 0,
+          "seconds": 0.466
+        },
+        {
+          "label": "m6-runtime-wrong-listener-create",
+          "argv": [
+            "docker",
+            "create",
+            "--name",
+            "patamaps-cross-stack-b7595d4c019c4c44b89d4444a4958a82",
+            "--platform",
+            "linux/amd64",
+            "--memory",
+            "256m",
+            "--cpus",
+            "1",
+            "--pids-limit",
+            "64",
+            "--read-only",
+            "--cap-drop",
+            "ALL",
+            "--security-opt",
+            "no-new-privileges",
+            "--publish",
+            "127.0.0.1::8080",
+            "--publish",
+            "127.0.0.1::9090",
+            "sha256:bee5ada3ba7d45609620711067a03ec26aaeb85433e832c46bc454b0a2134e84"
+          ],
+          "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/consumer-source/patamaps-draft-97c1a1fa1b17",
+          "expectedSuccess": true,
+          "pid": 14954,
+          "exitCode": 0,
+          "seconds": 0.033
+        },
+        {
+          "label": "m6-runtime-wrong-listener-start",
+          "argv": [
+            "docker",
+            "start",
+            "f46bd36dcb3b49f16cfcc3777506a1a30c807ef8242227f60b83ec1c21a3b9b9"
+          ],
+          "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/consumer-source/patamaps-draft-97c1a1fa1b17",
+          "expectedSuccess": null,
+          "pid": 14962,
+          "exitCode": 0,
+          "seconds": 0.165
+        },
+        {
+          "label": "m6-runtime-wrong-listener-inspect",
+          "argv": [
+            "docker",
+            "inspect",
+            "f46bd36dcb3b49f16cfcc3777506a1a30c807ef8242227f60b83ec1c21a3b9b9"
+          ],
+          "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/consumer-source/patamaps-draft-97c1a1fa1b17",
+          "expectedSuccess": true,
+          "pid": 15063,
+          "exitCode": 0,
+          "seconds": 0.017
+        },
+        {
+          "label": "m6-runtime-wrong-listener-stop",
+          "argv": [
+            "docker",
+            "stop",
+            "--time",
+            "2",
+            "f46bd36dcb3b49f16cfcc3777506a1a30c807ef8242227f60b83ec1c21a3b9b9"
+          ],
+          "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/consumer-source/patamaps-draft-97c1a1fa1b17",
+          "expectedSuccess": true,
+          "pid": 15071,
+          "exitCode": 0,
+          "seconds": 2.171
+        },
+        {
+          "label": "m6-runtime-wrong-listener-logs",
+          "argv": [
+            "docker",
+            "logs",
+            "f46bd36dcb3b49f16cfcc3777506a1a30c807ef8242227f60b83ec1c21a3b9b9"
+          ],
+          "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/consumer-source/patamaps-draft-97c1a1fa1b17",
+          "expectedSuccess": true,
+          "pid": 15152,
+          "exitCode": 0,
+          "seconds": 0.018
+        },
+        {
+          "label": "m6-runtime-wrong-listener-final-inspect",
+          "argv": [
+            "docker",
+            "inspect",
+            "f46bd36dcb3b49f16cfcc3777506a1a30c807ef8242227f60b83ec1c21a3b9b9"
+          ],
+          "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/consumer-source/patamaps-draft-97c1a1fa1b17",
+          "expectedSuccess": true,
+          "pid": 15163,
+          "exitCode": 0,
+          "seconds": 0.017
+        },
+        {
+          "label": "m6-build-incompatible-elf",
+          "argv": [
+            "clang",
+            "--target=aarch64-linux-gnu",
+            "-fuse-ld=lld",
+            "-nostdlib",
+            "-static",
+            "-Wl,-e,_start",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/wrong-architecture.S",
+            "-o",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/wrong-architecture.elf"
+          ],
+          "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/consumer-source/patamaps-draft-97c1a1fa1b17",
+          "expectedSuccess": true,
+          "pid": 15172,
+          "exitCode": 0,
+          "seconds": 0.116
+        },
+        {
+          "label": "m6-image-wrong-architecture",
+          "argv": [
+            "docker",
+            "buildx",
+            "build",
+            "--load",
+            "--platform",
+            "linux/amd64",
+            "--target",
+            "runtime",
+            "--progress",
+            "plain",
+            "--metadata-file",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/m6-image-wrong-architecture.metadata.json",
+            "--iidfile",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/m6-image-wrong-architecture.iid",
+            "--file",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/image-cases/wrong-architecture/deploy/Dockerfile",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/image-cases/wrong-architecture"
+          ],
+          "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/consumer-source/patamaps-draft-97c1a1fa1b17",
+          "expectedSuccess": true,
+          "pid": 15180,
+          "exitCode": 0,
+          "seconds": 0.466
+        },
+        {
+          "label": "m6-runtime-wrong-architecture-create",
+          "argv": [
+            "docker",
+            "create",
+            "--name",
+            "patamaps-cross-stack-5151a30336ad4c0ab63d3fa1204cea1f",
+            "--platform",
+            "linux/amd64",
+            "--memory",
+            "256m",
+            "--cpus",
+            "1",
+            "--pids-limit",
+            "64",
+            "--read-only",
+            "--cap-drop",
+            "ALL",
+            "--security-opt",
+            "no-new-privileges",
+            "--publish",
+            "127.0.0.1::8080",
+            "--publish",
+            "127.0.0.1::9090",
+            "sha256:f4759b340cd0c2f908ea47723dc041f2154262fe98380d7f753787a3ee4ab784"
+          ],
+          "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/consumer-source/patamaps-draft-97c1a1fa1b17",
+          "expectedSuccess": true,
+          "pid": 15264,
+          "exitCode": 0,
+          "seconds": 0.034
+        },
+        {
+          "label": "m6-runtime-wrong-architecture-start",
+          "argv": [
+            "docker",
+            "start",
+            "c3eea6446676c5c777b35de60c385bed70f927b2927a01c448740ed7db6d2804"
+          ],
+          "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/consumer-source/patamaps-draft-97c1a1fa1b17",
+          "expectedSuccess": null,
+          "pid": 15272,
+          "exitCode": 0,
+          "seconds": 0.167
+        },
+        {
+          "label": "m6-runtime-wrong-architecture-inspect",
+          "argv": [
+            "docker",
+            "inspect",
+            "c3eea6446676c5c777b35de60c385bed70f927b2927a01c448740ed7db6d2804"
+          ],
+          "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/consumer-source/patamaps-draft-97c1a1fa1b17",
+          "expectedSuccess": true,
+          "pid": 15398,
+          "exitCode": 0,
+          "seconds": 0.116
+        },
+        {
+          "label": "m6-runtime-wrong-architecture-stop",
+          "argv": [
+            "docker",
+            "stop",
+            "--time",
+            "2",
+            "c3eea6446676c5c777b35de60c385bed70f927b2927a01c448740ed7db6d2804"
+          ],
+          "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/consumer-source/patamaps-draft-97c1a1fa1b17",
+          "expectedSuccess": true,
+          "pid": 15432,
+          "exitCode": 0,
+          "seconds": 0.017
+        },
+        {
+          "label": "m6-runtime-wrong-architecture-logs",
+          "argv": [
+            "docker",
+            "logs",
+            "c3eea6446676c5c777b35de60c385bed70f927b2927a01c448740ed7db6d2804"
+          ],
+          "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/consumer-source/patamaps-draft-97c1a1fa1b17",
+          "expectedSuccess": true,
+          "pid": 15440,
+          "exitCode": 0,
+          "seconds": 0.018
+        },
+        {
+          "label": "m6-runtime-wrong-architecture-final-inspect",
+          "argv": [
+            "docker",
+            "inspect",
+            "c3eea6446676c5c777b35de60c385bed70f927b2927a01c448740ed7db6d2804"
+          ],
+          "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/consumer-source/patamaps-draft-97c1a1fa1b17",
+          "expectedSuccess": true,
+          "pid": 15448,
+          "exitCode": 0,
+          "seconds": 0.018
+        },
+        {
+          "label": "m6-image-wrong-expose",
+          "argv": [
+            "docker",
+            "buildx",
+            "build",
+            "--load",
+            "--platform",
+            "linux/amd64",
+            "--target",
+            "runtime",
+            "--progress",
+            "plain",
+            "--metadata-file",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/m6-image-wrong-expose.metadata.json",
+            "--iidfile",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/m6-image-wrong-expose.iid",
+            "--file",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/image-cases/wrong-expose/deploy/Dockerfile",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/image-cases/wrong-expose"
+          ],
+          "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/consumer-source/patamaps-draft-97c1a1fa1b17",
+          "expectedSuccess": true,
+          "pid": 15456,
+          "exitCode": 0,
+          "seconds": 0.466
+        },
+        {
+          "label": "m6-runtime-wrong-expose-create",
+          "argv": [
+            "docker",
+            "create",
+            "--name",
+            "patamaps-cross-stack-c46d80a8b48d440886885d03a39cc75e",
+            "--platform",
+            "linux/amd64",
+            "--memory",
+            "256m",
+            "--cpus",
+            "1",
+            "--pids-limit",
+            "64",
+            "--read-only",
+            "--cap-drop",
+            "ALL",
+            "--security-opt",
+            "no-new-privileges",
+            "--publish",
+            "127.0.0.1::8080",
+            "--publish",
+            "127.0.0.1::9090",
+            "sha256:b957e559b605d525f91434037174e640700cea00a08ac7d78c406dde6176baa1"
+          ],
+          "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/consumer-source/patamaps-draft-97c1a1fa1b17",
+          "expectedSuccess": true,
+          "pid": 15540,
+          "exitCode": 0,
+          "seconds": 0.034
+        },
+        {
+          "label": "m6-runtime-wrong-expose-start",
+          "argv": [
+            "docker",
+            "start",
+            "28467af81279d9bb7bc7effb8a482b41144de51a235888d244f8cf34a446008b"
+          ],
+          "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/consumer-source/patamaps-draft-97c1a1fa1b17",
+          "expectedSuccess": null,
+          "pid": 15548,
+          "exitCode": 0,
+          "seconds": 0.166
+        },
+        {
+          "label": "m6-runtime-wrong-expose-inspect",
+          "argv": [
+            "docker",
+            "inspect",
+            "28467af81279d9bb7bc7effb8a482b41144de51a235888d244f8cf34a446008b"
+          ],
+          "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/consumer-source/patamaps-draft-97c1a1fa1b17",
+          "expectedSuccess": true,
+          "pid": 15649,
+          "exitCode": 0,
+          "seconds": 0.018
+        },
+        {
+          "label": "m6-runtime-wrong-expose-stop",
+          "argv": [
+            "docker",
+            "stop",
+            "--time",
+            "2",
+            "28467af81279d9bb7bc7effb8a482b41144de51a235888d244f8cf34a446008b"
+          ],
+          "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/consumer-source/patamaps-draft-97c1a1fa1b17",
+          "expectedSuccess": true,
+          "pid": 15657,
+          "exitCode": 0,
+          "seconds": 2.222
+        },
+        {
+          "label": "m6-runtime-wrong-expose-logs",
+          "argv": [
+            "docker",
+            "logs",
+            "28467af81279d9bb7bc7effb8a482b41144de51a235888d244f8cf34a446008b"
+          ],
+          "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/consumer-source/patamaps-draft-97c1a1fa1b17",
+          "expectedSuccess": true,
+          "pid": 15732,
+          "exitCode": 0,
+          "seconds": 0.017
+        },
+        {
+          "label": "m6-runtime-wrong-expose-final-inspect",
+          "argv": [
+            "docker",
+            "inspect",
+            "28467af81279d9bb7bc7effb8a482b41144de51a235888d244f8cf34a446008b"
+          ],
+          "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/consumer-source/patamaps-draft-97c1a1fa1b17",
+          "expectedSuccess": true,
+          "pid": 15740,
+          "exitCode": 0,
+          "seconds": 0.017
+        },
+        {
+          "label": "m6-missing-browser-runtime",
+          "argv": [
+            "/opt/hostedtoolcache/node/22.23.3/x64/bin/node",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/consumer-source/patamaps-draft-97c1a1fa1b17/examples/cross-stack/acceptance/browser/probe.cjs",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/absent-browser-runtime"
+          ],
+          "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/consumer-source/patamaps-draft-97c1a1fa1b17",
+          "expectedSuccess": false,
+          "pid": 15748,
+          "exitCode": 69,
+          "seconds": 0.416
+        },
+        {
+          "label": "m6-release-admit",
+          "argv": [
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/consumer-native/patamaps-draft-97c1a1fa1b17/bin/patamaps",
+            "generate",
+            "release-workspace.json",
+            "--root",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/release-candidate"
+          ],
+          "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/release-candidate",
+          "expectedSuccess": true,
+          "pid": 15760,
+          "exitCode": 0,
+          "seconds": 1.12
+        },
+        {
+          "label": "m6-release-offline",
+          "argv": [
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/consumer-native/patamaps-draft-97c1a1fa1b17/bin/patamaps",
+            "verify-workspace",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/release-candidate/release-baseline.json"
+          ],
+          "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/release-candidate",
+          "expectedSuccess": true,
+          "pid": 15869,
+          "exitCode": 0,
+          "seconds": 0.567
+        },
+        {
+          "label": "m6-release-refuse-uncompiled",
+          "argv": [
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/consumer-native/patamaps-draft-97c1a1fa1b17/bin/patamaps",
+            "generate",
+            "release-workspace-negative-uncompiled.json",
+            "--root",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/release-candidate"
+          ],
+          "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/release-candidate",
+          "expectedSuccess": false,
+          "pid": 15870,
+          "exitCode": 2,
+          "seconds": 1.118
+        },
+        {
+          "label": "m6-release-refuse-stale-config",
+          "argv": [
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/consumer-native/patamaps-draft-97c1a1fa1b17/bin/patamaps",
+            "generate",
+            "release-workspace-negative-stale-config.json",
+            "--root",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/release-candidate"
+          ],
+          "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/release-candidate",
+          "expectedSuccess": false,
+          "pid": 15979,
+          "exitCode": 2,
+          "seconds": 1.118
+        },
+        {
+          "label": "m6-release-refuse-different-image",
+          "argv": [
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/consumer-native/patamaps-draft-97c1a1fa1b17/bin/patamaps",
+            "generate",
+            "release-workspace-negative-different-image.json",
+            "--root",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/release-candidate"
+          ],
+          "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/release-candidate",
+          "expectedSuccess": false,
+          "pid": 16088,
+          "exitCode": 2,
+          "seconds": 1.118
+        },
+        {
+          "label": "m6-release-refuse-unobserved-browser",
+          "argv": [
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/consumer-native/patamaps-draft-97c1a1fa1b17/bin/patamaps",
+            "generate",
+            "release-workspace-negative-unobserved-browser.json",
+            "--root",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/release-candidate"
+          ],
+          "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/release-candidate",
+          "expectedSuccess": false,
+          "pid": 16197,
+          "exitCode": 2,
+          "seconds": 1.118
+        },
+        {
+          "label": "m6-release-refuse-ambiguous-artifact",
+          "argv": [
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/consumer-native/patamaps-draft-97c1a1fa1b17/bin/patamaps",
+            "generate",
+            "release-workspace-negative-ambiguous-artifact.json",
+            "--root",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/release-candidate"
+          ],
+          "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/release-candidate",
+          "expectedSuccess": false,
+          "pid": 16306,
+          "exitCode": 2,
+          "seconds": 1.118
+        },
+        {
+          "label": "installed-runtime-without-compilers",
+          "argv": [
+            "/opt/hostedtoolcache/node/22.23.3/x64/bin/node",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/consumer-source/patamaps-draft-97c1a1fa1b17/examples/cross-stack/acceptance/check-runtime.cjs",
+            "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/client-js/operations.js",
+            "http://127.0.0.1:47341",
+            "http://127.0.0.1:34991"
+          ],
+          "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/consumer-source/patamaps-draft-97c1a1fa1b17",
+          "expectedSuccess": true,
+          "pid": 16433,
+          "exitCode": 0,
+          "seconds": 0.217
+        }
+      ],
+      "fullReleaseAccepted": false,
+      "deleted": [],
+      "mixedWorkflow": {
+        "status": "passed-linux-image-browser-scope",
+        "controls": [
+          {
+            "control": "m6-buildkit-stages",
+            "result": "independently-observed",
+            "requiredStages": [
+              "builder",
+              "runtime"
+            ]
+          },
+          {
+            "control": "m6-cargo-linux-artifact",
+            "result": "compiled-and-inspected",
+            "digest": "sha256:53cdba98ef1ac119207a422ef7af19b91d10d6930f75b4e78402141ec81a07b2",
+            "target": {
+              "reason": "compiler-artifact",
+              "package_id": "path+file:///build/service#catalog-service@0.1.0",
+              "manifest_path": "/build/service/Cargo.toml",
+              "target": {
+                "kind": [
+                  "bin"
+                ],
+                "crate_types": [
+                  "bin"
+                ],
+                "name": "catalog-service",
+                "src_path": "/build/service/src/main.rs",
+                "edition": "2024",
+                "doc": true,
+                "doctest": false,
+                "test": true
+              },
+              "profile": {
+                "opt_level": "3",
+                "debuginfo": 0,
+                "debug_assertions": false,
+                "overflow_checks": false,
+                "test": false
+              },
+              "features": [],
+              "filenames": [
+                "/build/service/target/x86_64-unknown-linux-gnu/release/catalog-service"
+              ],
+              "executable": "/build/service/target/x86_64-unknown-linux-gnu/release/catalog-service",
+              "fresh": false
+            },
+            "compiler": "rustc 1.99.0 (b940084d7 2026-09-28)\nbinary: rustc\ncommit-hash: b940084d7eb6a299eb4bfeb8e34901bc051e7ac4\ncommit-date: 2026-09-28\nhost: x86_64-unknown-linux-gnu\nrelease: 1.99.0\nLLVM version: 23.1.1\n",
+            "executable": {
+              "format": "ELF64",
+              "endianness": "little",
+              "type": 3,
+              "machine": 62
+            }
+          },
+          {
+            "control": "m6-image-bytes-config-licenses",
+            "result": "equal-to-builder-and-captured-input",
+            "image": "sha256:d699b2a62d6903e8f11ce0ce84f7e49f5ea1f047e471bccbbd151b454a2a0619",
+            "configDigest": "sha256:ec046d3e08183708c3aae0453ce0cb4febe7b875452d781ea867897b65bccd07",
+            "noticeDigests": {
+              "application/NOTICE": "sha256:b0454a6c73ccd381741a9ab4a62eb8d432b9b94313c3d674a3136733a1f9d5e2",
+              "application/LICENSE": "sha256:cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+              "rust/COPYRIGHT": "sha256:172020dbfd5b53a226dfde77616190a48dcff519b0bc0e6deb91a8450782c4af",
+              "rust/SOURCE.json": "sha256:432104cab103476b59b2a61349ea888a91dc7fe7b7381ec9c9d39bbfc878384c",
+              "rust/SHA256SUMS": "sha256:9fb0c6a364b162c4c0d884f64bda342d8a6679ccbb8110e7e7859e0b3ccc1aea",
+              "rust/COPYRIGHT-library.html": "sha256:5647be074c8edf7339fd863055923a8fc80bc5610a8d4661ec3b767b9d392c27",
+              "rust/LICENSE-MIT": "sha256:b71bd43a069ca0641a9ecfe585ca7b3c53b5cc1608f8b68321168698e28b5ea1",
+              "rust/LICENSE-APACHE": "sha256:62c7a1e35f56406896d7aa7ca52d0cc0d272ac022b5d2796e7d6905db8a3636a",
+              "crates/chunked_transfer-1.5.0/LICENSE-MIT": "sha256:5eda8c6538e7d543efe31ebad3fc0e66a7c4df056ddb901a5bdfbf5ef397e116",
+              "crates/chunked_transfer-1.5.0/LICENSE-APACHE": "sha256:a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+              "crates/winnow-0.7.15/LICENSE-MIT": "sha256:cb5aedb296c5246d1f22e9099f925a65146f9f0d6b4eebba97fd27a6cdbbab2d",
+              "crates/syn-3.0.9/LICENSE-MIT": "sha256:23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+              "crates/syn-3.0.9/LICENSE-APACHE": "sha256:62c7a1e35f56406896d7aa7ca52d0cc0d272ac022b5d2796e7d6905db8a3636a",
+              "crates/zmij-1.0.23/LICENSE-MIT": "sha256:23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+              "crates/log-0.4.34/LICENSE-MIT": "sha256:6485b8ed310d3f0340bf1ad1f47645069ce4069dcc6bb46c7d5c6faf41de1fdb",
+              "crates/log-0.4.34/LICENSE-APACHE": "sha256:a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+              "crates/unicode-ident-1.0.27/LICENSE-UNICODE": "sha256:f7db81051789b729fea528a63ec4c938fdcb93d9d61d97dc8cc2e9df6d47f2a1",
+              "crates/unicode-ident-1.0.27/LICENSE-MIT": "sha256:23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+              "crates/unicode-ident-1.0.27/LICENSE-APACHE": "sha256:62c7a1e35f56406896d7aa7ca52d0cc0d272ac022b5d2796e7d6905db8a3636a",
+              "crates/winnow-1.0.4/LICENSE-MIT": "sha256:cb5aedb296c5246d1f22e9099f925a65146f9f0d6b4eebba97fd27a6cdbbab2d",
+              "crates/equivalent-1.0.3/LICENSE-MIT": "sha256:7365cc8878a1d7ce155a58c4ca09c3d7a6be413efa5334a80ea842912b669349",
+              "crates/equivalent-1.0.3/LICENSE-APACHE": "sha256:a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+              "crates/serde_core-1.0.229/LICENSE-MIT": "sha256:23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+              "crates/serde_core-1.0.229/LICENSE-APACHE": "sha256:62c7a1e35f56406896d7aa7ca52d0cc0d272ac022b5d2796e7d6905db8a3636a",
+              "crates/hashbrown-0.17.1/LICENSE-MIT": "sha256:ff8f68cb076caf8cefe7a6430d4ac086ce6af2ca8ce2c4e5a2004d4552ef52a2",
+              "crates/hashbrown-0.17.1/LICENSE-APACHE": "sha256:a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+              "crates/quote-1.0.47/LICENSE-MIT": "sha256:23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+              "crates/quote-1.0.47/LICENSE-APACHE": "sha256:62c7a1e35f56406896d7aa7ca52d0cc0d272ac022b5d2796e7d6905db8a3636a",
+              "crates/toml_edit-0.23.7/LICENSE-MIT": "sha256:6efb0476a1cc085077ed49357026d8c173bf33017278ef440f222fb9cbcb66e6",
+              "crates/toml_edit-0.23.7/LICENSE-APACHE": "sha256:c6596eb7be8581c18be736c846fb9173b69eccf6ef94c5135893ec56bd92ba08",
+              "crates/toml_datetime-0.7.5+spec-1.1.0/LICENSE-MIT": "sha256:6efb0476a1cc085077ed49357026d8c173bf33017278ef440f222fb9cbcb66e6",
+              "crates/toml_datetime-0.7.5+spec-1.1.0/LICENSE-APACHE": "sha256:c6596eb7be8581c18be736c846fb9173b69eccf6ef94c5135893ec56bd92ba08",
+              "crates/indexmap-2.14.2/LICENSE-MIT": "sha256:ecc269ef87fd38a1d98e30bfac9ba964a9dbd9315c3770fed98d4d7cb5882055",
+              "crates/indexmap-2.14.2/LICENSE-APACHE": "sha256:a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+              "crates/proc-macro2-1.0.107/LICENSE-MIT": "sha256:23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+              "crates/proc-macro2-1.0.107/LICENSE-APACHE": "sha256:62c7a1e35f56406896d7aa7ca52d0cc0d272ac022b5d2796e7d6905db8a3636a",
+              "crates/itoa-1.0.18/LICENSE-MIT": "sha256:23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+              "crates/itoa-1.0.18/LICENSE-APACHE": "sha256:62c7a1e35f56406896d7aa7ca52d0cc0d272ac022b5d2796e7d6905db8a3636a",
+              "crates/memchr-2.8.3/LICENSE-MIT": "sha256:0f96a83840e146e43c0ec96a22ec1f392e0680e6c1226e6f3ba87e0740af850f",
+              "crates/ascii-1.1.0/LICENSE-MIT": "sha256:7e4b8a17b118d3d7fd7a362a4b6563e0bd98b098a24c4c7f07dd22042091a847",
+              "crates/ascii-1.1.0/LICENSE-APACHE": "sha256:fabba0cb7d00a4b3211fdc13699223ab2d22f88678ccd608494cf2b332b903e9",
+              "crates/serde_json-1.0.151/LICENSE-MIT": "sha256:23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+              "crates/serde_json-1.0.151/LICENSE-APACHE": "sha256:62c7a1e35f56406896d7aa7ca52d0cc0d272ac022b5d2796e7d6905db8a3636a",
+              "crates/serde_derive-1.0.229/LICENSE-MIT": "sha256:23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+              "crates/serde_derive-1.0.229/LICENSE-APACHE": "sha256:62c7a1e35f56406896d7aa7ca52d0cc0d272ac022b5d2796e7d6905db8a3636a",
+              "crates/toml_parser-1.1.5+spec-1.1.0/LICENSE-MIT": "sha256:6efb0476a1cc085077ed49357026d8c173bf33017278ef440f222fb9cbcb66e6",
+              "crates/toml_parser-1.1.5+spec-1.1.0/LICENSE-APACHE": "sha256:249fdb6694467dd615b259f7ddde07be3f8ae5a72cecebb0e24f6629af4215fe",
+              "crates/httpdate-1.0.3/LICENSE-MIT": "sha256:934887691e05d69d7c86ad3f2c360980fa30c15b035e351f3c9865e99da4debc",
+              "crates/httpdate-1.0.3/LICENSE-APACHE": "sha256:4d10fe5f3aa176b05b229a248866bad70b834c173f1252a814ff4748d8a13837",
+              "crates/serde-1.0.229/LICENSE-MIT": "sha256:23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+              "crates/serde-1.0.229/LICENSE-APACHE": "sha256:62c7a1e35f56406896d7aa7ca52d0cc0d272ac022b5d2796e7d6905db8a3636a",
+              "crates/tiny_http-0.12.0/LICENSE-MIT": "sha256:e69bb98ae371fc43e5ef9cb1fc648762faf92edd93a8afd71411fac419b1b550",
+              "crates/tiny_http-0.12.0/LICENSE-APACHE": "sha256:a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+              "rust/licenses/Unicode-3.0.txt": "sha256:f5062c9a188d81dfe66b56db4182dcf9e4b17c0d9b0d311a8e20b3a1b075c443",
+              "rust/licenses/GCC-exception-3.1.txt": "sha256:a3966c9410ef94a1efbfa9ec04e9c1994026a70623fbf0885ce36737bfba3b54",
+              "rust/licenses/GPL-2.0-only.txt": "sha256:54b212ba1f97f6948fa5486239ab505dd820b02e50cbfd296b4062c8609a70af",
+              "rust/licenses/LLVM-exception.txt": "sha256:e34c58338bd89d43e709e226610d8f32b3e3c47f4ad9a99a8dc1d4ac7842488e",
+              "rust/licenses/NCSA.txt": "sha256:39cb0234065c92b9e6cee3830cbb52b1aa289aa8fe9ba2e66730fec5cf05c630",
+              "rust/licenses/CC-BY-SA-4.0.txt": "sha256:23ee78c8bae49cf08ea2f0c84945c66b987ebe4520881fb51b3dad4fb43d07c2",
+              "rust/licenses/BSD-2-Clause.txt": "sha256:f32fb3b417a194167cfad068223fc975ba96c5960513a10f66a3c28720aec1df",
+              "rust/licenses/MIT.txt": "sha256:b85dcd3e453d05982552c52b5fc9e0bdd6d23c6f8e844b984a88af32570b0cc0",
+              "rust/licenses/OFL-1.1.txt": "sha256:8eea8287e5876b539670cadb82e99f9a7afddec6f6730811be1daf25d2e9bcfd",
+              "rust/licenses/ISC.txt": "sha256:0ff61769b238634e042ab759dddfd104a8e69d091e3600ae3410e401a6164381",
+              "rust/licenses/GPL-3.0-or-later.txt": "sha256:05315fce6c35f79b8a35454828995fa26336f235895ac64557abc028f4ffcea2",
+              "rust/licenses/Apache-2.0.txt": "sha256:074e6e32c86a4c0ef8b3ed25b721ca23aca83df277cd88106ef7177c354615ff"
+            }
+          },
+          {
+            "control": "m6-real-next-linux-http",
+            "result": "passed",
+            "health": {
+              "status": "ok"
+            },
+            "malformed": {
+              "next": [
+                400,
+                {
+                  "error": "invalid-json"
+                }
+              ],
+              "service": [
+                400,
+                {
+                  "error": "invalid-request"
+                }
+              ]
+            },
+            "status": "passed",
+            "realNextRustRoundTrip": true,
+            "unicodeCodePointBoundary": true,
+            "malformedResponseRefused": true
+          },
+          {
+            "control": "m6-real-browser",
+            "status": "passed",
+            "engine": "chromium",
+            "version": "156.0.8078.4",
+            "actualFormInteraction": true,
+            "hydratedClientNextLinuxRoundTrip": true,
+            "preHydrationScriptDeliveryDelayMs": 250,
+            "observedCreateStatus": 201,
+            "delayedPageScripts": 1,
+            "literalPercentAndUnicodeIds": true,
+            "deliberateBackendFailure": true,
+            "dynamicPageNavigation": true,
+            "pageErrors": []
+          },
+          {
+            "control": "m6-stale-generated-client",
+            "result": "actual-HTTP-contract-refusal",
+            "typescriptCompilation": "passed"
+          },
+          {
+            "control": "m6-buildkit-alias-index",
+            "result": "actual-image-and-runtime-pass"
+          },
+          {
+            "control": "m6-buildkit-explicit-arg-json-copy",
+            "result": "actual-image-and-runtime-pass"
+          },
+          {
+            "control": "m6-buildkit-specific-ignore",
+            "result": "actual-specific-ignore-precedence-pass"
+          },
+          {
+            "control": "m6-buildkit-broken-copy",
+            "result": "actual-BuildKit-refusal"
+          },
+          {
+            "control": "m6-buildkit-ignored-config",
+            "result": "actual-BuildKit-refusal"
+          },
+          {
+            "control": "m6-buildkit-wrong-stage",
+            "result": "actual-BuildKit-refusal"
+          },
+          {
+            "control": "m6-wrong-binary",
+            "result": "actual-image-runtime-refusal",
+            "image": "sha256:6d18e630e626d765f30653494848e426fcb7da28db39894eae127daa2d80e0cd"
+          },
+          {
+            "control": "m6-missing-config",
+            "result": "actual-image-runtime-refusal",
+            "image": "sha256:65ee5a0133f600ea33ac577c176fea060662252647c8f0efa369ea4d999dbd96"
+          },
+          {
+            "control": "m6-missing-loader-library",
+            "result": "actual-image-runtime-refusal",
+            "image": "sha256:a8ccfdb564593758ad66626144e835cecb2426cf626d52e36d1c7dcd144bd33c"
+          },
+          {
+            "control": "m6-wrong-listener",
+            "result": "actual-image-runtime-refusal",
+            "image": "sha256:bee5ada3ba7d45609620711067a03ec26aaeb85433e832c46bc454b0a2134e84"
+          },
+          {
+            "control": "m6-wrong-architecture",
+            "result": "format-gate-and-actual-exec-format-refusal",
+            "observedMachine": 183,
+            "requiredMachine": 62,
+            "runtimeDiagnosticLogs": [
+              "m6-runtime-wrong-architecture-start.stderr.log",
+              "m6-runtime-wrong-architecture-logs.stdout.log",
+              "m6-runtime-wrong-architecture-logs.stderr.log"
+            ],
+            "runtimeDiagnosticDigest": "sha256:b3115f24e7d8267bf252e97746b5be28d2d515bfdb1c3aa833992149642c7bab"
+          },
+          {
+            "control": "m6-expose-is-not-listener",
+            "result": "advertised-port-closed-actual-listener-observed",
+            "advertised": 9090,
+            "actual": 8080
+          },
+          {
+            "control": "m6-missing-required-lanes",
+            "result": "unavailable-refuses-full-release",
+            "lanes": [
+              "docker",
+              "browser-module",
+              "browser-runtime",
+              "platform"
+            ]
+          },
+          {
+            "control": "m6-native-release-admission",
+            "result": "native-admission-and-offline-replay-passed",
+            "baseline": "sha256:946689f31cd8ccad70925a03362fca152dfe0f093bf19c28641933fe21c7b5ba",
+            "toolAuthenticationEstablished": false,
+            "offlineImageBytesReexecuted": false,
+            "negativeControls": [
+              {
+                "control": "uncompiled",
+                "result": "refused",
+                "code": "BUILD_OBSERVATION_BINDING_MISMATCH"
+              },
+              {
+                "control": "stale-config",
+                "result": "refused",
+                "code": "BUILD_OBSERVATION_BINDING_MISMATCH"
+              },
+              {
+                "control": "different-image",
+                "result": "refused",
+                "code": "BUILD_OBSERVATION_BINDING_MISMATCH"
+              },
+              {
+                "control": "unobserved-browser",
+                "result": "refused",
+                "code": "BUILD_OBSERVATION_BINDING_MISMATCH"
+              },
+              {
+                "control": "ambiguous-artifact",
+                "result": "refused",
+                "code": "BUILD_OBSERVATION_BINDING_MISMATCH"
+              }
+            ]
+          },
+          {
+            "control": "m6-native-evidence-refusals",
+            "result": "native-refusals",
+            "controls": [
+              {
+                "control": "uncompiled",
+                "result": "refused",
+                "code": "BUILD_OBSERVATION_BINDING_MISMATCH"
+              },
+              {
+                "control": "stale-config",
+                "result": "refused",
+                "code": "BUILD_OBSERVATION_BINDING_MISMATCH"
+              },
+              {
+                "control": "different-image",
+                "result": "refused",
+                "code": "BUILD_OBSERVATION_BINDING_MISMATCH"
+              },
+              {
+                "control": "unobserved-browser",
+                "result": "refused",
+                "code": "BUILD_OBSERVATION_BINDING_MISMATCH"
+              },
+              {
+                "control": "ambiguous-artifact",
+                "result": "refused",
+                "code": "BUILD_OBSERVATION_BINDING_MISMATCH"
+              }
+            ]
+          }
+        ],
+        "source": {
+          "status": "source-intent-graph-viable",
+          "requirements": [
+            {
+              "name": "catalog-page",
+              "matches": [
+                "urn:cross-stack-workspace:topology-page:urn%3Aexample%3Asource%3Anext%3A.%3Apage"
+              ]
+            },
+            {
+              "name": "item-page",
+              "matches": [
+                "urn:cross-stack-workspace:topology-page:urn%3Aexample%3Asource%3Anext%3Aitems%2F%5Bid%5D%3Apage"
+              ]
+            },
+            {
+              "name": "operation-next-route",
+              "matches": [
+                "urn:cross-stack-workspace:next-route:urn%3Aexample%3Asource%3Anext%3Aapi%2Fitems%3APOST"
+              ]
+            },
+            {
+              "name": "operation-next-handler",
+              "matches": [
+                "urn:cross-stack-workspace:next-handler:urn%3Aexample%3Asource%3Anext%3Aapi%2Fitems%3APOST"
+              ]
+            },
+            {
+              "name": "operation-next-endpoint",
+              "matches": [
+                "urn:cross-stack-workspace:next-endpoint:urn%3Aexample%3Asource%3Anext%3Aapi%2Fitems%3APOST"
+              ]
+            },
+            {
+              "name": "cargo-package",
+              "matches": [
+                "urn:patamaps:observed:cargo-package:sha256:3ab12f3fc610a1efed0abda58209fcbec3902dc010241a5a34fba8c5317c8435"
+              ]
+            },
+            {
+              "name": "cargo-target",
+              "matches": [
+                "urn:patamaps:observed:cargo-target:sha256:0e17085199230be61abb4b0918dc6121ad85263ab781b90db4c809a9b76abf3d"
+              ]
+            },
+            {
+              "name": "listener",
+              "matches": [
+                "urn:patamaps:observed:toml-key:sha256:8b7fd4c5ce017bb10ded78e65a63c6a7ef5155aabdb62292fa60caad0824cdd2"
+              ]
+            },
+            {
+              "name": "next-config",
+              "matches": [
+                "urn:patamaps:observed:input:sha256:c888ae9a10397cd966ead98a28a20c29d23ae1c79db9b0138d40059abdaddf17"
+              ]
+            },
+            {
+              "name": "builder",
+              "matches": [
+                "urn:patamaps:observed:docker-stage:sha256:aa7b352fb3e739fba62be174b5a7361713670939797830eada41a7b83d7a86b7"
+              ]
+            },
+            {
+              "name": "runtime",
+              "matches": [
+                "urn:patamaps:observed:docker-stage:sha256:295ea865fd059f7340e8ec9fba331a93bb2d86ddb728a1a3aa418feb1c5bee44"
+              ]
+            },
+            {
+              "name": "binary-copy",
+              "matches": [
+                "urn:patamaps:observed:docker-instruction:sha256:88a7d8ce3424243278705f23ee62d56ae85094d9778e7b358f918c47285da545"
+              ]
+            },
+            {
+              "name": "config-copy",
+              "matches": [
+                "urn:patamaps:observed:docker-instruction:sha256:6762ebaa038db0d6a2edd17cfc3d508e81ba54f9daa3059f4a564f5c63917397"
+              ]
+            },
+            {
+              "name": "build-recipe",
+              "matches": [
+                "urn:patamaps:observed:docker-instruction:sha256:053b5a291f61d32f43deafbe48da0963cf81db0a9ddb98497ac4c9fb59e596aa"
+              ]
+            }
+          ],
+          "baseline": "sha256:0f8c34bd58ba1de227cc22be14544909486cebec529746770bc4d4b284a15ce1",
+          "compilation": "not-established",
+          "image": "not-established",
+          "runtime": "not-established",
+          "fullReleaseAccepted": false,
+          "unsupported": [
+            "RUN effects require independent build evidence",
+            "one reviewed literal Next configuration only"
+          ],
+          "activation": "not-performed"
+        },
+        "release": {
+          "artifactDigest": "sha256:53cdba98ef1ac119207a422ef7af19b91d10d6930f75b4e78402141ec81a07b2",
+          "configurationDigest": "sha256:ec046d3e08183708c3aae0453ce0cb4febe7b875452d781ea867897b65bccd07",
+          "image": "sha256:d699b2a62d6903e8f11ce0ce84f7e49f5ea1f047e471bccbbd151b454a2a0619",
+          "platform": "linux/amd64",
+          "cargoTarget": "catalog-service",
+          "executable": {
+            "format": "ELF64",
+            "endianness": "little",
+            "type": 3,
+            "machine": 62
+          },
+          "http": true,
+          "browser": true
+        },
+        "metamapCompatibility": "pending-M7",
+        "installedConsumer": "pending-M7",
+        "fullReleaseAccepted": false,
+        "productionActivation": "not-performed",
+        "ownedObjects": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/installed-workflow/owned-docker-objects.json"
+      },
+      "engine": {
+        "compiler": "sha256:97c1a1fa1b1721e774bc7ac1bd456f9307835aeae40c25b620965316f8de1e03",
+        "documentType": "executor-description",
+        "governance": "sha256:5f0282418fabb491259c63d396880df37137d4812e5b25ac7b4eaf5c19458524",
+        "schemaVersion": "0.1.0",
+        "scientific": "sha256:4922a8e184b9a56f39f128577068e6c59295fcbdb5cce819e4b5946eea1499b1",
+        "workspace": "sha256:58d7706c0a7d701e8fab3d3152860bc3fc9d406b4e1b11bbb2ad82099647d42f"
+      },
+      "inventoryFilesVerified": 1016,
+      "configuredCompilerUnavailable": true,
+      "compilerRetainedAs": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-installed/consumer-native/patamaps-draft-97c1a1fa1b17/bin/patamaps.unavailable-after-generation",
+      "graphCompilersOnRequestPath": false,
+      "runtimeAfterRename": {
+        "mode": "native-host run of inspected image ELF",
+        "status": "passed",
+        "realNextRustRoundTrip": true,
+        "unicodeCodePointBoundary": true,
+        "malformedResponseRefused": true
+      },
+      "sourceInventoryUnchanged": true,
+      "activation": "not-performed",
+      "finishedUtc": "2026-10-21T16:34:09.959148+00:00"
+    },
+    "fullReleaseAccepted": false,
+    "productionActivation": "not-performed",
+    "deleted": []
+  },
+  "sourceUnchanged": true,
+  "finishedUtc": "2026-10-21T16:34:11.001567+00:00"
+}

@@ -1,0 +1,73 @@
+{
+  "status": "passed-scoped-real-router-transport",
+  "qualificationDate": "2026-10-17",
+  "recordedDate": "2026-10-18",
+  "scope": "Retained existing-project Axum router using in-process HTTP requests, controlled generation label, and unchanged retained scenarios.",
+  "testsPassed": 4,
+  "testsFailed": 0,
+  "testsIgnored": 0,
+  "otherLibraryTestsFilteredOut": 35,
+  "cargoElapsedSeconds": 129.468971481,
+  "testExecutionSecondsReported": 0.02,
+  "command": [
+    "cargo",
+    "test",
+    "--locked",
+    "--offline",
+    "--lib",
+    "patamaps_transport_qualification",
+    "--",
+    "--test-threads=1"
+  ],
+  "tests": [
+    {
+      "name": "canonical_unsigned_quantity_wire_boundaries_are_exact",
+      "result": "passed",
+      "checks": "Exact decimal-string round trips at zero, 2^53+1 and u64 maximum; reject overflow, noncanonical strings and bare numbers."
+    },
+    {
+      "name": "actual_router_rejects_json_mime_and_body_boundaries",
+      "result": "passed",
+      "checks": "Actual evaluate/replay/logistics routers reject malformed JSON with400, wrong MIME415, missing typed fields422 and oversized body413, with typed JSON errors."
+    },
+    {
+      "name": "actual_evaluate_and_replay_transport_preserve_typed_report",
+      "result": "passed",
+      "checks": "Actual evaluation report survives typed replay exactly; stale generation refuses400."
+    },
+    {
+      "name": "actual_logistics_transport_preserves_frozen_metrics_and_native_limits",
+      "result": "passed",
+      "checks": "Existing frozen hand-ledger expectations6/12 remain exact strings; quantity overflow422 and excessive work413."
+    }
+  ],
+  "witnessSha256": "d27e6d110f0f49177bc748a0c64fa57b3ad95c0a57334cdbb7f18de19fa8c6a8",
+  "apiSourceSha256": "c068e6047c3d1aeb954cba4729c7708098870187beb2ab6392244e1bd7a0a1af",
+  "existingNativeEvidence": {
+    "passingTestNamesVerified": 98,
+    "inputDigestsVerified": 41,
+    "exitCode": 0,
+    "existingTestsRerun": false
+  },
+  "selectedSourceEvidencePolicyAndScenarioDigestsChecked": 49,
+  "sourceAndEvidenceUnchanged": true,
+  "expectedFourNamedTestsObserved": true,
+  "supervisedExitCode": 0,
+  "filesDeleted": 0,
+  "preflightCorrection": {
+    "failedAttemptPreserved": true,
+    "change": "Read existing testsPassed array as98 unique nonempty names rather than expecting a numeric count. Evidence and source bytes unchanged.",
+    "transportTestsStartedDuringFailedPreflight": false
+  },
+  "evidenceLocation": "Private retained Intel qualification receipt, witness and Cargo logs; verified before connectivity was lost.",
+  "publicationMethod": "GitHub API after Intel SSH and mounted share became unavailable; no local build or test was substituted.",
+  "limitations": [
+    "In-process router checks do not prove TCP listener, Next proxy, generated client, browser or deployment behavior.",
+    "Controlled test-generation label does not establish managed manifest admission or operational acceptance.",
+    "Four new tests ran; the prior98-test receipt was verified against retained input digests, not rerun.",
+    "Frozen synthetic model references are not empirical validation.",
+    "This advances G2/G6 and does not complete the general-project-adoption goal."
+  ],
+  "applicationAcceptance": false,
+  "activation": "not performed"
+}

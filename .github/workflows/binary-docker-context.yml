@@ -1,0 +1,35 @@
+name: Native binary Docker context qualification
+on:
+  workflow_call:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  binary-context:
+    name: Current native Docker snapshot contract and real Rust image
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - name: Install pinned Rust toolchain
+        run: rustup toolchain install 1.99.0 --profile minimal --component rustfmt --component clippy
+      - name: Verify current Rust code and actual opaque context image
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: >-
+          python3 -B scripts/qualify_binary_docker_context.py
+          --build-cli --cli target/debug/patamaps
+          --work "$RUNNER_TEMP/patamaps-binary-docker-${{ github.run_id }}-${{ github.run_attempt }}"
+          --evidence ci-evidence/binary-docker-context
+      - name: Confirm owned containers stopped
+        if: always()
+        run: python3 -B scripts/deployment_miniserve_image.py --stop-owned ci-evidence/binary-docker-context/owned.json
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        if: always()
+        with:
+          name: binary-docker-context-${{ github.sha }}
+          path: ci-evidence/binary-docker-context/
+          if-no-files-found: error
+          retention-days: 14

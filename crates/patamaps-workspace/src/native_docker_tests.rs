@@ -6,6 +6,7 @@ fn config(paths: Vec<String>) -> DockerConfig {
         dockerfile: "deploy/Dockerfile".into(),
         context: ".".into(),
         context_files: paths,
+        context_snapshot: None,
         complete_context_snapshot: true,
         target: "runtime".into(),
         platform: "linux/amd64".into(),

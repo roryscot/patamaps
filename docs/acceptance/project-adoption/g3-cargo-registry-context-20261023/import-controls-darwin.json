@@ -1,0 +1,33 @@
+{
+  "status": "passed-explicit-registry-import-controls",
+  "platform": "Darwin x86_64",
+  "tests": 14,
+  "command": [
+    "python3.13",
+    "-B",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "scripts",
+    "-p",
+    "test_exact_archive_install.py"
+  ],
+  "summary": "..............\n----------------------------------------------------------------------\nRan 14 tests in 0.019s\n\nOK\n",
+  "runtimeDefault": {
+    "root": "selected-state",
+    "maximumMembers": 2000,
+    "maximumBytes": 64000000
+  },
+  "explicitRegistry": {
+    "root": "registry-state",
+    "maximumMembers": 10000,
+    "maximumBytes": 335544320
+  },
+  "originalRuntimeBoundsUnchanged": true,
+  "realInstalledRegistryReplayRun": false,
+  "sourceDigests": {
+    "qualify_installed_miniserve.py": "sha256:42e9de0f6eba5597605f92407f87b272ba98e56a5838978b1e8d204cf67b5d76",
+    "test_exact_archive_install.py": "sha256:9a2c8bd001d23dd436b9de14bdce32028bbcb3486441569cab00f2fe4837c7ac"
+  }
+}

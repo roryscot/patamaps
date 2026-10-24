@@ -1,0 +1,115 @@
+{
+  "status": "passed-scoped-elf-target-preflight",
+  "recordedAt": "2026-10-22T20:16:48.188Z",
+  "sourceParent": "ca38f364db09f05a5dab7e5cf8fea12f1270e921",
+  "sourceDigests": {
+    "crates/patamaps-workspace/src/elf_target.rs": "sha256:72c1193bb9399f477ba823c0c006aa2bd1b8bd9833b37e8222524bc875703fb3",
+    "crates/patamaps-workspace/src/lib.rs": "sha256:e25e5a7495145084ca449f9672807ee613faf42f7b9a3055aabaf218a7ad5020",
+    "crates/patamaps-cli/src/main.rs": "sha256:f49e80239f4ccd91ca61411778c6ac6080860535eb9aa9b8d38ecca3f0ceba8f"
+  },
+  "cliDigest": "sha256:b89a30c8742671057bf53891f0809b0f880fb13f08ad6a5cb24404e5eb9a1c02",
+  "toolchain": "patamaps-projects-intel-1.99.0",
+  "workspaceTests": {
+    "command": "cargo test --locked -p patamaps-workspace --lib",
+    "passed": 50,
+    "failed": 0,
+    "newElfTests": 5
+  },
+  "cliBuild": {
+    "command": "cargo build --locked -p patamaps-cli --bin patamaps",
+    "exitCode": 0
+  },
+  "artifactChecks": [
+    {
+      "label": "x64-matching",
+      "exitCode": 0
+    },
+    {
+      "label": "x64-wrong-target",
+      "exitCode": 2
+    },
+    {
+      "label": "arm64-matching",
+      "exitCode": 0
+    },
+    {
+      "label": "arm64-wrong-target",
+      "exitCode": 2
+    },
+    {
+      "label": "digest-mismatch",
+      "exitCode": 2
+    },
+    {
+      "label": "unsupported-target",
+      "exitCode": 2
+    },
+    {
+      "label": "malformed-header",
+      "exitCode": 2
+    },
+    {
+      "label": "symlink-refusal",
+      "exitCode": 2
+    },
+    {
+      "label": "fifo-refusal",
+      "exitCode": 2
+    },
+    {
+      "label": "oversize-refusal",
+      "exitCode": 2
+    },
+    {
+      "label": "directory-refusal",
+      "exitCode": 2
+    }
+  ],
+  "artifacts": [
+    {
+      "name": "Node 24.11.1 linux-x64",
+      "digest": "sha256:5796fd9700e83170bc7ddfdf7f18858c794a9f91cb39dd6f9e95060b292f2563",
+      "bytes": 121116896,
+      "previousVerifiedRuntime": true
+    },
+    {
+      "name": "Node 24.11.1 linux-arm64",
+      "digest": "sha256:9189756f81aa0d5c706826f2a7763227a5abba0b5ca8c770096a25f35cf10e55",
+      "bytes": 118343776,
+      "archiveDigest": "sha256:6b0863fb9f627bf4a6c5948dce1de4398174a2e05dbe717503d828e211ca01f0",
+      "source": "https://nodejs.org/dist/v24.11.1/node-v24.11.1-linux-arm64.tar.xz",
+      "runtimeExecuted": false
+    }
+  ],
+  "supervision": {
+    "reservation": "4adcda94-6304-4f71-bb76-02267d310d17",
+    "mode": "native-exclusive",
+    "parallelActivated": false,
+    "maximumGrowthBytes": 1073741824,
+    "completed": true,
+    "exitCode": 0,
+    "reservationFinished": true,
+    "leaseReleaseCompleted": true,
+    "filesDeleted": 0,
+    "retainedAllocatedBytesAtStart": 98299420672,
+    "freeBytesAtStart": 47333740544,
+    "freeBytesAtEnd": 46371717120,
+    "aggregateDiskDifferenceIsNotExactWriteAttribution": true
+  },
+  "scope": {
+    "headerAndDigestChecks": true,
+    "artifactExecutionPerformed": false,
+    "runtimeCompatibilityEstablished": false,
+    "linuxOsEstablishedByHeader": false,
+    "arm64ExecutionPerformed": false,
+    "wrongArchitectureRuntimeGateClosed": false,
+    "staleGeneratedContractGateClosed": false,
+    "automaticLaunchEnforcement": false,
+    "installedPackageAcceptance": false
+  },
+  "recovery": "No deletion. Official ARM archive, extracted binary, refusal fixtures, logs and receipts remain on Intel. No independent backup of ignored data was established.",
+  "primarySpecifications": [
+    "https://gabi.xinuos.com/elf/02-eheader.html",
+    "https://gabi.xinuos.com/elf/a-emachine.html"
+  ]
+}

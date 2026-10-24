@@ -1,0 +1,51 @@
+{
+  "status": "passed-focused-installed-next-preflight",
+  "testsPassed": 39,
+  "sourceIntegrityControls": 10,
+  "privateOutputControls": 3,
+  "archiveControls": 14,
+  "rewriteControls": 8,
+  "sourceAcquisitionControls": 4,
+  "commands": [
+    [
+      "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/intel-python-3.13.16-20261013/runtime/python/bin/python3",
+      "-B",
+      "-m",
+      "unittest",
+      "test_installed_source_identity",
+      "test_next_output_inventory",
+      "test_exact_archive_install",
+      "test_chatbot_rewrite_profile",
+      "test_next_source_acquisition"
+    ],
+    [
+      "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/intel-python-3.13.16-20261013/runtime/python/bin/python3",
+      "-B",
+      "scripts/package.py",
+      "--binary",
+      "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/installed-next-final-preflight-unxt_7o8/unexecuted-placeholder",
+      "--output",
+      "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/installed-next-final-preflight-unxt_7o8/scope",
+      "--check-scope"
+    ]
+  ],
+  "retainedControls": "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/installed-next-final-preflight-unxt_7o8",
+  "sourceScope": {
+    "status": "validated-source-package-scope",
+    "sourceFiles": 1162,
+    "sourceBytesIncludingInventory": 76535103,
+    "linkedEvidence": {
+      "policy": "markdown-reference-closure",
+      "files": 280,
+      "bytes": 26143382,
+      "maximumBytes": 33554432,
+      "maximumFiles": 512
+    },
+    "archivesCreated": false,
+    "binaryExecuted": false
+  },
+  "actualInstalledNextAccepted": false,
+  "fullRetainedNextBundleAccepted": false,
+  "filesDeleted": 0,
+  "sourceScopeNote": "Working-tree scope preflight before its own receipt/backlog links and final target-path wiring; actual packaging enforces current scope again."
+}

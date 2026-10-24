@@ -1,0 +1,163 @@
+{
+  "status": "passed-actual-cargo-linux-mutation-and-replay-scope",
+  "commands": [
+    {
+      "label": "resolved-linux-digest",
+      "exitCode": 0,
+      "seconds": 0.014
+    },
+    {
+      "label": "resolved-linux",
+      "exitCode": 0,
+      "seconds": 1.206
+    },
+    {
+      "label": "captured-manifest-mutation-digest",
+      "exitCode": 0,
+      "seconds": 0.012
+    },
+    {
+      "label": "captured-manifest-mutation",
+      "exitCode": 2,
+      "seconds": 0.019
+    },
+    {
+      "label": "post-metadata-member-change-digest",
+      "exitCode": 0,
+      "seconds": 0.012
+    },
+    {
+      "label": "post-metadata-member-change",
+      "exitCode": 2,
+      "seconds": 0.978
+    },
+    {
+      "label": "actual-workspace-baseline",
+      "exitCode": 0,
+      "seconds": 1.462
+    },
+    {
+      "label": "baseline-before",
+      "exitCode": 0,
+      "seconds": 0.261
+    },
+    {
+      "label": "baseline-without-configured-source-tools",
+      "exitCode": 0,
+      "seconds": 0.253
+    },
+    {
+      "label": "rehash-forged-baseline",
+      "exitCode": 0,
+      "seconds": 0.059
+    },
+    {
+      "label": "rehashed-lineage-refusal",
+      "exitCode": 2,
+      "seconds": 0.267
+    }
+  ],
+  "controls": [
+    {
+      "control": "resolved-linux",
+      "result": "observed",
+      "platform": "x86_64-unknown-linux-gnu",
+      "view": "resolved",
+      "metadataDigest": "sha256:78305e4138e0d7eee67314c6734338e3821f277574d28e8735d11ee73aa32c7e",
+      "packageNames": [
+        "axum",
+        "axum-core",
+        "axum-extra",
+        "axum-macros"
+      ]
+    },
+    {
+      "control": "captured-manifest-mutation",
+      "result": "refused",
+      "code": "NATIVE_SOURCE_CHANGED"
+    },
+    {
+      "control": "post-metadata-member-change",
+      "result": "refused",
+      "code": "NATIVE_CARGO_MEMBERS_CHANGED"
+    },
+    {
+      "control": "actual-cargo-workspace-baseline",
+      "result": "captured",
+      "cacheHits": 0,
+      "policy": "observation-only; empty mappings/constraints; no semantic acceptance inferred"
+    },
+    {
+      "control": "configured-source-provider-cargo-rustc-unavailable-replay",
+      "result": "verified",
+      "sourceRediscovery": "not-performed",
+      "pathsRestored": true,
+      "allHostAccessDenied": false
+    },
+    {
+      "control": "rehashed-native-lineage",
+      "result": "refused",
+      "code": "WORKSPACE_COMPOSITION_BINDING"
+    }
+  ],
+  "filesDeleted": 0,
+  "applicationAcceptance": false,
+  "compilationEstablished": false,
+  "providerBinaryDigest": "sha256:c202611fd5e3a2214adf50fe73d0180dcda6039a1ebc996b09f899902b5e7011",
+  "packageInventory": {
+    "entries": 4,
+    "digest": "sha256:125378a5ff5cd343e3e082a035f9c24f45c74fb7974f98b0a8930eb17d3d88cb",
+    "source": "checked actual cargo-package entities; zero relation slots"
+  },
+  "sourceCommit": "fc78d5bcdb276bd6fb53cf2db55e91757eabb469",
+  "sourceInputs": {
+    "Cargo.toml": "sha256:9f3db2a3fa254788aa0ea9f11fc18c83375120cb6dbe0dda2e34be6ac1d19e54",
+    "Cargo.lock": "sha256:76041942436b615d49df0eb672f1400a3b38f1484a22d0faf7b48cc5f8ea6184",
+    "axum/Cargo.toml": "sha256:7b653f34222b75257eb35b7edafb14308547fe79ac568527346c4b22cd2b83c2",
+    "axum-core/Cargo.toml": "sha256:db2fe074edf3fb2ea3a3d9a86551ab2b9deeff7c37ea83122045a81c419fd28f",
+    "axum-extra/Cargo.toml": "sha256:ddec00d887240b57bef312d94cdb64718ee15383f29fc4245da9c64f962f62a2",
+    "axum-macros/Cargo.toml": "sha256:bb17769cd54f0183ab72a4c185083c7ecdabb7b84a74d82909f9034a3b254f3d"
+  },
+  "originalSourceUnchanged": true,
+  "baselineDigest": "sha256:b2b4a1a8403633632189c0e714b8b1b12a4bc71b2138de619d54c72f71bc46c3",
+  "policyDigest": "sha256:e8b5859d6db996d5b728d73baf04df07a216494e92aefea09acb7cf113fe574a",
+  "workspaceConfigDigest": "sha256:9f4495c6f79dabd0836cd8b8b6168620e29f1b84e5e39406741ae925bf94a73f",
+  "configuredToolPathsUnavailableDuringReplay": true,
+  "limitations": [
+    "Observation-only policy does not establish business/domain viability or operational admission.",
+    "Resolved Linux metadata is not Linux target compilation or runtime.",
+    "Configured paths unavailable and external PATH empty; OS denial of all original host source/tools not exercised.",
+    "Mutated/racing copies and all outputs retained; no original upstream source files changed."
+  ],
+  "qualificationDate": "2026-10-19",
+  "scope": "Current installed native CLI observes actual pinned Axum Linux resolution, refuses captured-file/member races, emits a factual four-package inventory and verifies retained workspace record bindings without configured source/tools.",
+  "sourceOrigin": "https://github.com/tokio-rs/axum.git",
+  "privateReceiptDigest": "sha256:1d6fe1e8fc10af9adc0b546693dc70c14350e99d2c7a8d5f7a6a89790905f7ad",
+  "qualificationDriverDigest": "sha256:c01377932467bd4d9727d418d445896ac82f7b04e2c4f43203bd424ee1540968",
+  "supervisor": {
+    "completed": true,
+    "exitCode": 0,
+    "startedAt": "2026-10-19T16:32:08.076Z",
+    "finishedAt": "2026-10-19T16:34:44.847Z",
+    "filesDeleted": 0
+  },
+  "selectedSourcePreservation": "Six manifest/lock hashes and original Git status unchanged; mutation cases used separate retained copies.",
+  "priorAttempt": {
+    "status": "failed",
+    "path": "axum-linux-replay-20261019",
+    "cause": "Qualification workspace omitted the required projection; Linux and mutation controls passed before baseline validation refused. No product validator relaxed.",
+    "failedEvidencePreserved": true
+  },
+  "actualWorkspace": {
+    "sources": 1,
+    "unrelatedFixtureShards": 0,
+    "policyConstraints": 0,
+    "policyMappings": 0,
+    "projection": "Actual cargo-package entities with zero relation slots; structural observation-only viability, not domain/application acceptance."
+  },
+  "artifact": {
+    "path": "package-inventory.json",
+    "digest": "sha256:125378a5ff5cd343e3e082a035f9c24f45c74fb7974f98b0a8930eb17d3d88cb",
+    "entries": 4
+  }
+}

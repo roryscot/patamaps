@@ -1,0 +1,106 @@
+{
+  "status": "failed-before-source-capture",
+  "run": 39880581447,
+  "sourceRevision": "3a043e7c20a5ffce291904a0300212a14a7106c1",
+  "error": "AssertionError: Review forbidden source input",
+  "artifact": {
+    "id": 12471085385,
+    "sha256": "93779c53d4e42fa5463ffad8a25bdc002770df614a69ccdff4de7e87aef1c02a",
+    "bytes": 6905,
+    "digestVerified": true
+  },
+  "completedCommands": [
+    {
+      "label": "build-native-compiler",
+      "argv": [
+        "cargo",
+        "+1.99.0",
+        "build",
+        "--locked",
+        "--release",
+        "-p",
+        "patamaps-cli",
+        "--bin",
+        "patamaps"
+      ],
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "elapsedMs": 218585
+    },
+    {
+      "label": "relocated-engine",
+      "argv": [
+        "/home/runner/work/_temp/patamaps-miniserve-39880581447-1/relocated-native/bin/patamaps",
+        "engine"
+      ],
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "elapsedMs": 501
+    },
+    {
+      "label": "source-init",
+      "argv": [
+        "git",
+        "init",
+        "/home/runner/work/_temp/patamaps-miniserve-39880581447-1/upstream"
+      ],
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "elapsedMs": 503
+    },
+    {
+      "label": "source-fetch",
+      "argv": [
+        "git",
+        "fetch",
+        "--depth=1",
+        "https://github.com/svenstaro/miniserve.git",
+        "2cd9c495ef25f2fcef505615f603e9de8f981915"
+      ],
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "elapsedMs": 501
+    },
+    {
+      "label": "source-checkout",
+      "argv": [
+        "git",
+        "checkout",
+        "--detach",
+        "FETCH_HEAD"
+      ],
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "elapsedMs": 501
+    },
+    {
+      "label": "source-head",
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "elapsedMs": 501
+    },
+    {
+      "label": "source-members",
+      "argv": [
+        "git",
+        "ls-files",
+        "-z"
+      ],
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "elapsedMs": 501
+    }
+  ],
+  "applicationSourceBuild": false,
+  "applicationRuntime": false,
+  "qualificationFailure": true,
+  "productDefectEstablished": false,
+  "repair": "Keep exact reviewed public test data outside all captures; run full default owner tests in their pinned public clone, verify fixture Git identities, and reject unknown/changed fixtures or new secret paths.",
+  "dependencyClosureAccepted": false,
+  "privateKeyContentsInPublicRecord": false
+}

@@ -4,6 +4,7 @@ import argparse
 import hashlib
 import json
 import os
+import re
 from pathlib import Path
 import signal
 import subprocess
@@ -46,7 +47,7 @@ def stop(child, grace=10):
     child.wait()
 
 
-def guard(argv):
+def guard(argv, cleanup=None):
     """Watch the actual spawning parent, including after its SIGKILL.
 
     Used around the policy runner and inside it around the native CLI. The
@@ -79,7 +80,46 @@ def guard(argv):
                 return code if code >= 0 else 128 - code
             time.sleep(.05)
     finally:
-        stop(child)
+        # Docker workloads outlive their attach CLI. Stop the owned container
+        # before group cleanup can terminate the guardian or attach process.
+        try:
+            if cleanup is not None:
+                cleanup()
+        finally:
+            stop(child)
+
+
+def container_guard(path):
+    """Internal opt-in managed-container attachment; never remove owned objects."""
+    from deployment_miniserve_image import stop_owned
+    path = Path(path).absolute()
+    if path.is_symlink() or not path.is_file():
+        raise ValueError("CONTAINER_OWNERSHIP_FILE")
+    frozen = path.read_bytes()
+    owned = json.loads(frozen)
+    token = owned.get("token")
+    items = owned.get("containers")
+    if not isinstance(token, str) or not re.fullmatch("[0-9a-f]{32}", token):
+        raise ValueError("CONTAINER_OWNERSHIP_TOKEN")
+    if not isinstance(items, list) or len(items) != 1:
+        raise ValueError("CONTAINER_OWNERSHIP_SINGLE_ID")
+    identity = items[0].get("id")
+    if not isinstance(identity, str) or not re.fullmatch("[0-9a-f]{64}", identity):
+        raise ValueError("CONTAINER_OWNERSHIP_ID")
+    info = json.loads(subprocess.check_output(["docker", "inspect", identity], timeout=15))[0]
+    if info["Config"].get("Labels", {}).get("org.patamaps.qualification-owner") != token:
+        raise ValueError("CONTAINER_OWNERSHIP_LABEL")
+    state = info["State"]
+    if state["Running"] or state["Status"] != "created" or not state["StartedAt"].startswith("0001-"):
+        raise ValueError("CONTAINER_ALREADY_STARTED")
+
+    def cleanup():
+        if path.is_symlink() or path.read_bytes() != frozen:
+            raise ValueError("CONTAINER_OWNERSHIP_CHANGED")
+        # Rechecks the immutable ID and live Docker owner label before stopping.
+        stop_owned(path)
+
+    return guard(["docker", "start", "--attach", identity], cleanup=cleanup)
 
 
 def arguments():
@@ -89,8 +129,11 @@ def arguments():
     parser.add_argument("--state", type=Path, required=True)
     parser.add_argument("--compiler", type=Path, required=True)
     parser.add_argument("--context", type=Path, help="Explicit sealed context binding for each native update")
+    parser.add_argument("--preparation", type=Path, help="Explicit owner preparation contract for each update")
     parser.add_argument("--poll-ms", type=int, default=1000)
     parser.add_argument("--debounce-ms", type=int, default=300)
+    parser.add_argument("--inspection-timeout-ms", type=int, default=30000,
+                        help="Per native input/selection inspection budget (1000..3600000; default 30000)")
     parser.add_argument("--runner", nargs=argparse.REMAINDER,
                         help="Explicit policy command prefix; place last, including its -- separator")
     argv = sys.argv[1:]
@@ -104,10 +147,14 @@ def arguments():
     args.runner = runner
     if not 50 <= args.poll_ms <= 60000 or not 0 <= args.debounce_ms <= 60000:
         parser.error("poll-ms must be 50..60000 and debounce-ms 0..60000")
+    if not 1000 <= args.inspection_timeout_ms <= 3600000:
+        parser.error("inspection-timeout-ms must be 1000..3600000")
     for name in ("plan", "source", "state", "compiler"):
         setattr(args, name, getattr(args, name).absolute())
     if args.context is not None:
         args.context = args.context.absolute()
+    if args.preparation is not None:
+        args.preparation = args.preparation.absolute()
     if not args.runner:
         node, supervisor = os.environ.get("PATAMAPS_DEV_NODE"), os.environ.get("PATAMAPS_DEV_SUPERVISOR")
         if node and supervisor:
@@ -126,9 +173,11 @@ def observe(args):
     argv = [str(args.compiler), "project-build-input-key", str(args.plan), "--source", str(args.source)]
     if args.context is not None:
         argv.extend(["--context", str(args.context)])
+    if args.preparation is not None:
+        argv.extend(["--preparation", str(args.preparation)])
     result = subprocess.run(
         argv,
-        stdout=subprocess.PIPE, stderr=subprocess.PIPE, timeout=30, check=False)
+        stdout=subprocess.PIPE, stderr=subprocess.PIPE, timeout=args.inspection_timeout_ms / 1000, check=False)
     if len(result.stdout) > 1048576 or len(result.stderr) > 65536:
         raise ValueError("BUILD_INPUT_OBSERVATION_OUTPUT_LIMIT")
     if result.returncode:
@@ -145,7 +194,7 @@ def observe(args):
 def verified_selection(args):
     result = subprocess.run(
         [str(args.compiler), "project-build-verify", str(args.state)],
-        stdout=subprocess.PIPE, stderr=subprocess.PIPE, timeout=30, check=False)
+        stdout=subprocess.PIPE, stderr=subprocess.PIPE, timeout=args.inspection_timeout_ms / 1000, check=False)
     if result.returncode or len(result.stdout) > 1048576 or len(result.stderr) > 65536:
         raise ValueError("WATCH_SELECTED_BINDINGS_REFUSED")
     value = json.loads(result.stdout)
@@ -208,6 +257,8 @@ def main():
                           "--source", str(args.source), "--state", str(args.state)]
                 if args.context is not None:
                     native.extend(["--context", str(args.context)])
+                if args.preparation is not None:
+                    native.extend(["--preparation", str(args.preparation)])
                 inner = [sys.executable, str(script), "__guard", *native]
                 argv = [sys.executable, str(script), "__guard", *args.runner, *inner]
                 event("starting-project-build-update", inputKey=key)
@@ -249,6 +300,10 @@ if __name__ == "__main__":
             raise SystemExit(2)
         raise SystemExit(guard(sys.argv[2:]))
     try:
+        if len(sys.argv) > 1 and sys.argv[1] == "__guard-container":
+            if len(sys.argv) != 3:
+                raise SystemExit(2)
+            raise SystemExit(container_guard(sys.argv[2]))
         main()
     except KeyboardInterrupt:
         event("cancelled-project-watch")

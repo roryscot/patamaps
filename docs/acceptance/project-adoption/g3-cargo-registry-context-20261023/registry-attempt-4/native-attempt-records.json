@@ -1,0 +1,143 @@
+{
+  "1792797741138119060-2523": {
+    "build-000.started.json": {
+      "commandDigest": "sha256:180636012f132aae3b492afecf7081f62b50ccd01f6d34c0c8e68262428452b9"
+    },
+    "failure.json": {
+      "previousSelectionPreserved": true,
+      "published": false,
+      "reason": "PROJECT_BUILD_COMMAND: Retained project build refused",
+      "status": "refused"
+    },
+    "build-000.json": {
+      "activation": "not-performed",
+      "ambientEnvironment": "not-inherited",
+      "authorizationNow": "not-evaluated",
+      "captureDigest": "sha256:4e7c2d2b78fd0abbb162e8e564fa98a07a1f9a547e44fba69479480f4fd56ebb",
+      "commandDigest": "sha256:180636012f132aae3b492afecf7081f62b50ccd01f6d34c0c8e68262428452b9",
+      "completeBuildContextEstablished": false,
+      "completeExecutableDependencyClosureEstablished": false,
+      "elapsedMs": 138234,
+      "environmentReferences": {
+        "PATH": "path"
+      },
+      "environmentResolution": "captured-nonsecretConfiguration-only",
+      "executable": "/usr/bin/python3",
+      "executableDigestAfter": "sha256:e50d468e8b0adfb05733f5b87b3cff34829c4a8c1aea50c865aa8bdfe4bb150f",
+      "executableDigestBefore": "sha256:e50d468e8b0adfb05733f5b87b3cff34829c4a8c1aea50c865aa8bdfe4bb150f",
+      "executableUnchanged": true,
+      "exitCode": 1,
+      "exitSignal": null,
+      "parentDeathCleanup": "private-supervisor-configured",
+      "profile": "patamaps-project-command-1",
+      "programSucceeded": false,
+      "resolvedExecutable": "/usr/bin/python3.12",
+      "selectedInputsUnchanged": true,
+      "selectionPublication": "not-performed",
+      "status": "refused-project-command",
+      "stderr": {
+        "byteLength": 1210,
+        "digest": "sha256:85280ca293cc8c007a5b68b15a538fb45025aa365861bf6b9bf98d3001d1a8d2",
+        "hex": null,
+        "text": "Traceback (most recent call last):\n  File \"/home/runner/work/_temp/patamaps-miniserve-40039233532-1/registry-build/state/attempts/1792797741138119060-2523/candidate/cargo_registry_container.py\", line 235, in <module>\n    main()\n  File \"/home/runner/work/_temp/patamaps-miniserve-40039233532-1/registry-build/state/attempts/1792797741138119060-2523/candidate/cargo_registry_container.py\", line 169, in main\n    copy_file('/work/export/miniserve', bundle/'miniserve', MAXIMUM_BINARY)\n  File \"/home/runner/work/_temp/patamaps-miniserve-40039233532-1/registry-build/state/attempts/1792797741138119060-2523/candidate/cargo_registry_container.py\", line 84, in copy_file\n    with tarfile.open(fileobj=process.stdout, mode='r|') as archive:\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.12/tarfile.py\", line 1916, in open\n    t = cls(name, filemode, stream, **kwargs)\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.12/tarfile.py\", line 1792, in __init__\n    self.firstmember = self.next()\n                       ^^^^^^^^^^^\n  File \"/usr/lib/python3.12/tarfile.py\", line 2784, in next\n    raise ReadError(\"empty file\") from None\ntarfile.ReadError: empty file\n"
+      },
+      "stdout": {
+        "byteLength": 0,
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "hex": null,
+        "text": ""
+      },
+      "workingDirectory": "."
+    },
+    "registry-execution.json": {
+      "status": "failed",
+      "image": "busybox@sha256:dc88b80842580654294472735332ec7c7789a4010ec9a68b69f9b88c19abede6",
+      "originalConfiguredCacheMounted": false,
+      "cargoHome": "/work/cargo-home",
+      "workFilesystemBytes": 3221225472,
+      "cpuAllowance": 2,
+      "memoryAllowance": 6442450944,
+      "memorySwapAllowance": 0,
+      "pidsAllowance": 512,
+      "toolchainClosed": false,
+      "ownerTestFixturesClosed": false,
+      "filesDeleted": 0,
+      "capacityObservation": {
+        "uid": 1001,
+        "cpuCount": 4,
+        "availableMemoryBytes": 15270862848,
+        "requiredMemoryBytes": 6942450944
+      },
+      "executorIdentities": {
+        "/home/runner/.rustup/toolchains/1.99.0-x86_64-unknown-linux-gnu/bin/cargo": "sha256:e951141cc55a6cd7b9876d187bd30a3720e6086b99413af95e3b8de1cdd72f14",
+        "/home/runner/.rustup/toolchains/1.99.0-x86_64-unknown-linux-gnu/bin/rustc": "sha256:f3834d26669b03f6855fa54bd2381443123e860167bc0c7a8dd137e5cf6e5e4f",
+        "/usr/bin/docker": "sha256:6435ff9214bf8e0931078fb0980809728cac0a54a526d4f28a26d3e48132b58d"
+      },
+      "containerId": "dfdaa133c17e275122f7ed9f63761c696b27239ca930fdf6ef71d2771dcddfbf",
+      "imageId": "sha256:4b3c3c5fa628f793b84f999b8be30200339beb0a017e8546983af9766480029a",
+      "readOnlyMounts": [
+        {
+          "source": "/home/runner/work/_temp/patamaps-miniserve-40039233532-1/registry-build/state/attempts/1792797741138119060-2523/candidate",
+          "destination": "/source"
+        },
+        {
+          "source": "/home/runner/work/_temp/patamaps-miniserve-40039233532-1/registry-build/state/attempts/1792797741138119060-2523/candidate/.cargo-home/registry",
+          "destination": "/registry"
+        },
+        {
+          "source": "/home/runner/work/_temp/patamaps-miniserve-40039233532-1/upstream",
+          "destination": "/test-source"
+        },
+        {
+          "source": "/home/runner/.rustup/toolchains/1.99.0-x86_64-unknown-linux-gnu",
+          "destination": "/home/runner/.rustup/toolchains/1.99.0-x86_64-unknown-linux-gnu"
+        },
+        {
+          "source": "/usr",
+          "destination": "/usr"
+        },
+        {
+          "source": "/usr/bin",
+          "destination": "/bin"
+        },
+        {
+          "source": "/usr/lib",
+          "destination": "/lib"
+        },
+        {
+          "source": "/usr/lib64",
+          "destination": "/lib64"
+        },
+        {
+          "source": "/etc/alternatives",
+          "destination": "/etc/alternatives"
+        }
+      ],
+      "hostConfigurationVerifiedBeforeStart": true,
+      "hostUser": "1001:1001",
+      "errorClass": "ReadError",
+      "error": "empty file",
+      "failureContainerState": {
+        "Status": "running",
+        "Running": true,
+        "Pid": 2630,
+        "ExitCode": 0,
+        "Error": "",
+        "OOMKilled": false
+      },
+      "startupDiagnostics": {
+        "exitCode": 0,
+        "stdout": "",
+        "stderr": "REGISTRY_STARTUP_FAILED_LINE=23\n"
+      },
+      "containerStopped": true,
+      "guardianCleanupConfirmed": true,
+      "guardianExit": 130,
+      "guardianDiagnostics": {
+        "guardian.stdout": "{\"status\":\"cancelled-project-watch-update\",\"parentExited\":false}\nFlag --time has been deprecated, use --timeout instead\ndfdaa133c17e275122f7ed9f63761c696b27239ca930fdf6ef71d2771dcddfbf\n",
+        "guardian.stderr": "REGISTRY_STARTUP_FAILED_LINE=23\n"
+      },
+      "elapsedMs": 138045
+    }
+  }
+}

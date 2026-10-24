@@ -1,0 +1,35 @@
+{
+  "status": "passed-focused-native-discovery-unit-controls",
+  "sourceRevision": "6c9607f0950d659f496ec4de690a2762ca7af0fe",
+  "platform": "x86_64-apple-darwin",
+  "command": [
+    "cargo",
+    "test",
+    "--locked",
+    "--offline",
+    "-p",
+    "patamaps-workspace",
+    "native_discovery::tests",
+    "--",
+    "--nocapture",
+    "--test-threads=1"
+  ],
+  "testsPassed": 20,
+  "testsFailed": 0,
+  "additiveSegmentTests": 4,
+  "compileSeconds": 32.28,
+  "unitTestSeconds": 2.6,
+  "supervisedExitCode": 0,
+  "supervisedRun": "3692129b-006c-4038-8a0d-9004ded2adcd",
+  "filesDeleted": 0,
+  "limitations": [
+    "Focused unit scope; other integration tests were filtered out.",
+    "Full CLI provider controls, Clippy and actual pinned Axum qualification are not proved by this run.",
+    "CI39262858824 failed on E0716 test helper lifetimes; repair6c9607f replacement CI39264678054 remains pending."
+  ],
+  "sourceFiles": {
+    "crates/patamaps-workspace/src/native_discovery.rs": "sha256:bdfd533a068878b356cb70fffcf746314aef5f2494a5410f267d44c47d942122",
+    "crates/patamaps-workspace/src/native_discovery_tests.rs": "sha256:a776d23aa710de6c1c0ecdb6580b90827f008947a4962c0c2fdb849392a8a6eb",
+    "scripts/cross_stack_discovery.py": "sha256:5ef73ae0cde1dfa3c3a7264e9da0673fdf83f68f015df729c64e9883848f67d5"
+  }
+}

@@ -1,0 +1,159 @@
+{
+  "1792802991039651533-2776": {
+    "build-000.started.json": {
+      "commandDigest": "sha256:180636012f132aae3b492afecf7081f62b50ccd01f6d34c0c8e68262428452b9"
+    },
+    "failure.json": {
+      "previousSelectionPreserved": true,
+      "published": false,
+      "reason": "PROJECT_BUILD_COMMAND: Retained project build refused",
+      "status": "refused"
+    },
+    "build-000.json": {
+      "activation": "not-performed",
+      "ambientEnvironment": "not-inherited",
+      "authorizationNow": "not-evaluated",
+      "captureDigest": "sha256:3256fb95299162b585c5b82636af4c2234a0d836f415c45dd4023eedebdc7177",
+      "commandDigest": "sha256:180636012f132aae3b492afecf7081f62b50ccd01f6d34c0c8e68262428452b9",
+      "completeBuildContextEstablished": false,
+      "completeExecutableDependencyClosureEstablished": false,
+      "elapsedMs": 4425,
+      "environmentReferences": {
+        "PATH": "path"
+      },
+      "environmentResolution": "captured-nonsecretConfiguration-only",
+      "executable": "/usr/bin/python3",
+      "executableDigestAfter": "sha256:e50d468e8b0adfb05733f5b87b3cff34829c4a8c1aea50c865aa8bdfe4bb150f",
+      "executableDigestBefore": "sha256:e50d468e8b0adfb05733f5b87b3cff34829c4a8c1aea50c865aa8bdfe4bb150f",
+      "executableUnchanged": true,
+      "exitCode": 1,
+      "exitSignal": null,
+      "parentDeathCleanup": "private-supervisor-configured",
+      "profile": "patamaps-project-command-1",
+      "programSucceeded": false,
+      "resolvedExecutable": "/usr/bin/python3.12",
+      "selectedInputsUnchanged": true,
+      "selectionPublication": "not-performed",
+      "status": "refused-project-command",
+      "stderr": {
+        "byteLength": 690,
+        "digest": "sha256:d665eaa953dfedbc02bafa73397c150d0541cb280e8305a1e73fb6568d40d2ff",
+        "hex": null,
+        "text": "Traceback (most recent call last):\n  File \"/home/runner/work/_temp/patamaps-miniserve-40046851034-1/registry-build/state/attempts/1792802991039651533-2776/candidate/cargo_registry_container.py\", line 265, in <module>\n    main()\n  File \"/home/runner/work/_temp/patamaps-miniserve-40046851034-1/registry-build/state/attempts/1792802991039651533-2776/candidate/cargo_registry_container.py\", line 177, in main\n    assert child.poll() is None, (logs/'guardian.stderr').read_text()[-2048:]\n           ^^^^^^^^^^^^^^^^^^^^\nAssertionError: Traceback (most recent call last):\n  File \"<stdin>\", line 4, in <module>\nAssertionError: LOCALHOST_RESOLUTION: ['127.0.0.1']\nREGISTRY_STARTUP_FAILED_LINE=34\n\n"
+      },
+      "stdout": {
+        "byteLength": 0,
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "hex": null,
+        "text": ""
+      },
+      "workingDirectory": "."
+    },
+    "registry-execution.json": {
+      "status": "failed",
+      "image": "busybox@sha256:dc88b80842580654294472735332ec7c7789a4010ec9a68b69f9b88c19abede6",
+      "originalConfiguredCacheMounted": false,
+      "cargoHome": "/work/cargo-home",
+      "workFilesystemBytes": 3221225472,
+      "cpuAllowance": 2,
+      "memoryAllowance": 6442450944,
+      "memorySwapAllowance": 0,
+      "pidsAllowance": 512,
+      "toolchainClosed": false,
+      "ownerTestFixturesClosed": false,
+      "filesDeleted": 0,
+      "capacityObservation": {
+        "uid": 1001,
+        "cpuCount": 4,
+        "availableMemoryBytes": 15575576576,
+        "requiredMemoryBytes": 6942450944
+      },
+      "executorIdentities": {
+        "/home/runner/.rustup/toolchains/1.99.0-x86_64-unknown-linux-gnu/bin/cargo": "sha256:e951141cc55a6cd7b9876d187bd30a3720e6086b99413af95e3b8de1cdd72f14",
+        "/home/runner/.rustup/toolchains/1.99.0-x86_64-unknown-linux-gnu/bin/rustc": "sha256:f3834d26669b03f6855fa54bd2381443123e860167bc0c7a8dd137e5cf6e5e4f",
+        "/usr/bin/docker": "sha256:6435ff9214bf8e0931078fb0980809728cac0a54a526d4f28a26d3e48132b58d"
+      },
+      "containerId": "c9f0549884caae2b32b1e01b6ab5d3817444ecfc4b17995a180fa6432d2349a8",
+      "imageId": "sha256:4b3c3c5fa628f793b84f999b8be30200339beb0a017e8546983af9766480029a",
+      "readOnlyMounts": [
+        {
+          "source": "/home/runner/work/_temp/patamaps-miniserve-40046851034-1/registry-build/state/attempts/1792802991039651533-2776/candidate",
+          "destination": "/source"
+        },
+        {
+          "source": "/home/runner/work/_temp/patamaps-miniserve-40046851034-1/registry-build/state/attempts/1792802991039651533-2776/candidate/.cargo-home/registry",
+          "destination": "/registry"
+        },
+        {
+          "source": "/home/runner/work/_temp/patamaps-miniserve-40046851034-1/registry-build/state/attempts/1792802991039651533-2776/candidate/network-nsswitch.conf",
+          "destination": "/etc/nsswitch.conf"
+        },
+        {
+          "source": "/home/runner/work/_temp/patamaps-miniserve-40046851034-1/registry-build/state/attempts/1792802991039651533-2776/candidate/network-hosts.conf",
+          "destination": "/etc/hosts"
+        },
+        {
+          "source": "/home/runner/work/_temp/patamaps-miniserve-40046851034-1/upstream",
+          "destination": "/test-source"
+        },
+        {
+          "source": "/home/runner/.rustup/toolchains/1.99.0-x86_64-unknown-linux-gnu",
+          "destination": "/home/runner/.rustup/toolchains/1.99.0-x86_64-unknown-linux-gnu"
+        },
+        {
+          "source": "/usr",
+          "destination": "/usr"
+        },
+        {
+          "source": "/usr/bin",
+          "destination": "/bin"
+        },
+        {
+          "source": "/usr/lib",
+          "destination": "/lib"
+        },
+        {
+          "source": "/usr/lib64",
+          "destination": "/lib64"
+        },
+        {
+          "source": "/etc/alternatives",
+          "destination": "/etc/alternatives"
+        }
+      ],
+      "hostConfigurationVerifiedBeforeStart": true,
+      "hostUser": "1001:1001",
+      "explicitLocalhostAddresses": [
+        "127.0.0.1",
+        "::1"
+      ],
+      "networkConfigurationDigests": {
+        "network-hosts.conf": "sha256:b69b2c741be48691edabe3771c644c70473ccd6aa8effd9f17cc07fa129917f9",
+        "network-nsswitch.conf": "sha256:8b9e86f6268da8a51b3bd0cf3628df3d8f44621c8c50f6ee4b4719a42d2d82fe"
+      },
+      "errorClass": "AssertionError",
+      "error": "Traceback (most recent call last):\n  File \"<stdin>\", line 4, in <module>\nAssertionError: LOCALHOST_RESOLUTION: ['127.0.0.1']\nREGISTRY_STARTUP_FAILED_LINE=34\n",
+      "failureContainerState": {
+        "Status": "exited",
+        "Running": false,
+        "Pid": 0,
+        "ExitCode": 1,
+        "Error": "",
+        "OOMKilled": false
+      },
+      "startupDiagnostics": {
+        "exitCode": 0,
+        "stdout": "",
+        "stderr": "Traceback (most recent call last):\n  File \"<stdin>\", line 4, in <module>\nAssertionError: LOCALHOST_RESOLUTION: ['127.0.0.1']\nREGISTRY_STARTUP_FAILED_LINE=34\n"
+      },
+      "containerStopped": true,
+      "guardianCleanupConfirmed": true,
+      "guardianExit": 1,
+      "guardianDiagnostics": {
+        "guardian.stdout": "",
+        "guardian.stderr": "Traceback (most recent call last):\n  File \"<stdin>\", line 4, in <module>\nAssertionError: LOCALHOST_RESOLUTION: ['127.0.0.1']\nREGISTRY_STARTUP_FAILED_LINE=34\n"
+      },
+      "elapsedMs": 4236
+    }
+  }
+}
