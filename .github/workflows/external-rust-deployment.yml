@@ -42,6 +42,7 @@ jobs:
           mkdir -p "$RUNNER_TEMP/miniserve-config-controls"
           PATAMAPS_TEST_RETAIN_ROOT="$RUNNER_TEMP/miniserve-config-controls" python3 -B -m unittest discover -s scripts -p test_deployment_miniserve.py
           PATAMAPS_TEST_RETAIN_ROOT="$RUNNER_TEMP/miniserve-config-controls" python3 -B -m unittest discover -s scripts -p test_cargo_registry_context.py
+          python3 -B -m unittest discover -s scripts -p test_cargo_registry_diagnostics.py
       - name: Build compiler and qualify actual external Rust source and HTTP
         env:
           GH_TOKEN: ${{ github.token }}

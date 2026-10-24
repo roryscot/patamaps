@@ -1015,3 +1015,20 @@ default import continues to refuse the registry root and retains its exact old
 bounds. [Source-bound receipt](../acceptance/project-adoption/g3-cargo-registry-context-20261023/import-controls-darwin.json).
 No current-engine installed replay was run by these tests; the producer run
 40039847865 is still the existing job to inspect before dependent dispatch.
+
+
+Fifth attempt40039847865 at0b70ed1 completed the real release build and bounded
+binary transfer before releasing the unchanged owner-test phase. Cargo then
+returned nonzero; the default-test success gate was not met. The
+[verified executor record](../acceptance/project-adoption/g3-cargo-registry-context-20261023/registry-attempt-5/native-attempt-records.json)
+confirms releaseBuildObserved, binaryCopiedBeforeOwnerTests, stopped container
+and confirmed guardian cleanup. Raw test logs were intentionally not published,
+so the actual test/build failure cause is not yet established. Preserve failure.
+
+Add only structured safe Cargo diagnostics: fixed capacity categories, Rust error
+codes, crate/test identifiers, source test panic locations, numeric signals,
+standard test summaries, work-filesystem usage and memory event counters. Never
+publish assertion bodies or arbitrary compiler/source payloads. Four controls
+verify that known facts survive while private sentinel/unknown payloads do not.
+No test, source, profile, quota or privacy condition is changed. Retry the same
+full application lane with exact CLI reuse and inspect these facts before repair.

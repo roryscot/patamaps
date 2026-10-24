@@ -26,6 +26,24 @@ def sha(path):
         return 'sha256:' + hashlib.file_digest(stream, 'sha256').hexdigest()
 
 
+
+def failure_summary(stdout, stderr):
+    """Only fixed categories/identifiers; never assertion or source payloads."""
+    text = stdout + "\n" + stderr
+    categories = {"disk-full": "No space left on device", "memory-allocation": "Cannot allocate memory",
+                  "permission": "Permission denied", "read-only": "Read-only file system",
+                  "open-files": "Too many open files", "resources": "Resource temporarily unavailable"}
+    return dict(categories=[key for key, token in categories.items() if token in text],
+                rustcErrorCodes=sorted(set(re.findall(r"error\[(E[0-9]{4})\]", text)))[:64],
+                compileFailures=sorted(set(re.findall(r"error: could not compile `([A-Za-z0-9_-]+)`", text)))[:64],
+                failedTests=sorted(set(re.findall(r"^test ([A-Za-z0-9_:]+) \.\.\. FAILED$", text, re.M)))[:400],
+                testSummaries=re.findall(r"test result: (ok|FAILED)\. (\d+) passed; (\d+) failed; (\d+) ignored", text)[:64],
+                osErrors=sorted(set(re.findall(r"Os \{ code: ([0-9]+), kind: ([A-Za-z]+)", text)))[:64],
+                signals=sorted(set(re.findall(r"signal: ([0-9]+), SIG([A-Z0-9]+)", text)))[:64],
+                missingLibraries=sorted(set(re.findall(r"(?:cannot find|unable to find library) -l([A-Za-z0-9_+.-]+)", text)))[:64],
+                panicLocations=sorted(set(re.findall(r"panicked at (tests/[A-Za-z0-9_./-]+[.]rs:[0-9]+:[0-9]+)", text)))[:64])
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--spec', type=Path, required=True)
@@ -181,6 +199,13 @@ def main():
                     assert match, status
                     for name in ['limits.txt', 'build.stdout', 'build.stderr', 'test.stdout', 'test.stderr']:
                         copy_file('/work/logs/'+name, logs/name, 1048576)
+                    report['cargoExitCode'] = int(match[1])
+                    report['cargoDiagnostics'] = failure_summary((logs/'build.stdout').read_text()+'\n'+(logs/'test.stdout').read_text(),
+                                                                (logs/'build.stderr').read_text()+'\n'+(logs/'test.stderr').read_text())
+                    facts = run(['docker','exec',container,'/bin/bash','-c',
+                                 'df -B1 /work | tail -1; cat /sys/fs/cgroup/memory.events'])
+                    report['workFilesystemObservation'] = facts.splitlines()[0].split()[1:5]
+                    report['memoryEvents'] = dict(line.split() for line in facts.splitlines()[1:])
                     assert match[1] == '0', 'Original Cargo build/test failed; bounded private logs retained'
                     break
                 time.sleep(1)
