@@ -61,6 +61,16 @@ class RetainedMeasurementControls(unittest.TestCase):
   root,stem=self.case()
   with self.assertRaises(FileNotFoundError):measured(['/unavailable-measurement-command'],root,{},retained=stem)
   value=self.read(stem);self.assertEqual(value['failureType'],'FileNotFoundError');self.assertIsNone(value['peakRssBytes'])
+ def test_guardian_cleanup_reaps_workload_and_leaves_failed_rss_unknown(self):
+  from project_watch import stop
+  root,stem=self.case();pidfile=root/'worker.pid'
+  worker='import os,time;from pathlib import Path;Path('+repr(str(pidfile))+').write_text(str(os.getpid()));time.sleep(30)'
+  argv=[sys.executable,'-B',str(Path(__file__).with_name('project_watch.py')),'__guard',*self.command(worker)]
+  def monitor():
+   if pidfile.exists() and pidfile.read_text().strip().isdigit():raise RuntimeError('controlled-guardian-cancel')
+  with self.assertRaisesRegex(RuntimeError,'guardian'):measured(argv,root,{},retained=stem,monitor=monitor,cleanup=stop)
+  value=self.read(stem);self.assertEqual(value['measurementStatus'],'failed');self.assertIsNone(value['peakRssBytes'])
+  with self.assertRaises(ProcessLookupError):os.kill(int(pidfile.read_text()),0)
  def test_rss_units_and_invalid_values_are_explicit(self):
   self.assertEqual(rss_observation(1024,'Darwin')['peakRssBytes'],1024)
   self.assertEqual(rss_observation(1024,'Linux')['peakRssBytes'],1024*1024)

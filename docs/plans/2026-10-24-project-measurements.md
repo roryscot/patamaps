@@ -1,6 +1,7 @@
 # Actual-project development measurements
 
-Status: planned; no new performance result is accepted. This implements the
+Status: driver implemented and focused controls verified; native preparation and
+actual measurements remain unrun. No new performance result is accepted. This implements the
 original G4 measurement requirement separately from completed native parity and
 the pinned installed Next runtime gate. The first workload is the already
 qualified native Axum workspace. Next.js measurements remain a separate gate.
@@ -168,3 +169,38 @@ verified; actual calibration, real-project driver/builds and timed acceptance
 remain pending. The exact3,491-file publication-cache deletion request is open;
 none of the proposed files has been deleted and no unrelated container has been
 interrupted. Fresh approval for this inventory remains pending.
+
+
+## Real Axum driver checkpoint
+
+The source-only coordinator in scripts/bench_axum_retained.py and trusted build
+helper in scripts/bench_axum_build.py implement reconstruction, captured-config
+checks, pinned tools/environment, retained logs, source edits, copied immutable
+artifacts, all459-test receipt checks, unchanged selection checks and restoration.
+Functional preparation and benchmark execution require separate live canonical
+reservations. The coordinator checks supervisor identities and live ownership,
+refuses other active reservations or any running container during measurement,
+and checks the frozen disk/wall/RSS budgets. A final native selected-build
+binding check is outside the seven performance intervals. Passing driver gates
+does not set actualBenchmarkAccepted; independent evidence review remains required.
+
+[Intel driver controls](../acceptance/project-adoption/g4-project-measurements-20261024/driver-preflight.json)
+passed23 checks:13 focused Axum contract/refusal cases and10 collector cases,
+including graceful guardian cancellation without leaving its owned workload
+running. Source parsing and the JavaScript ownership-probe syntax also passed.
+The opt-in Linux lane discovers both test files. These fixture checks do not
+establish that a real build/preparation or any performance budget has passed.
+
+Native admission remains exclusive. Interactive-memory telemetry uses macOS
+normal memory-pressure status and its reported free percentage, reduced by one
+percentage point before estimating capacity against the existing interactive
+reserve. It does not treat bare free pages as available capacity and is not an
+enforceable native memory reservation. The3GiB per-child observation limit remains
+unchanged; other unmanaged processes and aggregate memory are not measured by it.
+
+SSH to admin@norway was verified from the agent session. buildctl status showed
+zero running/review-needed requests, while one running container was observed.
+The previous storage refusal and exact3,491-file deletion proposal remain pending;
+no listed data, container or policy was changed. Actual native CLI preparation,
+RSS calibration and all seven real-project samples remain unrun. This measurement
+work remains an integration enhancement beyond completed MetaMaps native parity.

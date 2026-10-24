@@ -490,4 +490,4 @@ jobs:
       - name: Verify retained measurement controls
         run: |
           mkdir -p "$RUNNER_TEMP/patamaps-measurement-controls"
-          PATAMAPS_TEST_RETAIN_ROOT="$RUNNER_TEMP/patamaps-measurement-controls" python3 -B -m unittest discover -s scripts -p test_bench_phases.py
+          PATAMAPS_TEST_RETAIN_ROOT="$RUNNER_TEMP/patamaps-measurement-controls" python3 -B -m unittest discover -s scripts -p 'test_bench_*.py'

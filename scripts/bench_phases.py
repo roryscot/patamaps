@@ -53,7 +53,7 @@ def rss_observation(raw, system=None):
 
 
 def measured(argv, cwd, env, stdin=None, deadline=180, *, retained=None,
-             monitor=None, maximum_log_bytes=LIMIT):
+             monitor=None, maximum_log_bytes=LIMIT, cleanup=None):
     """Measure this exact child; retained mode never removes files or publishes stderr."""
     if type(maximum_log_bytes) is not int or not 0 < maximum_log_bytes <= LIMIT:
         raise ValueError("Measurement log bound")
@@ -102,10 +102,18 @@ def measured(argv, cwd, env, stdin=None, deadline=180, *, retained=None,
             failure = error
         finally:
             if child is not None and not reaped:
-                from project_watch import signal_group
-                signal_group(child.pid, signal.SIGKILL)
-                _, status, usage = os.wait4(child.pid, 0)
-                child.returncode = os.waitstatus_to_exitcode(status)
+                if cleanup is not None:
+                    # A parent-death guardian needs SIGTERM/grace to stop its
+                    # separately grouped workload. Failed samples have unknown
+                    # rusage when this existing cleanup helper owns reaping.
+                    cleanup(child)
+                    if child.returncode is None:
+                        raise RuntimeError("Measurement cleanup did not reap its child")
+                else:
+                    from project_watch import signal_group
+                    signal_group(child.pid, signal.SIGKILL)
+                    _, status, usage = os.wait4(child.pid, 0)
+                    child.returncode = os.waitstatus_to_exitcode(status)
             elapsed = time.perf_counter_ns() - start
             sizes = {name: os.fstat(handle.fileno()).st_size for name, handle in [("stdout", out), ("stderr", err)]}
             out.seek(0); err.seek(0)
