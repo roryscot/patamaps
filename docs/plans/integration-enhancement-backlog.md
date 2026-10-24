@@ -1266,3 +1266,13 @@ confirms browser/proxy/process/listener shutdown. Add only bounded HTTP status/
 body-type/redirect observations plus a direct canonical request with the same
 query before deciding whether matching or owner URL semantics caused this.
 Keep the frozen positive200 criterion and all original auth/permission checks.
+
+Fifth diagnostic40054799502 at005edaf confirms direct canonical query200 versus
+internal session alias400 JSON with no redirect; all owned runtimes stopped.
+[Verified evidence](../acceptance/project-adoption/g3-next-rewrite-runtime-20261024/attempt-5/ci.json).
+Keep the internal-session profile failed. [Revision2](2026-10-24-next-canonical-proxy.md)
+preserves the same user-visible paths, query/header conditions, session endpoint,
+positive200/same-identity and every refusal/auth control. Declare a captured
+HTTP origin for the owned loopback Next listener and proxy the session alias to
+its canonical pathname. Do not substitute an easier endpoint, patch NextAuth,
+disable typechecks, or relabel the original failure. A new actual pass is needed.
