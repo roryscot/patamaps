@@ -1,0 +1,44 @@
+name: Alpha 2 crate release checks
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  package-install:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    env:
+      CARGO_INCREMENTAL: "0"
+      CARGO_PROFILE_DEV_DEBUG: "0"
+      CARGO_PROFILE_TEST_DEBUG: "0"
+      CARGO_BUILD_JOBS: "2"
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install declared toolchain
+        run: rustup toolchain install 1.99.0 --profile minimal
+      - name: Stage two release crates
+        run: python3 scripts/prepare_alpha2.py --output "$RUNNER_TEMP/alpha2"
+      - name: Resolve published dependencies and test workspace
+        run: |
+          cd "$RUNNER_TEMP/alpha2"
+          export CARGO_TARGET_DIR="$RUNNER_TEMP/alpha2/target"
+          cargo generate-lockfile
+          cargo test --locked -p patamaps-workspace --lib
+      - name: Verify both Cargo packages
+        run: |
+          cd "$RUNNER_TEMP/alpha2"
+          export CARGO_TARGET_DIR="$RUNNER_TEMP/alpha2/target"
+          cargo package --locked --allow-dirty -p patamaps-workspace -p patamaps-cli
+      - name: Clean Cargo home installation and Rust consumer
+        run: python3 scripts/check_alpha2_install.py --stage "$RUNNER_TEMP/alpha2"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: alpha2-package-evidence
+          retention-days: 7
+          path: |
+            ${{ runner.temp }}/alpha2/staging-receipt.json
+            ${{ runner.temp }}/alpha2/Cargo.lock
+            ${{ runner.temp }}/alpha2/target/package/*.crate
+            ${{ runner.temp }}/alpha2/clean-install/receipt.json
+            ${{ runner.temp }}/alpha2/clean-install/install.log
