@@ -1255,3 +1255,14 @@ dictionary to baseline broke the existing disk-used subtraction. Use separate
 storage_baseline_bytes and baseline_observation names. Preserve the 4GB growth/
 500MB reserve admission checks and all frozen native/browser controls. The
 runtime cases have still not run; no product or application pass follows yet.
+
+Fourth rewrite attempt40054167680 ata27ea4e passed full source/build/compiled
+checks, both rehashed native projection refusals and four unchanged owner page
+tests. Eight beforeFiles runtime controls passed: both alias pages retained
+their browser URLs, and all six path/header/query refusals returned404. The
+afterFiles session alias returned a non200 response; no status/body was retained,
+so its cause is not yet established. [Failed evidence](../acceptance/project-adoption/g3-next-rewrite-runtime-20261024/attempt-4/ci.json)
+confirms browser/proxy/process/listener shutdown. Add only bounded HTTP status/
+body-type/redirect observations plus a direct canonical request with the same
+query before deciding whether matching or owner URL semantics caused this.
+Keep the frozen positive200 criterion and all original auth/permission checks.

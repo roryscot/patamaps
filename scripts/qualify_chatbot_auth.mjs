@@ -201,7 +201,15 @@ async function rewriteControls() {
     pass(stage);
   }
   stage = 'rewrite-session-query-positive';
+  const directQuery = await ctx.request.get('/api/auth/session?view=session', { maxRedirects: 0 });
+  check(directQuery.status() === 200, 'matched direct session query positive control');
   const response = await ctx.request.get('/qualified/session?view=session', { maxRedirects: 0 });
+  report.lastRewriteObservation = {
+    directQueryStatus: directQuery.status(), aliasStatus: response.status(),
+    aliasBodyType: (response.headers()['content-type'] ?? '').includes('json') ? 'json' : 'other',
+    aliasRedirect: Boolean(response.headers().location),
+  };
+  save();
   check(response.status() === 200, 'query-conditioned session rewrite response');
   const aliased = await response.json();
   check(isDeepStrictEqual(aliased.user, direct.user), 'session rewrite returns the same actual guest identity');
