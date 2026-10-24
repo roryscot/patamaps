@@ -24,7 +24,7 @@ def main():
  work,out,cli=a.work.resolve(),a.evidence.resolve(),a.cli.resolve()
  work.mkdir(parents=True,exist_ok=False);out.mkdir(parents=True,exist_ok=False);(out/"logs").mkdir()
  assert not any((v/"Cargo.toml").exists() for v in work.parents)
- baseline=shutil.disk_usage(ROOT).used
+ storage_baseline_bytes=shutil.disk_usage(ROOT).used
  env={k:v for k,v in os.environ.items() if k in ["PATH","HOME","CARGO_HOME","RUSTUP_HOME"]}
  env.update(CARGO_HOME=env.get("CARGO_HOME",str(Path.home()/".cargo")),RUSTUP_HOME=env.get("RUSTUP_HOME",str(Path.home()/".rustup")))
  for n in ["home","tmp","tools","store"]:(work/n).mkdir()
@@ -34,7 +34,7 @@ def main():
  r=dict(status="running",sourceRevision=subprocess.check_output(["git","rev-parse","HEAD"],cwd=ROOT,text=True).strip(),upstream=UPSTREAM,upstreamCommit=REV,commands=[],frameworkBuildEstablished=False,runtimeEstablished=False,authenticationAccepted=False,dependencyClosureEstablished=False,applicationAcceptance=False,productionActivation=False,filesDeleted=0,maximumWorkflowGrowthBytes=4000000000)
  def save():write(out/"receipt.json",r)
  def capacity():
-  d=shutil.disk_usage(ROOT);assert d.free>=500000000 and d.used-baseline<=4000000000,"CI workflow storage boundary"
+  d=shutil.disk_usage(ROOT);assert d.free>=500000000 and d.used-storage_baseline_bytes<=4000000000,"CI workflow storage boundary"
  def run(label,argv,cwd=None,data=None,timeout=1200,expected=0):
   capacity();began=time.monotonic();stdout_path=out/"logs"/(label+".stdout");stderr_path=out/"logs"/(label+".stderr");input_path=out/"logs"/(label+".input")
   if data is not None:input_path.write_bytes(data)
@@ -128,8 +128,8 @@ def main():
   assert observed["requestDigest"]==request["requestDigest"] and observed["shard"]["metadata"]["observation"]["runtimeEstablished"] is False
   if a.rewrites:
    from chatbot_rewrite_profile import verify_compiled
-   baseline=json.loads((ROOT/"docs/acceptance/project-adoption/g3-chatbot-source-20261023/native-observations.json").read_bytes())
-   bound=verify_compiled(json.loads(files["routes.json"].read_bytes()),observed,baseline)
+   baseline_observation=json.loads((ROOT/"docs/acceptance/project-adoption/g3-chatbot-source-20261023/native-observations.json").read_bytes())
+   bound=verify_compiled(json.loads(files["routes.json"].read_bytes()),observed,baseline_observation)
    bound["baselineObservationDigest"]=sha(ROOT/"docs/acceptance/project-adoption/g3-chatbot-source-20261023/native-observations.json")
    write(out/"rewrite-compiled.json",bound)
    def refuse_observation(label,changed):

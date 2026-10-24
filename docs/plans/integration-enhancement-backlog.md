@@ -1246,3 +1246,12 @@ check the phase object using satisfies against NextConfig's public rewrite
 return type, preserving its literal discriminants without casts, ts-ignore,
 skipLibCheck changes or owner compiler/test changes. Ten focused controls passed;
 actual type/build/compiled/native/runtime acceptance remains required.
+
+Third rewrite attempt40053774357 at9ebc369 passed the full owner build,
+native source mutation refusal and exact compiled preservation of both added
+rules and all four original records. [Verified failed evidence](../acceptance/project-adoption/g3-next-rewrite-runtime-20261024/attempt-3/ci.json)
+then identifies a collector variable collision: assigning an observation
+dictionary to baseline broke the existing disk-used subtraction. Use separate
+storage_baseline_bytes and baseline_observation names. Preserve the 4GB growth/
+500MB reserve admission checks and all frozen native/browser controls. The
+runtime cases have still not run; no product or application pass follows yet.
