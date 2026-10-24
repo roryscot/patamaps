@@ -1129,3 +1129,24 @@ nonsecret resolver inputs; compare its bytes before the same Python/Rust probes.
 No kernel changes, extra interface, external route, host credentials, capacity
 increase or test change. A subsequent pass is required; this source-based cause
 is not a retroactive acceptance of any failed attempt.
+
+
+Tenth attempt40047064763 atcf39ff6 passed all resolver/IPv4/IPv6 checks and all13
+bind tests, confirming the multi-address repair. It then failed the unchanged
+qrcode_shown_in_tty_when_enabled assertion at tests/qrcode.rs:102. No capacity
+shortage (54% work usage, zero memory events); both cleanup proofs passed.
+[Verified record](../acceptance/project-adoption/g3-cargo-registry-context-20261023/registry-attempt-10/native-attempt-records.json).
+Pinned main.rs:307–322 explicitly excludes127.0.0.1 and::1 from QR output; only
+those addresses existed. This is a concrete environment mismatch, not a TTY
+assertion to waive or a demonstrated Patamaps defect.
+
+Provision192.0.2.2/32 on the existing owned lo interface, preserving onlylo and
+all external-route refusals. A separate original BusyBox helper joins only that
+owned network namespace, with NET_ADMIN as its only effective capability,
+read-only root, no host mounts, CPU0.1/memory32MiB/swap0/PIDs16. Inspect before
+start; use the existing token-frozen guardian and require ExitCode0/Running=false/
+Pid0 before releasing the workload's network.ready barrier. The workload keeps
+cap-drop ALL/nonroot/read-only mounts and all original limits. Combined transient
+reservation must fit the runner plus reserve. No bridge/veth, external route,
+host network, kernel/global policy change, persistent setup process, source/test
+mutation or fabricated QR output. All original325 tests still must pass.

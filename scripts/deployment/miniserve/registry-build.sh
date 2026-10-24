@@ -3,6 +3,8 @@ set -euo pipefail
 trap 'printf "REGISTRY_STARTUP_FAILED_LINE=%s\n" "$LINENO" >&2' ERR
 trap 'exit 130' TERM INT HUP
 mkdir -p /work/{home,tmp,logs,export,cargo-home/registry}
+for attempt in $(seq 1 600); do test -f /work/network.ready && break; sleep .1; done
+test -f /work/network.ready
 ln -s /registry/cache /work/cargo-home/registry/cache
 ln -s /registry/index /work/cargo-home/registry/index
 {
@@ -17,6 +19,8 @@ ln -s /registry/index /work/cargo-home/registry/index
  test "$(df -k /dev | tail -1 | awk '{print $2}')" = 65536
  test "$(df -k /dev/shm | tail -1 | awk '{print $2}')" = 1024
  test "$(ls /sys/class/net)" = lo
+ test "$(awk '/^CapEff:/ {print $2}' /proc/self/status)" = 0000000000000000
+ /usr/sbin/ip -4 addr show dev lo | grep -q '192.0.2.2/32'
  printf 'lo\n'
  test -x /usr/sbin/ip
  if /usr/sbin/ip route get 192.0.2.1 >/work/no-external-route 2>&1; then

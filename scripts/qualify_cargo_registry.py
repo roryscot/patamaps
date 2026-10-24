@@ -145,7 +145,7 @@ def qualify(root, work, out, source, staged, names, cargo, cli, env, run, native
     candidate = state/selected['attempt']/'candidate'
     execution = json.loads((candidate/'bundle/registry-execution.json').read_text())
     assert execution['status']=='passed-real-cargo-registry-execution' and execution['defaultTestsPassed']==325
-    assert execution['binaryCopiedBeforeOwnerTests'] and execution['containerStopped'] and not download.exists()
+    assert execution['binaryCopiedBeforeOwnerTests'] and execution['containerStopped'] and execution['allOwnedContainersStopped'] and not download.exists()
     write(evidence/'execution.json', execution)
     archive_relative = '.cargo-home/'+next(p for p in sorted(registry['files']) if p.endswith('.crate'))
     original = snapshot/'data'/archive_relative

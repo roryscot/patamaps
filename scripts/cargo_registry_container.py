@@ -55,7 +55,7 @@ def main():
         receipt = json.loads((bundle/'registry-execution.json').read_text())
         assert receipt['status'] == 'passed-real-cargo-registry-execution'
         assert receipt['binaryDigest'] == sha(bundle/'miniserve')
-        assert receipt['defaultTestsPassed'] == 325 and receipt['containerStopped']
+        assert receipt['defaultTestsPassed'] == 325 and receipt['containerStopped'] and receipt['allOwnedContainersStopped']
         print(json.dumps(dict(status='verified-real-cargo-registry-execution', binaryDigest=receipt['binaryDigest'])))
         return
     available = int(next(line for line in Path('/proc/meminfo').read_text().splitlines() if line.startswith('MemAvailable:')).split()[1])*1024
@@ -75,7 +75,7 @@ def main():
                   cpuAllowance=2, memoryAllowance=MEMORY, memorySwapAllowance=0, pidsAllowance=512,
                   toolchainClosed=False, ownerTestFixturesClosed=False, filesDeleted=0)
     report['capacityObservation'] = dict(uid=os.geteuid(), cpuCount=os.cpu_count(), availableMemoryBytes=available,
-                                       requiredMemoryBytes=MEMORY+500000000)
+                                       requiredMemoryBytes=MEMORY+33554432+500000000)
     assert all(sha(path)==digest for path,digest in spec['toolIdentities'].items()), 'Configured executor bytes changed'
     report['executorIdentities'] = spec['toolIdentities']
     record_path = logs/'owned.json'
@@ -117,8 +117,8 @@ def main():
             stop(process)
 
     try:
-        assert os.geteuid() != 0 and (os.cpu_count() or 0) >= 3, 'Dedicated nonroot CI capacity required'
-        assert available >= MEMORY+500000000, 'Container memory reservation plus reserve unavailable'
+        assert os.geteuid() != 0 and (os.cpu_count() or 0) >= 4, 'Dedicated nonroot CI capacity required'
+        assert available >= MEMORY+33554432+500000000, 'Container memory reservation plus reserve unavailable'
         image = json.loads(run(['docker', 'image', 'inspect', IMAGE]))[0]
         assert IMAGE in image['RepoDigests'] and (image['Os'], image['Architecture']) == ('linux', 'amd64')
         mounts = [(source, '/source'), (source/'.cargo-home/registry', '/registry'),
@@ -172,6 +172,42 @@ def main():
         with (logs/'guardian.stdout').open('xb') as stdout, (logs/'guardian.stderr').open('xb') as stderr:
             child = subprocess.Popen([sys.executable, '-B', str(source/'project_watch.py'), '__guard-container', guard_record],
                                      stdout=stdout, stderr=stderr, start_new_session=True)
+            # A non-loopback URL is required by the unchanged QR test. Give
+            # lo one host-local /32; never create a bridge, peer or gateway.
+            ready_deadline = time.monotonic()+10
+            while not inspect()['State']['Running']:
+                assert child.poll() is None, (logs/'guardian.stderr').read_text()[-2048:]
+                assert time.monotonic()<ready_deadline
+                time.sleep(.05)
+            network_identity = run(['docker','exec',container,'/usr/bin/readlink','/proc/self/ns/net']).strip()
+            setup_command = "test \"$(id -u)\" = 0; test \"$(awk '/^CapEff:/ {print $2}' /proc/self/status)\" = 0000000000001000; readlink /proc/self/ns/net; ip addr add 192.0.2.2/32 dev lo; ip -4 addr show dev lo | grep -q '192.0.2.2/32'; echo OWNED_LOCAL_ADDRESS_READY"
+            setup_id = run(['docker','create','--label','org.patamaps.qualification-owner='+owned['token'],
+                '--network','container:'+container,'--read-only','--user','0:0','--cpus','.1',
+                '--memory','33554432','--memory-swap','33554432','--pids-limit','16','--shm-size','1048576',
+                '--cap-drop','ALL','--cap-add','NET_ADMIN','--security-opt','no-new-privileges',
+                '--entrypoint','/bin/sh',image['Id'],'-ec',setup_command]).strip()
+            assert re.fullmatch('[0-9a-f]{64}',setup_id)
+            owned['containers'].append(dict(id=setup_id,role='local-network-setup',confirmedStopped=False))
+            record_path.write_text(json.dumps(owned))
+            setup_info = json.loads(run(['docker','inspect',setup_id]))[0]
+            shost = setup_info['HostConfig']
+            assert setup_info['Image']==image['Id'] and setup_info['Config']['User']=='0:0'
+            assert shost['NetworkMode']=='container:'+container and shost['ReadonlyRootfs'] and not shost['Privileged']
+            assert shost['CapDrop']==['ALL'] and shost['CapAdd']==['NET_ADMIN'] and shost['SecurityOpt']==['no-new-privileges']
+            assert shost['NanoCpus']==100000000 and shost['Memory']==shost['MemorySwap']==33554432
+            assert shost['PidsLimit']==16 and shost['ShmSize']==1048576 and not setup_info['Mounts']
+            setup_owned = logs/'network-setup-owned.json'
+            setup_owned.write_text(json.dumps(dict(token=owned['token'],containers=[dict(id=setup_id)])))
+            setup_output = run([sys.executable,'-B',source/'project_watch.py','__guard-container',setup_owned])
+            assert network_identity in setup_output.splitlines() and 'OWNED_LOCAL_ADDRESS_READY' in setup_output.splitlines()
+            setup_final = json.loads(run(['docker','inspect',setup_id]))[0]['State']
+            assert not setup_final['Running'] and setup_final['Pid']==0 and setup_final['ExitCode']==0
+            assert json.loads(setup_owned.read_text())['containers'][0]['confirmedStopped']
+            report['localAddressProvision'] = dict(address='192.0.2.2/32',interface='lo',networkNamespace=network_identity,
+                helperId=setup_id,helperStoppedBeforeCargo=True,effectiveCapability='NET_ADMIN only',
+                workloadCapabilitiesDropped=True,bridgeOrExternalNetworkCreated=False,
+                helperCpuAllowance=.1,helperMemoryAllowance=33554432,helperPidsAllowance=16)
+            run(['docker','exec',container,'/usr/bin/touch','/work/network.ready'])
             copied = False
             while True:
                 assert time.monotonic()-started < 2400, 'Cargo execution deadline'
@@ -246,6 +282,9 @@ def main():
                 final = inspect()['State']
                 assert not final['Running'] and final['Pid']==0
                 report['containerStopped'] = True
+                stopped_states = [json.loads(run(['docker','inspect',item['id']]))[0]['State'] for item in owned['containers']]
+                report['allOwnedContainersStopped'] = all(not state['Running'] and state['Pid']==0 for state in stopped_states)
+                assert report['allOwnedContainersStopped']
                 if child is not None:
                     report['guardianCleanupConfirmed'] = json.loads(guard_record.read_text())['containers'][0].get('confirmedStopped') is True
                     assert report['guardianCleanupConfirmed']
