@@ -32,8 +32,8 @@ ln -s /registry/index /work/cargo-home/registry/index
  /usr/bin/python3 -B - <<'IPV6'
 import socket
 addresses=socket.getaddrinfo('localhost',0)
-assert any(row[0]==socket.AF_INET6 and row[4][0]=='::1' for row in addresses)
-assert any(row[0]==socket.AF_INET and row[4][0]=='127.0.0.1' for row in addresses)
+observed=sorted({row[4][0] for row in addresses if row[4][0] in {'::1','127.0.0.1'}})
+assert observed==['127.0.0.1','::1'], 'LOCALHOST_RESOLUTION: '+repr(observed)
 with socket.socket(socket.AF_INET6) as server:
  server.bind(('::1',0));server.listen(1)
  with socket.socket(socket.AF_INET6) as client:

@@ -122,6 +122,7 @@ def main():
         image = json.loads(run(['docker', 'image', 'inspect', IMAGE]))[0]
         assert IMAGE in image['RepoDigests'] and (image['Os'], image['Architecture']) == ('linux', 'amd64')
         mounts = [(source, '/source'), (source/'.cargo-home/registry', '/registry'),
+                  (source/'network-nsswitch.conf','/etc/nsswitch.conf'),
                   (tests, '/test-source'), (toolchain, str(toolchain))]
         for name in ['/usr', '/bin', '/lib', '/lib64', '/etc/alternatives']:
             if Path(name).exists():

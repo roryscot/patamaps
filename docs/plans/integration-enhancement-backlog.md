@@ -1086,3 +1086,18 @@ TcpStream::connect((localhost, port)), the same API used by the frozen port-chec
 dependency. This rejects a name-resolution mismatch before another full Cargo
 build. It is qualification code, not a changed upstream test or counted owner
 case. Quota/resource and external-route checks still precede execution.
+
+
+Seventh attempt40046190259 atc4f0f61 stopped at the early Python name-resolution
+check, before any Cargo compilation. Docker accepted both localhost declarations,
+but getaddrinfo did not expose::1. The fixed startup line and actual non-OOM,
+stopped-container state are in the [verified record](../acceptance/project-adoption/g3-cargo-registry-context-20261023/registry-attempt-7/native-attempt-records.json).
+The preflight prevented spending another full build on that context mismatch.
+
+Capture a minimal explicit nonsecret resolver input (hosts: files) in the owner
+profile and mount only that file read-only at /etc/nsswitch.conf. Do not inherit
+host resolver/user configuration or change kernel/network policy. Require both
+declared loopback addresses in getaddrinfo, a real IPv6 TCP exchange, and the Rust
+IPv4-only/IPv6-only localhost probe before Cargo. Both external-route refusals,
+all325 tests and all original quotas remain. This is an explicit bounded local
+qualification resolver profile, not general DNS support or full OS closure.
