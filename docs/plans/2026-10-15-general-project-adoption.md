@@ -932,3 +932,22 @@ dependency closure or performance was established. Continue
 [I2 retained Next bundle](2026-10-24-installed-next.md#i1-acceptance-and-next-i2-increment),
 applicable dependency/test-context treatment, remaining deployment controls and
 exclusive actual-project latency/memory/disk measurements. G4–G6 stay open.
+
+
+## Complete pinned retained Next installed checkpoint (2026-10-24)
+
+I2 now passes [exact package/runtime review](../acceptance/project-adoption/g5-installed-retained-next-20261024/accepted-40071420581/independent-verification.json)
+at80ae616/engine2fc8a201. Both fresh source/native installations built the real
+pinned Next standalone owner and passed28 groups/four unchanged upstream tests
+each, native retained selection/admission/postcheck and three tamper refusals,
+actual image/kernel/read-only/cache enforcement, producer absence, unchanged
+output inventories, restoration and owned-runtime cleanup. All1,180 packaged
+source members matched Git/inventory and both archive/engine identities passed.
+Locked/offline fresh source compilation reused declared dependency artifacts;
+it did not borrow the checkout compiler. Sampled peak growth3.987GB stayed under
+4GB with narrow margin. [I2 scope and limits](2026-10-24-installed-next.md#i2-fresh-installed-retained-workflow-accepted).
+
+This closes the selected pinned full-Next-bundle/installed subgate. G4 actual-
+project exclusive cold/warm/edit measurements and remaining scoped owner/deploy
+requirements stay open; no blanket hermeticity, performance, arbitrary Next
+compatibility or production activation is inferred.

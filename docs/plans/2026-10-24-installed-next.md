@@ -1,6 +1,6 @@
 # Fresh installed Next workflow
 
-Status: I1, native closed-tree selection, and I2 retained runtime independently verified at identified sources; fresh installed replay on the new engine remains open. Baseline79bf9c6.
+Status: I1 and the complete pinned I2 retained runtime/fresh installed workflow independently verified at identified sources, latest80ae616/engine2fc8a201. Baseline79bf9c6.
 Continue the original G5/G6 adoption requirement. The accepted Rust-only
 installed replay and checkout-based Next case do not prove this requirement.
 
@@ -502,3 +502,42 @@ retains the completed source-case receipts without promoting native/full workflo
 acceptance. The [storage repair preflight](../acceptance/project-adoption/g5-installed-retained-next-20261024/storage-repair-preflight.json)
 passes the same62 controls and syntax/YAML/diff checks. Both complete installed
 cases must still run under the original combined limit.
+
+
+## I2 fresh installed retained workflow accepted
+
+[Run40071420581](https://github.com/roryscot/patamaps/actions/runs/40071420581)
+at80ae616 passed [independent exact-package/runtime review](../acceptance/project-adoption/g5-installed-retained-next-20261024/accepted-40071420581/independent-verification.json).
+All1,180 shipped source members (including460 program files) matched both their
+archive inventory and the producing Git revision. Both archive digests and
+engine2fc8a201 matched. Locked/offline Cargo installed into a fresh prefix;
+compilation records confirm patamaps-cli and patamaps-workspace came from that
+exact installed source. Dependency artifacts were reused explicitly; no clean
+build or independent dependency claim is made.
+
+Each fresh source/native installation independently built the pinned Chatbot
+standalone profile and passed all28 browser groups/four unchanged upstream tests,
+real image byte/mode/link comparison in CI, one-CPU/3GiB/no-swap/128-PID kernel
+limits, read-only refusal and64MiB cache quota probes. Three real member/link
+tamper refusals passed per owner, followed by native selected-command admission,
+post-verification and unchanged pointer/generation. Both189.7MB producer-output
+inventories stayed unchanged. Producer/source/tool paths were unavailable during
+requests; original paths and source inventories were restored; all owned
+containers/process groups/listeners stopped. Checkout compiler/driver were
+unavailable during owners and the original compiler bytes were restored.
+Changed installed source refused before its compiler marker; restored inventory
+passed.59 library/31 integration tests and strict Clippy also passed.
+
+Sampled peak combined growth was3,986,653,184 bytes under the existing4GB limit,
+leaving only13,346,816 bytes of observed margin; sampled disk growth is not an
+instantaneous filesystem quota or a guarantee about subsequent runner variation.
+No limit increased and no files were deleted. The21,789,071-byte package/evidence
+artifact stays in GitHub with14-day retention; only compact reviewed receipts
+and executed review source are retained on Intel. Private image bytes were
+compared in CI, not independently rehashed by the external reviewer.
+
+This accepts I2 for this explicitly pinned standalone/proxy/auth profile on
+Linux x86_64. It does not accept arbitrary Next applications, external model/
+provider/BotID behavior, full OS/dependency closure, performance or production
+activation. Original G0–G6 remaining rows, especially actual-project exclusive
+cold/warm/edit measurements, stay open.

@@ -13,11 +13,11 @@ The plan uses profile patamaps-project-build-1 and embeds five existing declarat
 - workspace: a WorkspaceConfig whose paths are relative to that staged source. Every capture must be viable before build commands start.
 - buildSteps: one or more ProjectCommand declarations.
 - verificationSteps: one or more ProjectCommand declarations, run after the initial artifact snapshot.
-- outputs: explicit objects with path and kind (file or tree), relative to the candidate.
+- outputs: explicit objects with path and kind (file, tree or closed-tree), relative to the candidate.
 
 Generated workspace outputs are staged alongside source and become immutable selected command inputs. Do not also select old copies of those output paths as original source inputs. Program environmentReferences resolve only captured nonsecretConfiguration strings; ambient environment and secret references remain unresolved. See decision0038 for command JSON.
 
-Declared artifact bytes, Unix mode bits and tree membership must stay unchanged through verification and the final source/tool checks. Directory symlinks, file symlinks and special files refuse. File size is bounded at4GiB, combined artifact bytes at16GiB, tree depth at128 and entries at32768, with the normal record byte limit. These observations do not attest ACLs, xattrs, dynamic dependencies or runnable architecture.
+Declared artifact bytes, Unix mode bits and tree membership must stay unchanged through verification and the final source/tool checks. Ordinary file/tree outputs refuse symlinks; all output kinds refuse special files. File size is bounded at4GiB, combined artifact bytes at16GiB, tree depth at128 and entries at32768, with the normal record byte limit. These observations do not attest ACLs, xattrs, dynamic dependencies or runnable architecture.
 
 An explicit output kind closed-tree additionally permits symlinks only when
 their resolution stays inside that individual declared tree. The native
@@ -33,10 +33,16 @@ Their binding and selected execution receive the same pre/post verification as
 other artifacts. This does not admit mutable runtime caches or prove standalone
 application/dependency closure. [Native verification](../acceptance/project-adoption/g5-native-closed-tree-20261024/attempt-2/independent-verification.json)
 at6b5404d passed59 library tests,31 integration tests and strict Clippy, and
-selected/verified the real78-link Next standalone tree. The complete runtime
-profile remains failed because its separate served producer tree acquired cache
-files; enforced cache isolation/source-tool-unavailable execution and fresh
-installed publication remain separate.
+selected/verified the real78-link Next standalone tree. That historical
+host-served profile failed because its producer tree acquired cache files.
+The separate [read-only image runtime](../acceptance/project-adoption/g5-next-retained-runtime-20261024/accepted-40069762886/independent-verification.json)
+passed at0a40a4c: the selected generation stayed unchanged while a separate64MiB
+cache accepted writes and enforced its quota, with producer sources/tools
+unavailable during28 browser groups/four unchanged upstream tests. Actual kernel
+CPU/memory/swap/PID limits and owned-runtime cleanup passed. The [exact fresh source/native installed replay](../acceptance/project-adoption/g5-installed-retained-next-20261024/accepted-40071420581/independent-verification.json)
+now also passes at80ae616/engine2fc8a201 for that pinned profile. Neither result
+establishes full OS/dependency closure, network isolation, performance or
+production activation.
 
 A successful update atomically replaces selected.json and preserves the exact previous pointer in the new attempt. Failed, raced and interrupted attempts remain; pre-publication failures preserve the old pointer. A matching input key checks stored bindings/current selected bytes and reports verification:not-repeated with cacheHits:0. Use --force to execute a fresh attempt rather than taking that no-op path.
 

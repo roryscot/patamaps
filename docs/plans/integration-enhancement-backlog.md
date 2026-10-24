@@ -14,14 +14,23 @@ a passed fixture or metadata observation is not general support.
 | Workstream | Existing result | Remaining work if selected |
 | --- | --- | --- |
 | Real Rust application onboarding | Explicit project capture, Cargo observations, scoped Axum transport and pinned upstream Axum build/tests/replay | Retained Wargame router and thirteen production-network controls passed; extend only for uncovered owner schemas/semantics. Independent Miniserve registry/runtime and current installed workflow also passed. |
-| Broader Next.js/framework integration | Selected production build, public HTTP/browser paths and declared observations | Pinned Chatbot auth/private-document and explicit page-rewrite/canonical-session-proxy controls passed; fresh installed native commands now pass below; remaining owner route/deployment behavior and full retained Next bundle remain open. |
-| Retained builds and portable development loop | Controlled watch/recovery and scoped actual Rust retained workflow | Application-specific dependency closure, full retained Next bundle/installed replay and measured edit-loop behavior; no blanket hermeticity or speed claim. |
+| Broader Next.js/framework integration | Selected production build, public HTTP/browser paths and declared observations | Pinned Chatbot auth/private-document and explicit page-rewrite/canonical-session-proxy controls passed; fresh installed native commands and complete pinned retained bundle now pass below; remaining owner route/deployment behavior stays open. |
+| Retained builds and portable development loop | Controlled watch/recovery and scoped actual Rust retained workflow | Full pinned retained Next bundle/installed replay now passed; application-specific dependency context and measured edit-loop behavior remain open. No blanket hermeticity or speed claim. |
 | Deployment expansion | Scoped actual Linux output/runtime and deployment refusals | Remaining wrong-architecture/stale-contract controls or a chosen deployment profile. Production activation remains separate. |
 | Performance acceptance | Existing functional timing records | Define comparison and acceptance budgets before exclusive measured execution. Diagnostic profiling remains separate. |
 | Storage and reservation infrastructure | Installed qualified protocol3 reservations and bounded retention controls | Maintenance for demonstrated failures; no infrastructure prerequisite for parity. Preserve native/benchmark exclusive fallback. |
 | Qualification tooling | Source-preparation privacy controls and retained failed runs | Repair only for selected qualification work; collector defects are not product defects without a reproduced product failure. |
 
 ## Current selected work
+
+The complete pinned Next I2 installed workflow now [passes independent review](../acceptance/project-adoption/g5-installed-retained-next-20261024/accepted-40071420581/independent-verification.json)
+at80ae616/engine2fc8a201. Both fresh source/native installations passed the full
+retained runtime with enforced cache, source/tool absence, mutation refusals and
+restoration/cleanup. All1,180 source members matched Git. This closes the selected
+I2 subgate; original actual-project exclusive cold/warm/edit measurements and
+remaining support-matrix owner/deployment rows stay open. Earlier checkpoints
+below keep their identified historical source/engine scope.
+
 
 The real Cargo registry increment is now [independently verified](../acceptance/project-adoption/g3-cargo-registry-context-20261023/registry-accepted-40050181349/independent-verification.json)
 in [run 40050181349](https://github.com/roryscot/patamaps/actions/runs/40050181349)
