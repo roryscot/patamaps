@@ -158,3 +158,13 @@ archives, installed executables and receipts remain. All ten frozen crates
 match their publication hashes. Compiler-file backup/recompilation/exact-byte
 recovery have not been verified. This changed list needs fresh user approval;
 no proposed file has been deleted.
+
+
+The [Linux collector run40077251568](https://github.com/roryscot/patamaps/actions/runs/40077251568)
+at a322f65 also passed all9 controls; [verified log/source summary](../acceptance/project-adoption/g4-project-measurements-20261024/linux-collector-controls.json).
+The same collector/workflow source digests match the Intel preflight. No resource
+warnings occurred. The source-only implementation and both platform controls are
+verified; actual calibration, real-project driver/builds and timed acceptance
+remain pending. The exact3,491-file publication-cache deletion request is open;
+none of the proposed files has been deleted and no unrelated container has been
+interrupted. Fresh approval for this inventory remains pending.
