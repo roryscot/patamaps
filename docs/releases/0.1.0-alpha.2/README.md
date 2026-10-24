@@ -1,5 +1,7 @@
 # Patamaps 0.1.0-alpha.2
 
+Published to crates.io on 2026-10-24 as roryscot. All three public archive checksums and sparse-index entries match the verified candidates; see [publication.json](publication.json).
+
 Release packages: patamaps-workspace and patamaps-cli, plus patamaps-inspect solely because its exact workspace dependency pin must advance. Other Patamaps dependencies stay at 0.1.0-alpha.1; the collator stays at 2.2.1-patamaps.1.
 
 This release adds explicit lockless Cargo observations, bounded retained attempts, selected-command artifact checks, closed-tree output validation, captured executable-mode corrections, snapshot-backed Docker contexts and digest-bound ELF target inspection. Existing optional Next adapter corrections are included; further Next integration is outside this release.

@@ -9,17 +9,20 @@ and test that connection.
 ## Get the compiler
 
 The CLI is published on crates.io as `patamaps-cli` version
-`0.1.0-alpha.1`. Install that exact alpha version with:
+`0.1.0-alpha.2`. Install that exact alpha version with:
 
 ~~~sh
-cargo install patamaps-cli --version 0.1.0-alpha.1 --locked
+cargo install patamaps-cli --version 0.1.0-alpha.2 --locked
 ~~~
 
-The published-package install and generated-Rust consumer check passed in the
-[Linux x86_64 acceptance run](https://github.com/roryscot/patamaps/actions/runs/39847645841).
-For newer checkout features, including project-exec-selected, build from the
-checkout; the published alpha does not contain them. Building this checkout
-requires Rust 1.99 as declared in `rust-toolchain.toml`:
+The alpha.2 package verification, fresh Cargo-home installation of the exact
+candidate archives, and generated-Rust consumer compilation passed in
+[Linux x86_64 CI](https://github.com/roryscot/patamaps/actions/runs/40117789049).
+The install rehearsal used a debug build. Public crate downloads and registry
+checksums match those tested archives; see the
+[publication receipt](../releases/0.1.0-alpha.2/publication.json).
+Alpha.2 includes project-exec-selected and the retained-output checks.
+Building from this checkout requires Rust 1.99 as declared in rust-toolchain.toml:
 
 ~~~sh
 cargo build --release --locked -p patamaps-cli
