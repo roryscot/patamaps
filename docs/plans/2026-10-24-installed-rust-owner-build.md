@@ -1,6 +1,7 @@
 # Fresh installed Rust owner builds
 
-Status: planned; no new installed-owner build is accepted.
+Status: accepted for the exact development-profile source/native pair at8c6de4,
+workspace enginea5d602de, with pinned Miniserve0.35.0 on Linux x86_64.
 This is the original G5/G6 installed-consumer requirement, independent of the
 storage-blocked native G4 measurement run. Develop on Intel; use the existing
 opt-in Linux qualification infrastructure for actual work. No Intel guard bypass,
@@ -112,3 +113,39 @@ No actual owner success or acceptance is claimed from a running job. Follow
 this same handle to a terminal result; the separate in-memory review is prepared.
 The native G4 cleanup approval remains pending. One of two permitted repairs
 has been used, solely for reusable-workflow permissions.
+
+
+## Accepted scoped installed-owner result
+
+[Run40118700332](https://github.com/roryscot/patamaps/actions/runs/40118700332)
+at8c6de4 passed, including owned-container cleanup and the evidence ceiling.
+[Independent review](../acceptance/project-adoption/g5-installed-rust-owner-build-20261024/accepted-40118700332/independent-verification.json)
+matched all1,203 packaged source files to Git, both exact archive/engine
+identities, all60 original application files per owner and874 retained registry
+members per owner against456 unchanged Cargo.lock checksums. Both fresh
+installations compiled the real owner and passed the same19 harnesses/325 tests,
+eight named HTTP controls twice, four prior-selection-preserving refusals,
+registry corruption before-effects controls, stale-runtime refusal, restored
+replay and all owned-container shutdown. Source/checkout restoration and the
+changed-installed-source-before-compiler marker check passed.
+
+The source CLI was freshly compiled from installed paths with declared dependency
+artifacts reused. Native/source compiler binaries were each63,040,536 bytes;
+both compiler digests and both newly built application digests matched in this
+single profile. This is not a general reproducible-build or performance claim.
+Observed workflow growth peaked at3,474,575,360 bytes under the unchanged4GB cap.
+
+The first independent inspection stopped at an erroneous extra40MiB read cap
+for a development compiler. Package creation has no such40MiB binary limit.
+The [corrected inspector](../acceptance/project-adoption/g5-installed-rust-owner-build-20261024/inspector-correction.json)
+uses the already-frozen320MiB whole-artifact ceiling while retaining every source,
+digest, ELF, kernel, correctness and runtime check. The first failure and its
+source digest remain preserved. No owner workload, criterion or product limit
+was changed or rerun for this correction. Both allowed repairs have been used.
+
+One194,599,593-byte CI artifact retains the exact packages/states until
+2026-11-07T18:21:52Z. About100KB of reviewed receipts/source are retained on Intel;
+no archive or extracted registry tree was written there by review.
+Complete OS/toolchain/test-fixture closure and production activation remain
+outside this accepted profile. Native/Next actual-project G4 measurements remain
+unaccepted; the separate native cleanup approval is still pending.

@@ -1,0 +1,22 @@
+{
+  "status": "review-incomplete-inspector-bound",
+  "observedAtUtc": "2026-10-24T18:27:48.972331+00:00",
+  "runId": 40118700332,
+  "ciConclusion": "success",
+  "reviewExitCode": 1,
+  "failedLine": 75,
+  "oldInspectorPerCompilerLimitBytes": 41943040,
+  "actualSizeEvidence": "ZIP member exceeded the inspector limit; exact size not recorded in this first attempt.",
+  "cause": "An additional release-sized compiler read cap was incorrectly applied to a development-profile CLI. Package source has no such 40MiB binary cap.",
+  "correction": "Use the frozen 320MiB whole-artifact ceiling already checked against both ZIP metadata and total uncompressed members; preserve digest, ELF, source, execution and runtime checks.",
+  "criteriaChanged": false,
+  "productLimitsChanged": false,
+  "ownerWorkloadRerun": false,
+  "originalReviewDigest": "sha256:c4e2ac1962df8b5d9d5da95f53878fce369d2270faa685ee81cd38f033862f0f",
+  "revisedReviewDigest": "sha256:8fc1ac4aed011dc709321a8ff2d28d4d04cff5e72891ed1f4c5f1a6626b1eadf",
+  "repairNumber": 2,
+  "repairBudget": 2,
+  "ownerAcceptance": false,
+  "privateFailureStdout": "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/installed-rust-review-7_2a84ii/review.stdout",
+  "privateFailureStderr": "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/installed-rust-review-7_2a84ii/review.stderr"
+}

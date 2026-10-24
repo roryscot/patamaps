@@ -23,11 +23,15 @@ a passed fixture or metadata observation is not general support.
 
 ## Current selected work
 
-An independent original G5/G6 increment now follows the [fresh installed Rust
-owner-build plan](2026-10-24-installed-rust-owner-build.md). Existing installed
-Miniserve evidence replays retained artifacts; actual owner rebuilds with each
-fresh installed compiler remain unverified. Reuse the existing bounded Linux
-registry/HTTP qualification. The native G4 storage approval remains pending.
+The independent original G5/G6 [fresh installed Rust owner-build increment](2026-10-24-installed-rust-owner-build.md)
+now [passes independent review](../acceptance/project-adoption/g5-installed-rust-owner-build-20261024/accepted-40118700332/independent-verification.json)
+at8c6de4/workspace enginea5d602de: both installed compilers rebuilt pinned
+Miniserve, each passing325 unchanged tests, eight named HTTP controls twice,
+selection/registry/stale-artifact refusals and owned-container cleanup.
+All1,203 source members matched Git; both owners'874 registry members matched
+456 lock checksums. This closes that named owner-rebuild gap for this exact
+development-profile pair. G4 measurements, external OS/test-input closure and the
+pending native cleanup decision retain their existing status.
 
 The next original G4 gate follows the [frozen actual-project measurement plan](2026-10-24-project-measurements.md): native Axum initial/warm/edit phases with explicit RSS units, retained disk and a separate exclusive benchmark reservation. No new measurement is accepted yet.
 

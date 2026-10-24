@@ -111,8 +111,19 @@ The eight original Miniserve TLS/auth test fixture files remain outside every
 Patamaps capture. Tests use the pinned public clone. This preserves the existing
 privacy boundary while leaving owner test-context closure explicitly open.
 Performance, full OS/toolchain closure and production activation remain open.
-The installed result above covers exact registry/selected-state replay; it does
-not rerun Cargo or establish an installed full owner build.
+That earlier installed result covers registry/selected-state replay.
+[Fresh installed owner builds](../acceptance/project-adoption/g5-installed-rust-owner-build-20261024/accepted-40118700332/independent-verification.json)
+now pass for the exact development-profile source/native pair at8c6de4,
+workspace enginea5d602de. Both installed compilers rebuilt pinned Miniserve from
+the original selected source/registry inputs, each passing325 unchanged tests,
+the eight HTTP controls twice, four selection refusals and registry/stale-runtime
+before-effects checks. Review rehashed both owners'874 registry members and60
+source files and matched1,203 packaged source members against Git. Checkout
+compiler/qualifier absence, source restoration and stopped owned containers
+passed. See the [bounded plan](../plans/2026-10-24-installed-rust-owner-build.md).
+Declared dependency compiler artifacts were reused when building the installed
+source CLI; complete external OS/toolchain/test-fixture closure and performance
+remain unaccepted.
 
 
 The unchanged QR test requires a URL outside the loopback address ranges. Its
