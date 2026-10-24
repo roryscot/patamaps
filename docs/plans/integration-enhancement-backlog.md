@@ -23,6 +23,11 @@ a passed fixture or metadata observation is not general support.
 
 ## Current selected work
 
+The [remaining-gate audit](adoption-remaining-gates.md) maps current receipts back
+to the original requirements. Actual-project measurements and complete named
+Wargame/Seeder workflows remain open; public-project passes do not silently
+replace those requirements.
+
 The original G3/G6 [dynamic Next page/data-boundary increment](2026-10-24-next-dynamic-runtime.md)
 now [passes independent review](../acceptance/project-adoption/g3-next-dynamic-runtime-20261024/accepted-40125656603/independent-verification.json)
 at0f0ce33/workspace enginea5d602de with original owner source/configuration:
@@ -52,7 +57,10 @@ The driver and23 focused controls now pass on Intel and Linux at84922fa;
 The actual Intel unleased entry also refuses before writes. A
 [fresh canonical admission check](../acceptance/project-adoption/g4-project-measurements-20261024/admission-recheck.json)
 still refuses the next native preparation for retained-output headroom.
-The pending exact3,491-file cleanup approval has not been exercised. Native
+The pending exact3,491-file cleanup approval has not been exercised. A later
+[canonical recheck and complete inventory-identity check](adoption-remaining-gates.md#latest-native-admission-evidence)
+after the dynamic-route milestone confirmed the same refusal and all3,491
+unchanged files; no active reservations or compilers were observed. Native
 preparation and all real measurements remain unrun; independent source-only
 controls are complete. This blocker has persisted across three goal turns.
 
