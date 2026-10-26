@@ -23,6 +23,17 @@ a passed fixture or metadata observation is not general support.
 
 ## Current selected work
 
+
+The [original-owner topology increment](2026-10-25-current-owner-topology.md)
+now [passes source-built review](../acceptance/project-adoption/current-owner-topology-20261026/receipt.json):
+two unchanged generators, eight output matches,362 native calls, both package
+check lanes and three unchanged route tests per candidate. Native legacy
+TypeScript rendering and exact stable JSON/digest helpers close demonstrated
+owner interface gaps. Private source remains private. Complete retained/
+installed/authenticated owner workflows and actual performance remain open.
+Use the qualified context paths in that result; the initial selection of a
+known incomplete historical copy was an intake mistake, not a product defect.
+
 The [remaining-gate audit](adoption-remaining-gates.md) maps current receipts back
 to the original requirements. Actual-project measurements and complete named
 Wargame/Seeder workflows remain open; public-project passes do not silently

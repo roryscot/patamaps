@@ -1,6 +1,7 @@
 # Current-native owner topology and contract tests
 
-Status: planned; no new owner or browser acceptance.
+Status: native interfaces and the original-owner generator/route-contract lane
+verified; full owner and browser acceptance remain open.
 This continues original G3/G6 requirements alongside the separately gated G4
 benchmark. It does not replace private owner, runtime, browser or performance
 requirements with a smaller success condition.
@@ -13,7 +14,7 @@ bridge. Its second application-topology generator additionally imports
 composition, identifiers, canonical digest, the existing Next discovery adapter,
 and emitTypeScriptProjection. Native composition/reference APIs and the licensed
 discovery provider already exist. A native legacy TypeScript-emission SDK entry
-point is missing. The retained original dependency is Metamap0.5.0; use its exact
+point is missing. The retained original dependency is Metamap 0.5.0; use its exact
 bytes as this owner's compatibility oracle, not as evidence of0.7.1 API identity.
 
 Keep both original generator files, original compiler/dependency tree, graph/
@@ -83,7 +84,7 @@ protected original records and released ownership were independently checked.
 The current prepared executable is retained under
 .tools/axum-pinned-preparation-retry-20261026/actual-axum/tools/configured-provider.
 It is independent of subsequent root target rebuilds. Cold target/state remain
-absent. The legacy topology renderer and owner checks above remain planned.
+absent. The later scoped result below records the completed renderer and owner checks.
 
 ## Exact utility contract discovered during implementation
 
@@ -127,3 +128,31 @@ Run the current native full-context verifier before and after owner commands.
 A mismatched recovery source refuses before any writes. No manifest rewrite,
 deletion, policy increase, old-compiler fallback or weaker test expectation is
 authorized by this additive repair.
+
+
+## Verified scoped result
+
+The [current-owner review](../acceptance/project-adoption/current-owner-topology-20261026/receipt.json)
+passes both unchanged original generators, eight captured/original/native byte
+comparisons, both package validation/check lanes, SDK method type contracts and
+three unchanged route tests per candidate. All362 native calls succeeded.
+Current native full-context verification passed before and after the workflow;
+all 886 production inputs and toolkit bytes were checked, the original owner
+remained unchanged, and the reservation finished/released.
+
+The initial context choice missed the already recorded
+[earlier recovered augmented copy](../acceptance/project-adoption/g4-exact-context-recovery-2026-10-19/receipt.json).
+That was an avoidable intake error. This run restored 106 exact original-context
+files without overwriting/deleting any file or changing its manifest/address.
+Use the now-qualified original source context at
+.tools/project-adoption/seeder-retained-context-retry2-20261016/snapshot.
+The separate historical recovered augmented copy is at
+.tools/project-adoption/snapshot-recovery-20261019/snapshot; verify it before a
+future workflow rather than assuming its older receipt attests current bytes.
+
+The final allowed repair used only the existing Next adapter entry point to
+avoid eagerly importing an unused registry dependency. All prior refusals and
+private payloads remain retained. The source-built native renderer and generic
+legacy JSON utilities are implemented and verified; current retained Next
+production/replay, authenticated browser/permission behavior, fresh installed
+owner workflow, deployment and measured performance remain requirements.

@@ -75,3 +75,27 @@ is preserved. The retry waited for a fresh parent heartbeat without weakening
 ownership or changing policy. This closes controller-path preservation only;
 actual G4 measurements and the separate database quiet-window decision remain
 open.
+
+
+## Original-owner generation and route-contract increment
+
+The [reviewed current source-built owner result](../acceptance/project-adoption/current-owner-topology-20261026/receipt.json)
+now qualifies both unchanged generators and all eight outputs against the
+captured original Metamap 0.5.0 bytes. Native composition/viability/projection/
+TypeScript emission and exact legacy JSON/digest utilities were exercised in 362
+successful calls. Both package check lanes and three unchanged route tests per
+candidate passed; all 886 selected production inputs and the public toolkit
+matched their bindings. The195,911-entry source context passed current native
+verification before and after execution, and original owner Git stayed clean.
+
+This closes that named source-built generator/route-contract prerequisite.
+Current retained Next production selection/replay, authenticated browser/
+permissions and label visibility, fresh installed owner workflows and remaining
+G4/G5/G6 requirements stay open. Earlier snapshots/refusals remain historical;
+the qualified source-context location is recorded in the new receipt guide.
+
+The preserved Axum preparation still identifies its frozen f137cd54 compiler.
+The new legacy APIs change compiler identity; reprepare with the selected current
+CLI before making a current-source performance claim. The separate quiet-window
+approval, frozen measurement budgets and exclusive measurement requirement stay
+unchanged.
