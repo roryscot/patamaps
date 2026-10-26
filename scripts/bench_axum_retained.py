@@ -162,7 +162,7 @@ def prepare(args):
   with (owner/name).open('xb') as target:target.write(raw)
  lib=owner/'axum/src/lib.rs';base=lib.read_text();assert 'PATAMAPS_MEASURED_EDIT' not in base
  shutil.copy2(lib,work/'unmodified-axum-lib.rs');lib.write_text(base+probe_suffix('cold'))
- tools=work/'tools';shutil.copy2(cli,tools/'configured-provider')
+ tools=work/'tools';shutil.copy2(cli,tools/'configured-provider');cli=tools/'configured-provider'
  old_plan=json.loads((candidate.parent/'plan.json').read_bytes());source_config=old_plan['workspace']['sources'][0]['config']
  for name in ['cargo','rustc']:(tools/('configured-'+name)).symlink_to(Path(source_config[name]).resolve(strict=True))
  cargo,rustc=[tools/('configured-'+n) for n in ['cargo','rustc']]

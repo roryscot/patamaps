@@ -58,3 +58,20 @@ and [inventory/activity recheck](../acceptance/project-adoption/adoption-closeou
 remain historical evidence from before the explicit cleanup approval. They do
 not describe current native admission. The active remaining benchmark
 prerequisite is its separate exclusive window.
+
+## Retained controller follow-up
+
+The [fresh retained-controller review](../acceptance/project-adoption/axum-pinned-controller-20261026/review.json)
+supersedes the earlier preparation for future measurements: its controller now
+uses the already copied private configured-provider executable. All13 existing
+controls, a native CLI rebuild and fresh functional preparation passed. Engine
+and input-key inspection also passed while the shared compiler path was
+temporarily unavailable; exact compiler bytes/mode were restored. All337 owner
+inputs and prior protected records were rehashed, and the reservation finished
+and released. Cold target/state remain absent.
+
+The [first attempt's stale-heartbeat refusal](../acceptance/project-adoption/axum-pinned-controller-20261026/initial-refusal.json)
+is preserved. The retry waited for a fresh parent heartbeat without weakening
+ownership or changing policy. This closes controller-path preservation only;
+actual G4 measurements and the separate database quiet-window decision remain
+open.

@@ -73,3 +73,14 @@ existing-driver controls and the real private owner lane. Allow one initial
 owner run and at most two repairs for demonstrated implementation/harness
 defects. Preserve failures and all expected values; no policy increase, new VM,
 new hosted CI, private-source publication or unapproved deletion.
+
+## Benchmark prerequisite verified
+
+The [retained-controller follow-up](../acceptance/project-adoption/axum-pinned-controller-20261026/review.json)
+passed fresh guarded preparation and actual engine/input-key inspection with the
+shared compiler path unavailable. Exact restoration, all337 owner inputs,
+protected original records and released ownership were independently checked.
+The current prepared executable is retained under
+.tools/axum-pinned-preparation-retry-20261026/actual-axum/tools/configured-provider.
+It is independent of subsequent root target rebuilds. Cold target/state remain
+absent. The legacy topology renderer and owner checks above remain planned.
