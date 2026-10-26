@@ -5,7 +5,7 @@ for production selection, unavailable-source/snapshot/provider binding replay,
 no-op, context refusal and final native selection verification. The original
 controller's failed exit/stream assertion remains preserved; the separately
 queued follow-up native audit passed without rerunning the baseline or refusal.
-The declared positive edit remains planned. Continue original G4/G6; source-built
+The declared positive edit is running; its [independent oracle preflight](../acceptance/project-adoption/current-owner-retained-next-20261026/declared-edit-preflight.json) passed. Continue original G4/G6; source-built
 generator/route-contract qualification at bb73b81 is a prerequisite, not a
 substitute for the remaining workflow and owner acceptance.
 

@@ -71,3 +71,11 @@ the unchanged canonical policy and released its reservation. Source, selected ar
 three current CLI copies and ten rehashed publication archives are preserved.
 Compiled-file backup and exact restoration are unverified; reuse would require
 recompilation. APFS physical gains may be smaller than summed allocation.
+
+The separately queued declared edit now has a [passed independent original
+oracle preflight](declared-edit-preflight.json): both original generators and
+check modes, eight changed expected outputs, all three unchanged original route
+tests, and an actual baseline-JavaScript marker refusal. All 886 original text
+inputs and 943 new native inputs were rehashed. The native retained edit build is
+running with 952 prepared inputs. This preflight does not accept a new native
+selection, compiled marker, installed workflow or authenticated browser behavior.
