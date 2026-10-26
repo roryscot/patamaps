@@ -4,6 +4,7 @@ import type {
   validateLegacyProjection,
   parseLegacyProjection,
   compileLegacyProjection,
+  emitLegacyTypeScriptProjection,
 } from "./legacy-projection.js";
 export * from "./legacy-projection.js";
 import type {
@@ -277,6 +278,7 @@ export interface LegacyValidationApi {
   validateLegacyProjection: typeof validateLegacyProjection;
   parseLegacyProjection: typeof parseLegacyProjection;
   compileLegacyProjection: typeof compileLegacyProjection;
+  emitLegacyTypeScriptProjection: typeof emitLegacyTypeScriptProjection;
   parseLegacyEvaluationContext: typeof parseLegacyEvaluationContext;
   evaluateLegacyContextExpression: typeof evaluateLegacyContextExpression;
   requiredLegacyContextKeys: typeof requiredLegacyContextKeys;
