@@ -1,5 +1,5 @@
 {
-  "status": "reviewed-selected-build-and-scoped-controls-final-native-audit-open",
+  "status": "passed-reviewed-selected-owner-next-build-replay-noop-and-context-refusal",
   "observedAtUtc": "2026-10-26T17:08:43.876917+00:00",
   "sourceRevision": "27b9a2d1fac66a6007b6f3fd2174bddb2fa97807",
   "engine": {
@@ -54,6 +54,12 @@
       "role": "unbound-owner-edit-refusal",
       "exitCode": 1,
       "stdoutDigest": "sha256:91117e1b60e8fc7b27b69a328ede0ae6211384196c3b6af68e73fc850b9fb42d",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "role": "final-native-selection-after-refusal",
+      "exitCode": 0,
+      "stdoutDigest": "sha256:ead8844087b7bec3174d9c9d48fcf945d796511971616a7d6c53a42498689655",
       "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     }
   ],
@@ -121,10 +127,7 @@
   "controllerRunReceiptDigest": "sha256:2a965fd965cd45358927d6ac7315cb44bb409bdb5863a908071efdcf8a81837e",
   "controllerDriverDigest": "sha256:4856cf38082e2287598a049217244994fa1b9da0c728ef8898c3968b6ee70987",
   "baselineRepairBudgetExhausted": true,
-  "finalNativeSelectionAuditExecuted": false,
-  "finalNativeSelectionAuditAdmissionExitCode": 75,
-  "finalNativeSelectionAuditAdmissionCategory": "insufficient-retained-output-headroom",
-  "auditAdmissionRecordDigest": "sha256:f31fe75dae72e266650b29cd103422d962e5a5658b3fbc55dd96ddd815182812",
+  "finalNativeSelectionAuditExecuted": true,
   "finalAuditDraftReceiptStatusCorrectedBeforeExecution": true,
   "baselineBuildReruns": 0,
   "refusalReruns": 0,
@@ -151,6 +154,23 @@
       "state": "finished",
       "leaseReleaseCompleted": true,
       "ownerAlive": false
+    },
+    {
+      "id": "e7d1b45d-507e-4e99-8ea7-ee77022ba1a2",
+      "state": "finished",
+      "leaseReleaseCompleted": true,
+      "ownerAlive": false
     }
-  ]
+  ],
+  "priorFinalAuditAdmissionExitCode": 75,
+  "priorFinalAuditAdmissionCategory": "insufficient-retained-output-headroom",
+  "priorAuditAdmissionRecordDigest": "sha256:f31fe75dae72e266650b29cd103422d962e5a5658b3fbc55dd96ddd815182812",
+  "finalNativeSelectionAuditExitCode": 0,
+  "finalNativeSelectionAuditStatus": "verified-selected-build-bindings",
+  "finalNativeSelectionAuditReceiptDigest": "sha256:9718c4ae843a6a90aa3c61733062aafadce460e3fe96d0ef8f644a59658e5149",
+  "finalNativeSelectionAuditDriverDigest": "sha256:5849081875ab3f3f68dec54112bdb235b41c8128bcff5a5282cd69ec3c2fabd2",
+  "finalNativeSelectionAuditSupervisorRecordDigest": "sha256:59bf57b3a6ec7c889d523d97d597552f3aee0ace9b992c62305d1e8d3232eab2",
+  "finalNativeSelectionAuditReservationId": "e7d1b45d-507e-4e99-8ea7-ee77022ba1a2",
+  "finalNativeSelectionAuditReservationReleased": true,
+  "selectedBuildVerifiedAfterRefusal": true
 }

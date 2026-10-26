@@ -1,12 +1,13 @@
 # Current native owner retained Next workflow
 
-Status: production baseline selected; source/snapshot/provider-unavailable
-replay and no-op passed. [Recorded-results review](../acceptance/project-adoption/current-owner-retained-next-20261026/review.json)
-observes the correct before-candidate context refusal, but the controller failed
-on its exit/stream assertion. The final native post-refusal audit was refused
-before execution for retained-output headroom; the declared edit remains planned.
-Continue original G4/G6; source-built generator/route-contract qualification
-at bb73b81 is a prerequisite, not a substitute for this workflow.
+Status: [reviewed baseline workflow passed](../acceptance/project-adoption/current-owner-retained-next-20261026/review.json)
+for production selection, unavailable-source/snapshot/provider binding replay,
+no-op, context refusal and final native selection verification. The original
+controller's failed exit/stream assertion remains preserved; the separately
+queued follow-up native audit passed without rerunning the baseline or refusal.
+The declared positive edit remains planned. Continue original G4/G6; source-built
+generator/route-contract qualification at bb73b81 is a prerequisite, not a
+substitute for the remaining workflow and owner acceptance.
 
 Use the original private owner at c61d51a and the qualified original source
 context with digest 1bdf0656. The current compiler/SDK identities and all eight
@@ -154,3 +155,22 @@ The next action is only that existing-state audit after approved headroom is
 available, followed by the separately queued declared edit. No new whole context
 or application baseline is needed for the audit. Keep authenticated/browser,
 installed-owner, deployment and performance requirements open.
+
+The separate exact 2,366-file compiler inventory was subsequently approved and
+[deleted with independent journal review](../acceptance/project-adoption/current-owner-retained-next-20261026/approved-cleanup.json).
+All four excluded entries, three current CLI copies and ten publication archives
+remain. Observed available space increased 2,216,493,056 bytes. The corrected
+existing-state audit is requeued in a new evidence directory; its outcome remains
+pending. This consumed only that exact deletion approval and no baseline retry.
+
+## Final existing-state audit accepted
+
+After the exact approved cleanup, the corrected read-only audit admitted under
+the unchanged canonical policy and completed project-build-verify with exit0 /
+verified-selected-build-bindings. It rechecked the selected pointer, artifacts,
+sealed ledger, restored source and original owner Git after the recorded refusal.
+No baseline rebuild or refusal rerun occurred, and the reservation finished and
+released. This closes the final baseline audit; preserve the original failed
+controller and earlier admission refusal as history. Proceed to the separately
+queued declared edit with its existing fourth attempt slot. Installed owner,
+authenticated/browser, deployment, performance and full adoption remain open.

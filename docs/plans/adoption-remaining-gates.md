@@ -134,3 +134,12 @@ open check; do not rerun the baseline or infer a full owner/controller pass.
 Resume only the existing-state audit after approved headroom, then the separately
 planned declared edit. Authenticated/browser/permissions, fresh installed owner
 workflow, deployment, measurements and full G4/G6 acceptance remain open.
+
+The [follow-up existing-state audit](../acceptance/project-adoption/current-owner-retained-next-20261026/review.json)
+subsequently passed native project-build-verify after exact approved compiler
+cleanup: exit0 / verified-selected-build-bindings, no baseline/refusal reruns,
+unchanged selection/artifacts/source and released reservation. The earlier
+controller failure and admission refusal remain historical. The remaining
+current-owner functional stage is the declared positive edit; this scoped
+baseline result does not accept installed-owner, authenticated/browser,
+deployment, performance or full G4/G6 requirements.
