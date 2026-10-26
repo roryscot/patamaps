@@ -174,3 +174,36 @@ released. This closes the final baseline audit; preserve the original failed
 controller and earlier admission refusal as history. Proceed to the separately
 queued declared edit with its existing fourth attempt slot. Installed owner,
 authenticated/browser, deployment, performance and full adoption remain open.
+
+## Declared-edit execution contract
+
+The next separately queued run uses only the fourth retained attempt slot;
+the earlier baseline repair budget stays exhausted. Create a small original
+Metamap 0.5 oracle from the prior qualified 886 production text inputs and the
+existing dependency symlink. Run both unchanged original generators/check modes
+and all three original route tests. Those original outputs supply all eight
+new expected digests; native output must not supply its own oracle.
+
+The derived native source changes only the declared non-primary graph label,
+the expected-output control, its marker verification hook and one small marker
+module. Bind all helper bytes through existing codeInputs and project membership:
+943 selected inputs / 952 prepared inputs, still below the unchanged 1,024 limit.
+Declare the graph's original digest in context overlays. Preserve all old
+production inputs, framework commands/config, compiled-manifest witnesses,
+independent TypeScript check, three owner tests and native generator checks.
+
+Run the same bounded marker function against the actual baseline static
+JavaScript first; it must refuse the absent marker. The native build's contract
+verification then requires that marker in actual .next/static JavaScript
+before publication. It scans only ordinary files, refuses symlinks, caps 20,000
+entries and 128 MiB JavaScript, and records counts/membership digest. Source,
+helper/config text and standalone auxiliary files cannot satisfy this check.
+
+Require a new input key and selection, the exact old pointer retained as
+previous-selection.json, all eight independently expected native outputs,
+final native selected-build verification and a no-op with unchanged pointer/
+ledger, zero cache hits and no repeated verification. Rehash prior baseline
+artifacts and both small sources afterward. No new full snapshot, compiler
+rebuild, installed workflow, browser visibility, database stop, policy change
+or additional deletion is part of this run. Any fourth-slot failure is retained;
+do not silently rerun a baseline or increase the attempt limit.
