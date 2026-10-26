@@ -1,7 +1,12 @@
 # Current native owner retained Next workflow
 
-Status: running; [preparation checkpoint](../acceptance/project-adoption/current-owner-retained-next-20261026/preparation.json) passed. Continue original G4/G6; source-built generator/route-contract
-qualification at bb73b81 is a prerequisite, not a substitute for this workflow.
+Status: production baseline selected; source/snapshot/provider-unavailable
+replay and no-op passed. [Recorded-results review](../acceptance/project-adoption/current-owner-retained-next-20261026/review.json)
+observes the correct before-candidate context refusal, but the controller failed
+on its exit/stream assertion. The final native post-refusal audit was refused
+before execution for retained-output headroom; the declared edit remains planned.
+Continue original G4/G6; source-built generator/route-contract qualification
+at bb73b81 is a prerequisite, not a substitute for this workflow.
 
 Use the original private owner at c61d51a and the qualified original source
 context with digest 1bdf0656. The current compiler/SDK identities and all eight
@@ -125,3 +130,27 @@ intentional unbound-edit refusal. This accounts for the actual failed record
 without deleting it; the number of functional builds and the one-initial/two-
 repair budget are unchanged. All machine disk-growth, reserve and total-retention
 limits remain unchanged. No further baseline repair is authorized by this plan.
+
+## Recorded outcome and remaining final audit
+
+The final allowed baseline repair selected the real production build. Both
+native preparation commands, Next build, independent TypeScript check, all
+three compiled-manifest witnesses, eight generated contracts, three unchanged
+owner route tests and both native generator check modes passed. Offline binding
+replay with three producer paths unavailable and a no-op also passed.
+
+The undeclared graph edit correctly refused PROJECT_CONTEXT before candidate
+creation and preserved selection. Its structured stdout/exit-1 response matches
+the existing CLI contract; the controller's exit-2/stderr assumption was wrong.
+Keep its failed receipt and do not spend another baseline repair. A direct
+post-refusal inspection confirms every selected artifact hash/mode, source input,
+restored tool/context path and unchanged original owner Git.
+
+A separately queued read-only final native selection audit was denied before
+its program started because the unchanged retention policy could not reserve
+another full 4 GB. Its draft now uses the actual internal receipt status
+verified-command-build; no native verifier or baseline retry ran from that draft.
+The next action is only that existing-state audit after approved headroom is
+available, followed by the separately queued declared edit. No new whole context
+or application baseline is needed for the audit. Keep authenticated/browser,
+installed-owner, deployment and performance requirements open.

@@ -114,3 +114,23 @@ That same restriction exposes a still-unrun Axum measurement-driver layout issue
 The measurement driver needs a functionally checked external state path as well
 as fresh current-compiler preparation and its separate quiet-window approval.
 Preserve the earlier control/preparation passes at their actual scope.
+
+## Current retained-owner baseline and remaining audit
+
+The [recorded current-owner result](../acceptance/project-adoption/current-owner-retained-next-20261026/review.json)
+adds actual native retained production selection to the prior generator-only
+increment: unchanged Next build, independent tsc, three compiled-manifest
+witnesses, all eight original generated outputs, three original route tests and
+both native check modes. Offline binding replay with source/snapshot/provider
+unavailable and no-op passed. A genuine undeclared graph edit refused before
+candidate staging and preserved selection. Direct post-refusal inspection
+rehashed all 2,482 artifact files and 942 restored source inputs.
+
+The controller remains failed on an incorrect refusal exit/stream assumption;
+the actual structured stdout/exit1 refusal matches existing CLI behavior. Its
+baseline repair budget is exhausted. A separately queued final native selection
+audit was denied before execution for retained-output headroom. Preserve this
+open check; do not rerun the baseline or infer a full owner/controller pass.
+Resume only the existing-state audit after approved headroom, then the separately
+planned declared edit. Authenticated/browser/permissions, fresh installed owner
+workflow, deployment, measurements and full G4/G6 acceptance remain open.
