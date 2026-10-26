@@ -84,3 +84,24 @@ The current prepared executable is retained under
 .tools/axum-pinned-preparation-retry-20261026/actual-axum/tools/configured-provider.
 It is independent of subsequent root target rebuilds. Cold target/state remain
 absent. The legacy topology renderer and owner checks above remain planned.
+
+## Exact utility contract discovered during implementation
+
+Inspection of the retained original0.5.0 stable.js and current native transports
+shows that the initial assumption about an existing interchangeable digest
+facade was too broad. The owner's generic valueDigest always hashes compact
+legacy stable JSON plus LF. The current canonical digest uses JCS, and pack
+digest deliberately dispatches root schemaVersion2.0.0 to executable/JCS rules.
+Neither is an interchangeable alias for this owner's generic valueDigest.
+The earlier route shim also used strict parse output as a stableJson bridge;
+that is not a general proof of legacy locale/member-order equivalence.
+
+Expose stableLegacyJson and digestLegacyValue through the existing read-only
+reporting dispatcher and thin SDK facade. Reuse LegacyReadOnlyJson's existing
+stable/pretty serializers, pinned locale handling and native byte_digest.
+Bound pretty/wire expansion before formatting; do not change pack dispatch,
+JCS, existing parser contracts or discovery-provider semantics. Keep both
+operations read-only and separate from native admission. Differential controls
+must include root version2 objects, integer and collation-equal keys, finite
+numbers, scalar/null data and UTF-16 strings. Use these exact native utilities in
+the owner bridge. Preserve all prior failures, corpus bytes and owner tests.
