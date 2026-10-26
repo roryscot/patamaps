@@ -1,6 +1,6 @@
 # Current native owner retained Next workflow
 
-Status: planned. Continue original G4/G6; source-built generator/route-contract
+Status: running; [preparation checkpoint](../acceptance/project-adoption/current-owner-retained-next-20261026/preparation.json) passed. Continue original G4/G6; source-built generator/route-contract
 qualification at bb73b81 is a prerequisite, not a substitute for this workflow.
 
 Use the original private owner at c61d51a and the qualified original source
