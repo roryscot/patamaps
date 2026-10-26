@@ -99,3 +99,18 @@ The new legacy APIs change compiler identity; reprepare with the selected curren
 CLI before making a current-source performance claim. The separate quiet-window
 approval, frozen measurement budgets and exclusive measurement requirement stay
 unchanged.
+
+
+## Current retained-owner execution
+
+The [current native retained Next plan](2026-10-26-current-owner-retained-next.md)
+continues source-built production selection, replay/no-op, an unbound-edit
+refusal and a separately queued declared edit. It reuses the qualified original
+source context and current generator/SDK bindings without another full snapshot.
+
+The initial layout refused before staging because state was inside a Cargo
+workspace; the repair uses the already accounted external retained-state root.
+That same restriction exposes a still-unrun Axum measurement-driver layout issue.
+The measurement driver needs a functionally checked external state path as well
+as fresh current-compiler preparation and its separate quiet-window approval.
+Preserve the earlier control/preparation passes at their actual scope.
