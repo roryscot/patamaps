@@ -79,3 +79,9 @@ tests, and an actual baseline-JavaScript marker refusal. All 886 original text
 inputs and 943 new native inputs were rehashed. The native retained edit build is
 running with 952 prepared inputs. This preflight does not accept a new native
 selection, compiled marker, installed workflow or authenticated browser behavior.
+
+The edit preflight's package metadata digest names package.json specifically.
+A separate current inspection rehashed the original generator package's file
+members against the frozen context manifest; counts and membership digest are
+recorded in the preflight. This does not claim a separately verified npm archive
+or immutable file identities throughout execution.
