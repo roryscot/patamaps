@@ -105,3 +105,25 @@ operations read-only and separate from native admission. Differential controls
 must include root version2 objects, integer and collation-equal keys, finite
 numbers, scalar/null data and UTF-16 strings. Use these exact native utilities in
 the owner bridge. Preserve all prior failures, corpus bytes and owner tests.
+
+## First real-owner refusal and bounded context repair
+
+The first owner run refused its older augmented context before generation.
+Names-only inspection found107 absent files and no unexpected entries. Of
+those,106 are application/dependency files also absent from the original
+source capture; the remaining file is a historical injected compiler binary.
+The original owner checkout remains unchanged. The cause of the missing
+retained files has not been established; this is not evidence of a compiler
+regression or of the new renderer failing.
+
+Use the original retained source capture for this qualification, preserving its
+existing manifest/address. The source-only selection retains every original
+owner input and excludes only historical injected patamaps-native-tooling and
+patamaps-qualification controls. The current driver/SDK/provider remain separately
+bound. Before retrying, recover the106 absent original-context files only if all
+source bytes match their exact recorded hashes/lengths. Write only absent paths
+with exclusive creation; retain every existing file and both old manifests.
+Run the current native full-context verifier before and after owner commands.
+A mismatched recovery source refuses before any writes. No manifest rewrite,
+deletion, policy increase, old-compiler fallback or weaker test expectation is
+authorized by this additive repair.
