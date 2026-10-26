@@ -1,7 +1,8 @@
 # Actual-project development measurements
 
-Status: driver implemented and focused controls verified; native preparation and
-actual measurements remain unrun. No new performance result is accepted. This implements the
+Status: driver controls, current native CLI rebuild and real Axum preparation
+passed; actual measurements remain unrun pending a quiet exclusive window. No
+new performance result is accepted. This implements the
 original G4 measurement requirement separately from completed native parity and
 the pinned installed Next runtime gate. The first workload is the already
 qualified native Axum workspace. Next.js measurements remain a separate gate.
@@ -113,7 +114,7 @@ requirements retain their original scope. No release, registry publication,
 production activation or blanket performance/support conclusion follows.
 
 
-## Collector implementation and current admission
+## Collector implementation and initial admission history
 
 The existing bench_phases.measured function now accepts retained output paths,
 a monitoring callback and bounded logs; it records exact-child wait4 usage and
@@ -212,7 +213,7 @@ matches the Intel control source and workflow. This adds platform verification
 of the driver controls, with actual native preparation and measurements still
 unrun and unaccepted.
 
-## Native admission blocker after driver verification
+## Historical native admission blocker after driver verification
 
 A [fresh canonical check](../acceptance/project-adoption/g4-project-measurements-20261024/admission-recheck.json)
 at51f285e again returned75: insufficient retained-output headroom. The installed
@@ -234,3 +235,39 @@ state change. The pending exact3,491-file inventory still has its original
 digest; approval has not been exercised and per-file identities must be checked
 again before any removal. A quiet benchmark window is a separate later
 requirement; the unrelated running container remains untouched.
+
+
+## Approved cleanup and native preparation (2026-10-25)
+
+The owner explicitly approved the existing exact3,491-file inventory. The
+[executed cleanup receipt](../acceptance/project-adoption/intel-native-resume-20261026/approved-cleanup.json)
+and [independent review](../acceptance/project-adoption/intel-native-resume-20261026/independent-verification.json)
+verify all approved identities/journal paths and their subsequent absence.
+All845 excluded paths, five parent directories and ten independently rehashed
+crate archives were preserved. The existing scheduler transaction and legacy
+lease serialized cleanup and were archived afterward. Available space increased
+by an observed4,055,404,544 bytes; physical gain is not guaranteed by the summed
+4,592,123,904 allocated bytes. No other deletion or policy change occurred.
+
+The unchanged canonical supervisor then admitted functional preparation.
+Source7ebc10c rebuilt the current Intel CLI and verified enginea5d602de.
+Historical compiler/state, retained snapshot, original335 source files/333 text
+inputs and protected records passed their bindings. Explicit instrumentation
+produced the new337-input measurement owner; configured tools, plan and
+coordinator/supervisor digests were verified. Cold Cargo target/state remain
+absent. Both preparation commands exited0, supervisor exit0 was observed and its
+functional reservation fully released. This does not execute the frozen
+application correctness, calibration or timing phases.
+
+Measured child intervals were18.490s for CLI rebuild and10.445s for source
+preparation. The outer supervisor interval was220.943s. Its difference includes
+admission/accounting/finalization and other overhead, which was not isolated.
+These are functional observations, not cold/warm/edit acceptance, an end-to-end
+watch latency, or an enforceable native resource-cap claim.
+
+The exclusive benchmark must queue again in benchmark phase. A single unrelated
+database container is still running; no service was stopped. Its temporary
+stop/run/restart requires separate approval. Every original timing, memory,
+correctness, disk, ownership and restoration requirement remains unchanged.
+Actual measurements, independent measurement acceptance, Next-scale measurement
+and full original owner qualification remain open. JSON timestamps use UTC.

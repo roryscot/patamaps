@@ -45,8 +45,9 @@ refusal and exact restoration. Each180-member owner inventory and all compiled/
 driver bindings were independently checked. Parent-monitored growth peaked
 at2,853,916,672 bytes; only compact evidence remains on Intel.
 This closes the named installed extension, not retained replay of these added
-controls, other dynamic shapes or external providers. Native G4 and complete
-original Wargame/Seeder workflows retain their existing blockers.
+controls, other dynamic shapes or external providers. Native storage admission
+and Axum preparation now pass below; actual G4 measurements and complete
+original Wargame/Seeder workflows remain open.
 
 The independent original G5/G6 [fresh installed Rust owner-build increment](2026-10-24-installed-rust-owner-build.md)
 now [passes independent review](../acceptance/project-adoption/g5-installed-rust-owner-build-20261024/accepted-40118700332/independent-verification.json)
@@ -60,18 +61,27 @@ pending native cleanup decision retain their existing status.
 
 The next original G4 gate follows the [frozen actual-project measurement plan](2026-10-24-project-measurements.md): native Axum initial/warm/edit phases with explicit RSS units, retained disk and a separate exclusive benchmark reservation. No new measurement is accepted yet.
 
-The driver and23 focused controls now pass on Intel and Linux at84922fa;
+The driver and23 focused controls pass on Intel and Linux at84922fa;
 [Linux verification](../acceptance/project-adoption/g4-project-measurements-20261024/linux-driver-controls.json).
-The actual Intel unleased entry also refuses before writes. A
-[fresh canonical admission check](../acceptance/project-adoption/g4-project-measurements-20261024/admission-recheck.json)
-still refuses the next native preparation for retained-output headroom.
-The pending exact3,491-file cleanup approval has not been exercised. A later
-[canonical recheck and complete inventory-identity check](adoption-remaining-gates.md#latest-native-admission-evidence)
-after the dynamic-route milestone confirmed the same refusal and all3,491
-unchanged files; no active reservations or compilers were observed. Native
-preparation and all real measurements remain unrun; independent source-only
-controls are complete. This blocker has persisted across three goal turns.
+The earlier canonical refusals remain historical, unchanged.
 
+The owner-approved3,491-file cleanup is now complete. [Independent review](../acceptance/project-adoption/intel-native-resume-20261026/independent-verification.json)
+matched the deletion journal to the exact approved inventory, confirmed every
+approved path absent and all845 excluded paths preserved, and rehashed all ten
+retained crate archives. The observed available-space increase was4,055,404,544
+bytes; APFS allocation and concurrent activity prevent attributing an exact
+physical gain from summed file blocks. No directories or unlisted entries were
+deleted and no policy changed.
+
+The current Intel CLI rebuilt, and real Axum preparation passed through the
+unchanged4GB native supervisor at7ebc10c/enginea5d602de. The prior335-file
+snapshot/333 selected text inputs, protected old state and configured tools were
+verified; the derived measurement owner has337 selected text inputs. The cold
+Cargo target/state remain absent, and the functional reservation released.
+Actual cold/warm/edit phases, RSS calibration and all459 library checks in the
+new measured build remain unrun. The exclusive benchmark now awaits a quiet
+window; the unrelated database container remains running and untouched.
+Full G4/G6 acceptance remains open.
 
 The complete pinned Next I2 installed workflow now [passes independent review](../acceptance/project-adoption/g5-installed-retained-next-20261024/accepted-40071420581/independent-verification.json)
 at80ae616/engine2fc8a201. Both fresh source/native installations passed the full
