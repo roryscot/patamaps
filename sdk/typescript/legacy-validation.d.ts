@@ -81,6 +81,8 @@ import type {
   emptyLegacyGraphDiff,
   renderLegacyDriftReport,
   renderLegacyGraphDocumentation,
+  stableLegacyJson,
+  digestLegacyValue,
 } from "./legacy-reporting.js";
 export * from "./legacy-reporting.js";
 import type { materializeLegacyCorrespondences } from "./legacy-correspondence.js";
@@ -313,6 +315,8 @@ export interface LegacyValidationApi {
   emptyLegacyGraphDiff: typeof emptyLegacyGraphDiff;
   renderLegacyDriftReport: typeof renderLegacyDriftReport;
   renderLegacyGraphDocumentation: typeof renderLegacyGraphDocumentation;
+  stableLegacyJson: typeof stableLegacyJson;
+  digestLegacyValue: typeof digestLegacyValue;
   LegacyRelationRegistry: new (
     packs?: readonly LegacyRelationPack[],
   ) => LegacyRelationRegistry;

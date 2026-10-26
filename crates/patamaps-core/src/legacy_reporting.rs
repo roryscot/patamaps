@@ -20,6 +20,14 @@ fn default_locale() -> String {
 #[derive(Debug, Deserialize)]
 #[serde(tag = "operation", rename_all = "kebab-case", deny_unknown_fields)]
 pub enum LegacyReportingAction {
+    StableJson {
+        value: String,
+        #[serde(default)]
+        pretty: bool,
+    },
+    ValueDigest {
+        value: String,
+    },
     Diff {
         before: String,
         after: String,
@@ -615,10 +623,63 @@ fn documentation(
     lines.push("".into());
     Ok(LegacyReportText::join(&lines, "\n"))
 }
+
+fn stable_json_text(
+    input: &str,
+    pretty: bool,
+    locale: &str,
+) -> Result<LegacyReportText, LegacyReportingError> {
+    let parsed = parse(input)?;
+    // Bound indentation and enclosing JSON-string expansion before formatting.
+    // Compact input bytes already bound keys, escapes and scalar values.
+    let mut bound = input.len().checked_add(16).ok_or_else(output_limit)?;
+    let mut stack = vec![(parsed.value(), 0usize)];
+    while let Some((value, depth)) = stack.pop() {
+        if pretty {
+            bound = bound.checked_add(depth * 4 + 16).ok_or_else(output_limit)?;
+        }
+        if bound > (COMPATIBILITY_JSON_LIMITS.max_bytes - 2) / 2 {
+            return Err(output_limit());
+        }
+        match value {
+            J::Object(pairs) => stack.extend(pairs.iter().map(|(_, v)| (v, depth + 1))),
+            J::Array(values) => stack.extend(values.iter().map(|v| (v, depth + 1))),
+            _ => {}
+        }
+    }
+    let col = collator(locale)?;
+    let bytes = if pretty {
+        Data::stable_pretty_bytes(parsed.value(), &col)
+    } else {
+        Data::stable_bytes(parsed.value(), &col)
+    }
+    .map_err(|e| error(e.to_string()))?;
+    Ok(String::from_utf8(bytes)
+        .expect("Original JSON is UTF-8")
+        .into())
+}
+fn output_limit() -> LegacyReportingError {
+    LegacyReportingError {
+        code: "LEGACY_REPORTING_RESOURCE_LIMIT".into(),
+        name: "Error".into(),
+        message: "Original stable JSON exceeds native compatibility resource bounds".into(),
+    }
+}
+
 pub fn legacy_reporting_request(
     request: LegacyReportingRequest,
 ) -> Result<LegacyReportingResponse, LegacyReportingError> {
     Ok(match request.action {
+        LegacyReportingAction::StableJson { value, pretty } => {
+            LegacyReportingResponse::Text(stable_json_text(&value, pretty, &request.locale)?)
+        }
+        LegacyReportingAction::ValueDigest { value } => {
+            let parsed = parse(&value)?;
+            let bytes = Data::stable_bytes(parsed.value(), &collator(&request.locale)?)
+                .map_err(|e| error(e.to_string()))?;
+            LegacyReportingResponse::Text(patamaps_contracts::byte_digest(&bytes).into())
+        }
+
         LegacyReportingAction::EmptyDiff => {
             LegacyReportingResponse::Diff(LegacyGraphDiff::default())
         }

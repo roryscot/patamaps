@@ -9,6 +9,13 @@ export function createLegacyReportingApi(invoke) {
       locale: new Intl.Collator().resolvedOptions().locale,
     });
   return {
+    stableLegacyJson(value, pretty = false) {
+      return call({ operation: "stable-json", value: marshalLegacyObservationJson(value), pretty });
+    },
+    digestLegacyValue(value) {
+      return call({ operation: "value-digest", value: marshalLegacyObservationJson(value) });
+    },
+
     diffLegacyDocuments(before, after) {
       return call({
         operation: "diff",
