@@ -1,7 +1,8 @@
 # Current original-owner edited-generation runtime replay
 
-Status: planned; runtime not yet executed. Continues G4/G6 using the accepted
-source-built declared edit. This does not replace authenticated owner/browser,
+Status: independently reviewed native runtime replay passed at7e65a9c.
+[Reviewed evidence](../acceptance/project-adoption/current-owner-retained-next-20261026/edited-runtime.json).
+Continues G4/G6 using the accepted source-built declared edit. This does not replace authenticated owner/browser,
 fresh installed-owner, deployment or actual-project performance requirements.
 
 ## Fixed inputs and exclusions
@@ -105,3 +106,34 @@ artifacts, broader source changes, raised bounds, secrets or another scope
 requires a new reviewed plan. A failed or partial runtime must remain recorded
 as such. No installed, authenticated browser, deployment, performance or full
 G4/G6/goal acceptance follows from this scoped runtime increment.
+
+
+## Recorded outcome
+
+The initial runtime attempt passed without a repair, build or new state attempt.
+The current verifier replayed bindings while all three configured producer paths
+were unavailable. The native selected command then passed all seven frozen HTTP
+cases from the selected-output runtime copy, stopped/reaped its owned server,
+and verified the same selection again. All three paths were restored with exact
+inode/device/mode matches. A final native binding verification passed afterward.
+An independent observer recorded the absent original paths and relocated inode
+identities both before HTTP and after the owned server stopped.
+
+Independent review rehashed both2,482-file/524-directory selected generations,
+943 current and942 previous source inputs, source/context/tool identities,
+sealed ledger, selection pointer and unchanged four attempt names. The runtime
+copy retained all2,472 files/69,021,573 logical bytes without any changed member;
+no cache bytes were written. Its complete selected mapping and final inventory
+matched, within the frozen limits.
+Original owner Git remained clean atc61d51a. The canonical supervisor exited0
+and released reservation313331ab-64de-4954-9998-0cdeae24b51a.
+
+The trusted HTTP probe took6.411s; the full selected-execution call took549.082s.
+The latter includes native binding checks and other surrounding work; the exact
+outside-probe breakdown was not isolated. These are functional observations
+with the separate database still running, not an exclusive performance result,
+watch/edit latency acceptance or speed advantage. Practical Next workflow
+latency remains open. No extra source/dependency snapshot, container, image,
+build, installation, deletion or policy change occurred. Private application
+outputs, responses and raw logs remain private. Authenticated browser/permissions,
+installed owner, deployment and all remaining G4/G6 requirements stay open.

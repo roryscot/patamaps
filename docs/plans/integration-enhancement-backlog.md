@@ -1516,3 +1516,15 @@ original regular files/five captured links independently reviewed. Target/state
 remain cold; actual performance samples and their459-test checks remain unrun.
 The separate database quiet-window decision remains pending. This closes
 functional preparation, not G4 or the broader adoption goal.
+
+
+The original owner's [edited-generation runtime replay](../acceptance/project-adoption/current-owner-retained-next-20261026/edited-runtime.json)
+now passes its source-built scope: all seven public HTTP/asset cases with the
+configured source/context/provider paths unavailable, exact edited compiled
+asset responses, native selected execution/pre/post/final verification, owned
+server stop and exact restoration. Both generations,943/942 sources, ledger,
+pointer and four attempts remain preserved. Authenticated browser/permissions/
+visible labels, watch behavior, fresh installed owner, deployment and practical
+Rust/Next performance remain open. The549.082s full selected-execution functional
+interval must not become a development-performance pass. The separate Axum
+benchmark quiet-window approval remains pending; no database was stopped.

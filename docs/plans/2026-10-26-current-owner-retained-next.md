@@ -1,6 +1,8 @@
 # Current native owner retained Next workflow
 
-Status: source-built baseline and declared edit are verified. The
+Status: source-built baseline, declared edit and the separately scoped
+[edited-generation runtime replay](2026-10-27-current-owner-edited-runtime-replay.md)
+are verified. The
 [baseline review](../acceptance/project-adoption/current-owner-retained-next-20261026/review.json)
 covers selection, source/snapshot/provider-unavailable binding replay, no-op and
 the before-candidate refusal. The [declared-edit review](../acceptance/project-adoption/current-owner-retained-next-20261026/declared-edit.json)
@@ -246,3 +248,13 @@ or silently increase its bound.
 The separately scoped [edited-generation runtime replay plan](2026-10-27-current-owner-edited-runtime-replay.md)
 continues the remaining unavailable-path runtime requirement using only existing
 selected artifacts. It does not add a fifth attempt or rerun either build.
+
+
+The separately queued [edited-generation runtime review](../acceptance/project-adoption/current-owner-retained-next-20261026/edited-runtime.json)
+now closes the named unavailable-configured-producer-path runtime increment.
+All seven frozen HTTP cases, exact two edited JavaScript responses, native
+selected execution with pre/post checks, final bindings and exact restoration
+passed. Both2,482-file generations,943/942 sources, ledger, pointer and four
+attempt names remain unchanged. No build or fifth attempt was created. This
+adds actual public HTTP/asset replay; authenticated browser behavior and label
+visibility, fresh installed owner, deployment and performance remain open.
