@@ -1,13 +1,15 @@
 # Current native owner retained Next workflow
 
-Status: [reviewed baseline workflow passed](../acceptance/project-adoption/current-owner-retained-next-20261026/review.json)
-for production selection, unavailable-source/snapshot/provider binding replay,
-no-op, context refusal and final native selection verification. The original
-controller's failed exit/stream assertion remains preserved; the separately
-queued follow-up native audit passed without rerunning the baseline or refusal.
-The declared positive edit is running; its [independent oracle preflight](../acceptance/project-adoption/current-owner-retained-next-20261026/declared-edit-preflight.json) passed. Continue original G4/G6; source-built
-generator/route-contract qualification at bb73b81 is a prerequisite, not a
-substitute for the remaining workflow and owner acceptance.
+Status: source-built baseline and declared edit are verified. The
+[baseline review](../acceptance/project-adoption/current-owner-retained-next-20261026/review.json)
+covers selection, source/snapshot/provider-unavailable binding replay, no-op and
+the before-candidate refusal. The [declared-edit review](../acceptance/project-adoption/current-owner-retained-next-20261026/declared-edit.json)
+adds the independent original-generator oracle, changed native outputs, compiled
+client marker before selection, new selection, final native verification and
+no-op. Both retained generations and the original owner remain preserved.
+The original baseline controller assertion failure and admission refusals remain
+historical. Installed-owner, authenticated browser/permissions, deployment,
+performance and full G4/G6 acceptance remain open.
 
 Use the original private owner at c61d51a and the qualified original source
 context with digest 1bdf0656. The current compiler/SDK identities and all eight
@@ -207,3 +209,35 @@ artifacts and both small sources afterward. No new full snapshot, compiler
 rebuild, installed workflow, browser visibility, database stop, policy change
 or additional deletion is part of this run. Any fourth-slot failure is retained;
 do not silently rerun a baseline or increase the attempt limit.
+
+## Declared edit accepted at the source-built scope
+
+The fourth retained attempt passed without rerunning the baseline or unbound
+refusal. Both unchanged original Metamap 0.5.0 generators supplied all eight new
+expected outputs; three original route tests and both check modes passed.
+The current native compiler reproduced every expected output through 181
+preparation calls and 181 generator-check calls. The unchanged Next production
+build, independent TypeScript check, three manifest witnesses and three native
+owner route tests passed.
+
+The pre-selection contract found the unique changed label in two actual static
+JavaScript files out of 82 searched (3,993,018 bytes). An independent reader
+confirmed their membership digest and selected artifact hashes. The same checker
+had refused the unchanged baseline's absent marker. A new input key/selection
+was published; previous-selection.json preserves the exact prior pointer.
+
+Final native selected-build verification and a no-op passed; verification was
+not repeated and cacheHits stayed 0. All 2,482 new artifact files and 2,482 old
+artifact files were independently rehashed, with directory modes checked.
+All 943 new source inputs, 942 prior source inputs, 886 original-oracle inputs,
+eight new original/native generated outputs and 712 original package members
+matched their bindings. The original owner Git, context metadata, pinned tools,
+old generation and sealed ledger remain preserved. The supervisor exited 0 and
+released its reservation; no files were deleted and no policy changed.
+
+This accepts the named source-built preparation/compiled-consumer retained edit
+workflow. It does not prove authenticated label visibility, permissions, an
+installed owner workflow, edited-generation source-unavailable runtime replay,
+deployment, actual edit-loop measurements or full G4/G6 adoption. Continue those
+existing requirements; do not add another attempt to this full four-record state
+or silently increase its bound.

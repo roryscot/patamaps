@@ -1487,3 +1487,22 @@ controller failure and admission refusal remain historical. The remaining
 current-owner functional stage is the declared positive edit; this scoped
 baseline result does not accept installed-owner, authenticated/browser,
 deployment, performance or full G4/G6 requirements.
+
+## Current owner compiled-edit workflow accepted
+
+The [reviewed declared-edit run](../acceptance/project-adoption/current-owner-retained-next-20261026/declared-edit.json)
+closes the planned source-built edit stage: eight changed outputs matched the
+independent original Metamap 0.5 oracle; production build, separate tsc, three
+manifest witnesses, both generator checks and all three owner route tests passed.
+A baseline absence refusal and a pre-selection marker in two actual compiled
+client files establish the changed compiled consumer. A new key/selection,
+preserved old pointer/artifacts, final native verification and no-op passed.
+The native reservation released without deletion or policy change.
+
+The existing-state four-attempt budget is now full. No extra baseline or edit
+trial is authorized under this plan. Continue fresh installed/runtime replay,
+authenticated browser/permissions, actual G4 measurements and remaining owner
+acceptance. The edited generation's source-unavailable replay was not run here;
+the earlier baseline replay remains generation-specific. Axum measurements still
+need an external-state driver repair, functional verification, current-compiler
+preparation and the separately approved quiet window.

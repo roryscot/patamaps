@@ -53,9 +53,9 @@ and exclusive fallback. No baseline was rebuilt for review. The approved earlier
 3,491-file cleanup is recorded separately. The later exact 2,366-file approval
 and completed deletion are recorded below; no further deletion is authorized.
 
-The separately planned declared positive edit, authenticated browser/permissions,
-current fresh installed owner workflow, deployment, measurements and full G4/G6
-acceptance remain open. Private source, graph payloads, dependency trees and raw
+The source-built declared positive edit is now verified below. Authenticated
+browser/permissions, current fresh installed owner workflow, deployment,
+measurements and full G4/G6 acceptance remain open. Private source, graph payloads, dependency trees and raw
 logs stay on Intel; published evidence contains compact counts and digests.
 See the [execution plan](../../../plans/2026-10-26-current-owner-retained-next.md)
 and the earlier [preparation checkpoint](preparation.json).
@@ -76,12 +76,35 @@ The separately queued declared edit now has a [passed independent original
 oracle preflight](declared-edit-preflight.json): both original generators and
 check modes, eight changed expected outputs, all three unchanged original route
 tests, and an actual baseline-JavaScript marker refusal. All 886 original text
-inputs and 943 new native inputs were rehashed. The native retained edit build is
-running with 952 prepared inputs. This preflight does not accept a new native
-selection, compiled marker, installed workflow or authenticated browser behavior.
+inputs and 943 new native inputs were rehashed. That preflight remains historical;
+the completed native retained edit is reviewed below. Installed workflow and
+authenticated browser behavior remain open.
 
 The edit preflight's package metadata digest names package.json specifically.
 A separate current inspection rehashed the original generator package's file
 members against the frozen context manifest; counts and membership digest are
 recorded in the preflight. This does not claim a separately verified npm archive
 or immutable file identities throughout execution.
+
+[Declared-edit review](declared-edit.json) now verifies all eight changed native
+outputs against the independent original oracle, the production build,
+independent TypeScript check, three manifest witnesses, both check modes and
+three unchanged native route tests. Before publication, the marker check found
+the changed label in two actual client JavaScript files out of 82 searched.
+An independent reader reproduced that membership digest and checked selected
+file hashes.
+
+The new input key and selection differ from the baseline; the exact old pointer
+is retained. Final native selected-build verification and a no-op passed with
+no repeated verification and zero cache hits. Independent review rehashed all
+2,482 files in each artifact generation, 524 directory modes in each, 943 new
+source inputs, 942 prior inputs and 886 original-oracle inputs. All 712 original
+generator package file members were rehashed again. The original owner Git and
+both generations remain preserved. The exclusive reservation finished and
+released; no files were deleted or policy changed by the edit run.
+
+This is source-built preparation and compiled-consumer evidence. The edited
+selection was not replayed with source/provider paths unavailable in this run;
+that broader installed/runtime requirement, authenticated browser/permissions,
+deployment, actual measurements and full G4/G6 acceptance stay open. The baseline's
+earlier unavailable-path binding replay remains scoped to its recorded generation.
