@@ -1,8 +1,8 @@
 # Actual-project development measurements
 
 Status: prior driver controls and historical native preparation passed.
-The retained-state layout repair is implemented and awaiting focused/native
-functional verification. Current-compiler preparation and the separate approved
+The retained-state layout repair passed all28 focused Linux controls. Native
+functional layout verification is in progress under the canonical supervisor. Current-compiler preparation and the separate approved
 quiet exclusive window are still required before actual measurements. No new
 performance result is accepted. This continues original G4 separately from
 completed native parity and pinned installed Next runtime qualification.
@@ -304,3 +304,12 @@ and diff checks passed. Use the existing focused Linux control lane for the
 unchanged-interface/unit controls while keeping the actual Intel native layout
 fixture and real Axum functional preparation explicitly pending. This does not
 replace either native requirement or any measurement acceptance.
+
+
+The [focused Linux run40518822369](https://github.com/roryscot/patamaps/actions/runs/40518822369)
+atc742765 passed all28 measurement controls in0.707s; only the selected control
+job executed. The [source/log-bound receipt](../acceptance/project-adoption/g4-external-state-20261027/linux-controls.json)
+records exact producing source and unchanged local control digests. These unit
+checks cover the external-state resolver/refusals and combined-root accounting;
+the actual Intel native layout fixture, fresh current-compiler Axum preparation
+and all real performance measurements remain separate acceptance requirements.
