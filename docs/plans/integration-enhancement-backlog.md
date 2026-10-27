@@ -1528,3 +1528,12 @@ visible labels, watch behavior, fresh installed owner, deployment and practical
 Rust/Next performance remain open. The549.082s full selected-execution functional
 interval must not become a development-performance pass. The separate Axum
 benchmark quiet-window approval remains pending; no database was stopped.
+
+
+The [fresh installed original-owner plan](2026-10-27-installed-original-owner-next.md)
+now has passed wrapper/source integrity controls, exact Git-bound source/native
+package installations and a fresh installed-source compiler. The old hardcoded
+180s outer wrapper deadlines are explicitly configurable within1..3600 seconds;
+native command bounds and all semantic/resource checks remain unchanged. Both
+actual original-owner rebuild/runtime workflows remain pending. Package/compiler
+verification does not close the original G5/G6 installed-owner requirement.

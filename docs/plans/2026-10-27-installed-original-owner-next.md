@@ -1,8 +1,8 @@
 # Fresh installed original-owner Next workflow
 
-Status: wrapper/package-scope prerequisite verified; exact package/source
-compilation and both owner workflows remain pending. No new installed owner
-is accepted. Continues original G5/G6.
+Status: wrapper controls, exact source/native installations and fresh installed-
+source compiler independently verified. Both original-owner rebuild/runtime
+workflows remain pending; no installed owner is accepted. Continues G5/G6.
 The source-built original-owner baseline, declared edit and seven-case runtime
 remain accepted only at their identified source/engine. Keep their full four-
 attempt state unchanged. This plan does not narrow the adoption goal.
@@ -136,3 +136,31 @@ or binary executed by that scope check. The supervisor exited0 and released
 its reservation. Packaging will independently recompute and bind its later
 committed contents; these preflight counts do not claim a frozen distribution,
 fresh source compiler, owner rebuild, runtime or installed-owner acceptance.
+
+
+## Exact pair and fresh source compiler accepted
+
+The [independent package/source review](../acceptance/project-adoption/installed-original-owner-next-20261027/package-source-review.json)
+passes atcf1b51b, compiler7261d652/workspacef086e884. Every one of1,240 source
+members matches its producing Git blob, source archive member and extracted
+file; both archive hashes, exact membership, modes, inventory and native bytes
+passed. Source has no Git metadata. Both installed executables report the same
+expected engine.
+
+The CLI compiled from the installed source with locked/offline Rust1.99 and
+two jobs. Cargo output witnesses eight fresh workspace packages, including the
+CLI and workspace library, at installed paths. The declared shared dependency
+target was available; which dependency objects were reused was not measured,
+and this is not a clean dependency build. Source/native compiler bytes match
+in this profile at63,803,208 bytes and digestcd9a1594; this single observation
+is not a general reproducible-build claim. The original shared CLI was absent
+during compilation and restored with exact inode/device/mode and hash; both
+prior pinned copies and final installed-source inventory remain unchanged.
+
+The original private oracle's eight outputs and45 installed SDK/discovery
+members were independently rehashed against the owner fixture; its886 oracle
+inputs were checked when preparing that fixture. No new owner build, runtime,
+installed-owner acceptance, registry publication or performance acceptance
+follows from these prerequisites. The supervisor exited0 and released its
+reservation without deletion or a policy change. The next jobs are the
+separately queued source and native owner workflows in the frozen sequence.

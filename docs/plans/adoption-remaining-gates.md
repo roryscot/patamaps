@@ -207,3 +207,13 @@ continues the open installed consumer requirement with the actual unchanged
 owner, independent generator expectations and separate source/native rebuilds.
 The existing wrapper timeout prerequisite and package/source-compiler phase
 do not count as owner acceptance.
+
+
+The installed original-owner [package/source prerequisite](../acceptance/project-adoption/installed-original-owner-next-20261027/package-source-review.json)
+now passes atcf1b51b:1,240 Git/archive/extracted-source members, exact source/
+native archives, eight fresh installed-path workspace compilation witnesses,
+matching engines/CLI bytes, unchanged source inventory and exact shared-CLI
+restoration. Seventeen wrapper/source controls also pass. This prepares the
+two original-owner installations; their required generator/build/test/runtime
+workflows have not run and remain open, together with authenticated/browser,
+deployment, watch and actual Rust/Next performance requirements.

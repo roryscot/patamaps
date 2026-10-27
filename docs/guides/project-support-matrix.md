@@ -77,3 +77,14 @@ not automatically qualify newer binaries, other projects, or deployment.
 Historical receipts retain the limitations true when they were written. Later
 receipts can close a specifically named gap without rewriting earlier failures.
 Read the linked scope and exact source/tool identities before applying any result.
+
+
+The original-owner installed workflow remains pending. Its [exact package/source
+prerequisite](../acceptance/project-adoption/installed-original-owner-next-20261027/package-source-review.json)
+passes atcf1b51b:1,240 source members agree with Git/archive/extraction, eight
+workspace packages compiled from installed paths, both CLI engines/bytes match,
+and the original shared CLI/source inventory were preserved. The [17-control
+preflight](../acceptance/project-adoption/installed-original-owner-next-20261027/preflight.json)
+verifies bounded wrapper deadlines, refusal before effects and actual timeout
+cleanup. Neither result substitutes for the two new installed original-owner
+generator/build/test/runtime workflows, which remain unrun.
