@@ -1542,3 +1542,11 @@ The runtime-only repair reused the passed build with no added attempt; its
 reservation released. The native archive owner workflow remains pending,
 alongside authenticated browser/permissions, watch, deployment and measured
 Rust/Next performance. Full original G5/G6 acceptance remains open.
+
+
+The [original-owner browser continuation](2026-10-27-original-owner-browser.md)
+now defines the remaining hydrated UI, actual identity/permission and upstream
+Playwright acceptance. Its optional ready-inspector prerequisite reuses the
+existing selected-output HTTP/server lifecycle. Six retained process controls
+are queued separately; only syntax checks have run. No browser, real backend
+authentication or full owner acceptance follows from this preparation.
