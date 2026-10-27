@@ -200,3 +200,10 @@ This closes that specific runtime replay increment. It does not establish
 browser hydration, authentication/permissions/visible label behavior, fresh
 installed owner, deployment or measured performance. The full selected call's
 549.082s functional interval also leaves practical Next workflow latency open.
+
+
+The [fresh installed original-owner plan](2026-10-27-installed-original-owner-next.md)
+continues the open installed consumer requirement with the actual unchanged
+owner, independent generator expectations and separate source/native rebuilds.
+The existing wrapper timeout prerequisite and package/source-compiler phase
+do not count as owner acceptance.
