@@ -1506,3 +1506,13 @@ acceptance. The edited generation's source-unavailable replay was not run here;
 the earlier baseline replay remains generation-specific. Axum measurements still
 need an external-state driver repair, functional verification, current-compiler
 preparation and the separately approved quiet window.
+
+
+The [current Axum measurement preparation](../acceptance/project-adoption/g4-external-state-20261027/axum-preparation-review.json)
+now passes with compiler7261d652 after the external-state layout repair. Native
+layout refusal/selection/verify/no-op and18 controls pass; all28 Linux measurement
+controls pass. The prepared real source has337 selected inputs, with its330
+original regular files/five captured links independently reviewed. Target/state
+remain cold; actual performance samples and their459-test checks remain unrun.
+The separate database quiet-window decision remains pending. This closes
+functional preparation, not G4 or the broader adoption goal.

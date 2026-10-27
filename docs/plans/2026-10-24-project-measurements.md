@@ -1,12 +1,11 @@
 # Actual-project development measurements
 
-Status: prior driver controls and historical native preparation passed.
-The retained-state layout repair passed all28 focused Linux controls and the
-actual Intel native refusal/selection/verification/no-op check. Fresh functional
-Axum preparation with the current compiler is in progress. Current-compiler preparation and the separate approved
-quiet exclusive window are still required before actual measurements. No new
-performance result is accepted. This continues original G4 separately from
-completed native parity and pinned installed Next runtime qualification.
+Status: current-compiler functional preparation and external retained-state
+layout verification passed on Intel. All28 focused Linux controls also passed.
+The frozen actual-project measurements remain unrun; an approved quiet exclusive
+window is still required. No new performance result is accepted. This continues
+original G4 separately from completed native parity and pinned installed Next
+runtime qualification. Earlier checkpoints below remain historical.
 
 ## Frozen workload and provenance
 
@@ -331,3 +330,31 @@ projection files referenced by the fixture plan. The latter refused before
 candidate execution/selection. Neither demonstrates a product defect. The final
 fixture includes those exact digest-bound files; no acceptance criterion changed.
 The later canonical admission succeeded without further deletion or policy change.
+
+
+## Current-compiler external-state preparation (2026-10-27)
+
+The [fresh preparation review](../acceptance/project-adoption/g4-external-state-20261027/axum-preparation-review.json)
+now passes at7c86274, compiler7261d652/workspacef086e884. Five native preparation
+commands passed: current engine, historical selected bindings, snapshot verify,
+snapshot stage and prepared input key. Independent review rehashed330 original
+regular files, checked52 directories and five captured/staged symlink targets,
+and checked all337 selected owner inputs. The deliberate cold probe is the only
+original-source edit; its unmodified source and exact added suffix were checked.
+Staged modes match captured source modes; private snapshot blobs use their own
+storage modes. Compiler/tool, plan/binding, coordinator/supervisor and protected
+historical-record digests all matched.
+
+The new target and explicitly bound external retained-state path are absent.
+Both measured roots and the unchanged combined2GB budget are recorded. The
+canonical supervisor exited0 and released its separate functional reservation.
+No actual application build,459-test run, RSS calibration or measured phase ran
+in this preparation. The earlier f137cd54 preparation remains preserved and is
+superseded for future current-compiler measurement by this new preparation.
+
+The only observed running container remains the separate Advocates database.
+It was not interrupted. Temporary stop, exclusive measurement and checked
+restart await the separate quiet-window decision. Other original G4/G5/G6
+requirements, including Next-scale measurements and named owner workflows,
+remain open. No deletion, policy change, registry publication or deployment
+occurred in this increment.

@@ -172,6 +172,16 @@ and an [independently reviewed native layout check](../acceptance/project-adopti
 18 Intel controls, expected Cargo-ancestor refusal before creation, external-state
 selection/binding verification/no-op, and rehashed inputs/output. Both fixture
 preparation errors are retained separately. Fresh current-compiler actual Axum
-preparation is in progress; cold/warm/edit/RSS measurements remain unrun. No
+preparation also passes separately below; cold/warm/edit/RSS measurements remain unrun. No
 file deletion, policy change, database interruption or performance acceptance
 follows from this functional check.
+
+
+The [current-compiler Axum preparation review](../acceptance/project-adoption/g4-external-state-20261027/axum-preparation-review.json)
+now supersedes the earlier frozen compiler preparation for future measurement.
+All five native preparation commands passed with compiler7261d652;330 original
+regular files, five symlink targets,52 directories and337 selected owner inputs
+were independently checked. External state and target remain cold/absent; both
+roots are bound to the unchanged2GB measured allocation budget. Its functional
+reservation released. Actual builds/tests, RSS calibration and cold/warm/edit
+measurements remain unrun and require the separate quiet exclusive window.
