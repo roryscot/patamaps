@@ -1,11 +1,11 @@
 # Actual-project development measurements
 
-Status: driver controls, current native CLI rebuild and real Axum preparation
-passed; actual measurements remain unrun pending a quiet exclusive window. No
-new performance result is accepted. This implements the
-original G4 measurement requirement separately from completed native parity and
-the pinned installed Next runtime gate. The first workload is the already
-qualified native Axum workspace. Next.js measurements remain a separate gate.
+Status: prior driver controls and historical native preparation passed.
+The retained-state layout repair is implemented and awaiting focused/native
+functional verification. Current-compiler preparation and the separate approved
+quiet exclusive window are still required before actual measurements. No new
+performance result is accepted. This continues original G4 separately from
+completed native parity and pinned installed Next runtime qualification.
 
 ## Frozen workload and provenance
 
@@ -52,7 +52,7 @@ recompile local packages; record actual command evidence, not invented cache hit
 | Unchanged warm request | 3 | Same pointer/attempt/artifacts; verification not-repeated, cacheHits0 | Median at most30s; each at most60s |
 | Source edit to verified selection | 3, values edit-1 through edit-3 | Changed input key and newly selected attempt;459 tests and matching consumer each | Each at most180s |
 | Memory observation | Every measured child | wait4 raw unit and normalized bytes; calibration below | Largest reaped-process peak at most3GiB |
-| Retained data | Before/after each timed phase, outside its timer | Logical bytes and allocated blocks, no followed links | New workload root at most2GB allocated; existing supervisor4GB run growth/500MB reserve/100GB retention also apply |
+| Retained data | Before/after each timed phase, outside its timer | Logical bytes and allocated blocks, no followed links | Combined work and external retained state at most2GB allocated; existing supervisor4GB run growth/500MB reserve/100GB retention also apply |
 
 The comparison is between these three phases of the same retained workflow.
 There is no alternative compiler/build-system baseline and no speed advantage
@@ -85,8 +85,9 @@ headroom and record the machine state; unmanaged OS/background activity is not
 claimed to be absent. Do not run CI or another build concurrently on this Intel
 host during measured intervals.
 
-Retain every generated file/attempt/calibration/log under the inventoried project
-work root. Extend the existing collector to use exclusive-created retained files;
+Retain generated controls, target, calibration and logs under the inventoried
+project work root; native attempts live under the explicitly bound external
+retention root. Count both roots in the unchanged allocation budget. Extend the existing collector to use exclusive-created retained files;
 no TemporaryDirectory/TemporaryFile cleanup is permitted for this run. No file,
 cache, container or old state is deleted, no storage limit is raised, and no new
 VM or scheduler implementation is introduced. Compact reviewed receipts belong
@@ -271,3 +272,35 @@ stop/run/restart requires separate approval. Every original timing, memory,
 correctness, disk, ownership and restoration requirement remains unchanged.
 Actual measurements, independent measurement acceptance, Next-scale measurement
 and full original owner qualification remain open. JSON timestamps use UTC.
+
+## External retained-state repair contract
+
+The old work/state path lies beneath a Cargo.toml ancestor, which native
+project-build refuses. Preparation now requires an explicit --state path inside
+the project's existing registered retention root. Resolve and bind that cold
+path, require an existing parent, refuse occupied/dangling paths, Cargo ancestors
+and overlap with the work root, and persist it in preparation. Run consumes the
+same bound path; old preparations without this field require fresh preparation.
+
+Keep Cargo target and control files under work. Include both work and external
+retained state in every before/after footprint, deduplicating shared inodes and
+not following links. The original combined 2 GB allocation budget, all timing/RSS/
+correctness budgets, four-package 459-test requirement and canonical 4 GB/500 MB/
+100 GB policy remain unchanged. Bind projects.json with supervisor digests so
+the accounted-state declaration cannot silently change after preparation.
+
+Acceptance requires the focused state/refusal/combined-footprint controls and a
+tiny actual native project-build layout check: the old Cargo-descendant state
+must refuse nonzero with PROJECT_BUILD_STATE_ISOLATION before creation, while
+the external resolver path must select, verify and no-op. The tiny check is a
+layout fixture, not an Axum build, benchmark or measurement pass. Then perform
+fresh actual Axum functional preparation with the current compiler. No quiet
+window or database interruption is part of these functional checks.
+
+The first [native functional verification admission](../acceptance/project-adoption/g4-external-state-20261027/intel-admission.json)
+for this repair refused75 before any test/controller fixture started. Its
+reservation finished and released; no policy or deletion changed. Python syntax
+and diff checks passed. Use the existing focused Linux control lane for the
+unchanged-interface/unit controls while keeping the actual Intel native layout
+fixture and real Axum functional preparation explicitly pending. This does not
+replace either native requirement or any measurement acceptance.

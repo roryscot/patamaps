@@ -8,6 +8,7 @@ class AxumMeasurementControls(unittest.TestCase):
  @classmethod
  def setUpClass(cls):
   cls.root=Path(tempfile.mkdtemp(prefix='axum-measure-controls-',dir=os.environ['PATAMAPS_TEST_RETAIN_ROOT'])).resolve()
+  cls.state_root=Path(tempfile.mkdtemp(prefix='patamaps-axum-state-controls-',dir='/tmp')).resolve()
  def case(self):
   root=self.root/self._testMethodName;root.mkdir();return root
  def proof(self):
@@ -49,6 +50,32 @@ class AxumMeasurementControls(unittest.TestCase):
  def test_footprint_refuses_special_files(self):
   root=self.case();os.mkfifo(root/'fifo')
   with self.assertRaisesRegex(AssertionError,'FOOTPRINT_SPECIAL'):driver.footprint(root)
+ def state_case(self):
+  root=self.state_root/self._testMethodName;root.mkdir();return root
+ def test_external_state_is_cold_counted_and_disjoint(self):
+  work=self.case();counted=self.state_case();requested=counted/'retained'
+  self.assertEqual(driver.measurement_state(work,requested,[counted]),requested)
+  self.assertFalse(requested.exists())
+ def test_external_state_refuses_unaccounted_relative_and_missing_parent(self):
+  work=self.case();counted=self.state_case();other=counted/'other';other.mkdir()
+  for path,roots,code in [(counted/'state',[other],'NOT_ACCOUNTED'),(Path('relative'),[counted],'ABSOLUTE'),(counted/'missing/state',[counted],'PARENT')]:
+   with self.subTest(code=code),self.assertRaisesRegex(AssertionError,code):driver.measurement_state(work,path,roots)
+ def test_external_state_refuses_cargo_ancestry_and_nested_work(self):
+  work=self.case();counted=self.state_case();(counted/'Cargo.toml').write_text('[workspace]\n')
+  with self.assertRaisesRegex(AssertionError,'CARGO_ANCESTOR'):driver.measurement_state(work,counted/'state',[counted])
+  with self.assertRaisesRegex(AssertionError,'NOT_ISOLATED'):driver.measurement_state(work,work/'state',[work])
+ def test_external_state_refuses_existing_directory_and_dangling_link(self):
+  work=self.case();counted=self.state_case();existing=counted/'occupied';existing.mkdir();link=counted/'link';link.symlink_to(counted/'missing')
+  for path in [existing,link]:
+   with self.subTest(path=path),self.assertRaisesRegex(AssertionError,'STATE_EXISTS'):driver.measurement_state(work,path,[counted])
+ def test_footprint_includes_external_state_and_deduplicates_links(self):
+  work=self.case();state=self.root/(self._testMethodName+'-external');state.mkdir();(work/'one').write_bytes(b'x'*4096)
+  absent=state/'absent'
+  self.assertEqual(driver.footprint(work,[absent]),driver.footprint(work))
+  (state/'two').write_bytes(b'y'*8192);os.link(work/'one',state/'alias')
+  observed=driver.footprint(work,[state])
+  self.assertEqual(observed['files'],3);self.assertEqual(observed['hardlinkAliases'],1);self.assertEqual(observed['logicalFileBytes'],16384)
+  self.assertEqual(observed['allocatedBytes'],sum(p.lstat().st_blocks*512 for p in [work,state,work/'one',state/'two']))
  def test_capture_configs_rejects_content_digest_and_length_changes(self):
   root=self.case();capture=dict(inputs=[])
   for name in ['workspace.json','policy.json','package-projection.json']:

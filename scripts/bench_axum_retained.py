@@ -9,7 +9,7 @@ ROOT=Path(__file__).resolve().parent.parent
 SOURCE_COMMIT='fc78d5bcdb276bd6fb53cf2db55e91757eabb469'
 CONTROL=Path('/Users/admin/Documents/Codex/storage-safeguards')
 NODE='/Users/admin/.nvm/versions/node/v22.23.3/bin/node'
-SUPERVISORS=[CONTROL/'buildctl.mjs',CONTROL/'resource-executor.mjs',CONTROL/'engine/scripts/guarded-run.mjs']
+SUPERVISORS=[CONTROL/'buildctl.mjs',CONTROL/'resource-executor.mjs',CONTROL/'engine/scripts/guarded-run.mjs',CONTROL/'projects.json']
 SCRIPTS=['bench_axum_retained.py','bench_axum_build.py','bench_phases.py','project_watch.py']
 CONTROL_ROOT=Path('.patamaps-measure')
 PROBE='fn main() { println!("{}", axum::PATAMAPS_MEASURED_EDIT); }\n'
@@ -25,8 +25,8 @@ def checkpoint(path,value):
  # Only this coordinator's new receipt is updated; old attempts/files are retained.
  Path(path).write_text(json.dumps(value,indent=2)+'\n')
 
-def footprint(root):
- total=dict(entries=0,files=0,symlinks=0,logicalFileBytes=0,allocatedBytes=0,hardlinkAliases=0);seen=set();pending=[Path(root)]
+def footprint(root,extra_roots=()):
+ total=dict(entries=0,files=0,symlinks=0,logicalFileBytes=0,allocatedBytes=0,hardlinkAliases=0);seen=set();pending=[Path(root),*[Path(p) for p in extra_roots if os.path.lexists(p)]]
  while pending:
   p=pending.pop();s=p.lstat();total['entries']+=1
   assert total['entries']<=200000,'MEASUREMENT_FOOTPRINT_ENTRIES'
@@ -39,6 +39,26 @@ def footprint(root):
    assert stat.S_ISREG(s.st_mode),'MEASUREMENT_FOOTPRINT_SPECIAL'
    total['files']+=1;total['logicalFileBytes']+=s.st_size
  return total
+
+def measurement_state(work,requested,retained_roots):
+ requested=Path(requested)
+ assert requested.is_absolute(),'MEASUREMENT_STATE_ABSOLUTE'
+ assert not os.path.lexists(requested),'MEASUREMENT_STATE_EXISTS'
+ state=requested.resolve();work=Path(work).resolve()
+ assert state.parent.is_dir(),'MEASUREMENT_STATE_PARENT'
+ roots=[Path(p).resolve(strict=True) for p in retained_roots]
+ assert any(state!=root and state.is_relative_to(root) for root in roots),'MEASUREMENT_STATE_NOT_ACCOUNTED'
+ assert not state.is_relative_to(work) and not work.is_relative_to(state),'MEASUREMENT_STATE_NOT_ISOLATED'
+ assert not any(os.path.lexists(parent/'Cargo.toml') for parent in [state,*state.parents]),'MEASUREMENT_STATE_CARGO_ANCESTOR'
+ return state
+
+def configured_state_roots():
+ config=json.loads((CONTROL/'projects.json').read_bytes())
+ project=config['projects']['patamaps']
+ assert Path(project['root']).resolve()==ROOT.resolve(),'MEASUREMENT_COUNTED_ROOT'
+ roots=project.get('retentionRoots',[])
+ assert roots,'MEASUREMENT_STATE_NOT_ACCOUNTED'
+ return roots
 
 def validate_ownership(proof,phase,root=ROOT):
  assert proof['phase']==phase and proof['ownerAlive'] is True and proof['ownerIdentityVerified'] is True and proof['ownerIsAncestor'] is True,'MEASUREMENT_OWNER'
@@ -138,6 +158,7 @@ def guarded(argv):return [sys.executable,'-B',str(ROOT/'scripts/project_watch.py
 
 def prepare(args):
  proof=live_ownership('functional');work=args.work.resolve();assert work.is_relative_to(ROOT/'.tools') and not work.exists(),'MEASUREMENT_NEW_COUNTED_ROOT'
+ retained_state=measurement_state(work,args.state,configured_state_roots())
  prior=args.prior.resolve();prepared=json.loads((prior/'receipt.json').read_bytes());accepted=json.loads((prior/'build.receipt.json').read_bytes())
  assert prepared['sourceCommit']==accepted['sourceCommit']==SOURCE_COMMIT and accepted['status']=='passed-actual-rust-retained-build-scope' and accepted['upstreamLibraryTests']['passed']==459,'MEASUREMENT_PRIOR_ACCEPTANCE'
  cli=args.cli.resolve(strict=True);historical=args.prior_compiler.resolve(strict=True)
@@ -180,22 +201,25 @@ def prepare(args):
  binding.update(overlays={'axum/src/lib.rs':manifest['entries']['axum/src/lib.rs']['digest']},writablePaths=['target','bundle','.measurement-private'])
  write(work/'binding.json',binding)
  assert native('prepared-input-key',[cli,'project-build-input-key',work/'plan.json','--source',owner,'--context',work/'binding.json'])['inputKey']
- assert (state/'selected.json').read_bytes()==before and not (work/'cargo-target').exists() and not (work/'state').exists()
+ assert (state/'selected.json').read_bytes()==before and not (work/'cargo-target').exists() and not retained_state.exists()
  protected={str(snapshot/'manifest.json'):sha(snapshot/'manifest.json'),str(state/'selected.json'):sha(state/'selected.json'),str(capture_path):sha(capture_path)}
- record=dict(status='prepared-real-axum-measurements',sourceCommit=SOURCE_COMMIT,sourceRevision=subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip(),cli=str(cli),cliDigest=sha(cli),engine=engine,prior= str(prior),priorState=str(state),snapshot=str(snapshot),snapshotDigest=binding['digest'],protectedInputs=protected,supervisorDigests={str(p):sha(p) for p in SUPERVISORS},coordinatorDigests={name:sha(ROOT/'scripts'/name) for name in SCRIPTS},planDigest=sha(work/'plan.json'),bindingDigest=sha(work/'binding.json'),ownerInputs={name:sha(owner/name) for name in plan['project']['inputs']},sourceFiles=prepared['sourceFiles'],originalSelectedTextInputs=prepared['selectedTextInputs'],measuredTextInputs=len(plan['project']['inputs']),toolchain=version,preparationReservation=proof,budgets=BUDGETS,filesDeleted=0,nativeBenchmarkRun=False)
+ record=dict(status='prepared-real-axum-measurements',retainedState=str(retained_state),measuredRoots=[str(work),str(retained_state)],sourceCommit=SOURCE_COMMIT,sourceRevision=subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip(),cli=str(cli),cliDigest=sha(cli),engine=engine,prior= str(prior),priorState=str(state),snapshot=str(snapshot),snapshotDigest=binding['digest'],protectedInputs=protected,supervisorDigests={str(p):sha(p) for p in SUPERVISORS},coordinatorDigests={name:sha(ROOT/'scripts'/name) for name in SCRIPTS},planDigest=sha(work/'plan.json'),bindingDigest=sha(work/'binding.json'),ownerInputs={name:sha(owner/name) for name in plan['project']['inputs']},sourceFiles=prepared['sourceFiles'],originalSelectedTextInputs=prepared['selectedTextInputs'],measuredTextInputs=len(plan['project']['inputs']),toolchain=version,preparationReservation=proof,budgets=BUDGETS,filesDeleted=0,nativeBenchmarkRun=False)
  write(work/'preparation.json',record);print(json.dumps(dict(status=record['status'],work=str(work),measuredTextInputs=record['measuredTextInputs'])))
 
 def run(args):
  work=args.work.resolve();assert work.is_relative_to(ROOT/'.tools'),'MEASUREMENT_COUNTED_ROOT'
  prepared=json.loads((work/'preparation.json').read_bytes());assert prepared['status']=='prepared-real-axum-measurements' and prepared['budgets']==BUDGETS
- assert not (work/'state').exists() and not (work/'cargo-target').exists(),'MEASUREMENT_COLD_TARGET_ALREADY_USED'
+ assert isinstance(prepared.get('retainedState'),str),'MEASUREMENT_REPREPARATION_REQUIRED'
+ state=measurement_state(work,Path(prepared['retainedState']),configured_state_roots())
+ assert str(state)==prepared['retainedState'] and prepared.get('measuredRoots')==[str(work),str(state)],'MEASUREMENT_STATE_CHANGED'
+ assert not os.path.lexists(work/'cargo-target'),'MEASUREMENT_COLD_TARGET_ALREADY_USED'
  for name,digest in prepared['supervisorDigests'].items():assert sha(Path(name))==digest,'MEASUREMENT_SUPERVISOR_CHANGED'
  for name,digest in prepared['coordinatorDigests'].items():assert sha(ROOT/'scripts'/name)==digest,'MEASUREMENT_COORDINATOR_CHANGED'
  cli=Path(prepared['cli']);assert sha(cli)==prepared['cliDigest'] and sha(work/'plan.json')==prepared['planDigest'] and sha(work/'binding.json')==prepared['bindingDigest']
  owner=work/'owner';lib=owner/'axum/src/lib.rs';config_path=owner/CONTROL_ROOT/'measurement.json'
  assert all(sha(owner/n)==d for n,d in prepared['ownerInputs'].items()),'MEASUREMENT_OWNER_CHANGED'
  proof=live_ownership('benchmark');last_check=0;proofs=[]
- report=dict(status='running',preparationDigest=sha(work/'preparation.json'),sourceCommit=SOURCE_COMMIT,engine=prepared['engine'],budgets=BUDGETS,initialReservation=proof,samples=[],calibration=[],filesDeleted=0,completeDependencyClosure=False,performanceAdvantageClaimed=False,actualBenchmarkAccepted=False)
+ report=dict(status='running',retainedState=str(state),measuredRoots=[str(work),str(state)],preparationDigest=sha(work/'preparation.json'),sourceCommit=SOURCE_COMMIT,engine=prepared['engine'],budgets=BUDGETS,initialReservation=proof,samples=[],calibration=[],filesDeleted=0,completeDependencyClosure=False,performanceAdvantageClaimed=False,actualBenchmarkAccepted=False)
  output=args.output.resolve();assert output.is_relative_to(work) and not output.exists(),'MEASUREMENT_COUNTED_OUTPUT';output.mkdir(parents=True);receipt=output/'receipt.json'
  def save():checkpoint(receipt,report)
  def monitor(force=False):
@@ -203,7 +227,7 @@ def run(args):
   if force or time.monotonic()-last_check>=2:
    p=live_ownership('benchmark');assert p['id']==proof['id'],'MEASUREMENT_RESERVATION_CHANGED';proofs.append(p);last_check=time.monotonic()
  def observe_disk():
-  observed=footprint(work);assert observed['allocatedBytes']<=BUDGETS['workAllocatedBytes'],'MEASUREMENT_WORK_DISK_BUDGET';return observed
+  observed=footprint(work,[state]);assert observed['allocatedBytes']<=BUDGETS['workAllocatedBytes'],'MEASUREMENT_WORK_DISK_BUDGET';return observed
  def one(label,argv,deadline):
   monitor(True);before=observe_disk()
   sample,raw=measured(guarded(argv),ROOT,dict(os.environ),retained=work/'samples'/label,deadline=deadline,monitor=monitor,cleanup=stop)
@@ -220,7 +244,7 @@ def run(args):
    sample,raw,_,_=one('rss-'+str(mib),[sys.executable,'-B','-c',source],30)
    assert int(raw)==mib*1024**2;report['calibration'].append(dict(allocatedMiB=mib,**sample));save()
   delta=report['calibration'][1]['peakRssBytes']-report['calibration'][0]['peakRssBytes'];assert 48*1024**2<delta<96*1024**2,'MEASUREMENT_RSS_CALIBRATION'
-  state=work/'state';pointer=None
+  pointer=None
   phases=phase_schedule()
   for label,value,deadline in phases:
    warm=label.startswith('warm-')
@@ -262,7 +286,7 @@ def run(args):
 
 def main():
  p=argparse.ArgumentParser(description=__doc__);sub=p.add_subparsers(dest='mode',required=True)
- a=sub.add_parser('prepare');a.add_argument('--work',type=Path,required=True);a.add_argument('--prior',type=Path,required=True);a.add_argument('--cli',type=Path,required=True);a.add_argument('--prior-compiler',type=Path,required=True)
+ a=sub.add_parser('prepare');a.add_argument('--work',type=Path,required=True);a.add_argument('--state',type=Path,required=True);a.add_argument('--prior',type=Path,required=True);a.add_argument('--cli',type=Path,required=True);a.add_argument('--prior-compiler',type=Path,required=True)
  a=sub.add_parser('run');a.add_argument('--work',type=Path,required=True);a.add_argument('--output',type=Path,required=True)
  args=p.parse_args();(prepare if args.mode=='prepare' else run)(args)
 
