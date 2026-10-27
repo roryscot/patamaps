@@ -363,3 +363,15 @@ The [authentic client receipt](../acceptance/project-adoption/g5-authentic-clien
 records native TypeScript emission, compilation from captured compiler inputs,
 selected module loading, older-artifact refusal before module load, and restoration.
 It does not repeat real application/network acceptance.
+
+
+The packaged scripts/installed_selected.py wrapper verifies the exact installed
+source inventory and executes these same native commands. Its existing default
+is180 seconds for each complete call. For a larger declared context, configure
+--inspection-timeout-seconds and --execution-timeout-seconds explicitly; each
+accepts integers1..3600. Inspection covers engine and selected binding checks;
+execution covers the entire selected call, including native pre/post checks.
+The receipt records both settings and each command's effective timeout. These
+outer wrapper limits do not change the trusted native command's own bounds or
+prove practical latency. The wrapper still requires the existing host supervisor
+outside its qualified GitHub Linux environment.

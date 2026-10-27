@@ -1,6 +1,8 @@
 # Fresh installed original-owner Next workflow
 
-Status: planned; no new installed owner accepted. Continues original G5/G6.
+Status: wrapper/package-scope prerequisite verified; exact package/source
+compilation and both owner workflows remain pending. No new installed owner
+is accepted. Continues original G5/G6.
 The source-built original-owner baseline, declared edit and seven-case runtime
 remain accepted only at their identified source/engine. Keep their full four-
 attempt state unchanged. This plan does not narrow the adoption goal.
@@ -115,3 +117,22 @@ selection. Do not increase semantic, correctness, resource or privacy limits to
 obtain a pass. New owner states have explicit bounded attempts; never add to
 the original full four-attempt state. Return the exact unresolved cause when
 a repair budget or authorization boundary is reached.
+
+
+## Wrapper/package-scope preflight
+
+The [guarded Intel preflight](../acceptance/project-adoption/installed-original-owner-next-20261027/preflight.json)
+passed seven new wrapper controls and ten existing source-integrity controls.
+Defaults and inclusive limits passed; invalid flags refused before output or
+compiler effects. A real timeout stopped the owned guarded worker, while an
+unrelated session survived until its own test cleanup. All test files remain
+retained. The wrapper records configured/effective deadlines and preserves its
+existing command cleanup and source-identity contract.
+
+The current package scope has1,240 source members/77,101,844 bytes including its
+inventory and328 linked evidence members/26,277,373 bytes, within the existing
+128MiB source/32MiB evidence/512-evidence-member limits. No archive was created
+or binary executed by that scope check. The supervisor exited0 and released
+its reservation. Packaging will independently recompute and bind its later
+committed contents; these preflight counts do not claim a frozen distribution,
+fresh source compiler, owner rebuild, runtime or installed-owner acceptance.

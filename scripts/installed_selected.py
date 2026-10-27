@@ -42,10 +42,25 @@ def verify_installed_source(root, expected_digest):
   assert path.stat().st_size==item["bytes"] and sha(path)==item["digest"], "INSTALLED_SOURCE_BYTES_CHANGED"
  return dict(sourceInventoryDigest=expected_digest,sourceFiles=len(entries),sourceIsInstalled=True)
 
-def main():
+def bounded_timeout(value):
+ try:seconds=int(value)
+ except (TypeError,ValueError):raise argparse.ArgumentTypeError("Timeout must be an integer in 1..3600 seconds") from None
+ if not 1<=seconds<=3600:raise argparse.ArgumentTypeError("Timeout must be an integer in 1..3600 seconds")
+ return seconds
+
+def arguments(argv=None):
  p=argparse.ArgumentParser(description=__doc__)
  for n in ["compiler","state","command","output"]:p.add_argument("--"+n,type=Path,required=True)
- a=p.parse_args()
+ p.add_argument("--inspection-timeout-seconds",type=bounded_timeout,default=180,help="Outer deadline for engine/binding inspection (1..3600; default180)")
+ p.add_argument("--execution-timeout-seconds",type=bounded_timeout,default=180,help="Outer deadline for selected execution including binding checks (1..3600; default180); native command bounds remain unchanged")
+ return p.parse_args(argv)
+
+def wait_installed_child(child,timeout):
+ try:return child.wait(timeout=timeout)
+ finally:stop(child)
+
+def main():
+ a=arguments()
  if not (platform.system()=="Linux" and os.environ.get("GITHUB_ACTIONS")=="true"):
   guard=Path(os.environ.get("LOCAL_STORAGE_PROJECT","/unavailable"))/"scripts/parity/storage_guard.py"
   spec=importlib.util.spec_from_file_location("installed_selected_storage_guard",guard);module=importlib.util.module_from_spec(spec);spec.loader.exec_module(module)
@@ -58,21 +73,20 @@ def main():
   return True
  assert unchanged()
  sys.path.insert(0,str(ROOT/"scripts/parity"));from identity import identities
- r=dict(status="running",sourceInventoryDigest=sha(ROOT/"source-inventory.json"),sourceFiles=len(inventory),commands=[],productionActivation=False)
+ r=dict(status="running",sourceInventoryDigest=sha(ROOT/"source-inventory.json"),sourceFiles=len(inventory),commands=[],productionActivation=False,wrapperTimeoutSeconds=dict(inspection=a.inspection_timeout_seconds,execution=a.execution_timeout_seconds))
  def save():(output/"receipt.json").write_text(json.dumps(r,indent=2)+"\n")
- def run(label,args):
-  start=time.monotonic()
+ def run(label,args,timeout):
+  start=time.monotonic();r["currentCommand"]=dict(label=label,timeoutSeconds=timeout);save()
   with (output/(label+".stdout")).open("xb") as out,(output/(label+".stderr")).open("xb") as err:
    child=subprocess.Popen([sys.executable,str(ROOT/"scripts/project_watch.py"),"__guard",*map(str,args)],cwd=output,env={k:v for k,v in os.environ.items() if k in ["PATH","HOME","TMPDIR"]},stdout=out,stderr=err,start_new_session=True)
-   try:code=child.wait(timeout=180)
-   finally:stop(child)
-  r["commands"].append(dict(label=label,exitCode=code,elapsedMs=round((time.monotonic()-start)*1000)));save();assert code==0,(label,code)
+   code=wait_installed_child(child,timeout)
+  r["commands"].append(dict(label=label,exitCode=code,timeoutSeconds=timeout,elapsedMs=round((time.monotonic()-start)*1000)));save();assert code==0,(label,code)
   return json.loads((output/(label+".stdout")).read_text())
  try:
   compiler=a.compiler.resolve(strict=True);r["compilerDigest"]=sha(compiler)
-  engine=run("installed-engine",[compiler,"engine"]);assert engine=={"schemaVersion":"0.1.0","documentType":"executor-description",**identities(ROOT)}
-  verify=run("selected-bindings",[compiler,"project-build-verify",a.state.resolve()]);assert verify["status"]=="verified-selected-build-bindings"
-  report=run("selected-execution",[compiler,"project-exec-selected",a.state.resolve(),a.command.resolve()])
+  engine=run("installed-engine",[compiler,"engine"],a.inspection_timeout_seconds);assert engine=={"schemaVersion":"0.1.0","documentType":"executor-description",**identities(ROOT)}
+  verify=run("selected-bindings",[compiler,"project-build-verify",a.state.resolve()],a.inspection_timeout_seconds);assert verify["status"]=="verified-selected-build-bindings"
+  report=run("selected-execution",[compiler,"project-exec-selected",a.state.resolve(),a.command.resolve()],a.execution_timeout_seconds)
   assert report["status"]=="completed-selected-project-command" and report["postExecutionSelectionVerified"] and report["selectionPointerUnchanged"]
   assert unchanged()
   r.update(status="passed-installed-selected-application-workflow",engine=engine,execution=report,sourceInventoryUnchanged=True,sourceIsInstalled=True,fixtureScriptsImported=False)
