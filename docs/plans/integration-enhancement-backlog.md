@@ -1550,6 +1550,10 @@ performance remain open. Full original G5/G6 acceptance remains unproven.
 The [original-owner browser continuation](2026-10-27-original-owner-browser.md)
 now defines the remaining hydrated UI, actual identity/permission and upstream
 Playwright acceptance. Its optional ready-inspector prerequisite reuses the
-existing selected-output HTTP/server lifecycle. Six retained process controls
-are queued separately; only syntax checks have run. No browser, real backend
-authentication or full owner acceptance follows from this preparation.
+existing selected-output HTTP/server lifecycle. The [six retained process
+controls now pass independent Intel review](../acceptance/project-adoption/selected-owner-ready-inspector-20261027/receipt.json):
+default seven-case behavior, refusal before effects, ready-server access,
+exception cleanup, producer reappearance and SIGTERM cleanup. All five started
+fixture servers were reaped; exact tested helper/standalone qualifier bytes are
+in the checkout. The earlier admission refusal is retained. No real browser,
+backend authentication or full owner acceptance follows from these controls.

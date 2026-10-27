@@ -8,7 +8,8 @@ import {setTimeout as delay} from "node:timers/promises";
 
 const hash=b=>"sha256:"+crypto.createHash("sha256").update(b).digest("hex");
 const requireCheck=(value,code)=>{if(!value)throw Error(code);};
-export async function probe(cfg){
+export async function probe(cfg, inspectReady){
+ requireCheck(inspectReady===undefined||typeof inspectReady==="function","OWNER_PROBE_INSPECTOR");
  const report={status:"running",cases:[],readinessRequests:0,serverStopped:false,producerUnavailableThroughout:true};
  const unavailable=()=>{
   for(const p of cfg.unavailable){
@@ -94,6 +95,12 @@ export async function probe(cfg){
   requireCheck(response.status===404,"OWNER_MISSING_STATIC_REFUSAL");
   add("missing-static-refusal",response);
   requireCheck(report.cases.length===7,"OWNER_HTTP_CASES");
+  if(inspectReady!==undefined){
+   live();
+   await inspectReady(Object.freeze({root,assertLive:live}));
+   live();
+   report.readyInspectionCompleted=true;
+  }
   report.status="passed-current-owner-edited-runtime-http";
  }catch(error){
   report.status="failed";report.failureCodes=[...new Set(String(error.message).match(/OWNER_[A-Z_]+/g)??[])];throw error;

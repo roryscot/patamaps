@@ -1,9 +1,10 @@
 # Original-owner browser and authentication continuation
 
-Status: prerequisite lifecycle extension prepared privately; six process
-controls queued separately behind the current native owner. No browser or
-authentication acceptance is claimed. This continues the original G5/G6
-requirements after the [installed-owner workflow](2026-10-27-installed-original-owner-next.md);
+Status: the ready-inspector lifecycle prerequisite is implemented and its
+[six guarded process controls pass independent review](../acceptance/project-adoption/selected-owner-ready-inspector-20261027/receipt.json).
+The frozen source/native original-owner workflows also pass separately. Real
+browser and backend identity acceptance remain open. This continues original
+G5/G6 after the [installed-owner workflow](2026-10-27-installed-original-owner-next.md);
 it does not narrow the [adoption goal](2026-10-15-general-project-adoption.md).
 
 ## Scope and fixed expectations
@@ -36,9 +37,22 @@ invalid-session requirements separately from frontend-only diagnostic evidence.
    request the live owned loopback server; an inspector exception, producer
    reappearance or SIGTERM fails and still reaps that server. These six controls
    use retained local fixture inputs and are not original-owner browser proof.
-   The private proposed module and controls are syntax-checked, not runtime-
-   verified. Apply the patch to the checkout only after its held original has
-   restored and the separate guarded controls pass.
+   These controls now pass on Intel Node22.23.3, including five real fixture
+   servers reaped and absent. The initial storage refusal remains recorded;
+   authorized non-deleting recovery restored the unrelated local service and
+   admitted a new fair reservation. Exact tested bytes are now in the checkout.
+
+   The optional inspector receives a frozen `{root, assertLive}` after the seven
+   HTTP cases and before server shutdown. Bind its code and inputs into the
+   native command; call `assertLive` around awaited steps and close any additional
+   browser/service resources in `finally`. The existing HTTP/native bounds stay
+   unchanged. This hook does not itself implement browser or identity checks.
+
+   Reproduce the six process controls with the standalone qualifier, a fresh
+   absolute output path and the declared Node22.23.3 executable:
+   ```sh
+   python3 -B scripts/qualify_selected_next_ready_inspector.py --work /absolute/new-controls --probe /absolute/patamaps/scripts/selected_next_http_probe.mjs --node /absolute/node -v
+   ```
 
 2. Inspect actual owner API/test dependency and startup readiness without
    reading environment files or borrowing unrelated services. Bind unchanged
