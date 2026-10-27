@@ -164,3 +164,21 @@ installed-owner acceptance, registry publication or performance acceptance
 follows from these prerequisites. The supervisor exited0 and released its
 reservation without deletion or a policy change. The next jobs are the
 separately queued source and native owner workflows in the frozen sequence.
+
+
+## Source-installed owner in progress
+
+The [source-installed run](../acceptance/project-adoption/installed-original-owner-next-20261027/source-build-running.json)
+reached the actual native owner build after its engine,45 packaged tool members,
+943 owner inputs and changed-installed-source-before-compiler refusal passed.
+An independent observer confirmed five checkout compiler/functional qualifier
+paths unavailable. The source-installed project-build process was confirmed
+live; this is a running checkpoint, not build or installed-owner acceptance.
+
+Review identified an undefined NODE name in the later private runtime command
+construction. It does not affect the already-running owner build. Keep the
+executing controller immutable, retain its eventual result and repair only
+the runtime handoff using the newly selected generation if the build passes.
+Do not rebuild a passed owner or add a state attempt for this harness correction.
+The corrected future controller is prepared privately; no native-installation
+owner run, new runtime result or criterion relaxation is claimed.
