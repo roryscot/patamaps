@@ -1534,6 +1534,11 @@ The [fresh installed original-owner plan](2026-10-27-installed-original-owner-ne
 now has passed wrapper/source integrity controls, exact Git-bound source/native
 package installations and a fresh installed-source compiler. The old hardcoded
 180s outer wrapper deadlines are explicitly configurable within1..3600 seconds;
-native command bounds and all semantic/resource checks remain unchanged. Both
-actual original-owner rebuild/runtime workflows remain pending. Package/compiler
-verification does not close the original G5/G6 installed-owner requirement.
+native command bounds and all semantic/resource checks remain unchanged.
+The [source-installed original-owner workflow](../acceptance/project-adoption/installed-original-owner-next-20261027/source-owner-review.json)
+now passes independent generator/build/test/runtime review, including seven
+HTTP cases, unavailable producer paths, exact restoration and final bindings.
+The runtime-only repair reused the passed build with no added attempt; its
+reservation released. The native archive owner workflow remains pending,
+alongside authenticated browser/permissions, watch, deployment and measured
+Rust/Next performance. Full original G5/G6 acceptance remains open.

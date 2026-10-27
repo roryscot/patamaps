@@ -1,8 +1,8 @@
 # Fresh installed original-owner Next workflow
 
-Status: source-installed owner regeneration/build/tests/selection independently
-verified; its runtime-only repair is queued. The native-installed owner has not
-run. Full installed-owner acceptance remains pending. Continues original G5/G6.
+Status: the source-installed original-owner generation/build/test/runtime
+workflow passes independent review. The native-installed owner has not run.
+Full installed-owner acceptance remains pending. Continues original G5/G6.
 The source-built original-owner baseline, declared edit and seven-case runtime
 remain accepted only at their identified source/engine. Keep their full four-
 attempt state unchanged. This plan does not narrow the adoption goal.
@@ -204,3 +204,29 @@ released. The first bounded repair is separately queued and reuses that exact
 selection and existing runtime copy, with zero owner rebuilds or new attempts.
 It must pass the unchanged installed wrapper, unavailable-path HTTP, restoration,
 cleanup and final-binding requirements before this owner can be accepted.
+
+
+## Source-installed original-owner workflow accepted
+
+The [composite independent review](../acceptance/project-adoption/installed-original-owner-next-20261027/source-owner-review.json)
+accepts the successful actual owner build together with its first runtime-only
+repair. Both original generators, eight independent oracle outputs, unchanged
+Next production build, separate TypeScript check, three manifest witnesses,
+compiled edit and three route tests passed. The installed wrapper passed all
+seven HTTP cases from that new selected generation with source/context/provider
+unavailable; the two edited static responses matched selected bytes. Native
+pre/post and restored final bindings passed, the owned server was reaped and
+eight unavailable paths restored with independently observed identities.
+
+All1,240 installed source members,943 selected inputs,45 installed SDK/discovery
+members, the new artifact generation and both original generations were checked.
+The new state still has one attempt; the original state still has four. The
+runtime repair performed zero rebuilds. The initial private NODE NameError and
+exit1 remain preserved separately; the repair exited0 and its reservation
+finished and released. No deletion or policy change occurred.
+
+This accepts only the source-installed owner at the frozencf1b51b package and
+compiler7261d652. The native archive's independent owner rebuild/runtime is next.
+Authenticated browser/permissions/visible label behavior, watch, deployment and
+actual Rust/Next performance remain open; neither HTTP success nor functional
+binding timings proves those requirements.

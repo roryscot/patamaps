@@ -226,3 +226,15 @@ Its runtime handoff failed in the private harness before execution; all checkout
 paths restored and the reservation released. A separately queued runtime-only
 repair preserves the new selection. Source runtime and the native installation's
 complete owner workflow remain unaccepted; no G5/G6 completion follows.
+
+
+The [source-installed original-owner composite review](../acceptance/project-adoption/installed-original-owner-next-20261027/source-owner-review.json)
+now closes that installation's actual generator/build/test/runtime increment:
+eight independent outputs, production Next and separate tsc, three manifest
+witnesses, three route tests, compiled marker and all seven source/context/
+provider-unavailable HTTP cases. Native pre/post/final bindings, owned-server
+reaping, eight exact path restorations, installed source and old/new artifacts
+passed. One runtime-only harness repair reused the passed build with no new
+attempt; its reservation finished. The native archive owner remains unrun.
+Authenticated browser/permissions, watch, deployment and practical performance
+remain required; this does not complete G5/G6 or the adoption goal.

@@ -86,5 +86,12 @@ workspace packages compiled from installed paths, both CLI engines/bytes match,
 and the original shared CLI/source inventory were preserved. The [17-control
 preflight](../acceptance/project-adoption/installed-original-owner-next-20261027/preflight.json)
 verifies bounded wrapper deadlines, refusal before effects and actual timeout
-cleanup. Neither result substitutes for the two new installed original-owner
-generator/build/test/runtime workflows, which remain unrun.
+cleanup. The [source-installed original-owner workflow](../acceptance/project-adoption/installed-original-owner-next-20261027/source-owner-review.json)
+now passes its actual generation/build/test/runtime review: eight independent
+oracle outputs, Next production and separate tsc, three manifests/route tests,
+compiled edit, seven HTTP cases and native pre/post/final bindings. Checkout
+tools and configured producer paths were unavailable; owned-server reaping,
+eight exact restorations and source/artifact rehashes passed. The initial
+harness failure remains retained; its runtime-only repair rebuilt nothing and
+released its reservation. The native archive owner workflow, authenticated
+browser/permissions, watch, deployment and actual performance remain open.
