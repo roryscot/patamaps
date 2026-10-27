@@ -162,3 +162,16 @@ acceptance. The edited generation's source-unavailable replay was not run here;
 the earlier baseline replay remains generation-specific. Axum measurements still
 need an external-state driver repair, functional verification, current-compiler
 preparation and the separately approved quiet window.
+
+
+## Current external-state layout verification
+
+The [frozen Axum measurement plan](2026-10-24-project-measurements.md) now has
+[28 passed Linux controls](../acceptance/project-adoption/g4-external-state-20261027/linux-controls.json)
+and an [independently reviewed native layout check](../acceptance/project-adoption/g4-external-state-20261027/native-review.json):
+18 Intel controls, expected Cargo-ancestor refusal before creation, external-state
+selection/binding verification/no-op, and rehashed inputs/output. Both fixture
+preparation errors are retained separately. Fresh current-compiler actual Axum
+preparation is in progress; cold/warm/edit/RSS measurements remain unrun. No
+file deletion, policy change, database interruption or performance acceptance
+follows from this functional check.

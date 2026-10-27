@@ -1,8 +1,9 @@
 # Actual-project development measurements
 
 Status: prior driver controls and historical native preparation passed.
-The retained-state layout repair passed all28 focused Linux controls. Native
-functional layout verification is in progress under the canonical supervisor. Current-compiler preparation and the separate approved
+The retained-state layout repair passed all28 focused Linux controls and the
+actual Intel native refusal/selection/verification/no-op check. Fresh functional
+Axum preparation with the current compiler is in progress. Current-compiler preparation and the separate approved
 quiet exclusive window are still required before actual measurements. No new
 performance result is accepted. This continues original G4 separately from
 completed native parity and pinned installed Next runtime qualification.
@@ -313,3 +314,20 @@ records exact producing source and unchanged local control digests. These unit
 checks cover the external-state resolver/refusals and combined-root accounting;
 the actual Intel native layout fixture, fresh current-compiler Axum preparation
 and all real performance measurements remain separate acceptance requirements.
+
+
+The [actual Intel layout review](../acceptance/project-adoption/g4-external-state-20261027/native-review.json)
+now passes all18 focused controls and five command results: the old state refused
+with PROJECT_BUILD_STATE_ISOLATION before creation, while the accounted external
+state selected, verified bindings, and returned an unchanged no-op without
+repeating verification. Independent review rehashed all seven fixture inputs in
+three locations and the exact24-byte selected output. The supervisor exited0 and
+released its native reservation. This is a layout fixture, not an Axum build or
+performance measurement. Fresh real Axum preparation is queued separately.
+
+[Two preceding fixture failures](../acceptance/project-adoption/g4-external-state-20261027/native-initial-attempts.json)
+remain preserved: byte/text concatenation in the assertion, then omitted policy/
+projection files referenced by the fixture plan. The latter refused before
+candidate execution/selection. Neither demonstrates a product defect. The final
+fixture includes those exact digest-bound files; no acceptance criterion changed.
+The later canonical admission succeeded without further deletion or policy change.
