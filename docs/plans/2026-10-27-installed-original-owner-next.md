@@ -1,8 +1,9 @@
 # Fresh installed original-owner Next workflow
 
-Status: the source-installed original-owner generation/build/test/runtime
-workflow passes independent review. The native-installed owner has not run.
-Full installed-owner acceptance remains pending. Continues original G5/G6.
+Status: both source- and native-installed original-owner generation/build/test/
+runtime workflows pass independent review at the frozen cf1b51b package pair.
+This accepts the plan's scoped installed-owner increment, continuing G5/G6;
+authenticated browser, watch, deployment and performance remain open.
 The source-built original-owner baseline, declared edit and seven-case runtime
 remain accepted only at their identified source/engine. Keep their full four-
 attempt state unchanged. This plan does not narrow the adoption goal.
@@ -230,3 +231,29 @@ compiler7261d652. The native archive's independent owner rebuild/runtime is next
 Authenticated browser/permissions/visible label behavior, watch, deployment and
 actual Rust/Next performance remain open; neither HTTP success nor functional
 binding timings proves those requirements.
+
+
+## Native-installed original-owner workflow accepted
+
+The [independent native review](../acceptance/project-adoption/installed-original-owner-next-20261027/native-owner-review.json)
+now passes the separately queued native installation's actual owner build and
+runtime. All nine commands, eight original-oracle outputs, production Next,
+separate TypeScript check, three manifest witnesses, compiled marker, three
+route tests and both generator check modes passed. Seven HTTP cases then passed
+from the newly selected generation with configured source/context/provider
+unavailable through the installed wrapper. Native pre/post and restored final
+bindings, owned-server reaping and eight independently observed exact path
+restorations passed; its reservation finished and released.
+
+Review rehashed both frozen archives, all 1,240 installed source members, 943
+owner inputs, 45 packaged SDK/discovery members, the new native generation, the
+accepted source generation and both original generations. Source and native
+states each retain one attempt; the original state still has four. The native
+run needed no repair. The source run's initial private harness failure and
+runtime-only repair remain recorded. No deletion or policy change occurred.
+
+Both original-owner installations are now accepted at cf1b51b, compiler7261d652/
+workspacef086e884 and the identified development-profile pair. This does not
+prove general build reproducibility or practical latency. Continue the
+[original-owner browser plan](2026-10-27-original-owner-browser.md), watch,
+deployment and actual Rust/Next measurements; the full adoption goal is open.

@@ -1539,9 +1539,12 @@ The [source-installed original-owner workflow](../acceptance/project-adoption/in
 now passes independent generator/build/test/runtime review, including seven
 HTTP cases, unavailable producer paths, exact restoration and final bindings.
 The runtime-only repair reused the passed build with no added attempt; its
-reservation released. The native archive owner workflow remains pending,
-alongside authenticated browser/permissions, watch, deployment and measured
-Rust/Next performance. Full original G5/G6 acceptance remains open.
+reservation released. The [native archive owner workflow](../acceptance/project-adoption/installed-original-owner-next-20261027/native-owner-review.json)
+now independently passes the same frozen build/test/runtime requirements,
+including seven HTTP cases, eight exact path restorations, final native binding
+and released reservation. Both archives and old/new generations were rehashed.
+Authenticated browser/permissions, watch, deployment and measured Rust/Next
+performance remain open. Full original G5/G6 acceptance remains unproven.
 
 
 The [original-owner browser continuation](2026-10-27-original-owner-browser.md)

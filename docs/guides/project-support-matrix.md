@@ -79,7 +79,7 @@ receipts can close a specifically named gap without rewriting earlier failures.
 Read the linked scope and exact source/tool identities before applying any result.
 
 
-The original-owner installed workflow remains pending. Its [exact package/source
+Both original-owner installed workflows now pass their frozen scope. Their [exact package/source
 prerequisite](../acceptance/project-adoption/installed-original-owner-next-20261027/package-source-review.json)
 passes atcf1b51b:1,240 source members agree with Git/archive/extraction, eight
 workspace packages compiled from installed paths, both CLI engines/bytes match,
@@ -93,5 +93,10 @@ compiled edit, seven HTTP cases and native pre/post/final bindings. Checkout
 tools and configured producer paths were unavailable; owned-server reaping,
 eight exact restorations and source/artifact rehashes passed. The initial
 harness failure remains retained; its runtime-only repair rebuilt nothing and
-released its reservation. The native archive owner workflow, authenticated
+released its reservation. The [native archive owner review](../acceptance/project-adoption/installed-original-owner-next-20261027/native-owner-review.json)
+now also passes the independent build/test/runtime workflow: nine commands,
+eight oracle outputs, three route tests and seven HTTP cases, native pre/post/
+final bindings, eight exact restorations and released reservation. Both frozen
+archive hashes, installed source and new/source/original generations were
+rechecked. The native state has one attempt and no repair. Authenticated
 browser/permissions, watch, deployment and actual performance remain open.
