@@ -1,8 +1,8 @@
 # Fresh installed original-owner Next workflow
 
-Status: wrapper controls, exact source/native installations and fresh installed-
-source compiler independently verified. Both original-owner rebuild/runtime
-workflows remain pending; no installed owner is accepted. Continues G5/G6.
+Status: source-installed owner regeneration/build/tests/selection independently
+verified; its runtime-only repair is queued. The native-installed owner has not
+run. Full installed-owner acceptance remains pending. Continues original G5/G6.
 The source-built original-owner baseline, declared edit and seven-case runtime
 remain accepted only at their identified source/engine. Keep their full four-
 attempt state unchanged. This plan does not narrow the adoption goal.
@@ -182,3 +182,25 @@ the runtime handoff using the newly selected generation if the build passes.
 Do not rebuild a passed owner or add a state attempt for this harness correction.
 The corrected future controller is prepared privately; no native-installation
 owner run, new runtime result or criterion relaxation is claimed.
+
+
+## Source-installed owner build verified; runtime repair queued
+
+The [independent build-only review](../acceptance/project-adoption/installed-original-owner-next-20261027/source-build-review.json)
+now passes: both native generation commands, unchanged production Next build,
+independent TypeScript check, three manifest witnesses, eight oracle-matched
+contracts and compiled marker, three original route tests and both generator
+check modes. All nine native command reports passed;181 preparation calls
+succeeded. Source943 inputs,45 installed SDK/discovery mappings, selected
+artifact inventory, unchanged source installation and the five exactly restored
+checkout identities were independently checked. The fresh source state has one
+selected attempt; the original full four-attempt state remains preserved.
+
+The controller then failed with the previously identified private NODE NameError
+before writing or executing the runtime command. Its exit1 and all logs remain
+preserved; the real owner build exited0. No HTTP or full installed-owner result
+is inferred from this build-only review. The initial reservation finished and
+released. The first bounded repair is separately queued and reuses that exact
+selection and existing runtime copy, with zero owner rebuilds or new attempts.
+It must pass the unchanged installed wrapper, unavailable-path HTTP, restoration,
+cleanup and final-binding requirements before this owner can be accepted.

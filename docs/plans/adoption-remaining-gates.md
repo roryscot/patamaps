@@ -217,3 +217,12 @@ restoration. Seventeen wrapper/source controls also pass. This prepares the
 two original-owner installations; their required generator/build/test/runtime
 workflows have not run and remain open, together with authenticated/browser,
 deployment, watch and actual Rust/Next performance requirements.
+
+
+The [source-installed original-owner build](../acceptance/project-adoption/installed-original-owner-next-20261027/source-build-review.json)
+now independently passes native regeneration, production Next, separate tsc,
+manifest/contract/marker checks, three owner route tests and generator checks.
+Its runtime handoff failed in the private harness before execution; all checkout
+paths restored and the reservation released. A separately queued runtime-only
+repair preserves the new selection. Source runtime and the native installation's
+complete owner workflow remain unaccepted; no G5/G6 completion follows.
