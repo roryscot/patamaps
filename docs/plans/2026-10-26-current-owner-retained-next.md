@@ -241,3 +241,8 @@ installed owner workflow, edited-generation source-unavailable runtime replay,
 deployment, actual edit-loop measurements or full G4/G6 adoption. Continue those
 existing requirements; do not add another attempt to this full four-record state
 or silently increase its bound.
+
+
+The separately scoped [edited-generation runtime replay plan](2026-10-27-current-owner-edited-runtime-replay.md)
+continues the remaining unavailable-path runtime requirement using only existing
+selected artifacts. It does not add a fifth attempt or rerun either build.
