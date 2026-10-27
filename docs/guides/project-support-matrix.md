@@ -101,3 +101,12 @@ final bindings, eight exact restorations and released reservation. Both frozen
 archive hashes, installed source and new/source/original generations were
 rechecked. The native state has one attempt and no repair. Authenticated
 browser/permissions, watch, deployment and actual performance remain open.
+
+
+The [original-owner API import preflight](../acceptance/project-adoption/original-owner-api-import-20261027/receipt.json)
+has a reviewed terminal observation, not API acceptance. Its final wrapper
+control blocked network/outside writes but failed dummy dotenv-read denial,
+so zero library/application imports ran. All three reservations released and
+387 source/config/test inputs still match. A corrected file-rule diagnosis is
+separate from an additional qualification run; the phase's repair budget is
+exhausted. Actual API startup, identity and browser permissions remain open.

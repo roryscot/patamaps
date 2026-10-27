@@ -1557,3 +1557,15 @@ exception cleanup, producer reappearance and SIGTERM cleanup. All five started
 fixture servers were reaped; exact tested helper/standalone qualifier bytes are
 in the checkout. The earlier admission refusal is retained. No real browser,
 backend authentication or full owner acceptance follows from these controls.
+
+
+The [original-owner API import prerequisite](../acceptance/project-adoption/original-owner-api-import-20261027/receipt.json)
+remains unverified: three guarded attempts ended in wrapper setup/security
+controls before any library/application imports. The final dummy dotenv-read
+denial failed; network/outside-write denial passed. All 387 owner/API/test inputs
+were rehashed and all reservations released. No dependencies installed, services
+started, source changed, files deleted or storage policy changed. The existing
+one-initial/two-repair phase budget is exhausted. A read-only correction diagnosis
+passed on existing generated files; one extra import attempt is proposed for
+approval, with unchanged safety and acceptance criteria. Real browser/auth,
+watch/deployment and actual Rust/Next measurements retain their existing scope.

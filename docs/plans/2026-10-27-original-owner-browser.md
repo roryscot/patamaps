@@ -11,7 +11,7 @@ it does not narrow the [adoption goal](2026-10-15-general-project-adoption.md).
 
 Use the actual unchanged owner at c61d51a and its independently generated
 original Metamap 0.5 expectations. Preserve the already accepted source owner,
-the in-progress native owner, both original generations and the original full
+the accepted native owner, both original generations and the original full
 four-attempt state. Reuse their selected application outputs when configuration
 permits. Do not rebuild a passed application merely to add browser checks.
 
@@ -64,6 +64,29 @@ invalid-session requirements separately from frontend-only diagnostic evidence.
    Do not touch Advocates or any other project's database. A required occupied
    listener causes refusal rather than takeover. Freeze the selected compiled
    API origin before choosing ports; do not silently alter compiled config.
+
+   The [guarded import-readiness observation](../acceptance/project-adoption/original-owner-api-import-20261027/receipt.json)
+   is independently reviewed, but **no library or API imports ran**. All 387
+   frozen owner/API/test inputs were rehashed. The initial profile failed to
+   compile; the first repair exposed Python.framework's interpreter re-execution;
+   the second repair blocked network and outside writes but failed its dummy
+   dotenv-read denial. That security failure correctly stopped before imports.
+   All three reservations finished/released; no package installation, API or
+   database startup, source change, deletion or policy change occurred.
+
+   The phase has exhausted its one initial run and two repairs. A separately
+   retained read-only diagnosis on two existing generated files confirms a
+   literal-dot character-class correction denies the dummy dotenv and allows
+   ordinary settings. It is not the additional API qualification run. One
+   additional import attempt is proposed and awaits approval of the budget
+   extension; preserve the failed records and all existing criteria. API
+   dependency/startup and real authentication readiness remain unverified.
+
+   The current unchanged Playwright configuration starts the Python API through
+   Poetry despite the API README/package scripts describing a NestJS entry point.
+   Follow the actual browser configuration. Installed Playwright is 1.56.1; its
+   required downloaded browser executables are absent. No dependency or browser
+   installation has been performed by this continuation.
 
 3. Bind the exact original Playwright config, flow-walk spec and flow manifest.
    Use its existing-server override and preserve its five configured browser
