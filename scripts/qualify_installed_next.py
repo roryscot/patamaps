@@ -194,6 +194,11 @@ def main():
    assert len(browser["controls"])==groups and all(row["passed"] for row in browser["controls"]) and browser["upstreamPageTests"]==4
    record["cases"][label]=dict(status=result["status"],compilerDigest=sha(compiler),engine=engine,sourceInventoryDigest=binding,sourceFiles=source_identity["sourceFiles"],upstreamCommit=result["upstreamCommit"],runtimeGroupsPassed=groups,upstreamPageTestsPassed=4,generatedOutputObservation=result["generatedOutputObservation"],sourceWithoutGit=True,checkoutCompilerAndDriverUnavailable=True,allOwnedRuntimesStopped=True)
    if args.retained_dynamic_routes:
+    bootstrap=result["publicPnpmBootstrap"]
+    assert bootstrap["reused"] is (label=="native") and bootstrap["unchangedAfterOwner"] is True,"INSTALLED_PUBLIC_PNPM_REUSE"
+    if label=="source":record["sharedPublicPnpmBootstrap"]=bootstrap["identity"]
+    else:assert bootstrap["identity"]==record["sharedPublicPnpmBootstrap"],"INSTALLED_PUBLIC_PNPM_IDENTITY"
+    record["cases"][label]["publicPnpmBootstrap"]=bootstrap
     probe=json.loads((case_out/"standalone-probe.json").read_bytes())
     owned=json.loads((case_out/"retained-owned.json").read_bytes())
     record["cases"][label].update(retained_dynamic_case_result(result,runtime,browser,probe,owned))

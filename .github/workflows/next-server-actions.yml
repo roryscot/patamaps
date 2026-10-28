@@ -118,6 +118,7 @@ jobs:
           python3 -B -m unittest discover -s scripts -p test_installed_retained_next.py
           PATAMAPS_TEST_RETAIN_ROOT="$RUNNER_TEMP/installed-next-controls" python3 -B -m unittest discover -s scripts -p test_installed_dynamic_next.py
           PATAMAPS_TEST_RETAIN_ROOT="$RUNNER_TEMP/installed-next-controls" python3 -B -m unittest discover -s scripts -p test_installed_retained_dynamic_next.py
+          PATAMAPS_TEST_RETAIN_ROOT="$RUNNER_TEMP/installed-next-controls" python3 -B -m unittest discover -s scripts -p test_public_pnpm_bootstrap.py
           PATAMAPS_TEST_RETAIN_ROOT="$RUNNER_TEMP/installed-next-controls" python3 -B -m unittest discover -s scripts -p test_exact_archive_install.py
           PATAMAPS_TEST_RETAIN_ROOT="$RUNNER_TEMP/installed-next-controls" python3 -B -m unittest discover -s scripts -p test_next_output_inventory.py
       - name: Qualify fresh source and native installations on real Next

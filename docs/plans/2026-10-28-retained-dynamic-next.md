@@ -200,3 +200,13 @@ controls under the same combined4GBgrowth/500MBreserve and time bounds. A new
 storage failure is a failed attempt; do not delete data, increase the cap, split
 the resource budget, hide allocations, reuse an application build or retry again.
 Native I3e registration/watch/recovery approvals remain separate and pending.
+
+
+Repair2 implementation preflight passes112 focused controls with zero failures,
+errors or skips. [The source-bound record](../acceptance/project-adoption/g5-retained-dynamic-next-20261028/bootstrap-preflight.json)
+includes every as-run source digest and the released canonical guard handle.
+The existing installed-source CI step now also invokes the same nine bootstrap
+controls; its sole-line addition and YAML syntax were checked separately, with
+all implementation/test bindings unchanged. This preflight establishes the
+bootstrap harness/refusals and regressions, not application acceptance or Linux
+resource savings. Repair2's actual exact-pair qualification remains pending.

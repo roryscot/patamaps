@@ -16,6 +16,42 @@ def write(path,value):path.write_text(json.dumps(value,indent=2)+"\n")
 
 
 
+PNPM_ENTRY_DIGEST="sha256:b276da51dc8ca5b0d3ee3371695b50fc8b3244b281b091c63a3f082a88dadeb9"
+
+def public_pnpm_identity(prefix):
+ """Bind the public tool's complete bytes/modes/links, never application outputs."""
+ from qualify_next_standalone import inventory,summary
+ prefix=Path(prefix)
+ assert prefix.is_dir() and not prefix.is_symlink(),"PUBLIC_PNPM_BOOTSTRAP_ROOT"
+ rows=inventory(prefix)
+ for name,row in rows.items():
+  if row["kind"]=="symlink":
+   assert (prefix/name).resolve(strict=True).is_relative_to(prefix.resolve(strict=True)),"PUBLIC_PNPM_EXTERNAL_LINK"
+ entry=prefix/"node_modules/pnpm/bin/pnpm.cjs"
+ package=prefix/"node_modules/pnpm/package.json";lock=prefix/"package-lock.json"
+ assert all(p.is_file() and not p.is_symlink() for p in [entry,package,lock]),"PUBLIC_PNPM_FILES"
+ assert json.loads(package.read_bytes())["version"]=="10.32.1","PUBLIC_PNPM_VERSION"
+ assert sha(entry)==PNPM_ENTRY_DIGEST,"PUBLIC_PNPM_ENTRY"
+ return dict(profile="patamaps-public-pnpm-bootstrap-1",version="10.32.1",
+   entryDigest=sha(entry),lockDigest=sha(lock),tree=summary(rows))
+
+def public_pnpm_bootstrap(shared,run):
+ """A run-private public bootstrap; sequential reuse must match its sealed tree."""
+ shared=Path(shared)
+ assert shared.is_dir() and not shared.is_symlink(),"PUBLIC_PNPM_CACHE_ROOT"
+ prefix=shared/"pnpm-bootstrap";seal=shared/"pnpm-bootstrap.json"
+ reused=prefix.exists() or prefix.is_symlink() or seal.exists() or seal.is_symlink()
+ if reused:
+  assert prefix.is_dir() and not prefix.is_symlink() and seal.is_file() and not seal.is_symlink(),"PUBLIC_PNPM_PARTIAL_BOOTSTRAP"
+  expected=json.loads(seal.read_bytes())
+  assert public_pnpm_identity(prefix)==expected,"PUBLIC_PNPM_BOOTSTRAP_CHANGED"
+ else:
+  run("pnpm-install-tool",["npm","install","--prefix",prefix,"pnpm@10.32.1",
+      "--ignore-scripts","--no-audit","--no-fund","--cache",shared/"npm-bootstrap-cache"])
+  expected=public_pnpm_identity(prefix)
+  with seal.open("x") as stream:stream.write(json.dumps(expected,indent=2)+"\n")
+ return prefix,dict(identity=expected,reused=reused)
+
 def private_output_inventory(staged,work,label):
  """Hash generated files locally; publish only bounded category/count summaries."""
  base=staged/".next";records={};total=0
@@ -75,7 +111,7 @@ def main():
  env.update(HOME=str(work/"home"),TMPDIR=str(work/"tmp"),CI="true",LANG="C.UTF-8",TZ="UTC",CARGO_INCREMENTAL="0",CARGO_BUILD_JOBS="2",CARGO_PROFILE_DEV_DEBUG="0",CARGO_PROFILE_TEST_DEBUG="0",RUSTUP_TOOLCHAIN="1.99.0",CARGO_TERM_COLOR="never",PYTHONDONTWRITEBYTECODE="1",NEXT_TELEMETRY_DISABLED="1",NODE_OPTIONS="--max-old-space-size=2048",GIT_TERMINAL_PROMPT="0",GIT_CONFIG_GLOBAL="/dev/null",GIT_CONFIG_SYSTEM="/dev/null",npm_config_userconfig="/dev/null",npm_config_globalconfig="/dev/null",CI_PLAYWRIGHT="1")
  for key,name in [("npm_config_userconfig","npm-user.conf"),("npm_config_globalconfig","npm-global.conf")]:
   path=work/"tools"/name;path.write_text("");env[key]=str(path)
- shared_store=work/"store"
+ shared_store=work/"store";shared=None
  if a.shared_cache_root is not None:
   shared=a.shared_cache_root.resolve(strict=True)
   assert shared.is_dir() and not shared.is_relative_to(ROOT) and not ROOT.is_relative_to(shared), "Public cache must be outside installed/check-out sources"
@@ -150,9 +186,13 @@ def main():
   def source_unchanged(base,expected=None):
    return all(sha_bytes(base,e)==e["digest"] and (e["symlink"] or (base/e["path"]).stat().st_mode & 0o777 == (0o755 if e["mode"]=="100755" else 0o644)) for e in (inventory if expected is None else expected))
   assert all(sha_bytes(staged,e)==e["digest"] for e in staged_inventory)
-  run("pnpm-install-tool",["npm","install","--prefix",work/"tools","pnpm@10.32.1","--ignore-scripts","--no-audit","--no-fund"])
-  pnpm=work/"tools/node_modules/pnpm/bin/pnpm.cjs";assert pnpm.is_file()
-  r["pnpmTool"]=dict(version=json.loads((work/"tools/node_modules/pnpm/package.json").read_bytes())["version"],entryDigest=sha(pnpm),toolLockDigest=sha(work/"tools/package-lock.json"))
+  if a.retained_dynamic_routes and shared is not None:
+   tool_prefix,r["publicPnpmBootstrap"]=public_pnpm_bootstrap(shared,run)
+  else:
+   tool_prefix=work/"tools"
+   run("pnpm-install-tool",["npm","install","--prefix",tool_prefix,"pnpm@10.32.1","--ignore-scripts","--no-audit","--no-fund"])
+  pnpm=tool_prefix/"node_modules/pnpm/bin/pnpm.cjs";assert pnpm.is_file()
+  r["pnpmTool"]=dict(version=json.loads((tool_prefix/"node_modules/pnpm/package.json").read_bytes())["version"],entryDigest=sha(pnpm),toolLockDigest=sha(tool_prefix/"package-lock.json"))
   assert r["pnpmTool"]["version"]=="10.32.1"
   run("owner-frozen-dependencies",[pnpm,"install","--frozen-lockfile","--ignore-scripts","--store-dir",shared_store],cwd=staged)
   assert source_unchanged(staged,staged_inventory) and source_unchanged(owner)
@@ -291,6 +331,9 @@ def main():
   assert {name:sha(path) for name,path in files.items()}==manifest_before,"Public compiled manifests changed during runtime"
   r["generatedOutputObservation"]=dict(before=output_summary_before,after=output_summary_after,changedFiles=len(changed),changedCategories=categories,publicManifestsUnchanged=True,detailedInventoryPublished=False,fullRuntimeBundleSelected=a.retained_runtime)
   audit("source-exclusion-final-audit");assert source_unchanged(owner) and source_unchanged(staged,staged_inventory)
+  if "publicPnpmBootstrap" in r:
+   assert public_pnpm_identity(tool_prefix)==r["publicPnpmBootstrap"]["identity"],"PUBLIC_PNPM_OWNER_MUTATION"
+   r["publicPnpmBootstrap"]["unchangedAfterOwner"]=True
   if a.dynamic_routes:
    assert runtime["dynamicRouteWitness"]["fixturesUnchanged"] and runtime["dynamicRouteWitness"]["generationPostAttempts"]==0
    r["dynamicRouteQualification"].update(runtimeAccepted=True,sourceBytesUnchanged=True,privateEvidenceBarrierPassed=runtime["generatedOwnerSecretsAbsentFromEvidence"],ownedRuntimesStopped=runtime["ownedProcessGroupsStopped"] and runtime["ownedListenersStopped"])
