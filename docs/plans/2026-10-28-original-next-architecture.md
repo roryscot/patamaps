@@ -98,7 +98,7 @@ inspector. A new failure beyond that budget needs separate approval.
 All allocating preparation uses the existing canonical Intel supervisor:
 4 GB growth, 500 MB reserve, 100 GB retention and native-exclusive fallback.
 No policy change. Declare managed functional limits before preparation:
-CPU2, memory1.5 GiB, no swap, PIDs256, fixed writable quota1 GiB, read-only root,
+CPU2, memory1.5 GiB, no swap, PIDs256, fixed writable quota512 MiB, read-only root,
 network none and no host/source mount. Queue the managed job separately after
 native preparation releases; do not nest or bypass fairness.
 
@@ -154,3 +154,21 @@ or application build, original workspace remount, deletion, service interruption
 or pending retained-dynamic retry occurred. Reuse this passed phase and its
 selected runtime for the next separately queued managed preparation; do not
 reacquire ahead of waiting work or repeat selection merely to fix a collector.
+
+
+## Managed quota sizing before its initial preparation
+
+[Read-only metadata sizing](../acceptance/project-adoption/g5-original-next-architecture-20261028/managed-payload-sizing.json)
+observes 86,098,993 application bytes, 121,116,896 selected x64 Node bytes,
+118,343,776 ARM64 Node bytes and the previously inspected 63,168,200-byte Linux
+CLI. Their logical total is388,727,865bytes. An additional20,447,232byte per-entry
+allowance and64MiB headroom give476,283,961bytes, leaving60,586,951bytes below
+512MiB. These are size observations/estimates, not a content rehash or actual fit.
+
+Before creating or running any managed workspace, reduce its originally proposed
+1GiB quota to512MiB. This stricter limit retains all original controls and avoids
+allocating the unused upper allowance. Preserve the original estimate privately.
+Verify real capacity/free space and every copied input during preparation; refuse
+a mismatch or insufficient space. Do not automatically expand this limit after
+a failure. Host growth/reserve/retention, CPU/memory/PID/time bounds and all
+correctness requirements remain unchanged.
