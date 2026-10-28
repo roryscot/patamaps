@@ -1,6 +1,11 @@
 # ELF target preflight
 
-Development-tree command (not included in the published 0.1.0-alpha.1 CLI):
+Available in the published `patamaps-cli` version `0.1.0-alpha.2` and the
+current checkout. See the [Rust quickstart](rust-project-quickstart.md) for
+installation. [Exact public archive verification](../acceptance/project-adoption/g5-original-next-architecture-20261028/published-command.json)
+confirms the command, locked workspace version and matching ELF implementation.
+The release [fresh-install rehearsal](https://github.com/roryscot/patamaps/actions/runs/40117789049)
+uses those same verified archives.
 
 ```sh
 patamaps elf-target-check retained/bin/server \

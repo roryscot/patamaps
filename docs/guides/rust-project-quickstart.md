@@ -104,5 +104,9 @@ select the supported explicit contract profile and qualify your actual types.
 For compiler embedding, use local patamaps-core/patamaps-projection crates and
 their checked-state APIs; decoded records are not admitted values.
 
+For Linux runtime selection, the native [ELF target preflight](elf-target-preflight.md)
+checks a reviewed producer digest and declared architecture before selection.
+Use immutable artifact bindings and qualify the actual runtime separately.
+
 See the [support matrix](project-support-matrix.md) for additional scoped results.
 Broader work belongs to the [enhancement backlog](../plans/integration-enhancement-backlog.md).

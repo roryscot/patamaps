@@ -1,6 +1,7 @@
 # Original Next runtime architecture qualification
 
-Status: planned independent G5 increment. The retained-dynamic Chatbot phase has
+Status: native preparation passes independent review at d590748; managed
+application preparation/startup remains unrun. Independent G5 increment. The retained-dynamic Chatbot phase has
 exhausted its runtime budget; its symbol-profile proposal remains unapplied and
 awaits approval. This increment uses the separately retained actual Next 16.1.6
 owner output. It does not retry that Chatbot phase or any I3e/API/benchmark case.
@@ -129,3 +130,27 @@ Primary references: existing native ELF implementation and the
 [architecture-selection receipt](../acceptance/project-adoption/g5-native-architecture-selection-20261022/receipt.json).
 Node archive checksum source: https://nodejs.org/dist/v24.11.1/SHASUMS256.txt.
 ELF observation limits: https://gabi.xinuos.com/elf/02-eheader.html.
+
+
+## Native preparation checkpoint
+
+[Independent review](../acceptance/project-adoption/g5-original-next-architecture-20261028/native-preparation.json)
+passes eight guarded native calls at source d590748 with unchanged cd9a1594
+compiler/workspace f086e884. The genuine same-version Node archive/member were
+independently rehashed; x64 and ARM64 match their declared target headers. Native
+ProjectBuild selected x64 and refused ARM64 for the same amd64 requirement with
+ELF_ARCHITECTURE, preserving the pointer. The correct ARM digest was supplied.
+Node producer metadata and x64 snapshot paths were then unavailable for binding
+replay. This does not mean the original Next sources or entire dependency set
+were unavailable. The selected runtime, original Node/expected manifest and
+compiler bytes remain unchanged; all188 relevant Rust build inputs match b615.
+The canonical reservation finished and released normally.
+
+Only native runtime selection preparation is accepted here. The original2,480
+application files have not yet been fully rechecked in this increment; managed
+workspace preparation, kernel/enforcement inspection, actual application HTML
+before/after refusal and the complete architecture gate remain unrun. No Node
+or application build, original workspace remount, deletion, service interruption
+or pending retained-dynamic retry occurred. Reuse this passed phase and its
+selected runtime for the next separately queued managed preparation; do not
+reacquire ahead of waiting work or repeat selection merely to fix a collector.

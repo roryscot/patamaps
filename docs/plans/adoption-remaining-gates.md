@@ -261,3 +261,13 @@ See [the exact final review](../acceptance/project-adoption/g5-retained-dynamic-
 The planned initial+2 runtime budget is exhausted. The sampled4,001,222,656byte
 stop does not establish full-workflow headroom; the public bootstrap was actually
 reused but did not suffice. No G5/G6 completion or further runtime attempt follows.
+
+
+The independent [original Next architecture increment](2026-10-28-original-next-architecture.md)
+now passes native preparation: genuine Node x64 selection, correct-digest ARM64
+ELF_ARCHITECTURE refusal, unchanged pointer and offline Node-producer/snapshot
+binding replay. [The source-bound review](../acceptance/project-adoption/g5-original-next-architecture-20261028/native-preparation.json)
+records eight guarded calls and a released reservation at d590748. Actual managed
+application startup and full architecture acceptance remain unrun; stale-contract,
+authentication, watch, performance and G5/G6 requirements remain open. This is
+separate from the capacity-failed retained-dynamic phase and its pending proposal.

@@ -1694,3 +1694,14 @@ no strip build, savings, extra runtime trial or whole-goal acceptance is claimed
 Further attempts need explicit approval under the named plan. Continue the
 original remaining owner/watch/deployment/performance gates within their separate
 authorizations; do not substitute this partial public-project result for them.
+
+
+[Original Next runtime architecture preparation](2026-10-28-original-next-architecture.md)
+now passes independently at d590748: both authentic Node target headers, x64
+selection, ARM64 refusal with the correct digest, preserved pointer and offline
+Node-producer/snapshot replay. No app build/start or full2,480-file runtime
+recheck ran. The next managed leg must use the already selected runtime and
+retained actual Next output, prove real HTML around architecture refusal, inspect
+enforcement and confirm cleanup. Stale contracts and the full architecture/G5/G6
+gates stay open. No new ELF parser, Rust change, source worktree, service change,
+capacity increase, deletion or blocked-phase retry was introduced.
