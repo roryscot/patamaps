@@ -371,3 +371,72 @@ a wrapper exits normally with unknown workers. Confirm every registered group
 and all channels/streams before considering a preexisting-container exception.
 Then independently qualify the staged integration before any installation or
 new bounded real-owner parent-death proposal. Full G0–G6 adoption stays open.
+
+## I3d staged supervisor receiver
+
+The next integration increment implements the global-side receiver for the
+existing private lifecycle channel. It must observe and persist pending,
+guardian and native registration during execution; bound and validate the closed
+wire grammar; retain uncertainty on malformed, interrupted or unregistered
+launches even if the controller exits zero; and independently query every
+recorded process instance/group before reporting stop evidence.
+
+This receiver supplies ownership evidence, not authorization or a lease-release
+predicate. Source/runtime/OS registration and the installed guard integration
+remain required next steps. Declared hashes, a caller callback, stdout and tokens
+cannot confer that trust. Keep the installed supervisor unchanged and native
+execution exclusive with parallelfalse. The exact installed guard preimage and
+provenance remain the baseline for the later opt-in patch.
+
+Acceptance for this increment: deterministic grammar/bounds/uncertainty controls;
+real anonymous Node/Python channel with live guardian/native kernel identities;
+independent stop observations after normal completion, controller SIGKILL and
+guardian SIGKILL; an interrupted unregistered launch with an independently
+observed surviving worker must stay ownership-unknown. Preserve all fixtures,
+failure bytes and an unrelated owned sentinel. Test failures receive at most two
+evidence-backed repairs; retain each source/attempt. Use the canonical outer
+exclusive reservation and existing4GB/500MB/100GB limits. No actual retained-owner
+crash trial, installation, registry activation, parallel execution, service
+interruption, deletion or automatic reservation recovery is included.
+
+## I3d receiver result
+
+[The evidence review](../acceptance/project-adoption/native-global-receiver-20261028/receipt.json)
+passes32 initial controls and3 focused supplemental controls. Four actual Darwin
+cases exercise the anonymous Node/Python channel: normal completion, controller
+SIGKILL, guardian SIGKILL and an interrupted unregistered launch. Live snapshots
+capture kernel identities before exit; all16 observed process instances stopped,
+and the unrelated owned sentinel remained unchanged during each case.
+
+The unregistered fixture worker remains alive after the registered groups stop;
+the receiver correctly reports ownership unknown. Only the independent harness
+then stops that separately identified worker. This is a counterfactual unconfined
+fixture, not proof that a registered restricted program can fork. Registered
+crashes retain failed/incomplete operations even when all known groups stop.
+Malformed records, PID reuse, false completion, bounded records/calls, transport
+loss and a zero-exit wrapper cannot erase ownership uncertainty.
+
+Review found three weak test assertions after the first pass. One additive
+qualification repair covers valid-looking duplicate keys, the per-record bound
+below the aggregate limit, and transport error versus clean EOF. Production
+source and the entire earlier test-file prefix are unchanged. The32 earlier
+controls were not needlessly repeated; only those3 new checks ran. As-run source
+snapshots, raw TAP, journals, live probes, stop probes and both reservations are
+retained privately. Both canonical reservations finished/released; the separate
+reviewer exited0 and the installed guard's exact digest is unchanged.
+
+I3d is complete with0 production repairs and1 qualification repair. The receiver
+never signals processes or releases reservations, and every assessment explicitly
+reports source/runtime registration unqualified and automatic release unqualified.
+Its probe and persistence callbacks are integration boundaries, not trust grants.
+No installed supervisor behavior, parallel execution or actual retained-owner
+crash trial changed. All full G0–G6 adoption requirements remain in force.
+
+Next bind a closed controller, complete private Python runtime/stdlib/native
+extension closure, fixed source snapshot and qualified OS in a supervisor-owned
+registration. Then patch the preserved installed-guard candidate to consume this
+channel live, update reservation status and use independent all-group/channel/
+data-stream stop confirmation. Missing or changed registration must refuse before
+effects; pending/unsealed/malformed ownership must hold even after a zero exit.
+Qualify the complete staged path before installation or another bounded real-owner
+parent-death proposal. Keep native exclusive and parallelfalse throughout staging.
