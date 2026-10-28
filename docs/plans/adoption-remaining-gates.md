@@ -271,3 +271,12 @@ records eight guarded calls and a released reservation at d590748. Actual manage
 application startup and full architecture acceptance remain unrun; stale-contract,
 authentication, watch, performance and G5/G6 requirements remain open. This is
 separate from the capacity-failed retained-dynamic phase and its pending proposal.
+
+
+The original Next architecture increment's initial managed staging now passes
+all2,480 input bindings, but its controller failed a Linux namespace statfs
+comparison before any application launch. The [independent initial failure review](../acceptance/project-adoption/g5-original-next-architecture-20261028/managed-attempt-0/failure-review.json)
+confirms actual host quota/image bounds, stopped owned resources and finished
+reservation. The bounded host-versus-namespace inspector repair is specified in
+the existing plan; architecture application acceptance remains false. No full
+G5/G6 acceptance or extra retained-dynamic/I3e/API/benchmark authorization follows.

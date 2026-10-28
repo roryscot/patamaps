@@ -1,7 +1,8 @@
 # Original Next runtime architecture qualification
 
-Status: native preparation passes independent review at d590748; managed
-application preparation/startup remains unrun. Independent G5 increment. The retained-dynamic Chatbot phase has
+Status: native preparation and initial managed staging pass; the initial managed
+controller failed its filesystem observation before any application launch.
+The first bounded inspector repair below is prepared for implementation; it has not run. Independent G5 increment. The retained-dynamic Chatbot phase has
 exhausted its runtime budget; its symbol-profile proposal remains unapplied and
 awaits approval. This increment uses the separately retained actual Next 16.1.6
 owner output. It does not retry that Chatbot phase or any I3e/API/benchmark case.
@@ -172,3 +173,43 @@ Verify real capacity/free space and every copied input during preparation; refus
 a mismatch or insufficient space. Do not automatically expand this limit after
 a failure. Host growth/reserve/retention, CPU/memory/PID/time bounds and all
 correctness requirements remain unchanged.
+
+
+## Initial managed observation failure and first bounded repair
+
+The [independent failed-attempt review](../acceptance/project-adoption/g5-original-next-architecture-20261028/managed-attempt-0/failure-review.json)
+confirms canonical staging passed and released (f612b1b1 / guard1b136c61),
+all2,480 original members and staged bytes/modes matched, and the selected
+runtime/package bindings remained unchanged. Managed4a6ad3a1 exited1 before
+any app launch or owned verifier child. Its CPU/memory/swap/PID checks passed.
+The Linux namespace statfs comparison exceeded512MiB; the exact reported count
+was not persisted. The owned container and host process group stopped and the
+reservation finished. All failed bytes/output remain. Architecture acceptance
+is false; this failure does not establish a Patamaps product defect.
+
+Independent inspection of the stopped container verifies its only work bind
+points to the exact host quota filesystem:535,781,376bytes, with a535,822,336byte
+backing image. Both are below the unchanged536,870,912byte allowance. The
+namespace size comparison therefore must not be treated as a measurement of
+that physical quota. No claim about the unrecorded namespace byte count or its
+precise filesystem-sharing cause is justified.
+
+Use the first of the two already bounded repairs to distinguish these observations.
+Reuse the passed native selection, staged Linux verifier and all fixed input
+bindings; no Node download, source capture, selection or application rebuild.
+Prepare/queue a fresh quota workspace through the same existing executor.
+Before queuing, record actual MacDocker.config/verifyWorkspace and physical
+filesystem/image identities in the bound input manifest. Existing executor
+admission rechecks those identities and the sole work bind before launch, and
+its heartbeat continues verification. Independently recheck them after stop.
+The controller records Linux namespace statfs separately without calling it the
+physical quota, verifies the bound host quota evidence and still requires a real
+writable probe plus all original kernel/namespace/application/refusal controls.
+
+Physical quota must remain512MiB and be proved through those existing host
+identity/mount checks; no quota/enforcement assertion may simply disappear.
+All source/image/CPU/memory/swap/PID/time/storage/stop conditions and the initial
+plus two repair budget remain. Preserve initial outputs; no automatic deletion,
+recovery, service interruption, image substitution or parallel activation.
+This repair is not yet executed or accepted. Stale-contract/auth/performance
+and full G0–G6 requirements remain open.
