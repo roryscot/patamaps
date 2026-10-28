@@ -1,6 +1,6 @@
 # Original-owner foreground watch
 
-Status: verification ownership fix implemented; [eleven controlled regressions and existing guardian checks pass independent review](../acceptance/project-adoption/watch-policy-verification-20261028/receipt.json). Linux CI, updated installation and real-owner watch acceptance remain open. This continues G4/G6 in the
+Status: verification ownership fix implemented; [eleven controlled regressions and existing guardian checks pass independent review](../acceptance/project-adoption/watch-policy-verification-20261028/receipt.json). The [new exact installation passes independent review](../acceptance/project-adoption/installed-watch-policy-20261028/receipt.json), and both Linux watch-control jobs passed; actual-owner W0/W1 acceptance remains open. This continues G4/G6 in the
 [general adoption plan](2026-10-15-general-project-adoption.md). The original
 requirement includes failed, raced and cancelled builds, parent death, readiness,
 and practical development performance. Passing a no-op or a fixture does not
@@ -113,3 +113,20 @@ Publish only reviewed aggregate outcomes, bindings and safe executed audit code.
 Record initial failures and scoped acceptance honestly. Commit and push verified
 milestones with Rory identity. W0 alone does not complete W1, G4/G6, measurements,
 or the adoption goal.
+
+## Updated installed pair ready for W0
+
+The source/native archive qualification at producer37c19bc passes independent
+review: all1,255 source members match Git/archive/extraction, all188 Rust build
+inputs match the previously compiled source, native/source engine identities
+agree, and the accepted development CLI was reused. No new compiler or
+application build is claimed. All eleven controlled watch tests ran from the
+extracted source, including the actual controller main loop's two controlled
+policy calls. Installed source/native bytes and old-pair bindings stayed intact;
+the native-exclusive reservation finished and released. These controlled calls
+are not the real owner's two host reservations.
+
+[CI observations](../acceptance/project-adoption/installed-watch-policy-20261028/ci.json)
+identify the exact commit, run and job outcomes; both Linux watch-control jobs
+passed. A pending overall run is not a full CI pass. Use this updated installed
+pair for W0, then retain W1 and the original G4/G6 acceptance requirements.

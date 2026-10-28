@@ -399,3 +399,10 @@ establish a real-owner watch or the updated installed helper. The
 [original-owner continuation](../plans/2026-10-28-original-owner-watch.md) retains
 those checks and the complete changed-build requirements. Linux CI is pending
 at this checkpoint.
+
+The [updated exact installed pair](../acceptance/project-adoption/installed-watch-policy-20261028/receipt.json)
+also passes independent archive/Git/extraction review and all11 controls from its
+installed source. All188 Rust build inputs matched the accepted compiled source,
+so its existing development CLI was reused. Both Linux watch-control jobs
+[passed at the identified commit](../acceptance/project-adoption/installed-watch-policy-20261028/ci.json).
+This prepares actual-owner watch checks; it does not accept them or W1.

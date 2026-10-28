@@ -1616,3 +1616,13 @@ a read-only recovery comparison, its image remains preserved and the unrelated
 database stayed ready. No files were deleted, services stopped, policy changed
 or parallel execution activated. Linux CI, the exact updated installation and
 actual-owner watch remain unaccepted; earlier owner/browser results are preserved.
+
+The [updated installed watch pair](../acceptance/project-adoption/installed-watch-policy-20261028/receipt.json)
+now passes exact1,255-member source/Git/archive verification,188 unchanged Rust
+build-input comparisons, matching source/native engine identities and all11
+extracted-source watch controls. The existing development CLI was reused; no
+application/compiler rebuild ran. Both Linux watch-control jobs passed, with
+[full run statuses recorded separately](../acceptance/project-adoption/installed-watch-policy-20261028/ci.json).
+The reservation released. This closes the updated-tooling prerequisite for
+[actual-owner W0](2026-10-28-original-owner-watch.md), which remains unrun along
+with W1, authentication/permissions, deployment and measured performance.
