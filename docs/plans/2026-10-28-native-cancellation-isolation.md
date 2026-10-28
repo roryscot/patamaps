@@ -1,6 +1,8 @@
 # Native cancellation ownership isolation
 
-Status: implementation/qualification in progress after the actual
+Status: fixed single-process kernel prerequisite independently passes on Intel
+macOS15.8.1; trusted-controller integration and automatic release remain unqualified.
+This follows the actual
 [parent-death release failure](../acceptance/project-adoption/original-owner-active-parent-death-20261028/receipt.json).
 The approved metadata recovery is complete. Full G0–G6 adoption and W0/W1 remain
 open; the original no-op/idle/SIGTERM pass remains accepted.
@@ -62,3 +64,21 @@ inheritance rules. Apple's [App Sandbox documentation](https://developer.apple.c
 describes broader sandbox capabilities; it is not a specification for this
 deprecated command's private profile language. Actual kernel denial tests are
 required before making an enforcement claim.
+
+
+## Kernel prerequisite result
+
+[Independent review](../acceptance/project-adoption/native-inspection-kernel-20261028/receipt.json)
+passed all20 frozen kernel controls, four unsafe-root refusals and four
+unsandboxed endpoint baselines on Intel macOS15.8.1. Exec-in-place retained the
+restrictions; fork/posix_spawn, outside writes/signals, TCP4/TCP6/Unix and Mach
+lookup denied. The connected-stdin and explicitly inheritable extra-descriptor
+controls passed. Allowed fixture read/write succeeded. All known test processes
+stopped and the canonical reservation released. Attempt0 passed without repairs;
+all sources, outputs and fixture files remain preserved.
+
+This does not qualify automatic reservation release, arbitrary builds, native
+CPU/memory enforcement or the actual owner under this profile. Next inspect the
+existing read-only CLI under the same fixed primitive, then integrate only a
+trusted controller whose entire untrusted execution is demonstrably confined.
+The installed guard and native fallback have not changed.

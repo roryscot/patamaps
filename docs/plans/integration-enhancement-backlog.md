@@ -23,6 +23,14 @@ a passed fixture or metadata observation is not general support.
 
 ## Current selected work
 
+The [native cancellation isolation increment](2026-10-28-native-cancellation-isolation.md)
+now has [20 passed actual kernel controls](../acceptance/project-adoption/native-inspection-kernel-20261028/receipt.json)
+for a fixed Darwin single-process inspection primitive, with descriptor closure,
+denied fork/network/IPC/outside writes and exec persistence. It is not installed
+in the supervisor and does not close the failed automatic-release gate. Native
+work remains exclusive; full original adoption requirements remain unchanged.
+
+
 The stopped watch reservation has now been explicitly approved for recovery
 and [released with preservation verified](../acceptance/project-adoption/approved-reservation-recovery-20261028/receipt.json).
 The [resumption plan](2026-10-28-adoption-resumption.md) now has
