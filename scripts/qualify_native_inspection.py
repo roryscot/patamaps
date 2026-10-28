@@ -3,6 +3,7 @@ from pathlib import Path
 import argparse
 import ctypes
 import errno
+import fcntl
 import hashlib
 import json
 import os
@@ -14,7 +15,8 @@ import sys
 import uuid
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from native_inspection import KIND, PROFILE, launch, owned_directory
+from native_inspection import (KIND, PROFILE, LOCK_KIND, LOCK_PROFILE, launch,
+                               launch_strict, owned_directory, owned_driver_lock)
 
 ROOT = Path(__file__).resolve().parents[1]
 DENIALS = {errno.EPERM, errno.EACCES}
@@ -50,6 +52,24 @@ def connect(family, address):
         s.settimeout(2)
         s.connect(address)
 
+def process_path_available(pid):
+    library = ctypes.CDLL("/usr/lib/libproc.dylib", use_errno=True)
+    library.proc_pidpath.argtypes = [ctypes.c_int, ctypes.c_void_p, ctypes.c_uint32]
+    library.proc_pidpath.restype = ctypes.c_int
+    buffer = ctypes.create_string_buffer(4096)
+    return library.proc_pidpath(pid, buffer, len(buffer)) > 0
+
+
+def open_lock(path):
+    descriptor = os.open(path, os.O_RDWR | os.O_CREAT | os.O_NOFOLLOW, 0o600)
+    try:
+        fcntl.flock(descriptor, fcntl.LOCK_EX | fcntl.LOCK_NB)
+        fcntl.flock(descriptor, fcntl.LOCK_UN)
+    finally:
+        os.close(descriptor)
+    return True
+
+
 def payload(data, after_exec=False):
     checks = dict(data.get("checks", {}))
     root, outside = Path(data["workspace"]), Path(data["outside"])
@@ -59,6 +79,10 @@ def payload(data, after_exec=False):
     checks[prefix + "UnixDenied"] = denied(lambda: connect(socket.AF_UNIX, data["unix"]))
     checks[prefix + "MachLookupDenied"] = mach_lookup(data["machService"]) != 0
     if after_exec:
+        if data.get("strictLock"):
+            checks["afterExecProtectedHardlinkDenied"] = denied(
+                lambda: os.link(outside, root / "after-exec-hardlink"))
+            checks["afterExecLockOpenAllowed"] = open_lock(data["driverLock"])
         checks["execPreservedPid"] = data["initialPid"] == os.getpid()
         print(json.dumps({"status": "completed-kernel-probe", "checks": checks,
                           "pid": os.getpid()}), flush=True)
@@ -68,6 +92,16 @@ def payload(data, after_exec=False):
     checks["canReadSelectedFixture"] = outside.read_bytes() == b"unchanged-fixture"
     (root / "allowed-output").write_bytes(b"owned-output")
     checks["ownedWriteAllowed"] = (root / "allowed-output").read_bytes() == b"owned-output"
+    if data.get("strictLock"):
+        (root / "escape").symlink_to(outside.parent, target_is_directory=True)
+        checks["protectedHardlinkDenied"] = denied(lambda: os.link(outside, root / "hardlink"))
+        checks["lockHardlinkDenied"] = denied(lambda: os.link(data["driverLock"], root / "lock-link"))
+        checks["ownedHardlinkDenied"] = denied(lambda: os.link(root / "allowed-output", root / "owned-link"))
+        checks["lockOpenAndFlockAllowed"] = open_lock(data["driverLock"])
+        checks["lockParentWriteDenied"] = denied(
+            lambda: (Path(data["driverLock"]).parent / "unexpected-output").write_bytes(b"bad"))
+        checks["selfProcessPathAllowed"] = process_path_available(os.getpid())
+        checks["externalProcessPathDenied"] = not process_path_available(data["parentPid"])
     checks["outsideWriteDenied"] = denied(lambda: outside.write_bytes(b"bad-write"))
     checks["symlinkWriteDenied"] = denied(lambda: (root / "escape" / outside.name).write_bytes(b"bad-link"))
     checks["externalSignalDenied"] = denied(lambda: os.kill(data["parentPid"], signal.SIGUSR1))
@@ -102,12 +136,14 @@ def main():
     ensure_guarded()
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--work", type=Path, required=True)
+    parser.add_argument("--strict-lock", action="store_true")
     args = parser.parse_args()
     work = args.work
     need(work.is_absolute() and not work.exists(), "Fresh absolute work directory required")
     work.mkdir(parents=True, mode=0o700)
+    selected_profile = LOCK_PROFILE if args.strict_lock else PROFILE
     report = {"status": "started-native-inspection-kernel-qualification",
-              "kind": KIND, "filesDeleted": 0, "servicesInterrupted": 0,
+              "kind": LOCK_KIND if args.strict_lock else KIND, "filesDeleted": 0, "servicesInterrupted": 0,
               "supervisorPolicyChanged": False, "parallelActivated": False,
               "automaticReservationReleaseQualified": False}
     sources = {"qualifier": Path(__file__), "helper": Path(__file__).parent / "native_inspection.py"}
@@ -135,7 +171,8 @@ def main():
         supervisor.mkdir(mode=0o700)
         outside = supervisor / "sentinel"
         outside.write_bytes(b"unchanged-fixture")
-        (workspace / "escape").symlink_to(supervisor, target_is_directory=True)
+        if not args.strict_lock:
+            (workspace / "escape").symlink_to(supervisor, target_is_directory=True)
         (fixture / "alias").symlink_to(workspace, target_is_directory=True)
         report["retainedFixture"] = str(fixture)
         refused = []
@@ -150,6 +187,64 @@ def main():
                 refused.append(label)
         need(len(refused) == 4, "Unsafe root declaration accepted")
         report["rootRefusals"] = refused
+        driver_lock = None
+        if args.strict_lock:
+            driver_lock = supervisor / "driver.lock"
+            driver_lock.touch(mode=0o600)
+            lock_identity = owned_driver_lock(driver_lock, workspace)
+            open_lock(driver_lock)
+            need(process_path_available(os.getpid()), "No positive process-path baseline")
+            report["strictPositiveBaselines"] = ["lock-open-and-flock", "own-process-path"]
+            rejected = []
+            candidates = {}
+            for label in ["symlink", "shared", "nonempty", "worldreadable", "directory", "missing"]:
+                parent = fixture / ("bad-" + label)
+                parent.mkdir(mode=0o700)
+                candidate = parent / "driver.lock"
+                if label == "symlink":
+                    candidate.symlink_to(driver_lock)
+                elif label == "directory":
+                    candidate.mkdir(mode=0o600)
+                elif label != "missing":
+                    candidate.touch(mode=0o600)
+                    if label == "shared":
+                        os.link(candidate, parent / "peer")
+                    elif label == "nonempty":
+                        candidate.write_bytes(b"x")
+                    elif label == "worldreadable":
+                        candidate.chmod(0o644)
+                candidates[label] = (candidate, workspace)
+            alias = fixture / "state-alias"
+            alias.symlink_to(supervisor, target_is_directory=True)
+            candidates["alias"] = (alias / "driver.lock", workspace)
+            candidates["relative"] = (Path("driver.lock"), workspace)
+            wrong = fixture / "wrong-name"
+            wrong.touch(mode=0o600)
+            candidates["wrongname"] = (wrong, workspace)
+            overlap = fixture / "overlap"
+            overlap.mkdir(mode=0o700)
+            (overlap / "driver.lock").touch(mode=0o600)
+            candidates["overlap"] = (overlap / "driver.lock", overlap)
+            for label, (candidate, tree) in candidates.items():
+                try:
+                    owned_driver_lock(candidate, tree)
+                except (OSError, ValueError):
+                    rejected.append(label)
+            need(len(rejected) == 10, "Unsafe lock declaration accepted")
+            seeded = fixture / "seeded"
+            seeded.mkdir(mode=0o700)
+            os.link(outside, seeded / "preexisting-link")
+            try:
+                unexpected, _ = launch_strict(sys.executable, ["-c", "pass"],
+                    workspace=seeded, allowed_root=fixture, driver_lock=driver_lock)
+            except ValueError:
+                rejected.append("preseeded-workspace")
+            else:
+                os.killpg(unexpected.pid, signal.SIGKILL)
+                unexpected.wait(timeout=5)
+                raise RuntimeError("Preseeded writable tree admitted")
+            report["lockRefusals"] = rejected
+            report["originalLockIdentity"] = lock_identity
         for family, address in [(socket.AF_INET, ("127.0.0.1", 0)),
                                 (socket.AF_INET6, ("::1", 0)),
                                 (socket.AF_UNIX, str(supervisor / "socket"))]:
@@ -170,13 +265,16 @@ def main():
                 "tcp4": servers[0].getsockname()[1], "tcp6": servers[1].getsockname()[1],
                 "unix": str(supervisor / "socket"), "parentPid": os.getpid(),
                 "inheritableFd": descriptor, "outsideIdentity": [info.st_dev, info.st_ino],
-                "machService": service}
+                "machService": service, "strictLock": args.strict_lock,
+                "driverLock": str(driver_lock) if driver_lock is not None else None}
         a, b = socket.socketpair()
         old_stdin = os.dup(0)
         try:
             os.dup2(a.fileno(), 0)
-            child, requested = launch(sys.executable, ["-I", "-S", "-B", str(Path(__file__).resolve()), "__payload"],
-                                      workspace=workspace, allowed_root=fixture)
+            chosen_launch = launch_strict if args.strict_lock else launch
+            options = {"driver_lock": driver_lock} if args.strict_lock else {}
+            child, requested = chosen_launch(sys.executable, ["-I", "-S", "-B", str(Path(__file__).resolve()), "__payload"],
+                                      workspace=workspace, allowed_root=fixture, **options)
         finally:
             os.dup2(old_stdin, 0)
             os.close(old_stdin)
@@ -204,6 +302,13 @@ def main():
             "stdinIsPipe", "forkDenied", "posixSpawnDenied", "afterExecTcp4Denied",
             "afterExecTcp6Denied", "afterExecUnixDenied", "afterExecMachLookupDenied", "execPreservedPid"
         }
+        if args.strict_lock:
+            expected |= {"protectedHardlinkDenied", "lockHardlinkDenied", "ownedHardlinkDenied",
+                         "lockOpenAndFlockAllowed", "lockParentWriteDenied",
+                         "selfProcessPathAllowed", "externalProcessPathDenied",
+                         "afterExecProtectedHardlinkDenied", "afterExecLockOpenAllowed"}
+            need(owned_driver_lock(driver_lock, workspace) == lock_identity, "Driver lock changed")
+            report["driverLockUnchanged"] = True
         report.update(checks=checks, checkCount=len(checks))
         need(set(checks) == expected and all(checks.values()), "Kernel denial/positive controls failed")
         need(outside.read_bytes() == b"unchanged-fixture" and not signal_hits,
@@ -216,7 +321,7 @@ def main():
         report.update(status="passed-native-inspection-kernel-qualification",
                       checks=checks, checkCount=len(checks), sourceSha256=hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
                       helperSha256=hashlib.sha256((Path(__file__).parent / "native_inspection.py").read_bytes()).hexdigest(),
-                      profileSha256=hashlib.sha256(PROFILE.encode()).hexdigest(),
+                      profileSha256=hashlib.sha256(selected_profile.encode()).hexdigest(),
                       supervisorSentinelUnchanged=True, unrelatedSignalHits=0,
                       childStopped=child.poll() is not None,
                       platform=subprocess.check_output(["/usr/bin/sw_vers", "-productVersion"], text=True).strip())

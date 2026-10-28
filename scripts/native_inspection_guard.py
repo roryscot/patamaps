@@ -88,14 +88,43 @@ def validate_records(records, run_id, guardian_pid):
     return end
 
 
+def inspection_mode(value, primitive, work):
+    """Validate only closed fixed variants; never accept caller profile text."""
+    if value["version"] == 1:
+        return None
+    item = value["inspection"]
+    if (not isinstance(item, dict)
+            or set(item) != {"kind", "driverLock", "lockIdentity"}):
+        raise ValueError("INSPECTION_MODE_PROTOCOL")
+    if item["kind"] == primitive.STRICT_KIND:
+        if item["driverLock"] is not None or item["lockIdentity"] is not None:
+            raise ValueError("INSPECTION_MODE_PROTOCOL")
+    elif item["kind"] == primitive.LOCK_KIND:
+        if (not isinstance(item["driverLock"], str)
+                or not isinstance(item["lockIdentity"], list)
+                or len(item["lockIdentity"]) != 2
+                or any(type(v) is not int for v in item["lockIdentity"])
+                or primitive.owned_driver_lock(item["driverLock"], work) != item["lockIdentity"]):
+            raise ValueError("INSPECTION_LOCK_CHANGED")
+    else:
+        raise ValueError("INSPECTION_MODE_PROTOCOL")
+    return item
+
+
 class InspectionRunner:
     """subprocess.run-shaped adapter for existing read-only watcher functions.
 
     Each invocation retains its descriptor, raw data and control records.
     The descriptor hashes are caller bindings, not registry authorization.
     """
-    def __init__(self, root, allowed_root, *, stop_grace=2):
+    def __init__(self, root, allowed_root, *, stop_grace=2, strict=False, driver_lock=None):
         primitive = load_sibling("native_inspection")
+        if type(strict) is not bool:
+            raise ValueError("INSPECTION_MODE_PROTOCOL")
+        self.strict = strict or driver_lock is not None
+        self.driver_lock = Path(driver_lock) if driver_lock is not None else None
+        if self.strict and (sys.platform != "darwin" or not primitive.SANDBOX_EXEC.is_file()):
+            raise RuntimeError("Darwin inspection isolation is unavailable")
         self.root, _ = primitive.owned_directory(root, allowed_root)
         self.allowed_root = Path(allowed_root)
         if not .05 <= stop_grace <= 10:
@@ -122,6 +151,14 @@ class InspectionRunner:
                       "workspace": str(work), "allowedRoot": str(self.root),
                       "timeout": timeout, "stopGrace": self.stop_grace,
                       "bindings": registered}
+        if self.strict:
+            primitive = load_sibling("native_inspection")
+            descriptor["version"] = 2
+            descriptor["inspection"] = {
+                "kind": primitive.LOCK_KIND if self.driver_lock is not None else primitive.STRICT_KIND,
+                "driverLock": str(self.driver_lock) if self.driver_lock is not None else None,
+                "lockIdentity": primitive.owned_driver_lock(self.driver_lock, work)
+                                if self.driver_lock is not None else None}
         path = job / "descriptor.json"
         with path.open("x") as stream:
             json.dump(descriptor, stream, sort_keys=True)
@@ -210,9 +247,10 @@ def run_guardian(path, expected_sha, control_fd, expected_parent):
         raise ValueError("INSPECTION_DESCRIPTOR_OR_PARENT_CHANGED")
     value = json.loads(path.read_text())
     if (not isinstance(value, dict)
-            or set(value) != {"version", "runId", "argv", "workspace", "allowedRoot",
-                             "timeout", "stopGrace", "bindings"}
-            or value["version"] != 1 or type(value["version"]) is not int
+            or type(value.get("version")) is not int or value["version"] not in (1, 2)
+            or set(value) != ({"version", "runId", "argv", "workspace", "allowedRoot",
+                              "timeout", "stopGrace", "bindings"}
+                             | ({"inspection"} if value["version"] == 2 else set()))
             or not isinstance(value["runId"], str)
             or len(value["runId"]) != 32
             or any(c not in "0123456789abcdef" for c in value["runId"])
@@ -233,6 +271,7 @@ def run_guardian(path, expected_sha, control_fd, expected_parent):
         raise ValueError("INSPECTION_WORKSPACE_NOT_EMPTY_OR_DESCRIPTOR_WRITABLE")
     if any(work == Path(p) or work in Path(p).parents for p in value["bindings"]):
         raise ValueError("INSPECTION_TRUSTED_INPUT_WRITABLE")
+    inspection = inspection_mode(value, primitive, work)
     pipe_stat = os.fstat(control_fd)
     if (control_fd < 3 or not stat.S_ISFIFO(pipe_stat.st_mode)
             or fcntl.fcntl(control_fd, fcntl.F_GETFL) & os.O_ACCMODE != os.O_WRONLY):
@@ -260,8 +299,10 @@ def run_guardian(path, expected_sha, control_fd, expected_parent):
         # incomplete lifecycle and must retain the reservation in any consumer.
         if digest(path) != expected_sha or not check_bindings(value["bindings"]):
             raise ValueError("INSPECTION_BINDINGS_CHANGED")
-        current, _ = primitive.launch(argv[0], argv[1:], workspace=work,
-                                      allowed_root=value["allowedRoot"])
+        launch = primitive.launch_strict if inspection is not None else primitive.launch
+        options = {"driver_lock": inspection["driverLock"]} if inspection is not None else {}
+        current, _ = launch(argv[0], argv[1:], workspace=work,
+                            allowed_root=value["allowedRoot"], **options)
         try:
             current.stdin.close()
             for name in ("stdout", "stderr"):
@@ -309,7 +350,11 @@ def run_guardian(path, expected_sha, control_fd, expected_parent):
                 drain(child)
                 if len(poll.get_map()) == before and not poll.select(.05):
                     raise ValueError("INSPECTION_DATA_STREAM_UNCONFIRMED")
-            unchanged = (digest(path) == expected_sha and check_bindings(value["bindings"])
+            try:
+                mode_unchanged = inspection_mode(value, primitive, work) == inspection
+            except (OSError, ValueError):
+                mode_unchanged = False
+            unchanged = (mode_unchanged and digest(path) == expected_sha and check_bindings(value["bindings"])
                          and primitive.owned_directory(work, value["allowedRoot"])[1] == identity)
             emit("payload-stopped", 2, pid=child.pid, pgid=child.pid,
                  returncode=child.returncode, stdoutClosed=closed["stdout"],

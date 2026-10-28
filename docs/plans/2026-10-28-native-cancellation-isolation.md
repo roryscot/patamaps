@@ -210,3 +210,55 @@ ownership registration. Exercise those crash/refusal paths in a staged candidate
 before installing a new release predicate. Native exclusive fallback and
 parallelfalse remain. Another actual-owner parent-death trial needs its own
 bounded, concrete proposal after integration is independently qualified.
+
+
+## I3b first increment: strict profile and exact unchanged-build lock
+
+I3a is complete; its repair budget remains consumed. This distinct increment
+adds new opt-in functionality: a stricter inspection profile with self-only
+process metadata, explicit hardlink denial and a literal file-write-data grant
+for an existing owned driver.lock. Retain the legacy mode and every historical
+receipt. Do not replace the installed controller or release predicate.
+
+Acceptance: preserve all twenty original kernel controls in both legacy and
+strict modes; add hardlink/alias denials and exact lock open/flock positive/
+outside-write negative controls. Reject nonempty/preseeded write trees and
+noncanonical, linked, nonempty, broadly accessible or misplaced lock declarations.
+Carry the strict kind and lock identity in a closed descriptor version through
+the existing guardian, with post-stop lock identity/content confirmation.
+Exercise the existing guardian controls in strict mode, plus lock mutation and
+descriptor refusals. Then qualify the actual accepted owner's unchanged
+project-build under only the exact lock grant, preserving pointer, artifacts,
+ledger and the one existing application-build attempt. No forced/changed build,
+actual owner watch or parent-death retrial is included.
+
+All allocating work remains canonically supervised and exclusive at4GB growth/
+500MB reserve/100GB retention. Initial qualification plus at most two evidence-
+backed repairs for this new strict-lock increment; preserve every attempt.
+Stop rather than remove controls, grant whole-state writes or silently fall
+back. Global registry/runtime binding, live ownership collection, crash proof
+and automatic-release activation remain separate unfinished integration work.
+
+
+## Strict-lock control result
+
+[Independent control review](../acceptance/project-adoption/native-strict-lock-controls-20261028/receipt.json)
+passes the unchanged20 legacy kernel checks,29 strict kernel checks,11 unsafe
+lock declarations and36 guardian/watcher tests. All76 observed processes stopped
+and the canonical reservation released. The first attempt failed only the
+protected-parent process-path denial. One repair adds an explicit process-info*
+denial for target others; every control remains. Exact lock open/flock works
+with only file-write-data permission. Preexisting and new hardlinks, writes to
+the rest of state, mutated locks and unknown modes refuse as declared.
+
+The local Apple SDK provides the proc_pidpath signature. Apple's
+[XNU process-info routing](https://github.com/apple-oss-distributions/xnu/blob/main/bsd/kern/proc_info.c)
+and [libproc wrapper](https://github.com/apple-oss-distributions/xnu/blob/main/libsyscall/wrappers/libproc/libproc.c)
+supply primary context about API flavors and policy checks, not a specification
+of private SBPL mapping or precedence. The added deny is supported by observed
+kernel behavior on the qualified host. Do not generalize it to other hosts.
+
+This qualifies proposed source and controlled effects. The real retained
+unchanged-build check is prepared but unrun at this checkpoint. Installed
+controller/runtime registration, live global ownership collection, guardian
+crash/unsealed-launch handling and automatic release remain unqualified.
