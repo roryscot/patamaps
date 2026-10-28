@@ -1,7 +1,8 @@
 # Native cancellation ownership isolation
 
-Status: fixed single-process kernel prerequisite independently passes on Intel
-macOS15.8.1; trusted-controller integration and automatic release remain unqualified.
+Status: fixed kernel primitive, proposed guardian controls and actual retained-owner
+read-only CLI compatibility pass on Intel macOS15.8.1. Installed controller
+registration, global ownership integration and automatic release remain unqualified.
 This follows the actual
 [parent-death release failure](../acceptance/project-adoption/original-owner-active-parent-death-20261028/receipt.json).
 The approved metadata recovery is complete. Full G0–G6 adoption and W0/W1 remain
@@ -176,3 +177,36 @@ retained owner's actual CLI before registering this source for global ownership.
 Hardlink/IPC counterexamples, complete runtime/source registration, guardian
 crash/unsealed launch handling, driver-lock permission and global release
 integration still need qualification. Native remains exclusive; parallelfalse.
+
+
+## I3a actual retained-owner compatibility result
+
+[Independent review](../acceptance/project-adoption/native-inspection-guardian-core-20261028/receipt.json)
+passes the actual accepted CLI's engine, selected-build verification and current
+input-key observation through the proposed guardian and existing
+verify_selected_step logic. The original pointer, artifact manifest and ledger
+match accepted preimages; the one application-build attempt remains unchanged.
+All13 observed processes stopped and the canonical reservation released.
+
+Existing runner-death, five exit and nine inspection-budget controls pass.
+The first compatibility coordinator stopped before real CLI calls because its
+synthetic argument parser inherited the outer reservation; the second/final
+increment repair supplies that fixture's intended environment and verifies
+restoration. The allocating coordinator and actual CLI remained guarded.
+Both failed attempts and all successful raw/source evidence are retained.
+I3a is complete at its two-repair limit; no further automatic repairs/retries
+are included. No actual owner watch/crash retrial or application build ran.
+
+## I3b remaining integration
+
+The installed guard is unchanged. Next bind registered closed controller and
+runtime/OS sources, with writable paths protected against aliases; qualify the
+hardlink/IPC assumptions and exact unchanged-build driver.lock grant. The global
+collector must observe pending/started records during execution, account for
+every native group and guardian, and retain uncertainty on missing proof,
+guardian death or interrupted/unsealed launches. The proposed local adapter
+currently validates its private pipe after completion; that is not live global
+ownership registration. Exercise those crash/refusal paths in a staged candidate
+before installing a new release predicate. Native exclusive fallback and
+parallelfalse remain. Another actual-owner parent-death trial needs its own
+bounded, concrete proposal after integration is independently qualified.
