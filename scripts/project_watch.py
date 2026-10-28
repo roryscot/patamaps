@@ -49,13 +49,14 @@ def stop(child, grace=10):
     child.wait()
 
 
-def guard(argv, cleanup=None):
+def guard(argv, cleanup=None, *, child_factory=None, tick=None, finished=None,
+          expected_parent=None, stop_grace=10):
     """Watch the actual spawning parent, including after its SIGKILL.
 
     Used around the policy runner and inside it around the native CLI. The
     second instance handles a runner that exits without stopping its child.
     """
-    parent = os.getppid()
+    parent = os.getppid() if expected_parent is None else expected_parent
     # The policy runner need not detach its child. Keep this guardian outside
     # its group so outer cleanup cannot kill it before it stops the build.
     if os.getpgrp() != os.getpid():
@@ -70,13 +71,16 @@ def guard(argv, cleanup=None):
         signal.signal(sig, cancel)
     child = None
     try:
-        if parent == 1:
+        if parent == 1 or os.getppid() != parent:
             return 130
-        child = subprocess.Popen(argv, start_new_session=True)
+        child = (child_factory(argv) if child_factory is not None else
+                 subprocess.Popen(argv, start_new_session=True))
         while True:
             if cancelled or os.getppid() != parent:
                 event("cancelled-project-watch-update", parentExited=os.getppid() != parent)
                 return 130
+            if tick is not None:
+                tick(child)
             code = child.poll()
             if code is not None:
                 return code if code >= 0 else 128 - code
@@ -88,7 +92,11 @@ def guard(argv, cleanup=None):
             if cleanup is not None:
                 cleanup()
         finally:
-            stop(child)
+            try:
+                stop(child, grace=stop_grace)
+            finally:
+                if finished is not None:
+                    finished(child)
 
 
 def container_guard(path):
@@ -171,13 +179,13 @@ def arguments():
     return args
 
 
-def observe(args):
+def observe(args, native_run=None):
     argv = [str(args.compiler), "project-build-input-key", str(args.plan), "--source", str(args.source)]
     if args.context is not None:
         argv.extend(["--context", str(args.context)])
     if args.preparation is not None:
         argv.extend(["--preparation", str(args.preparation)])
-    result = subprocess.run(
+    result = (native_run or subprocess.run)(
         argv,
         stdout=subprocess.PIPE, stderr=subprocess.PIPE, timeout=args.inspection_timeout_ms / 1000, check=False)
     if len(result.stdout) > 1048576 or len(result.stderr) > 65536:
@@ -193,14 +201,14 @@ def observe(args):
     return key
 
 
-def verified_selection(args):
-    result = subprocess.run(
+def verified_selection(args, native_run=None):
+    result = (native_run or subprocess.run)(
         [str(args.compiler), "project-build-verify", str(args.state)],
         stdout=subprocess.PIPE, stderr=subprocess.PIPE, timeout=args.inspection_timeout_ms / 1000, check=False)
     if result.returncode or len(result.stdout) > 1048576 or len(result.stderr) > 65536:
         raise ValueError("WATCH_SELECTED_BINDINGS_REFUSED")
     value = json.loads(result.stdout)
-    if value.get("status") != "verified-selected-build-bindings" or value.get("inputKey") != observe(args):
+    if value.get("status") != "verified-selected-build-bindings" or value.get("inputKey") != observe(args, native_run=native_run):
         raise ValueError("WATCH_SELECTION_DOES_NOT_MATCH_CURRENT_INPUTS")
     return value
 
@@ -266,7 +274,7 @@ def policy_verified_selection(args, parent, driver):
     return records[0]
 
 
-def verify_selected_step(raw):
+def verify_selected_step(raw, native_run=None):
     """Internal bounded native inspections, invoked under the same policy runner."""
     payload = json.loads(raw)
     names = ("plan", "source", "state", "compiler", "context", "preparation")
@@ -289,7 +297,7 @@ def verify_selected_step(raw):
         else:
             raise ValueError("WATCH_VERIFICATION_INPUT")
     args = argparse.Namespace(**values, inspection_timeout_ms=payload["inspectionTimeoutMs"])
-    checked = verified_selection(args)
+    checked = verified_selection(args, native_run=native_run)
     event("verified-project-watch-selection", nonce=payload["nonce"],
           inputKey=checked["inputKey"],
           selectedPointerDigest="sha256:" + hashlib.sha256(selection(args.state) or b"").hexdigest())

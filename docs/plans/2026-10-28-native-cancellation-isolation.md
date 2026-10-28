@@ -130,3 +130,49 @@ unconfined work. Keep native execution exclusive, CPU/memory enforcement
 unclaimed, performance windows exclusive and existing diagnostic requirements.
 Neither the controller integration nor another actual parent-death trial is
 qualified by the prerequisite and compatibility receipts above.
+
+
+## I3a guardian and verification adapter
+
+Implement a proposed, uninstalled adapter around the existing guardian and
+selected-verification functions. Default watcher and container behavior remain
+unchanged. The adapter starts the trusted guardian with isolated Python startup,
+sanitized loader environment, a frozen descriptor and a separate pipe for pending,
+started and stopped records. Restricted payloads inherit none of that pipe.
+
+Bind the helper, watcher, primitive, Python executable, sandbox executable and
+payload before launch and after stop. These are execution bindings, not an
+installed registration or a complete runtime/stdlib attestation. Keep automatic
+release unqualified and do not change the installed supervisor.
+
+Observable acceptance: real restricted success/failure, normal output and matching
+input-key verification through the adapter; retained stop on early stdout closure;
+ignored-SIGTERM escalation; actual controlled owner SIGKILL cleanup; no native
+control-fd inheritance/false-proof acceptance; changed descriptor/source and output/
+time budget refusals. Validate both default watcher regressions and adapter
+controls under the canonical exclusive guard. Initial control run plus at most
+two evidence-backed repairs; retain every attempt. No actual-owner retrial,
+unchanged-build driver-lock grant, global installation or release activation is
+included in this increment.
+
+
+## I3a control result
+
+[Independent review](../acceptance/project-adoption/native-inspection-guardian-20261028/receipt.json)
+passes ten real-kernel guardian controls and all eleven existing watcher policy
+controls. Initial overflow refusal exposed missing caller-side guardian/payload
+exit correspondence; one repair adds explicit refusal while preserving every
+criterion. Both attempts remain private. The review checks thirteen adapter
+calls, fifteen complete lifecycles and one deliberately incomplete timeout
+lifecycle, plus36 observed stopped test processes and canonical release.
+
+Controlled actual-parent SIGKILL, ignored-SIGTERM escalation, early stdout
+closure, closed native control descriptors, false/missing/malformed proof,
+changed executable/descriptor and output/time limits pass. The existing watcher
+input/selection protocol runs through the opt-in callback without replacing
+native verification. This is proposed source, not installed supervisor acceptance.
+The fixed primitive is unchanged. The next compatibility check must use the
+retained owner's actual CLI before registering this source for global ownership.
+Hardlink/IPC counterexamples, complete runtime/source registration, guardian
+crash/unsealed launch handling, driver-lock permission and global release
+integration still need qualification. Native remains exclusive; parallelfalse.
