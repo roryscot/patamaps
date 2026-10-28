@@ -165,3 +165,38 @@ One runtime repair remains in this increment's initial+2 budget. Native I3e
 approval is still pending; no native-registration retry, watch/crash trial,
 service interruption, deletion, limit change or activation follows from this
 partial result. Full G0–G6 adoption remains active and unachieved.
+
+
+## Repair2: bounded public pnpm bootstrap reuse
+
+[The corrected Intel public-tool probe](../acceptance/project-adoption/g5-retained-dynamic-next-20261028/bootstrap-footprint/result.json)
+installed byte-identical pnpm10.32.1 packages into two independent prefixes with
+isolated homes/tmp. Each package contains1,077 regular files/18,914,320logical
+bytes and21,880,832allocated bytes; the public npm cache used10,276,864allocated
+bytes after the first install and grew4,096bytes after the second. The earlier
+probe refused duplicate empty npm config paths before installation; preserve it.
+These Intel allocation values do not prove Linux savings or passing headroom.
+
+For this derived retained profile only, when its existing explicit shared public
+cache root is supplied, install the pinned public pnpm bootstrap once under that
+root, using an explicit public npm download cache. Keep consumer homes, temporary
+directories, application dependency/build/config/selection/runtime outputs and
+fresh compiler paths independent. Legacy and original-config modes retain their
+existing installation behavior. Do not share or reuse an owner application build.
+
+Seal the public bootstrap with the existing byte/mode/link inventory helper,
+pinned version and known entry digest plus package-lock identity. Refuse partial
+or tampered bootstrap/seal state and external links before invoking pnpm or
+performing a new installation. Recheck the exact tree after each owner case and
+require the source case to create it and the native case to reuse the same
+identity. Existing producer-tool absence and exact restoration still apply.
+Add focused real-filesystem missing/changed/mode/link/partial-state controls and
+run the existing focused regression suite under Intel's canonical supervisor.
+
+This is repair2, the final application runtime attempt in the agreed initial+2
+budget, only after passing preflight and publishing the exact implementation.
+It must prove both fresh installed41-group/four-test cases and all existing
+controls under the same combined4GBgrowth/500MBreserve and time bounds. A new
+storage failure is a failed attempt; do not delete data, increase the cap, split
+the resource budget, hide allocations, reuse an application build or retry again.
+Native I3e registration/watch/recovery approvals remain separate and pending.
