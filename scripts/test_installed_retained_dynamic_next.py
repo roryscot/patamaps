@@ -24,11 +24,11 @@ class RetainedDynamicControls(unittest.TestCase):
   result.update(retained);runtime.update(actual)
   result["sourceTextFiles"]=175
   result["retainedDynamicProfile"]=runtime["retainedDynamicProfile"]=RETAINED_DYNAMIC_PROFILE
-  result["rewriteQualification"]=dict(originalSourceContextDigest=result["sourceContextDigest"],
-    derivedSourceContextDigest="sha256:"+"1"*64,compiledRulesBound=True,originalRulesPreserved=True,
-    missingProjectionRefused=True,staleProjectionRefusedAfterRequestRehash=True)
+  accepted=json.loads((ROOT/"docs/acceptance/project-adoption/g5-installed-retained-next-20261024/accepted-40071420581/source-receipt.json").read_bytes())
+  result["rewriteQualification"]=copy.deepcopy(accepted["rewriteQualification"])
+  result["rewriteQualification"]["originalSourceContextDigest"]=result["sourceContextDigest"]
   result["dynamicRouteQualification"].update(configurationProfile=RETAINED_DYNAMIC_PROFILE,
-    originalOwnerConfigurationPreserved=False,derivedSourceContextDigest="sha256:"+"1"*64)
+    originalOwnerConfigurationPreserved=False,derivedSourceContextDigest=result["rewriteQualification"]["derivedSourceContextDigest"])
   runtime.update(sourceMutationRequested=True,qualificationConfigurationOverlay=True)
   controls=[dict(name=name,passed=True)for name in sorted(EXPECTED_CONTROLS|REWRITE_CONTROLS|DYNAMIC_CONTROLS)]
   browser["controls"]=copy.deepcopy(controls);runtime["browserControls"]=copy.deepcopy(controls)
@@ -76,6 +76,11 @@ class RetainedDynamicControls(unittest.TestCase):
     if mutation=="no-dynamic":values[index][key]=[c for c in controls if c["name"]not in DYNAMIC_CONTROLS]
     if mutation=="no-rewrites":values[index][key]=[c for c in controls if c["name"]not in REWRITE_CONTROLS]
     with self.subTest(index=index,mutation=mutation),self.assertRaisesRegex(AssertionError,"EXACT_CONTROLS"):retained_dynamic_case_result(*values)
+ def test_exact_original_rule_count_is_required_and_boolean_is_not_a_count(self):
+  self.assertEqual(self.sample()[0]["rewriteQualification"]["originalRulesPreserved"],4)
+  for count in [True,False,0,3,5,"4",None]:
+   values=self.sample();values[0]["rewriteQualification"]["originalRulesPreserved"]=count
+   with self.subTest(count=count),self.assertRaisesRegex(AssertionError,"REWRITES"):retained_dynamic_case_result(*values)
  def test_profile_source_and_context_bindings_are_required(self):
   for mutation in ["parent-profile","runtime-profile","context","original-claim","source"]:
    values=self.sample()

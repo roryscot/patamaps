@@ -1,0 +1,52 @@
+{
+  "status": "passed-compiled-rewrite-binding",
+  "addedRules": 2,
+  "originalRulesPreserved": 4,
+  "fullNativeRulesPreserved": true,
+  "nativeMatchingAndExecution": "not-performed",
+  "rules": {
+    "/qualified/auth/:page(login|register)": {
+      "category": "beforeFiles",
+      "rule": {
+        "source": "/qualified/auth/:page(login|register)",
+        "destination": "/:page",
+        "has": [
+          {
+            "type": "header",
+            "key": "x-patamaps-rewrite",
+            "value": "enabled"
+          }
+        ],
+        "missing": [
+          {
+            "type": "query",
+            "key": "blocked"
+          }
+        ],
+        "regex": "^/qualified/auth(?:/(login|register))(?:/)?$"
+      }
+    },
+    "/qualified/session": {
+      "category": "afterFiles",
+      "rule": {
+        "source": "/qualified/session",
+        "destination": "http://127.0.0.1:59119/api/auth/session",
+        "has": [
+          {
+            "type": "query",
+            "key": "view",
+            "value": "session"
+          }
+        ],
+        "missing": [
+          {
+            "type": "header",
+            "key": "x-patamaps-block"
+          }
+        ],
+        "regex": "^/qualified/session(?:/)?$"
+      }
+    }
+  },
+  "baselineObservationDigest": "sha256:a3145399fa46051404b17894b8a1f196a5bb087df974dbd6b28b7187b13aaf13"
+}

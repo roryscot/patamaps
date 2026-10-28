@@ -1,6 +1,6 @@
 # Retained dynamic Next replay
 
-Status: implemented with passed focused preflight; actual installed runtime unrun. Independent G3/G5/G6 increment. The native I3e retry remains
+Status: initial source-installation subcontrols verified; aggregate failed and native case unrun. Repair1 preflight passed. Independent G3/G5/G6 increment. The native I3e retry remains
 unapproved and is not part of this work. Full G0–G6 adoption remains active.
 
 ## Scope and dependencies
@@ -93,3 +93,40 @@ configuration/driver refusals before sentinel effects, then both full fresh
 installed owner workflows and every existing immutable-runtime/cache/cleanup
 gate. The actual selected lane has not run at this checkpoint. Native I3e
 registration retry approval remains pending and was not used or bypassed.
+
+
+## Initial runtime result and first repair
+
+[Run40761106495](https://github.com/roryscot/patamaps/actions/runs/40761106495)
+at69450ce failed in the new parent validator: originalRulesPreserved is the
+integer4, while the new composed synthetic unit input incorrectly used True.
+The source-installed child returned0 after all41 browser/API groups, four
+unchanged owner tests, real image/cache/kernel checks and all five profile/driver
+before-effects refusals passed. The native installation did not run. Preserve
+the failed parent; this is a harness contract defect, not a demonstrated owner
+or native-kernel defect.
+
+[Independent partial review](../acceptance/project-adoption/g5-retained-dynamic-next-20261028/attempt-40761106495/independent-verification.json)
+verified the21,696,717byte artifact digest in memory, all1,290 shipped source
+members against Git, archive/native bytes, installed-source recompilation
+witnesses,180 original members/181 derived entries/175 text inputs, all nine
+original dynamic Git blobs, three module bindings, all41 groups/four owner tests,
+native refusals and retained enforcement/absence/cleanup. Private image bytes
+were compared in CI, not independently rehashed by this public-artifact reviewer.
+Only compact receipts and executed review source remain on Intel. The parent
+source-only peak3,327,856,640bytes is not a full-pair or whole-job resource result.
+
+Repair1 requires the exact integer4 and rejects booleans/wrong counts, deriving
+the synthetic unit's rewrite fields from the accepted real receipt. It also
+requires the existing captured-config mutation refusal and directly rechecks all
+nine dynamic source blobs after applying the declared overlay, before application
+execution. [All32 affected local controls](../acceptance/project-adoption/g5-retained-dynamic-next-20261028/rule-count-preflight.json)
+and workflow parsing pass. The prior102-control result remains at its original
+source binding.
+
+The independent review accepted only source694 subcontrols without rerunning
+that workload. These shipped qualifier/child changes produce a new exact package
+inventory, so their matching source/native pair still requires the scoped runtime
+qualification. No old result is promoted to the repaired package. The next
+selected run is repair1 of this increment's initial+2 runtime budget; existing
+limits, controls, original-config separation and I3e approval boundary remain.

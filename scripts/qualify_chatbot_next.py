@@ -138,6 +138,7 @@ def main():
    from chatbot_rewrite_profile import apply, reserve_owner_port
    rewrite_port_reservation=reserve_owner_port()
    staged_inventory,rewrite_overlay=apply(staged,inventory,canonical_port=rewrite_port_reservation.getsockname()[1],standalone=a.standalone_probe)
+   if a.dynamic_routes:assert verify_sources(staged)==r["dynamicSourceBindings"],"DYNAMIC_OWNER_SOURCE_CHANGED_AFTER_OVERLAY"
    write(out/"rewrite-overlay.json",rewrite_overlay)
    write(out/"derived-source.json",staged_inventory)
    derived_definition=work/"derived-selection.json";write(derived_definition,dict(profile="patamaps-project-context-selection-1",id="urn:qualification:chatbot:derived-rewrites",nonsecretInputs=True,paths=[e["path"] for e in staged_inventory],symlinks="internal-closed"))

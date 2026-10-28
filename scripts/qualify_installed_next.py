@@ -39,8 +39,9 @@ def _dynamic_case_result(result,runtime,browser,*,derived_retained=False):
   assert result["retainedDynamicProfile"]==runtime["retainedDynamicProfile"]==RETAINED_DYNAMIC_PROFILE,"INSTALLED_RETAINED_DYNAMIC_PROFILE"
   rewrite=result["rewriteQualification"]
   assert rewrite["originalSourceContextDigest"]==result["sourceContextDigest"],"INSTALLED_RETAINED_DYNAMIC_CONTEXT"
-  for key in ["compiledRulesBound","originalRulesPreserved","missingProjectionRefused","staleProjectionRefusedAfterRequestRehash"]:
+  for key in ["compiledRulesBound","missingProjectionRefused","staleProjectionRefusedAfterRequestRehash","capturedConfigMutationRefusedBeforeMarker"]:
    assert rewrite[key] is True,"INSTALLED_RETAINED_DYNAMIC_REWRITES"
+  assert type(rewrite["originalRulesPreserved"]) is int and rewrite["originalRulesPreserved"]==4,"INSTALLED_RETAINED_DYNAMIC_REWRITES"
  else:
   assert not any(key in result for key in ["rewriteQualification","standaloneProbe","retainedSelectedExecution","retainedDynamicProfile"]), "INSTALLED_DYNAMIC_ORIGINAL_PROFILE"
  qualification=result["dynamicRouteQualification"]
