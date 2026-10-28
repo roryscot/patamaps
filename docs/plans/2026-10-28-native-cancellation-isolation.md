@@ -82,3 +82,51 @@ CPU/memory enforcement or the actual owner under this profile. Next inspect the
 existing read-only CLI under the same fixed primitive, then integrate only a
 trusted controller whose entire untrusted execution is demonstrably confined.
 The installed guard and native fallback have not changed.
+
+
+## Existing-owner read-only compatibility
+
+The [independent compatibility review](../acceptance/project-adoption/native-inspection-core-compatibility-20261028/receipt.json)
+passes all three bound Native CLI calls under the fixed profile: engine identity,
+original input-key observation with commandsExecuted=false, and actual selected
+build binding verification. The protected owner state was outside every writable
+root; pointer, artifact manifest, ledger and one application-build attempt remain
+unchanged. CLI/helper/system-sandbox executable digests matched before/after,
+known payloads stopped and the separate canonical reservation released.
+No application build, owner watch/crash retry or installed-supervisor change ran.
+
+This qualifies the read-only commands with the existing development CLI, not a
+general build executor or automatic cancellation release. The ordinary native
+guard still retains container uncertainty on cancellation.
+
+## Trusted-controller integration contract to implement
+
+Reuse the existing watcher guardian and selected-verification contracts. Keep
+payloads inside the fixed profile and close all capabilities outside its three
+data pipes. Trusted Python supervision must use fixed registered source/runtime
+bindings, isolated startup and no user callback loading; a caller-provided digest
+or environment declaration alone is insufficient.
+
+Before allowing release with preexisting containers, require all of the following:
+
+- Canonical private write paths disjoint from the controller, runtime, compiler,
+  frozen descriptor, installed control code and all other trusted inputs.
+- A dedicated control channel available only to trusted guardians. Restricted
+  payloads must not inherit it; stdout, child tokens and caller flags cannot
+  provide ownership proof.
+- Explicit launch-pending and registered-payload states before sealing ownership.
+  Missing/malformed records, changed bindings or uncertain process identity keep
+  the existing conservative hold. A parent crash during an unsealed launch must
+  not be misreported as complete ownership.
+- Stop confirmation for every registered native group and trusted guardian,
+  plus data/control-channel closure. Exercise early stdout closure, ignored
+  SIGTERM, parent/owner crashes and false-proof attempts before activation.
+- The unchanged-only project-build path must first qualify its driver-lock write
+  requirement against an explicitly owned state root. Do not grant the whole
+  project write access merely to make an inspection pass.
+
+Use an opt-in functional inspection mode and preserve legacy behavior for
+unconfined work. Keep native execution exclusive, CPU/memory enforcement
+unclaimed, performance windows exclusive and existing diagnostic requirements.
+Neither the controller integration nor another actual parent-death trial is
+qualified by the prerequisite and compatibility receipts above.

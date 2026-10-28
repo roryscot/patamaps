@@ -26,8 +26,9 @@ a passed fixture or metadata observation is not general support.
 The [native cancellation isolation increment](2026-10-28-native-cancellation-isolation.md)
 now has [20 passed actual kernel controls](../acceptance/project-adoption/native-inspection-kernel-20261028/receipt.json)
 for a fixed Darwin single-process inspection primitive, with descriptor closure,
-denied fork/network/IPC/outside writes and exec persistence. It is not installed
-in the supervisor and does not close the failed automatic-release gate. Native
+denied fork/network/IPC/outside writes and exec persistence. [Existing-owner engine/input-key/selected-binding inspection](../acceptance/project-adoption/native-inspection-core-compatibility-20261028/receipt.json)
+also passes under that profile with unchanged protected state. The primitive
+is not installed in the supervisor and does not close the failed automatic-release gate. Native
 work remains exclusive; full original adoption requirements remain unchanged.
 
 
