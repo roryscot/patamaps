@@ -24,13 +24,18 @@ its conservative cancellation rule cannot disprove work inside an already
 running container; the same unrelated container was present before and after,
 and no new surviving container was recorded.
 
-Current owner/process-group absence and three complete process/file/container
-inventories pass read-only stop review. The canonical stopped-workload check
-also passes. The sealed native record remains held pending an exact reviewed
-recovery; no policy override, service stop, deletion or additional qualification
-run is authorized by that proposal. Automatic approval review rejected the
-normal recovery command because this exact record has no recorded approval.
-The executor's ordinary branches also do not cover this sealed native failure.
+The exact recovery was subsequently approved by the user and
+[verified after application](../acceptance/project-adoption/approved-reservation-recovery-20261028/receipt.json).
+Three fresh process/file/container inventories and the canonical stop check
+passed; the reservation is finished and its compatibility lease archived.
+The original request, lease and exit75/completed=false guard retain their
+reviewed hashes. The same unrelated database remained running and ready.
+No deletion, service stop, policy change or qualification retry occurred.
+The earlier automatic-approval rejection remains historical: it preceded this
+exact authorization. The ordinary executor's missing sealed-native recovery
+branch was handled only by the approved one-off plan, without a global change.
+Follow the [resumption plan](2026-10-28-adoption-resumption.md); this recovery
+does not extend the exhausted qualification repair budget.
 
 All2,482 selected artifact files,943 owner inputs,eight original oracle outputs,
 1,255 installed source members, CLI bytes, selected pointer, one-attempt state

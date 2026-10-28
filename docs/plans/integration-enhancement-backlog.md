@@ -23,6 +23,14 @@ a passed fixture or metadata observation is not general support.
 
 ## Current selected work
 
+The stopped watch reservation has now been explicitly approved for recovery
+and [released with preservation verified](../acceptance/project-adoption/approved-reservation-recovery-20261028/receipt.json).
+The [resumption plan](2026-10-28-adoption-resumption.md) starts with bounded
+resource diagnosis, then a separately approved one-attempt W0 extension.
+No additional watch attempt, service interruption or policy change has run.
+W0/W1, original-owner authentication/permissions, measurements, deployment and
+the full G0–G6 acceptance requirements remain open.
+
 
 The [original-owner topology increment](2026-10-25-current-owner-topology.md)
 now [passes source-built review](../acceptance/project-adoption/current-owner-topology-20261026/receipt.json):
