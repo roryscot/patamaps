@@ -287,3 +287,62 @@ The installed guard and its preexisting-container uncertainty remain unchanged.
 Guardian death/unsealed-launch refusal, publication/installation provenance and
 automatic release still require independent qualification. Keep native exclusive
 and parallelfalse. Full G0–G6 adoption remains active and unachieved.
+
+
+## I3c live ownership collection
+
+Replace the local adapter's completion-only pipe read with simultaneous bounded
+control/stdout/stderr draining. Persist accepted pending/started records while
+the worker is alive. Validate the same closed grammar incrementally and retain
+partial/malformed input. Register Darwin kernel process-start identity and parent/
+group relationship before considering a live native group known. On guardian
+failure, signal only a still-matching owned group, then independently confirm it
+stopped; identity uncertainty must preserve an unconfirmed result.
+
+Add an optional private controller channel for a staged supervisor: publish
+launch-pending before Popen, then guardian identity, validated native records and
+the final outcome. The native worker must inherit none of that channel. Missing,
+malformed, changed or unsealed ownership remains a refusal. This is observability
+and owned-process cleanup, not an installed registry or release attestation.
+
+Acceptance: legacy10/strict15 guardian and11 watcher policy controls remain;
+new controls cover records visible before exit, fragmented/malformed/oversized
+records, early stdout closure, guardian SIGKILL after verified registration,
+interrupted pending launch, PID identity mismatch, forwarding failure and absence
+of native access to the outer channel. Reuse unchanged kernel/profile evidence;
+do not rerun it without a relevant profile change. Qualify actual retained
+unchanged build through live collection after controls pass. Initial plus at most
+two evidence-backed repairs; retain attempts. All allocating work uses the same
+canonical exclusive guard and unchanged limits. No installed-supervisor, registry,
+parallel, production, service or deletion activation is included.
+
+
+## I3c live-control result
+
+[Independent review](../acceptance/project-adoption/native-live-ownership-controls-20261028/receipt.json)
+passes15 live controls plus the unchanged36 guardian/watcher regressions.
+The initial50 controls passed. Review identified that the pending fixture had no
+worker; one additive qualification repair added an explicit unregistered survivor.
+Existing test methods and production source remained unchanged, all15 live cases
+passed, and the36 regression cases were not unnecessarily repeated. Both source
+sets and raw evidence remain. All140 observed process instances stopped and both
+canonical reservations released.
+
+Accepted registration is persisted before worker exit, with kernel microsecond
+start identity and actual parent/group relationship. Guardian SIGKILL after known
+registration stops the still-matching native group while leaving the operation
+failed. A pending launch with a real surviving, unregistered fixture worker stays
+unconfirmed; the independent harness stops that worker afterward. This does not
+qualify automatic unsealed recovery or prove a global scheduler hold.
+
+Private FIFO and anonymous Unix socket-pair observers receive ordered controller
+frames; restricted payloads inherit neither channel. Fragmented records work;
+malformed/oversized/partial records, observer loss and identity mismatch refuse.
+The installed shared guard's exact digest is unchanged. Its local copy differs
+from the current War-games checkout; future staging must use the preserved
+installed preimage rather than assuming those files are interchangeable.
+
+The real unchanged-build check through the changed collector remains prepared
+but unrun at this checkpoint. Closed source/runtime/OS registration, staged global
+collection, all-group stop confirmation and installed release behavior remain
+unfinished. Keep native exclusive and parallelfalse.

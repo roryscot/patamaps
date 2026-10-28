@@ -7,12 +7,16 @@ predicate, concurrency policy or arbitrary-build executor is installed here.
 """
 from pathlib import Path
 import argparse
+import ctypes
+import errno
 import fcntl
 import hashlib
 import importlib.util
 import json
 import os
 import selectors
+import signal
+import socket
 import stat
 import subprocess
 import sys
@@ -57,15 +61,15 @@ def check_bindings(expected):
         Path(path).is_absolute() and digest(path) == value for path, value in expected.items())
 
 
-def validate_records(records, run_id, guardian_pid):
+def validate_prefix(records, run_id, guardian_pid):
     """Closed lifecycle grammar. Stdout is never an input to this parser."""
     common = {"runId", "guardianPid", "parentPid", "sequence", "event"}
     schemas = [common, common | {"pid", "pgid"},
                common | {"pid", "pgid", "returncode", "stdoutClosed", "stderrClosed",
                          "bindingsUnchanged"}]
     events = ["launch-pending", "payload-started", "payload-stopped"]
-    if len(records) != 3:
-        raise ValueError("INSPECTION_CONTROL_INCOMPLETE")
+    if len(records) > 3:
+        raise ValueError("INSPECTION_CONTROL_PROTOCOL")
     for index, row in enumerate(records):
         if (not isinstance(row, dict) or set(row) != schemas[index]
                 or row["runId"] != run_id or row["guardianPid"] != guardian_pid
@@ -76,14 +80,30 @@ def validate_records(records, run_id, guardian_pid):
             raise ValueError("INSPECTION_CONTROL_PROTOCOL")
     if any(row["parentPid"] != records[0]["parentPid"] for row in records):
         raise ValueError("INSPECTION_CONTROL_PARENT_CHANGED")
-    start, end = records[1:]
+    if len(records) < 2:
+        return None
+    start = records[1]
+    if type(start["pid"]) is not int or start["pid"] <= 1 or type(start["pgid"]) is not int or start["pgid"] != start["pid"]:
+        raise ValueError("INSPECTION_CONTROL_PROTOCOL")
+    if len(records) < 3:
+        return None
+    end = records[2]
     if (type(start["pid"]) is not int or start["pid"] <= 1
             or type(start["pgid"]) is not int or start["pgid"] != start["pid"]
             or type(end["pid"]) is not int or type(end["pgid"]) is not int
             or end["pid"] != start["pid"] or end["pgid"] != start["pgid"]
             or type(end["returncode"]) is not int
-            or any(end[k] is not True for k in
+            or any(type(end[k]) is not bool for k in
                    ["stdoutClosed", "stderrClosed", "bindingsUnchanged"])):
+        raise ValueError("INSPECTION_STOP_UNCONFIRMED")
+    return end
+
+
+def validate_records(records, run_id, guardian_pid):
+    if len(records) != 3:
+        raise ValueError("INSPECTION_CONTROL_INCOMPLETE")
+    end = validate_prefix(records, run_id, guardian_pid)
+    if any(end[k] is not True for k in ["stdoutClosed", "stderrClosed", "bindingsUnchanged"]):
         raise ValueError("INSPECTION_STOP_UNCONFIRMED")
     return end
 
@@ -110,6 +130,116 @@ def inspection_mode(value, primitive, work):
         raise ValueError("INSPECTION_MODE_PROTOCOL")
     return item
 
+class _BsdInfo(ctypes.Structure):
+    # Local Apple SDK sys/proc_info.h, LP64 proc_bsdinfo (136 bytes).
+    _fields_ = [(name, ctypes.c_uint32) for name in (
+        "flags", "status", "xstatus", "pid", "ppid", "uid", "gid",
+        "ruid", "rgid", "svuid", "svgid", "reserved")] + [
+        ("comm", ctypes.c_char * 16), ("name", ctypes.c_char * 32)] + [
+        (name, ctypes.c_uint32) for name in ("nfiles", "pgid", "jobc", "tty", "tty_pgid")] + [
+        ("nice", ctypes.c_int32), ("start_seconds", ctypes.c_uint64),
+        ("start_microseconds", ctypes.c_uint64)]
+
+
+def process_identity(pid):
+    """Darwin kernel identity, not a caller-provided PID or second-granularity date."""
+    if sys.platform != "darwin" or ctypes.sizeof(_BsdInfo) != 136:
+        raise RuntimeError("Native process identity is unavailable")
+    library = ctypes.CDLL("/usr/lib/libproc.dylib", use_errno=True)
+    library.proc_pidinfo.argtypes = [ctypes.c_int, ctypes.c_int, ctypes.c_uint64,
+                                    ctypes.c_void_p, ctypes.c_int]
+    library.proc_pidinfo.restype = ctypes.c_int
+    value = _BsdInfo()
+    ctypes.set_errno(0)
+    count = library.proc_pidinfo(pid, 3, 0, ctypes.byref(value), ctypes.sizeof(value))
+    if count == 0 and ctypes.get_errno() == errno.ESRCH:
+        return None
+    if count != ctypes.sizeof(value) or value.pid != pid:
+        raise OSError(ctypes.get_errno() or errno.EIO, "Native identity unconfirmed")
+    return {"pid": int(value.pid), "parentPid": int(value.ppid), "pgid": int(value.pgid),
+            "startSeconds": int(value.start_seconds), "startMicroseconds": int(value.start_microseconds)}
+
+
+def same_process(before, after):
+    return (isinstance(before, dict) and isinstance(after, dict)
+            and all(before.get(k) == after.get(k) for k in
+                    ["pid", "pgid", "startSeconds", "startMicroseconds"]))
+
+
+def group_live(pgid):
+    result = subprocess.run(["/bin/ps", "-axo", "pgid=,stat="], capture_output=True,
+                            text=True, timeout=5, check=True)
+    rows = [line.split() for line in result.stdout.splitlines() if line.strip()]
+    if not rows or any(len(row) != 2 or not row[0].isdigit() for row in rows):
+        raise ValueError("INSPECTION_GROUP_STATE_UNCONFIRMED")
+    return any(int(group) == pgid and not state.startswith("Z") for group, state in rows)
+
+
+def stop_registered(identity, grace):
+    """Never signal a replacement PID, even if it uses the same group number."""
+    if identity is None:
+        return False
+    pid = identity["pid"]
+    for signum, budget in [(signal.SIGTERM, grace), (signal.SIGKILL, 2)]:
+        current = process_identity(pid)
+        if current is None:
+            return not group_live(pid)
+        if not same_process(identity, current):
+            return False
+        try:
+            os.killpg(pid, signum)
+        except (ProcessLookupError, PermissionError):
+            return not group_live(pid)
+        deadline = time.monotonic() + budget
+        while time.monotonic() < deadline:
+            current = process_identity(pid)
+            if current is None:
+                return not group_live(pid)
+            if not same_process(identity, current):
+                return False
+            time.sleep(.02)
+    return not group_live(pid)
+
+
+def private_observer(fd):
+    if type(fd) is not int or fd < 3:
+        raise ValueError("INSPECTION_OBSERVER_DESCRIPTOR")
+    info = os.fstat(fd)
+    access = fcntl.fcntl(fd, fcntl.F_GETFL) & os.O_ACCMODE
+    if stat.S_ISFIFO(info.st_mode):
+        if access != os.O_WRONLY:
+            raise ValueError("INSPECTION_OBSERVER_DIRECTION")
+    elif stat.S_ISSOCK(info.st_mode):
+        # Node's extra stdio pipes are anonymous Unix socket pairs.
+        peer = socket.socket(fileno=fd)
+        try:
+            if (peer.family != socket.AF_UNIX or peer.type != socket.SOCK_STREAM
+                    or peer.getsockname() not in ("", b"") or peer.getpeername() not in ("", b"")):
+                raise ValueError("INSPECTION_OBSERVER_NOT_PRIVATE")
+        finally:
+            peer.detach()
+    else:
+        raise ValueError("INSPECTION_OBSERVER_NOT_PRIVATE")
+    os.set_inheritable(fd, False)
+    os.set_blocking(fd, False)
+    return (info.st_dev, info.st_ino, stat.S_IFMT(info.st_mode))
+
+
+def append_record(path, value):
+    with path.open("ab") as stream:
+        stream.write(json.dumps(value, separators=(",", ":")).encode() + b"\n")
+        stream.flush()
+        os.fsync(stream.fileno())
+
+
+def save_live(path, value):
+    temporary = path.with_name("live-" + uuid.uuid4().hex + ".staging")
+    with temporary.open("x") as stream:
+        json.dump(value, stream)
+        stream.flush()
+        os.fsync(stream.fileno())
+    os.replace(temporary, path)
+
 
 class InspectionRunner:
     """subprocess.run-shaped adapter for existing read-only watcher functions.
@@ -117,7 +247,7 @@ class InspectionRunner:
     Each invocation retains its descriptor, raw data and control records.
     The descriptor hashes are caller bindings, not registry authorization.
     """
-    def __init__(self, root, allowed_root, *, stop_grace=2, strict=False, driver_lock=None):
+    def __init__(self, root, allowed_root, *, stop_grace=2, strict=False, driver_lock=None, lifecycle_fd=None):
         primitive = load_sibling("native_inspection")
         if type(strict) is not bool:
             raise ValueError("INSPECTION_MODE_PROTOCOL")
@@ -131,6 +261,8 @@ class InspectionRunner:
             raise ValueError("INSPECTION_STOP_GRACE")
         self.stop_grace = stop_grace
         self.calls = []
+        self.lifecycle_fd = lifecycle_fd
+        self.observer_identity = private_observer(lifecycle_fd) if lifecycle_fd is not None else None
 
     def prepare(self, argv, timeout):
         if (not isinstance(argv, (list, tuple)) or not argv
@@ -180,63 +312,185 @@ class InspectionRunner:
         if stdout != subprocess.PIPE or stderr != subprocess.PIPE or check is not False:
             raise ValueError("INSPECTION_CAPTURE_CONTRACT")
         path, descriptor = self.prepare(argv, timeout)
-        read_fd, write_fd = os.pipe()
         expected_sha = digest(path)
+        read_fd, write_fd = os.pipe()
         child = None
-        out = err = b""
-        records = []
-        try:
-            child = self.spawn(path, descriptor, write_fd)
-        finally:
-            os.close(write_fd)
-            if child is None:
-                os.close(read_fd)
-        try:
-            try:
-                out, err = child.communicate(timeout=timeout + self.stop_grace + 10)
-            except BaseException:
-                # The guardian handles the actual parent, but orderly caller
-                # cancellation first gives it time to stop its separate group.
-                watch = load_sibling("project_watch")
-                watch.stop(child, grace=self.stop_grace + 2)
-                raise
-            os.set_blocking(read_fd, False)
-            raw = bytearray()
-            eof = False
-            while True:
-                try:
-                    chunk = os.read(read_fd, MAX_RECORD_BYTES)
-                except BlockingIOError:
-                    break
+        outputs = {"stdout": bytearray(), "stderr": bytearray()}
+        records, buffer = [], bytearray()
+        closed = set()
+        native_identity = None
+        guardian_identity = None
+        native_already_stopped = False
+        root_sequence = 0
+        succeeded = False
+        error_text = None
+        cleanup = {"confirmed": False, "reason": "launch-unsealed"}
+        registration_known = False
+        deadline = time.monotonic() + timeout + self.stop_grace + 10
+
+        def state(phase):
+            save_live(path.parent / "live.json", {
+                "runId": descriptor["runId"], "phase": phase,
+                "controllerPid": os.getpid(), "guardianPid": child.pid if child else None,
+                "guardianIdentity": guardian_identity, "nativeIdentity": native_identity, "registrationKnown": registration_known,
+                "nativeAlreadyStopped": native_already_stopped, "acceptedRecordCount": len(records),
+                "controlClosed": "control" in closed, "cleanup": cleanup,
+                "error": error_text, "automaticReservationReleaseQualified": False})
+
+        def forward(event, **fields):
+            nonlocal root_sequence
+            if self.lifecycle_fd is None:
+                return
+            if private_observer(self.lifecycle_fd) != self.observer_identity:
+                raise ValueError("INSPECTION_OBSERVER_CHANGED")
+            frame = {"event": event, "runId": descriptor["runId"], "controllerPid": os.getpid(),
+                     "sequence": root_sequence, **fields}
+            raw = json.dumps(frame, separators=(",", ":")).encode() + b"\n"
+            if len(raw) > MAX_RECORD_BYTES or os.write(self.lifecycle_fd, raw) != len(raw):
+                raise ValueError("INSPECTION_OBSERVER_WRITE_UNCONFIRMED")
+            root_sequence += 1
+
+        def accept(row):
+            nonlocal native_identity, native_already_stopped, registration_known
+            validate_prefix([*records, row], descriptor["runId"], child.pid)
+            if row["parentPid"] != os.getpid():
+                raise ValueError("INSPECTION_CONTROL_PARENT_CHANGED")
+            if len(records) == 1:
+                observed = process_identity(row["pid"])
+                if observed is None:
+                    if group_live(row["pgid"]):
+                        raise ValueError("INSPECTION_REGISTRATION_IDENTITY_UNCONFIRMED")
+                    native_already_stopped = True
+                elif observed["parentPid"] != child.pid or observed["pgid"] != row["pgid"]:
+                    raise ValueError("INSPECTION_REGISTRATION_IDENTITY_MISMATCH")
+                else:
+                    native_identity = observed
+                registration_known = True
+            records.append(row)
+            append_record(path.parent / "lifecycle.jsonl", row)
+            state(row["event"])
+            forward("guardian-record", record=row, nativeIdentity=native_identity,
+                    registrationKnown=registration_known, nativeAlreadyStopped=native_already_stopped)
+
+        def read_ready(poll, budget):
+            for key, _ in poll.select(budget):
+                chunk = os.read(key.fd, 65536)
+                name = key.data
                 if not chunk:
-                    eof = True
-                    break
-                raw.extend(chunk)
-                if len(raw) > 3 * MAX_RECORD_BYTES:
-                    raise ValueError("INSPECTION_CONTROL_OUTPUT_LIMIT")
-            if not eof:
-                raise ValueError("INSPECTION_CONTROL_STILL_OPEN")
-            records = [json.loads(line) for line in raw.splitlines()]
+                    poll.unregister(key.fileobj)
+                    closed.add(name)
+                    if name == "control" and buffer:
+                        raise ValueError("INSPECTION_CONTROL_PARTIAL_RECORD")
+                    continue
+                if name == "control":
+                    raw_file = path.parent / "control.raw"
+                    # Never persist an unbounded control producer.
+                    previous = raw_file.stat().st_size if raw_file.exists() else 0
+                    with raw_file.open("ab") as stream:
+                        stream.write(chunk[:max(0, 3 * MAX_RECORD_BYTES - previous)])
+                    if previous + len(chunk) > 3 * MAX_RECORD_BYTES:
+                        raise ValueError("INSPECTION_CONTROL_OUTPUT_LIMIT")
+                    buffer.extend(chunk)
+                    while b"\n" in buffer:
+                        line, _, tail = buffer.partition(b"\n")
+                        buffer[:] = tail
+                        if len(line) > MAX_RECORD_BYTES:
+                            raise ValueError("INSPECTION_CONTROL_RECORD_LIMIT")
+                        accept(json.loads(line))
+                    if len(buffer) > MAX_RECORD_BYTES:
+                        raise ValueError("INSPECTION_CONTROL_RECORD_LIMIT")
+                else:
+                    outputs[name].extend(chunk)
+                    if len(outputs[name]) > OUTPUT_LIMIT + 65536:
+                        raise ValueError("INSPECTION_GUARDIAN_OUTPUT_LIMIT")
+
+        poll = selectors.DefaultSelector()
+        original_parent = os.getppid()
+        try:
+            state("guardian-launch-pending")
+            # This reaches the outer collector before any guardian/native spawn.
+            forward("guardian-launch-pending", descriptorDigest=expected_sha)
+            child = self.spawn(path, descriptor, write_fd)
+            os.close(write_fd)
+            write_fd = None
+            guardian_identity = process_identity(child.pid)
+            if guardian_identity is not None and guardian_identity["parentPid"] != os.getpid():
+                raise ValueError("INSPECTION_GUARDIAN_IDENTITY_MISMATCH")
+            forward("guardian-started", guardianPid=child.pid, guardianIdentity=guardian_identity)
+            for name, stream in [("control", read_fd), ("stdout", child.stdout), ("stderr", child.stderr)]:
+                os.set_blocking(stream if isinstance(stream, int) else stream.fileno(), False)
+                poll.register(stream, selectors.EVENT_READ, name)
+            while poll.get_map() or child.poll() is None:
+                if os.getppid() != original_parent:
+                    raise InterruptedError("Inspection controller parent exited")
+                if time.monotonic() > deadline:
+                    raise subprocess.TimeoutExpired(argv, timeout + self.stop_grace + 10)
+                read_ready(poll, .05)
+            child.wait()
             end = validate_records(records, descriptor["runId"], child.pid)
+            if closed != {"control", "stdout", "stderr"}:
+                raise ValueError("INSPECTION_STREAMS_UNCONFIRMED")
             if not check_bindings(descriptor["bindings"]) or digest(path) != expected_sha:
                 raise ValueError("INSPECTION_BINDINGS_CHANGED")
-            # A guardian cancellation/failure is never converted to payload success.
-            code = child.returncode
-            expected_code = (end["returncode"] if end["returncode"] >= 0
-                             else 128 - end["returncode"])
-            if code not in (expected_code, 130):
+            expected_code = end["returncode"] if end["returncode"] >= 0 else 128 - end["returncode"]
+            if child.returncode not in (expected_code, 130):
                 raise ValueError("INSPECTION_GUARDIAN_REFUSED")
-            if code == 0 and end["returncode"] != 0:
+            if child.returncode == 0 and end["returncode"] != 0:
                 raise ValueError("INSPECTION_EXIT_PROTOCOL")
-            return subprocess.CompletedProcess(argv, code, out, err)
+            cleanup = {"confirmed": registration_known and not group_live(end["pgid"]), "reason": "completed"}
+            if cleanup["confirmed"] is not True:
+                raise ValueError("INSPECTION_GROUP_STOP_UNCONFIRMED")
+            succeeded = True
+            state("complete")
+            return subprocess.CompletedProcess(argv, child.returncode,
+                                               bytes(outputs["stdout"]), bytes(outputs["stderr"]))
+        except BaseException as error:
+            error_text = type(error).__name__ + ": " + str(error)
+            # Stop only our still-live guardian; it normally stops/reaps native.
+            # A killed guardian's separate native group needs its verified kernel identity.
+            try:
+                if child is not None and child.poll() is None:
+                    load_sibling("project_watch").stop(child, grace=self.stop_grace + 2)
+                if registration_known:
+                    confirmed = (not group_live(records[1]["pgid"]) if native_already_stopped else
+                                 stop_registered(native_identity, self.stop_grace))
+                    cleanup = {"confirmed": confirmed, "reason": "registered-owned-processes"}
+                else:
+                    cleanup = {"confirmed": False, "reason": "launch-unsealed"}
+            except (OSError, ValueError, subprocess.SubprocessError) as cleanup_error:
+                cleanup = {"confirmed": False, "reason": str(cleanup_error)}
+            # Retain bytes already captured. Missing/invalid proof stays a failure,
+            # even when independently stopping a registered group succeeds.
+            state("refused")
+            raise
         finally:
+            if write_fd is not None:
+                os.close(write_fd)
+            poll.close()
             os.close(read_fd)
-            (path.parent / "stdout").write_bytes(out)
-            (path.parent / "stderr").write_bytes(err)
-            receipt = {"guardianPid": child.pid, "guardianExitCode": child.returncode,
-                       "records": records, "automaticReservationReleaseQualified": False}
+            if child is not None:
+                for stream in [child.stdout, child.stderr]:
+                    if stream is not None:
+                        stream.close()
+            (path.parent / "stdout").write_bytes(outputs["stdout"])
+            (path.parent / "stderr").write_bytes(outputs["stderr"])
+            receipt = {"guardianPid": child.pid if child else None,
+                       "guardianExitCode": child.returncode if child else None,
+                       "records": records, "cleanup": cleanup, "controlComplete": succeeded,
+                       "automaticReservationReleaseQualified": False}
             (path.parent / "control.json").write_text(json.dumps(receipt, indent=2) + "\n")
             self.calls.append(receipt)
+            try:
+                forward("inspection-finished", guardianPid=child.pid if child else None,
+                        controlComplete=succeeded, cleanup=cleanup)
+            except (OSError, ValueError):
+                # An unavailable observer is never evidence of release.
+                receipt["observerComplete"] = False
+                receipt["controlComplete"] = False
+                (path.parent / "control.json").write_text(json.dumps(receipt, indent=2) + "\n")
+                state("observer-refused")
+                if succeeded:
+                    raise
 
 
 def run_guardian(path, expected_sha, control_fd, expected_parent):
