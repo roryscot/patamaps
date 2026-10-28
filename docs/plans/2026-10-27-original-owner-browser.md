@@ -48,6 +48,20 @@ invalid-session requirements separately from frontend-only diagnostic evidence.
    browser/service resources in `finally`. The existing HTTP/native bounds stay
    unchanged. This hook does not itself implement browser or identity checks.
 
+   The [exact packaged/installed helper controls](../acceptance/project-adoption/selected-owner-installed-inspector-20261027/receipt.json)
+   now also pass independently at package producer451c064: all1,250 source
+   members match Git/archive/extraction, including the unchanged qualified
+   inspector and standalone driver. Both source/native archives were installed;
+   the extracted native engine matches. Its existing development-profile CLI
+   was reused after all188 packaged Rust build-input files matched the previously
+   compiled source. No fresh compiler or application build is claimed.
+   The six controls ran from extracted source/helper paths without installed Git,
+   passing35 fixture HTTP cases and reaping all five owned servers. Checkout
+   helper unavailability was not tested in this prerequisite. The source
+   inventory and old CLI/source inventory stayed unchanged; reservation released.
+   This closes helper packaging/extracted execution, while the real installed
+   browser/runtime workflow in step5 remains open.
+
    Reproduce the six process controls with the standalone qualifier, a fresh
    absolute output path and the declared Node22.23.3 executable:
    ```sh

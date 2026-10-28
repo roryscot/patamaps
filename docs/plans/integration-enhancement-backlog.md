@@ -1569,3 +1569,16 @@ one-initial/two-repair phase budget is exhausted. A read-only correction diagnos
 passed on existing generated files; one extra import attempt is proposed for
 approval, with unchanged safety and acceptance criteria. Real browser/auth,
 watch/deployment and actual Rust/Next measurements retain their existing scope.
+
+
+The [packaged ready-inspector prerequisite](../acceptance/project-adoption/selected-owner-installed-inspector-20261027/receipt.json)
+now passes at producer451c064: exact source/native archives installed, all1,250
+source members matched Git/archive/extraction, and188 Rust build-input files
+matched the previously compiled source. The accepted development CLI was reused;
+no fresh compiler or application rebuild occurred. All six controls ran from
+extracted helper/driver paths, passing35 fixture HTTP cases and reaping five
+servers; native engine, unchanged source inventory and released reservation
+were independently verified. Checkout-helper unavailability was not tested.
+This closes helper packaging/extracted control execution only. API retry-budget
+approval, actual browser/auth/permissions, watch/deployment and measured Rust/Next
+performance retain their existing requirements.
