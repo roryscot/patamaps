@@ -25,10 +25,48 @@ acceptance. No file deletion, service interruption, policy change or automatic r
 was needed.
 
 The three previous failures remain historical failures. The earlier volume-wide
-disk-growth cause remains unknown. Full W0 still requires its separate active
-parent-death case, which this approval explicitly excluded and which has not
-launched. W1, authentication/permissions, deployment and actual measurements
-remain open. The one additional attempt is consumed; it grants no further retry.
+disk-growth cause remains unknown. That no-op approval excluded active parent
+death; the separately approved case subsequently ran and failed the lease-release
+criterion below. Full W0/W1, authentication/permissions, deployment and actual
+measurements remain open. The one extra no-op attempt is consumed.
+
+## Active-parent-death case: processes stopped, lease release failed
+
+The separately approved case at56dce4e
+[failed its frozen60-second cleanup criterion](../acceptance/project-adoption/original-owner-active-parent-death-20261028/receipt.json).
+The driver observed a real active project-build under a sealed exclusive
+reservation, matched ancestry/identities/lease/limits, then sent SIGKILL only
+to its test-owned parent. Watch cancellation was recorded; no update completed
+or second reservation queued. All six observed owned process identities and
+the monitor/controller subsequently disappeared. A direct watcher exit code
+was not observed and is not invented.
+
+Reservation3527c7eb remained needs-review. The guard recorded exit75,
+completed=false and existingContainerUncertainty=true with the same preexisting
+database container and zero new surviving containers. No disk-growth failure
+was reported. Process cleanup therefore has evidence, but automatic reservation
+release and full active-parent-death acceptance failed.
+
+The independent preservation audit rehashed2,482 artifacts,943 owner inputs,
+eight original oracle outputs and1,255 installed source files; the same selection,
+one application-build attempt and ledger remained. Canonical stop confirmation
+and three complete process/file/container inventories passed. The original
+database kept its start identity and readiness.
+
+The user then explicitly approved
+[recovery of only that stopped reservation](../acceptance/project-adoption/original-owner-active-parent-death-20261028/recovery.json).
+The original request/lease/failed guard were archived with exact hashes; only the
+reviewed request fields changed. The reservation released, with no active or
+queued requests at review. No file deletion, service interruption, policy change
+or retry occurred. The failure reviewer ran before recovery; its held-state
+checks describe that historical checkpoint and should refuse a changed state.
+Recovery does not turn the failed case into a pass.
+
+Before another real case, resolve the native cancellation ownership boundary:
+establish enforceable isolation from preexisting containers, or propose a
+separately approved isolated service window for the current guard. Neither
+remedy has been qualified. Do not disable uncertainty checks, extend the frozen
+cleanup bound or treat manual recovery as automatic cleanup acceptance.
 
 ## Earlier real-owner qualification: failed, preserved
 
@@ -65,16 +103,17 @@ A subsequent [bounded resource/admission review](../acceptance/project-adoption/
 records a quiet30-second sample and a successful unchanged canonical admission
 check, with the full4GB allowance fitting under100GB retention. The previous
 writer remains unknown. A byte-identical observer retry was subsequently authorized for one case
-and passed the scoped independent review above. The separate active-parent-death
-case and changed builds have not launched.
+and passed the scoped independent review above. The separate parent-death
+case later ran and failed automatic release, as recorded above; changed builds
+have not launched.
 
 All2,482 selected artifact files,943 owner inputs,eight original oracle outputs,
 1,255 installed source members, CLI bytes, selected pointer, one-attempt state
 and execution ledger were rechecked unchanged. No application build or new
 selection was created. At that failed checkpoint, watch update, idle/SIGTERM and parent-death
 acceptance remained unproved. The later approved extension closes only the
-no-op/update/idle/SIGTERM subcase. Its budget is consumed; the separately prepared
-parent-death case has not launched. Keep full W0/W1 and G0–G6 requirements open.
+no-op/update/idle/SIGTERM subcase. Its budget is consumed. The later separate
+parent-death case failed automatic release; keep full W0/W1 and G0–G6 open.
 
 ## Inputs and preservation
 

@@ -418,3 +418,16 @@ source members stayed unchanged. No application build or new selection ran.
 The1,008-second functional interval is not performance acceptance. Active
 parent death, changed-generation failure/race/cancellation and practical watch
 usability remain required; do not infer them from this scoped pass.
+
+
+The separately approved
+[active-parent-death case failed lease release](../acceptance/project-adoption/original-owner-active-parent-death-20261028/receipt.json)
+with the current native fallback and an unrelated container already running.
+All six observed owned process identities stopped and watch cancellation was
+recorded, but the conservative guard retained its reservation. The unchanged
+selection and source were independently verified; a separate explicit
+[one-record recovery](../acceptance/project-adoption/original-owner-active-parent-death-20261028/recovery.json)
+released the stopped reservation while preserving the failed guard.
+Do not infer automatic crash cleanup from that manual recovery. Existing
+container access must have enforceable ownership boundaries, or the case needs
+a separately approved isolated service window; neither remedy is qualified here.

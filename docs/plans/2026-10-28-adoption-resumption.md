@@ -21,9 +21,11 @@ occurred. This closes the ownership barrier, not the failed watch qualification.
 
 Steps1–4 below are complete at the scoped
 [single-extension result](../acceptance/project-adoption/original-owner-watch-single-extension-20261028/receipt.json).
-Step5, the separate active-parent-death case, remains unrun and outside the
-completed extension's authorization. Full W0/W1 and all original adoption gates
-remain open.
+Step5 was separately approved and run: all observed owned processes stopped,
+but automatic lease release failed its60-second criterion. Its
+[independent failure review and approved one-record recovery](../acceptance/project-adoption/original-owner-active-parent-death-20261028/receipt.json)
+preserve that failure and the accepted selection. Full W0/W1 and all original
+adoption gates remain open.
 
 
 1. Establish resource readiness using read-only host observations before asking
@@ -55,11 +57,12 @@ remain open.
    intervals and exit130 on SIGTERM. Recheck preserved selection/attempt/ledger
    and owned-process absence. A failed run stays failed; stop at the one-attempt
    budget and do not retry or release uncertain ownership automatically.
-5. Only after that pass, review the separately prepared active-parent-death
-   case and its authorization/budget. It must observe the real native child
-   before killing only the test-owned parent, then confirm cleanup and release
-   within the frozen 60-second bound. It has not run. A prepared script or
-   successful idle shutdown is not crash-recovery evidence.
+5. Review active-parent-death ownership and its case budget after the no-op
+   pass. The separately approved initial case has now run and failed automatic
+   lease release. Any future case must first resolve the ownership boundary,
+   observe the real native child before killing only its test-owned parent,
+   then confirm cleanup and release within the unchanged60-second bound.
+   A prepared script or successful idle shutdown is not crash-recovery evidence.
 
 The detailed W0/W1 contract remains in
 [the watch plan](2026-10-28-original-owner-watch.md). No acceptance criterion is
@@ -94,6 +97,22 @@ That extension is consumed; the admission checkpoint does not reserve future
 resources or authorize another case. Keep the original
 bounds and one-attempt/no-automatic-repair scope in the next increment above.
 The earlier resource cause and all remaining W0/W1 acceptance stay open.
+
+## Cancellation ownership is the next unresolved boundary
+
+The actual parent-death result separates observed process cleanup from the
+failed automatic-release requirement. The unchanged guard retained a cancelled
+native lease because an unrelated container was already running. Three complete
+stop inventories and explicit one-record human approval subsequently allowed
+[metadata recovery](../acceptance/project-adoption/original-owner-active-parent-death-20261028/recovery.json);
+the failed guard remains archived byte-for-byte.
+
+Do not repeat the unchanged test expecting a different result or weaken its
+60-second criterion. Review enforceable native isolation from existing container
+access, or prepare a separately approved isolated service window if retaining
+the current guard. Neither option is implemented/qualified by this checkpoint.
+The earlier no-op/idle/SIGTERM pass remains valid; manual recovery is not proof
+of automatic parent-death cleanup. Other original G0–G6 work remains required.
 
 ## Continue the full adoption plan
 

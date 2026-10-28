@@ -31,9 +31,13 @@ The exactly one approved W0 extension now
 [passes independent no-op/idle/SIGTERM review](../acceptance/project-adoption/original-owner-watch-single-extension-20261028/receipt.json):
 two actual native calls/reservations, one completed update, idle and exit130,
 zero application builds/new attempts, unchanged selected state and owned cleanup.
-The extension is consumed; active-parent-death remains separate and unrun.
-The earlier disk-growth cause is still unknown; no service interruption or
-policy change occurred.
+The extension is consumed. The separately approved active-parent-death case
+[subsequently failed automatic lease release](../acceptance/project-adoption/original-owner-active-parent-death-20261028/receipt.json),
+despite all observed owned processes stopping; the existing-container uncertainty
+rule retained the lease. Explicit scoped recovery released it with the failure
+preserved. Native cancellation isolation or a separately approved isolated
+service window needs review before another case. The earlier disk-growth cause
+is still unknown; no service interruption or policy change occurred.
 W0/W1, original-owner authentication/permissions, measurements, deployment and
 the full G0–G6 acceptance requirements remain open.
 
