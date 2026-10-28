@@ -6,7 +6,31 @@ requirement includes failed, raced and cancelled builds, parent death, readiness
 and practical development performance. Passing a no-op or a fixture does not
 close that requirement. Authentication and benchmark approvals remain separate.
 
-## Latest real-owner qualification: failed, preserved
+## Approved single-extension result: no-op, idle and SIGTERM passed
+
+The [independent review](../acceptance/project-adoption/original-owner-watch-single-extension-20261028/receipt.json)
+accepts the one explicitly approved extra case atb765223. The unchanged installed
+helper/driver observed actual project-build and project-build-verify under two
+separate native-exclusive reservations, one completed update, six idle seconds
+without a held reservation or driver lock, and SIGTERM exit130. Both reservations
+finished/released; the monitor, controller, watcher, native calls and supervisors
+were absent at review.
+
+The selected pointer, one application-build attempt and execution ledger remain
+unchanged. All2,482 artifacts,943 owner inputs,eight original oracle outputs and
+1,255 installed source members were rehashed. Zero application builds or new
+application-build attempts ran. The functional case took1,008.280seconds within
+its frozen2,100-second bound; this is not a benchmark or practical-speed
+acceptance. No file deletion, service interruption, policy change or automatic repair
+was needed.
+
+The three previous failures remain historical failures. The earlier volume-wide
+disk-growth cause remains unknown. Full W0 still requires its separate active
+parent-death case, which this approval explicitly excluded and which has not
+launched. W1, authentication/permissions, deployment and actual measurements
+remain open. The one additional attempt is consumed; it grants no further retry.
+
+## Earlier real-owner qualification: failed, preserved
 
 The [independent failure/preservation audit](../acceptance/project-adoption/original-owner-watch-20261028/receipt.json)
 records all three attempted no-op watch cases. The first two failed in private
@@ -40,17 +64,17 @@ does not extend the exhausted qualification repair budget.
 A subsequent [bounded resource/admission review](../acceptance/project-adoption/resource-readiness-20261028/receipt.json)
 records a quiet30-second sample and a successful unchanged canonical admission
 check, with the full4GB allowance fitting under100GB retention. The previous
-writer remains unknown. A byte-identical observer retry is prepared only;
-request one explicit budget extension before another no-op/idle/SIGTERM case.
-No additional watch process, parent-death case or build has started.
+writer remains unknown. A byte-identical observer retry was subsequently authorized for one case
+and passed the scoped independent review above. The separate active-parent-death
+case and changed builds have not launched.
 
 All2,482 selected artifact files,943 owner inputs,eight original oracle outputs,
 1,255 installed source members, CLI bytes, selected pointer, one-attempt state
 and execution ledger were rechecked unchanged. No application build or new
-selection was created. The watch update, idle/SIGTERM and parent-death acceptance
-remain unproved. The no-op phase's initial-plus-two-repair budget is exhausted;
-the separately prepared parent-death case has not launched. Keep W0/W1 and the
-full G0–G6 requirements open.
+selection was created. At that failed checkpoint, watch update, idle/SIGTERM and parent-death
+acceptance remained unproved. The later approved extension closes only the
+no-op/update/idle/SIGTERM subcase. Its budget is consumed; the separately prepared
+parent-death case has not launched. Keep full W0/W1 and G0–G6 requirements open.
 
 ## Inputs and preservation
 

@@ -407,10 +407,14 @@ so its existing development CLI was reused. Both Linux watch-control jobs
 [passed at the identified commit](../acceptance/project-adoption/installed-watch-policy-20261028/ci.json).
 This prepares actual-owner watch checks; it does not accept them or W1.
 
-Actual-owner qualification with this installed watch helper remains
-[unaccepted](../acceptance/project-adoption/original-owner-watch-20261028/receipt.json).
-A real no-op passed and full verification was observed under a separate
-reservation, but a volume-wide4GB growth refusal stopped that verification.
-The accepted build and installed bytes were preserved. Controlled tests and
-successful CI do not supersede this failed real-owner result or establish
-practical large-context watch usability.
+The [earlier actual-owner failure](../acceptance/project-adoption/original-owner-watch-20261028/receipt.json)
+remains preserved: its separate verification stopped on volume-wide4GB growth.
+After explicit stopped-reservation recovery and a successful admission check,
+[one approved extra no-op/idle/SIGTERM case passed independent review](../acceptance/project-adoption/original-owner-watch-single-extension-20261028/receipt.json).
+Both actual native calls ran under separate exclusive reservations and released;
+one update completed, idle held no lease/lock, and SIGTERM exited130. Selected
+state,2,482 artifacts,943 owner inputs,eight oracle outputs and1,255 installed
+source members stayed unchanged. No application build or new selection ran.
+The1,008-second functional interval is not performance acceptance. Active
+parent death, changed-generation failure/race/cancellation and practical watch
+usability remain required; do not infer them from this scoped pass.

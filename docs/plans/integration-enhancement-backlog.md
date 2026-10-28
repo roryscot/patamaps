@@ -27,9 +27,13 @@ The stopped watch reservation has now been explicitly approved for recovery
 and [released with preservation verified](../acceptance/project-adoption/approved-reservation-recovery-20261028/receipt.json).
 The [resumption plan](2026-10-28-adoption-resumption.md) now has
 [a completed bounded observation and successful canonical admission check](../acceptance/project-adoption/resource-readiness-20261028/receipt.json).
-A one-attempt W0 extension with the unchanged observer is prepared for approval;
-the earlier disk-growth cause is still unknown. No additional watch attempt,
-service interruption or policy change has run.
+The exactly one approved W0 extension now
+[passes independent no-op/idle/SIGTERM review](../acceptance/project-adoption/original-owner-watch-single-extension-20261028/receipt.json):
+two actual native calls/reservations, one completed update, idle and exit130,
+zero application builds/new attempts, unchanged selected state and owned cleanup.
+The extension is consumed; active-parent-death remains separate and unrun.
+The earlier disk-growth cause is still unknown; no service interruption or
+policy change occurred.
 W0/W1, original-owner authentication/permissions, measurements, deployment and
 the full G0–G6 acceptance requirements remain open.
 

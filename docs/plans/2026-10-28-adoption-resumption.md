@@ -1,7 +1,8 @@
 # Resume the original project-adoption goal
 
-Status: prepared after the explicitly approved reservation recovery on
-2026-10-28. No new qualification attempt has started. The full G0–G6 scope in
+Status: reservation recovery and resource readiness complete; the one approved
+additional W0 no-op/idle/SIGTERM case now passes independent review. No further
+case is authorized by that completed extension. The full G0–G6 scope in
 [the adoption plan](2026-10-15-general-project-adoption.md) remains unachieved;
 completed C01–C19 native parity remains a separate milestone.
 
@@ -17,6 +18,13 @@ No file deletion, service interruption, limit change or qualification retry
 occurred. This closes the ownership barrier, not the failed watch qualification.
 
 ## Next bounded increment
+
+Steps1–4 below are complete at the scoped
+[single-extension result](../acceptance/project-adoption/original-owner-watch-single-extension-20261028/receipt.json).
+Step5, the separate active-parent-death case, remains unrun and outside the
+completed extension's authorization. Full W0/W1 and all original adoption gates
+remain open.
+
 
 1. Establish resource readiness using read-only host observations before asking
    to extend the exhausted watch budget. Observe volume-available bytes,
@@ -79,9 +87,11 @@ full root list privately and publishes only budget figures. These are inspection
 failures, not Patamaps qualification failures or confirmed quota refusals.
 
 Current evidence supports proposing exactly one guarded W0 extension using the
-unchanged prior observer driver. No extension has been granted or run. At launch,
-recheck scheduler ownership and let each native call obtain fresh canonical
-admission; this checkpoint does not reserve future resources. Keep the original
+unchanged prior observer driver. The user subsequently granted exactly one extension, which
+[passed independent no-op/idle/SIGTERM review](../acceptance/project-adoption/original-owner-watch-single-extension-20261028/receipt.json).
+Each actual native call obtained its own fresh reservation and both released.
+That extension is consumed; the admission checkpoint does not reserve future
+resources or authorize another case. Keep the original
 bounds and one-attempt/no-automatic-repair scope in the next increment above.
 The earlier resource cause and all remaining W0/W1 acceptance stay open.
 
