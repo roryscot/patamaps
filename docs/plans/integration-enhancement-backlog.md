@@ -1591,3 +1591,16 @@ versions, retained footprint, initial fixture failure and partial repair.
 This closes the missing browser-runtime prerequisite only. The unchanged
 five-project application suite, real API/authentication, installed browser
 workflow, watch/deployment and actual Rust/Next performance remain open.
+
+The [installed original-owner public browser replay](../acceptance/project-adoption/original-owner-five-project-browser-20261027/receipt.json)
+now passes all 25 unchanged upstream cases across the original five projects.
+It reused the accepted production selection with no rebuild or extra attempt.
+Native pre/post/restored-final bindings, unavailable producer paths, command-bound
+runtime inputs, unchanged tool/cache inventories, tamper refusal before HTTP
+effects and owned browser/server cleanup passed; the reservation released.
+This closes the public suite and its installed runtime increment. Actual backend
+authentication, permissions and exact edited visible-label behavior remain open,
+together with watch/deployment and measured Rust/Next performance. The
+[continuation plan](2026-10-27-original-owner-browser.md) preserves all remaining
+acceptance requirements and the separate pending API-budget and benchmark
+quiet-window decisions. The full adoption goal remains active.

@@ -2,8 +2,11 @@
 
 Status: the ready-inspector lifecycle prerequisite is implemented and its
 [six guarded process controls pass independent review](../acceptance/project-adoption/selected-owner-ready-inspector-20261027/receipt.json).
-The frozen source/native original-owner workflows also pass separately. Real
-browser and backend identity acceptance remain open. This continues original
+The frozen source/native original-owner workflows also pass separately. The
+[installed public browser replay](../acceptance/project-adoption/original-owner-five-project-browser-20261027/receipt.json)
+now passes all 25 unchanged upstream cases across five projects, with native
+pre/post/restored-final bindings and cleanup. Backend identity, permission-based
+edited-label visibility, watch, deployment and measured performance remain open. This continues original
 G5/G6 after the [installed-owner workflow](2026-10-27-installed-original-owner-next.md);
 it does not narrow the [adoption goal](2026-10-15-general-project-adoption.md).
 
@@ -174,3 +177,36 @@ Native installed-owner acceptance, watch behavior, deployment and actual
 Rust/Next performance remain separate open requirements. The Axum quiet-window
 approval remains pending; this browser continuation does not authorize stopping
 its unrelated database.
+
+## Accepted public browser replay
+
+The independent review above covers producer a3bfc6c, the unchanged original
+owner c61d51a, the installed 1,250-member source inventory and accepted native
+development CLI cd9a1594. It reused the selected production build without a new
+application build or state attempt. All five original tests ran in Chromium,
+Firefox, WebKit, Mobile Chrome and Mobile Safari: 25 passed, no skips, failures
+or flaky results. The original test/configuration/manifest bytes were staged
+unchanged. Only report destinations and the standard context proxy were
+overlaid; original projects, workers, retries and timeouts were preserved.
+
+The command bound the inspector, test tools, Node and the complete existing
+browser cache through argv preflight and postchecks. These extra runtime inputs
+are not new build-capture members; codeInputs remains empty under the existing
+trusted-command contract. A changed staged test refused before HTTP effects.
+The proxy forwarded unchanged responses from the owned Next origin and refused
+another origin. This is no claim of kernel or whole-process network isolation.
+
+Seven HTTP cases and native pre/post/restored-final bindings passed. All five
+browser groups and the owned Next server were absent after shutdown. Eight
+producer paths were restored; the controller checked checkout inode identities
+and the independent review checked their bytes plus the three runtime inode
+identities. Installed source, browser cache, selected and prior artifacts,
+source/oracle outputs, selection pointers, attempt counts and ledger were
+rechecked. The native-exclusive reservation finished and released.
+
+This closes steps 3 and 5 for the public browser increment and supplies the
+public hydration/navigation portion of step 4. It does not close step 2 or the
+remaining authentication, permissions, exact edited visible-label and
+invalid/expired-session cases in step 4. The API retry-budget extension and
+benchmark quiet-window approval remain separate pending decisions. The full
+G0–G6 adoption goal remains unaccepted.
