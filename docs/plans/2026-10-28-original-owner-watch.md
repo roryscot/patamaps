@@ -6,6 +6,40 @@ requirement includes failed, raced and cancelled builds, parent death, readiness
 and practical development performance. Passing a no-op or a fixture does not
 close that requirement. Authentication and benchmark approvals remain separate.
 
+## Latest real-owner qualification: failed, preserved
+
+The [independent failure/preservation audit](../acceptance/project-adoption/original-owner-watch-20261028/receipt.json)
+records all three attempted no-op watch cases. The first two failed in private
+observer checks: matching compatibility-lease handling, then non-atomic status
+snapshot handling. Their scoped supported recoveries preserved outputs. Those
+observers were repaired without changing native checks or bounds.
+
+In the last attempt, the real native no-op completed under its own reservation.
+A second fresh exclusive reservation ran actual project-build-verify, with live
+process ancestry and matching compatibility-lease evidence. That call was
+stopped by the supervisor after a4,284,735,488-byte fall in volume-wide available
+space exceeded the unchanged4GB run-growth allowance. This counter alone does
+not establish which workload wrote data. The guard retained its lease because
+its conservative cancellation rule cannot disprove work inside an already
+running container; the same unrelated container was present before and after,
+and no new surviving container was recorded.
+
+Current owner/process-group absence and three complete process/file/container
+inventories pass read-only stop review. The canonical stopped-workload check
+also passes. The sealed native record remains held pending an exact reviewed
+recovery; no policy override, service stop, deletion or additional qualification
+run is authorized by that proposal. Automatic approval review rejected the
+normal recovery command because this exact record has no recorded approval.
+The executor's ordinary branches also do not cover this sealed native failure.
+
+All2,482 selected artifact files,943 owner inputs,eight original oracle outputs,
+1,255 installed source members, CLI bytes, selected pointer, one-attempt state
+and execution ledger were rechecked unchanged. No application build or new
+selection was created. The watch update, idle/SIGTERM and parent-death acceptance
+remain unproved. The no-op phase's initial-plus-two-repair budget is exhausted;
+the separately prepared parent-death case has not launched. Keep W0/W1 and the
+full G0–G6 requirements open.
+
 ## Inputs and preservation
 
 Use the unchanged owner c61d51a and the native installed tooling qualified by

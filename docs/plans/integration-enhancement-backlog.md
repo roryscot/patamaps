@@ -1626,3 +1626,14 @@ application/compiler rebuild ran. Both Linux watch-control jobs passed, with
 The reservation released. This closes the updated-tooling prerequisite for
 [actual-owner W0](2026-10-28-original-owner-watch.md), which remains unrun along
 with W1, authentication/permissions, deployment and measured performance.
+
+The [actual-owner watch preservation audit](../acceptance/project-adoption/original-owner-watch-20261028/receipt.json)
+records a failed W0 qualification. The real native no-op passed and the full
+verification did enter a separate exclusive reservation, but the supervisor
+stopped it after a volume-wide free-space drop exceeded4GB. Actual write
+attribution remains unknown. Conservative uncertainty about the already running
+container retained the sealed native lease; reviewed recovery is pending.
+All2,482 artifacts,943 source inputs,eight oracle outputs,1,255 installed source
+members,pointer,one-attempt state and ledger remained unchanged. Two earlier
+observer failures and their supported recoveries are preserved. No W0 pass,
+parent-death acceptance, new retry budget or whole-goal completion follows.

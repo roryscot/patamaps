@@ -406,3 +406,11 @@ installed source. All188 Rust build inputs matched the accepted compiled source,
 so its existing development CLI was reused. Both Linux watch-control jobs
 [passed at the identified commit](../acceptance/project-adoption/installed-watch-policy-20261028/ci.json).
 This prepares actual-owner watch checks; it does not accept them or W1.
+
+Actual-owner qualification with this installed watch helper remains
+[unaccepted](../acceptance/project-adoption/original-owner-watch-20261028/receipt.json).
+A real no-op passed and full verification was observed under a separate
+reservation, but a volume-wide4GB growth refusal stopped that verification.
+The accepted build and installed bytes were preserved. Controlled tests and
+successful CI do not supersede this failed real-owner result or establish
+practical large-context watch usability.
