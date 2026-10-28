@@ -1,6 +1,6 @@
 # Retained dynamic Next replay
 
-Status: initial source-installation subcontrols verified; aggregate failed and native case unrun. Repair1 preflight passed. Independent G3/G5/G6 increment. The native I3e retry remains
+Status: source-installation subcontrols independently verified at49545b1; repair1 aggregate failed at the unchanged4GB storage cap. Native installation incomplete; pair unaccepted. One runtime repair remains. Independent G3/G5/G6 increment. The native I3e retry remains
 unapproved and is not part of this work. Full G0–G6 adoption remains active.
 
 ## Scope and dependencies
@@ -130,3 +130,38 @@ inventory, so their matching source/native pair still requires the scoped runtim
 qualification. No old result is promoted to the repaired package. The next
 selected run is repair1 of this increment's initial+2 runtime budget; existing
 limits, controls, original-config separation and I3e approval boundary remain.
+
+
+## Repair1 storage result and next repair boundary
+
+[Run40764583126](https://github.com/roryscot/patamaps/actions/runs/40764583126)
+at49545b1 completed with failure. The source-installed case passed all41 groups,
+four upstream tests and retained/refusal/cleanup controls. The native case built
+its owner and selected bundle, passed image-byte/kernel/quota controls and reached
+browser execution, but the parent stopped it at4,001,755,136bytes of combined
+filesystem growth. Its browser receipt is failed/incomplete;27 successful groups
+do not establish the required41-group native acceptance. Owned app/probe
+containers were confirmed stopped; the CI cleanup step passed. No cap was raised.
+
+[Executed independent source review](../acceptance/project-adoption/g5-retained-dynamic-next-20261028/attempt-40764583126/independent-verification.json)
+verified the22,062,303byte artifact digest in memory, all1,292 packaged source
+files against49545b1, archive/native identities, installed-source compilation
+witnesses and the full completed source case. Its sampled growth exceeded the
+cap by1,755,136bytes; it is neither a passing resource result nor a whole-job peak.
+The private image-byte comparison occurred inside CI. Raw ZIP/package/dependency
+trees were not retained on Intel. Preserve both failed aggregate runs.
+
+Before spending the final repair attempt, measure opportunities to avoid repeated
+public pnpm bootstrap/cache allocations across the sequential consumers. Reuse
+only declared public tool inputs; retain independent owner/source/config/build/
+selection/runtime outputs, private homes and temporary directories, both fresh
+compiler paths and every acceptance control. The exact storage attribution and
+savings are not yet established. Do not replace measured savings with a larger
+cap, cleanup, reused application build or a speculative retry. Any shipped repair
+needs focused preflight and its own exact package/source bindings. An inspector
+repair reuses this artifact and does not justify another application run.
+
+One runtime repair remains in this increment's initial+2 budget. Native I3e
+approval is still pending; no native-registration retry, watch/crash trial,
+service interruption, deletion, limit change or activation follows from this
+partial result. Full G0–G6 adoption remains active and unachieved.

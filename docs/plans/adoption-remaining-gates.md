@@ -243,3 +243,12 @@ archives, installed source and new/source/original generations were rehashed.
 The native state has one attempt and no repair; old states remain preserved.
 Authenticated browser/permissions, watch, deployment and practical performance
 remain required; this does not complete G5/G6 or the adoption goal.
+
+
+Retained dynamic Next checkpoint: repair1 run40764583126 at49545b1 independently
+proves its completed source-installed41-group/four-test subcase, but aggregate
+acceptance is contradicted by a4,001,755,136byte storage stop. Native-installed
+execution is incomplete and the pair remains unaccepted. See the
+[exact reviewed result](../acceptance/project-adoption/g5-retained-dynamic-next-20261028/attempt-40764583126/independent-verification.json)
+and [bounded next repair](2026-10-28-retained-dynamic-next.md). This does not close
+G5/G6, replace owner-specific workflows or extend the native I3e budget.

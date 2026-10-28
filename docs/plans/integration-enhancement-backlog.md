@@ -1673,3 +1673,12 @@ dynamic page/data groups; all41 combined groups are required for both fresh
 installations. Real installed/retained runtime acceptance remains pending.
 The original-config dynamic result stays separate. This work does not extend
 the exhausted native I3e budget or approve its pending extra attempt.
+
+
+Retained dynamic Next repair1 at49545b1 is now independently reviewed at
+[run40764583126](../acceptance/project-adoption/g5-retained-dynamic-next-20261028/attempt-40764583126/independent-verification.json).
+The source-installed41-group/four-test case passes; the combined pair fails the
+unchanged4GB growth cap at4,001,755,136bytes during the native case. Native
+acceptance and full-pair resource acceptance remain open. The named plan records
+the incomplete native phase and the single remaining runtime repair; no larger
+cap, cleanup, shared application outputs or unapproved I3e trial is implied.
