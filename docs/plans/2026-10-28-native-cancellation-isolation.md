@@ -1,7 +1,8 @@
 # Native cancellation ownership isolation
 
-Status: fixed kernel primitive, proposed guardian controls and actual retained-owner
-read-only CLI compatibility pass on Intel macOS15.8.1. Installed controller
+Status: fixed kernel/guardian controls, strict mode and actual retained-owner
+unchanged project-build with the exact lock grant pass on Intel macOS15.8.1.
+Installed controller
 registration, global ownership integration and automatic release remain unqualified.
 This follows the actual
 [parent-death release failure](../acceptance/project-adoption/original-owner-active-parent-death-20261028/receipt.json).
@@ -262,3 +263,27 @@ This qualifies proposed source and controlled effects. The real retained
 unchanged-build check is prepared but unrun at this checkpoint. Installed
 controller/runtime registration, live global ownership collection, guardian
 crash/unsealed-launch handling and automatic release remain unqualified.
+
+
+## Actual exact-lock unchanged-build result
+
+[Independent real-case review](../acceptance/project-adoption/native-strict-lock-real-20261028/receipt.json)
+passes the accepted CLI's engine, current input-key observation and unchanged
+project-build under the strict variants. The build invocation received only the
+literal driver.lock file-write-data grant outside its fresh private workspace.
+Native returned unchanged-project-build, verification not-repeated, zero cache
+hits and no activation. This establishes selected artifact reuse with native
+structural verification, not a new application execution or performance result.
+
+Pointer, artifact manifest, trace ledger, lock identity/content and the single
+existing application-build attempt match their preimages. All nine observed
+processes stopped and the separate canonical reservation released. No forced/
+changed build, owner watch/crash retry, service interruption or deletion ran.
+
+This first strict-lock increment is complete, with one evidence-backed profile
+repair and no real-case repair. Next implement live lifecycle collection and
+registered closed controller/runtime/OS bindings in a staged supervisor candidate.
+The installed guard and its preexisting-container uncertainty remain unchanged.
+Guardian death/unsealed-launch refusal, publication/installation provenance and
+automatic release still require independent qualification. Keep native exclusive
+and parallelfalse. Full G0–G6 adoption remains active and unachieved.
