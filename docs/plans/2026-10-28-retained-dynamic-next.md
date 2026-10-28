@@ -1,6 +1,6 @@
 # Retained dynamic Next replay
 
-Status: source-installation subcontrols independently verified at49545b1; repair1 aggregate failed at the unchanged4GB storage cap. Native installation incomplete; pair unaccepted. One runtime repair remains. Independent G3/G5/G6 increment. The native I3e retry remains
+Status: final planned run atb6157b8 failed the unchanged4GB capacity gate. Its completed source-installed case is independently verified; native execution is incomplete and the pair remains unaccepted. Initial+2 runtime budget exhausted. Independent G3/G5/G6 increment. The native I3e retry remains
 unapproved and is not part of this work. Full G0–G6 adoption remains active.
 
 ## Scope and dependencies
@@ -210,3 +210,41 @@ controls; its sole-line addition and YAML syntax were checked separately, with
 all implementation/test bindings unchanged. This preflight establishes the
 bootstrap harness/refusals and regressions, not application acceptance or Linux
 resource savings. Repair2's actual exact-pair qualification remains pending.
+
+
+## Final planned runtime outcome and repair boundary
+
+[Run40770841087](https://github.com/roryscot/patamaps/actions/runs/40770841087)
+atb6157b8 failed Combined installed Next qualification storage boundary at
+4,001,222,656bytes. The exact public bootstrap identity was created by source
+and reused by native without another npm install; source post-owner verification
+passed. This optimization did not establish full-pair capacity acceptance.
+The sampled peak is censored at the stop threshold: the1,222,656byte excess does
+not measure the remaining space needed to complete. Comparing two stopped values
+does not establish a reduction in complete-workflow peak allocation.
+
+[Independent source review](../acceptance/project-adoption/g5-retained-dynamic-next-20261028/attempt-40770841087/independent-verification.json)
+checked all1,296 packaged source members against the producing Git revision,
+archive/native identities, installed compilation witnesses and the complete
+41-group/four-test source runtime with retained enforcement/refusals/restoration/
+cleanup. [The interrupted native review](../acceptance/project-adoption/g5-retained-dynamic-next-20261028/attempt-40770841087/native-interruption-review.json)
+preserves the failed browser outcome after31of41 groups. Its app/probe containers,
+browser and HTTPS proxy were confirmed stopped; CI owned-container cleanup passed.
+Native post-owner bootstrap verification and complete-case acceptance did not run.
+Both image comparisons occurred in CI; private trees were not externally rehashed.
+
+The agreed one initial runtime attempt plus two repairs are now consumed. No
+further application dispatch, resource increase, deletion or qualification
+weakening is authorized by this plan. Further work on this exact runtime phase
+needs an explicit budget extension; other original goal gates retain their own
+scope and budgets. The full G0–G6 goal remains active and incomplete.
+
+Read-only inspection of the existing63,168,200byte public Linux CLI found
+25,404,641bytes in its nonallocated.symtab/.strtab sections. No binary was
+stripped or rebuilt; this is not verified storage savings, semantic equivalence
+or a guarantee the full pair will fit. A frozen, unapplied two-file candidate
+proposal under.tools/retained-dynamic-next-20261028/symbol-profile-proposal/
+would set Cargo dev/test symbol stripping only for this explicit profile, record
+the setting and preserve every existing correctness/resource gate. It requires
+separate human approval; do not treat this diagnosis or goal continuation as
+approval. The separate native I3e/API/benchmark decisions remain pending.

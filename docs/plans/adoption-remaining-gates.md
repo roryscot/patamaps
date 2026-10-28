@@ -252,3 +252,12 @@ execution is incomplete and the pair remains unaccepted. See the
 [exact reviewed result](../acceptance/project-adoption/g5-retained-dynamic-next-20261028/attempt-40764583126/independent-verification.json)
 and [bounded next repair](2026-10-28-retained-dynamic-next.md). This does not close
 G5/G6, replace owner-specific workflows or extend the native I3e budget.
+
+
+Final retained-dynamic attempt40770841087 atb6157b8 again failed the unchanged4GB
+capacity gate. Its complete source41-group/four-test case passes independent
+review; native browser execution stopped after31of41 and remains incomplete.
+See [the exact final review](../acceptance/project-adoption/g5-retained-dynamic-next-20261028/attempt-40770841087/independent-verification.json).
+The planned initial+2 runtime budget is exhausted. The sampled4,001,222,656byte
+stop does not establish full-workflow headroom; the public bootstrap was actually
+reused but did not suffice. No G5/G6 completion or further runtime attempt follows.

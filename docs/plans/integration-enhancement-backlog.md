@@ -1682,3 +1682,15 @@ unchanged4GB growth cap at4,001,755,136bytes during the native case. Native
 acceptance and full-pair resource acceptance remain open. The named plan records
 the incomplete native phase and the single remaining runtime repair; no larger
 cap, cleanup, shared application outputs or unapproved I3e trial is implied.
+
+
+The retained-dynamic Next runtime phase has used its initial+2attempt budget.
+[Final reviewed run40770841087](../acceptance/project-adoption/g5-retained-dynamic-next-20261028/attempt-40770841087/independent-verification.json)
+atb6157b8 passes the exact source-installed41+4subcase, but aggregate capacity
+fails at4,001,222,656bytes and native remains incomplete after31groups. Actual
+public pnpm reuse passed its admission; it does not establish total headroom.
+A read-only binary symbol inspection and unapplied scoped proposal are retained;
+no strip build, savings, extra runtime trial or whole-goal acceptance is claimed.
+Further attempts need explicit approval under the named plan. Continue the
+original remaining owner/watch/deployment/performance gates within their separate
+authorizations; do not substitute this partial public-project result for them.
