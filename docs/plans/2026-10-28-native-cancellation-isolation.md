@@ -440,3 +440,84 @@ data-stream stop confirmation. Missing or changed registration must refuse befor
 effects; pending/unsealed/malformed ownership must hold even after a zero exit.
 Qualify the complete staged path before installation or another bounded real-owner
 parent-death proposal. Keep native exclusive and parallelfalse throughout staging.
+
+## I3e closed registration and candidate integration
+
+Freeze a complete runtime from the already retained Python release archive with
+its fixed published asset digest, plus the accepted native CLI and exact helper/
+receiver/controller source. Inventory every runtime file, directory and symlink,
+including stdlib, native extensions, bytecode and private dylibs; audit dynamic
+references to the private tree or qualified system roots. Bind the qualified
+Darwin build, architecture and required system executables. No arbitrary caller
+digest, environment, profile, program or code grants source trust.
+
+A supervisor-owned opaque staged registration will validate the immutable
+snapshot before starting any interpreter and again after stop. Its closed
+controller admits engine, input-key observation and the strict unchanged-build
+path only, using minimal interpreter startup and private acknowledgement/control
+channels. Protect snapshot/input aliases; keep the exact lock grant. Exercise
+changed source/runtime/extension/manifest/OS declarations, forged registration,
+caller startup injection and writable aliases before actual accepted operations.
+
+Then integrate the registered path and I3d receiver into a candidate based on the
+exact installed guard preimage. Retain uncertainty regardless of wrapper exit,
+track all groups and channels, preserve fair admission/atomic finalization and
+native-exclusive fallback. Stage in isolated control/lease directories beneath
+the canonical outer guard. Preserve every attempt; initial plus at most two
+evidence-backed repairs for registration qualification, then separately define
+the bounded candidate-guard controls. Reuse unchanged profile/kernel receipts.
+No installed activation, parallel execution, actual owner crash retrial, manual
+recovery, service interruption, deletion or policy increase is included.
+
+## I3e checkpoint: implemented, qualification FAILED; repair budget exhausted
+
+[The separate facts review](../acceptance/project-adoption/native-registered-inspection-20261028/receipt.json)
+verifies the retained evidence; it does not accept the registration. Source
+implements an opaque staged capability, complete archive-backed read-only runtime/
+source snapshot, fixed controller/CLI operations, pre/post binding checks and
+private controller acknowledgement before guardian launch. The snapshot matches
+all1643 regular runtime members and9 symlinks in the fixed published archive;
+the complete native set is10 Mach-O objects. Isolated startup paths also match
+the private snapshot. These are scoped facts on the recorded Intel/macOS build,
+with qualified system-library trust, not general OS attestation.
+
+The initial attempt refused before native launch because the dependency parser
+treated four Tcl LC_ID_DYLIB identifiers as load references. Repair1 separates
+identification from actual loads, using the local Apple SDK and exact otool
+records; it retained all load-reference constraints. That retry exposed an
+unsupported >20-object count assumption. Repair2 replaces that guess with the
+exact ten-member set from the pinned archive, preserves whole-tree content checks,
+extracts the actual bytes that passed hashing and checks destination copies.
+It adds archive-path replacement, destination-corruption and bytecode-absence
+counterexamples. All failed attempts and source copies remain.
+
+Final run:14checks passed, one test timed out/cancelled at180seconds. Engine and
+input-key test cases passed. The unchanged invocation later returned0 with the
+expected reused-build result and no activation, but its late result MUST NOT be
+relabeled a passing test. Its approximately274.6second descriptor/terminal file
+span is consistent with earlier accepted254.4/277.3second spans under900second
+native limits. Those observations diagnose the new harness's inconsistent
+deadline; they are not performance qualification.
+
+The cancelled asynchronous callback continued while later mutation cases ran.
+That overlap also prevents claiming this entire final suite proves an unchanged
+runtime throughout the real invocation. A future isolated case must avoid it and
+explicitly stop/reap owned work on abort. All9 recorded root/guardian/native
+process IDs are now stopped, source copies and original protected state/lock/
+one application attempt match, and all3 canonical reservations finished/released.
+The installed guard is unchanged. No runtime/source registration or release/
+parallel activation has occurred. The unchanged kernel/profile receipts remain.
+
+I3e remains UNQUALIFIED at its initial+2repair limit. No further automatic repair
+or retry is authorized by that increment. A concrete, unapplied
+[one-attempt proposal](../../.tools/native-registered-inspection-20261028/retry-proposal-1/RETRY_PROPOSAL.md)
+changes the arbitrary new180second test deadline to960seconds around the existing
+900second native limit, isolates one unchanged invocation and adds owned-process
+abort cleanup. The outer coordinator limit would be1200seconds. Its proposed
+source parses; no behavioral check or extra attempt has run. Explicit approval
+must extend this exhausted budget before applying/running it.
+
+The staged installed-guard patch, cancellation/owner-crash/unsealed recovery
+qualification, installation and any new actual-owner parent-death proposal remain
+unfinished. Native execution stays exclusive and parallelfalse. Full G0–G6
+adoption remains active and unachieved; no requirement is narrowed by this failure.
