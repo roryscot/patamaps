@@ -37,6 +37,13 @@ branch was handled only by the approved one-off plan, without a global change.
 Follow the [resumption plan](2026-10-28-adoption-resumption.md); this recovery
 does not extend the exhausted qualification repair budget.
 
+A subsequent [bounded resource/admission review](../acceptance/project-adoption/resource-readiness-20261028/receipt.json)
+records a quiet30-second sample and a successful unchanged canonical admission
+check, with the full4GB allowance fitting under100GB retention. The previous
+writer remains unknown. A byte-identical observer retry is prepared only;
+request one explicit budget extension before another no-op/idle/SIGTERM case.
+No additional watch process, parent-death case or build has started.
+
 All2,482 selected artifact files,943 owner inputs,eight original oracle outputs,
 1,255 installed source members, CLI bytes, selected pointer, one-attempt state
 and execution ledger were rechecked unchanged. No application build or new

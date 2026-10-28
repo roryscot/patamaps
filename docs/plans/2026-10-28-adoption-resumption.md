@@ -57,6 +57,34 @@ The detailed W0/W1 contract remains in
 [the watch plan](2026-10-28-original-owner-watch.md). No acceptance criterion is
 removed or replaced by this order of work.
 
+## Resource observation and admission checkpoint
+
+The [executed readiness review](../acceptance/project-adoption/resource-readiness-20261028/receipt.json)
+records three metadata samples over30.212s: available-space range3,231,744bytes,
+net change-208,896bytes, unchanged swap usage and zero swap-in/out deltas.
+The two selected known disk-image metadata records stayed unchanged. This is
+a short quiet interval; it does not identify the earlier writer, establish
+future stability or prove the full native verifier's memory bound.
+
+The unchanged canonical run-project.mjs patamaps check subsequently exited0:
+47,590,436,864bytes available;93,673,992,192 retained allocation upper bound;
+2,326,007,808bytes remain under100GB after the full4GB reservation. It inspected
+2,087 configured roots and took234.052s. That is admission-inspection elapsed
+time, not an application performance measurement.
+
+Preserve the earlier local inspection failures:10s and60s CPU limits stopped
+two inventory checks before any admission result; a later wrapper discarded
+the result when the root list exceeded64KiB. The corrected capture retains the
+full root list privately and publishes only budget figures. These are inspection
+failures, not Patamaps qualification failures or confirmed quota refusals.
+
+Current evidence supports proposing exactly one guarded W0 extension using the
+unchanged prior observer driver. No extension has been granted or run. At launch,
+recheck scheduler ownership and let each native call obtain fresh canonical
+admission; this checkpoint does not reserve future resources. Keep the original
+bounds and one-attempt/no-automatic-repair scope in the next increment above.
+The earlier resource cause and all remaining W0/W1 acceptance stay open.
+
 ## Continue the full adoption plan
 
 | Required work | Dependency and evidence still needed |
