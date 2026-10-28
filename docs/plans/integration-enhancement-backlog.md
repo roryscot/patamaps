@@ -1582,3 +1582,12 @@ were independently verified. Checkout-helper unavailability was not tested.
 This closes helper packaging/extracted control execution only. API retry-budget
 approval, actual browser/auth/permissions, watch/deployment and measured Rust/Next
 performance retain their existing requirements.
+
+
+The [original-owner browser-runtime prerequisite](../acceptance/project-adoption/original-owner-browser-runtimes-20261027/receipt.json)
+now passes acquisition and scoped native readiness/ownership checks. The
+[continuation plan](2026-10-27-original-owner-browser.md) records the exact
+versions, retained footprint, initial fixture failure and partial repair.
+This closes the missing browser-runtime prerequisite only. The unchanged
+five-project application suite, real API/authentication, installed browser
+workflow, watch/deployment and actual Rust/Next performance remain open.

@@ -98,9 +98,10 @@ invalid-session requirements separately from frontend-only diagnostic evidence.
 
    The current unchanged Playwright configuration starts the Python API through
    Poetry despite the API README/package scripts describing a NestJS entry point.
-   Follow the actual browser configuration. Installed Playwright is 1.56.1; its
-   required downloaded browser executables are absent. No dependency or browser
-   installation has been performed by this continuation.
+   Follow the actual browser configuration. The separate browser-runtime
+   prerequisite below now installs pinned Playwright 1.56.1 runtimes and passes
+   scoped readiness/ownership controls. No API dependency installation or
+   successful API import follows from that preparation.
 
 3. Bind the exact original Playwright config, flow-walk spec and flow manifest.
    Use its existing-server override and preserve its five configured browser
@@ -108,6 +109,29 @@ invalid-session requirements separately from frontend-only diagnostic evidence.
    browser project is partial evidence until the remaining projects pass.
    Declare any browser/dependency installation before allocation and retain it
    under the existing storage policy; do not start an alternate VM/runtime.
+
+   The [pinned native browser-runtime preparation](../acceptance/project-adoption/original-owner-browser-runtimes-20261027/receipt.json)
+   now passes independent review on Intel macOS 15.8.1 and Node 22.23.3. A fresh
+   private cache holds Chromium headless shell 1194, Firefox 1495, WebKit 2215 and
+   FFmpeg 1011, matching the owner's existing Playwright 1.56.1 registry.
+   Acquisition retained 6,782 files and 765,747,200 allocated bytes. Existing
+   caches were not targeted; garbage collection was disabled. The five original
+   browser projects remain unchanged.
+
+   Three engines passed offline DOM/JavaScript smoke checks. The Node browser
+   owner's SIGTERM, recovery of a stopped owned browser after its owner's
+   SIGKILL, and refusal of a synthetic wrong-token process also pass. All six
+   observed browser instances and the negative fixture were reaped; all three
+   reservations released. The first survivor fixture failure is preserved:
+   that browser had already exited before guardian intervention. Only the
+   survivor fixture was repaired; four passing controls were reused.
+
+   All 13 source/configuration/dependency bindings and the full runtime cache
+   inventory were independently rechecked. Runtime payload bytes were unchanged.
+   This is preparation only: zero upstream browser tests, application builds or
+   API imports ran. It does not prove the real owner, full native crash closure,
+   dependency closure, a hard native cache quota or parallel execution. The
+   actual five-project suite and authenticated browser acceptance remain open.
 
 4. Through real browser sessions, prove public hydration/navigation, the
    original guest redirect, valid-session entry, exact edited link text and
