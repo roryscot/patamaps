@@ -21,7 +21,7 @@ MEMORY_BYTES = 3221225472
 DRIVERS = [
     "qualify_chatbot_runtime.py", "qualify_chatbot_auth.mjs", "chatbot_rewrite_profile.py",
     "qualify_chatbot_next.py", "qualify_next_standalone.py", "project_watch.py",
-    "deployment_miniserve_image.py", "next_retained_runtime.py",
+    "deployment_miniserve_image.py", "next_retained_runtime.py", "chatbot_dynamic_profile.py",
 ]
 ENVIRONMENT = [
     "PATH", "HOME", "TMPDIR", "LANG", "TZ", "CI", "CI_PLAYWRIGHT", "NODE_OPTIONS",
@@ -241,6 +241,8 @@ def main():
     assert sys.platform=="linux" and os.environ.get("GITHUB_ACTIONS")=="true"
     config=json.loads(Path(sys.argv[1]).read_bytes())
     assert config["profile"]=="patamaps-retained-next-runtime-1"
+    from chatbot_dynamic_profile import retained_dynamic_mode
+    dynamic=retained_dynamic_mode(config)
     state=Path(config["state"])
     pointer=json.loads((state/"selected.json").read_bytes())
     config["attempt"]=pointer["attempt"]
@@ -252,7 +254,7 @@ def main():
         assert disk.free>=500000000,"RETAINED_RUNTIME_RESERVE"
     from qualify_chatbot_runtime import qualify
     result=qualify(Path(config["owner"]),work,evidence,Path(config["pnpm"]),dict(os.environ),capacity,
-        rewrite_profile=config["rewrite"],standalone_root=Path(config["standalone"]),retained=config)
+        rewrite_profile=config["rewrite"],standalone_root=Path(config["standalone"]),retained=config,dynamic_routes=dynamic,retained_dynamic=dynamic)
     assert result["status"]=="passed" and result["retainedRuntime"]["allOwnedContainersStopped"]
     print("retained-next-private-runtime-passed")
 

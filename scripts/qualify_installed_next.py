@@ -28,20 +28,36 @@ def retained_case_result(result,runtime,probe,owned):
  assert len(owned["containers"])==2 and {c["role"] for c in owned["containers"]}=={"probe","app"} and all(c["confirmedStopped"] is True for c in owned["containers"]), "INSTALLED_RETAINED_OWNED_CONTAINERS"
  return dict(retainedRuntimeAccepted=True,selectedGenerationUnchanged=True,producerUnavailableDuringRequests=True,producerRestored=True,allOwnedContainersStopped=True)
 
-def dynamic_case_result(result,runtime,browser):
- """Keep installed acceptance bound to the original dynamic profile."""
+def _dynamic_case_result(result,runtime,browser,*,derived_retained=False):
+ """Validate fixed original or explicitly captured derived dynamic scope."""
  from chatbot_dynamic_profile import DYNAMIC_CONTROLS,SOURCE_BLOBS
  from qualify_chatbot_runtime import EXPECTED_CONTROLS
- assert result["sourceFiles"]==180 and result["sourceTextFiles"]==174, "INSTALLED_DYNAMIC_OWNER_SOURCE"
+ assert result["sourceFiles"]==180 and result["sourceTextFiles"]==(175 if derived_retained else 174), "INSTALLED_DYNAMIC_OWNER_SOURCE"
  assert result["dynamicSourceBindings"]["gitBlobs"]==SOURCE_BLOBS and result["dynamicSourceBindings"]["sourceFiles"]==9 and result["dynamicSourceBindings"]["sourceMutated"] is False, "INSTALLED_DYNAMIC_SOURCE_BINDINGS"
- assert "rewriteQualification" not in result and "standaloneProbe" not in result and "retainedSelectedExecution" not in result, "INSTALLED_DYNAMIC_ORIGINAL_PROFILE"
+ if derived_retained:
+  from chatbot_dynamic_profile import RETAINED_DYNAMIC_PROFILE
+  assert result["retainedDynamicProfile"]==runtime["retainedDynamicProfile"]==RETAINED_DYNAMIC_PROFILE,"INSTALLED_RETAINED_DYNAMIC_PROFILE"
+  rewrite=result["rewriteQualification"]
+  assert rewrite["originalSourceContextDigest"]==result["sourceContextDigest"],"INSTALLED_RETAINED_DYNAMIC_CONTEXT"
+  for key in ["compiledRulesBound","originalRulesPreserved","missingProjectionRefused","staleProjectionRefusedAfterRequestRehash"]:
+   assert rewrite[key] is True,"INSTALLED_RETAINED_DYNAMIC_REWRITES"
+ else:
+  assert not any(key in result for key in ["rewriteQualification","standaloneProbe","retainedSelectedExecution","retainedDynamicProfile"]), "INSTALLED_DYNAMIC_ORIGINAL_PROFILE"
  qualification=result["dynamicRouteQualification"]
  for key in ["buildBindingsVerified","runtimeAccepted","sourceBytesUnchanged","privateEvidenceBarrierPassed","ownedRuntimesStopped"]:
   assert qualification[key] is True, "INSTALLED_DYNAMIC_QUALIFICATION"
- for key in ["sourceMutationRequested","qualificationConfigurationOverlay","credentialsCaptured","rawRuntimeLogsUploaded","externalModelAccepted"]:
+ for key in ["sourceMutationRequested","qualificationConfigurationOverlay"]:
+  assert runtime[key] is derived_retained, "INSTALLED_DYNAMIC_RUNTIME_SCOPE"
+ for key in ["credentialsCaptured","rawRuntimeLogsUploaded","externalModelAccepted"]:
   assert runtime[key] is False, "INSTALLED_DYNAMIC_RUNTIME_SCOPE"
+ if derived_retained:
+  from chatbot_rewrite_profile import REWRITE_CONTROLS
+  expected_controls=EXPECTED_CONTROLS|DYNAMIC_CONTROLS|REWRITE_CONTROLS
+  assert qualification["configurationProfile"]==RETAINED_DYNAMIC_PROFILE and qualification["originalOwnerConfigurationPreserved"] is False,"INSTALLED_RETAINED_DYNAMIC_PROFILE"
+  assert qualification["derivedSourceContextDigest"]==rewrite["derivedSourceContextDigest"],"INSTALLED_RETAINED_DYNAMIC_CONTEXT"
+ else:expected_controls=EXPECTED_CONTROLS|DYNAMIC_CONTROLS
  for controls in [browser["controls"],runtime["browserControls"]]:
-  assert len(controls)==29 and {c["name"] for c in controls}==EXPECTED_CONTROLS|DYNAMIC_CONTROLS and all(c["passed"] is True for c in controls), "INSTALLED_DYNAMIC_EXACT_CONTROLS"
+  assert len(controls)==len(expected_controls) and {c["name"] for c in controls}==expected_controls and all(c["passed"] is True for c in controls), "INSTALLED_DYNAMIC_EXACT_CONTROLS"
  assert browser["upstreamPageTests"]==runtime["upstreamPageTests"]==4, "INSTALLED_DYNAMIC_UPSTREAM_TESTS"
  assert browser["ownedBrowserStopped"] is True and browser["ownedHttpsProxyStopped"] is True, "INSTALLED_DYNAMIC_BROWSER_CLEANUP"
  witness=runtime["dynamicRouteWitness"]
@@ -51,16 +67,33 @@ def dynamic_case_result(result,runtime,browser):
  for key,status in [("crossUserPrivateStatus",403),("guestPrivateStatus",403),("missingQueryStatus",400),("extraPageSegmentStatus",404),("streamGetStatus",204),("streamPostStatus",405),("extraStreamSegmentStatus",404)]:
   assert witness[key]==status, "INSTALLED_DYNAMIC_REFUSAL_STATUS"
  assert witness["generationPostAttempts"]==0 and witness["rawFixtureValuesPublished"] is False, "INSTALLED_DYNAMIC_GENERATION_OR_DISCLOSURE"
- return dict(dynamicRouteQualification=qualification,dynamicRouteWitness=witness,originalOwnerConfigurationPreserved=True)
+ return dict(dynamicRouteQualification=qualification,dynamicRouteWitness=witness,originalOwnerConfigurationPreserved=not derived_retained)
+
+def dynamic_case_result(result,runtime,browser):
+ """Original-config acceptance stays separate from any derived/retained profile."""
+ return _dynamic_case_result(result,runtime,browser)
+
+def retained_dynamic_case_result(result,runtime,browser,probe,owned):
+ from chatbot_dynamic_profile import RETAINED_DYNAMIC_PROFILE
+ from next_retained_runtime import DRIVERS
+ result_flags=_dynamic_case_result(result,runtime,browser,derived_retained=True)
+ result_flags.update(retained_case_result(result,runtime,probe,owned))
+ controls=probe["retainedDynamicProfileRefusals"]
+ assert controls["profile"]==RETAINED_DYNAMIC_PROFILE,"INSTALLED_RETAINED_DYNAMIC_PROFILE"
+ for key in ["baselineCommandAdmitted","strippedProfileRefused","strippedModeRefused","disabledDynamicRefused","missingDriverRefused","changedDriverRefused","selectionPointerUnchanged"]:
+  assert controls[key] is True,"INSTALLED_RETAINED_DYNAMIC_CODE_INPUTS"
+ assert set(controls["sealedCommandCodeInputs"])=={"runtime-descriptor.json",*("scripts/"+name for name in DRIVERS)},"INSTALLED_RETAINED_DYNAMIC_CODE_INPUTS"
+ return dict(**result_flags,retainedDynamicProfileAccepted=True,retainedDynamicProfile=RETAINED_DYNAMIC_PROFILE)
 
 def main():
  parser=argparse.ArgumentParser(description=__doc__)
  for name in ["work","evidence"]:parser.add_argument("--"+name,type=Path,required=True)
  parser.add_argument("--retained-runtime",action="store_true",help="Repeat complete immutable selected runtime with both fresh installations")
  parser.add_argument("--dynamic-routes",action="store_true",help="Repeat the original-config29-group dynamic profile with both fresh installations")
+ parser.add_argument("--retained-dynamic-routes",action="store_true",help="Explicit derived standalone/proxy41-group retained dynamic profile")
  args=parser.parse_args()
- assert not (args.dynamic_routes and args.retained_runtime),"INSTALLED_DYNAMIC_PROFILE_COMBINATION"
- shared_compilation=args.retained_runtime or args.dynamic_routes
+ assert sum(bool(value) for value in [args.dynamic_routes,args.retained_runtime,args.retained_dynamic_routes])<=1,"INSTALLED_DYNAMIC_PROFILE_COMBINATION"
+ shared_compilation=args.retained_runtime or args.dynamic_routes or args.retained_dynamic_routes
  assert platform.system()=="Linux" and platform.machine()=="x86_64" and os.environ.get("GITHUB_ACTIONS")=="true","Use focused Linux CI; Intel heavy work needs its existing supervisor"
  work,out=args.work.resolve(),args.evidence.resolve()
  work.mkdir(parents=True,exist_ok=False);out.mkdir(parents=True,exist_ok=False);(out/"logs").mkdir()
@@ -98,7 +131,7 @@ def main():
  checkout_cli=ROOT/("target/x86_64-unknown-linux-gnu/debug/patamaps" if shared_compilation else "target/debug/patamaps")
  checkout_driver=ROOT/"scripts/qualify_chatbot_next.py"
  checkout_driver_digest=sha(checkout_driver)
- runtime_options=["--dynamic-routes"] if args.dynamic_routes else ["--rewrites",*(["--standalone-probe","--retained-runtime"] if args.retained_runtime else [])]
+ runtime_options=["--retained-dynamic-routes"] if args.retained_dynamic_routes else (["--dynamic-routes"] if args.dynamic_routes else ["--rewrites",*(["--standalone-probe","--retained-runtime"] if args.retained_runtime else [])])
  cli_backup=work/"checkout-cli.unavailable"
  driver_backup=work/"checkout-driver.unavailable"
  source_build_output=work/"fresh-source-build-output.retained"
@@ -156,12 +189,16 @@ def main():
    if not args.dynamic_routes:assert result["rewritePortReservationClosed"]
    assert runtime["ownedProcessGroupsStopped"] and runtime["ownedListenersStopped"] and runtime["generatedOwnerSecretsAbsentFromEvidence"]
    assert runtime["databaseTransportVerified"]=="authenticated IPv4 loopback TCP" and runtime["databaseUnixSocketsDisabled"] is True
-   groups=29 if args.dynamic_routes else 28
+   groups=41 if args.retained_dynamic_routes else (29 if args.dynamic_routes else 28)
    assert len(browser["controls"])==groups and all(row["passed"] for row in browser["controls"]) and browser["upstreamPageTests"]==4
    record["cases"][label]=dict(status=result["status"],compilerDigest=sha(compiler),engine=engine,sourceInventoryDigest=binding,sourceFiles=source_identity["sourceFiles"],upstreamCommit=result["upstreamCommit"],runtimeGroupsPassed=groups,upstreamPageTestsPassed=4,generatedOutputObservation=result["generatedOutputObservation"],sourceWithoutGit=True,checkoutCompilerAndDriverUnavailable=True,allOwnedRuntimesStopped=True)
-   if args.dynamic_routes:
+   if args.retained_dynamic_routes:
+    probe=json.loads((case_out/"standalone-probe.json").read_bytes())
+    owned=json.loads((case_out/"retained-owned.json").read_bytes())
+    record["cases"][label].update(retained_dynamic_case_result(result,runtime,browser,probe,owned))
+   elif args.dynamic_routes:
     record["cases"][label].update(dynamic_case_result(result,runtime,browser))
-   if args.retained_runtime:
+   elif args.retained_runtime:
     probe=json.loads((case_out/"standalone-probe.json").read_bytes())
     owned=json.loads((case_out/"retained-owned.json").read_bytes())
     record["cases"][label].update(retained_case_result(result,runtime,probe,owned))
@@ -177,7 +214,7 @@ def main():
   finally:
    original.rename(work/"installed-guide.changed-retained");backup.rename(original)
   assert verify_installed_source(source,binding)==source_identity and sha(native_cli)==distribution["binaryDigest"]
-  record.update(status="passed-installed-next-dynamic-workflows" if args.dynamic_routes else ("passed-installed-next-retained-runtime-workflows" if args.retained_runtime else "passed-installed-next-native-command-workflows"),installedDynamicProfileAccepted=args.dynamic_routes,fullRetainedNextBundleAccepted=args.retained_runtime,distribution=distribution,sourceIdentity=source_identity,checkoutCompilerAndDriverUnavailableDuringOwners=True,changedSourceRefusedBeforeCompilerMarker=True,restoredSourceInventoryVerified=True,privateGeneratedOutputsPublished=False,publicCachesShared=True)
+  record.update(status="passed-installed-next-retained-dynamic-workflows" if args.retained_dynamic_routes else ("passed-installed-next-dynamic-workflows" if args.dynamic_routes else ("passed-installed-next-retained-runtime-workflows" if args.retained_runtime else "passed-installed-next-native-command-workflows")),installedDynamicProfileAccepted=args.dynamic_routes,installedRetainedDynamicProfileAccepted=args.retained_dynamic_routes,fullRetainedNextBundleAccepted=args.retained_runtime or args.retained_dynamic_routes,distribution=distribution,sourceIdentity=source_identity,checkoutCompilerAndDriverUnavailableDuringOwners=True,changedSourceRefusedBeforeCompilerMarker=True,restoredSourceInventoryVerified=True,privateGeneratedOutputsPublished=False,publicCachesShared=True)
  except BaseException as error:
   record.update(status="failed",error=type(error).__name__+": "+str(error));save();raise
  finally:

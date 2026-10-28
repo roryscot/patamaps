@@ -42,11 +42,14 @@ def private_output_inventory(staged,work,label):
 def main():
  p=argparse.ArgumentParser(description=__doc__)
  for n in ["work","evidence","cli"]:p.add_argument("--"+n,type=Path,required=True)
- p.add_argument("--dynamic-routes",action="store_true");p.add_argument("--installed-inventory-digest");p.add_argument("--shared-cache-root",type=Path)
+ p.add_argument("--dynamic-routes",action="store_true");p.add_argument("--retained-dynamic-routes",action="store_true");p.add_argument("--installed-inventory-digest");p.add_argument("--shared-cache-root",type=Path)
  p.add_argument("--retained-runtime",action="store_true");p.add_argument("--standalone-probe",action="store_true");p.add_argument("--build-cli",action="store_true");p.add_argument("--runtime",action="store_true");p.add_argument("--rewrites",action="store_true");a=p.parse_args()
+ if a.retained_dynamic_routes:
+  assert not any([a.dynamic_routes,a.rewrites,a.standalone_probe,a.retained_runtime]),"DYNAMIC_RETAINED_EXPLICIT_MODE"
+  a.dynamic_routes=a.rewrites=a.standalone_probe=a.retained_runtime=True
  if a.dynamic_routes:
   from chatbot_dynamic_profile import validate_mode
-  validate_mode(runtime=a.runtime,rewrites=a.rewrites,standalone=a.standalone_probe,retained=a.retained_runtime)
+  validate_mode(runtime=a.runtime,rewrites=a.rewrites,standalone=a.standalone_probe,retained=a.retained_runtime,derived_retained=a.retained_dynamic_routes)
  assert not a.rewrites or a.runtime, "Rewrite acceptance requires actual production runtime"
  assert not a.standalone_probe or (a.rewrites and a.runtime), "Standalone probe requires the existing real runtime and rewrite controls"
  assert not a.retained_runtime or a.standalone_probe, "Retained runtime requires the standalone source/build/refusal profile"
@@ -61,7 +64,7 @@ def main():
   assert not (ROOT/"source-inventory.json").exists(), "Installed source requires its explicit inventory binding"
   source_revision=subprocess.check_output(["git","rev-parse","HEAD"],cwd=ROOT,text=True).strip()
  if a.dynamic_routes:
-  validate_mode(runtime=a.runtime,installed=bool(a.installed_inventory_digest),verified_installation=installed_identity is not None)
+  validate_mode(runtime=a.runtime,rewrites=a.rewrites,standalone=a.standalone_probe,retained=a.retained_runtime,installed=bool(a.installed_inventory_digest),verified_installation=installed_identity is not None,derived_retained=a.retained_dynamic_routes)
  work,out,cli=a.work.resolve(),a.evidence.resolve(),a.cli.resolve()
  work.mkdir(parents=True,exist_ok=False);out.mkdir(parents=True,exist_ok=False);(out/"logs").mkdir()
  assert not any((v/"Cargo.toml").exists() for v in work.parents)
@@ -202,6 +205,10 @@ def main():
    bound_dynamic["ownerSourceBindings"]=r["dynamicSourceBindings"]
    write(out/"dynamic-build-bindings.json",bound_dynamic)
    r["dynamicRouteQualification"]=dict(buildBindingsVerified=True,nativeObservationDigest=bound_dynamic["nativeObservationDigest"],runtimeAccepted=False)
+   if a.retained_dynamic_routes:
+    from chatbot_dynamic_profile import RETAINED_DYNAMIC_PROFILE
+    r["retainedDynamicProfile"]=RETAINED_DYNAMIC_PROFILE
+    r["dynamicRouteQualification"].update(configurationProfile=RETAINED_DYNAMIC_PROFILE,originalOwnerConfigurationPreserved=False,derivedSourceContextDigest=r["rewriteQualification"]["derivedSourceContextDigest"])
   if a.rewrites:
    from chatbot_rewrite_profile import verify_compiled
    baseline_observation=json.loads((ROOT/"docs/acceptance/project-adoption/g3-chatbot-source-20261023/native-observations.json").read_bytes())
@@ -236,6 +243,8 @@ def main():
     cache.mkdir(mode=0o700)
     retained_config=dict(owner=str(staged),originalSource=str(owner),pnpm=str(pnpm),
        standalone=str(standalone_root),rewrite=rewrite_overlay,environment=env)
+    if a.retained_dynamic_routes:
+     retained_config.update(dynamicRoutes=True,retainedDynamicProfile=RETAINED_DYNAMIC_PROFILE)
    r["standaloneProbe"]=observe(cli,standalone_root,work,out,run,
        dict(sourceCaptureDigest=source["digest"],compiledBuildReceiptDigest=sha(out/"logs/owner-production-build.stdout"),configurationProjectionDigest=sha(observations/"config.json")),
        runtime=retained_config)

@@ -10,8 +10,20 @@ MODULES={
  '/api/messages':('static','/(chat)/api/messages/route','app/(chat)/api/messages/route.js'),
 }
 
-def validate_mode(*,runtime,rewrites=False,standalone=False,retained=False,installed=False,verified_installation=False):
- assert runtime and not any([rewrites,standalone,retained]) and (not installed or verified_installation is True),'DYNAMIC_QUALIFICATION_PROFILE'
+RETAINED_DYNAMIC_PROFILE='patamaps-pinned-retained-dynamic-next-1'
+
+def validate_mode(*,runtime,rewrites=False,standalone=False,retained=False,installed=False,verified_installation=False,derived_retained=False):
+ assert type(derived_retained) is bool,'DYNAMIC_QUALIFICATION_PROFILE'
+ if derived_retained:
+  assert runtime and rewrites and standalone and retained and (not installed or verified_installation is True),'DYNAMIC_QUALIFICATION_PROFILE'
+ else:
+  assert runtime and not any([rewrites,standalone,retained]) and (not installed or verified_installation is True),'DYNAMIC_QUALIFICATION_PROFILE'
+
+def retained_dynamic_mode(config):
+ assert isinstance(config,dict),'RETAINED_DYNAMIC_PROFILE'
+ if not any(key in config for key in ['dynamicRoutes','retainedDynamicProfile']):return False
+ assert config.get('dynamicRoutes') is True and config.get('retainedDynamicProfile')==RETAINED_DYNAMIC_PROFILE,'RETAINED_DYNAMIC_PROFILE'
+ return True
 
 def verify_sources(owner):
  owner=Path(owner);result={}

@@ -92,6 +92,55 @@ def helper_main():
         raise AssertionError("STANDALONE_HELPER_MODE")
     print("standalone-private-output-check-passed")
 
+def retained_dynamic_refusals(cli,state,candidate,work,run,driver_paths):
+    """Real selected-source drift refusals; every changed version is retained."""
+    from chatbot_dynamic_profile import RETAINED_DYNAMIC_PROFILE
+    paths=[*driver_paths,"runtime-descriptor.json"]
+    pointer=(state/"selected.json").read_bytes()
+    def command(label,body):
+        request=work/("retained-dynamic-"+label+".command.json")
+        request.write_text(json.dumps(dict(profile="patamaps-project-command-1",workingDirectory=".",
+            environmentReferences={},invocation=dict(executable="/bin/sh",arguments=["-c",body],
+                codeInputs=paths,bounds=dict(maximumElapsedMs=5000,maximumStdoutBytes=1024,maximumStderrBytes=4096))),indent=2)+"\n")
+        return request
+    baseline=command("baseline","printf admitted")
+    accepted=json.loads(run("retained-dynamic-profile-baseline",[cli,"project-exec-selected",state,baseline]))
+    assert accepted["status"]=="completed-selected-project-command","RETAINED_DYNAMIC_BASELINE"
+    controls=dict(profile=RETAINED_DYNAMIC_PROFILE,baselineCommandAdmitted=True,sealedCommandCodeInputs=paths)
+    descriptor=candidate/"runtime-descriptor.json"
+    driver=candidate/"scripts/chatbot_dynamic_profile.py"
+    for label,target,change in [
+        ("strippedProfileRefused",descriptor,"strip"),
+        ("strippedModeRefused",descriptor,"mode"),
+        ("disabledDynamicRefused",descriptor,"disable"),
+        ("missingDriverRefused",driver,"missing"),
+        ("changedDriverRefused",driver,"driver"),
+    ]:
+        original=work/("retained-dynamic-"+label+".original")
+        target.rename(original)
+        if change in ["strip","mode","disable"]:
+            value=json.loads(original.read_bytes())
+            if change=="strip":value.pop("retainedDynamicProfile")
+            elif change=="mode":
+                value.pop("retainedDynamicProfile");value.pop("dynamicRoutes")
+            else:value["dynamicRoutes"]=False
+            target.write_text(json.dumps(value,indent=2)+"\n")
+        elif change=="driver":
+            target.write_bytes(original.read_bytes()+b"\n# controlled source drift\n")
+        marker="retained-dynamic-"+label+".marker"
+        request=command(label,"printf invoked > "+marker)
+        try:
+            run("retained-dynamic-"+label,[cli,"project-exec-selected",state,request],expected=2)
+            assert not(candidate/marker).exists(),"RETAINED_DYNAMIC_BEFORE_EFFECTS"
+            controls[label]=True
+        finally:
+            if target.exists()or target.is_symlink():target.rename(work/("retained-dynamic-"+label+".changed"))
+            original.rename(target)
+        assert(state/"selected.json").read_bytes()==pointer,"RETAINED_DYNAMIC_POINTER"
+    controls["selectionPointerUnchanged"]=True
+    return controls
+
+
 def observe(cli, standalone, work, evidence, run, producer, *, runtime=None):
     rows = inventory(standalone)
     observed = summary(rows)
@@ -220,6 +269,11 @@ def observe(cli, standalone, work, evidence, run, producer, *, runtime=None):
             assert not (candidate/"retained-forbidden.marker").exists()
         finally:
             link.rename(work/"retained-link.changed");link_backup.rename(link)
+    dynamic_refusals=None
+    if runtime is not None:
+        from chatbot_dynamic_profile import retained_dynamic_mode
+        if retained_dynamic_mode(runtime):
+            dynamic_refusals=retained_dynamic_refusals(cli,state,candidate,work,run,driver_paths)
     verified = json.loads(run("standalone-final-native-selection-verify", [cli, "project-build-verify", state]))
     assert verified["status"] == "verified-selected-build-bindings"
     assert inventory(standalone) == rows
@@ -228,7 +282,7 @@ def observe(cli, standalone, work, evidence, run, producer, *, runtime=None):
             environmentReferences=environment_references(public_environment),
             invocation=dict(executable=sys.executable,
                 arguments=["scripts/next_retained_runtime.py","runtime-descriptor.json"],
-                codeInputs=driver_paths,bounds=dict(maximumElapsedMs=1200000,
+                codeInputs=[*driver_paths,*( ["runtime-descriptor.json"] if dynamic_refusals is not None else [] )],bounds=dict(maximumElapsedMs=1200000,
                     maximumStdoutBytes=1048576,maximumStderrBytes=65536)))
         (work/"retained-runtime.command.json").write_text(json.dumps(runtime_command,indent=2)+"\n")
     report = dict(status="observed-standalone-native-output-boundary", producedTree=observed,
@@ -241,6 +295,9 @@ def observe(cli, standalone, work, evidence, run, producer, *, runtime=None):
         sourceBuildLineage=producer, helperDigest=digest(Path(__file__).read_bytes()), filesDeleted=0,
         realMemberAndLinkRefusalsBeforeEffects=runtime is not None)
     (evidence/"standalone-probe.json").write_text(json.dumps(report, indent=2)+"\n")
+    if dynamic_refusals is not None:
+        report["retainedDynamicProfileRefusals"]=dynamic_refusals
+        (evidence/"standalone-probe.json").write_text(json.dumps(report,indent=2)+"\n")
     return report
 
 if __name__ == "__main__":

@@ -1,6 +1,6 @@
 # Retained dynamic Next replay
 
-Status: planned independent G3/G5/G6 increment. The native I3e retry remains
+Status: implemented with passed focused preflight; actual installed runtime unrun. Independent G3/G5/G6 increment. The native I3e retry remains
 unapproved and is not part of this work. Full G0–G6 adoption remains active.
 
 ## Scope and dependencies
@@ -72,3 +72,24 @@ registry/trust activation or deletion is authorized by this increment.
 Acceptance closes only this new retained dynamic profile. Original Wargame/
 Seeder workflows, native ownership integration, measurements, remaining deployment
 and full G0–G6 release requirements remain open.
+
+
+## Implementation preflight
+
+[The Intel preflight](../acceptance/project-adoption/g5-retained-dynamic-next-20261028/preflight.json)
+passes102 focused controls, including11 new derived-mode/admission tests and the
+unchanged original-config dynamic, retained, rewrite, source/archive and private
+output controls. Both workflow YAML files parse; all nine as-run source/workflow
+bindings stayed unchanged. The canonical reservation finished/released. Synthetic
+composed receipts and a filesystem-driven refusal stub establish validator/
+harness behavior only, not real selected-command or application acceptance.
+
+The new --retained-dynamic-routes option is distinct from old flag combinations.
+It requires the captured standalone/canonical-proxy configuration and all41
+browser/API groups, keeps original-config admission separate and binds the
+dynamic helper plus runtime-descriptor.json as selected command code inputs.
+The selected CI path requires a positive command and five real changed/missing
+configuration/driver refusals before sentinel effects, then both full fresh
+installed owner workflows and every existing immutable-runtime/cache/cleanup
+gate. The actual selected lane has not run at this checkpoint. Native I3e
+registration retry approval remains pending and was not used or bypassed.

@@ -1664,3 +1664,12 @@ All2,482 artifacts,943 source inputs,eight oracle outputs,1,255 installed source
 members,pointer,one-attempt state and ledger remained unchanged. Two earlier
 observer failures and their supported recoveries are preserved. No W0 pass,
 parent-death acceptance, new retry budget or whole-goal completion follows.
+
+
+The independent [retained dynamic Next increment](2026-10-28-retained-dynamic-next.md)
+now has102 passed Intel preflight controls and a dedicated existing-lane selection.
+It combines the existing captured standalone/canonical-proxy profile with all13
+dynamic page/data groups; all41 combined groups are required for both fresh
+installations. Real installed/retained runtime acceptance remains pending.
+The original-config dynamic result stays separate. This work does not extend
+the exhausted native I3e budget or approve its pending extra attempt.

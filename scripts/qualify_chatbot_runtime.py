@@ -38,11 +38,11 @@ def available_port():
         return listener.getsockname()[1]
 
 
-def qualify(owner, work, evidence, pnpm, environment, capacity, *, rewrite_profile=None, rewrite_reservation=None, standalone_root=None, retained=None, dynamic_routes=False):
+def qualify(owner, work, evidence, pnpm, environment, capacity, *, rewrite_profile=None, rewrite_reservation=None, standalone_root=None, retained=None, dynamic_routes=False, retained_dynamic=False):
     assert sys.platform == "linux" and os.environ.get("GITHUB_ACTIONS") == "true"
     if dynamic_routes:
         from chatbot_dynamic_profile import validate_mode
-        validate_mode(runtime=True,rewrites=bool(rewrite_profile),standalone=standalone_root is not None,retained=retained is not None)
+        validate_mode(runtime=True,rewrites=bool(rewrite_profile),standalone=standalone_root is not None,retained=retained is not None,derived_retained=retained_dynamic)
     private = work / "trusted-owner-runtime"
     private.mkdir(mode=0o700)
     report_path = evidence / "runtime.json"
@@ -53,6 +53,9 @@ def qualify(owner, work, evidence, pnpm, environment, capacity, *, rewrite_profi
         testBoundary="new CI-only PostgreSQL; trusted-owner secret environment; HTTPS loopback",
         productionActivation=False, externalModelAccepted=False,
     )
+    if retained_dynamic:
+        from chatbot_dynamic_profile import RETAINED_DYNAMIC_PROFILE
+        report["retainedDynamicProfile"]=RETAINED_DYNAMIC_PROFILE
     active = []
     handles = []
     runtime_ports = []

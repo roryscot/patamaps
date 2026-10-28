@@ -21,6 +21,7 @@ on:
           - next-server-actions
           - next-dynamic-routes
           - next-installed-dynamic
+          - next-installed-retained-dynamic
           - next-rewrites
           - next-installed
           - next-installed-retained
@@ -552,3 +553,15 @@ jobs:
     with:
       dynamic-route-controls: true
       installed-controls: true
+
+
+  next-installed-retained-dynamic:
+    if: github.event_name == 'workflow_dispatch' && inputs.qualification == 'next-installed-retained-dynamic'
+    name: Fresh installed retained Next dynamic page and data replay
+    uses: ./.github/workflows/next-server-actions.yml
+    with:
+      retained-dynamic-route-controls: true
+      rewrite-controls: true
+      installed-controls: true
+      standalone-controls: true
+      retained-runtime-controls: true
