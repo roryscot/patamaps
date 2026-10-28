@@ -280,3 +280,12 @@ confirms actual host quota/image bounds, stopped owned resources and finished
 reservation. The bounded host-versus-namespace inspector repair is specified in
 the existing plan; architecture application acceptance remains false. No full
 G5/G6 acceptance or extra retained-dynamic/I3e/API/benchmark authorization follows.
+
+
+The first original-Next quota inspector repair is now statically implemented,
+but [its canonical admission was refused before execution](../acceptance/project-adoption/g5-original-next-architecture-20261028/managed-repair1-prepared/admission.json).
+That reservation finished/released; no stale lease exists. A472-file exact
+compiler cleanup proposal is awaiting approval to restore one-run headroom.
+No deletion, new workspace/application run or architecture acceptance occurred.
+Resume the frozen repair only after approved cleanup and fresh admission; all
+other pending authorization and full G0–G6 requirements remain unchanged.

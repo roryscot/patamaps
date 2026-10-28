@@ -951,3 +951,17 @@ This closes the selected pinned full-Next-bundle/installed subgate. G4 actual-
 project exclusive cold/warm/edit measurements and remaining scoped owner/deploy
 requirements stay open; no blanket hermeticity, performance, arbitrary Next
 compatibility or production activation is inferred.
+
+
+## Original Next architecture increment (2026-10-28)
+
+[The independent increment](2026-10-28-original-next-architecture.md) now passes
+genuine x64 Node selection, correct-digest ARM64 refusal, offline Node-producer
+binding replay and exact staging of2,480 existing actual-owner runtime files.
+Its initial managed namespace-size inspection failed before application launch;
+owned resources stopped and the reservation released. The actual host quota
+bound remains verified. The bounded physical-versus-namespace inspector repair
+is statically implemented, but retention admission refused before execution.
+A precise472-file compiler cleanup proposal is pending approval. Architecture
+application startup/refusal acceptance remains unachieved; this does not close
+stale-contract, authenticated/browser, watch, performance or full G5/G6 gates.

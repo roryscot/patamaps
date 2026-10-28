@@ -2,7 +2,8 @@
 
 Status: native preparation and initial managed staging pass; the initial managed
 controller failed its filesystem observation before any application launch.
-The first bounded inspector repair below is prepared for implementation; it has not run. Independent G5 increment. The retained-dynamic Chatbot phase has
+The first bounded inspector repair is implemented and syntax-checked, but canonical
+admission refused before preparation because retained-output headroom is insufficient. Independent G5 increment. The retained-dynamic Chatbot phase has
 exhausted its runtime budget; its symbol-profile proposal remains unapplied and
 awaits approval. This increment uses the separately retained actual Next 16.1.6
 owner output. It does not retry that Chatbot phase or any I3e/API/benchmark case.
@@ -213,3 +214,37 @@ plus two repair budget remain. Preserve initial outputs; no automatic deletion,
 recovery, service interruption, image substitution or parallel activation.
 This repair is not yet executed or accepted. Stale-contract/auth/performance
 and full G0–G6 requirements remain open.
+
+
+## First repair admission refused before execution
+
+[The frozen repair and admission record](../acceptance/project-adoption/g5-original-next-architecture-20261028/managed-repair1-prepared/README.md)
+now distinguish physical host quota evidence from namespace statfs and retain all
+application/kernel/isolation/stop controls. Python AST and Node syntax checks pass.
+The future success reviewer is prepared but has not executed.
+
+Canonical reservation82798920 finished/released with guard aedfb95d exit75:
+retention admission refused before the preparation script, new workspace or
+application ran. No stale lease or recovery is involved. The read-only audit
+observed96,502,341,632 retained allocated bytes against the100GB cap and4GB
+run reservation, a502,341,632byte shortfall; approximately37GB physical free
+space was observed separately. These accounting quantities are not interchangeable.
+
+The [pending cleanup summary](../acceptance/project-adoption/g5-original-next-architecture-20261028/managed-repair1-prepared/cleanup-proposal-summary.json)
+binds472 exact compiler files directly under target/debug/deps, allocated
+537,149,440bytes, SHA-25635043a7a4eba81a2701edf78ae88f43d08d4a250ea46af4cb74ead7d2e11b939.
+No deletion has occurred or is authorized by this document. All source, current
+CLI, application selections/artifacts, archives, receipts, images, directories
+and the four earlier exclusions remain. Full compiled-file backup and exact
+restoration are unverified; future compiler reuse needs recompilation. Nominal
+headroom is only34,807,808bytes before small new records, enough for a proposed
+one-run admission under this accounting, not repeated builds.
+
+After explicit exact-list approval, recheck jobs and every file identity before
+deleting only that list. A changed list needs fresh approval. Then resume only
+the same frozen first-repair preparation through canonical admission; do not
+repeat selection/acquisition or any completed application phase. Preserve the
+denied request and failed guard. Use the actual new successful native request
+ID for later review;82798920 is not a successful preparation proof. Queue the
+managed run separately only after success/release. The original initial+two
+repair budget and all resource/service/activation exclusions remain unchanged.
