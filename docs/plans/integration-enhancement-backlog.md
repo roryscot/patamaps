@@ -1604,3 +1604,15 @@ together with watch/deployment and measured Rust/Next performance. The
 [continuation plan](2026-10-27-original-owner-browser.md) preserves all remaining
 acceptance requirements and the separate pending API-budget and benchmark
 quiet-window decisions. The full adoption goal remains active.
+
+The [original-owner watch plan](2026-10-28-original-owner-watch.md) continues
+actual no-op/lifecycle and changed-generation acceptance separately. Its
+verification-ownership prerequisite found a full selection scan outside the
+build reservation. The fix queues that scan independently through the existing
+policy runner and requires a fresh matching result before completion.
+[Eleven controlled regressions, ordinary guardian cleanup and five exit/permission cases pass independent review](../acceptance/project-adoption/watch-policy-verification-20261028/receipt.json).
+One completed owned workspace image was closed normally; 201,693 entries matched
+a read-only recovery comparison, its image remains preserved and the unrelated
+database stayed ready. No files were deleted, services stopped, policy changed
+or parallel execution activated. Linux CI, the exact updated installation and
+actual-owner watch remain unaccepted; earlier owner/browser results are preserved.

@@ -31,11 +31,44 @@ on:
           - cargo-registry-container-preflight
           - cargo-registry-context
           - cargo-registry-installed-build
+          - watch-policy-controls
 
 permissions:
   contents: read
 
 jobs:
+
+  watch-policy-verification:
+    if: github.event_name != 'workflow_dispatch' || inputs.qualification == 'all' || inputs.qualification == 'watch-policy-controls'
+    name: Watch policy verification controls
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - name: Check reserved verification and controller result handling
+        env:
+          PATAMAPS_TEST_RETAIN_ROOT: ${{ runner.temp }}/patamaps-watch-policy
+          PYTHONDONTWRITEBYTECODE: '1'
+        run: |
+          mkdir -p "$PATAMAPS_TEST_RETAIN_ROOT"
+          python3 -B -m unittest discover -s scripts -p test_watch_policy_verification.py -v
+      - name: Check ordinary process-group cleanup and permission handling
+        env:
+          PYTHONDONTWRITEBYTECODE: '1'
+        run: |
+          python3 -B - <<'PY'
+          import os,sys
+          from pathlib import Path
+          sys.path.insert(0, "scripts")
+          from project_watch_guard_controls import verify,verify_exits
+          root=Path.cwd()
+          work=Path(os.environ["RUNNER_TEMP"])/"patamaps-watch-guard"
+          work.mkdir()
+          verify(root/"scripts/project_watch.py",work/"guardian")
+          verify_exits(root/"scripts/project_watch.py",work/"exits")
+          print("PASS: isolated Linux controlled policy and ordinary guardian regressions; real-owner acceptance is separate")
+          PY
+
   cargo-metadata-contract:
     if: github.event_name != 'workflow_dispatch' || inputs.qualification == 'all'
     name: Rust Cargo metadata contract

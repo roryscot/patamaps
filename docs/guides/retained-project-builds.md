@@ -104,10 +104,22 @@ not establish arbitrary application HTTP readiness, a complete build context,
 dependency closure, performance claims or installed-consumer acceptance.
 
 
-A zero runner exit also requires native selected-build binding verification and
-a match against the current declared input key. A runner that skips the command
-cannot claim an update while stale or absent selection remains. This check
-repeats artifact/binding verification, not application runtime commands.
+After a build update, the controller queues a separate verification through
+the configured policy runner. That reservation covers the full native
+project-build-verify scan and its current-input-key comparison. The follow-up
+joins the fair queue; it does not retain or automatically reacquire the original
+build slot. Only declared-input observation and small pointer/result comparisons
+remain outside the reservation. Full verification can take minutes for a large
+context, so it must not run as unreserved idle work.
+
+A zero runner exit also requires a fresh matching verification result and an
+unchanged selection pointer. Missing, replayed, duplicate or mismatched results
+refuse, including a runner that returns success without executing verification.
+The helper checks native selected bindings and the current declared input key;
+the parent checks the key and pointer again after the policy handoff. These
+repeat binding verification, not application runtime commands. The configured
+runner and programs remain explicitly trusted; the result is lifecycle
+bookkeeping, not a signed execution attestation.
 
 Native Intel qualification covers10 controlled workflow/lifecycle cases, plus
 separate preflight refusals. See the scoped watch acceptance record. Linux CI
@@ -375,3 +387,15 @@ The receipt records both settings and each command's effective timeout. These
 outer wrapper limits do not change the trusted native command's own bounds or
 prove practical latency. The wrapper still requires the existing host supervisor
 outside its qualified GitHub Linux environment.
+
+The [watch verification policy fix](../acceptance/project-adoption/watch-policy-verification-20261028/receipt.json)
+passes eleven controlled protocol/main-loop regressions, the ordinary guardian
+control and five exit/permission cases on Intel Python 3.13.16 under the canonical
+4 GB native-exclusive supervisor. The main-loop fixture requires two policy
+calls before completion and proves that full verification runs within its
+controlled policy scope; a runner that skips verification refuses even for an
+already current selection. These controlled compiler/policy inputs do not
+establish a real-owner watch or the updated installed helper. The
+[original-owner continuation](../plans/2026-10-28-original-owner-watch.md) retains
+those checks and the complete changed-build requirements. Linux CI is pending
+at this checkpoint.

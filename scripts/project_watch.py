@@ -7,6 +7,8 @@ import os
 import re
 from pathlib import Path
 import signal
+import selectors
+import uuid
 import subprocess
 import sys
 import time
@@ -210,6 +212,89 @@ def selection(state):
         return None
 
 
+def policy_verified_selection(args, parent, driver):
+    """Queue the full binding scan; idle observation does not hold this lease."""
+    nonce = uuid.uuid4().hex
+    payload = {name: str(getattr(args, name)) if getattr(args, name) is not None else None
+               for name in ("plan", "source", "state", "compiler", "context", "preparation")}
+    payload.update(inspectionTimeoutMs=args.inspection_timeout_ms, nonce=nonce,
+                   driverDigest=driver.hex())
+    script = Path(__file__).resolve()
+    inner = [sys.executable, str(script), "__guard", sys.executable, str(script),
+             "__verify-selected", json.dumps(payload, separators=(",", ":"))]
+    argv = [sys.executable, str(script), "__guard", *args.runner, *inner]
+    child = None
+    captured = bytearray()
+    try:
+        child = subprocess.Popen(argv, stdout=subprocess.PIPE, start_new_session=True)
+        with selectors.DefaultSelector() as poll:
+            poll.register(child.stdout, selectors.EVENT_READ)
+            while poll.get_map() or child.poll() is None:
+                if os.getppid() != parent:
+                    raise KeyboardInterrupt()
+                for key, _ in poll.select(.05):
+                    chunk = key.fileobj.read1(65536)
+                    if not chunk:
+                        poll.unregister(key.fileobj)
+                        continue
+                    if len(captured) + len(chunk) > 1048576:
+                        raise ValueError("WATCH_VERIFICATION_OUTPUT_LIMIT")
+                    captured.extend(chunk)
+                    sys.stdout.write(chunk.decode("utf-8", errors="replace"))
+                    sys.stdout.flush()
+            code = child.wait()
+        if code:
+            raise ValueError("WATCH_POLICY_VERIFICATION_REFUSED: " + str(code))
+    finally:
+        stop(child)
+        if child is not None and child.stdout is not None:
+            child.stdout.close()
+    records = []
+    for line in captured.decode("utf-8", errors="strict").splitlines():
+        try:
+            value = json.loads(line)
+        except ValueError:
+            continue
+        if isinstance(value, dict) and value.get("status") == "verified-project-watch-selection":
+            records.append(value)
+    if (len(records) != 1 or records[0].get("nonce") != nonce
+            or records[0].get("selectedPointerDigest") !=
+            "sha256:" + hashlib.sha256(selection(args.state) or b"").hexdigest()):
+        raise ValueError("WATCH_VERIFICATION_RECORD_REFUSED")
+    if records[0].get("inputKey") != observe(args):
+        raise ValueError("WATCH_SELECTION_DOES_NOT_MATCH_CURRENT_INPUTS")
+    return records[0]
+
+
+def verify_selected_step(raw):
+    """Internal bounded native inspections, invoked under the same policy runner."""
+    payload = json.loads(raw)
+    names = ("plan", "source", "state", "compiler", "context", "preparation")
+    if (not isinstance(payload, dict)
+            or set(payload) != set(names) | {"inspectionTimeoutMs", "nonce", "driverDigest"}
+            or not isinstance(payload["nonce"], str)
+            or re.fullmatch("[0-9a-f]{32}", payload["nonce"]) is None
+            or not isinstance(payload["driverDigest"], str)
+            or hashlib.sha256(Path(__file__).read_bytes()).hexdigest() != payload["driverDigest"]
+            or type(payload["inspectionTimeoutMs"]) is not int
+            or not 1000 <= payload["inspectionTimeoutMs"] <= 3600000):
+        raise ValueError("WATCH_VERIFICATION_INPUT")
+    values = {}
+    for name in names:
+        value = payload[name]
+        if value is None and name in ("context", "preparation"):
+            values[name] = None
+        elif isinstance(value, str) and Path(value).is_absolute():
+            values[name] = Path(value)
+        else:
+            raise ValueError("WATCH_VERIFICATION_INPUT")
+    args = argparse.Namespace(**values, inspection_timeout_ms=payload["inspectionTimeoutMs"])
+    checked = verified_selection(args)
+    event("verified-project-watch-selection", nonce=payload["nonce"],
+          inputKey=checked["inputKey"],
+          selectedPointerDigest="sha256:" + hashlib.sha256(selection(args.state) or b"").hexdigest())
+
+
 def main():
     args = arguments()
     script = Path(__file__).resolve()
@@ -278,7 +363,8 @@ def main():
                           retry="after-input-change-or-explicit-restart")
                 else:
                     try:
-                        checked = verified_selection(args)
+                        event("starting-project-build-verification", inputKey=key)
+                        checked = policy_verified_selection(args, parent, driver)
                     except (OSError, ValueError, subprocess.SubprocessError) as error:
                         event("refused-project-build-update", inputKey=key, exitCode=1,
                               reason=str(error), previousSelectionPreserved=selection(args.state) == before,
@@ -300,6 +386,11 @@ if __name__ == "__main__":
             raise SystemExit(2)
         raise SystemExit(guard(sys.argv[2:]))
     try:
+        if len(sys.argv) > 1 and sys.argv[1] == "__verify-selected":
+            if len(sys.argv) != 3:
+                raise SystemExit(2)
+            verify_selected_step(sys.argv[2])
+            raise SystemExit(0)
         if len(sys.argv) > 1 and sys.argv[1] == "__guard-container":
             if len(sys.argv) != 3:
                 raise SystemExit(2)

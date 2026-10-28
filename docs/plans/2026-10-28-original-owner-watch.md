@@ -1,6 +1,6 @@
 # Original-owner foreground watch
 
-Status: planned, not accepted. This continues G4/G6 in the
+Status: verification ownership fix implemented; [eleven controlled regressions and existing guardian checks pass independent review](../acceptance/project-adoption/watch-policy-verification-20261028/receipt.json). Linux CI, updated installation and real-owner watch acceptance remain open. This continues G4/G6 in the
 [general adoption plan](2026-10-15-general-project-adoption.md). The original
 requirement includes failed, raced and cancelled builds, parent death, readiness,
 and practical development performance. Passing a no-op or a fixture does not
@@ -22,6 +22,28 @@ changed-build stage needs a separately retained working source and external
 state under the existing accounting roots; it must not duplicate old build
 states or silently reuse another generation's selection.
 
+## Verification ownership prerequisite
+
+Code inspection after the public browser increment found that the old watch
+loop performed its full post-update selection scan after releasing the build
+reservation. The earlier owner's selected-binding call took 267,909 ms; this is
+functional timing evidence, not an accepted benchmark. Such a scan must be
+reserved before real-owner watch acceptance.
+
+Keep the existing watcher and native checks. Queue post-update verification
+separately through the same policy runner, retain parent-death/cancellation and
+bounded-output handling, require a fresh result bound to the selected pointer
+and current key, and refuse a runner that skips verification. Cover the real
+main loop with controlled policy/CLI inputs plus missing, stale/duplicate,
+failed, changed-input, changed-pointer, output-limit and cancellation controls.
+Preserve the original per-native-call inspection bounds and runner trust scope.
+
+Qualify these changed checkout bytes first. Then package/install the exact
+updated source and native tooling before W0; the earlier installed helper's
+passing tests do not qualify this change. Native compiler rebuilds are needed
+only if its actual Rust build inputs differ. All accepted application builds
+and earlier installed archives remain preserved.
+
 ## W0: actual selected-owner no-op and lifecycle
 
 Run the existing installed foreground controller outside an allocating lease.
@@ -30,7 +52,7 @@ Intel policy runner; every update must queue independently. Start the watcher
 as an owned child whose parent remains observable.
 
 1. Observe the selected input key and one real native no-op update. Require the
-   native project-build-no-op report, zero repeated application/generator/test
+   native unchanged-project-build report (verification=not-repeated, cacheHits=0), zero repeated application/generator/test
    commands, current selected-binding verification and the controller's
    completed-project-build-update event. Bound native inspection to 900 seconds,
    the complete update to 1,800 seconds and the whole initial case to 2,100

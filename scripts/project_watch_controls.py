@@ -330,9 +330,9 @@ def main():
         start("ignored-runner", runner_override=["/usr/bin/true"])
         wait_until(lambda: refused("ignored-runner"), "ignored runner refusal", timeout=30)
         assert pointer() == previous and len(list((state / "attempts").iterdir())) == attempts
-        assert any(e.get("reason") == "WATCH_SELECTION_DOES_NOT_MATCH_CURRENT_INPUTS" for e in events("ignored-runner"))
+        assert any(e.get("reason") == "WATCH_VERIFICATION_RECORD_REFUSED" for e in events("ignored-runner"))
         receipt["controls"].append(dict(control="ignored-runner-refuses-success", result="passed",
-                                        nativeSelectedBindingsChecked=True, currentInputKeyRequired=True))
+                                        guardedVerificationRecordRequired=True, currentInputKeyRequired=True))
         finish()
         assert all(hashlib.sha256(Path(path).read_bytes()).hexdigest() == expected for path, expected in fixed.items())
         receipt["sourceUnchanged"] = True
