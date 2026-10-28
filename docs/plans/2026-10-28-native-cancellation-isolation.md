@@ -1,8 +1,7 @@
 # Native cancellation ownership isolation
 
-Status: fixed kernel/guardian controls, strict mode and actual retained-owner
-unchanged project-build with the exact lock grant pass on Intel macOS15.8.1.
-Installed controller
+Status: strict kernel/guardian controls, live collection and actual retained-owner
+unchanged build with exact lock access pass on Intel macOS15.8.1. Installed controller
 registration, global ownership integration and automatic release remain unqualified.
 This follows the actual
 [parent-death release failure](../acceptance/project-adoption/original-owner-active-parent-death-20261028/receipt.json).
@@ -346,3 +345,29 @@ The real unchanged-build check through the changed collector remains prepared
 but unrun at this checkpoint. Closed source/runtime/OS registration, staged global
 collection, all-group stop confirmation and installed release behavior remain
 unfinished. Keep native exclusive and parallelfalse.
+
+
+## I3c real live-collection result
+
+[Independent real-case review](../acceptance/project-adoption/native-live-real-unchanged-20261028/receipt.json)
+passes engine identity, current input observation and the retained unchanged
+project-build through the changed collector. A separate inspection captured the
+native registration and matching kernel identity while the real build was alive.
+All three live journals exactly match their terminal control receipts.
+
+The original pointer, artifact manifest, trace ledger, driver lock and one
+application-build attempt remain unchanged. No application commands, forced/
+changed build, owner watch/crash trial, service interruption or deletion ran.
+All nine observed processes stopped and the separate canonical reservation
+released. The native CLI and strict profile were reused without recompilation.
+
+I3c is complete with zero production repairs and one additive qualification
+repair. Local live collection, ordered observer frames and identity-checked
+cleanup are qualified at their stated scope. They are not an installed
+supervisor attestation. Next implement the staged global receiver and closed,
+registered controller/runtime/OS bindings against the exact preserved installed
+guard. Pending/unsealed/malformed ownership must hold resources, including when
+a wrapper exits normally with unknown workers. Confirm every registered group
+and all channels/streams before considering a preexisting-container exception.
+Then independently qualify the staged integration before any installation or
+new bounded real-owner parent-death proposal. Full G0–G6 adoption stays open.
