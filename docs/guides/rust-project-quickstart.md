@@ -8,7 +8,21 @@ and test that connection.
 
 ## Get the compiler
 
-The CLI is published on crates.io as `patamaps-cli` version
+On Norway, start with the existing verified development executable:
+
+~~~sh
+export PATAMAPS=/Volumes/dev_src_case_sensitive/projects/patamaps/target/debug/patamaps
+"$PATAMAPS" engine
+~~~
+
+The read-only identity command currently exits successfully with compiler
+7261d652 and workspace f086e884. The executable's SHA-256 is
+cd9a15943eb96e6a45df582cc92ceda0316f222c695205888d9e47b2d419a355,
+matching the [native preparation record](../acceptance/project-adoption/g5-original-next-architecture-20261028/native-preparation.json).
+It remains usable after the approved compiler-cache cleanup. No compiler or
+application rebuild is needed to start with this existing executable.
+
+For another machine, the CLI is published on crates.io as `patamaps-cli` version
 `0.1.0-alpha.2`. Install that exact alpha version with:
 
 ~~~sh
@@ -37,10 +51,12 @@ On the shared Intel Mac, use the existing storage supervisor instead:
   build --release --locked -p patamaps-cli
 ~~~
 
-The existing Intel executable is
-/Volumes/dev_src_case_sensitive/projects/patamaps/target/release/patamaps.
-Record the source revision and executable identity; historical acceptance does
-not automatically cover a later build.
+A successful release build creates target/release/patamaps. That path is
+currently absent on Norway; the existing executable above is the development
+build under target/debug. After installing or building your chosen compiler,
+set PATAMAPS to its absolute executable path. Record the source revision and
+executable identity; historical acceptance does not automatically cover a
+later build or make development and release binaries interchangeable.
 
 ## Declare and generate one binding
 
