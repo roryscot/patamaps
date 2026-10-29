@@ -210,3 +210,22 @@ remaining authentication, permissions, exact edited visible-label and
 invalid/expired-session cases in step 4. The API retry-budget extension and
 benchmark quiet-window approval remain separate pending decisions. The full
 G0–G6 adoption goal remains unaccepted.
+
+
+## Additional API attempt approved; admission refused (2026-10-29)
+
+The user approved the previously frozen one-additional-attempt API proposal.
+All387 source inputs, three runner inputs, two interpreter executables and the
+literal-dot profile matched immediately before its single guarded launch.
+[Independent outcome review](../acceptance/project-adoption/original-owner-api-additional-attempt-20261029/review.json)
+confirms reservation16810ad3 finished/released and guard628e741d exit75:
+retained-output headroom refused before preflight. No security control, third-party
+library or API import ran. All16 earlier failure records and original inputs
+remain unchanged; the unrelated database kept its running/start identity.
+No package installation, service startup/interruption, deletion or policy change.
+
+The approved launch ended at refusal and is not automatically retried. The API
+runtime prerequisite, authentication, permission/edited-label and invalid-session
+gates remain unverified. Resolve capacity with a concrete authorized remedy
+before proposing unchanged preflight resumption. This does not change native
+isolation, retained-dynamic or benchmark budgets and permissions.

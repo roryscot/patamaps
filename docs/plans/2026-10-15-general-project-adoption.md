@@ -977,3 +977,12 @@ auth/stale-contract/performance or full adoption acceptance follows. See the
 [source-bound result](../acceptance/project-adoption/g5-original-next-architecture-20261028/managed-architecture.json).
 The initial inspection failure, capacity refusal and review-only collector repair
 remain recorded; the actual application was not rerun to fix the collector.
+
+
+The user-approved one-extra API-readiness launch atd660ff5 stopped at retention
+admission before any import or security-control execution. Its reviewed
+reservation is finished/released, guard exit75 remains failed, and all bound
+inputs/prior failures/database identity are preserved. See the
+[exact outcome](../acceptance/project-adoption/original-owner-api-additional-attempt-20261029/review.json).
+No API/authentication or full adoption acceptance follows; no automatic retry,
+package installation, deletion, policy increase or service interruption occurred.

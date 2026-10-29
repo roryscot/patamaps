@@ -308,3 +308,13 @@ initial failures/refusal remain. This closes that explicit owner architecture
 admission increment; it does not establish kernel exec-format denial, automatic
 launch protection, auth/permissions, stale-contract refusal, watch/performance
 or full G5/G6. The other exact retry/quiet-window decisions remain pending.
+
+
+The [approved additional original-owner API launch](../acceptance/project-adoption/original-owner-api-additional-attempt-20261029/README.md)
+was attempted once and refused at canonical retention admission. The reservation
+finished/released; no preflight, security controls or imports ran. All387 frozen
+owner inputs and16 earlier failed records still match, and the database was
+untouched. Capacity is the immediate prerequisite before proposing a controlled
+resumption; API/authentication and fullG0–G6 acceptance remain open. The old
+pending-approval descriptions are historical; approval was received, but this
+guarded launch ended in refusal rather than a passing import result.
