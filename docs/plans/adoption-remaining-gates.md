@@ -289,3 +289,11 @@ compiler cleanup proposal is awaiting approval to restore one-run headroom.
 No deletion, new workspace/application run or architecture acceptance occurred.
 Resume the frozen repair only after approved cleanup and fresh admission; all
 other pending authorization and full G0–G6 requirements remain unchanged.
+
+
+The [exact approved compiler cleanup](../acceptance/project-adoption/g5-original-next-architecture-20261028/approved-compiler-cleanup/README.md)
+is complete:472 verified removals, four excluded directories/current CLI/
+selection unchanged, no service or policy change. Unchanged first-repair native
+preparation is separately queued as1e448dbf. Its previous admission refusal and
+initial managed failure remain; no architecture application acceptance follows
+from cleanup or queuing. The full goal and other pending approvals remain open.

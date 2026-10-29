@@ -2,8 +2,9 @@
 
 Status: native preparation and initial managed staging pass; the initial managed
 controller failed its filesystem observation before any application launch.
-The first bounded inspector repair is implemented and syntax-checked, but canonical
-admission refused before preparation because retained-output headroom is insufficient. Independent G5 increment. The retained-dynamic Chatbot phase has
+The first bounded inspector repair is implemented and syntax-checked. Its first
+admission refusal is preserved; the exact approved compiler cleanup has completed,
+and unchanged preparation is separately queued as1e448dbf. Independent G5 increment. The retained-dynamic Chatbot phase has
 exhausted its runtime budget; its symbol-profile proposal remains unapplied and
 awaits approval. This increment uses the separately retained actual Next 16.1.6
 owner output. It does not retry that Chatbot phase or any I3e/API/benchmark case.
@@ -248,3 +249,18 @@ denied request and failed guard. Use the actual new successful native request
 ID for later review;82798920 is not a successful preparation proof. Queue the
 managed run separately only after success/release. The original initial+two
 repair budget and all resource/service/activation exclusions remain unchanged.
+
+
+## Exact approved cleanup and resumed first repair
+
+[The approved cleanup review](../acceptance/project-adoption/g5-original-next-architecture-20261028/approved-compiler-cleanup/README.md)
+confirms exactly472 approved files removed, all944 journal rows matched, four
+excluded directories and current CLI/runtime selection unchanged. No directory,
+service or policy changed. The physical-space recovery and future recompilation
+are not claimed. The approval is consumed; every other file remains unselected.
+
+The same frozen managed-1 preparation is now queued through canonical admission
+as1e448dbf-d51a-457d-804e-7c7813e27e30. This is resumption after the refused
+admission, not a passing guard or application result. Preserve denied82798920
+and initial managed4a6ad3a1. Verify actual success/release before separately
+queuing managed execution; all original controls, limits and budgets remain.
