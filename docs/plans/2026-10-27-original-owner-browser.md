@@ -229,3 +229,27 @@ runtime prerequisite, authentication, permission/edited-label and invalid-sessio
 gates remain unverified. Resolve capacity with a concrete authorized remedy
 before proposing unchanged preflight resumption. This does not change native
 isolation, retained-dynamic or benchmark budgets and permissions.
+
+
+## Non-deleting capacity recovery and remaining exact approval
+
+[The owned-view closeout](../acceptance/project-adoption/owned-quota-closeout-20261029/README.md)
+normally closed six eligible finished quota views, exercised byte/mode read-only
+restoration and independently rehashed all preserved backing images. All 8,582
+work files remain in their images; the two views reporting virtualization
+handles remain mounted. No force, deletion, service interruption or policy edit.
+
+The unchanged canonical capacity check still returned 75. Read-only accounting
+measured 96,045,187,072 bytes, leaving 45,187,072 bytes to clear before a full 4 GB
+reservation fits. A precise one-file proposal identifies an unselected raw
+public ARM64 Node copy of 118,345,728 allocated bytes, backed by a byte/mode-
+verified retained official archive and an additional failed-candidate copy.
+Nothing has been removed; fresh exact-list approval is required. The selected
+x64/runtime and current API declared inputs remain unaffected.
+
+Preserve the failed API admission. After explicitly approved capacity recovery,
+resume only the unchanged preflight through fresh canonical admission and its
+one actual API-attempt/security/bound scope. No actual preflight has yet run
+under the additional-attempt approval. Do not delete additional data, force a
+busy view closed, borrow the database, broaden permissions or automatically
+repair/repeat a failed preflight.

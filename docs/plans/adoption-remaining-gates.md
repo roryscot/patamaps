@@ -318,3 +318,12 @@ untouched. Capacity is the immediate prerequisite before proposing a controlled
 resumption; API/authentication and fullG0–G6 acceptance remain open. The old
 pending-approval descriptions are historical; approval was received, but this
 guarded launch ended in refusal rather than a passing import result.
+
+
+[Normal closure of six finished owned quota views](../acceptance/project-adoption/owned-quota-closeout-20261029/README.md)
+preserved all backing images, passed read-only restoration and left the
+database untouched. Capacity still needs 45,187,072 bytes. A pending exact
+single-file redundant public ARM-runtime proposal exceeds that deficit and
+keeps verified archive/candidate copies; no deletion is authorized. API
+preflight/import/authentication remain unrun. The original full adoption and
+separate native/dynamic/measurement decisions stay open.
