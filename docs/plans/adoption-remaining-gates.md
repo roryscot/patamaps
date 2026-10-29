@@ -297,3 +297,14 @@ selection unchanged, no service or policy change. Unchanged first-repair native
 preparation is separately queued as1e448dbf. Its previous admission refusal and
 initial managed failure remain; no architecture application acceptance follows
 from cleanup or queuing. The full goal and other pending approvals remain open.
+
+
+The [original Next managed architecture review](../acceptance/project-adoption/g5-original-next-architecture-20261028/managed-architecture.json)
+now passes at 1e3b13c: native selection/offline binding plus real x64 public HTML
+before/after correct-digest genuine ARM64 pre-launch refusal, all 2,480 original/
+staged file modes/bytes, five native responses, 188 Rust inputs and inspected
+quota/kernel/isolation/stop proof. The native and managed reservations released;
+initial failures/refusal remain. This closes that explicit owner architecture
+admission increment; it does not establish kernel exec-format denial, automatic
+launch protection, auth/permissions, stale-contract refusal, watch/performance
+or full G5/G6. The other exact retry/quiet-window decisions remain pending.

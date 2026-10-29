@@ -673,7 +673,7 @@ The existing actual-Axum Linux qualifier now separately inspects every compiled 
 
 ## Exact managed Linux tool-runtime checkpoint (2026-10-19)
 
-The [managed tool-runtime receipt](../acceptance/project-adoption/g5-linux-tool-runtime-2026-10-19/receipt.json) passed exact retained compiler engine execution with pinned Linux Node24.11.1, matched kernel CPU/memory/swap/PID limits, real source/rustc read refusals, and confirmed container/process shutdown. This is not provider execution, full source/native installation, or application acceptance. Six locked Linux dependency archives passed independent integrity/member rechecks; actual Next Linux build staging is running. Full goal requirements remain open.
+The [managed tool-runtime receipt](../acceptance/project-adoption/g5-linux-tool-runtime-2026-10-19/receipt.json) passed exact retained compiler engine execution with pinned Linux Node 24.11.1, matched kernel CPU/memory/swap/PID limits, real source/rustc read refusals, and confirmed container/process shutdown. This is not provider execution, full source/native installation, or application acceptance. Six locked Linux dependency archives passed independent integrity/member rechecks; actual Next Linux build staging is running. Full goal requirements remain open.
 
 The first archive-inspection CI39314603229 failed before tests at an unknown member; all three other jobs passed. Independent inspection of the prior exact retained libraries identified lib.rmeta-link. The pinned rustc source documents this late metadata at https://github.com/rust-lang/rust/blob/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/compiler/rustc_codegen_ssa/src/back/rmeta_link.rs. Both lib.rmeta and lib.rmeta-link are actual ELF64/x86_64 relocatable objects in the observed archives. The corrected candidate checks both headers as strictly as code objects, requires exactly one of each, and retains their hashes. It does not exempt metadata from architecture checks. Eight full-inspector negative controls now include late-metadata wrong architecture and unknown membership; all prior refusals remain. Execution of the correction is pending.
 
@@ -707,7 +707,7 @@ Bounded-packaging follow-up: [all five committed-head capability CI gates](../ac
 
 ## Actual Linux Next compilation (2026-10-20)
 
-The [managed actual-project receipt](../acceptance/project-adoption/g5-actual-next-linux-build-2026-10-20/receipt.json) passes the actual selected existing Next monorepo production build on Linux x86_64 / Node24.11.1 / Next16.1.6, TypeScript checking and generated-manifest witness. Native staging verified180135selected files and six exact locked Linux dependency packages. The original selected app and pointer remain unchanged; all14compiled font digests match captured real font inputs.
+The [managed actual-project receipt](../acceptance/project-adoption/g5-actual-next-linux-build-2026-10-20/receipt.json) passes the actual selected existing Next monorepo production build on Linux x86_64 / Node 24.11.1 / Next16.1.6, TypeScript checking and generated-manifest witness. Native staging verified180135selected files and six exact locked Linux dependency packages. The original selected app and pointer remain unchanged; all14compiled font digests match captured real font inputs.
 
 This uses the explicitly version-pinned Next CSS-response qualification hook, changing only captured font transport URLs to isolated loopback. It establishes this declared build scope, not automatic offline support for arbitrary Next versions. The earlier network-font build refusal remains failed. The run used exclusive fallback with2CPU/3GiB memory, swap equal to memory, read-only root and a fixed writable quota. Whole-container peak memory was2561671168bytes; production build elapsed91544ms. These are functional observations, not cold/warm acceptance benchmarks. The font listener and owned container were independently confirmed stopped.
 
@@ -965,3 +965,15 @@ is statically implemented, but retention admission refused before execution.
 A precise472-file compiler cleanup proposal is pending approval. Architecture
 application startup/refusal acceptance remains unachieved; this does not close
 stale-contract, authenticated/browser, watch, performance or full G5/G6 gates.
+
+
+The original Next architecture increment subsequently passed independent managed
+review at 1e3b13c after exact approved compiler cleanup. Selected x64 served real
+public HTML before and after genuine correct-digest ARM64 pre-launch refusal.
+All inputs, 188 Rust build sources, physical quota/kernel/isolation and owned
+stop/release proofs passed. This is an explicit owner admission contract; no ARM
+execution, automatic arbitrary-launch protection, pristine font transport,
+auth/stale-contract/performance or full adoption acceptance follows. See the
+[source-bound result](../acceptance/project-adoption/g5-original-next-architecture-20261028/managed-architecture.json).
+The initial inspection failure, capacity refusal and review-only collector repair
+remain recorded; the actual application was not rerun to fix the collector.

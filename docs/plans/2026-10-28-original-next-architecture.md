@@ -1,10 +1,10 @@
 # Original Next runtime architecture qualification
 
-Status: native preparation and initial managed staging pass; the initial managed
-controller failed its filesystem observation before any application launch.
-The first bounded inspector repair is implemented and syntax-checked. Its first
-admission refusal is preserved; the exact approved compiler cleanup has completed,
-and unchanged preparation is separately queued as1e448dbf. Independent G5 increment. The retained-dynamic Chatbot phase has
+Status: this scoped architecture application gate passes independent review at
+source1e3b13c. The first managed inspector repair served actual Next HTML before
+and after authentic ARM64 pre-launch refusal, preserved all bindings and released
+owned resources. The initial inspection failure and retention refusal remain.
+The full G0–G6 adoption objective is incomplete. Independent G5 increment. The retained-dynamic Chatbot phase has
 exhausted its runtime budget; its symbol-profile proposal remains unapplied and
 awaits approval. This increment uses the separately retained actual Next 16.1.6
 owner output. It does not retry that Chatbot phase or any I3e/API/benchmark case.
@@ -149,7 +149,7 @@ were unavailable. The selected runtime, original Node/expected manifest and
 compiler bytes remain unchanged; all188 relevant Rust build inputs match b615.
 The canonical reservation finished and released normally.
 
-Only native runtime selection preparation is accepted here. The original2,480
+At that native-preparation checkpoint, only runtime selection was accepted. The original2,480
 application files have not yet been fully rechecked in this increment; managed
 workspace preparation, kernel/enforcement inspection, actual application HTML
 before/after refusal and the complete architecture gate remain unrun. No Node
@@ -264,3 +264,49 @@ as1e448dbf-d51a-457d-804e-7c7813e27e30. This is resumption after the refused
 admission, not a passing guard or application result. Preserve denied82798920
 and initial managed4a6ad3a1. Verify actual success/release before separately
 queuing managed execution; all original controls, limits and budgets remain.
+
+
+## Accepted first managed repair
+
+[Independent managed review](../acceptance/project-adoption/g5-original-next-architecture-20261028/managed-architecture.json)
+passed after the exact approved cleanup. Canonical preparation 1e448dbf,
+guard 53bfe173, exited 0/completed true and released. Managed 694ee737 separately
+queued and exited 0/finished, with stopped container and host process group.
+The driver source was 1e3b13c; the original three frozen repair hashes remain.
+
+Five actual native engine/ELF calls match their complete responses and digests.
+The unchanged selected x64 Node served 17,260-byte real public HTML, genuine
+same-version ARM64 with its correct digest refused linux/amd64 with exit 2/
+ELF_ARCHITECTURE before another application counter/marker effect, and x64
+served the same 17,260-byte response again. Both response digests match. Exactly
+two downstream app launches occurred; ARM64 was never executed. All owned
+children/listener/container stopped.
+
+All 2,480 original and staged files/modes, three tools, 188 relevant current Rust
+build inputs, selected pointer and protected originals were independently
+rehashed. Real CPU/memory/swap/PID limits, read-only root, network/source
+isolation, exact quota image/mount identity and writable probe passed. The
+physical host filesystem is 535,781,376 bytes; Linux namespace statfs separately
+observed 274,320,064,512 bytes. That namespace observation is not the physical
+quota. The exact host bound was checked before queue/admission and after stop
+through existing backend contracts. No limit or enforcement was expanded.
+
+The independent collector first failed to discover the successful guard because
+its record has no command argv. A review-only repair takes actual request and
+guard IDs, verifies project/label/time containment/outcome/release, and reuses
+the same passed application. No application rerun followed that collector error.
+The [executed reviewer](../acceptance/project-adoption/g5-original-next-architecture-20261028/review-managed.py)
+also verifies the initial failed runtime receipt and prior denied guard bytes.
+Actual invocation: Python -I -S -B review-managed-repair1.py
+--native-request-id 1e448dbf-d51a-457d-804e-7c7813e27e30
+--native-guard-id 53bfe173-912a-4a74-978f-1ef283b8907b; exit 0.
+
+This accepts explicit owner digest/target admission before effects on this
+retained actual Next output. It does not establish kernel exec-format denial,
+automatic protection of arbitrary CLI launches, general loader/dependency
+closure, ARM execution, pristine original font transport, authenticated owner
+workflows, stale-contract refusal, performance or a complete deployment/release.
+All full G0–G6 and separate pending I3e/API/dynamic-retry/quiet-window requirements
+remain. No app rebuild, extra deletion, service interruption, registry/trust/
+production or parallel activation occurred. One initial managed runtime failure
+plus one managed inspector repair were used; no extra budget is granted.

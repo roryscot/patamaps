@@ -19,3 +19,8 @@ remain. No extra I3e/API/retained-dynamic/benchmark trial is authorized here.
 The472-file proposal is pending human approval; summary binds the exact private
 inventory hash. No deletion, policy increase, service interruption, reservation
 recovery or architecture acceptance occurred.
+
+Subsequent outcome: the unchanged first managed inspector repair and independent
+review passed. See [the actual accepted result](../managed-architecture.json).
+The initial inspection failure and denied admission remain historical; this
+record does not retroactively become a successful guard or application run.

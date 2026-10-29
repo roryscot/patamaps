@@ -35,7 +35,7 @@ Program segments, dynamic loader, libraries, CPU features, dependencies and
 actual runtime behavior are unverified. The inspected path could change before
 a later, separate launch. Retain immutable artifact bindings and qualify the
 real runtime independently. This check grants no deployment authorization and
-does not close G5 wrong-architecture runtime or stale generated-contract gates.
+by itself does not close application deployment or stale generated-contract gates.
 
 Header fields and machine values follow the primary
 [ELF header specification](https://gabi.xinuos.com/elf/02-eheader.html) and
@@ -83,3 +83,36 @@ The [actual Rust component case](../acceptance/project-adoption/g5-native-archit
 verified x86_64 selection, authentic ARM64 refusal, unchanged pointer, offline
 replay and harmless selected Linux execution. It did not activate the component
 or qualify an external project's deployment.
+
+
+## Gate the selected Next runtime before launch
+
+On the declared Linux deployment host, use the same retained runtime path and
+reviewed producer digest for admission and the downstream launch:
+
+```sh
+patamaps elf-target-check "$RUNTIME" \
+  --target linux/amd64 \
+  --digest "$RUNTIME_DIGEST" &&
+  "$RUNTIME" "$SERVER_ENTRY"
+```
+
+Set RUNTIME to the immutable selected Node binary, RUNTIME_DIGEST to its reviewed
+sha256: digest and SERVER_ENTRY to the retained Next server.js. Keep the selected
+app/configuration and host/runtime dependencies bound separately. The conditional
+launch is the owner's responsibility; an unrelated direct invocation does not
+automatically acquire this protection. Preserve immutable bindings to avoid a
+path replacement between verification and launch.
+
+The [actual original-owner Next check](../acceptance/project-adoption/g5-original-next-architecture-20261028/managed-architecture.json)
+verified this ordering with Node 24.11.1: genuine same-version ARM64, supplied
+with its correct digest, refused before another app launch counter/marker effect.
+Selected x64 served real HTML before and after the refusal. All 2,480 app files,
+tools and selected pointer stayed unchanged; the bound host quota, kernel limits
+and owned resource shutdown passed independent inspection. The retained Linux
+output's explicit captured-real-font adapter and SDK lineage remain declared.
+
+This is pre-launch owner admission on that qualified output. ARM execution,
+kernel exec-format denial, automatic generic launch protection, general loader/
+library closure, authenticated workflows, stale-contract and performance
+acceptance remain separate.

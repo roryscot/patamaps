@@ -25,3 +25,8 @@ further cleanup. The frozen managed-1 repair bytes remain unchanged; canonical
 resumption1e448dbf-d51a-457d-804e-7c7813e27e30 is separately queued. Its new actual
 guard/result and separately queued managed application must be checked before
 any architecture acceptance. No earlier failed/refused result is relabeled.
+
+Subsequent outcome: the unchanged first managed inspector repair and independent
+review passed. See [the actual accepted result](../managed-architecture.json).
+The initial inspection failure and denied admission remain historical; this
+record does not retroactively become a successful guard or application run.

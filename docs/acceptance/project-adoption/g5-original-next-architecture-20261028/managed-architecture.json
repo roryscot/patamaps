@@ -1,0 +1,122 @@
+{
+  "status": "passed-independent-original-next-architecture-review",
+  "sourceRevision": "1e3b13caa2d84b5bf36b496bb5cca0d91a735eae",
+  "driverDigests": {
+    "prepare.py": "67668a09a914277670f57fa9671af39fd0e235e8fac9dcbadc5db8356de6ac09",
+    "run-managed.py": "db9ddc620ef9c48dc5f9d6f704c1bbcebfccc7de325a54d158333c4bcf3f6227",
+    "controls.mjs": "598f197e6a99811a21451e82495ace695f83666e4aaed4cc5252f2f44107338c"
+  },
+  "reviewerSha256": "d049a14e9db3ac09f3fc66226dea12e088c3349c70fba7d5719cac93ba2863ec",
+  "nativePreparationReservation": "1e448dbf-d51a-457d-804e-7c7813e27e30",
+  "nativePreparationReleased": true,
+  "nativeGuardId": "53bfe173-912a-4a74-978f-1ef283b8907b",
+  "nativeGuardSha256": "eb31b7ccd0f84cf3ee2a6ae5bf254258dce02f07049814965fa7882b4849468f",
+  "managedReservation": "694ee737-ec17-4f78-81f4-1ba7c3064b71",
+  "managedReservationReleased": true,
+  "managedExecutorExitCode": 0,
+  "managedRequestSha256": "d294c8b040f3395078a08b5a59d704434a084da9b1116d46292e3e5b11b9dc50",
+  "managedReceiptSha256": "ed4635068894af0d9b52edbfc11753596b45f5437e8fda3e0ca6a5e0df77a5b9",
+  "runtimeFiles": 2480,
+  "runtimeBytes": 86098993,
+  "originalAndStagedFilesAndModesIndependentlyRehashed": true,
+  "originalExpectedManifestSha256": "b08b5a281185568cc48a14a533339ad49a7656bf433c060a098245ad03a88577",
+  "linuxBuildId": "88oi95a5YM6PvetCCaAoU",
+  "linuxBuildReceiptSha256": "a4cb438d9e3edb3e89f2680ec8917496b381a4641b27954c326bb167099a81eb",
+  "selectedPointerSha256": "6db82ee515f78afb0b83339ff66eb1beb3fb7e3fae3d87534aa51a0ca46d0238",
+  "selectionAndProtectedInputsUnchanged": true,
+  "nodeVersion": "24.11.1",
+  "toolDigests": {
+    "node": "5796fd9700e83170bc7ddfdf7f18858c794a9f91cb39dd6f9e95060b292f2563",
+    "node-arm64": "9189756f81aa0d5c706826f2a7763227a5abba0b5ca8c770096a25f35cf10e55",
+    "patamaps": "aaefe1394d50b3e11b1465fef4a0be1885089c8e108e317120cb09d55cf85455"
+  },
+  "linuxCompilerEngine": {
+    "compiler": "sha256:7261d65205d62c538ba0b2b62444e8acd67acf4ad5b4d43f7bc9f39fc4d118a2",
+    "documentType": "executor-description",
+    "governance": "sha256:44340be70a82afd66a36f8ba7e08a4b7ab424ed7feee9c6669da8c8c23569792",
+    "schemaVersion": "0.1.0",
+    "scientific": "sha256:7682918959c03b8798d141fdb6043c3d341fb8e0f9949203467f80c8d6a9d446",
+    "workspace": "sha256:f086e884c32a6cbf035e2f815e062ffbc466cc18f440ff16ecc847698ea7ae59"
+  },
+  "artifact": {
+    "id": 12851904399,
+    "runId": 40770841087,
+    "digest": "sha256:eecf2a8d57cc0361f427129ddce98006a9d6190b50b68810ec7dab43486589ce",
+    "bytes": 22053286,
+    "rawArchiveRetained": false
+  },
+  "cases": [
+    {
+      "name": "baseline-selected-x64-real-html",
+      "status": "passed",
+      "httpStatus": 200,
+      "htmlBytes": 17260,
+      "responseDigest": "e5653c89c9ca4ea58a7889f4c2282547453370bf557f60e48e6dc6b7f492cfba"
+    },
+    {
+      "name": "authentic-arm64-before-application-effects",
+      "status": "refused",
+      "exitCode": 2,
+      "diagnostic": "ELF_ARCHITECTURE",
+      "correctDigestSupplied": true,
+      "applicationLaunchCountUnchanged": true,
+      "downstreamMarkerAbsent": true
+    },
+    {
+      "name": "post-refusal-selected-x64-real-html",
+      "status": "passed",
+      "httpStatus": 200,
+      "htmlBytes": 17260,
+      "responseDigest": "e5653c89c9ca4ea58a7889f4c2282547453370bf557f60e48e6dc6b7f492cfba"
+    }
+  ],
+  "applicationLaunches": 2,
+  "wrongArchitectureExecuted": false,
+  "allOwnedChildrenStopped": true,
+  "listenerStopped": true,
+  "containers": [
+    {
+      "id": "68224a68ce86167f1243a5541cb122f75ef4c45e90e79bc04402142e9a7b409d",
+      "stopped": true,
+      "image": "sha256:69f919497cada9a8611f3de61df902d9f94bf20f84552ef5bd93125c38608ef9"
+    }
+  ],
+  "kernelLimits": {
+    "cpu": "200000 100000",
+    "memory": "1610612736",
+    "swap": "0",
+    "pids": "256"
+  },
+  "filesystemBytes": 535781376,
+  "namespaceFilesystemBytes": 274320064512,
+  "namespaceStatfsUsedAsQuota": false,
+  "hostQuotaAdmissionProofSha256": "f8c88f229619461398681306065e6cda3d8a7bc6cf0919bc083553a9e9f571d8",
+  "relevantRustInputsMatchedB615": 188,
+  "nativeVerifierCalls": 5,
+  "initialManagedFailurePreserved": true,
+  "managedRepair": 1,
+  "enforcement": {
+    "configurationVerified": true,
+    "quotaIdentityVerified": true
+  },
+  "sourceMount": false,
+  "network": "none",
+  "readonlyRoot": true,
+  "exclusiveFallback": true,
+  "protectedDatabaseRunning": true,
+  "filesDeleted": 0,
+  "servicesStopped": 0,
+  "policyChanged": false,
+  "applicationRebuilt": false,
+  "architectureApplicationGateAccepted": true,
+  "kernelExecFormatDenialClaimed": false,
+  "automaticGenericLaunchProtection": false,
+  "loaderClosureAccepted": false,
+  "originalFontTransportPristine": false,
+  "staleContractAccepted": false,
+  "authenticationAccepted": false,
+  "performanceAccepted": false,
+  "applicationReleaseAccepted": false,
+  "fullGoalComplete": false,
+  "scope": "Explicit native digest/ELF target admission before actual retained Next public HTML startup, genuine ARM64 refusal before downstream application effects, and x64 post-refusal startup. Existing captured-real-font transport lineage retained; no full deployment, auth, stale-contract, performance or G0-G6 acceptance."
+}
