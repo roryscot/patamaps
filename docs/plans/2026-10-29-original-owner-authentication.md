@@ -90,3 +90,22 @@ only the isolated database port to 18866 and fresh output paths, retaining the
 accepted frontend/API ports, original assertions, deadlines and resource limits.
 It needs direct approval before a launch; no automatic phase repair or retry.
 Authentication/permissions and full G0–G6 adoption remain unaccepted.
+
+
+## Port 18866 attempt stopped at owned profile parsing (2026-10-30)
+
+The [specifically approved attempt](../acceptance/project-adoption/original-owner-auth-endpoint-20261029/services-port18866-proposal-20261030/README.md)
+passed ownership and free-port checks and started its isolated PostgreSQL.
+macOS rejected literal-IP host syntax in the owned service profile before
+Python or original migrations ran. Migration wrapper exit 65 is preserved.
+No seed, API, HTTP case or browser case ran; authentication remains unverified.
+The owned container is independently stopped with declared limits/mounts,
+all test listeners are closed, reservation released, old failures preserved,
+and unrelated database identity unchanged. Owned data/logs remain private.
+
+This one-attempt approval is consumed. An unexecuted proposal corrects only
+owned loopback-selector syntax, adds a 10s pre-database profile check within the
+existing 600s deadline, and uses fresh paths. Actual bind addresses, ports,
+original auth/denial assertions and resource limits stay unchanged. It needs
+direct approval; no automatic phase repair/retry, deletion, installed safeguard
+change or unrelated interruption follows. Full G0–G6 remains unachieved.

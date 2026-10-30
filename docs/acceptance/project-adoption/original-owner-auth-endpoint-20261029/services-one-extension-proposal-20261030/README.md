@@ -67,3 +67,6 @@ Python AST/Node --check, 421 input rehashes and normalized payload equivalence
 passed. Frozen manifest SHA-256:
 f00a7525a3aa101a28706077d39a8a01685acd2ea081a5bf4791b8bd70ff91cb.
 It requests one separately approved attempt without automatic phase repairs.
+
+
+The port-only proposal was separately approved and executed. Its [preserved owned-profile parser refusal](../services-port18866-proposal-20261030/README.md) records that original migration/authentication code remained unrun. Earlier proposal and failure records remain historical.
