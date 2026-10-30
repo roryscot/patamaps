@@ -330,3 +330,21 @@ Approval is pending; no files deleted. After exact capacity authorization,
 resume only the frozen unused service phase through fresh normal admission,
 preserving this refusal and all earlier failures. No frontend rebuild,
 old-preflight rerun, global limit change or unrelated service use follows.
+
+
+## Approved cleanup completed; authentication ownership budget exhausted (2026-10-30)
+
+[Exact216-file cleanup](../acceptance/project-adoption/original-owner-auth-endpoint-20261029/approved-cleanup-20261030/README.md)
+is complete and independently verified; its approval is consumed. The [resumed
+run](../acceptance/project-adoption/original-owner-auth-endpoint-20261029/services-resume-20261030/README.md)
+and both bounded repairs were admitted, but ownership queries timed out before
+any database, API request or browser test. All reservations finished/released,
+all387/2 original API/interpreter bindings match and Advocates is unchanged.
+
+The [diagnosis and final boundary](../acceptance/project-adoption/original-owner-auth-endpoint-20261029/ownership-diagnosis-20261030/README.md)
+preserve both30s timeouts, component observations and unsuccessful final
+projection repair. The initial+2 budget is exhausted. Investigate/fix bounded
+ownership-status latency without dropping any safety criterion, then prepare a
+concrete budget-extension proposal before another application run. No new file
+deletion, timeout increase, global activation or passing auth result is implied.
+The accepted frontend endpoint and original fullG0–G6 requirements remain separate.
