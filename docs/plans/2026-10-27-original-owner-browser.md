@@ -273,3 +273,24 @@ labels and invalid/expired sessions remain open. Continue the existing owner
 browser plan with owned isolated data; do not borrow unrelated services.
 Native/dynamic retry and benchmark quiet-window decisions remain separate.
 The original fullG0–G6 goal remains incomplete.
+
+
+## Next authenticated-owner preparation: compiled API configuration
+
+The [read-only continuation audit](../acceptance/project-adoption/original-owner-auth-preparation-20261029/README.md)
+binds actual login/RBAC persistence and80 selected JavaScript chunks. The
+default AppApiClient constructor is compiled with http://127.0.0.1:1/api;
+localhost:8000 fallback literals do not prove that client uses port8000.
+Original login/AuthProvider/authService/client inputs and the compiled witness
+are hashed separately. Actual browser network and a complete bundle call graph
+remain unobserved.
+
+Trace the actual consumer first. Unless a legitimate runtime override is
+proved, prepare a fresh declared API-config generation at an unprivileged
+loopback origin, preserving all old selections/artifacts. Then use isolated
+owned PostgreSQL data and the actual handlers for real sessions/permissions/
+visible edited labels and invalid sessions. A cached public image is
+identified without borrowing the running database. No service/build driver
+or auth execution was launched by this inspection; freeze its exact owned
+resources, bounds and lifecycle before normal admission. No additional API
+preflight, old-budget retry, database interruption or parallel activation follows.
