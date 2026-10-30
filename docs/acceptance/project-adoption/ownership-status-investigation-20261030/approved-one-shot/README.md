@@ -59,3 +59,6 @@ bindings (including 387 original API sources and 2 interpreter executables) and
 normalized runner equivalence. Frozen manifest SHA-256:
 49c414f92f6b38749f3fc6212a1e4e5ffd27d7f6d1b2095cf989d10ab50aba60.
 No diagnostic-only approval extends the exhausted application phase budget.
+
+
+The proposed application extension was separately approved and executed. Its [preserved port-precondition refusal](../../original-owner-auth-endpoint-20261029/services-one-extension-proposal-20261030/README.md) supersedes the proposal status only; the diagnostic result and original frozen proposal remain historical, unchanged.

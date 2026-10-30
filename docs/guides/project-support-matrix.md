@@ -194,3 +194,20 @@ budget remains exhausted. A separate frozen one-application-attempt proposal is
 prepared, NOT APPROVED/NOT RUN, with original assertions and bounds, only fresh
 output paths and full-probe stage markers. It does not extend other pending
 lifecycle/dynamic/measurement permissions or establish full adoption completion.
+
+
+## Additional auth attempt refused before service startup (2026-10-30)
+
+The [specifically approved attempt](../acceptance/project-adoption/original-owner-auth-endpoint-20261029/services-one-extension-proposal-20261030/README.md)
+passed the original full ownership validator after its unchanged heartbeat wait.
+It then refused the required free-port check with address-already-in-use. A
+pre-existing foreign listener occupies database port 18766 and was left running.
+No owned database, credentials, migration, API, HTTP case or browser case ran.
+The failed guard/supervisor outcome and initial reviewer failure are preserved;
+the reservation finished/released and protected database identity is unchanged.
+
+This one-attempt approval is consumed. A separate unexecuted proposal changes
+only the isolated database port to 18866 and fresh output paths, retaining the
+accepted frontend/API ports, original assertions, deadlines and resource limits.
+It needs direct approval before a launch; no automatic phase repair or retry.
+Authentication/permissions and full G0–G6 adoption remain unaccepted.
