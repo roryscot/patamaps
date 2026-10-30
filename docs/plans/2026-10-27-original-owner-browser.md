@@ -294,3 +294,21 @@ identified without borrowing the running database. No service/build driver
 or auth execution was launched by this inspection; freeze its exact owned
 resources, bounds and lifecycle before normal admission. No additional API
 preflight, old-budget retry, database interruption or parallel activation follows.
+
+
+## Declared original-owner API endpoint generation (2026-10-29)
+
+The [independent endpoint build review](../acceptance/project-adoption/original-owner-auth-endpoint-20261029/README.md)
+passes at sourcee1512af/ownerc61d51a. A separate new generation declares and
+compiles http://127.0.0.1:18765, preserving the old port1 output and both prior
+selections/artifacts. Native generation, production Next, TypeScript, three
+route tests, original oracle/manifest/marker checks and final native bindings
+pass;2482 selected artifact files were rehashed. The exclusive reservation
+finished/released with guard/supervisor0; limits and the unrelated database
+are unchanged.
+
+This resolves that selected frontend's compiled default API endpoint.
+Real isolated authentication/permissions/browser are prepared, not yet run;
+fresh admission and inspected owned-resource enforcement remain required.
+Context staging/verification remains slow; functional command durations do
+not establish measured development performance or fullG4/G5/G6 acceptance.
