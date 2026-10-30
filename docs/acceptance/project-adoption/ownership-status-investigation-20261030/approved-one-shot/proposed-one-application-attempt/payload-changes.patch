@@ -1,0 +1,45 @@
+--- services-repair1/run.py
++++ proposed-one-extension/run.py
+@@ -9,7 +9,7 @@
+  probeAttempt+=1
+  prefix=Path(__file__).resolve().parent/("ownership-probe-"+str(probeAttempt))
+  try:
+-  p=subprocess.run([str(NODE),"--input-type=module","-e",LEASE_PROBE],capture_output=True,text=True,timeout=30)
++  p=subprocess.run([str(NODE),"--import",str(B/"preload.mjs"),"--input-type=module","-e",(B/"probe.mjs").read_text()],capture_output=True,text=True,timeout=30)
+  except subprocess.TimeoutExpired as e:
+   prefix.with_suffix(".stdout.private").write_bytes(e.stdout or b"")
+   prefix.with_suffix(".stderr.private").write_bytes(e.stderr or b"")
+--- services-repair1/sandbox.sb
++++ proposed-one-extension/sandbox.sb
+@@ -5,7 +5,7 @@
+ (allow network-inbound (local ip "127.0.0.1:18765"))
+ (allow network-outbound (remote ip "127.0.0.1:18766"))
+ (deny file-write*)
+-(allow file-write* (subpath "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/owner-auth-endpoint-20261029/services-repair1-20261030/run"))
++(allow file-write* (subpath "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/owner-auth-endpoint-20261029/services-one-extension-proposal-20261030/run"))
+ (deny process-exec)
+ (allow process-exec (literal "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3.11") (literal "/Library/Frameworks/Python.framework/Versions/3.11/Resources/Python.app/Contents/MacOS/Python"))
+ (deny file-read* (regex #".*/[.]env.*") (subpath "/Users/admin/.ssh") (subpath "/Users/admin/.aws") (subpath "/Users/admin/.config/gh") (literal "/Users/admin/.netrc"))
+--- services-repair1/execution-contract.json
++++ proposed-one-extension/execution-contract.json
+@@ -60,7 +60,7 @@
+   "nextProducerPathsUnavailable": "New source copy, existing dependency snapshot, configured native provider; exact paths restored",
+   "runtimeAssemblyMaximumBytes": 134217728,
+   "runtimeAssemblyMaximumEntries": 8192,
+-  "apiWritableSubtree": "services-0/run only; frozen drivers/manifests outside it",
+-  "apiPrivateReportsLogsSubtree": "services-0/run",
++  "apiWritableSubtree": "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/owner-auth-endpoint-20261029/services-one-extension-proposal-20261030/run",
++  "apiPrivateReportsLogsSubtree": "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/owner-auth-endpoint-20261029/services-one-extension-proposal-20261030/run",
+   "sandboxControlsOutsideWriteProbe": "parent phase path outside permitted run subtree"
+ }
+--- services-repair1/launch-config.json
++++ proposed-one-extension/launch-config.json
+@@ -6,7 +6,7 @@
+     "--",
+     "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/intel-python-3.13.16-20261013/runtime/python/bin/python3",
+     "-B",
+-    "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/owner-auth-endpoint-20261029/services-repair1-20261030/guardian.py"
++    "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/owner-auth-endpoint-20261029/services-one-extension-proposal-20261030/guardian.py"
+   ],
+   "cwd": "/Volumes/dev_src_case_sensitive/projects/patamaps"
+ }

@@ -401,3 +401,20 @@ ownership-status latency without dropping any safety criterion, then prepare a
 concrete budget-extension proposal before another application run. No new file
 deletion, timeout increase, global activation or passing auth result is implied.
 The accepted frontend endpoint and original fullG0–G6 requirements remain separate.
+
+
+## Approved ownership trace completed; application remains gated (2026-10-30)
+
+The [single approved diagnostic](../acceptance/project-adoption/ownership-status-investigation-20261030/approved-one-shot/README.md)
+completed all original queries in 0.553s and released its exclusive reservation.
+It did not reproduce the earlier 30s timeout. Its saved ownership sample has a
+stale heartbeat and is refused by the unchanged validator. The service runner's
+existing 20s fresh-heartbeat wait was not exercised; no safety criterion or
+installed safeguard was changed.
+
+The one diagnostic approval is consumed. No authentication service, database,
+HTTP request or browser case ran. The original initial-plus-two-repair application
+budget remains exhausted. A separate frozen one-application-attempt proposal is
+prepared, NOT APPROVED/NOT RUN, with original assertions and bounds, only fresh
+output paths and full-probe stage markers. It does not extend other pending
+lifecycle/dynamic/measurement permissions or establish full adoption completion.

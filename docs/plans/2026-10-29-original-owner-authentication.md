@@ -56,3 +56,20 @@ Publish only reviewed counts/hashes/outcomes and executed review code.
 Keep raw application source/chunks/DOM/logs/test credentials on Intel.
 A successful endpoint build alone does not prove real authentication or full
 G4/G5/G6. Update the exact result and handoff after each terminal phase.
+
+
+## Approved ownership trace completed; application remains gated (2026-10-30)
+
+The [single approved diagnostic](../acceptance/project-adoption/ownership-status-investigation-20261030/approved-one-shot/README.md)
+completed all original queries in 0.553s and released its exclusive reservation.
+It did not reproduce the earlier 30s timeout. Its saved ownership sample has a
+stale heartbeat and is refused by the unchanged validator. The service runner's
+existing 20s fresh-heartbeat wait was not exercised; no safety criterion or
+installed safeguard was changed.
+
+The one diagnostic approval is consumed. No authentication service, database,
+HTTP request or browser case ran. The original initial-plus-two-repair application
+budget remains exhausted. A separate frozen one-application-attempt proposal is
+prepared, NOT APPROVED/NOT RUN, with original assertions and bounds, only fresh
+output paths and full-probe stage markers. It does not extend other pending
+lifecycle/dynamic/measurement permissions or establish full adoption completion.

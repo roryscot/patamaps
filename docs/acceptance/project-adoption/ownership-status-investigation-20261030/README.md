@@ -35,3 +35,6 @@ or establish ownership correctness until its actual result is reviewed.
 Full G0–G6 adoption remains incomplete, including real owner authentication,
 permissions/browser, lifecycle/crash, measurements and remaining deployment
 requirements. Native C01–C19 completion stays separate.
+
+
+The separately approved [one-shot guarded diagnostic](approved-one-shot/README.md) is now executed. It completed the queries but its saved proof had a stale heartbeat; neither authentication nor the ownership precondition is accepted. The earlier proposal and read-only findings remain historical, unchanged.
