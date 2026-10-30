@@ -113,3 +113,13 @@ so zero library/application imports ran. All three reservations released and
 387 source/config/test inputs still match. A corrected file-rule diagnosis is
 separate from an additional qualification run; the phase's repair budget is
 exhausted. Actual API startup, identity and browser permissions remain open.
+
+
+The [original-owner API preflight resumption](../acceptance/project-adoption/original-owner-api-resumption-20261029/review.json)
+passes at1e9c57e/ownerc61d51a: three sandbox controls,15library imports,
+actual application import/required route presence,387/3/2 frozen bindings,
+unchanged earlier failures/database and released exclusive reservation.
+This supports dependency import readiness; service startup, real sessions,
+permission behavior, visible edited label and full original-owner acceptance
+remain unverified. One exact approved redundant ARM-copy removal restored
+admission; no policy change or package/service setup was used.

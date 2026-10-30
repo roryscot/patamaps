@@ -253,3 +253,23 @@ one actual API-attempt/security/bound scope. No actual preflight has yet run
 under the additional-attempt approval. Do not delete additional data, force a
 busy view closed, borrow the database, broaden permissions or automatically
 repair/repeat a failed preflight.
+
+
+## Approved exact cleanup and actual API readiness pass (2026-10-29)
+
+The [independently reviewed unchanged API preflight](../acceptance/project-adoption/original-owner-api-resumption-20261029/README.md)
+now passes at source1e9c57e/ownerc61d51a: all three security controls,15
+library imports and actual application import with the expected login,
+current-user and permission routes. All387/3/2 frozen bindings and16 earlier
+failed records match. The exclusive reservation finished and released; no
+services/packages/policy were changed and the unrelated database kept its
+start identity. The exact approved one-file ARM-copy removal was independently
+journal-reviewed with verified retained copies; its initial zero-deletion
+self-handle refusal remains. Original API admission failure remains historical.
+
+This closes import readiness only, with one actual API run and no subsequent
+repair. Real authenticated sessions, permission boundaries, edited visible
+labels and invalid/expired sessions remain open. Continue the existing owner
+browser plan with owned isolated data; do not borrow unrelated services.
+Native/dynamic retry and benchmark quiet-window decisions remain separate.
+The original fullG0–G6 goal remains incomplete.
