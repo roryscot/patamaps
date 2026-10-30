@@ -1,0 +1,78 @@
+{
+  "commands": [
+    {
+      "command": "cargo build --locked --offline -p patamaps-cli",
+      "elapsedMs": 19390,
+      "exitCode": 0,
+      "label": "cargo-build"
+    },
+    {
+      "elapsedMs": 1608,
+      "exitCode": 0,
+      "label": "project-capture"
+    },
+    {
+      "elapsedMs": 7138,
+      "exitCode": 0,
+      "label": "generate"
+    },
+    {
+      "elapsedMs": 1504,
+      "exitCode": 0,
+      "label": "offline-replay"
+    }
+  ],
+  "evaluatedAt": "2026-10-22T18:21:26.988Z",
+  "guard": {
+    "filesDeleted": 0,
+    "freeSpaceDeltaAttribution": "aggregate supervisor observation; not an isolated write-attribution measurement",
+    "maximumRunGrowthBytes": 268435456,
+    "mode": "native-exclusive",
+    "ownedWorkloadConfirmedStopped": true,
+    "parallelExecutionActivated": false,
+    "persistentPolicyChanged": false,
+    "supervisorFreeBytesAfter": 39561703424,
+    "supervisorFreeBytesBefore": 39573741568
+  },
+  "limitations": [
+    "This validates manifest ingestion and offline record-binding replay only; it is not an application build or end-to-end project acceptance.",
+    "The recorded buildReceiptDigest field is the digest of a private, unbound input bundle, not a Next.js build receipt.",
+    "next.config.js was not executed, effective configuration was not established, and environment or secret values were not read or captured.",
+    "HTTP, browser, authentication, Server Actions, dependency closure, and deployment behavior remain unverified.",
+    "Raw route values and the generated observation graph remain in private retained evidence; they are intentionally omitted here."
+  ],
+  "patamaps": {
+    "cliSha256": "6f6afc98ee7aa8f3ba4f97dab9871735bad0468be3a634615c39567ea44b9c8f",
+    "observations": {
+      "appPathRouteMappings": 55,
+      "appPaths": 55,
+      "configurationObservations": 1,
+      "dynamicRoutes": 21,
+      "headerRules": 0,
+      "protocolObservations": 1,
+      "redirectRules": 1,
+      "rewriteRules": 0,
+      "routeModules": 55,
+      "routes": 55,
+      "staticRoutes": 34
+    },
+    "offlineReplay": "verified-record-bindings",
+    "revision": "73701ebb6ef7ef3d513d9f17a805ed522d4c8790",
+    "selectedInputsUnavailableDuringReplay": true
+  },
+  "schemaVersion": 1,
+  "scope": "Actual Next.js 14.2.14 build-manifest ingestion and offline record-binding replay.",
+  "source": {
+    "checkoutCleanBeforeAndAfter": true,
+    "framework": "Next.js",
+    "manifestDigestsSha256": {
+      "appPathRoutes": "b61e5e1af18ce170c4deced924f398b5937fca972b0c8fc1f18af20e4e448d5c",
+      "appPaths": "3049585ce3e249af5536eb699e8da04bd354c9200e4231f6ca28903bae351dc2",
+      "routes": "aafba6a8f446fe8072c0f5873c7c731adfdb16f0badda9e449800ecf3ad0550d"
+    },
+    "manifestToRevisionBinding": "not established; generated outputs contain no source identity",
+    "revision": "7721da50e4a817dafb13a8e4cd10347e7ee884f7",
+    "version": "14.2.14"
+  },
+  "status": "passed-actual-next14-manifest-parser-replay"
+}

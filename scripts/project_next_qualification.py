@@ -12,6 +12,25 @@ EXTENSIONS = {".ts", ".tsx", ".js", ".jsx"}
 def sha(raw):
     return "sha256:" + hashlib.sha256(raw).hexdigest()
 
+def route_shape_counts(entities):
+    pages = [e for e in entities if e.get("kind") == "topology:page"]
+    segments = [e for e in entities if e.get("kind") == "topology:segment"]
+    return {
+        "pageCount": len(pages),
+        "pageSourcesUnderRouteGroups": sum(
+            any(part.startswith("(") and part.endswith(")")
+                for part in str(e.get("attributes", {}).get("repositoryPath", "")).split("/"))
+            for e in pages
+        ),
+        "dynamicPageCount": sum(e.get("attributes", {}).get("dynamic") is True for e in pages),
+        "routeGroupSegments": sum(e.get("attributes", {}).get("segmentKind") == "group" for e in segments),
+        "dynamicSegments": sum(e.get("attributes", {}).get("segmentKind") == "dynamic" for e in segments),
+        "optionalCatchAllSegments": sum(
+            e.get("attributes", {}).get("segmentKind") == "optional-catch-all" for e in segments
+        ),
+        "segmentCount": len(segments),
+    }
+
 def write(path, value):
     path.parent.mkdir(parents=True, exist_ok=True)
     with path.open("x") as stream:
@@ -25,6 +44,9 @@ def main():
     parser.add_argument("--app-router-root", required=True)
     parser.add_argument("--require-endpoint", nargs=2, action="append", default=[], metavar=("METHOD", "PATH"),
                         help="Require exactly one observed endpoint with this method and path; no runtime claim")
+    parser.add_argument("--require-route-shape", choices=("route-group", "dynamic", "optional-catch-all"),
+                        action="append", default=[],
+                        help="Require this route shape in selected source observations; no runtime claim")
     args = parser.parse_args()
     ensure_guarded()
     cli, node = args.compiler.resolve(strict=True), args.node.resolve(strict=True)
@@ -110,6 +132,16 @@ def main():
         required_endpoints.append(dict(method=method, path=path, observedId=matches[0]))
     counts = {kind:sum(e["kind"] == kind for e in entities)
               for kind in sorted({e["kind"] for e in entities})}
+    route_shapes = route_shape_counts(entities)
+    shape_counts = {
+        "route-group": route_shapes["routeGroupSegments"],
+        "dynamic": route_shapes["dynamicSegments"],
+        "optional-catch-all": route_shapes["optionalCatchAllSegments"],
+    }
+    required_route_shapes = []
+    for shape in args.require_route_shape:
+        assert shape_counts[shape] > 0, ("Required route shape was not observed", shape, route_shapes)
+        required_route_shapes.append(dict(shape=shape, observedCount=shape_counts[shape]))
     # Missing a declared selected source must fail; the exact bytes stay retained.
     selected = output/"source"/special[0]
     retained = selected.with_name(selected.name+".retained-missing-control")
@@ -133,7 +165,8 @@ def main():
     receipt = dict(status="passed-selected-next-observations", sourceCommit=head, originalTrackedStatus=status,
                    qualificationDriverDigest=driver_digest,
                    captureDigest=capture["digest"], baselineDigest=baseline["digest"], specialFileCount=len(special),
-                   entityKindCounts=counts, requiredEndpointObservations=required_endpoints, compilerDigest=sha(cli.read_bytes()), nodeDigest=sha(node.read_bytes()),
+                   entityKindCounts=counts, routeShapeCounts=route_shapes, requiredRouteShapes=required_route_shapes,
+                   requiredEndpointObservations=required_endpoints, compilerDigest=sha(cli.read_bytes()), nodeDigest=sha(node.read_bytes()),
                    selectedSourcesUnchanged=True, originalHeadAndStatusUnchanged=True,
                    missingSelectedInput="refused", offlineReplay="passed-source-and-tools-configured-paths-unavailable",
                    externalProgramsAbsentFromPath=True, commands=commands,
@@ -142,7 +175,8 @@ def main():
                               proxySemantics="not-established", processDependencyClosure="not-proved; cache-disabled", admission="observations-only",
                               activation="not-performed", fullGoalComplete=False))
     write(output/"receipt.json", receipt)
-    print(json.dumps(dict(status=receipt["status"], specialFileCount=len(special), entityKindCounts=counts)))
+    print(json.dumps(dict(status=receipt["status"], specialFileCount=len(special),
+                          entityKindCounts=counts, routeShapeCounts=route_shapes)))
 
 if __name__ == "__main__":
     main()

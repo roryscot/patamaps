@@ -1,0 +1,89 @@
+--- executed-one-extension/run.py
++++ proposed-port18866/run.py
+@@ -144,7 +144,7 @@
+  build=read(Path(F["build"])/"receipt.json")
+  assert build["status"]=="passed-declared-owner-endpoint-build"
+  # Check required ports without taking over another listener.
+- for port in[18765,18766,13000]:
++ for port in[18765,18866,13000]:
+   s=socket.socket();s.bind(("127.0.0.1",port));s.close()
+  token=secrets.token_hex(16);databaseName="patamaps_auth_"+token[:12];password=secrets.token_urlsafe(32)
+  (B/"database").mkdir(mode=0o700);
+@@ -159,12 +159,12 @@
+  users={k:dict(id="patamaps-"+k+"-"+token,email=k+"-"+token[:12]+"@example.com",password=secrets.token_urlsafe(24))for k in["allowed","denied"]}
+  cfg=dict(apiSource=str(Path(F["owner"])/"packages/api"),site=F["site"],databaseName=databaseName,users=users)
+  write(B/"service-config.private.json",cfg,True)
+- cid=docker("create","--name","patamaps-auth-"+token,"--label","patamaps.auth.owner="+token,"--label","buildctl.project="+str(R),"--label","buildctl.request="+ownership["id"],"--read-only","--user","501:20","--cap-drop","ALL","--security-opt","no-new-privileges:true","--cpus","1","--memory","536870912","--memory-swap","536870912","--pids-limit","128","--log-driver","none","--network","bridge","--publish","127.0.0.1:18766:5432","--mount","type=bind,source="+str(B/"database")+",target=/var/lib/postgresql/data","--mount","type=bind,source="+str(B/"container-passwd")+",target=/etc/passwd,readonly","--mount","type=bind,source="+str(B/"container-group")+",target=/etc/group,readonly","--tmpfs","/tmp:rw,nosuid,nodev,size=67108864","--tmpfs","/var/run/postgresql:rw,nosuid,nodev,size=16777216,uid=501,gid=20","--env-file",str(envfile),F["postgresImage"]).strip()
++ cid=docker("create","--name","patamaps-auth-"+token,"--label","patamaps.auth.owner="+token,"--label","buildctl.project="+str(R),"--label","buildctl.request="+ownership["id"],"--read-only","--user","501:20","--cap-drop","ALL","--security-opt","no-new-privileges:true","--cpus","1","--memory","536870912","--memory-swap","536870912","--pids-limit","128","--log-driver","none","--network","bridge","--publish","127.0.0.1:18866:5432","--mount","type=bind,source="+str(B/"database")+",target=/var/lib/postgresql/data","--mount","type=bind,source="+str(B/"container-passwd")+",target=/etc/passwd,readonly","--mount","type=bind,source="+str(B/"container-group")+",target=/etc/group,readonly","--tmpfs","/tmp:rw,nosuid,nodev,size=67108864","--tmpfs","/var/run/postgresql:rw,nosuid,nodev,size=16777216,uid=501,gid=20","--env-file",str(envfile),F["postgresImage"]).strip()
+  write(B/"container.json",dict(containerId=cid,ownerToken=token,project=str(R)))
+  d=json.loads(docker("inspect",cid))[0];h=d["HostConfig"]
+  assert not d["State"]["Running"]and d["Image"]==F["postgresImage"]
+  assert h["NanoCpus"]==1000000000 and h["Memory"]==h["MemorySwap"]==536870912 and h["PidsLimit"]==128 and h["ReadonlyRootfs"]and not h["AutoRemove"]
+- assert h["PortBindings"]=={"5432/tcp":[{"HostIp":"127.0.0.1","HostPort":"18766"}]}
++ assert h["PortBindings"]=={"5432/tcp":[{"HostIp":"127.0.0.1","HostPort":"18866"}]}
+  assert h["LogConfig"]["Type"]=="none"and h["NetworkMode"]=="bridge"and not h["Privileged"]
+  assert any(x in["no-new-privileges","no-new-privileges:true"]for x in h["SecurityOpt"])
+  assert d["Config"]["Labels"]["patamaps.auth.owner"]==token and d["Config"]["Labels"]["buildctl.request"]==ownership["id"]
+@@ -173,14 +173,14 @@
+  assert {(m["Source"],m["Destination"],m["RW"])for m in binds}=={(str(B/"database"),"/var/lib/postgresql/data",True),(str(B/"container-passwd"),"/etc/passwd",False),(str(B/"container-group"),"/etc/group",False)}
+  assert d["Config"]["User"]=="501:20"and h["CapDrop"]==["ALL"]and not h.get("CapAdd")
+  assert set(h["Tmpfs"])=={"/tmp","/var/run/postgresql"}
+- write(B/"container-limits.json",dict(containerId=cid,cpu=1,memoryBytes=536870912,swapBytes=0,pids=128,readonlyRoot=True,logDriver="none",publishedLoopbackPort=18766,ownedData=str(B/"database"),nativeExclusive=True,maximumObservedOwnedDataBytes=536870912))
++ write(B/"container-limits.json",dict(containerId=cid,cpu=1,memoryBytes=536870912,swapBytes=0,pids=128,readonlyRoot=True,logDriver="none",publishedLoopbackPort=18866,ownedData=str(B/"database"),nativeExclusive=True,maximumObservedOwnedDataBytes=536870912))
+  docker("start",cid);report["servicesStarted"]=1;report["containerId"]=cid;save()
+  end=time.monotonic()+30
+  while True:
+   p=subprocess.run([DOCKER,"exec",cid,"pg_isready","-U","patamaps_owned","-d",databaseName],capture_output=True,timeout=5)
+   if p.returncode==0:break
+   assert time.monotonic()<end,"OWNED_POSTGRES_NOT_READY";time.sleep(.3)
+- env={"PATH":"/usr/bin:/bin:/usr/sbin:/sbin","HOME":str(B/"run/home"),"TMPDIR":str(B/"run/tmp")+"/","LANG":"en_US.UTF-8","ENV_FILE":str(settings),"APP_ENV":"test","ENVIRONMENT":"test","APP_NAME":"Owned Patamaps authentication","API_BASE_URL":"http://127.0.0.1:18765","DATABASE_URL":"postgresql://patamaps_owned:"+password+"@127.0.0.1:18766/"+databaseName,"INTERNAL_API_KEY":secrets.token_urlsafe(32),"JWT_SECRET":secrets.token_urlsafe(48),"MEDIA_BUCKET_NAME":"patamaps-owned-auth","MEDIA_CDN_BASE_URL":"http://127.0.0.1:9","UPLOAD_DIR":str(B/"run/uploads"),"KAFKA_ENABLED":"false","PYTHONPATH":str(Path(F["owner"])/"packages/api")+":"+F["site"],"PYTHONDONTWRITEBYTECODE":"1","CORS_ORIGINS":"http://127.0.0.1:13000,http://localhost:13000"}
++ env={"PATH":"/usr/bin:/bin:/usr/sbin:/sbin","HOME":str(B/"run/home"),"TMPDIR":str(B/"run/tmp")+"/","LANG":"en_US.UTF-8","ENV_FILE":str(settings),"APP_ENV":"test","ENVIRONMENT":"test","APP_NAME":"Owned Patamaps authentication","API_BASE_URL":"http://127.0.0.1:18765","DATABASE_URL":"postgresql://patamaps_owned:"+password+"@127.0.0.1:18866/"+databaseName,"INTERNAL_API_KEY":secrets.token_urlsafe(32),"JWT_SECRET":secrets.token_urlsafe(48),"MEDIA_BUCKET_NAME":"patamaps-owned-auth","MEDIA_CDN_BASE_URL":"http://127.0.0.1:9","UPLOAD_DIR":str(B/"run/uploads"),"KAFKA_ENABLED":"false","PYTHONPATH":str(Path(F["owner"])/"packages/api")+":"+F["site"],"PYTHONDONTWRITEBYTECODE":"1","CORS_ORIGINS":"http://127.0.0.1:13000,http://localhost:13000"}
+  child("migrate",env);child("seed",env)
+  api=child("server",env,True);report["servicesStarted"]=2;save()
+  end=time.monotonic()+30
+--- executed-one-extension/sandbox.sb
++++ proposed-port18866/sandbox.sb
+@@ -3,9 +3,9 @@
+ (deny network*)
+ (allow network-bind (local ip "127.0.0.1:18765"))
+ (allow network-inbound (local ip "127.0.0.1:18765"))
+-(allow network-outbound (remote ip "127.0.0.1:18766"))
++(allow network-outbound (remote ip "127.0.0.1:18866"))
+ (deny file-write*)
+-(allow file-write* (subpath "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/owner-auth-endpoint-20261029/services-one-extension-proposal-20261030/run"))
++(allow file-write* (subpath "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/owner-auth-endpoint-20261029/services-port18866-proposal-20261030/run"))
+ (deny process-exec)
+ (allow process-exec (literal "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3.11") (literal "/Library/Frameworks/Python.framework/Versions/3.11/Resources/Python.app/Contents/MacOS/Python"))
+ (deny file-read* (regex #".*/[.]env.*") (subpath "/Users/admin/.ssh") (subpath "/Users/admin/.aws") (subpath "/Users/admin/.config/gh") (literal "/Users/admin/.netrc"))
+--- executed-one-extension/execution-contract.json
++++ proposed-port18866/execution-contract.json
+@@ -11,7 +11,7 @@
+   "dataScanSeconds": 5,
+   "nativeExclusive": true,
+   "apiPort": 18765,
+-  "databasePort": 18766,
++  "databasePort": 18866,
+   "serviceTotalDeadlineSeconds": 600,
+   "postgresReadinessSeconds": 30,
+   "migrationsSeconds": 120,
+@@ -60,7 +60,7 @@
+   "nextProducerPathsUnavailable": "New source copy, existing dependency snapshot, configured native provider; exact paths restored",
+   "runtimeAssemblyMaximumBytes": 134217728,
+   "runtimeAssemblyMaximumEntries": 8192,
+-  "apiWritableSubtree": "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/owner-auth-endpoint-20261029/services-one-extension-proposal-20261030/run",
+-  "apiPrivateReportsLogsSubtree": "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/owner-auth-endpoint-20261029/services-one-extension-proposal-20261030/run",
++  "apiWritableSubtree": "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/owner-auth-endpoint-20261029/services-port18866-proposal-20261030/run",
++  "apiPrivateReportsLogsSubtree": "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/owner-auth-endpoint-20261029/services-port18866-proposal-20261030/run",
+   "sandboxControlsOutsideWriteProbe": "parent phase path outside permitted run subtree"
+ }
+--- executed-one-extension/launch-config.json
++++ proposed-port18866/launch-config.json
+@@ -6,7 +6,7 @@
+     "--",
+     "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/intel-python-3.13.16-20261013/runtime/python/bin/python3",
+     "-B",
+-    "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/owner-auth-endpoint-20261029/services-one-extension-proposal-20261030/guardian.py"
++    "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/owner-auth-endpoint-20261029/services-port18866-proposal-20261030/guardian.py"
+   ],
+   "cwd": "/Volumes/dev_src_case_sensitive/projects/patamaps"
+ }

@@ -23,6 +23,7 @@ def main():
     parser.add_argument("--runner", nargs=argparse.REMAINDER)
     parser.add_argument("--work", type=Path)
     parser.add_argument("--context", type=Path)
+    parser.add_argument("--prepare-contract", action="store_true")
     parser.add_argument("--isolated-ci", action="store_true")
     argv = sys.argv[1:]
     runner = None
@@ -33,6 +34,8 @@ def main():
             parser.error("--runner requires an executable")
     args = parser.parse_args(argv)
     args.runner = runner
+    if args.prepare_contract and args.context is None:
+        parser.error("--prepare-contract requires --context")
     if args.context is not None:
         args.context = args.context.absolute()
     if os.environ.get("WARGAME_STORAGE_RUN_TOKEN"):
@@ -79,7 +82,17 @@ def main():
                                                 maximumStderrBytes=4096)))
 
     good = "/bin/mkdir -p bundle; printf artifact > bundle/app"
-    plan = dict(profile="patamaps-project-build-1", project=project, workspace=workspace,
+    preparation_path = None
+    original_preparation = None
+    if args.prepare_contract:
+        preparation_path = work / "preparation.json"
+        preparation = dict(profile="patamaps-project-preparation-1",
+            commands=[command("umask 077; /bin/cp input.txt generated-owner.txt")],
+            outputs={"generated-owner.txt": None})
+        original_preparation = json.dumps(preparation)
+        preparation_path.write_text(original_preparation)
+        good += "; /usr/bin/cmp input.txt generated-owner.txt; /bin/cp generated-owner.txt bundle/owner-contract"
+    plan = dict(profile="patamaps-project-build-1", maximumRetainedAttempts=64, project=project, workspace=workspace,
                 buildSteps=[command(good)], verificationSteps=[command('test "$(/bin/cat bundle/app)" = artifact')],
                 outputs=[dict(path="bundle", kind="tree")])
     plan_path = work / "plan.json"
@@ -138,6 +151,9 @@ def main():
             # Context must precede the runner's remainder arguments.
             split=argv.index("--runner")
             argv[split:split]=["--context",str(args.context)]
+        if preparation_path is not None:
+            split = argv.index("--runner")
+            argv[split:split] = ["--preparation", str(preparation_path)]
         if parent_wrapper:
             # Real parent process; exec would erase the parent-death condition.
             argv = [sys.executable, "-c",
@@ -171,6 +187,8 @@ def main():
     if args.context is not None:
         fixed[str(args.context)]=hashlib.sha256(args.context.read_bytes()).hexdigest()
         receipt["contextBindingDigest"]=fixed[str(args.context)]
+    if preparation_path is not None:
+        fixed[str(preparation_path)] = hashlib.sha256(preparation_path.read_bytes()).hexdigest()
     receipt["fixedSourceDigests"] = fixed
     save()
     try:
@@ -178,6 +196,8 @@ def main():
         receipt["controls"].append(verify_guard_groups(ROOT / "scripts/project_watch.py", work / "guard-group-probe"))
         from project_watch_guard_controls import verify_exits
         receipt["controls"].append(verify_exits(ROOT / "scripts/project_watch.py", work / "guard-exit-probe"))
+        from project_watch_guard_controls import verify_inspection_budget
+        receipt["controls"].append(verify_inspection_budget(ROOT / "scripts/project_watch.py", work / "inspection-budget-probe"))
         save()
         start("edits")
         wait_until(lambda: completed("edits", 1), "initial selected build")
@@ -191,6 +211,13 @@ def main():
                 snapshotDigest=expected_context["digest"],nativeSelectedContextRequired=True))
             save()
 
+        if preparation_path is not None:
+            selected = json.loads(pointer())
+            attempt = state / selected["attempt"]
+            assert json.loads((attempt / "preparation.json").read_text()) == preparation
+            assert (attempt / "candidate/bundle/owner-contract").read_bytes() == (owner / "input.txt").read_bytes()
+            receipt["controls"].append(dict(control="native-preparation-consumed-through-watch", result="passed"))
+            save()
         previous = pointer()
         attempts = len(list((state / "attempts").iterdir()))
         time.sleep(1)
@@ -202,6 +229,9 @@ def main():
         wait_until(lambda: completed("edits", 2), "debounced edit")
         assert len(list((state / "attempts").iterdir())) == attempts + 1
         assert pointer() != previous
+        if preparation_path is not None:
+            selected = json.loads(pointer())
+            assert (state / selected["attempt"] / "candidate/bundle/owner-contract").read_text() == "rapid-final"
         receipt["controls"].append(dict(control="initial-edit-debounce-idle", result="passed",
                                         idleCreatedNoAttempt=True, rapidEditsOneAttempt=True))
         previous = pointer()
@@ -217,6 +247,22 @@ def main():
         wait_until(lambda: completed("edits", 3), "recovery")
         assert pointer() == previous  # Native no-op: commands deliberately not repeated.
         receipt["controls"].append(dict(control="recovery-native-noop", result="passed", verification="not-repeated"))
+        if preparation_path is not None:
+            bad_preparation = json.loads(original_preparation)
+            bad_preparation["commands"] = [command("printf preparation-failed >&2; exit 9")]
+            preparation_path.write_text(json.dumps(bad_preparation))
+            wait_until(lambda: sum(e.get("status") == "refused-project-build-update" for e in events("edits")) >= 2,
+                       "failed preparation update")
+            assert pointer() == previous
+            attempts = len(list((state / "attempts").iterdir()))
+            time.sleep(1)
+            assert len(list((state / "attempts").iterdir())) == attempts
+            preparation_path.write_text(original_preparation)
+            wait_until(lambda: completed("edits", 4), "restored preparation native no-op")
+            assert pointer() == previous
+            receipt["controls"].append(dict(control="preparation-key-edit-failure-suppression-recovery",
+                result="passed", previousSelectionPreserved=True, verification="not-repeated"))
+            save()
         finish()
         for case in ("SIGINT", "SIGTERM", "SIGKILL", "parent-death", "runner-death"):
             sig = getattr(signal, case) if case.startswith("SIG") else signal.SIGKILL
@@ -284,9 +330,9 @@ def main():
         start("ignored-runner", runner_override=["/usr/bin/true"])
         wait_until(lambda: refused("ignored-runner"), "ignored runner refusal", timeout=30)
         assert pointer() == previous and len(list((state / "attempts").iterdir())) == attempts
-        assert any(e.get("reason") == "WATCH_SELECTION_DOES_NOT_MATCH_CURRENT_INPUTS" for e in events("ignored-runner"))
+        assert any(e.get("reason") == "WATCH_VERIFICATION_RECORD_REFUSED" for e in events("ignored-runner"))
         receipt["controls"].append(dict(control="ignored-runner-refuses-success", result="passed",
-                                        nativeSelectedBindingsChecked=True, currentInputKeyRequired=True))
+                                        guardedVerificationRecordRequired=True, currentInputKeyRequired=True))
         finish()
         assert all(hashlib.sha256(Path(path).read_bytes()).hexdigest() == expected for path, expected in fixed.items())
         receipt["sourceUnchanged"] = True

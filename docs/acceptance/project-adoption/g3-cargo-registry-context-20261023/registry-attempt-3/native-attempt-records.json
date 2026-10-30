@@ -1,0 +1,139 @@
+{
+  "1792797550389019471-2249": {
+    "build-000.started.json": {
+      "commandDigest": "sha256:13d9a8a4982053e686e96cb9f6cc02d03e08d00b5e0166fc65d1cc457d823e27"
+    },
+    "failure.json": {
+      "previousSelectionPreserved": true,
+      "published": false,
+      "reason": "PROJECT_BUILD_COMMAND: Retained project build refused",
+      "status": "refused"
+    },
+    "build-000.json": {
+      "activation": "not-performed",
+      "ambientEnvironment": "not-inherited",
+      "authorizationNow": "not-evaluated",
+      "captureDigest": "sha256:552534993540ccefd68a185d5a6091bb86d3b667b1c9e0c763dd0e5ce7d14707",
+      "commandDigest": "sha256:13d9a8a4982053e686e96cb9f6cc02d03e08d00b5e0166fc65d1cc457d823e27",
+      "completeBuildContextEstablished": false,
+      "completeExecutableDependencyClosureEstablished": false,
+      "elapsedMs": 10618,
+      "environmentReferences": {
+        "PATH": "path"
+      },
+      "environmentResolution": "captured-nonsecretConfiguration-only",
+      "executable": "/usr/bin/python3",
+      "executableDigestAfter": "sha256:e50d468e8b0adfb05733f5b87b3cff34829c4a8c1aea50c865aa8bdfe4bb150f",
+      "executableDigestBefore": "sha256:e50d468e8b0adfb05733f5b87b3cff34829c4a8c1aea50c865aa8bdfe4bb150f",
+      "executableUnchanged": true,
+      "exitCode": 1,
+      "exitSignal": null,
+      "parentDeathCleanup": "private-supervisor-configured",
+      "profile": "patamaps-project-command-1",
+      "programSucceeded": false,
+      "resolvedExecutable": "/usr/bin/python3.12",
+      "selectedInputsUnchanged": true,
+      "selectionPublication": "not-performed",
+      "status": "refused-project-command",
+      "stderr": {
+        "byteLength": 831,
+        "digest": "sha256:1eaff1658cc9eeb4ed750c7de46d674ff16fb9ec6605c316cd9d462064ad0bd3",
+        "hex": null,
+        "text": "Traceback (most recent call last):\n  File \"/home/runner/work/_temp/patamaps-miniserve-40038899657-1/registry-build/state/attempts/1792797550389019471-2249/candidate/cargo_registry_container.py\", line 232, in <module>\n    main()\n  File \"/home/runner/work/_temp/patamaps-miniserve-40038899657-1/registry-build/state/attempts/1792797550389019471-2249/candidate/cargo_registry_container.py\", line 162, in main\n    status = run(['docker', 'exec', container, '/bin/bash', '-c',\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/_temp/patamaps-miniserve-40038899657-1/registry-build/state/attempts/1792797550389019471-2249/candidate/cargo_registry_container.py\", line 72, in run\n    assert value.returncode == expected, value.stderr[-2048:]\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+      },
+      "stdout": {
+        "byteLength": 0,
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "hex": null,
+        "text": ""
+      },
+      "workingDirectory": "."
+    },
+    "registry-execution.json": {
+      "status": "failed",
+      "image": "busybox@sha256:dc88b80842580654294472735332ec7c7789a4010ec9a68b69f9b88c19abede6",
+      "originalConfiguredCacheMounted": false,
+      "cargoHome": "/work/cargo-home",
+      "workFilesystemBytes": 3221225472,
+      "cpuAllowance": 2,
+      "memoryAllowance": 6442450944,
+      "memorySwapAllowance": 0,
+      "pidsAllowance": 512,
+      "toolchainClosed": false,
+      "ownerTestFixturesClosed": false,
+      "filesDeleted": 0,
+      "capacityObservation": {
+        "uid": 1001,
+        "cpuCount": 4,
+        "availableMemoryBytes": 15589249024,
+        "requiredMemoryBytes": 6942450944
+      },
+      "executorIdentities": {
+        "/home/runner/.rustup/toolchains/1.99.0-x86_64-unknown-linux-gnu/bin/cargo": "sha256:e951141cc55a6cd7b9876d187bd30a3720e6086b99413af95e3b8de1cdd72f14",
+        "/home/runner/.rustup/toolchains/1.99.0-x86_64-unknown-linux-gnu/bin/rustc": "sha256:f3834d26669b03f6855fa54bd2381443123e860167bc0c7a8dd137e5cf6e5e4f",
+        "/usr/bin/docker": "sha256:6435ff9214bf8e0931078fb0980809728cac0a54a526d4f28a26d3e48132b58d"
+      },
+      "containerId": "2dcd32ba7cc2bbff3d09d34a5deb4b633e2bd9f55b8835ce666446cdd5db1d60",
+      "imageId": "sha256:4b3c3c5fa628f793b84f999b8be30200339beb0a017e8546983af9766480029a",
+      "readOnlyMounts": [
+        {
+          "source": "/home/runner/work/_temp/patamaps-miniserve-40038899657-1/registry-build/state/attempts/1792797550389019471-2249/candidate",
+          "destination": "/source"
+        },
+        {
+          "source": "/home/runner/work/_temp/patamaps-miniserve-40038899657-1/registry-build/state/attempts/1792797550389019471-2249/candidate/.cargo-home/registry",
+          "destination": "/registry"
+        },
+        {
+          "source": "/home/runner/work/_temp/patamaps-miniserve-40038899657-1/upstream",
+          "destination": "/test-source"
+        },
+        {
+          "source": "/home/runner/.rustup/toolchains/1.99.0-x86_64-unknown-linux-gnu",
+          "destination": "/home/runner/.rustup/toolchains/1.99.0-x86_64-unknown-linux-gnu"
+        },
+        {
+          "source": "/usr",
+          "destination": "/usr"
+        },
+        {
+          "source": "/usr/bin",
+          "destination": "/bin"
+        },
+        {
+          "source": "/usr/lib",
+          "destination": "/lib"
+        },
+        {
+          "source": "/usr/lib64",
+          "destination": "/lib64"
+        }
+      ],
+      "hostConfigurationVerifiedBeforeStart": true,
+      "hostUser": "1001:1001",
+      "errorClass": "AssertionError",
+      "error": "",
+      "failureContainerState": {
+        "Status": "exited",
+        "Running": false,
+        "Pid": 0,
+        "ExitCode": 1,
+        "Error": "",
+        "OOMKilled": false
+      },
+      "startupDiagnostics": {
+        "exitCode": 0,
+        "stdout": "",
+        "stderr": "/source/registry-build.sh: line 14: awk: command not found\nREGISTRY_STARTUP_FAILED_LINE=14\n"
+      },
+      "containerStopped": true,
+      "guardianCleanupConfirmed": true,
+      "guardianExit": 130,
+      "guardianDiagnostics": {
+        "guardian.stdout": "{\"status\":\"cancelled-project-watch-update\",\"parentExited\":false}\n",
+        "guardian.stderr": "/source/registry-build.sh: line 14: awk: command not found\nREGISTRY_STARTUP_FAILED_LINE=14\n"
+      },
+      "elapsedMs": 10466
+    }
+  }
+}

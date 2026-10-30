@@ -1,3 +1,4 @@
+import type { JsonValue } from "./canonical.js";
 import type { LegacyGraphDocument } from "./legacy-graph.js";
 import type {
   LegacyValidationIssue,
@@ -60,3 +61,7 @@ export declare function renderLegacyGraphDocumentation(
   graph: LegacyGraphDocument,
   correspondences: readonly { id: string }[],
 ): string;
+
+/** Unchecked legacy locale-stable data formatting; never admission. */
+export declare function stableLegacyJson(value: JsonValue, pretty?: boolean): string;
+export declare function digestLegacyValue(value: JsonValue): string;

@@ -1,0 +1,47 @@
+{
+  "status": "passed-native-retention-build",
+  "sourceHead": "0e4b75db957dc421fdac23aa681a9e4660c35391",
+  "sourceFiles": 273,
+  "oldReleaseCliSha256": "c202611fd5e3a2214adf50fe73d0180dcda6039a1ebc996b09f899902b5e7011",
+  "steps": [
+    {
+      "step": "release-build",
+      "argv": [
+        "/Users/admin/.rustup/toolchains/1.99.0-x86_64-apple-darwin/bin/cargo",
+        "build",
+        "--locked",
+        "--offline",
+        "--release",
+        "-p",
+        "patamaps-cli"
+      ],
+      "exitCode": 0,
+      "elapsedSeconds": 320.728
+    },
+    {
+      "step": "native-workspace-tests",
+      "argv": [
+        "/Users/admin/.rustup/toolchains/1.99.0-x86_64-apple-darwin/bin/cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "--release",
+        "-p",
+        "patamaps-workspace",
+        "--test",
+        "workspace",
+        "--",
+        "--test-threads=1"
+      ],
+      "exitCode": 0,
+      "elapsedSeconds": 317.91
+    }
+  ],
+  "filesDeleted": 0,
+  "policyLimitsChanged": false,
+  "binary": "/Volumes/dev_src_case_sensitive/projects/patamaps/target/release/patamaps",
+  "binarySha256": "496bc10e6a2ff71d18ef667cfa4f9b02a935486732577ce04cf428c4ac7abd77",
+  "nativeWorkspaceLogSha256": "81ca2257ec597e475767572eb039519f85bb68dff2850588643205a9c20a049a",
+  "sourceUnchanged": true,
+  "recordedAt": "2026-10-20T18:04:28.917132+00:00"
+}

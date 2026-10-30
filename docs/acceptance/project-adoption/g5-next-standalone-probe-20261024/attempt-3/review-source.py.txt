@@ -1,0 +1,66 @@
+from pathlib import Path
+import subprocess,json,zipfile,io,hashlib
+r=Path("/Volumes/dev_src_case_sensitive/projects/patamaps");gh=r/".tools/intel-gh-2.102.0-20261015/unpacked/gh_2.102.0_macOS_amd64/bin/gh"
+rid=40063648666;revision="fdeb9356339c0c8af606226b73557cbbc1f12e25";aid=12548461848
+def api(p,raw=False):
+ value=subprocess.check_output([str(gh),"api","repos/roryscot/patamaps/"+p],cwd=r,timeout=90)
+ return value if raw else json.loads(value)
+def sha(b):return "sha256:"+hashlib.sha256(b).hexdigest()
+run=api(f"actions/runs/{rid}");meta=api(f"actions/artifacts/{aid}")
+assert run["conclusion"]=="failure" and run["status"]=="completed" and run["head_sha"]==revision
+assert meta["workflow_run"]["id"]==rid and meta["workflow_run"]["head_sha"]==revision and not meta["expired"]
+raw=api(f"actions/artifacts/{aid}/zip",True)
+assert len(raw)==meta["size_in_bytes"]==364781 and sha(raw)==meta["digest"]=="sha256:32cd0fefdc81c5025090512fed392448e92081d1d00307431a3debc2b36b7d83"
+z=zipfile.ZipFile(io.BytesIO(raw));assert len(z.namelist())==len(set(z.namelist()))
+def load(p):return json.loads(z.read(p))
+receipt=load("receipt.json");runtime=load("runtime.json");browser=load("browser-auth.json");probe=load("standalone-probe.json")
+assert receipt["sourceRevision"]==revision and receipt["status"]=="failed" and receipt["error"]=="Standalone tree changed during runtime"
+assert receipt["frameworkBuildEstablished"] and receipt["runtimeEstablished"] and receipt["authenticationAccepted"] and receipt["selectedSourcesUnchangedAfterFailure"] and receipt["rewritePortReservationClosed"]
+assert all(c["exitCode"]==c["expectedExitCode"] for c in receipt["commands"])
+assert runtime["status"]==browser["status"]=="passed" and browser["upstreamPageTests"]==4
+expected=json.loads((r/"docs/acceptance/project-adoption/g5-installed-next-20261024/accepted-40061124534/source-browser-auth.json").read_text())
+assert len(browser["controls"])==28 and {c["name"] for c in browser["controls"]}=={c["name"] for c in expected["controls"]} and all(c["passed"] is True for c in browser["controls"])
+assert runtime["browserControls"]==browser["controls"]
+for key in ["ownedListenersStopped","ownedProcessGroupsStopped","generatedOwnerSecretsAbsentFromEvidence","standaloneServerEntrypoint","configuredPortReservationVerified","configuredPortReservationReleasedForOwnerStart"]:assert runtime[key] is True,key
+for key in ["ownedBrowserStopped","ownedHttpsProxyStopped"]:assert browser[key] is True,key
+assert runtime["databaseUnixSocketsDisabled"] and runtime["databaseTransportChecks"]==dict(authenticatedQuery=True,unixSocketsDisabled=True,loopbackListener=True,loopbackServer=True)
+assert not browser["credentialsCaptured"] and not browser["rawHttpUploaded"] and not browser["traceEnabled"]
+assert set(runtime["driverDigests"])=={"qualify_chatbot_runtime.py","qualify_chatbot_auth.mjs","chatbot_rewrite_profile.py","qualify_chatbot_next.py","qualify_next_standalone.py"}
+for name,digest in runtime["driverDigests"].items():
+ assert sha(subprocess.check_output(["git","show",revision+":scripts/"+name],cwd=r))==digest
+capture=load("logs/text-source-capture.stdout");derived=load("derived-source.json");d={row["path"]:row for row in derived}
+assert len(d)==181 and len(capture["inputs"])==175
+for value in capture["inputs"]:
+ raw_input=value["content"].encode();name=value["receipt"]["path"]
+ assert sha(raw_input)==value["receipt"]["digest"]==d[name]["digest"] and len(raw_input)==value["receipt"]["byteLength"]
+overlay=load("rewrite-overlay.json");profile=overlay["profile"];assert profile["profile"]=="patamaps-chatbot-standalone-proxy-3" and profile["output"]=="standalone"
+assert sha(next(v["content"].encode() for v in capture["inputs"] if v["receipt"]["path"]=="patamaps-rewrite-profile.json"))==overlay["profileDigest"]
+config_text=next(v["content"] for v in capture["inputs"] if v["receipt"]["path"]=="next.config.ts")
+assert 'qualifiedNextConfig.output = "standalone";' in config_text and sha(config_text.encode())==overlay["derivedConfigDigest"]
+request=load("logs/native-compiled-next-observations.input");inputs={v["receipt"]["path"]:v for v in request["inputs"]}
+for value in inputs.values():assert sha(value["content"].encode())==value["receipt"]["digest"]
+configuration=json.loads(inputs["config.json"]["content"])
+assert configuration["configuration"]["output"]=="standalone" and configuration["buildReceiptDigest"]==sha(z.read("logs/owner-production-build.stdout"))
+compiled=load("rewrite-compiled.json");assert compiled["addedRules"]==2 and compiled["originalRulesPreserved"]==4 and compiled["fullNativeRulesPreserved"]
+for key in ["capturedConfigMutationRefusedBeforeMarker","compiledRulesBound","missingProjectionRefused","staleProjectionRefusedAfterRequestRehash"]:assert receipt["rewriteQualification"][key]
+assert probe["helperDigest"]==runtime["driverDigests"]["qualify_next_standalone.py"]
+assert probe["sourceBuildLineage"]==dict(sourceCaptureDigest=capture["digest"],compiledBuildReceiptDigest=configuration["buildReceiptDigest"],configurationProjectionDigest=inputs["config.json"]["receipt"]["digest"])
+tree=probe["producedTree"];assert tree["entries"]==2852 and tree["files"]==2323 and tree["symlinks"]==78 and tree["bytes"]==86092133 and not tree["symlinkTargetsFollowed"]
+for key in ["previousSelectionPreserved","priorAndFinalSelectionVerified","exactPrivateCopyVerified"]:assert probe[key]
+assert not probe["nativeTreeSelected"] and probe["generatedSymlinkRefused"] and not probe["fullRetainedBundleAccepted"] and not probe["producerSourceAndToolsUnavailable"]
+prior=load("logs/standalone-prior-selection.stdout");actual=load("logs/standalone-actual-native-output.stdout");final=load("logs/standalone-final-native-selection-verify.stdout")
+assert prior["status"]=="selected-project-build" and actual["status"]=="refused-project-build" and "PROJECT_BUILD_OUTPUT_SYMLINK" in actual["reason"] and actual["previousSelectionPreserved"] is True and final["status"]=="verified-selected-build-bindings"
+assert receipt["standaloneProbe"]==probe
+mutation=probe["runtimeMutationObservation"]
+assert mutation["before"]==tree and mutation["changedEntries"]==6 and mutation["categories"]==dict(cache=6,diagnostics=0,**{"server-rendered":0,"other":0})
+assert mutation["changes"]==dict(added=6,removed=0,changed=0) and mutation["detailedInventoryPublished"] is False
+assert mutation["after"]["entries"]==2858 and mutation["after"]["files"]==2327 and mutation["after"]["symlinks"]==78 and mutation["after"]["bytes"]-tree["bytes"]==27407
+assert probe["actualStandaloneRuntimePassed"] is True
+expected_engine=json.loads((r/"docs/acceptance/project-adoption/g5-installed-next-20261024/accepted-40061124534/source-receipt.json").read_text())["compiler"]["engine"]
+assert receipt["compiler"]["engine"]==expected_engine
+out=r/"docs/acceptance/project-adoption/g5-next-standalone-probe-20261024/attempt-3"
+verification=dict(status="independently-verified-partial-failed-standalone-run",wholeRunPassed=False,sourceRevision=revision,runId=rid,artifactId=aid,artifactDigest=meta["digest"],artifactBytes=len(raw),artifactExpiresAt=meta["expires_at"],capturedTextInputsVerified=175,driverDigestsMatchedToGit=5,actualStandaloneBrowserGroupsPassed=28,upstreamTestsPassed=4,compiledStandaloneModeAndProducerBindingsVerified=True,nativeSymlinkRefusalAndPriorSelectionVerified=True,allOwnedRuntimesStopped=True,reportedPrivateTree=tree,privateTreeBytesIndependentlyRehashed=False,wholeTreeUnchanged=False,runtimeMutationDetailsAvailable=True,runtimeMutationObservation=mutation,producerSourceAndToolsUnavailable=False,fullRetainedBundleAccepted=False,completeDependencyClosure=False,performanceAccepted=False,filesDeleted=0)
+for name in ["receipt.json","runtime.json","browser-auth.json","standalone-probe.json","rewrite-overlay.json","rewrite-compiled.json"]:(out/name).write_bytes(z.read(name))
+(out/"independent-verification.json").write_text(json.dumps(verification,indent=2)+"\n")
+(out/"review-source.py.txt").write_bytes(Path(__file__).read_bytes())
+print(json.dumps(verification))

@@ -1,0 +1,364 @@
+{
+  "status": "passed-retained-linux-tool-and-library-artifact-scope",
+  "ci": {
+    "run": 39301564209,
+    "url": "https://github.com/roryscot/patamaps/actions/runs/39301564209",
+    "pushedCommit": "2cf2eb9044ca742013ae72fc5b1e47847d932d2d",
+    "testedMerge": "bf16fee2d821034c345eb0731a4b6496d1cf36c6",
+    "testedTree": "873c090300242227addf381f24f743e8a36ad6f0",
+    "localTree": "873c090300242227addf381f24f743e8a36ad6f0",
+    "sameTrackedTree": true,
+    "jobs": [
+      {
+        "id": 118227802167,
+        "name": "Linux aarch64",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 118227802405,
+        "name": "Cross-stack Linux image and browser (amd64)",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 118227802613,
+        "name": "Linux x86_64",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 118227802710,
+        "name": "Cross-stack source bindings (Linux x86_64)",
+        "status": "completed",
+        "conclusion": "success"
+      }
+    ],
+    "allFourJobsPassed": true
+  },
+  "nativeQualification": {
+    "status": "passed-actual-axum-linux-build-scope",
+    "upstream": "https://github.com/tokio-rs/axum.git",
+    "sourceCommit": "fc78d5bcdb276bd6fb53cf2db55e91757eabb469",
+    "commands": [
+      {
+        "label": "source-init",
+        "argv": [
+          "git",
+          "init",
+          "/home/runner/work/_temp/patamaps-actual-axum-39301564209-1/source"
+        ],
+        "exitCode": 0,
+        "seconds": 0.008
+      },
+      {
+        "label": "source-fetch",
+        "argv": [
+          "git",
+          "fetch",
+          "--depth=1",
+          "https://github.com/tokio-rs/axum.git",
+          "fc78d5bcdb276bd6fb53cf2db55e91757eabb469"
+        ],
+        "exitCode": 0,
+        "seconds": 0.315
+      },
+      {
+        "label": "source-checkout",
+        "argv": [
+          "git",
+          "checkout",
+          "--detach",
+          "FETCH_HEAD"
+        ],
+        "exitCode": 0,
+        "seconds": 0.064
+      },
+      {
+        "label": "source-head",
+        "argv": [
+          "git",
+          "rev-parse",
+          "HEAD"
+        ],
+        "exitCode": 0,
+        "seconds": 0.004
+      },
+      {
+        "label": "inventory-4",
+        "argv": [
+          "git",
+          "ls-files",
+          "-z"
+        ],
+        "exitCode": 0,
+        "seconds": 0.004
+      },
+      {
+        "label": "source-status-before",
+        "argv": [
+          "git",
+          "status",
+          "--porcelain=v1"
+        ],
+        "exitCode": 0,
+        "seconds": 0.016
+      },
+      {
+        "label": "cargo-path",
+        "argv": [
+          "rustup",
+          "which",
+          "--toolchain",
+          "1.99.0",
+          "cargo"
+        ],
+        "exitCode": 0,
+        "seconds": 0.008
+      },
+      {
+        "label": "rustc-version",
+        "argv": [
+          "/home/runner/.rustup/toolchains/1.99.0-x86_64-unknown-linux-gnu/bin/rustc",
+          "-vV"
+        ],
+        "exitCode": 0,
+        "seconds": 0.016
+      },
+      {
+        "label": "fetch-locked-linux",
+        "argv": [
+          "/home/runner/.rustup/toolchains/1.99.0-x86_64-unknown-linux-gnu/bin/cargo",
+          "fetch",
+          "--locked",
+          "--target",
+          "x86_64-unknown-linux-gnu"
+        ],
+        "exitCode": 0,
+        "seconds": 1.167
+      },
+      {
+        "label": "request-digest",
+        "argv": [
+          "/home/runner/work/patamaps/patamaps/target/release/patamaps",
+          "json",
+          "digest"
+        ],
+        "exitCode": 0,
+        "seconds": 0.005
+      },
+      {
+        "label": "native-linux-observation",
+        "argv": [
+          "/home/runner/work/patamaps/patamaps/target/release/patamaps",
+          "discover-native"
+        ],
+        "exitCode": 0,
+        "seconds": 0.266
+      },
+      {
+        "label": "build-actual-workspace",
+        "argv": [
+          "/home/runner/.rustup/toolchains/1.99.0-x86_64-unknown-linux-gnu/bin/cargo",
+          "build",
+          "--workspace",
+          "--lib",
+          "--locked",
+          "--offline",
+          "--features",
+          "axum/ws",
+          "--target",
+          "x86_64-unknown-linux-gnu",
+          "--message-format=json"
+        ],
+        "exitCode": 0,
+        "seconds": 14.653
+      },
+      {
+        "label": "test-actual-workspace",
+        "argv": [
+          "/home/runner/.rustup/toolchains/1.99.0-x86_64-unknown-linux-gnu/bin/cargo",
+          "test",
+          "--workspace",
+          "--lib",
+          "--locked",
+          "--offline",
+          "--features",
+          "axum/ws",
+          "--target",
+          "x86_64-unknown-linux-gnu"
+        ],
+        "exitCode": 0,
+        "seconds": 70.455
+      },
+      {
+        "label": "inventory-13",
+        "argv": [
+          "git",
+          "ls-files",
+          "-z"
+        ],
+        "exitCode": 0,
+        "seconds": 0.004
+      },
+      {
+        "label": "source-status-after",
+        "argv": [
+          "git",
+          "status",
+          "--porcelain=v1"
+        ],
+        "exitCode": 0,
+        "seconds": 0.016
+      },
+      {
+        "label": "retained-tool-engine",
+        "argv": [
+          "/home/runner/work/patamaps/patamaps/target/release/patamaps",
+          "engine"
+        ],
+        "exitCode": 0,
+        "seconds": 0.016
+      }
+    ],
+    "controls": [
+      "actual-resolved-linux-metadata-with-explicit-ws",
+      "actual-shared-library-ELF64-x86_64-header",
+      "tampered-architecture-header-refusal",
+      "truncated-ELF-header-refusal",
+      "all-four-actual-workspace-libraries-compiled-on-linux",
+      "actual-upstream-workspace-library-tests"
+    ],
+    "filesDeleted": 0,
+    "applicationAcceptance": false,
+    "linuxTargetCompilationEstablished": true,
+    "limitations": [
+      "Public library workspace, not a deployed HTTP application.",
+      "Cargo registry cache is external; this is not hermetic dependency closure.",
+      "No actual Next deployment or image/browser acceptance is established."
+    ],
+    "compilerDigest": "sha256:9054791c53173c8378d4bc60e4cbeec536ea1bc43497b376046d08cf8fc10d61",
+    "cargoDigest": "sha256:e951141cc55a6cd7b9876d187bd30a3720e6086b99413af95e3b8de1cdd72f14",
+    "rustcDigest": "sha256:f3834d26669b03f6855fa54bd2381443123e860167bc0c7a8dd137e5cf6e5e4f",
+    "rustcVersion": "rustc 1.99.0 (b940084d7 2026-09-28)\nbinary: rustc\ncommit-hash: b940084d7eb6a299eb4bfeb8e34901bc051e7ac4\ncommit-date: 2026-09-28\nhost: x86_64-unknown-linux-gnu\nrelease: 1.99.0\nLLVM version: 23.1.1\n",
+    "sourceFiles": 505,
+    "sourceInventoryDigest": "sha256:5989ce076dabefb2d8514e59e2aa6d154000c9303b8aaee2555a200f65742504",
+    "buildPlatform": "x86_64-unknown-linux-gnu",
+    "buildEnvironment": {
+      "RUSTC": "/home/runner/.rustup/toolchains/1.99.0-x86_64-unknown-linux-gnu/bin/rustc",
+      "CARGO_TARGET_DIR": "/home/runner/work/_temp/patamaps-actual-axum-39301564209-1/target",
+      "CARGO_HOME": "/home/runner/.cargo",
+      "CARGO_INCREMENTAL": "0",
+      "CARGO_BUILD_JOBS": "2",
+      "CARGO_PROFILE_DEV_DEBUG": "0",
+      "CARGO_PROFILE_TEST_DEBUG": "0",
+      "RUST_TEST_THREADS": "1"
+    },
+    "artifacts": [
+      {
+        "file": "target/x86_64-unknown-linux-gnu/debug/libaxum_core.rlib",
+        "digest": "sha256:0e457d8b99414f91dde51185b1775030fc502ca575fdfafd21ee6490b3f6a183",
+        "bytes": 2739416,
+        "target": "axum_core"
+      },
+      {
+        "file": "target/x86_64-unknown-linux-gnu/debug/deps/libaxum_core-52e9fe6945d956a4.rmeta",
+        "digest": "sha256:9272169a4f89340de43d80f3b77478dc68493c2fcb53a98b9c23fe7949c3340f",
+        "bytes": 2167042,
+        "target": "axum_core"
+      },
+      {
+        "file": "target/debug/libaxum_macros.so",
+        "digest": "sha256:50b61fcf383c8e610753b380281938ae786f3cdcdb30419989414016cc6c7fde",
+        "bytes": 4647280,
+        "target": "axum_macros"
+      },
+      {
+        "file": "target/x86_64-unknown-linux-gnu/debug/libaxum_extra.rlib",
+        "digest": "sha256:1bfc536815a4872ef230e25442d37be2019c48009b7f5c969e73a0fa9d2f3738",
+        "bytes": 237738,
+        "target": "axum_extra"
+      },
+      {
+        "file": "target/x86_64-unknown-linux-gnu/debug/deps/libaxum_extra-a3ca2e8457909142.rmeta",
+        "digest": "sha256:0acffce009edf9a3991a5d6531d628505c62288497af82825264e9e063d38493",
+        "bytes": 235502,
+        "target": "axum_extra"
+      },
+      {
+        "file": "target/x86_64-unknown-linux-gnu/debug/libaxum.rlib",
+        "digest": "sha256:4ad75b2691280a581fce3a7307bb584f1b5309b33f424f8bd22667633ee6ab13",
+        "bytes": 7756194,
+        "target": "axum"
+      },
+      {
+        "file": "target/x86_64-unknown-linux-gnu/debug/deps/libaxum-30a3f7d2cad5d2d8.rmeta",
+        "digest": "sha256:7e8cbe9b88037f77b389b82168d33200c1fa688b7ad3e418bd894eba52e11bc3",
+        "bytes": 5646008,
+        "target": "axum"
+      }
+    ],
+    "sharedLibraryArchitecture": {
+      "file": "target/debug/libaxum_macros.so",
+      "format": "ELF64",
+      "byteOrder": "little",
+      "machine": 62,
+      "wrongArchitectureHeaderRefused": true,
+      "truncatedHeaderRefused": true,
+      "scope": "Actual proc-macro shared-library header; Rust archive objects not independently inspected"
+    },
+    "retainedPayload": {
+      "file": "qualified-artifacts.tar.gz",
+      "digest": "sha256:7eb280c46816cddcbcef05b03f86805295111a39e4d7673d162dcd64399e4d81",
+      "bytes": 17629458,
+      "compilerMember": "tool/bin/patamaps",
+      "compilerDigest": "sha256:9054791c53173c8378d4bc60e4cbeec536ea1bc43497b376046d08cf8fc10d61",
+      "engine": {
+        "compiler": "sha256:97c1a1fa1b1721e774bc7ac1bd456f9307835aeae40c25b620965316f8de1e03",
+        "documentType": "executor-description",
+        "governance": "sha256:5f0282418fabb491259c63d396880df37137d4812e5b25ac7b4eaf5c19458524",
+        "schemaVersion": "0.1.0",
+        "scientific": "sha256:4922a8e184b9a56f39f128577068e6c59295fcbdb5cce819e4b5946eea1499b1",
+        "workspace": "sha256:06bf03da155f95d1125b2062a45102b2bd56513f6361b076c1cdb65c172781ad"
+      },
+      "libraryFiles": 7,
+      "allPayloadMembersVerified": true,
+      "scope": "Exact qualification tools/libraries; no registry publication or deployment activation"
+    },
+    "sourceInputsUnchanged": true,
+    "metadataCompilationClaimRemainsFalse": true
+  },
+  "independentInspection": {
+    "status": "verified-retained-linux-artifact-payload",
+    "run": 39301564209,
+    "artifact": 12212840922,
+    "artifactBytes": 17876490,
+    "artifactDigest": "sha256:ac49af0a3e0501677c9057e0936fe1f3cf8e49b5ae1fe719849eca4fb1cbac18",
+    "payloadDigest": "sha256:7eb280c46816cddcbcef05b03f86805295111a39e4d7673d162dcd64399e4d81",
+    "payloadBytes": 17629458,
+    "members": {
+      "tool/bin/patamaps": "sha256:9054791c53173c8378d4bc60e4cbeec536ea1bc43497b376046d08cf8fc10d61",
+      "tool/engine.json": "sha256:63787ce69d0357432b84c071a75d7827f6ae741e4f09d0371f5b714ffb830a63",
+      "licenses/axum-LICENSE": "sha256:008c87afcd2e626eaf564093250bed06dd7efb5732113264bba3dda8f1c556a1",
+      "libraries/target/x86_64-unknown-linux-gnu/debug/libaxum_core.rlib": "sha256:0e457d8b99414f91dde51185b1775030fc502ca575fdfafd21ee6490b3f6a183",
+      "libraries/target/x86_64-unknown-linux-gnu/debug/deps/libaxum_core-52e9fe6945d956a4.rmeta": "sha256:9272169a4f89340de43d80f3b77478dc68493c2fcb53a98b9c23fe7949c3340f",
+      "libraries/target/debug/libaxum_macros.so": "sha256:50b61fcf383c8e610753b380281938ae786f3cdcdb30419989414016cc6c7fde",
+      "libraries/target/x86_64-unknown-linux-gnu/debug/libaxum_extra.rlib": "sha256:1bfc536815a4872ef230e25442d37be2019c48009b7f5c969e73a0fa9d2f3738",
+      "libraries/target/x86_64-unknown-linux-gnu/debug/deps/libaxum_extra-a3ca2e8457909142.rmeta": "sha256:0acffce009edf9a3991a5d6531d628505c62288497af82825264e9e063d38493",
+      "libraries/target/x86_64-unknown-linux-gnu/debug/libaxum.rlib": "sha256:4ad75b2691280a581fce3a7307bb584f1b5309b33f424f8bd22667633ee6ab13",
+      "libraries/target/x86_64-unknown-linux-gnu/debug/deps/libaxum-30a3f7d2cad5d2d8.rmeta": "sha256:7e8cbe9b88037f77b389b82168d33200c1fa688b7ad3e418bd894eba52e11bc3"
+    },
+    "payloadLogicalBytes": 52937102,
+    "testsPassed": 459,
+    "procMacroAndCompilerELF64x86_64IndependentlyInspected": true,
+    "rustArchiveArchitecturesIndependentlyInspected": false,
+    "runtimeExecutionEstablished": false,
+    "filesDeleted": 0
+  },
+  "limitations": [
+    "The selected compiler and proc-macro shared library have independently checked ELF64/x86_64 headers; Rust archive object architectures were not independently inspected.",
+    "Payload hashes establish exact retained bytes, not an execution attestation or independent binary reproducibility.",
+    "Intel managed tool runtime and actual application Linux staging/runtime checks remain separate and unrun at this checkpoint.",
+    "This is not a registry release, package-wide installation, operational authorization or application deployment acceptance."
+  ]
+}

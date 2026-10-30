@@ -1,0 +1,119 @@
+--- executed-corrected-profile/run.py
++++ proposed-database-startup-trace/run.py
+@@ -1,5 +1,5 @@
+ from pathlib import Path
+-import json,os,sys,subprocess,hashlib,secrets,socket,time,signal,urllib.request,urllib.error,datetime
++import json,os,sys,subprocess,hashlib,secrets,socket,time,signal,urllib.request,urllib.error,datetime,resource
+ R=Path("/Volumes/dev_src_case_sensitive/projects/patamaps");B=Path(__file__).resolve().parent
+ sys.path.insert(0,str(R/"scripts"))
+ from bench_axum_retained import LEASE_PROBE,validate_ownership,NODE
+@@ -181,11 +181,48 @@
+  assert d["Config"]["User"]=="501:20"and h["CapDrop"]==["ALL"]and not h.get("CapAdd")
+  assert set(h["Tmpfs"])=={"/tmp","/var/run/postgresql"}
+  write(B/"container-limits.json",dict(containerId=cid,cpu=1,memoryBytes=536870912,swapBytes=0,pids=128,readonlyRoot=True,logDriver="none",publishedLoopbackPort=18866,ownedData=str(B/"database"),nativeExclusive=True,maximumObservedOwnedDataBytes=536870912))
+- docker("start",cid);report["servicesStarted"]=1;report["containerId"]=cid;save()
++ # Capture startup output through the Docker client; daemon log driver stays none.
++ def startup_trace(row):
++  path=B/"postgres-readiness.private.jsonl"
++  payload=(json.dumps(row)+"\n").encode()
++  assert (path.stat().st_size if path.exists()else 0)+len(payload)<=4194304,"OWNED_POSTGRES_TRACE_BOUND"
++  with path.open("ab")as f:f.write(payload)
++  path.chmod(0o600)
++ def startup_state(phase,deadline):
++  remaining=deadline-time.monotonic()
++  assert remaining>0,"OWNED_POSTGRES_"+phase.upper()+"_DEADLINE"
++  process=subprocess.run([DOCKER,"inspect",cid],capture_output=True,text=True,timeout=min(5,remaining))
++  assert process.returncode==0,"OWNED_POSTGRES_INSPECT_FAILED"
++  info=json.loads(process.stdout)[0]
++  assert info["Id"]==cid and info["Config"]["Labels"]["patamaps.auth.owner"]==token and info["Config"]["Labels"]["buildctl.project"]==str(R)
++  state={k:info["State"].get(k)for k in["Status","Running","Restarting","Pid","ExitCode","OOMKilled","Error","StartedAt","FinishedAt"]}
++  startup_trace(dict(phase=phase,state=state,elapsedSeconds=time.monotonic()-startupBegan))
++  return state
++ startupBegan=time.monotonic()
++ with(B/"postgres-startup.stdout.private").open("xb")as out,(B/"postgres-startup.stderr.private").open("xb")as err:
++  os.fchmod(out.fileno(),0o600);os.fchmod(err.fileno(),0o600)
++  postgresAttach=subprocess.Popen([DOCKER,"start","--attach",cid],stdout=out,stderr=err,preexec_fn=lambda:resource.setrlimit(resource.RLIMIT_FSIZE,(4194304,4194304)))
++ write(B/"postgres-attach-process.json",dict(pid=postgresAttach.pid,processGroup=os.getpgrp(),sameGuardedWorkerGroup=True,startedAtUtc=datetime.datetime.now(datetime.timezone.utc).isoformat()))
+  end=time.monotonic()+30
+  while True:
+-  p=subprocess.run([DOCKER,"exec",cid,"pg_isready","-U","patamaps_owned","-d",databaseName],capture_output=True,timeout=5)
++  state=startup_state("start",end)
++  if state["Running"]:break
++  assert postgresAttach.poll()is None,"OWNED_POSTGRES_ATTACH_EXITED_BEFORE_RUNNING"
++  assert state["Status"]not in["exited","dead"],"OWNED_POSTGRES_EXITED_BEFORE_RUNNING"
++  time.sleep(.1)
++ report["servicesStarted"]=1;report["containerId"]=cid;save()
++ end=time.monotonic()+30
++ while True:
++  remaining=end-time.monotonic();assert remaining>0,"OWNED_POSTGRES_NOT_READY"
++  p=subprocess.run([DOCKER,"exec",cid,"pg_isready","-U","patamaps_owned","-d",databaseName],capture_output=True,timeout=min(5,remaining))
++  startup_trace(dict(phase="readiness",elapsedSeconds=time.monotonic()-startupBegan,exitCode=p.returncode,stdout=p.stdout[:4096].decode(errors="replace"),stderr=p.stderr[:4096].decode(errors="replace"),stdoutBytes=len(p.stdout),stderrBytes=len(p.stderr),stdoutSha256=hashlib.sha256(p.stdout).hexdigest(),stderrSha256=hashlib.sha256(p.stderr).hexdigest()))
++  state=startup_state("readiness",end)
++  if not state["Running"]:
++   try:postgresAttach.wait(timeout=5)
++   except subprocess.TimeoutExpired:pass
++   raise RuntimeError("OWNED_POSTGRES_EXITED_BEFORE_READY")
+   if p.returncode==0:break
++  assert postgresAttach.poll()is None,"OWNED_POSTGRES_ATTACH_EXITED_BEFORE_READY"
+   assert time.monotonic()<end,"OWNED_POSTGRES_NOT_READY";time.sleep(.3)
+  env={"PATH":"/usr/bin:/bin:/usr/sbin:/sbin","HOME":str(B/"run/home"),"TMPDIR":str(B/"run/tmp")+"/","LANG":"en_US.UTF-8","ENV_FILE":str(settings),"APP_ENV":"test","ENVIRONMENT":"test","APP_NAME":"Owned Patamaps authentication","API_BASE_URL":"http://127.0.0.1:18765","DATABASE_URL":"postgresql://patamaps_owned:"+password+"@127.0.0.1:18866/"+databaseName,"INTERNAL_API_KEY":secrets.token_urlsafe(32),"JWT_SECRET":secrets.token_urlsafe(48),"MEDIA_BUCKET_NAME":"patamaps-owned-auth","MEDIA_CDN_BASE_URL":"http://127.0.0.1:9","UPLOAD_DIR":str(B/"run/uploads"),"KAFKA_ENABLED":"false","PYTHONPATH":str(Path(F["owner"])/"packages/api")+":"+F["site"],"PYTHONDONTWRITEBYTECODE":"1","CORS_ORIGINS":"http://127.0.0.1:13000,http://localhost:13000"}
+  child("migrate",env);child("seed",env)
+--- executed-corrected-profile/guardian.py
++++ proposed-database-startup-trace/guardian.py
+@@ -24,6 +24,9 @@
+  (B/"owned-container-stop.json").write_text(json.dumps(dict(stopped=True,containerId=None if d is None else d["Id"],containerDeleted=False,dataDeleted=False)))
+ def tick(child):
+  if time.monotonic()-began>600:raise RuntimeError("OWNED_AUTH_PHASE_DEADLINE")
++ for name in["postgres-startup.stdout.private","postgres-startup.stderr.private","postgres-readiness.private.jsonl"]:
++  path=B/name
++  if path.exists()and path.stat().st_size>4194304:raise RuntimeError("OWNED_POSTGRES_DIAGNOSTIC_LOG_BOUND")
+  for n in["migrate","seed","server"]:
+   for suffix in["stdout","stderr"]:
+    p=B/"run"/(n+"."+suffix)
+--- executed-corrected-profile/sandbox.sb
++++ proposed-database-startup-trace/sandbox.sb
+@@ -5,7 +5,7 @@
+ (allow network-inbound (local ip "localhost:18765"))
+ (allow network-outbound (remote ip "localhost:18866"))
+ (deny file-write*)
+-(allow file-write* (subpath "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/owner-auth-endpoint-20261029/services-localhost-profile-proposal-20261030/run"))
++(allow file-write* (subpath "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/owner-auth-endpoint-20261029/services-db-startup-trace-proposal-20261030/run"))
+ (deny process-exec)
+ (allow process-exec (literal "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3.11") (literal "/Library/Frameworks/Python.framework/Versions/3.11/Resources/Python.app/Contents/MacOS/Python"))
+ (deny file-read* (regex #".*/[.]env.*") (subpath "/Users/admin/.ssh") (subpath "/Users/admin/.aws") (subpath "/Users/admin/.config/gh") (literal "/Users/admin/.netrc"))
+--- executed-corrected-profile/execution-contract.json
++++ proposed-database-startup-trace/execution-contract.json
+@@ -60,11 +60,19 @@
+   "nextProducerPathsUnavailable": "New source copy, existing dependency snapshot, configured native provider; exact paths restored",
+   "runtimeAssemblyMaximumBytes": 134217728,
+   "runtimeAssemblyMaximumEntries": 8192,
+-  "apiWritableSubtree": "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/owner-auth-endpoint-20261029/services-localhost-profile-proposal-20261030/run",
+-  "apiPrivateReportsLogsSubtree": "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/owner-auth-endpoint-20261029/services-localhost-profile-proposal-20261030/run",
++  "apiWritableSubtree": "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/owner-auth-endpoint-20261029/services-db-startup-trace-proposal-20261030/run",
++  "apiPrivateReportsLogsSubtree": "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/owner-auth-endpoint-20261029/services-db-startup-trace-proposal-20261030/run",
+   "sandboxControlsOutsideWriteProbe": "parent phase path outside permitted run subtree",
+   "sandboxNetworkHostSelector": "localhost (IPv4 and IPv6 loopback); actual listeners remain127.0.0.1",
+   "profileSyntaxPrecheckMaximumSeconds": 10,
+   "profileSyntaxPrecheckMaximumRecordedStreamBytes": 65536,
+-  "profileSyntaxPrecheckBeforeCredentialsAndDatabase": true
++  "profileSyntaxPrecheckBeforeCredentialsAndDatabase": true,
++  "postgresStartupOutputCapture": "docker start --attach, inherited guarded worker group; guardian stops exact owned container before group cleanup",
++  "postgresAttachPerStreamHardLimitBytes": 4194304,
++  "postgresReadinessTraceMaximumBytes": 4194304,
++  "postgresReadinessPerResponseRecordedBytes": 4096,
++  "postgresStartDeadlineSeconds": 30,
++  "postgresReadinessDeadlineSeconds": 30,
++  "postgresEarlyExitFails": true,
++  "postgresDaemonLogDriverUnchanged": "none"
+ }
+--- executed-corrected-profile/launch-config.json
++++ proposed-database-startup-trace/launch-config.json
+@@ -6,7 +6,7 @@
+     "--",
+     "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/intel-python-3.13.16-20261013/runtime/python/bin/python3",
+     "-B",
+-    "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/owner-auth-endpoint-20261029/services-localhost-profile-proposal-20261030/guardian.py"
++    "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/owner-auth-endpoint-20261029/services-db-startup-trace-proposal-20261030/guardian.py"
+   ],
+   "cwd": "/Volumes/dev_src_case_sensitive/projects/patamaps"
+ }

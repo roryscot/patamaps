@@ -5,8 +5,10 @@ import hashlib
 import io
 import json
 import subprocess
+import sys
 import tarfile
 from pathlib import Path
+from package_source import SourcePayload, include_linked_evidence, MAX_SOURCE_BYTES
 
 ROOT = Path(__file__).resolve().parents[1]
 parser = argparse.ArgumentParser()
@@ -15,6 +17,7 @@ parser.add_argument("--activator-binary", type=Path, help="Optional separately v
 parser.add_argument("--output", type=Path, required=True)
 parser.add_argument("--build-profile", choices=["release", "development", "unspecified"], default="unspecified")
 parser.add_argument("--acceptance-output", type=Path, help="Exact current receipt directory kept beside this package, outside its source payload")
+parser.add_argument("--check-scope", action="store_true", help="Validate bounded source/evidence selection without creating archives or executing a binary")
 args = parser.parse_args()
 binary = args.binary.resolve()
 output = args.output.resolve()
@@ -40,7 +43,8 @@ def archive(path, files, prefix):
                     entry.mtime = 0
                     tar.addfile(entry, io.BytesIO(data))
 
-source = {}
+payload = SourcePayload(ROOT)
+source = payload.files
 for directory in ["crates", "fixtures", "relation-packs", "schemas", "sdk", "adapters", "scripts", "examples", "vendor"]:
     for path in sorted((ROOT / directory).rglob("*")):
         if path.is_file() and not any(p in {"__pycache__", "node_modules", ".DS_Store", "target"} for p in path.parts):
@@ -50,28 +54,33 @@ for directory in ["crates", "fixtures", "relation-packs", "schemas", "sdk", "ada
                 or path.name in {"next-env.d.ts", "tsconfig.tsbuildinfo"}
             ):
                 continue
-            source[relative.as_posix()] = path.read_bytes()
+            payload.add(relative.as_posix(), path)
 for name in ["Cargo.toml", "Cargo.lock", "rust-toolchain.toml", "LICENSE", "NOTICE", "README.md", "BUILD_PLAN.md", "docs/SPEC.md", "docs/TEST_CLASSIFICATION.md"]:
-    source[name] = (ROOT / name).read_bytes()
+    payload.add(name, ROOT / name)
+# Ship the user-facing development workflow with exact source installations.
+for path in sorted((ROOT / "docs/guides").glob("*.md")):
+    payload.add(path.relative_to(ROOT).as_posix(), path)
+# The support guide links to the adoption plan; keep that source navigation usable.
+for path in sorted((ROOT / "docs/plans").glob("*.md")):
+    payload.add(path.relative_to(ROOT).as_posix(), path)
 for path in (ROOT / "docs/decisions").glob("*.md"):
-    source[path.relative_to(ROOT).as_posix()] = path.read_bytes()
+    payload.add(path.relative_to(ROOT).as_posix(), path)
 for path in (ROOT / "docs/licenses").rglob("*"):
     if path.is_file():
-        source[path.relative_to(ROOT).as_posix()] = path.read_bytes()
+        payload.add(path.relative_to(ROOT).as_posix(), path)
 for path in (ROOT / "docs/history").rglob("*"):
     if path.is_file():
-        source[path.relative_to(ROOT).as_posix()] = path.read_bytes()
-# The installation receipt identifies these archives and remains beside them,
-# rather than recursively entering the bundle it verifies. Historical archives
-# remain in the repository. Include all other acceptance records for inspection.
-for path in (ROOT / "docs/acceptance").rglob("*"):
-    relative = path.relative_to(ROOT / "docs/acceptance")
-    if acceptance_output and path.is_relative_to(acceptance_output):
-        continue
-    if path.is_file() and relative.parts[0] not in {"distributions", "source-snapshots"} and relative.as_posix() != "native-installation.json":
-        source[path.relative_to(ROOT).as_posix()] = path.read_bytes()
+        payload.add(path.relative_to(ROOT).as_posix(), path)
+# Keep required evidence navigation, not every previous generated test output.
+# Historical records stay in Git/the evidence repository and are never deleted.
+source_evidence = include_linked_evidence(payload, acceptance_output)
 inventory = [{"path": name, "digest": digest(data), "bytes": len(data)} for name, data in sorted(source.items())]
 source["source-inventory.json"] = (json.dumps(inventory, indent=2) + "\n").encode()
+if sum(map(len, source.values())) > MAX_SOURCE_BYTES:
+    raise ValueError("Source payload plus inventory exceeds the package budget")
+if args.check_scope:
+    print(json.dumps({"status":"validated-source-package-scope","sourceFiles":len(inventory),"sourceBytesIncludingInventory":sum(map(len,source.values())),"linkedEvidence":source_evidence,"archivesCreated":False,"binaryExecuted":False},indent=2))
+    sys.exit(0)
 engine = json.loads(subprocess.check_output([str(binary), "engine"]))
 rustc = str(Path.home() / ".cargo/bin/rustc")
 toolchain = subprocess.check_output([rustc, "-vV"], text=True)
@@ -81,7 +90,8 @@ receipt = {"schemaVersion": "0.1.0", "status": "unpublished-draft", "target": ta
            "buildProfile": args.build_profile,
            "buildProvenance": "Caller-declared profile; hashing and source identity do not attest a reproducible or authorized binary",
            "sourceInventoryDigest": digest(source["source-inventory.json"]),
-           "protectedActivationAcceptance": "recorded-separately"}
+           "protectedActivationAcceptance": "recorded-separately",
+           "sourceEvidence": source_evidence, "maximumSourcePayloadBytes": MAX_SOURCE_BYTES}
 if acceptance_output:
     receipt["acceptanceOutputOutsideSourcePayload"] = acceptance_output.relative_to(ROOT).as_posix()
 if args.activator_binary:

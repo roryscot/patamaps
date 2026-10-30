@@ -67,7 +67,8 @@ struct CargoConfig {
     workspace_members: CargoMemberMode,
     #[serde(default)]
     workspace_exclusions: CargoExclusionMode,
-    lockfile: String,
+    #[serde(default)]
+    lockfile: Option<String>,
     cargo: String,
     cargo_digest: String,
     rustc: String,
@@ -93,6 +94,7 @@ enum CargoMemberMode {
     #[default]
     LiteralPaths,
     BoundedDirectoryGlobs,
+    BoundedSegmentGlobs,
 }
 
 #[derive(Clone, Copy, Default, Deserialize, PartialEq, Eq)]
@@ -207,31 +209,60 @@ fn expand_member_filtered(
     inputs: &Inputs<'_>,
     exclusions: &BTreeSet<String>,
 ) -> Result<(Vec<String>, Vec<String>), Error> {
+    expand_member_filtered_mode(
+        root,
+        base,
+        pattern,
+        inputs,
+        exclusions,
+        CargoMemberMode::BoundedDirectoryGlobs,
+    )
+}
+
+fn expand_member_filtered_mode(
+    root: &Path,
+    base: &Path,
+    pattern: &str,
+    inputs: &Inputs<'_>,
+    exclusions: &BTreeSet<String>,
+    mode: CargoMemberMode,
+) -> Result<(Vec<String>, Vec<String>), Error> {
+    let partial_segment = mode == CargoMemberMode::BoundedSegmentGlobs;
     let parts = pattern.split('/').collect::<Vec<_>>();
-    if pattern.len() > 4096
+    if mode == CargoMemberMode::LiteralPaths
+        || pattern.len() > 4096
         || parts.len() > 32
         || parts.iter().any(|s| {
             s.is_empty()
                 || *s == "."
                 || *s == ".."
                 || s.contains(['\\', '?', '[', ']', '{', '}', ':'])
-                || (*s != "*" && s.contains('*'))
+                || (!partial_segment && *s != "*" && s.contains('*'))
         })
-        || parts.iter().filter(|s| **s == "*").count() != 1
+        || parts.iter().map(|s| s.matches('*').count()).sum::<usize>() != 1
     {
         return Err(refused(
             "NATIVE_CARGO_MEMBERS",
-            "Expected one complete star directory segment and normalized literal segments",
+            if partial_segment {
+                "Expected one star in one directory segment and normalized literal segments"
+            } else {
+                "Expected one complete star directory segment and normalized literal segments"
+            },
         ));
     }
-    let star = parts.iter().position(|s| *s == "*").expect("checked star");
+    let star = parts
+        .iter()
+        .position(|s| s.contains('*'))
+        .expect("checked star");
+    let (name_prefix, name_suffix) = parts[star].split_once('*').expect("checked star");
     let prefix = parts[..star]
         .iter()
         .fold(base.to_path_buf(), |p, s| p.join(s));
     member_directory(root, &prefix)?;
     let mut names = Vec::new();
-    for entry in fs::read_dir(&prefix)? {
-        if names.len() >= 1024 {
+    for (enumerated, entry) in fs::read_dir(&prefix)?.enumerate() {
+        // Bound all inspected entries, including names that do not match.
+        if enumerated >= 1024 {
             return Err(refused(
                 "NATIVE_CARGO_MEMBERS",
                 "Member directory enumeration exceeds 1024 entries",
@@ -247,6 +278,12 @@ fn expand_member_filtered(
                 "NATIVE_CARGO_MEMBERS",
                 "Member name must be normalized",
             ));
+        }
+        if name.len() < name_prefix.len() + name_suffix.len()
+            || !name.starts_with(name_prefix)
+            || !name.ends_with(name_suffix)
+        {
+            continue;
         }
         // Cargo's star matches files as well; refuse before it could inspect an
         // unintended path. This conservative subset requires ordinary directories.
@@ -838,12 +875,10 @@ fn validate_manifest_paths(
         }
         Ok(())
     }
-    if exclusion_mode == CargoExclusionMode::LiteralPaths
-        && mode != CargoMemberMode::BoundedDirectoryGlobs
-    {
+    if exclusion_mode == CargoExclusionMode::LiteralPaths && mode == CargoMemberMode::LiteralPaths {
         return Err(refused(
             "NATIVE_CARGO_EXCLUSIONS",
-            "Literal exclusions require bounded-directory-globs mode",
+            "Literal exclusions require an explicit bounded member mode",
         ));
     }
     let mut expansions = Vec::new();
@@ -864,7 +899,7 @@ fn validate_manifest_paths(
         if let Some(workspace) = workspace
             && let Some(members) = workspace.get("members").and_then(Item::as_array)
         {
-            if mode == CargoMemberMode::BoundedDirectoryGlobs && members.len() > 128 {
+            if mode != CargoMemberMode::LiteralPaths && members.len() > 128 {
                 return Err(refused(
                     "NATIVE_CARGO_MEMBERS",
                     "At most 128 member declarations are supported",
@@ -875,21 +910,22 @@ fn validate_manifest_paths(
                     .as_str()
                     .ok_or_else(|| refused("NATIVE_CARGO_MEMBERS", "Member is not a string"))?;
                 if value.contains(['*', '?', '[', ']', '{', '}']) {
-                    if mode != CargoMemberMode::BoundedDirectoryGlobs
+                    if mode == CargoMemberMode::LiteralPaths
                         || (workspace.get("exclude").is_some()
                             && exclusion_mode != CargoExclusionMode::LiteralPaths)
                     {
                         return Err(refused(
                             "NATIVE_CARGO_MEMBERS",
-                            "Glob expansion requires bounded-directory-globs and an explicit supported exclusion policy",
+                            "Glob expansion requires an explicit bounded member mode and a supported exclusion policy",
                         ));
                     }
-                    let (manifests, excluded) =
-                        if exclusion_mode == CargoExclusionMode::LiteralPaths {
-                            expand_member_filtered(root, &base, value, inputs, &exclusions)?
-                        } else {
-                            (expand_member(root, &base, value, inputs)?, Vec::new())
-                        };
+                    let (manifests, excluded) = if mode == CargoMemberMode::BoundedSegmentGlobs {
+                        expand_member_filtered_mode(root, &base, value, inputs, &exclusions, mode)?
+                    } else if exclusion_mode == CargoExclusionMode::LiteralPaths {
+                        expand_member_filtered(root, &base, value, inputs, &exclusions)?
+                    } else {
+                        (expand_member(root, &base, value, inputs)?, Vec::new())
+                    };
                     expanded_count += manifests.len() + excluded.len();
                     if expanded_count > 1024 || expansions.len() >= 128 {
                         return Err(refused(
@@ -959,6 +995,39 @@ fn tool(
     })?;
     Ok(out)
 }
+fn validate_cargo_lockfile(
+    view: DependencyView,
+    lockfile: Option<&str>,
+    inputs: &Inputs<'_>,
+    root: &Path,
+    workspace_root: &Path,
+) -> Result<(), Error> {
+    let Some(lockfile) = lockfile else {
+        return if view == DependencyView::Resolved {
+            Err(refused(
+                "NATIVE_CARGO_LOCK",
+                "Resolved Cargo observations require a captured workspace Cargo.lock",
+            ))
+        } else {
+            Ok(())
+        };
+    };
+    let Some(content) = inputs.get(lockfile) else {
+        return Err(refused(
+            "NATIVE_CARGO_INPUT",
+            format!("Required captured input unavailable: {lockfile}"),
+        ));
+    };
+    parse_toml(lockfile, content)?;
+    if live_path(root, lockfile)? != workspace_root.join("Cargo.lock") {
+        return Err(refused(
+            "NATIVE_CARGO_LOCK",
+            "Lockfile does not belong to declared workspace root",
+        ));
+    }
+    Ok(())
+}
+
 fn cargo_entities(
     request: &AdapterRequest,
     inputs: &Inputs<'_>,
@@ -967,7 +1036,7 @@ fn cargo_entities(
 ) -> Result<(Vec<Value>, Value), Error> {
     let manifest = config.manifest.as_str();
     let workspace_manifest = config.workspace_manifest.as_str();
-    let lockfile = config.lockfile.as_str();
+    let lockfile = config.lockfile.as_deref();
     let cargo = config.cargo.as_str();
     let cargo_digest = config.cargo_digest.as_str();
     let rustc = config.rustc.as_str();
@@ -977,7 +1046,7 @@ fn cargo_entities(
     let features = config.features.as_slice();
     let default_features = config.default_features;
     let view = config.view;
-    for path in [manifest, workspace_manifest, lockfile] {
+    for path in [manifest, workspace_manifest] {
         if !inputs.contains_key(path) {
             return Err(refused(
                 "NATIVE_CARGO_INPUT",
@@ -1004,19 +1073,12 @@ fn cargo_entities(
             "Invalid feature/platform context",
         ));
     }
-    parse_toml(lockfile, inputs[lockfile])?;
     let manifest_path = live_path(root, manifest)?;
     let workspace_path = live_path(root, workspace_manifest)?;
     let workspace_root = workspace_path.parent().expect("manifest parent");
     let declared = parse_toml(workspace_manifest, inputs[workspace_manifest])?;
     validate_cargo_root(config.root_mode, &manifest_path, &workspace_path, &declared)?;
-
-    if live_path(root, lockfile)? != workspace_root.join("Cargo.lock") {
-        return Err(refused(
-            "NATIVE_CARGO_LOCK",
-            "Lockfile does not belong to declared workspace root",
-        ));
-    }
+    validate_cargo_lockfile(view, lockfile, inputs, root, workspace_root)?;
     let cargo_home = Path::new(cargo_home);
     if !cargo_home.is_absolute() || !cargo_home.is_dir() {
         return Err(refused(
@@ -1319,8 +1381,14 @@ fn cargo_entities(
         "rustc":{"path":rustc_path,"digest":actual_rustc,"version":std::str::from_utf8(&rustc_version).map_err(|_|refused("NATIVE_TOOL_UTF8","Rustc version output is not UTF-8"))?},
         "argv":args,"metadataDigest":byte_digest(&raw),"metadataBytes":std::str::from_utf8(&raw).map_err(|_|refused("NATIVE_TOOL_UTF8","Cargo metadata is not UTF-8"))?,
         "possibleExecutableInputs":executable_inputs,"dependencyExecutableInventoryAvailable":view==DependencyView::Resolved,"compilationEstablished":false,"buildScriptsExecuted":false,"completeExecutableDependencyClosureEstablished":false});
-    if config.workspace_members == CargoMemberMode::BoundedDirectoryGlobs {
-        receipt["workspaceMembers"] = json!({"mode":"bounded-directory-globs", "expansions":member_expansions, "preAndPostObservedEqual":true});
+    if config.workspace_members != CargoMemberMode::LiteralPaths {
+        let mode = if config.workspace_members == CargoMemberMode::BoundedSegmentGlobs {
+            "bounded-segment-globs"
+        } else {
+            "bounded-directory-globs"
+        };
+        receipt["workspaceMembers"] =
+            json!({"mode":mode, "expansions":member_expansions, "preAndPostObservedEqual":true});
         if config.workspace_exclusions == CargoExclusionMode::LiteralPaths {
             receipt["workspaceMembers"]["exclusionMode"] = json!("literal-paths");
         }

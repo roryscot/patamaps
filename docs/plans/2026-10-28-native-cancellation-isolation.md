@@ -1,0 +1,523 @@
+# Native cancellation ownership isolation
+
+Status: strict kernel/guardian controls, live collection and actual retained-owner
+unchanged build with exact lock access pass on Intel macOS15.8.1. Installed controller
+registration, global ownership integration and automatic release remain unqualified.
+This follows the actual
+[parent-death release failure](../acceptance/project-adoption/original-owner-active-parent-death-20261028/receipt.json).
+The approved metadata recovery is complete. Full G0–G6 adoption and W0/W1 remain
+open; the original no-op/idle/SIGTERM pass remains accepted.
+
+## Scope and acceptance
+
+The failure is in the native cancellation ownership boundary. A dead process
+group and unchanged container IDs cannot exclude work inside an existing
+container. Preserve the current conservative guard for every unconfined or
+uncertain workload. Do not stop the unrelated database or weaken its checks.
+
+First qualify a fixed, opt-in Darwin single-process inspection primitive.
+It must deny new processes, network/Unix connections, broker lookup and writes
+outside its declared private work directory. Start a new session, close extra
+descriptors, and give the payload pipe-based standard streams. Existing open
+descriptors are significant: Apple's local sandbox(7) says restrictions are
+generally checked when acquiring resources. A network-only rule is insufficient.
+The installed sandbox-exec(1) also labels the tool deprecated; qualify only the
+observed host/runtime and refuse unavailable/changed enforcement.
+
+The primitive is for inspection, not arbitrary builds that fork. It grants
+filesystem reads required by the bound tools; existing source/configuration
+capture allowlists still apply. It does not establish CPU/memory quotas,
+general sandbox escape resistance or automatic reservation release.
+
+## Increment order
+
+1. Inspect current supervisor code, platform documentation and failure receipts.
+2. Implement the fixed primitive and a guarded real-kernel qualifier using
+   test-owned files, socket listeners and signal handlers only. Freeze20
+   positive/negative controls, four root refusals, ordinary unsandboxed endpoint
+   baselines, exec persistence, fork/posix_spawn refusal, session identity and
+   descriptor/connected-stdin closure. Preserve all attempt outputs and sources.
+   Initial qualification plus at most two evidence-backed repairs; do not
+   remove controls or broaden network/IPC/process/write permissions for a pass.
+3. Review trusted-controller integration into existing execution contracts.
+   Only a verified isolated path may suppress preexisting-container uncertainty;
+   declarations, environment flags or a child-reported token alone cannot.
+   Keep process/stream/container stop checks and default fallback unchanged.
+   No installed supervisor modification or parallel activation occurs in step2.
+4. Verify integration with controlled cancellation/crash and enforcement-change
+   refusals before proposing another bounded real-owner parent-death case.
+   Bind exact helper/CLI/config/runtime identities. The previous case approval
+   and its recovery approval are consumed; they do not authorize a repeat.
+5. Close actual parent-death only after the real case meets the unchanged60s
+   release criterion. Continue changed-generation, authenticated-owner,
+   deployment, installed-consumer and actual performance requirements afterward.
+
+All allocating qualification uses the existing Intel canonical supervisor:
+4GB growth,500MB reserve,100GB retention, native-exclusive fallback.
+No file deletion, service interruption, resource-policy increase, VM, registry/
+production/trust activation or parallel activation is included.
+
+## Platform evidence
+
+Use the current host's Apple sandbox-exec(1), sandbox(7) and public system
+profiles as execution-specific evidence, including descriptor acquisition and
+inheritance rules. Apple's [App Sandbox documentation](https://developer.apple.com/documentation/security/protecting-user-data-with-app-sandbox)
+describes broader sandbox capabilities; it is not a specification for this
+deprecated command's private profile language. Actual kernel denial tests are
+required before making an enforcement claim.
+
+
+## Kernel prerequisite result
+
+[Independent review](../acceptance/project-adoption/native-inspection-kernel-20261028/receipt.json)
+passed all20 frozen kernel controls, four unsafe-root refusals and four
+unsandboxed endpoint baselines on Intel macOS15.8.1. Exec-in-place retained the
+restrictions; fork/posix_spawn, outside writes/signals, TCP4/TCP6/Unix and Mach
+lookup denied. The connected-stdin and explicitly inheritable extra-descriptor
+controls passed. Allowed fixture read/write succeeded. All known test processes
+stopped and the canonical reservation released. Attempt0 passed without repairs;
+all sources, outputs and fixture files remain preserved.
+
+This does not qualify automatic reservation release, arbitrary builds, native
+CPU/memory enforcement or the actual owner under this profile. Next inspect the
+existing read-only CLI under the same fixed primitive, then integrate only a
+trusted controller whose entire untrusted execution is demonstrably confined.
+The installed guard and native fallback have not changed.
+
+
+## Existing-owner read-only compatibility
+
+The [independent compatibility review](../acceptance/project-adoption/native-inspection-core-compatibility-20261028/receipt.json)
+passes all three bound Native CLI calls under the fixed profile: engine identity,
+original input-key observation with commandsExecuted=false, and actual selected
+build binding verification. The protected owner state was outside every writable
+root; pointer, artifact manifest, ledger and one application-build attempt remain
+unchanged. CLI/helper/system-sandbox executable digests matched before/after,
+known payloads stopped and the separate canonical reservation released.
+No application build, owner watch/crash retry or installed-supervisor change ran.
+
+This qualifies the read-only commands with the existing development CLI, not a
+general build executor or automatic cancellation release. The ordinary native
+guard still retains container uncertainty on cancellation.
+
+## Trusted-controller integration contract to implement
+
+Reuse the existing watcher guardian and selected-verification contracts. Keep
+payloads inside the fixed profile and close all capabilities outside its three
+data pipes. Trusted Python supervision must use fixed registered source/runtime
+bindings, isolated startup and no user callback loading; a caller-provided digest
+or environment declaration alone is insufficient.
+
+Before allowing release with preexisting containers, require all of the following:
+
+- Canonical private write paths disjoint from the controller, runtime, compiler,
+  frozen descriptor, installed control code and all other trusted inputs.
+- A dedicated control channel available only to trusted guardians. Restricted
+  payloads must not inherit it; stdout, child tokens and caller flags cannot
+  provide ownership proof.
+- Explicit launch-pending and registered-payload states before sealing ownership.
+  Missing/malformed records, changed bindings or uncertain process identity keep
+  the existing conservative hold. A parent crash during an unsealed launch must
+  not be misreported as complete ownership.
+- Stop confirmation for every registered native group and trusted guardian,
+  plus data/control-channel closure. Exercise early stdout closure, ignored
+  SIGTERM, parent/owner crashes and false-proof attempts before activation.
+- The unchanged-only project-build path must first qualify its driver-lock write
+  requirement against an explicitly owned state root. Do not grant the whole
+  project write access merely to make an inspection pass.
+
+Use an opt-in functional inspection mode and preserve legacy behavior for
+unconfined work. Keep native execution exclusive, CPU/memory enforcement
+unclaimed, performance windows exclusive and existing diagnostic requirements.
+Neither the controller integration nor another actual parent-death trial is
+qualified by the prerequisite and compatibility receipts above.
+
+
+## I3a guardian and verification adapter
+
+Implement a proposed, uninstalled adapter around the existing guardian and
+selected-verification functions. Default watcher and container behavior remain
+unchanged. The adapter starts the trusted guardian with isolated Python startup,
+sanitized loader environment, a frozen descriptor and a separate pipe for pending,
+started and stopped records. Restricted payloads inherit none of that pipe.
+
+Bind the helper, watcher, primitive, Python executable, sandbox executable and
+payload before launch and after stop. These are execution bindings, not an
+installed registration or a complete runtime/stdlib attestation. Keep automatic
+release unqualified and do not change the installed supervisor.
+
+Observable acceptance: real restricted success/failure, normal output and matching
+input-key verification through the adapter; retained stop on early stdout closure;
+ignored-SIGTERM escalation; actual controlled owner SIGKILL cleanup; no native
+control-fd inheritance/false-proof acceptance; changed descriptor/source and output/
+time budget refusals. Validate both default watcher regressions and adapter
+controls under the canonical exclusive guard. Initial control run plus at most
+two evidence-backed repairs; retain every attempt. No actual-owner retrial,
+unchanged-build driver-lock grant, global installation or release activation is
+included in this increment.
+
+
+## I3a control result
+
+[Independent review](../acceptance/project-adoption/native-inspection-guardian-20261028/receipt.json)
+passes ten real-kernel guardian controls and all eleven existing watcher policy
+controls. Initial overflow refusal exposed missing caller-side guardian/payload
+exit correspondence; one repair adds explicit refusal while preserving every
+criterion. Both attempts remain private. The review checks thirteen adapter
+calls, fifteen complete lifecycles and one deliberately incomplete timeout
+lifecycle, plus36 observed stopped test processes and canonical release.
+
+Controlled actual-parent SIGKILL, ignored-SIGTERM escalation, early stdout
+closure, closed native control descriptors, false/missing/malformed proof,
+changed executable/descriptor and output/time limits pass. The existing watcher
+input/selection protocol runs through the opt-in callback without replacing
+native verification. This is proposed source, not installed supervisor acceptance.
+The fixed primitive is unchanged. The next compatibility check must use the
+retained owner's actual CLI before registering this source for global ownership.
+Hardlink/IPC counterexamples, complete runtime/source registration, guardian
+crash/unsealed launch handling, driver-lock permission and global release
+integration still need qualification. Native remains exclusive; parallelfalse.
+
+
+## I3a actual retained-owner compatibility result
+
+[Independent review](../acceptance/project-adoption/native-inspection-guardian-core-20261028/receipt.json)
+passes the actual accepted CLI's engine, selected-build verification and current
+input-key observation through the proposed guardian and existing
+verify_selected_step logic. The original pointer, artifact manifest and ledger
+match accepted preimages; the one application-build attempt remains unchanged.
+All13 observed processes stopped and the canonical reservation released.
+
+Existing runner-death, five exit and nine inspection-budget controls pass.
+The first compatibility coordinator stopped before real CLI calls because its
+synthetic argument parser inherited the outer reservation; the second/final
+increment repair supplies that fixture's intended environment and verifies
+restoration. The allocating coordinator and actual CLI remained guarded.
+Both failed attempts and all successful raw/source evidence are retained.
+I3a is complete at its two-repair limit; no further automatic repairs/retries
+are included. No actual owner watch/crash retrial or application build ran.
+
+## I3b remaining integration
+
+The installed guard is unchanged. Next bind registered closed controller and
+runtime/OS sources, with writable paths protected against aliases; qualify the
+hardlink/IPC assumptions and exact unchanged-build driver.lock grant. The global
+collector must observe pending/started records during execution, account for
+every native group and guardian, and retain uncertainty on missing proof,
+guardian death or interrupted/unsealed launches. The proposed local adapter
+currently validates its private pipe after completion; that is not live global
+ownership registration. Exercise those crash/refusal paths in a staged candidate
+before installing a new release predicate. Native exclusive fallback and
+parallelfalse remain. Another actual-owner parent-death trial needs its own
+bounded, concrete proposal after integration is independently qualified.
+
+
+## I3b first increment: strict profile and exact unchanged-build lock
+
+I3a is complete; its repair budget remains consumed. This distinct increment
+adds new opt-in functionality: a stricter inspection profile with self-only
+process metadata, explicit hardlink denial and a literal file-write-data grant
+for an existing owned driver.lock. Retain the legacy mode and every historical
+receipt. Do not replace the installed controller or release predicate.
+
+Acceptance: preserve all twenty original kernel controls in both legacy and
+strict modes; add hardlink/alias denials and exact lock open/flock positive/
+outside-write negative controls. Reject nonempty/preseeded write trees and
+noncanonical, linked, nonempty, broadly accessible or misplaced lock declarations.
+Carry the strict kind and lock identity in a closed descriptor version through
+the existing guardian, with post-stop lock identity/content confirmation.
+Exercise the existing guardian controls in strict mode, plus lock mutation and
+descriptor refusals. Then qualify the actual accepted owner's unchanged
+project-build under only the exact lock grant, preserving pointer, artifacts,
+ledger and the one existing application-build attempt. No forced/changed build,
+actual owner watch or parent-death retrial is included.
+
+All allocating work remains canonically supervised and exclusive at4GB growth/
+500MB reserve/100GB retention. Initial qualification plus at most two evidence-
+backed repairs for this new strict-lock increment; preserve every attempt.
+Stop rather than remove controls, grant whole-state writes or silently fall
+back. Global registry/runtime binding, live ownership collection, crash proof
+and automatic-release activation remain separate unfinished integration work.
+
+
+## Strict-lock control result
+
+[Independent control review](../acceptance/project-adoption/native-strict-lock-controls-20261028/receipt.json)
+passes the unchanged20 legacy kernel checks,29 strict kernel checks,11 unsafe
+lock declarations and36 guardian/watcher tests. All76 observed processes stopped
+and the canonical reservation released. The first attempt failed only the
+protected-parent process-path denial. One repair adds an explicit process-info*
+denial for target others; every control remains. Exact lock open/flock works
+with only file-write-data permission. Preexisting and new hardlinks, writes to
+the rest of state, mutated locks and unknown modes refuse as declared.
+
+The local Apple SDK provides the proc_pidpath signature. Apple's
+[XNU process-info routing](https://github.com/apple-oss-distributions/xnu/blob/main/bsd/kern/proc_info.c)
+and [libproc wrapper](https://github.com/apple-oss-distributions/xnu/blob/main/libsyscall/wrappers/libproc/libproc.c)
+supply primary context about API flavors and policy checks, not a specification
+of private SBPL mapping or precedence. The added deny is supported by observed
+kernel behavior on the qualified host. Do not generalize it to other hosts.
+
+This qualifies proposed source and controlled effects. The real retained
+unchanged-build check is prepared but unrun at this checkpoint. Installed
+controller/runtime registration, live global ownership collection, guardian
+crash/unsealed-launch handling and automatic release remain unqualified.
+
+
+## Actual exact-lock unchanged-build result
+
+[Independent real-case review](../acceptance/project-adoption/native-strict-lock-real-20261028/receipt.json)
+passes the accepted CLI's engine, current input-key observation and unchanged
+project-build under the strict variants. The build invocation received only the
+literal driver.lock file-write-data grant outside its fresh private workspace.
+Native returned unchanged-project-build, verification not-repeated, zero cache
+hits and no activation. This establishes selected artifact reuse with native
+structural verification, not a new application execution or performance result.
+
+Pointer, artifact manifest, trace ledger, lock identity/content and the single
+existing application-build attempt match their preimages. All nine observed
+processes stopped and the separate canonical reservation released. No forced/
+changed build, owner watch/crash retry, service interruption or deletion ran.
+
+This first strict-lock increment is complete, with one evidence-backed profile
+repair and no real-case repair. Next implement live lifecycle collection and
+registered closed controller/runtime/OS bindings in a staged supervisor candidate.
+The installed guard and its preexisting-container uncertainty remain unchanged.
+Guardian death/unsealed-launch refusal, publication/installation provenance and
+automatic release still require independent qualification. Keep native exclusive
+and parallelfalse. Full G0–G6 adoption remains active and unachieved.
+
+
+## I3c live ownership collection
+
+Replace the local adapter's completion-only pipe read with simultaneous bounded
+control/stdout/stderr draining. Persist accepted pending/started records while
+the worker is alive. Validate the same closed grammar incrementally and retain
+partial/malformed input. Register Darwin kernel process-start identity and parent/
+group relationship before considering a live native group known. On guardian
+failure, signal only a still-matching owned group, then independently confirm it
+stopped; identity uncertainty must preserve an unconfirmed result.
+
+Add an optional private controller channel for a staged supervisor: publish
+launch-pending before Popen, then guardian identity, validated native records and
+the final outcome. The native worker must inherit none of that channel. Missing,
+malformed, changed or unsealed ownership remains a refusal. This is observability
+and owned-process cleanup, not an installed registry or release attestation.
+
+Acceptance: legacy10/strict15 guardian and11 watcher policy controls remain;
+new controls cover records visible before exit, fragmented/malformed/oversized
+records, early stdout closure, guardian SIGKILL after verified registration,
+interrupted pending launch, PID identity mismatch, forwarding failure and absence
+of native access to the outer channel. Reuse unchanged kernel/profile evidence;
+do not rerun it without a relevant profile change. Qualify actual retained
+unchanged build through live collection after controls pass. Initial plus at most
+two evidence-backed repairs; retain attempts. All allocating work uses the same
+canonical exclusive guard and unchanged limits. No installed-supervisor, registry,
+parallel, production, service or deletion activation is included.
+
+
+## I3c live-control result
+
+[Independent review](../acceptance/project-adoption/native-live-ownership-controls-20261028/receipt.json)
+passes15 live controls plus the unchanged36 guardian/watcher regressions.
+The initial50 controls passed. Review identified that the pending fixture had no
+worker; one additive qualification repair added an explicit unregistered survivor.
+Existing test methods and production source remained unchanged, all15 live cases
+passed, and the36 regression cases were not unnecessarily repeated. Both source
+sets and raw evidence remain. All140 observed process instances stopped and both
+canonical reservations released.
+
+Accepted registration is persisted before worker exit, with kernel microsecond
+start identity and actual parent/group relationship. Guardian SIGKILL after known
+registration stops the still-matching native group while leaving the operation
+failed. A pending launch with a real surviving, unregistered fixture worker stays
+unconfirmed; the independent harness stops that worker afterward. This does not
+qualify automatic unsealed recovery or prove a global scheduler hold.
+
+Private FIFO and anonymous Unix socket-pair observers receive ordered controller
+frames; restricted payloads inherit neither channel. Fragmented records work;
+malformed/oversized/partial records, observer loss and identity mismatch refuse.
+The installed shared guard's exact digest is unchanged. Its local copy differs
+from the current War-games checkout; future staging must use the preserved
+installed preimage rather than assuming those files are interchangeable.
+
+The real unchanged-build check through the changed collector remains prepared
+but unrun at this checkpoint. Closed source/runtime/OS registration, staged global
+collection, all-group stop confirmation and installed release behavior remain
+unfinished. Keep native exclusive and parallelfalse.
+
+
+## I3c real live-collection result
+
+[Independent real-case review](../acceptance/project-adoption/native-live-real-unchanged-20261028/receipt.json)
+passes engine identity, current input observation and the retained unchanged
+project-build through the changed collector. A separate inspection captured the
+native registration and matching kernel identity while the real build was alive.
+All three live journals exactly match their terminal control receipts.
+
+The original pointer, artifact manifest, trace ledger, driver lock and one
+application-build attempt remain unchanged. No application commands, forced/
+changed build, owner watch/crash trial, service interruption or deletion ran.
+All nine observed processes stopped and the separate canonical reservation
+released. The native CLI and strict profile were reused without recompilation.
+
+I3c is complete with zero production repairs and one additive qualification
+repair. Local live collection, ordered observer frames and identity-checked
+cleanup are qualified at their stated scope. They are not an installed
+supervisor attestation. Next implement the staged global receiver and closed,
+registered controller/runtime/OS bindings against the exact preserved installed
+guard. Pending/unsealed/malformed ownership must hold resources, including when
+a wrapper exits normally with unknown workers. Confirm every registered group
+and all channels/streams before considering a preexisting-container exception.
+Then independently qualify the staged integration before any installation or
+new bounded real-owner parent-death proposal. Full G0–G6 adoption stays open.
+
+## I3d staged supervisor receiver
+
+The next integration increment implements the global-side receiver for the
+existing private lifecycle channel. It must observe and persist pending,
+guardian and native registration during execution; bound and validate the closed
+wire grammar; retain uncertainty on malformed, interrupted or unregistered
+launches even if the controller exits zero; and independently query every
+recorded process instance/group before reporting stop evidence.
+
+This receiver supplies ownership evidence, not authorization or a lease-release
+predicate. Source/runtime/OS registration and the installed guard integration
+remain required next steps. Declared hashes, a caller callback, stdout and tokens
+cannot confer that trust. Keep the installed supervisor unchanged and native
+execution exclusive with parallelfalse. The exact installed guard preimage and
+provenance remain the baseline for the later opt-in patch.
+
+Acceptance for this increment: deterministic grammar/bounds/uncertainty controls;
+real anonymous Node/Python channel with live guardian/native kernel identities;
+independent stop observations after normal completion, controller SIGKILL and
+guardian SIGKILL; an interrupted unregistered launch with an independently
+observed surviving worker must stay ownership-unknown. Preserve all fixtures,
+failure bytes and an unrelated owned sentinel. Test failures receive at most two
+evidence-backed repairs; retain each source/attempt. Use the canonical outer
+exclusive reservation and existing4GB/500MB/100GB limits. No actual retained-owner
+crash trial, installation, registry activation, parallel execution, service
+interruption, deletion or automatic reservation recovery is included.
+
+## I3d receiver result
+
+[The evidence review](../acceptance/project-adoption/native-global-receiver-20261028/receipt.json)
+passes32 initial controls and3 focused supplemental controls. Four actual Darwin
+cases exercise the anonymous Node/Python channel: normal completion, controller
+SIGKILL, guardian SIGKILL and an interrupted unregistered launch. Live snapshots
+capture kernel identities before exit; all16 observed process instances stopped,
+and the unrelated owned sentinel remained unchanged during each case.
+
+The unregistered fixture worker remains alive after the registered groups stop;
+the receiver correctly reports ownership unknown. Only the independent harness
+then stops that separately identified worker. This is a counterfactual unconfined
+fixture, not proof that a registered restricted program can fork. Registered
+crashes retain failed/incomplete operations even when all known groups stop.
+Malformed records, PID reuse, false completion, bounded records/calls, transport
+loss and a zero-exit wrapper cannot erase ownership uncertainty.
+
+Review found three weak test assertions after the first pass. One additive
+qualification repair covers valid-looking duplicate keys, the per-record bound
+below the aggregate limit, and transport error versus clean EOF. Production
+source and the entire earlier test-file prefix are unchanged. The32 earlier
+controls were not needlessly repeated; only those3 new checks ran. As-run source
+snapshots, raw TAP, journals, live probes, stop probes and both reservations are
+retained privately. Both canonical reservations finished/released; the separate
+reviewer exited0 and the installed guard's exact digest is unchanged.
+
+I3d is complete with0 production repairs and1 qualification repair. The receiver
+never signals processes or releases reservations, and every assessment explicitly
+reports source/runtime registration unqualified and automatic release unqualified.
+Its probe and persistence callbacks are integration boundaries, not trust grants.
+No installed supervisor behavior, parallel execution or actual retained-owner
+crash trial changed. All full G0–G6 adoption requirements remain in force.
+
+Next bind a closed controller, complete private Python runtime/stdlib/native
+extension closure, fixed source snapshot and qualified OS in a supervisor-owned
+registration. Then patch the preserved installed-guard candidate to consume this
+channel live, update reservation status and use independent all-group/channel/
+data-stream stop confirmation. Missing or changed registration must refuse before
+effects; pending/unsealed/malformed ownership must hold even after a zero exit.
+Qualify the complete staged path before installation or another bounded real-owner
+parent-death proposal. Keep native exclusive and parallelfalse throughout staging.
+
+## I3e closed registration and candidate integration
+
+Freeze a complete runtime from the already retained Python release archive with
+its fixed published asset digest, plus the accepted native CLI and exact helper/
+receiver/controller source. Inventory every runtime file, directory and symlink,
+including stdlib, native extensions, bytecode and private dylibs; audit dynamic
+references to the private tree or qualified system roots. Bind the qualified
+Darwin build, architecture and required system executables. No arbitrary caller
+digest, environment, profile, program or code grants source trust.
+
+A supervisor-owned opaque staged registration will validate the immutable
+snapshot before starting any interpreter and again after stop. Its closed
+controller admits engine, input-key observation and the strict unchanged-build
+path only, using minimal interpreter startup and private acknowledgement/control
+channels. Protect snapshot/input aliases; keep the exact lock grant. Exercise
+changed source/runtime/extension/manifest/OS declarations, forged registration,
+caller startup injection and writable aliases before actual accepted operations.
+
+Then integrate the registered path and I3d receiver into a candidate based on the
+exact installed guard preimage. Retain uncertainty regardless of wrapper exit,
+track all groups and channels, preserve fair admission/atomic finalization and
+native-exclusive fallback. Stage in isolated control/lease directories beneath
+the canonical outer guard. Preserve every attempt; initial plus at most two
+evidence-backed repairs for registration qualification, then separately define
+the bounded candidate-guard controls. Reuse unchanged profile/kernel receipts.
+No installed activation, parallel execution, actual owner crash retrial, manual
+recovery, service interruption, deletion or policy increase is included.
+
+## I3e checkpoint: implemented, qualification FAILED; repair budget exhausted
+
+[The separate facts review](../acceptance/project-adoption/native-registered-inspection-20261028/receipt.json)
+verifies the retained evidence; it does not accept the registration. Source
+implements an opaque staged capability, complete archive-backed read-only runtime/
+source snapshot, fixed controller/CLI operations, pre/post binding checks and
+private controller acknowledgement before guardian launch. The snapshot matches
+all1643 regular runtime members and9 symlinks in the fixed published archive;
+the complete native set is10 Mach-O objects. Isolated startup paths also match
+the private snapshot. These are scoped facts on the recorded Intel/macOS build,
+with qualified system-library trust, not general OS attestation.
+
+The initial attempt refused before native launch because the dependency parser
+treated four Tcl LC_ID_DYLIB identifiers as load references. Repair1 separates
+identification from actual loads, using the local Apple SDK and exact otool
+records; it retained all load-reference constraints. That retry exposed an
+unsupported >20-object count assumption. Repair2 replaces that guess with the
+exact ten-member set from the pinned archive, preserves whole-tree content checks,
+extracts the actual bytes that passed hashing and checks destination copies.
+It adds archive-path replacement, destination-corruption and bytecode-absence
+counterexamples. All failed attempts and source copies remain.
+
+Final run:14checks passed, one test timed out/cancelled at180seconds. Engine and
+input-key test cases passed. The unchanged invocation later returned0 with the
+expected reused-build result and no activation, but its late result MUST NOT be
+relabeled a passing test. Its approximately274.6second descriptor/terminal file
+span is consistent with earlier accepted254.4/277.3second spans under900second
+native limits. Those observations diagnose the new harness's inconsistent
+deadline; they are not performance qualification.
+
+The cancelled asynchronous callback continued while later mutation cases ran.
+That overlap also prevents claiming this entire final suite proves an unchanged
+runtime throughout the real invocation. A future isolated case must avoid it and
+explicitly stop/reap owned work on abort. All9 recorded root/guardian/native
+process IDs are now stopped, source copies and original protected state/lock/
+one application attempt match, and all3 canonical reservations finished/released.
+The installed guard is unchanged. No runtime/source registration or release/
+parallel activation has occurred. The unchanged kernel/profile receipts remain.
+
+I3e remains UNQUALIFIED at its initial+2repair limit. No further automatic repair
+or retry is authorized by that increment. A concrete, unapplied
+[one-attempt proposal](../../.tools/native-registered-inspection-20261028/retry-proposal-1/RETRY_PROPOSAL.md)
+changes the arbitrary new180second test deadline to960seconds around the existing
+900second native limit, isolates one unchanged invocation and adds owned-process
+abort cleanup. The outer coordinator limit would be1200seconds. Its proposed
+source parses; no behavioral check or extra attempt has run. Explicit approval
+must extend this exhausted budget before applying/running it.
+
+The staged installed-guard patch, cancellation/owner-crash/unsealed recovery
+qualification, installation and any new actual-owner parent-death proposal remain
+unfinished. Native execution stays exclusive and parallelfalse. Full G0–G6
+adoption remains active and unachieved; no requirement is narrowed by this failure.

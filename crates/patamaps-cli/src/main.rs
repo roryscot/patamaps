@@ -108,6 +108,14 @@ enum Intent {
 enum Command {
     /// Bounded native Cargo/TOML provider using the existing workspace process protocol.
     DiscoverNative,
+    /// Check an artifact digest and ELF target header without executing the artifact.
+    ElfTargetCheck {
+        artifact: PathBuf,
+        #[arg(long)]
+        target: String,
+        #[arg(long)]
+        digest: String,
+    },
     /// Capture explicitly selected nonsecret project inputs without executing project tools.
     ProjectCapture {
         profile: PathBuf,
@@ -141,6 +149,11 @@ enum Command {
         #[arg(long)]
         root: PathBuf,
     },
+    /// Verify a selected build, lock its state, execute a trusted command and recheck bindings.
+    ProjectExecSelected {
+        state: PathBuf,
+        command: PathBuf,
+    },
     /// Run a retained build plan and atomically select its verified declared artifacts.
     ProjectBuild {
         plan: PathBuf,
@@ -152,6 +165,8 @@ enum Command {
         force: bool,
         #[arg(long)]
         context: Option<PathBuf>,
+        #[arg(long)]
+        preparation: Option<PathBuf>,
     },
     /// Observe declared build inputs/tool identities without commands or build-state writes.
     ProjectBuildInputKey {
@@ -160,6 +175,8 @@ enum Command {
         source: PathBuf,
         #[arg(long)]
         context: Option<PathBuf>,
+        #[arg(long)]
+        preparation: Option<PathBuf>,
     },
     /// Capture explicit binary files and closed internal links into a fresh retained snapshot.
     ProjectContextCapture {
@@ -1050,6 +1067,15 @@ fn run(command: Command) -> Result<(), Failure> {
                 &serde_json::json!({"status":"observed-matches", "graph":{"id":checked.document().id,"digest":checked.digest()},"constraint":constraint.id,"matches":matches,"admission":"not-performed","activeBindings":"not-evaluated","authorization":"not-evaluated"}),
             )
         }
+        Command::ElfTargetCheck {
+            artifact,
+            target,
+            digest,
+        } => {
+            let report = patamaps_workspace::check_elf_target(&artifact, &target, &digest)
+                .map_err(|e| Failure::Operational(e.to_string()))?;
+            stdout_json(&report)
+        }
         Command::ProjectCapture {
             profile,
             root,
@@ -1100,23 +1126,40 @@ fn run(command: Command) -> Result<(), Failure> {
                 Err(Failure::ReportedRejection)
             }
         }
+        Command::ProjectExecSelected { state, command } => {
+            let command = read::<patamaps_workspace::ProjectCommand>(&command)?;
+            let report = patamaps_workspace::execute_selected_project_command(&state, &command)
+                .map_err(|e| Failure::Operational(e.to_string()))?;
+            stdout_json(&report)?;
+            if report["status"] == "completed-selected-project-command" {
+                Ok(())
+            } else {
+                Err(Failure::ReportedRejection)
+            }
+        }
         Command::ProjectBuild {
             plan,
             source,
             state,
             force,
             context,
+            preparation,
         } => {
             let plan = read::<patamaps_workspace::ProjectBuildPlan>(&plan)?;
             let context = context
                 .as_ref()
                 .map(|p| read::<patamaps_workspace::ProjectBuildContext>(p))
                 .transpose()?;
-            let report = patamaps_workspace::build_project_with_context(
+            let preparation = preparation
+                .as_ref()
+                .map(|p| read::<patamaps_workspace::ProjectPreparation>(p))
+                .transpose()?;
+            let report = patamaps_workspace::build_project_with_preparation(
                 &source,
                 &state,
                 &plan,
                 context.as_ref(),
+                preparation.as_ref(),
                 force,
             )
             .map_err(|e| Failure::Operational(e.to_string()))?;
@@ -1133,16 +1176,22 @@ fn run(command: Command) -> Result<(), Failure> {
             plan,
             source,
             context,
+            preparation,
         } => {
             let plan = read::<patamaps_workspace::ProjectBuildPlan>(&plan)?;
             let context = context
                 .as_ref()
                 .map(|p| read::<patamaps_workspace::ProjectBuildContext>(p))
                 .transpose()?;
-            let report = patamaps_workspace::project_build_input_key_with_context(
+            let preparation = preparation
+                .as_ref()
+                .map(|p| read::<patamaps_workspace::ProjectPreparation>(p))
+                .transpose()?;
+            let report = patamaps_workspace::project_build_input_key_with_preparation(
                 &source,
                 &plan,
                 context.as_ref(),
+                preparation.as_ref(),
             )
             .map_err(|e| Failure::Operational(e.to_string()))?;
             stdout_json(&report)
