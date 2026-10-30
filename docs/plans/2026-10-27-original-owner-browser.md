@@ -401,3 +401,22 @@ existing 600s deadline, and uses fresh paths. Actual bind addresses, ports,
 original auth/denial assertions and resource limits stay unchanged. It needs
 direct approval; no automatic phase repair/retry, deletion, installed safeguard
 change or unrelated interruption follows. Full G0–G6 remains unachieved.
+
+
+## Corrected profile passed; isolated database startup failed (2026-10-30)
+
+The [approved corrected-profile attempt](../acceptance/project-adoption/original-owner-auth-endpoint-20261029/services-localhost-profile-proposal-20261030/README.md)
+passed its pre-database syntax check. PostgreSQL then exited 1 after about 4.6s;
+the unchanged 30s readiness loop refused. No OOM or Docker engine error was
+recorded. Startup output and readiness responses were not retained by that
+runner, so the root cause remains unknown. No original migration, seed, API,
+HTTP case or browser case ran. The owned container/data are preserved and
+stopped, all test listeners closed, reservation released, old failures intact,
+and unrelated database identity unchanged.
+
+This one-attempt approval is consumed. An unexecuted proposal adds bounded
+owned startup streams and readiness/state capture while preserving database
+settings, limits, deadlines and every original auth assertion. It needs direct
+approval and is diagnostic instrumentation, not a demonstrated root-cause fix.
+No automatic phase repair/retry, deletion, unrelated interruption, installed
+safeguard change or activation follows. Full G0–G6 remains unachieved.

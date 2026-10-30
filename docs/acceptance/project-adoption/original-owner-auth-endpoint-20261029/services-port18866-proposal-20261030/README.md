@@ -70,3 +70,6 @@ One separately approved application attempt is proposed, with original 12 HTTP
 and five browser cases and all existing resource/deadline limits. No installed
 safeguard change, global activation, unrelated interruption or deletion follows.
 Full G0–G6 adoption remains unachieved.
+
+
+The profile correction was separately approved and executed. Its [profile-pass/database-startup-failure result](../services-localhost-profile-proposal-20261030/README.md) preserves the accepted syntax check and subsequent unknown database exit. Historical proposal and failure records remain unchanged.
