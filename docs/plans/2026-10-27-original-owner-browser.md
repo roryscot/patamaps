@@ -312,3 +312,21 @@ Real isolated authentication/permissions/browser are prepared, not yet run;
 fresh admission and inspected owned-resource enforcement remain required.
 Context staging/verification remains slow; functional command durations do
 not establish measured development performance or fullG4/G5/G6 acceptance.
+
+
+## Isolated real-authentication admission refused (2026-10-29)
+
+The [frozen backend/browser phase](../acceptance/project-adoption/original-owner-auth-endpoint-20261029/services-0/README.md)
+was refused before driver/service execution for retained-output headroom.
+Reservation5c95616c finished/released; no stale lease or actual auth result.
+All387/2 API/interpreter and frozen runner inputs match; Advocates is untouched.
+The new endpoint generation remains accepted independently.
+
+Canonical accounting measured98,249,068,544bytes and a2,249,068,544byte shortfall
+for the unchanged4GB reservation/100GB retention cap. An exact216-file
+2,450,522,112byte proposal excludes selected artifacts/project/code/current
+auth inputs; original context backups and every candidate matched SHA256.
+Approval is pending; no files deleted. After exact capacity authorization,
+resume only the frozen unused service phase through fresh normal admission,
+preserving this refusal and all earlier failures. No frontend rebuild,
+old-preflight rerun, global limit change or unrelated service use follows.
