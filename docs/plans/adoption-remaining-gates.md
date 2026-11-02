@@ -473,3 +473,18 @@ settings, limits, deadlines and every original auth assertion. It needs direct
 approval and is diagnostic instrumentation, not a demonstrated root-cause fix.
 No automatic phase repair/retry, deletion, unrelated interruption, installed
 safeguard change or activation follows. Full G0–G6 remains unachieved.
+
+
+## Readiness-contract correction awaiting qualification (2026-11-02)
+
+The [read-only audit](../acceptance/project-adoption/database-tcp-readiness-audit-20261102/README.md)
+found that the old readiness check can observe the image's temporary Unix-socket
+server without proving the API-facing TCP route. Earlier readiness samples stay
+scoped to that socket; the database exit remains unexplained. No new runtime
+test or application acceptance occurred.
+
+The unexecuted 1fe5c343 proposal replaces the unexecuted e4a8936 proposal. It
+requires container TCP5432 and published-host TCP18866 under the same30s deadline,
+retains bounded startup capture and all original auth cases, and needs direct
+one-attempt approval. Old proposal bytes and every failed record remain intact.
+Full G0–G6 and all separate execution boundaries remain unchanged.

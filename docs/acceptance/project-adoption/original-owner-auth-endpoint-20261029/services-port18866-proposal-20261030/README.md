@@ -73,3 +73,6 @@ Full G0–G6 adoption remains unachieved.
 
 
 The profile correction was separately approved and executed. Its [profile-pass/database-startup-failure result](../services-localhost-profile-proposal-20261030/README.md) preserves the accepted syntax check and subsequent unknown database exit. Historical proposal and failure records remain unchanged.
+
+
+Readiness scope correction: the [2026-11-02 source audit](../../database-tcp-readiness-audit-20261102/README.md) shows the existing Unix-socket check does not prove final TCP readiness. Earlier raw outcomes remain unchanged. The unexecuted startup-only proposal is superseded by the new TCP-readiness scope; no new runtime acceptance follows.

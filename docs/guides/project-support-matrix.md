@@ -249,3 +249,11 @@ settings, limits, deadlines and every original auth assertion. It needs direct
 approval and is diagnostic instrumentation, not a demonstrated root-cause fix.
 No automatic phase repair/retry, deletion, unrelated interruption, installed
 safeguard change or activation follows. Full G0–G6 remains unachieved.
+
+
+## Readiness evidence scope correction (2026-11-02)
+
+The [source audit and unexecuted TCP proposal](../acceptance/project-adoption/database-tcp-readiness-audit-20261102/README.md)
+limit earlier readiness evidence to Unix sockets and require real TCP readiness
+for a future approved run. This is preparation, not a new application/runtime
+pass. The database exit cause and full adoption requirements remain open.

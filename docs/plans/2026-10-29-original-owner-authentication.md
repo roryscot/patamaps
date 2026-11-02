@@ -128,3 +128,15 @@ settings, limits, deadlines and every original auth assertion. It needs direct
 approval and is diagnostic instrumentation, not a demonstrated root-cause fix.
 No automatic phase repair/retry, deletion, unrelated interruption, installed
 safeguard change or activation follows. Full G0–G6 remains unachieved.
+
+
+## Current proposed attempt: TCP readiness (2026-11-02)
+
+The [source-derived readiness audit](../acceptance/project-adoption/database-tcp-readiness-audit-20261102/README.md)
+supersedes the pending e4a8936 proposal with 1fe5c343. The new unexecuted payload
+requires container and published-host TCP readiness within the existing30s
+window, plus the already proposed bounded startup capture. Original migrations,
+authentication/permission/browser assertions and all limits remain mandatory.
+No runtime false-positive reproduction, startup cause or application pass is
+claimed. Goal resumption is not an execution-budget extension; direct approval
+for the latest frozen scope is required before any new attempt.

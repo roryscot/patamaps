@@ -68,3 +68,6 @@ AST/Node --check, all 422 hashes and normalized application payload comparisons
 passed. Frozen manifest SHA-256:
 e4a8936a0c62da5186208a3f87a621b3ae7fa842b58897c0740607b734bd4fad.
 Full G0–G6 remains unachieved; other pending execution permissions are separate.
+
+
+Readiness scope correction: the [2026-11-02 source audit](../../database-tcp-readiness-audit-20261102/README.md) shows the existing Unix-socket check does not prove final TCP readiness. Earlier raw outcomes remain unchanged. The unexecuted startup-only proposal is superseded by the new TCP-readiness scope; no new runtime acceptance follows.

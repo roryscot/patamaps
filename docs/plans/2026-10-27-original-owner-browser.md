@@ -420,3 +420,9 @@ settings, limits, deadlines and every original auth assertion. It needs direct
 approval and is diagnostic instrumentation, not a demonstrated root-cause fix.
 No automatic phase repair/retry, deletion, unrelated interruption, installed
 safeguard change or activation follows. Full G0–G6 remains unachieved.
+
+
+The [2026-11-02 readiness audit](../acceptance/project-adoption/database-tcp-readiness-audit-20261102/README.md)
+replaces the unexecuted startup-only proposal with a stricter TCP-readiness
+proposal. No browser cases ran, no earlier outcome changed, and no execution
+budget was extended. Follow the current authentication plan before any launch.
