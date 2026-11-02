@@ -257,3 +257,9 @@ The [source audit and unexecuted TCP proposal](../acceptance/project-adoption/da
 limit earlier readiness evidence to Unix sockets and require real TCP readiness
 for a future approved run. This is preparation, not a new application/runtime
 pass. The database exit cause and full adoption requirements remain open.
+
+
+The [executed TCP attempt](../acceptance/project-adoption/original-owner-auth-endpoint-20261029/services-db-tcp-readiness-proposal-20261102/README.md)
+captured an owned data-directory ownership refusal before original API/browser
+execution. Cleanup/release and bounded captures are verified; authentication
+and the proposed data-owner correction are not accepted.

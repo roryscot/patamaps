@@ -67,3 +67,6 @@ The latest current scope requires a DIRECT one-attempt approval before launch;
 do not execute the superseded pending proposal or infer approval from goal
 resumption. Full G0–G6 remains unachieved, and other pending lifecycle/dynamic/
 performance execution decisions remain separate.
+
+
+The revised TCP proposal was separately approved and executed. Its [captured data-ownership refusal](../original-owner-auth-endpoint-20261029/services-db-tcp-readiness-proposal-20261102/README.md) records safe refusal before original migration/auth/browser execution; no full runtime acceptance follows.

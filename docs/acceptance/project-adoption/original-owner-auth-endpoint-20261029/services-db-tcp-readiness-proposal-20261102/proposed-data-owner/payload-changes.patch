@@ -1,0 +1,94 @@
+--- executed-tcp-readiness/run.py
++++ proposed-data-owner/run.py
+@@ -1,5 +1,5 @@
+ from pathlib import Path
+-import json,os,sys,subprocess,hashlib,secrets,socket,time,signal,urllib.request,urllib.error,datetime,resource
++import json,os,sys,subprocess,hashlib,secrets,socket,time,signal,urllib.request,urllib.error,datetime,resource,tarfile
+ R=Path("/Volumes/dev_src_case_sensitive/projects/patamaps");B=Path(__file__).resolve().parent
+ sys.path.insert(0,str(R/"scripts"))
+ from bench_axum_retained import LEASE_PROBE,validate_ownership,NODE
+@@ -166,7 +166,7 @@
+  users={k:dict(id="patamaps-"+k+"-"+token,email=k+"-"+token[:12]+"@example.com",password=secrets.token_urlsafe(24))for k in["allowed","denied"]}
+  cfg=dict(apiSource=str(Path(F["owner"])/"packages/api"),site=F["site"],databaseName=databaseName,users=users)
+  write(B/"service-config.private.json",cfg,True)
+- cid=docker("create","--name","patamaps-auth-"+token,"--label","patamaps.auth.owner="+token,"--label","buildctl.project="+str(R),"--label","buildctl.request="+ownership["id"],"--read-only","--user","501:20","--cap-drop","ALL","--security-opt","no-new-privileges:true","--cpus","1","--memory","536870912","--memory-swap","536870912","--pids-limit","128","--log-driver","none","--network","bridge","--publish","127.0.0.1:18866:5432","--mount","type=bind,source="+str(B/"database")+",target=/var/lib/postgresql/data","--mount","type=bind,source="+str(B/"container-passwd")+",target=/etc/passwd,readonly","--mount","type=bind,source="+str(B/"container-group")+",target=/etc/group,readonly","--tmpfs","/tmp:rw,nosuid,nodev,size=67108864","--tmpfs","/var/run/postgresql:rw,nosuid,nodev,size=16777216,uid=501,gid=20","--env-file",str(envfile),F["postgresImage"]).strip()
++ cid=docker("create","--name","patamaps-auth-"+token,"--label","patamaps.auth.owner="+token,"--label","buildctl.project="+str(R),"--label","buildctl.request="+ownership["id"],"--read-only","--user","501:20","--cap-drop","ALL","--security-opt","no-new-privileges:true","--cpus","1","--memory","536870912","--memory-swap","536870912","--pids-limit","128","--log-driver","none","--network","bridge","--publish","127.0.0.1:18866:5432","--mount","type=bind,source="+str(B/"database")+",target=/var/lib/postgresql/data","--mount","type=bind,source="+str(B/"container-passwd")+",target=/etc/passwd,readonly","--mount","type=bind,source="+str(B/"container-group")+",target=/etc/group,readonly","--tmpfs","/tmp:rw,nosuid,nodev,size=67108864","--tmpfs","/var/run/postgresql:rw,nosuid,nodev,size=16777216,uid=501,gid=20","--env-file",str(envfile),"--entrypoint","/bin/sh",F["postgresImage"],"-c",(B/"data-owner-entrypoint.sh").read_text()).strip()
+  write(B/"container.json",dict(containerId=cid,ownerToken=token,project=str(R)))
+  d=json.loads(docker("inspect",cid))[0];h=d["HostConfig"]
+  assert not d["State"]["Running"]and d["Image"]==F["postgresImage"]
+@@ -179,8 +179,23 @@
+  assert len(binds)==3
+  assert {(m["Source"],m["Destination"],m["RW"])for m in binds}=={(str(B/"database"),"/var/lib/postgresql/data",True),(str(B/"container-passwd"),"/etc/passwd",False),(str(B/"container-group"),"/etc/group",False)}
+  assert d["Config"]["User"]=="501:20"and h["CapDrop"]==["ALL"]and not h.get("CapAdd")
++ assert d["Config"]["Entrypoint"]==["/bin/sh"]and d["Config"]["Cmd"]==["-c",(B/"data-owner-entrypoint.sh").read_text()]
+  assert set(h["Tmpfs"])=={"/tmp","/var/run/postgresql"}
+  write(B/"container-limits.json",dict(containerId=cid,cpu=1,memoryBytes=536870912,swapBytes=0,pids=128,readonlyRoot=True,logDriver="none",publishedLoopbackPort=18866,ownedData=str(B/"database"),nativeExclusive=True,maximumObservedOwnedDataBytes=536870912))
++ # Set metadata only on the new EMPTY owned bind directory, before any process.
++ assert not any((B/"database").iterdir()),"OWNED_DATA_OWNER_SETUP_REQUIRES_EMPTY_DIRECTORY"
++ ownershipTar=B/"empty-data-owner.tar"
++ with tarfile.open(ownershipTar,"r:")as archive:
++  members=archive.getmembers()
++  assert len(members)==1 and members[0].name=="."and members[0].isdir()and members[0].uid==501 and members[0].gid==20 and members[0].mode==0o700 and members[0].size==0 and not members[0].pax_headers,"OWNED_DATA_OWNER_TAR_INVALID"
++ result=subprocess.run([DOCKER,"cp","--archive","-",cid+":/var/lib/postgresql/data"],input=ownershipTar.read_bytes(),capture_output=True,timeout=30)
++ for suffix,stream in[("stdout",result.stdout),("stderr",result.stderr)]:
++  with(B/("data-owner-setup."+suffix+".private")).open("xb")as f:
++   os.fchmod(f.fileno(),0o600);f.write(stream[:65536])
++ write(B/"data-owner-setup-result.json",dict(exitCode=result.returncode,expectedUid=501,expectedGid=20,expectedMode="0700",tarDigest=sha(ownershipTar),stdoutBytes=len(result.stdout),stderrBytes=len(result.stderr),stdoutSha256=hashlib.sha256(result.stdout).hexdigest(),stderrSha256=hashlib.sha256(result.stderr).hexdigest(),existingDataTouched=False))
++ assert len(result.stdout)<=65536 and len(result.stderr)<=65536,"OWNED_DATA_OWNER_SETUP_OUTPUT_BOUND"
++ assert result.returncode==0,"OWNED_DATA_OWNER_SETUP_FAILED"
++ assert not any((B/"database").iterdir()),"OWNED_DATA_OWNER_SETUP_CREATED_UNEXPECTED_CONTENT"
+  # Capture startup output through the Docker client; daemon log driver stays none.
+  def startup_trace(row):
+   path=B/"postgres-readiness.private.jsonl"
+--- executed-tcp-readiness/sandbox.sb
++++ proposed-data-owner/sandbox.sb
+@@ -5,7 +5,7 @@
+ (allow network-inbound (local ip "localhost:18765"))
+ (allow network-outbound (remote ip "localhost:18866"))
+ (deny file-write*)
+-(allow file-write* (subpath "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/owner-auth-endpoint-20261029/services-db-tcp-readiness-proposal-20261102/run"))
++(allow file-write* (subpath "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/owner-auth-endpoint-20261029/services-data-owner-proposal-20261102/run"))
+ (deny process-exec)
+ (allow process-exec (literal "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3.11") (literal "/Library/Frameworks/Python.framework/Versions/3.11/Resources/Python.app/Contents/MacOS/Python"))
+ (deny file-read* (regex #".*/[.]env.*") (subpath "/Users/admin/.ssh") (subpath "/Users/admin/.aws") (subpath "/Users/admin/.config/gh") (literal "/Users/admin/.netrc"))
+--- executed-tcp-readiness/execution-contract.json
++++ proposed-data-owner/execution-contract.json
+@@ -60,8 +60,8 @@
+   "nextProducerPathsUnavailable": "New source copy, existing dependency snapshot, configured native provider; exact paths restored",
+   "runtimeAssemblyMaximumBytes": 134217728,
+   "runtimeAssemblyMaximumEntries": 8192,
+-  "apiWritableSubtree": "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/owner-auth-endpoint-20261029/services-db-tcp-readiness-proposal-20261102/run",
+-  "apiPrivateReportsLogsSubtree": "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/owner-auth-endpoint-20261029/services-db-tcp-readiness-proposal-20261102/run",
++  "apiWritableSubtree": "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/owner-auth-endpoint-20261029/services-data-owner-proposal-20261102/run",
++  "apiPrivateReportsLogsSubtree": "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/owner-auth-endpoint-20261029/services-data-owner-proposal-20261102/run",
+   "sandboxControlsOutsideWriteProbe": "parent phase path outside permitted run subtree",
+   "sandboxNetworkHostSelector": "localhost (IPv4 and IPv6 loopback); actual listeners remain127.0.0.1",
+   "profileSyntaxPrecheckMaximumSeconds": 10,
+@@ -85,5 +85,15 @@
+     "hostConnectMaximumSeconds": 1,
+     "sharedReadinessDeadlineSeconds": 30,
+     "unixSocketReadinessInsufficient": true
+-  }
++  },
++  "dataOwnershipSetup": "Docker cp --archive of one empty directory metadata entry to fresh owned RW data bind only; no root workload",
++  "dataOwnershipSetupUid": 501,
++  "dataOwnershipSetupGid": 20,
++  "dataOwnershipSetupMode": "0700",
++  "dataOwnershipSetupMaximumSeconds": 30,
++  "dataOwnershipSetupRecordedStreamBytes": 65536,
++  "requireEmptyDataBeforeAndAfterMetadataSetup": true,
++  "requireInsideContainerProcessAndDataOwner501_20BeforePostgres": true,
++  "postgresOriginalEntrypointExecutedAfterOwnershipGuard": true,
++  "readonlyRootAndAllExistingCapabilitiesUnchanged": true
+ }
+--- executed-tcp-readiness/launch-config.json
++++ proposed-data-owner/launch-config.json
+@@ -6,7 +6,7 @@
+     "--",
+     "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/intel-python-3.13.16-20261013/runtime/python/bin/python3",
+     "-B",
+-    "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/owner-auth-endpoint-20261029/services-db-tcp-readiness-proposal-20261102/guardian.py"
++    "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/owner-auth-endpoint-20261029/services-data-owner-proposal-20261102/guardian.py"
+   ],
+   "cwd": "/Volumes/dev_src_case_sensitive/projects/patamaps"
+ }

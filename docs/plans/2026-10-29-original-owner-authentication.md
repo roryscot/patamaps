@@ -140,3 +140,14 @@ authentication/permission/browser assertions and all limits remain mandatory.
 No runtime false-positive reproduction, startup cause or application pass is
 claimed. Goal resumption is not an execution-budget extension; direct approval
 for the latest frozen scope is required before any new attempt.
+
+
+## Current candidate: fresh owned data metadata (2026-11-02)
+
+The specifically approved1fe5c343 attempt is consumed. Its [captured failure](../acceptance/project-adoption/original-owner-auth-endpoint-20261029/services-db-tcp-readiness-proposal-20261102/README.md)
+is PostgreSQL data-directory ownership rejection; original app tests remain
+unrun. The new99ac2126 candidate limits metadata setup to a fresh empty owned
+directory and verifies ownership in the non-root workload before original
+startup. Image, caps, existing data and original assertions stay unchanged.
+No candidate action has run. It needs a direct one-attempt budget extension;
+goal continuation alone is not approval.

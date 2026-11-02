@@ -426,3 +426,8 @@ The [2026-11-02 readiness audit](../acceptance/project-adoption/database-tcp-rea
 replaces the unexecuted startup-only proposal with a stricter TCP-readiness
 proposal. No browser cases ran, no earlier outcome changed, and no execution
 budget was extended. Follow the current authentication plan before any launch.
+
+
+The [2026-11-02 captured database ownership failure](../acceptance/project-adoption/original-owner-auth-endpoint-20261029/services-db-tcp-readiness-proposal-20261102/README.md)
+stopped the approved TCP attempt before all browser cases. The new data-owner
+candidate is unexecuted and separately gated by the current authentication plan.

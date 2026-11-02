@@ -488,3 +488,20 @@ requires container TCP5432 and published-host TCP18866 under the same30s deadlin
 retains bounded startup capture and all original auth cases, and needs direct
 one-attempt approval. Old proposal bytes and every failed record remain intact.
 Full G0–G6 and all separate execution boundaries remain unchanged.
+
+
+## TCP attempt captured data ownership failure (2026-11-02)
+
+The [approved TCP attempt](../acceptance/project-adoption/original-owner-auth-endpoint-20261029/services-db-tcp-readiness-proposal-20261102/README.md)
+captured PostgreSQL refusing its owned data-directory ownership. Profile syntax
+passed; no migration/API/HTTP/browser case ran. TCP readiness was never accepted.
+Owned container/attachment stopped, test ports closed, reservation released,
+old failures preserved and unrelated database unchanged.
+
+A separately proposed425-input candidate sets metadata only on a fresh empty
+owned bind directory, then verifies process/data ownership inside the unchanged
+non-root container before the original PostgreSQL entrypoint. It is unexecuted,
+requires direct approval, and preserves all original criteria/limits/deadlines.
+No deletion, installed safeguard edit or automatic phase retry follows. The
+captured refusal is established; the underlying UID projection and proposed
+correction remain unverified. Full G0–G6 is unachieved.
