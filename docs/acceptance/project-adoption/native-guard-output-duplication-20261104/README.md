@@ -1,0 +1,8 @@
+# Registered output duplication: real defect, staged correction
+Six genuine negative ownership cases produced required conservative holds. Five actual engine controllers exited0 with complete raw native lifecycle frames; missing/malformed/truncated/lost/unsealed receiver evidence still prevented release. A real separately observed sleep sentinel remained alive when the unsealed reservation held. Live staged-source mutation produced controller75 and a held reservation; original bytes were restored and all observed groups stopped.
+
+Independent review then rejected aggregate acceptance: five successful engine calls produced ten exact executor-description documents. The staged guard forwarded registered child streams live and also wrote their final captured streams. This is a real executor defect, not an incorrect collector assumption. The failed review and original outputs/source remain preserved. Earlier five lifecycle passes retain their identified scope; no full registered-candidate acceptance follows.
+
+The proposed one-condition fix forwards ordinary command output live while registered streams remain bounded by the existing registrar and emit once from final capture. Byte/progress observation remains. The other eight candidate engine files are byte-identical; no registrar, receiver, controller, profile, kernel stop/probe, installed guard or policy changes.
+
+A new frozen regression harness shares one runtime across all six negative controls and five actual lifecycle cases, with per-case output boundaries and exact document counts. It is prepared/queued separately; results are pending. The ordinary fairness/fallback review is separate. Nothing is installed or activated.

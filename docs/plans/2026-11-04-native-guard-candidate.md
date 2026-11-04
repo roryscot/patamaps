@@ -81,3 +81,10 @@ The proposed opaque bridge is implemented. [Fourteen controls, ten source bindin
 ## Five-case execution and independent review
 
 [Five genuine staged cases and exact source/harness snapshots](../acceptance/project-adoption/native-guard-five-crashes-20261104/README.md) now pass normal completion, active cancellation, controller/guardian crashes and active command-owner parent death with a surviving trusted observer. All reservations release with complete proof; failed operations stay failed. Fourteen bridge controls, full runtime/system/source bindings and protected state are independently checked. One runtime is reused. The installed guard, trust and parallel activation remain unchanged. The remaining unsealed/channel/binding/fallback/atomic/fairness controls above are still required before any real-owner retry or activation.
+
+
+## Additional conservative holds and independent output counterexample
+
+The [new six-case run](../acceptance/project-adoption/native-guard-output-duplication-20261104/README.md) observes missing/malformed/truncated/lost/unsealed proof and live-source mutation retaining resources, with physical cleanup and restored bindings. Aggregate independent acceptance failed on a real duplicate-output counterexample: ten matching engine documents for five zero-exit calls. Preserve this failure; do not change the collector to accept duplicates.
+
+The staged one-condition correction emits registered output exactly once from the existing bounded final capture. Requalify all six negatives plus the five real lifecycle cases using one runtime and exact per-case output counts. The unchanged15 registration controls remain reusable only while their source bytes remain identical. [Actual native fairness/fallback controls](../acceptance/project-adoption/native-guard-fairness-20261104/README.md) pass separately at their recorded source. No full candidate, real-owner watch or activation claim follows before the affected regression review passes.
