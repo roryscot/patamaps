@@ -289,5 +289,14 @@ passes all12 original login/session/permission assertions after real database
 readiness and schema/seed. Chromium UI timed out; the other four browser projects
 were skipped. HTTP support at this exact source/profile does not establish full
 authenticated browser compatibility. Resources stopped/released and prior
-failures remain. Native registration and actual performance are still open;
-the112-control symbol-profile preflight is preparation for a separate Linux pair.
+failures remain. Closed native registration now passes independently below;
+automatic release and actual performance remain open. The Linux symbol-profile
+pair completed successfully; independent evidence collection is in progress.
+
+
+Current native registration checkpoint (2026-11-04): the earlier failed retry
+is superseded for the closed registration stage by an independently reviewed
+15/15 pass after exact restoration of31 required selected-context files.
+See [review](../acceptance/project-adoption/native-registered-inspection-20261104/restored-context-review.json).
+Automatic release, staged global-guard integration, actual owner parent-death/W1,
+browser authentication, performance and overall G0–G6 remain open.

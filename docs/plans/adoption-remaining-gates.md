@@ -533,10 +533,18 @@ acceptance stays false. The1GB native-exclusive job finished/released and all
 owned services/groups stopped; original limits/criteria and old failures remain.
 
 [The112-control retained-dynamic symbol preflight](../acceptance/project-adoption/retained-dynamic-symbols-20261104/README.md)
-passes separately; its full Linux runtime pair is still required. The
+passes separately; Linux runtime pair41883534897 has completed successfully and
+its independent evidence collection is in progress. The earlier
 [native registration retry](../acceptance/project-adoption/native-registered-inspection-20261104/README.md)
-remains failed.31 raw context files removed by an earlier incomplete cleanup
-classification are required for the selected native reuse contract; exact
-restoration from verified retained backups is planned before requalification.
+remains a preserved failure. Its follow-up restored31 required selected-context
+files from verified retained backups and independently passed all15 controls.
 No manual recovery or direct HTTP result closes native crash, watch, deployment,
 measurement, browser or final adoption requirements.
+
+
+Current native registration checkpoint (2026-11-04): the earlier failed retry
+is superseded for the closed registration stage by an independently reviewed
+15/15 pass after exact restoration of31 required selected-context files.
+See [review](../acceptance/project-adoption/native-registered-inspection-20261104/restored-context-review.json).
+Automatic release, staged global-guard integration, actual owner parent-death/W1,
+browser authentication, performance and overall G0–G6 remain open.
