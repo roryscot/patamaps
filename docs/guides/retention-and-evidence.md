@@ -15,3 +15,25 @@ Source distributions retain code, tests, fixtures and vendor inputs. Historical 
 The 2026-10-20 exact approved cleanup and prevention verification are recorded in the [audit](../acceptance/project-adoption/retention-audit-20261020/AUDIT.md). No automatic deletion is enabled.
 
 Intel's [protocol3 reservation rollout](../acceptance/project-adoption/g5-reservation-rollout-2026-10-20/receipt.json) is installed and active after source-bound real-backend qualification and fresh installed verification. Every declared dependency remains hash-bound; drift refuses parallel admission. Native jobs, benchmarks and uncertain ownership retain exclusive behavior. Storage limits and deletion-approval requirements remain unchanged.
+
+
+## Selected context is protected input (2026-11-04)
+
+A candidate file's absence from artifacts.json does not establish that it is
+unused. Native selected-build verification also checks its effective context
+outside declared writable paths. Raw dependency files can remain mandatory even
+when they are not emitted runtime artifacts or directly selected graph inputs.
+
+The earlier216-copy cleanup classification omitted that distinction.31 removed
+files are still required by one selected native build, blocking unchanged reuse.
+Their manifest digests/modes match retained backups; restore only the required
+absent copies after current full hashes pass. This was an incomplete cleanup
+analysis, not permission to weaken context verification or relabel failures.
+
+Future cleanup inventories must protect both selected artifacts and selected
+non-writable context entries, plus original source/snapshots and other retained
+inputs. A backup establishes recoverability; it does not prove a copy is unused.
+Use the native binding/context contracts when classifying candidate files.
+Retiring an entire old build or changing that contract is a separate reviewed
+operation. Preserve historical inventories and record any restored copies with
+new identities instead of pretending original inode/timestamp restoration.

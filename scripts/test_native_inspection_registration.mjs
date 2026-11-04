@@ -6,7 +6,7 @@ import os from "node:os";
 import { createHash } from "node:crypto";
 import { stageInspectionRegistration, verifyInspectionRegistration, qualifiedInspectionHost,
   startRegisteredInspection, finishRegisteredInspection, registeredInspectionStatus,
-  probeRegisteredInspection } from "./native_inspection_registration.mjs";
+  probeRegisteredInspection, stopRegisteredInspection } from "./native_inspection_registration.mjs";
 
 const root = process.env.PATAMAPS_TEST_RETAIN_ROOT;
 assert.ok(root && path.isAbsolute(root));
@@ -79,11 +79,32 @@ test("unapproved archive or native bytes refuse before creating a snapshot", () 
 });
 
 for (const operation of ["engine", "input-key", "unchanged-build"]) {
-  test("actual accepted CLI through closed registered " + operation, { timeout: 180000 }, async () => {
+  test("actual accepted CLI through closed registered " + operation, { timeout: operation === "unchanged-build" ? 960000 : 180000 }, async (t) => {
     const dir = fixture("real-" + operation);
     const inputs = operation === "engine" ? {} : { ...supplied.inputs };
     if (operation === "input-key") delete inputs.state;
     const run = await startRegisteredInspection(registration, { operation, runRoot: dir, inputs });
+
+    let terminalConfirmed = false;
+    let abortCleanup;
+    const cleanup = () => {
+      abortCleanup ??= (async () => {
+        await stopRegisteredInspection(run);
+        const stopped = await finishRegisteredInspection(run);
+        assert.equal(stopped.ownership.allRegisteredStopped, true);
+        assert.equal(stopped.ownership.channelClosed, true);
+        write(path.join(dir, "abort-cleanup.json"), {
+          knownGroupsStopped: true, controlClosed: true, automaticRecoveryPerformed: false });
+      })();
+      return abortCleanup;
+    };
+    const aborted = () => { if (!terminalConfirmed) cleanup().catch(() => {}); };
+    t.signal.addEventListener("abort", aborted, { once: true });
+    t.after(async () => {
+      t.signal.removeEventListener("abort", aborted);
+      if (!terminalConfirmed) await cleanup();
+    });
+
     const initial = registeredInspectionStatus(run);
     assert.ok(initial.controllerIdentity.pid > 1);
     // The controller is observed before acknowledgement; normal fast operations
@@ -122,6 +143,7 @@ for (const operation of ["engine", "input-key", "unchanged-build"]) {
     assert.ok(Object.values(stopped.identities).every(value => value === null));
     assert.ok(Object.values(stopped.groupsStopped).every(value => value === true));
     write(path.join(dir, "independent-stop.json"), stopped);
+    terminalConfirmed = true;
   });
 }
 

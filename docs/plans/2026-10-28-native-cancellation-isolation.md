@@ -1,5 +1,9 @@
 # Native cancellation ownership isolation
 
+Current execution authorization: [owner-directed autonomous closeout](2026-11-04-adoption-closeout.md).
+Historical per-attempt approval waits below are superseded by that instruction;
+recorded results, acceptance criteria and resource limits remain unchanged.
+
 Status: strict kernel/guardian controls, live collection and actual retained-owner
 unchanged build with exact lock access pass on Intel macOS15.8.1. Installed controller
 registration, global ownership integration and automatic release remain unqualified.
@@ -521,3 +525,22 @@ The staged installed-guard patch, cancellation/owner-crash/unsealed recovery
 qualification, installation and any new actual-owner parent-death proposal remain
 unfinished. Native execution stays exclusive and parallelfalse. Full G0–G6
 adoption remains active and unachieved; no requirement is narrowed by this failure.
+
+
+## Authorized isolated retry; selected context recovery needed (2026-11-04)
+
+The [isolated retry](../acceptance/project-adoption/native-registered-inspection-20261104/README.md)
+completed one snapshot case and one real unchanged-build case without test
+cancellation. The native command refused PROJECT_CONTEXT; registration remains
+unaccepted. The supervisor then failed finalization with a missing shared lease
+of unknown cause. Two explicit stop observations supported recovery of only the
+stopped request under the owner's delegated authority; the original exit75 and
+failed case remain. No installed release predicate or parallel activation changed.
+
+Inspection of the actual cached verification path confirms that selected
+non-writable context entries remain required even when absent from artifacts.json.
+31 earlier approved removals fall in that required context, with350566593 bytes
+and manifest-matching retained backup declarations. Restore only those absent
+files after rehashing all backups, then rerun serial registration controls with
+the existing900s native/960s test limits. No new application build, selection,
+owner crash trial, deletion or weakened context rule follows.
