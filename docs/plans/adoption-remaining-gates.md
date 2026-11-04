@@ -565,3 +565,8 @@ The [API-isolation attempt](../acceptance/project-adoption/original-owner-auth-e
 
 
 The [history/cleanup repair](../acceptance/project-adoption/original-owner-auth-endpoint-20261029/services-isolated-browser-history-20261104/review.json) passes25 controls and12 HTTP cases; both API processes and all other owned resources stop, producer restoration succeeds and reservation releases. Full UI remains false: the fresh API work-root lacked the original bootstrap's pre-existing denied-read probe. A complete-layout/narrowed-profile repair adds the actual layout regression before another app attempt. The original source, real quota, assertions and limits are preserved.
+
+
+## 2026-11-04 partial browser authentication checkpoint
+
+All 12 original HTTP cases and real Chromium/Firefox browser login and exact permission-denial assertions pass in the isolated-runtime attempt. WebKit reset readiness failed; two mobile projects remain unrun. Full authentication is not accepted. Independent review confirms four API processes reaped, owned resources stopped, lease released and all selected files/directories/modes/pointer/manifest unchanged. The diagnostic retry preserves every original deadline and adds bounded private startup observations. Evidence: [partial browser review](../acceptance/project-adoption/owner-auth-isolated-runtime-20261104/README.md). Other goal gates remain open.

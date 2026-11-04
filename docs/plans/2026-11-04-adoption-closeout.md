@@ -109,3 +109,8 @@ The optional idle-view maintenance touches only a reviewed finished owned
 workspace. Retain its image, prove complete logical contents through a read-only
 restoration, then leave the duplicate view closed. No file deletion, forced
 detach, Docker interruption or unrelated database restart follows.
+
+
+## 2026-11-04 partial browser authentication checkpoint
+
+All 12 original HTTP cases and real Chromium/Firefox browser login and exact permission-denial assertions pass in the isolated-runtime attempt. WebKit reset readiness failed; two mobile projects remain unrun. Full authentication is not accepted. Independent review confirms four API processes reaped, owned resources stopped, lease released and all selected files/directories/modes/pointer/manifest unchanged. The diagnostic retry preserves every original deadline and adds bounded private startup observations. Evidence: [partial browser review](../acceptance/project-adoption/owner-auth-isolated-runtime-20261104/README.md). Other goal gates remain open.
