@@ -556,3 +556,6 @@ performance still gate overall adoption; this pair is not a full G5/G6 decision.
 
 
 Latest original-owner browser diagnostic (2026-11-04): [review](../acceptance/project-adoption/original-owner-auth-endpoint-20261029/services-browser-request-diagnostic-20261104/review.json) independently verifies12 HTTP passes and a first-browser failure. The observed login429 is confounded by the extra CORS precheck consuming the original five-request window; it does not explain the earlier timeout. A frozen neutral-route precheck correction preserves the limiter, original assertions and20s/600s deadlines. Browser/full authentication remains false. Owned resources stopped and reservation released.
+
+
+The [quota-neutral follow-up](../acceptance/project-adoption/original-owner-auth-endpoint-20261029/services-browser-neutral-precheck-20261104/review.json) now independently verifies439 bindings and12 HTTP passes. Its first UI login/current-user/permissions return200; the allowed-user loop completes before our second-context trace creation fails EEXIST. No whole browser project or full authentication is accepted. The prepared sink-sharing and per-context owned-API process-isolation correction must preserve the original limiter, source, assertions and deadlines; it is unrun. Earlier failures remain.
