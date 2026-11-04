@@ -1,0 +1,176 @@
+{
+  "status": "verified-six-scoped-browser-passes-webkit-client-startup-failure",
+  "sourceRevision": "afce3d06575762748df1d7335bb2420acdfd1e77",
+  "ownerCommit": "c61d51a57120abbbca65d4cb4a432c1cef9343bb",
+  "actualLaunchRevision": "de66152837813c3a7beb78af0d5fb77c6c0764ad",
+  "reservationId": "919e5c5f-118e-420c-8672-1c314599a87c",
+  "reservationFinished": true,
+  "leaseReleased": true,
+  "guardId": "fd6c6322-0799-4e9d-bbca-54a60a3ee82d",
+  "supervisorExitCode": 1,
+  "guardExitCode": 1,
+  "frozenManifestSha256": "cd54277f4cbf23cc845262cb2558bab6315cdbbbd17af24c95acfe4d870d43d9",
+  "all444FrozenInputBindingsMatched": true,
+  "httpCases": [
+    {
+      "name": "missing-session",
+      "status": 401,
+      "expected": 401,
+      "passed": true
+    },
+    {
+      "name": "invalid-session",
+      "status": 401,
+      "expected": 401,
+      "passed": true
+    },
+    {
+      "name": "wrong-password",
+      "status": 401,
+      "expected": 401,
+      "passed": true
+    },
+    {
+      "name": "allowed-real-login",
+      "status": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "allowed-current-user",
+      "status": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "allowed-permissions",
+      "status": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "allowed-permission-check",
+      "status": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "denied-real-login",
+      "status": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "denied-current-user",
+      "status": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "denied-permissions",
+      "status": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "denied-permission-check",
+      "status": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "expired-session",
+      "status": 401,
+      "expected": 401,
+      "passed": true
+    }
+  ],
+  "httpCasesPassed": 12,
+  "realPasswordLoginsIndependentlyVerified": 2,
+  "httpAuthenticationAndPermissionAssertionsPassed": true,
+  "browserProjectStatuses": {
+    "chromium": {
+      "real login, edited navigation and exact permission denial": [
+        "passed"
+      ],
+      "invalid session is rejected by original API and UI": [
+        "passed"
+      ],
+      "expired session is rejected by original API and UI": [
+        "passed"
+      ]
+    },
+    "firefox": {
+      "real login, edited navigation and exact permission denial": [
+        "passed"
+      ],
+      "invalid session is rejected by original API and UI": [
+        "passed"
+      ],
+      "expired session is rejected by original API and UI": [
+        "passed"
+      ]
+    },
+    "webkit": {
+      "real login, edited navigation and exact permission denial": [
+        "timedOut"
+      ],
+      "invalid session is rejected by original API and UI": [],
+      "expired session is rejected by original API and UI": []
+    },
+    "Mobile Chrome": {
+      "real login, edited navigation and exact permission denial": [],
+      "invalid session is rejected by original API and UI": [],
+      "expired session is rejected by original API and UI": []
+    },
+    "Mobile Safari": {
+      "real login, edited navigation and exact permission denial": [],
+      "invalid session is rejected by original API and UI": [],
+      "expired session is rejected by original API and UI": []
+    }
+  },
+  "originalPositiveCasesPassed": 2,
+  "invalidSessionUiCasesPassed": 2,
+  "expiredSessionUiCasesPassed": 2,
+  "fullBrowserMatrixAccepted": false,
+  "webkitClientPageErrorsBeforeAnyApiRequest": true,
+  "readinessObservations": [
+    {
+      "instance": 1,
+      "readySeconds": 7.136
+    },
+    {
+      "instance": 2,
+      "readySeconds": 8.255
+    },
+    {
+      "instance": 3,
+      "readySeconds": 8.363
+    }
+  ],
+  "privacyControlsPassed": 10,
+  "controllerControlsPassed": 11,
+  "actualHelperControlsPassed": 10,
+  "preflightInclusive600SecondBoundVerified": true,
+  "originalPositiveSourceRetainedByteForByte": true,
+  "sourceApiUnmodified": true,
+  "completeBrowserCaseResultsAvailable": true,
+  "browserProjectsFullyUnrun": 2,
+  "browserCasesSkipped": 8,
+  "allFourApiInstancesReaped": true,
+  "allThreeCaseProfilesAndControlsMatched": true,
+  "independentlyRehashedSelectedFiles": 2482,
+  "independentlyCheckedSelectedDirectories": 524,
+  "selectedPointerUnchanged": true,
+  "ownedContainerInspectedStopped": true,
+  "ownedContainerLimitsIndependentlyMatched": true,
+  "protectedDatabaseStartIdentityUnchanged": true,
+  "nativeReservationGrowthBytes": 1250000000,
+  "approvedMachineGrowthCeilingBytes": 4000000000,
+  "installedEnforcerChanged": false,
+  "filesDeleted": 0,
+  "authenticationAccepted": false,
+  "goalComplete": false,
+  "collectorSchemaCorrectionOnly": true,
+  "originalCollectorFailurePreserved": true
+}

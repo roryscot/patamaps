@@ -575,3 +575,10 @@ All 12 original HTTP cases and real Chromium/Firefox browser login and exact per
 ## 2026-11-04 bounded startup diagnostic
 
 The diagnostic independently confirms both observed API resets ready within ten seconds, twelve HTTP passes and a Chromium UI pass. Firefox real logins pass but a subsequent navigation is aborted; three projects remain unrun. Original asynchronous login redirect is a plausible test race. The next attempt adds an explicit /discovery redirect-completion assertion while preserving all eleven original expectations and all existing limits. Full auth remains open. [Evidence and limitations](../acceptance/project-adoption/owner-auth-startup-diagnostic-20261104/README.md).
+
+
+## 2026-11-04 verified frontier
+
+The [five staged native crash cases](../acceptance/project-adoption/native-guard-five-crashes-20261104/README.md) now independently pass, including active parent death with a surviving trusted observer and automatic stopped-state release. Remaining channel/unsealed/binding/fallback/fairness controls and real-owner watch cases stay open; nothing is installed or activated.
+
+The [six scoped browser cases](../acceptance/project-adoption/owner-auth-six-browser-cases-20261104/README.md) establish real login/permissions and invalid/expired UI rejection in Chromium and Firefox. All twelve HTTP cases and31 controls pass. WebKit times out before sending an API request; eight following cases remain unrun. Anonymous client-startup diagnosis is in progress under the same original profile/time limits. Full authentication and the wider G0–G6 goal remain incomplete.

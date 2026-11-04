@@ -1,6 +1,6 @@
 # Registered native inspection: staged guard candidate
 
-Status: planned 2026-11-04 under [autonomous closeout](2026-11-04-adoption-closeout.md).
+Status: five staged cases independently accepted; full suite incomplete (2026-11-04), under [autonomous closeout](2026-11-04-adoption-closeout.md).
 Closed registration now independently passes15 controls, three real native calls
 and the archive/runtime/OS/stop checks. Earlier failures remain. This increment
 does not install a guard, activate source trust or enable parallel execution.
@@ -76,3 +76,8 @@ production activation, installed guard change or parallel activation is included
 ## Source/decision preflight (2026-11-04)
 
 The proposed opaque bridge is implemented. [Fourteen controls, ten source bindings and six JavaScript syntax checks](../acceptance/project-adoption/native-guard-candidate-20261104/preflight.json) pass under a released256MiB canonical native-exclusive reservation. The private engine patch has not been executed. Its scheduler dependency resolution and isolated end-to-end cancellation/crash/unsealed/fairness controls remain required; this is not integration acceptance or installed activation.
+
+
+## Five-case execution and independent review
+
+[Five genuine staged cases and exact source/harness snapshots](../acceptance/project-adoption/native-guard-five-crashes-20261104/README.md) now pass normal completion, active cancellation, controller/guardian crashes and active command-owner parent death with a surviving trusted observer. All reservations release with complete proof; failed operations stay failed. Fourteen bridge controls, full runtime/system/source bindings and protected state are independently checked. One runtime is reused. The installed guard, trust and parallel activation remain unchanged. The remaining unsealed/channel/binding/fallback/atomic/fairness controls above are still required before any real-owner retry or activation.
