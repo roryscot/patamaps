@@ -37,3 +37,8 @@ Use the native binding/context contracts when classifying candidate files.
 Retiring an entire old build or changing that contract is a separate reviewed
 operation. Preserve historical inventories and record any restored copies with
 new identities instead of pretending original inode/timestamp restoration.
+
+
+### Owned data outside ordinary roots
+
+Directory scans alone can miss labelled Patamaps Docker volumes stored inside a preallocated Docker VM. The current [Norway staged task adapter](../acceptance/project-adoption/owned-volume-accounting-20261104/README.md) charges exact owned-volume bytes in addition to all original roots, and conservatively charges their growth against the same declared job allowance. Unrelated project data is excluded; unknown sizes, duplicate identity or unavailable metadata refuse. The canonical installed guard and policy remain unchanged. This does not establish hard native quotas or parallel qualification. Future storage claims must state whether such data was included.
