@@ -264,7 +264,15 @@ records the actual512MiB native-exclusive reservation and released guard0.
 
 Only this explicit derived retained profile requests dev/test strip=symbols,
 including the existing workspace gates and fresh compiler paths, and records it.
-No actual stripped-build size reduction or full-pair headroom is yet proved.
+The preflight alone proves no size reduction or full-pair headroom; the completed
+full-pair result below supplies the subsequent actual runtime evidence.
 The same original41-group/four-test cases per installation, native correctness,
 package/image/refusal/restoration checks and combined4GB CI cap remain. Continue
 the existing selected Linux lane and independently review its real artifact.
+
+
+## Both installed cases independently accepted (2026-11-04)
+
+[Run41883534897 at1ad2508](../acceptance/project-adoption/g5-retained-dynamic-next-20261028/accepted-41883534897/independent-verification.json) passes the original source/native pair and every119 independent-review predicate, including exact compilerSymbolProfile dev/test=symbols. Each case passed41 groups and four unchanged upstream tests. All1,340 packaged files match Git; archive/engine/source compilation, bootstrap, mutation/refusal, image/cache/kernel, unavailable producer paths, restoration and shutdown requirements pass. Sampled peak3,906,961,408bytes is below the unchanged4GB cap; no whole-job peak, clean build or direct symbol-savings comparison is claimed.
+
+The initial evidence collector failed only after all predicates, while creating its result path. A separate evidence-only collector repair retained all119 predicates and passed; it repeated no application build or runtime case. Both collector records and all earlier application capacity failures remain private/raw or previously published as appropriate. This closes only the explicit derived retained-dynamic installed pair. Named-owner browser/lifecycle/deployment, dependency closure, practical measurements and overall G0–G6 remain separate.

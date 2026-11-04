@@ -533,8 +533,7 @@ acceptance stays false. The1GB native-exclusive job finished/released and all
 owned services/groups stopped; original limits/criteria and old failures remain.
 
 [The112-control retained-dynamic symbol preflight](../acceptance/project-adoption/retained-dynamic-symbols-20261104/README.md)
-passes separately; Linux runtime pair41883534897 has completed successfully and
-its independent evidence collection is in progress. The earlier
+passes separately; [Linux runtime pair41883534897](../acceptance/project-adoption/g5-retained-dynamic-next-20261028/accepted-41883534897/independent-verification.json) now passes independent review of both fresh installations, all41 groups/four upstream tests each and the unchanged4GB cap. The earlier
 [native registration retry](../acceptance/project-adoption/native-registered-inspection-20261104/README.md)
 remains a preserved failure. Its follow-up restored31 required selected-context
 files from verified retained backups and independently passed all15 controls.
@@ -548,3 +547,9 @@ is superseded for the closed registration stage by an independently reviewed
 See [review](../acceptance/project-adoption/native-registered-inspection-20261104/restored-context-review.json).
 Automatic release, staged global-guard integration, actual owner parent-death/W1,
 browser authentication, performance and overall G0–G6 remain open.
+
+
+The previously incomplete native retained-dynamic installed case is now closed
+for its explicit derived profile by run41883534897. All original capacity failures
+remain historical. Owner-specific authentication/lifecycle/deployment and actual
+performance still gate overall adoption; this pair is not a full G5/G6 decision.
