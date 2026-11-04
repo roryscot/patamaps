@@ -531,8 +531,7 @@ adoption remains active and unachieved; no requirement is narrowed by this failu
 
 The [isolated retry](../acceptance/project-adoption/native-registered-inspection-20261104/README.md)
 completed one snapshot case and one real unchanged-build case without test
-cancellation. The native command refused PROJECT_CONTEXT; registration remains
-unaccepted. The supervisor then failed finalization with a missing shared lease
+cancellation. The native command refused PROJECT_CONTEXT; registration was unaccepted in that attempt. The supervisor then failed finalization with a missing shared lease
 of unknown cause. Two explicit stop observations supported recovery of only the
 stopped request under the owner's delegated authority; the original exit75 and
 failed case remain. No installed release predicate or parallel activation changed.
@@ -544,3 +543,10 @@ and manifest-matching retained backup declarations. Restore only those absent
 files after rehashing all backups, then rerun serial registration controls with
 the existing900s native/960s test limits. No new application build, selection,
 owner crash trial, deletion or weakened context rule follows.
+
+
+## Closed registration accepted; staged integration next (2026-11-04)
+
+After exact restoration of31 required non-writable selected-context files, all15 serial controls pass and the separate [postreview](../acceptance/project-adoption/native-registered-inspection-20261104/restored-context-review.json) verifies runtime/archive/OS bindings, three real calls and nine stopped process identities. The installed guard remains unchanged; automatic release and actual owner parent-death remain unaccepted.
+
+Proceed under the [bounded staged-candidate plan](2026-11-04-native-guard-candidate.md), preserving original native-exclusive fallback, limits, channel/source trust boundaries and every historical failure.
