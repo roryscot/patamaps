@@ -71,3 +71,8 @@ case against the qualified candidate, then W1 failure/race/cancellation. Histori
 kernel/profile, read-only compatibility and passing application builds are reused.
 No application recompilation, deletion, service interruption, public registry or
 production activation, installed guard change or parallel activation is included.
+
+
+## Source/decision preflight (2026-11-04)
+
+The proposed opaque bridge is implemented. [Fourteen controls, ten source bindings and six JavaScript syntax checks](../acceptance/project-adoption/native-guard-candidate-20261104/preflight.json) pass under a released256MiB canonical native-exclusive reservation. The private engine patch has not been executed. Its scheduler dependency resolution and isolated end-to-end cancellation/crash/unsealed/fairness controls remain required; this is not integration acceptance or installed activation.
