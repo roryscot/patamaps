@@ -562,3 +562,6 @@ The [quota-neutral follow-up](../acceptance/project-adoption/original-owner-auth
 
 
 The [API-isolation attempt](../acceptance/project-adoption/original-owner-auth-endpoint-20261029/services-isolated-browser-cases-20261104/review.json) passes20 preflight controls and12 HTTP cases but fails an immutable-writer/update mismatch before browser API readiness. Guardian stop and reservation release are verified; agent recovery separately restored3 exact producer paths, followed by441-input/2,482-file/524-directory/mode/pointer/manifest/attempt verification. Original failed records remain. The prepared25-control repair preserves both users on one API per browser project; full authentication remains unaccepted.
+
+
+The [history/cleanup repair](../acceptance/project-adoption/original-owner-auth-endpoint-20261029/services-isolated-browser-history-20261104/review.json) passes25 controls and12 HTTP cases; both API processes and all other owned resources stop, producer restoration succeeds and reservation releases. Full UI remains false: the fresh API work-root lacked the original bootstrap's pre-existing denied-read probe. A complete-layout/narrowed-profile repair adds the actual layout regression before another app attempt. The original source, real quota, assertions and limits are preserved.
