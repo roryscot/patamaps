@@ -559,3 +559,6 @@ Latest original-owner browser diagnostic (2026-11-04): [review](../acceptance/pr
 
 
 The [quota-neutral follow-up](../acceptance/project-adoption/original-owner-auth-endpoint-20261029/services-browser-neutral-precheck-20261104/review.json) now independently verifies439 bindings and12 HTTP passes. Its first UI login/current-user/permissions return200; the allowed-user loop completes before our second-context trace creation fails EEXIST. No whole browser project or full authentication is accepted. The prepared sink-sharing and per-context owned-API process-isolation correction must preserve the original limiter, source, assertions and deadlines; it is unrun. Earlier failures remain.
+
+
+The [API-isolation attempt](../acceptance/project-adoption/original-owner-auth-endpoint-20261029/services-isolated-browser-cases-20261104/review.json) passes20 preflight controls and12 HTTP cases but fails an immutable-writer/update mismatch before browser API readiness. Guardian stop and reservation release are verified; agent recovery separately restored3 exact producer paths, followed by441-input/2,482-file/524-directory/mode/pointer/manifest/attempt verification. Original failed records remain. The prepared25-control repair preserves both users on one API per browser project; full authentication remains unaccepted.
