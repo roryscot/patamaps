@@ -114,3 +114,8 @@ detach, Docker interruption or unrelated database restart follows.
 ## 2026-11-04 partial browser authentication checkpoint
 
 All 12 original HTTP cases and real Chromium/Firefox browser login and exact permission-denial assertions pass in the isolated-runtime attempt. WebKit reset readiness failed; two mobile projects remain unrun. Full authentication is not accepted. Independent review confirms four API processes reaped, owned resources stopped, lease released and all selected files/directories/modes/pointer/manifest unchanged. The diagnostic retry preserves every original deadline and adds bounded private startup observations. Evidence: [partial browser review](../acceptance/project-adoption/owner-auth-isolated-runtime-20261104/README.md). Other goal gates remain open.
+
+
+## 2026-11-04 bounded startup diagnostic
+
+The diagnostic independently confirms both observed API resets ready within ten seconds, twelve HTTP passes and a Chromium UI pass. Firefox real logins pass but a subsequent navigation is aborted; three projects remain unrun. Original asynchronous login redirect is a plausible test race. The next attempt adds an explicit /discovery redirect-completion assertion while preserving all eleven original expectations and all existing limits. Full auth remains open. [Evidence and limitations](../acceptance/project-adoption/owner-auth-startup-diagnostic-20261104/README.md).
