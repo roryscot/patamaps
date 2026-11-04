@@ -59,8 +59,20 @@ export function consumeRegisteredGuardInvocation(handle){
     await exited;
     let timer;
     try{
+     const settle=async()=>{
+      let result=await finishRegisteredInspection(inspection);
+      if(result.ownership.allRegisteredStopped!==true){
+       // EOF exposes the complete accepted identity set. Stop only those owned
+       // instances, then obtain a fresh independent assessment; never clear a
+       // missing registration or protocol failure merely because known PIDs stop.
+       if(stopPromise)await stopPromise;
+       await stopRegisteredInspection(inspection);
+       result=await finishRegisteredInspection(inspection);
+      }
+      return result;
+     };
      const result=await Promise.race([
-      finishRegisteredInspection(inspection),
+      settle(),
       new Promise((_,reject)=>{timer=setTimeout(()=>reject(Error('registered-final-proof-deadline')),30000);timer.unref();}),
      ]);
      terminal={safeToRelease:observerFailure===null&&closedInspectionStopped(result,value.binding),observerFailure,
