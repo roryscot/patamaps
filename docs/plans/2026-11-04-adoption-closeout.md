@@ -22,7 +22,8 @@ outcomes and actual results. Preserve original failures and run independently
 reviewed follow-up checks before claiming acceptance. Prefer a fix that follows
 from observed evidence; avoid unchanged retries.
 
-Existing 4 GB run-growth, 500 MB reserve and 100 GB retention limits, canonical
+The approved 4 GB per-run growth ceiling, 500 MB reserve and 100 GB retention
+limit, canonical
 resource reservations, native exclusive fallback, ownership checks and exact
 shared-output protection remain. Preserve unrelated services, existing source,
 accepted generations and prior evidence. No deletion is authorized by this
@@ -78,3 +79,33 @@ commits. Keep credentials, raw environment, private configuration and unreviewed
 application logs out of public records. Record implemented, executed, accepted
 and activated states separately. Completion requires all original gates, not
 merely a successful authentication run.
+
+
+## Smaller declared jobs under the same guard
+
+Three unchanged4GB admission checks refused before workers started after the
+native registration fixture increased retained data. Physical free space remains
+available; the project retention headroom is the relevant boundary.
+
+The existing canonical guard API already accepts a per-job policy value. A
+task-specific adapter may copy the approved policy and select only a smaller
+64MiB..4GB growth allowance. The SAME smaller value must govern native reservation,
+retention admission and the existing growth monitor. Preserve all accounting
+roots, capacity probes, fair queue, ownership/cancellation rules and native
+exclusive fallback. The500MB reserve/100GB retention ceilings do not change.
+Invalid and inherited declarations must refuse before queueing or effects.
+
+The unmodified run-project.mjs CLI does not expose that parameter; do not claim
+it does. This adapter invokes the existing guard API directly and changes no
+installed enforcer or policy. Its source and all selected job inputs must be
+bound, and actual request/guard/release results independently reviewed.
+Use256MiB for the first non-deleting idle-view maintenance qualification,512MiB
+for the bounded focused controls, and1GB for the next isolated authentication
+attempt. These are stricter job allowances, not increased resource limits.
+Original600s authentication deadline and application assertions remain unchanged.
+Failures stop their own attempt and remain preserved.
+
+The optional idle-view maintenance touches only a reviewed finished owned
+workspace. Retain its image, prove complete logical contents through a read-only
+restoration, then leave the duplicate view closed. No file deletion, forced
+detach, Docker interruption or unrelated database restart follows.

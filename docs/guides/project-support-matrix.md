@@ -1,5 +1,9 @@
 # Existing-project support and qualification
 
+Current execution authorization: [owner-directed autonomous closeout](../plans/2026-11-04-adoption-closeout.md).
+Historical per-attempt approval waits below are superseded by that instruction;
+recorded results, acceptance criteria and resource limits remain unchanged.
+
 Current scoped checkpoints differ: original-config Next dynamic page/data
 boundaries pass through both fresh installations at9276b07, and fresh installed
 Rust owner builds pass at8c6de4, both with workspace enginea5d602de. The pinned retained Next installed workflow
@@ -276,3 +280,14 @@ exit0. No authentication/browser case ran. Owned resources stopped, reservation
 released and earlier failures/unrelated database preserved. A new labelled
 Docker-volume attempt follows from this observation; no ownership repair or
 full adoption acceptance is claimed. See the [reviewed failure](../acceptance/project-adoption/original-owner-auth-endpoint-20261029/services-data-owner-proposal-20261102/README.md).
+
+
+## Owner authentication checkpoint (2026-11-04)
+
+The [fresh isolated owner HTTP case](../acceptance/project-adoption/original-owner-auth-endpoint-20261029/services-managed-volume-paths-small-20261104/README.md)
+passes all12 original login/session/permission assertions after real database
+readiness and schema/seed. Chromium UI timed out; the other four browser projects
+were skipped. HTTP support at this exact source/profile does not establish full
+authenticated browser compatibility. Resources stopped/released and prior
+failures remain. Native registration and actual performance are still open;
+the112-control symbol-profile preflight is preparation for a separate Linux pair.

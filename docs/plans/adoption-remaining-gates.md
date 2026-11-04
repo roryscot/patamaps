@@ -1,5 +1,9 @@
 # Remaining adoption gates
 
+Current execution authorization: [owner-directed autonomous closeout](2026-11-04-adoption-closeout.md).
+Historical per-attempt approval waits below are superseded by that instruction;
+recorded results, acceptance criteria and resource limits remain unchanged.
+
 This is a read-only audit of the original [G0–G6 requirements](2026-10-15-general-project-adoption.md),
 after the independently reviewed Next dynamic-route result at0f0ce33.
 It is a downstream status view, not a replacement specification or a new goal.
@@ -518,3 +522,21 @@ exit0. No authentication/browser case ran. Owned resources stopped, reservation
 released and earlier failures/unrelated database preserved. A new labelled
 Docker-volume attempt follows from this observation; no ownership repair or
 full adoption acceptance is claimed. See the [reviewed failure](../acceptance/project-adoption/original-owner-auth-endpoint-20261029/services-data-owner-proposal-20261102/README.md).
+
+
+## Actual HTTP milestone and next verified prerequisites (2026-11-04)
+
+[Real owner HTTP authentication/permissions](../acceptance/project-adoption/original-owner-auth-endpoint-20261029/services-managed-volume-paths-small-20261104/README.md)
+now passes its12 original cases with isolated owned data. The browser phase
+timed out in the first project; four projects did not run. Full owner/UI/G6
+acceptance stays false. The1GB native-exclusive job finished/released and all
+owned services/groups stopped; original limits/criteria and old failures remain.
+
+[The112-control retained-dynamic symbol preflight](../acceptance/project-adoption/retained-dynamic-symbols-20261104/README.md)
+passes separately; its full Linux runtime pair is still required. The
+[native registration retry](../acceptance/project-adoption/native-registered-inspection-20261104/README.md)
+remains failed.31 raw context files removed by an earlier incomplete cleanup
+classification are required for the selected native reuse contract; exact
+restoration from verified retained backups is planned before requalification.
+No manual recovery or direct HTTP result closes native crash, watch, deployment,
+measurement, browser or final adoption requirements.

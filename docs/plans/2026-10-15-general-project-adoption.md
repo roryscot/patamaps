@@ -1,5 +1,9 @@
 # General project adoption build plan
 
+Current execution authorization: [owner-directed autonomous closeout](2026-11-04-adoption-closeout.md).
+Historical per-attempt approval waits below are superseded by that instruction;
+recorded results, acceptance criteria and resource limits remain unchanged.
+
 Status: active Intel adoption goal, continuing separately from the completed
 C01–C19 capability milestone. The [integration backlog](integration-enhancement-backlog.md)
 records current priorities and distinguishes verified results from open gates.

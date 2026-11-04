@@ -1,5 +1,9 @@
 # Original-owner endpoint and real authentication
 
+Current execution authorization: [owner-directed autonomous closeout](2026-11-04-adoption-closeout.md).
+Historical per-attempt approval waits below are superseded by that instruction;
+recorded results, acceptance criteria and resource limits remain unchanged.
+
 This continues the existing owner browser plan and full adoption goal.
 The user explicitly requests endpoint resolution, real authentication and
 permissions with isolated owned data on Norway, unchanged limits, preserved
@@ -164,3 +168,20 @@ exit0. No authentication/browser case ran. Owned resources stopped, reservation
 released and earlier failures/unrelated database preserved. A new labelled
 Docker-volume attempt follows from this observation; no ownership repair or
 full adoption acceptance is claimed. See the [reviewed failure](../acceptance/project-adoption/original-owner-auth-endpoint-20261029/services-data-owner-proposal-20261102/README.md).
+
+
+## Real HTTP milestone; browser remains unaccepted (2026-11-04)
+
+The [independent partial review](../acceptance/project-adoption/original-owner-auth-endpoint-20261029/services-managed-volume-paths-small-20261104/README.md)
+verifies fresh owned PostgreSQL ownership and both TCP paths, schema/seed,
+all12 original HTTP cases and two real password logins with exact identity and
+permission assertions. The first Chromium case timed out at20s awaiting the
+current-user response; four projects were skipped. Full authentication/browser
+acceptance remains false. The actual1GB exclusive reservation released, owned
+processes/container/browser group stopped, producer paths/artifacts restored and
+unrelated database identity unchanged. Raw credentials/data/traces remain private.
+
+Next collect bounded request/path/status and CORS evidence under the same
+assertions/deadlines; do not widen timeout or claim a frontend request succeeded
+from the direct HTTP pass. Existing112 installed/runtime focused controls pass
+separately; they do not accept owner UI or the full adoption objective.
