@@ -102,7 +102,9 @@ def main():
  baseline_bytes=shutil.disk_usage(ROOT).used;started=time.monotonic()
  env={k:v for k,v in os.environ.items() if k in ["PATH","HOME","CARGO_HOME","RUSTUP_HOME"]}
  env.update(GITHUB_ACTIONS="true",PYTHONDONTWRITEBYTECODE="1",CARGO_INCREMENTAL="0",CARGO_BUILD_JOBS="2",CARGO_PROFILE_DEV_DEBUG="0",CARGO_PROFILE_TEST_DEBUG="0",CARGO_TERM_COLOR="never",RUSTUP_TOOLCHAIN="1.99.0")
+ if args.retained_dynamic_routes:env.update(CARGO_PROFILE_DEV_STRIP="symbols",CARGO_PROFILE_TEST_STRIP="symbols")
  record=dict(status="running",sourceRevision=subprocess.check_output(["git","rev-parse","HEAD"],cwd=ROOT,text=True).strip(),commands=[],cases={},filesDeleted=0,productionActivation=False,registryPublication=False,completeDependencyClosure=False,fullRetainedNextBundleAccepted=False,performanceAccepted=False,maximumQualificationGrowthBytes=4000000000)
+ if args.retained_dynamic_routes:record["compilerSymbolProfile"]=dict(dev="symbols",test="symbols")
  def save():write(out/"receipt.json",record)
  def capacity():
   disk=shutil.disk_usage(ROOT)

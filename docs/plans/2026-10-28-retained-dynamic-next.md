@@ -1,5 +1,9 @@
 # Retained dynamic Next replay
 
+Current execution authorization: [owner-directed autonomous closeout](2026-11-04-adoption-closeout.md).
+Historical per-attempt approval waits below are superseded by that instruction;
+recorded results, acceptance criteria and resource limits remain unchanged.
+
 Status: final planned run atb6157b8 failed the unchanged4GB capacity gate. Its completed source-installed case is independently verified; native execution is incomplete and the pair remains unaccepted. Initial+2 runtime budget exhausted. Independent G3/G5/G6 increment. The native I3e retry remains
 unapproved and is not part of this work. Full G0–G6 adoption remains active.
 
@@ -248,3 +252,19 @@ would set Cargo dev/test symbol stripping only for this explicit profile, record
 the setting and preserve every existing correctness/resource gate. It requires
 separate human approval; do not treat this diagnosis or goal continuation as
 approval. The separate native I3e/API/benchmark decisions remain pending.
+
+
+## Symbol-profile working overlay passes focused preflight (2026-11-04)
+
+The owner's autonomous continuation supersedes the old pending one-attempt
+question. The exact prepared two-file symbol-profile patch is applied; all112
+focused controls and workflow YAML checks pass with0 failures/errors/skips.
+The [source-bound preflight](../acceptance/project-adoption/retained-dynamic-symbols-20261104/README.md)
+records the actual512MiB native-exclusive reservation and released guard0.
+
+Only this explicit derived retained profile requests dev/test strip=symbols,
+including the existing workspace gates and fresh compiler paths, and records it.
+No actual stripped-build size reduction or full-pair headroom is yet proved.
+The same original41-group/four-test cases per installation, native correctness,
+package/image/refusal/restoration checks and combined4GB CI cap remain. Continue
+the existing selected Linux lane and independently review its real artifact.
