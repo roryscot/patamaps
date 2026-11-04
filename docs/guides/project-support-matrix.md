@@ -263,3 +263,16 @@ The [executed TCP attempt](../acceptance/project-adoption/original-owner-auth-en
 captured an owned data-directory ownership refusal before original API/browser
 execution. Cleanup/release and bounded captures are verified; authentication
 and the proposed data-owner correction are not accepted.
+
+
+## Autonomous continuation and observed ownership refusal (2026-11-04)
+
+The owner authorized continued implementation, repairs and checks with review
+at the end. The new [continuation scope](../plans/2026-11-04-adoption-closeout.md)
+supersedes historical per-attempt approval waits; criteria and limits remain.
+The executed425-input owned-data candidate failed before initialization: its
+actual non-root guard observed process501:20 but data0:0 despite metadata-copy
+exit0. No authentication/browser case ran. Owned resources stopped, reservation
+released and earlier failures/unrelated database preserved. A new labelled
+Docker-volume attempt follows from this observation; no ownership repair or
+full adoption acceptance is claimed. See the [reviewed failure](../acceptance/project-adoption/original-owner-auth-endpoint-20261029/services-data-owner-proposal-20261102/README.md).
