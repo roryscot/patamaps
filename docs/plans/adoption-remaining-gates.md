@@ -553,3 +553,6 @@ The previously incomplete native retained-dynamic installed case is now closed
 for its explicit derived profile by run41883534897. All original capacity failures
 remain historical. Owner-specific authentication/lifecycle/deployment and actual
 performance still gate overall adoption; this pair is not a full G5/G6 decision.
+
+
+Latest original-owner browser diagnostic (2026-11-04): [review](../acceptance/project-adoption/original-owner-auth-endpoint-20261029/services-browser-request-diagnostic-20261104/review.json) independently verifies12 HTTP passes and a first-browser failure. The observed login429 is confounded by the extra CORS precheck consuming the original five-request window; it does not explain the earlier timeout. A frozen neutral-route precheck correction preserves the limiter, original assertions and20s/600s deadlines. Browser/full authentication remains false. Owned resources stopped and reservation released.
