@@ -5,8 +5,20 @@ import {
 } from './native_inspection_registration.mjs';
 const capabilities=new WeakMap();
 const need=(condition,message)=>{if(!condition)throw Error(message);};
-export function closedInspectionStopped(result,initialBinding){
- return result?.registeredStagedSource===true&&
+export function normalInspectionSealed(status){
+ return status?.version===1&&status.channelClosed===true&&status.failure===null&&
+  status.controllerOutcome?.code===0&&status.controllerOutcome?.signal===null&&
+  Array.isArray(status.calls)&&status.calls.length>0&&status.calls.every(call=>
+   call.registrationKnown===true&&call.innerCount===3&&call.nextSequence===6&&
+   call.finished===true&&call.controlComplete===true&&
+   ['stdoutClosed','stderrClosed','bindingsUnchanged'].every(key=>call.terminalFlags?.[key]===true));
+}
+export function closedInspectionStopped(result,initialBinding,status){
+ const outcome=result?.exit;
+ const outcomeKnown=(Number.isInteger(outcome?.code)&&outcome.signal===null)||
+  (outcome?.code===null&&typeof outcome.signal==='string'&&outcome.signal.length>0);
+ return outcomeKnown&&(outcome.code!==0||normalInspectionSealed(status))&&
+  result?.registeredStagedSource===true&&
   typeof initialBinding?.manifestSha256==='string'&&
   initialBinding.qualifiedHost!==null&&typeof initialBinding.qualifiedHost==='object'&&
   result.binding?.manifestSha256===initialBinding.manifestSha256&&
@@ -75,7 +87,9 @@ export function consumeRegisteredGuardInvocation(handle){
       settle(),
       new Promise((_,reject)=>{timer=setTimeout(()=>reject(Error('registered-final-proof-deadline')),30000);timer.unref();}),
      ]);
-     terminal={safeToRelease:observerFailure===null&&closedInspectionStopped(result,value.binding),observerFailure,
+     const finalStatus=registeredInspectionStatus(inspection);
+     terminal={safeToRelease:observerFailure===null&&closedInspectionStopped(result,value.binding,finalStatus),observerFailure,
+      normalCompletionSealed:normalInspectionSealed(finalStatus),
       controllerExitCode:result.exit?.code??1,controllerSignal:result.exit?.signal??null,
       outputError:result.outputError,ownership:result.ownership,
       binding:result.binding,dataStreamsClosed:result.dataStreamsClosed};

@@ -11,6 +11,14 @@ The [support matrix](../guides/project-support-matrix.md) retains exact source,
 engine, profile and verification limits. Native MetaMap C01–C19 completion stays
 separate. Full adoption completion remains unproven.
 
+## 2026-11-05 execution frontier
+
+The [twelve genuine staged executor cases](../acceptance/project-adoption/native-normal-seal-twelve-cases-20261105/README.md) independently pass seven conservative holds and five automatic stopped-state releases, with28 source decision controls. Both actual discovered defects (duplicate engine output and release after a lost final normal-success record) are corrected in the staged candidate; the qualified bridge is repository source. This does not install or activate trust/parallel execution and does not substitute fixture outcomes for actual owner watch, changed-build, deployment or performance gates.
+
+The [compiled WebSocket configuration rebuilds](../acceptance/project-adoption/websocket-build-limits-20261105/README.md) stopped at their declared3GB/4GB budgets during dependency materialization without selecting an output. Their failures and candidates remain, and their reservations were individually recovered after complete stop/source/selection checks. Real Chromium/Firefox partial authentication evidence remains valid at its scope; all-five-project authentication is still open. Reduce/explain materialization cost before another build; existing ceilings and assertions remain.
+
+Two independently checked non-deleting closed-image batches preserve every logical byte and reduce summed allocation by4,869,586,944bytes, including the [additional five images](../acceptance/project-adoption/closed-images-followup-20261105/README.md). This is capacity recovery, not acceptance of any application gate. The independent quiet-window requirement below remains unresolved; leave unrelated services running.
+
 ## What the existing evidence establishes
 
 | Original requirement | Evidence inspected | Remaining requirement |
