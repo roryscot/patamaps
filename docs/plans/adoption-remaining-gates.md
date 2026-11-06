@@ -71,9 +71,9 @@ before its interrupted final reference case. A focused retry
 [failed during FIFO](../acceptance/project-adoption/wargame-owner-reference-db-timeout-20261106/README.md)
 after PostgreSQL closed an idle transaction. The exact case then
 [passed with a read-only observer](../acceptance/project-adoption/wargame-owned-db-observer-20261106/README.md#full-focused-owner-reference-passed),
-including both complete plans and exact cold recovery and history. All
-117 native cases have passing evidence across separate invocations.
-A single successful full-suite invocation remains open. Both installed
+including both complete plans and exact cold recovery and history. The
+[source-installed native aggregate](../acceptance/project-adoption/wargame-source-installed-20261106/README.md#full-native-persistence-suite)
+now passes all 117 named cases in a single invocation. Both installed
 Patamaps CLIs [reproduced the exact Wargame client and Axum witness](../acceptance/project-adoption/wargame-installed-profile-20261106/README.md).
 The [native-package owner build and runtime](../acceptance/project-adoption/wargame-installed-network-20261106/README.md)
 then passed with fresh Rust and Next output and all 13 original lab network
@@ -81,8 +81,8 @@ checks. The [source-installed owner build](../acceptance/project-adoption/wargam
 passed those same 13 checks and all 22 original desktop and narrow browser
 cases on its new Rust and Next output. All three
 [source-installed managed checks](../acceptance/project-adoption/wargame-source-installed-20261106/README.md#managed-identity-and-detached-restore)
-now have passing evidence across two invocations. A successful aggregate
-native invocation and the remaining adoption gates below are still open.
+now have passing evidence across two invocations. The remaining adoption
+gates below are still open.
 
 ## What the existing evidence establishes
 

@@ -24,7 +24,7 @@ reservations released under the existing limits.
 The Patamaps CLI was reused from its [earlier exact source installation](../installed-original-owner-next-20261027/package-source-review.json).
 This passes the source-installed Wargame build and lab transport and
 browser workflow. The managed checks on the same builds are recorded below.
-A single successful aggregate native suite remains open.
+The full native suite on the source-installed Cargo target is also recorded below.
 
 [Network review](network-review.json) · [Browser review](browser-review.json)
 
@@ -52,3 +52,31 @@ reservations released. The detached check qualifies this synthetic
 fixture and archived runtime.
 
 [Managed review](managed-review.json)
+
+## Full native persistence suite
+
+The unfiltered owner command passed on the source-installed Cargo target
+on Norway using isolated PostgreSQL 18.6.
+
+```sh
+node scripts/check-persistence.mjs
+```
+
+A single invocation passed all 117 names in the owner's native suite
+manifest with zero failed or ignored. FIFO and priority each verified
+2,000 orders, 866 stored boundaries and the independent terminal ledger.
+Both cold recovery and complete history matched the reference. The test
+took 6,523.94 seconds within the 9,000-second controller deadline. This
+uses the existing four-gigabyte growth cap and five-second database
+idle transaction setting. The earlier timeout remains in the record.
+
+Independent review rehashed 597 inputs, verified both reference outputs,
+and confirmed that the prior operations and audit evidence matched by
+identity and digest. The owned cluster stopped, the PostgreSQL tool
+image detached, and the reservation released. The protected database
+matched its pre-run identity. The observer recorded 31,565 samples
+without an idle transaction reaching its two-second sample threshold.
+This qualifies the native suite for the tested build. The instrumented
+run supplies functional evidence.
+
+[Native aggregate review](native-aggregate-review.json)
