@@ -83,8 +83,11 @@ all eight differing later outputs against their independent oracle. The
 [managed launcher preflight](../acceptance/project-adoption/seeder-deployment-generation-20261106/linux-contract-gate-preflight.json)
 passed six pre-effect refusals and the matching launch sequence with stubbed
 effects. Managed stale-contract execution and production activation remain open. A fresh
-retention scan leaves 126,847,440 bytes of headroom, 673,152,560 bytes short
-of the frozen Safari reservation.
+retention scan left 126,847,440 bytes of headroom. A later
+[byte-preserving image recovery](../acceptance/project-adoption/closed-preparation-image-recovery-20261106/README.md)
+reclaimed 133,099,520 allocated bytes. Its admission inventory and verified
+reduction imply about 260 MB of headroom, still about 540 MB short of the
+frozen Safari reservation. Fresh admission must confirm current capacity.
 
 The [Wargame managed and browser checks](../acceptance/project-adoption/wargame-owner-managed-and-native-persistence-20261106/README.md)
 pass at their recorded scope. The earlier native suite passed 116 cases
