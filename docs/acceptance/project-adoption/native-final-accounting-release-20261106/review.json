@@ -1,0 +1,120 @@
+{
+  "status": "verified-staged-final-accounting-release",
+  "baselineProof": {
+    "baselineReproduced": true,
+    "cases": [
+      {
+        "label": "capacity",
+        "exitCode": null,
+        "failure": "fixture terminal volume accounting unavailable",
+        "activeLease": true,
+        "state": "running",
+        "ownershipSealed": true,
+        "releaseCompleted": false,
+        "receiptCompleted": null,
+        "receiptExitCode": null,
+        "terminalErrorFields": [],
+        "reason": null
+      }
+    ]
+  },
+  "candidateProof": {
+    "candidatePassed": true,
+    "cases": [
+      {
+        "label": "capacity",
+        "exitCode": 75,
+        "failure": null,
+        "activeLease": false,
+        "state": "finished",
+        "ownershipSealed": true,
+        "releaseCompleted": true,
+        "receiptCompleted": false,
+        "receiptExitCode": 75,
+        "terminalErrorFields": [
+          "freeBytesAtEnd"
+        ],
+        "reason": "Storage guard: final accounting unavailable",
+        "followUpReleased": true
+      },
+      {
+        "label": "roots",
+        "exitCode": 75,
+        "failure": null,
+        "activeLease": false,
+        "state": "finished",
+        "ownershipSealed": true,
+        "releaseCompleted": true,
+        "receiptCompleted": false,
+        "receiptExitCode": 75,
+        "terminalErrorFields": [
+          "retainedRootsAtEnd"
+        ],
+        "reason": "Storage guard: final accounting unavailable",
+        "followUpReleased": true
+      },
+      {
+        "label": "both",
+        "exitCode": 75,
+        "failure": null,
+        "activeLease": false,
+        "state": "finished",
+        "ownershipSealed": true,
+        "releaseCompleted": true,
+        "receiptCompleted": false,
+        "receiptExitCode": 75,
+        "terminalErrorFields": [
+          "freeBytesAtEnd",
+          "retainedRootsAtEnd"
+        ],
+        "reason": "Storage guard: final accounting unavailable",
+        "followUpReleased": true
+      },
+      {
+        "label": "uncertain",
+        "exitCode": null,
+        "failure": "Owned workload stop unconfirmed (processes or containers); reservation retained",
+        "activeLease": true,
+        "state": "needs-review",
+        "ownershipSealed": true,
+        "releaseCompleted": false,
+        "receiptCompleted": false,
+        "receiptExitCode": 75,
+        "terminalErrorFields": [
+          "freeBytesAtEnd"
+        ],
+        "reason": "Owned workload stop unconfirmed; shared lease retained"
+      },
+      {
+        "label": "normal",
+        "exitCode": 0,
+        "failure": null,
+        "activeLease": false,
+        "state": "finished",
+        "ownershipSealed": true,
+        "releaseCompleted": true,
+        "receiptCompleted": true,
+        "receiptExitCode": 0,
+        "terminalErrorFields": [],
+        "reason": null,
+        "followUpReleased": true
+      }
+    ]
+  },
+  "registeredProof": {
+    "registeredTerminalFaultPassed": true,
+    "nativeCalls": 1,
+    "exitCode": 75,
+    "commandReportedComplete": false,
+    "exactStopProof": true,
+    "reservationReleased": true
+  },
+  "actualNativeProcessGroupsStopped": true,
+  "ordinaryFollowUpsAcquired": 4,
+  "uncertainOwnershipConservativelyHeld": true,
+  "installedGuardChanged": false,
+  "sharedLeaseUsedByFixture": false,
+  "filesDeleted": 0,
+  "baselineGuardSha256": "2e78ed4c0e478878424bc6cd068af957dc165477dd05086b06c1536a8a4d4337",
+  "candidateGuardSha256": "c88e5d3ddf1568b83d4f591086f2ee3ef298bebe4a42d00e244a350b0a748d3c"
+}
