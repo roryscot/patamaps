@@ -24,3 +24,14 @@ The probes use a baseline and patched copy in adjacent fixture directories.
 
 The shared installed guard was not changed. The original failure and both
 pending approvals remain separate from the fixture results.
+
+## Combined ordinary guard check
+
+The staged ordinary adapter combines the prelaunch check with the
+[final-accounting error handling](ordinary-final-probes.patch). The
+[combined probe](combined-probe.mjs) injected a growth refusal and
+failures in both final accounting reads. It preserved the original
+growth diagnostic, recorded both final errors, released the unstarted
+job and ran a follow-up on the same isolated scheduler. The guarded
+Linux preparation declaration stays at 450 MB. Live admission and
+managed runtime qualification remain pending. [Combined review](combined-review.json)
