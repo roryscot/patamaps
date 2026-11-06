@@ -26,3 +26,13 @@ prepared follow-up. Separate successful runs took 131,450 ms in test
 case time in total. The full matrix retains its 120-second browser
 deadline, so those separate timings leave uncertainty about a single
 run. The full matrix remains unrun.
+
+Desktop WebKit and Mobile Safari took 57,269 ms across their four
+passing negative-session cases in the separate runs. The prepared full
+matrix now records phase and elapsed milliseconds for those cases
+without changing any browser assertion or deadline. An isolated Node
+preflight verified ten private trace files and refusal to overwrite a
+trace. The first Playwright list-only check selected the preserved spec
+backup. Moving that backup to a suffix outside the test pattern restored
+the exact same 15 cases. The [timing preflight](negative-timing-preflight.json)
+covers observation and case discovery. The live full matrix remains unrun.
