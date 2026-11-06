@@ -47,8 +47,12 @@ The [actual borrowed runtime replay](../acceptance/project-adoption/seeder-reado
 passed all seven public Next HTTP and compiled-asset checks under the
 write-denial profile, with three producer paths temporarily unavailable.
 It supports reuse without another runtime copy. The staged Safari
-launcher binds that result. Owned Safari authentication and the full
-matrix remain open.
+launcher now freezes 496 input bindings for 12 HTTP checks and three
+Mobile Safari cases. The latest read-only scan measured 127,142,352
+bytes of retention headroom, 672,857,648 bytes short of the 800 MB
+reservation. The existing 24,720-file duplicate inventory reverified
+against retained recovery bytes. Its deletion requires exact owner
+approval. Owned Safari authentication and the full matrix remain open.
 
 The [original-owner watcher postcheck](../acceptance/project-adoption/original-owner-watch-readonly-verification-20261106/README.md)
 passed both real native inspections under the read-only guard. The
