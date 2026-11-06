@@ -21,7 +21,7 @@ const SOURCES = Object.freeze({
   "native_inspection_guard.py": "a9e1b35e728b38dd8c7746bd6318cb28c10598a0c558b097f51b99c36447f91d",
   "project_watch.py": "94b3b1ccdd936a044fc815772ee72ecbdf2344701e57cd5f7a2fdf9b778ecf85",
   "native_inspection_receiver.mjs": "c0e26d091caec2033db0bc54e0001f804d17cacac443872e46bc37335e1ee04d",
-  "native_registered_controller.py": "7e2f0fd53ff04dcbeef623510c2b65862ac99945e7b69af3cdeabed2cba7a627",
+  "native_registered_controller.py": "5ff17e111f126e3c828022b9197b86280ef841557a5bae659c78985fe1695a81",
 });
 const ENV = Object.freeze({ PATH: "/usr/bin:/bin", LANG: "C", PYTHONDONTWRITEBYTECODE: "1" });
 const SYSTEM = ["/usr/bin/sandbox-exec", "/usr/bin/tar", "/usr/bin/otool",
@@ -268,16 +268,24 @@ export function probeRegisteredInspection(handle, ids) {
 function privateInvocation(handle, options) {
   const value = capsule(handle);
   need(exact(options, ["operation", "runRoot", "inputs"]) &&
-    ["engine", "input-key", "unchanged-build"].includes(options.operation), "closed-inspection-operation");
+    ["engine", "input-key", "unchanged-build", "watch-verify"].includes(options.operation), "closed-inspection-operation");
   privateDirectory(options.runRoot, true);
   need(!inside(value.root, options.runRoot) && !inside(options.runRoot, value.root),
     "inspection-writable-registration-alias");
-  const keys = options.operation === "engine" ? [] :
-    ["plan", "source", "context", "preparation", ...(options.operation === "unchanged-build" ? ["state"] : [])];
+  const watchVerify = options.operation === "watch-verify";
+  const keys = options.operation === "engine" ? [] : ["plan", "source", "context", "preparation"];
+  if (options.operation === "unchanged-build" || watchVerify) keys.push("state");
+  if (watchVerify) keys.push("nonce");
   need(exact(options.inputs, keys), "closed-inspection-inputs");
   for (const [key, file] of Object.entries(options.inputs)) {
+    if (key === "nonce") {
+      need(typeof file === "string" && file.length === 32 && /^[0-9a-f]+$/.test(file), "invalid-watch-verification-nonce");
+      continue;
+    }
     canonical(file, ["source", "state"].includes(key) ? "directory" : "file");
     need(!inside(value.root, file) && !inside(file, value.root), "inspection-input-registration-alias");
+    if (watchVerify)
+      need(!inside(options.runRoot, file) && !inside(file, options.runRoot), "inspection-input-work-alias");
   }
   if (options.operation === "unchanged-build") {
     const lock = path.join(options.inputs.state, "driver.lock");

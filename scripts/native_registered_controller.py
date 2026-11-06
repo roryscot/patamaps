@@ -1,6 +1,7 @@
 """Closed staged native inspection entrypoint; no caller code or profiles."""
+from contextlib import redirect_stdout
 from pathlib import Path
-import hashlib,json,os,select,stat,subprocess,sys
+import hashlib,io,json,os,re,select,stat,subprocess,sys
 
 HERE=Path(__file__).resolve().parent
 ROOT=HERE.parent
@@ -56,14 +57,23 @@ def main():
  inputs=invocation['inputs'];operation=invocation['operation']
  need(isinstance(inputs,dict),'Input shape')
  native=ROOT/'native/patamaps';need(digest(native)==manifest['nativeSha256'],'Native changed')
- if operation=='engine':
-  need(inputs=={},'Engine input shape');args=['engine'];lock=None
+ lock=None
+ if operation=='watch-verify':
+  required={'plan','source','context','preparation','state','nonce'}
+  need(set(inputs)==required,'Watch verification input shape')
+  need(isinstance(inputs['nonce'],str) and re.fullmatch('[0-9a-f]{32}',inputs['nonce']),'Watch verification nonce')
+  for key,value in inputs.items():
+   if key=='nonce':continue
+   p=Path(canonical(value,key in ('source','state')))
+   need(all(p!=protected and protected not in p.parents and p not in protected.parents
+            for protected in (ROOT,run)),'Watch verification path alias')
+ elif operation=='engine':
+  need(inputs=={},'Engine input shape');args=['engine']
  else:
   required={'plan','source','context','preparation'}|({'state'} if operation=='unchanged-build' else set())
   need(operation in ['input-key','unchanged-build'] and set(inputs)==required,'Operation/input shape')
   for key,value in inputs.items():canonical(value,key in ['source','state'])
   args=['project-build-input-key' if operation=='input-key' else 'project-build',inputs['plan'],'--source',inputs['source'],'--context',inputs['context'],'--preparation',inputs['preparation']]
-  lock=None
   if operation=='unchanged-build':
    args+=['--state',inputs['state']];lock=Path(inputs['state'])/'driver.lock'
  # Private acknowledgement prevents a fast controller exit before its actual
@@ -74,12 +84,26 @@ def main():
  need(os.getppid()==invocation['expectedParent'],'Supervisor died before launch')
  jobs=run/'jobs';jobs.mkdir(mode=0o700)
  runner=live.InspectionRunner(jobs,run,strict=True,driver_lock=lock,lifecycle_fd=3,stop_grace=.5)
- result=runner([str(native),*args],stdout=subprocess.PIPE,stderr=subprocess.PIPE,timeout=900 if operation=='unchanged-build' else 60,check=False)
+ if operation=='watch-verify':
+  from project_watch import selection,verify_selected_step
+  state=Path(inputs['state'])
+  before=selection(state)
+  need(before is not None,'Watch verification selection missing')
+  payload=dict(inputs,compiler=str(native),inspectionTimeoutMs=900000,
+               driverDigest=digest(HERE/'project_watch.py'))
+  output=io.StringIO()
+  with redirect_stdout(output):
+   verify_selected_step(json.dumps(payload),native_run=runner)
+  need(selection(state)==before,'Watch verification selection changed')
+  stdout,stderr,code=output.getvalue().encode(),b'',0
+ else:
+  result=runner([str(native),*args],stdout=subprocess.PIPE,stderr=subprocess.PIPE,timeout=900 if operation=='unchanged-build' else 60,check=False)
+  stdout,stderr,code=result.stdout,result.stderr,result.returncode
  need(digest(invocation_path)==sys.argv[4] and digest(ROOT/'registration.json')==invocation['manifestSha256'],'Invocation/binding changed after stop')
- sys.stdout.buffer.write(result.stdout);sys.stdout.buffer.flush()
- sys.stderr.buffer.write(result.stderr);sys.stderr.buffer.flush()
+ sys.stdout.buffer.write(stdout);sys.stdout.buffer.flush()
+ sys.stderr.buffer.write(stderr);sys.stderr.buffer.flush()
  os.close(3)
- return result.returncode
+ return code
 if __name__=='__main__':
  try:code=main()
  except BaseException as error:

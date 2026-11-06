@@ -35,3 +35,15 @@ for(const field of ['stdoutClosed','stderrClosed','bindingsUnchanged']){
 }
 test('observed controller result must agree with normal success',()=>{const status=sealed();status.controllerOutcome.code=75;assert.equal(closedInspectionStopped(good(),binding,status),false);});
 test('normal success with no observed call retains uncertainty',()=>{const status=sealed();status.calls=[];assert.equal(closedInspectionStopped(good(),binding,status),false);});
+test('paired watch verification requires exactly two sealed calls',()=>{
+ const status=sealed();
+ assert.equal(rawClosedInspectionStopped(good(),binding,status,2),false);
+ status.calls.push(structuredClone(status.calls[0]));
+ assert.equal(rawClosedInspectionStopped(good(),binding,status,2),true);
+ assert.equal(rawClosedInspectionStopped(good(),binding,status),false);
+ status.calls[1].controlComplete=false;
+ assert.equal(rawClosedInspectionStopped(good(),binding,status,2),false);
+ status.calls[1].controlComplete=true;
+ status.calls.push(structuredClone(status.calls[0]));
+ assert.equal(rawClosedInspectionStopped(good(),binding,status,2),false);
+});
