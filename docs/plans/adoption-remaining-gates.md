@@ -43,6 +43,13 @@ conservative growth against a 300 MB reservation. The exact stopped
 reservation was recovered and its failure preserved. This adds no
 Safari acceptance and leaves the full matrix open.
 
+The [actual borrowed runtime replay](../acceptance/project-adoption/seeder-readonly-runtime-http-20261106/README.md)
+passed all seven public Next HTTP and compiled-asset checks under the
+write-denial profile, with three producer paths temporarily unavailable.
+It supports reuse without another runtime copy. The staged Safari
+launcher binds that result. Owned Safari authentication and the full
+matrix remain open.
+
 ## What the existing evidence establishes
 
 | Original requirement | Evidence inspected | Remaining requirement |
