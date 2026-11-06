@@ -58,6 +58,13 @@ limit while staging the capsule. The failed record was preserved and
 the exact stopped reservation was released. The live registered pair,
 its refusal controls and actual watcher parent-death release remain open.
 
+The [actual installed owner watcher](../acceptance/project-adoption/seeder-stale-installed-selection-refusal-20261106/README.md)
+also refused the retained baseline inputs against the installed edited
+selection. Its two native commands and normal reservation release were
+independently verified. The [earlier context refusal](../acceptance/project-adoption/seeder-stale-selection-context-refusal-20261106/README.md)
+remains separate evidence. Live registered lifecycle, changed-build
+and deployment refusal acceptance remain open.
+
 ## What the existing evidence establishes
 
 | Original requirement | Evidence inspected | Remaining requirement |
