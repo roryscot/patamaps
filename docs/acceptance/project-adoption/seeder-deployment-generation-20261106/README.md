@@ -58,3 +58,23 @@ resources and an unchanged artifact. The retained image and its build inputs
 were left closed. The previously qualified 512 MiB quota exceeds the last
 measured retention headroom by about 410 MB, before accounting for any new
 staging growth. No workspace or container was created for this increment.
+
+## Smaller workspace and separate admission checks
+
+The revised managed definition keeps the exact Linux application, pinned
+Node and native verifier. It omits the ARM64 binary used in the separate
+architecture test. The retained payload totals 270,384,089 bytes. With
+the existing per-entry and free-space allowances, the candidate requires
+358,988,761 bytes free before copying into a 384 MiB workspace. The
+read-only preflight rehashed the closed source image, checked the stopped
+source reservation, and repeated the seven launcher controls. Actual
+workspace fit still requires measurement after creation.
+
+The earlier single headroom comparison combined two different accounting
+layers. The installed managed executor charges twice the declared quota
+against its own inventory. Its read-only scan gives this 384 MiB candidate
+607,774,720 bytes of margin before temporary staging effects. The separate
+native preparation guard includes owned Docker volume usage. It measured
+259,459,536 bytes of headroom, 190,540,464 bytes short of the candidate's
+450 MB preparation reservation. Both checks must pass before execution.
+The Linux runtime and Safari checks remain unrun. [Preflight](linux-384mib-preflight.json)

@@ -87,7 +87,11 @@ retention scan left 126,847,440 bytes of headroom. A later
 [byte-preserving image recovery](../acceptance/project-adoption/closed-preparation-image-recovery-20261106/README.md)
 reclaimed 133,099,520 allocated bytes. Its admission inventory and verified
 reduction imply about 260 MB of headroom, still about 540 MB short of the
-frozen Safari reservation. Fresh admission must confirm current capacity.
+frozen Safari reservation. The [384 MiB managed candidate preflight](../acceptance/project-adoption/seeder-deployment-generation-20261106/linux-384mib-preflight.json)
+verified its source bindings and distinguished the two admission checks.
+The installed managed inventory has room for its doubled quota. The latest
+native scan is 190,540,464 bytes short of the guarded preparation reservation.
+The workspace and runtime remain unrun.
 
 The [Wargame managed and browser checks](../acceptance/project-adoption/wargame-owner-managed-and-native-persistence-20261106/README.md)
 pass at their recorded scope. The earlier native suite passed 116 cases
