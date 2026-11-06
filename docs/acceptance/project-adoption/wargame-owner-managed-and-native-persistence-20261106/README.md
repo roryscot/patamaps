@@ -26,7 +26,7 @@ identity.
 A separate native command completed 116 of 117 declared persistence
 cases. The first plan of the remaining boundary-reference test reached
 tick 200 of 864 at 487.98 seconds. The agent stopped the attempt because
-the chosen 1,000-second deadline was inadequate for the three plans.
+the chosen 1,000-second deadline was inadequate for both reference plans.
 The partial native results, reference progress and failed run remain
 retained. The native reservation released and the owned cluster
 stopped. Full native persistence remains open, as do broader owner
