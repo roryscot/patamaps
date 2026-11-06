@@ -52,7 +52,11 @@ Mobile Safari cases. The latest read-only scan measured 127,142,352
 bytes of retention headroom, 672,857,648 bytes short of the 800 MB
 reservation. The existing 24,720-file duplicate inventory reverified
 against retained recovery bytes. Its deletion requires exact owner
-approval. Owned Safari authentication and the full matrix remain open.
+approval. That [exact cleanup and recovery](../acceptance/project-adoption/seeder-deployment-generation-20261106/approved-recovery-and-cleanup.json)
+subsequently completed. The [focused Mobile Safari result](../acceptance/project-adoption/seeder-mobile-safari-accepted-20261106/README.md)
+passes all 12 direct HTTP checks and all three browser cases, with 31
+preflight checks and stopped resources independently verified. The full
+15-case browser matrix in one invocation remains open.
 
 The [original-owner watcher postcheck](../acceptance/project-adoption/original-owner-watch-readonly-verification-20261106/README.md)
 passed both real native inspections under the read-only guard. The
