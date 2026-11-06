@@ -127,3 +127,25 @@ and the managed container is stopped. The outer reservation remains held.
 Three read-only recovery observations tied the remaining image handle to the
 exact separately reserved mount. An exact recovery proposal and a guarded
 copy continuation are prepared. [Stop record](linux-preparation-growth-stop.json)
+
+## Approved release and guarded resume outcomes
+
+The exact approved outer lease released with its three archived hashes
+verified. The managed reservation stayed prepared. The first resume
+refused an existing log path before mounting and released normally.
+
+The corrected resume passed retention admission. A physical-pool sample
+recorded a 447,836,160-byte drop before the worker mounted the source.
+Owned Docker volume accounting was unchanged between the two samples.
+The guard stopped the worker after a 467,570,688-byte charge. The source
+closed and matched its original hash. All 752 workspace files matched
+again, and no additional file had been copied. The managed runtime did
+not start. The new outer reservation is held.
+
+The last native admission measured 516,515,575 bytes of retention
+headroom, 283,484,425 bytes short of the full browser run's 800 MB
+declaration. The staged retry requires 300 MB of its existing 450 MB
+growth allowance to remain before it starts. The isolated probe reproduced
+the recorded loss, tested both sides of the margin, and confirmed every
+fixture reservation released. The installed guard remains unchanged.
+[Resume and verification record](linux-resume-growth-stop.json)
