@@ -71,8 +71,14 @@ The [actual installed owner watcher](../acceptance/project-adoption/seeder-stale
 also refused the retained baseline inputs against the installed edited
 selection. Its two native commands and normal reservation release were
 independently verified. The [earlier context refusal](../acceptance/project-adoption/seeder-stale-selection-context-refusal-20261106/README.md)
-remains separate evidence. Changed-build lifecycle and deployment
-refusal acceptance remain open.
+remains separate evidence. Changed-build lifecycle remains open.
+
+The [staged Seeder deployment generation gate](../acceptance/project-adoption/seeder-deployment-generation-20261106/README.md)
+refused the actual older compiled configuration before starting a listener.
+The matching selection passed native verification and seven HTTP checks on the
+declared loopback port. The first harness failure remains recorded. The
+managed Linux stale generated-contract case and production activation remain
+separate from this Intel result.
 
 The [Wargame managed and browser checks](../acceptance/project-adoption/wargame-owner-managed-and-native-persistence-20261106/README.md)
 pass at their recorded scope. The earlier native suite passed 116 cases
