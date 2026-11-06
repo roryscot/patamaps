@@ -19,6 +19,15 @@ The [compiled WebSocket configuration rebuilds](../acceptance/project-adoption/w
 
 Two independently checked non-deleting closed-image batches preserve every logical byte and reduce summed allocation by4,869,586,944bytes, including the [additional five images](../acceptance/project-adoption/closed-images-followup-20261105/README.md). This is capacity recovery, not acceptance of any application gate. The independent quiet-window requirement below remains unresolved; leave unrelated services running.
 
+The corrected Seeder frontend has since passed its two original generators,
+Next production build, six verification commands and separate retained-binding
+review. [Real authentication on that frontend](../acceptance/project-adoption/seeder-webkit-submit-timeout-20261105/README.md)
+passes all 12 direct HTTP cases and six Chromium/Firefox cases. The WebKit
+API reached readiness in the traced run, but its first browser case timed
+out without an observed API request. Both browsers attempted a POST in the
+[focused synthetic form check](../acceptance/project-adoption/seeder-synthetic-submit-20261105/README.md).
+Full five-project authentication is still open.
+
 ## What the existing evidence establishes
 
 | Original requirement | Evidence inspected | Remaining requirement |
