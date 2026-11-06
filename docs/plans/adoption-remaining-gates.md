@@ -55,8 +55,10 @@ passed both real native inspections under the read-only guard. The
 [registered counterpart](../acceptance/project-adoption/original-owner-registered-watch-postcheck-20261106/README.md)
 passes 29 source controls. Its first live trial stopped at the growth
 limit while staging the capsule. The failed record was preserved and
-the exact stopped reservation was released. The live registered pair,
-its refusal controls and actual watcher parent-death release remain open.
+the exact stopped reservation was released. A [staged reuse run](../acceptance/project-adoption/original-owner-registered-retained-capsule-20261106/README.md)
+then passed the live registered pair and refusal controls with the
+pinned, read-only capsule and automatic reservation release. Foreground
+watcher execution and actual parent-death release remain open.
 
 The [actual installed owner watcher](../acceptance/project-adoption/seeder-stale-installed-selection-refusal-20261106/README.md)
 also refused the retained baseline inputs against the installed edited
