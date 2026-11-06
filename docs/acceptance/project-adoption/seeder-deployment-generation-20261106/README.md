@@ -149,3 +149,11 @@ growth allowance to remain before it starts. The isolated probe reproduced
 the recorded loss, tested both sides of the margin, and confirmed every
 fixture reservation released. The installed guard remains unchanged.
 [Resume and verification record](linux-resume-growth-stop.json)
+
+A 270-second read-only observation while the native worker was stopped
+recorded a 1,025,482,752-byte loss of free space in the shared APFS pool.
+The source volume grew by 985,174,016 bytes. That volume contains
+multiple projects, so the sample does not identify the writer. The
+observed window exceeded the staged retry's 150 MB prelaunch drift
+allowance. A stable window and the separate approved recovery are needed
+before retrying. [Pool observation](linux-resume-pool-observation.json)
