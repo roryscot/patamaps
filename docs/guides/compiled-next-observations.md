@@ -1,14 +1,22 @@
 # Captured Next build observations
 
-Use the native process provider `next-build` with exactly three explicitly
-nonsecret captured inputs: a routes manifest, an App Router module-to-route map,
-and an independent owner configuration projection. This complements source AST
-observations; it does not replace them or infer business correspondences.
+Use the native process provider `next-build` with exactly four explicitly
+nonsecret captured inputs: the routes manifest, the App Router module manifest,
+the separately generated App Router route map, and an independent owner
+configuration projection. This complements source AST observations; it does not
+replace them or infer business correspondences.
 
-The supported input profile is Next App Router, routes-manifest version 3,
-with a declared stable 16.x version. The real qualified compiler is 16.1.6.
-Other releases are not automatically runtime-qualified. Pages Router/dataRoutes,
-unknown fields and unsupported rule shapes refuse.
+The parser accepts reviewed Next App Router version-3 manifest shapes from
+14.2.x and 16.x. Next 14.2.14 and 16.1.6 both write `app-paths-manifest.json`
+with module-file values, then write `app-path-routes-manifest.json` from each
+module key and Next's normalized route. The two maps must have the same keys;
+Patamaps preserves the module file as a bounded relative path and takes the
+public route only from the paired route manifest. It does not execute or
+reimplement Next's normalization. See the [Next 14.2.14 build source](https://github.com/vercel/next.js/blob/v14.2.14/packages/next/src/build/index.ts#L1619-L1631)
+and [Next 16.1.6 build source](https://github.com/vercel/next.js/blob/v16.1.6/packages/next/src/build/index.ts#L1916-L1928).
+A real Next 16.1.6 application remains the qualified application version; the
+Next 14.2.14 existing-project replay is a separate compatibility check. Pages
+Router/dataRoutes, unknown fields and unsupported rule shapes refuse.
 
 Example process-source config:
 
@@ -17,12 +25,13 @@ Example process-source config:
   "provider": "next-build",
   "nonsecretInputs": true,
   "routesManifest": "build-observations/routes.json",
-  "appPathsManifest": "build-observations/apps.json",
+  "appPathsManifest": "build-observations/app-paths.json",
+  "appPathRoutesManifest": "build-observations/app-path-routes.json",
   "configurationProjection": "build-observations/config.json"
 }
 ```
 
-Use the existing native `discover-native` invocation, with those same three paths
+Use the existing native `discover-native` invocation, with those same four paths
 in its inputs array. A workspace may compose these observations with source AST
 facts and owner-authored correspondences. Keep original business identities;
 matching URLs alone never establish semantic equivalence.
@@ -37,6 +46,7 @@ with SHA256 addresses of exact retained file bytes, not canonicalized JSON:
   "buildReceiptDigest": "sha256:<64 lowercase hex>",
   "routesDigest": "sha256:<64 lowercase hex>",
   "appPathsDigest": "sha256:<64 lowercase hex>",
+  "appPathRoutesDigest": "sha256:<64 lowercase hex>",
   "configuration": {
     "basePath": "",
     "output": "standalone",
@@ -57,10 +67,13 @@ material into the capture. Secret references are labels and are never resolved.
 This profile restricts environment values to explicit uppercase NEXT_PUBLIC_
 keys; other configuration treatment remains separate work.
 
-The reader checks both manifest byte digests and basePath consistency. It
-records the build receipt digest and framework version as owner declarations,
-not authenticated execution evidence. Preserve the actual build/tool receipts
-separately. A fabricated manifest and receipt address cannot establish a build.
+The reader checks all three manifest byte digests, paired app-map key equality,
+relative module-file paths, and basePath consistency. It records the build receipt
+digest and framework version as owner declarations, not authenticated execution
+evidence. The paired route map is trusted as captured output after its structural
+checks; its derivation from a Next build is not re-executed or authenticated.
+Preserve the actual build/tool receipts separately. A fabricated manifest and
+receipt address cannot establish a build.
 
 Outputs are next-build-route, next-build-rule, next-build-module,
 next-build-configuration and next-build-protocol entities. Rule category and
@@ -70,12 +83,35 @@ retain route groups and dynamic path labels as captured; HTTP methods and
 Server Action handlers are not inferred. Optional serverActions config contains
 only bodySizeLimit and allowedOrigins; observing a limit does not test it.
 
-The [existing-project receipt](../acceptance/project-adoption/g3-next-compiled-20261016/receipt.json)
+Module entities retain the app-path key, bounded emitted `moduleFile`, and
+`routePath` from `app-path-routes-manifest.json`; the file mapping is not treated
+as a route. The [existing-project receipt](../acceptance/project-adoption/g3-next-compiled-20261016/receipt.json)
 compares 43 static routes, 3 dynamic routes, 46 module aliases and the compiled
-redirect against a retained Avaelus/Seeder build. A missing projection refuses;
-offline baseline verification passes with source/provider paths unavailable.
-Its real rewrite lists are empty. Nonempty rewrite records are covered by
+redirect against a retained Avaelus/Seeder build. That earlier receipt's retained
+`apps.json` contains normalized slash-prefixed route values; it does not verify
+the emitted module-file values now captured separately by `appPathsManifest`.
+A missing projection refuses; offline baseline verification passes with
+source/provider paths unavailable. Its real rewrite lists are empty. Nonempty
+rewrite records are covered by
 controlled data cases, not real proxy execution. HTTP/browser, generated-contract
 integration, complete contexts, deployment and installed qualification remain open.
 
 Inputs total at most 8 MiB; at most 10000 observation entities are emitted. Selected arrays/maps and strings have further explicit bounds. This profile refuses control characters in observed text fields. It provides structured observations, not a complete validator for all Next runtime semantics.
+
+Next 16.2.10 adds optional route prefetchSegmentDataRoutes, onMatchHeaders and
+ppr.chain.headers in the reviewed [build manifest definition](https://github.com/vercel/next.js/blob/v16.2.10/packages/next/src/build/index.ts).
+The [segment route definition](https://github.com/vercel/next.js/blob/v16.2.10/packages/next/src/server/lib/router-utils/build-prefetch-segment-data-route.ts)
+contains source, destination and routeKeys. The current reader preserves those
+typed route records (at most 128 per route, with bounded strings/maps), records
+onMatchHeader rules with the existing header validation, and preserves the
+bounded resume-header map in next-build-protocol. Unknown nested fields refuse;
+Next14 inputs containing these active features refuse. These remain observations:
+prefetch regexes, resume chains and on-match headers are never executed.
+[Pinned Chatbot qualification](../acceptance/project-adoption/g3-chatbot-source-20261023/receipt.json)
+passed the unchanged owner production build and exact native observations for
+Next16.2.10: 17 static routes, 3 dynamic routes, 20 module mappings and two real
+BotID-generated rewrite declarations. Those external rewrites were observed,
+not requested or executed. Resume and prefetch metadata matched the genuine
+manifest exactly. Database migrations were skipped by the owner's build script
+because no database was configured. Authentication, actual Server Action calls
+and permission checks remain unverified.

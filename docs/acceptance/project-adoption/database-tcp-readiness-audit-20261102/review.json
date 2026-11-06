@@ -1,0 +1,95 @@
+{
+  "status": "read-only-readiness-contract-audit",
+  "inspectedAtUtc": "2026-11-02T22:42:32.057797+00:00",
+  "containers": [
+    {
+      "label": "earlier-unix-readiness",
+      "containerId": "67842c21a033ce700cc7b53e2a115d1ef41c12711e7305cd375b55f17aec4791",
+      "imageId": "sha256:81bd698b4594e751a3269e4dcd3e03a4a0ec0daf7b72e7aa1abd43cce9887542",
+      "stopped": true,
+      "identityFiles": {
+        "container-passwd": {
+          "sha256": "862e8a7bd00e2c5488f7f5a99987d470d179b60dbd0f9eb46ec81e4150557c64",
+          "unixNewlines": 2,
+          "literalBackslashN": 0,
+          "uid": 501,
+          "gid": 20,
+          "mode": "0o644"
+        },
+        "container-group": {
+          "sha256": "332c5471e82b99298172d1a25e673e1f6f5178539cfeed36fb5c669dd497bbb8",
+          "unixNewlines": 2,
+          "literalBackslashN": 0,
+          "uid": 501,
+          "gid": 20,
+          "mode": "0o644"
+        }
+      },
+      "pgHostPresent": false,
+      "pgHostAddressPresent": false,
+      "pgPortPresent": false,
+      "normalizedConfigurationSha256": "60d68d16cccf6bcb06e05f87cf847150f6e3c7b70430c1b833531d3fd38052f2"
+    },
+    {
+      "label": "early-database-exit",
+      "containerId": "335cb0b920db5996a39e8533302436b4534e1eec40cc543a9e3867f4d1566ea4",
+      "imageId": "sha256:81bd698b4594e751a3269e4dcd3e03a4a0ec0daf7b72e7aa1abd43cce9887542",
+      "stopped": true,
+      "identityFiles": {
+        "container-passwd": {
+          "sha256": "862e8a7bd00e2c5488f7f5a99987d470d179b60dbd0f9eb46ec81e4150557c64",
+          "unixNewlines": 2,
+          "literalBackslashN": 0,
+          "uid": 501,
+          "gid": 20,
+          "mode": "0o644"
+        },
+        "container-group": {
+          "sha256": "332c5471e82b99298172d1a25e673e1f6f5178539cfeed36fb5c669dd497bbb8",
+          "unixNewlines": 2,
+          "literalBackslashN": 0,
+          "uid": 501,
+          "gid": 20,
+          "mode": "0o644"
+        }
+      },
+      "pgHostPresent": false,
+      "pgHostAddressPresent": false,
+      "pgPortPresent": false,
+      "normalizedConfigurationSha256": "60d68d16cccf6bcb06e05f87cf847150f6e3c7b70430c1b833531d3fd38052f2"
+    }
+  ],
+  "normalizedConfigurationEqual": true,
+  "identityFilesEqual": true,
+  "sourceMethod": "docker cp from stopped owned container; tar parsed in memory without filesystem extraction",
+  "entrypointPath": "/usr/local/bin/docker-entrypoint.sh",
+  "entrypointSha256": "9c440299ae04a0a79d55b8bf03307036d890a40979d2fb698073c9050d4b20a5",
+  "entrypointExcerpts": [
+    {
+      "line": 297,
+      "code": "set -- \"$@\" -c listen_addresses='' -p \"${PGPORT:-5432}\""
+    },
+    {
+      "line": 360,
+      "code": "docker_temp_server_start \"$@\""
+    },
+    {
+      "line": 365,
+      "code": "docker_temp_server_stop"
+    },
+    {
+      "line": 384,
+      "code": "exec \"$@\""
+    }
+  ],
+  "officialConnectionDocs": "https://www.postgresql.org/docs/16/libpq-connect.html#LIBPQ-CONNECT-HOST",
+  "officialReadinessDocs": "https://www.postgresql.org/docs/16/app-pg-isready.html",
+  "finding": "Existing pg_isready has no explicit host or port. With no PGHOST/PGHOSTADDR it can observe the temporary Unix-socket-only initialization server. It does not prove final TCP5432 or host-mapped18866 readiness.",
+  "observedFalsePositiveReproduced": false,
+  "earlierReadyResultScope": "A Unix-socket readiness sample; host TCP readiness was not established.",
+  "databaseExitRootCauseKnown": false,
+  "containersStartedOrRestarted": 0,
+  "applicationTestsExecuted": 0,
+  "installedSafeguardsChanged": false,
+  "oldFrozenProposalChanged": false
+}

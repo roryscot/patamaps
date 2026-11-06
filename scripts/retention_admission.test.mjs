@@ -1,0 +1,12 @@
+import {test} from 'node:test';
+import assert from 'node:assert/strict';
+import {checkRetentionHeadroom,retentionInventory} from './retention_admission.mjs';
+const p={maximumRetainedBytes:100,maximumRunGrowthBytes:4};
+test('reserves a complete allowed run before admitting it',()=>assert.deepEqual(checkRetentionHeadroom(95,p),{retainedBytes:95,reservedGrowthBytes:4,remainingAfterReservationBytes:1,filesDeleted:0}));
+test('admits the exact boundary',()=>assert.equal(checkRetentionHeadroom(96,p).remainingAfterReservationBytes,0));
+test('refuses before the existing total limit is reached',()=>assert.throws(()=>checkRetentionHeadroom(97,p),/headroom/));
+test('refuses an already exceeded limit',()=>assert.throws(()=>checkRetentionHeadroom(101,p),/headroom/));
+test('refuses unknown, negative, fractional and overflowing accounting',()=>{for(const n of [NaN,undefined,-1,.5,Number.MAX_SAFE_INTEGER+1])assert.throws(()=>checkRetentionHeadroom(n,p),/Unknown/);});
+test('never enlarges the approved run limit',()=>assert.throws(()=>checkRetentionHeadroom(90,p,5),/per-run/));
+test('uses the guard inventory once and emits only admitted reservations',()=>{let calls=0,events=0;const roots=['one','two'];const f=retentionInventory(r=>{calls++;assert.equal(r,roots);return 95;},p,()=>events++);assert.equal(f(roots),95);assert.equal(calls,1);assert.equal(events,1);});
+test('does not notify admission or mutate the policy on refusal',()=>{const before=JSON.stringify(p);let calls=0;assert.throws(()=>retentionInventory(()=>97,p,()=>calls++)([]),/headroom/);assert.equal(calls,0);assert.equal(JSON.stringify(p),before);});

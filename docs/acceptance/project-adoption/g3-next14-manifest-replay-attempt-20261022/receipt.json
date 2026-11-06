@@ -1,0 +1,72 @@
+{
+  "schemaVersion": 1,
+  "status": "failed-bounded-existing-next14-manifest-replay",
+  "date": "2026-10-22",
+  "patamaps": {
+    "branchHeadAtReplay": "5070cf946503d6984cf4dba589fe0aada6a9ec93",
+    "cliBinarySha256": "ecb35b53e9de7b6d085e887fa2f020ea9a2975fbd8a22e8a090764a887b247ce",
+    "adapterSourceAtReplay": "unchanged from 5001ee7; documentation-only 5070cf9 commit"
+  },
+  "source": {
+    "identity": "same private Next.js project checkout as the earlier route-shape capture",
+    "observedCheckoutHead": "7721da50e4a817dafb13a8e4cd10347e7ee884f7",
+    "frameworkVersion": "14.2.14",
+    "manifestBuildProvenance": "not bound to source commit"
+  },
+  "inputs": {
+    "routesManifest": {
+      "sha256": "aafba6a8f446fe8072c0f5873c7c731adfdb16f0badda9e449800ecf3ad0550d",
+      "bytes": 8283,
+      "version": 3,
+      "staticRoutes": 34,
+      "dynamicRoutes": 21
+    },
+    "appPathsManifest": {
+      "sha256": "3049585ce3e249af5536eb699e8da04bd354c9200e4231f6ca28903bae351dc2",
+      "bytes": 4736,
+      "entries": 55,
+      "valuesSlashPrefixed": 0,
+      "valuesSafeRelativePaths": 55
+    },
+    "appPathRoutesManifest": {
+      "sha256": "b61e5e1af18ce170c4deced924f398b5937fca972b0c8fc1f18af20e4e448d5c",
+      "bytes": 3275,
+      "entries": 55,
+      "valuesSlashPrefixed": 55,
+      "keySetMatchesAppPaths": true
+    }
+  },
+  "configurationProjection": {
+    "kind": "synthetic typed nonsecret projection used only to satisfy the parser contract",
+    "manifestDigestsBound": true,
+    "actualNextConfigRead": false,
+    "buildReceiptAuthenticated": false
+  },
+  "commands": [
+    {
+      "phase": "project-capture",
+      "result": "passed",
+      "exitCode": 0
+    },
+    {
+      "phase": "generate-actual-manifests",
+      "result": "failed",
+      "exitCode": 2,
+      "diagnosticClass": "ADAPTER_EXIT",
+      "diagnosticBytes": 223,
+      "diagnosticSha256": "0a210ebd9149100e1e9aab2f2f15d08e0282a49668f0168a23477ae11e121533"
+    }
+  ],
+  "assessment": {
+    "observation": "The bounded replay did not produce a baseline.",
+    "likelyCause": "The prior adapter validated app-paths-manifest values as slash-prefixed public routes. In this input all 55 values are safe relative module-file paths; the separate app-path-routes manifest supplies the 55 normalized public routes.",
+    "confidence": "high but not directly exposed by the generic child-process diagnostic",
+    "correction": "Capture both manifests, bind both exact byte digests, require identical key sets, and preserve the route map as the sole source of public route paths."
+  },
+  "limitations": [
+    "The generic ADAPTER_EXIT diagnostic hides the provider child error; the likely cause is inferred from the recorded input shape and adapter validation source.",
+    "No Next application build, HTTP/browser behavior, deployment, or source-to-build provenance was established.",
+    "Raw manifests and generated workspace/capture material remain only in a private local inspection directory and are not included in this receipt."
+  ],
+  "filesDeleted": 0
+}

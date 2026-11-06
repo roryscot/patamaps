@@ -1,0 +1,67 @@
+{
+  "status": "verified-release-and-preserved-linux-resume-stops",
+  "approvedRelease": {
+    "status": "verified-exact-approved-outer-release",
+    "nativeReservationId": "29b79091-2ca8-45f6-b539-553f53074b26",
+    "managedReservationPreserved": "da12a830-7907-4c0c-b82d-fcd39ff61f0f",
+    "originalGuardExitCode": 75,
+    "archivesRehashed": 3,
+    "preparedFilesPreviouslyRehashed": 752,
+    "recoveryObservations": 3
+  },
+  "firstResumeStoppedBeforeMountForExistingLog": true,
+  "firstResumeReservationReleased": true,
+  "secondResume": {
+    "status": "verified-resume-stop-before-copy",
+    "outerReservationId": "8540cb00-b8f3-405d-942a-72a046bf5b9d",
+    "managedReservationId": "da12a830-7907-4c0c-b82d-fcd39ff61f0f",
+    "originalSourceImagePreserved": true,
+    "sourceClosed": true,
+    "nestedContainerStopped": true,
+    "nativeGroupAbsent": true,
+    "exactPreparedFilesRehashed": 752,
+    "filesAddedToManagedWorkspace": 0,
+    "unrelatedDatabasePreserved": true,
+    "observedPhysicalPoolDropBeforeSourceMountBytes": 447836160,
+    "guardGrowthChargeBytes": 467570688,
+    "growthAllowanceBytes": 450000000,
+    "retainedHeadroomAtAdmissionBytes": 516515575,
+    "browserReservationBytes": 800000000,
+    "browserShortfallAtAdmissionBytes": 283484425,
+    "managedRuntimeStarted": false,
+    "fullBrowserStarted": false,
+    "guardExitCode": 75,
+    "outerReservationReleased": false
+  },
+  "newRecoveryObservations": 3,
+  "stagedRetryMarginControl": {
+    "status": "verified-staged-prelaunch-growth-margin",
+    "marginBytes": 300000000,
+    "allowanceBytes": 450000000,
+    "cases": [
+      {
+        "label": "observed-resume-loss",
+        "lossBytes": 447836160,
+        "remainingBytes": 2163840,
+        "started": false,
+        "released": true
+      },
+      {
+        "label": "one-byte-below-margin",
+        "lossBytes": 150000001,
+        "remainingBytes": 299999999,
+        "started": false,
+        "released": true
+      },
+      {
+        "label": "exact-margin",
+        "lossBytes": 150000000,
+        "remainingBytes": 300000000,
+        "started": true,
+        "released": true
+      }
+    ],
+    "isolatedScheduler": true,
+    "installedGuardChanged": false
+  }
+}

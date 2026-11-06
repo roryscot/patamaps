@@ -1,0 +1,118 @@
+{
+  "status": "installed-verified-and-activated-protocol3-repair",
+  "activationProtocol": 3,
+  "parallelActivated": true,
+  "unitTests": 69,
+  "runtimeControls": [
+    "actual-guard-native-followup-managed-progress",
+    "native-finalization-handoff",
+    "system-metadata-readonly",
+    "persistent-output-restart",
+    "writable-enospc",
+    "fixed-image-bound",
+    "two-job-overlap",
+    "simultaneous-acquisition",
+    "kernel-limits",
+    "running-cancellation",
+    "owner-crash-surviving-container",
+    "confirmed-crash-recovery",
+    "output-conflict",
+    "queued-cancellation",
+    "instance-conflict",
+    "native-barrier",
+    "benchmark-exclusive",
+    "fair-queue",
+    "unmanaged-fallback",
+    "capacity-refusal",
+    "altered-enforcement-refusal",
+    "pause-preserved",
+    "cli-integration"
+  ],
+  "oldGateProbe": {
+    "status": "reproduced-four-activation-refusals-missing-in-old-code",
+    "tests": 5,
+    "failures": 4,
+    "sourceBefore": "d0a1d29d5678837177f75d48a89de46ac57676f514ac0b13d2af9067bb7e4266",
+    "sourceAfter": "ed3255ad775442475533bc5c5150a9875e9086a71cd4c129c728338ff49b95fd",
+    "filesDeleted": 0
+  },
+  "watchSnapshots": 2,
+  "installedSmoke": {
+    "status": "passed-fresh-installed-executor-smoke",
+    "outputQuotaEnospc": true,
+    "systemMetadataReadonly": true,
+    "limits": {
+      "cpu": 0.25,
+      "memoryBytes": 134217728,
+      "diskBytes": 67108864
+    },
+    "receiptSha256": "8c6ed27047fa4fb5ecbdfd792e021d380b49f047a23e9b825cf2eeaeb9d70640"
+  },
+  "independentlyConfirmedStoppedContainers": 22,
+  "runtimeReceiptSha256": "fbd74f8b8e009df715b0eeae348b5041957e87bf89a77d9f1385f821257de508",
+  "unitLogSha256": "c76d25ceb84e5a47bf0febe5879b2300933a794cd698d7dae1f29ea1b71a06a9",
+  "rolloutReceiptSha256": "6244deb14cf9aa0b8a4a5e28b156ae4c8282bab0f66f39b1404c9fb0d4d10c22",
+  "bindings": [
+    {
+      "role": "scheduler-core",
+      "before": "b56b8d4db14ce4ac0ab8590739d446ec828851d549fc9a8160efe686bd69b594",
+      "after": "ed3255ad775442475533bc5c5150a9875e9086a71cd4c129c728338ff49b95fd",
+      "contentChanged": true
+    },
+    {
+      "role": "reservation-executor",
+      "before": "6f7759df557ae462a9347d7705277deb03b17fbcae569a1e487df4318b9a67de",
+      "after": "2f285785dfc5d737233b78d759eb7e30b5ef3743e369faf6052a304a3b2851f9",
+      "contentChanged": true
+    },
+    {
+      "role": "status-and-control-cli",
+      "before": "b429cc96b9f2785ebe7f9ec99e4779c7d380041509875e73f25a278c4cef1fb5",
+      "after": "b429cc96b9f2785ebe7f9ec99e4779c7d380041509875e73f25a278c4cef1fb5",
+      "contentChanged": false
+    },
+    {
+      "role": "canonical-native-guard",
+      "before": "427f3df3623635a4cdabb55751f6841d7fc247184a6a38af5689e43752fc713c",
+      "after": "3bfb9aeb901e02419a156538ddf78b09b134844e4bea1efe73235d6d4d7ed6b0",
+      "contentChanged": true
+    },
+    {
+      "role": "actual-native-compatibility-scheduler",
+      "before": "615b1aa4d06344345f665fa7b8404f12238a85bce4454f923bc71c685a1e889c",
+      "after": "0ff0e37eb622f66a8b27111734b8e997544e9b1a73daeb91a6e939a69f96b75b",
+      "contentChanged": true
+    }
+  ],
+  "existingCompatibilityWorkPreserved": true,
+  "compatibilityWorkingTreeDelta": "One completion-marker assignment after synchronous finalization; existing uncommitted guard work preserved",
+  "compatibilityChangesCommittedSeparately": false,
+  "policy": {
+    "maximumRunGrowthBytes": 4000000000,
+    "maximumRetainedBytes": 100000000000,
+    "reserveFreeBytes": 500000000,
+    "changed": false
+  },
+  "qualificationScope": "Full real-backend controls ran in an isolated pool under the actual exclusive supervisor; fresh installed smoke ran in a separate isolated pool before enabling global protocol3. Actual installed status/watch then confirmed enabled admission.",
+  "limitations": [
+    "Old activation protocol2 cannot enable new protocol3 concurrency; native and uncertain ownership remain exclusive.",
+    "Performance measurements remain exclusive; these are functional qualification controls, not application throughput acceptance.",
+    "No full application, authenticated permissions or final Patamaps release acceptance is implied."
+  ],
+  "filesDeleted": 0,
+  "verifiedAt": "2026-10-20T23:14:26.005215+00:00",
+  "independentInstalledStatus": {
+    "parallelActivated": true,
+    "mode": "verified-reservations-with-exclusive-fallback",
+    "observedAt": "2026-10-20T23:17:14.623Z",
+    "interactiveReserve": {
+      "cpu": 2,
+      "memoryBytes": 4294967296,
+      "diskBytes": 5368709120
+    }
+  },
+  "localSafeguardSourcePublished": false,
+  "sourcePatchRetainedPrivatelyOnIntel": true,
+  "privateSourcePatchSha256": "dfa5388bbb28fead732057c662c7877e478274dd41632d5040adc3dfb30663f1",
+  "privateSourcePatchBytes": 6317
+}

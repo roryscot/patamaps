@@ -1,0 +1,82 @@
+--- superseded-startup-capture/run.py
++++ proposed-tcp-readiness/run.py
+@@ -214,14 +214,24 @@
+  end=time.monotonic()+30
+  while True:
+   remaining=end-time.monotonic();assert remaining>0,"OWNED_POSTGRES_NOT_READY"
+-  p=subprocess.run([DOCKER,"exec",cid,"pg_isready","-U","patamaps_owned","-d",databaseName],capture_output=True,timeout=min(5,remaining))
++  p=subprocess.run([DOCKER,"exec",cid,"pg_isready","-h","127.0.0.1","-p","5432","-U","patamaps_owned","-d",databaseName],capture_output=True,timeout=min(5,remaining))
+   startup_trace(dict(phase="readiness",elapsedSeconds=time.monotonic()-startupBegan,exitCode=p.returncode,stdout=p.stdout[:4096].decode(errors="replace"),stderr=p.stderr[:4096].decode(errors="replace"),stdoutBytes=len(p.stdout),stderrBytes=len(p.stderr),stdoutSha256=hashlib.sha256(p.stdout).hexdigest(),stderrSha256=hashlib.sha256(p.stderr).hexdigest()))
+   state=startup_state("readiness",end)
+   if not state["Running"]:
+    try:postgresAttach.wait(timeout=5)
+    except subprocess.TimeoutExpired:pass
+    raise RuntimeError("OWNED_POSTGRES_EXITED_BEFORE_READY")
+-  if p.returncode==0:break
++  if p.returncode==0:
++   remaining=end-time.monotonic();assert remaining>0,"OWNED_POSTGRES_NOT_READY"
++   try:
++    with socket.create_connection(("127.0.0.1",18866),timeout=min(1,remaining)):pass
++   except OSError as error:
++    startup_trace(dict(phase="published-tcp-readiness",elapsedSeconds=time.monotonic()-startupBegan,connected=False,errorType=type(error).__name__,errorNumber=error.errno))
++   else:
++    assert time.monotonic()<end,"OWNED_POSTGRES_NOT_READY"
++    startup_trace(dict(phase="published-tcp-readiness",elapsedSeconds=time.monotonic()-startupBegan,connected=True))
++    report.update(databaseTcpReadinessAccepted=True,databaseContainerReadinessTransport="tcp4",databasePublishedPort=18866);save()
++    break
+   assert postgresAttach.poll()is None,"OWNED_POSTGRES_ATTACH_EXITED_BEFORE_READY"
+   assert time.monotonic()<end,"OWNED_POSTGRES_NOT_READY";time.sleep(.3)
+  env={"PATH":"/usr/bin:/bin:/usr/sbin:/sbin","HOME":str(B/"run/home"),"TMPDIR":str(B/"run/tmp")+"/","LANG":"en_US.UTF-8","ENV_FILE":str(settings),"APP_ENV":"test","ENVIRONMENT":"test","APP_NAME":"Owned Patamaps authentication","API_BASE_URL":"http://127.0.0.1:18765","DATABASE_URL":"postgresql://patamaps_owned:"+password+"@127.0.0.1:18866/"+databaseName,"INTERNAL_API_KEY":secrets.token_urlsafe(32),"JWT_SECRET":secrets.token_urlsafe(48),"MEDIA_BUCKET_NAME":"patamaps-owned-auth","MEDIA_CDN_BASE_URL":"http://127.0.0.1:9","UPLOAD_DIR":str(B/"run/uploads"),"KAFKA_ENABLED":"false","PYTHONPATH":str(Path(F["owner"])/"packages/api")+":"+F["site"],"PYTHONDONTWRITEBYTECODE":"1","CORS_ORIGINS":"http://127.0.0.1:13000,http://localhost:13000"}
+--- superseded-startup-capture/sandbox.sb
++++ proposed-tcp-readiness/sandbox.sb
+@@ -5,7 +5,7 @@
+ (allow network-inbound (local ip "localhost:18765"))
+ (allow network-outbound (remote ip "localhost:18866"))
+ (deny file-write*)
+-(allow file-write* (subpath "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/owner-auth-endpoint-20261029/services-db-startup-trace-proposal-20261030/run"))
++(allow file-write* (subpath "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/owner-auth-endpoint-20261029/services-db-tcp-readiness-proposal-20261102/run"))
+ (deny process-exec)
+ (allow process-exec (literal "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3.11") (literal "/Library/Frameworks/Python.framework/Versions/3.11/Resources/Python.app/Contents/MacOS/Python"))
+ (deny file-read* (regex #".*/[.]env.*") (subpath "/Users/admin/.ssh") (subpath "/Users/admin/.aws") (subpath "/Users/admin/.config/gh") (literal "/Users/admin/.netrc"))
+--- superseded-startup-capture/execution-contract.json
++++ proposed-tcp-readiness/execution-contract.json
+@@ -60,8 +60,8 @@
+   "nextProducerPathsUnavailable": "New source copy, existing dependency snapshot, configured native provider; exact paths restored",
+   "runtimeAssemblyMaximumBytes": 134217728,
+   "runtimeAssemblyMaximumEntries": 8192,
+-  "apiWritableSubtree": "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/owner-auth-endpoint-20261029/services-db-startup-trace-proposal-20261030/run",
+-  "apiPrivateReportsLogsSubtree": "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/owner-auth-endpoint-20261029/services-db-startup-trace-proposal-20261030/run",
++  "apiWritableSubtree": "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/owner-auth-endpoint-20261029/services-db-tcp-readiness-proposal-20261102/run",
++  "apiPrivateReportsLogsSubtree": "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/owner-auth-endpoint-20261029/services-db-tcp-readiness-proposal-20261102/run",
+   "sandboxControlsOutsideWriteProbe": "parent phase path outside permitted run subtree",
+   "sandboxNetworkHostSelector": "localhost (IPv4 and IPv6 loopback); actual listeners remain127.0.0.1",
+   "profileSyntaxPrecheckMaximumSeconds": 10,
+@@ -74,5 +74,16 @@
+   "postgresStartDeadlineSeconds": 30,
+   "postgresReadinessDeadlineSeconds": 30,
+   "postgresEarlyExitFails": true,
+-  "postgresDaemonLogDriverUnchanged": "none"
++  "postgresDaemonLogDriverUnchanged": "none",
++  "postgresReadinessTransport": {
++    "requireContainerTCP": true,
++    "containerHost": "127.0.0.1",
++    "containerPort": 5432,
++    "requirePublishedHostTCP": true,
++    "publishedHost": "127.0.0.1",
++    "publishedPort": 18866,
++    "hostConnectMaximumSeconds": 1,
++    "sharedReadinessDeadlineSeconds": 30,
++    "unixSocketReadinessInsufficient": true
++  }
+ }
+--- superseded-startup-capture/launch-config.json
++++ proposed-tcp-readiness/launch-config.json
+@@ -6,7 +6,7 @@
+     "--",
+     "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/intel-python-3.13.16-20261013/runtime/python/bin/python3",
+     "-B",
+-    "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/owner-auth-endpoint-20261029/services-db-startup-trace-proposal-20261030/guardian.py"
++    "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/owner-auth-endpoint-20261029/services-db-tcp-readiness-proposal-20261102/guardian.py"
+   ],
+   "cwd": "/Volumes/dev_src_case_sensitive/projects/patamaps"
+ }

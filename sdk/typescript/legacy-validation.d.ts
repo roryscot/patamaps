@@ -4,6 +4,7 @@ import type {
   validateLegacyProjection,
   parseLegacyProjection,
   compileLegacyProjection,
+  emitLegacyTypeScriptProjection,
 } from "./legacy-projection.js";
 export * from "./legacy-projection.js";
 import type {
@@ -80,6 +81,8 @@ import type {
   emptyLegacyGraphDiff,
   renderLegacyDriftReport,
   renderLegacyGraphDocumentation,
+  stableLegacyJson,
+  digestLegacyValue,
 } from "./legacy-reporting.js";
 export * from "./legacy-reporting.js";
 import type { materializeLegacyCorrespondences } from "./legacy-correspondence.js";
@@ -277,6 +280,7 @@ export interface LegacyValidationApi {
   validateLegacyProjection: typeof validateLegacyProjection;
   parseLegacyProjection: typeof parseLegacyProjection;
   compileLegacyProjection: typeof compileLegacyProjection;
+  emitLegacyTypeScriptProjection: typeof emitLegacyTypeScriptProjection;
   parseLegacyEvaluationContext: typeof parseLegacyEvaluationContext;
   evaluateLegacyContextExpression: typeof evaluateLegacyContextExpression;
   requiredLegacyContextKeys: typeof requiredLegacyContextKeys;
@@ -311,6 +315,8 @@ export interface LegacyValidationApi {
   emptyLegacyGraphDiff: typeof emptyLegacyGraphDiff;
   renderLegacyDriftReport: typeof renderLegacyDriftReport;
   renderLegacyGraphDocumentation: typeof renderLegacyGraphDocumentation;
+  stableLegacyJson: typeof stableLegacyJson;
+  digestLegacyValue: typeof digestLegacyValue;
   LegacyRelationRegistry: new (
     packs?: readonly LegacyRelationPack[],
   ) => LegacyRelationRegistry;

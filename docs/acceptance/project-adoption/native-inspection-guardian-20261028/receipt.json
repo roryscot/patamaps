@@ -1,0 +1,39 @@
+{
+  "status": "passed-independent-proposed-guardian-review",
+  "sourceBindings": {
+    "scripts/native_inspection.py": "9e623779667f97fd53e6c84de7cade52ee9cc08aadae69b5997cfb3f6422447e",
+    "scripts/native_inspection_guard.py": "f7416243f4100377044347cb034e895c4df4bc5e52180f12f8749b998817f2bd",
+    "scripts/project_watch.py": "94b3b1ccdd936a044fc815772ee72ecbdf2344701e57cd5f7a2fdf9b778ecf85",
+    "scripts/test_native_inspection_guard.py": "9e45d5cf8ec48ad83191cadfeaa4822bc1886f8f78539f9cd82d1ba721650725",
+    "scripts/test_watch_policy_verification.py": "81b1d75e39ef924f2b0dcbbb4bbdd8356afff3000c97306d14771c037ae21794"
+  },
+  "guardianControlsPassed": 10,
+  "legacyWatcherControlsPassed": 11,
+  "initialAttemptPassed": false,
+  "repairsUsed": 1,
+  "retainedAdapterCalls": 13,
+  "completeLifecycles": 15,
+  "incompleteTimeoutLifecycles": 1,
+  "observedTestProcessesStopped": 36,
+  "reservationId": "b2323bd5-fb20-454f-90f2-9a639061e9c9",
+  "reservationReleased": true,
+  "automaticReservationReleaseQualified": false,
+  "installedSupervisorChanged": false,
+  "parallelActivated": false,
+  "actualOwnerWatchRetried": false,
+  "unchangedBuildLockQualified": false,
+  "reviewerDigest": "39e83e4e3e9dcb6668445c991786c0b394ca0bd0ce956a22ba9e0165acc80dca",
+  "scope": "Proposed uninstalled native inspection guardian and existing watcher verification adapter on Intel macOS15.8.1",
+  "executedCommands": [
+    "python3 -B scripts/test_native_inspection_guard.py -v",
+    "python3 -B scripts/test_watch_policy_verification.py -v",
+    "python3 -B review.py --root CHECKOUT"
+  ],
+  "initialFailure": "Overflow refused with guardian75/payload0 but the caller returned a nonzero result; control expected an exception. Repair enforces guardian/payload exit correspondence, preserving all controls and output ceiling.",
+  "limitations": [
+    "No installed registered-source/runtime attestation or supervisor integration",
+    "No unchanged-build driver.lock permission",
+    "No real-owner watch/crash retry",
+    "No native CPU/memory quota or parallel execution claim"
+  ]
+}

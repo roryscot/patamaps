@@ -1,0 +1,328 @@
+{
+  "status": "passed-real-next-native-client-network-controls",
+  "scope": "Actual original application generator/build/production test launcher plus native generated client over loopback TCP in explicit lab mode.",
+  "commands": [
+    {
+      "label": "candidate-root-offline-install",
+      "exitCode": 0,
+      "seconds": 1.357
+    },
+    {
+      "label": "candidate-web-offline-install",
+      "exitCode": 0,
+      "seconds": 10.793
+    },
+    {
+      "label": "candidate-original-generation",
+      "exitCode": 0,
+      "seconds": 227.881
+    },
+    {
+      "label": "candidate-production-build",
+      "exitCode": 0,
+      "seconds": 182.838
+    },
+    {
+      "label": "actual-network-controls",
+      "exitCode": 0,
+      "seconds": 0.473
+    }
+  ],
+  "cases": [
+    {
+      "case": "native-tcp-evaluation",
+      "result": "passed"
+    },
+    {
+      "case": "next-production-evaluation",
+      "result": "passed"
+    },
+    {
+      "case": "next-production-replay",
+      "result": "passed"
+    },
+    {
+      "case": "native-tcp-replay",
+      "result": "passed"
+    },
+    {
+      "case": "shared-next-proxy-tampered-replay-reaches-replay-validation",
+      "result": "passed"
+    },
+    {
+      "case": "next-stale-generation-refused",
+      "result": "passed"
+    },
+    {
+      "case": "native-tcp-logistics-frozen-metrics",
+      "result": "passed"
+    },
+    {
+      "case": "next-production-logistics-frozen-metrics",
+      "result": "passed"
+    },
+    {
+      "case": "actual-next-malformed-json-and-oversize-body-refused",
+      "result": "passed"
+    },
+    {
+      "case": "actual-next-chunked-body-limit",
+      "result": "passed"
+    },
+    {
+      "case": "actual-native-tcp-mime-and-oversize-body-refused",
+      "result": "passed"
+    },
+    {
+      "case": "actual-next-upstream-unavailable-declared503",
+      "result": "passed"
+    },
+    {
+      "case": "actual-next-upstream-unavailable-legacy-profile-refuses503",
+      "result": "passed"
+    }
+  ],
+  "exchanges": [
+    {
+      "path": "/evaluate",
+      "port": "4101",
+      "method": "POST"
+    },
+    {
+      "path": "/api/evaluate",
+      "port": "3100",
+      "method": "POST"
+    },
+    {
+      "path": "/api/evaluate",
+      "port": "3100",
+      "method": "POST"
+    },
+    {
+      "path": "/replay",
+      "port": "4101",
+      "method": "POST"
+    },
+    {
+      "path": "/api/evaluate",
+      "port": "3100",
+      "method": "POST"
+    },
+    {
+      "path": "/api/evaluate",
+      "port": "3100",
+      "method": "POST"
+    },
+    {
+      "path": "/logistics",
+      "port": "4101",
+      "method": "POST"
+    },
+    {
+      "path": "/api/logistics",
+      "port": "3100",
+      "method": "POST"
+    },
+    {
+      "path": "/api/evaluate",
+      "port": "3100",
+      "method": "POST"
+    },
+    {
+      "path": "/api/evaluate",
+      "port": "3100",
+      "method": "POST"
+    },
+    {
+      "path": "/api/logistics",
+      "port": "3100",
+      "method": "POST"
+    },
+    {
+      "path": "/api/logistics",
+      "port": "3100",
+      "method": "POST"
+    },
+    {
+      "path": "/api/evaluate",
+      "port": "3100",
+      "method": "POST",
+      "requestShape": "streamed-no-content-length"
+    },
+    {
+      "path": "/api/logistics",
+      "port": "3100",
+      "method": "POST",
+      "requestShape": "streamed-no-content-length"
+    },
+    {
+      "path": "/evaluate",
+      "port": "4101",
+      "method": "POST"
+    },
+    {
+      "path": "/evaluate",
+      "port": "4101",
+      "method": "POST"
+    },
+    {
+      "path": "/replay",
+      "port": "4101",
+      "method": "POST"
+    },
+    {
+      "path": "/replay",
+      "port": "4101",
+      "method": "POST"
+    },
+    {
+      "path": "/logistics",
+      "port": "4101",
+      "method": "POST"
+    },
+    {
+      "path": "/logistics",
+      "port": "4101",
+      "method": "POST"
+    },
+    {
+      "path": "/api/evaluate",
+      "port": "3102",
+      "method": "POST"
+    },
+    {
+      "path": "/api/evaluate",
+      "port": "3102",
+      "method": "POST"
+    }
+  ],
+  "compilationEnvironment": {
+    "RUSTUP_TOOLCHAIN": null,
+    "CARGO_INCREMENTAL": "0",
+    "CARGO_PROFILE_DEV_DEBUG": "line-tables-only",
+    "CARGO_PROFILE_TEST_DEBUG": "line-tables-only",
+    "CARGO_BUILD_JOBS": null,
+    "WARGAME_MODE": "lab"
+  },
+  "priorCandidateBundlePointer": "0cc40b8a05545f965adb874ae4690014bd78bf2e366aee7fc560f76bd1a258c4",
+  "candidateBundlePointerAfter": "6fed7b147d77b5526acf2d416f55b697ffb6ce12af7f4d75b796f81c0277069e",
+  "nextBuildIdSha256": "903e7ee5cc4d71ff3ae77114ad5a2383bb57c64a318d5e9df88a99666676120e",
+  "projectionGenerationSha256": "7b07d0d86b6703e9e7d6b2952dd384175fcb92a6d99343dd60cd186288906e30",
+  "nativeBinarySha256": "ce275ab1de7f98f1414131ac6579b3cd1ed7df53377b359affed10640bc53cc6",
+  "sourceAndInputsUnchanged": true,
+  "actualNextProductionRuntime": true,
+  "actualRustTcpRuntime": true,
+  "ownedWrappersStopped": true,
+  "ownedListenerSurvivors": [],
+  "cleanupErrors": [],
+  "filesDeleted": 0,
+  "applicationAcceptance": false,
+  "qualificationDate": "2026-10-18",
+  "candidateSourceHead": "cf4e0de9dcd7c87ccf32f6f40adb662078e45d13",
+  "candidateIncludesSelectedWorkingBytes": true,
+  "selectedInputDigests": {
+    "patamaps/.tools/project-adoption/next-proxy-intake-20261018/network-runtime-20261018/run-network.py": "4eaa8f3c9a974c2bdd08d0720eb030ecae26645bcc8b6eb48dddbf2e0ff9b849",
+    "patamaps/.tools/project-adoption/next-proxy-intake-20261018/network-runtime-20261018/network-controls.cjs": "965b06d06347b20c618ab9d3faefca1cd2de34e64ada0be3f6997480da24427e",
+    "patamaps/scripts/project_watch.py": "e71e1d6bd303ad7bb4d80e90a7e43e90213aef99a5952f25f1a8f150c78d98a2",
+    "toolchain/node": "7abcf39bd37ab251015337ff75304d7555f0d8e88c6e0fbf04bce8ce34636f49",
+    "toolchain/npm-cli.js": "8e5f6f3429f8cdbe693cdc29904e9d5a7b127a494bd15c804bd54c7403bfcbe7",
+    "candidate/package-lock.json": "cf8794466d943823c4b8eedc5e676fa8690d44710471c7061687d66216f8a058",
+    "candidate/web/package-lock.json": "39681a9089601566762ee615c021f31776ac55e8de1dce68e0b4c93870b62584",
+    "candidate/vendor/roryscot-metamap-0.7.1.tgz": "eb47196e7926deaa94a690de4cc920f5920b1833463fd26ca954c8cbac96686f",
+    "patamaps/.tools/project-adoption/next-proxy-intake-20261018/compiled-new/client.js": "7e1d74c7b676b927c40ff460f3d30f3cf17a41f42dba4a5cf3812252bd8854b6",
+    "patamaps/.tools/project-adoption/next-proxy-intake-20261018/compiled-legacy/client.js": "47299c482848b34a3f2f0e1f3710d74bcad8940c4b84aa388950c3baade8dab7",
+    "patamaps/.tools/project-adoption/next-proxy-intake-20261018/witness.rs": "853da58a4193703f96692b91c33877a4c026099439e101ef3a24213ba6e358e3",
+    "candidate/storage-policy.json": "a4e85ba829c87fb8671dc7faf32933ede8d5c607c4e0c934c0f783ece8eac8f3",
+    "candidate/assurance/evidence/logistics-native.json": "e6ea6c1b15c17ae5fc048323a090357ee11c76e6609cd6af61fb1c53b9760b08",
+    "candidate/web/src/app/api/evaluate/route.ts": "34d772f770e92288ec57b65459c73b7ae110bfbe4380c6a7c2dca78cb4c08f24",
+    "candidate/web/src/app/api/logistics/route.ts": "672dc4b5b9b58ee02068a033d9278943bb72b2d79481b0b9b1faad59a066bc19",
+    "candidate/web/src/lib/server-engine.ts": "449cf78980e75e43796886fb2cf08155c84317512cd91fa42e0a9a24852a322c",
+    "candidate/web/next.config.ts": "821155c786264297e92006c228f62d243d97c41fa50fc95936f16a53bdfbf88a",
+    "candidate/web/package.json": "e3f1ff3918ceb8ed6a3f2eb349f895461928dc4c4d5cc606a08a83bb323b483b",
+    "candidate/package.json": "3451c2d0c325e8b255c753e26f7c260475081bd790e901b39f938be09245c3e0",
+    "candidate/scripts/build.mjs": "54c24685a12b1d450e52b72896e7cec53b99b50bfbaceee2899e57f66c8be35b",
+    "candidate/scripts/serve.mjs": "9007acd3da05387a1c4b4b4f2fe6d303df25a9df9187f0410475a39996301153",
+    "candidate/scripts/generate-contracts.mjs": "91ff2315eff242c46df7fe042d8ea6acc77ccdf1f777a3d24f6a88638bcdc852",
+    "candidate/scripts/tooling.mjs": "08bd7920eb322bfbe9842625a39acf0c7669fd6f6807caacd5db6cbc5ac5efcb",
+    "candidate/scenarios/bridge-demo.json": "bb26870144c9ec626e366dccf4c73b7b0de5cd3f333f7e58d56e4bc0cef5407d",
+    "candidate/scenarios/demo-orders.json": "171471cd48f464e4740b12bec5d891f9e70473cea791e38e1fbbe793e9fdc777",
+    "candidate/scenarios/logistics/two-depot-deadline.json": "7003980f4c527da07d5ee13260da4dfaba2a9718a120aeb3a57ebda9ee1fc585",
+    "candidate/scenarios/logistics/centralized-plan.json": "df2ff5bc310ff97bf71d59f305ce75ecd789d5d2a29403f48a73306c33c7f11f",
+    "candidate/scenarios/logistics/distributed-plan.json": "b36c9595d6757db259c3ab2bd37f0f5d1026198f58fcc85fd2d9b1cff45515bb",
+    "candidate/scenarios/logistics/expected-two-plan.json": "0a97b2018f54af40011a03862fc0bb7afaaf2da298ce78b6ac8fa7542690680f",
+    "candidate/assurance/analysis-protocol.json": "6f3de3467c83dd066a25813a3529758227cbfc72358ecd646b7dfcb584c2c1e3",
+    "candidate/assurance/assumptions.json": "f14ad5a92251d616d0f433e38c009c23d14f156e6bf7e59ef14f69a45a77d853",
+    "candidate/assurance/protocol.json": "393a2ba115f92468bdfec52d0c680ce1ca15dc899e60f67a3c1e9bda9339ad98",
+    "candidate/assurance/requirements.json": "95978ffb4c06adcddbe84cd76fabf715048f49ab56250aeed2c62c6f15f772d2",
+    "candidate/docs/ANALYSIS_REFERENCE.md": "c86014c9e83c7fcc2972a2bb0d6bde86391c9a5d71cca3f281ba95bddc071fdf",
+    "candidate/docs/CHECKPOINT_REFERENCE.md": "a45d09a86b199999f6ed1a716b9ea9868334d85bcdcaeed06e97191ec0f511b0",
+    "candidate/docs/INTENDED_USE.md": "f0dbcac42748a6ff7c38facad4b1bb57a93e4d1431ca51c22a17003043273d15",
+    "candidate/docs/PHASE8_BACKGROUND_ANALYSIS.md": "30f6a0710a1d66ab4dbc58381467a2f7717cf34f91cb250e5f4bd6df617971c9",
+    "candidate/docs/TWO_PLAN_REFERENCE.md": "3e9b4f127141777e032c44e768ca6fc56e56f8de74e732e8d0479efd4df46061",
+    "candidate/meta/analysis-traceability.json": "71cf72fe24663eb10453981d110fd2a3ba4ab9954acff1eeefaee1ddc8e6f266",
+    "candidate/meta/traceability.json": "b05560f415a8f208e2906dc8b805395732137643bac0ec32af3b2e9b61c22366",
+    "candidate/scenarios/analysis/expected-checkpoint.json": "13ac4c4d2f33a9085a7be64e64aa69bbefb0e6948cd126c5b8505d065cd38ff8",
+    "candidate/scenarios/analysis/expected-statistics.json": "c332bba0fd873d692641d0ab9b90421c51b768fa69fe1a10c575f1ee6f49944a",
+    "candidate/scenarios/analysis/paired-demo.json": "4a11ac0c8b31fb3fa2199390a6468bc926d2edd37e021570dce5ae7744dbe022",
+    "candidate/scenarios/authoring/known-cases.json": "a19af77ca31ed678500727ae47f6e74b5baf5a50e73b2edce636836b25443e0a",
+    "candidate/scenarios/authoring/synthetic-package.json": "5f9cd6826fa1a1c41218f5110551526776e2455845d82751514fd0bb4bccc2c2",
+    "candidate/scenarios/performance/expected-reference.json": "d96197030303b114c0dddb760ddec920d8cbb28532fb6852e6350b036a7117e3",
+    "candidate/scenarios/performance/reference-fifo.json": "9eef9edb939b697e1873c91dd223dc7cb67b22c19ae8c7c916e70ba30af0d260",
+    "candidate/scenarios/performance/reference-priority.json": "62d956ae5dce095f3dc687982537d290178853948c01a3f20ab0e0347322f6c4",
+    "candidate/scenarios/performance/reference-scenario.json": "39b649e26b664e3768c82b49fec958fccd0898be4f6d4a7a751987c52d40dd3a",
+    "candidate/scripts/analysis-reference.py": "a9502532dcd1c93872af286e665da932786306e8c6fe165885128f53d65f5fd5",
+    "candidate/src/analysis/mod.rs": "e1907f701d0fa695cdc6dff28f52d87d220da60c9bdb69c47d9d88045150d340",
+    "candidate/src/analysis/model.rs": "3bad061de2732dd196d8b9b4b81432ef9ffcc22adf6458e829de49a1ddabbb4a",
+    "candidate/src/analysis/random.rs": "0ab56f48f06af62469ada5eb9c9b8a04dc25ab5a329f1efdc0fa9b63ef7f1702",
+    "candidate/src/analysis/statistics.rs": "a941d214665cbe19bd2bec53036fe4f51f5cd95fce6396f80359eebdd11b0767",
+    "candidate/src/analysis/study.rs": "3865734e1840d07bdf164d73ec196a9b8fa4c75b0301abe1e62bcdb72e0ca7e0",
+    "candidate/src/logistics/checkpoint.rs": "ae1cc2371b5cf0f8b2681a545bbbfa980453043cc018f4fb83e101498f78e214",
+    "candidate/src/logistics/engine/incremental.rs": "33098f9004cb1f5e56571dc2170857eb3530084ec3444b7269c2491a163c36f8",
+    "candidate/src/logistics/engine/streamed.rs": "04de71c560cc53c6af20d345e84278632efc8f8a417a1ccd4ce7646d3ebd56a1",
+    "candidate/src/records/boundaries.rs": "7ad20655f0da74c728d5cf8a74975d6c88aea0a8137bbb1ec865d765d25bedd5",
+    "candidate/src/records/boundary_replay.rs": "4f19b91128c7a00611aa5e26c8b5833ab37bc761be53b6f8b496e6223234ef22",
+    "candidate/tests/analysis.rs": "69122640bf537a475693ab24f11b9f176f61e640ca6ed9005675d78d25fadd29",
+    "candidate/tests/authoring.rs": "ae0f81059cb2e88f4b304f73b7bd03910209075ea1e69c1b58c82f5b753851ac",
+    "candidate/tests/interventions.rs": "d4234346a7ceff181d638c9a3ce9c604fb30de61f240bdb4339cba7ba39abe99",
+    "candidate/tests/journal.rs": "88d1bf86257b831f6084c61174390b60c4f30b8e1fecb57a641259f98078dbe2",
+    "candidate/tests/logistics.rs": "bea7730d51276246d194375e755a4498af3ff9f40a9334cd9fc604a7a3d6be6c",
+    "candidate/tests/logistics_api.rs": "e43a48e316bd5ab83bb2367fa064c3d7590b55db72130d32c3786076a718e324",
+    "candidate/meta/metamap.config.json": "102a00adf8c8986078234547ba502fd7f6b1f1e34503e2812e79e13247a249cf",
+    "candidate/meta/evaluation-context.json": "9a5424904d3d54ebf7704a28086cc1b29f52625e2620e096b328c5b091a8da65",
+    "candidate/meta/correspondences.json": "e80ccc1759e7f6df23a222762cd5a5365b260a65acae94ad4ac6ef76b840cb93",
+    "candidate/meta/viability-policy.json": "31c31245b30794c33cb7518010765fdba411cfc0c1f4993b2a4b4d7415140bca",
+    "candidate/meta/projection-spec.json": "cf3760ef9fbefd49ef2da5ae584633f41c0689d27d682d560628f10357137ca6"
+  },
+  "selectedInputsVerified": 71,
+  "supervisedExitCode": 0,
+  "supervisedStartedAt": "2026-10-18T23:42:16.615Z",
+  "supervisedFinishedAt": "2026-10-18T23:49:26.879Z",
+  "minimumFreeBytesObserved": 96726007808,
+  "retainedAllocatedBytesAtStart": 27590656,
+  "privateReceiptSha256": "2ca9251110d1298234a97152a3369470177fa17984a030ac91255f1d12bc7d98",
+  "privateSupervisorReceiptSha256": "1f752c35502f143b3df750d229aaddc7f096c83948f3af996176308cecd8e0c7",
+  "logDigests": {
+    "actual-application-services.stderr.log": "aea5fd1b39a2f8fbdfe6319be1bfe298ee3554c9c63b6779560d6fc75603bbd6",
+    "actual-application-services.stdout.log": "e3fef667032ace90df2fef18688ec44a697359aa4a09be614324b9448cf7f629",
+    "actual-network-controls.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "actual-network-controls.stdout.log": "045e2747741a534b5116f18e629576d260a422d48bdb8f1c844bef7264fb9e96",
+    "actual-next-upstream-unavailable.stderr.log": "3861a178b6fcb8464a8d771f3f499296914082070c23f5d781facadbc704cfed",
+    "actual-next-upstream-unavailable.stdout.log": "8238980824f45044af09293f99af1566764d3396840a7bb0372e6947c5e592d1",
+    "candidate-original-generation.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "candidate-original-generation.stdout.log": "b566ed87aedb80cc41d500984b963197f66e4925f48bbd59ac1a2a89c5ec9b25",
+    "candidate-production-build.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "candidate-production-build.stdout.log": "6094bd34688a6e8ca67984a02f8a2fe8b70f39fe9ad636f92fabfc2041fb1022",
+    "candidate-root-offline-install.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "candidate-root-offline-install.stdout.log": "e73b7fa562e390731b1da969510e43f2c308c45a066b3e107831d059adadeaad",
+    "candidate-web-offline-install.stderr.log": "22cd48f376484a6b3611d8d3fb1ce954966c05ac31df3887633aca2c1f1c0f83",
+    "candidate-web-offline-install.stdout.log": "5f5c71b02cd56eab43ca198464ecacc9955c9831655dcd2aa42e3b8fb2b19b2f"
+  },
+  "limitations": [
+    "Loopback TCP in explicit lab mode; managed identity, persistence, browser and deployment acceptance are not established.",
+    "No installed Patamaps package or independent source-free application runtime was exercised here.",
+    "Wall times are functional observations, not performance benchmark acceptance.",
+    "Original source commit alone does not identify the candidate; selected working bytes and generated bundle identities are recorded separately.",
+    "This advances G2/G6 and does not complete the adoption goal."
+  ],
+  "evidenceLocation": "Private retained Intel network-runtime-20261018 artifacts; all inputs and binary/build identities rechecked before publication."
+}

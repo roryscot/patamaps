@@ -1,0 +1,163 @@
+{
+  "schemaVersion": 1,
+  "status": "passed-source-bound-next-manifest-replay; application-prerender-failed-missing-configuration",
+  "recordedAt": "2026-10-22T19:55:45.719489+00:00",
+  "source": {
+    "identity": "same private existing Next.js frontend; no source/route labels published",
+    "revision": "dd0719f11b9c45b765267612a0fe9cd149dbf59d",
+    "selectedFiles": 923,
+    "selectedBytes": 22183900,
+    "selectedInventorySha256": "85636b14400fa3892d5dac14a4ed0caddab835c568300821a06623f72a8317fd",
+    "originalSourceUnchanged": true,
+    "dotenvSelectedOrRead": false,
+    "candidateOnlyConfigurationOverlay": {
+      "path": "next.config.js",
+      "originalSha256": "2903ac0a36d36c9471879ebee71952db261bfa92f128caec0b870ceb762ba8de",
+      "overlaidSha256": "31df210635ba61040e10c4cf58cc46ad1460c8a372ded8552accf9d98945f81e",
+      "change": "Delegate owner webpack hook; disable persistent cache and set experimental.cpus=1 only in retained candidate",
+      "originalCheckoutChanged": false,
+      "reason": "Previous interrupted build retained 1.07 GB of Webpack pack caches"
+    }
+  },
+  "tools": {
+    "patamapsRevision": "e6236182053bfc847744c9990210228d2f813581",
+    "cliSha256": "6f6afc98ee7aa8f3ba4f97dab9871735bad0468be3a634615c39567ea44b9c8f",
+    "nodeVersion": "22.9.0",
+    "nodeSha256": "0cb28b566cb23b2ddba1b843b29c94a4df74621671f8425fcfb96ba7251472f7",
+    "nextVersion": "14.2.23",
+    "swc": {
+      "package": "@next/swc-darwin-x64",
+      "version": "14.2.23",
+      "npmIntegrity": "sha512-vwLw0HN2gVclT/ikO6EcE+LcIN+0mddJ53yG4eZd0rXkuEr/RnOaMH8wg/sYl5iz5AYYRo/l6XX7FIo6kwbw1Q==",
+      "archiveSha256": "0cc4c92d3c35e4d634c105607c29fdde74100517424118fe17a6d976ecbb31a6",
+      "binarySha256": "bf6fc1c980bc058083610f9dc1deebfe42466931e6b6c8de93b303ee51cba5e7",
+      "targetTriple": "x86_64-apple-darwin",
+      "resolution": "ordinary NODE_PATH; original dependency tree unchanged"
+    }
+  },
+  "applicationBuild": {
+    "command": "sandbox-exec -f <retained profile> node@22.9.0 <installed next@14.2.23>/dist/bin/next build",
+    "exactArgv": "retained privately; displayed command normalizes private paths",
+    "exitCode": 1,
+    "elapsedMs": 132252,
+    "compilationCompleted": true,
+    "builtInTypecheckCompleted": true,
+    "prerender": "failed; missing required API client configuration",
+    "observedRequiredMissingConfiguration": [
+      "NEXT_PUBLIC_BASE_API_URL"
+    ],
+    "diagnostic": "Environment keys for API client are not defined",
+    "additionalConfigurationRequirements": "may emerge after supplying reviewed nonsecret configuration; no raw environment file was read",
+    "fullApplicationBuildPassed": false,
+    "httpBrowserDeploymentAccepted": false
+  },
+  "resources": {
+    "nativeExclusive": true,
+    "parallelActivated": false,
+    "declaredGrowthCeilingBytes": 1073741824,
+    "frameworkRuntimeControls": {
+      "nodeHeapMiB": 1024,
+      "nextBuildWorkers": 1,
+      "rayonThreads": 1,
+      "uvThreads": 2,
+      "enforcement": "native exclusive; no kernel RSS quota or concurrency claim"
+    },
+    "sampledPeakOwnedGroupRssKiB": 2144112,
+    "sampling": "1-second RSS sum for owned group; shared pages may be counted more than once; no benchmark or kernel RSS quota",
+    "nextOutputAllocatedBytes": 28250112,
+    "persistentWebpackPackFiles": 0,
+    "ownerClientServerWebpackSettings": "matched original except cache:false",
+    "ownerNonWebpackConfiguration": "matched original except experimental.cpus=1; all 20 header rules matched",
+    "writeAndNetworkRefusals": "passed",
+    "persistentStoragePolicyChanged": false,
+    "guardStoppedForCapacity": false,
+    "normalOwnedWorkloadStopAndLeaseRelease": true,
+    "aggregateFreeSpaceDeltaAttribution": "not isolated; background activity prevents attributing all changes to this workload",
+    "priorCacheDisabledAttempt": "capacity interrupted; 4,239,360 candidate output bytes versus aggregate free-space decrease of 5,044,965,376 bytes; cause not established",
+    "filesDeletedDuringBuildOrReplay": 0
+  },
+  "nativeObservations": {
+    "baselineDigest": "sha256:b78eaea06b2fba464f48f686306a6d10904bf3d432e53d906036a34c6d48b13f",
+    "routeCounts": {
+      "staticRoutes": 32,
+      "dynamicRoutes": 21,
+      "headerRules": 20,
+      "redirectRules": 1,
+      "moduleAndRouteAliases": 53
+    },
+    "allRouteRegexKeysHeaderConditionsAndModuleAliasesCompared": true,
+    "producerBinding": "retained command receipt binds source inventory, candidate overlay and three output hashes; producer failed prerendering",
+    "buildReceiptDigestField": "digest of failed producer receipt, opaque to native parser; not successful-build or admission attestation",
+    "configurationProjection": "explicit typed/default declaration; not authenticated complete effective-runtime configuration",
+    "manifestDigestsSha256": {
+      "routes": "04cbf987da3611b341fc8c6315c528d68ea32731f40b6582581f0c9a938299b4",
+      "appPaths": "4134d2ee4631e6f754c82294e0ef9b3fdb8e7dbf4245de004909ad131807f81e",
+      "appPathRoutes": "bd4dee163423d08e0a9b5dd9d7cf358c2ce3809fae92fb8f3b37325fc83d2e8c"
+    },
+    "digestMismatch": "refused exit 2",
+    "missingProjection": "refused exit 2",
+    "offlineReplay": "verified-record-bindings",
+    "configuredInputsUnavailable": true,
+    "configuredProviderUnavailable": true,
+    "externalPathEmpty": true,
+    "commands": [
+      {
+        "label": "project-capture",
+        "exitCode": 0,
+        "elapsedMs": 84,
+        "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "label": "generate",
+        "exitCode": 0,
+        "elapsedMs": 4390,
+        "stdoutSha256": "1fac8aab143b6fb2f41ca0f9fb9b53bcdd1dcbf75ce9a04d0e2bc784a0a6af8e",
+        "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "label": "refuse-manifest-digest",
+        "exitCode": 2,
+        "elapsedMs": 2992,
+        "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderrSha256": "8849c1cc6c0aa16ec0f1b47ae36cd7d2d8c6df692db88b6c7f0f7a54e02d1f63"
+      },
+      {
+        "label": "refuse-missing-projection",
+        "exitCode": 2,
+        "elapsedMs": 13,
+        "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderrSha256": "510b4768b494eab7911bee980278e0f603282927e5cec3fa774cc8af16766ce3"
+      },
+      {
+        "label": "offline-replay",
+        "exitCode": 0,
+        "elapsedMs": 660,
+        "stdoutSha256": "c056f2901c08d7a3aeee2412cbac719eee43c6be93321adcb3fc145edc0bf0dc",
+        "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    ]
+  },
+  "approvedCacheRemoval": {
+    "inventory": "../next14-cache-cleanup-review-20261022/inventory.json",
+    "result": "../next14-cache-cleanup-review-20261022/deletion-result.json",
+    "filesDeleted": 6,
+    "summedAllocationBytes": 1074593792,
+    "backupVerified": false,
+    "allDirectoriesAndUnlistedFilesPreserved": true
+  },
+  "evidenceSha256": {
+    "producerReceipt": "c5c841af424d1914b456e0ddd26a348f65ef378eec13709dc3d561d66a6be106",
+    "replayReceipt": "c34be732310db29294333dc2660378365b09007f98c6ced9c14231e85312c69e",
+    "independentFieldComparison": "883cf2ca03877401a85ce9a3b3f50fa01db0cd4e7a0f144ec1efdf98c2e8b963",
+    "producerGuard": "3049404addb17b06f342c0594100a96a4f638544099fcd3c397b8c91063e1c56",
+    "replayGuard": "2a84d849f506aa830f9ce005110b271d0b1c21b8329bb86a31d94c00d839ac2f"
+  },
+  "limitations": [
+    "Only sanitized metadata is public; source/route values/snapshots/tools/logs stay private on Intel.",
+    "Manifest equality does not establish executed HTTP/header/regex behavior, Server Actions or authentication.",
+    "Producer was an unsuccessful application build with declared resource-only configuration changes.",
+    "Dependency/toolchain closure, full application replay, practical edit performance and deployment remain open."
+  ],
+  "fullGoalComplete": false
+}

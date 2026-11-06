@@ -1,0 +1,39 @@
+{
+  "status": "verified-initial-managed-inspection-failure",
+  "reservationId": "4a6ad3a1-6817-4512-85d5-6093fc32bec1",
+  "reservationFinished": true,
+  "ownedContainerAndHostGroupStopped": true,
+  "executorExitCode": 1,
+  "applicationLaunches": 0,
+  "casesCompleted": 0,
+  "architectureApplicationGateAccepted": false,
+  "failure": "In-container statfs reported a filesystem larger than the declared512MiB; actual reported byte count was not persisted.",
+  "actualReportedByteCountRecorded": false,
+  "physicalHostFilesystemBytes": 535781376,
+  "backingImageBytes": 535822336,
+  "declaredDiskBytes": 536870912,
+  "physicalQuotaIdentityAndOnlyWorkBindIndependentlyVerified": true,
+  "kernelLimits": {
+    "cpu": "200000 100000",
+    "memory": "1610612736",
+    "swap": "0",
+    "pids": "256"
+  },
+  "preparationPassed": true,
+  "runtimeFilesRehashedInPreparation": 2480,
+  "protectedInputsUnchanged": true,
+  "controlsReceiptSha256": "2012794410cb4bef7e1bf0d905ffe94c33dff3d562e038f2d24ebb16f5ef37ef",
+  "requestAfterSha256": "c173a274eef6675684f1ceb5b034d9088791f7ed5dbc474cfcb53597ec921b6e",
+  "driverDigests": {
+    "prepare.py": "a69cad847072e4ad79ec0f8859c0e42082adefa494a23c412ea99421a624a208",
+    "run-managed.py": "db9ddc620ef9c48dc5f9d6f704c1bbcebfccc7de325a54d158333c4bcf3f6227",
+    "controls.mjs": "aca7b6b33df5d8a50fc10d42745d9bb8498129db6b7ad3cccfbdbd4c485829aa"
+  },
+  "reviewerSha256": "3b4d5857459ef8e59387a93204d143e9612e4c7725176546c7018aa8668497f5",
+  "filesDeleted": 0,
+  "servicesStopped": 0,
+  "policyChanged": false,
+  "productDefectEstablished": false,
+  "fullGoalComplete": false,
+  "nextRepair": "Use existing executor host quota identity/bind checks as the physical bound; preserve and report the distinct Linux namespace statfs observation before effects. Same512MiB quota, inputs, image and other controls. Initial workload and source selection must not be rerun."
+}

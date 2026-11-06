@@ -1,0 +1,68 @@
+{
+  "schemaVersion": 1,
+  "status": "passed-next-manifest-adapter-library-tests-and-cli-build",
+  "date": "2026-10-22",
+  "sourceCommit": "346e5d885f4e5462e136597b739323939a1a7dfa",
+  "workflow": {
+    "id": 39718879830,
+    "url": "https://github.com/roryscot/patamaps/actions/runs/39718879830",
+    "job": "Rust Cargo metadata contract",
+    "jobId": 119627465140,
+    "result": "success",
+    "runner": "ubuntu-24.04",
+    "rustToolchain": "1.99.0"
+  },
+  "commands": [
+    {
+      "argv": [
+        "cargo",
+        "+1.99.0",
+        "test",
+        "--locked",
+        "-p",
+        "patamaps-workspace",
+        "--lib"
+      ],
+      "result": "passed",
+      "testsPassed": 44,
+      "testsFailed": 0,
+      "includes": [
+        "native_next::tests::captures_reviewed_next_14_2_rewrite_manifest_shapes",
+        "native_next::tests::refuses_unreviewed_next_14_2_i18n_and_manifest_variants"
+      ]
+    },
+    {
+      "argv": [
+        "cargo",
+        "+1.99.0",
+        "build",
+        "--locked",
+        "-p",
+        "patamaps-cli",
+        "--bin",
+        "patamaps"
+      ],
+      "result": "passed"
+    }
+  ],
+  "upstreamSourceReview": {
+    "package": "next@14.2.23",
+    "file": "dist/build/index.js",
+    "lines": "638-667",
+    "result": "confirmed-version-3-and-flat-or-phased-rewrites"
+  },
+  "history": {
+    "initialRunId": 39718201222,
+    "initialResult": "failed-compile-at-optional-rewriteHeaders-check",
+    "correctionCommit": "49dbe67e8fb9d8775ad3c185fb2d7ddb385c990c",
+    "fullLibraryRunId": 39718649654,
+    "fullLibraryTestsPassed": 44,
+    "cliBuildRunId": 39718879830
+  },
+  "notEstablished": [
+    "Intel rebuild of the CLI; current supervisor free-memory measure remains below its 4 GiB interactive reserve",
+    "Replay of a generated routes-manifest from the existing Next.js 14.2 project; no routes-manifest.json is currently available in its build output",
+    "Next application build, HTTP/browser behavior, configuration semantics, Server Actions, dependency closure, deployment, or complete project adoption"
+  ],
+  "scope": "Linux CI verifies the Rust adapter library and CLI build only; it does not qualify an actual Next application build or runtime."
+}

@@ -1,0 +1,9 @@
+--- a/guarded-run.mjs
++++ b/guarded-run.mjs
+@@ -349,4 +349,6 @@
+         throw new Error("Benchmark phase requires an isolated runtime; existing containers are unreserved");
+     }
++    record.minimumFreeBytesObserved = Math.min(record.freeBytesAtStart, free());
++    checkCapacity(policy, record.minimumFreeBytesObserved, record.freeBytesAtStart);
+     const child = spawn(command, args, {
+       cwd,

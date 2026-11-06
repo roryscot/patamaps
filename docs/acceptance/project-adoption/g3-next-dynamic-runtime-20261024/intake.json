@@ -1,0 +1,55 @@
+{
+  "status": "read-only-pinned-source-intake",
+  "upstream": "https://github.com/vercel/chatbot",
+  "revision": "c2f8235e1f3ea903ad8b7f61447c4f74164b5c58",
+  "nextVersion": "16.2.10",
+  "publicGitBlobs": {
+    "app/(chat)/chat/[id]/page.tsx": "67e08591353b913c179399d9e4808e69c5f36df5",
+    "components/chat/shell.tsx": "53c55676fe767b4bbfe30765cc9c360c64592f99",
+    "hooks/use-active-chat.tsx": "f3b9522f7fcf900416ce073f79ca5a6164826a1d",
+    "app/(chat)/api/messages/route.ts": "60de354e9af1ba60f8f9709b54f1de8bfa901df7",
+    "app/(chat)/api/chat/[id]/stream/route.ts": "3713ec5dac7673cbc37a056cbb1b433f0cb81550",
+    "lib/db/schema.ts": "82d0ca04aa55a270c18d0bccd7f46442bcac9817",
+    "components/chat/message.tsx": "227c42ef2ff1477631fee063fb4615250b57248d",
+    "components/chat/multimodal-input.tsx": "987aefa66617eee567da4f5f9e70c2ca818ce887",
+    "hooks/use-auto-resume.ts": "de6092e6f46b932881c359bb664c76b8fb60469f"
+  },
+  "nextMethodSource": {
+    "repository": "https://github.com/vercel/next.js",
+    "revision": "v16.2.10",
+    "path": "packages/next/src/server/route-modules/app-route/helpers/auto-implement-methods.ts",
+    "gitBlob": "3cb4f2d0f118df8762ea529ecabf6645b853c74f"
+  },
+  "facts": {
+    "pageDelegatesToClientShell": true,
+    "chatIdExtractedFromPath": true,
+    "dataQueryPath": "/api/messages?chatId=...",
+    "privateOtherOrAbsentSessionStatus": 403,
+    "unseenValidIdStatus": 200,
+    "unseenIdPersistsChat": false,
+    "publicNonownerReadonly": true,
+    "streamHandlerConstantStatus": 204,
+    "streamGenerationProven": false,
+    "unimplementedPostStatus": 405
+  },
+  "runtimeControls": [
+    "dynamic-owner-private-page-and-id-bound-data",
+    "dynamic-owner-second-id-replaces-visible-data",
+    "dynamic-cross-user-public-page-readonly",
+    "dynamic-cross-user-private-data-refusal",
+    "dynamic-guest-public-page-readonly",
+    "dynamic-guest-private-data-refusal",
+    "dynamic-unseen-id-empty-response",
+    "dynamic-missing-chat-id-query-refusal",
+    "dynamic-extra-page-segment-refusal",
+    "dynamic-stream-route-204",
+    "dynamic-stream-post-method-refusal",
+    "dynamic-stream-extra-segment-refusal",
+    "dynamic-fixtures-unchanged-and-no-generation"
+  ],
+  "sourceChanged": false,
+  "databaseAccessed": false,
+  "runtimeRun": false,
+  "runtimeAccepted": false,
+  "scope": "Primary pinned source facts and predeclared controls, not runtime acceptance. Existing browser records cover auth, documents, public navigation and rewrites, not this non-catch-all dynamic chat page."
+}

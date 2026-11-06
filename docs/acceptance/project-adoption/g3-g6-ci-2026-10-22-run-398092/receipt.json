@@ -1,0 +1,68 @@
+{
+  "schemaVersion": 1,
+  "status": "passed-defined-branch-adoption-ci-scopes",
+  "date": "2026-10-22",
+  "sourceCommit": "2806b09cc5838fe8e45ca3b8e3d9d81ee4b5db14",
+  "testedMergeCommit": "8a49c79557792988a4c7ed8e9fec4433777ebb1f",
+  "baseCommit": "27dedef0186981d9fca60c1a2e665f34ab88da86",
+  "workflow": {
+    "id": 39809274887,
+    "event": "pull_request",
+    "result": "success",
+    "url": "https://github.com/roryscot/patamaps/actions/runs/39809274887"
+  },
+  "jobs": {
+    "rustCargoMetadataContractIncludingNextManifestBoundaries": "passed",
+    "linuxX86_64NativeAcceptance": "passed",
+    "linuxX86_64PublishedCliInstallerAndFreshCargoHomeConsumer": "passed",
+    "linuxAarch64NativeAcceptance": "passed",
+    "crossStackSourceBindingsAndPinnedAxumLinuxQualification": "passed",
+    "crossStackLinuxImageHttpBrowserAndInstalledConsumer": "passed",
+    "retentionAdmissionBoundaries": "passed",
+    "pinnedFumadocsProductionBuild": "skipped"
+  },
+  "retention": {
+    "artifactCount": 5,
+    "artifactBytes": 80543868,
+    "regularEvidenceDays": 14,
+    "publishedCliEvidenceDays": 30,
+    "failureReplayBundleDaysConfigured": 7,
+    "successfulRunLargeReplayBundlesPresent": false,
+    "failureOnlyBundleRetentionNotExercised": true,
+    "artifacts": [
+      {
+        "name": "native-linux-x86_64-8a49c79557792988a4c7ed8e9fec4433777ebb1f",
+        "bytes": 23808782,
+        "expiresUtc": "2026-11-05T16:03:02Z"
+      },
+      {
+        "name": "published-cli-install-8a49c79557792988a4c7ed8e9fec4433777ebb1f",
+        "bytes": 9205,
+        "expiresUtc": "2026-11-21T16:02:58Z"
+      },
+      {
+        "name": "cross-stack-diagnostics-source-8a49c79557792988a4c7ed8e9fec4433777ebb1f",
+        "bytes": 34096895,
+        "expiresUtc": "2026-11-05T16:10:30Z"
+      },
+      {
+        "name": "native-linux-aarch64-8a49c79557792988a4c7ed8e9fec4433777ebb1f",
+        "bytes": 21690242,
+        "expiresUtc": "2026-11-05T16:01:51Z"
+      },
+      {
+        "name": "cross-stack-diagnostics-image-8a49c79557792988a4c7ed8e9fec4433777ebb1f",
+        "bytes": 938744,
+        "expiresUtc": "2026-11-05T16:03:46Z"
+      }
+    ]
+  },
+  "limitations": [
+    "This records only the named CI scopes; general G2-G6 adoption remains open.",
+    "The clean Cargo-home published CLI consumer passed on Linux x86_64; the aarch64 published-CLI install and consumer steps were skipped.",
+    "The pinned Fumadocs production build was skipped.",
+    "The existing Next.js 14 application build and manifest replay remain pending on Intel.",
+    "Production deployment acceptance is not established.",
+    "The tested source was PR head 2806b09 merged into base 27dedef as 8a49c79; later branch commits were not part of this run."
+  ]
+}

@@ -1,0 +1,26 @@
+--- a/guarded-run.mjs
++++ b/guarded-run.mjs
+@@ -472 +471,0 @@
+-      return record.exitCode;
+@@ -536,2 +535,17 @@
+-    record.freeBytesAtEnd = free();
+-    record.retainedRootsAtEnd = retentionRoots(root, temporary);
++    const finalAccountingErrors = [];
++    for (const [field, probe] of [
++      ["freeBytesAtEnd", free],
++      ["retainedRootsAtEnd", () => retentionRoots(root, temporary)],
++    ]) {
++      try {
++        record[field] = probe();
++      } catch (error) {
++        finalAccountingErrors.push({ field, error: String(error.message).slice(0, 240) });
++      }
++    }
++    if (finalAccountingErrors.length) {
++      record.finalAccountingErrors = finalAccountingErrors;
++      record.stopReason ??= "Storage guard: final accounting unavailable";
++      record.completed = false;
++      record.exitCode = 75;
++    }
+@@ -553,0 +568 @@
++  return record.exitCode;

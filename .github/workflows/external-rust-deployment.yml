@@ -1,0 +1,184 @@
+name: External Rust deployment qualification
+on:
+  workflow_call:
+    inputs:
+      registry-preflight-only:
+        type: boolean
+        default: false
+      registry-container-preflight-only:
+        type: boolean
+        default: false
+      installed-owner-build:
+        type: boolean
+        default: false
+      registry-context:
+        type: boolean
+        default: false
+      registry-reuse-compiler:
+        type: boolean
+        default: false
+permissions:
+  contents: read
+jobs:
+  miniserve:
+    if: ${{ !inputs['registry-preflight-only'] && !inputs['registry-container-preflight-only'] && !inputs['installed-owner-build'] }}
+    name: Pinned Miniserve source build and retained HTTP
+    permissions:
+      contents: read
+      actions: read
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    env:
+      CARGO_INCREMENTAL: '0'
+      CARGO_PROFILE_DEV_DEBUG: '0'
+      CARGO_PROFILE_TEST_DEBUG: '0'
+      CARGO_BUILD_JOBS: '2'
+      RUST_TEST_THREADS: '1'
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - name: Install pinned Rust toolchain
+        run: rustup toolchain install 1.99.0 --profile minimal
+      - name: Check configuration controls
+        run: |
+          mkdir -p "$RUNNER_TEMP/miniserve-config-controls"
+          PATAMAPS_TEST_RETAIN_ROOT="$RUNNER_TEMP/miniserve-config-controls" python3 -B -m unittest discover -s scripts -p test_deployment_miniserve.py
+          PATAMAPS_TEST_RETAIN_ROOT="$RUNNER_TEMP/miniserve-config-controls" python3 -B -m unittest discover -s scripts -p test_cargo_registry_context.py
+          python3 -B -m unittest discover -s scripts -p test_cargo_registry_diagnostics.py
+      - name: Build compiler and qualify actual external Rust source and HTTP
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: >-
+          python3 -B scripts/qualify_miniserve_linux.py
+          --cli target/release/patamaps
+          ${{ inputs['registry-reuse-compiler'] && '--reuse-registry-cli' || '--build-cli' }}
+          ${{ inputs['registry-context'] && '--registry-context' || '' }}
+          --work "$RUNNER_TEMP/patamaps-miniserve-${{ github.run_id }}-${{ github.run_attempt }}"
+          --evidence ci-evidence/miniserve
+      - name: Stop only the named registry build container
+        if: always() && inputs['registry-context']
+        run: >-
+          python3 -B scripts/deployment_miniserve_image.py
+          --stop-owned "$RUNNER_TEMP/patamaps-miniserve-${{ github.run_id }}-${{ github.run_attempt }}/registry-build/private-execution/owned.json"
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        if: always()
+        with:
+          name: miniserve-deployment-${{ github.sha }}
+          path: ci-evidence/miniserve/
+          if-no-files-found: error
+          retention-days: 14
+
+  registry-network-preflight:
+    if: ${{ inputs['registry-preflight-only'] }}
+    name: Unprivileged Cargo registry network prerequisite only
+    runs-on: ubuntu-24.04
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - name: Verify namespace isolation, cancellation and owner crash
+        run: >-
+          python3 -B scripts/cargo_registry_network_preflight.py
+          --evidence ci-evidence/cargo-registry-network
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        if: always()
+        with:
+          name: cargo-registry-network-${{ github.sha }}
+          path: ci-evidence/cargo-registry-network/receipt.json
+          if-no-files-found: error
+          retention-days: 14
+
+  registry-container-preflight:
+    if: ${{ inputs['registry-container-preflight-only'] }}
+    name: Managed Cargo registry container prerequisite only
+    runs-on: ubuntu-24.04
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - name: Verify kernel limits, writable quota and actual owner cleanup
+        run: >-
+          python3 -B scripts/cargo_registry_container_preflight.py
+          --evidence ci-evidence/cargo-registry-container
+      - name: Confirm only named owned containers stopped
+        if: always()
+        run: >-
+          python3 -B scripts/deployment_miniserve_image.py
+          --stop-owned ci-evidence/cargo-registry-container/owned.json
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        if: always()
+        with:
+          name: cargo-registry-container-${{ github.sha }}
+          path: ci-evidence/cargo-registry-container/*.json
+          if-no-files-found: error
+          retention-days: 14
+
+  installed-owner-build:
+    if: inputs['installed-owner-build']
+    name: Fresh installed compilers rebuild pinned Rust owner
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    env:
+      CARGO_INCREMENTAL: '0'
+      CARGO_PROFILE_DEV_DEBUG: '0'
+      CARGO_PROFILE_TEST_DEBUG: '0'
+      CARGO_BUILD_JOBS: '2'
+      RUST_TEST_THREADS: '1'
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - name: Install pinned Rust toolchain
+        run: rustup toolchain install 1.99.0 --profile minimal
+      - name: Check installed-source and owner-build boundaries
+        run: |
+          mkdir -p "$RUNNER_TEMP/installed-rust-controls"
+          PATAMAPS_TEST_RETAIN_ROOT="$RUNNER_TEMP/installed-rust-controls" python3 -B -m unittest discover -s scripts -p test_installed_rust_build.py
+          PATAMAPS_TEST_RETAIN_ROOT="$RUNNER_TEMP/installed-rust-controls" python3 -B -m unittest discover -s scripts -p test_installed_source_identity.py
+          PATAMAPS_TEST_RETAIN_ROOT="$RUNNER_TEMP/installed-rust-controls" python3 -B -m unittest discover -s scripts -p test_exact_archive_install.py
+          PATAMAPS_TEST_RETAIN_ROOT="$RUNNER_TEMP/installed-rust-controls" python3 -B -m unittest discover -s scripts -p test_deployment_miniserve.py
+          PATAMAPS_TEST_RETAIN_ROOT="$RUNNER_TEMP/installed-rust-controls" python3 -B -m unittest discover -s scripts -p test_cargo_registry_context.py
+      - name: Qualify both exact installations and real owner builds
+        run: >-
+          python3 -B scripts/qualify_installed_rust_build.py
+          --work "$RUNNER_TEMP/patamaps-installed-rust-${{ github.run_id }}-${{ github.run_attempt }}"
+          --evidence ci-evidence/installed-rust-build
+      - name: Confirm only the two owners' containers stopped
+        if: always()
+        run: |
+          python3 -B - <<'PY'
+          import os,sys
+          from pathlib import Path
+          sys.path.insert(0,"scripts")
+          from deployment_miniserve_image import stop_owned
+          work=Path(os.environ["RUNNER_TEMP"])/("patamaps-installed-rust-"+os.environ["GITHUB_RUN_ID"]+"-"+os.environ["GITHUB_RUN_ATTEMPT"])
+          for label in ["source","native"]:
+              stop_owned(work/(label+"-owner")/"registry-build/private-execution/owned.json")
+          print("Only named installed-owner records checked")
+          PY
+      - name: Check retained evidence ceiling
+        id: evidence-budget
+        if: always()
+        run: |
+          python3 -B - <<'PY'
+          from pathlib import Path
+          root=Path("ci-evidence/installed-rust-build")
+          assert root.is_dir()
+          total=0
+          for path in root.rglob("*"):
+              assert not path.is_symlink()
+              if path.is_file():
+                  total+=path.stat().st_size
+          assert total<=320*1024**2
+          print("Evidence bytes:",total)
+          PY
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        if: always() && steps.evidence-budget.outcome == 'success'
+        with:
+          name: installed-rust-owner-build-${{ github.sha }}
+          path: ci-evidence/installed-rust-build/
+          if-no-files-found: error
+          retention-days: 14

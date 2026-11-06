@@ -1,0 +1,73 @@
+--- prior/run.py
++++ executed/run.py
+@@ -1,5 +1,5 @@
+ from pathlib import Path
+-import json,os,sys,subprocess,hashlib,secrets,socket,time,signal,urllib.request,urllib.error,datetime,resource,tarfile
++import json,os,sys,subprocess,hashlib,secrets,socket,time,signal,urllib.request,urllib.error,datetime,resource,tarfile,io
+ R=Path("/Volumes/dev_src_case_sensitive/projects/patamaps");B=Path(__file__).resolve().parent
+ sys.path.insert(0,str(R/"scripts"))
+ from bench_axum_retained import LEASE_PROBE,validate_ownership,NODE
+@@ -162,11 +162,21 @@
+  settings=B/"run/readiness-settings";settings.write_text("")
+  (B/"run/.env.blocked-control").write_text("dummy service denial control\n")
+  envfile=B/"database-env.private"
+- envfile.write_text("POSTGRES_USER=patamaps_owned\nPOSTGRES_PASSWORD="+password+"\nPOSTGRES_DB="+databaseName+"\n");envfile.chmod(0o600)
++ envfile.write_text("POSTGRES_USER=patamaps_owned\nPOSTGRES_PASSWORD="+password+"\nPOSTGRES_DB="+databaseName+"\nPGDATA=/var/lib/postgresql/data/owned\n");envfile.chmod(0o600)
+  users={k:dict(id="patamaps-"+k+"-"+token,email=k+"-"+token[:12]+"@example.com",password=secrets.token_urlsafe(24))for k in["allowed","denied"]}
+  cfg=dict(apiSource=str(Path(F["owner"])/"packages/api"),site=F["site"],databaseName=databaseName,users=users)
+  write(B/"service-config.private.json",cfg,True)
+- cid=docker("create","--name","patamaps-auth-"+token,"--label","patamaps.auth.owner="+token,"--label","buildctl.project="+str(R),"--label","buildctl.request="+ownership["id"],"--read-only","--user","501:20","--cap-drop","ALL","--security-opt","no-new-privileges:true","--cpus","1","--memory","536870912","--memory-swap","536870912","--pids-limit","128","--log-driver","none","--network","bridge","--publish","127.0.0.1:18866:5432","--mount","type=bind,source="+str(B/"database")+",target=/var/lib/postgresql/data","--mount","type=bind,source="+str(B/"container-passwd")+",target=/etc/passwd,readonly","--mount","type=bind,source="+str(B/"container-group")+",target=/etc/group,readonly","--tmpfs","/tmp:rw,nosuid,nodev,size=67108864","--tmpfs","/var/run/postgresql:rw,nosuid,nodev,size=16777216,uid=501,gid=20","--env-file",str(envfile),"--entrypoint","/bin/sh",F["postgresImage"],"-c",(B/"data-owner-entrypoint.sh").read_text()).strip()
++ # A new explicitly labelled Docker volume isolates Linux ownership from host bind projection.
++ volumeName="patamaps-auth-data-"+token
++ probe=subprocess.run([DOCKER,"volume","inspect",volumeName],capture_output=True,timeout=10)
++ assert probe.returncode!=0,"OWNED_VOLUME_NAME_ALREADY_EXISTS"
++ created=docker("volume","create","--name",volumeName,"--label","patamaps.auth.owner="+token,"--label","buildctl.project="+str(R),"--label","buildctl.request="+ownership["id"]).strip()
++ assert created==volumeName,"OWNED_VOLUME_NAME_MISMATCH"
++ volumeInfo=json.loads(docker("volume","inspect",volumeName))[0]
++ assert volumeInfo["Name"]==volumeName and volumeInfo["Driver"]=="local"and not volumeInfo.get("Options")
++ assert volumeInfo["Labels"]["patamaps.auth.owner"]==token and volumeInfo["Labels"]["buildctl.project"]==str(R)and volumeInfo["Labels"]["buildctl.request"]==ownership["id"]
++ write(B/"volume.json",dict(name=volumeName,ownerToken=token,project=str(R),request=ownership["id"],driver="local",dataPath="/var/lib/postgresql/data/owned",existingVolumeReused=False,volumeDeleted=False))
++ cid=docker("create","--name","patamaps-auth-"+token,"--label","patamaps.auth.owner="+token,"--label","buildctl.project="+str(R),"--label","buildctl.request="+ownership["id"],"--read-only","--user","501:20","--cap-drop","ALL","--security-opt","no-new-privileges:true","--cpus","1","--memory","536870912","--memory-swap","536870912","--pids-limit","128","--log-driver","none","--network","bridge","--publish","127.0.0.1:18866:5432","--mount","type=volume,source="+volumeName+",target=/var/lib/postgresql/data,volume-nocopy","--mount","type=bind,source="+str(B/"container-passwd")+",target=/etc/passwd,readonly","--mount","type=bind,source="+str(B/"container-group")+",target=/etc/group,readonly","--tmpfs","/tmp:rw,nosuid,nodev,size=67108864","--tmpfs","/var/run/postgresql:rw,nosuid,nodev,size=16777216,uid=501,gid=20","--env-file",str(envfile),"--entrypoint","/bin/sh",F["postgresImage"],"-c",(B/"data-owner-entrypoint.sh").read_text()).strip()
+  write(B/"container.json",dict(containerId=cid,ownerToken=token,project=str(R)))
+  d=json.loads(docker("inspect",cid))[0];h=d["HostConfig"]
+  assert not d["State"]["Running"]and d["Image"]==F["postgresImage"]
+@@ -176,18 +186,26 @@
+  assert any(x in["no-new-privileges","no-new-privileges:true"]for x in h["SecurityOpt"])
+  assert d["Config"]["Labels"]["patamaps.auth.owner"]==token and d["Config"]["Labels"]["buildctl.request"]==ownership["id"]
+  binds=[m for m in d["Mounts"]if m["Type"]=="bind"]
+- assert len(binds)==3
+- assert {(m["Source"],m["Destination"],m["RW"])for m in binds}=={(str(B/"database"),"/var/lib/postgresql/data",True),(str(B/"container-passwd"),"/etc/passwd",False),(str(B/"container-group"),"/etc/group",False)}
+- assert d["Config"]["User"]=="501:20"and h["CapDrop"]==["ALL"]and not h.get("CapAdd")
++ assert len(binds)==2
++ assert {(m["Source"],m["Destination"],m["RW"])for m in binds}=={(str(B/"container-passwd"),"/etc/passwd",False),(str(B/"container-group"),"/etc/group",False)}
++ volumes=[m for m in d["Mounts"]if m["Type"]=="volume"]
++ assert len(volumes)==1 and volumes[0]["Name"]==volumeName and volumes[0]["Destination"]=="/var/lib/postgresql/data"and volumes[0]["RW"]is True
++ assert d["Config"]["User"]=="501:20" and h["CapDrop"]==["ALL"]and not h.get("CapAdd")
+  assert d["Config"]["Entrypoint"]==["/bin/sh"]and d["Config"]["Cmd"]==["-c",(B/"data-owner-entrypoint.sh").read_text()]
+  assert set(h["Tmpfs"])=={"/tmp","/var/run/postgresql"}
+- write(B/"container-limits.json",dict(containerId=cid,cpu=1,memoryBytes=536870912,swapBytes=0,pids=128,readonlyRoot=True,logDriver="none",publishedLoopbackPort=18866,ownedData=str(B/"database"),nativeExclusive=True,maximumObservedOwnedDataBytes=536870912))
++ write(B/"container-limits.json",dict(containerId=cid,cpu=1,memoryBytes=536870912,swapBytes=0,pids=128,readonlyRoot=True,logDriver="none",publishedLoopbackPort=18866,ownedVolume=volumeName,ownedDataContainerPath="/var/lib/postgresql/data/owned",nativeExclusive=True,maximumObservedOwnedDataBytes=536870912))
+  # Set metadata only on the new EMPTY owned bind directory, before any process.
+  assert not any((B/"database").iterdir()),"OWNED_DATA_OWNER_SETUP_REQUIRES_EMPTY_DIRECTORY"
++ # Require a truly empty new Linux volume before installing directory metadata.
++ emptyArchive=subprocess.run([DOCKER,"cp",cid+":/var/lib/postgresql/data","-"],capture_output=True,timeout=15)
++ assert emptyArchive.returncode==0 and len(emptyArchive.stdout)<=1048576,"OWNED_VOLUME_EMPTY_CHECK_FAILED"
++ with tarfile.open(fileobj=io.BytesIO(emptyArchive.stdout),mode="r:")as archive:
++  entries=archive.getmembers()
++  assert len(entries)==1 and entries[0].isdir(),"OWNED_VOLUME_NOT_EMPTY"
+  ownershipTar=B/"empty-data-owner.tar"
+  with tarfile.open(ownershipTar,"r:")as archive:
+   members=archive.getmembers()
+-  assert len(members)==1 and members[0].name=="."and members[0].isdir()and members[0].uid==501 and members[0].gid==20 and members[0].mode==0o700 and members[0].size==0 and not members[0].pax_headers,"OWNED_DATA_OWNER_TAR_INVALID"
++  assert len(members)==1 and members[0].name=="owned"and members[0].isdir()and members[0].uid==501 and members[0].gid==20 and members[0].mode==0o700 and members[0].size==0 and not members[0].pax_headers,"OWNED_DATA_OWNER_TAR_INVALID"
+  result=subprocess.run([DOCKER,"cp","--archive","-",cid+":/var/lib/postgresql/data"],input=ownershipTar.read_bytes(),capture_output=True,timeout=30)
+  for suffix,stream in[("stdout",result.stdout),("stderr",result.stderr)]:
+   with(B/("data-owner-setup."+suffix+".private")).open("xb")as f:
+@@ -196,6 +214,7 @@
+  assert len(result.stdout)<=65536 and len(result.stderr)<=65536,"OWNED_DATA_OWNER_SETUP_OUTPUT_BOUND"
+  assert result.returncode==0,"OWNED_DATA_OWNER_SETUP_FAILED"
+  assert not any((B/"database").iterdir()),"OWNED_DATA_OWNER_SETUP_CREATED_UNEXPECTED_CONTENT"
++ # Startup guard requires that the new Linux-native subdirectory has exact numeric ownership.
+  # Capture startup output through the Docker client; daemon log driver stays none.
+  def startup_trace(row):
+   path=B/"postgres-readiness.private.jsonl"

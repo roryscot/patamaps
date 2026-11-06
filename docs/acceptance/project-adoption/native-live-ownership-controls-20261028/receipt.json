@@ -1,0 +1,56 @@
+{
+  "status": "passed-independent-live-ownership-controls",
+  "sourceBindings": {
+    "scripts/native_inspection.py": "b8c9db39af73b42bebd888d60dde2dfdaf4bf80f88f193f29a2841c213edea71",
+    "scripts/native_inspection_guard.py": "a9e1b35e728b38dd8c7746bd6318cb28c10598a0c558b097f51b99c36447f91d",
+    "scripts/project_watch.py": "94b3b1ccdd936a044fc815772ee72ecbdf2344701e57cd5f7a2fdf9b778ecf85",
+    "scripts/test_live_native_inspection.py": "f03f8fa66d949eb525777633aa7f5fc505539b16b4d4ac505764df930a77b401",
+    "scripts/test_native_inspection_guard.py": "9e45d5cf8ec48ad83191cadfeaa4822bc1886f8f78539f9cd82d1ba721650725",
+    "scripts/test_strict_native_inspection_guard.py": "f0988f9ae66cd4f573a91a652dbe198dec01c805cba7534e35aafb0fad43779d",
+    "scripts/test_watch_policy_verification.py": "81b1d75e39ef924f2b0dcbbb4bbdd8356afff3000c97306d14771c037ae21794"
+  },
+  "liveControls": 15,
+  "legacyGuardianControls": 10,
+  "strictGuardianControls": 15,
+  "watchPolicyControls": 11,
+  "initialControlsPassed": 50,
+  "latestTotalControls": 51,
+  "productionRepairsUsed": 0,
+  "qualificationRepairsUsed": 1,
+  "liveBeforeExitSnapshots": 6,
+  "guardianCrashRegisteredCleanupPassed": true,
+  "unregisteredSurvivorRemainedUnconfirmed": true,
+  "unregisteredFixtureStoppedByHarness": true,
+  "observerPipeAndSocketPairPassed": true,
+  "observedProcessInstancesStopped": 140,
+  "reservationIds": [
+    "010de474-be45-4972-a594-93bda51e4d92",
+    "f1d49b0c-c299-4109-bbfd-a7fd53548de7"
+  ],
+  "reservationsReleased": true,
+  "installedGuardDigest": "3bfb9aeb901e02419a156538ddf78b09b134844e4bea1efe73235d6d4d7ed6b0",
+  "automaticReservationReleaseQualified": false,
+  "installedSupervisorChanged": false,
+  "runtimeRegistryQualified": false,
+  "actualOwnerWatchRetried": false,
+  "parallelActivated": false,
+  "reviewerDigest": "9ab654df91f1de0af296595abd98bfa7b4237c74d50113088ed694e1002f742a",
+  "scope": "Proposed live collection and identity-checked owned-process cleanup; not installed supervisor acceptance",
+  "executedCommands": [
+    "test_live_native_inspection.py -v (initial14, then additive15)",
+    "test_native_inspection_guard.py -v",
+    "test_strict_native_inspection_guard.py -v",
+    "test_watch_policy_verification.py -v",
+    "review.py --root CHECKOUT"
+  ],
+  "qualifications": [
+    "Actual restricted workers for normal/live/crash/observer controls",
+    "Controlled counterfactual guardians for malformed, fragmented and unsealed-survivor protocol tests"
+  ],
+  "limitations": [
+    "Unregistered surviving fixture was stopped by the independent harness, not automatically recovered",
+    "No global scheduler hold/release behavior was activated or qualified",
+    "Closed controller/runtime/OS registry and staged supervisor integration remain open",
+    "No actual owner watch or parent-death retrial"
+  ]
+}

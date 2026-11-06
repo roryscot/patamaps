@@ -32,7 +32,7 @@ def verify(root,work,env,run):
                     invocation=dict(executable="/bin/sh",arguments=["-c",body],codeInputs=[],
                                     bounds=dict(maximumElapsedMs=60001,maximumStdoutBytes=65536,maximumStderrBytes=4096)))
     build_body="/bin/mkdir -p bundle; printf artifact > bundle/app"
-    plan=dict(profile="patamaps-project-build-1",project=profile,workspace=workspace,
+    plan=dict(profile="patamaps-project-build-1",maximumRetainedAttempts=64,project=profile,workspace=workspace,
               buildSteps=[command(build_body)],verificationSteps=[command('test "$(/bin/cat bundle/app)" = artifact')],
               outputs=[dict(path="bundle",kind="tree")])
     def build(label,value,success=True,force=False):

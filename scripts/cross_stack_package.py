@@ -14,6 +14,23 @@ def digest(path):
         return "sha256:" + hashlib.file_digest(stream, "sha256").hexdigest()
 
 
+def install_archive(archive, destination, capacity_root):
+    """Extract an externally digest-verified package into a fresh consumer prefix."""
+    destination.mkdir(parents=True, exist_ok=False)
+    with tarfile.open(archive, "r:gz") as source:
+        members = source.getmembers()
+        assert len(members) < 100000 and sum(v.size for v in members) < 1500000000
+        assert shutil.disk_usage(capacity_root).free > sum(v.size for v in members) + 500000000
+        assert len({Path(item.name).parts for item in members}) == len(members), "Duplicate package members"
+        prefixes = set()
+        for item in members:
+            path = Path(item.name)
+            assert not path.is_absolute() and ".." not in path.parts and len(path.parts) >= 2 and item.isfile()
+            prefixes.add(path.parts[0])
+        assert len(prefixes) == 1
+        source.extractall(destination, members=members, filter="data")
+    return destination / prefixes.pop()
+
 def verify(root, work, env, run):
     cli = root / "target/release/patamaps"
     run("installed-cli-build", ["cargo", "build", "--release", "-p", "patamaps-cli", "--locked", "--offline"], timeout=900)
@@ -25,22 +42,8 @@ def verify(root, work, env, run):
     native_archive = package / distribution["nativeArchive"]["path"]
     assert digest(source_archive) == distribution["sourceArchive"]["digest"]
     assert digest(native_archive) == distribution["nativeArchive"]["digest"]
-    def install(archive, destination):
-        destination.mkdir(parents=True, exist_ok=False)
-        with tarfile.open(archive, "r:gz") as source:
-            members = source.getmembers()
-            assert len(members) < 100000 and sum(v.size for v in members) < 1500000000
-            assert shutil.disk_usage(work).free > sum(v.size for v in members) + 500000000
-            prefixes = set()
-            for item in members:
-                path = Path(item.name)
-                assert not path.is_absolute() and ".." not in path.parts and len(path.parts) >= 2 and item.isfile()
-                prefixes.add(path.parts[0])
-            assert len(prefixes) == 1
-            source.extractall(destination, members=members, filter="data")
-        return destination / prefixes.pop()
-    source = install(source_archive, work / "consumer-source")
-    native = install(native_archive, work / "consumer-native")
+    source = install_archive(source_archive, work / "consumer-source", work)
+    native = install_archive(native_archive, work / "consumer-native", work)
     executable = native / "bin/patamaps"
     assert digest(executable) == distribution["binaryDigest"] == digest(cli)
     assert os.access(executable, os.X_OK)

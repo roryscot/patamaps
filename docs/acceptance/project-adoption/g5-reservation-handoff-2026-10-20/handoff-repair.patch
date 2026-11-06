@@ -1,0 +1,39 @@
+--- a/buildctl.mjs
++++ b/buildctl.mjs
+@@ -30,0 +31,7 @@
++export function nativeFinalizationPending(r) {
++  if (r.enforcement !== 'native-exclusive' || r.state !== 'finished' || r.leaseReleaseCompleted === true) return false;
++  if (alive(r.owner?.pid) === false) return false;
++  const current = processIdentity(r.owner?.pid);
++  return current === null || typeof r.owner?.identity !== 'string' || current === r.owner.identity;
++}
++
+@@ -78 +85 @@
+-    const required=['two-job-overlap','simultaneous-acquisition','writable-enospc','fixed-image-bound','kernel-limits',
++    const required=['system-metadata-readonly','native-finalization-handoff','two-job-overlap','simultaneous-acquisition','writable-enospc','fixed-image-bound','kernel-limits',
+@@ -199 +206 @@
+-      if (active.length) return null;
++      if (active.length || all.some(nativeFinalizationPending)) return null;
+@@ -222 +229 @@
+-  finish(id, stopped) {
++  finish(id, stopped, releaseStoppedLease = null) {
+@@ -225,0 +233,3 @@
++      // Finish and legacy lease archival share the admission transaction.
++      if (stopped && releaseStoppedLease) releaseStoppedLease();
++      r.leaseReleaseCompleted = stopped && typeof releaseStoppedLease === 'function';
+--- a/resource-executor.mjs
++++ b/resource-executor.mjs
+@@ -7 +7 @@
+-import { Scheduler, defaultDirectory, canonical, fairHead, outputConflict, processIdentity, alive, workloadStopped, redactCommand, parallelEnabled } from './buildctl.mjs';
++import { Scheduler, defaultDirectory, canonical, fairHead, outputConflict, processIdentity, alive, workloadStopped, redactCommand, parallelEnabled, nativeFinalizationPending } from './buildctl.mjs';
+@@ -191,0 +192 @@
++  if(all.some(nativeFinalizationPending))return {wait:'legacy native owner finalization pending'};
+--- a/guarded-run.mjs
++++ b/guarded-run.mjs
+@@ -497 +497,2 @@
+-      if (reservation) reservation.finish(lease.buildctlRequest, safeToRelease);
++      if (reservation) reservation.finish(lease.buildctlRequest, safeToRelease,
++        safeToRelease ? () => { reportDirectory = releaseLease(lease, leaseDirectory); } : null);
+@@ -503 +504 @@
+-      reportDirectory = releaseLease(lease, leaseDirectory);
++      if (!reservation) reportDirectory = releaseLease(lease, leaseDirectory);

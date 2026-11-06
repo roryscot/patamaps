@@ -1,0 +1,27 @@
+--- prior/run.py
++++ prepared/run.py
+@@ -187,7 +187,23 @@
+  assert d["Config"]["Labels"]["patamaps.auth.owner"]==token and d["Config"]["Labels"]["buildctl.request"]==ownership["id"]
+  binds=[m for m in d["Mounts"]if m["Type"]=="bind"]
+  assert len(binds)==2
+- assert {(m["Source"],m["Destination"],m["RW"])for m in binds}=={(str(B/"container-passwd"),"/etc/passwd",False),(str(B/"container-group"),"/etc/group",False)}
++ expectedBind={"/etc/passwd":str(B/"container-passwd"),"/etc/group":str(B/"container-group")}
++ assert {m["Destination"]for m in binds}==set(expectedBind)
++ identityRows=[]
++ for m in binds:
++  expected=expectedBind[m["Destination"]]
++  assert m["RW"]is False and m["Source"]in [expected,"/host_mnt"+expected],"OWNED_IDENTITY_BIND_SOURCE_MISMATCH"
++  copied=subprocess.run([DOCKER,"cp",cid+":"+m["Destination"],"-"],capture_output=True,timeout=15)
++  assert copied.returncode==0 and len(copied.stdout)<=65536,"OWNED_IDENTITY_BIND_READ_FAILED"
++  with tarfile.open(fileobj=io.BytesIO(copied.stdout),mode="r:")as archive:
++   entries=archive.getmembers()
++   assert len(entries)==1 and entries[0].isfile()and entries[0].size<=512,"OWNED_IDENTITY_BIND_ARCHIVE_INVALID"
++   content=archive.extractfile(entries[0]).read()
++  actual=hashlib.sha256(content).hexdigest();expectedDigest=sha(expected)[7:]
++  assert actual==expectedDigest,"OWNED_IDENTITY_BIND_CONTENT_MISMATCH"
++  identityRows.append(dict(destination=m["Destination"],containerBytes=len(content),containerDigest=actual,hostDigest=expectedDigest,matched=True))
++ write(B/"identity-mount-readonly-review.json",dict(status="verified-owned-bind-contents-before-first-start",identityFiles=identityRows,containerStarted=False,applicationExecuted=False))
++
+  volumes=[m for m in d["Mounts"]if m["Type"]=="volume"]
+  assert len(volumes)==1 and volumes[0]["Name"]==volumeName and volumes[0]["Destination"]=="/var/lib/postgresql/data"and volumes[0]["RW"]is True
+  assert d["Config"]["User"]=="501:20" and h["CapDrop"]==["ALL"]and not h.get("CapAdd")

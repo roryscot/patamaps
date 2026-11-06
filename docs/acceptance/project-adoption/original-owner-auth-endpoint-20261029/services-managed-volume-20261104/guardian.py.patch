@@ -1,0 +1,30 @@
+--- prior/guardian.py
++++ executed/guardian.py
+@@ -33,14 +33,19 @@
+    if p.exists()and p.stat().st_size>4194304:raise RuntimeError("OWNED_AUTH_LOG_BOUND")
+  if time.monotonic()-tick.last>5:
+   tick.last=time.monotonic();total=0;count=0
+-  data=B/"database"
+-  if data.exists():
+-   for folder,dirs,files in os.walk(data):
+-    for name in files:
+-     p=Path(folder)/name
+-     if p.is_symlink():continue
+-     total+=p.stat().st_blocks*512;count+=1
+-     if count>16384 or total>536870912:raise RuntimeError("OWNED_DATABASE_GROWTH_BOUND")
++  descriptor=B/"volume.json";container=B/"container.json"
++  if descriptor.exists()and container.exists():
++   d=inspect()
++   if d["State"]["Running"]:
++    result=subprocess.run([DOCKER,"exec",d["Id"],"/bin/sh","-c",'du -sk "$PGDATA"; find "$PGDATA" -type f | wc -l'],capture_output=True,text=True,timeout=3)
++    if result.returncode:raise RuntimeError("OWNED_VOLUME_OBSERVATION_FAILED")
++    lines=result.stdout.splitlines()
++    if len(lines)!=2 or not lines[0].split()[0].isdigit()or not lines[1].strip().isdigit():raise RuntimeError("OWNED_VOLUME_OBSERVATION_INVALID")
++    total=int(lines[0].split()[0])*1024;count=int(lines[1].strip())
++    with(B/"volume-data-observation.jsonl").open("a")as out:
++     out.write(json.dumps(dict(allocatedBytes=total,files=count,elapsedSeconds=time.monotonic()-began))+"\n")
++    if count>16384 or total>536870912:raise RuntimeError("OWNED_DATABASE_GROWTH_BOUND")
++
+ tick.last=0
+ if __name__=="__main__":
+  began=time.monotonic()

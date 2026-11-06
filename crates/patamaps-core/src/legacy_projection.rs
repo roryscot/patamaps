@@ -680,12 +680,242 @@ fn compile(input: &J, name: &str, holes: &HashSet<usize>) -> Result<J, LegacyWor
     fields.push(("digest".into(), scalar(&address)));
     result(vec![], Some(J::Object(fields)))
 }
+
+const TYPESCRIPT_EXPORT_RESERVED: &[&str] = &[
+    "await",
+    "break",
+    "case",
+    "catch",
+    "class",
+    "const",
+    "continue",
+    "debugger",
+    "default",
+    "delete",
+    "do",
+    "else",
+    "enum",
+    "export",
+    "extends",
+    "false",
+    "finally",
+    "for",
+    "function",
+    "if",
+    "import",
+    "implements",
+    "in",
+    "instanceof",
+    "interface",
+    "let",
+    "new",
+    "null",
+    "package",
+    "private",
+    "protected",
+    "public",
+    "return",
+    "static",
+    "super",
+    "switch",
+    "this",
+    "throw",
+    "true",
+    "try",
+    "typeof",
+    "var",
+    "void",
+    "while",
+    "with",
+    "yield",
+    // The generated resolver refers to these globals; strict modules also
+    // prohibit bindings named arguments or eval.
+    "Object",
+    "Error",
+    "arguments",
+    "eval",
+];
+
+fn export_name(input: &J) -> Result<&str, LegacyWorkspaceError> {
+    let options = input.get("options");
+    if options.is_some_and(|v| !matches!(v, J::Object(_))) {
+        return Err(error(
+            "TypeError",
+            "TypeScript emission options must be an object",
+        ));
+    }
+    let name = match options.and_then(|v| v.get("exportName")) {
+        None | Some(J::Null) => "metamapProjection",
+        Some(J::String(name)) => name,
+        _ => {
+            return Err(error(
+                "TypeError",
+                "TypeScript export name must be a string",
+            ));
+        }
+    };
+    let identifier = |c: u8| c.is_ascii_alphabetic() || c == b'_' || c == b'$';
+    if name.is_empty()
+        || name.len() > 128
+        || !identifier(name.as_bytes()[0])
+        || !name.bytes().all(|c| identifier(c) || c.is_ascii_digit())
+        || TYPESCRIPT_EXPORT_RESERVED.contains(&name)
+    {
+        return Err(error(
+            "Error",
+            "Invalid or reserved TypeScript export identifier",
+        ));
+    }
+    Ok(name)
+}
+
+fn emission_budget(value: &J) -> Result<(), LegacyWorkspaceError> {
+    let mut budget = Budget::default();
+    budget.value(value)?;
+    // Reserve fixed source text and a conservative upper bound for pretty
+    // indentation, computed-property brackets, and JSON wire escaping.
+    budget.charge(1024, 0)?;
+    let mut stack = vec![(value, 0usize)];
+    while let Some((v, depth)) = stack.pop() {
+        budget.charge(depth * 4 + 16, 0)?;
+        match v {
+            J::Number(n) if !n.is_finite() => {
+                return Err(error(
+                    "TypeError",
+                    "TypeScript projection data must contain finite numbers",
+                ));
+            }
+            J::Object(pairs) => {
+                budget.charge(pairs.len() * 2, 0)?;
+                stack.extend(pairs.iter().map(|(_, v)| (v, depth + 1)));
+            }
+            J::Array(values) => stack.extend(values.iter().map(|v| (v, depth + 1))),
+            _ => {}
+        }
+    }
+    if budget.bytes.checked_mul(2).ok_or_else(limit)?
+        > patamaps_contracts::COMPATIBILITY_JSON_LIMITS.max_bytes
+    {
+        return Err(limit());
+    }
+    Ok(())
+}
+
+fn own_literal_keys(json: &str) -> String {
+    // Work only on complete JSON string tokens. Caller strings resembling a
+    // property or containing source text remain data, including escaped quotes.
+    let bytes = json.as_bytes();
+    let mut out = Vec::with_capacity(bytes.len());
+    let mut i = 0;
+    while i < bytes.len() {
+        if bytes[i] != b'"' {
+            out.push(bytes[i]);
+            i += 1;
+            continue;
+        }
+        let start = i;
+        i += 1;
+        while bytes[i] != b'"' {
+            i += if bytes[i] == b'\\' { 2 } else { 1 };
+        }
+        i += 1;
+        let token = &bytes[start..i];
+        let computed = token == b"\"__proto__\"" && bytes.get(i) == Some(&b':');
+        if computed {
+            out.push(b'[');
+        }
+        out.extend_from_slice(token);
+        if computed {
+            out.push(b']');
+        }
+    }
+    String::from_utf8(out).expect("Original JSON tokens retain UTF-8")
+}
+
+fn emit_typescript(
+    input: &J,
+    name: &str,
+    holes: &HashSet<usize>,
+) -> Result<J, LegacyWorkspaceError> {
+    let export = export_name(input)?;
+    let projection = get(input, "value")?;
+    if s(projection, "id").contains("*/")
+        || s(projection, "id").chars().any(char::is_control)
+        || !validate(projection, true, name, holes)?.is_empty()
+    {
+        return Err(error(
+            "Error",
+            "TypeScript emission requires a valid content-addressed v1 projection",
+        ));
+    }
+    let mut entries = Vec::new();
+    let mut entry_indices = HashMap::new();
+    for entry in items(projection, "entries") {
+        let mut slots = Vec::new();
+        let mut slot_indices = HashMap::new();
+        for slot in items(entry, "slots") {
+            let targets = items(slot, "targets");
+            let cardinality = s(slot, "cardinality");
+            if (cardinality == "exactly-one" && targets.len() != 1)
+                || (cardinality == "zero-or-one" && targets.len() > 1)
+                || (cardinality == "one-or-more" && targets.is_empty())
+            {
+                return Err(error(
+                    "Error",
+                    "TypeScript projection slot violates its cardinality",
+                ));
+            }
+            let value = if ["exactly-one", "zero-or-one"].contains(&cardinality) {
+                targets.first().cloned().unwrap_or(J::Null)
+            } else {
+                J::Array(targets.to_vec())
+            };
+            let pair = (s(slot, "name").to_owned(), value);
+            if let Some(index) = slot_indices.get(&pair.0) {
+                slots[*index] = pair;
+            } else {
+                slot_indices.insert(pair.0.clone(), slots.len());
+                slots.push(pair);
+            }
+        }
+        let subject = get(entry, "subject")?;
+        let pair = (
+            s(subject, "id").to_owned(),
+            obj(vec![
+                ("subject", subject.clone()),
+                ("slots", J::Object(slots)),
+            ]),
+        );
+        if let Some(index) = entry_indices.get(&pair.0) {
+            entries[*index] = pair;
+        } else {
+            entry_indices.insert(pair.0.clone(), entries.len());
+            entries.push(pair);
+        }
+    }
+    let table = J::Object(entries);
+    emission_budget(&table)?;
+    let pretty = Data::stable_pretty_bytes(&table, &locale(name)?)
+        .map_err(|e| error("Error", &e.to_string()))?;
+    let pretty = String::from_utf8(pretty).expect("Original pretty JSON is UTF-8");
+    let literal = own_literal_keys(pretty.trim_end());
+    let capitalized = format!("{}{}", export[..1].to_ascii_uppercase(), &export[1..]);
+    let source = format!(
+        "/* Generated by Metamap from {}. Do not edit. */\nexport const {export} = {literal} as const;\n\nexport type {capitalized}Id = keyof typeof {export};\n\nexport function resolve{capitalized}(id: string): (typeof {export})[{capitalized}Id] {{\n  if (!Object.prototype.hasOwnProperty.call({export}, id)) {{\n    throw new Error(\u{0060}Unknown Metamap identity \u{0024}{{id}}\u{0060});\n  }}\n  return {export}[id as {capitalized}Id];\n}}\n",
+        s(projection, "id")
+    );
+    Ok(response(scalar(&source), vec![]))
+}
+
 pub(crate) fn request(
     operation: &str,
     input: &J,
     name: &str,
     holes: &HashSet<usize>,
 ) -> Result<J, LegacyWorkspaceError> {
+    if operation == "projection-emit-typescript" {
+        return emit_typescript(input, name, holes);
+    }
     if operation == "projection-compile" {
         return compile(input, name, holes);
     }
@@ -742,6 +972,19 @@ pub(crate) fn request(
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn typescript_output_expansion_and_nonfinite_values_are_refused() {
+        let oversized = J::String("a".repeat(9 * 1024 * 1024));
+        assert_eq!(
+            emission_budget(&oversized).unwrap_err().code.as_ref(),
+            "LEGACY_PROJECTION_RESOURCE_LIMIT"
+        );
+        for number in [f64::NAN, f64::INFINITY, f64::NEG_INFINITY] {
+            assert!(emission_budget(&J::Number(number)).is_err());
+        }
+    }
+
     #[test]
     fn projected_output_depth_is_bounded_before_serialization() {
         let mut value = J::Null;

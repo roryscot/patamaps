@@ -1,0 +1,54 @@
+{
+  "profile": "patamaps-project-adoption-evidence-1",
+  "workstream": "G3 real Next.js project build",
+  "status": "failed",
+  "patamapsCommit": "5048d30963fc1b006ceae07a381f76ac4a5cf4ae",
+  "upstream": "https://github.com/fuma-nama/fumadocs",
+  "upstreamCommit": "2919bf9a9a84a7a594d42460878548d0677d7bb3",
+  "workflow": {
+    "repository": "roryscot/patamaps",
+    "runId": 39625379329,
+    "jobId": 119309114976,
+    "url": "https://github.com/roryscot/patamaps/actions/runs/39625379329",
+    "artifactId": 12357475729,
+    "artifactName": "fumadocs-next-build-5048d30963fc1b006ceae07a381f76ac4a5cf4ae",
+    "artifactBytes": 546248,
+    "artifactSha256": "bc9a43be7e7f3889553df2ffe7df583573f65a89125e6178133b70b384b855a7",
+    "artifactExpiresAt": "2027-01-19T15:24:31Z"
+  },
+  "passed": [
+    "3 Git source-acquisition boundary tests",
+    "Pinned native patamaps-cli release build",
+    "Official Node 24.21.0 and pnpm 12.14.0 integrity/version checks",
+    "Selected non-secret source capture, verify and staging",
+    "Frozen dependency installation with lifecycle scripts disabled",
+    "2,792 selected source paths totaling 47,825,903 bytes",
+    "Selected-path copy and digest checks before the upstream pre-build"
+  ],
+  "failedStage": {
+    "command": "pnpm --filter docs run build:pre",
+    "exitCode": 1,
+    "summary": "The pinned upstream Fumadocs registry compiler rejected unresolved package-local path aliases and relative imports.",
+    "stderrSha256": "db052c00d300bb5e2c0b61a47345e37939aee96acb5612b575092544e7f78e42",
+    "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "patamapsOrUpstreamDefect": "Undetermined. The referenced source files were present in the selected-source inventory. The failing command is the owner's fuma-cli/compiler pre-build."
+  },
+  "notEstablished": [
+    "Next production build",
+    "Framework/runtime behavior",
+    "HTTP or browser behavior",
+    "Deployment",
+    "Independent complete dependency closure",
+    "Application acceptance"
+  ],
+  "sideEffects": {
+    "ownerPostBuild": "not run",
+    "externalOramaUpdate": "not run",
+    "applicationGithubActions": "not invoked",
+    "originalSourceCheckout": "not modified by the qualification",
+    "filesDeleted": 0,
+    "intelNativeGuardedRun": "not invoked"
+  },
+  "retainedArtifactPathOnIntel": "/tmp/patamaps-fumadocs-failure.ceY8vL",
+  "receiptCorrection": "Original helper report left preBuildExecuted false on nonzero exit, although command record and retained log prove invocation; helper source now sets the flag before invocation. Original artifact is preserved unchanged."
+}

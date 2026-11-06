@@ -1,0 +1,62 @@
+--- executed-port18866/run.py
++++ proposed-localhost-profile/run.py
+@@ -146,6 +146,13 @@
+  # Check required ports without taking over another listener.
+  for port in[18765,18866,13000]:
+   s=socket.socket();s.bind(("127.0.0.1",port));s.close()
++ # Check profile grammar before creating credentials or a database.
++ profile=subprocess.run(["/usr/bin/sandbox-exec","-f",str(B/"sandbox.sb"),F["apiPython"],"-I","-S","-B","-c","pass"],cwd=Path(F["owner"])/"packages/api",env={"PATH":"/usr/bin:/bin:/usr/sbin:/sbin","PYTHONDONTWRITEBYTECODE":"1"},capture_output=True,timeout=10)
++ with(B/"profile-syntax.stdout.private").open("xb")as f:f.write(profile.stdout[:65536])
++ with(B/"profile-syntax.stderr.private").open("xb")as f:f.write(profile.stderr[:65536])
++ report.update(profileSyntaxExitCode=profile.returncode,profileSyntaxStdoutBytes=len(profile.stdout),profileSyntaxStderrBytes=len(profile.stderr),profileSyntaxStdoutSha256=hashlib.sha256(profile.stdout).hexdigest(),profileSyntaxStderrSha256=hashlib.sha256(profile.stderr).hexdigest());save()
++ assert len(profile.stdout)<=65536 and len(profile.stderr)<=65536,"OWNED_PROFILE_SYNTAX_OUTPUT_BOUND"
++ assert profile.returncode==0,"OWNED_SERVICE_PROFILE_PARSE_FAILED"
+  token=secrets.token_hex(16);databaseName="patamaps_auth_"+token[:12];password=secrets.token_urlsafe(32)
+  (B/"database").mkdir(mode=0o700);
+  (B/"container-passwd").write_text("root:x:0:0:root:/root:/bin/sh\npostgres:x:501:20:Owned PostgreSQL:/tmp:/bin/sh\n")
+--- executed-port18866/sandbox.sb
++++ proposed-localhost-profile/sandbox.sb
+@@ -1,11 +1,11 @@
+ (version 1)
+ (allow default)
+ (deny network*)
+-(allow network-bind (local ip "127.0.0.1:18765"))
+-(allow network-inbound (local ip "127.0.0.1:18765"))
+-(allow network-outbound (remote ip "127.0.0.1:18866"))
++(allow network-bind (local ip "localhost:18765"))
++(allow network-inbound (local ip "localhost:18765"))
++(allow network-outbound (remote ip "localhost:18866"))
+ (deny file-write*)
+-(allow file-write* (subpath "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/owner-auth-endpoint-20261029/services-port18866-proposal-20261030/run"))
++(allow file-write* (subpath "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/owner-auth-endpoint-20261029/services-localhost-profile-proposal-20261030/run"))
+ (deny process-exec)
+ (allow process-exec (literal "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3.11") (literal "/Library/Frameworks/Python.framework/Versions/3.11/Resources/Python.app/Contents/MacOS/Python"))
+ (deny file-read* (regex #".*/[.]env.*") (subpath "/Users/admin/.ssh") (subpath "/Users/admin/.aws") (subpath "/Users/admin/.config/gh") (literal "/Users/admin/.netrc"))
+--- executed-port18866/execution-contract.json
++++ proposed-localhost-profile/execution-contract.json
+@@ -60,7 +60,11 @@
+   "nextProducerPathsUnavailable": "New source copy, existing dependency snapshot, configured native provider; exact paths restored",
+   "runtimeAssemblyMaximumBytes": 134217728,
+   "runtimeAssemblyMaximumEntries": 8192,
+-  "apiWritableSubtree": "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/owner-auth-endpoint-20261029/services-port18866-proposal-20261030/run",
+-  "apiPrivateReportsLogsSubtree": "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/owner-auth-endpoint-20261029/services-port18866-proposal-20261030/run",
+-  "sandboxControlsOutsideWriteProbe": "parent phase path outside permitted run subtree"
++  "apiWritableSubtree": "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/owner-auth-endpoint-20261029/services-localhost-profile-proposal-20261030/run",
++  "apiPrivateReportsLogsSubtree": "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/owner-auth-endpoint-20261029/services-localhost-profile-proposal-20261030/run",
++  "sandboxControlsOutsideWriteProbe": "parent phase path outside permitted run subtree",
++  "sandboxNetworkHostSelector": "localhost (IPv4 and IPv6 loopback); actual listeners remain127.0.0.1",
++  "profileSyntaxPrecheckMaximumSeconds": 10,
++  "profileSyntaxPrecheckMaximumRecordedStreamBytes": 65536,
++  "profileSyntaxPrecheckBeforeCredentialsAndDatabase": true
+ }
+--- executed-port18866/launch-config.json
++++ proposed-localhost-profile/launch-config.json
+@@ -6,7 +6,7 @@
+     "--",
+     "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/intel-python-3.13.16-20261013/runtime/python/bin/python3",
+     "-B",
+-    "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/owner-auth-endpoint-20261029/services-port18866-proposal-20261030/guardian.py"
++    "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/owner-auth-endpoint-20261029/services-localhost-profile-proposal-20261030/guardian.py"
+   ],
+   "cwd": "/Volumes/dev_src_case_sensitive/projects/patamaps"
+ }

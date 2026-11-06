@@ -1,0 +1,40 @@
+{
+  "status": "verified-static-auth-client-default-origin",
+  "compiledClientChunk": ".next/static/chunks/8f8389e448618ff6.js",
+  "compiledClientChunkSha256": "e3c790f0d5003e4b085b79c5be99ecc75abcbb91900dfd05d8dcdc6826647a41",
+  "compiledDefaultApiBase": "http://127.0.0.1:1/api",
+  "sourceCallChain": [
+    "login page imports AuthProvider/authService",
+    "authService uses apiClient.post",
+    "default AppApiClient derives /api from captured NEXT_PUBLIC_API_BASE_URL",
+    "compiled client constructor fixes loopback port1"
+  ],
+  "sourceInputs": [
+    {
+      "path": "packages/web/src/app/login/page.tsx",
+      "sha256": "5fc4bedae6320502f7615ee0a89936b79f3aaf92f7f81c00db24f6806c96817a"
+    },
+    {
+      "path": "packages/web/src/components/auth/AuthProvider.tsx",
+      "sha256": "d7d569dcf08ff1caf378c2da1e1cb50793036a0640f38c9cc3427018050e68c9"
+    },
+    {
+      "path": "packages/web/src/services/authService.ts",
+      "sha256": "8a1c512b8398e70bbc290772d20e17c62e0d732b70c164b719449682a691bcc6"
+    },
+    {
+      "path": "packages/web/src/services/rbacService.ts",
+      "sha256": "606ba561e0cda89147c19c4e9255a62855671c2dc79f6e2e35ed4aaaebd1249a"
+    },
+    {
+      "path": "packages/web/src/lib/api/client-app.ts",
+      "sha256": "87fcab893de89d4901fc93facd89f15f2a21ee1a907dc06a9daa3077d4640139"
+    }
+  ],
+  "browserNetworkObserved": false,
+  "completeBundlerCallGraphProven": false,
+  "serverStarted": false,
+  "oldSelectionMustRemainUnchanged": true,
+  "newDeclaredConfigGenerationRequiredUnlessLegitimateRuntimeOverrideProven": true,
+  "noPrivilegedPortBindingOrResponseInterception": true
+}

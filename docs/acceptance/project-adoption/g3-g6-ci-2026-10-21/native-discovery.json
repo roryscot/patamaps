@@ -1,0 +1,2416 @@
+{
+  "status": "passed-native-discovery-scope",
+  "sourceRevision": "f81e6a464d779d1107178a7b08b9c41f7f2311d7",
+  "startedUtc": "2026-10-21T16:25:41.869256+00:00",
+  "commands": [
+    {
+      "label": "rust-version",
+      "argv": [
+        "rustc",
+        "-Vv"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.032,
+      "stdoutDigest": "sha256:b569b0c98ea3133c7252b4b8ea6b39b7b353813df0dd5f5c412c355691424112",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "cargo-version",
+      "argv": [
+        "cargo",
+        "--version"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.032,
+      "stdoutDigest": "sha256:1f88eaf7fe1aaec83184752cf4c944cd22f00184136ff36a3e4c318cc60ef566",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "node-version",
+      "argv": [
+        "node",
+        "--version"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.008,
+      "stdoutDigest": "sha256:33e26f35db6e57ce0c486ddc815fe966867e4f649e418eaf323f75f4720eb8e9",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m1-format",
+      "argv": [
+        "cargo",
+        "fmt",
+        "--all",
+        "--",
+        "--check"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.916,
+      "stdoutDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m1-unit-and-process-tests",
+      "argv": [
+        "cargo",
+        "test",
+        "-p",
+        "patamaps-workspace",
+        "--locked",
+        "--offline"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 63.128,
+      "stdoutDigest": "sha256:cddf36b49e8cc0b773eaf0437bfc3066c897240f400c672fa08095fe4beac6fd",
+      "stderrDigest": "sha256:04c45431db7b61ca1a4e56e339768952755ab9ffd148278600f93b128e970a8a"
+    },
+    {
+      "label": "m1-cli-build",
+      "argv": [
+        "cargo",
+        "build",
+        "-p",
+        "patamaps-cli",
+        "--locked",
+        "--offline"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 27.035,
+      "stdoutDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrDigest": "sha256:866d03696a76eb9b6c200fd160dfb3b2753894c9543858ce282e6e91c90c7446"
+    },
+    {
+      "label": "m1-selected-cargo",
+      "argv": [
+        "rustup",
+        "which",
+        "cargo"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.032,
+      "stdoutDigest": "sha256:c15b86fb353a905df8e0e155072f56ce51cb7986f607161716fb2f6ea0e06972",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m1-selected-rustc",
+      "argv": [
+        "rustup",
+        "which",
+        "rustc"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.032,
+      "stdoutDigest": "sha256:cf7c5c8ef6339599e282ac27baa1b851ae590561ab6a54362d9da3d4ef337f5d",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m1-executor-description",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/debug/patamaps",
+        "engine"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.164,
+      "stdoutDigest": "sha256:19609e00dee1730f761db448238b71543beebd7d65501d0b0f25316e3640cfdb",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m1-fixture-lock",
+      "argv": [
+        "/home/runner/.rustup/toolchains/1.99.0-x86_64-unknown-linux-gnu/bin/cargo",
+        "generate-lockfile",
+        "--offline",
+        "--manifest-path",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-discovery/cases/base/Cargo.toml"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.064,
+      "stdoutDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m1-resolved-workspace-request",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/debug/patamaps",
+        "json",
+        "digest"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "stdinDigest": "sha256:10520f6835fb763124c9affb673bcec45c5e63e8de8a2fc3b2a2d7fc45c2d2fc",
+      "exitCode": 0,
+      "seconds": 0.008,
+      "stdoutDigest": "sha256:6aa3b0bda1c8d119c8af706a158ce2b1b8bee3121eeb5db9f54bc5cbfa095269",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m1-resolved-workspace",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/debug/patamaps",
+        "discover-native"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-discovery/cases/base",
+      "expectedSuccess": true,
+      "stdinDigest": "sha256:0605c2b35a9e09a6f4cce760c94a5bcfecf9f92da120942f8f1227af9b071e67",
+      "exitCode": 0,
+      "seconds": 2.018,
+      "stdoutDigest": "sha256:783cb44ab1e22d68e9b30931d6b8818cb9dd84dd1baf37ab1198ef811aa2b35b",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m1-resolved-workspace-shard-digest",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/debug/patamaps",
+        "json",
+        "digest"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "stdinDigest": "sha256:afc80406fbe8ff2e0e6fd20bc370028601bc57b3e744e477b44c00bd76e1c7b2",
+      "exitCode": 0,
+      "seconds": 0.008,
+      "stdoutDigest": "sha256:66fce65f17ad3cba47ec3cc9b7f89ad34a45935684b820632adc139d5d951baa",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m1-declared-view-request",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/debug/patamaps",
+        "json",
+        "digest"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "stdinDigest": "sha256:0ceee010fd135de5fe88ca4d1b91b8897ef7e5fbee697809d9a47ff98453a3fd",
+      "exitCode": 0,
+      "seconds": 0.008,
+      "stdoutDigest": "sha256:d7f30ac3fda068e7f1ff739806e64d7995f0a3739d0fa6620a212b4126c7dba2",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m1-declared-view",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/debug/patamaps",
+        "discover-native"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-discovery/cases/base",
+      "expectedSuccess": true,
+      "stdinDigest": "sha256:2b7985f224a399d77163ad6b2a96bdedce14046fe3038a2fd46ceac745eb8fad",
+      "exitCode": 0,
+      "seconds": 2.019,
+      "stdoutDigest": "sha256:ad89bc831eec2461ce6b046c7db8c7d386f1001612b8a952b11886a58effeab9",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m1-declared-view-shard-digest",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/debug/patamaps",
+        "json",
+        "digest"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "stdinDigest": "sha256:6278ca45a84acce895eb35444d9eb0439791a2448b11a8692dd1ad5f5fcdb9b9",
+      "exitCode": 0,
+      "seconds": 0.008,
+      "stdoutDigest": "sha256:5f52946877b8d29ab764994e9a0a8a2cac458eeb00d1bc5673810711a3994707",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m1-feature-disabled-request",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/debug/patamaps",
+        "json",
+        "digest"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "stdinDigest": "sha256:53601ac7726c5a28775740a8c2c44e32dcbd4110263c60c51bf3b9d57a23bc0c",
+      "exitCode": 0,
+      "seconds": 0.008,
+      "stdoutDigest": "sha256:6134101dced6148f701fbc3b5ea0c7818586a7bd02f69199a8ee80ae102d99b0",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m1-feature-disabled",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/debug/patamaps",
+        "discover-native"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-discovery/cases/base",
+      "expectedSuccess": true,
+      "stdinDigest": "sha256:89e4ebd36c3f05d84b83c4fbd1d962e288902900ce1496b47ea6719f3ed79bbc",
+      "exitCode": 0,
+      "seconds": 2.018,
+      "stdoutDigest": "sha256:67cfba4a9921af5aba2147afb94588f582140ea2af6324b95e33ce9ad3433fb5",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m1-feature-disabled-shard-digest",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/debug/patamaps",
+        "json",
+        "digest"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "stdinDigest": "sha256:6e560dcebe329c9a68814a70d8aa4aeececf6b3485da960a2e0c06bf73c4edb4",
+      "exitCode": 0,
+      "seconds": 0.008,
+      "stdoutDigest": "sha256:5e58b7b8349315a6f44f58914d8eebde2797b85e4d8f277f2b4329cd8b00bbde",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m1-root-relocated-request",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/debug/patamaps",
+        "json",
+        "digest"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "stdinDigest": "sha256:10520f6835fb763124c9affb673bcec45c5e63e8de8a2fc3b2a2d7fc45c2d2fc",
+      "exitCode": 0,
+      "seconds": 0.008,
+      "stdoutDigest": "sha256:6aa3b0bda1c8d119c8af706a158ce2b1b8bee3121eeb5db9f54bc5cbfa095269",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m1-root-relocated",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/debug/patamaps",
+        "discover-native"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-discovery/cases/relocated",
+      "expectedSuccess": true,
+      "stdinDigest": "sha256:0605c2b35a9e09a6f4cce760c94a5bcfecf9f92da120942f8f1227af9b071e67",
+      "exitCode": 0,
+      "seconds": 2.018,
+      "stdoutDigest": "sha256:217ac440d2be6309d9abd30bc683ad4d741312317d40ad7f4dea77aeca3700a5",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m1-root-relocated-shard-digest",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/debug/patamaps",
+        "json",
+        "digest"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "stdinDigest": "sha256:c476560efef31e4c97cd3d3baf8aeb7e89ad425f04d6a09b7a4f710b6fd3011f",
+      "exitCode": 0,
+      "seconds": 0.008,
+      "stdoutDigest": "sha256:51814ddb531f7af0c0966b96391d11a51ef0cb2dc6a38868e2dca7a209e56783",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "g3-globs-default-refused-request",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/debug/patamaps",
+        "json",
+        "digest"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "stdinDigest": "sha256:8bed8a3b11fda381c7ecde2751767ebbb46415bde1f453ad0af599cd9ad29890",
+      "exitCode": 0,
+      "seconds": 0.008,
+      "stdoutDigest": "sha256:c30dc98cd6f4f3a3c3ca8e590b865fd03244e1a81e5347f15427672239e24bdb",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "g3-globs-default-refused",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/debug/patamaps",
+        "discover-native"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-discovery/cases/bounded-members",
+      "expectedSuccess": false,
+      "stdinDigest": "sha256:25b5c862c8c847e54b18d39f0cf1e72688e290008ac9f8e378842393bfdfa35a",
+      "exitCode": 2,
+      "seconds": 0.008,
+      "stdoutDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrDigest": "sha256:7e5d8c4787dc37ec45f43652a42427c246164eefd4de48c2c79392ad0637f50e"
+    },
+    {
+      "label": "g3-globs-explicit-request",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/debug/patamaps",
+        "json",
+        "digest"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "stdinDigest": "sha256:ae3674df6f5e3b8eef564191b261a7663b5cd5d16a2bdcbe95f0f884b3ba2d0e",
+      "exitCode": 0,
+      "seconds": 0.008,
+      "stdoutDigest": "sha256:a6135ce8d09f0674e5649f2bec72e687905b78152479643d433d254c4a49973f",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "g3-globs-explicit",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/debug/patamaps",
+        "discover-native"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-discovery/cases/bounded-members",
+      "expectedSuccess": true,
+      "stdinDigest": "sha256:d418dcdd8ed28eb8984b0efa01f1a77f74ebd761e7faf8149c851d49837c5a17",
+      "exitCode": 0,
+      "seconds": 2.018,
+      "stdoutDigest": "sha256:3b981675acba41a65ab7e8d6218cb84b19527726157da5bb90962aff2d734d67",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "g3-globs-explicit-shard-digest",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/debug/patamaps",
+        "json",
+        "digest"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "stdinDigest": "sha256:05513ff0718fbde6654a955eb5167f2675c550d3ac90e4a903926fdedb354c5b",
+      "exitCode": 0,
+      "seconds": 0.008,
+      "stdoutDigest": "sha256:714a19036bf7c30ddb69cbbed0288514a0e1c2132ea710071b4886c8ab061c03",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "g3-globs-missing-capture-request",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/debug/patamaps",
+        "json",
+        "digest"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "stdinDigest": "sha256:b96d53cc32c4054b37bcd87115238aa5d11a9a5e2b8602e91a362d8a638ca6df",
+      "exitCode": 0,
+      "seconds": 0.008,
+      "stdoutDigest": "sha256:c9ab85a39b7823ac08dde86a5bcb7a50e290c2d7fe1facb18e697204fdf43860",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "g3-globs-missing-capture",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/debug/patamaps",
+        "discover-native"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-discovery/cases/bounded-members",
+      "expectedSuccess": false,
+      "stdinDigest": "sha256:480b101a5e1015246601d4c2bcd14b0c1a8290c654ff9cc2e90514370a7f2f10",
+      "exitCode": 2,
+      "seconds": 0.008,
+      "stdoutDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrDigest": "sha256:b85631f71c1d0d84754a3ddf7df394ab7fd9f5dc35b0f48298aaf7f0d1147f24"
+    },
+    {
+      "label": "g3-globs-recursive-request",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/debug/patamaps",
+        "json",
+        "digest"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "stdinDigest": "sha256:ed242527fe7b4169f4e7d04a90811e6b3505fcba05dff78e3609e88cdcd71b09",
+      "exitCode": 0,
+      "seconds": 0.008,
+      "stdoutDigest": "sha256:af0705d5c71f9ffb7d607b213f9215221b75dda916a5018a70e0c5c065ccab92",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "g3-globs-recursive",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/debug/patamaps",
+        "discover-native"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-discovery/cases/glob-recursive",
+      "expectedSuccess": false,
+      "stdinDigest": "sha256:510bc110260ec1aeb30e64553682f2816bf4acfc6a78c412d6412c711b9fe542",
+      "exitCode": 2,
+      "seconds": 0.008,
+      "stdoutDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrDigest": "sha256:bd8506916ff78933d5ded7ecb398b786596510837f0814e33b003f93134cfe01"
+    },
+    {
+      "label": "g3-globs-question-request",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/debug/patamaps",
+        "json",
+        "digest"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "stdinDigest": "sha256:20b67a438b392787e97e0d651cbb64322b8dd0068ad390ab22aaf1586308ad62",
+      "exitCode": 0,
+      "seconds": 0.008,
+      "stdoutDigest": "sha256:3dbee9dd792acf47f71c6982da253f77d4ec5b9dccd33e3aeb834181982213a3",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "g3-globs-question",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/debug/patamaps",
+        "discover-native"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-discovery/cases/glob-question",
+      "expectedSuccess": false,
+      "stdinDigest": "sha256:af8a4a9384b95b8ee6a07fa8d482d4fb47a9c5a3a8d654be711cefdb96fb3967",
+      "exitCode": 2,
+      "seconds": 0.008,
+      "stdoutDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrDigest": "sha256:bd8506916ff78933d5ded7ecb398b786596510837f0814e33b003f93134cfe01"
+    },
+    {
+      "label": "g3-globs-escape-request",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/debug/patamaps",
+        "json",
+        "digest"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "stdinDigest": "sha256:d23d9d8252aac893ac313321da59c7873982dd719e4a218baf9082af62c713cf",
+      "exitCode": 0,
+      "seconds": 0.008,
+      "stdoutDigest": "sha256:8060d01cbd4d80be175e66648392298535eae0d8c36ed67bcb98b7be8555d407",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "g3-globs-escape",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/debug/patamaps",
+        "discover-native"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-discovery/cases/glob-escape",
+      "expectedSuccess": false,
+      "stdinDigest": "sha256:3d3960e65b73e86c6032ecb8b272eb44458798458b13f3aba8ed1eadc4ce8940",
+      "exitCode": 2,
+      "seconds": 0.008,
+      "stdoutDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrDigest": "sha256:bd8506916ff78933d5ded7ecb398b786596510837f0814e33b003f93134cfe01"
+    },
+    {
+      "label": "g3-globs-exclusions-request",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/debug/patamaps",
+        "json",
+        "digest"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "stdinDigest": "sha256:e60d610e13457084131ac3bf9693bfbe220e3c1df11ed47e7add81685d547324",
+      "exitCode": 0,
+      "seconds": 0.008,
+      "stdoutDigest": "sha256:44786c3061bc145881a67605e75a237086512d8ca1fca959cf5eb6e717f4ea8d",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "g3-globs-exclusions",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/debug/patamaps",
+        "discover-native"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-discovery/cases/glob-exclusions",
+      "expectedSuccess": false,
+      "stdinDigest": "sha256:e594e92ba8d0a5d1fb247a00dad92fafa775d6ed2545fc2faca9c1cdae5399ff",
+      "exitCode": 2,
+      "seconds": 0.008,
+      "stdoutDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrDigest": "sha256:7e5d8c4787dc37ec45f43652a42427c246164eefd4de48c2c79392ad0637f50e"
+    },
+    {
+      "label": "g3-globs-symlink-request",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/debug/patamaps",
+        "json",
+        "digest"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "stdinDigest": "sha256:ae3674df6f5e3b8eef564191b261a7663b5cd5d16a2bdcbe95f0f884b3ba2d0e",
+      "exitCode": 0,
+      "seconds": 0.008,
+      "stdoutDigest": "sha256:a6135ce8d09f0674e5649f2bec72e687905b78152479643d433d254c4a49973f",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "g3-globs-symlink",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/debug/patamaps",
+        "discover-native"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-discovery/cases/glob-symlink",
+      "expectedSuccess": false,
+      "stdinDigest": "sha256:d418dcdd8ed28eb8984b0efa01f1a77f74ebd761e7faf8149c851d49837c5a17",
+      "exitCode": 2,
+      "seconds": 0.008,
+      "stdoutDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrDigest": "sha256:7458337b623058b40c4fbc55460f415533e929b0ca3a0714a95209f6a5c53cd7"
+    },
+    {
+      "label": "g3-globs-post-metadata-change-request",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/debug/patamaps",
+        "json",
+        "digest"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "stdinDigest": "sha256:07fbb1c4a88e6f7bd0939bdb5e790f6e2f59c8fe68706c06d41df22644eab5d7",
+      "exitCode": 0,
+      "seconds": 0.008,
+      "stdoutDigest": "sha256:6a47e25e880c20e167f68a00f389b970b19c2a56b85ab0b130da5db77548fa19",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "g3-globs-post-metadata-change",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/debug/patamaps",
+        "discover-native"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-discovery/cases/glob-racing",
+      "expectedSuccess": false,
+      "stdinDigest": "sha256:9d40f3886ca2ef8fd1b37cc0e491cfc54bc66d8f18cd69b90d561644cc00a7d6",
+      "exitCode": 2,
+      "seconds": 0.214,
+      "stdoutDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrDigest": "sha256:e2b908bb1fce1feeb0c7ee4ba3a5db5e71651c736e96a746a5561c5374503dfa"
+    },
+    {
+      "label": "g3-segment-legacy-refuses-request",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/debug/patamaps",
+        "json",
+        "digest"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "stdinDigest": "sha256:a3da73be15502aa66ab4940c7bd3bc2f05ef0384028f2370127c747ff33056c1",
+      "exitCode": 0,
+      "seconds": 0.008,
+      "stdoutDigest": "sha256:781114ff3849c7d4dc00d8130cb7d460918ace198694aa30d9c6fa86f0f2743b",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "g3-segment-legacy-refuses",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/debug/patamaps",
+        "discover-native"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-discovery/cases/segment-member-globs",
+      "expectedSuccess": false,
+      "stdinDigest": "sha256:9e4bdd3809d887076935d21bbf8fa8fd788589f33594ec7f3f1bceb44647aef1",
+      "exitCode": 2,
+      "seconds": 0.008,
+      "stdoutDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrDigest": "sha256:bd8506916ff78933d5ded7ecb398b786596510837f0814e33b003f93134cfe01"
+    },
+    {
+      "label": "g3-segment-explicit-request",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/debug/patamaps",
+        "json",
+        "digest"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "stdinDigest": "sha256:dfb6e491d17e3cc5ce7adca2c3c13d8d268e043b01428d5a9b529f9afe88007d",
+      "exitCode": 0,
+      "seconds": 0.008,
+      "stdoutDigest": "sha256:89822cfdc23fc574ed5c9aad61d9fb3f1143d4943ffc6533d70b03390cc5a3dc",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "g3-segment-explicit",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/debug/patamaps",
+        "discover-native"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-discovery/cases/segment-member-globs",
+      "expectedSuccess": true,
+      "stdinDigest": "sha256:2e47a3f2750a167bd4497ec1f047d764df101a68cb49d748a4ac27b0690e667e",
+      "exitCode": 0,
+      "seconds": 2.018,
+      "stdoutDigest": "sha256:242632d937955c0d594e9ff10a542bfb76bb9299a386d39e0c9d64456fa38be3",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "g3-segment-explicit-shard-digest",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/debug/patamaps",
+        "json",
+        "digest"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "stdinDigest": "sha256:5b2460f225cc64b0b8bd5c7ba516e935e3c17b3d46f0a903d998d1cb265928ba",
+      "exitCode": 0,
+      "seconds": 0.008,
+      "stdoutDigest": "sha256:34fa0a995f56c8867679157057585409eff9b37d3bb3a50a6d4a632d680db1ec",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "g3-segment-missing-capture-request",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/debug/patamaps",
+        "json",
+        "digest"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "stdinDigest": "sha256:f8889da71df70afdd3a7f85d6dae16f68bdc19d2f8bc61a19999aba512c47dfb",
+      "exitCode": 0,
+      "seconds": 0.008,
+      "stdoutDigest": "sha256:8723d388ccdf4efd466278f79f32e78120c6b2d97ec940649430f70da16b3a00",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "g3-segment-missing-capture",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/debug/patamaps",
+        "discover-native"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-discovery/cases/segment-member-globs",
+      "expectedSuccess": false,
+      "stdinDigest": "sha256:4853e123eda1f58cacf81a8122b4e7ab6ef2c493e5aa7af14af9a4f4003cc498",
+      "exitCode": 2,
+      "seconds": 0.008,
+      "stdoutDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrDigest": "sha256:77be283f76d49d3705317e2a12580f9730d522fb2d2ac2e14220dc85ea493410"
+    },
+    {
+      "label": "g3-segment-recursive-refused-request",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/debug/patamaps",
+        "json",
+        "digest"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "stdinDigest": "sha256:b491d02f3de85cf250bdad101e7d45074f66b6d379f2bb6dbf7e4db68e4cd3c4",
+      "exitCode": 0,
+      "seconds": 0.008,
+      "stdoutDigest": "sha256:bf4b103308b742c282ca4e0dff63c2819e8d9b454e817a62922df0441059efca",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "g3-segment-recursive-refused",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/debug/patamaps",
+        "discover-native"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-discovery/cases/segment-recursive-refused",
+      "expectedSuccess": false,
+      "stdinDigest": "sha256:5ae6e34b260d522b6c56c2406f8c4642ac60d4ec1b6a7133666b5ca730ed2d44",
+      "exitCode": 2,
+      "seconds": 0.008,
+      "stdoutDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrDigest": "sha256:f16f707f21df94e8fd04148ffe83b60775f06c9c4b7237debc9753f790c2b7dd"
+    },
+    {
+      "label": "g3-segment-post-metadata-change-request",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/debug/patamaps",
+        "json",
+        "digest"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "stdinDigest": "sha256:75da61436f5cd855355a83413d82849096ba66ccd765e27467b6cd3981fef9f5",
+      "exitCode": 0,
+      "seconds": 0.008,
+      "stdoutDigest": "sha256:3e3e0b10e26794f9f1ff36285de11f3317a5bc60e08a75a248f3ce229ad44b80",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "g3-segment-post-metadata-change",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/debug/patamaps",
+        "discover-native"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-discovery/cases/segment-racing",
+      "expectedSuccess": false,
+      "stdinDigest": "sha256:34f2326d2191b0a015ec80713f7c1baf4595b496088cf1c7ed14821bf60b3484",
+      "exitCode": 2,
+      "seconds": 0.164,
+      "stdoutDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrDigest": "sha256:e2b908bb1fce1feeb0c7ee4ba3a5db5e71651c736e96a746a5561c5374503dfa"
+    },
+    {
+      "label": "g3-literal-exclusion-default-request",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/debug/patamaps",
+        "json",
+        "digest"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "stdinDigest": "sha256:74e77f519a2af0bdfcec0f461a3b448d8690a0b4476604ef908a98d0ac5e6a09",
+      "exitCode": 0,
+      "seconds": 0.008,
+      "stdoutDigest": "sha256:548c1521f323948e43d91c9a156afefff4cd49e8f7d84d56ef2cd9a9ebc40a6d",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "g3-literal-exclusion-default",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/debug/patamaps",
+        "discover-native"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-discovery/cases/literal-exclusion",
+      "expectedSuccess": false,
+      "stdinDigest": "sha256:64a199226ce7684dfb782dde2418b69f20cd2bcab4803db93771801e5991ab50",
+      "exitCode": 2,
+      "seconds": 0.008,
+      "stdoutDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrDigest": "sha256:7e5d8c4787dc37ec45f43652a42427c246164eefd4de48c2c79392ad0637f50e"
+    },
+    {
+      "label": "g3-literal-exclusion-explicit-request",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/debug/patamaps",
+        "json",
+        "digest"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "stdinDigest": "sha256:273f1706eca93faf5ca443ca9688b3a6e9c3b7ce0fa2bde6b6e734f209f7e354",
+      "exitCode": 0,
+      "seconds": 0.008,
+      "stdoutDigest": "sha256:6d24eae70f06f2de27bd53c242b17dea1db828a26abed471af65fa26a0aa262b",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "g3-literal-exclusion-explicit",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/debug/patamaps",
+        "discover-native"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-discovery/cases/literal-exclusion",
+      "expectedSuccess": true,
+      "stdinDigest": "sha256:891fa5e8847cf473c6265d60c867074f7e0ac77231069874a23bacf6dc45a44c",
+      "exitCode": 0,
+      "seconds": 2.018,
+      "stdoutDigest": "sha256:9907a1a5a6dce39fbb4d171670e28563f3f4bb1c069a34753a692442778988df",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "g3-literal-exclusion-explicit-shard-digest",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/debug/patamaps",
+        "json",
+        "digest"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "stdinDigest": "sha256:573785b24f036868857006c8c6238c6a4b1615ee65ad6e808d0a07049f0a5ada",
+      "exitCode": 0,
+      "seconds": 0.008,
+      "stdoutDigest": "sha256:6a9f13c50130317def7f723fc41c08c9b1390d658201562432f4e59f5a62c096",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "g3-exclusion-included-capture-missing-request",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/debug/patamaps",
+        "json",
+        "digest"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "stdinDigest": "sha256:e278349a61aaf0e8ba97963f0319a62906897663d71272babc1b19c56916bdff",
+      "exitCode": 0,
+      "seconds": 0.008,
+      "stdoutDigest": "sha256:577f8622a2d12bd80b79bb209b2d234f65d9730ae5421bf87f36557b93ce2f2b",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "g3-exclusion-included-capture-missing",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/debug/patamaps",
+        "discover-native"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-discovery/cases/literal-exclusion",
+      "expectedSuccess": false,
+      "stdinDigest": "sha256:a7bd21792a9f49e976083af7802cb9cfc9835387b51709e7179320f7f35382e6",
+      "exitCode": 2,
+      "seconds": 0.008,
+      "stdoutDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrDigest": "sha256:b85631f71c1d0d84754a3ddf7df394ab7fd9f5dc35b0f48298aaf7f0d1147f24"
+    },
+    {
+      "label": "g3-exclusion-without-glob-mode-request",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/debug/patamaps",
+        "json",
+        "digest"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "stdinDigest": "sha256:c0b746fd8f911ef73a8d1758f6cdb7286fef0bfa90b61336d5f080f3a6ac01d7",
+      "exitCode": 0,
+      "seconds": 0.008,
+      "stdoutDigest": "sha256:0402056c55e49ea7f38f5f7ef322944a007088e1323ee8947a28689acfe3b962",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "g3-exclusion-without-glob-mode",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/debug/patamaps",
+        "discover-native"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-discovery/cases/literal-exclusion",
+      "expectedSuccess": false,
+      "stdinDigest": "sha256:e3a26fd13f6c7ac4912ebfacc552526b19d2a66130ad6c991aff660a62b1c7f1",
+      "exitCode": 2,
+      "seconds": 0.008,
+      "stdoutDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrDigest": "sha256:5d121f31ba15b560b95eb354d01ee28492517c1e72e3990b924dfe15ee40526d"
+    },
+    {
+      "label": "g3-exclusion-duplicate-request",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/debug/patamaps",
+        "json",
+        "digest"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "stdinDigest": "sha256:c128274e907f83cc6151ef84b857d945ec76e6cdc3e362023784b58a7a2c0f70",
+      "exitCode": 0,
+      "seconds": 0.008,
+      "stdoutDigest": "sha256:6e841e7f638a4f325570e544f4e7d616eac69556472b5cc51a1436019534a65a",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "g3-exclusion-duplicate",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/debug/patamaps",
+        "discover-native"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-discovery/cases/exclusion-duplicate",
+      "expectedSuccess": false,
+      "stdinDigest": "sha256:4439f3161b44ff6afd76fdb995f43b43c531682af1c7d898b86d267802bb1673",
+      "exitCode": 2,
+      "seconds": 0.008,
+      "stdoutDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrDigest": "sha256:604dc24cf97300b4cdbc834c54e2e5763621cd99778b22bd2fb7b1520136ba32"
+    },
+    {
+      "label": "g3-exclusion-nested-request",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/debug/patamaps",
+        "json",
+        "digest"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "stdinDigest": "sha256:cc14f0cd77a6bee8e5fb6f40059cd83679db757e7b5b03974deeb69c2e4cbf15",
+      "exitCode": 0,
+      "seconds": 0.008,
+      "stdoutDigest": "sha256:ea8f3b5b51319c00f34153919ee45b870ec1439114a2037daa375c7631f17507",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "g3-exclusion-nested",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/debug/patamaps",
+        "discover-native"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-discovery/cases/exclusion-nested",
+      "expectedSuccess": false,
+      "stdinDigest": "sha256:0447f57ecfc3450be4b3a0ede252880d6de555f9b1928e6a1bb65a4c3a23c52a",
+      "exitCode": 2,
+      "seconds": 0.008,
+      "stdoutDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrDigest": "sha256:64ba3a9c07027edf398f81fb0700ecaf34337c0548151e45afbd185e4f4dc940"
+    },
+    {
+      "label": "g3-exclusion-escape-request",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/debug/patamaps",
+        "json",
+        "digest"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "stdinDigest": "sha256:ceb00093e620c237b823374408b877f9f56cc341228bd7af9be35f4e5de0bebf",
+      "exitCode": 0,
+      "seconds": 0.008,
+      "stdoutDigest": "sha256:5f8d3a19e3e0abf0e57d3472953d6500ae1e4934233420bd2582b4066476114a",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "g3-exclusion-escape",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/debug/patamaps",
+        "discover-native"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-discovery/cases/exclusion-escape",
+      "expectedSuccess": false,
+      "stdinDigest": "sha256:016c6c4dec3e2ff15245f60045a3d3ea358c53fefb2d656727a20797f5989271",
+      "exitCode": 2,
+      "seconds": 0.008,
+      "stdoutDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrDigest": "sha256:f192e2d55ecef298220e9b6de796f23715564f1e742db12efcffbc0313f7390a"
+    },
+    {
+      "label": "g3-exclusion-glob-request",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/debug/patamaps",
+        "json",
+        "digest"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "stdinDigest": "sha256:62f30e9e3132a265a8131330a00c440b4907e1189d263288f4da557e00c5a398",
+      "exitCode": 0,
+      "seconds": 0.008,
+      "stdoutDigest": "sha256:5689657bbeddf3ad1b2ccd2068abf2f74e2e7cb9a455a317cbb66b7a395f6bea",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "g3-exclusion-glob",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/debug/patamaps",
+        "discover-native"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-discovery/cases/exclusion-glob",
+      "expectedSuccess": false,
+      "stdinDigest": "sha256:20b07d051ffcb1a3d2bf197188b7fa9d818598e6b7e8bc10cb0238e7f55e255f",
+      "exitCode": 2,
+      "seconds": 0.008,
+      "stdoutDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrDigest": "sha256:f192e2d55ecef298220e9b6de796f23715564f1e742db12efcffbc0313f7390a"
+    },
+    {
+      "label": "g3-exclusion-ancestor-overlap-request",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/debug/patamaps",
+        "json",
+        "digest"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "stdinDigest": "sha256:9b0db25134efdbd3be7266f009aa1fd47c0a81951e49a4fd3b6df226395c1ba8",
+      "exitCode": 0,
+      "seconds": 0.008,
+      "stdoutDigest": "sha256:fb100c85f7aeb5f5c6b69a32b72c42c0e248f9d3f95fdcaa8b108d6c0e2d6615",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "g3-exclusion-ancestor-overlap",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/debug/patamaps",
+        "discover-native"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-discovery/cases/exclusion-ancestor-overlap",
+      "expectedSuccess": false,
+      "stdinDigest": "sha256:7ba8ce4e42fecf711c6d234d72fcfef9476eaf653104205bb54c52d74dbf93eb",
+      "exitCode": 2,
+      "seconds": 0.008,
+      "stdoutDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrDigest": "sha256:f904399cc0110dcc90419de83a41aa4dd786f8fcb63871f0e8ab250f5606ca6f"
+    },
+    {
+      "label": "g3-exclusion-descendant-overlap-request",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/debug/patamaps",
+        "json",
+        "digest"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "stdinDigest": "sha256:356f92db6bb8cbbf117e160f2e7c9b35742182c47e6c6f51d22602030cc02795",
+      "exitCode": 0,
+      "seconds": 0.008,
+      "stdoutDigest": "sha256:9476fd39f84df06c8f03611ce436b2a41f1627c62c2d199e4932bc1241e91f83",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "g3-exclusion-descendant-overlap",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/debug/patamaps",
+        "discover-native"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-discovery/cases/exclusion-descendant-overlap",
+      "expectedSuccess": false,
+      "stdinDigest": "sha256:3226c08843cef8f6795ed20a9dc4c14225858e81ca322f7628226b60a2c8ab48",
+      "exitCode": 2,
+      "seconds": 0.008,
+      "stdoutDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrDigest": "sha256:f904399cc0110dcc90419de83a41aa4dd786f8fcb63871f0e8ab250f5606ca6f"
+    },
+    {
+      "label": "g3-exclusion-explicit-member-overlap-request",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/debug/patamaps",
+        "json",
+        "digest"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "stdinDigest": "sha256:15f5500dfae029174e114a1c8efed0bfc7407127f73365f0cdeebbee6bc00bfb",
+      "exitCode": 0,
+      "seconds": 0.008,
+      "stdoutDigest": "sha256:55327da8e61c7f359f603b0767695317c3efe2b64cb07bfa1e9af7bc360fd48c",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "g3-exclusion-explicit-member-overlap",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/debug/patamaps",
+        "discover-native"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-discovery/cases/exclusion-literal-member-overlap",
+      "expectedSuccess": false,
+      "stdinDigest": "sha256:04e7e2f9a90b60cfb55e5125bcce94be0749fa1208ba187bfa566c3656e5c960",
+      "exitCode": 2,
+      "seconds": 0.008,
+      "stdoutDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrDigest": "sha256:08bb17a393d4b8eb5768a53bc80ec193f21f711a6a9c4bc374858cf18cb7dd46"
+    },
+    {
+      "label": "g3-exclusion-symlink-request",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/debug/patamaps",
+        "json",
+        "digest"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "stdinDigest": "sha256:02c9971ba69e2e90ed3dfb6f1f8e194d1514b28d748bddc32fe5b63fe95de706",
+      "exitCode": 0,
+      "seconds": 0.008,
+      "stdoutDigest": "sha256:6e478175734196748f0d19a10c77843c1c7c36a0a78a6c32ace1680bdec8ef50",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "g3-exclusion-symlink",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/debug/patamaps",
+        "discover-native"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-discovery/cases/exclusion-symlink",
+      "expectedSuccess": false,
+      "stdinDigest": "sha256:9f812e6002dd755d33b5b9b6e4c7b36f74cbda20b0b2125a9cf0650e5d033318",
+      "exitCode": 2,
+      "seconds": 0.008,
+      "stdoutDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrDigest": "sha256:7458337b623058b40c4fbc55460f415533e929b0ca3a0714a95209f6a5c53cd7"
+    },
+    {
+      "label": "g3-excluded-path-dependency-uncaptured-request",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/debug/patamaps",
+        "json",
+        "digest"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "stdinDigest": "sha256:0ffe818afe038493ca01f67ac4a72b9535b9ade6c07bfb93c93222bb7f9367ee",
+      "exitCode": 0,
+      "seconds": 0.008,
+      "stdoutDigest": "sha256:d9921f4acc1a290951c08d96972bca7f27c6d326255cdb9cab071d758e375bfb",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "g3-excluded-path-dependency-uncaptured",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/debug/patamaps",
+        "discover-native"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-discovery/cases/excluded-dependency-missing",
+      "expectedSuccess": false,
+      "stdinDigest": "sha256:29e94cd7a7a92d5e891d3d222fed86231b6387ab5d3f945b2c951ab4a6b7179a",
+      "exitCode": 2,
+      "seconds": 0.008,
+      "stdoutDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrDigest": "sha256:662e00c0cfe6306c83f47931d3730195450b2b2fd8ce6db81f05b3b668010386"
+    },
+    {
+      "label": "g3-excluded-dependency-lock",
+      "argv": [
+        "/home/runner/.rustup/toolchains/1.99.0-x86_64-unknown-linux-gnu/bin/cargo",
+        "generate-lockfile",
+        "--offline",
+        "--manifest-path",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-discovery/cases/excluded-dependency-captured/Cargo.toml"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.114,
+      "stdoutDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrDigest": "sha256:34e6e782f43bcb559efa136041c5ebceb8959479f69a625054c8b7566dcf5b35"
+    },
+    {
+      "label": "g3-excluded-path-dependency-captured-request",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/debug/patamaps",
+        "json",
+        "digest"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "stdinDigest": "sha256:91292be649d8a9d90f88fed8e0e609bdad20e18fb307a501985d0c33c757df1d",
+      "exitCode": 0,
+      "seconds": 0.008,
+      "stdoutDigest": "sha256:d63627e4a5a76e264f874286d66616513c62369006a69bd3e48aba62bcde9351",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "g3-excluded-path-dependency-captured",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/debug/patamaps",
+        "discover-native"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-discovery/cases/excluded-dependency-captured",
+      "expectedSuccess": true,
+      "stdinDigest": "sha256:d4ebacf1bb361480a57dc5ff2c0879ddfb0a09cf191ae731973b85e61dc0b693",
+      "exitCode": 0,
+      "seconds": 2.069,
+      "stdoutDigest": "sha256:fdfbf55e1404ac1aecf62896e5af09212a61e09ef7e1320e48c801b0b6b4648e",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "g3-excluded-path-dependency-captured-shard-digest",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/debug/patamaps",
+        "json",
+        "digest"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "stdinDigest": "sha256:e0d5d3d3fb5faa42b4091873298c2c3a0ea86cf9ad1f83dd313fa57bcbae1303",
+      "exitCode": 0,
+      "seconds": 0.008,
+      "stdoutDigest": "sha256:292aac53bec6c32b12687b08da4a76a4c428dfa7a65d67e4a08fe56e691da550",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "g3-excluded-match-post-metadata-change-request",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/debug/patamaps",
+        "json",
+        "digest"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "stdinDigest": "sha256:9134cb5278763fe4f7ae320efe3fd71f70126d98faf1431ff82334d3a5b49cfc",
+      "exitCode": 0,
+      "seconds": 0.008,
+      "stdoutDigest": "sha256:59c23cc2d96fb9b8669ab5ab09ddd1ce8a347694087495c4144c440ac0be7835",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "g3-excluded-match-post-metadata-change",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/debug/patamaps",
+        "discover-native"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-discovery/cases/excluded-match-mutation",
+      "expectedSuccess": false,
+      "stdinDigest": "sha256:fe11e104058ba5a594499a6d5ad31aac82ff3dfb623af3bb61f659223ba27c04",
+      "exitCode": 2,
+      "seconds": 0.214,
+      "stdoutDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrDigest": "sha256:2e1b146b2519afdc2f25def93c71bd1fecc5b4cecfd2d6f0bb3c4872dc72c108"
+    },
+    {
+      "label": "m1-malformed-toml-request",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/debug/patamaps",
+        "json",
+        "digest"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "stdinDigest": "sha256:d432ab813070615c9c15b44963c32927ab6cafad710a38bde070253bb81c8f6b",
+      "exitCode": 0,
+      "seconds": 0.008,
+      "stdoutDigest": "sha256:05679cca5382843d3f1809ff21feffeafdaa8616d98b72f9ab24fd67177e42b2",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m1-malformed-toml",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/debug/patamaps",
+        "discover-native"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-discovery/cases/malformed",
+      "expectedSuccess": false,
+      "stdinDigest": "sha256:dcc1e2bc99fc3d77e09d0f70b73e66c240f55c9213a0a4388bfb3118fe21197a",
+      "exitCode": 2,
+      "seconds": 0.008,
+      "stdoutDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrDigest": "sha256:29e1d046aa38891c2446526b4d3fed291c43a879d42c369c814638a628c9aeda"
+    },
+    {
+      "label": "m1-duplicate-toml-request",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/debug/patamaps",
+        "json",
+        "digest"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "stdinDigest": "sha256:547e3f4cb159edf7418782c3cbfe257fa03537faef67e1379e6e1413144af6ba",
+      "exitCode": 0,
+      "seconds": 0.008,
+      "stdoutDigest": "sha256:8a21401abfb85aaf841766e8194c9dc11aa0466c7bf37549e9efc12e2575dad3",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m1-duplicate-toml",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/debug/patamaps",
+        "discover-native"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-discovery/cases/duplicate",
+      "expectedSuccess": false,
+      "stdinDigest": "sha256:79afa82654fe3bb21e2b295c811bd08b6dbc31157c32507bb3fdec5cc5810536",
+      "exitCode": 2,
+      "seconds": 0.008,
+      "stdoutDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrDigest": "sha256:8c8b3e2332fc2c8199611820f82c137308e0aad3311068f473d0da69730726c4"
+    },
+    {
+      "label": "m1-unrecorded-member-request",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/debug/patamaps",
+        "json",
+        "digest"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "stdinDigest": "sha256:5d9b0f274427339e83026726d5d8b807db24f709c20efc9f22d6cc2653959722",
+      "exitCode": 0,
+      "seconds": 0.008,
+      "stdoutDigest": "sha256:b45e2cf4a774dc35db9034b73af34ac083af7dcd6df8d89886bab0a1c8a657d5",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m1-unrecorded-member",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/debug/patamaps",
+        "discover-native"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-discovery/cases/base",
+      "expectedSuccess": false,
+      "stdinDigest": "sha256:91bb1eadd35e637600112ae9bc59ff866ee3eb2496d5a37d4d27addbb65089cf",
+      "exitCode": 2,
+      "seconds": 0.008,
+      "stdoutDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrDigest": "sha256:aa281b693343ea57ab9b08c3a4ab167d7fbcae5cc16c814d470c41d091639206"
+    },
+    {
+      "label": "m1-missing-lock-request",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/debug/patamaps",
+        "json",
+        "digest"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "stdinDigest": "sha256:1d1a24e086bbb6ffdbc0d3b59140a620fc1b5b28fb829e2597417c84f0949504",
+      "exitCode": 0,
+      "seconds": 0.008,
+      "stdoutDigest": "sha256:a55db01eb27b9361f4c6e6f78758d74460e45499e49a1c2a9428a7ae9b4e897c",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m1-missing-lock",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/debug/patamaps",
+        "discover-native"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-discovery/cases/missing-lock",
+      "expectedSuccess": false,
+      "stdinDigest": "sha256:91f86fac56617ce759ef32842b336c7926029f6b6f06f2a0386a18b2678ac4ff",
+      "exitCode": 2,
+      "seconds": 0.008,
+      "stdoutDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrDigest": "sha256:4a8a7e2f0d5b9e1903d49bac0f98170f8511b99c17f8372b2345e226c3560fc3"
+    },
+    {
+      "label": "m1-offline-unavailable-request",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/debug/patamaps",
+        "json",
+        "digest"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "stdinDigest": "sha256:54981900b210350cb7b0158dfc5cbe5389544a2b120099edb9ded7f15e8d75ae",
+      "exitCode": 0,
+      "seconds": 0.008,
+      "stdoutDigest": "sha256:454ec520689f92c3b954421e59f79152661b4ca7e1ec376d595dccf78a9ba694",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m1-offline-unavailable",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/debug/patamaps",
+        "discover-native"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-discovery/cases/offline-dependency",
+      "expectedSuccess": false,
+      "stdinDigest": "sha256:8bdb1462260c34e0756427f946590a2ce606164ee0ac0fba08e4c5b9c51c999a",
+      "exitCode": 2,
+      "seconds": 1.066,
+      "stdoutDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrDigest": "sha256:5801df89ca98b6f3b48f25a765cf88676a9fad22a46ab33187606bd8f8b44930"
+    },
+    {
+      "label": "m1-real-service-request",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/debug/patamaps",
+        "json",
+        "digest"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "stdinDigest": "sha256:1e89948b9bcd23061c205c07d06a54f8c3084afadd1f95d890a2936d5e637f21",
+      "exitCode": 0,
+      "seconds": 0.008,
+      "stdoutDigest": "sha256:b5cabb4fb515ba5d4a232ec0ce9d83ca7f2ba83111b0a9e0f25fe863aaf6ef08",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m1-real-service",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/debug/patamaps",
+        "discover-native"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-discovery/cases/real-service",
+      "expectedSuccess": true,
+      "stdinDigest": "sha256:0ec54b4121008300e70acf5b387cf2ebd760781f68dfd8975caf3c99f7be6d70",
+      "exitCode": 0,
+      "seconds": 2.068,
+      "stdoutDigest": "sha256:6fcc101a112c2a359a7b8a9525ecb289fc99d50df3cec97f4aeef4bfa1cd8e8f",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m1-real-service-shard-digest",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/debug/patamaps",
+        "json",
+        "digest"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "stdinDigest": "sha256:5b358cc7b2c57822acdff39b152176cda76f4d9cc37fe1cccbe252f759311bba",
+      "exitCode": 0,
+      "seconds": 0.035,
+      "stdoutDigest": "sha256:166b33355c27ba63e8ffa5f2455c5d2c5b659f141ca9a23afcb94a025f9d1580",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m1-oversized-tool-request",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/debug/patamaps",
+        "json",
+        "digest"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "stdinDigest": "sha256:c1dc8634d411fe23f370da69ca50154157ec6c52650af2e9d22cfae31dead70f",
+      "exitCode": 0,
+      "seconds": 0.008,
+      "stdoutDigest": "sha256:004ead8905209c0bf84062fed842cd71ca3b08c94ad6d999eecf042565fe4911",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m1-oversized-tool",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/debug/patamaps",
+        "discover-native"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-discovery/cases/base",
+      "expectedSuccess": false,
+      "stdinDigest": "sha256:8300b06f13e5c71edc533e79bea3f77091d7f76b2ba333b217373b0fd8e6b32b",
+      "exitCode": 2,
+      "seconds": 0.008,
+      "stdoutDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrDigest": "sha256:45eb4853fae8edff3495a8c025e652cbd0506bed30d8ebc7265885eb69fef369"
+    },
+    {
+      "label": "m1-out-of-scope-path-request",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/debug/patamaps",
+        "json",
+        "digest"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "stdinDigest": "sha256:3133eb7c7951ddf0c78e0024badbf8f02339cd7edcadcaa5c6cee3dcebac2a04",
+      "exitCode": 0,
+      "seconds": 0.008,
+      "stdoutDigest": "sha256:8b29f56f162130ad4c4c0b9a7e928a2712f126faf0784caf8e431213d22fefb0",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m1-out-of-scope-path",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/debug/patamaps",
+        "discover-native"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-discovery/cases/escaped",
+      "expectedSuccess": false,
+      "stdinDigest": "sha256:5b05fa77da72c3a2acf20d018bfeb678313fbce12a70411cc2ece9d641e7c212",
+      "exitCode": 2,
+      "seconds": 0.008,
+      "stdoutDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrDigest": "sha256:9f12b5869b3fa234ad8c4cb47f23065ab37f2b2e245f294a41d7b5fa69d2625d"
+    },
+    {
+      "label": "m1-explicit-config-request",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/debug/patamaps",
+        "json",
+        "digest"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "stdinDigest": "sha256:c006e851e327f9083a4e38a31330c0f4bed7a6eb845e820f0adadd80a0803844",
+      "exitCode": 0,
+      "seconds": 0.008,
+      "stdoutDigest": "sha256:66de0d6bf01dc2fc0b9dc3f346b35a93b7689d36f1bdcd4abff539c77ced0d63",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m1-explicit-config",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/debug/patamaps",
+        "discover-native"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-discovery/cases/config",
+      "expectedSuccess": true,
+      "stdinDigest": "sha256:e4233d7e827db03282e2aa471c59ccc1e10a36bd29d576bec0f2ed1c4be70cc2",
+      "exitCode": 0,
+      "seconds": 2.018,
+      "stdoutDigest": "sha256:04b2c8584cbf04f0bc38e5eb8abdccdcb7d3be0b43c261c11c502e46c57d7c54",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m1-explicit-config-shard-digest",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/debug/patamaps",
+        "json",
+        "digest"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "stdinDigest": "sha256:5e605938a1ed79d3fa769f3419fc09db26da29ee44832a681780738e02001394",
+      "exitCode": 0,
+      "seconds": 0.008,
+      "stdoutDigest": "sha256:71319d4039866cd7e16ab1edaeac8ca00a08b890da80c267f4c6a3d2f577b6a3",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m1-unrecorded-config-request",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/debug/patamaps",
+        "json",
+        "digest"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "stdinDigest": "sha256:10520f6835fb763124c9affb673bcec45c5e63e8de8a2fc3b2a2d7fc45c2d2fc",
+      "exitCode": 0,
+      "seconds": 0.008,
+      "stdoutDigest": "sha256:6aa3b0bda1c8d119c8af706a158ce2b1b8bee3121eeb5db9f54bc5cbfa095269",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m1-unrecorded-config",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/debug/patamaps",
+        "discover-native"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-discovery/cases/config",
+      "expectedSuccess": false,
+      "stdinDigest": "sha256:0605c2b35a9e09a6f4cce760c94a5bcfecf9f92da120942f8f1227af9b071e67",
+      "exitCode": 2,
+      "seconds": 0.008,
+      "stdoutDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrDigest": "sha256:cef6a0128af17502ffd6e0ddf706e868b844140d807b18f8b84a0fc55a6af8df"
+    },
+    {
+      "label": "m1-mismatched-toolchain-request",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/debug/patamaps",
+        "json",
+        "digest"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "stdinDigest": "sha256:130540fcaa175518ff183e68006338b95b18e66b3e1659c5b3378dc0fb53751b",
+      "exitCode": 0,
+      "seconds": 0.008,
+      "stdoutDigest": "sha256:d8094fce2d12d605d19f60e0c1d8cd589f29939d7529d0e2c6a76e95efd63929",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m1-mismatched-toolchain",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/debug/patamaps",
+        "discover-native"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-discovery/cases/mismatched-toolchain",
+      "expectedSuccess": false,
+      "stdinDigest": "sha256:97d313ffad2959dd12d19b5ea0092925fc2c2e9c087bca42a8ad77cf16de8b9c",
+      "exitCode": 2,
+      "seconds": 1.016,
+      "stdoutDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrDigest": "sha256:26306899eec6872abfa9425207a359d29ae645b115a0f1e3cbf805e050d3edb6"
+    },
+    {
+      "label": "m1-unrecorded-toolchain-request",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/debug/patamaps",
+        "json",
+        "digest"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "stdinDigest": "sha256:7a8e23ca867bae9a94b24ef16f2ba74c502f72a2e8829b50150afc141722419a",
+      "exitCode": 0,
+      "seconds": 0.008,
+      "stdoutDigest": "sha256:88cdcb71cf77a372adb0b345e2054a6ab29b6ced90249112ec9fa2ec19287666",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m1-unrecorded-toolchain",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/debug/patamaps",
+        "discover-native"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-discovery/cases/base",
+      "expectedSuccess": false,
+      "stdinDigest": "sha256:286238587b9add1f6e16da6d60239378fad986bf125ea5118fc10f7a67a40455",
+      "exitCode": 2,
+      "seconds": 0.008,
+      "stdoutDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrDigest": "sha256:aaf15555af13181c1e196504a807fa10dcb05a4193ef0469c7a8ee0169dfb7a3"
+    },
+    {
+      "label": "m1-executable-override-request",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/debug/patamaps",
+        "json",
+        "digest"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "stdinDigest": "sha256:e5f70a4531deb916b5af6a47877a0b17f079f5a5095325aa47ed75dcd0102f91",
+      "exitCode": 0,
+      "seconds": 0.008,
+      "stdoutDigest": "sha256:c00232403af0ba7f2ba3cb235bd5e3a5a780b2409909777a6450a4d7c2ec6586",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m1-executable-override",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/debug/patamaps",
+        "discover-native"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-discovery/cases/unsafe-config",
+      "expectedSuccess": false,
+      "stdinDigest": "sha256:2e42186e5d819f47a588ca3346cb95e95690e1b254128c7cec643b0376b3117c",
+      "exitCode": 2,
+      "seconds": 0.008,
+      "stdoutDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrDigest": "sha256:29d3d3ff1efb39efa0d307dec90ef3d879c511a8da95c3ab0249b1b19f65c09b"
+    },
+    {
+      "label": "m1-ambient-config-request",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/debug/patamaps",
+        "json",
+        "digest"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "stdinDigest": "sha256:10520f6835fb763124c9affb673bcec45c5e63e8de8a2fc3b2a2d7fc45c2d2fc",
+      "exitCode": 0,
+      "seconds": 0.008,
+      "stdoutDigest": "sha256:6aa3b0bda1c8d119c8af706a158ce2b1b8bee3121eeb5db9f54bc5cbfa095269",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m1-ambient-config",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/debug/patamaps",
+        "discover-native"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-discovery/ambient-parent/owner",
+      "expectedSuccess": false,
+      "stdinDigest": "sha256:0605c2b35a9e09a6f4cce760c94a5bcfecf9f92da120942f8f1227af9b071e67",
+      "exitCode": 2,
+      "seconds": 0.008,
+      "stdoutDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrDigest": "sha256:18e6979dc033180bf2eeeb8ffa21973302bf27ebdd0732af56e6db79a988e531"
+    },
+    {
+      "label": "m1-tool-substitution-request",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/debug/patamaps",
+        "json",
+        "digest"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "stdinDigest": "sha256:cc2a790ffdbcb3f466afe6793e28f34a0734b73693646abbb35d63c99a0beb66",
+      "exitCode": 0,
+      "seconds": 0.008,
+      "stdoutDigest": "sha256:8fa4e23c17a8dd3e731e4798212321330784e5237ae8901175e58eb1bda7676c",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m1-tool-substitution",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/debug/patamaps",
+        "discover-native"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-discovery/cases/base",
+      "expectedSuccess": false,
+      "stdinDigest": "sha256:e533393824cf32f333d84a49cead1eb832a2c401be32939f3ea8722f08c78c66",
+      "exitCode": 2,
+      "seconds": 0.966,
+      "stdoutDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrDigest": "sha256:7200fe98fcfabf830c30ae8b0671e7c906093f72695f07321ed5da28ab048969"
+    },
+    {
+      "label": "m1-stale-source-request",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/debug/patamaps",
+        "json",
+        "digest"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "stdinDigest": "sha256:10520f6835fb763124c9affb673bcec45c5e63e8de8a2fc3b2a2d7fc45c2d2fc",
+      "exitCode": 0,
+      "seconds": 0.008,
+      "stdoutDigest": "sha256:6aa3b0bda1c8d119c8af706a158ce2b1b8bee3121eeb5db9f54bc5cbfa095269",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m1-stale-source",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/debug/patamaps",
+        "discover-native"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-discovery/cases/stale-source",
+      "expectedSuccess": false,
+      "stdinDigest": "sha256:0605c2b35a9e09a6f4cce760c94a5bcfecf9f92da120942f8f1227af9b071e67",
+      "exitCode": 2,
+      "seconds": 0.008,
+      "stdoutDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrDigest": "sha256:c0900b8b40bfae7fa812a59c5615ca06f13972c477a7403e1c8544320995fb3e"
+    },
+    {
+      "label": "m1-workspace-native-bridge",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/debug/patamaps",
+        "generate",
+        "workspace.json",
+        "--root",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-discovery/cases/workspace-bridge"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-discovery/cases/workspace-bridge",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 3.871,
+      "stdoutDigest": "sha256:50e0dd324fb97595405965173e7bb854484625fb8f59ac2ae760586e0e2ab592",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m1-workspace-offline-before",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/debug/patamaps",
+        "verify-workspace",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-discovery/native-workspace-baseline.json"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.264,
+      "stdoutDigest": "sha256:ae4ba06614efe6d18b4aea182c82517414a3038ed464d1c8432b7ba0906ccac4",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m1-workspace-offline-without-inputs-tools-node",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/debug/patamaps",
+        "verify-workspace",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-discovery/native-workspace-baseline.json"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-discovery",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.264,
+      "stdoutDigest": "sha256:ae4ba06614efe6d18b4aea182c82517414a3038ed464d1c8432b7ba0906ccac4",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m1-rehash-tampered-baseline",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/debug/patamaps",
+        "json",
+        "digest"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "stdinDigest": "sha256:63880a34fb6ad18fd378fd27867f8f532eda72a5a2581917b3b64d4766be7b15",
+      "exitCode": 0,
+      "seconds": 0.016,
+      "stdoutDigest": "sha256:ac0bbf80d45f264af5a4e03d7c338b92f050f493d612957ee5c7569a8f07c071",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m1-offline-rehashed-lineage-refusal",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/debug/patamaps",
+        "verify-workspace",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-discovery/tampered-rehashed-baseline.json"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": false,
+      "exitCode": 2,
+      "seconds": 0.264,
+      "stdoutDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrDigest": "sha256:dfecf9114e3eb29a0d9d40d0ab97fe791d501260e88162f2ca9540e152ddee93"
+    },
+    {
+      "label": "g4-stage-capture",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/debug/patamaps",
+        "project-capture",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-discovery/stage-profile.json",
+        "--root",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-discovery/cases/base",
+        "--output",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-discovery/stage-capture.json"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.008,
+      "stdoutDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "g4-project-stage",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/debug/patamaps",
+        "project-stage",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-discovery/stage-capture.json",
+        "--destination",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-discovery/staged-selected-inputs"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-discovery",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.008,
+      "stdoutDigest": "sha256:ce13966f8b4b9e6cbcdc9f22f500caa101d8b6ac65e05e2edbecb5bd52873afe",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "g4-stage-existing-destination",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/debug/patamaps",
+        "project-stage",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-discovery/stage-capture.json",
+        "--destination",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-discovery/staged-selected-inputs"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-discovery",
+      "expectedSuccess": false,
+      "exitCode": 2,
+      "seconds": 0.008,
+      "stdoutDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrDigest": "sha256:672e7f44c0e4b3569f8c4a9f3ac3322f137c3059b2711946c7d971def5a98403"
+    },
+    {
+      "label": "g4-stage-tampered-capture",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/debug/patamaps",
+        "project-stage",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-discovery/stage-tampered.json",
+        "--destination",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-discovery/stage-refused-candidate"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-discovery",
+      "expectedSuccess": false,
+      "exitCode": 2,
+      "seconds": 0.008,
+      "stdoutDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrDigest": "sha256:b49c8307a05ed2db26b68617a464823a20dfc7655a3c9e7fee1b9e249a72579d"
+    }
+  ],
+  "fullCrossStackAcceptance": false,
+  "linuxImage": "pending",
+  "browser": "pending",
+  "deleted": [],
+  "ciResourceChecks": {
+    "growthBytes": 4000000000,
+    "reserveBytes": 500000000,
+    "checkedBetweenCommands": true,
+    "diskUsedBefore": 65394040832,
+    "localIntelPolicyChanged": false,
+    "diskUsedAfter": 66429931520
+  },
+  "nativeDiscovery": {
+    "status": "passed",
+    "controls": [
+      {
+        "control": "m1-resolved-workspace",
+        "result": "observed",
+        "view": "resolved",
+        "manifestsAndLocksUnchanged": true,
+        "projectBuildScriptExecuted": false,
+        "requestDigest": "sha256:8f3144899096eb12b34fe5dae2ebc9e95625f3b2d47e380a380daf2aabdd1bb4",
+        "shardDigest": "sha256:6faac1290e986997a9a060dd1c19524835b36fb46fbe2ca5c101d09bbc5758b0"
+      },
+      {
+        "control": "m1-declared-view",
+        "result": "observed",
+        "view": "declared-local",
+        "manifestsAndLocksUnchanged": true,
+        "projectBuildScriptExecuted": false,
+        "requestDigest": "sha256:67b286025223302dadacff0b8bd7d36ad763a8272e2603cec4afe3ae6b5cf1c1",
+        "shardDigest": "sha256:07d854980be7ed3bb7f128b13233797f00111001f566bd4c98fa344ad99534c2"
+      },
+      {
+        "control": "m1-feature-disabled",
+        "result": "observed",
+        "view": "resolved",
+        "manifestsAndLocksUnchanged": true,
+        "projectBuildScriptExecuted": false,
+        "requestDigest": "sha256:de792369ed2670b82f0564f20cd0a0e56d836243d2d460486699f61cddfa9c38",
+        "shardDigest": "sha256:b88e5e7f869dcc0c61f659a56b793bfb212339c9c2640fc48ac300b57687bee2"
+      },
+      {
+        "control": "m1-root-relocated",
+        "result": "observed",
+        "view": "resolved",
+        "manifestsAndLocksUnchanged": true,
+        "projectBuildScriptExecuted": false,
+        "requestDigest": "sha256:8f3144899096eb12b34fe5dae2ebc9e95625f3b2d47e380a380daf2aabdd1bb4",
+        "shardDigest": "sha256:7f45b00f4135449ad4e5344a040b1d0b3a57ae660cc0248589511bb24b3799ad"
+      },
+      {
+        "control": "g3-globs-default-refused",
+        "result": "refused",
+        "code": "NATIVE_CARGO_MEMBERS",
+        "manifestsAndLocksUnchanged": true,
+        "projectBuildScriptExecuted": false
+      },
+      {
+        "control": "g3-globs-explicit",
+        "result": "observed",
+        "view": "resolved",
+        "manifestsAndLocksUnchanged": true,
+        "projectBuildScriptExecuted": false,
+        "requestDigest": "sha256:044be3f1880a5acd7fff303fb4d963701cf7e5bd7b217efdf1d045c088d6823e",
+        "shardDigest": "sha256:20d1960574da4690e24a893482c9fa3a96e863b2b31c3f6332ebc1a5605a37b0",
+        "memberExpansion": {
+          "expansions": [
+            {
+              "manifest": "Cargo.toml",
+              "manifests": [
+                "crates/app/Cargo.toml",
+                "crates/helper/Cargo.toml",
+                "crates/platform/Cargo.toml"
+              ],
+              "pattern": "crates/*"
+            }
+          ],
+          "mode": "bounded-directory-globs",
+          "preAndPostObservedEqual": true
+        }
+      },
+      {
+        "control": "g3-globs-missing-capture",
+        "result": "refused",
+        "code": "NATIVE_CARGO_MANIFEST_INPUT",
+        "manifestsAndLocksUnchanged": true,
+        "projectBuildScriptExecuted": false
+      },
+      {
+        "control": "g3-globs-recursive",
+        "result": "refused",
+        "code": "NATIVE_CARGO_MEMBERS",
+        "manifestsAndLocksUnchanged": true,
+        "projectBuildScriptExecuted": false
+      },
+      {
+        "control": "g3-globs-question",
+        "result": "refused",
+        "code": "NATIVE_CARGO_MEMBERS",
+        "manifestsAndLocksUnchanged": true,
+        "projectBuildScriptExecuted": false
+      },
+      {
+        "control": "g3-globs-escape",
+        "result": "refused",
+        "code": "NATIVE_CARGO_MEMBERS",
+        "manifestsAndLocksUnchanged": true,
+        "projectBuildScriptExecuted": false
+      },
+      {
+        "control": "g3-globs-exclusions",
+        "result": "refused",
+        "code": "NATIVE_CARGO_MEMBERS",
+        "manifestsAndLocksUnchanged": true,
+        "projectBuildScriptExecuted": false
+      },
+      {
+        "control": "g3-globs-symlink",
+        "result": "refused",
+        "code": "NATIVE_CARGO_MEMBERS",
+        "manifestsAndLocksUnchanged": true,
+        "projectBuildScriptExecuted": false
+      },
+      {
+        "control": "g3-globs-post-metadata-change",
+        "result": "refused",
+        "code": "NATIVE_CARGO_MEMBERS_CHANGED",
+        "manifestsAndLocksUnchanged": true,
+        "projectBuildScriptExecuted": false
+      },
+      {
+        "control": "g3-segment-legacy-refuses",
+        "result": "refused",
+        "code": "NATIVE_CARGO_MEMBERS",
+        "manifestsAndLocksUnchanged": true,
+        "projectBuildScriptExecuted": false
+      },
+      {
+        "control": "g3-segment-explicit",
+        "result": "observed",
+        "view": "resolved",
+        "manifestsAndLocksUnchanged": true,
+        "projectBuildScriptExecuted": false,
+        "requestDigest": "sha256:2d26c2be506e14100d461267760bb3665fa4dbe71d0f717c96dd102518f38552",
+        "shardDigest": "sha256:bec1a75ebf4406776c4fc706ed440b8a642dd15254461b60e16eadebc94f4e18",
+        "memberExpansion": {
+          "expansions": [
+            {
+              "manifest": "Cargo.toml",
+              "manifests": [
+                "crates/app/Cargo.toml"
+              ],
+              "pattern": "crates/a*"
+            }
+          ],
+          "mode": "bounded-segment-globs",
+          "preAndPostObservedEqual": true
+        }
+      },
+      {
+        "control": "g3-segment-missing-capture",
+        "result": "refused",
+        "code": "NATIVE_CARGO_MANIFEST_INPUT",
+        "manifestsAndLocksUnchanged": true,
+        "projectBuildScriptExecuted": false
+      },
+      {
+        "control": "g3-segment-recursive-refused",
+        "result": "refused",
+        "code": "NATIVE_CARGO_MEMBERS",
+        "manifestsAndLocksUnchanged": true,
+        "projectBuildScriptExecuted": false
+      },
+      {
+        "control": "g3-segment-post-metadata-change",
+        "result": "refused",
+        "code": "NATIVE_CARGO_MEMBERS_CHANGED",
+        "manifestsAndLocksUnchanged": true,
+        "projectBuildScriptExecuted": false
+      },
+      {
+        "control": "g3-literal-exclusion-default",
+        "result": "refused",
+        "code": "NATIVE_CARGO_MEMBERS",
+        "manifestsAndLocksUnchanged": true,
+        "projectBuildScriptExecuted": false
+      },
+      {
+        "control": "g3-literal-exclusion-explicit",
+        "result": "observed",
+        "view": "resolved",
+        "manifestsAndLocksUnchanged": true,
+        "projectBuildScriptExecuted": false,
+        "requestDigest": "sha256:c992c10b9352db22e30c43d499c2ddfa2653b22460a6455c1184826fcecf5b71",
+        "shardDigest": "sha256:d4f9c15fcce16061d00846675b7d28aed8773c629cd56e06fe17f59ebd946411",
+        "memberExpansion": {
+          "exclusionMode": "literal-paths",
+          "expansions": [
+            {
+              "excludedDirectories": [
+                "crates/unselected"
+              ],
+              "manifest": "Cargo.toml",
+              "manifests": [
+                "crates/app/Cargo.toml",
+                "crates/helper/Cargo.toml",
+                "crates/platform/Cargo.toml"
+              ],
+              "pattern": "crates/*"
+            }
+          ],
+          "mode": "bounded-directory-globs",
+          "preAndPostObservedEqual": true
+        },
+        "uncapturedMalformedManifestCompatible": true,
+        "excludedManifestCaptured": false,
+        "excludedManifestUnchanged": true
+      },
+      {
+        "control": "g3-exclusion-included-capture-missing",
+        "result": "refused",
+        "code": "NATIVE_CARGO_MANIFEST_INPUT",
+        "manifestsAndLocksUnchanged": true,
+        "projectBuildScriptExecuted": false
+      },
+      {
+        "control": "g3-exclusion-without-glob-mode",
+        "result": "refused",
+        "code": "NATIVE_CARGO_EXCLUSIONS",
+        "manifestsAndLocksUnchanged": true,
+        "projectBuildScriptExecuted": false
+      },
+      {
+        "control": "g3-exclusion-duplicate",
+        "result": "refused",
+        "code": "NATIVE_CARGO_EXCLUSIONS",
+        "manifestsAndLocksUnchanged": true,
+        "projectBuildScriptExecuted": false
+      },
+      {
+        "control": "g3-exclusion-nested",
+        "result": "refused",
+        "code": "NATIVE_CARGO_EXCLUSIONS",
+        "manifestsAndLocksUnchanged": true,
+        "projectBuildScriptExecuted": false
+      },
+      {
+        "control": "g3-exclusion-escape",
+        "result": "refused",
+        "code": "NATIVE_CARGO_EXCLUSIONS",
+        "manifestsAndLocksUnchanged": true,
+        "projectBuildScriptExecuted": false
+      },
+      {
+        "control": "g3-exclusion-glob",
+        "result": "refused",
+        "code": "NATIVE_CARGO_EXCLUSIONS",
+        "manifestsAndLocksUnchanged": true,
+        "projectBuildScriptExecuted": false
+      },
+      {
+        "control": "g3-exclusion-ancestor-overlap",
+        "result": "refused",
+        "code": "NATIVE_CARGO_EXCLUSIONS",
+        "manifestsAndLocksUnchanged": true,
+        "projectBuildScriptExecuted": false
+      },
+      {
+        "control": "g3-exclusion-descendant-overlap",
+        "result": "refused",
+        "code": "NATIVE_CARGO_EXCLUSIONS",
+        "manifestsAndLocksUnchanged": true,
+        "projectBuildScriptExecuted": false
+      },
+      {
+        "control": "g3-exclusion-explicit-member-overlap",
+        "result": "refused",
+        "code": "NATIVE_CARGO_EXCLUSIONS",
+        "manifestsAndLocksUnchanged": true,
+        "projectBuildScriptExecuted": false
+      },
+      {
+        "control": "g3-exclusion-symlink",
+        "result": "refused",
+        "code": "NATIVE_CARGO_MEMBERS",
+        "manifestsAndLocksUnchanged": true,
+        "projectBuildScriptExecuted": false
+      },
+      {
+        "control": "g3-excluded-path-dependency-uncaptured",
+        "result": "refused",
+        "code": "NATIVE_CARGO_MANIFEST_INPUT",
+        "manifestsAndLocksUnchanged": true,
+        "projectBuildScriptExecuted": false
+      },
+      {
+        "control": "g3-excluded-path-dependency-captured",
+        "result": "observed",
+        "view": "resolved",
+        "manifestsAndLocksUnchanged": true,
+        "projectBuildScriptExecuted": false,
+        "requestDigest": "sha256:286dd108841ac1ffcb23a5f79dfff33430c158ea5b9f6517ae5738f2b7cd65b3",
+        "shardDigest": "sha256:933169ba4212b2fe28320360d7abd561d2be8fe6b80f0b5a53639a5ee465c45f",
+        "memberExpansion": {
+          "exclusionMode": "literal-paths",
+          "expansions": [
+            {
+              "excludedDirectories": [
+                "crates/unselected"
+              ],
+              "manifest": "Cargo.toml",
+              "manifests": [
+                "crates/app/Cargo.toml",
+                "crates/helper/Cargo.toml",
+                "crates/platform/Cargo.toml"
+              ],
+              "pattern": "crates/*"
+            }
+          ],
+          "mode": "bounded-directory-globs",
+          "preAndPostObservedEqual": true
+        },
+        "excludedDependencyCaptured": true,
+        "excludedDependencyWorkspaceMember": false
+      },
+      {
+        "control": "g3-excluded-match-post-metadata-change",
+        "result": "refused",
+        "code": "NATIVE_CARGO_MEMBERS_CHANGED",
+        "manifestsAndLocksUnchanged": true,
+        "projectBuildScriptExecuted": false
+      },
+      {
+        "control": "m1-malformed-toml",
+        "result": "refused",
+        "code": "NATIVE_TOML_SYNTAX",
+        "manifestsAndLocksUnchanged": true,
+        "projectBuildScriptExecuted": false
+      },
+      {
+        "control": "m1-duplicate-toml",
+        "result": "refused",
+        "code": "NATIVE_TOML_SYNTAX",
+        "manifestsAndLocksUnchanged": true,
+        "projectBuildScriptExecuted": false
+      },
+      {
+        "control": "m1-unrecorded-member",
+        "result": "refused",
+        "code": "NATIVE_CARGO_MANIFEST_INPUT",
+        "manifestsAndLocksUnchanged": true,
+        "projectBuildScriptExecuted": false
+      },
+      {
+        "control": "m1-missing-lock",
+        "result": "refused",
+        "code": "NATIVE_CARGO_INPUT",
+        "manifestsAndLocksUnchanged": true,
+        "projectBuildScriptExecuted": false
+      },
+      {
+        "control": "m1-offline-unavailable",
+        "result": "refused",
+        "code": "NATIVE_CARGO_UNAVAILABLE",
+        "manifestsAndLocksUnchanged": true,
+        "projectBuildScriptExecuted": false
+      },
+      {
+        "control": "m1-real-service",
+        "result": "observed",
+        "view": "resolved",
+        "manifestsAndLocksUnchanged": true,
+        "projectBuildScriptExecuted": false,
+        "requestDigest": "sha256:2ec30f444879b95245589ab1a17c1f51ad27ac10acc4fecc292ca795ca339b45",
+        "shardDigest": "sha256:e2f5408b990cc01ca841f998ef9b7a4aab66dbdc3eee59c7cbb2b0f42cac972f"
+      },
+      {
+        "control": "m1-oversized-tool",
+        "result": "refused",
+        "code": "NATIVE_CARGO_TOOL_REFUSED",
+        "manifestsAndLocksUnchanged": true,
+        "projectBuildScriptExecuted": false
+      },
+      {
+        "control": "m1-out-of-scope-path",
+        "result": "refused",
+        "code": "NATIVE_CARGO_PATH_ESCAPE",
+        "manifestsAndLocksUnchanged": true,
+        "projectBuildScriptExecuted": false
+      },
+      {
+        "control": "m1-explicit-config",
+        "result": "observed",
+        "view": "resolved",
+        "manifestsAndLocksUnchanged": true,
+        "projectBuildScriptExecuted": false,
+        "requestDigest": "sha256:df08c960f7dbe8b3c913649e7b055f988958c6c643ff73ab440e1b9fe06ff5cb",
+        "shardDigest": "sha256:6497b44214c4d030d66dd5aea7c97115551994359794f5e1414f4827c28282ff"
+      },
+      {
+        "control": "m1-unrecorded-config",
+        "result": "refused",
+        "code": "NATIVE_CARGO_CONFIG_INPUT",
+        "manifestsAndLocksUnchanged": true,
+        "projectBuildScriptExecuted": false
+      },
+      {
+        "control": "m1-mismatched-toolchain",
+        "result": "refused",
+        "code": "NATIVE_CARGO_TOOLCHAIN",
+        "manifestsAndLocksUnchanged": true,
+        "projectBuildScriptExecuted": false
+      },
+      {
+        "control": "m1-unrecorded-toolchain",
+        "result": "refused",
+        "code": "NATIVE_CARGO_CONFIG_INPUT",
+        "manifestsAndLocksUnchanged": true,
+        "projectBuildScriptExecuted": false
+      },
+      {
+        "control": "m1-executable-override",
+        "result": "refused",
+        "code": "NATIVE_CARGO_CONFIG",
+        "manifestsAndLocksUnchanged": true,
+        "projectBuildScriptExecuted": false
+      },
+      {
+        "control": "m1-ambient-config",
+        "result": "refused",
+        "code": "NATIVE_CARGO_AMBIENT_CONFIG",
+        "manifestsAndLocksUnchanged": true,
+        "projectBuildScriptExecuted": false
+      },
+      {
+        "control": "m1-tool-substitution",
+        "result": "refused",
+        "code": "NATIVE_CARGO_TOOL_CHANGED",
+        "manifestsAndLocksUnchanged": true,
+        "projectBuildScriptExecuted": false
+      },
+      {
+        "control": "m1-stale-source",
+        "result": "refused",
+        "code": "NATIVE_SOURCE_CHANGED",
+        "manifestsAndLocksUnchanged": true,
+        "projectBuildScriptExecuted": false
+      },
+      {
+        "control": "m1-native-workspace-offline-reconstruction",
+        "result": "verified",
+        "providerAndConfiguredCargoRustcAndManifestUnavailable": true,
+        "boundedMemberExpansionReplayed": true,
+        "externalProgramsAbsentFromPath": true,
+        "retainedMoves": [
+          {
+            "configuredPathNowUnavailable": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-discovery/captured-native-provider",
+            "preservedAt": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-discovery/captured-native-provider.retained"
+          },
+          {
+            "configuredPathNowUnavailable": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-discovery/captured-cargo",
+            "preservedAt": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-discovery/captured-cargo.retained"
+          },
+          {
+            "configuredPathNowUnavailable": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-discovery/captured-rustc",
+            "preservedAt": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-discovery/captured-rustc.retained"
+          },
+          {
+            "configuredPathNowUnavailable": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-discovery/cases/workspace-bridge/Cargo.toml",
+            "preservedAt": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-discovery/cases/workspace-bridge/Cargo.toml.retained"
+          }
+        ]
+      },
+      {
+        "control": "m1-rehashed-native-workspace-lineage",
+        "result": "refused",
+        "code": "WORKSPACE_COMPOSITION_BINDING"
+      },
+      {
+        "control": "g4-retained-input-stage",
+        "result": "staged",
+        "captureDigest": "sha256:6abd2a581d04ac05eb92028053dfd38fe42af3a44a89366580d23b294d7bdca5",
+        "originalSelectedSourceRootUnavailable": true,
+        "sourcePreservedAt": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-discovery/cases/base-staging-retained",
+        "externalProgramsAbsentFromPath": true,
+        "inputCount": 2,
+        "selectedInputDigests": {
+          "Cargo.toml": "sha256:9cb76678fbddb3d27f414c96effc40e97e18f99ecafeafec31de4a35fb00286b",
+          "app/src/main.rs": "sha256:536e506bb90914c243a12b397b9a998f85ae2cbd9ba02dfd03a9e155ca5ca0f4"
+        },
+        "compilationEstablished": false
+      },
+      {
+        "control": "g4-stage-no-overwrite",
+        "result": "refused",
+        "code": "PROJECT_STAGE_DESTINATION_UNAVAILABLE",
+        "selectedBytesUnchanged": true
+      },
+      {
+        "control": "g4-stage-tamper-before-creation",
+        "result": "refused",
+        "code": "PROJECT_RECORD_INPUT",
+        "destinationCreated": false
+      }
+    ],
+    "engines": {
+      "compiler": "sha256:97c1a1fa1b1721e774bc7ac1bd456f9307835aeae40c25b620965316f8de1e03",
+      "documentType": "executor-description",
+      "governance": "sha256:5f0282418fabb491259c63d396880df37137d4812e5b25ac7b4eaf5c19458524",
+      "schemaVersion": "0.1.0",
+      "scientific": "sha256:4922a8e184b9a56f39f128577068e6c59295fcbdb5cce819e4b5946eea1499b1",
+      "workspace": "sha256:58d7706c0a7d701e8fab3d3152860bc3fc9d406b4e1b11bbb2ad82099647d42f"
+    },
+    "nativeBinaryDigest": "sha256:c5ba87bb646320ec6385a1a633d21848ee434940107b85be7cbffbf4dbacf2c4",
+    "newNativeTomlUnitTests": 10,
+    "memberExpansionUnitTests": 3,
+    "segmentGlobProviderControls": 5,
+    "existingBoundedProcessTests": 2,
+    "cargo": {
+      "path": "/home/runner/.rustup/toolchains/1.99.0-x86_64-unknown-linux-gnu/bin/cargo",
+      "digest": "sha256:e951141cc55a6cd7b9876d187bd30a3720e6086b99413af95e3b8de1cdd72f14"
+    },
+    "rustc": {
+      "path": "/home/runner/.rustup/toolchains/1.99.0-x86_64-unknown-linux-gnu/bin/rustc",
+      "digest": "sha256:f3834d26669b03f6855fa54bd2381443123e860167bc0c7a8dd137e5cf6e5e4f"
+    },
+    "compiledFixtureEstablishedByTheseObservations": false,
+    "limits": {
+      "workspaceMembers": "literal default; separate whole-segment and prefix/suffix single-star modes, bounded enumeration and exact captured expansion; literal exclusions remain opt-in",
+      "ambientConfig": "outside owner root refuses without copying values",
+      "cargoConfig": "only matching build.target and net.offline=true",
+      "artifactAndRuntimeAcceptance": "not established"
+    }
+  },
+  "sourceUnchanged": true,
+  "finishedUtc": "2026-10-21T16:27:46.427210+00:00"
+}

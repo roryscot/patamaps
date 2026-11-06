@@ -605,3 +605,267 @@ fn literal_exclusions_skip_only_exact_ordinary_glob_directories() {
     }
     eprintln!("Retained exclusion fixture: {}", root.display());
 }
+
+fn segment_glob_fixture() -> std::path::PathBuf {
+    use std::sync::atomic::{AtomicU64, Ordering};
+    static SEQ: AtomicU64 = AtomicU64::new(0);
+    let root = std::env::temp_dir().join(format!(
+        "patamaps-segment-members-{}-{}",
+        std::process::id(),
+        SEQ.fetch_add(1, Ordering::Relaxed)
+    ));
+    fs::create_dir(&root).unwrap();
+    let root = fs::canonicalize(root).unwrap();
+    eprintln!("Retained segment member fixture: {}", root.display());
+    root
+}
+
+#[test]
+fn segment_mode_handles_real_axum_member_shape_without_widening_old_mode() {
+    let root = segment_glob_fixture();
+    let mut captured = BTreeMap::new();
+    for name in ["axum", "axum-core", "axum-extra", "axum-macros"] {
+        fs::create_dir(root.join(name)).unwrap();
+        let raw = format!("[package]\nname='{name}'\nversion='0.1.0'\n");
+        fs::write(root.join(name).join("Cargo.toml"), &raw).unwrap();
+        captured.insert(format!("{name}/Cargo.toml"), raw);
+    }
+    let raw = "[workspace]\nmembers=['axum','axum-*']\nresolver='2'\n";
+    fs::write(root.join("Cargo.toml"), raw).unwrap();
+    fs::write(root.join("README.md"), "unmatched ordinary file").unwrap();
+    captured.insert("Cargo.toml".to_owned(), raw.to_owned());
+    let inputs = captured
+        .iter()
+        .map(|(p, s)| (p.as_str(), s.as_str()))
+        .collect::<Inputs<'_>>();
+    assert!(
+        serde_json::from_str::<CargoMemberMode>("\"bounded-segment-globs\"").unwrap()
+            == CargoMemberMode::BoundedSegmentGlobs
+    );
+    let expansions = validate_manifest_paths(
+        &root,
+        &inputs,
+        CargoMemberMode::BoundedSegmentGlobs,
+        CargoExclusionMode::RefuseWithGlobs,
+    )
+    .unwrap();
+    assert_eq!(expansions.len(), 1);
+    assert_eq!(expansions[0]["pattern"], "axum-*");
+    assert_eq!(
+        expansions[0]["manifests"],
+        json!([
+            "axum-core/Cargo.toml",
+            "axum-extra/Cargo.toml",
+            "axum-macros/Cargo.toml"
+        ])
+    );
+    assert!(
+        validate_manifest_paths(
+            &root,
+            &inputs,
+            CargoMemberMode::BoundedDirectoryGlobs,
+            CargoExclusionMode::RefuseWithGlobs
+        )
+        .is_err()
+    );
+    assert!(
+        validate_manifest_paths(
+            &root,
+            &inputs,
+            CargoMemberMode::LiteralPaths,
+            CargoExclusionMode::RefuseWithGlobs
+        )
+        .is_err()
+    );
+}
+
+#[test]
+fn segment_mode_suffix_capture_exclusions_and_matching_file_refusals() {
+    let root = segment_glob_fixture();
+    for name in ["api-service", "db-service", "other"] {
+        fs::create_dir(root.join(name)).unwrap();
+        fs::write(root.join(name).join("Cargo.toml"), "captured separately").unwrap();
+    }
+    fs::write(root.join("db-service/Cargo.toml"), [0xff, 0xfe]).unwrap();
+    let inputs = Inputs::from([("api-service/Cargo.toml", "a")]);
+    let excluded = BTreeSet::from(["db-service".to_owned()]);
+    let empty_inputs = Inputs::new();
+    let empty_exclusions = BTreeSet::new();
+    let expand = |pattern, selected, excluded| {
+        expand_member_filtered_mode(
+            &root,
+            &root,
+            pattern,
+            selected,
+            excluded,
+            CargoMemberMode::BoundedSegmentGlobs,
+        )
+    };
+    assert_eq!(
+        expand("*-service", &inputs, &excluded).unwrap(),
+        (
+            vec!["api-service/Cargo.toml".to_owned()],
+            vec!["db-service".to_owned()]
+        )
+    );
+    assert_eq!(
+        expand("a*ce", &inputs, &empty_exclusions).unwrap().0,
+        vec!["api-service/Cargo.toml".to_owned()]
+    );
+    assert_eq!(
+        expand("api*-service", &inputs, &empty_exclusions)
+            .unwrap()
+            .0,
+        vec!["api-service/Cargo.toml".to_owned()]
+    );
+    assert!(expand("api-service*service", &inputs, &empty_exclusions).is_err());
+    assert!(matches!(
+        expand("*-service", &empty_inputs, &excluded),
+        Err(Error::Refused {
+            code: "NATIVE_CARGO_MANIFEST_INPUT",
+            ..
+        })
+    ));
+    assert!(matches!(
+        expand("a*ce", &empty_inputs, &empty_exclusions),
+        Err(Error::Refused {
+            code: "NATIVE_CARGO_MANIFEST_INPUT",
+            ..
+        })
+    ));
+    fs::write(
+        root.join("file-service"),
+        "must not be treated as a directory",
+    )
+    .unwrap();
+    assert!(matches!(
+        expand("*-service", &inputs, &excluded),
+        Err(Error::Refused {
+            code: "NATIVE_CARGO_MEMBERS",
+            ..
+        })
+    ));
+}
+
+#[test]
+fn segment_mode_preserves_unsupported_patterns_and_matching_symlink_refusals() {
+    let root = segment_glob_fixture();
+    fs::create_dir(root.join("axum-core")).unwrap();
+    fs::write(root.join("axum-core/Cargo.toml"), "captured").unwrap();
+    let inputs = Inputs::from([("axum-core/Cargo.toml", "captured")]);
+    for pattern in [
+        "axum-**",
+        "*/axum-*",
+        "../axum-*",
+        "axum-*/../x",
+        "axum-?",
+        "axum-[a]",
+        "axum-{core,extra}",
+        "axum-*/",
+        "absent-*",
+    ] {
+        assert!(
+            expand_member_filtered_mode(
+                &root,
+                &root,
+                pattern,
+                &inputs,
+                &BTreeSet::new(),
+                CargoMemberMode::BoundedSegmentGlobs
+            )
+            .is_err(),
+            "{pattern}"
+        );
+    }
+    #[cfg(unix)]
+    {
+        std::os::unix::fs::symlink(root.join("axum-core"), root.join("axum-alias")).unwrap();
+        assert!(
+            expand_member_filtered_mode(
+                &root,
+                &root,
+                "axum-*",
+                &inputs,
+                &BTreeSet::from(["axum-alias".to_owned()]),
+                CargoMemberMode::BoundedSegmentGlobs
+            )
+            .is_err()
+        );
+    }
+}
+
+#[test]
+fn segment_mode_bounds_all_inspected_names_even_when_they_do_not_match() {
+    let root = segment_glob_fixture();
+    fs::create_dir(root.join("axum-core")).unwrap();
+    fs::write(root.join("axum-core/Cargo.toml"), "captured").unwrap();
+    for n in 0..1024 {
+        fs::write(root.join(format!("unmatched-{n}")), "not selected").unwrap();
+    }
+    let inputs = Inputs::from([("axum-core/Cargo.toml", "captured")]);
+    assert!(matches!(
+        expand_member_filtered_mode(
+            &root,
+            &root,
+            "axum-*",
+            &inputs,
+            &BTreeSet::new(),
+            CargoMemberMode::BoundedSegmentGlobs
+        ),
+        Err(Error::Refused {
+            code: "NATIVE_CARGO_MEMBERS",
+            ..
+        })
+    ));
+}
+
+#[test]
+fn cargo_declared_local_allows_omitted_lockfile_but_resolved_requires_one() {
+    let config = serde_json::from_value::<Config>(json!({
+        "provider": "cargo",
+        "nonsecretInputs": true,
+        "manifest": "src-tauri/Cargo.toml",
+        "workspaceManifest": "src-tauri/Cargo.toml",
+        "cargo": "/toolchain/bin/cargo",
+        "cargoDigest": format!("sha256:{}", "0".repeat(64)),
+        "rustc": "/toolchain/bin/rustc",
+        "rustcDigest": format!("sha256:{}", "0".repeat(64)),
+        "cargoHome": "/tmp/cargo-home",
+        "platform": "x86_64-apple-darwin",
+        "features": [],
+        "defaultFeatures": true,
+        "view": "declared-local"
+    }))
+    .unwrap();
+    let Config::Cargo(config) = config else {
+        panic!("Cargo config expected");
+    };
+    assert!(config.lockfile.is_none());
+
+    let empty_inputs = BTreeMap::new();
+    let root = Path::new("/not-a-live-owner-root");
+    let workspace_root = root;
+    assert!(
+        validate_cargo_lockfile(
+            DependencyView::DeclaredLocal,
+            None,
+            &empty_inputs,
+            root,
+            workspace_root,
+        )
+        .is_ok()
+    );
+    assert!(matches!(
+        validate_cargo_lockfile(
+            DependencyView::Resolved,
+            None,
+            &empty_inputs,
+            root,
+            workspace_root,
+        ),
+        Err(Error::Refused {
+            code: "NATIVE_CARGO_LOCK",
+            ..
+        })
+    ));
+}

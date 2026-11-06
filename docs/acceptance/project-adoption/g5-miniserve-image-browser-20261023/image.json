@@ -1,0 +1,105 @@
+{
+  "status": "passed-real-rust-image-browser",
+  "imageId": "sha256:0068229dba971ba5a1579b8176b425f1a806ca7d7099cb0efe6ac8a0e2e639ce",
+  "base": "ubuntu@sha256:534baea6a22c03a63003dbc8dbe78fe34bc0d7e595d9a9dc9834884ff530eb55",
+  "baseImageId": "sha256:69f919497cada9a8611f3de61df902d9f94bf20f84552ef5bd93125c38608ef9",
+  "bundleFiles": {
+    "launch.sh": "sha256:81378c875ea36328a3a218a0d667df19fa2ce3aa211b13024379525a5595be20",
+    "probe.sh": "sha256:12c973f73c2f70b5c666f7951fafb7c0ee0b433e5cef7abd7e9ded2025897f72",
+    "configuration.json": "sha256:4b7dc23a775e4538362e7849dd814cb70fb002dd706d29059ba248bc054b631e",
+    "miniserve": "sha256:453ff86b8df2521d3ad516bf78037646e704b0a1727cee65ee9210efdc9bfd69",
+    "public/status.txt": "sha256:6353ec260e0cf4741e5a52a74bc3b4a41554bfa85b81b266341642bd298edeed"
+  },
+  "contextFiles": {
+    "MINISERVE-LICENSE": "sha256:bedb87f0760796c7be677651eb10ad949410e90c55bc7f607d848e8e9d65375a",
+    "Dockerfile": "sha256:012d4cad83a9a96814560f7f6d308b657f726c67ab1490a452bc174e1bfae357",
+    "bundle/launch.sh": "sha256:81378c875ea36328a3a218a0d667df19fa2ce3aa211b13024379525a5595be20",
+    "bundle/probe.sh": "sha256:12c973f73c2f70b5c666f7951fafb7c0ee0b433e5cef7abd7e9ded2025897f72",
+    "bundle/configuration.json": "sha256:4b7dc23a775e4538362e7849dd814cb70fb002dd706d29059ba248bc054b631e",
+    "bundle/miniserve": "sha256:453ff86b8df2521d3ad516bf78037646e704b0a1727cee65ee9210efdc9bfd69",
+    "bundle/public/status.txt": "sha256:6353ec260e0cf4741e5a52a74bc3b4a41554bfa85b81b266341642bd298edeed"
+  },
+  "browserDependencyLock": "sha256:ebcfa8a29e03904cb1cac186a01dba982cf58d879de254b81a64fc61907c879a",
+  "applicationRecompiled": false,
+  "hostNetwork": true,
+  "networkIsolationClaimed": false,
+  "productionActivation": false,
+  "registryPublication": false,
+  "completeNativeDockerContextObservation": false,
+  "actualEntrypointOverrideRefusedBeforeStart": true,
+  "kernelLimits": [
+    "100000 100000",
+    "268435456",
+    "0",
+    "64"
+  ],
+  "writableFilesystemBytes": [
+    1048576,
+    1048576
+  ],
+  "browser": {
+    "status": "passed",
+    "engine": "chromium",
+    "version": "156.0.8078.4",
+    "controls": [
+      "rendered-real-directory-listing",
+      "actual-file-link-navigation-and-exact-text",
+      "browser-history-return-navigation",
+      "missing-document-browser-refusal",
+      "out-of-prefix-browser-refusal",
+      "no-script-errors-or-off-origin-requests"
+    ],
+    "actualFileLinkNavigation": true,
+    "actualBrowserHistoryNavigation": true,
+    "pageErrors": [],
+    "offOriginRequests": [],
+    "requests": [
+      {
+        "method": "GET",
+        "url": "http://127.0.0.1:9100/qualified/"
+      },
+      {
+        "method": "GET",
+        "url": "http://127.0.0.1:9100/qualified/__miniserve_internal/style.css"
+      },
+      {
+        "method": "GET",
+        "url": "http://127.0.0.1:9100/qualified/status.txt"
+      },
+      {
+        "method": "GET",
+        "url": "http://127.0.0.1:9100/qualified/"
+      },
+      {
+        "method": "GET",
+        "url": "http://127.0.0.1:9100/qualified/__miniserve_internal/style.css"
+      },
+      {
+        "method": "GET",
+        "url": "http://127.0.0.1:9100/qualified/not-present.txt"
+      },
+      {
+        "method": "GET",
+        "url": "http://127.0.0.1:9100/qualified/__miniserve_internal/style.css"
+      },
+      {
+        "method": "GET",
+        "url": "http://127.0.0.1:9100/status.txt"
+      },
+      {
+        "method": "GET",
+        "url": "http://127.0.0.1:9100/qualified/__miniserve_internal/style.css"
+      }
+    ]
+  },
+  "imageRuntimeBytesMatchSelected": true,
+  "contextAndSelectedBundleUnchanged": true,
+  "runtimeHostBindMounts": false,
+  "imageArchive": {
+    "path": "image-artifacts/miniserve-image.tar.gz",
+    "digest": "sha256:12de2713be67b295f22714df7077639a521fe3495f4226107e8d7007ecf5c3a2",
+    "bytes": 32951944,
+    "uncompressedBytes": 88388096
+  },
+  "ownedContainerAndListenerStopped": true
+}

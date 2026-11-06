@@ -163,6 +163,26 @@ def verify(root, work, env, run):
     wrapper.chmod(0o700)
     provider("g3-globs-post-metadata-change",racing,configuration(workspaceMembers="bounded-directory-globs",cargo=str(wrapper.resolve()),cargoDigest=sha(wrapper)),refuse="NATIVE_CARGO_MEMBERS_CHANGED")
 
+    # Prefix/suffix matching is a distinct opt-in; legacy refusal is unchanged.
+    segment_case=cases/"segment-member-globs";shutil.copytree(globbed,segment_case)
+    (segment_case/"Cargo.toml").write_text((segment_case/"Cargo.toml").read_text().replace('members=["crates/*"]','members=["crates/a*","crates/helper","crates/platform"]'))
+    provider("g3-segment-legacy-refuses",segment_case,glob_config,refuse="NATIVE_CARGO_MEMBERS")
+    segment_config=configuration(workspaceMembers="bounded-segment-globs")
+    segmented=provider("g3-segment-explicit",segment_case,segment_config)
+    assert segmented["shard"]["metadata"]["observation"]["workspaceMembers"]=={"mode":"bounded-segment-globs","preAndPostObservedEqual":True,"expansions":[{"manifest":"Cargo.toml","pattern":"crates/a*","manifests":["crates/app/Cargo.toml"]}]}
+    provider("g3-segment-missing-capture",segment_case,segment_config,omitted=("crates/app/Cargo.toml",),refuse="NATIVE_CARGO_MANIFEST_INPUT")
+    segment_invalid=cases/"segment-recursive-refused";shutil.copytree(segment_case,segment_invalid)
+    (segment_invalid/"Cargo.toml").write_text((segment_invalid/"Cargo.toml").read_text().replace('crates/a*','crates/a**'))
+    provider("g3-segment-recursive-refused",segment_invalid,segment_config,refuse="NATIVE_CARGO_MEMBERS")
+    segment_racing=cases/"segment-racing";shutil.copytree(segment_case,segment_racing)
+    segment_wrapper=work/"segment-mutating-cargo"
+    segment_wrapper.write_text("#!"+sys.executable+"\nimport pathlib,subprocess,sys\n"+
+        "result=subprocess.run(["+repr(str(cargo))+",*sys.argv[1:]])\n"+
+        "if sys.argv[1:2]==['metadata']:pathlib.Path("+repr(str(segment_racing/"crates/added-after-metadata"))+").mkdir()\n"+
+        "sys.exit(result.returncode)\n")
+    segment_wrapper.chmod(0o700)
+    provider("g3-segment-post-metadata-change",segment_racing,configuration(workspaceMembers="bounded-segment-globs",cargo=str(segment_wrapper.resolve()),cargoDigest=sha(segment_wrapper)),refuse="NATIVE_CARGO_MEMBERS_CHANGED")
+
     # Exclusions require a second explicit policy; old refusal remains frozen.
     excluded_case=cases/"literal-exclusion";shutil.copytree(globbed,excluded_case)
     excluded_file=excluded_case/"crates/unselected/Cargo.toml";excluded_file.parent.mkdir()
@@ -410,10 +430,10 @@ def verify(root, work, env, run):
         {"control":"g4-stage-no-overwrite","result":"refused","code":"PROJECT_STAGE_DESTINATION_UNAVAILABLE","selectedBytesUnchanged":True},
         {"control":"g4-stage-tamper-before-creation","result":"refused","code":"PROJECT_RECORD_INPUT","destinationCreated":False}])
 
-    return {"status": "passed", "controls": observed, "engines": engine, "nativeBinaryDigest": sha(cli), "newNativeTomlUnitTests": 10, "memberExpansionUnitTests": 3,
+    return {"status": "passed", "controls": observed, "engines": engine, "nativeBinaryDigest": sha(cli), "newNativeTomlUnitTests": 10, "memberExpansionUnitTests": 3, "segmentGlobProviderControls": sum(v["control"].startswith("g3-segment-") for v in observed),
             "existingBoundedProcessTests": 2, "cargo": {"path": str(cargo), "digest": sha(cargo)},
             "rustc": {"path": str(rustc), "digest": sha(rustc)}, "compiledFixtureEstablishedByTheseObservations": False,
-            "limits": {"workspaceMembers": "literal default; opt-in one-star directory glob and separate literal-exclusion policy with exact captured expansion",
+            "limits": {"workspaceMembers": "literal default; separate whole-segment and prefix/suffix single-star modes, bounded enumeration and exact captured expansion; literal exclusions remain opt-in",
                        "ambientConfig": "outside owner root refuses without copying values",
                        "cargoConfig": "only matching build.target and net.offline=true",
                        "artifactAndRuntimeAcceptance": "not established"}}

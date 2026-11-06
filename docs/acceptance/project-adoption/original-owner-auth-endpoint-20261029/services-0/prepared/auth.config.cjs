@@ -1,0 +1,3 @@
+const path=require('node:path');
+const original=require("/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/original-owner-five-project-browser-20261027/tools/packages/web/playwright.config.ts").default;
+module.exports={...original,testDir:__dirname,testMatch:'auth.spec.cjs',testIgnore:[],workers:1,retries:0,maxFailures:1,timeout:20000,globalTimeout:120000,reporter:[['json',{outputFile:path.join(process.env.PATAMAPS_BROWSER_OUTPUT,'results.json')}]],outputDir:path.join(process.env.PATAMAPS_BROWSER_OUTPUT,'artifacts'),use:{...original.use,baseURL:process.env.PLAYWRIGHT_TEST_BASE_URL,proxy:{server:process.env.PATAMAPS_TEST_PROXY},screenshot:'only-on-failure',trace:'off'}};

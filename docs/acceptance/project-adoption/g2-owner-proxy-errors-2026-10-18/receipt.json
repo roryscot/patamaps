@@ -1,0 +1,96 @@
+{
+  "status": "passed-native-proxy-profile-client-controls",
+  "scope": "Native owner-profile emission, strict TypeScript compilation and controlled client transport responses; not actual network/Next runtime acceptance",
+  "commands": [
+    {
+      "label": "emit-http-client",
+      "exitCode": 0,
+      "seconds": 0.082
+    },
+    {
+      "label": "emit-axum-witness",
+      "exitCode": 0,
+      "seconds": 0.04
+    },
+    {
+      "label": "compile-new",
+      "exitCode": 0,
+      "seconds": 1.834
+    },
+    {
+      "label": "compile-legacy",
+      "exitCode": 0,
+      "seconds": 1.706
+    },
+    {
+      "label": "client-errors",
+      "exitCode": 0,
+      "seconds": 0.136
+    }
+  ],
+  "controls": [
+    {
+      "case": "legacy-undeclared503",
+      "result": "HTTP_ERROR_CONTRACT",
+      "calls": 1,
+      "scope": "controlled transport response, no actual network"
+    },
+    {
+      "case": "declared-frontend503",
+      "result": "admitted",
+      "calls": 1,
+      "scope": "controlled transport response, no actual network"
+    },
+    {
+      "case": "declared-backend415",
+      "result": "admitted",
+      "calls": 1,
+      "scope": "controlled transport response, no actual network"
+    },
+    {
+      "case": "declared-status-invalid-error-shape",
+      "result": "HTTP_ERROR_CONTRACT",
+      "calls": 1,
+      "scope": "controlled transport response, no actual network"
+    },
+    {
+      "case": "invalid-request-not-transmitted",
+      "result": "HTTP_INVALID_REQUEST",
+      "calls": 0,
+      "scope": "controlled transport response, no actual network"
+    }
+  ],
+  "filesDeleted": 0,
+  "applicationAcceptance": false,
+  "runtimeEstablished": false,
+  "sourceAndInputsUnchanged": true,
+  "outputs": {
+    "client.ts": "ab982816530241b6caeb85bc1345a93bfbd91013beb5ac428b0f1f02b5156272",
+    "witness.rs": "853da58a4193703f96692b91c33877a4c026099439e101ef3a24213ba6e358e3",
+    "compiled-new/client.js": "7e1d74c7b676b927c40ff460f3d30f3cf17a41f42dba4a5cf3812252bd8854b6",
+    "compiled-legacy/client.js": "47299c482848b34a3f2f0e1f3710d74bcad8940c4b84aa388950c3baade8dab7"
+  },
+  "compilerSha256": "c06d5f4821be3b2f437c316b979ea41dd48242c2452bd2038c1bab5dde2bd58b",
+  "actualNextProxyRuntime": "not run",
+  "actualRustTcpRuntime": "not run",
+  "selectedInputsAndToolsVerifiedDuringRun": 17,
+  "profileRevision": "2",
+  "declaredStatusesAdded": [
+    415,
+    503
+  ],
+  "legacyProfilePreserved": true,
+  "originalApplicationUnchanged": true,
+  "currentRecheck": {
+    "remainingInputDigestsMatch": 16,
+    "generatedOutputDigestsMatch": 4,
+    "emitterAvailableAtRecordedPath": false
+  },
+  "limits": [
+    "Controlled supplied transport replies, not actual Next/Rust network behavior.",
+    "TypeScript client compilation passed; the newly emitted Rust witness has not been compiled in this increment.",
+    "Pinned emitter is absent from its recorded path on recheck. This receipt proves the completed run; it does not establish current emission rerun readiness.",
+    "Prepared production network controls remain unrun; G2-G6 and whole-project acceptance remain incomplete."
+  ],
+  "privateReceiptSha256": "sha256:62f45458492e412dd0997e3fc2512a7caefd995bf5f74fe0aa1aaef05ac3d094"
+}

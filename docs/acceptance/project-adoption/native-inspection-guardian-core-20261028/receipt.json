@@ -1,0 +1,64 @@
+{
+  "status": "passed-independent-real-readonly-guardian-review",
+  "nativeCallsPassed": 3,
+  "commandRoles": [
+    "engine",
+    "project-build-verify",
+    "project-build-input-key"
+  ],
+  "protectedStateUnchanged": true,
+  "originalApplicationAttempts": 1,
+  "newApplicationAttempts": 0,
+  "applicationBuildsRun": 0,
+  "legacyGuardianControlSets": [
+    {
+      "control": "runner-death",
+      "result": "passed",
+      "cases": 0
+    },
+    {
+      "control": "exits",
+      "result": "passed",
+      "cases": 5
+    },
+    {
+      "control": "inspection-budget",
+      "result": "passed",
+      "cases": 9
+    }
+  ],
+  "observedProcessesStopped": 13,
+  "reservationId": "16dde721-aaa8-441e-8d8c-6316e3711b70",
+  "reservationReleased": true,
+  "qualificationFixtureEnvironmentRestored": true,
+  "incrementRepairsUsed": 2,
+  "initialCompatibilityFixturePassed": false,
+  "nativeCliDigest": "cd9a15943eb96e6a45df582cc92ceda0316f222c695205888d9e47b2d419a355",
+  "sourceBindings": {
+    "scripts/native_inspection.py": "9e623779667f97fd53e6c84de7cade52ee9cc08aadae69b5997cfb3f6422447e",
+    "scripts/native_inspection_guard.py": "f7416243f4100377044347cb034e895c4df4bc5e52180f12f8749b998817f2bd",
+    "scripts/project_watch.py": "94b3b1ccdd936a044fc815772ee72ecbdf2344701e57cd5f7a2fdf9b778ecf85",
+    "scripts/project_watch_guard_controls.py": "714fcfeffd5e4ab9cc447d2dbd9e2c331f014dd2a0dedd827600d1be6c2f2e63"
+  },
+  "coordinatorDigest": "04058cbb390393ab9c38fd708f4f8eb843e70281fa3666a16fe07666a076c741",
+  "automaticReservationReleaseQualified": false,
+  "actualOwnerWatchRetried": false,
+  "unchangedBuildLockQualified": false,
+  "installedSupervisorChanged": false,
+  "parallelActivated": false,
+  "reviewerDigest": "f4bbb5bb4fbfd6d42b931f39981f02831ecf95b3e793fc07a1e2c31755d59292",
+  "scope": "Actual accepted retained-owner CLI engine, selected-binding verification and input observation through proposed inspection guardian",
+  "sourceProducerCommit": "f6b98a1de648df266a3e1096a029310df6a7af02",
+  "qualificationCommands": [
+    "python3 -B core-compatibility-repair-1/run.py (canonical exclusive guard)",
+    "python3 -B core-compatibility-repair-1/review.py --root CHECKOUT"
+  ],
+  "initialFixtureRefusal": "An argument-parser control inherited the outer allocating token and correctly refused. No real CLI calls ran before this refusal.",
+  "fixtureRepair": "Temporarily remove only that token for the synthetic parser/deadline fixture and explicitly verify restoration; actual work remains under canonical supervision.",
+  "limitations": [
+    "No real-owner watch/crash retrial",
+    "No driver.lock write grant or changed application build",
+    "No installed controller registry/global release predicate change",
+    "No complete runtime attestation, CPU/memory caps or parallel activation"
+  ]
+}

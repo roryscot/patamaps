@@ -1,0 +1,53 @@
+--- staged-registered-stop/guarded-run.mjs
++++ staged-parent-watch/guarded-run.mjs
+@@ -269,6 +269,10 @@
+   } = {},
+ ) {
+   const registered = nativeInspection === null ? null : consumeRegisteredGuardInvocation(nativeInspection);
++  const nativeCommandOwner = registered ? { pid: process.ppid, identity: scheduler?.processIdentity(process.ppid) } : null;
++  const nativeOwnerPresent = () => !registered || (nativeCommandOwner.pid > 1 && nativeCommandOwner.identity != null &&
++    process.ppid === nativeCommandOwner.pid && JSON.stringify(scheduler?.processIdentity(nativeCommandOwner.pid)) === JSON.stringify(nativeCommandOwner.identity));
++  if (!nativeOwnerPresent()) throw new Error("Native command owner identity is unconfirmed before admission");
+   assertUnpaused(directory);
+   const locations = [
+     ...new Set(
+@@ -285,6 +289,7 @@
+   const abortQueue = () => queuedAbort.abort();
+   let lease;
+   if (queued) {
++    const nativeParentQueueTimer = registered ? setInterval(() => { if (!nativeOwnerPresent()) abortQueue(); }, policy.monitorIntervalMs) : null;
+     for (const name of ["SIGINT", "SIGTERM", "SIGHUP"]) process.on(name, abortQueue);
+     try {
+       lease = await scheduler.queueLease(leaseDirectory, scheduler.nativeRequest({
+@@ -296,6 +301,7 @@
+         onQueued: id => console.error(`Build reservation queued: ${id}; inspect with buildctl status`),
+       });
+     } finally {
++      clearInterval(nativeParentQueueTimer);
+       for (const name of ["SIGINT", "SIGTERM", "SIGHUP"]) process.off(name, abortQueue);
+     }
+   } else lease = inherited ?? acquireLease(leaseDirectory, label);
+@@ -315,6 +321,7 @@
+     leaseDirectory,
+     completed: false,
+     filesDeleted: 0,
++    ...(registered ? { nativeCommandOwner } : {}),
+     initialCompilationEnvironment: Object.fromEntries(
+       [
+         "CARGO_INCREMENTAL",
+@@ -351,6 +358,7 @@
+       if (environment.BUILDCTL_PHASE === "benchmark" && containersBefore.ids.length)
+         throw new Error("Benchmark phase requires an isolated runtime; existing containers are unreserved");
+     }
++    if (!nativeOwnerPresent()) throw new Error("Native command owner stopped before launch");
+     // A launch attempt is conservatively held until concrete registered stop proof.
+     if (registered) safeToRelease = false;
+     const child = registered ? await registered.start(snapshot => {
+@@ -418,6 +426,7 @@
+     };
+     const watch = () => {
+       try {
++        if (!nativeOwnerPresent()) throw new Error("Storage guard: native command owner parent stopped; stopping registered inspection");
+         if (reservation) {
+           try { reservation.update(lease.buildctlRequest, {
+             heartbeat: now(), progress: `Child pid ${child.pid}; output bytes ${outputBytes}; last output ${lastOutputAt ?? "none"}`,

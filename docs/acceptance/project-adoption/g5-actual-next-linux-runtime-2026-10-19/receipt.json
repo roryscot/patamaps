@@ -1,0 +1,50 @@
+{
+  "status": "passed-selected-linux-standalone-http-scope",
+  "cases": [
+    "pinned-linux-runtime-and-exact-artifacts",
+    "host-source-and-compiler-paths-unavailable",
+    "public-html:/",
+    "public-html:/login",
+    "existing-client-protected-route-html",
+    "scripted-user-agent-refusal"
+  ],
+  "applicationAcceptance": false,
+  "linuxBuildEstablished": false,
+  "clientAuthNavigation": "requires-browser-not-established-by-http",
+  "ownedServerStopped": true,
+  "listenerStopped": true,
+  "hostReadDenials": [
+    {
+      "target": "selected-owner-source",
+      "code": "ENOENT"
+    },
+    {
+      "target": "configured-native-compiler",
+      "code": "ENOENT"
+    },
+    {
+      "target": "original-owner-source",
+      "code": "ENOENT"
+    }
+  ],
+  "runtimeReceiptSha256": "c1b78436f15564902c2c5175c700271c1b59da943de21a90a0363e3e6b84cb1d",
+  "nodeSha256": "5796fd9700e83170bc7ddfdf7f18858c794a9f91cb39dd6f9e95060b292f2563",
+  "driverDigests": {
+    "stage.py": "95dbf98d29b15a5db7e74fb736d21c147e071ea785d223ed8ff68f4826f53786",
+    "controls.mjs": "1cff1a24f710fc55f6afd8e104d397a64b546ed004c51a99c86428d0c302dd1e"
+  },
+  "limits": {
+    "cpu": 2,
+    "memoryBytes": 1610612736,
+    "diskBytes": 2147483648
+  },
+  "image": "sha256:69f919497cada9a8611f3de61df902d9f94bf20f84552ef5bd93125c38608ef9",
+  "sourceMount": false,
+  "network": "none",
+  "rootFilesystem": "read-only",
+  "limitations": [
+    "Artifacts were built on Darwin; this is Linux runtime qualification, not Linux build evidence.",
+    "HTTP does not establish authenticated client navigation or browser acceptance.",
+    "Full application and deployment refusal controls remain open."
+  ]
+}

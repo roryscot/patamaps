@@ -1,0 +1,45 @@
+{
+  "status": "passed-focused-preflight-runtime-unrun",
+  "recordedAt": "2026-10-24T19:30:55.679311+00:00",
+  "hostArchitecture": "x86_64",
+  "commands": [
+    {
+      "command": "python3 -B -m unittest discover -s scripts -p test_chatbot_dynamic_profile.py",
+      "tests": 11,
+      "passed": true
+    },
+    {
+      "command": "python3 -B -m unittest discover -s scripts -p test_next_source_acquisition.py",
+      "tests": 4,
+      "passed": true
+    },
+    {
+      "command": "node --check scripts/qualify_chatbot_auth.mjs",
+      "passed": true
+    },
+    {
+      "command": "ruby -ryaml: YAML.load_file for both changed workflows",
+      "passed": true
+    },
+    {
+      "command": "ast.parse for four changed Python modules",
+      "passed": true
+    },
+    {
+      "command": "git diff --check",
+      "passed": true
+    }
+  ],
+  "retainedFixtures": ".tools/dynamic-preflight-oh_ajm23",
+  "runtimeAccepted": false,
+  "nativeMeasurementRun": false,
+  "sourceDigests": {
+    "scripts/chatbot_dynamic_profile.py": "sha256:eeac84bffdadb8cfabc917db44ec6764e57875ad9a2984cfe7461946b0ad8509",
+    "scripts/test_chatbot_dynamic_profile.py": "sha256:e15fb98f5170fca5325f404229cb83b69316bd97bfa05209a096e2be6683c402",
+    "scripts/qualify_chatbot_auth.mjs": "sha256:95fb16a1f13a8aa1c8bf77bfb94a654a3ac6ad3aef530193354da49dd78142ff",
+    "scripts/qualify_chatbot_next.py": "sha256:2c0413e4a3bd555a7096cac2c27f633af9ca68b1f59aa128640a80eeaddf7c9c",
+    "scripts/qualify_chatbot_runtime.py": "sha256:383e1685ddb2f2fcbe3c0c99111ebe49a8e5ddbcd8919f5e6478a66ee2cd854e",
+    ".github/workflows/native-capabilities.yml": "sha256:6fc7e2bd5f2288f4ea8431352cd3d14ec5b42c0a3c7bc4b1549852e585f7bc5b",
+    ".github/workflows/next-server-actions.yml": "sha256:a95818e2ee60391906b62087305ebedb4462536f0d4a956085dc7e918ad0ee63"
+  }
+}

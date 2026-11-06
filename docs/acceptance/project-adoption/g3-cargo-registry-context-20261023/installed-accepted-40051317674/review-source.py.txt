@@ -1,0 +1,51 @@
+from pathlib import Path,PurePosixPath
+import subprocess,json,io,zipfile,tarfile,hashlib
+r=Path("/Volumes/dev_src_case_sensitive/projects/patamaps");gh=r/".tools/intel-gh-2.102.0-20261015/unpacked/gh_2.102.0_macOS_amd64/bin/gh"
+revision="77db11936f3e7e2f71a923e0d49c2b290d0df8a7";runid=40051317674;aid=12543472274
+def api(path,raw=False):
+ v=subprocess.check_output([str(gh),"api","repos/roryscot/patamaps/"+path],cwd=r,timeout=90);return v if raw else json.loads(v)
+def digest(raw):return "sha256:"+hashlib.sha256(raw).hexdigest()
+meta=api(f"actions/artifacts/{aid}");run=api(f"actions/runs/{runid}");assert run["conclusion"]=="success" and run["head_sha"]==revision and meta["workflow_run"]["head_sha"]==revision and meta["workflow_run"]["id"]==runid and not meta["expired"]
+raw=api(f"actions/artifacts/{aid}/zip",True);assert len(raw)==meta["size_in_bytes"]==18462557 and digest(raw)==meta["digest"]=="sha256:3d017d9623a3995b36aaa96ea4157473ca6a9306ad527d4633bafc217e85914c"
+z=zipfile.ZipFile(io.BytesIO(raw));assert len(z.namelist())==len(set(z.namelist()))
+receipt=json.loads(z.read("receipt.json"));assert receipt["status"]=="passed-installed-external-rust-workflow" and receipt["sourceRevision"]==revision and receipt["producerRevision"]=="73c7c882df86696d9990035d40f233cab19a0398" and receipt["producerRun"]==40050181349
+assert all(c["exitCode"]==c["expectedExitCode"] for c in receipt["commands"])
+for key in ["installedSourceInventoryUnchanged","selectedInputsAndPointerUnchanged","lateArtifactRefusedBeforeEffects","producerAndTestCompilersUnavailableRuntimePassed","nativePackageInstallerExercised","freshSourceCargoInstall","actualHttp"]:assert receipt[key],key
+assert not any(receipt[k] for k in ["applicationRecompiled","productionActivation","registryPublication","completeDependencyClosure"])
+frozen=json.loads((r/"docs/acceptance/project-adoption/g3-cargo-registry-context-20261023/registry-accepted-40050181349/receipt.json").read_text());engine=frozen["relocatedCompiler"]["engine"]
+replay=receipt["registryReplay"];assert replay["status"]=="passed-source-native-installed-registry-replay"
+for key in ["registryMemberTamperRefusedBeforeEffects","restoredBindingsVerified","selectedBytesUnchanged"]:assert replay[key]
+assert replay["archiveDigest"]==frozen["cargoRegistryContext"]["retainedStateArchive"]["digest"] and replay["registryContextDigest"]==frozen["cargoRegistryContext"]["snapshotDigest"]
+assert set(replay["installations"])==set(receipt["installations"])=={"source","native"}
+for label in ["source","native"]:
+ assert all(replay["installations"][label].values())
+ installed=receipt["installations"][label];assert installed["engine"]==engine and installed["postExecutionSelectionVerified"] and installed["runtimeControls"]==frozen["runtimeControls"] and len(installed["runtimeControls"])==8
+ consumer=json.loads(z.read("consumer-"+label+"/receipt.json"));assert consumer["engine"]==engine and consumer["sourceInventoryUnchanged"] and consumer["execution"]["postExecutionSelectionVerified"]
+distribution=receipt["distribution"];assert distribution==json.loads(z.read("package/distribution.json")) and distribution["engines"]==engine and distribution["binaryDigest"]=="sha256:"+frozen["relocatedCompiler"]["sha256"]
+source_files={};source_inventory=None;native_binary=None
+for kind in ["sourceArchive","nativeArchive"]:
+ entry=distribution[kind];archive=z.read("package/"+entry["path"]);assert digest(archive)==entry["digest"]
+ seen=set()
+ with tarfile.open(fileobj=io.BytesIO(archive),mode="r|gz") as tar:
+  for member in tar:
+   path=PurePosixPath(member.name);assert not path.is_absolute() and ".." not in path.parts and len(path.parts)>1 and member.isfile() and not member.mode&0o7000
+   relative="/".join(path.parts[1:]);assert relative not in seen;seen.add(relative)
+   data=tar.extractfile(member).read()
+   if kind=="sourceArchive":
+    if relative=="source-inventory.json":source_inventory=json.loads(data);assert digest(data)==distribution["sourceInventoryDigest"]
+    else:source_files[relative]=dict(digest=digest(data),bytes=len(data))
+   elif relative=="bin/patamaps":native_binary=digest(data)
+assert source_inventory is not None and set(source_files)=={row["path"] for row in source_inventory}
+assert all(source_files[row["path"]]==dict(digest=row["digest"],bytes=row["bytes"]) for row in source_inventory)
+assert len(source_files)==receipt["sourceFiles"] and native_binary==distribution["binaryDigest"]
+for key,value in receipt["productionObjects"].items():assert subprocess.check_output(["git","rev-parse",revision+":"+key],cwd=r,text=True).strip()==value
+source_programs=0
+for name,value in source_files.items():
+ if name.startswith(("crates/","scripts/","adapters/","sdk/")):
+  original=subprocess.check_output(["git","show",revision+":"+name],cwd=r,timeout=10);assert digest(original)==value["digest"];source_programs+=1
+ci=dict(runId=runid,sourceRevision=revision,artifactId=aid,artifactDigest=meta["digest"],artifactBytes=len(raw),status="independently-verified-passed",artifactExpiresAt=meta["expires_at"],fullArchiveRetained=False)
+verification={**ci,"status":"passed-independent-installed-registry-review","sourceFilesVerified":len(source_files),"sourceProgramFilesMatchedToGit":source_programs,"nativeBinaryDigest":native_binary,"registryReplayVerified":True,"sourceAndNativeEightHttpControls":True,"lateRuntimeAndRegistryRefusedBeforeEffects":True,"restoredSelectedBytesUnchanged":True,"producerAndCompilersUnavailableRuntimePassed":True,"applicationRecompiled":False,"completeDependencyClosure":False,"filesDeleted":0}
+out=r/"docs/acceptance/project-adoption/g3-cargo-registry-context-20261023/installed-accepted-40051317674";out.mkdir(exist_ok=False)
+for name,value in [("receipt.json",receipt),("ci.json",ci),("independent-verification.json",verification),("distribution.json",distribution)]:(out/name).write_text(json.dumps(value,indent=2)+"\n")
+for label in ["source","native"]:(out/("consumer-"+label+".json")).write_text(json.dumps(json.loads(z.read("consumer-"+label+"/receipt.json")),indent=2)+"\n")
+print(json.dumps(verification))

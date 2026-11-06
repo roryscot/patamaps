@@ -1,0 +1,28 @@
+{
+  "runId": 40065213177,
+  "jobId": 120786909558,
+  "sourceRevision": "a8304d31b0dd57ff5d0b106e4f86378d67480728",
+  "status": "failed-before-owner-qualification",
+  "errorCodes": [
+    "E0599"
+  ],
+  "categories": [],
+  "failedNativeTests": [],
+  "testSummaries": [],
+  "sourceLocations": [
+    [
+      "crates/patamaps-workspace/src/project_build.rs",
+      "366",
+      "18"
+    ]
+  ],
+  "nativeLogsDigest": "sha256:6d12604b0b9f186b044dc401fe4254c5c9a28b95dc6f16471191b7969c0449e4",
+  "rawLogsPublished": false,
+  "actualNextQualificationRun": false,
+  "diagnosis": {
+    "errorCode": "E0599",
+    "constructor": "SafeInteger::new",
+    "actualReturnType": "Option<SafeInteger>",
+    "repair": "Use ok_or_else, retaining the same safe-integer refusal."
+  }
+}

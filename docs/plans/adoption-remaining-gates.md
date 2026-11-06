@@ -1,0 +1,706 @@
+# Remaining adoption gates
+
+Current execution authorization: [owner-directed autonomous closeout](2026-11-04-adoption-closeout.md).
+Historical per-attempt approval waits below are superseded by that instruction;
+recorded results, acceptance criteria and resource limits remain unchanged.
+
+This is a read-only audit of the original [G0–G6 requirements](2026-10-15-general-project-adoption.md),
+after the independently reviewed Next dynamic-route result at0f0ce33.
+It is a downstream status view, not a replacement specification or a new goal.
+The [support matrix](../guides/project-support-matrix.md) retains exact source,
+engine, profile and verification limits. Native MetaMap C01–C19 completion stays
+separate. Full adoption completion remains unproven.
+
+## 2026-11-05 execution frontier
+
+The [twelve genuine staged executor cases](../acceptance/project-adoption/native-normal-seal-twelve-cases-20261105/README.md) independently pass seven conservative holds and five automatic stopped-state releases, with28 source decision controls. Both actual discovered defects (duplicate engine output and release after a lost final normal-success record) are corrected in the staged candidate; the qualified bridge is repository source. This does not install or activate trust/parallel execution and does not substitute fixture outcomes for actual owner watch, changed-build, deployment or performance gates.
+
+The [compiled WebSocket configuration rebuilds](../acceptance/project-adoption/websocket-build-limits-20261105/README.md) stopped at their declared3GB/4GB budgets during dependency materialization without selecting an output. Their failures and candidates remain, and their reservations were individually recovered after complete stop/source/selection checks. Real Chromium/Firefox partial authentication evidence remains valid at its scope; all-five-project authentication is still open. Reduce/explain materialization cost before another build; existing ceilings and assertions remain.
+
+Two independently checked non-deleting closed-image batches preserve every logical byte and reduce summed allocation by4,869,586,944bytes, including the [additional five images](../acceptance/project-adoption/closed-images-followup-20261105/README.md). This is capacity recovery, not acceptance of any application gate. The independent quiet-window requirement below remains unresolved; leave unrelated services running.
+
+The corrected Seeder frontend has since passed its two original generators,
+Next production build, six verification commands and separate retained-binding
+review. [Real authentication on that frontend](../acceptance/project-adoption/seeder-webkit-submit-timeout-20261105/README.md)
+passes all 12 direct HTTP cases and six Chromium/Firefox cases. The WebKit
+API reached readiness in the traced run, but its first browser case timed
+out without an observed API request. Both browsers attempted a POST in the
+[focused synthetic form check](../acceptance/project-adoption/seeder-synthetic-submit-20261105/README.md).
+Full five-project authentication is still open.
+
+The form-readiness check subsequently passed all three desktop WebKit
+cases, for nine desktop cases total. A separate real [Mobile Chrome run](../acceptance/project-adoption/seeder-mobile-chrome-viewport-pass-20261105/README.md)
+passed all three cases after translating the visual viewport offset for the
+trusted touch on the exact edited link. The [full rerun](../acceptance/project-adoption/seeder-full-viewport-accounting-stop-20261105/README.md)
+stopped on live volume accounting and later released only the proven-stopped
+reservation. Mobile Safari and a complete 15-case result remain open.
+
+The [single-request accounting candidate](../acceptance/project-adoption/seeder-single-deadline-accounting-20261106/README.md)
+passed its deadline and matching-inventory controls. A separately
+[admitted Mobile Safari attempt](../acceptance/project-adoption/seeder-mobile-safari-growth-stop-20261106/README.md)
+stopped before API or browser launch when the guard observed 654 MB of
+conservative growth against a 300 MB reservation. The exact stopped
+reservation was recovered and its failure preserved. This adds no
+Safari acceptance and leaves the full matrix open.
+
+The [actual borrowed runtime replay](../acceptance/project-adoption/seeder-readonly-runtime-http-20261106/README.md)
+passed all seven public Next HTTP and compiled-asset checks under the
+write-denial profile, with three producer paths temporarily unavailable.
+It supports reuse without another runtime copy. The staged Safari
+launcher now freezes 496 input bindings for 12 HTTP checks and three
+Mobile Safari cases. The latest read-only scan measured 127,142,352
+bytes of retention headroom, 672,857,648 bytes short of the 800 MB
+reservation. The existing 24,720-file duplicate inventory reverified
+against retained recovery bytes. Its deletion requires exact owner
+approval. That [exact cleanup and recovery](../acceptance/project-adoption/seeder-deployment-generation-20261106/approved-recovery-and-cleanup.json)
+subsequently completed. The [focused Mobile Safari result](../acceptance/project-adoption/seeder-mobile-safari-accepted-20261106/README.md)
+passes all 12 direct HTTP checks and all three browser cases, with 31
+preflight checks and stopped resources independently verified. The full
+15-case browser matrix in one invocation remains open.
+
+The [original-owner watcher postcheck](../acceptance/project-adoption/original-owner-watch-readonly-verification-20261106/README.md)
+passed both real native inspections under the read-only guard. The
+[registered counterpart](../acceptance/project-adoption/original-owner-registered-watch-postcheck-20261106/README.md)
+passes 29 source controls. Its first live trial stopped at the growth
+limit while staging the capsule. The failed record was preserved and
+the exact stopped reservation was released. A [staged reuse run](../acceptance/project-adoption/original-owner-registered-retained-capsule-20261106/README.md)
+then passed the live registered pair and refusal controls with the
+pinned, read-only capsule and automatic reservation release. The
+[foreground original-owner watcher](../acceptance/project-adoption/original-owner-foreground-registered-watch-20261106/README.md)
+then passed a no-op and separate post-check, idle SIGTERM, and active
+test-parent death with automatic release. Changed-build lifecycle
+checks remain open.
+
+The [actual installed owner watcher](../acceptance/project-adoption/seeder-stale-installed-selection-refusal-20261106/README.md)
+also refused the retained baseline inputs against the installed edited
+selection. Its two native commands and normal reservation release were
+independently verified. The [earlier context refusal](../acceptance/project-adoption/seeder-stale-selection-context-refusal-20261106/README.md)
+remains separate evidence. Changed-build lifecycle remains open.
+
+The [staged Seeder deployment generation gate](../acceptance/project-adoption/seeder-deployment-generation-20261106/README.md)
+refused the actual older compiled configuration before starting a listener.
+The matching selection passed native verification and seven HTTP checks on the
+declared loopback port. The first harness failure remains recorded. The
+[Linux contract lineage review](../acceptance/project-adoption/seeder-deployment-generation-20261106/linux-contract-lineage.json)
+now binds the historical managed artifact to its older contract and rehashes
+all eight differing later outputs against their independent oracle. The
+[managed launcher preflight](../acceptance/project-adoption/seeder-deployment-generation-20261106/linux-contract-gate-preflight.json)
+passed six pre-effect refusals and the matching launch sequence with stubbed
+effects. Managed stale-contract execution and production activation remain open. A fresh
+retention scan left 126,847,440 bytes of headroom. A later
+[byte-preserving image recovery](../acceptance/project-adoption/closed-preparation-image-recovery-20261106/README.md)
+reclaimed 133,099,520 allocated bytes. Its admission inventory and verified
+reduction imply about 260 MB of headroom, still about 540 MB short of the
+frozen Safari reservation. The [384 MiB managed candidate preflight](../acceptance/project-adoption/seeder-deployment-generation-20261106/linux-384mib-preflight.json)
+verified its source bindings and distinguished the two admission checks.
+The installed managed inventory has room for its doubled quota. The latest
+native scan is 190,540,464 bytes short of the guarded preparation reservation.
+The workspace and runtime remain unrun. A subsequent [guarded source-image inspection](../acceptance/project-adoption/seeder-deployment-generation-20261106/linux-source-inspection-stop.json)
+stopped on growth and left a sealed native reservation. The owned mount
+is closed and the original image hash matches. Three conservative stop
+observations passed. The [subsequently approved recovery and cleanup](../acceptance/project-adoption/seeder-deployment-generation-20261106/approved-recovery-and-cleanup.json)
+released that reservation, preserved the failure receipt and removed the
+24,720 verified duplicate copies. The [live Linux preparation](../acceptance/project-adoption/seeder-deployment-generation-20261106/linux-preparation-growth-stop.json)
+then stopped at its growth limit. It left 752 verified files in a stopped
+managed workspace. The approved release and [guarded resume results](../acceptance/project-adoption/seeder-deployment-generation-20261106/linux-resume-growth-stop.json)
+preserved those files. The new outer lease is held after another growth
+stop before copying. The managed runtime and full browser matrix remain
+unrun. The last measured browser shortfall was 283,484,425 bytes.
+
+The [Wargame managed and browser checks](../acceptance/project-adoption/wargame-owner-managed-and-native-persistence-20261106/README.md)
+pass at their recorded scope. The earlier native suite passed 116 cases
+before its interrupted final reference case. A focused retry
+[failed during FIFO](../acceptance/project-adoption/wargame-owner-reference-db-timeout-20261106/README.md)
+after PostgreSQL closed an idle transaction. The exact case then
+[passed with a read-only observer](../acceptance/project-adoption/wargame-owned-db-observer-20261106/README.md#full-focused-owner-reference-passed),
+including both complete plans and exact cold recovery and history. The
+[source-installed native aggregate](../acceptance/project-adoption/wargame-source-installed-20261106/README.md#full-native-persistence-suite)
+now passes all 117 named cases in a single invocation. Both installed
+Patamaps CLIs [reproduced the exact Wargame client and Axum witness](../acceptance/project-adoption/wargame-installed-profile-20261106/README.md).
+The [native-package owner build and runtime](../acceptance/project-adoption/wargame-installed-network-20261106/README.md)
+then passed with fresh Rust and Next output and all 13 original lab network
+checks. The [source-installed owner build](../acceptance/project-adoption/wargame-source-installed-20261106/README.md)
+passed those same 13 checks and all 22 original desktop and narrow browser
+cases on its new Rust and Next output. All three
+[source-installed managed checks](../acceptance/project-adoption/wargame-source-installed-20261106/README.md#managed-identity-and-detached-restore)
+now have passing evidence across two invocations. The remaining adoption
+gates below are still open.
+
+## What the existing evidence establishes
+
+| Original requirement | Evidence inspected | Remaining requirement |
+| --- | --- | --- |
+| G0 provenance, fixed inputs and preservation of previous accepted results | Original qualification intake; [fixed-source existing-project record](../acceptance/project-adoption/native-fixed-383d0c5/receipt.json); later receipts identify their producing source and exact selected working bytes. | New runs must continue binding source, engine, inputs and owner instructions. A later commit does not retroactively change an older result. |
+| G1 explicit nonsecret input capture, configurable layouts, refusal and source/tool-unavailable replay | The fixed-source record includes actual Wargame and Seeder capture/stage/replay. [Selected Next guide](../guides/selected-next-observations.md) and [Cargo guide](../guides/cargo-workspace-observations.md) expose the declared profiles. | This proves selected-input workflows. It does not reconstruct arbitrary dependencies or qualify an application from metadata alone. |
+| G2 typed HTTP contracts and actual stateful Rust/Next transport | [Finite transport controls](../acceptance/project-adoption/g2-http-transport-5880cbe/receipt.json) exercise methods, parameter locations and scalar bounds. [Actual Wargame network qualification](../acceptance/project-adoption/g6-wargame-production-network-2026-10-18/receipt.json) passes13 cases/22 exchanges, including both proxy branches, stale generation, malformed/chunked/oversize bodies and unavailable upstream. | Wargame's result is explicitly lab-mode, with applicationAcceptance=false. It does not establish managed identity, persistence, browser acceptance or a complete installed Wargame workflow. |
+| G3 real Next/Cargo framework and configuration boundaries | [Original-config Next dynamic/runtime review](../acceptance/project-adoption/g3-next-dynamic-runtime-20261024/accepted-40125656603/independent-verification.json), existing auth/rewrite and Cargo/registry rows in the support matrix. | Keep supported shape/configuration subsets explicit. Metadata, the204 stream stub and source-labelled secret references must not become execution, generation or authenticated-owner claims. |
+| G4 portable commands, selection, replay and lifecycle | [Retained workflow contract](../guides/retained-project-builds.md), historical actual Axum workflow and fresh installed Rust owner builds. The [approved actual-owner extension](../acceptance/project-adoption/original-owner-watch-single-extension-20261028/receipt.json) now passes no-op/update/idle/SIGTERM with unchanged state and two released reservations. | The [separately approved parent-death case](../acceptance/project-adoption/original-owner-active-parent-death-20261028/receipt.json) stopped observed processes but failed automatic release; its manual recovery does not accept that gate. Active-parent-death and changed-build failure/race/cancellation remain unaccepted. Actual-project cold/warm/edit latency, memory and retained-disk measurements remain unrun. The [frozen Axum measurement plan](2026-10-24-project-measurements.md) now has [passed guarded native preparation](../acceptance/project-adoption/intel-native-resume-20261026/independent-verification.json); measured phases await a quiet exclusive window. Next-scale measurements remain required afterward. |
+| G5 exact source/native installs, retained outputs and deployment | [Installed Rust owner rebuilds](../acceptance/project-adoption/g5-installed-rust-owner-build-20261024/accepted-40118700332/independent-verification.json) and [installed retained Next replay](../acceptance/project-adoption/g5-installed-retained-next-20261024/accepted-40071420581/independent-verification.json) pass their identified profiles. Existing image/browser and refusal rows identify additional scoped evidence. | Preserve remaining owner-specific deployment/refusal requirements. The [new dynamic controls also pass both fresh installations](../acceptance/project-adoption/g5-installed-next-dynamic-20261024/accepted-40127431158/independent-verification.json) at9276b07; retained replay of those added controls and the named owner-specific workflows are separate. External OS/toolchain/test inputs remain declared dependencies; complete hermeticity and production activation are not established. |
+| G6 existing Wargame and differently structured Seeder qualification | Actual Wargame transport receipt; [Seeder command qualification](../acceptance/project-adoption/seeder-actual-next-commands-20261016/receipt.json); [current native retained baseline](../acceptance/project-adoption/current-owner-retained-next-20261026/review.json) and [independent-oracle declared edit](../acceptance/project-adoption/current-owner-retained-next-20261026/declared-edit.json); separate selected Linux/public-browser records in the support matrix. | Their complete owner-specific workflows remain unaccepted. Current source-built Seeder generation, retained Next compilation/selection, baseline binding replay, declared compiled-label edit and no-op now pass. The [edited-generation runtime replay](../acceptance/project-adoption/current-owner-retained-next-20261026/edited-runtime.json) now passes its seven public HTTP/asset cases with configured source/context/provider unavailable. The [fresh original-owner source/native workflow](../acceptance/project-adoption/installed-original-owner-next-20261027/native-owner-review.json) now passes its frozen generation/build/test/runtime increment atcf1b51b. Authenticated browser/permission/label visibility, watch behavior, deployment and actual performance remain open. Preserve each owner's mandated acceptance commands and independent expectations. |
+| G6 final support/release decision | The support matrix records scoped passes, failures and unavailable work. | No full adoption/release decision is justified until required performance and existing-owner integration gates are proved together. Public Chatbot/Miniserve results supplement the named owner evidence; they do not silently replace unmet Wargame/Seeder requirements. |
+
+## Execution boundary
+
+The exact3,491-file cleanup was explicitly approved and completed. The
+[cleanup/preparation review](../acceptance/project-adoption/intel-native-resume-20261026/independent-verification.json)
+confirmed the journal matches the approved identities, every approved path is
+absent, all845 excluded paths and five parent directories remain, and all ten
+preserved publication archives still match their digests. No additional deletion
+or policy increase is authorized by that completed approval.
+
+The current native CLI rebuilt and the real Axum measurement source prepared
+under the unchanged canonical4GB supervisor. Its functional reservation has
+finished and released. Cold target/state remain absent; preparation is not an
+application build, calibration or performance pass.
+
+The existing Advocates database container is a separate workload. Exclusive
+measurement still requires an appropriate quiet window. A temporary stop/run/
+restart request is separate from the approved file cleanup; until answered,
+leave the database running. No source file, container, runtime or policy
+substitution bypasses the measurement contract.
+
+The remaining application work targets the original owner gaps above. Public
+project results supplement those requirements, and this audit does not replace
+their guarded acceptance or the original G0–G6 scope.
+
+## Latest native admission evidence
+
+[Approved cleanup and current native preparation](../acceptance/project-adoption/intel-native-resume-20261026/independent-verification.json)
+passed at source7ebc10c, enginea5d602de. The new owner has337 selected text inputs,
+including explicit measurement instrumentation. All prior inputs, configured
+tools, old state and source bindings were verified. Two functional commands
+exited0; the supervisor exited 0 and released its reservation. Actual measured
+phases and their459-test correctness checks remain unrun.
+
+The earlier [canonical refusal](../acceptance/project-adoption/adoption-closeout-audit-20261024/native-admission.json)
+and [inventory/activity recheck](../acceptance/project-adoption/adoption-closeout-audit-20261024/cleanup-recheck.json)
+remain historical evidence from before the explicit cleanup approval. They do
+not describe current native admission. The active remaining benchmark
+prerequisite is its separate exclusive window.
+
+## Retained controller follow-up
+
+The [fresh retained-controller review](../acceptance/project-adoption/axum-pinned-controller-20261026/review.json)
+supersedes the earlier preparation for future measurements: its controller now
+uses the already copied private configured-provider executable. All13 existing
+controls, a native CLI rebuild and fresh functional preparation passed. Engine
+and input-key inspection also passed while the shared compiler path was
+temporarily unavailable; exact compiler bytes/mode were restored. All337 owner
+inputs and prior protected records were rehashed, and the reservation finished
+and released. Cold target/state remain absent.
+
+The [first attempt's stale-heartbeat refusal](../acceptance/project-adoption/axum-pinned-controller-20261026/initial-refusal.json)
+is preserved. The retry waited for a fresh parent heartbeat without weakening
+ownership or changing policy. This closes controller-path preservation only;
+actual G4 measurements and the separate database quiet-window decision remain
+open.
+
+
+## Original-owner generation and route-contract increment
+
+The [reviewed current source-built owner result](../acceptance/project-adoption/current-owner-topology-20261026/receipt.json)
+now qualifies both unchanged generators and all eight outputs against the
+captured original Metamap 0.5.0 bytes. Native composition/viability/projection/
+TypeScript emission and exact legacy JSON/digest utilities were exercised in 362
+successful calls. Both package check lanes and three unchanged route tests per
+candidate passed; all 886 selected production inputs and the public toolkit
+matched their bindings. The195,911-entry source context passed current native
+verification before and after execution, and original owner Git stayed clean.
+
+This closes that named source-built generator/route-contract prerequisite.
+Current retained Next production selection/replay, authenticated browser/
+permissions and label visibility, fresh installed owner workflows and remaining
+G4/G5/G6 requirements stay open. Earlier snapshots/refusals remain historical;
+the qualified source-context location is recorded in the new receipt guide.
+
+The preserved Axum preparation still identifies its frozen f137cd54 compiler.
+The new legacy APIs change compiler identity; reprepare with the selected current
+CLI before making a current-source performance claim. The separate quiet-window
+approval, frozen measurement budgets and exclusive measurement requirement stay
+unchanged.
+
+
+## Current retained-owner execution
+
+The [current native retained Next plan](2026-10-26-current-owner-retained-next.md)
+continues source-built production selection, replay/no-op, an unbound-edit
+refusal and a separately queued declared edit. It reuses the qualified original
+source context and current generator/SDK bindings without another full snapshot.
+
+The initial layout refused before staging because state was inside a Cargo
+workspace; the repair uses the already accounted external retained-state root.
+That same restriction exposes a still-unrun Axum measurement-driver layout issue.
+The measurement driver needs a functionally checked external state path as well
+as fresh current-compiler preparation and its separate quiet-window approval.
+Preserve the earlier control/preparation passes at their actual scope.
+
+## Current retained-owner baseline and remaining audit
+
+The [recorded current-owner result](../acceptance/project-adoption/current-owner-retained-next-20261026/review.json)
+adds actual native retained production selection to the prior generator-only
+increment: unchanged Next build, independent tsc, three compiled-manifest
+witnesses, all eight original generated outputs, three original route tests and
+both native check modes. Offline binding replay with source/snapshot/provider
+unavailable and no-op passed. A genuine undeclared graph edit refused before
+candidate staging and preserved selection. Direct post-refusal inspection
+rehashed all 2,482 artifact files and 942 restored source inputs.
+
+The controller remains failed on an incorrect refusal exit/stream assumption;
+the actual structured stdout/exit1 refusal matches existing CLI behavior. Its
+baseline repair budget is exhausted. A separately queued final native selection
+audit was denied before execution for retained-output headroom. Preserve this
+open check; do not rerun the baseline or infer a full owner/controller pass.
+Resume only the existing-state audit after approved headroom, then the separately
+planned declared edit. Authenticated/browser/permissions, fresh installed owner
+workflow, deployment, measurements and full G4/G6 acceptance remain open.
+
+The [follow-up existing-state audit](../acceptance/project-adoption/current-owner-retained-next-20261026/review.json)
+subsequently passed native project-build-verify after exact approved compiler
+cleanup: exit0 / verified-selected-build-bindings, no baseline/refusal reruns,
+unchanged selection/artifacts/source and released reservation. The earlier
+controller failure and admission refusal remain historical. The remaining
+current-owner functional stage is the declared positive edit; this scoped
+baseline result does not accept installed-owner, authenticated/browser,
+deployment, performance or full G4/G6 requirements.
+
+## Current owner compiled-edit workflow accepted
+
+The [reviewed declared-edit run](../acceptance/project-adoption/current-owner-retained-next-20261026/declared-edit.json)
+closes the planned source-built edit stage: eight changed outputs matched the
+independent original Metamap 0.5 oracle; production build, separate tsc, three
+manifest witnesses, both generator checks and all three owner route tests passed.
+A baseline absence refusal and a pre-selection marker in two actual compiled
+client files establish the changed compiled consumer. A new key/selection,
+preserved old pointer/artifacts, final native verification and no-op passed.
+The native reservation released without deletion or policy change.
+
+The existing-state four-attempt budget is now full. No extra baseline or edit
+trial is authorized under this plan. Continue fresh installed/runtime replay,
+authenticated browser/permissions, actual G4 measurements and remaining owner
+acceptance. The edited generation's source-unavailable replay was not run here;
+the earlier baseline replay remains generation-specific. Axum measurements still
+need an external-state driver repair, functional verification, current-compiler
+preparation and the separately approved quiet window.
+
+
+## Current external-state layout verification
+
+The [frozen Axum measurement plan](2026-10-24-project-measurements.md) now has
+[28 passed Linux controls](../acceptance/project-adoption/g4-external-state-20261027/linux-controls.json)
+and an [independently reviewed native layout check](../acceptance/project-adoption/g4-external-state-20261027/native-review.json):
+18 Intel controls, expected Cargo-ancestor refusal before creation, external-state
+selection/binding verification/no-op, and rehashed inputs/output. Both fixture
+preparation errors are retained separately. Fresh current-compiler actual Axum
+preparation also passes separately below; cold/warm/edit/RSS measurements remain unrun. No
+file deletion, policy change, database interruption or performance acceptance
+follows from this functional check.
+
+
+The [current-compiler Axum preparation review](../acceptance/project-adoption/g4-external-state-20261027/axum-preparation-review.json)
+now supersedes the earlier frozen compiler preparation for future measurement.
+All five native preparation commands passed with compiler7261d652;330 original
+regular files, five symlink targets,52 directories and337 selected owner inputs
+were independently checked. External state and target remain cold/absent; both
+roots are bound to the unchanged2GB measured allocation budget. Its functional
+reservation released. Actual builds/tests, RSS calibration and cold/warm/edit
+measurements remain unrun and require the separate quiet exclusive window.
+
+
+## Edited original-owner selected runtime
+
+The [reviewed edited-generation runtime](../acceptance/project-adoption/current-owner-retained-next-20261026/edited-runtime.json)
+passes at7e65a9c/compiler7261d652. Source/context/provider paths were unavailable
+for native binding replay and all seven actual HTTP cases through native
+selected execution. Both edited static JavaScript responses match the accepted
+artifact bytes. Native pre/post and final bindings passed; owned server stopped,
+three path identities restored, both selected generations and943/942 source
+inputs rehashed, ledger/pointer and four attempts preserved, reservation released.
+This closes that specific runtime replay increment. It does not establish
+browser hydration, authentication/permissions/visible label behavior, fresh
+installed owner, deployment or measured performance. The full selected call's
+549.082s functional interval also leaves practical Next workflow latency open.
+
+
+The [fresh installed original-owner plan](2026-10-27-installed-original-owner-next.md)
+continues the open installed consumer requirement with the actual unchanged
+owner, independent generator expectations and separate source/native rebuilds.
+The existing wrapper timeout prerequisite and package/source-compiler phase
+do not count as owner acceptance.
+
+
+The installed original-owner [package/source prerequisite](../acceptance/project-adoption/installed-original-owner-next-20261027/package-source-review.json)
+now passes atcf1b51b:1,240 Git/archive/extracted-source members, exact source/
+native archives, eight fresh installed-path workspace compilation witnesses,
+matching engines/CLI bytes, unchanged source inventory and exact shared-CLI
+restoration. Seventeen wrapper/source controls also pass. This prepares the
+two original-owner installations; their required generator/build/test/runtime
+workflows have not run and remain open, together with authenticated/browser,
+deployment, watch and actual Rust/Next performance requirements.
+
+
+The [source-installed original-owner build](../acceptance/project-adoption/installed-original-owner-next-20261027/source-build-review.json)
+now independently passes native regeneration, production Next, separate tsc,
+manifest/contract/marker checks, three owner route tests and generator checks.
+Its runtime handoff failed in the private harness before execution; all checkout
+paths restored and the reservation released. A separately queued runtime-only
+repair preserves the new selection. Source runtime and the native installation's
+complete owner workflow remain unaccepted; no G5/G6 completion follows.
+
+
+The [source-installed original-owner composite review](../acceptance/project-adoption/installed-original-owner-next-20261027/source-owner-review.json)
+now closes that installation's actual generator/build/test/runtime increment:
+eight independent outputs, production Next and separate tsc, three manifest
+witnesses, three route tests, compiled marker and all seven source/context/
+provider-unavailable HTTP cases. Native pre/post/final bindings, owned-server
+reaping, eight exact path restorations, installed source and old/new artifacts
+passed. One runtime-only harness repair reused the passed build with no new
+attempt; its reservation finished. The [native archive owner review](../acceptance/project-adoption/installed-original-owner-next-20261027/native-owner-review.json)
+now also passes all nine commands, eight oracle outputs, three route tests and
+seven unavailable-producer HTTP cases, with native pre/post/final bindings,
+eight exact restorations, owned-server reaping and released reservation. Both
+archives, installed source and new/source/original generations were rehashed.
+The native state has one attempt and no repair; old states remain preserved.
+Authenticated browser/permissions, watch, deployment and practical performance
+remain required; this does not complete G5/G6 or the adoption goal.
+
+
+Retained dynamic Next checkpoint: repair1 run40764583126 at49545b1 independently
+proves its completed source-installed41-group/four-test subcase, but aggregate
+acceptance is contradicted by a4,001,755,136byte storage stop. Native-installed
+execution is incomplete and the pair remains unaccepted. See the
+[exact reviewed result](../acceptance/project-adoption/g5-retained-dynamic-next-20261028/attempt-40764583126/independent-verification.json)
+and [bounded next repair](2026-10-28-retained-dynamic-next.md). This does not close
+G5/G6, replace owner-specific workflows or extend the native I3e budget.
+
+
+Final retained-dynamic attempt40770841087 atb6157b8 again failed the unchanged4GB
+capacity gate. Its complete source41-group/four-test case passes independent
+review; native browser execution stopped after31of41 and remains incomplete.
+See [the exact final review](../acceptance/project-adoption/g5-retained-dynamic-next-20261028/attempt-40770841087/independent-verification.json).
+The planned initial+2 runtime budget is exhausted. The sampled4,001,222,656byte
+stop does not establish full-workflow headroom; the public bootstrap was actually
+reused but did not suffice. No G5/G6 completion or further runtime attempt follows.
+
+
+The independent [original Next architecture increment](2026-10-28-original-next-architecture.md)
+now passes native preparation: genuine Node x64 selection, correct-digest ARM64
+ELF_ARCHITECTURE refusal, unchanged pointer and offline Node-producer/snapshot
+binding replay. [The source-bound review](../acceptance/project-adoption/g5-original-next-architecture-20261028/native-preparation.json)
+records eight guarded calls and a released reservation at d590748. Actual managed
+application startup and full architecture acceptance remain unrun; stale-contract,
+authentication, watch, performance and G5/G6 requirements remain open. This is
+separate from the capacity-failed retained-dynamic phase and its pending proposal.
+
+
+The original Next architecture increment's initial managed staging now passes
+all2,480 input bindings, but its controller failed a Linux namespace statfs
+comparison before any application launch. The [independent initial failure review](../acceptance/project-adoption/g5-original-next-architecture-20261028/managed-attempt-0/failure-review.json)
+confirms actual host quota/image bounds, stopped owned resources and finished
+reservation. The bounded host-versus-namespace inspector repair is specified in
+the existing plan; architecture application acceptance remains false. No full
+G5/G6 acceptance or extra retained-dynamic/I3e/API/benchmark authorization follows.
+
+
+The first original-Next quota inspector repair is now statically implemented,
+but [its canonical admission was refused before execution](../acceptance/project-adoption/g5-original-next-architecture-20261028/managed-repair1-prepared/admission.json).
+That reservation finished/released; no stale lease exists. A472-file exact
+compiler cleanup proposal is awaiting approval to restore one-run headroom.
+No deletion, new workspace/application run or architecture acceptance occurred.
+Resume the frozen repair only after approved cleanup and fresh admission; all
+other pending authorization and full G0–G6 requirements remain unchanged.
+
+
+The [exact approved compiler cleanup](../acceptance/project-adoption/g5-original-next-architecture-20261028/approved-compiler-cleanup/README.md)
+is complete:472 verified removals, four excluded directories/current CLI/
+selection unchanged, no service or policy change. Unchanged first-repair native
+preparation is separately queued as1e448dbf. Its previous admission refusal and
+initial managed failure remain; no architecture application acceptance follows
+from cleanup or queuing. The full goal and other pending approvals remain open.
+
+
+The [original Next managed architecture review](../acceptance/project-adoption/g5-original-next-architecture-20261028/managed-architecture.json)
+now passes at 1e3b13c: native selection/offline binding plus real x64 public HTML
+before/after correct-digest genuine ARM64 pre-launch refusal, all 2,480 original/
+staged file modes/bytes, five native responses, 188 Rust inputs and inspected
+quota/kernel/isolation/stop proof. The native and managed reservations released;
+initial failures/refusal remain. This closes that explicit owner architecture
+admission increment; it does not establish kernel exec-format denial, automatic
+launch protection, auth/permissions, stale-contract refusal, watch/performance
+or full G5/G6. The other exact retry/quiet-window decisions remain pending.
+
+
+The [approved additional original-owner API launch](../acceptance/project-adoption/original-owner-api-additional-attempt-20261029/README.md)
+was attempted once and refused at canonical retention admission. The reservation
+finished/released; no preflight, security controls or imports ran. All387 frozen
+owner inputs and16 earlier failed records still match, and the database was
+untouched. Capacity is the immediate prerequisite before proposing a controlled
+resumption; API/authentication and fullG0–G6 acceptance remain open. The old
+pending-approval descriptions are historical; approval was received, but this
+guarded launch ended in refusal rather than a passing import result.
+
+
+[Normal closure of six finished owned quota views](../acceptance/project-adoption/owned-quota-closeout-20261029/README.md)
+preserved all backing images, passed read-only restoration and left the
+database untouched. Capacity still needs 45,187,072 bytes. A pending exact
+single-file redundant public ARM-runtime proposal exceeds that deficit and
+keeps verified archive/candidate copies; no deletion is authorized. API
+preflight/import/authentication remain unrun. The original full adoption and
+separate native/dynamic/measurement decisions stay open.
+
+
+## Approved exact cleanup and actual API readiness pass (2026-10-29)
+
+The [independently reviewed unchanged API preflight](../acceptance/project-adoption/original-owner-api-resumption-20261029/README.md)
+now passes at source1e9c57e/ownerc61d51a: all three security controls,15
+library imports and actual application import with the expected login,
+current-user and permission routes. All387/3/2 frozen bindings and16 earlier
+failed records match. The exclusive reservation finished and released; no
+services/packages/policy were changed and the unrelated database kept its
+start identity. The exact approved one-file ARM-copy removal was independently
+journal-reviewed with verified retained copies; its initial zero-deletion
+self-handle refusal remains. Original API admission failure remains historical.
+
+This closes import readiness only, with one actual API run and no subsequent
+repair. Real authenticated sessions, permission boundaries, edited visible
+labels and invalid/expired sessions remain open. Continue the existing owner
+browser plan with owned isolated data; do not borrow unrelated services.
+Native/dynamic retry and benchmark quiet-window decisions remain separate.
+The original fullG0–G6 goal remains incomplete.
+
+
+## Declared original-owner API endpoint generation (2026-10-29)
+
+The [independent endpoint build review](../acceptance/project-adoption/original-owner-auth-endpoint-20261029/README.md)
+passes at sourcee1512af/ownerc61d51a. A separate new generation declares and
+compiles http://127.0.0.1:18765, preserving the old port1 output and both prior
+selections/artifacts. Native generation, production Next, TypeScript, three
+route tests, original oracle/manifest/marker checks and final native bindings
+pass;2482 selected artifact files were rehashed. The exclusive reservation
+finished/released with guard/supervisor0; limits and the unrelated database
+are unchanged.
+
+This resolves that selected frontend's compiled default API endpoint.
+Real isolated authentication/permissions/browser are prepared, not yet run;
+fresh admission and inspected owned-resource enforcement remain required.
+Context staging/verification remains slow; functional command durations do
+not establish measured development performance or fullG4/G5/G6 acceptance.
+
+
+## Isolated real-authentication admission refused (2026-10-29)
+
+The [frozen backend/browser phase](../acceptance/project-adoption/original-owner-auth-endpoint-20261029/services-0/README.md)
+was refused before driver/service execution for retained-output headroom.
+Reservation5c95616c finished/released; no stale lease or actual auth result.
+All387/2 API/interpreter and frozen runner inputs match; Advocates is untouched.
+The new endpoint generation remains accepted independently.
+
+Canonical accounting measured98,249,068,544bytes and a2,249,068,544byte shortfall
+for the unchanged4GB reservation/100GB retention cap. An exact216-file
+2,450,522,112byte proposal excludes selected artifacts/project/code/current
+auth inputs; original context backups and every candidate matched SHA256.
+Approval is pending; no files deleted. After exact capacity authorization,
+resume only the frozen unused service phase through fresh normal admission,
+preserving this refusal and all earlier failures. No frontend rebuild,
+old-preflight rerun, global limit change or unrelated service use follows.
+
+
+## Approved cleanup completed; authentication ownership budget exhausted (2026-10-30)
+
+[Exact216-file cleanup](../acceptance/project-adoption/original-owner-auth-endpoint-20261029/approved-cleanup-20261030/README.md)
+is complete and independently verified; its approval is consumed. The [resumed
+run](../acceptance/project-adoption/original-owner-auth-endpoint-20261029/services-resume-20261030/README.md)
+and both bounded repairs were admitted, but ownership queries timed out before
+any database, API request or browser test. All reservations finished/released,
+all387/2 original API/interpreter bindings match and Advocates is unchanged.
+
+The [diagnosis and final boundary](../acceptance/project-adoption/original-owner-auth-endpoint-20261029/ownership-diagnosis-20261030/README.md)
+preserve both30s timeouts, component observations and unsuccessful final
+projection repair. The initial+2 budget is exhausted. Investigate/fix bounded
+ownership-status latency without dropping any safety criterion, then prepare a
+concrete budget-extension proposal before another application run. No new file
+deletion, timeout increase, global activation or passing auth result is implied.
+The accepted frontend endpoint and original fullG0–G6 requirements remain separate.
+
+
+## Approved ownership trace completed; application remains gated (2026-10-30)
+
+The [single approved diagnostic](../acceptance/project-adoption/ownership-status-investigation-20261030/approved-one-shot/README.md)
+completed all original queries in 0.553s and released its exclusive reservation.
+It did not reproduce the earlier 30s timeout. Its saved ownership sample has a
+stale heartbeat and is refused by the unchanged validator. The service runner's
+existing 20s fresh-heartbeat wait was not exercised; no safety criterion or
+installed safeguard was changed.
+
+The one diagnostic approval is consumed. No authentication service, database,
+HTTP request or browser case ran. The original initial-plus-two-repair application
+budget remains exhausted. A separate frozen one-application-attempt proposal is
+prepared, NOT APPROVED/NOT RUN, with original assertions and bounds, only fresh
+output paths and full-probe stage markers. It does not extend other pending
+lifecycle/dynamic/measurement permissions or establish full adoption completion.
+
+
+## Additional auth attempt refused before service startup (2026-10-30)
+
+The [specifically approved attempt](../acceptance/project-adoption/original-owner-auth-endpoint-20261029/services-one-extension-proposal-20261030/README.md)
+passed the original full ownership validator after its unchanged heartbeat wait.
+It then refused the required free-port check with address-already-in-use. A
+pre-existing foreign listener occupies database port 18766 and was left running.
+No owned database, credentials, migration, API, HTTP case or browser case ran.
+The failed guard/supervisor outcome and initial reviewer failure are preserved;
+the reservation finished/released and protected database identity is unchanged.
+
+This one-attempt approval is consumed. A separate unexecuted proposal changes
+only the isolated database port to 18866 and fresh output paths, retaining the
+accepted frontend/API ports, original assertions, deadlines and resource limits.
+It needs direct approval before a launch; no automatic phase repair or retry.
+Authentication/permissions and full G0–G6 adoption remain unaccepted.
+
+
+## Port 18866 attempt stopped at owned profile parsing (2026-10-30)
+
+The [specifically approved attempt](../acceptance/project-adoption/original-owner-auth-endpoint-20261029/services-port18866-proposal-20261030/README.md)
+passed ownership and free-port checks and started its isolated PostgreSQL.
+macOS rejected literal-IP host syntax in the owned service profile before
+Python or original migrations ran. Migration wrapper exit 65 is preserved.
+No seed, API, HTTP case or browser case ran; authentication remains unverified.
+The owned container is independently stopped with declared limits/mounts,
+all test listeners are closed, reservation released, old failures preserved,
+and unrelated database identity unchanged. Owned data/logs remain private.
+
+This one-attempt approval is consumed. An unexecuted proposal corrects only
+owned loopback-selector syntax, adds a 10s pre-database profile check within the
+existing 600s deadline, and uses fresh paths. Actual bind addresses, ports,
+original auth/denial assertions and resource limits stay unchanged. It needs
+direct approval; no automatic phase repair/retry, deletion, installed safeguard
+change or unrelated interruption follows. Full G0–G6 remains unachieved.
+
+
+## Corrected profile passed; isolated database startup failed (2026-10-30)
+
+The [approved corrected-profile attempt](../acceptance/project-adoption/original-owner-auth-endpoint-20261029/services-localhost-profile-proposal-20261030/README.md)
+passed its pre-database syntax check. PostgreSQL then exited 1 after about 4.6s;
+the unchanged 30s readiness loop refused. No OOM or Docker engine error was
+recorded. Startup output and readiness responses were not retained by that
+runner, so the root cause remains unknown. No original migration, seed, API,
+HTTP case or browser case ran. The owned container/data are preserved and
+stopped, all test listeners closed, reservation released, old failures intact,
+and unrelated database identity unchanged.
+
+This one-attempt approval is consumed. An unexecuted proposal adds bounded
+owned startup streams and readiness/state capture while preserving database
+settings, limits, deadlines and every original auth assertion. It needs direct
+approval and is diagnostic instrumentation, not a demonstrated root-cause fix.
+No automatic phase repair/retry, deletion, unrelated interruption, installed
+safeguard change or activation follows. Full G0–G6 remains unachieved.
+
+
+## Readiness-contract correction awaiting qualification (2026-11-02)
+
+The [read-only audit](../acceptance/project-adoption/database-tcp-readiness-audit-20261102/README.md)
+found that the old readiness check can observe the image's temporary Unix-socket
+server without proving the API-facing TCP route. Earlier readiness samples stay
+scoped to that socket; the database exit remains unexplained. No new runtime
+test or application acceptance occurred.
+
+The unexecuted 1fe5c343 proposal replaces the unexecuted e4a8936 proposal. It
+requires container TCP5432 and published-host TCP18866 under the same30s deadline,
+retains bounded startup capture and all original auth cases, and needs direct
+one-attempt approval. Old proposal bytes and every failed record remain intact.
+Full G0–G6 and all separate execution boundaries remain unchanged.
+
+
+## TCP attempt captured data ownership failure (2026-11-02)
+
+The [approved TCP attempt](../acceptance/project-adoption/original-owner-auth-endpoint-20261029/services-db-tcp-readiness-proposal-20261102/README.md)
+captured PostgreSQL refusing its owned data-directory ownership. Profile syntax
+passed; no migration/API/HTTP/browser case ran. TCP readiness was never accepted.
+Owned container/attachment stopped, test ports closed, reservation released,
+old failures preserved and unrelated database unchanged.
+
+A separately proposed425-input candidate sets metadata only on a fresh empty
+owned bind directory, then verifies process/data ownership inside the unchanged
+non-root container before the original PostgreSQL entrypoint. It is unexecuted,
+requires direct approval, and preserves all original criteria/limits/deadlines.
+No deletion, installed safeguard edit or automatic phase retry follows. The
+captured refusal is established; the underlying UID projection and proposed
+correction remain unverified. Full G0–G6 is unachieved.
+
+
+## Autonomous continuation and observed ownership refusal (2026-11-04)
+
+The owner authorized continued implementation, repairs and checks with review
+at the end. The new [continuation scope](2026-11-04-adoption-closeout.md)
+supersedes historical per-attempt approval waits; criteria and limits remain.
+The executed425-input owned-data candidate failed before initialization: its
+actual non-root guard observed process501:20 but data0:0 despite metadata-copy
+exit0. No authentication/browser case ran. Owned resources stopped, reservation
+released and earlier failures/unrelated database preserved. A new labelled
+Docker-volume attempt follows from this observation; no ownership repair or
+full adoption acceptance is claimed. See the [reviewed failure](../acceptance/project-adoption/original-owner-auth-endpoint-20261029/services-data-owner-proposal-20261102/README.md).
+
+
+## Actual HTTP milestone and next verified prerequisites (2026-11-04)
+
+[Real owner HTTP authentication/permissions](../acceptance/project-adoption/original-owner-auth-endpoint-20261029/services-managed-volume-paths-small-20261104/README.md)
+now passes its12 original cases with isolated owned data. The browser phase
+timed out in the first project; four projects did not run. Full owner/UI/G6
+acceptance stays false. The1GB native-exclusive job finished/released and all
+owned services/groups stopped; original limits/criteria and old failures remain.
+
+[The112-control retained-dynamic symbol preflight](../acceptance/project-adoption/retained-dynamic-symbols-20261104/README.md)
+passes separately; [Linux runtime pair41883534897](../acceptance/project-adoption/g5-retained-dynamic-next-20261028/accepted-41883534897/independent-verification.json) now passes independent review of both fresh installations, all41 groups/four upstream tests each and the unchanged4GB cap. The earlier
+[native registration retry](../acceptance/project-adoption/native-registered-inspection-20261104/README.md)
+remains a preserved failure. Its follow-up restored31 required selected-context
+files from verified retained backups and independently passed all15 controls.
+No manual recovery or direct HTTP result closes native crash, watch, deployment,
+measurement, browser or final adoption requirements.
+
+
+Current native registration checkpoint (2026-11-04): the earlier failed retry
+is superseded for the closed registration stage by an independently reviewed
+15/15 pass after exact restoration of31 required selected-context files.
+See [review](../acceptance/project-adoption/native-registered-inspection-20261104/restored-context-review.json).
+Automatic release, staged global-guard integration, actual owner parent-death/W1,
+browser authentication, performance and overall G0–G6 remain open.
+
+
+The previously incomplete native retained-dynamic installed case is now closed
+for its explicit derived profile by run41883534897. All original capacity failures
+remain historical. Owner-specific authentication/lifecycle/deployment and actual
+performance still gate overall adoption; this pair is not a full G5/G6 decision.
+
+
+Latest original-owner browser diagnostic (2026-11-04): [review](../acceptance/project-adoption/original-owner-auth-endpoint-20261029/services-browser-request-diagnostic-20261104/review.json) independently verifies12 HTTP passes and a first-browser failure. The observed login429 is confounded by the extra CORS precheck consuming the original five-request window; it does not explain the earlier timeout. A frozen neutral-route precheck correction preserves the limiter, original assertions and20s/600s deadlines. Browser/full authentication remains false. Owned resources stopped and reservation released.
+
+
+The [quota-neutral follow-up](../acceptance/project-adoption/original-owner-auth-endpoint-20261029/services-browser-neutral-precheck-20261104/review.json) now independently verifies439 bindings and12 HTTP passes. Its first UI login/current-user/permissions return200; the allowed-user loop completes before our second-context trace creation fails EEXIST. No whole browser project or full authentication is accepted. The prepared sink-sharing and per-context owned-API process-isolation correction must preserve the original limiter, source, assertions and deadlines; it is unrun. Earlier failures remain.
+
+
+The [API-isolation attempt](../acceptance/project-adoption/original-owner-auth-endpoint-20261029/services-isolated-browser-cases-20261104/review.json) passes20 preflight controls and12 HTTP cases but fails an immutable-writer/update mismatch before browser API readiness. Guardian stop and reservation release are verified; agent recovery separately restored3 exact producer paths, followed by441-input/2,482-file/524-directory/mode/pointer/manifest/attempt verification. Original failed records remain. The prepared25-control repair preserves both users on one API per browser project; full authentication remains unaccepted.
+
+
+The [history/cleanup repair](../acceptance/project-adoption/original-owner-auth-endpoint-20261029/services-isolated-browser-history-20261104/review.json) passes25 controls and12 HTTP cases; both API processes and all other owned resources stop, producer restoration succeeds and reservation releases. Full UI remains false: the fresh API work-root lacked the original bootstrap's pre-existing denied-read probe. A complete-layout/narrowed-profile repair adds the actual layout regression before another app attempt. The original source, real quota, assertions and limits are preserved.
+
+
+## 2026-11-04 partial browser authentication checkpoint
+
+All 12 original HTTP cases and real Chromium/Firefox browser login and exact permission-denial assertions pass in the isolated-runtime attempt. WebKit reset readiness failed; two mobile projects remain unrun. Full authentication is not accepted. Independent review confirms four API processes reaped, owned resources stopped, lease released and all selected files/directories/modes/pointer/manifest unchanged. The diagnostic retry preserves every original deadline and adds bounded private startup observations. Evidence: [partial browser review](../acceptance/project-adoption/owner-auth-isolated-runtime-20261104/README.md). Other goal gates remain open.
+
+
+## 2026-11-04 bounded startup diagnostic
+
+The diagnostic independently confirms both observed API resets ready within ten seconds, twelve HTTP passes and a Chromium UI pass. Firefox real logins pass but a subsequent navigation is aborted; three projects remain unrun. Original asynchronous login redirect is a plausible test race. The next attempt adds an explicit /discovery redirect-completion assertion while preserving all eleven original expectations and all existing limits. Full auth remains open. [Evidence and limitations](../acceptance/project-adoption/owner-auth-startup-diagnostic-20261104/README.md).
+
+
+## 2026-11-04 verified frontier
+
+The [five staged native crash cases](../acceptance/project-adoption/native-guard-five-crashes-20261104/README.md) now independently pass, including active parent death with a surviving trusted observer and automatic stopped-state release. Remaining channel/unsealed/binding/fallback/fairness controls and real-owner watch cases stay open; nothing is installed or activated.
+
+The [six scoped browser cases](../acceptance/project-adoption/owner-auth-six-browser-cases-20261104/README.md) establish real login/permissions and invalid/expired UI rejection in Chromium and Firefox. All twelve HTTP cases and31 controls pass. WebKit times out before sending an API request; eight following cases remain unrun. Anonymous client-startup diagnosis is in progress under the same original profile/time limits. Full authentication and the wider G0–G6 goal remain incomplete.
+
+The [2026-11-05 capacity/context checkpoint](2026-11-04-adoption-closeout.md#2026-11-05-concrete-capacity-and-context-repairs) narrows two preparation blockers without accepting application/authentication or the wider goal. One exact reversible idle-view maintenance window is prepared; separate benchmark acceptance remains unrun.
+
+## Completed one-window maintenance, 2026-11-05
+The [independent maintenance review](../acceptance/project-adoption/idle-view-maintenance-20261105/README.md) verifies all three stopped image views closed and complete read-only recovery matched. The original database is ready with the same container/configuration/cluster/data volume; the planned stop-to-readiness interval was58.80seconds. Historical unchanged-start baselines remain unchanged records; new jobs capture a fresh baseline after this explicit transition. Canonical guard/worker exited0/released; the outer controller's post-restart statistics timeout/exit1 stays failed. The unchanged query later passed independently, without another service interruption. No deletion, limit increase or parallel activation occurred. This supersedes only the earlier prepared/unrun maintenance status; authentication and the full goal remain open.
+
+The [newly closed three-image recovery](../acceptance/project-adoption/newly-closed-images-recovery-20261105/README.md) independently preserves all1.61GB logical bytes and saves576.88MB allocated without another service interruption or deletion. The preceding2.5GB frontend request was refused/released before its worker. The corrected context's actual application build and all-browser authentication remain pending.

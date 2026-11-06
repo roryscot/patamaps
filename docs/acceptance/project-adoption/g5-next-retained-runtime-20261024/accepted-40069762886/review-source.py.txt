@@ -1,0 +1,83 @@
+"""Review only bounded public receipts; private inventories/outputs remain in CI."""
+from pathlib import Path
+import hashlib,io,json,re,subprocess,sys,zipfile
+root=Path('/Volumes/dev_src_case_sensitive/projects/patamaps')
+gh=root/'.tools/intel-gh-2.102.0-20261015/unpacked/gh_2.102.0_macOS_amd64/bin/gh'
+run_id=40069762886
+revision='0a40a4c3ec21fbbfb8e2b853ab8ae81dff8d97b0'
+def api(path,raw=False):
+ data=subprocess.check_output([str(gh),'api','repos/roryscot/patamaps/'+path],cwd=root,timeout=90)
+ return data if raw else json.loads(data)
+def sha(raw):return 'sha256:'+hashlib.sha256(raw).hexdigest()
+run=api(f'actions/runs/{run_id}')
+assert run['status']=='completed' and run['conclusion']=='success' and run['head_sha']==revision
+artifacts=api(f'actions/runs/{run_id}/artifacts')['artifacts']
+assert len(artifacts)==1
+meta=artifacts[0];assert not meta['expired'] and meta['workflow_run']['head_sha']==revision
+raw=api(f'actions/artifacts/{meta["id"]}/zip',True)
+assert len(raw)==meta['size_in_bytes'] and sha(raw)==meta['digest']
+z=zipfile.ZipFile(io.BytesIO(raw));assert len(z.namelist())==len(set(z.namelist()))
+def load(name):return json.loads(z.read(name))
+receipt=load('receipt.json');runtime=load('runtime.json');browser=load('browser-auth.json');probe=load('standalone-probe.json')
+assert receipt['sourceRevision']==revision and receipt['status']=='passed-pinned-chatbot-source-build-auth'
+for key in ['frameworkBuildEstablished','runtimeEstablished','authenticationAccepted','selectedSourceBytesAndModesUnchanged','sourceExclusionAudited','retainedPortHandoffVerified']:assert receipt[key] is True,key
+assert all(c['exitCode']==c['expectedExitCode'] for c in receipt['commands'])
+labels={c['label']:c for c in receipt['commands']}
+for label in ['retained-stale-member-before-effects','retained-missing-member-before-effects','retained-external-identical-link-before-effects']:assert labels[label]['exitCode']==2
+assert runtime['status']==browser['status']=='passed' and browser['upstreamPageTests']==4
+expected=json.loads((root/'docs/acceptance/project-adoption/g5-installed-next-20261024/accepted-40061124534/source-browser-auth.json').read_bytes())
+assert len(browser['controls'])==28 and {c['name'] for c in browser['controls']}=={c['name'] for c in expected['controls']} and all(c['passed'] is True for c in browser['controls'])
+assert runtime['browserControls']==browser['controls']
+for key in ['ownedListenersStopped','ownedProcessGroupsStopped','generatedOwnerSecretsAbsentFromEvidence','standaloneServerEntrypoint','configuredPortReservationVerified','configuredPortReservationReleasedForOwnerStart','producerSourceAndToolsUnavailable']:assert runtime[key] is True,key
+for key in ['ownedBrowserStopped','ownedHttpsProxyStopped']:assert browser[key] is True,key
+assert runtime['databaseUnixSocketsDisabled'] and runtime['databaseTransportChecks']==dict(authenticatedQuery=True,unixSocketsDisabled=True,loopbackListener=True,loopbackServer=True)
+assert not browser['credentialsCaptured'] and not browser['rawHttpUploaded'] and not browser['traceEnabled']
+assert len(runtime['driverDigests'])==8
+for name,digest in runtime['driverDigests'].items():assert sha(subprocess.check_output(['git','show',revision+':scripts/'+name],cwd=root))==digest
+capture=load('logs/text-source-capture.stdout');derived=load('derived-source.json');declared={row['path']:row for row in derived}
+assert len(declared)==181 and len(capture['inputs'])==175 and receipt['sourceFiles']==180
+for value in capture['inputs']:
+ data=value['content'].encode();name=value['receipt']['path']
+ assert sha(data)==value['receipt']['digest']==declared[name]['digest'] and len(data)==value['receipt']['byteLength']
+overlay=load('rewrite-overlay.json');assert overlay['profile']['profile']=='patamaps-chatbot-standalone-proxy-3' and overlay['profile']['output']=='standalone'
+assert sha(next(v['content'].encode() for v in capture['inputs'] if v['receipt']['path']=='patamaps-rewrite-profile.json'))==overlay['profileDigest']
+compiled=load('rewrite-compiled.json');assert compiled['addedRules']==2 and compiled['originalRulesPreserved']==4 and compiled['fullNativeRulesPreserved']
+for key in ['capturedConfigMutationRefusedBeforeMarker','compiledRulesBound','missingProjectionRefused','staleProjectionRefusedAfterRequestRehash']:assert receipt['rewriteQualification'][key] is True
+for key in ['previousSelectionPreserved','priorAndFinalSelectionVerified','exactPrivateCopyVerified','closedTreeSelected','realMemberAndLinkRefusalsBeforeEffects','actualStandaloneRuntimePassed','standaloneTreeUnchanged','producerSourceAndToolsUnavailable','retainedRuntimeAccepted']:assert probe[key] is True,key
+assert not probe['fullRetainedBundleAccepted'] and receipt['standaloneProbe']==probe
+selected=load('logs/retained-native-runtime.stdout')
+assert selected['status']=='completed-selected-project-command'
+for key in ['preExecutionSelectionVerified','postExecutionSelectionVerified','selectionPointerUnchanged']:assert selected[key] is True
+command=selected['command'];assert command['status']=='completed-project-command' and command['environmentResolution']=='captured-nonsecretConfiguration-only' and command['ambientEnvironment']=='not-inherited'
+assert command['executableUnchanged'] and command['selectedInputsUnchanged'] and command['programSucceeded']
+assert all(re.fullmatch('[A-Z_][A-Z_0-9]*',key) for key in command['environmentReferences'])
+actual=runtime['retainedRuntime'];assert actual['status']=='passed-private-retained-next-runtime'
+for key in ['dockerDataSharesMonitoredFilesystem','imageBytesModesAndLinkTargetsVerified','readonlyWriteRefused','cacheWritePassed','cacheQuotaFailurePassed','probeCacheSeparateFromApp','producerSourceAndToolsUnavailable','selectedGenerationUnchanged','producerUnavailableThroughoutBrowser','allOwnedContainersStopped','renamedProducerPathsRestored']:assert actual[key] is True,key
+assert actual['base']=='node@sha256:bbf39cb344bb33c1f2eedb3b45b4a890eecfbac91a4f7bac020a95d4e4ea147e' and actual['cacheQuotaBytes']==67108864
+limits=dict(cpu='100000 100000',memory='3221225472',swap='0',pids='128')
+assert actual['kernelLimits']==actual['enforcementObservation']['limits']==actual['applicationCache']['limits']==limits
+assert actual['enforcementObservation']['uid']==1000 and actual['enforcementObservation']['quotaRefused'] and actual['enforcementObservation']['readonly']
+assert actual['enforcementObservation']['cacheQuotaBytes']==67108864
+assert actual['imageDifference']['changedEntries']==0 and actual['imageBundle']==probe['producedTree']
+assert actual['applicationCache']['files']>0 and 0<actual['applicationCache']['bytes']<67108864 and actual['applicationCache']['symlinks']==0
+assert actual['unavailableProducerPaths']==8 and not actual['testHarnessApplicationSourceCopied'] and not actual['hostSourceOrCompilerMount'] and not actual['networkIsolationClaimed']
+owned=load('retained-owned.json');assert len(owned['containers'])==2 and all(c['confirmedStopped'] for c in owned['containers'])
+assert receipt['generatedOutputObservation']['changedFiles']==0
+subprocess.run(['git','diff','--quiet',revision,'--','crates','vendor/icu_collator','scripts/parity/identity.py','Cargo.toml','Cargo.lock'],cwd=root,check=True)
+sys.path.insert(0,str(root/'scripts/parity'));from identity import identities
+engine=dict(schemaVersion='0.1.0',documentType='executor-description',**identities(root))
+assert receipt['compiler']['engine']==engine
+jobs=api(f'actions/runs/{run_id}/jobs?per_page=100')['jobs']
+job=next(j for j in jobs if any(s['name']=='Verify strict manifest compatibility and workspace regressions' for s in j.get('steps',[])))
+assert all(s['conclusion']=='success' for s in job['steps'] if s['name'] in ['Verify strict manifest compatibility and workspace regressions','Check retained runtime admission and private coordinator syntax','Confirm only owned retained containers stopped'])
+logs=subprocess.check_output([str(gh),'api',f'repos/roryscot/patamaps/actions/jobs/{job["id"]}/logs','--allow-escape-sequences'],cwd=root,timeout=90)
+assert len(logs)<8*1024**2
+text=re.sub(r'\x1b\[[0-?]*[ -/]*[@-~]','',logs.decode(errors='replace'))
+summaries=[dict(passed=int(a),failed=int(b),ignored=int(c)) for a,b,c in re.findall(r'test result: ok\. (\d+) passed; (\d+) failed; (\d+) ignored',text)]
+assert summaries==[dict(passed=59,failed=0,ignored=0),dict(passed=31,failed=0,ignored=0)]
+out=root/'docs/acceptance/project-adoption/g5-next-retained-runtime-20261024'/f'accepted-{run_id}';out.mkdir()
+review=dict(status='independently-verified-retained-next-runtime',sourceRevision=revision,runId=run_id,artifactId=meta['id'],artifactDigest=meta['digest'],artifactBytes=len(raw),artifactExpiresAt=meta['expires_at'],sourceFiles=180,capturedTextInputsVerified=175,driverDigestsMatchedToGit=8,browserGroupsPassed=28,unchangedUpstreamPageTestsPassed=4,workspaceEngine=engine['workspace'],nativeTestSummaries=summaries,strictClippyPassed=True,realBeforeEffectsRefusals=3,selectedNativeExecutionAndPostcheckVerified=True,kernelEnforcementVerified=True,privateImageByteComparisonReportedByCI=True,privateTreeBytesIndependentlyRehashed=False,producerUnavailableDuringRequests=True,producerRestorationVerified=True,ownedContainersAndListenersStopped=True,fullRetainedBundleAccepted=False,freshInstalledReplayOnThisEngineAccepted=False,completeDependencyClosure=False,performanceAccepted=False,filesDeleted=0)
+for name in ['receipt.json','runtime.json','browser-auth.json','standalone-probe.json','rewrite-overlay.json','rewrite-compiled.json']:(out/name).write_bytes(z.read(name))
+(out/'independent-verification.json').write_text(json.dumps(review,indent=2)+'\n')
+(out/'review-source.py.txt').write_bytes(Path(__file__).read_bytes())
+print(json.dumps(review))

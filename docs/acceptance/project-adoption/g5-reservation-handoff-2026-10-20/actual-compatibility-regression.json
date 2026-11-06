@@ -1,0 +1,47 @@
+{
+  "status": "passed-actual-guard-compatibility-red-green",
+  "productionChanged": false,
+  "parallelActivated": false,
+  "filesDeleted": 0,
+  "originalBindings": {
+    "buildctl.mjs": "615b1aa4d06344345f665fa7b8404f12238a85bce4454f923bc71c685a1e889c",
+    "guarded-run.mjs": "050efffb7299411776bad4add2dde0396a255dc1893d885fa35edacd338d34a5"
+  },
+  "frozenTestSha256": "f4f7c4201f2496b4dabda3b3f07e7cc88b95c09db53b8ac805d6c8fc4d577e68",
+  "steps": [
+    {
+      "name": "actual-unmodified-red",
+      "exitCode": 1,
+      "stdoutSha256": "bbcc5843901496f197fc2a6943cc58c2088cce363ee28fb76d69bab180caeb4d",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "candidate-green",
+      "exitCode": 0,
+      "stdoutSha256": "3313da54e2478f842b84d2ad70731fb72f03558c1179e4f4f771743c9e1cdfc8",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "candidateSchedulerSha256": "0ff0e37eb622f66a8b27111734b8e997544e9b1a73daeb91a6e939a69f96b75b",
+  "recordedAt": "2026-10-20T19:15:02.551632+00:00",
+  "scope": "One frozen isolated compatibility regression using exact retained actual Wargame scheduler/guard bytes and the previously qualified managed finalization predicate. Not complete application acceptance or production rollout.",
+  "canonicalReservation": "e1cf676b-c327-45c0-95f1-d820104ec6a8",
+  "requiredBeforeActivation": [
+    "Preserve current uncommitted application guard work",
+    "Roll out compatible synchronous lease-finalization completion records across actual guarded entry points",
+    "Verify long-lived owner follow-up and managed admission against installed bytes",
+    "Repeat source-bound status/watch and stop/recovery qualification before enabling parallel execution"
+  ],
+  "publishedLogs": [
+    {
+      "file": "actual-compatibility-actual-unmodified-red.stdout.log",
+      "sha256": "fcdc5a4543239d87f36c80802d60b1f625b32bd58a8633014fe26b3ffcfd268a",
+      "normalization": "Trailing horizontal whitespace stripped for Git; original exact bytes retained in Intel run"
+    },
+    {
+      "file": "actual-compatibility-candidate-green.stdout.log",
+      "sha256": "3313da54e2478f842b84d2ad70731fb72f03558c1179e4f4f771743c9e1cdfc8",
+      "normalization": "Trailing horizontal whitespace stripped for Git; original exact bytes retained in Intel run"
+    }
+  ]
+}

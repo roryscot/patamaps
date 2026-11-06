@@ -1,0 +1,454 @@
+{
+  "schemaVersion": "0.1.0",
+  "documentType": "adapter-response",
+  "profile": "patamaps-workspace-draft-1",
+  "sourceId": "urn:qualification:miniserve:docker",
+  "adapterVersion": "patamaps-native-observations-1",
+  "requestDigest": "sha256:a98aaf556af5f3129648014745b0683509bbfd39c86836c6f87a9bd7129aed83",
+  "inputs": [
+    {
+      "path": "Dockerfile",
+      "digest": "sha256:09e269cbd1bbbcc38966cb4de92fd6838f665f9943c077647d10a386dfb429e7",
+      "byteLength": 291
+    },
+    {
+      "path": "MINISERVE-LICENSE",
+      "digest": "sha256:bedb87f0760796c7be677651eb10ad949410e90c55bc7f607d848e8e9d65375a",
+      "byteLength": 1075
+    },
+    {
+      "path": "bundle/configuration.json",
+      "digest": "sha256:4b7dc23a775e4538362e7849dd814cb70fb002dd706d29059ba248bc054b631e",
+      "byteLength": 585
+    },
+    {
+      "path": "bundle/launch.sh",
+      "digest": "sha256:81378c875ea36328a3a218a0d667df19fa2ce3aa211b13024379525a5595be20",
+      "byteLength": 203
+    },
+    {
+      "path": "bundle/probe.sh",
+      "digest": "sha256:12c973f73c2f70b5c666f7951fafb7c0ee0b433e5cef7abd7e9ded2025897f72",
+      "byteLength": 3464
+    },
+    {
+      "path": "bundle/public/status.txt",
+      "digest": "sha256:6353ec260e0cf4741e5a52a74bc3b4a41554bfa85b81b266341642bd298edeed",
+      "byteLength": 29
+    }
+  ],
+  "shard": {
+    "schemaVersion": "0.1.0",
+    "documentType": "graph",
+    "id": "urn:patamaps:observed:shard:sha256:2cceac1a364defd492006abe14f8ae80301a4744b187a11ccf384e7bdb924c8c",
+    "namespace": "miniserve-binary-context",
+    "entities": [
+      {
+        "id": "urn:patamaps:observed:docker-instruction:sha256:39954871d59e89eed89b6f416556dd29379eef453d1a64e1af06329d6ae3fe0f",
+        "kind": "docker-instruction",
+        "locators": [
+          {
+            "uri": "file:Dockerfile",
+            "digest": "sha256:09e269cbd1bbbcc38966cb4de92fd6838f665f9943c077647d10a386dfb429e7"
+          }
+        ],
+        "attributes": {
+          "file": "Dockerfile",
+          "instruction": "user_instruction",
+          "lexeme": "USER 65532:65532",
+          "observation": {
+            "declaredUser": "65532:65532"
+          },
+          "span": [
+            212.0,
+            228.0
+          ],
+          "stageIndex": 0.0,
+          "supportedSyntaxAndResolution": true,
+          "unsupportedReasons": []
+        }
+      },
+      {
+        "id": "urn:patamaps:observed:docker-instruction:sha256:452df933bbb1faf54402812dff358917fae2b9a60c181d5611faf3b6aeb38b7b",
+        "kind": "docker-instruction",
+        "locators": [
+          {
+            "uri": "file:Dockerfile",
+            "digest": "sha256:09e269cbd1bbbcc38966cb4de92fd6838f665f9943c077647d10a386dfb429e7"
+          }
+        ],
+        "attributes": {
+          "file": "Dockerfile",
+          "instruction": "copy_instruction",
+          "lexeme": "COPY MINISERVE-LICENSE /licenses/MINISERVE-LICENSE",
+          "observation": {
+            "contentEstablished": false,
+            "contextMembers": [
+              {
+                "byteLength": 1075.0,
+                "bytesCaptured": true,
+                "contentSuppliedAsText": true,
+                "contextSnapshotDigest": "sha256:890779f4c016dc0e83e6a4834beba4987ff7a4d12f12c64070d39dfce76865c0",
+                "destination": "/licenses/MINISERVE-LICENSE",
+                "digest": "sha256:bedb87f0760796c7be677651eb10ad949410e90c55bc7f607d848e8e9d65375a",
+                "source": "MINISERVE-LICENSE"
+              }
+            ],
+            "destination": "/licenses/MINISERVE-LICENSE",
+            "from": null,
+            "fromStageIndex": null,
+            "resolvedDestination": "/licenses/MINISERVE-LICENSE",
+            "sources": [
+              "MINISERVE-LICENSE"
+            ]
+          },
+          "span": [
+            161.0,
+            211.0
+          ],
+          "stageIndex": 0.0,
+          "supportedSyntaxAndResolution": true,
+          "unsupportedReasons": []
+        }
+      },
+      {
+        "id": "urn:patamaps:observed:docker-instruction:sha256:48952f10993ec6e3407f9d151444a552cd2c6695a28380586c6261cc1368af5c",
+        "kind": "docker-instruction",
+        "locators": [
+          {
+            "uri": "file:Dockerfile",
+            "digest": "sha256:09e269cbd1bbbcc38966cb4de92fd6838f665f9943c077647d10a386dfb429e7"
+          }
+        ],
+        "attributes": {
+          "file": "Dockerfile",
+          "instruction": "expose_instruction",
+          "lexeme": "EXPOSE 9100/tcp",
+          "observation": {
+            "listenerEstablished": false,
+            "ports": [
+              "9100/tcp"
+            ]
+          },
+          "span": [
+            229.0,
+            244.0
+          ],
+          "stageIndex": 0.0,
+          "supportedSyntaxAndResolution": true,
+          "unsupportedReasons": []
+        }
+      },
+      {
+        "id": "urn:patamaps:observed:docker-instruction:sha256:50db3c24c7047c1d9da62b1694e7dbeb2ce5e154af5ff1acbadba3bdbc17957b",
+        "kind": "docker-instruction",
+        "locators": [
+          {
+            "uri": "file:Dockerfile",
+            "digest": "sha256:09e269cbd1bbbcc38966cb4de92fd6838f665f9943c077647d10a386dfb429e7"
+          }
+        ],
+        "attributes": {
+          "file": "Dockerfile",
+          "instruction": "from_instruction",
+          "lexeme": "FROM ubuntu@sha256:534baea6a22c03a63003dbc8dbe78fe34bc0d7e595d9a9dc9834884ff530eb55 AS runtime",
+          "observation": {
+            "alias": "runtime",
+            "base": "ubuntu@sha256:534baea6a22c03a63003dbc8dbe78fe34bc0d7e595d9a9dc9834884ff530eb55",
+            "baseImageIdentityObserved": false,
+            "cmd": null,
+            "entrypoint": null,
+            "expose": [],
+            "imageContentsEstablished": false,
+            "index": 0.0,
+            "platform": "linux/amd64",
+            "runtimeListenerEstablished": false,
+            "unsupportedReasons": [],
+            "user": null,
+            "workdir": null
+          },
+          "span": [
+            34.0,
+            128.0
+          ],
+          "stageIndex": 0.0,
+          "supportedSyntaxAndResolution": true,
+          "unsupportedReasons": []
+        }
+      },
+      {
+        "id": "urn:patamaps:observed:docker-instruction:sha256:618cf1fd062bdfc391eecfbae024bd9eae6ce778f503d2fd076f61cc083fe309",
+        "kind": "docker-instruction",
+        "locators": [
+          {
+            "uri": "file:Dockerfile",
+            "digest": "sha256:09e269cbd1bbbcc38966cb4de92fd6838f665f9943c077647d10a386dfb429e7"
+          }
+        ],
+        "attributes": {
+          "file": "Dockerfile",
+          "instruction": "copy_instruction",
+          "lexeme": "COPY bundle/ /bundle/",
+          "observation": {
+            "contentEstablished": false,
+            "contextMembers": [
+              {
+                "byteLength": 585.0,
+                "bytesCaptured": true,
+                "contentSuppliedAsText": true,
+                "contextSnapshotDigest": "sha256:890779f4c016dc0e83e6a4834beba4987ff7a4d12f12c64070d39dfce76865c0",
+                "destination": "/bundle/configuration.json",
+                "digest": "sha256:4b7dc23a775e4538362e7849dd814cb70fb002dd706d29059ba248bc054b631e",
+                "source": "bundle/configuration.json"
+              },
+              {
+                "byteLength": 203.0,
+                "bytesCaptured": true,
+                "contentSuppliedAsText": true,
+                "contextSnapshotDigest": "sha256:890779f4c016dc0e83e6a4834beba4987ff7a4d12f12c64070d39dfce76865c0",
+                "destination": "/bundle/launch.sh",
+                "digest": "sha256:81378c875ea36328a3a218a0d667df19fa2ce3aa211b13024379525a5595be20",
+                "source": "bundle/launch.sh"
+              },
+              {
+                "byteLength": 7663536.0,
+                "bytesCaptured": true,
+                "contentSuppliedAsText": false,
+                "contextSnapshotDigest": "sha256:890779f4c016dc0e83e6a4834beba4987ff7a4d12f12c64070d39dfce76865c0",
+                "destination": "/bundle/miniserve",
+                "digest": "sha256:453ff86b8df2521d3ad516bf78037646e704b0a1727cee65ee9210efdc9bfd69",
+                "source": "bundle/miniserve"
+              },
+              {
+                "byteLength": 3464.0,
+                "bytesCaptured": true,
+                "contentSuppliedAsText": true,
+                "contextSnapshotDigest": "sha256:890779f4c016dc0e83e6a4834beba4987ff7a4d12f12c64070d39dfce76865c0",
+                "destination": "/bundle/probe.sh",
+                "digest": "sha256:12c973f73c2f70b5c666f7951fafb7c0ee0b433e5cef7abd7e9ded2025897f72",
+                "source": "bundle/probe.sh"
+              },
+              {
+                "byteLength": 29.0,
+                "bytesCaptured": true,
+                "contentSuppliedAsText": true,
+                "contextSnapshotDigest": "sha256:890779f4c016dc0e83e6a4834beba4987ff7a4d12f12c64070d39dfce76865c0",
+                "destination": "/bundle/public/status.txt",
+                "digest": "sha256:6353ec260e0cf4741e5a52a74bc3b4a41554bfa85b81b266341642bd298edeed",
+                "source": "bundle/public/status.txt"
+              }
+            ],
+            "destination": "/bundle/",
+            "from": null,
+            "fromStageIndex": null,
+            "resolvedDestination": "/bundle",
+            "sources": [
+              "bundle/"
+            ]
+          },
+          "span": [
+            139.0,
+            160.0
+          ],
+          "stageIndex": 0.0,
+          "supportedSyntaxAndResolution": true,
+          "unsupportedReasons": []
+        }
+      },
+      {
+        "id": "urn:patamaps:observed:docker-instruction:sha256:d081805caf8f9781d53f2ad9119c587bc4151ace546d7ac4059b0ea30b59fc68",
+        "kind": "docker-instruction",
+        "locators": [
+          {
+            "uri": "file:Dockerfile",
+            "digest": "sha256:09e269cbd1bbbcc38966cb4de92fd6838f665f9943c077647d10a386dfb429e7"
+          }
+        ],
+        "attributes": {
+          "file": "Dockerfile",
+          "instruction": "workdir_instruction",
+          "lexeme": "WORKDIR /",
+          "observation": {
+            "resolvedWorkdir": "/"
+          },
+          "span": [
+            129.0,
+            138.0
+          ],
+          "stageIndex": 0.0,
+          "supportedSyntaxAndResolution": true,
+          "unsupportedReasons": []
+        }
+      },
+      {
+        "id": "urn:patamaps:observed:docker-instruction:sha256:e9753182de0d0471259855566b83b71c548364140de8eaca73c2610dbcd11cbe",
+        "kind": "docker-instruction",
+        "locators": [
+          {
+            "uri": "file:Dockerfile",
+            "digest": "sha256:09e269cbd1bbbcc38966cb4de92fd6838f665f9943c077647d10a386dfb429e7"
+          }
+        ],
+        "attributes": {
+          "file": "Dockerfile",
+          "instruction": "entrypoint_instruction",
+          "lexeme": "ENTRYPOINT [\"/bin/bash\", \"/bundle/launch.sh\"]",
+          "observation": {
+            "environmentExpansionPerformed": false,
+            "exec": [
+              "/bin/bash",
+              "/bundle/launch.sh"
+            ]
+          },
+          "span": [
+            245.0,
+            290.0
+          ],
+          "stageIndex": 0.0,
+          "supportedSyntaxAndResolution": true,
+          "unsupportedReasons": []
+        }
+      },
+      {
+        "id": "urn:patamaps:observed:docker-stage:sha256:0345cbb4f30575d55caa6dd80c86ba42af0cc588fa5631ecf072ddd1a32a670b",
+        "kind": "docker-stage",
+        "attributes": {
+          "alias": "runtime",
+          "base": "ubuntu@sha256:534baea6a22c03a63003dbc8dbe78fe34bc0d7e595d9a9dc9834884ff530eb55",
+          "baseImageIdentityObserved": false,
+          "buildArgs": {},
+          "cmd": null,
+          "context": ".",
+          "dockerfile": "Dockerfile",
+          "entrypoint": [
+            "/bin/bash",
+            "/bundle/launch.sh"
+          ],
+          "expose": [
+            "9100/tcp"
+          ],
+          "frontend": "docker/dockerfile:1.10.0",
+          "imageContentsEstablished": false,
+          "index": 0.0,
+          "platform": "linux/amd64",
+          "requestedTarget": "runtime",
+          "runtimeListenerEstablished": false,
+          "unsupportedReasons": [],
+          "user": "65532:65532",
+          "workdir": "/"
+        }
+      }
+    ],
+    "mappings": [],
+    "authorities": [],
+    "metadata": {
+      "observation": {
+        "baseImageIdentitiesObserved": false,
+        "buildArgs": {},
+        "capturedContextFiles": [
+          "Dockerfile",
+          "MINISERVE-LICENSE",
+          "bundle/configuration.json",
+          "bundle/launch.sh",
+          "bundle/miniserve",
+          "bundle/probe.sh",
+          "bundle/public/status.txt"
+        ],
+        "compilationEstablished": false,
+        "context": ".",
+        "contextCompleteness": "verified sealed file-context inventory; original owner not rediscovered",
+        "contextSnapshot": {
+          "capturedModesBound": true,
+          "digest": "sha256:890779f4c016dc0e83e6a4834beba4987ff7a4d12f12c64070d39dfce76865c0",
+          "fileBytes": 7669183.0,
+          "fileCount": 7.0,
+          "files": {
+            "Dockerfile": {
+              "byteLength": 291.0,
+              "digest": "sha256:09e269cbd1bbbcc38966cb4de92fd6838f665f9943c077647d10a386dfb429e7",
+              "kind": "file",
+              "mode": 420.0
+            },
+            "MINISERVE-LICENSE": {
+              "byteLength": 1075.0,
+              "digest": "sha256:bedb87f0760796c7be677651eb10ad949410e90c55bc7f607d848e8e9d65375a",
+              "kind": "file",
+              "mode": 420.0
+            },
+            "bundle/configuration.json": {
+              "byteLength": 585.0,
+              "digest": "sha256:4b7dc23a775e4538362e7849dd814cb70fb002dd706d29059ba248bc054b631e",
+              "kind": "file",
+              "mode": 420.0
+            },
+            "bundle/launch.sh": {
+              "byteLength": 203.0,
+              "digest": "sha256:81378c875ea36328a3a218a0d667df19fa2ce3aa211b13024379525a5595be20",
+              "kind": "file",
+              "mode": 493.0
+            },
+            "bundle/miniserve": {
+              "byteLength": 7663536.0,
+              "digest": "sha256:453ff86b8df2521d3ad516bf78037646e704b0a1727cee65ee9210efdc9bfd69",
+              "kind": "file",
+              "mode": 493.0
+            },
+            "bundle/probe.sh": {
+              "byteLength": 3464.0,
+              "digest": "sha256:12c973f73c2f70b5c666f7951fafb7c0ee0b433e5cef7abd7e9ded2025897f72",
+              "kind": "file",
+              "mode": 420.0
+            },
+            "bundle/public/status.txt": {
+              "byteLength": 29.0,
+              "digest": "sha256:6353ec260e0cf4741e5a52a74bc3b4a41554bfa85b81b266341642bd298edeed",
+              "kind": "file",
+              "mode": 420.0
+            }
+          },
+          "originalSourceAccess": "not-required",
+          "profile": "patamaps-project-context-1",
+          "snapshotBytesVerified": true,
+          "toolExecution": "not-performed"
+        },
+        "dockerfile": "Dockerfile",
+        "dockerfileSpecificIgnorePrecedence": true,
+        "evidenceClass": "observed-captured-syntax",
+        "ignoreFile": null,
+        "imageContentsEstablished": false,
+        "instructionsExecuted": false,
+        "parser": {
+          "engine": "tree-sitter=0.26.5",
+          "grammar": "tree-sitter-containerfile=0.9.2",
+          "nodeTypesDigest": "sha256:45db9754de1647e4aa3a526d8e94c580e906099bf92000fe09247cd64c1e5868"
+        },
+        "processCaching": false,
+        "profile": "patamaps-docker-captured-syntax-1",
+        "runtimeListenerEstablished": false,
+        "selectedStage": {
+          "alias": "runtime",
+          "base": "ubuntu@sha256:534baea6a22c03a63003dbc8dbe78fe34bc0d7e595d9a9dc9834884ff530eb55",
+          "baseImageIdentityObserved": false,
+          "cmd": null,
+          "entrypoint": [
+            "/bin/bash",
+            "/bundle/launch.sh"
+          ],
+          "expose": [
+            "9100/tcp"
+          ],
+          "imageContentsEstablished": false,
+          "index": 0.0,
+          "platform": "linux/amd64",
+          "runtimeListenerEstablished": false,
+          "unsupportedReasons": [],
+          "user": "65532:65532",
+          "workdir": "/"
+        },
+        "unsupported": []
+      },
+      "profile": "patamaps-native-observations-1"
+    }
+  },
+  "diagnostics": []
+}

@@ -99,3 +99,83 @@ def verify_exits(controller, work):
         receipt.update(result="failed",error=type(error).__name__+": "+str(error));raise
     finally:
         (work/"receipt.json").write_text(json.dumps(receipt,indent=2)+"\n")
+
+
+def verify_inspection_budget(controller, work):
+    """Real subprocess deadline/protocol controls; no native build or lease."""
+    import importlib.util
+    from unittest.mock import patch
+    work.mkdir(exist_ok=False)
+    spec = importlib.util.spec_from_file_location("patamaps_watch_budget_probe", controller)
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    key = "sha256:" + "a" * 64
+    compiler = work / "controlled-compiler"
+    delay = work / "delay.json"
+    selected = work / "selected-key.txt"
+    delay.write_text("{}")
+    selected.write_text(key)
+    compiler.write_text("#!" + sys.executable + "\n" +
+        "import json,sys,time\nfrom pathlib import Path\n" +
+        "root=Path(__file__).parent\n" +
+        "command=sys.argv[1]\n" +
+        "time.sleep(json.loads((root/'delay.json').read_text()).get(command,0))\n" +
+        "key='sha256:'+'a'*64\n" +
+        "if command=='project-build-input-key':\n" +
+        " print(json.dumps(dict(status='observed-project-build-inputs',commandsExecuted=False,inputKey=key)))\n" +
+        "elif command=='project-build-verify':\n" +
+        " print(json.dumps(dict(status='verified-selected-build-bindings',inputKey=(root/'selected-key.txt').read_text())))\n" +
+        "else: raise SystemExit(2)\n")
+    compiler.chmod(0o700)
+    argv = [str(controller), str(work / "plan.json"), "--source", str(work),
+            "--state", str(work / "state"), "--compiler", str(compiler)]
+    def arguments(extra):
+        with patch.object(sys, "argv", [*argv, *extra, "--runner", sys.executable]):
+            return module.arguments()
+    report = dict(control="bounded-watch-native-inspections", result="running", cases=[],
+                  scope="controlled subprocess deadlines and protocol, not native/application acceptance")
+    try:
+        default = arguments([])
+        assert default.inspection_timeout_ms == 30000
+        report["cases"].append(dict(case="default-30000ms-preserved", result="passed"))
+        for budget in ("999", "3600001", "invalid"):
+            with (work / ("invalid-" + budget + ".stderr.log")).open("x") as err:
+                with patch.object(sys, "stderr", err):
+                    try:
+                        arguments(["--inspection-timeout-ms", budget])
+                    except SystemExit as error:
+                        assert error.code == 2
+                    else:
+                        raise AssertionError("invalid inspection budget admitted")
+            report["cases"].append(dict(case="invalid-budget-" + budget, result="refused"))
+        assert arguments(["--inspection-timeout-ms", "3600000"]).inspection_timeout_ms == 3600000
+        short = arguments(["--inspection-timeout-ms", "1000"])
+        long = arguments(["--inspection-timeout-ms", "3000"])
+        for command, inspect in (("project-build-input-key", module.observe),
+                                 ("project-build-verify", module.verified_selection)):
+            delay.write_text(json.dumps({command: 1.5}))
+            try:
+                inspect(short)
+            except subprocess.TimeoutExpired:
+                report["cases"].append(dict(case=command + "-short-budget", result="timed-out"))
+            else:
+                raise AssertionError("inspection exceeded its budget without refusal")
+            value = inspect(long)
+            assert (value if isinstance(value, str) else value["inputKey"]) == key
+            report["cases"].append(dict(case=command + "-explicit-budget", result="passed"))
+        delay.write_text("{}")
+        selected.write_text("sha256:" + "b" * 64)
+        try:
+            module.verified_selection(long)
+        except ValueError as error:
+            assert str(error) == "WATCH_SELECTION_DOES_NOT_MATCH_CURRENT_INPUTS"
+            report["cases"].append(dict(case="larger-budget-keeps-key-match", result="refused"))
+        else:
+            raise AssertionError("inspection budget bypassed selected/current key match")
+        report["result"] = "passed"
+        return report
+    except BaseException as error:
+        report.update(result="failed", error=type(error).__name__ + ": " + str(error))
+        raise
+    finally:
+        (work / "receipt.json").write_text(json.dumps(report, indent=2) + "\n")

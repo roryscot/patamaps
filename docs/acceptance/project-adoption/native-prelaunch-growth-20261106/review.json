@@ -1,0 +1,76 @@
+{
+  "status": "verified-staged-prelaunch-capacity-check",
+  "baseline": {
+    "variant": "baseline",
+    "cases": [
+      {
+        "label": "slow-inventory",
+        "spawned": true,
+        "leaseHeld": true,
+        "requestState": "needs-review",
+        "leaseReleased": false,
+        "receiptExitCode": 75,
+        "chargedBytes": 67108865
+      }
+    ],
+    "isolatedLeases": true,
+    "realShellChildren": true,
+    "capacityAndContainerInventoryInjected": true
+  },
+  "candidate": {
+    "variant": "candidate",
+    "cases": [
+      {
+        "label": "slow-inventory",
+        "spawned": false,
+        "leaseHeld": false,
+        "requestState": "finished",
+        "leaseReleased": true,
+        "receiptExitCode": 75,
+        "chargedBytes": 67108865
+      },
+      {
+        "label": "snapshot-loss",
+        "spawned": false,
+        "leaseHeld": false,
+        "requestState": "finished",
+        "leaseReleased": true,
+        "receiptExitCode": 75,
+        "chargedBytes": 67108865
+      },
+      {
+        "label": "exact-limit",
+        "spawned": true,
+        "leaseHeld": false,
+        "requestState": "finished",
+        "leaseReleased": true,
+        "receiptExitCode": 0,
+        "chargedBytes": 67108864
+      },
+      {
+        "label": "unchanged-capacity",
+        "spawned": true,
+        "leaseHeld": false,
+        "requestState": "finished",
+        "leaseReleased": true,
+        "receiptExitCode": 0,
+        "chargedBytes": 0
+      }
+    ],
+    "isolatedLeases": true,
+    "realShellChildren": true,
+    "capacityAndContainerInventoryInjected": true
+  },
+  "followUp": {
+    "refusedRequestReleased": true,
+    "subsequentRequestQueuedAndReleased": true,
+    "subsequentExitCode": 0
+  },
+  "observedPoolDropBeforeInspectionMountBytes": 334585856,
+  "ownedVolumeAccountingUnchangedBetweenSamples": true,
+  "productionGrowthAttributionEstablished": false,
+  "originalFailedReservationRecovered": false,
+  "stagedGuardSha256": "8db6299f79130d780757fa9a3e1f77bb7e5467f1be3f288d36b8675bdbff5f91",
+  "installedGuardChanged": false,
+  "filesDeleted": 0
+}

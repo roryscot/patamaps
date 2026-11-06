@@ -1,0 +1,51 @@
+{
+  "schemaVersion": 1,
+  "status": "failed-real-standalone-cargo-check-missing-tauri-icon",
+  "date": "2026-10-22",
+  "patamapsBaseCommit": "b87c873ff047fb32117d4f4011b2baf4576a9827",
+  "source": {
+    "identity": "private existing standalone Rust/Tauri package; repository identity, revision, source bytes and paths retained on Intel",
+    "selectedNonsecretInputCount": 6,
+    "cargoLockPresentInOriginalBefore": false,
+    "cargoLockPresentInOriginalAfter": false,
+    "originalWorktreeCleanAndUnchanged": true,
+    "trackedImageOrIconAssetsPresent": false
+  },
+  "attemptHistory": [
+    {
+      "stage": "initial candidate check",
+      "result": "refused before compilation because candidate was staged inside an enclosing, unrelated Cargo workspace"
+    },
+    {
+      "stage": "isolated offline resolution",
+      "result": "refused before compilation because the isolated offline cache did not contain tauri"
+    },
+    {
+      "stage": "credential-free public dependency fetch followed by offline check",
+      "result": "fetch passed; 407 package entries were resolved into a candidate-only lockfile; application check then failed"
+    }
+  ],
+  "finalCheck": {
+    "command": "cargo check --offline --locked --all-targets",
+    "exitCode": 101,
+    "failure": "Tauri generate_context! expansion required its default icons/icon.png input, absent from the selected package and original project assets",
+    "projectRustCrateCompilationEstablished": false,
+    "testsRun": false,
+    "frontendBuildHookConfigured": true,
+    "frontendBuildHookExecuted": false
+  },
+  "guard": {
+    "sharedIntelSupervisor": true,
+    "exclusiveNativeReservation": true,
+    "oneRunDiskReservationBytes": 2500000000,
+    "measuredNetFreeSpaceConsumptionBytes": 796917760,
+    "persistentPolicyChanged": false,
+    "workloadStopConfirmed": true,
+    "newContainersAtEnd": 0
+  },
+  "privacy": {
+    "rawCaptureCandidateCargoLockAndLogsRetainedPrivatelyOnIntel": true,
+    "privateProjectIdentityOrSourceCommitted": false
+  },
+  "scope": "Standalone Cargo dependency resolution and selected-input capture/staging were exercised; application compilation and acceptance failed at a missing required icon asset."
+}

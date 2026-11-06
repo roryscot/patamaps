@@ -1,0 +1,29 @@
+{
+  "status": "passed-focused-ca-store-controls",
+  "testsPassed": 32,
+  "commands": [
+    [
+      "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/intel-python-3.13.16-20261013/runtime/python/bin/python3",
+      "-B",
+      "-m",
+      "unittest",
+      "test_cargo_registry_context",
+      "test_cargo_registry_diagnostics",
+      "test_exact_archive_install"
+    ],
+    [
+      "bash",
+      "-n",
+      "/Volumes/dev_src_case_sensitive/projects/patamaps/scripts/deployment/miniserve/registry-build.sh"
+    ],
+    [
+      "git",
+      "diff",
+      "--check"
+    ]
+  ],
+  "retainedTestRoot": "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/ca-store-controls-ykdnn1sp",
+  "previousInvocation": "Refused before fixture checks: missing PATAMAPS_TEST_RETAIN_ROOT; five diagnostic controls passed; corrected environment for rerun",
+  "filesDeleted": 0,
+  "realLinuxWorkloadAcceptance": false
+}
