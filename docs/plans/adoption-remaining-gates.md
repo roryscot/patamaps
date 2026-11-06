@@ -28,6 +28,13 @@ out without an observed API request. Both browsers attempted a POST in the
 [focused synthetic form check](../acceptance/project-adoption/seeder-synthetic-submit-20261105/README.md).
 Full five-project authentication is still open.
 
+The form-readiness check subsequently passed all three desktop WebKit
+cases, for nine desktop cases total. A separate real [Mobile Chrome run](../acceptance/project-adoption/seeder-mobile-chrome-viewport-pass-20261105/README.md)
+passed all three cases after translating the visual viewport offset for the
+trusted touch on the exact edited link. The [full rerun](../acceptance/project-adoption/seeder-full-viewport-accounting-stop-20261105/README.md)
+stopped on live volume accounting and later released only the proven-stopped
+reservation. Mobile Safari and a complete 15-case result remain open.
+
 ## What the existing evidence establishes
 
 | Original requirement | Evidence inspected | Remaining requirement |
