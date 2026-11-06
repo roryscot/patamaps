@@ -79,9 +79,10 @@ The [native-package owner build and runtime](../acceptance/project-adoption/warg
 then passed with fresh Rust and Next output and all 13 original lab network
 checks. The [source-installed owner build](../acceptance/project-adoption/wargame-source-installed-20261106/README.md)
 passed those same 13 checks and all 22 original desktop and narrow browser
-cases on its new Rust and Next output. Managed identity and PostgreSQL
-checks on the new installed builds and a single successful aggregate
-native suite invocation remain open.
+cases on its new Rust and Next output. All three
+[source-installed managed checks](../acceptance/project-adoption/wargame-source-installed-20261106/README.md#managed-identity-and-detached-restore)
+now have passing evidence across two invocations. A successful aggregate
+native invocation and the remaining adoption gates below are still open.
 
 ## What the existing evidence establishes
 

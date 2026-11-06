@@ -23,7 +23,32 @@ reservations released under the existing limits.
 
 The Patamaps CLI was reused from its [earlier exact source installation](../installed-original-owner-next-20261027/package-source-review.json).
 This passes the source-installed Wargame build and lab transport and
-browser workflow. Managed identity and PostgreSQL checks on this new
-build and a single successful aggregate native suite remain open.
+browser workflow. The managed checks on the same builds are recorded below.
+A single successful aggregate native suite remains open.
 
 [Network review](network-review.json) · [Browser review](browser-review.json)
+
+## Managed identity and detached restore
+
+The original managed suite on the same source-installed builds passed
+the identity and authoring integrations. Its detached restore check
+failed at archive extraction verification. The wrapper's file-creation
+mask changed 2,012 extracted files from mode 0644 to 0600. The
+independent comparison verified that every expected payload byte matched.
+The failed invocation and its extracted tree are preserved.
+
+The original focused detached check then passed under mask 022 with
+isolated PostgreSQL 18.6 and synthetic OIDC. It restored and exercised
+a separate database while the original fixture's connections were
+denied. The independent review streamed all 2,185 regular archive
+members, including the exact source-installed Rust binary and Next
+build ID. The three managed integrations passed across the two
+invocations, each with two browser cases.
+
+Both invocations restored the 72 prior evidence files by identity and
+digest and kept the original and producing Next trees intact. Both
+owned clusters stopped, both tool mounts detached, and both
+reservations released. The detached check qualifies this synthetic
+fixture and archived runtime.
+
+[Managed review](managed-review.json)
