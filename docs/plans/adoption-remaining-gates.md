@@ -35,6 +35,14 @@ trusted touch on the exact edited link. The [full rerun](../acceptance/project-a
 stopped on live volume accounting and later released only the proven-stopped
 reservation. Mobile Safari and a complete 15-case result remain open.
 
+The [single-request accounting candidate](../acceptance/project-adoption/seeder-single-deadline-accounting-20261106/README.md)
+passed its deadline and matching-inventory controls. A separately
+[admitted Mobile Safari attempt](../acceptance/project-adoption/seeder-mobile-safari-growth-stop-20261106/README.md)
+stopped before API or browser launch when the guard observed 654 MB of
+conservative growth against a 300 MB reservation. The exact stopped
+reservation was recovered and its failure preserved. This adds no
+Safari acceptance and leaves the full matrix open.
+
 ## What the existing evidence establishes
 
 | Original requirement | Evidence inspected | Remaining requirement |
