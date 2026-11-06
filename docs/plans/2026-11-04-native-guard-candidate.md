@@ -95,3 +95,16 @@ The full adoption goal remains open. The [lost final-success-record counterexamp
 The [configuration-only WebSocket builds](../acceptance/project-adoption/websocket-build-limits-20261105/README.md) both stopped under declared3GB/4GB limits before selecting an output. Proven-stopped reservations were individually recovered; failures and prior selections remain. No unchanged retry or limit increase is authorized by these results. The [additional five-image sparse recovery](../acceptance/project-adoption/closed-images-followup-20261105/README.md) independently preserves every logical byte and saves another1.40GB allocated. No file deletion or unrelated service interruption occurred.
 
 The subsequent [twelve-case registered regression](../acceptance/project-adoption/native-normal-seal-twelve-cases-20261105/README.md) independently passes28 decisions, seven conservative holds and five automatic stopped-state releases. The qualified bridge is repository source; installed/trust/parallel activation remains off and full owner/adoption gates remain open.
+
+
+## 2026-11-06 actual owner read-only postcheck compatibility
+
+The [installed watcher postcheck](../acceptance/project-adoption/original-owner-watch-readonly-verification-20261106/README.md)
+passed both real verification operations on the original owner selection
+under the existing strict inspection profile and original 900-second
+bound. The historical installed interface and too-short preflight
+failures are preserved. Both native groups stopped and the ordinary
+outer reservation released. This was a direct read-only preflight.
+The registered controller still requires a closed paired postcheck
+operation and the real watcher still requires the original parent-death
+and changed-generation cases.
