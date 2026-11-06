@@ -57,15 +57,18 @@ passes 29 source controls. Its first live trial stopped at the growth
 limit while staging the capsule. The failed record was preserved and
 the exact stopped reservation was released. A [staged reuse run](../acceptance/project-adoption/original-owner-registered-retained-capsule-20261106/README.md)
 then passed the live registered pair and refusal controls with the
-pinned, read-only capsule and automatic reservation release. Foreground
-watcher execution and actual parent-death release remain open.
+pinned, read-only capsule and automatic reservation release. The
+[foreground original-owner watcher](../acceptance/project-adoption/original-owner-foreground-registered-watch-20261106/README.md)
+then passed a no-op and separate post-check, idle SIGTERM, and active
+test-parent death with automatic release. Changed-build lifecycle
+checks remain open.
 
 The [actual installed owner watcher](../acceptance/project-adoption/seeder-stale-installed-selection-refusal-20261106/README.md)
 also refused the retained baseline inputs against the installed edited
 selection. Its two native commands and normal reservation release were
 independently verified. The [earlier context refusal](../acceptance/project-adoption/seeder-stale-selection-context-refusal-20261106/README.md)
-remains separate evidence. Live registered lifecycle, changed-build
-and deployment refusal acceptance remain open.
+remains separate evidence. Changed-build lifecycle and deployment
+refusal acceptance remain open.
 
 The [Wargame managed and browser checks](../acceptance/project-adoption/wargame-owner-managed-and-native-persistence-20261106/README.md)
 pass at their recorded scope. The earlier native suite passed 116 cases
