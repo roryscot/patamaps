@@ -121,7 +121,7 @@ def main():
   for n in ["prepare_bundle.py","probe.sh"]:shutil.copyfile(recipe/n,owner/n)
   (owner/"public/status.txt").write_text("patamaps-miniserve-qualified\n")
   identity="urn:qualification:miniserve:deployment"
-  values={"graph.json":dict(schemaVersion="0.1.0",documentType="graph",id=identity+":source",namespace="miniserve-deployment",revision="1",entities=[dict(id=identity+":service",kind="deployment-runtime",label="Miniserve 0.35.0",attributes=dict(sourceCommit=REV,target="linux/amd64"))],mappings=[],authorities=[]),"policy.json":dict(schemaVersion="0.1.0",documentType="policy",id=identity+":policy",graph=dict(id=identity,revision="1"),mappings=[],constraints=[],evidence=[]),"projection.json":dict(schemaVersion="0.1.0",documentType="projection-spec",id=identity+":projection",select=dict(kinds=["deployment-runtime"]),slots=[]),"producer.json":r["applicationBinary"],"service.json":dict(schemaVersion="miniserve-qualified-1",nonsecret=True,target="linux/amd64",bind="127.0.0.1",port=9100,routePrefix="/qualified",documentRoot="public")}
+  values={"graph.json":dict(schemaVersion="0.1.0",documentType="graph",id=identity+":source",namespace="miniserve-deployment",revision="1",entities=[dict(id=identity+":service",kind="deployment-runtime",label="Miniserve 0.35.0",attributes=dict(sourceCommit=REV,target="linux/amd64",listenerPort=9100))],mappings=[],authorities=[]),"policy.json":dict(schemaVersion="0.1.0",documentType="policy",id=identity+":policy",graph=dict(id=identity,revision="1"),mappings=[],constraints=[],evidence=[]),"projection.json":dict(schemaVersion="0.1.0",documentType="projection-spec",id=identity+":projection",select=dict(kinds=["deployment-runtime"]),slots=[]),"producer.json":r["applicationBinary"],"service.json":dict(schemaVersion="miniserve-qualified-1",nonsecret=True,target="linux/amd64",bind="127.0.0.1",port=9100,routePrefix="/qualified",documentRoot="public")}
   for n,v in values.items():write(owner/n,v)
   profile=dict(profile="patamaps-project-inputs-1",id=identity+":inputs",nonsecretInputs=True,inputs=[*values,"prepare_bundle.py","probe.sh","public/status.txt"],components=[dict(id="service",kind="deployment",root=".",entrypoints=["service.json"])],nonsecretConfiguration={},secretReferences={})
   workspace=dict(schemaVersion="0.1.0",documentType="workspace-config",id=identity,namespace="miniserve-deployment",revision="1",sources=[dict(adapter="portable-shard",id=identity+":source",path="graph.json")],packs=[],policy="policy.json",projections=[dict(path="projection.json",emissions=[dict(path="generated/service.json",language="json")])],context=dict(scope="explicit external service qualification"),evaluatedAt="2026-10-22T00:00:00Z")
@@ -138,7 +138,8 @@ def main():
    pp=work/(label+"-plan.json")
    write(pp,dict(profile="patamaps-project-build-1",maximumRetainedAttempts=8,project=profile,workspace=workspace,buildSteps=[command(sys.executable,["prepare_bundle.py"],inputs=["prepare_bundle.py"])],verificationSteps=[command(sys.executable,["prepare_bundle.py","--verify"],inputs=["prepare_bundle.py"]),command(cli,["elf-target-check","bundle/miniserve","--target","linux/amd64","--digest","sha256:"+dig]),command("/bin/bash",["probe.sh",mode,out/("runtime-"+label)],inputs=["probe.sh"],maximum=60000)],outputs=[dict(path="bundle",kind="tree")]))
    return pp
-  good=native("native-deployment-select",["project-build",plan("positive",sha(binary)),"--source",owner,"--state",state,"--context",binding]);assert good["status"]=="selected-project-build"
+  positive_plan=plan("positive",sha(binary))
+  good=native("native-deployment-select",["project-build",positive_plan,"--source",owner,"--state",state,"--context",binding]);assert good["status"]=="selected-project-build"
   pointer=(state/"selected.json").read_bytes();candidate=state/good["attempt"]/"candidate"
   r["runtimeControls"]=(out/"runtime-positive/passed-controls.txt").read_text().splitlines();assert len(r["runtimeControls"])==8
   def refused(label,pp,bp,diagnostic):
@@ -152,6 +153,23 @@ def main():
   refused("wrong-digest-selection",plan("wrong-digest","0"*64),binding,"ELF_BINDING")
   arm=work/"official-arm64";run("official-arm64",["curl","--fail","--location","--max-time","120","--max-filesize","3145728","--output",arm,"https://github.com/svenstaro/miniserve/releases/download/v0.35.0/miniserve-0.35.0-aarch64-unknown-linux-musl"]);assert sha(arm)==ARM_SHA
   _,ab=context("arm64",arm);refused("wrong-architecture-selection",plan("wrong-architecture",ARM_SHA),ab,"ELF_ARCHITECTURE")
+  # Observe an intended deployment change without replacing the selected bundle.
+  graph=values["graph.json"]
+  service=values["service.json"]
+  graph_path=owner/"graph.json";service_path=owner/"service.json"
+  graph_bytes=graph_path.read_bytes();service_bytes=service_path.read_bytes()
+  entity=graph["entities"][0]
+  next_graph={**graph,"entities":[{**entity,"attributes":{**entity["attributes"],"listenerPort":9101}}]}
+  next_service={**service,"port":9101}
+  try:
+   write(graph_path,next_graph);write(service_path,next_service)
+   desired=native("observe-intended-deployment",["project-build-input-key",positive_plan,"--source",owner,"--context",binding])
+   assert desired["status"]=="observed-project-build-inputs" and desired["commandsExecuted"] is False
+   desired_key=desired["inputKey"]
+   assert desired_key!=good["inputKey"]
+   desired_graph_digest=sha(graph_path);desired_service_digest=sha(service_path)
+  finally:
+   graph_path.write_bytes(graph_bytes);service_path.write_bytes(service_bytes)
   owner.rename(work/"owner.retained-offline");snapshot.rename(work/"built-snapshot.retained-offline")
   replay=native("offline-selected-replay",["project-build-verify",state]);assert replay["status"]=="verified-selected-build-bindings"
   artifact=candidate/"bundle/miniserve";backup=work/"qualified-runtime.retained";artifact.rename(backup);shutil.copy2(arm,artifact)
@@ -159,8 +177,24 @@ def main():
   run("stale-before-effects",[cli,"project-exec-selected",state,cp],expected=2)
   assert not (candidate/"forbidden.marker").exists() and "PROJECT_BUILD_SELECTED_OUTPUT_CHANGED" in (out/"logs/stale-before-effects.stderr").read_text()
   artifact.rename(work/"stale-arm64.retained");backup.rename(artifact)
-  cp=work/"selected-runtime.command.json";write(cp,command("/bin/bash",["probe.sh","positive",out/"runtime-selected"],inputs=["probe.sh"],maximum=60000))
-  result=native("selected-runtime-repeat",["project-exec-selected",state,cp]);assert result["status"]=="completed-selected-project-command" and result["selectionPointerUnchanged"] and (state/"selected.json").read_bytes()==pointer
+  stale_runtime=out/"runtime-stale-generation"
+  cp=work/"stale-generation.command.json"
+  write(cp,command("/bin/bash",["probe.sh","positive",stale_runtime],inputs=["probe.sh"],maximum=60000))
+  run("stale-generation-before-deployment",[cli,"project-exec-selected",state,cp,"--expected-input-key",desired_key],expected=2)
+  assert "PROJECT_BUILD_EXPECTED_INPUT_KEY_MISMATCH" in (out/"logs/stale-generation-before-deployment.stderr").read_text()
+  assert not stale_runtime.exists() and (state/"selected.json").read_bytes()==pointer
+
+  cp=work/"selected-runtime.command.json"
+  selected_runtime=out/"runtime-selected"
+  write(cp,command("/bin/bash",["probe.sh","positive",selected_runtime],inputs=["probe.sh"],maximum=60000))
+  result=native("selected-runtime-repeat",["project-exec-selected",state,cp,"--expected-input-key",good["inputKey"]])
+  assert result["status"]=="completed-selected-project-command" and result["postExecutionSelectionVerified"]
+  assert result["inputKey"]==good["inputKey"] and result["selectionPointerUnchanged"] and (state/"selected.json").read_bytes()==pointer
+  assert (selected_runtime/"passed-controls.txt").read_text().splitlines()==r["runtimeControls"]
+  r["deploymentGenerationGuard"]=dict(selectedInputKey=good["inputKey"],intendedInputKey=desired_key,
+    intendedGraphSha256=desired_graph_digest,intendedServiceSha256=desired_service_digest,
+    selectedPort=9100,intendedPort=9101,staleRefusedBeforeProbe=True,
+    matchingKeyPassedHttp=True,selectionPointerUnchanged=True)
   archive=out/"artifacts/selected-state.tar.gz"
   with tarfile.open(archive,"w:gz") as tar:
    for name in ["driver.lock","selected.json",good["attempt"]]:tar.add(state/name,arcname="selected-state/"+name)
