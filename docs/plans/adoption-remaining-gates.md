@@ -77,9 +77,11 @@ A single successful full-suite invocation remains open. Both installed
 Patamaps CLIs [reproduced the exact Wargame client and Axum witness](../acceptance/project-adoption/wargame-installed-profile-20261106/README.md).
 The [native-package owner build and runtime](../acceptance/project-adoption/wargame-installed-network-20261106/README.md)
 then passed with fresh Rust and Next output and all 13 original lab network
-checks. The corresponding source-installed runtime, managed and browser
-checks on the new builds, and a single successful native suite invocation
-remain open.
+checks. The [source-installed owner build](../acceptance/project-adoption/wargame-source-installed-20261106/README.md)
+passed those same 13 checks and all 22 original desktop and narrow browser
+cases on its new Rust and Next output. Managed identity and PostgreSQL
+checks on the new installed builds and a single successful aggregate
+native suite invocation remain open.
 
 ## What the existing evidence establishes
 
