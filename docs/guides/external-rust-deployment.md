@@ -46,6 +46,9 @@ verification preserves the previously selected generation. The
 also verifies `--expected-input-key` against actual deployment inputs.
 The key for a changed listener declaration refuses before the probe
 starts. The selected key passes all eight HTTP and startup controls.
+The [managed Intel replay](../acceptance/project-adoption/miniserve-managed-generation-replay-20261106/README.md)
+repeated both outcomes with the exact creating compiler and selected
+state under the executor's CPU, memory, network and writable quota limits.
 
 ## Reproduction and provenance
 
