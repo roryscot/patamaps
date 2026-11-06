@@ -41,7 +41,11 @@ The selected artifact includes its launcher, nonsecret configuration proof,
 document and executable. A late artifact change refuses project-exec-selected
 before command effects. The cooperative state lock remains held through
 execution and post-verification. A failed runtime/config/digest/architecture
-verification preserves the previously selected generation.
+verification preserves the previously selected generation. The
+[current-engine Linux qualification](../acceptance/project-adoption/miniserve-deployment-generation-20261106/README.md)
+also verifies `--expected-input-key` against actual deployment inputs.
+The key for a changed listener declaration refuses before the probe
+starts. The selected key passes all eight HTTP and startup controls.
 
 ## Reproduction and provenance
 
