@@ -21,3 +21,33 @@ application assertion. The exact [reference failure](../wargame-owner-reference-
 still needs correlation with a traced owner run.
 
 [Independent fixture review](fixture-review.json)
+
+## Full focused owner reference passed
+
+The unchanged owner command passed under the existing guard.
+
+```sh
+node scripts/check-persistence.mjs --native-test=boundary_reference::full_reference_boundaries_storage_recovery_and_ledger_are_exact
+```
+
+FIFO and priority each completed all 864 ticks with 2,000 orders. The test
+checked native equality, independent terminal ledgers, cold recovery, and
+all 866 stored history entries per plan. It exited successfully after
+6,684.57 seconds, within the two-hour deadline. It reused the exact
+executable from the earlier failed attempt. Independent verification
+rehashed 150 frozen inputs and confirmed both completed plan artifacts.
+
+The observer collected 32,335 samples and recorded no idle transaction at
+or above its two-second threshold. The earlier five-second timeout did
+not recur and its cause remains unresolved. The guard observed
+1,392,017,408 bytes of growth, exited successfully and released. The
+isolated database stopped, the tool image detached, and the unrelated
+database matched its pre-run identity.
+
+The earlier run's 116 successful cases and this focused success cover all
+117 named native cases across separate invocations. The original aggregate
+failure and focused timeout are preserved. This run does not supply a
+single successful full-suite invocation, performance measurements, or
+fresh installed Wargame owner acceptance.
+
+[Independent reference review](reference-review.json)

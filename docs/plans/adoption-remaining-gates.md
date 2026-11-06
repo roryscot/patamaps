@@ -66,11 +66,15 @@ remains separate evidence. Live registered lifecycle, changed-build
 and deployment refusal acceptance remain open.
 
 The [Wargame managed and browser checks](../acceptance/project-adoption/wargame-owner-managed-and-native-persistence-20261106/README.md)
-pass at their recorded scope. The separate native suite passed 116 cases
-before its interrupted final reference case. The exact focused retry
-[failed during the FIFO plan](../acceptance/project-adoption/wargame-owner-reference-db-timeout-20261106/README.md)
-after PostgreSQL closed an idle transaction. Full native persistence and
-the complete installed Wargame owner workflow remain open.
+pass at their recorded scope. The earlier native suite passed 116 cases
+before its interrupted final reference case. A focused retry
+[failed during FIFO](../acceptance/project-adoption/wargame-owner-reference-db-timeout-20261106/README.md)
+after PostgreSQL closed an idle transaction. The exact case then
+[passed with a read-only observer](../acceptance/project-adoption/wargame-owned-db-observer-20261106/README.md#full-focused-owner-reference-passed),
+including both complete plans and exact cold recovery and history. All
+117 native cases have passing evidence across separate invocations.
+A single successful full-suite invocation and the complete installed
+Wargame owner workflow remain open.
 
 ## What the existing evidence establishes
 
