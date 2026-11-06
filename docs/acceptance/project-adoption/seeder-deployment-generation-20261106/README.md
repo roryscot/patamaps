@@ -98,3 +98,18 @@ Exact recovery remains pending. [Failure record](linux-source-inspection-stop.js
 The pending cleanup inventory was also reverified. All 24,720 retired
 copies match the 2,472 retained recovery files, and none overlaps the
 496 frozen Safari inputs or its borrowed runtime. No files were removed.
+
+## Approved reservation recovery and cleanup
+
+The owner approved the exact stopped reservation and the separate retired
+runtime inventory. Three fresh stop observations passed before the scheduler
+archived the original request, lease and exit-75 receipt and released the
+one reservation. An independent check matched all three archived hashes.
+
+The exact cleanup removed 24,720 copies. The inventory accounted for
+757,227,520 allocated bytes. A separate review checked every original path
+was absent and rehashed all 2,472 retained recovery files and 496 Safari
+bindings. The selected pointer, manifest and inventoried parent directories
+remain. Full restoration to the original paths remains untested. The
+[review record](approved-recovery-and-cleanup.json) captures the verified
+scope. Live capacity is checked separately.

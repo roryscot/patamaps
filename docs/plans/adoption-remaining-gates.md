@@ -94,8 +94,9 @@ native scan is 190,540,464 bytes short of the guarded preparation reservation.
 The workspace and runtime remain unrun. A subsequent [guarded source-image inspection](../acceptance/project-adoption/seeder-deployment-generation-20261106/linux-source-inspection-stop.json)
 stopped on growth and left a sealed native reservation. The owned mount
 is closed and the original image hash matches. Three conservative stop
-observations passed. Exact reservation recovery and the separate cleanup
-approval are pending.
+observations passed. The [subsequently approved recovery and cleanup](../acceptance/project-adoption/seeder-deployment-generation-20261106/approved-recovery-and-cleanup.json)
+released that reservation, preserved the failure receipt and removed the
+24,720 verified duplicate copies. Both runtime jobs require fresh admission.
 
 The [Wargame managed and browser checks](../acceptance/project-adoption/wargame-owner-managed-and-native-persistence-20261106/README.md)
 pass at their recorded scope. The earlier native suite passed 116 cases
