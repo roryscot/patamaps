@@ -78,3 +78,23 @@ native preparation guard includes owned Docker volume usage. It measured
 259,459,536 bytes of headroom, 190,540,464 bytes short of the candidate's
 450 MB preparation reservation. Both checks must pass before execution.
 The Linux runtime and Safari checks remain unrun. [Preflight](linux-384mib-preflight.json)
+
+## Guarded source inspection stop
+
+A follow-up attempted to rehash the files inside the retained Linux image.
+Its read-only mount succeeded. The guard stopped the job after observing
+339,722,240 bytes of charged growth against the 112 MB allowance. The
+observation does not attribute the charge to the image mount. The worker
+did not finish its file review. The managed workspace and runtime were
+never started.
+
+The inspection's own mount was detached normally after its process group
+and any matching containers were confirmed absent. The source image still
+matches its original SHA-256, and the unrelated database kept its start
+identity. The failed exit-75 guard retained the reservation. A separate
+read-only preflight then passed three complete stopped-state observations.
+Exact recovery remains pending. [Failure record](linux-source-inspection-stop.json)
+
+The pending cleanup inventory was also reverified. All 24,720 retired
+copies match the 2,472 retained recovery files, and none overlaps the
+496 frozen Safari inputs or its borrowed runtime. No files were removed.
