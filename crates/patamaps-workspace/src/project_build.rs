@@ -701,6 +701,15 @@ mod unix {
         state: &Path,
         command: &ProjectCommand,
     ) -> Result<Value, Error> {
+        execute_selected_project_command_with_input_key(state, command, None)
+    }
+
+    /// Execute only the expected generation when the caller supplies an input key.
+    pub fn execute_selected_project_command_with_input_key(
+        state: &Path,
+        command: &ProjectCommand,
+        expected_input_key: Option<&str>,
+    ) -> Result<Value, Error> {
         let metadata = fs::symlink_metadata(state)?;
         if metadata.file_type().is_symlink() || !metadata.is_dir() {
             return Err(refuse("PROJECT_BUILD_DIRECTORY"));
@@ -725,6 +734,9 @@ mod unix {
         let pointer =
             selected_bytes(&state)?.ok_or_else(|| refuse("PROJECT_BUILD_NO_SELECTION"))?;
         let selected = selection(&pointer)?;
+        if expected_input_key.is_some_and(|key| key != selected.input_key.as_str()) {
+            return Err(refuse("PROJECT_BUILD_EXPECTED_INPUT_KEY_MISMATCH"));
+        }
         let before = verify_selected_record(&state, &pointer)?;
         if selected_bytes(&state)?.as_deref() != Some(pointer.as_slice()) {
             return Err(refuse("PROJECT_BUILD_SELECTION_CHANGED"));
@@ -1188,9 +1200,9 @@ mod unix {
 #[cfg(unix)]
 pub use unix::{
     build_project, build_project_with_context, build_project_with_preparation,
-    execute_selected_project_command, project_build_input_key,
-    project_build_input_key_with_context, project_build_input_key_with_preparation,
-    verify_project_build_selection,
+    execute_selected_project_command, execute_selected_project_command_with_input_key,
+    project_build_input_key, project_build_input_key_with_context,
+    project_build_input_key_with_preparation, verify_project_build_selection,
 };
 
 #[cfg(not(unix))]
@@ -1278,8 +1290,17 @@ pub fn project_build_input_key_with_preparation(
 
 #[cfg(not(unix))]
 pub fn execute_selected_project_command(
+    state: &std::path::Path,
+    command: &ProjectCommand,
+) -> Result<serde_json::Value, Error> {
+    execute_selected_project_command_with_input_key(state, command, None)
+}
+
+#[cfg(not(unix))]
+pub fn execute_selected_project_command_with_input_key(
     _: &std::path::Path,
     _: &ProjectCommand,
+    _: Option<&str>,
 ) -> Result<serde_json::Value, Error> {
     Err(Error::refused(
         "PROJECT_BUILD_PLATFORM",

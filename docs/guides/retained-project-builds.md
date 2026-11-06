@@ -349,6 +349,13 @@ declared artifact is refused before the command starts. A competing build or
 selected execution is refused while this lock is held. The lock remains held
 through command execution and a second selection verification.
 
+When a deployment or test requires a specific generation, pass its exact
+input key with `--expected-input-key`. Use the key from the build receipt or
+from `project-build-input-key` for the declared inputs you intend to run.
+Patamaps compares it with the selected key under the same lock. A mismatch
+returns exit 2 with `PROJECT_BUILD_EXPECTED_INPUT_KEY_MISMATCH` before
+starting the command. A match still requires full artifact verification.
+
 Exit 0 means completed-selected-project-command: the command completed under
 its bounds, bindings still verify, and the selection pointer is unchanged.
 Exit 1 reports refused-selected-project-command after command admission,

@@ -153,6 +153,9 @@ enum Command {
     ProjectExecSelected {
         state: PathBuf,
         command: PathBuf,
+        /// Require the selected generation to match this exact input key.
+        #[arg(long)]
+        expected_input_key: Option<String>,
     },
     /// Run a retained build plan and atomically select its verified declared artifacts.
     ProjectBuild {
@@ -1126,10 +1129,18 @@ fn run(command: Command) -> Result<(), Failure> {
                 Err(Failure::ReportedRejection)
             }
         }
-        Command::ProjectExecSelected { state, command } => {
+        Command::ProjectExecSelected {
+            state,
+            command,
+            expected_input_key,
+        } => {
             let command = read::<patamaps_workspace::ProjectCommand>(&command)?;
-            let report = patamaps_workspace::execute_selected_project_command(&state, &command)
-                .map_err(|e| Failure::Operational(e.to_string()))?;
+            let report = patamaps_workspace::execute_selected_project_command_with_input_key(
+                &state,
+                &command,
+                expected_input_key.as_deref(),
+            )
+            .map_err(|e| Failure::Operational(e.to_string()))?;
             stdout_json(&report)?;
             if report["status"] == "completed-selected-project-command" {
                 Ok(())

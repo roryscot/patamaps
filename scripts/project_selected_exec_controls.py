@@ -49,11 +49,26 @@ def verify(cli,root):
         pointer=(state/"selected.json").read_bytes()
         candidate=state/json.loads(pointer)["attempt"]/"candidate"
         return case,owner,state,candidate,pointer,plan
-    def execute(name,state,body,expected=0,refs=None):
+    def execute(name,state,body,expected=0,refs=None,expected_key=None):
         p=root/(name+".command.json");write(p,command(body,refs))
-        return run(name,["project-exec-selected",state,p],expected)
+        args=["project-exec-selected",state,p]
+        if expected_key is not None:
+            args.extend(["--expected-input-key",expected_key])
+        return run(name,args,expected)
     case,owner,state,candidate,pointer,plan=setup("positive")
+    selected_key=json.loads(pointer)["inputKey"]
+    (owner/"input.txt").write_text("new generation")
+    new_key=run("observe-new-input",["project-build-input-key",plan,"--source",owner])["inputKey"]
+    assert new_key!=selected_key
+    r=execute("stale-generation-before-effects",state,"printf invoked > invoked.marker",2,expected_key=new_key)
+    assert "PROJECT_BUILD_EXPECTED_INPUT_KEY_MISMATCH" in r
+    assert not (candidate/"invoked.marker").exists() and (state/"selected.json").read_bytes()==pointer
+    checks.append(dict(control="stale-generation-refused-before-command",passed=True))
     owner.rename(case/"owner.offline-retained")
+    r=execute("matching-generation-offline",state,"/bin/cat bundle/app",expected_key=selected_key)
+    assert r["inputKey"]==selected_key and r["command"]["stdout"]["text"]=="artifact"
+    assert r["postExecutionSelectionVerified"] and r["selectionPointerUnchanged"]
+    checks.append(dict(control="matching-generation-executes-without-source",passed=True))
     r=execute("captured-env",state,'printf "%s:%s:%s" "$(/bin/cat bundle/app)" "$MODE" "${AMBIENT_SELECTED_EXEC_TEST-unset}"')
     assert r["command"]["stdout"]["text"]=="artifact:declared:unset",r
     assert r["postExecutionSelectionVerified"] and r["selectionPointerUnchanged"]
