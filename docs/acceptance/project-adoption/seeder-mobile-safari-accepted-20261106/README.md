@@ -19,3 +19,10 @@ been generated. Running the four frozen postprocessing scripts against
 the saved traces let the original reviewer finish. The application and
 browser tests ran once. The full 15-case matrix in one invocation and
 the wider adoption goal remain open. [Independent review](review.json)
+
+The [full-matrix list-only check](full-matrix-preflight.json) subsequently
+confirmed all 15 original cases across the five browser profiles in a
+prepared follow-up. Separate successful runs took 131,450 ms in test
+case time in total. The full matrix retains its 120-second browser
+deadline, so those separate timings leave uncertainty about a single
+run. The full matrix remains unrun.

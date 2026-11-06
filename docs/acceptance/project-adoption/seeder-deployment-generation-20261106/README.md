@@ -113,3 +113,17 @@ bindings. The selected pointer, manifest and inventoried parent directories
 remain. Full restoration to the original paths remains untested. The
 [review record](approved-recovery-and-cleanup.json) captures the verified
 scope. Live capacity is checked separately.
+
+## Live workspace preparation stopped on growth
+
+The native preparation reached the retained source and verified its files
+from a read-only mount. The managed executor created the 384 MiB workspace.
+The outer guard recorded a 795,746,304-byte conservative charge against
+its 450 MB limit and stopped preparation. The managed runtime never started.
+
+The source mount was detached and the original image SHA-256 still matches.
+The new quota workspace retains 752 complete files with verified digests,
+and the managed container is stopped. The outer reservation remains held.
+Three read-only recovery observations tied the remaining image handle to the
+exact separately reserved mount. An exact recovery proposal and a guarded
+copy continuation are prepared. [Stop record](linux-preparation-growth-stop.json)

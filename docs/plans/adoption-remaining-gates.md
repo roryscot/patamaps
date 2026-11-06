@@ -100,7 +100,10 @@ stopped on growth and left a sealed native reservation. The owned mount
 is closed and the original image hash matches. Three conservative stop
 observations passed. The [subsequently approved recovery and cleanup](../acceptance/project-adoption/seeder-deployment-generation-20261106/approved-recovery-and-cleanup.json)
 released that reservation, preserved the failure receipt and removed the
-24,720 verified duplicate copies. Both runtime jobs require fresh admission.
+24,720 verified duplicate copies. The [live Linux preparation](../acceptance/project-adoption/seeder-deployment-generation-20261106/linux-preparation-growth-stop.json)
+then stopped at its growth limit. It left 752 verified files in a stopped
+managed workspace. The outer lease is held pending exact recovery. The
+managed runtime remains unrun.
 
 The [Wargame managed and browser checks](../acceptance/project-adoption/wargame-owner-managed-and-native-persistence-20261106/README.md)
 pass at their recorded scope. The earlier native suite passed 116 cases
