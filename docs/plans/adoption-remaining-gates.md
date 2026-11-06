@@ -50,6 +50,14 @@ It supports reuse without another runtime copy. The staged Safari
 launcher binds that result. Owned Safari authentication and the full
 matrix remain open.
 
+The [original-owner watcher postcheck](../acceptance/project-adoption/original-owner-watch-readonly-verification-20261106/README.md)
+passed both real native inspections under the read-only guard. The
+[registered counterpart](../acceptance/project-adoption/original-owner-registered-watch-postcheck-20261106/README.md)
+passes 29 source controls. Its first live trial stopped at the growth
+limit while staging the capsule. The failed record was preserved and
+the exact stopped reservation was released. The live registered pair,
+its refusal controls and actual watcher parent-death release remain open.
+
 ## What the existing evidence establishes
 
 | Original requirement | Evidence inspected | Remaining requirement |
