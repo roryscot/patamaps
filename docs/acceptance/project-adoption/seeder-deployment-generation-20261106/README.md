@@ -25,3 +25,19 @@ verifies the matching selection's bindings. This receipt covers the compiled
 configuration generation on Intel, with the stale generated-contract case in
 the managed Linux deployment profile still open. Browser, WebSocket traffic and
 production activation require separate evidence. See the [review](review.json).
+
+## Retained Linux artifact and later contract
+
+A separate read-only review linked the retained Linux build, standalone
+runtime and managed architecture receipts by build ID and build receipt
+digest. The copied-source inventory matches all eight rehashed contract
+files from the installed source. Three of those digests also match that
+installation's generator receipt. All eight later files match their
+selected artifact manifest and the independent original-generator review,
+and all eight digests differ from the Linux build inputs.
+
+This establishes the two contract generations to use in the managed
+stale-contract test. It checks historical input and runtime lineage and
+current retained source and selection bytes. The closed Linux images
+remain closed. The managed stale-contract test is still unrun.
+[Lineage review](linux-contract-lineage.json)

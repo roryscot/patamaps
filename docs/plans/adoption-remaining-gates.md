@@ -77,8 +77,12 @@ The [staged Seeder deployment generation gate](../acceptance/project-adoption/se
 refused the actual older compiled configuration before starting a listener.
 The matching selection passed native verification and seven HTTP checks on the
 declared loopback port. The first harness failure remains recorded. The
-managed Linux stale generated-contract case and production activation remain
-separate from this Intel result.
+[Linux contract lineage review](../acceptance/project-adoption/seeder-deployment-generation-20261106/linux-contract-lineage.json)
+now binds the historical managed artifact to its older contract and rehashes
+all eight differing later outputs against their independent oracle. Managed
+stale-contract execution and production activation remain open. A fresh
+retention scan leaves 126,847,440 bytes of headroom, 673,152,560 bytes short
+of the frozen Safari reservation.
 
 The [Wargame managed and browser checks](../acceptance/project-adoption/wargame-owner-managed-and-native-persistence-20261106/README.md)
 pass at their recorded scope. The earlier native suite passed 116 cases
