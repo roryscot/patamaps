@@ -79,8 +79,10 @@ The matching selection passed native verification and seven HTTP checks on the
 declared loopback port. The first harness failure remains recorded. The
 [Linux contract lineage review](../acceptance/project-adoption/seeder-deployment-generation-20261106/linux-contract-lineage.json)
 now binds the historical managed artifact to its older contract and rehashes
-all eight differing later outputs against their independent oracle. Managed
-stale-contract execution and production activation remain open. A fresh
+all eight differing later outputs against their independent oracle. The
+[managed launcher preflight](../acceptance/project-adoption/seeder-deployment-generation-20261106/linux-contract-gate-preflight.json)
+passed six pre-effect refusals and the matching launch sequence with stubbed
+effects. Managed stale-contract execution and production activation remain open. A fresh
 retention scan leaves 126,847,440 bytes of headroom, 673,152,560 bytes short
 of the frozen Safari reservation.
 

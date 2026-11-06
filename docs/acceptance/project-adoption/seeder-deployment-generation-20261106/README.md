@@ -41,3 +41,20 @@ stale-contract test. It checks historical input and runtime lineage and
 current retained source and selection bytes. The closed Linux images
 remain closed. The managed stale-contract test is still unrun.
 [Lineage review](linux-contract-lineage.json)
+
+## Managed launcher preflight
+
+The staged controller uses the same launch branch for the baseline release
+and the newer release contract. A Norway Node preflight executed that branch
+with real lineage digests and stubbed effects. Six refusals, including the
+genuine stale generation and a single changed digest, occurred before
+listener inspection, native verification, marker creation or spawning. The
+matching case reached those four operations in order. The [preflight](linux-contract-gate-preflight.json)
+binds the controller and comparison module by digest.
+
+Actual qualification still requires the managed Linux executor, native ELF
+verification, real HTML before and after the stale refusal, verified stopped
+resources and an unchanged artifact. The retained image and its build inputs
+were left closed. The previously qualified 512 MiB quota exceeds the last
+measured retention headroom by about 410 MB, before accounting for any new
+staging growth. No workspace or container was created for this increment.
