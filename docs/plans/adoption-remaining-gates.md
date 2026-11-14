@@ -11,6 +11,25 @@ The [support matrix](../guides/project-support-matrix.md) retains exact source,
 engine, profile and verification limits. Native MetaMap C01–C19 completion stays
 separate. Full adoption completion remains unproven.
 
+## Current checkpoint, 2026-11-14
+
+The [full isolated owner authentication matrix](../acceptance/project-adoption/seeder-mobile-safari-accepted-20261106/full-browser-matrix-page-close-20261114.json)
+passes all 12 HTTP checks and 15 browser cases in one invocation, with all
+31 preflight controls and stopped resources independently verified. This
+supersedes historical statements below that the full browser matrix is
+unrun or unaccepted. The earlier failed run and its guardian uncertainty
+remain preserved; this later success does not explain that uncertainty.
+
+The scoped managed Linux stale-contract check also passes. Changed-build
+failure, race and cancellation lifecycle checks, actual-project performance
+measurements in a quiet exclusive window, other owner-specific workflows and
+any broader adoption or production activation decision remain open. The
+[measurement plan](2026-10-24-project-measurements.md) requires up to 2 GB
+of retained data under the existing limits; the prior focused browser
+admission measured only 920,691,013 bytes of retention headroom before its
+run, so that number cannot establish admission for the larger measurement.
+A fresh capacity and workload check is required.
+
 ## 2026-11-05 execution frontier
 
 The [twelve genuine staged executor cases](../acceptance/project-adoption/native-normal-seal-twelve-cases-20261105/README.md) independently pass seven conservative holds and five automatic stopped-state releases, with28 source decision controls. Both actual discovered defects (duplicate engine output and release after a lost final normal-success record) are corrected in the staged candidate; the qualified bridge is repository source. This does not install or activate trust/parallel execution and does not substitute fixture outcomes for actual owner watch, changed-build, deployment or performance gates.
