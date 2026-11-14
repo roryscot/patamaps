@@ -76,3 +76,22 @@ checks passed. The reservation released and owned resources stopped.
 This establishes where the observed delay occurs. It does not establish
 why context close takes that long or accept the earlier full matrix.
 [Independent diagnostic](webkit-context-close-diagnostic-20261114.json)
+
+A follow-up focused WebKit diagnostic closed each negative-session page
+before closing its context, while retaining nested context cleanup and
+the original assertions. The combined page and context close took 11 ms
+and 9 ms in the two cases. All three focused browser cases and all 12 HTTP
+cases passed. This is a measured result, not an explanation of WebKit's
+internal delay. [Focused result](webkit-page-close-diagnostic-20261114.json)
+
+The full five-project matrix then passed all 15 browser cases and all 12
+HTTP cases in an isolated owner-data run. Playwright recorded no skipped,
+flaky or unexpected cases; the browser run took 66,990 ms within its
+existing 120-second deadline. All five browser process groups and the
+owned database stopped, the unrelated database retained its start identity,
+and the reservation completed. The original timeout and its unresolved
+guardian uncertainty remain recorded above. This acceptance is limited to
+the tested authentication and admin-permission cases; it does not establish
+all project integrations or performance criteria.
+[Full result](full-browser-matrix-page-close-20261114.json) ·
+[Test change](negative-session-page-close.patch)

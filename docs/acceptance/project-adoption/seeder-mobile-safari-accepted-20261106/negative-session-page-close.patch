@@ -1,0 +1,39 @@
+--- a/auth.spec.cjs
++++ b/auth.spec.cjs
+@@ -158,8 +158,9 @@
+   negativeTiming('context-start'); /* PATAMAPS_TIMING */
+   const context=await browser.newContext({...options,baseURL:process.env.PLAYWRIGHT_TEST_BASE_URL,proxy:{server:process.env.PATAMAPS_TEST_PROXY},
+    storageState:{cookies:[],origins:[{origin:'http://127.0.0.1:13000',localStorage:[{name:'access_token',value:token}]}]}});
++  let page;
+   try{
+-   const page=await context.newPage();attachDiagnostic(page,info.project.name);
++   page=await context.newPage();attachDiagnostic(page,info.project.name);
+    negativeTiming('page-ready'); /* PATAMAPS_TIMING */
+    const refused=page.waitForResponse(r=>r.url()==='http://127.0.0.1:18765/api/v1/auth/me'&&r.request().method()==='GET'&&r.status()===401);
+    negativeTiming('navigation-start'); /* PATAMAPS_TIMING */
+@@ -171,9 +172,24 @@
+    negativeTiming('redirect-confirmed'); /* PATAMAPS_TIMING */
+    await expect.poll(()=>page.evaluate(()=>localStorage.getItem('access_token')===null)).toBe(true);
+    negativeTiming('session-cleared'); /* PATAMAPS_TIMING */
++   negativeTiming('heading-check-start'); /* PATAMAPS_TIMING */
+    await expect(page.getByRole('heading',{name:'Users',exact:true})).toHaveCount(0);
++   negativeTiming('heading-check-done'); /* PATAMAPS_TIMING */
++   negativeTiming('link-check-start'); /* PATAMAPS_TIMING */
+    await expect(page.getByRole('link',{name:marker,exact:true})).toHaveCount(0);
+-  }finally{await context.close();}
++   negativeTiming('link-check-done'); /* PATAMAPS_TIMING */
++  }finally{
++   try{
++    negativeTiming('page-close-start'); /* PATAMAPS_TIMING */
++    if(page)await page.close();
++    negativeTiming('page-close-done'); /* PATAMAPS_TIMING */
++   }finally{
++    negativeTiming('context-close-start'); /* PATAMAPS_TIMING */
++    await context.close();
++    negativeTiming('context-close-done'); /* PATAMAPS_TIMING */
++   }
++  }
++  negativeTiming('context-close-done-recorded'); /* PATAMAPS_TIMING */
+   negativeTiming('case-complete'); /* PATAMAPS_TIMING */
+  });
+ }
