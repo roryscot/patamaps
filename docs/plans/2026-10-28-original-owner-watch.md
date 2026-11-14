@@ -200,6 +200,15 @@ fresh external state, dependency-context binding, a current CLI, failure/race/
 cancellation triggers and a frozen attempt budget are still required. No
 changed-build lifecycle case has run.
 
+The saved edited-owner verifier expects edited output on every invocation, so
+it cannot verify an initial baseline unchanged. The prepared
+[expectation-selector controls](../acceptance/project-adoption/current-owner-retained-next-20261026/lifecycle-expectation-controls-20261114.json)
+check the eight original outputs and absence of the edited client label for the
+baseline, then the eight independent edited-oracle outputs and presence of that
+label for the edited graph. Unknown graph bytes and invalid configuration refuse.
+The selector is not integrated into the build plan; integration, native input
+binding, and real lifecycle tests remain required.
+
 Prepare one private working owner and a fresh external state with a frozen
 attempt budget before running changed builds. Reuse existing sealed dependency
 inputs without modifying them. Independently freeze original-MetaMap expected
