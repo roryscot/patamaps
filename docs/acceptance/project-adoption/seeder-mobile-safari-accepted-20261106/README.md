@@ -41,3 +41,17 @@ The fresh retention scan after managed Linux qualification found
 286,107,383 bytes of headroom. The prepared full browser matrix declares
 800,000,000 bytes, leaving a 513,892,617-byte shortfall. The matrix was
 not started. [Capacity record](full-matrix-capacity-20261113.json)
+
+The approved cleanup removed 24,720 copies and reverified all 2,472
+recovery files and 501 frozen browser inputs. A fresh scan allowed the
+full matrix to start. All 12 HTTP checks passed. The browser suite hit
+its existing timeout during the Mobile Safari invalid-session case,
+after eight negative-case traces completed. No complete Playwright
+result was produced, so the full matrix remains unaccepted.
+
+The browser guardian reported ownership uncertainty. Its four recorded
+process groups were subsequently absent, all three test ports were clear,
+the isolated database container stopped, the outer reservation released,
+and the unrelated database retained its start identity. Those observations
+do not resolve the guardian's uncertainty. The initial independent reviewer
+also stopped on that uncertainty and remains preserved. [Failure review](full-matrix-timeout-20261113.json)

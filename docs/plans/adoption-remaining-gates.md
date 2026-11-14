@@ -712,3 +712,13 @@ startup and stopped resources. The [full browser matrix capacity scan](../accept
 found 286,107,383 bytes of headroom, 513,892,617 bytes short of its
 800 MB declaration. The full matrix remains unrun. The separately scoped
 changed-build lifecycle and quiet-window performance requirements remain.
+
+
+## Full browser attempt after approved cleanup
+
+The approved exact duplicate cleanup completed and the full matrix started
+under the 800 MB guard. [Independent review](../acceptance/project-adoption/seeder-mobile-safari-accepted-20261106/full-matrix-timeout-20261113.json)
+confirms 12 HTTP passes and the browser timeout during Mobile Safari. The
+browser guardian recorded ownership uncertainty. Four recorded browser groups
+were later absent and the reservation released. Full browser acceptance,
+changed-build lifecycle and performance remain open.
