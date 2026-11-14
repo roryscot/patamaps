@@ -25,10 +25,13 @@ failure, race and cancellation lifecycle checks, actual-project performance
 measurements in a quiet exclusive window, other owner-specific workflows and
 any broader adoption or production activation decision remain open. The
 [measurement plan](2026-10-24-project-measurements.md) requires up to 2 GB
-of retained data under the existing limits; the prior focused browser
-admission measured only 920,691,013 bytes of retention headroom before its
-run, so that number cannot establish admission for the larger measurement.
-A fresh capacity and workload check is required.
+of retained data under the existing limits. A subsequent [read-only readiness
+audit](../acceptance/project-adoption/g4-external-state-20261027/readiness-audit-20261114.json)
+measured 817,321,375 bytes of retention headroom and verified all 337 prepared
+Axum inputs. The prepared native CLI predates a later selection-code change;
+a current CLI and fresh preparation are required for a current-source
+measurement. The measurement's 2 GB cap is not a prediction of actual growth.
+Fresh supervised admission and a quiet exclusive window remain necessary.
 
 ## 2026-11-05 execution frontier
 
