@@ -703,3 +703,12 @@ The [2026-11-05 capacity/context checkpoint](2026-11-04-adoption-closeout.md#202
 The [independent maintenance review](../acceptance/project-adoption/idle-view-maintenance-20261105/README.md) verifies all three stopped image views closed and complete read-only recovery matched. The original database is ready with the same container/configuration/cluster/data volume; the planned stop-to-readiness interval was58.80seconds. Historical unchanged-start baselines remain unchanged records; new jobs capture a fresh baseline after this explicit transition. Canonical guard/worker exited0/released; the outer controller's post-restart statistics timeout/exit1 stays failed. The unchanged query later passed independently, without another service interruption. No deletion, limit increase or parallel activation occurred. This supersedes only the earlier prepared/unrun maintenance status; authentication and the full goal remain open.
 
 The [newly closed three-image recovery](../acceptance/project-adoption/newly-closed-images-recovery-20261105/README.md) independently preserves all1.61GB logical bytes and saves576.88MB allocated without another service interruption or deletion. The preceding2.5GB frontend request was refused/released before its worker. The corrected context's actual application build and all-browser authentication remain pending.
+
+
+## Latest qualification checkpoint, 2026-11-13
+
+The scoped managed Linux stale-contract check passes with real application
+startup and stopped resources. The [full browser matrix capacity scan](../acceptance/project-adoption/seeder-mobile-safari-accepted-20261106/full-matrix-capacity-20261113.json)
+found 286,107,383 bytes of headroom, 513,892,617 bytes short of its
+800 MB declaration. The full matrix remains unrun. The separately scoped
+changed-build lifecycle and quiet-window performance requirements remain.

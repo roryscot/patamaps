@@ -36,3 +36,8 @@ trace. The first Playwright list-only check selected the preserved spec
 backup. Moving that backup to a suffix outside the test pattern restored
 the exact same 15 cases. The [timing preflight](negative-timing-preflight.json)
 covers observation and case discovery. The live full matrix remains unrun.
+
+The fresh retention scan after managed Linux qualification found
+286,107,383 bytes of headroom. The prepared full browser matrix declares
+800,000,000 bytes, leaving a 513,892,617-byte shortfall. The matrix was
+not started. [Capacity record](full-matrix-capacity-20261113.json)
