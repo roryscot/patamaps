@@ -55,3 +55,13 @@ the isolated database container stopped, the outer reservation released,
 and the unrelated database retained its start identity. Those observations
 do not resolve the guardian's uncertainty. The initial independent reviewer
 also stopped on that uncertainty and remains preserved. [Failure review](full-matrix-timeout-20261113.json)
+
+A review of the saved negative-session traces found 8,513 ms and
+8,526 ms between session-cleared and case-complete in the two desktop
+WebKit cases. That interval includes two absence assertions and context
+cleanup. Mobile Safari's invalid-session trace reached session-cleared
+but did not record case completion before the suite timeout. The trace
+does not distinguish which remaining operation consumed the WebKit
+interval. Separate markers around those operations are needed to identify
+a repair without changing the existing assertions or deadlines.
+[Phase analysis](full-matrix-timeout-phase-analysis.json)
