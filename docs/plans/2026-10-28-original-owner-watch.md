@@ -206,8 +206,16 @@ it cannot verify an initial baseline unchanged. The prepared
 check the eight original outputs and absence of the edited client label for the
 baseline, then the eight independent edited-oracle outputs and presence of that
 label for the edited graph. Unknown graph bytes and invalid configuration refuse.
-The selector is not integrated into the build plan; integration, native input
-binding, and real lifecycle tests remain required.
+A [separate draft integration](../acceptance/project-adoption/current-owner-retained-next-20261026/lifecycle-integrated-verifier-20261114.json)
+binds the selector as a source input and command input, preserving the other
+recorded plan and preparation fields. Its actual verifier passes baseline and
+edited controls using saved outputs, and refuses an unknown graph, incorrect
+output, an unexpected baseline marker and a missing edited marker. Those tests
+use sampled saved JavaScript; they do not execute a build or watcher. The draft
+still has historical compiler and temporary paths, an inherited four-attempt
+limit and an unverified dependency context. Rebind to a current compiler, freeze
+the W1 budget and fresh state, verify the context, and run the real lifecycle
+cases before claiming acceptance.
 
 Prepare one private working owner and a fresh external state with a frozen
 attempt budget before running changed builds. Reuse existing sealed dependency
