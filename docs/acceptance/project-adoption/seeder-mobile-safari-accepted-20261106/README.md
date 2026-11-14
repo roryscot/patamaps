@@ -1,4 +1,13 @@
-# Focused Seeder Mobile Safari acceptance
+# Seeder authentication and browser acceptance
+
+Current result: the [full five-project matrix](full-browser-matrix-page-close-20261114.json)
+passed all 12 HTTP checks and 15 browser cases in one invocation on Norway.
+The earlier Mobile Safari qualification and subsequent failed full attempt
+below remain historical records; their statements about the full matrix being
+unrun or unaccepted describe those earlier checkpoints. Broader adoption and
+production activation remain open.
+
+## Focused Mobile Safari checkpoint
 
 The exact frozen 800 MB job passed 31 preflight checks, all 12 original
 direct HTTP checks and the three Mobile Safari cases on Norway. The
