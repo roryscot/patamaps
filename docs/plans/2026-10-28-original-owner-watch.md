@@ -188,6 +188,18 @@ race recovery during compilation, performance, or complete native crash closure.
 
 ## W1: changed-generation workflow
 
+A [read-only recheck](../acceptance/project-adoption/current-owner-retained-next-20261026/lifecycle-input-recheck-20261114.json)
+confirmed the prior 943 owner inputs, eight original-generator expected
+outputs and 2,482 recorded selected files. A [fresh private source-only
+preparation](../acceptance/project-adoption/current-owner-retained-next-20261026/lifecycle-source-preparation-20261114.json)
+copies the 943 selected inputs, restores the separately verified baseline graph,
+and retains the exact edited graph for the existing independent oracle.
+File bytes, modes and membership were checked independently; the historical
+owner and selected pointer remain unchanged. This is not a prepared build:
+fresh external state, dependency-context binding, a current CLI, failure/race/
+cancellation triggers and a frozen attempt budget are still required. No
+changed-build lifecycle case has run.
+
 Prepare one private working owner and a fresh external state with a frozen
 attempt budget before running changed builds. Reuse existing sealed dependency
 inputs without modifying them. Independently freeze original-MetaMap expected

@@ -23,7 +23,10 @@ remain preserved; this later success does not explain that uncertainty.
 The scoped managed Linux stale-contract check also passes. Changed-build
 failure, race and cancellation lifecycle checks, actual-project performance
 measurements in a quiet exclusive window, other owner-specific workflows and
-any broader adoption or production activation decision remain open. The
+any broader adoption or production activation decision remain open. A
+[verified private source-only preparation](../acceptance/project-adoption/current-owner-retained-next-20261026/lifecycle-source-preparation-20261114.json)
+now stages the known Seeder baseline and edit for those lifecycle cases; its
+dependency context and fresh build state have not yet been prepared. The
 [measurement plan](2026-10-24-project-measurements.md) requires up to 2 GB
 of retained data under the existing limits. A subsequent [read-only readiness
 audit](../acceptance/project-adoption/g4-external-state-20261027/readiness-audit-20261114.json)
