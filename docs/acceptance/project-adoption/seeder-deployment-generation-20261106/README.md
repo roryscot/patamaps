@@ -157,3 +157,20 @@ multiple projects, so the sample does not identify the writer. The
 observed window exceeded the staged retry's 150 MB prelaunch drift
 allowance. A stable window and the separate approved recovery are needed
 before retrying. [Pool observation](linux-resume-pool-observation.json)
+
+## Managed Linux stale-contract result
+
+On Norway, the resumed 384 MiB workspace reused 752 previously verified
+files and completed verification of all 2,480 runtime files. The managed
+Linux executor started the selected application with its matching contract
+and received real HTML. Its staged launcher then refused the newer
+incompatible generated contract before a second startup. The matching
+contract started again and returned the same HTML digest. Native ELF
+target verification ran before each allowed launch.
+
+The owned server and container stopped, the managed reservation released,
+and the unrelated database kept its start identity. The source image
+remained closed and its bytes matched. The earlier preparation failures
+remain recorded. The launcher implements this contract gate in the
+qualified test scope. Full browser and overall adoption acceptance remain
+open. [Managed review](linux-managed-stale-contract-20261113.json)

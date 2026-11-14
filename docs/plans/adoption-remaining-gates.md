@@ -104,8 +104,7 @@ released that reservation, preserved the failure receipt and removed the
 then stopped at its growth limit. It left 752 verified files in a stopped
 managed workspace. The approved release and [guarded resume results](../acceptance/project-adoption/seeder-deployment-generation-20261106/linux-resume-growth-stop.json)
 preserved those files. The new outer lease is held after another growth
-stop before copying. The managed runtime and full browser matrix remain
-unrun. The last measured browser shortfall was 283,484,425 bytes.
+stop before copying. The [managed Linux stale-contract test](../acceptance/project-adoption/seeder-deployment-generation-20261106/linux-managed-stale-contract-20261113.json) now passes with stopped resources. The full browser matrix remains unrun. The last measured browser shortfall was 283,484,425 bytes.
 
 The [Wargame managed and browser checks](../acceptance/project-adoption/wargame-owner-managed-and-native-persistence-20261106/README.md)
 pass at their recorded scope. The earlier native suite passed 116 cases
