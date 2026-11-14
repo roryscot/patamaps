@@ -65,3 +65,14 @@ does not distinguish which remaining operation consumed the WebKit
 interval. Separate markers around those operations are needed to identify
 a repair without changing the existing assertions or deadlines.
 [Phase analysis](full-matrix-timeout-phase-analysis.json)
+
+A focused WebKit run added timing markers around the two negative-session
+assertions and context close. The invalid-session case spent 29 ms and
+16 ms on the two assertions, then 7,937 ms closing its context. The
+expired-session case spent 34 ms and 13 ms on the assertions, then
+8,299 ms closing its context. All three focused WebKit cases and 12 HTTP
+checks passed. The reservation released and owned resources stopped.
+
+This establishes where the observed delay occurs. It does not establish
+why context close takes that long or accept the earlier full matrix.
+[Independent diagnostic](webkit-context-close-diagnostic-20261114.json)

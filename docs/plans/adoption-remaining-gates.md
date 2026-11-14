@@ -722,3 +722,8 @@ confirms 12 HTTP passes and the browser timeout during Mobile Safari. The
 browser guardian recorded ownership uncertainty. Four recorded browser groups
 were later absent and the reservation released. Full browser acceptance,
 changed-build lifecycle and performance remain open.
+
+A [focused WebKit timing diagnostic](../acceptance/project-adoption/seeder-mobile-safari-accepted-20261106/webkit-context-close-diagnostic-20261114.json)
+passed all three cases and identified context close as the roughly eight-second
+interval in each negative case. The cause of the close delay and the earlier
+full-run guardian uncertainty remain open. Full matrix acceptance is unchanged.
