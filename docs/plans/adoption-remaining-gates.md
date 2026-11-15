@@ -24,8 +24,10 @@ The current CLI also [verified the retained Seeder context](../acceptance/projec
 195,911 entries matched the recorded digest. This is not fresh staging or a
 changed-build lifecycle pass. Its supervisor measured 98,219,221,601 bytes
 retained at admission; future admission must recheck capacity. The W1 draft
-still needs current-tool and temporary-path rebinding, fresh state, a frozen
-attempt budget and the real failure, race and cancellation cases. Current Axum
+now has a [corrected current-tool input-key check](../acceptance/project-adoption/current-owner-retained-next-20261026/current-provider-input-key-20261115.json)
+after an earlier [mixed-provider observation](../acceptance/project-adoption/current-owner-retained-next-20261026/filtered-context-mixed-provider-20261115.json).
+Fresh state, frozen case triggers and bounds, and the real failure, race and
+cancellation cases remain outstanding. Current Axum
 performance preparation and the quiet exclusive measurement remain open.
 
 ## Historical checkpoint, 2026-11-14

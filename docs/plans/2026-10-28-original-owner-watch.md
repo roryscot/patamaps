@@ -217,7 +217,13 @@ limit and an unverified dependency context. Rebind to a current compiler, freeze
 the W1 budget and fresh state, verify the context, and run the real lifecycle
 cases before claiming acceptance. Since that draft, the [current CLI rebuild](../acceptance/project-adoption/g4-external-state-20261027/current-cli-rebuild-20261115.json)
 passed and the [retained dependency context](../acceptance/project-adoption/current-owner-retained-next-20261026/current-cli-context-verify-20261115.json)
-was verified with that CLI. The draft itself has not yet been rebound or run.
+was verified with that CLI. A follow-up [filtered-context and input-key check](../acceptance/project-adoption/current-owner-retained-next-20261026/filtered-context-mixed-provider-20261115.json)
+verified 84,188 context entries but exposed a separate old workspace-provider
+binding. The [corrected current-provider observation](../acceptance/project-adoption/current-owner-retained-next-20261026/current-provider-input-key-20261115.json)
+then rehashed 944 source files and bound both CLI and provider to the new
+executable; it did not rerun the context byte verification. Fresh state remains
+absent. Eight retained attempts are declared, but failure triggers, per-case
+bounds and actual build admission are not yet frozen or exercised.
 
 Prepare one private working owner and a fresh external state with a frozen
 attempt budget before running changed builds. Reuse existing sealed dependency
