@@ -215,7 +215,9 @@ use sampled saved JavaScript; they do not execute a build or watcher. The draft
 still has historical compiler and temporary paths, an inherited four-attempt
 limit and an unverified dependency context. Rebind to a current compiler, freeze
 the W1 budget and fresh state, verify the context, and run the real lifecycle
-cases before claiming acceptance.
+cases before claiming acceptance. Since that draft, the [current CLI rebuild](../acceptance/project-adoption/g4-external-state-20261027/current-cli-rebuild-20261115.json)
+passed and the [retained dependency context](../acceptance/project-adoption/current-owner-retained-next-20261026/current-cli-context-verify-20261115.json)
+was verified with that CLI. The draft itself has not yet been rebound or run.
 
 Prepare one private working owner and a fresh external state with a frozen
 attempt budget before running changed builds. Reuse existing sealed dependency

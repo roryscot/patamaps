@@ -11,7 +11,24 @@ The [support matrix](../guides/project-support-matrix.md) retains exact source,
 engine, profile and verification limits. Native MetaMap C01–C19 completion stays
 separate. Full adoption completion remains unproven.
 
-## Current checkpoint, 2026-11-14
+## Current checkpoint, 2026-11-15
+
+The owner approved two exact file inventories; their [cleanup review](../acceptance/project-adoption/g4-external-state-20261027/approved-cleanup-20261115.json)
+verifies 23,341 paths removed, 773 retained recovery files rehashed and the
+historical selection preserved. Under the existing limits, an offline
+[current CLI rebuild](../acceptance/project-adoption/g4-external-state-20261027/current-cli-rebuild-20261115.json)
+then passed with all 157 frozen tracked inputs and the expected-input-key
+option checked. Cargo reported a debug-stripping warning; the executable runs.
+
+The current CLI also [verified the retained Seeder context](../acceptance/project-adoption/current-owner-retained-next-20261026/current-cli-context-verify-20261115.json):
+195,911 entries matched the recorded digest. This is not fresh staging or a
+changed-build lifecycle pass. Its supervisor measured 98,219,221,601 bytes
+retained at admission; future admission must recheck capacity. The W1 draft
+still needs current-tool and temporary-path rebinding, fresh state, a frozen
+attempt budget and the real failure, race and cancellation cases. Current Axum
+performance preparation and the quiet exclusive measurement remain open.
+
+## Historical checkpoint, 2026-11-14
 
 The [full isolated owner authentication matrix](../acceptance/project-adoption/seeder-mobile-safari-accepted-20261106/full-browser-matrix-page-close-20261114.json)
 passes all 12 HTTP checks and 15 browser cases in one invocation, with all
