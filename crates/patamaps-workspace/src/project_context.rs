@@ -583,6 +583,83 @@ mod unix {
         }
         Ok(())
     }
+    // Clone only ordinary files with no extra metadata: the streaming path does
+    // not transfer extended attributes or BSD flags. Verify the cloned bytes
+    // and source identity before accepting it as a staged context member.
+    #[cfg(target_os = "macos")]
+    fn clone_context_file(
+        source: &File,
+        destination: &File,
+        name: &str,
+        digest: &str,
+        length: u64,
+        want: SafeInteger,
+    ) -> Result<bool, Error> {
+        use std::os::macos::fs::MetadataExt as MacMetadataExt;
+        let before = source.metadata()?;
+        if before.st_flags() != 0 || !matches!(rustix::fs::flistxattr(source, &mut [0u8; 0]), Ok(0))
+        {
+            return Ok(false);
+        }
+        match rustix::fs::fclonefileat(
+            source,
+            destination,
+            name,
+            rustix::fs::CloneFlags::NOOWNERCOPY,
+        ) {
+            Ok(()) => {}
+            Err(e)
+                if e == rustix::io::Errno::NOTSUP
+                    || e == rustix::io::Errno::OPNOTSUPP
+                    || e == rustix::io::Errno::XDEV
+                    || e == rustix::io::Errno::NOSYS =>
+            {
+                return Ok(false);
+            }
+            Err(e) => return Err(std::io::Error::from(e).into()),
+        }
+        let output = crate::project::open_project_file(destination, name)?;
+        let copied = output.metadata()?;
+        if (copied.dev(), copied.ino()) == (before.dev(), before.ino())
+            || copied.nlink() != 1
+            || copied.st_flags() != 0
+            || !matches!(rustix::fs::flistxattr(&output, &mut [0u8; 0]), Ok(0))
+            || bytes(output.try_clone()?, None)? != (digest.to_owned(), length)
+        {
+            return Err(refuse());
+        }
+        let after = source.metadata()?;
+        if (
+            before.dev(),
+            before.ino(),
+            before.len(),
+            before.mtime(),
+            before.mtime_nsec(),
+            before.ctime(),
+            before.ctime_nsec(),
+            before.mode(),
+            before.st_flags(),
+        ) != (
+            after.dev(),
+            after.ino(),
+            after.len(),
+            after.mtime(),
+            after.mtime_nsec(),
+            after.ctime(),
+            after.ctime_nsec(),
+            after.mode(),
+            after.st_flags(),
+        ) || !matches!(rustix::fs::flistxattr(source, &mut [0u8; 0]), Ok(0))
+        {
+            return Err(refuse());
+        }
+        rustix::fs::fchmod(
+            &output,
+            Mode::from_bits_truncate(want.get().try_into().map_err(|_| refuse())?),
+        )
+        .map_err(std::io::Error::from)?;
+        Ok(true)
+    }
     fn copy_context_tree(
         source: &File,
         destination: &File,
@@ -631,6 +708,21 @@ mod unix {
                         if source.is_none() {
                             source = Some(project_fs::directory(source_root, prefix)?);
                         }
+                        let input = crate::project::open_project_file(
+                            source.as_ref().ok_or_else(refuse)?,
+                            name,
+                        )?;
+                        #[cfg(target_os = "macos")]
+                        if clone_context_file(
+                            &input,
+                            destination,
+                            name,
+                            digest,
+                            byte_length.get(),
+                            *want,
+                        )? {
+                            continue;
+                        }
                         let mut output = File::from(
                             rustix::fs::openat(
                                 destination,
@@ -644,14 +736,7 @@ mod unix {
                             )
                             .map_err(std::io::Error::from)?,
                         );
-                        if bytes(
-                            crate::project::open_project_file(
-                                source.as_ref().ok_or_else(refuse)?,
-                                name,
-                            )?,
-                            Some(&mut output),
-                        )? != (digest.clone(), byte_length.get())
-                        {
+                        if bytes(input, Some(&mut output))? != (digest.clone(), byte_length.get()) {
                             return Err(refuse());
                         }
                         rustix::fs::fchmod(
@@ -1302,6 +1387,44 @@ mod tests {
         );
         assert!(dest.join("empty").is_dir());
         assert!(stage_project_context(&snapshot, &dest).is_err());
+    }
+    #[test]
+    fn staged_writes_leave_snapshot_unchanged() {
+        let (tmp, source, definition) = fixture();
+        let snapshot = tmp.0.join("snapshot");
+        capture_project_context(&source, &snapshot, &definition).unwrap();
+        let dest = tmp.0.join("staged");
+        stage_project_context(&snapshot, &dest).unwrap();
+        fs::write(dest.join("tools/program"), b"changed").unwrap();
+        assert_eq!(
+            fs::read(snapshot.join("data/tools/program")).unwrap(),
+            [0, 255, 128, 1, 0]
+        );
+        verify_project_context(&snapshot).unwrap();
+    }
+    #[cfg(target_os = "macos")]
+    #[test]
+    fn staging_does_not_copy_extended_attributes() {
+        let (tmp, source, definition) = fixture();
+        let snapshot = tmp.0.join("snapshot");
+        capture_project_context(&source, &snapshot, &definition).unwrap();
+        let input = fs::File::open(snapshot.join("data/tools/program")).unwrap();
+        rustix::fs::fsetxattr(
+            &input,
+            "org.patamaps.context-test",
+            b"private",
+            rustix::fs::XattrFlags::empty(),
+        )
+        .unwrap();
+        let dest = tmp.0.join("staged");
+        stage_project_context(&snapshot, &dest).unwrap();
+        let output = fs::File::open(dest.join("tools/program")).unwrap();
+        assert_eq!(rustix::fs::flistxattr(&output, &mut [0u8; 0]).unwrap(), 0);
+        assert!(rustix::fs::flistxattr(&input, &mut [0u8; 0]).unwrap() > 0);
+        assert_eq!(
+            fs::read(dest.join("tools/program")).unwrap(),
+            [0, 255, 128, 1, 0]
+        );
     }
     #[test]
     fn unsafe_selection_links_and_nested_destinations_refuse_before_creation() {
