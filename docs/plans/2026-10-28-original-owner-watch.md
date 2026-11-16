@@ -225,6 +225,14 @@ executable; it did not rerun the context byte verification. Fresh state remains
 absent. Eight retained attempts are declared, but failure triggers, per-case
 bounds and actual build admission are not yet frozen or exercised.
 
+The first fresh baseline attempt [refused before application preparation](../acceptance/project-adoption/current-owner-retained-next-20261026/w1-baseline-overlay-refusal-20261116.json):
+the unchanged graph matched the snapshot but was incorrectly declared as an
+overlay. The failed attempt is retained, prior selections remain unchanged and
+the reservation released. A read-only comparison of all 944 captured inputs
+and one workspace output found no mismatched overlaps. The corrected baseline
+binding has no overlay; the edited binding retains the required graph preimage.
+One of the eight retained attempts has been consumed.
+
 Prepare one private working owner and a fresh external state with a frozen
 attempt budget before running changed builds. Reuse existing sealed dependency
 inputs without modifying them. Independently freeze original-MetaMap expected
