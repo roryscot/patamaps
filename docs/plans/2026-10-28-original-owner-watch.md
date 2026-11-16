@@ -231,7 +231,17 @@ overlay. The failed attempt is retained, prior selections remain unchanged and
 the reservation released. A read-only comparison of all 944 captured inputs
 and one workspace output found no mismatched overlaps. The corrected baseline
 binding has no overlay; the edited binding retains the required graph preimage.
-One of the eight retained attempts has been consumed.
+One of the eight retained attempts was consumed.
+
+The corrected second attempt staged the context and completed the first
+generator, but [hit its 2.2 GB growth limit](../acceptance/project-adoption/current-owner-retained-next-20261026/w1-baseline-growth-stop-20261116.json)
+after the second generator started and before the Next build. The guard retained
+its reservation because it could not rule out work in a pre-existing container.
+Three complete process, open-file and container observations confirmed the
+owned work stopped; the exact reservation was recovered, and the failed guard
+and outputs remain archived. No selection was created. Two of the eight attempts
+are now consumed. Do not repeat the same materialization unchanged; establish
+a lower-copy approach and fresh capacity before another attempt.
 
 Prepare one private working owner and a fresh external state with a frozen
 attempt budget before running changed builds. Reuse existing sealed dependency

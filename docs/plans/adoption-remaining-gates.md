@@ -11,7 +11,18 @@ The [support matrix](../guides/project-support-matrix.md) retains exact source,
 engine, profile and verification limits. Native MetaMap C01–C19 completion stays
 separate. Full adoption completion remains unproven.
 
-## Current checkpoint, 2026-11-15
+## Current checkpoint, 2026-11-16
+
+The approved [duplicate-dependency cleanup](../acceptance/project-adoption/g4-external-state-20261027/approved-duplicate-cleanup-20261116.json)
+removed 169,012 listed copies after every retained counterpart was rehashed.
+The first fresh owner baseline [refused an unused context overlay](../acceptance/project-adoption/current-owner-retained-next-20261026/w1-baseline-overlay-refusal-20261116.json).
+The corrected attempt reached the second generator but [exceeded its 2.2 GB
+growth limit](../acceptance/project-adoption/current-owner-retained-next-20261026/w1-baseline-growth-stop-20261116.json).
+Both failures and outputs remain; no fresh selection or lifecycle pass is
+claimed. The stopped reservation was recovered after repeated ownership checks.
+Further real-project checks need a lower-copy approach and fresh capacity.
+
+## Historical checkpoint, 2026-11-15
 
 The owner approved two exact file inventories; their [cleanup review](../acceptance/project-adoption/g4-external-state-20261027/approved-cleanup-20261115.json)
 verifies 23,341 paths removed, 773 retained recovery files rehashed and the
