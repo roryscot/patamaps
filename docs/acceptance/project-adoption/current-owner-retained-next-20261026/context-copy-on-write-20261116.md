@@ -32,3 +32,12 @@ Verification on Norway:
 - The real Seeder baseline using the rebuilt CLI is a separate run; its
   acceptance and the later lifecycle checks are not established by the unit
   tests or the preflight.
+
+The separate real Seeder baseline subsequently passed with the rebuilt CLI.
+All eight expected generated outputs matched, all three original route tests
+passed, and the selected artifact inventory was verified. Its 2.2 GB request
+was refused before launch because retained headroom was insufficient; the same
+case completed with a 2 GB reservation. See the adjacent
+w1-clone-baseline-20261116.json for the result and measurement limits.
+The follow-up edit, failure, race, cancellation, no-op, and parent-death cases
+remain unverified by this baseline.
