@@ -83,3 +83,10 @@ allowance. The guard retained its reservation after a permission error; repeated
 process/container checks supported recovery of that reservation only. The failed
 run is preserved, no policy changed, and the library tests and example remain
 unverified. Shared-pool movement is not proof of which process consumed space.
+
+A second Norway attempt was also stopped by the unchanged 500 MB guard after
+shared free space fell during the admission scan. Its stopped reservation was
+recovered after ownership checks and its failure retained. Existing Linux CI
+compiled the core as a dependency; focused example and test coverage has been
+added to CI but must pass before it is claimed. Norway verification remains
+separate.
