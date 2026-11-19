@@ -76,3 +76,10 @@ here; the integration objective is not marked complete. The first draft construc
 formatting passed. The guarded test run was refused before compilation because
 retained allocation was 101,480,141,409 bytes against the existing 100 GB cap
 and the requested 500 MB reservation. The tests and example remain unrun.
+
+After the approved 90,000-file cleanup, the focused run was admitted but stopped
+before tests completed because shared-pool free space fell beyond the 500 MB
+allowance. The guard retained its reservation after a permission error; repeated
+process/container checks supported recovery of that reservation only. The failed
+run is preserved, no policy changed, and the library tests and example remain
+unverified. Shared-pool movement is not proof of which process consumed space.
