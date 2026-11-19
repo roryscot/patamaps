@@ -1,0 +1,48 @@
+{
+  "status": "passed-staged-native-receiver-review",
+  "passedControls": 35,
+  "initialControls": 32,
+  "supplementalControls": 3,
+  "realProcessCases": 4,
+  "observedProcessInstancesStopped": 16,
+  "oldTestSourcePreserved": true,
+  "productionRepairs": 0,
+  "qualificationRepairs": 1,
+  "installedGuardUnchanged": true,
+  "canonicalRequestsReleased": [
+    "95fd43fc-aecf-4b39-a1be-476c58b4f7ec",
+    "9d1c9047-9845-4280-be5f-c848ddfb38a1"
+  ],
+  "unknownSurvivorStayedUnconfirmed": true,
+  "sourceBindings": {
+    "scripts/native_inspection_receiver.mjs": "c0e26d091caec2033db0bc54e0001f804d17cacac443872e46bc37335e1ee04d",
+    "scripts/test_native_inspection_receiver.mjs": "8f12ece7468dd8b5b0866bc9d0fddad86154f85b202d3f534cf56695da015027",
+    "scripts/native_inspection_guard.py": "a9e1b35e728b38dd8c7746bd6318cb28c10598a0c558b097f51b99c36447f91d",
+    "scripts/native_inspection.py": "b8c9db39af73b42bebd888d60dde2dfdaf4bf80f88f193f29a2841c213edea71",
+    "scripts/project_watch.py": "94b3b1ccdd936a044fc815772ee72ecbdf2344701e57cd5f7a2fdf9b778ecf85"
+  },
+  "sourceRuntimeRegistration": "unqualified",
+  "installedReleaseActivated": false,
+  "parallelActivated": false,
+  "actualOwnerCrashRetried": false,
+  "goalComplete": false,
+  "reviewerSha256": "8c96a803616d74efbfd6fbe9b8b14f839d237ba8ee577cb4bc71d1e1196b66d0",
+  "evidenceRoot": ".tools/native-global-receiver-20261028",
+  "qualificationCommands": [
+    [
+      "node",
+      "--test",
+      "--test-concurrency=1",
+      "scripts/test_native_inspection_receiver.mjs"
+    ],
+    [
+      "node",
+      "--test",
+      "--test-concurrency=1",
+      "--test-name-pattern=valid-looking duplicate|individual record bound|stream errors",
+      "scripts/test_native_inspection_receiver.mjs"
+    ]
+  ],
+  "execution": "Intel Darwin; both allocating runs through canonical run-project.mjs patamaps; unchanged exclusive limits",
+  "scope": "staged receiver controls; no source/runtime authorization or installed release predicate"
+}

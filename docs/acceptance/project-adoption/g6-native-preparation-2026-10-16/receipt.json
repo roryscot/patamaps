@@ -1,0 +1,312 @@
+{
+  "status": "passed-scoped-native-owner-preparation-controls",
+  "sourceCommit": "c1fa683b9e4c8a977dae301cb111b6f3816d8e38",
+  "compilerSha256": "141498d321f688baa9d1c54e0af4192430ae43de88ddfdc8349d733756cd02fe",
+  "workspaceTestsPassed": 83,
+  "commands": [
+    {
+      "command": [
+        "cargo",
+        "fmt",
+        "--all",
+        "--",
+        "--check"
+      ],
+      "exitCode": 0
+    },
+    {
+      "command": [
+        "cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "-p",
+        "patamaps-workspace"
+      ],
+      "exitCode": 0
+    },
+    {
+      "command": [
+        "cargo",
+        "clippy",
+        "--locked",
+        "--offline",
+        "-p",
+        "patamaps-workspace",
+        "-p",
+        "patamaps-cli",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exitCode": 0
+    },
+    {
+      "command": [
+        "cargo",
+        "build",
+        "--locked",
+        "--offline",
+        "-p",
+        "patamaps-cli"
+      ],
+      "exitCode": 0
+    }
+  ],
+  "controls": {
+    "project-builds": [
+      {
+        "control": "build-input-observation",
+        "result": "read-only",
+        "sameKeyAsBuild": true,
+        "selectedChangeDetected": true
+      },
+      {
+        "control": "build-selection",
+        "result": "selected",
+        "workspaceAdmissionRequired": true,
+        "separateVerificationCommands": true,
+        "artifactTree": true
+      },
+      {
+        "control": "build-noop",
+        "result": "unchanged",
+        "verification": "not-repeated",
+        "cacheHits": 0
+      },
+      {
+        "control": "build-failure",
+        "result": "refused",
+        "previousSelectionPreserved": true
+      },
+      {
+        "control": "build-artifact-change",
+        "result": "refused",
+        "previousSelectionPreserved": true
+      },
+      {
+        "control": "build-admission-before-commands",
+        "result": "refused",
+        "buildCommandStarted": false
+      },
+      {
+        "control": "build-concurrent-writer",
+        "result": "refused",
+        "ownerConfirmedLive": true
+      },
+      {
+        "control": "build-interruption-sigkill",
+        "result": "owned-child-stopped",
+        "previousSelectionPreserved": true,
+        "signal": "SIGKILL",
+        "ordinaryProcessGroupOnly": true
+      },
+      {
+        "control": "build-interruption-sigterm",
+        "result": "owned-child-stopped",
+        "previousSelectionPreserved": true,
+        "signal": "SIGTERM",
+        "ordinaryProcessGroupOnly": true
+      },
+      {
+        "control": "build-interruption-sigint",
+        "result": "owned-child-stopped",
+        "previousSelectionPreserved": true,
+        "signal": "SIGINT",
+        "ordinaryProcessGroupOnly": true
+      },
+      {
+        "control": "build-permission-tamper",
+        "result": "refused"
+      },
+      {
+        "control": "build-offline-bindings",
+        "result": "verified",
+        "originalSourcePathUnavailable": true,
+        "externalProgramsAbsentFromPath": true,
+        "verification": "records-and-selected-bytes-only"
+      },
+      {
+        "control": "build-state-relocation",
+        "result": "verified",
+        "originalStateRetained": true
+      }
+    ],
+    "project-build-contexts": [
+      {
+        "control": "native-binary-context-overlay-selection",
+        "result": "passed"
+      },
+      {
+        "control": "native-context-noop",
+        "result": "passed",
+        "cacheHits": 0
+      },
+      {
+        "control": "dependency-mutation",
+        "result": "refused",
+        "previousSelectionPreserved": true
+      },
+      {
+        "control": "undeclared-write",
+        "result": "refused",
+        "previousSelectionPreserved": true
+      },
+      {
+        "control": "command-failure",
+        "result": "refused",
+        "previousSelectionPreserved": true
+      },
+      {
+        "control": "wrong-preimage",
+        "result": "refused",
+        "previousSelectionPreserved": true
+      },
+      {
+        "control": "mutable-dependencies",
+        "result": "refused",
+        "previousSelectionPreserved": true
+      },
+      {
+        "control": "corrupt-snapshot-before-selection",
+        "result": "refused"
+      },
+      {
+        "control": "context-selection-offline-replay",
+        "result": "passed",
+        "sourceAndSnapshotUnavailable": true
+      },
+      {
+        "control": "selected-binary-tamper",
+        "result": "refused"
+      }
+    ],
+    "project-preparation": [
+      {
+        "control": "prepare-consumed-contract-before-frozen-capture",
+        "result": "passed"
+      },
+      {
+        "control": "preparation-noop",
+        "result": "passed",
+        "verification": "not-repeated"
+      },
+      {
+        "control": "owner-edit-regenerates-consumed-contract",
+        "result": "passed"
+      },
+      {
+        "control": "failure",
+        "result": "refused",
+        "previousSelectionPreserved": true,
+        "buildCommandStarted": false
+      },
+      {
+        "control": "undeclared-write",
+        "result": "refused",
+        "previousSelectionPreserved": true,
+        "buildCommandStarted": false
+      },
+      {
+        "control": "build-write-root-not-permitted",
+        "result": "refused",
+        "previousSelectionPreserved": true,
+        "buildCommandStarted": false
+      },
+      {
+        "control": "dependency-mutation",
+        "result": "refused",
+        "previousSelectionPreserved": true,
+        "buildCommandStarted": false
+      },
+      {
+        "control": "selected-source-mutation",
+        "result": "refused",
+        "previousSelectionPreserved": true,
+        "buildCommandStarted": false
+      },
+      {
+        "control": "missing-output",
+        "result": "refused",
+        "previousSelectionPreserved": true,
+        "buildCommandStarted": false
+      },
+      {
+        "control": "symlink-output",
+        "result": "refused",
+        "previousSelectionPreserved": true,
+        "buildCommandStarted": false
+      },
+      {
+        "control": "stale-preimage-before-command",
+        "result": "refused",
+        "preparationStarted": false
+      },
+      {
+        "control": "absent-preimage-refuses-existing-file",
+        "result": "refused"
+      },
+      {
+        "control": "selected-input-collision",
+        "result": "refused-before-execution"
+      },
+      {
+        "control": "secret-output-path",
+        "result": "refused-before-execution"
+      },
+      {
+        "control": "credential-output-path",
+        "result": "refused-before-execution"
+      },
+      {
+        "control": "mutable-output-path",
+        "result": "refused-before-execution"
+      },
+      {
+        "control": "output-prefix-collision",
+        "result": "refused-before-execution"
+      },
+      {
+        "control": "preparation-requires-sealed-context",
+        "result": "refused-before-execution"
+      },
+      {
+        "control": "unchanged-generated-preimage",
+        "result": "passed"
+      },
+      {
+        "control": "absent-preimage-new-output",
+        "result": "passed"
+      },
+      {
+        "control": "verification-mutates-generated",
+        "result": "refused",
+        "previousSelectionPreserved": true
+      },
+      {
+        "control": "offline-preparation-replay",
+        "result": "passed",
+        "sourceAndSnapshotUnavailable": true
+      },
+      {
+        "control": "generated-selected-byte-tamper",
+        "result": "refused"
+      },
+      {
+        "control": "preparation-command-record-tamper",
+        "result": "refused"
+      }
+    ]
+  },
+  "guardRun": "f72791a7-e979-43ad-9361-9c71cfd3e003",
+  "filesDeleted": 0,
+  "watchQualification": "Linux draft PR CI running; native watch not run for this change",
+  "actualOwnerGenerator": "not-run-in-native-preparation-yet",
+  "applicationAcceptance": false,
+  "limitations": [
+    "Controlled contract consumption is not actual application acceptance.",
+    "Existing owner generator, Next build/edit/failure, practical watch latency, runtime, installed and deployment qualification remain open.",
+    "Commands are trusted; checks establish final filesystem state, not absence of transient writes."
+  ]
+}

@@ -887,6 +887,17 @@ impl CheckedGraph {
         Ok(count != indegree.len())
     }
 
+    /// Applies an edit to a cloned draft and checks it using the same relation packs.
+    ///
+    /// The original checked graph remains available if validation fails. The
+    /// closure edits draft records, so it cannot grant admission or authority.
+    /// This clones and rechecks the graph; it is not an incremental update.
+    pub fn try_edit(&self, edit: impl FnOnce(&mut GraphDocument)) -> Result<Self, CheckError> {
+        let mut draft = self.document.clone();
+        edit(&mut draft);
+        Self::check(draft, self.packs.clone())
+    }
+
     pub fn document(&self) -> &GraphDocument {
         &self.document
     }

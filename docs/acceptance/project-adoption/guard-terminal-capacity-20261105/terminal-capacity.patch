@@ -1,0 +1,17 @@
+--- a/scripts/guarded-run.mjs
++++ b/scripts/guarded-run.mjs
+@@ -494 +494,11 @@
+-    record.freeBytesAtEnd = free();
++    let terminalCapacityError;
++    try {
++      record.freeBytesAtEnd = free();
++    } catch (error) {
++      terminalCapacityError = error;
++      record.freeBytesAtEnd = null;
++      record.terminalCapacityUnavailable = true;
++      record.completed = false;
++      record.exitCode = 75;
++      record.stopReason ??= "Storage guard: final capacity unavailable";
++    }
+@@ -510,0 +521 @@
++    if (terminalCapacityError) throw terminalCapacityError;

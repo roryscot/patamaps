@@ -1,0 +1,38 @@
+--- a/guarded-run.mjs
++++ b/guarded-run.mjs
+@@ -442 +441,0 @@
+-      return record.exitCode;
+@@ -496,7 +495,16 @@
+-    let terminalCapacityError;
+-    try {
+-      record.freeBytesAtEnd = free();
+-    } catch (error) {
+-      terminalCapacityError = error;
+-      record.freeBytesAtEnd = null;
+-      record.terminalCapacityUnavailable = true;
++    const finalAccountingErrors = [];
++    for (const [field, probe] of [
++      ["freeBytesAtEnd", free],
++      ["retainedRootsAtEnd", () => retentionRoots(root, temporary)],
++    ]) {
++      try {
++        record[field] = probe();
++      } catch (error) {
++        record[field] = null;
++        if (field === "freeBytesAtEnd") record.terminalCapacityUnavailable = true;
++        finalAccountingErrors.push({ field, error: String(error.message).slice(0, 240) });
++      }
++    }
++    if (finalAccountingErrors.length) {
++      record.finalAccountingErrors = finalAccountingErrors;
++      record.stopReason ??= "Storage guard: final accounting unavailable";
+@@ -505,3 +513 @@
+-      record.stopReason ??= "Storage guard: final capacity unavailable";
+-    }
+-    record.retainedRootsAtEnd = retentionRoots(root, temporary);
++    }
+@@ -523,2 +529,2 @@
+-    if (terminalCapacityError) throw terminalCapacityError;
+-  }
++  }
++  return record.exitCode;

@@ -1,0 +1,42 @@
+{
+  "status": "passed-focused-rewrite-preflight",
+  "baseline": "c3ecead44e67f07a411f22edbad1f1e2e1e6cbaf",
+  "planCommit": "93432ce",
+  "overlayBoundaryControlsPassed": 6,
+  "sourceAcquisitionControlsPassed": 4,
+  "controlledUnitInputs": true,
+  "actualOwnerOverlayAndRuntimeAccepted": false,
+  "nodeSyntaxOnIntel": "Not run: Node is absent from the inspected Intel runtime paths; explicit Node22.23.3 syntax step added to existing CI lane",
+  "pythonAstFiles": [
+    "chatbot_rewrite_profile.py",
+    "test_chatbot_rewrite_profile.py",
+    "qualify_chatbot_next.py",
+    "qualify_chatbot_runtime.py"
+  ],
+  "workflowYamlParsed": [
+    "next-server-actions.yml",
+    "native-capabilities.yml"
+  ],
+  "commands": [
+    [
+      "python3.13",
+      "-B",
+      "-m",
+      "unittest",
+      "test_chatbot_rewrite_profile",
+      "test_next_source_acquisition"
+    ],
+    [
+      "ruby",
+      "-e",
+      "require yaml; YAML.parse_file for both changed workflows"
+    ],
+    [
+      "git",
+      "diff",
+      "--check"
+    ]
+  ],
+  "retainedControls": "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/next-rewrite-preflight-3p9_g79w",
+  "filesDeleted": 0
+}

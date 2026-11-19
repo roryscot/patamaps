@@ -1,0 +1,147 @@
+{
+  "status": "passed-native-selected-exec-qualification",
+  "scope": "Native selected-build execution, controlled artifacts; no real application deployment",
+  "platform": "x86_64-apple-darwin",
+  "creatingHeadBeforeChanges": "bb6596b",
+  "cliDigest": "sha256:ab8ec7069345fc61c4b02fba7468c9e1d009142c64b69b2088d3682a01cc46e1",
+  "workspaceLibraryTests": {
+    "passed": 50,
+    "failed": 0
+  },
+  "checks": [
+    {
+      "control": "verified-artifact-offline-captured-environment",
+      "passed": true
+    },
+    {
+      "control": "stale-output-refused-before-command",
+      "passed": true
+    },
+    {
+      "control": "successful-command-output-mutation-refused",
+      "passed": true
+    },
+    {
+      "control": "successful-command-pointer-mutation-refused",
+      "passed": true
+    },
+    {
+      "control": "unresolved-configuration-refused-before-command",
+      "passed": true
+    },
+    {
+      "control": "symlink-lock-refused-before-command",
+      "passed": true
+    },
+    {
+      "control": "executor-and-builder-share-live-lock",
+      "passed": true
+    },
+    {
+      "control": "interruption-sigkill-owned-child-stopped-and-lock-recovered",
+      "passed": true
+    },
+    {
+      "control": "interruption-sigterm-owned-child-stopped-and-lock-recovered",
+      "passed": true
+    },
+    {
+      "control": "interruption-sigint-owned-child-stopped-and-lock-recovered",
+      "passed": true
+    }
+  ],
+  "commands": [
+    {
+      "label": "workspace-tests",
+      "argv": [
+        "/Users/admin/.cargo/bin/cargo",
+        "test",
+        "--locked",
+        "-p",
+        "patamaps-workspace",
+        "--lib"
+      ],
+      "exitCode": 0,
+      "elapsedMs": 15167
+    },
+    {
+      "label": "cli-build",
+      "argv": [
+        "/Users/admin/.cargo/bin/cargo",
+        "build",
+        "--locked",
+        "-p",
+        "patamaps-cli",
+        "--bin",
+        "patamaps"
+      ],
+      "exitCode": 0,
+      "elapsedMs": 19026
+    },
+    {
+      "label": "selected-exec-controls",
+      "argv": [
+        "python3",
+        "-B",
+        "scripts/project_selected_exec_controls.py",
+        "--compiler",
+        "<built-cli>",
+        "--work-root",
+        "<outside-Cargo-counted-state>"
+      ],
+      "exitCode": 0,
+      "elapsedMs": 24131
+    },
+    {
+      "label": "format",
+      "argv": [
+        "/Users/admin/.cargo/bin/cargo",
+        "fmt",
+        "--all",
+        "--check"
+      ],
+      "exitCode": 0,
+      "elapsedMs": 1907
+    },
+    {
+      "label": "diff-check",
+      "argv": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exitCode": 0,
+      "elapsedMs": 205
+    }
+  ],
+  "guard": {
+    "recordId": "6931f0c4-2955-4200-baa5-40c4ec11d043",
+    "exitCode": 0,
+    "completed": true,
+    "startedAt": "2026-10-22T22:06:38.932Z",
+    "finishedAt": "2026-10-22T22:11:10.070Z",
+    "maximumRunGrowthBytes": 402653184,
+    "executionMode": "exclusive-native"
+  },
+  "previousCliPreservation": {
+    "originalDigest": "sha256:b89a30c8742671057bf53891f0809b0f880fb13f08ad6a5cb24404e5eb9a1c02",
+    "compressedDigest": "sha256:792a2680fcd5ae41619894ab970668f32a72b9d661ca5848333eb380283dc8cb",
+    "decompressedDigestVerified": true,
+    "executionAfterRestorationExercised": false
+  },
+  "filesDeleted": 0,
+  "parallelExecutionActivated": false,
+  "registryPublication": false,
+  "productionActivation": false,
+  "limits": [
+    "cooperative state lock; no hostile-writer isolation",
+    "post-command refusal does not roll back effects",
+    "only declared bindings are verified",
+    "no application deployment or detached-process cleanup claim"
+  ],
+  "sourceDigests": {
+    "crates/patamaps-workspace/src/project_build.rs": "94745dc0406016c8bfa080f3002ebf8b3926f32908e489b5445a511ee35fddbe",
+    "crates/patamaps-cli/src/main.rs": "b4b186d35c00f2c79cd8860a7d89ca0666adf8488a5839d67c7cfe6eccc04143",
+    "scripts/project_selected_exec_controls.py": "f8a6765028c5737b87e2b955d7311366bc9dca400877c3552fa17a363658ec64"
+  }
+}

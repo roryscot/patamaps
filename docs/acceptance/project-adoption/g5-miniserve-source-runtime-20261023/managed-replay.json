@@ -1,0 +1,160 @@
+{
+  "status": "passed-bounded-intel-miniserve-selected-state-replay",
+  "recordedAt": "2026-10-23T03:11:36.515080+00:00",
+  "ciRun": 39884102308,
+  "creatingSourceRevision": "36e6525fcc3f7fdb513efa8eb1fff329ffe67034",
+  "reservation": "e8a38608-124e-4d30-846e-7ad726b0689b",
+  "container": "71435b6b2bf9e6ba3866b747b27f2d82f3dc8493cab8734e7ce0a9032fe79d6d",
+  "image": "sha256:69f919497cada9a8611f3de61df902d9f94bf20f84552ef5bd93125c38608ef9",
+  "limits": {
+    "cpu": 1,
+    "memoryBytes": 268435456,
+    "diskBytes": 67108864
+  },
+  "kernelLimits": [
+    "100000 100000",
+    "268435456",
+    "0",
+    "256",
+    "100"
+  ],
+  "readonlyRoot": true,
+  "network": "none",
+  "sourceMounted": false,
+  "quotaImageBytes": 66060288,
+  "quotaFilesystemBytes": 66019328,
+  "importedStateBytes": 15390573,
+  "compilerBytes": 29607880,
+  "creatingCompilerDigest": "5e0b1d10bcb0f5f82090df17a0fba8d838c8f28016a949476289de6f3f7a40b6",
+  "applicationBinaryDigest": "453ff86b8df2521d3ad516bf78037646e704b0a1727cee65ee9210efdc9bfd69",
+  "archiveDigestVerified": true,
+  "hostEngineMatchesCreatingEngine": true,
+  "hostImportedBindingsVerified": true,
+  "preExecutionSelectionVerified": true,
+  "postExecutionSelectionVerified": true,
+  "selectionPointerUnchanged": true,
+  "stateLock": "held-through-command-and-post-verification",
+  "command": {
+    "status": "completed-project-command",
+    "programSucceeded": true,
+    "exitCode": 0,
+    "selectedInputsUnchanged": true,
+    "executableUnchanged": true,
+    "stdout": {
+      "byteLength": 28,
+      "digest": "sha256:586ce8409cc047f62cd0596cb1cc825e2d4b1edb71ee936d6c8b8c1dce14bf90",
+      "hex": null,
+      "text": "passed-miniserve-linux-http\n"
+    },
+    "stderr": {
+      "byteLength": 0,
+      "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "hex": null,
+      "text": ""
+    }
+  },
+  "runtimeControls": [
+    "pinned-version-startup",
+    "exact-get-body",
+    "head-length-and-empty-body",
+    "directory-listing",
+    "missing-document-refused",
+    "out-of-prefix-refused",
+    "invalid-port-refused",
+    "wrong-listener-readiness-refused"
+  ],
+  "httpResponses": {
+    "get-document.http": {
+      "sha256": "fc143e9a41703e28d11aaa6a6cde86ce40ff11603ca934f0bb346b5cc9f7f6cc",
+      "bytes": 295,
+      "statusLine": "HTTP/1.0 200 OK"
+    },
+    "head-document.http": {
+      "sha256": "6926941f60f461d26ad3f7b4c0fec779293c0d7c522a05bc04f2ce0446dc4bf2",
+      "bytes": 266,
+      "statusLine": "HTTP/1.0 200 OK"
+    },
+    "listing.http": {
+      "sha256": "c76665c3d23e1417909cb0940b320cd3b5e217952b1f5458162b38c0cd741dc6",
+      "bytes": 8180,
+      "statusLine": "HTTP/1.0 200 OK"
+    },
+    "missing.http": {
+      "sha256": "55c3790846efefe1ec7646f60a0b6c7ed8ec69024e1f6bf62d8d25bc3e3060ab",
+      "bytes": 4672,
+      "statusLine": "HTTP/1.0 404 Not Found"
+    },
+    "outside-prefix.http": {
+      "sha256": "446d00f9ca86d6209a690c4d26e7ba1c51bec307a8bc34d8967636cd72b6fd9b",
+      "bytes": 4657,
+      "statusLine": "HTTP/1.0 404 Not Found"
+    },
+    "readiness-1.http": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "statusLine": ""
+    },
+    "readiness-2.http": {
+      "sha256": "fc143e9a41703e28d11aaa6a6cde86ce40ff11603ca934f0bb346b5cc9f7f6cc",
+      "bytes": 295,
+      "statusLine": "HTTP/1.0 200 OK"
+    },
+    "wrong-expected-listener.http": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "statusLine": ""
+    },
+    "wrong-listener-ready-1.http": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "statusLine": ""
+    },
+    "wrong-listener-ready-2.http": {
+      "sha256": "61c05a3d813752f652b67e19086e9df095dbc11ce8197b41b8d5cb7150f491ef",
+      "bytes": 295,
+      "statusLine": "HTTP/1.0 200 OK"
+    }
+  },
+  "inputFiles": 47,
+  "allImportedInputsByteIdenticalAfter": true,
+  "workloadExitCode": 0,
+  "containerRunning": false,
+  "containerKeeperExitCode": 137,
+  "containerKeeperStop": "Executor stops the sleep-infinity keeper after workload exit; workload exited 0",
+  "releaseProof": {
+    "containerStopped": true,
+    "hostProcessGroupStopped": true,
+    "recordedAt": "2026-10-23T03:04:27.014Z",
+    "verifiedBy": 78050
+  },
+  "nativePreparation": {
+    "recordId": "e7affc7c-7652-41dd-be4c-e648e8c45560",
+    "completed": true,
+    "exitCode": 0,
+    "maximumGrowthBytes": 201326592,
+    "transportResetAfterCompletion": true,
+    "terminalStateRecheckedBeforeLaunch": true
+  },
+  "actualBrowser": false,
+  "nativePackageInstaller": false,
+  "performanceAcceptance": false,
+  "completeDependencyClosure": false,
+  "productionActivation": false,
+  "parallelActivationPerformed": false,
+  "registryPublication": false,
+  "filesDeleted": 0,
+  "kernelReadback": {
+    "cpuMax": "100000 100000",
+    "memoryMaxBytes": 268435456,
+    "memorySwapMaxBytes": 0,
+    "pidsMax": 256,
+    "cpuWeight": 100
+  },
+  "onlyWritableBindMount": "/work",
+  "sharedMemoryBytes": 1048576,
+  "pidsLimit": 256,
+  "capabilitiesDropped": [
+    "ALL"
+  ],
+  "noNewPrivileges": true
+}

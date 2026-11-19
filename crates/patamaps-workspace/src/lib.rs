@@ -1,5 +1,7 @@
 //! Local I/O orchestration. All semantic decisions use the checked Rust kernel.
 #![forbid(unsafe_code)]
+mod elf_target;
+pub use elf_target::check_elf_target;
 mod legacy_io;
 mod model;
 mod native_discovery;
@@ -42,7 +44,7 @@ use std::{
 
 pub const PROFILE: &str = "patamaps-workspace-draft-1";
 pub fn engine_id() -> String {
-    canonical_digest(&json!({"profile":PROFILE,"compiler":executor_id(),"manifest":include_str!("../Cargo.toml"),"model":include_str!("model.rs"),"process":include_str!("process.rs"),"toolSupervisor":include_str!("tool_supervisor.rs"),"workspace":include_str!("lib.rs"),"legacyIO":include_str!("legacy_io.rs"),"sourceEvaluation":include_str!("source_evaluation.rs"),"nativeDiscovery":include_str!("native_discovery.rs"),"nativeDocker":include_str!("native_docker.rs"),"nativeNext":include_str!("native_next.rs"),"project":include_str!("project.rs"),"projectFilesystem":include_str!("project_fs.rs"),"projectCommand":include_str!("project_command.rs"),"projectBuild":include_str!("project_build.rs"),"projectContext":include_str!("project_context.rs")})).expect("finite embedded source")
+    canonical_digest(&json!({"profile":PROFILE,"compiler":executor_id(),"manifest":include_str!("../Cargo.toml"),"model":include_str!("model.rs"),"process":include_str!("process.rs"),"toolSupervisor":include_str!("tool_supervisor.rs"),"workspace":include_str!("lib.rs"),"elfTarget":include_str!("elf_target.rs"),"legacyIO":include_str!("legacy_io.rs"),"sourceEvaluation":include_str!("source_evaluation.rs"),"nativeDiscovery":include_str!("native_discovery.rs"),"nativeDocker":include_str!("native_docker.rs"),"nativeNext":include_str!("native_next.rs"),"project":include_str!("project.rs"),"projectFilesystem":include_str!("project_fs.rs"),"projectCommand":include_str!("project_command.rs"),"projectBuild":include_str!("project_build.rs"),"projectContext":include_str!("project_context.rs")})).expect("finite embedded source")
 }
 #[derive(Debug, thiserror::Error)]
 pub enum Error {

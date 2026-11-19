@@ -1,0 +1,24 @@
+{
+  "cases": [
+    {
+      "name": "stock-terminal-fault",
+      "expectedState": "running",
+      "terminalReads": 1,
+      "terminalFailurePreserved": false
+    },
+    {
+      "name": "candidate-terminal-fault-stopped",
+      "expectedState": "finished",
+      "terminalReads": 1,
+      "terminalFailurePreserved": true
+    },
+    {
+      "name": "candidate-terminal-fault-uncertain",
+      "expectedState": "needs-review",
+      "terminalReads": 1,
+      "terminalFailurePreserved": true
+    }
+  ],
+  "installedGuardChanged": false,
+  "applicationBuildRun": false
+}

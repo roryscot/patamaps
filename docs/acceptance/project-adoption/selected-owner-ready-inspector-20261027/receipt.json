@@ -1,0 +1,96 @@
+{
+  "status": "passed-reviewed-selected-owner-ready-inspector-controls",
+  "observedAtUtc": "2026-10-27T20:59:35.438131+00:00",
+  "sourceRevisionBeforeImplementation": "bf336a58302b63af71bbbdd4463fb147dc406b20",
+  "baselineProbeDigest": "sha256:dbf9d7600cf5b994941538031a04008b438716fbf35079b86a3b7c34654dca8c",
+  "proposedProbeDigest": "sha256:e0152203e3a9ebaa9499c92fdb633a01a50d57f6910c7d5643d1dbd3dced7bf1",
+  "controlDriverDigest": "sha256:077895476c8c6a8cb33bcee9430351489e187ce9018a0825f8823cfa09ae1bd1",
+  "controlsPassed": 6,
+  "controls": [
+    {
+      "control": "test_default_seven_cases_are_unchanged",
+      "passed": true,
+      "driverExitCode": 0,
+      "ownedServerReapedAndPidAbsent": true,
+      "fixtureHttpCases": 7,
+      "inspectionCompleted": false,
+      "expectedFailureCode": null
+    },
+    {
+      "control": "test_invalid_inspector_refuses_before_server_or_outputs",
+      "passed": true,
+      "driverExitCode": 1,
+      "beforeEffectsRefusal": true
+    },
+    {
+      "control": "test_inspector_requests_the_live_owned_server",
+      "passed": true,
+      "driverExitCode": 0,
+      "ownedServerReapedAndPidAbsent": true,
+      "fixtureHttpCases": 7,
+      "inspectionCompleted": true,
+      "expectedFailureCode": null
+    },
+    {
+      "control": "test_inspector_failure_stops_owned_server",
+      "passed": true,
+      "driverExitCode": 1,
+      "ownedServerReapedAndPidAbsent": true,
+      "fixtureHttpCases": 7,
+      "inspectionCompleted": false,
+      "expectedFailureCode": "OWNER_INSPECTOR_TEST_FAILURE"
+    },
+    {
+      "control": "test_reappeared_producer_refuses_after_inspector",
+      "passed": true,
+      "driverExitCode": 1,
+      "ownedServerReapedAndPidAbsent": true,
+      "fixtureHttpCases": 7,
+      "inspectionCompleted": false,
+      "expectedFailureCode": "OWNER_PRODUCER_REAPPEARED"
+    },
+    {
+      "control": "test_sigterm_during_inspector_stops_owned_server",
+      "passed": true,
+      "driverExitCode": 1,
+      "ownedServerReapedAndPidAbsent": true,
+      "fixtureHttpCases": 7,
+      "inspectionCompleted": false,
+      "expectedFailureCode": "OWNER_PROBE_CANCELLED"
+    }
+  ],
+  "fixtureHttpCasesPassed": 35,
+  "ownedServersReapedAndAbsent": 5,
+  "exactNodeVersion": "v22.23.3",
+  "defaultResultSchemaPreserved": true,
+  "initialAdmissionExitCode": 75,
+  "retrySupervisorExitCode": 0,
+  "reservationId": "3fb68533-61f7-44ae-9e46-947cfdda78b6",
+  "reservationFinishedAndReleased": true,
+  "guardRecordDigest": "sha256:7783f04eead5e1b6f0c357772939d65deedb7a3c5477270d542316866291a1ff",
+  "privateRetryStdoutDigest": "sha256:27ed4fa4fb8fe8f819a665cfdd26a68844cb072b263d24d40e6517113c65ceec",
+  "privateRetryStderrDigest": "sha256:976e53ccffec9baf636019801d3559336a9c98bcbbc2cfaa300e27c541d20bfe",
+  "nondeletingRecovery": {
+    "fullFileAndMetadataComparisonPassed": true,
+    "entriesVerified": 205145,
+    "filesVerified": 183991,
+    "imageClosedAndPreserved": true,
+    "originalUnrelatedServiceReadyAndConfigurationPreserved": true,
+    "privateReceiptDigest": "sha256:3919fae54b1e73b3642ab9b1432f16a9065783f1313551e9698cd2b41d2868d0"
+  },
+  "retainedAllocatedBytesBeforeControls": 95049428992,
+  "maximumRetainedBytes": 100000000000,
+  "reservedGrowthBytes": 4000000000,
+  "filesDeleted": 0,
+  "policyChanged": false,
+  "realOwnerBrowserAccepted": false,
+  "realBackendAuthenticationAccepted": false,
+  "installedHelperAccepted": false,
+  "performanceAccepted": false,
+  "fullGoalAccepted": false,
+  "publicQualifier": "scripts/qualify_selected_next_ready_inspector.py",
+  "independentReviewer": "review.py",
+  "independentReviewerDigest": "sha256:fceb396740525b4c81a68b1cec02c7aa59f28a72e30b25aaf9b828b14e2fc7b9",
+  "sourceProbeMatchesTestedBytes": true,
+  "sourceQualifierMatchesTestedBytes": true
+}

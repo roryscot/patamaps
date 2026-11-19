@@ -1,0 +1,146 @@
+{
+  "status": "passed-controlled-cargo-segment-provider-controls",
+  "workflowHead": "6c9607f0950d659f496ec4de690a2762ca7af0fe",
+  "testedPullRequestMerge": "38107df7b3b8d8f1ed0eeaa25ddd438a67bbb006",
+  "currentImplementationMatchesTestedMerge": true,
+  "sourceFiles": {
+    "crates/patamaps-workspace/src/native_discovery.rs": "sha256:bdfd533a068878b356cb70fffcf746314aef5f2494a5410f267d44c47d942122",
+    "crates/patamaps-workspace/src/native_discovery_tests.rs": "sha256:a776d23aa710de6c1c0ecdb6580b90827f008947a4962c0c2fdb849392a8a6eb",
+    "scripts/cross_stack_discovery.py": "sha256:5ef73ae0cde1dfa3c3a7264e9da0673fdf83f68f015df729c64e9883848f67d5"
+  },
+  "workflow": {
+    "runId": 39264678054,
+    "url": "https://github.com/roryscot/patamaps/actions/runs/39264678054",
+    "status": "completed",
+    "conclusion": "success",
+    "jobs": [
+      {
+        "name": "Cross-stack source bindings (Linux x86_64)",
+        "conclusion": "success"
+      },
+      {
+        "name": "Linux x86_64",
+        "conclusion": "success"
+      },
+      {
+        "name": "Linux aarch64",
+        "conclusion": "success"
+      },
+      {
+        "name": "Cross-stack Linux image and browser (amd64)",
+        "conclusion": "success"
+      }
+    ]
+  },
+  "diagnostics": {
+    "artifactId": 12192732595,
+    "bytes": 166783,
+    "digest": "sha256:66a1b2102e98e19f7e8a91fee12bad2f32e01ed9bbc58b50c53fee31d9af079c"
+  },
+  "commands": [
+    {
+      "label": "g3-segment-legacy-refuses",
+      "exitCode": 2,
+      "expectedSuccess": false,
+      "seconds": 0.008
+    },
+    {
+      "label": "g3-segment-explicit",
+      "exitCode": 0,
+      "expectedSuccess": true,
+      "seconds": 2.32
+    },
+    {
+      "label": "g3-segment-missing-capture",
+      "exitCode": 2,
+      "expectedSuccess": false,
+      "seconds": 0.008
+    },
+    {
+      "label": "g3-segment-recursive-refused",
+      "exitCode": 2,
+      "expectedSuccess": false,
+      "seconds": 0.008
+    },
+    {
+      "label": "g3-segment-post-metadata-change",
+      "exitCode": 2,
+      "expectedSuccess": false,
+      "seconds": 0.164
+    }
+  ],
+  "controls": [
+    {
+      "control": "g3-segment-legacy-refuses",
+      "result": "refused",
+      "code": "NATIVE_CARGO_MEMBERS",
+      "manifestsAndLocksUnchanged": true,
+      "projectBuildScriptExecuted": false
+    },
+    {
+      "control": "g3-segment-explicit",
+      "result": "observed",
+      "view": "resolved",
+      "manifestsAndLocksUnchanged": true,
+      "projectBuildScriptExecuted": false,
+      "requestDigest": "sha256:2d26c2be506e14100d461267760bb3665fa4dbe71d0f717c96dd102518f38552",
+      "shardDigest": "sha256:bec1a75ebf4406776c4fc706ed440b8a642dd15254461b60e16eadebc94f4e18",
+      "memberExpansion": {
+        "expansions": [
+          {
+            "manifest": "Cargo.toml",
+            "manifests": [
+              "crates/app/Cargo.toml"
+            ],
+            "pattern": "crates/a*"
+          }
+        ],
+        "mode": "bounded-segment-globs",
+        "preAndPostObservedEqual": true
+      }
+    },
+    {
+      "control": "g3-segment-missing-capture",
+      "result": "refused",
+      "code": "NATIVE_CARGO_MANIFEST_INPUT",
+      "manifestsAndLocksUnchanged": true,
+      "projectBuildScriptExecuted": false
+    },
+    {
+      "control": "g3-segment-recursive-refused",
+      "result": "refused",
+      "code": "NATIVE_CARGO_MEMBERS",
+      "manifestsAndLocksUnchanged": true,
+      "projectBuildScriptExecuted": false
+    },
+    {
+      "control": "g3-segment-post-metadata-change",
+      "result": "refused",
+      "code": "NATIVE_CARGO_MEMBERS_CHANGED",
+      "manifestsAndLocksUnchanged": true,
+      "projectBuildScriptExecuted": false
+    }
+  ],
+  "providerBinaryDigest": "sha256:9d7a8d4760b97e2b37ebe552a346467d7388c7bce7d729b7658baae3fd93be97",
+  "engine": {
+    "compiler": "sha256:97c1a1fa1b1721e774bc7ac1bd456f9307835aeae40c25b620965316f8de1e03",
+    "documentType": "executor-description",
+    "governance": "sha256:5f0282418fabb491259c63d396880df37137d4812e5b25ac7b4eaf5c19458524",
+    "schemaVersion": "0.1.0",
+    "scientific": "sha256:4922a8e184b9a56f39f128577068e6c59295fcbdb5cce819e4b5946eea1499b1",
+    "workspace": "sha256:06bf03da155f95d1125b2062a45102b2bd56513f6361b076c1cdb65c172781ad"
+  },
+  "sourceUnchanged": true,
+  "filesDeleted": 0,
+  "limits": {
+    "workspaceMembers": "literal default; separate whole-segment and prefix/suffix single-star modes, bounded enumeration and exact captured expansion; literal exclusions remain opt-in",
+    "ambientConfig": "outside owner root refuses without copying values",
+    "cargoConfig": "only matching build.target and net.offline=true",
+    "artifactAndRuntimeAcceptance": "not established"
+  },
+  "limitations": [
+    "Controlled provider cases, not the independent upstream Axum qualification.",
+    "Metadata observations do not establish application target compilation or runtime behavior.",
+    "No whole-goal adoption acceptance or protected activation."
+  ]
+}

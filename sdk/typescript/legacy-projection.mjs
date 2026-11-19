@@ -43,7 +43,7 @@ export function createLegacyProjectionApi(invoke, Registry) {
         configurable: true,
       });
     }
-    if (value.issues)
+    if (value && typeof value === "object" && value.issues)
       value.issues = value.issues.map((entry, i) =>
         Object.fromEntries(
           response.issueKeys[i].map((key) => [key, entry[key]]),
@@ -62,6 +62,9 @@ export function createLegacyProjectionApi(invoke, Registry) {
     parseLegacyProjection(value) {
       call("projection-parse", { value });
       return value;
+    },
+    emitLegacyTypeScriptProjection(value, options = {}) {
+      return call("projection-emit-typescript", { value, options });
     },
     compileLegacyProjection(document, generation, spec, options = {}) {
       const registry = options.relationRegistry ?? new Registry();

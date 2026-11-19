@@ -1,0 +1,130 @@
+"""Independent, bounded, in-memory review; never execute or extract artifact programs."""
+from pathlib import Path,PurePosixPath
+import argparse,datetime,hashlib,io,json,subprocess,tarfile,tomllib,zipfile
+ROOT=Path('/Volumes/dev_src_case_sensitive/projects/patamaps')
+GH=ROOT/'.tools/intel-gh-2.102.0-20261015/unpacked/gh_2.102.0_macOS_amd64/bin/gh'
+MAX=320*1024**2
+def sha(raw):return 'sha256:'+hashlib.sha256(raw).hexdigest()
+def api(path,binary=False):
+ raw=subprocess.check_output([str(GH),'api','repos/roryscot/patamaps/'+path],cwd=ROOT,timeout=120)
+ return raw if binary else json.loads(raw)
+def members(raw,maximum=MAX):
+ seen=set();total=0
+ with tarfile.open(fileobj=io.BytesIO(raw),mode='r|gz') as tar:
+  for m in tar:
+   p=PurePosixPath(m.name);name=p.as_posix().rstrip('/')
+   assert not p.is_absolute() and '..' not in p.parts and name not in seen and len(seen)<20000 and (m.isfile() or m.isdir()) and not m.mode&0o7000
+   seen.add(name)
+   if m.isdir():continue
+   total+=m.size;assert 0<=m.size<=128*1024**2 and total<=maximum
+   data=tar.extractfile(m).read();assert len(data)==m.size
+   yield name,data,m.mode
+def hashes(raw):
+ return {name:dict(digest=sha(data),bytes=len(data),mode=mode) for name,data,mode in members(raw)}
+def main():
+ parser=argparse.ArgumentParser();parser.add_argument('--run',type=int,required=True);args=parser.parse_args()
+ run=api('actions/runs/'+str(args.run));assert run['status']=='completed' and run['conclusion']=='success'
+ revision=run['head_sha'];listed=api('actions/runs/'+str(args.run)+'/artifacts')['artifacts']
+ listed=[a for a in listed if a['name']=='installed-rust-owner-build-'+revision];assert len(listed)==1
+ meta=api('actions/artifacts/'+str(listed[0]['id']));assert not meta['expired'] and meta['workflow_run']['id']==args.run and meta['workflow_run']['head_sha']==revision and meta['size_in_bytes']<=MAX
+ raw=api('actions/artifacts/'+str(meta['id'])+'/zip',True)
+ assert len(raw)==meta['size_in_bytes'] and sha(raw)==meta['digest']
+ zipped=zipfile.ZipFile(io.BytesIO(raw));assert len(zipped.infolist())<5000 and sum(i.file_size for i in zipped.infolist())<=MAX and len(zipped.namelist())==len(set(zipped.namelist()))
+ for name in zipped.namelist():
+  p=PurePosixPath(name);assert not p.is_absolute() and '..' not in p.parts
+ def read(name,limit=MAX):
+  assert zipped.getinfo(name).file_size<=limit;return zipped.read(name)
+ def data(name):return json.loads(read(name,4*1024**2))
+ receipt=data('receipt.json');assert receipt['status']=='passed-installed-rust-owner-builds' and receipt['sourceRevision']==revision
+ assert all(c['exitCode']==c['expectedExitCode'] for c in receipt['commands'])
+ for key in ['applicationRecompiled','sourceFilesMatchedProducingGit','checkoutCompilerAndDriverUnavailableDuringOwners','freshSourceCompilerBuiltFromInstalledPaths','sharedCargoDependencyArtifacts','changedSourceRefusedBeforeCompilerMarker','restoredSourceInventoryVerified','allOwnedContainersStopped','checkoutCompilerBytesRestored','checkoutQualifierRestored']:assert receipt[key] is True,key
+ assert not any(receipt[k] for k in ['filesDeleted','policyChanged','productionActivation','registryPublication','performanceAccepted','completeDependencyClosure'])
+ assert receipt['maximumGrowthBytes']==4000000000 and receipt['storageObservation']['peakGrowthBytes']<=4000000000
+ dist=data('package/distribution.json');assert dist==receipt['distribution'] and dist['target']=='x86_64-unknown-linux-gnu'
+ source_files={};inventory=None;native_binary=None
+ for kind in ['sourceArchive','nativeArchive']:
+  entry=dist[kind];assert PurePosixPath(entry['path']).name==entry['path']
+  archive=read('package/'+entry['path']);assert sha(archive)==entry['digest']
+  for name,body,mode in members(archive,128*1024**2):
+   parts=PurePosixPath(name).parts;assert len(parts)>1;relative='/'.join(parts[1:])
+   if kind=='sourceArchive':
+    if relative=='source-inventory.json':inventory=json.loads(body);assert sha(body)==dist['sourceInventoryDigest']
+    else:source_files[relative]=dict(digest=sha(body),bytes=len(body))
+   elif relative=='bin/patamaps':
+    native_binary=sha(body)
+    assert native_binary==dist['binaryDigest'] and mode&0o111 and body[:6]==b'\x7fELF\x02\x01' and int.from_bytes(body[18:20],'little')==62
+ assert native_binary==dist['binaryDigest']
+ assert inventory and len(source_files)==receipt['sourceIdentity']['sourceFiles'] and set(source_files)=={x['path'] for x in inventory}
+ for item in inventory:assert source_files[item['path']]==dict(digest=item['digest'],bytes=item['bytes'])
+ names=sorted(source_files)
+ result=subprocess.run(['git','cat-file','--batch'],input=''.join(revision+':'+name+'\n' for name in names).encode(),capture_output=True,cwd=ROOT,timeout=120);assert result.returncode==0
+ stream=io.BytesIO(result.stdout)
+ for name in names:
+  header=stream.readline().split();assert len(header)==3 and header[1]==b'blob'
+  size=int(header[2]);assert size<=128*1024**2
+  body=stream.read(size);assert stream.read(1)==b'\n'
+  assert len(body)==source_files[name]['bytes'] and sha(body)==source_files[name]['digest'],name
+ assert stream.read()==b''
+ frozen=json.loads((ROOT/'docs/acceptance/project-adoption/g3-cargo-registry-context-20261023/registry-accepted-40050181349/receipt.json').read_bytes())
+ cases={}
+ for label in ['native','source']:
+  child=data(label+'/receipt.json');execution=data(label+'/registry/execution.json');registry=data(label+'/registry/receipt.json');index=data(label+'/registry/inventory.json')
+  assert child['status']=='passed-source-built-miniserve-linux-deployment' and child['sourceRevision'] is None
+  assert child['installedSourceIdentity']==receipt['sourceIdentity'] and child['installedSourceInventoryUnchanged'] is True
+  assert child['relocatedCompiler']['engine']==dist['engines'] and 'sha256:'+child['relocatedCompiler']['sha256']==receipt['cases'][label]['compilerDigest']
+  compiler=read(label+'/artifacts/patamaps',MAX)
+  assert sha(compiler)==receipt['cases'][label]['compilerDigest'] and compiler[:6]==b'\x7fELF\x02\x01' and int.from_bytes(compiler[18:20],'little')==62
+  assert all(c['exitCode']==c['expectedExitCode'] for c in child['commands'])
+  required={'registry-native-real-build','registry-snapshot-before-effects','registry-selected-before-effects','registry-offline-selected-replay','native-deployment-select','invalid-config-selection','wrong-listener-selection','wrong-digest-selection','wrong-architecture-selection','offline-selected-replay','stale-before-effects','selected-runtime-repeat'}
+  assert required<={c['label'] for c in child['commands']}
+  assert child['upstreamCommit']==frozen['upstreamCommit'] and child['upstreamInventory']==frozen['upstreamInventory'] and child['uncapturedPublicTestFixtures']==frozen['uncapturedPublicTestFixtures']
+  assert child['upstreamTestSummaries']==execution['testSummaries']==frozen['upstreamTestSummaries']
+  for key in ['sourceBuild','upstreamSourceUnchanged','capturedSourceStageMatchesFrozenInventory','configuredSourceAndSnapshotUnavailableReplay','previousSelectionPreservedOnFourRefusals','staleRuntimeRefusedBeforeCommand','restoredSelectedRuntimePassed','runtimeVerificationBeforeSelection','actualHttp']:assert child[key] is True,key
+  assert child['runtimeControls']==frozen['runtimeControls']
+  for phase in ['positive','selected']:
+   assert read(label+'/runtime-'+phase+'/passed-controls.txt',4096).decode().splitlines()==frozen['runtimeControls']
+  for key in ['hostConfigurationVerifiedBeforeStart','releaseBuildObserved','binaryCopiedBeforeOwnerTests','kernelLimitsVerified','externalRouteAbsent','loopbackAvailableForOwnerTests','ipv6LoopbackVerified','ipv6ExternalRouteAbsent','retainedArchiveIndexReadOnly','containerStopped','allOwnedContainersStopped','guardianCleanupConfirmed']:assert execution[key] is True,key
+  assert execution['cpuAllowance']==2 and execution['memoryAllowance']==6*1024**3 and execution['memorySwapAllowance']==0 and execution['pidsAllowance']==512 and execution['workFilesystemBytes']==3*1024**3
+  assert execution['cargoExitCode']==0
+  assert execution['localAddressProvision']['helperStoppedBeforeCargo'] is True and execution['localAddressProvision']['workloadCapabilitiesDropped'] is True
+  assert registry==child['cargoRegistryContext']
+  for key in ['configuredDownloadHomeUnavailable','immutableRegistryContext','generatedCargoPathsInsideQuota','snapshotCorruptionRefusedBeforeMarker','selectedRegistryCorruptionRefusedBeforeMarker','previousSelectionPreserved','restoredOfflineSelectedReplay','configuredOwnerAndSnapshotUnavailable','originalPublicArchives','originalSourceInputsUnchanged']:assert registry[key] is True,key
+  assert index['packageCount']==456 and index['fileCount']==len(index['files']) and index['originalPublicDistributionArchives'] is True and index['extractedSourceCaptured'] is False
+  archive=read(label+'/artifacts/registry-selected-state.tar.gz')
+  assert sha(archive)==registry['retainedStateArchive']['digest'] and len(archive)==registry['retainedStateArchive']['bytes']
+  table={};small={};application={}
+  for name,body,mode in members(archive):
+   table[name]=dict(digest=sha(body),bytes=len(body))
+   if name.endswith('/selected.json') or name.endswith('/application/Cargo.lock'):small[name]=body
+   marker='/candidate/application/'
+   if marker in name:application[name.split(marker,1)[1]]=sha(body).removeprefix('sha256:')
+  pointer=small['registry-state/selected.json'];assert sha(pointer)==registry['selectionDigest']
+  selected=json.loads(pointer);prefix='registry-state/'+selected['attempt']+'/candidate/'
+  assert application==frozen['upstreamInventory']
+  assert {name.removeprefix(prefix+'.cargo-home/'):row for name,row in table.items() if name.startswith(prefix+'.cargo-home/')}==index['files']
+  lock=tomllib.loads(small[prefix+'application/Cargo.lock'].decode())
+  expected={p['name']+'-'+p['version']+'.crate':'sha256:'+p['checksum'] for p in lock['package'] if p.get('source','').startswith('registry+')}
+  assert len(expected)==456 and set(expected)==set(index['packages'])
+  for basename,digest in expected.items():
+   entry=index['packages'][basename];assert entry['checksum']==digest
+   matched=[row for name,row in index['files'].items() if name.endswith('/'+basename)];assert len(matched)==1 and matched[0]['digest']==digest
+  assert table[prefix+'bundle/miniserve']['digest']==execution['binaryDigest']=='sha256:'+child['applicationBinary']['sha256']
+  deployment=read(label+'/artifacts/selected-state.tar.gz');assert sha(deployment)=='sha256:'+child['portableSelectedState']['sha256']
+  deployment_members=hashes(deployment);selected_bytes=None
+  for name,body,mode in members(deployment):
+   if name=='selected-state/selected.json':selected_bytes=body;break
+  assert selected_bytes is not None and sha(selected_bytes)=='sha256:'+child['portableSelectedState']['selectionDigest']
+  deployed=json.loads(selected_bytes);runtime='selected-state/'+deployed['attempt']+'/candidate/bundle/miniserve'
+  assert deployment_members[runtime]['digest']==execution['binaryDigest']
+  cases[label]=dict(sourceFilesVerified=len(application),registryFilesVerified=len(index['files']),lockChecksumsVerified=456,upstreamTestsPassed=325,namedHttpControlsPerPass=8,httpPassesVerified=2,registryBinaryDigest=execution['binaryDigest'],compilerDigest=sha(compiler),snapshotAndSelectedCorruptionsRefused=True,previousSelectionPreservedOnFourRefusals=True,staleRuntimeRefusedBeforeEffects=True,allOwnedContainersStopped=True)
+ output=ROOT/'docs/acceptance/project-adoption/g5-installed-rust-owner-build-20261024'/('accepted-'+str(args.run))
+ assert not output.exists();output.mkdir()
+ ci=dict(runId=args.run,runUrl=run['html_url'],sourceRevision=revision,artifactId=meta['id'],artifactDigest=meta['digest'],artifactBytes=len(raw),artifactExpiresAt=meta['expires_at'],fullArchiveRetainedOnIntel=False)
+ verification=dict(status='passed-independent-installed-rust-owner-build-review',observedAtUtc=datetime.datetime.now(datetime.timezone.utc).isoformat(),**ci,sourceFilesMatchedGit=len(source_files),cases=cases,bothFreshCompilersRebuiltActualOwner=True,sourceAndCheckoutRestorationVerifiedFromCI=True,rawRegistryAndRuntimeMembersRehashed=True,performanceAccepted=False,completeDependencyClosure=False,externalOsAndTestInputsRemain=True,filesDeleted=0)
+ for name,value in [('ci.json',ci),('independent-verification.json',verification),('receipt.json',receipt),('distribution.json',dist)]:(output/name).write_text(json.dumps(value,indent=2)+'\n')
+ for label in ['native','source']:
+  for name,entry in [('receipt.json',label+'/receipt.json'),('registry-execution.json',label+'/registry/execution.json'),('registry-receipt.json',label+'/registry/receipt.json')]:
+   (output/(label+'-'+name)).write_text(json.dumps(data(entry),indent=2)+'\n')
+ (output/'review-source.py.txt').write_text(Path(__file__).read_text())
+ print(json.dumps(verification))
+if __name__=='__main__':main()

@@ -1,9 +1,11 @@
 //! Registered relation data. Registration never admits a consumer generation.
-use crate::{
-    CheckError, CheckedGraph, ImportedLegacyRelationPack, Issue, import_legacy_relation_pack,
-};
+use crate::{CheckError, CheckedGraph, Issue};
+#[cfg(feature = "legacy-compat")]
+use crate::{ImportedLegacyRelationPack, import_legacy_relation_pack};
 use patamaps_contracts::{GraphDocument, Relation, RelationLaw, RelationPack, parse};
+#[cfg(feature = "legacy-compat")]
 use serde_json::Value;
+#[cfg(feature = "legacy-compat")]
 use std::collections::HashSet;
 
 /// Registration preserves pack and relation order. Each mutation validates the
@@ -11,6 +13,7 @@ use std::collections::HashSet;
 #[derive(Debug, Clone)]
 pub struct RelationRegistry {
     packs: Vec<RelationPack>,
+    #[cfg(feature = "legacy-compat")]
     legacy: Option<Vec<ImportedLegacyRelationPack>>,
 }
 
@@ -18,6 +21,7 @@ impl RelationRegistry {
     pub fn new(packs: impl IntoIterator<Item = RelationPack>) -> Result<Self, CheckError> {
         let mut registry = Self {
             packs: Vec::new(),
+            #[cfg(feature = "legacy-compat")]
             legacy: None,
         };
         for pack in packs {
@@ -32,6 +36,7 @@ impl RelationRegistry {
 
     /// Interpret the pinned legacy core's definitions with their original pack
     /// identity. The original data and legacy digest remain separately available.
+    #[cfg(feature = "legacy-compat")]
     pub fn with_legacy_core() -> Result<Self, CheckError> {
         Self::from_legacy_packs([parse(include_bytes!("legacy_core.json"))?])
     }
@@ -40,6 +45,7 @@ impl RelationRegistry {
     /// documents. Empty 1.0 kind lists retain their original meaning; executable
     /// dependencies bind to original addresses, never rewritten native views.
     /// This does not reproduce mutable or unchecked legacy JS registration.
+    #[cfg(feature = "legacy-compat")]
     pub fn from_legacy_packs(packs: impl IntoIterator<Item = Value>) -> Result<Self, CheckError> {
         let mut registry = Self {
             packs: Vec::new(),
@@ -105,11 +111,13 @@ impl RelationRegistry {
 
     /// Original envelopes and addresses for imported snapshots. Ordinary modern
     /// registries return None; this data grants no checked/admitted capability.
+    #[cfg(feature = "legacy-compat")]
     pub fn imported_packs(&self) -> Option<&[ImportedLegacyRelationPack]> {
         self.legacy.as_deref()
     }
 
     pub fn register_pack(&mut self, pack: RelationPack) -> Result<(), CheckError> {
+        #[cfg(feature = "legacy-compat")]
         if self.legacy.is_some() {
             return Err(CheckError(vec![Issue::error(
                 "LEGACY_REGISTRY_SNAPSHOT",

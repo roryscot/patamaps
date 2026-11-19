@@ -1,0 +1,44 @@
+# Retention and evidence
+
+Keep compact receipts, command logs reviewed for secrets, source/tool digests, refusal records, and a selected reproducible failure. Publish Patamaps qualification evidence in Patamaps; keep private application source and secret-bearing logs out of its public repository. Historical consumer results identify their exact source and do not attest current application correctness.
+
+Retained `project-build` plans accept `maximumRetainedAttempts` (1–64, default 8). Both successes and failures consume slots. Before allocating another candidate, the native driver refuses with `PROJECT_BUILD_RETENTION_REVIEW_REQUIRED` when full. A verified unchanged-input no-op remains available at capacity; `--force` does not bypass retention. The default is omitted during serialization to preserve legacy plan identities. Controlled stress-test plans explicitly request 64 slots. No attempt is deleted automatically.
+
+The local supervisor admission helper reserves the entire approved per-run growth allowance before launch: retained bytes plus reserved growth must fit the existing retained limit. Unknown accounting fails closed. This tightens admission without enlarging any limit or changing the inventory roots. Installing this helper is recorded separately from its source/CI checks. The native attempt ceiling requires a newly built CLI; it does not retroactively change installed binaries.
+
+Before another full qualification, reuse an existing immutable source/package when its identity matches. Do not create a new date-named full copy merely to rerun an observation. Preserve the selected generation and unique failure context. Export compact evidence before proposing removal of superseded compiler outputs or archive-identical extracted files.
+
+Deletion always needs an exact inventory and explicit approval. Recheck file identities, current job ownership, archive digests and saved selection before acting. A push is not a backup of ignored files. Archive member hash verification establishes matching bytes, not an exercised filesystem restoration or a guaranteed amount of APFS space reclaimed.
+
+Source distributions retain code, tests, fixtures and vendor inputs. Historical generated acceptance trees are not recursively copied. Inline Markdown links from included documents select evidence recursively through linked Markdown; directory references require README.md, index.md or receipt.json. Reference-style Markdown links are not interpreted by this selector. Source payloads are capped at 128 MiB / 16,384 members; linked evidence at 32 MiB / 512 files. Missing references, escaped paths and exceeded budgets refuse packaging. Review scope rather than raising limits automatically. Distribution metadata records the selected evidence and budgets.
+
+The 2026-10-20 exact approved cleanup and prevention verification are recorded in the [audit](../acceptance/project-adoption/retention-audit-20261020/AUDIT.md). No automatic deletion is enabled.
+
+Intel's [protocol3 reservation rollout](../acceptance/project-adoption/g5-reservation-rollout-2026-10-20/receipt.json) is installed and active after source-bound real-backend qualification and fresh installed verification. Every declared dependency remains hash-bound; drift refuses parallel admission. Native jobs, benchmarks and uncertain ownership retain exclusive behavior. Storage limits and deletion-approval requirements remain unchanged.
+
+
+## Selected context is protected input (2026-11-04)
+
+A candidate file's absence from artifacts.json does not establish that it is
+unused. Native selected-build verification also checks its effective context
+outside declared writable paths. Raw dependency files can remain mandatory even
+when they are not emitted runtime artifacts or directly selected graph inputs.
+
+The earlier216-copy cleanup classification omitted that distinction.31 removed
+files are still required by one selected native build, blocking unchanged reuse.
+Their manifest digests/modes match retained backups; restore only the required
+absent copies after current full hashes pass. This was an incomplete cleanup
+analysis, not permission to weaken context verification or relabel failures.
+
+Future cleanup inventories must protect both selected artifacts and selected
+non-writable context entries, plus original source/snapshots and other retained
+inputs. A backup establishes recoverability; it does not prove a copy is unused.
+Use the native binding/context contracts when classifying candidate files.
+Retiring an entire old build or changing that contract is a separate reviewed
+operation. Preserve historical inventories and record any restored copies with
+new identities instead of pretending original inode/timestamp restoration.
+
+
+### Owned data outside ordinary roots
+
+Directory scans alone can miss labelled Patamaps Docker volumes stored inside a preallocated Docker VM. The current [Norway staged task adapter](../acceptance/project-adoption/owned-volume-accounting-20261104/README.md) charges exact owned-volume bytes in addition to all original roots, and conservatively charges their growth against the same declared job allowance. Unrelated project data is excluded; unknown sizes, duplicate identity or unavailable metadata refuse. The canonical installed guard and policy remain unchanged. This does not establish hard native quotas or parallel qualification. Future storage claims must state whether such data was included.

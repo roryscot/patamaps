@@ -13,6 +13,9 @@ fn files(directory: &Path, output: &mut Vec<std::path::PathBuf>) {
 }
 
 fn main() {
+    if std::env::var_os("CARGO_FEATURE_LEGACY_COMPAT").is_none() {
+        return;
+    }
     let manifest = std::env::var("CARGO_MANIFEST_DIR").expect("Cargo manifest path");
     let root = Path::new(&manifest).join("../../vendor/icu_collator");
     // Watch additions/removals as well as changes to already inventoried files.

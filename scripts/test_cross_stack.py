@@ -103,6 +103,10 @@ def main():
             run("build-plan-cli", ["cargo", "build", "-p", "patamaps-cli", "--locked", "--offline"])
             from project_build_controls import verify
             receipt["projectBuilds"] = verify(ROOT, work, env, run)
+            from project_build_context_controls import verify as verify_context_builds
+            receipt["projectContextBuilds"] = verify_context_builds(ROOT, work, env, run)
+            from project_preparation_controls import verify as verify_preparation
+            receipt["projectPreparation"] = verify_preparation(ROOT, work, env, run, fixture_work=work)
         elif args.phase == "commands":
             run("command-cli", ["cargo", "build", "-p", "patamaps-cli", "--locked", "--offline"])
             from project_command_controls import verify

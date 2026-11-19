@@ -1,0 +1,91 @@
+{
+  "status": "passed-scoped-real-owner-native-preparation-baseline",
+  "sourceHead": "534273e6dd56ebc6ac438b1d48b01d1cfbca3b17",
+  "driverCompilerSha256": "c06d5f4821be3b2f437c316b979ea41dd48242c2452bd2038c1bab5dde2bd58b",
+  "generationCompilerSha256": "141498d321f688baa9d1c54e0af4192430ae43de88ddfdc8349d733756cd02fe",
+  "contextDigest": "sha256:f873090e94e1f019dc664f52e0c0bc9648fe260b9f65a942f72b856e341709c3",
+  "selectedTextInputs": 960,
+  "generatedArtifactsByteIdenticalToOriginal": 3,
+  "nativeCalls": 12,
+  "nativeOperations": [
+    "compile",
+    "parse-policy",
+    "projection-compile",
+    "projection-spec-parse"
+  ],
+  "commands": [
+    {
+      "label": "owner-native-build",
+      "exitCode": 0,
+      "seconds": 500.397
+    },
+    {
+      "label": "owner-native-offline-replay",
+      "exitCode": 0,
+      "seconds": 31.823
+    },
+    {
+      "label": "owner-native-noop",
+      "exitCode": 0,
+      "seconds": 34.716
+    }
+  ],
+  "commandReports": {
+    "owner-generation": {
+      "exitCode": 0,
+      "elapsedMs": 2807,
+      "selectedInputsUnchanged": true,
+      "executableUnchanged": true
+    },
+    "next-build": {
+      "exitCode": 0,
+      "elapsedMs": 18609,
+      "selectedInputsUnchanged": true,
+      "executableUnchanged": true
+    },
+    "typescript": {
+      "exitCode": 0,
+      "elapsedMs": 17325,
+      "selectedInputsUnchanged": true,
+      "executableUnchanged": true
+    },
+    "fresh-manifest-witness": {
+      "exitCode": 0,
+      "elapsedMs": 125,
+      "selectedInputsUnchanged": true,
+      "executableUnchanged": true
+    }
+  },
+  "sourceAndSnapshotUnavailableReplay": true,
+  "noOpPreviousSelectionPreserved": true,
+  "noOpVerification": "not-repeated",
+  "originalGitUnchanged": true,
+  "driverUnchanged": true,
+  "filesDeleted": 0,
+  "guardRun": "1fb571ed-131d-4e70-90e8-560429c204ee",
+  "optimizedDriverBuild": {
+    "status": "built-native-release-cli",
+    "exitCode": 0,
+    "command": [
+      "cargo",
+      "build",
+      "--release",
+      "--locked",
+      "--offline",
+      "-p",
+      "patamaps-cli"
+    ],
+    "seconds": 348.873,
+    "sourceHead": "534273e6dd56ebc6ac438b1d48b01d1cfbca3b17",
+    "generationCompilerSha256": "141498d321f688baa9d1c54e0af4192430ae43de88ddfdc8349d733756cd02fe",
+    "driverCompilerSha256": "c06d5f4821be3b2f437c316b979ea41dd48242c2452bd2038c1bab5dde2bd58b"
+  },
+  "applicationAcceptance": false,
+  "developmentLoopPerformance": "not-accepted",
+  "limitations": [
+    "Actual unchanged owner generator produces the existing contract and the real Next build consumes it.",
+    "Owner edit/failure controls have not run; first launch was refused before startup for a live shared lease.",
+    "Browser/runtime, installed/deployment, real-project watch and broader framework cases remain open.",
+    "Observed full-build time includes context traversal/copying, artifact checks and record handling; it is not an isolated compiler benchmark."
+  ]
+}

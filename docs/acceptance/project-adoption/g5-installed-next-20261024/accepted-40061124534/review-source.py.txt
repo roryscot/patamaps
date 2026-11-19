@@ -1,0 +1,149 @@
+from pathlib import Path,PurePosixPath
+import subprocess,json,io,zipfile,tarfile,hashlib
+r=Path("/Volumes/dev_src_case_sensitive/projects/patamaps")
+gh=r/".tools/intel-gh-2.102.0-20261015/unpacked/gh_2.102.0_macOS_amd64/bin/gh"
+revision="13faaa4f59ad1a677092a04de2dec19ec0b5a269";runid=40061124534
+def api(path,raw=False):
+ value=subprocess.check_output([str(gh),"api","repos/roryscot/patamaps/"+path],cwd=r,timeout=90)
+ return value if raw else json.loads(value)
+def digest(raw):return "sha256:"+hashlib.sha256(raw).hexdigest()
+run=api(f"actions/runs/{runid}");assert run["status"]=="completed" and run["conclusion"]=="success" and run["head_sha"]==revision
+artifacts=api(f"actions/runs/{runid}/artifacts")["artifacts"];assert len(artifacts)==1
+meta=artifacts[0];assert not meta["expired"] and meta["workflow_run"]["head_sha"]==revision and meta["workflow_run"]["id"]==runid and meta["name"]=="installed-next-"+revision
+assert meta["size_in_bytes"]<64*1024**2
+raw=api(f'actions/artifacts/{meta["id"]}/zip',True);assert len(raw)==meta["size_in_bytes"] and digest(raw)==meta["digest"]
+archive=zipfile.ZipFile(io.BytesIO(raw));assert len(archive.namelist())==len(set(archive.namelist()))
+parent=json.loads(archive.read("receipt.json"));distribution=json.loads(archive.read("package/distribution.json"))
+assert parent["sourceRevision"]==revision and parent["status"]=="passed-installed-next-native-command-workflows"
+assert all(c["exitCode"]==c["expectedExitCode"] for c in parent["commands"])
+for key in ["checkoutCompilerAndDriverUnavailableDuringOwners","changedSourceRefusedBeforeCompilerMarker","restoredSourceInventoryVerified","publicCachesShared"]:assert parent[key],key
+for key in ["fullRetainedNextBundleAccepted","completeDependencyClosure","performanceAccepted","productionActivation","registryPublication","privateGeneratedOutputsPublished"]:assert parent[key] is False,key
+assert parent["filesDeleted"]==0 and parent["maximumQualificationGrowthBytes"]==4000000000
+assert parent["distribution"]==distribution and distribution["buildProfile"]=="development"
+assert set(parent["cases"])=={"source","native"}
+files={};inventory=None;native_digest=None
+for kind in ["sourceArchive","nativeArchive"]:
+ entry=distribution[kind];payload=archive.read("package/"+entry["path"]);assert digest(payload)==entry["digest"]
+ seen=set()
+ with tarfile.open(fileobj=io.BytesIO(payload),mode="r|gz") as tar:
+  for member in tar:
+   path=PurePosixPath(member.name)
+   assert not path.is_absolute() and ".." not in path.parts and len(path.parts)>1 and member.isfile() and not member.mode&0o7000
+   name="/".join(path.parts[1:]);assert name not in seen;seen.add(name)
+   data=tar.extractfile(member).read()
+   if kind=="sourceArchive":
+    if name=="source-inventory.json":inventory=json.loads(data);assert digest(data)==distribution["sourceInventoryDigest"]
+    else:files[name]=dict(digest=digest(data),bytes=len(data))
+   elif name=="bin/patamaps":native_digest=digest(data)
+assert inventory is not None and set(files)=={row["path"] for row in inventory}
+assert all(files[row["path"]]==dict(digest=row["digest"],bytes=row["bytes"]) for row in inventory)
+assert native_digest==distribution["binaryDigest"]
+identity=dict(sourceInventoryDigest=distribution["sourceInventoryDigest"],sourceFiles=len(files),sourceIsInstalled=True)
+assert parent["sourceIdentity"]==identity
+programs=0
+for name,value in files.items():
+ if name.startswith(("crates/","scripts/","adapters/","sdk/")):
+  original=subprocess.check_output(["git","show",revision+":"+name],cwd=r,timeout=10)
+  assert digest(original)==value["digest"];programs+=1
+class PrefixZip:
+ def __init__(self,prefix):self.prefix=prefix
+ def read(self,name):return archive.read(self.prefix+name)
+summaries={};configurations={}
+for label in ["source","native"]:
+ z=PrefixZip(label+"/")
+ def load(name):return json.loads(z.read(name))
+ receipt=load("receipt.json");runtime=load("runtime.json");browser=load("browser-auth.json");overlay=load("rewrite-overlay.json");compiled=load("rewrite-compiled.json");observed=load("native-observations.json")
+ assert receipt["sourceRevision"] is None and receipt["upstreamCommit"]=="c2f8235e1f3ea903ad8b7f61447c4f74164b5c58" and receipt["status"]=="passed-pinned-chatbot-source-build-auth" and receipt["frameworkVersion"]=="16.2.10"
+ assert all(c["exitCode"]==c["expectedExitCode"] for c in receipt["commands"])
+ for key in ["frameworkBuildEstablished","runtimeEstablished","authenticationAccepted","selectedSourceBytesAndModesUnchanged","sourceExclusionAudited","rewritePortReservationClosed"]:assert receipt[key],key
+ assert not receipt["productionActivation"] and not receipt["dependencyClosureEstablished"]
+ qualified=receipt["rewriteQualification"]
+ for key in ["capturedConfigMutationRefusedBeforeMarker","compiledRulesBound","missingProjectionRefused","staleProjectionRefusedAfterRequestRehash"]:assert qualified[key],key
+ profile=overlay["profile"];assert profile["profile"]=="patamaps-chatbot-canonical-session-proxy-2" and profile["originalInternalSessionRewriteAccepted"] is False
+ port=profile["canonicalOwnerPort"];origin=profile["canonicalOwnerOrigin"];assert type(port) is int and 1024<port<=65535 and origin=="http://127.0.0.1:"+str(port)
+ assert runtime["status"]==browser["status"]=="passed" and runtime["canonicalRewriteOwnerOrigin"]==origin
+ for key in ["configuredPortReservationVerified","configuredPortReservationReleasedForOwnerStart","ownedListenersStopped","ownedProcessGroupsStopped","generatedOwnerSecretsAbsentFromEvidence"]:assert runtime[key],key
+ assert browser["ownedBrowserStopped"] and browser["ownedHttpsProxyStopped"] and browser["upstreamPageTests"]==4 and not browser["credentialsCaptured"] and not browser["rawHttpUploaded"] and not browser["traceEnabled"]
+ assert browser["lastRewriteObservation"]==dict(directQueryStatus=200,aliasStatus=200,aliasBodyType="json",aliasRedirect=False)
+ earlier=json.loads((r/"docs/acceptance/project-adoption/g3-chatbot-production-auth-20261023/browser-auth.json").read_text())
+ original_names={row["name"] for row in earlier["controls"]}
+ extra_names={"rewrite-login-url-preserved","rewrite-register-url-preserved","rewrite-missing-header-refused","rewrite-wrong-header-refused","rewrite-blocked-query-refused","rewrite-prefix-refused","rewrite-extra-segment-refused","rewrite-page-parameter-refused","rewrite-session-query-positive","rewrite-session-query-missing-refused","rewrite-session-query-wrong-refused","rewrite-session-block-header-refused"}
+ assert len(original_names)==16 and len(browser["controls"])==28 and {row["name"] for row in browser["controls"]}==original_names|extra_names and all(row["passed"] for row in browser["controls"])
+ assert runtime["browserControls"]==browser["controls"]
+ assert set(runtime["driverDigests"])=={"qualify_chatbot_runtime.py","qualify_chatbot_auth.mjs","chatbot_rewrite_profile.py","qualify_chatbot_next.py"}
+ for name,value in runtime["driverDigests"].items():
+     content=subprocess.check_output(["git","show",revision+":scripts/"+name],cwd=r,timeout=10);assert digest(content)==value
+ engine=json.loads((r/"docs/acceptance/project-adoption/g3-cargo-registry-context-20261023/registry-accepted-40050181349/receipt.json").read_text())["relocatedCompiler"]["engine"];assert receipt["compiler"]["engine"]==engine
+ upstream=load("selected-source.json");derived=load("derived-source.json")
+ upstream_tree=json.loads(subprocess.check_output([str(gh),"api","repos/vercel/chatbot/git/trees/c2f8235e1f3ea903ad8b7f61447c4f74164b5c58?recursive=1"],cwd=r,timeout=30));assert not upstream_tree.get("truncated")
+ upstream_blobs={row["path"]:row for row in upstream_tree["tree"] if row["type"]=="blob"}
+ assert all(row["gitBlob"]==upstream_blobs[row["path"]]["sha"] and row["mode"]==upstream_blobs[row["path"]]["mode"] for row in upstream)
+ u={row["path"]:row for row in upstream};d={row["path"]:row for row in derived};assert len(u)==180 and len(d)==181 and set(d)==set(u)|{"patamaps-rewrite-profile.json"}
+ assert all(d[name]==row for name,row in u.items() if name!="next.config.ts")
+ assert overlay["originalConfigDigest"]==u["next.config.ts"]["digest"]=="sha256:856cc04806b203481ad9722b92d3f52907a618468ee79129f98373b4ae86e075"
+ assert d["next.config.ts"]["digest"]==overlay["derivedConfigDigest"]!=overlay["originalConfigDigest"] and "gitBlob" not in d["next.config.ts"]
+ capture=load("logs/text-source-capture.stdout");assert capture["digest"]==receipt["textSourceDigest"] and capture["definition"]["nonsecretConfiguration"]["qualifiedOwnerOrigin"]==origin
+ captured={}
+ for item in capture["inputs"]:
+     name=item["receipt"]["path"];data=item["content"].encode()
+     assert digest(data)==item["receipt"]["digest"]==d[name]["digest"] and len(data)==item["receipt"]["byteLength"]
+     captured[name]=data
+ assert digest(captured["patamaps-rewrite-profile.json"])==overlay["profileDigest"] and json.loads(captured["patamaps-rewrite-profile.json"])==profile
+ assert digest(captured["next.config.ts"])==overlay["derivedConfigDigest"] and origin.encode() in captured["next.config.ts"]
+ request=load("logs/native-compiled-next-observations.input");inputs={row["receipt"]["path"]:row for row in request["inputs"]};assert set(inputs)=={"config.json","routes.json","app-paths.json","app-routes.json"}
+ for row in inputs.values():
+     data=row["content"].encode();assert digest(data)==row["receipt"]["digest"] and len(data)==row["receipt"]["byteLength"]
+ configuration=json.loads(inputs["config.json"]["content"]);assert configuration["routesDigest"]==inputs["routes.json"]["receipt"]["digest"] and configuration["buildReceiptDigest"]==digest(z.read("logs/owner-production-build.stdout"))
+ manifest=json.loads(inputs["routes.json"]["content"])
+ baseline_observed=json.loads((r/"docs/acceptance/project-adoption/g3-chatbot-source-20261023/native-observations.json").read_text())
+ def rules(value):return [entity["attributes"] for entity in value["shard"]["entities"] if entity["kind"]=="next-build-rule"]
+ rows=rules(observed);previous=rules(baseline_observed);assert len(rows)==6 and len(previous)==4
+ new_sources={"/qualified/auth/:page(login|register)","/qualified/session"}
+ preserved=[dict(category=row["category"],rule=row["rule"]) for row in rows if row["rule"]["source"] not in new_sources]
+ original=[dict(category=row["category"],rule=row["rule"]) for row in previous]
+ assert sorted(json.dumps(row,sort_keys=True) for row in preserved)==sorted(json.dumps(row,sort_keys=True) for row in original)
+ expected=[
+  ("beforeFiles","/qualified/auth/:page(login|register)","/:page",[dict(type="header",key="x-patamaps-rewrite",value="enabled")],[dict(type="query",key="blocked")]),
+  ("afterFiles","/qualified/session",origin+"/api/auth/session",[dict(type="query",key="view",value="session")],[dict(type="header",key="x-patamaps-block")]),
+ ]
+ for category,source,destination,has,missing in expected:
+     matching=[row for row in rows if row["rule"]["source"]==source];assert len(matching)==1
+     row=matching[0];rule=row["rule"];assert row["category"]==category and rule["destination"]==destination and rule["has"]==has and rule["missing"]==missing
+     assert row["matchingAndExecution"]=="not-performed" and rule in manifest["rewrites"][category]
+     assert compiled["rules"][source]==dict(category=category,rule=rule)
+ assert compiled["addedRules"]==2 and compiled["originalRulesPreserved"]==qualified["originalRulesPreserved"]==4 and compiled["fullNativeRulesPreserved"] and observed["shard"]["metadata"]["observation"]["runtimeEstablished"] is False
+ assert compiled["baselineObservationDigest"]==digest((r/"docs/acceptance/project-adoption/g3-chatbot-source-20261023/native-observations.json").read_bytes())
+
+ assert receipt["installedSourceIdentity"]==identity and receipt["installedSourceInventoryUnchanged"] is True
+ assert receipt["compiler"]["engine"]==distribution["engines"]==parent["cases"][label]["engine"]
+ assert receipt["compiler"]["sha256"]==parent["cases"][label]["compilerDigest"]
+ if label=="native":assert receipt["compiler"]["sha256"]==native_digest
+ assert runtime["databaseUnixSocketsDisabled"] is True and runtime["databaseTransportVerified"]=="authenticated IPv4 loopback TCP"
+ assert runtime["databaseTransportChecks"]==dict(authenticatedQuery=True,unixSocketsDisabled=True,loopbackListener=True,loopbackServer=True)
+ assert any(c["name"]=="isolated-database-tcp-only-verification" and c["passed"] is True for c in runtime["controls"])
+ assert all(c["passed"] is True for c in runtime["controls"])
+ output=receipt["generatedOutputObservation"]
+ assert output==parent["cases"][label]["generatedOutputObservation"]
+ assert output["publicManifestsUnchanged"] is True and output["detailedInventoryPublished"] is False and output["fullRuntimeBundleSelected"] is False
+ assert sum(output["changedCategories"].values())==output["changedFiles"]
+ for timing in ["before","after"]:
+  value=output[timing]
+  assert type(value["files"]) is int and 0<value["files"]<=32768 and 0<=value["symlinks"]<=value["files"] and value["bytes"]<=1024**3 and value["symlinkTargetsFollowed"] is False
+ cfg=capture["definition"]["nonsecretConfiguration"]
+ configurations[label]={key:cfg[key] for key in ["home","tmp","pnpmStorePath","playwrightBrowserCache"]}
+ for name,value in runtime["driverDigests"].items():assert files["scripts/"+name]["digest"]==value
+ summaries[label]=dict(browserGroups=28,upstreamTests=4,sourceInventoryUnchanged=True,authenticatedTcpOnlyVerified=True,allOwnedRuntimesStopped=True,generatedOutput=output)
+assert configurations["source"]["home"]!=configurations["native"]["home"] and configurations["source"]["tmp"]!=configurations["native"]["tmp"]
+for key in ["pnpmStorePath","playwrightBrowserCache"]:assert configurations["source"][key]==configurations["native"][key]
+assert "INSTALLED_SOURCE_BYTES_CHANGED" in archive.read("logs/changed-installed-source-before-compiler.stderr").decode()
+ci=dict(runId=runid,sourceRevision=revision,artifactId=meta["id"],artifactDigest=meta["digest"],artifactBytes=len(raw),artifactExpiresAt=meta["expires_at"],fullArchiveRetained=False,status="independently-verified-passed")
+verification={**ci,"status":"passed-independent-installed-next-native-command-review","sourceFilesVerified":len(files),"sourceProgramFilesMatchedToGit":programs,"sourceInventoryDigest":distribution["sourceInventoryDigest"],"nativeBinaryDigest":native_digest,"cases":summaries,"samePublicCachesDistinctOwnerState":True,"checkoutCompilerAndDriverUnavailable":True,"changedSourceRefusedBeforeCompilerMarker":True,"restoredInventoryVerified":True,"fullRetainedNextBundleAccepted":False,"completeDependencyClosure":False,"performanceAccepted":False,"productionActivation":False,"registryPublication":False,"filesDeleted":0}
+out=r/f"docs/acceptance/project-adoption/g5-installed-next-20261024/accepted-{runid}"
+out.mkdir(exist_ok=False)
+for name,value in [("ci.json",ci),("independent-verification.json",verification),("receipt.json",parent),("distribution.json",distribution)]:
+ (out/name).write_text(json.dumps(value,indent=2)+"\n")
+for label in ["source","native"]:
+ for name in ["receipt.json","runtime.json","browser-auth.json","rewrite-overlay.json","rewrite-compiled.json","native-observations.json","selected-source.json","derived-source.json"]:
+  (out/(label+"-"+name)).write_bytes(archive.read(label+"/"+name))
+(out/"review-source.py.txt").write_bytes(Path(__file__).read_bytes())
+print(json.dumps(verification))

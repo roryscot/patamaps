@@ -1,0 +1,110 @@
+{
+  "status": "passed-installed-rust-owner-build-preflight",
+  "observedAtUtc": "2026-10-24T17:52:08.333954+00:00",
+  "sourceRevisionBeforeCheckpoint": "f160d0dcb5ff15ef3f13f5316495bd0e0aa902de",
+  "architecture": "x86_64",
+  "python": "3.13.16",
+  "suites": [
+    {
+      "pattern": "test_installed_rust_build.py",
+      "tests": 10,
+      "exitCode": 0,
+      "command": [
+        "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/intel-python-3.13.16-20261013/runtime/python/bin/python3",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "scripts",
+        "-p",
+        "test_installed_rust_build.py"
+      ]
+    },
+    {
+      "pattern": "test_installed_source_identity.py",
+      "tests": 10,
+      "exitCode": 0,
+      "command": [
+        "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/intel-python-3.13.16-20261013/runtime/python/bin/python3",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "scripts",
+        "-p",
+        "test_installed_source_identity.py"
+      ]
+    },
+    {
+      "pattern": "test_exact_archive_install.py",
+      "tests": 14,
+      "exitCode": 0,
+      "command": [
+        "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/intel-python-3.13.16-20261013/runtime/python/bin/python3",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "scripts",
+        "-p",
+        "test_exact_archive_install.py"
+      ]
+    },
+    {
+      "pattern": "test_deployment_miniserve.py",
+      "tests": 15,
+      "exitCode": 0,
+      "command": [
+        "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/intel-python-3.13.16-20261013/runtime/python/bin/python3",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "scripts",
+        "-p",
+        "test_deployment_miniserve.py"
+      ]
+    },
+    {
+      "pattern": "test_cargo_registry_context.py",
+      "tests": 13,
+      "exitCode": 0,
+      "command": [
+        "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/intel-python-3.13.16-20261013/runtime/python/bin/python3",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "scripts",
+        "-p",
+        "test_cargo_registry_context.py"
+      ]
+    }
+  ],
+  "totalTests": 62,
+  "pythonAstChecks": 3,
+  "workflowYamlChecks": 2,
+  "diffCheck": true,
+  "sourceDigests": {
+    "scripts/qualify_installed_rust_build.py": "sha256:76801806637c66ed024219d1c262115fee79307f65e5c6ac52800db590eb5423",
+    "scripts/qualify_miniserve_linux.py": "sha256:b99c59b4230a608b427312665b08afae32a044ef43c189f8d458f5b2b1094819",
+    "scripts/test_installed_rust_build.py": "sha256:b9b8d7004e646e3d6f426b01863e687829b2d4d480c90e6408d73967e4b24205",
+    "scripts/installed_selected.py": "sha256:c3e7397f009111ffa28a2d11b3bce4840b03847085ad7f4293d417bb5f76c3be",
+    "scripts/qualify_cargo_registry.py": "sha256:6fa4f3f3087f21b6099fdbe8913cdd1fc34c12df5ab7a80a1177ce0e729f9fc3",
+    "scripts/cargo_registry_container.py": "sha256:e11d186323df4194121aec2deee106adf42640d7dc56f75aa3026bdd453daa02",
+    "scripts/deployment/miniserve/registry-build.sh": "sha256:c238b6ba109b26a8f5c8c553bff3d351ee6f958cf7772e4fbc0837e4b08b716f",
+    ".github/workflows/native-capabilities.yml": "sha256:aa3ca8f43b69a94b1cf89e19ccf27879c17a3c0e75351bbf762dc4baa79b060d",
+    ".github/workflows/external-rust-deployment.yml": "sha256:eb60eda29d1515397efe2ef011343df1d21af95097c8f4d12454d4347be8e811"
+  },
+  "privateRecord": "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/installed-rust-preflight-pl7h0ijo",
+  "actualOwnerBuildRun": false,
+  "installedOwnerBuildAccepted": false,
+  "filesDeleted": 0,
+  "policyChanged": false,
+  "scope": "Ten new source-binding/acceptance refusal cases and existing inventory/archive/config/registry controls; historical fixture is not new application evidence."
+}

@@ -1,0 +1,392 @@
+{
+  "status": "passed-real-cargo-registry-execution",
+  "image": "busybox@sha256:dc88b80842580654294472735332ec7c7789a4010ec9a68b69f9b88c19abede6",
+  "originalConfiguredCacheMounted": false,
+  "cargoHome": "/work/cargo-home",
+  "workFilesystemBytes": 3221225472,
+  "cpuAllowance": 2,
+  "memoryAllowance": 6442450944,
+  "memorySwapAllowance": 0,
+  "pidsAllowance": 512,
+  "toolchainClosed": false,
+  "ownerTestFixturesClosed": false,
+  "filesDeleted": 0,
+  "capacityObservation": {
+    "uid": 1001,
+    "cpuCount": 4,
+    "availableMemoryBytes": 15625129984,
+    "requiredMemoryBytes": 6976005376
+  },
+  "executorIdentities": {
+    "/home/runner/.rustup/toolchains/1.99.0-x86_64-unknown-linux-gnu/bin/cargo": "sha256:e951141cc55a6cd7b9876d187bd30a3720e6086b99413af95e3b8de1cdd72f14",
+    "/home/runner/.rustup/toolchains/1.99.0-x86_64-unknown-linux-gnu/bin/rustc": "sha256:f3834d26669b03f6855fa54bd2381443123e860167bc0c7a8dd137e5cf6e5e4f",
+    "/usr/bin/docker": "sha256:6435ff9214bf8e0931078fb0980809728cac0a54a526d4f28a26d3e48132b58d"
+  },
+  "externalOsInputIdentities": {
+    "/etc/ssl/certs/ca-certificates.crt": "sha256:ecd9dc38bc3efb7dbd6431f57e29d2f8d6a0f0d211e1464b3fef2cbfe266fcd2"
+  },
+  "containerId": "4ab59bbc8a8a136ca9be38a873fa8acb99ca7069557465562cd748b1421f0219",
+  "imageId": "sha256:4b3c3c5fa628f793b84f999b8be30200339beb0a017e8546983af9766480029a",
+  "readOnlyMounts": [
+    {
+      "source": "/home/runner/work/_temp/patamaps-installed-rust-40118700332-1/native-owner/registry-build/state/attempts/1792864953703030432-5067/candidate",
+      "destination": "/source"
+    },
+    {
+      "source": "/home/runner/work/_temp/patamaps-installed-rust-40118700332-1/native-owner/registry-build/state/attempts/1792864953703030432-5067/candidate/.cargo-home/registry",
+      "destination": "/registry"
+    },
+    {
+      "source": "/home/runner/work/_temp/patamaps-installed-rust-40118700332-1/native-owner/registry-build/state/attempts/1792864953703030432-5067/candidate/network-nsswitch.conf",
+      "destination": "/etc/nsswitch.conf"
+    },
+    {
+      "source": "/home/runner/work/_temp/patamaps-installed-rust-40118700332-1/native-owner/registry-build/state/attempts/1792864953703030432-5067/candidate/network-hosts.conf",
+      "destination": "/etc/hosts"
+    },
+    {
+      "source": "/home/runner/work/_temp/patamaps-installed-rust-40118700332-1/native-owner/registry-build/state/attempts/1792864953703030432-5067/candidate/network-host.conf",
+      "destination": "/etc/host.conf"
+    },
+    {
+      "source": "/etc/ssl/certs/ca-certificates.crt",
+      "destination": "/etc/ssl/certs/ca-certificates.crt"
+    },
+    {
+      "source": "/home/runner/work/_temp/patamaps-installed-rust-40118700332-1/native-owner/upstream",
+      "destination": "/test-source"
+    },
+    {
+      "source": "/home/runner/.rustup/toolchains/1.99.0-x86_64-unknown-linux-gnu",
+      "destination": "/home/runner/.rustup/toolchains/1.99.0-x86_64-unknown-linux-gnu"
+    },
+    {
+      "source": "/usr",
+      "destination": "/usr"
+    },
+    {
+      "source": "/usr/bin",
+      "destination": "/bin"
+    },
+    {
+      "source": "/usr/lib",
+      "destination": "/lib"
+    },
+    {
+      "source": "/usr/lib64",
+      "destination": "/lib64"
+    },
+    {
+      "source": "/etc/alternatives",
+      "destination": "/etc/alternatives"
+    }
+  ],
+  "hostConfigurationVerifiedBeforeStart": true,
+  "hostUser": "1001:1001",
+  "explicitLocalhostAddresses": [
+    "127.0.0.1",
+    "::1"
+  ],
+  "networkConfigurationDigests": {
+    "network-hosts.conf": "sha256:b69b2c741be48691edabe3771c644c70473ccd6aa8effd9f17cc07fa129917f9",
+    "network-nsswitch.conf": "sha256:8b9e86f6268da8a51b3bd0cf3628df3d8f44621c8c50f6ee4b4719a42d2d82fe",
+    "network-host.conf": "sha256:4341b412f4731aab3fcd39e5df51a32dd909a2d9229e243b8588d04b7b5546de"
+  },
+  "setupHostConfiguration": {
+    "NetworkMode": "container:4ab59bbc8a8a136ca9be38a873fa8acb99ca7069557465562cd748b1421f0219",
+    "ReadonlyRootfs": true,
+    "Privileged": false,
+    "CapDrop": [
+      "ALL"
+    ],
+    "CapAdd": [
+      "CAP_NET_ADMIN"
+    ],
+    "SecurityOpt": [
+      "no-new-privileges"
+    ],
+    "NanoCpus": 100000000,
+    "Memory": 33554432,
+    "MemorySwap": 33554432,
+    "PidsLimit": 16
+  },
+  "localAddressProvision": {
+    "address": "192.0.2.2/32",
+    "interface": "lo",
+    "networkNamespace": "net:[4026532273]",
+    "helperId": "96f2c4a51a45a02423ae1c3468116139349001f358db34c3ac1f5476e7bf5dac",
+    "helperStoppedBeforeCargo": true,
+    "effectiveCapability": "NET_ADMIN only",
+    "workloadCapabilitiesDropped": true,
+    "bridgeOrExternalNetworkCreated": false,
+    "helperCpuAllowance": 0.1,
+    "helperMemoryAllowance": 33554432,
+    "helperPidsAllowance": 16
+  },
+  "releaseBuildObserved": true,
+  "producedBinaryDigest": "sha256:ed96e136acc8e3377415fe7b5dd97ef27a1a8919d4ae690384be8399e2578e34",
+  "binaryDigest": "sha256:ed96e136acc8e3377415fe7b5dd97ef27a1a8919d4ae690384be8399e2578e34",
+  "binaryBytes": 7649648,
+  "binaryCopiedBeforeOwnerTests": true,
+  "cargoExitCode": 0,
+  "cargoDiagnostics": {
+    "categories": [],
+    "rustcErrorCodes": [],
+    "compileFailures": [],
+    "failedTests": [],
+    "testSummaries": [
+      [
+        "ok",
+        "43",
+        "0",
+        "0"
+      ],
+      [
+        "ok",
+        "15",
+        "0",
+        "0"
+      ],
+      [
+        "ok",
+        "15",
+        "0",
+        "0"
+      ],
+      [
+        "ok",
+        "22",
+        "0",
+        "0"
+      ],
+      [
+        "ok",
+        "6",
+        "0",
+        "0"
+      ],
+      [
+        "ok",
+        "13",
+        "0",
+        "0"
+      ],
+      [
+        "ok",
+        "4",
+        "0",
+        "0"
+      ],
+      [
+        "ok",
+        "9",
+        "0",
+        "0"
+      ],
+      [
+        "ok",
+        "2",
+        "0",
+        "0"
+      ],
+      [
+        "ok",
+        "11",
+        "0",
+        "0"
+      ],
+      [
+        "ok",
+        "2",
+        "0",
+        "0"
+      ],
+      [
+        "ok",
+        "5",
+        "0",
+        "0"
+      ],
+      [
+        "ok",
+        "8",
+        "0",
+        "0"
+      ],
+      [
+        "ok",
+        "15",
+        "0",
+        "0"
+      ],
+      [
+        "ok",
+        "57",
+        "0",
+        "0"
+      ],
+      [
+        "ok",
+        "45",
+        "0",
+        "0"
+      ],
+      [
+        "ok",
+        "5",
+        "0",
+        "0"
+      ],
+      [
+        "ok",
+        "39",
+        "0",
+        "0"
+      ],
+      [
+        "ok",
+        "9",
+        "0",
+        "0"
+      ]
+    ],
+    "osErrors": [],
+    "signals": [],
+    "missingLibraries": [],
+    "panicLocations": []
+  },
+  "workFilesystemObservation": [
+    "3221225472",
+    "1708601344",
+    "1512624128",
+    "54%"
+  ],
+  "memoryEvents": {
+    "low": "0",
+    "high": "0",
+    "max": "0",
+    "oom": "0",
+    "oom_kill": "0",
+    "oom_group_kill": "0"
+  },
+  "defaultTestsPassed": 325,
+  "testSummaries": [
+    [
+      "43",
+      "0",
+      "0"
+    ],
+    [
+      "15",
+      "0",
+      "0"
+    ],
+    [
+      "15",
+      "0",
+      "0"
+    ],
+    [
+      "22",
+      "0",
+      "0"
+    ],
+    [
+      "6",
+      "0",
+      "0"
+    ],
+    [
+      "13",
+      "0",
+      "0"
+    ],
+    [
+      "4",
+      "0",
+      "0"
+    ],
+    [
+      "9",
+      "0",
+      "0"
+    ],
+    [
+      "2",
+      "0",
+      "0"
+    ],
+    [
+      "11",
+      "0",
+      "0"
+    ],
+    [
+      "2",
+      "0",
+      "0"
+    ],
+    [
+      "5",
+      "0",
+      "0"
+    ],
+    [
+      "8",
+      "0",
+      "0"
+    ],
+    [
+      "15",
+      "0",
+      "0"
+    ],
+    [
+      "57",
+      "0",
+      "0"
+    ],
+    [
+      "45",
+      "0",
+      "0"
+    ],
+    [
+      "5",
+      "0",
+      "0"
+    ],
+    [
+      "39",
+      "0",
+      "0"
+    ],
+    [
+      "9",
+      "0",
+      "0"
+    ]
+  ],
+  "kernelLimitsVerified": true,
+  "externalRouteAbsent": true,
+  "loopbackAvailableForOwnerTests": true,
+  "ipv6LoopbackVerified": true,
+  "ipv6ExternalRouteAbsent": true,
+  "retainedArchiveIndexReadOnly": true,
+  "logDigests": {
+    "limits.txt": "sha256:46be86319acb10a0f2233674c4c93326e6e57bc4781b49328aa9373d6719af9e",
+    "build.stdout": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build.stderr": "sha256:0808432722e00b44e8193f7859fc72965cd38ee5dbda470eff746da1deb234d5",
+    "test.stdout": "sha256:89e7a8a3afb533210c920ff38c06cff3cdbbeee5e8c4edef79f9d4272d85f628",
+    "test.stderr": "sha256:cb790484af405e15e0695cd13fcb54fadda13b6f1e5f59ce38434a226c7e716d"
+  },
+  "containerStopped": true,
+  "allOwnedContainersStopped": true,
+  "guardianCleanupConfirmed": true,
+  "guardianExit": 130,
+  "guardianDiagnostics": {
+    "guardian.stdout": "{\"status\":\"cancelled-project-watch-update\",\"parentExited\":false}\nFlag --time has been deprecated, use --timeout instead\n4ab59bbc8a8a136ca9be38a873fa8acb99ca7069557465562cd748b1421f0219\n",
+    "guardian.stderr": ""
+  },
+  "elapsedMs": 476262
+}

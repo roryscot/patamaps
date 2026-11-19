@@ -1,0 +1,219 @@
+{
+  "status": "passed-development-preview-scope",
+  "sourceRevision": "f81e6a464d779d1107178a7b08b9c41f7f2311d7",
+  "startedUtc": "2026-10-21T16:34:46.694770+00:00",
+  "commands": [
+    {
+      "label": "rust-version",
+      "argv": [
+        "rustc",
+        "-Vv"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.032,
+      "stdoutDigest": "sha256:b569b0c98ea3133c7252b4b8ea6b39b7b353813df0dd5f5c412c355691424112",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "cargo-version",
+      "argv": [
+        "cargo",
+        "--version"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.032,
+      "stdoutDigest": "sha256:1f88eaf7fe1aaec83184752cf4c944cd22f00184136ff36a3e4c318cc60ef566",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "node-version",
+      "argv": [
+        "node",
+        "--version"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.008,
+      "stdoutDigest": "sha256:33e26f35db6e57ce0c486ddc815fe966867e4f649e418eaf323f75f4720eb8e9",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m5-preview-cli",
+      "argv": [
+        "cargo",
+        "build",
+        "-p",
+        "patamaps-cli",
+        "--release",
+        "--locked",
+        "--offline"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.164,
+      "stdoutDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrDigest": "sha256:3997fc6790b8063b86c119e91f87ac7395ac6cf26135da637dcb229006bc32dc"
+    },
+    {
+      "label": "m5-preview-cargo",
+      "argv": [
+        "rustup",
+        "which",
+        "cargo"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.032,
+      "stdoutDigest": "sha256:c15b86fb353a905df8e0e155072f56ce51cb7986f607161716fb2f6ea0e06972",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m5-preview-rustc",
+      "argv": [
+        "rustup",
+        "which",
+        "rustc"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.032,
+      "stdoutDigest": "sha256:cf7c5c8ef6339599e282ac27baa1b851ae590561ab6a54362d9da3d4ef337f5d",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "m5-prior-preview-still-usable",
+      "argv": [
+        "/opt/hostedtoolcache/node/22.23.3/x64/bin/node",
+        "/home/runner/work/patamaps/patamaps/examples/cross-stack/acceptance/check-runtime.cjs",
+        "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-development/development-state/attempts/20261021T163448.471014Z/client-js/operations.js",
+        "http://127.0.0.1:56721",
+        "http://127.0.0.1:36159"
+      ],
+      "cwd": "/home/runner/work/patamaps/patamaps",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "seconds": 0.215,
+      "stdoutDigest": "sha256:e0707dd4c6dde54ec9aa65edec42e53be0cfdee3ac51d70ec3e8c2f7c730e768",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "fullCrossStackAcceptance": false,
+  "linuxImage": "pending",
+  "browser": "pending",
+  "deleted": [],
+  "ciResourceChecks": {
+    "growthBytes": 4000000000,
+    "reserveBytes": 500000000,
+    "checkedBetweenCommands": true,
+    "diskUsedBefore": 67913121792,
+    "localIntelPolicyChanged": false,
+    "diskUsedAfter": 71530926080
+  },
+  "developmentPreview": {
+    "controls": [
+      {
+        "control": "m5-real-preview",
+        "status": "verified-native-preview",
+        "selected": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-development/development-state/selected.json",
+        "candidate": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-development/development-state/attempts/20261021T163448.471014Z/candidate",
+        "seconds": 41.462,
+        "fullReleaseAccepted": false
+      },
+      {
+        "control": "m5-no-op",
+        "status": "unchanged",
+        "verification": "not-repeated",
+        "cacheHits": 0,
+        "selected": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-development/development-state/selected.json",
+        "fullReleaseAccepted": false
+      },
+      {
+        "control": "m5-missing-compiler",
+        "result": "refused",
+        "reason": "[Errno 2] No such file or directory: '/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-development/missing-compiler'",
+        "previousSelectionPreserved": true
+      },
+      {
+        "control": "m5-duplicate-schema-key",
+        "result": "refused",
+        "reason": "http-request-schema-0 failed; retained logs: /home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-development/development-state/attempts/20261021T163530.300409Z/logs",
+        "previousSelectionPreserved": true
+      },
+      {
+        "control": "m5-snapshot-race",
+        "result": "refused",
+        "reason": "SOURCE_CHANGED_DURING_SNAPSHOT",
+        "previousSelectionPreserved": true
+      },
+      {
+        "control": "m5-real-cargo-failure",
+        "result": "refused",
+        "reason": "cargo-tests failed; retained logs: /home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-development/development-state/attempts/20261021T163530.853188Z/logs",
+        "previousSelectionPreserved": true
+      },
+      {
+        "control": "m5-prior-selection-still-usable",
+        "result": "passed"
+      },
+      {
+        "control": "m5-single-edit",
+        "status": "verified-native-preview",
+        "selected": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-development/development-state/selected.json",
+        "candidate": "/home/runner/work/patamaps/patamaps/ci-evidence/cross-stack-development/development-state/attempts/20261021T163536.377438Z/candidate",
+        "seconds": 35.772,
+        "fullReleaseAccepted": false
+      },
+      {
+        "control": "m5-batch-and-lost-event-reconciliation",
+        "result": "selected-one-complete-candidate",
+        "edits": 5,
+        "eventChannel": "none"
+      },
+      {
+        "control": "m5-generated-feedback",
+        "result": "no-extra-attempt"
+      },
+      {
+        "control": "m5-atomic-selection-readers",
+        "result": "all-observed-pointers-complete",
+        "generations": 2
+      },
+      {
+        "control": "m5-route-rename",
+        "result": "actual-renamed-page-served",
+        "stableOperationIds": [
+          "urn:example:operation:create-item"
+        ]
+      },
+      {
+        "control": "m5-cancelled-pipeline",
+        "result": "stopped",
+        "ownedPids": [
+          17693,
+          17705,
+          17734,
+          17739,
+          17778,
+          17783,
+          17787
+        ],
+        "lingeringBeforeCleanup": [],
+        "milliseconds": 271.071,
+        "previousSelectionPreserved": true
+      }
+    ],
+    "count": 13,
+    "fullReleaseAccepted": false,
+    "scope": "native preview compilation, generated-client HTTP, retained selection and bounded foreground watch"
+  },
+  "sourceUnchanged": true,
+  "finishedUtc": "2026-10-21T16:37:31.647827+00:00"
+}

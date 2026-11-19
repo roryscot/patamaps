@@ -1,0 +1,34 @@
+{
+  "status": "passed-three-actual-zero-only-controls",
+  "controls": [
+    "nonzero-range-refused-before-fcntl",
+    "stale-identity-refused-before-fcntl",
+    "real-filesystem-zero-range-preserves-entire-file-digest-size-inode-and-reduces-allocation"
+  ],
+  "before": {
+    "device": 16777226,
+    "inode": 18680926,
+    "size": 8388608,
+    "mode": 384,
+    "uid": 501,
+    "sha256": "dc85b42a62df5161b3eaa6bf3339ebdf0aa607cb567fbef32249186c8e1afd9b",
+    "allocatedBytes": 8388608
+  },
+  "after": {
+    "device": 16777226,
+    "inode": 18680926,
+    "size": 8388608,
+    "mode": 384,
+    "uid": 501,
+    "sha256": "dc85b42a62df5161b3eaa6bf3339ebdf0aa607cb567fbef32249186c8e1afd9b",
+    "allocatedBytes": 7340032
+  },
+  "journal": [
+    {
+      "offset": 1048576,
+      "length": 1048576,
+      "verifiedAllZeroBefore": true,
+      "allZeroAfter": true
+    }
+  ]
+}

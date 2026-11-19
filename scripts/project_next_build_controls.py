@@ -15,26 +15,29 @@ def verify(root,work,env,run):
                 redirects=[],headers=[],rewrites=dict(beforeFiles=[dict(source="/old",destination="/new",regex="^/old$",
                   has=[dict(type="header",key="x-mode",value="on")])],afterFiles=[],fallback=[]),
                 dataRoutes=[],rsc=dict(header="rsc"),rewriteHeaders=dict(pathHeader="x-rewritten-path"))
-    apps={"/(group)/page":"/","/item/[id]/page":"/item/[id]"}
-    write(source/"routes.json",routes);write(source/"apps.json",apps)
+    apps={"/(group)/page":"app/(group)/page.js","/item/[id]/page":"app/item/[id]/page.js"}
+    app_routes={"/(group)/page":"/","/item/[id]/page":"/item/[id]"}
+    write(source/"routes.json",routes);write(source/"apps.json",apps);write(source/"app-routes.json",app_routes)
     projection=dict(profile="patamaps-next-build-config-1",frameworkVersion="16.1.6",buildReceiptDigest="sha256:"+"a"*64,
                     routesDigest=sha((source/"routes.json").read_bytes()),appPathsDigest=sha((source/"apps.json").read_bytes()),
+                    appPathRoutesDigest=sha((source/"app-routes.json").read_bytes()),
                     configuration=dict(basePath="",output="standalone",trailingSlash=False,
                        environment=dict(NEXT_PUBLIC_API_URL="http://127.0.0.1:1"),secretReferences=dict(AUTH_TOKEN="OWNER_AUTH_TOKEN"),
                        transpilePackages=[],serverActions=None))
     write(source/"config.json",projection)
     identity="urn:qualification:compiled-next"
     profile=dict(profile="patamaps-project-inputs-1",id=identity+":inputs",nonsecretInputs=True,
-                 inputs=["routes.json","apps.json","config.json"],components=[dict(id="build",kind="configuration",root=".",entrypoints=["config.json"])],
+                 inputs=["routes.json","apps.json","app-routes.json","config.json"],components=[dict(id="build",kind="configuration",root=".",entrypoints=["config.json"])],
                  nonsecretConfiguration={},secretReferences={})
     write(base/"profile.json",profile)
     invocation=dict(executable=str(cli),arguments=["discover-native"],codeInputs=[],
                     bounds=dict(maximumElapsedMs=60000,maximumStdoutBytes=16777216,maximumStderrBytes=65536))
     config=dict(schemaVersion="0.1.0",documentType="workspace-config",id=identity,namespace="next-build-controls",revision="1",
                 sources=[dict(adapter="process",id=identity+":source",invocation=invocation,
-                  inputs=["inputs/routes.json","inputs/apps.json","inputs/config.json"],
+                  inputs=["inputs/routes.json","inputs/apps.json","inputs/app-routes.json","inputs/config.json"],
                   config=dict(provider="next-build",nonsecretInputs=True,routesManifest="inputs/routes.json",
-                    appPathsManifest="inputs/apps.json",configurationProjection="inputs/config.json"))],
+                    appPathsManifest="inputs/apps.json",appPathRoutesManifest="inputs/app-routes.json",
+                    configurationProjection="inputs/config.json"))],
                 packs=[],policy="policy.json",projections=[dict(path="projection.json",emissions=[dict(path="observations.json",language="json")])],
                 context=dict(scope="captured-compiled-next-observations"),evaluatedAt="2026-10-16T00:00:00Z")
     write(base/"workspace.json",config)
@@ -47,12 +50,15 @@ def verify(root,work,env,run):
     baseline=generated["baseline"];write(base/"baseline.json",baseline)
     entities=baseline["captures"][0]["inputs"]["graph"]["entities"]
     assert sum(e["kind"]=="next-build-route" for e in entities)==2
-    assert {(e["attributes"]["appPath"],e["attributes"]["routePath"]) for e in entities if e["kind"]=="next-build-module"}==set(apps.items())
+    modules={e["attributes"]["appPath"]:e["attributes"] for e in entities if e["kind"]=="next-build-module"}
+    assert {key:value["moduleFile"] for key,value in modules.items()}==apps
+    assert {key:value["routePath"] for key,value in modules.items()}==app_routes
     rule=next(e for e in entities if e["kind"]=="next-build-rule")
     assert rule["attributes"]["rule"]==routes["rewrites"]["beforeFiles"][0]
     controls=[dict(control="compiled-manifest-workspace",result="passed",routeGroups=True,conditionsPreserved=True,runtime=False)]
     for label,change in [
         ("digest",lambda v:v.update(routesDigest="sha256:"+"b"*64)),
+        ("app-path-routes-digest",lambda v:v.update(appPathRoutesDigest="sha256:"+"c"*64)),
         ("public-env",lambda v:v["configuration"]["environment"].update(AUTH_TOKEN="must-refuse")),
         ("projection-unknown",lambda v:v["configuration"].update(unreviewed=True)),
     ]:

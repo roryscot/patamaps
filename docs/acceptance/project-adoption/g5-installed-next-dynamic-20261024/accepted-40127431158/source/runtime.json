@@ -1,0 +1,202 @@
+{
+  "status": "passed",
+  "controls": [
+    {
+      "name": "isolated-database-init",
+      "passed": true
+    },
+    {
+      "name": "isolated-database-tcp-only-verification",
+      "passed": true
+    },
+    {
+      "name": "owner-real-migrations",
+      "passed": true
+    },
+    {
+      "name": "owned-loopback-certificate",
+      "passed": true
+    },
+    {
+      "name": "owner-production-readiness",
+      "passed": true
+    },
+    {
+      "name": "production-server-actions-and-permissions",
+      "passed": true
+    }
+  ],
+  "credentialsCaptured": false,
+  "rawRuntimeLogsUploaded": false,
+  "sourceMutationRequested": false,
+  "qualificationConfigurationOverlay": false,
+  "testBoundary": "new CI-only PostgreSQL; trusted-owner secret environment; HTTPS loopback",
+  "productionActivation": false,
+  "externalModelAccepted": false,
+  "postgresVersion": "postgres (PostgreSQL) 16.15 (Ubuntu 16.15-1.pgdg24.04+2)",
+  "postgresBinaryDigest": "sha256:3a089a86625851a42ea1561dcdffa30569c24879c4eb6eb7be9055a72172e431",
+  "databaseTransportChecks": {
+    "authenticatedQuery": true,
+    "unixSocketsDisabled": true,
+    "loopbackListener": true,
+    "loopbackServer": true
+  },
+  "databaseTransportVerified": "authenticated IPv4 loopback TCP",
+  "databaseUnixSocketsDisabled": true,
+  "dynamicRouteWitness": {
+    "profile": "patamaps-pinned-dynamic-runtime-1",
+    "pagePattern": "/chat/[id]",
+    "dataEndpoint": "/api/messages",
+    "fixturesUnchanged": true,
+    "generationPostAttempts": 0,
+    "rawFixtureValuesPublished": false,
+    "pageAuthorization": "client shell; data API enforces private visibility",
+    "streamBehavior": "constant204 stub; no resumable generation claim",
+    "ownerPathAndQueryIdMatched": true,
+    "ownerPrivateMessageRendered": true,
+    "distinctSecondIdRendered": true,
+    "crossUserPublicReadonly": true,
+    "crossUserPrivateStatus": 403,
+    "guestPublicReadonly": true,
+    "guestPrivateStatus": 403,
+    "unseenIdEmptyAndNotPersisted": true,
+    "missingQueryStatus": 400,
+    "extraPageSegmentStatus": 404,
+    "streamGetStatus": 204,
+    "streamPostStatus": 405,
+    "extraStreamSegmentStatus": 404,
+    "fixtureDigest": "sha256:ce94879a20228a7014652fbe74e1b14bf275e12e8ea3f456e24d18bd115cb0fb"
+  },
+  "generatedOwnerSecretsAbsentFromEvidence": true,
+  "driverDigests": {
+    "qualify_chatbot_runtime.py": "sha256:383e1685ddb2f2fcbe3c0c99111ebe49a8e5ddbcd8919f5e6478a66ee2cd854e",
+    "qualify_chatbot_auth.mjs": "sha256:95fb16a1f13a8aa1c8bf77bfb94a654a3ac6ad3aef530193354da49dd78142ff",
+    "chatbot_dynamic_profile.py": "sha256:62a0b8361892ec72c9f0f0ec2a61601765857b476b107a247cd1d3b0d5821775",
+    "qualify_chatbot_next.py": "sha256:a0074e55ede26a4fa954858882c1621fbcdeaa42931ea431c18f7e00aea657c0"
+  },
+  "browserControls": [
+    {
+      "name": "unchanged-upstream-four-auth-page-tests",
+      "passed": true
+    },
+    {
+      "name": "invalid-registration-action",
+      "passed": true
+    },
+    {
+      "name": "successful-registration-action",
+      "passed": true
+    },
+    {
+      "name": "production-secure-session-cookie",
+      "passed": true
+    },
+    {
+      "name": "duplicate-registration-action-refusal",
+      "passed": true
+    },
+    {
+      "name": "invalid-login-action",
+      "passed": true
+    },
+    {
+      "name": "wrong-password-action-refusal",
+      "passed": true
+    },
+    {
+      "name": "successful-login-action",
+      "passed": true
+    },
+    {
+      "name": "off-origin-action-refusal-before-database-effect",
+      "passed": true
+    },
+    {
+      "name": "same-request-valid-origin-positive-control",
+      "passed": true
+    },
+    {
+      "name": "independent-second-user-registration",
+      "passed": true
+    },
+    {
+      "name": "owner-private-document-create-and-read",
+      "passed": true
+    },
+    {
+      "name": "cross-user-private-document-read-refusal",
+      "passed": true
+    },
+    {
+      "name": "cross-user-private-document-write-refusal",
+      "passed": true
+    },
+    {
+      "name": "guest-private-document-read-refusal",
+      "passed": true
+    },
+    {
+      "name": "dynamic-owner-private-page-and-id-bound-data",
+      "passed": true
+    },
+    {
+      "name": "dynamic-owner-second-id-replaces-visible-data",
+      "passed": true
+    },
+    {
+      "name": "dynamic-cross-user-public-page-readonly",
+      "passed": true
+    },
+    {
+      "name": "dynamic-cross-user-private-data-refusal",
+      "passed": true
+    },
+    {
+      "name": "dynamic-guest-public-page-readonly",
+      "passed": true
+    },
+    {
+      "name": "dynamic-guest-private-data-refusal",
+      "passed": true
+    },
+    {
+      "name": "dynamic-unseen-id-empty-response",
+      "passed": true
+    },
+    {
+      "name": "dynamic-missing-chat-id-query-refusal",
+      "passed": true
+    },
+    {
+      "name": "dynamic-extra-page-segment-refusal",
+      "passed": true
+    },
+    {
+      "name": "dynamic-stream-route-204",
+      "passed": true
+    },
+    {
+      "name": "dynamic-stream-post-method-refusal",
+      "passed": true
+    },
+    {
+      "name": "dynamic-stream-extra-segment-refusal",
+      "passed": true
+    },
+    {
+      "name": "dynamic-fixtures-unchanged-and-no-generation",
+      "passed": true
+    },
+    {
+      "name": "credential-and-cookie-evidence-barrier",
+      "passed": true
+    }
+  ],
+  "upstreamPageTests": 4,
+  "runtimeEstablished": true,
+  "authenticationAccepted": true,
+  "ownerMigrationExecuted": true,
+  "ownedListenersStopped": true,
+  "ownedProcessGroupsStopped": true,
+  "elapsedMs": 15673
+}

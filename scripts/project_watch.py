@@ -4,8 +4,11 @@ import argparse
 import hashlib
 import json
 import os
+import re
 from pathlib import Path
 import signal
+import selectors
+import uuid
 import subprocess
 import sys
 import time
@@ -46,13 +49,14 @@ def stop(child, grace=10):
     child.wait()
 
 
-def guard(argv):
+def guard(argv, cleanup=None, *, child_factory=None, tick=None, finished=None,
+          expected_parent=None, stop_grace=10):
     """Watch the actual spawning parent, including after its SIGKILL.
 
     Used around the policy runner and inside it around the native CLI. The
     second instance handles a runner that exits without stopping its child.
     """
-    parent = os.getppid()
+    parent = os.getppid() if expected_parent is None else expected_parent
     # The policy runner need not detach its child. Keep this guardian outside
     # its group so outer cleanup cannot kill it before it stops the build.
     if os.getpgrp() != os.getpid():
@@ -67,19 +71,65 @@ def guard(argv):
         signal.signal(sig, cancel)
     child = None
     try:
-        if parent == 1:
+        if parent == 1 or os.getppid() != parent:
             return 130
-        child = subprocess.Popen(argv, start_new_session=True)
+        child = (child_factory(argv) if child_factory is not None else
+                 subprocess.Popen(argv, start_new_session=True))
         while True:
             if cancelled or os.getppid() != parent:
                 event("cancelled-project-watch-update", parentExited=os.getppid() != parent)
                 return 130
+            if tick is not None:
+                tick(child)
             code = child.poll()
             if code is not None:
                 return code if code >= 0 else 128 - code
             time.sleep(.05)
     finally:
-        stop(child)
+        # Docker workloads outlive their attach CLI. Stop the owned container
+        # before group cleanup can terminate the guardian or attach process.
+        try:
+            if cleanup is not None:
+                cleanup()
+        finally:
+            try:
+                stop(child, grace=stop_grace)
+            finally:
+                if finished is not None:
+                    finished(child)
+
+
+def container_guard(path):
+    """Internal opt-in managed-container attachment; never remove owned objects."""
+    from deployment_miniserve_image import stop_owned
+    path = Path(path).absolute()
+    if path.is_symlink() or not path.is_file():
+        raise ValueError("CONTAINER_OWNERSHIP_FILE")
+    frozen = path.read_bytes()
+    owned = json.loads(frozen)
+    token = owned.get("token")
+    items = owned.get("containers")
+    if not isinstance(token, str) or not re.fullmatch("[0-9a-f]{32}", token):
+        raise ValueError("CONTAINER_OWNERSHIP_TOKEN")
+    if not isinstance(items, list) or len(items) != 1:
+        raise ValueError("CONTAINER_OWNERSHIP_SINGLE_ID")
+    identity = items[0].get("id")
+    if not isinstance(identity, str) or not re.fullmatch("[0-9a-f]{64}", identity):
+        raise ValueError("CONTAINER_OWNERSHIP_ID")
+    info = json.loads(subprocess.check_output(["docker", "inspect", identity], timeout=15))[0]
+    if info["Config"].get("Labels", {}).get("org.patamaps.qualification-owner") != token:
+        raise ValueError("CONTAINER_OWNERSHIP_LABEL")
+    state = info["State"]
+    if state["Running"] or state["Status"] != "created" or not state["StartedAt"].startswith("0001-"):
+        raise ValueError("CONTAINER_ALREADY_STARTED")
+
+    def cleanup():
+        if path.is_symlink() or path.read_bytes() != frozen:
+            raise ValueError("CONTAINER_OWNERSHIP_CHANGED")
+        # Rechecks the immutable ID and live Docker owner label before stopping.
+        stop_owned(path)
+
+    return guard(["docker", "start", "--attach", identity], cleanup=cleanup)
 
 
 def arguments():
@@ -89,8 +139,11 @@ def arguments():
     parser.add_argument("--state", type=Path, required=True)
     parser.add_argument("--compiler", type=Path, required=True)
     parser.add_argument("--context", type=Path, help="Explicit sealed context binding for each native update")
+    parser.add_argument("--preparation", type=Path, help="Explicit owner preparation contract for each update")
     parser.add_argument("--poll-ms", type=int, default=1000)
     parser.add_argument("--debounce-ms", type=int, default=300)
+    parser.add_argument("--inspection-timeout-ms", type=int, default=30000,
+                        help="Per native input/selection inspection budget (1000..3600000; default 30000)")
     parser.add_argument("--runner", nargs=argparse.REMAINDER,
                         help="Explicit policy command prefix; place last, including its -- separator")
     argv = sys.argv[1:]
@@ -104,10 +157,14 @@ def arguments():
     args.runner = runner
     if not 50 <= args.poll_ms <= 60000 or not 0 <= args.debounce_ms <= 60000:
         parser.error("poll-ms must be 50..60000 and debounce-ms 0..60000")
+    if not 1000 <= args.inspection_timeout_ms <= 3600000:
+        parser.error("inspection-timeout-ms must be 1000..3600000")
     for name in ("plan", "source", "state", "compiler"):
         setattr(args, name, getattr(args, name).absolute())
     if args.context is not None:
         args.context = args.context.absolute()
+    if args.preparation is not None:
+        args.preparation = args.preparation.absolute()
     if not args.runner:
         node, supervisor = os.environ.get("PATAMAPS_DEV_NODE"), os.environ.get("PATAMAPS_DEV_SUPERVISOR")
         if node and supervisor:
@@ -122,13 +179,15 @@ def arguments():
     return args
 
 
-def observe(args):
+def observe(args, native_run=None):
     argv = [str(args.compiler), "project-build-input-key", str(args.plan), "--source", str(args.source)]
     if args.context is not None:
         argv.extend(["--context", str(args.context)])
-    result = subprocess.run(
+    if args.preparation is not None:
+        argv.extend(["--preparation", str(args.preparation)])
+    result = (native_run or subprocess.run)(
         argv,
-        stdout=subprocess.PIPE, stderr=subprocess.PIPE, timeout=30, check=False)
+        stdout=subprocess.PIPE, stderr=subprocess.PIPE, timeout=args.inspection_timeout_ms / 1000, check=False)
     if len(result.stdout) > 1048576 or len(result.stderr) > 65536:
         raise ValueError("BUILD_INPUT_OBSERVATION_OUTPUT_LIMIT")
     if result.returncode:
@@ -142,14 +201,14 @@ def observe(args):
     return key
 
 
-def verified_selection(args):
-    result = subprocess.run(
+def verified_selection(args, native_run=None):
+    result = (native_run or subprocess.run)(
         [str(args.compiler), "project-build-verify", str(args.state)],
-        stdout=subprocess.PIPE, stderr=subprocess.PIPE, timeout=30, check=False)
+        stdout=subprocess.PIPE, stderr=subprocess.PIPE, timeout=args.inspection_timeout_ms / 1000, check=False)
     if result.returncode or len(result.stdout) > 1048576 or len(result.stderr) > 65536:
         raise ValueError("WATCH_SELECTED_BINDINGS_REFUSED")
     value = json.loads(result.stdout)
-    if value.get("status") != "verified-selected-build-bindings" or value.get("inputKey") != observe(args):
+    if value.get("status") != "verified-selected-build-bindings" or value.get("inputKey") != observe(args, native_run=native_run):
         raise ValueError("WATCH_SELECTION_DOES_NOT_MATCH_CURRENT_INPUTS")
     return value
 
@@ -159,6 +218,89 @@ def selection(state):
         return (state / "selected.json").read_bytes()
     except FileNotFoundError:
         return None
+
+
+def policy_verified_selection(args, parent, driver):
+    """Queue the full binding scan; idle observation does not hold this lease."""
+    nonce = uuid.uuid4().hex
+    payload = {name: str(getattr(args, name)) if getattr(args, name) is not None else None
+               for name in ("plan", "source", "state", "compiler", "context", "preparation")}
+    payload.update(inspectionTimeoutMs=args.inspection_timeout_ms, nonce=nonce,
+                   driverDigest=driver.hex())
+    script = Path(__file__).resolve()
+    inner = [sys.executable, str(script), "__guard", sys.executable, str(script),
+             "__verify-selected", json.dumps(payload, separators=(",", ":"))]
+    argv = [sys.executable, str(script), "__guard", *args.runner, *inner]
+    child = None
+    captured = bytearray()
+    try:
+        child = subprocess.Popen(argv, stdout=subprocess.PIPE, start_new_session=True)
+        with selectors.DefaultSelector() as poll:
+            poll.register(child.stdout, selectors.EVENT_READ)
+            while poll.get_map() or child.poll() is None:
+                if os.getppid() != parent:
+                    raise KeyboardInterrupt()
+                for key, _ in poll.select(.05):
+                    chunk = key.fileobj.read1(65536)
+                    if not chunk:
+                        poll.unregister(key.fileobj)
+                        continue
+                    if len(captured) + len(chunk) > 1048576:
+                        raise ValueError("WATCH_VERIFICATION_OUTPUT_LIMIT")
+                    captured.extend(chunk)
+                    sys.stdout.write(chunk.decode("utf-8", errors="replace"))
+                    sys.stdout.flush()
+            code = child.wait()
+        if code:
+            raise ValueError("WATCH_POLICY_VERIFICATION_REFUSED: " + str(code))
+    finally:
+        stop(child)
+        if child is not None and child.stdout is not None:
+            child.stdout.close()
+    records = []
+    for line in captured.decode("utf-8", errors="strict").splitlines():
+        try:
+            value = json.loads(line)
+        except ValueError:
+            continue
+        if isinstance(value, dict) and value.get("status") == "verified-project-watch-selection":
+            records.append(value)
+    if (len(records) != 1 or records[0].get("nonce") != nonce
+            or records[0].get("selectedPointerDigest") !=
+            "sha256:" + hashlib.sha256(selection(args.state) or b"").hexdigest()):
+        raise ValueError("WATCH_VERIFICATION_RECORD_REFUSED")
+    if records[0].get("inputKey") != observe(args):
+        raise ValueError("WATCH_SELECTION_DOES_NOT_MATCH_CURRENT_INPUTS")
+    return records[0]
+
+
+def verify_selected_step(raw, native_run=None):
+    """Internal bounded native inspections, invoked under the same policy runner."""
+    payload = json.loads(raw)
+    names = ("plan", "source", "state", "compiler", "context", "preparation")
+    if (not isinstance(payload, dict)
+            or set(payload) != set(names) | {"inspectionTimeoutMs", "nonce", "driverDigest"}
+            or not isinstance(payload["nonce"], str)
+            or re.fullmatch("[0-9a-f]{32}", payload["nonce"]) is None
+            or not isinstance(payload["driverDigest"], str)
+            or hashlib.sha256(Path(__file__).read_bytes()).hexdigest() != payload["driverDigest"]
+            or type(payload["inspectionTimeoutMs"]) is not int
+            or not 1000 <= payload["inspectionTimeoutMs"] <= 3600000):
+        raise ValueError("WATCH_VERIFICATION_INPUT")
+    values = {}
+    for name in names:
+        value = payload[name]
+        if value is None and name in ("context", "preparation"):
+            values[name] = None
+        elif isinstance(value, str) and Path(value).is_absolute():
+            values[name] = Path(value)
+        else:
+            raise ValueError("WATCH_VERIFICATION_INPUT")
+    args = argparse.Namespace(**values, inspection_timeout_ms=payload["inspectionTimeoutMs"])
+    checked = verified_selection(args, native_run=native_run)
+    event("verified-project-watch-selection", nonce=payload["nonce"],
+          inputKey=checked["inputKey"],
+          selectedPointerDigest="sha256:" + hashlib.sha256(selection(args.state) or b"").hexdigest())
 
 
 def main():
@@ -208,6 +350,8 @@ def main():
                           "--source", str(args.source), "--state", str(args.state)]
                 if args.context is not None:
                     native.extend(["--context", str(args.context)])
+                if args.preparation is not None:
+                    native.extend(["--preparation", str(args.preparation)])
                 inner = [sys.executable, str(script), "__guard", *native]
                 argv = [sys.executable, str(script), "__guard", *args.runner, *inner]
                 event("starting-project-build-update", inputKey=key)
@@ -227,7 +371,8 @@ def main():
                           retry="after-input-change-or-explicit-restart")
                 else:
                     try:
-                        checked = verified_selection(args)
+                        event("starting-project-build-verification", inputKey=key)
+                        checked = policy_verified_selection(args, parent, driver)
                     except (OSError, ValueError, subprocess.SubprocessError) as error:
                         event("refused-project-build-update", inputKey=key, exitCode=1,
                               reason=str(error), previousSelectionPreserved=selection(args.state) == before,
@@ -249,6 +394,15 @@ if __name__ == "__main__":
             raise SystemExit(2)
         raise SystemExit(guard(sys.argv[2:]))
     try:
+        if len(sys.argv) > 1 and sys.argv[1] == "__verify-selected":
+            if len(sys.argv) != 3:
+                raise SystemExit(2)
+            verify_selected_step(sys.argv[2])
+            raise SystemExit(0)
+        if len(sys.argv) > 1 and sys.argv[1] == "__guard-container":
+            if len(sys.argv) != 3:
+                raise SystemExit(2)
+            raise SystemExit(container_guard(sys.argv[2]))
         main()
     except KeyboardInterrupt:
         event("cancelled-project-watch")

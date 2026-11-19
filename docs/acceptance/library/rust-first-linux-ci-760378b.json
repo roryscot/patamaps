@@ -1,0 +1,30 @@
+{
+  "status": "passed-linux-ci",
+  "sourceCommit": "760378b3b8c587a6e12adbf6d37c41db9cda62c1",
+  "workflowRun": "https://github.com/roryscot/patamaps/actions/runs/44617000970",
+  "runner": "ubuntu-24.04",
+  "commands": [
+    {
+      "command": "cargo +1.99.0 test --locked -p patamaps-core --test in_memory_library",
+      "result": "passed",
+      "tests": 3
+    },
+    {
+      "command": "cargo +1.99.0 run --locked -p patamaps-core --example in_memory_graph",
+      "result": "passed"
+    },
+    {
+      "command": "CARGO_TARGET_DIR=$GITHUB_WORKSPACE/target cargo +1.99.0 run --locked --manifest-path examples/rust-library-consumer/Cargo.toml",
+      "result": "passed"
+    },
+    {
+      "command": "cargo +1.99.0 test --locked -p patamaps-workspace --lib",
+      "result": "passed",
+      "tests": 60
+    }
+  ],
+  "normalDependencyPackageIdentitiesExcludingConsumerOnNorwayDefaultTarget": 108,
+  "dependencyScope": "cargo tree --edges normal; excludes build dependencies and other targets",
+  "norwayFocusedTests": "not completed; both interruptions preserved separately",
+  "publishedPackage": "not verified by this path-dependent consumer"
+}

@@ -1,0 +1,8 @@
+(version 1)
+(allow default)
+(deny network*)
+(deny file-write*)
+(allow file-write* (subpath "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/owner-api-readiness-20261027/repair3-prepared/run"))
+(deny process-exec)
+(allow process-exec (literal "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3.11") (literal "/Library/Frameworks/Python.framework/Versions/3.11/Resources/Python.app/Contents/MacOS/Python"))
+(deny file-read* (regex #".*/[.]env.*") (subpath "/Users/admin/.ssh") (subpath "/Users/admin/.aws") (subpath "/Users/admin/.config/gh") (literal "/Users/admin/.netrc"))
