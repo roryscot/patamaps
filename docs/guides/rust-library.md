@@ -38,7 +38,8 @@ complete code and the core tests for invalid-input behavior.
 A separate Cargo workspace is available at
 [examples/rust-library-consumer](../../examples/rust-library-consumer/README.md).
 It uses a path dependency on this checkout and demonstrates checked editing
-without the CLI. Its Linux CI check passed at source 760378b; this does not verify a published package or a Norway build.
+without the CLI. Its native-only Linux CI check passed at source e4ccd68; this does not verify
+a published package or a Norway build.
 
 ## Optional legacy compatibility
 
@@ -48,4 +49,5 @@ consumers. A consumer that needs only the native graph API can set
 Legacy APIs and legacy registry import methods are unavailable in that mode;
 ordinary native registry and checked graph operations remain intended to work.
 Cargo can unify features if another dependency enables legacy compatibility.
-The feature split is under verification and is not yet a published release.
+The feature split passed focused Linux CI at source e4ccd68 and is not yet a
+published release. Norway compilation remains unverified.

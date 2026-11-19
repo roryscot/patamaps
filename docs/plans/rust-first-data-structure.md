@@ -115,8 +115,10 @@ compatibility. On Norway, offline cargo tree reports 30 normal dependency
 package identities beneath the standalone consumer in native-only mode, down
 from 108 with defaults, on the same host target and counting method. These are
 dependency-tree counts, not compile-time, size, or performance measurements.
-Both configurations and the standalone consumer require fresh CI verification;
-Norway compilation remains blocked by shared-disk activity.
+Both configurations and the standalone consumer passed focused Linux CI at
+e4ccd68. The legacy pack and registry regression tests and existing workspace
+library suite also passed. Norway compilation remains blocked by shared-disk
+activity; no release or broad compatibility claim follows from these checks.
 
 The first locked consumer tree inspection refused because the new feature
 selection required a lockfile update. The consumer lockfile was updated offline;
