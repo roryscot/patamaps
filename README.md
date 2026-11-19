@@ -1,6 +1,8 @@
 # Patamaps
 
-Patamaps is a Rust-native correspondence compiler built against MetaMap’s substantive capabilities and guarantees. Independently owned descriptions of concepts and implementations produce checked static bindings whose semantic identities survive implementation moves. The Rust kernel owns validation, admission, proofs, uncertainty, risk, replay and governance; generated Rust consumers run without MetaMap or the compiler.
+Patamaps is being refocused as a Rust-first data structure and library for explicitly modeled semantic identities and correspondences. The existing correspondence compiler and project workflows remain available as optional layers. The [Rust-first plan](docs/plans/rust-first-data-structure.md) defines the new direction and its current implementation status.
+
+Historically, Patamaps was developed as a Rust-native correspondence compiler built against MetaMap’s substantive capabilities and guarantees. Independently owned descriptions of concepts and implementations produce checked static bindings whose semantic identities survive implementation moves. The Rust kernel owns validation, admission, proofs, uncertainty, risk, replay and governance; generated Rust consumers run without MetaMap or the compiler.
 
 ## Product boundary and Rust starting point
 
