@@ -35,3 +35,31 @@ fn draft_constructors_do_not_bypass_existing_graph_validation() {
     let error = CheckedGraph::check(document, packs).unwrap_err();
     assert!(error.0.iter().any(|i| i.code == "UNRESOLVED_ENDPOINT"));
 }
+
+#[test]
+fn edited_graph_is_checked_and_failed_edits_leave_original_unchanged() {
+    let (document, packs) = example::draft();
+    let original = CheckedGraph::check(document, packs).unwrap();
+    let before = original.digest().to_owned();
+
+    let updated = original
+        .try_edit(|draft| {
+            draft.entities.push(patamaps_core::model::Entity::new(
+                "urn:example:extra",
+                "concept",
+            ));
+        })
+        .unwrap();
+    assert!(updated.entity("urn:example:extra").is_some());
+    assert!(original.entity("urn:example:extra").is_none());
+    assert_ne!(updated.digest(), before);
+
+    let error = original
+        .try_edit(|draft| {
+            draft.entities.push(draft.entities[0].clone());
+        })
+        .unwrap_err();
+    assert!(error.0.iter().any(|issue| issue.code == "DUPLICATE_ID"));
+    assert_eq!(original.digest(), before);
+    assert_eq!(original.document().entities.len(), 2);
+}

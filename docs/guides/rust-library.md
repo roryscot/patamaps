@@ -19,8 +19,11 @@ The example creates a draft GraphDocument, entities, an explicit relation
 definition and a mapping with explicit cardinality, lossiness and provenance.
 It calls CheckedGraph::check before using indexed lookup and trace. Draft
 constructors do not validate identifiers, infer authority, or confer admission.
-CheckedGraph is an immutable checked view; changing a graph requires creating
-and checking a new draft. Admission and policy evaluation are separate.
+CheckedGraph is an immutable checked view. Its try_edit method clones the
+draft, applies a caller-provided change and checks it with the same relation
+packs, leaving the original graph unchanged if the edit is invalid. This is a
+full clone and recheck, not an incremental update. Admission and policy
+evaluation are separate.
 
 Rust consumers can depend on patamaps-core and access draft records through
 patamaps_core::model. Projection, code generation, CLI commands, application

@@ -90,3 +90,8 @@ recovered after ownership checks and its failure retained. Existing Linux CI
 compiled the core as a dependency; focused example and test coverage has been
 added to CI but must pass before it is claimed. Norway verification remains
 separate.
+
+Linux CI passed the initial focused in-memory tests and example at a48726a.
+An explicit clone-and-recheck edit method and failure-isolation test are now
+being added; this change requires fresh verification. Norway results remain
+separate from Linux CI.
