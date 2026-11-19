@@ -72,10 +72,10 @@ report the exact limitation rather than presenting unrun tests as passed.
 
 The existing tracker contains a paused, unfinished integration goal and cannot
 replace it through the available goal API. The user's new direction is recorded
-here; the integration objective is not marked complete. The first draft constructors, in-memory example, and focused tests are implemented;
-formatting passed. The guarded test run was refused before compilation because
-retained allocation was 101,480,141,409 bytes against the existing 100 GB cap
-and the requested 500 MB reservation. The tests and example remain unrun.
+here; the integration objective is not marked complete. The first draft constructors, in-memory example, and focused tests are implemented.
+An initial Norway run was refused before compilation because retained allocation
+was 101,480,141,409 bytes against the 100 GB cap and 500 MB reservation. That
+refusal is preserved; later Linux and Norway outcomes are recorded below.
 
 After the approved 90,000-file cleanup, the focused run was admitted but stopped
 before tests completed because shared-pool free space fell beyond the 500 MB
@@ -92,11 +92,19 @@ added to CI but must pass before it is claimed. Norway verification remains
 separate.
 
 Linux CI passed the initial focused in-memory tests and example at a48726a.
-An explicit clone-and-recheck edit method and failure-isolation test are now
-being added; this change requires fresh verification. Norway results remain
-separate from Linux CI.
+An explicit clone-and-recheck edit method and failure-isolation test passed
+in the later Linux CI run at 760378b. Norway results remain separate from
+Linux CI.
 
 A standalone path-dependent Rust consumer has been prepared for CI. The first
 lockfile generation attempt could not find rustc because PATH omitted the
 pinned toolchain; repeating with that toolchain in PATH succeeded offline. No
-compilation occurred in that attempt. The consumer is not yet verified.
+compilation occurred in that attempt. The standalone consumer passed Linux CI at 760378b; Norway execution remains unverified.
+
+The Linux run at source 760378b passed three focused in-memory tests, the
+in-memory example, the standalone path-dependent consumer and the existing
+60-test workspace library suite. A Norway cargo tree inspection found 108
+normal dependency package identities beneath the standalone consumer on the
+host default target; this excludes the consumer itself and does not measure
+compile time, binary size, all targets, or build dependencies. Reducing that
+footprint remains a separate measured design task.

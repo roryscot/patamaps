@@ -1,6 +1,6 @@
 # Use Patamaps in a Rust program
 
-This is the first library-first example, under development and not yet compiled or tested: the first guarded run was refused before compilation for insufficient retained-storage headroom. It uses the
+This is the first library-first example. The focused tests, in-memory example and standalone path-dependent consumer passed Linux CI at source 760378b. Norway's local focused runs did not complete because the existing shared-disk growth guard stopped them; those outcomes remain separate. It uses the
 existing graph model and checked kernel directly; it does not execute the CLI,
 read a graph file, generate code, or start an application.
 
@@ -38,4 +38,4 @@ complete code and the core tests for invalid-input behavior.
 A separate Cargo workspace is available at
 [examples/rust-library-consumer](../../examples/rust-library-consumer/README.md).
 It uses a path dependency on this checkout and demonstrates checked editing
-without the CLI. Its fresh-consumer CI verification is pending.
+without the CLI. Its Linux CI check passed at source 760378b; this does not verify a published package or a Norway build.
