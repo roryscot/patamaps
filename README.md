@@ -13,7 +13,9 @@ records that milestone at source 956f1a8. This is scoped native capability
 completion, not exact JavaScript/API compatibility or fresh verification of every
 later revision. The [capability plan](BUILD_PLAN.md) controls this boundary.
 
-Start with the [real Rust project guide](docs/guides/rust-project-quickstart.md):
+For the emerging in-process API, start with the [Rust library guide](docs/guides/rust-library.md) and its in-memory example. This new on-ramp is under development and its verification status is tracked in the plan.
+
+For the existing compiler workflow, start with the [real Rust project guide](docs/guides/rust-project-quickstart.md):
 declare one correspondence, validate it, generate static Rust and connect that
 artifact to your own handler. The application need not run the compiler.
 

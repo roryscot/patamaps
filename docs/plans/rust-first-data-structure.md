@@ -72,5 +72,7 @@ report the exact limitation rather than presenting unrun tests as passed.
 
 The existing tracker contains a paused, unfinished integration goal and cannot
 replace it through the available goal API. The user's new direction is recorded
-here; the integration objective is not marked complete. Initial implementation
-and verification are pending.
+here; the integration objective is not marked complete. The first draft constructors, in-memory example, and focused tests are implemented;
+formatting passed. The guarded test run was refused before compilation because
+retained allocation was 101,480,141,409 bytes against the existing 100 GB cap
+and the requested 500 MB reservation. The tests and example remain unrun.

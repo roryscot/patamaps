@@ -1,5 +1,8 @@
 #![forbid(unsafe_code)]
 
+/// Draft graph records used by the in-process kernel.
+pub use patamaps_contracts as model;
+
 mod admission;
 mod build_observations;
 pub use build_observations::observation_matches;
