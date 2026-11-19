@@ -95,3 +95,8 @@ Linux CI passed the initial focused in-memory tests and example at a48726a.
 An explicit clone-and-recheck edit method and failure-isolation test are now
 being added; this change requires fresh verification. Norway results remain
 separate from Linux CI.
+
+A standalone path-dependent Rust consumer has been prepared for CI. The first
+lockfile generation attempt could not find rustc because PATH omitted the
+pinned toolchain; repeating with that toolchain in PATH succeeded offline. No
+compilation occurred in that attempt. The consumer is not yet verified.

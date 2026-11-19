@@ -34,3 +34,8 @@ compile footprint has not yet been measured.
 The [Rust-first plan](../plans/rust-first-data-structure.md) tracks the remaining
 API, packaging and external-consumer work. See the example source for the
 complete code and the core tests for invalid-input behavior.
+
+A separate Cargo workspace is available at
+[examples/rust-library-consumer](../../examples/rust-library-consumer/README.md).
+It uses a path dependency on this checkout and demonstrates checked editing
+without the CLI. Its fresh-consumer CI verification is pending.
