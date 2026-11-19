@@ -63,3 +63,9 @@ fn edited_graph_is_checked_and_failed_edits_leave_original_unchanged() {
     assert_eq!(original.digest(), before);
     assert_eq!(original.document().entities.len(), 2);
 }
+
+#[test]
+fn native_registry_remains_available_without_legacy_compatibility() {
+    let registry = patamaps_core::RelationRegistry::with_core().unwrap();
+    assert!(registry.get("core:contains").is_some());
+}

@@ -86,6 +86,8 @@ jobs:
       - name: Verify the in-memory Rust graph library
         run: |
           cargo +1.99.0 test --locked -p patamaps-core --test in_memory_library
+          cargo +1.99.0 test --locked -p patamaps-core --no-default-features --test in_memory_library
+          cargo +1.99.0 test --locked -p patamaps-core --test registry --test legacy_pack
           cargo +1.99.0 run --locked -p patamaps-core --example in_memory_graph
           CARGO_TARGET_DIR="$GITHUB_WORKSPACE/target" cargo +1.99.0 run --locked --manifest-path examples/rust-library-consumer/Cargo.toml
       - name: Test patamaps-workspace library suite, including Next manifest boundaries

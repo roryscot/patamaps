@@ -108,3 +108,17 @@ normal dependency package identities beneath the standalone consumer on the
 host default target; this excludes the consumer itself and does not measure
 compile time, binary size, all targets, or build dependencies. Reducing that
 footprint remains a separate measured design task.
+
+A default-on legacy-compat feature is being introduced so existing consumers
+retain their current API while a native-only consumer can disable legacy
+compatibility. On Norway, offline cargo tree reports 30 normal dependency
+package identities beneath the standalone consumer in native-only mode, down
+from 108 with defaults, on the same host target and counting method. These are
+dependency-tree counts, not compile-time, size, or performance measurements.
+Both configurations and the standalone consumer require fresh CI verification;
+Norway compilation remains blocked by shared-disk activity.
+
+The first locked consumer tree inspection refused because the new feature
+selection required a lockfile update. The consumer lockfile was updated offline;
+subsequent locked tree checks succeeded. This was a dependency-resolution
+refusal, not a completed build or a library test result.

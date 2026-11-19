@@ -39,3 +39,13 @@ A separate Cargo workspace is available at
 [examples/rust-library-consumer](../../examples/rust-library-consumer/README.md).
 It uses a path dependency on this checkout and demonstrates checked editing
 without the CLI. Its Linux CI check passed at source 760378b; this does not verify a published package or a Norway build.
+
+## Optional legacy compatibility
+
+The core crate enables its legacy-compat feature by default to preserve existing
+consumers. A consumer that needs only the native graph API can set
+`default-features = false` on patamaps-core, as the standalone consumer does.
+Legacy APIs and legacy registry import methods are unavailable in that mode;
+ordinary native registry and checked graph operations remain intended to work.
+Cargo can unify features if another dependency enables legacy compatibility.
+The feature split is under verification and is not yet a published release.
