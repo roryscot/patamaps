@@ -117,10 +117,18 @@ from 108 with defaults, on the same host target and counting method. These are
 dependency-tree counts, not compile-time, size, or performance measurements.
 Both configurations and the standalone consumer passed focused Linux CI at
 e4ccd68. The legacy pack and registry regression tests and existing workspace
-library suite also passed. Norway compilation remains blocked by shared-disk
-activity; no release or broad compatibility claim follows from these checks.
+library suite also passed. Those Linux results do not establish a release or
+broad compatibility.
 
 The first locked consumer tree inspection refused because the new feature
 selection required a lockfile update. The consumer lockfile was updated offline;
 subsequent locked tree checks succeeded. This was a dependency-resolution
 refusal, not a completed build or a library test result.
+
+On 2026-11-25, the focused native-only in-memory library tests passed on
+Norway at source 4a2024d: four tests, using the existing 500 MB guarded
+reservation. The compiler reported that optional debug-symbol stripping failed
+because rust-objcopy could not load libLLVM; the test command exited zero.
+The earlier storage-guard failures remain preserved. This result does not
+verify the default-feature configuration, a published crate, or a real Rust
+application on Norway.

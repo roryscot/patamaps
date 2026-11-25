@@ -1,6 +1,6 @@
 # Use Patamaps in a Rust program
 
-This is the first library-first example. The focused tests, in-memory example and standalone path-dependent consumer passed Linux CI at source 760378b. Norway's local focused runs did not complete because the existing shared-disk growth guard stopped them; those outcomes remain separate. It uses the
+This is the first library-first example. The focused tests, in-memory example and standalone path-dependent consumer passed Linux CI at source 760378b. Two earlier Norway runs stopped under the shared-disk guard. A later native-only focused run passed four tests on Norway on 2026-11-25; the earlier failures remain recorded. It uses the
 existing graph model and checked kernel directly; it does not execute the CLI,
 read a graph file, generate code, or start an application.
 
@@ -50,4 +50,5 @@ Legacy APIs and legacy registry import methods are unavailable in that mode;
 ordinary native registry and checked graph operations remain intended to work.
 Cargo can unify features if another dependency enables legacy compatibility.
 The feature split passed focused Linux CI at source e4ccd68 and is not yet a
-published release. Norway compilation remains unverified.
+published release. The four native-only focused tests also passed on Norway;
+that local result does not verify a published package.
