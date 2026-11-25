@@ -38,8 +38,9 @@ complete code and the core tests for invalid-input behavior.
 A separate Cargo workspace is available at
 [examples/rust-library-consumer](../../examples/rust-library-consumer/README.md).
 It uses a path dependency on this checkout and demonstrates checked editing
-without the CLI. Its native-only Linux CI check passed at source e4ccd68; this does not verify
-a published package or a Norway build.
+without the CLI. Its native-only Linux CI check passed at source e4ccd68. It also passed on
+Norway on 2026-11-25. These path-dependency checks do not verify a published
+package.
 
 ## Optional legacy compatibility
 

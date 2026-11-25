@@ -132,3 +132,8 @@ because rust-objcopy could not load libLLVM; the test command exited zero.
 The earlier storage-guard failures remain preserved. This result does not
 verify the default-feature configuration, a published crate, or a real Rust
 application on Norway.
+
+The standalone path-dependent Rust consumer also compiled and ran on Norway
+on 2026-11-25 under a 500 MB guarded reservation. It checked and edited its
+graph. The same debug-symbol stripping warning appeared. This is an example
+consumer, not verification of a published package or an existing application.
