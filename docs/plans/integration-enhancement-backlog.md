@@ -25,7 +25,7 @@ a passed fixture or metadata observation is not general support.
 
 The [current adoption checkpoint](adoption-remaining-gates.md#current-checkpoint-2026-11-17)
 records passing fresh Seeder baseline and edited builds and their no-op checks.
-Changed-build failure, race, cancellation and parent-death remain open. The
+The generator-failure case has since passed; race, cancellation and parent-death remain open. The
 user's [Rust-first library plan](rust-first-data-structure.md) is the product
 priority; this integration backlog remains separate.
 
@@ -1712,3 +1712,10 @@ retained actual Next output, prove real HTML around architecture refusal, inspec
 enforcement and confirm cleanup. Stale contracts and the full architecture/G5/G6
 gates stay open. No new ELF parser, Rust change, source worktree, service change,
 capacity increase, deletion or blocked-phase retry was introduced.
+
+
+On 2026-11-25 the isolated Seeder malformed-graph case reached the route
+generator, which exited on the frozen JSON syntax error. The retained build
+refused preparation and preserved the previous selection; no activation was
+performed. [Scoped receipt](../acceptance/project-adoption/current-owner-retained-next-20261026/w1-clone-generator-failure-20261125.json).
+Race, cancellation and parent-death checks remain open.

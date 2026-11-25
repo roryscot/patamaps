@@ -23,7 +23,7 @@ passed without rerunning verification. These are scoped functional results, not
 performance benchmarks or evidence of production activation.
 
 The earlier overlay refusal and growth stop below remain failures. Changed-build
-generator failure, race, cancellation and parent-death cases remain unverified.
+generator failure, race, cancellation and parent-death cases remained unverified at that checkpoint; the later generator-failure result is recorded below.
 The [Rust-first plan](rust-first-data-structure.md) is the current product
 direction; this separate integration goal does not gate its library milestone.
 
@@ -798,3 +798,10 @@ A [focused WebKit timing diagnostic](../acceptance/project-adoption/seeder-mobil
 passed all three cases and identified context close as the roughly eight-second
 interval in each negative case. The cause of the close delay and the earlier
 full-run guardian uncertainty remain open. Full matrix acceptance is unchanged.
+
+
+On 2026-11-25 the isolated Seeder malformed-graph case reached the route
+generator, which exited on the frozen JSON syntax error. The retained build
+refused preparation and preserved the previous selection; no activation was
+performed. [Scoped receipt](../acceptance/project-adoption/current-owner-retained-next-20261026/w1-clone-generator-failure-20261125.json).
+Race, cancellation and parent-death checks remain open.
