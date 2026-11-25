@@ -23,6 +23,13 @@ a passed fixture or metadata observation is not general support.
 
 ## Current selected work
 
+The [current adoption checkpoint](adoption-remaining-gates.md#current-checkpoint-2026-11-17)
+records passing fresh Seeder baseline and edited builds and their no-op checks.
+Changed-build failure, race, cancellation and parent-death remain open. The
+user's [Rust-first library plan](rust-first-data-structure.md) is the product
+priority; this integration backlog remains separate.
+
+
 The [native cancellation isolation increment](2026-10-28-native-cancellation-isolation.md)
 now has [20 passed actual kernel controls](../acceptance/project-adoption/native-inspection-kernel-20261028/receipt.json)
 for a fixed Darwin single-process inspection primitive, with descriptor closure,

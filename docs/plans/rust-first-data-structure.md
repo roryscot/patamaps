@@ -70,9 +70,9 @@ report the exact limitation rather than presenting unrun tests as passed.
 
 ## Current checkpoint
 
-The existing tracker contains a paused, unfinished integration goal and cannot
-replace it through the available goal API. The user's new direction is recorded
-here; the integration objective is not marked complete. The first draft constructors, in-memory example, and focused tests are implemented.
+The tracker carries a separate unfinished integration objective. The user's
+newer Rust-first direction is recorded here and remains the product priority;
+the integration objective is not marked complete. The first draft constructors, in-memory example, and focused tests are implemented.
 An initial Norway run was refused before compilation because retained allocation
 was 101,480,141,409 bytes against the 100 GB cap and 500 MB reservation. That
 refusal is preserved; later Linux and Norway outcomes are recorded below.

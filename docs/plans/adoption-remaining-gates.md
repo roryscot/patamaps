@@ -11,7 +11,23 @@ The [support matrix](../guides/project-support-matrix.md) retains exact source,
 engine, profile and verification limits. Native MetaMap C01–C19 completion stays
 separate. Full adoption completion remains unproven.
 
-## Current checkpoint, 2026-11-16
+## Current checkpoint, 2026-11-17
+
+The later [fresh Seeder baseline](../acceptance/project-adoption/current-owner-retained-next-20261026/w1-clone-baseline-20261116.json)
+and [edited project build](../acceptance/project-adoption/current-owner-retained-next-20261026/w1-clone-edited-project-20261117.json)
+both passed after context-copy reduction. Each matched eight expected generated
+outputs and passed three original route tests; the edited build also contained
+the compiled edit marker. The [baseline no-op](../acceptance/project-adoption/current-owner-retained-next-20261026/w1-clone-noop-20261117.json)
+and [edited no-op](../acceptance/project-adoption/current-owner-retained-next-20261026/w1-clone-edited-noop-20261117.json)
+passed without rerunning verification. These are scoped functional results, not
+performance benchmarks or evidence of production activation.
+
+The earlier overlay refusal and growth stop below remain failures. Changed-build
+generator failure, race, cancellation and parent-death cases remain unverified.
+The [Rust-first plan](rust-first-data-structure.md) is the current product
+direction; this separate integration goal does not gate its library milestone.
+
+## Historical checkpoint, 2026-11-16
 
 The approved [duplicate-dependency cleanup](../acceptance/project-adoption/g4-external-state-20261027/approved-duplicate-cleanup-20261116.json)
 removed 169,012 listed copies after every retained counterpart was rehashed.
