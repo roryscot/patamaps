@@ -805,3 +805,11 @@ generator, which exited on the frozen JSON syntax error. The retained build
 refused preparation and preserved the previous selection; no activation was
 performed. [Scoped receipt](../acceptance/project-adoption/current-owner-retained-next-20261026/w1-clone-generator-failure-20261125.json).
 Race, cancellation and parent-death checks remain open.
+
+
+On 2026-11-25 the retained-project source-race attempt was refused at
+retention admission, before its test runner or source mutation. The previous
+selection remained unchanged. The cap was 441,077,857 bytes short of the
+2.2 GB reservation. [Receipt](../acceptance/project-adoption/current-owner-retained-next-20261026/w1-clone-race-admission-20261125.json).
+A hash-verified candidate-copy inventory is prepared for review; no deletion
+has been performed. The race remains unverified.
