@@ -91,6 +91,11 @@ jobs:
           cargo +1.99.0 test --locked -p patamaps-core --test registry --test legacy_pack
           cargo +1.99.0 run --locked -p patamaps-core --example in_memory_graph
           CARGO_TARGET_DIR="$GITHUB_WORKSPACE/target" cargo +1.99.0 run --locked --manifest-path examples/rust-library-consumer/Cargo.toml
+      - name: Verify Rust crates from packaged archives
+        run: |
+          mkdir -p "$RUNNER_TEMP/patamaps-package-controls"
+          PATAMAPS_TEST_RETAIN_ROOT="$RUNNER_TEMP/patamaps-package-controls" python3 -B -m unittest discover -s scripts -p test_check_rust_package_consumers.py
+          python3 -B scripts/check_rust_package_consumers.py --work "$RUNNER_TEMP/patamaps-rust-package-${{ github.run_id }}-${{ github.run_attempt }}"
       - name: Test patamaps-workspace library suite, including Next manifest boundaries
         run: cargo +1.99.0 test --locked -p patamaps-workspace --lib
       - name: Build Patamaps CLI with the updated workspace adapter
