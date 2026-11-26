@@ -137,3 +137,11 @@ The standalone path-dependent Rust consumer also compiled and ran on Norway
 on 2026-11-25 under a 500 MB guarded reservation. It checked and edited its
 graph. The same debug-symbol stripping warning appeared. This is an example
 consumer, not verification of a published package or an existing application.
+
+
+The relation-index iterator and its consumer coverage were added on 2026-11-25.
+The first Norway check stopped before tests completed after the 500 MB
+shared-pool growth guard fired during admission; its reservation was retained
+after ownership stop could not be confirmed by the guard. Normal recovery
+refused incomplete ownership. The failed run remains preserved; no test pass
+is claimed until separate verification completes.

@@ -69,3 +69,37 @@ fn native_registry_remains_available_without_legacy_compatibility() {
     let registry = patamaps_core::RelationRegistry::with_core().unwrap();
     assert!(registry.get("core:contains").is_some());
 }
+
+#[test]
+fn relation_lookup_returns_document_order_and_reflects_checked_edits() {
+    let (mut document, packs) = example::draft();
+    document.entities.push(patamaps_core::model::Entity::new(
+        "urn:example:other-implementation",
+        "implementation",
+    ));
+    let mut second = document.mappings[0].clone();
+    second.id = "urn:example:second-mapping".into();
+    second.targets = vec!["urn:example:other-implementation".into()];
+    document.mappings.push(second);
+
+    let original = CheckedGraph::check(document, packs).unwrap();
+    let ids = |graph: &CheckedGraph| {
+        graph
+            .mappings_for_relation("example:implemented_by")
+            .map(|mapping| mapping.id.clone())
+            .collect::<Vec<_>>()
+    };
+    assert_eq!(
+        ids(&original),
+        ["urn:example:mapping", "urn:example:second-mapping"]
+    );
+    assert_eq!(original.mappings_for_relation("example:missing").count(), 0);
+
+    let updated = original
+        .try_edit(|draft| {
+            draft.mappings.remove(0);
+        })
+        .unwrap();
+    assert_eq!(ids(&updated), ["urn:example:second-mapping"]);
+    assert_eq!(ids(&original).len(), 2);
+}

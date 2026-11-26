@@ -932,6 +932,18 @@ impl CheckedGraph {
             .get(id)
             .map(|&(pi, ri)| &self.packs[pi].relations[ri])
     }
+    /// Returns mappings with this relation in document order.
+    ///
+    /// An unknown or unused relation returns an empty iterator. Results borrow
+    /// the checked graph; no mappings are cloned.
+    pub fn mappings_for_relation(&self, relation: &str) -> impl Iterator<Item = &Mapping> {
+        self.by_relation
+            .get(relation)
+            .into_iter()
+            .flatten()
+            .map(|&i| &self.document.mappings[i])
+    }
+
     pub fn incident(&self, id: &str) -> impl Iterator<Item = &Mapping> {
         self.incident
             .get(id)

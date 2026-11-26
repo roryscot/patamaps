@@ -15,6 +15,9 @@ On a shared development host, run these through that host's configured
 resource supervisor. The example is part of the checkout; do not assume it is
 already present in a published crate version.
 
+For indexed relation lookup, `graph.mappings_for_relation(id)` borrows matching
+mappings in the document's order; unknown or unused relations yield no items.
+
 The example creates a draft GraphDocument, entities, an explicit relation
 definition and a mapping with explicit cardinality, lossiness and provenance.
 It calls CheckedGraph::check before using indexed lookup and trace. Draft

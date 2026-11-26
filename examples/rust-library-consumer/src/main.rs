@@ -30,6 +30,9 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     ));
     let graph = CheckedGraph::check(draft, vec![relations])?;
 
+    assert_eq!(graph.mappings_for_relation("consumer:implemented_by").count(), 1);
+    assert_eq!(graph.mappings_for_relation("consumer:missing").count(), 0);
+
     let updated = graph.try_edit(|draft| {
         draft
             .entities
