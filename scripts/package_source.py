@@ -88,8 +88,16 @@ def include_linked_evidence(payload, excluded=None, maximum_bytes=MAX_EVIDENCE_B
             if relative in selected:
                 continue
             size = path.stat().st_size
-            if len(selected) >= maximum_files or size > maximum_bytes - total:
-                raise PackageScopeError("Linked evidence budget exceeded; retain bulky data separately")
+            if len(selected) >= maximum_files:
+                raise PackageScopeError(
+                    f"Linked evidence file limit exceeded ({len(selected) + 1} > {maximum_files}); "
+                    "retain bulky data separately"
+                )
+            if size > maximum_bytes - total:
+                raise PackageScopeError(
+                    f"Linked evidence byte limit exceeded ({total + size} > {maximum_bytes}); "
+                    "retain bulky data separately"
+                )
             payload.add(relative, path)
             selected[relative] = len(payload.files[relative])
             total += selected[relative]

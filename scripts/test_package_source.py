@@ -42,9 +42,9 @@ class PackageScope(unittest.TestCase):
         p = self.seed("[a](docs/acceptance/a.json) [b](docs/acceptance/b.json)")
         self.write("docs/acceptance/a.json", "12")
         self.write("docs/acceptance/b.json", "34")
-        with self.assertRaises(PackageScopeError): include_linked_evidence(p, maximum_files=1)
+        with self.assertRaisesRegex(PackageScopeError, r"file limit exceeded \(2 > 1\)"): include_linked_evidence(p, maximum_files=1)
         p = self.seed("[a](docs/acceptance/a.json)")
-        with self.assertRaises(PackageScopeError): include_linked_evidence(p, maximum_bytes=1)
+        with self.assertRaisesRegex(PackageScopeError, r"byte limit exceeded \(2 > 1\)"): include_linked_evidence(p, maximum_bytes=1)
     def test_total_source_budget_and_replacement_accounting(self):
         p = SourcePayload(self.root, maximum_bytes=3)
         f = self.write("a", "12")
