@@ -16,13 +16,20 @@ fn options() -> EvaluationOptions {
 }
 
 fn fixture(code: &str) -> (CheckedGraph, PolicyDocument, String) {
-    let mut graph: GraphDocument =
-        parse(include_bytes!("../../../fixtures/routing/graph.json")).unwrap();
-    let mut policy: PolicyDocument =
-        parse(include_bytes!("../../../fixtures/routing/policy.json")).unwrap();
+    let mut graph: GraphDocument = parse(include_bytes!(
+        "../package-data/fixtures/routing/graph.json"
+    ))
+    .unwrap();
+    let mut policy: PolicyDocument = parse(include_bytes!(
+        "../package-data/fixtures/routing/policy.json"
+    ))
+    .unwrap();
     let mut packs: Vec<RelationPack> = vec![
-        parse(include_bytes!("../../../relation-packs/core.json")).unwrap(),
-        parse(include_bytes!("../../../relation-packs/routing.json")).unwrap(),
+        parse(include_bytes!("../package-data/relation-packs/core.json")).unwrap(),
+        parse(include_bytes!(
+            "../package-data/relation-packs/routing.json"
+        ))
+        .unwrap(),
     ];
     let subject = graph.mappings[0].id.clone();
     match code {

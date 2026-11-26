@@ -4,15 +4,21 @@ use serde_json::json;
 
 fn fixture() -> (GraphDocument, PolicyDocument) {
     (
-        parse(include_bytes!("../../../fixtures/topology/graph.json")).unwrap(),
-        parse(include_bytes!("../../../fixtures/topology/policy.json")).unwrap(),
+        parse(include_bytes!(
+            "../package-data/fixtures/topology/graph.json"
+        ))
+        .unwrap(),
+        parse(include_bytes!(
+            "../package-data/fixtures/topology/policy.json"
+        ))
+        .unwrap(),
     )
 }
 fn evaluate(graph: GraphDocument, policy: PolicyDocument) -> Result<(), CheckError> {
     let packs = [
-        include_bytes!("../../../relation-packs/core.json").as_slice(),
-        include_bytes!("../../../relation-packs/routing.json").as_slice(),
-        include_bytes!("../../../relation-packs/application-topology.json").as_slice(),
+        include_bytes!("../package-data/relation-packs/core.json").as_slice(),
+        include_bytes!("../package-data/relation-packs/routing.json").as_slice(),
+        include_bytes!("../package-data/relation-packs/application-topology.json").as_slice(),
     ]
     .into_iter()
     .map(|p| parse(p).unwrap())

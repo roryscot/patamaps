@@ -9,10 +9,10 @@ fn fixture() -> (
     PolicyDocument,
 ) {
     (
-        parse(include_bytes!("../../../fixtures/laws/graph.json")).unwrap(),
-        parse(include_bytes!("../../../fixtures/laws/pack.json")).unwrap(),
-        parse(include_bytes!("../../../fixtures/laws/request.json")).unwrap(),
-        parse(include_bytes!("../../../fixtures/laws/policy.json")).unwrap(),
+        parse(include_bytes!("../package-data/fixtures/laws/graph.json")).unwrap(),
+        parse(include_bytes!("../package-data/fixtures/laws/pack.json")).unwrap(),
+        parse(include_bytes!("../package-data/fixtures/laws/request.json")).unwrap(),
+        parse(include_bytes!("../package-data/fixtures/laws/policy.json")).unwrap(),
     )
 }
 fn assess(

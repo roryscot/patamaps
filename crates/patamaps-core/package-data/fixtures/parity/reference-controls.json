@@ -1,0 +1,2869 @@
+{
+  "schemaVersion": "1.0.0",
+  "referenceEngine": "399747a4ad05a37cd8db1cedd53048fad2175be4",
+  "originalRuntime": "v22.16.0",
+  "originalArtifacts": [
+    {
+      "path": "dist/references.js",
+      "digest": "sha256:80102a89024a795e4100341f061d8c7f4623384bd2eedb605e030e49f4a9c688"
+    }
+  ],
+  "scope": "Original reference/locator public functions over typed strings and complete nonstring type-guard categories, including ECMAScript whitespace, normalization, percent encoding and URIError. Untyped method-coercion/accessor/error details, resources, package and platform obligations remain open.",
+  "cases": [
+    {
+      "name": "reference-identifier-nonstring-0",
+      "action": {
+        "operation": "reference-identifier",
+        "input": "{\"value\":null}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": false
+      }
+    },
+    {
+      "name": "relation-identifier-nonstring-1",
+      "action": {
+        "operation": "relation-identifier",
+        "input": "{\"value\":null}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": false
+      }
+    },
+    {
+      "name": "reference-identifier-nonstring-2",
+      "action": {
+        "operation": "reference-identifier",
+        "input": "{\"value\":true}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": false
+      }
+    },
+    {
+      "name": "relation-identifier-nonstring-3",
+      "action": {
+        "operation": "relation-identifier",
+        "input": "{\"value\":true}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": false
+      }
+    },
+    {
+      "name": "reference-identifier-nonstring-4",
+      "action": {
+        "operation": "reference-identifier",
+        "input": "{\"value\":false}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": false
+      }
+    },
+    {
+      "name": "relation-identifier-nonstring-5",
+      "action": {
+        "operation": "relation-identifier",
+        "input": "{\"value\":false}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": false
+      }
+    },
+    {
+      "name": "reference-identifier-nonstring-6",
+      "action": {
+        "operation": "reference-identifier",
+        "input": "{\"value\":0}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": false
+      }
+    },
+    {
+      "name": "relation-identifier-nonstring-7",
+      "action": {
+        "operation": "relation-identifier",
+        "input": "{\"value\":0}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": false
+      }
+    },
+    {
+      "name": "reference-identifier-nonstring-8",
+      "action": {
+        "operation": "reference-identifier",
+        "input": "{\"value\":17}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": false
+      }
+    },
+    {
+      "name": "relation-identifier-nonstring-9",
+      "action": {
+        "operation": "relation-identifier",
+        "input": "{\"value\":17}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": false
+      }
+    },
+    {
+      "name": "reference-identifier-nonstring-10",
+      "action": {
+        "operation": "reference-identifier",
+        "input": "{\"value\":{}}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": false
+      }
+    },
+    {
+      "name": "relation-identifier-nonstring-11",
+      "action": {
+        "operation": "relation-identifier",
+        "input": "{\"value\":{}}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": false
+      }
+    },
+    {
+      "name": "reference-identifier-nonstring-12",
+      "action": {
+        "operation": "reference-identifier",
+        "input": "{\"value\":[]}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": false
+      }
+    },
+    {
+      "name": "relation-identifier-nonstring-13",
+      "action": {
+        "operation": "relation-identifier",
+        "input": "{\"value\":[]}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": false
+      }
+    },
+    {
+      "name": "reference-identifier-nonstring-14",
+      "action": {
+        "operation": "reference-identifier",
+        "input": "{\"value\":[\"urn:x\"]}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": false
+      }
+    },
+    {
+      "name": "relation-identifier-nonstring-15",
+      "action": {
+        "operation": "relation-identifier",
+        "input": "{\"value\":[\"urn:x\"]}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": false
+      }
+    },
+    {
+      "name": "reference-identifier-undefined",
+      "action": {
+        "operation": "reference-identifier",
+        "input": "{\"kind\":\"undefined\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": false
+      }
+    },
+    {
+      "name": "relation-identifier-undefined",
+      "action": {
+        "operation": "relation-identifier",
+        "input": "{\"kind\":\"undefined\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": false
+      }
+    },
+    {
+      "name": "reference-identifier-symbol",
+      "action": {
+        "operation": "reference-identifier",
+        "input": "{\"kind\":\"symbol\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": false
+      }
+    },
+    {
+      "name": "relation-identifier-symbol",
+      "action": {
+        "operation": "relation-identifier",
+        "input": "{\"kind\":\"symbol\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": false
+      }
+    },
+    {
+      "name": "reference-identifier-bigint",
+      "action": {
+        "operation": "reference-identifier",
+        "input": "{\"kind\":\"bigint\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": false
+      }
+    },
+    {
+      "name": "relation-identifier-bigint",
+      "action": {
+        "operation": "relation-identifier",
+        "input": "{\"kind\":\"bigint\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": false
+      }
+    },
+    {
+      "name": "reference-identifier-function",
+      "action": {
+        "operation": "reference-identifier",
+        "input": "{\"kind\":\"function\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": false
+      }
+    },
+    {
+      "name": "relation-identifier-function",
+      "action": {
+        "operation": "relation-identifier",
+        "input": "{\"kind\":\"function\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": false
+      }
+    },
+    {
+      "name": "reference-identifier-string-object",
+      "action": {
+        "operation": "reference-identifier",
+        "input": "{\"kind\":\"string-object\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": false
+      }
+    },
+    {
+      "name": "relation-identifier-string-object",
+      "action": {
+        "operation": "relation-identifier",
+        "input": "{\"kind\":\"string-object\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": false
+      }
+    },
+    {
+      "name": "reference-identifier-null-prototype",
+      "action": {
+        "operation": "reference-identifier",
+        "input": "{\"kind\":\"null-prototype\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": false
+      }
+    },
+    {
+      "name": "relation-identifier-null-prototype",
+      "action": {
+        "operation": "relation-identifier",
+        "input": "{\"kind\":\"null-prototype\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": false
+      }
+    },
+    {
+      "name": "reference-identifier-getter-object",
+      "action": {
+        "operation": "reference-identifier",
+        "input": "{\"kind\":\"getter-object\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": false
+      }
+    },
+    {
+      "name": "relation-identifier-getter-object",
+      "action": {
+        "operation": "relation-identifier",
+        "input": "{\"kind\":\"getter-object\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": false
+      }
+    },
+    {
+      "name": "reference-identifier-syntax-30",
+      "action": {
+        "operation": "reference-identifier",
+        "input": "{\"value\":\"urn:x\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": true
+      }
+    },
+    {
+      "name": "relation-identifier-syntax-31",
+      "action": {
+        "operation": "relation-identifier",
+        "input": "{\"value\":\"urn:x\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": true
+      }
+    },
+    {
+      "name": "reference-identifier-syntax-32",
+      "action": {
+        "operation": "reference-identifier",
+        "input": "{\"value\":\"urn:\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": false
+      }
+    },
+    {
+      "name": "relation-identifier-syntax-33",
+      "action": {
+        "operation": "relation-identifier",
+        "input": "{\"value\":\"urn:\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": false
+      }
+    },
+    {
+      "name": "reference-identifier-syntax-34",
+      "action": {
+        "operation": "reference-identifier",
+        "input": "{\"value\":\"URN:x\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": true
+      }
+    },
+    {
+      "name": "relation-identifier-syntax-35",
+      "action": {
+        "operation": "relation-identifier",
+        "input": "{\"value\":\"URN:x\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": false
+      }
+    },
+    {
+      "name": "reference-identifier-syntax-36",
+      "action": {
+        "operation": "reference-identifier",
+        "input": "{\"value\":\"x:y:z\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": true
+      }
+    },
+    {
+      "name": "relation-identifier-syntax-37",
+      "action": {
+        "operation": "relation-identifier",
+        "input": "{\"value\":\"x:y:z\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": false
+      }
+    },
+    {
+      "name": "reference-identifier-syntax-38",
+      "action": {
+        "operation": "reference-identifier",
+        "input": "{\"value\":\"a+.-1:thing\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": true
+      }
+    },
+    {
+      "name": "relation-identifier-syntax-39",
+      "action": {
+        "operation": "relation-identifier",
+        "input": "{\"value\":\"a+.-1:thing\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": false
+      }
+    },
+    {
+      "name": "reference-identifier-syntax-40",
+      "action": {
+        "operation": "reference-identifier",
+        "input": "{\"value\":\"1:x\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": false
+      }
+    },
+    {
+      "name": "relation-identifier-syntax-41",
+      "action": {
+        "operation": "relation-identifier",
+        "input": "{\"value\":\"1:x\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": false
+      }
+    },
+    {
+      "name": "reference-identifier-syntax-42",
+      "action": {
+        "operation": "reference-identifier",
+        "input": "{\"value\":\":x\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": false
+      }
+    },
+    {
+      "name": "relation-identifier-syntax-43",
+      "action": {
+        "operation": "relation-identifier",
+        "input": "{\"value\":\":x\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": false
+      }
+    },
+    {
+      "name": "reference-identifier-syntax-44",
+      "action": {
+        "operation": "reference-identifier",
+        "input": "{\"value\":\"a_b:x\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": false
+      }
+    },
+    {
+      "name": "relation-identifier-syntax-45",
+      "action": {
+        "operation": "relation-identifier",
+        "input": "{\"value\":\"a_b:x\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": true
+      }
+    },
+    {
+      "name": "reference-identifier-syntax-46",
+      "action": {
+        "operation": "reference-identifier",
+        "input": "{\"value\":\"a:b/c#q?x=1\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": true
+      }
+    },
+    {
+      "name": "relation-identifier-syntax-47",
+      "action": {
+        "operation": "relation-identifier",
+        "input": "{\"value\":\"a:b/c#q?x=1\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": false
+      }
+    },
+    {
+      "name": "reference-identifier-syntax-48",
+      "action": {
+        "operation": "reference-identifier",
+        "input": "{\"value\":\"https://example.test/path\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": true
+      }
+    },
+    {
+      "name": "relation-identifier-syntax-49",
+      "action": {
+        "operation": "relation-identifier",
+        "input": "{\"value\":\"https://example.test/path\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": false
+      }
+    },
+    {
+      "name": "reference-identifier-syntax-50",
+      "action": {
+        "operation": "reference-identifier",
+        "input": "{\"value\":\"a:x y\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": false
+      }
+    },
+    {
+      "name": "relation-identifier-syntax-51",
+      "action": {
+        "operation": "relation-identifier",
+        "input": "{\"value\":\"a:x y\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": false
+      }
+    },
+    {
+      "name": "reference-identifier-syntax-52",
+      "action": {
+        "operation": "reference-identifier",
+        "input": "{\"value\":\"a:x\\n\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": false
+      }
+    },
+    {
+      "name": "relation-identifier-syntax-53",
+      "action": {
+        "operation": "relation-identifier",
+        "input": "{\"value\":\"a:x\\n\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": false
+      }
+    },
+    {
+      "name": "reference-identifier-syntax-54",
+      "action": {
+        "operation": "reference-identifier",
+        "input": "{\"value\":\"a:x\\r\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": false
+      }
+    },
+    {
+      "name": "relation-identifier-syntax-55",
+      "action": {
+        "operation": "relation-identifier",
+        "input": "{\"value\":\"a:x\\r\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": false
+      }
+    },
+    {
+      "name": "reference-identifier-syntax-56",
+      "action": {
+        "operation": "reference-identifier",
+        "input": "{\"value\":\"a:x\\r\\n\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": false
+      }
+    },
+    {
+      "name": "relation-identifier-syntax-57",
+      "action": {
+        "operation": "relation-identifier",
+        "input": "{\"value\":\"a:x\\r\\n\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": false
+      }
+    },
+    {
+      "name": "reference-identifier-syntax-58",
+      "action": {
+        "operation": "reference-identifier",
+        "input": "{\"value\":\"a:x \"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": false
+      }
+    },
+    {
+      "name": "relation-identifier-syntax-59",
+      "action": {
+        "operation": "relation-identifier",
+        "input": "{\"value\":\"a:x \"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": false
+      }
+    },
+    {
+      "name": "reference-identifier-syntax-60",
+      "action": {
+        "operation": "reference-identifier",
+        "input": "{\"value\":\"a:x \"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": false
+      }
+    },
+    {
+      "name": "relation-identifier-syntax-61",
+      "action": {
+        "operation": "relation-identifier",
+        "input": "{\"value\":\"a:x \"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": false
+      }
+    },
+    {
+      "name": "reference-identifier-syntax-62",
+      "action": {
+        "operation": "reference-identifier",
+        "input": "{\"value\":\"core:maps\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": true
+      }
+    },
+    {
+      "name": "relation-identifier-syntax-63",
+      "action": {
+        "operation": "relation-identifier",
+        "input": "{\"value\":\"core:maps\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": true
+      }
+    },
+    {
+      "name": "reference-identifier-syntax-64",
+      "action": {
+        "operation": "reference-identifier",
+        "input": "{\"value\":\"core:a_1.-\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": true
+      }
+    },
+    {
+      "name": "relation-identifier-syntax-65",
+      "action": {
+        "operation": "relation-identifier",
+        "input": "{\"value\":\"core:a_1.-\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": true
+      }
+    },
+    {
+      "name": "reference-identifier-syntax-66",
+      "action": {
+        "operation": "reference-identifier",
+        "input": "{\"value\":\"Core:maps\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": true
+      }
+    },
+    {
+      "name": "relation-identifier-syntax-67",
+      "action": {
+        "operation": "relation-identifier",
+        "input": "{\"value\":\"Core:maps\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": false
+      }
+    },
+    {
+      "name": "reference-identifier-syntax-68",
+      "action": {
+        "operation": "reference-identifier",
+        "input": "{\"value\":\"core:Maps\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": true
+      }
+    },
+    {
+      "name": "relation-identifier-syntax-69",
+      "action": {
+        "operation": "relation-identifier",
+        "input": "{\"value\":\"core:Maps\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": false
+      }
+    },
+    {
+      "name": "reference-identifier-syntax-70",
+      "action": {
+        "operation": "reference-identifier",
+        "input": "{\"value\":\"co+re:maps\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": true
+      }
+    },
+    {
+      "name": "relation-identifier-syntax-71",
+      "action": {
+        "operation": "relation-identifier",
+        "input": "{\"value\":\"co+re:maps\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": false
+      }
+    },
+    {
+      "name": "reference-identifier-syntax-72",
+      "action": {
+        "operation": "reference-identifier",
+        "input": "{\"value\":\"a:b:c\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": true
+      }
+    },
+    {
+      "name": "relation-identifier-syntax-73",
+      "action": {
+        "operation": "relation-identifier",
+        "input": "{\"value\":\"a:b:c\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": false
+      }
+    },
+    {
+      "name": "reference-identifier-syntax-74",
+      "action": {
+        "operation": "reference-identifier",
+        "input": "{\"value\":\"urn:😀\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": true
+      }
+    },
+    {
+      "name": "relation-identifier-syntax-75",
+      "action": {
+        "operation": "relation-identifier",
+        "input": "{\"value\":\"urn:😀\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": false
+      }
+    },
+    {
+      "name": "reference-identifier-syntax-76",
+      "action": {
+        "operation": "reference-identifier",
+        "input": "{\"value\":\"urn:\\ud800\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": true
+      }
+    },
+    {
+      "name": "relation-identifier-syntax-77",
+      "action": {
+        "operation": "relation-identifier",
+        "input": "{\"value\":\"urn:\\ud800\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": false
+      }
+    },
+    {
+      "name": "reference-identifier-syntax-78",
+      "action": {
+        "operation": "reference-identifier",
+        "input": "{\"value\":\"urn:\\udfff\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": true
+      }
+    },
+    {
+      "name": "relation-identifier-syntax-79",
+      "action": {
+        "operation": "relation-identifier",
+        "input": "{\"value\":\"urn:\\udfff\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": false
+      }
+    },
+    {
+      "name": "identifier-whitespace-9",
+      "action": {
+        "operation": "reference-identifier",
+        "input": "{\"value\":\"urn:x\\ty\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": false
+      }
+    },
+    {
+      "name": "ambiguous-whitespace-9",
+      "action": {
+        "operation": "ambiguous-path",
+        "input": "{\"path\":\"a\\toR\\tb\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": true
+      }
+    },
+    {
+      "name": "identifier-whitespace-10",
+      "action": {
+        "operation": "reference-identifier",
+        "input": "{\"value\":\"urn:x\\ny\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": false
+      }
+    },
+    {
+      "name": "ambiguous-whitespace-10",
+      "action": {
+        "operation": "ambiguous-path",
+        "input": "{\"path\":\"a\\noR\\nb\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": true
+      }
+    },
+    {
+      "name": "identifier-whitespace-11",
+      "action": {
+        "operation": "reference-identifier",
+        "input": "{\"value\":\"urn:x\\u000by\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": false
+      }
+    },
+    {
+      "name": "ambiguous-whitespace-11",
+      "action": {
+        "operation": "ambiguous-path",
+        "input": "{\"path\":\"a\\u000boR\\u000bb\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": true
+      }
+    },
+    {
+      "name": "identifier-whitespace-12",
+      "action": {
+        "operation": "reference-identifier",
+        "input": "{\"value\":\"urn:x\\fy\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": false
+      }
+    },
+    {
+      "name": "ambiguous-whitespace-12",
+      "action": {
+        "operation": "ambiguous-path",
+        "input": "{\"path\":\"a\\foR\\fb\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": true
+      }
+    },
+    {
+      "name": "identifier-whitespace-13",
+      "action": {
+        "operation": "reference-identifier",
+        "input": "{\"value\":\"urn:x\\ry\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": false
+      }
+    },
+    {
+      "name": "ambiguous-whitespace-13",
+      "action": {
+        "operation": "ambiguous-path",
+        "input": "{\"path\":\"a\\roR\\rb\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": true
+      }
+    },
+    {
+      "name": "identifier-whitespace-32",
+      "action": {
+        "operation": "reference-identifier",
+        "input": "{\"value\":\"urn:x y\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": false
+      }
+    },
+    {
+      "name": "ambiguous-whitespace-32",
+      "action": {
+        "operation": "ambiguous-path",
+        "input": "{\"path\":\"a oR b\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": true
+      }
+    },
+    {
+      "name": "identifier-whitespace-160",
+      "action": {
+        "operation": "reference-identifier",
+        "input": "{\"value\":\"urn:x y\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": false
+      }
+    },
+    {
+      "name": "ambiguous-whitespace-160",
+      "action": {
+        "operation": "ambiguous-path",
+        "input": "{\"path\":\"a oR b\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": true
+      }
+    },
+    {
+      "name": "identifier-whitespace-5760",
+      "action": {
+        "operation": "reference-identifier",
+        "input": "{\"value\":\"urn:x y\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": false
+      }
+    },
+    {
+      "name": "ambiguous-whitespace-5760",
+      "action": {
+        "operation": "ambiguous-path",
+        "input": "{\"path\":\"a oR b\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": true
+      }
+    },
+    {
+      "name": "identifier-whitespace-6158",
+      "action": {
+        "operation": "reference-identifier",
+        "input": "{\"value\":\"urn:x᠎y\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": true
+      }
+    },
+    {
+      "name": "ambiguous-whitespace-6158",
+      "action": {
+        "operation": "ambiguous-path",
+        "input": "{\"path\":\"a᠎oR᠎b\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": false
+      }
+    },
+    {
+      "name": "identifier-whitespace-8192",
+      "action": {
+        "operation": "reference-identifier",
+        "input": "{\"value\":\"urn:x y\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": false
+      }
+    },
+    {
+      "name": "ambiguous-whitespace-8192",
+      "action": {
+        "operation": "ambiguous-path",
+        "input": "{\"path\":\"a oR b\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": true
+      }
+    },
+    {
+      "name": "identifier-whitespace-8193",
+      "action": {
+        "operation": "reference-identifier",
+        "input": "{\"value\":\"urn:x y\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": false
+      }
+    },
+    {
+      "name": "ambiguous-whitespace-8193",
+      "action": {
+        "operation": "ambiguous-path",
+        "input": "{\"path\":\"a oR b\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": true
+      }
+    },
+    {
+      "name": "identifier-whitespace-8194",
+      "action": {
+        "operation": "reference-identifier",
+        "input": "{\"value\":\"urn:x y\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": false
+      }
+    },
+    {
+      "name": "ambiguous-whitespace-8194",
+      "action": {
+        "operation": "ambiguous-path",
+        "input": "{\"path\":\"a oR b\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": true
+      }
+    },
+    {
+      "name": "identifier-whitespace-8195",
+      "action": {
+        "operation": "reference-identifier",
+        "input": "{\"value\":\"urn:x y\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": false
+      }
+    },
+    {
+      "name": "ambiguous-whitespace-8195",
+      "action": {
+        "operation": "ambiguous-path",
+        "input": "{\"path\":\"a oR b\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": true
+      }
+    },
+    {
+      "name": "identifier-whitespace-8196",
+      "action": {
+        "operation": "reference-identifier",
+        "input": "{\"value\":\"urn:x y\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": false
+      }
+    },
+    {
+      "name": "ambiguous-whitespace-8196",
+      "action": {
+        "operation": "ambiguous-path",
+        "input": "{\"path\":\"a oR b\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": true
+      }
+    },
+    {
+      "name": "identifier-whitespace-8197",
+      "action": {
+        "operation": "reference-identifier",
+        "input": "{\"value\":\"urn:x y\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": false
+      }
+    },
+    {
+      "name": "ambiguous-whitespace-8197",
+      "action": {
+        "operation": "ambiguous-path",
+        "input": "{\"path\":\"a oR b\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": true
+      }
+    },
+    {
+      "name": "identifier-whitespace-8198",
+      "action": {
+        "operation": "reference-identifier",
+        "input": "{\"value\":\"urn:x y\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": false
+      }
+    },
+    {
+      "name": "ambiguous-whitespace-8198",
+      "action": {
+        "operation": "ambiguous-path",
+        "input": "{\"path\":\"a oR b\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": true
+      }
+    },
+    {
+      "name": "identifier-whitespace-8199",
+      "action": {
+        "operation": "reference-identifier",
+        "input": "{\"value\":\"urn:x y\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": false
+      }
+    },
+    {
+      "name": "ambiguous-whitespace-8199",
+      "action": {
+        "operation": "ambiguous-path",
+        "input": "{\"path\":\"a oR b\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": true
+      }
+    },
+    {
+      "name": "identifier-whitespace-8200",
+      "action": {
+        "operation": "reference-identifier",
+        "input": "{\"value\":\"urn:x y\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": false
+      }
+    },
+    {
+      "name": "ambiguous-whitespace-8200",
+      "action": {
+        "operation": "ambiguous-path",
+        "input": "{\"path\":\"a oR b\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": true
+      }
+    },
+    {
+      "name": "identifier-whitespace-8201",
+      "action": {
+        "operation": "reference-identifier",
+        "input": "{\"value\":\"urn:x y\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": false
+      }
+    },
+    {
+      "name": "ambiguous-whitespace-8201",
+      "action": {
+        "operation": "ambiguous-path",
+        "input": "{\"path\":\"a oR b\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": true
+      }
+    },
+    {
+      "name": "identifier-whitespace-8202",
+      "action": {
+        "operation": "reference-identifier",
+        "input": "{\"value\":\"urn:x y\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": false
+      }
+    },
+    {
+      "name": "ambiguous-whitespace-8202",
+      "action": {
+        "operation": "ambiguous-path",
+        "input": "{\"path\":\"a oR b\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": true
+      }
+    },
+    {
+      "name": "identifier-whitespace-8203",
+      "action": {
+        "operation": "reference-identifier",
+        "input": "{\"value\":\"urn:x​y\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": true
+      }
+    },
+    {
+      "name": "ambiguous-whitespace-8203",
+      "action": {
+        "operation": "ambiguous-path",
+        "input": "{\"path\":\"a​oR​b\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": false
+      }
+    },
+    {
+      "name": "identifier-whitespace-8232",
+      "action": {
+        "operation": "reference-identifier",
+        "input": "{\"value\":\"urn:x y\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": false
+      }
+    },
+    {
+      "name": "ambiguous-whitespace-8232",
+      "action": {
+        "operation": "ambiguous-path",
+        "input": "{\"path\":\"a oR b\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": true
+      }
+    },
+    {
+      "name": "identifier-whitespace-8233",
+      "action": {
+        "operation": "reference-identifier",
+        "input": "{\"value\":\"urn:x y\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": false
+      }
+    },
+    {
+      "name": "ambiguous-whitespace-8233",
+      "action": {
+        "operation": "ambiguous-path",
+        "input": "{\"path\":\"a oR b\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": true
+      }
+    },
+    {
+      "name": "identifier-whitespace-8239",
+      "action": {
+        "operation": "reference-identifier",
+        "input": "{\"value\":\"urn:x y\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": false
+      }
+    },
+    {
+      "name": "ambiguous-whitespace-8239",
+      "action": {
+        "operation": "ambiguous-path",
+        "input": "{\"path\":\"a oR b\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": true
+      }
+    },
+    {
+      "name": "identifier-whitespace-8287",
+      "action": {
+        "operation": "reference-identifier",
+        "input": "{\"value\":\"urn:x y\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": false
+      }
+    },
+    {
+      "name": "ambiguous-whitespace-8287",
+      "action": {
+        "operation": "ambiguous-path",
+        "input": "{\"path\":\"a oR b\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": true
+      }
+    },
+    {
+      "name": "identifier-whitespace-12288",
+      "action": {
+        "operation": "reference-identifier",
+        "input": "{\"value\":\"urn:x　y\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": false
+      }
+    },
+    {
+      "name": "ambiguous-whitespace-12288",
+      "action": {
+        "operation": "ambiguous-path",
+        "input": "{\"path\":\"a　oR　b\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": true
+      }
+    },
+    {
+      "name": "identifier-whitespace-65279",
+      "action": {
+        "operation": "reference-identifier",
+        "input": "{\"value\":\"urn:x﻿y\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": false
+      }
+    },
+    {
+      "name": "ambiguous-whitespace-65279",
+      "action": {
+        "operation": "ambiguous-path",
+        "input": "{\"path\":\"a﻿oR﻿b\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": true
+      }
+    },
+    {
+      "name": "identifier-whitespace-133",
+      "action": {
+        "operation": "reference-identifier",
+        "input": "{\"value\":\"urn:xy\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": true
+      }
+    },
+    {
+      "name": "ambiguous-whitespace-133",
+      "action": {
+        "operation": "ambiguous-path",
+        "input": "{\"path\":\"aoRb\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": false
+      }
+    },
+    {
+      "name": "ambiguous-syntax-136",
+      "action": {
+        "operation": "ambiguous-path",
+        "input": "{\"path\":\"x or y\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": true
+      }
+    },
+    {
+      "name": "pattern-syntax-137",
+      "action": {
+        "operation": "path-pattern",
+        "input": "{\"path\":\"x or y\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": false
+      }
+    },
+    {
+      "name": "ambiguous-syntax-138",
+      "action": {
+        "operation": "ambiguous-path",
+        "input": "{\"path\":\" OR \"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": true
+      }
+    },
+    {
+      "name": "pattern-syntax-139",
+      "action": {
+        "operation": "path-pattern",
+        "input": "{\"path\":\" OR \"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": false
+      }
+    },
+    {
+      "name": "ambiguous-syntax-140",
+      "action": {
+        "operation": "ambiguous-path",
+        "input": "{\"path\":\"x\\tor\\ny\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": true
+      }
+    },
+    {
+      "name": "pattern-syntax-141",
+      "action": {
+        "operation": "path-pattern",
+        "input": "{\"path\":\"x\\tor\\ny\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": false
+      }
+    },
+    {
+      "name": "ambiguous-syntax-142",
+      "action": {
+        "operation": "ambiguous-path",
+        "input": "{\"path\":\"xor y\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": false
+      }
+    },
+    {
+      "name": "pattern-syntax-143",
+      "action": {
+        "operation": "path-pattern",
+        "input": "{\"path\":\"xor y\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": false
+      }
+    },
+    {
+      "name": "ambiguous-syntax-144",
+      "action": {
+        "operation": "ambiguous-path",
+        "input": "{\"path\":\"x ory\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": false
+      }
+    },
+    {
+      "name": "pattern-syntax-145",
+      "action": {
+        "operation": "path-pattern",
+        "input": "{\"path\":\"x ory\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": false
+      }
+    },
+    {
+      "name": "ambiguous-syntax-146",
+      "action": {
+        "operation": "ambiguous-path",
+        "input": "{\"path\":\"or\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": false
+      }
+    },
+    {
+      "name": "pattern-syntax-147",
+      "action": {
+        "operation": "path-pattern",
+        "input": "{\"path\":\"or\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": false
+      }
+    },
+    {
+      "name": "ambiguous-syntax-148",
+      "action": {
+        "operation": "ambiguous-path",
+        "input": "{\"path\":\"x or \"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": true
+      }
+    },
+    {
+      "name": "pattern-syntax-149",
+      "action": {
+        "operation": "path-pattern",
+        "input": "{\"path\":\"x or \"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": false
+      }
+    },
+    {
+      "name": "ambiguous-syntax-150",
+      "action": {
+        "operation": "ambiguous-path",
+        "input": "{\"path\":\" x OR y \"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": true
+      }
+    },
+    {
+      "name": "pattern-syntax-151",
+      "action": {
+        "operation": "path-pattern",
+        "input": "{\"path\":\" x OR y \"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": false
+      }
+    },
+    {
+      "name": "ambiguous-syntax-152",
+      "action": {
+        "operation": "ambiguous-path",
+        "input": "{\"path\":\"x otherwise y\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": false
+      }
+    },
+    {
+      "name": "pattern-syntax-153",
+      "action": {
+        "operation": "path-pattern",
+        "input": "{\"path\":\"x otherwise y\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": false
+      }
+    },
+    {
+      "name": "ambiguous-syntax-154",
+      "action": {
+        "operation": "ambiguous-path",
+        "input": "{\"path\":\"x or or y\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": true
+      }
+    },
+    {
+      "name": "pattern-syntax-155",
+      "action": {
+        "operation": "path-pattern",
+        "input": "{\"path\":\"x or or y\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": false
+      }
+    },
+    {
+      "name": "ambiguous-syntax-156",
+      "action": {
+        "operation": "ambiguous-path",
+        "input": "{\"path\":\"x​or​y\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": false
+      }
+    },
+    {
+      "name": "pattern-syntax-157",
+      "action": {
+        "operation": "path-pattern",
+        "input": "{\"path\":\"x​or​y\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": false
+      }
+    },
+    {
+      "name": "ambiguous-syntax-158",
+      "action": {
+        "operation": "ambiguous-path",
+        "input": "{\"path\":\"[x]\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": false
+      }
+    },
+    {
+      "name": "pattern-syntax-159",
+      "action": {
+        "operation": "path-pattern",
+        "input": "{\"path\":\"[x]\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": true
+      }
+    },
+    {
+      "name": "ambiguous-syntax-160",
+      "action": {
+        "operation": "ambiguous-path",
+        "input": "{\"path\":\"{x}\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": false
+      }
+    },
+    {
+      "name": "pattern-syntax-161",
+      "action": {
+        "operation": "path-pattern",
+        "input": "{\"path\":\"{x}\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": true
+      }
+    },
+    {
+      "name": "ambiguous-syntax-162",
+      "action": {
+        "operation": "ambiguous-path",
+        "input": "{\"path\":\"x*\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": false
+      }
+    },
+    {
+      "name": "pattern-syntax-163",
+      "action": {
+        "operation": "path-pattern",
+        "input": "{\"path\":\"x*\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": true
+      }
+    },
+    {
+      "name": "ambiguous-syntax-164",
+      "action": {
+        "operation": "ambiguous-path",
+        "input": "{\"path\":\"x?\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": false
+      }
+    },
+    {
+      "name": "pattern-syntax-165",
+      "action": {
+        "operation": "path-pattern",
+        "input": "{\"path\":\"x?\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": true
+      }
+    },
+    {
+      "name": "ambiguous-syntax-166",
+      "action": {
+        "operation": "ambiguous-path",
+        "input": "{\"path\":\"x]\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": false
+      }
+    },
+    {
+      "name": "pattern-syntax-167",
+      "action": {
+        "operation": "path-pattern",
+        "input": "{\"path\":\"x]\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": true
+      }
+    },
+    {
+      "name": "ambiguous-syntax-168",
+      "action": {
+        "operation": "ambiguous-path",
+        "input": "{\"path\":\"x}\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": false
+      }
+    },
+    {
+      "name": "pattern-syntax-169",
+      "action": {
+        "operation": "path-pattern",
+        "input": "{\"path\":\"x}\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": true
+      }
+    },
+    {
+      "name": "ambiguous-syntax-170",
+      "action": {
+        "operation": "ambiguous-path",
+        "input": "{\"path\":\"x\\\\y\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": false
+      }
+    },
+    {
+      "name": "pattern-syntax-171",
+      "action": {
+        "operation": "path-pattern",
+        "input": "{\"path\":\"x\\\\y\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": false
+      }
+    },
+    {
+      "name": "ambiguous-syntax-172",
+      "action": {
+        "operation": "ambiguous-path",
+        "input": "{\"path\":\"x\\ud800\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": false
+      }
+    },
+    {
+      "name": "pattern-syntax-173",
+      "action": {
+        "operation": "path-pattern",
+        "input": "{\"path\":\"x\\ud800\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": false
+      }
+    },
+    {
+      "name": "ambiguous-syntax-174",
+      "action": {
+        "operation": "ambiguous-path",
+        "input": "{\"path\":\"./a/b\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": false
+      }
+    },
+    {
+      "name": "pattern-syntax-175",
+      "action": {
+        "operation": "path-pattern",
+        "input": "{\"path\":\"./a/b\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": false
+      }
+    },
+    {
+      "name": "urn-encoding-176",
+      "action": {
+        "operation": "urn",
+        "input": "{\"namespace\":\"n:space\\ud800\",\"kind\":\"mapping\",\"value\":\"\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": "urn:n:space\ud800:mapping:"
+      }
+    },
+    {
+      "name": "urn-encoding-177",
+      "action": {
+        "operation": "urn",
+        "input": "{\"namespace\":\"n:space\\ud800\",\"kind\":\"mapping\",\"value\":\"AZaz09-_.!~*'()\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": "urn:n:space\ud800:mapping:AZaz09-_.!~*'()"
+      }
+    },
+    {
+      "name": "urn-encoding-178",
+      "action": {
+        "operation": "urn",
+        "input": "{\"namespace\":\"n:space\\ud800\",\"kind\":\"mapping\",\"value\":\"a b/c?d#e&f=g%h\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": "urn:n:space\ud800:mapping:a%20b%2Fc%3Fd%23e%26f%3Dg%25h"
+      }
+    },
+    {
+      "name": "urn-encoding-179",
+      "action": {
+        "operation": "urn",
+        "input": "{\"namespace\":\"n:space\\ud800\",\"kind\":\"mapping\",\"value\":\"é é 😀\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": "urn:n:space\ud800:mapping:%C3%A9%20e%CC%81%20%F0%9F%98%80"
+      }
+    },
+    {
+      "name": "urn-encoding-180",
+      "action": {
+        "operation": "urn",
+        "input": "{\"namespace\":\"n:space\\ud800\",\"kind\":\"mapping\",\"value\":\"\\u0000\\b\\t\\n\\r\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": "urn:n:space\ud800:mapping:%00%08%09%0A%0D"
+      }
+    },
+    {
+      "name": "urn-encoding-181",
+      "action": {
+        "operation": "urn",
+        "input": "{\"namespace\":\"n:space\\ud800\",\"kind\":\"mapping\",\"value\":\"\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": "urn:n:space\ud800:mapping:%EE%80%80%EE%80%81"
+      }
+    },
+    {
+      "name": "urn-encoding-182",
+      "action": {
+        "operation": "urn",
+        "input": "{\"namespace\":\"n:space\\ud800\",\"kind\":\"mapping\",\"value\":\"日Ω한\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": "urn:n:space\ud800:mapping:%E6%97%A5%CE%A9%ED%95%9C"
+      }
+    },
+    {
+      "name": "urn-encoding-183",
+      "action": {
+        "operation": "urn",
+        "input": "{\"namespace\":\"n:space\\ud800\",\"kind\":\"mapping\",\"value\":\"\\ud800\"}"
+      },
+      "expected": {
+        "status": "threw",
+        "error": {
+          "name": "URIError",
+          "message": "URI malformed"
+        }
+      }
+    },
+    {
+      "name": "urn-encoding-184",
+      "action": {
+        "operation": "urn",
+        "input": "{\"namespace\":\"n:space\\ud800\",\"kind\":\"mapping\",\"value\":\"\\udfff\"}"
+      },
+      "expected": {
+        "status": "threw",
+        "error": {
+          "name": "URIError",
+          "message": "URI malformed"
+        }
+      }
+    },
+    {
+      "name": "urn-encoding-185",
+      "action": {
+        "operation": "urn",
+        "input": "{\"namespace\":\"n:space\\ud800\",\"kind\":\"mapping\",\"value\":\"a\\ud800b\"}"
+      },
+      "expected": {
+        "status": "threw",
+        "error": {
+          "name": "URIError",
+          "message": "URI malformed"
+        }
+      }
+    },
+    {
+      "name": "urn-encoding-186",
+      "action": {
+        "operation": "urn",
+        "input": "{\"namespace\":\"n:space\\ud800\",\"kind\":\"mapping\",\"value\":\"𐀀\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": "urn:n:space\ud800:mapping:%F0%90%80%80"
+      }
+    },
+    {
+      "name": "repository-uri-187",
+      "action": {
+        "operation": "repository-uri",
+        "input": "{\"path\":\"./a\\\\b/../c\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": "repo://workspace/a/b/../c"
+      }
+    },
+    {
+      "name": "repository-uri-188",
+      "action": {
+        "operation": "repository-uri",
+        "input": "{\"path\":\"./a\\\\b/../c\",\"repository\":\"workspace\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": "repo://workspace/a/b/../c"
+      }
+    },
+    {
+      "name": "repository-uri-189",
+      "action": {
+        "operation": "repository-uri",
+        "input": "{\"path\":\"./a\\\\b/../c\",\"repository\":\"repository/name\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": "repo://repository%2Fname/a/b/../c"
+      }
+    },
+    {
+      "name": "repository-uri-190",
+      "action": {
+        "operation": "repository-uri",
+        "input": "{\"path\":\"./a\\\\b/../c\",\"repository\":\"a b\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": "repo://a%20b/a/b/../c"
+      }
+    },
+    {
+      "name": "repository-uri-191",
+      "action": {
+        "operation": "repository-uri",
+        "input": "{\"path\":\"./a\\\\b/../c\",\"repository\":\"é\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": "repo://%C3%A9/a/b/../c"
+      }
+    },
+    {
+      "name": "repository-uri-192",
+      "action": {
+        "operation": "repository-uri",
+        "input": "{\"path\":\"./a\\\\b/../c\",\"repository\":\"\\ud800\"}"
+      },
+      "expected": {
+        "status": "threw",
+        "error": {
+          "name": "URIError",
+          "message": "URI malformed"
+        }
+      }
+    },
+    {
+      "name": "repository-uri-193",
+      "action": {
+        "operation": "repository-uri",
+        "input": "{\"path\":\"././a\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": "repo://workspace/./a"
+      }
+    },
+    {
+      "name": "repository-uri-194",
+      "action": {
+        "operation": "repository-uri",
+        "input": "{\"path\":\"././a\",\"repository\":\"workspace\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": "repo://workspace/./a"
+      }
+    },
+    {
+      "name": "repository-uri-195",
+      "action": {
+        "operation": "repository-uri",
+        "input": "{\"path\":\"././a\",\"repository\":\"repository/name\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": "repo://repository%2Fname/./a"
+      }
+    },
+    {
+      "name": "repository-uri-196",
+      "action": {
+        "operation": "repository-uri",
+        "input": "{\"path\":\"././a\",\"repository\":\"a b\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": "repo://a%20b/./a"
+      }
+    },
+    {
+      "name": "repository-uri-197",
+      "action": {
+        "operation": "repository-uri",
+        "input": "{\"path\":\"././a\",\"repository\":\"é\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": "repo://%C3%A9/./a"
+      }
+    },
+    {
+      "name": "repository-uri-198",
+      "action": {
+        "operation": "repository-uri",
+        "input": "{\"path\":\"././a\",\"repository\":\"\\ud800\"}"
+      },
+      "expected": {
+        "status": "threw",
+        "error": {
+          "name": "URIError",
+          "message": "URI malformed"
+        }
+      }
+    },
+    {
+      "name": "repository-uri-199",
+      "action": {
+        "operation": "repository-uri",
+        "input": "{\"path\":\"/absolute//path\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": "repo://workspace//absolute//path"
+      }
+    },
+    {
+      "name": "repository-uri-200",
+      "action": {
+        "operation": "repository-uri",
+        "input": "{\"path\":\"/absolute//path\",\"repository\":\"workspace\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": "repo://workspace//absolute//path"
+      }
+    },
+    {
+      "name": "repository-uri-201",
+      "action": {
+        "operation": "repository-uri",
+        "input": "{\"path\":\"/absolute//path\",\"repository\":\"repository/name\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": "repo://repository%2Fname//absolute//path"
+      }
+    },
+    {
+      "name": "repository-uri-202",
+      "action": {
+        "operation": "repository-uri",
+        "input": "{\"path\":\"/absolute//path\",\"repository\":\"a b\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": "repo://a%20b//absolute//path"
+      }
+    },
+    {
+      "name": "repository-uri-203",
+      "action": {
+        "operation": "repository-uri",
+        "input": "{\"path\":\"/absolute//path\",\"repository\":\"é\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": "repo://%C3%A9//absolute//path"
+      }
+    },
+    {
+      "name": "repository-uri-204",
+      "action": {
+        "operation": "repository-uri",
+        "input": "{\"path\":\"/absolute//path\",\"repository\":\"\\ud800\"}"
+      },
+      "expected": {
+        "status": "threw",
+        "error": {
+          "name": "URIError",
+          "message": "URI malformed"
+        }
+      }
+    },
+    {
+      "name": "repository-uri-205",
+      "action": {
+        "operation": "repository-uri",
+        "input": "{\"path\":\"../a/b\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": "repo://workspace/../a/b"
+      }
+    },
+    {
+      "name": "repository-uri-206",
+      "action": {
+        "operation": "repository-uri",
+        "input": "{\"path\":\"../a/b\",\"repository\":\"workspace\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": "repo://workspace/../a/b"
+      }
+    },
+    {
+      "name": "repository-uri-207",
+      "action": {
+        "operation": "repository-uri",
+        "input": "{\"path\":\"../a/b\",\"repository\":\"repository/name\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": "repo://repository%2Fname/../a/b"
+      }
+    },
+    {
+      "name": "repository-uri-208",
+      "action": {
+        "operation": "repository-uri",
+        "input": "{\"path\":\"../a/b\",\"repository\":\"a b\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": "repo://a%20b/../a/b"
+      }
+    },
+    {
+      "name": "repository-uri-209",
+      "action": {
+        "operation": "repository-uri",
+        "input": "{\"path\":\"../a/b\",\"repository\":\"é\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": "repo://%C3%A9/../a/b"
+      }
+    },
+    {
+      "name": "repository-uri-210",
+      "action": {
+        "operation": "repository-uri",
+        "input": "{\"path\":\"../a/b\",\"repository\":\"\\ud800\"}"
+      },
+      "expected": {
+        "status": "threw",
+        "error": {
+          "name": "URIError",
+          "message": "URI malformed"
+        }
+      }
+    },
+    {
+      "name": "repository-uri-211",
+      "action": {
+        "operation": "repository-uri",
+        "input": "{\"path\":\"a b/[x]/{y}/*.ts\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": "repo://workspace/a%20b/%5Bx%5D/%7By%7D/*.ts"
+      }
+    },
+    {
+      "name": "repository-uri-212",
+      "action": {
+        "operation": "repository-uri",
+        "input": "{\"path\":\"a b/[x]/{y}/*.ts\",\"repository\":\"workspace\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": "repo://workspace/a%20b/%5Bx%5D/%7By%7D/*.ts"
+      }
+    },
+    {
+      "name": "repository-uri-213",
+      "action": {
+        "operation": "repository-uri",
+        "input": "{\"path\":\"a b/[x]/{y}/*.ts\",\"repository\":\"repository/name\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": "repo://repository%2Fname/a%20b/%5Bx%5D/%7By%7D/*.ts"
+      }
+    },
+    {
+      "name": "repository-uri-214",
+      "action": {
+        "operation": "repository-uri",
+        "input": "{\"path\":\"a b/[x]/{y}/*.ts\",\"repository\":\"a b\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": "repo://a%20b/a%20b/%5Bx%5D/%7By%7D/*.ts"
+      }
+    },
+    {
+      "name": "repository-uri-215",
+      "action": {
+        "operation": "repository-uri",
+        "input": "{\"path\":\"a b/[x]/{y}/*.ts\",\"repository\":\"é\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": "repo://%C3%A9/a%20b/%5Bx%5D/%7By%7D/*.ts"
+      }
+    },
+    {
+      "name": "repository-uri-216",
+      "action": {
+        "operation": "repository-uri",
+        "input": "{\"path\":\"a b/[x]/{y}/*.ts\",\"repository\":\"\\ud800\"}"
+      },
+      "expected": {
+        "status": "threw",
+        "error": {
+          "name": "URIError",
+          "message": "URI malformed"
+        }
+      }
+    },
+    {
+      "name": "repository-uri-217",
+      "action": {
+        "operation": "repository-uri",
+        "input": "{\"path\":\"a%2Fb?x=1#y\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": "repo://workspace/a%252Fb%3Fx%3D1%23y"
+      }
+    },
+    {
+      "name": "repository-uri-218",
+      "action": {
+        "operation": "repository-uri",
+        "input": "{\"path\":\"a%2Fb?x=1#y\",\"repository\":\"workspace\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": "repo://workspace/a%252Fb%3Fx%3D1%23y"
+      }
+    },
+    {
+      "name": "repository-uri-219",
+      "action": {
+        "operation": "repository-uri",
+        "input": "{\"path\":\"a%2Fb?x=1#y\",\"repository\":\"repository/name\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": "repo://repository%2Fname/a%252Fb%3Fx%3D1%23y"
+      }
+    },
+    {
+      "name": "repository-uri-220",
+      "action": {
+        "operation": "repository-uri",
+        "input": "{\"path\":\"a%2Fb?x=1#y\",\"repository\":\"a b\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": "repo://a%20b/a%252Fb%3Fx%3D1%23y"
+      }
+    },
+    {
+      "name": "repository-uri-221",
+      "action": {
+        "operation": "repository-uri",
+        "input": "{\"path\":\"a%2Fb?x=1#y\",\"repository\":\"é\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": "repo://%C3%A9/a%252Fb%3Fx%3D1%23y"
+      }
+    },
+    {
+      "name": "repository-uri-222",
+      "action": {
+        "operation": "repository-uri",
+        "input": "{\"path\":\"a%2Fb?x=1#y\",\"repository\":\"\\ud800\"}"
+      },
+      "expected": {
+        "status": "threw",
+        "error": {
+          "name": "URIError",
+          "message": "URI malformed"
+        }
+      }
+    },
+    {
+      "name": "repository-uri-223",
+      "action": {
+        "operation": "repository-uri",
+        "input": "{\"path\":\"é/😀/日\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": "repo://workspace/%C3%A9/%F0%9F%98%80/%E6%97%A5"
+      }
+    },
+    {
+      "name": "repository-uri-224",
+      "action": {
+        "operation": "repository-uri",
+        "input": "{\"path\":\"é/😀/日\",\"repository\":\"workspace\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": "repo://workspace/%C3%A9/%F0%9F%98%80/%E6%97%A5"
+      }
+    },
+    {
+      "name": "repository-uri-225",
+      "action": {
+        "operation": "repository-uri",
+        "input": "{\"path\":\"é/😀/日\",\"repository\":\"repository/name\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": "repo://repository%2Fname/%C3%A9/%F0%9F%98%80/%E6%97%A5"
+      }
+    },
+    {
+      "name": "repository-uri-226",
+      "action": {
+        "operation": "repository-uri",
+        "input": "{\"path\":\"é/😀/日\",\"repository\":\"a b\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": "repo://a%20b/%C3%A9/%F0%9F%98%80/%E6%97%A5"
+      }
+    },
+    {
+      "name": "repository-uri-227",
+      "action": {
+        "operation": "repository-uri",
+        "input": "{\"path\":\"é/😀/日\",\"repository\":\"é\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": "repo://%C3%A9/%C3%A9/%F0%9F%98%80/%E6%97%A5"
+      }
+    },
+    {
+      "name": "repository-uri-228",
+      "action": {
+        "operation": "repository-uri",
+        "input": "{\"path\":\"é/😀/日\",\"repository\":\"\\ud800\"}"
+      },
+      "expected": {
+        "status": "threw",
+        "error": {
+          "name": "URIError",
+          "message": "URI malformed"
+        }
+      }
+    },
+    {
+      "name": "repository-uri-229",
+      "action": {
+        "operation": "repository-uri",
+        "input": "{\"path\":\"a\\n\\r\\t\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": "repo://workspace/a%0A%0D%09"
+      }
+    },
+    {
+      "name": "repository-uri-230",
+      "action": {
+        "operation": "repository-uri",
+        "input": "{\"path\":\"a\\n\\r\\t\",\"repository\":\"workspace\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": "repo://workspace/a%0A%0D%09"
+      }
+    },
+    {
+      "name": "repository-uri-231",
+      "action": {
+        "operation": "repository-uri",
+        "input": "{\"path\":\"a\\n\\r\\t\",\"repository\":\"repository/name\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": "repo://repository%2Fname/a%0A%0D%09"
+      }
+    },
+    {
+      "name": "repository-uri-232",
+      "action": {
+        "operation": "repository-uri",
+        "input": "{\"path\":\"a\\n\\r\\t\",\"repository\":\"a b\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": "repo://a%20b/a%0A%0D%09"
+      }
+    },
+    {
+      "name": "repository-uri-233",
+      "action": {
+        "operation": "repository-uri",
+        "input": "{\"path\":\"a\\n\\r\\t\",\"repository\":\"é\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": "repo://%C3%A9/a%0A%0D%09"
+      }
+    },
+    {
+      "name": "repository-uri-234",
+      "action": {
+        "operation": "repository-uri",
+        "input": "{\"path\":\"a\\n\\r\\t\",\"repository\":\"\\ud800\"}"
+      },
+      "expected": {
+        "status": "threw",
+        "error": {
+          "name": "URIError",
+          "message": "URI malformed"
+        }
+      }
+    },
+    {
+      "name": "repository-uri-235",
+      "action": {
+        "operation": "repository-uri",
+        "input": "{\"path\":\"\\ud800/path\"}"
+      },
+      "expected": {
+        "status": "threw",
+        "error": {
+          "name": "URIError",
+          "message": "URI malformed"
+        }
+      }
+    },
+    {
+      "name": "repository-uri-236",
+      "action": {
+        "operation": "repository-uri",
+        "input": "{\"path\":\"\\ud800/path\",\"repository\":\"workspace\"}"
+      },
+      "expected": {
+        "status": "threw",
+        "error": {
+          "name": "URIError",
+          "message": "URI malformed"
+        }
+      }
+    },
+    {
+      "name": "repository-uri-237",
+      "action": {
+        "operation": "repository-uri",
+        "input": "{\"path\":\"\\ud800/path\",\"repository\":\"repository/name\"}"
+      },
+      "expected": {
+        "status": "threw",
+        "error": {
+          "name": "URIError",
+          "message": "URI malformed"
+        }
+      }
+    },
+    {
+      "name": "repository-uri-238",
+      "action": {
+        "operation": "repository-uri",
+        "input": "{\"path\":\"\\ud800/path\",\"repository\":\"a b\"}"
+      },
+      "expected": {
+        "status": "threw",
+        "error": {
+          "name": "URIError",
+          "message": "URI malformed"
+        }
+      }
+    },
+    {
+      "name": "repository-uri-239",
+      "action": {
+        "operation": "repository-uri",
+        "input": "{\"path\":\"\\ud800/path\",\"repository\":\"é\"}"
+      },
+      "expected": {
+        "status": "threw",
+        "error": {
+          "name": "URIError",
+          "message": "URI malformed"
+        }
+      }
+    },
+    {
+      "name": "repository-uri-240",
+      "action": {
+        "operation": "repository-uri",
+        "input": "{\"path\":\"\\ud800/path\",\"repository\":\"\\ud800\"}"
+      },
+      "expected": {
+        "status": "threw",
+        "error": {
+          "name": "URIError",
+          "message": "URI malformed"
+        }
+      }
+    },
+    {
+      "name": "repository-uri-241",
+      "action": {
+        "operation": "repository-uri",
+        "input": "{\"path\":\"a/\\udfff\"}"
+      },
+      "expected": {
+        "status": "threw",
+        "error": {
+          "name": "URIError",
+          "message": "URI malformed"
+        }
+      }
+    },
+    {
+      "name": "repository-uri-242",
+      "action": {
+        "operation": "repository-uri",
+        "input": "{\"path\":\"a/\\udfff\",\"repository\":\"workspace\"}"
+      },
+      "expected": {
+        "status": "threw",
+        "error": {
+          "name": "URIError",
+          "message": "URI malformed"
+        }
+      }
+    },
+    {
+      "name": "repository-uri-243",
+      "action": {
+        "operation": "repository-uri",
+        "input": "{\"path\":\"a/\\udfff\",\"repository\":\"repository/name\"}"
+      },
+      "expected": {
+        "status": "threw",
+        "error": {
+          "name": "URIError",
+          "message": "URI malformed"
+        }
+      }
+    },
+    {
+      "name": "repository-uri-244",
+      "action": {
+        "operation": "repository-uri",
+        "input": "{\"path\":\"a/\\udfff\",\"repository\":\"a b\"}"
+      },
+      "expected": {
+        "status": "threw",
+        "error": {
+          "name": "URIError",
+          "message": "URI malformed"
+        }
+      }
+    },
+    {
+      "name": "repository-uri-245",
+      "action": {
+        "operation": "repository-uri",
+        "input": "{\"path\":\"a/\\udfff\",\"repository\":\"é\"}"
+      },
+      "expected": {
+        "status": "threw",
+        "error": {
+          "name": "URIError",
+          "message": "URI malformed"
+        }
+      }
+    },
+    {
+      "name": "repository-uri-246",
+      "action": {
+        "operation": "repository-uri",
+        "input": "{\"path\":\"a/\\udfff\",\"repository\":\"\\ud800\"}"
+      },
+      "expected": {
+        "status": "threw",
+        "error": {
+          "name": "URIError",
+          "message": "URI malformed"
+        }
+      }
+    },
+    {
+      "name": "repository-uri-247",
+      "action": {
+        "operation": "repository-uri",
+        "input": "{\"path\":\"\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": "repo://workspace/"
+      }
+    },
+    {
+      "name": "repository-uri-248",
+      "action": {
+        "operation": "repository-uri",
+        "input": "{\"path\":\"\",\"repository\":\"workspace\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": "repo://workspace/"
+      }
+    },
+    {
+      "name": "repository-uri-249",
+      "action": {
+        "operation": "repository-uri",
+        "input": "{\"path\":\"\",\"repository\":\"repository/name\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": "repo://repository%2Fname/"
+      }
+    },
+    {
+      "name": "repository-uri-250",
+      "action": {
+        "operation": "repository-uri",
+        "input": "{\"path\":\"\",\"repository\":\"a b\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": "repo://a%20b/"
+      }
+    },
+    {
+      "name": "repository-uri-251",
+      "action": {
+        "operation": "repository-uri",
+        "input": "{\"path\":\"\",\"repository\":\"é\"}"
+      },
+      "expected": {
+        "status": "observed",
+        "value": "repo://%C3%A9/"
+      }
+    },
+    {
+      "name": "repository-uri-252",
+      "action": {
+        "operation": "repository-uri",
+        "input": "{\"path\":\"\",\"repository\":\"\\ud800\"}"
+      },
+      "expected": {
+        "status": "threw",
+        "error": {
+          "name": "URIError",
+          "message": "URI malformed"
+        }
+      }
+    }
+  ]
+}

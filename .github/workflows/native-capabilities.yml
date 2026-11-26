@@ -85,6 +85,7 @@ jobs:
         run: rustup toolchain install 1.99.0 --profile minimal
       - name: Verify the in-memory Rust graph library
         run: |
+          python3 -B scripts/core_package_assets.py
           cargo +1.99.0 test --locked -p patamaps-core --test in_memory_library
           cargo +1.99.0 test --locked -p patamaps-core --no-default-features --test in_memory_library
           cargo +1.99.0 test --locked -p patamaps-core --test registry --test legacy_pack
