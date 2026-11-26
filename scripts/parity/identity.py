@@ -39,7 +39,11 @@ def identities(root: Path):
     profile = re.search(r'pub const PROFILE: &str = "([^"]+)";', contracts)[1]
     collator = root / "vendor/icu_collator"
     digest = hashlib.sha256()
-    for path in sorted(p for p in collator.rglob("*") if p.is_file()):
+    inputs = [collator / "Cargo.toml", collator / "build.rs"]
+    for directory in ["src", "data"]:
+        if (collator / directory).is_dir():
+            inputs.extend(p for p in (collator / directory).rglob("*") if p.is_file())
+    for path in sorted(inputs):
         raw = path.read_bytes()
         digest.update(path.relative_to(collator).as_posix().encode())
         digest.update(b"\0")

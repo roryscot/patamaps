@@ -1,3 +1,12 @@
+# Patamaps ICU4X collation fork
+
+`patamaps-icu-collator` is a maintained fork of ICU4X `icu_collator` 2.2.1 for
+Patamaps' bounded legacy UTF-16 compatibility. It is not an official ICU4X release.
+The upstream Unicode-3.0 license remains unchanged. See `PATAMAPS-PATCH.md` for
+the patch, source digest and limits, and `PATAMAPS-UPSTREAM.json` for provenance.
+
+---
+
 # icu_collator [![crates.io](https://img.shields.io/crates/v/icu_collator)](https://crates.io/crates/icu_collator)
 
 <!-- cargo-rdme start -->

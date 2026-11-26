@@ -24,5 +24,18 @@
     "reservationReleased": true,
     "warning": "rust-objcopy could not load libLLVM while stripping debug information",
     "limitations": "Path-dependent example; does not verify published crate, default-feature Norway tests, or existing application."
+  },
+  "packageInvestigation": {
+    "sourceBaseCommit": "8ce895badbc4fbfef877a77be33cc390187f948b",
+    "offlineSingleCrate": "failed: local registry index missing icu_collator",
+    "onlineSingleCrate": "failed: patamaps-contracts 0.1.0 unavailable on crates.io; alpha.1 exists",
+    "twoCrateArchives": "created locally without publication",
+    "nativeOnlyExtractedConsumer": "passed",
+    "defaultExtractedConsumer": "failed: contracts build script expected external vendored collation",
+    "stagedForkExperiment": "passed default and native-only focused core tests and default consumer after modifying isolated package copies to use existing published patched fork",
+    "candidateCheckout": "uses published fork identity and package-local contracts test assets; static asset, offline metadata and format checks passed",
+    "norwayCandidateTests": "not run; 500 MB reservation refused at retained allocation 99594142305 bytes",
+    "reservationReleased": true,
+    "limits": "Staged experiment is not a pass for the unmodified contracts archive. No crate published."
   }
 }

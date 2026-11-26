@@ -24,7 +24,7 @@ pub use legacy_json::{LegacyPackJson, LegacyReadOnlyJson};
 pub use legacy_stable::LegacyOrderedJson;
 #[doc(hidden)]
 #[cfg(feature = "legacy-compat")]
-pub const LEGACY_COLLATOR_SOURCE_DIGEST: &str = env!("PATAMAPS_COLLATOR_SOURCE_DIGEST");
+pub const LEGACY_COLLATOR_SOURCE_DIGEST: &str = icu_collator::PATAMAPS_SOURCE_DIGEST;
 pub use model::*;
 pub use semantic::*;
 
