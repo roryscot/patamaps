@@ -1,0 +1,25 @@
+{
+  "sourceCommit": "fa2c4523bc72946184284d417315844b5ee9da2c",
+  "workflowRun": "https://github.com/roryscot/patamaps/actions/runs/45727991870",
+  "workflowConclusion": "failure",
+  "failedJob": "Cross-stack Linux image and browser (amd64)",
+  "failedStep": "Install an exact package and rerun the mixed workflow",
+  "observedFailure": "PackageScopeError: Linked evidence budget exceeded",
+  "separateCompletedJobs": {
+    "Linux x86_64": "success",
+    "Linux aarch64": "success"
+  },
+  "localClosureAnalysis": {
+    "sourceCommit": "728619df54f1da196bcfdb29df2ba0b3b5c593212eb28a",
+    "method": "In-memory Markdown seed selection and recursive evidence closure, with analysis-only higher traversal limits; no package created and installed limits unchanged",
+    "linkedEvidenceFiles": 530,
+    "linkedEvidenceBytes": 26734732,
+    "existingMaximumFiles": 512,
+    "existingMaximumBytes": 33554432,
+    "byteIdenticalRedundantNames": 2,
+    "reachablePlans": 24,
+    "allPlans": 25,
+    "linkedEvidenceFilesWithOnlyReachablePlans": 530
+  },
+  "limitations": "Local analysis does not exactly reproduce CI acceptance-output exclusion. It supports a file-count cause but does not establish the precise CI closure count. Package bounds and evidence were not changed; installed cross-stack workflow remains failed."
+}

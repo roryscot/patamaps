@@ -1719,3 +1719,12 @@ generator, which exited on the frozen JSON syntax error. The retained build
 refused preparation and preserved the previous selection; no activation was
 performed. [Scoped receipt](../acceptance/project-adoption/current-owner-retained-next-20261026/w1-clone-generator-failure-20261125.json).
 Race, cancellation and parent-death checks remain open.
+
+
+On 2026-11-25 the cross-stack installed-package job failed because the linked
+evidence closure exceeded the package's existing 512-file bound. The two Linux
+native-acceptance jobs passed separately. Local in-memory analysis found 530
+linked files and 26,734,732 bytes; the exact CI closure may differ because it
+excludes its current acceptance output. Two byte-identical extra names and
+packaging only linked plans do not close the gap. Bounds and evidence remain
+unchanged; the installed workflow remains failed. [Analysis](../acceptance/project-adoption/package-evidence-closure-20261125.json).
