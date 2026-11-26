@@ -28,6 +28,16 @@
     "inventoryBytes": 96225133,
     "inventorySha256": "7de7be12fb87f920b52a442bd2085e9ba191ebc0bc150a485d081744c668693c",
     "status": "review only; no deletion authorized",
-    "limitations": "Every candidate matched its retained snapshot by SHA-256. Two sample restores used identical small source contents; full original-path restoration and off-disk backup unverified."
+    "limitations": "Every candidate matched its retained snapshot by SHA-256. Two sample restores used identical small source contents; full original-path restoration and off-disk backup unverified.",
+    "watcherRunnerFinding": "Earlier foreground watcher runner uses the installed full 4 GB policy and does not invoke the separate owned-volume query used by the newer guard. The 1.69 GB proposed cleanup was sized for the 2.2 GB case contract, not established sufficient for that earlier runner.",
+    "preparedAdapter": {
+      "scope": "One exact frozen watcher update; execs existing owned-volume-aware guard with 2.2 GB declaration.",
+      "adapterSha256": "9fecd6fb3cecc25384336854ff4ef9f2632725a541d9df17a9bd9fbf80796f3d",
+      "frozenSha256": "3baf194007cc5eb2c5e86c5e16f060799db3423fa3dcbe221197c629a6aad1b7",
+      "checks": "Valid specification and altered-command, wrong-directory and changed-reservation refusals; 10 bound files, 944 source files and selected pointer verified.",
+      "guardRun": false,
+      "watchCancellationRun": false,
+      "limits": "Adapter alone is not a qualified cancellation harness; no release or stop behavior verified."
+    }
   }
 }
