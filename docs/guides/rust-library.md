@@ -4,6 +4,35 @@ This is the first library-first example. The focused tests, in-memory example an
 existing graph model and checked kernel directly; it does not execute the CLI,
 read a graph file, generate code, or start an application.
 
+## Add the library to a project
+
+For a local checkout, add a path dependency to your project's `Cargo.toml`.
+Adjust the path so it points to `crates/patamaps-core` in your Patamaps
+checkout; Cargo resolves it relative to the manifest containing this entry:
+
+```toml
+[dependencies]
+patamaps-core = { path = "../patamaps/crates/patamaps-core", default-features = false }
+```
+
+This checkout requires Rust 1.99 or newer. The path uses the checkout's source,
+so its API follows that checkout; pin the checkout revision for repeatable
+builds. The example disables legacy compatibility for this dependency. Cargo
+feature unification can still enable it if another dependency requests it.
+
+Start with the complete
+[standalone consumer](../../examples/rust-library-consumer/src/main.rs): it
+creates two entities and a mapping, declares the relation and provenance,
+checks the graph, queries it, and makes a checked edit. Copy and adapt those
+records to your project's explicit domain; draft records become a
+`CheckedGraph` only after validation succeeds. No service or CLI is required.
+
+The path-dependent example does not establish that the same API exists in a
+published crate version. Check the version's documentation and release before
+replacing the path with a registry dependency.
+
+## Run the checkout examples
+
 From this checkout, run the example and its focused tests:
 
 ```sh
