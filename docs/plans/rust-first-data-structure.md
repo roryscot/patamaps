@@ -150,3 +150,7 @@ Linux CI subsequently passed the relation lookup in default and native-only
 focused tests, the standalone consumer and existing regression checks at
 source f89d278. [Receipt](../acceptance/library/relation-lookup-linux-f89d278.json).
 This does not resolve Norway's retained reservation or verify a published package.
+
+Both Linux native-acceptance architecture jobs passed at source fa2c452 after
+scoping the imported example's dead-code allowance to the test module. The
+earlier failures and the separate Norway reservation remain. [Receipt](../acceptance/library/clippy-fix-linux-fa2c452.json).
