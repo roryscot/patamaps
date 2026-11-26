@@ -21,5 +21,17 @@
     "allPlans": 25,
     "linkedEvidenceFilesWithOnlyReachablePlans": 530
   },
-  "limitations": "Local analysis does not exactly reproduce CI acceptance-output exclusion. It supports a file-count cause but does not establish the precise CI closure count. Package bounds and evidence were not changed; installed cross-stack workflow remains failed."
+  "limitations": "Local analysis does not exactly reproduce CI acceptance-output exclusion. It supports a file-count cause but does not establish the precise CI closure count. Package bounds and evidence were not changed; installed cross-stack workflow remains failed.",
+  "diagnosticRerun": {
+    "sourceCommit": "bb4b0c3e3acf1120910aa8355a3c4a5e5209b31b",
+    "workflowRun": "https://github.com/roryscot/patamaps/actions/runs/45730283237",
+    "job": "Cross-stack Linux image and browser (amd64)",
+    "completedSteps": {
+      "Linux image, HTTP and browser": "success",
+      "MetaMap decisions with Linux release observations": "success",
+      "installed exact package": "failure"
+    },
+    "error": "Linked evidence file limit exceeded (513 > 512)",
+    "interpretation": "The first attempted file above the cap was the 513th; this is not the full closure count."
+  }
 }
