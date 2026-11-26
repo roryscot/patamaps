@@ -1,8 +1,10 @@
 # Use Patamaps in a Rust program
 
-This is the first library-first example. The focused tests, in-memory example and standalone path-dependent consumer passed Linux CI at source 760378b. Two earlier Norway runs stopped under the shared-disk guard. A later native-only focused run passed four tests on Norway on 2026-11-25; the earlier failures remain recorded. It uses the
-existing graph model and checked kernel directly; it does not execute the CLI,
-read a graph file, generate code, or start an application.
+Use the existing graph model and checked kernel directly in your Rust program.
+The example does not execute the CLI, read a graph file, generate code, or start
+an application. Five native-only focused tests and the standalone path consumer
+passed on Norway; earlier interrupted runs remain recorded in the
+[Rust-first plan](../plans/rust-first-data-structure.md).
 
 ## Add the library to a project
 
@@ -27,9 +29,14 @@ checks the graph, queries it, and makes a checked edit. Copy and adapt those
 records to your project's explicit domain; draft records become a
 `CheckedGraph` only after validation succeeds. No service or CLI is required.
 
-The path-dependent example does not establish that the same API exists in a
-published crate version. Check the version's documentation and release before
-replacing the path with a registry dependency.
+The current checkout's `0.1.0` core and contracts crates are **not published**.
+Do not replace this path with a registry version expecting the current API.
+Linux CI at source `5612baf` built fresh archives of both crates and ran default
+and native-only consumers against the extracted packages, with the extracted
+contracts crate supplied through a Cargo patch. It also ran focused core and
+contracts tests from those archives. This checks package contents; it does not
+verify a registry release or an existing application integration. The separate
+Norway test of the packaged candidate was refused by the storage guard.
 
 ## Run the checkout examples
 

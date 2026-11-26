@@ -176,3 +176,10 @@ including relation lookup, and the standalone path-dependent consumer. Its
 500 MB reservation released; the debug-symbol stripping warning persisted.
 The earlier guard failure remains preserved. This does not verify a published
 crate or an existing application.
+
+On Linux CI at source 5612baf, fresh local 0.1.0 archives of core and contracts
+passed default and native-only extracted-package consumers, focused core tests,
+and contracts tests. The consumer resolves contracts through a local Cargo
+patch to the extracted archive. Neither current crate was published. Norway
+admission for the candidate was refused by the existing retention limit; the
+CI result does not turn that refusal into a Norway pass.
