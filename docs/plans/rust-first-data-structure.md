@@ -170,3 +170,9 @@ scoped recovery passed three complete ownership checks, including its final
 locked check. The failed guard and original request were archived; the
 unrelated database remained running. This recovery did not turn the earlier
 interrupted Norway library tests into a pass.
+
+A later Norway retry passed all five native-only in-memory library tests,
+including relation lookup, and the standalone path-dependent consumer. Its
+500 MB reservation released; the debug-symbol stripping warning persisted.
+The earlier guard failure remains preserved. This does not verify a published
+crate or an existing application.

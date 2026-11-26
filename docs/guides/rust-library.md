@@ -83,5 +83,5 @@ Legacy APIs and legacy registry import methods are unavailable in that mode;
 ordinary native registry and checked graph operations remain intended to work.
 Cargo can unify features if another dependency enables legacy compatibility.
 The feature split passed focused Linux CI at source e4ccd68 and is not yet a
-published release. The four native-only focused tests also passed on Norway;
+published release. The five native-only focused tests and standalone consumer passed on Norway;
 that local result does not verify a published package.
