@@ -25,7 +25,7 @@ a passed fixture or metadata observation is not general support.
 
 The [current adoption checkpoint](adoption-remaining-gates.md#current-checkpoint-2026-11-17)
 records passing fresh Seeder baseline and edited builds and their no-op checks.
-The generator-failure case has since passed; race, cancellation and parent-death remain open. The
+The generator-failure and source-change race cases have since passed; cancellation and parent-death remain open. The
 user's [Rust-first library plan](rust-first-data-structure.md) is the product
 priority; this integration backlog remains separate.
 
@@ -1728,3 +1728,10 @@ linked files and 26,734,732 bytes; the exact CI closure may differ because it
 excludes its current acceptance output. Two byte-identical extra names and
 packaging only linked plans do not close the gap. Bounds and evidence remain
 unchanged; the installed workflow remains failed. [Analysis](../acceptance/project-adoption/package-evidence-closure-20261125.json).
+
+
+The retained Seeder source-change race passed on 2026-11-26 UTC: an isolated
+graph changed while the owned Next.js build was active, and the pinned CLI
+refused publication while preserving the prior selection. The reservation
+released. [Scoped receipt](../acceptance/project-adoption/current-owner-retained-next-20261026/w1-clone-race-20261126.json).
+Cancellation, parent-death and other adoption requirements remain open.

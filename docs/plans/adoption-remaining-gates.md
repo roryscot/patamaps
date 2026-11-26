@@ -813,3 +813,10 @@ selection remained unchanged. The cap was 441,077,857 bytes short of the
 2.2 GB reservation. [Receipt](../acceptance/project-adoption/current-owner-retained-next-20261026/w1-clone-race-admission-20261125.json).
 A hash-verified candidate-copy inventory is prepared for review; no deletion
 has been performed. The race remains unverified.
+
+
+The source-change race later passed on 2026-11-26 UTC against the pinned
+Norway CLI: the build observed an isolated graph edit, refused publication,
+preserved the prior selection and released its reservation. [Receipt](../acceptance/project-adoption/current-owner-retained-next-20261026/w1-clone-race-20261126.json).
+The preceding admission refusal remains historical; cancellation and
+parent-death remain open.

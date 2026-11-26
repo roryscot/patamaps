@@ -163,3 +163,10 @@ open-project-file and matching-container counts were zero. The match appeared
 in the process command/environment listing, but its relationship to the held
 workload is not established. Earlier recovery refusals remain preserved, the
 reservation remains held, and no service or safeguard was changed.
+
+
+The held native reservation was subsequently released after the original
+scoped recovery passed three complete ownership checks, including its final
+locked check. The failed guard and original request were archived; the
+unrelated database remained running. This recovery did not turn the earlier
+interrupted Norway library tests into a pass.
