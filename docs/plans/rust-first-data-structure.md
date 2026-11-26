@@ -154,3 +154,12 @@ This does not resolve Norway's retained reservation or verify a published packag
 Both Linux native-acceptance architecture jobs passed at source fa2c452 after
 scoping the imported example's dead-code allowance to the test module. The
 earlier failures and the separate Norway reservation remain. [Receipt](../acceptance/library/clippy-fix-linux-fa2c452.json).
+
+
+A later read-only recovery diagnostic preserved the ownership predicates and
+stopped before lease release. Its exact process snapshot identified a newly
+started Docker CLI child of Docker Desktop as the project-command match; token,
+open-project-file and matching-container counts were zero. The match appeared
+in the process command/environment listing, but its relationship to the held
+workload is not established. Earlier recovery refusals remain preserved, the
+reservation remains held, and no service or safeguard was changed.
