@@ -145,3 +145,8 @@ shared-pool growth guard fired during admission; its reservation was retained
 after ownership stop could not be confirmed by the guard. Normal recovery
 refused incomplete ownership. The failed run remains preserved; no test pass
 is claimed until separate verification completes.
+
+Linux CI subsequently passed the relation lookup in default and native-only
+focused tests, the standalone consumer and existing regression checks at
+source f89d278. [Receipt](../acceptance/library/relation-lookup-linux-f89d278.json).
+This does not resolve Norway's retained reservation or verify a published package.
