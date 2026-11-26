@@ -1,3 +1,5 @@
+// The example entry point is used when run directly, not when imported here.
+#[allow(dead_code)]
 #[path = "../examples/in_memory_graph.rs"]
 mod example;
 
