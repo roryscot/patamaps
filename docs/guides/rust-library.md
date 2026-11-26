@@ -81,6 +81,31 @@ without the CLI. Its native-only Linux CI check passed at source e4ccd68. It als
 Norway on 2026-11-25. These path-dependency checks do not verify a published
 package.
 
+## Queries, errors and limits
+
+`entity`, `mapping`, and `relation` return borrowed records, or `None` when the
+identity is not present. `incident(entity_id)` borrows mappings in document
+order, with each mapping returned once even if that entity occurs on both sides;
+an unknown identity yields an empty iterator. The returned references cannot
+outlive the checked graph. `document()` and `packs()` also expose borrowed,
+immutable data. Iterate the document's vectors when you need all records in
+their stored order.
+
+`trace` includes an existing starting entity at depth zero; an unknown start
+returns an empty result. The depth limit is 64 and a higher value produces a
+`CheckError`. An empty relation filter allows every relation. Validation
+returns `CheckError`, whose issues have codes and optional subject identities;
+inspect those fields instead of relying on the displayed error sentence.
+
+The current checked-graph profile allows up to 200,000 entities, 100,000
+mappings, 1,024 authorities, 1,000,000 total source and target endpoint
+occurrences, 64 relation packs, and 4,096 relations across packs. An authority
+may list at most 128 facts. Metadata has separate structural limits, and other
+validation rules may reject a graph below these counts. If diagnostics exceed
+1,000, the list is truncated and includes a `DIAGNOSTIC_LIMIT` error; the
+graph remains rejected. These are current profile bounds, not performance
+promises or a guarantee that a graph near the bounds fits available memory.
+
 ## Optional legacy compatibility
 
 The core crate enables its legacy-compat feature by default to preserve existing
