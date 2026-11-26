@@ -44,5 +44,24 @@
     "status": "passed",
     "verification": "Fresh local 0.1.0 core and contracts archives; default and native-only consumers, extracted core focused tests, and contracts tests",
     "limitations": "Linux CI; contracts resolved from the extracted local archive via a Cargo patch. Neither 0.1.0 crate was published; Norway candidate admission was refused."
+  },
+  "postCleanupCandidateNorway": {
+    "sourceCommit": "541ffdab7e680a6d77ffb075300374fa591c51cf",
+    "date": "2026-11-26",
+    "hostArchitecture": "x86_64",
+    "status": "passed",
+    "commands": [
+      "cargo test --locked --offline -p patamaps-contracts --tests --jobs 2",
+      "cargo test --locked --offline -p patamaps-core --test in_memory_library --test registry --test legacy_pack --test legacy_semantic --jobs 2",
+      "cargo test --locked --offline -p patamaps-core --no-default-features --test in_memory_library --jobs 2",
+      "cargo run --locked --offline --manifest-path examples/rust-library-consumer/Cargo.toml --jobs 2",
+      "cargo generate-lockfile --offline and cargo run --locked --offline --jobs 2 for a separate projection identity consumer"
+    ],
+    "identity": "Independent Python compiler identity matched the projection consumer",
+    "configuration": "Existing target directory; dev and test debug information disabled, incremental compilation disabled; guarded 500000000-byte maximum growth",
+    "guardExitCode": 0,
+    "reservationReleased": true,
+    "warning": "rust-objcopy stripping debug information failed with SIGABRT; commands exited zero",
+    "limits": "Checkout/path-based tests only; this does not establish an existing application integration or a published 0.1.0 release. Earlier failures remain preserved."
   }
 }
