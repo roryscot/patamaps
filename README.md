@@ -12,7 +12,7 @@ newer application's `Cargo.toml`:
 
 ```toml
 [dependencies]
-patamaps-core = { git = "https://github.com/roryscot/patamaps.git", rev = "40a0ef969af41b7b17938c8083b20ee0a48f5421", default-features = false }
+patamaps-core = { git = "https://github.com/roryscot/patamaps.git", rev = "303c9f53d3565984a5dd0da5ccfd931febc2f448", default-features = false }
 ```
 
 The [Rust library guide](docs/guides/rust-library.md) explains how to create,

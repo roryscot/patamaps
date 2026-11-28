@@ -14,15 +14,17 @@ revision in your project's `Cargo.toml`:
 
 ```toml
 [dependencies]
-patamaps-core = { git = "https://github.com/roryscot/patamaps.git", rev = "40a0ef969af41b7b17938c8083b20ee0a48f5421", default-features = false }
+patamaps-core = { git = "https://github.com/roryscot/patamaps.git", rev = "303c9f53d3565984a5dd0da5ccfd931febc2f448", default-features = false }
 ```
 
 Use Rust 1.99 or newer and commit your application's `Cargo.lock` to retain the
 resolved dependencies. Cargo needs network access for the first fetch; checking
-and querying an in-memory graph do not need network access. The pinned revision compiled as a Git dependency in a hosted Intel macOS Rust
-desktop application and passed its focused integration tests, including the
-validation-issue accessor. The application UI was not exercised. An earlier
-Git fetch on Norway was interrupted by its storage guard. A Git revision
+and querying an in-memory graph do not need network access. An earlier revision (`40a0ef9`) compiled as a Git dependency in a hosted Intel
+macOS Rust application and passed focused integration tests. The newer pinned
+revision includes the registry fix, tested from the checkout and packaged
+archives; its exact Git fetch has not been separately tested. The application
+UI was not exercised, and an earlier Git fetch on Norway was interrupted by its
+guard. A Git revision
 is a source snapshot, not a published release or stability guarantee.
 
 Alternatively, for a local checkout, add a path dependency to your project's `Cargo.toml`.
@@ -70,6 +72,12 @@ already present in a published crate version.
 
 For indexed relation lookup, `graph.mappings_for_relation(id)` borrows matching
 mappings in the document's order; unknown or unused relations yield no items.
+
+`RelationRegistry::new(packs)` checks all supplied native packs together, so an
+importer can appear before its exact dependency. Pack order is preserved, and
+identical repeated packs are retained once. `register_pack` checks each
+incremental addition, so its dependencies must already be registered. The
+separate legacy-import snapshot retains its existing registration-order rules.
 
 The example creates a draft GraphDocument, entities, an explicit relation
 definition and a mapping with explicit cardinality, lossiness and provenance.
