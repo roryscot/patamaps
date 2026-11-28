@@ -13,8 +13,8 @@ when moving both crates to the same tested revision:
 
 ```toml
 [dependencies]
-patamaps-core = { git = "https://github.com/roryscot/patamaps.git", rev = "5d1b594153337966220ce14d929812614c687459" }
-patamaps-contracts = { git = "https://github.com/roryscot/patamaps.git", rev = "5d1b594153337966220ce14d929812614c687459" }
+patamaps-core = { git = "https://github.com/roryscot/patamaps.git", rev = "40a0ef969af41b7b17938c8083b20ee0a48f5421" }
+patamaps-contracts = { git = "https://github.com/roryscot/patamaps.git", rev = "40a0ef969af41b7b17938c8083b20ee0a48f5421" }
 ```
 
 If the consumer only uses the native in-memory graph, it can use just

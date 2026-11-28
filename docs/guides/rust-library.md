@@ -14,15 +14,16 @@ revision in your project's `Cargo.toml`:
 
 ```toml
 [dependencies]
-patamaps-core = { git = "https://github.com/roryscot/patamaps.git", rev = "5d1b594153337966220ce14d929812614c687459", default-features = false }
+patamaps-core = { git = "https://github.com/roryscot/patamaps.git", rev = "40a0ef969af41b7b17938c8083b20ee0a48f5421", default-features = false }
 ```
 
 Use Rust 1.99 or newer and commit your application's `Cargo.lock` to retain the
 resolved dependencies. Cargo needs network access for the first fetch; checking
-and querying an in-memory graph do not need network access. A fresh Intel macOS
-CI build compiled this pinned dependency in a Rust desktop application and ran
-two integration-module tests. The application UI was not exercised, and a
-separate fetch on Norway was interrupted by its storage guard. A Git revision
+and querying an in-memory graph do not need network access. An earlier snapshot (`5d1b594`) compiled as a Git dependency in an Intel macOS
+desktop application and passed its focused integration tests. The pinned newer
+revision adds validation-issue accessors, tested on Norway through a local path;
+its Git fetch has not been independently exercised. The application UI was not
+exercised, and a separate Git fetch on Norway was interrupted by its guard. A Git revision
 is a source snapshot, not a published release or stability guarantee.
 
 Alternatively, for a local checkout, add a path dependency to your project's `Cargo.toml`.
@@ -114,7 +115,8 @@ their stored order.
 `trace` includes an existing starting entity at depth zero; an unknown start
 returns an empty result. The depth limit is 64 and a higher value produces a
 `CheckError`. An empty relation filter allows every relation. Validation
-returns `CheckError`, whose issues have codes and optional subject identities;
+returns `CheckError`, whose issues have codes and optional subject identities.
+Use `error.issues()` to borrow them or `error.into_issues()` to take ownership;
 inspect those fields instead of relying on the displayed error sentence.
 
 The current checked-graph profile allows up to 200,000 entities, 100,000
