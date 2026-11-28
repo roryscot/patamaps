@@ -126,6 +126,9 @@ validation rules may reject a graph below these counts. If diagnostics exceed
 graph remains rejected. These are current profile bounds, not performance
 promises or a guarantee that a graph near the bounds fits available memory.
 
+Moving an existing consumer from the published alpha? See the
+[versioned migration guide](rust-library-migration.md).
+
 ## Optional legacy compatibility
 
 The core crate enables its legacy-compat feature by default to preserve existing
