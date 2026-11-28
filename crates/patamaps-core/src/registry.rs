@@ -8,6 +8,24 @@ use serde_json::Value;
 #[cfg(feature = "legacy-compat")]
 use std::collections::HashSet;
 
+fn pack_conflict(existing: &RelationPack, pack: &RelationPack) -> CheckError {
+    CheckError(vec![Issue::error(
+        "RELATION_PACK_CONFLICT",
+        if existing.version != pack.version {
+            format!(
+                "Relation pack {} is already registered at version {}",
+                pack.id, existing.version
+            )
+        } else {
+            format!(
+                "Relation pack {}@{} conflicts with its registered definition",
+                pack.id, pack.version
+            )
+        },
+        &pack.id,
+    )])
+}
+
 /// Registration preserves pack and relation order. Each mutation validates the
 /// complete proposed registry before replacing the previous state.
 #[derive(Debug, Clone)]
@@ -18,6 +36,8 @@ pub struct RelationRegistry {
 }
 
 impl RelationRegistry {
+    /// Validates the complete supplied set, allowing imports in either order.
+    /// Identical repeated packs are retained once, at their first position.
     pub fn new(packs: impl IntoIterator<Item = RelationPack>) -> Result<Self, CheckError> {
         let mut registry = Self {
             packs: Vec::new(),
@@ -25,8 +45,23 @@ impl RelationRegistry {
             legacy: None,
         };
         for pack in packs {
-            registry.register_pack(pack)?;
+            if let Some(existing) = registry.get_pack(&pack.id) {
+                if existing == &pack {
+                    continue;
+                }
+                return Err(pack_conflict(existing, &pack));
+            }
+            if registry.packs.len() == crate::graph::MAX_PACKS {
+                return Err(CheckError(vec![Issue::error(
+                    "GRAPH_RESOURCE_LIMIT",
+                    "Graph exceeds the declared draft profile limits",
+                    "urn:patamaps:registry:validation",
+                )]));
+            }
+            registry.packs.push(pack);
         }
+        let empty: GraphDocument = parse(br#"{"schemaVersion":"0.1.0","documentType":"graph","id":"urn:patamaps:registry:validation","namespace":"registry","entities":[],"mappings":[],"authorities":[]}"#)?;
+        CheckedGraph::check(empty, registry.packs.clone())?;
         Ok(registry)
     }
 
@@ -131,21 +166,7 @@ impl RelationRegistry {
             if existing == &pack {
                 return Ok(());
             }
-            return Err(CheckError(vec![Issue::error(
-                "RELATION_PACK_CONFLICT",
-                if existing.version != pack.version {
-                    format!(
-                        "Relation pack {} is already registered at version {}",
-                        pack.id, existing.version
-                    )
-                } else {
-                    format!(
-                        "Relation pack {}@{} conflicts with its registered definition",
-                        pack.id, pack.version
-                    )
-                },
-                &pack.id,
-            )]));
+            return Err(pack_conflict(existing, &pack));
         }
         let mut proposed = self.packs.clone();
         proposed.push(pack);

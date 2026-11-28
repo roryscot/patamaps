@@ -7,6 +7,7 @@ pub const MAX_MAPPINGS: usize = 100_000;
 pub const MAX_AUTHORITIES: usize = 1_024;
 pub const MAX_ENDPOINTS: usize = 1_000_000;
 pub const MAX_RELATIONS: usize = 4_096;
+pub(crate) const MAX_PACKS: usize = 64;
 pub const MAX_ISSUES: usize = 1_000;
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Serialize)]
@@ -292,7 +293,7 @@ impl CheckedGraph {
             || document.mappings.len() > MAX_MAPPINGS
             || document.authorities.len() > MAX_AUTHORITIES
             || endpoints > MAX_ENDPOINTS
-            || packs.len() > 64
+            || packs.len() > MAX_PACKS
             || packs.iter().map(|p| p.relations.len()).sum::<usize>() > MAX_RELATIONS
             || document.authorities.iter().any(|a| a.facts.len() > 128)
         {
