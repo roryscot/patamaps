@@ -27,5 +27,24 @@
   "reservationReleased": true,
   "ciRun": "https://github.com/roryscot/patamaps/actions/runs/46102620301",
   "ciResult": "passed: independently packaged archives had the same SHA-256 and sizes; extracted default and native-only consumers and focused core/contracts tests passed",
-  "localDirectory": ".tools/rust-crate-candidates-20261127/target/package"
+  "localDirectory": ".tools/rust-crate-candidates-20261127/target/package",
+  "norwayFrozenConsumers": {
+    "status": "passed",
+    "hostArchitecture": "x86_64",
+    "sourceCommit": "23fc1a64b9061937037eb655ad4204ebfaddfbe6",
+    "commands": [
+      "cargo generate-lockfile --offline",
+      "cargo run --locked --offline --jobs 2"
+    ],
+    "featureModes": [
+      "native-only",
+      "default"
+    ],
+    "archiveHashesRechecked": true,
+    "consumer": "standalone in-memory example from the source commit; each mode generated its own lockfile and ran",
+    "configuration": "fresh extracted archives and consumer workspaces; reused target directory; debug disabled and incremental compilation disabled",
+    "reservationReleased": true,
+    "warning": "rust-objcopy debug stripping failed because libLLVM was unavailable; both commands exited zero",
+    "limits": "Contracts are patched to the extracted local archive. This does not verify a published registry installation, the full application, or an optimized build."
+  }
 }
