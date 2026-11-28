@@ -88,8 +88,10 @@ newer pinned Git revision's exact fetch has not been independently exercised.
 
 The [library guide](../guides/rust-library.md) and
 [migration guide](../guides/rust-library-migration.md) describe usage and
-limits. The local `0.1.0` archives in the [archive record](../acceptance/library/local-crate-archives-20261127.json)
-predate the registry fix and are not current candidates. No `0.1.0` core or
+limits. The earlier local `0.1.0` archives predate the registry fix. New
+[local archives](../acceptance/library/local-crate-archives-20261128.json)
+include the fix and passed native-only and default consumer checks on Norway;
+they have not been installed from a public registry. No `0.1.0` core or
 contracts release has been published. Publication is a separate action. The
 original project-adoption goal remains open in the
 [integration backlog](integration-enhancement-backlog.md); its broader gates
