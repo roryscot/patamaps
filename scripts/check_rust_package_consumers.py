@@ -76,6 +76,12 @@ def main():
             report["archives"].append({"name": name, "sha256": hashlib.sha256(raw).hexdigest(),
                                        "bytes": len(raw)})
             unpack(archive, unpacked, package_root)
+            for metadata in ("LICENSE", "NOTICE", "README.md"):
+                packaged = unpacked / package_root / metadata
+                expected = ROOT / "crates" / name / metadata
+                if not packaged.is_file() or packaged.read_bytes() != expected.read_bytes():
+                    raise ValueError(f"missing or changed {metadata} in {name} archive")
+            report["completed"].append(f"{name}-metadata")
 
         core = unpacked / f"patamaps-core-{version}"
         contracts = unpacked / f"patamaps-contracts-{version}"
