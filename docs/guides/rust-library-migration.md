@@ -57,3 +57,8 @@ snapshot's native-only consumer and a scoped Rust desktop integration have been
 built and tested, but the UI and every existing consumer have not been tested.
 The [library guide](rust-library.md) records the relevant test and footprint
 limits. No crate publication or automatic data conversion is implied.
+
+A [limited Norway comparison](../acceptance/library/alpha-wire-compat-20261127.json)
+passed on three graph fixtures, one relation pack, and three strict rejection
+cases using the retained alpha source and current native-only contracts. It
+does not replace application-specific migration checks.

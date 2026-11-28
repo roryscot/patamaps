@@ -1,0 +1,25 @@
+{
+  "status": "passed",
+  "currentSourceCommit": "2d49e399957d1bdf49dc8bbff1b3fc6be67ea853",
+  "alphaVersion": "0.1.0-alpha.1",
+  "alphaSource": "retained alpha checkout; its 10 src/build.rs files matched the retained public crate archive byte-for-byte",
+  "alphaPublicArchiveSha256": "7a926ecb8efe7e0fe5254187ac48fe6f9907543594fc8119f027ddd7bfc925d5",
+  "testSource": "alpha-wire-compat-20261127.rs",
+  "testSourceSha256": "c908ca342d7a3e72b5aa1e4b0dcef817020276fb61f7a17626cf8c40deb69197",
+  "consumerLockSha256": "b7960791b9b217dbd87fa0fbcb6798a5e12825b043e5dfe42182c1e383f82751",
+  "fixtures": {
+    "fixtures/routing/graph.json": "c3f812727d666b10fc3a230f3f70427ca27413dd77e3fa97080c63d3f4016477",
+    "fixtures/topology/graph.json": "462a52f310dc1c634297d3ef924ce0bb22cb7b82e220147c142ca2d3b1049431",
+    "fixtures/laws/graph.json": "c565b59c76000d5d09dc3fed1c0e621c05f3590335c4b7c049e3208df1a3866d",
+    "fixtures/laws/pack.json": "ae937ce752b7932ae596ce72b89351084fe7f399f8f577b70f2b35f48ea1c789"
+  },
+  "checks": "Three graph fixtures and one relation pack parsed in both versions, canonical typed output matched and cross-parsed; duplicate key, explicit-null optional field and unknown field rejected by both",
+  "command": "cargo test --locked --offline --jobs 2 in a standalone workspace with alpha and current contracts path dependencies",
+  "currentFeatures": "default-features=false",
+  "testCount": 2,
+  "exitCode": 0,
+  "hostArchitecture": "x86_64",
+  "reservationReleased": true,
+  "warning": "rust-objcopy debug stripping failed because libLLVM was unavailable; tests exited zero",
+  "limitations": "Finite fixture check, not a full wire, semantic, policy, performance or API compatibility proof. The copied test source uses Norway-specific absolute fixture paths. Alpha dependencies came from its retained checkout, not a fresh registry installation."
+}
