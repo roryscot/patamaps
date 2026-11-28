@@ -84,8 +84,11 @@ evaluation are separate.
 Rust consumers can depend on patamaps-core and access draft records through
 patamaps_core::model. Projection, code generation, CLI commands, application
 builds and framework integrations are separate workflows, not required to run
-this in-memory example. The library still has its own Rust dependencies; their
-compile footprint has not yet been measured.
+this in-memory example. The library still has its own Rust dependencies. One fresh-target native-only
+consumer build on Norway produced about 111 MB of allocated target files in
+22.4 seconds, using cached registry sources and debug information disabled.
+See the [measurement and limits](../acceptance/library/native-consumer-footprint-norway-20261127.json);
+it is not a comparison or a fully cold build.
 
 The [Rust-first plan](../plans/rust-first-data-structure.md) tracks the remaining
 API, packaging and external-consumer work. See the example source for the
