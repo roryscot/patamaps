@@ -1,0 +1,10 @@
+--- a/run-project.mjs
++++ b/run-project.mjs
+@@ -11,0 +12 @@
++import { checkRetentionHeadroom, retentionInventory } from "./retention_admission.mjs";
+@@ -53,0 +55 @@
++    if (project.root === config.projects.patamaps.root) checkRetentionHeadroom(retained, policy);
+@@ -101,0 +104,3 @@
++        inventory: project.root === config.projects.patamaps.root
++          ? retentionInventory(engine.retainedBytes, policy)
++          : engine.retainedBytes,

@@ -1,0 +1,113 @@
+{
+  "status": "passed-independently-verified-next-deployment-refusals",
+  "recordedAt": "2026-10-20T23:44:55.298013+00:00",
+  "nativeReservationId": "ec66704d-7614-446e-8719-cb5253823ba5",
+  "managedReservationId": "a96986e9-673c-4940-8d68-71e08ed53e85",
+  "executorExitCode": 0,
+  "containersConfirmedStopped": [
+    {
+      "id": "d35bb365b34eb29170e1bfb7977da990de84e01bd9268ad32d2e1bc73698f603",
+      "running": false,
+      "paused": false,
+      "restarting": false,
+      "pid": 0
+    }
+  ],
+  "linuxBuildEstablished": true,
+  "linuxBuildId": "88oi95a5YM6PvetCCaAoU",
+  "linuxBuildReceiptSha256": "a4cb438d9e3edb3e89f2680ec8917496b381a4641b27954c326bb167099a81eb",
+  "nodeSha256": "5796fd9700e83170bc7ddfdf7f18858c794a9f91cb39dd6f9e95060b292f2563",
+  "sourceRuntimeFiles": 2480,
+  "sourceAndCopyInventoriesMatched": true,
+  "controls": {
+    "status": "passed-actual-next-deployment-refusal-scope",
+    "cases": [
+      {
+        "name": "baseline-public-html",
+        "result": "passed"
+      },
+      {
+        "name": "nonserver-executable",
+        "result": "readiness-refused",
+        "exitCode": 0
+      },
+      {
+        "name": "missing-build-configuration",
+        "result": "startup-refused",
+        "exitCode": 1,
+        "variantSha256": "a0b1d5f2ec87cba8cb2d7a223d93a5b54ec1bee1652803d8f52a34416ca04e60"
+      },
+      {
+        "name": "wrong-listener",
+        "result": "required-listener-refused-alternate-html-confirmed",
+        "requiredPort": 32139,
+        "actualPort": 32140
+      },
+      {
+        "name": "post-negative-public-html",
+        "result": "passed"
+      }
+    ],
+    "applicationAcceptance": false,
+    "architectureRuntimeRefusal": false,
+    "staleContractRefusal": false,
+    "linuxBuildId": "88oi95a5YM6PvetCCaAoU",
+    "linuxBuildReceiptSha256": "a4cb438d9e3edb3e89f2680ec8917496b381a4641b27954c326bb167099a81eb",
+    "nodeSha256": "5796fd9700e83170bc7ddfdf7f18858c794a9f91cb39dd6f9e95060b292f2563",
+    "runtimeElfMachine": 62,
+    "allOwnedChildrenStopped": true,
+    "expectedListenerStopped": true,
+    "alternateListenerStopped": true
+  },
+  "controlsReceiptSha256": "e1870c61c652639b6f69a2e25c15ad6548d0b3b4e0f7f3e6a7d12c18a645044e",
+  "stagingReceiptSha256": "26ad917bd8b78c5866940ce901cd2b0e17b74da241e529b43c21a80c257c302a",
+  "driverDigests": {
+    "stage.py": "bfec6167d3809fc1ed4444786cc9c605a9de4eed328b0bcad7d06455acfc154f",
+    "controls.mjs": "773d04eb748f09fb36bc3faf5c93301d0436cd2f124be0ac17945aae8a847e82"
+  },
+  "originalSelectionPointerSha256": "1ee0a2f059331b3ed78eebaab8f796ca920f909da2c0f6cd61569852d6391e95",
+  "originalSelectionPointerUnchanged": true,
+  "originalStagedRuntimeBytesUnchanged": true,
+  "limits": {
+    "cpu": 2,
+    "memoryBytes": 1610612736,
+    "diskBytes": 536870912
+  },
+  "image": "sha256:69f919497cada9a8611f3de61df902d9f94bf20f84552ef5bd93125c38608ef9",
+  "sourceMount": false,
+  "network": "none",
+  "readOnlyRoot": true,
+  "originalAggregationFailure": {
+    "preserved": true,
+    "receiptSha256": "00e305b651816c4138a606b47195a4d280a8fa5356f36666e5189410f9ea5bce",
+    "diagnosticSha256": "5cd4dde55cea49bc97ef169915b0a04fdd5d1844e13b1098750a814865a54ec9",
+    "reason": "Collector expected redundant linuxBuildEstablished field absent from runtime receipt; independent verifier binds actual prior successful Linux build receipt instead."
+  },
+  "verificationDriverSha256": "baf9d7e9f397c4727c257c644d5fdb96ea94e6ba39ed3ba077df45a483e68173",
+  "workloadRerun": false,
+  "applicationAcceptance": false,
+  "architectureRuntimeRefusal": false,
+  "staleContractRefusal": false,
+  "filesDeleted": 0,
+  "independentVerificationReceiptSha256": "e562d009df8bd3f5fe62416c355222513abcd61c293324578df9649d8f295756",
+  "enforcementInspection": {
+    "status": "passed-independent-stopped-container-configuration-and-fixed-volume-inspection",
+    "containerId": "d35bb365b34eb29170e1bfb7977da990de84e01bd9268ad32d2e1bc73698f603",
+    "cpuNano": 2000000000,
+    "memoryBytes": 1610612736,
+    "swapTotalBytes": 1610612736,
+    "pidsLimit": 256,
+    "readOnlyRoot": true,
+    "network": "none",
+    "sourceMount": false,
+    "registeredQuotaMountOnly": true,
+    "imageBytes": 535822336,
+    "filesystemBytes": 535781376,
+    "diskReservationBytes": 536870912,
+    "kernelLimitsRemeasured": false,
+    "stopped": true
+  },
+  "enforcementReceiptSha256": "b14fe77a72e88513bc32c835cf5ae295106b19f8688e5ca0a19aed1f321a61cb",
+  "scope": "Actual existing Linux-built Next16.1.6 standalone deployment refusal controls; no fixture rebuild or application release acceptance.",
+  "privateSourcePublished": false
+}

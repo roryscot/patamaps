@@ -1,0 +1,256 @@
+{
+  "sourceRevision": "afce3d06575762748df1d7335bb2420acdfd1e77",
+  "ownerCommit": "c61d51a57120abbbca65d4cb4a432c1cef9343bb",
+  "reservationId": "5900c6e4-cc24-4bc0-8dae-353b128852ac",
+  "reservationFinished": true,
+  "leaseReleased": true,
+  "guardId": "c4daa785-ccee-4314-b96b-d19d81735730",
+  "guardRecordDigest": "sha256:ca19f1ab1ab0af71236ec33eca535f79b00b647e19dcfbabc4e45fc01388272b",
+  "supervisorExitCode": 1,
+  "guardExitCode": 1,
+  "guardCompleted": false,
+  "sourceInputsRehashed": 387,
+  "interpreterExecutablesRehashed": 2,
+  "allFrozenInputsMatched": true,
+  "protectedDatabaseStartIdentityUnchanged": true,
+  "filesDeleted": 0,
+  "policyChanged": false,
+  "fullGoalComplete": false,
+  "endpointAlreadyAccepted": true,
+  "realHttpAuthenticationAccepted": false,
+  "browserAccepted": false,
+  "status": "verified-isolated-owner-auth-failure",
+  "driverExecuted": true,
+  "driverStatus": "failed-isolated-original-owner-auth",
+  "servicesStarted": 2,
+  "migrateExitCode": 0,
+  "seedExitCode": 0,
+  "httpCases": [
+    {
+      "name": "missing-session",
+      "status": 401,
+      "expected": 401,
+      "passed": true
+    },
+    {
+      "name": "invalid-session",
+      "status": 401,
+      "expected": 401,
+      "passed": true
+    },
+    {
+      "name": "wrong-password",
+      "status": 401,
+      "expected": 401,
+      "passed": true
+    },
+    {
+      "name": "allowed-real-login",
+      "status": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "allowed-current-user",
+      "status": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "allowed-permissions",
+      "status": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "allowed-permission-check",
+      "status": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "denied-real-login",
+      "status": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "denied-current-user",
+      "status": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "denied-permissions",
+      "status": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "denied-permission-check",
+      "status": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "expired-session",
+      "status": 401,
+      "expected": 401,
+      "passed": true
+    }
+  ],
+  "apiRequestsExecuted": 12,
+  "apiStopped": true,
+  "ownedContainerStopped": true,
+  "ownedDataPreserved": true,
+  "rawReceiptDigest": "sha256:1abbdadd9da53a982da8b007506d254912f966e92974d1336a88c3d6993e97ad",
+  "browserProjectsExecuted": 0,
+  "browserProjectCounts": null,
+  "browserGroupsStopped": null,
+  "nextProducerPathsAndArtifactBytesRestored": true,
+  "failureType": "RuntimeError",
+  "failurePreserved": true,
+  "sandboxControls": {
+    "migrate": {
+      "otherPortDenied": true,
+      "outsideWriteDenied": true,
+      "dotenvReadDenied": true
+    },
+    "seed": {
+      "otherPortDenied": true,
+      "outsideWriteDenied": true,
+      "dotenvReadDenied": true
+    },
+    "server": {
+      "otherPortDenied": true,
+      "outsideWriteDenied": true,
+      "dotenvReadDenied": true
+    }
+  },
+  "inspectedOwnedContainerLimits": {
+    "containerId": "fd8fbddd1906d8ea76a0b6e16f34159c0b1d89b1861495d73621bcdf9dceb890",
+    "cpu": 1,
+    "memoryBytes": 536870912,
+    "swapBytes": 0,
+    "pids": 128,
+    "readonlyRoot": true,
+    "logDriver": "none",
+    "publishedLoopbackPort": 18866,
+    "ownedVolume": "patamaps-auth-data-102fe42bcd7fd0068e4eee76dd110e39",
+    "ownedDataContainerPath": "/var/lib/postgresql/data/owned",
+    "nativeExclusive": true,
+    "maximumObservedOwnedDataBytes": 536870912
+  },
+  "priorAdmissionPreserved": true,
+  "approvedSeparateCleanupFilesDeleted": 216,
+  "applicationAttemptAuthorized": 1,
+  "automaticPhaseRetriesExecuted": 0,
+  "actualLaunchRevision": "afce3d06575762748df1d7335bb2420acdfd1e77",
+  "frozenManifestSha256": "6b4429be14bf4c78b4522258e1adcf0b51ca1ebee382d8a5b8eb97ee101c7365",
+  "all442FrozenInputBindingsMatched": true,
+  "priorFailureFilesRehashed": 255,
+  "ownedContainerInspectedStopped": true,
+  "ownedContainerLimitsIndependentlyMatched": true,
+  "ownedDataVolumePreserved": true,
+  "failureCodeSha256": "sha256:dadfe78310785512ee054abb22ed13399c3103a3d55f6f5909b9dc3052048ff5",
+  "testPortListenerCountsAfterRun": {
+    "18765": 0,
+    "18866": 0,
+    "13000": 0
+  },
+  "testPortsHaveNoListeners": true,
+  "databasePort": 18866,
+  "profileSyntaxExitCode": 0,
+  "profileSyntaxStdoutBytes": 0,
+  "profileSyntaxStderrBytes": 0,
+  "profilePrecheckBeforeDatabaseSatisfied": true,
+  "databaseTCPReadinessAccepted": true,
+  "startupCaptureStreams": {
+    "postgres-startup.stdout.private": {
+      "bytes": 2399,
+      "digest": "sha256:eda439a77b54d942e58db6a67f4f8bafa672dc75e7409261016e8dcecbd2af91",
+      "privateMode": true
+    },
+    "postgres-startup.stderr.private": {
+      "bytes": 1650,
+      "digest": "sha256:3701c3b325606bc126af6a2355aa4922fcea600a06e6e38acee0bfd13ceabf82",
+      "privateMode": true
+    },
+    "postgres-readiness.private.jsonl": {
+      "bytes": 3720,
+      "digest": "sha256:583bca76c8e2c855d46cd0e94284dce67b01986c952799882c65c1391a197094",
+      "privateMode": true
+    }
+  },
+  "readinessTraceRecords": 13,
+  "publishedTCPConnectedObserved": true,
+  "readinessExitCodes": [
+    2,
+    2,
+    2,
+    2,
+    0
+  ],
+  "startupAttachmentAndWorkerGroupStopped": true,
+  "ownedStartupAttachPid": 71268,
+  "authorizationSource": "docs/plans/2026-11-04-adoption-closeout.md; actual owner autonomous-continuation instruction",
+  "autonomousFollowupImplementationAndChecksAuthorized": true,
+  "dataOwnershipSetupExecuted": true,
+  "insideContainerOwnerGuardAccepted": true,
+  "dataOwnershipSetupExitCode": 0,
+  "dataOwnershipSetupStreams": {
+    "stdout": {
+      "bytes": 0,
+      "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "stderr": {
+      "bytes": 0,
+      "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "ownedVolumeRetainedAndLabelsVerified": true,
+  "ownedVolumeIsFresh": true,
+  "volumeObservationIsHardQuota": false,
+  "ownedVolumeDataObservation": {
+    "samples": 18,
+    "maximumAllocatedBytes": 50495488,
+    "maximumFiles": 1515
+  },
+  "originalCollectorLiteralSourceAssertionFailed": false,
+  "collectorRepairOnlyNoApplicationRepeat": false,
+  "identityMountContentsIndependentlyVerified": true,
+  "nativeReservationGrowthBytes": 1000000000,
+  "approvedMachineGrowthCeilingBytes": 4000000000,
+  "perJobAllowanceReduced": true,
+  "installedEnforcerChanged": false,
+  "guardApiDriverDigest": "sha256:576b7db6ebb492a0f190eae36aabd6874bb577b93d1f9a55a998a92ede46eb82",
+  "httpAuthenticationAndPermissionAssertionsPassed": true,
+  "httpCasesPassed": 12,
+  "realPasswordLoginsIndependentlyVerified": 2,
+  "browserProjectsAttempted": 3,
+  "browserProjectsSkipped": 2,
+  "browserGroupsIndependentlyConfirmedStopped": 3,
+  "fullAuthenticationWorkflowAccepted": false,
+  "browserProjectStatuses": {
+    "chromium": [
+      "passed"
+    ],
+    "firefox": [
+      "passed"
+    ],
+    "webkit": [
+      "failed"
+    ],
+    "Mobile Chrome": [],
+    "Mobile Safari": []
+  },
+  "independentlyRehashedSelectedFiles": 2482,
+  "independentlyCheckedSelectedDirectories": 524,
+  "selectedPointerUnchanged": true,
+  "allFourApiInstancesReaped": true,
+  "allThreeCaseProfilesAndControlsMatched": true,
+  "basicBrowserAuthenticationPartiallyAccepted": true,
+  "apiReadinessFailureCodeNotPreserved": true,
+  "extraIntegrationStillOpen": true,
+  "reviewerDigest": "sha256:9ecf22c1b485b35b17ca23f2d6ecdd9f1304dd177b0bd841bd2e7580fd155010"
+}

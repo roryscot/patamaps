@@ -1,0 +1,211 @@
+{
+  "diagnostic-proxy.jsonl": [
+    {
+      "kind": "proxy-request",
+      "origin": "web",
+      "endpoint": "/login",
+      "method": "GET"
+    },
+    {
+      "kind": "proxy-response",
+      "origin": "web",
+      "endpoint": "/login",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "kind": "proxy-request",
+      "origin": "api",
+      "endpoint": "/api/v1/auth/login",
+      "method": "OPTIONS"
+    },
+    {
+      "kind": "proxy-response",
+      "origin": "api",
+      "endpoint": "/api/v1/auth/login",
+      "method": "OPTIONS",
+      "status": 200
+    },
+    {
+      "kind": "proxy-request",
+      "origin": "api",
+      "endpoint": "/api/v1/auth/login",
+      "method": "POST"
+    },
+    {
+      "kind": "proxy-response",
+      "origin": "api",
+      "endpoint": "/api/v1/auth/login",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "kind": "proxy-request",
+      "origin": "api",
+      "endpoint": "/api/v1/auth/me",
+      "method": "OPTIONS"
+    },
+    {
+      "kind": "proxy-response",
+      "origin": "api",
+      "endpoint": "/api/v1/auth/me",
+      "method": "OPTIONS",
+      "status": 200
+    },
+    {
+      "kind": "proxy-request",
+      "origin": "api",
+      "endpoint": "/api/v1/auth/me",
+      "method": "GET"
+    },
+    {
+      "kind": "proxy-response",
+      "origin": "api",
+      "endpoint": "/api/v1/auth/me",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "kind": "proxy-request",
+      "origin": "web",
+      "endpoint": "/admin/users",
+      "method": "GET"
+    },
+    {
+      "kind": "proxy-response",
+      "origin": "web",
+      "endpoint": "/admin/users",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "kind": "proxy-request",
+      "origin": "api",
+      "endpoint": "/api/v1/rbac/permissions",
+      "method": "OPTIONS"
+    },
+    {
+      "kind": "proxy-response",
+      "origin": "api",
+      "endpoint": "/api/v1/rbac/permissions",
+      "method": "OPTIONS",
+      "status": 200
+    },
+    {
+      "kind": "proxy-request",
+      "origin": "api",
+      "endpoint": "/api/v1/rbac/permissions",
+      "method": "GET"
+    },
+    {
+      "kind": "proxy-response",
+      "origin": "api",
+      "endpoint": "/api/v1/rbac/permissions",
+      "method": "GET",
+      "status": 200
+    }
+  ],
+  "diagnostic-browser-chromium.jsonl": [
+    {
+      "kind": "stage",
+      "origin": "other",
+      "endpoint": "other",
+      "stage": "login-start"
+    },
+    {
+      "kind": "request",
+      "origin": "web",
+      "endpoint": "/login",
+      "method": "GET"
+    },
+    {
+      "kind": "response",
+      "origin": "web",
+      "endpoint": "/login",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "kind": "stage",
+      "origin": "other",
+      "endpoint": "other",
+      "stage": "submit"
+    },
+    {
+      "kind": "request",
+      "origin": "api",
+      "endpoint": "/api/v1/auth/login",
+      "method": "POST"
+    },
+    {
+      "kind": "response",
+      "origin": "api",
+      "endpoint": "/api/v1/auth/login",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "kind": "stage",
+      "origin": "other",
+      "endpoint": "other",
+      "stage": "login-response"
+    },
+    {
+      "kind": "request",
+      "origin": "api",
+      "endpoint": "/api/v1/auth/me",
+      "method": "GET"
+    },
+    {
+      "kind": "response",
+      "origin": "api",
+      "endpoint": "/api/v1/auth/me",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "kind": "stage",
+      "origin": "other",
+      "endpoint": "other",
+      "stage": "current-user-response"
+    },
+    {
+      "kind": "stage",
+      "origin": "other",
+      "endpoint": "other",
+      "stage": "permissions-navigation"
+    },
+    {
+      "kind": "request",
+      "origin": "web",
+      "endpoint": "/admin/users",
+      "method": "GET"
+    },
+    {
+      "kind": "response",
+      "origin": "web",
+      "endpoint": "/admin/users",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "kind": "request",
+      "origin": "api",
+      "endpoint": "/api/v1/rbac/permissions",
+      "method": "GET"
+    },
+    {
+      "kind": "response",
+      "origin": "api",
+      "endpoint": "/api/v1/rbac/permissions",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "kind": "stage",
+      "origin": "other",
+      "endpoint": "other",
+      "stage": "permissions-response"
+    }
+  ]
+}

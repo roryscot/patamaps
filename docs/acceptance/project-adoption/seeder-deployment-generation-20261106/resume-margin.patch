@@ -1,0 +1,30 @@
+--- a/guarded-run.mjs
++++ b/guarded-run.mjs
+@@ -265,0 +266 @@
++    minimumRemainingGrowthBeforeLaunchBytes = 0,
+@@ -268,0 +270,4 @@
++  if (!Number.isSafeInteger(minimumRemainingGrowthBeforeLaunchBytes) ||
++      minimumRemainingGrowthBeforeLaunchBytes < 0 ||
++      minimumRemainingGrowthBeforeLaunchBytes > policy.maximumRunGrowthBytes)
++    throw new Error("Invalid prelaunch disk-growth margin");
+@@ -352,0 +358,7 @@
++    if (minimumRemainingGrowthBeforeLaunchBytes > 0) {
++      record.minimumRemainingGrowthBeforeLaunchBytes = minimumRemainingGrowthBeforeLaunchBytes;
++      record.remainingGrowthAtLaunchCheckBytes = policy.maximumRunGrowthBytes -
++        (record.freeBytesAtStart - record.minimumFreeBytesObserved);
++      if (record.remainingGrowthAtLaunchCheckBytes < minimumRemainingGrowthBeforeLaunchBytes)
++        throw new Error("Storage guard: insufficient disk-growth margin before workload startup");
++    }
+--- a/run.mjs
++++ b/run.mjs
+@@ -13 +13,6 @@
+-if(Object.keys(spec).sort().join(',')!=='argv,cwd,maximumRunGrowthBytes,version'||spec.version!==1)throw Error('Closed guarded-job declaration required');
++const keys=Object.keys(spec).sort().join(',');
++if(!['argv,cwd,maximumRunGrowthBytes,version','argv,cwd,maximumRunGrowthBytes,minimumRemainingGrowthBeforeLaunchBytes,version'].includes(keys)||spec.version!==1)
++ throw Error('Closed guarded-job declaration required');
++const prelaunchMargin=Object.hasOwn(spec,'minimumRemainingGrowthBeforeLaunchBytes')?spec.minimumRemainingGrowthBeforeLaunchBytes:0;
++if(!Number.isSafeInteger(prelaunchMargin)||prelaunchMargin<0||prelaunchMargin>spec.maximumRunGrowthBytes)
++ throw Error('Invalid prelaunch disk-growth margin');
+@@ -67 +72 @@
+- root:project.root,cwd:spec.cwd,policy,capacity,retentionRoots:roots,
++ root:project.root,cwd:spec.cwd,policy,capacity,retentionRoots:roots,minimumRemainingGrowthBeforeLaunchBytes:prelaunchMargin,

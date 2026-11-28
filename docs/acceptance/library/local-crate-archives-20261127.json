@@ -1,0 +1,51 @@
+{
+  "status": "prepared-not-published",
+  "archives": [
+    {
+      "name": "patamaps-contracts",
+      "version": "0.1.0",
+      "sha256": "031c4c73c755f66049b3f2cd4bfdf027e88fb62d9081d3219828720e1d7cbb11",
+      "bytes": 85982,
+      "members": 25,
+      "metadataMatched": true,
+      "sourceCommit": "23fc1a64b9061937037eb655ad4204ebfaddfbe6"
+    },
+    {
+      "name": "patamaps-core",
+      "version": "0.1.0",
+      "sha256": "30bffd6ae53a341f6bef9c414fc845e30388cfb70670f4290ca983003f2df6a5",
+      "bytes": 1171488,
+      "members": 111,
+      "metadataMatched": true,
+      "sourceCommit": "23fc1a64b9061937037eb655ad4204ebfaddfbe6"
+    }
+  ],
+  "command": "cargo package --locked --offline --no-verify -p patamaps-contracts -p patamaps-core",
+  "limits": "Local package command used --no-verify; CI verified matching extracted bytes, not a public registry installation. Crate version 0.1.0 is not published. Recheck exact source, hashes, ownership and registry state before any separate publication decision.",
+  "sourceCommit": "23fc1a64b9061937037eb655ad4204ebfaddfbe6",
+  "published": false,
+  "reservationReleased": true,
+  "ciRun": "https://github.com/roryscot/patamaps/actions/runs/46102620301",
+  "ciResult": "passed: independently packaged archives had the same SHA-256 and sizes; extracted default and native-only consumers and focused core/contracts tests passed",
+  "localDirectory": ".tools/rust-crate-candidates-20261127/target/package",
+  "norwayFrozenConsumers": {
+    "status": "passed",
+    "hostArchitecture": "x86_64",
+    "sourceCommit": "23fc1a64b9061937037eb655ad4204ebfaddfbe6",
+    "commands": [
+      "cargo generate-lockfile --offline",
+      "cargo run --locked --offline --jobs 2"
+    ],
+    "featureModes": [
+      "native-only",
+      "default"
+    ],
+    "archiveHashesRechecked": true,
+    "consumer": "standalone in-memory example from the source commit; each mode generated its own lockfile and ran",
+    "configuration": "fresh extracted archives and consumer workspaces; reused target directory; debug disabled and incremental compilation disabled",
+    "reservationReleased": true,
+    "warning": "rust-objcopy debug stripping failed because libLLVM was unavailable; both commands exited zero",
+    "limits": "Contracts are patched to the extracted local archive. This does not verify a published registry installation, the full application, or an optimized build."
+  },
+  "laterSourceNote": "These frozen archives predate registry order-independence fix 303c9f53d3565984a5dd0da5ccfd931febc2f448; they are not archives of that later source."
+}

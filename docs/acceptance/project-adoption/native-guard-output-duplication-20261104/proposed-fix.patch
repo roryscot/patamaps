@@ -1,0 +1,11 @@
+--- staged-parent-watch/guarded-run.mjs
++++ staged-single-output/guarded-run.mjs
+@@ -391,7 +391,7 @@
+     for (const [source, target] of [[child.stdout, process.stdout], [child.stderr, process.stderr]]) {
+       source.on("data", chunk => {
+         outputBytes += chunk.length; lastOutputAt = now();
+-        if (!target.write(chunk)) { source.pause(); target.once("drain", () => source.resume()); }
++        // Registered streams are bounded by the registrar and emitted once from\n        // their final capture below. Ordinary commands still forward live output.\n        if (!registered && !target.write(chunk)) { source.pause(); target.once("drain", () => source.resume()); }
+       });
+     }
+     let stopped = false;

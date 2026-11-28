@@ -1,0 +1,92 @@
+{
+  "artifactId": 12546409492,
+  "artifactDigest": "sha256:2e551f6617534a70e05c91981a2eed6e67f27ef11976221de2c940a401a12190",
+  "artifactBytes": 21326989,
+  "failed": true,
+  "errorClass": "AssertionError",
+  "commands": [
+    {
+      "label": "checkout-cli-for-package",
+      "exitCode": 0,
+      "expectedExitCode": 0
+    },
+    {
+      "label": "package-engine",
+      "exitCode": 0,
+      "expectedExitCode": 0
+    },
+    {
+      "label": "package-exact-current-pair",
+      "exitCode": 0,
+      "expectedExitCode": 0
+    },
+    {
+      "label": "source-locked-fetch",
+      "exitCode": 0,
+      "expectedExitCode": 0
+    },
+    {
+      "label": "fresh-source-cargo-install",
+      "exitCode": 0,
+      "expectedExitCode": 0
+    },
+    {
+      "label": "source-installed-engine",
+      "exitCode": 0,
+      "expectedExitCode": 0
+    },
+    {
+      "label": "source-installed-next",
+      "exitCode": 1,
+      "expectedExitCode": 0
+    }
+  ],
+  "casesCompleted": [],
+  "source": {
+    "failed": true,
+    "errorClass": "other",
+    "commandsCompleted": 33,
+    "sourceStatus": "verified-unchanged",
+    "errorCategories": []
+  },
+  "source-runtime.json": {
+    "passed": false,
+    "groupsPassed": 1,
+    "browserStopped": false,
+    "proxyStopped": false,
+    "processesStopped": true,
+    "listenersStopped": true,
+    "browserAndProxyObservation": "not started; false flags do not indicate surviving browser or proxy"
+  },
+  "diagnostics": {
+    "source-installed-next": {
+      "categories": [],
+      "locations": [
+        [
+          "scripts/qualify_chatbot_next.py",
+          "239"
+        ],
+        [
+          "scripts/qualify_chatbot_next.py",
+          "203"
+        ],
+        [
+          "scripts/qualify_chatbot_runtime.py",
+          "186"
+        ]
+      ]
+    }
+  },
+  "parentCategories": [
+    "assertion"
+  ],
+  "failureStage": "isolated-database-init",
+  "diagnosis": {
+    "basis": "source-derived configuration and captured nonsecret runtime path; private PostgreSQL stderr not inspected",
+    "configuredFiveDigitSocketPathBytes": 111,
+    "linuxSunPathCapacityBytes": 108,
+    "nullTerminatorRequired": true,
+    "inference": "Configured filesystem socket pathname cannot fit; exact historical PostgreSQL error is not claimed.",
+    "repair": "Disable unused Unix-domain sockets; verify authenticated TCP and server settings before migrations."
+  }
+}

@@ -1,0 +1,7 @@
+# Neutral precheck: real browser login reaches permissions
+
+The original12 HTTP cases and nine privacy controls pass. The neutral auth/me precheck passes without consuming the login quota. Actual first-browser login, current-user and permission responses are200. The allowed user reaches the end of its original UI assertions; that is inferred from the subsequent second-context setup failing at the diagnostic file creation, not recorded as a passing whole project.
+
+The diagnostic helper attempted to create the same project trace file with exclusive creation for its second user: EEXIST. This is a harness defect, not an observed application defect. Four later projects remain skipped and full browser acceptance is false. The earlier cold timeout remains unexplained. [Typed review](review.json) verifies439 inputs, selected-state restoration, stopped own resources, protected service identity and released reservation. [Events](allowlisted-events.json) retain unique safe request/status/stage witnesses only. Raw config/logs/data remain private.
+
+The next prepared correction shares one bounded trace sink across both contexts and adds a duplicate-create regression. Independent browser contexts will use fresh original owned API processes with the same database/users/source/config/frontend, preserving the real rate policy instead of bypassing it. Original11 assertions and20s/120s/180s/600s limits remain; all preflight time counts inside600s. The20 proposed privacy/controller controls and full application attempt are still unrun.

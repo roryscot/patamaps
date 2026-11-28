@@ -1,0 +1,214 @@
+{
+  "version": 3,
+  "pages404": true,
+  "appType": "app",
+  "caseSensitive": false,
+  "basePath": "",
+  "redirects": [
+    {
+      "source": "/:path+/",
+      "destination": "/:path+",
+      "internal": true,
+      "priority": true,
+      "statusCode": 308,
+      "regex": "^(?:/((?:[^/]+?)(?:/(?:[^/]+?))*))/$"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/149e9513-01fa-4fb0-aad4-566afd725d1b/2d206a39-8ed7-437e-a3be-862e0f06eea3/:path*",
+      "headers": [
+        {
+          "key": "X-Frame-Options",
+          "value": "SAMEORIGIN"
+        },
+        {
+          "key": "Content-Security-Policy",
+          "value": "frame-ancestors 'self'"
+        }
+      ],
+      "regex": "^/149e9513-01fa-4fb0-aad4-566afd725d1b/2d206a39-8ed7-437e-a3be-862e0f06eea3(?:/((?:[^/]+?)(?:/(?:[^/]+?))*))?(?:/)?$"
+    }
+  ],
+  "onMatchHeaders": [],
+  "rewrites": {
+    "beforeFiles": [],
+    "afterFiles": [
+      {
+        "source": "/149e9513-01fa-4fb0-aad4-566afd725d1b/2d206a39-8ed7-437e-a3be-862e0f06eea3/a-4-a/c.js",
+        "destination": "https://api.vercel.com/bot-protection/v1/challenge",
+        "regex": "^/149e9513-01fa-4fb0-aad4-566afd725d1b/2d206a39-8ed7-437e-a3be-862e0f06eea3/a-4-a/c\\.js(?:/)?$"
+      },
+      {
+        "source": "/149e9513-01fa-4fb0-aad4-566afd725d1b/2d206a39-8ed7-437e-a3be-862e0f06eea3/:path*",
+        "destination": "https://api.vercel.com/bot-protection/v1/proxy/:path*",
+        "regex": "^/149e9513-01fa-4fb0-aad4-566afd725d1b/2d206a39-8ed7-437e-a3be-862e0f06eea3(?:/((?:[^/]+?)(?:/(?:[^/]+?))*))?(?:/)?$"
+      }
+    ],
+    "fallback": []
+  },
+  "dynamicRoutes": [
+    {
+      "page": "/api/auth/[...nextauth]",
+      "regex": "^/api/auth/(.+?)(?:/)?$",
+      "routeKeys": {
+        "nxtPnextauth": "nxtPnextauth"
+      },
+      "namedRegex": "^/api/auth/(?<nxtPnextauth>.+?)(?:/)?$"
+    },
+    {
+      "page": "/api/chat/[id]/stream",
+      "regex": "^/api/chat/([^/]+?)/stream(?:/)?$",
+      "routeKeys": {
+        "nxtPid": "nxtPid"
+      },
+      "namedRegex": "^/api/chat/(?<nxtPid>[^/]+?)/stream(?:/)?$"
+    },
+    {
+      "page": "/chat/[id]",
+      "regex": "^/chat/([^/]+?)(?:/)?$",
+      "routeKeys": {
+        "nxtPid": "nxtPid"
+      },
+      "namedRegex": "^/chat/(?<nxtPid>[^/]+?)(?:/)?$",
+      "prefetchSegmentDataRoutes": [
+        {
+          "destination": "/chat/[id].segments$segment",
+          "source": "^/chat/(?<nxtPid>[^/]+?)\\.segments(?<segment>/__PAGE__\\.segment\\.rsc|\\.segment\\.rsc)(?:/)?$",
+          "routeKeys": {
+            "nxtPid": "nxtPid"
+          }
+        }
+      ]
+    }
+  ],
+  "staticRoutes": [
+    {
+      "page": "/",
+      "regex": "^/(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/(?:/)?$"
+    },
+    {
+      "page": "/_global-error",
+      "regex": "^/_global\\-error(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/_global\\-error(?:/)?$"
+    },
+    {
+      "page": "/_not-found",
+      "regex": "^/_not\\-found(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/_not\\-found(?:/)?$"
+    },
+    {
+      "page": "/api/auth/guest",
+      "regex": "^/api/auth/guest(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/auth/guest(?:/)?$"
+    },
+    {
+      "page": "/api/chat",
+      "regex": "^/api/chat(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/chat(?:/)?$"
+    },
+    {
+      "page": "/api/document",
+      "regex": "^/api/document(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/document(?:/)?$"
+    },
+    {
+      "page": "/api/files/upload",
+      "regex": "^/api/files/upload(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/files/upload(?:/)?$"
+    },
+    {
+      "page": "/api/history",
+      "regex": "^/api/history(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/history(?:/)?$"
+    },
+    {
+      "page": "/api/messages",
+      "regex": "^/api/messages(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/messages(?:/)?$"
+    },
+    {
+      "page": "/api/models",
+      "regex": "^/api/models(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/models(?:/)?$"
+    },
+    {
+      "page": "/api/suggestions",
+      "regex": "^/api/suggestions(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/suggestions(?:/)?$"
+    },
+    {
+      "page": "/api/vote",
+      "regex": "^/api/vote(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/vote(?:/)?$"
+    },
+    {
+      "page": "/favicon.ico",
+      "regex": "^/favicon\\.ico(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/favicon\\.ico(?:/)?$"
+    },
+    {
+      "page": "/login",
+      "regex": "^/login(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/login(?:/)?$"
+    },
+    {
+      "page": "/opengraph-image-12cog0.png",
+      "regex": "^/opengraph\\-image\\-12cog0\\.png(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/opengraph\\-image\\-12cog0\\.png(?:/)?$"
+    },
+    {
+      "page": "/register",
+      "regex": "^/register(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/register(?:/)?$"
+    },
+    {
+      "page": "/twitter-image-12cog0.png",
+      "regex": "^/twitter\\-image\\-12cog0\\.png(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/twitter\\-image\\-12cog0\\.png(?:/)?$"
+    }
+  ],
+  "dataRoutes": [],
+  "rsc": {
+    "header": "rsc",
+    "varyHeader": "rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch",
+    "prefetchHeader": "next-router-prefetch",
+    "didPostponeHeader": "x-nextjs-postponed",
+    "contentTypeHeader": "text/x-component",
+    "suffix": ".rsc",
+    "prefetchSegmentHeader": "next-router-segment-prefetch",
+    "prefetchSegmentSuffix": ".segment.rsc",
+    "prefetchSegmentDirSuffix": ".segments",
+    "clientParamParsing": true,
+    "dynamicRSCPrerender": true
+  },
+  "rewriteHeaders": {
+    "pathHeader": "x-nextjs-rewritten-path",
+    "queryHeader": "x-nextjs-rewritten-query"
+  },
+  "ppr": {
+    "chain": {
+      "headers": {
+        "next-resume": "1"
+      }
+    }
+  }
+}

@@ -1,0 +1,93 @@
+{
+  "status": "passed-guarded-functional-preparation",
+  "startedAtUtc": "2026-10-26T03:15:36.548835+00:00",
+  "sourceRevision": "7ebc10c94c68da72166eb09182fc3a2b2a3a9417",
+  "filesDeleted": 0,
+  "policyChanged": false,
+  "benchmarkRun": false,
+  "commands": [
+    {
+      "label": "current-cli-build",
+      "measurement": {
+        "argv": [
+          "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/intel-python-3.13.16-20261013/runtime/python/bin/python3",
+          "-B",
+          "/Volumes/dev_src_case_sensitive/projects/patamaps/scripts/project_watch.py",
+          "__guard",
+          "/Users/admin/.rustup/toolchains/1.99.0-x86_64-apple-darwin/bin/cargo",
+          "build",
+          "--locked",
+          "--offline",
+          "-p",
+          "patamaps-cli"
+        ],
+        "pid": 59476,
+        "exitCode": 0,
+        "wallNanoseconds": 18490463227,
+        "userSeconds": 24.62792,
+        "systemSeconds": 2.623307,
+        "peakRssRaw": 387211264,
+        "peakRssRawUnit": "bytes",
+        "peakRssBytes": 387211264,
+        "stdoutBytes": 0,
+        "stdoutDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderrBytes": 1722,
+        "stderrDigest": "sha256:62d3756e34db0aa9cf4c77e46b13e27d5f78cc16f520190a868b34ed38a64999",
+        "retainedOutputs": {
+          "stdout": "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/axum-guarded-preparation-20261026/current-cli-build.stdout",
+          "stderr": "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/axum-guarded-preparation-20261026/current-cli-build.stderr",
+          "stdin": "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/axum-guarded-preparation-20261026/current-cli-build.stdin"
+        },
+        "measurementStatus": "completed",
+        "failureType": null,
+        "rssScope": "largest-reaped-process-high-water-mark-not-concurrent-job-sum"
+      }
+    },
+    {
+      "label": "real-axum-preparation",
+      "measurement": {
+        "argv": [
+          "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/intel-python-3.13.16-20261013/runtime/python/bin/python3",
+          "-B",
+          "/Volumes/dev_src_case_sensitive/projects/patamaps/scripts/project_watch.py",
+          "__guard",
+          "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/intel-python-3.13.16-20261013/runtime/python/bin/python3",
+          "-B",
+          "/Volumes/dev_src_case_sensitive/projects/patamaps/scripts/bench_axum_retained.py",
+          "prepare",
+          "--work",
+          "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/axum-guarded-preparation-20261026/actual-axum",
+          "--prior",
+          "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/project-adoption/axum-retained-build-retry-20261019",
+          "--cli",
+          "/Volumes/dev_src_case_sensitive/projects/patamaps/target/debug/patamaps",
+          "--prior-compiler",
+          "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/project-adoption/installed-current-owner-20261019/installed-native/patamaps-draft-97c1a1fa1b17/bin/patamaps"
+        ],
+        "pid": 59575,
+        "exitCode": 0,
+        "wallNanoseconds": 10444856687,
+        "userSeconds": 7.821199,
+        "systemSeconds": 0.838565,
+        "peakRssRaw": 61661184,
+        "peakRssRawUnit": "bytes",
+        "peakRssBytes": 61661184,
+        "stdoutBytes": 187,
+        "stdoutDigest": "sha256:1f83149bec9e00a17e84ebc15702a145ae890a9760bcd73fb7a0479b4bec8d4e",
+        "stderrBytes": 0,
+        "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "retainedOutputs": {
+          "stdout": "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/axum-guarded-preparation-20261026/real-axum-preparation.stdout",
+          "stderr": "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/axum-guarded-preparation-20261026/real-axum-preparation.stderr",
+          "stdin": "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/axum-guarded-preparation-20261026/real-axum-preparation.stdin"
+        },
+        "measurementStatus": "completed",
+        "failureType": null,
+        "rssScope": "largest-reaped-process-high-water-mark-not-concurrent-job-sum"
+      }
+    }
+  ],
+  "preparedWork": "/Volumes/dev_src_case_sensitive/projects/patamaps/.tools/axum-guarded-preparation-20261026/actual-axum",
+  "measuredTextInputs": 337,
+  "finishedAtUtc": "2026-10-26T03:16:05.593767+00:00"
+}

@@ -1,0 +1,77 @@
+{
+  "status": "passed-on-norway",
+  "date": "2026-11-25",
+  "sourceCommit": "4a2024d6e2a29e0e00f42da6eeb2f773743f19a2",
+  "hostArchitecture": "x86_64",
+  "command": "cargo test --locked --offline -p patamaps-core --no-default-features --test in_memory_library --jobs 2",
+  "configuration": "CARGO_PROFILE_DEV_DEBUG=0 CARGO_PROFILE_TEST_DEBUG=0 CARGO_INCREMENTAL=0; existing target directory; guarded maximum run growth 500000000 bytes",
+  "testsPassed": 4,
+  "exitCode": 0,
+  "warnings": [
+    "rust-objcopy could not load libLLVM while stripping debug information",
+    "dead-code warning in example imported by test"
+  ],
+  "limits": "Focused native-only test; no default-feature, published-package, or real-application claim. Earlier interrupted Norway runs remain preserved.",
+  "relationLookupRetry": {
+    "sourceCommit": "3cb47e2680c41e6d5fb01e9fd2ba7adabceceea1",
+    "status": "passed-on-norway",
+    "hostArchitecture": "x86_64",
+    "focusedCommand": "cargo test --locked --offline -p patamaps-core --no-default-features --test in_memory_library --jobs 2",
+    "focusedTestsPassed": 5,
+    "consumerCommand": "cargo run --locked --offline --manifest-path examples/rust-library-consumer/Cargo.toml --jobs 2",
+    "consumer": "passed",
+    "maximumRunGrowthBytes": 500000000,
+    "reservationReleased": true,
+    "warning": "rust-objcopy could not load libLLVM while stripping debug information",
+    "limitations": "Path-dependent example; does not verify published crate, default-feature Norway tests, or existing application."
+  },
+  "packageInvestigation": {
+    "sourceBaseCommit": "8ce895badbc4fbfef877a77be33cc390187f948b",
+    "offlineSingleCrate": "failed: local registry index missing icu_collator",
+    "onlineSingleCrate": "failed: patamaps-contracts 0.1.0 unavailable on crates.io; alpha.1 exists",
+    "twoCrateArchives": "created locally without publication",
+    "nativeOnlyExtractedConsumer": "passed",
+    "defaultExtractedConsumer": "failed: contracts build script expected external vendored collation",
+    "stagedForkExperiment": "passed default and native-only focused core tests and default consumer after modifying isolated package copies to use existing published patched fork",
+    "candidateCheckout": "uses published fork identity and package-local contracts test assets; static asset, offline metadata and format checks passed",
+    "norwayCandidateTests": "not run; 500 MB reservation refused at retained allocation 99594142305 bytes",
+    "reservationReleased": true,
+    "limits": "Staged experiment is not a pass for the unmodified contracts archive. No crate published."
+  },
+  "packagedCrateLinuxCI": {
+    "sourceCommit": "5612baf",
+    "run": "https://github.com/roryscot/patamaps/actions/runs/45761540034",
+    "status": "passed",
+    "verification": "Fresh local 0.1.0 core and contracts archives; default and native-only consumers, extracted core focused tests, and contracts tests",
+    "limitations": "Linux CI; contracts resolved from the extracted local archive via a Cargo patch. Neither 0.1.0 crate was published; Norway candidate admission was refused."
+  },
+  "postCleanupCandidateNorway": {
+    "sourceCommit": "541ffdab7e680a6d77ffb075300374fa591c51cf",
+    "date": "2026-11-26",
+    "hostArchitecture": "x86_64",
+    "status": "passed",
+    "commands": [
+      "cargo test --locked --offline -p patamaps-contracts --tests --jobs 2",
+      "cargo test --locked --offline -p patamaps-core --test in_memory_library --test registry --test legacy_pack --test legacy_semantic --jobs 2",
+      "cargo test --locked --offline -p patamaps-core --no-default-features --test in_memory_library --jobs 2",
+      "cargo run --locked --offline --manifest-path examples/rust-library-consumer/Cargo.toml --jobs 2",
+      "cargo generate-lockfile --offline and cargo run --locked --offline --jobs 2 for a separate projection identity consumer"
+    ],
+    "identity": "Independent Python compiler identity matched the projection consumer",
+    "configuration": "Existing target directory; dev and test debug information disabled, incremental compilation disabled; guarded 500000000-byte maximum growth",
+    "guardExitCode": 0,
+    "reservationReleased": true,
+    "warning": "rust-objcopy stripping debug information failed with SIGABRT; commands exited zero",
+    "limits": "Checkout/path-based tests only; this does not establish an existing application integration or a published 0.1.0 release. Earlier failures remain preserved."
+  },
+  "gitDependencyAttemptNorway": {
+    "sourceRevision": "c6732ac2526bbad7acf28e9baa98219a9da5095e",
+    "status": "incomplete-guard-stopped",
+    "scope": "Standalone native-only consumer with a pinned public Git dependency",
+    "result": "Cargo began fetching the Git repository; the 500 MB shared-pool growth guard fired before lockfile generation completed. A cause for the observed pool growth is not established.",
+    "reservationId": "47e0f851-b10c-4a5e-a3a4-11a76a0c5280",
+    "reservationStatus": "released after reviewed sealed-native recovery; failed guard remains preserved",
+    "recovery": "Original recovery passed two ownership checks and a final locked check, with recorded process group absent and no matching process, open file or container. Prior refusals remain preserved. An unrelated running container was left untouched.",
+    "limitations": "No consumer build or run completed; no Git dependency compatibility or application integration is claimed. No files deleted or limits changed."
+  }
+}

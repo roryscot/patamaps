@@ -471,23 +471,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "2304e00983f87ffb38b55b444b5e3b60a884b5d30c0fca7d82fe33449bbe55ea"
 
 [[package]]
-name = "icu_collator"
-version = "2.2.1"
-dependencies = [
- "icu_collator_data",
- "icu_collections",
- "icu_locale",
- "icu_locale_core",
- "icu_normalizer",
- "icu_properties",
- "icu_provider",
- "smallvec",
- "utf16_iter",
- "utf8_iter",
- "zerovec",
-]
-
-[[package]]
 name = "icu_collator_data"
 version = "2.2.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -870,7 +853,7 @@ dependencies = [
 
 [[package]]
 name = "patamaps-cli"
-version = "0.1.0"
+version = "0.1.0-alpha.2"
 dependencies = [
  "base64",
  "clap",
@@ -890,7 +873,7 @@ dependencies = [
 name = "patamaps-contracts"
 version = "0.1.0"
 dependencies = [
- "icu_collator",
+ "patamaps-icu-collator",
  "serde",
  "serde_json",
  "serde_json_canonicalizer",
@@ -902,9 +885,9 @@ dependencies = [
 name = "patamaps-core"
 version = "0.1.0"
 dependencies = [
- "icu_collator",
  "jsonschema",
  "patamaps-contracts",
+ "patamaps-icu-collator",
  "serde",
  "serde_json",
  "thiserror",
@@ -926,8 +909,26 @@ dependencies = [
 ]
 
 [[package]]
+name = "patamaps-icu-collator"
+version = "2.2.1-patamaps.1"
+dependencies = [
+ "icu_collator_data",
+ "icu_collections",
+ "icu_locale",
+ "icu_locale_core",
+ "icu_normalizer",
+ "icu_properties",
+ "icu_provider",
+ "sha2",
+ "smallvec",
+ "utf16_iter",
+ "utf8_iter",
+ "zerovec",
+]
+
+[[package]]
 name = "patamaps-inspect"
-version = "0.1.0"
+version = "0.1.0-alpha.2"
 dependencies = [
  "base64",
  "ed25519-dalek",
@@ -970,7 +971,7 @@ dependencies = [
 
 [[package]]
 name = "patamaps-workspace"
-version = "0.1.0"
+version = "0.1.0-alpha.2"
 dependencies = [
  "patamaps-contracts",
  "patamaps-core",

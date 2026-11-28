@@ -1,0 +1,198 @@
+{
+  "status": "verified-isolated-owner-auth-failure",
+  "reservationId": "7022df17-58f3-42fd-b9ee-5505f8a4a609",
+  "leaseReleased": true,
+  "guardExitCode": 1,
+  "supervisorExitCode": 1,
+  "httpCases": [
+    {
+      "name": "missing-session",
+      "status": 401,
+      "expected": 401,
+      "passed": true
+    },
+    {
+      "name": "invalid-session",
+      "status": 401,
+      "expected": 401,
+      "passed": true
+    },
+    {
+      "name": "wrong-password",
+      "status": 401,
+      "expected": 401,
+      "passed": true
+    },
+    {
+      "name": "allowed-real-login",
+      "status": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "allowed-current-user",
+      "status": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "allowed-permissions",
+      "status": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "allowed-permission-check",
+      "status": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "denied-real-login",
+      "status": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "denied-current-user",
+      "status": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "denied-permissions",
+      "status": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "denied-permission-check",
+      "status": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "expired-session",
+      "status": 401,
+      "expected": 401,
+      "passed": true
+    }
+  ],
+  "httpCasesPassed": 12,
+  "httpAuthenticationAndPermissionAssertionsPassed": true,
+  "browserProjectStatuses": {
+    "chromium": {
+      "real login, edited navigation and exact permission denial": [
+        "passed"
+      ],
+      "invalid session is rejected by original API and UI": [
+        "passed"
+      ],
+      "expired session is rejected by original API and UI": [
+        "passed"
+      ]
+    },
+    "firefox": {
+      "real login, edited navigation and exact permission denial": [
+        "passed"
+      ],
+      "invalid session is rejected by original API and UI": [
+        "passed"
+      ],
+      "expired session is rejected by original API and UI": [
+        "passed"
+      ]
+    },
+    "webkit": {
+      "real login, edited navigation and exact permission denial": [
+        "failed"
+      ],
+      "invalid session is rejected by original API and UI": [],
+      "expired session is rejected by original API and UI": []
+    },
+    "Mobile Chrome": {
+      "real login, edited navigation and exact permission denial": [],
+      "invalid session is rejected by original API and UI": [],
+      "expired session is rejected by original API and UI": []
+    },
+    "Mobile Safari": {
+      "real login, edited navigation and exact permission denial": [],
+      "invalid session is rejected by original API and UI": [],
+      "expired session is rejected by original API and UI": []
+    }
+  },
+  "browserCasesSkipped": 8,
+  "browserProjectsAttempted": 3,
+  "preflightControlsPassed": 31,
+  "fullAuthenticationWorkflowAccepted": false,
+  "fullBrowserMatrixAccepted": false,
+  "fullGoalComplete": false,
+  "apiReadinessFailureCode": "OWNED_API_CASE_READINESS_DEADLINE",
+  "attemptedApiReadiness": [
+    {
+      "instance": 1,
+      "observedPhases": {
+        "tcp": 63,
+        "listener": 1,
+        "http": 1
+      },
+      "lastObservation": {
+        "elapsedSeconds": 7.046,
+        "phase": "http",
+        "status": 401,
+        "apiStillRunning": true
+      },
+      "confinementChecksPassed": 3,
+      "firstStartupSampleFrame": [
+        {
+          "module": "threading.py",
+          "line": 320,
+          "function": "wait"
+        }
+      ]
+    },
+    {
+      "instance": 2,
+      "observedPhases": {
+        "tcp": 76,
+        "listener": 1,
+        "http": 1
+      },
+      "lastObservation": {
+        "elapsedSeconds": 8.497,
+        "phase": "http",
+        "status": 401,
+        "apiStillRunning": true
+      },
+      "confinementChecksPassed": 3,
+      "firstStartupSampleFrame": [
+        {
+          "module": "selectors.py",
+          "line": 561,
+          "function": "select"
+        }
+      ]
+    },
+    {
+      "instance": 3,
+      "observedPhases": {
+        "tcp": 95
+      },
+      "lastObservation": {
+        "elapsedSeconds": 9.915,
+        "phase": "tcp",
+        "connectable": false
+      },
+      "confinementChecksPassed": 3,
+      "firstStartupSampleFrame": [
+        {
+          "module": "_compiler.py",
+          "line": 402,
+          "function": "_simple"
+        }
+      ]
+    }
+  ],
+  "correctedFrontendAccepted": true,
+  "initialFreezeSetupError": "Missing SCOPE.md, supplied before any application launch"
+}

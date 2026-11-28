@@ -1,0 +1,125 @@
+--- installed/guarded-run.mjs
++++ staged/guarded-run.mjs
+@@ -1,3 +1,4 @@
++import {consumeRegisteredGuardInvocation} from './native_registered_guard_candidate.mjs';
+ import {
+   existsSync,
+   lstatSync,
+@@ -263,9 +264,11 @@
+     retentionRoots = retainedRoots,
+     cwd = process.cwd(),
+     queueAdmission = true,
++    nativeInspection = null,
+     containerSnapshot = scheduler?.containerSnapshot ?? (() => ({ known: false, ids: [] })),
+   } = {},
+ ) {
++  const registered = nativeInspection === null ? null : consumeRegisteredGuardInvocation(nativeInspection);
+   assertUnpaused(directory);
+   const locations = [
+     ...new Set(
+@@ -348,7 +351,15 @@
+       if (environment.BUILDCTL_PHASE === "benchmark" && containersBefore.ids.length)
+         throw new Error("Benchmark phase requires an isolated runtime; existing containers are unreserved");
+     }
+-    const child = spawn(command, args, {
++    // A launch attempt is conservatively held until concrete registered stop proof.
++    if (registered) safeToRelease = false;
++    const child = registered ? await registered.start(snapshot => {
++      record.nativeInspection = snapshot;
++      if (reservation) reservation.update(lease.buildctlRequest, {
++        progress: snapshot.calls.some(call => call.nativePid > 1) ? 'native inspection registered' :
++          snapshot.calls.length ? 'native inspection launch pending' : 'native controller registered'
++      });
++    }) : spawn(command, args, {
+       cwd,
+       stdio: ["inherit", "pipe", "pipe"],
+       // Nested supervisors stay in the parent's group so its emergency stop
+@@ -362,7 +373,7 @@
+         WARGAME_STORAGE_OWNER_PID: String(lease.pid),
+       },
+     });
+-    const childClosed = new Promise(resolve => child.once("close", resolve));
++    const childClosed = registered ? registered.result().then(() => {}) : new Promise(resolve => child.once("close", resolve));
+     if (child.pid && ownsProcessGroup) safeToRelease = false;
+     if (reservation && child.pid) reservation.update(lease.buildctlRequest, {
+       processGroup: ownsProcessGroup ? child.pid : null,
+@@ -391,6 +402,14 @@
+       stopped = true;
+       record.stopReason = reason;
+       console.error(reason);
++      if (registered) {
++        // Only the registered controller can select the exact owned identities.
++        // Generic group signaling is redundant and can fail after that stop.
++        void registered.stop().catch(error => {
++          record.nativeInspectionStopFailure = String(error.message).slice(0,240);
++        });
++        return;
++      }
+       signal("SIGTERM");
+       forceTimer = setTimeout(
+         () => signal("SIGKILL"),
+@@ -428,25 +447,33 @@
+     for (const [name, handler] of handlers) process.on(name, handler);
+     const timer = setInterval(watch, policy.monitorIntervalMs);
+     try {
+-      const result = await new Promise((resolve, reject) => {
++      const result = registered ? await registered.result() : await new Promise((resolve, reject) => {
+         child.once("error", reject);
+         child.once("exit", (code, childSignal) =>
+           resolve({ code, childSignal }),
+         );
+       });
++      if (registered) {
++        if (result.stdout?.length) process.stdout.write(result.stdout);
++        if (result.stderr?.length) process.stderr.write(result.stderr);
++      }
+       record.exitCode = stopped ? 75 : (result.code ?? 1);
+       record.signal = result.childSignal;
+       record.completed = !stopped && result.code === 0;
+       return record.exitCode;
+     } finally {
+       clearInterval(timer);
++      if (registered && stopped) {
++        try { await registered.stop(); }
++        catch (error) { record.nativeInspectionStopFailure = String(error.message).slice(0,240); }
++      }
+       if (child.pid && ownsProcessGroup && scheduler && !scheduler.workloadStopped(child.pid) && !stopped) {
+         leakedChildren = true;
+         stop("Storage guard: child leader exited with surviving owned processes; stopping group before release");
+       }
+       // A leader can exit before its allocating children. Keep the lease until
+       // the owned process group has stopped, including the grace-period kill.
+-      if (stopped && child.pid && ownsProcessGroup) {
++      if (stopped && child.pid && ownsProcessGroup && !registered) {
+         const deadline = Date.now() + policy.terminationGraceMs + 1000;
+         while (Date.now() < deadline) {
+           try {
+@@ -468,6 +495,11 @@
+         new Promise(resolve => { const deadline = setTimeout(() => resolve(false), policy.terminationGraceMs); deadline.unref(); }),
+       ]);
+       safeToRelease = safeToRelease && streamsClosed;
++      const registeredComplete = registered ? await registered.closed() : false;
++      if (registered) {
++        record.registeredNativeStop = registered.status();
++        safeToRelease = safeToRelease && registeredComplete;
++      }
+       clearTimeout(forceTimer);
+       for (const [name, handler] of handlers) process.off(name, handler);
+       if (!inherited && child.pid) {
+@@ -477,7 +509,7 @@
+         record.newSurvivingContainers = survivors;
+         // A killed native wrapper may have left exec work inside a container
+         // that already existed at admission. PID/group exit cannot disprove it.
+-        const existingContainerUncertainty = stopped && containersBefore.ids.length > 0;
++        const existingContainerUncertainty = stopped && containersBefore.ids.length > 0 && !registeredComplete;
+         record.existingContainerUncertainty = existingContainerUncertainty;
+         safeToRelease = safeToRelease && after.known && survivors.length === 0 && !existingContainerUncertainty;
+       }
+@@ -490,6 +522,7 @@
+     record.stopReason = error.message;
+     throw error;
+   } finally {
++    if (registered) safeToRelease = safeToRelease && (await registered.closed().catch(() => false));
+     record.finishedAt = now();
+     record.freeBytesAtEnd = free();
+     record.retainedRootsAtEnd = retentionRoots(root, temporary);

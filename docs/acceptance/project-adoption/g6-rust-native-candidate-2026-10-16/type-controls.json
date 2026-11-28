@@ -1,0 +1,109 @@
+{
+  "status": "passed-scoped-real-rust-handler-type-controls",
+  "results": [
+    {
+      "control": "positive-original",
+      "command": [
+        "cargo",
+        "check",
+        "--locked",
+        "--offline",
+        "--lib"
+      ],
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "seconds": 108.136,
+      "witnessSha256": "0544efe0e8b8a5c48d95390df078043eb53405460f484ff8099aad3dfbab90a0",
+      "compilerEnvironment": {
+        "RUSTUP_TOOLCHAIN": "patamaps-intel-1.99.0",
+        "CARGO_INCREMENTAL": "0",
+        "CARGO_PROFILE_DEV_DEBUG": "line-tables-only",
+        "CARGO_PROFILE_TEST_DEBUG": "line-tables-only",
+        "RUST_TEST_THREADS": "1"
+      },
+      "stderrSha256": "d50158961ef2960e24b806f3a01ce43e17dce59e07b3aeb0cf6c47960c4e1fa7",
+      "expectedDiagnostic": null
+    },
+    {
+      "control": "negative-handler",
+      "command": [
+        "cargo",
+        "check",
+        "--locked",
+        "--offline",
+        "--lib"
+      ],
+      "exitCode": 101,
+      "expectedExitCode": 101,
+      "seconds": 17.888,
+      "witnessSha256": "66021205d798a30d7795085743ac01f9b634d7ec80341d337591bf709dab0de7",
+      "compilerEnvironment": {
+        "RUSTUP_TOOLCHAIN": "patamaps-intel-1.99.0",
+        "CARGO_INCREMENTAL": "0",
+        "CARGO_PROFILE_DEV_DEBUG": "line-tables-only",
+        "CARGO_PROFILE_TEST_DEBUG": "line-tables-only",
+        "RUST_TEST_THREADS": "1"
+      },
+      "stderrSha256": "485c3da821ea574b6165e5e82973746adbab528200979b9705a4e118771ff042",
+      "expectedDiagnostic": "E0631 with distinct request types"
+    },
+    {
+      "control": "negative-return",
+      "command": [
+        "cargo",
+        "check",
+        "--locked",
+        "--offline",
+        "--lib"
+      ],
+      "exitCode": 101,
+      "expectedExitCode": 101,
+      "seconds": 16.79,
+      "witnessSha256": "937047d60ed8fb3f41ad29ab5e6817f99c538555317090479b6a0091981ed2ef",
+      "compilerEnvironment": {
+        "RUSTUP_TOOLCHAIN": "patamaps-intel-1.99.0",
+        "CARGO_INCREMENTAL": "0",
+        "CARGO_PROFILE_DEV_DEBUG": "line-tables-only",
+        "CARGO_PROFILE_TEST_DEBUG": "line-tables-only",
+        "RUST_TEST_THREADS": "1"
+      },
+      "stderrSha256": "69d25c626e01b3e0608250e01f071f92953859a6708653f7bd219985b328f4d6",
+      "expectedDiagnostic": "E0271 with distinct response types"
+    },
+    {
+      "control": "positive-restored",
+      "command": [
+        "cargo",
+        "check",
+        "--locked",
+        "--offline",
+        "--lib"
+      ],
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "seconds": 18.495,
+      "witnessSha256": "0544efe0e8b8a5c48d95390df078043eb53405460f484ff8099aad3dfbab90a0",
+      "compilerEnvironment": {
+        "RUSTUP_TOOLCHAIN": "patamaps-intel-1.99.0",
+        "CARGO_INCREMENTAL": "0",
+        "CARGO_PROFILE_DEV_DEBUG": "line-tables-only",
+        "CARGO_PROFILE_TEST_DEBUG": "line-tables-only",
+        "RUST_TEST_THREADS": "1"
+      },
+      "stderrSha256": "d4a4a4e4f3b5e7ace555da604c311a863110c59872163f4e406843915d358e18",
+      "expectedDiagnostic": null
+    }
+  ],
+  "sourceApiSha256": "c068e6047c3d1aeb954cba4729c7708098870187beb2ab6392244e1bd7a0a1af",
+  "originalProviderPrefixSha256": "5ea820a2e0accee66217f12578e0cef25777c83819993040b8997793272d19a5",
+  "nativeEvidenceUnchanged": true,
+  "approvedCandidatePolicyUnchanged": true,
+  "filesDeleted": 0,
+  "guardRun": "2aafe192-8442-4348-8af0-2b1e0baf290c",
+  "applicationAcceptance": false,
+  "runtime": "not-tested",
+  "limitations": [
+    "Module-local compile-time binding of the three captured actual lab handlers only.",
+    "Runtime HTTP bodies, real Next integration, managed application paths, installed and deployment qualification remain open."
+  ]
+}

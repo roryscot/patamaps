@@ -1,16 +1,58 @@
 # Patamaps
 
-Patamaps is a Rust-native correspondence compiler built against MetaMap’s substantive capabilities and guarantees. Independently owned descriptions of concepts and implementations produce checked static bindings whose semantic identities survive implementation moves. The Rust kernel owns validation, admission, proofs, uncertainty, risk, replay and governance; generated Rust consumers run without MetaMap or the compiler.
+Patamaps is being refocused as a Rust-first data structure and library for explicitly modeled semantic identities and correspondences. The existing correspondence compiler and project workflows remain available as optional layers. The [Rust-first plan](docs/plans/rust-first-data-structure.md) defines the new direction and its current implementation status.
+
+Historically, Patamaps was developed as a Rust-native correspondence compiler built against MetaMap’s substantive capabilities and guarantees. Independently owned descriptions of concepts and implementations produce checked static bindings whose semantic identities survive implementation moves. The Rust kernel owns validation, admission, proofs, uncertainty, risk, replay and governance; generated Rust consumers run without MetaMap or the compiler.
+
+## Start with the Rust library
+
+Patamaps can represent and check entities and their explicitly declared
+correspondences in memory. Add the tested source revision to a Rust 1.99 or
+newer application's `Cargo.toml`:
+
+```toml
+[dependencies]
+patamaps-core = { git = "https://github.com/roryscot/patamaps.git", rev = "303c9f53d3565984a5dd0da5ccfd931febc2f448", default-features = false }
+```
+
+The [Rust library guide](docs/guides/rust-library.md) explains how to create,
+check, query, and edit a graph and links to a complete executable example.
+The current `0.1.0` crates are not published; this pinned Git dependency is a
+source snapshot, not a released stability guarantee. Cargo needs network access
+for an initial fetch, but graph operations do not require a CLI or service.
+
+## Optional compiler and historical capability record
+
+The earlier compiler milestone covers MetaMap 0.7.1's substantive C01–C19
+capabilities and required semantic, security and wire guarantees at source
+`956f1a8`. The [acceptance record](docs/acceptance/capabilities/package-reproducibility-956f1a8/capability-acceptance.json)
+and [capability plan](BUILD_PLAN.md) describe its scope and limits; they do not
+assert exact JavaScript/API compatibility or fresh verification of every later
+revision. These compiler workflows are optional for in-process Rust use.
+
+For the existing compiler workflow, start with the [real Rust project guide](docs/guides/rust-project-quickstart.md):
+declare one correspondence, validate it, generate static Rust and connect that
+artifact to your own handler. The application need not run the compiler.
+
+The broader Intel project-adoption goal continues as a separate program tracked in
+the [integration backlog](docs/plans/integration-enhancement-backlog.md): real
+Next.js/Rust onboarding, retained application builds, deployment, browser and
+installed-workflow qualification, and performance work. These are not prerequisites
+for the completed capability milestone. Existing implementations,
+historical receipts and unfinished work remain intact. No open enhancement
+becomes a pass through this scope change.
 
 The [cross-stack fixture](examples/cross-stack/README.md) passes its [declared first-release profile](docs/acceptance/cross-stack/release-profile-1/receipt.json), covering M0–M7 and X01–X20. Its real Next.js page, generated HTTP client, Rust handler, Cargo target and Linux image are checked through actual compilation, HTTP and Chromium interaction. Intel/Linux preview controls preserve complete selected generations; paired MetaMap decisions and exact installed consumers also pass. This accepts the [pinned support profile](examples/cross-stack/support.json); arbitrary frameworks, macros, shell effects and production deployment require separate work.
 
-[General project adoption](docs/plans/2026-10-15-general-project-adoption.md) is in progress. Native [project-capture/project-verify](docs/decisions/0031-explicit-project-inputs.md) accept explicit nonsecret input lists and arbitrary component layouts without executing project code or resolving secret references. The [G1 Linux native regressions](docs/acceptance/project-adoption/g1-linux-native-ec79db4/receipt.json) pass on both architectures at the identified source. [Richer JSON DTO HTTP bindings](docs/decisions/0032-finite-json-http-contracts.md) also pass scoped Rust/TypeScript/wire regressions. Existing-project runtime qualification, stateful Axum integration and a portable general development workflow remain open.
+[General project adoption](docs/plans/2026-10-15-general-project-adoption.md) continues as a separate Intel goal. Native [project-capture/project-verify](docs/decisions/0031-explicit-project-inputs.md) accept explicit nonsecret input lists and arbitrary component layouts without executing project code or resolving secret references. The [G1 Linux native regressions](docs/acceptance/project-adoption/g1-linux-native-ec79db4/receipt.json) pass on both architectures at the identified source. [Richer JSON DTO HTTP bindings](docs/decisions/0032-finite-json-http-contracts.md) also pass scoped Rust/TypeScript/wire regressions. Broader existing-project runtime qualification and a portable general development workflow remain enhancement work; scoped stateful Axum results are recorded in the support matrix.
 
 The [retained project workflow](docs/guides/retained-project-builds.md) composes explicit source capture, workspace admission/emission, build and verification commands, exact artifacts and atomic selection. Its foreground controller runs outside examples and acquires the configured policy runner per update; [decision0040](docs/decisions/0040-foreground-retained-project-watch.md) scopes cancellation and parent-death behavior. Real-project readiness, complete build contexts, performance and installed general-workflow qualification remain open.
 
 A [retained existing Avaelus/Seeder monorepo](docs/acceptance/project-adoption/seeder-actual-next-commands-20261016/receipt.json) passes its actual Next build and separate TypeScript check through native project-exec with 878 selected text inputs. This qualifies the command primitive on that application; generated-contract integration, complete dependency capture, runtime and deployment remain open.
 
 Native [compiled Next observations](docs/guides/compiled-next-observations.md) now preserve captured routes, ordered rules, module aliases and an independent nonsecret configuration projection. The retained existing-app case passes scoped comparison and offline replay; runtime semantics remain separate.
+
+For image contexts containing executables, the [native Docker snapshot guide](docs/guides/docker-context-snapshots.md) explains opaque capture, exact staging and COPY observations without putting binary bytes in JSON.
 
 The [capability build plan](BUILD_PLAN.md) uses `@roryscot/metamap` 0.7.1 engine `399747a4ad05a37cd8db1cedd53048fad2175be4` as its reference. The owner’s revised goal prioritizes complete native workflows and required semantic, security, format, canonicalization, hash and signature guarantees. Exact JavaScript exception wording, object identity, prototypes and incidental mutation are required only for a demonstrated integration. The [test classification policy](docs/TEST_CLASSIFICATION.md) preserves that distinction without changing original evidence.
 

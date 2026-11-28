@@ -1,0 +1,3297 @@
+{
+  "schemaVersion": "1.0.0",
+  "referenceEngine": "399747a4ad05a37cd8db1cedd53048fad2175be4",
+  "baselineDigest": "sha256:963a0bdb0514342053144b369b900342d78c55d79ddc3a07c032dd859c8cd8ed",
+  "purpose": "Append omissions discovered during inventory review. The original denominator and assertions remain untouched; completion includes both files.",
+  "obligations": [
+    {
+      "id": "parity:6bbc87e9fa4a5cf17541",
+      "identity": "auxiliary-data:relation-packs/scientific-skos.json",
+      "kind": "contract-data",
+      "name": "relation-packs/scientific-skos.json",
+      "origin": {
+        "path": "relation-packs/scientific-skos.json",
+        "digest": "sha256:2b79e79f495f2c8a1fb2e7cd39ddf112e2306c26ad5a267762f9c38759b5ff57"
+      },
+      "status": "unclassified",
+      "candidateEvidence": [],
+      "workstream": "P2",
+      "candidateEntryPoint": {
+        "kind": "legacy-contract-import",
+        "path": "relation-packs/scientific-skos.json"
+      },
+      "verificationStrategy": "Preserve the original contract bytes and exercise the public scientific workflows that depend on the slot vocabulary or scientific relation pack.",
+      "expectation": {
+        "kind": "exact-source-bytes",
+        "digest": "sha256:2b79e79f495f2c8a1fb2e7cd39ddf112e2306c26ad5a267762f9c38759b5ff57"
+      },
+      "inventoryCorrection": "Referenced public contract data was listed but had no obligation row in the first freeze."
+    },
+    {
+      "id": "parity:5b4e4792cd92c71dfd3e",
+      "identity": "auxiliary-data:schemas/sssom-1.0.0-slots.json",
+      "kind": "contract-data",
+      "name": "schemas/sssom-1.0.0-slots.json",
+      "origin": {
+        "path": "schemas/sssom-1.0.0-slots.json",
+        "digest": "sha256:6c6869005ab2724260006f8eb5d8f0ef65f93cd399439342803d9ad2e5aff8eb"
+      },
+      "status": "unclassified",
+      "candidateEvidence": [],
+      "workstream": "P2",
+      "candidateEntryPoint": {
+        "kind": "legacy-contract-import",
+        "path": "schemas/sssom-1.0.0-slots.json"
+      },
+      "verificationStrategy": "Preserve the original contract bytes and exercise the public scientific workflows that depend on the slot vocabulary or scientific relation pack.",
+      "expectation": {
+        "kind": "exact-source-bytes",
+        "digest": "sha256:6c6869005ab2724260006f8eb5d8f0ef65f93cd399439342803d9ad2e5aff8eb"
+      },
+      "inventoryCorrection": "Referenced public contract data was listed but had no obligation row in the first freeze."
+    },
+    {
+      "id": "parity:dfca390a02d032eebc42",
+      "identity": "member:src/canonical.ts:CanonicalJsonError.code:instance",
+      "kind": "class-member",
+      "name": "CanonicalJsonError.code",
+      "origin": {
+        "path": "src/canonical.ts",
+        "digest": "sha256:06994bd6e52c332ef52e37dd92408372adc51a593067a1b03ba0108bf1adf7ce",
+        "line": 6
+      },
+      "parent": "parity:3258bfc66c5c362bd18c",
+      "status": "unclassified",
+      "candidateEvidence": [],
+      "workstream": "P6",
+      "candidateEntryPoint": {
+        "kind": "mapped-public-api",
+        "referenceModule": "src/canonical.ts",
+        "symbol": "CanonicalJsonError.code"
+      },
+      "verificationStrategy": "Compile and execute a consumer that inspects the public error property through the Rust-backed compatibility facade.",
+      "expectation": {
+        "kind": "pinned-declaration",
+        "declarationDigest": "sha256:49c1d13ed613029b2c285fd348c142ff0e8534ee3246701f8cd3adae65ed0541",
+        "declaration": "public readonly code: string"
+      },
+      "inventoryCorrection": "A public constructor parameter property is part of the class API, even though it is not a separate class-member declaration."
+    },
+    {
+      "id": "parity:0946a39e6b9df934bc45",
+      "identity": "member:src/composer.ts:MetamapCompositionError.identifier:instance",
+      "kind": "class-member",
+      "name": "MetamapCompositionError.identifier",
+      "origin": {
+        "path": "src/composer.ts",
+        "digest": "sha256:337f9a22e811f36ed4f8760c8180070ad9e349e29964de916b823230484de23e",
+        "line": 13
+      },
+      "parent": "parity:6eb1a45137dba8c4deeb",
+      "status": "unclassified",
+      "candidateEvidence": [],
+      "workstream": "P6",
+      "candidateEntryPoint": {
+        "kind": "mapped-public-api",
+        "referenceModule": "src/composer.ts",
+        "symbol": "MetamapCompositionError.identifier"
+      },
+      "verificationStrategy": "Compile and execute a consumer that inspects the public error property through the Rust-backed compatibility facade.",
+      "expectation": {
+        "kind": "pinned-declaration",
+        "declarationDigest": "sha256:5e4f44fe4fd4155502bd4c6067411fb3f868f5fd404754f163f58f584ddb1daf",
+        "declaration": "public readonly identifier?: string"
+      },
+      "inventoryCorrection": "A public constructor parameter property is part of the class API, even though it is not a separate class-member declaration."
+    },
+    {
+      "id": "parity:0e9883b01360db581c99",
+      "identity": "member:src/explanation.ts:MetamapExplanationError.code:instance",
+      "kind": "class-member",
+      "name": "MetamapExplanationError.code",
+      "origin": {
+        "path": "src/explanation.ts",
+        "digest": "sha256:7e950b4a7fbd1dff4a10bd7ccaddb6afe2cef81babf13de6b088364b66ab5201",
+        "line": 81
+      },
+      "parent": "parity:8e7c866ae3a126c14b75",
+      "status": "unclassified",
+      "candidateEvidence": [],
+      "workstream": "P6",
+      "candidateEntryPoint": {
+        "kind": "mapped-public-api",
+        "referenceModule": "src/explanation.ts",
+        "symbol": "MetamapExplanationError.code"
+      },
+      "verificationStrategy": "Compile and execute a consumer that inspects the public error property through the Rust-backed compatibility facade.",
+      "expectation": {
+        "kind": "pinned-declaration",
+        "declarationDigest": "sha256:49c1d13ed613029b2c285fd348c142ff0e8534ee3246701f8cd3adae65ed0541",
+        "declaration": "public readonly code: string"
+      },
+      "inventoryCorrection": "A public constructor parameter property is part of the class API, even though it is not a separate class-member declaration."
+    },
+    {
+      "id": "parity:197b9190ecd48ace9d38",
+      "identity": "member:src/governance.ts:GovernanceError.code:instance",
+      "kind": "class-member",
+      "name": "GovernanceError.code",
+      "origin": {
+        "path": "src/governance.ts",
+        "digest": "sha256:9247c0c03f3cd6d9bc381595154da81dcd32a90f657f0a1abb6ef193f7202709",
+        "line": 89
+      },
+      "parent": "parity:2b0e5eecb45db94d7f6e",
+      "status": "unclassified",
+      "candidateEvidence": [],
+      "workstream": "P6",
+      "candidateEntryPoint": {
+        "kind": "mapped-public-api",
+        "referenceModule": "src/governance.ts",
+        "symbol": "GovernanceError.code"
+      },
+      "verificationStrategy": "Compile and execute a consumer that inspects the public error property through the Rust-backed compatibility facade.",
+      "expectation": {
+        "kind": "pinned-declaration",
+        "declarationDigest": "sha256:49c1d13ed613029b2c285fd348c142ff0e8534ee3246701f8cd3adae65ed0541",
+        "declaration": "public readonly code: string"
+      },
+      "inventoryCorrection": "A public constructor parameter property is part of the class API, even though it is not a separate class-member declaration."
+    },
+    {
+      "id": "parity:4af1385550ec32b8f328",
+      "identity": "member:src/graph.ts:MetamapValidationError.issues:instance",
+      "kind": "class-member",
+      "name": "MetamapValidationError.issues",
+      "origin": {
+        "path": "src/graph.ts",
+        "digest": "sha256:8f2d1c2f0154041f4c3f72438039206311d7ff4e6a32d364918b0c3689e5f4e9",
+        "line": 16
+      },
+      "parent": "parity:c7e0d0807bc455c13084",
+      "status": "unclassified",
+      "candidateEvidence": [],
+      "workstream": "P6",
+      "candidateEntryPoint": {
+        "kind": "mapped-public-api",
+        "referenceModule": "src/graph.ts",
+        "symbol": "MetamapValidationError.issues"
+      },
+      "verificationStrategy": "Compile and execute a consumer that inspects the public error property through the Rust-backed compatibility facade.",
+      "expectation": {
+        "kind": "pinned-declaration",
+        "declarationDigest": "sha256:197a7799de7d050270a7a0500ef7a8581b31b9b484863da6d57fea40f7f213cb",
+        "declaration": "public readonly issues: ValidationIssue[]"
+      },
+      "inventoryCorrection": "A public constructor parameter property is part of the class API, even though it is not a separate class-member declaration."
+    },
+    {
+      "id": "parity:184f236a2ca83615dab4",
+      "identity": "member:src/repair.ts:MetamapRepairError.code:instance",
+      "kind": "class-member",
+      "name": "MetamapRepairError.code",
+      "origin": {
+        "path": "src/repair.ts",
+        "digest": "sha256:d65b22c1e943e52460cf84870954242ec91754e94a0380241541ecd19ad4d853",
+        "line": 82
+      },
+      "parent": "parity:e9ec827147d0db41d4eb",
+      "status": "unclassified",
+      "candidateEvidence": [],
+      "workstream": "P6",
+      "candidateEntryPoint": {
+        "kind": "mapped-public-api",
+        "referenceModule": "src/repair.ts",
+        "symbol": "MetamapRepairError.code"
+      },
+      "verificationStrategy": "Compile and execute a consumer that inspects the public error property through the Rust-backed compatibility facade.",
+      "expectation": {
+        "kind": "pinned-declaration",
+        "declarationDigest": "sha256:49c1d13ed613029b2c285fd348c142ff0e8534ee3246701f8cd3adae65ed0541",
+        "declaration": "public readonly code: string"
+      },
+      "inventoryCorrection": "A public constructor parameter property is part of the class API, even though it is not a separate class-member declaration."
+    },
+    {
+      "id": "parity:fb49041595f58e28534f",
+      "identity": "member:src/sssom.ts:SssomError.code:instance",
+      "kind": "class-member",
+      "name": "SssomError.code",
+      "origin": {
+        "path": "src/sssom.ts",
+        "digest": "sha256:bc99ab38d7b4e9d8754bafdadddca5edb164de116464ab0b9a454a5a8ac8c6af",
+        "line": 77
+      },
+      "parent": "parity:cd68e5b28d35ba574f1d",
+      "status": "unclassified",
+      "candidateEvidence": [],
+      "workstream": "P6",
+      "candidateEntryPoint": {
+        "kind": "mapped-public-api",
+        "referenceModule": "src/sssom.ts",
+        "symbol": "SssomError.code"
+      },
+      "verificationStrategy": "Compile and execute a consumer that inspects the public error property through the Rust-backed compatibility facade.",
+      "expectation": {
+        "kind": "pinned-declaration",
+        "declarationDigest": "sha256:49c1d13ed613029b2c285fd348c142ff0e8534ee3246701f8cd3adae65ed0541",
+        "declaration": "public readonly code: string"
+      },
+      "inventoryCorrection": "A public constructor parameter property is part of the class API, even though it is not a separate class-member declaration."
+    }
+  ],
+  "referenceTree": [
+    {
+      "path": ".gitattributes",
+      "mode": "100644",
+      "gitBlob": "8b530a80c6b73a3f77701a5d71abc974ee6fddba"
+    },
+    {
+      "path": ".github/FUNDING.yml",
+      "mode": "100644",
+      "gitBlob": "99f8e20de983364b17f53a3ba71ab55f749d9d29"
+    },
+    {
+      "path": ".github/workflows/ci.yml",
+      "mode": "100644",
+      "gitBlob": "a189ef76093a62403c87fdeb721a4bf1a371a5e1"
+    },
+    {
+      "path": ".gitignore",
+      "mode": "100644",
+      "gitBlob": "7c54718b869a56808a3def9d60e53dba0e1dc308"
+    },
+    {
+      "path": ".prettierignore",
+      "mode": "100644",
+      "gitBlob": "2412c3cd2ad6b5fd883c1aeb9ef5151b23a0a109"
+    },
+    {
+      "path": "ACTIVATION.md",
+      "mode": "100644",
+      "gitBlob": "3bbd42b14bdf648d95c15c6621e595efe494cb46"
+    },
+    {
+      "path": "APPLICATION_TOPOLOGY.md",
+      "mode": "100644",
+      "gitBlob": "9c1fe78a63fc2150aafd46eec9ef4bd00ec70c61"
+    },
+    {
+      "path": "ARCHITECTURE.md",
+      "mode": "100644",
+      "gitBlob": "dbceb15cb9bf049e03025890c26cf34b8056df8d"
+    },
+    {
+      "path": "BUILD_PLAN.md",
+      "mode": "100644",
+      "gitBlob": "9518e338aefa0902d1124a79bdebbe1c5fccbd7c"
+    },
+    {
+      "path": "CHANGELOG.md",
+      "mode": "100644",
+      "gitBlob": "c036a40db28b7a4f8d9cbe1837bcc9a5dc30500d"
+    },
+    {
+      "path": "CONTRACTS.md",
+      "mode": "100644",
+      "gitBlob": "1c89100ffffa09ea723ed2beb8aa794e4081101a"
+    },
+    {
+      "path": "CONTRIBUTING.md",
+      "mode": "100644",
+      "gitBlob": "d884901f09cd2442c3c2ac5b1586a49bcbd7e019"
+    },
+    {
+      "path": "COUNTERFACTUAL.md",
+      "mode": "100644",
+      "gitBlob": "08e123b59c328d40581c5bc7ea0966af71a154f1"
+    },
+    {
+      "path": "DEBUGGER.md",
+      "mode": "100644",
+      "gitBlob": "2bfd2aa4750d63e92ed412c20aa1a7c6840b6b95"
+    },
+    {
+      "path": "GOVERNANCE.md",
+      "mode": "100644",
+      "gitBlob": "f5ca7e09772c6ec395cadb07e714b4afe35a6c4b"
+    },
+    {
+      "path": "LICENSE",
+      "mode": "100644",
+      "gitBlob": "d645695673349e3947e8e5ae42332d0ac3164cd7"
+    },
+    {
+      "path": "LIFECYCLE.md",
+      "mode": "100644",
+      "gitBlob": "5edcb0bfbbf3ca174fd6722426be3d0a8b37b3d7"
+    },
+    {
+      "path": "NOTICE",
+      "mode": "100644",
+      "gitBlob": "5668e92cbe870b849626ddd24100db2a0e949a6b"
+    },
+    {
+      "path": "PROVENANCE.md",
+      "mode": "100644",
+      "gitBlob": "e5d8be063c735bcc2e0713c1fd7b45f798cc2bcb"
+    },
+    {
+      "path": "README.md",
+      "mode": "100644",
+      "gitBlob": "a199e0ce32baf8ed676430b2134fc084a2b868cf"
+    },
+    {
+      "path": "RELATIONS.md",
+      "mode": "100644",
+      "gitBlob": "4bc91a231aa3bc3a9c5c48a0fe05fbcbbc25e658"
+    },
+    {
+      "path": "REPAIR.md",
+      "mode": "100644",
+      "gitBlob": "710617d51832b54e28ff18d058c287523e560916"
+    },
+    {
+      "path": "REPLAY.md",
+      "mode": "100644",
+      "gitBlob": "ae9b2c684bdb22c5e49835694d6fe491f1bd8501"
+    },
+    {
+      "path": "ROUTING.md",
+      "mode": "100644",
+      "gitBlob": "832f144a550d223f7c8f9587b704eb9f12b56e95"
+    },
+    {
+      "path": "SCIENTIFIC_MAPPING.md",
+      "mode": "100644",
+      "gitBlob": "048eecbd6b09703c76a0394fdd8f1ac5b354d0eb"
+    },
+    {
+      "path": "SECURITY.md",
+      "mode": "100644",
+      "gitBlob": "a8b1766429070e66ff15e012f06a86fdfa0b1af5"
+    },
+    {
+      "path": "UNCERTAINTY.md",
+      "mode": "100644",
+      "gitBlob": "6cf25ef828b34004ac30a004ab6bd67f36c39cf7"
+    },
+    {
+      "path": "VIABILITY.md",
+      "mode": "100644",
+      "gitBlob": "a917a6d1bcf6534f7fa73d98d4053827541f1382"
+    },
+    {
+      "path": "VISION.md",
+      "mode": "100644",
+      "gitBlob": "9a6f44b3ddf0ec4eddac280de1c39838b39ecdef"
+    },
+    {
+      "path": "dist/activation-model.d.ts",
+      "mode": "100644",
+      "gitBlob": "cff2d3ace63bd3fd9ef6708cd064be1e7b36afbb"
+    },
+    {
+      "path": "dist/activation-model.d.ts.map",
+      "mode": "100644",
+      "gitBlob": "da90db59a1f2834946ade870235b46203a65af0b"
+    },
+    {
+      "path": "dist/activation-model.js",
+      "mode": "100644",
+      "gitBlob": "2544fff3db73462473c024c882bc9288a289bdd0"
+    },
+    {
+      "path": "dist/activation-model.js.map",
+      "mode": "100644",
+      "gitBlob": "7619eb2b6c88ddb0084ce142481e188ca30d9e0e"
+    },
+    {
+      "path": "dist/activation.d.ts",
+      "mode": "100644",
+      "gitBlob": "9bde27d05ba733a334ec5e6d95e9812393bf3af8"
+    },
+    {
+      "path": "dist/activation.d.ts.map",
+      "mode": "100644",
+      "gitBlob": "9ad1a57d0738177e7f270c81f8768c54c1c954e3"
+    },
+    {
+      "path": "dist/activation.js",
+      "mode": "100644",
+      "gitBlob": "3c2a77dee9a4b123a3259b786db90d36af609012"
+    },
+    {
+      "path": "dist/activation.js.map",
+      "mode": "100644",
+      "gitBlob": "e6f25e583c517813ae0f7de8fb65c704014c9308"
+    },
+    {
+      "path": "dist/adapters/json-collections.d.ts",
+      "mode": "100644",
+      "gitBlob": "1da03ed380dabf114ca1e3394f44bfdf8801d458"
+    },
+    {
+      "path": "dist/adapters/json-collections.d.ts.map",
+      "mode": "100644",
+      "gitBlob": "161ad7ee2dab8ee6b86df2b0e04516218d32dbf3"
+    },
+    {
+      "path": "dist/adapters/json-collections.js",
+      "mode": "100644",
+      "gitBlob": "65fbab0849a8a9fcf0fe3bb8cd156856685aee8c"
+    },
+    {
+      "path": "dist/adapters/json-collections.js.map",
+      "mode": "100644",
+      "gitBlob": "0cab2caf05edb87ae32bf2871eb6fee20d2c3af0"
+    },
+    {
+      "path": "dist/adapters/legacy-sources.d.ts",
+      "mode": "100644",
+      "gitBlob": "f19e1159c3869d1bfff201444686bfd14e20f9d9"
+    },
+    {
+      "path": "dist/adapters/legacy-sources.d.ts.map",
+      "mode": "100644",
+      "gitBlob": "3cc81b0b46be262550f073b6e7b250ff65775b5d"
+    },
+    {
+      "path": "dist/adapters/legacy-sources.js",
+      "mode": "100644",
+      "gitBlob": "0595a33adcff40fc50f27654582201df3c05a00a"
+    },
+    {
+      "path": "dist/adapters/legacy-sources.js.map",
+      "mode": "100644",
+      "gitBlob": "0a342e0877f7b027be8582f2ebcadcacc96c759b"
+    },
+    {
+      "path": "dist/adapters/metamap-shard.d.ts",
+      "mode": "100644",
+      "gitBlob": "4087b2c8932536ddd94cfaf5a46e6adda9576e9b"
+    },
+    {
+      "path": "dist/adapters/metamap-shard.d.ts.map",
+      "mode": "100644",
+      "gitBlob": "b19ca79db3233cd8246068acb39dc51f6993ea60"
+    },
+    {
+      "path": "dist/adapters/metamap-shard.js",
+      "mode": "100644",
+      "gitBlob": "e03eafba5657a45fd7830afa43c0e35bd5413f3a"
+    },
+    {
+      "path": "dist/adapters/metamap-shard.js.map",
+      "mode": "100644",
+      "gitBlob": "d9c6fef52e10f8cc5d7965967f9dd834b34fab27"
+    },
+    {
+      "path": "dist/adapters/nextjs-app-router.d.ts",
+      "mode": "100644",
+      "gitBlob": "4b6812c630e45ad060d630ccfa8aaef51ed6302b"
+    },
+    {
+      "path": "dist/adapters/nextjs-app-router.d.ts.map",
+      "mode": "100644",
+      "gitBlob": "6fbab65905c212055896d02fc7392bb684ffed5d"
+    },
+    {
+      "path": "dist/adapters/nextjs-app-router.js",
+      "mode": "100644",
+      "gitBlob": "809ee9a402c88630513f1095017597b7b3222f8b"
+    },
+    {
+      "path": "dist/adapters/nextjs-app-router.js.map",
+      "mode": "100644",
+      "gitBlob": "fa8e7ec6beb18f9fadafa416e5f13d4864c912a2"
+    },
+    {
+      "path": "dist/adapters/prisma.d.ts",
+      "mode": "100644",
+      "gitBlob": "54e0d7fdc1cec6d70751a528fff0edcd9c3c2783"
+    },
+    {
+      "path": "dist/adapters/prisma.d.ts.map",
+      "mode": "100644",
+      "gitBlob": "0025c1de9098193a97f678635e79c00d27fe9ef0"
+    },
+    {
+      "path": "dist/adapters/prisma.js",
+      "mode": "100644",
+      "gitBlob": "317a6db5a2138c268dffec9f2161872e341aee89"
+    },
+    {
+      "path": "dist/adapters/prisma.js.map",
+      "mode": "100644",
+      "gitBlob": "b15bb77f04b132351b99b7a406f1122cb15ac4e8"
+    },
+    {
+      "path": "dist/adapters/registry.d.ts",
+      "mode": "100644",
+      "gitBlob": "fd1f0a921d63dd086f0cfd0d052ed127b8aaa2e0"
+    },
+    {
+      "path": "dist/adapters/registry.d.ts.map",
+      "mode": "100644",
+      "gitBlob": "6dba541c8b57ae797176bc2f1b24fb82cffdfd94"
+    },
+    {
+      "path": "dist/adapters/registry.js",
+      "mode": "100644",
+      "gitBlob": "47d08488b281e7f68538f247fbce93ccc5e25ddc"
+    },
+    {
+      "path": "dist/adapters/registry.js.map",
+      "mode": "100644",
+      "gitBlob": "b355b35e0c86671818081788fd480d7b2709a6f1"
+    },
+    {
+      "path": "dist/adapters/source-of-truth.d.ts",
+      "mode": "100644",
+      "gitBlob": "45cef825e4d5740bc104eb279718c48b01c7ea76"
+    },
+    {
+      "path": "dist/adapters/source-of-truth.d.ts.map",
+      "mode": "100644",
+      "gitBlob": "7dcbea54f8ee76f76fc752838e264ed76fb2c648"
+    },
+    {
+      "path": "dist/adapters/source-of-truth.js",
+      "mode": "100644",
+      "gitBlob": "98769f2ac6dcd558206515469fcf0831c79543bf"
+    },
+    {
+      "path": "dist/adapters/source-of-truth.js.map",
+      "mode": "100644",
+      "gitBlob": "f226da20431ccb8bcc96c3603c484683ed7b2b4e"
+    },
+    {
+      "path": "dist/adapters/sssom-tsv.d.ts",
+      "mode": "100644",
+      "gitBlob": "3b82d39d3ed49700c0837cea0440d2f01663cb3a"
+    },
+    {
+      "path": "dist/adapters/sssom-tsv.d.ts.map",
+      "mode": "100644",
+      "gitBlob": "81c0e8a7137df05ccc160a1dd261664803c230d8"
+    },
+    {
+      "path": "dist/adapters/sssom-tsv.js",
+      "mode": "100644",
+      "gitBlob": "95c26533182d421bb21cf5986aa9a91ca704642c"
+    },
+    {
+      "path": "dist/adapters/sssom-tsv.js.map",
+      "mode": "100644",
+      "gitBlob": "828bc2fcf8c20f3decaa264eb42756a3f437ed7f"
+    },
+    {
+      "path": "dist/adapters/types.d.ts",
+      "mode": "100644",
+      "gitBlob": "2f34e5b44b9a2b951fc8d984a9159f0d5783799b"
+    },
+    {
+      "path": "dist/adapters/types.d.ts.map",
+      "mode": "100644",
+      "gitBlob": "259bee96174e4dedd8f212976fea5c8e3b2c20db"
+    },
+    {
+      "path": "dist/adapters/types.js",
+      "mode": "100644",
+      "gitBlob": "718fd38ae40c67ea23b242517cf9919f602c5a3e"
+    },
+    {
+      "path": "dist/adapters/types.js.map",
+      "mode": "100644",
+      "gitBlob": "6b1b1aaeec11177b317f08a1134ca7d4f5fca0d9"
+    },
+    {
+      "path": "dist/adapters/typescript-zod.d.ts",
+      "mode": "100644",
+      "gitBlob": "95cbb6e3c7935da3521bb45c749236a2993f1305"
+    },
+    {
+      "path": "dist/adapters/typescript-zod.d.ts.map",
+      "mode": "100644",
+      "gitBlob": "ce41a057cfd2cd6e759c8acdde1b577f0b304343"
+    },
+    {
+      "path": "dist/adapters/typescript-zod.js",
+      "mode": "100644",
+      "gitBlob": "e6a2c62b87111a1080c9f89536d872474e356d2e"
+    },
+    {
+      "path": "dist/adapters/typescript-zod.js.map",
+      "mode": "100644",
+      "gitBlob": "341443197f3fed261281513920cbac3cff0b0202"
+    },
+    {
+      "path": "dist/canonical.d.ts",
+      "mode": "100644",
+      "gitBlob": "fe5951d1e9b635ba01c46ce46139e3b2b10833d7"
+    },
+    {
+      "path": "dist/canonical.d.ts.map",
+      "mode": "100644",
+      "gitBlob": "afeccf2467f2ab9bd428abcc971c20c4f3818883"
+    },
+    {
+      "path": "dist/canonical.js",
+      "mode": "100644",
+      "gitBlob": "fc1bf3eeb8228c0a280bb802d9be6212b08d2051"
+    },
+    {
+      "path": "dist/canonical.js.map",
+      "mode": "100644",
+      "gitBlob": "a33532add48dc2d22533f935e99262624d465b7c"
+    },
+    {
+      "path": "dist/cli.d.ts",
+      "mode": "100644",
+      "gitBlob": "faaadd55117775ff9dcd7155c28a0f63e7f86d0b"
+    },
+    {
+      "path": "dist/cli.d.ts.map",
+      "mode": "100644",
+      "gitBlob": "f022439b157b2fbd1902a8ba164f9afd776878e3"
+    },
+    {
+      "path": "dist/cli.js",
+      "mode": "100644",
+      "gitBlob": "eb97c659d124f70dfafa1b52e610181892b9f463"
+    },
+    {
+      "path": "dist/cli.js.map",
+      "mode": "100644",
+      "gitBlob": "bf0f49b1b5de0ce37c86f389e83ebd3fa3bf4ced"
+    },
+    {
+      "path": "dist/composer.d.ts",
+      "mode": "100644",
+      "gitBlob": "e259b30621f2b9c3ffae8c261e825a0497b342c3"
+    },
+    {
+      "path": "dist/composer.d.ts.map",
+      "mode": "100644",
+      "gitBlob": "b8b813ac2b1fc0c94d58ad2b29115f1d64c0fac0"
+    },
+    {
+      "path": "dist/composer.js",
+      "mode": "100644",
+      "gitBlob": "cdb6b1f9406faa335d93c70dbee7c59b1bbe6aac"
+    },
+    {
+      "path": "dist/composer.js.map",
+      "mode": "100644",
+      "gitBlob": "ac6ca8a3a6ee6aa6c913fb33e5c01d00fbf7345c"
+    },
+    {
+      "path": "dist/config.d.ts",
+      "mode": "100644",
+      "gitBlob": "07e218a34e1fbda4ff5f879a071adc6afd9781a2"
+    },
+    {
+      "path": "dist/config.d.ts.map",
+      "mode": "100644",
+      "gitBlob": "7e584509b164a7db5ac0e89f68b17dff41ec4827"
+    },
+    {
+      "path": "dist/config.js",
+      "mode": "100644",
+      "gitBlob": "eb16afc92183883d701421389cc1a85078d9b7bd"
+    },
+    {
+      "path": "dist/config.js.map",
+      "mode": "100644",
+      "gitBlob": "86d708eae2e9455af0434894ce8f740f7484b5db"
+    },
+    {
+      "path": "dist/constraints.d.ts",
+      "mode": "100644",
+      "gitBlob": "4bb565dbd50f7f98039d029b8235429c0585e2ee"
+    },
+    {
+      "path": "dist/constraints.d.ts.map",
+      "mode": "100644",
+      "gitBlob": "56ad4162880b5972038db2aabd3b6fc7074e97dc"
+    },
+    {
+      "path": "dist/constraints.js",
+      "mode": "100644",
+      "gitBlob": "52980dbbdb32d4c3a15d4275ec9cec418b051b22"
+    },
+    {
+      "path": "dist/constraints.js.map",
+      "mode": "100644",
+      "gitBlob": "5de3301f68898c51eb13ff4c1f3142da0faa9466"
+    },
+    {
+      "path": "dist/context.d.ts",
+      "mode": "100644",
+      "gitBlob": "e08493f6dd3584f8122e3d1d3dccaef9b1fb201e"
+    },
+    {
+      "path": "dist/context.d.ts.map",
+      "mode": "100644",
+      "gitBlob": "8c7a9d2ca2f91b977eb45f82f7b3a966b44e1e93"
+    },
+    {
+      "path": "dist/context.js",
+      "mode": "100644",
+      "gitBlob": "3efc5b400ca50de6dc2bf0243332b96ffe6e644a"
+    },
+    {
+      "path": "dist/context.js.map",
+      "mode": "100644",
+      "gitBlob": "b9df18feda8ea9393d5b5cb64a3e4c868ce4b5c2"
+    },
+    {
+      "path": "dist/correspondence.d.ts",
+      "mode": "100644",
+      "gitBlob": "d2ae21e41dd845880ec2ea9c01bfcaf979781f3e"
+    },
+    {
+      "path": "dist/correspondence.d.ts.map",
+      "mode": "100644",
+      "gitBlob": "716467c339e9471a2e92db1a39b7b09403d8e550"
+    },
+    {
+      "path": "dist/correspondence.js",
+      "mode": "100644",
+      "gitBlob": "5eb2c1f607e98fb70832cf27549ec4bb574c9f8d"
+    },
+    {
+      "path": "dist/correspondence.js.map",
+      "mode": "100644",
+      "gitBlob": "91f8c0c0c179b21a6251ddfe6f72c49e619a23ff"
+    },
+    {
+      "path": "dist/counterfactual.d.ts",
+      "mode": "100644",
+      "gitBlob": "f5607c94b75cccca135fcc0cd265c17ba2048b9d"
+    },
+    {
+      "path": "dist/counterfactual.d.ts.map",
+      "mode": "100644",
+      "gitBlob": "7e93e07580160534631b6c028e304513431b3377"
+    },
+    {
+      "path": "dist/counterfactual.js",
+      "mode": "100644",
+      "gitBlob": "4091c25498de8e87494d2c667406f7cbc0b2a23d"
+    },
+    {
+      "path": "dist/counterfactual.js.map",
+      "mode": "100644",
+      "gitBlob": "72295d733d4594a3d229f635e05fb2a40432cb1f"
+    },
+    {
+      "path": "dist/debugger.d.ts",
+      "mode": "100644",
+      "gitBlob": "990bb477e59ecda8ab0ad7f4369aa3191d50038d"
+    },
+    {
+      "path": "dist/debugger.d.ts.map",
+      "mode": "100644",
+      "gitBlob": "f1b07ec0e30a63c3e721ce25d08849cfbb395740"
+    },
+    {
+      "path": "dist/debugger.js",
+      "mode": "100644",
+      "gitBlob": "eb311c7d5ae7c692473370c683c626045c25ac64"
+    },
+    {
+      "path": "dist/debugger.js.map",
+      "mode": "100644",
+      "gitBlob": "6fdc25cc1f6784ab1c5b6f9bf11386da755d6e40"
+    },
+    {
+      "path": "dist/derivation-model.d.ts",
+      "mode": "100644",
+      "gitBlob": "d3ba01ce023329415ca85985e83d0d0e4d9b9190"
+    },
+    {
+      "path": "dist/derivation-model.d.ts.map",
+      "mode": "100644",
+      "gitBlob": "fca44e5310978326b35830febe12f1bd5e0aa0a3"
+    },
+    {
+      "path": "dist/derivation-model.js",
+      "mode": "100644",
+      "gitBlob": "2cfbf7f286f03b7d0c2c013742a7f3bca5f67323"
+    },
+    {
+      "path": "dist/derivation-model.js.map",
+      "mode": "100644",
+      "gitBlob": "6066473d531f53de233966d1940d7a64f2ae2e82"
+    },
+    {
+      "path": "dist/derivation.d.ts",
+      "mode": "100644",
+      "gitBlob": "952beaa9f1e34ba6a5d51a717ce2a51565942ab7"
+    },
+    {
+      "path": "dist/derivation.d.ts.map",
+      "mode": "100644",
+      "gitBlob": "e614c43ae28e1fba01eb41f2bf6eace292b2a5b7"
+    },
+    {
+      "path": "dist/derivation.js",
+      "mode": "100644",
+      "gitBlob": "48005807b4203ef1850e390cb14c99ed5fa45f6c"
+    },
+    {
+      "path": "dist/derivation.js.map",
+      "mode": "100644",
+      "gitBlob": "fedaa3364e56fcd7d4b7cc478f6eba9e10eecac6"
+    },
+    {
+      "path": "dist/diff.d.ts",
+      "mode": "100644",
+      "gitBlob": "f84b6f77de3abcf6675c39608c1b7fd3bb4b5bbc"
+    },
+    {
+      "path": "dist/diff.d.ts.map",
+      "mode": "100644",
+      "gitBlob": "6c2f32f398e1731eed0f9b87484bbdb7889e3b32"
+    },
+    {
+      "path": "dist/diff.js",
+      "mode": "100644",
+      "gitBlob": "76abe27e73d0421f9a02414b947c936f0e26bc31"
+    },
+    {
+      "path": "dist/diff.js.map",
+      "mode": "100644",
+      "gitBlob": "19d9b17ac07c0d93bd13032196a4e32139a36835"
+    },
+    {
+      "path": "dist/explanation-model.d.ts",
+      "mode": "100644",
+      "gitBlob": "a77d8f0ff85ac920b099d22e017b244c51543b81"
+    },
+    {
+      "path": "dist/explanation-model.d.ts.map",
+      "mode": "100644",
+      "gitBlob": "c4ff88ab4cd1d4859ff2ef29032b7106597eda98"
+    },
+    {
+      "path": "dist/explanation-model.js",
+      "mode": "100644",
+      "gitBlob": "22eb7e582def7c4527c49e3d9c956ad74f7e92e1"
+    },
+    {
+      "path": "dist/explanation-model.js.map",
+      "mode": "100644",
+      "gitBlob": "e33562af70bfbcc74100934261d217e524f26c5e"
+    },
+    {
+      "path": "dist/explanation.d.ts",
+      "mode": "100644",
+      "gitBlob": "d6716ade32ebec5a5d6af4d51ed733a95431296c"
+    },
+    {
+      "path": "dist/explanation.d.ts.map",
+      "mode": "100644",
+      "gitBlob": "48a47eea368844b44d097a8c43cb152a0a1e34b1"
+    },
+    {
+      "path": "dist/explanation.js",
+      "mode": "100644",
+      "gitBlob": "a0c710f05abe2ca11bdd6ffb68fc757c70a161e7"
+    },
+    {
+      "path": "dist/explanation.js.map",
+      "mode": "100644",
+      "gitBlob": "e3fbd496ed519da3e4cf7dc4c9b42ad8360ec6e2"
+    },
+    {
+      "path": "dist/governance-model.d.ts",
+      "mode": "100644",
+      "gitBlob": "9193fbd660c5ec381ab306c15130399831f19181"
+    },
+    {
+      "path": "dist/governance-model.d.ts.map",
+      "mode": "100644",
+      "gitBlob": "f888343ac65264ed78bc7bbdcd6f694d95700031"
+    },
+    {
+      "path": "dist/governance-model.js",
+      "mode": "100644",
+      "gitBlob": "551cec7b461fada293520779c3cf6a079ca2084a"
+    },
+    {
+      "path": "dist/governance-model.js.map",
+      "mode": "100644",
+      "gitBlob": "e0d620d2e7850864ea2ba09883a9bd9dc7c06f36"
+    },
+    {
+      "path": "dist/governance.d.ts",
+      "mode": "100644",
+      "gitBlob": "ea83a0a81dfde83800c307cf9c6a636cc00c0cd2"
+    },
+    {
+      "path": "dist/governance.d.ts.map",
+      "mode": "100644",
+      "gitBlob": "71dfef6f01fc8f56306c232fffdacddc20577b89"
+    },
+    {
+      "path": "dist/governance.js",
+      "mode": "100644",
+      "gitBlob": "6a855d26d309ffbd93c90c2ac6866d8a13e3280f"
+    },
+    {
+      "path": "dist/governance.js.map",
+      "mode": "100644",
+      "gitBlob": "f7ee46a8df77a3e3aaebb2bf77284541becf113a"
+    },
+    {
+      "path": "dist/graph.d.ts",
+      "mode": "100644",
+      "gitBlob": "9bdb5b778d5c25d06db29b24b4756275a6b6e9ee"
+    },
+    {
+      "path": "dist/graph.d.ts.map",
+      "mode": "100644",
+      "gitBlob": "73e1cf838c851d8d01afce65772967add38f51ae"
+    },
+    {
+      "path": "dist/graph.js",
+      "mode": "100644",
+      "gitBlob": "9946ecf9c8ed22e9f326ec2f1677db08d4b1fd12"
+    },
+    {
+      "path": "dist/graph.js.map",
+      "mode": "100644",
+      "gitBlob": "0e5f6955869427f2162f03413ae17fe0a01dffa6"
+    },
+    {
+      "path": "dist/impact.d.ts",
+      "mode": "100644",
+      "gitBlob": "68cea2997b5de781c2dc1fc1b7638405032cdfcf"
+    },
+    {
+      "path": "dist/impact.d.ts.map",
+      "mode": "100644",
+      "gitBlob": "a7b2c4e75161520b0d3993a1544c6a5c11ccbd6c"
+    },
+    {
+      "path": "dist/impact.js",
+      "mode": "100644",
+      "gitBlob": "141e2cf19d75db5402f4c6f23db56a11d9b9ef7f"
+    },
+    {
+      "path": "dist/impact.js.map",
+      "mode": "100644",
+      "gitBlob": "bcb2d6d9f1bf23b371bc3a2bae7483cee912e9fb"
+    },
+    {
+      "path": "dist/index.d.ts",
+      "mode": "100644",
+      "gitBlob": "ad445abf79ac1ee20f4c3444d064f44d9bddc616"
+    },
+    {
+      "path": "dist/index.d.ts.map",
+      "mode": "100644",
+      "gitBlob": "4e9f808735c825edf46738dfbe52834607dcd41d"
+    },
+    {
+      "path": "dist/index.js",
+      "mode": "100644",
+      "gitBlob": "e5d0b88e6f37430da5e892f98f129dc6aa182a92"
+    },
+    {
+      "path": "dist/index.js.map",
+      "mode": "100644",
+      "gitBlob": "8ba58a8eb5531e17ac3501512e77a3de42bff6c1"
+    },
+    {
+      "path": "dist/model.d.ts",
+      "mode": "100644",
+      "gitBlob": "d972525cc1978c9d542fbbe1ee4358c97b950959"
+    },
+    {
+      "path": "dist/model.d.ts.map",
+      "mode": "100644",
+      "gitBlob": "3eb460c423cfe1e256f8b6a23e5d96fc02e25e79"
+    },
+    {
+      "path": "dist/model.js",
+      "mode": "100644",
+      "gitBlob": "33bac6a4ada0088fb156f94e6f7713a332e55fd4"
+    },
+    {
+      "path": "dist/model.js.map",
+      "mode": "100644",
+      "gitBlob": "5aad570b1bf629211268d2183f6c493ab193c037"
+    },
+    {
+      "path": "dist/path-tree.d.ts",
+      "mode": "100644",
+      "gitBlob": "dd0a1b91bfd766f236e928c4e67f6aae0538fa4f"
+    },
+    {
+      "path": "dist/path-tree.d.ts.map",
+      "mode": "100644",
+      "gitBlob": "0cfc1ccbaf74ea0b508af6db6a3a9a9f9c4ffeb7"
+    },
+    {
+      "path": "dist/path-tree.js",
+      "mode": "100644",
+      "gitBlob": "32b2680289c9941afe2a23255b8e7063812da621"
+    },
+    {
+      "path": "dist/path-tree.js.map",
+      "mode": "100644",
+      "gitBlob": "347b5d8063a0f618b27fa4a006d9a15d64a4ac7c"
+    },
+    {
+      "path": "dist/projection.d.ts",
+      "mode": "100644",
+      "gitBlob": "45eec7c09a5025f6db04f4b18005998c94814231"
+    },
+    {
+      "path": "dist/projection.d.ts.map",
+      "mode": "100644",
+      "gitBlob": "fd3ab03ff7c254eef967fc69b9ef82b26ba1ce27"
+    },
+    {
+      "path": "dist/projection.js",
+      "mode": "100644",
+      "gitBlob": "41b1dce2c45356a7a65b9d1ff0340f475d51b29d"
+    },
+    {
+      "path": "dist/projection.js.map",
+      "mode": "100644",
+      "gitBlob": "291e95a181f9861a2f0a2f74ec43f787f8fd5183"
+    },
+    {
+      "path": "dist/protected-activation.d.ts",
+      "mode": "100644",
+      "gitBlob": "962547c2a9f038c8087a0de98c89824db2985422"
+    },
+    {
+      "path": "dist/protected-activation.d.ts.map",
+      "mode": "100644",
+      "gitBlob": "058486a759b16faa0735f3c62e52942e663ef2fe"
+    },
+    {
+      "path": "dist/protected-activation.js",
+      "mode": "100644",
+      "gitBlob": "7b4e0636388d356f8abde63faea8d18c3209e4a2"
+    },
+    {
+      "path": "dist/protected-activation.js.map",
+      "mode": "100644",
+      "gitBlob": "595712e75b892896a1ec23fe78b3ab0863f8005a"
+    },
+    {
+      "path": "dist/provenance-model.d.ts",
+      "mode": "100644",
+      "gitBlob": "0b6f58c9338410a20eca354d4f8f13158c3c4d0e"
+    },
+    {
+      "path": "dist/provenance-model.d.ts.map",
+      "mode": "100644",
+      "gitBlob": "f36f150c05f97dd6a894d749adb3dbc305be5097"
+    },
+    {
+      "path": "dist/provenance-model.js",
+      "mode": "100644",
+      "gitBlob": "4214d60de550595ab460cd841d438db6b7e9f511"
+    },
+    {
+      "path": "dist/provenance-model.js.map",
+      "mode": "100644",
+      "gitBlob": "e576b5249988b9c16b594198b6aea91e89389c98"
+    },
+    {
+      "path": "dist/provenance.d.ts",
+      "mode": "100644",
+      "gitBlob": "5f365de150ce1a424d528a3ab50b6bf150c50b6e"
+    },
+    {
+      "path": "dist/provenance.d.ts.map",
+      "mode": "100644",
+      "gitBlob": "763e18c16d163891129b16301f64c1b70820d123"
+    },
+    {
+      "path": "dist/provenance.js",
+      "mode": "100644",
+      "gitBlob": "cfba4474ebe36a22beebc08431abbc5820913d27"
+    },
+    {
+      "path": "dist/provenance.js.map",
+      "mode": "100644",
+      "gitBlob": "0c256c74791a152009cb125598194e6075c3063f"
+    },
+    {
+      "path": "dist/references.d.ts",
+      "mode": "100644",
+      "gitBlob": "38411eef66add025bd88b1a286ddc951b49a05ae"
+    },
+    {
+      "path": "dist/references.d.ts.map",
+      "mode": "100644",
+      "gitBlob": "15b7a0bfe7a65e7dbae17b40e8db63df90946802"
+    },
+    {
+      "path": "dist/references.js",
+      "mode": "100644",
+      "gitBlob": "d8f4d66640e49379faa98233f48d756261af167d"
+    },
+    {
+      "path": "dist/references.js.map",
+      "mode": "100644",
+      "gitBlob": "51bdb867caa3fd6d39d814afe1c11486651cd013"
+    },
+    {
+      "path": "dist/relation-pack.d.ts",
+      "mode": "100644",
+      "gitBlob": "44f0c9fe472804c5a730e1fa5ce72365c32b6601"
+    },
+    {
+      "path": "dist/relation-pack.d.ts.map",
+      "mode": "100644",
+      "gitBlob": "10c1da8cab822e24bea899614cf9d30fb154a014"
+    },
+    {
+      "path": "dist/relation-pack.js",
+      "mode": "100644",
+      "gitBlob": "613f4d09c142fd4ede1b239d81cc09ef441689a2"
+    },
+    {
+      "path": "dist/relation-pack.js.map",
+      "mode": "100644",
+      "gitBlob": "15b280798878060f6a33941ee7b13baaf142055d"
+    },
+    {
+      "path": "dist/relations.d.ts",
+      "mode": "100644",
+      "gitBlob": "d61e13e99bca48161f1fbf7f701e7db7db58e744"
+    },
+    {
+      "path": "dist/relations.d.ts.map",
+      "mode": "100644",
+      "gitBlob": "c93790655d068227b4ff212498f4c5d597b48ae1"
+    },
+    {
+      "path": "dist/relations.js",
+      "mode": "100644",
+      "gitBlob": "708181b6b45f602368b7e19f07f46e08521334f9"
+    },
+    {
+      "path": "dist/relations.js.map",
+      "mode": "100644",
+      "gitBlob": "18f725008349b5e6d21301ba7937567cf3be123d"
+    },
+    {
+      "path": "dist/repair-model.d.ts",
+      "mode": "100644",
+      "gitBlob": "922f9881026e7f737e1c128d67d47054a4f9dcc9"
+    },
+    {
+      "path": "dist/repair-model.d.ts.map",
+      "mode": "100644",
+      "gitBlob": "633631f992f6cc640c0452446b171dd5f3fff2bf"
+    },
+    {
+      "path": "dist/repair-model.js",
+      "mode": "100644",
+      "gitBlob": "b5addf5252e5cf2208d8794bf9d3497c3581ac92"
+    },
+    {
+      "path": "dist/repair-model.js.map",
+      "mode": "100644",
+      "gitBlob": "f48b2ca73cf28a9ae010421217be9e237a241114"
+    },
+    {
+      "path": "dist/repair.d.ts",
+      "mode": "100644",
+      "gitBlob": "d2259e94c5685f88490aacafa7019d782239f333"
+    },
+    {
+      "path": "dist/repair.d.ts.map",
+      "mode": "100644",
+      "gitBlob": "46757513444ddbdd092e0246d04349ff6069641d"
+    },
+    {
+      "path": "dist/repair.js",
+      "mode": "100644",
+      "gitBlob": "ea9ccea7f6beaa5ff22d2209da21aeb4a4ba1450"
+    },
+    {
+      "path": "dist/repair.js.map",
+      "mode": "100644",
+      "gitBlob": "c34a80b9aa8b93c98d9143be5d7bad334a6d52c6"
+    },
+    {
+      "path": "dist/replay.d.ts",
+      "mode": "100644",
+      "gitBlob": "008ce1d9b393b564373985e53956d8b933ed62d8"
+    },
+    {
+      "path": "dist/replay.d.ts.map",
+      "mode": "100644",
+      "gitBlob": "b93f39cfa0690950af9ac05db3f8088779cb11ae"
+    },
+    {
+      "path": "dist/replay.js",
+      "mode": "100644",
+      "gitBlob": "5eb9b2c3fa7356f8758807c8aa0d13a86ee1376a"
+    },
+    {
+      "path": "dist/replay.js.map",
+      "mode": "100644",
+      "gitBlob": "29788d74f83c343fc64d763dc09a9588aa0c0fb0"
+    },
+    {
+      "path": "dist/report.d.ts",
+      "mode": "100644",
+      "gitBlob": "cfd65edaf783f37d73dd5bb537462a88d99d7ec9"
+    },
+    {
+      "path": "dist/report.d.ts.map",
+      "mode": "100644",
+      "gitBlob": "220124a2f713fd1a4eb275f9989b9dac97981ad7"
+    },
+    {
+      "path": "dist/report.js",
+      "mode": "100644",
+      "gitBlob": "723c19326646f0304c61c160cf232aaa810feb21"
+    },
+    {
+      "path": "dist/report.js.map",
+      "mode": "100644",
+      "gitBlob": "1e6d09365485c345bed44651953d86dcc02c4c22"
+    },
+    {
+      "path": "dist/risk.d.ts",
+      "mode": "100644",
+      "gitBlob": "30580d052d53e1e94544e2556ec817562888a44b"
+    },
+    {
+      "path": "dist/risk.d.ts.map",
+      "mode": "100644",
+      "gitBlob": "2437a8e0b48673eae4aea1623ed174da2ebfaae8"
+    },
+    {
+      "path": "dist/risk.js",
+      "mode": "100644",
+      "gitBlob": "73726934a06174ecc17450482c5f6a044587998b"
+    },
+    {
+      "path": "dist/risk.js.map",
+      "mode": "100644",
+      "gitBlob": "227f7868ba4a1187eb5f6b75cf078821e5639dd9"
+    },
+    {
+      "path": "dist/scientific-crate.d.ts",
+      "mode": "100644",
+      "gitBlob": "8bd761a70b3c177db4d4195ebb7ea0aa95cd5ca2"
+    },
+    {
+      "path": "dist/scientific-crate.d.ts.map",
+      "mode": "100644",
+      "gitBlob": "94d3605dea167f659750683e4c1a8403c6006f0c"
+    },
+    {
+      "path": "dist/scientific-crate.js",
+      "mode": "100644",
+      "gitBlob": "7dde632dda07e03b47dd894af59d15007dc472ae"
+    },
+    {
+      "path": "dist/scientific-crate.js.map",
+      "mode": "100644",
+      "gitBlob": "d48a2b8d8757807f5b5ed681ffc3766c272c58eb"
+    },
+    {
+      "path": "dist/scientific-relations.d.ts",
+      "mode": "100644",
+      "gitBlob": "217c53c7e7b26bbb5a05ddf4f4bf86cbb5dadc83"
+    },
+    {
+      "path": "dist/scientific-relations.d.ts.map",
+      "mode": "100644",
+      "gitBlob": "769e2b7458fae06abcf64c91b8ed848979a4f494"
+    },
+    {
+      "path": "dist/scientific-relations.js",
+      "mode": "100644",
+      "gitBlob": "dde0a10c7e19678efae26ed67f5efe1d32c1b2eb"
+    },
+    {
+      "path": "dist/scientific-relations.js.map",
+      "mode": "100644",
+      "gitBlob": "11f2b3cbbc223f9859b15486acedfde3b82f9792"
+    },
+    {
+      "path": "dist/semantic-counterfactual-model.d.ts",
+      "mode": "100644",
+      "gitBlob": "e89a5763c8ed9fa37e339c17675d7194e516731e"
+    },
+    {
+      "path": "dist/semantic-counterfactual-model.d.ts.map",
+      "mode": "100644",
+      "gitBlob": "4e023b77ecc42c90274ce5fd026080b858064b36"
+    },
+    {
+      "path": "dist/semantic-counterfactual-model.js",
+      "mode": "100644",
+      "gitBlob": "0c6457750ba8b0366aadc01b7212662d7f5b7bb0"
+    },
+    {
+      "path": "dist/semantic-counterfactual-model.js.map",
+      "mode": "100644",
+      "gitBlob": "89d78456085252f2797e3a573daf681a900f6e0e"
+    },
+    {
+      "path": "dist/semantic-counterfactual.d.ts",
+      "mode": "100644",
+      "gitBlob": "61f26f9d57ca655e692a6c0216b70d562262c80f"
+    },
+    {
+      "path": "dist/semantic-counterfactual.d.ts.map",
+      "mode": "100644",
+      "gitBlob": "dc9224edb702f06be48dfc3eb0142d48268cf615"
+    },
+    {
+      "path": "dist/semantic-counterfactual.js",
+      "mode": "100644",
+      "gitBlob": "629143524e3111215f3152b48c748711272bfdaa"
+    },
+    {
+      "path": "dist/semantic-counterfactual.js.map",
+      "mode": "100644",
+      "gitBlob": "88603b2585691f6472158eb41d946fea5bf29d83"
+    },
+    {
+      "path": "dist/semantic-model.d.ts",
+      "mode": "100644",
+      "gitBlob": "7586387976e568773c17a8110d55e99908eac7f7"
+    },
+    {
+      "path": "dist/semantic-model.d.ts.map",
+      "mode": "100644",
+      "gitBlob": "f2ddc6d667cb7b64b040f17119e4ff873e97cca6"
+    },
+    {
+      "path": "dist/semantic-model.js",
+      "mode": "100644",
+      "gitBlob": "df279e08f797e40117ec702d5e6cfdced12e70f8"
+    },
+    {
+      "path": "dist/semantic-model.js.map",
+      "mode": "100644",
+      "gitBlob": "e0eb48aa0a1c444507e13a4cb5d318f8d5eedbf6"
+    },
+    {
+      "path": "dist/semantic-path-tree.d.ts",
+      "mode": "100644",
+      "gitBlob": "c963d093fb074425a32617e6cbee9a333a5f91d8"
+    },
+    {
+      "path": "dist/semantic-path-tree.d.ts.map",
+      "mode": "100644",
+      "gitBlob": "4e78003c67ced93c9ca1125b54ff9ac7e5be7ff0"
+    },
+    {
+      "path": "dist/semantic-path-tree.js",
+      "mode": "100644",
+      "gitBlob": "f866e1cfb8b13aace1ddac6cd5db7cc268e71292"
+    },
+    {
+      "path": "dist/semantic-path-tree.js.map",
+      "mode": "100644",
+      "gitBlob": "6e0c71212ca8747af00f87985e119c7a7b9c4baf"
+    },
+    {
+      "path": "dist/semantic-projection-model.d.ts",
+      "mode": "100644",
+      "gitBlob": "b8c9d089dc644c42c1c2d289c5f305010d9798b6"
+    },
+    {
+      "path": "dist/semantic-projection-model.d.ts.map",
+      "mode": "100644",
+      "gitBlob": "82b5a10834b460514a2f62b6cbce940d416594b5"
+    },
+    {
+      "path": "dist/semantic-projection-model.js",
+      "mode": "100644",
+      "gitBlob": "0f944b9d1435eb108f1e8a8ba6bd7e449476e014"
+    },
+    {
+      "path": "dist/semantic-projection-model.js.map",
+      "mode": "100644",
+      "gitBlob": "c74a9afb0afb2c14851144abb776ee92f612fd0a"
+    },
+    {
+      "path": "dist/semantic-projection.d.ts",
+      "mode": "100644",
+      "gitBlob": "3bee7f2fafa2b10ca80908b3912d569f4d758e42"
+    },
+    {
+      "path": "dist/semantic-projection.d.ts.map",
+      "mode": "100644",
+      "gitBlob": "2393def6fcbb5ae61bc2942d6ed6d699417217a5"
+    },
+    {
+      "path": "dist/semantic-projection.js",
+      "mode": "100644",
+      "gitBlob": "90236b912a2f249a725b747c128f6a63f078760e"
+    },
+    {
+      "path": "dist/semantic-projection.js.map",
+      "mode": "100644",
+      "gitBlob": "298c3ee8d0535f35c0707d245ab34bc20a8e7d42"
+    },
+    {
+      "path": "dist/semantic-replay-model.d.ts",
+      "mode": "100644",
+      "gitBlob": "dc5f777729e57d69fb8c21e325abcfcdd114347d"
+    },
+    {
+      "path": "dist/semantic-replay-model.d.ts.map",
+      "mode": "100644",
+      "gitBlob": "c9c9fa96b4e158ebd7d3082cdf3b59140c7e901a"
+    },
+    {
+      "path": "dist/semantic-replay-model.js",
+      "mode": "100644",
+      "gitBlob": "ad05351b82864aa71f5c2250c42ff37d640effd8"
+    },
+    {
+      "path": "dist/semantic-replay-model.js.map",
+      "mode": "100644",
+      "gitBlob": "26c069fdeee62ef37f8b42912d0ec55d914d0c34"
+    },
+    {
+      "path": "dist/semantic-replay.d.ts",
+      "mode": "100644",
+      "gitBlob": "1d915c33e751dcae8a16aa42c3ef5da763527e9d"
+    },
+    {
+      "path": "dist/semantic-replay.d.ts.map",
+      "mode": "100644",
+      "gitBlob": "fe30b4998631616feafc7102e730a7f66363738d"
+    },
+    {
+      "path": "dist/semantic-replay.js",
+      "mode": "100644",
+      "gitBlob": "a1706a9f6cee89c9ca57a609d425f4f5786cf091"
+    },
+    {
+      "path": "dist/semantic-replay.js.map",
+      "mode": "100644",
+      "gitBlob": "75e564c9c2430d3334241ef79946159a2d2ef246"
+    },
+    {
+      "path": "dist/semantic.d.ts",
+      "mode": "100644",
+      "gitBlob": "fd47b27184719b2bf7731b24cf5c52c831241289"
+    },
+    {
+      "path": "dist/semantic.d.ts.map",
+      "mode": "100644",
+      "gitBlob": "edc92bde1a5dd17ac899cf6aef323ed80e43bf45"
+    },
+    {
+      "path": "dist/semantic.js",
+      "mode": "100644",
+      "gitBlob": "7240528264f1fd57bdef9f42f0b5a945cd4a53e0"
+    },
+    {
+      "path": "dist/semantic.js.map",
+      "mode": "100644",
+      "gitBlob": "194bc3cee0c92e5c3cba05f97199add44f81ab8e"
+    },
+    {
+      "path": "dist/sssom-model.d.ts",
+      "mode": "100644",
+      "gitBlob": "bb1ce4d90499025aa6b84fe8d7cd428a90cc3cc1"
+    },
+    {
+      "path": "dist/sssom-model.d.ts.map",
+      "mode": "100644",
+      "gitBlob": "6f6f949f61d7ae7787ca70fd63cb80dc1d32e504"
+    },
+    {
+      "path": "dist/sssom-model.js",
+      "mode": "100644",
+      "gitBlob": "b2d9a51c228ab798b65190a1155e41cc58354c4e"
+    },
+    {
+      "path": "dist/sssom-model.js.map",
+      "mode": "100644",
+      "gitBlob": "d8ccb7d461144bfef14932bc376ec348bb6fff36"
+    },
+    {
+      "path": "dist/sssom.d.ts",
+      "mode": "100644",
+      "gitBlob": "efdc61d432892ac8cefa511b1f08f345c1561f47"
+    },
+    {
+      "path": "dist/sssom.d.ts.map",
+      "mode": "100644",
+      "gitBlob": "2d768b0d0893ae96ca3fd84b29dc8a56811c6db5"
+    },
+    {
+      "path": "dist/sssom.js",
+      "mode": "100644",
+      "gitBlob": "4debff8e6a48c12b426bf0999e1c742cc1b51676"
+    },
+    {
+      "path": "dist/sssom.js.map",
+      "mode": "100644",
+      "gitBlob": "7242bef060ceb5385dcb9aa35a4f28b05e15fa36"
+    },
+    {
+      "path": "dist/stable.d.ts",
+      "mode": "100644",
+      "gitBlob": "f893d373762cb36405b70853346e74b231b9129a"
+    },
+    {
+      "path": "dist/stable.d.ts.map",
+      "mode": "100644",
+      "gitBlob": "89dc85e137b2deb4e4da068a860b24637735ac1b"
+    },
+    {
+      "path": "dist/stable.js",
+      "mode": "100644",
+      "gitBlob": "7d000832a22a458d15e36058606b7070552260ab"
+    },
+    {
+      "path": "dist/stable.js.map",
+      "mode": "100644",
+      "gitBlob": "1125cc16f0789541a0d64688031cda30f3060a24"
+    },
+    {
+      "path": "dist/uncertainty.d.ts",
+      "mode": "100644",
+      "gitBlob": "ce3fe339354cbccfa3563b9ca4a762a944cef51c"
+    },
+    {
+      "path": "dist/uncertainty.d.ts.map",
+      "mode": "100644",
+      "gitBlob": "1478b50c7bfe6a16b4ab299dd2b7c030df062d33"
+    },
+    {
+      "path": "dist/uncertainty.js",
+      "mode": "100644",
+      "gitBlob": "2b4da4fac9bb1b3c13b5577ce56c932422eaf8cd"
+    },
+    {
+      "path": "dist/uncertainty.js.map",
+      "mode": "100644",
+      "gitBlob": "8e2eaf01a06db9a1625b2bb3f76aa944bfc99a7d"
+    },
+    {
+      "path": "dist/validator.d.ts",
+      "mode": "100644",
+      "gitBlob": "b6b8c6fa7c6a294377bf3679f4561f360b90eb55"
+    },
+    {
+      "path": "dist/validator.d.ts.map",
+      "mode": "100644",
+      "gitBlob": "addcc51eda2797ff0641b19ba333735fc32fd89e"
+    },
+    {
+      "path": "dist/validator.js",
+      "mode": "100644",
+      "gitBlob": "b992f573dc33ddd7e79c311b7aae1cbb1b2ed69c"
+    },
+    {
+      "path": "dist/validator.js.map",
+      "mode": "100644",
+      "gitBlob": "969f056428fa0d205023a8bdfaef09cc0b57cedc"
+    },
+    {
+      "path": "dist/viability-model.d.ts",
+      "mode": "100644",
+      "gitBlob": "17da17de758e3c4099d08a35cfe242dfa9fee4ca"
+    },
+    {
+      "path": "dist/viability-model.d.ts.map",
+      "mode": "100644",
+      "gitBlob": "e5db69e9206579b6d879427efd0aad56e706afaf"
+    },
+    {
+      "path": "dist/viability-model.js",
+      "mode": "100644",
+      "gitBlob": "16c895e10b867fa62a91e787b4444334d9acc160"
+    },
+    {
+      "path": "dist/viability-model.js.map",
+      "mode": "100644",
+      "gitBlob": "eff64ee01ab863818adac1f885f958724cf2529b"
+    },
+    {
+      "path": "dist/viability.d.ts",
+      "mode": "100644",
+      "gitBlob": "d1ae48354ed0d8433001fdfd1cdd52cab54133db"
+    },
+    {
+      "path": "dist/viability.d.ts.map",
+      "mode": "100644",
+      "gitBlob": "617d15c7284cf8281a87653919fe9e0f44e04904"
+    },
+    {
+      "path": "dist/viability.js",
+      "mode": "100644",
+      "gitBlob": "f552c2352fc55e0d382760630a4545e28042f62d"
+    },
+    {
+      "path": "dist/viability.js.map",
+      "mode": "100644",
+      "gitBlob": "9e7ad905bd2c8e628442731e33687397bff84b4e"
+    },
+    {
+      "path": "dist/workspace.d.ts",
+      "mode": "100644",
+      "gitBlob": "206a13e7d4de7f97a93c4d8457866730d9aad079"
+    },
+    {
+      "path": "dist/workspace.d.ts.map",
+      "mode": "100644",
+      "gitBlob": "0513213db3c44c5abe3471bde3f789df0fa381df"
+    },
+    {
+      "path": "dist/workspace.js",
+      "mode": "100644",
+      "gitBlob": "fe23ce96958ea2e5bee5623462c37633a32ccf03"
+    },
+    {
+      "path": "dist/workspace.js.map",
+      "mode": "100644",
+      "gitBlob": "8d16800c3de549ed981cfdbdf52d6af348bcc682"
+    },
+    {
+      "path": "evaluation/README.md",
+      "mode": "100644",
+      "gitBlob": "d09c4f7a4a7a7e48bb367b200f2b5a561fd5a8e4"
+    },
+    {
+      "path": "evaluation/capability-corpus.json",
+      "mode": "100644",
+      "gitBlob": "8626424f1fcbdb7e24ebcb6e86d1d55af8f5882c"
+    },
+    {
+      "path": "evaluation/first-release-corpus.json",
+      "mode": "100644",
+      "gitBlob": "b767906882ed05bc4d5e512f321cd220586efd0e"
+    },
+    {
+      "path": "evaluation/legacy-compatibility.json",
+      "mode": "100644",
+      "gitBlob": "2eff57f5c9a25518bafde8f1e06292c2312e6bcb"
+    },
+    {
+      "path": "evaluation/localization-pilot.mjs",
+      "mode": "100644",
+      "gitBlob": "efda6a17f1baaf7850e334827640a22e3a142368"
+    },
+    {
+      "path": "evaluation/localization-protocol.json",
+      "mode": "100644",
+      "gitBlob": "32afbaf9d436606d921aa80c6be04840ff66de64"
+    },
+    {
+      "path": "evaluation/results/localization-0.7.1.json",
+      "mode": "100644",
+      "gitBlob": "8eca0e769cb1bb0b786f5ef13ce81ec540b0a1ea"
+    },
+    {
+      "path": "evaluation/results/seeder-0.7.1.json",
+      "mode": "100644",
+      "gitBlob": "480d747dbc7a60652d6c182f336879a04e8ef71e"
+    },
+    {
+      "path": "evaluation/results/seeder-confirmation.json",
+      "mode": "100644",
+      "gitBlob": "a005ee75d2d7d94691e3f02368bc04c42a543a79"
+    },
+    {
+      "path": "evaluation/results/seeder-first-trial.json",
+      "mode": "100644",
+      "gitBlob": "f93e118fa7daa27d84d44f22d59cec2e9f98df18"
+    },
+    {
+      "path": "evaluation/seeder-inputs.json",
+      "mode": "100644",
+      "gitBlob": "0f154ea3cc80075efbf7054868ef239bbf1f786e"
+    },
+    {
+      "path": "evaluation/seeder-pilot.mjs",
+      "mode": "100644",
+      "gitBlob": "78550b1ee201fd6e0c78a13872aadf532b1aedda"
+    },
+    {
+      "path": "evaluation/seeder-protocol.json",
+      "mode": "100644",
+      "gitBlob": "6cfaa36e3659a49783cf18fe03a7c800cc9a5f68"
+    },
+    {
+      "path": "examples/activation/README.md",
+      "mode": "100644",
+      "gitBlob": "531ccefaeb19e54ad3f59b88cd2140444049f84a"
+    },
+    {
+      "path": "examples/activation/promoter.mjs",
+      "mode": "100644",
+      "gitBlob": "84224076f441261590a3635bc75405388fd0fff2"
+    },
+    {
+      "path": "examples/application-topology/README.md",
+      "mode": "100644",
+      "gitBlob": "65ceba5de4534b14b6b28c07090e36884c1ee626"
+    },
+    {
+      "path": "examples/application-topology/generated/application-topology.json",
+      "mode": "100644",
+      "gitBlob": "dd7def9b6957432d5498bc92320e8776b020cdfb"
+    },
+    {
+      "path": "examples/application-topology/generated/application-topology.ts",
+      "mode": "100644",
+      "gitBlob": "2fd1fc13a246bf2eaf2eaafcc3db4a0c6f2fb382"
+    },
+    {
+      "path": "examples/application-topology/generated/generation.json",
+      "mode": "100644",
+      "gitBlob": "82a8045ab490ff008947984c9933d8eba6c5c710"
+    },
+    {
+      "path": "examples/application-topology/graph.json",
+      "mode": "100644",
+      "gitBlob": "1798cea424b96bd6e8e04a286ad757c36af73f2e"
+    },
+    {
+      "path": "examples/application-topology/projection.json",
+      "mode": "100644",
+      "gitBlob": "8edbf51766145106e8b233f1b968fdb4c56cfb25"
+    },
+    {
+      "path": "examples/application-topology/viability-policy.json",
+      "mode": "100644",
+      "gitBlob": "b5013b1f590fad9fad57ee4410ae3317f7dd9375"
+    },
+    {
+      "path": "examples/debugger/run.mjs",
+      "mode": "100644",
+      "gitBlob": "e446dc568b5ff0c5949705c7bdafd46aa2290d86"
+    },
+    {
+      "path": "examples/debugger/scenarios.mjs",
+      "mode": "100644",
+      "gitBlob": "0f57f688978a6a54f55ff03cdae2095b6bfae756"
+    },
+    {
+      "path": "examples/example-authority-graph.json",
+      "mode": "100644",
+      "gitBlob": "43ebaebfe25cd40f1444927aeb573329f705392a"
+    },
+    {
+      "path": "examples/example-context.json",
+      "mode": "100644",
+      "gitBlob": "f96da6102470f39b1bfa61b19078aa9d61478f1c"
+    },
+    {
+      "path": "examples/example-generation.json",
+      "mode": "100644",
+      "gitBlob": "ffcf47dabd35e9adf81ffb83ff1265ca5f27f0a2"
+    },
+    {
+      "path": "examples/example-viability-policy.json",
+      "mode": "100644",
+      "gitBlob": "a532c863eca8bdc7b3a09005e3c1569a8f05bd8f"
+    },
+    {
+      "path": "examples/explanation/run.mjs",
+      "mode": "100644",
+      "gitBlob": "58797332185b43172e5148fda8222039dcdba381"
+    },
+    {
+      "path": "examples/governance/README.md",
+      "mode": "100644",
+      "gitBlob": "3f029c5cae43afbdf4ac48836e1e65f58526108a"
+    },
+    {
+      "path": "examples/governance/run.mjs",
+      "mode": "100644",
+      "gitBlob": "e979f20cce409bbf3bbbe3d8a36e5767df26a50e"
+    },
+    {
+      "path": "examples/lifecycle/run.mjs",
+      "mode": "100644",
+      "gitBlob": "60f08ff01dc43975582eb9db0f5d8d09c7d2e66a"
+    },
+    {
+      "path": "examples/path-tree/README.md",
+      "mode": "100644",
+      "gitBlob": "98288998c97090925c15aa143babd114cd7cdf9b"
+    },
+    {
+      "path": "examples/path-tree/generated/generation.json",
+      "mode": "100644",
+      "gitBlob": "29482c6f25abd95876616f7dd05576da9a81983c"
+    },
+    {
+      "path": "examples/path-tree/generated/routes.json",
+      "mode": "100644",
+      "gitBlob": "2af3981e8e10cea1f354fc5280b26e7c0bcf27cb"
+    },
+    {
+      "path": "examples/path-tree/generated/routes.ts",
+      "mode": "100644",
+      "gitBlob": "c09d0603e20629a098dbd0496c81b87b13eb7409"
+    },
+    {
+      "path": "examples/path-tree/graph.json",
+      "mode": "100644",
+      "gitBlob": "ae122886a36c621e2902a57d68a18a5c9a12a8c8"
+    },
+    {
+      "path": "examples/path-tree/projection.json",
+      "mode": "100644",
+      "gitBlob": "d1f195a09db9ac90a799d9141e41edde5a48ae8c"
+    },
+    {
+      "path": "examples/path-tree/viability-policy.json",
+      "mode": "100644",
+      "gitBlob": "2f92f7eda8c44f9f2574f6dea9e64d869a2b71c0"
+    },
+    {
+      "path": "examples/provenance/README.md",
+      "mode": "100644",
+      "gitBlob": "51029e80b7a062965fa76a272d87450f25ccda3d"
+    },
+    {
+      "path": "examples/provenance/build.mjs",
+      "mode": "100644",
+      "gitBlob": "26f385c775aea1b47f610fb96c0db66e9cbed8c5"
+    },
+    {
+      "path": "examples/provenance/context.json",
+      "mode": "100644",
+      "gitBlob": "8e4a0283b208385ecf1bfec79fcf1e481fd39be6"
+    },
+    {
+      "path": "examples/provenance/generated/generation.json",
+      "mode": "100644",
+      "gitBlob": "a0d1eaa27141d1dfb859e47e073cf6cfe7c4676c"
+    },
+    {
+      "path": "examples/provenance/generated/graph.json",
+      "mode": "100644",
+      "gitBlob": "30c5c4b8a6b8ef5036350d8ba6026093bb65623f"
+    },
+    {
+      "path": "examples/provenance/generated/network-bindings.ts",
+      "mode": "100644",
+      "gitBlob": "6d6e54061bfd89d2a38138ee6f5503eb9daa5ad6"
+    },
+    {
+      "path": "examples/provenance/generated/network-tree.ts",
+      "mode": "100644",
+      "gitBlob": "c4aef2c103c50820021e24ceba88c4a75aea26d2"
+    },
+    {
+      "path": "examples/provenance/generated/path-tree.json",
+      "mode": "100644",
+      "gitBlob": "01706a00454e48ab45bb1faf5591332bee7355ec"
+    },
+    {
+      "path": "examples/provenance/generated/policy.json",
+      "mode": "100644",
+      "gitBlob": "e2f7c5866a0c0202d06deb6ad2cb0311743506fd"
+    },
+    {
+      "path": "examples/provenance/generated/projection.json",
+      "mode": "100644",
+      "gitBlob": "9cf7076e5e3d38c7b0ecbeacd917d41f28b80a45"
+    },
+    {
+      "path": "examples/provenance/generated/proposal.json",
+      "mode": "100644",
+      "gitBlob": "87e90c0306fa07456cefbb96b825bfbe036b4804"
+    },
+    {
+      "path": "examples/provenance/generated/receipts.json",
+      "mode": "100644",
+      "gitBlob": "5491b5e9f3da741ecb9ff66b4064934f53f23286"
+    },
+    {
+      "path": "examples/provenance/generated/request.json",
+      "mode": "100644",
+      "gitBlob": "497cf439c22ef49e981b0409d5c42133d01e86e8"
+    },
+    {
+      "path": "examples/provenance/generated/snapshot.json",
+      "mode": "100644",
+      "gitBlob": "6458c274ea57281a2132ca7cfe2289a9b3deb015"
+    },
+    {
+      "path": "examples/provenance/generated/source-capture.json",
+      "mode": "100644",
+      "gitBlob": "c000963f7543f327ab02af5418241b3bd7d1bd5c"
+    },
+    {
+      "path": "examples/provenance/generated/source-inspection.json",
+      "mode": "100644",
+      "gitBlob": "f2d486bcfebb4a8714a8c176100bee30b64ded0b"
+    },
+    {
+      "path": "examples/provenance/generated/spec.json",
+      "mode": "100644",
+      "gitBlob": "1f0d0b0913ef4faff53aa9429057fc417c56351a"
+    },
+    {
+      "path": "examples/provenance/generated/strict-policy.json",
+      "mode": "100644",
+      "gitBlob": "c1b384d2318abf9d23db68aee3ff6d4b44812723"
+    },
+    {
+      "path": "examples/provenance/generated/strict-result.json",
+      "mode": "100644",
+      "gitBlob": "7841d37ec3efea7ccf842dfee02389da9fbfa911"
+    },
+    {
+      "path": "examples/provenance/generated/verification.json",
+      "mode": "100644",
+      "gitBlob": "a0ac7a118513653bcc3e453735a79c30b6f26eec"
+    },
+    {
+      "path": "examples/provenance/metamap.config.json",
+      "mode": "100644",
+      "gitBlob": "3fb45ecf344f00f165c93a3b41f8209cc2d92d7c"
+    },
+    {
+      "path": "examples/provenance/sources/network.json",
+      "mode": "100644",
+      "gitBlob": "6b765c3cff0b3b71c5775a0e96187476488d0385"
+    },
+    {
+      "path": "examples/provenance/sources/schema.json",
+      "mode": "100644",
+      "gitBlob": "a92c88b97141bd6d78cef4e8d1962da381adc833"
+    },
+    {
+      "path": "examples/relations/build.mjs",
+      "mode": "100644",
+      "gitBlob": "48adcb5a0a6b8f64d0099906540562511cbc7bd4"
+    },
+    {
+      "path": "examples/relations/context.json",
+      "mode": "100644",
+      "gitBlob": "1d38170edee95f838703d64e030dfa31c0ad4e4e"
+    },
+    {
+      "path": "examples/relations/generated/dependency-bindings.ts",
+      "mode": "100644",
+      "gitBlob": "bd44b4ae7e295dcaa733b450ee4468b93f63e12c"
+    },
+    {
+      "path": "examples/relations/generated/dependency-tree.ts",
+      "mode": "100644",
+      "gitBlob": "287a4e9c5fc694b6755c9193d0f96e11791aece0"
+    },
+    {
+      "path": "examples/relations/generated/generation.json",
+      "mode": "100644",
+      "gitBlob": "0d23ab92a038568a1d45b7428db0497e644d8e85"
+    },
+    {
+      "path": "examples/relations/generated/graph.json",
+      "mode": "100644",
+      "gitBlob": "12a9fa862abff65ba8f91ddfcd8b98333d2506f3"
+    },
+    {
+      "path": "examples/relations/generated/path-tree.json",
+      "mode": "100644",
+      "gitBlob": "69e05e914ae8b64e4a750e8a62cd9c4c79de603c"
+    },
+    {
+      "path": "examples/relations/generated/policy.json",
+      "mode": "100644",
+      "gitBlob": "af00637c097a1e4a73bafd66645a0f0fa0c622f1"
+    },
+    {
+      "path": "examples/relations/generated/projection.json",
+      "mode": "100644",
+      "gitBlob": "d75423dcb5136f99a973aa7fd5f6b0aea0307817"
+    },
+    {
+      "path": "examples/relations/generated/proposal.json",
+      "mode": "100644",
+      "gitBlob": "02a7c9ce097f04dc2b02c613313ab78c431d285e"
+    },
+    {
+      "path": "examples/relations/graph.json",
+      "mode": "100644",
+      "gitBlob": "9f93f927b856ca46be936ebbb03f3f27503a7cfc"
+    },
+    {
+      "path": "examples/relations/pack.json",
+      "mode": "100644",
+      "gitBlob": "9e29e280c2cf170f4c2a4d25b533c8bc30a11396"
+    },
+    {
+      "path": "examples/relations/projection.json",
+      "mode": "100644",
+      "gitBlob": "cb4430d263db4f01cc75ca060f564560cb5970c6"
+    },
+    {
+      "path": "examples/relations/request.json",
+      "mode": "100644",
+      "gitBlob": "25909f235f445b0e1ad9bf270fcf4dd6f735e99a"
+    },
+    {
+      "path": "examples/repair/run.mjs",
+      "mode": "100644",
+      "gitBlob": "1aff07b9cf180f5b1e98e53e074b573f32ed0c20"
+    },
+    {
+      "path": "examples/replay/run.mjs",
+      "mode": "100644",
+      "gitBlob": "1b6b4297c842b4eea5d3058ec76691878c4c3619"
+    },
+    {
+      "path": "examples/research/README.md",
+      "mode": "100644",
+      "gitBlob": "122a0118d6c292cbc3520a4c3f7504617dd7fd17"
+    },
+    {
+      "path": "examples/research/claim-shard.json",
+      "mode": "100644",
+      "gitBlob": "81178c8e3d884e87c6531849da5f58f1bf2df4cf"
+    },
+    {
+      "path": "examples/research/generated/generation.json",
+      "mode": "100644",
+      "gitBlob": "1d2b6dd3f7746213026836d24f8535ef0140f4e2"
+    },
+    {
+      "path": "examples/research/generated/graph.json",
+      "mode": "100644",
+      "gitBlob": "4296617aead6567f23b17bd9da03270aaa8dbb62"
+    },
+    {
+      "path": "examples/research/generated/graph.md",
+      "mode": "100644",
+      "gitBlob": "39b470336cdf59fb3157a79e49f2f7199160cef0"
+    },
+    {
+      "path": "examples/research/generated/report.md",
+      "mode": "100644",
+      "gitBlob": "14b287e7f5542acb4af209f2569189fc5ff8ea00"
+    },
+    {
+      "path": "examples/research/generated/snapshot.json",
+      "mode": "100644",
+      "gitBlob": "6528fce8f2a53c6e1011d2f965223b935a4ba80f"
+    },
+    {
+      "path": "examples/research/metamap.config.json",
+      "mode": "100644",
+      "gitBlob": "5c8d25821767b3e27540030c7ece918ae31c63a5"
+    },
+    {
+      "path": "examples/research/viability-policy.json",
+      "mode": "100644",
+      "gitBlob": "ef0c5b3c37ba7a35f0f42a28b622a67f9e17d736"
+    },
+    {
+      "path": "examples/routing/README.md",
+      "mode": "100644",
+      "gitBlob": "29674314aba33d505ee4b340d1c0f792503e6092"
+    },
+    {
+      "path": "examples/routing/bindings/.npmignore",
+      "mode": "100644",
+      "gitBlob": "ceddaa37f12a86d3d1e7ffaa27838052e2d93d1e"
+    },
+    {
+      "path": "examples/routing/bindings/README.md",
+      "mode": "100644",
+      "gitBlob": "b2be0ec6a159ea62aaaa28850b9fc1cb3a9d030a"
+    },
+    {
+      "path": "examples/routing/bindings/build.d.mts",
+      "mode": "100644",
+      "gitBlob": "fcd41be7be07ec1db2bc24c3fdb751ff5fd3c425"
+    },
+    {
+      "path": "examples/routing/bindings/build.mjs",
+      "mode": "100644",
+      "gitBlob": "10f53e5305771ce0d7d4037caabfce96e24e7585"
+    },
+    {
+      "path": "examples/routing/bindings/consumer/consumer.ts",
+      "mode": "100644",
+      "gitBlob": "f2dfe85336cfdb710651bc1d38d2c8aeef16ed02"
+    },
+    {
+      "path": "examples/routing/bindings/consumer/graph.json",
+      "mode": "100644",
+      "gitBlob": "79522ecd6508b218123419d9d728c2698847f452"
+    },
+    {
+      "path": "examples/routing/bindings/consumer/projection.json",
+      "mode": "100644",
+      "gitBlob": "e48de850dfa041a23b9a5266e0a507836c4e18d5"
+    },
+    {
+      "path": "examples/routing/bindings/consumer/viability-template.json",
+      "mode": "100644",
+      "gitBlob": "53aa21261ca361d116759e0d9a6a59f5b6c008e0"
+    },
+    {
+      "path": "examples/routing/bindings/contract/graph.json",
+      "mode": "100644",
+      "gitBlob": "8a5a70632998b823a2ade2d4adfba8c96658c9da"
+    },
+    {
+      "path": "examples/routing/bindings/contract/input-schema.mjs",
+      "mode": "100644",
+      "gitBlob": "36290f70c52d203ad06bbca6ed68e6b457ec5509"
+    },
+    {
+      "path": "examples/routing/bindings/generated/build.json",
+      "mode": "100644",
+      "gitBlob": "87d9becf427651c6cd28e035d2197fb9ece9130e"
+    },
+    {
+      "path": "examples/routing/bindings/generated/consumer.d.mts",
+      "mode": "100644",
+      "gitBlob": "2a9bf44bf989f38727df63c5ea69e290e415b53e"
+    },
+    {
+      "path": "examples/routing/bindings/generated/consumer.mjs",
+      "mode": "100644",
+      "gitBlob": "ffad845193f498e58a80b0e0e9cfa415cbdc8f53"
+    },
+    {
+      "path": "examples/routing/bindings/generated/inputs/contract/input-schema.91ef94507725d4dd0b453a69687ae40428ced2b20875a023e980bd38982f5bf0.mjs",
+      "mode": "100644",
+      "gitBlob": "36290f70c52d203ad06bbca6ed68e6b457ec5509"
+    },
+    {
+      "path": "examples/routing/bindings/generated/inputs/service/handlers/create-user.689adf3371d4bdce1c6af91d9c93354133a7c10719e794a8b1c93f30ee2d5c1b.mjs",
+      "mode": "100644",
+      "gitBlob": "8e794f4b9290fc2ce390e19355c1d7d72f1b072b"
+    },
+    {
+      "path": "examples/routing/bindings/metamap.config.json",
+      "mode": "100644",
+      "gitBlob": "b5e52fab9cca34f3b7215c06f730ddbbe93ec384"
+    },
+    {
+      "path": "examples/routing/bindings/service/graph.json",
+      "mode": "100644",
+      "gitBlob": "d2485b20871e7d3cd6d8a90c3468621dfc250f1f"
+    },
+    {
+      "path": "examples/routing/bindings/service/handlers/create-user.mjs",
+      "mode": "100644",
+      "gitBlob": "8e794f4b9290fc2ce390e19355c1d7d72f1b072b"
+    },
+    {
+      "path": "examples/routing/generated/command-router.json",
+      "mode": "100644",
+      "gitBlob": "b664e3cc101a16e42fcdbb62832cc2443085ea33"
+    },
+    {
+      "path": "examples/routing/generated/command-router.ts",
+      "mode": "100644",
+      "gitBlob": "a1c3caf4f134a2297309cc87136d458f5646038d"
+    },
+    {
+      "path": "examples/routing/generated/generation.json",
+      "mode": "100644",
+      "gitBlob": "e21e5f8f39be9f0e7b058ca390e00b395f351db8"
+    },
+    {
+      "path": "examples/routing/graph.json",
+      "mode": "100644",
+      "gitBlob": "07b51f08b9b7c28360133a5edde8d94b5ab4c017"
+    },
+    {
+      "path": "examples/routing/projection.json",
+      "mode": "100644",
+      "gitBlob": "3812060a9b89c131d598cd62585300603b7d00e2"
+    },
+    {
+      "path": "examples/routing/viability-policy.json",
+      "mode": "100644",
+      "gitBlob": "f67db5b5a16a83a68c3d23c15c72d920a29c9cc5"
+    },
+    {
+      "path": "examples/scientific-mapping/README.md",
+      "mode": "100644",
+      "gitBlob": "b9296381895a37396b229951c13796142f74863f"
+    },
+    {
+      "path": "examples/scientific-mapping/consumer.mjs",
+      "mode": "100644",
+      "gitBlob": "11fc5b7fae7408c4b6313b9ccaf6ba66f679f493"
+    },
+    {
+      "path": "examples/scientific-mapping/fixtures/mgi-subset-manifest.json",
+      "mode": "100644",
+      "gitBlob": "cf2a9a0e451526eaa1e67f534630059fd0ea6131"
+    },
+    {
+      "path": "examples/scientific-mapping/fixtures/mgi-subset.sssom.tsv",
+      "mode": "100644",
+      "gitBlob": "2ddf4c2d44a786d4c83895a2fe46510037fd382f"
+    },
+    {
+      "path": "examples/scientific-mapping/lookup.mjs",
+      "mode": "100644",
+      "gitBlob": "1deed622909c2b3833bf49d33f298272f7e27bff"
+    },
+    {
+      "path": "examples/scientific-mapping/source.mjs",
+      "mode": "100644",
+      "gitBlob": "6fbf9a36606fec52d3d8052631868eecb44ec6b9"
+    },
+    {
+      "path": "examples/uncertainty/build.mjs",
+      "mode": "100644",
+      "gitBlob": "2bcbdbc3d19b1e74e91072a76c3f4f459e5ef609"
+    },
+    {
+      "path": "examples/uncertainty/generated/generation.json",
+      "mode": "100644",
+      "gitBlob": "9d02733c3736969b0b161c1943fc49035843d443"
+    },
+    {
+      "path": "examples/uncertainty/generated/graph.json",
+      "mode": "100644",
+      "gitBlob": "337128d68548d0cb4b4fab2c3ac336323eeebeac"
+    },
+    {
+      "path": "examples/uncertainty/generated/network-bindings.ts",
+      "mode": "100644",
+      "gitBlob": "1b1f78af8af43514848bcc6b8beb1763cdddc72e"
+    },
+    {
+      "path": "examples/uncertainty/generated/network-tree.ts",
+      "mode": "100644",
+      "gitBlob": "19fe86b0408216c6fd66475e7139af8dc3024174"
+    },
+    {
+      "path": "examples/uncertainty/generated/path-tree.json",
+      "mode": "100644",
+      "gitBlob": "d7b2318cf684be24bc332a28f56cf6e9731ffc51"
+    },
+    {
+      "path": "examples/uncertainty/generated/policy.json",
+      "mode": "100644",
+      "gitBlob": "636e259d5161ca4b7b44a92cd10595770333266b"
+    },
+    {
+      "path": "examples/uncertainty/generated/projection.json",
+      "mode": "100644",
+      "gitBlob": "caa48125a47d1373250c0481f4267d5b8c60f057"
+    },
+    {
+      "path": "examples/uncertainty/generated/proposal.json",
+      "mode": "100644",
+      "gitBlob": "5db2d70849ee1586b79b34ec1502fa1adbb7b195"
+    },
+    {
+      "path": "examples/uncertainty/generated/request.json",
+      "mode": "100644",
+      "gitBlob": "490318e2758e5aff4ad7dfbc1206ffda9f44bf8c"
+    },
+    {
+      "path": "examples/uncertainty/generated/spec.json",
+      "mode": "100644",
+      "gitBlob": "2b95c8953ff6e23cd51213f24e71150a32ec080d"
+    },
+    {
+      "path": "examples/uncertainty/generated/strict-policy.json",
+      "mode": "100644",
+      "gitBlob": "7269c1d49aa4ecc5ddeb9a0ac56bff23b4899b35"
+    },
+    {
+      "path": "examples/uncertainty/generated/strict-result.json",
+      "mode": "100644",
+      "gitBlob": "236f9e601efb9935ad1a70a6f6b6614f860e8542"
+    },
+    {
+      "path": "examples/uncertainty/generated/verification.json",
+      "mode": "100644",
+      "gitBlob": "1a3ef251432c8b2973577c1e529efdb2cda7b1dd"
+    },
+    {
+      "path": "examples/workspace/generated/drift-report.md",
+      "mode": "100644",
+      "gitBlob": "a196f2350f96623491eddd9d663f1762e6c81fed"
+    },
+    {
+      "path": "examples/workspace/generated/graph.json",
+      "mode": "100644",
+      "gitBlob": "696c9bcf1fff3ecd996faa5ce99b42b7f65a7eb4"
+    },
+    {
+      "path": "examples/workspace/generated/graph.md",
+      "mode": "100644",
+      "gitBlob": "fc09244a29858fb2605824df65318c7005b5ed8f"
+    },
+    {
+      "path": "examples/workspace/generated/snapshot.json",
+      "mode": "100644",
+      "gitBlob": "8d495f4dd2e4b38c91a7968ef56ebd32aa1cb6ef"
+    },
+    {
+      "path": "examples/workspace/metamap.config.json",
+      "mode": "100644",
+      "gitBlob": "30613230aae7eea22fc835833859d784c2567890"
+    },
+    {
+      "path": "examples/workspace/schema.prisma",
+      "mode": "100644",
+      "gitBlob": "8e6b1714993d15aa61335866164cabda35e3375c"
+    },
+    {
+      "path": "examples/workspace/schemas/item.ts",
+      "mode": "100644",
+      "gitBlob": "034134b8d2618bb446dc136bf3142c4fd4ced868"
+    },
+    {
+      "path": "package-lock.json",
+      "mode": "100644",
+      "gitBlob": "e5b05bec93e65f932038fe0e8734fb3729100fb7"
+    },
+    {
+      "path": "package.json",
+      "mode": "100644",
+      "gitBlob": "2d7fa02bfe713e0c6dd2213be67366d13a2ed2eb"
+    },
+    {
+      "path": "relation-packs/application-topology.json",
+      "mode": "100644",
+      "gitBlob": "7d7e8b3408437ba4fd7aa2b055dececce57ee36c"
+    },
+    {
+      "path": "relation-packs/core.json",
+      "mode": "100644",
+      "gitBlob": "3eeb3b817bc9f4233bcbe1e1bf21b952c8f3216d"
+    },
+    {
+      "path": "relation-packs/research.json",
+      "mode": "100644",
+      "gitBlob": "e17c451cc3697f8b4731aae72324318d2f70006e"
+    },
+    {
+      "path": "relation-packs/routing.json",
+      "mode": "100644",
+      "gitBlob": "bc01b9dccb4f152dc080ddd05e0178445b2675eb"
+    },
+    {
+      "path": "relation-packs/scientific-skos.json",
+      "mode": "100644",
+      "gitBlob": "9bc9d75f3b92484991cd0dc5dac3923c20ea375a"
+    },
+    {
+      "path": "schemas/metamap-activation-request.schema.json",
+      "mode": "100644",
+      "gitBlob": "1f2ce3b4fb4a17885b002b3c4b53d26401004b17"
+    },
+    {
+      "path": "schemas/metamap-activation.schema.json",
+      "mode": "100644",
+      "gitBlob": "fab26b1d9a073e8ce62abca953efcfe1e2864432"
+    },
+    {
+      "path": "schemas/metamap-active-pointer.schema.json",
+      "mode": "100644",
+      "gitBlob": "694d78b791f2291c82d91ba652f111ae12c654fb"
+    },
+    {
+      "path": "schemas/metamap-approval.schema.json",
+      "mode": "100644",
+      "gitBlob": "909725329ea6b343d324ff00834bdb3e8f36bfb2"
+    },
+    {
+      "path": "schemas/metamap-artifact-manifest.schema.json",
+      "mode": "100644",
+      "gitBlob": "d7face18b838d09cbc4a5eecac41f907650e0533"
+    },
+    {
+      "path": "schemas/metamap-change-proposal.schema.json",
+      "mode": "100644",
+      "gitBlob": "1db10df767db76a0f27ab8af28b4b985c806bc58"
+    },
+    {
+      "path": "schemas/metamap-composition-request.schema.json",
+      "mode": "100644",
+      "gitBlob": "e86c960554f5ce40739cead94b1f505d1411a177"
+    },
+    {
+      "path": "schemas/metamap-composition-result.schema.json",
+      "mode": "100644",
+      "gitBlob": "ead26473d3724fff4b025873ea37ee9a1e9e5f26"
+    },
+    {
+      "path": "schemas/metamap-config.schema.json",
+      "mode": "100644",
+      "gitBlob": "537c8ff5a1d61c66094e099dec540260b97230d2"
+    },
+    {
+      "path": "schemas/metamap-counterfactual-v2.schema.json",
+      "mode": "100644",
+      "gitBlob": "bf8266d5ac34d359bbcab2f16af1d703bef36e1f"
+    },
+    {
+      "path": "schemas/metamap-counterfactual-v3.schema.json",
+      "mode": "100644",
+      "gitBlob": "f980a299e1c7710f84e19fe32cb0f87dbd6742fa"
+    },
+    {
+      "path": "schemas/metamap-counterfactual.schema.json",
+      "mode": "100644",
+      "gitBlob": "8ae6fee6fece70e9d2f67a7ea43a3d3c658da1f3"
+    },
+    {
+      "path": "schemas/metamap-derivation.schema.json",
+      "mode": "100644",
+      "gitBlob": "0a4ded30f8675682275c12acac7c4b5bfd14cf95"
+    },
+    {
+      "path": "schemas/metamap-explanation-request.schema.json",
+      "mode": "100644",
+      "gitBlob": "00c252cf85c36339f7c8a3f01ff7ba6cf6b4b6d3"
+    },
+    {
+      "path": "schemas/metamap-explanation-result.schema.json",
+      "mode": "100644",
+      "gitBlob": "be79bc844979d3d71e155c0cb685f9b283d58702"
+    },
+    {
+      "path": "schemas/metamap-explanation.schema.json",
+      "mode": "100644",
+      "gitBlob": "88d116eeb717d9abf00824a623360fb9d6379e84"
+    },
+    {
+      "path": "schemas/metamap-generation-v2.schema.json",
+      "mode": "100644",
+      "gitBlob": "d12db0a7645de0985e283f107d4997e635c9f4d8"
+    },
+    {
+      "path": "schemas/metamap-generation.schema.json",
+      "mode": "100644",
+      "gitBlob": "8fe819d9b88198ed51e79f41c7a20328d9af9b30"
+    },
+    {
+      "path": "schemas/metamap-governance.schema.json",
+      "mode": "100644",
+      "gitBlob": "641a7d37912c90c3ec20167617a003b3a49d8cb1"
+    },
+    {
+      "path": "schemas/metamap-graph.schema.json",
+      "mode": "100644",
+      "gitBlob": "faa96b43cd6c6bb5b310d0a9ec29edbb9dd669a6"
+    },
+    {
+      "path": "schemas/metamap-path-tree-v2.schema.json",
+      "mode": "100644",
+      "gitBlob": "51d4e384ae6eae254776d5270850a4767c76fe28"
+    },
+    {
+      "path": "schemas/metamap-path-tree.schema.json",
+      "mode": "100644",
+      "gitBlob": "0a552fbaa03a6489478e4710bb47db642ef70ff6"
+    },
+    {
+      "path": "schemas/metamap-projection-spec-v2.schema.json",
+      "mode": "100644",
+      "gitBlob": "626b63b91a0b845dd63466b5a82769f71146bf69"
+    },
+    {
+      "path": "schemas/metamap-projection-spec.schema.json",
+      "mode": "100644",
+      "gitBlob": "fe82d9e122b1cf9a81bf3970a5e6ee8b10ea9526"
+    },
+    {
+      "path": "schemas/metamap-projection-v2.schema.json",
+      "mode": "100644",
+      "gitBlob": "bdb963327cbd8507797299e1c897f9c24fcc9cb0"
+    },
+    {
+      "path": "schemas/metamap-projection.schema.json",
+      "mode": "100644",
+      "gitBlob": "4f69ff248896c7aa3e553528e7b6d37f45f4c15c"
+    },
+    {
+      "path": "schemas/metamap-repair-request.schema.json",
+      "mode": "100644",
+      "gitBlob": "ccba6609b168f5254b9de18ce1bbe10a5c1ce1cc"
+    },
+    {
+      "path": "schemas/metamap-repair-result.schema.json",
+      "mode": "100644",
+      "gitBlob": "c25fe53554b970ee5a60df7094ed8cefe4a4a1aa"
+    },
+    {
+      "path": "schemas/metamap-repair.schema.json",
+      "mode": "100644",
+      "gitBlob": "3e9dd5ae689e73d16cf0675fd0fe03b24265da8e"
+    },
+    {
+      "path": "schemas/metamap-replay-v2.schema.json",
+      "mode": "100644",
+      "gitBlob": "227313b30b91cabf9143e7316279678d7e1158fd"
+    },
+    {
+      "path": "schemas/metamap-replay-v3.schema.json",
+      "mode": "100644",
+      "gitBlob": "b626ae491feb9eafb5cdf898d46cf16fb27b7f1d"
+    },
+    {
+      "path": "schemas/metamap-replay.schema.json",
+      "mode": "100644",
+      "gitBlob": "a8048925956a34aaf106858efbd8d8ea268a0c60"
+    },
+    {
+      "path": "schemas/metamap-scientific-crate-profile.schema.json",
+      "mode": "100644",
+      "gitBlob": "9fea4f8c3c7bc1aac6b22e1a75c8aa86a2eea83d"
+    },
+    {
+      "path": "schemas/metamap-snapshot.schema.json",
+      "mode": "100644",
+      "gitBlob": "3d37a296f58ca7519a93de005293ebb87abcb609"
+    },
+    {
+      "path": "schemas/metamap-source-capture.schema.json",
+      "mode": "100644",
+      "gitBlob": "c4fedd985941bfc6ee65108df0d713332efadb89"
+    },
+    {
+      "path": "schemas/metamap-source-inspection.schema.json",
+      "mode": "100644",
+      "gitBlob": "f11e1f514809a7b3d3cb5744a6a34a3bc59e24e7"
+    },
+    {
+      "path": "schemas/metamap-source-receipt.schema.json",
+      "mode": "100644",
+      "gitBlob": "c53caf656b811b161202fa70c1815ef003710498"
+    },
+    {
+      "path": "schemas/metamap-sssom-document.schema.json",
+      "mode": "100644",
+      "gitBlob": "42f386123abb5cb83fc2f9f21cd90608cbdb6f88"
+    },
+    {
+      "path": "schemas/metamap-sssom-source.schema.json",
+      "mode": "100644",
+      "gitBlob": "4d7b7d4407fb574e04c1573dbd8fd390f5f5e66b"
+    },
+    {
+      "path": "schemas/metamap-trusted-consumer.schema.json",
+      "mode": "100644",
+      "gitBlob": "02a53ec507b8e640b9dd001744e89cf542ca82fc"
+    },
+    {
+      "path": "schemas/metamap-viability-v2.schema.json",
+      "mode": "100644",
+      "gitBlob": "0e1b49bd689580d40d1dc29c6055f68e85ca4255"
+    },
+    {
+      "path": "schemas/metamap-viability.schema.json",
+      "mode": "100644",
+      "gitBlob": "8f73cd9d148d35d4c3b3f92a741072b429169f76"
+    },
+    {
+      "path": "schemas/relation-pack-v2.schema.json",
+      "mode": "100644",
+      "gitBlob": "cd25c2d8e1e1106fac84bf21c05054fe719d740f"
+    },
+    {
+      "path": "schemas/relation-pack.schema.json",
+      "mode": "100644",
+      "gitBlob": "c5b2dea6c9109e6cd6f18d0ae5d23d1918bff11d"
+    },
+    {
+      "path": "schemas/sssom-1.0.0-slots.json",
+      "mode": "100644",
+      "gitBlob": "eea7901b67542150b42dbaf892d978c50ef23080"
+    },
+    {
+      "path": "schemas/sssom-1.0.0.schema.json",
+      "mode": "100644",
+      "gitBlob": "7665c32f0055d5cd028529a2dd36b749534d4ebc"
+    },
+    {
+      "path": "scripts/verify-package.mjs",
+      "mode": "100644",
+      "gitBlob": "64d8dde4a151d62c9059997f551b7301a1098586"
+    },
+    {
+      "path": "src/__tests__/activation.test.ts",
+      "mode": "100644",
+      "gitBlob": "a8b6ce5c29d76c01cbe926fa5e5da9b798b932f4"
+    },
+    {
+      "path": "src/__tests__/adapter-registry.test.ts",
+      "mode": "100644",
+      "gitBlob": "71102526775f2f125bd823db009a8e40804a89f9"
+    },
+    {
+      "path": "src/__tests__/adapters.test.ts",
+      "mode": "100644",
+      "gitBlob": "7682fc5d51cb91e3e7281bce856079bcbb29191e"
+    },
+    {
+      "path": "src/__tests__/application-topology.test.ts",
+      "mode": "100644",
+      "gitBlob": "b25f727410e9fe515a6323fda45754af64ce3175"
+    },
+    {
+      "path": "src/__tests__/canonical.test.ts",
+      "mode": "100644",
+      "gitBlob": "dd6cc7d920abd82c1bf4d6d2541e9b943764d9d6"
+    },
+    {
+      "path": "src/__tests__/composer.test.ts",
+      "mode": "100644",
+      "gitBlob": "741853719069c68e8629b74ffd4fa611f77361b8"
+    },
+    {
+      "path": "src/__tests__/config.test.ts",
+      "mode": "100644",
+      "gitBlob": "6bc7cda6c81ee63a93f90cb939967ab314667228"
+    },
+    {
+      "path": "src/__tests__/consumer-bindings.test.ts",
+      "mode": "100644",
+      "gitBlob": "7d54fd4585aa55af3f8e8a8705b38555403e4c64"
+    },
+    {
+      "path": "src/__tests__/correspondence.test.ts",
+      "mode": "100644",
+      "gitBlob": "3b894d0123ca23f9e48b5bf29d2d245f5c098f3c"
+    },
+    {
+      "path": "src/__tests__/counterfactual.test.ts",
+      "mode": "100644",
+      "gitBlob": "d043bab909be2be251ac58c34656cd0f93f23bfa"
+    },
+    {
+      "path": "src/__tests__/current-sources.test.ts",
+      "mode": "100644",
+      "gitBlob": "6df4c127f1c17a0e4c470a4125a4bbbd8e3ab623"
+    },
+    {
+      "path": "src/__tests__/debugger-native.test.ts",
+      "mode": "100644",
+      "gitBlob": "29c43fa9db5636fced25866a8544547036d59283"
+    },
+    {
+      "path": "src/__tests__/debugger.test.ts",
+      "mode": "100644",
+      "gitBlob": "4bfd8693d001f1a16ddffa137f1c73d25ecb26a3"
+    },
+    {
+      "path": "src/__tests__/derivation.test.ts",
+      "mode": "100644",
+      "gitBlob": "6a87aa88f3675f8d7b8cfbd7671e4d983e217afa"
+    },
+    {
+      "path": "src/__tests__/diff.test.ts",
+      "mode": "100644",
+      "gitBlob": "31763191de62127ea3bb4f3a574bbb26983cf2e6"
+    },
+    {
+      "path": "src/__tests__/executable-pack.test.ts",
+      "mode": "100644",
+      "gitBlob": "8fe48bd29f6c36cc2b1552e871c04640993bba7c"
+    },
+    {
+      "path": "src/__tests__/explanation-native.test.ts",
+      "mode": "100644",
+      "gitBlob": "2362288162ae501d2cd8b8b401ec7627cf4b74fc"
+    },
+    {
+      "path": "src/__tests__/explanation.test.ts",
+      "mode": "100644",
+      "gitBlob": "4f060879a18532387312e1df49cf510d17cc9603"
+    },
+    {
+      "path": "src/__tests__/fixtures/protected-host.mjs",
+      "mode": "100644",
+      "gitBlob": "f4fb83ce1b5db093d9bcec70d53e660afbfc9ae0"
+    },
+    {
+      "path": "src/__tests__/fixtures/protected-native.mjs",
+      "mode": "100644",
+      "gitBlob": "349f676142fcc9e13514ecd333ace5a93e71a413"
+    },
+    {
+      "path": "src/__tests__/fixtures/protected-probe.mjs",
+      "mode": "100644",
+      "gitBlob": "a602e322102e3521843a7134a756a7c7ff8a1915"
+    },
+    {
+      "path": "src/__tests__/fixtures/sources-of-truth.json",
+      "mode": "100644",
+      "gitBlob": "aee037b9a67624b470e12b3b08ac933a757aa4cd"
+    },
+    {
+      "path": "src/__tests__/governance-native.test.ts",
+      "mode": "100644",
+      "gitBlob": "05050b5778d983d7383169cd2c255365e910c510"
+    },
+    {
+      "path": "src/__tests__/governance.test.ts",
+      "mode": "100644",
+      "gitBlob": "9a1774e6ce68708702bc39f902e3bfc82fd51f88"
+    },
+    {
+      "path": "src/__tests__/governed-activation.test.ts",
+      "mode": "100644",
+      "gitBlob": "735a3349d2cb0c6dc715c596ef219d99056ef326"
+    },
+    {
+      "path": "src/__tests__/graph.test.ts",
+      "mode": "100644",
+      "gitBlob": "883a0f8bec549384401466dde16591f187a4eb39"
+    },
+    {
+      "path": "src/__tests__/helpers/governance-fixture.ts",
+      "mode": "100644",
+      "gitBlob": "5ef63e497fa195c5f37e458b7dab93729feb9226"
+    },
+    {
+      "path": "src/__tests__/helpers/repair-fixture.ts",
+      "mode": "100644",
+      "gitBlob": "26d68ef6e586268ce89386c7a1880a213c16e8f8"
+    },
+    {
+      "path": "src/__tests__/helpers/semantic-fixture.ts",
+      "mode": "100644",
+      "gitBlob": "da86205c8a8ab675ca1dc31e0f884e57c0e92504"
+    },
+    {
+      "path": "src/__tests__/helpers/source-fixture.ts",
+      "mode": "100644",
+      "gitBlob": "3c8c38dadf90ea46934b585d9b783fd53753ba82"
+    },
+    {
+      "path": "src/__tests__/helpers/sssom-fixture.ts",
+      "mode": "100644",
+      "gitBlob": "6f96147050f7c073a884eed053478fc533e27127"
+    },
+    {
+      "path": "src/__tests__/helpers/uncertainty-fixture.ts",
+      "mode": "100644",
+      "gitBlob": "c25b25fcaddbb8538d3f75f1afdd16a4f105d805"
+    },
+    {
+      "path": "src/__tests__/legacy-adapter.test.ts",
+      "mode": "100644",
+      "gitBlob": "fa59228183df782b7bcda6e3d6aead2c16fffa8b"
+    },
+    {
+      "path": "src/__tests__/legacy-compatibility.test.ts",
+      "mode": "100644",
+      "gitBlob": "ccf9912797a6e73d44e5265ecc31e9053f916d3e"
+    },
+    {
+      "path": "src/__tests__/lifecycle-native.test.ts",
+      "mode": "100644",
+      "gitBlob": "e3c6650b76b3ef565a36791f3cb0c321732a00e0"
+    },
+    {
+      "path": "src/__tests__/metamap-shard.test.ts",
+      "mode": "100644",
+      "gitBlob": "9ba9cef8ccdf89e61451f530157004527e134a3e"
+    },
+    {
+      "path": "src/__tests__/nextjs-app-router.test.ts",
+      "mode": "100644",
+      "gitBlob": "973c6862cbd9c82b66356a71bc1140b14732a772"
+    },
+    {
+      "path": "src/__tests__/path-tree.test.ts",
+      "mode": "100644",
+      "gitBlob": "1fabd8d05b14e54411787893a53d19c85861a577"
+    },
+    {
+      "path": "src/__tests__/projection.test.ts",
+      "mode": "100644",
+      "gitBlob": "55c435727c17beb6c75821f961379fb6cfc60da3"
+    },
+    {
+      "path": "src/__tests__/protected-activation.test.ts",
+      "mode": "100644",
+      "gitBlob": "5dac98f4f09c21e832330ea67461309aab882b5f"
+    },
+    {
+      "path": "src/__tests__/provenance.test.ts",
+      "mode": "100644",
+      "gitBlob": "df9d587b0a90d652a1a79a5387ba32fce2b266d9"
+    },
+    {
+      "path": "src/__tests__/relation-pack.test.ts",
+      "mode": "100644",
+      "gitBlob": "142e1f3ccde854195ac48a252347934fcb298cfe"
+    },
+    {
+      "path": "src/__tests__/repair-native.test.ts",
+      "mode": "100644",
+      "gitBlob": "ba56d950f8bc077f09ec33b13bd5069595c16d1b"
+    },
+    {
+      "path": "src/__tests__/repair.test.ts",
+      "mode": "100644",
+      "gitBlob": "8fde8ad891abf05eb97082767528cf129915a177"
+    },
+    {
+      "path": "src/__tests__/replay.test.ts",
+      "mode": "100644",
+      "gitBlob": "603d5b2ef4acdfd26af6bceb098abdab5fbc4bfa"
+    },
+    {
+      "path": "src/__tests__/risk.test.ts",
+      "mode": "100644",
+      "gitBlob": "e9565b55f43ae2f6479db494a8f1a1f15b439c25"
+    },
+    {
+      "path": "src/__tests__/schema-contract.test.ts",
+      "mode": "100644",
+      "gitBlob": "e2cd663a117de8d60ada35c80486cb2c1a6334d1"
+    },
+    {
+      "path": "src/__tests__/scientific-crate.test.ts",
+      "mode": "100644",
+      "gitBlob": "9cbe082025ce36f72f90ad7e39a8b53feda0c3b6"
+    },
+    {
+      "path": "src/__tests__/scientific-source-native.test.ts",
+      "mode": "100644",
+      "gitBlob": "1034a44103532efb5f8ed38f6819ab0dfacccd2e"
+    },
+    {
+      "path": "src/__tests__/scientific-source.test.ts",
+      "mode": "100644",
+      "gitBlob": "0455e1b749a0bea28565d6cc70f1241385637b9e"
+    },
+    {
+      "path": "src/__tests__/semantic-counterfactual.test.ts",
+      "mode": "100644",
+      "gitBlob": "b5adc95cebd2de8116a9e54bd826527520109f4b"
+    },
+    {
+      "path": "src/__tests__/semantic-projection.test.ts",
+      "mode": "100644",
+      "gitBlob": "99f1a5d20db44621a25d4cdd8ec6b734e45b16fe"
+    },
+    {
+      "path": "src/__tests__/semantic-replay.test.ts",
+      "mode": "100644",
+      "gitBlob": "67878a830e6ede1892197c0de206a8797ca30047"
+    },
+    {
+      "path": "src/__tests__/semantic.test.ts",
+      "mode": "100644",
+      "gitBlob": "80130a7bc0b08da71490006ae378e709fd51b432"
+    },
+    {
+      "path": "src/__tests__/source-cli.test.ts",
+      "mode": "100644",
+      "gitBlob": "46d0404bf2b2a44ddf282bf719308412e5b386b7"
+    },
+    {
+      "path": "src/__tests__/source-replay.test.ts",
+      "mode": "100644",
+      "gitBlob": "6c1fabd7c388f2035b71b169172c3d81ce22e64a"
+    },
+    {
+      "path": "src/__tests__/sssom.test.ts",
+      "mode": "100644",
+      "gitBlob": "ec63c2decf788c5db4e741b5b0546318f1ced3f9"
+    },
+    {
+      "path": "src/__tests__/typed-native.test.ts",
+      "mode": "100644",
+      "gitBlob": "e62df6d365425c168c379734f305f582e4c7f587"
+    },
+    {
+      "path": "src/__tests__/typed-replay.test.ts",
+      "mode": "100644",
+      "gitBlob": "5cab8b5799b8c3b37bbc10bae45930161ade91ba"
+    },
+    {
+      "path": "src/__tests__/uncertainty.test.ts",
+      "mode": "100644",
+      "gitBlob": "0a533d7d3f0f1236af6957e76b078b0c2346517d"
+    },
+    {
+      "path": "src/__tests__/validator.test.ts",
+      "mode": "100644",
+      "gitBlob": "e0e3d5590c4ce5508e0f943b6986c3ba96d40268"
+    },
+    {
+      "path": "src/__tests__/viability.test.ts",
+      "mode": "100644",
+      "gitBlob": "d16ff6f67a9089a4138eeafa4650b85ff095d393"
+    },
+    {
+      "path": "src/__tests__/workspace.test.ts",
+      "mode": "100644",
+      "gitBlob": "0a4daa927de2f901b0f05e4e000ceded9c31e320"
+    },
+    {
+      "path": "src/activation-model.ts",
+      "mode": "100644",
+      "gitBlob": "fb51a8f2e1f4628649399d466346c65298b4cc62"
+    },
+    {
+      "path": "src/activation.ts",
+      "mode": "100644",
+      "gitBlob": "a78efcfa79d93dbc1b5b7d4f480a4dcb82b4b435"
+    },
+    {
+      "path": "src/adapters/json-collections.ts",
+      "mode": "100644",
+      "gitBlob": "75319faf6b591ff1931d7e811668aad6d8e09e90"
+    },
+    {
+      "path": "src/adapters/legacy-sources.ts",
+      "mode": "100644",
+      "gitBlob": "e6db0dd9971d4e1fbb205b2b168af129c9fb9ad2"
+    },
+    {
+      "path": "src/adapters/metamap-shard.ts",
+      "mode": "100644",
+      "gitBlob": "a1dc78c2d3c2cf01e7f299fdaaf780978f1245b3"
+    },
+    {
+      "path": "src/adapters/nextjs-app-router.ts",
+      "mode": "100644",
+      "gitBlob": "2557e98d4984cf8d63c88c08a0b89ca6b546a70b"
+    },
+    {
+      "path": "src/adapters/prisma.ts",
+      "mode": "100644",
+      "gitBlob": "cd938446c34fb63ef4a4342169820182b47d42dc"
+    },
+    {
+      "path": "src/adapters/registry.ts",
+      "mode": "100644",
+      "gitBlob": "09ca1a986bf5d373a8d9bd58c115a41923a9471e"
+    },
+    {
+      "path": "src/adapters/source-of-truth.ts",
+      "mode": "100644",
+      "gitBlob": "fe86406c4facc2e191d9b92df5c9d6ca7e73d1b2"
+    },
+    {
+      "path": "src/adapters/sssom-tsv.ts",
+      "mode": "100644",
+      "gitBlob": "edb0debdb8084a34c7d71bbf87bfb344e1005f17"
+    },
+    {
+      "path": "src/adapters/types.ts",
+      "mode": "100644",
+      "gitBlob": "72935dda060026a7de08aa6413e95ee87ca70d68"
+    },
+    {
+      "path": "src/adapters/typescript-zod.ts",
+      "mode": "100644",
+      "gitBlob": "2a02cae6e8f7718396c7b9350dac65c5eed740da"
+    },
+    {
+      "path": "src/canonical.ts",
+      "mode": "100644",
+      "gitBlob": "0d8066b308ddae704448d241a96addd78bdc2456"
+    },
+    {
+      "path": "src/cli.ts",
+      "mode": "100644",
+      "gitBlob": "6e4d753f34bb6700b4f37f6dd742a23e88d36631"
+    },
+    {
+      "path": "src/composer.ts",
+      "mode": "100644",
+      "gitBlob": "053dd68b04cb45951c944cb21f0f5e50176a31dd"
+    },
+    {
+      "path": "src/config.ts",
+      "mode": "100644",
+      "gitBlob": "6bf50407b1902947962e096f1a666852d3965ae9"
+    },
+    {
+      "path": "src/constraints.ts",
+      "mode": "100644",
+      "gitBlob": "03685434c76772039459980ce0d7b870ffe827ce"
+    },
+    {
+      "path": "src/context.ts",
+      "mode": "100644",
+      "gitBlob": "0bd525b9ddaa6694269c6db3bdceb35b8f405186"
+    },
+    {
+      "path": "src/correspondence.ts",
+      "mode": "100644",
+      "gitBlob": "ebff63630b20c6e9a7832efce59277634fa767c1"
+    },
+    {
+      "path": "src/counterfactual.ts",
+      "mode": "100644",
+      "gitBlob": "e9c99cdddbab27ebb9c249e73991654bb2d0f859"
+    },
+    {
+      "path": "src/debugger.ts",
+      "mode": "100644",
+      "gitBlob": "9b0e0dff9bd4e8ab2fc05af96c0b8092bc363d5f"
+    },
+    {
+      "path": "src/derivation-model.ts",
+      "mode": "100644",
+      "gitBlob": "7e96393bfad339175a1e55111646d96810893d31"
+    },
+    {
+      "path": "src/derivation.ts",
+      "mode": "100644",
+      "gitBlob": "e76f7b28e8fa6bdaa417af2f18a19692cc072ad2"
+    },
+    {
+      "path": "src/diff.ts",
+      "mode": "100644",
+      "gitBlob": "6c92e819332497c8d731ef016314b8d08db93571"
+    },
+    {
+      "path": "src/explanation-model.ts",
+      "mode": "100644",
+      "gitBlob": "c4ea1a88043260fde7affe493fad368ec2f8fe5b"
+    },
+    {
+      "path": "src/explanation.ts",
+      "mode": "100644",
+      "gitBlob": "e92b670df4af20b4ae66a2beedd3e0ebe0938c55"
+    },
+    {
+      "path": "src/governance-model.ts",
+      "mode": "100644",
+      "gitBlob": "a155a65c3f4997663e3f9b404bca324740d228ab"
+    },
+    {
+      "path": "src/governance.ts",
+      "mode": "100644",
+      "gitBlob": "077659990233c9136fb64f04d4e800538c612f5d"
+    },
+    {
+      "path": "src/graph.ts",
+      "mode": "100644",
+      "gitBlob": "ed836406166c299e277dc41f61ea186e6825ff96"
+    },
+    {
+      "path": "src/impact.ts",
+      "mode": "100644",
+      "gitBlob": "eae6733909da0b0f013bd2871f692facb9335bed"
+    },
+    {
+      "path": "src/index.ts",
+      "mode": "100644",
+      "gitBlob": "ebe5ba9649ad0f4a12f69dd0943466628dbff172"
+    },
+    {
+      "path": "src/model.ts",
+      "mode": "100644",
+      "gitBlob": "c60f571d4216ffe19f2fc131f9677fe6598fda17"
+    },
+    {
+      "path": "src/path-tree.ts",
+      "mode": "100644",
+      "gitBlob": "6de969fc4303037fef25e70523a4a4cb8b1a6904"
+    },
+    {
+      "path": "src/projection.ts",
+      "mode": "100644",
+      "gitBlob": "9874dc978a1c5b183ce5a8bf308ef3a5c6dca2a4"
+    },
+    {
+      "path": "src/protected-activation.ts",
+      "mode": "100644",
+      "gitBlob": "d5d2087bf0ceaed6034e2d8cbe101d8832d3b759"
+    },
+    {
+      "path": "src/provenance-model.ts",
+      "mode": "100644",
+      "gitBlob": "1e4cfe59577efe53644d757e314ac7e9a420dd38"
+    },
+    {
+      "path": "src/provenance.ts",
+      "mode": "100644",
+      "gitBlob": "68bacefbbc89864b2827dbfb46ffc152051db4f6"
+    },
+    {
+      "path": "src/references.ts",
+      "mode": "100644",
+      "gitBlob": "9f3a34dafb6d56f6737c4945221cf223817fb38d"
+    },
+    {
+      "path": "src/relation-pack.ts",
+      "mode": "100644",
+      "gitBlob": "851f0176b300e820444cb41ec86ffdd650525e05"
+    },
+    {
+      "path": "src/relations.ts",
+      "mode": "100644",
+      "gitBlob": "550e2954a17b61f23cd35458c39cfc719081fa26"
+    },
+    {
+      "path": "src/repair-model.ts",
+      "mode": "100644",
+      "gitBlob": "e17dccc545b44b4064e7da35032eab5c63cd2f8f"
+    },
+    {
+      "path": "src/repair.ts",
+      "mode": "100644",
+      "gitBlob": "38f247bd07cf2df6927701bcb80319b36ecc1849"
+    },
+    {
+      "path": "src/replay.ts",
+      "mode": "100644",
+      "gitBlob": "7db845ade17620625178d683c00572dd0e36d9e3"
+    },
+    {
+      "path": "src/report.ts",
+      "mode": "100644",
+      "gitBlob": "d4cd5a3251dbeea151893bf9da77eb5f90604d10"
+    },
+    {
+      "path": "src/risk.ts",
+      "mode": "100644",
+      "gitBlob": "99cf30efb63c2cd61c49c93f3daec21251d165e0"
+    },
+    {
+      "path": "src/scientific-crate.ts",
+      "mode": "100644",
+      "gitBlob": "87c6d88fdef0cbcb6324ab99e765d180ca77ff22"
+    },
+    {
+      "path": "src/scientific-relations.ts",
+      "mode": "100644",
+      "gitBlob": "8ab8b040b0150fdfb820eb7427289c2546622c54"
+    },
+    {
+      "path": "src/semantic-counterfactual-model.ts",
+      "mode": "100644",
+      "gitBlob": "e82f149c46f24ffbe7fca55d03290571caa5bf06"
+    },
+    {
+      "path": "src/semantic-counterfactual.ts",
+      "mode": "100644",
+      "gitBlob": "bc80f97d20b9c7bdd8f86354386ff7922622a464"
+    },
+    {
+      "path": "src/semantic-model.ts",
+      "mode": "100644",
+      "gitBlob": "8a6dfb884b8f91923c12fe643628c6e0875c2938"
+    },
+    {
+      "path": "src/semantic-path-tree.ts",
+      "mode": "100644",
+      "gitBlob": "e0aa30233b11848c7aef317c6044702f1c96f0ed"
+    },
+    {
+      "path": "src/semantic-projection-model.ts",
+      "mode": "100644",
+      "gitBlob": "c08788fe49e231e4099143100d7f776d1a1e1c52"
+    },
+    {
+      "path": "src/semantic-projection.ts",
+      "mode": "100644",
+      "gitBlob": "a9bf7fa724cb73bbaa47f7125434841311d519f6"
+    },
+    {
+      "path": "src/semantic-replay-model.ts",
+      "mode": "100644",
+      "gitBlob": "a0b5a69eba9c87a1a1d1508410296bc6436dc34d"
+    },
+    {
+      "path": "src/semantic-replay.ts",
+      "mode": "100644",
+      "gitBlob": "ef6cb2f175ece37d4df44e9b575aacaf41ffd711"
+    },
+    {
+      "path": "src/semantic.ts",
+      "mode": "100644",
+      "gitBlob": "fb7f8b6ee1093d30b613ae61375ad8e76029a63e"
+    },
+    {
+      "path": "src/sssom-model.ts",
+      "mode": "100644",
+      "gitBlob": "8311bc97cae729f254a11d7468d22910cc1cefa4"
+    },
+    {
+      "path": "src/sssom.ts",
+      "mode": "100644",
+      "gitBlob": "ef37868acfc52c467904e35526016ea3ace53c23"
+    },
+    {
+      "path": "src/stable.ts",
+      "mode": "100644",
+      "gitBlob": "9b5e9d89453894177fe2c083cab25650a203c033"
+    },
+    {
+      "path": "src/uncertainty.ts",
+      "mode": "100644",
+      "gitBlob": "35cec70f709f2506ccd5f67d9f18dfcff3bd2449"
+    },
+    {
+      "path": "src/validator.ts",
+      "mode": "100644",
+      "gitBlob": "3640c7cf9440a396f64334fb785e6902176e789c"
+    },
+    {
+      "path": "src/viability-model.ts",
+      "mode": "100644",
+      "gitBlob": "5cd87b5d18cdac23e40584d116c64b3ecbff9e46"
+    },
+    {
+      "path": "src/viability.ts",
+      "mode": "100644",
+      "gitBlob": "6ca92ab71801e738439bc09d65ba3daaf3108760"
+    },
+    {
+      "path": "src/workspace.ts",
+      "mode": "100644",
+      "gitBlob": "905a49924d807a3568aa2b21c0a6ee82516d721c"
+    },
+    {
+      "path": "standards/sssom-1.0.0/LICENSE",
+      "mode": "100644",
+      "gitBlob": "21d6bce343bc126364fa173f2e7ed3ae882ce7f8"
+    },
+    {
+      "path": "standards/sssom-1.0.0/README.md",
+      "mode": "100644",
+      "gitBlob": "07806215ddee75916e2f43eddf3beeadd6826a35"
+    },
+    {
+      "path": "standards/sssom-1.0.0/sssom_schema.yaml",
+      "mode": "100644",
+      "gitBlob": "099e8928f49e7a6b2dcf39c20cc550af235fd1d3"
+    },
+    {
+      "path": "tsconfig.build.json",
+      "mode": "100644",
+      "gitBlob": "67f21ee900dc3b5dd8788ce7da6c818ca5619139"
+    },
+    {
+      "path": "tsconfig.json",
+      "mode": "100644",
+      "gitBlob": "d37dc76446214f83bd4c46e6fbca31c4c67a05b8"
+    }
+  ],
+  "expandedObligationCount": 1292,
+  "ownerApprovedDeviations": []
+}

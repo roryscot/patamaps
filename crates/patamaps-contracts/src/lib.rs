@@ -4,7 +4,9 @@
 mod integer;
 mod json;
 mod json_scan;
+#[cfg(feature = "legacy-compat")]
 mod legacy_json;
+#[cfg(feature = "legacy-compat")]
 mod legacy_stable;
 mod model;
 mod semantic;
@@ -15,11 +17,14 @@ pub use json::{
     byte_digest, canonical_bytes, canonical_digest, parse, parse_value, parse_value_with_limits,
     parse_with_limits,
 };
+#[cfg(feature = "legacy-compat")]
 pub use legacy_json::{LegacyPackJson, LegacyReadOnlyJson};
 #[doc(hidden)]
+#[cfg(feature = "legacy-compat")]
 pub use legacy_stable::LegacyOrderedJson;
 #[doc(hidden)]
-pub const LEGACY_COLLATOR_SOURCE_DIGEST: &str = env!("PATAMAPS_COLLATOR_SOURCE_DIGEST");
+#[cfg(feature = "legacy-compat")]
+pub const LEGACY_COLLATOR_SOURCE_DIGEST: &str = icu_collator::PATAMAPS_SOURCE_DIGEST;
 pub use model::*;
 pub use semantic::*;
 

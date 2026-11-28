@@ -1,0 +1,55 @@
+{
+  "profile": {
+    "profile": "patamaps-chatbot-internal-rewrites-1",
+    "upstreamConfigDigest": "sha256:856cc04806b203481ad9722b92d3f52907a618468ee79129f98373b4ae86e075",
+    "rules": {
+      "beforeFiles": [
+        {
+          "source": "/qualified/auth/:page(login|register)",
+          "destination": "/:page",
+          "has": [
+            {
+              "type": "header",
+              "key": "x-patamaps-rewrite",
+              "value": "enabled"
+            }
+          ],
+          "missing": [
+            {
+              "type": "query",
+              "key": "blocked"
+            }
+          ]
+        }
+      ],
+      "afterFiles": [
+        {
+          "source": "/qualified/session",
+          "destination": "/api/auth/session",
+          "has": [
+            {
+              "type": "query",
+              "key": "view",
+              "value": "session"
+            }
+          ],
+          "missing": [
+            {
+              "type": "header",
+              "key": "x-patamaps-block"
+            }
+          ]
+        }
+      ],
+      "fallback": []
+    },
+    "originalUpstreamUnchanged": true,
+    "qualificationOverlay": true
+  },
+  "profileDigest": "sha256:96e688aa44a4791cc8b6a943149cde85f3424eb1e6054b025ba798e85e5c7b01",
+  "originalConfigDigest": "sha256:856cc04806b203481ad9722b92d3f52907a618468ee79129f98373b4ae86e075",
+  "derivedConfigDigest": "sha256:b629c0e705c79960a3835955d86645299a145c37abe3393e289f4db14438af35",
+  "sourceFile": "patamaps-rewrite-profile.json",
+  "upstreamBehaviorClaim": false,
+  "upstreamConfigGitBlob": "bfe7242c81c4c4e32cd7095c07ecf5d32d5100fe"
+}

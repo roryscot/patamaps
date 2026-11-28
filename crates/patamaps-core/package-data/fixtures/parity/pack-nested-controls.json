@@ -1,0 +1,5872 @@
+{
+  "schemaVersion": "1.0.0",
+  "referenceEngine": "399747a4ad05a37cd8db1cedd53048fad2175be4",
+  "sourceFiles": [
+    {
+      "path": "src/relation-pack.ts",
+      "digest": "sha256:b035eb01f6af1d9d34547abaa0139f07492ef801c72987bcae42245935f3d9b7"
+    },
+    {
+      "path": "src/canonical.ts",
+      "digest": "sha256:06994bd6e52c332ef52e37dd92408372adc51a593067a1b03ba0108bf1adf7ce"
+    },
+    {
+      "path": "src/stable.ts",
+      "digest": "sha256:5e0800fab53ac01f4e8506ca4d85b8a0a25ee74c1e79392cb69c11431633f270"
+    },
+    {
+      "path": "schemas/relation-pack.schema.json",
+      "digest": "sha256:bfac8a6fa108eb430aec628ec6952b8123468daba0178b801f7f7c1ac3e4e135"
+    },
+    {
+      "path": "schemas/relation-pack-v2.schema.json",
+      "digest": "sha256:3923a94dc77e608b73534d1c31844d4bfa823fb75708d961e6d9b97e67ae41fc"
+    }
+  ],
+  "scope": "Finite executable law/conditional/context/import JSON schema controls, parser identity, valid original digests and exact thrown name/message. No arbitrary JS object, unchecked digest, file or resource-bound equivalence.",
+  "cases": [
+    {
+      "name": "reverse-neutral",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [
+          {
+            "id": "urn:law:reverse",
+            "operation": "reverse",
+            "operands": [
+              "test:edge"
+            ],
+            "resultRelation": "test:edge",
+            "handling": {
+              "lossiness": "conservative",
+              "uncertainty": "conservative",
+              "authority": "none"
+            }
+          }
+        ]
+      },
+      "expected": {
+        "status": "accepted",
+        "digest": "sha256:025e38fa8aaeee256cbd9e582a7b7e2d61601c0c11f6f9666c73a2e65803eb21"
+      }
+    },
+    {
+      "name": "reverse-id-absent",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [
+          {
+            "operation": "reverse",
+            "operands": [
+              "test:edge"
+            ],
+            "resultRelation": "test:edge",
+            "handling": {
+              "lossiness": "conservative",
+              "uncertainty": "conservative",
+              "authority": "none"
+            }
+          }
+        ]
+      },
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0 must have required property 'id'"
+        }
+      }
+    },
+    {
+      "name": "reverse-id-null",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [
+          {
+            "id": null,
+            "operation": "reverse",
+            "operands": [
+              "test:edge"
+            ],
+            "resultRelation": "test:edge",
+            "handling": {
+              "lossiness": "conservative",
+              "uncertainty": "conservative",
+              "authority": "none"
+            }
+          }
+        ]
+      },
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/id must be string"
+        }
+      }
+    },
+    {
+      "name": "reverse-id-false",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [
+          {
+            "id": false,
+            "operation": "reverse",
+            "operands": [
+              "test:edge"
+            ],
+            "resultRelation": "test:edge",
+            "handling": {
+              "lossiness": "conservative",
+              "uncertainty": "conservative",
+              "authority": "none"
+            }
+          }
+        ]
+      },
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/id must be string"
+        }
+      }
+    },
+    {
+      "name": "reverse-id-0",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [
+          {
+            "id": 0,
+            "operation": "reverse",
+            "operands": [
+              "test:edge"
+            ],
+            "resultRelation": "test:edge",
+            "handling": {
+              "lossiness": "conservative",
+              "uncertainty": "conservative",
+              "authority": "none"
+            }
+          }
+        ]
+      },
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/id must be string"
+        }
+      }
+    },
+    {
+      "name": "reverse-id-\"\"",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [
+          {
+            "id": "",
+            "operation": "reverse",
+            "operands": [
+              "test:edge"
+            ],
+            "resultRelation": "test:edge",
+            "handling": {
+              "lossiness": "conservative",
+              "uncertainty": "conservative",
+              "authority": "none"
+            }
+          }
+        ]
+      },
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/id must match pattern \"^[A-Za-z][A-Za-z0-9+.-]*:[^\\s]+$\""
+        }
+      }
+    },
+    {
+      "name": "reverse-id-[]",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [
+          {
+            "id": [],
+            "operation": "reverse",
+            "operands": [
+              "test:edge"
+            ],
+            "resultRelation": "test:edge",
+            "handling": {
+              "lossiness": "conservative",
+              "uncertainty": "conservative",
+              "authority": "none"
+            }
+          }
+        ]
+      },
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/id must be string"
+        }
+      }
+    },
+    {
+      "name": "reverse-id-{}",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [
+          {
+            "id": {},
+            "operation": "reverse",
+            "operands": [
+              "test:edge"
+            ],
+            "resultRelation": "test:edge",
+            "handling": {
+              "lossiness": "conservative",
+              "uncertainty": "conservative",
+              "authority": "none"
+            }
+          }
+        ]
+      },
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/id must be string"
+        }
+      }
+    },
+    {
+      "name": "reverse-operation-absent",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [
+          {
+            "id": "urn:law:reverse",
+            "operands": [
+              "test:edge"
+            ],
+            "resultRelation": "test:edge",
+            "handling": {
+              "lossiness": "conservative",
+              "uncertainty": "conservative",
+              "authority": "none"
+            }
+          }
+        ]
+      },
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/operands must NOT have fewer than 2 items; /laws/0 must match \"else\" schema; /laws/0 must have required property 'operation'"
+        }
+      }
+    },
+    {
+      "name": "reverse-operation-null",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [
+          {
+            "id": "urn:law:reverse",
+            "operation": null,
+            "operands": [
+              "test:edge"
+            ],
+            "resultRelation": "test:edge",
+            "handling": {
+              "lossiness": "conservative",
+              "uncertainty": "conservative",
+              "authority": "none"
+            }
+          }
+        ]
+      },
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/operands must NOT have fewer than 2 items; /laws/0 must match \"else\" schema; /laws/0/operation must be equal to one of the allowed values"
+        }
+      }
+    },
+    {
+      "name": "reverse-operation-false",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [
+          {
+            "id": "urn:law:reverse",
+            "operation": false,
+            "operands": [
+              "test:edge"
+            ],
+            "resultRelation": "test:edge",
+            "handling": {
+              "lossiness": "conservative",
+              "uncertainty": "conservative",
+              "authority": "none"
+            }
+          }
+        ]
+      },
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/operands must NOT have fewer than 2 items; /laws/0 must match \"else\" schema; /laws/0/operation must be equal to one of the allowed values"
+        }
+      }
+    },
+    {
+      "name": "reverse-operation-0",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [
+          {
+            "id": "urn:law:reverse",
+            "operation": 0,
+            "operands": [
+              "test:edge"
+            ],
+            "resultRelation": "test:edge",
+            "handling": {
+              "lossiness": "conservative",
+              "uncertainty": "conservative",
+              "authority": "none"
+            }
+          }
+        ]
+      },
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/operands must NOT have fewer than 2 items; /laws/0 must match \"else\" schema; /laws/0/operation must be equal to one of the allowed values"
+        }
+      }
+    },
+    {
+      "name": "reverse-operation-\"\"",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [
+          {
+            "id": "urn:law:reverse",
+            "operation": "",
+            "operands": [
+              "test:edge"
+            ],
+            "resultRelation": "test:edge",
+            "handling": {
+              "lossiness": "conservative",
+              "uncertainty": "conservative",
+              "authority": "none"
+            }
+          }
+        ]
+      },
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/operands must NOT have fewer than 2 items; /laws/0 must match \"else\" schema; /laws/0/operation must be equal to one of the allowed values"
+        }
+      }
+    },
+    {
+      "name": "reverse-operation-[]",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [
+          {
+            "id": "urn:law:reverse",
+            "operation": [],
+            "operands": [
+              "test:edge"
+            ],
+            "resultRelation": "test:edge",
+            "handling": {
+              "lossiness": "conservative",
+              "uncertainty": "conservative",
+              "authority": "none"
+            }
+          }
+        ]
+      },
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/operands must NOT have fewer than 2 items; /laws/0 must match \"else\" schema; /laws/0/operation must be equal to one of the allowed values"
+        }
+      }
+    },
+    {
+      "name": "reverse-operation-{}",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [
+          {
+            "id": "urn:law:reverse",
+            "operation": {},
+            "operands": [
+              "test:edge"
+            ],
+            "resultRelation": "test:edge",
+            "handling": {
+              "lossiness": "conservative",
+              "uncertainty": "conservative",
+              "authority": "none"
+            }
+          }
+        ]
+      },
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/operands must NOT have fewer than 2 items; /laws/0 must match \"else\" schema; /laws/0/operation must be equal to one of the allowed values"
+        }
+      }
+    },
+    {
+      "name": "reverse-operands-absent",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [
+          {
+            "id": "urn:law:reverse",
+            "operation": "reverse",
+            "resultRelation": "test:edge",
+            "handling": {
+              "lossiness": "conservative",
+              "uncertainty": "conservative",
+              "authority": "none"
+            }
+          }
+        ]
+      },
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0 must have required property 'operands'"
+        }
+      }
+    },
+    {
+      "name": "reverse-operands-null",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [
+          {
+            "id": "urn:law:reverse",
+            "operation": "reverse",
+            "operands": null,
+            "resultRelation": "test:edge",
+            "handling": {
+              "lossiness": "conservative",
+              "uncertainty": "conservative",
+              "authority": "none"
+            }
+          }
+        ]
+      },
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/operands must be array; /laws/0 must match \"then\" schema; /laws/0/operands must be array"
+        }
+      }
+    },
+    {
+      "name": "reverse-operands-false",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [
+          {
+            "id": "urn:law:reverse",
+            "operation": "reverse",
+            "operands": false,
+            "resultRelation": "test:edge",
+            "handling": {
+              "lossiness": "conservative",
+              "uncertainty": "conservative",
+              "authority": "none"
+            }
+          }
+        ]
+      },
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/operands must be array; /laws/0 must match \"then\" schema; /laws/0/operands must be array"
+        }
+      }
+    },
+    {
+      "name": "reverse-operands-0",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [
+          {
+            "id": "urn:law:reverse",
+            "operation": "reverse",
+            "operands": 0,
+            "resultRelation": "test:edge",
+            "handling": {
+              "lossiness": "conservative",
+              "uncertainty": "conservative",
+              "authority": "none"
+            }
+          }
+        ]
+      },
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/operands must be array; /laws/0 must match \"then\" schema; /laws/0/operands must be array"
+        }
+      }
+    },
+    {
+      "name": "reverse-operands-\"\"",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [
+          {
+            "id": "urn:law:reverse",
+            "operation": "reverse",
+            "operands": "",
+            "resultRelation": "test:edge",
+            "handling": {
+              "lossiness": "conservative",
+              "uncertainty": "conservative",
+              "authority": "none"
+            }
+          }
+        ]
+      },
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/operands must be array; /laws/0 must match \"then\" schema; /laws/0/operands must be array"
+        }
+      }
+    },
+    {
+      "name": "reverse-operands-[]",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [
+          {
+            "id": "urn:law:reverse",
+            "operation": "reverse",
+            "operands": [],
+            "resultRelation": "test:edge",
+            "handling": {
+              "lossiness": "conservative",
+              "uncertainty": "conservative",
+              "authority": "none"
+            }
+          }
+        ]
+      },
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/operands must NOT have fewer than 1 items; /laws/0 must match \"then\" schema; /laws/0/operands must NOT have fewer than 1 items"
+        }
+      }
+    },
+    {
+      "name": "reverse-operands-{}",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [
+          {
+            "id": "urn:law:reverse",
+            "operation": "reverse",
+            "operands": {},
+            "resultRelation": "test:edge",
+            "handling": {
+              "lossiness": "conservative",
+              "uncertainty": "conservative",
+              "authority": "none"
+            }
+          }
+        ]
+      },
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/operands must be array; /laws/0 must match \"then\" schema; /laws/0/operands must be array"
+        }
+      }
+    },
+    {
+      "name": "reverse-resultRelation-absent",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [
+          {
+            "id": "urn:law:reverse",
+            "operation": "reverse",
+            "operands": [
+              "test:edge"
+            ],
+            "handling": {
+              "lossiness": "conservative",
+              "uncertainty": "conservative",
+              "authority": "none"
+            }
+          }
+        ]
+      },
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0 must have required property 'resultRelation'"
+        }
+      }
+    },
+    {
+      "name": "reverse-resultRelation-null",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [
+          {
+            "id": "urn:law:reverse",
+            "operation": "reverse",
+            "operands": [
+              "test:edge"
+            ],
+            "resultRelation": null,
+            "handling": {
+              "lossiness": "conservative",
+              "uncertainty": "conservative",
+              "authority": "none"
+            }
+          }
+        ]
+      },
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/resultRelation must be string"
+        }
+      }
+    },
+    {
+      "name": "reverse-resultRelation-false",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [
+          {
+            "id": "urn:law:reverse",
+            "operation": "reverse",
+            "operands": [
+              "test:edge"
+            ],
+            "resultRelation": false,
+            "handling": {
+              "lossiness": "conservative",
+              "uncertainty": "conservative",
+              "authority": "none"
+            }
+          }
+        ]
+      },
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/resultRelation must be string"
+        }
+      }
+    },
+    {
+      "name": "reverse-resultRelation-0",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [
+          {
+            "id": "urn:law:reverse",
+            "operation": "reverse",
+            "operands": [
+              "test:edge"
+            ],
+            "resultRelation": 0,
+            "handling": {
+              "lossiness": "conservative",
+              "uncertainty": "conservative",
+              "authority": "none"
+            }
+          }
+        ]
+      },
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/resultRelation must be string"
+        }
+      }
+    },
+    {
+      "name": "reverse-resultRelation-\"\"",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [
+          {
+            "id": "urn:law:reverse",
+            "operation": "reverse",
+            "operands": [
+              "test:edge"
+            ],
+            "resultRelation": "",
+            "handling": {
+              "lossiness": "conservative",
+              "uncertainty": "conservative",
+              "authority": "none"
+            }
+          }
+        ]
+      },
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/resultRelation must match pattern \"^[a-z][a-z0-9._-]*:[a-z][a-z0-9._-]*$\""
+        }
+      }
+    },
+    {
+      "name": "reverse-resultRelation-[]",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [
+          {
+            "id": "urn:law:reverse",
+            "operation": "reverse",
+            "operands": [
+              "test:edge"
+            ],
+            "resultRelation": [],
+            "handling": {
+              "lossiness": "conservative",
+              "uncertainty": "conservative",
+              "authority": "none"
+            }
+          }
+        ]
+      },
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/resultRelation must be string"
+        }
+      }
+    },
+    {
+      "name": "reverse-resultRelation-{}",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [
+          {
+            "id": "urn:law:reverse",
+            "operation": "reverse",
+            "operands": [
+              "test:edge"
+            ],
+            "resultRelation": {},
+            "handling": {
+              "lossiness": "conservative",
+              "uncertainty": "conservative",
+              "authority": "none"
+            }
+          }
+        ]
+      },
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/resultRelation must be string"
+        }
+      }
+    },
+    {
+      "name": "reverse-handling-absent",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [
+          {
+            "id": "urn:law:reverse",
+            "operation": "reverse",
+            "operands": [
+              "test:edge"
+            ],
+            "resultRelation": "test:edge"
+          }
+        ]
+      },
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0 must have required property 'handling'"
+        }
+      }
+    },
+    {
+      "name": "reverse-handling-null",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [
+          {
+            "id": "urn:law:reverse",
+            "operation": "reverse",
+            "operands": [
+              "test:edge"
+            ],
+            "resultRelation": "test:edge",
+            "handling": null
+          }
+        ]
+      },
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/handling must be object"
+        }
+      }
+    },
+    {
+      "name": "reverse-handling-false",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [
+          {
+            "id": "urn:law:reverse",
+            "operation": "reverse",
+            "operands": [
+              "test:edge"
+            ],
+            "resultRelation": "test:edge",
+            "handling": false
+          }
+        ]
+      },
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/handling must be object"
+        }
+      }
+    },
+    {
+      "name": "reverse-handling-0",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [
+          {
+            "id": "urn:law:reverse",
+            "operation": "reverse",
+            "operands": [
+              "test:edge"
+            ],
+            "resultRelation": "test:edge",
+            "handling": 0
+          }
+        ]
+      },
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/handling must be object"
+        }
+      }
+    },
+    {
+      "name": "reverse-handling-\"\"",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [
+          {
+            "id": "urn:law:reverse",
+            "operation": "reverse",
+            "operands": [
+              "test:edge"
+            ],
+            "resultRelation": "test:edge",
+            "handling": ""
+          }
+        ]
+      },
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/handling must be object"
+        }
+      }
+    },
+    {
+      "name": "reverse-handling-[]",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [
+          {
+            "id": "urn:law:reverse",
+            "operation": "reverse",
+            "operands": [
+              "test:edge"
+            ],
+            "resultRelation": "test:edge",
+            "handling": []
+          }
+        ]
+      },
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/handling must be object"
+        }
+      }
+    },
+    {
+      "name": "reverse-handling-{}",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [
+          {
+            "id": "urn:law:reverse",
+            "operation": "reverse",
+            "operands": [
+              "test:edge"
+            ],
+            "resultRelation": "test:edge",
+            "handling": {}
+          }
+        ]
+      },
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/handling must have required property 'lossiness'; /laws/0/handling must have required property 'uncertainty'; /laws/0/handling must have required property 'authority'"
+        }
+      }
+    },
+    {
+      "name": "reverse-conditions-absent",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [
+          {
+            "id": "urn:law:reverse",
+            "operation": "reverse",
+            "operands": [
+              "test:edge"
+            ],
+            "resultRelation": "test:edge",
+            "handling": {
+              "lossiness": "conservative",
+              "uncertainty": "conservative",
+              "authority": "none"
+            }
+          }
+        ]
+      },
+      "expected": {
+        "status": "accepted",
+        "digest": "sha256:025e38fa8aaeee256cbd9e582a7b7e2d61601c0c11f6f9666c73a2e65803eb21"
+      }
+    },
+    {
+      "name": "reverse-conditions-null",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [
+          {
+            "id": "urn:law:reverse",
+            "operation": "reverse",
+            "operands": [
+              "test:edge"
+            ],
+            "resultRelation": "test:edge",
+            "handling": {
+              "lossiness": "conservative",
+              "uncertainty": "conservative",
+              "authority": "none"
+            },
+            "conditions": null
+          }
+        ]
+      },
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/conditions must be object; /laws/0 must match \"then\" schema; /laws/0/conditions must be object"
+        }
+      }
+    },
+    {
+      "name": "reverse-conditions-false",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [
+          {
+            "id": "urn:law:reverse",
+            "operation": "reverse",
+            "operands": [
+              "test:edge"
+            ],
+            "resultRelation": "test:edge",
+            "handling": {
+              "lossiness": "conservative",
+              "uncertainty": "conservative",
+              "authority": "none"
+            },
+            "conditions": false
+          }
+        ]
+      },
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/conditions must be object; /laws/0 must match \"then\" schema; /laws/0/conditions must be object"
+        }
+      }
+    },
+    {
+      "name": "reverse-conditions-0",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [
+          {
+            "id": "urn:law:reverse",
+            "operation": "reverse",
+            "operands": [
+              "test:edge"
+            ],
+            "resultRelation": "test:edge",
+            "handling": {
+              "lossiness": "conservative",
+              "uncertainty": "conservative",
+              "authority": "none"
+            },
+            "conditions": 0
+          }
+        ]
+      },
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/conditions must be object; /laws/0 must match \"then\" schema; /laws/0/conditions must be object"
+        }
+      }
+    },
+    {
+      "name": "reverse-conditions-\"\"",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [
+          {
+            "id": "urn:law:reverse",
+            "operation": "reverse",
+            "operands": [
+              "test:edge"
+            ],
+            "resultRelation": "test:edge",
+            "handling": {
+              "lossiness": "conservative",
+              "uncertainty": "conservative",
+              "authority": "none"
+            },
+            "conditions": ""
+          }
+        ]
+      },
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/conditions must be object; /laws/0 must match \"then\" schema; /laws/0/conditions must be object"
+        }
+      }
+    },
+    {
+      "name": "reverse-conditions-[]",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [
+          {
+            "id": "urn:law:reverse",
+            "operation": "reverse",
+            "operands": [
+              "test:edge"
+            ],
+            "resultRelation": "test:edge",
+            "handling": {
+              "lossiness": "conservative",
+              "uncertainty": "conservative",
+              "authority": "none"
+            },
+            "conditions": []
+          }
+        ]
+      },
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/conditions must be object; /laws/0 must match \"then\" schema; /laws/0/conditions must be object"
+        }
+      }
+    },
+    {
+      "name": "reverse-conditions-{}",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [
+          {
+            "id": "urn:law:reverse",
+            "operation": "reverse",
+            "operands": [
+              "test:edge"
+            ],
+            "resultRelation": "test:edge",
+            "handling": {
+              "lossiness": "conservative",
+              "uncertainty": "conservative",
+              "authority": "none"
+            },
+            "conditions": {}
+          }
+        ]
+      },
+      "expected": {
+        "status": "accepted",
+        "digest": "sha256:783f84fa0712dc0daca297b27893d09d604ed8b87cbf1c908f32f0b3ea58ddc0"
+      }
+    },
+    {
+      "name": "reverse-patch-{\"operands\":[]}",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [
+          {
+            "id": "urn:law:reverse",
+            "operation": "reverse",
+            "operands": [],
+            "resultRelation": "test:edge",
+            "handling": {
+              "lossiness": "conservative",
+              "uncertainty": "conservative",
+              "authority": "none"
+            }
+          }
+        ]
+      },
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/operands must NOT have fewer than 1 items; /laws/0 must match \"then\" schema; /laws/0/operands must NOT have fewer than 1 items"
+        }
+      }
+    },
+    {
+      "name": "reverse-patch-{\"operands\":[\"test:edge\",\"test:edge\",\"test:edge\"]}",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [
+          {
+            "id": "urn:law:reverse",
+            "operation": "reverse",
+            "operands": [
+              "test:edge",
+              "test:edge",
+              "test:edge"
+            ],
+            "resultRelation": "test:edge",
+            "handling": {
+              "lossiness": "conservative",
+              "uncertainty": "conservative",
+              "authority": "none"
+            }
+          }
+        ]
+      },
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/operands must NOT have more than 1 items; /laws/0 must match \"then\" schema; /laws/0/operands must NOT have more than 2 items"
+        }
+      }
+    },
+    {
+      "name": "reverse-patch-{\"operands\":[null,false]}",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [
+          {
+            "id": "urn:law:reverse",
+            "operation": "reverse",
+            "operands": [
+              null,
+              false
+            ],
+            "resultRelation": "test:edge",
+            "handling": {
+              "lossiness": "conservative",
+              "uncertainty": "conservative",
+              "authority": "none"
+            }
+          }
+        ]
+      },
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/operands must NOT have more than 1 items; /laws/0 must match \"then\" schema; /laws/0/operands/0 must be string; /laws/0/operands/1 must be string"
+        }
+      }
+    },
+    {
+      "name": "reverse-patch-{\"operation\":\"unknown\",\"operands\":[]}",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [
+          {
+            "id": "urn:law:reverse",
+            "operation": "unknown",
+            "operands": [],
+            "resultRelation": "test:edge",
+            "handling": {
+              "lossiness": "conservative",
+              "uncertainty": "conservative",
+              "authority": "none"
+            }
+          }
+        ]
+      },
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/operands must NOT have fewer than 2 items; /laws/0 must match \"else\" schema; /laws/0/operation must be equal to one of the allowed values; /laws/0/operands must NOT have fewer than 1 items"
+        }
+      }
+    },
+    {
+      "name": "reverse-patch-{\"handling\":{\"authority\":\"delegate\",\"uncertainty\":0,\"lossiness\":false}}",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [
+          {
+            "id": "urn:law:reverse",
+            "operation": "reverse",
+            "operands": [
+              "test:edge"
+            ],
+            "resultRelation": "test:edge",
+            "handling": {
+              "authority": "delegate",
+              "uncertainty": 0,
+              "lossiness": false
+            }
+          }
+        ]
+      },
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/handling/lossiness must be equal to constant; /laws/0/handling/uncertainty must be equal to constant; /laws/0/handling/authority must be equal to constant"
+        }
+      }
+    },
+    {
+      "name": "reverse-patch-{\"handling\":{\"unknownZ\":true,\"unknownA\":false}}",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [
+          {
+            "id": "urn:law:reverse",
+            "operation": "reverse",
+            "operands": [
+              "test:edge"
+            ],
+            "resultRelation": "test:edge",
+            "handling": {
+              "unknownZ": true,
+              "unknownA": false
+            }
+          }
+        ]
+      },
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/handling must have required property 'lossiness'; /laws/0/handling must have required property 'uncertainty'; /laws/0/handling must have required property 'authority'; /laws/0/handling must NOT have additional properties; /laws/0/handling must NOT have additional properties"
+        }
+      }
+    },
+    {
+      "name": "reverse-patch-{\"conditions\":{\"middleKinds\":[\"x\"]}}",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [
+          {
+            "id": "urn:law:reverse",
+            "operation": "reverse",
+            "operands": [
+              "test:edge"
+            ],
+            "resultRelation": "test:edge",
+            "handling": {
+              "lossiness": "conservative",
+              "uncertainty": "conservative",
+              "authority": "none"
+            },
+            "conditions": {
+              "middleKinds": [
+                "x"
+              ]
+            }
+          }
+        ]
+      },
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/conditions/middleKinds boolean schema is false; /laws/0 must match \"then\" schema"
+        }
+      }
+    },
+    {
+      "name": "reverse-patch-{\"conditions\":{\"sourceKinds\":[],\"middleKinds\":[],\"targetKinds\":[]}}",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [
+          {
+            "id": "urn:law:reverse",
+            "operation": "reverse",
+            "operands": [
+              "test:edge"
+            ],
+            "resultRelation": "test:edge",
+            "handling": {
+              "lossiness": "conservative",
+              "uncertainty": "conservative",
+              "authority": "none"
+            },
+            "conditions": {
+              "sourceKinds": [],
+              "middleKinds": [],
+              "targetKinds": []
+            }
+          }
+        ]
+      },
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/conditions/middleKinds boolean schema is false; /laws/0 must match \"then\" schema; /laws/0/conditions/sourceKinds must NOT have fewer than 1 items; /laws/0/conditions/middleKinds must NOT have fewer than 1 items; /laws/0/conditions/targetKinds must NOT have fewer than 1 items"
+        }
+      }
+    },
+    {
+      "name": "reverse-patch-{\"conditions\":{\"middleKinds\":[\"__proto__\",\"__proto__\"]}}",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [
+          {
+            "id": "urn:law:reverse",
+            "operation": "reverse",
+            "operands": [
+              "test:edge"
+            ],
+            "resultRelation": "test:edge",
+            "handling": {
+              "lossiness": "conservative",
+              "uncertainty": "conservative",
+              "authority": "none"
+            },
+            "conditions": {
+              "middleKinds": [
+                "__proto__",
+                "__proto__"
+              ]
+            }
+          }
+        ]
+      },
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/conditions/middleKinds boolean schema is false; /laws/0 must match \"then\" schema"
+        }
+      }
+    },
+    {
+      "name": "reverse-patch-{\"conditions\":{\"sourceKinds\":[0,0],\"middleKinds\":[false,false]}}",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [
+          {
+            "id": "urn:law:reverse",
+            "operation": "reverse",
+            "operands": [
+              "test:edge"
+            ],
+            "resultRelation": "test:edge",
+            "handling": {
+              "lossiness": "conservative",
+              "uncertainty": "conservative",
+              "authority": "none"
+            },
+            "conditions": {
+              "sourceKinds": [
+                0,
+                0
+              ],
+              "middleKinds": [
+                false,
+                false
+              ]
+            }
+          }
+        ]
+      },
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/conditions/middleKinds boolean schema is false; /laws/0 must match \"then\" schema; /laws/0/conditions/sourceKinds/0 must be string; /laws/0/conditions/sourceKinds/1 must be string; /laws/0/conditions/middleKinds/0 must be string; /laws/0/conditions/middleKinds/1 must be string"
+        }
+      }
+    },
+    {
+      "name": "reverse-patch-{\"conditions\":{\"sourceKinds\":[\"a\",\"b\",\"a\",\"b\",\"a\"]}}",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [
+          {
+            "id": "urn:law:reverse",
+            "operation": "reverse",
+            "operands": [
+              "test:edge"
+            ],
+            "resultRelation": "test:edge",
+            "handling": {
+              "lossiness": "conservative",
+              "uncertainty": "conservative",
+              "authority": "none"
+            },
+            "conditions": {
+              "sourceKinds": [
+                "a",
+                "b",
+                "a",
+                "b",
+                "a"
+              ]
+            }
+          }
+        ]
+      },
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/conditions/sourceKinds must NOT have duplicate items (items ## 4 and 2 are identical)"
+        }
+      }
+    },
+    {
+      "name": "reverse-patch-{\"conditions\":{\"unknownZ\":true,\"unknownA\":false}}",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [
+          {
+            "id": "urn:law:reverse",
+            "operation": "reverse",
+            "operands": [
+              "test:edge"
+            ],
+            "resultRelation": "test:edge",
+            "handling": {
+              "lossiness": "conservative",
+              "uncertainty": "conservative",
+              "authority": "none"
+            },
+            "conditions": {
+              "unknownZ": true,
+              "unknownA": false
+            }
+          }
+        ]
+      },
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/conditions must NOT have additional properties; /laws/0/conditions must NOT have additional properties"
+        }
+      }
+    },
+    {
+      "name": "reverse-patch-{\"id\":null,\"operation\":\"unknown\",\"operands\":[],\"handling\":{}}",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [
+          {
+            "id": null,
+            "operation": "unknown",
+            "operands": [],
+            "resultRelation": "test:edge",
+            "handling": {}
+          }
+        ]
+      },
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/operands must NOT have fewer than 2 items; /laws/0 must match \"else\" schema; /laws/0/id must be string; /laws/0/operation must be equal to one of the allowed values; /laws/0/operands must NOT have fewer than 1 items; /laws/0/handling must have required property 'lossiness'; /laws/0/handling must have required property 'uncertainty'; /laws/0/handling must have required property 'authority'"
+        }
+      }
+    },
+    {
+      "name": "chain-neutral",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [
+          {
+            "id": "urn:law:chain",
+            "operation": "chain",
+            "operands": [
+              "test:edge",
+              "test:edge"
+            ],
+            "resultRelation": "test:edge",
+            "handling": {
+              "lossiness": "conservative",
+              "uncertainty": "conservative",
+              "authority": "none"
+            }
+          }
+        ]
+      },
+      "expected": {
+        "status": "accepted",
+        "digest": "sha256:33a7f2a3df361b0cf0ea6045aa26c7a056eaf55483a37669fe32cfea6ba35eeb"
+      }
+    },
+    {
+      "name": "chain-id-absent",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [
+          {
+            "operation": "chain",
+            "operands": [
+              "test:edge",
+              "test:edge"
+            ],
+            "resultRelation": "test:edge",
+            "handling": {
+              "lossiness": "conservative",
+              "uncertainty": "conservative",
+              "authority": "none"
+            }
+          }
+        ]
+      },
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0 must have required property 'id'"
+        }
+      }
+    },
+    {
+      "name": "chain-id-null",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [
+          {
+            "id": null,
+            "operation": "chain",
+            "operands": [
+              "test:edge",
+              "test:edge"
+            ],
+            "resultRelation": "test:edge",
+            "handling": {
+              "lossiness": "conservative",
+              "uncertainty": "conservative",
+              "authority": "none"
+            }
+          }
+        ]
+      },
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/id must be string"
+        }
+      }
+    },
+    {
+      "name": "chain-id-false",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [
+          {
+            "id": false,
+            "operation": "chain",
+            "operands": [
+              "test:edge",
+              "test:edge"
+            ],
+            "resultRelation": "test:edge",
+            "handling": {
+              "lossiness": "conservative",
+              "uncertainty": "conservative",
+              "authority": "none"
+            }
+          }
+        ]
+      },
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/id must be string"
+        }
+      }
+    },
+    {
+      "name": "chain-id-0",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [
+          {
+            "id": 0,
+            "operation": "chain",
+            "operands": [
+              "test:edge",
+              "test:edge"
+            ],
+            "resultRelation": "test:edge",
+            "handling": {
+              "lossiness": "conservative",
+              "uncertainty": "conservative",
+              "authority": "none"
+            }
+          }
+        ]
+      },
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/id must be string"
+        }
+      }
+    },
+    {
+      "name": "chain-id-\"\"",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [
+          {
+            "id": "",
+            "operation": "chain",
+            "operands": [
+              "test:edge",
+              "test:edge"
+            ],
+            "resultRelation": "test:edge",
+            "handling": {
+              "lossiness": "conservative",
+              "uncertainty": "conservative",
+              "authority": "none"
+            }
+          }
+        ]
+      },
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/id must match pattern \"^[A-Za-z][A-Za-z0-9+.-]*:[^\\s]+$\""
+        }
+      }
+    },
+    {
+      "name": "chain-id-[]",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [
+          {
+            "id": [],
+            "operation": "chain",
+            "operands": [
+              "test:edge",
+              "test:edge"
+            ],
+            "resultRelation": "test:edge",
+            "handling": {
+              "lossiness": "conservative",
+              "uncertainty": "conservative",
+              "authority": "none"
+            }
+          }
+        ]
+      },
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/id must be string"
+        }
+      }
+    },
+    {
+      "name": "chain-id-{}",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [
+          {
+            "id": {},
+            "operation": "chain",
+            "operands": [
+              "test:edge",
+              "test:edge"
+            ],
+            "resultRelation": "test:edge",
+            "handling": {
+              "lossiness": "conservative",
+              "uncertainty": "conservative",
+              "authority": "none"
+            }
+          }
+        ]
+      },
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/id must be string"
+        }
+      }
+    },
+    {
+      "name": "chain-operation-absent",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [
+          {
+            "id": "urn:law:chain",
+            "operands": [
+              "test:edge",
+              "test:edge"
+            ],
+            "resultRelation": "test:edge",
+            "handling": {
+              "lossiness": "conservative",
+              "uncertainty": "conservative",
+              "authority": "none"
+            }
+          }
+        ]
+      },
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0 must have required property 'operation'"
+        }
+      }
+    },
+    {
+      "name": "chain-operation-null",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [
+          {
+            "id": "urn:law:chain",
+            "operation": null,
+            "operands": [
+              "test:edge",
+              "test:edge"
+            ],
+            "resultRelation": "test:edge",
+            "handling": {
+              "lossiness": "conservative",
+              "uncertainty": "conservative",
+              "authority": "none"
+            }
+          }
+        ]
+      },
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/operation must be equal to one of the allowed values"
+        }
+      }
+    },
+    {
+      "name": "chain-operation-false",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [
+          {
+            "id": "urn:law:chain",
+            "operation": false,
+            "operands": [
+              "test:edge",
+              "test:edge"
+            ],
+            "resultRelation": "test:edge",
+            "handling": {
+              "lossiness": "conservative",
+              "uncertainty": "conservative",
+              "authority": "none"
+            }
+          }
+        ]
+      },
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/operation must be equal to one of the allowed values"
+        }
+      }
+    },
+    {
+      "name": "chain-operation-0",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [
+          {
+            "id": "urn:law:chain",
+            "operation": 0,
+            "operands": [
+              "test:edge",
+              "test:edge"
+            ],
+            "resultRelation": "test:edge",
+            "handling": {
+              "lossiness": "conservative",
+              "uncertainty": "conservative",
+              "authority": "none"
+            }
+          }
+        ]
+      },
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/operation must be equal to one of the allowed values"
+        }
+      }
+    },
+    {
+      "name": "chain-operation-\"\"",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [
+          {
+            "id": "urn:law:chain",
+            "operation": "",
+            "operands": [
+              "test:edge",
+              "test:edge"
+            ],
+            "resultRelation": "test:edge",
+            "handling": {
+              "lossiness": "conservative",
+              "uncertainty": "conservative",
+              "authority": "none"
+            }
+          }
+        ]
+      },
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/operation must be equal to one of the allowed values"
+        }
+      }
+    },
+    {
+      "name": "chain-operation-[]",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [
+          {
+            "id": "urn:law:chain",
+            "operation": [],
+            "operands": [
+              "test:edge",
+              "test:edge"
+            ],
+            "resultRelation": "test:edge",
+            "handling": {
+              "lossiness": "conservative",
+              "uncertainty": "conservative",
+              "authority": "none"
+            }
+          }
+        ]
+      },
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/operation must be equal to one of the allowed values"
+        }
+      }
+    },
+    {
+      "name": "chain-operation-{}",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [
+          {
+            "id": "urn:law:chain",
+            "operation": {},
+            "operands": [
+              "test:edge",
+              "test:edge"
+            ],
+            "resultRelation": "test:edge",
+            "handling": {
+              "lossiness": "conservative",
+              "uncertainty": "conservative",
+              "authority": "none"
+            }
+          }
+        ]
+      },
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/operation must be equal to one of the allowed values"
+        }
+      }
+    },
+    {
+      "name": "chain-operands-absent",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [
+          {
+            "id": "urn:law:chain",
+            "operation": "chain",
+            "resultRelation": "test:edge",
+            "handling": {
+              "lossiness": "conservative",
+              "uncertainty": "conservative",
+              "authority": "none"
+            }
+          }
+        ]
+      },
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0 must have required property 'operands'"
+        }
+      }
+    },
+    {
+      "name": "chain-operands-null",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [
+          {
+            "id": "urn:law:chain",
+            "operation": "chain",
+            "operands": null,
+            "resultRelation": "test:edge",
+            "handling": {
+              "lossiness": "conservative",
+              "uncertainty": "conservative",
+              "authority": "none"
+            }
+          }
+        ]
+      },
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/operands must be array; /laws/0 must match \"else\" schema; /laws/0/operands must be array"
+        }
+      }
+    },
+    {
+      "name": "chain-operands-false",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [
+          {
+            "id": "urn:law:chain",
+            "operation": "chain",
+            "operands": false,
+            "resultRelation": "test:edge",
+            "handling": {
+              "lossiness": "conservative",
+              "uncertainty": "conservative",
+              "authority": "none"
+            }
+          }
+        ]
+      },
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/operands must be array; /laws/0 must match \"else\" schema; /laws/0/operands must be array"
+        }
+      }
+    },
+    {
+      "name": "chain-operands-0",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [
+          {
+            "id": "urn:law:chain",
+            "operation": "chain",
+            "operands": 0,
+            "resultRelation": "test:edge",
+            "handling": {
+              "lossiness": "conservative",
+              "uncertainty": "conservative",
+              "authority": "none"
+            }
+          }
+        ]
+      },
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/operands must be array; /laws/0 must match \"else\" schema; /laws/0/operands must be array"
+        }
+      }
+    },
+    {
+      "name": "chain-operands-\"\"",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [
+          {
+            "id": "urn:law:chain",
+            "operation": "chain",
+            "operands": "",
+            "resultRelation": "test:edge",
+            "handling": {
+              "lossiness": "conservative",
+              "uncertainty": "conservative",
+              "authority": "none"
+            }
+          }
+        ]
+      },
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/operands must be array; /laws/0 must match \"else\" schema; /laws/0/operands must be array"
+        }
+      }
+    },
+    {
+      "name": "chain-operands-[]",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [
+          {
+            "id": "urn:law:chain",
+            "operation": "chain",
+            "operands": [],
+            "resultRelation": "test:edge",
+            "handling": {
+              "lossiness": "conservative",
+              "uncertainty": "conservative",
+              "authority": "none"
+            }
+          }
+        ]
+      },
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/operands must NOT have fewer than 2 items; /laws/0 must match \"else\" schema; /laws/0/operands must NOT have fewer than 1 items"
+        }
+      }
+    },
+    {
+      "name": "chain-operands-{}",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [
+          {
+            "id": "urn:law:chain",
+            "operation": "chain",
+            "operands": {},
+            "resultRelation": "test:edge",
+            "handling": {
+              "lossiness": "conservative",
+              "uncertainty": "conservative",
+              "authority": "none"
+            }
+          }
+        ]
+      },
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/operands must be array; /laws/0 must match \"else\" schema; /laws/0/operands must be array"
+        }
+      }
+    },
+    {
+      "name": "chain-resultRelation-absent",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [
+          {
+            "id": "urn:law:chain",
+            "operation": "chain",
+            "operands": [
+              "test:edge",
+              "test:edge"
+            ],
+            "handling": {
+              "lossiness": "conservative",
+              "uncertainty": "conservative",
+              "authority": "none"
+            }
+          }
+        ]
+      },
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0 must have required property 'resultRelation'"
+        }
+      }
+    },
+    {
+      "name": "chain-resultRelation-null",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [
+          {
+            "id": "urn:law:chain",
+            "operation": "chain",
+            "operands": [
+              "test:edge",
+              "test:edge"
+            ],
+            "resultRelation": null,
+            "handling": {
+              "lossiness": "conservative",
+              "uncertainty": "conservative",
+              "authority": "none"
+            }
+          }
+        ]
+      },
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/resultRelation must be string"
+        }
+      }
+    },
+    {
+      "name": "chain-resultRelation-false",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [
+          {
+            "id": "urn:law:chain",
+            "operation": "chain",
+            "operands": [
+              "test:edge",
+              "test:edge"
+            ],
+            "resultRelation": false,
+            "handling": {
+              "lossiness": "conservative",
+              "uncertainty": "conservative",
+              "authority": "none"
+            }
+          }
+        ]
+      },
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/resultRelation must be string"
+        }
+      }
+    },
+    {
+      "name": "chain-resultRelation-0",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [
+          {
+            "id": "urn:law:chain",
+            "operation": "chain",
+            "operands": [
+              "test:edge",
+              "test:edge"
+            ],
+            "resultRelation": 0,
+            "handling": {
+              "lossiness": "conservative",
+              "uncertainty": "conservative",
+              "authority": "none"
+            }
+          }
+        ]
+      },
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/resultRelation must be string"
+        }
+      }
+    },
+    {
+      "name": "chain-resultRelation-\"\"",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [
+          {
+            "id": "urn:law:chain",
+            "operation": "chain",
+            "operands": [
+              "test:edge",
+              "test:edge"
+            ],
+            "resultRelation": "",
+            "handling": {
+              "lossiness": "conservative",
+              "uncertainty": "conservative",
+              "authority": "none"
+            }
+          }
+        ]
+      },
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/resultRelation must match pattern \"^[a-z][a-z0-9._-]*:[a-z][a-z0-9._-]*$\""
+        }
+      }
+    },
+    {
+      "name": "chain-resultRelation-[]",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [
+          {
+            "id": "urn:law:chain",
+            "operation": "chain",
+            "operands": [
+              "test:edge",
+              "test:edge"
+            ],
+            "resultRelation": [],
+            "handling": {
+              "lossiness": "conservative",
+              "uncertainty": "conservative",
+              "authority": "none"
+            }
+          }
+        ]
+      },
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/resultRelation must be string"
+        }
+      }
+    },
+    {
+      "name": "chain-resultRelation-{}",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [
+          {
+            "id": "urn:law:chain",
+            "operation": "chain",
+            "operands": [
+              "test:edge",
+              "test:edge"
+            ],
+            "resultRelation": {},
+            "handling": {
+              "lossiness": "conservative",
+              "uncertainty": "conservative",
+              "authority": "none"
+            }
+          }
+        ]
+      },
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/resultRelation must be string"
+        }
+      }
+    },
+    {
+      "name": "chain-handling-absent",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [
+          {
+            "id": "urn:law:chain",
+            "operation": "chain",
+            "operands": [
+              "test:edge",
+              "test:edge"
+            ],
+            "resultRelation": "test:edge"
+          }
+        ]
+      },
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0 must have required property 'handling'"
+        }
+      }
+    },
+    {
+      "name": "chain-handling-null",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [
+          {
+            "id": "urn:law:chain",
+            "operation": "chain",
+            "operands": [
+              "test:edge",
+              "test:edge"
+            ],
+            "resultRelation": "test:edge",
+            "handling": null
+          }
+        ]
+      },
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/handling must be object"
+        }
+      }
+    },
+    {
+      "name": "chain-handling-false",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [
+          {
+            "id": "urn:law:chain",
+            "operation": "chain",
+            "operands": [
+              "test:edge",
+              "test:edge"
+            ],
+            "resultRelation": "test:edge",
+            "handling": false
+          }
+        ]
+      },
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/handling must be object"
+        }
+      }
+    },
+    {
+      "name": "chain-handling-0",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [
+          {
+            "id": "urn:law:chain",
+            "operation": "chain",
+            "operands": [
+              "test:edge",
+              "test:edge"
+            ],
+            "resultRelation": "test:edge",
+            "handling": 0
+          }
+        ]
+      },
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/handling must be object"
+        }
+      }
+    },
+    {
+      "name": "chain-handling-\"\"",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [
+          {
+            "id": "urn:law:chain",
+            "operation": "chain",
+            "operands": [
+              "test:edge",
+              "test:edge"
+            ],
+            "resultRelation": "test:edge",
+            "handling": ""
+          }
+        ]
+      },
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/handling must be object"
+        }
+      }
+    },
+    {
+      "name": "chain-handling-[]",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [
+          {
+            "id": "urn:law:chain",
+            "operation": "chain",
+            "operands": [
+              "test:edge",
+              "test:edge"
+            ],
+            "resultRelation": "test:edge",
+            "handling": []
+          }
+        ]
+      },
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/handling must be object"
+        }
+      }
+    },
+    {
+      "name": "chain-handling-{}",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [
+          {
+            "id": "urn:law:chain",
+            "operation": "chain",
+            "operands": [
+              "test:edge",
+              "test:edge"
+            ],
+            "resultRelation": "test:edge",
+            "handling": {}
+          }
+        ]
+      },
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/handling must have required property 'lossiness'; /laws/0/handling must have required property 'uncertainty'; /laws/0/handling must have required property 'authority'"
+        }
+      }
+    },
+    {
+      "name": "chain-conditions-absent",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [
+          {
+            "id": "urn:law:chain",
+            "operation": "chain",
+            "operands": [
+              "test:edge",
+              "test:edge"
+            ],
+            "resultRelation": "test:edge",
+            "handling": {
+              "lossiness": "conservative",
+              "uncertainty": "conservative",
+              "authority": "none"
+            }
+          }
+        ]
+      },
+      "expected": {
+        "status": "accepted",
+        "digest": "sha256:33a7f2a3df361b0cf0ea6045aa26c7a056eaf55483a37669fe32cfea6ba35eeb"
+      }
+    },
+    {
+      "name": "chain-conditions-null",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [
+          {
+            "id": "urn:law:chain",
+            "operation": "chain",
+            "operands": [
+              "test:edge",
+              "test:edge"
+            ],
+            "resultRelation": "test:edge",
+            "handling": {
+              "lossiness": "conservative",
+              "uncertainty": "conservative",
+              "authority": "none"
+            },
+            "conditions": null
+          }
+        ]
+      },
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/conditions must be object"
+        }
+      }
+    },
+    {
+      "name": "chain-conditions-false",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [
+          {
+            "id": "urn:law:chain",
+            "operation": "chain",
+            "operands": [
+              "test:edge",
+              "test:edge"
+            ],
+            "resultRelation": "test:edge",
+            "handling": {
+              "lossiness": "conservative",
+              "uncertainty": "conservative",
+              "authority": "none"
+            },
+            "conditions": false
+          }
+        ]
+      },
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/conditions must be object"
+        }
+      }
+    },
+    {
+      "name": "chain-conditions-0",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [
+          {
+            "id": "urn:law:chain",
+            "operation": "chain",
+            "operands": [
+              "test:edge",
+              "test:edge"
+            ],
+            "resultRelation": "test:edge",
+            "handling": {
+              "lossiness": "conservative",
+              "uncertainty": "conservative",
+              "authority": "none"
+            },
+            "conditions": 0
+          }
+        ]
+      },
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/conditions must be object"
+        }
+      }
+    },
+    {
+      "name": "chain-conditions-\"\"",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [
+          {
+            "id": "urn:law:chain",
+            "operation": "chain",
+            "operands": [
+              "test:edge",
+              "test:edge"
+            ],
+            "resultRelation": "test:edge",
+            "handling": {
+              "lossiness": "conservative",
+              "uncertainty": "conservative",
+              "authority": "none"
+            },
+            "conditions": ""
+          }
+        ]
+      },
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/conditions must be object"
+        }
+      }
+    },
+    {
+      "name": "chain-conditions-[]",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [
+          {
+            "id": "urn:law:chain",
+            "operation": "chain",
+            "operands": [
+              "test:edge",
+              "test:edge"
+            ],
+            "resultRelation": "test:edge",
+            "handling": {
+              "lossiness": "conservative",
+              "uncertainty": "conservative",
+              "authority": "none"
+            },
+            "conditions": []
+          }
+        ]
+      },
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/conditions must be object"
+        }
+      }
+    },
+    {
+      "name": "chain-conditions-{}",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [
+          {
+            "id": "urn:law:chain",
+            "operation": "chain",
+            "operands": [
+              "test:edge",
+              "test:edge"
+            ],
+            "resultRelation": "test:edge",
+            "handling": {
+              "lossiness": "conservative",
+              "uncertainty": "conservative",
+              "authority": "none"
+            },
+            "conditions": {}
+          }
+        ]
+      },
+      "expected": {
+        "status": "accepted",
+        "digest": "sha256:cd1cf8da2f75316b8ba3b8773291d6ec234f4476f9d762fc1da1a4a5afdb04fd"
+      }
+    },
+    {
+      "name": "chain-patch-{\"operands\":[]}",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [
+          {
+            "id": "urn:law:chain",
+            "operation": "chain",
+            "operands": [],
+            "resultRelation": "test:edge",
+            "handling": {
+              "lossiness": "conservative",
+              "uncertainty": "conservative",
+              "authority": "none"
+            }
+          }
+        ]
+      },
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/operands must NOT have fewer than 2 items; /laws/0 must match \"else\" schema; /laws/0/operands must NOT have fewer than 1 items"
+        }
+      }
+    },
+    {
+      "name": "chain-patch-{\"operands\":[\"test:edge\",\"test:edge\",\"test:edge\"]}",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [
+          {
+            "id": "urn:law:chain",
+            "operation": "chain",
+            "operands": [
+              "test:edge",
+              "test:edge",
+              "test:edge"
+            ],
+            "resultRelation": "test:edge",
+            "handling": {
+              "lossiness": "conservative",
+              "uncertainty": "conservative",
+              "authority": "none"
+            }
+          }
+        ]
+      },
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/operands must NOT have more than 2 items; /laws/0 must match \"else\" schema; /laws/0/operands must NOT have more than 2 items"
+        }
+      }
+    },
+    {
+      "name": "chain-patch-{\"operands\":[null,false]}",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [
+          {
+            "id": "urn:law:chain",
+            "operation": "chain",
+            "operands": [
+              null,
+              false
+            ],
+            "resultRelation": "test:edge",
+            "handling": {
+              "lossiness": "conservative",
+              "uncertainty": "conservative",
+              "authority": "none"
+            }
+          }
+        ]
+      },
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/operands/0 must be string; /laws/0/operands/1 must be string"
+        }
+      }
+    },
+    {
+      "name": "chain-patch-{\"operation\":\"unknown\",\"operands\":[]}",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [
+          {
+            "id": "urn:law:chain",
+            "operation": "unknown",
+            "operands": [],
+            "resultRelation": "test:edge",
+            "handling": {
+              "lossiness": "conservative",
+              "uncertainty": "conservative",
+              "authority": "none"
+            }
+          }
+        ]
+      },
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/operands must NOT have fewer than 2 items; /laws/0 must match \"else\" schema; /laws/0/operation must be equal to one of the allowed values; /laws/0/operands must NOT have fewer than 1 items"
+        }
+      }
+    },
+    {
+      "name": "chain-patch-{\"handling\":{\"authority\":\"delegate\",\"uncertainty\":0,\"lossiness\":false}}",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [
+          {
+            "id": "urn:law:chain",
+            "operation": "chain",
+            "operands": [
+              "test:edge",
+              "test:edge"
+            ],
+            "resultRelation": "test:edge",
+            "handling": {
+              "authority": "delegate",
+              "uncertainty": 0,
+              "lossiness": false
+            }
+          }
+        ]
+      },
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/handling/lossiness must be equal to constant; /laws/0/handling/uncertainty must be equal to constant; /laws/0/handling/authority must be equal to constant"
+        }
+      }
+    },
+    {
+      "name": "chain-patch-{\"handling\":{\"unknownZ\":true,\"unknownA\":false}}",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [
+          {
+            "id": "urn:law:chain",
+            "operation": "chain",
+            "operands": [
+              "test:edge",
+              "test:edge"
+            ],
+            "resultRelation": "test:edge",
+            "handling": {
+              "unknownZ": true,
+              "unknownA": false
+            }
+          }
+        ]
+      },
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/handling must have required property 'lossiness'; /laws/0/handling must have required property 'uncertainty'; /laws/0/handling must have required property 'authority'; /laws/0/handling must NOT have additional properties; /laws/0/handling must NOT have additional properties"
+        }
+      }
+    },
+    {
+      "name": "chain-patch-{\"conditions\":{\"middleKinds\":[\"x\"]}}",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [
+          {
+            "id": "urn:law:chain",
+            "operation": "chain",
+            "operands": [
+              "test:edge",
+              "test:edge"
+            ],
+            "resultRelation": "test:edge",
+            "handling": {
+              "lossiness": "conservative",
+              "uncertainty": "conservative",
+              "authority": "none"
+            },
+            "conditions": {
+              "middleKinds": [
+                "x"
+              ]
+            }
+          }
+        ]
+      },
+      "expected": {
+        "status": "accepted",
+        "digest": "sha256:39ae0f93a5fcf9a7c58577e4f8317341a5afbd5bfdec5796d8c44768c2a49bd3"
+      }
+    },
+    {
+      "name": "chain-patch-{\"conditions\":{\"sourceKinds\":[],\"middleKinds\":[],\"targetKinds\":[]}}",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [
+          {
+            "id": "urn:law:chain",
+            "operation": "chain",
+            "operands": [
+              "test:edge",
+              "test:edge"
+            ],
+            "resultRelation": "test:edge",
+            "handling": {
+              "lossiness": "conservative",
+              "uncertainty": "conservative",
+              "authority": "none"
+            },
+            "conditions": {
+              "sourceKinds": [],
+              "middleKinds": [],
+              "targetKinds": []
+            }
+          }
+        ]
+      },
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/conditions/sourceKinds must NOT have fewer than 1 items; /laws/0/conditions/middleKinds must NOT have fewer than 1 items; /laws/0/conditions/targetKinds must NOT have fewer than 1 items"
+        }
+      }
+    },
+    {
+      "name": "chain-patch-{\"conditions\":{\"middleKinds\":[\"__proto__\",\"__proto__\"]}}",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [
+          {
+            "id": "urn:law:chain",
+            "operation": "chain",
+            "operands": [
+              "test:edge",
+              "test:edge"
+            ],
+            "resultRelation": "test:edge",
+            "handling": {
+              "lossiness": "conservative",
+              "uncertainty": "conservative",
+              "authority": "none"
+            },
+            "conditions": {
+              "middleKinds": [
+                "__proto__",
+                "__proto__"
+              ]
+            }
+          }
+        ]
+      },
+      "expected": {
+        "status": "accepted",
+        "digest": "sha256:a4482f64424ad941e618ddd180d780a3407e17ad984f7a000697bae06f609f5f"
+      }
+    },
+    {
+      "name": "chain-patch-{\"conditions\":{\"sourceKinds\":[0,0],\"middleKinds\":[false,false]}}",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [
+          {
+            "id": "urn:law:chain",
+            "operation": "chain",
+            "operands": [
+              "test:edge",
+              "test:edge"
+            ],
+            "resultRelation": "test:edge",
+            "handling": {
+              "lossiness": "conservative",
+              "uncertainty": "conservative",
+              "authority": "none"
+            },
+            "conditions": {
+              "sourceKinds": [
+                0,
+                0
+              ],
+              "middleKinds": [
+                false,
+                false
+              ]
+            }
+          }
+        ]
+      },
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/conditions/sourceKinds/0 must be string; /laws/0/conditions/sourceKinds/1 must be string; /laws/0/conditions/middleKinds/0 must be string; /laws/0/conditions/middleKinds/1 must be string"
+        }
+      }
+    },
+    {
+      "name": "chain-patch-{\"conditions\":{\"sourceKinds\":[\"a\",\"b\",\"a\",\"b\",\"a\"]}}",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [
+          {
+            "id": "urn:law:chain",
+            "operation": "chain",
+            "operands": [
+              "test:edge",
+              "test:edge"
+            ],
+            "resultRelation": "test:edge",
+            "handling": {
+              "lossiness": "conservative",
+              "uncertainty": "conservative",
+              "authority": "none"
+            },
+            "conditions": {
+              "sourceKinds": [
+                "a",
+                "b",
+                "a",
+                "b",
+                "a"
+              ]
+            }
+          }
+        ]
+      },
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/conditions/sourceKinds must NOT have duplicate items (items ## 4 and 2 are identical)"
+        }
+      }
+    },
+    {
+      "name": "chain-patch-{\"conditions\":{\"unknownZ\":true,\"unknownA\":false}}",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [
+          {
+            "id": "urn:law:chain",
+            "operation": "chain",
+            "operands": [
+              "test:edge",
+              "test:edge"
+            ],
+            "resultRelation": "test:edge",
+            "handling": {
+              "lossiness": "conservative",
+              "uncertainty": "conservative",
+              "authority": "none"
+            },
+            "conditions": {
+              "unknownZ": true,
+              "unknownA": false
+            }
+          }
+        ]
+      },
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/conditions must NOT have additional properties; /laws/0/conditions must NOT have additional properties"
+        }
+      }
+    },
+    {
+      "name": "chain-patch-{\"id\":null,\"operation\":\"unknown\",\"operands\":[],\"handling\":{}}",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [
+          {
+            "id": null,
+            "operation": "unknown",
+            "operands": [],
+            "resultRelation": "test:edge",
+            "handling": {}
+          }
+        ]
+      },
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/operands must NOT have fewer than 2 items; /laws/0 must match \"else\" schema; /laws/0/id must be string; /laws/0/operation must be equal to one of the allowed values; /laws/0/operands must NOT have fewer than 1 items; /laws/0/handling must have required property 'lossiness'; /laws/0/handling must have required property 'uncertainty'; /laws/0/handling must have required property 'authority'"
+        }
+      }
+    },
+    {
+      "name": "context-null",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [
+          {
+            "id": "urn:law:chain",
+            "operation": "chain",
+            "operands": [
+              "test:edge",
+              "test:edge"
+            ],
+            "resultRelation": "test:edge",
+            "handling": {
+              "lossiness": "conservative",
+              "uncertainty": "conservative",
+              "authority": "none"
+            },
+            "conditions": {
+              "context": null
+            }
+          }
+        ]
+      },
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/conditions/context must be object; /laws/0/conditions/context must be object; /laws/0/conditions/context must be object; /laws/0/conditions/context must be object; /laws/0/conditions/context must be object; /laws/0/conditions/context must be object; /laws/0/conditions/context must match exactly one schema in oneOf"
+        }
+      }
+    },
+    {
+      "name": "context-false",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [
+          {
+            "id": "urn:law:chain",
+            "operation": "chain",
+            "operands": [
+              "test:edge",
+              "test:edge"
+            ],
+            "resultRelation": "test:edge",
+            "handling": {
+              "lossiness": "conservative",
+              "uncertainty": "conservative",
+              "authority": "none"
+            },
+            "conditions": {
+              "context": false
+            }
+          }
+        ]
+      },
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/conditions/context must be object; /laws/0/conditions/context must be object; /laws/0/conditions/context must be object; /laws/0/conditions/context must be object; /laws/0/conditions/context must be object; /laws/0/conditions/context must be object; /laws/0/conditions/context must match exactly one schema in oneOf"
+        }
+      }
+    },
+    {
+      "name": "context-[]",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [
+          {
+            "id": "urn:law:chain",
+            "operation": "chain",
+            "operands": [
+              "test:edge",
+              "test:edge"
+            ],
+            "resultRelation": "test:edge",
+            "handling": {
+              "lossiness": "conservative",
+              "uncertainty": "conservative",
+              "authority": "none"
+            },
+            "conditions": {
+              "context": []
+            }
+          }
+        ]
+      },
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/conditions/context must be object; /laws/0/conditions/context must be object; /laws/0/conditions/context must be object; /laws/0/conditions/context must be object; /laws/0/conditions/context must be object; /laws/0/conditions/context must be object; /laws/0/conditions/context must match exactly one schema in oneOf"
+        }
+      }
+    },
+    {
+      "name": "context-{}",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [
+          {
+            "id": "urn:law:chain",
+            "operation": "chain",
+            "operands": [
+              "test:edge",
+              "test:edge"
+            ],
+            "resultRelation": "test:edge",
+            "handling": {
+              "lossiness": "conservative",
+              "uncertainty": "conservative",
+              "authority": "none"
+            },
+            "conditions": {
+              "context": {}
+            }
+          }
+        ]
+      },
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/conditions/context must have required property 'key'; /laws/0/conditions/context must have required property 'operator'; /laws/0/conditions/context must have required property 'value'; /laws/0/conditions/context must have required property 'key'; /laws/0/conditions/context must have required property 'operator'; /laws/0/conditions/context must have required property 'values'; /laws/0/conditions/context must have required property 'key'; /laws/0/conditions/context must have required property 'operator'; /laws/0/conditions/context must have required property 'all'; /laws/0/conditions/context must have required property 'any'; /laws/0/conditions/context must have required property 'not'; /laws/0/conditions/context must match exactly one schema in oneOf"
+        }
+      }
+    },
+    {
+      "name": "context-{\"key\":\"x\",\"operator\":\"equals\",\"value\":null}",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [
+          {
+            "id": "urn:law:chain",
+            "operation": "chain",
+            "operands": [
+              "test:edge",
+              "test:edge"
+            ],
+            "resultRelation": "test:edge",
+            "handling": {
+              "lossiness": "conservative",
+              "uncertainty": "conservative",
+              "authority": "none"
+            },
+            "conditions": {
+              "context": {
+                "key": "x",
+                "operator": "equals",
+                "value": null
+              }
+            }
+          }
+        ]
+      },
+      "expected": {
+        "status": "accepted",
+        "digest": "sha256:e3b340ce3e980efdcbf89b50f882e8d412a545d5dbdff842bb86d572530b84c6"
+      }
+    },
+    {
+      "name": "context-{\"key\":\"x\",\"operator\":\"not-equals\",\"value\":false}",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [
+          {
+            "id": "urn:law:chain",
+            "operation": "chain",
+            "operands": [
+              "test:edge",
+              "test:edge"
+            ],
+            "resultRelation": "test:edge",
+            "handling": {
+              "lossiness": "conservative",
+              "uncertainty": "conservative",
+              "authority": "none"
+            },
+            "conditions": {
+              "context": {
+                "key": "x",
+                "operator": "not-equals",
+                "value": false
+              }
+            }
+          }
+        ]
+      },
+      "expected": {
+        "status": "accepted",
+        "digest": "sha256:ee54f15bacb82362236c4b2d1379570970eb639e43e7f5b83d0097c7657ca99e"
+      }
+    },
+    {
+      "name": "context-{\"key\":\"x\",\"operator\":\"in\",\"values\":[null,false,0,\"\"]}",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [
+          {
+            "id": "urn:law:chain",
+            "operation": "chain",
+            "operands": [
+              "test:edge",
+              "test:edge"
+            ],
+            "resultRelation": "test:edge",
+            "handling": {
+              "lossiness": "conservative",
+              "uncertainty": "conservative",
+              "authority": "none"
+            },
+            "conditions": {
+              "context": {
+                "key": "x",
+                "operator": "in",
+                "values": [
+                  null,
+                  false,
+                  0,
+                  ""
+                ]
+              }
+            }
+          }
+        ]
+      },
+      "expected": {
+        "status": "accepted",
+        "digest": "sha256:99c457a145637d20fa27816005bb450248f4e16358d4457d3adc8cd797c3e651"
+      }
+    },
+    {
+      "name": "context-{\"key\":\"x\",\"operator\":\"not-in\",\"values\":[true]}",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [
+          {
+            "id": "urn:law:chain",
+            "operation": "chain",
+            "operands": [
+              "test:edge",
+              "test:edge"
+            ],
+            "resultRelation": "test:edge",
+            "handling": {
+              "lossiness": "conservative",
+              "uncertainty": "conservative",
+              "authority": "none"
+            },
+            "conditions": {
+              "context": {
+                "key": "x",
+                "operator": "not-in",
+                "values": [
+                  true
+                ]
+              }
+            }
+          }
+        ]
+      },
+      "expected": {
+        "status": "accepted",
+        "digest": "sha256:ffec4e675773275baac21a559cc2d4cfbd7a322137a2cab9d322158a459e940f"
+      }
+    },
+    {
+      "name": "context-{\"key\":\"x\",\"operator\":\"exists\"}",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [
+          {
+            "id": "urn:law:chain",
+            "operation": "chain",
+            "operands": [
+              "test:edge",
+              "test:edge"
+            ],
+            "resultRelation": "test:edge",
+            "handling": {
+              "lossiness": "conservative",
+              "uncertainty": "conservative",
+              "authority": "none"
+            },
+            "conditions": {
+              "context": {
+                "key": "x",
+                "operator": "exists"
+              }
+            }
+          }
+        ]
+      },
+      "expected": {
+        "status": "accepted",
+        "digest": "sha256:60c5f2167d5419c83832df1477daddda6b6df6cd37320a056ce5e1685e4ea061"
+      }
+    },
+    {
+      "name": "context-{\"key\":\"x\",\"operator\":\"exists\",\"value\":false}",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [
+          {
+            "id": "urn:law:chain",
+            "operation": "chain",
+            "operands": [
+              "test:edge",
+              "test:edge"
+            ],
+            "resultRelation": "test:edge",
+            "handling": {
+              "lossiness": "conservative",
+              "uncertainty": "conservative",
+              "authority": "none"
+            },
+            "conditions": {
+              "context": {
+                "key": "x",
+                "operator": "exists",
+                "value": false
+              }
+            }
+          }
+        ]
+      },
+      "expected": {
+        "status": "accepted",
+        "digest": "sha256:58e649fe9d95d3e685f4019497d480706b2bee52f14c47ec0e42e48e3afcd286"
+      }
+    },
+    {
+      "name": "context-{\"key\":\"x\",\"operator\":\"equals\"}",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [
+          {
+            "id": "urn:law:chain",
+            "operation": "chain",
+            "operands": [
+              "test:edge",
+              "test:edge"
+            ],
+            "resultRelation": "test:edge",
+            "handling": {
+              "lossiness": "conservative",
+              "uncertainty": "conservative",
+              "authority": "none"
+            },
+            "conditions": {
+              "context": {
+                "key": "x",
+                "operator": "equals"
+              }
+            }
+          }
+        ]
+      },
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/conditions/context must have required property 'value'; /laws/0/conditions/context must have required property 'values'; /laws/0/conditions/context/operator must be equal to one of the allowed values; /laws/0/conditions/context/operator must be equal to constant; /laws/0/conditions/context must have required property 'all'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must have required property 'any'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must have required property 'not'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must match exactly one schema in oneOf"
+        }
+      }
+    },
+    {
+      "name": "context-{\"key\":\"\",\"operator\":\"equals\",\"value\":[]}",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [
+          {
+            "id": "urn:law:chain",
+            "operation": "chain",
+            "operands": [
+              "test:edge",
+              "test:edge"
+            ],
+            "resultRelation": "test:edge",
+            "handling": {
+              "lossiness": "conservative",
+              "uncertainty": "conservative",
+              "authority": "none"
+            },
+            "conditions": {
+              "context": {
+                "key": "",
+                "operator": "equals",
+                "value": []
+              }
+            }
+          }
+        ]
+      },
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/conditions/context/key must NOT have fewer than 1 characters; /laws/0/conditions/context/value must be null; /laws/0/conditions/context/value must be boolean; /laws/0/conditions/context/value must be number; /laws/0/conditions/context/value must be string; /laws/0/conditions/context/value must match exactly one schema in oneOf; /laws/0/conditions/context must have required property 'values'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context/key must NOT have fewer than 1 characters; /laws/0/conditions/context/operator must be equal to one of the allowed values; /laws/0/conditions/context/key must NOT have fewer than 1 characters; /laws/0/conditions/context/operator must be equal to constant; /laws/0/conditions/context/value must be boolean; /laws/0/conditions/context must have required property 'all'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must have required property 'any'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must have required property 'not'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must match exactly one schema in oneOf"
+        }
+      }
+    },
+    {
+      "name": "context-{\"key\":false,\"operator\":\"unknown\",\"value\":{}}",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [
+          {
+            "id": "urn:law:chain",
+            "operation": "chain",
+            "operands": [
+              "test:edge",
+              "test:edge"
+            ],
+            "resultRelation": "test:edge",
+            "handling": {
+              "lossiness": "conservative",
+              "uncertainty": "conservative",
+              "authority": "none"
+            },
+            "conditions": {
+              "context": {
+                "key": false,
+                "operator": "unknown",
+                "value": {}
+              }
+            }
+          }
+        ]
+      },
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/conditions/context/key must be string; /laws/0/conditions/context/operator must be equal to one of the allowed values; /laws/0/conditions/context/value must be null; /laws/0/conditions/context/value must be boolean; /laws/0/conditions/context/value must be number; /laws/0/conditions/context/value must be string; /laws/0/conditions/context/value must match exactly one schema in oneOf; /laws/0/conditions/context must have required property 'values'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context/key must be string; /laws/0/conditions/context/operator must be equal to one of the allowed values; /laws/0/conditions/context/key must be string; /laws/0/conditions/context/operator must be equal to constant; /laws/0/conditions/context/value must be boolean; /laws/0/conditions/context must have required property 'all'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must have required property 'any'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must have required property 'not'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must match exactly one schema in oneOf"
+        }
+      }
+    },
+    {
+      "name": "context-{\"key\":\"x\",\"operator\":\"in\",\"values\":[]}",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [
+          {
+            "id": "urn:law:chain",
+            "operation": "chain",
+            "operands": [
+              "test:edge",
+              "test:edge"
+            ],
+            "resultRelation": "test:edge",
+            "handling": {
+              "lossiness": "conservative",
+              "uncertainty": "conservative",
+              "authority": "none"
+            },
+            "conditions": {
+              "context": {
+                "key": "x",
+                "operator": "in",
+                "values": []
+              }
+            }
+          }
+        ]
+      },
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/conditions/context must have required property 'value'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context/operator must be equal to one of the allowed values; /laws/0/conditions/context/values must NOT have fewer than 1 items; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context/operator must be equal to constant; /laws/0/conditions/context must have required property 'all'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must have required property 'any'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must have required property 'not'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must match exactly one schema in oneOf"
+        }
+      }
+    },
+    {
+      "name": "context-{\"key\":\"x\",\"operator\":\"in\",\"values\":[null,null]}",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [
+          {
+            "id": "urn:law:chain",
+            "operation": "chain",
+            "operands": [
+              "test:edge",
+              "test:edge"
+            ],
+            "resultRelation": "test:edge",
+            "handling": {
+              "lossiness": "conservative",
+              "uncertainty": "conservative",
+              "authority": "none"
+            },
+            "conditions": {
+              "context": {
+                "key": "x",
+                "operator": "in",
+                "values": [
+                  null,
+                  null
+                ]
+              }
+            }
+          }
+        ]
+      },
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/conditions/context must have required property 'value'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context/operator must be equal to one of the allowed values; /laws/0/conditions/context/values must NOT have duplicate items (items ## 0 and 1 are identical); /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context/operator must be equal to constant; /laws/0/conditions/context must have required property 'all'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must have required property 'any'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must have required property 'not'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must match exactly one schema in oneOf"
+        }
+      }
+    },
+    {
+      "name": "context-{\"key\":\"x\",\"operator\":\"in\",\"values\":[0,false,0,false,0]}",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [
+          {
+            "id": "urn:law:chain",
+            "operation": "chain",
+            "operands": [
+              "test:edge",
+              "test:edge"
+            ],
+            "resultRelation": "test:edge",
+            "handling": {
+              "lossiness": "conservative",
+              "uncertainty": "conservative",
+              "authority": "none"
+            },
+            "conditions": {
+              "context": {
+                "key": "x",
+                "operator": "in",
+                "values": [
+                  0,
+                  false,
+                  0,
+                  false,
+                  0
+                ]
+              }
+            }
+          }
+        ]
+      },
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/conditions/context must have required property 'value'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context/operator must be equal to one of the allowed values; /laws/0/conditions/context/values must NOT have duplicate items (items ## 2 and 4 are identical); /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context/operator must be equal to constant; /laws/0/conditions/context must have required property 'all'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must have required property 'any'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must have required property 'not'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must match exactly one schema in oneOf"
+        }
+      }
+    },
+    {
+      "name": "context-{\"key\":\"x\",\"operator\":\"in\",\"values\":[[],{}]}",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [
+          {
+            "id": "urn:law:chain",
+            "operation": "chain",
+            "operands": [
+              "test:edge",
+              "test:edge"
+            ],
+            "resultRelation": "test:edge",
+            "handling": {
+              "lossiness": "conservative",
+              "uncertainty": "conservative",
+              "authority": "none"
+            },
+            "conditions": {
+              "context": {
+                "key": "x",
+                "operator": "in",
+                "values": [
+                  [],
+                  {}
+                ]
+              }
+            }
+          }
+        ]
+      },
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/conditions/context must have required property 'value'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context/operator must be equal to one of the allowed values; /laws/0/conditions/context/values/0 must be null; /laws/0/conditions/context/values/0 must be boolean; /laws/0/conditions/context/values/0 must be number; /laws/0/conditions/context/values/0 must be string; /laws/0/conditions/context/values/0 must match exactly one schema in oneOf; /laws/0/conditions/context/values/1 must be null; /laws/0/conditions/context/values/1 must be boolean; /laws/0/conditions/context/values/1 must be number; /laws/0/conditions/context/values/1 must be string; /laws/0/conditions/context/values/1 must match exactly one schema in oneOf; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context/operator must be equal to constant; /laws/0/conditions/context must have required property 'all'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must have required property 'any'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must have required property 'not'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must match exactly one schema in oneOf"
+        }
+      }
+    },
+    {
+      "name": "context-{\"key\":\"x\",\"operator\":\"exists\",\"value\":null}",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [
+          {
+            "id": "urn:law:chain",
+            "operation": "chain",
+            "operands": [
+              "test:edge",
+              "test:edge"
+            ],
+            "resultRelation": "test:edge",
+            "handling": {
+              "lossiness": "conservative",
+              "uncertainty": "conservative",
+              "authority": "none"
+            },
+            "conditions": {
+              "context": {
+                "key": "x",
+                "operator": "exists",
+                "value": null
+              }
+            }
+          }
+        ]
+      },
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/conditions/context/operator must be equal to one of the allowed values; /laws/0/conditions/context must have required property 'values'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context/operator must be equal to one of the allowed values; /laws/0/conditions/context/value must be boolean; /laws/0/conditions/context must have required property 'all'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must have required property 'any'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must have required property 'not'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must match exactly one schema in oneOf"
+        }
+      }
+    },
+    {
+      "name": "context-{\"key\":\"x\",\"operator\":\"equals\",\"value\":true,\"values\":[true]}",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [
+          {
+            "id": "urn:law:chain",
+            "operation": "chain",
+            "operands": [
+              "test:edge",
+              "test:edge"
+            ],
+            "resultRelation": "test:edge",
+            "handling": {
+              "lossiness": "conservative",
+              "uncertainty": "conservative",
+              "authority": "none"
+            },
+            "conditions": {
+              "context": {
+                "key": "x",
+                "operator": "equals",
+                "value": true,
+                "values": [
+                  true
+                ]
+              }
+            }
+          }
+        ]
+      },
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context/operator must be equal to one of the allowed values; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context/operator must be equal to constant; /laws/0/conditions/context must have required property 'all'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must have required property 'any'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must have required property 'not'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must match exactly one schema in oneOf"
+        }
+      }
+    },
+    {
+      "name": "context-{\"all\":[]}",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [
+          {
+            "id": "urn:law:chain",
+            "operation": "chain",
+            "operands": [
+              "test:edge",
+              "test:edge"
+            ],
+            "resultRelation": "test:edge",
+            "handling": {
+              "lossiness": "conservative",
+              "uncertainty": "conservative",
+              "authority": "none"
+            },
+            "conditions": {
+              "context": {
+                "all": []
+              }
+            }
+          }
+        ]
+      },
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/conditions/context must have required property 'key'; /laws/0/conditions/context must have required property 'operator'; /laws/0/conditions/context must have required property 'value'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must have required property 'key'; /laws/0/conditions/context must have required property 'operator'; /laws/0/conditions/context must have required property 'values'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must have required property 'key'; /laws/0/conditions/context must have required property 'operator'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context/all must NOT have fewer than 1 items; /laws/0/conditions/context must have required property 'any'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must have required property 'not'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must match exactly one schema in oneOf"
+        }
+      }
+    },
+    {
+      "name": "context-{\"any\":false}",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [
+          {
+            "id": "urn:law:chain",
+            "operation": "chain",
+            "operands": [
+              "test:edge",
+              "test:edge"
+            ],
+            "resultRelation": "test:edge",
+            "handling": {
+              "lossiness": "conservative",
+              "uncertainty": "conservative",
+              "authority": "none"
+            },
+            "conditions": {
+              "context": {
+                "any": false
+              }
+            }
+          }
+        ]
+      },
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/conditions/context must have required property 'key'; /laws/0/conditions/context must have required property 'operator'; /laws/0/conditions/context must have required property 'value'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must have required property 'key'; /laws/0/conditions/context must have required property 'operator'; /laws/0/conditions/context must have required property 'values'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must have required property 'key'; /laws/0/conditions/context must have required property 'operator'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must have required property 'all'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context/any must be array; /laws/0/conditions/context must have required property 'not'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must match exactly one schema in oneOf"
+        }
+      }
+    },
+    {
+      "name": "context-{\"not\":null}",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [
+          {
+            "id": "urn:law:chain",
+            "operation": "chain",
+            "operands": [
+              "test:edge",
+              "test:edge"
+            ],
+            "resultRelation": "test:edge",
+            "handling": {
+              "lossiness": "conservative",
+              "uncertainty": "conservative",
+              "authority": "none"
+            },
+            "conditions": {
+              "context": {
+                "not": null
+              }
+            }
+          }
+        ]
+      },
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/conditions/context must have required property 'key'; /laws/0/conditions/context must have required property 'operator'; /laws/0/conditions/context must have required property 'value'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must have required property 'key'; /laws/0/conditions/context must have required property 'operator'; /laws/0/conditions/context must have required property 'values'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must have required property 'key'; /laws/0/conditions/context must have required property 'operator'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must have required property 'all'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must have required property 'any'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context/not must be object; /laws/0/conditions/context/not must be object; /laws/0/conditions/context/not must be object; /laws/0/conditions/context/not must be object; /laws/0/conditions/context/not must be object; /laws/0/conditions/context/not must be object; /laws/0/conditions/context/not must match exactly one schema in oneOf; /laws/0/conditions/context must match exactly one schema in oneOf"
+        }
+      }
+    },
+    {
+      "name": "context-{\"all\":[{\"key\":\"x\",\"operator\":\"exists\"}]}",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [
+          {
+            "id": "urn:law:chain",
+            "operation": "chain",
+            "operands": [
+              "test:edge",
+              "test:edge"
+            ],
+            "resultRelation": "test:edge",
+            "handling": {
+              "lossiness": "conservative",
+              "uncertainty": "conservative",
+              "authority": "none"
+            },
+            "conditions": {
+              "context": {
+                "all": [
+                  {
+                    "key": "x",
+                    "operator": "exists"
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      },
+      "expected": {
+        "status": "accepted",
+        "digest": "sha256:70fc704d6a54dbbcac102156ea5091792854b065b74703c97d845ad32d29220b"
+      }
+    },
+    {
+      "name": "context-{\"any\":[{\"key\":\"x\",\"operator\":\"exists\",\"value\":true}]}",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [
+          {
+            "id": "urn:law:chain",
+            "operation": "chain",
+            "operands": [
+              "test:edge",
+              "test:edge"
+            ],
+            "resultRelation": "test:edge",
+            "handling": {
+              "lossiness": "conservative",
+              "uncertainty": "conservative",
+              "authority": "none"
+            },
+            "conditions": {
+              "context": {
+                "any": [
+                  {
+                    "key": "x",
+                    "operator": "exists",
+                    "value": true
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      },
+      "expected": {
+        "status": "accepted",
+        "digest": "sha256:57590887eb0010f345e23b0bb2c7d9f9bf68570ca1b020275a79509425ae3fb6"
+      }
+    },
+    {
+      "name": "context-{\"not\":{\"key\":\"x\",\"operator\":\"equals\",\"value\":1}}",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [
+          {
+            "id": "urn:law:chain",
+            "operation": "chain",
+            "operands": [
+              "test:edge",
+              "test:edge"
+            ],
+            "resultRelation": "test:edge",
+            "handling": {
+              "lossiness": "conservative",
+              "uncertainty": "conservative",
+              "authority": "none"
+            },
+            "conditions": {
+              "context": {
+                "not": {
+                  "key": "x",
+                  "operator": "equals",
+                  "value": 1
+                }
+              }
+            }
+          }
+        ]
+      },
+      "expected": {
+        "status": "accepted",
+        "digest": "sha256:706d9e33ce6435c6a09adb460fdff56b2fda674d9a8271226adc5f0ce47a4904"
+      }
+    },
+    {
+      "name": "context-{\"all\":[{\"any\":[{\"not\":{\"key\":\"x\",\"operator\":\"exists\"}}]}]}",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [
+          {
+            "id": "urn:law:chain",
+            "operation": "chain",
+            "operands": [
+              "test:edge",
+              "test:edge"
+            ],
+            "resultRelation": "test:edge",
+            "handling": {
+              "lossiness": "conservative",
+              "uncertainty": "conservative",
+              "authority": "none"
+            },
+            "conditions": {
+              "context": {
+                "all": [
+                  {
+                    "any": [
+                      {
+                        "not": {
+                          "key": "x",
+                          "operator": "exists"
+                        }
+                      }
+                    ]
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      },
+      "expected": {
+        "status": "accepted",
+        "digest": "sha256:cdab46f372cfab4ad0fc016d45572333cccd9eb7d6d391409e37f5fdc5c2d1dc"
+      }
+    },
+    {
+      "name": "context-{\"all\":[{\"key\":\"x\",\"operator\":\"exists\"},{}]}",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [
+          {
+            "id": "urn:law:chain",
+            "operation": "chain",
+            "operands": [
+              "test:edge",
+              "test:edge"
+            ],
+            "resultRelation": "test:edge",
+            "handling": {
+              "lossiness": "conservative",
+              "uncertainty": "conservative",
+              "authority": "none"
+            },
+            "conditions": {
+              "context": {
+                "all": [
+                  {
+                    "key": "x",
+                    "operator": "exists"
+                  },
+                  {}
+                ]
+              }
+            }
+          }
+        ]
+      },
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/conditions/context must have required property 'key'; /laws/0/conditions/context must have required property 'operator'; /laws/0/conditions/context must have required property 'value'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must have required property 'key'; /laws/0/conditions/context must have required property 'operator'; /laws/0/conditions/context must have required property 'values'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must have required property 'key'; /laws/0/conditions/context must have required property 'operator'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context/all/1 must have required property 'key'; /laws/0/conditions/context/all/1 must have required property 'operator'; /laws/0/conditions/context/all/1 must have required property 'value'; /laws/0/conditions/context/all/1 must have required property 'key'; /laws/0/conditions/context/all/1 must have required property 'operator'; /laws/0/conditions/context/all/1 must have required property 'values'; /laws/0/conditions/context/all/1 must have required property 'key'; /laws/0/conditions/context/all/1 must have required property 'operator'; /laws/0/conditions/context/all/1 must have required property 'all'; /laws/0/conditions/context/all/1 must have required property 'any'; /laws/0/conditions/context/all/1 must have required property 'not'; /laws/0/conditions/context/all/1 must match exactly one schema in oneOf; /laws/0/conditions/context must have required property 'any'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must have required property 'not'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must match exactly one schema in oneOf"
+        }
+      }
+    },
+    {
+      "name": "context-{\"any\":[{\"not\":{\"key\":0,\"operator\":\"equals\",\"value\":[]}},false]}",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [
+          {
+            "id": "urn:law:chain",
+            "operation": "chain",
+            "operands": [
+              "test:edge",
+              "test:edge"
+            ],
+            "resultRelation": "test:edge",
+            "handling": {
+              "lossiness": "conservative",
+              "uncertainty": "conservative",
+              "authority": "none"
+            },
+            "conditions": {
+              "context": {
+                "any": [
+                  {
+                    "not": {
+                      "key": 0,
+                      "operator": "equals",
+                      "value": []
+                    }
+                  },
+                  false
+                ]
+              }
+            }
+          }
+        ]
+      },
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/conditions/context must have required property 'key'; /laws/0/conditions/context must have required property 'operator'; /laws/0/conditions/context must have required property 'value'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must have required property 'key'; /laws/0/conditions/context must have required property 'operator'; /laws/0/conditions/context must have required property 'values'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must have required property 'key'; /laws/0/conditions/context must have required property 'operator'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must have required property 'all'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context/any/0 must have required property 'key'; /laws/0/conditions/context/any/0 must have required property 'operator'; /laws/0/conditions/context/any/0 must have required property 'value'; /laws/0/conditions/context/any/0 must NOT have additional properties; /laws/0/conditions/context/any/0 must have required property 'key'; /laws/0/conditions/context/any/0 must have required property 'operator'; /laws/0/conditions/context/any/0 must have required property 'values'; /laws/0/conditions/context/any/0 must NOT have additional properties; /laws/0/conditions/context/any/0 must have required property 'key'; /laws/0/conditions/context/any/0 must have required property 'operator'; /laws/0/conditions/context/any/0 must NOT have additional properties; /laws/0/conditions/context/any/0 must have required property 'all'; /laws/0/conditions/context/any/0 must NOT have additional properties; /laws/0/conditions/context/any/0 must have required property 'any'; /laws/0/conditions/context/any/0 must NOT have additional properties; /laws/0/conditions/context/any/0/not/key must be string; /laws/0/conditions/context/any/0/not/value must be null; /laws/0/conditions/context/any/0/not/value must be boolean; /laws/0/conditions/context/any/0/not/value must be number; /laws/0/conditions/context/any/0/not/value must be string; /laws/0/conditions/context/any/0/not/value must match exactly one schema in oneOf; /laws/0/conditions/context/any/0/not must have required property 'values'; /laws/0/conditions/context/any/0/not must NOT have additional properties; /laws/0/conditions/context/any/0/not/key must be string; /laws/0/conditions/context/any/0/not/operator must be equal to one of the allowed values; /laws/0/conditions/context/any/0/not/key must be string; /laws/0/conditions/context/any/0/not/operator must be equal to constant; /laws/0/conditions/context/any/0/not/value must be boolean; /laws/0/conditions/context/any/0/not must have required property 'all'; /laws/0/conditions/context/any/0/not must NOT have additional properties; /laws/0/conditions/context/any/0/not must NOT have additional properties; /laws/0/conditions/context/any/0/not must NOT have additional properties; /laws/0/conditions/context/any/0/not must have required property 'any'; /laws/0/conditions/context/any/0/not must NOT have additional properties; /laws/0/conditions/context/any/0/not must NOT have additional properties; /laws/0/conditions/context/any/0/not must NOT have additional properties; /laws/0/conditions/context/any/0/not must have required property 'not'; /laws/0/conditions/context/any/0/not must NOT have additional properties; /laws/0/conditions/context/any/0/not must NOT have additional properties; /laws/0/conditions/context/any/0/not must NOT have additional properties; /laws/0/conditions/context/any/0/not must match exactly one schema in oneOf; /laws/0/conditions/context/any/0 must match exactly one schema in oneOf; /laws/0/conditions/context/any/1 must be object; /laws/0/conditions/context/any/1 must be object; /laws/0/conditions/context/any/1 must be object; /laws/0/conditions/context/any/1 must be object; /laws/0/conditions/context/any/1 must be object; /laws/0/conditions/context/any/1 must be object; /laws/0/conditions/context/any/1 must match exactly one schema in oneOf; /laws/0/conditions/context must have required property 'not'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must match exactly one schema in oneOf"
+        }
+      }
+    },
+    {
+      "name": "context-{\"all\":[],\"any\":[],\"not\":{}}",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [
+          {
+            "id": "urn:law:chain",
+            "operation": "chain",
+            "operands": [
+              "test:edge",
+              "test:edge"
+            ],
+            "resultRelation": "test:edge",
+            "handling": {
+              "lossiness": "conservative",
+              "uncertainty": "conservative",
+              "authority": "none"
+            },
+            "conditions": {
+              "context": {
+                "all": [],
+                "any": [],
+                "not": {}
+              }
+            }
+          }
+        ]
+      },
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/conditions/context must have required property 'key'; /laws/0/conditions/context must have required property 'operator'; /laws/0/conditions/context must have required property 'value'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must have required property 'key'; /laws/0/conditions/context must have required property 'operator'; /laws/0/conditions/context must have required property 'values'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must have required property 'key'; /laws/0/conditions/context must have required property 'operator'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context/all must NOT have fewer than 1 items; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context/any must NOT have fewer than 1 items; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context/not must have required property 'key'; /laws/0/conditions/context/not must have required property 'operator'; /laws/0/conditions/context/not must have required property 'value'; /laws/0/conditions/context/not must have required property 'key'; /laws/0/conditions/context/not must have required property 'operator'; /laws/0/conditions/context/not must have required property 'values'; /laws/0/conditions/context/not must have required property 'key'; /laws/0/conditions/context/not must have required property 'operator'; /laws/0/conditions/context/not must have required property 'all'; /laws/0/conditions/context/not must have required property 'any'; /laws/0/conditions/context/not must have required property 'not'; /laws/0/conditions/context/not must match exactly one schema in oneOf; /laws/0/conditions/context must match exactly one schema in oneOf"
+        }
+      }
+    },
+    {
+      "name": "context-{\"unknownZ\":true,\"unknownA\":false}",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [
+          {
+            "id": "urn:law:chain",
+            "operation": "chain",
+            "operands": [
+              "test:edge",
+              "test:edge"
+            ],
+            "resultRelation": "test:edge",
+            "handling": {
+              "lossiness": "conservative",
+              "uncertainty": "conservative",
+              "authority": "none"
+            },
+            "conditions": {
+              "context": {
+                "unknownZ": true,
+                "unknownA": false
+              }
+            }
+          }
+        ]
+      },
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /laws/0/conditions/context must have required property 'key'; /laws/0/conditions/context must have required property 'operator'; /laws/0/conditions/context must have required property 'value'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must have required property 'key'; /laws/0/conditions/context must have required property 'operator'; /laws/0/conditions/context must have required property 'values'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must have required property 'key'; /laws/0/conditions/context must have required property 'operator'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must have required property 'all'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must have required property 'any'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must have required property 'not'; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must NOT have additional properties; /laws/0/conditions/context must match exactly one schema in oneOf"
+        }
+      }
+    },
+    {
+      "name": "imports-null",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [],
+        "imports": null
+      },
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /imports must be array"
+        }
+      }
+    },
+    {
+      "name": "imports-false",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [],
+        "imports": false
+      },
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /imports must be array"
+        }
+      }
+    },
+    {
+      "name": "imports-[]",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [],
+        "imports": []
+      },
+      "expected": {
+        "status": "accepted",
+        "digest": "sha256:d60f794c6523f770924b60b6660b99398b62cd4f83dc91a68eefd1d6a7b89791"
+      }
+    },
+    {
+      "name": "imports-[{\"id\":\"urn:pack:other\",\"version\":\"1\",\"digest\":\"sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"}]",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [],
+        "imports": [
+          {
+            "id": "urn:pack:other",
+            "version": "1",
+            "digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        ]
+      },
+      "expected": {
+        "status": "accepted",
+        "digest": "sha256:30f72f1f7d5ae1fa5597e7105b1fa68952928267490272bee7649cd4b3eeeb11"
+      }
+    },
+    {
+      "name": "imports-[{\"id\":\"urn:pack:other\",\"version\":\"1\",\"digest\":\"sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"},{\"id\":\"urn:pack:other\",\"version\":\"1\",\"digest\":\"sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"}]",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [],
+        "imports": [
+          {
+            "id": "urn:pack:other",
+            "version": "1",
+            "digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          },
+          {
+            "id": "urn:pack:other",
+            "version": "1",
+            "digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        ]
+      },
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /imports must NOT have duplicate items (items ## 0 and 1 are identical)"
+        }
+      }
+    },
+    {
+      "name": "imports-[{\"id\":null,\"version\":\"\",\"digest\":\"wrong\",\"unknown\":true},{}]",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [],
+        "imports": [
+          {
+            "id": null,
+            "version": "",
+            "digest": "wrong",
+            "unknown": true
+          },
+          {}
+        ]
+      },
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /imports/0 must NOT have additional properties; /imports/0/id must be string; /imports/0/version must NOT have fewer than 1 characters; /imports/0/digest must match pattern \"^sha256:[a-f0-9]{64}$\"; /imports/1 must have required property 'id'; /imports/1 must have required property 'version'; /imports/1 must have required property 'digest'"
+        }
+      }
+    },
+    {
+      "name": "imports-[null,null]",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow"
+          }
+        ],
+        "laws": [],
+        "imports": [
+          null,
+          null
+        ]
+      },
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /imports/0 must be object; /imports/1 must be object; /imports must NOT have duplicate items (items ## 0 and 1 are identical)"
+        }
+      }
+    },
+    {
+      "name": "relation-disjointWith-[null,null]",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow",
+            "disjointWith": [
+              null,
+              null
+            ]
+          }
+        ],
+        "laws": []
+      },
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0/disjointWith/0 must be string; /relations/0/disjointWith/1 must be string"
+        }
+      }
+    },
+    {
+      "name": "relation-disjointWith-[0,0]",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow",
+            "disjointWith": [
+              0,
+              0
+            ]
+          }
+        ],
+        "laws": []
+      },
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0/disjointWith/0 must be string; /relations/0/disjointWith/1 must be string"
+        }
+      }
+    },
+    {
+      "name": "relation-disjointWith-[\"__proto__\",\"__proto__\"]",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow",
+            "disjointWith": [
+              "__proto__",
+              "__proto__"
+            ]
+          }
+        ],
+        "laws": []
+      },
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0/disjointWith/0 must match pattern \"^[a-z][a-z0-9._-]*:[a-z][a-z0-9._-]*$\"; /relations/0/disjointWith/1 must match pattern \"^[a-z][a-z0-9._-]*:[a-z][a-z0-9._-]*$\""
+        }
+      }
+    },
+    {
+      "name": "relation-disjointWith-[\"test:edge\",\"test:edge\"]",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow",
+            "disjointWith": [
+              "test:edge",
+              "test:edge"
+            ]
+          }
+        ],
+        "laws": []
+      },
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0/disjointWith must NOT have duplicate items (items ## 1 and 0 are identical)"
+        }
+      }
+    },
+    {
+      "name": "relation-composesWith-[null,null]",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow",
+            "composesWith": [
+              null,
+              null
+            ]
+          }
+        ],
+        "laws": []
+      },
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0/composesWith/0 must be string; /relations/0/composesWith/1 must be string"
+        }
+      }
+    },
+    {
+      "name": "relation-composesWith-[0,0]",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow",
+            "composesWith": [
+              0,
+              0
+            ]
+          }
+        ],
+        "laws": []
+      },
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0/composesWith/0 must be string; /relations/0/composesWith/1 must be string"
+        }
+      }
+    },
+    {
+      "name": "relation-composesWith-[\"__proto__\",\"__proto__\"]",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow",
+            "composesWith": [
+              "__proto__",
+              "__proto__"
+            ]
+          }
+        ],
+        "laws": []
+      },
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0/composesWith/0 must match pattern \"^[a-z][a-z0-9._-]*:[a-z][a-z0-9._-]*$\"; /relations/0/composesWith/1 must match pattern \"^[a-z][a-z0-9._-]*:[a-z][a-z0-9._-]*$\""
+        }
+      }
+    },
+    {
+      "name": "relation-composesWith-[\"test:edge\",\"test:edge\"]",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow",
+            "composesWith": [
+              "test:edge",
+              "test:edge"
+            ]
+          }
+        ],
+        "laws": []
+      },
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0/composesWith must NOT have duplicate items (items ## 1 and 0 are identical)"
+        }
+      }
+    },
+    {
+      "name": "relation-cardinalities-[null,null]",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow",
+            "cardinalities": [
+              null,
+              null
+            ]
+          }
+        ],
+        "laws": []
+      },
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0/cardinalities/0 must be equal to one of the allowed values; /relations/0/cardinalities/1 must be equal to one of the allowed values; /relations/0/cardinalities must NOT have duplicate items (items ## 0 and 1 are identical)"
+        }
+      }
+    },
+    {
+      "name": "relation-cardinalities-[0,0]",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow",
+            "cardinalities": [
+              0,
+              0
+            ]
+          }
+        ],
+        "laws": []
+      },
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0/cardinalities/0 must be equal to one of the allowed values; /relations/0/cardinalities/1 must be equal to one of the allowed values; /relations/0/cardinalities must NOT have duplicate items (items ## 0 and 1 are identical)"
+        }
+      }
+    },
+    {
+      "name": "relation-cardinalities-[\"__proto__\",\"__proto__\"]",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow",
+            "cardinalities": [
+              "__proto__",
+              "__proto__"
+            ]
+          }
+        ],
+        "laws": []
+      },
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0/cardinalities/0 must be equal to one of the allowed values; /relations/0/cardinalities/1 must be equal to one of the allowed values; /relations/0/cardinalities must NOT have duplicate items (items ## 0 and 1 are identical)"
+        }
+      }
+    },
+    {
+      "name": "relation-cardinalities-[\"test:edge\",\"test:edge\"]",
+      "value": {
+        "schemaVersion": "2.0.0",
+        "id": "urn:pack:control",
+        "version": "1",
+        "relations": [
+          {
+            "id": "test:edge",
+            "cyclePolicy": "allow",
+            "cardinalities": [
+              "test:edge",
+              "test:edge"
+            ]
+          }
+        ],
+        "laws": []
+      },
+      "expected": {
+        "status": "refused",
+        "error": {
+          "name": "Error",
+          "message": "Relation pack does not match the portable schema: /relations/0/cardinalities/0 must be equal to one of the allowed values; /relations/0/cardinalities/1 must be equal to one of the allowed values; /relations/0/cardinalities must NOT have duplicate items (items ## 0 and 1 are identical)"
+        }
+      }
+    }
+  ]
+}

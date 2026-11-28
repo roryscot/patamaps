@@ -1,0 +1,59 @@
+{
+  "status": "passed-five-actual-owner-followup-controls",
+  "scope": "Synthetic state-machine adapter copied from qualified executor tests; no runtime enforcement claim",
+  "sourceBindings": {
+    "actualOriginal": {
+      "buildctl.mjs": "615b1aa4d06344345f665fa7b8404f12238a85bce4454f923bc71c685a1e889c",
+      "guarded-run.mjs": "050efffb7299411776bad4add2dde0396a255dc1893d885fa35edacd338d34a5"
+    },
+    "testSha256": "b94abddb831b5904aa5eec51b7cc73ca36acb2bdbbbb0477899934547ef3c95c",
+    "backend": "Synthetic state-machine adapter copied from qualified executor tests; no runtime enforcement claim",
+    "productionChanged": false
+  },
+  "productionChanged": false,
+  "parallelActivated": false,
+  "filesDeleted": 0,
+  "steps": [
+    {
+      "name": "original-red",
+      "exitCode": 1,
+      "tests": 5,
+      "failures": 1,
+      "stdoutSha256": "1d5db1bd3cc5693a1250de0e02e4c5a9835d9c89f4746e8ef238bbb55b765d44"
+    },
+    {
+      "name": "candidate-green",
+      "exitCode": 0,
+      "tests": 5,
+      "failures": 0,
+      "stdoutSha256": "4b86c9a26b512f32aa070abbe7027d6ecb41cd907bf423c3b82db33b243afc89"
+    }
+  ],
+  "candidateSchedulerSha256": "0ff0e37eb622f66a8b27111734b8e997544e9b1a73daeb91a6e939a69f96b75b",
+  "recordedAt": "2026-10-20T19:37:50.931382+00:00",
+  "canonicalReservation": "612eb59b-6c83-4b52-9cbb-a597e07483d4",
+  "controls": [
+    "managed head progresses while prior native owner stays alive and native follow-up queues again",
+    "native follow-up cannot leapfrog a different waiting project",
+    "failed finalizer retains needs-review and shared barrier",
+    "uncertain stop skips finalizer and blocks managed admission",
+    "missing callback preserves conservative native-finalization barrier"
+  ],
+  "limitations": [
+    "Synthetic backend; no new real container enforcement or crash-recovery attestation",
+    "Actual application and installed scheduler files unchanged",
+    "Previously qualified 57-unit/22-runtime candidate remains source-bound but does not attest actual entry-point rollout"
+  ],
+  "publishedLogs": [
+    {
+      "file": "actual-followup-original-red.stdout.log",
+      "sha256": "1d5db1bd3cc5693a1250de0e02e4c5a9835d9c89f4746e8ef238bbb55b765d44",
+      "normalization": "Trailing horizontal whitespace stripped for Git; raw exact bytes retained in Intel qualification"
+    },
+    {
+      "file": "actual-followup-candidate-green.stdout.log",
+      "sha256": "4b86c9a26b512f32aa070abbe7027d6ecb41cd907bf423c3b82db33b243afc89",
+      "normalization": "Trailing horizontal whitespace stripped for Git; raw exact bytes retained in Intel qualification"
+    }
+  ]
+}

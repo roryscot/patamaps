@@ -1,0 +1,132 @@
+{
+  "schemaVersion": 1,
+  "status": "passed-independent-native-architecture-selection-and-linux-probe",
+  "recordedAt": "2026-10-22T21:33:24.846204+00:00",
+  "selectedPointerDigest": "sha256:91802e329a53f77ea9b4d198685c62d2418544207481e3937cf0569e21e7e81a",
+  "selectedRuntimeDigest": "sha256:11879a605fc95dd517a96378bf94806f389373d9b14a76fca1bd4a1645ee8d2f",
+  "armAuthenticDigest": "sha256:0a2b58fafdca0b454ee2b92183195ec146ea2f8fbde5dfca5d1fdd6f998c9b95",
+  "armDiagnostic": "ELF_ARCHITECTURE",
+  "armCommandExitCode": 2,
+  "previousSelectionPointerUnchanged": true,
+  "sourceAndSnapshotUnavailableReplay": "verified-selected-build-bindings",
+  "managedExitCode": 0,
+  "expectedProgramUsageExitCode": 1,
+  "usageDiagnosticMatched": true,
+  "containerStopped": true,
+  "activeReservations": 0,
+  "sharedLeasePresent": false,
+  "parallelActivated": false,
+  "filesDeleted": 0,
+  "scope": "Actual Rust Patamaps activator artifacts; self-hosted deployment selection and usage-only Linux probe. Not independent external app acceptance.",
+  "source": {
+    "ciRun": 39847645841,
+    "ciUrl": "https://github.com/roryscot/patamaps/actions/runs/39847645841",
+    "ciCheckout": "7a5e30ba1968f5d6336e7d358007e3b24c0a9b59",
+    "prHead": "d6433e2d1e3ea6597c27c0513e1e332436f413b1",
+    "nativeBuilderImplementation": "d6433e2d1e3ea6597c27c0513e1e332436f413b1",
+    "component": "patamaps-activator",
+    "componentProfile": "release",
+    "artifacts": [
+      {
+        "architecture": "x86_64",
+        "component": "patamaps-activator",
+        "profile": "release",
+        "artifactId": 12455344773,
+        "archiveDigest": "sha256:5b825d350c0d16ff65ba364396dd30e645743ecc6704e6da2bc8bc3f6015337a",
+        "archiveDigestVerified": true,
+        "sourceRevision": "7a5e30ba1968f5d6336e7d358007e3b24c0a9b59",
+        "member": "patamaps-ci-39847645841-1/.stage-linux-test-9939-1792700652240705926-21/patamaps-activator",
+        "binaryDigest": "sha256:11879a605fc95dd517a96378bf94806f389373d9b14a76fca1bd4a1645ee8d2f",
+        "bytes": 8097696,
+        "sourceImplementationDigestsMatched": true
+      },
+      {
+        "architecture": "aarch64",
+        "component": "patamaps-activator",
+        "profile": "release",
+        "artifactId": 12456346595,
+        "archiveDigest": "sha256:c16c3e0feab5fdc4680b9938ec1e3f11466194324df6941c21707a29530915b5",
+        "archiveDigestVerified": true,
+        "sourceRevision": "7a5e30ba1968f5d6336e7d358007e3b24c0a9b59",
+        "member": "patamaps-ci-39847645841-1/.stage-linux-test-9471-1792700709527671315-21/patamaps-activator",
+        "binaryDigest": "sha256:0a2b58fafdca0b454ee2b92183195ec146ea2f8fbde5dfca5d1fdd6f998c9b95",
+        "bytes": 7234112,
+        "sourceImplementationDigestsMatched": true
+      }
+    ]
+  },
+  "controls": {
+    "x86_64NativeContextSelection": "selected-project-build",
+    "wrongArchitecture": {
+      "target": "linux/amd64",
+      "candidateMachine": 183,
+      "correctCandidateDigestSupplied": "sha256:0a2b58fafdca0b454ee2b92183195ec146ea2f8fbde5dfca5d1fdd6f998c9b95",
+      "refusal": "ELF_ARCHITECTURE",
+      "exitCode": 2,
+      "buildStatus": "refused-project-build",
+      "previousPointerUnchanged": true,
+      "armRuntimeLaunchRequested": false
+    },
+    "offlineReplay": {
+      "status": "verified-selected-build-bindings",
+      "configuredSourceAndSnapshotUnavailable": true
+    },
+    "runtimeProbe": {
+      "platform": "Linux x86_64 verified by captured uname check",
+      "invocation": "selected patamaps-activator with no arguments",
+      "expectedProgramExitCode": 1,
+      "usageDiagnosticMatched": true,
+      "managedControlExitCode": 0,
+      "trustConfigurationCreated": false,
+      "activationPerformed": false,
+      "runtimeDigest": "sha256:11879a605fc95dd517a96378bf94806f389373d9b14a76fca1bd4a1645ee8d2f",
+      "probeDigest": "sha256:162b04eb4f5be423197725a48ee81edeba6a83be9daa3ec1dbdd9f03e8a0c410"
+    }
+  },
+  "resources": {
+    "nativePreparationRetryGrowthCeilingBytes": 469762048,
+    "managedCpu": 1,
+    "managedMemoryBytes": 268435456,
+    "managedMemorySwapBytes": 268435456,
+    "writableQuotaBytes": 67108864,
+    "quotaImageBytes": 66060288,
+    "quotaFilesystemBytes": 66019328,
+    "rootReadonly": true,
+    "network": "none",
+    "sourceMounted": false,
+    "onlyWritableMount": "/work",
+    "limitsAndInputsInspectedBeforeLaunch": true,
+    "managedReservation": "8569ca95-2790-47d8-b484-0ade4229b3bb",
+    "containerStopped": true,
+    "activeReservations": 0,
+    "policyChanged": false,
+    "parallelActivated": false,
+    "filesDeleted": 0
+  },
+  "retainedFailures": [
+    {
+      "phase": "initial build selection",
+      "result": "PROJECT_BUILD_STATE_ISOLATION",
+      "cause": "qualification driver used Cargo-nested state; corrected to existing accounted isolated root",
+      "sourceOrPolicyWeakened": false
+    },
+    {
+      "phase": "128 MiB quota preparation after passed selection/replay",
+      "result": "384 MiB native aggregate growth exceeded; kill EPERM retained lease",
+      "runtimeLaunched": false,
+      "reviewedRecovery": "owned group/PIDs absent; own container label/name absent; quota image unmounted; unrelated database unchanged; original records preserved",
+      "nativeReservation": "e7764d79-fe4d-4a89-b0aa-49b04a0ef2ff",
+      "preparationReservation": "5448e18c-0a05-491f-bd0b-b230c3af97eb",
+      "partialQuotaImageRetained": true,
+      "diskGrowthAttribution": "aggregate free-space drop; exact per-process cause not established"
+    }
+  ],
+  "independentVerificationDigest": "sha256:661031712ee9dddbb3a57bf6f148b22b693fc7bea1f8a527d8f39ea04e054f16",
+  "limits": [
+    "Architecture refusal uses an explicit owner verification step before selection; not kernel exec-format refusal or automatic launch protection.",
+    "Header matching alone does not establish loader/library/OS compatibility; exact x86_64 artifact additionally started in this Linux image.",
+    "Usage refusal proves executable startup; no protected-host configuration, trust update, activation or service workflow was exercised.",
+    "Runtime graph metadata is owner-declared. Complete dependency closure, external app deployment and stale generated-contract acceptance stay open."
+  ],
+  "retention": "CI ZIPs, extracted runtimes, contexts, selected/failed attempts, logs, failed quota image and recovery records remain on Intel. No files removed."
+}

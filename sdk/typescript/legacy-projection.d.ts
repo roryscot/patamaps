@@ -61,3 +61,9 @@ export function compileLegacyProjection(
   spec: LegacyProjectionSpec,
   options?: { relationRegistry?: LegacyRelationRegistry },
 ): LegacyProjectionCompilation;
+
+/** Static legacy data rendering; this never admits a generation. */
+export function emitLegacyTypeScriptProjection(
+  projection: LegacyProjection,
+  options?: { exportName?: string },
+): string;

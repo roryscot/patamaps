@@ -1,0 +1,124 @@
+{
+  "status": "passed-independent-actual-linux-archive-inspection",
+  "filesDeleted": 0,
+  "applicationAcceptance": false,
+  "runId": 39317528021,
+  "lightweightInspection": true,
+  "artifactExecution": false,
+  "bulkExtraction": false,
+  "headCommit": "982eac34dfa33d4ef938ef8279404a6522b73526",
+  "testedMergeCommit": "64a7a3dc503840a6da8cbb775c4f89ff9cbe4767",
+  "trackedTree": "130d6317e3c22d97493b9505cf040177bc5dca3c",
+  "ciJobs": [
+    {
+      "name": "Cross-stack Linux image and browser (amd64)",
+      "conclusion": "success"
+    },
+    {
+      "name": "Linux x86_64",
+      "conclusion": "success"
+    },
+    {
+      "name": "Cross-stack source bindings (Linux x86_64)",
+      "conclusion": "success"
+    },
+    {
+      "name": "Linux aarch64",
+      "conclusion": "success"
+    }
+  ],
+  "artifact": {
+    "id": 12218538239,
+    "bytes": 17879943,
+    "digest": "sha256:3cd9547386264d5d58bcca81bf8e229c230bcb12288dd491c7b360280fa06bff"
+  },
+  "nativeReceiptDigest": "sha256:b5c80cfd9b95bd95bac547b903f4e6c74459d28eae4f3a377caf043a869517be",
+  "payloadDigest": "sha256:8f2fd582871244a3209fc6ac4e7bf728104aed610be9c930ab111787132bb6d2",
+  "payloadMembers": {
+    "tool/bin/patamaps": "sha256:9054791c53173c8378d4bc60e4cbeec536ea1bc43497b376046d08cf8fc10d61",
+    "tool/engine.json": "sha256:63787ce69d0357432b84c071a75d7827f6ae741e4f09d0371f5b714ffb830a63",
+    "licenses/axum-LICENSE": "sha256:008c87afcd2e626eaf564093250bed06dd7efb5732113264bba3dda8f1c556a1",
+    "libraries/target/x86_64-unknown-linux-gnu/debug/libaxum_core.rlib": "sha256:ed1a61a27efc28070e86dbee20ae23bb77c42c9bc8a7df838c92ce7001e8187d",
+    "libraries/target/x86_64-unknown-linux-gnu/debug/deps/libaxum_core-52e9fe6945d956a4.rmeta": "sha256:98ca9eed25c9df79da8182870e21662fb5fc9c4d45fb8a9c6ab75288370829d0",
+    "libraries/target/debug/libaxum_macros.so": "sha256:a70c229d2b2da93438dd34398206939c4cac4b59bab7b2818ffddebd9259b900",
+    "libraries/target/x86_64-unknown-linux-gnu/debug/libaxum_extra.rlib": "sha256:040b46fc44df1f777bffbe745c6c8426878d9dc864bb52fa22a99b2fea518f47",
+    "libraries/target/x86_64-unknown-linux-gnu/debug/deps/libaxum_extra-a3ca2e8457909142.rmeta": "sha256:427c2b84218683e5e6a9d8d2bdaef8c3685d3da89553198cbdcf24e9fa16fda0",
+    "libraries/target/x86_64-unknown-linux-gnu/debug/libaxum.rlib": "sha256:50cb3d8cbe1cadc46c29054fb943b9dbd4016f7149e17b8d1d48ab82c2bd89b2",
+    "libraries/target/x86_64-unknown-linux-gnu/debug/deps/libaxum-30a3f7d2cad5d2d8.rmeta": "sha256:6d265e8d289dbe90459f80538956990ebcefdb0408146ba03f1d19e1dd0867cd"
+  },
+  "archives": [
+    {
+      "file": "libraries/target/x86_64-unknown-linux-gnu/debug/libaxum_core.rlib",
+      "codeObjects": 2,
+      "metadataObjects": 2,
+      "allMemberHashesAndHeadersMatched": true
+    },
+    {
+      "file": "libraries/target/x86_64-unknown-linux-gnu/debug/libaxum_extra.rlib",
+      "codeObjects": 1,
+      "metadataObjects": 2,
+      "allMemberHashesAndHeadersMatched": true
+    },
+    {
+      "file": "libraries/target/x86_64-unknown-linux-gnu/debug/libaxum.rlib",
+      "codeObjects": 8,
+      "metadataObjects": 2,
+      "allMemberHashesAndHeadersMatched": true
+    }
+  ],
+  "codeObjectCount": 11,
+  "negativeControls": [
+    {
+      "case": "wrong-architecture",
+      "archiveDigest": "sha256:7985a5cc91ed490fe37172fa2e73f84bb040ca50ca1066706c9d4eabef379094",
+      "expectedRefusal": "Wrong archive object architecture"
+    },
+    {
+      "case": "truncated-header",
+      "archiveDigest": "sha256:9039603510232a5a97e25dbf057a4a5ef8864179a8388e25930a529bd437bdcf",
+      "expectedRefusal": "Wrong archive object architecture"
+    },
+    {
+      "case": "non-relocatable",
+      "archiveDigest": "sha256:dcd7e2493ba76bad4b4edc665de7ad5eb39a8f0b8052c7cda0a388160dbe7326",
+      "expectedRefusal": "Archive member is not relocatable"
+    },
+    {
+      "case": "duplicate-member",
+      "archiveDigest": "sha256:1f0dfeb723d3bfd7898409afd90deb25a245f219bd491f45bee9617b5930cb08",
+      "expectedRefusal": "Ambiguous archive membership"
+    },
+    {
+      "case": "missing-metadata",
+      "archiveDigest": "sha256:2ffd715c9d1052b83d69280f18ba61d6fa52f5a512671ef855f89043d6b95899",
+      "expectedRefusal": "Expected exactly one Rust metadata member"
+    },
+    {
+      "case": "late-metadata-wrong-architecture",
+      "archiveDigest": "sha256:1252f5f398110414349c9f63cef5a31f588a473f69e4a6ab0ca51e7982f51384",
+      "expectedRefusal": "Wrong archive object architecture"
+    },
+    {
+      "case": "unknown-member",
+      "archiveDigest": "sha256:1dc5960d58487248f741a0ec50ddd7f7e7b625f29366377d285ad7ccbd2366b7",
+      "expectedRefusal": "Unexpected non-object archive member"
+    },
+    {
+      "case": "thin-archive",
+      "archiveDigest": "sha256:0a65ccde55367e8e46b05a05832863123bb32fd25be68eb45c6523b2e54dc0f6"
+    }
+  ],
+  "upstreamLibraryTests": {
+    "passed": 459,
+    "failed": 0,
+    "ignored": 0
+  },
+  "compilerDigest": "sha256:9054791c53173c8378d4bc60e4cbeec536ea1bc43497b376046d08cf8fc10d61",
+  "sourceCommit": "fc78d5bcdb276bd6fb53cf2db55e91757eabb469",
+  "limitations": [
+    "Header/byte inspection, not full ELF/link or external dependency validity.",
+    "No install, artifact execution, application HTTP/browser or release acceptance."
+  ],
+  "inspectionDriverDigest": "sha256:4483b3d989c0c133701b3f8da91a5eec0879c2c8402e030e718900b0b5cd4acc",
+  "inspectionReceiptDigest": "sha256:c2b61a59ac12a62630d432c1187c57f3e45a56590f35a5668252c55edafd95b1"
+}

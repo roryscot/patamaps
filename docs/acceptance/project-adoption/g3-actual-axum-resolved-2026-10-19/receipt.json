@@ -1,0 +1,429 @@
+{
+  "status": "passed-scoped-metadata-controls",
+  "commands": [
+    {
+      "label": "source-head",
+      "exitCode": 0,
+      "seconds": 0.056
+    },
+    {
+      "label": "source-status-before",
+      "exitCode": 0,
+      "seconds": 0.082
+    },
+    {
+      "label": "focused-clippy",
+      "exitCode": 0,
+      "seconds": 1.134
+    },
+    {
+      "label": "cli-build",
+      "exitCode": 0,
+      "seconds": 0.489
+    },
+    {
+      "label": "legacy-member-mode-digest",
+      "exitCode": 0,
+      "seconds": 0.895
+    },
+    {
+      "label": "legacy-member-mode",
+      "exitCode": 2,
+      "seconds": 0.04
+    },
+    {
+      "label": "missing-member-digest",
+      "exitCode": 0,
+      "seconds": 0.026
+    },
+    {
+      "label": "missing-member",
+      "exitCode": 2,
+      "seconds": 0.041
+    },
+    {
+      "label": "missing-lock-digest",
+      "exitCode": 0,
+      "seconds": 0.015
+    },
+    {
+      "label": "missing-lock",
+      "exitCode": 2,
+      "seconds": 0.016
+    },
+    {
+      "label": "wrong-tool-digest",
+      "exitCode": 0,
+      "seconds": 0.027
+    },
+    {
+      "label": "wrong-tool",
+      "exitCode": 2,
+      "seconds": 1.436
+    },
+    {
+      "label": "declared-darwin-digest",
+      "exitCode": 0,
+      "seconds": 0.026
+    },
+    {
+      "label": "declared-darwin",
+      "exitCode": 0,
+      "seconds": 2.901
+    },
+    {
+      "label": "declared-linux-digest",
+      "exitCode": 0,
+      "seconds": 0.025
+    },
+    {
+      "label": "declared-linux",
+      "exitCode": 0,
+      "seconds": 2.963
+    },
+    {
+      "label": "resolved-default-digest",
+      "exitCode": 0,
+      "seconds": 0.027
+    },
+    {
+      "label": "resolved-default",
+      "exitCode": 0,
+      "seconds": 3.786
+    },
+    {
+      "label": "resolved-disabled-digest",
+      "exitCode": 0,
+      "seconds": 0.024
+    },
+    {
+      "label": "resolved-disabled",
+      "exitCode": 0,
+      "seconds": 3.43
+    },
+    {
+      "label": "resolved-websocket-digest",
+      "exitCode": 0,
+      "seconds": 0.028
+    },
+    {
+      "label": "resolved-websocket",
+      "exitCode": 0,
+      "seconds": 3.387
+    },
+    {
+      "label": "source-status-after",
+      "exitCode": 0,
+      "seconds": 0.03
+    },
+    {
+      "label": "tool-source",
+      "exitCode": 0,
+      "seconds": 0.019
+    }
+  ],
+  "controls": [
+    {
+      "control": "legacy-member-mode",
+      "result": "refused",
+      "code": "NATIVE_CARGO_MEMBERS"
+    },
+    {
+      "control": "missing-member",
+      "result": "refused",
+      "code": "NATIVE_CARGO_MANIFEST_INPUT"
+    },
+    {
+      "control": "missing-lock",
+      "result": "refused",
+      "code": "NATIVE_CARGO_INPUT"
+    },
+    {
+      "control": "wrong-tool",
+      "result": "refused",
+      "code": "NATIVE_CARGO_TOOL_CHANGED"
+    },
+    {
+      "control": "declared-darwin",
+      "result": "observed",
+      "view": "declared-local",
+      "platform": "x86_64-apple-darwin",
+      "features": [],
+      "defaultFeatures": true,
+      "packages": [
+        {
+          "name": "axum-macros",
+          "featuresResolved": null
+        },
+        {
+          "name": "axum-extra",
+          "featuresResolved": null
+        },
+        {
+          "name": "axum-core",
+          "featuresResolved": null
+        },
+        {
+          "name": "axum",
+          "featuresResolved": null
+        }
+      ],
+      "targets": 6,
+      "metadataDigest": "sha256:05c5edeb0479039d85cc007136fec5fe25f994b9365c9bec356b1c0848eb7255",
+      "requestDigest": "sha256:51a9d95a5222ba94a8c3ec3eea48d2b6d8816866b74fe63e0c34898573eb0bee"
+    },
+    {
+      "control": "declared-linux",
+      "result": "observed",
+      "view": "declared-local",
+      "platform": "x86_64-unknown-linux-gnu",
+      "features": [],
+      "defaultFeatures": true,
+      "packages": [
+        {
+          "name": "axum-macros",
+          "featuresResolved": null
+        },
+        {
+          "name": "axum-extra",
+          "featuresResolved": null
+        },
+        {
+          "name": "axum-core",
+          "featuresResolved": null
+        },
+        {
+          "name": "axum",
+          "featuresResolved": null
+        }
+      ],
+      "targets": 6,
+      "metadataDigest": "sha256:05c5edeb0479039d85cc007136fec5fe25f994b9365c9bec356b1c0848eb7255",
+      "requestDigest": "sha256:0d8c03704399991d5ad1b2ac7e2a4593bcc11d89c342b6c03563498561e83e5a"
+    },
+    {
+      "control": "resolved-default",
+      "result": "observed",
+      "view": "resolved",
+      "platform": "x86_64-apple-darwin",
+      "features": [],
+      "defaultFeatures": true,
+      "packages": [
+        {
+          "name": "axum-macros",
+          "featuresResolved": [
+            "__private",
+            "default"
+          ]
+        },
+        {
+          "name": "axum-extra",
+          "featuresResolved": [
+            "cookie",
+            "cookie-private",
+            "default",
+            "routing",
+            "tracing",
+            "typed-header",
+            "typed-routing"
+          ]
+        },
+        {
+          "name": "axum-core",
+          "featuresResolved": [
+            "tracing"
+          ]
+        },
+        {
+          "name": "axum",
+          "featuresResolved": [
+            "__private",
+            "default",
+            "form",
+            "http1",
+            "json",
+            "macros",
+            "matched-path",
+            "original-uri",
+            "query",
+            "tokio",
+            "tracing"
+          ]
+        }
+      ],
+      "targets": 6,
+      "metadataDigest": "sha256:d7965ed9db6cffeb05c9a1caa4fba7de4d8ce60374f0cec553328ab41cc78242",
+      "requestDigest": "sha256:c13fd4c4460c23c8bf652ac55afdf83b7a5aac3e59f2da63e36302b577265623"
+    },
+    {
+      "control": "resolved-disabled",
+      "result": "observed",
+      "view": "resolved",
+      "platform": "x86_64-apple-darwin",
+      "features": [],
+      "defaultFeatures": false,
+      "packages": [
+        {
+          "name": "axum-macros",
+          "featuresResolved": [
+            "__private",
+            "default"
+          ]
+        },
+        {
+          "name": "axum-extra",
+          "featuresResolved": [
+            "cookie",
+            "cookie-private",
+            "default",
+            "routing",
+            "tracing",
+            "typed-header",
+            "typed-routing"
+          ]
+        },
+        {
+          "name": "axum-core",
+          "featuresResolved": [
+            "tracing"
+          ]
+        },
+        {
+          "name": "axum",
+          "featuresResolved": [
+            "__private",
+            "default",
+            "form",
+            "http1",
+            "json",
+            "macros",
+            "matched-path",
+            "original-uri",
+            "query",
+            "tokio",
+            "tracing"
+          ]
+        }
+      ],
+      "targets": 6,
+      "metadataDigest": "sha256:d7965ed9db6cffeb05c9a1caa4fba7de4d8ce60374f0cec553328ab41cc78242",
+      "requestDigest": "sha256:d8d472384b1b9885afe03348e154f5e1bc861a7a1e1227a98608d09166d8b9c8"
+    },
+    {
+      "control": "resolved-websocket",
+      "result": "observed",
+      "view": "resolved",
+      "platform": "x86_64-apple-darwin",
+      "features": [
+        "axum/ws"
+      ],
+      "defaultFeatures": true,
+      "packages": [
+        {
+          "name": "axum-macros",
+          "featuresResolved": [
+            "__private",
+            "default"
+          ]
+        },
+        {
+          "name": "axum-extra",
+          "featuresResolved": [
+            "cookie",
+            "cookie-private",
+            "default",
+            "routing",
+            "tracing",
+            "typed-header",
+            "typed-routing"
+          ]
+        },
+        {
+          "name": "axum-core",
+          "featuresResolved": [
+            "tracing"
+          ]
+        },
+        {
+          "name": "axum",
+          "featuresResolved": [
+            "__private",
+            "default",
+            "form",
+            "http1",
+            "json",
+            "macros",
+            "matched-path",
+            "original-uri",
+            "query",
+            "tokio",
+            "tracing",
+            "ws"
+          ]
+        }
+      ],
+      "targets": 6,
+      "metadataDigest": "sha256:e5ff66737169c3421ddf685c57e8a0df4b3ad9f1c6a0b5c43d0b89279551e846",
+      "requestDigest": "sha256:5c3079f892dbd4e25ee1679787886acd96d77f81fcb612a6eeb3d5de7091f318"
+    }
+  ],
+  "sourceCommit": "fc78d5bcdb276bd6fb53cf2db55e91757eabb469",
+  "sourceRevision": "a2875f2f2a9fa51bbfd67b540b26508c7cbc6892",
+  "compilerDigest": "sha256:2c02777099685abece791ef4363a13baf214783e797d3af5ce132b3e9c005b47",
+  "sourceInputsUnchanged": true,
+  "sourceInputs": {
+    "Cargo.toml": "sha256:9f3db2a3fa254788aa0ea9f11fc18c83375120cb6dbe0dda2e34be6ac1d19e54",
+    "Cargo.lock": "sha256:76041942436b615d49df0eb672f1400a3b38f1484a22d0faf7b48cc5f8ea6184",
+    "axum/Cargo.toml": "sha256:7b653f34222b75257eb35b7edafb14308547fe79ac568527346c4b22cd2b83c2",
+    "axum-core/Cargo.toml": "sha256:db2fe074edf3fb2ea3a3d9a86551ab2b9deeff7c37ea83122045a81c419fd28f",
+    "axum-extra/Cargo.toml": "sha256:ddec00d887240b57bef312d94cdb64718ee15383f29fc4245da9c64f962f62a2",
+    "axum-macros/Cargo.toml": "sha256:bb17769cd54f0183ab72a4c185083c7ecdabb7b84a74d82909f9034a3b254f3d"
+  },
+  "filesDeleted": 0,
+  "applicationAcceptance": false,
+  "compilationEstablished": false,
+  "qualificationDate": "2026-10-19",
+  "scope": "Actual pinned Axum workspace native declared/resolved metadata and four expected refusals; no target compilation or application runtime acceptance.",
+  "sourceOrigin": "https://github.com/tokio-rs/axum.git",
+  "explicitWebsocketFeatureObserved": true,
+  "noDefaultRequestRetainedSameFeatureSet": true,
+  "resolvedFeatureSetsIndependentlyComparedWithRawCargoNodes": true,
+  "dependencyPreparation": {
+    "status": "passed-locked-offline-dependency-preparation",
+    "commands": [
+      {
+        "label": "offline-before",
+        "exitCode": 101,
+        "seconds": 0.597
+      },
+      {
+        "label": "fetch-locked-registry",
+        "exitCode": 0,
+        "seconds": 3.24
+      },
+      {
+        "label": "offline-after",
+        "exitCode": 0,
+        "seconds": 0.293
+      }
+    ],
+    "sourceInputsUnchanged": true,
+    "privateReceiptDigest": "sha256:7d1bd9fbaf9a4a17301888818d8c95f1850219bb6194287539294802b9aab91f"
+  },
+  "privateReceiptDigest": "sha256:110ddf1cbfda06b698a65a2e5744bbfd85575078f920294a6ef978789e369f25",
+  "qualificationDriverDigest": "sha256:b207fcbab57b5e3ea463d7450d364878450e6bc0f965b8e862cc37674c3f01e7",
+  "supervisor": {
+    "completed": true,
+    "exitCode": 0,
+    "startedAt": "2026-10-19T15:14:19.346Z",
+    "finishedAt": "2026-10-19T15:17:09.254Z",
+    "filesDeleted": 0
+  },
+  "limitations": [
+    "Declared Darwin/Linux requests have identical metadata; resolved cases here use Darwin only. Resolved Linux/platform filtering remains open.",
+    "The no-default request retained the same workspace feature set; this is not a minimal-feature build claim.",
+    "Metadata and its feature graph are not target compilation, runtime, arbitrary macro/Serde equivalence or complete executable dependency closure.",
+    "Actual source/member mutation, retained workspace baseline capture and configured-source/tool-unavailable replay remain separate controls.",
+    "No whole-goal release or protected activation."
+  ]
+}

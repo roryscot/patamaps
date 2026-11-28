@@ -1,0 +1,77 @@
+{
+  "status": "completed-bounded-resource-readiness-review",
+  "observationSeconds": 30.212,
+  "sampleCount": 3,
+  "minimumAvailableBytesObserved": 47786876928,
+  "maximumAvailableBytesObserved": 47790108672,
+  "availableByteRange": 3231744,
+  "netAvailableByteChange": -208896,
+  "swapUsageUnchanged": true,
+  "vmCounterDeltas": {
+    "Swapins": 0,
+    "Swapouts": 0,
+    "Compressions": 0,
+    "Decompressions": 32
+  },
+  "knownFileMetadataStable": true,
+  "allSelectedKnownFileMetadataAvailable": true,
+  "selectedKnownFileCount": 2,
+  "activeReservationsBeforeAdmissionCheck": 0,
+  "queuedReservationsBeforeAdmissionCheck": 0,
+  "admissionChecks": [
+    {
+      "exitCode": -24,
+      "timedOut": null,
+      "timeoutSeconds": 45,
+      "cpuLimitSeconds": 10,
+      "elapsedSeconds": null,
+      "observerError": null
+    },
+    {
+      "exitCode": -24,
+      "timedOut": null,
+      "timeoutSeconds": 120,
+      "cpuLimitSeconds": 60,
+      "elapsedSeconds": 106.34,
+      "observerError": null
+    },
+    {
+      "exitCode": null,
+      "timedOut": null,
+      "timeoutSeconds": 300,
+      "cpuLimitSeconds": 180,
+      "elapsedSeconds": null,
+      "observerError": "Child completed but wrapper discarded result because serialized inventory roots exceeded64KiB; original exit and result not recoverable"
+    },
+    {
+      "exitCode": 0,
+      "timedOut": null,
+      "timeoutSeconds": 300,
+      "cpuLimitSeconds": 180,
+      "elapsedSeconds": 234.052,
+      "observerError": null
+    }
+  ],
+  "admissionEstablished": true,
+  "earlierGrowthCauseEstablished": false,
+  "futureResourceStabilityEstablished": false,
+  "nativeMemoryBoundEstablished": false,
+  "watchQualificationStarted": false,
+  "qualificationAccepted": false,
+  "filesDeleted": 0,
+  "servicesStopped": 0,
+  "policyChanged": false,
+  "admissionAvailableBytes": 47590436864,
+  "retainedAllocatedBytesUpperBound": 93673992192,
+  "reservedGrowthBytes": 4000000000,
+  "remainingRetentionAfterReservationBytes": 2326007808,
+  "sourceObservation": {
+    "path": "crates/patamaps-workspace/src/project_context.rs",
+    "sha256": "83646cb0448cd66a437904ede476c9ae834ec9d5173bd311a6c5cbdc59cc3fb0",
+    "contextFileHasherBufferBytes": 65536,
+    "wholeVerifierMemoryBoundEstablished": false
+  },
+  "reviewerSha256": "0ab7f6b463e99ed0c5972b5c7e6a614501e706763039ce96fa12b9909ac2ddc9",
+  "reviewCommand": "python3 -B review.py --records <private-readiness-records> --checkout <Intel-checkout>",
+  "sourceRevision": "8b479b516a2ff6fb33174b1f7a8cba90caebb3ff"
+}

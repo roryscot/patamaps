@@ -110,7 +110,7 @@ fn refuse() -> Error {
         "Explicit retained context refused; partial outputs retained",
     )
 }
-fn allowed(path: &str) -> bool {
+pub(crate) fn allowed(path: &str) -> bool {
     crate::relative_path(path)
         && path.len() <= 4096
         && path.split('/').count() <= 128
@@ -170,7 +170,8 @@ fn address(manifest: &ProjectContextManifest) -> Result<String, Error> {
         entries: &manifest.entries,
     })?)
 }
-fn closure(entries: &BTreeMap<String, ProjectContextEntry>) -> Result<(), Error> {
+/// Resolve only inventoried members; input secrecy checks belong to the caller.
+pub(crate) fn closure(entries: &BTreeMap<String, ProjectContextEntry>) -> Result<(), Error> {
     use std::collections::VecDeque;
     for (path, entry) in entries {
         for (i, _) in path.match_indices('/') {
@@ -582,6 +583,83 @@ mod unix {
         }
         Ok(())
     }
+    // Clone only ordinary files with no extra metadata: the streaming path does
+    // not transfer extended attributes or BSD flags. Verify the cloned bytes
+    // and source identity before accepting it as a staged context member.
+    #[cfg(target_os = "macos")]
+    fn clone_context_file(
+        source: &File,
+        destination: &File,
+        name: &str,
+        digest: &str,
+        length: u64,
+        want: SafeInteger,
+    ) -> Result<bool, Error> {
+        use std::os::macos::fs::MetadataExt as MacMetadataExt;
+        let before = source.metadata()?;
+        if before.st_flags() != 0 || !matches!(rustix::fs::flistxattr(source, &mut [0u8; 0]), Ok(0))
+        {
+            return Ok(false);
+        }
+        match rustix::fs::fclonefileat(
+            source,
+            destination,
+            name,
+            rustix::fs::CloneFlags::NOOWNERCOPY,
+        ) {
+            Ok(()) => {}
+            Err(e)
+                if e == rustix::io::Errno::NOTSUP
+                    || e == rustix::io::Errno::OPNOTSUPP
+                    || e == rustix::io::Errno::XDEV
+                    || e == rustix::io::Errno::NOSYS =>
+            {
+                return Ok(false);
+            }
+            Err(e) => return Err(std::io::Error::from(e).into()),
+        }
+        let output = crate::project::open_project_file(destination, name)?;
+        let copied = output.metadata()?;
+        if (copied.dev(), copied.ino()) == (before.dev(), before.ino())
+            || copied.nlink() != 1
+            || copied.st_flags() != 0
+            || !matches!(rustix::fs::flistxattr(&output, &mut [0u8; 0]), Ok(0))
+            || bytes(output.try_clone()?, None)? != (digest.to_owned(), length)
+        {
+            return Err(refuse());
+        }
+        let after = source.metadata()?;
+        if (
+            before.dev(),
+            before.ino(),
+            before.len(),
+            before.mtime(),
+            before.mtime_nsec(),
+            before.ctime(),
+            before.ctime_nsec(),
+            before.mode(),
+            before.st_flags(),
+        ) != (
+            after.dev(),
+            after.ino(),
+            after.len(),
+            after.mtime(),
+            after.mtime_nsec(),
+            after.ctime(),
+            after.ctime_nsec(),
+            after.mode(),
+            after.st_flags(),
+        ) || !matches!(rustix::fs::flistxattr(source, &mut [0u8; 0]), Ok(0))
+        {
+            return Err(refuse());
+        }
+        rustix::fs::fchmod(
+            &output,
+            Mode::from_bits_truncate(want.get().try_into().map_err(|_| refuse())?),
+        )
+        .map_err(std::io::Error::from)?;
+        Ok(true)
+    }
     fn copy_context_tree(
         source: &File,
         destination: &File,
@@ -630,6 +708,21 @@ mod unix {
                         if source.is_none() {
                             source = Some(project_fs::directory(source_root, prefix)?);
                         }
+                        let input = crate::project::open_project_file(
+                            source.as_ref().ok_or_else(refuse)?,
+                            name,
+                        )?;
+                        #[cfg(target_os = "macos")]
+                        if clone_context_file(
+                            &input,
+                            destination,
+                            name,
+                            digest,
+                            byte_length.get(),
+                            *want,
+                        )? {
+                            continue;
+                        }
                         let mut output = File::from(
                             rustix::fs::openat(
                                 destination,
@@ -643,14 +736,7 @@ mod unix {
                             )
                             .map_err(std::io::Error::from)?,
                         );
-                        if bytes(
-                            crate::project::open_project_file(
-                                source.as_ref().ok_or_else(refuse)?,
-                                name,
-                            )?,
-                            Some(&mut output),
-                        )? != (digest.clone(), byte_length.get())
-                        {
+                        if bytes(input, Some(&mut output))? != (digest.clone(), byte_length.get()) {
                             return Err(refuse());
                         }
                         rustix::fs::fchmod(
@@ -692,6 +778,7 @@ mod unix {
     }
     fn load(
         snapshot: &Path,
+        file_limits: Option<(&str, usize, u64)>,
     ) -> Result<(File, ProjectContextDefinition, ProjectContextManifest), Error> {
         let root = project_fs::root(snapshot)?;
         let names = Dir::read_from(&root)
@@ -720,6 +807,32 @@ mod unix {
         let definition = read_json(&root, "selection.json")?;
         let manifest: ProjectContextManifest = read_json(&root, "manifest.json")?;
         validate(&definition, &manifest)?;
+        if let Some((digest, maximum_files, maximum_bytes)) = file_limits {
+            if manifest.digest != digest {
+                return Err(refuse());
+            }
+            let mut files = 0usize;
+            let mut bytes = 0u64;
+            for entry in manifest.entries.values() {
+                match entry {
+                    ProjectContextEntry::File { byte_length, .. } => {
+                        files += 1;
+                        bytes = bytes.checked_add(byte_length.get()).ok_or_else(refuse)?;
+                    }
+                    ProjectContextEntry::Directory { .. } => {}
+                    ProjectContextEntry::Symlink { .. } => return Err(refuse()),
+                }
+            }
+            if files > maximum_files
+                || manifest.entries.len() > maximum_files.saturating_mul(8)
+                || bytes > maximum_bytes
+            {
+                return Err(Error::refused(
+                    "PROJECT_CONTEXT_LIMIT",
+                    "Bounded file-context inventory exceeded before payload traversal",
+                ));
+            }
+        }
         let data = project_fs::directory(&root, "data")?;
         let expected = manifest
             .entries
@@ -848,6 +961,111 @@ mod unix {
         let expected = effective_entries(binding, &manifest, inputs)?;
         let root = project_fs::root(candidate)?;
         verify_tree(&root, &expected, &binding.writable_paths, true)?;
+        root_identity(candidate, &root)?;
+        Ok(())
+    }
+    fn preparation_preimages(
+        outputs: &BTreeMap<String, Option<String>>,
+        manifest: &ProjectContextManifest,
+    ) -> Result<(), Error> {
+        for (path, preimage) in outputs {
+            if !allowed(path) {
+                return Err(refuse());
+            }
+            match (manifest.entries.get(path), preimage) {
+                (Some(ProjectContextEntry::File { digest, .. }), Some(expected))
+                    if digest == expected => {}
+                (None, None) => {}
+                _ => return Err(refuse()),
+            }
+        }
+        Ok(())
+    }
+    pub(crate) fn verify_preparation_preimages(
+        outputs: &BTreeMap<String, Option<String>>,
+        metadata: &Path,
+        candidate: &Path,
+    ) -> Result<(), Error> {
+        let (_, manifest) = build_metadata(metadata)?;
+        preparation_preimages(outputs, &manifest)?;
+        let root = project_fs::root(candidate)?;
+        for (path, expected) in outputs {
+            let mut dir = root.try_clone()?;
+            let parts = path.split('/').collect::<Vec<_>>();
+            let mut actual = None;
+            for (index, part) in parts.iter().enumerate() {
+                let last = index == parts.len() - 1;
+                let flags = rustix::fs::OFlags::RDONLY
+                    | rustix::fs::OFlags::NOFOLLOW
+                    | rustix::fs::OFlags::CLOEXEC
+                    | if last {
+                        rustix::fs::OFlags::NONBLOCK
+                    } else {
+                        rustix::fs::OFlags::DIRECTORY
+                    };
+                match rustix::fs::openat(&dir, *part, flags, Mode::empty()) {
+                    Err(rustix::io::Errno::NOENT) => break,
+                    Err(_) => return Err(refuse()),
+                    Ok(fd) => {
+                        let file = File::from(fd);
+                        if last {
+                            if !file.metadata()?.is_file() {
+                                return Err(refuse());
+                            }
+                            actual = Some(bytes(file, None)?.0);
+                        } else {
+                            dir = file;
+                        }
+                    }
+                }
+            }
+            if &actual != expected {
+                return Err(refuse());
+            }
+        }
+        root_identity(candidate, &root)?;
+        Ok(())
+    }
+    pub(crate) fn prepared_context_binding(
+        binding: &ProjectBuildContext,
+        outputs: &BTreeMap<String, Option<String>>,
+        inputs: &[crate::SuppliedInput],
+        metadata: &Path,
+    ) -> Result<ProjectBuildContext, Error> {
+        let (_, manifest) = build_metadata(metadata)?;
+        preparation_preimages(outputs, &manifest)?;
+        let mut result = binding.clone();
+        for (path, preimage) in outputs {
+            if result.overlays.contains_key(path) {
+                return Err(refuse());
+            }
+            let input = inputs
+                .iter()
+                .find(|i| &i.receipt.path == path)
+                .ok_or_else(refuse)?;
+            if let Some(preimage) = preimage
+                && preimage != &input.receipt.digest
+            {
+                result.overlays.insert(path.clone(), preimage.clone());
+            }
+        }
+        result.validate()?;
+        // Validate explicit preimages, paths and all generated content, including replay.
+        effective_entries(&result, &manifest, inputs)?;
+        Ok(result)
+    }
+    pub(crate) fn verify_prepared_build_context(
+        binding: &ProjectBuildContext,
+        inputs: &[crate::SuppliedInput],
+        metadata: &Path,
+        candidate: &Path,
+    ) -> Result<(), Error> {
+        let (_, manifest) = build_metadata(metadata)?;
+        let expected = effective_entries(binding, &manifest, inputs)?;
+        let root = project_fs::root(candidate)?;
+        // Build write roots are NOT available to preparation. Only declared
+        // generated files may differ before the immutable candidate capture.
+        verify_tree(&root, &expected, &[], true)?;
         root_identity(candidate, &root)?;
         Ok(())
     }
@@ -1019,8 +1237,15 @@ mod unix {
             "fileBytes":total,"completeBuildContextEstablished":false,"activation":"not-performed","durability":"not-attested"}),
         )
     }
+    pub(crate) fn verified_file_context(
+        snapshot: &Path,
+        digest: &str,
+    ) -> Result<ProjectContextManifest, Error> {
+        let (_, _, manifest) = load(snapshot, Some((digest, 1024, 512 * 1024 * 1024)))?;
+        Ok(manifest)
+    }
     pub fn verify_project_context(snapshot: &Path) -> Result<serde_json::Value, Error> {
-        let (_, _, manifest) = load(snapshot)?;
+        let (_, _, manifest) = load(snapshot, None)?;
         Ok(
             serde_json::json!({"status":"verified-project-context","digest":manifest.digest,"entries":manifest.entries.len(),
             "originalSourceAccess":"not-required","toolExecution":"not-performed","activation":"not-performed"}),
@@ -1031,7 +1256,7 @@ mod unix {
         destination: &Path,
     ) -> Result<serde_json::Value, Error> {
         isolated_destination(snapshot, destination)?;
-        let (root, _, manifest) = load(snapshot)?;
+        let (root, _, manifest) = load(snapshot, None)?;
         let data = project_fs::directory(&root, "data")?;
         let stage = StageRoot::create(destination)?;
         copy_context_tree(&data, &stage.directory, &manifest.entries)?;
@@ -1052,13 +1277,23 @@ mod unix {
 #[cfg(unix)]
 pub use unix::{capture_project_context, stage_project_context, verify_project_context};
 #[cfg(unix)]
-pub(crate) use unix::{stage_build_context, verify_build_context};
+pub(crate) use unix::{
+    prepared_context_binding, stage_build_context, verified_file_context, verify_build_context,
+    verify_preparation_preimages, verify_prepared_build_context,
+};
 #[cfg(not(unix))]
 pub fn capture_project_context(
     _: &std::path::Path,
     _: &std::path::Path,
     _: &ProjectContextDefinition,
 ) -> Result<serde_json::Value, Error> {
+    Err(refuse())
+}
+#[cfg(not(unix))]
+pub(crate) fn verified_file_context(
+    _: &std::path::Path,
+    _: &str,
+) -> Result<ProjectContextManifest, Error> {
     Err(refuse())
 }
 #[cfg(not(unix))]
@@ -1152,6 +1387,44 @@ mod tests {
         );
         assert!(dest.join("empty").is_dir());
         assert!(stage_project_context(&snapshot, &dest).is_err());
+    }
+    #[test]
+    fn staged_writes_leave_snapshot_unchanged() {
+        let (tmp, source, definition) = fixture();
+        let snapshot = tmp.0.join("snapshot");
+        capture_project_context(&source, &snapshot, &definition).unwrap();
+        let dest = tmp.0.join("staged");
+        stage_project_context(&snapshot, &dest).unwrap();
+        fs::write(dest.join("tools/program"), b"changed").unwrap();
+        assert_eq!(
+            fs::read(snapshot.join("data/tools/program")).unwrap(),
+            [0, 255, 128, 1, 0]
+        );
+        verify_project_context(&snapshot).unwrap();
+    }
+    #[cfg(target_os = "macos")]
+    #[test]
+    fn staging_does_not_copy_extended_attributes() {
+        let (tmp, source, definition) = fixture();
+        let snapshot = tmp.0.join("snapshot");
+        capture_project_context(&source, &snapshot, &definition).unwrap();
+        let input = fs::File::open(snapshot.join("data/tools/program")).unwrap();
+        rustix::fs::fsetxattr(
+            &input,
+            "org.patamaps.context-test",
+            b"private",
+            rustix::fs::XattrFlags::empty(),
+        )
+        .unwrap();
+        let dest = tmp.0.join("staged");
+        stage_project_context(&snapshot, &dest).unwrap();
+        let output = fs::File::open(dest.join("tools/program")).unwrap();
+        assert_eq!(rustix::fs::flistxattr(&output, &mut [0u8; 0]).unwrap(), 0);
+        assert!(rustix::fs::flistxattr(&input, &mut [0u8; 0]).unwrap() > 0);
+        assert_eq!(
+            fs::read(dest.join("tools/program")).unwrap(),
+            [0, 255, 128, 1, 0]
+        );
     }
     #[test]
     fn unsafe_selection_links_and_nested_destinations_refuse_before_creation() {
@@ -1273,6 +1546,74 @@ mod tests {
             assert_eq!(
                 fs::read(staged.join(format!("sibling-{i}.bin"))).unwrap(),
                 [i as u8, 0, 255]
+            );
+        }
+    }
+    #[test]
+    fn bounded_file_context_refuses_inventory_before_payload_traversal() {
+        for case in ["bytes", "files", "entries"] {
+            let tmp = Temp::new();
+            let snapshot = tmp.0.join("bounded");
+            fs::create_dir(&snapshot).unwrap();
+            fs::create_dir(snapshot.join("data")).unwrap();
+            let count = if case == "files" { 1025 } else { 1 };
+            let mut entries = BTreeMap::new();
+            for index in 0..count {
+                entries.insert(
+                    format!("file-{index}"),
+                    ProjectContextEntry::File {
+                        digest: format!("sha256:{}", "0".repeat(64)),
+                        byte_length: SafeInteger::new(if case == "bytes" {
+                            512 * 1024 * 1024 + 1
+                        } else {
+                            1
+                        })
+                        .unwrap(),
+                        mode: SafeInteger::new(0o644).unwrap(),
+                    },
+                );
+            }
+            if case == "entries" {
+                for index in 0..8192 {
+                    entries.insert(
+                        format!("directory-{index}"),
+                        ProjectContextEntry::Directory {
+                            mode: SafeInteger::new(0o700).unwrap(),
+                        },
+                    );
+                }
+            }
+            let definition = ProjectContextDefinition {
+                profile: CONTEXT_PROFILE.into(),
+                id: "urn:test:bounded-docker-context".into(),
+                nonsecret_inputs: true,
+                paths: entries.keys().cloned().collect(),
+                symlinks: ContextSymlinks::Refuse,
+            };
+            let mut manifest = ProjectContextManifest {
+                profile: CONTEXT_RECORD.into(),
+                definition_digest: canonical_digest(&definition).unwrap(),
+                entries,
+                digest: String::new(),
+            };
+            manifest.digest = address(&manifest).unwrap();
+            validate(&definition, &manifest).unwrap();
+            fs::write(
+                snapshot.join("selection.json"),
+                canonical_bytes(&definition).unwrap(),
+            )
+            .unwrap();
+            fs::write(
+                snapshot.join("manifest.json"),
+                canonical_bytes(&manifest).unwrap(),
+            )
+            .unwrap();
+            // No file payload exists: the distinct limit error demonstrates
+            // refusal before any attempt to open or hash those payloads.
+            let error = verified_file_context(&snapshot, &manifest.digest).unwrap_err();
+            assert!(
+                error.to_string().contains("PROJECT_CONTEXT_LIMIT"),
+                "{case}: {error}"
             );
         }
     }

@@ -616,3 +616,9 @@ export const parseLegacyProjection = (value) =>
   api().parseLegacyProjection(value);
 export const compileLegacyProjection = (document, generation, spec, options) =>
   api().compileLegacyProjection(document, generation, spec, options);
+
+export const emitLegacyTypeScriptProjection = (projection, options) =>
+  api().emitLegacyTypeScriptProjection(projection, options);
+
+export const stableLegacyJson = (value, pretty) => api().stableLegacyJson(value, pretty);
+export const digestLegacyValue = (value) => api().digestLegacyValue(value);

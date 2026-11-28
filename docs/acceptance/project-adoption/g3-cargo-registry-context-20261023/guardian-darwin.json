@@ -1,0 +1,48 @@
+{
+  "status": "passed-ordinary-guardian-regressions",
+  "platform": "Darwin x86_64",
+  "compilerBuildRun": false,
+  "containerControlsRun": false,
+  "guardianDigest": "sha256:d3cbb0dc12e6209e67c0eec838a0a39adfd7f4d66567237b1443bba0c2f8d0f6",
+  "groups": {
+    "control": "no-detach-policy-guardian-group",
+    "result": "passed",
+    "runner": 13996,
+    "innerGuard": 13997,
+    "tool": 13998,
+    "sleep": 13999,
+    "runnerGroup": 13996,
+    "innerGuardGroup": 13997,
+    "ordinarySurvivors": [],
+    "guardianHasIndependentGroup": true
+  },
+  "exits": {
+    "control": "ordinary-exit-and-empty-group-permission",
+    "result": "passed",
+    "cases": [
+      {
+        "case": "ordinary-success",
+        "result": "passed",
+        "exitCode": 0
+      },
+      {
+        "case": "ordinary-failure",
+        "result": "passed",
+        "exitCode": 7
+      },
+      {
+        "case": "timed-success",
+        "result": "passed",
+        "exitCode": 0
+      },
+      {
+        "case": "empty-group-EPERM",
+        "result": "passed"
+      },
+      {
+        "case": "live-group-EPERM",
+        "result": "refused"
+      }
+    ]
+  }
+}

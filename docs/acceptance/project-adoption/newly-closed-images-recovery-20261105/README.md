@@ -1,0 +1,10 @@
+# Freshly closed images: unchanged zero-only recovery
+The frontend2.5GB reservation was refused before its driver started:97,592,052,222retained allocated bytes left a92,052,222byte shortage under100GB. Canonical request9c545951-0c3a-4cc6-9c35-2b24565fb7b9 finished and released without an application command. The error/controller exit1 and all frozen inputs remain.
+
+After the separate planned maintenance closed three images, the exact [previously qualified4KiB worker](../small-block-sparse-recovery-20261105/sparse.py) was reused byte-for-byte on those three images with fresh whole-file hashes and identities. It passed the same three actual filesystem controls, wrote a durable intent/completion journal and reread every zero range before/after the real APFS operation.
+
+[Independent review](independent-review.json) rehashes all1,607,467,008logical bytes, confirms the same paths/inodes/size/modes/owners, and verifies576,884,736bytes of actual allocation reduction. The closed-image digests still match the maintenance review. Whole-zero coverage includes existing holes and is not itself saved allocation. APFS sharing means physical free-space recovery may differ.
+
+The512MiB native-exclusive job31a5997b-1a89-4085-9a59-fbe5a2893f14 completed0/released. No deletion, remount, service interruption, policy/trust/parallel change occurred. The database start identity was compared to its fresh post-maintenance baseline. Full images, private raw journals and frozen inputs stay on Norway; this directory keeps bounded review evidence. Application build/authentication acceptance remains pending.
+
+The next 3 GB declaration was also refused and released before the worker; the measured post-recovery total was97,015,704,062bytes, leaving a15,704,062byte shortage. Its [independent refusal review](frontend-3gb-admission-review.json) preserves the result. The next declaration uses2.8GB with a nominal184,295,938byte margin on that measurement. Canonical admission rechecks the actual total before executing the unchanged application work.

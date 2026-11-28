@@ -1,0 +1,177 @@
+{
+  "status": "passed",
+  "controls": [
+    {
+      "name": "unchanged-upstream-four-auth-page-tests",
+      "passed": true
+    },
+    {
+      "name": "invalid-registration-action",
+      "passed": true
+    },
+    {
+      "name": "successful-registration-action",
+      "passed": true
+    },
+    {
+      "name": "production-secure-session-cookie",
+      "passed": true
+    },
+    {
+      "name": "duplicate-registration-action-refusal",
+      "passed": true
+    },
+    {
+      "name": "invalid-login-action",
+      "passed": true
+    },
+    {
+      "name": "wrong-password-action-refusal",
+      "passed": true
+    },
+    {
+      "name": "successful-login-action",
+      "passed": true
+    },
+    {
+      "name": "off-origin-action-refusal-before-database-effect",
+      "passed": true
+    },
+    {
+      "name": "same-request-valid-origin-positive-control",
+      "passed": true
+    },
+    {
+      "name": "independent-second-user-registration",
+      "passed": true
+    },
+    {
+      "name": "owner-private-document-create-and-read",
+      "passed": true
+    },
+    {
+      "name": "cross-user-private-document-read-refusal",
+      "passed": true
+    },
+    {
+      "name": "cross-user-private-document-write-refusal",
+      "passed": true
+    },
+    {
+      "name": "guest-private-document-read-refusal",
+      "passed": true
+    },
+    {
+      "name": "dynamic-owner-private-page-and-id-bound-data",
+      "passed": true
+    },
+    {
+      "name": "dynamic-owner-second-id-replaces-visible-data",
+      "passed": true
+    },
+    {
+      "name": "dynamic-cross-user-public-page-readonly",
+      "passed": true
+    },
+    {
+      "name": "dynamic-cross-user-private-data-refusal",
+      "passed": true
+    },
+    {
+      "name": "dynamic-guest-public-page-readonly",
+      "passed": true
+    },
+    {
+      "name": "dynamic-guest-private-data-refusal",
+      "passed": true
+    },
+    {
+      "name": "dynamic-unseen-id-empty-response",
+      "passed": true
+    },
+    {
+      "name": "dynamic-missing-chat-id-query-refusal",
+      "passed": true
+    },
+    {
+      "name": "dynamic-extra-page-segment-refusal",
+      "passed": true
+    },
+    {
+      "name": "dynamic-stream-route-204",
+      "passed": true
+    },
+    {
+      "name": "dynamic-stream-post-method-refusal",
+      "passed": true
+    },
+    {
+      "name": "dynamic-stream-extra-segment-refusal",
+      "passed": true
+    },
+    {
+      "name": "dynamic-fixtures-unchanged-and-no-generation",
+      "passed": true
+    },
+    {
+      "name": "credential-and-cookie-evidence-barrier",
+      "passed": true
+    }
+  ],
+  "upstreamPageTests": 4,
+  "credentialsCaptured": false,
+  "rawHttpUploaded": false,
+  "traceEnabled": false,
+  "origin": "owned HTTPS loopback",
+  "productionServer": true,
+  "actionResponseCollector": "request-body-digest-bound HTTPS proxy; identity encoding; no body rewrite",
+  "actionResponseMaximumBytes": 1048576,
+  "upstreamTestDigest": "sha256:d4a2ea78a5e1019aedef533e8b778f4345a5efe1d2c8fbd0ddb42cbbda19bc66",
+  "browserVersion": "149.0.7827.55",
+  "initialSessionReadyPages": 6,
+  "lastAction": {
+    "httpStatus": 200,
+    "responseIsRsc": true,
+    "observedStates": [
+      "success"
+    ],
+    "expectedState": "success"
+  },
+  "lastDatabaseCount": 1,
+  "lastSessionType": "guest",
+  "lastSessionObservation": {
+    "principalType": "regular",
+    "expectedEmailMatches": true,
+    "principalIdPresent": true
+  },
+  "originPositiveCookieObservation": {
+    "serverIssuedSessionCookie": true,
+    "sessionCookieChanged": true
+  },
+  "dynamicRouteWitness": {
+    "profile": "patamaps-pinned-dynamic-runtime-1",
+    "pagePattern": "/chat/[id]",
+    "dataEndpoint": "/api/messages",
+    "fixturesUnchanged": true,
+    "generationPostAttempts": 0,
+    "rawFixtureValuesPublished": false,
+    "pageAuthorization": "client shell; data API enforces private visibility",
+    "streamBehavior": "constant204 stub; no resumable generation claim",
+    "ownerPathAndQueryIdMatched": true,
+    "ownerPrivateMessageRendered": true,
+    "distinctSecondIdRendered": true,
+    "crossUserPublicReadonly": true,
+    "crossUserPrivateStatus": 403,
+    "guestPublicReadonly": true,
+    "guestPrivateStatus": 403,
+    "unseenIdEmptyAndNotPersisted": true,
+    "missingQueryStatus": 400,
+    "extraPageSegmentStatus": 404,
+    "streamGetStatus": 204,
+    "streamPostStatus": 405,
+    "extraStreamSegmentStatus": 404,
+    "fixtureDigest": "sha256:fd405746096cfe3be77d1cbd6f94b66b8a7d6e0634ca1707d339092f63e1f021"
+  },
+  "ownedBrowserStopped": true,
+  "ownedHttpsProxyStopped": true
+}

@@ -1,0 +1,32 @@
+"""Bounded failed-run review; only the completed source-installed case is checked."""
+from pathlib import Path
+import hashlib,io,json,subprocess,zipfile
+root=Path('/Volumes/dev_src_case_sensitive/projects/patamaps');gh=root/'.tools/intel-gh-2.102.0-20261015/unpacked/gh_2.102.0_macOS_amd64/bin/gh'
+def api(path,raw=False):
+ data=subprocess.check_output([str(gh),'api','repos/roryscot/patamaps/'+path],timeout=90)
+ return data if raw else json.loads(data)
+def digest(data):return 'sha256:'+hashlib.sha256(data).hexdigest()
+run=api('actions/runs/40070401886');assert run['status']=='completed' and run['conclusion']=='failure' and run['head_sha']=='851e375d82bf6967befe44b30e5c2351020ea753'
+meta=api('actions/artifacts/12550787495');raw=api('actions/artifacts/12550787495/zip',True)
+assert len(raw)==meta['size_in_bytes'] and digest(raw)==meta['digest']
+z=zipfile.ZipFile(io.BytesIO(raw));parent=json.loads(z.read('receipt.json'))
+assert parent['status']=='failed' and 'Combined installed Next qualification storage boundary' in parent['error'] and set(parent['cases'])=={'source'} and not parent['fullRetainedNextBundleAccepted']
+source=json.loads(z.read('source/receipt.json'));runtime=json.loads(z.read('source/runtime.json'));browser=json.loads(z.read('source/browser-auth.json'));probe=json.loads(z.read('source/standalone-probe.json'));owned=json.loads(z.read('source/retained-owned.json'))
+assert source['status']=='passed-pinned-chatbot-source-build-auth' and source['installedSourceInventoryUnchanged'] and source['sourceRevision'] is None
+assert runtime['status']==browser['status']=='passed' and browser['upstreamPageTests']==4
+expected=json.loads((root/'docs/acceptance/project-adoption/g5-next-retained-runtime-20261024/accepted-40069762886/browser-auth.json').read_bytes())
+assert len(browser['controls'])==28 and {c['name'] for c in browser['controls']}=={c['name'] for c in expected['controls']} and all(c['passed'] is True for c in browser['controls'])
+assert source['retainedSelectedExecution']==dict(status='completed-selected-project-command',postExecutionSelectionVerified=True,selectionPointerUnchanged=True)
+assert probe['retainedRuntimeAccepted'] and probe['standaloneTreeUnchanged'] and source['generatedOutputObservation']['changedFiles']==0
+actual=runtime['retainedRuntime']
+for key in ['selectedGenerationUnchanged','producerUnavailableThroughoutBrowser','renamedProducerPathsRestored','allOwnedContainersStopped','readonlyWriteRefused','cacheQuotaFailurePassed']:assert actual[key] is True
+assert runtime['ownedListenersStopped'] and runtime['ownedProcessGroupsStopped'] and len(owned['containers'])==2 and all(c['confirmedStopped'] for c in owned['containers'])
+assert 'native/runtime.json' not in z.namelist() and 'native/retained-owned.json' not in z.namelist()
+jobs=api('actions/runs/40070401886/jobs?per_page=100')['jobs'];job=next(j for j in jobs if any(s['name']=='Confirm only owned retained containers stopped' for s in j.get('steps',[])))
+assert next(s for s in job['steps'] if s['name']=='Confirm only owned retained containers stopped')['conclusion']=='success'
+folder=root/'docs/acceptance/project-adoption/g5-installed-retained-next-20261024/attempt-1';folder.mkdir()
+review=dict(status='reviewed-source-case-in-storage-refused-installed-workflow',runId=40070401886,sourceRevision=run['head_sha'],artifactId=meta['id'],artifactDigest=meta['digest'],artifactBytes=len(raw),artifactExpiresAt=meta['expires_at'],sourceInstalledRuntimePassed=True,nativeInstalledRuntimeRun=False,sourceCaseBrowserGroupsPassed=28,sourceCaseUpstreamTestsPassed=4,sourceCaseSelectedGenerationUnchanged=True,sourceCaseOwnedRuntimesStopped=True,alwaysOwnedContainerCleanupPassed=True,fullRetainedNextBundleAccepted=False,allSourceMembersIndependentlyMatchedToGit=False,storageLimitBytes=4000000000,filesDeleted=0)
+(folder/'review.json').write_text(json.dumps(review,indent=2)+'\n')
+for name in ['receipt.json','runtime.json','browser-auth.json','standalone-probe.json']:(folder/('source-'+name)).write_bytes(z.read('source/'+name))
+(folder/'review-source.py.txt').write_bytes(Path(__file__).read_bytes())
+print(json.dumps(review))

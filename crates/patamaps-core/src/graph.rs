@@ -7,6 +7,7 @@ pub const MAX_MAPPINGS: usize = 100_000;
 pub const MAX_AUTHORITIES: usize = 1_024;
 pub const MAX_ENDPOINTS: usize = 1_000_000;
 pub const MAX_RELATIONS: usize = 4_096;
+pub(crate) const MAX_PACKS: usize = 64;
 pub const MAX_ISSUES: usize = 1_000;
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Serialize)]
@@ -43,6 +44,18 @@ impl Issue {
 #[derive(Debug, thiserror::Error)]
 #[error("candidate rejected with {} issue(s)", .0.len())]
 pub struct CheckError(pub Vec<Issue>);
+
+impl CheckError {
+    /// Borrows the validation issues without consuming the error.
+    pub fn issues(&self) -> &[Issue] {
+        &self.0
+    }
+
+    /// Returns the validation issues, consuming the error.
+    pub fn into_issues(self) -> Vec<Issue> {
+        self.0
+    }
+}
 
 impl From<ContractError> for CheckError {
     fn from(error: ContractError) -> Self {
@@ -280,7 +293,7 @@ impl CheckedGraph {
             || document.mappings.len() > MAX_MAPPINGS
             || document.authorities.len() > MAX_AUTHORITIES
             || endpoints > MAX_ENDPOINTS
-            || packs.len() > 64
+            || packs.len() > MAX_PACKS
             || packs.iter().map(|p| p.relations.len()).sum::<usize>() > MAX_RELATIONS
             || document.authorities.iter().any(|a| a.facts.len() > 128)
         {
@@ -887,6 +900,17 @@ impl CheckedGraph {
         Ok(count != indegree.len())
     }
 
+    /// Applies an edit to a cloned draft and checks it using the same relation packs.
+    ///
+    /// The original checked graph remains available if validation fails. The
+    /// closure edits draft records, so it cannot grant admission or authority.
+    /// This clones and rechecks the graph; it is not an incremental update.
+    pub fn try_edit(&self, edit: impl FnOnce(&mut GraphDocument)) -> Result<Self, CheckError> {
+        let mut draft = self.document.clone();
+        edit(&mut draft);
+        Self::check(draft, self.packs.clone())
+    }
+
     pub fn document(&self) -> &GraphDocument {
         &self.document
     }
@@ -921,6 +945,18 @@ impl CheckedGraph {
             .get(id)
             .map(|&(pi, ri)| &self.packs[pi].relations[ri])
     }
+    /// Returns mappings with this relation in document order.
+    ///
+    /// An unknown or unused relation returns an empty iterator. Results borrow
+    /// the checked graph; no mappings are cloned.
+    pub fn mappings_for_relation(&self, relation: &str) -> impl Iterator<Item = &Mapping> {
+        self.by_relation
+            .get(relation)
+            .into_iter()
+            .flatten()
+            .map(|&i| &self.document.mappings[i])
+    }
+
     pub fn incident(&self, id: &str) -> impl Iterator<Item = &Mapping> {
         self.incident
             .get(id)

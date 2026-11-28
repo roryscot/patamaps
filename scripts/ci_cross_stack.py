@@ -92,6 +92,8 @@ def main():
             receipt["projectBuilds"] = verify_builds(ROOT, work, env, run)
             from project_build_context_controls import verify as verify_context_builds
             receipt["projectContextBuilds"] = verify_context_builds(ROOT, work, env, run)
+            from project_preparation_controls import verify as verify_preparation
+            receipt["projectPreparation"] = verify_preparation(ROOT, work, env, run, fixture_work=work)
             from project_next_build_controls import verify as verify_next_build
             receipt["nextBuildObservations"] = verify_next_build(ROOT, work, env, run)
             from project_context_controls import verify as verify_context
@@ -105,6 +107,11 @@ def main():
             run("project-watch-context-controls", [sys.executable, "-B", ROOT / "scripts/project_watch_controls.py",
                 "--work", watch_context_work, "--isolated-ci", "--context", work / "project-build-contexts/watch-binding.json"], timeout=300)
             receipt["projectContextWatch"] = json.loads((watch_context_work / "receipt.json").read_text())
+            watch_preparation_work = work / "project-watch-preparation"
+            run("project-watch-preparation-controls", [sys.executable, "-B", ROOT / "scripts/project_watch_controls.py",
+                "--work", watch_preparation_work, "--isolated-ci", "--prepare-contract",
+                "--context", work / "project-build-contexts/watch-binding.json"], timeout=300)
+            receipt["projectPreparationWatch"] = json.loads((watch_preparation_work / "receipt.json").read_text())
 
             from project_http_json import verify as verify_http_json
             receipt["jsonHttpContracts"] = verify_http_json(ROOT, work, env, run)

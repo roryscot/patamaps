@@ -12,10 +12,10 @@
 [package]
 edition = "2021"
 rust-version = "1.86"
-name = "icu_collator"
-version = "2.2.1"
+name = "patamaps-icu-collator"
+version = "2.2.1-patamaps.1"
 authors = ["The ICU4X Project Developers"]
-build = false
+build = "build.rs"
 include = [
     "data/**/*",
     "src/**/*",
@@ -26,6 +26,8 @@ include = [
     "LICENSE",
     "README.md",
     "build.rs",
+    "PATAMAPS-PATCH.md",
+    "PATAMAPS-UPSTREAM.json",
 ]
 autolib = false
 autobins = false
@@ -47,7 +49,7 @@ categories = [
     "embedded",
 ]
 license = "Unicode-3.0"
-repository = "https://github.com/unicode-org/icu4x"
+repository = "https://github.com/roryscot/patamaps"
 
 [package.metadata.docs.rs]
 all-features = true
@@ -229,3 +231,9 @@ check-cfg = [
     "cfg(icu4x_run_size_tests)",
     "cfg(icu4x_unstable_fast_trie_only)",
 ]
+
+[build-dependencies.sha2]
+version = "=0.10.9"
+
+# The fork also builds independently when nested under another checkout.
+[workspace]

@@ -782,3 +782,117 @@ pub struct ProjectionSpec {
     )]
     pub metadata: Option<JsonObject>,
 }
+
+// These helpers construct draft values. CheckedGraph validation is a separate,
+// explicit operation; no authority, relation semantics, or provenance is inferred.
+impl GraphDocument {
+    /// Creates an empty, unchecked graph document with explicit identity and namespace.
+    pub fn new(id: impl Into<String>, namespace: impl Into<String>) -> Self {
+        Self {
+            schema: None,
+            schema_version: ProtocolVersion::Draft1,
+            document_type: GraphType::Graph,
+            id: id.into(),
+            namespace: namespace.into(),
+            label: None,
+            revision: None,
+            relation_packs: None,
+            entities: Vec::new(),
+            mappings: Vec::new(),
+            authorities: Vec::new(),
+            metadata: None,
+            extensions: None,
+        }
+    }
+}
+
+impl Entity {
+    /// Creates an unchecked entity with an explicit stable identity and kind.
+    pub fn new(id: impl Into<String>, kind: impl Into<String>) -> Self {
+        Self {
+            id: id.into(),
+            kind: kind.into(),
+            label: None,
+            schema: None,
+            locators: None,
+            attributes: None,
+            provenance: None,
+        }
+    }
+}
+
+impl Provenance {
+    /// Creates attribution with an explicit status and asserting party.
+    pub fn new(status: ProvenanceStatus, asserted_by: impl Into<String>) -> Self {
+        Self {
+            status,
+            asserted_by: asserted_by.into(),
+            observed_at: None,
+            source_revision: None,
+            confidence: None,
+        }
+    }
+}
+
+impl Mapping {
+    /// Creates an unchecked correspondence with explicit endpoints and semantics.
+    pub fn new(
+        id: impl Into<String>,
+        relation: impl Into<String>,
+        sources: impl IntoIterator<Item = impl Into<String>>,
+        targets: impl IntoIterator<Item = impl Into<String>>,
+        cardinality: Cardinality,
+        lossiness: Lossiness,
+        provenance: Provenance,
+    ) -> Self {
+        Self {
+            id: id.into(),
+            relation: relation.into(),
+            sources: sources.into_iter().map(Into::into).collect(),
+            targets: targets.into_iter().map(Into::into).collect(),
+            cardinality,
+            lossiness,
+            provenance,
+            transform: None,
+            invariants: None,
+            attributes: None,
+        }
+    }
+}
+
+impl Relation {
+    /// Creates a relation definition with explicit cycle behavior.
+    pub fn new(id: impl Into<String>, cycle_policy: CyclePolicy) -> Self {
+        Self {
+            id: id.into(),
+            cycle_policy,
+            description: None,
+            source_kinds: None,
+            target_kinds: None,
+            cardinalities: None,
+            transitive: None,
+            symmetric: None,
+            inverse: None,
+            composes_with: None,
+            impact_direction: None,
+            disjoint_with: None,
+        }
+    }
+}
+
+impl RelationPack {
+    /// Creates an empty, unchecked relation pack with explicit identity and version.
+    pub fn new(id: impl Into<String>, version: impl Into<String>) -> Self {
+        Self {
+            schema: None,
+            schema_version: ProtocolVersion::Draft1,
+            document_type: PackType::RelationPack,
+            id: id.into(),
+            version: version.into(),
+            description: None,
+            relations: Vec::new(),
+            imports: None,
+            laws: None,
+        }
+    }
+}

@@ -1,37 +1,79 @@
 //! Registered relation data. Registration never admits a consumer generation.
-use crate::{
-    CheckError, CheckedGraph, ImportedLegacyRelationPack, Issue, import_legacy_relation_pack,
-};
+use crate::{CheckError, CheckedGraph, Issue};
+#[cfg(feature = "legacy-compat")]
+use crate::{ImportedLegacyRelationPack, import_legacy_relation_pack};
 use patamaps_contracts::{GraphDocument, Relation, RelationLaw, RelationPack, parse};
+#[cfg(feature = "legacy-compat")]
 use serde_json::Value;
+#[cfg(feature = "legacy-compat")]
 use std::collections::HashSet;
+
+fn pack_conflict(existing: &RelationPack, pack: &RelationPack) -> CheckError {
+    CheckError(vec![Issue::error(
+        "RELATION_PACK_CONFLICT",
+        if existing.version != pack.version {
+            format!(
+                "Relation pack {} is already registered at version {}",
+                pack.id, existing.version
+            )
+        } else {
+            format!(
+                "Relation pack {}@{} conflicts with its registered definition",
+                pack.id, pack.version
+            )
+        },
+        &pack.id,
+    )])
+}
 
 /// Registration preserves pack and relation order. Each mutation validates the
 /// complete proposed registry before replacing the previous state.
 #[derive(Debug, Clone)]
 pub struct RelationRegistry {
     packs: Vec<RelationPack>,
+    #[cfg(feature = "legacy-compat")]
     legacy: Option<Vec<ImportedLegacyRelationPack>>,
 }
 
 impl RelationRegistry {
+    /// Validates the complete supplied set, allowing imports in either order.
+    /// Identical repeated packs are retained once, at their first position.
     pub fn new(packs: impl IntoIterator<Item = RelationPack>) -> Result<Self, CheckError> {
         let mut registry = Self {
             packs: Vec::new(),
+            #[cfg(feature = "legacy-compat")]
             legacy: None,
         };
         for pack in packs {
-            registry.register_pack(pack)?;
+            if let Some(existing) = registry.get_pack(&pack.id) {
+                if existing == &pack {
+                    continue;
+                }
+                return Err(pack_conflict(existing, &pack));
+            }
+            if registry.packs.len() == crate::graph::MAX_PACKS {
+                return Err(CheckError(vec![Issue::error(
+                    "GRAPH_RESOURCE_LIMIT",
+                    "Graph exceeds the declared draft profile limits",
+                    "urn:patamaps:registry:validation",
+                )]));
+            }
+            registry.packs.push(pack);
         }
+        let empty: GraphDocument = parse(br#"{"schemaVersion":"0.1.0","documentType":"graph","id":"urn:patamaps:registry:validation","namespace":"registry","entities":[],"mappings":[],"authorities":[]}"#)?;
+        CheckedGraph::check(empty, registry.packs.clone())?;
         Ok(registry)
     }
 
     pub fn with_core() -> Result<Self, CheckError> {
-        Self::new([parse(include_bytes!("../../../relation-packs/core.json"))?])
+        Self::new([parse(include_bytes!(
+            "../package-data/relation-packs/core.json"
+        ))?])
     }
 
     /// Interpret the pinned legacy core's definitions with their original pack
     /// identity. The original data and legacy digest remain separately available.
+    #[cfg(feature = "legacy-compat")]
     pub fn with_legacy_core() -> Result<Self, CheckError> {
         Self::from_legacy_packs([parse(include_bytes!("legacy_core.json"))?])
     }
@@ -40,6 +82,7 @@ impl RelationRegistry {
     /// documents. Empty 1.0 kind lists retain their original meaning; executable
     /// dependencies bind to original addresses, never rewritten native views.
     /// This does not reproduce mutable or unchecked legacy JS registration.
+    #[cfg(feature = "legacy-compat")]
     pub fn from_legacy_packs(packs: impl IntoIterator<Item = Value>) -> Result<Self, CheckError> {
         let mut registry = Self {
             packs: Vec::new(),
@@ -105,11 +148,13 @@ impl RelationRegistry {
 
     /// Original envelopes and addresses for imported snapshots. Ordinary modern
     /// registries return None; this data grants no checked/admitted capability.
+    #[cfg(feature = "legacy-compat")]
     pub fn imported_packs(&self) -> Option<&[ImportedLegacyRelationPack]> {
         self.legacy.as_deref()
     }
 
     pub fn register_pack(&mut self, pack: RelationPack) -> Result<(), CheckError> {
+        #[cfg(feature = "legacy-compat")]
         if self.legacy.is_some() {
             return Err(CheckError(vec![Issue::error(
                 "LEGACY_REGISTRY_SNAPSHOT",
@@ -121,21 +166,7 @@ impl RelationRegistry {
             if existing == &pack {
                 return Ok(());
             }
-            return Err(CheckError(vec![Issue::error(
-                "RELATION_PACK_CONFLICT",
-                if existing.version != pack.version {
-                    format!(
-                        "Relation pack {} is already registered at version {}",
-                        pack.id, existing.version
-                    )
-                } else {
-                    format!(
-                        "Relation pack {}@{} conflicts with its registered definition",
-                        pack.id, pack.version
-                    )
-                },
-                &pack.id,
-            )]));
+            return Err(pack_conflict(existing, &pack));
         }
         let mut proposed = self.packs.clone();
         proposed.push(pack);

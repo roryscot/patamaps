@@ -1,0 +1,357 @@
+{
+  "status": "passed-actual-axum-linux-build-scope",
+  "upstream": "https://github.com/tokio-rs/axum.git",
+  "sourceCommit": "fc78d5bcdb276bd6fb53cf2db55e91757eabb469",
+  "commands": [
+    {
+      "label": "source-init",
+      "argv": [
+        "git",
+        "init",
+        "/home/runner/work/_temp/patamaps-actual-axum-39296124316-1/source"
+      ],
+      "exitCode": 0,
+      "seconds": 0.004
+    },
+    {
+      "label": "source-fetch",
+      "argv": [
+        "git",
+        "fetch",
+        "--depth=1",
+        "https://github.com/tokio-rs/axum.git",
+        "fc78d5bcdb276bd6fb53cf2db55e91757eabb469"
+      ],
+      "exitCode": 0,
+      "seconds": 0.315
+    },
+    {
+      "label": "source-checkout",
+      "argv": [
+        "git",
+        "checkout",
+        "--detach",
+        "FETCH_HEAD"
+      ],
+      "exitCode": 0,
+      "seconds": 0.064
+    },
+    {
+      "label": "source-head",
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "exitCode": 0,
+      "seconds": 0.004
+    },
+    {
+      "label": "inventory-4",
+      "argv": [
+        "git",
+        "ls-files",
+        "-z"
+      ],
+      "exitCode": 0,
+      "seconds": 0.004
+    },
+    {
+      "label": "source-status-before",
+      "argv": [
+        "git",
+        "status",
+        "--porcelain=v1"
+      ],
+      "exitCode": 0,
+      "seconds": 0.016
+    },
+    {
+      "label": "cargo-path",
+      "argv": [
+        "rustup",
+        "which",
+        "--toolchain",
+        "1.99.0",
+        "cargo"
+      ],
+      "exitCode": 0,
+      "seconds": 0.008
+    },
+    {
+      "label": "rustc-version",
+      "argv": [
+        "/home/runner/.rustup/toolchains/1.99.0-x86_64-unknown-linux-gnu/bin/rustc",
+        "-vV"
+      ],
+      "exitCode": 0,
+      "seconds": 0.008
+    },
+    {
+      "label": "fetch-locked-linux",
+      "argv": [
+        "/home/runner/.rustup/toolchains/1.99.0-x86_64-unknown-linux-gnu/bin/cargo",
+        "fetch",
+        "--locked",
+        "--target",
+        "x86_64-unknown-linux-gnu"
+      ],
+      "exitCode": 0,
+      "seconds": 1.167
+    },
+    {
+      "label": "request-digest",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/release/patamaps",
+        "json",
+        "digest"
+      ],
+      "exitCode": 0,
+      "seconds": 0.005
+    },
+    {
+      "label": "native-linux-observation",
+      "argv": [
+        "/home/runner/work/patamaps/patamaps/target/release/patamaps",
+        "discover-native"
+      ],
+      "exitCode": 0,
+      "seconds": 0.266
+    },
+    {
+      "label": "build-actual-workspace",
+      "argv": [
+        "/home/runner/.rustup/toolchains/1.99.0-x86_64-unknown-linux-gnu/bin/cargo",
+        "build",
+        "--workspace",
+        "--lib",
+        "--locked",
+        "--offline",
+        "--features",
+        "axum/ws",
+        "--message-format=json"
+      ],
+      "exitCode": 0,
+      "seconds": 13.148
+    },
+    {
+      "label": "test-actual-workspace",
+      "argv": [
+        "/home/runner/.rustup/toolchains/1.99.0-x86_64-unknown-linux-gnu/bin/cargo",
+        "test",
+        "--workspace",
+        "--lib",
+        "--locked",
+        "--offline",
+        "--features",
+        "axum/ws"
+      ],
+      "exitCode": 0,
+      "seconds": 41.483
+    },
+    {
+      "label": "inventory-13",
+      "argv": [
+        "git",
+        "ls-files",
+        "-z"
+      ],
+      "exitCode": 0,
+      "seconds": 0.004
+    },
+    {
+      "label": "source-status-after",
+      "argv": [
+        "git",
+        "status",
+        "--porcelain=v1"
+      ],
+      "exitCode": 0,
+      "seconds": 0.016
+    }
+  ],
+  "controls": [
+    "actual-resolved-linux-metadata-with-explicit-ws",
+    "all-four-actual-workspace-libraries-compiled-on-linux",
+    "actual-upstream-workspace-library-tests"
+  ],
+  "filesDeleted": 0,
+  "applicationAcceptance": false,
+  "linuxTargetCompilationEstablished": true,
+  "limitations": [
+    "Public library workspace, not a deployed HTTP application.",
+    "Cargo registry cache is external; this is not hermetic dependency closure.",
+    "No actual Next deployment or image/browser acceptance is established.",
+    "Cargo cache was not cleared; command durations are not cold-build or exclusive performance measurements.",
+    "Compiled-library digests and Cargo events are retained in diagnostics; library payload bytes were not included in that small artifact."
+  ],
+  "compilerDigest": "sha256:9054791c53173c8378d4bc60e4cbeec536ea1bc43497b376046d08cf8fc10d61",
+  "cargoDigest": "sha256:e951141cc55a6cd7b9876d187bd30a3720e6086b99413af95e3b8de1cdd72f14",
+  "rustcDigest": "sha256:f3834d26669b03f6855fa54bd2381443123e860167bc0c7a8dd137e5cf6e5e4f",
+  "rustcVersion": "rustc 1.99.0 (b940084d7 2026-09-28)\nbinary: rustc\ncommit-hash: b940084d7eb6a299eb4bfeb8e34901bc051e7ac4\ncommit-date: 2026-09-28\nhost: x86_64-unknown-linux-gnu\nrelease: 1.99.0\nLLVM version: 23.1.1\n",
+  "sourceFiles": 505,
+  "sourceInventoryDigest": "sha256:5989ce076dabefb2d8514e59e2aa6d154000c9303b8aaee2555a200f65742504",
+  "artifacts": [
+    {
+      "file": "target/debug/libaxum_core.rlib",
+      "digest": "sha256:6d76fbb7ae6dc1471b6cf7054057ff8a9ad8be1e506f672180bbced493cf6a46",
+      "bytes": 2740314,
+      "target": "axum_core"
+    },
+    {
+      "file": "target/debug/deps/libaxum_core-ae490f21d637ffcc.rmeta",
+      "digest": "sha256:a9a9d23bbf9d99b631f0acc119cb5c4b6f0c9a322e4708dcb0eea37f9662ec5b",
+      "bytes": 2167042,
+      "target": "axum_core"
+    },
+    {
+      "file": "target/debug/libaxum_macros.so",
+      "digest": "sha256:e9b63ea745d3d6edfe40319f6326eb362bdb9caca3e5a7bbe4aab860e04ad74f",
+      "bytes": 4647280,
+      "target": "axum_macros"
+    },
+    {
+      "file": "target/debug/libaxum_extra.rlib",
+      "digest": "sha256:dfb2ee0c0e85e4ca2036508f2778c8b168327fa9c7e0933e2b2771d68b551ef6",
+      "bytes": 237738,
+      "target": "axum_extra"
+    },
+    {
+      "file": "target/debug/deps/libaxum_extra-fe231db5ff0293d0.rmeta",
+      "digest": "sha256:66ce01c34dde65b38513dad0a3c0223d8f717e0897ec484babadcf20104c397a",
+      "bytes": 235502,
+      "target": "axum_extra"
+    },
+    {
+      "file": "target/debug/libaxum.rlib",
+      "digest": "sha256:164ea8d4b2745ac3342708209a109a071fbe18b02a4ee7597807a143ef140ae9",
+      "bytes": 7758778,
+      "target": "axum"
+    },
+    {
+      "file": "target/debug/deps/libaxum-d0e626efcbbf11d2.rmeta",
+      "digest": "sha256:da8fdac8b64dfdadf200a187d04fe2a9766af740b5d9b59da8bc42a1884a06b6",
+      "bytes": 5646008,
+      "target": "axum"
+    }
+  ],
+  "sourceInputsUnchanged": true,
+  "metadataCompilationClaimRemainsFalse": true,
+  "qualification": "pinned-existing-Axum-library-build-and-tests",
+  "ci": {
+    "run": 39296124316,
+    "artifact": 12209233111,
+    "bytes": 306212,
+    "digest": "sha256:aed2928bc128c850843fe78dfc610b2b78f7d7a223610ee43a5e5ec63e4c3990",
+    "sourceCommit": "4f31b735de06d973abbeddcc1dfe4839c5ae6afd",
+    "testedMerge": "847b0e7884183484491d2485c5df51f9c9dd8174",
+    "url": "https://github.com/roryscot/patamaps/actions/runs/39296124316",
+    "allFourJobsPassed": true,
+    "trackedTreeBinding": {
+      "commitTrees": {
+        "4f31b735de06d973abbeddcc1dfe4839c5ae6afd": "c1a36537b214cd2e97290d897dec2a3bc86bcc97",
+        "847b0e7884183484491d2485c5df51f9c9dd8174": "c1a36537b214cd2e97290d897dec2a3bc86bcc97"
+      },
+      "localTree": "c1a36537b214cd2e97290d897dec2a3bc86bcc97",
+      "allTrackedSourceTreesIdentical": true
+    }
+  },
+  "upstreamTests": {
+    "passed": 459,
+    "failed": 0,
+    "ignored": 0,
+    "perLibrary": {
+      "axum": 423,
+      "axum-core": 16,
+      "axum-extra": 15,
+      "axum-macros": 5
+    }
+  },
+  "compilerEvents": [
+    {
+      "target": "axum_core",
+      "features": [
+        "tracing"
+      ],
+      "targetKinds": [
+        "lib"
+      ]
+    },
+    {
+      "target": "axum_macros",
+      "features": [
+        "default"
+      ],
+      "targetKinds": [
+        "proc-macro"
+      ]
+    },
+    {
+      "target": "axum_extra",
+      "features": [
+        "default",
+        "tracing"
+      ],
+      "targetKinds": [
+        "lib"
+      ]
+    },
+    {
+      "target": "axum",
+      "features": [
+        "default",
+        "form",
+        "http1",
+        "json",
+        "matched-path",
+        "original-uri",
+        "query",
+        "tokio",
+        "tracing",
+        "ws"
+      ],
+      "targetKinds": [
+        "lib"
+      ]
+    }
+  ],
+  "commandLogDigests": {
+    "build-actual-workspace.stderr.log": "sha256:eee8befe8f5a3ee1575bd0718b8d61509f85def809ccc6c2a163b7abe659d568",
+    "build-actual-workspace.stdout.log": "sha256:2655b2c9d3567368f8ce9eb003c4535d9b651bda5f2f275900b115e46ab3db2a",
+    "cargo-path.stderr.log": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "cargo-path.stdout.log": "sha256:c15b86fb353a905df8e0e155072f56ce51cb7986f607161716fb2f6ea0e06972",
+    "fetch-locked-linux.stderr.log": "sha256:8919471b6ff0dabb9b2a6d488985f31c45666436f4b34d7be5d1ffa2b939d2d9",
+    "fetch-locked-linux.stdout.log": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "inventory-13.stderr.log": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "inventory-4.stderr.log": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "inventory-13.stdout.log": "sha256:030cdb0481c1e8bb2632979bfa9cdcab66310f7aea1f0ad019d5b4c019249de6",
+    "inventory-4.stdout.log": "sha256:030cdb0481c1e8bb2632979bfa9cdcab66310f7aea1f0ad019d5b4c019249de6",
+    "native-linux-observation.stderr.log": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "native-linux-observation.stdout.log": "sha256:62f7f221fc2420afe1f51a61f41ee45dda00dcc754fee7b379ab1c2984832c3b",
+    "request-digest.stderr.log": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "request-digest.stdout.log": "sha256:cb195fc92b08e63557ae7ce7be3af27ba2d9782c723c4f5b49f4592bc4349e87",
+    "rustc-version.stderr.log": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "rustc-version.stdout.log": "sha256:b569b0c98ea3133c7252b4b8ea6b39b7b353813df0dd5f5c412c355691424112",
+    "source-checkout.stderr.log": "sha256:9f16160f58a0ce8c07e67ea783513933d07bff548acf91417eaf823eab072237",
+    "source-checkout.stdout.log": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "source-fetch.stderr.log": "sha256:032d1eda9478d23d4bb9251269ace235ba676df1fbd70658b6fc33e4ba348706",
+    "source-head.stderr.log": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "source-fetch.stdout.log": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "source-head.stdout.log": "sha256:27f9618166ac603ed78bc1ff024017d113dbd13be42e12ae0a285ac3b9f19c27",
+    "source-init.stderr.log": "sha256:3e70934f1909b0f5a846d62237fcc1509d733b9fb0321187024723dfc67176d3",
+    "source-init.stdout.log": "sha256:64b695b7b15bf506536e0646c8ae6bba403645f76cf5c3cecfe70dd500d8ee72",
+    "source-status-after.stderr.log": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "source-status-after.stdout.log": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "source-status-before.stderr.log": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "source-status-before.stdout.log": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "test-actual-workspace.stderr.log": "sha256:632565b953dbe2215861c4f345ca1b130a88d27b1b7685dd8f68c283ce4e6528",
+    "test-actual-workspace.stdout.log": "sha256:463ab3499211f39c31dcf4d4ee228c461955c536ea97029536b92a3f4e6e4515"
+  },
+  "scopeDistinctions": {
+    "metadataProviderExecutedBuildScripts": false,
+    "buildAndTestsExecutedSeparately": true,
+    "retainedProjectBuildWorkflowExercised": false,
+    "linuxApplicationDeploymentEstablished": false,
+    "nativeArtifactArchitectureIndependentlyInspected": false
+  }
+}

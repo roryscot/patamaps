@@ -1,0 +1,58 @@
+{
+  "profile": {
+    "profile": "patamaps-chatbot-canonical-session-proxy-2",
+    "upstreamConfigDigest": "sha256:856cc04806b203481ad9722b92d3f52907a618468ee79129f98373b4ae86e075",
+    "rules": {
+      "beforeFiles": [
+        {
+          "source": "/qualified/auth/:page(login|register)",
+          "destination": "/:page",
+          "has": [
+            {
+              "type": "header",
+              "key": "x-patamaps-rewrite",
+              "value": "enabled"
+            }
+          ],
+          "missing": [
+            {
+              "type": "query",
+              "key": "blocked"
+            }
+          ]
+        }
+      ],
+      "afterFiles": [
+        {
+          "source": "/qualified/session",
+          "destination": "http://127.0.0.1:58905/api/auth/session",
+          "has": [
+            {
+              "type": "query",
+              "key": "view",
+              "value": "session"
+            }
+          ],
+          "missing": [
+            {
+              "type": "header",
+              "key": "x-patamaps-block"
+            }
+          ]
+        }
+      ],
+      "fallback": []
+    },
+    "canonicalOwnerPort": 58905,
+    "canonicalOwnerOrigin": "http://127.0.0.1:58905",
+    "originalInternalSessionRewriteAccepted": false,
+    "originalUpstreamUnchanged": true,
+    "qualificationOverlay": true
+  },
+  "profileDigest": "sha256:13e8ba2363f9b080e78c3f1c1db95b39c2ab298dc0075c54b052548e337d3a7a",
+  "originalConfigDigest": "sha256:856cc04806b203481ad9722b92d3f52907a618468ee79129f98373b4ae86e075",
+  "derivedConfigDigest": "sha256:67c07c06a079787e9ff6a0c5e2225414b9c7e26254f9c3f991c56412aa6a5885",
+  "sourceFile": "patamaps-rewrite-profile.json",
+  "upstreamBehaviorClaim": false,
+  "upstreamConfigGitBlob": "bfe7242c81c4c4e32cd7095c07ecf5d32d5100fe"
+}

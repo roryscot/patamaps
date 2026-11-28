@@ -1,0 +1,6 @@
+# Registered stream output correction
+Independent review of five actual successful engine calls found ten exact output documents. The staged guard both forwarded live registered child streams and wrote the registrar's final captured streams. This is a real executor defect, not a collector-schema mismatch.
+
+The only proposed core change forwards live output for ordinary commands; registered output remains bounded by the existing registrar and is emitted exactly once from its final capture. Byte counters and heartbeat/progress tracking still observe registered data. No registration source, receiver, kernel helper, controller, stop/probe, profile, ownership, fair queue, policy or installed file changes.
+
+Requalify the affected genuine normal/cancellation/crash/parent-death and all six negative cases with one registered runtime. Add per-case markers and require exactly one matching engine document for each of the five successful negative controls and normal engine case; zero for binding refusal. Keep prior five lifecycle passes and six observed holds at their actual source/scope; preserve the new failed independent review. Reuse unchanged15 registration controls only because those source bytes remain identical. No installed trust or parallel activation.

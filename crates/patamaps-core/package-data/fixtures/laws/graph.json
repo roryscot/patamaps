@@ -1,0 +1,62 @@
+{
+  "schemaVersion": "0.1.0",
+  "documentType": "graph",
+  "id": "urn:example:graph",
+  "namespace": "example",
+  "revision": "1",
+  "entities": [
+    {
+      "id": "urn:a",
+      "kind": "concept"
+    },
+    {
+      "id": "urn:b",
+      "kind": "concept"
+    },
+    {
+      "id": "urn:c",
+      "kind": "concept"
+    },
+    {
+      "id": "urn:d",
+      "kind": "concept"
+    }
+  ],
+  "mappings": [
+    {
+      "id": "urn:m:ab",
+      "relation": "example:r",
+      "sources": [
+        "urn:a"
+      ],
+      "targets": [
+        "urn:b"
+      ],
+      "cardinality": "one-to-one",
+      "lossiness": "lossless",
+      "provenance": {
+        "status": "declared",
+        "assertedBy": "source-owner",
+        "confidence": 0.9
+      }
+    },
+    {
+      "id": "urn:m:bc",
+      "relation": "example:s",
+      "sources": [
+        "urn:b"
+      ],
+      "targets": [
+        "urn:c"
+      ],
+      "cardinality": "one-to-one",
+      "lossiness": "lossless",
+      "provenance": {
+        "status": "declared",
+        "assertedBy": "source-owner",
+        "confidence": 0.9
+      }
+    }
+  ],
+  "authorities": []
+}

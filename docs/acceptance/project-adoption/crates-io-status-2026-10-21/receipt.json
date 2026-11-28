@@ -1,0 +1,65 @@
+{
+  "schema": "patamaps.crates-io-registry-status.v1",
+  "observed_at_utc": "2026-10-21T16:30:07Z",
+  "repository_branch": "feat/retained-owner-preparation",
+  "method": {
+    "registry": "https://crates.io",
+    "search_endpoint": "GET /api/v1/crates?q=patamaps&per_page=100",
+    "individual_version_endpoint": "GET /api/v1/crates/{crate}",
+    "user_agent": "PatamapsReleaseStatus/1.0"
+  },
+  "results": {
+    "registry_search_count": 8,
+    "published": [
+      {
+        "name": "patamaps-contracts",
+        "version": "0.1.0-alpha.1"
+      },
+      {
+        "name": "patamaps-core",
+        "version": "0.1.0-alpha.1"
+      },
+      {
+        "name": "patamaps-projection",
+        "version": "0.1.0-alpha.1"
+      },
+      {
+        "name": "patamaps-governance",
+        "version": "0.1.0-alpha.1"
+      },
+      {
+        "name": "patamaps-inspect",
+        "version": "0.1.0-alpha.1"
+      },
+      {
+        "name": "patamaps-workspace",
+        "version": "0.1.0-alpha.1"
+      },
+      {
+        "name": "patamaps-scientific",
+        "version": "0.1.0-alpha.1"
+      },
+      {
+        "name": "patamaps-icu-collator",
+        "version": "2.2.1-patamaps.1",
+        "note": "separately versioned vendored fork; not a workspace member"
+      }
+    ],
+    "workspace_unpublished": [
+      {
+        "name": "patamaps-cli",
+        "individual_endpoint_http_status": 404
+      },
+      {
+        "name": "patamaps-activator",
+        "individual_endpoint_http_status": 404
+      }
+    ]
+  },
+  "acceptance_limits": [
+    "Registry discoverability and listed versions were verified. This does not verify crate archive bytes against the local package preflight, successful Cargo authentication, a fresh consumer install, or runtime behavior.",
+    "The CLI archive SHA-256 equality and Cargo authentication are owner-reported in the progress checkpoint; the recorded abbreviated digest is 25811536…31a1024.",
+    "A clean fresh install from the registry remains pending."
+  ],
+  "raw_response_retained": false
+}

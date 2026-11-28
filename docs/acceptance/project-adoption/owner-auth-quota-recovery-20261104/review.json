@@ -1,0 +1,117 @@
+{
+  "status": "verified-auth-preflight-http-pass-quota-stop",
+  "sourceRevision": "afce3d06575762748df1d7335bb2420acdfd1e77",
+  "ownerCommit": "c61d51a57120abbbca65d4cb4a432c1cef9343bb",
+  "actualLaunchRevision": "de66152837813c3a7beb78af0d5fb77c6c0764ad",
+  "frozenManifestSha256": "sha256:f76ae27b979bb3d32c10ecb14bcbaee7285afdede51225a78227c35697df5de5",
+  "frozenInputsRehashed": 443,
+  "privacyControlsPassed": 10,
+  "controllerControlsPassed": 11,
+  "actualHelperControlsPassed": 10,
+  "httpCases": [
+    {
+      "name": "missing-session",
+      "status": 401,
+      "expected": 401,
+      "passed": true
+    },
+    {
+      "name": "invalid-session",
+      "status": 401,
+      "expected": 401,
+      "passed": true
+    },
+    {
+      "name": "wrong-password",
+      "status": 401,
+      "expected": 401,
+      "passed": true
+    },
+    {
+      "name": "allowed-real-login",
+      "status": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "allowed-current-user",
+      "status": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "allowed-permissions",
+      "status": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "allowed-permission-check",
+      "status": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "denied-real-login",
+      "status": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "denied-current-user",
+      "status": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "denied-permissions",
+      "status": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "denied-permission-check",
+      "status": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "expired-session",
+      "status": 401,
+      "expected": 401,
+      "passed": true
+    }
+  ],
+  "browserAuthenticationAccepted": false,
+  "completeBrowserProjectResultsUnavailable": true,
+  "driverFailureType": "SystemExit",
+  "driverFailure": "SIGTERM exit143 after resource enforcement",
+  "originalJobGrowthAllowanceBytes": 1000000000,
+  "observedConservativeGrowthBytes": 1026791633,
+  "applicationSpecificDiskBytesWrittenNotEstablished": true,
+  "retainedBytesAtAdmission": 98248330836,
+  "browserCleanupOriginallyUncertain": true,
+  "originalBrowserCleanupPermissionErrorPreserved": true,
+  "independentStopSamples": 3,
+  "ownedProcessIdentitiesIndependentlyStopped": 10,
+  "ownedContainerStoppedAndDataPreserved": true,
+  "protectedDatabaseStartIdentityUnchanged": true,
+  "selectedFilesRehashed": 2482,
+  "selectedDirectoriesAndModesConfirmed": 524,
+  "sourcePointerAndAttemptListUnchanged": true,
+  "reservationId": "cc40da37-fb5e-4095-a3fa-91f1b85c5e63",
+  "reservationInitiallyHeld": true,
+  "manualRecoveryCompleted": true,
+  "automaticApplicationAcceptance": false,
+  "originalFailedReceiptsPreserved": true,
+  "originalReceiptDigest": "sha256:a9647d749f562f3caa05f2ddd735b2e8f82c7a6fb37ba839c4d9f51f2f67194f",
+  "originalBrowserCleanupDigest": "sha256:4e8bddb638a58dd4facd1a61d3ce9a254adb85cf78e69f5d4d07e80d048fca85",
+  "recoveryProofDigest": "sha256:e4196f6dcffd267a01f72d8c7c2609bb3652c8ff62df47e99f3ff003372b9295",
+  "machineGrowthCeilingBytes": 4000000000,
+  "reserveFreeBytes": 500000000,
+  "retentionCeilingBytes": 100000000000,
+  "installedGuardChanged": false,
+  "filesDeleted": 0,
+  "goalComplete": false,
+  "reviewedAtUtc": "2026-11-04T21:54:10.027354+00:00"
+}

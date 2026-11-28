@@ -1,0 +1,215 @@
+{
+  "1792801705580829977-2769": {
+    "build-000.started.json": {
+      "commandDigest": "sha256:180636012f132aae3b492afecf7081f62b50ccd01f6d34c0c8e68262428452b9"
+    },
+    "failure.json": {
+      "previousSelectionPreserved": true,
+      "published": false,
+      "reason": "PROJECT_BUILD_COMMAND: Retained project build refused",
+      "status": "refused"
+    },
+    "build-000.json": {
+      "activation": "not-performed",
+      "ambientEnvironment": "not-inherited",
+      "authorizationNow": "not-evaluated",
+      "captureDigest": "sha256:54581d14c2ea3043e9d68b23a28f229d912d3c64b7762d6501dcb7986928ca71",
+      "commandDigest": "sha256:180636012f132aae3b492afecf7081f62b50ccd01f6d34c0c8e68262428452b9",
+      "completeBuildContextEstablished": false,
+      "completeExecutableDependencyClosureEstablished": false,
+      "elapsedMs": 441501,
+      "environmentReferences": {
+        "PATH": "path"
+      },
+      "environmentResolution": "captured-nonsecretConfiguration-only",
+      "executable": "/usr/bin/python3",
+      "executableDigestAfter": "sha256:e50d468e8b0adfb05733f5b87b3cff34829c4a8c1aea50c865aa8bdfe4bb150f",
+      "executableDigestBefore": "sha256:e50d468e8b0adfb05733f5b87b3cff34829c4a8c1aea50c865aa8bdfe4bb150f",
+      "executableUnchanged": true,
+      "exitCode": 1,
+      "exitSignal": null,
+      "parentDeathCleanup": "private-supervisor-configured",
+      "profile": "patamaps-project-command-1",
+      "programSucceeded": false,
+      "resolvedExecutable": "/usr/bin/python3.12",
+      "selectedInputsUnchanged": true,
+      "selectionPublication": "not-performed",
+      "status": "refused-project-command",
+      "stderr": {
+        "byteLength": 607,
+        "digest": "sha256:35c97a75e6eca6e6a6300de55209b4ec62cd1c01c949c3c817ddc7f3984d7b0d",
+        "hex": null,
+        "text": "Traceback (most recent call last):\n  File \"/home/runner/work/_temp/patamaps-miniserve-40045090305-1/registry-build/state/attempts/1792801705580829977-2769/candidate/cargo_registry_container.py\", line 262, in <module>\n    main()\n  File \"/home/runner/work/_temp/patamaps-miniserve-40045090305-1/registry-build/state/attempts/1792801705580829977-2769/candidate/cargo_registry_container.py\", line 209, in main\n    assert match[1] == '0', 'Original Cargo build/test failed; bounded private logs retained'\n           ^^^^^^^^^^^^^^^\nAssertionError: Original Cargo build/test failed; bounded private logs retained\n"
+      },
+      "stdout": {
+        "byteLength": 0,
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "hex": null,
+        "text": ""
+      },
+      "workingDirectory": "."
+    },
+    "registry-execution.json": {
+      "status": "failed",
+      "image": "busybox@sha256:dc88b80842580654294472735332ec7c7789a4010ec9a68b69f9b88c19abede6",
+      "originalConfiguredCacheMounted": false,
+      "cargoHome": "/work/cargo-home",
+      "workFilesystemBytes": 3221225472,
+      "cpuAllowance": 2,
+      "memoryAllowance": 6442450944,
+      "memorySwapAllowance": 0,
+      "pidsAllowance": 512,
+      "toolchainClosed": false,
+      "ownerTestFixturesClosed": false,
+      "filesDeleted": 0,
+      "capacityObservation": {
+        "uid": 1001,
+        "cpuCount": 4,
+        "availableMemoryBytes": 15564009472,
+        "requiredMemoryBytes": 6942450944
+      },
+      "executorIdentities": {
+        "/home/runner/.rustup/toolchains/1.99.0-x86_64-unknown-linux-gnu/bin/cargo": "sha256:e951141cc55a6cd7b9876d187bd30a3720e6086b99413af95e3b8de1cdd72f14",
+        "/home/runner/.rustup/toolchains/1.99.0-x86_64-unknown-linux-gnu/bin/rustc": "sha256:f3834d26669b03f6855fa54bd2381443123e860167bc0c7a8dd137e5cf6e5e4f",
+        "/usr/bin/docker": "sha256:6435ff9214bf8e0931078fb0980809728cac0a54a526d4f28a26d3e48132b58d"
+      },
+      "containerId": "8116fdd884cfe71acc2990ad5c0b611d31f7a0e75a8987036c1a1d1a53c63770",
+      "imageId": "sha256:4b3c3c5fa628f793b84f999b8be30200339beb0a017e8546983af9766480029a",
+      "readOnlyMounts": [
+        {
+          "source": "/home/runner/work/_temp/patamaps-miniserve-40045090305-1/registry-build/state/attempts/1792801705580829977-2769/candidate",
+          "destination": "/source"
+        },
+        {
+          "source": "/home/runner/work/_temp/patamaps-miniserve-40045090305-1/registry-build/state/attempts/1792801705580829977-2769/candidate/.cargo-home/registry",
+          "destination": "/registry"
+        },
+        {
+          "source": "/home/runner/work/_temp/patamaps-miniserve-40045090305-1/upstream",
+          "destination": "/test-source"
+        },
+        {
+          "source": "/home/runner/.rustup/toolchains/1.99.0-x86_64-unknown-linux-gnu",
+          "destination": "/home/runner/.rustup/toolchains/1.99.0-x86_64-unknown-linux-gnu"
+        },
+        {
+          "source": "/usr",
+          "destination": "/usr"
+        },
+        {
+          "source": "/usr/bin",
+          "destination": "/bin"
+        },
+        {
+          "source": "/usr/lib",
+          "destination": "/lib"
+        },
+        {
+          "source": "/usr/lib64",
+          "destination": "/lib64"
+        },
+        {
+          "source": "/etc/alternatives",
+          "destination": "/etc/alternatives"
+        }
+      ],
+      "hostConfigurationVerifiedBeforeStart": true,
+      "hostUser": "1001:1001",
+      "releaseBuildObserved": true,
+      "producedBinaryDigest": "sha256:ed96e136acc8e3377415fe7b5dd97ef27a1a8919d4ae690384be8399e2578e34",
+      "binaryDigest": "sha256:ed96e136acc8e3377415fe7b5dd97ef27a1a8919d4ae690384be8399e2578e34",
+      "binaryBytes": 7649648,
+      "binaryCopiedBeforeOwnerTests": true,
+      "cargoExitCode": 101,
+      "cargoDiagnostics": {
+        "categories": [],
+        "rustcErrorCodes": [],
+        "compileFailures": [],
+        "failedTests": [
+          "bind_ipv4_ipv6::case_2"
+        ],
+        "testSummaries": [
+          [
+            "ok",
+            "43",
+            "0",
+            "0"
+          ],
+          [
+            "ok",
+            "15",
+            "0",
+            "0"
+          ],
+          [
+            "ok",
+            "15",
+            "0",
+            "0"
+          ],
+          [
+            "ok",
+            "22",
+            "0",
+            "0"
+          ],
+          [
+            "ok",
+            "6",
+            "0",
+            "0"
+          ],
+          [
+            "FAILED",
+            "12",
+            "1",
+            "0"
+          ]
+        ],
+        "osErrors": [],
+        "signals": [],
+        "missingLibraries": [],
+        "panicLocations": [
+          "tests/fixtures/mod.rs:201:13"
+        ]
+      },
+      "workFilesystemObservation": [
+        "3221225472",
+        "1703997440",
+        "1517228032",
+        "53%"
+      ],
+      "memoryEvents": {
+        "low": "0",
+        "high": "0",
+        "max": "0",
+        "oom": "0",
+        "oom_kill": "0",
+        "oom_group_kill": "0"
+      },
+      "errorClass": "AssertionError",
+      "error": "Original Cargo build/test failed; bounded private logs retained",
+      "failureContainerState": {
+        "Status": "running",
+        "Running": true,
+        "Pid": 2871,
+        "ExitCode": 0,
+        "Error": "",
+        "OOMKilled": false
+      },
+      "startupDiagnostics": {
+        "exitCode": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      "containerStopped": true,
+      "guardianCleanupConfirmed": true,
+      "guardianExit": 130,
+      "guardianDiagnostics": {
+        "guardian.stdout": "{\"status\":\"cancelled-project-watch-update\",\"parentExited\":false}\nFlag --time has been deprecated, use --timeout instead\n8116fdd884cfe71acc2990ad5c0b611d31f7a0e75a8987036c1a1d1a53c63770\n",
+        "guardian.stderr": ""
+      },
+      "elapsedMs": 441313
+    }
+  }
+}

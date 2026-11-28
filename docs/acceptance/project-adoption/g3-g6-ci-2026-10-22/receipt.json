@@ -1,0 +1,70 @@
+{
+  "schemaVersion": 1,
+  "status": "passed-defined-branch-adoption-ci-scopes",
+  "date": "2026-10-22",
+  "sourceCommit": "df1b329c7d93a3daf8011c017a5d8029eaebaa59",
+  "workflow": {
+    "id": 39719098227,
+    "url": "https://github.com/roryscot/patamaps/actions/runs/39719098227",
+    "event": "pull_request",
+    "result": "success"
+  },
+  "jobs": {
+    "rustCargoMetadataContract": "passed",
+    "crossStackSourceBindingsLinuxX86_64": "passed",
+    "nativeLinuxX86_64": "passed",
+    "nativeLinuxAarch64": "passed",
+    "retentionAdmission": "passed",
+    "crossStackLinuxImageBrowserAndInstalledConsumer": "passed",
+    "pinnedFumadocsBuild": "skipped"
+  },
+  "workspaceAdapter": {
+    "libraryTestsPassed": 44,
+    "cliBuild": "passed"
+  },
+  "actualAxum": {
+    "source": "tokio-rs/axum@fc78d5bcdb276bd6fb53cf2db55e91757eabb469",
+    "buildCommand": [
+      "cargo",
+      "build",
+      "--workspace",
+      "--lib",
+      "--locked",
+      "--offline",
+      "--features",
+      "axum/ws",
+      "--target",
+      "x86_64-unknown-linux-gnu"
+    ],
+    "buildExitCode": 0,
+    "testCommand": [
+      "cargo",
+      "test",
+      "--workspace",
+      "--lib",
+      "--locked",
+      "--offline",
+      "--features",
+      "axum/ws",
+      "--target",
+      "x86_64-unknown-linux-gnu"
+    ],
+    "testExitCode": 0,
+    "testSeconds": 70.509,
+    "retainedWorkflow": {
+      "contextCaptureAndVerify": "passed",
+      "nativeBuildAndSelection": "passed",
+      "configuredSourceAndToolsUnavailableReplay": "passed",
+      "corruptOutputRefusal": "passed",
+      "minimalArchiveRestoreAndReplay": "passed",
+      "noOp": "passed",
+      "sourceCleanAfterRun": true
+    }
+  },
+  "limitations": [
+    "This is the defined branch CI scope, not acceptance of every G2-G6 requirement.",
+    "Fumadocs production build was skipped.",
+    "External Axum deployment is not established.",
+    "Existing Next.js 14.2 application build and generated-manifest replay remain pending on Intel."
+  ]
+}

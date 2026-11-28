@@ -1,0 +1,83 @@
+"""Detach only two verified finished quota volumes, preserving images and all files."""
+from pathlib import Path
+import hashlib,json,os,plistlib,stat,subprocess
+ROOT=Path('/Volumes/dev_src_case_sensitive/projects/patamaps')
+NODE='/Users/admin/.nvm/versions/node/v22.23.3/bin/node'
+CONTROL='/Users/admin/Documents/Codex/storage-safeguards/buildctl-cli.mjs'
+DOCKER='/Applications/Docker.app/Contents/Resources/bin/docker'
+IDS=['46900e7c-98ac-4a8e-b945-56c7e7bd6095','6cd78da3-e293-4fe1-8416-a75a7ffab7d1']
+OUT=ROOT/'docs/acceptance/project-adoption/g4-project-measurements-20261024/reservation-detach.json'
+report=dict(status='checking-owned-finished-volumes',filesDeleted=0,imagesDeleted=0,policyChanged=False,volumes=[])
+def save():OUT.write_text(json.dumps(report,indent=2)+'\n')
+def call(args,timeout=30):return subprocess.check_output(args,stderr=subprocess.PIPE,timeout=timeout)
+def control():
+ s=json.loads(call([NODE,CONTROL,'status']))
+ assert s['legacyLease'] is None and not s['transactionBlocked']
+ assert not [r for r in s['requests'] if r['state'] not in ['finished','cancelled','preparation-failed','failed','recovered'] or (r['state']=='finished' and r['ownerAlive'])], 'Reservation activity changed'
+ return {r['id']:r for r in s['requests'] if r['id'] in IDS}
+def inspect(cid):return json.loads(call([DOCKER,'inspect',cid]))[0]
+def running():return call([DOCKER,'ps','--quiet','--no-trunc']).decode().splitlines()
+def images():return plistlib.loads(call(['/usr/bin/hdiutil','info','-plist']))['images']
+def attached(image):
+ values=[i for i in images() if i.get('image-path')==str(image)]
+ assert len(values)<=1
+ return values[0] if values else None
+def overlap(a,b):return a==b or a.is_relative_to(b) or b.is_relative_to(a)
+def prove(r):
+ assert r['state']=='finished' and r['ownerAlive'] is False and r['enforcement']=='container-fixed-volume'
+ assert r['project']==str(ROOT) and len(r['containerIds'])==1
+ w=r['workspace'];home=ROOT/'.tools/buildctl'/r['id']
+ assert w['home']==str(home) and w['image']==str(home/'workspace.dmg') and w['mount']==str(home/'mount')
+ image=Path(w['image']);s=image.lstat()
+ assert stat.S_ISREG(s.st_mode) and (s.st_dev,s.st_ino,s.st_size)==(w['imageDevice'],w['imageInode'],w['imageBytes'])
+ d=inspect(r['containerIds'][0]);labels=d['Config']['Labels']
+ assert not d['State']['Running'] and not d['State']['Restarting'] and not d['State']['Paused']
+ assert labels['buildctl.request']==r['id'] and labels['buildctl.project']==r['project'] and labels['buildctl.definition']==r['definitionHash']
+ assert d['HostConfig']['RestartPolicy']['Name']=='no'
+ for cid in running():
+  for mount in inspect(cid).get('Mounts',[]):
+   source=mount.get('Source')
+   assert not source or not overlap(Path(source),Path(w['mount'])), 'An active container references this volume'
+ return w
+def volume_info(mount):
+ info=plistlib.loads(call(['/usr/sbin/diskutil','info','-plist',str(mount)]))
+ assert info['VolumeUUID'] and info['MountPoint']==str(mount)
+ work=Path(mount)/'work'
+ assert all((work/name).is_dir() for name in ['home','tmp','target','cache'])
+ return dict(volumeUUID=info['VolumeUUID'],rootLayoutVerified=True,readOnly=bool(os.statvfs(mount).f_flag & os.ST_RDONLY))
+def detach(image):
+ a=attached(image);assert a is not None
+ device=next(e['dev-entry'] for e in a['system-entities'] if e.get('content-hint')=='GUID_partition_scheme')
+ call(['/usr/bin/hdiutil','detach',device],timeout=60)
+ assert attached(image) is None
+save()
+try:
+ requests=control();assert set(requests)==set(IDS)
+ initial_running=running()
+ for rid in IDS:prove(requests[rid])
+ for rid in IDS:
+  r=control()[rid];w=prove(r);image=Path(w['image']);mount=Path(w['mount'])
+  assert attached(image) is not None
+  before=volume_info(mount)
+  row=dict(requestId=rid,image=str(image),imageBytes=w['imageBytes'],ownedContainerStopped=True,ownerDead=True,readOnlyRemountVerified=False,detached=False)
+  report['volumes'].append(row);save()
+  detach(image)
+  try:
+   call(['/usr/bin/hdiutil','attach','-readonly','-nobrowse','-noautoopen','-mountpoint',str(mount),str(image)],timeout=60)
+   after=volume_info(mount);assert before['volumeUUID']==after['volumeUUID'] and after['rootLayoutVerified'] and after['readOnly']
+   row['readOnlyRemountVerified']=True
+  finally:
+   if attached(image) is not None:detach(image)
+  final=image.lstat()
+  assert (final.st_dev,final.st_ino,final.st_size)==(w['imageDevice'],w['imageInode'],w['imageBytes'])
+  assert mount.is_dir() and mount.stat().st_dev==final.st_dev and not (mount/'work').exists()
+  row.update(detached=True,imagePreserved=True,volumeUUIDPreserved=True,privateFileBytesIndependentlyRehashed=False)
+  save()
+ assert running()==initial_running
+ report.update(status='detached-finished-volumes-images-and-data-preserved',unrelatedRunningContainersUnchanged=True,runningContainersPreserved=len(initial_running),physicalDiskReclamationClaimed=False,retentionDoubleTraversalRemoved=True)
+except BaseException as error:
+ report.update(status='failed-requires-review',errorType=type(error).__name__)
+ save();raise
+save()
+(OUT.parent/'reservation-detach-source.py.txt').write_bytes(Path(__file__).read_bytes())
+print(json.dumps(report))
