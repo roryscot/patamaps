@@ -35,7 +35,16 @@ fn draft_constructors_do_not_bypass_existing_graph_validation() {
     let (mut document, packs) = example::draft();
     document.mappings[0].targets = vec!["urn:example:missing".into()];
     let error = CheckedGraph::check(document, packs).unwrap_err();
-    assert!(error.0.iter().any(|i| i.code == "UNRESOLVED_ENDPOINT"));
+    assert!(
+        error
+            .issues()
+            .iter()
+            .any(|i| i.code == "UNRESOLVED_ENDPOINT")
+    );
+    let issues = error.into_issues();
+    assert!(issues.iter().any(|i| {
+        i.code == "UNRESOLVED_ENDPOINT" && i.subject_id.as_deref() == Some("urn:example:mapping")
+    }));
 }
 
 #[test]

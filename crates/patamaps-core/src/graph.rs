@@ -44,6 +44,18 @@ impl Issue {
 #[error("candidate rejected with {} issue(s)", .0.len())]
 pub struct CheckError(pub Vec<Issue>);
 
+impl CheckError {
+    /// Borrows the validation issues without consuming the error.
+    pub fn issues(&self) -> &[Issue] {
+        &self.0
+    }
+
+    /// Returns the validation issues, consuming the error.
+    pub fn into_issues(self) -> Vec<Issue> {
+        self.0
+    }
+}
+
 impl From<ContractError> for CheckError {
     fn from(error: ContractError) -> Self {
         Self(vec![Issue::error(
