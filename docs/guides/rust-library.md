@@ -8,7 +8,24 @@ passed on Norway; earlier interrupted runs remain recorded in the
 
 ## Add the library to a project
 
-For a local checkout, add a path dependency to your project's `Cargo.toml`.
+The current `0.1.0` core and contracts crates are not published. To use the
+verified native-only API without a local Patamaps checkout, pin the tested Git
+revision in your project's `Cargo.toml`:
+
+```toml
+[dependencies]
+patamaps-core = { git = "https://github.com/roryscot/patamaps.git", rev = "5d1b594153337966220ce14d929812614c687459", default-features = false }
+```
+
+Use Rust 1.99 or newer and commit your application's `Cargo.lock` to retain the
+resolved dependencies. Cargo needs network access for the first fetch; checking
+and querying an in-memory graph do not need network access. A fresh Intel macOS
+CI build compiled this pinned dependency in a Rust desktop application and ran
+two integration-module tests. The application UI was not exercised, and a
+separate fetch on Norway was interrupted by its storage guard. A Git revision
+is a source snapshot, not a published release or stability guarantee.
+
+Alternatively, for a local checkout, add a path dependency to your project's `Cargo.toml`.
 Adjust the path so it points to `crates/patamaps-core` in your Patamaps
 checkout; Cargo resolves it relative to the manifest containing this entry:
 
@@ -29,14 +46,14 @@ checks the graph, queries it, and makes a checked edit. Copy and adapt those
 records to your project's explicit domain; draft records become a
 `CheckedGraph` only after validation succeeds. No service or CLI is required.
 
-The current checkout's `0.1.0` core and contracts crates are **not published**.
-Do not replace this path with a registry version expecting the current API.
+Do not replace these dependencies with a registry version expecting the current
+API until an appropriate version is published.
 Linux CI at source `5612baf` built fresh archives of both crates and ran default
 and native-only consumers against the extracted packages, with the extracted
 contracts crate supplied through a Cargo patch. It also ran focused core and
 contracts tests from those archives. This checks package contents; it does not
-verify a registry release or an existing application integration. The separate
-Norway test of the packaged candidate was refused by the storage guard.
+verify a registry release. The initial Norway test of the packaged candidate
+was refused by the storage guard; later checkout tests passed on Norway.
 
 ## Run the checkout examples
 
