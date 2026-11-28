@@ -68,7 +68,34 @@ coherent milestones. No deletion or storage-policy change is authorized by
 this plan. If a build cannot be admitted, preserve the implementation and
 report the exact limitation rather than presenting unrun tests as passed.
 
-## Current checkpoint
+## Current checkpoint, 2026-11-28
+
+The in-memory graph on-ramp, checked editing, relation lookup and named error
+accessors are implemented. Native-only and default focused tests passed on
+Norway; the [registry fix CI](https://github.com/roryscot/patamaps/actions/runs/46104931415)
+also passed in-memory and freshly packaged-crate checks at source `303c9f5`.
+The exact-import registry fix accepts a complete native pack set in either
+order; incremental registration and the separate legacy snapshot retain their
+existing rules.
+
+A [fresh-target native-only consumer measurement](../acceptance/library/native-consumer-footprint-norway-20261127.json)
+ran on Norway with cached registry sources. It is a single measurement, not a
+comparative benchmark. A [limited alpha wire comparison](../acceptance/library/alpha-wire-compat-20261127.json)
+passed for the listed fixtures and rejection cases; it is not a universal
+compatibility proof. A scoped existing Rust application was tested with an
+earlier Git revision on hosted Intel macOS, not through its graphical UI; the
+newer pinned Git revision's exact fetch has not been independently exercised.
+
+The [library guide](../guides/rust-library.md) and
+[migration guide](../guides/rust-library-migration.md) describe usage and
+limits. The local `0.1.0` archives in the [archive record](../acceptance/library/local-crate-archives-20261127.json)
+predate the registry fix and are not current candidates. No `0.1.0` core or
+contracts release has been published. Publication is a separate action. The
+original project-adoption goal remains open in the
+[integration backlog](integration-enhancement-backlog.md); its broader gates
+are not prerequisites for the in-process library.
+
+## Historical checkpoints
 
 The tracker carries a separate unfinished integration objective. The user's
 newer Rust-first direction is recorded here and remains the product priority;
