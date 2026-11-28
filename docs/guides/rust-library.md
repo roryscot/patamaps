@@ -19,11 +19,10 @@ patamaps-core = { git = "https://github.com/roryscot/patamaps.git", rev = "40a0e
 
 Use Rust 1.99 or newer and commit your application's `Cargo.lock` to retain the
 resolved dependencies. Cargo needs network access for the first fetch; checking
-and querying an in-memory graph do not need network access. An earlier snapshot (`5d1b594`) compiled as a Git dependency in an Intel macOS
-desktop application and passed its focused integration tests. The pinned newer
-revision adds validation-issue accessors, tested on Norway through a local path;
-its Git fetch has not been independently exercised. The application UI was not
-exercised, and a separate Git fetch on Norway was interrupted by its guard. A Git revision
+and querying an in-memory graph do not need network access. The pinned revision compiled as a Git dependency in a hosted Intel macOS Rust
+desktop application and passed its focused integration tests, including the
+validation-issue accessor. The application UI was not exercised. An earlier
+Git fetch on Norway was interrupted by its storage guard. A Git revision
 is a source snapshot, not a published release or stability guarantee.
 
 Alternatively, for a local checkout, add a path dependency to your project's `Cargo.toml`.
