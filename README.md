@@ -4,16 +4,31 @@ Patamaps is being refocused as a Rust-first data structure and library for expli
 
 Historically, Patamaps was developed as a Rust-native correspondence compiler built against MetaMap’s substantive capabilities and guarantees. Independently owned descriptions of concepts and implementations produce checked static bindings whose semantic identities survive implementation moves. The Rust kernel owns validation, admission, proofs, uncertainty, risk, replay and governance; generated Rust consumers run without MetaMap or the compiler.
 
-## Product boundary and Rust starting point
+## Start with the Rust library
 
-The product goal is MetaMap 0.7.1's substantive C01–C19 capabilities and required
-semantic, security and wire guarantees through Rust-native workflows.
-The [acceptance record](docs/acceptance/capabilities/package-reproducibility-956f1a8/capability-acceptance.json)
-records that milestone at source 956f1a8. This is scoped native capability
-completion, not exact JavaScript/API compatibility or fresh verification of every
-later revision. The [capability plan](BUILD_PLAN.md) controls this boundary.
+Patamaps can represent and check entities and their explicitly declared
+correspondences in memory. Add the tested source revision to a Rust 1.99 or
+newer application's `Cargo.toml`:
 
-For the emerging in-process API, start with the [Rust library guide](docs/guides/rust-library.md) and its in-memory example. This new on-ramp is under development and its verification status is tracked in the plan.
+```toml
+[dependencies]
+patamaps-core = { git = "https://github.com/roryscot/patamaps.git", rev = "5d1b594153337966220ce14d929812614c687459", default-features = false }
+```
+
+The [Rust library guide](docs/guides/rust-library.md) explains how to create,
+check, query, and edit a graph and links to a complete executable example.
+The current `0.1.0` crates are not published; this pinned Git dependency is a
+source snapshot, not a released stability guarantee. Cargo needs network access
+for an initial fetch, but graph operations do not require a CLI or service.
+
+## Optional compiler and historical capability record
+
+The earlier compiler milestone covers MetaMap 0.7.1's substantive C01–C19
+capabilities and required semantic, security and wire guarantees at source
+`956f1a8`. The [acceptance record](docs/acceptance/capabilities/package-reproducibility-956f1a8/capability-acceptance.json)
+and [capability plan](BUILD_PLAN.md) describe its scope and limits; they do not
+assert exact JavaScript/API compatibility or fresh verification of every later
+revision. These compiler workflows are optional for in-process Rust use.
 
 For the existing compiler workflow, start with the [real Rust project guide](docs/guides/rust-project-quickstart.md):
 declare one correspondence, validate it, generate static Rust and connect that
