@@ -31,6 +31,11 @@ def referenced_assets():
                     assets[target] = authority
     if not assets:
         raise ValueError("no packaged assets found")
+    # License and attribution files in each distributable crate are mirrors
+    # of the repository originals, just like the embedded package assets.
+    for crate in CRATES:
+        for name in ("LICENSE", "NOTICE"):
+            assets[crate / name] = ROOT / name
     return assets
 
 
